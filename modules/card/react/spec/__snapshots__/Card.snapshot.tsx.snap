@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Snapshots renders a card with depth 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border: 1px solid #ced3d9;
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  padding: 32px;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    Card with custom depth
+  </div>
+</div>
+`;
+
+exports[`Card Snapshots renders a card with heading 1`] = `
+.emotion-4 {
+  background-color: #ffffff;
+  border: 1px solid #ced3d9;
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
+  padding: 32px;
+}
+
+.emotion-2 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+}
+
+.emotion-0 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #333333;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  margin-bottom: 24px;
+}
+
+<div
+  className="emotion-4 emotion-5"
+>
+  <h3
+    className="emotion-0 emotion-1"
+  >
+    Card Title
+  </h3>
+  <div
+    className="emotion-2 emotion-3"
+  >
+    Card with a heading
+  </div>
+</div>
+`;
+
+exports[`Card Snapshots renders a card with height 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border: 1px solid #ced3d9;
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
+  padding: 32px;
+  height: 12px;
+}
+
+<div
+  className="emotion-2 emotion-3"
+  height="12px"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    Card with custom width
+  </div>
+</div>
+`;
+
+exports[`Card Snapshots renders a card with padding 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border: 1px solid #ced3d9;
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
+  padding: 12px;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    Card with custom padding
+  </div>
+</div>
+`;
+
+exports[`Card Snapshots renders a card with width 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border: 1px solid #ced3d9;
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
+  padding: 32px;
+  width: 12px;
+}
+
+<div
+  className="emotion-2 emotion-3"
+  width="12px"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    Card with custom width
+  </div>
+</div>
+`;
+
+exports[`Card Snapshots renders as expected 1`] = `
+.emotion-2 {
+  background-color: #ffffff;
+  border: 1px solid #ced3d9;
+  border-radius: 3px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
+  padding: 32px;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    Card
+  </div>
+</div>
+`;

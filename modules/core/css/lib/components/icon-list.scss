@@ -1,0 +1,49 @@
+.wdc-icon-list {
+  display: flex;
+  margin-left: -$wdc-spacing-xxxs;
+  margin-right: -$wdc-spacing-xxxs;
+
+  .wdc-icon-list-icon {
+    cursor: pointer;
+    width: $wdc-spacing-m;
+    height: $wdc-spacing-m;
+    margin-left: $wdc-spacing-xxxs;
+    margin-right: $wdc-spacing-xxxs;
+
+    &:focus,
+    &.wdc-icon-list-icon-focus {
+      outline: none;
+      border-radius: 3px;
+      box-shadow: 0 0 0 2px $wdc-color-blueberry-500;
+    }
+
+    .wd-icon-fill,
+    .wd-icon-accent {
+      fill: $wdc-color-licorice-200;
+      transition: fill 0.2s;
+    }
+    .wd-icon-background {
+      fill: transparent;
+    }
+
+    &:hover {
+      .wd-icon-fill,
+      .wd-icon-accent {
+        fill: $wdc-color-licorice-500;
+      }
+    }
+  }
+
+  &.wdc-icon-list-white .wdc-icon-list-icon {
+    .wd-icon-fill,
+    .wd-icon-accent {
+      fill: $wdc-color-french-vanilla-100;
+    }
+
+    &:focus,
+    &.wdc-icon-list-white-focus {
+      outline: none;
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100;
+    }
+  }
+}

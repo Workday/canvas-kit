@@ -1,0 +1,74 @@
+// Typography
+@import 'mixins/type';
+
+.wdc-type {
+  @include wdc-type();
+  @include wdc-type-body-1();
+}
+
+// Data viz
+.wdc-type-data-viz-1 {
+  @include wdc-type-data-viz-1();
+}
+.wdc-type-data-viz-2 {
+  @include wdc-type-data-viz-2();
+}
+
+// Headers
+.wdc-type-h1 {
+  @include wdc-type-h1();
+}
+.wdc-type-h2 {
+  @include wdc-type-h2();
+}
+.wdc-type-h3 {
+  @include wdc-type-h3();
+}
+.wdc-type-h4 {
+  @include wdc-type-h4();
+}
+.wdc-type-h5 {
+  @include wdc-type-h5();
+}
+
+// Body
+.wdc-type-body,
+.wdc-type-body-1 {
+  @include wdc-type-body-1();
+}
+.wdc-type-body-2 {
+  @include wdc-type-body-2();
+}
+
+// Small
+.wdc-type-small {
+  @include wdc-type-small();
+}
+
+// Variations
+.wdc-type-variant-label {
+  @include wdc-type-variant-label();
+}
+.wdc-type-variant-btn,
+.wdc-type-variant-button {
+  @include wdc-type-variant-button();
+}
+.wdc-type-variant-caps {
+  @include wdc-type-variant-caps();
+}
+.wdc-type-variant-link {
+  @include wdc-type-variant-link();
+}
+.wdc-type-variant-hint {
+  @include wdc-type-variant-hint();
+}
+.wdc-type-variant-error {
+  @include wdc-type-variant-error();
+}
+.wdc-type-variant-mono {
+  @include wdc-type-variant-mono();
+}
+.wdc-type-variant-inverse,
+.wdc-type-variant-white {
+  @include wdc-type-variant-inverse();
+}

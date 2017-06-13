@@ -1,0 +1,41 @@
+// Errors
+$_errorBg: rgba($wdc-color-error, 0.2);
+$_alertBg: rgba($wdc-color-alert, 0.2);
+
+table.wdc-table {
+  tbody {
+    tr {
+      &.wdc-table-row-error {
+        th,
+        td {
+          @include wdc-table-colored-row($_errorBg, $wdc-color-error);
+          border-left-color: $wdc-color-error-light;
+          border-right-color: $wdc-color-error-light;
+        }
+
+        &-borderless {
+          th,
+          td {
+            background-color: $_errorBg;
+          }
+        }
+      }
+
+      &.wdc-table-row-alert {
+        th,
+        td {
+          @include wdc-table-colored-row($_alertBg, $wdc-color-alert);
+          border-left-color: $wdc-color-alert-light;
+          border-right-color: $wdc-color-alert-light;
+        }
+
+        &-borderless {
+          th,
+          td {
+            background-color: $_alertBg;
+          }
+        }
+      }
+    }
+  }
+}

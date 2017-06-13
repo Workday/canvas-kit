@@ -1,0 +1,32 @@
+module.exports = {
+  rootDir: '.',
+  setupFilesAfterEnv: ['<rootDir>/jest/setupTests.ts'],
+  verbose: true,
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'modules/**/*.{tsx,}',
+    '!**/header/**/lib/Header.tsx',
+    '!**/common/**/ControlledComponentWrapper.tsx',
+    '!**/common/**/InputProviderDecorator.tsx',
+    '!**/common/**/SectionDecorator.tsx',
+    '!**/index.{ts,tsx,js,jsx}',
+    '!**/stories*.{ts,tsx,js,jsx}',
+  ],
+  coverageReporters: ['text', 'clover', 'html'],
+  coverageDirectory: '<rootDir>/build/reports/jest',
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
+  moduleFileExtensions: ['tsx', 'ts', 'js', 'jsx', 'json'],
+  snapshotSerializers: ['jest-emotion/serializer'],
+  testMatch: ['**/?(*.)+(spec|test|snapshot).ts?(x)'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+  clearMocks: true,
+  reporters: ['default', ['jest-junit', {suiteName: 'Canvas Kit tests'}]],
+  testURL: 'http://localhost',
+};

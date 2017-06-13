@@ -1,0 +1,972 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Snapshots renders a disabled option as expected 1`] = `
+.emotion-4 {
+  position: relative;
+  display: inline-block;
+}
+
+.emotion-4 span {
+  background-color: #ffffff;
+}
+
+.emotion-4:hover path {
+  fill: #333d47;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  -moz-appearance: none;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+.emotion-3 {
+  display: inline-block;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 4px;
+  pointer-events: none;
+}
+
+.emotion-3 svg {
+  display: block;
+}
+
+.emotion-3 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3 path {
+  -webkit-transition: 100ms fill;
+  transition: 100ms fill;
+}
+
+<div
+  className="emotion-4 emotion-5"
+  disabled={false}
+>
+  <select
+    className="emotion-0 emotion-1"
+    disabled={false}
+    name="contact"
+  >
+    <option
+      disabled={true}
+      label="E-mail"
+      value="email"
+    >
+      E-mail
+    </option>
+    <option
+      disabled={false}
+      label="Phone"
+      value="phone"
+    >
+      Phone
+    </option>
+  </select>
+  <span
+    className="emotion-2 emotion-3"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Select Snapshots renders a disabled select as expected 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  -moz-appearance: none;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+.emotion-4 {
+  position: relative;
+  display: inline-block;
+}
+
+.emotion-4 span {
+  background-color: #f6f7f8;
+}
+
+.emotion-3 {
+  display: inline-block;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 4px;
+  pointer-events: none;
+}
+
+.emotion-3 svg {
+  display: block;
+}
+
+.emotion-3 .wd-icon-fill {
+  fill: #a1aab3;
+}
+
+.emotion-3:hover .wd-icon-fill {
+  fill: #a1aab3;
+}
+
+.emotion-3 .wd-icon-accent {
+  fill: #a1aab3;
+}
+
+.emotion-3:hover .wd-icon-accent {
+  fill: #a1aab3;
+}
+
+.emotion-3 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3 path {
+  -webkit-transition: 100ms fill;
+  transition: 100ms fill;
+}
+
+<div
+  className="emotion-4 emotion-5"
+  disabled={true}
+>
+  <select
+    className="emotion-0 emotion-1"
+    disabled={true}
+    name="contact"
+  >
+    <option
+      disabled={false}
+      label="E-mail"
+      value="email"
+    >
+      E-mail
+    </option>
+    <option
+      disabled={false}
+      label="Phone"
+      value="phone"
+    >
+      Phone
+    </option>
+  </select>
+  <span
+    className="emotion-2 emotion-3"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Select Snapshots renders a growing select as expected 1`] = `
+.emotion-3 {
+  display: inline-block;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 4px;
+  pointer-events: none;
+}
+
+.emotion-3 svg {
+  display: block;
+}
+
+.emotion-3 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3 path {
+  -webkit-transition: 100ms fill;
+  transition: 100ms fill;
+}
+
+.emotion-4 {
+  position: relative;
+  display: block;
+}
+
+.emotion-4 span {
+  background-color: #ffffff;
+}
+
+.emotion-4:hover path {
+  fill: #333d47;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  -moz-appearance: none;
+  width: 100%;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+<div
+  className="emotion-4 emotion-5"
+  disabled={false}
+>
+  <select
+    className="emotion-0 emotion-1"
+    disabled={false}
+    name="contact"
+  >
+    <option
+      disabled={false}
+      label="E-mail"
+      value="email"
+    >
+      E-mail
+    </option>
+    <option
+      disabled={false}
+      label="Phone"
+      value="phone"
+    >
+      Phone
+    </option>
+  </select>
+  <span
+    className="emotion-2 emotion-3"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Select Snapshots renders an alert on select as expected 1`] = `
+.emotion-4 {
+  position: relative;
+  display: inline-block;
+}
+
+.emotion-4 span {
+  background-color: #ffffff;
+}
+
+.emotion-4:hover path {
+  fill: #333d47;
+}
+
+.emotion-3 {
+  display: inline-block;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 4px;
+  pointer-events: none;
+}
+
+.emotion-3 svg {
+  display: block;
+}
+
+.emotion-3 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3 path {
+  -webkit-transition: 100ms fill;
+  transition: 100ms fill;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  -moz-appearance: none;
+  border-color: #c06c00;
+  -webkit-transition: 100ms box-shadow;
+  transition: 100ms box-shadow;
+  box-shadow: inset 0 0 0 2px #ffa126;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:hover {
+  border-color: #c06c00;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #c06c00;
+  box-shadow: inset 0 0 0 2px #ffa126, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
+}
+
+<div
+  className="emotion-4 emotion-5"
+  disabled={false}
+>
+  <select
+    className="emotion-0 emotion-1"
+    disabled={false}
+    name="contact"
+  >
+    <option
+      disabled={false}
+      label="E-mail"
+      value="email"
+    >
+      E-mail
+    </option>
+    <option
+      disabled={false}
+      label="Phone"
+      value="phone"
+    >
+      Phone
+    </option>
+  </select>
+  <span
+    className="emotion-2 emotion-3"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Select Snapshots renders an error on select as expected 1`] = `
+.emotion-4 {
+  position: relative;
+  display: inline-block;
+}
+
+.emotion-4 span {
+  background-color: #ffffff;
+}
+
+.emotion-4:hover path {
+  fill: #333d47;
+}
+
+.emotion-3 {
+  display: inline-block;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 4px;
+  pointer-events: none;
+}
+
+.emotion-3 svg {
+  display: block;
+}
+
+.emotion-3 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3 path {
+  -webkit-transition: 100ms fill;
+  transition: 100ms fill;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  -moz-appearance: none;
+  border-color: #de2e21;
+  -webkit-transition: 100ms box-shadow;
+  transition: 100ms box-shadow;
+  box-shadow: inset 0 0 0 1px #de2e21;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:hover {
+  border-color: #de2e21;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #de2e21;
+  box-shadow: inset 0 0 0 1px #de2e21, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
+}
+
+<div
+  className="emotion-4 emotion-5"
+  disabled={false}
+>
+  <select
+    className="emotion-0 emotion-1"
+    disabled={false}
+    name="contact"
+  >
+    <option
+      disabled={false}
+      label="E-mail"
+      value="email"
+    >
+      E-mail
+    </option>
+    <option
+      disabled={false}
+      label="Phone"
+      value="phone"
+    >
+      Phone
+    </option>
+  </select>
+  <span
+    className="emotion-2 emotion-3"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Select Snapshots renders as expected 1`] = `
+.emotion-4 {
+  position: relative;
+  display: inline-block;
+}
+
+.emotion-4 span {
+  background-color: #ffffff;
+}
+
+.emotion-4:hover path {
+  fill: #333d47;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  -moz-appearance: none;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+.emotion-3 {
+  display: inline-block;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 4px;
+  pointer-events: none;
+}
+
+.emotion-3 svg {
+  display: block;
+}
+
+.emotion-3 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-3:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-3 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-3 path {
+  -webkit-transition: 100ms fill;
+  transition: 100ms fill;
+}
+
+<div
+  className="emotion-4 emotion-5"
+  disabled={false}
+>
+  <select
+    className="emotion-0 emotion-1"
+    disabled={false}
+    name="contact"
+  >
+    <option
+      disabled={false}
+      label="E-mail"
+      value="email"
+    >
+      E-mail
+    </option>
+    <option
+      disabled={false}
+      label="Phone"
+      value="phone"
+    >
+      Phone
+    </option>
+  </select>
+  <span
+    className="emotion-2 emotion-3"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      }
+    }
+  />
+</div>
+`;

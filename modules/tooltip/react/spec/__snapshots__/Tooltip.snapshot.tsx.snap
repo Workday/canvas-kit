@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip Snapshots renders a tooltip with a child element 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: rgba(0,0,0,.85);
+  color: #ffffff;
+  font-size: 13px;
+  margin: 4px;
+  -webkit-animation: animation-ttfnet;
+  animation: animation-ttfnet;
+  -webkit-animation-duration: 150ms;
+  animation-duration: 150ms;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-transform-origin: bottom center;
+  -ms-transform-origin: bottom center;
+  transform-origin: bottom center;
+}
+
+.emotion-0 a {
+  color: #ffffff;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+  className="emotion-0 emotion-1"
+  role="tooltip"
+>
+  I'm being hovered
+</div>
+`;
+
+exports[`Tooltip Snapshots renders a tooltip with a different transformOrigin 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: rgba(0,0,0,.85);
+  color: #ffffff;
+  font-size: 13px;
+  margin: 4px;
+  -webkit-animation: animation-4n2zzm;
+  animation: animation-4n2zzm;
+  -webkit-animation-duration: 150ms;
+  animation-duration: 150ms;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-transform-origin: top center;
+  -ms-transform-origin: top center;
+  transform-origin: top center;
+}
+
+.emotion-0 a {
+  color: #ffffff;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+  className="emotion-0 emotion-1"
+  role="tooltip"
+>
+  Delete
+</div>
+`;
+
+exports[`Tooltip Snapshots renders a tooltip with a link 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: rgba(0,0,0,.85);
+  color: #ffffff;
+  font-size: 13px;
+  margin: 4px;
+  -webkit-animation: animation-4n2zzm;
+  animation: animation-4n2zzm;
+  -webkit-animation-duration: 150ms;
+  animation-duration: 150ms;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-transform-origin: top center;
+  -ms-transform-origin: top center;
+  transform-origin: top center;
+}
+
+.emotion-0 a {
+  color: #ffffff;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<div
+  className="emotion-0 emotion-1"
+  role="tooltip"
+>
+  <a
+    href="#"
+  >
+    More Info
+  </a>
+</div>
+`;

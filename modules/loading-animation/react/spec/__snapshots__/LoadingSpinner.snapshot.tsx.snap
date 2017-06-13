@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingSpinner Snapshots renders a LoadingSpinner with a different color 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-0 div {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  -webkit-animation: .8s linear infinite animation-1eh1san;
+  animation: .8s linear infinite animation-1eh1san;
+}
+
+.emotion-0 div:nth-child(1) {
+  top: 14.7px;
+  left: 0px;
+}
+
+.emotion-0 div:nth-child(2) {
+  -webkit-animation-delay: .1s;
+  animation-delay: .1s;
+  top: 4.306px;
+  left: 4.306px;
+}
+
+.emotion-0 div:nth-child(3) {
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
+  top: 0px;
+  left: 14.7px;
+}
+
+.emotion-0 div:nth-child(4) {
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+  top: 4.306px;
+  right: 4.306px;
+}
+
+.emotion-0 div:nth-child(5) {
+  -webkit-animation-delay: .4s;
+  animation-delay: .4s;
+  top: 14.7px;
+  right: 0px;
+}
+
+.emotion-0 div:nth-child(6) {
+  -webkit-animation-delay: .5s;
+  animation-delay: .5s;
+  right: 4.306px;
+  bottom: 4.306px;
+}
+
+.emotion-0 div:nth-child(7) {
+  -webkit-animation-delay: .6s;
+  animation-delay: .6s;
+  bottom: 0px;
+  left: 14.7px;
+}
+
+.emotion-0 div:nth-child(8) {
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+  bottom: 4.306px;
+  left: 4.306px;
+}
+
+.emotion-0 div {
+  background: #bdbdbd;
+}
+
+<div
+  aria-busy="true"
+  className="emotion-0 emotion-1"
+  color="#bdbdbd"
+  role="alert"
+>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots renders a larger LoadingSpinner 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+}
+
+.emotion-0 div {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  -webkit-animation: .8s linear infinite animation-1eh1san;
+  animation: .8s linear infinite animation-1eh1san;
+}
+
+.emotion-0 div:nth-child(1) {
+  top: 14.7px;
+  left: 0px;
+}
+
+.emotion-0 div:nth-child(2) {
+  -webkit-animation-delay: .1s;
+  animation-delay: .1s;
+  top: 4.306px;
+  left: 4.306px;
+}
+
+.emotion-0 div:nth-child(3) {
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
+  top: 0px;
+  left: 14.7px;
+}
+
+.emotion-0 div:nth-child(4) {
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+  top: 4.306px;
+  right: 4.306px;
+}
+
+.emotion-0 div:nth-child(5) {
+  -webkit-animation-delay: .4s;
+  animation-delay: .4s;
+  top: 14.7px;
+  right: 0px;
+}
+
+.emotion-0 div:nth-child(6) {
+  -webkit-animation-delay: .5s;
+  animation-delay: .5s;
+  right: 4.306px;
+  bottom: 4.306px;
+}
+
+.emotion-0 div:nth-child(7) {
+  -webkit-animation-delay: .6s;
+  animation-delay: .6s;
+  bottom: 0px;
+  left: 14.7px;
+}
+
+.emotion-0 div:nth-child(8) {
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+  bottom: 4.306px;
+  left: 4.306px;
+}
+
+.emotion-0 div {
+  background: #0875e1;
+}
+
+<div
+  aria-busy="true"
+  className="emotion-0 emotion-1"
+  role="alert"
+  scale={1.5}
+>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots renders as expected 1`] = `
+.emotion-0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-0 div {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  -webkit-animation: .8s linear infinite animation-1eh1san;
+  animation: .8s linear infinite animation-1eh1san;
+}
+
+.emotion-0 div:nth-child(1) {
+  top: 14.7px;
+  left: 0px;
+}
+
+.emotion-0 div:nth-child(2) {
+  -webkit-animation-delay: .1s;
+  animation-delay: .1s;
+  top: 4.306px;
+  left: 4.306px;
+}
+
+.emotion-0 div:nth-child(3) {
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
+  top: 0px;
+  left: 14.7px;
+}
+
+.emotion-0 div:nth-child(4) {
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+  top: 4.306px;
+  right: 4.306px;
+}
+
+.emotion-0 div:nth-child(5) {
+  -webkit-animation-delay: .4s;
+  animation-delay: .4s;
+  top: 14.7px;
+  right: 0px;
+}
+
+.emotion-0 div:nth-child(6) {
+  -webkit-animation-delay: .5s;
+  animation-delay: .5s;
+  right: 4.306px;
+  bottom: 4.306px;
+}
+
+.emotion-0 div:nth-child(7) {
+  -webkit-animation-delay: .6s;
+  animation-delay: .6s;
+  bottom: 0px;
+  left: 14.7px;
+}
+
+.emotion-0 div:nth-child(8) {
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+  bottom: 4.306px;
+  left: 4.306px;
+}
+
+.emotion-0 div {
+  background: #0875e1;
+}
+
+<div
+  aria-busy="true"
+  className="emotion-0 emotion-1"
+  role="alert"
+>
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;

@@ -1,0 +1,25 @@
+# dependencies
+node_modules
+
+# misc
+.DS_Store
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+.cache
+
+# build
+modules/**/dist
+modules/**/ts-tmp
+build/*
+*.tsbuildinfo
+
+# intellij
+.idea
+junit.xml
+
+# vscode
+.vscode

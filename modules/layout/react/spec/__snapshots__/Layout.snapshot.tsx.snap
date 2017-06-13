@@ -1,0 +1,324 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout Snapshots renders a layout and column with no gutter and no spacing 1`] = `
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.emotion-0 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-0:first-child {
+  padding-left: 0;
+}
+
+.emotion-0:last-child {
+  padding-right: 0;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <div
+    className="emotion-0 emotion-1"
+    spacing={0}
+  />
+</div>
+`;
+
+exports[`Layout Snapshots renders a layout and columns with 12 column grid widths 1`] = `
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+.emotion-0 {
+  padding: 0 12px;
+  width: 33.33333333333333%;
+}
+
+.emotion-0:first-child {
+  padding-left: 0;
+}
+
+.emotion-0:last-child {
+  padding-right: 0;
+}
+
+.emotion-2 {
+  padding: 0 12px;
+  width: 66.66666666666666%;
+}
+
+.emotion-2:first-child {
+  padding-left: 0;
+}
+
+.emotion-2:last-child {
+  padding-right: 0;
+}
+
+<div
+  className="emotion-4 emotion-5"
+>
+  <div
+    className="emotion-0 emotion-1"
+  />
+  <div
+    className="emotion-2 emotion-1"
+  />
+</div>
+`;
+
+exports[`Layout Snapshots renders a layout and columns with custom spacing 1`] = `
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+.emotion-0 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-0:first-child {
+  padding-left: 0;
+}
+
+.emotion-0:last-child {
+  padding-right: 0;
+}
+
+.emotion-2 {
+  padding: 0 60px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-2:first-child {
+  padding-left: 0;
+}
+
+.emotion-2:last-child {
+  padding-right: 0;
+}
+
+<div
+  className="emotion-6 emotion-7"
+  spacing={60}
+>
+  <div
+    className="emotion-0 emotion-1"
+    spacing={0}
+  />
+  <div
+    className="emotion-2 emotion-1"
+    spacing={60}
+  />
+  <div
+    className="emotion-2 emotion-1"
+    spacing={60}
+  />
+</div>
+`;
+
+exports[`Layout Snapshots renders a layout and columns with fixed width 1`] = `
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+.emotion-2 {
+  padding: 0 12px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-2:first-child {
+  padding-left: 0;
+}
+
+.emotion-2:last-child {
+  padding-right: 0;
+}
+
+.emotion-0 {
+  padding: 0 12px;
+  width: 400px;
+}
+
+.emotion-0:first-child {
+  padding-left: 0;
+}
+
+.emotion-0:last-child {
+  padding-right: 0;
+}
+
+<div
+  className="emotion-4 emotion-5"
+>
+  <div
+    className="emotion-0 emotion-1"
+    width="400px"
+  />
+  <div
+    className="emotion-2 emotion-1"
+  />
+</div>
+`;
+
+exports[`Layout Snapshots renders a layout with an empty div 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+<div
+  className="emotion-0 emotion-1"
+/>
+`;
+
+exports[`Layout Snapshots renders a layout with capWidth 1`] = `
+.emotion-0 {
+  padding: 0 12px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-0:first-child {
+  padding-left: 0;
+}
+
+.emotion-0:last-child {
+  padding-right: 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 12px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <div
+    className="emotion-0 emotion-1"
+  />
+</div>
+`;
+
+exports[`Layout Snapshots renders a layout with fluid columns 1`] = `
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+.emotion-0 {
+  padding: 0 12px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-0:first-child {
+  padding-left: 0;
+}
+
+.emotion-0:last-child {
+  padding-right: 0;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <div
+    className="emotion-0 emotion-1"
+  />
+  <div
+    className="emotion-0 emotion-1"
+  />
+  <div
+    className="emotion-0 emotion-1"
+  />
+</div>
+`;
+
+exports[`Layout Snapshots renders layout and column 1`] = `
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+.emotion-0 {
+  padding: 0 12px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-0:first-child {
+  padding-left: 0;
+}
+
+.emotion-0:last-child {
+  padding-right: 0;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <div
+    className="emotion-0 emotion-1"
+  />
+</div>
+`;

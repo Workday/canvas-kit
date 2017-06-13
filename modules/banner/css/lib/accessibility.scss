@@ -1,0 +1,22 @@
+@mixin wdc-focusable-alerts() {
+  .wdc-alert-bar:not([disabled]) {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+[data-whatinput='keyboard'] {
+  @include wdc-focusable-alerts() {
+    @extend .wdc-alert-bar.wdc-alert-bar-focus;
+  }
+}
+
+[data-whatinput='initial'],
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  @include wdc-focusable-alerts() {
+    outline: none;
+    box-shadow: none;
+  }
+}
