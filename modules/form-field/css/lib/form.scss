@@ -1,0 +1,399 @@
+// Fields
+@mixin wdc-form-field-wrapper() {
+  margin-bottom: $wdc-spacing-s;
+  position: relative;
+
+  .wdc-form-field {
+    position: relative;
+  }
+}
+
+.wdc-form-field-wrapper {
+  @include wdc-form-field-wrapper();
+}
+
+@mixin wdc-form-label() {
+  @include wdc-type-body-2();
+  @include wdc-type-variant-label();
+  display: block;
+}
+
+.wdc-form-label {
+  @include wdc-form-label();
+  margin-bottom: 12px;
+
+  &.wdc-form-label-required:after {
+    content: '*';
+    display: inline-block;
+    color: $wdc-color-peach-500;
+    margin-left: $wdc-spacing-xxxs;
+  }
+  & + .wdc-form-textinput,
+  & + .wdc-form-textarea,
+  & + .wdc-form-select {
+    margin-top: $wdc-spacing-xxs;
+  }
+}
+
+// Common styles
+
+// Styles common to elements with text boxes like text inputs and selects
+@mixin wdc-form-common-box() {
+  @include wdc-type();
+  @include wdc-type-body-2();
+  background-color: $wdc-color-french-vanilla-100;
+  display: block;
+  border: 1px solid $wdc-color-soap-500;
+  border-radius: 3px;
+  min-width: $wdc-form-field-min-width;
+  line-height: $wdc-spacing-s - 2;
+  padding: $wdc-spacing-xxs;
+  box-sizing: border-box;
+  transition: 0.2s border-color, 0.2s box-shadow;
+
+  &.wdc-form-hover:not([disabled]):not(.wdc-form-disabled),
+  &:hover:not([disabled]):not(.wdc-form-disabled) {
+    border-color: $wdc-color-licorice-100;
+  }
+}
+
+// Styles common to textarea and text inputs
+@mixin wdc-form-text() {
+  @include wdc-form-common-box();
+
+  &::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: $wdc-color-licorice-100;
+  }
+
+  &:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $wdc-color-licorice-100;
+    opacity: 1;
+  }
+
+  &::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $wdc-color-licorice-100;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $wdc-color-licorice-100;
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $wdc-color-licorice-100;
+  }
+
+  // Show focus outline still on disabled class
+  &.wdc-form-focus:not([disabled]),
+  &:focus:not([disabled]) {
+    @include wdc-form-focus();
+  }
+}
+
+@mixin wdc-form-focus() {
+  border-color: $wdc-color-blueberry-500;
+  box-shadow: 0 0 0 1px $wdc-color-blueberry-500;
+  outline: none;
+}
+
+@mixin wdc-form-textarea() {
+  @include wdc-form-text();
+  overflow: auto; // IE 11
+  line-height: $wdc-spacing-s;
+}
+
+.wdc-form-textarea {
+  @include wdc-form-textarea();
+}
+
+@mixin wdc-form-textinput() {
+  @include wdc-form-text();
+}
+
+.wdc-form-textinput {
+  @include wdc-form-textinput();
+}
+
+.wdc-form-text {
+  @include wdc-type();
+  @include wdc-type-body-2();
+  display: block;
+  margin-top: $wdc-spacing-xxs;
+}
+
+// Select
+@mixin wdc-form-select() {
+  @include wdc-form-common-box();
+  background: $wdc-color-french-vanilla-100
+    svg-load('#{$_wdc-form-icons-path}/wd-icon-caret-down.svg', fill=$wdc-color-licorice-200)
+    calc(100% - #{$wdc-spacing-xxs}) center no-repeat;
+  background-size: $wdc-spacing-s;
+  color: $wdc-color-black-pepper-300;
+  appearance: none;
+  padding-right: $wdc-spacing-l;
+
+  &:-moz-focusring {
+    // Hack to hide outline on FF
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+
+  &.wdc-form-hover:not([disabled]):not(.wdc-form-disabled),
+  &:hover:not([disabled]):not(.wdc-form-disabled) {
+    background-image: svg-load(
+      '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
+      fill=$wdc-color-licorice-500
+    );
+  }
+
+  &:focus:not([disabled]),
+  &.wdc-form-focus:not([disabled]) {
+    @include wdc-form-focus();
+    background-image: svg-load(
+      '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
+      fill=$wdc-color-blueberry-500
+    );
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+.wdc-form-select {
+  @include wdc-form-select();
+}
+
+// Common styles for checkboxes and radios
+@mixin wdc-form-common-control() {
+  + .wdc-form-label {
+    margin-left: 8px;
+    display: inline;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &:before {
+      width: $wdc-spacing-s;
+      height: $wdc-spacing-s;
+      background: $wdc-color-french-vanilla-100;
+      border: 1px solid $wdc-color-licorice-100;
+      border-radius: 2px;
+      transition: 0.2s border-color, 0.2s box-shadow;
+    }
+  }
+
+  & + .wdc-form-label {
+    @include wdc-type-body-2();
+    display: inline-block;
+    margin: 0 0 0 $wdc-spacing-xxs;
+    top: -4px;
+  }
+
+  &:disabled,
+  &.wdc-form-disabled {
+    border-color: $wdc-color-soap-500;
+    pointer-events: none;
+
+    & + .wdc-form-label {
+      color: $wdc-color-licorice-100;
+    }
+  }
+}
+
+// Form Groups
+@mixin wdc-form-group() {
+  .wdc-form-label:first-child {
+    margin-bottom: 12px;
+  }
+
+  .wdc-form-field-wrapper:last-child {
+    margin-bottom: 0;
+  }
+
+  .wdc-form-group-fields {
+    display: inline-block;
+
+    .wdc-form-field {
+      margin-bottom: $wdc-spacing-xs;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .wdc-form-field {
+    margin-bottom: $wdc-spacing-s;
+  }
+}
+
+.wdc-form-group {
+  @include wdc-form-group();
+}
+
+/* Checkboxes explained:
+ * It's technically a bug that webkit browsers allow pseudo elements on inputs.
+ * This means that styling a checked checkbox by using input:after is not
+ * supported in Firefox, IE, etc. To get around this, we layer the before and
+ * after pseudo elements of the adjacent label ontop of the native checkbox
+ * to give the visual we want.
+
+ * This wrapper is a helper to achieve the same visual when there is no label
+ * (i.e. a checkbox in the first column of a table). We still require an empty
+ * label so we can target it based on the checked checkbox.
+ */
+.wdc-form-checkbox-nolabel {
+  width: $wdc-spacing-s;
+  height: $wdc-spacing-s;
+  position: relative;
+}
+
+// Checkboxes
+@mixin wdc-form-checkbox() {
+  @include wdc-form-common-control();
+
+  &.wdc-form-checked,
+  &:checked {
+    + .wdc-form-label:before {
+      border-color: $wdc-color-blueberry-500;
+      background-color: $wdc-color-blueberry-500;
+    }
+    + .wdc-form-label:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $wdc-spacing-s + 2px;
+      height: $wdc-spacing-s + 2px;
+      content: '';
+      background: svg-load(
+          '#{$_wdc-form-icons-path}/wd-icon-check.svg',
+          fill=$wdc-color-french-vanilla-100
+        )
+        center no-repeat;
+      background-size: $wdc-spacing-s;
+    }
+
+    &:focus:not([disabled]),
+    &.wdc-form-focus:not([disabled]) {
+      @include wdc-form-checkbox-checked-focus();
+    }
+  }
+
+  &:focus:not([disabled]),
+  &.wdc-form-focus:not([disabled]) {
+    @include wdc-form-checkbox-focus();
+  }
+}
+
+@mixin wdc-form-checkbox-checked-focus() {
+  + .wdc-form-label:before {
+    border-color: $wdc-color-french-vanilla-100;
+    box-shadow: 0 0 0 1px $wdc-color-french-vanilla-100, 0 0 0 3px $wdc-color-blueberry-500,
+      inset 0 0 0 4px $wdc-color-blueberry-500;
+  }
+}
+
+@mixin wdc-form-checkbox-focus() {
+  + .wdc-form-label:before {
+    border-color: $wdc-color-blueberry-500;
+    box-shadow: 0 0 0 1px $wdc-color-blueberry-500;
+    outline: none;
+  }
+}
+
+.wdc-form-checkbox {
+  @include wdc-form-checkbox();
+}
+
+// Radios
+@mixin wdc-form-radio() {
+  @include wdc-form-common-control();
+
+  + .wdc-form-label:before {
+    border-radius: 100%;
+  }
+
+  &.wdc-form-checked,
+  &:checked {
+    + .wdc-form-label:before {
+      border-color: $wdc-color-blueberry-500;
+      box-shadow: inset 0 0 0 4px $wdc-color-blueberry-500;
+    }
+
+    &:focus:not([disabled]),
+    &.wdc-form-focus:not([disabled]) {
+      @include wdc-form-radio-checked-focus();
+    }
+  }
+
+  &:focus:not([disabled]),
+  &.wdc-form-focus:not([disabled]) {
+    @include wdc-form-radio-focus();
+  }
+}
+
+@mixin wdc-form-radio-checked-focus() {
+  + .wdc-form-label:before {
+    border-color: $wdc-color-french-vanilla-100;
+    box-shadow: 0 0 0 1px $wdc-color-french-vanilla-100, 0 0 0 3px $wdc-color-blueberry-500,
+      inset 0 0 0 4px $wdc-color-blueberry-500;
+  }
+}
+
+@mixin wdc-form-radio-focus() {
+  + .wdc-form-label:before {
+    border-color: $wdc-color-blueberry-500;
+    box-shadow: 0 0 0 1px $wdc-color-blueberry-500;
+    outline: none;
+  }
+}
+
+.wdc-form-radio {
+  @include wdc-form-radio();
+}
+
+@mixin wdc-form-inline-labels() {
+  .wdc-form-field-wrapper {
+    display: flex;
+
+    // Case where there's no label on the left
+    & > .wdc-form-field {
+      margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
+    }
+    & > .wdc-form-label + .wdc-form-field {
+      margin-left: 0;
+    }
+  }
+  .wdc-form-label {
+    min-width: $wdc-form-inline-label-width;
+    width: $wdc-form-inline-label-width;
+    float: left;
+    margin-top: $wdc-spacing-xxs;
+    margin-right: $wdc-spacing-s;
+    margin-bottom: 0;
+  }
+  .wdc-form-checkbox + .wdc-form-label,
+  .wdc-form-radio + .wdc-form-label {
+    width: auto;
+    float: none;
+
+    &:before,
+    &:after {
+      top: $wdc-spacing-xxs - 2;
+    }
+  }
+}
+.wdc-form-inline-labels {
+  @include wdc-form-inline-labels();
+}

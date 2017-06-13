@@ -1,0 +1,19 @@
+@import './index.scss';
+// custom styles for storybook
+
+.demo-box {
+  position: relative;
+  box-sizing: border-box;
+  min-height: $wdc-spacing-s;
+  margin-bottom: $wdc-spacing-s;
+  background: $wdc-color-blueberry-500;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+
+  &.demo-box-big {
+    min-height: $wdc-spacing-xxl;
+  }
+}

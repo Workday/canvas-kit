@@ -1,0 +1,110 @@
+// Grid System
+
+@mixin wdc-col-common {
+  box-sizing: border-box;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+@each $breakpoint in $wdc-grid-system-breakpoints {
+  $_name: nth($breakpoint, 1);
+  $_size: nth($breakpoint, 2);
+  $_gutter: nth($breakpoint, 3);
+  $_half-gutter: $_gutter * 0.5;
+  $_gutter-compensation: $_half-gutter * -1;
+
+  @media only screen and (min-width: $_size) {
+    .wdc-row {
+      box-sizing: border-box;
+      display: flex;
+      flex: 0 1 auto;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-right: $_gutter-compensation;
+      margin-left: $_gutter-compensation;
+    }
+
+    .wdc-col {
+      @include wdc-col-common;
+      padding-left: $_half-gutter;
+      padding-right: $_half-gutter;
+      flex-grow: 1;
+      flex-basis: 0;
+      max-width: 100%;
+    }
+
+    @for $_i from 1 through $wdc-grid-system-columns {
+      .wdc-col-#{$_i} {
+        @include wdc-col-common;
+        padding-left: $_half-gutter;
+        padding-right: $_half-gutter;
+        flex-basis: 100% / $wdc-grid-system-columns * $_i;
+        max-width: 100% / $wdc-grid-system-columns * $_i;
+      }
+
+      .wdc-col-offset-#{$_i} {
+        @include wdc-col-common;
+        padding-left: $_half-gutter;
+        padding-right: $_half-gutter;
+
+        @if $_i == 0 {
+          margin-left: 0;
+        } @else {
+          margin-left: 100% / $wdc-grid-system-columns * $_i;
+        }
+      }
+
+      .wdc-col-#{$_name}-#{$_i} {
+        @include wdc-col-common;
+        padding-left: $_half-gutter;
+        padding-right: $_half-gutter;
+        flex-basis: 100% / $wdc-grid-system-columns * $_i;
+        max-width: 100% / $wdc-grid-system-columns * $_i;
+      }
+
+      .wdc-col-#{$_name}-offset-#{$_i} {
+        @include wdc-col-common;
+        padding-left: $_half-gutter;
+        padding-right: $_half-gutter;
+
+        @if $_i == 0 {
+          margin-left: 0;
+        } @else {
+          margin-left: 100% / $wdc-grid-system-columns * $_i;
+        }
+      }
+    }
+  }
+}
+
+.wdc-row {
+  &.wdc-row-start {
+    justify-content: flex-start;
+  }
+
+  &.wdc-row-center {
+    justify-content: center;
+  }
+
+  &.wdc-row-end {
+    justify-content: flex-end;
+  }
+
+  &.wdc-row-top {
+    align-items: flex-start;
+  }
+
+  &.wdc-row-middle {
+    align-items: center;
+  }
+
+  &.wdc-row-bottom {
+    align-items: flex-end;
+  }
+  &.wdc-row-around {
+    justify-content: space-around;
+  }
+  &.wdc-row-between {
+    justify-content: space-between;
+  }
+}

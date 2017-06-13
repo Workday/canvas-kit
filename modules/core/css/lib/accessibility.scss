@@ -1,0 +1,49 @@
+// Focus styling
+@mixin wdc-focusable-elements() {
+  a,
+  input,
+  button,
+  .wdc-type-variant-link,
+  area[href],
+  iframe,
+  [contentEditable='true'] {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+@mixin wdc-show-outlines() {
+  @include wdc-focusable-elements() {
+    text-decoration: none;
+    outline: 2px solid $wdc-color-blueberry-500;
+  }
+}
+
+@mixin wdc-hide-outlines() {
+  @include wdc-focusable-elements() {
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+/* default styling before what-input executes */
+.wdc-a11y {
+  @include wdc-show-outlines();
+}
+
+[data-whatinput='initial'],
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  .wdc-a11y,
+  &.wdc-a11y {
+    @include wdc-hide-outlines();
+  }
+}
+
+[data-whatinput='keyboard'] {
+  .wdc-a11y,
+  &.wdc-a11y {
+    @include wdc-show-outlines();
+  }
+}

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Graphic Snapshots renders as expected 1`] = `
+.emotion-0 {
+  display: inline-block;
+}
+
+.emotion-0 svg {
+  display: block;
+}
+
+<span
+  className="emotion-0"
+  dangerouslySetInnerHTML={
+    Object {
+      "__html": "<svg></svg>",
+    }
+  }
+/>
+`;

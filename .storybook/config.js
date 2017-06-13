@@ -1,0 +1,28 @@
+import {configure, addDecorator, addParameters} from '@storybook/react';
+import {withKnobs} from '@storybook/addon-knobs/react';
+import {injectGlobal} from 'emotion';
+import fonts from '../modules/fonts/react';
+import {create} from '@storybook/theming';
+import {commonColors, typeColors, fontFamily} from '../modules/core/react';
+
+const req = require.context('../modules', true, /stories.*\.tsx?$/);
+
+function loadStories() {
+  req.keys().forEach(req);
+}
+
+addDecorator(withKnobs);
+
+addParameters({
+  options: {
+    name: 'Canvas Kit',
+    theme: create({
+      mainTextColor: typeColors.body,
+      mainTextFace: fontFamily,
+      mainBackground: commonColors.backgroundAlt,
+    }),
+  },
+});
+
+configure(loadStories, module);
+injectGlobal(...fonts);

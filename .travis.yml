@@ -1,0 +1,30 @@
+language: node_js
+node_js: 8
+cache:
+  yarn: true
+git:
+  depth: 3
+branches:
+  only:
+  - master
+before_install:
+- npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+- export PATH="$HOME/.yarn/bin:$PATH"
+script:
+- yarn install --production=false
+- yarn build:rebuild
+- yarn test
+- rm -rf docs
+- yarn build-storybook
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: docs
+  github_token: "$STORYBOOK_TOKEN"
+  on:
+    branch: master
+env:
+  global:
+  - secure: 0IjKwQ/4FnH2vjbD3sql/6iviJoiy3PFs7uJF4D8DVmobrSbX2GAYXksqlqYF6xxD5WzbcB5ArI3p3BY0E1cY8MpxsyCqxzy7nVzb/wZ99CFYEpoYL5E/DIQkUgSjuuTbf66Isc0dVd03cyaeedc8A6jqIzt8Ly9wcYv+W2Peq3bTE6KUPyw0sJ0ueiCghrnG5HdUC5Sx2Hn1vNQEphntQbD1NsNNPEZM+2fFATcDA4Je06FotBHPKmTsc4zzGKe0FnsIL3BKqCQWQOzRMHtmNKPrgagys7tMWSvznjcqs4w5rh63hy6c1LukDa617ZWHHX6iUy4qucgipv7VuH27DKlGA/8O0SiizRGD7keFLGxG5NKwYXr4wU6828gKKqpaMXK6HUF+xc0vsTiSTfK9qiXsxV/v6exdsOohOyxqpFyR9vLczkBdPc+bel0W78uWjPVOtay9yKA+w6P1RZ4bBC2t4nTaT1jTKJ1gsK1ttpPqykcfA909Me7so390WA3FiSNRCZnsKdJN0s3NwrO3oJfOjfe2t2wEyFzcnVwxZVcZhnHHILNmXGvnvoyzSnMIVWntTIgP28FKFCQI+SUb+3R2Oa6vC4z/I2wwNalb8DkJtSPVfEOSbmU5uW4S9ed5xqQJhMY0yHVt9t83b3mTnkv8vyoa05T57zV+n/+aSQ=
+  - secure: mP09ZMr9gAPNanTcIyyQzM7KdqQxnFaTK5/ekcJ/K1mF39jKt2quAcvUZckWNwQhVsSk6ENN4703RmRUcH6NTI2k/Yp2R09mgWXiWwUFJ5RNUMYA1YkxTHlizL3UB0TnIkOkjeImnIgcqXx7xX9ZEFy8wt9xMeyNGVbvvnptzL/NxH7nZ/kXL9L9jFq1Kq6iq+E0mQe5L7LcnzSR4s2tKVjNXYyFraKm/vJHymSMdnEJpXKp78uqYeKLScxB3waRctLf1CRPrw+3gwnOBX2rqUXWwFGEvUuG0G4+KrhGQ/mYe/9PolRuOt3z4yZSqdjhWs2ldhlggquC4VbOlFCpU7hMEMxATnPQaOxH9MDu+ywlw/zyM6z4RmdlMH2Y1kxPTLOKY8AmQSYZ4aIJm4iGtqqcBBuFgf3U+DKODmUQl4lRDJsdNAyQdpW7qLHezu+CGCsGHA/zlMpcx40WqBpdClGIxBB8+5bjNtzQY44H3jfEgY7JQrCrfgLNxMAHq2jlgoJvP83108xEGTT00z49Zo6JkXsd9q35eOS0LVA3ycRBtUqvMk13sRr/vqdu6FwrA4Xbzx+5eV5+yB8Oav863F57wqZrKF6RXnYy6Dj5RSC5t+eOJkvxfX8HtVv7E7TyGFkgGAz4lmauwNK4BPLqbx+KzaqnJ+Ly0oF4DliU2LU=

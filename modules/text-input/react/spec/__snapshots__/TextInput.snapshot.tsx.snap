@@ -1,0 +1,458 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput Snapshots alert 1`] = `
+.emotion-5 {
+  display: inline-block;
+  position: relative;
+}
+
+.emotion-3 {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  border-color: #c06c00;
+  -webkit-transition: 100ms box-shadow;
+  transition: 100ms box-shadow;
+  box-shadow: inset 0 0 0 2px #ffa126;
+  padding-right: 36px;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:hover {
+  border-color: #c06c00;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #c06c00;
+  box-shadow: inset 0 0 0 2px #ffa126, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
+}
+
+.emotion-2 {
+  display: inline-block;
+}
+
+.emotion-2 svg {
+  display: block;
+}
+
+.emotion-2 .wd-icon-fill {
+  fill: #f38b00;
+}
+
+.emotion-2:hover .wd-icon-fill {
+  fill: #f38b00;
+}
+
+.emotion-2 .wd-icon-accent {
+  fill: #f38b00;
+}
+
+.emotion-2:hover .wd-icon-accent {
+  fill: #f38b00;
+}
+
+.emotion-2 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-2:hover .wd-icon-background {
+  fill: transparent;
+}
+
+<div
+  className="emotion-5 emotion-6"
+>
+  <input
+    className="emotion-0 emotion-1"
+    type="text"
+  />
+  <div
+    className="emotion-3 emotion-4"
+  >
+    <span
+      className="emotion-2"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-exclamation-triangle wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.004 6.393L17.995 19H6z\\" class=\\"wd-icon-background\\"/><path d=\\"M12.442 3.316l8.468 16.918a.5.5 0 0 1-.448.724l-16.888-.003a.5.5 0 0 1-.447-.723l8.42-16.915a.5.5 0 0 1 .895-.001zm-.438 3.077L6 19h11.995L12.004 6.393z\\" class=\\"wd-icon-fill\\"/><path d=\\"M12.495 10c.279 0 .505.215.505.498v4.004a.494.494 0 0 1-.505.498h-.99a.496.496 0 0 1-.505-.498v-4.004c0-.275.214-.498.505-.498h.99zm0 8h-.99a.497.497 0 0 1-.505-.505v-.99c0-.291.226-.505.505-.505h.99c.291 0 .505.226.505.505v.99c0 .291-.226.505-.505.505z\\" class=\\"wd-icon-accent\\"/></g></svg>",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`TextInput Snapshots error 1`] = `
+.emotion-5 {
+  display: inline-block;
+  position: relative;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  border-color: #de2e21;
+  -webkit-transition: 100ms box-shadow;
+  transition: 100ms box-shadow;
+  box-shadow: inset 0 0 0 1px #de2e21;
+  padding-right: 36px;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:hover {
+  border-color: #de2e21;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #de2e21;
+  box-shadow: inset 0 0 0 1px #de2e21, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
+}
+
+.emotion-3 {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.emotion-2 {
+  display: inline-block;
+}
+
+.emotion-2 svg {
+  display: block;
+}
+
+.emotion-2 .wd-icon-fill {
+  fill: #de2e21;
+}
+
+.emotion-2:hover .wd-icon-fill {
+  fill: #de2e21;
+}
+
+.emotion-2 .wd-icon-accent {
+  fill: #de2e21;
+}
+
+.emotion-2:hover .wd-icon-accent {
+  fill: #de2e21;
+}
+
+.emotion-2 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-2:hover .wd-icon-background {
+  fill: transparent;
+}
+
+<div
+  className="emotion-5 emotion-6"
+>
+  <input
+    className="emotion-0 emotion-1"
+    type="text"
+  />
+  <div
+    className="emotion-3 emotion-4"
+  >
+    <span
+      className="emotion-2"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-exclamation-circle wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><circle cx=\\"12\\" cy=\\"12\\" r=\\"9\\" class=\\"wd-icon-background\\"/><path d=\\"M2 12C2 6.477 6.476 2 12 2c5.523 0 10 4.476 10 10 0 5.523-4.476 10-10 10-5.523 0-10-4.476-10-10zm2 0a8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8z\\" class=\\"wd-icon-fill\\"/><path d=\\"M12.495 7c.279 0 .505.233.505.503v5.994a.497.497 0 0 1-.505.503h-.99a.509.509 0 0 1-.505-.503V7.503c0-.278.214-.503.505-.503h.99zm0 10h-.99a.497.497 0 0 1-.505-.505v-.99c0-.291.226-.505.505-.505h.99c.291 0 .505.226.505.505v.99c0 .291-.226.505-.505.505z\\" class=\\"wd-icon-accent\\"/></g></svg>",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`TextInput Snapshots grow 1`] = `
+.emotion-2 {
+  display: block;
+  position: relative;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  width: 100%;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <input
+    className="emotion-0 emotion-1"
+    type="text"
+  />
+</div>
+`;
+
+exports[`TextInput Snapshots renders as expected 1`] = `
+.emotion-2 {
+  display: inline-block;
+  position: relative;
+}
+
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:hover {
+  border-color: #333d47;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <input
+    className="emotion-0 emotion-1"
+    type="text"
+  />
+</div>
+`;

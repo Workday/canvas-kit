@@ -1,0 +1,871 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cookie Banner Snapshots renders a CookieBanner 1`] = `
+.emotion-8 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  background-color: #ffffff;
+  border-top: 1px solid #dfe2e6;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 24px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+}
+
+@media (max-width:450px) {
+  .emotion-8 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    text-align: center;
+    padding: 16px 0;
+  }
+}
+
+.emotion-0 {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media (max-width:450px) {
+  .emotion-0:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.emotion-6 {
+  margin-left: 16px;
+  margin-right: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width:450px) {
+  .emotion-6:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  background-color: #ffa126;
+  border-color: #ffa126;
+  color: #ffffff;
+  height: 40px;
+  padding: 0 32px;
+  min-width: 112px;
+  max-width: 288px;
+  font-weight: 500;
+  width: 100%;
+  max-width: 100%;
+}
+
+.emotion-4:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-4:disabled,
+.emotion-4:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-4:focus {
+  background-color: #ffa126;
+  border-color: #0875e1;
+  color: #ffffff;
+}
+
+.emotion-4:hover:focus {
+  background-color: #f38b00;
+}
+
+.emotion-4:active,
+.emotion-4:focus:active,
+.emotion-4:hover:active {
+  background-color: #ffa126;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-4:hover {
+  background-color: #f38b00;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-4:disabled,
+.emotion-4:active:disabled,
+.emotion-4:focus:disabled,
+.emotion-4:hover:disabled {
+  background-color: #fcd49f;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-4:not([disabled]):focus,
+.emotion-4:not([disabled]):active {
+  border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-2 {
+  position: relative;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 700;
+  font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  padding: 0 12px;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0px;
+}
+
+.emotion-2:hover:active {
+  background-color: transparent;
+}
+
+<div
+  className="emotion-8 emotion-9"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we’ll assume that you are willing to receive cookies.
+  </div>
+  <div
+    className="emotion-6 emotion-1"
+  >
+    <button
+      className="emotion-4 emotion-5"
+      onClick={[Function]}
+    >
+      <span
+        className="emotion-2 emotion-3"
+      >
+        Continue
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Cookie Banner Snapshots renders a CookieBanner with settings 1`] = `
+.emotion-10 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  background-color: #ffffff;
+  border-top: 1px solid #dfe2e6;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 24px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+}
+
+@media (max-width:450px) {
+  .emotion-10 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    text-align: center;
+    padding: 16px 0;
+  }
+}
+
+.emotion-0 {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media (max-width:450px) {
+  .emotion-0:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.emotion-8 {
+  margin-left: 16px;
+  margin-right: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width:450px) {
+  .emotion-8:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.emotion-6 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  background-color: #ffa126;
+  border-color: #ffa126;
+  color: #ffffff;
+  height: 40px;
+  padding: 0 32px;
+  min-width: 112px;
+  max-width: 288px;
+  font-weight: 500;
+  width: 100%;
+  max-width: 100%;
+}
+
+.emotion-6:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-6:disabled,
+.emotion-6:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-6:focus {
+  background-color: #ffa126;
+  border-color: #0875e1;
+  color: #ffffff;
+}
+
+.emotion-6:hover:focus {
+  background-color: #f38b00;
+}
+
+.emotion-6:active,
+.emotion-6:focus:active,
+.emotion-6:hover:active {
+  background-color: #ffa126;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-6:hover {
+  background-color: #f38b00;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-6:disabled,
+.emotion-6:active:disabled,
+.emotion-6:focus:disabled,
+.emotion-6:hover:disabled {
+  background-color: #fcd49f;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-6:not([disabled]):focus,
+.emotion-6:not([disabled]):active {
+  border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-4 {
+  position: relative;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 700;
+  font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  padding: 0 12px;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0px;
+}
+
+.emotion-4:hover:active {
+  background-color: transparent;
+}
+
+.emotion-2 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  margin-right: 16px;
+  border: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 0;
+  height: 0%;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+<div
+  className="emotion-10 emotion-11"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we’ll assume that you are willing to receive cookies.
+  </div>
+  <div
+    className="emotion-8 emotion-1"
+  >
+    <button
+      className="emotion-2 emotion-3"
+      onClick={[Function]}
+    >
+      Cookie Settings
+    </button>
+    <button
+      className="emotion-6 emotion-7"
+      onClick={[Function]}
+    >
+      <span
+        className="emotion-4 emotion-5"
+      >
+        Continue
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Cookie Banner Snapshots renders a closed CookieBanner 1`] = `
+.emotion-0 {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media (max-width:450px) {
+  .emotion-0:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.emotion-6 {
+  margin-left: 16px;
+  margin-right: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width:450px) {
+  .emotion-6:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  background-color: #ffa126;
+  border-color: #ffa126;
+  color: #ffffff;
+  height: 40px;
+  padding: 0 32px;
+  min-width: 112px;
+  max-width: 288px;
+  font-weight: 500;
+  width: 100%;
+  max-width: 100%;
+}
+
+.emotion-4:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-4:disabled,
+.emotion-4:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-4:focus {
+  background-color: #ffa126;
+  border-color: #0875e1;
+  color: #ffffff;
+}
+
+.emotion-4:hover:focus {
+  background-color: #f38b00;
+}
+
+.emotion-4:active,
+.emotion-4:focus:active,
+.emotion-4:hover:active {
+  background-color: #ffa126;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-4:hover {
+  background-color: #f38b00;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-4:disabled,
+.emotion-4:active:disabled,
+.emotion-4:focus:disabled,
+.emotion-4:hover:disabled {
+  background-color: #fcd49f;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-4:not([disabled]):focus,
+.emotion-4:not([disabled]):active {
+  border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-2 {
+  position: relative;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 700;
+  font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  padding: 0 12px;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0px;
+}
+
+.emotion-2:hover:active {
+  background-color: transparent;
+}
+
+.emotion-8 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  background-color: #ffffff;
+  border-top: 1px solid #dfe2e6;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 24px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  -webkit-transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+@media (max-width:450px) {
+  .emotion-8 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    text-align: center;
+    padding: 16px 0;
+  }
+}
+
+<div
+  className="emotion-8 emotion-9"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we’ll assume that you are willing to receive cookies.
+  </div>
+  <div
+    className="emotion-6 emotion-1"
+  >
+    <button
+      className="emotion-4 emotion-5"
+      onClick={[Function]}
+    >
+      <span
+        className="emotion-2 emotion-3"
+      >
+        Continue
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Cookie Banner Snapshots renders a closed CookieBanner with settings 1`] = `
+.emotion-0 {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media (max-width:450px) {
+  .emotion-0:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.emotion-8 {
+  margin-left: 16px;
+  margin-right: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width:450px) {
+  .emotion-8:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.emotion-6 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  background-color: #ffa126;
+  border-color: #ffa126;
+  color: #ffffff;
+  height: 40px;
+  padding: 0 32px;
+  min-width: 112px;
+  max-width: 288px;
+  font-weight: 500;
+  width: 100%;
+  max-width: 100%;
+}
+
+.emotion-6:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-6:disabled,
+.emotion-6:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-6:focus {
+  background-color: #ffa126;
+  border-color: #0875e1;
+  color: #ffffff;
+}
+
+.emotion-6:hover:focus {
+  background-color: #f38b00;
+}
+
+.emotion-6:active,
+.emotion-6:focus:active,
+.emotion-6:hover:active {
+  background-color: #ffa126;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-6:hover {
+  background-color: #f38b00;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-6:disabled,
+.emotion-6:active:disabled,
+.emotion-6:focus:disabled,
+.emotion-6:hover:disabled {
+  background-color: #fcd49f;
+  border-color: #ffa126;
+  color: #ffffff;
+}
+
+.emotion-6:not([disabled]):focus,
+.emotion-6:not([disabled]):active {
+  border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-4 {
+  position: relative;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 700;
+  font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  padding: 0 12px;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0px;
+}
+
+.emotion-4:hover:active {
+  background-color: transparent;
+}
+
+.emotion-10 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  background-color: #ffffff;
+  border-top: 1px solid #dfe2e6;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 24px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  transition: transform 0.2s ease-out;
+  -webkit-transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+@media (max-width:450px) {
+  .emotion-10 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    text-align: center;
+    padding: 16px 0;
+  }
+}
+
+.emotion-2 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  margin-right: 16px;
+  border: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 0;
+  height: 0%;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+<div
+  className="emotion-10 emotion-11"
+>
+  <div
+    className="emotion-0 emotion-1"
+  >
+    We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we’ll assume that you are willing to receive cookies.
+  </div>
+  <div
+    className="emotion-8 emotion-1"
+  >
+    <button
+      className="emotion-2 emotion-3"
+      onClick={[Function]}
+    >
+      Cookie Settings
+    </button>
+    <button
+      className="emotion-6 emotion-7"
+      onClick={[Function]}
+    >
+      <span
+        className="emotion-4 emotion-5"
+      >
+        Continue
+      </span>
+    </button>
+  </div>
+</div>
+`;

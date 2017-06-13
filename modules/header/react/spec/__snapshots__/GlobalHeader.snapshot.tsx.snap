@@ -1,0 +1,2522 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconButton children 1`] = `
+.emotion-19 {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 64px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  color: #333333;
+}
+
+.emotion-6 {
+  height: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.emotion-4 {
+  display: inline-block;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 64px;
+  padding-left: 24px;
+  background: none;
+}
+
+.emotion-0 {
+  line-height: 0;
+}
+
+.emotion-17 {
+  margin-right: 24px;
+}
+
+.emotion-17 > .canvas-header--menu-icon {
+  cursor: pointer;
+}
+
+@media (min-width:0px) {
+  .emotion-17 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    height: 100%;
+    margin-right: 24px;
+  }
+
+  .emotion-17 > * {
+    margin-left: 16px;
+  }
+
+  .emotion-17 > *:not(.canvas-header--menu-icon) {
+    display: none;
+  }
+}
+
+@media (min-width:1px) {
+  .emotion-17 > *:last-child {
+    margin-right: 0;
+  }
+
+  .emotion-17 > *:not(.canvas-header--menu-icon) {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (min-width:600px) {
+  .emotion-17 {
+    -webkit-box-flex: unset;
+    -webkit-flex-grow: unset;
+    -ms-flex-positive: unset;
+    flex-grow: unset;
+  }
+}
+
+.emotion-17 nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: inherit;
+  margin-left: 40px;
+}
+
+.emotion-17 nav ul {
+  color: #333333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: inherit;
+}
+
+.emotion-17 nav ul:hover {
+  color: #7b858f;
+}
+
+.emotion-17 nav ul li {
+  box-sizing: border-box;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  height: inherit;
+  -webkit-transition: color 150ms ease-out 0s;
+  transition: color 150ms ease-out 0s;
+  cursor: pointer;
+}
+
+.emotion-17 nav ul li:first-child > * {
+  margin-left: 0;
+}
+
+.emotion-17 nav ul li:last-child > * {
+  margin-right: 0;
+}
+
+.emotion-17 nav ul li > * {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 0px 16px;
+  margin: 0 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: inherit;
+}
+
+.emotion-17 nav ul li > *:visited {
+  color: inherit;
+}
+
+.emotion-17 nav ul li:hover,
+.emotion-17 nav ul li:active {
+  color: #333333;
+}
+
+.emotion-17 nav ul li.current {
+  color: #005cb9;
+}
+
+.emotion-17 nav ul li.current a {
+  cursor: default;
+}
+
+.emotion-17 nav ul li.current:hover,
+.emotion-17 nav ul li.current:active {
+  color: #005cb9;
+}
+
+.emotion-17 nav ul li.current:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  height: 4px;
+  width: 100%;
+  background-color: #0875e1;
+  border-radius: 3px 3px 0 0;
+}
+
+.emotion-8 {
+  display: inline-block;
+}
+
+.emotion-8 svg {
+  display: block;
+}
+
+.emotion-8 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-8:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-8 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-8:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-8 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-8:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-9 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  border-width: 0px;
+  background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
+}
+
+.emotion-9:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-9:disabled,
+.emotion-9:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-9 .wd-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.emotion-9 span .wd-icon-fill,
+.emotion-9 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-9:focus {
+  background-color: transparent;
+}
+
+.emotion-9:focus span .wd-icon-fill,
+.emotion-9:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-9:hover:focus {
+  background-color: transparent;
+}
+
+.emotion-9:active,
+.emotion-9:focus:active,
+.emotion-9:hover:active {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.emotion-9:active span .wd-icon-fill,
+.emotion-9:focus:active span .wd-icon-fill,
+.emotion-9:hover:active span .wd-icon-fill,
+.emotion-9:active span .wd-icon-accent,
+.emotion-9:focus:active span .wd-icon-accent,
+.emotion-9:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-9:hover {
+  background-color: transparent;
+}
+
+.emotion-9:hover span .wd-icon-fill,
+.emotion-9:hover span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-9:disabled,
+.emotion-9:active:disabled,
+.emotion-9:focus:disabled,
+.emotion-9:hover:disabled {
+  background-color: transparent;
+}
+
+.emotion-9:disabled span .wd-icon-fill,
+.emotion-9:active:disabled span .wd-icon-fill,
+.emotion-9:focus:disabled span .wd-icon-fill,
+.emotion-9:hover:disabled span .wd-icon-fill,
+.emotion-9:disabled span .wd-icon-accent,
+.emotion-9:active:disabled span .wd-icon-accent,
+.emotion-9:focus:disabled span .wd-icon-accent,
+.emotion-9:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #e8ebed;
+  height: 32px;
+  width: 32px;
+  cursor: default;
+}
+
+.emotion-16 img {
+  width: 100%;
+  height: 100%;
+}
+
+.emotion-16:not([disabled]):focus {
+  outline: none;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+[data-whatinput='mouse'] .emotion-16:focus,
+[data-whatinput='touch'] .emotion-16:focus,
+[data-whatinput='pointer'] .emotion-16:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.emotion-15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #e8ebed;
+  width: 32px;
+  height: 32px;
+}
+
+.emotion-15 img {
+  width: 100%;
+  height: 100%;
+}
+
+.emotion-14 {
+  display: inline-block;
+}
+
+.emotion-14 svg {
+  display: block;
+}
+
+.emotion-14 .wd-icon-fill {
+  fill: rgba(0,0,0,0.65);
+}
+
+.emotion-14:hover .wd-icon-fill {
+  fill: rgba(0,0,0,0.65);
+}
+
+.emotion-14 .wd-icon-accent {
+  fill: rgba(0,0,0,0.65);
+}
+
+.emotion-14:hover .wd-icon-accent {
+  fill: rgba(0,0,0,0.65);
+}
+
+.emotion-14 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-14:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-14 svg {
+  width: 20px;
+  height: 20px;
+}
+
+<div
+  className="emotion-19 emotion-20"
+>
+  <div
+    className="emotion-6 emotion-7"
+  >
+    <span>
+      <div
+        className="emotion-4 emotion-5"
+      >
+        <div
+          className="emotion-2 emotion-3"
+        >
+          <div
+            className="emotion-0 emotion-1"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<img src=\\"//design.workday.com/images/ck-dub-logo-blue.svg\\">",
+              }
+            }
+          />
+        </div>
+      </div>
+    </span>
+  </div>
+  <div
+    className="emotion-17 emotion-18"
+  >
+    <button
+      className="emotion-9 emotion-10"
+      style={
+        Object {
+          "margin": "0 0 0 16px",
+        }
+      }
+    >
+      <span
+        className="emotion-8"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-notifications wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M18.417 17.998l-12.83-.008c.036-.05.071-.103.106-.156.974-1.46 1.58-2.973 1.58-4.561V8.546A3.539 3.539 0 0 1 10.82 5h2.359a3.554 3.554 0 0 1 3.548 3.546v4.727c0 1.588.605 3.1 1.579 4.561l.11.164zm-4.623.605a1.794 1.794 0 0 1-3.588 0h3.588z\\" class=\\"wd-icon-background\\"/><path d=\\"M9 18.993l-4.504-.003A.502.502 0 0 1 4 18.488V17s2-2 2-4V9a4.995 4.995 0 0 1 4.002-4.9A1.995 1.995 0 0 1 12 2a1.995 1.995 0 0 1 1.998 2.1A5.01 5.01 0 0 1 18 9v4c0 2 2 4 2 4v1.495a.503.503 0 0 1-.496.505L15 18.997V19a3 3 0 0 1-6 0v-.007zm8.43-1.995a12.076 12.076 0 0 1-.094-.139C16.512 15.623 16 14.344 16 13V9c0-1.651-1-3-4-3S8 7.34 8 9v4c0 1.344-.512 2.623-1.336 3.86l-.09.132 10.856.006zM13 19h-2a1 1 0 0 0 2 0z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+          }
+        }
+      />
+    </button>
+    <button
+      className="emotion-9 emotion-10"
+      style={
+        Object {
+          "margin": "0 0 0 16px",
+        }
+      }
+    >
+      <span
+        className="emotion-8"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-inbox wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M3 11h18v8H3z\\" class=\\"wd-icon-background\\"/><path fill-rule=\\"nonzero\\" d=\\"M4.45 10h15.126l-2.65-4H7.12l-2.67 4zM20 12H4v6h16v-6zM5.772 4.417c.153-.23.506-.417.776-.417h10.954c.275 0 .622.187.773.415L22 10v9.492c0 .28-.225.508-.494.508H2.494A.5.5 0 0 1 2 19.494V10l3.772-5.583z\\" class=\\"wd-icon-fill\\"/><rect width=\\"8\\" height=\\"2\\" x=\\"8\\" y=\\"14\\" class=\\"wd-icon-accent\\" rx=\\".5\\"/></g></svg>",
+          }
+        }
+      />
+    </button>
+    <button
+      aria-label="Avatar"
+      className="emotion-16"
+      disabled={true}
+      size={32}
+    >
+      <div
+        className="emotion-15"
+        size={32}
+      >
+        <span
+          className="emotion-14"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-user wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M20 20.491a.503.503 0 0 1-.496.505H4.496A.493.493 0 0 1 4 20.49v-1.495C4 16 6.246 13.8 8.756 12.683 7.682 11.675 7 10.174 7 8.5 7 5.462 9.239 3 12 3s5 2.462 5 5.499c0 1.675-.68 3.175-1.755 4.183C17.758 13.797 20 15.995 20 18.996v1.495zM6.083 18.996H18c0-2.996-2.5-4.999-6-4.999s-6 2.003-5.917 5zM12 11.998c1.657 0 3-1.567 3-3.5C15 6.567 13.657 5 12 5S9 6.566 9 8.499c0 1.932 1.343 3.499 3 3.499z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+            }
+          }
+        />
+      </div>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
+.emotion-18 {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 64px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  color: #333333;
+}
+
+.emotion-6 {
+  height: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.emotion-4 {
+  display: inline-block;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 64px;
+  padding-left: 24px;
+  background: none;
+}
+
+.emotion-0 {
+  line-height: 0;
+}
+
+.emotion-16 {
+  margin-right: 24px;
+}
+
+.emotion-16 > .canvas-header--menu-icon {
+  cursor: pointer;
+}
+
+@media (min-width:0px) {
+  .emotion-16 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    height: 100%;
+    margin-right: 24px;
+  }
+
+  .emotion-16 > * {
+    margin-left: 16px;
+  }
+
+  .emotion-16 > *:not(.canvas-header--menu-icon) {
+    display: none;
+  }
+}
+
+@media (min-width:1px) {
+  .emotion-16 > *:last-child {
+    margin-right: 0;
+  }
+
+  .emotion-16 > *:not(.canvas-header--menu-icon) {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (min-width:600px) {
+  .emotion-16 {
+    -webkit-box-flex: unset;
+    -webkit-flex-grow: unset;
+    -ms-flex-positive: unset;
+    flex-grow: unset;
+  }
+}
+
+.emotion-16 nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: inherit;
+  margin-left: 40px;
+}
+
+.emotion-16 nav ul {
+  color: #333333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: inherit;
+}
+
+.emotion-16 nav ul:hover {
+  color: #7b858f;
+}
+
+.emotion-16 nav ul li {
+  box-sizing: border-box;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  height: inherit;
+  -webkit-transition: color 150ms ease-out 0s;
+  transition: color 150ms ease-out 0s;
+  cursor: pointer;
+}
+
+.emotion-16 nav ul li:first-child > * {
+  margin-left: 0;
+}
+
+.emotion-16 nav ul li:last-child > * {
+  margin-right: 0;
+}
+
+.emotion-16 nav ul li > * {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 0px 16px;
+  margin: 0 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: inherit;
+}
+
+.emotion-16 nav ul li > *:visited {
+  color: inherit;
+}
+
+.emotion-16 nav ul li:hover,
+.emotion-16 nav ul li:active {
+  color: #333333;
+}
+
+.emotion-16 nav ul li.current {
+  color: #005cb9;
+}
+
+.emotion-16 nav ul li.current a {
+  cursor: default;
+}
+
+.emotion-16 nav ul li.current:hover,
+.emotion-16 nav ul li.current:active {
+  color: #005cb9;
+}
+
+.emotion-16 nav ul li.current:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  height: 4px;
+  width: 100%;
+  background-color: #0875e1;
+  border-radius: 3px 3px 0 0;
+}
+
+.emotion-11 {
+  display: inline-block;
+}
+
+.emotion-11 svg {
+  display: block;
+}
+
+.emotion-11 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-11:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-11 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-11:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-11 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-11:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-14 {
+  position: relative;
+  margin-left: 24px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 480px;
+}
+
+.emotion-8 {
+  display: inline-block;
+}
+
+.emotion-8 svg {
+  display: block;
+}
+
+.emotion-8 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-8:hover .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-8 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-8:hover .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-8 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-8:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-9 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  padding: 12px;
+  padding-left: 40px;
+  max-width: 480px;
+  min-width: 120px;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: none;
+  -webkit-appearance: none;
+  -webkit-transition: background 150ms;
+  transition: background 150ms;
+  background: #f0f1f2;
+  color: #494949;
+}
+
+.emotion-9::-webkit-search-cancel-button {
+  display: none;
+}
+
+.emotion-9::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):active {
+  outline: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  background: #f0f1f2;
+  color: #494949;
+}
+
+.emotion-9:not([disabled]):focus::-webkit-input-placeholder,
+.emotion-9:not([disabled]):active::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):focus::-moz-placeholder,
+.emotion-9:not([disabled]):active::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):focus:-ms-input-placeholder,
+.emotion-9:not([disabled]):active:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):focus::placeholder,
+.emotion-9:not([disabled]):active::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):hover {
+  background: #e8ebed;
+}
+
+.emotion-12 {
+  border-radius: 24px;
+  height: 24px;
+  margin-left: -32px;
+  margin-right: 8px;
+  width: 24px;
+  display: none;
+}
+
+.emotion-12:hover {
+  cursor: pointer;
+}
+
+<div
+  className="emotion-18 emotion-19"
+>
+  <div
+    className="emotion-6 emotion-7"
+  >
+    <span>
+      <div
+        className="emotion-4 emotion-5"
+      >
+        <div
+          className="emotion-2 emotion-3"
+        >
+          <div
+            className="emotion-0 emotion-1"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<img src=\\"//design.workday.com/images/ck-dub-logo-blue.svg\\">",
+              }
+            }
+          />
+        </div>
+      </div>
+    </span>
+  </div>
+  <form
+    className="emotion-14 emotion-15"
+    onSubmit={[Function]}
+    placeholder="Search"
+  >
+    <span
+      className="emotion-8"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-search wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path fill-rule=\\"nonzero\\" d=\\"M17.32 15.906l2.859 2.858a.5.5 0 0 1 .003.717l-.7.7a.5.5 0 0 1-.718-.002l-2.858-2.86a8 8 0 1 1 1.414-1.414zM11 17a6 6 0 1 0 0-12 6 6 0 0 0 0 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+        }
+      }
+      style={
+        Object {
+          "left": "8px",
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": "50%",
+          "transform": "translateY(-50%)",
+        }
+      }
+    />
+    <input
+      className="emotion-9 emotion-10"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      placeholder="Search"
+      type="search"
+      value=""
+    />
+    <span
+      aria-label="Reset Search Input"
+      className="reset-input emotion-12 emotion-13"
+      onClick={[Function]}
+      value=""
+    >
+      <span
+        className="emotion-11"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M10.783 12l-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588L10.783 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+          }
+        }
+      />
+    </span>
+  </form>
+  <div
+    className="emotion-16 emotion-17"
+  />
+</div>
+`;
+
+exports[`App GlobalHeader Snapshots renders a header with content with a search bar 1`] = `
+.emotion-27 {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 64px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  color: #333333;
+}
+
+.emotion-4 {
+  display: inline-block;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 64px;
+  padding-left: 24px;
+  background: none;
+}
+
+.emotion-0 {
+  line-height: 0;
+}
+
+.emotion-25 {
+  margin-right: 24px;
+}
+
+.emotion-25 > .canvas-header--menu-icon {
+  cursor: pointer;
+}
+
+@media (min-width:0px) {
+  .emotion-25 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    height: 100%;
+    margin-right: 24px;
+  }
+
+  .emotion-25 > * {
+    margin-left: 16px;
+  }
+
+  .emotion-25 > *:not(.canvas-header--menu-icon) {
+    display: none;
+  }
+}
+
+@media (min-width:1px) {
+  .emotion-25 > *:last-child {
+    margin-right: 0;
+  }
+
+  .emotion-25 > *:not(.canvas-header--menu-icon) {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (min-width:600px) {
+  .emotion-25 {
+    -webkit-box-flex: unset;
+    -webkit-flex-grow: unset;
+    -ms-flex-positive: unset;
+    flex-grow: unset;
+  }
+}
+
+.emotion-25 nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: inherit;
+  margin-left: 40px;
+}
+
+.emotion-25 nav ul {
+  color: #333333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: inherit;
+}
+
+.emotion-25 nav ul:hover {
+  color: #7b858f;
+}
+
+.emotion-25 nav ul li {
+  box-sizing: border-box;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  height: inherit;
+  -webkit-transition: color 150ms ease-out 0s;
+  transition: color 150ms ease-out 0s;
+  cursor: pointer;
+}
+
+.emotion-25 nav ul li:first-child > * {
+  margin-left: 0;
+}
+
+.emotion-25 nav ul li:last-child > * {
+  margin-right: 0;
+}
+
+.emotion-25 nav ul li > * {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 0px 16px;
+  margin: 0 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: inherit;
+}
+
+.emotion-25 nav ul li > *:visited {
+  color: inherit;
+}
+
+.emotion-25 nav ul li:hover,
+.emotion-25 nav ul li:active {
+  color: #333333;
+}
+
+.emotion-25 nav ul li.current {
+  color: #005cb9;
+}
+
+.emotion-25 nav ul li.current a {
+  cursor: default;
+}
+
+.emotion-25 nav ul li.current:hover,
+.emotion-25 nav ul li.current:active {
+  color: #005cb9;
+}
+
+.emotion-25 nav ul li.current:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  height: 4px;
+  width: 100%;
+  background-color: #0875e1;
+  border-radius: 3px 3px 0 0;
+}
+
+.emotion-11 {
+  display: inline-block;
+}
+
+.emotion-11 svg {
+  display: block;
+}
+
+.emotion-11 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-11:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-11 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-11:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-11 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-11:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-17 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  border-width: 0px;
+  background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
+}
+
+.emotion-17:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-17:disabled,
+.emotion-17:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-17 .wd-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.emotion-17 span .wd-icon-fill,
+.emotion-17 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-17:focus {
+  background-color: transparent;
+}
+
+.emotion-17:focus span .wd-icon-fill,
+.emotion-17:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-17:hover:focus {
+  background-color: transparent;
+}
+
+.emotion-17:active,
+.emotion-17:focus:active,
+.emotion-17:hover:active {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.emotion-17:active span .wd-icon-fill,
+.emotion-17:focus:active span .wd-icon-fill,
+.emotion-17:hover:active span .wd-icon-fill,
+.emotion-17:active span .wd-icon-accent,
+.emotion-17:focus:active span .wd-icon-accent,
+.emotion-17:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-17:hover {
+  background-color: transparent;
+}
+
+.emotion-17:hover span .wd-icon-fill,
+.emotion-17:hover span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-17:disabled,
+.emotion-17:active:disabled,
+.emotion-17:focus:disabled,
+.emotion-17:hover:disabled {
+  background-color: transparent;
+}
+
+.emotion-17:disabled span .wd-icon-fill,
+.emotion-17:active:disabled span .wd-icon-fill,
+.emotion-17:focus:disabled span .wd-icon-fill,
+.emotion-17:hover:disabled span .wd-icon-fill,
+.emotion-17:disabled span .wd-icon-accent,
+.emotion-17:active:disabled span .wd-icon-accent,
+.emotion-17:focus:disabled span .wd-icon-accent,
+.emotion-17:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-17:not([disabled]):focus,
+.emotion-17:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-24 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #e8ebed;
+  height: 32px;
+  width: 32px;
+  cursor: default;
+}
+
+.emotion-24 img {
+  width: 100%;
+  height: 100%;
+}
+
+.emotion-24:not([disabled]):focus {
+  outline: none;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+[data-whatinput='mouse'] .emotion-24:focus,
+[data-whatinput='touch'] .emotion-24:focus,
+[data-whatinput='pointer'] .emotion-24:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.emotion-23 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #e8ebed;
+  width: 32px;
+  height: 32px;
+}
+
+.emotion-23 img {
+  width: 100%;
+  height: 100%;
+}
+
+.emotion-22 {
+  display: inline-block;
+}
+
+.emotion-22 svg {
+  display: block;
+}
+
+.emotion-22 .wd-icon-fill {
+  fill: rgba(0,0,0,0.65);
+}
+
+.emotion-22:hover .wd-icon-fill {
+  fill: rgba(0,0,0,0.65);
+}
+
+.emotion-22 .wd-icon-accent {
+  fill: rgba(0,0,0,0.65);
+}
+
+.emotion-22:hover .wd-icon-accent {
+  fill: rgba(0,0,0,0.65);
+}
+
+.emotion-22 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-22:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-22 svg {
+  width: 20px;
+  height: 20px;
+}
+
+.emotion-8 {
+  display: inline-block;
+}
+
+.emotion-8 svg {
+  display: block;
+}
+
+.emotion-8 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-8:hover .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-8 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-8:hover .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-8 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-8:hover .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-9 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  padding: 12px;
+  padding-left: 40px;
+  max-width: 480px;
+  min-width: 120px;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: none;
+  -webkit-appearance: none;
+  -webkit-transition: background 150ms;
+  transition: background 150ms;
+  background: #f0f1f2;
+  color: #494949;
+}
+
+.emotion-9::-webkit-search-cancel-button {
+  display: none;
+}
+
+.emotion-9::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):active {
+  outline: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  background: #f0f1f2;
+  color: #494949;
+}
+
+.emotion-9:not([disabled]):focus::-webkit-input-placeholder,
+.emotion-9:not([disabled]):active::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):focus::-moz-placeholder,
+.emotion-9:not([disabled]):active::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):focus:-ms-input-placeholder,
+.emotion-9:not([disabled]):active:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):focus::placeholder,
+.emotion-9:not([disabled]):active::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-9:not([disabled]):hover {
+  background: #e8ebed;
+}
+
+.emotion-12 {
+  border-radius: 24px;
+  height: 24px;
+  margin-left: -32px;
+  margin-right: 8px;
+  width: 24px;
+  display: none;
+}
+
+.emotion-12:hover {
+  cursor: pointer;
+}
+
+.emotion-6 {
+  height: 100%;
+  -webkit-box-flex: unset;
+  -webkit-flex-grow: unset;
+  -ms-flex-positive: unset;
+  flex-grow: unset;
+}
+
+.emotion-14 {
+  position: relative;
+  margin-left: 24px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div
+  className="emotion-27 emotion-28"
+>
+  <div
+    className="emotion-6 emotion-7"
+  >
+    <span>
+      <div
+        className="emotion-4 emotion-5"
+      >
+        <div
+          className="emotion-2 emotion-3"
+        >
+          <div
+            className="emotion-0 emotion-1"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<img src=\\"//design.workday.com/images/ck-dub-logo-blue.svg\\">",
+              }
+            }
+          />
+        </div>
+      </div>
+    </span>
+  </div>
+  <form
+    className="emotion-14 emotion-15"
+    onSubmit={[Function]}
+    placeholder="Search"
+  >
+    <span
+      className="emotion-8"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-search wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path fill-rule=\\"nonzero\\" d=\\"M17.32 15.906l2.859 2.858a.5.5 0 0 1 .003.717l-.7.7a.5.5 0 0 1-.718-.002l-2.858-2.86a8 8 0 1 1 1.414-1.414zM11 17a6 6 0 1 0 0-12 6 6 0 0 0 0 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+        }
+      }
+      style={
+        Object {
+          "left": "8px",
+          "pointerEvents": "none",
+          "position": "absolute",
+          "top": "50%",
+          "transform": "translateY(-50%)",
+        }
+      }
+    />
+    <input
+      className="emotion-9 emotion-10"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      placeholder="Search"
+      type="search"
+      value=""
+    />
+    <span
+      aria-label="Reset Search Input"
+      className="reset-input emotion-12 emotion-13"
+      onClick={[Function]}
+      value=""
+    >
+      <span
+        className="emotion-11"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M10.783 12l-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588L10.783 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+          }
+        }
+      />
+    </span>
+  </form>
+  <div
+    className="emotion-25 emotion-26"
+  >
+    <button
+      className="emotion-17 emotion-18"
+      style={
+        Object {
+          "margin": "0 0 0 16px",
+        }
+      }
+    >
+      <span
+        className="emotion-11"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-notifications wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M18.417 17.998l-12.83-.008c.036-.05.071-.103.106-.156.974-1.46 1.58-2.973 1.58-4.561V8.546A3.539 3.539 0 0 1 10.82 5h2.359a3.554 3.554 0 0 1 3.548 3.546v4.727c0 1.588.605 3.1 1.579 4.561l.11.164zm-4.623.605a1.794 1.794 0 0 1-3.588 0h3.588z\\" class=\\"wd-icon-background\\"/><path d=\\"M9 18.993l-4.504-.003A.502.502 0 0 1 4 18.488V17s2-2 2-4V9a4.995 4.995 0 0 1 4.002-4.9A1.995 1.995 0 0 1 12 2a1.995 1.995 0 0 1 1.998 2.1A5.01 5.01 0 0 1 18 9v4c0 2 2 4 2 4v1.495a.503.503 0 0 1-.496.505L15 18.997V19a3 3 0 0 1-6 0v-.007zm8.43-1.995a12.076 12.076 0 0 1-.094-.139C16.512 15.623 16 14.344 16 13V9c0-1.651-1-3-4-3S8 7.34 8 9v4c0 1.344-.512 2.623-1.336 3.86l-.09.132 10.856.006zM13 19h-2a1 1 0 0 0 2 0z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+          }
+        }
+      />
+    </button>
+    <button
+      className="emotion-17 emotion-18"
+      style={
+        Object {
+          "margin": "0 0 0 16px",
+        }
+      }
+    >
+      <span
+        className="emotion-11"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-inbox wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M3 11h18v8H3z\\" class=\\"wd-icon-background\\"/><path fill-rule=\\"nonzero\\" d=\\"M4.45 10h15.126l-2.65-4H7.12l-2.67 4zM20 12H4v6h16v-6zM5.772 4.417c.153-.23.506-.417.776-.417h10.954c.275 0 .622.187.773.415L22 10v9.492c0 .28-.225.508-.494.508H2.494A.5.5 0 0 1 2 19.494V10l3.772-5.583z\\" class=\\"wd-icon-fill\\"/><rect width=\\"8\\" height=\\"2\\" x=\\"8\\" y=\\"14\\" class=\\"wd-icon-accent\\" rx=\\".5\\"/></g></svg>",
+          }
+        }
+      />
+    </button>
+    <button
+      aria-label="Avatar"
+      className="emotion-24"
+      disabled={true}
+      size={32}
+    >
+      <div
+        className="emotion-23"
+        size={32}
+      >
+        <span
+          className="emotion-22"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-user wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M20 20.491a.503.503 0 0 1-.496.505H4.496A.493.493 0 0 1 4 20.49v-1.495C4 16 6.246 13.8 8.756 12.683 7.682 11.675 7 10.174 7 8.5 7 5.462 9.239 3 12 3s5 2.462 5 5.499c0 1.675-.68 3.175-1.755 4.183C17.758 13.797 20 15.995 20 18.996v1.495zM6.083 18.996H18c0-2.996-2.5-4.999-6-4.999s-6 2.003-5.917 5zM12 11.998c1.657 0 3-1.567 3-3.5C15 6.567 13.657 5 12 5S9 6.566 9 8.499c0 1.932 1.343 3.499 3 3.499z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+            }
+          }
+        />
+      </div>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`App GlobalHeader Snapshots renders an app header 1`] = `
+.emotion-10 {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 64px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  color: #333333;
+}
+
+.emotion-6 {
+  height: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.emotion-4 {
+  display: inline-block;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 64px;
+  padding-left: 24px;
+  background: none;
+}
+
+.emotion-0 {
+  line-height: 0;
+}
+
+.emotion-8 {
+  margin-right: 24px;
+}
+
+.emotion-8 > .canvas-header--menu-icon {
+  cursor: pointer;
+}
+
+@media (min-width:0px) {
+  .emotion-8 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    height: 100%;
+    margin-right: 24px;
+  }
+
+  .emotion-8 > * {
+    margin-left: 16px;
+  }
+
+  .emotion-8 > *:not(.canvas-header--menu-icon) {
+    display: none;
+  }
+}
+
+@media (min-width:1px) {
+  .emotion-8 > *:last-child {
+    margin-right: 0;
+  }
+
+  .emotion-8 > *:not(.canvas-header--menu-icon) {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (min-width:600px) {
+  .emotion-8 {
+    -webkit-box-flex: unset;
+    -webkit-flex-grow: unset;
+    -ms-flex-positive: unset;
+    flex-grow: unset;
+  }
+}
+
+.emotion-8 nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: inherit;
+  margin-left: 40px;
+}
+
+.emotion-8 nav ul {
+  color: #333333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: inherit;
+}
+
+.emotion-8 nav ul:hover {
+  color: #7b858f;
+}
+
+.emotion-8 nav ul li {
+  box-sizing: border-box;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  height: inherit;
+  -webkit-transition: color 150ms ease-out 0s;
+  transition: color 150ms ease-out 0s;
+  cursor: pointer;
+}
+
+.emotion-8 nav ul li:first-child > * {
+  margin-left: 0;
+}
+
+.emotion-8 nav ul li:last-child > * {
+  margin-right: 0;
+}
+
+.emotion-8 nav ul li > * {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 0px 16px;
+  margin: 0 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: inherit;
+}
+
+.emotion-8 nav ul li > *:visited {
+  color: inherit;
+}
+
+.emotion-8 nav ul li:hover,
+.emotion-8 nav ul li:active {
+  color: #333333;
+}
+
+.emotion-8 nav ul li.current {
+  color: #005cb9;
+}
+
+.emotion-8 nav ul li.current a {
+  cursor: default;
+}
+
+.emotion-8 nav ul li.current:hover,
+.emotion-8 nav ul li.current:active {
+  color: #005cb9;
+}
+
+.emotion-8 nav ul li.current:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  height: 4px;
+  width: 100%;
+  background-color: #0875e1;
+  border-radius: 3px 3px 0 0;
+}
+
+<div
+  className="emotion-10 emotion-11"
+>
+  <div
+    className="emotion-6 emotion-7"
+  >
+    <span>
+      <div
+        className="emotion-4 emotion-5"
+      >
+        <div
+          className="emotion-2 emotion-3"
+        >
+          <div
+            className="emotion-0 emotion-1"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<img src=\\"//design.workday.com/images/ck-dub-logo-blue.svg\\">",
+              }
+            }
+          />
+        </div>
+      </div>
+    </span>
+  </div>
+  <div
+    className="emotion-8 emotion-9"
+  />
+</div>
+`;
+
+exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`] = `
+.emotion-16 {
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  height: 64px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  color: #333333;
+}
+
+.emotion-6 {
+  height: 100%;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.emotion-4 {
+  display: inline-block;
+}
+
+.emotion-14 {
+  margin-right: 24px;
+}
+
+.emotion-14 > .canvas-header--menu-icon {
+  cursor: pointer;
+}
+
+@media (min-width:0px) {
+  .emotion-14 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    height: 100%;
+    margin-right: 24px;
+  }
+
+  .emotion-14 > * {
+    margin-left: 16px;
+  }
+
+  .emotion-14 > *:not(.canvas-header--menu-icon) {
+    display: none;
+  }
+}
+
+@media (min-width:1px) {
+  .emotion-14 > *:last-child {
+    margin-right: 0;
+  }
+
+  .emotion-14 > *:not(.canvas-header--menu-icon) {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (min-width:600px) {
+  .emotion-14 {
+    -webkit-box-flex: unset;
+    -webkit-flex-grow: unset;
+    -ms-flex-positive: unset;
+    flex-grow: unset;
+  }
+}
+
+.emotion-14 nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: inherit;
+  margin-left: 40px;
+}
+
+.emotion-14 nav ul {
+  color: #333333;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: inherit;
+}
+
+.emotion-14 nav ul:hover {
+  color: #7b858f;
+}
+
+.emotion-14 nav ul li {
+  box-sizing: border-box;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  height: inherit;
+  -webkit-transition: color 150ms ease-out 0s;
+  transition: color 150ms ease-out 0s;
+  cursor: pointer;
+}
+
+.emotion-14 nav ul li:first-child > * {
+  margin-left: 0;
+}
+
+.emotion-14 nav ul li:last-child > * {
+  margin-right: 0;
+}
+
+.emotion-14 nav ul li > * {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  padding: 0px 16px;
+  margin: 0 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: inherit;
+}
+
+.emotion-14 nav ul li > *:visited {
+  color: inherit;
+}
+
+.emotion-14 nav ul li:hover,
+.emotion-14 nav ul li:active {
+  color: #333333;
+}
+
+.emotion-14 nav ul li.current {
+  color: #005cb9;
+}
+
+.emotion-14 nav ul li.current a {
+  cursor: default;
+}
+
+.emotion-14 nav ul li.current:hover,
+.emotion-14 nav ul li.current:active {
+  color: #005cb9;
+}
+
+.emotion-14 nav ul li.current:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  height: 4px;
+  width: 100%;
+  background-color: #0875e1;
+  border-radius: 3px 3px 0 0;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 64px;
+}
+
+.emotion-0 {
+  padding-left: 24px;
+  line-height: 0;
+}
+
+.emotion-9 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  border-width: 0px;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+}
+
+.emotion-9:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-9:disabled,
+.emotion-9:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-9 .wd-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.emotion-9 span .wd-icon-fill,
+.emotion-9 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-9:focus {
+  background-color: #ffffff;
+}
+
+.emotion-9:focus span .wd-icon-fill,
+.emotion-9:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-9:hover:focus {
+  background-color: #e8ebed;
+}
+
+.emotion-9:active,
+.emotion-9:focus:active,
+.emotion-9:hover:active {
+  background-color: #dfe2e6;
+}
+
+.emotion-9:active span .wd-icon-fill,
+.emotion-9:focus:active span .wd-icon-fill,
+.emotion-9:hover:active span .wd-icon-fill,
+.emotion-9:active span .wd-icon-accent,
+.emotion-9:focus:active span .wd-icon-accent,
+.emotion-9:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-9:hover {
+  background-color: #e8ebed;
+}
+
+.emotion-9:hover span .wd-icon-fill,
+.emotion-9:hover span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-9:disabled,
+.emotion-9:active:disabled,
+.emotion-9:focus:disabled,
+.emotion-9:hover:disabled {
+  background-color: transparent;
+}
+
+.emotion-9:disabled span .wd-icon-fill,
+.emotion-9:active:disabled span .wd-icon-fill,
+.emotion-9:focus:disabled span .wd-icon-fill,
+.emotion-9:hover:disabled span .wd-icon-fill,
+.emotion-9:disabled span .wd-icon-accent,
+.emotion-9:active:disabled span .wd-icon-accent,
+.emotion-9:focus:disabled span .wd-icon-accent,
+.emotion-9:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-8 {
+  display: inline-block;
+}
+
+.emotion-8 svg {
+  display: block;
+}
+
+.emotion-8 .wd-icon-fill {
+  fill: #7b858f;
+}
+
+.emotion-8:hover .wd-icon-fill {
+  fill: #333d47;
+}
+
+.emotion-8 .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-8:hover .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-8 .wd-icon-background {
+  fill: transparent;
+}
+
+.emotion-8:hover .wd-icon-background {
+  fill: transparent;
+}
+
+<div
+  className="emotion-16 emotion-17"
+>
+  <div
+    className="emotion-6 emotion-7"
+  >
+    <span>
+      <div
+        className="emotion-4 emotion-5"
+      >
+        <div
+          className="emotion-2 emotion-3"
+          title=""
+        >
+          <span
+            className="emotion-0 emotion-1"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<img src=\\"//design.workday.com/images/ck-mini-wday-logo-blue.svg\\">",
+              }
+            }
+            title=""
+          />
+          
+        </div>
+      </div>
+    </span>
+  </div>
+  <div
+    className="emotion-14 emotion-15"
+  >
+    <button
+      className="emotion-9 emotion-10"
+    >
+      <span
+        className="emotion-8"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-notifications wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M18.417 17.998l-12.83-.008c.036-.05.071-.103.106-.156.974-1.46 1.58-2.973 1.58-4.561V8.546A3.539 3.539 0 0 1 10.82 5h2.359a3.554 3.554 0 0 1 3.548 3.546v4.727c0 1.588.605 3.1 1.579 4.561l.11.164zm-4.623.605a1.794 1.794 0 0 1-3.588 0h3.588z\\" class=\\"wd-icon-background\\"/><path d=\\"M9 18.993l-4.504-.003A.502.502 0 0 1 4 18.488V17s2-2 2-4V9a4.995 4.995 0 0 1 4.002-4.9A1.995 1.995 0 0 1 12 2a1.995 1.995 0 0 1 1.998 2.1A5.01 5.01 0 0 1 18 9v4c0 2 2 4 2 4v1.495a.503.503 0 0 1-.496.505L15 18.997V19a3 3 0 0 1-6 0v-.007zm8.43-1.995a12.076 12.076 0 0 1-.094-.139C16.512 15.623 16 14.344 16 13V9c0-1.651-1-3-4-3S8 7.34 8 9v4c0 1.344-.512 2.623-1.336 3.86l-.09.132 10.856.006zM13 19h-2a1 1 0 0 0 2 0z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+          }
+        }
+      />
+    </button>
+    <button
+      className="emotion-9 emotion-10"
+    >
+      <span
+        className="emotion-8"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-inbox wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M3 11h18v8H3z\\" class=\\"wd-icon-background\\"/><path fill-rule=\\"nonzero\\" d=\\"M4.45 10h15.126l-2.65-4H7.12l-2.67 4zM20 12H4v6h16v-6zM5.772 4.417c.153-.23.506-.417.776-.417h10.954c.275 0 .622.187.773.415L22 10v9.492c0 .28-.225.508-.494.508H2.494A.5.5 0 0 1 2 19.494V10l3.772-5.583z\\" class=\\"wd-icon-fill\\"/><rect width=\\"8\\" height=\\"2\\" x=\\"8\\" y=\\"14\\" class=\\"wd-icon-accent\\" rx=\\".5\\"/></g></svg>",
+          }
+        }
+      />
+    </button>
+  </div>
+</div>
+`;
