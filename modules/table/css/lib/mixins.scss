@@ -1,0 +1,35 @@
+// Mixins
+
+@mixin wdc-table-colored-row($_bgColor, $_borderColor) {
+  background-color: $_bgColor;
+  position: relative;
+
+  // Bottom border
+  &:before,
+  &:after {
+    position: absolute;
+    left: 0;
+    top: -$wdc-table-border-width;
+    content: '';
+    width: calc(100% + #{$wdc-table-border-width});
+    height: $wdc-table-border-width;
+    background-color: $_borderColor;
+  }
+
+  &:after {
+    top: auto;
+    bottom: -$wdc-table-border-width;
+  }
+
+  &:first-child {
+    box-shadow: inset $wdc-table-border-width 0 0 $_borderColor;
+  }
+
+  &:last-child {
+    box-shadow: inset -#{$wdc-table-border-width} 0 0 $_borderColor;
+    &:before,
+    &:after {
+      width: 100%;
+    }
+  }
+}

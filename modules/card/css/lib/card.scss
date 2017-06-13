@@ -1,0 +1,84 @@
+$_wdc-card-border-color: $wdc-color-soap-500;
+$_wdc-mobile-breakpoint: 320px;
+$_wdc-tablet-breakpoint: 768px;
+
+$_wdc-card-sizes: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+
+$_wdc-container-positions: 'start' flex-start, 'end' flex-end, 'center' center,
+  'between' space-between, 'around' space-around;
+
+@mixin card-container-common() {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+@mixin card-common() {
+  @include wdc-depth-2();
+  border: 1px solid $_wdc-card-border-color;
+  border-radius: 3px;
+  padding: $wdc-spacing-l;
+  margin: $wdc-spacing-s 0;
+
+  .wdc-card-header {
+    @include wdc-type-h3();
+    margin-bottom: $wdc-spacing-m;
+  }
+
+  .wdc-card-body {
+    @include wdc-type-body();
+  }
+}
+
+@each $position in $_wdc-container-positions {
+  $_positionKey: nth($position, 1);
+  $_positionValue: nth($position, 2);
+
+  .wdc-card-container.wdc-card-container-#{$_positionKey} {
+    justify-content: $_positionValue;
+  }
+}
+
+.wdc-card-container {
+  @include card-container-common();
+}
+
+@each $size in $_wdc-card-sizes {
+  // add compensation for the padding
+  // and spacing in between cards
+  $_spacing-compensation: $wdc-spacing-l * 3;
+  $_width: 100% / 12 * $size;
+
+  .wdc-card-#{$size} {
+    @include card-common();
+    width: calc(#{$_width} - #{$_spacing-compensation});
+  }
+
+  .wdc-card-#{$size}.wdc-card-no-padding {
+    padding: 0;
+    width: calc(#{$_width} - #{$wdc-spacing-l});
+  }
+
+  // double the size for tablet;
+  // if size is > 50% increase it to 100%
+  @media only screen and(max-width: $_wdc-tablet-breakpoint) {
+    $_doubled-size: $size * 2;
+    $_doubled-width: null;
+
+    @if $_doubled-size > 6 {
+      $_doubled-width: 100%;
+    } @else {
+      $_doubled-width: 100% / 12 * $_doubled-size;
+    }
+
+    .wdc-card-#{$size} {
+      width: calc(#{$_doubled-width} - #{$_spacing-compensation});
+    }
+  }
+
+  @media only screen and(max-width: $_wdc-mobile-breakpoint) {
+    .wdc-card-#{$size} {
+      width: 100%;
+    }
+  }
+}

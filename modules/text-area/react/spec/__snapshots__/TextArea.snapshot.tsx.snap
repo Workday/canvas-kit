@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextArea Snapshots error 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  min-height: 64px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  border-color: #de2e21;
+  -webkit-transition: 100ms box-shadow;
+  transition: 100ms box-shadow;
+  box-shadow: inset 0 0 0 1px #de2e21;
+  resize: both;
+}
+
+.emotion-0::webkit-resizer {
+  display: none;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:hover {
+  border-color: #de2e21;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #de2e21;
+  box-shadow: inset 0 0 0 1px #de2e21, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
+}
+
+<textarea
+  className="emotion-0 emotion-1"
+/>
+`;
+
+exports[`TextArea Snapshots grow 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  min-height: 64px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  width: 100%;
+  resize: vertical;
+}
+
+.emotion-0::webkit-resizer {
+  display: none;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+<textarea
+  className="emotion-0 emotion-1"
+/>
+`;
+
+exports[`TextArea Snapshots renders as expected 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  display: block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  min-height: 64px;
+  min-width: 280px;
+  -webkit-transition: 0.2s box-shadow,0.2s border-color;
+  transition: 0.2s box-shadow,0.2s border-color;
+  padding: 8px;
+  resize: both;
+}
+
+.emotion-0::webkit-resizer {
+  display: none;
+}
+
+.emotion-0::-webkit-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::-moz-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:-ms-input-placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0::placeholder {
+  color: #5e6a75;
+}
+
+.emotion-0:focus:not([disabled]) {
+  border-color: #0875e1;
+  box-shadow: inset 0 0 0 1px #0875e1;
+  outline: none;
+}
+
+.emotion-0:disabled {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-webkit-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::-moz-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled:-ms-input-placeholder {
+  color: #a1aab3;
+}
+
+.emotion-0:disabled::placeholder {
+  color: #a1aab3;
+}
+
+<textarea
+  className="emotion-0 emotion-1"
+/>
+`;

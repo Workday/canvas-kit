@@ -1,0 +1,56 @@
+@mixin wdc-focusable-icon-list() {
+  .wdc-icon-list .wdc-icon-list-icon:not([disabled]) {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+@mixin wdc-focusable-icon-list-white() {
+  .wdc-icon-list.wdc-icon-list-white .wdc-icon-list-icon:not([disabled]) {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+@mixin wdc-focusable-type-link() {
+  .wdc-type-variant-link:not([disabled]) {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+[data-whatinput='keyboard'] {
+  @include wdc-focusable-icon-list() {
+    @extend .wdc-icon-list-icon-focus;
+  }
+
+  @include wdc-focusable-icon-list-white() {
+    @extend .wdc-icon-list-white-focus;
+  }
+
+  @include wdc-focusable-type-link() {
+    @extend .wdc-type-variant-link.wdc-type-variant-link-focus;
+  }
+}
+
+[data-whatinput='initial'],
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  @include wdc-focusable-icon-list() {
+    outline: none;
+    box-shadow: none;
+  }
+
+  @include wdc-focusable-icon-list-white() {
+    outline: none;
+    box-shadow: none;
+  }
+
+  @include wdc-focusable-type-link() {
+    outline: none;
+    box-shadow: none;
+  }
+}

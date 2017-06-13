@@ -1,0 +1,18 @@
+@import '~@workday/canvas-kit-css-core/index.scss';
+
+.demo-action-bar-container {
+  padding: 20px;
+  background: $wdc-color-soap-100;
+}
+
+.demo-action-bar-custom {
+  position: relative;
+  width: inherit;
+  margin: 20px;
+}
+
+.demo-action-bar-custom-mobile {
+  position: relative;
+  width: 320px;
+  margin: 10px;
+}

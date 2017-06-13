@@ -1,0 +1,1323 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio Snapshots renders as expected 1`] = `
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 32px;
+}
+
+.emotion-6 {
+  height: 18px;
+}
+
+.emotion-6::after {
+  border-radius: 100%;
+  box-shadow: 0 0 0 0 #f0f1f2;
+  content: "";
+  display: inline-block;
+  height: 18px;
+  -webkit-transition: box-shadow 150ms ease-out;
+  transition: box-shadow 150ms ease-out;
+  width: 18px;
+  z-index: 1;
+}
+
+.emotion-6:hover::after {
+  box-shadow: 0 0 0 7px #f0f1f2;
+}
+
+.emotion-0 {
+  border-radius: 9px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: -3px;
+  margin-left: -3px;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type,
+.emotion-0focus:hover ~ div:first-of-type,
+.emotion-0:active:hover ~ div:first-of-type {
+  border-color: #0875e1;
+  border-width: 2px;
+  z-index: 2;
+}
+
+.emotion-0:checked:focus ~ div:first-of-type {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-0:focus:hover ~ div:first-of-type {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: animation-1swfa1h 100ms;
+  animation: animation-1swfa1h 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+  border-width: 1px;
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type:hover {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:hover ~ div:first-of-type {
+  background-color: #0875e1;
+  border-color: #0875e1;
+  border-width: 1px;
+}
+
+.emotion-4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px 2px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: border 200ms ease,background 200ms;
+  transition: border 200ms ease,background 200ms;
+  width: 18px;
+  border-color: #0875e1;
+  background-color: #0875e1;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border-radius: 9px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 8px;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 200ms ease,opacity 200ms ease;
+  -webkit-transition: transform 200ms ease,opacity 200ms ease;
+  transition: transform 200ms ease,opacity 200ms ease;
+  width: 8px;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+<div
+  className="emotion-8 emotion-9"
+>
+  <div
+    className="emotion-6 emotion-7"
+    disabled={false}
+  >
+    <input
+      checked={true}
+      className="emotion-0 emotion-1"
+      disabled={false}
+      id="123"
+      type="radio"
+    />
+    <div
+      checked={true}
+      className="emotion-4 emotion-5"
+      disabled={false}
+    >
+      <div
+        checked={true}
+        className="emotion-2 emotion-3"
+      />
+    </div>
+  </div>
+  
+</div>
+`;
+
+exports[`Radio Snapshots renders as expected 2`] = `
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 32px;
+}
+
+.emotion-4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px 2px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: border 200ms ease,background 200ms;
+  transition: border 200ms ease,background 200ms;
+  width: 18px;
+  border-color: #0875e1;
+  background-color: #0875e1;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border-radius: 9px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 8px;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 200ms ease,opacity 200ms ease;
+  -webkit-transition: transform 200ms ease,opacity 200ms ease;
+  transition: transform 200ms ease,opacity 200ms ease;
+  width: 8px;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-6 {
+  height: 18px;
+}
+
+.emotion-6::after {
+  border-radius: 100%;
+  box-shadow: 0 0 0 0 #f0f1f2;
+  content: "";
+  display: inline-block;
+  height: 18px;
+  -webkit-transition: box-shadow 150ms ease-out;
+  transition: box-shadow 150ms ease-out;
+  width: 18px;
+  z-index: 1;
+}
+
+.emotion-0 {
+  border-radius: 9px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: -3px;
+  margin-left: -3px;
+  position: absolute;
+  opacity: 0;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type,
+.emotion-0focus:hover ~ div:first-of-type,
+.emotion-0:active:hover ~ div:first-of-type {
+  border-color: #0875e1;
+  border-width: 2px;
+  z-index: 2;
+}
+
+.emotion-0:checked:focus ~ div:first-of-type {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-0:focus:hover ~ div:first-of-type {
+  border-color: #7b858f;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: animation-1swfa1h 100ms;
+  animation: animation-1swfa1h 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+  border-width: 1px;
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type:hover {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:hover ~ div:first-of-type {
+  background-color: #0875e1;
+  border-color: #0875e1;
+  border-width: 1px;
+}
+
+<div
+  className="emotion-8 emotion-9"
+>
+  <div
+    className="emotion-6 emotion-7"
+    disabled={true}
+  >
+    <input
+      checked={true}
+      className="emotion-0 emotion-1"
+      disabled={true}
+      id="123"
+      type="radio"
+    />
+    <div
+      checked={true}
+      className="emotion-4 emotion-5"
+      disabled={true}
+    >
+      <div
+        checked={true}
+        className="emotion-2 emotion-3"
+      />
+    </div>
+  </div>
+  
+</div>
+`;
+
+exports[`Radio Snapshots renders as expected 3`] = `
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 32px;
+}
+
+.emotion-6 {
+  height: 18px;
+}
+
+.emotion-6::after {
+  border-radius: 100%;
+  box-shadow: 0 0 0 0 #f0f1f2;
+  content: "";
+  display: inline-block;
+  height: 18px;
+  -webkit-transition: box-shadow 150ms ease-out;
+  transition: box-shadow 150ms ease-out;
+  width: 18px;
+  z-index: 1;
+}
+
+.emotion-0 {
+  border-radius: 9px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: -3px;
+  margin-left: -3px;
+  position: absolute;
+  opacity: 0;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type,
+.emotion-0focus:hover ~ div:first-of-type,
+.emotion-0:active:hover ~ div:first-of-type {
+  border-color: #0875e1;
+  border-width: 2px;
+  z-index: 2;
+}
+
+.emotion-0:checked:focus ~ div:first-of-type {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-0:focus:hover ~ div:first-of-type {
+  border-color: #7b858f;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: animation-1swfa1h 100ms;
+  animation: animation-1swfa1h 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+  border-width: 1px;
+  border-color: #7b858f;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type:hover {
+  border-color: #333d47;
+}
+
+[data-whatinput="mouse"] .emotion-0:hover ~ div:first-of-type {
+  background-color: #f6f7f8;
+  border-color: #b9c0c7;
+  border-width: 1px;
+}
+
+.emotion-4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px 2px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: border 200ms ease,background 200ms;
+  transition: border 200ms ease,background 200ms;
+  width: 18px;
+  border-color: #b9c0c7;
+  background-color: #f6f7f8;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border-radius: 9px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 8px;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 200ms ease,opacity 200ms ease;
+  -webkit-transition: transform 200ms ease,opacity 200ms ease;
+  transition: transform 200ms ease,opacity 200ms ease;
+  width: 8px;
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+<div
+  className="emotion-8 emotion-9"
+>
+  <div
+    className="emotion-6 emotion-7"
+    disabled={true}
+  >
+    <input
+      checked={false}
+      className="emotion-0 emotion-1"
+      disabled={true}
+      id="123"
+      type="radio"
+    />
+    <div
+      checked={false}
+      className="emotion-4 emotion-5"
+      disabled={true}
+    >
+      <div
+        checked={false}
+        className="emotion-2 emotion-3"
+      />
+    </div>
+  </div>
+  
+</div>
+`;
+
+exports[`Radio Snapshots renders as expected 4`] = `
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 32px;
+}
+
+.emotion-6 {
+  height: 18px;
+}
+
+.emotion-6::after {
+  border-radius: 100%;
+  box-shadow: 0 0 0 0 #f0f1f2;
+  content: "";
+  display: inline-block;
+  height: 18px;
+  -webkit-transition: box-shadow 150ms ease-out;
+  transition: box-shadow 150ms ease-out;
+  width: 18px;
+  z-index: 1;
+}
+
+.emotion-6:hover::after {
+  box-shadow: 0 0 0 7px #f0f1f2;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border-radius: 9px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 8px;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 200ms ease,opacity 200ms ease;
+  -webkit-transition: transform 200ms ease,opacity 200ms ease;
+  transition: transform 200ms ease,opacity 200ms ease;
+  width: 8px;
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+.emotion-0 {
+  border-radius: 9px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: -3px;
+  margin-left: -3px;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type,
+.emotion-0focus:hover ~ div:first-of-type,
+.emotion-0:active:hover ~ div:first-of-type {
+  border-color: #0875e1;
+  border-width: 2px;
+  z-index: 2;
+}
+
+.emotion-0:checked:focus ~ div:first-of-type {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-0:focus:hover ~ div:first-of-type {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: animation-1swfa1h 100ms;
+  animation: animation-1swfa1h 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+  border-width: 1px;
+  border-color: #7b858f;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type:hover {
+  border-color: #333d47;
+}
+
+[data-whatinput="mouse"] .emotion-0:hover ~ div:first-of-type {
+  background-color: white;
+  border-color: #333d47;
+  border-width: 1px;
+}
+
+.emotion-4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px 2px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: border 200ms ease,background 200ms;
+  transition: border 200ms ease,background 200ms;
+  width: 18px;
+  border-color: #7b858f;
+  background-color: white;
+}
+
+<div
+  className="emotion-8 emotion-9"
+>
+  <div
+    className="emotion-6 emotion-7"
+    disabled={false}
+  >
+    <input
+      checked={false}
+      className="emotion-0 emotion-1"
+      disabled={false}
+      id="123"
+      type="radio"
+    />
+    <div
+      checked={false}
+      className="emotion-4 emotion-5"
+      disabled={false}
+    >
+      <div
+        checked={false}
+        className="emotion-2 emotion-3"
+      />
+    </div>
+  </div>
+  
+</div>
+`;
+
+exports[`Radio Snapshots renders radio group with alert as expected 1`] = `
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 32px;
+}
+
+.emotion-6 {
+  height: 18px;
+}
+
+.emotion-6::after {
+  border-radius: 100%;
+  box-shadow: 0 0 0 0 #f0f1f2;
+  content: "";
+  display: inline-block;
+  height: 18px;
+  -webkit-transition: box-shadow 150ms ease-out;
+  transition: box-shadow 150ms ease-out;
+  width: 18px;
+  z-index: 1;
+}
+
+.emotion-6:hover::after {
+  box-shadow: 0 0 0 7px #f0f1f2;
+}
+
+.emotion-0 {
+  border-radius: 9px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: -3px;
+  margin-left: -3px;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type,
+.emotion-0focus:hover ~ div:first-of-type,
+.emotion-0:active:hover ~ div:first-of-type {
+  border-color: #0875e1;
+  border-width: 2px;
+  z-index: 2;
+}
+
+.emotion-0:checked:focus ~ div:first-of-type {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-0:focus:hover ~ div:first-of-type {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: animation-1swfa1h 100ms;
+  animation: animation-1swfa1h 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+  border-width: 1px;
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type:hover {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:hover ~ div:first-of-type {
+  background-color: #0875e1;
+  border-color: #0875e1;
+  border-width: 1px;
+}
+
+.emotion-4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px 2px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: border 200ms ease,background 200ms;
+  transition: border 200ms ease,background 200ms;
+  width: 18px;
+  border-color: #0875e1;
+  background-color: #0875e1;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border-radius: 9px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 8px;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 200ms ease,opacity 200ms ease;
+  -webkit-transition: transform 200ms ease,opacity 200ms ease;
+  transition: transform 200ms ease,opacity 200ms ease;
+  width: 8px;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-12 {
+  background-color: #ffffff;
+  border-radius: 9px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 8px;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 200ms ease,opacity 200ms ease;
+  -webkit-transition: transform 200ms ease,opacity 200ms ease;
+  transition: transform 200ms ease,opacity 200ms ease;
+  width: 8px;
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+.emotion-10 {
+  border-radius: 9px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: -3px;
+  margin-left: -3px;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.emotion-10:focus,
+.emotion-10:active {
+  outline: none;
+}
+
+.emotion-10:focus ~ div:first-of-type,
+.emotion-10:active ~ div:first-of-type,
+.emotion-10focus:hover ~ div:first-of-type,
+.emotion-10:active:hover ~ div:first-of-type {
+  border-color: #0875e1;
+  border-width: 2px;
+  z-index: 2;
+}
+
+.emotion-10:checked:focus ~ div:first-of-type {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-10:focus:hover ~ div:first-of-type {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-10:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-10:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-10:focus ~ div:first-of-type {
+  -webkit-animation: animation-1swfa1h 100ms;
+  animation: animation-1swfa1h 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+  border-width: 1px;
+  border-color: #7b858f;
+}
+
+[data-whatinput="mouse"] .emotion-10:focus ~ div:first-of-type:hover,
+[data-whatinput="touch"] .emotion-10:focus ~ div:first-of-type:hover,
+[data-whatinput="pointer"] .emotion-10:focus ~ div:first-of-type:hover {
+  border-color: #333d47;
+}
+
+[data-whatinput="mouse"] .emotion-10:hover ~ div:first-of-type {
+  background-color: white;
+  border-color: #333d47;
+  border-width: 1px;
+}
+
+.emotion-14 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px 2px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: border 200ms ease,background 200ms;
+  transition: border 200ms ease,background 200ms;
+  width: 18px;
+  border-color: #7b858f;
+  background-color: white;
+}
+
+.emotion-20 {
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 4px;
+  -webkit-transition: 100ms box-shadow;
+  transition: 100ms box-shadow;
+  box-shadow: inset 0 0 0 1px #c06c00,inset 0 0 0 3px #ffa126;
+  padding: 2px 8px;
+  margin: -2px -8px;
+}
+
+<div
+  className="emotion-20 emotion-21"
+>
+  <div
+    className="emotion-8 emotion-9"
+  >
+    <div
+      className="emotion-6 emotion-7"
+      disabled={false}
+    >
+      <input
+        checked={true}
+        className="emotion-0 emotion-1"
+        disabled={false}
+        id="123"
+        onChange={[Function]}
+        type="radio"
+      />
+      <div
+        checked={true}
+        className="emotion-4 emotion-5"
+        disabled={false}
+      >
+        <div
+          checked={true}
+          className="emotion-2 emotion-3"
+        />
+      </div>
+    </div>
+    
+  </div>
+  <div
+    className="emotion-8 emotion-9"
+  >
+    <div
+      className="emotion-6 emotion-7"
+      disabled={false}
+    >
+      <input
+        checked={false}
+        className="emotion-10 emotion-1"
+        disabled={false}
+        id="123"
+        onChange={[Function]}
+        type="radio"
+      />
+      <div
+        checked={false}
+        className="emotion-14 emotion-5"
+        disabled={false}
+      >
+        <div
+          checked={false}
+          className="emotion-12 emotion-3"
+        />
+      </div>
+    </div>
+    
+  </div>
+</div>
+`;
+
+exports[`Radio Snapshots renders radio group with error as expected 1`] = `
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 32px;
+}
+
+.emotion-6 {
+  height: 18px;
+}
+
+.emotion-6::after {
+  border-radius: 100%;
+  box-shadow: 0 0 0 0 #f0f1f2;
+  content: "";
+  display: inline-block;
+  height: 18px;
+  -webkit-transition: box-shadow 150ms ease-out;
+  transition: box-shadow 150ms ease-out;
+  width: 18px;
+  z-index: 1;
+}
+
+.emotion-6:hover::after {
+  box-shadow: 0 0 0 7px #f0f1f2;
+}
+
+.emotion-0 {
+  border-radius: 9px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: -3px;
+  margin-left: -3px;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type,
+.emotion-0focus:hover ~ div:first-of-type,
+.emotion-0:active:hover ~ div:first-of-type {
+  border-color: #0875e1;
+  border-width: 2px;
+  z-index: 2;
+}
+
+.emotion-0:checked:focus ~ div:first-of-type {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-0:focus:hover ~ div:first-of-type {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: animation-1swfa1h 100ms;
+  animation: animation-1swfa1h 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+  border-width: 1px;
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type:hover,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type:hover {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:hover ~ div:first-of-type {
+  background-color: #0875e1;
+  border-color: #0875e1;
+  border-width: 1px;
+}
+
+.emotion-4 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px 2px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: border 200ms ease,background 200ms;
+  transition: border 200ms ease,background 200ms;
+  width: 18px;
+  border-color: #0875e1;
+  background-color: #0875e1;
+}
+
+.emotion-2 {
+  background-color: #ffffff;
+  border-radius: 9px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 8px;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 200ms ease,opacity 200ms ease;
+  -webkit-transition: transform 200ms ease,opacity 200ms ease;
+  transition: transform 200ms ease,opacity 200ms ease;
+  width: 8px;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.emotion-12 {
+  background-color: #ffffff;
+  border-radius: 9px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 8px;
+  pointer-events: none;
+  -webkit-transition: -webkit-transform 200ms ease,opacity 200ms ease;
+  -webkit-transition: transform 200ms ease,opacity 200ms ease;
+  transition: transform 200ms ease,opacity 200ms ease;
+  width: 8px;
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+.emotion-10 {
+  border-radius: 9px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: -3px;
+  margin-left: -3px;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.emotion-10:focus,
+.emotion-10:active {
+  outline: none;
+}
+
+.emotion-10:focus ~ div:first-of-type,
+.emotion-10:active ~ div:first-of-type,
+.emotion-10focus:hover ~ div:first-of-type,
+.emotion-10:active:hover ~ div:first-of-type {
+  border-color: #0875e1;
+  border-width: 2px;
+  z-index: 2;
+}
+
+.emotion-10:checked:focus ~ div:first-of-type {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-10:focus:hover ~ div:first-of-type {
+  border-color: #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-10:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-10:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-10:focus ~ div:first-of-type {
+  -webkit-animation: animation-1swfa1h 100ms;
+  animation: animation-1swfa1h 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+  border-width: 1px;
+  border-color: #7b858f;
+}
+
+[data-whatinput="mouse"] .emotion-10:focus ~ div:first-of-type:hover,
+[data-whatinput="touch"] .emotion-10:focus ~ div:first-of-type:hover,
+[data-whatinput="pointer"] .emotion-10:focus ~ div:first-of-type:hover {
+  border-color: #333d47;
+}
+
+[data-whatinput="mouse"] .emotion-10:hover ~ div:first-of-type {
+  background-color: white;
+  border-color: #333d47;
+  border-width: 1px;
+}
+
+.emotion-14 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 18px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px 2px;
+  pointer-events: none;
+  position: absolute;
+  -webkit-transition: border 200ms ease,background 200ms;
+  transition: border 200ms ease,background 200ms;
+  width: 18px;
+  border-color: #7b858f;
+  background-color: white;
+}
+
+.emotion-20 {
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 4px;
+  -webkit-transition: 100ms box-shadow;
+  transition: 100ms box-shadow;
+  box-shadow: inset 0 0 0 2px #de2e21;
+  padding: 2px 8px;
+  margin: -2px -8px;
+}
+
+<div
+  className="emotion-20 emotion-21"
+>
+  <div
+    className="emotion-8 emotion-9"
+  >
+    <div
+      className="emotion-6 emotion-7"
+      disabled={false}
+    >
+      <input
+        checked={true}
+        className="emotion-0 emotion-1"
+        disabled={false}
+        id="123"
+        onChange={[Function]}
+        type="radio"
+      />
+      <div
+        checked={true}
+        className="emotion-4 emotion-5"
+        disabled={false}
+      >
+        <div
+          checked={true}
+          className="emotion-2 emotion-3"
+        />
+      </div>
+    </div>
+    
+  </div>
+  <div
+    className="emotion-8 emotion-9"
+  >
+    <div
+      className="emotion-6 emotion-7"
+      disabled={false}
+    >
+      <input
+        checked={false}
+        className="emotion-10 emotion-1"
+        disabled={false}
+        id="123"
+        onChange={[Function]}
+        type="radio"
+      />
+      <div
+        checked={false}
+        className="emotion-14 emotion-5"
+        disabled={false}
+      >
+        <div
+          checked={false}
+          className="emotion-12 emotion-3"
+        />
+      </div>
+    </div>
+    
+  </div>
+</div>
+`;

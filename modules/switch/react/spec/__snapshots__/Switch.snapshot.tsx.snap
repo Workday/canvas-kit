@@ -1,0 +1,598 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch Snapshots renders a switch with custom prop 1`] = `
+.emotion-6 {
+  position: relative;
+  height: 16px;
+  width: 32px;
+}
+
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  pointer-events: none;
+  width: 32px;
+  height: 16px;
+  border-radius: 999px;
+  padding: 0px 2px;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  background-color: #005cb9;
+}
+
+.emotion-2 {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  background-color: #ffffff;
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+  -webkit-transition: -webkit-transform 150ms ease;
+  -webkit-transition: transform 150ms ease;
+  transition: transform 150ms ease;
+  pointer-events: none;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <input
+    checked={true}
+    className="emotion-0 emotion-1"
+    disabled={false}
+    id="123"
+    onChange={[MockFunction]}
+    role="checkbox"
+    tabIndex={0}
+    title="hello world"
+    type="checkbox"
+    value="user"
+  />
+  <div
+    checked={true}
+    className="emotion-4 emotion-5"
+    disabled={false}
+  >
+    <div
+      checked={true}
+      className="emotion-2 emotion-3"
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch Snapshots renders as expected 1`] = `
+.emotion-6 {
+  position: relative;
+  height: 16px;
+  width: 32px;
+}
+
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  pointer-events: none;
+  width: 32px;
+  height: 16px;
+  border-radius: 999px;
+  padding: 0px 2px;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  background-color: #7b858f;
+}
+
+.emotion-2 {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  background-color: #ffffff;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: -webkit-transform 150ms ease;
+  -webkit-transition: transform 150ms ease;
+  transition: transform 150ms ease;
+  pointer-events: none;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <input
+    checked={false}
+    className="emotion-0 emotion-1"
+    onChange={[MockFunction]}
+    role="checkbox"
+    tabIndex={0}
+    type="checkbox"
+  />
+  <div
+    checked={false}
+    className="emotion-4 emotion-5"
+  >
+    <div
+      checked={false}
+      className="emotion-2 emotion-3"
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch Snapshots renders switch disabled checked 1`] = `
+.emotion-6 {
+  position: relative;
+  height: 16px;
+  width: 32px;
+}
+
+.emotion-2 {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  background-color: #ffffff;
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+  -webkit-transition: -webkit-transform 150ms ease;
+  -webkit-transition: transform 150ms ease;
+  transition: transform 150ms ease;
+  pointer-events: none;
+}
+
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  border-radius: 999px;
+  cursor: not-allowed;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  pointer-events: none;
+  width: 32px;
+  height: 16px;
+  border-radius: 999px;
+  padding: 0px 2px;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  background-color: #dfe2e6;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <input
+    checked={true}
+    className="emotion-0 emotion-1"
+    disabled={true}
+    onChange={[MockFunction]}
+    role="checkbox"
+    tabIndex={0}
+    type="checkbox"
+  />
+  <div
+    checked={true}
+    className="emotion-4 emotion-5"
+    disabled={true}
+  >
+    <div
+      checked={true}
+      className="emotion-2 emotion-3"
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch Snapshots renders switch disabled unchecked 1`] = `
+.emotion-6 {
+  position: relative;
+  height: 16px;
+  width: 32px;
+}
+
+.emotion-2 {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  background-color: #ffffff;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: -webkit-transform 150ms ease;
+  -webkit-transition: transform 150ms ease;
+  transition: transform 150ms ease;
+  pointer-events: none;
+}
+
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  border-radius: 999px;
+  cursor: not-allowed;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  pointer-events: none;
+  width: 32px;
+  height: 16px;
+  border-radius: 999px;
+  padding: 0px 2px;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  background-color: #dfe2e6;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <input
+    checked={false}
+    className="emotion-0 emotion-1"
+    disabled={true}
+    onChange={[MockFunction]}
+    role="checkbox"
+    tabIndex={0}
+    type="checkbox"
+  />
+  <div
+    checked={false}
+    className="emotion-4 emotion-5"
+    disabled={true}
+  >
+    <div
+      checked={false}
+      className="emotion-2 emotion-3"
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch Snapshots renders switch on 1`] = `
+.emotion-6 {
+  position: relative;
+  height: 16px;
+  width: 32px;
+}
+
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  pointer-events: none;
+  width: 32px;
+  height: 16px;
+  border-radius: 999px;
+  padding: 0px 2px;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  background-color: #005cb9;
+}
+
+.emotion-2 {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  background-color: #ffffff;
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+  -webkit-transition: -webkit-transform 150ms ease;
+  -webkit-transition: transform 150ms ease;
+  transition: transform 150ms ease;
+  pointer-events: none;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <input
+    checked={true}
+    className="emotion-0 emotion-1"
+    onChange={[MockFunction]}
+    role="checkbox"
+    tabIndex={0}
+    type="checkbox"
+  />
+  <div
+    checked={true}
+    className="emotion-4 emotion-5"
+  >
+    <div
+      checked={true}
+      className="emotion-2 emotion-3"
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch Snapshots renders switch with id 1`] = `
+.emotion-6 {
+  position: relative;
+  height: 16px;
+  width: 32px;
+}
+
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  pointer-events: none;
+  width: 32px;
+  height: 16px;
+  border-radius: 999px;
+  padding: 0px 2px;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  background-color: #005cb9;
+}
+
+.emotion-2 {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  background-color: #ffffff;
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+  -webkit-transition: -webkit-transform 150ms ease;
+  -webkit-transition: transform 150ms ease;
+  transition: transform 150ms ease;
+  pointer-events: none;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <input
+    checked={true}
+    className="emotion-0 emotion-1"
+    disabled={false}
+    id="123"
+    onChange={[MockFunction]}
+    role="checkbox"
+    tabIndex={0}
+    type="checkbox"
+    value="user"
+  />
+  <div
+    checked={true}
+    className="emotion-4 emotion-5"
+    disabled={false}
+  >
+    <div
+      checked={true}
+      className="emotion-2 emotion-3"
+    />
+  </div>
+</div>
+`;
+
+exports[`Switch Snapshots renders switch with name and value 1`] = `
+.emotion-6 {
+  position: relative;
+  height: 16px;
+  width: 32px;
+}
+
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+.emotion-4 {
+  box-sizing: border-box;
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  pointer-events: none;
+  width: 32px;
+  height: 16px;
+  border-radius: 999px;
+  padding: 0px 2px;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+  background-color: #005cb9;
+}
+
+.emotion-2 {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: 0px 2px 4px 0 rgba(0,0,0,0.08);
+  background-color: #ffffff;
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+  -webkit-transition: -webkit-transform 150ms ease;
+  -webkit-transition: transform 150ms ease;
+  transition: transform 150ms ease;
+  pointer-events: none;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <input
+    checked={true}
+    className="emotion-0 emotion-1"
+    disabled={false}
+    onChange={[MockFunction]}
+    role="checkbox"
+    tabIndex={0}
+    type="checkbox"
+    value="user"
+  />
+  <div
+    checked={true}
+    className="emotion-4 emotion-5"
+    disabled={false}
+  >
+    <div
+      checked={true}
+      className="emotion-2 emotion-3"
+    />
+  </div>
+</div>
+`;

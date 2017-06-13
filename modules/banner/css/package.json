@@ -1,0 +1,35 @@
+{
+  "name": "@workday/canvas-kit-css-banner",
+  "version": "3.0.0-alpha.0",
+  "description": "Errors and alerts for canvas-kit-css",
+  "author": "Workday, Inc. (https://www.workday.com)",
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "lib",
+    "index.scss"
+  ],
+  "style": "dist/canvas-kit-css-banner.min.css",
+  "main": "dist/canvas-kit-css-banner.min.css",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/banner/css"
+  },
+  "dependencies": {
+    "@workday/canvas-kit-css-core": "^3.0.0-alpha.0",
+    "@workday/canvas-system-icons-web": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ../../../utils/css-build.js index.scss"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "css",
+    "scss",
+    "sass",
+    "workday",
+    "alerts"
+  ]
+}

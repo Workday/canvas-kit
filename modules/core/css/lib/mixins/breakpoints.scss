@@ -1,0 +1,15 @@
+@mixin respond-to($device) {
+  @if $device == 'desktop' {
+    @media all and (min-width: $wdc-breakpoint-tablet) and (max-width: $wdc-breakpoint-desktop - 1) {
+      @content;
+    }
+  } @else if $device == 'tablet' {
+    @media all and (min-width: $wdc-breakpoint-mobile) and (max-width: $wdc-breakpoint-tablet - 1) {
+      @content;
+    }
+  } @else if $device == 'mobile' {
+    @media all and (max-width: $wdc-breakpoint-mobile - 1) {
+      @content;
+    }
+  }
+}
