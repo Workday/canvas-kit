@@ -1,0 +1,45 @@
+{
+  "name": "@workday/canvas-kit-react-core",
+  "version": "1.9.4",
+  "description": "A group of core primitives (i.e. colors, text, etc.)",
+  "homepage": "https://workdaydesign.com",
+  "author": "Alex Nicholls",
+  "license": "Apache-2.0",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/es6/index.js",
+  "sideEffects": false,
+  "types": "dist/es6/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://ghe.megaleo.com/design/canvas-kit-react/tree/master/modules/canvas-kit-react-core"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "index.tsx"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist && mkdirp dist",
+    "build:cjs": "tsc --outDir dist/commonjs --module commonjs --declaration",
+    "build:es6": "tsc --outDir dist/es6 --declaration",
+    "build": "npm-run-all clean --parallel build:cjs build:es6"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "react",
+    "components",
+    "workday",
+    "core"
+  ],
+  "peerDependencies": {
+    "react": ">= 15 < 17"
+  },
+  "dependencies": {
+    "@workday/canvas-colors-web": "^0.17.12",
+    "@workday/canvas-depth-web": "^0.16.3",
+    "@workday/canvas-space-web": "^0.15.5",
+    "emotion": "^9.2.6"
+  }
+}

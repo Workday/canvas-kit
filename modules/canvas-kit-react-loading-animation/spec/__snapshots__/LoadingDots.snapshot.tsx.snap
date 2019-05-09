@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingDots Snapshots renders as expected 1`] = `
+.emotion-6 {
+  display: inline-block;
+}
+
+.emotion-0 {
+  background-color: #dfe2e6;
+  width: 16px;
+  height: 16px;
+  font-size: 0px;
+  border-radius: 100%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  display: inline-block;
+  margin-right: 8px;
+  -webkit-animation-name: animation-dvggdx;
+  animation-name: animation-dvggdx;
+  -webkit-animation-duration: 1400ms;
+  animation-duration: 1400ms;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-delay: 0ms;
+  animation-delay: 0ms;
+}
+
+.emotion-0:last-child {
+  margin-right: 0;
+}
+
+.emotion-2 {
+  background-color: #dfe2e6;
+  width: 16px;
+  height: 16px;
+  font-size: 0px;
+  border-radius: 100%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  display: inline-block;
+  margin-right: 8px;
+  -webkit-animation-name: animation-dvggdx;
+  animation-name: animation-dvggdx;
+  -webkit-animation-duration: 1400ms;
+  animation-duration: 1400ms;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-delay: 160ms;
+  animation-delay: 160ms;
+}
+
+.emotion-2:last-child {
+  margin-right: 0;
+}
+
+.emotion-4 {
+  background-color: #dfe2e6;
+  width: 16px;
+  height: 16px;
+  font-size: 0px;
+  border-radius: 100%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  display: inline-block;
+  margin-right: 8px;
+  -webkit-animation-name: animation-dvggdx;
+  animation-name: animation-dvggdx;
+  -webkit-animation-duration: 1400ms;
+  animation-duration: 1400ms;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-delay: 320ms;
+  animation-delay: 320ms;
+}
+
+.emotion-4:last-child {
+  margin-right: 0;
+}
+
+<div
+  className="emotion-6 emotion-7"
+>
+  <div
+    className="emotion-0 emotion-1"
+  />
+  <div
+    className="emotion-2 emotion-1"
+  />
+  <div
+    className="emotion-4 emotion-1"
+  />
+</div>
+`;

@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "node_modules",
+    "ts-tmp",
+    "dist",
+    "spec",
+    "stories.tsx",
+    "stories_beta.tsx",
+    "stories_icon.tsx",
+    "stories_iconButton.tsx",
+    "stories_iconButtonToggle.tsx"
+  ]
+}

@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SkeletonText default with backgroundColor 1`] = `
+.emotion-4 {
+  margin-bottom: 24px;
+}
+
+.emotion-0 {
+  width: 100%;
+  height: 21px;
+  border-radius: 2px;
+  background-color: #f0f1f2;
+  margin-bottom: 12px;
+}
+
+.emotion-2 {
+  width: 60%;
+  height: 21px;
+  border-radius: 2px;
+  background-color: #f0f1f2;
+  margin-bottom: 12px;
+}
+
+<div
+  className="emotion-4 emotion-5"
+>
+  <div
+    className="emotion-0 emotion-1"
+    height="21px"
+    width="100%"
+  />
+  <div
+    className="emotion-2 emotion-1"
+    height="21px"
+    width="60%"
+  />
+</div>
+`;
+
+exports[`SkeletonText default with two lines 1`] = `
+.emotion-4 {
+  margin-bottom: 24px;
+}
+
+.emotion-0 {
+  width: 100%;
+  height: 21px;
+  border-radius: 2px;
+  background-color: #f0f1f2;
+  margin-bottom: 12px;
+}
+
+.emotion-2 {
+  width: 60%;
+  height: 21px;
+  border-radius: 2px;
+  background-color: #f0f1f2;
+  margin-bottom: 12px;
+}
+
+<div
+  className="emotion-4 emotion-5"
+>
+  <div
+    className="emotion-0 emotion-1"
+    height="21px"
+    width="100%"
+  />
+  <div
+    className="emotion-2 emotion-1"
+    height="21px"
+    width="60%"
+  />
+</div>
+`;
+
+exports[`SkeletonText one line 1`] = `
+.emotion-2 {
+  margin-bottom: 24px;
+}
+
+.emotion-0 {
+  width: 100%;
+  height: 21px;
+  border-radius: 2px;
+  background-color: #f0f1f2;
+  margin-bottom: 12px;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <div
+    className="emotion-0 emotion-1"
+    height="21px"
+    width="100%"
+  />
+</div>
+`;
+
+exports[`SkeletonText zero line 1`] = `null`;

@@ -1,0 +1,15 @@
+{
+  "packages": ["modules/*"],
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "logLevel": "warn",
+      "message": "chore(release): Publish [ci skip]",
+      "registry": "https://artifactory.workday.com/artifactory/api/npm/npm-virtual",
+      "yes": true
+    }
+  }
+}

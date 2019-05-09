@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "ts-tmp",
+    "dist",
+    "spec",
+    "stories.tsx",
+    "stories_TextInput.tsx",
+    "stories_TextArea.tsx"
+  ]
+}
