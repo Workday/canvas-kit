@@ -5,9 +5,14 @@ git:
   depth: 3
 branches:
   only:
-    - travis
+  - travis
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
+  - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
   - export PATH="$HOME/.yarn/bin:$PATH"
 script:
-  - which yarn
+  - yarn install --production=false
+  - yarn build
+env:
+  global:
+    secure: C0W3PWVSlC8uE2yElg/G8tvt8OF4JRsbui/xNJc9uVPX3cqeOh266ESgnFLaL1JjF1ZMjUERZ7hwEYWx7/vrfbKja9LTlujSnG5cq4xqCd7kzrDn3mAoCqR4uALWy/hWbcBi01bK/b8Z4CcOvyZYPqkmX1u0V0XI+4JPLIqP8D/ZAfnQyjzO6U6NpaaLJ7NUmcGZCUmUheL0NzNjXGmXU8hxvqo/OOu1sYUeLukkPZCHTc4hObthWOgwggz8EQ/kKjfChcOaM9mVQFzmd0mnccoA+9bY0DB6y0xeZ5MhV7Vp2QVYwieLj6PwrMmwi7rLsY4HozL1Uquf8LLuEKuVx89wYX43uASkte6L0HwCnpith46wVRBwsnSPKYU7P3wmTe49Wv3qeXtO9EVBWwj1IwCe2gE1Wt7fAbQRnL22XLruZWJL1g3rSrX2iF9Mw1a1MxuwJ+l+J/XLy4T65yJpXVwLdlQpO4IAqqtnx6Eb+BXQO88mq+kJT+jqf9rFcf/w8L3FwuXmW/5tcbkasJpDHkEiOn8u1Gao+02Zfft77nDsnZ3FAfWXwPIUdhjLuRWQ3dPsRYGN9yonsVfHM/QgXqJtbJLVRRr0Ylx6C3lANfWVSa88tL9wYzj9+koSbGP6IIIpXxHWD2kuFoGzGN560bkk1HPpnr/hCRedVwIeqFI=
