@@ -1,0 +1,13 @@
+language: node_js
+node_js: 8
+cache: yarn
+git:
+  depth: 3
+branches:
+  only:
+    - travis
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
+  - export PATH="$HOME/.yarn/bin:$PATH"
+script:
+  - which yarn
