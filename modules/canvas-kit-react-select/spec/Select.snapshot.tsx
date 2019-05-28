@@ -14,7 +14,7 @@ describe('Select Snapshots', () => {
     );
     expect(component).toMatchSnapshot();
   });
-  test('renders as expected', () => {
+  test('renders a disabled option as expected', () => {
     const component = renderer.create(
       <Select name="contact">
         <SelectOption value="email" label="E-mail" disabled={true} />
@@ -23,7 +23,7 @@ describe('Select Snapshots', () => {
     );
     expect(component).toMatchSnapshot();
   });
-  test('renders as expected', () => {
+  test('renders a disabled select as expected', () => {
     const component = renderer.create(
       <Select name="contact" disabled={true}>
         <SelectOption value="email" label="E-mail" />
@@ -32,7 +32,7 @@ describe('Select Snapshots', () => {
     );
     expect(component).toMatchSnapshot();
   });
-  test('renders as expected', () => {
+  test('renders a growing select as expected', () => {
     const component = renderer.create(
       <Select name="contact" grow={true}>
         <SelectOption value="email" label="E-mail" />
@@ -41,7 +41,7 @@ describe('Select Snapshots', () => {
     );
     expect(component).toMatchSnapshot();
   });
-  test('renders as expected', () => {
+  test('renders an alert on select as expected', () => {
     const component = renderer.create(
       <Select name="contact" error={ErrorType.Alert}>
         <SelectOption value="email" label="E-mail" />
@@ -50,7 +50,7 @@ describe('Select Snapshots', () => {
     );
     expect(component).toMatchSnapshot();
   });
-  test('renders as expected', () => {
+  test('renders an error on select as expected', () => {
     const component = renderer.create(
       <Select name="contact" error={ErrorType.Error}>
         <SelectOption value="email" label="E-mail" />
