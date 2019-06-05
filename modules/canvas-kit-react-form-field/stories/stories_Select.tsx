@@ -4,10 +4,9 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {InputProviderDecorator, SectionDecorator, controlComponent} from '../../../utils/storybook';
 
-import FormField from '..';
 import README from '../README.md';
 import {Select, SelectOption} from '@workday/canvas-kit-react-select';
-import {ErrorType} from '@workday/canvas-kit-react-common';
+import FormField from '..';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
@@ -49,7 +48,7 @@ storiesOf('Form Field/Select/Top Label', module)
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" error={ErrorType.Alert}>
+        <Select name="contact" error={FormField.ErrorType.Alert}>
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -67,7 +66,7 @@ storiesOf('Form Field/Select/Top Label', module)
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" error={ErrorType.Error}>
+        <Select name="contact" error={FormField.ErrorType.Error}>
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -98,7 +97,7 @@ storiesOf('Form Field/Select/Top Label', module)
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" grow={true} error={ErrorType.Error}>
+        <Select name="contact" grow={true} error={FormField.ErrorType.Error}>
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -145,7 +144,7 @@ storiesOf('Form Field/Select/Left Label', module)
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" error={ErrorType.Alert}>
+        <Select name="contact" error={FormField.ErrorType.Alert}>
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -164,7 +163,7 @@ storiesOf('Form Field/Select/Left Label', module)
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" error={ErrorType.Error}>
+        <Select name="contact" error={FormField.ErrorType.Error}>
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -201,7 +200,7 @@ storiesOf('Form Field/Select/Left Label', module)
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" grow={true} error={ErrorType.Error}>
+        <Select name="contact" grow={true} error={FormField.ErrorType.Error}>
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
