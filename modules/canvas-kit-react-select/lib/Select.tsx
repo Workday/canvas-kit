@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {CSSObject} from 'create-emotion';
-import {GrowthBehavior, ErrorType, GenericStyle} from '@workday/canvas-kit-react-common';
+import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
 import {colors, inputColors, spacingNumbers, type, spacing} from '@workday/canvas-kit-react-core';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
@@ -18,43 +17,8 @@ export interface SelectProps extends GrowthBehavior, React.SelectHTMLAttributes<
   value?: string;
 }
 
-export interface TextInputGenericStyle extends GenericStyle {
-  variants: {
-    states: {
-      error: CSSObject;
-      alert: CSSObject;
-    };
-  };
-}
-
-function getErrorStyle(error: ErrorType): CSSObject {
-  let errorBorderColor;
-
-  if (error === ErrorType.Error) {
-    errorBorderColor = inputColors.error.border;
-  } else {
-    errorBorderColor = inputColors.warning.border;
-  }
-
-  return {
-    borderColor: errorBorderColor,
-    transition: '100ms box-shadow',
-    boxShadow: `inset 0 0 0 1px ${errorBorderColor}`,
-    '&:hover': {
-      borderColor: errorBorderColor,
-    },
-    '&:focus:not([disabled])': {
-      borderColor: errorBorderColor,
-      boxShadow: `inset 0 0 0 1px ${errorBorderColor},
-        0 0 0 2px ${colors.frenchVanilla100},
-        0 0 0 4px ${inputColors.focusBorder}`,
-    },
-  };
-}
-
-export const SelectStyles: TextInputGenericStyle = {
-  classname: 'text-input',
-  styles: {
+const SelectContainer = styled('select')<SelectProps>(
+  {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
     display: 'block',
@@ -85,25 +49,9 @@ export const SelectStyles: TextInputGenericStyle = {
       },
     },
   },
-  variants: {
-    states: {
-      error: getErrorStyle(ErrorType.Error),
-      alert: getErrorStyle(ErrorType.Alert),
-    },
-  },
-};
-
-const SelectContainer = styled('select')<SelectProps>(
-  SelectStyles.styles,
-  ({error}) => {
-    if (error === ErrorType.Error) {
-      return SelectStyles.variants.states.error;
-    } else if (error === ErrorType.Alert) {
-      return SelectStyles.variants.states.alert;
-    } else {
-      return {};
-    }
-  },
+  ({error}) => ({
+    ...errorRing(error),
+  }),
   ({grow}) =>
     grow && {
       width: '100%',

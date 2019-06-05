@@ -538,7 +538,7 @@ exports[`Select Snapshots renders an alert on select as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
-  border-color: #ffa126;
+  border: 1px solid #ffa126;
   -webkit-transition: 100ms box-shadow;
   transition: 100ms box-shadow;
   box-shadow: inset 0 0 0 1px #ffa126;
@@ -707,7 +707,7 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
-  border-color: #de2e21;
+  border: 1px solid #de2e21;
   -webkit-transition: 100ms box-shadow;
   transition: 100ms box-shadow;
   box-shadow: inset 0 0 0 1px #de2e21;
