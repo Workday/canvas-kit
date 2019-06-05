@@ -63,30 +63,32 @@ import FormField from '@workday/canvas-kit-react-form-field';
 
 A select component must have children of type `SelectOption`:
 
-### Optional
-
-#### `checked: boolean`
-
-> Whether or not the radio input is checked (`true`) or not checked (`false`)
-
 ```tsx
-import * as React from 'react';
-import Select from '@workday/canvas-kit-react-select';
-import FormField from '@workday/canvas-kit-react-form-field';
-
-<FormField label="My Field" inputId="my-radio-field">
-  <Select name="contact">
-    <SelectOption value="email" label="E-mail" />
-    <SelectOption value="phone" label="Phone" />
-    <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
-    <SelectOption value="mail" label="Mail" />
-  </Select>
-</FormField>;
+<Select name="contact">
+  <SelectOption value="email" label="E-mail" />
+  <SelectOption value="phone" label="Phone" />
+  <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
+  <SelectOption value="mail" label="Mail" />
+</Select>
 ```
+
+A children of type `SelectOption` has the following optional props:
+
+##### `value?: string`
+
+> The value of the SelectOption
+
+##### `label?: string;`
+
+> The label of the SelectOption
+
+##### `disabled?: boolean;`
+
+> Whether or not the SelectOption is disabled
 
 Default: `false`
 
----
+### Optional
 
 #### `disabled: boolean`
 
@@ -111,5 +113,18 @@ Default: `false`
 #### `value: string`
 
 > The `value` attribute of the select.
+
+---
+
+#### `error: ErrorType`
+
+> The type of error to display, if any.
+
+| Type  | Description                     |
+| ----- | ------------------------------- |
+| Error | Red outline with error icon.    |
+| Alert | Yellow outline with alert icon. |
+
+Default: `undefined`
 
 ---
