@@ -35,6 +35,11 @@
     "select"
   ],
   "peerDependencies": {
-    "react": ">= 15 < 17"
+    "react": ">= 15 < 17",
+    "emotion": "^9.2.12",
+    "@workday/canvas-kit-react-common": "^0.7.0",
+    "@workday/canvas-kit-react-core": "^1.10.2",
+    "@workday/canvas-kit-react-icon": "^1.7.1",
+    "@workday/canvas-system-icons-web": "^1.0.1"
   }
 }

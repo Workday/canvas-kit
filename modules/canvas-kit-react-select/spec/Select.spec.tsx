@@ -9,7 +9,7 @@ describe('Select', () => {
     cb.mockReset();
   });
 
-  test('renders two radios as expected', () => {
+  test('renders two select options as expected', () => {
     const component = mount(
       <Select name="contact">
         <SelectOption value="email" label="E-mail" />

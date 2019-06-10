@@ -16,7 +16,7 @@ storiesOf('Form Field/Select/Top Label', module)
   .addDecorator(SectionDecorator('Select'))
   .addDecorator(withReadme(README))
   .add('Plain', () => (
-    <FormField label="Label" inputId="input-plain">
+    <FormField label="Label" inputId="select-plain">
       {controlComponent(
         <Select name="contact">
           <SelectOption value="email" label="E-mail" />
@@ -28,7 +28,7 @@ storiesOf('Form Field/Select/Top Label', module)
     </FormField>
   ))
   .add('Disabled', () => (
-    <FormField label="Label" inputId="input-disabled">
+    <FormField label="Label" inputId="select-disabled">
       {controlComponent(
         <Select name="contact" disabled={true}>
           <SelectOption value="email" label="E-mail" />
@@ -42,13 +42,13 @@ storiesOf('Form Field/Select/Top Label', module)
   .add('Alert', () => (
     <FormField
       label="Label"
-      inputId="input-alert"
+      inputId="select-alert"
       error={FormField.ErrorType.Alert}
       hintText={hintText}
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" error={FormField.ErrorType.Alert}>
+        <Select name="contact">
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -60,13 +60,13 @@ storiesOf('Form Field/Select/Top Label', module)
   .add('Error', () => (
     <FormField
       label="Label"
-      inputId="input-error"
+      inputId="select-error"
       error={FormField.ErrorType.Error}
       hintText={hintText}
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" error={FormField.ErrorType.Error}>
+        <Select name="contact">
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -76,7 +76,7 @@ storiesOf('Form Field/Select/Top Label', module)
     </FormField>
   ))
   .add('Grow', () => (
-    <FormField label="Label" inputId="input-grow" grow={true}>
+    <FormField label="Label" inputId="select-grow" grow={true}>
       {controlComponent(
         <Select name="contact" grow={true}>
           <SelectOption value="email" label="E-mail" />
@@ -90,14 +90,14 @@ storiesOf('Form Field/Select/Top Label', module)
   .add('Grow - Error', () => (
     <FormField
       label="Label"
-      inputId="input-grow-error"
+      inputId="select-grow-error"
       grow={true}
       error={FormField.ErrorType.Error}
       hintText={hintText}
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" grow={true} error={FormField.ErrorType.Error}>
+        <Select name="contact" grow={true}>
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -111,7 +111,7 @@ storiesOf('Form Field/Select/Left Label', module)
   .addDecorator(SectionDecorator('Select'))
   .addDecorator(withReadme(README))
   .add('Plain', () => (
-    <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="input-plain">
+    <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-plain">
       {controlComponent(
         <Select name="contact">
           <SelectOption value="email" label="E-mail" />
@@ -123,7 +123,7 @@ storiesOf('Form Field/Select/Left Label', module)
     </FormField>
   ))
   .add('Disabled', () => (
-    <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="input-disabled">
+    <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-disabled">
       {controlComponent(
         <Select name="contact" disabled={true}>
           <SelectOption value="email" label="E-mail" />
@@ -138,13 +138,13 @@ storiesOf('Form Field/Select/Left Label', module)
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
-      inputId="input-alert"
+      inputId="select-alert"
       error={FormField.ErrorType.Alert}
       hintText={hintText}
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" error={FormField.ErrorType.Alert}>
+        <Select name="contact">
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -157,13 +157,13 @@ storiesOf('Form Field/Select/Left Label', module)
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
-      inputId="input-error"
+      inputId="select-error"
       error={FormField.ErrorType.Error}
       hintText={hintText}
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" error={FormField.ErrorType.Error}>
+        <Select name="contact">
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
@@ -176,7 +176,7 @@ storiesOf('Form Field/Select/Left Label', module)
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
-      inputId="input-grow"
+      inputId="select-grow"
       grow={true}
     >
       {controlComponent(
@@ -193,14 +193,14 @@ storiesOf('Form Field/Select/Left Label', module)
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"
-      inputId="input-grow-error"
+      inputId="select-grow-error"
       grow={true}
       error={FormField.ErrorType.Error}
       hintText={hintText}
       hintId={hintId}
     >
       {controlComponent(
-        <Select name="contact" grow={true} error={FormField.ErrorType.Error}>
+        <Select name="contact" grow={true}>
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />

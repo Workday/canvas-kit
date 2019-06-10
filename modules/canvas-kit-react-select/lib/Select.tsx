@@ -25,7 +25,7 @@ const SelectContainer = styled('select')<SelectProps>(
     backgroundColor: inputColors.background,
     borderRadius: 4,
     boxSizing: 'border-box',
-    height: 40,
+    height: spacing.xl,
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // Compensate for border
@@ -86,7 +86,7 @@ export default class Select extends React.Component<SelectProps> {
   };
 
   public render() {
-    const {error, disabled, grow, children, value, onChange} = this.props;
+    const {error, disabled, grow, children, value, onChange, ...otherProps} = this.props;
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
@@ -96,6 +96,7 @@ export default class Select extends React.Component<SelectProps> {
           error={error}
           value={value}
           onChange={onChange}
+          {...otherProps}
         >
           {children}
         </SelectContainer>

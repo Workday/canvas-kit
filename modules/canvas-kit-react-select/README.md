@@ -41,7 +41,7 @@ import * as React from 'react';
 import Select, {SelectOption} from '@workday/canvas-kit-react-select';
 import FormField from '@workday/canvas-kit-react-form-field';
 
-<FormField label="My Field" inputId="my-radio-field">
+<FormField label="My Field" inputId="my-select-field">
   <Select name="contact">
     <SelectOption value="email" label="E-mail" />
     <SelectOption value="phone" label="Phone" />
@@ -53,13 +53,17 @@ import FormField from '@workday/canvas-kit-react-form-field';
 
 ## Static Properties
 
-> None
+#### `ErrorType: ErrorType`
+
+```tsx
+<Select error={TextInput.ErrorType.Alert} />
+```
 
 ## Component Props
 
 ### Required
 
-> Children
+#### `children: React.ReactElement<Option>[]`
 
 A select component must have children of type `SelectOption`:
 
@@ -71,30 +75,6 @@ A select component must have children of type `SelectOption`:
   <SelectOption value="mail" label="Mail" />
 </Select>
 ```
-
-A children of type `SelectOption` has the following optional props:
-
-##### `value?: string`
-
-> The value of the SelectOption
-
-##### `label?: string;`
-
-> The label of the SelectOption
-
-##### `disabled?: boolean;`
-
-> Whether or not the SelectOption is disabled
-
-Default: `false`
-
-### Optional
-
-#### `disabled: boolean`
-
-> Whether or not the radio input is disabled (not able to be checked on or off)
-
-Default: `false`
 
 ---
 
@@ -127,4 +107,26 @@ Default: `false`
 
 Default: `undefined`
 
----
+# Canvas Kit SelectOption
+
+##### `value?: string`
+
+> The value of the SelectOption
+
+##### `label?: string;`
+
+> The label of the SelectOption
+
+##### `disabled?: boolean;`
+
+> Whether or not the SelectOption is disabled
+
+Default: `false`
+
+### Optional
+
+#### `disabled: boolean`
+
+> Whether or not the select is disabled (not able to be selected)
+
+Default: `false`
