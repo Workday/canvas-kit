@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select Snapshots renders a disabled option as expected 1`] = `
-.emotion-8 {
+.emotion-4 {
   display: inline-block;
   position: relative;
 }
 
-.emotion-8 span {
+.emotion-4 span {
   background-color: #ffffff;
 }
 
-.emotion-8:hover path {
+.emotion-4:hover path {
   fill: #333d47;
 }
 
-.emotion-4 {
+.emotion-0 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -32,55 +32,55 @@ exports[`Select Snapshots renders a disabled option as expected 1`] = `
   padding: 8px;
 }
 
-.emotion-4::-webkit-input-placeholder {
+.emotion-0::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::-moz-placeholder {
+.emotion-0::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:-ms-input-placeholder {
+.emotion-0:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::placeholder {
+.emotion-0::placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:hover {
+.emotion-0:hover {
   border-color: #333d47;
 }
 
-.emotion-4:focus:not([disabled]) {
+.emotion-0:focus:not([disabled]) {
   border-color: #0875e1;
   box-shadow: inset 0 0 0 1px #0875e1;
   outline: none;
 }
 
-.emotion-4:disabled {
+.emotion-0:disabled {
   background-color: #f6f7f8;
   border-color: #b9c0c7;
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-webkit-input-placeholder {
+.emotion-0:disabled::-webkit-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-moz-placeholder {
+.emotion-0:disabled::-moz-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled:-ms-input-placeholder {
+.emotion-0:disabled:-ms-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::placeholder {
+.emotion-0:disabled::placeholder {
   color: #a1aab3;
 }
 
-.emotion-7 {
+.emotion-3 {
   display: inline-block;
   position: absolute;
   top: 4px;
@@ -89,49 +89,49 @@ exports[`Select Snapshots renders a disabled option as expected 1`] = `
   pointer-events: none;
 }
 
-.emotion-7 svg {
+.emotion-3 svg {
   display: block;
 }
 
-.emotion-7 .wd-icon-fill {
+.emotion-3 .wd-icon-fill {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-fill {
+.emotion-3:hover .wd-icon-fill {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-accent {
+.emotion-3 .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-accent {
+.emotion-3:hover .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-background {
+.emotion-3 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7:hover .wd-icon-background {
+.emotion-3:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7 path {
+.emotion-3 path {
   -webkit-transition: 100ms fill;
   transition: 100ms fill;
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-4 emotion-5"
   disabled={false}
 >
   <select
-    className="emotion-4 emotion-5"
+    className="emotion-0 emotion-1"
     disabled={false}
+    name="contact"
   >
     <option
-      className="emotion-0 emotion-1"
       disabled={true}
       label="E-mail"
       value="email"
@@ -139,7 +139,6 @@ exports[`Select Snapshots renders a disabled option as expected 1`] = `
       E-mail
     </option>
     <option
-      className="emotion-0 emotion-1"
       label="Phone"
       value="phone"
     >
@@ -147,7 +146,7 @@ exports[`Select Snapshots renders a disabled option as expected 1`] = `
     </option>
   </select>
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-2 emotion-3"
     dangerouslySetInnerHTML={
       Object {
         "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
@@ -158,7 +157,7 @@ exports[`Select Snapshots renders a disabled option as expected 1`] = `
 `;
 
 exports[`Select Snapshots renders a disabled select as expected 1`] = `
-.emotion-4 {
+.emotion-0 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -176,64 +175,64 @@ exports[`Select Snapshots renders a disabled select as expected 1`] = `
   padding: 8px;
 }
 
-.emotion-4::-webkit-input-placeholder {
+.emotion-0::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::-moz-placeholder {
+.emotion-0::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:-ms-input-placeholder {
+.emotion-0:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::placeholder {
+.emotion-0::placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:hover {
+.emotion-0:hover {
   border-color: #333d47;
 }
 
-.emotion-4:focus:not([disabled]) {
+.emotion-0:focus:not([disabled]) {
   border-color: #0875e1;
   box-shadow: inset 0 0 0 1px #0875e1;
   outline: none;
 }
 
-.emotion-4:disabled {
+.emotion-0:disabled {
   background-color: #f6f7f8;
   border-color: #b9c0c7;
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-webkit-input-placeholder {
+.emotion-0:disabled::-webkit-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-moz-placeholder {
+.emotion-0:disabled::-moz-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled:-ms-input-placeholder {
+.emotion-0:disabled:-ms-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::placeholder {
+.emotion-0:disabled::placeholder {
   color: #a1aab3;
 }
 
-.emotion-8 {
+.emotion-4 {
   display: inline-block;
   position: relative;
 }
 
-.emotion-8 span {
+.emotion-4 span {
   background-color: #f6f7f8;
 }
 
-.emotion-7 {
+.emotion-3 {
   display: inline-block;
   position: absolute;
   top: 4px;
@@ -242,56 +241,55 @@ exports[`Select Snapshots renders a disabled select as expected 1`] = `
   pointer-events: none;
 }
 
-.emotion-7 svg {
+.emotion-3 svg {
   display: block;
 }
 
-.emotion-7 .wd-icon-fill {
+.emotion-3 .wd-icon-fill {
   fill: #a1aab3;
 }
 
-.emotion-7:hover .wd-icon-fill {
+.emotion-3:hover .wd-icon-fill {
   fill: #a1aab3;
 }
 
-.emotion-7 .wd-icon-accent {
+.emotion-3 .wd-icon-accent {
   fill: #a1aab3;
 }
 
-.emotion-7:hover .wd-icon-accent {
+.emotion-3:hover .wd-icon-accent {
   fill: #a1aab3;
 }
 
-.emotion-7 .wd-icon-background {
+.emotion-3 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7:hover .wd-icon-background {
+.emotion-3:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7 path {
+.emotion-3 path {
   -webkit-transition: 100ms fill;
   transition: 100ms fill;
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-4 emotion-5"
   disabled={true}
 >
   <select
-    className="emotion-4 emotion-5"
+    className="emotion-0 emotion-1"
     disabled={true}
+    name="contact"
   >
     <option
-      className="emotion-0 emotion-1"
       label="E-mail"
       value="email"
     >
       E-mail
     </option>
     <option
-      className="emotion-0 emotion-1"
       label="Phone"
       value="phone"
     >
@@ -299,7 +297,7 @@ exports[`Select Snapshots renders a disabled select as expected 1`] = `
     </option>
   </select>
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-2 emotion-3"
     dangerouslySetInnerHTML={
       Object {
         "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
@@ -310,7 +308,7 @@ exports[`Select Snapshots renders a disabled select as expected 1`] = `
 `;
 
 exports[`Select Snapshots renders a growing select as expected 1`] = `
-.emotion-7 {
+.emotion-3 {
   display: inline-block;
   position: absolute;
   top: 4px;
@@ -319,53 +317,53 @@ exports[`Select Snapshots renders a growing select as expected 1`] = `
   pointer-events: none;
 }
 
-.emotion-7 svg {
+.emotion-3 svg {
   display: block;
 }
 
-.emotion-7 .wd-icon-fill {
+.emotion-3 .wd-icon-fill {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-fill {
+.emotion-3:hover .wd-icon-fill {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-accent {
+.emotion-3 .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-accent {
+.emotion-3:hover .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-background {
+.emotion-3 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7:hover .wd-icon-background {
+.emotion-3:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7 path {
+.emotion-3 path {
   -webkit-transition: 100ms fill;
   transition: 100ms fill;
 }
 
-.emotion-8 {
+.emotion-4 {
   display: block;
   position: relative;
 }
 
-.emotion-8 span {
+.emotion-4 span {
   background-color: #ffffff;
 }
 
-.emotion-8:hover path {
+.emotion-4:hover path {
   fill: #333d47;
 }
 
-.emotion-4 {
+.emotion-0 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -384,71 +382,70 @@ exports[`Select Snapshots renders a growing select as expected 1`] = `
   width: 100%;
 }
 
-.emotion-4::-webkit-input-placeholder {
+.emotion-0::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::-moz-placeholder {
+.emotion-0::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:-ms-input-placeholder {
+.emotion-0:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::placeholder {
+.emotion-0::placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:hover {
+.emotion-0:hover {
   border-color: #333d47;
 }
 
-.emotion-4:focus:not([disabled]) {
+.emotion-0:focus:not([disabled]) {
   border-color: #0875e1;
   box-shadow: inset 0 0 0 1px #0875e1;
   outline: none;
 }
 
-.emotion-4:disabled {
+.emotion-0:disabled {
   background-color: #f6f7f8;
   border-color: #b9c0c7;
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-webkit-input-placeholder {
+.emotion-0:disabled::-webkit-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-moz-placeholder {
+.emotion-0:disabled::-moz-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled:-ms-input-placeholder {
+.emotion-0:disabled:-ms-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::placeholder {
+.emotion-0:disabled::placeholder {
   color: #a1aab3;
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-4 emotion-5"
   disabled={false}
 >
   <select
-    className="emotion-4 emotion-5"
+    className="emotion-0 emotion-1"
     disabled={false}
+    name="contact"
   >
     <option
-      className="emotion-0 emotion-1"
       label="E-mail"
       value="email"
     >
       E-mail
     </option>
     <option
-      className="emotion-0 emotion-1"
       label="Phone"
       value="phone"
     >
@@ -456,7 +453,7 @@ exports[`Select Snapshots renders a growing select as expected 1`] = `
     </option>
   </select>
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-2 emotion-3"
     dangerouslySetInnerHTML={
       Object {
         "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
@@ -467,20 +464,20 @@ exports[`Select Snapshots renders a growing select as expected 1`] = `
 `;
 
 exports[`Select Snapshots renders an alert on select as expected 1`] = `
-.emotion-8 {
+.emotion-4 {
   display: inline-block;
   position: relative;
 }
 
-.emotion-8 span {
+.emotion-4 span {
   background-color: #ffffff;
 }
 
-.emotion-8:hover path {
+.emotion-4:hover path {
   fill: #333d47;
 }
 
-.emotion-7 {
+.emotion-3 {
   display: inline-block;
   position: absolute;
   top: 4px;
@@ -489,40 +486,40 @@ exports[`Select Snapshots renders an alert on select as expected 1`] = `
   pointer-events: none;
 }
 
-.emotion-7 svg {
+.emotion-3 svg {
   display: block;
 }
 
-.emotion-7 .wd-icon-fill {
+.emotion-3 .wd-icon-fill {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-fill {
+.emotion-3:hover .wd-icon-fill {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-accent {
+.emotion-3 .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-accent {
+.emotion-3:hover .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-background {
+.emotion-3 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7:hover .wd-icon-background {
+.emotion-3:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7 path {
+.emotion-3 path {
   -webkit-transition: 100ms fill;
   transition: 100ms fill;
 }
 
-.emotion-4 {
+.emotion-0 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -544,80 +541,79 @@ exports[`Select Snapshots renders an alert on select as expected 1`] = `
   box-shadow: inset 0 0 0 1px #ffa126;
 }
 
-.emotion-4::-webkit-input-placeholder {
+.emotion-0::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::-moz-placeholder {
+.emotion-0::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:-ms-input-placeholder {
+.emotion-0:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::placeholder {
+.emotion-0::placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:hover {
+.emotion-0:hover {
   border-color: #333d47;
 }
 
-.emotion-4:focus:not([disabled]) {
+.emotion-0:focus:not([disabled]) {
   border-color: #0875e1;
   box-shadow: inset 0 0 0 1px #0875e1;
   outline: none;
 }
 
-.emotion-4:disabled {
+.emotion-0:disabled {
   background-color: #f6f7f8;
   border-color: #b9c0c7;
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-webkit-input-placeholder {
+.emotion-0:disabled::-webkit-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-moz-placeholder {
+.emotion-0:disabled::-moz-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled:-ms-input-placeholder {
+.emotion-0:disabled:-ms-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::placeholder {
+.emotion-0:disabled::placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:hover {
+.emotion-0:hover {
   border-color: #ffa126;
 }
 
-.emotion-4:focus:not([disabled]) {
+.emotion-0:focus:not([disabled]) {
   border-color: #ffa126;
   box-shadow: inset 0 0 0 1px #ffa126, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-4 emotion-5"
   disabled={false}
 >
   <select
-    className="emotion-4 emotion-5"
+    className="emotion-0 emotion-1"
     disabled={false}
+    name="contact"
   >
     <option
-      className="emotion-0 emotion-1"
       label="E-mail"
       value="email"
     >
       E-mail
     </option>
     <option
-      className="emotion-0 emotion-1"
       label="Phone"
       value="phone"
     >
@@ -625,7 +621,7 @@ exports[`Select Snapshots renders an alert on select as expected 1`] = `
     </option>
   </select>
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-2 emotion-3"
     dangerouslySetInnerHTML={
       Object {
         "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
@@ -636,20 +632,20 @@ exports[`Select Snapshots renders an alert on select as expected 1`] = `
 `;
 
 exports[`Select Snapshots renders an error on select as expected 1`] = `
-.emotion-8 {
+.emotion-4 {
   display: inline-block;
   position: relative;
 }
 
-.emotion-8 span {
+.emotion-4 span {
   background-color: #ffffff;
 }
 
-.emotion-8:hover path {
+.emotion-4:hover path {
   fill: #333d47;
 }
 
-.emotion-7 {
+.emotion-3 {
   display: inline-block;
   position: absolute;
   top: 4px;
@@ -658,40 +654,40 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
   pointer-events: none;
 }
 
-.emotion-7 svg {
+.emotion-3 svg {
   display: block;
 }
 
-.emotion-7 .wd-icon-fill {
+.emotion-3 .wd-icon-fill {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-fill {
+.emotion-3:hover .wd-icon-fill {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-accent {
+.emotion-3 .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-accent {
+.emotion-3:hover .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-background {
+.emotion-3 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7:hover .wd-icon-background {
+.emotion-3:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7 path {
+.emotion-3 path {
   -webkit-transition: 100ms fill;
   transition: 100ms fill;
 }
 
-.emotion-4 {
+.emotion-0 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -713,80 +709,79 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
   box-shadow: inset 0 0 0 1px #de2e21;
 }
 
-.emotion-4::-webkit-input-placeholder {
+.emotion-0::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::-moz-placeholder {
+.emotion-0::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:-ms-input-placeholder {
+.emotion-0:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::placeholder {
+.emotion-0::placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:hover {
+.emotion-0:hover {
   border-color: #333d47;
 }
 
-.emotion-4:focus:not([disabled]) {
+.emotion-0:focus:not([disabled]) {
   border-color: #0875e1;
   box-shadow: inset 0 0 0 1px #0875e1;
   outline: none;
 }
 
-.emotion-4:disabled {
+.emotion-0:disabled {
   background-color: #f6f7f8;
   border-color: #b9c0c7;
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-webkit-input-placeholder {
+.emotion-0:disabled::-webkit-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-moz-placeholder {
+.emotion-0:disabled::-moz-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled:-ms-input-placeholder {
+.emotion-0:disabled:-ms-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::placeholder {
+.emotion-0:disabled::placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:hover {
+.emotion-0:hover {
   border-color: #de2e21;
 }
 
-.emotion-4:focus:not([disabled]) {
+.emotion-0:focus:not([disabled]) {
   border-color: #de2e21;
   box-shadow: inset 0 0 0 1px #de2e21, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-4 emotion-5"
   disabled={false}
 >
   <select
-    className="emotion-4 emotion-5"
+    className="emotion-0 emotion-1"
     disabled={false}
+    name="contact"
   >
     <option
-      className="emotion-0 emotion-1"
       label="E-mail"
       value="email"
     >
       E-mail
     </option>
     <option
-      className="emotion-0 emotion-1"
       label="Phone"
       value="phone"
     >
@@ -794,7 +789,7 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
     </option>
   </select>
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-2 emotion-3"
     dangerouslySetInnerHTML={
       Object {
         "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
@@ -805,20 +800,20 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
 `;
 
 exports[`Select Snapshots renders as expected 1`] = `
-.emotion-8 {
+.emotion-4 {
   display: inline-block;
   position: relative;
 }
 
-.emotion-8 span {
+.emotion-4 span {
   background-color: #ffffff;
 }
 
-.emotion-8:hover path {
+.emotion-4:hover path {
   fill: #333d47;
 }
 
-.emotion-4 {
+.emotion-0 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -836,55 +831,55 @@ exports[`Select Snapshots renders as expected 1`] = `
   padding: 8px;
 }
 
-.emotion-4::-webkit-input-placeholder {
+.emotion-0::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::-moz-placeholder {
+.emotion-0::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:-ms-input-placeholder {
+.emotion-0:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-4::placeholder {
+.emotion-0::placeholder {
   color: #5e6a75;
 }
 
-.emotion-4:hover {
+.emotion-0:hover {
   border-color: #333d47;
 }
 
-.emotion-4:focus:not([disabled]) {
+.emotion-0:focus:not([disabled]) {
   border-color: #0875e1;
   box-shadow: inset 0 0 0 1px #0875e1;
   outline: none;
 }
 
-.emotion-4:disabled {
+.emotion-0:disabled {
   background-color: #f6f7f8;
   border-color: #b9c0c7;
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-webkit-input-placeholder {
+.emotion-0:disabled::-webkit-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::-moz-placeholder {
+.emotion-0:disabled::-moz-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled:-ms-input-placeholder {
+.emotion-0:disabled:-ms-input-placeholder {
   color: #a1aab3;
 }
 
-.emotion-4:disabled::placeholder {
+.emotion-0:disabled::placeholder {
   color: #a1aab3;
 }
 
-.emotion-7 {
+.emotion-3 {
   display: inline-block;
   position: absolute;
   top: 4px;
@@ -893,56 +888,55 @@ exports[`Select Snapshots renders as expected 1`] = `
   pointer-events: none;
 }
 
-.emotion-7 svg {
+.emotion-3 svg {
   display: block;
 }
 
-.emotion-7 .wd-icon-fill {
+.emotion-3 .wd-icon-fill {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-fill {
+.emotion-3:hover .wd-icon-fill {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-accent {
+.emotion-3 .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-7:hover .wd-icon-accent {
+.emotion-3:hover .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-7 .wd-icon-background {
+.emotion-3 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7:hover .wd-icon-background {
+.emotion-3:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-7 path {
+.emotion-3 path {
   -webkit-transition: 100ms fill;
   transition: 100ms fill;
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-4 emotion-5"
   disabled={false}
 >
   <select
-    className="emotion-4 emotion-5"
+    className="emotion-0 emotion-1"
     disabled={false}
+    name="contact"
   >
     <option
-      className="emotion-0 emotion-1"
       label="E-mail"
       value="email"
     >
       E-mail
     </option>
     <option
-      className="emotion-0 emotion-1"
       label="Phone"
       value="phone"
     >
@@ -950,7 +944,7 @@ exports[`Select Snapshots renders as expected 1`] = `
     </option>
   </select>
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-2 emotion-3"
     dangerouslySetInnerHTML={
       Object {
         "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-caret-down-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M12.288 15.866c.117.18.31.177.424 0l4.235-6.538c.116-.18.034-.328-.176-.328H8.229c-.214 0-.29.15-.176.328l4.235 6.538z\\" class=\\"wd-icon-fill\\"/></g></svg>",
