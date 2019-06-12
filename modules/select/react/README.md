@@ -56,7 +56,7 @@ import FormField from '@workday/canvas-kit-react-form-field';
 #### `ErrorType: ErrorType`
 
 ```tsx
-<Select error={TextInput.ErrorType.Alert} />
+<Select error={Select.ErrorType.Alert} />
 ```
 
 ## Component Props
@@ -84,7 +84,7 @@ A select component must have children of type `SelectOption`:
 
 ---
 
-#### `onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void`
+#### `onChange: (e: React.SyntheticEvent<HTMLSelectElement>) => void`
 
 > A callback that gets called everytime the select state changes.
 
