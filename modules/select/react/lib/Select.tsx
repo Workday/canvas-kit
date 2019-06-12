@@ -28,7 +28,7 @@ const SelectContainer = styled('select')<SelectProps>(
     height: spacing.xl,
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spacingNumbers.xxs, // Compensate for border
+    padding: spacingNumbers.xxs, // Add padding for IE11
     '&::placeholder': {
       color: inputColors.placeholder,
     },

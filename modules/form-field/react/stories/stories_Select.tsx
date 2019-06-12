@@ -1,12 +1,16 @@
-/// <reference path="../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {InputProviderDecorator, SectionDecorator, controlComponent} from '../../../utils/storybook';
+import {
+  InputProviderDecorator,
+  SectionDecorator,
+  controlComponent,
+} from '../../../../utils/storybook';
 
+import FormField from '..';
 import README from '../README.md';
 import {Select, SelectOption} from '@workday/canvas-kit-react-select';
-import FormField from '..';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
