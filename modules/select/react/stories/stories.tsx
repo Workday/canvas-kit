@@ -31,7 +31,7 @@ storiesOf('Select', module)
       </Select>
     )
   )
-  .add('Error - Alert', () =>
+  .add('Alert', () =>
     controlComponent(
       <Select name="contact" error={ErrorType.Alert}>
         <SelectOption value="email" label="E-mail" />
@@ -41,9 +41,29 @@ storiesOf('Select', module)
       </Select>
     )
   )
-  .add('Error - Error', () =>
+  .add('Error', () =>
     controlComponent(
       <Select name="contact" error={ErrorType.Error}>
+        <SelectOption value="email" label="E-mail" />
+        <SelectOption value="phone" label="Phone" />
+        <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
+        <SelectOption value="mail" label="Mail" />
+      </Select>
+    )
+  )
+  .add('Grow', () =>
+    controlComponent(
+      <Select name="contact" grow={true}>
+        <SelectOption value="email" label="E-mail" />
+        <SelectOption value="phone" label="Phone" />
+        <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
+        <SelectOption value="mail" label="Mail" />
+      </Select>
+    )
+  )
+  .add('Grow - Error', () =>
+    controlComponent(
+      <Select name="contact" grow={true} error={ErrorType.Error}>
         <SelectOption value="email" label="E-mail" />
         <SelectOption value="phone" label="Phone" />
         <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
