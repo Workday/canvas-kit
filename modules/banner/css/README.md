@@ -1,25 +1,27 @@
-# Canvas Kit Errors and Alerts
+# Canvas Kit Banner
 
-Components to display errors, warnings, and other alerts.
+Errors and Alerts notify users of missteps that happen within a workflow and describe how the user
+can take appropriate action to resolve them.
 
-## Usage
+## Installation
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
-
-```scss
-@import '~@workday/canvas-kit-css-alert/index.scss';
-```
 
 **You must have PostCSS support.** Add the
 [postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
 inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
 
-### Alert Bar
+## Usage
+
+```scss
+@import '~@workday/canvas-kit-css-alert/index.scss';
+```
 
 Use by applying `.wdc-alert-bar`.
 
-**Components**  
+## Component Structure
+
 `.wdc-alert-bar-text` - Contains the alert/error text.  
 `.wdc-alert-bar-right` - Rightmost area containing a link.
 
@@ -34,10 +36,11 @@ Use by applying `.wdc-alert-bar`.
 </a>
 ```
 
-#### Error Bar
+### Component Modifiers
 
-Apply the error bar style by adding `.wdc-alert-bar-error`. This can be combined with the minimized
-state as well.
+#### Theme: `.wdc-alert-bar-error`
+
+> Set the banner theme as `error`
 
 ```html
 <a class="wdc-alert-bar wdc-alert-bar-error" href="#">
@@ -50,10 +53,10 @@ state as well.
 </a>
 ```
 
-#### Minimized
+#### Variant: `.wdc-alert-bar-mini`
 
-Apply the minimized state by adding `.wdc-alert-bar-mini`. Text will truncate with an ellipsis if
-longer than maximum width.
+> Set the banner variant as `mini`. Text will truncate with an ellipsis if longer than maximum
+> width.
 
 ```html
 <a class="wdc-alert-bar wdc-alert-bar-mini" href="#">

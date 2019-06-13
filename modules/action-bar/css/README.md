@@ -2,16 +2,18 @@
 
 Full width action bar fixed to bottom of screen.
 
-## Usage
+## Installation
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
+
+## Usage
 
 ```scss
 @import '~@workday/canvas-kit-css-action-bar/index.scss';
 ```
 
-## Action Bar
+## Component Structure
 
 The Action Bar consists of two components, `wdc-action-bar` and `wdc-action-bar-container`. All
 button sets should be wrapped around `wdc-action-bar-container`.
@@ -29,9 +31,11 @@ button sets should be wrapped around `wdc-action-bar-container`.
 </div>
 ```
 
-### Fixed Positioning
+### Component Modifiers
 
-Use `.wdc-action-bar.wdc-action-bar-fixed` to fix the Action Bar to the bottom of the page.
+#### Fixed: `.wdc-fat.wdc-fat-fixed`
+
+> Fixes the toolbar to the bottom of the window (uses `position: fixed`)
 
 ```html
 <div class="wdc-action-bar wdc-action-bar-fixed">
@@ -41,7 +45,7 @@ Use `.wdc-action-bar.wdc-action-bar-fixed` to fix the Action Bar to the bottom o
 </div>
 ```
 
-### Responsive
+#### Responsive Behavior
 
 At 575px, responsive styles will take effect:
 
