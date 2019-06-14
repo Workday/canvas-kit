@@ -3,7 +3,19 @@
 Icon injection and coloring toolkit for Canvas icons. Uses
 [SVGInjector](https://github.com/iconic/SVGInjector).
 
-## Quick Start
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-icon
+```
+
+## Usage
 
 Icons will load from CDN by default and the injector will look for the `.wdc-icon` selector.
 

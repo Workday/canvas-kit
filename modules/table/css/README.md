@@ -5,7 +5,7 @@ A component for applying Canvas styling to table elements.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-table
+yarn add @workday/canvas-kit-css
 ```
 
 or

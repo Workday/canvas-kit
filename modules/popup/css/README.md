@@ -5,7 +5,7 @@ Popups and tooltips with modifiers and containers implementing display on hover.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-popup
+yarn add @workday/canvas-kit-css
 ```
 
 or

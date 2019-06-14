@@ -6,7 +6,7 @@ for positioning of columns.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-grid-system
+yarn add @workday/canvas-kit-css
 ```
 
 or

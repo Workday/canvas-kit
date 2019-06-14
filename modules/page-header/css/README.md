@@ -5,7 +5,7 @@ The page header for our application.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-page-header
+yarn add @workday/canvas-kit-css
 ```
 
 or
