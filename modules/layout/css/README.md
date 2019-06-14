@@ -3,7 +3,17 @@
 Canvas Kit Grid System is based on a 12 column grid. The Canvas Grid System uses the flexbox layout
 for positioning of columns.
 
-## Usage
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css-grid-system
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-grid-system
+```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
@@ -12,7 +22,9 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 @import '~@workday/canvas-kit-css-grid-system/index.scss';
 ```
 
-## Grid Options
+## Usage
+
+### Grid Options
 
 |              | Small         | Medium        | Large         | Extra Large  |
 | ------------ | ------------- | ------------- | ------------- | ------------ |
@@ -20,7 +32,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 | Gutter Width | 16px          | 16px          | 24px          | 40px         |
 | Class Prefix | `wdc-col-sm-` | `wdc-col-md-` | `wdc-col-lg-` | `wdc-col-xl` |
 
-## Responsive Grids
+### Responsive Grids
 
 Responsive modifiers allow you to specify different column sizes for different breakpoints.
 
@@ -41,7 +53,7 @@ Responsive modifiers allow you to specify different column sizes for different b
 </div>
 ```
 
-## Fluid Grids
+### Fluid Grids
 
 Fluid grids are percentage based columns for resizing content.
 
@@ -80,7 +92,7 @@ Fluid grids are percentage based columns for resizing content.
 </div>
 ```
 
-## Grids with Offsets
+### Grids with Offsets
 
 Offsets for columns.
 
@@ -92,7 +104,7 @@ Offsets for columns.
 </div>
 ```
 
-## Auto Widths
+### Auto Widths
 
 Flex grow the columns to the parent container.
 
@@ -110,7 +122,9 @@ Flex grow the columns to the parent container.
 </div>
 ```
 
-## Grid Horizontal Positioning
+### Positioning
+
+#### Horizontal
 
 Horizonal position for columns.
 
@@ -132,7 +146,7 @@ Horizonal position for columns.
 </div>
 ```
 
-## Grid Vertical Positioning
+#### Vertical
 
 Vertical position for columns.
 
@@ -163,7 +177,7 @@ Vertical position for columns.
 </div>
 ```
 
-## Grid Distribution
+### Grid Distribution
 
 Position content with `wdc-row-around` and `wdc-row-between`.
 

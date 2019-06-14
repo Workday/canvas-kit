@@ -2,7 +2,17 @@
 
 Button highlight actions available on a screen with a click or tap.
 
-## Usage
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css-button
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-button
+```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
@@ -15,7 +25,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 [postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
 inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
 
-## Overview
+## Usage
 
 Button styles can be applied by using `.wdc-btn`. Most modifiers can be used by combining `.wdc-btn`
 with the modifier class (e.g. `.wdc-btn-primary`). Some modifiers can be combined (e.g.

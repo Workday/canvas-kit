@@ -2,7 +2,17 @@
 
 Popups and tooltips with modifiers and containers implementing display on hover.
 
-## Usage
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css-popup
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-popup
+```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
@@ -11,7 +21,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 @import '~@workday/canvas-kit-css-popup/index.scss';
 ```
 
-### Popups
+## Usage
 
 > Popups are for more advanced use cases, usually displaying more complex information or affording
 > more complex interactions.
@@ -27,7 +37,7 @@ title. `p` elements also have adjusted margins.
 </div>
 ```
 
-#### Directional Modifiers
+### Directional Modifiers
 
 Four directions are available. Each direction will change the orientation of the popup arrow. Use
 directional classes in addition to `.wdc-popup`.
@@ -55,7 +65,7 @@ directional classes in addition to `.wdc-popup`.
 </div>
 ```
 
-#### Menus
+### Menus
 
 Use `.wdc-popup-menu` in addition to `.wdc-popup` to apply popup menu styling. Use a `ul` and `li`
 to list menu items. Menus are compatible with directional classes.
@@ -73,7 +83,7 @@ to list menu items. Menus are compatible with directional classes.
 </div>
 ```
 
-##### Menu Item States
+#### Menu Item States
 
 Use `.wdc-popup-menu-item-hover` or `.wdc-popup-menu-item-focus` on a `li` to apply hover/focus
 styling to a menu item.
@@ -91,7 +101,7 @@ styling to a menu item.
 </div>
 ```
 
-### Tooltips
+## Tooltips
 
 > Tooltips are used to display brief items of information.
 
@@ -106,7 +116,7 @@ any directional modifiers.
 </div>
 ```
 
-### Display on hover
+## Display on hover
 
 To display a popup on hover, wrap hoverable content within a `.wdc-popup-container`. Insert a
 `.wdc-popup` within the container. The popup will automatically be positioned according to its

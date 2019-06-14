@@ -2,7 +2,26 @@
 
 The page header for our application.
 
-**Example:**
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css-page-header
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-page-header
+```
+
+Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
+`index.scss`.
+
+```scss
+@import '~@workday/canvas-kit-css-page-header/index.scss';
+```
+
+## Usage
 
 ```html
 <header class="wdc-page-header">
@@ -18,15 +37,6 @@ The page header for our application.
     </div>
   </div>
 </header>
-```
-
-## Usage
-
-Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
-`index.scss`.
-
-```scss
-@import '~@workday/canvas-kit-css-page-header/index.scss';
 ```
 
 ### Marketing Contexts

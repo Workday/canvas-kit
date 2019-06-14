@@ -5,6 +5,16 @@ can take appropriate action to resolve them.
 
 ## Installation
 
+```sh
+yarn add @workday/canvas-kit-css-banner
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-banner
+```
+
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
 
@@ -20,8 +30,6 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 
 Use by applying `.wdc-alert-bar`.
 
-## Component Structure
-
 `.wdc-alert-bar-text` - Contains the alert/error text.  
 `.wdc-alert-bar-right` - Rightmost area containing a link.
 
@@ -36,11 +44,11 @@ Use by applying `.wdc-alert-bar`.
 </a>
 ```
 
-### Component Modifiers
+### Variant
 
-#### Theme: `.wdc-alert-bar-error`
+#### `.wdc-alert-bar-error`
 
-> Set the banner theme as `error`
+> Set the banner variant as `error`
 
 ```html
 <a class="wdc-alert-bar wdc-alert-bar-error" href="#">
@@ -53,7 +61,7 @@ Use by applying `.wdc-alert-bar`.
 </a>
 ```
 
-#### Variant: `.wdc-alert-bar-mini`
+#### `.wdc-alert-bar-mini`
 
 > Set the banner variant as `mini`. Text will truncate with an ellipsis if longer than maximum
 > width.

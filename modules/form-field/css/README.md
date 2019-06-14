@@ -1,8 +1,18 @@
-# Canvas Kit Form
+# Canvas Kit Form Field
 
 Form element styles and other common form styles.
 
-## Usage
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css-form
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-form
+```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
@@ -15,7 +25,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 [postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
 inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
 
-## Example
+## Usage
 
 ```html
 <form class="wdc-form">

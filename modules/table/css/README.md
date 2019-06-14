@@ -1,8 +1,18 @@
 # Canvas Kit Table
 
-Data table styling for Canvas Kit.
+A component for applying Canvas styling to table elements.
 
-## Usage
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css-table
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-table
+```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
@@ -11,7 +21,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 @import '~@workday/canvas-kit-css-table/index.scss';
 ```
 
-## Table
+## Usage
 
 Use `.wdc-table` on a `<table>` element.
 

@@ -11,7 +11,17 @@ Includes:
 - [Type](#type)
 - [Accessibility](#accessibility)
 
-## Usage
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css-core
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-core
+```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
