@@ -6,7 +6,7 @@ can take appropriate action to resolve them.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-banner
+yarn add @workday/canvas-kit-css
 ```
 
 or

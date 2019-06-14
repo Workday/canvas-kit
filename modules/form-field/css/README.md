@@ -5,7 +5,7 @@ Form element styles and other common form styles.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-form
+yarn add @workday/canvas-kit-css
 ```
 
 or

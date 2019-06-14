@@ -5,7 +5,7 @@ Components that display animations while a page or component loads.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-loading-spinner
+yarn add @workday/canvas-kit-css
 ```
 
 or

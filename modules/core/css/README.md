@@ -14,7 +14,7 @@ Includes:
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-core
+yarn add @workday/canvas-kit-css
 ```
 
 or

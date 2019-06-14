@@ -5,7 +5,7 @@ Button highlight actions available on a screen with a click or tap.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-button
+yarn add @workday/canvas-kit-css
 ```
 
 or

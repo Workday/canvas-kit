@@ -5,7 +5,7 @@ Full width action bar fixed to bottom of screen.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css-fat
+yarn add @workday/canvas-kit-css
 ```
 
 or
