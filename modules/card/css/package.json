@@ -14,7 +14,7 @@
   "main": "dist/canvas-kit-css-card.css",
   "repository": {
     "type": "git",
-    "url": "https://ghe.megaleo.com/design/canvas-kit-react/tree/master/modules/css/card"
+    "url": "https://ghe.megaleo.com/design/canvas-kit-react/tree/master/modules/card/css"
   },
   "dependencies": {
     "@workday/canvas-kit-css-core": "2.0.0"
