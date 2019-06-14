@@ -9,7 +9,6 @@ Includes:
 - [Depth](#depth)
 - [Fonts](#fonts)
 - [Type](#type)
-- [Cards](#cards)
 - [Accessibility](#accessibility)
 
 ## Usage
@@ -39,34 +38,9 @@ $wdc-color-cinnamon-200: #fcc2bd;
 $wdc-color-cinnamon-100: #ffeeed;
 ```
 
-**Colors**  
-Cinnamon  
-Peach  
-Chili Mango  
-Cantaloupe  
-Sour Lemon  
-Juicy Pear  
-Kiwi  
-Green Apple  
-Watermelon  
-Jewel  
-Toothpaste  
-Blueberry  
-Plum  
-Berry Smoothie  
-Blackberry  
-Island Punch  
-Grape Soda  
-Pomegranate  
-Fruit Punch  
-Root Beer  
-Toasted Marshmallow  
-Coconut  
-Cappuccino  
-Soap  
-Licorice  
-French Vanilla  
-Black Pepper
+**Colors** Cinnamon Peach Chili Mango Cantaloupe Sour Lemon Juicy Pear Kiwi Green Apple Watermelon
+Jewel Toothpaste Blueberry Plum Berry Smoothie Blackberry Island Punch Grape Soda Pomegranate Fruit
+Punch Root Beer Toasted Marshmallow Coconut Cappuccino Soap Licorice French Vanilla Black Pepper
 
 ## Spacing
 
@@ -106,25 +80,17 @@ Five levels of depth available in CSS classes and SASS mixins.
 }
 ```
 
-**Depth -1:** Inset card depth  
-Class: `.wdc-depth-inset`  
-Mixin: `wdc-depth-inset`
+**Depth -1:** Inset card depth Class: `.wdc-depth-inset` Mixin: `wdc-depth-inset`
 
-**Depth 1:** Standard card depth  
-Class: `.wdc-depth-1`  
-Mixin: `wdc-depth-1`
+**Depth 1:** Standard card depth Class: `.wdc-depth-1` Mixin: `wdc-depth-1`
 
-**Depth 2:** Increased card depth on hover  
-Class: `.wdc-depth-2`  
-Mixin: `wdc-depth-2`
+**Depth 2:** Increased card depth on hover Class: `.wdc-depth-2` Mixin: `wdc-depth-2`
 
-**Depth 3:** Active, Task Orch, Pop Ups, Async Notification  
-Class: `.wdc-depth-3`  
-Mixin: `wdc-depth-3`
+**Depth 3:** Active, Task Orch, Pop Ups, Async Notification Class: `.wdc-depth-3` Mixin:
+`wdc-depth-3`
 
-**Depth 4:** Cards on white backgrounds, Menus, Prompt window  
-Class: `.wdc-depth-4`  
-Mixin: `wdc-depth-4`
+**Depth 4:** Cards on white backgrounds, Menus, Prompt window Class: `.wdc-depth-4` Mixin:
+`wdc-depth-4`
 
 ## Fonts
 
@@ -164,9 +130,8 @@ Roboto Mono is included as weight 400.
 Type styles are available as classes and mixins. Using the class is preferred. Use mixins to
 override CSS only if necessary,
 
-**Base Type**  
-Applies base body and font styles. Any type styles must be descendants of `.wdc-type` for the Canvas
-fonts to be used.
+**Base Type** Applies base body and font styles. Any type styles must be descendants of `.wdc-type`
+for the Canvas fonts to be used.
 
 ```html
 <div class="wdc-type">
@@ -200,8 +165,7 @@ h2 {
 ...
 ```
 
-**Headings**  
-Modifies font size and weight.
+**Headings** Modifies font size and weight.
 
 ```html
 <h1 class="wdc-type-h1">H1 Header</h1>
@@ -274,89 +238,6 @@ You can modify any of the type hierarchy with the below variations:
 
 ```html
 <button class="wdc-type-variant-inverse">White Text</button>
-```
-
-## Cards
-
-A card is a flexible and extensible content container. The card container includes options for
-positioning. The card content includes classes for header and body. Card sizes follow the 12 column
-grid system. To adjust sizes append the size modifier to the `.wdc-card-{size}` class. For the
-tablet breakpoint, columns double if less than 50% or round up to 100% if greater than 50%. On
-mobile all card sizes increase to 100%.
-
-**Card Sizes**
-
-```html
-<div class="wdc-card-container">
-  <div class="wdc-card-4">
-    <div class="wdc-card-header">
-      Card Header
-    </div>
-    <div class="wdc-card-body">
-      .wdc-card-4
-    </div>
-  </div>
-  <div class="wdc-card-4">
-    <div class="wdc-card-header">
-      Card Header
-    </div>
-    <div class="wdc-card-body">
-      .wdc-card-4
-    </div>
-  </div>
-  <div class="wdc-card-4">
-    <div class="wdc-card-header">
-      Card Header
-    </div>
-    <div class="wdc-card-body">
-      .wdc-card-4
-    </div>
-  </div>
-</div>
-```
-
-**Card No Padding**
-
-Card padding may be removed by add the `.wdc-card-no-padding` modifier.
-
-```html
-<div class="wdc-card-container">
-  <div class="wdc-card-6 wdc-card-no-padding">
-    <div class="wdc-card-header">
-      Card Header
-    </div>
-    <div class="wdc-card-body">
-      .wdc-card-6.wdc-card-no-padding
-    </div>
-  </div>
-  <div class="wdc-card-6">
-    <div class="wdc-card-header">
-      Card Header
-    </div>
-    <div class="wdc-card-body">
-      .wdc-card-6
-    </div>
-  </div>
-</div>
-```
-
-**Card Positioning**
-
-Card positioning can be changed by adding a modifier to the container class,
-`.wdc-card-container-{position}`. Positioning options are: `start`, `end`, `center`, `between`,
-`around`. These modifiers apply flex positioning to the cards.
-
-```html
-<div class="wdc-card-container wdc-card-container-space-around">
-  <div class="wdc-card-2">
-    <div class="wdc-card-header">
-      Card Header
-    </div>
-    <div class="wdc-card-body">
-      .wdc-card-container .wdc-card-container-space-around
-    </div>
-  </div>
-</div>
 ```
 
 ## Accessibility

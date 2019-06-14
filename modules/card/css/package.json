@@ -1,0 +1,34 @@
+{
+  "name": "@workday/canvas-kit-css-card",
+  "version": "0.0.0",
+  "description": "Card CSS for canvas-kit-css",
+  "homepage": "https://design.workday.com",
+  "author": "Chad Sahlhoff <chad.sahlhoff@workday.com>",
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "lib",
+    "index.scss"
+  ],
+  "style": "dist/canvas-kit-css-card.css",
+  "main": "dist/canvas-kit-css-card.css",
+  "repository": {
+    "type": "git",
+    "url": "https://ghe.megaleo.com/design/canvas-kit-react/tree/master/modules/css/card"
+  },
+  "dependencies": {
+    "@workday/canvas-kit-css-core": "2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "css",
+    "scss",
+    "sass",
+    "workday",
+    "card"
+  ]
+}
