@@ -3,6 +3,8 @@ import {mount} from 'enzyme';
 import IconButton from '../lib/IconButton';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import ReactDOMServer from 'react-dom/server';
+import {axe} from 'jest-axe';
 
 describe('Icon Button', () => {
   const cb = jest.fn();
@@ -106,5 +108,14 @@ describe('Icon Button Accessibility', () => {
         .hasAttribute('disabled')
     ).toEqual(true);
     component.unmount();
+  });
+
+  test('IconButton should pass axe DOM accessibility guidelines', async () => {
+    const html = ReactDOMServer.renderToString(
+      <IconButton altText={'Activity Stream'}>
+        <SystemIcon icon={activityStreamIcon} />{' '}
+      </IconButton>
+    );
+    expect(await axe(html)).toHaveNoViolations();
   });
 });

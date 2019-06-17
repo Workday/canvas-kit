@@ -9,6 +9,7 @@ import canvas, {
 } from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
+import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends React.HTMLAttributes<HTMLInputElement> {
   checked: boolean;
@@ -226,6 +227,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
   public static defaultProps = {
     checked: false,
     label: '',
+    id: uuid(),
   };
 
   public render() {

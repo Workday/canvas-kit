@@ -2,6 +2,8 @@ import * as React from 'react';
 import Checkbox from '../lib/Checkbox';
 import * as renderer from 'react-test-renderer';
 
+jest.mock('uuid/v4', () => () => '123');
+
 describe('Checkbox Snapshots', () => {
   test('renders as expected', () => {
     const component = renderer.create(<Checkbox checked={true} disabled={false} />);

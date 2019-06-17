@@ -153,6 +153,7 @@ exports[`Radio Snapshots renders as expected 1`] = `
       checked={true}
       className="emotion-0 emotion-1"
       disabled={false}
+      id="123"
       type="radio"
     />
     <div
@@ -318,6 +319,7 @@ exports[`Radio Snapshots renders as expected 2`] = `
       checked={true}
       className="emotion-0 emotion-1"
       disabled={true}
+      id="123"
       type="radio"
     />
     <div
@@ -483,6 +485,7 @@ exports[`Radio Snapshots renders as expected 3`] = `
       checked={false}
       className="emotion-0 emotion-1"
       disabled={true}
+      id="123"
       type="radio"
     />
     <div
@@ -653,6 +656,7 @@ exports[`Radio Snapshots renders as expected 4`] = `
       checked={false}
       className="emotion-0 emotion-1"
       disabled={false}
+      id="123"
       type="radio"
     />
     <div
@@ -946,6 +950,7 @@ exports[`Radio Snapshots renders radio group with alert as expected 1`] = `
         checked={true}
         className="emotion-0 emotion-1"
         disabled={false}
+        id="123"
         onChange={[Function]}
         type="radio"
       />
@@ -973,6 +978,7 @@ exports[`Radio Snapshots renders radio group with alert as expected 1`] = `
         checked={false}
         className="emotion-10 emotion-1"
         disabled={false}
+        id="123"
         onChange={[Function]}
         type="radio"
       />
@@ -1268,6 +1274,7 @@ exports[`Radio Snapshots renders radio group with error as expected 1`] = `
         checked={true}
         className="emotion-0 emotion-1"
         disabled={false}
+        id="123"
         onChange={[Function]}
         type="radio"
       />
@@ -1295,6 +1302,7 @@ exports[`Radio Snapshots renders radio group with error as expected 1`] = `
         checked={false}
         className="emotion-10 emotion-1"
         disabled={false}
+        id="123"
         onChange={[Function]}
         type="radio"
       />

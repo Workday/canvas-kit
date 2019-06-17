@@ -59,11 +59,11 @@ exports[`Card Snapshots renders a card with heading 1`] = `
 <div
   className="emotion-4 emotion-5"
 >
-  <div
+  <h3
     className="emotion-0 emotion-1"
   >
     Card Title
-  </div>
+  </h3>
   <div
     className="emotion-2 emotion-3"
   >

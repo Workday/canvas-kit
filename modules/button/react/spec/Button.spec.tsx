@@ -2,6 +2,8 @@ import * as React from 'react';
 import Button, {ButtonProps} from '../lib/Button';
 import TextButton from '../lib/TextButton';
 import {mount} from 'enzyme';
+import ReactDOMServer from 'react-dom/server';
+import {axe} from 'jest-axe';
 
 describe('Button', () => {
   const cb = jest.fn();
@@ -95,6 +97,11 @@ describe('Button Accessibility', () => {
         .hasAttribute('disabled')
     ).toEqual(true);
     component.unmount();
+  });
+
+  test('button should pass axe DOM accessibility guidelines', async () => {
+    const html = ReactDOMServer.renderToString(<Button>Button</Button>);
+    expect(await axe(html)).toHaveNoViolations();
   });
 });
 

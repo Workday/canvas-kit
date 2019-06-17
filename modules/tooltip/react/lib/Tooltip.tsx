@@ -6,6 +6,7 @@ import {keyframes} from 'emotion';
 
 export interface TooltipProps {
   transformOrigin: TransformOrigin;
+  id?: string;
 }
 
 const tooltipAnimation = (transformOrigin: TransformOrigin) => {

@@ -3,6 +3,8 @@ import Radio from '../lib/Radio';
 import RadioGroup from '../lib/RadioGroup';
 import * as renderer from 'react-test-renderer';
 
+jest.mock('uuid/v4', () => () => '123');
+
 describe('Radio Snapshots', () => {
   test('renders as expected', () => {
     const component = renderer.create(<Radio checked={true} disabled={false} />);

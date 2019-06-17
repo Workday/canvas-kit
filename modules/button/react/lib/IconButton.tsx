@@ -15,6 +15,10 @@ export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonTypes
    */
   toggled: boolean;
   /**
+   * Text describing what the icon represents
+   */
+  altText?: string;
+  /**
    * Size of icon button
    */
   buttonSize?: ButtonSizes.Small | ButtonSizes.Medium;
@@ -195,7 +199,12 @@ export default class IconButton extends React.Component<IconButtonProps> {
     const {onToggleChange, ...iconButtonConProps} = this.props;
     return (
       // TODO (breaking change): need to remove buttonType and buttonSize prop here, doesn't make sense to expose
-      <IconButtonCon {...iconButtonConProps} aria-pressed={this.props.toggled}>
+      <IconButtonCon
+        {...iconButtonConProps}
+        aria-label={this.props.altText}
+        aria-pressed={this.props.toggled}
+        title={this.props.altText}
+      >
         {this.props.icon ? <SystemIcon icon={this.props.icon} /> : this.props.children}
       </IconButtonCon>
     );

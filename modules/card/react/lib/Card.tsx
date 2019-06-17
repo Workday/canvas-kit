@@ -49,7 +49,7 @@ const Box = styled('div')<CardProps>(
   ({height}) => height && {height}
 );
 
-const Header = styled('div')(type.h3, {
+const Header = styled('h3')(type.h3, {
   marginBottom: spacing.m,
 });
 

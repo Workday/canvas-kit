@@ -1,6 +1,9 @@
 import * as React from 'react';
 import ColorInput from '../lib/ColorInput';
 import {mount} from 'enzyme';
+import ReactDOMServer from 'react-dom/server';
+import {axe} from 'jest-axe';
+import FormField from '@workday/canvas-kit-react-form-field';
 
 describe('ColorInput', () => {
   const cb = jest.fn();
@@ -88,5 +91,16 @@ describe('ColorInput', () => {
     const ref = React.createRef<HTMLInputElement>();
     mount(<ColorInput inputRef={ref} value={''} />);
     expect(ref.current && ref.current.tagName && ref.current.tagName.toUpperCase()).toBe('INPUT');
+  });
+});
+
+describe('ColorInput Accessibility', () => {
+  test('ColorInput should pass axe DOM accessibility guidelines', async () => {
+    const html = ReactDOMServer.renderToString(
+      <FormField label="Label" inputId="input-plain">
+        <ColorInput />
+      </FormField>
+    );
+    expect(await axe(html)).toHaveNoViolations();
   });
 });

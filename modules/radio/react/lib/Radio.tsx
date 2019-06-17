@@ -6,6 +6,7 @@ import canvas, {
   inputColors,
   spacingNumbers as spacing,
 } from '@workday/canvas-kit-react-core';
+import uuid from 'uuid/v4';
 
 export interface RadioProps extends React.HTMLAttributes<HTMLInputElement> {
   checked: boolean;
@@ -178,6 +179,7 @@ export default class Radio extends React.Component<RadioProps> {
   public static defaultProps = {
     checked: false,
     label: '',
+    id: uuid(),
   };
 
   public render() {

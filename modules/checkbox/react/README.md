@@ -78,6 +78,8 @@ Default: `false`
 > The HTML attribute `id` for the underlying input checkbox and label component. This is required if
 > `label` is defined.
 
+Default: A uniquely generated id
+
 ---
 
 #### `label: string`

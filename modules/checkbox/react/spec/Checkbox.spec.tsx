@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
 import Checkbox from '../lib/Checkbox';
+import ReactDOMServer from 'react-dom/server';
+import {axe} from 'jest-axe';
 
 describe('Checkbox', () => {
   const cb = jest.fn();
@@ -39,5 +41,17 @@ describe('Checkbox', () => {
 
     expect(cb.mock.calls.length).toBe(1);
     component.unmount();
+  });
+});
+
+describe('Checkbox Accessibility', () => {
+  test('Checkbox should pass axe DOM accessibility guidelines', async () => {
+    const html = ReactDOMServer.renderToString(<Checkbox id={'123'} label={'Label'} />);
+    expect(await axe(html)).toHaveNoViolations();
+  });
+
+  test('Checkbox without a defined id should pass axe DOM accessibility guidelines', async () => {
+    const html = ReactDOMServer.renderToString(<Checkbox label={'Label'} />);
+    expect(await axe(html)).toHaveNoViolations();
   });
 });

@@ -188,6 +188,12 @@ Default: `undefined`
 
 ---
 
+#### `altText: string`
+
+> Text describing what the icon represents.
+
+---
+
 #### `onToggleChange: (toggled: boolean | undefined) => void`
 
 > The callback that is fired when a button toggle prop changes This is true when the toggle changes

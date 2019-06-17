@@ -248,6 +248,7 @@ exports[`Checkbox Snapshots alert renders as expected 1`] = `
       checked={false}
       className="emotion-0 emotion-1"
       disabled={false}
+      id="123"
       type="checkbox"
     />
     <div
@@ -522,6 +523,7 @@ exports[`Checkbox Snapshots checked alert renders as expected 1`] = `
       checked={true}
       className="emotion-0 emotion-1"
       disabled={false}
+      id="123"
       type="checkbox"
     />
     <div
@@ -796,6 +798,7 @@ exports[`Checkbox Snapshots checked error renders as expected 1`] = `
       checked={true}
       className="emotion-0 emotion-1"
       disabled={false}
+      id="123"
       type="checkbox"
     />
     <div
@@ -1070,6 +1073,7 @@ exports[`Checkbox Snapshots error renders as expected 1`] = `
       checked={false}
       className="emotion-0 emotion-1"
       disabled={false}
+      id="123"
       type="checkbox"
     />
     <div
@@ -1303,6 +1307,7 @@ exports[`Checkbox Snapshots renders as expected 1`] = `
       checked={true}
       className="emotion-0 emotion-1"
       disabled={false}
+      id="123"
       type="checkbox"
     />
     <div
@@ -1532,6 +1537,7 @@ exports[`Checkbox Snapshots renders as expected 2`] = `
       checked={true}
       className="emotion-0 emotion-1"
       disabled={true}
+      id="123"
       type="checkbox"
     />
     <div
@@ -1771,6 +1777,7 @@ exports[`Checkbox Snapshots renders as expected 3`] = `
       checked={false}
       className="emotion-0 emotion-1"
       disabled={true}
+      id="123"
       type="checkbox"
     />
     <div
@@ -1796,6 +1803,7 @@ exports[`Checkbox Snapshots renders as expected 3`] = `
   <label
     className="emotion-9 emotion-10"
     disabled={true}
+    htmlFor="123"
   >
     checkbox
   </label>
@@ -2019,6 +2027,7 @@ exports[`Checkbox Snapshots renders as expected 4`] = `
       checked={false}
       className="emotion-0 emotion-1"
       disabled={false}
+      id="123"
       type="checkbox"
     />
     <div
@@ -2044,6 +2053,7 @@ exports[`Checkbox Snapshots renders as expected 4`] = `
   <label
     className="emotion-9 emotion-10"
     disabled={false}
+    htmlFor="123"
   >
     checkbox
   </label>

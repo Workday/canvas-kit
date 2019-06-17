@@ -47,11 +47,13 @@ class TooltipExample extends React.Component<{}, TooltipExampleState> {
           onMouseLeave={this.close}
           onFocus={this.open}
           onBlur={this.close}
+          aria-describedBy={'tooltip-id'}
+          tabIndex={0}
         >
           Hover Over Me
         </div>
         <Popper open={open} anchorEl={this.state.anchorEl} placement={'bottom'}>
-          <Tooltip>Close</Tooltip>
+          <Tooltip id={'tooltip-id'}>Close</Tooltip>
         </Popper>
       </div>
     );
@@ -98,3 +100,7 @@ Default:
   vertical: 'top',
 }
 ```
+
+#### `id: string`
+
+> Unique id of the tooltip
