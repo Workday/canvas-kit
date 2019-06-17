@@ -108,11 +108,17 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     },
     '&:checked:focus ~ div:first-of-type': {
       ...focusRing(2, 2, false),
+      '& span': {
+        marginLeft: '-7px',
+      },
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
         border: `1px solid ${inputColors.border}`,
         boxShadow: 'none',
+        '& span': {
+          marginLeft: '-6px',
+        },
       },
       '&:checked ~ div:first-of-type': {
         borderColor: colors.blueberry400,
@@ -197,6 +203,7 @@ const CheckboxCheck = styled('div')<Pick<CheckboxProps, 'checked'>>(
       // This is necessary because we're using max-width: 100% in the CheckboxCheck container
       // in order for the Checkbox to render properly on IE 11
       marginLeft: '-6px',
+      transition: 'margin 200ms ease',
     },
   },
   ({checked}) => ({
