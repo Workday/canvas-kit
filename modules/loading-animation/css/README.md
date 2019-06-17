@@ -28,7 +28,3 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
   <span />
 </div>
 ```
-
-### Loading Spinner
-
-The loading spinner will be used to replace all current instances of the loading spinner.

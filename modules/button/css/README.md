@@ -152,7 +152,7 @@ applied to form controls using the classes below.
 <button class="wdc-btn wdc-btn-disabled">Disabled Button</button>
 ```
 
-## Types
+## Variants
 
 ### Icon Button
 
