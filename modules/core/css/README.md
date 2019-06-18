@@ -38,9 +38,34 @@ $wdc-color-cinnamon-200: #fcc2bd;
 $wdc-color-cinnamon-100: #ffeeed;
 ```
 
-**Colors** Cinnamon Peach Chili Mango Cantaloupe Sour Lemon Juicy Pear Kiwi Green Apple Watermelon
-Jewel Toothpaste Blueberry Plum Berry Smoothie Blackberry Island Punch Grape Soda Pomegranate Fruit
-Punch Root Beer Toasted Marshmallow Coconut Cappuccino Soap Licorice French Vanilla Black Pepper
+**Colors**  
+Cinnamon  
+Peach  
+Chili Mango  
+Cantaloupe  
+Sour Lemon  
+Juicy Pear  
+Kiwi  
+Green Apple  
+Watermelon  
+Jewel  
+Toothpaste  
+Blueberry  
+Plum  
+Berry Smoothie  
+Blackberry  
+Island Punch  
+Grape Soda  
+Pomegranate  
+Fruit Punch  
+Root Beer  
+Toasted Marshmallow  
+Coconut  
+Cappuccino  
+Soap  
+Licorice  
+French Vanilla  
+Black Pepper
 
 ## Spacing
 
@@ -80,17 +105,25 @@ Five levels of depth available in CSS classes and SASS mixins.
 }
 ```
 
-**Depth -1:** Inset card depth Class: `.wdc-depth-inset` Mixin: `wdc-depth-inset`
+**Depth -1:** Inset card depth  
+Class: `.wdc-depth-inset`  
+Mixin: `wdc-depth-inset`
 
-**Depth 1:** Standard card depth Class: `.wdc-depth-1` Mixin: `wdc-depth-1`
+**Depth 1:** Standard card depth  
+Class: `.wdc-depth-1`  
+Mixin: `wdc-depth-1`
 
-**Depth 2:** Increased card depth on hover Class: `.wdc-depth-2` Mixin: `wdc-depth-2`
+**Depth 2:** Increased card depth on hover  
+Class: `.wdc-depth-2`  
+Mixin: `wdc-depth-2`
 
-**Depth 3:** Active, Task Orch, Pop Ups, Async Notification Class: `.wdc-depth-3` Mixin:
-`wdc-depth-3`
+**Depth 3:** Active, Task Orch, Pop Ups, Async Notification  
+Class: `.wdc-depth-3`  
+Mixin: `wdc-depth-3`
 
-**Depth 4:** Cards on white backgrounds, Menus, Prompt window Class: `.wdc-depth-4` Mixin:
-`wdc-depth-4`
+**Depth 4:** Cards on white backgrounds, Menus, Prompt window  
+Class: `.wdc-depth-4`  
+Mixin: `wdc-depth-4`
 
 ## Fonts
 
@@ -130,8 +163,9 @@ Roboto Mono is included as weight 400.
 Type styles are available as classes and mixins. Using the class is preferred. Use mixins to
 override CSS only if necessary,
 
-**Base Type** Applies base body and font styles. Any type styles must be descendants of `.wdc-type`
-for the Canvas fonts to be used.
+**Base Type**  
+Applies base body and font styles. Any type styles must be descendants of `.wdc-type` for the Canvas
+fonts to be used.
 
 ```html
 <div class="wdc-type">
@@ -165,7 +199,8 @@ h2 {
 ...
 ```
 
-**Headings** Modifies font size and weight.
+**Headings**  
+Modifies font size and weight.
 
 ```html
 <h1 class="wdc-type-h1">H1 Header</h1>
