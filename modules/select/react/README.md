@@ -121,6 +121,12 @@ Default: `false`
 
 ### Required
 
+##### `disabled: boolean;`
+
+> Whether or not the SelectOption is disabled
+
+Default: `false`
+
 ### Optional
 
 ##### `value?: string`
@@ -130,9 +136,3 @@ Default: `false`
 ##### `label?: string;`
 
 > The label of the SelectOption
-
-##### `disabled?: boolean;`
-
-> Whether or not the SelectOption is disabled
-
-Default: `false`

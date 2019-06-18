@@ -7,7 +7,7 @@ import * as React from 'react';
 export interface SelectOptionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
   value?: string;
   label?: string;
-  disabled?: boolean;
+  disabled: boolean;
 }
 
 export default class SelectOption extends React.Component<SelectOptionProps> {
