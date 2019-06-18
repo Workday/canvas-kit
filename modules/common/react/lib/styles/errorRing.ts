@@ -8,12 +8,10 @@ export default function errorRing(error?: ErrorType): CSSObject {
 
   if (error === ErrorType.Error) {
     errorBorderColor = inputColors.error.border;
-    errorBoxShadow = `inset 0 0 0 2px ${inputColors.error.border}`;
+    errorBoxShadow = `inset 0 0 0 1px ${inputColors.error.border}`;
   } else if (error === ErrorType.Alert) {
     errorBorderColor = colors.cantaloupe600;
-    errorBoxShadow = `inset 0 0 0 1px ${colors.cantaloupe600}, inset 0 0 0 3px ${
-      inputColors.warning.border
-    }`;
+    errorBoxShadow = `inset 0 0 0 2px ${inputColors.warning.border}`;
   } else {
     return {};
   }
