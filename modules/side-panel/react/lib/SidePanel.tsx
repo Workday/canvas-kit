@@ -48,7 +48,7 @@ const SidePanelContainer = styled('div')<SidePanelProps>(
     boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
-    transition: 'width 200ms ease',
+    transition: 'width 600ms ease',
     position: 'absolute',
   },
   ({open}) => ({
@@ -90,7 +90,6 @@ const SidePanelContainer = styled('div')<SidePanelProps>(
 const ChildrenContainer = styled('div')<Pick<SidePanelProps, 'openWidth'>>(
   {
     transition: 'none',
-    overflow: 'hidden',
     zIndex: 1, // show above SidePanelFooter when screen is small vertically
   },
   ({openWidth}) => ({

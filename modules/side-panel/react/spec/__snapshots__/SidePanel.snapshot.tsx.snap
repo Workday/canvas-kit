@@ -4,7 +4,6 @@ exports[`SidePanel Snapshots does not render header when side panel is closed 1`
 .emotion-0 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -20,8 +19,8 @@ exports[`SidePanel Snapshots does not render header when side panel is closed 1`
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -65,7 +64,6 @@ exports[`SidePanel Snapshots renders a closed side panel 1`] = `
 .emotion-0 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -81,8 +79,8 @@ exports[`SidePanel Snapshots renders a closed side panel 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -126,7 +124,6 @@ exports[`SidePanel Snapshots renders a side panel from the right 1`] = `
 .emotion-2 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -160,8 +157,8 @@ exports[`SidePanel Snapshots renders a side panel from the right 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -210,8 +207,8 @@ exports[`SidePanel Snapshots renders a side panel header 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -228,7 +225,6 @@ exports[`SidePanel Snapshots renders a side panel header 1`] = `
 .emotion-2 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -278,7 +274,6 @@ exports[`SidePanel Snapshots renders a side panel with a Gray background when op
 .emotion-2 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -312,8 +307,8 @@ exports[`SidePanel Snapshots renders a side panel with a Gray background when op
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -362,8 +357,8 @@ exports[`SidePanel Snapshots renders a side panel with children elements 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -380,7 +375,6 @@ exports[`SidePanel Snapshots renders a side panel with children elements 1`] = `
 .emotion-0 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -430,7 +424,6 @@ exports[`SidePanel Snapshots renders a toggle button 1`] = `
 .emotion-0 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -446,8 +439,8 @@ exports[`SidePanel Snapshots renders a toggle button 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -657,8 +650,8 @@ exports[`SidePanel Snapshots renders as expected 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -675,7 +668,6 @@ exports[`SidePanel Snapshots renders as expected 1`] = `
 .emotion-0 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -718,8 +710,8 @@ exports[`SidePanel Snapshots renders side panel on the left 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -736,7 +728,6 @@ exports[`SidePanel Snapshots renders side panel on the left 1`] = `
 .emotion-2 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -786,7 +777,6 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
 .emotion-0 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -843,8 +833,8 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -1005,7 +995,6 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
 .emotion-2 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
@@ -1039,8 +1028,8 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -1247,8 +1236,8 @@ exports[`SidePanel Snapshots renders side panel with a different width 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -1265,7 +1254,6 @@ exports[`SidePanel Snapshots renders side panel with a different width 1`] = `
 .emotion-0 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 900px;
 }
@@ -1308,8 +1296,8 @@ exports[`SidePanel Snapshots renders standard side panel 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-transition: width 200ms ease;
-  transition: width 200ms ease;
+  -webkit-transition: width 600ms ease;
+  transition: width 600ms ease;
   position: absolute;
   -webkit-align-items: px;
   -webkit-box-align: px;
@@ -1326,7 +1314,6 @@ exports[`SidePanel Snapshots renders standard side panel 1`] = `
 .emotion-0 {
   -webkit-transition: none;
   transition: none;
-  overflow: hidden;
   z-index: 1;
   width: 300px;
 }
