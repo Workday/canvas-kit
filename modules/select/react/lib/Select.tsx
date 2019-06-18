@@ -70,16 +70,22 @@ const SelectDropdownIcon = styled(SystemIcon)({
   },
 });
 
-const SelectWrapper = styled('div')<SelectProps>(({grow, disabled}) => ({
-  display: grow ? 'block' : 'inline-block',
-  position: 'relative',
-  '& span': {
-    backgroundColor: disabled ? colors.soap100 : colors.frenchVanilla100,
+const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
+  {
+    position: 'relative',
   },
-  '&:hover path': {
-    fill: disabled ? undefined : colors.licorice500,
-  },
-}));
+  ({grow}) => ({
+    display: grow ? 'block' : 'inline-block',
+  }),
+  ({disabled}) => ({
+    '& span': {
+      backgroundColor: disabled ? colors.soap100 : colors.frenchVanilla100,
+    },
+    '&:hover path': {
+      fill: disabled ? undefined : colors.licorice500,
+    },
+  })
+);
 
 export default class Select extends React.Component<SelectProps> {
   static defaultProps = {
@@ -87,7 +93,7 @@ export default class Select extends React.Component<SelectProps> {
   };
 
   public render() {
-    const {error, disabled, grow, children, value, onChange, ...otherProps} = this.props;
+    const {error, disabled, grow, children, value, onChange, ...elemProps} = this.props;
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
@@ -97,7 +103,7 @@ export default class Select extends React.Component<SelectProps> {
           error={error}
           value={value}
           onChange={onChange}
-          {...otherProps}
+          {...elemProps}
         >
           {children}
         </SelectContainer>

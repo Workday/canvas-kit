@@ -63,7 +63,9 @@ import FormField from '@workday/canvas-kit-react-form-field';
 
 ### Required
 
-#### `children: React.ReactElement<Option>[]`
+None
+
+#### `children: React.ReactElement<SelectOption >[]`
 
 A select component must have children of type `SelectOption`:
 
@@ -107,7 +109,19 @@ A select component must have children of type `SelectOption`:
 
 Default: `undefined`
 
+### Optional
+
+#### `disabled: boolean`
+
+> Whether or not the select is disabled (not able to be selected)
+
+Default: `false`
+
 # Canvas Kit SelectOption
+
+### Required
+
+### Optional
 
 ##### `value?: string`
 
@@ -120,13 +134,5 @@ Default: `undefined`
 ##### `disabled?: boolean;`
 
 > Whether or not the SelectOption is disabled
-
-Default: `false`
-
-### Optional
-
-#### `disabled: boolean`
-
-> Whether or not the select is disabled (not able to be selected)
 
 Default: `false`
