@@ -1,4 +1,5 @@
 export {default as canvas} from '@workday/canvas-kit-react-core';
+export * from '@workday/canvas-kit-react-action-bar';
 export * from '@workday/canvas-kit-react-avatar';
 export * from '@workday/canvas-kit-react-button';
 export * from '@workday/canvas-kit-react-card';
@@ -6,7 +7,6 @@ export * from '@workday/canvas-kit-react-checkbox';
 export * from '@workday/canvas-kit-react-color-picker';
 export * from '@workday/canvas-kit-react-common';
 export * from '@workday/canvas-kit-react-cookie-banner';
-export * from '@workday/canvas-kit-react-action-bar';
 export * from '@workday/canvas-kit-react-fonts';
 export * from '@workday/canvas-kit-react-form-field';
 export * from '@workday/canvas-kit-react-header';
