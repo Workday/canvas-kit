@@ -1,0 +1,303 @@
+# API & Pattern Guidelines
+
+Note: This repo hasn't seen a full audit, so you may find examples that contradict these guidelines.
+Some of the below rules are inspired by painpoints we've encountered in this project.
+
+- [Canvas](#canvas)
+- [Naming](#naming)
+  - [Props](#props)
+  - [T-shirt Sizes](#t-shirt-sizes)
+  - [Theme Types](#theme-types)
+  - [Event Handlers](#event-handlers)
+  - [Enums](#enums)
+- [Patterns](#patterns)
+  - [Event Handlers](#event-handlers-1)
+  - [Grow Interface](#grow-interface)
+  - [Static Class Variables](#static-class-variables)
+  - [Input Provider](#input-provider)
+  - [Prop Spread Behavior](#prop-spread-behavior)
+  - [Controlled Components](#controlled-components)
+  - [Ref Usage](#ref-usage)
+  - [Accessibility](#accessibility)
+  - [Child Mapping](#child-mapping)
+  - [Logic Flow](#logic-flow)
+- [Code Style](#code-style)
+  - [Default Props](#default-props)
+  - [Class Function Binding](#class-function-binding)
+  - [Element Choice](#element-choice)
+  - [Styled Components](#styled-components)
+  - [Exports](#exports)
+- [Documentation](#documentation)
+  - [Readmes](#readmes)
+  - [Storybook Structure](#storybook-structure)
+
+## Canvas
+
+- Ensure you're always using the Canvas primitives and enums wherever possible for things like:
+  - Spacing (e.g. `canvas.spacing.s`)
+  - Depth (e.g. `canvas.depth[2]`)
+  - Type (e.g. `...canvas.type.h1`). Always start from a type hierarchy level and override if
+    needed.
+- Use the provided types (e.g. `CanvasSpacingValue`, `CanvasSpacingNumber`, etc.) to restrict prop
+  values
+- Check out the
+  [`@workday/canvas-kit-react-core` README](https://github.com/Workday/canvas-kit/blob/master/modules/core/react/README.md)
+  for the latest and greatest Canvas helpers.
+
+## Naming
+
+#### Props
+
+- Prop names should never include the component name (e.g. `type`, not `buttonType`)
+- Use the same props for the same concepts across components
+- Avoid names that reference color, position, and size. For example:
+  - `blueIcon` can be bad because it may not be blue to everyone and changing colors or making
+    colors variable is a breaking change.
+  - `leftIcon` can be bad because we can change the position with RTL or add something to the left
+    of that, then it wouldn't make sense anymore.
+  - `mediumIcon` can be bad if we add another size in between... then which one is medium? Is it
+    mediumLarge now?
+
+#### T-shirt Sizes
+
+- Always use the shortest enumeration (`xs, s, m, l, xl`, etc.)
+- **Do not** use longer versions (e.g. `sm`)
+
+#### Theme Types
+
+- Default - normal state/color for use on light background
+- Inverse - inverted colors for use on a dark background
+- _Note:_ If you encounter somewhere you need another theme type, please let us know so we can
+  document it
+
+#### Event Handlers
+
+- Always use standard `on{Descriptor}{Event}` naming (`onClick`, `onChange`, `onBreakpointChange`,
+  etc.)
+- Only use a descriptor if:
+  - You need more context
+  - There is already a handler for that type of event (e.g. `onChange`, `onValidColorChange`)
+
+#### Enums
+
+- Singular
+- PascalCase
+- Include component name unless it's a generic enum shared across components. Since we export our
+  enums, this prevents naming clashes
+- Exclude component name in static class variables (`Button.Type` vs. `Button.ButtonType`):
+
+  ```tsx
+  class Button extends React.Component<ButtonProps> {
+    public static Type = ButtonType;
+    public static Size = ButtonSize;
+    ...
+  }
+  // Results in
+  Button.Type.Primary
+  ```
+
+## Patterns
+
+#### Event Handlers
+
+- Use standard browser events wherever possible
+- All event handlers should receive an event unless there's a good reason otherwise. This is for
+  consumer predictability. In other words, always opt for `onChange: e => void` over
+  `onChange: () => void` or `onChange: value => void`, etc.
+
+#### Grow Interface
+
+- If your component needs to grow to fill to it's container, extend `GrowthInterface` (e.g.
+  `export interface MyComponentProps extends GrowthBehavior`)
+- Then use the `grow` boolean prop in your styles to acheive the desired effect (e.g.
+  `width: grow ? '100%' : undefined`)
+
+#### Static Class Variables
+
+- Expose enums you expect to be commonly used on the class to reduce imports.
+
+  ```tsx
+  class Button extends React.Component<ButtonProps> {
+    public static Type = ButtonType;
+    public static Size = ButtonSize;
+    ...
+  }
+  // Results in
+  <Button type={Button.Type.Primary} />
+  ```
+
+- Ensure you leave out the component name for the static variable so it's not repeated (e.g.
+  `Button.Type.Primary`, not `Button.ButtonType.Primary`)
+
+#### Input Provider
+
+- All Canvas Kit components should support a wrapping `InputProvider` component to provide the
+  cleanest experience for mouse users. Read the docs
+  [here](https://github.com/Workday/canvas-kit/tree/master/modules/core/react#input-provider).
+- Do not use `InputProvider` within your components. It is meant to be a higher order component
+  wrapping a whole application of Canvas components
+- Make sure you provide fully accessible styling by default, and only override for mouse usage.
+
+```tsx
+[`[data-whatinput='mouse'] &:focus,
+  [data-whatinput='touch'] &:focus,
+  [data-whatinput='pointer'] &:focus`]: {
+  outline: 'none',
+  border: 'none',
+},
+```
+
+#### Prop Spread Behavior
+
+- Extend the interface of the primary element/component in your component (e.g.
+  `export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>`)
+- Intentionally destructure your props so that every prop is assigned. This allows you to use spread
+  the way it was intended.
+
+```tsx
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  type: ButtonType,
+  size: ButtonSize,
+  icon: CanvasIcon
+}
+
+// ...somewhere in your button render()
+const { type, size, icon, ...elemProps } = this.props
+<ButtonContainer type={type} size={size} icon={icon} {...elemProps} />
+```
+
+- Only spread props on one element/component (or create a specific prop to spread (e.g.
+  `inputProps`))
+
+#### Controlled Components
+
+- We opt for controlled components wherever possible.
+- We aim to manage the least amount of state within our components as possible.
+- For input type components:
+
+  - Always stick with the default `value` and `onChange` if you can
+  - Deviate where it makes sense and/or is required (e.g. `checked` and `onChange` for checkboxes).
+
+#### Ref Usage
+
+- When a consumer
+  [needs a reference to an underlying element](https://reactjs.org/docs/refs-and-the-dom.html#when-to-use-refs)
+  (to manage focus, check DOM ancestors, etc.), use emotion components' `innerRef` prop. Note: with
+  emotion 10,
+  this[ will change to `ref`](https://medium.com/emotion-js/announcing-emotion-10-f1a4b17b8ccd#71bb)
+- When providing a ref prop, indicate what element it's tied to (generally by using the type of
+  element if it's descriptive enough for your component). E.g. `inputRef`
+
+#### Accessibility
+
+- Use aria labels where required
+- Ensure full keyboard navigation
+- Check whether tabbing is enough or whether additional keyboard navigation is required (e.g. arrow
+  keys)
+- When in doubt, ask an expert!
+
+#### Child Mapping
+
+- We often add or augment props to React children within our components. Use `React.Children.map`
+  along with `React.cloneElement()`
+- Use `React.isValidElement()` if you want to make sure it's a React component and not a regular DOM
+  node.
+- If you're adding any event handlers to the children, make sure you also support existing ones
+
+#### Logic Flow
+
+- If vs. Switch: use switch statements when code branching is determined by the value of a single
+  variable or expression.
+- Nested Ternaries: maximum two levels and only if it's very obvious. If you have two or more
+  levels, try rewriting it as if/else statements and compare the complexity & scanability.
+- Opt for
+  [pure functions](https://medium.com/@jamesjefferyuk/javascript-what-are-pure-functions-4d4d5392d49c)
+  wherever possible. They make unit testing easier and always behave as expected. Because React can
+  be a bit of a magic black box, sometimes `this.x` values are not what you expect.
+
+```ts
+foo(number, bar) => {
+  return number * bar
+}
+
+foo(this.number, this.bar);
+
+// is a much better option than
+
+foo() => {
+  return this.number * this.bar
+}
+
+foo();
+```
+
+## Code Style
+
+#### Default Props
+
+- Use `defaultProps` whenever you find yourself checking for the existence of something before
+  executing branching logic. It significantly reduces conditionals, facilitating easier testing and
+  less bugs.
+- Any prop included in `defaultProps` should be typed as required in the component interface.
+  However, it can still be documented as optional in the README. You can find more details
+  [here](https://stackoverflow.com/questions/37282159/default-property-value-in-react-component-using-typescript)
+
+#### Class Function Binding
+
+- It used to be common to bind class functions in the constructor (i.e.
+  `this.onChange = this.onChange.bind(this)`).
+- We recommend using an arrow function for your class function to avoid this
+- Since we avoid state where possible, doing so often enables you to remove the constructor
+
+#### Element Choice
+
+- Use the correct native element wherever possible. This enables us to get as much behavior for free
+  from the browser.
+- For example, if something peforms an action on a click, it should generally use a `button` to get
+  keypress handling for free.
+
+#### Styled Components
+
+- Always initialize styled components outside of your render function. Failing to do this will
+  result in a big performance hit.
+- When specifying the props a styled component can accept, it is up to you do define how restrictive
+  you should be. You can accept any prop that the component accepts (e.g.
+  `styled('div')<ComponentProps>`) or only accept a subset (e.g.
+  `styled('div')<Pick<ComponentProps, 'someProp' | 'anotherProp'>>`)
+- We generally prefer the use of `styled` components over using the `css` function. However, `css`
+  can be handy for some basic styling.
+
+#### Exports
+
+- Export the component most closely tied with the name of the package as the default
+- Also export the above component as a named export
+- Export everything else as a named export (`export * from ...`). Consider the naming of the things
+  you're exporting (interfaces, enums, etc.) so you don't encounter any clashes.
+
+```ts
+// inside MyComponent/index.ts
+import MyComponent from './lib/MyComponent';
+import AnotherComponent from './lib/AnotherComponent';
+
+export default MyComponent;
+export {MyComponent, AnotherComponent};
+export * from './lib/MyComponent';
+export * from './lib/AnotherComponent';
+```
+
+## Documentation
+
+#### Readmes
+
+- Follow our README template
+- Outline static properties (e.g. `Button.Type`), required props, and optional props
+- Usage example should be as standalone as possible. As long as it's not too complex, this snippet
+  should be a working implementation so consumers can copy/paste
+
+#### Storybook Structure
+
+- Always opt for the most referenceable code in your stories. Storybook helps us test, but many
+  consumers use it as an example of how to implement components.
+- Avoid helper functions to reduce duplication that make it harder to parse.
+- Avoid sharing wrappers, components, etc. from other story files.
+- Essentially, try to keep each example as standalone and referencable as possible.

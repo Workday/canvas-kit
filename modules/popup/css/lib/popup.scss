@@ -1,0 +1,248 @@
+.wdc-popup {
+  @include wdc-type();
+  @include wdc-type-body();
+  @include wdc-depth-3();
+  display: inline-block;
+  background-color: $_wdc-popup-bg-color;
+  padding: $wdc-spacing-s;
+  border-radius: 3px;
+  border: 1px solid $_wdc-popup-border-color;
+  position: relative;
+  width: max-content;
+  max-width: $_wdc-popup-max-width;
+
+  // Fallback for IE11
+  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+    width: auto;
+    min-width: $_wdc-popup-menu-min-width;
+  }
+
+  // Fallback for Edge and browsers that don't support max-content
+  @supports not (width: max-content) {
+    width: auto;
+    min-width: $_wdc-popup-menu-min-width;
+  }
+
+  &-menu {
+    padding: $wdc-spacing-xxs 0;
+    min-width: $_wdc-popup-menu-min-width;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        color: $wdc-color-black-pepper-300;
+        padding: $wdc-spacing-xxxs $wdc-spacing-s;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        &.wdc-popup-menu-item-focus,
+        &:focus,
+        &.wdc-popup-menu-item-hover,
+        &:hover {
+          color: $wdc-color-french-vanilla-100;
+          background-color: $wdc-color-blueberry-500;
+        }
+      }
+    }
+  }
+
+  &-right,
+  &-left,
+  &-top,
+  &-bottom {
+    &:before,
+    &:after {
+      content: ' ';
+      position: absolute;
+      border-style: solid;
+      border-color: transparent;
+    }
+
+    &:before {
+      border-width: $_wdc-popup-arrow-size + 1px;
+    }
+
+    &:after {
+      border-width: $_wdc-popup-arrow-size;
+    }
+  }
+
+  &-right {
+    margin-left: $wdc-spacing-s;
+
+    &:before,
+    &:after {
+      top: $_wdc-popup-arrow-offset;
+      right: 100%;
+    }
+
+    &:before {
+      margin-top: -($_wdc-popup-arrow-size + 1px);
+      border-right-color: $_wdc-popup-border-color;
+    }
+
+    &:after {
+      margin-top: -$_wdc-popup-arrow-size;
+      border-right-color: $_wdc-popup-bg-color;
+    }
+  }
+
+  &-left {
+    margin-right: $wdc-spacing-s;
+
+    &:before,
+    &:after {
+      top: $_wdc-popup-arrow-offset;
+      left: 100%;
+    }
+
+    &:before {
+      margin-top: -($_wdc-popup-arrow-size + 1px);
+      border-left-color: $_wdc-popup-border-color;
+    }
+
+    &:after {
+      margin-top: -$_wdc-popup-arrow-size;
+      border-left-color: $_wdc-popup-bg-color;
+    }
+  }
+
+  &-top {
+    margin-bottom: $wdc-spacing-s;
+
+    &:before,
+    &:after {
+      top: 100%;
+      left: $_wdc-popup-arrow-offset;
+    }
+
+    &:before {
+      margin-left: -($_wdc-popup-arrow-size + 1px);
+      border-top-color: $_wdc-popup-border-color;
+    }
+
+    &:after {
+      margin-left: -$_wdc-popup-arrow-size;
+      border-top-color: $_wdc-popup-bg-color;
+    }
+  }
+
+  &-bottom {
+    margin-top: $wdc-spacing-s;
+
+    &:before,
+    &:after {
+      bottom: 100%;
+      left: $_wdc-popup-arrow-offset;
+    }
+
+    &:before {
+      margin-left: -($_wdc-popup-arrow-size + 1px);
+      border-bottom-color: $_wdc-popup-border-color;
+    }
+
+    &:after {
+      margin-left: -$_wdc-popup-arrow-size;
+      border-bottom-color: $_wdc-popup-bg-color;
+    }
+  }
+
+  &-tooltip {
+    padding: $wdc-spacing-xs $wdc-spacing-s;
+    font-size: 14px;
+    white-space: nowrap;
+    min-width: auto;
+    max-width: $_wdc-popup-tooltip-max-width;
+
+    &.wdc-popup-right,
+    &.wdc-popup-left {
+      &:before,
+      &:after {
+        top: 50%;
+      }
+    }
+  }
+
+  .wdc-popup-title {
+    font-weight: 500;
+    margin-bottom: $wdc-spacing-xxs;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &:not(:first-child) {
+      margin-top: $wdc-spacing-xxxs;
+    }
+  }
+}
+
+.wdc-popup-container {
+  display: inline-block;
+  position: relative;
+
+  .wdc-popup {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    &-right,
+    &-left,
+    &-top,
+    &-bottom {
+      position: absolute;
+      z-index: $_wdc-popup-z-index;
+    }
+
+    &-left,
+    &-right {
+      top: -$wdc-spacing-s;
+    }
+
+    &-right {
+      left: calc(100%);
+    }
+
+    &-left {
+      right: calc(100%);
+    }
+
+    &-top,
+    &-bottom {
+      left: 0;
+    }
+
+    &-top {
+      bottom: 100%;
+    }
+
+    &-bottom {
+      top: 100%;
+    }
+
+    &-tooltip {
+      &.wdc-popup-left,
+      &.wdc-popup-right {
+        top: -$wdc-spacing-xs;
+      }
+    }
+  }
+
+  &.wdc-popup-hover,
+  &:hover {
+    .wdc-popup {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

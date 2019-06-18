@@ -1,0 +1,32 @@
+.wdc-page-header {
+  height: 84px;
+  background-image: linear-gradient(94deg, $wdc-color-blueberry-500, $wdc-color-blueberry-400);
+  color: #fff;
+
+  .wdc-page-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding-left: $wdc-spacing-xl;
+    padding-right: $wdc-spacing-xl;
+  }
+
+  .wdc-marketing-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .wdc-page-header-title {
+    @include wdc-type-h1();
+    color: $wdc-color-french-vanilla-100;
+    padding: $wdc-spacing-xs 0;
+    margin: 0;
+  }
+
+  .wdc-icon-list {
+    margin-left: $wdc-spacing-l;
+  }
+}

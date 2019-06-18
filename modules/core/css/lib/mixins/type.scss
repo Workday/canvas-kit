@@ -1,0 +1,130 @@
+@import '../variables/type';
+
+@mixin wdc-type() {
+  font-family: $wdc-font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+// Data viz
+@mixin wdc-type-data-viz-1() {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 68px;
+  color: $wdc-color-black-pepper-400;
+}
+@mixin wdc-type-data-viz-2() {
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 40px;
+  color: $wdc-color-black-pepper-400;
+}
+
+// Headers
+@mixin wdc-type-h1() {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 36px;
+  color: $wdc-color-black-pepper-400;
+}
+
+@mixin wdc-type-h2() {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: $wdc-color-black-pepper-400;
+}
+
+@mixin wdc-type-h3() {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: $wdc-color-black-pepper-400;
+}
+
+@mixin wdc-type-h4() {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: $wdc-color-black-pepper-400;
+}
+
+@mixin wdc-type-h5() {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $wdc-color-black-pepper-400;
+}
+
+// Body
+@mixin wdc-type-body-1() {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: $wdc-color-black-pepper-300;
+}
+@mixin wdc-type-body() {
+  @include wdc-type-body-1();
+}
+@mixin wdc-type-body-2() {
+  @include wdc-type-body();
+  font-size: 13px;
+}
+
+// Small
+@mixin wdc-type-small() {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: $wdc-color-black-pepper-300;
+}
+
+// Variations
+@mixin wdc-type-variant-label() {
+  font-weight: 500;
+}
+@mixin wdc-type-variant-button() {
+  font-weight: 500;
+}
+@mixin wdc-type-variant-btn() {
+  @include wdc-type-variant-button();
+}
+@mixin wdc-type-variant-caps() {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+@mixin wdc-type-variant-hint() {
+  color: $wdc-color-licorice-300;
+}
+@mixin wdc-type-variant-error() {
+  color: $wdc-color-peach-500;
+}
+@mixin wdc-type-variant-link() {
+  color: $wdc-color-blueberry-500;
+  text-decoration: none;
+  cursor: pointer;
+
+  // States
+  &:hover,
+  &:active {
+    text-decoration: underline;
+    color: $wdc-color-blueberry-500;
+  }
+
+  &.wdc-type-variant-link-focus,
+  &:focus {
+    background: $wdc-color-blueberry-100;
+    text-decoration: underline;
+    outline: 2px solid $wdc-color-blueberry-100;
+  }
+}
+@mixin wdc-type-variant-mono() {
+  font-family: $wdc-font-family-mono;
+}
+@mixin wdc-type-variant-inverse() {
+  color: $wdc-color-french-vanilla-100;
+}
+@mixin wdc-type-variant-white() {
+  @include wdc-type-variant-inverse();
+}

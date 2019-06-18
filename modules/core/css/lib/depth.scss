@@ -1,0 +1,18 @@
+// Depth & Shadows
+@import 'variables/depth';
+
+.wdc-depth-inset {
+  @include wdc-depth-inset();
+}
+.wdc-depth-1 {
+  @include wdc-depth-1();
+}
+.wdc-depth-2 {
+  @include wdc-depth-2();
+}
+.wdc-depth-3 {
+  @include wdc-depth-3();
+}
+.wdc-depth-4 {
+  @include wdc-depth-4();
+}

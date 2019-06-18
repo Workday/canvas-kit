@@ -1,0 +1,30 @@
+# Canvas Kit contributors (sorted alphabetically)
+
+- Ajar Sagar
+- Alex Kong
+- Alex Nichols
+- Ana Chang
+- Angad Kaflay
+- Austin Zielinski
+- Chad Sahlhoff
+- Clara Chao
+- Dan Bye
+- Elliot Brown
+- Jay Scheidt
+- Jesse Spencer
+- Joseph Le
+- Justin Olson
+- Justin Panté
+- Kendall Gassner
+- Kevin lee
+- Manuel Carrera
+- Matt Johnson
+- Matt Rust
+- Neema Mahdavi
+- Parker Ledoux
+- Phuoc Huynh
+- Robert Everett
+- Simon Taft
+- Stephane Rangaya
+- Tino Mejia
+- Yuqin Shao

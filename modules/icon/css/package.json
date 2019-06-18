@@ -1,0 +1,29 @@
+{
+  "name": "@workday/canvas-kit-css-icon",
+  "version": "1.0.0",
+  "description": "Icon toolkit for Canvas kit",
+  "author": "Workday, Inc. (https://www.workday.com)",
+  "license": "Apache-2.0",
+  "main": "dist/canvas-kit-css-icon",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/icon/css"
+  },
+  "dependencies": {
+    "@workday/canvas-colors-web": "^0.17.13",
+    "svg-injector": "^1.1.3",
+    "to-slug-case": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "css",
+    "scss",
+    "sass",
+    "workday",
+    "icon"
+  ]
+}

@@ -1,0 +1,6 @@
+modules/canvas-kit-react-core/lib/colors.ts
+**/CHANGELOG.md
+**/package.json
+.vscode
+.idea
+docs

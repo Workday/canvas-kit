@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Skeleton Single Span 1`] = `
+.emotion-2 {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.emotion-0 {
+  -webkit-animation: animation-3qt75e 5s ease-in-out infinite;
+  animation: animation-3qt75e 5s ease-in-out infinite;
+  background: linear-gradient(130deg,rgba(255,255,255,0) 45%,#ffffff,rgba(255,255,255,0) 55%);
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  width: 10px;
+  height: 10px;
+  top: -5px;
+  position: absolute;
+  z-index: 999;
+}
+
+<div
+  aria-label="Loading"
+  aria-live="polite"
+  className="emotion-2 emotion-3"
+  role="status"
+>
+  <div
+    className="emotion-0 emotion-1"
+    width={0}
+  />
+  <div
+    aria-hidden={true}
+  >
+    <span>
+       Hello 
+    </span>
+  </div>
+</div>
+`;

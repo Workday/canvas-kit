@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`focusRing return correct animation and boxShadow 1`] = `
+Object {
+  "animation": "animation-10dvi4o 100ms",
+  "boxShadow": "0 0 0 1px #333333, 0 0 0 4px #666666",
+}
+`;
+
+exports[`focusRing returns correct animation and inset box shadow 1`] = `
+Object {
+  "animation": "animation-2sf17f 100ms",
+  "boxShadow": "inset 0 0 0 4px #666666",
+}
+`;
+
+exports[`focusRing returns default animation and box shadow 1`] = `
+Object {
+  "animation": "animation-os2b9x 100ms",
+  "boxShadow": "0 0 0 0px #ffffff, 0 0 0 2px #0875e1",
+}
+`;
+
+exports[`focusRing returns no animation 1`] = `
+Object {
+  "boxShadow": "0 0 0 0px #ffffff, 0 0 0 2px #0875e1",
+}
+`;
