@@ -382,13 +382,13 @@ exports[`Toast Snapshots renders with a close button 1`] = `
   width={360}
 >
   <div
-    aria-label="Close"
     className="emotion-3"
-    title="Close"
   >
     <button
+      aria-label="Close"
       className="emotion-1 emotion-2"
       onClick={[MockFunction]}
+      title="Close"
     >
       <span
         className="emotion-0"
@@ -716,13 +716,13 @@ exports[`Toast Snapshots renders with an action link 1`] = `
   width={360}
 >
   <div
-    aria-label="Close"
     className="emotion-3"
-    title="Close"
   >
     <button
+      aria-label="Close"
       className="emotion-1 emotion-2"
       onClick={[MockFunction]}
+      title="Close"
     >
       <span
         className="emotion-0"
@@ -1027,13 +1027,13 @@ exports[`Toast Snapshots renders with an icon 1`] = `
   width={360}
 >
   <div
-    aria-label="Close"
     className="emotion-3"
-    title="Close"
   >
     <button
+      aria-label="Close"
       className="emotion-1 emotion-2"
       onClick={[MockFunction]}
+      title="Close"
     >
       <span
         className="emotion-0"
