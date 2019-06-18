@@ -5,7 +5,7 @@ exports[`SidePanel Snapshots does not render header when side panel is closed 1`
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-4 {
@@ -65,7 +65,7 @@ exports[`SidePanel Snapshots renders a closed side panel 1`] = `
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-4 {
@@ -125,7 +125,7 @@ exports[`SidePanel Snapshots renders a side panel from the right 1`] = `
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-4 {
@@ -226,7 +226,7 @@ exports[`SidePanel Snapshots renders a side panel header 1`] = `
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-4 {
@@ -275,7 +275,7 @@ exports[`SidePanel Snapshots renders a side panel with a Gray background when op
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-4 {
@@ -376,7 +376,7 @@ exports[`SidePanel Snapshots renders a side panel with children elements 1`] = `
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-2 {
@@ -425,7 +425,7 @@ exports[`SidePanel Snapshots renders a toggle button 1`] = `
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-8 {
@@ -669,7 +669,7 @@ exports[`SidePanel Snapshots renders as expected 1`] = `
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-2 {
@@ -729,7 +729,7 @@ exports[`SidePanel Snapshots renders side panel on the left 1`] = `
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-4 {
@@ -778,7 +778,7 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-6 {
@@ -996,7 +996,7 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-8 {
@@ -1225,6 +1225,13 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
 `;
 
 exports[`SidePanel Snapshots renders side panel with a different width 1`] = `
+.emotion-0 {
+  -webkit-transition: none;
+  transition: none;
+  z-index: 1;
+  width: 64px;
+}
+
 .emotion-4 {
   overflow: hidden;
   height: 100%;
@@ -1249,13 +1256,6 @@ exports[`SidePanel Snapshots renders side panel with a different width 1`] = `
   padding: 24px;
   right: px;
   left: 0px;
-}
-
-.emotion-0 {
-  -webkit-transition: none;
-  transition: none;
-  z-index: 1;
-  width: 900px;
 }
 
 .emotion-2 {
@@ -1315,7 +1315,7 @@ exports[`SidePanel Snapshots renders standard side panel 1`] = `
   -webkit-transition: none;
   transition: none;
   z-index: 1;
-  width: 300px;
+  width: 64px;
 }
 
 .emotion-2 {
