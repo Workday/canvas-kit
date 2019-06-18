@@ -85,11 +85,16 @@ storiesOf('Header', module)
           }
           onSearchSubmit={handleSearchSubmitTest}
         >
-          <IconButton icon={notificationsIcon} buttonType={IconButton.Types.Circle} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} />
+          <IconButton
+            icon={notificationsIcon}
+            buttonType={IconButton.Types.Circle}
+            altText="Notifications"
+          />
+          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} altText="Inbox" />
           <Avatar
             onClick={handleAvatarClickTest}
             url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
+            altText="Profile"
           />
         </GlobalHeader>
       </div>
@@ -100,16 +105,24 @@ storiesOf('Header', module)
           onSearchSubmit={handleSearchSubmitTest}
           breakpoint={700}
         >
-          <IconButton icon={notificationsIcon} buttonType={IconButton.Types.Circle} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} />
-          <Avatar onClick={handleAvatarClickTest} />
+          <IconButton
+            icon={notificationsIcon}
+            buttonType={IconButton.Types.Circle}
+            altText="Notifications"
+          />
+          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} altText="Inbox" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
       <div className={containerStyle}>
         <GlobalHeader onSearchSubmit={handleSearchSubmitTest} onMenuClick={handleMenuClickTest}>
-          <IconButton icon={notificationsIcon} buttonType={IconButton.Types.Circle} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} />
-          <Avatar onClick={handleAvatarClickTest} />
+          <IconButton
+            icon={notificationsIcon}
+            buttonType={IconButton.Types.Circle}
+            altText="Notifications"
+          />
+          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} altText="Inbox" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
     </div>
@@ -125,9 +138,9 @@ storiesOf('Header', module)
           <a href="/">
             <SystemIcon icon={notificationsIcon} />
           </a>
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Plain} />
-          <Avatar onClick={handleAvatarClickTest} />
+          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} altText="Inbox" />
+          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Plain} altText="Inbox" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </Header>
       </div>
       <br />
@@ -140,8 +153,12 @@ storiesOf('Header', module)
           onSearchSubmit={handleSearchSubmitTest}
         >
           {nav}
-          <IconButton buttonType={IconButton.Types.Inverse} icon={notificationsIcon} />
-          <Avatar onClick={handleAvatarClickTest} />
+          <IconButton
+            buttonType={IconButton.Types.Inverse}
+            icon={notificationsIcon}
+            altText="Notifications"
+          />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
           <Button buttonType={Button.Types.Primary}>Download</Button>
         </Header>
       </div>
@@ -162,8 +179,12 @@ storiesOf('Header', module)
           onSearchSubmit={handleSearchSubmitTest}
         >
           {nav}
-          <IconButton buttonType={IconButton.Types.Circle} icon={notificationsIcon} />
-          <IconButton buttonType={IconButton.Types.Circle} icon={inboxIcon} />
+          <IconButton
+            buttonType={IconButton.Types.Circle}
+            icon={notificationsIcon}
+            altText="Notifications"
+          />
+          <IconButton buttonType={IconButton.Types.Circle} icon={inboxIcon} altText="Inbox" />
           <Button buttonType={Button.Types.Primary}>Logout</Button>
         </Header>
       </div>
@@ -178,8 +199,12 @@ storiesOf('Header', module)
           onSearchSubmit={handleSearchSubmitTest}
         >
           {nav}
-          <IconButton buttonType={IconButton.Types.Circle} icon={notificationsIcon} />
-          <IconButton buttonType={IconButton.Types.Circle} icon={inboxIcon} />
+          <IconButton
+            buttonType={IconButton.Types.Circle}
+            icon={notificationsIcon}
+            altText="Notifications"
+          />
+          <IconButton buttonType={IconButton.Types.Circle} icon={inboxIcon} altText="Inbox" />
           <Button buttonType={Button.Types.Primary}>Logout</Button>
         </Header>
       </div>
@@ -193,8 +218,12 @@ storiesOf('Header', module)
           onSearchSubmit={handleSearchSubmitTest}
         >
           {nav}
-          <IconButton buttonType={IconButton.Types.Inverse} icon={notificationsIcon} />
-          <IconButton buttonType={IconButton.Types.Inverse} icon={inboxIcon} />
+          <IconButton
+            buttonType={IconButton.Types.Inverse}
+            icon={notificationsIcon}
+            altText="Notifications"
+          />
+          <IconButton buttonType={IconButton.Types.Inverse} icon={inboxIcon} altText="Inbox" />
           <Button buttonType={Button.Types.Primary}>Logout</Button>
         </Header>
       </div>
@@ -225,8 +254,12 @@ storiesOf('Header', module)
           onMenuClick={handleMenuClickTest}
         >
           {nav}
-          <IconButton buttonType={IconButton.Types.Inverse} icon={notificationsIcon} />
-          <Avatar onClick={handleAvatarClickTest} />
+          <IconButton
+            buttonType={IconButton.Types.Inverse}
+            icon={notificationsIcon}
+            altText="Notifications"
+          />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
           <Button buttonType={Button.Types.Primary}>Download</Button>
         </Header>
       </div>
@@ -234,7 +267,11 @@ storiesOf('Header', module)
       <div className={containerStyle}>
         <Header variant={Header.Variant.Full} title="" themeColor={Header.Theme.Blue} brandUrl="#">
           {nav}
-          <IconButton buttonType={IconButton.Types.Inverse} icon={notificationsIcon} />
+          <IconButton
+            buttonType={IconButton.Types.Inverse}
+            icon={notificationsIcon}
+            altText="Notifications"
+          />
           <Avatar onClick={handleAvatarClickTest} />
         </Header>
       </div>
@@ -247,8 +284,12 @@ storiesOf('Header', module)
           brandUrl="#"
         >
           {nav}
-          <IconButton buttonType={IconButton.Types.Inverse} icon={notificationsIcon} />
-          <Avatar onClick={handleAvatarClickTest} />
+          <IconButton
+            buttonType={IconButton.Types.Inverse}
+            icon={notificationsIcon}
+            altText="Notifications"
+          />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </Header>
       </div>
       <br />
@@ -261,8 +302,12 @@ storiesOf('Header', module)
           brandUrl="#"
         >
           {nav}
-          <IconButton buttonType={IconButton.Types.Circle} icon={notificationsIcon} />
-          <IconButton buttonType={IconButton.Types.Circle} icon={inboxIcon} />
+          <IconButton
+            buttonType={IconButton.Types.Circle}
+            icon={notificationsIcon}
+            altText="Notifications"
+          />
+          <IconButton buttonType={IconButton.Types.Circle} icon={inboxIcon} altText="Inbox" />
           <Button buttonType={Button.Types.Primary}>Logout</Button>
         </Header>
       </div>
@@ -277,8 +322,12 @@ storiesOf('Header', module)
         onMenuClick={handleMenuClickTest}
       >
         {nav}
-        <IconButton buttonType={IconButton.Types.Inverse} icon={notificationsIcon} />
-        <Avatar onClick={handleAvatarClickTest} />
+        <IconButton
+          buttonType={IconButton.Types.Inverse}
+          icon={notificationsIcon}
+          altText="Notifications"
+        />
+        <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         <Button buttonType={Button.Types.Primary}>Download</Button>
       </Header>
       <Header title="Nav Collapses Later" breakpoints={{sm: 320, md: 420, lg: 768}}>
@@ -294,8 +343,12 @@ storiesOf('Header', module)
         title="Icons Drop Later"
         breakpoints={{...Header.defaultProps.breakpoints, md: 640, lg: 1140}}
       >
-        <IconButton buttonType={IconButton.Types.Circle} icon={notificationsIcon} />
-        <IconButton buttonType={IconButton.Types.Circle} icon={inboxIcon} />
+        <IconButton
+          buttonType={IconButton.Types.Circle}
+          icon={notificationsIcon}
+          altText="Notifications"
+        />
+        <IconButton buttonType={IconButton.Types.Circle} icon={inboxIcon} altText="Inbox" />
         <Button buttonType={Button.Types.Primary}>Logout</Button>
       </Header>
     </div>

@@ -52,11 +52,16 @@ import {Button} from '@workday/canvas-kit-react-button';
       </li>
     </ul>
   </nav>
-  <IconButton icon={notificationsIcon} buttonType={IconButton.Types.Circle} />
+  <IconButton
+    icon={notificationsIcon}
+    buttonType={IconButton.Types.Circle}
+    altText="Notifications"
+  />
   <Avatar
     onClick={() => {
       alert('clicked avatar');
     }}
+    altText="Profile"
   />
   <Button buttonType={Button.Types.Primary}>Sign Up</Button>
 </Header>;

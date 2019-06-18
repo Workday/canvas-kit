@@ -33,7 +33,7 @@ class PopperPopup extends React.Component<{}, PopperPopupState> {
         </Button>
         <Popper placement={'bottom'} open={open} anchorElement={this.buttonRef.current!}>
           <Popup width={400} heading={'Popper Example'} handleClose={this.handleClose}>
-            <div>Welcome to your popup positioned by Popper!</div>
+            <h3>Welcome to your popup positioned by Popper!</h3>
           </Popup>
         </Popper>
       </div>
