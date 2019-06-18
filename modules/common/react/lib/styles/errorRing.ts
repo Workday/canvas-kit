@@ -4,27 +4,30 @@ import {colors, inputColors} from '@workday/canvas-kit-react-core';
 
 export default function errorRing(error?: ErrorType): CSSObject {
   let errorBorderColor;
-  let errorRingColor;
+  let errorBoxShadow;
 
   if (error === ErrorType.Error) {
-    errorRingColor = inputColors.error.border;
+    errorBorderColor = inputColors.error.border;
+    errorBoxShadow = `inset 0 0 0 2px ${inputColors.error.border}`;
   } else if (error === ErrorType.Alert) {
-    errorRingColor = inputColors.warning.border;
     errorBorderColor = colors.cantaloupe600;
+    errorBoxShadow = `inset 0 0 0 1px ${colors.cantaloupe600}, inset 0 0 0 3px ${
+      inputColors.warning.border
+    }`;
   } else {
     return {};
   }
 
   return {
-    border: errorBorderColor ? `1px solid ${errorBorderColor}` : 'none',
+    borderColor: errorBorderColor,
     transition: '100ms box-shadow',
-    boxShadow: `inset 0 0 0 2px ${errorRingColor}`,
+    boxShadow: errorBoxShadow,
     '&:hover': {
       borderColor: errorBorderColor,
     },
     '&:focus:not([disabled])': {
       borderColor: errorBorderColor,
-      boxShadow: `inset 0 0 0 2px ${errorRingColor},
+      boxShadow: `${errorBoxShadow},
         0 0 0 2px ${colors.frenchVanilla100},
         0 0 0 4px ${inputColors.focusBorder}`,
     },
