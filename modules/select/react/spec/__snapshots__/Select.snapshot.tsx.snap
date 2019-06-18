@@ -544,7 +544,7 @@ exports[`Select Snapshots renders an alert on select as expected 1`] = `
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
   -moz-appearance: none;
-  border: 1px solid #c06c00;
+  border-color: #c06c00;
   -webkit-transition: 100ms box-shadow;
   transition: 100ms box-shadow;
   box-shadow: inset 0 0 0 2px #ffa126;
@@ -715,10 +715,10 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
   -moz-appearance: none;
-  border: none;
+  border-color: #de2e21;
   -webkit-transition: 100ms box-shadow;
   transition: 100ms box-shadow;
-  box-shadow: inset 0 0 0 2px #de2e21;
+  box-shadow: inset 0 0 0 1px #de2e21;
 }
 
 .emotion-0::-webkit-input-placeholder {
@@ -769,8 +769,13 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
   color: #a1aab3;
 }
 
+.emotion-0:hover {
+  border-color: #de2e21;
+}
+
 .emotion-0:focus:not([disabled]) {
-  box-shadow: inset 0 0 0 2px #de2e21, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
+  border-color: #de2e21;
+  box-shadow: inset 0 0 0 1px #de2e21, 0 0 0 2px #ffffff, 0 0 0 4px #0875e1;
 }
 
 <div
