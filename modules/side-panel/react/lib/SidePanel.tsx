@@ -92,8 +92,8 @@ const ChildrenContainer = styled('div')<Pick<SidePanelProps, 'openWidth'>>(
     transition: 'none',
     zIndex: 1, // show above SidePanelFooter when screen is small vertically
   },
-  ({openWidth}) => ({
-    width: openWidth,
+  ({open, openWidth}) => ({
+    width: open ? openWidth : closedWidth,
   })
 );
 
