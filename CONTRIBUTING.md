@@ -50,12 +50,12 @@ The Canvas Kit core team will take a look and discuss it with you.
 
 ## How to Contribute
 
-**Don't hesitate to contribute!** Canvas Kit React thrives on open discussion and contribution by
-anyone in the Workday community. Contribution doesn't have to be code-based. Anyone can suggest
-changes things like documentation, processes, and use cases.
+**Don't hesitate to contribute!** Canvas Kit thrives on open discussion and contribution by anyone
+in the Workday community. Contribution doesn't have to be code-based. Anyone can suggest changes
+things like documentation, processes, and use cases.
 
 If you are contributing code, please take a look at the following sections to familiarize yourself
-with how the Canvas Kit React repo is organized and run. This will help streamline the pull request
+with how the Canvas Kit repo is organized and run. This will help streamline the pull request
 process.
 
 ### Commit Message Format
@@ -92,20 +92,20 @@ Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your 
 
 ### Storybook
 
-Canvas Kit React utilizes [Storybook](https://storybook.js.org/) for the component development
+Canvas Kit utilizes [Storybook](https://storybook.js.org/) for the component development
 environment.
 
 ### Yarn and Workspaces
 
-Canvas Kit React utilizes Yarn for package management and takes advantage of its support for
+Canvas Kit utilizes Yarn for package management and takes advantage of its support for
 [Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) to connect all of its different modules
 within a single repository.
 
 ### Testing
 
-Canvas Kit React uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) to test our
-React components. Each and every component requires at least 97% unit test coverage and a thorough
-set of snapshot tests.
+Canvas Kit uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) to test our React
+components. Each and every component requires at least 97% unit test coverage and a thorough set of
+snapshot tests.
 
 ## Pull Request Guidelines
 
