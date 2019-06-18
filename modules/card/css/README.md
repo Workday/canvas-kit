@@ -1,12 +1,34 @@
 # Canvas Kit Card
 
-A card is a flexible and extensible content container. The card container includes options for
-positioning. The card content includes classes for header and body. Card sizes follow the 12 column
-grid system. To adjust sizes append the size modifier to the `.wdc-card-{size}` class. For the
-tablet breakpoint, columns double if less than 50% or round up to 100% if greater than 50%. On
-mobile all card sizes increase to 100%.
+A card is a flexible and extensible content container that includes options for positioning. The
+card content includes classes for header and body.
 
-**Card Sizes**
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-card
+```
+
+Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
+`index.scss`.
+
+```scss
+@import '~@workday/canvas-kit-css-card/index.scss';
+```
+
+## Usage
+
+Card sizes follow the 12 column grid system. To adjust sizes append the size modifier to the
+`.wdc-card-{size}` class. For the tablet breakpoint, columns double if less than 50% or round up to
+100% if greater than 50%. On mobile all card sizes increase to 100%.
+
+#### Card Sizes
 
 ```html
 <div class="wdc-card-container">
@@ -37,7 +59,9 @@ mobile all card sizes increase to 100%.
 </div>
 ```
 
-**Card No Padding**
+### Variants
+
+#### Card with No Padding
 
 Card padding may be removed by add the `.wdc-card-no-padding` modifier.
 
@@ -62,7 +86,7 @@ Card padding may be removed by add the `.wdc-card-no-padding` modifier.
 </div>
 ```
 
-**Card Positioning**
+#### Card Positioning
 
 Card positioning can be changed by adding a modifier to the container class,
 `.wdc-card-container-{position}`. Positioning options are: `start`, `end`, `center`, `between`,
