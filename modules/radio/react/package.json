@@ -36,9 +36,6 @@
   "peerDependencies": {
     "react": ">= 16.8 < 17"
   },
-  "devDependencies": {
-    "@types/uuid": "^3.4.4"
-  },
   "dependencies": {
     "@workday/canvas-kit-react-common": "^3.0.0-alpha.0",
     "@workday/canvas-kit-react-core": "^3.0.0-alpha.0",

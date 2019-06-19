@@ -2,10 +2,6 @@
 
 A checkbox input.
 
-Coming soon:
-
-- Error/Alert handling
-
 ## Installation
 
 ```sh
@@ -41,8 +37,20 @@ import Checkbox from '@workday/canvas-kit-react-checkbox';
 import FormField from '@workday/canvas-kit-react-form-field';
 
 <FormField label="My Field" inputId="my-checkbox-field">
-  <Checkbox disabled={false} checked={checked} onChange={this.handleCheck} />;
+  <Checkbox disabled={false} checked={checked} onChange={this.handleCheck} id="my-checkbox-field" />
+  ;
 </FormField>;
+```
+
+If use inside a FormField doesn't work for your use case, you can use the `aria-labelledBy`
+attribute.
+
+```tsx
+import * as React from 'react';
+import Checkbox from '@workday/canvas-kit-react-checkbox';
+<label id="123">Label</label>
+...
+<Checkbox checked={true} onChange={this.handleCheck} aria-labelledBy="123" />;
 ```
 
 ## Static Properties

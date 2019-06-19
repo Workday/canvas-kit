@@ -47,7 +47,7 @@ class TooltipExample extends React.Component<{}, TooltipExampleState> {
           onMouseLeave={this.close}
           onFocus={this.open}
           onBlur={this.close}
-          aria-describedBy={'tooltip-id'}
+          aria-labelledBy={'tooltip-id'}
           tabIndex={0}
         >
           Hover Over Me

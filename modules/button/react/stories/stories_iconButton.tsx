@@ -21,6 +21,7 @@ import {
 import README from '../README.md';
 import {css} from 'emotion';
 import {CSSObject} from 'create-emotion';
+import {IconButtonProps} from '../lib/IconButton';
 
 const blueBackground: CSSObject = {
   display: 'flex',
@@ -34,6 +35,12 @@ const blueBackground: CSSObject = {
   button: {
     margin: '0 12px',
   },
+};
+
+const commonIconButtonProps: Partial<IconButtonProps> = {
+  'aria-label': 'Activity Stream',
+  title: 'Activity Stream',
+  icon: activityStreamIcon,
 };
 
 // Wrapper to add state mgmt to IconButtons
@@ -56,10 +63,10 @@ export class ToggleIconButtonWrapper extends React.Component<
   public render() {
     return (
       <IconButton
+        {...commonIconButtonProps}
         toggled={this.state.isToggled}
         buttonType={this.props.buttonType}
         onClick={this.handleToggle}
-        icon={activityStreamIcon}
       />
     );
   }
@@ -101,8 +108,8 @@ storiesOf('Button/Icon Button', module)
     <div className="story">
       <h3>Medium Default</h3>
       <IconButton
-        buttonType={IconButton.Types.Circle}
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
+        buttonType={IconButton.types.Circle}
         buttonSize={IconButton.Sizes.Medium}
       />
       <IconButton
@@ -113,8 +120,8 @@ storiesOf('Button/Icon Button', module)
       />
       <h3>Small Default</h3>
       <IconButton
-        buttonType={IconButton.Types.Circle}
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
+        buttonType={IconButton.types.Circle}
         buttonSize={IconButton.Sizes.Small}
       />
       <IconButton
@@ -131,7 +138,7 @@ storiesOf('Button/Icon Button', module)
     <div className="story">
       <h3>Medium Square</h3>
       <IconButton
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
         buttonSize={IconButton.Sizes.Medium}
         buttonType={IconButton.Types.Square}
       />
@@ -143,7 +150,7 @@ storiesOf('Button/Icon Button', module)
       />
       <h3>Small Square</h3>
       <IconButton
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
         buttonSize={IconButton.Sizes.Small}
         buttonType={IconButton.Types.Square}
       />
@@ -161,7 +168,7 @@ storiesOf('Button/Icon Button', module)
     <div className="story">
       <h3>Medium Square</h3>
       <IconButton
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
         buttonSize={IconButton.Sizes.Medium}
         buttonType={IconButton.Types.SquareFilled}
       />
@@ -173,7 +180,7 @@ storiesOf('Button/Icon Button', module)
       />
       <h3>Small Square</h3>
       <IconButton
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
         buttonSize={IconButton.Sizes.Small}
         buttonType={IconButton.Types.SquareFilled}
       />
@@ -191,7 +198,7 @@ storiesOf('Button/Icon Button', module)
     <div className="story">
       <h3>Medium Plain</h3>
       <IconButton
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
         buttonSize={IconButton.Sizes.Medium}
         buttonType={IconButton.Types.Plain}
       />
@@ -203,7 +210,7 @@ storiesOf('Button/Icon Button', module)
       />
       <h3>Small Plain</h3>
       <IconButton
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
         buttonSize={IconButton.Sizes.Small}
         buttonType={IconButton.Types.Plain}
       />
@@ -221,7 +228,7 @@ storiesOf('Button/Icon Button', module)
     <div className="story">
       <h3>Medium Filled</h3>
       <IconButton
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
         buttonSize={IconButton.Sizes.Medium}
         buttonType={IconButton.Types.CircleFilled}
       />
@@ -233,7 +240,7 @@ storiesOf('Button/Icon Button', module)
       />
       <h3>Small Filled</h3>
       <IconButton
-        icon={activityStreamIcon}
+        {...commonIconButtonProps}
         buttonSize={IconButton.Sizes.Small}
         buttonType={IconButton.Types.CircleFilled}
       />
@@ -252,7 +259,7 @@ storiesOf('Button/Icon Button', module)
       <h3>Medium Inverse</h3>
       <div className={css(blueBackground)}>
         <IconButton
-          icon={activityStreamIcon}
+          {...commonIconButtonProps}
           buttonSize={IconButton.Sizes.Medium}
           buttonType={IconButton.Types.Inverse}
         />
@@ -271,7 +278,7 @@ storiesOf('Button/Icon Button', module)
           buttonType={IconButton.Types.Inverse}
         />
         <IconButton
-          icon={activityStreamIcon}
+          {...commonIconButtonProps}
           buttonSize={IconButton.Sizes.Small}
           disabled={true}
           buttonType={IconButton.Types.Inverse}
@@ -288,7 +295,7 @@ storiesOf('Button/Icon Button', module)
       <h3>Medium Inverse Filled</h3>
       <div className={css(blueBackground)}>
         <IconButton
-          icon={activityStreamIcon}
+          {...commonIconButtonProps}
           buttonSize={IconButton.Sizes.Medium}
           buttonType={IconButton.Types.InverseFilled}
         />
@@ -302,7 +309,7 @@ storiesOf('Button/Icon Button', module)
       <h3>Small Inverse Filled</h3>
       <div className={css(blueBackground)}>
         <IconButton
-          icon={activityStreamIcon}
+          {...commonIconButtonProps}
           buttonSize={IconButton.Sizes.Small}
           buttonType={IconButton.Types.InverseFilled}
         />
@@ -327,26 +334,56 @@ storiesOf('Button/Icon Button Toggle Group', module)
       <h3>With Three Buttons</h3>
       <IconButtonToggleGroupWrapper>
         <IconButtonToggleGroup>
-          <IconButton icon={listViewIcon} />
-          <IconButton icon={worksheetsIcon} />
+          <IconButton icon={listViewIcon} title="List View" aria-label="List View" />
+          <IconButton icon={worksheetsIcon} title="Worksheets" aria-label="Worksheets" />
           <IconButton icon={percentageIcon} disabled={true} />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>
       <h3>With Four Buttons</h3>
       <IconButtonToggleGroupWrapper>
         <IconButtonToggleGroup>
-          <IconButton icon={listViewIcon} value="list-view" />
-          <IconButton icon={worksheetsIcon} value="table-view" />
-          <IconButton icon={deviceTabletIcon} value="device-view" />
+          <IconButton
+            icon={listViewIcon}
+            value="list-view"
+            title="List View"
+            aria-label="List View"
+          />
+          <IconButton
+            icon={worksheetsIcon}
+            value="table-view"
+            title="Worksheets"
+            aria-label="Worksheets"
+          />
+          <IconButton
+            icon={deviceTabletIcon}
+            value="device-view"
+            title="Device Tablet"
+            aria-label="Device Tablet"
+          />
           <IconButton icon={percentageIcon} value="percent-view" disabled={true} />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>
       <h3>Right To Left With Four Buttons</h3>
       <IconButtonToggleGroupWrapper>
         <IconButtonToggleGroup isRTL={true} value="table-view">
-          <IconButton icon={listViewIcon} value="list-view" />
-          <IconButton icon={worksheetsIcon} value="table-view" />
-          <IconButton icon={deviceTabletIcon} value="device-view" />
+          <IconButton
+            icon={listViewIcon}
+            value="list-view"
+            title="List View"
+            aria-label="List View"
+          />
+          <IconButton
+            icon={worksheetsIcon}
+            value="table-view"
+            title="Worksheets"
+            aria-label="Worksheets"
+          />
+          <IconButton
+            icon={deviceTabletIcon}
+            value="device-view"
+            title="Device Tablet"
+            aria-label="Device Tablet"
+          />
           <IconButton icon={percentageIcon} value="percent-view" disabled={true} />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>

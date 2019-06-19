@@ -3,6 +3,7 @@ import {mount} from 'enzyme';
 import Radio from '../lib/Radio';
 import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
+import FormField from '@workday/canvas-kit-react-form-field';
 
 describe('Radio Input', () => {
   const cb = jest.fn();
@@ -58,6 +59,15 @@ describe('Radio Accessibility', () => {
 
   test('Radio without a defined id should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(<Radio label={'Label'} />);
+    expect(await axe(html)).toHaveNoViolations();
+  });
+
+  test('Radio using FormField should pass axe DOM accessibility guidelines', async () => {
+    const html = ReactDOMServer.renderToString(
+      <FormField label="My Field" inputId="my-radio-field">
+        <Radio disabled={false} checked={true} id="my-radio-field" />
+      </FormField>
+    );
     expect(await axe(html)).toHaveNoViolations();
   });
 });

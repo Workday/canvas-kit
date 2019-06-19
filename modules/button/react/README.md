@@ -115,11 +115,11 @@ import {IconButton} from '@workday/canvas-kit-react-button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-<IconButton>
+<IconButton title="Activity Stream" aria-label="Activity Stream">
   <SystemIcon icon={activityStreamIcon} />
 </IconButton>;
 
-<IconButton icon={activityStreamIcon} />;
+<IconButton icon={activityStreamIcon} title="Activity Stream" aria-label="Activity Stream" />;
 ```
 
 ## Static Properties
@@ -188,12 +188,6 @@ Default: `undefined`
 
 ---
 
-#### `altText: string`
-
-> Text describing what the icon represents.
-
----
-
 #### `onToggleChange: (toggled: boolean | undefined) => void`
 
 > The callback that is fired when a button toggle prop changes This is true when the toggle changes
@@ -206,6 +200,11 @@ Default: `undefined`
 #### `value: string`
 
 > Value of the button. Must be unique if used within an IconButtonToggleGroup.
+
+## Accessibility Notes
+
+> The content of an IconButton is not always clear to the user. In order to better convey what the
+> icon represents, the IconButton should be initialized with `title` and `aria-label` attributes.
 
 # Icon Button Toggle Group
 
@@ -220,8 +219,8 @@ import {IconButton, IconButtonToggleGroup} from '@workday/canvas-kit-react-butto
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 <IconButtonToggleGroup>
-  <IconButton icon={listViewIcon} value="list-view" />
-  <IconButton icon={worksheetsIcon} value="table-view" />
+  <IconButton icon={listViewIcon} value="list-view" title="List View" aria-label="List View" />
+  <IconButton icon={worksheetsIcon} value="table-view" title="Worksheets" aria-label="Worksheets" />
 </IconButtonToggleGroup>;
 ```
 

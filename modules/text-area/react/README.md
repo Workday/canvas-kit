@@ -33,7 +33,7 @@ import TextArea from '@workday/canvas-kit-react-text-area';
 
 ```tsx
 import * as React from 'react';
-import TextArea from '@workday/canvas-kit-react-text-textarea';
+import TextArea from '@workday/canvas-kit-react-text-area';
 import FormField from '@workday/canvas-kit-react-form-field';
 
 // Accessible default state
@@ -51,6 +51,17 @@ import FormField from '@workday/canvas-kit-react-form-field';
 >
   <TextArea placeholder="Placeholder" value={this.state.value} onChange={() => {}} />;
 </FormField>
+```
+
+If use inside a FormField doesn't work for your use case, you can use the `aria-labelledBy`
+attribute.
+
+```tsx
+import * as React from 'react';
+import TextArea from '@workday/canvas-kit-react-text-area';
+<label id="123">Label</label>
+...
+<TextArea placeholder="Placeholder" value={this.state.value} onChange={() => {}} aria-labelledBy="123" />;
 ```
 
 ## Static Properties

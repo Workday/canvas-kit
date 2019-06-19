@@ -112,7 +112,7 @@ describe('Icon Button Accessibility', () => {
 
   test('IconButton should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(
-      <IconButton altText={'Activity Stream'}>
+      <IconButton title="Activity Stream" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />{' '}
       </IconButton>
     );
