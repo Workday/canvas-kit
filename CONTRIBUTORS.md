@@ -8,6 +8,7 @@
 - Austin Zielinski
 - Chad Sahlhoff
 - Clara Chao
+- Cyril Sellam
 - Dan Bye
 - Elliot Brown
 - Jay Scheidt

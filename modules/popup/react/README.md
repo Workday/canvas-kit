@@ -108,3 +108,10 @@ Default:
 #### `closeIconSize: ButtonSizes`
 
 > The size of the close icon button (small or medium)
+
+---
+
+#### `popupRef: React.Ref<HTMLDivElement>`
+
+> A ref to the underlying popup container element. Use this to check click targets against when
+> closing a popup.

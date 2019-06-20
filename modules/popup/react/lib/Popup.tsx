@@ -2,7 +2,7 @@ import * as React from 'react';
 import Card from '@workday/canvas-kit-react-card';
 import styled from 'react-emotion';
 import {IconButton, ButtonSizes} from '@workday/canvas-kit-react-button';
-import {CanvasDepthValue, colors, spacing} from '@workday/canvas-kit-react-core';
+import {CanvasDepthValue, spacing} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {keyframes} from 'emotion';
@@ -17,6 +17,7 @@ export interface PopupProps {
   padding: PopupPadding;
   transformOrigin: TransformOrigin;
   closeIconSize: ButtonSizes.Small | ButtonSizes.Medium;
+  popupRef?: React.Ref<HTMLDivElement>;
   handleClose?: () => void;
   width?: number | string;
   heading?: React.ReactNode;
@@ -44,7 +45,6 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 const Container = styled('div')<Pick<PopupProps, 'transformOrigin' | 'width'>>(
   {
     position: 'relative',
-    backgroundColor: colors.frenchVanilla100,
   },
   ({width}) => width && {width},
   ({transformOrigin}) => ({
@@ -85,10 +85,17 @@ export default class Popup extends React.Component<PopupProps> {
       depth,
       closeIconSize,
       transformOrigin,
+      popupRef,
       ...otherProps
     } = this.props;
     return (
-      <Container transformOrigin={transformOrigin} width={width} role="dialog" {...otherProps}>
+      <Container
+        transformOrigin={transformOrigin}
+        width={width}
+        role="dialog"
+        innerRef={popupRef}
+        {...otherProps}
+      >
         {handleClose && (
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton

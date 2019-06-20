@@ -3,7 +3,6 @@
 exports[`Toast Snapshots renders as expected 1`] = `
 .emotion-8 {
   position: relative;
-  background-color: #ffffff;
   width: 360px;
   -webkit-animation: animation-221pkp;
   animation: animation-221pkp;
@@ -128,7 +127,6 @@ exports[`Toast Snapshots renders as expected 1`] = `
 exports[`Toast Snapshots renders with a close button 1`] = `
 .emotion-12 {
   position: relative;
-  background-color: #ffffff;
   width: 360px;
   -webkit-animation: animation-221pkp;
   animation: animation-221pkp;
@@ -433,7 +431,6 @@ exports[`Toast Snapshots renders with a close button 1`] = `
 exports[`Toast Snapshots renders with an action link 1`] = `
 .emotion-14 {
   position: relative;
-  background-color: #ffffff;
   width: 360px;
   -webkit-animation: animation-221pkp;
   animation: animation-221pkp;
@@ -773,7 +770,6 @@ exports[`Toast Snapshots renders with an action link 1`] = `
 exports[`Toast Snapshots renders with an icon 1`] = `
 .emotion-12 {
   position: relative;
-  background-color: #ffffff;
   width: 360px;
   -webkit-animation: animation-221pkp;
   animation: animation-221pkp;
