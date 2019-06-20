@@ -249,11 +249,18 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
       onClick={[MockFunction]}
       title="Close"
     >
-      <span
-        className="emotion-0"
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M5.996 4.582a.5.5 0 0 0-.717-.003l-.7.7a.504.504 0 0 0 .003.717L10.586 12l-6.004 6.004a.5.5 0 0 0-.003.717l.7.7c.197.197.514.2.717-.003L12 13.414l6.004 6.004a.5.5 0 0 0 .717.003l.7-.7a.504.504 0 0 0-.003-.717L13.414 12l6.004-6.004a.5.5 0 0 0 .003-.717l-.7-.7a.504.504 0 0 0-.717.003L12 10.586 5.996 4.582z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      <button
+        aria-label="Close"
+        className="emotion-1 emotion-2"
+        onClick={[MockFunction]}
+        title="Close"
+      >
+        <span
+          className="emotion-0"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M5.996 4.582a.5.5 0 0 0-.717-.003l-.7.7a.504.504 0 0 0 .003.717L10.586 12l-6.004 6.004a.5.5 0 0 0-.003.717l.7.7c.197.197.514.2.717-.003L12 13.414l6.004 6.004a.5.5 0 0 0 .717.003l.7-.7a.504.504 0 0 0-.003-.717L13.414 12l6.004-6.004a.5.5 0 0 0 .003-.717l-.7-.7a.504.504 0 0 0-.717.003L12 10.586 5.996 4.582z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+            }
           }
         }
       />
@@ -472,11 +479,18 @@ exports[`Popup Snapshots renders Popup with close icon 1`] = `
       onClick={[MockFunction]}
       title="Close"
     >
-      <span
-        className="emotion-0"
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M5.996 4.582a.5.5 0 0 0-.717-.003l-.7.7a.504.504 0 0 0 .003.717L10.586 12l-6.004 6.004a.5.5 0 0 0-.003.717l.7.7c.197.197.514.2.717-.003L12 13.414l6.004 6.004a.5.5 0 0 0 .717.003l.7-.7a.504.504 0 0 0-.003-.717L13.414 12l6.004-6.004a.5.5 0 0 0 .003-.717l-.7-.7a.504.504 0 0 0-.717.003L12 10.586 5.996 4.582z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      <button
+        aria-label="Close"
+        className="emotion-1 emotion-2"
+        onClick={[MockFunction]}
+        title="Close"
+      >
+        <span
+          className="emotion-0"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M5.996 4.582a.5.5 0 0 0-.717-.003l-.7.7a.504.504 0 0 0 .003.717L10.586 12l-6.004 6.004a.5.5 0 0 0-.003.717l.7.7c.197.197.514.2.717-.003L12 13.414l6.004 6.004a.5.5 0 0 0 .717.003l.7-.7a.504.504 0 0 0-.003-.717L13.414 12l6.004-6.004a.5.5 0 0 0 .003-.717l-.7-.7a.504.504 0 0 0-.717.003L12 10.586 5.996 4.582z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+            }
           }
         }
       />
@@ -691,11 +705,18 @@ exports[`Popup Snapshots renders Popup with different padding 1`] = `
       onClick={[MockFunction]}
       title="Close"
     >
-      <span
-        className="emotion-0"
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M5.996 4.582a.5.5 0 0 0-.717-.003l-.7.7a.504.504 0 0 0 .003.717L10.586 12l-6.004 6.004a.5.5 0 0 0-.003.717l.7.7c.197.197.514.2.717-.003L12 13.414l6.004 6.004a.5.5 0 0 0 .717.003l.7-.7a.504.504 0 0 0-.003-.717L13.414 12l6.004-6.004a.5.5 0 0 0 .003-.717l-.7-.7a.504.504 0 0 0-.717.003L12 10.586 5.996 4.582z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+      <button
+        aria-label="Close"
+        className="emotion-1 emotion-2"
+        onClick={[MockFunction]}
+        title="Close"
+      >
+        <span
+          className="emotion-0"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M5.996 4.582a.5.5 0 0 0-.717-.003l-.7.7a.504.504 0 0 0 .003.717L10.586 12l-6.004 6.004a.5.5 0 0 0-.003.717l.7.7c.197.197.514.2.717-.003L12 13.414l6.004 6.004a.5.5 0 0 0 .717.003l.7-.7a.504.504 0 0 0-.003-.717L13.414 12l6.004-6.004a.5.5 0 0 0 .003-.717l-.7-.7a.504.504 0 0 0-.717.003L12 10.586 5.996 4.582z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+            }
           }
         }
       />
