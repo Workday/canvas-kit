@@ -3,7 +3,7 @@
 Creates an actions menu of clickable items.
 
 Can be used to implement a menu button, context menu, etc. For a full suite of examples, have a look
-at the [Menu Stories](./stories.tsx).
+at the [Menu Stories](./stories/stories.tsx).
 
 ## Coming Soon
 
