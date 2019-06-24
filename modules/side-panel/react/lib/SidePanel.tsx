@@ -179,7 +179,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
               buttonSize={ButtonSizes.Small}
               onClick={this.onToggleClick}
               icon={this.toggleButtonDirection()}
-              buttonType={IconButton.Types.Filled}
+              buttonType={IconButton.Types.CircleFilled}
             />
           )}
         </SidePanelFooter>
