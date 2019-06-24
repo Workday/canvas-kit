@@ -23,7 +23,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
 
 ```scss
-@import '~@workday/canvas-kit-css-alert/index.scss';
+@import '~@workday/canvas-kit-css-banner/index.scss';
 ```
 
 ## Usage
