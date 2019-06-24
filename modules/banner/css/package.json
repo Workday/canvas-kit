@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-banner",
-  "version": "1.0.17",
+  "version": "3.0.0-alpha.0",
   "description": "Errors and alerts for canvas-kit-css",
   "homepage": "https://design.workday.com",
   "author": "Joseph Le <joseph.le@workday.com>",
@@ -17,7 +17,7 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/banner/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "2.0.0",
+    "@workday/canvas-kit-css-core": "^3.0.0-alpha.0",
     "@workday/canvas-system-icons-web": "^1.0.1"
   },
   "scripts": {

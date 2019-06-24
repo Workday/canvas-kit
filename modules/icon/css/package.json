@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-icon",
-  "version": "1.0.0",
+  "version": "3.0.0-alpha.0",
   "description": "Icon toolkit for Canvas kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",

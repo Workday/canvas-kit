@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-card",
-  "version": "0.0.0",
+  "version": "3.0.0-alpha.0",
   "description": "Card CSS for canvas-kit-css",
   "homepage": "https://design.workday.com",
   "author": "Chad Sahlhoff <chad.sahlhoff@workday.com>",
@@ -17,7 +17,7 @@
     "url": "https://ghe.megaleo.com/design/canvas-kit-react/tree/master/modules/card/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "2.0.0"
+    "@workday/canvas-kit-css-core": "^3.0.0-alpha.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
