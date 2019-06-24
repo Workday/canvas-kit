@@ -233,6 +233,14 @@ Default: `false`
 
 ---
 
+#### `role: string`
+
+> Allow you to override the role of the item, e.g. you can use this element as a option in a combobox.
+
+Default: `menuItem`
+
+---
+
 #### `shouldClose: boolean`
 
 > Allows the onClose Menu callback to be fired after the menu item has been clicked
