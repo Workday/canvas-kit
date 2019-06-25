@@ -11,18 +11,16 @@ import {
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
 
-export interface MenuItemProps {
+export interface MenuItemProps extends React.HTMLAttributes<HTMLLIElement> {
   onClick?: (event: React.SyntheticEvent) => void;
   children?: React.ReactNode;
   id?: string;
   icon?: CanvasSystemIcon;
   secondaryIcon?: CanvasSystemIcon;
-  label?: string;
   hasDivider?: boolean;
   isDisabled?: boolean;
   isFocused?: boolean;
-  role?: string;
-  useAriaSelected?: boolean;
+  role: string;
   shouldClose?: boolean;
 }
 
@@ -53,7 +51,7 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
             fill: iconColors.hover,
           },
         },
-      }
+      };
     } else if (isDisabled && !isFocused) {
       return {
         color: colors.licorice100,
@@ -62,7 +60,8 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
           fill: iconColors.disabled,
         },
       };
-    } else { // Is focused or focused and disabled
+    } else {
+      // Is focused or focused and disabled
       return {
         backgroundColor: isDisabled ? colors.blueberry200 : commonColors.focusBackground,
         color: typeColors.inverse,
@@ -155,14 +154,14 @@ export default class MenuItem extends React.Component<MenuItemProps> {
     const {
       onClick,
       children,
+      id,
       icon,
       secondaryIcon,
+      hasDivider,
       isDisabled,
       isFocused,
-      label,
-      hasDivider,
-      useAriaSelected,
-      ...otherProps
+      role,
+      ...elemProps
     } = this.props;
 
     iconProps = setIconProps(icon, isDisabled, isFocused);
@@ -173,17 +172,21 @@ export default class MenuItem extends React.Component<MenuItemProps> {
         {hasDivider && <Divider />}
         <Item
           tabIndex={-1}
-          aria-label={label}
+          id={id}
+          role={role}
           onClick={event => this.handleClick(event)}
           aria-disabled={!!isDisabled}
           isDisabled={!!isDisabled}
           isFocused={!!isFocused}
-          aria-selected={useAriaSelected && !!isFocused}
-          {...otherProps}
+          {...elemProps}
         >
-          {icon && iconProps && <StyledSystemIcon {...iconProps} />}
+          {icon && iconProps && (
+            <StyledSystemIcon {...iconProps} />
+          )}
           <LabelContainer>{children}</LabelContainer>
-          {secondaryIcon && secondaryIconProps && <SecondaryStyledSystemIcon {...secondaryIconProps} />}
+          {secondaryIcon && secondaryIconProps && (
+            <SecondaryStyledSystemIcon {...secondaryIconProps} />
+          )}
         </Item>
       </>
     );

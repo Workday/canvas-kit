@@ -191,7 +191,7 @@ describe('Menu Accessibility', () => {
   });
 
   test('role should be overridden', () => {
-    const newRole = 'option'
+    const newRole = 'option';
     const component = mount(<MenuItem role={newRole} />);
     expect(
       component
