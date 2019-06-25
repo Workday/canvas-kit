@@ -4,7 +4,11 @@
   "description": "Icon toolkit for Canvas kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "main": "dist/canvas-kit-css-icon",
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "main": "dist/canvas-kit-css-icon.min.js",
   "repository": {
     "type": "git",
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/icon/css"
@@ -15,7 +19,8 @@
     "to-slug-case": "^1.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ../../../utils/js-build.js js/canvas-kit-css-icon.js"
   },
   "keywords": [
     "canvas",
