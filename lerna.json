@@ -9,7 +9,7 @@
       "ignoreChanges": ["modules/**/css/**"],
       "logLevel": "warn",
       "message": "chore(release): Publish [ci skip]",
-      "registry": "https://artifactory.workday.com/artifactory/api/npm/npm-virtual",
+      "registry": "https://registry.npmjs.org",
       "yes": true,
       "changelog": false
     }
