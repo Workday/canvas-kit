@@ -57,7 +57,7 @@ to get started
 Refer to the [API & Pattern Guidelines](API_PATTERN_GUIDELINES.md).
 
 Rules are enforced using [TSLint](https://palantir.github.io/tslint/) and code formatting is
-provided through [Prettier](prettier.io).
+provided through [Prettier](https://prettier.io/).
 
 To lint using TSLint, use `yarn lint`. To format and lint your code (careful - this can rewrite
 files), use `yarn format`.

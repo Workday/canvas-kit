@@ -2,8 +2,7 @@
   "name": "@workday/canvas-kit-css-banner",
   "version": "3.0.0-alpha.0",
   "description": "Errors and alerts for canvas-kit-css",
-  "homepage": "https://design.workday.com",
-  "author": "Joseph Le <joseph.le@workday.com>",
+  "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "files": [
     "dist",

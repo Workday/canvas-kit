@@ -197,8 +197,7 @@ cat > $packageJson << EOF
 	"name": "@workday/canvas-kit-css-$name",
 	"version": "0.0.0",
 	"description": "$description",
-	"homepage": "https://design.workday.com",
-	"author": "$author",
+	"author": "Workday, Inc. (https://www.workday.com)",
 	"license": "Apache-2.0",
   "files": [
     "dist",

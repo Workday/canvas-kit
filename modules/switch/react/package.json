@@ -2,7 +2,6 @@
   "name": "@workday/canvas-kit-react-switch",
   "version": "3.0.0-alpha.0",
   "description": "A Canvas-styled switch",
-  "homepage": "https://design.workday.com",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",

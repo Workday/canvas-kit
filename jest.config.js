@@ -5,10 +5,10 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'modules/**/*.{tsx,}',
-    '!**/canvas-kit-react-header/**/lib/Header.tsx',
-    '!**/canvas-kit-react-common/**/ControlledComponentWrapper.tsx',
-    '!**/canvas-kit-react-common/**/InputProviderDecorator.tsx',
-    '!**/canvas-kit-react-common/**/SectionDecorator.tsx',
+    '!**/header/**/lib/Header.tsx',
+    '!**/common/**/ControlledComponentWrapper.tsx',
+    '!**/common/**/InputProviderDecorator.tsx',
+    '!**/common/**/SectionDecorator.tsx',
     '!**/index.{ts,tsx,js,jsx}',
     '!**/stories*.{ts,tsx,js,jsx}',
   ],
@@ -27,6 +27,6 @@ module.exports = {
   testMatch: ['**/?(*.)+(spec|test|snapshot).ts?(x)'],
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   clearMocks: true,
-  reporters: ['default', ['jest-junit', {suiteName: 'Canvas Kit React tests'}]],
+  reporters: ['default', ['jest-junit', {suiteName: 'Canvas Kit tests'}]],
   testURL: 'http://localhost',
 };
