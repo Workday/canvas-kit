@@ -3,51 +3,65 @@
 We will continue to update this list as we add or make significant changes to react modules that are
 part of Canvas.
 
+:white_check_mark: - Available     
+:clock330: - In progress / needs an update.
+
 ## Primitives
 
-| Component                               |       Status       |                               Docs                                |
+
+
+
+| Component                               |       Status       |                               Guidelines                                |
 | --------------------------------------- | :----------------: | :---------------------------------------------------------------: |
-| [Colors](modules/canvas-kit-react-core) | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/color) |
-| [Depth](modules/canvas-kit-react-core)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/depth) |
-| [Icons](modules/canvas-kit-react-icon)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/icons) |
-| [Space](modules/canvas-kit-react-core)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/space) |
-| [Type](modules/canvas-kit-react-core)   | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/type)  |
+| [Colors](modules/core) | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/color) |
+| [Depth](modules/core)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/depth) |
+| [Icons](modules/icon)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/icons) |
+| [Space](modules/core)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/space) |
+| [Type](modules/core)   | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/type)  |
 
 ## Components
 
-| Component                                                       |       Status       |                                        Docs                                        |
-| --------------------------------------------------------------- | :----------------: | :--------------------------------------------------------------------------------: |
-| [Avatar](modules/canvas-kit-react-avatar)                       | :white_check_mark: |                                                                                    |
-| [Button - Standard](modules/canvas-kit-react-button)            | :white_check_mark: |      [:blue_book:](https://design.workday.com/guidelines/components/buttons)       |
-| [Button - Drop Down](modules/canvas-kit-react-button)           | :white_check_mark: |      [:blue_book:](https://design.workday.com/guidelines/components/buttons)       |
-| [Button - Icon](modules/canvas-kit-react-button)                | :white_check_mark: |      [:blue_book:](https://design.workday.com/guidelines/components/buttons)       |
-| [Button - Text](modules/canvas-kit-react-button)                | :white_check_mark: |      [:blue_book:](https://design.workday.com/guidelines/components/buttons)       |
-| [Card](modules/canvas-kit-react-card)                           | :white_check_mark: |                                                                                    |
-| [Checkbox](modules/canvas-kit-react-checkbox)                   | :white_check_mark: |    [:blue_book:](https://design.workday.com/guidelines/components/check-boxes)     |
-| Color Picker                                                    |                    |                                                                                    |
-| Context Menu                                                    |                    |                                                                                    |
-| [Cookie Banner](modules/canvas-kit-react-cookie-banner)         | :white_check_mark: |                                                                                    |
-| Date Input                                                      |                    |    [:blue_book:](https://design.workday.com/guidelines/components/date-picker)     |
-| Dialog                                                          |                    |                                                                                    |
-| Drop Down Select                                                |                    |   [:blue_book:](https://design.workday.com/guidelines/components/dropdown-menus)   |
-| Empty State                                                     |                    |                                                                                    |
-| [Action Bar](modules/canvas-kit-react-action-bar)               | :white_check_mark: |                                                                                    |
-| Footer                                                          |                    |                                                                                    |
-| [Header](modules/canvas-kit-react-header)                       | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/components/application-header) |
-| List                                                            |                    |                                                                                    |
-| [Loading Animation](modules/canvas-kit-react-loading-animation) | :white_check_mark: |                                                                                    |
+
+| Component                                                       |       React       | CSS  |                                        Guidelines                                        |
+| --------------------------------------------------------------- | :----------------: | :----------------: |:--------------------------------------------------------------------------------: |
+| **Buttons** |
+| [Button - Standard](modules/button)            | :white_check_mark: |  :clock330:  |    [:blue_book:](https://design.workday.com/components/buttons/buttons)       |
+| [Button - Drop Down](modules/button)           | :white_check_mark: | :clock330:  |     [:blue_book:](https://design.workday.com/components/buttons/buttons)       |
+| [Button - Icon](modules/button)                | :white_check_mark: | :clock330: |      [:blue_book:](https://design.workday.com/components/buttons/icon-buttons)       |
+| [Button - Text](modules/button)                | :white_check_mark: | :clock330: |     [:blue_book:](https://design.workday.com/components/buttons/text-buttons)       |
+| [Action Bar](modules/action-bar)               | :white_check_mark: |   :white_check_mark:                             |  [:blue_book:](https://design.workday.com/components/buttons/action-bar)       |                                                  |
+| **Containers** |
+| [Card](modules/card)                           | :white_check_mark: |   |  [:blue_book:](https://design.workday.com/components/containers/cards)                                                                                   |
+| Tabs                                                            |   |                 |               |
+| [Table](modules/table)                         | :white_check_mark: | :white_check_mark: |     [:blue_book:](https://design.workday.com/components/containers/tables)       |
+| **Form Elements** |
+| [Form Field](modules/form-field)                                                    |   :white_check_mark:                 |                  :clock330:                                                                  |
+| [Checkbox](modules/checkbox)                   | :white_check_mark: | :clock330: |    [:blue_book:](https://design.workday.com/components/form-elements/checkboxes)     |
+| [Color Input]([modules/color-picker)                                                    |   :white_check_mark:                 ||   [:blue_book:](https://design.workday.com/components/form-elements/color-input)                                                                                 |
+| Date Input                                                      |                    |    |
+| [Drop Down Select](modules/select)                                                |  :white_check_mark:    |       :clock330:         |     |
 | Numeric Input                                                   |                    |                                                                                    |
-| [Menu](modules/canvas-kit-react-menu)                           | :white_check_mark: |                                                                                    |
-| [Page Header](modules/canvas-kit-react-page-header)             | :white_check_mark: |    [:blue_book:](https://design.workday.com/guidelines/components/page-header)     |
-| [Pop Up](modules/canvas-kit-react-popup)                        | :white_check_mark: |                                                                                    |
-| Progress Bar                                                    |                    |                                                                                    |
-| [Radio Button](modules/canvas-kit-react-radio)                  | :white_check_mark: |   [:blue_book:](https://design.workday.com/guidelines/components/radio-buttons)    |
-| Rich Text Editor                                                |                    |  [:blue_book:](https://design.workday.com/guidelines/components/rich-text-editor)  |
+| [Radio Button](modules/radio)                  | :white_check_mark: | :clock330: | [:blue_book:](https://design.workday.com/components/form-elements/radio-buttons)    |
+| [TextArea](modules/text-area)                  | :white_check_mark: |                :clock330:                                                                    |[:blue_book:](https://design.workday.com/components/form-elements/text-area)|
+| [Text Input](modules/text-input)               | :white_check_mark: |  :clock330:  |  [:blue_book:](https://design.workday.com/components/form-elements/text-input)     |
+| [Switch](modules/switch)                       | :white_check_mark: |  
 | Slider                                                          |                    |                                                                                    |
-| [Table](modules/canvas-kit-react-table)                         | :white_check_mark: |       [:blue_book:](https://design.workday.com/guidelines/components/tables)       |
-| Tabs                                                            |                    |        [:blue_book:](https://design.workday.com/guidelines/components/tabs)        |
-| Toast                                                           |                    |                                                                                    |
-| [Tooltip](modules/canvas-kit-react-tooltip)                     | :white_check_mark: |                                                                                    |
-| [TextArea](modules/canvas-kit-react-text-area)                  | :white_check_mark: |                                                                                    |
-| [Text Input](modules/canvas-kit-react-text-input)               | :white_check_mark: |    [:blue_book:](https://design.workday.com/guidelines/components/text-inputs)     |
-| [Switch](modules/canvas-kit-react-switch)                       | :white_check_mark: |                                                                                    |  |
+| **Indicators** |
+| [Banners](modules/banner) | :white_check_mark: |   :clock330:                                                                                 |[:blue_book:](https://design.workday.com/components/indicators/banners)     |
+| [Loading Animation](modules/loading-animation) | :white_check_mark: |       :clock330:                                                                             |[:blue_book:](https://design.workday.com/components/indicators/loading-animation)     |
+| [Skeleton Loader](modules/skeleton) | :white_check_mark: |                                                                                   |[:blue_book:](https://design.workday.com/components/indicators/skeleton-loader)     |
+| Progress Bar                                                    |                    |                                                                                    |
+| [Status Indicator](modules/status-indicator) | :white_check_mark: |                                                                                   |[:blue_book:](https://design.workday.com/components/indicators/status-indicators)     |
+| **Navigation** |
+| [Header](modules/header)                       | :white_check_mark: | |  [:blue_book:](https://design.workday.com/components/navigation/headers)  |
+| [Page Header](modules/page-header)             | :white_check_mark: | :white_check_mark: |  [:blue_book:](https://design.workday.com/components/navigation/page-header)      |
+| [Side Panel](modules/side-panel) | :white_check_mark: |
+| **Popups** |
+| [Cookie Banner](modules/banner)         | :white_check_mark: |                                                                                    |
+|  [Modal](modules/modal)                                                          |      :white_check_mark:              |                                                                                    |
+| [Toast](modules/toast)                                                           |    :white_check_mark:              | |[:blue_book:](https://design.workday.com/components/popups/toasts) | |                                                                                    |
+| [Tooltip](modules/tooltip)                     | :white_check_mark: |                                                                                    |  [:blue_book:](https://design.workday.com/components/popups/tooltips) |
+| [Menu](modules/menu)                           | :white_check_mark: | :white_check_mark: | [:blue_book:](https://design.workday.com/components/popups/menus) |                                                                                    |
+| [Pop Up](modules/popup)                        | :white_check_mark: | :white_check_mark:                                                                                   |
+| **Miscellaneous** |
+| [Avatar](modules/avatar)                       | :white_check_mark: |  |                                                                                    |
