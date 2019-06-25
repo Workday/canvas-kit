@@ -1,6 +1,6 @@
 # Canvas Kit Table
 
-A component for applying Canvas styling to table elements.
+Data table styling for Canvas Kit.
 
 ## Installation
 
