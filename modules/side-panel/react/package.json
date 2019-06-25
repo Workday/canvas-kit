@@ -11,7 +11,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://ghe.megaleo.com/design/canvas-kit-react/tree/master/modules/canvas-kit-react-side-panel"
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/side-panel/react"
   },
   "files": [
     "dist/",
