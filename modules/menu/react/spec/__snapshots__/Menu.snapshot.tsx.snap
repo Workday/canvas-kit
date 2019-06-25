@@ -41,8 +41,7 @@ exports[`Menu Snapshots renders a disabled menu item 1`] = `
   outline: none;
 }
 
-.emotion-2:hover .wd-icon-fill,
-.emotion-2 .wd-icon-fill {
+.emotion-2:hover .wd-icon-fill {
   fill: #b9c0c7;
 }
 
@@ -1171,7 +1170,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
 }
 
 .emotion-1:hover .wd-icon-fill {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-1 .wd-icon-accent {
@@ -1219,7 +1218,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
 }
 
 .emotion-5:hover .wd-icon-fill {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5 .wd-icon-accent {
