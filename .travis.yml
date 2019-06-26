@@ -19,8 +19,7 @@ script:
 - yarn build-storybook
 deploy:
   provider: script
-  script:
-  - ./utils/storybook/commitDocs.sh
+  script: ./utils/storybook/commitDocs.sh
   on:
     branch: master
 env:
