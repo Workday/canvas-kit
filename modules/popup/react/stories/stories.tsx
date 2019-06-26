@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import Popper from '@material-ui/core/Popper';
 
-import {Button} from '@workday/canvas-kit-react-button';
+import {beta_Button as Button} from '@workday/canvas-kit-react-button';
 import {Popup} from '../index';
 import README from '../README.md';
 

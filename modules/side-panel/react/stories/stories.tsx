@@ -12,7 +12,7 @@ import {colors, type} from '@workday/canvas-kit-react-core';
 import README from '../README.md';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {Header} from '@workday/canvas-kit-react-header';
-import {Button, ButtonTypes, IconButton, ButtonSizes} from '@workday/canvas-kit-react-button';
+import {beta_Button as Button, IconButton, ButtonSizes} from '@workday/canvas-kit-react-button';
 import {Avatar} from '@workday/canvas-kit-react-avatar';
 import SidePanel, {SidePanelOpenDirection, SidePanelBackgroundColor} from '..';
 
@@ -104,7 +104,7 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
         header={'Side Panel Header'}
       >
         {open ? (
-          <Button buttonType={ButtonTypes.Primary}>Add New</Button>
+          <Button buttonType={Button.Types.Primary}>Add New</Button>
         ) : (
           <AddButton
             toggled={false}
@@ -158,7 +158,6 @@ storiesOf('Side Panel', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <h1 className="section-label">Standard Side Panel</h1>
       <div style={{height: '67vh', position: 'relative'}}>
         <SidePanel
           sidePanelBackgroundColor={SidePanelBackgroundColor.Gray}
@@ -171,7 +170,6 @@ storiesOf('Side Panel', module)
   ))
   .add('Configurable', () => (
     <div className="story">
-      <h1 className="section-label">Configurable Side Panel</h1>
       <div style={{height: '67vh', position: 'relative'}}>
         <Header brandUrl="#">
           <Avatar
