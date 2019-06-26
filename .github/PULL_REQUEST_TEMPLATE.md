@@ -15,11 +15,11 @@
 - [ ] `yarn test` passes
 - [ ] all (dev)dependencies that the module needs is added to its `package.json`
 - [ ] code has been documented and, if applicable, usage described in README.md
-- [ ] module has been added to `canvas-kit-react`, if applicable
+- [ ] module has been added to `canvas-kit-react` and/or `canvas-kit-css` universal modules, if applicable
 - [ ] design approved final implementation
 - [ ] a11y approved final implementation
 - [ ] code adheres to the [API & Pattern guidelines](../API_PATTERN_GUIDELINES.md)
 
 ## Additional References
 
-<!-- Upload screenshots of the final component, add references to component specification files from Sketch, or any other artifacts that would help a reviewer understand the choices you made in the PR. -->
+<!-- Upload screenshots of the final component or any other artifacts that would help a reviewer understand the choices you made in the PR. -->
