@@ -7,6 +7,10 @@ git:
 branches:
   only:
   - master
+
+stages:
+  - before_install
+
 before_install:
 - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
@@ -16,9 +20,10 @@ script:
 - yarn build:rebuild
 - yarn test
 - yarn build-storybook
-deploy:
-  script:
+before_deploy:
     - ./utils/storybook/commitDocs.sh
+    on:
+      branch: master
 env:
   global:
     secure: 0IjKwQ/4FnH2vjbD3sql/6iviJoiy3PFs7uJF4D8DVmobrSbX2GAYXksqlqYF6xxD5WzbcB5ArI3p3BY0E1cY8MpxsyCqxzy7nVzb/wZ99CFYEpoYL5E/DIQkUgSjuuTbf66Isc0dVd03cyaeedc8A6jqIzt8Ly9wcYv+W2Peq3bTE6KUPyw0sJ0ueiCghrnG5HdUC5Sx2Hn1vNQEphntQbD1NsNNPEZM+2fFATcDA4Je06FotBHPKmTsc4zzGKe0FnsIL3BKqCQWQOzRMHtmNKPrgagys7tMWSvznjcqs4w5rh63hy6c1LukDa617ZWHHX6iUy4qucgipv7VuH27DKlGA/8O0SiizRGD7keFLGxG5NKwYXr4wU6828gKKqpaMXK6HUF+xc0vsTiSTfK9qiXsxV/v6exdsOohOyxqpFyR9vLczkBdPc+bel0W78uWjPVOtay9yKA+w6P1RZ4bBC2t4nTaT1jTKJ1gsK1ttpPqykcfA909Me7so390WA3FiSNRCZnsKdJN0s3NwrO3oJfOjfe2t2wEyFzcnVwxZVcZhnHHILNmXGvnvoyzSnMIVWntTIgP28FKFCQI+SUb+3R2Oa6vC4z/I2wwNalb8DkJtSPVfEOSbmU5uW4S9ed5xqQJhMY0yHVt9t83b3mTnkv8vyoa05T57zV+n/+aSQ=
