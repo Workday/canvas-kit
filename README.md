@@ -1,7 +1,20 @@
 # Workday Canvas Kit
 
-This project provides a set of components that can be used to implement user experiences consistent
-with [Workday's design principles](https://design.workday.com/).
+This project provides a set of components for the Workday Canvas Design System that can be used to
+implement user experiences consistent with
+[Workday's design principles](https://design.workday.com/).
+
+<a href="./LICENSE">
+  <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
+</a>
+<a href="https://lerna.js.org">
+  <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
+</a>
+<a href="./CONTRIBUTING.md">
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
+</a>
+
+---
 
 **:white_check_mark: For a list of available react modules see
 [Canvas Kit Component Status](COMPONENT_STATUS.md)**
