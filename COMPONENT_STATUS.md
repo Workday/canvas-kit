@@ -57,7 +57,7 @@ part of Canvas.
 | [Page Header](modules/page-header)             | :white_check_mark: | :white_check_mark: |  [:blue_book:](https://design.workday.com/components/navigation/page-header)      |
 | [Side Panel](modules/side-panel) | :white_check_mark: |
 | **Popups** |
-| [Cookie Banner](modules/banner)         | :white_check_mark: |                                                                                    |
+| [Cookie Banner](modules/cookie-banner)         | :white_check_mark: |                                                                                    |
 |  [Modal](modules/modal)                                                          |      :white_check_mark:              |                                                                                    |
 | [Toast](modules/toast)                                                           |    :white_check_mark:              | |[:blue_book:](https://design.workday.com/components/popups/toasts) | |                                                                                    |
 | [Tooltip](modules/tooltip)                     | :white_check_mark: |                                                                                    |  [:blue_book:](https://design.workday.com/components/popups/tooltips) |
