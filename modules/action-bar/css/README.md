@@ -1,6 +1,6 @@
 # Canvas Kit Action Bar
 
-Full width action bar fixed to bottom of screen.
+Full width action bar that can be fixed to the bottom of the screen.
 
 ## Installation
 
@@ -11,7 +11,7 @@ yarn add @workday/canvas-kit-css
 or
 
 ```sh
-yarn add @workday/canvas-kit-css-fat
+yarn add @workday/canvas-kit-css-action-bar
 ```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
@@ -41,7 +41,7 @@ button sets should be wrapped around `wdc-action-bar-container`.
 
 ### Variants
 
-#### `.wdc-fat.wdc-fat-fixed`
+#### `.wdc-action-bar.wdc-action-bar-fixed`
 
 > Fixes the toolbar to the bottom of the window (uses `position: fixed`)
 
