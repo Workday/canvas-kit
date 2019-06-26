@@ -2,34 +2,23 @@ language: node_js
 node_js: 8
 cache:
   yarn: true
-  directories:
-    - modules
 git:
   depth: 3
 branches:
   only:
-    - master
-    - travis-config
+  - master
 before_install:
-  - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
-  - export PATH="$HOME/.yarn/bin:$PATH"
+- npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+- export PATH="$HOME/.yarn/bin:$PATH"
 script:
-  - yarn install --production=false
-  - yarn build:rebuild
-  - yarn test
-  - yarn build-storybook
+- yarn install --production=false
+- yarn build:rebuild
+- yarn test
+- yarn build-storybook
+deploy:
+  script:
+    - ./utils/storybook/commitDocs.sh
 env:
   global:
-    secure: C0W3PWVSlC8uE2yElg/G8tvt8OF4JRsbui/xNJc9uVPX3cqeOh266ESgnFLaL1JjF1ZMjUERZ7hwEYWx7/vrfbKja9LTlujSnG5cq4xqCd7kzrDn3mAoCqR4uALWy/hWbcBi01bK/b8Z4CcOvyZYPqkmX1u0V0XI+4JPLIqP8D/ZAfnQyjzO6U6NpaaLJ7NUmcGZCUmUheL0NzNjXGmXU8hxvqo/OOu1sYUeLukkPZCHTc4hObthWOgwggz8EQ/kKjfChcOaM9mVQFzmd0mnccoA+9bY0DB6y0xeZ5MhV7Vp2QVYwieLj6PwrMmwi7rLsY4HozL1Uquf8LLuEKuVx89wYX43uASkte6L0HwCnpith46wVRBwsnSPKYU7P3wmTe49Wv3qeXtO9EVBWwj1IwCe2gE1Wt7fAbQRnL22XLruZWJL1g3rSrX2iF9Mw1a1MxuwJ+l+J/XLy4T65yJpXVwLdlQpO4IAqqtnx6Eb+BXQO88mq+kJT+jqf9rFcf/w8L3FwuXmW/5tcbkasJpDHkEiOn8u1Gao+02Zfft77nDsnZ3FAfWXwPIUdhjLuRWQ3dPsRYGN9yonsVfHM/QgXqJtbJLVRRr0Ylx6C3lANfWVSa88tL9wYzj9+koSbGP6IIIpXxHWD2kuFoGzGN560bkk1HPpnr/hCRedVwIeqFI=
-deploy:
-  provider: s3
-  access_key_id: AKIAQLRSS2M327OINEWD
-  secret_access_key:
-    secure: ZU7xIEgSBIGLztaWTgAFCKkkNwOzj9YklpSgHxq8xlzYv6TgmNrafZ2/NwFxgH1VZXQ0O95hdGbezZFSR3h7pFX1h03uN88fLAZCouVAJq0Cy2rTaFDfn6b7mE/vtkAmKFuCzQQ8ECkZBnHQeQUBeSAx5BwWtlBDO9AtDpZOuSR6MRBnPZdaugYllCKTeJ6weaI9zmIoO+a3nnCtivWE/kpIuwQdcgr2hQm43g820q4wq20OmKSaHAi6rPa43wbwFKFyAzZxw3hwa/d0wabdhEniI3YkrkAy4nELueErb5mkOIxRTg/ArtSA/xrrn36nVojXUvKGwUWj5oMFt9MRUMQoRKjlSLIa6LRxfSMtxhj9fIPrTg88oMhfywSEV4HG690jOlb6MJLdQ0NvCEpDOOItu6FHm/5+iHrLqfBSVfdv83/05n+XEUBL5M3cM6vktwtS2yag9gqfZFvIjQBbOOCk1pKjnc94tVcrQ06onsQJ2RVQ4nJYJDc26WMh455iCFI7HpJ0E7CN+ihTgaeFizZpHyI/j4I675rh6GbVYsZd5vXy+116fAaRq4oZHrtrTc+7VR1NPdWEMvkgXuWgm+knRa32+kwb8N7NpihoQAaMN8MsDDxhJx8cp/aRVB1d5YtuLhBamEOP27bADz3ovAGGxA7ZRh10PrKvN/cVgNI=
-  bucket: travis-storybook-test
-  acl: private
-  local_dir: docs
-  skip_cleanup: true
-  on:
-    repo: Workday/canvas-kit
+    secure: 0IjKwQ/4FnH2vjbD3sql/6iviJoiy3PFs7uJF4D8DVmobrSbX2GAYXksqlqYF6xxD5WzbcB5ArI3p3BY0E1cY8MpxsyCqxzy7nVzb/wZ99CFYEpoYL5E/DIQkUgSjuuTbf66Isc0dVd03cyaeedc8A6jqIzt8Ly9wcYv+W2Peq3bTE6KUPyw0sJ0ueiCghrnG5HdUC5Sx2Hn1vNQEphntQbD1NsNNPEZM+2fFATcDA4Je06FotBHPKmTsc4zzGKe0FnsIL3BKqCQWQOzRMHtmNKPrgagys7tMWSvznjcqs4w5rh63hy6c1LukDa617ZWHHX6iUy4qucgipv7VuH27DKlGA/8O0SiizRGD7keFLGxG5NKwYXr4wU6828gKKqpaMXK6HUF+xc0vsTiSTfK9qiXsxV/v6exdsOohOyxqpFyR9vLczkBdPc+bel0W78uWjPVOtay9yKA+w6P1RZ4bBC2t4nTaT1jTKJ1gsK1ttpPqykcfA909Me7so390WA3FiSNRCZnsKdJN0s3NwrO3oJfOjfe2t2wEyFzcnVwxZVcZhnHHILNmXGvnvoyzSnMIVWntTIgP28FKFCQI+SUb+3R2Oa6vC4z/I2wwNalb8DkJtSPVfEOSbmU5uW4S9ed5xqQJhMY0yHVt9t83b3mTnkv8vyoa05T57zV+n/+aSQ=
