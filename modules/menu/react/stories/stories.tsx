@@ -11,7 +11,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import Popper from '@material-ui/core/Popper';
 import {Transition} from 'react-transition-group';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import {Button, ButtonProps} from '@workday/canvas-kit-react-button';
+import {DropdownButton, ButtonProps, BetaButtonTypes} from '@workday/canvas-kit-react-button';
 
 import Menu from '../lib/Menu';
 import MenuItem, {MenuItemProps} from '../lib/MenuItem';
@@ -19,10 +19,10 @@ import MenuItem, {MenuItemProps} from '../lib/MenuItem';
 import README from '../README.md';
 
 const FocusableButton = React.forwardRef(
-  (props: ButtonProps, ref: React.RefObject<HTMLButtonElement>) => (
-    <Button buttonType={Button.Types.Primary} buttonRef={ref} {...props}>
+  (props: ButtonProps<BetaButtonTypes>, ref: React.RefObject<HTMLButtonElement>) => (
+    <DropdownButton buttonRef={ref} {...props}>
       {props.children}
-    </Button>
+    </DropdownButton>
   )
 );
 interface MenuItemProperties {
@@ -126,7 +126,7 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
             id={this.controlButtonId}
             ref={this.buttonRef}
           >
-            Open Popup
+            Open Menu
           </FocusableButton>
           <Popper
             transition={true}
