@@ -308,8 +308,10 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
       className="emotion-3"
     >
       <button
+        aria-label="Close"
         className="emotion-1 emotion-2"
         onClick={[MockFunction]}
+        title="Close"
       >
         <span
           className="emotion-0"
@@ -562,8 +564,10 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
       className="emotion-3"
     >
       <button
+        aria-label="Close"
         className="emotion-1 emotion-2"
         onClick={[MockFunction]}
+        title="Close"
       >
         <span
           className="emotion-0"
@@ -812,8 +816,10 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
       className="emotion-3"
     >
       <button
+        aria-label="Close"
         className="emotion-1 emotion-2"
         onClick={[MockFunction]}
+        title="Close"
       >
         <span
           className="emotion-0"
