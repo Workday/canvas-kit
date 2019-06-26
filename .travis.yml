@@ -8,9 +8,6 @@ branches:
   only:
   - master
 
-stages:
-  - before_install
-
 before_install:
 - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
