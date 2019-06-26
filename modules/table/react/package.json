@@ -15,7 +15,7 @@
   "files": [
     "dist/",
     "lib/",
-    "index.tsx"
+    "index.ts"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

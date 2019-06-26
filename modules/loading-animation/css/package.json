@@ -4,6 +4,11 @@
   "description": "Animations used while a page or component is loading.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "lib",
+    "index.scss"
+  ],
   "style": "dist/canvas-kit-css-loading-animation.min.css",
   "main": "dist/canvas-kit-css-loading-animation.min.css",
   "repository": {

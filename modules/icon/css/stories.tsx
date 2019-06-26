@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
 // @ts-ignore
-import initializeIcons from './js/canvas-kit-css-icon';
+import initializeIcons from './lib/canvas-kit-css-icon';
 
 class IconDemo extends Component {
   componentDidMount() {
