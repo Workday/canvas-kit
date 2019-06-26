@@ -6,12 +6,10 @@
   "command": {
     "publish": {
       "conventionalCommits": true,
-      "ignoreChanges": ["modules/**/css/**"],
       "logLevel": "warn",
       "message": "chore(release): Publish [ci skip]",
       "registry": "https://registry.npmjs.org",
-      "yes": true,
-      "changelog": false
+      "yes": true
     }
   }
 }
