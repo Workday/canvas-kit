@@ -16,6 +16,7 @@ script:
 - yarn install --production=false
 - yarn build:rebuild
 - yarn test
+- rm -rf docs
 - yarn build-storybook
 deploy:
   provider: script
