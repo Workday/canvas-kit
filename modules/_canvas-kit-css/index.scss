@@ -1,9 +1,11 @@
+$wdc-system-icons-path: '../../node_modules/@workday/canvas-system-icons-web/dist/svg' !default;
+
 @import '~@workday/canvas-kit-css-action-bar';
 @import '~@workday/canvas-kit-css-alert';
 @import '~@workday/canvas-kit-css-button';
 @import '~@workday/canvas-kit-css-card';
 @import '~@workday/canvas-kit-css-core';
-@import '~@workday/canvas-kit-css-color-form';
+@import '~@workday/canvas-kit-css-form';
 @import '~@workday/canvas-kit-css-icon';
 @import '~@workday/canvas-kit-css-grid-system';
 @import '~@workday/canvas-kit-css-loading-annimation';

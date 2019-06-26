@@ -1,0 +1,47 @@
+{
+    "name": "@workday/canvas-kit-css",
+    "version": "2.0.1",
+    "description": "The css for canvas-kit-css",
+    "homepage": "https://design.workday.com",
+    "author": "Alex Nicholls",
+    "isCdnModule": true,
+    "license": "Apache-2.0",
+    "files": [
+      "dist",
+      "lib",
+      "index.scss"
+    ],
+    "style": "dist/canvas-kit-css.css",
+    "main": "dist/canvas-kit-css.css",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_canvas-kit-css"
+    },
+    "dependencies": {
+      "@workday/canvas-kit-css-action-bar": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-alert": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-button": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-card": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-core": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-icon": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-form": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-grid-system": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-loading-annimation": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-page-header": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-popup": "^3.0.0-alpha.0",
+      "@workday/canvas-kit-css-table": "^3.0.0-alpha.0"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "canvas-kit-build build-css index.scss",
+      "prepublishOnly": "yarn build"
+    },
+    "keywords": [
+      "canvas",
+      "canvas-kit",
+      "css",
+      "scss",
+      "sass",
+      "workday"
+    ]
+  }
