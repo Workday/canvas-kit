@@ -1,6 +1,12 @@
 @import '~@workday/canvas-kit-css-core/lib/mixins';
 @import '~@workday/canvas-kit-css-core/lib/variables';
-@import './lib/variables.scss';
-@import './lib/form.scss';
-@import './lib/errors.scss';
+@import '~@workday/canvas-kit-css-common/lib/variables';
+@import '~@workday/canvas-kit-css-common/lib/forms';
+@import '~@workday/canvas-kit-css-text-input/lib/text-input';
+@import '~@workday/canvas-kit-css-text-area/lib/text-area';
+@import '~@workday/canvas-kit-css-select/lib/select';
+@import '~@workday/canvas-kit-css-checkbox/lib/checkbox';
+@import '~@workday/canvas-kit-css-radio/lib/radio';
+@import '~@workday/canvas-kit-css-common/lib/errors';
+@import './lib/form-field.scss';
 @import './lib/accessibility.scss';

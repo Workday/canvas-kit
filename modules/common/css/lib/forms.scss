@@ -1,0 +1,105 @@
+// Styles common to elements with text boxes like text inputs and selects
+@mixin wdc-form-common-box() {
+  @include wdc-type();
+  @include wdc-type-body-2();
+  background-color: $wdc-color-french-vanilla-100;
+  display: block;
+  border: 1px solid $wdc-color-soap-500;
+  border-radius: 3px;
+  min-width: $wdc-form-field-min-width;
+  line-height: $wdc-spacing-s - 2;
+  padding: $wdc-spacing-xxs;
+  box-sizing: border-box;
+  transition: 0.2s border-color, 0.2s box-shadow;
+
+  &.wdc-form-hover:not([disabled]):not(.wdc-form-disabled),
+  &:hover:not([disabled]):not(.wdc-form-disabled) {
+    border-color: $wdc-color-licorice-100;
+  }
+}
+
+// Styles common to textarea and text inputs
+@mixin wdc-form-text() {
+  @include wdc-form-common-box();
+
+  &::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: $wdc-color-licorice-100;
+  }
+
+  &:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $wdc-color-licorice-100;
+    opacity: 1;
+  }
+
+  &::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $wdc-color-licorice-100;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $wdc-color-licorice-100;
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $wdc-color-licorice-100;
+  }
+
+  // Show focus outline still on disabled class
+  &.wdc-form-focus:not([disabled]),
+  &:focus:not([disabled]) {
+    @include wdc-form-focus();
+  }
+}
+
+// Common styles for checkboxes and radios
+@mixin wdc-form-common-control() {
+  +.wdc-form-label {
+    margin-left: 8px;
+    display: inline;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &:before {
+      width: $wdc-spacing-s;
+      height: $wdc-spacing-s;
+      background: $wdc-color-french-vanilla-100;
+      border: 1px solid $wdc-color-licorice-100;
+      border-radius: 2px;
+      transition: 0.2s border-color, 0.2s box-shadow;
+    }
+  }
+
+  &+.wdc-form-label {
+    @include wdc-type-body-2();
+    display: inline-block;
+    margin: 0 0 0 $wdc-spacing-xxs;
+    top: -4px;
+  }
+
+  &:disabled,
+  &.wdc-form-disabled {
+    border-color: $wdc-color-soap-500;
+    pointer-events: none;
+
+    &+.wdc-form-label {
+      color: $wdc-color-licorice-100;
+    }
+  }
+}
+
+@mixin wdc-form-focus() {
+  border-color: $wdc-color-blueberry-500;
+  box-shadow: 0 0 0 1px $wdc-color-blueberry-500;
+  outline: none;
+}
