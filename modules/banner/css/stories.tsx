@@ -12,9 +12,9 @@ storiesOf('CSS/Banner/Alert ', module)
       <h1 className="section-label">Banner Alert Full</h1>
       <div>
         <section>
-          <a className="wdc-alert-bar" href="#">
-            <span className="wdc-alert-bar-text">10 Alerts</span>
-            <span className="wdc-alert-bar-link">View All</span>
+          <a className="wdc-banner" href="#">
+            <span className="wdc-banner-text">10 Alerts</span>
+            <span className="wdc-banner-link">View All</span>
           </a>
         </section>
       </div>
@@ -25,8 +25,8 @@ storiesOf('CSS/Banner/Alert ', module)
       <h1 className="section-label">Banner Alert Mini</h1>
       <div>
         <section>
-          <a className="wdc-alert-bar wdc-alert-bar-mini" href="#">
-            <span className="wdc-alert-bar-text">10 Alerts</span>
+          <a className="wdc-banner wdc-banner-mini" href="#">
+            <span className="wdc-banner-text">10 Alerts</span>
           </a>
         </section>
       </div>
@@ -40,9 +40,9 @@ storiesOf('CSS/Banner/Error ', module)
       <h1 className="section-label">Banner Error Full</h1>
       <div>
         <section>
-          <a className="wdc-alert-bar wdc-alert-bar-error" href="#">
-            <span className="wdc-alert-bar-text">24 Errors and 12 Alerts</span>
-            <span className="wdc-alert-bar-link">View All</span>
+          <a className="wdc-banner wdc-banner-error" href="#">
+            <span className="wdc-banner-text">24 Errors and 12 Alerts</span>
+            <span className="wdc-banner-link">View All</span>
           </a>
         </section>
       </div>
@@ -53,8 +53,8 @@ storiesOf('CSS/Banner/Error ', module)
       <h1 className="section-label">Banner Error Mini</h1>
       <div>
         <section>
-          <a className="wdc-alert-bar wdc-alert-bar-error wdc-alert-bar-mini" href="#">
-            <span className="wdc-alert-bar-text">24 Errors and 12 Alerts</span>
+          <a className="wdc-banner wdc-banner-error wdc-banner-mini" href="#">
+            <span className="wdc-banner-text">24 Errors and 12 Alerts</span>
           </a>
         </section>
       </div>
