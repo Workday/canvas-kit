@@ -1,0 +1,46 @@
+// Radios
+@mixin wdc-form-radio() {
+  @include wdc-form-common-control();
+
+  +.wdc-form-label:before {
+    border-radius: 100%;
+  }
+
+  &.wdc-form-checked,
+  &:checked {
+    +.wdc-form-label:before {
+      border-color: $wdc-color-blueberry-500;
+      box-shadow: inset 0 0 0 4px $wdc-color-blueberry-500;
+    }
+
+    &:focus:not([disabled]),
+    &.wdc-form-focus:not([disabled]) {
+      @include wdc-form-radio-checked-focus();
+    }
+  }
+
+  &:focus:not([disabled]),
+  &.wdc-form-focus:not([disabled]) {
+    @include wdc-form-radio-focus();
+  }
+}
+
+@mixin wdc-form-radio-checked-focus() {
+  +.wdc-form-label:before {
+    border-color: $wdc-color-french-vanilla-100;
+    box-shadow: 0 0 0 1px $wdc-color-french-vanilla-100, 0 0 0 3px $wdc-color-blueberry-500,
+      inset 0 0 0 4px $wdc-color-blueberry-500;
+  }
+}
+
+@mixin wdc-form-radio-focus() {
+  +.wdc-form-label:before {
+    border-color: $wdc-color-blueberry-500;
+    box-shadow: 0 0 0 1px $wdc-color-blueberry-500;
+    outline: none;
+  }
+}
+
+.wdc-form-radio {
+  @include wdc-form-radio();
+}

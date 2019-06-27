@@ -1,0 +1,14 @@
+@mixin wdc-form-textinput() {
+  @include wdc-form-text();
+}
+
+.wdc-form-textinput {
+  @include wdc-form-textinput();
+}
+
+.wdc-form-text {
+  @include wdc-type();
+  @include wdc-type-body-2();
+  display: block;
+  margin-top: $wdc-spacing-xxs;
+}
