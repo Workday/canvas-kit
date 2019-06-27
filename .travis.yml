@@ -35,7 +35,6 @@ deploy:
       branch: master
   - provider: script
     script: yarn lerna publish --no-changelog --pre-dist-tag prerelease
-    keep_history: true
     on:
       branch: release-3.0
 env:
