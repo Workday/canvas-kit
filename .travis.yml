@@ -20,6 +20,7 @@ script:
 - yarn build-storybook
 deploy:
   provider: script
+  skip_cleanup: true
   script: ./utils/storybook/commitDocs.sh
   on:
     branch: master
