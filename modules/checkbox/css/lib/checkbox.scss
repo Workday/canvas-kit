@@ -21,20 +21,23 @@
 
   &.wdc-form-checked,
   &:checked {
-    +.wdc-form-label:before {
-      border-color: $wdc-color-blueberry-500;
-      background-color: $wdc-color-blueberry-500;
+    + .wdc-form-label:before {
+      border-color: $wdc-color-common-focus-outline;
+      background-color: $wdc-color-common-focus-outline;
     }
 
-    +.wdc-form-label:after {
+    + .wdc-form-label:after {
       position: absolute;
       top: 0;
       left: 0;
       width: $wdc-spacing-s + 2px;
       height: $wdc-spacing-s + 2px;
       content: '';
-      background: svg-load('#{$_wdc-form-icons-path}/wd-icon-check.svg',
-        fill=$wdc-color-french-vanilla-100) center no-repeat;
+      background: svg-load(
+          '#{$_wdc-form-icons-path}/wd-icon-check.svg',
+          fill=$wdc-color-french-vanilla-100
+        )
+        center no-repeat;
       background-size: $wdc-spacing-s;
     }
 
@@ -51,17 +54,17 @@
 }
 
 @mixin wdc-form-checkbox-checked-focus() {
-  +.wdc-form-label:before {
-    border-color: $wdc-color-french-vanilla-100;
-    box-shadow: 0 0 0 1px $wdc-color-french-vanilla-100, 0 0 0 3px $wdc-color-blueberry-500,
-      inset 0 0 0 4px $wdc-color-blueberry-500;
+  + .wdc-form-label:before {
+    border-color: $wdc-color-input-background;
+    box-shadow: 0 0 0 1px $wdc-color-input-background, 0 0 0 3px $wdc-color-common-focus-outline,
+      inset 0 0 0 4px $wdc-color-common-focus-outline;
   }
 }
 
 @mixin wdc-form-checkbox-focus() {
-  +.wdc-form-label:before {
-    border-color: $wdc-color-blueberry-500;
-    box-shadow: 0 0 0 1px $wdc-color-blueberry-500;
+  + .wdc-form-label:before {
+    border-color: $wdc-color-common-focus-outline;
+    box-shadow: 0 0 0 1px $wdc-color-common-focus-outline;
     outline: none;
   }
 }
