@@ -1,8 +1,10 @@
 @mixin wdc-form-select() {
   @include wdc-form-common-box();
-  background: $wdc-color-french-vanilla-100 svg-load('#{$_wdc-form-icons-path}/wd-icon-caret-down.svg', fill=$wdc-color-licorice-200) calc(100% - #{$wdc-spacing-xxs}) center no-repeat;
+  background: $wdc-color-input-background
+    svg-load('#{$_wdc-form-icons-path}/wd-icon-caret-down.svg', fill=$wdc-color-licorice-200)
+    calc(100% - #{$wdc-spacing-xxs}) center no-repeat;
   background-size: $wdc-spacing-s;
-  color: $wdc-color-black-pepper-300;
+  color: $wdc-color-input-text;
   appearance: none;
   padding-right: $wdc-spacing-l;
 
@@ -14,15 +16,19 @@
 
   &.wdc-form-hover:not([disabled]):not(.wdc-form-disabled),
   &:hover:not([disabled]):not(.wdc-form-disabled) {
-    background-image: svg-load('#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
-      fill=$wdc-color-licorice-500);
+    background-image: svg-load(
+      '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
+      fill=$wdc-color-licorice-500
+    );
   }
 
   &:focus:not([disabled]),
   &.wdc-form-focus:not([disabled]) {
     @include wdc-form-focus();
-    background-image: svg-load('#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
-      fill=$wdc-color-blueberry-500);
+    background-image: svg-load(
+      '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
+      fill=$wdc-color-blueberry-500
+    );
   }
 
   &::-ms-expand {
