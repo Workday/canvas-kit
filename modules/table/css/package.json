@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-table",
-  "version": "3.0.0-alpha.0",
+  "version": "3.0.0-alpha.1",
   "description": "Table CSS for Canvas kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/table/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^3.0.0-alpha.0"
+    "@workday/canvas-kit-css-core": "^3.0.0-alpha.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
