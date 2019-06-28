@@ -8,6 +8,7 @@
     "dist",
     "lib"
   ],
+  "style": "dist/canvas-kit-css-icon-list.min.css",
   "main": "dist/canvas-kit-css-icon.min.js",
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "scss",
     "sass",
     "workday",
-    "icon"
+    "icon",
+    "icon-list"
   ]
 }
