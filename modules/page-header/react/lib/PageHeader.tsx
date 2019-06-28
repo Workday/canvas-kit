@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {makeMq} from '@workday/canvas-kit-react-common';
 
 export interface PageHeaderProps {
@@ -95,22 +95,9 @@ export default class PageHeader extends React.Component<PageHeaderProps> {
         return child;
       }
 
-      // child is now guaranteed to be a valid ReactElement from the check above
-
-      type Props = {children: React.ReactNode};
-      const propsChildren = (child as React.ReactElement<Props>).props.children;
-
-      if (React.Children.count(propsChildren)) {
-        return React.cloneElement(child as React.ReactElement<Props>, {
-          children: this.renderChildren(propsChildren),
-        });
-      }
-
-      // TODO: Should be replaced with icon buttons when ready
-      if (child.type === SystemIcon) {
-        return React.cloneElement(child as React.ReactElement<SystemIconProps>, {
-          color: colors.frenchVanilla100,
-          colorHover: colors.blueberry200,
+      if (child.type === IconButton) {
+        return React.cloneElement(child as React.ReactElement<IconButtonProps>, {
+          buttonType: IconButton.Types.Inverse,
         });
       }
 
