@@ -75,6 +75,7 @@ export default class IconButtonToggleGroup extends React.Component<IconButtonTog
 
       return React.cloneElement(child, {
         toggled,
+        buttonType: IconButton.Types.SquareFilled,
         onClick: this.onButtonClick.bind(this, childProps.onClick, index),
       });
     }
