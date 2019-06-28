@@ -234,35 +234,29 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
     <div className="story">
       <div className="wdc-form">
         <div className="wdc-form-field-wrapper wdc-form-group">
-          <label htmlFor="radioError" className="wdc-form-label">
+          <label htmlFor="checkboxError" className="wdc-form-label">
             Label
           </label>
 
           <div className="wdc-form-group-fields wdc-form-field-error">
             <div className="wdc-form-field">
-              <input
-                type="radio"
-                className="wdc-form-radio"
-                name="radioError"
-                id="radio-error1"
-                defaultChecked={true}
-              />
-              <label htmlFor="radio-error1" className="wdc-form-label">
-                Option 1
+              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-1" />
+              <label htmlFor="checkbox-1" className="wdc-form-label">
+                Checkbox
               </label>
             </div>
 
             <div className="wdc-form-field">
-              <input type="radio" className="wdc-form-radio" name="radioError" id="radio-error2" />
-              <label htmlFor="radio-error2" className="wdc-form-label">
-                Option 2
+              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-2" />
+              <label htmlFor="checkbox-2" className="wdc-form-label">
+                Checkbox
               </label>
             </div>
 
             <div className="wdc-form-field">
-              <input type="radio" className="wdc-form-radio" name="radioError" id="radio-error3" />
-              <label htmlFor="radio-error3" className="wdc-form-label">
-                Option 3
+              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-3" />
+              <label htmlFor="checkbox-3" className="wdc-form-label">
+                Checkbox
               </label>
             </div>
           </div>
@@ -313,7 +307,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
     <div className="story">
       <div className="wdc-form wdc-form-inline-labels">
         <div className="wdc-form-field-wrapper wdc-form-group">
-          <label htmlFor="radioAlert" className="wdc-form-label">
+          <label htmlFor="checkboxAlert" className="wdc-form-label">
             Label
           </label>
 
@@ -351,35 +345,29 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
     <div className="story">
       <div className="wdc-form wdc-form-inline-labels">
         <div className="wdc-form-field-wrapper wdc-form-group">
-          <label htmlFor="radioError" className="wdc-form-label">
+          <label htmlFor="checkboxError" className="wdc-form-label">
             Label
           </label>
 
           <div className="wdc-form-group-fields wdc-form-field-error">
             <div className="wdc-form-field">
-              <input
-                type="radio"
-                className="wdc-form-radio"
-                name="radioError"
-                id="radio-error1"
-                defaultChecked={true}
-              />
-              <label htmlFor="radio-error1" className="wdc-form-label">
-                Option 1
+              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-1" />
+              <label htmlFor="checkbox-1" className="wdc-form-label">
+                Checkbox
               </label>
             </div>
 
             <div className="wdc-form-field">
-              <input type="radio" className="wdc-form-radio" name="radioError" id="radio-error2" />
-              <label htmlFor="radio-error2" className="wdc-form-label">
-                Option 2
+              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-2" />
+              <label htmlFor="checkbox-2" className="wdc-form-label">
+                Checkbox
               </label>
             </div>
 
             <div className="wdc-form-field">
-              <input type="radio" className="wdc-form-radio" name="radioError" id="radio-error3" />
-              <label htmlFor="radio-error3" className="wdc-form-label">
-                Option 3
+              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-3" />
+              <label htmlFor="checkbox-3" className="wdc-form-label">
+                Checkbox
               </label>
             </div>
           </div>

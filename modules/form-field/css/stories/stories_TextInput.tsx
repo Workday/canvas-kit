@@ -10,9 +10,11 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
     <div className="story">
       <div className="wdc-form">
         <div className="wdc-form-field-wrapper">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput" />
+            <input id="input" type="text" className="wdc-form-textinput" />
           </div>
         </div>
       </div>
@@ -22,9 +24,16 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
     <div className="story">
       <div className="wdc-form">
         <div className="wdc-form-field-wrapper">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput" placeholder="Placeholder" />
+            <input
+              id="input"
+              type="text"
+              className="wdc-form-textinput"
+              placeholder="Placeholder"
+            />
           </div>
         </div>
       </div>
@@ -34,9 +43,16 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
     <div className="story">
       <div className="wdc-form">
         <div className="wdc-form-field-wrapper">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput wdc-form-disabled" disabled={true} />
+            <input
+              id="input"
+              type="text"
+              className="wdc-form-textinput wdc-form-disabled"
+              disabled={true}
+            />
           </div>
         </div>
       </div>
@@ -46,7 +62,9 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
     <div className="story">
       <div className="wdc-form">
         <div className="wdc-form-field-wrapper">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
             <input
               type="text"
@@ -63,9 +81,11 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
     <div className="story">
       <div className="wdc-form">
         <div className="wdc-form-field-wrapper wdc-form-field-alert">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput wdc-form-alert" />
+            <input id="input" type="text" className="wdc-form-textinput wdc-form-alert" />
             <div className="wdc-form-alert-message">
               <strong>Alert:</strong> Alert message
             </div>
@@ -78,9 +98,11 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
     <div className="story">
       <div className="wdc-form">
         <div className="wdc-form-field-wrapper wdc-form-field-error">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput wdc-form-error" />
+            <input id="input" type="text" className="wdc-form-textinput wdc-form-error" />
             <div className="wdc-form-error-message">
               <strong>Error:</strong> Error message
             </div>
@@ -96,9 +118,11 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
     <div className="story">
       <div className="wdc-form wdc-form-inline-labels">
         <div className="wdc-form-field-wrapper">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput" />
+            <input id="input" type="text" className="wdc-form-textinput" />
           </div>
         </div>
       </div>
@@ -108,9 +132,16 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
     <div className="story">
       <div className="wdc-form wdc-form-inline-labels">
         <div className="wdc-form-field-wrapper">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput" placeholder="Placeholder" />
+            <input
+              id="input"
+              type="text"
+              className="wdc-form-textinput"
+              placeholder="Placeholder"
+            />
           </div>
         </div>
       </div>
@@ -120,9 +151,16 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
     <div className="story">
       <div className="wdc-form wdc-form-inline-labels">
         <div className="wdc-form-field-wrapper">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput wdc-form-disabled" disabled={true} />
+            <input
+              id="input"
+              type="text"
+              className="wdc-form-textinput wdc-form-disabled"
+              disabled={true}
+            />
           </div>
         </div>
       </div>
@@ -132,7 +170,9 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
     <div className="story">
       <div className="wdc-form wdc-form-inline-labels">
         <div className="wdc-form-field-wrapper">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
             <input
               type="text"
@@ -149,9 +189,11 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
     <div className="story">
       <div className="wdc-form wdc-form-inline-labels">
         <div className="wdc-form-field-wrapper wdc-form-field-alert">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput wdc-form-alert" />
+            <input id="input" type="text" className="wdc-form-textinput wdc-form-alert" />
             <div className="wdc-form-alert-message">
               <strong>Alert:</strong> Alert message
             </div>
@@ -164,9 +206,11 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
     <div className="story">
       <div className="wdc-form wdc-form-inline-labels">
         <div className="wdc-form-field-wrapper wdc-form-field-error">
-          <label className="wdc-form-label">Label</label>
+          <label htmlFor="input" className="wdc-form-label">
+            Label
+          </label>
           <div className="wdc-form-field">
-            <input type="text" className="wdc-form-textinput wdc-form-error" />
+            <input id="input" type="text" className="wdc-form-textinput wdc-form-error" />
             <div className="wdc-form-error-message">
               <strong>Error:</strong> Error message
             </div>
