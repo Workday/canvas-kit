@@ -3,9 +3,8 @@ import PageHeader from '../lib/PageHeader';
 import {mount} from 'enzyme';
 import {createMatchers} from 'jest-emotion';
 import * as emotion from 'emotion';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {IconButton} from '@workday/canvas-kit-react-button';
 import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react-core';
 
 expect.extend(createMatchers(emotion));
 
@@ -25,49 +24,11 @@ describe('Page Header', () => {
     const component = mount(<PageHeader title="Marketing Context" marketing={true} />);
     expect(component.find('div').first()).toHaveStyleRule('max-width', '1440px');
   });
-
-  test('should set correct SystemIcon color and colorHover props', () => {
-    const testColors = {
-      color: colors.blackberry100,
-      colorHover: colors.cinnamon200,
-    };
-    const component = mount(
-      <PageHeader title="Product Context">
-        <a href="#">
-          <SystemIcon
-            className="icon1"
-            icon={exportIcon}
-            color={testColors.color}
-            colorHover={testColors.colorHover}
-          />
-        </a>
-        <a href="#">
-          <SystemIcon className="icon2" icon={fullscreenIcon} />
-        </a>
-      </PageHeader>
-    );
-    expect(
-      component
-        .find(SystemIcon)
-        .filter('.icon1')
-        .props().color
-    ).toBe(colors.frenchVanilla100);
-    expect(
-      component
-        .find(SystemIcon)
-        .filter('.icon1')
-        .props().colorHover
-    ).toBe(colors.blueberry200);
-  });
   test('should render a copy of the children', () => {
     const component = mount(
       <PageHeader title="With Children">
-        <a href="#">
-          <SystemIcon className="icon1" icon={exportIcon} />
-        </a>
-        <a href="#">
-          <SystemIcon className="icon2" icon={fullscreenIcon} />
-        </a>
+        <IconButton icon={exportIcon} />
+        <IconButton icon={fullscreenIcon} />
       </PageHeader>
     );
 
@@ -78,8 +39,8 @@ describe('Page Header', () => {
     expect(component.instance().renderChildren(null)).toEqual(null); // tests what happens when no children exist
     expect(
       // @ts-ignore
-      component.instance().renderChildren(<SystemIcon className="icon2" icon={fullscreenIcon} />)
-    ).toHaveLength(1); // tests handling of SystemIcons
+      component.instance().renderChildren(<IconButton icon={fullscreenIcon} />)
+    ).toHaveLength(1); // tests handling of IconButtons
     // @ts-ignore
     expect(component.instance().renderChildren(<PageHeader title="Page Header" />)[0].type).toBe(
       PageHeader
