@@ -13,7 +13,7 @@ before_install:
 - export PATH="$HOME/.yarn/bin:$PATH"
 script:
 - yarn install --production=false
-- yarn build:rebuild
+- yarn build
 - yarn test
 - rm -rf docs
 - yarn build-storybook
