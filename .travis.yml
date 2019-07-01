@@ -5,26 +5,44 @@ cache:
 git:
   depth: 3
 branches:
-  only:
-  - master
+  except:
+  - gh-pages
+stages:
+  - name: storybook
+    if: branch = master AND type != pull_request
+  - name: pr-previews
+    if: "(branch = master AND type = pull_request) OR branch != master OR branch !=
+      /release-*/"
+  - name: npm publish
+    if: branch = /release-*/ AND type != pull_request
 before_install:
-- npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
-- export PATH="$HOME/.yarn/bin:$PATH"
-script:
-- yarn install --production=false
-- yarn build
-- yarn test
-- rm -rf docs
-- yarn build-storybook
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: docs
-  github_token: "$STORYBOOK_TOKEN"
-  on:
-    branch: master
+  - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+  - export PATH="$HOME/.yarn/bin:$PATH"
+install:
+  - yarn install --production=false
+  - yarn build
+  - yarn test
+jobs:
+  include:
+    - stage: storybook
+      script:
+      - yarn build-storybook
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        local_dir: docs
+        github_token: "$GH_STORYBOOK_TOKEN"
+        on:
+          branch: master
+    - stage: pr previews
+      script: echo "TODO"
+    - stage: npm publish
+      script:
+      - "./utils/travis/getGit.sh"
 env:
   global:
-  - secure: 0IjKwQ/4FnH2vjbD3sql/6iviJoiy3PFs7uJF4D8DVmobrSbX2GAYXksqlqYF6xxD5WzbcB5ArI3p3BY0E1cY8MpxsyCqxzy7nVzb/wZ99CFYEpoYL5E/DIQkUgSjuuTbf66Isc0dVd03cyaeedc8A6jqIzt8Ly9wcYv+W2Peq3bTE6KUPyw0sJ0ueiCghrnG5HdUC5Sx2Hn1vNQEphntQbD1NsNNPEZM+2fFATcDA4Je06FotBHPKmTsc4zzGKe0FnsIL3BKqCQWQOzRMHtmNKPrgagys7tMWSvznjcqs4w5rh63hy6c1LukDa617ZWHHX6iUy4qucgipv7VuH27DKlGA/8O0SiizRGD7keFLGxG5NKwYXr4wU6828gKKqpaMXK6HUF+xc0vsTiSTfK9qiXsxV/v6exdsOohOyxqpFyR9vLczkBdPc+bel0W78uWjPVOtay9yKA+w6P1RZ4bBC2t4nTaT1jTKJ1gsK1ttpPqykcfA909Me7so390WA3FiSNRCZnsKdJN0s3NwrO3oJfOjfe2t2wEyFzcnVwxZVcZhnHHILNmXGvnvoyzSnMIVWntTIgP28FKFCQI+SUb+3R2Oa6vC4z/I2wwNalb8DkJtSPVfEOSbmU5uW4S9ed5xqQJhMY0yHVt9t83b3mTnkv8vyoa05T57zV+n/+aSQ=
-  - secure: mP09ZMr9gAPNanTcIyyQzM7KdqQxnFaTK5/ekcJ/K1mF39jKt2quAcvUZckWNwQhVsSk6ENN4703RmRUcH6NTI2k/Yp2R09mgWXiWwUFJ5RNUMYA1YkxTHlizL3UB0TnIkOkjeImnIgcqXx7xX9ZEFy8wt9xMeyNGVbvvnptzL/NxH7nZ/kXL9L9jFq1Kq6iq+E0mQe5L7LcnzSR4s2tKVjNXYyFraKm/vJHymSMdnEJpXKp78uqYeKLScxB3waRctLf1CRPrw+3gwnOBX2rqUXWwFGEvUuG0G4+KrhGQ/mYe/9PolRuOt3z4yZSqdjhWs2ldhlggquC4VbOlFCpU7hMEMxATnPQaOxH9MDu+ywlw/zyM6z4RmdlMH2Y1kxPTLOKY8AmQSYZ4aIJm4iGtqqcBBuFgf3U+DKODmUQl4lRDJsdNAyQdpW7qLHezu+CGCsGHA/zlMpcx40WqBpdClGIxBB8+5bjNtzQY44H3jfEgY7JQrCrfgLNxMAHq2jlgoJvP83108xEGTT00z49Zo6JkXsd9q35eOS0LVA3ycRBtUqvMk13sRr/vqdu6FwrA4Xbzx+5eV5+yB8Oav863F57wqZrKF6RXnYy6Dj5RSC5t+eOJkvxfX8HtVv7E7TyGFkgGAz4lmauwNK4BPLqbx+KzaqnJ+Ly0oF4DliU2LU=
+  - secure: VPjIkNM2XCPIwaxaAaxIn47dpGHxsQWO77xhjisBXVEbg1f5yHJG2TYPn/wWZCLfwD7QGoc/ujIAbw2ah8Cr63QurvyPLE9mO82VwAaeonihgv4lQplb346uag2UQ+7rs0E5FpZ5SGvq/GA0kgRld1h5l/TDt6DxPt4yL6+/GxXi228BRRyXnwW5CBMttlE9ufyyUJvCT9rsPpAYfKHqbutf7TYfjpGFpKFY8TTxgJes58l/FmAzj9TvfS8p1oqZw0cPUimUYSAlYzKdxxtBLcN+wkqsD4B6eRLQjMAIzN5zbaWcYKPkrta3fGWFBAbkHbKqAk2CxP5ATyjk7szgsPFU43AwEUKLgD02P5S92iDTqJVtRPLee9D5bGQUhMjYXP1p7MrCEekpR+IcuSp2L9iIat3szFue4m0uYW4FJcBLDgGFD7Bu/bEyFfsAJGlWLqc5tKcni5juvc/Ff09dnYniOzYv8pCbP8tPj2ul6ce13g0M5Fa/Ulq5Nt+3U57llzIH1zvv4re8puc9sztHK8oOmrDmG0i54eXR0u9rXGECOsNRvBD6vKR/GmT1Lc094MxrSDDXOtqC8IIG3WJYYfre7WwlnLCT5w5UnSQDiYVzmrPhllDd8lpRsuyciSxPi0jDJWv1TKmUHufrSRjzHOusaNNNwEOUq0TCN5t1sBg=
+  - secure: Z2hSVhcWQ56KO1BKprNcDgcO9vL+bKrbZEFfaY+QO+2Brs9vx7vtjmkUC5W/8LbEOGKrkm7mgOGdbaSAmz1zEOaXlqnZzA7xBOfdOHziLSDMnkges0TDkQixW/RzgxXh7BqCm7LbNYiy6cymlNxUywngPAGokHDCfDyz+8GdWJz7ASDDDvqNmwYs6WjXnf1H1v1ZPJ7zGbNacsxR+c5heEGihDA1P1V7FBzsvY94lH2CFv8zk1P3elkAsejEvkaNe1KOU1DLXGtPm+VR603OzFDKvc9xq3fa45Br/guUu9NBX6A+e4PMG/EmgGuqokOZ1ww0PQjEk8Rq1F1A6kpwIlk2r30F0Hi5hQUo33xyXcI9Jfc/KXEVD0eq1nW4yvLnytq38GOeUA9n0S9Idv88+XQhTx6h05G/CvPVxIN0Eu/v4jzzdioGO4h1JghCsxkPYldbmnFgqTHbENP46cwVTQffFx0WdHMZ+BD6Kpy8QQlswjKHesHfeLgMxA17PeIjYVd/a/4T95Ic/mWHmiQpGKn5VXVRp01Oa+y46lUHgrjzGfWd7xCpYHhATMcRG0ccdEfA3U3Tr4Kj7Ns/Qsf1bE+qXNj/JFCKnakccSYaeUq/N2imaeFXuDWjGIl+P6uE4uTKCnsloYybZtk9A742Ycqa3BfLnWeufArm7th4Smc=
+  - secure: y7IzCazmnNZG963lIYy2Lny/6Bg9bZha1ta2lCotWJY/FIlWnpQdiByvcf42ShoNQSqYVw7Jk/9fPms9aJVkXWNlBq+OPmywzNayFfUBCBevIvJH3ktwRtj1fEGI+w9E+VF04XIQF6s939QTrbSkaQmfQCHMVdtT582aMYiRwhJdJsMZthzesy3PqgcWb4vL7Woa63xVf7XtQESBSSmCzeqOqBJ3sMCLYOeDsT1HIqN9v6igNSmbqinuwY0Lyq9nq7Bxt2Ei4mUh8xSMjDVGkuo0f0Aygf5llh5U2aBzQW4ia4gBfoLtQfq7CIxREkjWCH+h9TDgbUo0ONEbtvK3OzVprzH/LxM/AO0khX0LZszHX1jd9cLFKqwqMpuFR3X5NbZkCiNTj24VEwUTt/aDWNqhtPnIpqU0Jx6AVWhlGCpjFGyaAgtbED18gH21iCt5vp+7EJeOGoIea042Rz4S7bA5rKZj6DvsLSslRRt7DH6ky8yiS9bi8VWwPbQy/HH8t/ZWP2vLf+mR5GtrpGjeFS08mOovt/My9nLrGQbbcOhEEqZqgsKRTKbfASuexo8tBxLascqb+UtyOUvyERx3iFt40RBKEfjXh9ZITP+v5PmO5tjMoT1Jc5SjCuBb6j1OIDSzfVa6ZuoKbr9wpX23NalpAShRbbnvCITSvzXTOf4=
+  - secure: gw+HFfPqBYiNKclbFR8SnP39gljyiOGeyZmN6mqBSE21PM8JWMoIwEdlFDu1nXn6tQxzPo+YRmb7+SJmHFJ2SpoTmZhNAN08NfmSzWw1UAIdeD2562sBOqJXe/WuAavYsaK/WnZunHTiAQZGJ6KXXz6JnRCsXIHJr3wngC/Px1Tw4sQqz1nmenHkK6hasN4ckq+OvYJpxyX6zjjv9cs9EADkEP1mXeytvGnAOVhRnY/tTblrNFKT9YCgjLRdNHMaXXFE6R+3ll5irW1Sa0ZyzSg1mjHomoybZxqAChJ2/cugkEX0cgKfAIg7m81GlKLlq9hs2ja7qXMZhOy8VrB/7L7QSB/AAH5GOltyQwemctUnhtF/1Chu0j1kcfBXcq3iuUTw62GbZNhHv1J37d86ok//I04vQUO77JGwmhJnWD5Pviko9tnioe+/LghGZhiOATVMZGourObw6gqYtiGGPK+Ci+Z3zKoqVq4EWz27mQXoibqFGB6g7UKrn5hIjUyWMHv9DNp8L6pwkE2BcteckSbl9PrildktjkRrKOcXDRawEcXQ/QkeT/nlEkkdkFm3Tihmi+SRMzxznxp/gDoO7FhEUHbpQAy5gH19vwTQ7xZoxceIo2DmD8ryC3mzSHDp73lODGAOcIc6NdEQynfk0wTgsvRwy+V9jhplq1y8DAo=
