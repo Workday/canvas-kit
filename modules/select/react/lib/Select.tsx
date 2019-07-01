@@ -30,6 +30,7 @@ const SelectContainer = styled('select')<SelectProps>(
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // IE11 bugfix: add padding so text is displayed properly
     MozAppearance: 'none', // FF bugfix: hide arrow so it doesn't show under ours
+    WebkitAppearance: 'none',
     '&::placeholder': {
       color: inputColors.placeholder,
     },
