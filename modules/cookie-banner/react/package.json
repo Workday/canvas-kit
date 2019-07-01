@@ -39,7 +39,7 @@
   "dependencies": {
     "@workday/canvas-kit-react-button": "^3.0.0-alpha.2",
     "@workday/canvas-kit-react-core": "^3.0.0-alpha.2",
-    "emotion": "^9.2.10",
-    "react-emotion": "^9.2.10"
+    "emotion": "^9.2.12",
+    "react-emotion": "^9.2.12"
   }
 }
