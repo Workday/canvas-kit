@@ -8,6 +8,7 @@ branches:
   except:
   - gh-pages
 stages:
+  - name: test
   - name: storybook
     if: branch = master AND type != pull_request
   - name: pr-previews
