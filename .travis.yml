@@ -13,7 +13,7 @@ stages:
   - name: pr-previews
     if: "(branch = master AND type = pull_request) OR branch != master OR branch != /release-*/"
   - name: npm publish
-    if: branch = /release-*/ AND type != pull_request
+    if: branch =~ /^release-.*/ AND type != pull_request
 before_install:
   - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
