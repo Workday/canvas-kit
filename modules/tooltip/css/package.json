@@ -1,7 +1,7 @@
 {
-  "name": "@workday/canvas-kit-css-popup",
-  "version": "3.0.0-alpha.2",
-  "description": "Popup CSS for Canvas kit CSS",
+  "name": "@workday/canvas-kit-css-tooltip",
+  "version": "3.0.0-alpha.0",
+  "description": "Tooltip CSS for Canvas kit CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "files": [
@@ -9,14 +9,14 @@
     "lib",
     "index.scss"
   ],
-  "style": "dist/canvas-kit-css-popup.css",
-  "main": "dist/canvas-kit-css-popup.css",
+  "style": "dist/canvas-kit-css-tooltip.css",
+  "main": "dist/canvas-kit-css-tooltip.css",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/popup/css"
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/tooltip/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^3.0.0-alpha.2"
+    "@workday/canvas-kit-css-core": "^3.0.0-alpha.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -29,6 +29,7 @@
     "scss",
     "sass",
     "workday",
-    "popup"
+    "tooltip",
+    "tooltips"
   ]
 }

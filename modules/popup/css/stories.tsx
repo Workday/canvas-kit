@@ -43,59 +43,6 @@ storiesOf('CSS/Popup', module)
             <p>Total Salary & Allowances: $78,798.88</p>
           </div>
         </div>
-
-        <div className="wdc-type popup-demo">
-          <div className="wdc-popup wdc-popup-right wdc-popup-tooltip">Right tooltip</div>
-          <div className="wdc-popup wdc-popup-left wdc-popup-tooltip">Left tooltip</div>
-          <div className="wdc-popup wdc-popup-top wdc-popup-tooltip">Top tooltip</div>
-          <div className="wdc-popup wdc-popup-bottom wdc-popup-tooltip">Bottom tooltip</div>
-        </div>
-      </section>
-
-      <section className="popup-demo-section">
-        <h2>Menus</h2>
-        <div className="wdc-type popup-demo">
-          <div className="wdc-popup wdc-popup-menu">
-            <ul>
-              <li>
-                <a href="#">Item 1</a>
-              </li>
-              <li>Item 2</li>
-            </ul>
-          </div>
-          <div className="wdc-popup wdc-popup-right wdc-popup-menu">
-            <ul>
-              <li>
-                <a href="#">Item 1</a>
-              </li>
-              <li>Item 2</li>
-            </ul>
-          </div>
-          <div className="wdc-popup wdc-popup-left wdc-popup-menu">
-            <ul>
-              <li>
-                <a href="#">Item 1</a>
-              </li>
-              <li>Item 2</li>
-            </ul>
-          </div>
-          <div className="wdc-popup wdc-popup-top wdc-popup-menu">
-            <ul>
-              <li>
-                <a href="#">Item 1</a>
-              </li>
-              <li>Item 2</li>
-            </ul>
-          </div>
-          <div className="wdc-popup wdc-popup-bottom wdc-popup-menu">
-            <ul>
-              <li>
-                <a href="#">Item 1</a>
-              </li>
-              <li>Item 2</li>
-            </ul>
-          </div>
-        </div>
       </section>
 
       <section className="popup-demo-section">
@@ -119,28 +66,6 @@ storiesOf('CSS/Popup', module)
           <div className="wdc-popup-container">
             Bottom popup
             <div className="wdc-popup wdc-popup-bottom">This is a popup</div>
-          </div>
-        </div>
-
-        <div className="wdc-type popup-demo">
-          <div className="wdc-popup-container">
-            Right tooltip
-            <div className="wdc-popup wdc-popup-right wdc-popup-tooltip">Tooltip text</div>
-          </div>
-
-          <div className="wdc-popup-container">
-            Left tooltip
-            <div className="wdc-popup wdc-popup-left wdc-popup-tooltip">Tooltip text</div>
-          </div>
-
-          <div className="wdc-popup-container">
-            Top tooltip
-            <div className="wdc-popup wdc-popup-top wdc-popup-tooltip">Tooltip text</div>
-          </div>
-
-          <div className="wdc-popup-container">
-            Bottom tooltip
-            <div className="wdc-popup wdc-popup-bottom wdc-popup-tooltip">Tooltip text</div>
           </div>
         </div>
       </section>

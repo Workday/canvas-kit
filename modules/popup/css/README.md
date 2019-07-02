@@ -1,6 +1,6 @@
 # Canvas Kit Popup
 
-Popups and tooltips with modifiers and containers implementing display on hover.
+Popups with modifiers and containers implementing display on hover.
 
 ## Installation
 
@@ -101,26 +101,11 @@ styling to a menu item.
 </div>
 ```
 
-## Tooltips
-
-> Tooltips are used to display brief items of information.
-
-Tooltips are a subgroup of popups. Text does not wrap in tooltips.
-
-Use `.wdc-popup-tooltip` with `.wdc-popup` to create a tooltip. This can be used in conjunction with
-any directional modifiers.
-
-```html
-<div class="wdc-popup wdc-popup-right wdc-popup-tooltip">
-  Right tooltip
-</div>
-```
-
 ## Display on hover
 
 To display a popup on hover, wrap hoverable content within a `.wdc-popup-container`. Insert a
 `.wdc-popup` within the container. The popup will automatically be positioned according to its
-directional modifier. This also works with `.wdc-popup-tooltip`
+directional modifier.
 
 > A directional modifier is required for proper usage.
 
@@ -129,13 +114,6 @@ directional modifier. This also works with `.wdc-popup-tooltip`
   Right popup
   <div class="wdc-popup wdc-popup-right">
     Popup
-  </div>
-</div>
-
-<div class="wdc-popup-container">
-  Right tooltip
-  <div class="wdc-popup wdc-popup-right wdc-popup-tooltip">
-    Tooltip text
   </div>
 </div>
 ```
