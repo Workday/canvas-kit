@@ -8,7 +8,9 @@ setup_git() {
 setup_branch() {
   git checkout $TRAVIS_BRANCH
   git remote rm origin
-  git remote add origin https://${GH_RELEASE_TOKEN}:github.com/workday/canvas-kit.git > /dev/null 2>&1
+  git remote add origin https://${GH_RELEASE_TOKEN}@github.com/workday/canvas-kit.git > /dev/null 2>&1
+  git fetch > /dev/null 2>&1
+  git branch -u origin/$TRAVIS_BRANCH 2>&1
 }
 
 lerna_publish() {
