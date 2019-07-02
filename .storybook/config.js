@@ -24,5 +24,11 @@ addParameters({
   },
 });
 
+addParameters({
+  readme: {
+    codeTheme: 'github',
+  },
+});
+
 configure(loadStories, module);
 injectGlobal(...fonts);
