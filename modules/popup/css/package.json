@@ -9,8 +9,8 @@
     "lib",
     "index.scss"
   ],
-  "style": "dist/canvas-kit-css-popup.css",
-  "main": "dist/canvas-kit-css-popup.css",
+  "style": "dist/canvas-kit-css-popup.min.css",
+  "main": "dist/canvas-kit-css-popup.min.css",
   "repository": {
     "type": "git",
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/popup/css"

@@ -9,8 +9,8 @@
     "lib",
     "index.scss"
   ],
-  "style": "dist/canvas-kit-css-tooltip.css",
-  "main": "dist/canvas-kit-css-tooltip.css",
+  "style": "dist/canvas-kit-css-tooltip.min.css",
+  "main": "dist/canvas-kit-css-tooltip.min.css",
   "repository": {
     "type": "git",
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/tooltip/css"
