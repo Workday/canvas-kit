@@ -163,6 +163,8 @@ initializeIcons(null, '.wdc-custom-icon');
 
 # Canvas Kit CSS Icon List
 
+Allows styling for arranging and spacing a list of icons.
+
 ## Installation
 
 ```sh
@@ -180,4 +182,17 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 
 ```scss
 @import '~@workday/canvas-kit-css-icon/index.scss';
+```
+
+## Usage
+
+```html
+<div class="wdc-icon-list wdc-icon-list-white">
+  <div class="wdc-icon-list-icon">
+    <!-- wd-icon-export.svg -->
+  </div>
+  <div class="wdc-icon-list-icon">
+    <!-- wd-icon-fullscreen.svg -->
+  </div>
+</div>
 ```
