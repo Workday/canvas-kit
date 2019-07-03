@@ -3,4 +3,5 @@ modules/canvas-kit-react-core/lib/colors.ts
 **/package.json
 .vscode
 .idea
+.travis.yml
 docs
