@@ -31,6 +31,7 @@ exports[`Select Snapshots renders a disabled option as expected 1`] = `
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
   -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 .emotion-0::-webkit-input-placeholder {
@@ -176,6 +177,7 @@ exports[`Select Snapshots renders a disabled select as expected 1`] = `
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
   -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 .emotion-0::-webkit-input-placeholder {
@@ -385,6 +387,7 @@ exports[`Select Snapshots renders a growing select as expected 1`] = `
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
   -moz-appearance: none;
+  -webkit-appearance: none;
   width: 100%;
 }
 
@@ -544,6 +547,7 @@ exports[`Select Snapshots renders an alert on select as expected 1`] = `
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
   -moz-appearance: none;
+  -webkit-appearance: none;
   border-color: #c06c00;
   -webkit-transition: 100ms box-shadow;
   transition: 100ms box-shadow;
@@ -715,6 +719,7 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
   -moz-appearance: none;
+  -webkit-appearance: none;
   border-color: #de2e21;
   -webkit-transition: 100ms box-shadow;
   transition: 100ms box-shadow;
@@ -844,6 +849,7 @@ exports[`Select Snapshots renders as expected 1`] = `
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
   -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 .emotion-0::-webkit-input-placeholder {
