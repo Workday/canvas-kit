@@ -6,7 +6,7 @@ import {InputProviderDecorator, controlComponent} from '../../../../utils/storyb
 
 import {ColorInput} from '../../../color-picker/react/index';
 import FormField from '../index';
-import README from '../README.md';
+import README from '../../../color-picker/react/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';

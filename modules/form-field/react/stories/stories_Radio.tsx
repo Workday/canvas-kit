@@ -6,7 +6,7 @@ import {InputProviderDecorator, ControlledComponentWrapper} from '../../../../ut
 
 import {Radio, RadioGroup} from '../../../radio/react/index';
 import FormField from '../index';
-import README from '../README.md';
+import README from '../../../radio/react/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
