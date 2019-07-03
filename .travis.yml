@@ -20,6 +20,7 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 install:
   - yarn install --production=false
+  - yarn lint
   - yarn build
   - yarn test
 jobs:
