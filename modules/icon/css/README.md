@@ -160,3 +160,24 @@ selector when injecting.
 ```js
 initializeIcons(null, '.wdc-custom-icon');
 ```
+
+# Canvas Kit CSS Icon List
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-css
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-icon
+```
+
+Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
+`index.scss`.
+
+```scss
+@import '~@workday/canvas-kit-css-icon/index.scss';
+```
