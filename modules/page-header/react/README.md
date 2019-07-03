@@ -21,27 +21,17 @@ yarn add @workday/canvas-kit-react-page-header
 ```tsx
 import * as React from 'react';
 import {PageHeader} from '@workday/canvas-kit-react-page-header';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {IconButton} from '@workday/canvas-kit-react-button';
 import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
 
-// No need to set the `color` or `colorHover` prop on SystemIcon here, we'll do it for you
-
 <PageHeader title="Product">
-  <a href="#">
-    <SystemIcon icon={exportIcon} />
-  </a>
-  <a href="#">
-    <SystemIcon icon={fullscreenIcon} />
-  </a>
+  <IconButton icon={exportIcon} />
+  <IconButton icon={fullscreenIcon} />
 </PageHeader>
 
 <PageHeader title="Marketing" marketing={true}>
-  <a href="#">
-    <SystemIcon icon={exportIcon} />
-  </a>
-  <a href="#">
-    <SystemIcon icon={fullscreenIcon} />
-  </a>
+  <IconButton icon={exportIcon} />
+  <IconButton icon={fullscreenIcon} />
 </PageHeader>
 ```
 
