@@ -6494,7 +6494,7 @@ emotion-theming@^10.0.10, emotion-theming@^10.0.9:
     hoist-non-react-statics "^3.3.0"
     object-assign "^4.1.1"
 
-emotion@^9.1.2, emotion@^9.2.10, emotion@^9.2.12, emotion@^9.2.6:
+emotion@^9.1.2, emotion@^9.2.12:
   version "9.2.12"
   resolved "https://registry.yarnpkg.com/emotion/-/emotion-9.2.12.tgz#53925aaa005614e65c6e43db8243c843574d1ea9"
   integrity sha512-hcx7jppaI8VoXxIWEhxpDW7I+B4kq9RNzQLmsrF6LY8BGKqe2N+gFAQr0EfuFucFlPs2A9HM4+xNj4NeqEWIOQ==
@@ -13334,7 +13334,7 @@ react-draggable@^3.1.1:
     classnames "^2.2.5"
     prop-types "^15.6.0"
 
-react-emotion@^9.2.10, react-emotion@^9.2.12, react-emotion@^9.2.6:
+react-emotion@^9.2.12:
   version "9.2.12"
   resolved "https://registry.yarnpkg.com/react-emotion/-/react-emotion-9.2.12.tgz#74d1494f89e22d0b9442e92a33ca052461955c83"
   integrity sha512-qt7XbxnEKX5sZ73rERJ92JMbEOoyOwG3BuCRFRkXrsJhEe+rFBRTljRw7yOLHZUCQC4GBObZhjXIduQ8S0ZpYw==
