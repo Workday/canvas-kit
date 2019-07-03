@@ -8,41 +8,41 @@ branches:
   except:
   - gh-pages
 stages:
-  - name: storybook
-    if: branch = master AND type != pull_request
-  - name: pr-previews
-    if: "(branch = master AND type = pull_request) OR branch != master OR NOT branch =~ /^release-.+$/"
-  - name: npm publish
-    if: branch =~ /^release-.+$/ AND type != pull_request
+- name: storybook
+  if: branch = master AND type != pull_request
+- name: pr-previews
+  if: "(branch = master AND type = pull_request) OR branch != master OR NOT branch =~ /^release-.+$/"
+- name: npm publish
+  if: branch =~ /^release-.+$/ AND type != pull_request
 before_install:
-  - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
-  - export PATH="$HOME/.yarn/bin:$PATH"
+- npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+- export PATH="$HOME/.yarn/bin:$PATH"
 install:
-  - yarn install --production=false
-  - yarn lint
-  - yarn build
-  - yarn test
+- yarn install --production=false
+- yarn lint
+- yarn build
+- yarn test
 jobs:
   include:
-    - stage: storybook
-      script:
-      - yarn build-storybook
-      deploy:
-        provider: pages
-        skip_cleanup: true
-        local_dir: docs
-        github_token: "$GH_STORYBOOK_TOKEN"
-        on:
-          branch: master
-    - stage: pr previews
-      script: echo "TODO"
-    - stage: npm publish
-      script:
-      - "./utils/travis/getGit.sh"
+  - stage: storybook
+    script:
+    - yarn build-storybook
+    deploy:
+      provider: pages
+      skip_cleanup: true
+      local_dir: docs
+      github_token: "$GH_STORYBOOK_TOKEN"
+      on:
+        branch: master
+  - stage: pr previews
+    script: echo "TODO"
+  - stage: npm publish
+    script:
+    - "./utils/travis/getGit.sh"
 env:
   global:
-  - secure: JZmvmwC3FY+wBnn8zuxgNTyx4suWI9NmGFyK5LQFoU0/HaZ2qvOxzckqDrsAvkljg/myt1YyHPT53BrSEwBQSDROMojC6fMyYPGx8mNYq1mEhsw+xGKPda85tsToFgJMqLF79mqF+frjPA5WU5mzFwkDZHLkRCK7srlaskAVlrxJXFKCywAPdrQy1UDksc7+2nNmVgY+HfpBh14h4v5a2Xw5NUEsIUcyQjaLt7NW2BTZ0f+DkjoSzqAumFtO1vXT3W7mfLnpiyDRkGZrG1zV34bWEFiMDAIQarTZ5KBi+vmXQ/6JNmWABYJhGt02VSwdQwjJUAVQweXI7SisOt1wQ9Sciwsk3SbVAywI45ljTSJY43A+9ZoRc6qOK4Vbz3/pVjwXqCDBdxcgKw9isk7qrTt5U5hFXH+USPldsLUXa4x9V9cfzrbstRfo25uKF9mIesFQNQSoqjPcezyZND9nxKUW9optLkFW5StDDGokuvp0P/TD8B8kmBpljw5K0N7LrQWNLdZ1i8Kn43A2BMie5TEFHnua32m6B5Brc/BaztKxgvmqETzJu7d93TBSf0p7G4dXHaoQLnjgXCy/qpktvzWot7iMDWwBYkeHBtp/4a0lyUUM3Vnmn6j3CoIvrgOhE4+zmrGHiRrL8aPUlMqwI74haDIpq97dw6kfiqt5QNw=
-  - secure: d9ZfQBSo1ZxNjY+tDqvP9KtFb55+pmSsKfqwtAAYmN76iL2RKVLcJuubwsEN71Kvq76Qy0onXWzfLNkWY2+YwaHvSRkBCBaMbpHBB4b1aI+zUgJX5GUDAdcbyui2jpTTsekiH39ojSVlFqoTqammwPSZp3ZTQolQ7yRAvVAGfUEJTUfy7Jy4QZN2D1kIbjhNvFC1RcFiejhQVeAf/AD8lmo9b6ScyyCrvIjfi7JcHyWteVBMeWCGHywWV/UYLg06ZQT4lJrVzRDKstMuiZQv2AztvycghnhsgPXlvzZTKpf3G4WbmyPrMsAerXD/kLsETS5BV7lN3FWCzLOidNruVgnv/5K+qx2GW709xP83IE5gHOmUcLpr2iyJi634Jt39+XaAZmM1eOaAYmWJH6g5Wl/BMxqNfMPHqOKgrcOjoEh0B7svejtx+sEGG06FB2emeJGMqHH1Or1m1SRSzBw0/ApFj9BuqYr/lSBzLAnEKdgraSTeJ3LAF+ca0z5mNRZOBt3/5gf+Fj8vGJgKGxNhmZ0J0+S8ipYJJ46pCwplj9qVYaNj4gpY/DC5pdcDQxTZInyI3mlgNFbJu5oR9n0JKRGE6BfwpZE7la9YvqGjfaM2VcUDiqNCjiglLKuSP7TPSm9wXOrC78Qm+94MKCVIHWfF/D26AvDPUHg0hqiGZmA=
-  - secure: k0sirDXLNOsjEYXfbcA7BFZbhyI4hgKaxuP5pRxbgqN0K+DwtPHfKoA6LpAf1XoI6bSDsSOhIsc85yPj5hAxDqttSamF+uR8Oc4dPiVyFA/7T6Rjr+idl8KMgE8jhkRE1Q1kiLNVkL6AfjyVVOiu7bQc8XXAAaNG7iz0/UCRsNpxWHg7Ukldycin+uS/8fr6ICNIxPzlUUHcEOGNlXg+P/wd+225Deg1vYrKs7BB8ZSpeBzeaDUSBdcA5MRuKX6iIuYzRhytsGNcgBPK54B5/qaplKMnzD+4/t5Ki6XTepXdF6RVr/x0xeLXouoOezLGGvWMYfIuXqhduJU75YxfQSHP5dq5ICqRMtZFMR+CV8OToUGMa/C+Yb/qPviR/n3jrlVU4bdNiKxotFWcDyMHXVKY104Gp3dhiYvWBBD8zkUIOwDkG1XrnLiHaFjZAAxhZ9HJ0l2oV+GXWxSslhfXevh/pxecu58/wF6kPx7+nHT3yMOvAZ3yn8ji/VUGdeYViFHnbsJ15Cbvi/GIBkUItlecydTEZIfKdcnvcT7Yk0utUV84J57n52V29GK18vYlhHi8vgeEnwXzc1JJFREHKSSTJXIhwJ4cNO/eFADRygHDof/rmmQEAmXkMRYcPGZ5OFYMuDBd/1W7/PjHdFtZkjt2cSQHCMopIC+jv5UC4ME=
-  - secure: VJl7aOS/oO/TmZpwmyuVFvKfrgaRVlqUgB2MQcbfqT1ezie5hZNY1H5YjcYps2tVG/oyQ+GW10Bwp6IYB1+rPj+PSG7uvzSfm9NVfNF5/LxLpqgkq7/wlqKiqEj7zfFuDmcCyUekQ/GTVV/QcYJvgh1Cj/QZMuXWTN6pWpTdydl6VZeEAAj/Uvdnkj/7lpZKyJ4bl4/nXmhoEvx/H3t6PoZnGLJQtGFMg7pHFklzBC3xyA4hILtpkTFjyg3DKIiIoq6AfIWN6RjL/KPXXCAwkOCbwI+QZJ+t00+TIsof79hx0dS9UuEGrjFOieIlbkOLr9ZvwhZmCVDTrn6WqGnEjfJlkqo/g53siGvGgd0TQuvyVoDCL0Q++TSDaRJ7HsIOGczowqrDBwIEnKblNhQeKake8VMajp0yPJKK1siYFc/pRcsAPy+P7dAauPSdS36xYwC1ZRztMl982ev1bn9gOEcGuVySlaDqLzu++WQD6ruYA65jAKymJC9lYmqRHnBJlcZ15QSXw7jYRPTBKEzVYIgsE2U1i9W//9OtSHzCo4IGr6XYxWnwxfV+lof8hBV1QzJBxEp+RLvAPkjumak67UwkuQb4W9tDjGgrc6DMNe9HNGEQ8mMV/KM3j01QGudJds3OXn3PYWtRejRzW6+fchsn5hE0WqeaUehxahMF7po=
+  - secure: 2mf5LOhqAmYsMKOoVK+4F9Yym0Y7CvrgyHZcSMsezFB/8PowxdPKDfHuwV8I5DsRQuFzv1G9xmdlrV7qWKf48bJwyFRXulAdzsElrkrXDVhW3nmzt/vpqSA/YJWqB1gsBolp1dOrC0dblNTNzCxHPHgl0y8x8A6ZpT4oUY14iVO+olg5hkD6Yx+M17+Oe1q5r7GUF5auFazZr3BeyJ5oxdIIUVeZRitJU0KxScaZmBv/pwfCKrmrfGk/GSt11WJgTA5pRG+HQZ253uy/Oxsh4JKJXCoeEp1taSnxzJpVeA9iq3Ywj+C64sAqS4NVM/wtLFxDz7RZ3w+B6MbdnAYWarYotuNWtpduiHp9rzfOhYr1DmD9uxCQ+bnt0pwfLY010wsXwnBljxTvVvUwEvMRVTgwzSDwQIbhepb3Br+KduRIZOLAa/mbk6uFQOBJrDfkcug5xZUcoNii2WMtGxdq4gRZ4mWXjiXNOKgm27zu+IRM09z9aUbRTCVsNp8TP23GnhMMdoEhxZECWwHrwT6+QrLeih9tkA7YYlPrjaA33+vajSDzNyLWBxvk7JPIwDZiaObSWOh2XD3XBSnLHN/Pt0udrWxW7Zdtumg/u2zvWRhaQCIPN8fdgYMTEYQ4a1U+hR3gKl6DhF1mgkVqo1Q98g4lY+JMaS8/HG+YCmY5HzI=
+  - secure: CgjEbYaMt8j0xsAnmj2k3zJlIgWEbRpYRdfFA3dXaXYTDKtxIY/Ql/i9qOACZ7v2W2W1TQ+b8CwYc7pXvlP3/ih9o3xykAHRkfT/skTfqAvC+6IRKZVF/oeEMVoOEloXg5wpW/jqScN0pMCm1Rs/1hJOp9XBS1TweS0XU54yA9vfLs8Bm8KP9afXYg2FdtHjfkpMoWrX102GB+JQiMwaOvmX9x5Avcg6l7TJbnC+cqjvc0eLqB4tdF7b+dtBaWvdUYle7liuB5YNQlR/24MeimgXN4fWZfc35OjEo0vLArIlUwvV1pg9n0rzOExzaxpQ3l2eNGHC5JgyTdjDV3eH9Fsy1cVRiiXSqrF/84vWnWiFJzRM8mdhHteLe9bM/WdEzPURD/oZZbupWp5JHkUtvK3whvAlHCKhNjsiwY8AxM3hOr+Gy3ObUk+y7oyHhWhddYoAFXxKUq/d7MXdjnz2aOgoI8IkP+Vu2YZSbooOBi0lnZF1ZtlSsIo4r7I4p1j4ZLmoRxq0cNfNf15Fvl3pPzcckJmeI388rP79qvjiBFbv2OgCu4NcibWPIyOgOgwjNHZ6tULxyoSi7ZKrUWTmhzhkT2s95HRYxknci7Yf/N6hxsHbu6qmpDIDszit1xjhbtZmP2QZDbjGPE/3wMU/h3/1msCK20V6xwqkjNRku2k=
+  - secure: Kj4P29f+O5DDUfm8KdSS6B6M/74QzTFiIt8s7FApJe0VyXuQ3WsX5M7O7Uq5pomBRrcOaxUMtCPYNwYMXHVoXuXp1CsFnIoaOf2xlz060bfM7ugfvByR/BjTUPSVlL7ftJhh9q2UymQ/1GyGTAUwMNoxKsBdinrsGuAlIag5PbJhnlks7tavurRjk2p06AiJYxrly1s4BaSm2fW5uTdSA68w2A8omINJvhPhPOFswOs1KHeJ1s9shx1X2/qE8FocywnByIblQaGzTb6ZVAsdjOMrXCYnPcTj9HmX2ZRBpn1Thnzob6cNe9Jfdg9q80LVn/hea0InSYJJYCHZwrS3Mp6xQU4IY+IlABNnIF1nlkua0P6AwnZqWbNRT/+Atf1zYD9ziUB8z287vvVT346nwVW0pO3ZsHvBW0DVnORM3sx50/zTvpWrcg86Gi4HB8opvqc6GsXZfWbOKm7Nw9X7B61iRptQ30Jg2V0Pg3EB93c5tv1V/ZbTDhVoGJj6FBRr10lQN1ZtlSAret1NV8DaqGFvxP5vTlnZrS92YAmLQy9mO/5hRrrJN7hM0tonZU/IFRME2ZlnC7EALOXmBKaXB8KGAqBIX7hG6yhksRJKCSkJi9L8O0a871c+WMU6iPyX2uyizN4OtTB/ahCppMnxxMotpy68l7ElzSjU0/+ls2Y=
+  - secure: edPF7AX/0Z8RkOgsfIyX8KuaW0pKBqOLXjTH7MfCTFyrihPkSldqvSaqudb3q4DwWv8S/r7BXUMT0UYu+WOn3Kl86TrlZbMC+0b0cBLOE0IrNcnXvq/JyLa1E/VANOqYPvs5r07xqIKfO6Myo1pg+xhIX/8TtAEBKuoA6/KlDh6sVjPM1mOdxiMozR+BHSkGx6n+Hgv071vZb7th+k+CKwThVjHMATBGqktr5JlPsjVqNuQRyjJ40DFL3lBiUSvcWH8j2ZW1klFN1SaHmBw9iaKzi9xsM7Rrf2/f9PQpJJE1iAfsh2RwcVmvOI1Hm17PbCV9QCc6HpSBxFUTCx3oEDyjTz+dmaBN5VsQiRuukaaxvNonqhb88+lbgrcE5yVl1io5DoSReNNwTe6oshZS6nI/WwQarkS0dABDPzCK0/nRrvzrl0QglkSeSszSHb2mRxEn8V4KAEnxBWbaaoTc7ak0zps/AJTwOvrHKcb+V01/Hwn10hiMhmv4KtOMPsftZTW4cTLLKa8Y8UYay4My2Ho9cWdbSn+KpQ5QA1I4dEXA1DWuuzH9JYwpeH6sqB7hbob90S1wc9xJpLokgiwn6eKzwHjQd9RTQ4YftVlN2MHaCKdzUKancmYXRRS+21YqzrE9UK3pIwBYW+tA0AJ6+VOfm1mgOnTql0RPnUD78Fs=
