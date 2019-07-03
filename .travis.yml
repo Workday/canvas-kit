@@ -14,6 +14,10 @@ stages:
     if: "(branch = master AND type = pull_request) OR branch != master OR branch IS NOT /release-*/"
   - name: npm publish
     if: branch =~ /^release-.*/ AND type != pull_request
+  - name: test regex
+    if: NOT branch =~ /travis-vars/
+  - name: still test regex
+    if: branch =~ /travis-v*/
 before_install:
   - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
@@ -39,6 +43,10 @@ jobs:
     - stage: npm publish
       script:
       - "./utils/travis/getGit.sh"
+    - stage: test regex
+      script: echo test regex
+    - stage: still test regex
+      script: echo test regex again
 env:
   global:
   - secure: JZmvmwC3FY+wBnn8zuxgNTyx4suWI9NmGFyK5LQFoU0/HaZ2qvOxzckqDrsAvkljg/myt1YyHPT53BrSEwBQSDROMojC6fMyYPGx8mNYq1mEhsw+xGKPda85tsToFgJMqLF79mqF+frjPA5WU5mzFwkDZHLkRCK7srlaskAVlrxJXFKCywAPdrQy1UDksc7+2nNmVgY+HfpBh14h4v5a2Xw5NUEsIUcyQjaLt7NW2BTZ0f+DkjoSzqAumFtO1vXT3W7mfLnpiyDRkGZrG1zV34bWEFiMDAIQarTZ5KBi+vmXQ/6JNmWABYJhGt02VSwdQwjJUAVQweXI7SisOt1wQ9Sciwsk3SbVAywI45ljTSJY43A+9ZoRc6qOK4Vbz3/pVjwXqCDBdxcgKw9isk7qrTt5U5hFXH+USPldsLUXa4x9V9cfzrbstRfo25uKF9mIesFQNQSoqjPcezyZND9nxKUW9optLkFW5StDDGokuvp0P/TD8B8kmBpljw5K0N7LrQWNLdZ1i8Kn43A2BMie5TEFHnua32m6B5Brc/BaztKxgvmqETzJu7d93TBSf0p7G4dXHaoQLnjgXCy/qpktvzWot7iMDWwBYkeHBtp/4a0lyUUM3Vnmn6j3CoIvrgOhE4+zmrGHiRrL8aPUlMqwI74haDIpq97dw6kfiqt5QNw=
