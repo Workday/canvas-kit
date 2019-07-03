@@ -27,7 +27,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 
 > Menu renders Canvas-style menu list.
 
-Use `.wdc-menu` to create a tooltip. This can be used in conjunction with any directional modifiers.
+Use `.wdc-menu` to create a menu. This can be used in conjunction with any directional modifiers.
 
 ```html
 <div class="wdc-menu">
