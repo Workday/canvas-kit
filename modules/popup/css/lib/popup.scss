@@ -12,7 +12,8 @@
   max-width: $_wdc-popup-max-width;
 
   // Fallback for IE11
-  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+  @media screen and (-ms-high-contrast: active),
+  screen and (-ms-high-contrast: none) {
     width: auto;
     min-width: $_wdc-popup-menu-min-width;
   }
@@ -23,42 +24,11 @@
     min-width: $_wdc-popup-menu-min-width;
   }
 
-  &-menu {
-    padding: $wdc-spacing-xxs 0;
-    min-width: $_wdc-popup-menu-min-width;
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        color: $wdc-color-black-pepper-300;
-        padding: $wdc-spacing-xxxs $wdc-spacing-s;
-        font-size: 13px;
-        cursor: pointer;
-        transition: background-color 0.2s, color 0.2s;
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        &.wdc-popup-menu-item-focus,
-        &:focus,
-        &.wdc-popup-menu-item-hover,
-        &:hover {
-          color: $wdc-color-french-vanilla-100;
-          background-color: $wdc-color-blueberry-500;
-        }
-      }
-    }
-  }
-
   &-right,
   &-left,
   &-top,
   &-bottom {
+
     &:before,
     &:after {
       content: ' ';
@@ -156,22 +126,6 @@
     }
   }
 
-  &-tooltip {
-    padding: $wdc-spacing-xs $wdc-spacing-s;
-    font-size: 14px;
-    white-space: nowrap;
-    min-width: auto;
-    max-width: $_wdc-popup-tooltip-max-width;
-
-    &.wdc-popup-right,
-    &.wdc-popup-left {
-      &:before,
-      &:after {
-        top: 50%;
-      }
-    }
-  }
-
   .wdc-popup-title {
     font-weight: 500;
     margin-bottom: $wdc-spacing-xxs;
@@ -231,6 +185,7 @@
     }
 
     &-tooltip {
+
       &.wdc-popup-left,
       &.wdc-popup-right {
         top: -$wdc-spacing-xs;
