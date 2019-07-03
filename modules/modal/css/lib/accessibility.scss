@@ -1,0 +1,22 @@
+@mixin wdc-focusable-close-btn() {
+  .wdc-modal-close-btn:not([disabled]) {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+[data-whatinput='keyboard'] {
+  @include wdc-focusable-close-btn() {
+    @extend .wdc-modal-close-btn.wdc-modal-close-btn-focus;
+  }
+}
+
+[data-whatinput='initial'],
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  @include wdc-focusable-close-btn() {
+    box-shadow: none;
+    outline: none;
+  }
+}

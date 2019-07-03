@@ -1,0 +1,121 @@
+$wdc-modal-background-color: $wdc-color-french-vanilla-100 !default;
+$wdc-modal-padding: $wdc-spacing-xl $wdc-spacing-xxl $wdc-spacing-l !default;
+$wdc-modal-backdrop: rgba(255, 255, 255, 0.6) !default;
+$wdc-modal-border: 1px solid rgba(213, 217, 222, 1) !default;
+$wdc-modal-border-radius: 3px !default;
+$wdc-modal-box-shadow: 0 20px 25px 0 rgba(82, 97, 115, 0.2) !default;
+$wdc-modal-z-index: 100 !default;
+$wdc-modal-breakpoint: 450px !default;
+
+$wdc-modal-body-margin: $wdc-spacing-s 0 $wdc-spacing-m !default;
+
+$wdc-modal-close-color: #86959e !default;
+$wdc-modal-close-hover: #3f4e59 !default;
+
+$wdc-modal-sizes: sm 448px, md 664px, lg 1120px !default;
+
+.wdc-modal-container {
+  background-color: $wdc-modal-backdrop;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: $wdc-modal-z-index;
+  visibility: hidden;
+
+  &.wdc-modal-visible {
+    visibility: visible;
+
+    .wdc-modal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @each $size in $wdc-modal-sizes {
+    $_name: nth($size, 1);
+    $_size: nth($size, 2);
+
+    .wdc-modal-#{$_name} {
+      width: $_size;
+    }
+  }
+
+  .wdc-modal {
+    @include wdc-type();
+    overflow: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: $wdc-modal-background-color;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: transform 0.3s ease-out, opacity 0.3s;
+    padding: $wdc-modal-padding;
+    box-shadow: $wdc-modal-box-shadow;
+    border-radius: $wdc-modal-border-radius;
+    border: $wdc-modal-border;
+  }
+
+  @media only screen and (max-width: $wdc-modal-breakpoint) {
+    .wdc-modal {
+      width: 95%;
+    }
+  }
+
+  .wdc-modal-header {
+    .wdc-modal-close-btn {
+      width: $wdc-spacing-m;
+      height: $wdc-spacing-m;
+      fill: $wdc-modal-close-color;
+      position: absolute;
+      padding: $wdc-spacing-xxs;
+      right: $wdc-spacing-xxxs;
+      top: $wdc-spacing-xxxs;
+      transition: fill 0.3s;
+
+      &:hover {
+        cursor: pointer;
+        fill: $wdc-modal-close-hover;
+      }
+
+      &:focus,
+      &.wdc-modal-close-btn-focus {
+        outline: none;
+        border-radius: 2px;
+        box-shadow: 0 0 0 2px $wdc-color-blueberry-500;
+      }
+    }
+
+    .wdc-modal-title {
+      @include wdc-type-h3();
+    }
+  }
+
+  .wdc-modal-body {
+    @include wdc-type-body();
+    margin: $wdc-modal-body-margin;
+  }
+
+  .wdc-modal-footer {
+    display: flex;
+    flex: wrap;
+
+    .wdc-btn {
+      margin-right: $wdc-spacing-s;
+    }
+
+    @media only screen and (max-width: $wdc-modal-breakpoint) {
+      flex-direction: column;
+
+      .wdc-btn:not(:first-child) {
+        margin-top: $wdc-spacing-s;
+      }
+    }
+  }
+}
