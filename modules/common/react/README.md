@@ -14,7 +14,7 @@ or
 yarn add @workday/canvas-kit-react-common
 ```
 
-# Canvas Kit Popper
+# Popper
 
 A thin wrapper component around the Popper.js positioning engine. For reference:
 https://popper.js.org/
@@ -115,3 +115,48 @@ Default: `bottom`
 > DOM hierarchy of it's parent. When true, the popper is attached to the `containerElement`.
 
 Default: `true`
+
+# OutsideEventListener
+
+Detect events that happen outside of an element. Listen for outside click events and Escape key
+presses. Works with portals.
+
+## Usage
+
+```tsx
+import * as React from 'react';
+import {OutsideEventListener, Popper} from '@workday/canvas-kit-react-common';
+import {Popup} from '@workday/canvas-kit-react-popup';
+
+<OutsideEventListener onOutsideClick={this.closePopup} onEscape={this.closePopup}>
+  <Popper placement={'bottom'} open={this.state.open} anchorElement={this.buttonRef.current}>
+    <Popup heading={'Popup Title'}>{this.props.children}</Popup>
+  </Popper>
+</OutsideEventListener>;
+```
+
+## Static Properties
+
+> None
+
+## Component Props
+
+### Required
+
+#### `children: JSX.Element`
+
+> A single JSX or React element capable of supporting an `onClick` handler.
+
+---
+
+### Optional
+
+#### `onOutsideClick: (event?: MouseEvent) => void`
+
+> This handler is called when a click event is detected outside of the child element.
+
+---
+
+#### `onEscape: (event?: KeyboardEvent) => void`
+
+> This handler is called when an Escape key press is detected.

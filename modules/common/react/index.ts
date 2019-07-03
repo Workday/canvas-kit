@@ -7,4 +7,5 @@ export * from './lib/utils/colorUtils';
 export * from './lib/parts/_brand-assets';
 export * from './lib/types';
 export * from './lib/genericStyles';
+export * from './lib/OutsideEventListener';
 export * from './lib/Popper';
