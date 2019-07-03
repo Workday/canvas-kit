@@ -2,6 +2,7 @@ export {default as canvas} from '@workday/canvas-kit-react-core';
 export * from '@workday/canvas-kit-react-action-bar';
 export * from '@workday/canvas-kit-react-avatar';
 export * from '@workday/canvas-kit-react-button';
+export * from '@workday/canvas-kit-react-banner';
 export * from '@workday/canvas-kit-react-card';
 export * from '@workday/canvas-kit-react-checkbox';
 export * from '@workday/canvas-kit-react-color-picker';

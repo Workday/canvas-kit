@@ -3,14 +3,12 @@ import styled, {css} from 'react-emotion';
 import {colors, commonColors, type, spacing} from '@workday/canvas-kit-react-core';
 import Button from '@workday/canvas-kit-react-button';
 
-export interface BannerProps {
+export interface CookieBannerProps {
   /**
    * Whether or not the banner is closed.
    */
   isClosed?: boolean;
-}
 
-export interface CookieBannerProps extends BannerProps {
   /**
    * Callback executed upon accepting cookies.
    * The function should set `isClosed` to true.
@@ -51,7 +49,8 @@ const Banner = styled('div')(
       padding: `${spacing.s} 0`,
     },
   },
-  ({isClosed}: BannerProps) => (isClosed ? {transform: 'translateY(100%)'} : null)
+  ({isClosed}: Pick<CookieBannerProps, 'isClosed'>) =>
+    isClosed ? {transform: 'translateY(100%)'} : null
 );
 
 const BannerItem = styled('div')({
