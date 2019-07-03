@@ -7,7 +7,7 @@ implement user experiences consistent with
 <a href="./LICENSE">
   <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
 </a>
-<a href="https://travis-ci.com/Workday/canvas-kit">
+<a href="https://travis-ci.org/Workday/canvas-kit">
   <img src="https://travis-ci.com/Workday/canvas-kit.svg?token=oZpr7hcrwxtuCsrBb5dT&branch=master" alt="Travis CI">
 </a>
 <a href="https://lerna.js.org">
