@@ -9,7 +9,7 @@ branches:
   - gh-pages
 stages:
 - name: storybook
-  if: branch = master AND type != pull_request
+  if: branch =~ /^release-.+$/ AND type != pull_request
 - name: pr-previews
   if: "(branch = master AND type = pull_request) OR branch != master OR NOT branch =~ /^release-.+$/"
 - name: npm publish
