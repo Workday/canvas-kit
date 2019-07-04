@@ -9,11 +9,11 @@ branches:
   except:
   - gh-pages
 stages:
-- name: storybook
-  if: branch =~ /^release-.+$/ AND type != pull_request
 - name: pr-previews
   if: "(branch = master AND type = pull_request) OR branch != master OR NOT branch =~ /^release-.+$/"
 - name: npm publish
+  if: branch =~ /^release-.+$/ AND type != pull_request
+- name: storybook
   if: branch =~ /^release-.+$/ AND type != pull_request
 before_install:
 - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
