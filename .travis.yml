@@ -1,5 +1,6 @@
 language: node_js
-node_js: 8
+node_js:
+- "8"
 cache:
   yarn: true
 git:
@@ -25,6 +26,11 @@ install:
 - yarn test
 jobs:
   include:
+  - stage: pr previews
+    script: echo "TODO"
+  - stage: npm publish
+    script:
+    - "./utils/travis/getGit.sh"
   - stage: storybook
     script:
     - yarn build-storybook
@@ -34,12 +40,8 @@ jobs:
       local_dir: docs
       github_token: "$GH_STORYBOOK_TOKEN"
       on:
-        branch: master
-  - stage: pr previews
-    script: echo "TODO"
-  - stage: npm publish
-    script:
-    - "./utils/travis/getGit.sh"
+        all_branches: true
+        condition: $TRAVIS_BRANCH =~ /^release-.+$/
 env:
   global:
   - secure: 2mf5LOhqAmYsMKOoVK+4F9Yym0Y7CvrgyHZcSMsezFB/8PowxdPKDfHuwV8I5DsRQuFzv1G9xmdlrV7qWKf48bJwyFRXulAdzsElrkrXDVhW3nmzt/vpqSA/YJWqB1gsBolp1dOrC0dblNTNzCxHPHgl0y8x8A6ZpT4oUY14iVO+olg5hkD6Yx+M17+Oe1q5r7GUF5auFazZr3BeyJ5oxdIIUVeZRitJU0KxScaZmBv/pwfCKrmrfGk/GSt11WJgTA5pRG+HQZ253uy/Oxsh4JKJXCoeEp1taSnxzJpVeA9iq3Ywj+C64sAqS4NVM/wtLFxDz7RZ3w+B6MbdnAYWarYotuNWtpduiHp9rzfOhYr1DmD9uxCQ+bnt0pwfLY010wsXwnBljxTvVvUwEvMRVTgwzSDwQIbhepb3Br+KduRIZOLAa/mbk6uFQOBJrDfkcug5xZUcoNii2WMtGxdq4gRZ4mWXjiXNOKgm27zu+IRM09z9aUbRTCVsNp8TP23GnhMMdoEhxZECWwHrwT6+QrLeih9tkA7YYlPrjaA33+vajSDzNyLWBxvk7JPIwDZiaObSWOh2XD3XBSnLHN/Pt0udrWxW7Zdtumg/u2zvWRhaQCIPN8fdgYMTEYQ4a1U+hR3gKl6DhF1mgkVqo1Q98g4lY+JMaS8/HG+YCmY5HzI=
