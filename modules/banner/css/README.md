@@ -28,17 +28,17 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 
 ## Usage
 
-Use by applying `.wdc-alert-bar`.
+Use by applying `.wdc-banner`.
 
-`.wdc-alert-bar-text` - Contains the alert/error text.  
-`.wdc-alert-bar-right` - Rightmost area containing a link.
+`.wdc-banner-text` - Contains the alert/error text.  
+`.wdc-banner-right` - Rightmost area containing a link.
 
 ```html
-<a class="wdc-alert-bar" href="#">
-  <span class="wdc-alert-bar-text">
+<a class="wdc-banner" href="#">
+  <span class="wdc-banner-text">
     12 Alerts
   </span>
-  <span class="wdc-alert-bar-link">
+  <span class="wdc-banner-link">
     View All
   </span>
 </a>
@@ -46,32 +46,32 @@ Use by applying `.wdc-alert-bar`.
 
 ### Variant
 
-#### `.wdc-alert-bar-error`
+#### `.wdc-banner-error`
 
 > Set the banner variant as `error`
 
 ```html
-<a class="wdc-alert-bar wdc-alert-bar-error" href="#">
-  <span class="wdc-alert-bar-text">
+<a class="wdc-banner wdc-banner-error" href="#">
+  <span class="wdc-banner-text">
     24 Errors and 12 Alerts
   </span>
-  <span class="wdc-alert-bar-link">
+  <span class="wdc-banner-link">
     View All
   </span>
 </a>
 ```
 
-#### `.wdc-alert-bar-mini`
+#### `.wdc-banner-mini`
 
 > Set the banner variant as `mini`. Text will truncate with an ellipsis if longer than maximum
 > width.
 
 ```html
-<a class="wdc-alert-bar wdc-alert-bar-mini" href="#">
-  <span class="wdc-alert-bar-text">
+<a class="wdc-banner wdc-banner-mini" href="#">
+  <span class="wdc-banner-text">
     12 Alerts
   </span>
-  <span class="wdc-alert-bar-right">
+  <span class="wdc-banner-right">
     View All
   </span>
 </a>

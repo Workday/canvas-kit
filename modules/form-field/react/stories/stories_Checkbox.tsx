@@ -6,7 +6,7 @@ import {InputProviderDecorator, ControlledComponentWrapper} from '../../../../ut
 
 import {Checkbox} from '../../../checkbox/react/index';
 import FormField from '../index';
-import README from '../README.md';
+import README from '../../../checkbox/react/README.md';
 
 const control = (child: React.ReactNode) => (
   <ControlledComponentWrapper controlledProp={ControlledComponentWrapper.ControlledProp.Checked}>

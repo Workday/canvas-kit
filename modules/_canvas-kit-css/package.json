@@ -25,9 +25,11 @@
     "@workday/canvas-kit-css-icon": "^3.0.0-alpha.2",
     "@workday/canvas-kit-css-layout": "^3.0.0-alpha.2",
     "@workday/canvas-kit-css-loading-animation": "^3.0.0-alpha.2",
+    "@workday/canvas-kit-css-menu": "^3.0.0-alpha.0",
     "@workday/canvas-kit-css-page-header": "^3.0.0-alpha.2",
     "@workday/canvas-kit-css-popup": "^3.0.0-alpha.2",
-    "@workday/canvas-kit-css-table": "^3.0.0-alpha.2"
+    "@workday/canvas-kit-css-table": "^3.0.0-alpha.2",
+    "@workday/canvas-kit-css-tooltip": "^3.0.0-alpha.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

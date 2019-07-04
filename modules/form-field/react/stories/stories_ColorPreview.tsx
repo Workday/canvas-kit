@@ -6,7 +6,7 @@ import {InputProviderDecorator} from '../../../../utils/storybook';
 
 import {ColorPreview} from '../../../color-picker/react/index';
 import FormField from '../index';
-import README from '../README.md';
+import README from '../../../color-picker/react/README.md';
 
 storiesOf('Form Field/Color Picker/Color Preview/Top Label', module)
   .addDecorator(InputProviderDecorator)

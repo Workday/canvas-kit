@@ -97,7 +97,7 @@
     "commit": "git-cz",
     "commitmsg": "validate-commit-msg",
     "build-storybook": "build-storybook -c .storybook -o docs",
-    "lint": "tslint --project tsconfig.json",
+    "lint": "node utils/check-lockfile-links.js && tslint --project tsconfig.json",
     "format:prettier": "prettier --config=./.prettierrc --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format:tslint": "tslint --project tsconfig.json --fix",
     "format": "yarn format:prettier && yarn format:tslint",
@@ -118,6 +118,10 @@
       ],
       "*.{js,jsx,json,md}": [
         "prettier --config=./.prettierrc --ignore-path=./.prettierignore --write",
+        "git add"
+      ],
+      "yarn.lock": [
+        "node utils/check-lockfile-links.js",
         "git add"
       ]
     }

@@ -1,5 +1,5 @@
-@mixin wdc-focusable-alerts() {
-  .wdc-alert-bar:not([disabled]) {
+@mixin wdc-focusable-banner() {
+  .wdc-banner:not([disabled]) {
     &:not([tabindex='-1']):focus {
       @content;
     }
@@ -7,15 +7,15 @@
 }
 
 [data-whatinput='keyboard'] {
-  @include wdc-focusable-alerts() {
-    @extend .wdc-alert-bar.wdc-alert-bar-focus;
+  @include wdc-focusable-banner() {
+    @extend .wdc-banner.wdc-banner-focus;
   }
 }
 
 [data-whatinput='initial'],
 [data-whatinput='mouse'],
 [data-whatinput='touch'] {
-  @include wdc-focusable-alerts() {
+  @include wdc-focusable-banner() {
     outline: none;
     box-shadow: none;
   }

@@ -9,7 +9,7 @@ import {
 } from '../../../../utils/storybook';
 
 import FormField from '..';
-import README from '../README.md';
+import README from '../../../select/react/README.md';
 import {Select, SelectOption} from '@workday/canvas-kit-react-select';
 
 const hintText = 'Helpful text goes here.';

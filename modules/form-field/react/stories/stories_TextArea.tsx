@@ -6,7 +6,7 @@ import {InputProviderDecorator, controlComponent} from '../../../../utils/storyb
 
 import {TextArea} from '../../../text-area/react/index';
 import FormField from '../index';
-import README from '../README.md';
+import README from '../../../text-area/react/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
