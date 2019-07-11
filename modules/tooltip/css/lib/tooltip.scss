@@ -1,12 +1,10 @@
 .wdc-tooltip {
   @include wdc-type();
   @include wdc-type-body();
-  @include wdc-depth-3();
   display: inline-block;
   background-color: $_wdc-tooltip-bg-color;
-  padding: $wdc-spacing-s;
-  border-radius: 3px;
-  border: 1px solid $_wdc-tooltip-border-color;
+  padding: 0;
+  border-radius: $wdc-spacing-xxxs;
   position: relative;
   width: max-content;
   max-width: $_wdc-tooltip-max-width;
@@ -24,142 +22,31 @@
     min-width: $_wdc-tooltip-menu-min-width;
   }
 
-  &-menu {
-    padding: $wdc-spacing-xxs 0;
-    min-width: $_wdc-tooltip-menu-min-width;
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        color: $wdc-color-black-pepper-300;
-        padding: $wdc-spacing-xxxs $wdc-spacing-s;
-        font-size: 13px;
-        cursor: pointer;
-        transition: background-color 0.2s, color 0.2s;
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        &.wdc-tooltip-menu-item-focus,
-        &:focus,
-        &.wdc-tooltip-menu-item-hover,
-        &:hover {
-          color: $wdc-color-french-vanilla-100;
-          background-color: $wdc-color-blueberry-500;
-        }
-      }
-    }
-  }
-
-  &-right,
-  &-left,
-  &-top,
-  &-bottom {
-
-    &:before,
-    &:after {
-      content: ' ';
-      position: absolute;
-      border-style: solid;
-      border-color: transparent;
-    }
-
-    &:before {
-      border-width: $_wdc-tooltip-arrow-size + 1px;
-    }
-
-    &:after {
-      border-width: $_wdc-tooltip-arrow-size;
-    }
-  }
-
   &-right {
-    margin-left: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: $_wdc-tooltip-arrow-offset;
-      right: 100%;
-    }
-
-    &:before {
-      margin-top: -($_wdc-tooltip-arrow-size + 1px);
-      border-right-color: $_wdc-tooltip-border-color;
-    }
-
-    &:after {
-      margin-top: -$_wdc-tooltip-arrow-size;
-      border-right-color: $_wdc-tooltip-bg-color;
-    }
+    margin-left: $wdc-spacing-xxxs;
   }
 
   &-left {
-    margin-right: $wdc-spacing-s;
+    margin-right: $wdc-spacing-xxxs;
+  }
 
-    &:before,
-    &:after {
-      top: $_wdc-tooltip-arrow-offset;
-      left: 100%;
-    }
-
-    &:before {
-      margin-top: -($_wdc-tooltip-arrow-size + 1px);
-      border-left-color: $_wdc-tooltip-border-color;
-    }
-
-    &:after {
-      margin-top: -$_wdc-tooltip-arrow-size;
-      border-left-color: $_wdc-tooltip-bg-color;
-    }
+  &-right,
+  &-left {
+    margin-top: 8px;
   }
 
   &-top {
-    margin-bottom: $wdc-spacing-s;
+    margin-bottom: $wdc-spacing-xxxs;
 
-    &:before,
-    &:after {
-      top: 100%;
-      left: $_wdc-tooltip-arrow-offset;
-    }
-
-    &:before {
-      margin-left: -($_wdc-tooltip-arrow-size + 1px);
-      border-top-color: $_wdc-tooltip-border-color;
-    }
-
-    &:after {
-      margin-left: -$_wdc-tooltip-arrow-size;
-      border-top-color: $_wdc-tooltip-bg-color;
-    }
   }
 
   &-bottom {
-    margin-top: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      bottom: 100%;
-      left: $_wdc-tooltip-arrow-offset;
-    }
-
-    &:before {
-      margin-left: -($_wdc-tooltip-arrow-size + 1px);
-      border-bottom-color: $_wdc-tooltip-border-color;
-    }
-
-    &:after {
-      margin-left: -$_wdc-tooltip-arrow-size;
-      border-bottom-color: $_wdc-tooltip-bg-color;
-    }
+    margin-top: $wdc-spacing-xxxs;
   }
 
-  padding: $wdc-spacing-xs $wdc-spacing-s;
-  font-size: 14px;
+  padding: $wdc-spacing-xxs;
+  font-size: 13px;
+  color: $wdc-color-french-vanilla-100;
   white-space: nowrap;
   min-width: auto;
   max-width: $_wdc-tooltip-max-width;
