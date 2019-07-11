@@ -25,6 +25,8 @@
     "css",
     "scss",
     "sass",
+    "textarea",
+    "text-area",
     "workday"
   ],
   "dependencies": {

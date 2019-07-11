@@ -26,6 +26,9 @@ You may also import specific modules from `/lib`.
 
 ```scss
 @import '~@workday/canvas-kit-css-common/index.scss';
+
+or
+
 @import '~@workday/canvas-kit-css-common/lib/errors.scss';
 ```
 

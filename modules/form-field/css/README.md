@@ -102,47 +102,6 @@ label.
 </div>
 ```
 
-## States
-
-State styling may be explicitly applied to form controls using the classes below.
-
-| State    | Class                |
-| -------- | -------------------- |
-| hover    | `.wdc-form-hover`    |
-| focus    | `.wdc-form-focus`    |
-| disabled | `.wdc-form-disabled` |
-| checked  | `.wdc-form-checked`  |
-
-**Examples**
-
-```html
-<div class="wdc-form-field-wrapper">
-  <label class="wdc-form-label" for="textinput">Input Label</label>
-  <div class="wdc-form-field">
-    <input
-      type="text"
-      class="wdc-form-textinput wdc-form-focus"
-      placeholder="Here's a placeholder"
-      id="textinput"
-    />
-  </div>
-</div>
-
-<div class="wdc-form-field-wrapper">
-  <div class="wdc-form-field">
-    <input type="checkbox" class="wdc-form-checkbox wdc-form-disabled" />
-    <label class="wdc-form-label">Checkbox</label>
-  </div>
-</div>
-
-<div class="wdc-form-field-wrapper">
-  <div class="wdc-form-field">
-    <input type="radio" class="wdc-form-radio wdc-form-checked" name="radio" />
-    <label class="wdc-form-label">Option</label>
-  </div>
-</div>
-```
-
 ## Errors and Alerts
 
 Use `.wdc-form-error` or `.wdc-form-alert` to apply error or alert styling to form controls.

@@ -23,8 +23,9 @@
     "canvas",
     "canvas-kit",
     "css",
-    "scss",
     "sass",
+    "select",
+    "scss",
     "workday"
   ],
   "dependencies": {

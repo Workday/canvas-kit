@@ -31,13 +31,10 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 <input type="checkbox" class="wdc-form-checkbox" id="checkbox" />
 ```
 
-Using this component by itself is highly discouraged. We recommend you to render it inside a
-[canvas-kit-form-field](../../form-field/css).
+**Note:** While a base checkbox component is provided in this package, it is **not accessible** when
+used as is. It should be used in tandem with [canvas-kit-form-field](../../form-field/css) to be
+made fully accessible.
 
 ## Labels
 
-Render a checkbox inside a [canvas-kit-form-field](../../form-field/css) to add a label.
-
-## Accessibility
-
-See [canvas-kit-core](../../core/css#accessibility) for accessibility guidelines.
+Render a checkbox inside a [canvas-kit-form-field](../../form-field/css) to add a label.\

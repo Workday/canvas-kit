@@ -25,6 +25,8 @@
     "css",
     "scss",
     "sass",
+    "textinput",
+    "text-input",
     "workday"
   ],
   "dependencies": {
