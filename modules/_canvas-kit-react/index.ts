@@ -8,7 +8,6 @@ export * from '@workday/canvas-kit-react-checkbox';
 export * from '@workday/canvas-kit-react-color-picker';
 export * from '@workday/canvas-kit-react-common';
 export * from '@workday/canvas-kit-react-cookie-banner';
-export * from '@workday/canvas-kit-react-fonts';
 export * from '@workday/canvas-kit-react-form-field';
 export * from '@workday/canvas-kit-react-header';
 export * from '@workday/canvas-kit-react-icon';
