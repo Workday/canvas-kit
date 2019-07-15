@@ -8,6 +8,59 @@ import './index.scss';
 
 storiesOf('CSS/Button', module)
   .addDecorator(withReadme(README))
+  .add('Primary', () => (
+    <div className="story">
+      <h3>Large Primary</h3>
+      <button className="wdc-btn wdc-btn-primary">Primary Button</button>
+      <button className="wdc-btn wdc-btn-primary wdc-btn-disabled">Primary Button</button>
+      <h3>Medium Primary</h3>
+      <button className="wdc-btn wdc-btn-primary wdc-btn-medium">Primary Button</button>
+      <button className="wdc-btn wdc-btn-primary wdc-btn-medium wdc-btn-disabled">
+        Primary Button
+      </button>
+      <h3>Small Primary</h3>
+      <button className="wdc-btn wdc-btn-primary wdc-btn-small">Primary Button</button>
+      <button className="wdc-btn wdc-btn-primary wdc-btn-small wdc-btn-disabled">
+        Primary Button
+      </button>
+      <h3>Growing Primary</h3>
+      <button className="wdc-btn wdc-btn-primary wdc-btn-grow">Growing Primary Button</button>
+    </div>
+  ))
+  .add('Secondary', () => (
+    <div className="story">
+      <h3>Large Secondary</h3>
+      <button className="wdc-btn">Secondary Button</button>
+      <button className="wdc-btn wdc-btn-disabled">Secondary Button</button>
+      <h3>Medium Secondary</h3>
+      <button className="wdc-btn wdc-btn-medium">Secondary Button</button>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-disabled">Secondary Button</button>
+      <h3>Small Secondary</h3>
+      <button className="wdc-btn wdc-btn-small">Secondary Button</button>
+      <button className="wdc-btn wdc-btn-small wdc-btn-disabled">Secondary Button</button>
+      <h3>Growing Secondary</h3>
+      <button className="wdc-btn wdc-btn-grow">Growing Secondary Button</button>
+    </div>
+  ))
+  .add('Delete', () => (
+    <div className="story">
+      <h3>Large Delete</h3>
+      <button className="wdc-btn wdc-btn-delete">Delete Button</button>
+      <button className="wdc-btn wdc-btn-delete wdc-btn-disabled">Delete Button</button>
+      <h3>Medium Delete</h3>
+      <button className="wdc-btn wdc-btn-delete wdc-btn-medium">Delete Button</button>
+      <button className="wdc-btn wdc-btn-delete wdc-btn-medium wdc-btn-disabled">
+        Delete Button
+      </button>
+      <h3>Small Delete</h3>
+      <button className="wdc-btn wdc-btn-delete wdc-btn-small">Delete Button</button>
+      <button className="wdc-btn wdc-btn-delete wdc-btn-small wdc-btn-disabled">
+        Delete Button
+      </button>
+      <h3>Growing Delete</h3>
+      <button className="wdc-btn wdc-btn-delete wdc-btn-grow">Growing Delete Button</button>
+    </div>
+  ))
   .add('All', () => (
     <div className="story">
       <section>

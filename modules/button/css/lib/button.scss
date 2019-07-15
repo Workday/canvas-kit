@@ -96,6 +96,11 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     cursor: default;
   }
 
+  &.wdc-btn-grow {
+    width: 100%;
+    max-width: 100%;
+  }
+
   &.wdc-btn-dropdown {
     padding-left: $wdc-spacing-l;
     padding-right: $wdc-spacing-s;
