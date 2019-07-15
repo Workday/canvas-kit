@@ -39,7 +39,7 @@
   "dependencies": {
     "@workday/canvas-kit-react-core": "^3.0.0-alpha.2",
     "emotion": "^9.2.12",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
     "popper.js": "^1.15.0",
     "react-emotion": "^9.2.12"
   }
