@@ -11,7 +11,7 @@ import {justifyIcon} from '@workday/canvas-system-icons-web';
 import throttle from 'lodash/throttle';
 import {makeMq} from '@workday/canvas-kit-react-common';
 
-export interface HeaderProps {
+export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * A React node that will replace the menuToggle if provided.
    */
@@ -69,7 +69,7 @@ export interface HeaderState {
 
 const childrenSpacing = spacing.s;
 
-const HeaderShell = styled('div')<HeaderProps>(
+const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
   {
     overflow: 'hidden',
     display: 'flex',
@@ -110,8 +110,8 @@ const BrandLink = styled('a')({
   },
 });
 
-const navStyle = (props: HeaderProps) => {
-  const theme = themes[props.themeColor];
+const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
+  const theme = themes[themeColor];
 
   return css({
     nav: {
@@ -191,60 +191,62 @@ const navStyle = (props: HeaderProps) => {
   });
 };
 
-const ChildrenSlot = styled('div')<HeaderProps>(({centeredNav = false, variant, breakpoints}) => {
-  const mq = makeMq(breakpoints);
+const ChildrenSlot = styled('div')<Pick<HeaderProps, 'breakpoints' | 'centeredNav' | 'themeColor'>>(
+  ({centeredNav = false, breakpoints}) => {
+    const mq = makeMq(breakpoints);
 
-  return {
-    marginRight: spacing.m,
-
-    // TODO: remove this when we get real icon buttons
-    '> .canvas-header--menu-icon': {
-      cursor: 'pointer',
-    },
-    [mq.sm]: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      height: '100%',
+    return {
       marginRight: spacing.m,
 
-      '> *': {
-        marginLeft: childrenSpacing,
+      // TODO: remove this when we get real icon buttons
+      '> .canvas-header--menu-icon': {
+        cursor: 'pointer',
       },
-      '> *:not(.canvas-header--menu-icon)': {
-        display: 'none',
-      },
-    },
-    [mq.md]: {
-      '> *:last-child': {
-        marginRight: 0,
-      },
-
-      '> *:not(.canvas-header--menu-icon)': {
+      [mq.sm]: {
         display: 'flex',
-      },
-    },
-    [mq.lg]: {
-      flexGrow: centeredNav ? 1 : 'unset',
-    },
-  };
-},                                              navStyle);
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        height: '100%',
+        marginRight: spacing.m,
 
-class Brand extends React.Component<HeaderProps> {
+        '> *': {
+          marginLeft: childrenSpacing,
+        },
+        '> *:not(.canvas-header--menu-icon)': {
+          display: 'none',
+        },
+      },
+      [mq.md]: {
+        '> *:last-child': {
+          marginRight: 0,
+        },
+
+        '> *:not(.canvas-header--menu-icon)': {
+          display: 'flex',
+        },
+      },
+      [mq.lg]: {
+        flexGrow: centeredNav ? 1 : 'unset',
+      },
+    };
+  },
+  navStyle
+);
+
+class Brand extends React.Component<
+  Pick<HeaderProps, 'variant' | 'brand' | 'title' | 'themeColor'>
+> {
   render() {
-    switch (this.props.variant) {
+    const {variant, brand, themeColor, title} = this.props;
+
+    switch (variant) {
       case HeaderVariant.Global: {
-        return <span>{this.props.brand}</span>;
+        return <span>{brand}</span>;
       }
       case HeaderVariant.Full: {
         return (
           <span>
-            {this.props.brand || (
-              <WorkdayLogoTitle
-                title={this.props.title ? this.props.title : ''}
-                themeColor={this.props.themeColor}
-              />
-            )}
+            {brand || <WorkdayLogoTitle title={title ? title : ''} themeColor={themeColor} />}
           </span>
         );
       }
@@ -252,12 +254,7 @@ class Brand extends React.Component<HeaderProps> {
       default: {
         return (
           <span>
-            {this.props.brand || (
-              <DubLogoTitle
-                title={this.props.title ? this.props.title : ''}
-                themeColor={this.props.themeColor}
-              />
-            )}
+            {brand || <DubLogoTitle title={title ? title : ''} themeColor={themeColor} />}
           </span>
         );
       }
@@ -265,23 +262,24 @@ class Brand extends React.Component<HeaderProps> {
   }
 }
 
-class MenuIconButton extends React.Component<HeaderProps> {
+class MenuIconButton extends React.Component<
+  Pick<HeaderProps, 'themeColor' | 'menuToggle' | 'onMenuClick'>
+> {
   render() {
+    const {themeColor, menuToggle, onMenuClick} = this.props;
     const menuIconButtonProps = {
       buttonType:
-        this.props.themeColor === HeaderTheme.White
-          ? IconButton.Types.Circle
-          : IconButton.Types.Inverse,
+        themeColor === HeaderTheme.White ? IconButton.Types.Circle : IconButton.Types.Inverse,
       icon: justifyIcon,
     };
 
     const menuSlot =
-      this.props.menuToggle &&
-      React.cloneElement(this.props.menuToggle as React.ReactElement<any>, {
-        onClick: this.props.onMenuClick,
+      menuToggle &&
+      React.cloneElement(menuToggle as React.ReactElement<any>, {
+        onClick: onMenuClick,
       });
 
-    return this.props.menuToggle ? (
+    return menuToggle ? (
       menuSlot
     ) : (
       <IconButton {...menuIconButtonProps} className="canvas-header--menu-icon" />
@@ -439,7 +437,21 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
   }
 
   render() {
-    const {onBreakpointChange, onMenuClick, onSearchSubmit, ...props} = this.props;
+    const {
+      menuToggle,
+      themeColor,
+      variant,
+      centeredNav,
+      title,
+      brand,
+      brandUrl,
+      onMenuClick,
+      onSearchSubmit,
+      breakpoints,
+      onBreakpointChange,
+      children,
+      ...elemProps
+    } = this.props;
 
     /* Push everything to the right if:
        - on tablet and mobile screens
@@ -448,44 +460,55 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
     */
     const growBrand =
       this.state.screenSize !== 'lg' ||
-      (!onSearchSubmit && !this.props.centeredNav) ||
-      (onSearchSubmit && !this.props.children);
+      (!onSearchSubmit && !centeredNav) ||
+      (onSearchSubmit && !children);
 
     // Ignore centeredNav if search is enabled
-    const centeredNav = onSearchSubmit ? false : this.props.centeredNav;
+    const shouldCenteredNav = onSearchSubmit ? false : centeredNav;
 
     // Collapse search at sm breakpoint if no children, at md breakpoint if children
     const collapseSearch = Boolean(
-      (!this.props.children && this.state.screenSize === 'sm') ||
-        (this.props.children && this.state.screenSize !== 'lg')
+      (!children && this.state.screenSize === 'sm') || (children && this.state.screenSize !== 'lg')
     );
 
     // Screen size is smaller than our largest breakpoint so turn nav into a hamburger
     // TODO: This needs to get changed to IconButton when we get it restyled for headers
-    const collapseMenu = this.props.children && this.state.screenSize !== 'lg';
+    const collapseMenu = children && this.state.screenSize !== 'lg';
 
     return (
-      <HeaderShell {...props}>
+      <HeaderShell variant={variant} themeColor={themeColor} {...elemProps}>
         <BrandSlot grow={growBrand}>
-          {this.props.brandUrl ? (
-            <BrandLink href={this.props.brandUrl}>
-              <Brand {...props} />
+          {brandUrl ? (
+            <BrandLink href={brandUrl}>
+              <Brand variant={variant} brand={brand} title={title} themeColor={themeColor} />
             </BrandLink>
           ) : (
-            <Brand {...props} />
+            <Brand variant={variant} brand={brand} title={title} themeColor={themeColor} />
           )}
         </BrandSlot>
         {onSearchSubmit && (
           <Search
             onSearchSubmit={onSearchSubmit}
-            rightAlign={!this.props.children}
-            themeColor={this.props.themeColor}
+            rightAlign={!children}
+            themeColor={themeColor}
             collapse={collapseSearch}
             placeholder="Search"
           />
         )}
-        <ChildrenSlot {...props} centeredNav={centeredNav}>
-          {collapseMenu ? <MenuIconButton {...props} /> : this.renderChildren(this.props.children)}
+        <ChildrenSlot
+          breakpoints={breakpoints}
+          themeColor={themeColor}
+          centeredNav={shouldCenteredNav}
+        >
+          {collapseMenu ? (
+            <MenuIconButton
+              themeColor={themeColor}
+              menuToggle={menuToggle}
+              onMenuClick={onMenuClick}
+            />
+          ) : (
+            this.renderChildren(children)
+          )}
         </ChildrenSlot>
       </HeaderShell>
     );
