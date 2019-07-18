@@ -148,6 +148,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
     min-width: $wdc-btn-min-width-s;
     max-width: $wdc-btn-max-width-s;
     -webkit-font-smoothing: subpixel-antialiased;
+    vertical-align: -1px;
 
     &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
     &:hover:not([disabled]):not(.wdc-btn-disabled) {
