@@ -28,10 +28,10 @@
   "keywords": [
     "canvas",
     "canvas-kit",
+    "checkbox",
     "react",
     "components",
-    "workday",
-    "checkbox"
+    "workday"
   ],
   "peerDependencies": {
     "react": ">= 16.8 < 17"

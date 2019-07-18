@@ -1,11 +1,7 @@
-$_wdc-btn-caret-down-icon: svg-load(
-  '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
-  fill=$wdc-btn-color-icon
-);
-$_wdc-btn-caret-down-icon-hover: svg-load(
-  '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
-  fill=$wdc-btn-color-icon-hover
-);
+$_wdc-btn-caret-down-icon: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
+  fill=$wdc-btn-color-icon);
+$_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
+  fill=$wdc-btn-color-icon-hover);
 
 @mixin wdc-btn-icon-inline($_icon) {
   content: '';
@@ -22,16 +18,16 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 @mixin wdc-btn() {
   @include wdc-type-body();
   @include wdc-type-variant-btn();
-  @include wdc-btn-box-shadow($wdc-btn-border-color);
   display: inline-block;
   text-decoration: none;
+  font-family: $wdc-btn-font-family;
+  font-weight: $wdc-btn-font-weight;
   min-width: $wdc-btn-min-width-l;
   max-width: $wdc-btn-max-width-l;
   height: $wdc-btn-height-l;
-  line-height: $wdc-btn-height-l;
   padding: $wdc-btn-padding-l;
   background-color: $wdc-btn-bg;
-  border: none;
+  border: 1px solid $wdc-btn-border;
   color: $wdc-btn-color;
   border-radius: $wdc-btn-border-radius;
   transition: 0.2s background, 0.2s border-color, 0.2s box-shadow;
@@ -39,6 +35,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   font-size: 14px;
   cursor: pointer;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 
   .wd-icon {
     height: $wdc-btn-icon-size;
@@ -62,13 +59,16 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   }
 
   &.wdc-btn-hover,
-  &:hover {
+  &:hover,
+  &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
+  &:hover:not([disabled]):not(.wdc-btn-disabled) {
     @include wdc-btn-box-shadow($wdc-btn-border-color-hover);
     background-color: $wdc-btn-bg-hover;
   }
 
   &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
   &:hover:not([disabled]):not(.wdc-btn-disabled) {
+
     .wd-icon-accent,
     .wd-icon-fill {
       fill: $wdc-btn-color-icon-hover;
@@ -90,7 +90,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 
   &.wdc-btn-disabled,
   &:disabled {
-    @include wdc-btn-box-shadow($wdc-btn-border-color-disabled);
+    box-shadow: none;
     background-color: $wdc-btn-bg-disabled;
     color: $wdc-btn-color-disabled;
     cursor: default;
@@ -131,7 +131,6 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 
     &.wdc-btn-disabled,
     &:disabled {
-      @include wdc-btn-box-shadow($wdc-btn-border-color-disabled);
       background-color: $wdc-btn-bg-disabled;
       color: $wdc-btn-color-disabled;
     }
@@ -142,9 +141,10 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     line-height: $wdc-btn-height-s;
     font-size: 10px;
     padding: $wdc-btn-padding-s;
+    position: relative;
     background-color: $wdc-color-french-vanilla-100;
     color: $wdc-color-black-pepper-300;
-    font-weight: 400;
+    font-weight: 500;
     min-width: $wdc-btn-min-width-s;
     max-width: $wdc-btn-max-width-s;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -172,6 +172,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     background-color: $wdc-btn-bg-primary;
     box-shadow: none;
     color: $wdc-btn-color-primary;
+    border-color: $wdc-btn-border-primary;
 
     .wd-icon-accent,
     .wd-icon-fill {
@@ -184,6 +185,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     &:hover:not([disabled]):not(.wdc-btn-disabled) {
       background-color: $wdc-btn-bg-primary-hover;
       box-shadow: none;
+      border-color: $wdc-btn-border-primary-hover;
 
       .wd-icon-accent,
       .wd-icon-fill {
@@ -194,12 +196,14 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     &.wdc-btn-active,
     &:active {
       background-color: $wdc-btn-bg-primary;
+      border-color: $wdc-btn-border-primary-active;
     }
 
     &:focus,
     &.wdc-btn-focus {
       background-color: $wdc-btn-bg-primary;
       box-shadow: 0 0 0 2px $wdc-btn-border-color-focus;
+      border-color: $wdc-btn-border-primary-active;
     }
 
     &.wdc-btn-disabled,
@@ -207,6 +211,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       box-shadow: none;
       background-color: $wdc-btn-bg-primary-disabled;
       color: $wdc-btn-color-primary;
+      border-color: $wdc-btn-border-primary-disabled;
     }
 
     &.wdc-btn-split-icon {
@@ -215,35 +220,42 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   }
 
   &.wdc-btn-delete {
-    @include wdc-btn-box-shadow($wdc-btn-border-color-delete);
     background-color: $wdc-btn-bg-delete;
     color: $wdc-btn-color-delete;
+    border-color: $wdc-btn-border-delete;
 
     &.wdc-btn-hover,
-    &:hover {
+    &:hover,
+    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
+    &:hover:not([disabled]):not(.wdc-btn-disabled) {
       @include wdc-btn-box-shadow($wdc-btn-border-color-delete-hover);
       color: $wdc-btn-color-delete-hover;
       background-color: $wdc-btn-bg-delete-hover;
+      border-color: $wdc-btn-border-delete-hover;
     }
 
     &.wdc-btn-active,
     &:active {
       color: $wdc-btn-color-delete-hover;
       background-color: $wdc-btn-bg-delete-hover;
+      border-color: $wdc-btn-border-delete-active;
     }
 
     &:focus,
     &.wdc-btn-focus {
       color: $wdc-btn-color-delete-hover;
       background-color: $wdc-btn-bg-delete-hover;
-      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-btn-border-color-focus;
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
+        0 0 0 4px $wdc-btn-border-color-focus;
+      border-color: $wdc-btn-border-delete-active;
     }
 
     &.wdc-btn-disabled,
     &:disabled {
-      @include wdc-btn-box-shadow($wdc-btn-border-color-delete-disabled);
+      box-shadow: none;
       color: $wdc-btn-color-delete-disabled;
       background-color: $wdc-btn-bg-delete-disabled;
+      border-color: $wdc-btn-border-delete-disabled;
     }
   }
 
@@ -318,6 +330,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 
   .wdc-btn-split-text,
   .wdc-btn-split-icon {
+
     &.wdc-btn-hover,
     &:hover {
       z-index: 1;
@@ -361,10 +374,8 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     }
 
     &.wdc-btn-primary {
-      $_wdc-btn-split-primary-icon: svg-load(
-        '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
-        fill=$wdc-btn-color-primary
-      );
+      $_wdc-btn-split-primary-icon: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
+        fill=$wdc-btn-color-primary);
 
       background-image: $_wdc-btn-split-primary-icon;
 
