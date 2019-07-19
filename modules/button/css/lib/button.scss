@@ -36,6 +36,8 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
   cursor: pointer;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
+  outline: none;
+  line-height: 38px;
 
   .wd-icon {
     height: $wdc-btn-icon-size;
@@ -58,34 +60,37 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
     float: right;
   }
 
-  &.wdc-btn-hover,
-  &:hover,
-  &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-  &:hover:not([disabled]):not(.wdc-btn-disabled) {
-    @include wdc-btn-box-shadow($wdc-btn-border-color-hover);
-    background-color: $wdc-btn-bg-hover;
-  }
+  &:not([disabled]):not(.wdc-btn-disabled) {
 
-  &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-  &:hover:not([disabled]):not(.wdc-btn-disabled) {
+    &.wdc-btn-hover,
+    &:hover {
+      border-color: $wdc-btn-border-color-hover;
+      background-color: $wdc-btn-bg-hover;
 
-    .wd-icon-accent,
-    .wd-icon-fill {
-      fill: $wdc-btn-color-icon-hover;
+      .wd-icon-accent,
+      .wd-icon-fill {
+        fill: $wdc-btn-color-icon-hover;
+      }
     }
-  }
 
-  &.wdc-btn-active,
-  &:active {
-    @include wdc-btn-box-shadow($wdc-btn-border-color-active);
-    background-color: $wdc-btn-bg-active;
-  }
+    &.wdc-btn-active,
+    &:active {
+      background-color: $wdc-btn-bg-focus;
+      box-shadow: 0 0 0 2px $wdc-btn-border-active;
+      border-color: $wdc-btn-border-active;
+    }
 
-  &:focus,
-  &.wdc-btn-focus {
-    background-color: $wdc-btn-bg-focus;
-    box-shadow: 0 0 0 2px $wdc-btn-border-color-focus;
-    outline: none;
+    &:focus,
+    &.wdc-btn-focus {
+      background-color: $wdc-btn-bg-focus;
+      box-shadow: 0 0 0 2px $wdc-btn-border-active;
+      border-color: $wdc-btn-border-active;
+
+      &.wdc-btn-hover,
+      &:hover {
+        border-color: $wdc-btn-border-active;
+      }
+    }
   }
 
   &.wdc-btn-disabled,
@@ -138,35 +143,14 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
 
   &.wdc-btn-small {
     height: $wdc-btn-height-s;
-    line-height: $wdc-btn-height-s;
+    line-height: 16px;
     font-size: 10px;
     padding: $wdc-btn-padding-s;
     position: relative;
-    background-color: $wdc-color-french-vanilla-100;
-    color: $wdc-color-black-pepper-300;
     font-weight: 500;
     min-width: $wdc-btn-min-width-s;
     max-width: $wdc-btn-max-width-s;
-    -webkit-font-smoothing: subpixel-antialiased;
-    vertical-align: -1px;
-
-    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-    &:hover:not([disabled]):not(.wdc-btn-disabled) {
-      @include wdc-btn-box-shadow($wdc-color-licorice-100);
-      background-color: $wdc-color-soap-500;
-    }
-
-    &.wdc-btn-active:not([disabled]):not(.wdc-btn-disabled),
-    &:active:not([disabled]):not(.wdc-btn-disabled) {
-      @include wdc-btn-box-shadow($wdc-btn-border-color-active);
-      background-color: $wdc-color-french-vanilla-100;
-      background: $wdc-color-french-vanilla-100;
-    }
-
-    &.wdc-btn-focus:not([disabled]):not(.wdc-btn-disabled),
-    &:focus:not([disabled]):not(.wdc-btn-disabled) {
-      box-shadow: 0 0 0 2px $wdc-btn-border-color-focus;
-    }
+    -webkit-font-smoothing: antialiased;
   }
 
   &.wdc-btn-primary {
@@ -180,31 +164,37 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
       fill: $wdc-btn-color-primary;
     }
 
-    &.wdc-btn-hover,
-    &:hover,
-    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-    &:hover:not([disabled]):not(.wdc-btn-disabled) {
-      background-color: $wdc-btn-bg-primary-hover;
-      box-shadow: none;
-      border-color: $wdc-btn-border-primary-hover;
+    &:not([disabled]):not(.wdc-btn-disabled) {
 
-      .wd-icon-accent,
-      .wd-icon-fill {
-        fill: $wdc-btn-color-primary;
+      &.wdc-btn-hover,
+      &:hover {
+        border-color: $wdc-btn-border-primary-hover;
+        background-color: $wdc-btn-bg-primary-hover;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-color-primary;
+        }
       }
-    }
 
-    &.wdc-btn-active,
-    &:active {
-      background-color: $wdc-btn-bg-primary;
-      border-color: $wdc-btn-border-primary-active;
-    }
+      &.wdc-btn-active,
+      &:active {
+        background-color: $wdc-btn-bg-primary;
+        box-shadow: 0 0 0 2px $wdc-btn-border-primary-active;
+        border-color: $wdc-btn-border-primary-active;
+      }
 
-    &:focus,
-    &.wdc-btn-focus {
-      background-color: $wdc-btn-bg-primary;
-      box-shadow: 0 0 0 2px $wdc-btn-border-color-focus;
-      border-color: $wdc-btn-border-primary-active;
+      &:focus,
+      &.wdc-btn-focus {
+        background-color: $wdc-btn-bg-primary;
+        box-shadow: 0 0 0 2px $wdc-btn-border-primary-active;
+        border-color: $wdc-btn-border-primary-active;
+
+        &.wdc-btn-hover,
+        &:hover {
+          border-color: $wdc-btn-border-primary-active;
+        }
+      }
     }
 
     &.wdc-btn-disabled,
@@ -225,30 +215,40 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
     color: $wdc-btn-color-delete;
     border-color: $wdc-btn-border-delete;
 
-    &.wdc-btn-hover,
-    &:hover,
-    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-    &:hover:not([disabled]):not(.wdc-btn-disabled) {
-      @include wdc-btn-box-shadow($wdc-btn-border-color-delete-hover);
-      color: $wdc-btn-color-delete-hover;
-      background-color: $wdc-btn-bg-delete-hover;
-      border-color: $wdc-btn-border-delete-hover;
-    }
+    &:not([disabled]):not(.wdc-btn-disabled) {
 
-    &.wdc-btn-active,
-    &:active {
-      color: $wdc-btn-color-delete-hover;
-      background-color: $wdc-btn-bg-delete-hover;
-      border-color: $wdc-btn-border-delete-active;
-    }
+      &.wdc-btn-hover,
+      &:hover {
+        color: $wdc-btn-color-delete-hover;
+        background-color: $wdc-btn-bg-delete-hover;
+        border-color: $wdc-btn-border-delete-hover;
 
-    &:focus,
-    &.wdc-btn-focus {
-      color: $wdc-btn-color-delete-hover;
-      background-color: $wdc-btn-bg-delete-hover;
-      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
-        0 0 0 4px $wdc-btn-border-color-focus;
-      border-color: $wdc-btn-border-delete-active;
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-color-delete;
+        }
+      }
+
+      &.wdc-btn-active,
+      &:active {
+        background-color: $wdc-btn-bg-delete;
+        color: $wdc-btn-color-delete;
+        border-color: $wdc-btn-border-delete-active;
+      }
+
+      &:focus,
+      &.wdc-btn-focus {
+        background-color: $wdc-btn-bg-delete;
+        color: $wdc-btn-color-delete;
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
+          0 0 0 4px $wdc-btn-border-color-focus;
+        border-color: $wdc-btn-border-delete-active;
+
+        &.wdc-btn-hover,
+        &:hover {
+          border-color: $wdc-btn-border-delete-active;
+        }
+      }
     }
 
     &.wdc-btn-disabled,
@@ -350,7 +350,27 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
     max-width: $wdc-btn-max-width-l - $wdc-btn-split-icon-width;
     border-top-right-radius: $wdc-btn-split-border-radius;
     border-bottom-right-radius: $wdc-btn-split-border-radius;
+    border-right: 0px;
     margin-right: $wdc-btn-split-icon-width;
+
+    &:not([disabled]):not(.wdc-btn-disabled) {
+
+      &,
+      &.wdc-btn-primary,
+      &.wdc-btn-delete {
+
+        &.wdc-btn-active,
+        &:active {
+          box-shadow: 0 0 0 2px $wdc-btn-border-active, inset -1px 0 0 0 $wdc-btn-border-active;
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          box-shadow: 0 0 0 2px $wdc-btn-border-active, inset -1px 0 0 0 $wdc-btn-border-active;
+        }
+      }
+
+    }
   }
 
   .wdc-btn-split-icon {
