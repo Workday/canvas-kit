@@ -5,7 +5,7 @@ import PopperJS from 'popper.js';
 export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.PopperOptions;
 
-export interface PopperProps {
+export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   anchorElement: Element;
   children: React.ReactNode;
   containerElement?: Element;
@@ -46,7 +46,22 @@ export class Popper extends React.PureComponent<PopperProps> {
   }
 
   public renderPopper() {
-    return <div ref={this.openPopper}>{this.props.children}</div>;
+    const {
+      anchorElement,
+      children,
+      containerElement,
+      open,
+      placement,
+      popperOptions,
+      portal,
+      ...elemProps
+    } = this.props;
+
+    return (
+      <div {...elemProps} ref={this.openPopper}>
+        {this.props.children}
+      </div>
+    );
   }
 
   private openPopper = (popperNode: HTMLDivElement) => {

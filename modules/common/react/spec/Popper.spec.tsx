@@ -18,9 +18,11 @@ import * as PopperJS from 'popper.js';
 import {Popper, PopperProps} from '../lib/Popper';
 
 describe('Popper', () => {
+  const dataTestId = 'TESTY_TEST';
+
   const renderPopper = (props?: Partial<PopperProps>) => {
     return mount(
-      <Popper anchorElement={document.body} {...props}>
+      <Popper anchorElement={document.body} data-test-id={dataTestId} {...props}>
         <div id="content" />
       </Popper>
     );
@@ -82,6 +84,21 @@ describe('Popper', () => {
       expect.anything(),
       expect.objectContaining(popperOptions)
     );
+    component.unmount();
+  });
+
+  test('should include className attribute', () => {
+    const className = 'classy-popper';
+    const component = renderPopper({className});
+
+    expect(component.find(`div.${className}`).length).toBe(1);
+    component.unmount();
+  });
+
+  test('should include data-* attributes', () => {
+    const component = renderPopper();
+
+    expect(component.find(`div[data-test-id="${dataTestId}"]`).length).toBe(1);
     component.unmount();
   });
 });
