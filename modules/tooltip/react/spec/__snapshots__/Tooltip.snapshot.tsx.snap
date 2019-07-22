@@ -2,6 +2,11 @@
 
 exports[`Tooltip Snapshots renders a tooltip with a child element 1`] = `
 .emotion-0 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -9,8 +14,6 @@ exports[`Tooltip Snapshots renders a tooltip with a child element 1`] = `
   border-radius: 4px;
   padding: 8px;
   background-color: rgba(0,0,0,.85);
-  color: #ffffff;
-  font-size: 13px;
   margin: 4px;
   -webkit-animation: animation-ttfnet;
   animation: animation-ttfnet;
@@ -39,6 +42,11 @@ exports[`Tooltip Snapshots renders a tooltip with a child element 1`] = `
 
 exports[`Tooltip Snapshots renders a tooltip with a different transformOrigin 1`] = `
 .emotion-0 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -46,8 +54,6 @@ exports[`Tooltip Snapshots renders a tooltip with a different transformOrigin 1`
   border-radius: 4px;
   padding: 8px;
   background-color: rgba(0,0,0,.85);
-  color: #ffffff;
-  font-size: 13px;
   margin: 4px;
   -webkit-animation: animation-4n2zzm;
   animation: animation-4n2zzm;
@@ -76,6 +82,11 @@ exports[`Tooltip Snapshots renders a tooltip with a different transformOrigin 1`
 
 exports[`Tooltip Snapshots renders a tooltip with a link 1`] = `
 .emotion-0 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -83,8 +94,6 @@ exports[`Tooltip Snapshots renders a tooltip with a link 1`] = `
   border-radius: 4px;
   padding: 8px;
   background-color: rgba(0,0,0,.85);
-  color: #ffffff;
-  font-size: 13px;
   margin: 4px;
   -webkit-animation: animation-4n2zzm;
   animation: animation-4n2zzm;
