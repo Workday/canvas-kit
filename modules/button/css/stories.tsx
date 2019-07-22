@@ -100,11 +100,38 @@ storiesOf('CSS/Button/Icon Button', module)
   .addDecorator(withReadme(README))
   .add('Square Filled', () => (
     <div className="story">
-      <section>
-        <button className="wdc-btn wdc-btn-icon">
-          <SystemIcon icon={editIcon} />
-        </button>
-      </section>
+      <h3>Medium Square</h3>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-square-filled">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-square-filled wdc-btn-disabled">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <h3>Small Square</h3>
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-square-filled">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-square-filled wdc-btn-disabled">
+        <SystemIcon icon={editIcon} />
+      </button>
+    </div>
+  ))
+  .add('Circle Filled', () => (
+    <div className="story">
+      <h3>Medium Square</h3>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-circle-filled">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-circle-filled wdc-btn-disabled">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <h3>Small Square</h3>
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle-filled">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle-filled wdc-btn-disabled">
+        <SystemIcon icon={editIcon} />
+      </button>
     </div>
   ));
 
