@@ -5,7 +5,7 @@ import {CSSTransition} from 'react-transition-group';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import {colors, spacing, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 import {focusRing} from '@workday/canvas-kit-react-common';
-import {Button, IconButton, IconButtonTypes} from '@workday/canvas-kit-react-button';
+import {IconButton, IconButtonTypes} from '@workday/canvas-kit-react-button';
 import {searchIcon, xIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 
 export interface SearchProps extends React.HtmlHTMLAttributes<HTMLFormElement> {
@@ -94,12 +94,12 @@ const SearchInput = styled('input')<Pick<SearchProps, 'themeColor' | 'collapse'>
   type.body,
   {
     padding: spacing.xs,
-    paddingLeft: spacing.xl,
-    paddingRight: spacing.l,
+    paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
+    paddingRight: spacing.xl,
     maxWidth: '480px',
     minWidth: spacingNumbers.xs * 10,
     width: '100%',
-    height: '40px',
+    height: spacingNumbers.xl + spacingNumbers.xxxs,
     borderRadius: '4px',
     boxSizing: 'border-box',
     border: 'none',
@@ -163,10 +163,12 @@ const iconStyle: React.CSSProperties = {
   left: spacing.xxs,
 };
 
-const resetSize = 24;
 const SearchReset = styled(IconButton)<Pick<SearchState, 'value'>>(
   {
-    marginLeft: -(resetSize + spacingNumbers.xxs),
+    width: spacing.l,
+    height: spacing.l,
+    marginLeft: -spacingNumbers.xl,
+    padding: 0,
   },
   ({value}) => ({
     display: value ? 'block' : 'none',
@@ -174,12 +176,16 @@ const SearchReset = styled(IconButton)<Pick<SearchState, 'value'>>(
 );
 
 const SearchSubmit = styled(IconButton)({
-  left: spacing.xxxs,
-  marginRight: `-${spacing.l}`,
+  width: spacing.l,
+  height: spacing.l,
+  left: spacing.xxs,
+  marginRight: -spacingNumbers.l,
+  marginLeft: 0,
+  padding: 0,
 });
 
 const iconButtonType = (inverse: boolean) =>
-  inverse ? IconButton.Types.Inverse : IconButton.Types.Circle;
+  inverse ? IconButton.Types.Inverse : IconButton.Types.Plain;
 
 export class Search extends React.Component<SearchProps, SearchState> {
   static defaultProps = {
@@ -343,7 +349,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
         <SearchSubmit
           aria-label="Search"
           icon={searchIcon}
-          buttonSize={Button.Sizes.Small}
           buttonType={iconButtonType(!this.state.focused && themeColor !== HeaderTheme.White)}
           onClick={this.onSearchSubmit}
           type="submit"
@@ -367,7 +372,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
           aria-label="Reset Search Input"
           icon={xSmallIcon}
           buttonType={IconButtonTypes.Circle}
-          buttonSize={Button.Sizes.Small}
           onClick={this.resetSearchInput}
           type="reset"
           toggled={false}
