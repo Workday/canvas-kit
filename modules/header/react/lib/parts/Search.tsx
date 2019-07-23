@@ -371,7 +371,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
           value={this.state.value}
           aria-label="Reset Search Input"
           icon={xSmallIcon}
-          buttonType={IconButtonTypes.Circle}
+          buttonType={iconButtonType(!!this.state.value && !this.state.focused && themeColor !== HeaderTheme.White)}
           onClick={this.resetSearchInput}
           type="reset"
           toggled={false}
