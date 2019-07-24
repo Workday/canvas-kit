@@ -187,11 +187,11 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     }
 
     &.wdc-btn-active,
-    &:active {
+    &:active:not([disabled]):not(.wdc-btn-disabled) {
       background-color: $wdc-btn-bg-primary;
     }
 
-    &:focus,
+    &:focus:not([disabled]):not(.wdc-btn-disabled),
     &.wdc-btn-focus {
       background-color: $wdc-btn-bg-primary;
       box-shadow: 0 0 0 2px $wdc-btn-border-color-focus;
