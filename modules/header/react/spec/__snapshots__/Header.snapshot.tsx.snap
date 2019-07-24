@@ -1507,10 +1507,15 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-10:hover:active {
@@ -1537,7 +1542,7 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-10:focus span .wd-icon-fill,
@@ -1546,13 +1551,14 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-10:active,
 .emotion-10:focus:active,
 .emotion-10:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-10:active span .wd-icon-fill,
@@ -1565,7 +1571,7 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-10:hover span .wd-icon-fill,
@@ -1593,9 +1599,9 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
 
 .emotion-10:not([disabled]):focus,
 .emotion-10:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-12 {
@@ -1605,12 +1611,12 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -1698,9 +1704,13 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -1728,7 +1738,7 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-16:focus span .wd-icon-fill,
@@ -1737,13 +1747,14 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:active,
 .emotion-16:focus:active,
 .emotion-16:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-16:active span .wd-icon-fill,
@@ -1756,7 +1767,7 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:hover span .wd-icon-fill,
@@ -1784,14 +1795,9 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
 
 .emotion-16:not([disabled]):focus,
 .emotion-16:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-16 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <div
@@ -2108,7 +2114,7 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
   border-radius: 3px 3px 0 0;
 }
 
-.emotion-9 {
+.emotion-12 {
   box-sizing: border-box;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -2137,86 +2143,86 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
   height: 40px;
 }
 
-.emotion-9:hover:active {
+.emotion-12:hover:active {
   -webkit-transition-duration: 40ms;
   transition-duration: 40ms;
 }
 
-.emotion-9:disabled,
-.emotion-9:disabled:active {
+.emotion-12:disabled,
+.emotion-12:disabled:active {
   cursor: default;
   box-shadow: none;
 }
 
-.emotion-9 .wd-icon {
+.emotion-12 .wd-icon {
   display: inline-block;
   vertical-align: middle;
 }
 
-.emotion-9 span .wd-icon-fill,
-.emotion-9 span .wd-icon-accent {
+.emotion-12 span .wd-icon-fill,
+.emotion-12 span .wd-icon-accent {
   -webkit-transition: fill 120ms ease-in;
   transition: fill 120ms ease-in;
   fill: #7b858f;
 }
 
-.emotion-9:focus {
+.emotion-12:focus {
   background-color: #ffffff;
 }
 
-.emotion-9:focus span .wd-icon-fill,
-.emotion-9:focus span .wd-icon-accent {
+.emotion-12:focus span .wd-icon-fill,
+.emotion-12:focus span .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-9:hover:focus {
+.emotion-12:hover:focus {
   background-color: #e8ebed;
 }
 
-.emotion-9:active,
-.emotion-9:focus:active,
-.emotion-9:hover:active {
+.emotion-12:active,
+.emotion-12:focus:active,
+.emotion-12:hover:active {
   background-color: #dfe2e6;
 }
 
-.emotion-9:active span .wd-icon-fill,
-.emotion-9:focus:active span .wd-icon-fill,
-.emotion-9:hover:active span .wd-icon-fill,
-.emotion-9:active span .wd-icon-accent,
-.emotion-9:focus:active span .wd-icon-accent,
-.emotion-9:hover:active span .wd-icon-accent {
+.emotion-12:active span .wd-icon-fill,
+.emotion-12:focus:active span .wd-icon-fill,
+.emotion-12:hover:active span .wd-icon-fill,
+.emotion-12:active span .wd-icon-accent,
+.emotion-12:focus:active span .wd-icon-accent,
+.emotion-12:hover:active span .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-9:hover {
+.emotion-12:hover {
   background-color: #e8ebed;
 }
 
-.emotion-9:hover span .wd-icon-fill,
-.emotion-9:hover span .wd-icon-accent {
+.emotion-12:hover span .wd-icon-fill,
+.emotion-12:hover span .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-9:disabled,
-.emotion-9:active:disabled,
-.emotion-9:focus:disabled,
-.emotion-9:hover:disabled {
+.emotion-12:disabled,
+.emotion-12:active:disabled,
+.emotion-12:focus:disabled,
+.emotion-12:hover:disabled {
   background-color: transparent;
 }
 
-.emotion-9:disabled span .wd-icon-fill,
-.emotion-9:active:disabled span .wd-icon-fill,
-.emotion-9:focus:disabled span .wd-icon-fill,
-.emotion-9:hover:disabled span .wd-icon-fill,
-.emotion-9:disabled span .wd-icon-accent,
-.emotion-9:active:disabled span .wd-icon-accent,
-.emotion-9:focus:disabled span .wd-icon-accent,
-.emotion-9:hover:disabled span .wd-icon-accent {
+.emotion-12:disabled span .wd-icon-fill,
+.emotion-12:active:disabled span .wd-icon-fill,
+.emotion-12:focus:disabled span .wd-icon-fill,
+.emotion-12:hover:disabled span .wd-icon-fill,
+.emotion-12:disabled span .wd-icon-accent,
+.emotion-12:active:disabled span .wd-icon-accent,
+.emotion-12:focus:disabled span .wd-icon-accent,
+.emotion-12:hover:disabled span .wd-icon-accent {
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
-.emotion-9:not([disabled]):active {
+.emotion-12:not([disabled]):focus,
+.emotion-12:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
@@ -2252,6 +2258,122 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
 
 .emotion-8:hover .wd-icon-background {
   fill: transparent;
+}
+
+.emotion-9 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  border-width: 0px;
+  background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
+}
+
+.emotion-9:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-9:disabled,
+.emotion-9:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-9 .wd-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.emotion-9 span .wd-icon-fill,
+.emotion-9 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-9:focus {
+  background-color: transparent;
+}
+
+.emotion-9:focus span .wd-icon-fill,
+.emotion-9:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-9:hover:focus {
+  background-color: transparent;
+}
+
+.emotion-9:active,
+.emotion-9:focus:active,
+.emotion-9:hover:active {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.emotion-9:active span .wd-icon-fill,
+.emotion-9:focus:active span .wd-icon-fill,
+.emotion-9:hover:active span .wd-icon-fill,
+.emotion-9:active span .wd-icon-accent,
+.emotion-9:focus:active span .wd-icon-accent,
+.emotion-9:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-9:hover {
+  background-color: transparent;
+}
+
+.emotion-9:hover span .wd-icon-fill,
+.emotion-9:hover span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-9:disabled,
+.emotion-9:active:disabled,
+.emotion-9:focus:disabled,
+.emotion-9:hover:disabled {
+  background-color: transparent;
+}
+
+.emotion-9:disabled span .wd-icon-fill,
+.emotion-9:active:disabled span .wd-icon-fill,
+.emotion-9:focus:disabled span .wd-icon-fill,
+.emotion-9:hover:disabled span .wd-icon-fill,
+.emotion-9:disabled span .wd-icon-accent,
+.emotion-9:active:disabled span .wd-icon-accent,
+.emotion-9:focus:disabled span .wd-icon-accent,
+.emotion-9:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <div
@@ -2307,7 +2429,7 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
     className="emotion-14 emotion-15"
   >
     <button
-      className="canvas-header--menu-icon emotion-9 emotion-10"
+      className="canvas-header--menu-icon emotion-12 emotion-10"
     >
       <span
         className="emotion-8"
@@ -4497,9 +4619,13 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -4527,7 +4653,7 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
 }
 
 .emotion-16:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-16:focus span .wd-icon-fill,
@@ -4536,13 +4662,14 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
 }
 
 .emotion-16:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:active,
 .emotion-16:focus:active,
 .emotion-16:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-16:active span .wd-icon-fill,
@@ -4555,7 +4682,7 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
 }
 
 .emotion-16:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:hover span .wd-icon-fill,
@@ -4583,14 +4710,9 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
 
 .emotion-16:not([disabled]):focus,
 .emotion-16:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-16 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-2 {
@@ -4666,8 +4788,12 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   background-color: transparent;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-10:hover:active {
@@ -4744,12 +4870,12 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -5754,10 +5880,15 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-12:hover:active {
@@ -5784,7 +5915,7 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
 }
 
 .emotion-12:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-12:focus span .wd-icon-fill,
@@ -5793,13 +5924,14 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
 }
 
 .emotion-12:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-12:active,
 .emotion-12:focus:active,
 .emotion-12:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-12:active span .wd-icon-fill,
@@ -5812,7 +5944,7 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
 }
 
 .emotion-12:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-12:hover span .wd-icon-fill,
@@ -5840,9 +5972,9 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
 
 .emotion-12:not([disabled]):focus,
 .emotion-12:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-14 {
@@ -5852,12 +5984,12 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -5945,9 +6077,13 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -5975,7 +6111,7 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
 }
 
 .emotion-18:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-18:focus span .wd-icon-fill,
@@ -5984,13 +6120,14 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
 }
 
 .emotion-18:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-18:active,
 .emotion-18:focus:active,
 .emotion-18:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-18:active span .wd-icon-fill,
@@ -6003,7 +6140,7 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
 }
 
 .emotion-18:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-18:hover span .wd-icon-fill,
@@ -6031,14 +6168,9 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
 
 .emotion-18:not([disabled]):focus,
 .emotion-18:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-18 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-6:hover {
@@ -6633,10 +6765,15 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-10:hover:active {
@@ -6663,7 +6800,7 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-10:focus span .wd-icon-fill,
@@ -6672,13 +6809,14 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-10:active,
 .emotion-10:focus:active,
 .emotion-10:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-10:active span .wd-icon-fill,
@@ -6691,7 +6829,7 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-10:hover span .wd-icon-fill,
@@ -6719,9 +6857,9 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
 
 .emotion-10:not([disabled]):focus,
 .emotion-10:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-12 {
@@ -6731,12 +6869,12 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -6824,9 +6962,13 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -6854,7 +6996,7 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-16:focus span .wd-icon-fill,
@@ -6863,13 +7005,14 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:active,
 .emotion-16:focus:active,
 .emotion-16:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-16:active span .wd-icon-fill,
@@ -6882,7 +7025,7 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:hover span .wd-icon-fill,
@@ -6910,14 +7053,9 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
 
 .emotion-16:not([disabled]):focus,
 .emotion-16:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-16 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-22 {

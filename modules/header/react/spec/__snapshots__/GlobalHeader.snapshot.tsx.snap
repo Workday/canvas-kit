@@ -885,10 +885,15 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-10:hover:active {
@@ -915,7 +920,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-10:focus span .wd-icon-fill,
@@ -924,13 +929,14 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-10:active,
 .emotion-10:focus:active,
 .emotion-10:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-10:active span .wd-icon-fill,
@@ -943,7 +949,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-10:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-10:hover span .wd-icon-fill,
@@ -971,9 +977,9 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 
 .emotion-10:not([disabled]):focus,
 .emotion-10:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-12 {
@@ -983,12 +989,12 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -1076,9 +1082,13 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -1106,7 +1116,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-16:focus span .wd-icon-fill,
@@ -1115,13 +1125,14 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:active,
 .emotion-16:focus:active,
 .emotion-16:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-16:active span .wd-icon-fill,
@@ -1134,7 +1145,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 }
 
 .emotion-16:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:hover span .wd-icon-fill,
@@ -1162,14 +1173,9 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 
 .emotion-16:not([disabled]):focus,
 .emotion-16:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-16 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <div
@@ -1758,10 +1764,15 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-10:hover:active {
@@ -1788,7 +1799,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 .emotion-10:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-10:focus span .wd-icon-fill,
@@ -1797,13 +1808,14 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 .emotion-10:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-10:active,
 .emotion-10:focus:active,
 .emotion-10:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-10:active span .wd-icon-fill,
@@ -1816,7 +1828,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 .emotion-10:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-10:hover span .wd-icon-fill,
@@ -1844,9 +1856,9 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 
 .emotion-10:not([disabled]):focus,
 .emotion-10:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-12 {
@@ -1856,12 +1868,12 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -1949,9 +1961,13 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -1979,7 +1995,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 .emotion-16:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-16:focus span .wd-icon-fill,
@@ -1988,13 +2004,14 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 .emotion-16:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:active,
 .emotion-16:focus:active,
 .emotion-16:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-16:active span .wd-icon-fill,
@@ -2007,7 +2024,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 .emotion-16:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-16:hover span .wd-icon-fill,
@@ -2035,14 +2052,9 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 
 .emotion-16:not([disabled]):focus,
 .emotion-16:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-16 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-6 {

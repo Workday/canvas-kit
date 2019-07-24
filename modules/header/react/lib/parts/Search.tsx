@@ -5,7 +5,7 @@ import {CSSTransition} from 'react-transition-group';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import {colors, spacing, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 import {focusRing} from '@workday/canvas-kit-react-common';
-import {IconButton, IconButtonTypes} from '@workday/canvas-kit-react-button';
+import {IconButton} from '@workday/canvas-kit-react-button';
 import {searchIcon, xIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 
 export interface SearchProps extends React.HtmlHTMLAttributes<HTMLFormElement> {
@@ -371,7 +371,9 @@ export class Search extends React.Component<SearchProps, SearchState> {
           value={this.state.value}
           aria-label="Reset Search Input"
           icon={xSmallIcon}
-          buttonType={iconButtonType(!!this.state.value && !this.state.focused && themeColor !== HeaderTheme.White)}
+          buttonType={iconButtonType(
+            !!this.state.value && !this.state.focused && themeColor !== HeaderTheme.White
+          )}
           onClick={this.resetSearchInput}
           type="reset"
           toggled={false}

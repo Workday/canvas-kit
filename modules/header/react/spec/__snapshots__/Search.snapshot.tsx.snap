@@ -26,6 +26,7 @@ exports[`Header Search Snapshots Renders a collapsed search bar 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
 }
@@ -54,7 +55,7 @@ exports[`Header Search Snapshots Renders a collapsed search bar 1`] = `
 }
 
 .emotion-1:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-1:focus span .wd-icon-fill,
@@ -63,13 +64,14 @@ exports[`Header Search Snapshots Renders a collapsed search bar 1`] = `
 }
 
 .emotion-1:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-1:active,
 .emotion-1:focus:active,
 .emotion-1:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-1:active span .wd-icon-fill,
@@ -82,7 +84,7 @@ exports[`Header Search Snapshots Renders a collapsed search bar 1`] = `
 }
 
 .emotion-1:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-1:hover span .wd-icon-fill,
@@ -110,9 +112,9 @@ exports[`Header Search Snapshots Renders a collapsed search bar 1`] = `
 
 .emotion-1:not([disabled]):focus,
 .emotion-1:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -245,10 +247,15 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-2:hover:active {
@@ -275,7 +282,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-2:focus span .wd-icon-fill,
@@ -284,13 +291,14 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 }
 
 .emotion-2:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-2:active span .wd-icon-fill,
@@ -303,7 +311,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 }
 
 .emotion-2:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-2:hover span .wd-icon-fill,
@@ -331,9 +339,9 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 
 .emotion-2:not([disabled]):focus,
 .emotion-2:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-4 {
@@ -343,12 +351,12 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -436,9 +444,13 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: block;
 }
 
@@ -466,7 +478,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 }
 
 .emotion-8:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-8:focus span .wd-icon-fill,
@@ -475,13 +487,14 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 }
 
 .emotion-8:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:active,
 .emotion-8:focus:active,
 .emotion-8:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-8:active span .wd-icon-fill,
@@ -494,7 +507,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 }
 
 .emotion-8:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:hover span .wd-icon-fill,
@@ -522,14 +535,9 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 
 .emotion-8:not([disabled]):focus,
 .emotion-8:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-8 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <form
@@ -658,10 +666,15 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-2:hover:active {
@@ -688,7 +701,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-2:focus span .wd-icon-fill,
@@ -697,13 +710,14 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 }
 
 .emotion-2:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-2:active span .wd-icon-fill,
@@ -716,7 +730,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 }
 
 .emotion-2:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-2:hover span .wd-icon-fill,
@@ -744,9 +758,9 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 
 .emotion-2:not([disabled]):focus,
 .emotion-2:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-4 {
@@ -756,12 +770,12 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -849,9 +863,13 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: block;
 }
 
@@ -879,7 +897,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 }
 
 .emotion-8:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-8:focus span .wd-icon-fill,
@@ -888,13 +906,14 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 }
 
 .emotion-8:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:active,
 .emotion-8:focus:active,
 .emotion-8:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-8:active span .wd-icon-fill,
@@ -907,7 +926,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 }
 
 .emotion-8:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:hover span .wd-icon-fill,
@@ -935,14 +954,9 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 
 .emotion-8:not([disabled]):focus,
 .emotion-8:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-8 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <form
@@ -1073,8 +1087,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   background-color: transparent;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-2:hover:active {
@@ -1151,12 +1169,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -1239,9 +1257,13 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -1269,7 +1291,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 }
 
 .emotion-8:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-8:focus span .wd-icon-fill,
@@ -1278,13 +1300,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 }
 
 .emotion-8:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:active,
 .emotion-8:focus:active,
 .emotion-8:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-8:active span .wd-icon-fill,
@@ -1297,7 +1320,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 }
 
 .emotion-8:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:hover span .wd-icon-fill,
@@ -1325,14 +1348,9 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 
 .emotion-8:not([disabled]):focus,
 .emotion-8:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-8 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <form
@@ -1463,8 +1481,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   background-color: transparent;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-2:hover:active {
@@ -1541,12 +1563,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -1629,9 +1651,13 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -1659,7 +1685,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 }
 
 .emotion-8:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-8:focus span .wd-icon-fill,
@@ -1668,13 +1694,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 }
 
 .emotion-8:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:active,
 .emotion-8:focus:active,
 .emotion-8:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-8:active span .wd-icon-fill,
@@ -1687,7 +1714,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 }
 
 .emotion-8:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:hover span .wd-icon-fill,
@@ -1715,14 +1742,9 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 
 .emotion-8:not([disabled]):focus,
 .emotion-8:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-8 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <form
@@ -1853,8 +1875,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   background-color: transparent;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-2:hover:active {
@@ -1931,12 +1957,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -2019,9 +2045,13 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -2049,7 +2079,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 }
 
 .emotion-8:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-8:focus span .wd-icon-fill,
@@ -2058,13 +2088,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 }
 
 .emotion-8:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:active,
 .emotion-8:focus:active,
 .emotion-8:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-8:active span .wd-icon-fill,
@@ -2077,7 +2108,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 }
 
 .emotion-8:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:hover span .wd-icon-fill,
@@ -2105,14 +2136,9 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 
 .emotion-8:not([disabled]):focus,
 .emotion-8:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-8 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <form
@@ -2243,8 +2269,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   background-color: transparent;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-2:hover:active {
@@ -2321,12 +2351,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -2409,9 +2439,13 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -2439,7 +2473,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 }
 
 .emotion-8:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-8:focus span .wd-icon-fill,
@@ -2448,13 +2482,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 }
 
 .emotion-8:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:active,
 .emotion-8:focus:active,
 .emotion-8:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-8:active span .wd-icon-fill,
@@ -2467,7 +2502,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 }
 
 .emotion-8:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:hover span .wd-icon-fill,
@@ -2495,14 +2530,9 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 
 .emotion-8:not([disabled]):focus,
 .emotion-8:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-8 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <form
@@ -2631,10 +2661,15 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-2:hover:active {
@@ -2661,7 +2696,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-2:focus span .wd-icon-fill,
@@ -2670,13 +2705,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-2:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-2:active span .wd-icon-fill,
@@ -2689,7 +2725,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-2:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-2:hover span .wd-icon-fill,
@@ -2717,9 +2753,9 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 
 .emotion-2:not([disabled]):focus,
 .emotion-2:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-4 {
@@ -2729,12 +2765,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -2822,9 +2858,13 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -2852,7 +2892,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-8:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-8:focus span .wd-icon-fill,
@@ -2861,13 +2901,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-8:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:active,
 .emotion-8:focus:active,
 .emotion-8:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-8:active span .wd-icon-fill,
@@ -2880,7 +2921,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-8:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:hover span .wd-icon-fill,
@@ -2908,14 +2949,9 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 
 .emotion-8:not([disabled]):focus,
 .emotion-8:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-8 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <form
@@ -3044,10 +3080,15 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
-  left: 4px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
   margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
 }
 
 .emotion-2:hover:active {
@@ -3074,7 +3115,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-2:focus span .wd-icon-fill,
@@ -3083,13 +3124,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-2:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-2:active span .wd-icon-fill,
@@ -3102,7 +3144,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-2:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-2:hover span .wd-icon-fill,
@@ -3130,9 +3172,9 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 
 .emotion-2:not([disabled]):focus,
 .emotion-2:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-4 {
@@ -3142,12 +3184,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
-  padding-right: 32px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -3235,9 +3277,13 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
   width: 32px;
   height: 32px;
-  margin-left: -32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
@@ -3265,7 +3311,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-8:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-8:focus span .wd-icon-fill,
@@ -3274,13 +3320,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-8:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:active,
 .emotion-8:focus:active,
 .emotion-8:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-8:active span .wd-icon-fill,
@@ -3293,7 +3340,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 }
 
 .emotion-8:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-8:hover span .wd-icon-fill,
@@ -3321,14 +3368,9 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 
 .emotion-8:not([disabled]):focus,
 .emotion-8:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
-}
-
-.emotion-8 span svg {
-  width: 20px;
-  height: 20px;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <form
@@ -3712,6 +3754,7 @@ exports[`Header Search Snapshots renders themed, collapsed search bars: <Search 
   transition: all 120ms linear;
   border-width: 0px;
   background-color: transparent;
+  margin: -8px;
   width: 40px;
   height: 40px;
 }
@@ -3740,7 +3783,7 @@ exports[`Header Search Snapshots renders themed, collapsed search bars: <Search 
 }
 
 .emotion-1:focus {
-  background-color: #ffffff;
+  background-color: transparent;
 }
 
 .emotion-1:focus span .wd-icon-fill,
@@ -3749,13 +3792,14 @@ exports[`Header Search Snapshots renders themed, collapsed search bars: <Search 
 }
 
 .emotion-1:hover:focus {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-1:active,
 .emotion-1:focus:active,
 .emotion-1:hover:active {
-  background-color: #dfe2e6;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .emotion-1:active span .wd-icon-fill,
@@ -3768,7 +3812,7 @@ exports[`Header Search Snapshots renders themed, collapsed search bars: <Search 
 }
 
 .emotion-1:hover {
-  background-color: #e8ebed;
+  background-color: transparent;
 }
 
 .emotion-1:hover span .wd-icon-fill,
@@ -3796,9 +3840,9 @@ exports[`Header Search Snapshots renders themed, collapsed search bars: <Search 
 
 .emotion-1:not([disabled]):focus,
 .emotion-1:not([disabled]):active {
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
