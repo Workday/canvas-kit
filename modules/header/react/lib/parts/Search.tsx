@@ -294,6 +294,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
           unmountOnExit={true}
         >
           <SearchContainer
+            role="search"
             rightAlign={rightAlign}
             collapse={collapse}
             onSubmit={this.onSearchSubmit}
@@ -303,7 +304,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
               placeholder={placeholder}
               themeColor={themeColor}
               collapse={collapse}
-              role="search"
               innerRef={this.inputRef}
               onFocus={this.setFocused.bind(this, true)}
               onBlur={this.setFocused.bind(this, false)}
@@ -341,6 +341,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
 
     return (
       <SearchContainer
+        role="search"
         rightAlign={rightAlign}
         collapse={collapse}
         onSubmit={this.onSearchSubmit}
@@ -358,7 +359,6 @@ export class Search extends React.Component<SearchProps, SearchState> {
           placeholder={placeholder}
           themeColor={themeColor}
           collapse={collapse}
-          role="search"
           value={this.state.value}
           innerRef={this.inputRef}
           onMouseEnter={() => this.handleHover(true)}

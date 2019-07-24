@@ -543,6 +543,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
 <form
   className="emotion-10 emotion-11"
   onSubmit={[Function]}
+  role="search"
 >
   <button
     aria-label="Search"
@@ -568,7 +569,6 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     placeholder="Search"
-    role="search"
     value="Hello World"
   />
   <button
@@ -962,6 +962,7 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
 <form
   className="emotion-10 emotion-11"
   onSubmit={[Function]}
+  role="search"
 >
   <button
     aria-label="Search"
@@ -987,7 +988,6 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     placeholder="Search"
-    role="search"
     value="Hello World"
   />
   <button
@@ -1356,6 +1356,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 <form
   className="emotion-10 emotion-11"
   onSubmit={[Function]}
+  role="search"
 >
   <button
     aria-label="Search"
@@ -1381,7 +1382,6 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     placeholder="Search"
-    role="search"
     value=""
   />
   <button
@@ -1750,6 +1750,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
 <form
   className="emotion-10 emotion-11"
   onSubmit={[Function]}
+  role="search"
 >
   <button
     aria-label="Search"
@@ -1775,7 +1776,6 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     placeholder="Search"
-    role="search"
     value=""
   />
   <button
@@ -2144,6 +2144,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 <form
   className="emotion-10 emotion-11"
   onSubmit={[Function]}
+  role="search"
 >
   <button
     aria-label="Search"
@@ -2169,7 +2170,6 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     placeholder="Search"
-    role="search"
     value=""
   />
   <button
@@ -2538,6 +2538,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
 <form
   className="emotion-10 emotion-11"
   onSubmit={[Function]}
+  role="search"
 >
   <button
     aria-label="Search"
@@ -2563,7 +2564,6 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     placeholder="Search"
-    role="search"
     value=""
   />
   <button
@@ -2957,6 +2957,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 <form
   className="emotion-10 emotion-11"
   onSubmit={[Function]}
+  role="search"
 >
   <button
     aria-label="Search"
@@ -2982,7 +2983,6 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     placeholder="Search"
-    role="search"
     value=""
   />
   <button
@@ -3376,6 +3376,7 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
 <form
   className="emotion-10 emotion-11"
   onSubmit={[Function]}
+  role="search"
 >
   <button
     aria-label="Search"
@@ -3401,7 +3402,6 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     placeholder="Search"
-    role="search"
     value=""
   />
   <button

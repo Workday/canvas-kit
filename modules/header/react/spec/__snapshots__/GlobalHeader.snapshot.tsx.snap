@@ -1206,6 +1206,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   <form
     className="emotion-18 emotion-19"
     onSubmit={[Function]}
+    role="search"
   >
     <button
       aria-label="Search"
@@ -1231,7 +1232,6 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       placeholder="Search"
-      role="search"
       value=""
     />
     <button
@@ -2110,6 +2110,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   <form
     className="emotion-18 emotion-19"
     onSubmit={[Function]}
+    role="search"
   >
     <button
       aria-label="Search"
@@ -2135,7 +2136,6 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       placeholder="Search"
-      role="search"
       value=""
     />
     <button

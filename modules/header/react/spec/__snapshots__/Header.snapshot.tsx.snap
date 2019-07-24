@@ -1831,6 +1831,7 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   <form
     className="emotion-18 emotion-19"
     onSubmit={[Function]}
+    role="search"
   >
     <button
       aria-label="Search"
@@ -1856,7 +1857,6 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       placeholder="Search"
-      role="search"
       value=""
     />
     <button
@@ -4964,6 +4964,7 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   <form
     className="emotion-18 emotion-19"
     onSubmit={[Function]}
+    role="search"
   >
     <button
       aria-label="Search"
@@ -4989,7 +4990,6 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       placeholder="Search"
-      role="search"
       value=""
     />
     <button
@@ -6219,6 +6219,7 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   <form
     className="emotion-20 emotion-21"
     onSubmit={[Function]}
+    role="search"
   >
     <button
       aria-label="Search"
@@ -6244,7 +6245,6 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       placeholder="Search"
-      role="search"
       value=""
     />
     <button
@@ -7135,6 +7135,7 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   <form
     className="emotion-18 emotion-19"
     onSubmit={[Function]}
+    role="search"
   >
     <button
       aria-label="Search"
@@ -7160,7 +7161,6 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       placeholder="Search"
-      role="search"
       value=""
     />
     <button
