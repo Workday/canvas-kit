@@ -98,6 +98,24 @@ storiesOf('CSS/Button', module)
 
 storiesOf('CSS/Button/Icon Button', module)
   .addDecorator(withReadme(README))
+  .add('Square', () => (
+    <div className="story">
+      <h3>Medium Square</h3>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-square">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-square wdc-btn-disabled">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <h3>Small Square</h3>
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-square">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-square wdc-btn-disabled">
+        <SystemIcon icon={editIcon} />
+      </button>
+    </div>
+  ))
   .add('Square Filled', () => (
     <div className="story">
       <h3>Medium Square</h3>
@@ -116,16 +134,34 @@ storiesOf('CSS/Button/Icon Button', module)
       </button>
     </div>
   ))
+  .add('Circle', () => (
+    <div className="story">
+      <h3>Medium Circle</h3>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-circle">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-disabled">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <h3>Small Circle</h3>
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle">
+        <SystemIcon icon={editIcon} />
+      </button>
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-disabled">
+        <SystemIcon icon={editIcon} />
+      </button>
+    </div>
+  ))
   .add('Circle Filled', () => (
     <div className="story">
-      <h3>Medium Square</h3>
+      <h3>Medium Circle</h3>
       <button className="wdc-btn wdc-btn-medium wdc-btn-icon-circle-filled">
         <SystemIcon icon={editIcon} />
       </button>
       <button className="wdc-btn wdc-btn-medium wdc-btn-icon-circle-filled wdc-btn-disabled">
         <SystemIcon icon={editIcon} />
       </button>
-      <h3>Small Square</h3>
+      <h3>Small Circle</h3>
       <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle-filled">
         <SystemIcon icon={editIcon} />
       </button>

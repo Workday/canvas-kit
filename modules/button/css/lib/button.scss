@@ -30,7 +30,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
   border: 1px solid $wdc-btn-border;
   color: $wdc-btn-color;
   border-radius: $wdc-btn-border-radius;
-  transition: 0.2s background, 0.2s border-color, 0.2s box-shadow;
+  transition: all 120ms linear;
   text-align: center;
   font-size: 14px;
   cursor: pointer;
@@ -38,6 +38,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
   -webkit-font-smoothing: antialiased;
   outline: none;
   line-height: 38px;
+
 
   .wd-icon {
     height: $wdc-btn-icon-size-s;
@@ -66,6 +67,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
     &:hover {
       border-color: $wdc-btn-border-color-hover;
       background-color: $wdc-btn-bg-hover;
+      transition-duration: 40ms;
 
       .wd-icon-accent,
       .wd-icon-fill {
@@ -320,6 +322,25 @@ $_wdc-btn-caret-down-icon-hover: svg-load('#{$_wdc-btn-icons-path}/wd-icon-caret
         .wd-icon-fill {
           fill: $wdc-btn-color-icon-disabled;
         }
+      }
+
+      &-square,
+      &-circle {
+        background-color: white;
+
+        &:not([disabled]):not(.wdc-btn-disabled) {
+
+          &:focus,
+          &.wdc-btn-focus {
+            background-color: white;
+
+            &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
+            &:hover:not([disabled]):not(.wdc-btn-disabled) {
+              background-color: $wdc-btn-bg-icon-hover;
+            }
+          }
+        }
+
       }
 
       &-square,
