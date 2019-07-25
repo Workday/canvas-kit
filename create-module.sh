@@ -263,6 +263,14 @@ cat > $readme << EOF
 # Canvas Kit CSS $upperName
 EOF
 
+# Adds module dependency and export for React and CSS
+node "utils/create-module.js" "$name" "css";
+
+else
+
+# Adds module dependency and export for React only
+node "utils/create-module.js" "$name";
+
 fi
 
 
