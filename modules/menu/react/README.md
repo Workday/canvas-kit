@@ -134,7 +134,8 @@ Default: `true`
 #### `onClose: () => void`
 
 > If specified, this callback is executed when the menu should close. Called after an item is
-> selected or the escape shortcut key is used.
+> selected or the escape shortcut key is used. This will not fire if the menu item overrides 
+> the action with canSkipClose.
 
 ---
 
@@ -229,3 +230,8 @@ Default: `false`
 > Allow you to disable a menu item so it is not clickable.
 
 Default: `false`
+
+#### `canSkipClose: boolean`
+
+> Allows you to skip the onClose Menu callback that is fired at the end of
+> the onClick event.

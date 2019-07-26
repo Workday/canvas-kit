@@ -21,6 +21,7 @@ export interface MenuItemProps {
   hasDivider?: boolean;
   isDisabled?: boolean;
   isFocused?: boolean;
+  canSkipClose?: boolean;
 }
 
 const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(

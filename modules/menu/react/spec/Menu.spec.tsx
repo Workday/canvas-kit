@@ -44,6 +44,18 @@ describe('Menu', () => {
     component.unmount();
   });
 
+  test('should not call on close function when item is clicked with canSkipClose enabled', () => {
+    const component = mount(
+      <Menu onClose={cb}>
+        <MenuItem canSkipClose={true}/>
+      </Menu>
+    );
+    const item = component.find('li');
+    item.simulate('click');
+    expect(cb.mock.calls.length).toBe(0);
+    component.unmount();
+  });
+
   test('should not call a callback function when disabled', () => {
     const component = mount(
       <Menu>
