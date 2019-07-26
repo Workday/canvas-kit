@@ -150,7 +150,7 @@ well. This allows for greater flexibility in how developers consume your module.
 #### CSS
 
 If in the `yarn create-module` flow you reply that you'd like to create a CSS module as well, it
-will:
+will (in addition to creating required scaffolding):
 
 - Add your module as a package dependency in `modules/_canvas-kit-css/package.json`
 - Add an import statement for your module in `modules/_canvas-kit-css/index.scss`
