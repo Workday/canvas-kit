@@ -54,6 +54,10 @@ jest.mock('@workday/canvas-kit-react-common', () => ({
 
 ## Component Props
 
+This component extends the HTML `div` element. All additional props that are passed to this
+component that are valid HTML attributes will be rendered as part of the wrapper `div` element. This
+includes custom `data-*` attributes such as `data-test-id` to help facilitate automation testing.
+
 ### Required
 
 #### `anchorElement: Element`
