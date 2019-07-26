@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 /**
  * Add the module as a dependency in modules/_canvas-kit-<TYPE>/package.json.
@@ -13,7 +14,7 @@ const addModuleAsDependencyByType = (cwd, moduleName, type) => {
   const json = JSON.parse(packageContents);
 
   // Add module, sort dependencies, then write back out
-  json.dependencies[`@workday/canvas-kit-${type}-${moduleName}`] = '^3.0.0-alpha.2';
+  json.dependencies[`@workday/canvas-kit-${type}-${moduleName}`] = `^${json.version}`;
   let ordered = {};
   Object.keys(json.dependencies)
     .sort()
@@ -21,25 +22,15 @@ const addModuleAsDependencyByType = (cwd, moduleName, type) => {
       ordered[key] = json.dependencies[key];
     });
   json.dependencies = ordered;
-  fs.writeFileSync(packagePath, JSON.stringify(json, null, 2), 'utf8');
-};
-
-/**
- * Adds React module as a package.json dependency. If `wantsCssToo`
- * is true, will add to the corresponding CSS package.json as well.
- */
-const addModuleAsDependency = (cwd, moduleName, wantsCssToo) => {
-  addModuleAsDependencyByType(cwd, moduleName, 'react');
-  if (wantsCssToo) {
-    addModuleAsDependencyByType(cwd, moduleName, 'css');
-  }
+  let jsonStr = JSON.stringify(json, null, 2) + os.EOL;
+  fs.writeFileSync(packagePath, jsonStr, 'utf8');
 };
 
 /**
  * Add export * from '@workday/canvas-kit-react-<MODULE_NAME>' to
  * modules/_canvas-kit-react/index.ts so that consumers can use.
  */
-const addExportToIndex = (cwd, moduleName, wantsCss) => {
+const addExportToReactIndex = (cwd, moduleName) => {
   const sortExports = lines => {
     const exportsAsObj = lines
       .filter(line => !line.includes("from '@workday/canvas-kit-react-core'"))
@@ -110,22 +101,23 @@ const addImportToSassIndex = (cwd, moduleName) => {
   fs.writeFileSync(indexPath, sortedImports.join('\n'), 'utf8');
 };
 
+const setupModuleByType = (cwd, moduleName, moduleType) => {
+  // Add module as depedency based off `moduleType` ('css' or 'react')
+  addModuleAsDependencyByType(cwd, moduleName, moduleType);
+  if (moduleType === 'css') {
+    addImportToSassIndex(cwd, moduleName);
+  } else {
+    addExportToReactIndex(cwd, moduleName);
+  }
+};
+
 // Only allow this script to be ran off command line
 if (require.main === module) {
   const cwd = process.cwd();
-  const moduleName = process.argv[2];
-  let wantsCss = false;
-  if (process.argv.length >= 3) {
-    const arg = process.argv[3];
-    if (arg.toLowerCase() === 'css') {
-      wantsCss = true;
-    }
+  const [, , moduleName, moduleType] = process.argv;
+
+  if (!['css', 'react'].includes(moduleType)) {
+    throw Error(`Module type (second argument) must be either 'react' or 'css'`);
   }
-  addModuleAsDependency(cwd, moduleName, wantsCss);
-  addExportToIndex(cwd, moduleName);
-  if (wantsCss) {
-    // If we add the import by calling this, it throws error:
-    // error Couldn't find package "@workday/canvas-kit-css-alert@^3.0.0-alpha.2" required by "@workday/canvas-kit-css@3.0.0-alpha.2" on the "npm" registry.
-    addImportToSassIndex(cwd, moduleName);
-  }
+  setupModuleByType(cwd, moduleName, moduleType);
 }
