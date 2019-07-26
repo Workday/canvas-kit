@@ -206,7 +206,9 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       this.props.onSelect();
     }
     if (this.props.onClose) {
-      this.props.onClose();
+      if (menuItemProps.shouldClose) {
+        this.props.onClose();
+      }
     }
   };
 

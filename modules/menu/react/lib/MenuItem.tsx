@@ -21,6 +21,7 @@ export interface MenuItemProps {
   hasDivider?: boolean;
   isDisabled?: boolean;
   isFocused?: boolean;
+  shouldClose?: boolean;
 }
 
 const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
@@ -115,6 +116,10 @@ const SecondaryStyledSystemIcon = styled(StyledSystemIcon)({
 });
 
 export default class MenuItem extends React.Component<MenuItemProps> {
+  static defaultProps = {
+    shouldClose: true,
+  };
+
   render(): React.ReactNode {
     const {
       onClick,
