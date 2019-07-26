@@ -276,7 +276,7 @@ echo -e "\nInstalling dependencies\n"
 yarn
 
 # We always add the React module as dependency and set up export
-echo -e 'Adding module as dependency and adding module imports'
+echo -e 'Adding module as dependency and adding export to index'
 node "utils/create-module.js" "$name" "react";
 
 if [ "$wantsCss" = true ] ; then
