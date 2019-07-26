@@ -44,10 +44,22 @@ describe('Menu', () => {
     component.unmount();
   });
 
-  test('should not call on close function when item is clicked with canSkipClose enabled', () => {
+  test('should call on close function when item is clicked with shouldClose enabled', () => {
     const component = mount(
       <Menu onClose={cb}>
-        <MenuItem canSkipClose={true}/>
+        <MenuItem shouldClose={false} />
+      </Menu>
+    );
+    const item = component.find('li');
+    item.simulate('click');
+    expect(cb.mock.calls.length).toBe(0);
+    component.unmount();
+  });
+
+  test('should not call on close function when item is clicked with shouldClose disabled', () => {
+    const component = mount(
+      <Menu onClose={cb}>
+        <MenuItem shouldClose={false}/>
       </Menu>
     );
     const item = component.find('li');
