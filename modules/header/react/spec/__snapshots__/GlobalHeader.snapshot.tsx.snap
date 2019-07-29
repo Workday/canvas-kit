@@ -576,7 +576,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
 `;
 
 exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
-.emotion-18 {
+.emotion-22 {
   overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
@@ -631,16 +631,16 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   line-height: 0;
 }
 
-.emotion-16 {
+.emotion-20 {
   margin-right: 24px;
 }
 
-.emotion-16 > .canvas-header--menu-icon {
+.emotion-20 > .canvas-header--menu-icon {
   cursor: pointer;
 }
 
 @media (min-width:0px) {
-  .emotion-16 {
+  .emotion-20 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -657,21 +657,21 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
     margin-right: 24px;
   }
 
-  .emotion-16 > * {
+  .emotion-20 > * {
     margin-left: 16px;
   }
 
-  .emotion-16 > *:not(.canvas-header--menu-icon) {
+  .emotion-20 > *:not(.canvas-header--menu-icon) {
     display: none;
   }
 }
 
 @media (min-width:1px) {
-  .emotion-16 > *:last-child {
+  .emotion-20 > *:last-child {
     margin-right: 0;
   }
 
-  .emotion-16 > *:not(.canvas-header--menu-icon) {
+  .emotion-20 > *:not(.canvas-header--menu-icon) {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -680,7 +680,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
 }
 
 @media (min-width:600px) {
-  .emotion-16 {
+  .emotion-20 {
     -webkit-box-flex: unset;
     -webkit-flex-grow: unset;
     -ms-flex-positive: unset;
@@ -688,7 +688,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   }
 }
 
-.emotion-16 nav {
+.emotion-20 nav {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -705,7 +705,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   margin-left: 40px;
 }
 
-.emotion-16 nav ul {
+.emotion-20 nav ul {
   color: #333333;
   display: -webkit-box;
   display: -webkit-flex;
@@ -725,11 +725,11 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   height: inherit;
 }
 
-.emotion-16 nav ul:hover {
+.emotion-20 nav ul:hover {
   color: #7b858f;
 }
 
-.emotion-16 nav ul li {
+.emotion-20 nav ul li {
   box-sizing: border-box;
   position: relative;
   display: -webkit-box;
@@ -748,15 +748,15 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   cursor: pointer;
 }
 
-.emotion-16 nav ul li:first-child > * {
+.emotion-20 nav ul li:first-child > * {
   margin-left: 0;
 }
 
-.emotion-16 nav ul li:last-child > * {
+.emotion-20 nav ul li:last-child > * {
   margin-right: 0;
 }
 
-.emotion-16 nav ul li > * {
+.emotion-20 nav ul li > * {
   color: inherit;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -773,29 +773,29 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   height: inherit;
 }
 
-.emotion-16 nav ul li > *:visited {
+.emotion-20 nav ul li > *:visited {
   color: inherit;
 }
 
-.emotion-16 nav ul li:hover,
-.emotion-16 nav ul li:active {
+.emotion-20 nav ul li:hover,
+.emotion-20 nav ul li:active {
   color: #333333;
 }
 
-.emotion-16 nav ul li.current {
+.emotion-20 nav ul li.current {
   color: #005cb9;
 }
 
-.emotion-16 nav ul li.current a {
+.emotion-20 nav ul li.current a {
   cursor: default;
 }
 
-.emotion-16 nav ul li.current:hover,
-.emotion-16 nav ul li.current:active {
+.emotion-20 nav ul li.current:hover,
+.emotion-20 nav ul li.current:active {
   color: #005cb9;
 }
 
-.emotion-16 nav ul li.current:after {
+.emotion-20 nav ul li.current:after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -806,39 +806,39 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   border-radius: 3px 3px 0 0;
 }
 
-.emotion-11 {
+.emotion-8 {
   display: inline-block;
 }
 
-.emotion-11 svg {
+.emotion-8 svg {
   display: block;
 }
 
-.emotion-11 .wd-icon-fill {
+.emotion-8 .wd-icon-fill {
   fill: #7b858f;
 }
 
-.emotion-11:hover .wd-icon-fill {
+.emotion-8:hover .wd-icon-fill {
   fill: #333d47;
 }
 
-.emotion-11 .wd-icon-accent {
+.emotion-8 .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-11:hover .wd-icon-accent {
+.emotion-8:hover .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-11 .wd-icon-background {
+.emotion-8 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-11:hover .wd-icon-background {
+.emotion-8:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-14 {
+.emotion-18 {
   position: relative;
   margin-left: 24px;
   -webkit-box-flex: 1;
@@ -860,50 +860,141 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   max-width: 480px;
 }
 
-.emotion-8 {
+.emotion-10 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  border-width: 0px;
+  background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
+  margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
+}
+
+.emotion-10:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-10:disabled,
+.emotion-10:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-10 .wd-icon {
   display: inline-block;
+  vertical-align: middle;
 }
 
-.emotion-8 svg {
-  display: block;
-}
-
-.emotion-8 .wd-icon-fill {
+.emotion-10 span .wd-icon-fill,
+.emotion-10 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
   fill: #7b858f;
 }
 
-.emotion-8:hover .wd-icon-fill {
+.emotion-10:focus {
+  background-color: transparent;
+}
+
+.emotion-10:focus span .wd-icon-fill,
+.emotion-10:focus span .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-8 .wd-icon-accent {
-  fill: #7b858f;
+.emotion-10:hover:focus {
+  background-color: transparent;
 }
 
-.emotion-8:hover .wd-icon-accent {
-  fill: #7b858f;
+.emotion-10:active,
+.emotion-10:focus:active,
+.emotion-10:hover:active {
+  background-color: transparent;
+  border-color: transparent;
 }
 
-.emotion-8 .wd-icon-background {
-  fill: transparent;
+.emotion-10:active span .wd-icon-fill,
+.emotion-10:focus:active span .wd-icon-fill,
+.emotion-10:hover:active span .wd-icon-fill,
+.emotion-10:active span .wd-icon-accent,
+.emotion-10:focus:active span .wd-icon-accent,
+.emotion-10:hover:active span .wd-icon-accent {
+  fill: #333d47;
 }
 
-.emotion-8:hover .wd-icon-background {
-  fill: transparent;
+.emotion-10:hover {
+  background-color: transparent;
 }
 
-.emotion-9 {
+.emotion-10:hover span .wd-icon-fill,
+.emotion-10:hover span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-10:disabled,
+.emotion-10:active:disabled,
+.emotion-10:focus:disabled,
+.emotion-10:hover:disabled {
+  background-color: transparent;
+}
+
+.emotion-10:disabled span .wd-icon-fill,
+.emotion-10:active:disabled span .wd-icon-fill,
+.emotion-10:focus:disabled span .wd-icon-fill,
+.emotion-10:hover:disabled span .wd-icon-fill,
+.emotion-10:disabled span .wd-icon-accent,
+.emotion-10:active:disabled span .wd-icon-accent,
+.emotion-10:focus:disabled span .wd-icon-accent,
+.emotion-10:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-10:not([disabled]):focus,
+.emotion-10:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-12 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -914,73 +1005,181 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   color: #494949;
 }
 
-.emotion-9::-webkit-search-cancel-button {
+.emotion-12::-webkit-search-cancel-button {
   display: none;
 }
 
-.emotion-9::-webkit-input-placeholder {
+.emotion-12::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9::-moz-placeholder {
+.emotion-12::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:-ms-input-placeholder {
+.emotion-12:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9::placeholder {
+.emotion-12::placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):focus,
-.emotion-9:not([disabled]):active {
+.emotion-12:not([disabled]):focus,
+.emotion-12:not([disabled]):active {
   outline: none;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
   background: #f0f1f2;
   color: #494949;
 }
 
-.emotion-9:not([disabled]):focus::-webkit-input-placeholder,
-.emotion-9:not([disabled]):active::-webkit-input-placeholder {
+.emotion-12:not([disabled]):focus::-webkit-input-placeholder,
+.emotion-12:not([disabled]):active::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):focus::-moz-placeholder,
-.emotion-9:not([disabled]):active::-moz-placeholder {
+.emotion-12:not([disabled]):focus::-moz-placeholder,
+.emotion-12:not([disabled]):active::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):focus:-ms-input-placeholder,
-.emotion-9:not([disabled]):active:-ms-input-placeholder {
+.emotion-12:not([disabled]):focus:-ms-input-placeholder,
+.emotion-12:not([disabled]):active:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):focus::placeholder,
-.emotion-9:not([disabled]):active::placeholder {
+.emotion-12:not([disabled]):focus::placeholder,
+.emotion-12:not([disabled]):active::placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):hover {
+.emotion-12:not([disabled]):hover {
   background: #e8ebed;
 }
 
-.emotion-12 {
-  border-radius: 24px;
-  height: 24px;
-  margin-left: -32px;
-  margin-right: 8px;
-  width: 24px;
+.emotion-16 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  border-width: 0px;
+  background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
+  width: 32px;
+  height: 32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
-.emotion-12:hover {
-  cursor: pointer;
+.emotion-16:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-16:disabled,
+.emotion-16:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-16 .wd-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.emotion-16 span .wd-icon-fill,
+.emotion-16 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-16:focus {
+  background-color: transparent;
+}
+
+.emotion-16:focus span .wd-icon-fill,
+.emotion-16:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-16:hover:focus {
+  background-color: transparent;
+}
+
+.emotion-16:active,
+.emotion-16:focus:active,
+.emotion-16:hover:active {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.emotion-16:active span .wd-icon-fill,
+.emotion-16:focus:active span .wd-icon-fill,
+.emotion-16:hover:active span .wd-icon-fill,
+.emotion-16:active span .wd-icon-accent,
+.emotion-16:focus:active span .wd-icon-accent,
+.emotion-16:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-16:hover {
+  background-color: transparent;
+}
+
+.emotion-16:hover span .wd-icon-fill,
+.emotion-16:hover span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-16:disabled,
+.emotion-16:active:disabled,
+.emotion-16:focus:disabled,
+.emotion-16:hover:disabled {
+  background-color: transparent;
+}
+
+.emotion-16:disabled span .wd-icon-fill,
+.emotion-16:active:disabled span .wd-icon-fill,
+.emotion-16:focus:disabled span .wd-icon-fill,
+.emotion-16:hover:disabled span .wd-icon-fill,
+.emotion-16:disabled span .wd-icon-accent,
+.emotion-16:active:disabled span .wd-icon-accent,
+.emotion-16:focus:disabled span .wd-icon-accent,
+.emotion-16:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-16:not([disabled]):focus,
+.emotion-16:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 <div
-  className="emotion-18 emotion-19"
+  className="emotion-22 emotion-23"
 >
   <div
     className="emotion-6 emotion-7"
@@ -1005,62 +1204,62 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
     </span>
   </div>
   <form
-    className="emotion-14 emotion-15"
+    className="emotion-18 emotion-19"
     onSubmit={[Function]}
-    placeholder="Search"
+    role="search"
   >
-    <span
-      className="emotion-8"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-search wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path fill-rule=\\"nonzero\\" d=\\"M17.32 15.906l2.859 2.858a.5.5 0 0 1 .003.717l-.7.7a.5.5 0 0 1-.718-.002l-2.858-2.86a8 8 0 1 1 1.414-1.414zM11 17a6 6 0 1 0 0-12 6 6 0 0 0 0 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+    <button
+      aria-label="Search"
+      aria-pressed={false}
+      className="emotion-9 emotion-10 emotion-11"
+      onClick={[Function]}
+      type="submit"
+    >
+      <span
+        className="emotion-8"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-search wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path fill-rule=\\"nonzero\\" d=\\"M17.32 15.906l2.859 2.858a.5.5 0 0 1 .003.717l-.7.7a.5.5 0 0 1-.718-.002l-2.858-2.86a8 8 0 1 1 1.414-1.414zM11 17a6 6 0 1 0 0-12 6 6 0 0 0 0 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+          }
         }
-      }
-      style={
-        Object {
-          "left": "8px",
-          "pointerEvents": "none",
-          "position": "absolute",
-          "top": "50%",
-          "transform": "translateY(-50%)",
-        }
-      }
-    />
+      />
+    </button>
     <input
-      className="emotion-9 emotion-10"
+      className="emotion-12 emotion-13"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       placeholder="Search"
-      type="search"
       value=""
     />
-    <span
+    <button
       aria-label="Reset Search Input"
-      className="reset-input emotion-12 emotion-13"
+      aria-pressed={false}
+      className="emotion-15 emotion-16 emotion-11"
       onClick={[Function]}
+      type="reset"
       value=""
     >
       <span
-        className="emotion-11"
+        className="emotion-8"
         dangerouslySetInnerHTML={
           Object {
             "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M10.783 12l-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588L10.783 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
           }
         }
       />
-    </span>
+    </button>
   </form>
   <div
-    className="emotion-16 emotion-17"
+    className="emotion-20 emotion-21"
   />
 </div>
 `;
 
 exports[`App GlobalHeader Snapshots renders a header with content with a search bar 1`] = `
-.emotion-27 {
+.emotion-31 {
   overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1107,16 +1306,16 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   line-height: 0;
 }
 
-.emotion-25 {
+.emotion-29 {
   margin-right: 24px;
 }
 
-.emotion-25 > .canvas-header--menu-icon {
+.emotion-29 > .canvas-header--menu-icon {
   cursor: pointer;
 }
 
 @media (min-width:0px) {
-  .emotion-25 {
+  .emotion-29 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -1133,21 +1332,21 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
     margin-right: 24px;
   }
 
-  .emotion-25 > * {
+  .emotion-29 > * {
     margin-left: 16px;
   }
 
-  .emotion-25 > *:not(.canvas-header--menu-icon) {
+  .emotion-29 > *:not(.canvas-header--menu-icon) {
     display: none;
   }
 }
 
 @media (min-width:1px) {
-  .emotion-25 > *:last-child {
+  .emotion-29 > *:last-child {
     margin-right: 0;
   }
 
-  .emotion-25 > *:not(.canvas-header--menu-icon) {
+  .emotion-29 > *:not(.canvas-header--menu-icon) {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -1156,7 +1355,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 @media (min-width:600px) {
-  .emotion-25 {
+  .emotion-29 {
     -webkit-box-flex: unset;
     -webkit-flex-grow: unset;
     -ms-flex-positive: unset;
@@ -1164,7 +1363,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   }
 }
 
-.emotion-25 nav {
+.emotion-29 nav {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1181,7 +1380,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   margin-left: 40px;
 }
 
-.emotion-25 nav ul {
+.emotion-29 nav ul {
   color: #333333;
   display: -webkit-box;
   display: -webkit-flex;
@@ -1201,11 +1400,11 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   height: inherit;
 }
 
-.emotion-25 nav ul:hover {
+.emotion-29 nav ul:hover {
   color: #7b858f;
 }
 
-.emotion-25 nav ul li {
+.emotion-29 nav ul li {
   box-sizing: border-box;
   position: relative;
   display: -webkit-box;
@@ -1224,15 +1423,15 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   cursor: pointer;
 }
 
-.emotion-25 nav ul li:first-child > * {
+.emotion-29 nav ul li:first-child > * {
   margin-left: 0;
 }
 
-.emotion-25 nav ul li:last-child > * {
+.emotion-29 nav ul li:last-child > * {
   margin-right: 0;
 }
 
-.emotion-25 nav ul li > * {
+.emotion-29 nav ul li > * {
   color: inherit;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -1249,29 +1448,29 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   height: inherit;
 }
 
-.emotion-25 nav ul li > *:visited {
+.emotion-29 nav ul li > *:visited {
   color: inherit;
 }
 
-.emotion-25 nav ul li:hover,
-.emotion-25 nav ul li:active {
+.emotion-29 nav ul li:hover,
+.emotion-29 nav ul li:active {
   color: #333333;
 }
 
-.emotion-25 nav ul li.current {
+.emotion-29 nav ul li.current {
   color: #005cb9;
 }
 
-.emotion-25 nav ul li.current a {
+.emotion-29 nav ul li.current a {
   cursor: default;
 }
 
-.emotion-25 nav ul li.current:hover,
-.emotion-25 nav ul li.current:active {
+.emotion-29 nav ul li.current:hover,
+.emotion-29 nav ul li.current:active {
   color: #005cb9;
 }
 
-.emotion-25 nav ul li.current:after {
+.emotion-29 nav ul li.current:after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -1282,39 +1481,39 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   border-radius: 3px 3px 0 0;
 }
 
-.emotion-11 {
+.emotion-8 {
   display: inline-block;
 }
 
-.emotion-11 svg {
+.emotion-8 svg {
   display: block;
 }
 
-.emotion-11 .wd-icon-fill {
+.emotion-8 .wd-icon-fill {
   fill: #7b858f;
 }
 
-.emotion-11:hover .wd-icon-fill {
+.emotion-8:hover .wd-icon-fill {
   fill: #333d47;
 }
 
-.emotion-11 .wd-icon-accent {
+.emotion-8 .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-11:hover .wd-icon-accent {
+.emotion-8:hover .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-11 .wd-icon-background {
+.emotion-8 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-11:hover .wd-icon-background {
+.emotion-8:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-17 {
+.emotion-21 {
   box-sizing: border-box;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -1344,93 +1543,93 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   height: 40px;
 }
 
-.emotion-17:hover:active {
+.emotion-21:hover:active {
   -webkit-transition-duration: 40ms;
   transition-duration: 40ms;
 }
 
-.emotion-17:disabled,
-.emotion-17:disabled:active {
+.emotion-21:disabled,
+.emotion-21:disabled:active {
   cursor: default;
   box-shadow: none;
 }
 
-.emotion-17 .wd-icon {
+.emotion-21 .wd-icon {
   display: inline-block;
   vertical-align: middle;
 }
 
-.emotion-17 span .wd-icon-fill,
-.emotion-17 span .wd-icon-accent {
+.emotion-21 span .wd-icon-fill,
+.emotion-21 span .wd-icon-accent {
   -webkit-transition: fill 120ms ease-in;
   transition: fill 120ms ease-in;
   fill: #7b858f;
 }
 
-.emotion-17:focus {
+.emotion-21:focus {
   background-color: transparent;
 }
 
-.emotion-17:focus span .wd-icon-fill,
-.emotion-17:focus span .wd-icon-accent {
+.emotion-21:focus span .wd-icon-fill,
+.emotion-21:focus span .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-17:hover:focus {
+.emotion-21:hover:focus {
   background-color: transparent;
 }
 
-.emotion-17:active,
-.emotion-17:focus:active,
-.emotion-17:hover:active {
+.emotion-21:active,
+.emotion-21:focus:active,
+.emotion-21:hover:active {
   background-color: transparent;
   border-color: transparent;
 }
 
-.emotion-17:active span .wd-icon-fill,
-.emotion-17:focus:active span .wd-icon-fill,
-.emotion-17:hover:active span .wd-icon-fill,
-.emotion-17:active span .wd-icon-accent,
-.emotion-17:focus:active span .wd-icon-accent,
-.emotion-17:hover:active span .wd-icon-accent {
+.emotion-21:active span .wd-icon-fill,
+.emotion-21:focus:active span .wd-icon-fill,
+.emotion-21:hover:active span .wd-icon-fill,
+.emotion-21:active span .wd-icon-accent,
+.emotion-21:focus:active span .wd-icon-accent,
+.emotion-21:hover:active span .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-17:hover {
+.emotion-21:hover {
   background-color: transparent;
 }
 
-.emotion-17:hover span .wd-icon-fill,
-.emotion-17:hover span .wd-icon-accent {
+.emotion-21:hover span .wd-icon-fill,
+.emotion-21:hover span .wd-icon-accent {
   fill: #333d47;
 }
 
-.emotion-17:disabled,
-.emotion-17:active:disabled,
-.emotion-17:focus:disabled,
-.emotion-17:hover:disabled {
+.emotion-21:disabled,
+.emotion-21:active:disabled,
+.emotion-21:focus:disabled,
+.emotion-21:hover:disabled {
   background-color: transparent;
 }
 
-.emotion-17:disabled span .wd-icon-fill,
-.emotion-17:active:disabled span .wd-icon-fill,
-.emotion-17:focus:disabled span .wd-icon-fill,
-.emotion-17:hover:disabled span .wd-icon-fill,
-.emotion-17:disabled span .wd-icon-accent,
-.emotion-17:active:disabled span .wd-icon-accent,
-.emotion-17:focus:disabled span .wd-icon-accent,
-.emotion-17:hover:disabled span .wd-icon-accent {
+.emotion-21:disabled span .wd-icon-fill,
+.emotion-21:active:disabled span .wd-icon-fill,
+.emotion-21:focus:disabled span .wd-icon-fill,
+.emotion-21:hover:disabled span .wd-icon-fill,
+.emotion-21:disabled span .wd-icon-accent,
+.emotion-21:active:disabled span .wd-icon-accent,
+.emotion-21:focus:disabled span .wd-icon-accent,
+.emotion-21:hover:disabled span .wd-icon-accent {
   fill: #b9c0c7;
 }
 
-.emotion-17:not([disabled]):focus,
-.emotion-17:not([disabled]):active {
+.emotion-21:not([disabled]):focus,
+.emotion-21:not([disabled]):active {
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
-.emotion-24 {
+.emotion-28 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1454,28 +1653,28 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   cursor: default;
 }
 
-.emotion-24 img {
+.emotion-28 img {
   width: 100%;
   height: 100%;
 }
 
-.emotion-24:not([disabled]):focus {
+.emotion-28:not([disabled]):focus {
   outline: none;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
-[data-whatinput='mouse'] .emotion-24:focus,
-[data-whatinput='touch'] .emotion-24:focus,
-[data-whatinput='pointer'] .emotion-24:focus {
+[data-whatinput='mouse'] .emotion-28:focus,
+[data-whatinput='touch'] .emotion-28:focus,
+[data-whatinput='pointer'] .emotion-28:focus {
   outline: none;
   box-shadow: none;
   -webkit-animation: none;
   animation: none;
 }
 
-.emotion-23 {
+.emotion-27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1498,92 +1697,183 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   height: 32px;
 }
 
-.emotion-23 img {
+.emotion-27 img {
   width: 100%;
   height: 100%;
 }
 
-.emotion-22 {
+.emotion-26 {
   display: inline-block;
 }
 
-.emotion-22 svg {
+.emotion-26 svg {
   display: block;
 }
 
-.emotion-22 .wd-icon-fill {
+.emotion-26 .wd-icon-fill {
   fill: rgba(0,0,0,0.65);
 }
 
-.emotion-22:hover .wd-icon-fill {
+.emotion-26:hover .wd-icon-fill {
   fill: rgba(0,0,0,0.65);
 }
 
-.emotion-22 .wd-icon-accent {
+.emotion-26 .wd-icon-accent {
   fill: rgba(0,0,0,0.65);
 }
 
-.emotion-22:hover .wd-icon-accent {
+.emotion-26:hover .wd-icon-accent {
   fill: rgba(0,0,0,0.65);
 }
 
-.emotion-22 .wd-icon-background {
+.emotion-26 .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-22:hover .wd-icon-background {
+.emotion-26:hover .wd-icon-background {
   fill: transparent;
 }
 
-.emotion-22 svg {
+.emotion-26 svg {
   width: 20px;
   height: 20px;
 }
 
-.emotion-8 {
+.emotion-10 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  border-width: 0px;
+  background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
+  width: 32px;
+  height: 32px;
+  left: 8px;
+  margin-right: -32px;
+  margin-left: 0;
+  padding: 0;
+}
+
+.emotion-10:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-10:disabled,
+.emotion-10:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-10 .wd-icon {
   display: inline-block;
+  vertical-align: middle;
 }
 
-.emotion-8 svg {
-  display: block;
-}
-
-.emotion-8 .wd-icon-fill {
+.emotion-10 span .wd-icon-fill,
+.emotion-10 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
   fill: #7b858f;
 }
 
-.emotion-8:hover .wd-icon-fill {
+.emotion-10:focus {
+  background-color: transparent;
+}
+
+.emotion-10:focus span .wd-icon-fill,
+.emotion-10:focus span .wd-icon-accent {
   fill: #7b858f;
 }
 
-.emotion-8 .wd-icon-accent {
-  fill: #7b858f;
+.emotion-10:hover:focus {
+  background-color: transparent;
 }
 
-.emotion-8:hover .wd-icon-accent {
-  fill: #7b858f;
+.emotion-10:active,
+.emotion-10:focus:active,
+.emotion-10:hover:active {
+  background-color: transparent;
+  border-color: transparent;
 }
 
-.emotion-8 .wd-icon-background {
-  fill: transparent;
+.emotion-10:active span .wd-icon-fill,
+.emotion-10:focus:active span .wd-icon-fill,
+.emotion-10:hover:active span .wd-icon-fill,
+.emotion-10:active span .wd-icon-accent,
+.emotion-10:focus:active span .wd-icon-accent,
+.emotion-10:hover:active span .wd-icon-accent {
+  fill: #333d47;
 }
 
-.emotion-8:hover .wd-icon-background {
-  fill: transparent;
+.emotion-10:hover {
+  background-color: transparent;
 }
 
-.emotion-9 {
+.emotion-10:hover span .wd-icon-fill,
+.emotion-10:hover span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-10:disabled,
+.emotion-10:active:disabled,
+.emotion-10:focus:disabled,
+.emotion-10:hover:disabled {
+  background-color: transparent;
+}
+
+.emotion-10:disabled span .wd-icon-fill,
+.emotion-10:active:disabled span .wd-icon-fill,
+.emotion-10:focus:disabled span .wd-icon-fill,
+.emotion-10:hover:disabled span .wd-icon-fill,
+.emotion-10:disabled span .wd-icon-accent,
+.emotion-10:active:disabled span .wd-icon-accent,
+.emotion-10:focus:disabled span .wd-icon-accent,
+.emotion-10:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-10:not([disabled]):focus,
+.emotion-10:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-12 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 12px;
-  padding-left: 40px;
+  padding-left: 48px;
+  padding-right: 40px;
   max-width: 480px;
   min-width: 120px;
   width: 100%;
-  height: 40px;
+  height: 44px;
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -1594,69 +1884,177 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   color: #494949;
 }
 
-.emotion-9::-webkit-search-cancel-button {
+.emotion-12::-webkit-search-cancel-button {
   display: none;
 }
 
-.emotion-9::-webkit-input-placeholder {
+.emotion-12::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9::-moz-placeholder {
+.emotion-12::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:-ms-input-placeholder {
+.emotion-12:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9::placeholder {
+.emotion-12::placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):focus,
-.emotion-9:not([disabled]):active {
+.emotion-12:not([disabled]):focus,
+.emotion-12:not([disabled]):active {
   outline: none;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
   background: #f0f1f2;
   color: #494949;
 }
 
-.emotion-9:not([disabled]):focus::-webkit-input-placeholder,
-.emotion-9:not([disabled]):active::-webkit-input-placeholder {
+.emotion-12:not([disabled]):focus::-webkit-input-placeholder,
+.emotion-12:not([disabled]):active::-webkit-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):focus::-moz-placeholder,
-.emotion-9:not([disabled]):active::-moz-placeholder {
+.emotion-12:not([disabled]):focus::-moz-placeholder,
+.emotion-12:not([disabled]):active::-moz-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):focus:-ms-input-placeholder,
-.emotion-9:not([disabled]):active:-ms-input-placeholder {
+.emotion-12:not([disabled]):focus:-ms-input-placeholder,
+.emotion-12:not([disabled]):active:-ms-input-placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):focus::placeholder,
-.emotion-9:not([disabled]):active::placeholder {
+.emotion-12:not([disabled]):focus::placeholder,
+.emotion-12:not([disabled]):active::placeholder {
   color: #5e6a75;
 }
 
-.emotion-9:not([disabled]):hover {
+.emotion-12:not([disabled]):hover {
   background: #e8ebed;
 }
 
-.emotion-12 {
-  border-radius: 24px;
-  height: 24px;
-  margin-left: -32px;
-  margin-right: 8px;
-  width: 24px;
+.emotion-16 {
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 13px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  box-shadow: none;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 120ms linear;
+  transition: all 120ms linear;
+  border-width: 0px;
+  background-color: transparent;
+  margin: -8px;
+  width: 40px;
+  height: 40px;
+  width: 32px;
+  height: 32px;
+  margin-left: -40px;
+  padding: 0;
   display: none;
 }
 
-.emotion-12:hover {
-  cursor: pointer;
+.emotion-16:hover:active {
+  -webkit-transition-duration: 40ms;
+  transition-duration: 40ms;
+}
+
+.emotion-16:disabled,
+.emotion-16:disabled:active {
+  cursor: default;
+  box-shadow: none;
+}
+
+.emotion-16 .wd-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.emotion-16 span .wd-icon-fill,
+.emotion-16 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-16:focus {
+  background-color: transparent;
+}
+
+.emotion-16:focus span .wd-icon-fill,
+.emotion-16:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
+.emotion-16:hover:focus {
+  background-color: transparent;
+}
+
+.emotion-16:active,
+.emotion-16:focus:active,
+.emotion-16:hover:active {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.emotion-16:active span .wd-icon-fill,
+.emotion-16:focus:active span .wd-icon-fill,
+.emotion-16:hover:active span .wd-icon-fill,
+.emotion-16:active span .wd-icon-accent,
+.emotion-16:focus:active span .wd-icon-accent,
+.emotion-16:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-16:hover {
+  background-color: transparent;
+}
+
+.emotion-16:hover span .wd-icon-fill,
+.emotion-16:hover span .wd-icon-accent {
+  fill: #333d47;
+}
+
+.emotion-16:disabled,
+.emotion-16:active:disabled,
+.emotion-16:focus:disabled,
+.emotion-16:hover:disabled {
+  background-color: transparent;
+}
+
+.emotion-16:disabled span .wd-icon-fill,
+.emotion-16:active:disabled span .wd-icon-fill,
+.emotion-16:focus:disabled span .wd-icon-fill,
+.emotion-16:hover:disabled span .wd-icon-fill,
+.emotion-16:disabled span .wd-icon-accent,
+.emotion-16:active:disabled span .wd-icon-accent,
+.emotion-16:focus:disabled span .wd-icon-accent,
+.emotion-16:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-16:not([disabled]):focus,
+.emotion-16:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-6 {
@@ -1667,7 +2065,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   flex-grow: unset;
 }
 
-.emotion-14 {
+.emotion-18 {
   position: relative;
   margin-left: 24px;
   -webkit-box-flex: 1;
@@ -1685,7 +2083,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 <div
-  className="emotion-27 emotion-28"
+  className="emotion-31 emotion-32"
 >
   <div
     className="emotion-6 emotion-7"
@@ -1710,59 +2108,59 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
     </span>
   </div>
   <form
-    className="emotion-14 emotion-15"
+    className="emotion-18 emotion-19"
     onSubmit={[Function]}
-    placeholder="Search"
+    role="search"
   >
-    <span
-      className="emotion-8"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-search wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path fill-rule=\\"nonzero\\" d=\\"M17.32 15.906l2.859 2.858a.5.5 0 0 1 .003.717l-.7.7a.5.5 0 0 1-.718-.002l-2.858-2.86a8 8 0 1 1 1.414-1.414zM11 17a6 6 0 1 0 0-12 6 6 0 0 0 0 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+    <button
+      aria-label="Search"
+      aria-pressed={false}
+      className="emotion-9 emotion-10 emotion-11"
+      onClick={[Function]}
+      type="submit"
+    >
+      <span
+        className="emotion-8"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-search wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path fill-rule=\\"nonzero\\" d=\\"M17.32 15.906l2.859 2.858a.5.5 0 0 1 .003.717l-.7.7a.5.5 0 0 1-.718-.002l-2.858-2.86a8 8 0 1 1 1.414-1.414zM11 17a6 6 0 1 0 0-12 6 6 0 0 0 0 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
+          }
         }
-      }
-      style={
-        Object {
-          "left": "8px",
-          "pointerEvents": "none",
-          "position": "absolute",
-          "top": "50%",
-          "transform": "translateY(-50%)",
-        }
-      }
-    />
+      />
+    </button>
     <input
-      className="emotion-9 emotion-10"
+      className="emotion-12 emotion-13"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       placeholder="Search"
-      type="search"
       value=""
     />
-    <span
+    <button
       aria-label="Reset Search Input"
-      className="reset-input emotion-12 emotion-13"
+      aria-pressed={false}
+      className="emotion-15 emotion-16 emotion-11"
       onClick={[Function]}
+      type="reset"
       value=""
     >
       <span
-        className="emotion-11"
+        className="emotion-8"
         dangerouslySetInnerHTML={
           Object {
             "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-x-small wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M10.783 12l-3.661 3.661a.414.414 0 0 0 .001.588l.628.628a.414.414 0 0 0 .588.001L12 13.217l3.661 3.661a.414.414 0 0 0 .588-.001l.628-.628a.414.414 0 0 0 .001-.588L13.217 12l3.661-3.661a.414.414 0 0 0-.001-.588l-.628-.628a.414.414 0 0 0-.588-.001L12 10.783 8.339 7.122a.414.414 0 0 0-.588.001l-.628.628a.414.414 0 0 0-.001.588L10.783 12z\\" class=\\"wd-icon-fill\\"/></g></svg>",
           }
         }
       />
-    </span>
+    </button>
   </form>
   <div
-    className="emotion-25 emotion-26"
+    className="emotion-29 emotion-30"
   >
     <button
-      className="emotion-17 emotion-18"
+      className="emotion-21 emotion-11"
       style={
         Object {
           "margin": "0 0 0 16px",
@@ -1770,7 +2168,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
       }
     >
       <span
-        className="emotion-11"
+        className="emotion-8"
         dangerouslySetInnerHTML={
           Object {
             "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-notifications wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M18.417 17.998l-12.83-.008c.036-.05.071-.103.106-.156.974-1.46 1.58-2.973 1.58-4.561V8.546A3.539 3.539 0 0 1 10.82 5h2.359a3.554 3.554 0 0 1 3.548 3.546v4.727c0 1.588.605 3.1 1.579 4.561l.11.164zm-4.623.605a1.794 1.794 0 0 1-3.588 0h3.588z\\" class=\\"wd-icon-background\\"/><path d=\\"M9 18.993l-4.504-.003A.502.502 0 0 1 4 18.488V17s2-2 2-4V9a4.995 4.995 0 0 1 4.002-4.9A1.995 1.995 0 0 1 12 2a1.995 1.995 0 0 1 1.998 2.1A5.01 5.01 0 0 1 18 9v4c0 2 2 4 2 4v1.495a.503.503 0 0 1-.496.505L15 18.997V19a3 3 0 0 1-6 0v-.007zm8.43-1.995a12.076 12.076 0 0 1-.094-.139C16.512 15.623 16 14.344 16 13V9c0-1.651-1-3-4-3S8 7.34 8 9v4c0 1.344-.512 2.623-1.336 3.86l-.09.132 10.856.006zM13 19h-2a1 1 0 0 0 2 0z\\" class=\\"wd-icon-fill\\"/></g></svg>",
@@ -1779,7 +2177,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
       />
     </button>
     <button
-      className="emotion-17 emotion-18"
+      className="emotion-21 emotion-11"
       style={
         Object {
           "margin": "0 0 0 16px",
@@ -1787,7 +2185,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
       }
     >
       <span
-        className="emotion-11"
+        className="emotion-8"
         dangerouslySetInnerHTML={
           Object {
             "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-inbox wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M3 11h18v8H3z\\" class=\\"wd-icon-background\\"/><path fill-rule=\\"nonzero\\" d=\\"M4.45 10h15.126l-2.65-4H7.12l-2.67 4zM20 12H4v6h16v-6zM5.772 4.417c.153-.23.506-.417.776-.417h10.954c.275 0 .622.187.773.415L22 10v9.492c0 .28-.225.508-.494.508H2.494A.5.5 0 0 1 2 19.494V10l3.772-5.583z\\" class=\\"wd-icon-fill\\"/><rect width=\\"8\\" height=\\"2\\" x=\\"8\\" y=\\"14\\" class=\\"wd-icon-accent\\" rx=\\".5\\"/></g></svg>",
@@ -1797,16 +2195,16 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
     </button>
     <button
       aria-label="Avatar"
-      className="emotion-24"
+      className="emotion-28"
       disabled={true}
       size={32}
     >
       <div
-        className="emotion-23"
+        className="emotion-27"
         size={32}
       >
         <span
-          className="emotion-22"
+          className="emotion-26"
           dangerouslySetInnerHTML={
             Object {
               "__html": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" class=\\"wd-icon-user wd-icon\\" focusable=\\"false\\" role=\\"presentation\\" viewBox=\\"0 0 24 24\\"><g fill-rule=\\"evenodd\\" class=\\"wd-icon-container\\"><path d=\\"M20 20.491a.503.503 0 0 1-.496.505H4.496A.493.493 0 0 1 4 20.49v-1.495C4 16 6.246 13.8 8.756 12.683 7.682 11.675 7 10.174 7 8.5 7 5.462 9.239 3 12 3s5 2.462 5 5.499c0 1.675-.68 3.175-1.755 4.183C17.758 13.797 20 15.995 20 18.996v1.495zM6.083 18.996H18c0-2.996-2.5-4.999-6-4.999s-6 2.003-5.917 5zM12 11.998c1.657 0 3-1.567 3-3.5C15 6.567 13.657 5 12 5S9 6.566 9 8.499c0 1.932 1.343 3.499 3 3.499z\\" class=\\"wd-icon-fill\\"/></g></svg>",
