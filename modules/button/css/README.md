@@ -51,6 +51,7 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
   - Small
 - [Colors](#colors)
   - Default
+  - Filled (Icons)
   - Primary
   - Delete
 - [States](#states)
@@ -60,7 +61,7 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
   - Disabled
 - [Types](#types)
   - Icon Button
-  - Icon Button (Rounded)
+  - Rounded Button
   - Dropdown Button
   - Split Button
 
@@ -159,15 +160,23 @@ applied to form controls using the classes below.
 > Use when space is limited and the action is clearly communicated through an icon. For instance, an
 > edit button.
 
-Use by adding `.wdc-btn-icon`. A Workday icon should be used as the `<button>`'s content.
+Use by adding `.wdc-btn-icon-square` or `.wdc-btn-icon-circle`. A Workday icon should be used as the
+`<button>`'s content. An alternative is available if you need an Icon button with a filled
+background: `wdc-btn-icon-square-filled` and `wdc-btn-icon-circle-filled`.
 
 ```html
-<button class="wdc-btn wdc-btn-icon">
+<button class="wdc-btn wdc-btn-icon-square">
   <svg ...>
 </button>
 ```
 
-### Icon Button (Rounded)
+```html
+<button class="wdc-btn wdc-btn-icon-circle">
+  <svg ...>
+</button>
+```
+
+### Rounded Button
 
 > This button is similar to the default button but has a fixed width. Use this button when placing
 > an icon button inline with a group of buttons. Often used to style the Overflow Button used in
