@@ -9,27 +9,17 @@ storiesOf('CSS/Banner/Alert ', module)
   .addDecorator(withReadme(README))
   .add('Full', () => (
     <div className="story">
-      <h1 className="section-label">Banner Alert Full</h1>
-      <div>
-        <section>
-          <a className="wdc-banner" href="#">
-            <span className="wdc-banner-text">10 Alerts</span>
-            <span className="wdc-banner-link">View All</span>
-          </a>
-        </section>
-      </div>
+      <a className="wdc-banner" href="#">
+        <span className="wdc-banner-text">3 Alerts</span>
+        <span className="wdc-banner-link">View All</span>
+      </a>
     </div>
   ))
-  .add('Mini  ', () => (
+  .add('Sticky  ', () => (
     <div className="story">
-      <h1 className="section-label">Banner Alert Mini</h1>
-      <div>
-        <section>
-          <a className="wdc-banner wdc-banner-mini" href="#">
-            <span className="wdc-banner-text">10 Alerts</span>
-          </a>
-        </section>
-      </div>
+      <a className="wdc-banner wdc-banner-sticky" href="#">
+        <span className="wdc-banner-text">3 Alerts</span>
+      </a>
     </div>
   ));
 
@@ -37,26 +27,16 @@ storiesOf('CSS/Banner/Error ', module)
   .addDecorator(withReadme(README))
   .add('Full', () => (
     <div className="story">
-      <h1 className="section-label">Banner Error Full</h1>
-      <div>
-        <section>
-          <a className="wdc-banner wdc-banner-error" href="#">
-            <span className="wdc-banner-text">24 Errors and 12 Alerts</span>
-            <span className="wdc-banner-link">View All</span>
-          </a>
-        </section>
-      </div>
+      <a className="wdc-banner wdc-banner-error" href="#">
+        <span className="wdc-banner-text">3 Errors</span>
+        <span className="wdc-banner-link">View All</span>
+      </a>
     </div>
   ))
-  .add('Mini', () => (
+  .add('Sticky', () => (
     <div className="story">
-      <h1 className="section-label">Banner Error Mini</h1>
-      <div>
-        <section>
-          <a className="wdc-banner wdc-banner-error wdc-banner-mini" href="#">
-            <span className="wdc-banner-text">24 Errors and 12 Alerts</span>
-          </a>
-        </section>
-      </div>
+      <a className="wdc-banner wdc-banner-error wdc-banner-sticky" href="#">
+        <span className="wdc-banner-text">3 Errors</span>
+      </a>
     </div>
   ));
