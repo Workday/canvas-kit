@@ -23,7 +23,7 @@ install:
 jobs:
   include:
   - stage: pr previews
-    script: echo "TODO"
+    script: export TRAVIS_BUILD_WEB_URL=$STORYBOOK_URL
   - stage: npm publish
     deploy:
       provider: npm
