@@ -23,7 +23,9 @@ install:
 jobs:
   include:
   - stage: pr previews
-    script: export TRAVIS_BUILD_WEB_URL=$STORYBOOK_URL
+    script:
+      - echo $TRAVIS_COMMIT
+      - echo $TRAVIS_COMMIT_RANGE
   - stage: npm publish
     deploy:
       provider: npm
