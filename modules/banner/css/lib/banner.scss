@@ -1,10 +1,12 @@
 @svg-load alertIcon url(#{$_wdc-banner-icons-path}/wd-icon-exclamation-triangle.svg) {
   .wd-icon-fill {
-    fill: $wdc-banner-font-color;
+    fill: $wdc-banner-font-color-alert;
   }
+
   .wd-icon-accent {
-    fill: $wdc-banner-font-color;
+    fill: $wdc-banner-font-color-alert;
   }
+
   .wd-icon-background {
     fill: none;
   }
@@ -12,11 +14,13 @@
 
 @svg-load errorIcon url(#{$_wdc-banner-icons-path}/wd-icon-exclamation-circle.svg) {
   .wd-icon-fill {
-    fill: $wdc-banner-font-color;
+    fill: $wdc-banner-font-color-error;
   }
+
   .wd-icon-accent {
-    fill: $wdc-banner-font-color;
+    fill: $wdc-banner-font-color-error;
   }
+
   .wd-icon-background {
     fill: none;
   }
@@ -27,7 +31,7 @@
   background-color: $wdc-banner-bg-alert;
   border-radius: $wdc-banner-border-radius;
   box-sizing: border-box;
-  color: $wdc-banner-font-color;
+  color: $wdc-banner-font-color-alert;
   display: inline-flex;
   font-size: $wdc-banner-font-size;
   font-weight: $wdc-banner-font-weight;
@@ -35,12 +39,13 @@
   min-width: $wdc-banner-min-width;
   line-height: $_wdc-banner-line-height;
   padding: $wdc-banner-padding;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.14);
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   text-decoration: none;
   transition: background-color 0.2s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &:before {
     content: '';
@@ -48,13 +53,13 @@
     background-size: $wdc-banner-icon-size;
     flex: 0 0 $wdc-banner-icon-size;
     box-sizing: border-box;
-    margin-right: $wdc-spacing-s;
+    margin-right: $wdc-spacing-xs;
     width: $wdc-banner-icon-size;
     height: $wdc-banner-icon-size;
   }
 
   a {
-    color: $wdc-banner-font-color;
+    color: $wdc-banner-font-color-alert;
   }
 
   .wdc-banner-text {
@@ -74,6 +79,11 @@
 
   &.wdc-banner-error {
     background-color: $wdc-banner-bg-error;
+    color: $wdc-banner-font-color-error;
+
+    a {
+      color: $wdc-banner-font-color-error;
+    }
 
     &:before {
       background-image: svg-inline(errorIcon);
@@ -90,11 +100,11 @@
     box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-500;
   }
 
-  &.wdc-banner-mini {
+  &.wdc-banner-sticky {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     min-width: auto;
-    width: $wdc-banner-mini-width;
+    width: $wdc-banner-sticky-width;
 
     .wdc-banner-text {
       text-overflow: ellipsis;
@@ -122,8 +132,8 @@
       margin-right: $wdc-spacing-xs;
     }
 
-    &.wdc-banner-mini {
-      width: $wdc-banner-mobile-mini-width;
+    &.wdc-banner-sticky {
+      width: $wdc-banner-mobile-sticky-width;
       padding: 0;
       justify-content: center;
       align-items: center;

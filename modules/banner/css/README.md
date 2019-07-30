@@ -61,17 +61,17 @@ Use by applying `.wdc-banner`.
 </a>
 ```
 
-#### `.wdc-banner-mini`
+#### `.wdc-banner-sticky`
 
-> Set the banner variant as `mini`. Text will truncate with an ellipsis if longer than maximum
+> Set the banner variant as `sticky`. Text will truncate with an ellipsis if longer than maximum
 > width.
 
 ```html
-<a class="wdc-banner wdc-banner-mini" href="#">
+<a class="wdc-banner wdc-banner-sticky" href="#">
   <span class="wdc-banner-text">
     12 Alerts
   </span>
-  <span class="wdc-banner-right">
+  <span class="wdc-banner-link">
     View All
   </span>
 </a>
