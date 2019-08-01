@@ -5,18 +5,14 @@ cache:
   yarn: true
 git:
   depth: 3
-branches:
-  except:
-  - gh-pages
 stages:
 - name: pr-previews
   if: "(branch = master AND type = pull_request) OR branch != master OR NOT branch =~ /^release-.+$/"
 - name: npm publish
-  if: branch =~ /^release-.+$/ AND type != pull_request
-- name: storybook
-  if: branch =~ /^release-.+$/ AND type != pull_request
+  if: branch = master AND type != pull_request AND tag IS present
+- name: master storybook
+  if: branch = master AND type != pull_request
 before_install:
-- npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
 - export PATH="$HOME/.yarn/bin:$PATH"
 install:
@@ -29,9 +25,13 @@ jobs:
   - stage: pr previews
     script: echo "TODO"
   - stage: npm publish
-    script:
-    - "./utils/travis/getGit.sh"
-  - stage: storybook
+    deploy:
+      provider: npm
+      email: "$GITHUB_EMAIL"
+      api_key: "$NPM_TOKEN"
+      on:
+        tags: true
+  - stage: master storybook
     script:
     - yarn build-storybook
     deploy:
@@ -40,8 +40,7 @@ jobs:
       local_dir: docs
       github_token: "$GH_STORYBOOK_TOKEN"
       on:
-        all_branches: true
-        condition: $TRAVIS_BRANCH =~ /^release-.+$/
+        branch: master
 env:
   global:
   - secure: 2mf5LOhqAmYsMKOoVK+4F9Yym0Y7CvrgyHZcSMsezFB/8PowxdPKDfHuwV8I5DsRQuFzv1G9xmdlrV7qWKf48bJwyFRXulAdzsElrkrXDVhW3nmzt/vpqSA/YJWqB1gsBolp1dOrC0dblNTNzCxHPHgl0y8x8A6ZpT4oUY14iVO+olg5hkD6Yx+M17+Oe1q5r7GUF5auFazZr3BeyJ5oxdIIUVeZRitJU0KxScaZmBv/pwfCKrmrfGk/GSt11WJgTA5pRG+HQZ253uy/Oxsh4JKJXCoeEp1taSnxzJpVeA9iq3Ywj+C64sAqS4NVM/wtLFxDz7RZ3w+B6MbdnAYWarYotuNWtpduiHp9rzfOhYr1DmD9uxCQ+bnt0pwfLY010wsXwnBljxTvVvUwEvMRVTgwzSDwQIbhepb3Br+KduRIZOLAa/mbk6uFQOBJrDfkcug5xZUcoNii2WMtGxdq4gRZ4mWXjiXNOKgm27zu+IRM09z9aUbRTCVsNp8TP23GnhMMdoEhxZECWwHrwT6+QrLeih9tkA7YYlPrjaA33+vajSDzNyLWBxvk7JPIwDZiaObSWOh2XD3XBSnLHN/Pt0udrWxW7Zdtumg/u2zvWRhaQCIPN8fdgYMTEYQ4a1U+hR3gKl6DhF1mgkVqo1Q98g4lY+JMaS8/HG+YCmY5HzI=
