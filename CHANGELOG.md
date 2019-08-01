@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# 3.0.0-alpha.3 (2019-08-02)
+# 3.0.0-alpha.4 (2019-08-02)
 
 ### Infrastructure:
 
