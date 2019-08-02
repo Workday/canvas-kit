@@ -138,7 +138,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     window.addEventListener('resize', throttle(this.handleResize, 150));
   }
   public componentWillUnmount() {
-    window.addEventListener('resize', throttle(this.handleResize, 150));
+    window.removeEventListener('resize', throttle(this.handleResize, 150));
   }
 
   public render() {
