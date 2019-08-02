@@ -103,7 +103,7 @@
     "format": "yarn format:prettier && yarn format:tslint",
     "test": "TZ=UTC jest",
     "updateSnaps": "TZ=UTC jest -u",
-    "version": "yarn lerna version --no-git-tag-version --no-push --no-changelog"
+    "bump": "lerna version"
   },
   "config": {
     "commitizen": {
