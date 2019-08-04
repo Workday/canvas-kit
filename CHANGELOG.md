@@ -1,4 +1,4 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
@@ -17,8 +17,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix(Popper): Spread remainder props on wrapper div (#44)
 - feat(menu): Enable MenuItems to skip onClose (#48)
 - fix(header): Header search accessibility & prop spread fixes (#43)
+- fix(SidePanel): remove resize event handler on unmount (#74)
 
 ### Breaking Changes:
 
 - refactor(Icon): Move icon-list from core into icon module (#30)
-- Refactor(Fonts): Remove @workday/canvas-kit-react-fonts from universal module (#40)
+- refactor(Fonts): Remove @workday/canvas-kit-react-fonts from universal module (#40)
