@@ -1,15 +1,12 @@
 {
   "packages": ["modules/**"],
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
-    "publish": {
-      "conventionalCommits": true,
-      "logLevel": "warn",
-      "message": "chore(release): Publish [ci skip]",
-      "registry": "https://registry.npmjs.org",
-      "yes": true
+    "version": {
+      "gitTagVersion": false,
+      "push": false
     }
   }
 }
