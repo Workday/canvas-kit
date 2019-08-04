@@ -102,7 +102,8 @@
     "format:tslint": "tslint --project tsconfig.json --fix",
     "format": "yarn format:prettier && yarn format:tslint",
     "test": "TZ=UTC jest",
-    "updateSnaps": "TZ=UTC jest -u"
+    "updateSnaps": "TZ=UTC jest -u",
+    "bump": "lerna version"
   },
   "config": {
     "commitizen": {
