@@ -1,25 +1,74 @@
+@keyframes tooltipAnimationTop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, $wdc-spacing-xxxs);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0px);
+  }
+}
+
+@keyframes tooltipAnimationRight {
+  from {
+    opacity: 0;
+    transform: translate(-$wdc-spacing-xxxs, -50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, -50%);
+  }
+}
+
+@keyframes tooltipAnimationLeft {
+  from {
+    opacity: 0;
+    transform: translate($wdc-spacing-xxxs, -50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, -50%);
+  }
+}
+
+@keyframes tooltipAnimationBottom {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -$wdc-spacing-xxxs);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0px);
+  }
+}
+
 .wdc-tooltip {
   @include wdc-type();
   @include wdc-type-body();
-  display: inline-block;
   background-color: $_wdc-tooltip-bg-color;
-  padding: 0;
   border-radius: $wdc-spacing-xxxs;
+  color: $wdc-color-french-vanilla-100;
+  display: inline-block;
+  font-size: 13px;
+  min-width: auto;
+  padding: $wdc-spacing-xxs;
   position: relative;
+  white-space: nowrap;
   width: max-content;
-  max-width: $_wdc-tooltip-max-width;
 
   // Fallback for IE11
   @media screen and (-ms-high-contrast: active),
   screen and (-ms-high-contrast: none) {
     width: auto;
-    min-width: $_wdc-tooltip-menu-min-width;
   }
 
   // Fallback for Edge and browsers that don't support max-content
   @supports not (width: max-content) {
     width: auto;
-    min-width: $_wdc-tooltip-menu-min-width;
   }
 
   &-right {
@@ -37,19 +86,11 @@
 
   &-top {
     margin-bottom: $wdc-spacing-xxxs;
-
   }
 
   &-bottom {
     margin-top: $wdc-spacing-xxxs;
   }
-
-  padding: $wdc-spacing-xxs;
-  font-size: 13px;
-  color: $wdc-color-french-vanilla-100;
-  white-space: nowrap;
-  min-width: auto;
-  max-width: $_wdc-tooltip-max-width;
 
   &.wdc-tooltip-right,
   &.wdc-tooltip-left {
@@ -82,7 +123,6 @@
   .wdc-tooltip {
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.2s;
 
     &-right,
     &-left,
@@ -94,7 +134,8 @@
 
     &-left,
     &-right {
-      top: -$wdc-spacing-s;
+      top: calc(50% - 8px);
+      transform: translateY(-50%);
     }
 
     &-right {
@@ -107,7 +148,8 @@
 
     &-top,
     &-bottom {
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     &-top {
@@ -132,6 +174,24 @@
     .wdc-tooltip {
       visibility: visible;
       opacity: 1;
+      animation-duration: 150ms;
+      animation-timing-function: ease-out;
+
+      &-right {
+        animation-name: tooltipAnimationRight;
+      }
+
+      &-left {
+        animation-name: tooltipAnimationLeft;
+      }
+
+      &-top {
+        animation-name: tooltipAnimationTop;
+      }
+
+      &-bottom {
+        animation-name: tooltipAnimationBottom;
+      }
     }
   }
 }
