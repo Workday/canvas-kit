@@ -7,7 +7,7 @@ git:
   depth: 3
 stages:
 - name: pr-previews
-  if: "(branch = master AND type = pull_request) OR branch != master OR NOT branch =~ /^release-.+$/"
+  if: "(branch = master AND type = pull_request) OR branch != master"
 - name: npm publish
   if: branch = master AND type != pull_request AND tag IS present
 - name: master storybook
@@ -27,8 +27,10 @@ jobs:
   - stage: npm publish
     deploy:
       provider: npm
+      skip_cleanup: true
       email: "$GITHUB_EMAIL"
       api_key: "$NPM_TOKEN"
+      tag: prerelease # TODO: This needs to be changed to 'latest' eventually
       on:
         tags: true
   - stage: master storybook
