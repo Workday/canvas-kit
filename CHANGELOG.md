@@ -10,6 +10,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Update lodash version to resolve vulnerability (#41)
 - ci(travis): Enable tag publishing and re-enable master storybook (#52)
 - chore: Pull in version bumps from old release branch (#71)
+- build(travis): skip cleanup on npm publish (#79)
 
 ### Components:
 
