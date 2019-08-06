@@ -7,6 +7,7 @@ exports[`TextArea Snapshots error 1`] = `
   font-weight: 400;
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
   display: block;
   background-color: #ffffff;
   border-radius: 4px;
@@ -92,6 +93,7 @@ exports[`TextArea Snapshots grow 1`] = `
   font-weight: 400;
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
   display: block;
   background-color: #ffffff;
   border-radius: 4px;
@@ -165,6 +167,7 @@ exports[`TextArea Snapshots renders as expected 1`] = `
   font-weight: 400;
   color: #494949;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  border: 1px solid #7b858f;
   display: block;
   background-color: #ffffff;
   border-radius: 4px;
