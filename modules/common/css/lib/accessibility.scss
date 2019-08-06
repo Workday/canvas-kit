@@ -1,0 +1,23 @@
+@mixin wdc-focusable-inputs() {
+  .wdc-form-textinput:not([disabled]):not(.wdc-form-disabled),
+  .wdc-a11y select:not([disabled]),
+  .wdc-a11y textarea:not([disabled]) {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+[data-whatinput='keyboard'] {
+  @include wdc-focusable-inputs() {
+    @include wdc-form-focus();
+  }
+}
+
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  @include wdc-focusable-inputs() {
+    text-decoration: none;
+    outline: none;
+  }
+}
