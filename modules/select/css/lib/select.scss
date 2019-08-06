@@ -1,0 +1,73 @@
+@mixin wdc-form-select() {
+  @include wdc-form-common-box();
+  background: $wdc-color-input-background
+    svg-load('#{$_wdc-form-icons-path}/wd-icon-caret-down.svg', fill=$wdc-color-licorice-200)
+    calc(100% - #{$wdc-spacing-xxs}) center no-repeat;
+  background-size: $wdc-spacing-s;
+  color: $wdc-color-input-text;
+  appearance: none;
+  padding-right: $wdc-spacing-l;
+
+  &:-moz-focusring {
+    // Hack to hide outline on FF
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+
+  &.wdc-form-hover:not([disabled]):not(.wdc-form-disabled),
+  &:hover:not([disabled]):not(.wdc-form-disabled) {
+    background-image: svg-load(
+      '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
+      fill=$wdc-color-licorice-500
+    );
+  }
+
+  &:focus:not([disabled]),
+  &.wdc-form-focus:not([disabled]) {
+    @include wdc-form-focus();
+    background-image: svg-load(
+      '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
+      fill=$wdc-color-blueberry-500
+    );
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+.wdc-form-select {
+  @include wdc-form-select();
+}
+
+[data-whatinput='keyboard'] .wdc-form-select:not([disabled]):focus {
+  @extend .wdc-form-select.wdc-form-focus;
+}
+
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  .wdc-form-select:not([disabled]) {
+    &.wdc-form-error:active,
+    &.wdc-form-error.wdc-form-focus,
+    &.wdc-form-error:focus {
+      box-shadow: none;
+      border-color: $wdc-color-error;
+    }
+
+    &.wdc-form-alert:active,
+    &.wdc-form-alert.wdc-form-focus,
+    &.wdc-form-alert:focus {
+      box-shadow: none;
+      border-color: $wdc-color-alert;
+    }
+
+    &:focus {
+      border: 1px solid $wdc-color-soap-500;
+      box-shadow: none;
+      background-image: svg-load(
+        '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
+        fill=$wdc-color-licorice-500
+      );
+    }
+  }
+}
