@@ -26,11 +26,9 @@ jobs:
     script: echo "TODO"
   - stage: npm publish
     deploy:
-      provider: npm
+      provider: script
+      script: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN && yarn lerna publish from-package --yes --pre-dist-tag prerelease
       skip_cleanup: true
-      email: "$GITHUB_EMAIL"
-      api_key: "$NPM_TOKEN"
-      tag: prerelease # TODO: This needs to be changed to 'latest' eventually
       on:
         tags: true
   - stage: master storybook
