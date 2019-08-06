@@ -3,7 +3,7 @@
 Creates an actions menu of clickable items.
 
 Can be used to implement a menu button, context menu, etc. For a full suite of examples, have a look
-at the [Menu Stories](./stories/stories.tsx).
+at the [Menu Stories](https://workday.github.io/canvas-kit/?path=/story/menu--default).
 
 ## Coming Soon
 
@@ -48,16 +48,19 @@ import {userIcon} from '@workday/canvas-system-icons-web';
 ### `ul, li`
 
 For a semantic menu, this component will style a child `<ul>` element with a role of `menu`. If you
-implement your own `<MenuItem>` (see [menu stories](./stories.tsx) for an example), make sure you
-use a `<li>` with a role of `menuItem`, tabindex of `-1`, and ids that follow the pattern
-`${MenuId}-${index}`.
+implement your own `<MenuItem>` (see
+[menu stories](https://workday.github.io/canvas-kit/?path=/story/menu--default) for
+an example), make sure you use a `<li>` with a role of `menuItem`, tabindex of `-1`, and ids that
+follow the pattern `${MenuId}-${index}`.
 
 ## Accessibility
 
 This component implements a actions menu using aria-activedescendant.
 [See the w3 example here](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html).
 If used in conjunction with a menu button you will need to add your own keyboard shortcuts, aria
-attributes, and focus management. See the [menu stories](./stories.tsx) for a fully fledged example.
+attributes, and focus management. See the
+[menu stories](https://workday.github.io/canvas-kit/?path=/story/menu--default) for
+a fully fledged example.
 
 ## Keyboard Shortcuts
 
@@ -211,12 +214,6 @@ Default: `false`
 
 ---
 
-#### `label: boolean`
-
-> Optional aria-label for your menu item, useful if you want an icon without text.
-
----
-
 #### `hasDivider: boolean`
 
 > Adds a top border on the menu item.
@@ -230,6 +227,15 @@ Default: `false`
 > Allow you to disable a menu item so it is not clickable.
 
 Default: `false`
+
+---
+
+#### `role: string`
+
+> Allow you to override the role of the item, e.g. you can use this element as a option in a
+> combobox.
+
+Default: `menuItem`
 
 ---
 
