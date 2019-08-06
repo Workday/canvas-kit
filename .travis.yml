@@ -9,7 +9,7 @@ stages:
 - name: pr-previews
   if: "(branch = master AND type = pull_request) OR branch != master"
 - name: npm publish
-  if: branch = master AND type != pull_request AND tag IS present
+  if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 - name: master storybook
   if: branch = master AND type != pull_request
 before_install:
