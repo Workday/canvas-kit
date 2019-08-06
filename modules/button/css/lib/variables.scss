@@ -1,10 +1,6 @@
 $_wdc-btn-icons-path: $wdc-system-icons-path !default;
 
-$wdc-btn-font-family: "Roboto",
-"Helvetica Neue",
-"Helvetica",
-"Arial",
-sans-serif;
+$wdc-btn-font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 $wdc-btn-font-weight: 500;
 
 $wdc-btn-icon-size-s: $wdc-spacing-s;
@@ -13,7 +9,7 @@ $wdc-btn-border-size: 1px;
 
 $wdc-btn-height-l: $wdc-spacing-xl;
 $wdc-btn-height-m: $wdc-spacing-m;
-$wdc-btn-height-s: $wdc-spacing-s+($wdc-btn-border-size * 2);
+$wdc-btn-height-s: $wdc-spacing-s + ($wdc-btn-border-size * 2);
 $wdc-btn-height-icon: $wdc-spacing-l;
 
 $wdc-btn-min-width-l: 112px;
@@ -29,7 +25,8 @@ $wdc-btn-padding-l: 0 $wdc-spacing-l;
 $wdc-btn-padding-m: 0 $wdc-spacing-m;
 $wdc-btn-padding-s: 0 $wdc-spacing-xxs;
 $wdc-btn-padding-icon: $wdc-spacing-xxxs;
-$wdc-btn-padding-icon-rounded: (($wdc-btn-height-l - $wdc-btn-icon-size-m)/2) (($wdc-btn-width-icon-rounded - $wdc-btn-icon-size-m)/2);
+$wdc-btn-padding-icon-rounded: (($wdc-btn-height-l - $wdc-btn-icon-size-m)/2)
+  (($wdc-btn-width-icon-rounded - $wdc-btn-icon-size-m)/2);
 
 $wdc-btn-border-radius: $wdc-spacing-xl;
 $wdc-btn-border-radius-icon: $wdc-spacing-xxxs;
@@ -43,7 +40,7 @@ $wdc-btn-bg-icon: $wdc-color-french-vanilla-100;
 $wdc-btn-bg-icon-hover: $wdc-color-soap-300;
 $wdc-btn-bg-icon-active: $wdc-color-soap-500;
 $wdc-btn-bg-icon-focus: $wdc-color-french-vanilla-100;
-$wdc-btn-bg-icon-disabled: $wdc-color-french-vanilla-100;
+$wdc-btn-bg-icon-disabled: rgba(255, 255, 255, 0.75);
 $wdc-btn-bg-icon-filled-hover: $wdc-color-soap-400;
 $wdc-btn-bg-icon-filled-active: $wdc-color-soap-500;
 $wdc-btn-bg-icon-filled-disabled: $wdc-color-soap-100;
@@ -81,6 +78,7 @@ $wdc-btn-color-delete-disabled: $wdc-color-cinnamon-300;
 
 $wdc-btn-split-border-radius: 3px;
 $wdc-btn-split-icon-height: $wdc-spacing-s;
-$wdc-btn-split-icon-width: $wdc-spacing-xxxs+$wdc-spacing-m+$wdc-spacing-xxs;
+$wdc-btn-split-icon-width: $wdc-spacing-xxxs + $wdc-spacing-m + $wdc-spacing-xxs;
 $wdc-btn-split-icon-padding-v: ($wdc-btn-height-l - $wdc-btn-split-icon-height)/2;
-$wdc-btn-split-icon-padding: $wdc-btn-split-icon-padding-v $wdc-spacing-xxs $wdc-btn-split-icon-padding-v $wdc-spacing-xxxs;
+$wdc-btn-split-icon-padding: $wdc-btn-split-icon-padding-v $wdc-spacing-xxs
+  $wdc-btn-split-icon-padding-v $wdc-spacing-xxxs;

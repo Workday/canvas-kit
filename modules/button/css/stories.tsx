@@ -3,8 +3,23 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
+import {css} from 'emotion';
 import README from './README.md';
 import './index.scss';
+
+const blueBackground = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#0875e1',
+  margin: '0 10px',
+  padding: '24px',
+  maxWidth: 'max-content',
+  borderRadius: '3px',
+  '.wdc-btn': {
+    margin: '0 12px',
+  },
+});
 
 storiesOf('CSS/Button', module)
   .addDecorator(withReadme(README))
@@ -168,6 +183,34 @@ storiesOf('CSS/Button/Icon Button', module)
       <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle-filled wdc-btn-disabled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
+    </div>
+  ))
+  .add('Inverse', () => (
+    <div className="story">
+      <h3>Medium Inverse</h3>
+      <div className={blueBackground}>
+        <button className="wdc-btn wdc-btn-medium wdc-btn-icon-inverse">
+          <SystemIcon icon={activityStreamIcon} />
+        </button>
+        <button
+          disabled={true}
+          className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-icon-circle-inverse"
+        >
+          <SystemIcon icon={activityStreamIcon} />
+        </button>
+      </div>
+      <h3>Small Inverse</h3>
+      <div className={blueBackground}>
+        <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-circle-inverse">
+          <SystemIcon icon={activityStreamIcon} />
+        </button>
+        <button
+          disabled={true}
+          className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-circle-inverse"
+        >
+          <SystemIcon icon={activityStreamIcon} />
+        </button>
+      </div>
     </div>
   ));
 
