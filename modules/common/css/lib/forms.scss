@@ -1,0 +1,83 @@
+// Styles common to elements with text boxes like text inputs and selects
+@mixin wdc-form-common-box() {
+  @include wdc-type();
+  @include wdc-type-body-2();
+  background-color: $wdc-color-input-background;
+  display: block;
+  border: 1px solid $wdc-color-input-border;
+  border-radius: 3px;
+  min-width: $wdc-form-field-min-width;
+  line-height: $wdc-spacing-s - 2;
+  padding: $wdc-spacing-xxs;
+  box-sizing: border-box;
+  transition: 0.2s border-color, 0.2s box-shadow;
+
+  &.wdc-form-hover:not([disabled]):not(.wdc-form-disabled),
+  &:hover:not([disabled]):not(.wdc-form-disabled) {
+    border-color: $wdc-color-input-hover-border;
+  }
+}
+
+// Styles common to textarea and text inputs
+@mixin wdc-form-text() {
+  @include wdc-form-common-box();
+
+  &::placeholder {
+    /* WebKit, Blink, Edge */
+    color: $wdc-color-input-placeholder;
+  }
+
+  // Show focus outline still on disabled class
+  &.wdc-form-focus:not([disabled]),
+  &:focus:not([disabled]) {
+    @include wdc-form-focus();
+  }
+}
+
+// Common styles for checkboxes and radios
+@mixin wdc-form-common-control() {
+  + .wdc-form-label {
+    margin-left: 8px;
+    display: inline;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &:before {
+      width: $wdc-spacing-s;
+      height: $wdc-spacing-s;
+      background: $wdc-color-input-background;
+      border: 1px solid $wdc-color-input-border;
+      border-radius: 2px;
+      transition: 0.2s border-color, 0.2s box-shadow;
+    }
+  }
+
+  & + .wdc-form-label {
+    @include wdc-type-body-2();
+    display: inline-block;
+    margin: 0 0 0 $wdc-spacing-xxs;
+    top: -4px;
+  }
+
+  &:disabled,
+  &.wdc-form-disabled {
+    border-color: $wdc-color-input-disabled-border;
+    pointer-events: none;
+
+    & + .wdc-form-label {
+      color: $wdc-color-input-disabled-text;
+    }
+  }
+}
+
+@mixin wdc-form-focus() {
+  border-color: $wdc-color-common-focus-outline;
+  box-shadow: 0 0 0 1px $wdc-color-common-focus-outline;
+  outline: none;
+}

@@ -1,6 +1,4 @@
 @import '~@workday/canvas-kit-css-core/lib/mixins';
 @import '~@workday/canvas-kit-css-core/lib/variables';
-@import './lib/variables.scss';
-@import './lib/form.scss';
-@import './lib/errors.scss';
-@import './lib/accessibility.scss';
+@import '~@workday/canvas-kit-css-common/index.scss';
+@import './lib/form-field.scss';
