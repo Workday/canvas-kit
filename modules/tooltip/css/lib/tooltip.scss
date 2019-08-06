@@ -1,176 +1,89 @@
+@keyframes tooltipAnimationTop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, $wdc-spacing-xxxs);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0px);
+  }
+}
+
+@keyframes tooltipAnimationRight {
+  from {
+    opacity: 0;
+    transform: translate(-$wdc-spacing-xxxs, -50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, -50%);
+  }
+}
+
+@keyframes tooltipAnimationLeft {
+  from {
+    opacity: 0;
+    transform: translate($wdc-spacing-xxxs, -50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, -50%);
+  }
+}
+
+@keyframes tooltipAnimationBottom {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -$wdc-spacing-xxxs);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0px);
+  }
+}
+
 .wdc-tooltip {
   @include wdc-type();
   @include wdc-type-body();
-  @include wdc-depth-3();
-  display: inline-block;
   background-color: $_wdc-tooltip-bg-color;
-  padding: $wdc-spacing-s;
-  border-radius: 3px;
-  border: 1px solid $_wdc-tooltip-border-color;
+  border-radius: $wdc-spacing-xxxs;
+  color: $wdc-color-french-vanilla-100;
+  display: inline-block;
+  font-size: 13px;
+  min-width: auto;
+  padding: $wdc-spacing-xxs;
   position: relative;
+  white-space: nowrap;
   width: max-content;
-  max-width: $_wdc-tooltip-max-width;
 
   // Fallback for IE11
-  @media screen and (-ms-high-contrast: active),
-  screen and (-ms-high-contrast: none) {
+  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
     width: auto;
-    min-width: $_wdc-tooltip-menu-min-width;
   }
 
   // Fallback for Edge and browsers that don't support max-content
   @supports not (width: max-content) {
     width: auto;
-    min-width: $_wdc-tooltip-menu-min-width;
-  }
-
-  &-menu {
-    padding: $wdc-spacing-xxs 0;
-    min-width: $_wdc-tooltip-menu-min-width;
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        color: $wdc-color-black-pepper-300;
-        padding: $wdc-spacing-xxxs $wdc-spacing-s;
-        font-size: 13px;
-        cursor: pointer;
-        transition: background-color 0.2s, color 0.2s;
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        &.wdc-tooltip-menu-item-focus,
-        &:focus,
-        &.wdc-tooltip-menu-item-hover,
-        &:hover {
-          color: $wdc-color-french-vanilla-100;
-          background-color: $wdc-color-blueberry-500;
-        }
-      }
-    }
-  }
-
-  &-right,
-  &-left,
-  &-top,
-  &-bottom {
-
-    &:before,
-    &:after {
-      content: ' ';
-      position: absolute;
-      border-style: solid;
-      border-color: transparent;
-    }
-
-    &:before {
-      border-width: $_wdc-tooltip-arrow-size + 1px;
-    }
-
-    &:after {
-      border-width: $_wdc-tooltip-arrow-size;
-    }
   }
 
   &-right {
-    margin-left: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: $_wdc-tooltip-arrow-offset;
-      right: 100%;
-    }
-
-    &:before {
-      margin-top: -($_wdc-tooltip-arrow-size + 1px);
-      border-right-color: $_wdc-tooltip-border-color;
-    }
-
-    &:after {
-      margin-top: -$_wdc-tooltip-arrow-size;
-      border-right-color: $_wdc-tooltip-bg-color;
-    }
+    margin-left: $wdc-spacing-xxxs;
   }
 
   &-left {
-    margin-right: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: $_wdc-tooltip-arrow-offset;
-      left: 100%;
-    }
-
-    &:before {
-      margin-top: -($_wdc-tooltip-arrow-size + 1px);
-      border-left-color: $_wdc-tooltip-border-color;
-    }
-
-    &:after {
-      margin-top: -$_wdc-tooltip-arrow-size;
-      border-left-color: $_wdc-tooltip-bg-color;
-    }
+    margin-right: $wdc-spacing-xxxs;
   }
 
   &-top {
-    margin-bottom: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: 100%;
-      left: $_wdc-tooltip-arrow-offset;
-    }
-
-    &:before {
-      margin-left: -($_wdc-tooltip-arrow-size + 1px);
-      border-top-color: $_wdc-tooltip-border-color;
-    }
-
-    &:after {
-      margin-left: -$_wdc-tooltip-arrow-size;
-      border-top-color: $_wdc-tooltip-bg-color;
-    }
+    margin-bottom: $wdc-spacing-xxxs;
   }
 
   &-bottom {
-    margin-top: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      bottom: 100%;
-      left: $_wdc-tooltip-arrow-offset;
-    }
-
-    &:before {
-      margin-left: -($_wdc-tooltip-arrow-size + 1px);
-      border-bottom-color: $_wdc-tooltip-border-color;
-    }
-
-    &:after {
-      margin-left: -$_wdc-tooltip-arrow-size;
-      border-bottom-color: $_wdc-tooltip-bg-color;
-    }
-  }
-
-  padding: $wdc-spacing-xs $wdc-spacing-s;
-  font-size: 14px;
-  white-space: nowrap;
-  min-width: auto;
-  max-width: $_wdc-tooltip-max-width;
-
-  &.wdc-tooltip-right,
-  &.wdc-tooltip-left {
-
-    &:before,
-    &:after {
-      top: 50%;
-    }
+    margin-top: $wdc-spacing-xxxs;
   }
 
   .wdc-tooltip-title {
@@ -195,7 +108,6 @@
   .wdc-tooltip {
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.2s;
 
     &-right,
     &-left,
@@ -207,20 +119,22 @@
 
     &-left,
     &-right {
-      top: -$wdc-spacing-s;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     &-right {
-      left: calc(100%);
+      left: 100%;
     }
 
     &-left {
-      right: calc(100%);
+      right: 100%;
     }
 
     &-top,
     &-bottom {
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     &-top {
@@ -230,14 +144,6 @@
     &-bottom {
       top: 100%;
     }
-
-    &-tooltip {
-
-      &.wdc-tooltip-left,
-      &.wdc-tooltip-right {
-        top: -$wdc-spacing-xs;
-      }
-    }
   }
 
   &.wdc-tooltip-hover,
@@ -245,6 +151,24 @@
     .wdc-tooltip {
       visibility: visible;
       opacity: 1;
+      animation-duration: 150ms;
+      animation-timing-function: ease-out;
+
+      &-right {
+        animation-name: tooltipAnimationRight;
+      }
+
+      &-left {
+        animation-name: tooltipAnimationLeft;
+      }
+
+      &-top {
+        animation-name: tooltipAnimationTop;
+      }
+
+      &-bottom {
+        animation-name: tooltipAnimationBottom;
+      }
     }
   }
 }
