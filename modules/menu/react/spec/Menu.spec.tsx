@@ -190,6 +190,18 @@ describe('Menu Accessibility', () => {
     component.unmount();
   });
 
+  test('role should be overridden', () => {
+    const newRole = 'option';
+    const component = mount(<MenuItem role={newRole} />);
+    expect(
+      component
+        .find('li')
+        .getDOMNode()
+        .getAttribute('role')
+    ).toEqual(newRole);
+    component.unmount();
+  });
+
   test('labeledBy menu should have aria-labelledby set', () => {
     const label: string = 'myLabel';
     const component = mount(<Menu labeledBy={label} />);

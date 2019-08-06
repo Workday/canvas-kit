@@ -41,8 +41,7 @@ exports[`Menu Snapshots renders a disabled menu item 1`] = `
   outline: none;
 }
 
-.emotion-2:hover .wd-icon-fill,
-.emotion-2 .wd-icon-fill {
+.emotion-2:hover .wd-icon-fill {
   fill: #b9c0c7;
 }
 
@@ -162,18 +161,15 @@ exports[`Menu Snapshots renders a focused menu item 1`] = `
   align-items: center;
   -webkit-transition: background-color 80ms;
   transition: background-color 80ms;
+  background-color: #0875e1;
+  color: #ffffff;
 }
 
 .emotion-2:focus {
   outline: none;
 }
 
-[role="menu"]:focus > .emotion-2 {
-  background-color: #0875e1;
-  color: #ffffff;
-}
-
-[role="menu"]:focus > .emotion-2 span .wd-icon-fill {
+.emotion-2 span .wd-icon-fill {
   fill: #ffffff;
 }
 
@@ -351,18 +347,15 @@ exports[`Menu Snapshots renders a menu with aria attributes 1`] = `
   align-items: center;
   -webkit-transition: background-color 80ms;
   transition: background-color 80ms;
+  background-color: #0875e1;
+  color: #ffffff;
 }
 
 .emotion-2:focus {
   outline: none;
 }
 
-[role="menu"]:focus > .emotion-2 {
-  background-color: #0875e1;
-  color: #ffffff;
-}
-
-[role="menu"]:focus > .emotion-2 span .wd-icon-fill {
+.emotion-2 span .wd-icon-fill {
   fill: #ffffff;
 }
 
@@ -494,18 +487,15 @@ exports[`Menu Snapshots renders a menu with grow=true 1`] = `
   align-items: center;
   -webkit-transition: background-color 80ms;
   transition: background-color 80ms;
+  background-color: #0875e1;
+  color: #ffffff;
 }
 
 .emotion-2:focus {
   outline: none;
 }
 
-[role="menu"]:focus > .emotion-2 {
-  background-color: #0875e1;
-  color: #ffffff;
-}
-
-[role="menu"]:focus > .emotion-2 span .wd-icon-fill {
+.emotion-2 span .wd-icon-fill {
   fill: #ffffff;
 }
 
@@ -771,18 +761,15 @@ exports[`Menu Snapshots renders an menu with one item 1`] = `
   align-items: center;
   -webkit-transition: background-color 80ms;
   transition: background-color 80ms;
+  background-color: #0875e1;
+  color: #ffffff;
 }
 
 .emotion-2:focus {
   outline: none;
 }
 
-[role="menu"]:focus > .emotion-2 {
-  background-color: #0875e1;
-  color: #ffffff;
-}
-
-[role="menu"]:focus > .emotion-2 span .wd-icon-fill {
+.emotion-2 span .wd-icon-fill {
   fill: #ffffff;
 }
 
@@ -921,18 +908,15 @@ exports[`Menu Snapshots renders an menu with two items 1`] = `
   align-items: center;
   -webkit-transition: background-color 80ms;
   transition: background-color 80ms;
+  background-color: #0875e1;
+  color: #ffffff;
 }
 
 .emotion-2:focus {
   outline: none;
 }
 
-[role="menu"]:focus > .emotion-2 {
-  background-color: #0875e1;
-  color: #ffffff;
-}
-
-[role="menu"]:focus > .emotion-2 span .wd-icon-fill {
+.emotion-2 span .wd-icon-fill {
   fill: #ffffff;
 }
 
@@ -1124,18 +1108,15 @@ exports[`Menu Snapshots renders with icon 1`] = `
   align-items: center;
   -webkit-transition: background-color 80ms;
   transition: background-color 80ms;
+  background-color: #0875e1;
+  color: #ffffff;
 }
 
 .emotion-6:focus {
   outline: none;
 }
 
-[role="menu"]:focus > .emotion-6 {
-  background-color: #0875e1;
-  color: #ffffff;
-}
-
-[role="menu"]:focus > .emotion-6 span .wd-icon-fill {
+.emotion-6 span .wd-icon-fill {
   fill: #ffffff;
 }
 
@@ -1189,7 +1170,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
 }
 
 .emotion-1:hover .wd-icon-fill {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-1 .wd-icon-accent {
@@ -1237,7 +1218,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
 }
 
 .emotion-5:hover .wd-icon-fill {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5 .wd-icon-accent {
