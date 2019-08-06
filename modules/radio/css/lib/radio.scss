@@ -44,3 +44,37 @@
 .wdc-form-radio {
   @include wdc-form-radio();
 }
+
+[data-whatinput='keyboard'] .wdc-form-radio:not([diabled]) {
+  &:checked {
+    &:focus {
+      @include wdc-form-radio-checked-focus();
+    }
+  }
+
+  &:focus {
+    @include wdc-form-radio-focus();
+  }
+}
+
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  .wdc-form-radio {
+    &.wdc-form-checked,
+    &:checked {
+      &:focus,
+      &.wdc-form-focus {
+        + .wdc-form-label:before {
+          border-color: $wdc-color-blueberry-500;
+          box-shadow: inset 0 0 0 4px $wdc-color-blueberry-500;
+        }
+      }
+    }
+
+    &:focus {
+      + .wdc-form-label:before {
+        border-color: $wdc-color-licorice-100;
+      }
+    }
+  }
+}

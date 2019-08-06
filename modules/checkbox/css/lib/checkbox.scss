@@ -72,3 +72,43 @@
 .wdc-form-checkbox {
   @include wdc-form-checkbox();
 }
+
+[data-whatinput='keyboard'] .wdc-form-checkbox:not([diabled]) {
+  &:checked {
+    &:focus {
+      @include wdc-form-checkbox-checked-focus();
+    }
+  }
+
+  &:focus {
+    @include wdc-form-checkbox-focus();
+  }
+}
+
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  .wdc-form-checkbox {
+    &.wdc-form-checked,
+    &:checked {
+      &:focus {
+        + .wdc-form-label:before {
+          border-color: $wdc-color-blueberry-500;
+          box-shadow: none;
+        }
+      }
+
+      &.wdc-form-focus {
+        + .wdc-form-label:before {
+          border-color: $wdc-color-soap-100;
+        }
+      }
+    }
+
+    &:focus {
+      + .wdc-form-label:before {
+        border-color: $wdc-color-licorice-100;
+        box-shadow: none;
+      }
+    }
+  }
+}

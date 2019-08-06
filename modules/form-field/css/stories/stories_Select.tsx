@@ -3,6 +3,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from '../README.md';
 import '../index.scss';
+import '@workday/canvas-kit-css-select/index.scss';
 
 storiesOf('CSS/Form Field/Select/Top Label', module)
   .addDecorator(withReadme(README))

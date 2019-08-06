@@ -29,9 +29,9 @@
     margin-left: $wdc-spacing-xxxs;
   }
 
-  &+.wdc-form-textinput,
-  &+.wdc-form-textarea,
-  &+.wdc-form-select {
+  & + .wdc-form-textinput,
+  & + .wdc-form-textarea,
+  & + .wdc-form-select {
     margin-top: $wdc-spacing-xxs;
   }
 }
@@ -72,11 +72,11 @@
     display: flex;
 
     // Case where there's no label on the left
-    &>.wdc-form-field {
+    & > .wdc-form-field {
       margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
     }
 
-    &>.wdc-form-label+.wdc-form-field {
+    & > .wdc-form-label + .wdc-form-field {
       margin-left: 0;
     }
   }
@@ -90,10 +90,13 @@
     margin-bottom: 0;
   }
 
-  .wdc-form-checkbox+.wdc-form-label,
-  .wdc-form-radio+.wdc-form-label {
+  .wdc-form-checkbox + .wdc-form-label,
+  .wdc-form-radio + .wdc-form-label {
     width: auto;
     float: none;
+    margin-top: $wdc-spacing-xxs;
+    margin-right: $wdc-spacing-s;
+    margin-bottom: 0;
 
     &:before,
     &:after {
@@ -101,7 +104,7 @@
     }
   }
 
-  .wdc-form-radio+.wdc-form-label {
+  .wdc-form-radio + .wdc-form-label {
     margin-top: $wdc-spacing-xxs;
   }
 }
