@@ -61,8 +61,7 @@
   width: max-content;
 
   // Fallback for IE11
-  @media screen and (-ms-high-contrast: active),
-  screen and (-ms-high-contrast: none) {
+  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
     width: auto;
   }
 
@@ -79,26 +78,12 @@
     margin-right: $wdc-spacing-xxxs;
   }
 
-  &-right,
-  &-left {
-    margin-top: 8px;
-  }
-
   &-top {
     margin-bottom: $wdc-spacing-xxxs;
   }
 
   &-bottom {
     margin-top: $wdc-spacing-xxxs;
-  }
-
-  &.wdc-tooltip-right,
-  &.wdc-tooltip-left {
-
-    &:before,
-    &:after {
-      top: 50%;
-    }
   }
 
   .wdc-tooltip-title {
@@ -134,16 +119,16 @@
 
     &-left,
     &-right {
-      top: calc(50% - 8px);
+      top: 50%;
       transform: translateY(-50%);
     }
 
     &-right {
-      left: calc(100%);
+      left: 100%;
     }
 
     &-left {
-      right: calc(100%);
+      right: 100%;
     }
 
     &-top,
@@ -158,14 +143,6 @@
 
     &-bottom {
       top: 100%;
-    }
-
-    &-tooltip {
-
-      &.wdc-tooltip-left,
-      &.wdc-tooltip-right {
-        top: -$wdc-spacing-xs;
-      }
     }
   }
 
