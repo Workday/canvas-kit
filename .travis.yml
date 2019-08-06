@@ -27,7 +27,7 @@ jobs:
   - stage: npm publish
     deploy:
       provider: script
-      script: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN && yarn lerna publish from-package --yes --pre-dist-tag prerelease
+      script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish from-package --yes --pre-dist-tag prerelease
       skip_cleanup: true
       on:
         tags: true
