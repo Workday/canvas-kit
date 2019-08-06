@@ -1,0 +1,114 @@
+// Fields
+@mixin wdc-form-field-wrapper() {
+  margin-bottom: $wdc-spacing-s;
+  position: relative;
+
+  .wdc-form-field {
+    position: relative;
+  }
+}
+
+.wdc-form-field-wrapper {
+  @include wdc-form-field-wrapper();
+}
+
+@mixin wdc-form-label() {
+  @include wdc-type-body-2();
+  @include wdc-type-variant-label();
+  display: block;
+}
+
+.wdc-form-label {
+  @include wdc-form-label();
+  margin-bottom: 12px;
+
+  &.wdc-form-label-required:after {
+    content: '*';
+    display: inline-block;
+    color: $wdc-color-peach-500;
+    margin-left: $wdc-spacing-xxxs;
+  }
+
+  & + .wdc-form-textinput,
+  & + .wdc-form-textarea,
+  & + .wdc-form-select {
+    margin-top: $wdc-spacing-xxs;
+  }
+}
+
+// Form Groups
+@mixin wdc-form-group() {
+  .wdc-form-label:first-child {
+    margin-bottom: 12px;
+  }
+
+  .wdc-form-field-wrapper:last-child {
+    margin-bottom: 0;
+  }
+
+  .wdc-form-group-fields {
+    display: inline-block;
+
+    .wdc-form-field {
+      margin-bottom: $wdc-spacing-xs;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .wdc-form-field {
+    margin-bottom: $wdc-spacing-s;
+  }
+}
+
+.wdc-form-group {
+  @include wdc-form-group();
+}
+
+@mixin wdc-form-inline-labels() {
+  .wdc-form-field-wrapper {
+    display: flex;
+
+    // Case where there's no label on the left
+    & > .wdc-form-field {
+      margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
+    }
+
+    & > .wdc-form-label + .wdc-form-field {
+      margin-left: 0;
+    }
+  }
+
+  .wdc-form-label {
+    min-width: $wdc-form-inline-label-width;
+    width: $wdc-form-inline-label-width;
+    float: left;
+    margin-top: $wdc-spacing-xxs;
+    margin-right: $wdc-spacing-s;
+    margin-bottom: 0;
+  }
+
+  .wdc-form-checkbox + .wdc-form-label,
+  .wdc-form-radio + .wdc-form-label {
+    width: auto;
+    float: none;
+    margin-top: $wdc-spacing-xxs;
+    margin-right: $wdc-spacing-s;
+    margin-bottom: 0;
+
+    &:before,
+    &:after {
+      top: $wdc-spacing-xxs - 2;
+    }
+  }
+
+  .wdc-form-radio + .wdc-form-label {
+    margin-top: $wdc-spacing-xxs;
+  }
+}
+
+.wdc-form-inline-labels {
+  @include wdc-form-inline-labels();
+}
