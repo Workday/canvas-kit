@@ -29,7 +29,7 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 
 ```html
 <select class="wdc-form-select" id="select">
-  <option disabled="{true}" selected="{true}">
+  <option disabled selected>
     Select an option
   </option>
   <option>Option 1</option>

@@ -21,14 +21,10 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 @import '~@workday/canvas-kit-css-text-input/index.scss';
 ```
 
-**You must have PostCSS support.** Add the
-[postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
-inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
-
 ## Usage
 
 ```html
-<input type="text" classe="wdc-form-textinput" />
+<input type="text" class="wdc-form-textinput" />
 ```
 
 **Note:** While a base checkbox component is provided in this package, it is **not accessible** when
