@@ -21,18 +21,18 @@
     &.wdc-form-textinput,
     &.wdc-form-select {
       border-color: transparent;
-      box-shadow: 0 0 0 2px $wdc-color-blueberry-500;
+      box-shadow: 0 0 0 2px $wdc-color-common-focus-outline;
     }
 
     &.wdc-form-checkbox + .wdc-form-label:before {
       border-color: $_borderColor;
-      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-500;
+      box-shadow: 0 0 0 2px $wdc-color-input-background, 0 0 0 4px $wdc-color-common-focus-outline;
     }
 
     &.wdc-form-checkbox:checked,
     &.wdc-form-checkbox.wdc-form-checked {
       + .wdc-form-label:before {
-        border-color: $wdc-color-blueberry-500;
+        border-color: $wdc-color-common-focus-outline;
       }
     }
   }
