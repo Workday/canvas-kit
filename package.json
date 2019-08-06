@@ -57,7 +57,7 @@
     "jest-emotion": "^9.2.11",
     "jest-junit": "^6.4.0",
     "lerna": "^3.13.1",
-    "lint-staged": "^7.1.0",
+    "lint-staged": "8.0.5",
     "mkdirp": "^0.5.1",
     "node-fetch": "^2.1.2",
     "node-sass": "^4.12.0",
