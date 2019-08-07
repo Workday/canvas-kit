@@ -6,6 +6,8 @@ cache:
 git:
   depth: 3
 stages:
+- name: pr-previews
+  if: "(branch = master AND type = pull_request) OR branch != master"
 - name: npm publish
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 - name: master storybook
@@ -15,11 +17,13 @@ before_install:
 - export PATH="$HOME/.yarn/bin:$PATH"
 install:
 - yarn install --production=false
-- yarn lint
 - yarn build
-- yarn test
 jobs:
   include:
+  - stage: pr-previews
+    script:
+    - yarn lint
+    - yarn test
   - stage: npm publish
     deploy:
       provider: script
@@ -29,6 +33,8 @@ jobs:
         tags: true
   - stage: master storybook
     script:
+    - yarn lint
+    - yarn test
     - yarn build-storybook
     deploy:
       provider: pages
