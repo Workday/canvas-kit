@@ -308,6 +308,9 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       padding: 0;
       line-height: 0;
       border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
       .wd-icon {
         display: inline-block;

@@ -194,19 +194,19 @@ storiesOf('CSS/Button/Icon Button', module)
         </button>
         <button
           disabled={true}
-          className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-icon-circle-inverse"
+          className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-icon-inverse"
         >
           <SystemIcon icon={activityStreamIcon} />
         </button>
       </div>
       <h3>Small Inverse</h3>
       <div className={blueBackground}>
-        <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-circle-inverse">
+        <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse">
           <SystemIcon icon={activityStreamIcon} />
         </button>
         <button
           disabled={true}
-          className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-circle-inverse"
+          className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse"
         >
           <SystemIcon icon={activityStreamIcon} />
         </button>
