@@ -7,9 +7,9 @@ git:
   depth: 3
 stages:
 - name: pr-previews
-  if: "(branch = master AND type = pull_request) OR branch != master OR NOT branch =~ /^release-.+$/"
+  if: "(branch = master AND type = pull_request) OR branch != master"
 - name: npm publish
-  if: branch = master AND type != pull_request AND tag IS present
+  if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 - name: master storybook
   if: branch = master AND type != pull_request
 before_install:
@@ -23,14 +23,12 @@ install:
 jobs:
   include:
   - stage: pr previews
-    script:
-      - echo $TRAVIS_COMMIT
-      - echo $TRAVIS_COMMIT_RANGE
+    script: echo "TODO"
   - stage: npm publish
     deploy:
-      provider: npm
-      email: "$GITHUB_EMAIL"
-      api_key: "$NPM_TOKEN"
+      provider: script
+      script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish from-package --yes --pre-dist-tag prerelease
+      skip_cleanup: true
       on:
         tags: true
   - stage: master storybook

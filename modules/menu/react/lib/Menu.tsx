@@ -6,7 +6,7 @@ import {Card} from '@workday/canvas-kit-react-card';
 import {commonColors, spacing} from '@workday/canvas-kit-react-core';
 import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
-export interface MenuProps extends GrowthBehavior {
+export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
   children?: React.ReactElement<MenuItemProps> | React.ReactElement<MenuItemProps>[];
   isOpen?: boolean;
   width?: number | string;
@@ -74,7 +74,18 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   }
 
   public render() {
-    const {children, id, isOpen, labeledBy, grow, width, ...otherProps} = this.props;
+    const {
+      children,
+      id,
+      isOpen,
+      labeledBy,
+      grow,
+      width,
+      onSelect,
+      onClose,
+      initialSelectedItem,
+      ...elemProps
+    } = this.props;
     const {selectedItemIndex} = this.state;
     const cardWidth = grow ? '100%' : width;
     return (
@@ -91,7 +102,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           aria-activedescendant={`${id}-${selectedItemIndex}`}
           onKeyDown={this.handleKeyboardShortcuts}
           innerRef={this.menuRef}
-          {...otherProps}
+          {...elemProps}
         >
           {React.Children.map(children, (menuItem: React.ReactElement<MenuItemProps>, index) => {
             const itemId = `${id}-${index}`;
