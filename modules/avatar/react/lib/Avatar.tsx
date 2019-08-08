@@ -16,7 +16,7 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    */
   themeColor: AvatarTheme;
   /**
-   * An AvatarSize enum or number value indicating the size of the avatar
+   * An SystemIconCircleSize enum or number value indicating the size of the avatar
    */
   size: SystemIconCircleSize | number;
   /**
@@ -83,13 +83,13 @@ export default class Avatar extends React.Component<AvatarProps> {
     const background = themeColor === AvatarTheme.Dark ? colors.blueberry400 : colors.soap300;
     return (
       <Container
-        {...elemProps}
         themeColor={themeColor}
         size={size}
         onClick={onClick}
         disabled={onClick ? false : true}
         innerRef={buttonRef}
         aria-label={altText}
+        {...elemProps}
       >
         {url ? (
           <img src={url} alt={altText} />
