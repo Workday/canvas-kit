@@ -13,7 +13,8 @@
 }
 
 @mixin wdc-form-label() {
-  @include wdc-type-body-2();
+  @include wdc-type();
+  @include wdc-type-body();
   @include wdc-type-variant-label();
   display: block;
 }
