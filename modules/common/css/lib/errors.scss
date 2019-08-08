@@ -55,30 +55,18 @@
 }
 
 // Messages
-@mixin wdc-form-validation-message($_color) {
+
+.wdc-form-hint-message {
   @include wdc-type();
   @include wdc-type-body();
   font-size: 13px;
-  margin-top: $wdc-spacing-xxs;
-  strong {
-    color: $_color;
+  margin: $wdc-spacing-xs;
+  margin-top: 0;
+
+  strong,
+  b {
+    font-weight: 500;
   }
-}
-
-@mixin wdc-form-error-message {
-  @include wdc-form-validation-message($wdc-color-error-dark);
-}
-
-.wdc-form-error-message {
-  @include wdc-form-error-message();
-}
-
-@mixin wdc-form-alert-message {
-  @include wdc-form-validation-message($wdc-color-alert-dark);
-}
-
-.wdc-form-alert-message {
-  @include wdc-form-alert-message();
 }
 
 // Form Field Errors
