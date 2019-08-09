@@ -6,8 +6,7 @@ import {css} from 'emotion';
 import './index.scss';
 
 const containerStyle = css({
-  paddingLeft: '32px',
-  paddingTop: '20px',
+  paddingTop: '12px',
 });
 
 storiesOf('CSS/Loading Animations', module)
