@@ -29,6 +29,7 @@
     "scss",
     "sass",
     "workday",
-    "loading-animations"
+    "loading-animations",
+    "loading-dots"
   ]
 }
