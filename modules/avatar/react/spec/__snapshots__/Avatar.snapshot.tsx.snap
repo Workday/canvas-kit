@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Avatar Snapshots renders a large Avatar 1`] = `
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -25,21 +25,21 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
   cursor: default;
 }
 
-.emotion-3 img {
+.emotion-2 img {
   width: 100%;
   height: 100%;
 }
 
-.emotion-3:not([disabled]):focus {
+.emotion-2:not([disabled]):focus {
   outline: none;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
-[data-whatinput='mouse'] .emotion-3:focus,
-[data-whatinput='touch'] .emotion-3:focus,
-[data-whatinput='pointer'] .emotion-3:focus {
+[data-whatinput='mouse'] .emotion-2:focus,
+[data-whatinput='touch'] .emotion-2:focus,
+[data-whatinput='pointer'] .emotion-2:focus {
   outline: none;
   box-shadow: none;
   -webkit-animation: none;
@@ -113,12 +113,12 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
 
 <button
   aria-label="Avatar"
-  className="emotion-3 emotion-4"
+  className="emotion-2 emotion-3"
   disabled={true}
   size={64}
 >
   <div
-    className="emotion-1 emotion-2"
+    className="emotion-1"
     size={64}
   >
     <span
@@ -193,7 +193,7 @@ exports[`Avatar Snapshots renders a large avatar with a photo 1`] = `
 `;
 
 exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -217,21 +217,21 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
   cursor: default;
 }
 
-.emotion-3 img {
+.emotion-2 img {
   width: 100%;
   height: 100%;
 }
 
-.emotion-3:not([disabled]):focus {
+.emotion-2:not([disabled]):focus {
   outline: none;
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
-[data-whatinput='mouse'] .emotion-3:focus,
-[data-whatinput='touch'] .emotion-3:focus,
-[data-whatinput='pointer'] .emotion-3:focus {
+[data-whatinput='mouse'] .emotion-2:focus,
+[data-whatinput='touch'] .emotion-2:focus,
+[data-whatinput='pointer'] .emotion-2:focus {
   outline: none;
   box-shadow: none;
   -webkit-animation: none;
@@ -305,12 +305,12 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
 
 <button
   aria-label="Avatar"
-  className="emotion-3 emotion-4"
+  className="emotion-2 emotion-3"
   disabled={true}
   size={64}
 >
   <div
-    className="emotion-1 emotion-2"
+    className="emotion-1"
     size={64}
   >
     <span
@@ -444,7 +444,7 @@ exports[`Avatar Snapshots renders an avatar with an aria label and an alt text 1
 `;
 
 exports[`Avatar Snapshots renders as expected 1`] = `
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -468,21 +468,21 @@ exports[`Avatar Snapshots renders as expected 1`] = `
   cursor: default;
 }
 
-.emotion-3 img {
+.emotion-2 img {
   width: 100%;
   height: 100%;
 }
 
-.emotion-3:not([disabled]):focus {
+.emotion-2:not([disabled]):focus {
   outline: none;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
-[data-whatinput='mouse'] .emotion-3:focus,
-[data-whatinput='touch'] .emotion-3:focus,
-[data-whatinput='pointer'] .emotion-3:focus {
+[data-whatinput='mouse'] .emotion-2:focus,
+[data-whatinput='touch'] .emotion-2:focus,
+[data-whatinput='pointer'] .emotion-2:focus {
   outline: none;
   box-shadow: none;
   -webkit-animation: none;
@@ -556,12 +556,12 @@ exports[`Avatar Snapshots renders as expected 1`] = `
 
 <button
   aria-label="Avatar"
-  className="emotion-3 emotion-4"
+  className="emotion-2 emotion-3"
   disabled={true}
   size={32}
 >
   <div
-    className="emotion-1 emotion-2"
+    className="emotion-1"
     size={32}
   >
     <span
