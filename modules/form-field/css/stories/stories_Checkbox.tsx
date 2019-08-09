@@ -5,7 +5,7 @@ import README from '../README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-checkbox/index.scss';
 
-storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox', module)
+storiesOf('CSS/Form Field/Checkbox/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -51,7 +51,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox', module)
             <label htmlFor="checkbox-alert" className="wdc-form-label">
               Checkbox option
             </label>
-            <div className="wdc-form-alert-message">
+            <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Alert message
             </div>
           </div>
@@ -73,7 +73,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox', module)
             <label htmlFor="checkbox-error" className="wdc-form-label">
               Checkbox option
             </label>
-            <div className="wdc-form-error-message">
+            <div className="wdc-form-hint-message">
               <strong>Error:</strong> Error message
             </div>
           </div>
@@ -128,7 +128,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
             <label htmlFor="checkbox-alert" className="wdc-form-label">
               Checkbox option
             </label>
-            <div className="wdc-form-alert-message">
+            <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Alert message
             </div>
           </div>
@@ -150,7 +150,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
             <label htmlFor="checkbox-error" className="wdc-form-label">
               Checkbox option
             </label>
-            <div className="wdc-form-error-message">
+            <div className="wdc-form-hint-message">
               <strong>Error:</strong> Error message
             </div>
           </div>
@@ -224,7 +224,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
             </div>
           </div>
 
-          <div className="wdc-form-alert-message">
+          <div className="wdc-form-hint-message">
             <strong>Alert:</strong> Alert message
           </div>
         </div>
@@ -262,7 +262,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
             </div>
           </div>
 
-          <div className="wdc-form-error-message">
+          <div className="wdc-form-hint-message">
             <strong>Error:</strong> Error message
           </div>
         </div>
@@ -335,7 +335,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
             </div>
           </div>
 
-          <div className="wdc-form-alert-message">
+          <div className="wdc-form-hint-message">
             <strong>Alert:</strong> Alert message
           </div>
         </div>
@@ -373,7 +373,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
             </div>
           </div>
 
-          <div className="wdc-form-error-message">
+          <div className="wdc-form-hint-message">
             <strong>Error:</strong> Error message
           </div>
         </div>

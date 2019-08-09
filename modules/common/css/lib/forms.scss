@@ -37,8 +37,8 @@
 // Common styles for checkboxes and radios
 @mixin wdc-form-common-control() {
   + .wdc-form-label {
-    margin-left: 8px;
-    display: inline;
+    padding-left: $wdc-spacing-xxxs;
+    display: inline-block;
 
     &:before,
     &:after {
@@ -59,7 +59,7 @@
   }
 
   & + .wdc-form-label {
-    @include wdc-type-body-2();
+    @include wdc-type-body();
     display: inline-block;
     margin: 0 0 0 $wdc-spacing-xxs;
     top: -4px;

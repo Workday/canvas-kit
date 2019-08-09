@@ -21,7 +21,7 @@
 
 .wdc-form-label {
   @include wdc-form-label();
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 
   &.wdc-form-label-required:after {
     content: '*';
