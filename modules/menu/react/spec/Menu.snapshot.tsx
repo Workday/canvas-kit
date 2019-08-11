@@ -31,7 +31,7 @@ describe('Menu Snapshots', () => {
   test('renders with icon', () => {
     const component = renderer.create(
       <Menu id="myId">
-        <MenuItem label="myLabel" icon={activityStreamIcon} secondaryIcon={activityStreamIcon}>
+        <MenuItem aria-label="myLabel" icon={activityStreamIcon} secondaryIcon={activityStreamIcon}>
           Foo
         </MenuItem>
       </Menu>
@@ -57,7 +57,7 @@ describe('Menu Snapshots', () => {
   test('renders a menu with aria attributes', () => {
     const component = renderer.create(
       <Menu id="myId" labeledBy="myLabel">
-        <MenuItem label="aria-label">Foo</MenuItem>
+        <MenuItem aria-label="aria-label">Foo</MenuItem>
       </Menu>
     );
     expect(component).toMatchSnapshot();

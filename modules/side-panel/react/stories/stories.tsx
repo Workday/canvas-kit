@@ -146,7 +146,7 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
   };
 
   private handleBreakpoint = (open: boolean) => {
-    console.warn('called');
+    console.warn('handle breakpoint called');
     this.setState({
       open: open,
     });

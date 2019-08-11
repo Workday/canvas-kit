@@ -26,6 +26,7 @@ export enum TextAreaResizeDirection {
 const TextAreaContainer = styled('textarea')<TextAreaProps>(
   {
     ...type.body,
+    border: `1px solid ${inputColors.border}`,
     display: 'block',
     backgroundColor: inputColors.background,
     borderRadius: 4,

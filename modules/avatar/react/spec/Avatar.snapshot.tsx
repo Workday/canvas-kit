@@ -32,4 +32,15 @@ describe('Avatar Snapshots', () => {
     );
     expect(component).toMatchSnapshot();
   });
+  test('renders an avatar with an aria label and an alt text', () => {
+    const component = renderer.create(
+      <Avatar
+        altText="my image"
+        aria-label="my avatar label"
+        size={Avatar.Size.xl}
+        url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
 });
