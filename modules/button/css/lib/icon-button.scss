@@ -23,8 +23,8 @@
       width: $wdc-btn-icon-size-m;
     }
 
-    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-    &:hover:not([disabled]):not(.wdc-btn-disabled) {
+    &.wdc-btn-hover:not([disabled]),
+    &:hover:not([disabled]) {
       background-color: $wdc-btn-bg-icon-filled-hover;
 
       .wd-icon-accent,
@@ -33,8 +33,8 @@
       }
     }
 
-    &.wdc-btn-active:not([disabled]):not(.wdc-btn-disabled),
-    &:active:not([disabled]):not(.wdc-btn-disabled) {
+    &.wdc-btn-active:not([disabled]),
+    &:active:not([disabled]) {
       background-color: $wdc-btn-bg-icon-filled-active;
 
       .wd-icon-accent,
@@ -42,8 +42,8 @@
         fill: $wdc-btn-color-icon-active;
       }
 
-      &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-      &:hover:not([disabled]):not(.wdc-btn-disabled) {
+      &.wdc-btn-hover:not([disabled]),
+      &:hover:not([disabled]) {
         background-color: $wdc-btn-bg-icon-filled-active;
 
         .wd-icon-accent,
@@ -53,7 +53,7 @@
       }
     }
 
-    &.wdc-btn-disabled,
+    &,
     &:disabled {
       background-color: $wdc-btn-bg-icon-filled-disabled;
 
@@ -67,7 +67,7 @@
     &-circle {
       background-color: $wdc-btn-bg-icon;
 
-      &:not([disabled]):not(.wdc-btn-disabled) {
+      &:not([disabled]) {
         &.wdc-btn-hover,
         &:hover {
           background-color: $wdc-btn-bg-icon-hover;
@@ -94,7 +94,7 @@
         }
       }
 
-      &.wdc-btn-disabled,
+      &,
       &:disabled {
         background-color: $wdc-btn-bg-icon-disabled;
 
@@ -112,8 +112,8 @@
         fill: $wdc-btn-bg-icon;
       }
 
-      &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-      &:hover:not([disabled]):not(.wdc-btn-disabled) {
+      &.wdc-btn-hover:not([disabled]),
+      &:hover:not([disabled]) {
         background-color: rgba(0, 0, 0, 0.2);
         .wd-icon-accent,
         .wd-icon-fill {
@@ -121,8 +121,8 @@
         }
       }
 
-      &.wdc-btn-active:not([disabled]):not(.wdc-btn-disabled),
-      &:active:not([disabled]):not(.wdc-btn-disabled) {
+      &.wdc-btn-active:not([disabled]),
+      &:active:not([disabled]) {
         background-color: rgba(0, 0, 0, 0.2);
 
         .wd-icon-accent,
@@ -130,8 +130,8 @@
           fill: $wdc-btn-bg-icon;
         }
 
-        &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-        &:hover:not([disabled]):not(.wdc-btn-disabled) {
+        &.wdc-btn-hover:not([disabled]),
+        &:hover:not([disabled]) {
           background-color: rgba(0, 0, 0, 0.4);
 
           .wd-icon-accent,
@@ -141,7 +141,7 @@
         }
       }
 
-      &.wdc-btn-disabled,
+      &,
       &:disabled {
         background-color: transparent;
 
@@ -151,7 +151,7 @@
         }
       }
 
-      &:not([disabled]):not(.wdc-btn-disabled) {
+      &:not([disabled]) {
         &.wdc-btn-hover,
         &:hover {
           background-color: rgba(0, 0, 0, 0.2);
@@ -185,7 +185,7 @@
 
     border-radius: 999;
 
-    &:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([disabled]) {
       &.wdc-btn-active,
       &:active {
         box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
@@ -201,7 +201,7 @@
     &-circle-filled {
       border-radius: 999;
 
-      &:not([disabled]):not(.wdc-btn-disabled) {
+      &:not([disabled]) {
         &.wdc-btn-active,
         &:active {
           box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;

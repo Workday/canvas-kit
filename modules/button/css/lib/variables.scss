@@ -1,6 +1,5 @@
 $_wdc-btn-icons-path: $wdc-system-icons-path !default;
 
-$wdc-btn-font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 $wdc-btn-font-weight: 500;
 
 $wdc-btn-icon-size-s: $wdc-spacing-s;
@@ -19,14 +18,11 @@ $wdc-btn-max-width-m: 200px;
 $wdc-btn-min-width-s: 56px;
 $wdc-btn-max-width-s: 120px;
 $wdc-btn-width-icon: $wdc-spacing-l;
-$wdc-btn-width-icon-rounded: 56px;
 
 $wdc-btn-padding-l: 0 $wdc-spacing-l;
 $wdc-btn-padding-m: 0 $wdc-spacing-m;
 $wdc-btn-padding-s: 0 $wdc-spacing-xxs;
 $wdc-btn-padding-icon: $wdc-spacing-xxxs;
-$wdc-btn-padding-icon-rounded: (($wdc-btn-height-l - $wdc-btn-icon-size-m)/2)
-  (($wdc-btn-width-icon-rounded - $wdc-btn-icon-size-m)/2);
 
 $wdc-btn-border-radius: $wdc-spacing-xl;
 $wdc-btn-border-radius-icon: $wdc-spacing-xxxs;

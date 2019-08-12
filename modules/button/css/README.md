@@ -1,6 +1,6 @@
 # Canvas Kit Button
 
-Button highlight actions available on a screen with a click or tap.
+Clickable button elements that extend the native `<button>` element with Canvas styling.
 
 ## Installation
 
@@ -59,9 +59,8 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
   - Hover
   - Focus
   - Disabled
-- [Types](#types)
+- [Variants](#variants)
   - Icon Button
-  - Rounded Button
   - Dropdown Button
   - Split Button
 
@@ -105,6 +104,20 @@ Most common button with default background color. Default buttons are available 
 <button class="wdc-btn">Default</button>
 <button class="wdc-btn wdc-btn-medium">Default</button>
 <button class="wdc-btn wdc-btn-small">Default</button>
+```
+
+### Filled
+
+Filled buttons can be squared or circle. These buttons should be used with icons and provide a solid
+color background.
+
+```html
+<button className="wdc-btn wdc-btn-medium wdc-btn-icon-square-filled">
+  <SystemIcon icon="{activityStreamIcon}" />
+</button>
+<button className="wdc-btn wdc-btn-small wdc-btn-icon-circle-filled">
+  <SystemIcon icon="{activityStreamIcon}" />
+</button>
 ```
 
 ### Primary
@@ -176,23 +189,6 @@ background: `wdc-btn-icon-square-filled` and `wdc-btn-icon-circle-filled`.
 </button>
 ```
 
-### Rounded Button
-
-> This button is similar to the default button but has a fixed width. Use this button when placing
-> an icon button inline with a group of buttons. Often used to style the Overflow Button used in
-> button rows with more than four items.
-
-Use by adding `.wdc-btn-icon-rounded`. A Workday icon should be used as the `<button>`'s content.
-
-```html
-<button class="wdc-btn wdc-btn-primary">Primary</button>
-<button class="wdc-btn">Button</button>
-<button class="wdc-btn">Button</button>
-<button class="wdc-btn wdc-btn-icon-rounded">
-  <svg ...>
-</button>
-```
-
 ### Dropdown Button
 
 > Use this button to display a menu of related actions.
@@ -234,6 +230,9 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 </div>
 ```
 
-## Accessibility
+## Accessibility Notes
+
+> The content of a button is not always clear to the user. In order to better convey what the icon
+> represents, the Icon Button should be initialized with `title` and `aria-label` attributes.
 
 See [canvas-kit-core](../../core/css#accessibility) for accessibility guidelines.

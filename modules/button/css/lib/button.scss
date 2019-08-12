@@ -11,7 +11,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   content: '';
   background-image: $_icon;
   background-position: center;
-  background-size: 16px;
+  background-size: $wdc-spacing-s;
   background-repeat: no-repeat;
 }
 
@@ -24,7 +24,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   @include wdc-type-variant-btn();
   display: inline-block;
   text-decoration: none;
-  font-family: $wdc-btn-font-family;
+  font-family: $wdc-font-family;
   font-weight: $wdc-btn-font-weight;
   min-width: $wdc-btn-min-width-l;
   max-width: $wdc-btn-max-width-l;
@@ -34,7 +34,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   border: 1px solid $wdc-btn-border;
   color: $wdc-btn-color;
   border-radius: $wdc-btn-border-radius;
-  transition: all 120ms linear;
+  transition: all 120ms, box-shadow 100ms;
   text-align: center;
   font-size: 14px;
   cursor: pointer;
@@ -69,7 +69,6 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     &:hover {
       border-color: $wdc-btn-border-hover;
       background-color: $wdc-btn-bg-hover;
-      transition-duration: 40ms;
 
       .wd-icon-accent,
       .wd-icon-fill {
@@ -125,8 +124,8 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       margin-left: $wdc-spacing-xxs;
       line-height: 0;
       float: right;
-      height: 16px;
-      width: 16px;
+      height: $wdc-spacing-s;
+      width: $wdc-spacing-s;
     }
 
     &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled):after,
@@ -152,7 +151,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 
   &.wdc-btn-small {
     height: $wdc-btn-height-s;
-    line-height: 16px;
+    line-height: $wdc-spacing-s;
     font-size: 10px;
     padding: $wdc-btn-padding-s;
     position: relative;
@@ -278,20 +277,6 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       color: $wdc-btn-color-delete-disabled;
       background-color: $wdc-btn-bg-delete-disabled;
       border-color: $wdc-btn-border-delete-disabled;
-    }
-  }
-
-  &.wdc-btn-icon-rounded {
-    min-width: auto;
-    max-width: auto;
-    width: $wdc-btn-width-icon-rounded;
-    padding: 0;
-
-    .wd-icon {
-      display: inline-block;
-      vertical-align: middle;
-      height: $wdc-btn-icon-size-m;
-      width: $wdc-btn-icon-size-m;
     }
   }
 
