@@ -25,7 +25,19 @@ import Banner from '@workday/canvas-kit-react-banner';
 
 ## Static Properties
 
-> None
+#### `Theme: BannerTheme`
+
+```tsx
+<Banner theme={Banner.Theme.Error} label="3 errors" />
+```
+
+---
+
+#### `Variant: BannerVariant`
+
+```tsx
+<Banner variant={Banner.Variant.Sticky} label="3 errors" />
+```
 
 ## Component Props
 
