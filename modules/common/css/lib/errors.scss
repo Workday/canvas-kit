@@ -18,7 +18,7 @@
     box-shadow: inset 0 0 0 1px $_borderColor;
 
     @if ($_type=='alert') {
-      border-color: black;
+      border-color: $wdc-color-alert-dark;
       box-shadow: inset 0 0 0 2px $_borderColor;
     }
   }
@@ -34,18 +34,37 @@
     &.wdc-form-textinput,
     &.wdc-form-select {
       border-color: $_borderColor;
+
+      @if ($_type=='alert') {
+        border-color: $wdc-color-alert-dark;
+        box-shadow: inset 0 0 0 2px $_borderColor;
+      }
     }
   }
 
-  &.wdc-form-focus,
-  &:focus {
+  &.wdc-form-focus:not([disabled]):not(.wdc-form-disabled),
+  &:focus:not([disabled]):not(.wdc-form-disabled) {
 
     &.wdc-form-textarea,
     &.wdc-form-textinput,
     &.wdc-form-select {
-      border-color: transparent;
-      box-shadow: 0 0 0 2px $wdc-color-input-background,
-        0 0 0 4px $wdc-color-common-focus-outline;
+      outline: none;
+      border-color: $_borderColor;
+
+      @if ($_type=='alert') {
+        border-color: $wdc-color-alert-dark;
+        box-shadow: inset 0 0 0 2px $_borderColor;
+      }
+
+      &.wdc-form-error {
+        box-shadow: inset 0 0 0 1px $_borderColor, 0 0 0 2px $wdc-color-input-background,
+          0 0 0 4px $wdc-color-common-focus-outline;
+      }
+
+      &.wdc-form-alert {
+        box-shadow: inset 0 0 0 2px $_borderColor, 0 0 0 2px $wdc-color-input-background,
+          0 0 0 4px $wdc-color-common-focus-outline;
+      }
     }
 
     &.wdc-form-checkbox+.wdc-form-label:before {
@@ -84,6 +103,7 @@
   @include wdc-type();
   @include wdc-type-body();
   font-size: 13px;
+  margin-top: $wdc-spacing-xxs;
 
   strong,
   b {

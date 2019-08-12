@@ -36,6 +36,19 @@
   &:focus:not([disabled]) {
     @include wdc-form-focus();
   }
+
+  &:disabled,
+  &.wdc-form-disabled {
+    background: $wdc-color-soap-100;
+    border-color: $wdc-color-input-disabled-border;
+    pointer-events: none;
+
+    &::placeholder {
+      /* WebKit, Blink, Edge */
+      color: $wdc-color-licorice-100;
+    }
+
+  }
 }
 
 // Common styles for checkboxes and radios
