@@ -8,7 +8,7 @@
   }
 
   @else if ($_type=='alert') {
-    $_borderColor: $wdc-color-alert;
+    $_borderColor: $wdc-color-alert-light;
   }
 
   &.wdc-form-textarea,
@@ -114,51 +114,51 @@
 // Form Field Errors
 @svg-load errorIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-circle.svg) {
   .wd-icon-fill {
-    fill: none;
+    fill: $wdc-color-error;
   }
 
   .wd-icon-accent {
-    fill: $wdc-color-french-vanilla-100;
+    fill: $wdc-color-error;
   }
 
   .wd-icon-background {
-    fill: $wdc-color-error;
+    fill: $wdc-color-french-vanilla-100;
   }
 }
 
 @svg-load alertIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-triangle.svg) {
-  width: 30;
-  height: 30;
+
 
   .wd-icon-fill {
-    fill: none;
+    fill: $wdc-color-alert;
   }
 
   .wd-icon-accent {
-    fill: $wdc-color-french-vanilla-100;
+    fill: $wdc-color-alert;
   }
 
   .wd-icon-background {
-    fill: $wdc-color-alert;
+    fill: $wdc-color-french-vanilla-100;
   }
 }
 
 @mixin wdc-form-field-validation($_icon, $_borderColor) {
-  $_wdc-form-error-icon-top: 6px;
+  $_wdc-form-error-icon-top: 8px;
   $_wdc-form-error-icon-right: ($wdc-form-error-icon-size + $wdc-form-error-spacing);
 
   .wdc-form-field,
   &.wdc-form-group-fields {
     position: relative;
 
-    &:after {
-      position: relative;
+    &::after {
+      position: absolute;
       top: $_wdc-form-error-icon-top;
-      right: $_wdc-form-error-icon-right;
+      left: 280-$_wdc-form-error-icon-right;
       content: '';
       width: $wdc-form-error-icon-size;
       height: $wdc-form-error-icon-size;
       background: svg-inline($_icon) center no-repeat;
+      pointer-events: none;
     }
   }
 
@@ -231,8 +231,8 @@
   .wdc-form-group-fields {
     margin-bottom: $wdc-spacing-m;
 
-    &+.wdc-form-alert-message,
-    &+.wdc-form-error-message {
+    &+.wdc-form-hint-message,
+    &+.wdc-form-hint-message {
       position: absolute;
       bottom: 0;
       left: $wdc-form-inline-label-width + $wdc-spacing-s;

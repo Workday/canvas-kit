@@ -116,7 +116,7 @@ Error styling is available as both classes and mixins. Using the class is prefer
     <label class="wdc-form-label">Input Label</label>
     <div class="wdc-form-field">
       <input type="text" class="wdc-form-textinput wdc-form-error" />
-      <div class="wdc-form-error-message"><strong>Error:</strong> Error message</div>
+      <div class="wdc-form-hint-message"><strong>Error:</strong> Error message</div>
     </div>
   </div>
 </div>
@@ -125,18 +125,18 @@ Error styling is available as both classes and mixins. Using the class is prefer
 ### Form Fields
 
 Use `.wdc-form-field-error` for errors and `.wdc-form-field-alert` for alerts. Applying error and
-alert styling will display an icon on the left next to the input.
+alert styling will display an icon on the right inside the input.
 
 **Messages**  
-Add messages to errors and alerts by wrapping your message with `.wdc-form-error-message` or
-`.wdc-form-alert-message`. Using `strong` will bolden text with the respective error/alert color.
+Add messages to errors and alerts by wrapping your message with `.wdc-form-hint-message` or
+`.wdc-form-hint-message`. Using `strong` will bolden text with the respective error/alert color.
 
 Place the message element after the form controls.
 
 ```html
-<div class="wdc-form-error-message"><strong>Error:</strong> Error message</div>
+<div class="wdc-form-hint-message"><strong>Error:</strong> Error message</div>
 
-<div class="wdc-form-alert-message"><strong>Alert:</strong> Alert message</div>
+<div class="wdc-form-hint-message"><strong>Alert:</strong> Alert message</div>
 ```
 
 ### Text Input
@@ -149,7 +149,7 @@ Use `.wdc-form-error`/`.wdc-form-alert` with `.wdc-form-textinput`.
     <label class="wdc-form-label">Input Label</label>
     <div class="wdc-form-field">
       <input type="text" class="wdc-form-textinput wdc-form-error" />
-      <div class="wdc-form-error-message"><strong>Error:</strong> Error message</div>
+      <div class="wdc-form-hint-message"><strong>Error:</strong> Error message</div>
     </div>
   </div>
 </div>

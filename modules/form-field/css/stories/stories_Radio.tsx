@@ -47,7 +47,7 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio', module)
             <label htmlFor="radio-alert" className="wdc-form-label">
               Radio option
             </label>
-            <div className="wdc-form-alert-message">
+            <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Alert message
             </div>
           </div>
@@ -59,13 +59,13 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio', module)
     <div className="story">
       <div className="wdc-form">
         <div className="wdc-form-field-wrapper wdc-form-field-error wdc-form-field-error-inline">
-          <label className="wdc-form-label">Label</label>
+          <label className="wdc-form-label">Labe l</label>
           <div className="wdc-form-field">
             <input type="radio" className="wdc-form-radio wdc-form-error" id="radio-error" />
             <label htmlFor="radio-error" className="wdc-form-label">
               Radio option
             </label>
-            <div className="wdc-form-error-message">
+            <div className="wdc-form-hint-message">
               <strong>Error:</strong> Error message
             </div>
           </div>
@@ -116,7 +116,7 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio', module)
             <label htmlFor="radio-alert" className="wdc-form-label">
               Radio option
             </label>
-            <div className="wdc-form-alert-message">
+            <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Alert message
             </div>
           </div>
@@ -134,7 +134,7 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio', module)
             <label htmlFor="radio-error" className="wdc-form-label">
               Radio option
             </label>
-            <div className="wdc-form-error-message">
+            <div className="wdc-form-hint-message">
               <strong>Error:</strong> Error message
             </div>
           </div>
@@ -222,7 +222,7 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio Group', module)
             </div>
           </div>
 
-          <div className="wdc-form-alert-message">
+          <div className="wdc-form-hint-message">
             <strong>Alert:</strong> Alert message
           </div>
         </div>
@@ -266,7 +266,7 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio Group', module)
             </div>
           </div>
 
-          <div className="wdc-form-error-message">
+          <div className="wdc-form-hint-message">
             <strong>Error:</strong> Error message
           </div>
         </div>
@@ -353,7 +353,7 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
             </div>
           </div>
 
-          <div className="wdc-form-alert-message">
+          <div className="wdc-form-hint-message">
             <strong>Alert:</strong> Alert message
           </div>
         </div>
@@ -397,7 +397,7 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
             </div>
           </div>
 
-          <div className="wdc-form-error-message">
+          <div className="wdc-form-hint-message">
             <strong>Error:</strong> Error message
           </div>
         </div>
