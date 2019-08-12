@@ -1,10 +1,10 @@
 $_wdc-btn-caret-down-icon: svg-load(
   '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
-  fill=$wdc-btn-color-icon
+  fill=$wdc-btn-icon-color
 );
 $_wdc-btn-caret-down-icon-hover: svg-load(
   '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
-  fill=$wdc-btn-color-icon-hover
+  fill=$wdc-btn-icon-hover-color
 );
 
 @mixin wdc-btn-icon-inline($_icon) {
@@ -54,7 +54,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 
   .wd-icon-accent,
   .wd-icon-fill {
-    fill: $wdc-btn-color-icon;
+    fill: $wdc-btn-icon-color;
   }
 
   .wdc-btn-icon-inline {
@@ -72,7 +72,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-color-icon-hover;
+        fill: $wdc-btn-icon-hover-color;
       }
     }
 

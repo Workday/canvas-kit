@@ -7,8 +7,8 @@
   &-inverse {
     min-width: auto;
     max-width: auto;
-    height: $wdc-btn-height-icon;
-    width: $wdc-btn-width-icon;
+    height: $wdc-btn-icon-height;
+    width: $wdc-btn-icon-width;
     padding: 0;
     line-height: 0;
     border: none;
@@ -25,82 +25,80 @@
 
     &.wdc-btn-hover:not([disabled]),
     &:hover:not([disabled]) {
-      background-color: $wdc-btn-bg-icon-filled-hover;
+      background-color: $wdc-btn-icon-filled-hover-bg;
 
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-color-icon-hover;
+        fill: $wdc-btn-icon-hover-color;
       }
     }
 
     &.wdc-btn-active:not([disabled]),
     &:active:not([disabled]) {
-      background-color: $wdc-btn-bg-icon-filled-active;
+      background-color: $wdc-btn-icon-filled-active-bg;
 
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-color-icon-active;
+        fill: $wdc-btn-icon-active-color;
       }
 
       &.wdc-btn-hover:not([disabled]),
       &:hover:not([disabled]) {
-        background-color: $wdc-btn-bg-icon-filled-active;
+        background-color: $wdc-btn-icon-filled-active-bg;
 
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-color-icon-active;
+          fill: $wdc-btn-icon-active-color;
         }
       }
     }
 
-    &,
     &:disabled {
-      background-color: $wdc-btn-bg-icon-filled-disabled;
+      background-color: $wdc-btn-icon-filled-disabled-bg;
 
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-color-icon-disabled;
+        fill: $wdc-btn-icon-disabled-color;
       }
     }
 
     &-square,
     &-circle {
-      background-color: $wdc-btn-bg-icon;
+      background-color: $wdc-btn-icon-bg;
 
       &:not([disabled]) {
         &.wdc-btn-hover,
         &:hover {
-          background-color: $wdc-btn-bg-icon-hover;
+          background-color: $wdc-btn-icon-hover-bg;
         }
 
         &.wdc-btn-active,
         &:active {
-          background-color: $wdc-btn-bg-icon-active;
+          background-color: $wdc-btn-icon-active-bg;
         }
 
         &:focus,
         &.wdc-btn-focus {
-          background-color: $wdc-btn-bg-icon-focus;
+          background-color: $wdc-btn-icon-focus-bg;
 
           &.wdc-btn-hover,
           &:hover {
-            background-color: $wdc-btn-bg-icon-hover;
+            background-color: $wdc-btn-icon-hover-bg;
 
             &.wdc-btn-active,
             &:active {
-              background-color: $wdc-btn-bg-icon-active;
+              background-color: $wdc-btn-icon-active-bg;
             }
           }
         }
       }
 
-      &,
       &:disabled {
-        background-color: $wdc-btn-bg-icon-disabled;
+        background-color: $wdc-btn-icon-disabled-bg;
 
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-color-icon-disabled;
+          fill: $wdc-btn-icon-disabled-color;
         }
       }
     }
@@ -109,57 +107,56 @@
       background-color: transparent;
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-bg-icon;
+        fill: $wdc-btn-icon-inverse;
       }
 
       &.wdc-btn-hover:not([disabled]),
       &:hover:not([disabled]) {
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: $wdc-btn-icon-inverse-hover;
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-bg-icon;
+          fill: $wdc-btn-icon-inverse;
         }
       }
 
       &.wdc-btn-active:not([disabled]),
       &:active:not([disabled]) {
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: $wdc-btn-icon-inverse-hover;
 
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-bg-icon;
+          fill: $wdc-btn-icon-inverse;
         }
 
         &.wdc-btn-hover:not([disabled]),
         &:hover:not([disabled]) {
-          background-color: rgba(0, 0, 0, 0.4);
+          background-color: $wdc-btn-icon-inverse-active-hover;
 
           .wd-icon-accent,
           .wd-icon-fill {
-            fill: $wdc-btn-bg-icon;
+            fill: $wdc-btn-icon-inverse;
           }
         }
       }
 
-      &,
       &:disabled {
         background-color: transparent;
 
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-bg-icon-disabled;
+          fill: $wdc-btn-icon-inverse-disabled;
         }
       }
 
       &:not([disabled]) {
         &.wdc-btn-hover,
         &:hover {
-          background-color: rgba(0, 0, 0, 0.2);
+          background-color: $wdc-btn-icon-inverse-hover;
         }
 
         &.wdc-btn-active,
         &:active {
-          background-color: rgba(0, 0, 0, 0.2);
+          background-color: $wdc-btn-icon-inverse-hover;
         }
 
         &:focus,
@@ -168,11 +165,11 @@
 
           &.wdc-btn-hover,
           &:hover {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: $wdc-btn-icon-inverse-hover;
           }
           &.wdc-btn-active,
           &:active {
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: $wdc-btn-icon-inverse-active-hover;
           }
         }
       }
