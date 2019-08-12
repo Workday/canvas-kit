@@ -14,7 +14,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {Header} from '@workday/canvas-kit-react-header';
 import {beta_Button as Button, IconButton, ButtonSizes} from '@workday/canvas-kit-react-button';
 import {Avatar} from '@workday/canvas-kit-react-avatar';
-import SidePanel, {SidePanelOpenDirection, SidePanelBackgroundColor} from '..';
+import SidePanel from '..';
 
 interface SidePanelState {
   open: boolean;
@@ -58,10 +58,10 @@ const AddButton = styled(IconButton)({
 // SidePanel Open Direction Knob
 const label = 'Open Direction';
 const options = {
-  left: SidePanelOpenDirection.Left,
-  right: SidePanelOpenDirection.Right,
+  left: SidePanel.OpenDirection.Left,
+  right: SidePanel.OpenDirection.Right,
 };
-const defaultValue = SidePanelOpenDirection.Left;
+const defaultValue = SidePanel.OpenDirection.Left;
 
 // SidePanel Breakpoint Knob
 const breakpointLabel = 'Breakpoint';
@@ -74,11 +74,11 @@ const openWidthDefaultValue = 300;
 // SidePanel Open Background Color
 const openBackgroundColorLabel = 'Open Background Color';
 const openBackgroundColorOptions = {
-  white: SidePanelBackgroundColor.White,
-  Gray: SidePanelBackgroundColor.Gray,
-  transparent: SidePanelBackgroundColor.Transparent,
+  white: SidePanel.BackgroundColor.White,
+  Gray: SidePanel.BackgroundColor.Gray,
+  transparent: SidePanel.BackgroundColor.Transparent,
 };
-const openBackgroundColorDefault = SidePanelBackgroundColor.Gray;
+const openBackgroundColorDefault = SidePanel.BackgroundColor.Gray;
 
 class SidePanelWrapper extends React.Component<{}, SidePanelState> {
   public state = {
@@ -160,7 +160,7 @@ storiesOf('Side Panel', module)
     <div className="story">
       <div style={{height: '67vh', position: 'relative'}}>
         <SidePanel
-          sidePanelBackgroundColor={SidePanelBackgroundColor.Gray}
+          sidePanelBackgroundColor={SidePanel.BackgroundColor.Gray}
           onToggleClick={() => console.warn('clicked')}
           header={'Side Panel Header'}
           open={true}
