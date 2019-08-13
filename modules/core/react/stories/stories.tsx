@@ -1,10 +1,11 @@
 /// <reference path="../../../../typings.d.ts" />
+import {storiesOf} from '@storybook/react';
 import * as React from 'react';
 import styled, {css} from 'react-emotion';
-import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
+
+import canvas, {H1, space, spacing} from '..';
 import {InputProviderDecorator} from '../../../../utils/storybook';
-import canvas, {space, spacing} from '../index';
 import README from '../README.md';
 
 export const inverseStyle = {
@@ -112,6 +113,7 @@ storiesOf('Core', module)
         <section>
           <h1 style={canvas.type.dataViz1}>Data Viz 1 Header</h1>
           <h1 style={canvas.type.dataViz2}>Data Viz 2 Header</h1>
+          <H1>Styled Component H1 Header</H1>
           {type(canvas.type)}
         </section>
       </div>
