@@ -15,12 +15,12 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
         </label>
         <div className="wdc-form-field">
           <select className="wdc-form-select" id="select">
-            <option label="Select an option" disabled={true} selected={true}>
-              Select an option
+            <option label="E-mail">E-mail</option>
+            <option label="Phone">Phone</option>
+            <option label="Fax (disabled)" disabled={true}>
+              Fax (disabled)
             </option>
-            <option label="Option 1">Option 1</option>
-            <option label="Option 2">Option 2</option>
-            <option label="Option 3">Option 3</option>
+            <option label="Mail">Mail</option>
           </select>
         </div>
       </div>
@@ -34,12 +34,12 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
         </label>
         <div className="wdc-form-field">
           <select className="wdc-form-select wdc-form-disabled" id="select" disabled={true}>
-            <option label="Select an option" disabled={true} selected={true}>
-              Select an option
+            <option label="E-mail">E-mail</option>
+            <option label="Phone">Phone</option>
+            <option label="Fax (disabled)" disabled={true}>
+              Fax (disabled)
             </option>
-            <option label="Option 1">Option 1</option>
-            <option label="Option 2">Option 2</option>
-            <option label="Option 3">Option 3</option>
+            <option label="Mail">Mail</option>
           </select>
         </div>
       </div>
@@ -53,15 +53,15 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
         </label>
         <div className="wdc-form-field">
           <select className="wdc-form-select  wdc-form-alert" id="select">
-            <option label="Select an option" disabled={true} selected={true}>
-              Select an option
+            <option label="E-mail">E-mail</option>
+            <option label="Phone">Phone</option>
+            <option label="Fax (disabled)" disabled={true}>
+              Fax (disabled)
             </option>
-            <option label="Option 1">Option 1</option>
-            <option label="Option 2">Option 2</option>
-            <option label="Option 3">Option 3</option>
+            <option label="Mail">Mail</option>
           </select>
           <div className="wdc-form-hint-message">
-            <strong>Alert:</strong> Alert message
+            <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
@@ -75,15 +75,15 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
         </label>
         <div className="wdc-form-field">
           <select className="wdc-form-select  wdc-form-error" id="select">
-            <option label="Select an option" disabled={true} selected={true}>
-              Select an option
+            <option label="E-mail">E-mail</option>
+            <option label="Phone">Phone</option>
+            <option label="Fax (disabled)" disabled={true}>
+              Fax (disabled)
             </option>
-            <option label="Option 1">Option 1</option>
-            <option label="Option 2">Option 2</option>
-            <option label="Option 3">Option 3</option>
+            <option label="Mail">Mail</option>
           </select>
           <div className="wdc-form-hint-message">
-            <strong>Error:</strong> Error message
+            <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
@@ -100,12 +100,12 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
         </label>
         <div className="wdc-form-field">
           <select className="wdc-form-select" id="select">
-            <option label="Select an option" disabled={true} selected={true}>
-              Select an option
+            <option label="E-mail">E-mail</option>
+            <option label="Phone">Phone</option>
+            <option label="Fax (disabled)" disabled={true}>
+              Fax (disabled)
             </option>
-            <option label="Option 1">Option 1</option>
-            <option label="Option 2">Option 2</option>
-            <option label="Option 3">Option 3</option>
+            <option label="Mail">Mail</option>
           </select>
         </div>
       </div>
@@ -119,12 +119,12 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
         </label>
         <div className="wdc-form-field">
           <select className="wdc-form-select wdc-form-disabled" id="select" disabled={true}>
-            <option label="Select an option" disabled={true} selected={true}>
-              Select an option
+            <option label="E-mail">E-mail</option>
+            <option label="Phone">Phone</option>
+            <option label="Fax (disabled)" disabled={true}>
+              Fax (disabled)
             </option>
-            <option label="Option 1">Option 1</option>
-            <option label="Option 2">Option 2</option>
-            <option label="Option 3">Option 3</option>
+            <option label="Mail">Mail</option>
           </select>
         </div>
       </div>
@@ -138,15 +138,15 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
         </label>
         <div className="wdc-form-field">
           <select className="wdc-form-select  wdc-form-alert" id="select">
-            <option label="Select an option" disabled={true} selected={true}>
-              Select an option
+            <option label="E-mail">E-mail</option>
+            <option label="Phone">Phone</option>
+            <option label="Fax (disabled)" disabled={true}>
+              Fax (disabled)
             </option>
-            <option label="Option 1">Option 1</option>
-            <option label="Option 2">Option 2</option>
-            <option label="Option 3">Option 3</option>
+            <option label="Mail">Mail</option>
           </select>
           <div className="wdc-form-hint-message">
-            <strong>Alert:</strong> Alert message
+            <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
@@ -160,15 +160,15 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
         </label>
         <div className="wdc-form-field">
           <select className="wdc-form-select wdc-form-error" id="select">
-            <option label="Select an option" disabled={true} selected={true}>
-              Select an option
+            <option label="E-mail">E-mail</option>
+            <option label="Phone">Phone</option>
+            <option label="Fax (disabled)" disabled={true}>
+              Fax (disabled)
             </option>
-            <option label="Option 1">Option 1</option>
-            <option label="Option 2">Option 2</option>
-            <option label="Option 3">Option 3</option>
+            <option label="Mail">Mail</option>
           </select>
           <div className="wdc-form-hint-message">
-            <strong>Error:</strong> Error message
+            <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
