@@ -104,3 +104,24 @@ Card positioning can be changed by adding a modifier to the container class,
   </div>
 </div>
 ```
+
+#### Card Depth
+
+Five levels of depth available in CSS classes
+
+> The CSS classes are implemented using the equivalent SASS mixin.
+
+**HTML**
+
+```html
+<div className="wdc-card-container">
+  <div className="wdc-card wdc-depth-3">
+    <h3 className="wdc-card-header">Card Header</h3>
+    <div className="wdc-card-body">.wdc-depth-3</div>
+  </div>
+  <div className="wdc-card-3 wdc-depth-4">
+    <h3 className="wdc-card-header">Card Header</h3>
+    <div className="wdc-card-body">.wdc-depth-4</div>
+  </div>
+</div>
+```

@@ -11,6 +11,10 @@ storiesOf('CSS/Card', module)
       <h2>Default</h2>
       <section>
         <div className="wdc-card-container">
+          <div className="wdc-card">
+            <h3 className="wdc-card-header">Card Header</h3>
+            <div className="wdc-card-body">.wdc-card</div>
+          </div>
           <div className="wdc-card-3">
             <h3 className="wdc-card-header">Card Header</h3>
             <div className="wdc-card-body">.wdc-card-3</div>
@@ -148,6 +152,29 @@ storiesOf('CSS/Card', module)
           <div className="wdc-card-6 wdc-card-no-padding">
             <h3 className="wdc-card-header">Card Header</h3>
             <div className="wdc-card-body">.wdc-card-6</div>
+          </div>
+        </div>
+      </section>
+
+      <h2>Different Depths</h2>
+
+      <section>
+        <div className="wdc-card-container">
+          <div className="wdc-card-3 wdc-depth-1">
+            <h3 className="wdc-card-header">Card Header</h3>
+            <div className="wdc-card-body">.wdc-depth-1</div>
+          </div>
+          <div className="wdc-card-3 wdc-depth-2">
+            <h3 className="wdc-card-header">Card Header</h3>
+            <div className="wdc-card-body">.wdc-depth-2</div>
+          </div>
+          <div className="wdc-card-3 wdc-depth-3">
+            <h3 className="wdc-card-header">Card Header</h3>
+            <div className="wdc-card-body">.wdc-depth-3</div>
+          </div>
+          <div className="wdc-card-3 wdc-depth-4">
+            <h3 className="wdc-card-header">Card Header</h3>
+            <div className="wdc-card-body">.wdc-depth-4</div>
           </div>
         </div>
       </section>
