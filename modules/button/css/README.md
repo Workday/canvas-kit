@@ -233,6 +233,7 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 ## Accessibility Notes
 
 > The content of a button is not always clear to the user. In order to better convey what the icon
-> represents, the Icon Button should be initialized with `title` and `aria-label` attributes.
+> represents, the Icon Button should always have an `aria-label` attribute as well as a 
+> [tooltip](https://github.com/Workday/canvas-kit/tree/master/modules/tooltip/css) or `title attribute`.
 
 See [canvas-kit-core](../../core/css#accessibility) for accessibility guidelines.
