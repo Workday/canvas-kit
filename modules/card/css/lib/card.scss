@@ -19,6 +19,7 @@ $_wdc-container-positions: 'start' flex-start, 'end' flex-end, 'center' center,
   border-radius: 3px;
   padding: $wdc-spacing-l;
   margin: $wdc-spacing-s 0;
+  background-color: $wdc-color-french-vanilla-100;
 
   .wdc-card-header {
     @include wdc-type-h3();
@@ -28,6 +29,10 @@ $_wdc-container-positions: 'start' flex-start, 'end' flex-end, 'center' center,
   .wdc-card-body {
     @include wdc-type-body();
   }
+}
+
+.wdc-card {
+  @include card-common();
 }
 
 @each $position in $_wdc-container-positions {
