@@ -107,9 +107,9 @@ Card positioning can be changed by adding a modifier to the container class,
 
 #### Card Depth
 
-Five levels of depth available in CSS classes
-
-> The CSS classes are implemented using the equivalent SASS mixin.
+Depth 2 is the default. You can use the depth classes
+(https://github.com/Workday/canvas-kit/tree/master/modules/core/css#depth) to set a custom depth for
+your card.
 
 **HTML**
 

@@ -33,7 +33,6 @@ $_wdc-container-positions: 'start' flex-start, 'end' flex-end, 'center' center,
 
 .wdc-card {
   @include card-common();
-  width: 100%;
 }
 
 @each $position in $_wdc-container-positions {

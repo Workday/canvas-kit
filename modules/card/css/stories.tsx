@@ -10,11 +10,11 @@ storiesOf('CSS/Card', module)
     <div className="story">
       <h2>Default</h2>
       <section>
+        <div className="wdc-card">
+          <h3 className="wdc-card-header">Card Header</h3>
+          <div className="wdc-card-body">.wdc-card</div>
+        </div>
         <div className="wdc-card-container">
-          <div className="wdc-card">
-            <h3 className="wdc-card-header">Card Header</h3>
-            <div className="wdc-card-body">.wdc-card</div>
-          </div>
           <div className="wdc-card-3">
             <h3 className="wdc-card-header">Card Header</h3>
             <div className="wdc-card-body">.wdc-card-3</div>
