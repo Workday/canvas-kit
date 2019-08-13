@@ -150,7 +150,7 @@
   &.wdc-form-group-fields {
     position: relative;
 
-    &::after {
+    &>.validation-icon {
       position: absolute;
       top: $_wdc-form-error-icon-top;
       left: 280-$_wdc-form-error-icon-right;

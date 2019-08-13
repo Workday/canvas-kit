@@ -81,7 +81,7 @@ storiesOf('CSS/Form Field/TextArea/Top Label', module)
           <div className="wdc-form-field">
             <textarea id="textarea" className="wdc-form-textarea wdc-form-alert" />
             <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Alert message
+              <strong>Alert:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@ storiesOf('CSS/Form Field/TextArea/Top Label', module)
           <div className="wdc-form-field">
             <textarea id="textarea" className="wdc-form-textarea wdc-form-error" />
             <div className="wdc-form-hint-message">
-              <strong>Error:</strong> Error message
+              <strong>Error:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -182,7 +182,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
           <div className="wdc-form-field">
             <textarea id="textarea" className="wdc-form-textarea wdc-form-alert" />
             <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Alert message
+              <strong>Alert:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
           <div className="wdc-form-field">
             <textarea id="textarea" className="wdc-form-textarea wdc-form-error" />
             <div className="wdc-form-hint-message">
-              <strong>Error:</strong> Error message
+              <strong>Error:</strong> Helpful text goes here.
             </div>
           </div>
         </div>

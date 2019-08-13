@@ -16,6 +16,7 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           </label>
           <div className="wdc-form-field">
             <input id="input" type="text" className="wdc-form-textinput" />
+            <span class="validation-icon" />
           </div>
         </div>
       </div>
@@ -35,6 +36,7 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
               className="wdc-form-textinput"
               placeholder="Placeholder"
             />
+            <span class="validation-icon" />
           </div>
         </div>
       </div>
@@ -54,6 +56,7 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
               className="wdc-form-textinput wdc-form-disabled"
               disabled={true}
             />
+            <span class="validation-icon" />
           </div>
         </div>
       </div>
@@ -73,6 +76,7 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
               placeholder="Placeholder"
               disabled={true}
             />
+            <span class="validation-icon" />
           </div>
         </div>
       </div>
@@ -87,8 +91,9 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           </label>
           <div className="wdc-form-field">
             <input id="input" type="text" className="wdc-form-textinput wdc-form-alert" />
+            <span class="validation-icon" />
             <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Alert message
+              <strong>Alert:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -104,8 +109,9 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           </label>
           <div className="wdc-form-field">
             <input id="input" type="text" className="wdc-form-textinput wdc-form-error" />
+            <span class="validation-icon" />
             <div className="wdc-form-hint-message">
-              <strong>Error:</strong> Error message
+              <strong>Error:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -124,6 +130,7 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           </label>
           <div className="wdc-form-field">
             <input id="input" type="text" className="wdc-form-textinput" />
+            <span class="validation-icon" />
           </div>
         </div>
       </div>
@@ -143,6 +150,7 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
               className="wdc-form-textinput"
               placeholder="Placeholder"
             />
+            <span class="validation-icon" />
           </div>
         </div>
       </div>
@@ -162,6 +170,7 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
               className="wdc-form-textinput wdc-form-disabled"
               disabled={true}
             />
+            <span class="validation-icon" />
           </div>
         </div>
       </div>
@@ -181,6 +190,7 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
               placeholder="Placeholder"
               disabled={true}
             />
+            <span class="validation-icon" />
           </div>
         </div>
       </div>
@@ -195,8 +205,9 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           </label>
           <div className="wdc-form-field">
             <input id="input" type="text" className="wdc-form-textinput wdc-form-alert" />
+            <span class="validation-icon" />
             <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Alert message
+              <strong>Alert:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -212,8 +223,9 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           </label>
           <div className="wdc-form-field">
             <input id="input" type="text" className="wdc-form-textinput wdc-form-error" />
+            <span class="validation-icon" />
             <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Hint
+              <strong>Alert:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
