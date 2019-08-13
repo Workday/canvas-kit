@@ -16,7 +16,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix(TextArea): Align border color to match other inputs (#66) (@neilpelow)
 - fix(Avatar): Change prop spread order to allow for overriding the aria label (#92) (@mannycarrera4)
 - feat(Type): Add styled components for type primitives (#106) (@drschulz)
-- fix(ActionBar): Match css styles to react action bar (#111)  (@mannycarrera4)
+- fix(ActionBar): Match css styles to react action bar (#111) (@mannycarrera4)
 
 
 # 3.0.0-alpha.4 (2019-08-05)
