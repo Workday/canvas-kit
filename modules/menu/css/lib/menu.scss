@@ -1,15 +1,18 @@
 .wdc-menu {
   @include wdc-type();
   @include wdc-type-body();
-  @include wdc-depth-3();
+  @include wdc-depth-2();
   display: inline-block;
   background-color: $_wdc-menu-bg-color;
-  padding: $wdc-spacing-s;
   border-radius: 3px;
   border: 1px solid $_wdc-menu-border-color;
   position: relative;
   width: max-content;
-  max-width: $_wdc-menu-max-width;
+
+  // NOTE-SR: what's the correct way to disable font smoothing? currently, i'm
+  // overriding styles from the wdc-type() mixin included above
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
 
   // Fallback for IE11
   @media screen and (-ms-high-contrast: active),
@@ -24,19 +27,21 @@
     min-width: $_wdc-menu-menu-min-width;
   }
 
-  padding: $wdc-spacing-xxs 0;
-
   ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: $wdc-spacing-xxs 0;
 
     li {
+      align-items: center;
+      box-sizing: border-box;
       color: $wdc-color-black-pepper-300;
-      padding: $wdc-spacing-xxxs $wdc-spacing-s;
-      font-size: 13px;
+      display: flex;
+      height: $wdc-spacing-xl;
+      padding: $wdc-spacing-xxs $wdc-spacing-s;
+      font-size: 14px;
       cursor: pointer;
-      transition: background-color 0.2s, color 0.2s;
+      transition: background-color 80ms;
 
       a {
         color: inherit;
@@ -45,15 +50,18 @@
 
       &:focus,
       &:hover {
-        color: $wdc-color-french-vanilla-100;
-        background-color: $wdc-color-blueberry-500;
+        background-color: $wdc-color-soap-300;
+      }
+
+      &.is-disabled {
+        color: $wdc-color-licorice-100;
+        cursor: default;
+
+        &:hover {
+          background-color: transparent;
+        }
       }
     }
-  }
-
-  .wdc-menu-title {
-    font-weight: 500;
-    margin-bottom: $wdc-spacing-xxs;
   }
 
   p {

@@ -6,13 +6,7 @@ import {css} from 'emotion';
 import './index.scss';
 
 const containerStyle = css({
-  '> *': {
-    margin: '20px !important',
-
-    '&:first-child': {
-      marginLeft: 0,
-    },
-  },
+  paddingTop: '12px',
 });
 
 storiesOf('CSS/Menu', module)
@@ -23,9 +17,15 @@ storiesOf('CSS/Menu', module)
         <div className="wdc-menu">
           <ul>
             <li>
-              <a href="#">Item 1</a>
+              <a href="#">First Item</a>
             </li>
-            <li>Item 2</li>
+            <li>Second Item with really really really long label</li>
+            <li className="is-disabled">Third Item (disabled)</li>
+            <li>
+              <em>
+                Fourth Item (<b>with markup</b>)
+              </em>
+            </li>
           </ul>
         </div>
       </div>
