@@ -429,8 +429,12 @@ function getButtonStateStyle(buttonType: AllButtonTypes): CSSObject {
       }),
     },
     '&:not([disabled])': {
-      '&:focus, &:active': {
+      '&:focus': {
         borderColor: buttonColors.focusBorder,
+        ...getButtonFocusRing(buttonType),
+      },
+      '&:active': {
+        borderColor: buttonColors.activeBorder,
         ...getButtonFocusRing(buttonType),
       },
     },

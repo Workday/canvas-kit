@@ -107,34 +107,34 @@
       background-color: transparent;
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-icon-inverse;
+        fill: $wdc-btn-icon-inverse-bg;
       }
 
       &.wdc-btn-hover:not([disabled]),
       &:hover:not([disabled]) {
-        background-color: $wdc-btn-icon-inverse-hover;
+        background-color: $wdc-btn-icon-inverse-hover-bg;
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse;
+          fill: $wdc-btn-icon-inverse-bg;
         }
       }
 
       &.wdc-btn-active:not([disabled]),
       &:active:not([disabled]) {
-        background-color: $wdc-btn-icon-inverse-hover;
+        background-color: $wdc-btn-icon-inverse-hover-bg;
 
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse;
+          fill: $wdc-btn-icon-inverse-bg;
         }
 
         &.wdc-btn-hover:not([disabled]),
         &:hover:not([disabled]) {
-          background-color: $wdc-btn-icon-inverse-active-hover;
+          background-color: $wdc-btn-icon-inverse-active-hover-bg;
 
           .wd-icon-accent,
           .wd-icon-fill {
-            fill: $wdc-btn-icon-inverse;
+            fill: $wdc-btn-icon-inverse-bg;
           }
         }
       }
@@ -144,19 +144,19 @@
 
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse-disabled;
+          fill: $wdc-btn-icon-inverse-disabled-bg;
         }
       }
 
       &:not([disabled]) {
         &.wdc-btn-hover,
         &:hover {
-          background-color: $wdc-btn-icon-inverse-hover;
+          background-color: $wdc-btn-icon-inverse-hover-bg;
         }
 
         &.wdc-btn-active,
         &:active {
-          background-color: $wdc-btn-icon-inverse-hover;
+          background-color: $wdc-btn-icon-inverse-hover-bg;
         }
 
         &:focus,
@@ -165,11 +165,11 @@
 
           &.wdc-btn-hover,
           &:hover {
-            background-color: $wdc-btn-icon-inverse-hover;
+            background-color: $wdc-btn-icon-inverse-hover-bg;
           }
           &.wdc-btn-active,
           &:active {
-            background-color: $wdc-btn-icon-inverse-active-hover;
+            background-color: $wdc-btn-icon-inverse-active-hover-bg;
           }
         }
       }

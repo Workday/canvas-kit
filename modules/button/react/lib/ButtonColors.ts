@@ -85,7 +85,7 @@ export const ButtonColors: ButtonColorCollection = {
     border: canvas.colors.cinnamon500,
     text: canvas.colors.frenchVanilla100,
     activeBackground: '#80160E',
-    activeBorder: 'transparent',
+    activeBorder: canvas.colors.cinnamon500,
     activeText: canvas.colors.frenchVanilla100,
     disabledBackground: canvas.colors.cinnamon200,
     disabledBorder: 'transparent',

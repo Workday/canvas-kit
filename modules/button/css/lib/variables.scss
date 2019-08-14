@@ -45,7 +45,7 @@ $wdc-btn-border-primary-active: $wdc-color-blueberry-400;
 $wdc-btn-border-primary-disabled: $wdc-color-cantaloupe-400;
 $wdc-btn-border-delete: $wdc-color-cinnamon-500;
 $wdc-btn-border-delete-hover: $wdc-color-cinnamon-500;
-$wdc-btn-border-delete-active: $wdc-color-blueberry-400;
+$wdc-btn-border-delete-active: $wdc-color-cinnamon-500;
 $wdc-btn-border-delete-disabled: $wdc-color-cinnamon-200;
 
 $wdc-btn-color: $wdc-color-black-pepper-400;
@@ -62,10 +62,10 @@ $wdc-btn-split-icon-padding-v: ($wdc-btn-height-l - $wdc-btn-split-icon-height)/
 $wdc-btn-split-icon-padding: $wdc-btn-split-icon-padding-v $wdc-spacing-xxs
   $wdc-btn-split-icon-padding-v $wdc-spacing-xxxs;
 
-$wdc-btn-icon-inverse: $wdc-color-french-vanilla-100;
-$wdc-btn-icon-inverse-hover: rgba(0, 0, 0, 0.2);
-$wdc-btn-icon-inverse-active-hover: rgba(0, 0, 0, 0.4);
-$wdc-btn-icon-inverse-disabled: rgba(255, 255, 255, 0.75);
+$wdc-btn-icon-inverse-bg: $wdc-color-french-vanilla-100;
+$wdc-btn-icon-inverse-hover-bg: rgba(0, 0, 0, 0.2);
+$wdc-btn-icon-inverse-active-hover-bg: rgba(0, 0, 0, 0.4);
+$wdc-btn-icon-inverse-disabled-bg: rgba(255, 255, 255, 0.75);
 
 $wdc-btn-icon-bg: $wdc-color-french-vanilla-100;
 $wdc-btn-icon-hover-bg: $wdc-color-soap-300;
