@@ -16,7 +16,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   padding?: CanvasSpacingValue;
   breakpoint?: number;
   openWidth?: number;
-  sidePanelBackgroundColor?: SidePanelBackgroundColor;
+  backgroundColor?: SidePanelBackgroundColor;
 }
 
 export interface SidePanelState {
@@ -55,10 +55,10 @@ const SidePanelContainer = styled('div')<SidePanelProps>(
     alignItems: open ? '' : 'center',
     boxShadow: !open ? '0 8px 16px -8px rgba(0, 0, 0, 0.16)' : '',
   }),
-  ({open, sidePanelBackgroundColor}) => {
+  ({open, backgroundColor}) => {
     let openBackgroundColor;
 
-    switch (sidePanelBackgroundColor) {
+    switch (backgroundColor) {
       case SidePanelBackgroundColor.Transparent:
         openBackgroundColor = 'transparent';
         break;
@@ -129,7 +129,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     breakpoint: 768,
     openWidth: 300,
     openDirection: SidePanelOpenDirection.Left,
-    sidePanelBackgroundColor: SidePanelBackgroundColor.White,
+    backgroundColor: SidePanelBackgroundColor.White,
   };
 
   constructor(props: SidePanelProps) {
@@ -157,7 +157,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
       padding,
       onBreakpointChange,
       openWidth,
-      sidePanelBackgroundColor,
+      backgroundColor,
       ...otherProps
     } = this.props;
 
@@ -169,7 +169,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
         onBreakpointChange={this.handleResize}
         openDirection={openDirection}
         openWidth={openWidth}
-        sidePanelBackgroundColor={sidePanelBackgroundColor}
+        backgroundColor={backgroundColor}
         open={open}
         {...otherProps}
       >

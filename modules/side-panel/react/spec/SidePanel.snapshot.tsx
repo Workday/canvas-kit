@@ -35,7 +35,7 @@ describe('SidePanel Snapshots', () => {
         onBreakpointChange={jest.fn()}
         header={'Side Panel Header'}
         open={true}
-        sidePanelBackgroundColor={SidePanelBackgroundColor.Gray}
+        backgroundColor={SidePanelBackgroundColor.Gray}
       />
     );
     expect(component).toMatchSnapshot();

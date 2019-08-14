@@ -90,7 +90,7 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
     const listItemStyles = open ? listItemOpen : listItemClosed;
     return (
       <SidePanel
-        sidePanelBackgroundColor={select(
+        backgroundColor={select(
           openBackgroundColorLabel,
           openBackgroundColorOptions,
           openBackgroundColorDefault
@@ -160,7 +160,7 @@ storiesOf('Side Panel', module)
     <div className="story">
       <div style={{height: '67vh', position: 'relative'}}>
         <SidePanel
-          sidePanelBackgroundColor={SidePanel.BackgroundColor.Gray}
+          backgroundColor={SidePanel.BackgroundColor.Gray}
           onToggleClick={() => console.warn('clicked')}
           header={'Side Panel Header'}
           open={true}
