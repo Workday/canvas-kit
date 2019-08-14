@@ -166,7 +166,6 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
         role="region"
         aria-orientation="vertical"
         padding={padding}
-        onBreakpointChange={this.handleResize}
         openDirection={openDirection}
         openWidth={openWidth}
         backgroundColor={backgroundColor}
