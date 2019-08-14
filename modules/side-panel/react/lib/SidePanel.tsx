@@ -12,7 +12,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   onToggleClick?: () => void;
   header?: string | React.ReactNode;
   openDirection?: SidePanelOpenDirection;
-  onBreakpointChange?: (open: boolean) => void;
+  onBreakpointChange?: (aboveBreakpoint: boolean) => void;
   padding?: CanvasSpacingValue;
   breakpoint?: number;
   openWidth?: number;

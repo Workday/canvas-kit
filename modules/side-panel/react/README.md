@@ -111,11 +111,12 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
 
 ### Optional
 
-#### `onBreakpointChange: (open: boolean) => void;`
+#### `onBreakpointChange: (aboveBreakpoint: boolean) => void;`
 
 > A function that is called when the screen size changes and reaches `breakpoint`. For example, if
 > the user has their window at 1000px of width, and then resizes, this will get called when the
-> window size reaches the value of the `breakpoint` prop.
+> window size reaches the value of the `breakpoint` prop. A boolean for whether the current window
+> size is above or below the breakpoint is provided so you can control `open` based on the change.
 
 ---
 

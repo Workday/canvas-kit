@@ -145,10 +145,10 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
     });
   };
 
-  private handleBreakpoint = (open: boolean) => {
+  private handleBreakpoint = (aboveBreakpoint: boolean) => {
     console.warn('handle breakpoint called');
     this.setState({
-      open: open,
+      open: aboveBreakpoint,
     });
   };
 }
