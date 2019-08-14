@@ -7,7 +7,7 @@ git:
   depth: 3
 stages:
 - name: pr-previews
-  if: "(branch = master AND type = pull_request) OR branch != master"
+  if: branch = master AND type = pull_request
 - name: npm publish
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 - name: master storybook
