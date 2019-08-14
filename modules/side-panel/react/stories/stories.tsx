@@ -14,7 +14,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {Header} from '@workday/canvas-kit-react-header';
 import {beta_Button as Button, IconButton, ButtonSizes} from '@workday/canvas-kit-react-button';
 import {Avatar} from '@workday/canvas-kit-react-avatar';
-import SidePanel from '..';
+import SidePanel from '../index';
 
 interface SidePanelState {
   open: boolean;

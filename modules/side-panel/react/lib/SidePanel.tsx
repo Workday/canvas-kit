@@ -52,8 +52,8 @@ const SidePanelContainer = styled('div')<SidePanelProps>(
     position: 'absolute',
   },
   ({open}) => ({
-    alignItems: open ? '' : 'center',
-    boxShadow: !open ? '0 8px 16px -8px rgba(0, 0, 0, 0.16)' : '',
+    alignItems: !open ? 'center' : undefined,
+    boxShadow: !open ? '0 8px 16px -8px rgba(0, 0, 0, 0.16)' : undefined,
   }),
   ({open, backgroundColor}) => {
     let openBackgroundColor;
@@ -82,8 +82,8 @@ const SidePanelContainer = styled('div')<SidePanelProps>(
     padding: open ? padding || spacing.m : `${spacing.s} 0`,
   }),
   ({openDirection}) => ({
-    right: openDirection === SidePanelOpenDirection.Right ? spacing.zero : '',
-    left: openDirection === SidePanelOpenDirection.Left ? spacing.zero : '',
+    right: openDirection === SidePanelOpenDirection.Right ? spacing.zero : undefined,
+    left: openDirection === SidePanelOpenDirection.Left ? spacing.zero : undefined,
   })
 );
 
