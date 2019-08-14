@@ -222,6 +222,8 @@ export const ButtonColors: ButtonColorCollection = {
     disabledText: 'rgba(255, 255, 255, 0.5)',
     focusBackground: 'transparent',
     focusText: canvas.colors.frenchVanilla100,
+    focusRingInner: 'transparent',
+    focusRingOuter: canvas.colors.frenchVanilla100,
     hoverBorder: 'transparent',
     labelIcon: canvas.colors.frenchVanilla100,
     labelIconHover: 'currentColor',
