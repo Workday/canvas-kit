@@ -8,9 +8,6 @@
   border: 1px solid $_wdc-menu-border-color;
   position: relative;
   width: max-content;
-
-  // NOTE-SR: what's the correct way to disable font smoothing? currently, i'm
-  // overriding styles from the wdc-type() mixin included above
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
 
