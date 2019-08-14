@@ -62,6 +62,14 @@
         }
       }
     }
+
+    hr {
+      border: 0;
+      border-top: 1px solid $wdc-color-soap-400;
+      display: block;
+      height: 1px;
+      margin: $wdc-spacing-xxs 0;
+    }
   }
 
   p {

@@ -26,6 +26,8 @@ storiesOf('CSS/Menu', module)
                 Fourth Item (<b>with markup</b>)
               </em>
             </li>
+            <hr />
+            <li>Fifth Item (with divider)</li>
           </ul>
         </div>
       </div>
