@@ -51,6 +51,7 @@
     "@workday/canvas-kit-react-icon": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-layout": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-loading-animation": "^3.0.0-alpha.5",
+    "@workday/canvas-kit-react-menu": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-modal": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-page-header": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-popup": "^3.0.0-alpha.5",
