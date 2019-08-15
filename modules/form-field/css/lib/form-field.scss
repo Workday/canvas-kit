@@ -6,7 +6,8 @@
   .wdc-form-field {
     position: relative;
     align-items: center;
-    height: 32px;
+    min-height: 32px;
+    display: flex;
   }
 }
 
@@ -23,7 +24,7 @@
 
 .wdc-form-label {
   @include wdc-form-label();
-  margin-bottom: 4px;
+  margin-bottom: $wdc-spacing-xxxs;
 
   &.wdc-form-label-required:after {
     content: '*';
@@ -74,9 +75,9 @@
   .wdc-form-field-wrapper {
     display: flex;
 
-    // Case where there's no label on the left
     &>.wdc-form-field {
-      margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
+      margin-left: $wdc-form-inline-label-width+$wdc-spacing-s;
+      // Case where there's no label on the left
     }
 
     &>.wdc-form-label+.wdc-form-field {

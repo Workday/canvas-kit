@@ -1,7 +1,7 @@
 // Errors
 @mixin wdc-form-validation($_type) {
 
-  $_borderColor: #000 !default;
+  $_borderColor: $wdc-color-black-pepper-100 !default; // This should not be used, it is necessary for the @if / @else if to.
 
   @if ($_type=='error') {
     $_borderColor: $wdc-color-error;
@@ -11,9 +11,7 @@
     $_borderColor: $wdc-color-alert-light;
   }
 
-  &.wdc-form-textarea,
-  &.wdc-form-textinput,
-  &.wdc-form-select {
+  & {
     border-color: $_borderColor;
     box-shadow: inset 0 0 0 1px $_borderColor;
 
@@ -30,9 +28,7 @@
   &.wdc-form-hover,
   &:hover {
 
-    &.wdc-form-textarea,
-    &.wdc-form-textinput,
-    &.wdc-form-select {
+    & {
       border-color: $_borderColor;
 
       @if ($_type=='alert') {
@@ -45,9 +41,7 @@
   &.wdc-form-focus:not([disabled]):not(.wdc-form-disabled),
   &:focus:not([disabled]):not(.wdc-form-disabled) {
 
-    &.wdc-form-textarea,
-    &.wdc-form-textinput,
-    &.wdc-form-select {
+    & {
       outline: none;
       border-color: $_borderColor;
 
@@ -86,7 +80,12 @@
 }
 
 .wdc-form-error {
-  @include wdc-form-error();
+
+  input,
+  textarea,
+  select {
+    @include wdc-form-error();
+  }
 }
 
 @mixin wdc-form-alert {
@@ -94,7 +93,12 @@
 }
 
 .wdc-form-alert {
-  @include wdc-form-alert();
+
+  input,
+  textarea,
+  select {
+    @include wdc-form-alert();
+  }
 }
 
 // Messages
