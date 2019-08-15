@@ -85,7 +85,7 @@
     "tslint-config-prettier": "^1.14.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.5.1",
-    "validate-commit-msg": "^2.14.0"
+    "commitlint": "^8.1.0"
   },
   "scripts": {
     "start": "node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook",
@@ -130,5 +130,8 @@
   "workspaces": [
     "modules/**"
   ],
-  "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, ie 11"
+  "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, ie 11",
+  "dependencies": {
+   
+  }
 }
