@@ -397,7 +397,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #e8ebed;
+  background: #f0f1f2;
   height: 32px;
   width: 32px;
   cursor: default;
@@ -1647,7 +1647,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #e8ebed;
+  background: #f0f1f2;
   height: 32px;
   width: 32px;
   cursor: default;

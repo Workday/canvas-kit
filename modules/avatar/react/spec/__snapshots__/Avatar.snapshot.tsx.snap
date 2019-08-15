@@ -19,7 +19,7 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #e8ebed;
+  background: #f0f1f2;
   height: 64px;
   width: 64px;
   cursor: default;
@@ -152,7 +152,7 @@ exports[`Avatar Snapshots renders a large avatar with a photo 1`] = `
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #e8ebed;
+  background: #f0f1f2;
   height: 64px;
   width: 64px;
   cursor: default;
@@ -211,7 +211,7 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #0875e1;
+  background: #f0f1f2;
   height: 64px;
   width: 64px;
   cursor: default;
@@ -344,7 +344,7 @@ exports[`Avatar Snapshots renders an avatar with a photo 1`] = `
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #e8ebed;
+  background: #f0f1f2;
   height: 32px;
   width: 32px;
   cursor: default;
@@ -403,7 +403,7 @@ exports[`Avatar Snapshots renders an avatar with an aria label and an alt text 1
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #e8ebed;
+  background: #f0f1f2;
   height: 64px;
   width: 64px;
   cursor: default;
@@ -462,7 +462,7 @@ exports[`Avatar Snapshots renders as expected 1`] = `
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #e8ebed;
+  background: #f0f1f2;
   height: 32px;
   width: 32px;
   cursor: default;
