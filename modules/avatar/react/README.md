@@ -18,7 +18,7 @@ yarn add @workday/canvas-kit-react-avatar
 
 ```tsx
 import * as React from 'react';
-import {Avatar, AvatarTheme, AvatarSize} from '@workday/canvas-kit-react-avatar';
+import {Avatar, AvatarTheme} from '@workday/canvas-kit-react-avatar';
 
 // Basic
 <Avatar />
@@ -30,8 +30,8 @@ import {Avatar, AvatarTheme, AvatarSize} from '@workday/canvas-kit-react-avatar'
   onClick={() => { window.alert('Avatar Clicked') }}
 />
 
-// Using AvatarTheme and AvatarSize imports directly
-<Avatar size={AvatarSize.xs} themeColor={AvatarTheme.Dark} />
+// Using AvatarTheme import directly
+<Avatar size={Avatar.Size.xs} themeColor={AvatarTheme.Dark} />
 ```
 
 ## Static Properties
@@ -44,7 +44,7 @@ import {Avatar, AvatarTheme, AvatarSize} from '@workday/canvas-kit-react-avatar'
 
 ---
 
-#### `Size: AvatarSize | number`
+#### `Size: SystemIconCircleSize | number`
 
 ```tsx
 <Avatar size={Avatar.Size.xs} />
@@ -75,11 +75,11 @@ Default: `AvatarTheme.Light`
 
 ---
 
-#### `size: AvatarSize`
+#### `size: SystemIconCircleSize | number`
 
 > The diameter of the avatar in pixels
 
-Default: `AvatarSize.m`
+Default: `Avatar.Size.m`
 
 | Name  | Size (px) |
 | ----- | --------- |

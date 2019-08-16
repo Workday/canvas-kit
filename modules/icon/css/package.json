@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-icon",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "description": "Icon toolkit for Canvas kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@workday/canvas-colors-web": "^0.17.13",
-    "@workday/canvas-kit-css-core": "^3.0.0-alpha.4",
+    "@workday/canvas-kit-css-core": "^3.0.0-alpha.5",
     "svg-injector": "^1.1.3",
     "to-slug-case": "^1.0.0"
   },

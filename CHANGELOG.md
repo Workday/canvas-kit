@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.0.0-alpha.5 (2019-08-13)
+
+### Infrastructure:
+
+- chore: update lint-staged to v8 (#76) (@Patil2099)
+
+### Components:
+
+- fix(SidePanel): Remove resize event on unmount (#78) (@mannycarrera4)
+- fix(Menu): Allow aria role of menu item to be overridden (#75) (@jayscheidt)
+- fix(TextArea): Align border color to match other inputs (#66) (@neilpelow)
+- fix(Avatar): Change prop spread order to allow for overriding the aria label (#92) (@mannycarrera4)
+- feat(Type): Add styled components for type primitives (#106) (@drschulz)
+- fix(ActionBar): Match css styles to react action bar (#111) (@mannycarrera4)
+
+
 # 3.0.0-alpha.4 (2019-08-05)
 
 ### Infrastructure:

@@ -15,8 +15,8 @@ addDecorator(withKnobs);
 
 addParameters({
   options: {
-    name: 'Canvas Kit',
     theme: create({
+      brandTitle: 'Canvas Kit',
       mainTextColor: typeColors.body,
       mainTextFace: fontFamily,
       mainBackground: commonColors.backgroundAlt,
