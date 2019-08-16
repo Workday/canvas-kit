@@ -14,9 +14,10 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput">
-            <input id="input" type="text" />
-            <span className="validation-icon" />
+          <div className="wdc-form-field">
+            <div className="wdc-form-textinput">
+              <input id="input" type="text" />
+            </div>
           </div>
         </div>
       </div>
@@ -29,9 +30,10 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput">
-            <input id="input" type="text" placeholder="Placeholder" />
-            <span className="validation-icon" />
+          <div className="wdc-form-field">
+            <div className="wdc-form-textinput">
+              <input id="input" type="text" placeholder="Placeholder" />
+            </div>
           </div>
         </div>
       </div>
@@ -44,14 +46,10 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput">
-            <input
-              id="input"
-              type="text"
-              className="wdc-form-textinput wdc-form-disabled"
-              disabled={true}
-            />
-            <span className="validation-icon" />
+          <div className="wdc-form-field">
+            <div className="wdc-form-textinput wdc-form-disabled">
+              <input id="input" type="text" disabled={true} />
+            </div>
           </div>
         </div>
       </div>
@@ -64,14 +62,10 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput">
-            <input
-              type="text"
-              className="wdc-form-textinput wdc-form-disabled"
-              placeholder="Placeholder"
-              disabled={true}
-            />
-            <span className="validation-icon" />
+          <div className="wdc-form-field">
+            <div className="wdc-form-textinput wdc-form-disabled">
+              <input type="text" placeholder="Placeholder" disabled={true} />
+            </div>
           </div>
         </div>
       </div>
@@ -84,9 +78,10 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput wdc-form-alert">
-            <input id="input" type="text" />
-            <span className="validation-icon" />
+          <div className="wdc-form-field  wdc-form-alert">
+            <div className="wdc-form-textinput">
+              <input id="input" type="text" />
+            </div>
             <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Helpful text goes here.
             </div>
@@ -102,9 +97,10 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput wdc-form-error">
-            <input id="input" type="text" />
-            <span className="validation-icon" />
+          <div className="wdc-form-field  wdc-form-error">
+            <div className="wdc-form-textinput">
+              <input id="input" type="text" />
+            </div>
             <div className="wdc-form-hint-message">
               <strong>Error:</strong> Helpful text goes here.
             </div>
@@ -123,9 +119,10 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput">
-            <input id="input" type="text" />
-            <span className="validation-icon" />
+          <div className="wdc-form-field">
+            <div className="wdc-form-textinput">
+              <input id="input" type="text" />
+            </div>
           </div>
         </div>
       </div>
@@ -138,9 +135,10 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput">
-            <input id="input" type="text" placeholder="Placeholder" />
-            <span className="validation-icon" />
+          <div className="wdc-form-field">
+            <div className="wdc-form-textinput">
+              <input id="input" type="text" placeholder="Placeholder" />
+            </div>
           </div>
         </div>
       </div>
@@ -153,14 +151,10 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput">
-            <input
-              id="input"
-              type="text"
-              className="wdc-form-textinput wdc-form-disabled"
-              disabled={true}
-            />
-            <span className="validation-icon" />
+          <div className="wdc-form-field">
+            <div className="wdc-form-textinput wdc-form-disabled">
+              <input id="input" type="text" disabled={true} />
+            </div>
           </div>
         </div>
       </div>
@@ -173,14 +167,10 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput">
-            <input
-              type="text"
-              className="wdc-form-textinput wdc-form-disabled"
-              placeholder="Placeholder"
-              disabled={true}
-            />
-            <span className="validation-icon" />
+          <div className="wdc-form-field">
+            <div className="wdc-form-textinput wdc-form-disabled">
+              <input type="text" placeholder="Placeholder" disabled={true} />
+            </div>
           </div>
         </div>
       </div>
@@ -193,9 +183,10 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput wdc-form-alert">
-            <input id="input" type="text" />
-            <span className="validation-icon" />
+          <div className="wdc-form-field wdc-form-alert">
+            <div className="wdc-form-textinput">
+              <input id="input" type="text" />
+            </div>
             <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Helpful text goes here.
             </div>
@@ -211,9 +202,10 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           <label htmlFor="input" className="wdc-form-label">
             Label
           </label>
-          <div className="wdc-form-field wdc-form-textinput wdc-form-error">
-            <input id="input" type="text" />
-            <span className="validation-icon" />
+          <div className="wdc-form-field wdc-form-error">
+            <div className="wdc-form-textinput">
+              <input id="input" type="text" />
+            </div>
             <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Helpful text goes here.
             </div>

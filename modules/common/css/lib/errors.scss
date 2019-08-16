@@ -1,13 +1,10 @@
 // Errors
 @mixin wdc-form-validation($_type) {
-
   $_borderColor: $wdc-color-black-pepper-100 !default; // This should not be used, it is necessary for the @if / @else if to.
 
-  @if ($_type=='error') {
+  @if ($_type== 'error') {
     $_borderColor: $wdc-color-error;
-  }
-
-  @else if ($_type=='alert') {
+  } @else if ($_type== 'alert') {
     $_borderColor: $wdc-color-alert-light;
   }
 
@@ -15,23 +12,22 @@
     border-color: $_borderColor;
     box-shadow: inset 0 0 0 1px $_borderColor;
 
-    @if ($_type=='alert') {
+    @if ($_type== 'alert') {
       border-color: $wdc-color-alert-dark;
       box-shadow: inset 0 0 0 2px $_borderColor;
     }
   }
 
-  &.wdc-form-checkbox:not(.wdc-form-checked):not(:checked)+.wdc-form-label:before {
+  &.wdc-form-checkbox:not(.wdc-form-checked):not(:checked) + .wdc-form-label:before {
     border-color: $_borderColor;
   }
 
   &.wdc-form-hover,
   &:hover {
-
     & {
       border-color: $_borderColor;
 
-      @if ($_type=='alert') {
+      @if ($_type== 'alert') {
         border-color: $wdc-color-alert-dark;
         box-shadow: inset 0 0 0 2px $_borderColor;
       }
@@ -40,35 +36,31 @@
 
   &.wdc-form-focus:not([disabled]):not(.wdc-form-disabled),
   &:focus:not([disabled]):not(.wdc-form-disabled) {
-
     & {
       outline: none;
       border-color: $_borderColor;
-
-      @if ($_type=='alert') {
-        border-color: $wdc-color-alert-dark;
-        box-shadow: inset 0 0 0 2px $_borderColor;
-      }
-
-      &.wdc-form-error {
+      & {
         box-shadow: inset 0 0 0 1px $_borderColor, 0 0 0 2px $wdc-color-input-background,
           0 0 0 4px $wdc-color-common-focus-outline;
       }
-
-      &.wdc-form-alert {
-        box-shadow: inset 0 0 0 2px $_borderColor, 0 0 0 2px $wdc-color-input-background,
-          0 0 0 4px $wdc-color-common-focus-outline;
+      @if ($_type== 'alert') {
+        border-color: $wdc-color-alert-dark;
+        box-shadow: inset 0 0 0 2px $_borderColor;
+        & {
+          box-shadow: inset 0 0 0 2px $_borderColor, 0 0 0 2px $wdc-color-input-background,
+            0 0 0 4px $wdc-color-common-focus-outline;
+        }
       }
     }
 
-    &.wdc-form-checkbox+.wdc-form-label:before {
+    &.wdc-form-checkbox + .wdc-form-label:before {
       border-color: $_borderColor;
       box-shadow: 0 0 0 2px $wdc-color-input-background, 0 0 0 4px $wdc-color-common-focus-outline;
     }
 
     &.wdc-form-checkbox:checked,
     &.wdc-form-checkbox.wdc-form-checked {
-      +.wdc-form-label:before {
+      + .wdc-form-label:before {
         border-color: $wdc-color-common-focus-outline;
       }
     }
@@ -76,28 +68,56 @@
 }
 
 @mixin wdc-form-error {
-  @include wdc-form-validation("error");
+  @include wdc-form-validation('error');
 }
 
 .wdc-form-error {
+  .wdc-form-textinput,
+  &.wdc-form-textinput {
+    input {
+      @include wdc-form-error;
+    }
+  }
 
-  input,
-  textarea,
-  select {
-    @include wdc-form-error();
+  .wdc-form-textarea,
+  &.wdc-form-textarea {
+    textarea {
+      @include wdc-form-error;
+    }
+  }
+
+  .wdc-form-select,
+  &.wdc-form-select {
+    select {
+      @include wdc-form-error;
+    }
   }
 }
 
 @mixin wdc-form-alert {
-  @include wdc-form-validation("alert");
+  @include wdc-form-validation('alert');
 }
 
 .wdc-form-alert {
+  .wdc-form-textinput,
+  &.wdc-form-textinput {
+    input {
+      @include wdc-form-alert;
+    }
+  }
 
-  input,
-  textarea,
-  select {
-    @include wdc-form-alert();
+  .wdc-form-textarea,
+  &.wdc-form-textarea {
+    textarea {
+      @include wdc-form-alert;
+    }
+  }
+
+  .wdc-form-select,
+  &.wdc-form-select {
+    select {
+      @include wdc-form-alert;
+    }
   }
 }
 
@@ -131,8 +151,6 @@
 }
 
 @svg-load alertIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-triangle.svg) {
-
-
   .wd-icon-fill {
     fill: $wdc-color-alert;
   }
@@ -154,7 +172,7 @@
   &.wdc-form-group-fields {
     position: relative;
 
-    &>.validation-icon {
+    .wdc-form-textinput::before {
       position: absolute;
       top: $_wdc-form-error-icon-top;
       left: 280-$_wdc-form-error-icon-right;
@@ -216,11 +234,11 @@
     position: relative;
 
     // Case where there's no label on the left
-    &>.wdc-form-field {
+    & > .wdc-form-field {
       margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
     }
 
-    &>.wdc-form-label+.wdc-form-field {
+    & > .wdc-form-label + .wdc-form-field {
       margin-left: 0;
     }
   }
@@ -235,8 +253,8 @@
   .wdc-form-group-fields {
     margin-bottom: $wdc-spacing-m;
 
-    &+.wdc-form-hint-message,
-    &+.wdc-form-hint-message {
+    & + .wdc-form-hint-message,
+    & + .wdc-form-hint-message {
       position: absolute;
       bottom: 0;
       left: $wdc-form-inline-label-width + $wdc-spacing-s;
