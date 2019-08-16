@@ -6,23 +6,23 @@ cache:
 git:
   depth: 3
 stages:
-- name: pr-previews
+- name: testing
   if: branch = master AND type = pull_request
 - name: npm publish
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
-- name: master storybook
+- name: master check and build storybook
   if: branch = master AND type != pull_request
 before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
 - export PATH="$HOME/.yarn/bin:$PATH"
 install:
 - yarn install --production=false
+- yarn lint
 - yarn build
 jobs:
   include:
-  - stage: pr-previews
+  - stage: testing
     script:
-    - yarn lint
     - yarn test
   - stage: npm publish
     deploy:
@@ -31,9 +31,8 @@ jobs:
       skip_cleanup: true
       on:
         tags: true
-  - stage: master storybook
+  - stage: master check and build storybook
     script:
-    - yarn lint
     - yarn test
     - yarn build-storybook
     deploy:
