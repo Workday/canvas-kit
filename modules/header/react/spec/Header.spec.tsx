@@ -173,7 +173,7 @@ describe('Header', () => {
 
       expect(wrapper.find(IconButton)).toHaveLength(1);
       expect(renderedIcon.props().icon).toBe(activityStreamIcon);
-      expect(renderedIcon.props().buttonType).toBe(IconButton.Types.Inverse);
+      expect(renderedIcon.props().buttonType).toBe(IconButton.Type.Inverse);
       expect(renderedIcon.props().onClick).toBeTruthy();
     });
 

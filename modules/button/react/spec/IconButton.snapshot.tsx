@@ -15,14 +15,14 @@ describe('Icon Button Snapshots', () => {
 
   test('renders a small icon button', () => {
     const component = renderer.create(
-      <IconButton buttonSize={IconButton.Sizes.Small} icon={activityStreamIcon} />
+      <IconButton buttonSize={IconButton.Size.Small} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a medium icon button', () => {
     const component = renderer.create(
-      <IconButton buttonSize={IconButton.Sizes.Medium} icon={activityStreamIcon} />
+      <IconButton buttonSize={IconButton.Size.Medium} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -35,14 +35,14 @@ describe('Icon Button Snapshots', () => {
   test('renders various icon types', () => {
     const component = renderer.create(
       <>
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Types.Square} />
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Types.SquareFilled} />
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Types.Plain} />
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Types.Circle} />
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Types.CircleFilled} />
+        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.Square} />
+        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.SquareFilled} />
+        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.Plain} />
+        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.Circle} />
+        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.CircleFilled} />
         <div style={{background: '#000'}}>
-          <IconButton icon={activityStreamIcon} buttonType={IconButton.Types.Inverse} />
-          <IconButton icon={activityStreamIcon} buttonType={IconButton.Types.InverseFilled} />
+          <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.Inverse} />
+          <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.InverseFilled} />
         </div>
       </>
     );

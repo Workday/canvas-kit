@@ -6,7 +6,7 @@ import {editIcon} from '@workday/canvas-system-icons-web';
 describe('Button (Secondary) Snapshots (beta)', () => {
   test('renders a large, secondary button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Secondary}>
+      <Button buttonSize={Button.Size.Large} buttonType={Button.Type.Secondary}>
         Button
       </Button>
     );
@@ -15,7 +15,7 @@ describe('Button (Secondary) Snapshots (beta)', () => {
 
   test('renders a large, secondary button with an icon', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Secondary} icon={editIcon}>
+      <Button buttonSize={Button.Size.Large} buttonType={Button.Type.Secondary} icon={editIcon}>
         Button
       </Button>
     );
@@ -24,11 +24,7 @@ describe('Button (Secondary) Snapshots (beta)', () => {
 
   test('renders a large, secondary button with a data label', () => {
     const component = renderer.create(
-      <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Secondary}
-        dataLabel={'1:00'}
-      >
+      <Button buttonSize={Button.Size.Large} buttonType={Button.Type.Secondary} dataLabel={'1:00'}>
         Button
       </Button>
     );
@@ -38,8 +34,8 @@ describe('Button (Secondary) Snapshots (beta)', () => {
   test('renders a large, secondary button with an icon and a data label', () => {
     const component = renderer.create(
       <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Secondary}
+        buttonSize={Button.Size.Large}
+        buttonType={Button.Type.Secondary}
         icon={editIcon}
         dataLabel={'1:00'}
       >
@@ -51,7 +47,7 @@ describe('Button (Secondary) Snapshots (beta)', () => {
 
   test('renders a medium, secondary button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Secondary}>
+      <Button buttonSize={Button.Size.Medium} buttonType={Button.Type.Secondary}>
         Button
       </Button>
     );
@@ -60,7 +56,7 @@ describe('Button (Secondary) Snapshots (beta)', () => {
 
   test('renders a medium, secondary button with an icon', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Secondary} icon={editIcon}>
+      <Button buttonSize={Button.Size.Medium} buttonType={Button.Type.Secondary} icon={editIcon}>
         Button
       </Button>
     );
@@ -69,11 +65,7 @@ describe('Button (Secondary) Snapshots (beta)', () => {
 
   test('renders a medium, secondary button with a data label', () => {
     const component = renderer.create(
-      <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Secondary}
-        dataLabel={'1:00'}
-      >
+      <Button buttonSize={Button.Size.Medium} buttonType={Button.Type.Secondary} dataLabel={'1:00'}>
         Button
       </Button>
     );
@@ -83,8 +75,8 @@ describe('Button (Secondary) Snapshots (beta)', () => {
   test('renders a medium, secondary button with an icon and a data label', () => {
     const component = renderer.create(
       <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Secondary}
+        buttonSize={Button.Size.Medium}
+        buttonType={Button.Type.Secondary}
         icon={editIcon}
         dataLabel={'1:00'}
       >
@@ -96,7 +88,7 @@ describe('Button (Secondary) Snapshots (beta)', () => {
 
   test('renders a small, secondary button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Small} buttonType={Button.Types.Secondary}>
+      <Button buttonSize={Button.Size.Small} buttonType={Button.Type.Secondary}>
         Button
       </Button>
     );
@@ -105,7 +97,7 @@ describe('Button (Secondary) Snapshots (beta)', () => {
 
   test('renders a large, growing secondary button', () => {
     const component = renderer.create(
-      <Button grow={true} buttonSize={Button.Sizes.Large} buttonType={Button.Types.Secondary}>
+      <Button grow={true} buttonSize={Button.Size.Large} buttonType={Button.Type.Secondary}>
         Button
       </Button>
     );

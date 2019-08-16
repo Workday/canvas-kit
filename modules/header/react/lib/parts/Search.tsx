@@ -185,7 +185,7 @@ const SearchSubmit = styled(IconButton)({
 });
 
 const iconButtonType = (inverse: boolean) =>
-  inverse ? IconButton.Types.Inverse : IconButton.Types.Plain;
+  inverse ? IconButton.Type.Inverse : IconButton.Type.Plain;
 
 export class Search extends React.Component<SearchProps, SearchState> {
   static defaultProps = {
@@ -314,7 +314,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
               aria-label="Reset Search Input"
               icon={xIcon}
               type="reset"
-              buttonType={IconButton.Types.Circle}
+              buttonType={IconButton.Type.Circle}
               style={{...iconStyle, ...closeIconStyle}}
               onClick={this.closeMobileSearch}
             />

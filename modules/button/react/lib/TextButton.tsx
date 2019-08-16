@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {ButtonBaseLabel, ButtonLabelIcon, getButtonStyle} from './ButtonBase';
 import styled from 'react-emotion';
-import {ButtonSizes, IconPositions, TextButtonTypes} from './types';
+import {ButtonSize, IconPosition, TextButtonType} from './types';
 import {BaseButtonProps} from './Button';
 import {textButtonStyles} from './ButtonStyles';
 
-export interface TextButtonProps extends BaseButtonProps<TextButtonTypes> {
-  iconPosition?: IconPositions;
+export interface TextButtonProps extends BaseButtonProps<TextButtonType> {
+  iconPosition?: IconPosition;
 }
 
 const TextButtonCon = styled('button')<TextButtonProps>(
@@ -16,25 +16,25 @@ const TextButtonCon = styled('button')<TextButtonProps>(
     const {sizes} = textButtonStyles.variants!;
 
     switch (buttonSize) {
-      case ButtonSizes.Large:
+      case ButtonSize.Large:
       default:
         return sizes.large;
-      case ButtonSizes.Medium:
-      case ButtonSizes.Small:
+      case ButtonSize.Medium:
+      case ButtonSize.Small:
         return sizes.small;
     }
   }
 );
 
 export default class TextButton extends React.Component<TextButtonProps> {
-  public static IconPositions = IconPositions;
-  public static Types = TextButtonTypes;
-  public static Sizes = ButtonSizes;
+  public static IconPosition = IconPosition;
+  public static Type = TextButtonType;
+  public static Size = ButtonSize;
 
   static defaultProps = {
-    iconPosition: IconPositions.Left,
-    buttonType: TextButtonTypes.Default,
-    buttonSize: ButtonSizes.Large,
+    iconPosition: IconPosition.Left,
+    buttonType: TextButtonType.Default,
+    buttonSize: ButtonSize.Large,
   };
 
   public render() {
@@ -42,11 +42,11 @@ export default class TextButton extends React.Component<TextButtonProps> {
 
     return (
       <TextButtonCon onClick={onClick} innerRef={buttonRef} {...elemProps}>
-        {elemProps.icon && elemProps.iconPosition === IconPositions.Left && (
+        {elemProps.icon && elemProps.iconPosition === IconPosition.Left && (
           <ButtonLabelIcon {...elemProps} />
         )}
         <ButtonBaseLabel {...elemProps}>{children}</ButtonBaseLabel>
-        {elemProps.icon && elemProps.iconPosition === IconPositions.Right && (
+        {elemProps.icon && elemProps.iconPosition === IconPosition.Right && (
           <ButtonLabelIcon {...elemProps} />
         )}
       </TextButtonCon>

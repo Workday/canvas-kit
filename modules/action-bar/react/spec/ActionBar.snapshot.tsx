@@ -17,7 +17,7 @@ describe('Action Bar Snapshots', () => {
   test('renders a action bar with one button', () => {
     const component = renderer.create(
       <ActionBar>
-        <Button buttonType={Button.Types.Primary}>Button</Button>
+        <Button buttonType={Button.Type.Primary}>Button</Button>
       </ActionBar>
     );
     expect(component).toMatchSnapshot();
@@ -26,7 +26,7 @@ describe('Action Bar Snapshots', () => {
   test('renders a fixed action bar with one button', () => {
     const component = renderer.create(
       <ActionBar fixed={true}>
-        <Button buttonType={Button.Types.Primary}>Button</Button>
+        <Button buttonType={Button.Type.Primary}>Button</Button>
       </ActionBar>
     );
     expect(component).toMatchSnapshot();
@@ -35,7 +35,7 @@ describe('Action Bar Snapshots', () => {
   test('renders a action bar with two buttons', () => {
     const component = renderer.create(
       <ActionBar>
-        <Button buttonType={Button.Types.Primary}>Button</Button>
+        <Button buttonType={Button.Type.Primary}>Button</Button>
         <Button>Button</Button>
       </ActionBar>
     );
@@ -45,7 +45,7 @@ describe('Action Bar Snapshots', () => {
   test('renders a fixed action bar with two buttons', () => {
     const component = renderer.create(
       <ActionBar fixed={true}>
-        <Button buttonType={Button.Types.Primary}>Button</Button>
+        <Button buttonType={Button.Type.Primary}>Button</Button>
         <Button>Button</Button>
       </ActionBar>
     );

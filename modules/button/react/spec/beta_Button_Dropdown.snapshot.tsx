@@ -6,8 +6,8 @@ describe('Button (Dropdown) Snapshots', () => {
   test('renders a large, dropdown primary button', () => {
     const component = renderer.create(
       <DropdownButton
-        buttonSize={DropdownButton.Sizes.Large}
-        buttonType={DropdownButton.Types.Primary}
+        buttonSize={DropdownButton.Size.Large}
+        buttonType={DropdownButton.Type.Primary}
       >
         Button
       </DropdownButton>
@@ -18,8 +18,8 @@ describe('Button (Dropdown) Snapshots', () => {
   test('renders a medium, dropdown primary button', () => {
     const component = renderer.create(
       <DropdownButton
-        buttonSize={DropdownButton.Sizes.Medium}
-        buttonType={DropdownButton.Types.Primary}
+        buttonSize={DropdownButton.Size.Medium}
+        buttonType={DropdownButton.Type.Primary}
       >
         Button
       </DropdownButton>
@@ -30,8 +30,8 @@ describe('Button (Dropdown) Snapshots', () => {
   test('renders a large, dropdown secondary button', () => {
     const component = renderer.create(
       <DropdownButton
-        buttonSize={DropdownButton.Sizes.Large}
-        buttonType={DropdownButton.Types.Secondary}
+        buttonSize={DropdownButton.Size.Large}
+        buttonType={DropdownButton.Type.Secondary}
       >
         Button
       </DropdownButton>
@@ -42,8 +42,8 @@ describe('Button (Dropdown) Snapshots', () => {
   test('renders a medium, dropdown secondary button', () => {
     const component = renderer.create(
       <DropdownButton
-        buttonSize={DropdownButton.Sizes.Medium}
-        buttonType={DropdownButton.Types.Secondary}
+        buttonSize={DropdownButton.Size.Medium}
+        buttonType={DropdownButton.Type.Secondary}
       >
         Button
       </DropdownButton>

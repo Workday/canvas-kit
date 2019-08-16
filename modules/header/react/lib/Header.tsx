@@ -269,7 +269,7 @@ class MenuIconButton extends React.Component<
     const {themeColor, menuToggle, onMenuClick} = this.props;
     const menuIconButtonProps = {
       buttonType:
-        themeColor === HeaderTheme.White ? IconButton.Types.Circle : IconButton.Types.Inverse,
+        themeColor === HeaderTheme.White ? IconButton.Type.Circle : IconButton.Type.Inverse,
       icon: justifyIcon,
     };
 
@@ -389,8 +389,8 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
         React.Children.count(propsChildren) === 1 && (propsChildren as React.ReactElement<any>);
       const iconButtonType =
         this.props.themeColor === HeaderTheme.White
-          ? IconButton.Types.Circle
-          : IconButton.Types.Inverse;
+          ? IconButton.Type.Circle
+          : IconButton.Type.Inverse;
 
       // Convert old method of SystemIcon into IconButton. If SystemIcon is within a link, make sure it's passed through
       if (child.type === 'a' && singleChild && singleChild.type === SystemIcon) {
@@ -425,7 +425,7 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
       // Plain icon buttons have negative margin that we need to negate.
       if (
         child.type === IconButton &&
-        (child.props as IconButtonProps).buttonType === IconButton.Types.Plain
+        (child.props as IconButtonProps).buttonType === IconButton.Type.Plain
       ) {
         return React.cloneElement(child as React.ReactElement<IconButtonProps>, {
           style: {margin: `0 0 0 ${childrenSpacing}`},

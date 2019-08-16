@@ -4,7 +4,7 @@ import throttle from 'lodash/throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors, spacing, type, CanvasSpacingValue} from '@workday/canvas-kit-react-core';
-import {IconButton, ButtonSizes} from '@workday/canvas-kit-react-button';
+import {IconButton, ButtonSize} from '@workday/canvas-kit-react-button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -182,10 +182,10 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
               openDirection={openDirection}
               aria-label={`${open ? 'hide navigation' : 'show navigation'}`}
               toggled={false}
-              buttonSize={ButtonSizes.Small}
+              buttonSize={ButtonSize.Small}
               onClick={this.onToggleClick}
               icon={this.toggleButtonDirection()}
-              buttonType={IconButton.Types.CircleFilled}
+              buttonType={IconButton.Type.CircleFilled}
             />
           )}
         </SidePanelFooter>

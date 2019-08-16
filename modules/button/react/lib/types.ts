@@ -1,7 +1,7 @@
 /**
  * The different button sizes.
  */
-export enum ButtonSizes {
+export enum ButtonSize {
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
@@ -11,13 +11,13 @@ export enum ButtonSizes {
 /**
  * The different button types.
  */
-export enum ButtonTypes {
+export enum ButtonType {
   Primary = 'primary',
   Secondary = 'secondary',
   Delete = 'delete',
 }
 
-export enum BetaButtonTypes {
+export enum BetaButtonType {
   Primary = 'betaPrimary',
   Secondary = 'betaSecondary',
   Delete = 'betaDelete',
@@ -27,7 +27,7 @@ export enum BetaButtonTypes {
   OutlineInverse = 'outlineInverse',
 }
 
-export enum IconButtonTypes {
+export enum IconButtonType {
   Square = 'square',
   SquareFilled = 'squareFilled',
   Plain = 'plain',
@@ -40,16 +40,16 @@ export enum IconButtonTypes {
 /**
  * The different icon positions.
  */
-export enum IconPositions {
+export enum IconPosition {
   Left = 'iconPositionLeft',
   Right = 'iconPositionRight',
 }
 
-export enum TextButtonTypes {
+export enum TextButtonType {
   Default = 'text',
   Inverse = 'textInverse',
   AllCaps = 'textAllCaps',
   InverseAllCaps = 'textInverseAllCaps',
 }
 
-export type AllButtonTypes = ButtonTypes | BetaButtonTypes | TextButtonTypes | IconButtonTypes;
+export type AllButtonTypes = ButtonType | BetaButtonType | TextButtonType | IconButtonType;

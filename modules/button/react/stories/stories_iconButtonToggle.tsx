@@ -15,7 +15,7 @@ import {
   IconButton,
   IconButtonToggleGroup,
   IconButtonToggleGroupProps,
-  IconButtonTypes,
+  IconButtonType,
 } from '../index';
 
 import README from '../README.md';
@@ -39,7 +39,7 @@ interface ToggleIconButtonWrapperState {
 }
 
 interface ToggleIconButtonWrapperProps {
-  buttonType: IconButtonTypes;
+  buttonType: IconButtonType;
 }
 
 export class ToggleIconButtonWrapper extends React.Component<
@@ -97,22 +97,22 @@ storiesOf('Button/Icon Button', module)
   .add('Toggleable', () => (
     <div className="story">
       <h3>Square Icon Buttons</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Types.Square} />
+      <ToggleIconButtonWrapper buttonType={IconButton.Type.Square} />
 
       <h3>Default Icon Buttons</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Types.Circle} />
+      <ToggleIconButtonWrapper buttonType={IconButton.Type.Circle} />
 
       <h3>Filled Icon Buttons</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Types.CircleFilled} />
+      <ToggleIconButtonWrapper buttonType={IconButton.Type.CircleFilled} />
 
       <h3>Inverse Icon Buttons</h3>
       <div className={css(blueBackground)}>
-        <ToggleIconButtonWrapper buttonType={IconButton.Types.Inverse} />
+        <ToggleIconButtonWrapper buttonType={IconButton.Type.Inverse} />
       </div>
 
       <h3>Inverse Filled Icon Buttons</h3>
       <div className={css(blueBackground)}>
-        <ToggleIconButtonWrapper buttonType={IconButton.Types.InverseFilled} />
+        <ToggleIconButtonWrapper buttonType={IconButton.Type.InverseFilled} />
       </div>
 
       <h3>Two buttons Grouped</h3>

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {
-  ButtonSizes,
-  ButtonTypes,
-  IconPositions,
+  ButtonSize,
+  ButtonType,
+  IconPosition,
   AllButtonTypes,
-  TextButtonTypes,
-  BetaButtonTypes,
-  IconButtonTypes,
+  TextButtonType,
+  BetaButtonType,
+  IconButtonType,
 } from './types';
 import {ButtonProps, BaseButtonProps} from './Button';
 import {TextButtonProps} from './TextButton';
@@ -40,12 +40,12 @@ export const ButtonBaseLabel = styled('span')<ButtonProps<AllButtonTypes>>(
     const {sizes} = ButtonStyles.labelBaseStyles.variants!;
 
     switch (buttonSize) {
-      case ButtonSizes.Large:
+      case ButtonSize.Large:
       default:
         return sizes.large;
-      case ButtonSizes.Small:
+      case ButtonSize.Small:
         return sizes.small;
-      case ButtonSizes.Medium:
+      case ButtonSize.Medium:
         return sizes.medium;
     }
   },
@@ -53,17 +53,17 @@ export const ButtonBaseLabel = styled('span')<ButtonProps<AllButtonTypes>>(
     const {types} = ButtonStyles.labelBaseStyles.variants!;
 
     switch (buttonType) {
-      case TextButtonTypes.Default:
-      case TextButtonTypes.Inverse:
+      case TextButtonType.Default:
+      case TextButtonType.Inverse:
         return types.text;
-      case TextButtonTypes.AllCaps:
-      case TextButtonTypes.InverseAllCaps:
+      case TextButtonType.AllCaps:
+      case TextButtonType.InverseAllCaps:
         return types.textAllCaps;
-      case ButtonTypes.Primary:
+      case ButtonType.Primary:
         return types.primary;
-      case ButtonTypes.Secondary:
+      case ButtonType.Secondary:
         return types.secondary;
-      case ButtonTypes.Delete:
+      case ButtonType.Delete:
         return types.delete;
       default:
         return {};
@@ -76,10 +76,10 @@ export const ButtonLabelData = styled('span')<ButtonProps>(
   ({buttonSize}) => {
     const {sizes} = ButtonStyles.labelDataBaseStyles.variants!;
     switch (buttonSize) {
-      case ButtonSizes.Large:
+      case ButtonSize.Large:
       default:
         return sizes.large;
-      case ButtonSizes.Medium:
+      case ButtonSize.Medium:
         return sizes.medium;
     }
   }
@@ -92,10 +92,10 @@ const ButtonLabelIconStyled = styled('span')<
   ({buttonSize, dropdown}) => {
     if (dropdown) {
       switch (buttonSize) {
-        case ButtonSizes.Large:
+        case ButtonSize.Large:
         default:
           return {padding: '0 8px 0 0'};
-        case ButtonSizes.Medium:
+        case ButtonSize.Medium:
           return {padding: '0 4px 0 0'};
       }
     }
@@ -103,10 +103,10 @@ const ButtonLabelIconStyled = styled('span')<
     const {sizes} = ButtonStyles.labelIconBaseStyles.variants!;
 
     switch (buttonSize) {
-      case ButtonSizes.Large:
+      case ButtonSize.Large:
       default:
         return sizes.large;
-      case ButtonSizes.Medium:
+      case ButtonSize.Medium:
         return sizes.medium;
     }
   },
@@ -118,10 +118,10 @@ const ButtonLabelIconStyled = styled('span')<
     const {types} = ButtonStyles.labelIconBaseStyles.variants!;
 
     switch (iconPosition) {
-      case IconPositions.Left:
+      case IconPosition.Left:
       default:
         return types.iconPositionLeft;
-      case IconPositions.Right:
+      case IconPosition.Right:
         return types.iconPositionRight;
     }
   }
@@ -140,7 +140,7 @@ export class ButtonLabelIcon extends React.Component<ButtonLabelIconProps> {
 
     let iconSize = 24;
 
-    if (this.props.buttonSize === ButtonSizes.Small) {
+    if (this.props.buttonSize === ButtonSize.Small) {
       iconSize = 20;
     }
 
@@ -154,17 +154,17 @@ export class ButtonLabelIcon extends React.Component<ButtonLabelIconProps> {
 
 export function getButtonSize(
   baseButton: ButtonStyles.ButtonGenericStyle,
-  buttonSize?: ButtonSizes
+  buttonSize?: ButtonSize
 ) {
   const {sizes} = baseButton.variants!;
 
   switch (buttonSize) {
-    case ButtonSizes.Large:
+    case ButtonSize.Large:
       return sizes.large;
-    case ButtonSizes.Medium:
+    case ButtonSize.Medium:
     default:
       return sizes.medium;
-    case ButtonSizes.Small:
+    case ButtonSize.Small:
       return sizes.small;
   }
 }
@@ -176,66 +176,66 @@ export function getButtonStyle(
   const {types} = baseButton.variants!;
 
   switch (buttonType) {
-    case ButtonTypes.Primary:
+    case ButtonType.Primary:
     default:
-      return types[ButtonTypes.Primary];
-    case ButtonTypes.Secondary:
-      return types[ButtonTypes.Secondary];
-    case ButtonTypes.Delete:
-      return types[ButtonTypes.Delete];
-    case BetaButtonTypes.Highlight:
-      return types[BetaButtonTypes.Highlight];
-    case BetaButtonTypes.OutlinePrimary:
-      return types[BetaButtonTypes.OutlinePrimary];
-    case BetaButtonTypes.OutlineSecondary:
-      return types[BetaButtonTypes.OutlineSecondary];
-    case BetaButtonTypes.OutlineInverse:
-      return types[BetaButtonTypes.OutlineInverse];
-    case BetaButtonTypes.Primary:
-      return types[BetaButtonTypes.Primary];
-    case BetaButtonTypes.Secondary:
-      return types[BetaButtonTypes.Secondary];
-    case BetaButtonTypes.Delete:
-      return types[BetaButtonTypes.Delete];
-    case TextButtonTypes.Default:
-      return types[TextButtonTypes.Default];
-    case TextButtonTypes.Inverse:
-      return types[TextButtonTypes.Inverse];
-    case TextButtonTypes.AllCaps:
-      return types[TextButtonTypes.AllCaps];
-    case TextButtonTypes.InverseAllCaps:
-      return types[TextButtonTypes.InverseAllCaps];
-    case IconButtonTypes.Square:
-      return types[IconButtonTypes.Square];
-    case IconButtonTypes.SquareFilled:
-      return types[IconButtonTypes.SquareFilled];
-    case IconButtonTypes.Plain:
-      return types[IconButtonTypes.Plain];
-    case IconButtonTypes.Circle:
-      return types[IconButtonTypes.Circle];
-    case IconButtonTypes.CircleFilled:
-      return types[IconButtonTypes.CircleFilled];
-    case IconButtonTypes.Inverse:
-      return types[IconButtonTypes.Inverse];
-    case IconButtonTypes.InverseFilled:
-      return types[IconButtonTypes.InverseFilled];
+      return types[ButtonType.Primary];
+    case ButtonType.Secondary:
+      return types[ButtonType.Secondary];
+    case ButtonType.Delete:
+      return types[ButtonType.Delete];
+    case BetaButtonType.Highlight:
+      return types[BetaButtonType.Highlight];
+    case BetaButtonType.OutlinePrimary:
+      return types[BetaButtonType.OutlinePrimary];
+    case BetaButtonType.OutlineSecondary:
+      return types[BetaButtonType.OutlineSecondary];
+    case BetaButtonType.OutlineInverse:
+      return types[BetaButtonType.OutlineInverse];
+    case BetaButtonType.Primary:
+      return types[BetaButtonType.Primary];
+    case BetaButtonType.Secondary:
+      return types[BetaButtonType.Secondary];
+    case BetaButtonType.Delete:
+      return types[BetaButtonType.Delete];
+    case TextButtonType.Default:
+      return types[TextButtonType.Default];
+    case TextButtonType.Inverse:
+      return types[TextButtonType.Inverse];
+    case TextButtonType.AllCaps:
+      return types[TextButtonType.AllCaps];
+    case TextButtonType.InverseAllCaps:
+      return types[TextButtonType.InverseAllCaps];
+    case IconButtonType.Square:
+      return types[IconButtonType.Square];
+    case IconButtonType.SquareFilled:
+      return types[IconButtonType.SquareFilled];
+    case IconButtonType.Plain:
+      return types[IconButtonType.Plain];
+    case IconButtonType.Circle:
+      return types[IconButtonType.Circle];
+    case IconButtonType.CircleFilled:
+      return types[IconButtonType.CircleFilled];
+    case IconButtonType.Inverse:
+      return types[IconButtonType.Inverse];
+    case IconButtonType.InverseFilled:
+      return types[IconButtonType.InverseFilled];
   }
 }
 
-function getBaseButton(buttonType: ButtonTypes | BetaButtonTypes) {
+function getBaseButton(buttonType: ButtonType | BetaButtonType) {
   switch (buttonType) {
-    case ButtonTypes.Primary:
-    case ButtonTypes.Secondary:
-    case ButtonTypes.Delete:
+    case ButtonType.Primary:
+    case ButtonType.Secondary:
+    case ButtonType.Delete:
     default:
       return ButtonStyles.canvasButtonStyles;
-    case BetaButtonTypes.Primary:
-    case BetaButtonTypes.Secondary:
-    case BetaButtonTypes.Delete:
-    case BetaButtonTypes.Highlight:
-    case BetaButtonTypes.OutlinePrimary:
-    case BetaButtonTypes.OutlineSecondary:
-    case BetaButtonTypes.OutlineInverse:
+    case BetaButtonType.Primary:
+    case BetaButtonType.Secondary:
+    case BetaButtonType.Delete:
+    case BetaButtonType.Highlight:
+    case BetaButtonType.OutlinePrimary:
+    case BetaButtonType.OutlineSecondary:
+    case BetaButtonType.OutlineInverse:
       return ButtonStyles.betaButtonStyles;
   }
 }

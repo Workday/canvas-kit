@@ -9,7 +9,7 @@ Clickable button elements that extend the native `<button>` element with Canvas 
 > across all our products. We want to discourage their use until everyone can uptake them
 > simultaneously for consistencies sake.
 >
-> The new buttons include new `ButtonTypes`, icon support, and the `ButtonSizes` equate to different
+> The new buttons include new `ButtonType`, icon support, and the `ButtonSize` equate to different
 > button and font sizes.
 >
 > **If you would like to use the new buttons, please consult the design systems team and get
@@ -38,18 +38,18 @@ import {Button} from '@workday/canvas-kit-react-button';
 
 ## Static Properties
 
-#### `Sizes: ButtonSizes`
+#### `Sizes: ButtonSize`
 
 ```tsx
-<Button buttonSize={Button.Sizes.Small}>Small Button</Button>
+<Button buttonSize={Button.Size.Small}>Small Button</Button>
 ```
 
 ---
 
-#### `Types: ButtonTypes`
+#### `Types: ButtonType`
 
 ```tsx
-<Button buttonType={Button.Types.Primary}>Primary Button</Button>
+<Button buttonType={Button.Type.Primary}>Primary Button</Button>
 ```
 
 ## Component Props
@@ -62,11 +62,11 @@ import {Button} from '@workday/canvas-kit-react-button';
 
 ### Optional
 
-#### `buttonType: ButtonTypes`
+#### `buttonType: ButtonType`
 
 > The type of the button
 
-Default: `ButtonTypes.Secondary`
+Default: `ButtonType.Secondary`
 
 | Theme       | Description                     |
 | ----------- | ------------------------------- |
@@ -76,11 +76,11 @@ Default: `ButtonTypes.Secondary`
 
 ---
 
-#### `buttonSize: ButtonSizes`
+#### `buttonSize: ButtonSize`
 
 > The type of the button
 
-Default: `ButtonSizes.Large`
+Default: `ButtonSize.Large`
 
 | Theme    | Description                            |
 | -------- | -------------------------------------- |
@@ -124,18 +124,18 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ## Static Properties
 
-#### `Sizes: ButtonSizes`
+#### `Sizes: ButtonSize`
 
 ```tsx
-<IconButton buttonSize={IconButton.Sizes.Small} icon={xIcon} />
+<IconButton buttonSize={IconButton.Size.Small} icon={xIcon} />
 ```
 
 ---
 
-#### `Types: IconButtonTypes`
+#### `Types: IconButtonType`
 
 ```tsx
-<IconButton buttonType={IconButton.Types.Plain} icon={xIcon} />
+<IconButton buttonType={IconButton.Type.Plain} icon={xIcon} />
 ```
 
 ## Component Props
@@ -146,11 +146,11 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ### Optional
 
-#### `buttonType: IconButtonTypes`
+#### `buttonType: IconButtonType`
 
 > The type of the icon button
 
-Default: `IconButtonTypes.Circle`
+Default: `IconButtonType.Circle`
 
 | Theme           | Description                                      |
 | --------------- | ------------------------------------------------ |
@@ -164,7 +164,7 @@ Default: `IconButtonTypes.Circle`
 
 ---
 
-#### `buttonSize: IconButton.Sizes.Small | IconButton.Sizes.Medium`
+#### `buttonSize: IconButton.Size.Small | IconButton.Size.Medium`
 
 > The size of the icon button
 

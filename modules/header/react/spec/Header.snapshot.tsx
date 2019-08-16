@@ -75,8 +75,8 @@ describe('Dub Header Snapshots', () => {
       .create(
         <Header>
           <SystemIcon icon={notificationsIcon} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Square} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Plain} />
+          <IconButton icon={inboxIcon} buttonType={IconButton.Type.Square} />
+          <IconButton icon={inboxIcon} buttonType={IconButton.Type.Plain} />
         </Header>
       )
       .toJSON();
