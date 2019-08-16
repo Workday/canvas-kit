@@ -47,16 +47,25 @@
 
       &:focus,
       &:hover {
-        background-color: $wdc-color-soap-300;
+        background-color: $wdc-color-common-hover-background;
       }
 
-      &.is-disabled {
+      &.wdc-menu-item-disabled {
         color: $wdc-color-licorice-100;
         cursor: default;
 
         &:hover {
           background-color: transparent;
         }
+
+        &.wdc-menu-item-focused {
+          background-color: $wdc-color-blueberry-200;
+        }
+      }
+
+      &.wdc-menu-item-focused {
+        background-color: $wdc-color-common-focus-background;
+        color: $wdc-color-type-inverse;
       }
     }
 

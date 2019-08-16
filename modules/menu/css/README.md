@@ -39,3 +39,55 @@ Use `.wdc-menu` to create a menu.
   </ul>
 </div>
 ```
+
+### Menu Item Modifiers
+
+Use `.wdc-menu-item-disabled` to create a disabled menu item.
+
+```html
+<div class="wdc-menu">
+  <ul>
+    <li class="wdc-menu-item-disabled">
+      Disabled item
+    </li>
+  </ul>
+</div>
+```
+
+Use `.wdc-menu-item-focused` to create a focused menu item.
+
+```html
+<div class="wdc-menu">
+  <ul>
+    <li class="wdc-menu-item-focused">
+      Focused item
+    </li>
+  </ul>
+</div>
+```
+
+Menu item modifiers may be combined.
+
+```html
+<div class="wdc-menu">
+  <ul>
+    <li class="wdc-menu-item-disabled wdc-menu-item-focused">
+      Disabled and focused item
+    </li>
+  </ul>
+</div>
+```
+
+## Divider
+
+Use `<hr />` to create a divider between menu items.
+
+```html
+<div class="wdc-menu">
+  <ul>
+    <li>Item 1</li>
+    <hr />
+    <li>Item 2</li>
+  </ul>
+</div>
+```

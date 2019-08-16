@@ -20,7 +20,7 @@ storiesOf('CSS/Menu', module)
               <a href="#">First Item</a>
             </li>
             <li>Second Item with really really really long label</li>
-            <li className="is-disabled">Third Item (disabled)</li>
+            <li className="wdc-menu-item-disabled">Third Item (disabled)</li>
             <li>
               <em>
                 Fourth Item (<b>with markup</b>)
