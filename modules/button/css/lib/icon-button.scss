@@ -4,6 +4,7 @@
   &-square-filled,
   &-circle,
   &-circle-filled,
+  &-plain,
   &-inverse {
     min-width: auto;
     max-width: auto;
@@ -88,6 +89,46 @@
             &.wdc-btn-active,
             &:active {
               background-color: $wdc-btn-icon-active-bg;
+            }
+          }
+        }
+      }
+
+      &:disabled {
+        background-color: $wdc-btn-icon-disabled-bg;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-disabled-color;
+        }
+      }
+    }
+
+    &-plain {
+      background-color: $wdc-btn-icon-bg;
+
+      &:not([disabled]) {
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-bg;
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-icon-bg;
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          background-color: $wdc-btn-icon-bg;
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-bg;
+
+            &.wdc-btn-active,
+            &:active {
+              background-color: $wdc-btn-icon-bg;
             }
           }
         }
