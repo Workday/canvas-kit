@@ -159,6 +159,27 @@ storiesOf('CSS/Button/Icon Button', module)
       </button>
     </div>
   ))
+  .add('Plain', () => (
+    <div className="story">
+      <h3>Medium Inverse</h3>
+
+      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-plain">
+        <SystemIcon icon={activityStreamIcon} />
+      </button>
+      <button disabled={true} className="wdc-btn wdc-btn-medium wdc-btn-icon-plain">
+        <SystemIcon icon={activityStreamIcon} />
+      </button>
+
+      <h3>Small Plain</h3>
+
+      <button className="wdc-btn wdc-btn-small wdc-btn-icon-plain">
+        <SystemIcon icon={activityStreamIcon} />
+      </button>
+      <button disabled={true} className="wdc-btn wdc-btn-small wdc-btn-icon-plain">
+        <SystemIcon icon={activityStreamIcon} />
+      </button>
+    </div>
+  ))
   .add('Circle', () => (
     <div className="story">
       <h3>Medium Circle</h3>
@@ -223,25 +244,32 @@ storiesOf('CSS/Button/Icon Button', module)
       </div>
     </div>
   ))
-  .add('Plain', () => (
+  .add('Inverse Filled', () => (
     <div className="story">
       <h3>Medium Inverse</h3>
-
-      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-plain">
-        <SystemIcon icon={activityStreamIcon} />
-      </button>
-      <button disabled={true} className="wdc-btn wdc-btn-medium wdc-btn-icon-plain">
-        <SystemIcon icon={activityStreamIcon} />
-      </button>
-
-      <h3>Small Plain</h3>
-
-      <button className="wdc-btn wdc-btn-small wdc-btn-icon-plain">
-        <SystemIcon icon={activityStreamIcon} />
-      </button>
-      <button disabled={true} className="wdc-btn wdc-btn-small wdc-btn-icon-plain">
-        <SystemIcon icon={activityStreamIcon} />
-      </button>
+      <div className={blueBackground}>
+        <button className="wdc-btn wdc-btn-medium wdc-btn-icon-inverse-filled">
+          <SystemIcon icon={activityStreamIcon} />
+        </button>
+        <button
+          disabled={true}
+          className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
+        >
+          <SystemIcon icon={activityStreamIcon} />
+        </button>
+      </div>
+      <h3>Small Inverse</h3>
+      <div className={blueBackground}>
+        <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse-filled">
+          <SystemIcon icon={activityStreamIcon} />
+        </button>
+        <button
+          disabled={true}
+          className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
+        >
+          <SystemIcon icon={activityStreamIcon} />
+        </button>
+      </div>
     </div>
   ));
 

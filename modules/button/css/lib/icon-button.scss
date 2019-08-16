@@ -5,7 +5,8 @@
   &-circle,
   &-circle-filled,
   &-plain,
-  &-inverse {
+  &-inverse,
+  &-inverse-filled {
     min-width: auto;
     max-width: auto;
     height: $wdc-btn-icon-height;
@@ -211,6 +212,78 @@
           &.wdc-btn-active,
           &:active {
             background-color: $wdc-btn-icon-inverse-active-hover-bg;
+          }
+        }
+      }
+    }
+
+    &-inverse-filled {
+      background-color: $wdc-btn-icon-inverse-filled-bg;
+      .wd-icon-accent,
+      .wd-icon-fill {
+        fill: $wdc-btn-icon-inverse-bg;
+      }
+
+      &.wdc-btn-hover:not([disabled]),
+      &:hover:not([disabled]) {
+        background-color: $wdc-btn-icon-inverse-filled-hover-bg;
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-inverse-bg;
+        }
+      }
+
+      &.wdc-btn-active:not([disabled]),
+      &:active:not([disabled]) {
+        background-color: $wdc-btn-icon-inverse-filled-bg;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-inverse-bg;
+        }
+
+        &.wdc-btn-hover:not([disabled]),
+        &:hover:not([disabled]) {
+          background-color: $wdc-btn-icon-inverse-filled-hover-bg;
+
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-inverse-bg;
+          }
+        }
+      }
+
+      &:disabled {
+        background-color: $wdc-btn-icon-inverse-hover-bg;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-inverse-disabled-bg;
+        }
+      }
+
+      &:not([disabled]) {
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-inverse-filled-hover-bg;
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-icon-inverse-filled-bg;
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          background-color: $wdc-btn-icon-inverse-filled-bg;
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-inverse-filled-bg;
+          }
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-inverse-filled-hover-bg;
           }
         }
       }
