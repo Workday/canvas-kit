@@ -120,6 +120,19 @@ color background.
 </button>
 ```
 
+### Inverse
+
+Inverse buttons are buttons that can be used on dark backgrounds.
+
+```html
+<button className="wdc-btn wdc-btn-medium wdc-btn-icon-inverse">
+  <SystemIcon icon="{activityStreamIcon}" />
+</button>
+<button className="wdc-btn wdc-btn-small wdc-btn-icon-inverse-filled">
+  <SystemIcon icon="{activityStreamIcon}" />
+</button>
+```
+
 ### Primary
 
 > Primary buttons are orange and draw attention to the primary action on a screen. They should only
@@ -233,7 +246,8 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 ## Accessibility Notes
 
 > The content of a button is not always clear to the user. In order to better convey what the icon
-> represents, the Icon Button should always have an `aria-label` attribute as well as a 
-> [tooltip](https://github.com/Workday/canvas-kit/tree/master/modules/tooltip/css) or `title attribute`.
+> represents, the Icon Button should always have an `aria-label` attribute as well as a
+> [tooltip](https://github.com/Workday/canvas-kit/tree/master/modules/tooltip/css) or
+> `title attribute`.
 
 See [canvas-kit-core](../../core/css#accessibility) for accessibility guidelines.
