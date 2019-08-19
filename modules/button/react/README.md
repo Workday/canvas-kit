@@ -41,7 +41,7 @@ import {Button} from '@workday/canvas-kit-react-button';
 #### `Sizes: ButtonSize`
 
 ```tsx
-<Button buttonSize={Button.Size.Small}>Small Button</Button>
+<Button size={Button.Size.Small}>Small Button</Button>
 ```
 
 ---
@@ -76,7 +76,7 @@ Default: `ButtonType.Secondary`
 
 ---
 
-#### `buttonSize: ButtonSize`
+#### `size: ButtonSize`
 
 > The type of the button
 
@@ -127,7 +127,7 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 #### `Sizes: ButtonSize`
 
 ```tsx
-<IconButton buttonSize={IconButton.Size.Small} icon={xIcon} />
+<IconButton size={IconButton.Size.Small} icon={xIcon} />
 ```
 
 ---
@@ -164,7 +164,7 @@ Default: `IconButtonType.Circle`
 
 ---
 
-#### `buttonSize: IconButton.Size.Small | IconButton.Size.Medium`
+#### `size: IconButton.Size.Small | IconButton.Size.Medium`
 
 > The size of the icon button
 

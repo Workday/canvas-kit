@@ -16,7 +16,7 @@ export interface BaseButtonProps<T = ButtonType | BetaButtonType>
   /**
    * Size of button.
    */
-  buttonSize?: ButtonSize;
+  size?: ButtonSize;
   /**
    * Ref of button that the styled component renders.
    */
@@ -45,23 +45,23 @@ export default class Button extends React.Component<ButtonProps> {
   public static Size = ButtonSize;
 
   static defaultProps = {
-    buttonSize: ButtonSize.Large,
+    size: ButtonSize.Large,
     buttonType: ButtonType.Secondary,
     grow: false,
   };
 
   public render() {
-    const {buttonRef, ...elemProps} = this.props;
+    const {buttonType, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
     return (
       <ButtonBaseCon {...elemProps} innerRef={buttonRef}>
-        {elemProps.icon && <ButtonLabelIcon {...elemProps} />}
-        <ButtonBaseLabel buttonSize={elemProps.buttonSize} buttonType={elemProps.buttonType}>
-          {elemProps.children}
+        {icon && <ButtonLabelIcon {...elemProps} />}
+        <ButtonBaseLabel size={size} buttonType={buttonType}>
+          {children}
         </ButtonBaseLabel>
-        {elemProps.dataLabel && (
+        {dataLabel && (
           <ButtonLabelData className={labelDataBaseStyles.classname} {...elemProps}>
-            {elemProps.dataLabel}
+            {dataLabel}
           </ButtonLabelData>
         )}
       </ButtonBaseCon>
@@ -81,11 +81,13 @@ export class beta_Button extends React.Component<ButtonProps<BetaButtonType>> {
   };
 
   render() {
+    const {buttonType, size, icon} = this.props;
+
     // TODO (beta button): Move this logic back into Button compponent
     // Restrict Hightlight button to only being sized Large, Medium with an Icon
     if (
-      this.props.buttonType === BetaButtonType.Highlight &&
-      (this.props.icon === undefined || this.props.buttonSize === ButtonSize.Small)
+      buttonType === BetaButtonType.Highlight &&
+      (icon === undefined || size === ButtonSize.Small)
     ) {
       return null;
     }

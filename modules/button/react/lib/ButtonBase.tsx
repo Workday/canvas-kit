@@ -16,19 +16,19 @@ import * as ButtonStyles from './ButtonStyles';
 
 export const ButtonBaseCon = styled('button')<ButtonProps>(
   /* istanbul ignore next line for coverage */
-  ({buttonType, buttonSize}) => {
+  ({buttonType, size}) => {
     if (buttonType === undefined) {
       return {};
     }
 
     const baseButton = getBaseButton(buttonType);
     const buttonStyles = getButtonStyle(baseButton, buttonType);
-    const buttonSizeStyles = buttonSize !== undefined ? getButtonSize(baseButton, buttonSize) : {};
+    const sizeStyles = size !== undefined ? getButtonSize(baseButton, size) : {};
 
     return {
       ...baseButton.styles,
       ...buttonStyles,
-      ...buttonSizeStyles,
+      ...sizeStyles,
     };
   },
   ({grow}) => grow && {width: '100%', maxWidth: '100%'}
@@ -36,10 +36,10 @@ export const ButtonBaseCon = styled('button')<ButtonProps>(
 
 export const ButtonBaseLabel = styled('span')<ButtonProps<AllButtonTypes>>(
   ButtonStyles.labelBaseStyles.styles,
-  ({buttonSize}) => {
+  ({size}) => {
     const {sizes} = ButtonStyles.labelBaseStyles.variants!;
 
-    switch (buttonSize) {
+    switch (size) {
       case ButtonSize.Large:
       default:
         return sizes.large;
@@ -73,9 +73,9 @@ export const ButtonBaseLabel = styled('span')<ButtonProps<AllButtonTypes>>(
 
 export const ButtonLabelData = styled('span')<ButtonProps>(
   ButtonStyles.labelDataBaseStyles.styles,
-  ({buttonSize}) => {
+  ({size}) => {
     const {sizes} = ButtonStyles.labelDataBaseStyles.variants!;
-    switch (buttonSize) {
+    switch (size) {
       case ButtonSize.Large:
       default:
         return sizes.large;
@@ -89,9 +89,9 @@ const ButtonLabelIconStyled = styled('span')<
   ButtonLabelIconProps & Pick<TextButtonProps, 'iconPosition'>
 >(
   ButtonStyles.labelIconBaseStyles.styles,
-  ({buttonSize, dropdown}) => {
+  ({size, dropdown}) => {
     if (dropdown) {
-      switch (buttonSize) {
+      switch (size) {
         case ButtonSize.Large:
         default:
           return {padding: '0 8px 0 0'};
@@ -102,7 +102,7 @@ const ButtonLabelIconStyled = styled('span')<
 
     const {sizes} = ButtonStyles.labelIconBaseStyles.variants!;
 
-    switch (buttonSize) {
+    switch (size) {
       case ButtonSize.Large:
       default:
         return sizes.large;
@@ -140,7 +140,7 @@ export class ButtonLabelIcon extends React.Component<ButtonLabelIconProps> {
 
     let iconSize = 24;
 
-    if (this.props.buttonSize === ButtonSize.Small) {
+    if (this.props.size === ButtonSize.Small) {
       iconSize = 20;
     }
 
@@ -152,13 +152,10 @@ export class ButtonLabelIcon extends React.Component<ButtonLabelIconProps> {
   }
 }
 
-export function getButtonSize(
-  baseButton: ButtonStyles.ButtonGenericStyle,
-  buttonSize?: ButtonSize
-) {
+export function getButtonSize(baseButton: ButtonStyles.ButtonGenericStyle, size?: ButtonSize) {
   const {sizes} = baseButton.variants!;
 
-  switch (buttonSize) {
+  switch (size) {
     case ButtonSize.Large:
       return sizes.large;
     case ButtonSize.Medium:

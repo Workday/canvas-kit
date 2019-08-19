@@ -16,17 +16,17 @@ storiesOf('Button', module)
         Primary Button
       </Button>
       <h3>Medium Primary</h3>
-      <Button buttonType={Button.Type.Primary} buttonSize={Button.Size.Medium}>
+      <Button buttonType={Button.Type.Primary} size={Button.Size.Medium}>
         Primary Button
       </Button>
-      <Button buttonType={Button.Type.Primary} buttonSize={Button.Size.Medium} disabled={true}>
+      <Button buttonType={Button.Type.Primary} size={Button.Size.Medium} disabled={true}>
         Primary Button
       </Button>
       <h3>Small Primary</h3>
-      <Button buttonType={Button.Type.Primary} buttonSize={Button.Size.Small}>
+      <Button buttonType={Button.Type.Primary} size={Button.Size.Small}>
         Primary Button
       </Button>
-      <Button buttonType={Button.Type.Primary} buttonSize={Button.Size.Small} disabled={true}>
+      <Button buttonType={Button.Type.Primary} size={Button.Size.Small} disabled={true}>
         Primary Button
       </Button>
       <h3>Growing Primary</h3>
@@ -43,17 +43,17 @@ storiesOf('Button', module)
         Secondary Button
       </Button>
       <h3>Medium Secondary</h3>
-      <Button buttonType={Button.Type.Secondary} buttonSize={Button.Size.Medium}>
+      <Button buttonType={Button.Type.Secondary} size={Button.Size.Medium}>
         Secondary Button
       </Button>
-      <Button buttonType={Button.Type.Secondary} buttonSize={Button.Size.Medium} disabled={true}>
+      <Button buttonType={Button.Type.Secondary} size={Button.Size.Medium} disabled={true}>
         Secondary Button
       </Button>
       <h3>Small Secondary</h3>
-      <Button buttonType={Button.Type.Secondary} buttonSize={Button.Size.Small}>
+      <Button buttonType={Button.Type.Secondary} size={Button.Size.Small}>
         Secondary Button
       </Button>
-      <Button buttonType={Button.Type.Secondary} buttonSize={Button.Size.Small} disabled={true}>
+      <Button buttonType={Button.Type.Secondary} size={Button.Size.Small} disabled={true}>
         Secondary Button
       </Button>
       <h3>Growing Secondary</h3>
@@ -70,17 +70,17 @@ storiesOf('Button', module)
         Delete Button
       </Button>
       <h3>Medium Delete</h3>
-      <Button buttonType={Button.Type.Delete} buttonSize={Button.Size.Medium}>
+      <Button buttonType={Button.Type.Delete} size={Button.Size.Medium}>
         Delete Button
       </Button>
-      <Button buttonType={Button.Type.Delete} buttonSize={Button.Size.Medium} disabled={true}>
+      <Button buttonType={Button.Type.Delete} size={Button.Size.Medium} disabled={true}>
         Delete Button
       </Button>
       <h3>Small Delete</h3>
-      <Button buttonType={Button.Type.Delete} buttonSize={Button.Size.Small}>
+      <Button buttonType={Button.Type.Delete} size={Button.Size.Small}>
         Delete Button
       </Button>
-      <Button buttonType={Button.Type.Delete} buttonSize={Button.Size.Small} disabled={true}>
+      <Button buttonType={Button.Type.Delete} size={Button.Size.Small} disabled={true}>
         Delete Button
       </Button>
       <h3>Growing Delete</h3>

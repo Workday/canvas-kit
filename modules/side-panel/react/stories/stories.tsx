@@ -107,7 +107,7 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
         ) : (
           <AddButton
             toggled={false}
-            buttonSize={ButtonSize.Small}
+            size={ButtonSize.Small}
             buttonType={IconButton.Type.CircleFilled}
           >
             <SystemIcon icon={plusIcon} />

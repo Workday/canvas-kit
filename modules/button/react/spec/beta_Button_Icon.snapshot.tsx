@@ -20,7 +20,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         buttonType={IconButton.Type.Plain}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         icon={activityStreamIcon}
       />
     );
@@ -31,7 +31,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         buttonType={IconButton.Type.Plain}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         icon={activityStreamIcon}
       />
     );
@@ -48,7 +48,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small default icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         buttonType={IconButton.Type.Circle}
         icon={activityStreamIcon}
       />
@@ -59,7 +59,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium default icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.Circle}
         icon={activityStreamIcon}
       />
@@ -91,7 +91,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small filled icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         buttonType={IconButton.Type.CircleFilled}
         icon={activityStreamIcon}
       />
@@ -102,7 +102,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium filled icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.CircleFilled}
         icon={activityStreamIcon}
       />
@@ -142,7 +142,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small inverse icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         buttonType={IconButton.Type.Inverse}
         icon={activityStreamIcon}
       />
@@ -153,7 +153,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium inverse icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.Inverse}
         icon={activityStreamIcon}
       />
@@ -185,7 +185,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small inverse filled icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         buttonType={IconButton.Type.InverseFilled}
         icon={activityStreamIcon}
       />
@@ -196,7 +196,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium inverse filled icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.InverseFilled}
         icon={activityStreamIcon}
       />

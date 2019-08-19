@@ -182,7 +182,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
               openDirection={openDirection}
               aria-label={`${open ? 'hide navigation' : 'show navigation'}`}
               toggled={false}
-              buttonSize={ButtonSize.Small}
+              size={ButtonSize.Small}
               onClick={this.onToggleClick}
               icon={this.toggleButtonDirection()}
               buttonType={IconButton.Type.CircleFilled}

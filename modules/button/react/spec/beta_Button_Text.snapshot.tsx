@@ -6,7 +6,7 @@ import {editIcon} from '@workday/canvas-system-icons-web';
 describe('Button (Text) Snapshots', () => {
   test('renders a large, text button', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Large} buttonType={TextButton.Type.Default}>
+      <TextButton size={TextButton.Size.Large} buttonType={TextButton.Type.Default}>
         Button
       </TextButton>
     );
@@ -16,7 +16,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text button with a left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.Default}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -30,7 +30,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text button with a right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.Default}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}
@@ -43,7 +43,7 @@ describe('Button (Text) Snapshots', () => {
 
   test('renders a large, text all caps button', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Large} buttonType={TextButton.Type.AllCaps}>
+      <TextButton size={TextButton.Size.Large} buttonType={TextButton.Type.AllCaps}>
         Button
       </TextButton>
     );
@@ -53,7 +53,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text all caps button with a left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.AllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -67,7 +67,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text all caps button with a right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.AllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}
@@ -80,7 +80,7 @@ describe('Button (Text) Snapshots', () => {
 
   test('renders a large, text inverse all caps button', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Large} buttonType={TextButton.Type.InverseAllCaps}>
+      <TextButton size={TextButton.Size.Large} buttonType={TextButton.Type.InverseAllCaps}>
         Button
       </TextButton>
     );
@@ -90,7 +90,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text inverse all caps button with a left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.InverseAllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -104,7 +104,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text inverse all caps button with a right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.InverseAllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}
@@ -117,7 +117,7 @@ describe('Button (Text) Snapshots', () => {
 
   test('renders a large, text inverse button', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Large} buttonType={TextButton.Type.Inverse}>
+      <TextButton size={TextButton.Size.Large} buttonType={TextButton.Type.Inverse}>
         Button
       </TextButton>
     );
@@ -127,7 +127,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text inverse button with a left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.Inverse}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -141,7 +141,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text inverse button with a right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.Inverse}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}
@@ -154,7 +154,7 @@ describe('Button (Text) Snapshots', () => {
 
   test('renders a large, text inverse all caps button', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Large} buttonType={TextButton.Type.InverseAllCaps}>
+      <TextButton size={TextButton.Size.Large} buttonType={TextButton.Type.InverseAllCaps}>
         Button
       </TextButton>
     );
@@ -164,7 +164,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text inverse all caps button with a left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.InverseAllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -178,7 +178,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a large, text inverse all caps button with a right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Large}
+        size={TextButton.Size.Large}
         buttonType={TextButton.Type.InverseAllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}
@@ -191,7 +191,7 @@ describe('Button (Text) Snapshots', () => {
 
   test('renders a small, text button', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Small} buttonType={TextButton.Type.Default}>
+      <TextButton size={TextButton.Size.Small} buttonType={TextButton.Type.Default}>
         Button
       </TextButton>
     );
@@ -201,7 +201,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a small, text button with a left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Small}
+        size={TextButton.Size.Small}
         buttonType={TextButton.Type.Default}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -215,7 +215,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a small, text button with a right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Small}
+        size={TextButton.Size.Small}
         buttonType={TextButton.Type.Default}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}
@@ -228,7 +228,7 @@ describe('Button (Text) Snapshots', () => {
 
   test('renders a small, text button with all caps', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Small} buttonType={TextButton.Type.AllCaps}>
+      <TextButton size={TextButton.Size.Small} buttonType={TextButton.Type.AllCaps}>
         Button
       </TextButton>
     );
@@ -238,7 +238,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a small, text button with all caps with a left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Small}
+        size={TextButton.Size.Small}
         buttonType={TextButton.Type.AllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -252,7 +252,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a small, text button with all caps with a right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Small}
+        size={TextButton.Size.Small}
         buttonType={TextButton.Type.AllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}
@@ -265,7 +265,7 @@ describe('Button (Text) Snapshots', () => {
 
   test('renders a small, text inverse button', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Small} buttonType={TextButton.Type.Inverse}>
+      <TextButton size={TextButton.Size.Small} buttonType={TextButton.Type.Inverse}>
         Button
       </TextButton>
     );
@@ -274,7 +274,7 @@ describe('Button (Text) Snapshots', () => {
 
   test('renders a small, text inverse button with all caps', () => {
     const component = renderer.create(
-      <TextButton buttonSize={TextButton.Size.Small} buttonType={TextButton.Type.InverseAllCaps}>
+      <TextButton size={TextButton.Size.Small} buttonType={TextButton.Type.InverseAllCaps}>
         Button
       </TextButton>
     );
@@ -284,7 +284,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a small, text inverse button with all caps and left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Small}
+        size={TextButton.Size.Small}
         buttonType={TextButton.Type.InverseAllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -298,7 +298,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a small, text inverse button with all caps and right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Small}
+        size={TextButton.Size.Small}
         buttonType={TextButton.Type.InverseAllCaps}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}
@@ -312,7 +312,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a small, text inverse button with a left icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Small}
+        size={TextButton.Size.Small}
         buttonType={TextButton.Type.Inverse}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Left}
@@ -326,7 +326,7 @@ describe('Button (Text) Snapshots', () => {
   test('renders a small, text inverse button with a right icon', () => {
     const component = renderer.create(
       <TextButton
-        buttonSize={TextButton.Size.Small}
+        size={TextButton.Size.Small}
         buttonType={TextButton.Type.Inverse}
         icon={editIcon}
         iconPosition={TextButton.IconPosition.Right}

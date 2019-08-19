@@ -110,24 +110,24 @@ storiesOf('Button/Icon Button', module)
       <IconButton
         {...commonIconButtonProps}
         buttonType={IconButton.Type.Circle}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
       />
       <IconButton
         buttonType={IconButton.Type.Circle}
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         disabled={true}
       />
       <h3>Small Default</h3>
       <IconButton
         {...commonIconButtonProps}
         buttonType={IconButton.Type.Circle}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
       />
       <IconButton
         buttonType={IconButton.Type.Circle}
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         disabled={true}
       />
       <h3>Toggleable Default</h3>
@@ -139,24 +139,24 @@ storiesOf('Button/Icon Button', module)
       <h3>Medium Square</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.Square}
       />
       <IconButton
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         disabled={true}
         buttonType={IconButton.Type.Square}
       />
       <h3>Small Square</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         buttonType={IconButton.Type.Square}
       />
       <IconButton
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         disabled={true}
         buttonType={IconButton.Type.Square}
       />
@@ -169,24 +169,24 @@ storiesOf('Button/Icon Button', module)
       <h3>Medium Square</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.SquareFilled}
       />
       <IconButton
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         disabled={true}
         buttonType={IconButton.Type.SquareFilled}
       />
       <h3>Small Square</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         buttonType={IconButton.Type.SquareFilled}
       />
       <IconButton
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         disabled={true}
         buttonType={IconButton.Type.SquareFilled}
       />
@@ -199,24 +199,24 @@ storiesOf('Button/Icon Button', module)
       <h3>Medium Plain</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.Plain}
       />
       <IconButton
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.Plain}
         disabled={true}
       />
       <h3>Small Plain</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         buttonType={IconButton.Type.Plain}
       />
       <IconButton
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         disabled={true}
         buttonType={IconButton.Type.Plain}
       />
@@ -229,24 +229,24 @@ storiesOf('Button/Icon Button', module)
       <h3>Medium Filled</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.CircleFilled}
       />
       <IconButton
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Medium}
+        size={IconButton.Size.Medium}
         buttonType={IconButton.Type.CircleFilled}
         disabled={true}
       />
       <h3>Small Filled</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         buttonType={IconButton.Type.CircleFilled}
       />
       <IconButton
         icon={activityStreamIcon}
-        buttonSize={IconButton.Size.Small}
+        size={IconButton.Size.Small}
         disabled={true}
         buttonType={IconButton.Type.CircleFilled}
       />
@@ -260,12 +260,12 @@ storiesOf('Button/Icon Button', module)
       <div className={css(blueBackground)}>
         <IconButton
           {...commonIconButtonProps}
-          buttonSize={IconButton.Size.Medium}
+          size={IconButton.Size.Medium}
           buttonType={IconButton.Type.Inverse}
         />
         <IconButton
           icon={activityStreamIcon}
-          buttonSize={IconButton.Size.Medium}
+          size={IconButton.Size.Medium}
           buttonType={IconButton.Type.Inverse}
           disabled={true}
         />
@@ -274,12 +274,12 @@ storiesOf('Button/Icon Button', module)
       <div className={css(blueBackground)}>
         <IconButton
           icon={activityStreamIcon}
-          buttonSize={IconButton.Size.Small}
+          size={IconButton.Size.Small}
           buttonType={IconButton.Type.Inverse}
         />
         <IconButton
           {...commonIconButtonProps}
-          buttonSize={IconButton.Size.Small}
+          size={IconButton.Size.Small}
           disabled={true}
           buttonType={IconButton.Type.Inverse}
         />
@@ -296,12 +296,12 @@ storiesOf('Button/Icon Button', module)
       <div className={css(blueBackground)}>
         <IconButton
           {...commonIconButtonProps}
-          buttonSize={IconButton.Size.Medium}
+          size={IconButton.Size.Medium}
           buttonType={IconButton.Type.InverseFilled}
         />
         <IconButton
           icon={activityStreamIcon}
-          buttonSize={IconButton.Size.Medium}
+          size={IconButton.Size.Medium}
           buttonType={IconButton.Type.InverseFilled}
           disabled={true}
         />
@@ -310,12 +310,12 @@ storiesOf('Button/Icon Button', module)
       <div className={css(blueBackground)}>
         <IconButton
           {...commonIconButtonProps}
-          buttonSize={IconButton.Size.Small}
+          size={IconButton.Size.Small}
           buttonType={IconButton.Type.InverseFilled}
         />
         <IconButton
           icon={activityStreamIcon}
-          buttonSize={IconButton.Size.Small}
+          size={IconButton.Size.Small}
           disabled={true}
           buttonType={IconButton.Type.InverseFilled}
         />

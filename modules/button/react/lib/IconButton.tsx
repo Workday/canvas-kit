@@ -17,7 +17,7 @@ export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonType>
   /**
    * Size of icon button
    */
-  buttonSize?: ButtonSize.Small | ButtonSize.Medium;
+  size?: ButtonSize.Small | ButtonSize.Medium;
   /**
    * Callback that fires when a button changes toggled states
    */
@@ -27,9 +27,9 @@ export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonType>
 export const IconButtonCon = styled('button')<IconButtonProps>(
   iconButtonStyles.styles,
   ({buttonType}) => getButtonStyle(iconButtonStyles, buttonType),
-  ({buttonSize, buttonType}) => {
+  ({size, buttonType}) => {
     if (buttonType === IconButtonType.Square || buttonType === IconButtonType.SquareFilled) {
-      switch (buttonSize) {
+      switch (size) {
         case ButtonSize.Medium:
           return iconButtonStyles.variants!.sizes.medium;
         default:
@@ -37,7 +37,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           return {};
       }
     } else if (buttonType === IconButtonType.Plain) {
-      switch (buttonSize) {
+      switch (size) {
         default:
         case ButtonSize.Medium:
           return {
@@ -51,7 +51,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           };
       }
     } else {
-      switch (buttonSize) {
+      switch (size) {
         default:
         case ButtonSize.Medium:
           return iconButtonStyles.variants!.sizes.medium;
@@ -192,13 +192,13 @@ export default class IconButton extends React.Component<IconButtonProps> {
 
   public render() {
     // onToggleChange will generate a warning if spread over a <button>
-    const {buttonRef, buttonSize, onToggleChange, toggled, ...elemProps} = this.props;
+    const {buttonRef, size, onToggleChange, toggled, ...elemProps} = this.props;
     return (
-      // TODO (breaking change): need to remove buttonType and buttonSize prop here, doesn't make sense to expose
+      // TODO (breaking change): need to remove buttonType and size prop here, doesn't make sense to expose
       <IconButtonCon
         toggled={toggled}
         innerRef={buttonRef}
-        buttonSize={buttonSize}
+        size={size}
         {...elemProps}
         aria-pressed={this.props.toggled}
       >

@@ -5,7 +5,7 @@ import Button from '../lib/Button';
 describe('Button (Delete) Snapshots', () => {
   test('renders a large, delete button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Size.Large} buttonType={Button.Type.Delete}>
+      <Button size={Button.Size.Large} buttonType={Button.Type.Delete}>
         Button
       </Button>
     );
@@ -14,7 +14,7 @@ describe('Button (Delete) Snapshots', () => {
 
   test('renders a medium, delete button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Size.Medium} buttonType={Button.Type.Delete}>
+      <Button size={Button.Size.Medium} buttonType={Button.Type.Delete}>
         Button
       </Button>
     );
@@ -23,7 +23,7 @@ describe('Button (Delete) Snapshots', () => {
 
   test('renders a small, delete button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Size.Small} buttonType={Button.Type.Delete}>
+      <Button size={Button.Size.Small} buttonType={Button.Type.Delete}>
         Button
       </Button>
     );

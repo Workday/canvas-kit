@@ -9,7 +9,7 @@ import {ButtonSize, BetaButtonType} from './types';
 const DropdownButtonCon = styled('button')<BaseButtonProps>(
   dropdownButtonStyles.styles,
   ({buttonType}) => getButtonStyle(dropdownButtonStyles, buttonType),
-  ({buttonSize}) => getButtonSize(dropdownButtonStyles, buttonSize)
+  ({size}) => getButtonSize(dropdownButtonStyles, size)
 );
 
 export default class DropdownButton extends React.Component<BaseButtonProps> {
@@ -18,7 +18,7 @@ export default class DropdownButton extends React.Component<BaseButtonProps> {
 
   static defaultProps = {
     buttonType: BetaButtonType.Primary,
-    buttonSize: ButtonSize.Large,
+    size: ButtonSize.Large,
   };
 
   public render() {

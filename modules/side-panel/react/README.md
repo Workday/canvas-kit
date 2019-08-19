@@ -56,7 +56,7 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
         {open ? (
           <Button buttonType={ButtonType.Primary}>Add New</Button>
         ) : (
-          <IconButton buttonSize={ButtonSize.Small} buttonType={IconButtonType.Filled}>
+          <IconButton size={ButtonSize.Small} buttonType={IconButtonType.Filled}>
             <SystemIcon icon={plusIcon} />
           </IconButton>
         )}

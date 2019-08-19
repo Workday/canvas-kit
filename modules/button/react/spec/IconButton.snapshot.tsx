@@ -15,14 +15,14 @@ describe('Icon Button Snapshots', () => {
 
   test('renders a small icon button', () => {
     const component = renderer.create(
-      <IconButton buttonSize={IconButton.Size.Small} icon={activityStreamIcon} />
+      <IconButton size={IconButton.Size.Small} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a medium icon button', () => {
     const component = renderer.create(
-      <IconButton buttonSize={IconButton.Size.Medium} icon={activityStreamIcon} />
+      <IconButton size={IconButton.Size.Medium} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
