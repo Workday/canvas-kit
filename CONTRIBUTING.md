@@ -88,8 +88,18 @@ through the commit history. It also automates [semantic versioning](http://semve
 
 #### Commit Descriptions
 
+> **Examples**
+
+```
+feat(IconButton): Add ariaLabel prop for accessibility
+fix: Add missing static class variable to IconButton and Avatar
+```
+
 > **DO**
 
+- Use the commit scope if your change is specific to a component or module
+- When in doubt, leave scope out
+- Capitalize your description
 - Explain the additions/edits/fixes made in your staged changes. If you cannot describe it within
   ~50 characters, you should be breaking it into multiple commits
 - Use the imperative mood (e.g. "fix", not "fixed")
