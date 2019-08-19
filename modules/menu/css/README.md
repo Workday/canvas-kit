@@ -27,7 +27,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 
 > Menu renders Canvas-style menu list.
 
-Use `.wdc-menu` to create a menu. This can be used in conjunction with any directional modifiers.
+Use `.wdc-menu` to create a menu.
 
 ```html
 <div class="wdc-menu">
@@ -40,69 +40,54 @@ Use `.wdc-menu` to create a menu. This can be used in conjunction with any direc
 </div>
 ```
 
-### Directional Modifiers
+### Menu Item Modifiers
 
-Four directions are available. Each direction will change the orientation of the menu arrow. Use
-directional classes in addition to `.wdc-menu`.
-
-- `.wdc-menu-right`
-- `.wdc-menu-left`
-- `.wdc-menu-top`
-- `.wdc-menu-bottom`
+Use `.wdc-menu-item-disabled` to create a disabled menu item.
 
 ```html
-<div class="wdc-menu wdc-menu-right">
+<div class="wdc-menu">
   <ul>
-    <li>
-      <a href="#">Item 1</a>
+    <li class="wdc-menu-item-disabled">
+      Disabled item
     </li>
-    <li>Item 2</li>
-  </ul>
-</div>
-<div class="wdc-menu wdc-menu-left">
-  <ul>
-    <li>
-      <a href="#">Item 1</a>
-    </li>
-    <li>Item 2</li>
-  </ul>
-</div>
-<div class="wdc-menu wdc-menu-top">
-  <ul>
-    <li>
-      <a href="#">Item 1</a>
-    </li>
-    <li>Item 2</li>
-  </ul>
-</div>
-<div class="wdc-menu wdc-menu-bottom">
-  <ul>
-    <li>
-      <a href="#">Item 1</a>
-    </li>
-    <li>Item 2</li>
   </ul>
 </div>
 ```
 
-## Display on hover
-
-To display a menu on hover, wrap hoverable content within a `.wdc-menu-container`. Insert a
-`.wdc-menu` within the container. The menu will automatically be positioned according to its
-directional modifier.
-
-> A directional modifier is required for proper usage.
+Use `.wdc-menu-item-focused` to create a focused menu item.
 
 ```html
-<div class="wdc-menu-container">
-  Left menu
-  <div class="wdc-menu wdc-menu-left">
-    <ul>
-      <li>
-        <a href="#">Item 1</a>
-      </li>
-      <li>Item 2</li>
-    </ul>
-  </div>
+<div class="wdc-menu">
+  <ul>
+    <li class="wdc-menu-item-focused">
+      Focused item
+    </li>
+  </ul>
+</div>
+```
+
+Menu item modifiers may be combined.
+
+```html
+<div class="wdc-menu">
+  <ul>
+    <li class="wdc-menu-item-disabled wdc-menu-item-focused">
+      Disabled and focused item
+    </li>
+  </ul>
+</div>
+```
+
+## Divider
+
+Use `<hr />` to create a divider between menu items.
+
+```html
+<div class="wdc-menu">
+  <ul>
+    <li>Item 1</li>
+    <hr />
+    <li>Item 2</li>
+  </ul>
 </div>
 ```
