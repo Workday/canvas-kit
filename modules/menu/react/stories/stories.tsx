@@ -407,9 +407,7 @@ storiesOf('Menu', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <Menu grow={true} onSelect={action(`onSelect menu`)}>
-        {createMenuItems().map(buildItem)}
-      </Menu>
+      <Menu onSelect={action(`onSelect menu`)}>{createMenuItems().map(buildItem)}</Menu>
     </div>
   ))
   .add('With Icons', () => (
