@@ -30,7 +30,7 @@ import {Popup} from '@workday/canvas-kit-react-popup';
   <Popup
     width={300}
     heading={'Popup Title'}
-    padding={Popup.padding.l}
+    padding={Popup.Padding.l}
     handleClose={this.handleClose}
   >
     {this.props.children}
@@ -40,10 +40,10 @@ import {Popup} from '@workday/canvas-kit-react-popup';
 
 ## Static Properties
 
-#### `padding: PopupPadding`
+#### `Padding: PopupPadding`
 
 ```tsx
-<Popup padding={Popup.padding.l}>{this.props.children}</Popup>
+<Popup padding={Popup.Padding.l}>{this.props.children}</Popup>
 ```
 
 ## Component Props
