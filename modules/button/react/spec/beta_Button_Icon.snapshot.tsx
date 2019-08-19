@@ -11,7 +11,7 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders a plain icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Type.Plain} icon={activityStreamIcon} />
+      <IconButton variant={IconButton.Variant.Plain} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -19,7 +19,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small plain icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonType={IconButton.Type.Plain}
+        variant={IconButton.Variant.Plain}
         size={IconButton.Size.Small}
         icon={activityStreamIcon}
       />
@@ -30,7 +30,7 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium plain icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonType={IconButton.Type.Plain}
+        variant={IconButton.Variant.Plain}
         size={IconButton.Size.Medium}
         icon={activityStreamIcon}
       />
@@ -40,7 +40,7 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders a default icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Type.Circle} icon={activityStreamIcon} />
+      <IconButton variant={IconButton.Variant.Circle} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -49,7 +49,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         size={IconButton.Size.Small}
-        buttonType={IconButton.Type.Circle}
+        variant={IconButton.Variant.Circle}
         icon={activityStreamIcon}
       />
     );
@@ -60,7 +60,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.Circle}
+        variant={IconButton.Variant.Circle}
         icon={activityStreamIcon}
       />
     );
@@ -69,21 +69,21 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders a default icon button, toggled on', () => {
     const component = renderer.create(
-      <IconButton toggled={true} buttonType={IconButton.Type.Circle} icon={activityStreamIcon} />
+      <IconButton toggled={true} variant={IconButton.Variant.Circle} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a default icon button, toggled off', () => {
     const component = renderer.create(
-      <IconButton toggled={false} buttonType={IconButton.Type.Circle} icon={activityStreamIcon} />
+      <IconButton toggled={false} variant={IconButton.Variant.Circle} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a filled icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Type.CircleFilled} icon={activityStreamIcon} />
+      <IconButton variant={IconButton.Variant.CircleFilled} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -92,7 +92,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         size={IconButton.Size.Small}
-        buttonType={IconButton.Type.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
       />
     );
@@ -103,7 +103,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
       />
     );
@@ -114,7 +114,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         toggled={true}
-        buttonType={IconButton.Type.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
       />
     );
@@ -125,7 +125,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         toggled={false}
-        buttonType={IconButton.Type.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
       />
     );
@@ -134,7 +134,7 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders an inverse icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Type.Inverse} icon={activityStreamIcon} />
+      <IconButton variant={IconButton.Variant.Inverse} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -143,7 +143,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         size={IconButton.Size.Small}
-        buttonType={IconButton.Type.Inverse}
+        variant={IconButton.Variant.Inverse}
         icon={activityStreamIcon}
       />
     );
@@ -154,7 +154,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.Inverse}
+        variant={IconButton.Variant.Inverse}
         icon={activityStreamIcon}
       />
     );
@@ -163,21 +163,21 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders an inverse icon button, toggled on', () => {
     const component = renderer.create(
-      <IconButton toggled={true} buttonType={IconButton.Type.Inverse} icon={activityStreamIcon} />
+      <IconButton toggled={true} variant={IconButton.Variant.Inverse} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders an inverse icon button, toggled off', () => {
     const component = renderer.create(
-      <IconButton toggled={false} buttonType={IconButton.Type.Inverse} icon={activityStreamIcon} />
+      <IconButton toggled={false} variant={IconButton.Variant.Inverse} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders an inverse filled icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Type.InverseFilled} icon={activityStreamIcon} />
+      <IconButton variant={IconButton.Variant.InverseFilled} icon={activityStreamIcon} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -186,7 +186,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         size={IconButton.Size.Small}
-        buttonType={IconButton.Type.InverseFilled}
+        variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
       />
     );
@@ -197,7 +197,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.InverseFilled}
+        variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
       />
     );
@@ -208,7 +208,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         toggled={true}
-        buttonType={IconButton.Type.InverseFilled}
+        variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
       />
     );
@@ -219,7 +219,7 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         toggled={false}
-        buttonType={IconButton.Type.InverseFilled}
+        variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
       />
     );

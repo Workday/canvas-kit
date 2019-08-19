@@ -35,14 +35,14 @@ describe('Icon Button Snapshots', () => {
   test('renders various icon types', () => {
     const component = renderer.create(
       <>
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.Square} />
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.SquareFilled} />
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.Plain} />
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.Circle} />
-        <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.CircleFilled} />
+        <IconButton icon={activityStreamIcon} variant={IconButton.Variant.Square} />
+        <IconButton icon={activityStreamIcon} variant={IconButton.Variant.SquareFilled} />
+        <IconButton icon={activityStreamIcon} variant={IconButton.Variant.Plain} />
+        <IconButton icon={activityStreamIcon} variant={IconButton.Variant.Circle} />
+        <IconButton icon={activityStreamIcon} variant={IconButton.Variant.CircleFilled} />
         <div style={{background: '#000'}}>
-          <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.Inverse} />
-          <IconButton icon={activityStreamIcon} buttonType={IconButton.Type.InverseFilled} />
+          <IconButton icon={activityStreamIcon} variant={IconButton.Variant.Inverse} />
+          <IconButton icon={activityStreamIcon} variant={IconButton.Variant.InverseFilled} />
         </div>
       </>
     );

@@ -5,7 +5,7 @@ import Button from '../lib/Button';
 describe('Button (Secondary) Snapshots', () => {
   test('renders a large, secondary button', () => {
     const component = renderer.create(
-      <Button size={Button.Size.Large} buttonType={Button.Type.Secondary}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Secondary}>
         Button
       </Button>
     );
@@ -14,7 +14,7 @@ describe('Button (Secondary) Snapshots', () => {
 
   test('renders a medium, secondary button', () => {
     const component = renderer.create(
-      <Button size={Button.Size.Medium} buttonType={Button.Type.Secondary}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Secondary}>
         Button
       </Button>
     );
@@ -23,7 +23,7 @@ describe('Button (Secondary) Snapshots', () => {
 
   test('renders a small, secondary button', () => {
     const component = renderer.create(
-      <Button size={Button.Size.Small} buttonType={Button.Type.Secondary}>
+      <Button size={Button.Size.Small} variant={Button.Variant.Secondary}>
         Button
       </Button>
     );

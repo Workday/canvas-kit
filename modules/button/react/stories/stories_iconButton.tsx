@@ -15,7 +15,7 @@ import {
   IconButton,
   IconButtonToggleGroup,
   IconButtonToggleGroupProps,
-  IconButtonType,
+  IconButtonVariant,
 } from '../index';
 
 import README from '../README.md';
@@ -49,7 +49,7 @@ interface ToggleIconButtonWrapperState {
 }
 
 interface ToggleIconButtonWrapperProps {
-  buttonType: IconButtonType;
+  variant: IconButtonVariant;
 }
 
 export class ToggleIconButtonWrapper extends React.Component<
@@ -65,7 +65,7 @@ export class ToggleIconButtonWrapper extends React.Component<
       <IconButton
         {...commonIconButtonProps}
         toggled={this.state.isToggled}
-        buttonType={this.props.buttonType}
+        variant={this.props.variant}
         onClick={this.handleToggle}
       />
     );
@@ -109,11 +109,11 @@ storiesOf('Button/Icon Button', module)
       <h3>Medium Default</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonType={IconButton.Type.Circle}
+        variant={IconButton.Variant.Circle}
         size={IconButton.Size.Medium}
       />
       <IconButton
-        buttonType={IconButton.Type.Circle}
+        variant={IconButton.Variant.Circle}
         icon={activityStreamIcon}
         size={IconButton.Size.Medium}
         disabled={true}
@@ -121,17 +121,17 @@ storiesOf('Button/Icon Button', module)
       <h3>Small Default</h3>
       <IconButton
         {...commonIconButtonProps}
-        buttonType={IconButton.Type.Circle}
+        variant={IconButton.Variant.Circle}
         size={IconButton.Size.Small}
       />
       <IconButton
-        buttonType={IconButton.Type.Circle}
+        variant={IconButton.Variant.Circle}
         icon={activityStreamIcon}
         size={IconButton.Size.Small}
         disabled={true}
       />
       <h3>Toggleable Default</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Type.Circle} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.Circle} />
     </div>
   ))
   .add('Square', () => (
@@ -140,28 +140,28 @@ storiesOf('Button/Icon Button', module)
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.Square}
+        variant={IconButton.Variant.Square}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Medium}
         disabled={true}
-        buttonType={IconButton.Type.Square}
+        variant={IconButton.Variant.Square}
       />
       <h3>Small Square</h3>
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Small}
-        buttonType={IconButton.Type.Square}
+        variant={IconButton.Variant.Square}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Small}
         disabled={true}
-        buttonType={IconButton.Type.Square}
+        variant={IconButton.Variant.Square}
       />
       <h3>Toggleable Square</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Type.Square} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.Square} />
     </div>
   ))
   .add('Square Filled', () => (
@@ -170,28 +170,28 @@ storiesOf('Button/Icon Button', module)
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.SquareFilled}
+        variant={IconButton.Variant.SquareFilled}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Medium}
         disabled={true}
-        buttonType={IconButton.Type.SquareFilled}
+        variant={IconButton.Variant.SquareFilled}
       />
       <h3>Small Square</h3>
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Small}
-        buttonType={IconButton.Type.SquareFilled}
+        variant={IconButton.Variant.SquareFilled}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Small}
         disabled={true}
-        buttonType={IconButton.Type.SquareFilled}
+        variant={IconButton.Variant.SquareFilled}
       />
       <h3>Toggleable Square</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Type.SquareFilled} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.SquareFilled} />
     </div>
   ))
   .add('Plain', () => (
@@ -200,28 +200,28 @@ storiesOf('Button/Icon Button', module)
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.Plain}
+        variant={IconButton.Variant.Plain}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.Plain}
+        variant={IconButton.Variant.Plain}
         disabled={true}
       />
       <h3>Small Plain</h3>
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Small}
-        buttonType={IconButton.Type.Plain}
+        variant={IconButton.Variant.Plain}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Small}
         disabled={true}
-        buttonType={IconButton.Type.Plain}
+        variant={IconButton.Variant.Plain}
       />
       <h3>Toggleable Plain</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Type.Plain} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.Plain} />
     </div>
   ))
   .add('Circle Filled', () => (
@@ -230,28 +230,28 @@ storiesOf('Button/Icon Button', module)
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Medium}
-        buttonType={IconButton.Type.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
         disabled={true}
       />
       <h3>Small Filled</h3>
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Small}
-        buttonType={IconButton.Type.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Small}
         disabled={true}
-        buttonType={IconButton.Type.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
       />
       <h3>Toggleable Filled</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Type.CircleFilled} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.CircleFilled} />
     </div>
   ))
   .add('Inverse', () => (
@@ -261,12 +261,12 @@ storiesOf('Button/Icon Button', module)
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Medium}
-          buttonType={IconButton.Type.Inverse}
+          variant={IconButton.Variant.Inverse}
         />
         <IconButton
           icon={activityStreamIcon}
           size={IconButton.Size.Medium}
-          buttonType={IconButton.Type.Inverse}
+          variant={IconButton.Variant.Inverse}
           disabled={true}
         />
       </div>
@@ -275,18 +275,18 @@ storiesOf('Button/Icon Button', module)
         <IconButton
           icon={activityStreamIcon}
           size={IconButton.Size.Small}
-          buttonType={IconButton.Type.Inverse}
+          variant={IconButton.Variant.Inverse}
         />
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Small}
           disabled={true}
-          buttonType={IconButton.Type.Inverse}
+          variant={IconButton.Variant.Inverse}
         />
       </div>
       <h3>Toggleable Inverse</h3>
       <div className={css(blueBackground)}>
-        <ToggleIconButtonWrapper buttonType={IconButton.Type.Inverse} />
+        <ToggleIconButtonWrapper variant={IconButton.Variant.Inverse} />
       </div>
     </div>
   ))
@@ -297,12 +297,12 @@ storiesOf('Button/Icon Button', module)
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Medium}
-          buttonType={IconButton.Type.InverseFilled}
+          variant={IconButton.Variant.InverseFilled}
         />
         <IconButton
           icon={activityStreamIcon}
           size={IconButton.Size.Medium}
-          buttonType={IconButton.Type.InverseFilled}
+          variant={IconButton.Variant.InverseFilled}
           disabled={true}
         />
       </div>
@@ -311,18 +311,18 @@ storiesOf('Button/Icon Button', module)
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Small}
-          buttonType={IconButton.Type.InverseFilled}
+          variant={IconButton.Variant.InverseFilled}
         />
         <IconButton
           icon={activityStreamIcon}
           size={IconButton.Size.Small}
           disabled={true}
-          buttonType={IconButton.Type.InverseFilled}
+          variant={IconButton.Variant.InverseFilled}
         />
       </div>
       <h3>Toggleable Inverse Filled</h3>
       <div className={css(blueBackground)}>
-        <ToggleIconButtonWrapper buttonType={IconButton.Type.InverseFilled} />
+        <ToggleIconButtonWrapper variant={IconButton.Variant.InverseFilled} />
       </div>
     </div>
   ));

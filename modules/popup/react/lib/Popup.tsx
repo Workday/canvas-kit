@@ -100,7 +100,7 @@ export default class Popup extends React.Component<PopupProps> {
         {handleClose && (
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton
-              buttonType={IconButton.Type.Plain}
+              variant={IconButton.Variant.Plain}
               size={closeIconSize}
               onClick={handleClose}
               icon={xIcon}

@@ -5,7 +5,7 @@ import {beta_Button as Button} from '../lib/Button';
 describe('Button (Delete) Snapshots (beta)', () => {
   test('renders a large, delete button', () => {
     const component = renderer.create(
-      <Button size={Button.Size.Large} buttonType={Button.Type.Delete}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Delete}>
         Button
       </Button>
     );
@@ -14,7 +14,7 @@ describe('Button (Delete) Snapshots (beta)', () => {
 
   test('renders a medium, delete button', () => {
     const component = renderer.create(
-      <Button size={Button.Size.Medium} buttonType={Button.Type.Delete}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Delete}>
         Button
       </Button>
     );
@@ -23,7 +23,7 @@ describe('Button (Delete) Snapshots (beta)', () => {
 
   test('renders a small, delete button', () => {
     const component = renderer.create(
-      <Button size={Button.Size.Small} buttonType={Button.Type.Delete}>
+      <Button size={Button.Size.Small} variant={Button.Variant.Delete}>
         Button
       </Button>
     );
@@ -32,7 +32,7 @@ describe('Button (Delete) Snapshots (beta)', () => {
 
   test('renders a large, growing delete button', () => {
     const component = renderer.create(
-      <Button grow={true} size={Button.Size.Large} buttonType={Button.Type.Delete}>
+      <Button grow={true} size={Button.Size.Large} variant={Button.Variant.Delete}>
         Button
       </Button>
     );

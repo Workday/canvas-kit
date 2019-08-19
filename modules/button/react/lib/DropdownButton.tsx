@@ -4,20 +4,20 @@ import styled from 'react-emotion';
 import {BaseButtonProps} from './Button';
 import {dropdownButtonStyles} from './ButtonStyles';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
-import {ButtonSize, BetaButtonType} from './types';
+import {ButtonSize, BetaButtonVariant} from './types';
 
 const DropdownButtonCon = styled('button')<BaseButtonProps>(
   dropdownButtonStyles.styles,
-  ({buttonType}) => getButtonStyle(dropdownButtonStyles, buttonType),
+  ({variant}) => getButtonStyle(dropdownButtonStyles, variant),
   ({size}) => getButtonSize(dropdownButtonStyles, size)
 );
 
 export default class DropdownButton extends React.Component<BaseButtonProps> {
-  public static Type = BetaButtonType;
+  public static Variant = BetaButtonVariant;
   public static Size = ButtonSize;
 
   static defaultProps = {
-    buttonType: BetaButtonType.Primary,
+    variant: BetaButtonVariant.Primary,
     size: ButtonSize.Large,
   };
 

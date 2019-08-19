@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {getButtonStyle} from './ButtonBase';
 import styled from 'react-emotion';
-import {IconButtonType, ButtonSize} from './types';
+import {IconButtonVariant, ButtonSize} from './types';
 import {BaseButtonProps} from './Button';
 import {iconButtonStyles} from './ButtonStyles';
 import {colors} from '@workday/canvas-kit-react-core';
@@ -9,7 +9,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import {CSSObject} from 'create-emotion';
 
-export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonType>> {
+export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonVariant>> {
   /**
    * Whether the icon button is toggled on or off
    */
@@ -26,9 +26,9 @@ export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonType>
 
 export const IconButtonCon = styled('button')<IconButtonProps>(
   iconButtonStyles.styles,
-  ({buttonType}) => getButtonStyle(iconButtonStyles, buttonType),
-  ({size, buttonType}) => {
-    if (buttonType === IconButtonType.Square || buttonType === IconButtonType.SquareFilled) {
+  ({variant}) => getButtonStyle(iconButtonStyles, variant),
+  ({size, variant}) => {
+    if (variant === IconButtonVariant.Square || variant === IconButtonVariant.SquareFilled) {
       switch (size) {
         case ButtonSize.Medium:
           return iconButtonStyles.variants!.sizes.medium;
@@ -36,7 +36,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
         case ButtonSize.Small:
           return {};
       }
-    } else if (buttonType === IconButtonType.Plain) {
+    } else if (variant === IconButtonVariant.Plain) {
       switch (size) {
         default:
         case ButtonSize.Medium:
@@ -60,13 +60,13 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
       }
     }
   },
-  ({buttonType, toggled}) => {
+  ({variant, toggled}) => {
     if (!toggled) {
       return {};
     }
 
-    switch (buttonType) {
-      case IconButtonType.SquareFilled:
+    switch (variant) {
+      case IconButtonVariant.SquareFilled:
       default:
         return {
           '&:focus&:hover, &:focus, &:active': {
@@ -85,7 +85,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.frenchVanilla100),
         };
-      case IconButtonType.Square:
+      case IconButtonVariant.Square:
         return {
           '&:focus:hover, &:focus, &:active': {
             backgroundColor: 'transparent',
@@ -102,7 +102,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getFillSelector(colors.blueberry400),
           ...getAccentSelector(colors.blueberry400),
         };
-      case IconButtonType.Circle:
+      case IconButtonVariant.Circle:
         return {
           '&:active': {
             ...getFillSelector(colors.blueberry400),
@@ -112,7 +112,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getFillSelector(colors.blueberry400),
           ...getAccentSelector(colors.frenchVanilla100),
         };
-      case IconButtonType.CircleFilled:
+      case IconButtonVariant.CircleFilled:
         return {
           backgroundColor: colors.blueberry400,
           '&:hover, &:focus&:hover': {
@@ -123,7 +123,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.blueberry400),
         };
-      case IconButtonType.Inverse:
+      case IconButtonVariant.Inverse:
         return {
           '&:hover span .wd-icon-fill, span .wd-icon-fill': {
             fill: colors.frenchVanilla100,
@@ -131,7 +131,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getBackgroundSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.licorice200),
         };
-      case IconButtonType.InverseFilled:
+      case IconButtonVariant.InverseFilled:
         return {
           backgroundColor: 'rgba(0, 0, 0, 0.4)',
           '&:focus': {
@@ -173,11 +173,11 @@ function getAccentSelector(fillColor: string): CSSObject {
 }
 
 export default class IconButton extends React.Component<IconButtonProps> {
-  public static Type = IconButtonType;
+  public static Variant = IconButtonVariant;
   public static Size = ButtonSize;
 
   static defaultProps = {
-    buttonType: IconButtonType.Circle,
+    variant: IconButtonVariant.Circle,
     toggled: undefined,
   };
 
@@ -194,7 +194,7 @@ export default class IconButton extends React.Component<IconButtonProps> {
     // onToggleChange will generate a warning if spread over a <button>
     const {buttonRef, size, onToggleChange, toggled, ...elemProps} = this.props;
     return (
-      // TODO (breaking change): need to remove buttonType and size prop here, doesn't make sense to expose
+      // TODO (breaking change): need to remove variant and size prop here, doesn't make sense to expose
       <IconButtonCon
         toggled={toggled}
         innerRef={buttonRef}

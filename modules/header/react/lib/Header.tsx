@@ -268,8 +268,8 @@ class MenuIconButton extends React.Component<
   render() {
     const {themeColor, menuToggle, onMenuClick} = this.props;
     const menuIconButtonProps = {
-      buttonType:
-        themeColor === HeaderTheme.White ? IconButton.Type.Circle : IconButton.Type.Inverse,
+      variant:
+        themeColor === HeaderTheme.White ? IconButton.Variant.Circle : IconButton.Variant.Inverse,
       icon: justifyIcon,
     };
 
@@ -387,10 +387,10 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
       const propsChildren = (child as React.ReactElement<Props>).props.children;
       const singleChild =
         React.Children.count(propsChildren) === 1 && (propsChildren as React.ReactElement<any>);
-      const iconButtonType =
+      const iconButtonVariant =
         this.props.themeColor === HeaderTheme.White
-          ? IconButton.Type.Circle
-          : IconButton.Type.Inverse;
+          ? IconButton.Variant.Circle
+          : IconButton.Variant.Inverse;
 
       // Convert old method of SystemIcon into IconButton. If SystemIcon is within a link, make sure it's passed through
       if (child.type === 'a' && singleChild && singleChild.type === SystemIcon) {
@@ -401,7 +401,7 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
               window.location.href = href;
             }
           },
-          buttonType: iconButtonType,
+          variant: iconButtonVariant,
           icon: (singleChild.props as SystemIconProps).icon,
         };
 
@@ -419,13 +419,13 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
       if (child.type === SystemIcon) {
         const icon = (child.props as SystemIconProps).icon;
 
-        return <IconButton buttonType={iconButtonType} icon={icon} />;
+        return <IconButton variant={iconButtonVariant} icon={icon} />;
       }
 
       // Plain icon buttons have negative margin that we need to negate.
       if (
         child.type === IconButton &&
-        (child.props as IconButtonProps).buttonType === IconButton.Type.Plain
+        (child.props as IconButtonProps).variant === IconButton.Variant.Plain
       ) {
         return React.cloneElement(child as React.ReactElement<IconButtonProps>, {
           style: {margin: `0 0 0 ${childrenSpacing}`},

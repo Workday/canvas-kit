@@ -23,9 +23,9 @@ yarn add @workday/canvas-kit-react-side-panel
 import * as React from 'react';
 import {
   Button,
-  ButtonType,
+  ButtonVariant,
   IconButton,
-  IconButtonType,
+  IconButtonVariant,
   ButtonSize,
 } from '@workday/canvas-kit-react-button';
 import SidePanel, {
@@ -54,9 +54,9 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
         header={'Side Panel Header'}
       >
         {open ? (
-          <Button buttonType={ButtonType.Primary}>Add New</Button>
+          <Button variant={ButtonVariant.Primary}>Add New</Button>
         ) : (
-          <IconButton size={ButtonSize.Small} buttonType={IconButtonType.Filled}>
+          <IconButton size={ButtonSize.Small} variant={IconButtonVariant.Filled}>
             <SystemIcon icon={plusIcon} />
           </IconButton>
         )}

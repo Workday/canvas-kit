@@ -22,8 +22,8 @@ describe('App GlobalHeader Snapshots', () => {
     const tree = renderer
       .create(
         <GlobalHeader brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}>
-          <IconButton icon={notificationsIcon} buttonType={IconButton.Type.Square} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Type.Square} />
+          <IconButton icon={notificationsIcon} variant={IconButton.Variant.Square} />
+          <IconButton icon={inboxIcon} variant={IconButton.Variant.Square} />
         </GlobalHeader>
       )
       .toJSON();
@@ -34,8 +34,8 @@ describe('App GlobalHeader Snapshots', () => {
     const tree = renderer
       .create(
         <GlobalHeader>
-          <IconButton icon={notificationsIcon} buttonType={IconButton.Type.Plain} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Type.Plain} />
+          <IconButton icon={notificationsIcon} variant={IconButton.Variant.Plain} />
+          <IconButton icon={inboxIcon} variant={IconButton.Variant.Plain} />
           <Avatar />
         </GlobalHeader>
       )
@@ -52,8 +52,8 @@ describe('App GlobalHeader Snapshots', () => {
     const tree = renderer
       .create(
         <GlobalHeader onSearchSubmit={cb}>
-          <IconButton icon={notificationsIcon} buttonType={IconButton.Type.Plain} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Type.Plain} />
+          <IconButton icon={notificationsIcon} variant={IconButton.Variant.Plain} />
+          <IconButton icon={inboxIcon} variant={IconButton.Variant.Plain} />
           <Avatar />
         </GlobalHeader>
       )

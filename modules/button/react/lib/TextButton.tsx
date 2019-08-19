@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {ButtonBaseLabel, ButtonLabelIcon, getButtonStyle} from './ButtonBase';
 import styled from 'react-emotion';
-import {ButtonSize, IconPosition, TextButtonType} from './types';
+import {ButtonSize, IconPosition, TextButtonVariant} from './types';
 import {BaseButtonProps} from './Button';
 import {textButtonStyles} from './ButtonStyles';
 
-export interface TextButtonProps extends BaseButtonProps<TextButtonType> {
+export interface TextButtonProps extends BaseButtonProps<TextButtonVariant> {
   iconPosition?: IconPosition;
 }
 
 const TextButtonCon = styled('button')<TextButtonProps>(
   textButtonStyles.styles,
-  ({buttonType}) => getButtonStyle(textButtonStyles, buttonType),
+  ({variant}) => getButtonStyle(textButtonStyles, variant),
   ({size}) => {
     const {sizes} = textButtonStyles.variants!;
 
@@ -28,12 +28,12 @@ const TextButtonCon = styled('button')<TextButtonProps>(
 
 export default class TextButton extends React.Component<TextButtonProps> {
   public static IconPosition = IconPosition;
-  public static Type = TextButtonType;
+  public static Variant = TextButtonVariant;
   public static Size = ButtonSize;
 
   static defaultProps = {
     iconPosition: IconPosition.Left,
-    buttonType: TextButtonType.Default,
+    variant: TextButtonVariant.Default,
     size: ButtonSize.Large,
   };
 

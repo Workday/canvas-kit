@@ -1,5 +1,11 @@
 import canvas from '@workday/canvas-kit-react-core';
-import {AllButtonTypes, ButtonType, TextButtonType, BetaButtonType, IconButtonType} from './types';
+import {
+  AllButtonVariants,
+  ButtonVariant,
+  TextButtonVariant,
+  BetaButtonVariant,
+  IconButtonVariant,
+} from './types';
 
 export interface CanvasButtonColors
   extends Partial<typeof canvas.buttonColors.secondary>,
@@ -21,14 +27,14 @@ export interface GenericButtonColors extends CanvasButtonColors {
   labelIconHover?: string;
 }
 
-export type ButtonColorCollection = {[key in AllButtonTypes]: GenericButtonColors | null};
+export type ButtonColorCollection = {[key in AllButtonVariants]: GenericButtonColors | null};
 
 export const ButtonColors: ButtonColorCollection = {
   // TODO (beta button): remove in favor of beta buttons, consider moving from design-assets too
-  [ButtonType.Primary]: canvas.buttonColors.primary,
-  [ButtonType.Secondary]: canvas.buttonColors.secondary,
-  [ButtonType.Delete]: canvas.buttonColors.delete,
-  [BetaButtonType.Primary]: {
+  [ButtonVariant.Primary]: canvas.buttonColors.primary,
+  [ButtonVariant.Secondary]: canvas.buttonColors.secondary,
+  [ButtonVariant.Delete]: canvas.buttonColors.delete,
+  [BetaButtonVariant.Primary]: {
     background: canvas.colors.blueberry400,
     border: 'transparent',
     text: canvas.colors.frenchVanilla100,
@@ -50,7 +56,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.frenchVanilla100,
     labelIconDisabled: canvas.colors.frenchVanilla100,
   },
-  [BetaButtonType.Secondary]: {
+  [BetaButtonVariant.Secondary]: {
     background: canvas.colors.soap200,
     border: 'transparent',
     text: canvas.colors.blackPepper400,
@@ -74,7 +80,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelData: canvas.colors.blackPepper400,
     labelDataDisabled: canvas.colors.licorice100,
   },
-  [BetaButtonType.Delete]: {
+  [BetaButtonVariant.Delete]: {
     background: canvas.colors.cinnamon500,
     border: canvas.colors.cinnamon500,
     text: canvas.colors.frenchVanilla100,
@@ -90,7 +96,7 @@ export const ButtonColors: ButtonColorCollection = {
     hoverBorder: canvas.colors.cinnamon600,
     hoverText: canvas.colors.frenchVanilla100,
   },
-  [BetaButtonType.Highlight]: {
+  [BetaButtonVariant.Highlight]: {
     background: canvas.colors.soap200,
     border: canvas.colors.soap200,
     text: canvas.colors.blueberry500,
@@ -112,7 +118,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.blueberry500,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [BetaButtonType.OutlinePrimary]: {
+  [BetaButtonVariant.OutlinePrimary]: {
     background: 'transparent',
     border: canvas.colors.blueberry400,
     text: canvas.colors.blueberry400,
@@ -134,7 +140,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.frenchVanilla100,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [BetaButtonType.OutlineSecondary]: {
+  [BetaButtonVariant.OutlineSecondary]: {
     background: 'transparent',
     border: canvas.colors.soap500,
     text: canvas.colors.blackPepper400,
@@ -156,7 +162,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.frenchVanilla100,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [BetaButtonType.OutlineInverse]: {
+  [BetaButtonVariant.OutlineInverse]: {
     background: 'transparent',
     border: canvas.colors.frenchVanilla100,
     text: canvas.colors.frenchVanilla100,
@@ -184,7 +190,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelDataFocus: canvas.colors.licorice300,
     labelDataDisabled: 'rgba(255, 255, 255, 0.75)',
   },
-  [TextButtonType.Default]: {
+  [TextButtonVariant.Default]: {
     background: 'transparent',
     border: 'transparent',
     text: canvas.colors.blueberry400,
@@ -204,7 +210,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.blueberry400,
     labelIconDisabled: 'rgba(8, 117, 225, 0.5)',
   },
-  [TextButtonType.Inverse]: {
+  [TextButtonVariant.Inverse]: {
     background: 'transparent',
     border: 'transparent',
     text: canvas.colors.frenchVanilla100,
@@ -225,9 +231,9 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.frenchVanilla100,
     labelIconDisabled: 'rgba(255, 255, 255, 0.5)',
   },
-  [TextButtonType.AllCaps]: null,
-  [TextButtonType.InverseAllCaps]: null,
-  [IconButtonType.Square]: {
+  [TextButtonVariant.AllCaps]: null,
+  [TextButtonVariant.InverseAllCaps]: null,
+  [IconButtonVariant.Square]: {
     background: 'transparent',
     activeBackground: canvas.colors.soap400,
     disabledBackground: 'transparent',
@@ -239,7 +245,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.licorice200,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [IconButtonType.SquareFilled]: {
+  [IconButtonVariant.SquareFilled]: {
     background: canvas.colors.soap200,
     border: canvas.colors.soap500,
     activeBackground: canvas.colors.soap500,
@@ -250,7 +256,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.licorice200,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [IconButtonType.Plain]: {
+  [IconButtonVariant.Plain]: {
     background: 'transparent',
     activeBackground: 'transparent',
     activeBorder: 'transparent',
@@ -263,7 +269,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.licorice200,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [IconButtonType.Circle]: {
+  [IconButtonVariant.Circle]: {
     background: 'transparent',
     activeBackground: canvas.colors.soap400,
     disabledBackground: 'transparent',
@@ -275,7 +281,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.licorice200,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [IconButtonType.CircleFilled]: {
+  [IconButtonVariant.CircleFilled]: {
     background: canvas.colors.soap200,
     activeBackground: canvas.colors.soap500,
     disabledBackground: canvas.colors.soap100,
@@ -285,7 +291,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.licorice200,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [IconButtonType.Inverse]: {
+  [IconButtonVariant.Inverse]: {
     background: 'transparent',
     activeBackground: 'rgba(0, 0, 0, 0.4)',
     disabledBackground: 'transparent',
@@ -295,7 +301,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconDisabled: 'rgba(255, 255, 255, 0.75)',
     focusRingOuter: canvas.colors.frenchVanilla100,
   },
-  [IconButtonType.InverseFilled]: {
+  [IconButtonVariant.InverseFilled]: {
     background: 'rgba(0, 0, 0, 0.2)',
     activeBackground: 'rgba(0, 0, 0, 0.4)',
     disabledBackground: 'rgba(0, 0, 0, 0.2)',

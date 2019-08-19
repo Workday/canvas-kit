@@ -9,8 +9,8 @@ Clickable button elements that extend the native `<button>` element with Canvas 
 > across all our products. We want to discourage their use until everyone can uptake them
 > simultaneously for consistencies sake.
 >
-> The new buttons include new `ButtonType`, icon support, and the `ButtonSize` equate to different
-> button and font sizes.
+> The new buttons include new `ButtonVariant`, icon support, and the `ButtonSize` equate to
+> different button and font sizes.
 >
 > **If you would like to use the new buttons, please consult the design systems team and get
 > approval first**
@@ -46,10 +46,10 @@ import {Button} from '@workday/canvas-kit-react-button';
 
 ---
 
-#### `Types: ButtonType`
+#### `Types: ButtonVariant`
 
 ```tsx
-<Button buttonType={Button.Type.Primary}>Primary Button</Button>
+<Button variant={Button.Variant.Primary}>Primary Button</Button>
 ```
 
 ## Component Props
@@ -62,11 +62,11 @@ import {Button} from '@workday/canvas-kit-react-button';
 
 ### Optional
 
-#### `buttonType: ButtonType`
+#### `variant: ButtonVariant`
 
 > The type of the button
 
-Default: `ButtonType.Secondary`
+Default: `ButtonVariant.Secondary`
 
 | Theme       | Description                     |
 | ----------- | ------------------------------- |
@@ -132,10 +132,10 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ---
 
-#### `Types: IconButtonType`
+#### `Types: IconButtonVariant`
 
 ```tsx
-<IconButton buttonType={IconButton.Type.Plain} icon={xIcon} />
+<IconButton variant={IconButton.Variant.Plain} icon={xIcon} />
 ```
 
 ## Component Props
@@ -146,11 +146,11 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ### Optional
 
-#### `buttonType: IconButtonType`
+#### `variant: IconButtonVariant`
 
 > The type of the icon button
 
-Default: `IconButtonType.Circle`
+Default: `IconButtonVariant.Circle`
 
 | Theme           | Description                                      |
 | --------------- | ------------------------------------------------ |

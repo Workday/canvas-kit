@@ -103,12 +103,12 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
         header={'Side Panel Header'}
       >
         {open ? (
-          <Button buttonType={Button.Type.Primary}>Add New</Button>
+          <Button variant={Button.Variant.Primary}>Add New</Button>
         ) : (
           <AddButton
             toggled={false}
             size={ButtonSize.Small}
-            buttonType={IconButton.Type.CircleFilled}
+            variant={IconButton.Variant.CircleFilled}
           >
             <SystemIcon icon={plusIcon} />
           </AddButton>
@@ -175,7 +175,7 @@ storiesOf('Side Panel', module)
               alert('clicked avatar');
             }}
           />
-          <Button buttonType={Button.Type.Primary}>Sign Up</Button>
+          <Button variant={Button.Variant.Primary}>Sign Up</Button>
         </Header>
         <SidePanelWrapper />
       </div>
