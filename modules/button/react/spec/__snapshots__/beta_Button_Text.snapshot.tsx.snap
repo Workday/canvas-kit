@@ -58,7 +58,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button 1`] = `
 }
 
 .emotion-2:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -112,6 +112,13 @@ exports[`Button (Text) Snapshots renders a large, text all caps button 1`] = `
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -254,7 +261,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a le
 }
 
 .emotion-5:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -308,6 +315,13 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a le
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-3 {
@@ -462,7 +476,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a ri
 }
 
 .emotion-5:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -516,6 +530,13 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a ri
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -623,7 +644,7 @@ exports[`Button (Text) Snapshots renders a large, text button 1`] = `
 }
 
 .emotion-2:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -677,6 +698,13 @@ exports[`Button (Text) Snapshots renders a large, text button 1`] = `
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -765,7 +793,7 @@ exports[`Button (Text) Snapshots renders a large, text button with a left icon 
 }
 
 .emotion-5:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -819,6 +847,13 @@ exports[`Button (Text) Snapshots renders a large, text button with a left icon 
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-3 {
@@ -965,7 +1000,7 @@ exports[`Button (Text) Snapshots renders a large, text button with a right icon
 }
 
 .emotion-5:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -1019,6 +1054,13 @@ exports[`Button (Text) Snapshots renders a large, text button with a right icon
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -1191,13 +1233,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 1
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-2:focus span .wd-icon-fill,
 .emotion-2:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-2:active,
@@ -1244,6 +1286,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 1
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -1386,13 +1435,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -1439,6 +1488,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -1593,13 +1649,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -1646,6 +1702,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -1746,13 +1809,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse button 1`] = `
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-2:focus span .wd-icon-fill,
 .emotion-2:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-2:active,
@@ -1799,6 +1862,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse button 1`] = `
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -1933,13 +2003,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a lef
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -1986,6 +2056,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a lef
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -2132,13 +2209,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a rig
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -2185,6 +2262,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a rig
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -2293,13 +2377,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-2:focus span .wd-icon-fill,
 .emotion-2:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-2:active,
@@ -2346,6 +2430,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -2488,13 +2579,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -2541,6 +2632,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -2695,13 +2793,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -2748,6 +2846,13 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -2830,7 +2935,7 @@ exports[`Button (Text) Snapshots renders a small, text button 1`] = `
 }
 
 .emotion-2:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -2884,6 +2989,13 @@ exports[`Button (Text) Snapshots renders a small, text button 1`] = `
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -2981,7 +3093,7 @@ exports[`Button (Text) Snapshots renders a small, text button with a left icon 1
 }
 
 .emotion-5:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -3035,6 +3147,13 @@ exports[`Button (Text) Snapshots renders a small, text button with a left icon 1
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-3 {
@@ -3181,7 +3300,7 @@ exports[`Button (Text) Snapshots renders a small, text button with a right icon 
 }
 
 .emotion-5:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -3235,6 +3354,13 @@ exports[`Button (Text) Snapshots renders a small, text button with a right icon 
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -3373,7 +3499,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps 1`] 
 }
 
 .emotion-2:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -3427,6 +3553,13 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps 1`] 
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -3569,7 +3702,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
 }
 
 .emotion-5:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -3623,6 +3756,13 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-3 {
@@ -3777,7 +3917,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
 }
 
 .emotion-5:focus {
-  background-color: #d7eafc;
+  background-color: transparent;
   color: #0875e1;
 }
 
@@ -3831,6 +3971,13 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(8,117,225,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
 }
 
 .emotion-0 {
@@ -3956,13 +4103,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button 1`] = `
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-2:focus span .wd-icon-fill,
 .emotion-2:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-2:active,
@@ -4009,6 +4156,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button 1`] = `
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -4143,13 +4297,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a lef
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -4196,6 +4350,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a lef
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -4342,13 +4503,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a rig
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -4395,6 +4556,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a rig
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -4503,13 +4671,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 }
 
 .emotion-2:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-2:focus span .wd-icon-fill,
 .emotion-2:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-2:active,
@@ -4556,6 +4724,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 .emotion-2:focus:disabled span .wd-icon-accent,
 .emotion-2:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -4698,13 +4873,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -4751,6 +4926,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button
@@ -4905,13 +5087,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 }
 
 .emotion-5:focus {
-  background-color: #ffffff;
-  color: #333d47;
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .emotion-5:focus span .wd-icon-fill,
 .emotion-5:focus span .wd-icon-accent {
-  fill: #333d47;
+  fill: #ffffff;
 }
 
 .emotion-5:active,
@@ -4958,6 +5140,13 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 .emotion-5:focus:disabled span .wd-icon-accent,
 .emotion-5:hover:disabled span .wd-icon-accent {
   fill: rgba(255,255,255,0.5);
+}
+
+.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):active {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
 }
 
 <button

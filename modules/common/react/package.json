@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-common",
-  "version": "3.0.0-alpha.4",
+  "version": "3.0.0-alpha.5",
   "description": "A module of common utilities shared across canvas components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -37,7 +37,7 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-core": "^3.0.0-alpha.4",
+    "@workday/canvas-kit-react-core": "^3.0.0-alpha.5",
     "emotion": "^9.2.12",
     "lodash": "^4.17.14",
     "popper.js": "^1.15.0",

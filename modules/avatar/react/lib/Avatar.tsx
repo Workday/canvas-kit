@@ -53,7 +53,7 @@ const Container = styled('button')<Omit<AvatarProps, 'altText'>>(
     },
   },
   ({themeColor, size, onClick}) => ({
-    background: themeColor === AvatarTheme.Dark ? colors.blueberry400 : colors.soap300,
+    background: colors.soap200,
     height: size,
     width: size,
     cursor: onClick ? 'pointer' : 'default',
