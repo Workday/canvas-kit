@@ -1,15 +1,15 @@
 .wdc-menu {
   @include wdc-type();
   @include wdc-type-body();
-  @include wdc-depth-3();
+  @include wdc-depth-2();
   display: inline-block;
   background-color: $_wdc-menu-bg-color;
-  padding: $wdc-spacing-s;
   border-radius: 3px;
   border: 1px solid $_wdc-menu-border-color;
   position: relative;
   width: max-content;
-  max-width: $_wdc-menu-max-width;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
 
   // Fallback for IE11
   @media screen and (-ms-high-contrast: active),
@@ -24,19 +24,21 @@
     min-width: $_wdc-menu-menu-min-width;
   }
 
-  padding: $wdc-spacing-xxs 0;
-
   ul {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: $wdc-spacing-xxs 0;
 
     li {
+      align-items: center;
+      box-sizing: border-box;
       color: $wdc-color-black-pepper-300;
-      padding: $wdc-spacing-xxxs $wdc-spacing-s;
-      font-size: 13px;
+      display: flex;
+      height: $wdc-spacing-xl;
+      padding: $wdc-spacing-xxs $wdc-spacing-s;
+      font-size: 14px;
       cursor: pointer;
-      transition: background-color 0.2s, color 0.2s;
+      transition: background-color 80ms;
 
       a {
         color: inherit;
@@ -45,117 +47,35 @@
 
       &:focus,
       &:hover {
-        color: $wdc-color-french-vanilla-100;
-        background-color: $wdc-color-blueberry-500;
+        background-color: $wdc-color-common-hover-background;
+      }
+
+      &.wdc-menu-item-disabled {
+        color: $wdc-color-licorice-100;
+        cursor: default;
+
+        &:hover {
+          background-color: transparent;
+        }
+
+        &.wdc-menu-item-focused {
+          background-color: $wdc-color-blueberry-200;
+        }
+      }
+
+      &.wdc-menu-item-focused {
+        background-color: $wdc-color-common-focus-background;
+        color: $wdc-color-type-inverse;
       }
     }
-  }
 
-  &-right,
-  &-left,
-  &-top,
-  &-bottom {
-
-    &:before,
-    &:after {
-      content: ' ';
-      position: absolute;
-      border-style: solid;
-      border-color: transparent;
+    hr {
+      border: 0;
+      border-top: 1px solid $wdc-color-soap-400;
+      display: block;
+      height: 1px;
+      margin: $wdc-spacing-xxs 0;
     }
-
-    &:before {
-      border-width: $_wdc-menu-arrow-size + 1px;
-    }
-
-    &:after {
-      border-width: $_wdc-menu-arrow-size;
-    }
-  }
-
-  &-right {
-    margin-left: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: $_wdc-menu-arrow-offset;
-      right: 100%;
-    }
-
-    &:before {
-      margin-top: -($_wdc-menu-arrow-size + 1px);
-      border-right-color: $_wdc-menu-border-color;
-    }
-
-    &:after {
-      margin-top: -$_wdc-menu-arrow-size;
-      border-right-color: $_wdc-menu-bg-color;
-    }
-  }
-
-  &-left {
-    margin-right: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: $_wdc-menu-arrow-offset;
-      left: 100%;
-    }
-
-    &:before {
-      margin-top: -($_wdc-menu-arrow-size + 1px);
-      border-left-color: $_wdc-menu-border-color;
-    }
-
-    &:after {
-      margin-top: -$_wdc-menu-arrow-size;
-      border-left-color: $_wdc-menu-bg-color;
-    }
-  }
-
-  &-top {
-    margin-bottom: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: 100%;
-      left: $_wdc-menu-arrow-offset;
-    }
-
-    &:before {
-      margin-left: -($_wdc-menu-arrow-size + 1px);
-      border-top-color: $_wdc-menu-border-color;
-    }
-
-    &:after {
-      margin-left: -$_wdc-menu-arrow-size;
-      border-top-color: $_wdc-menu-bg-color;
-    }
-  }
-
-  &-bottom {
-    margin-top: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      bottom: 100%;
-      left: $_wdc-menu-arrow-offset;
-    }
-
-    &:before {
-      margin-left: -($_wdc-menu-arrow-size + 1px);
-      border-bottom-color: $_wdc-menu-border-color;
-    }
-
-    &:after {
-      margin-left: -$_wdc-menu-arrow-size;
-      border-bottom-color: $_wdc-menu-bg-color;
-    }
-  }
-
-  .wdc-menu-title {
-    font-weight: 500;
-    margin-bottom: $wdc-spacing-xxs;
   }
 
   p {
@@ -164,67 +84,6 @@
 
     &:not(:first-child) {
       margin-top: $wdc-spacing-xxxs;
-    }
-  }
-}
-
-.wdc-menu-container {
-  display: inline-block;
-  position: relative;
-
-  .wdc-menu {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s;
-
-    &-right,
-    &-left,
-    &-top,
-    &-bottom {
-      position: absolute;
-      z-index: $_wdc-menu-z-index;
-    }
-
-    &-left,
-    &-right {
-      top: -$wdc-spacing-s;
-    }
-
-    &-right {
-      left: calc(100%);
-    }
-
-    &-left {
-      right: calc(100%);
-    }
-
-    &-top,
-    &-bottom {
-      left: 0;
-    }
-
-    &-top {
-      bottom: 100%;
-    }
-
-    &-bottom {
-      top: 100%;
-    }
-
-    &-menu {
-
-      &.wdc-menu-left,
-      &.wdc-menu-right {
-        top: -$wdc-spacing-xs;
-      }
-    }
-  }
-
-  &.wdc-menu-hover,
-  &:hover {
-    .wdc-menu {
-      visibility: visible;
-      opacity: 1;
     }
   }
 }
