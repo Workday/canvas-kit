@@ -81,6 +81,9 @@ const BannerViewAll = styled('span')<BannerProps>(
 );
 
 export default class Banner extends React.Component<BannerProps> {
+  static Variant = BannerVariant;
+  static Theme = BannerTheme;
+
   public static defaultProps = {
     actionText: 'View All',
     theme: BannerTheme.Alert,
