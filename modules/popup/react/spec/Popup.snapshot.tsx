@@ -5,20 +5,20 @@ import {ButtonSizes} from '@workday/canvas-kit-react';
 
 describe('Popup Snapshots', () => {
   test('renders as expected', () => {
-    const component = renderer.create(<Popup padding={Popup.padding.s} />);
+    const component = renderer.create(<Popup padding={Popup.Padding.s} />);
     expect(component).toMatchSnapshot();
   });
   test('renders Popup with close icon', () => {
-    const component = renderer.create(<Popup handleClose={jest.fn()} padding={Popup.padding.s} />);
+    const component = renderer.create(<Popup handleClose={jest.fn()} padding={Popup.Padding.s} />);
     expect(component).toMatchSnapshot();
   });
   test('renders Popup with different padding', () => {
-    const component = renderer.create(<Popup handleClose={jest.fn()} padding={Popup.padding.l} />);
+    const component = renderer.create(<Popup handleClose={jest.fn()} padding={Popup.Padding.l} />);
     expect(component).toMatchSnapshot();
   });
   test('renders Popup with children elements', () => {
     const component = renderer.create(
-      <Popup handleClose={jest.fn()} padding={Popup.padding.zero}>
+      <Popup handleClose={jest.fn()} padding={Popup.Padding.zero}>
         <span>hello world</span>
       </Popup>
     );
@@ -26,7 +26,7 @@ describe('Popup Snapshots', () => {
   });
   test('renders Popup without close icon', () => {
     const component = renderer.create(
-      <Popup padding={Popup.padding.zero}>
+      <Popup padding={Popup.Padding.zero}>
         <span>hello world</span>
       </Popup>
     );
@@ -34,7 +34,7 @@ describe('Popup Snapshots', () => {
   });
   test('renders Popup with transformOrigin', () => {
     const component = renderer.create(
-      <Popup transformOrigin={{vertical: 'top', horizontal: 'center'}} padding={Popup.padding.zero}>
+      <Popup transformOrigin={{vertical: 'top', horizontal: 'center'}} padding={Popup.Padding.zero}>
         <span>hello world</span>
       </Popup>
     );
@@ -46,7 +46,7 @@ describe('Popup Snapshots', () => {
       <Popup
         closeIconSize={ButtonSizes.Small}
         transformOrigin={{vertical: 'top', horizontal: 'center'}}
-        padding={Popup.padding.zero}
+        padding={Popup.Padding.zero}
       >
         <span>hello world</span>
       </Popup>
