@@ -247,6 +247,41 @@ exports[`Layout Snapshots renders a layout with capWidth 1`] = `
 </div>
 `;
 
+exports[`Layout Snapshots renders a layout with conditional columns 1`] = `
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+
+.emotion-0 {
+  padding: 0 12px;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-0:first-child {
+  padding-left: 0;
+}
+
+.emotion-0:last-child {
+  padding-right: 0;
+}
+
+<div
+  className="emotion-2 emotion-3"
+>
+  <div
+    className="emotion-0 emotion-1"
+  />
+</div>
+`;
+
 exports[`Layout Snapshots renders a layout with fluid columns 1`] = `
 .emotion-6 {
   display: -webkit-box;
