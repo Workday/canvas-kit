@@ -8,7 +8,6 @@ import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {Avatar} from '../../../avatar/react/index';
-import {SystemIcon} from '../../../icon/react/index';
 import {colors, spacing} from '../../../core/react/index';
 import {Button, IconButton} from '../../../button/react/index';
 import {GlobalHeader, Header, DubLogoTitle, WorkdayLogoTitle, HeaderVariant} from '../index';
@@ -152,19 +151,15 @@ storiesOf('Header', module)
       </div>
       <div className={containerStyle}>
         <Header title="Icons Only" brandUrl="#" onSearchSubmit={handleSearchSubmitTest}>
-          {/* Test states and padding on various types of icons */}
-          <a href="/">
-            <SystemIcon icon={notificationsIcon} />
-          </a>
           <IconButton
-            icon={inboxIcon}
             buttonType={IconButton.Types.Circle}
-            title="Inbox"
-            aria-label="Inbox"
+            icon={notificationsIcon}
+            title="Notifications"
+            aria-label="Notifications"
           />
           <IconButton
+            buttonType={IconButton.Types.Circle}
             icon={inboxIcon}
-            buttonType={IconButton.Types.Plain}
             title="Inbox"
             aria-label="Inbox"
           />
@@ -213,12 +208,6 @@ storiesOf('Header', module)
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
-          />
-          <IconButton
-            buttonType={IconButton.Types.Circle}
-            icon={inboxIcon}
-            title="Inbox"
-            aria-label="Inbox"
           />
           <IconButton
             buttonType={IconButton.Types.Circle}

@@ -192,10 +192,16 @@ export default class IconButton extends React.Component<IconButtonProps> {
 
   public render() {
     // onToggleChange will generate a warning if spread over a <button>
-    const {onToggleChange, ...iconButtonConProps} = this.props;
+    const {buttonRef, buttonSize, onToggleChange, toggled, ...elemProps} = this.props;
     return (
       // TODO (breaking change): need to remove buttonType and buttonSize prop here, doesn't make sense to expose
-      <IconButtonCon {...iconButtonConProps} aria-pressed={this.props.toggled}>
+      <IconButtonCon
+        toggled={toggled}
+        innerRef={buttonRef}
+        buttonSize={buttonSize}
+        {...elemProps}
+        aria-pressed={this.props.toggled}
+      >
         {this.props.icon ? <SystemIcon icon={this.props.icon} /> : this.props.children}
       </IconButtonCon>
     );

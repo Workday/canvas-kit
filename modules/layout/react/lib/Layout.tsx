@@ -61,6 +61,10 @@ export default class Layout extends React.Component<LayoutProps> {
   public static Column = Column;
 
   private renderChild = (child: React.ReactElement<ColumnProps>): React.ReactNode => {
+    if (!child) {
+      return;
+    }
+
     if (typeof child.type === typeof Column) {
       const childProps = child.props;
 
