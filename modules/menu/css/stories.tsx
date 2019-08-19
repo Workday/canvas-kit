@@ -5,15 +5,11 @@ import README from './README.md';
 import {css} from 'emotion';
 import './index.scss';
 
-const containerStyle = css({
-  paddingTop: '12px',
-});
-
 storiesOf('CSS/Menu', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <div className={containerStyle + ' wdc-type'}>
+      <div className="wdc-type">
         <div className="wdc-menu">
           <ul>
             <li>
