@@ -14,7 +14,7 @@ const addModuleAsDependencyByType = (cwd, moduleName, type) => {
   const json = JSON.parse(packageContents);
 
   // Add module, sort dependencies, then write back out
-  json.dependencies[`@workday/canvas-kit-${type}-${moduleName}`] = `^${json.version}`;
+  json.dependencies[`@workday/canvas-kit-${type}-${moduleName}`] = `0.0.0`;
   let ordered = {};
   Object.keys(json.dependencies)
     .sort()
