@@ -1,7 +1,8 @@
 import * as React from 'react';
-import * as renderer from 'react-test-renderer';
 import {css} from 'react-emotion';
-import canvas from '../index';
+import * as renderer from 'react-test-renderer';
+
+import canvas, {H1, H2, H3, H4, H5} from '..';
 
 export const inverseStyle = {
   display: 'inline-block',
@@ -11,6 +12,11 @@ export const inverseStyle = {
 };
 export const type = (hierarchy: any) => (
   <div>
+    <H1>H1 Header</H1>
+    <H2>H2 Header</H2>
+    <H3>H3 Header</H3>
+    <H4>H4 Header</H4>
+    <H5>H5 Header</H5>
     <h1 style={hierarchy.h1}>H1 Header</h1>
     <h2 style={hierarchy.h2}>H2 Header</h2>
     <h3 style={hierarchy.h3}>H3 Header</h3>

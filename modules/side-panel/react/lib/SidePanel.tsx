@@ -123,6 +123,8 @@ const SidePanelFooter = styled('div')<Pick<SidePanelProps, 'open' | 'openWidth'>
 
 export default class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
   static OpenDirection = SidePanelOpenDirection;
+  static BackgroundColor = SidePanelBackgroundColor;
+
   static defaultProps = {
     breakpoint: 768,
     openWidth: 300,
@@ -130,15 +132,20 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     sidePanelBackgroundColor: SidePanelBackgroundColor.White,
   };
 
+  constructor(props: SidePanelProps) {
+    super(props);
+    this.handleResize = throttle(this.handleResize.bind(this), 150);
+  }
+
   state = {
     screenSize: window.innerWidth,
   };
 
   public componentDidMount() {
-    window.addEventListener('resize', throttle(this.handleResize, 150));
+    window.addEventListener('resize', this.handleResize);
   }
   public componentWillUnmount() {
-    window.addEventListener('resize', throttle(this.handleResize, 150));
+    window.removeEventListener('resize', this.handleResize);
   }
 
   public render() {

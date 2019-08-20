@@ -244,12 +244,14 @@ const MyLabel = styled('label')({
 });
 ```
 
-If you are only using one object, you can do this inline with the `style` attribute.
+If you are only using one object, you can do this inline with the `style` attribute. For headings,
+styled components are also available.
 
 ```tsx
-import {type} from '@workday/canvas-kit-react-core';
+import {H2, type} from '@workday/canvas-kit-react-core';
 
 <h1 style={type.h1}>H1 Header</h1>;
+<H2>H2 Header</H2>;
 ```
 
 To combine objects inline, you can also use emotion's `css` function.

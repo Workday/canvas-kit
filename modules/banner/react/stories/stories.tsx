@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import {withKnobs, select, text} from '@storybook/addon-knobs/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import Banner, {BannerVariant, BannerTheme} from '../index';
+import Banner from '../index';
 import README from '../README.md';
 
 const handleBannerClick = (e: React.SyntheticEvent) => {
@@ -20,14 +20,14 @@ storiesOf('Banner/Alert', module)
         onClick={handleBannerClick}
         label={text('label', '3 Alerts')}
         actionText={text('actionText', 'View All')}
-        theme={BannerTheme.Alert}
+        theme={Banner.Theme.Alert}
         variant={select(
           'variant',
           {
-            Full: BannerVariant.Full,
-            Sticky: BannerVariant.Sticky,
+            Full: Banner.Variant.Full,
+            Sticky: Banner.Variant.Sticky,
           },
-          BannerVariant.Full
+          Banner.Variant.Full
         )}
       />
     </div>
@@ -38,14 +38,14 @@ storiesOf('Banner/Alert', module)
         onClick={handleBannerClick}
         label={text('label', '3 Alerts')}
         actionText={text('actionText', 'View All')}
-        theme={BannerTheme.Alert}
+        theme={Banner.Theme.Alert}
         variant={select(
           'variant',
           {
-            Full: BannerVariant.Full,
-            Sticky: BannerVariant.Sticky,
+            Full: Banner.Variant.Full,
+            Sticky: Banner.Variant.Sticky,
           },
-          BannerVariant.Sticky
+          Banner.Variant.Sticky
         )}
       />
     </div>
@@ -60,14 +60,14 @@ storiesOf('Banner/Error', module)
         onClick={handleBannerClick}
         label={text('label', '3 Errors')}
         actionText={text('actionText', 'View All')}
-        theme={BannerTheme.Error}
+        theme={Banner.Theme.Error}
         variant={select(
           'variant',
           {
-            Full: BannerVariant.Full,
-            Sticky: BannerVariant.Sticky,
+            Full: Banner.Variant.Full,
+            Sticky: Banner.Variant.Sticky,
           },
-          BannerVariant.Full
+          Banner.Variant.Full
         )}
       />
     </div>
@@ -78,14 +78,14 @@ storiesOf('Banner/Error', module)
         onClick={handleBannerClick}
         label={text('label', '3 Errors')}
         actionText={text('actionText', 'View All')}
-        theme={BannerTheme.Error}
+        theme={Banner.Theme.Error}
         variant={select(
           'variant',
           {
-            Full: BannerVariant.Full,
-            Sticky: BannerVariant.Sticky,
+            Full: Banner.Variant.Full,
+            Sticky: Banner.Variant.Sticky,
           },
-          BannerVariant.Sticky
+          Banner.Variant.Sticky
         )}
       />
     </div>

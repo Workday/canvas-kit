@@ -18,10 +18,26 @@ describe('Header Search', () => {
     expect(mockPreventDefault).toBeCalled();
   });
 
-  test('Searching something should call callback', () => {
+  test('Searching empty string should do nothing', () => {
     const component = mount(<Search onSearchSubmit={cb} />);
 
     component.find('form').simulate('submit');
+    expect(cb.mock.calls.length).toBe(0);
+    component.unmount();
+  });
+
+  test('Searching something should call callback', () => {
+    const component = mount(<Search value={'hello'} onSearchSubmit={cb} />);
+
+    component.find('form').simulate('submit');
+    expect(cb.mock.calls.length).toBe(1);
+    component.unmount();
+  });
+
+  test('Searching with icon should call callback', () => {
+    const component = mount(<Search value={'world'} onSearchSubmit={cb} />);
+
+    component.find('button[type="submit"]').simulate('click');
     expect(cb.mock.calls.length).toBe(1);
     component.unmount();
   });
@@ -121,7 +137,7 @@ describe('Header Search', () => {
 
   test('Clear Search Input', () => {
     const component = mount(<Search value="Hello World" />);
-    component.find('span.reset-input').simulate('click');
+    component.find('button[type="reset"]').simulate('click');
     expect(component.state('value')).toBe('');
     component.unmount();
   });

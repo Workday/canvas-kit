@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {colors, spacing} from '@workday/canvas-kit-react-core';
+import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
 import {keyframes} from 'emotion';
 
@@ -26,6 +26,7 @@ const tooltipAnimation = (transformOrigin: TransformOrigin) => {
 
 const TooltipContainer = styled('div')<TooltipProps>(
   {
+    ...type.body,
     display: 'inline-flex',
     borderRadius: spacing.xxxs,
     padding: spacing.xxs,

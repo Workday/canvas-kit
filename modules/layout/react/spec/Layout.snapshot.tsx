@@ -50,6 +50,16 @@ describe('Layout Snapshots', () => {
     expect(component).toMatchSnapshot();
   });
 
+  test('renders a layout with conditional columns', () => {
+    const component = renderer.create(
+      <Layout>
+        <Layout.Column />
+        {false && <Layout.Column />}
+      </Layout>
+    );
+    expect(component).toMatchSnapshot();
+  });
+
   test('renders a layout and columns with 12 column grid widths', () => {
     const component = renderer.create(
       <Layout>
