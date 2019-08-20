@@ -144,6 +144,14 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ---
 
+### Required
+
+#### `aria-label: string`
+
+> The accessibility label to indicate the action triggered by clicking the icon button.
+
+---
+
 ### Optional
 
 #### `variant: IconButtonVariant`

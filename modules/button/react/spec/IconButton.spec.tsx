@@ -14,7 +14,7 @@ describe('Icon Button', () => {
 
   test('render an icon button with id', () => {
     const component = mount(
-      <IconButton id="myBtn">
+      <IconButton id="myBtn" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </IconButton>
     );
@@ -24,7 +24,7 @@ describe('Icon Button', () => {
 
   test('should call a callback function', () => {
     const component = mount(
-      <IconButton onClick={cb}>
+      <IconButton onClick={cb} aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </IconButton>
     );
@@ -36,7 +36,7 @@ describe('Icon Button', () => {
 
   test('should not call a callback function when disabled', () => {
     const component = mount(
-      <IconButton onClick={cb} disabled={true}>
+      <IconButton onClick={cb} disabled={true} aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </IconButton>
     );
@@ -48,7 +48,7 @@ describe('Icon Button', () => {
 
   test('should call onToggleChange when toggle prop changes', () => {
     const wrapper = mount(
-      <IconButton toggled={false} onToggleChange={cb}>
+      <IconButton toggled={false} onToggleChange={cb} aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </IconButton>
     );
@@ -72,7 +72,7 @@ describe('Icon Button Accessibility', () => {
 
   test('icon button should be using HTML5 <button> tag', () => {
     const component = mount(
-      <IconButton>
+      <IconButton aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />{' '}
       </IconButton>
     );
@@ -82,7 +82,7 @@ describe('Icon Button Accessibility', () => {
 
   test('enabled icon button should NOT have disabled attribute set', () => {
     const component = mount(
-      <IconButton disabled={false}>
+      <IconButton disabled={false} aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />{' '}
       </IconButton>
     );
@@ -97,7 +97,7 @@ describe('Icon Button Accessibility', () => {
 
   test('disabled icon button should have disabled attribute set', () => {
     const component = mount(
-      <IconButton disabled={true}>
+      <IconButton disabled={true} aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />{' '}
       </IconButton>
     );

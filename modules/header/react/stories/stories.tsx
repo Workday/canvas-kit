@@ -387,7 +387,11 @@ storiesOf('Header', module)
       </Header>
       <Header title="Nav Collapses Earlier" breakpoints={{sm: 320, md: 768, lg: 1280}}>
         {nav}
-        <IconButton variant={IconButton.Variant.Circle} icon={notificationsIcon} />
+        <IconButton
+          variant={IconButton.Variant.Circle}
+          icon={notificationsIcon}
+          aria-label="Notifications"
+        />
         <Avatar onClick={handleAvatarClickTest} />
         <Button variant={Button.Variant.Primary}>Download</Button>
       </Header>

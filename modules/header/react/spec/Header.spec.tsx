@@ -182,7 +182,7 @@ describe('Header', () => {
 
       const wrapper = mount<Header>(
         <Header>
-          <IconButton icon={activityStreamIcon} />
+          <IconButton icon={activityStreamIcon} aria-label="Activity Stream" />
         </Header>
       );
       const renderedIcon = wrapper.find(IconButton).first();

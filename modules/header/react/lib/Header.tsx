@@ -282,7 +282,11 @@ class MenuIconButton extends React.Component<
     return menuToggle ? (
       menuSlot
     ) : (
-      <IconButton {...menuIconButtonProps} className="canvas-header--menu-icon" />
+      <IconButton
+        {...menuIconButtonProps}
+        className="canvas-header--menu-icon"
+        aria-label="Open Menu"
+      />
     );
   }
 }
@@ -405,7 +409,7 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
           icon: (singleChild.props as SystemIconProps).icon,
         };
 
-        return <IconButton {...iconButtonProps} />;
+        return <IconButton {...iconButtonProps} aria-label="" />;
       }
 
       // If child has children, render them
@@ -419,7 +423,7 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
       if (child.type === SystemIcon) {
         const icon = (child.props as SystemIconProps).icon;
 
-        return <IconButton variant={iconButtonVariant} icon={icon} />;
+        return <IconButton variant={iconButtonVariant} icon={icon} aria-label={icon.name} />;
       }
 
       // Plain icon buttons have negative margin that we need to negate.

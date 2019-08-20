@@ -15,6 +15,10 @@ export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonVaria
    */
   toggled: boolean;
   /**
+   * The accessibility label to indicate the action triggered by clicking the button
+   */
+  'aria-label': string;
+  /**
    * Size of icon button
    */
   size?: ButtonSize.Small | ButtonSize.Medium;

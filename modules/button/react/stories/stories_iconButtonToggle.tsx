@@ -120,31 +120,37 @@ storiesOf('Button/Icon Button', module)
         <IconButtonToggleGroup>
           <IconButton
             icon={listViewIcon}
+            aria-label="List View"
             onClick={e => {
               alert("Here's your click event target: " + e.currentTarget);
             }}
           />
-          <IconButton icon={worksheetsIcon} />
+          <IconButton aria-label="Worksheets" icon={worksheetsIcon} />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>
 
       <h3>Four buttons Grouped</h3>
       <IconButtonToggleGroupWrapper>
         <IconButtonToggleGroup>
-          <IconButton icon={listViewIcon} value="list-view" />
-          <IconButton icon={worksheetsIcon} value="table-view" />
-          <IconButton icon={deviceTabletIcon} value="device-view" />
-          <IconButton icon={percentageIcon} value="percent-view" />
+          <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
+          <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+          <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+          <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>
 
       <h3>RTL - w/ initial selected item & disabled item</h3>
       <IconButtonToggleGroupWrapper>
         <IconButtonToggleGroup isRTL={true} value="table-view">
-          <IconButton icon={listViewIcon} value="list-view" />
-          <IconButton icon={worksheetsIcon} value="table-view" />
-          <IconButton icon={deviceTabletIcon} value="device-view" />
-          <IconButton icon={percentageIcon} value="percent-view" disabled={true} />
+          <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
+          <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+          <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+          <IconButton
+            icon={percentageIcon}
+            value="percent-view"
+            aria-label="Percent View"
+            disabled={true}
+          />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>
     </div>
