@@ -164,17 +164,17 @@ fix: Add missing static class variable to IconButton and Avatar
 
 #### React
 
-1. If your module's `index.ts` has a default export, make sure it is available as a named export as
-   well. This allows for greater flexibility in how developers consume your module.
-2. Add your module as a dependency in `modules/_canvas-kit-react/package.json`.
-3. Add `export * from '@workday/canvas-kit-react-<MODULE_NAME>'` to
-   `modules/_canvas-kit-react/index.ts` so that consumers of our bundle module
-   (`@workday/canvas-kit-react`) can use your module too.
+If your module's `index.ts` has a default export, make sure it is available as a named export as
+well. This allows for greater flexibility in how developers consume your module. _Note that
+`yarn create-module` should set this up for you by default._
 
 #### CSS
 
-1. Add your module as a dependency in `modules/_canvas-kit-css/package.json`.
-2. Import your module in `modules/_canvas-kit-css/index.scss`.
+If in the `yarn create-module` flow you reply that you'd like to create a CSS module as well, it
+will (in addition to creating required scaffolding):
+
+- Add your module as a package dependency in `modules/_canvas-kit-css/package.json`
+- Add an import statement for your module in `modules/_canvas-kit-css/index.scss`
 
 ### Building Modules
 
