@@ -40,6 +40,20 @@ Use `.wdc-menu` to create a menu.
 </div>
 ```
 
+### Variants
+
+#### Grow
+
+Use `.wdc-menu-grow` to expand the menu to fit its container.
+
+```html
+<div className="wdc-menu wdc-menu-grow">
+  <ul>
+    <li>This menu will expand to fit its container</li>
+  </ul>
+</div>
+```
+
 ### Menu Item Modifiers
 
 Use `.wdc-menu-item-disabled` to create a disabled menu item.
@@ -78,7 +92,38 @@ Menu item modifiers may be combined.
 </div>
 ```
 
-## Divider
+### Icons
+
+Menu items can include an icon as well as a secondary icon (if necessary).
+
+Wrap the text for the menu item using a `<span>` with `.wdc-menu-item-label`, and wrap the icon
+using a `<span>` with `.wdc-menu-item-icon`.
+
+The `<span>` for the secondary icon will need `.wdc-menu-item-icon-secondary` as well.
+
+```html
+<div class="wdc-menu">
+  <ul>
+    <li>
+      <span className="wdc-menu-item-icon">
+        <svg ...>
+      </span>
+      <span className="wdc-menu-item-label">Item with icon</span>
+    </li>
+    <li>
+      <span className="wdc-menu-item-icon">
+        <svg ...>
+      </span>
+      <span className="wdc-menu-item-label">Item with icon and secondary icon</span>
+      <span className="wdc-menu-item-icon wdc-menu-item-icon-secondary">
+        <svg ...>
+      </span>
+    </li>
+  </ul>
+</div>
+```
+
+### Divider
 
 Use `<hr />` to create a divider between menu items.
 
