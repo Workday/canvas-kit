@@ -20,8 +20,8 @@ describe('Page Header', () => {
     expect(component.find('h2').contains(testTitle));
   });
 
-  test('should have a maxWidth in marketing contexts', () => {
-    const component = mount(<PageHeader title="Marketing Context" marketing={true} />);
+  test('should have a maxWidth in capWidth contexts', () => {
+    const component = mount(<PageHeader title="capWidth Context" capWidth={true} />);
     expect(component.find('div').first()).toHaveStyleRule('max-width', '1440px');
   });
   test('should render a copy of the children', () => {

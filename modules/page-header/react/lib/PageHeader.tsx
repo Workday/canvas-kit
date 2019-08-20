@@ -6,7 +6,7 @@ import {makeMq} from '@workday/canvas-kit-react-common';
 
 export interface PageHeaderProps {
   title: string;
-  marketing: boolean;
+  capWidth: boolean;
   breakpoints: {
     sm: number;
     md: number;
@@ -31,10 +31,10 @@ const Container = styled('div')<PageHeaderProps>(
     overflow: 'hidden',
     padding: `0 ${spacing.s}`,
   },
-  ({marketing, breakpoints}) => {
+  ({capWidth, breakpoints}) => {
     const mq = makeMq(breakpoints);
 
-    if (marketing) {
+    if (capWidth) {
       return {
         boxSizing: 'border-box',
         margin: '0 auto',
@@ -81,7 +81,7 @@ const IconList = styled('div')({
 export default class PageHeader extends React.Component<PageHeaderProps> {
   static defaultProps = {
     title: '',
-    marketing: false,
+    capWidth: false,
     breakpoints: {
       sm: 768,
       md: 992,
