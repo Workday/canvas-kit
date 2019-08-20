@@ -19,9 +19,9 @@ storiesOf('Page Header', module)
       </PageHeader>
     </div>
   ))
-  .add('Marketing Page Header', () => (
+  .add('With Cap Width', () => (
     <div className="story">
-      <PageHeader title="Marketing Context" marketing={true}>
+      <PageHeader title="With Cap Width" capWidth={true}>
         <IconButton icon={exportIcon} />
         <IconButton icon={fullscreenIcon} />
       </PageHeader>

@@ -29,7 +29,7 @@ import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
   <IconButton icon={fullscreenIcon} />
 </PageHeader>
 
-<PageHeader title="Marketing" marketing={true}>
+<PageHeader title="With Cap Width" capWidth={true}>
   <IconButton icon={exportIcon} />
   <IconButton icon={fullscreenIcon} />
 </PageHeader>
@@ -55,10 +55,10 @@ Default: `''`
 
 ---
 
-#### `marketing: boolean`
+#### `capWidth: boolean`
 
-> Use the page header in the marketing context (non-product). In this context, content is centered
-> and the page header is responsive in all three breakpoints.
+> Use the page header in the non-product page. In this context, content is centered and the page
+> header is responsive in all three breakpoints.
 
 Defalut: `false`
 
@@ -72,8 +72,7 @@ Defalut: `false`
 > For example, by default a mobile screen size would be from 0 to 767 pixels, a 'sm' screen is from
 > 768 to 991, a 'md' screen is from 992 to 1199 pixels, and a 'lg' screen is 1200 pixels and beyond.
 >
-> For a non-marketing (default) context, the page header only adjusts its spacing styles up until
-> the 'sm' size breakpoint. In the `marketing` context, a page header adjusts for spacing in all
-> sizes.
+> In the default context, the page header only adjusts its spacing styles up until the 'sm' size
+> breakpoint. In the `capWidth` context, a page header adjusts for spacing in all sizes.
 
 Default: `{ sm: 768, md: 992, lg: 1200 }`
