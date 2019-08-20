@@ -7,6 +7,7 @@
   &-plain,
   &-inverse,
   &-inverse-filled {
+    @include wdc-btn();
     min-width: auto;
     max-width: auto;
     height: $wdc-btn-icon-height;
@@ -60,7 +61,7 @@
 
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-icon-disabled-color;
+        fill: $wdc-btn-icon-disabled-color !important;
       }
     }
 
@@ -97,7 +98,7 @@
 
       &:disabled {
         background-color: $wdc-btn-icon-disabled-bg;
-
+        cursor: default;
         .wd-icon-accent,
         .wd-icon-fill {
           fill: $wdc-btn-icon-disabled-color;
@@ -149,10 +150,10 @@
       background-color: transparent;
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-icon-inverse-bg;
+        fill: $wdc-btn-icon-inverse-bg !important;
       }
 
-      &.wdc-btn-hover:not([disabled]),
+      &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
       &:hover:not([disabled]) {
         background-color: $wdc-btn-icon-inverse-hover-bg;
         .wd-icon-accent,
@@ -186,7 +187,7 @@
 
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse-disabled-bg;
+          fill: $wdc-btn-icon-inverse-disabled-bg !important;
         }
       }
 
@@ -221,7 +222,7 @@
       background-color: $wdc-btn-icon-inverse-filled-bg;
       .wd-icon-accent,
       .wd-icon-fill {
-        fill: $wdc-btn-icon-inverse-bg;
+        fill: $wdc-btn-icon-inverse-bg !important;
       }
 
       &.wdc-btn-hover:not([disabled]),
@@ -258,7 +259,7 @@
 
         .wd-icon-accent,
         .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse-disabled-bg;
+          fill: $wdc-btn-icon-inverse-disabled-bg !important;
         }
       }
 
@@ -325,14 +326,11 @@
       }
     }
 
-    &.wdc-btn-medium {
-      width: 40px;
-      height: 40px;
-    }
-
     &.wdc-btn-small {
       width: 32px;
       height: 32px;
+      min-width: 32px;
+      max-width: 32px;
 
       &.wdc-btn-icon {
         &,
@@ -353,6 +351,6 @@
   }
 }
 
-.wdc-btn.wdc-btn-icon {
+.wdc-btn-icon {
   @include wdc-btn-icon();
 }

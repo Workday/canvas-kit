@@ -106,16 +106,21 @@ Most common button with default background color. Default buttons are available 
 <button class="wdc-btn wdc-btn-small">Default</button>
 ```
 
+### Icon Buttons
+
+Icon buttons can be square, circle, filled, plain and inverse. By default, their size is medium, but
+you can add `wdc-btn-small` class to make them small.
+
 ### Filled
 
 Filled buttons can be squared or circle. These buttons should be used with icons and provide a solid
 color background.
 
 ```html
-<button className="wdc-btn wdc-btn-medium wdc-btn-icon-square-filled">
+<button className="wdc-btn-icon-square-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
-<button className="wdc-btn wdc-btn-small wdc-btn-icon-circle-filled">
+<button className="wdc-btn-small wdc-btn-icon-circle-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
 ```
@@ -125,10 +130,10 @@ color background.
 Inverse buttons are buttons that can be used on dark backgrounds.
 
 ```html
-<button className="wdc-btn wdc-btn-medium wdc-btn-icon-inverse">
+<button className="wdc-btn-icon-inverse">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
-<button className="wdc-btn wdc-btn-small wdc-btn-icon-inverse-filled">
+<button className="wdc-btn-small wdc-btn-icon-inverse-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
 ```

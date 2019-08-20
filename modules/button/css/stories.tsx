@@ -126,17 +126,17 @@ storiesOf('CSS/Button/Icon Button', module)
   .add('Square', () => (
     <div className="story">
       <h3>Medium Square</h3>
-      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-square">
+      <button className="wdc-btn-icon-square">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-medium wdc-btn-icon-square">
+      <button disabled={true} className="wdc-btn-icon-square">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <h3>Small Square</h3>
-      <button className="wdc-btn wdc-btn-small wdc-btn-icon-square">
+      <button className="wdc-btn-small wdc-btn-icon-square">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-small wdc-btn-icon-square">
+      <button disabled={true} className="wdc-btn-small wdc-btn-icon-square">
         <SystemIcon icon={activityStreamIcon} />
       </button>
     </div>
@@ -144,17 +144,17 @@ storiesOf('CSS/Button/Icon Button', module)
   .add('Square Filled', () => (
     <div className="story">
       <h3>Medium Filled Square</h3>
-      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-square-filled">
+      <button className="wdc-btn-icon-square-filled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-medium wdc-btn-icon-square-filled">
+      <button disabled={true} className="wdc-btn-icon-square-filled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <h3>Small Filled Square</h3>
-      <button className="wdc-btn wdc-btn-small wdc-btn-icon-square-filled">
+      <button className="wdc-btn-small wdc-btn-icon-square-filled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-small wdc-btn-icon-square-filled">
+      <button disabled={true} className="wdc-btn-small wdc-btn-icon-square-filled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
     </div>
@@ -163,19 +163,19 @@ storiesOf('CSS/Button/Icon Button', module)
     <div className="story">
       <h3>Medium Inverse</h3>
 
-      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-plain">
+      <button className="wdc-btn-icon-plain">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-medium wdc-btn-icon-plain">
+      <button disabled={true} className="wdc-btn-icon-plain">
         <SystemIcon icon={activityStreamIcon} />
       </button>
 
       <h3>Small Plain</h3>
 
-      <button className="wdc-btn wdc-btn-small wdc-btn-icon-plain">
+      <button className="wdc-btn-small wdc-btn-icon-plain">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-small wdc-btn-icon-plain">
+      <button disabled={true} className="wdc-btn-small wdc-btn-icon-plain">
         <SystemIcon icon={activityStreamIcon} />
       </button>
     </div>
@@ -183,17 +183,17 @@ storiesOf('CSS/Button/Icon Button', module)
   .add('Circle', () => (
     <div className="story">
       <h3>Medium Circle</h3>
-      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-circle">
+      <button className="wdc-btn-icon-circle">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-medium wdc-btn-icon-circle">
+      <button disabled={true} className="wdc-btn-icon-circle">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <h3>Small Circle</h3>
-      <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle">
+      <button className="wdc-btn-small wdc-btn-icon-circle">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-small wdc-btn-icon-circle">
+      <button disabled={true} className="wdc-btn-small wdc-btn-icon-circle">
         <SystemIcon icon={activityStreamIcon} />
       </button>
     </div>
@@ -201,17 +201,17 @@ storiesOf('CSS/Button/Icon Button', module)
   .add('Circle Filled', () => (
     <div className="story">
       <h3>Medium Filled Circle</h3>
-      <button className="wdc-btn wdc-btn-medium wdc-btn-icon-circle-filled">
+      <button className="wdc-btn-icon-circle-filled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-medium wdc-btn-icon-circle-filled">
+      <button disabled={true} className="wdc-btn-icon-circle-filled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <h3>Small Filled Circle</h3>
-      <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle-filled">
+      <button className="wdc-btn-small wdc-btn-icon-circle-filled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
-      <button disabled={true} className="wdc-btn wdc-btn-small wdc-btn-icon-circle-filled">
+      <button disabled={true} className="wdc-btn-small wdc-btn-icon-circle-filled">
         <SystemIcon icon={activityStreamIcon} />
       </button>
     </div>
@@ -220,25 +220,19 @@ storiesOf('CSS/Button/Icon Button', module)
     <div className="story">
       <h3>Medium Inverse</h3>
       <div className={blueBackground}>
-        <button className="wdc-btn wdc-btn-medium wdc-btn-icon-inverse">
+        <button className="wdc-btn-icon-inverse">
           <SystemIcon icon={activityStreamIcon} />
         </button>
-        <button
-          disabled={true}
-          className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-icon-inverse"
-        >
+        <button disabled={true} className="wdc-btn-icon-inverse">
           <SystemIcon icon={activityStreamIcon} />
         </button>
       </div>
       <h3>Small Inverse</h3>
       <div className={blueBackground}>
-        <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse">
+        <button className="wdc-btn-small wdc-btn-icon-inverse">
           <SystemIcon icon={activityStreamIcon} />
         </button>
-        <button
-          disabled={true}
-          className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse"
-        >
+        <button disabled={true} className="wdc-btn-small wdc-btn-icon-inverse">
           <SystemIcon icon={activityStreamIcon} />
         </button>
       </div>
@@ -248,24 +242,21 @@ storiesOf('CSS/Button/Icon Button', module)
     <div className="story">
       <h3>Medium Inverse</h3>
       <div className={blueBackground}>
-        <button className="wdc-btn wdc-btn-medium wdc-btn-icon-inverse-filled">
+        <button className="wdc-btn-icon-inverse-filled">
           <SystemIcon icon={activityStreamIcon} />
         </button>
-        <button
-          disabled={true}
-          className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
-        >
+        <button disabled={true} className="wdc-btn-icon-circle wdc-btn-icon-inverse-filled">
           <SystemIcon icon={activityStreamIcon} />
         </button>
       </div>
       <h3>Small Inverse</h3>
       <div className={blueBackground}>
-        <button className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse-filled">
+        <button className="wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse-filled">
           <SystemIcon icon={activityStreamIcon} />
         </button>
         <button
           disabled={true}
-          className="wdc-btn wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
+          className="wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
         >
           <SystemIcon icon={activityStreamIcon} />
         </button>
