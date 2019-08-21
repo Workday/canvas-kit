@@ -66,9 +66,10 @@ const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
 );
 
 export default class Popup extends React.Component<PopupProps> {
-  static padding = PopupPadding;
+  static Padding = PopupPadding;
+
   static defaultProps = {
-    padding: Popup.padding.l,
+    padding: Popup.Padding.l,
     closeIconSize: ButtonSizes.Medium,
     transformOrigin: {
       horizontal: 'center',

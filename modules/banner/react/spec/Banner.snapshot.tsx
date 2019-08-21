@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Banner from '../lib/Banner';
 import * as renderer from 'react-test-renderer';
-import {BannerVariant, BannerTheme} from '../lib/types';
 
 describe('Banner Snapshots', () => {
   test('renders as expected', () => {
@@ -9,19 +8,19 @@ describe('Banner Snapshots', () => {
     expect(component).toMatchSnapshot();
   });
   test('renders a full banner as expected', () => {
-    const component = renderer.create(<Banner variant={BannerVariant.Full} />);
+    const component = renderer.create(<Banner variant={Banner.Variant.Full} />);
     expect(component).toMatchSnapshot();
   });
   test('renders a sticky banner as expected', () => {
-    const component = renderer.create(<Banner variant={BannerVariant.Sticky} />);
+    const component = renderer.create(<Banner variant={Banner.Variant.Sticky} />);
     expect(component).toMatchSnapshot();
   });
   test('renders an error banner as expected', () => {
-    const component = renderer.create(<Banner theme={BannerTheme.Error} />);
+    const component = renderer.create(<Banner theme={Banner.Theme.Error} />);
     expect(component).toMatchSnapshot();
   });
   test('renders an alert banner as expected', () => {
-    const component = renderer.create(<Banner theme={BannerTheme.Alert} />);
+    const component = renderer.create(<Banner theme={Banner.Theme.Alert} />);
     expect(component).toMatchSnapshot();
   });
   test('renders a banner with a custom action text expected', () => {

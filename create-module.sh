@@ -17,6 +17,7 @@ read -p "Module/component name (@workday/canvas-kit-<TARGET>-<NAME>): " name
 
 path="./modules/$name"
 reactPath="$path/react"
+wantsCss=false
 
 if [ -d "$path" ]; then
   echo -e "${RED}Module with name '$name' already exists."
@@ -186,6 +187,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 
+wantsCss=true
 cssPath="$path/css"
 mkdir $cssPath
 
@@ -265,7 +267,6 @@ EOF
 
 fi
 
-
 # Copy LICENSE
 echo -e "Adding License file to ${CYAN}$reactPath{NC}"
 cp LICENSE $reactPath
@@ -273,3 +274,12 @@ cp LICENSE $reactPath
 # Install deps using Yarn workspaces (instead of Lerna bootstrap)
 echo -e "\nInstalling dependencies\n"
 yarn
+
+# We always add the React module as dependency and set up export
+echo -e 'Adding module as dependency and adding export to index'
+node "utils/create-module.js" "$name" "react";
+
+if [ "$wantsCss" = true ] ; then
+  echo -e 'Adding module as CSS dependency and adding Sass module import'
+  node "utils/create-module.js" "$name" "css";
+fi
