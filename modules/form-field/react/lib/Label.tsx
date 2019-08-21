@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {spacing, type} from '@workday/canvas-kit-react-core';
-import {LabelPosition, LabelPositionBehavior} from './types';
+import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
-export interface LabelProps extends LabelPositionBehavior {
-  labelPosition: LabelPosition;
+export interface LabelProps extends FormFieldLabelPositionBehavior {
+  labelPosition: FormFieldLabelPosition;
   isLegend: boolean;
   htmlFor?: string;
 }
@@ -16,7 +16,7 @@ const labelStyles = [
     padding: 0,
   },
   (props: LabelProps) => {
-    if (props.labelPosition === LabelPosition.Left) {
+    if (props.labelPosition === FormFieldLabelPosition.Left) {
       return {
         display: 'inline-block',
         verticalAlign: 'top',
@@ -38,7 +38,7 @@ const LegendComponent = styled('legend')<LabelProps>(...labelStyles);
 const LabelComponent = styled('label')<LabelProps>(...labelStyles);
 
 export default class Label extends React.Component<LabelProps> {
-  static Position = LabelPosition;
+  static Position = FormFieldLabelPosition;
 
   static defaultProps = {
     labelPosition: Label.Position.Top,
