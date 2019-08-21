@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {LoadingDots, LoadingSpinner} from '../index';
+import {LoadingDots} from '../index';
 import README from '../README.md';
 
 storiesOf('Loading Animation', module)
@@ -11,10 +11,5 @@ storiesOf('Loading Animation', module)
   .add('Loading Dots', () => (
     <div className="story">
       <LoadingDots />
-    </div>
-  ))
-  .add('Loading Spinner', () => (
-    <div className="story">
-      <LoadingSpinner />
     </div>
   ));
