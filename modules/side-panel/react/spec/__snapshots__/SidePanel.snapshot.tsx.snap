@@ -30,7 +30,6 @@ exports[`SidePanel Snapshots does not render header when side panel is closed 1`
   background-color: #ffffff;
   width: 64px;
   padding: 16px 0;
-  right: px;
   left: 0px;
 }
 
@@ -46,7 +45,6 @@ exports[`SidePanel Snapshots does not render header when side panel is closed 1`
 <div
   aria-orientation="vertical"
   className="emotion-4 emotion-5"
-  onBreakpointChange={[Function]}
   open={false}
   role="region"
 >
@@ -90,7 +88,6 @@ exports[`SidePanel Snapshots renders a closed side panel 1`] = `
   background-color: #ffffff;
   width: 64px;
   padding: 16px 0;
-  right: px;
   left: 0px;
 }
 
@@ -106,7 +103,6 @@ exports[`SidePanel Snapshots renders a closed side panel 1`] = `
 <div
   aria-orientation="vertical"
   className="emotion-4 emotion-5"
-  onBreakpointChange={[Function]}
   open={false}
   role="region"
 >
@@ -160,22 +156,15 @@ exports[`SidePanel Snapshots renders a side panel from the right 1`] = `
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #ffffff;
   width: 300px;
   padding: 24px;
   right: 0px;
-  left: px;
 }
 
 <div
   aria-orientation="vertical"
   className="emotion-6 emotion-7"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
@@ -210,15 +199,9 @@ exports[`SidePanel Snapshots renders a side panel header 1`] = `
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #ffffff;
   width: 300px;
   padding: 24px;
-  right: px;
   left: 0px;
 }
 
@@ -250,7 +233,6 @@ exports[`SidePanel Snapshots renders a side panel header 1`] = `
 <div
   aria-orientation="vertical"
   className="emotion-6 emotion-7"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
@@ -310,22 +292,15 @@ exports[`SidePanel Snapshots renders a side panel with a Gray background when op
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #f6f7f8;
   width: 300px;
   padding: 24px;
   right: 0px;
-  left: px;
 }
 
 <div
   aria-orientation="vertical"
   className="emotion-6 emotion-7"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
@@ -360,15 +335,9 @@ exports[`SidePanel Snapshots renders a side panel with children elements 1`] = `
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #ffffff;
   width: 300px;
   padding: 24px;
-  right: px;
   left: 0px;
 }
 
@@ -391,7 +360,6 @@ exports[`SidePanel Snapshots renders a side panel with children elements 1`] = `
 <div
   aria-orientation="vertical"
   className="emotion-4 emotion-5"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
@@ -450,7 +418,6 @@ exports[`SidePanel Snapshots renders a toggle button 1`] = `
   background-color: #ffffff;
   width: 64px;
   padding: 16px 0;
-  right: px;
   left: 0px;
 }
 
@@ -608,7 +575,6 @@ exports[`SidePanel Snapshots renders a toggle button 1`] = `
 <div
   aria-orientation="vertical"
   className="emotion-8 emotion-9"
-  onBreakpointChange={[Function]}
   open={false}
   role="region"
 >
@@ -653,15 +619,9 @@ exports[`SidePanel Snapshots renders as expected 1`] = `
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #ffffff;
   width: 300px;
   padding: 24px;
-  right: px;
   left: 0px;
 }
 
@@ -684,7 +644,6 @@ exports[`SidePanel Snapshots renders as expected 1`] = `
 <div
   aria-orientation="vertical"
   className="emotion-4 emotion-5"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
@@ -713,15 +672,9 @@ exports[`SidePanel Snapshots renders side panel on the left 1`] = `
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #ffffff;
   width: 300px;
   padding: 24px;
-  right: px;
   left: 0px;
 }
 
@@ -753,7 +706,6 @@ exports[`SidePanel Snapshots renders side panel on the left 1`] = `
 <div
   aria-orientation="vertical"
   className="emotion-6 emotion-7"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
@@ -845,7 +797,6 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
   width: 64px;
   padding: 16px 0;
   right: 0px;
-  left: px;
 }
 
 .emotion-4 {
@@ -961,7 +912,6 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
 <div
   aria-orientation="vertical"
   className="emotion-8 emotion-9"
-  onBreakpointChange={[Function]}
   open={false}
   role="region"
 >
@@ -1031,16 +981,10 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #ffffff;
   width: 300px;
   padding: 24px;
   right: 0px;
-  left: px;
 }
 
 .emotion-4 {
@@ -1188,7 +1132,6 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
 <div
   aria-orientation="vertical"
   className="emotion-10 emotion-11"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
@@ -1239,15 +1182,9 @@ exports[`SidePanel Snapshots renders side panel with a different width 1`] = `
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #ffffff;
   width: 900px;
   padding: 24px;
-  right: px;
   left: 0px;
 }
 
@@ -1270,7 +1207,6 @@ exports[`SidePanel Snapshots renders side panel with a different width 1`] = `
 <div
   aria-orientation="vertical"
   className="emotion-4 emotion-5"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
@@ -1299,15 +1235,9 @@ exports[`SidePanel Snapshots renders standard side panel 1`] = `
   -webkit-transition: width 200ms ease;
   transition: width 200ms ease;
   position: absolute;
-  -webkit-align-items: px;
-  -webkit-box-align: px;
-  -ms-flex-align: px;
-  align-items: px;
-  box-shadow: px;
   background-color: #ffffff;
   width: 300px;
   padding: 24px;
-  right: px;
   left: 0px;
 }
 
@@ -1330,7 +1260,6 @@ exports[`SidePanel Snapshots renders standard side panel 1`] = `
 <div
   aria-orientation="vertical"
   className="emotion-4 emotion-5"
-  onBreakpointChange={[Function]}
   open={true}
   role="region"
 >
