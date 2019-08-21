@@ -98,7 +98,6 @@
 
       &:disabled {
         background-color: $wdc-btn-icon-disabled-bg;
-        cursor: default;
         .wd-icon-accent,
         .wd-icon-fill {
           fill: $wdc-btn-icon-disabled-color;
@@ -153,7 +152,7 @@
         fill: $wdc-btn-icon-inverse-bg !important;
       }
 
-      &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
+      &.wdc-btn-hover:not([disabled]),
       &:hover:not([disabled]) {
         background-color: $wdc-btn-icon-inverse-hover-bg;
         .wd-icon-accent,
