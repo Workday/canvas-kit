@@ -7,7 +7,7 @@ git:
   depth: 3
 stages:
 - name: testing
-  if: branch = master AND type = pull_request
+  if: type = pull_request
 - name: npm publish
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 - name: master check and build storybook
