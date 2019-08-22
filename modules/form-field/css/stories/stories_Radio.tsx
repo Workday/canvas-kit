@@ -13,10 +13,10 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio', module)
         <div className="wdc-form-field-wrapper">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input type="radio" className="wdc-form-radio" id="radio" />
-            <label htmlFor="radio" className="wdc-form-label">
-              Radio option
-            </label>
+            <div className="wdc-form-radio">
+              <input type="radio" id="radio" />
+              <label htmlFor="radio">Radio option</label>
+            </div>
           </div>
         </div>
       </div>

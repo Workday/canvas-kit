@@ -97,3 +97,199 @@
   box-shadow: 0 0 0 1px $wdc-color-common-focus-outline;
   outline: none;
 }
+
+
+@mixin wdc-form-radio-checkbox() {
+  padding: 6px 0;
+  display: inline-block;
+  min-height: 20px;
+
+  // Ripple
+
+  &::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    border-radius: 16px;
+    top: 7px;
+    width: 18px;
+    height: 18px;
+    background: #f0f1f2;
+    box-shadow: 0 0 0 0px #f0f1f2;
+    transition: box-shadow 150ms ease-out;
+  }
+
+  &:hover::before {
+    box-shadow: 0 0 0 7px #f0f1f2;
+  }
+
+  input {
+    // display: none;
+
+    &+label {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      color: #494949;
+      font-family: "Roboto",
+        "Helvetica Neue",
+        "Helvetica",
+        Arial,
+        sans-serif;
+      position: absolute;
+      left: 30px;
+      cursor: pointer;
+
+      // Checkbox
+      &::before {
+        content: '';
+        display: inline-block;
+        background-color: #ffffff;
+        border-radius: 2px;
+        border: 1px solid #7b858f;
+        box-sizing: border-box;
+        width: 18px;
+        height: 18px;
+        transition: border 200ms ease,
+          background-color 200ms;
+        position: absolute;
+        left: -30px;
+        margin-top: 1px;
+      }
+    }
+
+    // States
+    &:hover+label::before {
+      border-color: #333d47;
+    }
+
+    &:checked+label {
+      &::before {
+        border-color: $wdc-color-blueberry-400;
+        background-color: $wdc-color-blueberry-400;
+      }
+
+      &::after {
+        transition: transform 200ms ease,
+          opacity 200ms ease;
+        opacity: 1;
+        transition: scale(1);
+      }
+    }
+
+    &:disabled+label {
+      color: #a1aab3;
+
+      &::before {
+        border-color: #b9c0c7;
+        background-color: #f6f7f8;
+      }
+    }
+
+    &:disabled:checked+label::before {
+      border-color: $wdc-color-blueberry-200;
+      background-color: $wdc-color-blueberry-200
+    }
+
+    // Focus
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    &:focus+label::before {
+      border-color: $wdc-color-blueberry-400;
+      border-width: 2px;
+    }
+
+    &:checked:focus+label::before {
+      box-shadow: 0 0 0 2px #ffffff,
+        0 0 0 4px #0875e1,
+        0 0 0 5px transparent;
+    }
+  }
+
+  &.wdc-form-alert {
+    input+label::before {
+      border: 1px solid #ffa126;
+      box-shadow: 0 0 0 1px #ffa126,
+        0 0 0 2px #c06c00;
+    }
+
+    input:checked+label::before {
+      border-color: #0875e1;
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ffa126, 0 0 0 5px #c06c00;
+    }
+
+    input:focus+label::before {
+      border-color: $wdc-color-blueberry-400;
+      border-width: 2px;
+      box-shadow: 0 0 0 0 #ffffff;
+    }
+  }
+
+  &.wdc-form-error {
+    input+label::before {
+      border: 1px solid #de2e21;
+      box-shadow: 0 0 0 1px #de2e21,
+        0 0 0 2px transparent;
+    }
+
+    input:checked+label::before {
+      border-color: #0875e1;
+      box-shadow: 0 0 0 2px #ffffff,
+        0 0 0 4px #de2e21,
+        0 0 0 5px transparent;
+    }
+
+    input:focus+label::before {
+      border-color: $wdc-color-blueberry-400;
+      border-width: 2px;
+      box-shadow: 0 0 0 0 #ffffff;
+    }
+  }
+}
+
+
+.wdc-form-checkbox {
+  @include wdc-form-radio-checkbox(); // Checkmark
+
+  input+label::after {
+    position: absolute;
+    left: -30px;
+    margin-top: 1px;
+    width: 18px;
+    height: 18px;
+    content: '';
+    background: svg-load('#{$_wdc-form-icons-path}/wd-icon-check-small.svg',
+      fill=$wdc-color-french-vanilla-100) center no-repeat;
+    background-size: $wdc-spacing-m;
+    transition: transform 200ms ease,
+      opacity 200ms ease;
+    opacity: 0;
+    transition: scale(0.5);
+  }
+}
+
+.wdc-form-radio {
+  @include wdc-form-radio-checkbox();
+
+  input+label::before {
+    border-radius: 18px;
+  }
+
+  input+label::after {
+    position: absolute;
+    left: -25px;
+    margin-top: 6px;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    content: '';
+    border-radius: 6px;
+    transition: transform 200ms ease,
+      opacity 200ms ease;
+    opacity: 0;
+    transition: scale(0.5);
+  }
+}

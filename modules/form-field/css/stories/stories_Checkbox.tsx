@@ -13,10 +13,10 @@ storiesOf('CSS/Form Field/Checkbox/Top Label', module)
         <div className="wdc-form-field-wrapper">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input type="checkbox" className="wdc-form-checkbox" id="checkbox" />
-            <label htmlFor="checkbox" className="wdc-form-label">
-              Checkbox option
-            </label>
+            <div className="wdc-form-checkbox">
+              <input type="checkbox" id="checkbox" />
+              <label htmlFor="checkbox">Checkbox option</label>
+            </div>
           </div>
         </div>
       </div>
@@ -28,10 +28,10 @@ storiesOf('CSS/Form Field/Checkbox/Top Label', module)
         <div className="wdc-form-field-wrapper">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input type="checkbox" className="wdc-form-checkbox" id="checkbox" disabled={true} />
-            <label htmlFor="checkbox" className="wdc-form-label">
-              Checkbox option
-            </label>
+            <div className="wdc-form-checkbox">
+              <input type="checkbox" id="checkbox" disabled={true} />
+              <label htmlFor="checkbox">Checkbox option</label>
+            </div>
           </div>
         </div>
       </div>
@@ -43,14 +43,10 @@ storiesOf('CSS/Form Field/Checkbox/Top Label', module)
         <div className="wdc-form-field-wrapper wdc-form-field-alert wdc-form-field-error-inline">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input
-              type="checkbox"
-              className="wdc-form-checkbox wdc-form-alert"
-              id="checkbox-alert"
-            />
-            <label htmlFor="checkbox-alert" className="wdc-form-label">
-              Checkbox option
-            </label>
+            <div className="wdc-form-checkbox wdc-form-alert">
+              <input type="checkbox" id="checkbox-alert" />
+              <label htmlFor="checkbox-alert">Checkbox option</label>
+            </div>
             <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Alert message
             </div>
@@ -65,14 +61,10 @@ storiesOf('CSS/Form Field/Checkbox/Top Label', module)
         <div className="wdc-form-field-wrapper wdc-form-field-error wdc-form-field-error-inline">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input
-              type="checkbox"
-              className="wdc-form-checkbox wdc-form-error"
-              id="checkbox-error"
-            />
-            <label htmlFor="checkbox-error" className="wdc-form-label">
-              Checkbox option
-            </label>
+            <div className="wdc-form-checkbox wdc-form-error">
+              <input type="checkbox" id="checkbox-error" />
+              <label htmlFor="checkbox-error">Checkbox option</label>
+            </div>
             <div className="wdc-form-hint-message">
               <strong>Error:</strong> Error message
             </div>
@@ -90,10 +82,10 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
         <div className="wdc-form-field-wrapper">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input type="checkbox" className="wdc-form-checkbox" id="checkbox" />
-            <label htmlFor="checkbox" className="wdc-form-label">
-              Checkbox option
-            </label>
+            <div className="wdc-form-checkbox">
+              <input type="checkbox" id="checkbox" />
+              <label htmlFor="checkbox">Checkbox option</label>
+            </div>
           </div>
         </div>
       </div>
@@ -105,10 +97,10 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
         <div className="wdc-form-field-wrapper">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input type="checkbox" className="wdc-form-checkbox" id="checkbox" disabled={true} />
-            <label htmlFor="checkbox" className="wdc-form-label">
-              Checkbox option
-            </label>
+            <div className="wdc-form-checkbox">
+              <input type="checkbox" id="checkbox" disabled={true} />
+              <label htmlFor="checkbox">Checkbox option</label>
+            </div>
           </div>
         </div>
       </div>
@@ -120,14 +112,10 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
         <div className="wdc-form-field-wrapper wdc-form-field-alert">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input
-              type="checkbox"
-              className="wdc-form-checkbox wdc-form-alert"
-              id="checkbox-alert"
-            />
-            <label htmlFor="checkbox-alert" className="wdc-form-label">
-              Checkbox option
-            </label>
+            <div className="wdc-form-checkbox wdc-form-alert">
+              <input type="checkbox" id="checkbox-alert" disabled={true} />
+              <label htmlFor="checkbox-alert">Checkbox option</label>
+            </div>
             <div className="wdc-form-hint-message">
               <strong>Alert:</strong> Alert message
             </div>
@@ -142,14 +130,10 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
         <div className="wdc-form-field-wrapper wdc-form-field-error">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
-            <input
-              type="checkbox"
-              className="wdc-form-checkbox wdc-form-error"
-              id="checkbox-error"
-            />
-            <label htmlFor="checkbox-error" className="wdc-form-label">
-              Checkbox option
-            </label>
+            <div className="wdc-form-checkbox wdc-form-error">
+              <input type="checkbox" id="checkbox-error" disabled={true} />
+              <label htmlFor="checkbox-error">Checkbox option</label>
+            </div>
             <div className="wdc-form-hint-message">
               <strong>Error:</strong> Error message
             </div>
@@ -169,24 +153,24 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
 
           <div className="wdc-form-group-fields">
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-1" />
-              <label htmlFor="checkbox-1" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-1" />
+                <label htmlFor="checkbox-1">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-2" />
-              <label htmlFor="checkbox-2" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-2" />
+                <label htmlFor="checkbox-2">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-3" />
-              <label htmlFor="checkbox-3" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-3" />
+                <label htmlFor="checkbox-3">Checkbox</label>
+              </div>
             </div>
           </div>
         </div>
@@ -203,24 +187,24 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
 
           <div className="wdc-form-group-fields wdc-form-field-alert">
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-1" />
-              <label htmlFor="checkbox-1" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-1" />
+                <label htmlFor="checkbox-1">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-2" />
-              <label htmlFor="checkbox-2" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-2" />
+                <label htmlFor="checkbox-2">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-3" />
-              <label htmlFor="checkbox-3" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-3" />
+                <label htmlFor="checkbox-3">Checkbox</label>
+              </div>
             </div>
           </div>
 
@@ -241,24 +225,24 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
 
           <div className="wdc-form-group-fields wdc-form-field-error">
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-1" />
-              <label htmlFor="checkbox-1" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-1" />
+                <label htmlFor="checkbox-1">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-2" />
-              <label htmlFor="checkbox-2" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-2" />
+                <label htmlFor="checkbox-2">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-3" />
-              <label htmlFor="checkbox-3" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-3" />
+                <label htmlFor="checkbox-3">Checkbox</label>
+              </div>
             </div>
           </div>
 
@@ -280,24 +264,24 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
 
           <div className="wdc-form-group-fields">
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-1" />
-              <label htmlFor="checkbox-1" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-1" />
+                <label htmlFor="checkbox-1">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-2" />
-              <label htmlFor="checkbox-2" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-2" />
+                <label htmlFor="checkbox-2">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-3" />
-              <label htmlFor="checkbox-3" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-3" />
+                <label htmlFor="checkbox-3">Checkbox</label>
+              </div>
             </div>
           </div>
         </div>
@@ -314,24 +298,24 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
 
           <div className="wdc-form-group-fields wdc-form-field-alert">
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-1" />
-              <label htmlFor="checkbox-1" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-1" />
+                <label htmlFor="checkbox-1">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-2" />
-              <label htmlFor="checkbox-2" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-2" />
+                <label htmlFor="checkbox-2">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-3" />
-              <label htmlFor="checkbox-3" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-3" />
+                <label htmlFor="checkbox-3">Checkbox</label>
+              </div>
             </div>
           </div>
 
@@ -352,24 +336,24 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
 
           <div className="wdc-form-group-fields wdc-form-field-error">
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-1" />
-              <label htmlFor="checkbox-1" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-1" />
+                <label htmlFor="checkbox-1">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-2" />
-              <label htmlFor="checkbox-2" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-2" />
+                <label htmlFor="checkbox-2">Checkbox</label>
+              </div>
             </div>
 
             <div className="wdc-form-field">
-              <input type="checkbox" className="wdc-form-checkbox" id="checkbox-3" />
-              <label htmlFor="checkbox-3" className="wdc-form-label">
-                Checkbox
-              </label>
+              <div className="wdc-form-checkbox">
+                <input type="checkbox" id="checkbox-3" />
+                <label htmlFor="checkbox-3">Checkbox</label>
+              </div>
             </div>
           </div>
 
