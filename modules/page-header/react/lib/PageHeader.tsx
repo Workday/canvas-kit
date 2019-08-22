@@ -2,16 +2,11 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
-import {makeMq} from '@workday/canvas-kit-react-common';
 
 export interface PageHeaderProps {
   title: string;
   capWidth: boolean;
-  breakpoints: {
-    sm: number;
-    md: number;
-    lg: number;
-  };
+  breakpoint?: number;
 }
 
 const Header = styled('header')({
@@ -31,34 +26,18 @@ const Container = styled('div')<PageHeaderProps>(
     overflow: 'hidden',
     padding: `0 ${spacing.s}`,
   },
-  ({capWidth, breakpoints}) => {
-    const mq = makeMq(breakpoints);
-
-    if (capWidth) {
-      return {
-        boxSizing: 'border-box',
-        margin: '0 auto',
-        width: '100%',
-        maxWidth: 1440,
-
-        [mq.sm]: {
-          padding: `0 ${spacing.xl}`,
-        },
-        [mq.md]: {
-          padding: `0 ${spacing.xxl}`,
-        },
-        [mq.lg]: {
-          padding: `0 100px`,
-        },
-      };
-    } else {
-      return {
-        [mq.sm]: {
-          padding: `0 ${spacing.xl}`,
-        },
-      };
+  ({breakpoint}) => ({
+    [`@media (min-width: ${breakpoint}px)`]: {
+      padding: `0 ${spacing.xl}`,
+    },
+  }),
+  ({capWidth}) =>
+    capWidth && {
+      boxSizing: 'border-box',
+      margin: '0 auto',
+      width: '100%',
+      maxWidth: 1440,
     }
-  }
 );
 
 const Title = styled('h2')({
@@ -82,11 +61,7 @@ export default class PageHeader extends React.Component<PageHeaderProps> {
   static defaultProps = {
     title: '',
     capWidth: false,
-    breakpoints: {
-      sm: 768,
-      md: 992,
-      lg: 1200,
-    },
+    breakpoint: 768,
   };
 
   private renderChildren(children: React.ReactNode): React.ReactNode {

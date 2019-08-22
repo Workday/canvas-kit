@@ -135,18 +135,6 @@ exports[`Page Header Snapshots renders a capWidth context PageHeader as expected
   }
 }
 
-@media (min-width:992px) {
-  .emotion-4 {
-    padding: 0 64px;
-  }
-}
-
-@media (min-width:1200px) {
-  .emotion-4 {
-    padding: 0 100px;
-  }
-}
-
 <header
   className="emotion-6 emotion-7"
 >

@@ -64,15 +64,8 @@ Defalut: `false`
 
 ---
 
-#### `breakpoints: { sm: number, md: number, lg: number }`
+#### `breakpoint: number`
 
-> A set of breakpoints that specifies where each screen size's minimum window width begins. The page
-> header sets spacing styles based on the size of the screen.
->
-> For example, by default a mobile screen size would be from 0 to 767 pixels, a 'sm' screen is from
-> 768 to 991, a 'md' screen is from 992 to 1199 pixels, and a 'lg' screen is 1200 pixels and beyond.
->
-> In the default context, the page header only adjusts its spacing styles up until the 'sm' size
-> breakpoint. In the `capWidth` context, a page header adjusts for spacing in all sizes.
+> The breakpoint at which the header's container spacing increases from 's' size to 'xl' size.
 
-Default: `{ sm: 768, md: 992, lg: 1200 }`
+Default: `768`
