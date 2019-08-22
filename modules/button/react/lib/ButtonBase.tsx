@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
+import isPropValid from '@emotion/is-prop-valid';
 import {
   ButtonSize,
   ButtonVariant,
@@ -13,7 +14,9 @@ import {ButtonProps, BaseButtonProps} from './Button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import * as ButtonStyles from './ButtonStyles';
 
-export const ButtonBaseCon = styled('button')<ButtonProps>(
+export const ButtonBaseCon = styled('button', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<ButtonProps>(
   /* istanbul ignore next line for coverage */
   ({variant, size}) => {
     if (variant === undefined) {

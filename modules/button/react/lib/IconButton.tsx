@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {getButtonStyle} from './ButtonBase';
 import styled from 'react-emotion';
+import isPropValid from '@emotion/is-prop-valid';
 import {IconButtonVariant, ButtonSize} from './types';
 import {BaseButtonProps} from './Button';
 import {iconButtonStyles} from './ButtonStyles';
@@ -28,7 +29,9 @@ export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonVaria
   onToggleChange?: (toggled: boolean | undefined) => void;
 }
 
-export const IconButtonCon = styled('button')<IconButtonProps>(
+export const IconButtonCon = styled('button', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<IconButtonProps>(
   iconButtonStyles.styles,
   ({variant}) => getButtonStyle(iconButtonStyles, variant),
   ({size, variant}) => {

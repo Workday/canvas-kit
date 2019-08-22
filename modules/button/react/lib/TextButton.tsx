@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {ButtonBaseLabel, ButtonLabelIcon, getButtonStyle} from './ButtonBase';
 import styled from 'react-emotion';
+import isPropValid from '@emotion/is-prop-valid';
 import {ButtonSize, IconPosition, TextButtonVariant} from './types';
 import {BaseButtonProps} from './Button';
 import {textButtonStyles} from './ButtonStyles';
@@ -9,7 +10,9 @@ export interface TextButtonProps extends BaseButtonProps<TextButtonVariant> {
   iconPosition?: IconPosition;
 }
 
-const TextButtonCon = styled('button')<TextButtonProps>(
+const TextButtonCon = styled('button', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<TextButtonProps>(
   textButtonStyles.styles,
   ({variant}) => getButtonStyle(textButtonStyles, variant),
   ({size}) => {
