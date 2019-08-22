@@ -185,6 +185,7 @@ export default class IconButton extends React.Component<IconButtonProps> {
 
   static defaultProps = {
     variant: IconButtonVariant.Circle,
+    size: ButtonSize.Medium,
     toggled: undefined,
   };
 

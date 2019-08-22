@@ -172,9 +172,11 @@ Default: `IconButtonVariant.Circle`
 
 ---
 
-#### `size: IconButton.Size.Small | IconButton.Size.Medium`
+#### `size: ButtonSize.Small | ButtonSize.Medium`
 
 > The size of the icon button
+
+Default: `ButtonSize.Medium`
 
 | Theme                       | Description                   | Is Default |
 | --------------------------- | ----------------------------- | ---------- |
