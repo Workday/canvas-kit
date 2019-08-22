@@ -4,7 +4,6 @@ import withReadme from 'storybook-readme/with-readme';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {extLinkIcon, setupIcon, uploadCloudIcon, userIcon} from '@workday/canvas-system-icons-web';
 import README from './README.md';
-import {css} from 'emotion';
 import './index.scss';
 
 storiesOf('CSS/Menu', module)
