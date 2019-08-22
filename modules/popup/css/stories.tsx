@@ -22,7 +22,7 @@ storiesOf('CSS/Popup', module)
   .add('All', () => (
     <div className="story">
       <div className={containerStyle + ' wdc-type'}>
-        <div className="wdc-popup wdc-popup-padding-l wdc-depth-2">
+        <div className="wdc-popup wdc-popup-top-center wdc-depth-2">
           <div className="wdc-popup-close">
             <IconButton
               buttonType={IconButton.Types.Plain}

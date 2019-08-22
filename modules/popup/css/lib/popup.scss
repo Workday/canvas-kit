@@ -1,50 +1,50 @@
-// @keyframes popupAnimationTop {
-//   from {
-//     opacity: 0;
-//     transform: translate(-50%, $wdc-spacing-xxxs);
-//   }
+@keyframes popupAnimationTopCenter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, $wdc-spacing-xxxs);
+  }
 
-//   to {
-//     opacity: 1;
-//     transform: translate(-50%, 0px);
-//   }
-// }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0px);
+  }
+}
 
-// @keyframes popupAnimationRight {
-//   from {
-//     opacity: 0;
-//     transform: translate(-$wdc-spacing-xxxs, -50%);
-//   }
+@keyframes popupAnimationRightCenter {
+  from {
+    opacity: 0;
+    transform: translate(-$wdc-spacing-xxxs, -50%);
+  }
 
-//   to {
-//     opacity: 1;
-//     transform: translate(0px, -50%);
-//   }
-// }
+  to {
+    opacity: 1;
+    transform: translate(0px, -50%);
+  }
+}
 
-// @keyframes popupAnimationLeft {
-//   from {
-//     opacity: 0;
-//     transform: translate($wdc-spacing-xxxs, -50%);
-//   }
+@keyframes popupAnimationLeftCenter {
+  from {
+    opacity: 0;
+    transform: translate($wdc-spacing-xxxs, -50%);
+  }
 
-//   to {
-//     opacity: 1;
-//     transform: translate(0px, -50%);
-//   }
-// }
+  to {
+    opacity: 1;
+    transform: translate(0px, -50%);
+  }
+}
 
-// @keyframes popupAnimationBottom {
-//   from {
-//     opacity: 0;
-//     transform: translate(-50%, -$wdc-spacing-xxxs);
-//   }
+@keyframes popupAnimationBottomCenter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -$wdc-spacing-xxxs);
+  }
 
-//   to {
-//     opacity: 1;
-//     transform: translate(-50%, 0px);
-//   }
-// }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0px);
+  }
+}
 
 .wdc-popup {
   position: relative;
@@ -55,6 +55,8 @@
   position: relative;
   width: max-content;
   max-width: $_wdc-popup-max-width;
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
 
   .wdc-popup-close {
     position: absolute;
@@ -69,6 +71,26 @@
 
   .wdc-popup-body {
     @include wdc-type-body();
+  }
+
+  &-top-center {
+    animation-name: popupAnimationTopCenter;
+    transform-origin: top center;
+  }
+
+  &-right-center {
+    animation-name: popupAnimationRightCenter;
+    transform-origin: right center;
+  }
+
+  &-bottom-center {
+    animation-name: popupAnimationBottomCenter;
+    transform-origin: bottom center;
+  }
+
+  &-left-center {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: left center;
   }
 
   // Fallback for IE11
