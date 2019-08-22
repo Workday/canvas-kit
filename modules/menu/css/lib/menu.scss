@@ -90,15 +90,17 @@
         fill: $wdc-color-icon-standard;
       }
 
+      .wdc-icon,
       .wdc-menu-item-icon {
-        display: flex;
-        flex: 40px 0;
-        order: 1;
-      }
+        &:first-child {
+          margin-right: 16px;
+          order: 1;
+        }
 
-      .wdc-menu-item-icon-secondary {
-        justify-content: flex-end;
-        order: 3;
+        &:not(:first-child) {
+          margin-left: 16px;
+          order: 3;
+        }
       }
 
       .wdc-menu-item-label {

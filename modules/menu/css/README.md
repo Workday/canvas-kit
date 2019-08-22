@@ -94,30 +94,24 @@ Menu item modifiers may be combined.
 
 ### Icons
 
-Menu items can include an icon as well as a secondary icon (if necessary).
+Menu items can include an icon as well as a secondary icon.
 
-Wrap the text for the menu item using a `<span>` with `.wdc-menu-item-label`, and wrap the icon
-using a `<span>` with `.wdc-menu-item-icon`.
-
-The `<span>` for the secondary icon will need `.wdc-menu-item-icon-secondary` as well.
+Wrap the text for the menu item using a `<span>` with `.wdc-menu-item-label`, and assign
+`.wdc-menu-item-icon` to the icons.
 
 ```html
 <div class="wdc-menu">
   <ul>
     <li>
-      <span className="wdc-menu-item-icon">
-        <svg ...>
-      </span>
-      <span className="wdc-menu-item-label">Item with icon</span>
+      <i className="wdc-icon wdc-menu-item-icon" data-icon="uploadCloud" data-category="system" />
+      <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
     </li>
     <li>
-      <span className="wdc-menu-item-icon">
-        <svg ...>
-      </span>
-      <span className="wdc-menu-item-label">Item with icon and secondary icon</span>
-      <span className="wdc-menu-item-icon wdc-menu-item-icon-secondary">
-        <svg ...>
-      </span>
+      <i className="wdc-icon wdc-menu-item-icon" data-icon="uploadCloud" data-category="system" />
+      <span className="wdc-menu-item-label"
+        >Item with uploadCloud icon and an extLink secondary icon</span
+      >
+      <i className="wdc-icon wdc-menu-item-icon" data-icon="extLink" data-category="system" />
     </li>
   </ul>
 </div>
