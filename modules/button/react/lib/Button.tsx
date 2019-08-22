@@ -54,7 +54,7 @@ export default class Button extends React.Component<ButtonProps> {
     const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
     return (
-      <ButtonBaseCon {...elemProps} innerRef={buttonRef}>
+      <ButtonBaseCon variant={variant} size={size} innerRef={buttonRef} {...elemProps}>
         {icon && <ButtonLabelIcon size={size} icon={icon} {...elemProps} />}
         <ButtonBaseLabel size={size} variant={variant}>
           {children}
@@ -75,7 +75,7 @@ export class beta_Button extends React.Component<ButtonProps<BetaButtonVariant>>
   public static Size = ButtonSize;
 
   static defaultProps = {
-    buttonSize: ButtonSize.Medium,
+    size: ButtonSize.Medium,
     variant: BetaButtonVariant.Secondary,
     grow: false,
   };
