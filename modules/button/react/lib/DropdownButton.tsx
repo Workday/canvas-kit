@@ -22,12 +22,14 @@ export default class DropdownButton extends React.Component<BaseButtonProps> {
   };
 
   public render() {
-    const {children} = this.props;
+    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
     return (
-      <DropdownButtonCon {...this.props}>
-        <ButtonBaseLabel {...this.props}>{children}</ButtonBaseLabel>
-        <ButtonLabelIcon icon={caretDownIcon} {...this.props} dropdown={true} />
+      <DropdownButtonCon variant={variant} size={size} innerRef={buttonRef} {...elemProps}>
+        <ButtonBaseLabel variant={variant} size={size} {...elemProps}>
+          {children}
+        </ButtonBaseLabel>
+        <ButtonLabelIcon size={size} icon={caretDownIcon} {...elemProps} dropdown={true} />
       </DropdownButtonCon>
     );
   }

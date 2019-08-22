@@ -10,7 +10,6 @@ import {
   IconButtonVariant,
 } from './types';
 import {ButtonProps, BaseButtonProps} from './Button';
-import {TextButtonProps} from './TextButton';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import * as ButtonStyles from './ButtonStyles';
 
@@ -85,9 +84,7 @@ export const ButtonLabelData = styled('span')<ButtonProps>(
   }
 );
 
-const ButtonLabelIconStyled = styled('span')<
-  ButtonLabelIconProps & Pick<TextButtonProps, 'iconPosition'>
->(
+const ButtonLabelIconStyled = styled('span')<ButtonLabelIconProps>(
   ButtonStyles.labelIconBaseStyles.styles,
   ({size, dropdown}) => {
     if (dropdown) {
@@ -128,25 +125,32 @@ const ButtonLabelIconStyled = styled('span')<
 );
 
 export interface ButtonLabelIconProps extends BaseButtonProps<AllButtonVariants> {
+  iconPosition?: IconPosition;
   dropdown?: boolean;
 }
 
 export class ButtonLabelIcon extends React.Component<ButtonLabelIconProps> {
   public render() {
+    const {icon, size, dropdown, iconPosition, ...elemProps} = this.props;
     /* istanbul ignore next line for coverage */
-    if (this.props.icon === undefined) {
+    if (icon === undefined) {
       return {};
     }
 
     let iconSize = 24;
 
-    if (this.props.size === ButtonSize.Small) {
+    if (size === ButtonSize.Small) {
       iconSize = 20;
     }
 
     return (
-      <ButtonLabelIconStyled {...this.props}>
-        <SystemIcon size={iconSize} icon={this.props.icon} />
+      <ButtonLabelIconStyled
+        iconPosition={iconPosition}
+        dropdown={dropdown}
+        size={size}
+        {...elemProps}
+      >
+        <SystemIcon size={iconSize} icon={icon} />
       </ButtonLabelIconStyled>
     );
   }

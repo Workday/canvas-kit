@@ -55,12 +55,12 @@ export default class Button extends React.Component<ButtonProps> {
 
     return (
       <ButtonBaseCon {...elemProps} innerRef={buttonRef}>
-        {icon && <ButtonLabelIcon {...elemProps} />}
+        {icon && <ButtonLabelIcon size={size} icon={icon} {...elemProps} />}
         <ButtonBaseLabel size={size} variant={variant}>
           {children}
         </ButtonBaseLabel>
         {dataLabel && (
-          <ButtonLabelData className={labelDataBaseStyles.classname} {...elemProps}>
+          <ButtonLabelData size={size} className={labelDataBaseStyles.classname} {...elemProps}>
             {dataLabel}
           </ButtonLabelData>
         )}
