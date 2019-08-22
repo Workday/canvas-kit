@@ -447,8 +447,6 @@ function getButtonFocusRing(variant: AllButtonVariants): CSSObject {
   switch (variant) {
     case ButtonVariant.Primary:
     case ButtonVariant.Secondary:
-    case IconButtonVariant.Square:
-    case IconButtonVariant.SquareFilled:
     case TextButtonVariant.Default:
     case TextButtonVariant.AllCaps:
       return focusRing(2, 0);

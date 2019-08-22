@@ -35,36 +35,18 @@ export const IconButtonCon = styled('button', {
   iconButtonStyles.styles,
   ({variant}) => getButtonStyle(iconButtonStyles, variant),
   ({size, variant}) => {
-    if (variant === IconButtonVariant.Square || variant === IconButtonVariant.SquareFilled) {
-      switch (size) {
-        case ButtonSize.Medium:
-          return iconButtonStyles.variants!.sizes.medium;
-        default:
-        case ButtonSize.Small:
-          return {};
-      }
-    } else if (variant === IconButtonVariant.Plain) {
-      switch (size) {
-        default:
-        case ButtonSize.Medium:
-          return {
-            margin: '-8px',
-            ...iconButtonStyles.variants!.sizes.medium,
-          };
-        case ButtonSize.Small:
-          return {
-            margin: '-6px',
-            ...iconButtonStyles.variants!.sizes.small,
-          };
-      }
-    } else {
-      switch (size) {
-        default:
-        case ButtonSize.Medium:
-          return iconButtonStyles.variants!.sizes.medium;
-        case ButtonSize.Small:
-          return iconButtonStyles.variants!.sizes.small;
-      }
+    switch (size) {
+      default:
+      case ButtonSize.Medium:
+        return {
+          margin: variant === IconButtonVariant.Plain ? '-8px' : undefined,
+          ...iconButtonStyles.variants!.sizes.medium,
+        };
+      case ButtonSize.Small:
+        return {
+          margin: variant === IconButtonVariant.Plain ? '-6px' : undefined,
+          ...iconButtonStyles.variants!.sizes.small,
+        };
     }
   },
   ({variant, toggled}) => {
