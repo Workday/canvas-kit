@@ -639,6 +639,7 @@ exports[`Icon Button Snapshots renders as expected 1`] = `
 }
 
 <button
+  aria-label="Hello"
   className="emotion-0 emotion-1"
 >
   <svg>

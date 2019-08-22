@@ -57,6 +57,7 @@ export class ToggleIconButtonWrapper extends React.Component<
         variant={this.props.variant}
         onClick={this.handleToggle}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
   }

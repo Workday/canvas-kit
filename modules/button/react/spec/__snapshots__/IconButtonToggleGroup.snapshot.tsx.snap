@@ -323,6 +323,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   className="emotion-12 emotion-13"
 >
   <button
+    aria-label="Percent View"
     aria-pressed={false}
     className="emotion-1 emotion-2"
     onClick={[Function]}
@@ -338,6 +339,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
     />
   </button>
   <button
+    aria-label="Device View"
     aria-pressed={true}
     className="emotion-4 emotion-2"
     onClick={[Function]}
@@ -353,6 +355,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
     />
   </button>
   <button
+    aria-label="Table View"
     aria-pressed={false}
     className="emotion-1 emotion-2"
     disabled={true}
@@ -369,6 +372,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
     />
   </button>
   <button
+    aria-label="List View"
     aria-pressed={false}
     className="emotion-1 emotion-2"
     onClick={[Function]}
@@ -709,6 +713,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   className="emotion-12 emotion-13"
 >
   <button
+    aria-label="List View"
     aria-pressed={false}
     className="emotion-1 emotion-2"
     onClick={[Function]}
@@ -724,6 +729,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
     />
   </button>
   <button
+    aria-label="Table View"
     aria-pressed={true}
     className="emotion-4 emotion-2"
     onClick={[Function]}
@@ -739,6 +745,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
     />
   </button>
   <button
+    aria-label="Device View"
     aria-pressed={false}
     className="emotion-1 emotion-2"
     onClick={[Function]}
@@ -754,6 +761,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
     />
   </button>
   <button
+    aria-label="Percent View"
     aria-pressed={false}
     className="emotion-1 emotion-2"
     onClick={[Function]}
@@ -1094,6 +1102,7 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   className="emotion-6 emotion-7"
 >
   <button
+    aria-label="List View"
     aria-pressed={true}
     className="emotion-1 emotion-2"
     onClick={[Function]}
@@ -1109,6 +1118,7 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
     />
   </button>
   <button
+    aria-label="Table View"
     aria-pressed={false}
     className="emotion-4 emotion-2"
     onClick={[Function]}

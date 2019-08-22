@@ -188,7 +188,6 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -400,7 +399,6 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -627,7 +625,6 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
 
 <button
   className="emotion-7 emotion-8"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -843,7 +840,6 @@ exports[`Button (Highlight) Snapshots renders a medium, highlight button with an
 
 <button
   className="emotion-5 emotion-6"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1071,7 +1067,6 @@ exports[`Button (Highlight) Snapshots renders a medium, highlight button with an
 
 <button
   className="emotion-7 emotion-8"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"

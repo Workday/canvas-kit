@@ -143,7 +143,6 @@ exports[`Button (Primary) Snapshots (beta) renders a large, growing primary butt
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -295,7 +294,6 @@ exports[`Button (Primary) Snapshots (beta) renders a large, primary button 1`] =
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -464,7 +462,6 @@ exports[`Button (Primary) Snapshots (beta) renders a large, primary button with
 
 <button
   className="emotion-4 emotion-5"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -667,7 +664,6 @@ exports[`Button (Primary) Snapshots (beta) renders a large, primary button with
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -894,7 +890,6 @@ exports[`Button (Primary) Snapshots (beta) renders a large, primary button with
 
 <button
   className="emotion-7 emotion-8"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1065,7 +1060,6 @@ exports[`Button (Primary) Snapshots (beta) renders a medium, primary button 1`] 
 
 <button
   className="emotion-2 emotion-3"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -1235,7 +1229,6 @@ exports[`Button (Primary) Snapshots (beta) renders a medium, primary button with
 
 <button
   className="emotion-4 emotion-5"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -1438,7 +1431,6 @@ exports[`Button (Primary) Snapshots (beta) renders a medium, primary button with
 
 <button
   className="emotion-5 emotion-6"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1666,7 +1658,6 @@ exports[`Button (Primary) Snapshots (beta) renders a medium, primary button with
 
 <button
   className="emotion-7 emotion-8"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1837,7 +1828,6 @@ exports[`Button (Primary) Snapshots (beta) renders a small, primary button 1`] =
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"

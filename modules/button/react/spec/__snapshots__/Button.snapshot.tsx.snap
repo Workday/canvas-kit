@@ -108,7 +108,6 @@ exports[`Button Snapshots renders a button with no type defined 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -229,7 +228,6 @@ exports[`Button Snapshots renders a growing button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -348,7 +346,6 @@ exports[`Button Snapshots renders as expected 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"

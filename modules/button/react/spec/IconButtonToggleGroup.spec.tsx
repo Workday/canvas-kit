@@ -18,8 +18,8 @@ describe('Icon Button Toggle', () => {
   test('renders two buttons as expected', () => {
     const component = mount(
       <IconButtonToggleGroup>
-        <IconButton icon={listViewIcon} value="list-view" onClick={cb} />
-        <IconButton icon={worksheetsIcon} value="table-view" />
+        <IconButton icon={listViewIcon} value="list-view" aria-label="List View" onClick={cb} />
+        <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
       </IconButtonToggleGroup>
     );
     expect(component.find('button').length).toEqual(2);
@@ -35,8 +35,8 @@ describe('Icon Button Toggle', () => {
   test('renders two buttons with disabled button', () => {
     const component = mount(
       <IconButtonToggleGroup onChange={cb}>
-        <IconButton icon={listViewIcon} value="list-view" disabled={true} />
-        <IconButton icon={worksheetsIcon} value="table-view" />
+        <IconButton icon={listViewIcon} value="list-view" aria-label="List View" disabled={true} />
+        <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
         <span /> {/* ensure random elements don't break anything */}
       </IconButtonToggleGroup>
     );
@@ -62,10 +62,10 @@ describe('Icon Button Toggle', () => {
   test('renders correctly when RTL is true', () => {
     const component = mount(
       <IconButtonToggleGroup isRTL={true}>
-        <IconButton icon={listViewIcon} value="list-view" />
-        <IconButton icon={worksheetsIcon} value="table-view" />
-        <IconButton icon={deviceTabletIcon} value="device-view" />
-        <IconButton icon={percentageIcon} value="percent-view" />
+        <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
+        <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+        <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+        <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
       </IconButtonToggleGroup>
     );
 
@@ -82,8 +82,8 @@ describe('Icon Button Toggle', () => {
   test('behavior when no values are used', () => {
     const component = mount(
       <IconButtonToggleGroup onChange={cb}>
-        <IconButton icon={listViewIcon} />
-        <IconButton icon={worksheetsIcon} />
+        <IconButton icon={listViewIcon} aria-label="List View" />
+        <IconButton icon={worksheetsIcon} aria-label="Table View" />
       </IconButtonToggleGroup>
     );
 

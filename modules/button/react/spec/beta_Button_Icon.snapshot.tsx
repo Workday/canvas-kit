@@ -5,13 +5,19 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 describe('Button (Icon) Snapshots', () => {
   test('renders a default icon button, toggled on', () => {
-    const component = renderer.create(<IconButton toggled={true} icon={activityStreamIcon} />);
+    const component = renderer.create(
+      <IconButton toggled={true} icon={activityStreamIcon} aria-label="Activity Stream" />
+    );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a plain icon button', () => {
     const component = renderer.create(
-      <IconButton variant={IconButton.Variant.Plain} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.Plain}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -22,6 +28,7 @@ describe('Button (Icon) Snapshots', () => {
         variant={IconButton.Variant.Plain}
         size={IconButton.Size.Small}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -33,6 +40,7 @@ describe('Button (Icon) Snapshots', () => {
         variant={IconButton.Variant.Plain}
         size={IconButton.Size.Medium}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -40,7 +48,11 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders a default icon button', () => {
     const component = renderer.create(
-      <IconButton variant={IconButton.Variant.Circle} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.Circle}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -51,6 +63,7 @@ describe('Button (Icon) Snapshots', () => {
         size={IconButton.Size.Small}
         variant={IconButton.Variant.Circle}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -62,6 +75,7 @@ describe('Button (Icon) Snapshots', () => {
         size={IconButton.Size.Medium}
         variant={IconButton.Variant.Circle}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -69,21 +83,35 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders a default icon button, toggled on', () => {
     const component = renderer.create(
-      <IconButton toggled={true} variant={IconButton.Variant.Circle} icon={activityStreamIcon} />
+      <IconButton
+        toggled={true}
+        variant={IconButton.Variant.Circle}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a default icon button, toggled off', () => {
     const component = renderer.create(
-      <IconButton toggled={false} variant={IconButton.Variant.Circle} icon={activityStreamIcon} />
+      <IconButton
+        toggled={false}
+        variant={IconButton.Variant.Circle}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a filled icon button', () => {
     const component = renderer.create(
-      <IconButton variant={IconButton.Variant.CircleFilled} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.CircleFilled}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -94,6 +122,7 @@ describe('Button (Icon) Snapshots', () => {
         size={IconButton.Size.Small}
         variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -105,6 +134,7 @@ describe('Button (Icon) Snapshots', () => {
         size={IconButton.Size.Medium}
         variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -116,6 +146,7 @@ describe('Button (Icon) Snapshots', () => {
         toggled={true}
         variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -127,6 +158,7 @@ describe('Button (Icon) Snapshots', () => {
         toggled={false}
         variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -134,7 +166,11 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders an inverse icon button', () => {
     const component = renderer.create(
-      <IconButton variant={IconButton.Variant.Inverse} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.Inverse}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -145,6 +181,7 @@ describe('Button (Icon) Snapshots', () => {
         size={IconButton.Size.Small}
         variant={IconButton.Variant.Inverse}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -156,6 +193,7 @@ describe('Button (Icon) Snapshots', () => {
         size={IconButton.Size.Medium}
         variant={IconButton.Variant.Inverse}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -163,21 +201,35 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders an inverse icon button, toggled on', () => {
     const component = renderer.create(
-      <IconButton toggled={true} variant={IconButton.Variant.Inverse} icon={activityStreamIcon} />
+      <IconButton
+        toggled={true}
+        variant={IconButton.Variant.Inverse}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders an inverse icon button, toggled off', () => {
     const component = renderer.create(
-      <IconButton toggled={false} variant={IconButton.Variant.Inverse} icon={activityStreamIcon} />
+      <IconButton
+        toggled={false}
+        variant={IconButton.Variant.Inverse}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders an inverse filled icon button', () => {
     const component = renderer.create(
-      <IconButton variant={IconButton.Variant.InverseFilled} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.InverseFilled}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -188,6 +240,7 @@ describe('Button (Icon) Snapshots', () => {
         size={IconButton.Size.Small}
         variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -199,6 +252,7 @@ describe('Button (Icon) Snapshots', () => {
         size={IconButton.Size.Medium}
         variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -210,6 +264,7 @@ describe('Button (Icon) Snapshots', () => {
         toggled={true}
         variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -221,6 +276,7 @@ describe('Button (Icon) Snapshots', () => {
         toggled={false}
         variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();

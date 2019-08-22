@@ -518,6 +518,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
     className="emotion-17 emotion-18"
   >
     <button
+      aria-label="Notifications"
       className="emotion-9 emotion-10"
       style={
         Object {
@@ -535,6 +536,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
       />
     </button>
     <button
+      aria-label="Inbox"
       className="emotion-9 emotion-10"
       style={
         Object {
@@ -2160,6 +2162,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
     className="emotion-29 emotion-30"
   >
     <button
+      aria-label="Notifications"
       className="emotion-21 emotion-11"
       style={
         Object {
@@ -2177,6 +2180,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
       />
     </button>
     <button
+      aria-label="Inbox"
       className="emotion-21 emotion-11"
       style={
         Object {
@@ -2892,6 +2896,7 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
     className="emotion-14 emotion-15"
   >
     <button
+      aria-label="Notifications"
       className="emotion-9 emotion-10"
     >
       <span
@@ -2904,6 +2909,7 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
       />
     </button>
     <button
+      aria-label="Inbox"
       className="emotion-9 emotion-10"
     >
       <span

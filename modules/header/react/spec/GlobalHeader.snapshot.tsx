@@ -22,8 +22,12 @@ describe('App GlobalHeader Snapshots', () => {
     const tree = renderer
       .create(
         <GlobalHeader brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}>
-          <IconButton icon={notificationsIcon} variant={IconButton.Variant.Square} />
-          <IconButton icon={inboxIcon} variant={IconButton.Variant.Square} />
+          <IconButton
+            icon={notificationsIcon}
+            variant={IconButton.Variant.Square}
+            aria-label="Notifications"
+          />
+          <IconButton icon={inboxIcon} variant={IconButton.Variant.Square} aria-label="Inbox" />
         </GlobalHeader>
       )
       .toJSON();
@@ -34,8 +38,12 @@ describe('App GlobalHeader Snapshots', () => {
     const tree = renderer
       .create(
         <GlobalHeader>
-          <IconButton icon={notificationsIcon} variant={IconButton.Variant.Plain} />
-          <IconButton icon={inboxIcon} variant={IconButton.Variant.Plain} />
+          <IconButton
+            icon={notificationsIcon}
+            variant={IconButton.Variant.Plain}
+            aria-label="Notifications"
+          />
+          <IconButton icon={inboxIcon} variant={IconButton.Variant.Plain} aria-label="Inbox" />
           <Avatar />
         </GlobalHeader>
       )
@@ -52,8 +60,12 @@ describe('App GlobalHeader Snapshots', () => {
     const tree = renderer
       .create(
         <GlobalHeader onSearchSubmit={cb}>
-          <IconButton icon={notificationsIcon} variant={IconButton.Variant.Plain} />
-          <IconButton icon={inboxIcon} variant={IconButton.Variant.Plain} />
+          <IconButton
+            icon={notificationsIcon}
+            variant={IconButton.Variant.Plain}
+            aria-label="Notifications"
+          />
+          <IconButton icon={inboxIcon} variant={IconButton.Variant.Plain} aria-label="Inbox" />
           <Avatar />
         </GlobalHeader>
       )

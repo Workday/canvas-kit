@@ -6,7 +6,7 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 describe('Icon Button Snapshots', () => {
   test('renders as expected', () => {
     const component = renderer.create(
-      <IconButton>
+      <IconButton aria-label="Hello">
         <svg>Hello</svg>
       </IconButton>
     );

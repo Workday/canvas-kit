@@ -108,7 +108,6 @@ exports[`Button (Secondary) Snapshots renders a large, secondary button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -227,7 +226,6 @@ exports[`Button (Secondary) Snapshots renders a medium, secondary button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -346,7 +344,6 @@ exports[`Button (Secondary) Snapshots renders a small, secondary button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"

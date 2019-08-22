@@ -148,6 +148,7 @@ exports[`Button (Icon) Snapshots renders a default icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
 >
   <span
@@ -309,6 +310,7 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled off 1`] 
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={false}
   className="emotion-1 emotion-2"
 >
@@ -500,6 +502,7 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled on 1`] =
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={true}
   className="emotion-1 emotion-2"
 >
@@ -691,6 +694,7 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled on 2`] =
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={true}
   className="emotion-1 emotion-2"
 >
@@ -840,6 +844,7 @@ exports[`Button (Icon) Snapshots renders a filled icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
 >
   <span
@@ -988,6 +993,7 @@ exports[`Button (Icon) Snapshots renders a filled icon button, toggled off 1`] =
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={false}
   className="emotion-1 emotion-2"
 >
@@ -1169,6 +1175,7 @@ exports[`Button (Icon) Snapshots renders a filled icon button, toggled on 1`] = 
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={true}
   className="emotion-1 emotion-2"
 >
@@ -1331,6 +1338,7 @@ exports[`Button (Icon) Snapshots renders a medium default icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="medium"
 >
@@ -1480,6 +1488,7 @@ exports[`Button (Icon) Snapshots renders a medium filled icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="medium"
 >
@@ -1633,6 +1642,7 @@ exports[`Button (Icon) Snapshots renders a medium inverse filled icon button 1`]
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="medium"
 >
@@ -1777,6 +1787,7 @@ exports[`Button (Icon) Snapshots renders a medium inverse icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="medium"
 >
@@ -1941,6 +1952,7 @@ exports[`Button (Icon) Snapshots renders a medium plain icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="medium"
 >
@@ -2105,6 +2117,7 @@ exports[`Button (Icon) Snapshots renders a plain icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
 >
   <span
@@ -2271,6 +2284,7 @@ exports[`Button (Icon) Snapshots renders a small default icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="small"
 >
@@ -2425,6 +2439,7 @@ exports[`Button (Icon) Snapshots renders a small filled icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="small"
 >
@@ -2583,6 +2598,7 @@ exports[`Button (Icon) Snapshots renders a small inverse filled icon button 1`] 
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="small"
 >
@@ -2732,6 +2748,7 @@ exports[`Button (Icon) Snapshots renders a small inverse icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="small"
 >
@@ -2901,6 +2918,7 @@ exports[`Button (Icon) Snapshots renders a small plain icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
   size="small"
 >
@@ -3054,6 +3072,7 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
 >
   <span
@@ -3206,6 +3225,7 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button, toggled 
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={false}
   className="emotion-1 emotion-2"
 >
@@ -3387,6 +3407,7 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button, toggled 
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={true}
   className="emotion-1 emotion-2"
 >
@@ -3531,6 +3552,7 @@ exports[`Button (Icon) Snapshots renders an inverse icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
 >
   <span
@@ -3674,6 +3696,7 @@ exports[`Button (Icon) Snapshots renders an inverse icon button, toggled off 1`]
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={false}
   className="emotion-1 emotion-2"
 >
@@ -3834,6 +3857,7 @@ exports[`Button (Icon) Snapshots renders an inverse icon button, toggled on 1`] 
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={true}
   className="emotion-1 emotion-2"
 >

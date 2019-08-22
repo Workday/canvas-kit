@@ -143,7 +143,6 @@ exports[`Button (Outline) Snapshots renders a large, growing outline primary but
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -318,7 +317,6 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button 1`] 
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -510,7 +508,6 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
 
 <button
   className="emotion-4 emotion-5"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -736,7 +733,6 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -986,7 +982,6 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
 
 <button
   className="emotion-7 emotion-8"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1157,7 +1152,6 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button 1`] 
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -1326,7 +1320,6 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
 
 <button
   className="emotion-4 emotion-5"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -1529,7 +1522,6 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1756,7 +1748,6 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
 
 <button
   className="emotion-7 emotion-8"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1927,7 +1918,6 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button 1`
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -2096,7 +2086,6 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
 
 <button
   className="emotion-4 emotion-5"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -2299,7 +2288,6 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -2526,7 +2514,6 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
 
 <button
   className="emotion-7 emotion-8"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -2720,7 +2707,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button 1`]
 
 <button
   className="emotion-2 emotion-3"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -2913,7 +2899,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
 
 <button
   className="emotion-4 emotion-5"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -3139,7 +3124,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
 
 <button
   className="emotion-5 emotion-6"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -3390,7 +3374,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
 
 <button
   className="emotion-7 emotion-8"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -3561,7 +3544,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button 1`]
 
 <button
   className="emotion-2 emotion-3"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -3731,7 +3713,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
 
 <button
   className="emotion-4 emotion-5"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -3934,7 +3915,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
 
 <button
   className="emotion-5 emotion-6"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -4162,7 +4142,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
 
 <button
   className="emotion-7 emotion-8"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -4333,7 +4312,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button 1
 
 <button
   className="emotion-2 emotion-3"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -4503,7 +4481,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
 
 <button
   className="emotion-4 emotion-5"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -4706,7 +4683,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
 
 <button
   className="emotion-5 emotion-6"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -4934,7 +4910,6 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
 
 <button
   className="emotion-7 emotion-8"
-  size="medium"
 >
   <span
     className="emotion-1 emotion-2"
@@ -5128,7 +5103,6 @@ exports[`Button (Outline) Snapshots renders a small, outline inverse button 1`] 
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -5280,7 +5254,6 @@ exports[`Button (Outline) Snapshots renders a small, outline primary button 1`] 
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -5432,7 +5405,6 @@ exports[`Button (Outline) Snapshots renders a small, outline secondary button 1`
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
