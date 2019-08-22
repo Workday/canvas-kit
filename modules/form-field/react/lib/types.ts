@@ -1,8 +1,8 @@
-export enum LabelPosition {
+export enum FormFieldLabelPosition {
   Top,
   Left,
 }
 
-export interface LabelPositionBehavior {
-  labelPosition?: LabelPosition;
+export interface FormFieldLabelPositionBehavior {
+  labelPosition?: FormFieldLabelPosition;
 }

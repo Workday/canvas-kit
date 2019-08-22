@@ -4,7 +4,8 @@ module.exports = {
   verbose: true,
   collectCoverage: true,
   collectCoverageFrom: [
-    'modules/**/*.{tsx,}',
+    'modules/**/*.{tsx,ts}',
+    '!modules/**/*.d.ts',
     '!**/header/**/lib/Header.tsx',
     '!**/common/**/ControlledComponentWrapper.tsx',
     '!**/common/**/InputProviderDecorator.tsx',

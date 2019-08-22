@@ -88,7 +88,13 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
 #### `OpenDirection: SidePanelOpenDirection`
 
 ```tsx
-<SidePanel open={true} openDirection={SidePanelOpenDirection.Left} />
+<SidePanel open={true} openDirection={SidePanel.OpenDirection.Left} />
+```
+
+#### `BackgroundColor: SidePanelBackgroundColor`
+
+```tsx
+<SidePanel open={true} backgroundColor={SidePanel.BackgroundColor.Gray} />
 ```
 
 ---

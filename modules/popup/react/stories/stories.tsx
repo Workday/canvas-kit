@@ -29,7 +29,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
           <Popup
             width={400}
             heading={'Delete Item'}
-            padding={Popup.padding.s}
+            padding={Popup.Padding.s}
             handleClose={this.handleClose}
           >
             <div style={{marginBottom: '24px'}}>

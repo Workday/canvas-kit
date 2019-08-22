@@ -30,7 +30,7 @@ import {Popup} from '@workday/canvas-kit-react-popup';
   <Popup
     width={300}
     heading={'Popup Title'}
-    paddingSize={Popup.padding.l}
+    padding={Popup.Padding.l}
     handleClose={this.handleClose}
   >
     {this.props.children}
@@ -40,7 +40,11 @@ import {Popup} from '@workday/canvas-kit-react-popup';
 
 ## Static Properties
 
-> None
+#### `Padding: PopupPadding`
+
+```tsx
+<Popup padding={Popup.Padding.l}>{this.props.children}</Popup>
+```
 
 ## Component Props
 
@@ -52,7 +56,7 @@ import {Popup} from '@workday/canvas-kit-react-popup';
 
 ### Optional
 
-### `paddingSize: PopupPadding`
+### `padding: PopupPadding`
 
 > You can choose between zero, s, l for your padding
 
