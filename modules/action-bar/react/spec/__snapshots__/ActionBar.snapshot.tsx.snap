@@ -164,9 +164,11 @@ exports[`Action Bar Snapshots renders a action bar with one button 1`] = `
   >
     <button
       className="emotion-2 emotion-3"
+      size="large"
     >
       <span
         className="emotion-0 emotion-1"
+        size="large"
       >
         Button
       </span>
@@ -424,18 +426,22 @@ exports[`Action Bar Snapshots renders a action bar with two buttons 1`] = `
   >
     <button
       className="emotion-2 emotion-3"
+      size="large"
     >
       <span
         className="emotion-0 emotion-1"
+        size="large"
       >
         Button
       </span>
     </button>
     <button
       className="emotion-6 emotion-3"
+      size="large"
     >
       <span
         className="emotion-0 emotion-1"
+        size="large"
       >
         Button
       </span>
@@ -612,9 +618,11 @@ exports[`Action Bar Snapshots renders a fixed action bar with one button 1`] = `
   >
     <button
       className="emotion-2 emotion-3"
+      size="large"
     >
       <span
         className="emotion-0 emotion-1"
+        size="large"
       >
         Button
       </span>
@@ -876,18 +884,22 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   >
     <button
       className="emotion-2 emotion-3"
+      size="large"
     >
       <span
         className="emotion-0 emotion-1"
+        size="large"
       >
         Button
       </span>
     </button>
     <button
       className="emotion-6 emotion-3"
+      size="large"
     >
       <span
         className="emotion-0 emotion-1"
+        size="large"
       >
         Button
       </span>

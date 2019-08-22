@@ -108,9 +108,11 @@ exports[`Button (Delete) Snapshots renders a large, delete button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
+  size="large"
 >
   <span
     className="emotion-0 emotion-1"
+    size="large"
   >
     Button
   </span>
@@ -225,9 +227,11 @@ exports[`Button (Delete) Snapshots renders a medium, delete button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
+  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
+    size="medium"
   >
     Button
   </span>
@@ -342,9 +346,11 @@ exports[`Button (Delete) Snapshots renders a small, delete button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
+  size="small"
 >
   <span
     className="emotion-0 emotion-1"
+    size="small"
   >
     Button
   </span>

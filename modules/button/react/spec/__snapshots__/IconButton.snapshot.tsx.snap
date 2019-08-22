@@ -148,7 +148,9 @@ exports[`Icon Button Snapshots renders a medium icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
+  size="medium"
 >
   <span
     className="emotion-0"
@@ -314,7 +316,9 @@ exports[`Icon Button Snapshots renders a small icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
+  size="small"
 >
   <span
     className="emotion-0"
@@ -504,6 +508,7 @@ exports[`Icon Button Snapshots renders an icon button, toggled 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={true}
   className="emotion-1 emotion-2"
 >
@@ -792,6 +797,7 @@ Array [
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -939,6 +945,7 @@ Array [
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -1099,6 +1106,7 @@ Array [
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -1257,6 +1265,7 @@ Array [
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -1402,6 +1411,7 @@ Array [
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -1654,6 +1664,7 @@ Array [
     }
   >
     <button
+      aria-label="Activity Stream"
       className="emotion-1 emotion-2"
     >
       <span
@@ -1666,6 +1677,7 @@ Array [
       />
     </button>
     <button
+      aria-label="Activity Stream"
       className="emotion-4 emotion-2"
     >
       <span
