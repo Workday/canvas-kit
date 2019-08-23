@@ -7,9 +7,9 @@ describe('Page Header Snapshots', () => {
     const component = renderer.create(<PageHeader title="Test Page Header" />);
     expect(component).toMatchSnapshot();
   });
-  test('renders a marketing context PageHeader as expected', () => {
+  test('renders a capWidth context PageHeader as expected', () => {
     const component = renderer.create(
-      <PageHeader title="Test Marketing Page Header" marketing={true} />
+      <PageHeader title="Test capWidth Page Header" capWidth={true} />
     );
     expect(component).toMatchSnapshot();
   });
