@@ -37,6 +37,7 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
+    "@workday/canvas-kit-react-button": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-common": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-core": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-icon": "^3.0.0-alpha.5",
