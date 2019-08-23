@@ -29,13 +29,13 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 
 Button styles can be applied by using `.wdc-btn`. Most modifiers can be used by combining `.wdc-btn`
 with the modifier class (e.g. `.wdc-btn-primary`). Some modifiers can be combined (e.g.
-`.wdc-btn-primary.wdc-btn-medium`).
+`.wdc-btn-primary.wdc-btn-size-m`).
 
 ```html
 <button class="wdc-btn">Default</button>
 <button class="wdc-btn wdc-btn-primary">Primary</button>
-<button class="wdc-btn wdc-btn-medium">Default</button>
-<button class="wdc-btn wdc-btn-small">Small Button</button>
+<button class="wdc-btn wdc-btn-size-m">Default</button>
+<button class="wdc-btn wdc-btn-size-s">Small Button</button>
 ```
 
 ### Button Order
@@ -76,20 +76,20 @@ The default button size when using `.wdc-btn` is large.
 
 > Medium buttons are used in grids only.
 
-Use by adding `.wdc-btn-medium`.
+Use by adding `.wdc-btn-size-m`.
 
 ```html
-<button class="wdc-btn wdc-btn-medium">Medium</button>
+<button class="wdc-btn wdc-btn-size-m">Medium</button>
 ```
 
 ### Small
 
 > Small buttons are used in page headers only.
 
-Use by adding `.wdc-btn-small`.
+Use by adding `.wdc-btn-size-s`.
 
 ```html
-<button class="wdc-btn wdc-btn-small">Small</button>
+<button class="wdc-btn wdc-btn-size-s">Small</button>
 ```
 
 ## Colors
@@ -102,14 +102,14 @@ Most common button with default background color. Default buttons are available 
 
 ```html
 <button class="wdc-btn">Default</button>
-<button class="wdc-btn wdc-btn-medium">Default</button>
-<button class="wdc-btn wdc-btn-small">Default</button>
+<button class="wdc-btn wdc-btn-size-m">Default</button>
+<button class="wdc-btn wdc-btn-size-s">Default</button>
 ```
 
 ### Icon Buttons
 
 Icon buttons can be square, circle, filled, plain and inverse. By default, their size is medium, but
-you can add `wdc-btn-small` class to make them small.
+you can add `wdc-btn-size-s` class to make them small.
 
 ### Filled
 
@@ -120,7 +120,7 @@ color background.
 <button className="wdc-btn-icon-square-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
-<button className="wdc-btn-small wdc-btn-icon-circle-filled">
+<button className="wdc-btn-size-s wdc-btn-icon-circle-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
 ```
@@ -133,7 +133,7 @@ Inverse buttons are buttons that can be used on dark backgrounds.
 <button className="wdc-btn-icon-inverse">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
-<button className="wdc-btn-small wdc-btn-icon-inverse-filled">
+<button className="wdc-btn-size-s wdc-btn-icon-inverse-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
 ```
@@ -149,7 +149,7 @@ sizes.
 
 ```html
 <button class="wdc-btn wdc-btn-primary">Primary</button>
-<button class="wdc-btn wdc-btn-primary wdc-btn-medium">Primary</button>
+<button class="wdc-btn wdc-btn-primary wdc-btn-size-m">Primary</button>
 ```
 
 ### Delete
@@ -159,7 +159,7 @@ sizes.
 
 ```html
 <button class="wdc-btn wdc-btn-delete">Delete</button>
-<button class="wdc-btn wdc-btn-delete wdc-btn-medium">Delete</button>
+<button class="wdc-btn wdc-btn-delete wdc-btn-size-m">Delete</button>
 ```
 
 ## States
@@ -189,7 +189,7 @@ applied to form controls using the classes below.
 ### Icon Button
 
 > Use when space is limited and the action is clearly communicated through an icon. For instance, an
-> edit button. They are medium size by default, but can be made smaller with `wdc-btn-small`
+> edit button. They are medium size by default, but can be made smaller with `wdc-btn-size-s`
 
 ```html
 <button class="wdc-btn-icon" aria-label="Action">

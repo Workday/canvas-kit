@@ -134,7 +134,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     }
   }
 
-  &.wdc-btn-medium {
+  &.wdc-btn-size-m {
     height: $wdc-btn-height-m;
     line-height: $wdc-btn-height-m;
     font-size: 13px;
@@ -149,7 +149,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     }
   }
 
-  &.wdc-btn-small {
+  &.wdc-btn-size-s {
     height: $wdc-btn-height-s;
     line-height: $wdc-spacing-s;
     font-size: 10px;

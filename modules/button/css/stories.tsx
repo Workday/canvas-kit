@@ -31,13 +31,13 @@ storiesOf('CSS/Button', module)
         Primary Button
       </button>
       <h3>Medium Primary</h3>
-      <button className="wdc-btn wdc-btn-primary wdc-btn-medium">Primary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-medium">
+      <button className="wdc-btn wdc-btn-primary wdc-btn-size-m">Primary Button</button>
+      <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-size-m">
         Primary Button
       </button>
       <h3>Small Primary</h3>
-      <button className="wdc-btn wdc-btn-primary wdc-btn-small">Primary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-small">
+      <button className="wdc-btn wdc-btn-primary wdc-btn-size-s">Primary Button</button>
+      <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-size-s">
         Primary Button
       </button>
       <h3>Growing Primary</h3>
@@ -46,10 +46,10 @@ storiesOf('CSS/Button', module)
       <a href="#" className="wdc-btn wdc-btn-primary" role="button">
         Primary
       </a>
-      <a href="#" className="wdc-btn wdc-btn-primary wdc-btn-medium" role="button">
+      <a href="#" className="wdc-btn wdc-btn-primary wdc-btn-size-m" role="button">
         Primary
       </a>
-      <a href="#" className="wdc-btn wdc-btn-primary wdc-btn-small" role="button">
+      <a href="#" className="wdc-btn wdc-btn-primary wdc-btn-size-s" role="button">
         Primary
       </a>
     </div>
@@ -62,13 +62,13 @@ storiesOf('CSS/Button', module)
         Secondary Button
       </button>
       <h3>Medium Secondary</h3>
-      <button className="wdc-btn wdc-btn-medium">Secondary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-medium">
+      <button className="wdc-btn wdc-btn-size-m">Secondary Button</button>
+      <button disabled={true} className="wdc-btn wdc-btn-size-m">
         Secondary Button
       </button>
       <h3>Small Secondary</h3>
-      <button className="wdc-btn wdc-btn-small">Secondary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-small">
+      <button className="wdc-btn wdc-btn-size-s">Secondary Button</button>
+      <button disabled={true} className="wdc-btn wdc-btn-size-s">
         Secondary Button
       </button>
       <h3>Growing Secondary</h3>
@@ -78,11 +78,11 @@ storiesOf('CSS/Button', module)
         Secondary
       </a>
 
-      <a href="#" className="wdc-btn wdc-btn-medium" role="button">
+      <a href="#" className="wdc-btn wdc-btn-size-m" role="button">
         Secondary
       </a>
 
-      <a href="#" className="wdc-btn wdc-btn-small" role="button">
+      <a href="#" className="wdc-btn wdc-btn-size-s" role="button">
         Secondary
       </a>
     </div>
@@ -95,13 +95,13 @@ storiesOf('CSS/Button', module)
         Delete Button
       </button>
       <h3>Medium Delete</h3>
-      <button className="wdc-btn wdc-btn-delete wdc-btn-medium">Delete Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-medium">
+      <button className="wdc-btn wdc-btn-delete wdc-btn-size-m">Delete Button</button>
+      <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-size-m">
         Delete Button
       </button>
       <h3>Small Delete</h3>
-      <button className="wdc-btn wdc-btn-delete wdc-btn-small">Delete Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-small">
+      <button className="wdc-btn wdc-btn-delete wdc-btn-size-s">Delete Button</button>
+      <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-size-s">
         Delete Button
       </button>
       <h3>Growing Delete</h3>
@@ -111,11 +111,11 @@ storiesOf('CSS/Button', module)
         Delete
       </a>
 
-      <a href="#" className="wdc-btn wdc-btn-delete wdc-btn-medium" role="button">
+      <a href="#" className="wdc-btn wdc-btn-delete wdc-btn-size-m" role="button">
         Delete
       </a>
 
-      <a href="#" className="wdc-btn wdc-btn-delete wdc-btn wdc-btn-small" role="button">
+      <a href="#" className="wdc-btn wdc-btn-delete wdc-btn wdc-btn-size-s" role="button">
         Delete
       </a>
     </div>
@@ -136,12 +136,12 @@ storiesOf('CSS/Button/Icon Button', module)
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <h3>Small Square</h3>
-      <button className="wdc-btn-small wdc-btn-icon-square" aria-label="Activity Stream">
+      <button className="wdc-btn-size-s wdc-btn-icon-square" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <button
         disabled={true}
-        className="wdc-btn-small wdc-btn-icon-square"
+        className="wdc-btn-size-s wdc-btn-icon-square"
         aria-label="Activity Stream"
       >
         <SystemIcon icon={activityStreamIcon} />
@@ -158,12 +158,12 @@ storiesOf('CSS/Button/Icon Button', module)
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <h3>Small Filled Square</h3>
-      <button className="wdc-btn-small wdc-btn-icon-square-filled" aria-label="Activity Stream">
+      <button className="wdc-btn-size-s wdc-btn-icon-square-filled" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <button
         disabled={true}
-        className="wdc-btn-small wdc-btn-icon-square-filled"
+        className="wdc-btn-size-s wdc-btn-icon-square-filled"
         aria-label="Activity Stream"
       >
         <SystemIcon icon={activityStreamIcon} />
@@ -183,12 +183,12 @@ storiesOf('CSS/Button/Icon Button', module)
 
       <h3>Small Plain</h3>
 
-      <button className="wdc-btn-small wdc-btn-icon-plain" aria-label="Activity Stream">
+      <button className="wdc-btn-size-s wdc-btn-icon-plain" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <button
         disabled={true}
-        className="wdc-btn-small wdc-btn-icon-plain"
+        className="wdc-btn-size-s wdc-btn-icon-plain"
         aria-label="Activity Stream"
       >
         <SystemIcon icon={activityStreamIcon} />
@@ -205,12 +205,12 @@ storiesOf('CSS/Button/Icon Button', module)
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <h3>Small Circle</h3>
-      <button className="wdc-btn-small wdc-btn-icon-circle" aria-label="Activity Stream">
+      <button className="wdc-btn-size-s wdc-btn-icon-circle" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <button
         disabled={true}
-        className="wdc-btn-small wdc-btn-icon-circle"
+        className="wdc-btn-size-s wdc-btn-icon-circle"
         aria-label="Activity Stream"
       >
         <SystemIcon icon={activityStreamIcon} />
@@ -227,12 +227,12 @@ storiesOf('CSS/Button/Icon Button', module)
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <h3>Small Filled Circle</h3>
-      <button className="wdc-btn-small wdc-btn-icon-circle-filled" aria-label="Activity Stream">
+      <button className="wdc-btn-size-s wdc-btn-icon-circle-filled" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </button>
       <button
         disabled={true}
-        className="wdc-btn-small wdc-btn-icon-circle-filled"
+        className="wdc-btn-size-s wdc-btn-icon-circle-filled"
         aria-label="Activity Stream"
       >
         <SystemIcon icon={activityStreamIcon} />
@@ -252,12 +252,12 @@ storiesOf('CSS/Button/Icon Button', module)
       </div>
       <h3>Small Inverse</h3>
       <div className={blueBackground}>
-        <button className="wdc-btn-small wdc-btn-icon-inverse" aria-label="Activity Stream">
+        <button className="wdc-btn-size-s wdc-btn-icon-inverse" aria-label="Activity Stream">
           <SystemIcon icon={activityStreamIcon} />
         </button>
         <button
           disabled={true}
-          className="wdc-btn-small wdc-btn-icon-inverse"
+          className="wdc-btn-size-s wdc-btn-icon-inverse"
           aria-label="Activity Stream"
         >
           <SystemIcon icon={activityStreamIcon} />
@@ -283,14 +283,14 @@ storiesOf('CSS/Button/Icon Button', module)
       <h3>Small Inverse</h3>
       <div className={blueBackground}>
         <button
-          className="wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
+          className="wdc-btn-size-s wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
           aria-label="Activity Stream"
         >
           <SystemIcon icon={activityStreamIcon} />
         </button>
         <button
           disabled={true}
-          className="wdc-btn-small wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
+          className="wdc-btn-size-s wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
           aria-label="Activity Stream"
         >
           <SystemIcon icon={activityStreamIcon} />

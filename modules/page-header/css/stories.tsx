@@ -15,14 +15,14 @@ storiesOf('CSS/Page Header', module)
           <h2 className="wdc-page-header-title">Page Title</h2>
           <div className="wdc-icon-list wdc-icon-list-white">
             <div
-              className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-icon-inverse"
+              className="wdc-btn wdc-btn-size-m wdc-btn-icon-circle wdc-btn-icon-inverse"
               role="button"
               tabIndex={0}
             >
               <SystemIcon icon={exportIcon} />
             </div>
             <div
-              className="wdc-btn wdc-btn-medium wdc-btn-icon-circle wdc-btn-icon-inverse"
+              className="wdc-btn wdc-btn-size-m wdc-btn-icon-circle wdc-btn-icon-inverse"
               role="button"
               tabIndex={0}
             >
