@@ -56,6 +56,8 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   height: 32px;
   background-color: #f0f1f2;
   border-color: #ced3d9;
+  width: 40px;
+  height: 40px;
   background-color: #0875e1;
   border-color: #0875e1;
 }
@@ -127,9 +129,9 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
 
 .emotion-4:not([disabled]):focus,
 .emotion-4:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-4:focus.emotion-4:hover,
@@ -245,6 +247,8 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   height: 32px;
   background-color: #f0f1f2;
   border-color: #ced3d9;
+  width: 40px;
+  height: 40px;
 }
 
 .emotion-1:hover:active {
@@ -314,9 +318,9 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
 
 .emotion-1:not([disabled]):focus,
 .emotion-1:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 <div
@@ -446,6 +450,8 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   height: 32px;
   background-color: #f0f1f2;
   border-color: #ced3d9;
+  width: 40px;
+  height: 40px;
   background-color: #0875e1;
   border-color: #0875e1;
 }
@@ -517,9 +523,9 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
 
 .emotion-4:not([disabled]):focus,
 .emotion-4:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-4:focus.emotion-4:hover,
@@ -635,6 +641,8 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   height: 32px;
   background-color: #f0f1f2;
   border-color: #ced3d9;
+  width: 40px;
+  height: 40px;
 }
 
 .emotion-1:hover:active {
@@ -704,9 +712,9 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
 
 .emotion-1:not([disabled]):focus,
 .emotion-1:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 <div
@@ -835,6 +843,8 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   height: 32px;
   background-color: #f0f1f2;
   border-color: #ced3d9;
+  width: 40px;
+  height: 40px;
   background-color: #0875e1;
   border-color: #0875e1;
 }
@@ -906,9 +916,9 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
 
 .emotion-1:not([disabled]):focus,
 .emotion-1:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-1:focus.emotion-1:hover,
@@ -1024,6 +1034,8 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   height: 32px;
   background-color: #f0f1f2;
   border-color: #ced3d9;
+  width: 40px;
+  height: 40px;
 }
 
 .emotion-4:hover:active {
@@ -1093,9 +1105,9 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
 
 .emotion-4:not([disabled]):focus,
 .emotion-4:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 <div

@@ -193,7 +193,6 @@ exports[`Cookie Banner Snapshots renders a CookieBanner 1`] = `
     <button
       className="emotion-4 emotion-5"
       onClick={[Function]}
-      size="large"
     >
       <span
         className="emotion-2 emotion-3"
@@ -423,7 +422,6 @@ exports[`Cookie Banner Snapshots renders a CookieBanner with settings 1`] = `
     <button
       className="emotion-6 emotion-7"
       onClick={[Function]}
-      size="large"
     >
       <span
         className="emotion-4 emotion-5"
@@ -632,7 +630,6 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner 1`] = `
     <button
       className="emotion-4 emotion-5"
       onClick={[Function]}
-      size="large"
     >
       <span
         className="emotion-2 emotion-3"
@@ -865,7 +862,6 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner with settings 1`]
     <button
       className="emotion-6 emotion-7"
       onClick={[Function]}
-      size="large"
     >
       <span
         className="emotion-4 emotion-5"

@@ -1340,7 +1340,6 @@ exports[`Button (Icon) Snapshots renders a medium default icon button 1`] = `
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="medium"
 >
   <span
     className="emotion-0"
@@ -1490,7 +1489,6 @@ exports[`Button (Icon) Snapshots renders a medium filled icon button 1`] = `
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="medium"
 >
   <span
     className="emotion-0"
@@ -1644,7 +1642,6 @@ exports[`Button (Icon) Snapshots renders a medium inverse filled icon button 1`]
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="medium"
 >
   <span
     className="emotion-0"
@@ -1789,7 +1786,6 @@ exports[`Button (Icon) Snapshots renders a medium inverse icon button 1`] = `
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="medium"
 >
   <span
     className="emotion-0"
@@ -1954,7 +1950,6 @@ exports[`Button (Icon) Snapshots renders a medium plain icon button 1`] = `
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="medium"
 >
   <span
     className="emotion-0"
@@ -2286,7 +2281,6 @@ exports[`Button (Icon) Snapshots renders a small default icon button 1`] = `
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="small"
 >
   <span
     className="emotion-0"
@@ -2441,7 +2435,6 @@ exports[`Button (Icon) Snapshots renders a small filled icon button 1`] = `
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="small"
 >
   <span
     className="emotion-0"
@@ -2600,7 +2593,6 @@ exports[`Button (Icon) Snapshots renders a small inverse filled icon button 1`] 
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="small"
 >
   <span
     className="emotion-0"
@@ -2750,7 +2742,6 @@ exports[`Button (Icon) Snapshots renders a small inverse icon button 1`] = `
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="small"
 >
   <span
     className="emotion-0"
@@ -2920,7 +2911,6 @@ exports[`Button (Icon) Snapshots renders a small plain icon button 1`] = `
 <button
   aria-label="Activity Stream"
   className="emotion-1 emotion-2"
-  size="small"
 >
   <span
     className="emotion-0"

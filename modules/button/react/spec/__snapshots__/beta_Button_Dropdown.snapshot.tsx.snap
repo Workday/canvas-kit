@@ -186,7 +186,6 @@ exports[`Button (Dropdown) Snapshots renders a large, dropdown primary button 1`
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -407,7 +406,6 @@ exports[`Button (Dropdown) Snapshots renders a large, dropdown secondary button 
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -617,7 +615,6 @@ exports[`Button (Dropdown) Snapshots renders a medium, dropdown primary button 1
 
 <button
   className="emotion-5 emotion-6"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"
@@ -838,7 +835,6 @@ exports[`Button (Dropdown) Snapshots renders a medium, dropdown secondary button
 
 <button
   className="emotion-5 emotion-6"
-  size="medium"
 >
   <span
     className="emotion-0 emotion-1"

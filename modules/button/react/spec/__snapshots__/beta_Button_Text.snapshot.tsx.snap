@@ -148,7 +148,6 @@ exports[`Button (Text) Snapshots renders a large, text all caps button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -353,7 +352,6 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a le
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -571,7 +569,6 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a ri
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -735,7 +732,6 @@ exports[`Button (Text) Snapshots renders a large, text button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -932,7 +928,6 @@ exports[`Button (Text) Snapshots renders a large, text button with a left icon 
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1142,7 +1137,6 @@ exports[`Button (Text) Snapshots renders a large, text button with a right icon
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -1313,7 +1307,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 1
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -1517,7 +1510,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -1734,7 +1726,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -1897,7 +1888,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -2093,7 +2083,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a lef
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -2302,7 +2291,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a rig
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -2473,7 +2461,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 
 <button
   className="emotion-2 emotion-3"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -2677,7 +2664,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-1 emotion-2"
@@ -2894,7 +2880,6 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
 
 <button
   className="emotion-5 emotion-6"
-  size="large"
 >
   <span
     className="emotion-0 emotion-1"
@@ -3058,7 +3043,6 @@ exports[`Button (Text) Snapshots renders a small, text button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -3255,7 +3239,6 @@ exports[`Button (Text) Snapshots renders a small, text button with a left icon 1
 
 <button
   className="emotion-5 emotion-6"
-  size="small"
 >
   <span
     className="emotion-1 emotion-2"
@@ -3465,7 +3448,6 @@ exports[`Button (Text) Snapshots renders a small, text button with a right icon 
 
 <button
   className="emotion-5 emotion-6"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -3637,7 +3619,6 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps 1`] 
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -3842,7 +3823,6 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
 
 <button
   className="emotion-5 emotion-6"
-  size="small"
 >
   <span
     className="emotion-1 emotion-2"
@@ -4060,7 +4040,6 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
 
 <button
   className="emotion-5 emotion-6"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -4223,7 +4202,6 @@ exports[`Button (Text) Snapshots renders a small, text inverse button 1`] = `
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -4419,7 +4397,6 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a lef
 
 <button
   className="emotion-5 emotion-6"
-  size="small"
 >
   <span
     className="emotion-1 emotion-2"
@@ -4628,7 +4605,6 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a rig
 
 <button
   className="emotion-5 emotion-6"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -4799,7 +4775,6 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 
 <button
   className="emotion-2 emotion-3"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
@@ -5003,7 +4978,6 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 
 <button
   className="emotion-5 emotion-6"
-  size="small"
 >
   <span
     className="emotion-1 emotion-2"
@@ -5220,7 +5194,6 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
 
 <button
   className="emotion-5 emotion-6"
-  size="small"
 >
   <span
     className="emotion-0 emotion-1"
