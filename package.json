@@ -12,6 +12,8 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
     "@storybook/addon-actions": "^5.0.11",
     "@storybook/addon-knobs": "^5.0.11",
     "@storybook/addon-options": "^5.0.11",
@@ -84,8 +86,7 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.14.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.5.1",
-    "validate-commit-msg": "^2.14.0"
+    "typescript": "^3.5.1"
   },
   "scripts": {
     "start": "node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook",
@@ -95,7 +96,7 @@
     "create-module": "./create-module.sh",
     "precommit": "lint-staged",
     "commit": "git-cz",
-    "commitmsg": "validate-commit-msg",
+    "commitmsg": "commitlint --edit $HUSKY_GIT_PARAMS",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "lint": "node utils/check-lockfile-links.js && tslint --project tsconfig.json",
     "format:prettier": "prettier --config=./.prettierrc --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
