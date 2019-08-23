@@ -189,23 +189,23 @@ applied to form controls using the classes below.
 ### Icon Button
 
 > Use when space is limited and the action is clearly communicated through an icon. For instance, an
-> edit button.
-
-Use by adding `.wdc-btn-icon-square` or `.wdc-btn-icon-circle`. A Workday icon should be used as the
-`<button>`'s content. An alternative is available if you need an Icon button with a filled
-background: `wdc-btn-icon-square-filled` and `wdc-btn-icon-circle-filled`.
+> edit button. They are medium size by default, but can be made smaller with `wdc-btn-small`
 
 ```html
-<button class="wdc-btn wdc-btn-icon-square">
+<button class="wdc-btn-icon" aria-label="Action">
   <svg ...>
 </button>
 ```
 
-```html
-<button class="wdc-btn wdc-btn-icon-circle">
-  <svg ...>
-</button>
-```
+| Icon Button Variant | Class                                   | Description                                      |
+| ------------------- | --------------------------------------- | ------------------------------------------------ |
+| Circle (default)    | `.wdc-btn-icon`, `.wdc-btn-icon-circle` | Circular, dark gray icon                         |
+| Circle Filled       | `.wdc-btn-iconcircle-filled`            | Circular, gray background, dark gray icon        |
+| Square              | `.wdc-btn-icon-square`                  | Square, white background, dark gray icon         |
+| Square Filled       | `.wdc-btn-icon-square-filled`           | Square, gray background, dark gray icon          |
+| Plain               | `.wdc-btn-icon-plain`                   | Dark gray icon                                   |
+| Inverse             | `.wdc-btn-icon-plain`                   | Circular, transparent background, white icon     |
+| Inverse             | `.wdc-btn-icon-plain`                   | Circular, semitransparent background, white icon |
 
 ### Dropdown Button
 
