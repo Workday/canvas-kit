@@ -2,10 +2,19 @@ import React, {Component} from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
+import {css} from 'emotion';
 // @ts-ignore
 import initializeIcons from './lib/canvas-kit-css-icon';
 
-class IconDemo extends Component {
+const containerStyle = css({
+  margin: '0 !important',
+
+  '> *': {
+    margin: '12px',
+  },
+});
+
+class OldIconDemo extends Component {
   componentDidMount() {
     initializeIcons();
   }
@@ -37,10 +46,74 @@ class IconDemo extends Component {
   }
 }
 
+class IconDemo extends Component {
+  componentDidMount() {
+    initializeIcons();
+  }
+
+  render() {
+    return <div className={containerStyle}>{this.props.children}</div>;
+  }
+}
+
 storiesOf('CSS/Icon', module)
   .addDecorator(withReadme(README))
+  .add('Accent Icon', () => (
+    <div className="story">
+      <IconDemo>
+        <i className="wdc-icon" data-icon="shield" data-category="accent" />
+        <i
+          className="wdc-icon"
+          data-icon="shield"
+          data-category="accent"
+          data-color="pomegranate500"
+        />
+        <br />
+        <i className="wdc-icon" data-icon="shield" data-category="accent" data-size="80" />
+      </IconDemo>
+    </div>
+  ))
+  .add('Applet Icon', () => (
+    <div className="story">
+      <IconDemo>
+        <i className="wdc-icon" data-icon="benefits" data-category="applet" />
+        <i
+          className="wdc-icon"
+          data-icon="benefits"
+          data-category="applet"
+          data-color="pomegranate"
+        />
+        <br />
+        <i className="wdc-icon" data-icon="benefits" data-category="applet" data-size="60" />
+      </IconDemo>
+    </div>
+  ))
+  .add('System Icon', () => (
+    <div className="story">
+      <IconDemo>
+        <i className="wdc-icon" data-icon="activityStream" data-category="system" />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-fill-color="blueberry500"
+          data-accent-color="blueberry500"
+        />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-fill-color="blueberry500"
+          data-accent-color="frenchVanilla100"
+          data-background-color="blueberry500"
+        />
+        <br />
+        <i className="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
+      </IconDemo>
+    </div>
+  ))
   .add('All', () => (
     <div className="story">
-      <IconDemo />
+      <OldIconDemo />
     </div>
   ));

@@ -102,6 +102,18 @@ function colorIcons(selector) {
   });
 }
 
+function sizeIcons(selector) {
+  const icons = document.querySelectorAll(selector);
+
+  icons.forEach(i => {
+    const size = i.getAttribute('data-size');
+    if (size) {
+      i.style.height = `${size}px`;
+      i.style.width = `${size}px`;
+    }
+  });
+}
+
 function injectIcons(iconsPath = null, selector = '.wdc-icon') {
   const icons = document.querySelectorAll(selector);
 
@@ -114,6 +126,7 @@ function injectIcons(iconsPath = null, selector = '.wdc-icon') {
 
   SVGInjector(icons, {}, () => {
     colorIcons(selector);
+    sizeIcons(selector);
   });
 }
 
