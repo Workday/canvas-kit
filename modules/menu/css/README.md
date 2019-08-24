@@ -96,22 +96,35 @@ Menu item modifiers may be combined.
 
 Menu items can include an icon as well as a secondary icon.
 
-Wrap the text for the menu item using a `<span>` with `.wdc-menu-item-label`, and assign
-`.wdc-menu-item-icon` to the icons.
+Wrap the text for the menu item using a `<span>` with `.wdc-menu-item-label`.
 
 ```html
 <div class="wdc-menu">
   <ul>
     <li>
-      <i className="wdc-icon wdc-menu-item-icon" data-icon="uploadCloud" data-category="system" />
+      <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
       <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
     </li>
     <li>
-      <i className="wdc-icon wdc-menu-item-icon" data-icon="uploadCloud" data-category="system" />
-      <span className="wdc-menu-item-label"
-        >Item with uploadCloud icon and an extLink secondary icon</span
-      >
-      <i className="wdc-icon wdc-menu-item-icon" data-icon="extLink" data-category="system" />
+      <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
+      <span className="wdc-menu-item-label">
+        Item with uploadCloud icon and an extLink secondary icon
+      </span>
+      <i className="wdc-icon" data-icon="extLink" data-category="system" />
+    </li>
+  </ul>
+</div>
+```
+
+If you're generating the icons using the React `SystemIcon` component, you'll need to assign
+`.wdc-menu-item-icon` to the icons.
+
+```tsx
+<div class="wdc-menu">
+  <ul>
+    <li>
+      <SystemIcon icon={uploadCloudIcon} className="wdc-menu-item-icon" />
+      <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
     </li>
   </ul>
 </div>

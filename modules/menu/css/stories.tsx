@@ -17,38 +17,26 @@ class WithIconsDemo extends Component {
         <div className="wdc-menu" style={{width: '250px'}}>
           <ul>
             <li className="wdc-menu-item-focused">
-              <i
-                className="wdc-icon wdc-menu-item-icon"
-                data-icon="uploadCloud"
-                data-category="system"
-              />
+              <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
               <span className="wdc-menu-item-label">First Item</span>
             </li>
             <li>
-              <i className="wdc-icon wdc-menu-item-icon" data-icon="setup" data-category="system" />
+              <i className="wdc-icon" data-icon="setup" data-category="system" />
               <span className="wdc-menu-item-label">
                 Second Item with really really really long label
               </span>
             </li>
             <li className="wdc-menu-item-disabled">
-              <i
-                className="wdc-icon wdc-menu-item-icon"
-                data-icon="uploadCloud"
-                data-category="system"
-              />
+              <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
               <span className="wdc-menu-item-label">Third Item (disabled)</span>
-              <i
-                className="wdc-icon wdc-menu-item-icon"
-                data-icon="extLink"
-                data-category="system"
-              />
+              <i className="wdc-icon" data-icon="extLink" data-category="system" />
             </li>
             <li>
-              <i className="wdc-icon wdc-menu-item-icon" data-icon="user" data-category="system" />
+              <i className="wdc-icon" data-icon="user" data-category="system" />
             </li>
             <hr />
             <li>
-              <i className="wdc-icon wdc-menu-item-icon" data-icon="user" data-category="system" />
+              <i className="wdc-icon" data-icon="user" data-category="system" />
               <span className="wdc-menu-item-label">Fifth Item (with divider)</span>
             </li>
           </ul>
