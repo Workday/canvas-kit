@@ -48,7 +48,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label', module)
               <label htmlFor="checkbox-alert">Checkbox option</label>
             </div>
             <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Alert message
+              <strong>Alert:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label', module)
               <label htmlFor="checkbox-error">Checkbox option</label>
             </div>
             <div className="wdc-form-hint-message">
-              <strong>Error:</strong> Error message
+              <strong>Error:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -117,7 +117,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
               <label htmlFor="checkbox-alert">Checkbox option</label>
             </div>
             <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Alert message
+              <strong>Alert:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -135,7 +135,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
               <label htmlFor="checkbox-error">Checkbox option</label>
             </div>
             <div className="wdc-form-hint-message">
-              <strong>Error:</strong> Error message
+              <strong>Error:</strong> Helpful text goes here.
             </div>
           </div>
         </div>
@@ -209,7 +209,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
           </div>
 
           <div className="wdc-form-hint-message">
-            <strong>Alert:</strong> Alert message
+            <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
@@ -247,7 +247,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
           </div>
 
           <div className="wdc-form-hint-message">
-            <strong>Error:</strong> Error message
+            <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
@@ -320,7 +320,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
           </div>
 
           <div className="wdc-form-hint-message">
-            <strong>Alert:</strong> Alert message
+            <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
@@ -358,7 +358,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
           </div>
 
           <div className="wdc-form-hint-message">
-            <strong>Error:</strong> Error message
+            <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
       </div>

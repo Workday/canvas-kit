@@ -2,9 +2,11 @@
 @mixin wdc-form-validation($_type) {
   $_borderColor: $wdc-color-black-pepper-100 !default; // This should not be used, it is necessary for the @if / @else if to.
 
-  @if ($_type== 'error') {
+  @if ($_type=='error') {
     $_borderColor: $wdc-color-error;
-  } @else if ($_type== 'alert') {
+  }
+
+  @else if ($_type=='alert') {
     $_borderColor: $wdc-color-alert-light;
   }
 
@@ -12,13 +14,13 @@
     border-color: $_borderColor;
     box-shadow: inset 0 0 0 1px $_borderColor;
 
-    @if ($_type== 'alert') {
+    @if ($_type=='alert') {
       border-color: $wdc-color-alert-dark;
       box-shadow: inset 0 0 0 2px $_borderColor;
     }
   }
 
-  &.wdc-form-checkbox:not(.wdc-form-checked):not(:checked) + .wdc-form-label:before {
+  &.wdc-form-checkbox:not(.wdc-form-checked):not(:checked)+.wdc-form-label:before {
     border-color: $_borderColor;
   }
 
@@ -27,7 +29,7 @@
     & {
       border-color: $_borderColor;
 
-      @if ($_type== 'alert') {
+      @if ($_type=='alert') {
         border-color: $wdc-color-alert-dark;
         box-shadow: inset 0 0 0 2px $_borderColor;
       }
@@ -39,13 +41,16 @@
     & {
       outline: none;
       border-color: $_borderColor;
+
       & {
         box-shadow: inset 0 0 0 1px $_borderColor, 0 0 0 2px $wdc-color-input-background,
           0 0 0 4px $wdc-color-common-focus-outline;
       }
-      @if ($_type== 'alert') {
+
+      @if ($_type=='alert') {
         border-color: $wdc-color-alert-dark;
         box-shadow: inset 0 0 0 2px $_borderColor;
+
         & {
           box-shadow: inset 0 0 0 2px $_borderColor, 0 0 0 2px $wdc-color-input-background,
             0 0 0 4px $wdc-color-common-focus-outline;
@@ -53,14 +58,14 @@
       }
     }
 
-    &.wdc-form-checkbox + .wdc-form-label:before {
+    &.wdc-form-checkbox+.wdc-form-label:before {
       border-color: $_borderColor;
       box-shadow: 0 0 0 2px $wdc-color-input-background, 0 0 0 4px $wdc-color-common-focus-outline;
     }
 
     &.wdc-form-checkbox:checked,
     &.wdc-form-checkbox.wdc-form-checked {
-      + .wdc-form-label:before {
+      +.wdc-form-label:before {
         border-color: $wdc-color-common-focus-outline;
       }
     }
@@ -72,6 +77,7 @@
 }
 
 .wdc-form-error {
+
   .wdc-form-textinput,
   &.wdc-form-textinput {
     input {
@@ -99,6 +105,7 @@
 }
 
 .wdc-form-alert {
+
   .wdc-form-textinput,
   &.wdc-form-textinput {
     input {
@@ -164,57 +171,33 @@
   }
 }
 
-@mixin wdc-form-field-validation($_icon, $_borderColor) {
-  $_wdc-form-error-icon-top: 8px;
-  $_wdc-form-error-icon-right: ($wdc-form-error-icon-size + $wdc-form-error-spacing);
+@mixin wdc-form-field-validation($_type) {
+  $_boxShadow: $wdc-color-black-pepper-100 !default; // This should not be used, it is necessary for the @if / @else if to.
 
-  .wdc-form-field,
-  &.wdc-form-group-fields {
-    position: relative;
-
-    .wdc-form-textinput::before {
-      position: absolute;
-      top: $_wdc-form-error-icon-top;
-      left: 280-$_wdc-form-error-icon-right;
-      content: '';
-      width: $wdc-form-error-icon-size;
-      height: $wdc-form-error-icon-size;
-      background: svg-inline($_icon) center no-repeat;
-      pointer-events: none;
-    }
+  @if ($_type=='error') {
+    $_boxShadow: $wdc-color-error 0px 0px 0px 2px inset;
   }
 
-  &.wdc-form-field-error-inline .wdc-form-field:after {
-    top: -1px;
+  @else if ($_type=='alert') {
+    $_boxShadow: rgb(192, 108, 0) 0px 0px 0px 1px inset,
+      rgb(255, 161, 38) 0px 0px 0px 3px inset;
   }
 
   &.wdc-form-group-fields {
-    padding: $wdc-spacing-s;
-    border-radius: 3px;
-
-    &:after {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-
-  &.wdc-form-group-fields {
-    border: 1px solid $wdc-color-error;
-
-    .wdc-form-field {
-      &:after {
-        display: none;
-      }
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
+    border-radius: 4px;
+    box-shadow: $_boxShadow;
+    box-sizing: border-box;
+    display: inline-block;
+    font-family: sans-serif;
+    margin: -2px -8px;
+    padding: 2px 8px;
+    margin-top: -10px;
+    text-align: left;
   }
 }
 
 @mixin wdc-form-field-error {
-  @include wdc-form-field-validation(errorIcon, $wdc-color-error);
+  @include wdc-form-field-validation('error');
 }
 
 .wdc-form-field-error {
@@ -222,7 +205,7 @@
 }
 
 @mixin wdc-form-field-alert {
-  @include wdc-form-field-validation(alertIcon, $wdc-color-alert);
+  @include wdc-form-field-validation('alert');
 }
 
 .wdc-form-field-alert {
@@ -234,11 +217,11 @@
     position: relative;
 
     // Case where there's no label on the left
-    & > .wdc-form-field {
+    &>.wdc-form-field {
       margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
     }
 
-    & > .wdc-form-label + .wdc-form-field {
+    &>.wdc-form-label+.wdc-form-field {
       margin-left: 0;
     }
   }
@@ -253,8 +236,8 @@
   .wdc-form-group-fields {
     margin-bottom: $wdc-spacing-m;
 
-    & + .wdc-form-hint-message,
-    & + .wdc-form-hint-message {
+    &+.wdc-form-hint-message,
+    &+.wdc-form-hint-message {
       position: absolute;
       bottom: 0;
       left: $wdc-form-inline-label-width + $wdc-spacing-s;
