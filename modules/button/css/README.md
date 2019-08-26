@@ -200,7 +200,7 @@ applied to form controls using the classes below.
 | Icon Button Variant | Class                                   | Description                                      |
 | ------------------- | --------------------------------------- | ------------------------------------------------ |
 | Circle (default)    | `.wdc-btn-icon`, `.wdc-btn-icon-circle` | Circular, dark gray icon                         |
-| Circle Filled       | `.wdc-btn-iconcircle-filled`            | Circular, gray background, dark gray icon        |
+| Circle Filled       | `.wdc-btn-icon-circle-filled`           | Circular, gray background, dark gray icon        |
 | Square              | `.wdc-btn-icon-square`                  | Square, white background, dark gray icon         |
 | Square Filled       | `.wdc-btn-icon-square-filled`           | Square, gray background, dark gray icon          |
 | Plain               | `.wdc-btn-icon-plain`                   | Dark gray icon                                   |
