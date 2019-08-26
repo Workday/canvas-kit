@@ -204,6 +204,12 @@ export default class TableRow extends React.Component<TableRowProps> {
   public static State = TableRowStates;
 
   public render() {
-    return <Row {...this.props}>{this.props.children}</Row>;
+    const {state, header, children, ...elemProps} = this.props;
+
+    return (
+      <Row state={state} header={header} {...elemProps}>
+        {children}
+      </Row>
+    );
   }
 }
