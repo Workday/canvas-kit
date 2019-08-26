@@ -60,9 +60,11 @@ const Container = styled('div')({
 /**
  * A simple component that displays three horizontal dots, to be used when some data is loading.
  */
-export default function LoadingDots() {
+export default function LoadingDots(props: React.HTMLAttributes<HTMLDivElement>) {
+  const {...elemProps} = props;
+
   return (
-    <Container>
+    <Container {...elemProps}>
       <LoadingAnimationDot animationDelay={0} />
       <LoadingAnimationDot animationDelay={160} />
       <LoadingAnimationDot animationDelay={320} />
