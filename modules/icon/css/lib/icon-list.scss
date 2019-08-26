@@ -1,3 +1,11 @@
+.wdc-icon {
+  &[data-category="accent"][data-transparent] {
+    .french-vanilla-100 {
+      fill: transparent;
+    }
+  }
+}
+
 .wdc-icon-list {
   display: flex;
   margin-left: -$wdc-spacing-xxxs;

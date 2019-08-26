@@ -3,6 +3,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
 import {css} from 'emotion';
+import {colors} from '../../core/react/index';
 // @ts-ignore
 import initializeIcons from './lib/canvas-kit-css-icon';
 
@@ -68,6 +69,21 @@ storiesOf('CSS/Icon', module)
           data-category="accent"
           data-color="pomegranate500"
         />
+        <span
+          style={{
+            backgroundColor: colors.blueberry500,
+            display: 'inline-block',
+            verticalAlign: 'top',
+          }}
+        >
+          <i
+            className="wdc-icon"
+            data-icon="shield"
+            data-category="accent"
+            data-color="frenchVanilla100"
+            data-transparent="true"
+          />
+        </span>
         <br />
         <i className="wdc-icon" data-icon="shield" data-category="accent" data-size="80" />
       </IconDemo>
