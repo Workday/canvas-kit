@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
-import FormField, {ErrorBehavior} from '../lib/FormField';
+import FormField, {FormFieldErrorBehavior} from '../lib/FormField';
 
 describe('FormField', () => {
   test('Set a string label', () => {
@@ -95,7 +95,7 @@ describe('FormField', () => {
   });
 
   test('Sets error prop with aria label', () => {
-    const InputComponent: React.SFC<ErrorBehavior> = () => <input type="text" />;
+    const InputComponent: React.SFC<FormFieldErrorBehavior> = () => <input type="text" />;
 
     const component = mount(
       <FormField error={FormField.ErrorType.Error}>
@@ -118,7 +118,7 @@ describe('FormField', () => {
   });
 
   test('Uses fieldset and legend when useFieldset=true (for RadioGroup)', () => {
-    const InputComponent: React.SFC<ErrorBehavior> = () => <input type="text" />;
+    const InputComponent: React.SFC<FormFieldErrorBehavior> = () => <input type="text" />;
 
     const component = mount(
       <FormField useFieldset={true} label="Label">

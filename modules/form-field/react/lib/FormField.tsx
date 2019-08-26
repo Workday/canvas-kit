@@ -4,10 +4,10 @@ import {spacing} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, ErrorType} from '@workday/canvas-kit-react-common';
 import Hint from './Hint';
 import Label from './Label';
-import {LabelPosition, LabelPositionBehavior} from './types';
+import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface FormFieldProps extends GrowthBehavior {
-  labelPosition: LabelPosition;
+  labelPosition: FormFieldLabelPosition;
   label?: React.ReactNode;
   hintText?: React.ReactNode;
   hintId?: string;
@@ -17,19 +17,19 @@ export interface FormFieldProps extends GrowthBehavior {
   children: React.ReactNode;
 }
 
-export interface ErrorBehavior {
+export interface FormFieldErrorBehavior {
   error?: ErrorType;
 }
 
 // Use a fieldset element for accessible radio groups
-const FormFieldFieldsetContainer = styled('fieldset')<LabelPositionBehavior>({
+const FormFieldFieldsetContainer = styled('fieldset')<FormFieldLabelPositionBehavior>({
   padding: 0,
   margin: 0,
   border: 0,
 });
 
-const FormFieldContainer = styled('div')<LabelPositionBehavior>(({labelPosition}) => {
-  if (labelPosition === LabelPosition.Left) {
+const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({labelPosition}) => {
+  if (labelPosition === FormFieldLabelPosition.Left) {
     return {
       display: 'flex',
       marginBottom: spacing.m,
@@ -41,10 +41,10 @@ const FormFieldContainer = styled('div')<LabelPositionBehavior>(({labelPosition}
   };
 });
 
-const FormFieldInputContainer = styled('div')<GrowthBehavior & LabelPositionBehavior>(
+const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
   ({grow, labelPosition}) => {
     if (grow) {
-      if (labelPosition === LabelPosition.Left) {
+      if (labelPosition === FormFieldLabelPosition.Left) {
         return {
           flexGrow: 1,
         };
@@ -55,7 +55,7 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & LabelPositionBeha
       };
     }
 
-    if (labelPosition === LabelPosition.Left) {
+    if (labelPosition === FormFieldLabelPosition.Left) {
       return {
         display: 'inline-flex',
         minHeight: 40,
@@ -71,7 +71,7 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & LabelPositionBeha
 );
 
 export default class FormField extends React.Component<FormFieldProps> {
-  static LabelPosition = LabelPosition;
+  static LabelPosition = FormFieldLabelPosition;
   static ErrorType = ErrorType;
 
   static defaultProps = {
@@ -81,7 +81,9 @@ export default class FormField extends React.Component<FormFieldProps> {
 
   private renderChildren = (child: React.ReactChild): React.ReactNode => {
     if (React.isValidElement<any>(child)) {
-      const props: GrowthBehavior & ErrorBehavior & React.HTMLAttributes<HTMLInputElement> = {
+      const props: GrowthBehavior &
+        FormFieldErrorBehavior &
+        React.HTMLAttributes<HTMLInputElement> = {
         ...child.props,
       };
 
@@ -89,7 +91,10 @@ export default class FormField extends React.Component<FormFieldProps> {
         props.grow = this.props.grow;
       }
 
-      if (typeof this.props.error !== 'undefined' && React.isValidElement<ErrorBehavior>(child)) {
+      if (
+        typeof this.props.error !== 'undefined' &&
+        React.isValidElement<FormFieldErrorBehavior>(child)
+      ) {
         props.error = this.props.error;
 
         if (this.props.hintId) {
