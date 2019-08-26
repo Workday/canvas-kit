@@ -40,6 +40,20 @@ Use `.wdc-menu` to create a menu.
 </div>
 ```
 
+### Variants
+
+#### Grow
+
+Use `.wdc-menu-grow` to expand the menu to fit its container.
+
+```html
+<div className="wdc-menu wdc-menu-grow">
+  <ul>
+    <li>This menu will expand to fit its container</li>
+  </ul>
+</div>
+```
+
 ### Menu Item Modifiers
 
 Use `.wdc-menu-item-disabled` to create a disabled menu item.
@@ -78,7 +92,45 @@ Menu item modifiers may be combined.
 </div>
 ```
 
-## Divider
+### Icons
+
+Menu items can include an icon as well as a secondary icon.
+
+Wrap the text for the menu item using a `<span>` with `.wdc-menu-item-label`.
+
+```html
+<div class="wdc-menu">
+  <ul>
+    <li>
+      <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
+      <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
+    </li>
+    <li>
+      <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
+      <span className="wdc-menu-item-label">
+        Item with uploadCloud icon and an extLink secondary icon
+      </span>
+      <i className="wdc-icon" data-icon="extLink" data-category="system" />
+    </li>
+  </ul>
+</div>
+```
+
+If you're generating the icons using the React `SystemIcon` component, you'll need to assign
+`.wdc-menu-item-icon` to the icons.
+
+```tsx
+<div class="wdc-menu">
+  <ul>
+    <li>
+      <SystemIcon icon={uploadCloudIcon} className="wdc-menu-item-icon" />
+      <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
+    </li>
+  </ul>
+</div>
+```
+
+### Divider
 
 Use `<hr />` to create a divider between menu items.
 
