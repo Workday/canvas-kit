@@ -1,9 +1,10 @@
 import * as React from 'react';
 import ColorInput from './ColorInput';
+import {TextInputProps} from '@workday/canvas-kit-react-text-input';
 import styled from 'react-emotion';
 import {colors} from '@workday/canvas-kit-react-core';
 
-export interface ColorPreviewProps {
+export interface ColorPreviewProps extends TextInputProps {
   value: string;
   id?: string;
 }
@@ -16,13 +17,10 @@ const ColorPreviewComponent = styled(ColorInput)({
 
 export default class ColorPreview extends React.Component<ColorPreviewProps> {
   public render() {
+    const {id, value, ...elemProps} = this.props;
+
     return (
-      <ColorPreviewComponent
-        id={this.props.id}
-        value={this.props.value}
-        readOnly={true}
-        placeholder=""
-      />
+      <ColorPreviewComponent id={id} value={value} readOnly={true} placeholder="" {...elemProps} />
     );
   }
 }
