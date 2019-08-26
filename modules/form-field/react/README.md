@@ -45,7 +45,7 @@ import TextInput from '@workday/canvas-kit-react-text-input';
 
 ---
 
-#### `LabelPosition: LabelPosition`
+#### `LabelPosition: FormFieldLabelPosition`
 
 ```tsx
 <TextInput labelPosition={TextInput.LabelPosition.Left} />
@@ -121,7 +121,7 @@ Default: `undefined`
 
 ---
 
-#### `labelPosition: LabelPosition`
+#### `labelPosition: FormFieldLabelPosition`
 
 > The position of the label relative to the input field.
 
@@ -201,7 +201,7 @@ import {Label} from '@workday/canvas-kit-react-form-field';
 
 ## Static Properties
 
-#### `Position: LabelPosition`
+#### `Position: FormFieldLabelPosition`
 
 ```tsx
 <Label error={Label.Position.Left} />
@@ -211,7 +211,7 @@ import {Label} from '@workday/canvas-kit-react-form-field';
 
 ### Optional
 
-#### `labelPosition: LabelPosition`
+#### `labelPosition: FormFieldLabelPosition`
 
 > Position of the label.
 
