@@ -6,10 +6,9 @@
   background-color: $_wdc-menu-bg-color;
   border-radius: 3px;
   border: 1px solid $_wdc-menu-border-color;
+  box-sizing: border-box;
   position: relative;
   width: max-content;
-  -webkit-font-smoothing: auto;
-  -moz-osx-font-smoothing: auto;
 
   // Fallback for IE11
   @media screen and (-ms-high-contrast: active),
@@ -22,6 +21,10 @@
   @supports not (width: max-content) {
     width: auto;
     min-width: $_wdc-menu-menu-min-width;
+  }
+
+  &.wdc-menu-grow {
+    width: 100%;
   }
 
   ul {
@@ -40,32 +43,72 @@
       cursor: pointer;
       transition: background-color 80ms;
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      &:focus,
       &:hover {
         background-color: $wdc-color-common-hover-background;
+
+        .wd-icon-fill {
+          fill: $wdc-color-icon-hover;
+        }
       }
 
       &.wdc-menu-item-disabled {
         color: $wdc-color-licorice-100;
         cursor: default;
 
-        &:hover {
-          background-color: transparent;
+        .wd-icon-fill {
+          fill: $wdc-color-icon-disabled;
         }
 
-        &.wdc-menu-item-focused {
-          background-color: $wdc-color-blueberry-200;
+        &:hover {
+          background-color: transparent;
         }
       }
 
       &.wdc-menu-item-focused {
         background-color: $wdc-color-common-focus-background;
+
+        &.wdc-menu-item-disabled {
+          background-color: $wdc-color-blueberry-200;
+        }
+      }
+
+      &.wdc-menu-item-focused,
+      &.wdc-menu-item-focused.wdc-menu-item-disabled {
         color: $wdc-color-type-inverse;
+
+        .wd-icon-fill {
+          fill: $wdc-color-icon-inverse;
+        }
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wd-icon-fill {
+        fill: $wdc-color-icon-standard;
+      }
+
+      .wdc-icon,
+      .wdc-menu-item-icon {
+        &:first-child {
+          margin-right: 16px;
+          order: 1;
+        }
+
+        &:not(:first-child) {
+          margin-left: 16px;
+          order: 3;
+        }
+      }
+
+      .wdc-menu-item-label {
+        flex: 1;
+        order: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
 
