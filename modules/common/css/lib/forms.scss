@@ -108,7 +108,7 @@
         display: inline-block;
         position: absolute;
         border-radius: 16px;
-        top: 1px;
+        top: -1px;
         left: -30px;
         width: 18px;
         height: 18px;
@@ -137,12 +137,18 @@
       &::before {
         border-color: #b9c0c7;
         background-color: #f6f7f8;
+        background-size: 0px;
+      }
+
+      &::after {
+        display: none;
       }
     }
 
     &:disabled:checked+label::before {
       border-color: $wdc-color-blueberry-200;
-      background-color: $wdc-color-blueberry-200
+      background-color: $wdc-color-blueberry-200;
+      background-size: $wdc-spacing-m;
     }
 
     // Focus
