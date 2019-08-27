@@ -33,7 +33,11 @@ export const ButtonColors: ButtonColorCollection = {
   // TODO (beta button): remove in favor of beta buttons, consider moving from design-assets too
   [ButtonVariant.Primary]: canvas.buttonColors.primary,
   [ButtonVariant.Secondary]: canvas.buttonColors.secondary,
-  [ButtonVariant.Delete]: canvas.buttonColors.delete,
+  [ButtonVariant.Delete]: {
+    ...canvas.buttonColors.delete,
+    focusBorder: canvas.colors.cinnamon500,
+    activeBorder: canvas.colors.cinnamon500,
+  },
   [BetaButtonVariant.Primary]: {
     background: canvas.colors.blueberry400,
     border: 'transparent',

@@ -78,9 +78,15 @@ exports[`Button (Secondary) Snapshots renders a large, secondary button 1`] = `
   color: #ced3d9;
 }
 
-.emotion-2:not([disabled]):focus,
-.emotion-2:not([disabled]):active {
+.emotion-2:not([disabled]):focus {
   border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-2:not([disabled]):active {
+  border-color: #ced3d9;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -195,9 +201,15 @@ exports[`Button (Secondary) Snapshots renders a medium, secondary button 1`] = `
   color: #ced3d9;
 }
 
-.emotion-2:not([disabled]):focus,
-.emotion-2:not([disabled]):active {
+.emotion-2:not([disabled]):focus {
   border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-2:not([disabled]):active {
+  border-color: #ced3d9;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -312,9 +324,15 @@ exports[`Button (Secondary) Snapshots renders a small, secondary button 1`] = `
   color: #ced3d9;
 }
 
-.emotion-2:not([disabled]):focus,
-.emotion-2:not([disabled]):active {
+.emotion-2:not([disabled]):focus {
   border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-2:not([disabled]):active {
+  border-color: #ced3d9;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
