@@ -207,7 +207,7 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
               <input id="input" type="text" />
             </div>
             <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Helpful text goes here.
+              <strong>Error:</strong> Helpful text goes here.
             </div>
           </div>
         </div>

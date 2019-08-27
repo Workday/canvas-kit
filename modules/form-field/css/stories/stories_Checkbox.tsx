@@ -113,7 +113,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
             <div className="wdc-form-checkbox wdc-form-alert">
-              <input type="checkbox" id="checkbox-alert" disabled={true} />
+              <input type="checkbox" id="checkbox-alert" />
               <label htmlFor="checkbox-alert">Checkbox option</label>
             </div>
             <div className="wdc-form-hint-message">
@@ -131,7 +131,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
             <div className="wdc-form-checkbox wdc-form-error">
-              <input type="checkbox" id="checkbox-error" disabled={true} />
+              <input type="checkbox" id="checkbox-error" />
               <label htmlFor="checkbox-error">Checkbox option</label>
             </div>
             <div className="wdc-form-hint-message">

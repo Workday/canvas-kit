@@ -183,7 +183,7 @@
       rgb(255, 161, 38) 0px 0px 0px 3px inset;
   }
 
-  &.wdc-form-group-fields {
+  .wdc-form-group &.wdc-form-group-fields {
     border-radius: 4px;
     box-shadow: $_boxShadow;
     box-sizing: border-box;
@@ -240,7 +240,7 @@
     &+.wdc-form-hint-message {
       position: absolute;
       bottom: 0;
-      left: $wdc-form-inline-label-width + $wdc-spacing-s;
+      left: $wdc-form-inline-label-width+$wdc-spacing-s + $wdc-spacing-s;
     }
   }
 }

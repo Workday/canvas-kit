@@ -53,7 +53,7 @@
   .wdc-form-group-fields {
     display: inline-block;
     flex-grow: 1;
-    margin-top: -2px;
+    margin-top: -8px;
 
     .wdc-form-field {
       margin-bottom: 0;
@@ -77,11 +77,30 @@
   .wdc-form-field-wrapper {
     display: flex;
 
+    &::after {
+      content: '';
+      flex-grow: 999;
+    }
+
+    .wdc-form-group-fields {
+      margin-top: -2px;
+      margin-bottom: 26px;
+    }
+
     &>.wdc-form-field {
       margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
       // Case where there's no label on the left
-      flex-grow: 1;
-      margin-top: $wdc-spacing-xxxs;
+      flex-grow: 0;
+
+      .wdc-form-checkbox:first-child,
+      .wdc-form-radio:first-child {
+        margin-top: $wdc-spacing-xxxs;
+
+        &.wdc-form-alert,
+        &.wdc-form-error {
+          margin-top: 0;
+        }
+      }
     }
 
     &>.wdc-form-label+.wdc-form-field {

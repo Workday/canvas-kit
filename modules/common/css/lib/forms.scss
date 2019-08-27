@@ -61,37 +61,37 @@
 @mixin wdc-form-selection-control() {
   padding: 6px 0;
   display: inline-block;
-  min-height: 20px;
+  min-height: $wdc-spacing-s+$wdc-spacing-xxxs;
 
   input {
     // display: none;
 
     &:hover+label::after {
-      box-shadow: 0 0 0 7px #f0f1f2;
+      box-shadow: 0 0 0 7px $wdc-color-soap-200;
     }
 
     &+label {
       font-size: 14px;
-      line-height: 20px;
+      line-height: $wdc-spacing-s+$wdc-spacing-xxxs;
       font-weight: 400;
-      color: #494949;
+      color: $wdc-color-black-pepper-300;
       font-family: "Roboto",
         "Helvetica Neue",
         "Helvetica",
         Arial,
         sans-serif;
       position: relative;
-      left: 12px;
-      padding-right: 12px;
+      left: $wdc-spacing-xs;
+      padding-right: $wdc-spacing-xs;
       cursor: pointer;
 
       // Input styling
       &::before {
         content: '';
         display: inline-block;
-        background-color: #ffffff;
+        background-color: $wdc-color-french-vanilla-100;
         border-radius: 2px;
-        border: 1px solid #7b858f;
+        border: 1px solid $wdc-color-licorice-200;
         box-sizing: border-box;
         width: 18px;
         height: 18px;
@@ -112,8 +112,8 @@
         left: -30px;
         width: 18px;
         height: 18px;
-        background: #f0f1f2;
-        box-shadow: 0 0 0 0px #f0f1f2;
+        background: $wdc-color-soap-200;
+        box-shadow: 0 0 0 0px $wdc-color-soap-200;
         transition: box-shadow 150ms ease-out;
         z-index: -1;
       }
@@ -121,7 +121,7 @@
 
     // States
     &:hover+label::before {
-      border-color: #333d47;
+      border-color: $wdc-color-licorice-500;
     }
 
     &:checked+label {
@@ -132,11 +132,11 @@
     }
 
     &:disabled+label {
-      color: #a1aab3;
+      color: $wdc-color-licorice-100;
 
       &::before {
-        border-color: #b9c0c7;
-        background-color: #f6f7f8;
+        border-color: $wdc-color-soap-600;
+        background-color: $wdc-color-soap-100;
         background-size: 0px;
       }
 
@@ -159,31 +159,31 @@
 
     &:focus+label::before {
       border-color: $wdc-color-blueberry-400;
-      box-shadow: inset 0 0 0 1px #0875e1,
+      box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400,
     }
 
     &:checked:focus+label::before {
-      box-shadow: 0 0 0 2px #ffffff,
-        0 0 0 4px #0875e1,
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
+        0 0 0 4px $wdc-color-blueberry-400,
         0 0 0 5px transparent;
     }
   }
 
   &.wdc-form-alert {
     input+label::before {
-      border: 1px solid #ffa126;
-      box-shadow: 0 0 0 1px #ffa126,
-        0 0 0 2px #c06c00;
+      border: 1px solid $wdc-color-cantaloupe-400;
+      box-shadow: 0 0 0 1px $wdc-color-cantaloupe-400,
+        0 0 0 2px $wdc-color-cantaloupe-600;
     }
 
     input:checked+label::before {
-      border-color: #0875e1;
-      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ffa126, 0 0 0 5px #c06c00;
+      border-color: $wdc-color-blueberry-400;
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-cantaloupe-400, 0 0 0 5px $wdc-color-cantaloupe-600;
     }
 
     input:focus+label::before {
       border-color: $wdc-color-blueberry-400;
-      box-shadow: 0 0 0 0 #ffffff;
+      box-shadow: 0 0 0 0 $wdc-color-french-vanilla-100;
     }
   }
 
@@ -195,8 +195,8 @@
     }
 
     input:checked+label::before {
-      border-color: #0875e1;
-      box-shadow: 0 0 0 2px #ffffff,
+      border-color: $wdc-color-blueberry-400;
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
         0 0 0 4px #de2e21,
         0 0 0 5px transparent;
     }
@@ -204,8 +204,8 @@
     input:focus+label::before {
       border-color: $wdc-color-blueberry-400;
       border-width: 1px;
-      box-shadow: inset 0 0 0 1px #0875e1,
-        0 0 0 0 #ffffff;
+      box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400,
+        0 0 0 0 $wdc-color-french-vanilla-100;
     }
   }
 }
