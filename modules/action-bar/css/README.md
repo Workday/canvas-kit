@@ -81,7 +81,7 @@ instance, the **related actions** button.
 <div class="wdc-action-bar">
 	<div class="wdc-action-bar-container">
 		<button class="wdc-btn wdc-btn-primary">Done</button>
-		<button class="wdc-btn wdc-btn-icon-rounded wdc-action-bar-container-item-natural">
+		<button class="wdc-btn wdc-action-bar-container-item-natural">
 			<svg ...>
 		</button>
 	</div>
