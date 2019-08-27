@@ -14,24 +14,18 @@ storiesOf('CSS/Page Header', module)
         <div className="wdc-page-header-container">
           <h2 className="wdc-page-header-title">Page Title</h2>
           <div className="wdc-icon-list wdc-icon-list-white">
-            <div className="wdc-icon-list-icon" role="button" tabIndex={0}>
+            <div
+              className="wdc-btn wdc-btn-size-m wdc-btn-icon-circle wdc-btn-icon-inverse"
+              role="button"
+              tabIndex={0}
+            >
               <SystemIcon icon={exportIcon} />
             </div>
-            <div className="wdc-icon-list-icon" role="button" tabIndex={0}>
-              <SystemIcon icon={fullscreenIcon} />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <header className="wdc-page-header">
-        <div className="wdc-marketing-container">
-          <h2 className="wdc-page-header-title">Page Title</h2>
-          <div className="wdc-icon-list wdc-icon-list-white">
-            <div className="wdc-icon-list-icon" role="button" tabIndex={0}>
-              <SystemIcon icon={exportIcon} />
-            </div>
-            <div className="wdc-icon-list-icon" role="button" tabIndex={0}>
+            <div
+              className="wdc-btn wdc-btn-size-m wdc-btn-icon-circle wdc-btn-icon-inverse"
+              role="button"
+              tabIndex={0}
+            >
               <SystemIcon icon={fullscreenIcon} />
             </div>
           </div>

@@ -110,8 +110,14 @@ exports[`Header Search Snapshots Renders a collapsed search bar 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -337,8 +343,14 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -533,8 +545,14 @@ exports[`Header Search Snapshots Renders a search bar with a value 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-8:not([disabled]):focus,
+.emotion-8:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-8:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -756,8 +774,14 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
   fill: #b9c0c7;
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -952,8 +976,14 @@ exports[`Header Search Snapshots Renders a search bar with a value 2`] = `
   fill: #b9c0c7;
 }
 
-.emotion-8:not([disabled]):focus,
+.emotion-8:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-8:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1155,7 +1185,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -1346,8 +1381,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   fill: #b9c0c7;
 }
 
-.emotion-8:not([disabled]):focus,
+.emotion-8:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-8:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1549,7 +1590,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -1740,8 +1786,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with blu
   fill: #b9c0c7;
 }
 
-.emotion-8:not([disabled]):focus,
+.emotion-8:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-8:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1943,7 +1995,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -2134,8 +2191,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   fill: #b9c0c7;
 }
 
-.emotion-8:not([disabled]):focus,
+.emotion-8:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-8:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -2337,7 +2400,12 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -2528,8 +2596,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with tra
   fill: #b9c0c7;
 }
 
-.emotion-8:not([disabled]):focus,
+.emotion-8:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-8:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -2751,8 +2825,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   fill: #b9c0c7;
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -2947,8 +3027,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   fill: #b9c0c7;
 }
 
-.emotion-8:not([disabled]):focus,
+.emotion-8:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-8:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3170,8 +3256,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   fill: #b9c0c7;
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3366,8 +3458,14 @@ exports[`Header Search Snapshots renders themed search bars: <Search /> with whi
   fill: #b9c0c7;
 }
 
-.emotion-8:not([disabled]):focus,
+.emotion-8:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-8:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3546,7 +3644,12 @@ exports[`Header Search Snapshots renders themed, collapsed search bars: <Search 
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -3698,7 +3801,12 @@ exports[`Header Search Snapshots renders themed, collapsed search bars: <Search 
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -3838,8 +3946,14 @@ exports[`Header Search Snapshots renders themed, collapsed search bars: <Search 
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;

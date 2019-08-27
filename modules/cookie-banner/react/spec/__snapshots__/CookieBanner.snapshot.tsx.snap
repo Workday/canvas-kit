@@ -151,9 +151,15 @@ exports[`Cookie Banner Snapshots renders a CookieBanner 1`] = `
   color: #ffffff;
 }
 
-.emotion-4:not([disabled]):focus,
-.emotion-4:not([disabled]):active {
+.emotion-4:not([disabled]):focus {
   border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-4:not([disabled]):active {
+  border-color: #ffa126;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -355,9 +361,15 @@ exports[`Cookie Banner Snapshots renders a CookieBanner with settings 1`] = `
   color: #ffffff;
 }
 
-.emotion-6:not([disabled]):focus,
-.emotion-6:not([disabled]):active {
+.emotion-6:not([disabled]):focus {
   border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-6:not([disabled]):active {
+  border-color: #ffa126;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -538,9 +550,15 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner 1`] = `
   color: #ffffff;
 }
 
-.emotion-4:not([disabled]):focus,
-.emotion-4:not([disabled]):active {
+.emotion-4:not([disabled]):focus {
   border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-4:not([disabled]):active {
+  border-color: #ffa126;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -745,9 +763,15 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner with settings 1`]
   color: #ffffff;
 }
 
-.emotion-6:not([disabled]):focus,
-.emotion-6:not([disabled]):active {
+.emotion-6:not([disabled]):focus {
   border-color: #0875e1;
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
+.emotion-6:not([disabled]):active {
+  border-color: #ffa126;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;

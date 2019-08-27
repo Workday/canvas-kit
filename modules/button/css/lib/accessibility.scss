@@ -1,4 +1,5 @@
 @mixin wdc-focusable-buttons() {
+
   .wdc-a11y button:not([disabled]),
   .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
     &:not([tabindex='-1']):focus {
@@ -9,7 +10,7 @@
 
 [data-whatinput='keyboard'] {
   @include wdc-focusable-buttons() {
-    box-shadow: 0 0 0 2px $wdc-btn-border-color-focus;
+    box-shadow: 0 0 0 2px $wdc-btn-border-focus;
     outline: none;
   }
 
@@ -47,14 +48,14 @@
 
   .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
     &:not([tabindex='-1']):focus {
-      @include wdc-btn-box-shadow($wdc-btn-border-color);
+      @include wdc-btn-box-shadow($wdc-btn-border);
     }
   }
 
   .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
     &:not([tabindex='-1']):hover {
       @extend .wdc-btn-hover;
-      @include wdc-btn-box-shadow($wdc-btn-border-color-hover);
+      @include wdc-btn-box-shadow($wdc-btn-border-hover);
     }
   }
 
@@ -73,7 +74,7 @@
 
   .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
     &:not([tabindex='-1']):focus {
-      @include wdc-btn-box-shadow($wdc-btn-border-color-delete);
+      @include wdc-btn-box-shadow($wdc-btn-border-delete);
       background: $wdc-btn-bg-delete;
       color: $wdc-btn-color-delete;
     }

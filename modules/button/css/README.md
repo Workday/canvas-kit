@@ -1,6 +1,6 @@
 # Canvas Kit Button
 
-Button highlight actions available on a screen with a click or tap.
+Clickable button elements that extend the native `<button>` element with Canvas styling.
 
 ## Installation
 
@@ -29,13 +29,13 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 
 Button styles can be applied by using `.wdc-btn`. Most modifiers can be used by combining `.wdc-btn`
 with the modifier class (e.g. `.wdc-btn-primary`). Some modifiers can be combined (e.g.
-`.wdc-btn-primary.wdc-btn-medium`).
+`.wdc-btn-primary.wdc-btn-size-m`).
 
 ```html
 <button class="wdc-btn">Default</button>
 <button class="wdc-btn wdc-btn-primary">Primary</button>
-<button class="wdc-btn wdc-btn-medium">Default</button>
-<button class="wdc-btn wdc-btn-small">Small Button</button>
+<button class="wdc-btn wdc-btn-size-m">Default</button>
+<button class="wdc-btn wdc-btn-size-s">Small Button</button>
 ```
 
 ### Button Order
@@ -51,6 +51,7 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
   - Small
 - [Colors](#colors)
   - Default
+  - Filled (Icons)
   - Primary
   - Delete
 - [States](#states)
@@ -58,9 +59,8 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
   - Hover
   - Focus
   - Disabled
-- [Types](#types)
+- [Variants](#variants)
   - Icon Button
-  - Icon Button (Rounded)
   - Dropdown Button
   - Split Button
 
@@ -76,20 +76,20 @@ The default button size when using `.wdc-btn` is large.
 
 > Medium buttons are used in grids only.
 
-Use by adding `.wdc-btn-medium`.
+Use by adding `.wdc-btn-size-m`.
 
 ```html
-<button class="wdc-btn wdc-btn-medium">Medium</button>
+<button class="wdc-btn wdc-btn-size-m">Medium</button>
 ```
 
 ### Small
 
 > Small buttons are used in page headers only.
 
-Use by adding `.wdc-btn-small`.
+Use by adding `.wdc-btn-size-s`.
 
 ```html
-<button class="wdc-btn wdc-btn-small">Small</button>
+<button class="wdc-btn wdc-btn-size-s">Small</button>
 ```
 
 ## Colors
@@ -102,8 +102,40 @@ Most common button with default background color. Default buttons are available 
 
 ```html
 <button class="wdc-btn">Default</button>
-<button class="wdc-btn wdc-btn-medium">Default</button>
-<button class="wdc-btn wdc-btn-small">Default</button>
+<button class="wdc-btn wdc-btn-size-m">Default</button>
+<button class="wdc-btn wdc-btn-size-s">Default</button>
+```
+
+### Icon Buttons
+
+Icon buttons can be square, circle, filled, plain and inverse. By default, their size is medium, but
+you can add `wdc-btn-size-s` class to make them small.
+
+### Filled
+
+Filled buttons can be squared or circle. These buttons should be used with icons and provide a solid
+color background.
+
+```html
+<button className="wdc-btn-icon-square-filled">
+  <SystemIcon icon="{activityStreamIcon}" />
+</button>
+<button className="wdc-btn-size-s wdc-btn-icon-circle-filled">
+  <SystemIcon icon="{activityStreamIcon}" />
+</button>
+```
+
+### Inverse
+
+Inverse buttons are buttons that can be used on dark backgrounds.
+
+```html
+<button className="wdc-btn-icon-inverse">
+  <SystemIcon icon="{activityStreamIcon}" />
+</button>
+<button className="wdc-btn-size-s wdc-btn-icon-inverse-filled">
+  <SystemIcon icon="{activityStreamIcon}" />
+</button>
 ```
 
 ### Primary
@@ -117,7 +149,7 @@ sizes.
 
 ```html
 <button class="wdc-btn wdc-btn-primary">Primary</button>
-<button class="wdc-btn wdc-btn-primary wdc-btn-medium">Primary</button>
+<button class="wdc-btn wdc-btn-primary wdc-btn-size-m">Primary</button>
 ```
 
 ### Delete
@@ -127,7 +159,7 @@ sizes.
 
 ```html
 <button class="wdc-btn wdc-btn-delete">Delete</button>
-<button class="wdc-btn wdc-btn-delete wdc-btn-medium">Delete</button>
+<button class="wdc-btn wdc-btn-delete wdc-btn-size-m">Delete</button>
 ```
 
 ## States
@@ -157,32 +189,23 @@ applied to form controls using the classes below.
 ### Icon Button
 
 > Use when space is limited and the action is clearly communicated through an icon. For instance, an
-> edit button.
-
-Use by adding `.wdc-btn-icon`. A Workday icon should be used as the `<button>`'s content.
+> edit button. They are medium size by default, but can be made smaller with `wdc-btn-size-s`
 
 ```html
-<button class="wdc-btn wdc-btn-icon">
+<button class="wdc-btn-icon" aria-label="Action">
   <svg ...>
 </button>
 ```
 
-### Icon Button (Rounded)
-
-> This button is similar to the default button but has a fixed width. Use this button when placing
-> an icon button inline with a group of buttons. Often used to style the Overflow Button used in
-> button rows with more than four items.
-
-Use by adding `.wdc-btn-icon-rounded`. A Workday icon should be used as the `<button>`'s content.
-
-```html
-<button class="wdc-btn wdc-btn-primary">Primary</button>
-<button class="wdc-btn">Button</button>
-<button class="wdc-btn">Button</button>
-<button class="wdc-btn wdc-btn-icon-rounded">
-  <svg ...>
-</button>
-```
+| Icon Button Variant | Class                                   | Description                                      |
+| ------------------- | --------------------------------------- | ------------------------------------------------ |
+| Circle (default)    | `.wdc-btn-icon`, `.wdc-btn-icon-circle` | Circular, dark gray icon                         |
+| Circle Filled       | `.wdc-btn-icon-circle-filled`           | Circular, gray background, dark gray icon        |
+| Square              | `.wdc-btn-icon-square`                  | Square, white background, dark gray icon         |
+| Square Filled       | `.wdc-btn-icon-square-filled`           | Square, gray background, dark gray icon          |
+| Plain               | `.wdc-btn-icon-plain`                   | Dark gray icon                                   |
+| Inverse             | `.wdc-btn-icon-plain`                   | Circular, transparent background, white icon     |
+| Inverse             | `.wdc-btn-icon-plain`                   | Circular, semitransparent background, white icon |
 
 ### Dropdown Button
 
@@ -225,6 +248,11 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 </div>
 ```
 
-## Accessibility
+## Accessibility Notes
+
+> The content of a button is not always clear to the user. In order to better convey what the icon
+> represents, the Icon Button should always have an `aria-label` attribute as well as a
+> [tooltip](https://github.com/Workday/canvas-kit/tree/master/modules/tooltip/css) or
+> `title attribute`.
 
 See [canvas-kit-core](../../core/css#accessibility) for accessibility guidelines.
