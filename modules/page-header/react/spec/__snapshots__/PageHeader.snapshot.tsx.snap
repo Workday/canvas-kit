@@ -61,7 +61,6 @@ exports[`Page Header Snapshots renders a basic PageHeader as expected 1`] = `
 >
   <div
     className="emotion-4 emotion-5"
-    title="Test Page Header"
   >
     <h2
       className="emotion-0 emotion-1"
@@ -140,7 +139,6 @@ exports[`Page Header Snapshots renders a capWidth context PageHeader as expected
 >
   <div
     className="emotion-4 emotion-5"
-    title="Test capWidth Page Header"
   >
     <h2
       className="emotion-0 emotion-1"

@@ -17,7 +17,7 @@ const Header = styled('header')({
   MozOsxFontSmoothing: 'grayscale',
 });
 
-const Container = styled('div')<PageHeaderProps>(
+const Container = styled('div')<Pick<PageHeaderProps, 'breakpoint' | 'capWidth'>>(
   {
     display: 'flex',
     alignItems: 'center',
@@ -81,11 +81,11 @@ export default class PageHeader extends React.Component<PageHeaderProps> {
   }
 
   public render() {
-    const {title, children} = this.props;
+    const {title, children, breakpoint, capWidth, ...elemProps} = this.props;
 
     return (
-      <Header>
-        <Container {...this.props}>
+      <Header {...elemProps}>
+        <Container breakpoint={breakpoint} capWidth={capWidth}>
           <Title>{title}</Title>
           <IconList>{this.renderChildren(children)}</IconList>
         </Container>
