@@ -1,5 +1,8 @@
-import {accentIconStyles} from '../lib/AccentIcon';
+import * as React from 'react';
+import {mount} from 'enzyme';
+import AccentIcon, {accentIconStyles} from '../lib/AccentIcon';
 import {colors} from '@workday/canvas-kit-react-core';
+import {shieldIcon} from '@workday/canvas-accent-icons-web';
 
 describe('Accent Icon', () => {
   test('Defaults styles are set correctly', () => {
@@ -16,5 +19,12 @@ describe('Accent Icon', () => {
   test('Can set icon color correctly', () => {
     const componentStyle = accentIconStyles({color: colors.cinnamon500});
     expect(componentStyle['& .color-500']).toHaveProperty('fill', colors.cinnamon500);
+  });
+
+  test('AccentIcon should spread extra props', () => {
+    const component = mount(<AccentIcon icon={shieldIcon} data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
   });
 });

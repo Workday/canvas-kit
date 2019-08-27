@@ -1,5 +1,8 @@
-import {systemIconStyles} from '../lib/SystemIcon';
+import * as React from 'react';
+import {mount} from 'enzyme';
+import SystemIcon, {systemIconStyles} from '../lib/SystemIcon';
 import {colors, iconColors} from '@workday/canvas-kit-react-core';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 describe('System Icon', () => {
   test('Defaults styles are set correctly', () => {
@@ -43,5 +46,12 @@ describe('System Icon', () => {
     expect(componentStyle[':hover .wd-icon-fill']).toHaveProperty('fill', fillHover);
     expect(componentStyle['& .wd-icon-accent']).toHaveProperty('fill', accent);
     expect(componentStyle[':hover .wd-icon-accent']).toHaveProperty('fill', accentHover);
+  });
+
+  test('SystemIcon should spread extra props', () => {
+    const component = mount(<SystemIcon icon={activityStreamIcon} data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
   });
 });

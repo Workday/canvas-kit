@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import Hint from '../lib/Hint';
 
 describe('Hint', () => {
@@ -16,6 +16,13 @@ describe('Hint', () => {
 
     expect(component.render().text()).toEqual(expect.stringContaining('Alert:'));
 
+    component.unmount();
+  });
+
+  test('Hint should spread extra props', () => {
+    const component = mount(<Hint data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
     component.unmount();
   });
 });

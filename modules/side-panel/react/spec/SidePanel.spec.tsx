@@ -81,4 +81,11 @@ describe('SidePanel', () => {
     expect(mockFunction).toHaveBeenCalledTimes(1);
     component.unmount();
   });
+
+  test('SidePanel should spread extra props', () => {
+    const component = mount(<SidePanel open={true} data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });

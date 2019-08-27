@@ -37,4 +37,11 @@ describe('Cookie Banner', () => {
     component.find('button[children="Cookie Settings"]').simulate('click');
     expect(cb).toHaveBeenCalled();
   });
+
+  test('Cookie Banner should spread extra props', () => {
+    const component = mount(<CookieBanner onAccept={noop} data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });

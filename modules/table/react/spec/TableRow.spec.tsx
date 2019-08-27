@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import TableRow from '../lib/TableRow';
 
 describe('TableRow', () => {
@@ -12,6 +12,13 @@ describe('TableRow', () => {
 
     expect(component.props().className.includes(customClassName));
 
+    component.unmount();
+  });
+
+  test('TableRow should spread extra props', () => {
+    const component = mount(<TableRow data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
     component.unmount();
   });
 });

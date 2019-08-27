@@ -136,4 +136,16 @@ describe('Radio', () => {
 
     expect(cb.mock.calls.length).toBe(1);
   });
+
+  test('RadioGroup should spread extra props', () => {
+    const component = mount(
+      <RadioGroup data-propspread="test">
+        <Radio id="1" value="email" label="E-mail" />
+        <Radio id="2" value="phone" label="Phone" />
+      </RadioGroup>
+    );
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });

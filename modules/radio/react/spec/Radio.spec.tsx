@@ -49,6 +49,13 @@ describe('Radio Input', () => {
     expect(cb.mock.calls.length).toBe(1);
     component.unmount();
   });
+
+  test('Radio input should spread extra props', () => {
+    const component = mount(<Radio data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });
 
 describe('Radio Accessibility', () => {

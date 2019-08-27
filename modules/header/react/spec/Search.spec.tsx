@@ -141,4 +141,11 @@ describe('Header Search', () => {
     expect(component.state('value')).toBe('');
     component.unmount();
   });
+
+  test('Search should spread extra props', () => {
+    const component = mount(<Search data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });

@@ -23,6 +23,13 @@ describe('Avatar', () => {
     expect(cb.mock.calls.length).toBe(1);
     component.unmount();
   });
+
+  test('Avatar should spread extra props', () => {
+    const component = mount(<Avatar data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });
 
 describe('Avatar Accessibility', () => {

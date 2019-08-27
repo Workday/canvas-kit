@@ -36,6 +36,13 @@ describe('Button', () => {
     expect(cb.mock.calls.length).toBe(0);
     component.unmount();
   });
+
+  test('Button should spread extra props', () => {
+    const component = mount(<Button data-propspread="test">Button Label</Button>);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });
 
 describe('TextButton', () => {

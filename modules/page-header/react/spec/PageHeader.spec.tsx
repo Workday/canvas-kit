@@ -46,4 +46,11 @@ describe('Page Header', () => {
       PageHeader
     ); // this should render what was passed in, not an <a> tag
   });
+
+  test('PageHeader should spread extra props', () => {
+    const component = mount(<PageHeader data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });

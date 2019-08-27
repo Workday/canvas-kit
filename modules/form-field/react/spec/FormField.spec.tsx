@@ -131,4 +131,16 @@ describe('FormField', () => {
 
     component.unmount();
   });
+
+  test('FormField should spread extra props', () => {
+    const InputComponent: React.SFC<FormFieldErrorBehavior> = () => <input type="text" />;
+    const component = mount(
+      <FormField data-propspread="test">
+        <InputComponent />
+      </FormField>
+    );
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });
