@@ -1,13 +1,11 @@
 $_wdc-btn-icons-path: $wdc-system-icons-path !default;
 
-$wdc-btn-icon-size: $wdc-spacing-s;
-$wdc-btn-icon-size-l: $wdc-spacing-m;
+$wdc-btn-font-weight: 500;
 $wdc-btn-border-size: 1px;
 
 $wdc-btn-height-l: $wdc-spacing-xl;
 $wdc-btn-height-m: $wdc-spacing-m;
 $wdc-btn-height-s: $wdc-spacing-s + ($wdc-btn-border-size * 2);
-$wdc-btn-height-icon: $wdc-spacing-l;
 
 $wdc-btn-min-width-l: 112px;
 $wdc-btn-max-width-l: 288px;
@@ -15,27 +13,20 @@ $wdc-btn-min-width-m: 80px;
 $wdc-btn-max-width-m: 200px;
 $wdc-btn-min-width-s: 56px;
 $wdc-btn-max-width-s: 120px;
-$wdc-btn-width-icon: $wdc-spacing-l;
-$wdc-btn-width-icon-rounded: 56px;
 
 $wdc-btn-padding-l: 0 $wdc-spacing-l;
 $wdc-btn-padding-m: 0 $wdc-spacing-m;
 $wdc-btn-padding-s: 0 $wdc-spacing-xxs;
 $wdc-btn-padding-icon: $wdc-spacing-xxxs;
-$wdc-btn-padding-icon-rounded: (($wdc-btn-height-l - $wdc-btn-icon-size-l)/2) ((
-        $wdc-btn-width-icon-rounded - $wdc-btn-icon-size-l
-      )/2);
 
-$wdc-btn-border-radius: 40px;
-$wdc-btn-border-radius-icon: 3px;
+$wdc-btn-border-radius: $wdc-spacing-xl;
+$wdc-btn-icon-border-radius: $wdc-spacing-xxxs;
 
 $wdc-btn-bg: $wdc-color-soap-200;
 $wdc-btn-bg-hover: $wdc-color-soap-500;
 $wdc-btn-bg-active: $wdc-color-soap-200;
 $wdc-btn-bg-focus: $wdc-color-soap-200;
 $wdc-btn-bg-disabled: $wdc-color-french-vanilla-100;
-$wdc-btn-bg-icon-active: $wdc-color-blueberry-500;
-$wdc-btn-bg-icon-disabled: $wdc-color-french-vanilla-100;
 $wdc-btn-bg-primary: $wdc-color-cantaloupe-400;
 $wdc-btn-bg-primary-hover: $wdc-color-cantaloupe-500;
 $wdc-btn-bg-primary-disabled: $wdc-color-cantaloupe-200;
@@ -43,25 +34,26 @@ $wdc-btn-bg-delete: $wdc-color-cinnamon-100;
 $wdc-btn-bg-delete-hover: $wdc-color-cinnamon-400;
 $wdc-btn-bg-delete-disabled: $wdc-color-cinnamon-100;
 
+$wdc-btn-border: $wdc-color-soap-500;
+$wdc-btn-border-hover: $wdc-color-licorice-100;
+$wdc-btn-border-active: $wdc-color-blueberry-400;
+$wdc-btn-border-focus: $wdc-color-blueberry-400;
+$wdc-btn-border-disabled: $wdc-color-soap-500;
+$wdc-btn-border-primary: $wdc-color-cantaloupe-400;
+$wdc-btn-border-primary-hover: $wdc-color-cantaloupe-400;
+$wdc-btn-border-primary-active: $wdc-color-blueberry-400;
+$wdc-btn-border-primary-disabled: $wdc-color-cantaloupe-400;
+$wdc-btn-border-delete: $wdc-color-cinnamon-500;
+$wdc-btn-border-delete-hover: $wdc-color-cinnamon-500;
+$wdc-btn-border-delete-active: $wdc-color-cinnamon-500;
+$wdc-btn-border-delete-disabled: $wdc-color-cinnamon-200;
+
 $wdc-btn-color: $wdc-color-black-pepper-400;
 $wdc-btn-color-disabled: $wdc-color-soap-500;
-$wdc-btn-color-icon: $wdc-color-licorice-200;
-$wdc-btn-color-icon-hover: $wdc-color-licorice-500;
-$wdc-btn-color-icon-active: $wdc-color-french-vanilla-100;
-$wdc-btn-color-icon-disabled: $wdc-color-soap-500;
 $wdc-btn-color-primary: $wdc-color-french-vanilla-100;
 $wdc-btn-color-delete: $wdc-color-cinnamon-500;
 $wdc-btn-color-delete-hover: $wdc-color-french-vanilla-100;
 $wdc-btn-color-delete-disabled: $wdc-color-cinnamon-300;
-
-$wdc-btn-border-color: $wdc-color-soap-500;
-$wdc-btn-border-color-hover: $wdc-color-licorice-100;
-$wdc-btn-border-color-active: $wdc-color-soap-500;
-$wdc-btn-border-color-focus: $wdc-color-blueberry-500;
-$wdc-btn-border-color-disabled: $wdc-color-soap-500;
-$wdc-btn-border-color-delete: $wdc-color-cinnamon-400;
-$wdc-btn-border-color-delete-hover: $wdc-color-cinnamon-600;
-$wdc-btn-border-color-delete-disabled: $wdc-color-cinnamon-200;
 
 $wdc-btn-split-border-radius: 3px;
 $wdc-btn-split-icon-height: $wdc-spacing-s;
@@ -69,3 +61,31 @@ $wdc-btn-split-icon-width: $wdc-spacing-xxxs + $wdc-spacing-m + $wdc-spacing-xxs
 $wdc-btn-split-icon-padding-v: ($wdc-btn-height-l - $wdc-btn-split-icon-height)/2;
 $wdc-btn-split-icon-padding: $wdc-btn-split-icon-padding-v $wdc-spacing-xxs
   $wdc-btn-split-icon-padding-v $wdc-spacing-xxxs;
+
+$wdc-btn-icon-inverse-bg: $wdc-color-french-vanilla-100;
+$wdc-btn-icon-inverse-hover-bg: rgba(0, 0, 0, 0.2);
+$wdc-btn-icon-inverse-active-hover-bg: rgba(0, 0, 0, 0.4);
+$wdc-btn-icon-inverse-disabled-bg: rgba(255, 255, 255, 0.75);
+
+$wdc-btn-icon-inverse-filled-bg: rgba(0, 0, 0, 0.2);
+$wdc-btn-icon-inverse-filled-hover-bg: rgba(0, 0, 0, 0.4);
+
+$wdc-btn-icon-bg: $wdc-color-french-vanilla-100;
+$wdc-btn-icon-hover-bg: $wdc-color-soap-300;
+$wdc-btn-icon-active-bg: $wdc-color-soap-500;
+$wdc-btn-icon-focus-bg: $wdc-color-french-vanilla-100;
+$wdc-btn-icon-disabled-bg: rgba(255, 255, 255, 0.75);
+
+$wdc-btn-icon-filled-hover-bg: $wdc-color-soap-400;
+$wdc-btn-icon-filled-active-bg: $wdc-color-soap-500;
+$wdc-btn-icon-filled-disabled-bg: $wdc-color-soap-100;
+
+$wdc-btn-icon-color: $wdc-color-licorice-200;
+$wdc-btn-icon-hover-color: $wdc-color-licorice-500;
+$wdc-btn-icon-active-color: $wdc-color-licorice-600;
+$wdc-btn-icon-disabled-color: $wdc-color-soap-600;
+
+$wdc-btn-icon-width: $wdc-spacing-xl;
+$wdc-btn-icon-height: $wdc-spacing-xl;
+$wdc-btn-icon-size-s: $wdc-spacing-s;
+$wdc-btn-icon-size-m: $wdc-spacing-m;
