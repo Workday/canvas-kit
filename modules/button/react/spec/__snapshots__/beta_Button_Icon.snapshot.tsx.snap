@@ -140,7 +140,12 @@ exports[`Button (Icon) Snapshots renders a default icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -301,7 +306,12 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled off 1`] 
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -431,7 +441,12 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled on 1`] =
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -622,7 +637,12 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled on 2`] =
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -832,7 +852,12 @@ exports[`Button (Icon) Snapshots renders a filled icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -980,7 +1005,12 @@ exports[`Button (Icon) Snapshots renders a filled icon button, toggled off 1`] =
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1130,7 +1160,12 @@ exports[`Button (Icon) Snapshots renders a filled icon button, toggled on 1`] = 
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1323,7 +1358,12 @@ exports[`Button (Icon) Snapshots renders a medium default icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1471,7 +1511,12 @@ exports[`Button (Icon) Snapshots renders a medium filled icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1623,7 +1668,12 @@ exports[`Button (Icon) Snapshots renders a medium inverse filled icon button 1`]
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -1766,7 +1816,12 @@ exports[`Button (Icon) Snapshots renders a medium inverse icon button 1`] = `
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -1929,8 +1984,14 @@ exports[`Button (Icon) Snapshots renders a medium plain icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -2092,8 +2153,14 @@ exports[`Button (Icon) Snapshots renders a plain icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -2253,7 +2320,12 @@ exports[`Button (Icon) Snapshots renders a small default icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -2406,7 +2478,12 @@ exports[`Button (Icon) Snapshots renders a small filled icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -2563,7 +2640,12 @@ exports[`Button (Icon) Snapshots renders a small inverse filled icon button 1`] 
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -2711,7 +2793,12 @@ exports[`Button (Icon) Snapshots renders a small inverse icon button 1`] = `
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -2879,8 +2966,14 @@ exports[`Button (Icon) Snapshots renders a small plain icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3036,7 +3129,12 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button 1`] = `
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -3188,7 +3286,12 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button, toggled 
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -3342,7 +3445,12 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button, toggled 
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -3513,7 +3621,12 @@ exports[`Button (Icon) Snapshots renders an inverse icon button 1`] = `
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -3656,7 +3769,12 @@ exports[`Button (Icon) Snapshots renders an inverse icon button, toggled off 1`]
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -3800,7 +3918,12 @@ exports[`Button (Icon) Snapshots renders an inverse icon button, toggled on 1`] 
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;

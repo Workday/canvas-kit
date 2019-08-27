@@ -108,7 +108,12 @@ exports[`Icon Button Snapshots renders a medium icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -269,7 +274,12 @@ exports[`Icon Button Snapshots renders a small icon button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -467,7 +477,12 @@ exports[`Icon Button Snapshots renders an icon button, toggled 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -626,7 +641,12 @@ exports[`Icon Button Snapshots renders as expected 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-0:not([disabled]):focus,
+.emotion-0:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-0:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -784,7 +804,12 @@ Array [
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
@@ -931,7 +956,12 @@ Array [
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
@@ -1091,8 +1121,14 @@ Array [
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1217,7 +1253,12 @@ Array [
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1394,7 +1435,12 @@ Array [
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1534,7 +1580,12 @@ Array [
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -1639,7 +1690,12 @@ Array [
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-4:not([disabled]):focus,
+.emotion-4:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-4:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
