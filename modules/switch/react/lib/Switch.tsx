@@ -75,7 +75,7 @@ export default class Switch extends React.Component<SwitchProps> {
   };
 
   public render() {
-    const {checked, disabled, id, inputRef, onChange, value, ...otherProps} = this.props;
+    const {checked, disabled, id, inputRef, onChange, value, ...elemProps} = this.props;
 
     return (
       <SwitchContainer>
@@ -89,7 +89,7 @@ export default class Switch extends React.Component<SwitchProps> {
           tabIndex={0}
           type="checkbox"
           value={value}
-          {...otherProps}
+          {...elemProps}
         />
         <SwitchBackground checked={checked} disabled={disabled}>
           <SwitchCircle checked={checked} />

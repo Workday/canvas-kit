@@ -63,7 +63,7 @@ export default class Toast extends React.Component<ToastProps> {
       icon,
       iconColor,
       transformOrigin,
-      ...otherProps
+      ...elemProps
     } = this.props;
     return (
       <Popup
@@ -72,7 +72,7 @@ export default class Toast extends React.Component<ToastProps> {
         padding={PopupPadding.s}
         handleClose={onClose}
         closeIconSize={ButtonSizes.Small}
-        {...otherProps}
+        {...elemProps}
       >
         <ToastContentContainer onClose={onClose}>
           {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}

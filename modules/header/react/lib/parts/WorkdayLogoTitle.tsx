@@ -67,11 +67,11 @@ export class WorkdayLogoTitle extends React.Component<WorkdayLogoTitleProps> {
   };
 
   public render() {
-    const {themeColor, title, variant, ...otherProps} = this.props;
+    const {themeColor, title, variant, ...elemProps} = this.props;
 
     return (
       <LockupContainer>
-        <Lockup {...this.props} {...otherProps}>
+        <Lockup {...this.props} {...elemProps}>
           <WorkdayLogo
             {...this.props}
             dangerouslySetInnerHTML={{

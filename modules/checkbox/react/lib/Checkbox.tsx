@@ -241,7 +241,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
       onChange,
       value,
       error,
-      ...otherProps
+      ...elemProps
     } = this.props;
 
     return (
@@ -256,7 +256,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
             type="checkbox"
             value={value}
             error={error}
-            {...otherProps}
+            {...elemProps}
           />
           <CheckboxBackground checked={checked} disabled={disabled}>
             <CheckboxCheck checked={checked}>

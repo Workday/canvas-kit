@@ -151,11 +151,11 @@ export default class StatusIndicator extends React.Component<StatusIndicatorProp
   };
 
   public render() {
-    const {type, emphasis, icon, label, ...otherProps} = this.props;
+    const {type, emphasis, icon, label, ...elemProps} = this.props;
     const variant = statusIndicatorStyles.variants[type][emphasis]!;
 
     return (
-      <Container type={type} emphasis={emphasis} {...otherProps}>
+      <Container type={type} emphasis={emphasis} {...elemProps}>
         {icon && (
           <SystemIcon
             colorHover={variant.color}

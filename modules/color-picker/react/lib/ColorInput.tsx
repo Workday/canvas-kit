@@ -105,7 +105,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
       inputRef,
       disabled,
       placeholder,
-      ...otherProps
+      ...elemProps
     } = this.props;
     const formattedValue = this.formatValue(value);
 
@@ -120,7 +120,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           spellCheck={false}
           disabled={disabled}
           maxLength={7} // 7 to allow pasting with a hash
-          {...otherProps}
+          {...elemProps}
         />
         <SwatchTile
           style={{
