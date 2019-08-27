@@ -884,7 +884,12 @@ exports[`Dub Header Snapshots renders a header with SystemIcon and IconButton ch
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1598,8 +1603,14 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-10:not([disabled]):focus,
+.emotion-10:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-10:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1794,8 +1805,14 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-16:not([disabled]):focus,
+.emotion-16:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-16:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -2222,7 +2239,12 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
   fill: #b9c0c7;
 }
 
-.emotion-12:not([disabled]):focus,
+.emotion-12:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-12:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -2370,8 +2392,14 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3049,7 +3077,12 @@ exports[`Dub Header Snapshots renders a header with nav elements 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -3299,7 +3332,12 @@ exports[`Dub Header Snapshots renders a header with nav elements 2`] = `
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -4712,8 +4750,14 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   fill: #b9c0c7;
 }
 
-.emotion-16:not([disabled]):focus,
+.emotion-16:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-16:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -4860,7 +4904,12 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-10:not([disabled]):focus,
+.emotion-10:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-10:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -5974,8 +6023,14 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   fill: #b9c0c7;
 }
 
-.emotion-12:not([disabled]):focus,
+.emotion-12:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-12:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -6170,8 +6225,14 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   fill: #b9c0c7;
 }
 
-.emotion-18:not([disabled]):focus,
+.emotion-18:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-18:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -6859,8 +6920,14 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-10:not([disabled]):focus,
+.emotion-10:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-10:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -7055,8 +7122,14 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-16:not([disabled]):focus,
+.emotion-16:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-16:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -7546,7 +7619,12 @@ exports[`Full Header Snapshots renders a header with content with a search bar 1
   fill: rgba(255,255,255,0.75);
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-sqg0p9 100ms;
+  animation: animation-sqg0p9 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #ffffff;
+}
+
 .emotion-9:not([disabled]):active {
   -webkit-animation: animation-sqg0p9 100ms;
   animation: animation-sqg0p9 100ms;
@@ -8185,7 +8263,12 @@ exports[`Full Header Snapshots renders a header with nav elements 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -8438,7 +8521,12 @@ exports[`Full Header Snapshots renders a header with nav elements 2`] = `
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -9041,7 +9129,12 @@ exports[`Full Header Snapshots renders a header with system icon children 1`] = 
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;

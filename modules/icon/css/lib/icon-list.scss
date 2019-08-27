@@ -1,7 +1,12 @@
 .wdc-icon-list {
   display: flex;
-  margin-left: -$wdc-spacing-xxxs;
-  margin-right: -$wdc-spacing-xxxs;
+  > *:first-child {
+    margin-left: -$wdc-spacing-xxxs;
+  }
+
+  > *:not(:last-child) {
+    margin-right: $wdc-spacing-xxs;
+  }
 
   .wdc-icon-list-icon {
     cursor: pointer;
