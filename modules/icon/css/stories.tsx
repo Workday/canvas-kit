@@ -125,6 +125,19 @@ storiesOf('CSS/Icon', module)
         />
         <br />
         <i className="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-circle="true"
+        />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-circle="true"
+          data-circle-background="blueberry400"
+        />
       </IconDemo>
     </div>
   ))

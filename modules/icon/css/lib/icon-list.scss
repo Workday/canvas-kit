@@ -1,9 +1,18 @@
 .wdc-icon {
+  display: inline-block;
+
   &[data-category="accent"][data-transparent] {
     .french-vanilla-100 {
       fill: transparent;
     }
   }
+}
+
+.wdc-icon-circle-container {
+  align-items: center;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .wdc-icon-list {
