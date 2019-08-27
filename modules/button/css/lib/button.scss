@@ -64,7 +64,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     float: right;
   }
 
-  &:not([disabled]):not(.wdc-btn-disabled) {
+  &:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-icon-plain):not(.wdc-btn-icon-inverse):not(.wdc-btn-icon-inverse-filled) {
     &.wdc-btn-hover,
     &:hover {
       border-color: $wdc-btn-border-hover;
@@ -170,7 +170,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       fill: $wdc-btn-color-primary;
     }
 
-    &:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-icon-inverse) {
       &.wdc-btn-hover,
       &:hover {
         border-color: $wdc-btn-border-primary-hover;
