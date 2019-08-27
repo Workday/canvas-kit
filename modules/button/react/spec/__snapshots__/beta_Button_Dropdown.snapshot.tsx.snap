@@ -114,7 +114,13 @@ exports[`Button (Dropdown) Snapshots renders a large, dropdown primary button 1`
   fill: #ffffff;
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
   border-color: transparent;
   -webkit-animation: animation-1h1pob6 100ms;
@@ -394,7 +400,13 @@ exports[`Button (Dropdown) Snapshots renders a large, dropdown secondary button 
   color: #a1aab3;
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
   border-color: transparent;
   -webkit-animation: animation-1h1pob6 100ms;
@@ -576,7 +588,13 @@ exports[`Button (Dropdown) Snapshots renders a medium, dropdown primary button 1
   fill: #ffffff;
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
   border-color: transparent;
   -webkit-animation: animation-1h1pob6 100ms;
@@ -819,7 +837,13 @@ exports[`Button (Dropdown) Snapshots renders a medium, dropdown secondary button
   color: #a1aab3;
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
   border-color: transparent;
   -webkit-animation: animation-1h1pob6 100ms;

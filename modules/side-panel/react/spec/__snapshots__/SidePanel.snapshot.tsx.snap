@@ -528,7 +528,12 @@ exports[`SidePanel Snapshots renders a toggle button 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-4:not([disabled]):focus,
+.emotion-4:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-4:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -897,7 +902,12 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
   fill: #b9c0c7;
 }
 
-.emotion-4:not([disabled]):focus,
+.emotion-4:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-4:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1117,7 +1127,12 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
   fill: #b9c0c7;
 }
 
-.emotion-6:not([disabled]):focus,
+.emotion-6:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-6:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;

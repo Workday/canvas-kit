@@ -372,8 +372,14 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -975,8 +981,14 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-10:not([disabled]):focus,
+.emotion-10:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-10:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1171,8 +1183,14 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-16:not([disabled]):focus,
+.emotion-16:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-16:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1622,8 +1640,14 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   fill: #b9c0c7;
 }
 
-.emotion-21:not([disabled]):focus,
+.emotion-21:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-21:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1854,8 +1878,14 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   fill: #b9c0c7;
 }
 
-.emotion-10:not([disabled]):focus,
+.emotion-10:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-10:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -2050,8 +2080,14 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   fill: #b9c0c7;
 }
 
-.emotion-16:not([disabled]):focus,
+.emotion-16:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-16:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -2823,7 +2859,12 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
   fill: #b9c0c7;
 }
 
-.emotion-9:not([disabled]):focus,
+.emotion-9:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-9:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
