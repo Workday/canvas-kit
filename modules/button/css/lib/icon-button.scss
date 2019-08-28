@@ -41,7 +41,6 @@
       &.wdc-btn-active,
       &:active {
         background-color: $wdc-btn-icon-filled-active-bg;
-        box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
 
         .wd-icon-accent,
         .wd-icon-fill {
@@ -97,11 +96,11 @@
           &.wdc-btn-hover,
           &:hover {
             background-color: $wdc-btn-icon-hover-bg;
+          }
 
-            &.wdc-btn-active,
-            &:active {
-              background-color: $wdc-btn-icon-active-bg;
-            }
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-active-bg;
           }
         }
       }
@@ -137,11 +136,10 @@
           &.wdc-btn-hover,
           &:hover {
             background-color: $wdc-btn-icon-bg;
-
-            &.wdc-btn-active,
-            &:active {
-              background-color: $wdc-btn-icon-bg;
-            }
+          }
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-bg;
           }
         }
       }
@@ -203,6 +201,7 @@
           &:hover {
             background-color: $wdc-btn-icon-inverse-hover-bg;
           }
+
           &.wdc-btn-active,
           &:active {
             background-color: $wdc-btn-icon-inverse-active-hover-bg;
@@ -275,7 +274,8 @@
         }
       }
 
-      &:disabled {
+      &:disabled,
+      .wdc-btn-disabled {
         background-color: $wdc-btn-icon-inverse-hover-bg;
 
         .wd-icon-accent,
@@ -294,12 +294,7 @@
     &-circle-filled {
       border-radius: 999;
 
-      &:not([disabled]) {
-        &.wdc-btn-active,
-        &:active {
-          box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
-        }
-
+      &:not([disabled]):not(.wdc-btn-disabled) {
         &:focus,
         &.wdc-btn-focus {
           box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
@@ -308,10 +303,10 @@
     }
 
     &.wdc-btn-size-s {
-      width: 32px;
-      height: 32px;
-      min-width: 32px;
-      max-width: 32px;
+      width: $wdc-spacing-l;
+      height: $wdc-spacing-l;
+      min-width: $wdc-spacing-l;
+      max-width: $wdc-spacing-l;
 
       &.wdc-btn-icon {
         &,
