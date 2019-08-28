@@ -18,6 +18,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border-radius: 999;
 
     .wd-icon {
       display: inline-block;
@@ -26,37 +27,46 @@
       width: $wdc-btn-icon-size-m;
     }
 
-    &.wdc-btn-hover:not([disabled]),
-    &:hover:not([disabled]) {
-      background-color: $wdc-btn-icon-filled-hover-bg;
+    &:not([disabled]):not(.wdc-btn-disabled) {
+      &.wdc-btn-hover,
+      &:hover {
+        background-color: $wdc-btn-icon-filled-hover-bg;
 
-      .wd-icon-accent,
-      .wd-icon-fill {
-        fill: $wdc-btn-icon-hover-color;
-      }
-    }
-
-    &.wdc-btn-active:not([disabled]),
-    &:active:not([disabled]) {
-      background-color: $wdc-btn-icon-filled-active-bg;
-
-      .wd-icon-accent,
-      .wd-icon-fill {
-        fill: $wdc-btn-icon-active-color;
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-hover-color;
+        }
       }
 
-      &.wdc-btn-hover:not([disabled]),
-      &:hover:not([disabled]) {
+      &.wdc-btn-active,
+      &:active {
         background-color: $wdc-btn-icon-filled-active-bg;
+        box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
 
         .wd-icon-accent,
         .wd-icon-fill {
           fill: $wdc-btn-icon-active-color;
         }
+
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-filled-active-bg;
+
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-active-color;
+          }
+        }
+      }
+
+      &:focus,
+      &.wdc-btn-focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
       }
     }
 
-    &:disabled {
+    &:disabled,
+    .wdc-btn-disabled {
       background-color: $wdc-btn-icon-filled-disabled-bg;
 
       .wd-icon-accent,
@@ -65,12 +75,11 @@
       }
     }
 
-    &,
     &-square,
     &-circle {
       background-color: $wdc-btn-icon-bg;
 
-      &:not([disabled]) {
+      &:not([disabled]):not(.wdc-btn-disabled) {
         &.wdc-btn-hover,
         &:hover {
           background-color: $wdc-btn-icon-hover-bg;
@@ -97,7 +106,8 @@
         }
       }
 
-      &:disabled {
+      &:disabled,
+      .wdc-btn-disabled {
         background-color: $wdc-btn-icon-disabled-bg;
         .wd-icon-accent,
         .wd-icon-fill {
@@ -109,7 +119,7 @@
     &-plain {
       background-color: $wdc-btn-icon-bg;
 
-      &:not([disabled]) {
+      &:not([disabled]):not(.wdc-btn-disabled) {
         &.wdc-btn-hover,
         &:hover {
           background-color: $wdc-btn-icon-bg;
@@ -136,7 +146,8 @@
         }
       }
 
-      &:disabled {
+      &:disabled,
+      .wdc-btn-disabled {
         background-color: $wdc-btn-icon-disabled-bg;
 
         .wd-icon-accent,
@@ -153,58 +164,40 @@
         fill: $wdc-btn-icon-inverse-bg !important;
       }
 
-      &.wdc-btn-hover:not([disabled]),
-      &:hover:not([disabled]) {
-        background-color: $wdc-btn-icon-inverse-hover-bg;
-        .wd-icon-accent,
-        .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse-bg;
-        }
-      }
-
-      &.wdc-btn-active:not([disabled]),
-      &:active:not([disabled]) {
-        background-color: $wdc-btn-icon-inverse-hover-bg;
-
-        .wd-icon-accent,
-        .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse-bg;
-        }
-
-        &.wdc-btn-hover:not([disabled]),
-        &:hover:not([disabled]) {
-          background-color: $wdc-btn-icon-inverse-active-hover-bg;
-
+      &:not([disabled]):not(.wdc-btn-disabled) {
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-inverse-hover-bg;
           .wd-icon-accent,
           .wd-icon-fill {
             fill: $wdc-btn-icon-inverse-bg;
           }
         }
-      }
-
-      &:disabled {
-        background-color: transparent;
-
-        .wd-icon-accent,
-        .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse-disabled-bg !important;
-        }
-      }
-
-      &:not([disabled]) {
-        &.wdc-btn-hover,
-        &:hover {
-          background-color: $wdc-btn-icon-inverse-hover-bg;
-        }
 
         &.wdc-btn-active,
         &:active {
           background-color: $wdc-btn-icon-inverse-hover-bg;
+
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-inverse-bg;
+          }
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-inverse-active-hover-bg;
+
+            .wd-icon-accent,
+            .wd-icon-fill {
+              fill: $wdc-btn-icon-inverse-bg;
+            }
+          }
         }
 
         &:focus,
         &.wdc-btn-focus {
           background-color: transparent;
+          box-shadow: 0 0 0 0 white, 0 0 0 2px white;
 
           &.wdc-btn-hover,
           &:hover {
@@ -216,6 +209,16 @@
           }
         }
       }
+
+      &:disabled,
+      .wdc-btn-disabled {
+        background-color: transparent;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-inverse-disabled-bg !important;
+        }
+      }
     }
 
     &-inverse-filled {
@@ -225,31 +228,49 @@
         fill: $wdc-btn-icon-inverse-bg !important;
       }
 
-      &.wdc-btn-hover:not([disabled]),
-      &:hover:not([disabled]) {
-        background-color: $wdc-btn-icon-inverse-filled-hover-bg;
-        .wd-icon-accent,
-        .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse-bg;
-        }
-      }
-
-      &.wdc-btn-active:not([disabled]),
-      &:active:not([disabled]) {
-        background-color: $wdc-btn-icon-inverse-filled-bg;
-
-        .wd-icon-accent,
-        .wd-icon-fill {
-          fill: $wdc-btn-icon-inverse-bg;
-        }
-
-        &.wdc-btn-hover:not([disabled]),
-        &:hover:not([disabled]) {
+      &:not([disabled]):not(.wdc-btn-disabled) {
+        &.wdc-btn-hover,
+        &:hover {
           background-color: $wdc-btn-icon-inverse-filled-hover-bg;
 
           .wd-icon-accent,
           .wd-icon-fill {
             fill: $wdc-btn-icon-inverse-bg;
+          }
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-icon-inverse-filled-bg;
+
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-inverse-bg;
+          }
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-inverse-filled-hover-bg;
+
+            .wd-icon-accent,
+            .wd-icon-fill {
+              fill: $wdc-btn-icon-inverse-bg;
+            }
+          }
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          background-color: $wdc-btn-icon-inverse-filled-bg;
+          box-shadow: 0 0 0 0 white, 0 0 0 2px white;
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-inverse-filled-bg;
+          }
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-inverse-filled-hover-bg;
           }
         }
       }
@@ -262,51 +283,11 @@
           fill: $wdc-btn-icon-inverse-disabled-bg !important;
         }
       }
-
-      &:not([disabled]) {
-        &.wdc-btn-hover,
-        &:hover {
-          background-color: $wdc-btn-icon-inverse-filled-hover-bg;
-        }
-
-        &.wdc-btn-active,
-        &:active {
-          background-color: $wdc-btn-icon-inverse-filled-bg;
-        }
-
-        &:focus,
-        &.wdc-btn-focus {
-          background-color: $wdc-btn-icon-inverse-filled-bg;
-
-          &.wdc-btn-hover,
-          &:hover {
-            background-color: $wdc-btn-icon-inverse-filled-bg;
-          }
-          &.wdc-btn-active,
-          &:active {
-            background-color: $wdc-btn-icon-inverse-filled-hover-bg;
-          }
-        }
-      }
     }
 
     &-square,
     &-square-filled {
       border-radius: $wdc-btn-icon-border-radius;
-    }
-
-    border-radius: 999;
-
-    &:not([disabled]) {
-      &.wdc-btn-active,
-      &:active {
-        box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
-      }
-
-      &:focus,
-      &.wdc-btn-focus {
-        box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
-      }
     }
 
     &-circle,
