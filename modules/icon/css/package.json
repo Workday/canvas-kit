@@ -8,7 +8,7 @@
     "dist",
     "lib"
   ],
-  "style": "dist/canvas-kit-css-icon-list.min.css",
+  "style": "dist/canvas-kit-css-icon.min.css",
   "main": "dist/canvas-kit-css-icon.min.js",
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ../../../utils/js-build.js lib/canvas-kit-css-icon.js"
+    "build": "node ../../../utils/js-build.js lib/canvas-kit-css-icon.js && node ../../../utils/css-build.js index.scss"
   },
   "keywords": [
     "canvas",

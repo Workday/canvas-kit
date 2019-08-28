@@ -6,6 +6,7 @@ import {css} from 'emotion';
 import {colors} from '../../core/react/index';
 // @ts-ignore
 import initializeIcons from './lib/canvas-kit-css-icon';
+import './index.scss';
 
 const containerStyle = css({
   margin: '0 !important',
