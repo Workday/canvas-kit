@@ -34,6 +34,7 @@ const CheckboxContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
   height: checkboxContainerHeight,
+  position: 'relative',
 });
 
 /**
