@@ -126,9 +126,6 @@ storiesOf('CSS/Button/Icon Button', module)
   .add('Square', () => (
     <div className="story">
       <h3>Medium Square</h3>
-      <button className="wdc-btn-icon" aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />
-      </button>
       <button className="wdc-btn-icon-square" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </button>
@@ -172,7 +169,7 @@ storiesOf('CSS/Button/Icon Button', module)
   ))
   .add('Plain', () => (
     <div className="story">
-      <h3>Medium Inverse</h3>
+      <h3>Medium Plain</h3>
 
       <button className="wdc-btn-icon-plain" aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
