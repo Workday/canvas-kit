@@ -79,8 +79,6 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     &.wdc-btn-active,
     &:active {
       background-color: $wdc-btn-bg-active;
-      box-shadow: 0 0 0 2px $wdc-btn-border-active;
-      border-color: $wdc-btn-border-active;
     }
 
     &:focus,
@@ -92,11 +90,11 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       &.wdc-btn-hover,
       &:hover {
         background-color: $wdc-btn-bg-hover;
+      }
 
-        &.wdc-btn-active,
-        &:active {
-          background-color: $wdc-btn-bg-active;
-        }
+      &.wdc-btn-active,
+      &:active {
+        background-color: $wdc-btn-bg-active;
       }
     }
   }
@@ -201,11 +199,11 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
         &:hover {
           border-color: $wdc-btn-border-primary-active;
           background-color: $wdc-btn-bg-primary-hover;
+        }
 
-          &.wdc-btn-active,
-          &:active {
-            background-color: $wdc-btn-bg-primary;
-          }
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-bg-primary;
         }
       }
     }

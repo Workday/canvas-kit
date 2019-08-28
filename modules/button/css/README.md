@@ -204,8 +204,8 @@ applied to form controls using the classes below.
 | Square              | `.wdc-btn-icon-square`                  | Square, white background, dark gray icon         |
 | Square Filled       | `.wdc-btn-icon-square-filled`           | Square, gray background, dark gray icon          |
 | Plain               | `.wdc-btn-icon-plain`                   | Dark gray icon                                   |
-| Inverse             | `.wdc-btn-icon-plain`                   | Circular, transparent background, white icon     |
-| Inverse             | `.wdc-btn-icon-plain`                   | Circular, semitransparent background, white icon |
+| Inverse             | `.wdc-btn-icon-inverse`                 | Circular, transparent background, white icon     |
+| Inverse Filled      | `.wdc-btn-icon-inverse-filled`          | Circular, semitransparent background, white icon |
 
 ### Dropdown Button
 
