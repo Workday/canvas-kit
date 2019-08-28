@@ -15,38 +15,6 @@ const containerStyle = css({
   },
 });
 
-class OldIconDemo extends Component {
-  componentDidMount() {
-    initializeIcons();
-  }
-
-  render() {
-    return (
-      <div>
-        <i
-          className="wdc-icon"
-          data-icon="activityStream"
-          data-category="system"
-          data-fill-color="blueberry"
-          data-accent-color="blueberry"
-          data-background-color="transparent"
-        />
-        <i
-          className="wdc-icon"
-          data-icon="activityStream"
-          data-category="system"
-          data-fill-color="cinnamon300"
-          data-accent-color="cinnamon300"
-          data-background-color="transparent"
-        />
-        <i className="wdc-icon" data-icon="activityStream" data-category="system" />
-        <i className="wdc-icon" data-icon="apple" data-category="accent" data-color="chiliMango" />
-        <i className="wdc-icon" data-icon="rocket" data-category="applet" data-hue="cinnamon" />
-      </div>
-    );
-  }
-}
-
 class IconDemo extends Component {
   componentDidMount() {
     initializeIcons();
@@ -139,10 +107,5 @@ storiesOf('CSS/Icon', module)
           data-circle-background="blueberry400"
         />
       </IconDemo>
-    </div>
-  ))
-  .add('All', () => (
-    <div className="story">
-      <OldIconDemo />
     </div>
   ));
