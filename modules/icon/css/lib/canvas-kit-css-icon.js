@@ -104,7 +104,8 @@ function colorIcons(selector) {
 }
 
 function sizeIcons(selector) {
-  const icons = document.querySelectorAll(selector);
+  // Do not size system icon circles (they'll be sized in styleSystemIcons)
+  const icons = document.querySelectorAll(`${selector}:not([data-circle])`);
 
   icons.forEach(i => {
     const size = i.getAttribute('data-size');
@@ -115,10 +116,22 @@ function sizeIcons(selector) {
   });
 }
 
-function circleIcons(selector) {
-  const icons = document.querySelectorAll(selector);
+function styleAccentIcons(selector) {
+  // Style transparent accent icons
+  const transparentIconBgs = document.querySelectorAll(
+    `${selector}[data-category="accent"][data-transparent] .french-vanilla-100`
+  );
 
-  icons.forEach(i => {
+  transparentIconBgs.forEach(bg => {
+    bg.style.fill = 'transparent';
+  });
+}
+
+function styleSystemIcons(selector) {
+  // Style system icon circles
+  const iconCircles = document.querySelectorAll(`${selector}[data-category="system"][data-circle]`);
+
+  iconCircles.forEach(i => {
     const circle = document.createElement('div');
     circle.setAttribute('class', 'wdc-icon-circle-container');
 
@@ -129,7 +142,7 @@ function circleIcons(selector) {
     i.style.width = `${size * 0.625}px`;
 
     let circleBgColor = i.getAttribute('data-circle-background') || 'soap300';
-    circleBgColor = getColor(circleBgColor);
+    circleBgColor = getColor(circleBgColor) || circleBgColor;
     circle.style.backgroundColor = circleBgColor;
 
     const iconColor = pickForegroundColor(circleBgColor, 'rgba(0,0,0,0.65)');
@@ -152,14 +165,13 @@ function injectIcons(iconsPath = null, selector = '.wdc-icon') {
   });
 
   SVGInjector(icons, {}, () => {
-    // Do not size system icon circles (they'll be sized later in circleIcons)
-    sizeIcons('.wdc-icon:not([data-circle])');
+    sizeIcons(selector);
 
-    // Add markup and styling for system icon circles
-    circleIcons('.wdc-icon[data-circle][data-category="system"]');
+    styleAccentIcons(selector);
+    styleSystemIcons(selector);
 
-    // colorIcons must be called AFTER circleIcons (since circleIcons applies
-    // coloring via the data-* attributes)
+    // colorIcons must be called at the end of this block (since previous calls
+    // in this block may have adjusted coloring)
     colorIcons(selector);
   });
 }
