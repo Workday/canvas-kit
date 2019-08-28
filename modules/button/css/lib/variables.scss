@@ -62,20 +62,21 @@ $wdc-btn-split-icon-padding-v: ($wdc-btn-height-l - $wdc-btn-split-icon-height)/
 $wdc-btn-split-icon-padding: $wdc-btn-split-icon-padding-v $wdc-spacing-xxs
   $wdc-btn-split-icon-padding-v $wdc-spacing-xxxs;
 
-$wdc-btn-icon-inverse-bg: $wdc-color-french-vanilla-100;
+$wdc-btn-icon-inverse-bg: transparent;
 $wdc-btn-icon-inverse-hover-bg: rgba(0, 0, 0, 0.2);
-$wdc-btn-icon-inverse-active-hover-bg: rgba(0, 0, 0, 0.4);
-$wdc-btn-icon-inverse-disabled-bg: rgba(255, 255, 255, 0.75);
+$wdc-btn-icon-inverse-active-bg: rgba(0, 0, 0, 0.4);
 
 $wdc-btn-icon-inverse-filled-bg: rgba(0, 0, 0, 0.2);
-$wdc-btn-icon-inverse-filled-hover-bg: rgba(0, 0, 0, 0.4);
+$wdc-btn-icon-inverse-filled-hover-bg: rgba(0, 0, 0, 0.3);
+$wdc-btn-icon-inverse-filled-active-bg: rgba(0, 0, 0, 0.4);
 
-$wdc-btn-icon-bg: $wdc-color-french-vanilla-100;
+$wdc-btn-icon-bg: transparent;
 $wdc-btn-icon-hover-bg: $wdc-color-soap-300;
 $wdc-btn-icon-active-bg: $wdc-color-soap-500;
 $wdc-btn-icon-focus-bg: $wdc-color-french-vanilla-100;
 $wdc-btn-icon-disabled-bg: rgba(255, 255, 255, 0.75);
 
+$wdc-btn-icon-filled-bg: $wdc-color-soap-200;
 $wdc-btn-icon-filled-hover-bg: $wdc-color-soap-400;
 $wdc-btn-icon-filled-active-bg: $wdc-color-soap-500;
 $wdc-btn-icon-filled-disabled-bg: $wdc-color-soap-100;
@@ -84,6 +85,8 @@ $wdc-btn-icon-color: $wdc-color-licorice-200;
 $wdc-btn-icon-hover-color: $wdc-color-licorice-500;
 $wdc-btn-icon-active-color: $wdc-color-licorice-600;
 $wdc-btn-icon-disabled-color: $wdc-color-soap-600;
+$wdc-btn-icon-inverse-color: $wdc-color-french-vanilla-100;
+$wdc-btn-icon-inverse-disabled-color: rgba(255, 255, 255, 0.75);
 
 $wdc-btn-icon-width: $wdc-spacing-xl;
 $wdc-btn-icon-height: $wdc-spacing-xl;
