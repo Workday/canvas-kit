@@ -1,48 +1,48 @@
 @keyframes popupAnimationTopCenter {
   from {
     opacity: 0;
-    transform: translate(-50%, $wdc-spacing-xxxs);
+    transform: translate(0, -50%);
   }
 
   to {
     opacity: 1;
-    transform: translate(-50%, 0px);
+    transform: translate(0);
   }
 }
 
 @keyframes popupAnimationRightCenter {
   from {
     opacity: 0;
-    transform: translate(-$wdc-spacing-xxxs, -50%);
+    transform: translate(-50%, 0);
   }
 
   to {
     opacity: 1;
-    transform: translate(0px, -50%);
+    transform: translate(0);
   }
 }
 
 @keyframes popupAnimationLeftCenter {
   from {
     opacity: 0;
-    transform: translate($wdc-spacing-xxxs, -50%);
+    transform: translate(50%, 0);
   }
 
   to {
     opacity: 1;
-    transform: translate(0px, -50%);
+    transform: translate(0);
   }
 }
 
 @keyframes popupAnimationBottomCenter {
   from {
     opacity: 0;
-    transform: translate(-50%, -$wdc-spacing-xxxs);
+    transform: translate(0, 50%);
   }
 
   to {
     opacity: 1;
-    transform: translate(-50%, 0px);
+    transform: translate(0);
   }
 }
 
@@ -57,6 +57,7 @@
   max-width: $_wdc-popup-max-width;
   animation-duration: 150ms;
   animation-timing-function: ease-out;
+  position: absolute;
 
   .wdc-popup-close {
     position: absolute;
@@ -73,22 +74,22 @@
     @include wdc-type-body();
   }
 
-  &-top-center {
+  &-animation-origin-top-center {
     animation-name: popupAnimationTopCenter;
     transform-origin: top center;
   }
 
-  &-right-center {
+  &-animation-origin-right-center {
     animation-name: popupAnimationRightCenter;
     transform-origin: right center;
   }
 
-  &-bottom-center {
+  &-animation-origin-bottom-center {
     animation-name: popupAnimationBottomCenter;
     transform-origin: bottom center;
   }
 
-  &-left-center {
+  &-animation-origin-left-center {
     animation-name: popupAnimationLeftCenter;
     transform-origin: left center;
   }
@@ -104,6 +105,10 @@
     width: auto;
     min-width: $_wdc-popup-menu-min-width;
   }
+}
+
+.wdc-popup-container {
+  position: relative;
 }
 
 .wdc-popup.wdc-popup-no-padding {
