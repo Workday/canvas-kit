@@ -32,6 +32,7 @@ const RadioContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
   height: radioContainerHeight,
+  position: 'relative',
 });
 
 /**
