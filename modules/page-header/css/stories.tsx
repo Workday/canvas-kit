@@ -14,10 +14,10 @@ storiesOf('CSS/Page Header', module)
         <div className="wdc-page-header-container wdc-page-header-cap-width">
           <h2 className="wdc-page-header-title">Product Context</h2>
           <div className="wdc-icon-list">
-            <button className="wdc-btn-icon-inverse" role="button" tabIndex={0}>
+            <button className="wdc-btn-icon-inverse">
               <SystemIcon icon={exportIcon} />
             </button>
-            <button className="wdc-btn-icon-inverse" role="button" tabIndex={0}>
+            <button className="wdc-btn-icon-inverse">
               <SystemIcon icon={fullscreenIcon} />
             </button>
           </div>

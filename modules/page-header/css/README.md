@@ -56,3 +56,10 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
   </div>
 </header>
 ```
+
+### Breakpoint
+
+> The default breakpoint at which the header's container spacing increases from 's' size to 'xl'
+> size.
+
+Default: `768px`

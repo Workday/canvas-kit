@@ -1,3 +1,5 @@
+$_wdc-page-header-tablet-breakpoint: 768px !default;
+
 .wdc-page-header {
   height: 84px;
   background-image: linear-gradient(
@@ -12,7 +14,11 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    padding: 0 $wdc-spacing-xl;
+    padding: 0 $wdc-spacing-s;
+
+    @media (min-width: $_wdc-page-header-tablet-breakpoint) {
+      padding: 0 $wdc-spacing-xl;
+    }
   }
 
   .wdc-page-header-title {
