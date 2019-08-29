@@ -51,11 +51,72 @@ Icon name in camelCase.
 
 ##### `data-category`
 
-The category of the icon. Must be one of the following: `system`, `accent`, `applet`.
+The category of the icon. Must be one of the following: `accent`, `applet`, or `system`.
+
+### Sizing
+
+```html
+<i className="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
+```
+
+##### `data-size`
+
+Set this attribute to render the icon in a particular size instead of the default size.
+
+## Accent Icons
 
 ### Coloring
 
-#### System Icons
+Accent icons may be colored in 1 color.
+
+```html
+<i className="wdc-icon" data-icon="apple" data-category="accent" data-color="cinnamon300" />
+
+<-- Shorthand Coloring -->
+<i className="wdc-icon" data-icon="apple" data-category="accent" data-color="chiliMango" />
+```
+
+##### `data-color`
+
+See [System Icons coloring](#system-icons).
+
+### Transparency
+
+```html
+<i
+  className="wdc-icon"
+  data-icon="shield"
+  data-category="accent"
+  data-color="frenchVanilla100"
+  data-transparent="true"
+/>
+```
+
+##### `data-transparent`
+
+Set this attribute to render a transparent accent icon background instead of the default white.
+
+## Applet Icons
+
+### Coloring
+
+Applet icons are colored by hues (e.g. blueberry). Selecting a hue will apply the proper color
+shades to the applet.
+
+```html
+<i className="wdc-icon" data-icon="rocket" data-category="applet" data-color="cinnamon" />
+```
+
+##### `data-color`
+
+> Applet icons only support base hues and will not accept shades.
+
+Use a hue in the [Canvas palette](https://design.workday.com/resources/colors). Hue must be written
+in camelCase. For example, `cinnamon`.
+
+## System Icons
+
+### Coloring
 
 System icons contain up to 3 layers that can be colored independently.
 
@@ -80,9 +141,7 @@ System icons contain up to 3 layers that can be colored independently.
 />
 ```
 
-**`data-fill-color`  
-`data-accent-color`  
-`data-background-color`**
+##### `data-fill-color`, `data-accent-color`, `data-background-color`
 
 Use a color in the [Canvas palette](https://design.workday.com/resources/colors). Color must be
 written in camelCase.
@@ -92,36 +151,29 @@ the 500 weight (e.g. `blueberry500`).
 
 A custom color value (e.g. `#FFFFFF`) may also be used.
 
-#### Accent Icons
-
-Accent icons may be colored in 1 color.
+### System Icon Circles
 
 ```html
-<i className="wdc-icon" data-icon="apple" data-category="accent" data-color="cinnamon300" />
-
-<-- Shorthand Coloring -->
-<i className="wdc-icon" data-icon="apple" data-category="accent" data-color="chiliMango" />
+<i
+  className="wdc-icon"
+  data-icon="activityStream"
+  data-category="system"
+  data-circle="true"
+  data-circle-background="blueberry400"
+/>
 ```
 
-**`data-color`**
+##### `data-circle`
+
+Set this attribute to render a system icon with a colored circular background. The icon color will
+be determined based on contrast with the provided background color.
+
+##### `data-circle-background`
+
+Set this attribute to render the circular background in a different color instead of the default
+gray.
 
 See [System Icons coloring](#system-icons).
-
-#### Applet Icons
-
-Applet icons are colored by hues (e.g. blueberry). Selecting a hue will apply the proper color
-shades to the applet.
-
-```html
-<i className="wdc-icon" data-icon="rocket" data-category="applet" data-color="cinnamon" />
-```
-
-**`data-color`**
-
-> Applet icons only support base hues and will not accept shades.
-
-Use a hue in the [Canvas palette](https://design.workday.com/resources/colors). Hue must be written
-in camelCase. For example, `cinnamon`.
 
 ## Injection Configuration
 
