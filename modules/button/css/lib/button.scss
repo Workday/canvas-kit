@@ -64,7 +64,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     float: right;
   }
 
-  &:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-icon-plain):not(.wdc-btn-icon-inverse):not(.wdc-btn-icon-inverse-filled) {
+  &:not([disabled]):not(.wdc-btn-disabled) {
     &.wdc-btn-hover,
     &:hover {
       border-color: $wdc-btn-border-hover;
