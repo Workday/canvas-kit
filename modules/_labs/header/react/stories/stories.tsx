@@ -5,16 +5,20 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import styled from '@emotion/styled';
+import { action } from '@storybook/addon-actions';
 import chroma from 'chroma-js';
+
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {AvatarButton} from '../../../../avatar/react/index';
 import {colors, spacing} from '../../../../core/react/index';
 import {Button, IconButton} from '../../../../button/react/index';
-import {GlobalHeader, Header, DubLogoTitle, WorkdayLogoTitle, HeaderVariant} from '../index';
+import {MenuItem} from '../../../menu/react/index';
+import {GlobalHeader, Header, DubLogoTitle, WorkdayLogoTitle, HeaderVariant, SearchBar, SearchBarProps, HeaderHeight, HeaderTheme} from '../index';
 
 import README from '../README.md';
 import bgImg from '../static/workday-bg.jpg';
+import {boolean, withKnobs} from "@storybook/addon-knobs";
 
 const containerStyle = css({
   backgroundColor: colors.soap100,
@@ -36,15 +40,16 @@ const backgroundStyle = css({
 const Link = styled('a')<{to: string}>({});
 
 const handleMenuClickTest = (e: React.SyntheticEvent) => {
-  alert(`Menu clicked!`);
+  action(`Menu clicked! ${e.target}`)();
 };
 
 const handleAvatarClickTest = (e: React.SyntheticEvent) => {
-  alert(`Avatar clicked!`);
+  action(`Avatar clicked! ${e.target}`);
 };
 
-const handleSearchSubmitTest = (query: string) => {
-  alert(`You searched for "${query}"!`);
+const handleSearchSubmitTest = (e: React.SyntheticEvent) => {
+  const formInputValue = (e.target as HTMLFormElement).getElementsByTagName('input')[0].value;
+  action(`search submitted ${formInputValue}`)();
 };
 
 const nav = (
@@ -68,6 +73,7 @@ const nav = (
 
 storiesOf('Labs/Header/React', module)
   .addDecorator(withReadme(README))
+  .addDecorator(withKnobs)
   .add('Global Header', () => (
     <div className="story">
       <div css={containerStyle}>
@@ -83,7 +89,9 @@ storiesOf('Labs/Header/React', module)
               url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
             />
           }
-          onSearchSubmit={handleSearchSubmitTest}
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          isCollapsed={boolean('isCollapsed', false)}
+          onMenuClick={handleMenuClickTest}
         >
           <IconButton
             icon={notificationsIcon}
@@ -108,8 +116,8 @@ storiesOf('Labs/Header/React', module)
         <GlobalHeader
           brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}
           menuToggle={<AvatarButton onClick={handleMenuClickTest} />}
-          onSearchSubmit={handleSearchSubmitTest}
-          breakpoint={700}
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          isCollapsed={boolean('isCollapsed', false)}
         >
           <IconButton
             icon={notificationsIcon}
@@ -127,7 +135,11 @@ storiesOf('Labs/Header/React', module)
         </GlobalHeader>
       </div>
       <div css={containerStyle}>
-        <GlobalHeader onSearchSubmit={handleSearchSubmitTest} onMenuClick={handleMenuClickTest}>
+        <GlobalHeader
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          onMenuClick={handleMenuClickTest}
+          isCollapsed={boolean('isCollapsed', false)}
+        >
           <IconButton
             icon={notificationsIcon}
             variant={IconButton.Variant.Circle}
@@ -148,10 +160,18 @@ storiesOf('Labs/Header/React', module)
   .add('Dub Header', () => (
     <div className="story">
       <div css={containerStyle}>
-        <Header title="Required" onSearchSubmit={handleSearchSubmitTest} />
+        <Header
+          title="Required"
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          isCollapsed={boolean('isCollapsed', false)}/>
       </div>
       <div css={containerStyle}>
-        <Header title="Icons Only" brandUrl="#" onSearchSubmit={handleSearchSubmitTest}>
+        <Header
+          title="Icons Only"
+          brandUrl="#"
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          isCollapsed={boolean('isCollapsed', false)}
+        >
           <IconButton
             variant={IconButton.Variant.Circle}
             icon={notificationsIcon}
@@ -174,7 +194,8 @@ storiesOf('Labs/Header/React', module)
           themeColor={Header.Theme.Blue}
           brandUrl="#"
           onMenuClick={handleMenuClickTest}
-          onSearchSubmit={handleSearchSubmitTest}
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
           <IconButton
@@ -201,7 +222,8 @@ storiesOf('Labs/Header/React', module)
             />
           }
           brandUrl="#"
-          onSearchSubmit={handleSearchSubmitTest}
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
           <IconButton
@@ -227,7 +249,8 @@ storiesOf('Labs/Header/React', module)
           themeColor={Header.Theme.White}
           centeredNav={true}
           brandUrl="#"
-          onSearchSubmit={handleSearchSubmitTest}
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
           <IconButton
@@ -252,7 +275,8 @@ storiesOf('Labs/Header/React', module)
           title="Transparent"
           themeColor={Header.Theme.Transparent}
           brandUrl="#"
-          onSearchSubmit={handleSearchSubmitTest}
+          leftSlot={<SearchBar onSubmit={handleSearchSubmitTest} />}
+          isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
           <IconButton
@@ -275,7 +299,7 @@ storiesOf('Labs/Header/React', module)
   .add('Full Header', () => (
     <div className="story">
       <div css={containerStyle}>
-        <Header variant={Header.Variant.Full} />
+        <Header variant={Header.Variant.Full} isCollapsed={boolean('isCollapsed', false)} />
       </div>
       <div css={containerStyle}>
         <Header
@@ -283,6 +307,7 @@ storiesOf('Labs/Header/React', module)
           title="Design"
           themeColor={Header.Theme.White}
           brandUrl="#"
+          isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
         </Header>
@@ -295,6 +320,7 @@ storiesOf('Labs/Header/React', module)
           themeColor={Header.Theme.Blue}
           brandUrl="#"
           onMenuClick={handleMenuClickTest}
+          isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
           <IconButton
@@ -309,7 +335,10 @@ storiesOf('Labs/Header/React', module)
       </div>
       <br />
       <div css={containerStyle}>
-        <Header variant={Header.Variant.Full} title="" themeColor={Header.Theme.Blue} brandUrl="#">
+        <Header variant={Header.Variant.Full} title=""
+                themeColor={Header.Theme.Blue} brandUrl="#"
+                isCollapsed={boolean('isCollapsed', false)}
+        >
           {nav}
           <IconButton
             variant={IconButton.Variant.Inverse}
@@ -327,6 +356,7 @@ storiesOf('Labs/Header/React', module)
           title="Transparent"
           themeColor={Header.Theme.Transparent}
           brandUrl="#"
+          isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
           <IconButton
@@ -346,6 +376,7 @@ storiesOf('Labs/Header/React', module)
           themeColor={Header.Theme.White}
           centeredNav={true}
           brandUrl="#"
+          isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
           <IconButton
@@ -372,6 +403,7 @@ storiesOf('Labs/Header/React', module)
         themeColor={Header.Theme.Blue}
         brandUrl="#"
         onMenuClick={handleMenuClickTest}
+        isCollapsed={boolean('isCollapsed', false)}
       >
         {nav}
         <IconButton
@@ -383,10 +415,10 @@ storiesOf('Labs/Header/React', module)
         <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
         <Button variant={Button.Variant.Primary}>Download</Button>
       </Header>
-      <Header title="Nav Collapses Later" breakpoints={{sm: 320, md: 420, lg: 768}}>
+      <Header title="Nav Collapses Later" isCollapsed={boolean('isCollapsed', false)}>
         {nav}
       </Header>
-      <Header title="Nav Collapses Earlier" breakpoints={{sm: 320, md: 768, lg: 1280}}>
+      <Header title="Nav Collapses Earlier" isCollapsed={boolean('isCollapsed', false)}>
         {nav}
         <IconButton
           variant={IconButton.Variant.Circle}
@@ -397,9 +429,7 @@ storiesOf('Labs/Header/React', module)
         <Button variant={Button.Variant.Primary}>Download</Button>
       </Header>
       <Header
-        title="Icons Drop Later"
-        breakpoints={{...Header.defaultProps.breakpoints, md: 640, lg: 1140}}
-      >
+        title="Icons Drop Later" isCollapsed={boolean('isCollapsed', false)}>
         <IconButton
           variant={IconButton.Variant.Circle}
           icon={notificationsIcon}
@@ -415,4 +445,50 @@ storiesOf('Labs/Header/React', module)
         <Button variant={Button.Variant.Primary}>Logout</Button>
       </Header>
     </div>
-  ));
+  ))
+  .add('Search Form', () => {
+    const searchId = 'searchInputId'
+    class Search extends React.Component<SearchBarProps, { currentText: string }> {
+      state = {
+        currentText: '',
+      };
+
+      autocompleteCallback = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        this.setState({ currentText: event.target.value });
+      };
+
+      render() {
+        const autocompleteResult = (textModifier: string) => (
+          <MenuItem onClick={action(`Clicked Result ${textModifier}`)}>
+            Result <span>num<span>ber</span></span> {textModifier}
+          </MenuItem>
+        );
+        return (
+          <SearchBar
+            {...this.props}
+            autocompleteItems={
+              Array.apply(null, Array(this.state.currentText.length))
+                .map((x: any, i: string) => autocompleteResult(i))
+                .splice(0, 5)
+            }
+            onInputChange={this.autocompleteCallback}
+            placeholder={`Search with Autocomplete`}
+            accessibleId={searchId}
+          />
+        )
+      }
+    }
+    return (
+      <Search
+        themeColor={HeaderTheme.White}
+        headerHeight={HeaderHeight.Small}
+        placeholder='Search'
+        accessibleLabel='Search'
+        showClearButton={true}
+        onSubmit={(event) => {
+          const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value
+          action(`search submitted ${formInputValue}`)()
+        }}
+      />
+    )
+  });

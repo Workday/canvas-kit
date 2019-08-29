@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@workday/canvas-kit-react-button": "^3.0.0-beta.1",
+    "@workday/canvas-kit-react-combobox": "^3.0.0-beta.1",
     "@workday/canvas-kit-react-common": "^3.0.0-beta.1",
     "@workday/canvas-kit-react-core": "^3.0.0-beta.1",
     "@workday/canvas-kit-react-icon": "^3.0.0-beta.1",
@@ -50,6 +51,7 @@
     "react-transition-group": "^2.5.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react-avatar": "^3.0.0-beta.1"
+    "@workday/canvas-kit-react-avatar": "^3.0.0-beta.1",
+    "@workday/canvas-kit-react-form-field": "^3.0.0-beta.1"
   }
 }

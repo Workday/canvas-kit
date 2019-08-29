@@ -4,8 +4,8 @@
  * the breakpoint size and the value is the min-width of that breakpoint
  * @returns {Object} A set of CSS media queries for each breakpoint size
  */
-export const makeMq = (breakpoints: {[key: string]: number}) => {
-  const mq: {[key: string]: string} = {};
+export const makeMq = (breakpoints: { [key: string]: number }) => {
+  const mq: { [key: string]: string } = {};
 
   Object.keys(breakpoints).forEach(key => {
     mq[key] = `@media (min-width: ${breakpoints[key]}px)`;

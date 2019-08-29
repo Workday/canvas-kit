@@ -35,7 +35,7 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    transition: 'background-color 80ms',
+    transition: 'background-color 80ms, color 80ms',
     '&:focus': {
       outline: 'none',
     },

@@ -161,35 +161,11 @@ Default: `DubLogoTitle` (for "Dub" variants) or `WorkdayLogoTitle` (for "Full" v
 
 ---
 
-#### `breakpoints: { sm: number, md: number, lg: number }`
+#### `isCollapsed: boolean`
 
-> The min-width breakpoints at which to collapse the children of the header.
+> Indicates whether the children in the header should be collapsed.
 >
-> Special children collapse in this order:
->
-> - The `nav` element collapses into a hamburger icon menu after the screen width falls below the
->   `lg` breakpoint
-> - Any `IconButton` or `SystemIcon` collapses after the screen width falls below the `md`
->   breakpoint
-> - _`sm` may be reserved for future functionality_
-
-Default:
-
-```tsx
-{
-  sm: 320,
-  md: 768,
-  lg: 1120,
-}
-```
-
----
-
-#### `searchLabel: string`
-
-> Default placeholder text for search
-
-Default: 'Search'
+> - The `nav` element collapses into a hamburger icon menu. Any `IconButton` or `SystemIcon` will also collapse.
 
 ---
 
@@ -213,11 +189,6 @@ Default: 'Search'
 > A flag to highlight the search on the left beside the logo. Will only work if `onSearchSubmit` is
 > provided.
 
-#### `onBreakpointChange: (BreakpointType | string) => void`
-
-> If specified, this callback is executed after the screen size changes with the new breakpoint key.
-> It also gets called on initialization so the consumer has the original breakpoint
-
 # Global Header
 
 The Global Header (or App Header) is used for Workday applications.
@@ -235,7 +206,6 @@ const HeaderBrand = () => <DubLogoTitle themeColor={Header.Theme.White} />
 const HeaderAvatar = () => <AvatarButton onClick={handleMenuClick} url="https://my.cdn.amazonaws.com/assets/avatar_pic.png" />
 const handleSearchSubmit = query => console.log("Submitted query: ", query)
 const openMenu = e => console.log("Menu opened")
-const handleBreakpointChange = key => console.log(`Breakpoint change: ${key}`)
 
 /**
  * In this instance, the right-most child will be an AvatarButton component, when the GlobalHeader
@@ -247,8 +217,7 @@ const handleBreakpointChange = key => console.log(`Breakpoint change: ${key}`)
   menuToggle={<HeaderAvatar />}
   onMenuClick={openMenu}
   onSearchSubmit={handleSearchSubmit}
-  breakpoint={720}
-  onBreakpointChange={handleBreakpointChange}
+  isCollapsed={false}
 >
   <IconButton icon={notificationsIcon} variant={IconButton.Variant.Circle} />
   <IconButton icon={inboxIcon} variant={IconButton.Variant.Circle} />
@@ -295,10 +264,9 @@ Default: `<DubLogoTitle />`
 > A function that accepts a `React.SyntheticEvent` for when the user submits from the search input.
 > A search input will not be rendered if this is not provided.
 
-#### `onBreakpointChange: (BreakpointType | string) => void`
+#### `isCollapsed: boolean`
 
-> If specified, this callback is executed after the screen size changes with the new breakpoint key.
-> It also gets called on initialization so the consumer has the original breakpoint
+> If true, renders the header with the children collapsed.
 
 # "Dub" Logo and Title
 
