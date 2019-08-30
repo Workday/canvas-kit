@@ -58,6 +58,7 @@ cat > $packageJson << EOF
     "index.ts"
   ],
   "scripts": {
+    "watch": "yarn build:es6 -w",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
