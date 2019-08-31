@@ -2,7 +2,7 @@ import SVGInjector from 'svg-injector';
 import toSlug from 'to-slug-case';
 import canvasColors from '@workday/canvas-colors-web';
 import {pickForegroundColor} from '@workday/canvas-kit-react-common';
-import {getHue, getColor} from './utils';
+import {appendStyle, getHue, getColor} from './utils';
 
 const cdnUrl = 'https://design.workdaycdn.com/beta/assets/web-icons';
 
@@ -151,6 +151,76 @@ function styleSystemIcons(selector) {
 
     circle.innerHTML = i.outerHTML;
     i.parentNode.replaceChild(circle, i);
+  });
+
+  styleSystemIconDefaultHovers(selector);
+  styleSystemIconCustomHovers(selector);
+}
+
+function styleSystemIconDefaultHovers(selector) {
+  const hoverSelector = `${selector}[data-category="system"]:not([data-circle]):hover`;
+
+  appendStyle(`
+    ${hoverSelector} .wd-icon-background {
+      fill: transparent;
+    }
+
+    ${hoverSelector} .wd-icon-accent,
+    ${hoverSelector} .wd-icon-fill {
+      fill: ${canvasColors.primary.iconHover};
+    }
+  `);
+}
+
+function styleSystemIconCustomHovers(selector) {
+  let HOVER_ID = 0;
+
+  const hoverableSystemIcons = document.querySelectorAll(
+    `${selector}[data-category="system"]:not([data-circle])`
+  );
+
+  hoverableSystemIcons.forEach(i => {
+    const hoverableClassName = `hoverable-system-icon-${HOVER_ID++}`;
+    i.classList.add(hoverableClassName);
+
+    const hoverSelector = `.${hoverableClassName}[data-category="system"]:not([data-circle]):hover`;
+
+    let hoverColor = i.getAttribute('data-hover-color');
+    if (hoverColor) {
+      appendStyle(`
+        ${hoverSelector} .wd-icon-accent,
+        ${hoverSelector} .wd-icon-fill {
+          fill: ${getColor(hoverColor) || hoverColor};
+        }
+      `);
+    }
+
+    let hoverFillColor = i.getAttribute('data-hover-fill-color');
+    if (hoverFillColor) {
+      appendStyle(`
+        ${hoverSelector} .wd-icon-fill {
+          fill: ${getColor(hoverFillColor) || hoverFillColor};
+        }
+      `);
+    }
+
+    let hoverAccentColor = i.getAttribute('data-hover-accent-color');
+    if (hoverAccentColor) {
+      appendStyle(`
+        ${hoverSelector} .wd-icon-accent {
+          fill: ${getColor(hoverAccentColor) || hoverAccentColor};
+        }
+      `);
+    }
+
+    let hoverBackgroundColor = i.getAttribute('data-hover-background-color');
+    if (hoverBackgroundColor) {
+      appendStyle(`
+        ${hoverSelector} .wd-icon-background {
+          fill: ${getColor(hoverBackgroundColor) || hoverBackgroundColor};
+        }
+      `);
+    }
   });
 }
 

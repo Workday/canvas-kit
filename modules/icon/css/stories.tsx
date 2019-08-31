@@ -92,6 +92,35 @@ storiesOf('CSS/Icon', module)
           data-accent-color="frenchVanilla100"
           data-background-color="blueberry500"
         />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-fill-color="blueberry500"
+          data-accent-color="blueberry500"
+          data-hover-color="#ff0000"
+        />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-fill-color="blueberry500"
+          data-accent-color="blueberry500"
+          data-hover-fill-color="#00ff00"
+          data-hover-accent-color="#ff0000"
+        />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-fill-color="blueberry500"
+          data-accent-color="frenchVanilla100"
+          data-background-color="blueberry500"
+          data-hover-color="#00ff00"
+          data-hover-fill-color="#0000ff"
+          data-hover-accent-color="#ff0000"
+          data-hover-background-color="#00ffff"
+        />
         <br />
         <i className="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
         <i
