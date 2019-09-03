@@ -27,10 +27,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix(status-indicator): Export type and emphasis enums (#166) @anicholls
 
 ### Breaking Change:
-- BREAKING fix: Add missing static variables and fix Popup padding static variable (#110) @anicholls
-- BREAKING refactor(LoadingSpinner): Deprecate LoadingSpinner (#142) @sahlhoff
-- BREAKING fix(FormField): Add component prefix to exported enums and interfaces #146 @sahlhoff
-- BREAKING refactor(PageHeader): Update marketing and breakpoint props (#143) @sahlhoff
+- fix: Add missing static variables and fix Popup padding static variable (#110) @anicholls
+- refactor(LoadingSpinner): Deprecate LoadingSpinner (#142) @sahlhoff
+- fix(FormField): Add component prefix to exported enums and interfaces #146 @sahlhoff
+- refactor(PageHeader): Update marketing and breakpoint props (#143) @sahlhoff
 
 # 3.0.0-alpha.5 (2019-08-13)
 
