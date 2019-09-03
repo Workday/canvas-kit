@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-layout",
-  "version": "3.0.0-alpha.5",
+  "version": "3.0.0-alpha.6",
   "description": "Layout module for canvas-kit-react",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -38,8 +38,8 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-common": "^3.0.0-alpha.5",
-    "@workday/canvas-kit-react-core": "^3.0.0-alpha.5",
+    "@workday/canvas-kit-react-common": "^3.0.0-alpha.6",
+    "@workday/canvas-kit-react-core": "^3.0.0-alpha.6",
     "emotion": "^9.2.12",
     "react-emotion": "^9.2.12"
   }
