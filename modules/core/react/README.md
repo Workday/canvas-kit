@@ -422,3 +422,14 @@ storiesOf('My Story', module)
   .addDecorator(InputProviderDecorator)
   .add('All', () => <YourJSX />);
 ```
+
+You can also add this [storybook decorator](../../utils/storybook/InputProviderDecorator.tsx) to
+your `/.storybook/config.js` configuration file so it wraps all your stories automatically.
+
+Example:
+
+```js
+import {InputProviderDecorator} from '../utils/storybook';
+
+addDecorator(InputProviderDecorator);
+```

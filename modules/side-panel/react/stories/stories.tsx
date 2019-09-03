@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {InputProviderDecorator} from '../../../../utils/storybook';
 import {homeIcon, starIcon, rocketIcon, plusIcon} from '@workday/canvas-system-icons-web';
 import styled from 'react-emotion';
 import {css} from 'emotion';
@@ -154,7 +153,6 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
 }
 
 storiesOf('Side Panel', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {InputProviderDecorator} from '../../../../utils/storybook';
 
 import Avatar from '../index';
 import README from '../README.md';
@@ -10,7 +9,6 @@ import README from '../README.md';
 const IMAGE_URL = 'https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png';
 
 storiesOf('Avatar', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Light', () => (
     <div className="story">

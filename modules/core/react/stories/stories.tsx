@@ -5,7 +5,6 @@ import styled, {css} from 'react-emotion';
 import withReadme from 'storybook-readme/with-readme';
 
 import canvas, {H1, space, spacing} from '..';
-import {InputProviderDecorator} from '../../../../utils/storybook';
 import README from '../README.md';
 
 export const inverseStyle = {
@@ -70,7 +69,6 @@ export const type = (hierarchy: any) => (
 
 storiesOf('Core', module)
   .addDecorator(withReadme(README))
-  .addDecorator(InputProviderDecorator)
   .add('Space', () => {
     const Box = styled('div')(space);
 
