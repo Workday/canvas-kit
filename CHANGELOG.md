@@ -28,7 +28,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix(page-header): Add missing dependency (#149) @anicholls
 - refactor(form-field): Add inputProviderDecorator to Storybook config (#164) @stephanerangaya
 - fix: change positioning of Checkbox and Radio react components to relative (#160) @stephanerangaya
-
+- fix(status-indicator): Export type and emphasis enums (#166) @anicholls
 
 # 3.0.0-alpha.5 (2019-08-13)
 
