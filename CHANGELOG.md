@@ -10,7 +10,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs(contributing): Update git guidelines to reflect new PR strategy (#109) @anicholls
 - Reduce number of manual steps required after running create-module.sh (#46) @roblevintennis
 - ci(travis): Break out testing to stages (#82) @d-bye
-- fix: Add code-coverage to *.ts files (#148) @NicholasBoll
+- fix: Add code-coverage to \*.ts files (#148) @NicholasBoll
 - chore: Update commit validation to use commitlint (#124) @Patil2099
 - feat: Add watch support for faster development (#161) @NicholasBoll
 
