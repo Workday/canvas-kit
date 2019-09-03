@@ -6,7 +6,7 @@ import {colors, type, spacing} from '@workday/canvas-kit-react-core';
 import {CSSObject} from 'create-emotion';
 import styled from 'react-emotion';
 
-enum StatusType {
+export enum StatusIndicatorType {
   Gray = 'gray',
   Orange = 'orange',
   Blue = 'blue',
@@ -15,7 +15,7 @@ enum StatusType {
   Transparent = 'transparent',
 }
 
-enum StatusEmphasis {
+export enum StatusIndicatorEmphasis {
   High = 'high',
   Low = 'low',
 }
@@ -23,8 +23,8 @@ enum StatusEmphasis {
 export interface StatusIndicatorGenericStyle extends GenericStyle {
   styles: CSSObject & React.CSSProperties;
   variants: {
-    [statusType in StatusType]: {
-      [statusEmphasis in StatusEmphasis]?: CSSObject & React.CSSProperties;
+    [statusType in StatusIndicatorType]: {
+      [statusEmphasis in StatusIndicatorEmphasis]?: CSSObject & React.CSSProperties;
     };
   };
 }
@@ -111,11 +111,11 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
   /**
    * Type of status indicator (e.g. Gray, Orange etc.).
    */
-  type: StatusType;
+  type: StatusIndicatorType;
   /**
    * Emphasis of status indicator (e.g. High v Low).
    */
-  emphasis: StatusEmphasis;
+  emphasis: StatusIndicatorEmphasis;
   /**
    * Label of status indicator.
    */
@@ -144,10 +144,10 @@ const StatusLabel = styled('span')({
 });
 
 export default class StatusIndicator extends React.Component<StatusIndicatorProps> {
-  public static Type = StatusType;
-  public static Emphasis = StatusEmphasis;
+  public static Type = StatusIndicatorType;
+  public static Emphasis = StatusIndicatorEmphasis;
   static defaultProps = {
-    emphasis: StatusEmphasis.High,
+    emphasis: StatusIndicatorEmphasis.High,
   };
 
   public render() {
