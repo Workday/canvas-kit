@@ -90,6 +90,7 @@
   },
   "scripts": {
     "start": "node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook",
+    "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
     "clean": "lerna run clean",
     "build": "lerna run build",
     "build:rebuild": "lerna run build:rebuild",
