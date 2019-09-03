@@ -109,6 +109,10 @@
         0 0 0 2px transparent;
     }
 
+    input:hover+label::before {
+      border: 1px solid #de2e21;
+    }
+
     input:checked+label::before {
       border-color: $wdc-color-blueberry-400;
       box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
@@ -160,6 +164,10 @@
       border: 1px solid $wdc-color-cantaloupe-400;
       box-shadow: 0 0 0 1px $wdc-color-cantaloupe-400,
         0 0 0 2px $wdc-color-cantaloupe-600;
+    }
+
+    input:hover+label::before {
+      border: 1px solid $wdc-color-cantaloupe-400;
     }
 
     input:checked+label::before {
