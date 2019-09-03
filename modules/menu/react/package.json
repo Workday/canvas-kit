@@ -18,6 +18,7 @@
     "index.ts"
   ],
   "scripts": {
+    "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",

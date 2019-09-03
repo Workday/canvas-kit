@@ -18,6 +18,7 @@
     "index.ts"
   ],
   "scripts": {
+    "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
@@ -37,6 +38,7 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
+    "@workday/canvas-kit-react-button": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-common": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-core": "^3.0.0-alpha.5",
     "@workday/canvas-kit-react-icon": "^3.0.0-alpha.5",
