@@ -11,6 +11,10 @@ const colorableKeys = {
   accent: 'data-accent-color',
   background: 'data-background-color',
   color: 'data-color',
+  hover: 'data-hover-color',
+  hoverFill: 'data-hover-fill-color',
+  hoverAccent: 'data-hover-accent-color',
+  hoverBackground: 'data-hover-background-color',
 };
 
 function getColorableFn(className, defaultColor = null) {
@@ -104,8 +108,7 @@ function colorIcons(selector) {
 }
 
 function sizeIcons(selector) {
-  // Do not size system icon circles (they'll be sized in styleSystemIcons)
-  const icons = document.querySelectorAll(`${selector}:not([data-circle])`);
+  const icons = document.querySelectorAll(selector);
 
   icons.forEach(i => {
     const size = i.getAttribute('data-size');
@@ -118,17 +121,20 @@ function sizeIcons(selector) {
 
 function styleAccentIcons(selector) {
   // Style transparent accent icons
-  const transparentIconBgs = document.querySelectorAll(
-    `${selector}[data-category="accent"][data-transparent] .french-vanilla-100`
+  const transparentIcons = document.querySelectorAll(
+    `${selector}[data-category="accent"][data-transparent]`
   );
-
-  transparentIconBgs.forEach(bg => {
-    bg.style.fill = 'transparent';
+  transparentIcons.forEach(i => {
+    i.querySelector('.french-vanilla-100').style.fill = 'transparent';
   });
 }
 
 function styleSystemIcons(selector) {
-  // Style system icon circles
+  styleSystemIconCircles(selector);
+  styleSystemIconHovers(selector);
+}
+
+function styleSystemIconCircles(selector) {
   const iconCircles = document.querySelectorAll(`${selector}[data-category="system"][data-circle]`);
 
   iconCircles.forEach(i => {
@@ -146,81 +152,52 @@ function styleSystemIcons(selector) {
     circle.style.backgroundColor = circleBgColor;
 
     const iconColor = pickForegroundColor(circleBgColor, 'rgba(0,0,0,0.65)');
-    i.setAttribute('data-fill-color', iconColor);
-    i.setAttribute('data-accent-color', iconColor);
+    i.setAttribute(colorableKeys.fill, iconColor);
+    i.setAttribute(colorableKeys.accent, iconColor);
 
     circle.innerHTML = i.outerHTML;
     i.parentNode.replaceChild(circle, i);
   });
-
-  styleSystemIconDefaultHovers(selector);
-  styleSystemIconCustomHovers(selector);
 }
 
-function styleSystemIconDefaultHovers(selector) {
-  const hoverSelector = `${selector}[data-category="system"]:not([data-circle]):hover`;
+function setIconHoverFill(iconSelector, fillColor, targetClassNames) {
+  if (fillColor) {
+    const hoverSelector = `${iconSelector}[data-category="system"]:not([data-circle]):hover`;
 
-  appendStyle(`
-    ${hoverSelector} .wd-icon-background {
-      fill: transparent;
-    }
-
-    ${hoverSelector} .wd-icon-accent,
-    ${hoverSelector} .wd-icon-fill {
-      fill: ${canvasColors.primary.iconHover};
-    }
-  `);
+    targetClassNames.forEach(className => {
+      appendStyle(`
+        ${hoverSelector} ${className} {
+          fill: ${getColor(fillColor) || fillColor};
+        }
+      `);
+    });
+  }
 }
 
-function styleSystemIconCustomHovers(selector) {
-  let HOVER_ID = 0;
+function styleSystemIconHovers(selector) {
+  // Style default hovers
+  setIconHoverFill(selector, 'transparent', ['.wd-icon-background']);
+  setIconHoverFill(selector, canvasColors.primary.iconHover, ['.wd-icon-accent', '.wd-icon-fill']);
 
+  // Style individual hovers
   const hoverableSystemIcons = document.querySelectorAll(
     `${selector}[data-category="system"]:not([data-circle])`
   );
+  hoverableSystemIcons.forEach((i, index) => {
+    const iconClassName = `hoverable-system-icon-${index}`;
+    const iconSelector = `.${iconClassName}`;
 
-  hoverableSystemIcons.forEach(i => {
-    const hoverableClassName = `hoverable-system-icon-${HOVER_ID++}`;
-    i.classList.add(hoverableClassName);
+    i.classList.add(iconClassName);
 
-    const hoverSelector = `.${hoverableClassName}[data-category="system"]:not([data-circle]):hover`;
-
-    let hoverColor = i.getAttribute('data-hover-color');
-    if (hoverColor) {
-      appendStyle(`
-        ${hoverSelector} .wd-icon-accent,
-        ${hoverSelector} .wd-icon-fill {
-          fill: ${getColor(hoverColor) || hoverColor};
-        }
-      `);
-    }
-
-    let hoverFillColor = i.getAttribute('data-hover-fill-color');
-    if (hoverFillColor) {
-      appendStyle(`
-        ${hoverSelector} .wd-icon-fill {
-          fill: ${getColor(hoverFillColor) || hoverFillColor};
-        }
-      `);
-    }
-
-    let hoverAccentColor = i.getAttribute('data-hover-accent-color');
-    if (hoverAccentColor) {
-      appendStyle(`
-        ${hoverSelector} .wd-icon-accent {
-          fill: ${getColor(hoverAccentColor) || hoverAccentColor};
-        }
-      `);
-    }
-
-    let hoverBackgroundColor = i.getAttribute('data-hover-background-color');
-    if (hoverBackgroundColor) {
-      appendStyle(`
-        ${hoverSelector} .wd-icon-background {
-          fill: ${getColor(hoverBackgroundColor) || hoverBackgroundColor};
-        }
-      `);
-    }
+    setIconHoverFill(iconSelector, i.getAttribute(colorableKeys.hover), [
+      '.wd-icon-accent',
+      '.wd-icon-fill',
+    ]);
+    setIconHoverFill(iconSelector, i.getAttribute(colorableKeys.hoverFill), ['.wd-icon-fill']);
+    setIconHoverFill(iconSelector, i.getAttribute(colorableKeys.hoverAccent), ['.wd-icon-accent']);
+    setIconHoverFill(iconSelector, i.getAttribute(colorableKeys.hoverBackground), [
+      '.wd-icon-background',
+    ]);
   });
 }
 
