@@ -151,6 +151,42 @@ the 500 weight (e.g. `blueberry500`).
 
 A custom color value (e.g. `#FFFFFF`) may also be used.
 
+### Hover Coloring
+
+Each of the 3 layers can also be assigned a hover color.
+
+```html
+<i
+  className="wdc-icon"
+  data-icon="activityStream"
+  data-category="system"
+  data-hover-fill-color="blueberry600"
+  data-hover-accent-color="blueberry400"
+  data-hover-background-color="blueberry200"
+/>
+```
+
+You may use the `data-hover-color` shorthand to set the fill and accent hover colors simultaneously.
+
+```html
+<i
+  className="wdc-icon"
+  data-icon="activityStream"
+  data-category="system"
+  data-accent-color="blueberry500"
+  data-hover-color="cinnamon300"
+/>
+```
+
+##### `data-hover-fill-color`, `data-hover-accent-color`, `data-hover-background-color`
+
+Set the hover color of the corresponding layer.
+
+##### `data-hover-color`
+
+Set the hover color for fill and accent layers simultaneously. This can be overridden by
+`data-hover-fill-color` and `data-hover-accent-color`.
+
 ### System Icon Circles
 
 ```html
@@ -174,6 +210,8 @@ Set this attribute to render the circular background in a different color instea
 gray.
 
 See [System Icons coloring](#system-icons).
+
+> System Icon Circles cannot have hover colors.
 
 ## Injection Configuration
 
