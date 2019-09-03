@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {InputProviderDecorator, ControlledComponentWrapper} from '../../../../utils/storybook';
+import {ControlledComponentWrapper} from '../../../../utils/storybook';
 
 import {Checkbox} from '../../../checkbox/react/index';
 import FormField from '../index';
@@ -18,7 +18,6 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Checkbox/Top Label', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -70,7 +69,6 @@ storiesOf('Form Field/Checkbox/Top Label', module)
   ));
 
 storiesOf('Form Field/Checkbox/Left Label', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
