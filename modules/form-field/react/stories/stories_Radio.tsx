@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {InputProviderDecorator, ControlledComponentWrapper} from '../../../../utils/storybook';
+import {ControlledComponentWrapper} from '../../../../utils/storybook';
 
 import {Radio, RadioGroup} from '../../../radio/react/index';
 import FormField from '../index';
@@ -12,7 +12,6 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Radio/Top Label/Radio Group', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -77,7 +76,6 @@ storiesOf('Form Field/Radio/Top Label/Radio Group', module)
   ));
 
 storiesOf('Form Field/Radio/Top Label/Radio', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -94,7 +92,6 @@ storiesOf('Form Field/Radio/Top Label/Radio', module)
   ));
 
 storiesOf('Form Field/Radio/Left Label/Radio Group', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -161,7 +158,6 @@ storiesOf('Form Field/Radio/Left Label/Radio Group', module)
   ));
 
 storiesOf('Form Field/Radio/Left Label/Radio', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

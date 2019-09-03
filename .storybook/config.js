@@ -4,7 +4,7 @@ import {injectGlobal} from 'emotion';
 import fonts from '../modules/fonts/react';
 import {create} from '@storybook/theming';
 import {commonColors, typeColors, fontFamily} from '../modules/core/react';
-
+import {InputProviderDecorator} from '../utils/storybook';
 const req = require.context('../modules', true, /stories.*\.tsx?$/);
 
 function loadStories() {
@@ -12,6 +12,7 @@ function loadStories() {
 }
 
 addDecorator(withKnobs);
+addDecorator(InputProviderDecorator);
 
 addParameters({
   options: {
