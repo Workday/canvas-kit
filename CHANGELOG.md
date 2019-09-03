@@ -21,10 +21,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix(IconButton): Pass buttonRef to button element (#128) @mannycarrera4
 - fix: Add menu component to universal module (#127) @lychyi
 - fix(Layout): Add check for null children (#119) @anicholls
-- fix: Add missing static variables and fix Popup padding static variable (#110) @anicholls
-- refactor(LoadingSpinner): Deprecate LoadvingSpinner (#142) @sahlhoff
-- fix(FormField): Add component prefix to exported enums and interfaces #146 @sahlhoff
-- refactor(PageHeader): Update marketing and breakpoint props (#143) @sahlhoff
+- BREAKING fix: Add missing static variables and fix Popup padding static variable (#110) @anicholls
+- BREAKING refactor(LoadingSpinner): Deprecate LoadingSpinner (#142) @sahlhoff
+- BREAKING fix(FormField): Add component prefix to exported enums and interfaces #146 @sahlhoff
+- BREAKING refactor(PageHeader): Update marketing and breakpoint props (#143) @sahlhoff
 - fix(page-header): Add missing dependency (#149) @anicholls
 - refactor(form-field): Add inputProviderDecorator to Storybook config (#164) @stephanerangaya
 - fix: change positioning of Checkbox and Radio react components to relative (#160) @stephanerangaya
