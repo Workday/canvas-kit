@@ -58,22 +58,3 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
   </div>
 </header>
 ```
-
-### Breakpoint
-
-> The default breakpoint at which the header's container spacing increases from 's' size to 'xl'
-> size. You can override the default breakpoint by using the variable
-> `$wdc-page-header-default-breakpoint`.
-
-Default: `768px`
-
-```scss
-$wdc-page-header-default-breakpoint: 400px;
-.wdc-page-header {
-  .custom-break-point {
-    @media (min-width: $wdc-page-header-default-breakpoint) {
-      padding: 0 10px;
-    }
-  }
-}
-```

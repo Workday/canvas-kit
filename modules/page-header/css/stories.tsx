@@ -41,21 +41,4 @@ storiesOf('CSS/Page Header', module)
         </div>
       </header>
     </div>
-  ))
-  .add('Custom Breakpoint', () => (
-    <div className="story">
-      <header className="wdc-page-header">
-        <div className="wdc-page-header-container custom-break-point">
-          <h2 className="wdc-page-header-title">Product Context</h2>
-          <div className="wdc-icon-list">
-            <button className="wdc-btn-icon-inverse">
-              <SystemIcon icon={exportIcon} />
-            </button>
-            <button className="wdc-btn-icon-inverse">
-              <SystemIcon icon={fullscreenIcon} />
-            </button>
-          </div>
-        </div>
-      </header>
-    </div>
   ));

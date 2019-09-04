@@ -2,12 +2,3 @@
 @import '~@workday/canvas-kit-css-core/lib/variables';
 @import '~@workday/canvas-kit-css-icon/lib/icon-list';
 @import './lib/page-header.scss';
-
-$wdc-page-header-default-breakpoint: 400px;
-.wdc-page-header {
-  .custom-break-point {
-    @media (min-width: $wdc-page-header-default-breakpoint) {
-      padding: 0 10px;
-    }
-  }
-}
