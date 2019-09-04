@@ -47,7 +47,6 @@
       /* WebKit, Blink, Edge */
       color: $wdc-color-licorice-100;
     }
-
   }
 }
 
@@ -57,28 +56,22 @@
   outline: none;
 }
 
-
 @mixin wdc-form-selection-control() {
   padding: 6px 0;
   display: inline-block;
-  min-height: $wdc-spacing-s+$wdc-spacing-xxxs;
+  min-height: $wdc-spacing-s + $wdc-spacing-xxxs;
 
   input {
-
-    &:hover+label::after {
+    &:hover + label::after {
       box-shadow: 0 0 0 7px $wdc-color-soap-200;
     }
 
-    &+label {
+    & + label {
       font-size: 14px;
-      line-height: $wdc-spacing-s+$wdc-spacing-xxxs;
+      line-height: $wdc-spacing-s + $wdc-spacing-xxxs;
       font-weight: 400;
       color: $wdc-color-black-pepper-300;
-      font-family: "Roboto",
-        "Helvetica Neue",
-        "Helvetica",
-        Arial,
-        sans-serif;
+      font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
       position: relative;
       left: $wdc-spacing-xs;
       padding-right: $wdc-spacing-xs;
@@ -94,8 +87,7 @@
         box-sizing: border-box;
         width: 18px;
         height: 18px;
-        transition: border 200ms ease,
-          background-color 200ms;
+        transition: border 200ms ease, background-color 200ms;
         position: absolute;
         left: -30px;
         margin-top: 1px;
@@ -118,18 +110,18 @@
       }
     }
 
-    &:hover+label::before {
+    &:hover + label::before {
       border-color: $wdc-color-licorice-500;
     }
 
-    &:checked+label {
+    &:checked + label {
       &::before {
         border-color: $wdc-color-blueberry-400;
         background-color: $wdc-color-blueberry-400;
       }
     }
 
-    &:disabled+label {
+    &:disabled + label {
       color: $wdc-color-licorice-100;
 
       &::before {
@@ -143,12 +135,12 @@
       }
     }
 
-    &:focus+label::before {
+    &:focus + label::before {
       border-color: $wdc-color-blueberry-400;
-      box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400,
+      box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400;
     }
 
-    &:disabled:checked+label::before {
+    &:disabled:checked + label::before {
       border-color: $wdc-color-blueberry-200;
       background-color: $wdc-color-blueberry-200;
       background-size: $wdc-spacing-m;
@@ -159,28 +151,19 @@
       outline: none;
     }
 
-    &:checked:focus+label::before {
-      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
-        0 0 0 4px $wdc-color-blueberry-400,
-        0 0 0 5px transparent;
+    [data-whatinput='keyboard'] & {
+      &:checked:focus + label::before {
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-400,
+          0 0 0 5px transparent;
+      }
     }
-  }
 
-  [data-whatinput='keyboard'] {
-    &:checked:focus+label::before {
-      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
-        0 0 0 4px yellow,
-        0 0 0 5px transparent;
-    }
-  }
-
-  [data-whatinput='initial'],
-  [data-whatinput='mouse'],
-  [data-whatinput='touch'] {
-    &:checked:focus+label::before {
-      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
-        0 0 0 4px red,
-        0 0 0 5px transparent;
+    [data-whatinput='initial'] &,
+    [data-whatinput='mouse'] &,
+    [data-whatinput='touch'] & {
+      &:checked:focus + label::before {
+        box-shadow: none;
+      }
     }
   }
 }
