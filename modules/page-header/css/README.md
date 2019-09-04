@@ -23,6 +23,8 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 
 ## Usage
 
+### Default
+
 ```html
 <header class="wdc-page-header">
   <div class="wdc-page-header-container">
@@ -60,6 +62,18 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ### Breakpoint
 
 > The default breakpoint at which the header's container spacing increases from 's' size to 'xl'
-> size.
+> size. You can override the default breakpoint by using the variable
+> `$wdc-page-header-default-breakpoint`.
 
 Default: `768px`
+
+```scss
+$wdc-page-header-default-breakpoint: 400px;
+.wdc-page-header {
+  .custom-break-point {
+    @media (min-width: $wdc-page-header-default-breakpoint) {
+      padding: 0 10px;
+    }
+  }
+}
+```

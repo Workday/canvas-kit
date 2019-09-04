@@ -1,4 +1,4 @@
-$_wdc-page-header-tablet-breakpoint: 768px !default;
+$wdc-page-header-default-breakpoint: 768px !default;
 
 .wdc-page-header {
   height: 84px;
@@ -16,7 +16,7 @@ $_wdc-page-header-tablet-breakpoint: 768px !default;
     height: 100%;
     padding: 0 $wdc-spacing-s;
 
-    @media (min-width: $_wdc-page-header-tablet-breakpoint) {
+    @media (min-width: $wdc-page-header-default-breakpoint) {
       padding: 0 $wdc-spacing-xl;
     }
   }
