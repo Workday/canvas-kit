@@ -5,9 +5,9 @@ import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('CSS/Grid System', module)
+storiesOf('CSS/Layout', module)
   .addDecorator(withReadme(README))
-  .add('Responsive Grids', () => (
+  .add('Responsive Layout', () => (
     <div className="story story-grid">
       <div>
         <div className="wdc-row">
@@ -46,7 +46,7 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Fluid Grids', () => (
+  .add('Fluid Layout', () => (
     <div className="story story-grid">
       <div>
         <div className="wdc-row">
@@ -140,7 +140,7 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Grids with Offsets', () => (
+  .add('Offsets', () => (
     <div className="story story-grid">
       <div>
         <div className="wdc-row">
@@ -206,7 +206,7 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Auto widths', () => (
+  .add('Auto Widths', () => (
     <div className="story story-grid">
       <div>
         <div className="wdc-row">
@@ -269,7 +269,7 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Grid Horizontal Positioning', () => (
+  .add('Horizontal Positioning', () => (
     <div className="story story-grid">
       <div>
         <div className="wdc-row wdc-row-start">
@@ -290,7 +290,7 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Grid Verical Positioning', () => (
+  .add('Vertical Positioning', () => (
     <div className="story story-grid">
       <div>
         <div className="wdc-row wdc-row-top">
@@ -320,7 +320,7 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Grid Distribution', () => (
+  .add('Distribution', () => (
     <div className="story story-grid">
       <div>
         <div className="wdc-row wdc-row-around">
