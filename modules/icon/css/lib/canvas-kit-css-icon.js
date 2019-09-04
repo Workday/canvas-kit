@@ -17,9 +17,18 @@ const colorableKeys = {
   hoverBackground: 'data-hover-background-color',
 };
 
-function getColorableFn(className, defaultColor = null) {
-  // Assume valid color value if not in palette
-  return attrVal => ({[className]: getColor(attrVal) || attrVal || defaultColor});
+function getColorableFn(classNames, defaultColor = null) {
+  return attrVal =>
+    classNames.reduce((colors, className) => {
+      if (attrVal) {
+        // Assume valid color value if not in palette
+        colors[className] = getColor(attrVal) || attrVal;
+      } else if (defaultColor !== null) {
+        colors[className] = defaultColor;
+      }
+
+      return colors;
+    }, {});
 }
 
 const categories = {
@@ -28,9 +37,13 @@ const categories = {
     version: '0.11.16', // TODO: Update to use 'latest' when available
     prefix: 'wd-icon',
     colorables: {
-      [colorableKeys.fill]: getColorableFn('.wd-icon-fill', canvasColors.primary.iconStandard),
-      [colorableKeys.accent]: getColorableFn('.wd-icon-accent', canvasColors.primary.iconStandard),
-      [colorableKeys.background]: getColorableFn('.wd-icon-background', 'transparent'),
+      [colorableKeys.color]: getColorableFn(
+        ['.wd-icon-fill', '.wd-icon-accent'],
+        canvasColors.primary.iconStandard
+      ),
+      [colorableKeys.fill]: getColorableFn(['.wd-icon-fill']),
+      [colorableKeys.accent]: getColorableFn(['.wd-icon-accent']),
+      [colorableKeys.background]: getColorableFn(['.wd-icon-background'], 'transparent'),
     },
   },
   accent: {
@@ -38,7 +51,7 @@ const categories = {
     version: '0.11.13', // TODO: Update to use 'latest' when available
     prefix: 'wd-accent',
     colorables: {
-      [colorableKeys.color]: getColorableFn('.color-500', canvasColors.blueberry500),
+      [colorableKeys.color]: getColorableFn(['.color-500'], canvasColors.blueberry500),
     },
   },
   applet: {

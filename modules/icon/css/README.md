@@ -141,6 +141,17 @@ System icons contain up to 3 layers that can be colored independently.
 />
 ```
 
+You may use the `data-color` shorthand to set the fill and accent colors simultaneously.
+
+```html
+<i
+  className="wdc-icon"
+  data-icon="activityStream"
+  data-category="system"
+  data-color="blueberry500"
+/>
+```
+
 ##### `data-fill-color`, `data-accent-color`, `data-background-color`
 
 Use a color in the [Canvas palette](https://design.workday.com/resources/colors). Color must be
@@ -150,6 +161,11 @@ If a hue name is used but no color shade is defined (e.g. `blueberry`), the colo
 the 500 weight (e.g. `blueberry500`).
 
 A custom color value (e.g. `#FFFFFF`) may also be used.
+
+##### `data-color`
+
+Set the color for fill and accent layers simultaneously. This can be overridden by `data-fill-color`
+and `data-accent-color`.
 
 ### Hover Coloring
 
