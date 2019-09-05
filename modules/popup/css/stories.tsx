@@ -3,6 +3,8 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
 import {Button} from '@workday/canvas-kit-react-button';
+import {xIcon} from '@workday/canvas-system-icons-web';
+import {SystemIcon} from '@workday/canvas-kit-react';
 import './index.scss';
 
 interface PopupWrapperState {
@@ -28,6 +30,11 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
           </Button>
           {open ? (
             <div className="wdc-popup wdc-popup-animation-origin-top-center wdc-depth-2">
+              <div className="wdc-popup-close">
+                <button className="wdc-btn-icon-circle">
+                  <SystemIcon icon={xIcon} />
+                </button>
+              </div>
               <h3 className="wdc-popup-title">Delete Item</h3>
               <div style={{marginBottom: '24px'}} className="wdc-popup-body">
                 Are you sure you'd like to delete the item titled 'My Item'?
