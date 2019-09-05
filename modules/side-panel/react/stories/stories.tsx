@@ -13,7 +13,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {Header} from '@workday/canvas-kit-react-header';
 import {beta_Button as Button, IconButton, ButtonSizes} from '@workday/canvas-kit-react-button';
 import {Avatar} from '@workday/canvas-kit-react-avatar';
-import SidePanel from '..';
+import SidePanel from '../index';
 
 interface SidePanelState {
   open: boolean;
@@ -89,7 +89,7 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
     const listItemStyles = open ? listItemOpen : listItemClosed;
     return (
       <SidePanel
-        sidePanelBackgroundColor={select(
+        backgroundColor={select(
           openBackgroundColorLabel,
           openBackgroundColorOptions,
           openBackgroundColorDefault
@@ -144,10 +144,10 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
     });
   };
 
-  private handleBreakpoint = (open: boolean) => {
+  private handleBreakpoint = (aboveBreakpoint: boolean) => {
     console.warn('handle breakpoint called');
     this.setState({
-      open: open,
+      open: aboveBreakpoint,
     });
   };
 }
@@ -158,7 +158,7 @@ storiesOf('Side Panel', module)
     <div className="story">
       <div style={{height: '67vh', position: 'relative'}}>
         <SidePanel
-          sidePanelBackgroundColor={SidePanel.BackgroundColor.Gray}
+          backgroundColor={SidePanel.BackgroundColor.Gray}
           onToggleClick={() => console.warn('clicked')}
           header={'Side Panel Header'}
           open={true}

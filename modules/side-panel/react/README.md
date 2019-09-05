@@ -45,7 +45,7 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
     const {open} = this.state;
     return (
       <SidePanel
-        sidePanelBackgroundColor={SidePanelBackgroundColor.Gray}
+        backgroundColor={SidePanelBackgroundColor.Gray}
         openDirection={SidePanelOpenDirection.Left}
         open={open}
         onToggleClick={this.onClick}
@@ -111,11 +111,12 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
 
 ### Optional
 
-#### `onBreakpointChange: (open: boolean) => void;`
+#### `onBreakpointChange: (aboveBreakpoint: boolean) => void;`
 
 > A function that is called when the screen size changes and reaches `breakpoint`. For example, if
 > the user has their window at 1000px of width, and then resizes, this will get called when the
-> window size reaches the value of the `breakpoint` prop.
+> window size reaches the value of the `breakpoint` prop. A boolean for whether the current window
+> size is above or below the breakpoint is provided so you can control `open` based on the change.
 
 ---
 
@@ -132,7 +133,7 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
 
 ---
 
-#### `sidePanelBackgroundColor: SidePanelBackgroundColor`
+#### `backgroundColor: SidePanelBackgroundColor`
 
 > Determines the background color of the side panel when it's `open`
 
