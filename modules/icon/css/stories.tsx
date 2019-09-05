@@ -98,13 +98,12 @@ storiesOf('CSS/Icon', module)
           className="wdc-icon"
           data-icon="activityStream"
           data-category="system"
-          data-circle="true"
+          data-circle-background="true"
         />
         <i
           className="wdc-icon"
           data-icon="activityStream"
           data-category="system"
-          data-circle="true"
           data-circle-background="blueberry400"
         />
       </IconDemo>

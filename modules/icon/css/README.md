@@ -210,22 +210,25 @@ Set the hover color for fill and accent layers simultaneously. This can be overr
   className="wdc-icon"
   data-icon="activityStream"
   data-category="system"
-  data-circle="true"
+  data-circle-background="true"
+/>
+
+<-- Circle with a Canvas Background Color -->
+<i
+  className="wdc-icon"
+  data-icon="activityStream"
+  data-category="system"
   data-circle-background="blueberry400"
 />
 ```
 
-##### `data-circle`
-
-Set this attribute to render a system icon with a colored circular background. The icon color will
-be determined based on contrast with the provided background color.
-
 ##### `data-circle-background`
 
-Set this attribute to render the circular background in a different color instead of the default
-gray.
+Set this attribute to render a system icon with a colored circular background. Set it to `true` to
+render the circlular background in the default color. You may also set it to a canvas or custom
+color.
 
-See [System Icons coloring](#system-icons).
+The icon color wil be determined based on contrast with the provided background color.
 
 > System Icon Circles cannot have hover colors.
 

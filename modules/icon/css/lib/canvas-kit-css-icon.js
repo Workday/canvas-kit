@@ -161,7 +161,7 @@ function styleSystemIcons(selector) {
 }
 
 function styleSystemIconCircles(selector) {
-  const selectorFragment = '[data-category="system"][data-circle]';
+  const selectorFragment = '[data-category="system"][data-circle-background]';
   const circleSelector = `${selector}${selectorFragment}`;
   const iconCircles = document.querySelectorAll(circleSelector);
 
@@ -175,7 +175,8 @@ function styleSystemIconCircles(selector) {
     i.style.height = `${size * 0.625}px`;
     i.style.width = `${size * 0.625}px`;
 
-    let circleBgColor = i.getAttribute('data-circle-background') || 'soap300';
+    let circleBgColor = i.getAttribute('data-circle-background');
+    circleBgColor = circleBgColor === 'true' ? 'soap300' : circleBgColor;
     circleBgColor = getColor(circleBgColor) || circleBgColor;
     circle.style.backgroundColor = circleBgColor;
 
@@ -189,7 +190,7 @@ function styleSystemIconCircles(selector) {
 }
 
 function styleSystemIconHovers(selector) {
-  const selectorFragment = '[data-category="system"]:not([data-circle])';
+  const selectorFragment = '[data-category="system"]:not([data-circle-background])';
   const hoverableSelector = `${selector}${selectorFragment}`;
 
   // Style default hovers
