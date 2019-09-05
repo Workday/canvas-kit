@@ -23,11 +23,13 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 
 ## Usage
 
+### Default
+
 ```html
 <header class="wdc-page-header">
   <div class="wdc-page-header-container">
     <h2 class="wdc-page-header-title">Page Title</h2>
-    <div class="wdc-icon-list wdc-icon-list-white">
+    <div class="wdc-icon-list">
       <div class="wdc-icon-list-icon">
         <!-- wd-icon-export.svg -->
       </div>
@@ -39,20 +41,13 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 </header>
 ```
 
-### Marketing Contexts
-
-If you would like to use it in a marketing context with a fixed width and padding that matches other
-marketing content, simply replace `.wdc-page-header-container` with the
-[marketing container](../canvas-kit-css-marketing/#container) component
-(`.wdc-marketing-container`).
-
-**Example:**
+### With Cap Width
 
 ```html
 <header class="wdc-page-header">
-  <div class="wdc-marketing-container">
+  <div class="wdc-page-header-container wdc-page-header-cap-width">
     <h2 class="wdc-page-header-title">Page Title</h2>
-    <div class="wdc-icon-list wdc-icon-list-white">
+    <div class="wdc-icon-list">
       <div class="wdc-icon-list-icon">
         <!-- wd-icon-export.svg -->
       </div>
