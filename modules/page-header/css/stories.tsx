@@ -8,26 +8,35 @@ import './index.scss';
 
 storiesOf('CSS/Page Header', module)
   .addDecorator(withReadme(README))
-  .add('All', () => (
+  .add('Default', () => (
     <div className="story">
       <header className="wdc-page-header">
         <div className="wdc-page-header-container">
-          <h2 className="wdc-page-header-title">Page Title</h2>
-          <div className="wdc-icon-list wdc-icon-list-white">
-            <div
-              className="wdc-btn wdc-btn-size-m wdc-btn-icon-circle wdc-btn-icon-inverse"
-              role="button"
-              tabIndex={0}
-            >
+          <h2 className="wdc-page-header-title">Product Context</h2>
+          <div className="wdc-icon-list">
+            <button className="wdc-btn-icon-inverse">
               <SystemIcon icon={exportIcon} />
-            </div>
-            <div
-              className="wdc-btn wdc-btn-size-m wdc-btn-icon-circle wdc-btn-icon-inverse"
-              role="button"
-              tabIndex={0}
-            >
+            </button>
+            <button className="wdc-btn-icon-inverse">
               <SystemIcon icon={fullscreenIcon} />
-            </div>
+            </button>
+          </div>
+        </div>
+      </header>
+    </div>
+  ))
+  .add('Cap Width', () => (
+    <div className="story">
+      <header className="wdc-page-header">
+        <div className="wdc-page-header-container wdc-page-header-cap-width">
+          <h2 className="wdc-page-header-title">Product Context</h2>
+          <div className="wdc-icon-list">
+            <button className="wdc-btn-icon-inverse">
+              <SystemIcon icon={exportIcon} />
+            </button>
+            <button className="wdc-btn-icon-inverse">
+              <SystemIcon icon={fullscreenIcon} />
+            </button>
           </div>
         </div>
       </header>

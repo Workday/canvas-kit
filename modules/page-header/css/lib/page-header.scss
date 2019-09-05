@@ -1,3 +1,5 @@
+$wdc-page-header-breakpoint: 768px !default;
+
 .wdc-page-header {
   height: 84px;
   background-image: linear-gradient(
@@ -12,22 +14,26 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    padding-left: $wdc-spacing-xl;
-    padding-right: $wdc-spacing-xl;
-  }
+    padding: 0 $wdc-spacing-s;
 
-  .wdc-marketing-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
+    @media (min-width: $wdc-page-header-breakpoint) {
+      padding: 0 $wdc-spacing-xl;
+    }
   }
 
   .wdc-page-header-title {
+    @include wdc-type();
     @include wdc-type-h1();
     color: $wdc-color-french-vanilla-100;
     padding: $wdc-spacing-xs 0;
     margin: 0;
+  }
+
+  .wdc-page-header-cap-width {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1440px;
   }
 
   .wdc-icon-list {
