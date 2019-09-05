@@ -81,8 +81,7 @@ storiesOf('CSS/Icon', module)
           className="wdc-icon"
           data-icon="activityStream"
           data-category="system"
-          data-fill-color="blueberry500"
-          data-accent-color="blueberry500"
+          data-color="blueberry500"
         />
         <i
           className="wdc-icon"
@@ -91,6 +90,32 @@ storiesOf('CSS/Icon', module)
           data-fill-color="blueberry500"
           data-accent-color="frenchVanilla100"
           data-background-color="blueberry500"
+        />
+        <br />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-hover-color="cinnamon300"
+        />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-color="blueberry500"
+          data-hover-fill-color="chiliMango200"
+          data-hover-accent-color="chiliMango400"
+        />
+        <i
+          className="wdc-icon"
+          data-icon="activityStream"
+          data-category="system"
+          data-fill-color="blueberry500"
+          data-accent-color="frenchVanilla100"
+          data-background-color="blueberry500"
+          data-hover-fill-color="cantaloupe500"
+          data-hover-accent-color="frenchVanilla100"
+          data-hover-background-color="cantaloupe500"
         />
         <br />
         <i className="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
