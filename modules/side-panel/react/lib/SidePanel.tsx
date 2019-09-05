@@ -52,8 +52,8 @@ const SidePanelContainer = styled('div')<SidePanelProps>(
     position: 'absolute',
   },
   ({open}) => ({
-    alignItems: !open ? 'center' : undefined,
-    boxShadow: !open ? '0 8px 16px -8px rgba(0, 0, 0, 0.16)' : undefined,
+    alignItems: open ? undefined : 'center',
+    boxShadow: open ? undefined : '0 8px 16px -8px rgba(0, 0, 0, 0.16)',
   }),
   ({open, backgroundColor}) => {
     let openBackgroundColor;
