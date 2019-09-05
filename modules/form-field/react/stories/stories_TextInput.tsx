@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {InputProviderDecorator, controlComponent} from '../../../../utils/storybook';
+import {controlComponent} from '../../../../utils/storybook';
 
 import {TextInput} from '../../../text-input/react/index';
 import FormField from '../index';
@@ -12,7 +12,6 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Text Input/Top Label', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="input-plain">

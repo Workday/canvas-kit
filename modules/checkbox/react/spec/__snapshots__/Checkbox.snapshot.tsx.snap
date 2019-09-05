@@ -11,6 +11,7 @@ exports[`Checkbox Snapshots alert renders as expected 1`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 32px;
+  position: relative;
 }
 
 .emotion-7 {
@@ -286,6 +287,7 @@ exports[`Checkbox Snapshots checked alert renders as expected 1`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 32px;
+  position: relative;
 }
 
 .emotion-7 {
@@ -561,6 +563,7 @@ exports[`Checkbox Snapshots checked error renders as expected 1`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 32px;
+  position: relative;
 }
 
 .emotion-7 {
@@ -836,6 +839,7 @@ exports[`Checkbox Snapshots error renders as expected 1`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 32px;
+  position: relative;
 }
 
 .emotion-7 {
@@ -1111,6 +1115,7 @@ exports[`Checkbox Snapshots renders as expected 1`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 32px;
+  position: relative;
 }
 
 .emotion-7 {
@@ -1345,6 +1350,7 @@ exports[`Checkbox Snapshots renders as expected 2`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 32px;
+  position: relative;
 }
 
 .emotion-0 {
@@ -1575,6 +1581,7 @@ exports[`Checkbox Snapshots renders as expected 3`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 32px;
+  position: relative;
 }
 
 .emotion-0 {
@@ -1821,6 +1828,7 @@ exports[`Checkbox Snapshots renders as expected 4`] = `
   -ms-flex-align: center;
   align-items: center;
   height: 32px;
+  position: relative;
 }
 
 .emotion-7 {

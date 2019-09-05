@@ -5,7 +5,6 @@ import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import uuid from 'uuid/v4';
 import {setupIcon, uploadCloudIcon, userIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
-import {InputProviderDecorator} from '../../../../utils/storybook';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import Popper from '@material-ui/core/Popper';
@@ -403,7 +402,6 @@ class Combobox extends React.Component<{}, ComboboxState> {
 }
 
 storiesOf('Menu', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
