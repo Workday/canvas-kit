@@ -8,7 +8,7 @@ import './stories.scss';
 storiesOf('CSS/Layout', module)
   .addDecorator(withReadme(README))
   .add('Responsive Layout', () => (
-    <div className="story story-grid">
+    <div className="story">
       <div>
         <div className="wdc-row">
           <div className="wdc-col-sm-2 wdc-col-md-5 wdc-col-lg-2 wdc-col-xl-1">
@@ -47,7 +47,7 @@ storiesOf('CSS/Layout', module)
     </div>
   ))
   .add('Fluid Layout', () => (
-    <div className="story story-grid">
+    <div className="story">
       <div>
         <div className="wdc-row">
           <div className="wdc-col-11">
@@ -141,7 +141,7 @@ storiesOf('CSS/Layout', module)
     </div>
   ))
   .add('Offsets', () => (
-    <div className="story story-grid">
+    <div className="story">
       <div>
         <div className="wdc-row">
           <div className="wdc-col-offset-11 wdc-col-1">
@@ -207,7 +207,7 @@ storiesOf('CSS/Layout', module)
     </div>
   ))
   .add('Auto Widths', () => (
-    <div className="story story-grid">
+    <div className="story">
       <div>
         <div className="wdc-row">
           <div className="wdc-col">
@@ -270,7 +270,7 @@ storiesOf('CSS/Layout', module)
     </div>
   ))
   .add('Horizontal Positioning', () => (
-    <div className="story story-grid">
+    <div className="story">
       <div>
         <div className="wdc-row wdc-row-start">
           <div className="wdc-col-1">
@@ -291,7 +291,7 @@ storiesOf('CSS/Layout', module)
     </div>
   ))
   .add('Vertical Positioning', () => (
-    <div className="story story-grid">
+    <div className="story">
       <div>
         <div className="wdc-row wdc-row-top">
           <div className="wdc-col">
@@ -321,7 +321,7 @@ storiesOf('CSS/Layout', module)
     </div>
   ))
   .add('Distribution', () => (
-    <div className="story story-grid">
+    <div className="story">
       <div>
         <div className="wdc-row wdc-row-around">
           <div className="wdc-col-1">
