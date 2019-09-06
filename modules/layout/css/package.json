@@ -26,6 +26,7 @@
     "canvas",
     "canvas-kit",
     "css",
+    "layout",
     "scss",
     "sass",
     "workday",

@@ -1,4 +1,4 @@
-// Grid System
+// Layout System
 
 @mixin wdc-col-common {
   box-sizing: border-box;
@@ -6,7 +6,7 @@
   flex-shrink: 0;
 }
 
-@each $breakpoint in $wdc-grid-system-breakpoints {
+@each $breakpoint in $wdc-layout-breakpoints {
   $_name: nth($breakpoint, 1);
   $_size: nth($breakpoint, 2);
   $_spacing: nth($breakpoint, 3);
@@ -33,13 +33,13 @@
       max-width: 100%;
     }
 
-    @for $_i from 1 through $wdc-grid-system-columns {
+    @for $_i from 1 through $wdc-layout-columns {
       .wdc-col-#{$_i} {
         @include wdc-col-common;
         padding-left: $_half-spacing;
         padding-right: $_half-spacing;
-        flex-basis: 100% / $wdc-grid-system-columns * $_i;
-        max-width: 100% / $wdc-grid-system-columns * $_i;
+        flex-basis: 100% / $wdc-layout-columns * $_i;
+        max-width: 100% / $wdc-layout-columns * $_i;
       }
 
       .wdc-col-offset-#{$_i} {
@@ -50,7 +50,7 @@
         @if $_i == 0 {
           margin-left: 0;
         } @else {
-          margin-left: 100% / $wdc-grid-system-columns * $_i;
+          margin-left: 100% / $wdc-layout-columns * $_i;
         }
       }
 
@@ -58,8 +58,8 @@
         @include wdc-col-common;
         padding-left: $_half-spacing;
         padding-right: $_half-spacing;
-        flex-basis: 100% / $wdc-grid-system-columns * $_i;
-        max-width: 100% / $wdc-grid-system-columns * $_i;
+        flex-basis: 100% / $wdc-layout-columns * $_i;
+        max-width: 100% / $wdc-layout-columns * $_i;
       }
 
       .wdc-col-#{$_name}-offset-#{$_i} {
@@ -70,7 +70,7 @@
         @if $_i == 0 {
           margin-left: 0;
         } @else {
-          margin-left: 100% / $wdc-grid-system-columns * $_i;
+          margin-left: 100% / $wdc-layout-columns * $_i;
         }
       }
     }
