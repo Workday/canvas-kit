@@ -118,7 +118,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper">
           <label htmlFor="textarea" className="wdc-form-label">
             Label
@@ -134,7 +134,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
   ))
   .add('With placeholder', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper">
           <label htmlFor="textarea" className="wdc-form-label">
             Label
@@ -150,7 +150,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
   ))
   .add('Disabled', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper">
           <label htmlFor="textarea" className="wdc-form-label">
             Label
@@ -170,7 +170,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
   ))
   .add('Disabled with placeholder', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper">
           <label htmlFor="textarea" className="wdc-form-label">
             Label
@@ -190,7 +190,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
   ))
   .add('Alert', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-field-alert">
           <label htmlFor="textarea" className="wdc-form-label">
             Label
@@ -209,7 +209,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
   ))
   .add('Error', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-field-error">
           <label htmlFor="textarea" className="wdc-form-label">
             Label

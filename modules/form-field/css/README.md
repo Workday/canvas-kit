@@ -48,10 +48,10 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 ## Inline Labels
 
 Form labels are rendered above the fields by default. You can enable inline labels (side by side),
-by applying the `.wdc-form-inline-labels` class to `.wdc-form`.
+by applying the `.wdc-form-label-position-left` class to `.wdc-form`.
 
 ```html
-<div class="wdc-form wdc-form-inline-labels">
+<div class="wdc-form wdc-form-label-position-left">
   <div class="wdc-form-field-wrapper">
     <label htmlFor="textinput" class="wdc-form-label wdc-form-label-required">Input Label</label>
     <div class="wdc-form-field">
@@ -67,12 +67,12 @@ by applying the `.wdc-form-inline-labels` class to `.wdc-form`.
 ```
 
 If you need to toggle this programmatically (i.e. for mobile responsive), you can use the
-`wdc-form-inline-labels()` mixin.
+`wdc-form-label-position-left()` mixin.
 
 ```css
 @media (max-width: 640px) {
   .wdc-form {
-    @include wdc-form-inline-labels();
+    @include wdc-form-label-position-left();
   }
 }
 ```

@@ -78,7 +78,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
@@ -93,7 +93,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
   ))
   .add('Disabled', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
@@ -108,7 +108,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
   ))
   .add('Alert', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-field-alert">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
@@ -126,7 +126,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
   ))
   .add('Error', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-field-error">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
@@ -258,7 +258,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-group">
           <label className="wdc-form-label">Label</label>
 
@@ -290,7 +290,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
   ))
   .add('Alert', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-group">
           <label htmlFor="checkboxAlert" className="wdc-form-label">
             Label
@@ -328,7 +328,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
   ))
   .add('Error', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-group">
           <label htmlFor="checkboxError" className="wdc-form-label">
             Label

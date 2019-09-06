@@ -73,7 +73,7 @@
   @include wdc-form-group();
 }
 
-@mixin wdc-form-inline-labels() {
+@mixin wdc-form-label-position-left() {
   .wdc-form-field-wrapper {
     display: flex;
 
@@ -122,6 +122,6 @@
   }
 }
 
-.wdc-form-inline-labels {
-  @include wdc-form-inline-labels();
+.wdc-form-label-position-left {
+  @include wdc-form-label-position-left();
 }

@@ -101,7 +101,7 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
 storiesOf('CSS/Form Field/Select/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="wdc-form wdc-form-inline-labels">
+    <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper">
         <label htmlFor="select" className="wdc-form-label">
           Label
@@ -122,7 +122,7 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
     </div>
   ))
   .add('Disabled', () => (
-    <div className="wdc-form wdc-form-inline-labels">
+    <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper">
         <label htmlFor="select" className="wdc-form-label">
           Label
@@ -143,7 +143,7 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
     </div>
   ))
   .add('Alert', () => (
-    <div className="wdc-form wdc-form-inline-labels">
+    <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper wdc-form-field-alert">
         <label htmlFor="select" className="wdc-form-label">
           Label
@@ -167,7 +167,7 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
     </div>
   ))
   .add('Error', () => (
-    <div className="wdc-form wdc-form-inline-labels">
+    <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper wdc-form-field-error">
         <label htmlFor="select" className="wdc-form-label">
           Label

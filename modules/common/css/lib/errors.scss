@@ -329,7 +329,7 @@
   @include wdc-form-field-alert();
 }
 
-@mixin wdc-form-inline-labels-errors() {
+@mixin label-position-left-errors() {
   .wdc-form-field-wrapper {
     position: relative;
 
@@ -362,6 +362,6 @@
   }
 }
 
-.wdc-form-inline-labels {
-  @include wdc-form-inline-labels-errors();
+.wdc-form-label-position-left {
+  @include label-position-left-errors();
 }

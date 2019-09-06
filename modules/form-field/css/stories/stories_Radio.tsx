@@ -27,7 +27,7 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper">
           <label className="wdc-form-label">Label</label>
           <div className="wdc-form-field">
@@ -178,7 +178,7 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-group">
           <label htmlFor="radioGroup" className="wdc-form-label">
             Label
@@ -219,7 +219,7 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
   ))
   .add('Alert', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-group">
           <label htmlFor="radioAlert" className="wdc-form-label">
             Label
@@ -264,7 +264,7 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
   ))
   .add('Error', () => (
     <div className="story">
-      <div className="wdc-form wdc-form-inline-labels">
+      <div className="wdc-form wdc-form-label-position-left">
         <div className="wdc-form-field-wrapper wdc-form-group">
           <label htmlFor="radioError" className="wdc-form-label">
             Label
