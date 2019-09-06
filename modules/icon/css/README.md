@@ -1,6 +1,6 @@
-# Canvas Kit CSS Icon
+# Canvas Kit Icon
 
-Icon injection and coloring toolkit for Canvas icons. Uses
+Icon injection and coloring toolkit for Canvas Kit icons. Uses
 [SVGInjector](https://github.com/iconic/SVGInjector).
 
 ## Installation
@@ -15,19 +15,14 @@ or
 yarn add @workday/canvas-kit-css-icon
 ```
 
-## Usage
+# Usage
 
-Icons will load from CDN by default and the injector will look for the `.wdc-icon` selector.
+Icons will load from the CDN by default. The injector will look for the `.wdc-icon` selector. You
+may also use a [custom icon selector](#custom-icon-selector).
 
-**HTML** Apply class `.wdc-icon` on an element to enable icon injection.
+## JavaScript
 
-```html
-<i className="wdc-icon" data-icon="activityStream" data-category="system" />
-<i className="wdc-icon" data-icon="apple" data-category="accent" data-color="chiliMango" />
-<i className="wdc-icon" data-icon="rocket" data-category="applet" data-hue="cinnamon" />
-```
-
-**JavaScript** Import script and execute.
+Import script and execute.
 
 ```js
 import initializeIcons from '@workday/canvas-kit-css-icon';
@@ -35,54 +30,51 @@ import initializeIcons from '@workday/canvas-kit-css-icon';
 initializeIcons();
 ```
 
-## Icon Configuration
+## HTML
 
-Icons may be configured through `data-*` properties below.
-
-### Selecting an icon
+Apply `.wdc-icon` to an element to enable icon injection. Icons may be configured using a variety of
+`data-*` attributes.
 
 ```html
+<i className="wdc-icon" data-icon="shield" data-category="accent" />
+<i className="wdc-icon" data-icon="benefits" data-category="applet" />
 <i className="wdc-icon" data-icon="activityStream" data-category="system" />
 ```
 
-##### `data-icon`
+## Data Attributes
 
-Icon name in camelCase.
+### Required
 
-##### `data-category`
+#### `data-icon`
 
-The category of the icon. Must be one of the following: `accent`, `applet`, or `system`.
+> Icon name in `camelCase`.
 
-### Sizing
+---
 
-```html
-<i className="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
-```
+#### `data-category`
 
-##### `data-size`
+> The category of the icon. Must be one of the following: `accent`, `applet`, or `system`. Each
+> category supports its own set of data attributes (see below).
 
-Set this attribute to render the icon in a particular size instead of the default size.
+## Colors
 
-## Accent Icons
+Canvas Kit icons support colors in a variety of contexts depending on the category of the icon.
 
-### Coloring
+In general, colors should be drawn from the
+[Canvas palette](https://design.workday.com/resources/colors). The color must be written in
+`camelCase`. If a hue name is used but no color shade is defined (e.g. `blueberry`), the color will
+default to the 500 weight (e.g. `blueberry500`).
 
-Accent icons may be colored in 1 color.
+In some cases, a custom color value (e.g. `#FFFFFF`) may also be used (see below).
 
-```html
-<i className="wdc-icon" data-icon="apple" data-category="accent" data-color="cinnamon300" />
+# Accent Icons
 
-<-- Shorthand Coloring -->
-<i className="wdc-icon" data-icon="apple" data-category="accent" data-color="chiliMango" />
-```
-
-##### `data-color`
-
-See [System Icons coloring](#system-icons).
-
-### Transparency
+## Usage
 
 ```html
+<i className="wdc-icon" data-icon="shield" data-category="accent" />
+<i className="wdc-icon" data-icon="shield" data-category="accent" data-color="pomegranate500" />
+<i className="wdc-icon" data-icon="shield" data-category="accent" data-size="80" />
 <i
   className="wdc-icon"
   data-icon="shield"
@@ -92,128 +84,95 @@ See [System Icons coloring](#system-icons).
 />
 ```
 
-##### `data-transparent`
+## Data Attributes
 
-Set this attribute to render a transparent accent icon background instead of the default white.
+### Optional
 
-## Applet Icons
+#### `data-color`
 
-### Coloring
+> Icon color from the [Canvas palette](https://design.workday.com/resources/colors) or a custom
+> color.
 
-Applet icons are colored by hues (e.g. blueberry). Selecting a hue will apply the proper color
-shades to the applet.
+Default: `blueberry500`
+
+#### `data-size`
+
+> Size of the icon in `px`.
+
+Default: `56`
+
+#### `data-transparent`
+
+> Toggle for transparent accent icon background. If `null`, the background fill will be white.
+
+Default: `null`
+
+# Applet Icons
+
+## Usage
 
 ```html
-<i className="wdc-icon" data-icon="rocket" data-category="applet" data-color="cinnamon" />
+<i className="wdc-icon" data-icon="benefits" data-category="applet" />
+<i className="wdc-icon" data-icon="benefits" data-category="applet" data-color="pomegranate" />
+<i className="wdc-icon" data-icon="benefits" data-category="applet" data-size="60" />
 ```
 
-##### `data-color`
+## Data Attributes
 
-> Applet icons only support base hues and will not accept shades.
+### Optional
 
-Use a hue in the [Canvas palette](https://design.workday.com/resources/colors). Hue must be written
-in camelCase. For example, `cinnamon`.
+#### `data-color`
 
-## System Icons
+> Icon hue from the [Canvas palette](https://design.workday.com/resources/colors) (e.g. `cinnamon`,
+> `chiliMango`, etc.). Applet icons only support base hues and will not accept shades.
 
-### Coloring
+Default: `blueberry`
 
-System icons contain up to 3 layers that can be colored independently.
+#### `data-size`
+
+> Size of the icon in `px`.
+
+Default: `92`
+
+# System Icons
+
+## Usage
+
+System icons contain up to 3 layers that may be colored independently: `accent`, `fill`, and
+`background`.
 
 ```html
+<i className="wdc-icon" data-icon="activityStream" data-category="system" />
 <i
   className="wdc-icon"
   data-icon="activityStream"
   data-category="system"
-  data-fill-color="cinnamon300"
-  data-accent-color="cinnamon300"
-  data-background-color="frenchVanilla100"
+  data-fill-color="blueberry500"
+  data-accent-color="frenchVanilla100"
+  data-background-color="blueberry500"
 />
+<i className="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
 
-<-- Shorthand Coloring -->
+<!-- Hover Colors -->
 <i
   className="wdc-icon"
   data-icon="activityStream"
   data-category="system"
-  data-fill-color="blueberry"
-  data-accent-color="blueberry"
-  data-background-color="transparent"
+  data-fill-color="blueberry500"
+  data-accent-color="frenchVanilla100"
+  data-background-color="blueberry500"
+  data-hover-fill-color="cantaloupe500"
+  data-hover-accent-color="frenchVanilla100"
+  data-hover-background-color="cantaloupe500"
 />
-```
 
-You may use the `data-color` shorthand to set the fill and accent colors simultaneously.
-
-```html
-<i
-  className="wdc-icon"
-  data-icon="activityStream"
-  data-category="system"
-  data-color="blueberry500"
-/>
-```
-
-##### `data-fill-color`, `data-accent-color`, `data-background-color`
-
-Use a color in the [Canvas palette](https://design.workday.com/resources/colors). Color must be
-written in camelCase.
-
-If a hue name is used but no color shade is defined (e.g. `blueberry`), the color will default to
-the 500 weight (e.g. `blueberry500`).
-
-A custom color value (e.g. `#FFFFFF`) may also be used.
-
-##### `data-color`
-
-Set the color for fill and accent layers simultaneously. This can be overridden by `data-fill-color`
-and `data-accent-color`.
-
-### Hover Coloring
-
-Each of the 3 layers can also be assigned a hover color.
-
-```html
-<i
-  className="wdc-icon"
-  data-icon="activityStream"
-  data-category="system"
-  data-hover-fill-color="blueberry600"
-  data-hover-accent-color="blueberry400"
-  data-hover-background-color="blueberry200"
-/>
-```
-
-You may use the `data-hover-color` shorthand to set the fill and accent hover colors simultaneously.
-
-```html
-<i
-  className="wdc-icon"
-  data-icon="activityStream"
-  data-category="system"
-  data-accent-color="blueberry500"
-  data-hover-color="cinnamon300"
-/>
-```
-
-##### `data-hover-fill-color`, `data-hover-accent-color`, `data-hover-background-color`
-
-Set the hover color of the corresponding layer.
-
-##### `data-hover-color`
-
-Set the hover color for fill and accent layers simultaneously. This can be overridden by
-`data-hover-fill-color` and `data-hover-accent-color`.
-
-### System Icon Circles
-
-```html
+<!-- Circle Background -->
 <i
   className="wdc-icon"
   data-icon="activityStream"
   data-category="system"
   data-circle-background="true"
 />
-
-<-- Circle with a Canvas Background Color -->
 <i
   className="wdc-icon"
   data-icon="activityStream"
@@ -222,25 +181,82 @@ Set the hover color for fill and accent layers simultaneously. This can be overr
 />
 ```
 
-##### `data-circle-background`
+## Data Attributes
 
-Set this attribute to render a system icon with a colored circular background. Set it to `true` to
-render the circlular background in the default color. You may also set it to a canvas or custom
-color.
+All system icon colors will accept colors from the
+[Canvas palette](https://design.workday.com/resources/colors) or a custom color.
 
-The icon color wil be determined based on contrast with the provided background color.
+### Optional
 
-> System Icon Circles cannot have hover colors.
+#### `data-color`
 
-## Injection Configuration
+> Icon color. This will define `data-accent-color` and `data-fill-color`. `data-accent-color` and
+> `data-fill-color` will override this property if defined.
 
-**Default Options**
+Default: `colors.primary.iconStandard`
+
+#### `data-hover-color`
+
+> Icon color on hover. This will define `data-hover-accent-color` and `data-hover-fill-color`.
+> `data-hover-accent-color` and `data-hover-fill-color` will override this property if defined.
+
+Default: `colors.primary.iconHover`
+
+#### `data-accent-color`
+
+> Accent color. This will override `data-color`.
+
+#### `data-hover-accent-color`
+
+> Accent color on hover. This will override `data-hover-color`.
+
+#### `data-background-color`
+
+> Background color.
+
+Default: `transparent`
+
+#### `data-hover-background-color`
+
+> Background color on hover.
+
+Default: `transparent`
+
+#### `data-fill-color`
+
+> Fill color. This will override `data-color`.
+
+#### `data-hover-fill-color`
+
+> Fill color on hover. This will override `data-hover-color`.
+
+#### `data-circle-background`
+
+> Background color for the circle background. Set it to `true` to render the circle background in
+> its default color (`soap300`). You may also use a color from the
+> [Canvas palette](https://design.workday.com/resources/colors) or a custom color. If `null`, the
+> circle background will not be rendered.
+>
+> The icon color will be determined based on contrast with the provided circle background color.
+> System icons with the circle background _cannot_ have hover colors.
+
+Default: `null`
+
+#### `data-size`
+
+> Size of the icon in `px`.
+
+Default: `24`
+
+# Injection Configuration
+
+## Default Options
 
 ```js
 initializeIcons((iconPath = null), (selector = '.wdc-icon'));
 ```
 
-### Icon Path
+## Icon Path
 
 You may define a custom path to a folder containing Canvas icons. Within this folder, each icon set
 must be named according to the structure below.
@@ -261,9 +277,9 @@ icons
 initializeIcons('./assets/icons');
 ```
 
-### Icon Selector
+## Custom Icon Selector
 
-Pass a selector string to the 2nd argument of the initialization function to target a different
+Pass a selector string to the second argument of the initialization function to target a different
 selector when injecting.
 
 ```js
