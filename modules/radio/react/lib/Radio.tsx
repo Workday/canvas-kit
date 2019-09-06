@@ -184,6 +184,7 @@ export default class Radio extends React.Component<RadioProps> {
   };
 
   public render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {
       checked,
       disabled,

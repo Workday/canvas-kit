@@ -29,8 +29,10 @@ describe('Select', () => {
         <SelectOption value="phone" label="Phone" />
       </Select>
     );
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
+    const select = component
+      .find('select') // TODO: Standardize on prop spread location (see #150)
+      .getDOMNode();
+    expect(select.getAttribute('data-propspread')).toBe('test');
     component.unmount();
   });
 });

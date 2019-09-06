@@ -17,6 +17,7 @@ const ColorPreviewComponent = styled(ColorInput)({
 
 export default class ColorPreview extends React.Component<ColorPreviewProps> {
   public render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {id, value, ...elemProps} = this.props;
 
     return (

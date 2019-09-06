@@ -75,6 +75,7 @@ export default class TextInput extends React.Component<TextInputProps> {
   };
 
   render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {grow, inputRef, error, ...inputProps} = this.props;
 
     let icon: React.ReactElement<SystemIcon> | undefined;

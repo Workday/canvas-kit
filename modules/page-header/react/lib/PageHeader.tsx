@@ -81,11 +81,12 @@ export default class PageHeader extends React.Component<PageHeaderProps> {
   }
 
   public render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {title, children, breakpoint, capWidth, ...elemProps} = this.props;
 
     return (
-      <Header {...elemProps}>
-        <Container breakpoint={breakpoint} capWidth={capWidth}>
+      <Header>
+        <Container breakpoint={breakpoint} capWidth={capWidth} {...elemProps}>
           <Title>{title}</Title>
           <IconList>{this.renderChildren(children)}</IconList>
         </Container>

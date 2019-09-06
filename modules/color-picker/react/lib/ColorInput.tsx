@@ -97,6 +97,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
   };
 
   public render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {
       showCheck,
       value,

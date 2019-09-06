@@ -49,7 +49,10 @@ describe('Page Header', () => {
 
   test('PageHeader should spread extra props', () => {
     const component = mount(<PageHeader data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
+    const container = component
+      .find('header')
+      .childAt(0) // TODO: Standardize on prop spread location (see #150)
+      .getDOMNode();
     expect(container.getAttribute('data-propspread')).toBe('test');
     component.unmount();
   });

@@ -75,6 +75,7 @@ export default class Switch extends React.Component<SwitchProps> {
   };
 
   public render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {checked, disabled, id, inputRef, onChange, value, ...elemProps} = this.props;
 
     return (

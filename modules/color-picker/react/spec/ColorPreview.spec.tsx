@@ -8,8 +8,10 @@ import ColorPreview from '../lib/ColorPreview';
 describe('ColorPreview', () => {
   test('Card should spread extra props', () => {
     const component = mount(<ColorPreview value={'#ffffff'} data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
+    const input = component
+      .find('input') // TODO: Standardize on prop spread location (see #150)
+      .getDOMNode();
+    expect(input.getAttribute('data-propspread')).toBe('test');
     component.unmount();
   });
 });
