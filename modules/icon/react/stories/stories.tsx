@@ -60,6 +60,24 @@ storiesOf('Icon', module)
         background={colors.blueberry500}
       />
       <br />
+      <SystemIcon icon={activityStreamIcon} colorHover={colors.cinnamon300} />
+      <SystemIcon
+        icon={activityStreamIcon}
+        color={colors.blueberry500}
+        fillHover={colors.chiliMango200}
+        accentHover={colors.chiliMango400}
+      />
+      <SystemIcon
+        className="custom-class"
+        icon={activityStreamIcon}
+        accent={colors.frenchVanilla100}
+        fill={colors.blueberry500}
+        background={colors.blueberry500}
+        fillHover={colors.cantaloupe500}
+        accentHover={colors.frenchVanilla100}
+        backgroundHover={colors.cantaloupe500}
+      />
+      <br />
       <SystemIcon icon={activityStreamIcon} size={48} />
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} background={colors.blueberry400} />
