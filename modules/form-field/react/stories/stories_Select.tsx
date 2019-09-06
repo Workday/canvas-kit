@@ -107,7 +107,6 @@ storiesOf('Form Field/Select/Top Label', module)
   ));
 
 storiesOf('Form Field/Select/Left Label', module)
-  .addDecorator(InputProviderDecorator)
   .addDecorator(withReadme(README))
   .add('Plain', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-plain">

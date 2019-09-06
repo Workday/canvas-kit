@@ -33,9 +33,9 @@
     margin-left: $wdc-spacing-xxxs;
   }
 
-  &+.wdc-form-textinput,
-  &+.wdc-form-textarea,
-  &+.wdc-form-select {
+  & + .wdc-form-textinput,
+  & + .wdc-form-textarea,
+  & + .wdc-form-select {
     margin-top: $wdc-spacing-xxs;
   }
 }
@@ -87,7 +87,7 @@
       margin-bottom: 26px;
     }
 
-    &>.wdc-form-field {
+    & > .wdc-form-field {
       margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
       // Case where there's no label on the left
       flex-grow: 0;
@@ -103,7 +103,7 @@
       }
     }
 
-    &>.wdc-form-label+.wdc-form-field {
+    & > .wdc-form-label + .wdc-form-field {
       margin-left: 0;
     }
   }
@@ -118,7 +118,8 @@
   }
 
   input[type='checkbox'],
-  input[type='radio'] {}
+  input[type='radio'] {
+  }
 }
 
 .wdc-form-inline-labels {
