@@ -19,4 +19,11 @@ describe('Modal', () => {
     expect(cb.mock.calls.length).toBe(1);
     component.unmount();
   });
+
+  test('Modal should spread extra props', () => {
+    const component = mount(<Modal open={true} data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });

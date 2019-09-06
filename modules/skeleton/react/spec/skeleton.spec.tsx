@@ -14,6 +14,13 @@ describe('Skeleton', () => {
     subject.unmount();
   });
 
+  test('Skeleton should spread extra props', () => {
+    const component = mount(<Skeleton data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
+
   describe('Accessibility', () => {
     it('should add aria-hidden to all of the children', () => {
       const subject = mount(

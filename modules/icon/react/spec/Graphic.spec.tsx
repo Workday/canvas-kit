@@ -1,18 +1,18 @@
 import * as React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import Graphic, {graphicStyles} from '../lib/Graphic';
 import Svg from '../lib/Svg';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
+const mockGraphic: CanvasGraphic = {
+  name: 'mockGraphic',
+  type: CanvasIconTypes.Graphic,
+  svg: '<svg></svg>',
+  filename: 'mock-graphic.svg',
+};
+
 describe('Graphic', () => {
   test('Icon is of type graphic', () => {
-    const mockGraphic: CanvasGraphic = {
-      name: 'mockGraphic',
-      type: CanvasIconTypes.Graphic,
-      svg: '<svg></svg>',
-      filename: 'mock-graphic.svg',
-    };
-
     const component = shallow(<Graphic src={mockGraphic} />);
     expect(component.find(Svg).prop('type')).toEqual('graphic');
     component.unmount();
@@ -49,5 +49,12 @@ describe('Graphic', () => {
         },
       })
     );
+  });
+
+  test('AccentIcon should spread extra props', () => {
+    const component = mount(<Graphic src={mockGraphic} data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
   });
 });

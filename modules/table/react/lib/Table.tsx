@@ -18,6 +18,8 @@ const TableComponent = styled('table')(type.body, {
 
 export default class Table extends React.Component<React.TableHTMLAttributes<HTMLTableElement>> {
   public render() {
-    return <TableComponent {...this.props}>{this.props.children}</TableComponent>;
+    const {children, ...elemProps} = this.props;
+
+    return <TableComponent {...elemProps}>{children}</TableComponent>;
   }
 }

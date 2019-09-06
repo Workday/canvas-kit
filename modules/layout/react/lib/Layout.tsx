@@ -81,9 +81,11 @@ export default class Layout extends React.Component<LayoutProps> {
   };
 
   public render() {
+    const {children, spacing, gutter, capWidth, ...elemProps} = this.props;
+
     return (
-      <LayoutContainer {...this.props}>
-        {React.Children.map(this.props.children, this.renderChild)}
+      <LayoutContainer gutter={gutter} capWidth={capWidth} {...elemProps}>
+        {React.Children.map(children, this.renderChild)}
       </LayoutContainer>
     );
   }

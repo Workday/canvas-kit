@@ -7,7 +7,7 @@ const TextContainer = styled('div')({
   marginBottom: canvas.spacing.m,
 });
 
-export interface SkeletonTextProps {
+export interface SkeletonTextProps extends React.HTMLAttributes<HTMLDivElement> {
   lineCount: number;
 }
 
@@ -32,8 +32,13 @@ export default class SkeletonText extends React.Component<SkeletonTextProps> {
   };
 
   render(): React.ReactNode {
-    const {lineCount} = this.props;
-    return lineCount > 0 ? <TextContainer>{this.createTextLines()}</TextContainer> : null;
+    const {lineCount, ...elemProps} = this.props;
+
+    if (lineCount <= 0) {
+      return null;
+    }
+
+    return <TextContainer {...elemProps}>{this.createTextLines()}</TextContainer>;
   }
 
   private readonly createTextLines = () => {

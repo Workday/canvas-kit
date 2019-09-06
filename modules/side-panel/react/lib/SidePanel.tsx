@@ -158,7 +158,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
       onBreakpointChange,
       openWidth,
       backgroundColor,
-      ...otherProps
+      ...elemProps
     } = this.props;
 
     return (
@@ -170,7 +170,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
         openWidth={openWidth}
         backgroundColor={backgroundColor}
         open={open}
-        {...otherProps}
+        {...elemProps}
       >
         <ChildrenContainer openWidth={openWidth}>
           {header && open ? <Header>{header}</Header> : null}

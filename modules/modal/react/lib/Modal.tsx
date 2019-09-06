@@ -9,7 +9,7 @@ export enum ModalWidth {
   m = '800px',
 }
 
-export interface ModalProps {
+export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
   padding: PopupPadding;
   transformOrigin: TransformOrigin;
@@ -70,10 +70,10 @@ export default class Modal extends React.Component<ModalProps> {
   };
 
   public render() {
-    const {open, handleClose, padding, width, heading, transformOrigin} = this.props;
+    const {open, handleClose, padding, width, heading, transformOrigin, ...elemProps} = this.props;
     return (
       open && (
-        <Container onClick={e => this.handleOutsideClick(handleClose, e)}>
+        <Container onClick={e => this.handleOutsideClick(handleClose, e)} {...elemProps}>
           <Popup
             popupRef={this.modalRef}
             width={width}

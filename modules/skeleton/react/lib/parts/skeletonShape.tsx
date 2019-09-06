@@ -18,7 +18,7 @@ const Shape = styled('div')<{
   };
 });
 
-export interface SkeletonShapeProps {
+export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement> {
   width?: number | string;
   height?: number | string;
   borderRadius?: number | string;
@@ -26,8 +26,8 @@ export interface SkeletonShapeProps {
 
 export default class SkeletonShape extends React.Component<SkeletonShapeProps> {
   render(): React.ReactNode {
-    const {width, height, borderRadius} = this.props;
+    const {width, height, borderRadius, ...elemProps} = this.props;
 
-    return <Shape width={width} height={height} borderRadius={borderRadius} />;
+    return <Shape width={width} height={height} borderRadius={borderRadius} {...elemProps} />;
   }
 }

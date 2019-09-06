@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {mount} from 'enzyme';
 import Toast from '../lib/Toast';
 import * as renderer from 'react-test-renderer';
 import {checkIcon} from '@workday/canvas-system-icons-web';
@@ -29,5 +30,12 @@ describe('Toast Snapshots', () => {
       </Toast>
     );
     expect(component).toMatchSnapshot();
+  });
+
+  test('Toast should spread extra props', () => {
+    const component = mount(<Toast data-propspread="test">Message</Toast>);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
   });
 });

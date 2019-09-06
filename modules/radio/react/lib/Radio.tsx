@@ -184,6 +184,7 @@ export default class Radio extends React.Component<RadioProps> {
   };
 
   public render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {
       checked,
       disabled,
@@ -193,7 +194,7 @@ export default class Radio extends React.Component<RadioProps> {
       name,
       onChange,
       value,
-      ...otherProps
+      ...elemProps
     } = this.props;
 
     return (
@@ -208,7 +209,7 @@ export default class Radio extends React.Component<RadioProps> {
             onChange={onChange}
             type="radio"
             value={value}
-            {...otherProps}
+            {...elemProps}
           />
           <RadioBackground checked={checked} disabled={disabled}>
             <RadioCheck checked={checked} />

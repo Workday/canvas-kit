@@ -92,6 +92,15 @@ describe('ColorInput', () => {
     mount(<ColorInput inputRef={ref} value={''} />);
     expect(ref.current && ref.current.tagName && ref.current.tagName.toUpperCase()).toBe('INPUT');
   });
+
+  test('ColorInput should spread extra props', () => {
+    const component = mount(<ColorInput data-propspread="test" />);
+    const input = component
+      .find('input') // TODO: Standardize on prop spread location (see #150)
+      .getDOMNode();
+    expect(input.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });
 
 describe('ColorInput Accessibility', () => {

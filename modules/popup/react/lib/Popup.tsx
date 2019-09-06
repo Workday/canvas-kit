@@ -87,7 +87,7 @@ export default class Popup extends React.Component<PopupProps> {
       closeIconSize,
       transformOrigin,
       popupRef,
-      ...otherProps
+      ...elemProps
     } = this.props;
     return (
       <Container
@@ -95,7 +95,7 @@ export default class Popup extends React.Component<PopupProps> {
         width={width}
         role="dialog"
         innerRef={popupRef}
-        {...otherProps}
+        {...elemProps}
       >
         {handleClose && (
           <CloseIconContainer closeIconSize={closeIconSize}>

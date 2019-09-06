@@ -96,6 +96,7 @@ export default class Select extends React.Component<SelectProps> {
   };
 
   public render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {error, disabled, grow, children, value, onChange, ...elemProps} = this.props;
 
     return (

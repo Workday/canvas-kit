@@ -6,7 +6,7 @@ import Hint from './Hint';
 import Label from './Label';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
-export interface FormFieldProps extends GrowthBehavior {
+export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
   labelPosition: FormFieldLabelPosition;
   label?: React.ReactNode;
   hintText?: React.ReactNode;
@@ -125,12 +125,13 @@ export default class FormField extends React.Component<FormFieldProps> {
       grow,
       children,
       useFieldset,
-      ...inputProps
+      labelPosition,
+      error,
+      ...elemProps
     } = this.props;
-    const {labelPosition, error} = inputProps;
 
     const field = (
-      <FormFieldContainer labelPosition={labelPosition}>
+      <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
         {typeof label === 'string' ? (
           <Label labelPosition={labelPosition} htmlFor={inputId} isLegend={useFieldset}>
             {label}

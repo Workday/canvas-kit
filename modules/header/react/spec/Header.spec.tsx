@@ -126,6 +126,13 @@ describe('Header', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
+  test('Header should spread extra props', () => {
+    const component = mount(<Header data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
+
   describe('How Header children render', () => {
     beforeEach(() => {
       window.resizeBy(1280, 1024);

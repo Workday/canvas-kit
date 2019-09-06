@@ -51,10 +51,10 @@ const ChildrenContainer = styled('div')({
 
 export default class ActionBar extends React.Component<ActionBarProps> {
   public render() {
-    const {fixed, children, ...props} = this.props;
+    const {fixed, children, ...elemProps} = this.props;
 
     return (
-      <ActionBarContainer {...props} fixed={fixed}>
+      <ActionBarContainer {...elemProps} fixed={fixed}>
         <ChildrenContainer>{children}</ChildrenContainer>
       </ActionBarContainer>
     );

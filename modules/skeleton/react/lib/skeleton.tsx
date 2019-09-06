@@ -54,7 +54,7 @@ export default class Skeleton extends React.Component<{}, SkeletonState> {
   };
 
   render(): React.ReactNode {
-    const {children} = this.props;
+    const {children, ...elemProps} = this.props;
     const {width, height} = this.state;
     const diagonal = Math.sqrt(width * width + height * height) + WHITE_SHEEN_WIDTH;
     const topPosition = (-1 * (diagonal - height)) / 2;
@@ -65,6 +65,7 @@ export default class Skeleton extends React.Component<{}, SkeletonState> {
         aria-live={'polite'}
         role={'status'}
         innerRef={this.ref}
+        {...elemProps}
       >
         <SkeletonAnimator diagonal={diagonal} topPosition={topPosition} width={width} />
         <div aria-hidden={true}>{children}</div>

@@ -74,6 +74,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   }
 
   public render() {
+    // TODO: Standardize on prop spread location (see #150)
     const {
       children,
       id,
@@ -88,6 +89,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     } = this.props;
     const {selectedItemIndex} = this.state;
     const cardWidth = grow ? '100%' : width;
+
     return (
       <Card
         style={{display: 'inline-block', minWidth: minWidth + 2}}

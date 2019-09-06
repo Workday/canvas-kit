@@ -59,7 +59,7 @@ describe('Menu', () => {
   test('should not call on close function when item is clicked with shouldClose disabled', () => {
     const component = mount(
       <Menu onClose={cb}>
-        <MenuItem shouldClose={false}/>
+        <MenuItem shouldClose={false} />
       </Menu>
     );
     const item = component.find('li');
@@ -118,6 +118,22 @@ describe('Menu', () => {
     expect(component.find('span').getDOMNode().innerHTML).toEqual(
       mount(labelText).getDOMNode().outerHTML
     );
+    component.unmount();
+  });
+
+  test('Menu should spread extra props', () => {
+    const component = mount(<Menu data-propspread="test" />);
+    const list = component
+      .find('ul') // TODO: Standardize on prop spread location (see #150)
+      .getDOMNode();
+    expect(list.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
+
+  test('Menu Item should spread extra props', () => {
+    const component = mount(<MenuItem data-propspread="test" />);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('data-propspread')).toBe('test');
     component.unmount();
   });
 });

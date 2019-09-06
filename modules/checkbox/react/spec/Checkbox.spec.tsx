@@ -43,6 +43,15 @@ describe('Checkbox', () => {
     expect(cb.mock.calls.length).toBe(1);
     component.unmount();
   });
+
+  test('Checkbox should spread extra props', () => {
+    const component = mount(<Checkbox data-propspread="test" />);
+    const input = component
+      .find('input') // TODO: Standardize on prop spread location (see #150)
+      .getDOMNode();
+    expect(input.getAttribute('data-propspread')).toBe('test');
+    component.unmount();
+  });
 });
 
 describe('Checkbox Accessibility', () => {

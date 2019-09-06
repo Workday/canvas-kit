@@ -125,7 +125,6 @@ exports[`Layout Snapshots renders a layout and columns with custom spacing 1`] =
 
 <div
   className="emotion-6 emotion-7"
-  spacing={60}
 >
   <div
     className="emotion-0 emotion-1"
