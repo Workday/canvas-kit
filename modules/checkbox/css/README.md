@@ -40,4 +40,4 @@ made fully accessible.
 
 ## Labels
 
-Render a select inside a [canvas-kit-form-field](../../form-field/css) to add a label.
+Render a checkbox inside a [canvas-kit-form-field](../../form-field/css) to add a label.
