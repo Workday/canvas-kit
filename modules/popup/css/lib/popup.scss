@@ -47,14 +47,8 @@
 }
 
 .wdc-popup {
+  @include card-common();
   position: relative;
-  background-color: $_wdc-popup-bg-color;
-  padding: $wdc-spacing-s;
-  border-radius: 3px;
-  border: 1px solid $_wdc-popup-border-color;
-  position: relative;
-  width: max-content;
-  max-width: $_wdc-popup-max-width;
   animation-duration: 150ms;
   animation-timing-function: ease-out;
 
@@ -91,18 +85,6 @@
   &-animation-origin-left-center {
     animation-name: popupAnimationLeftCenter;
     transform-origin: left center;
-  }
-
-  // Fallback for IE11
-  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
-    width: auto;
-    min-width: $_wdc-popup-menu-min-width;
-  }
-
-  // Fallback for Edge and browsers that don't support max-content
-  @supports not (width: max-content) {
-    width: auto;
-    min-width: $_wdc-popup-menu-min-width;
   }
 }
 
