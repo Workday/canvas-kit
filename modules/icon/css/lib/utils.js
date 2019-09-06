@@ -45,3 +45,16 @@ export function getColor(color) {
 
   return foundColor[1];
 }
+
+export function appendStyle(css) {
+  const style = document.createElement('style');
+
+  if (style.styleSheet) {
+    // Required for IE8 and below
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+
+  document.getElementsByTagName('head')[0].appendChild(style);
+}
