@@ -25,13 +25,13 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
         }}
       >
         <div className="wdc-popup-container">
-          <Button buttonType={Button.Types.Delete} onClick={this.handleClick}>
+          <Button buttonType={Button.Types.Delete} onClick={this.onOpenPopupClick}>
             Delete Item
           </Button>
           {open ? (
             <div className="wdc-popup wdc-popup-animation-origin-top-center wdc-depth-2">
               <div className="wdc-popup-close">
-                <button className="wdc-btn-icon-circle">
+                <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
                   <SystemIcon icon={xIcon} />
                 </button>
               </div>
@@ -41,12 +41,12 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
               </div>
               <Button
                 style={{marginRight: '16px'}}
-                onClick={this.handleSubmit}
+                onClick={this.onDeleteClick}
                 buttonType={Button.Types.Delete}
               >
                 Delete
               </Button>
-              <Button onClick={this.handleSubmit} buttonType={Button.Types.Secondary}>
+              <Button onClick={this.onCancelClick} buttonType={Button.Types.Secondary}>
                 Cancel
               </Button>
             </div>
@@ -56,19 +56,25 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
     );
   }
 
-  private handleClose = () => {
+  private onCloseClick = () => {
     this.setState({
       open: false,
     });
   };
 
-  private handleSubmit = () => {
+  private onDeleteClick = () => {
     this.setState({
       open: false,
     });
   };
 
-  private handleClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+  private onCancelClick = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  private onOpenPopupClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     this.setState({
       open: !this.state.open,
     });
