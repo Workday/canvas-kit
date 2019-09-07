@@ -5,11 +5,18 @@ import README from './README.md';
 import {Button} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react';
+import {css} from 'emotion';
+import {CSSObject} from 'create-emotion';
 import './index.scss';
 
 interface PopupWrapperState {
   open: boolean;
 }
+
+const popupStoryContainer: CSSObject = {
+  position: 'absolute',
+  width: '50%',
+};
 
 class PopupWrapper extends React.Component<{}, PopupWrapperState> {
   state = {
@@ -24,12 +31,12 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
           justifyContent: 'center',
         }}
       >
-        <div className="wdc-popup-container">
+        <div className={css(popupStoryContainer)}>
           <Button buttonType={Button.Types.Delete} onClick={this.onOpenPopupClick}>
             Delete Item
           </Button>
           {open ? (
-            <div className="wdc-popup wdc-popup-animation-origin-top-center wdc-depth-2">
+            <div className="wdc-popup wdc-popup-animation-origin-top-left wdc-depth-2">
               <div className="wdc-popup-close">
                 <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
                   <SystemIcon icon={xIcon} />

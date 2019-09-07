@@ -1,51 +1,3 @@
-@keyframes popupAnimationTopCenter {
-  from {
-    opacity: 0;
-    transform: translate(0, -50%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-@keyframes popupAnimationRightCenter {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-@keyframes popupAnimationLeftCenter {
-  from {
-    opacity: 0;
-    transform: translate(50%, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-@keyframes popupAnimationBottomCenter {
-  from {
-    opacity: 0;
-    transform: translate(0, 50%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
 .wdc-popup {
   @include card-common();
   position: relative;
@@ -86,10 +38,26 @@
     animation-name: popupAnimationLeftCenter;
     transform-origin: left center;
   }
-}
 
-.wdc-popup-container {
-  position: relative;
+  &-animation-origin-top-left {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: top left;
+  }
+
+  &-animation-origin-top-right {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: top right;
+  }
+
+  &-animation-origin-bottom-right {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: bottom right;
+  }
+
+  &-animation-origin-bottom-left {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: bottom right;
+  }
 }
 
 .wdc-popup.wdc-popup-no-padding {
