@@ -2,6 +2,8 @@
 
 @mixin wdc-type() {
   font-family: $wdc-font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   margin: 0;
 }
 
@@ -12,7 +14,6 @@
   line-height: 68px;
   color: $wdc-color-black-pepper-400;
 }
-
 @mixin wdc-type-data-viz-2() {
   font-size: 34px;
   font-weight: 300;
@@ -63,11 +64,9 @@
   line-height: 20px;
   color: $wdc-color-black-pepper-300;
 }
-
 @mixin wdc-type-body() {
   @include wdc-type-body-1();
 }
-
 @mixin wdc-type-body-2() {
   @include wdc-type-body();
   font-size: 13px;
@@ -85,28 +84,22 @@
 @mixin wdc-type-variant-label() {
   font-weight: 500;
 }
-
 @mixin wdc-type-variant-button() {
   font-weight: 500;
 }
-
 @mixin wdc-type-variant-btn() {
   @include wdc-type-variant-button();
 }
-
 @mixin wdc-type-variant-caps() {
   font-weight: 500;
   text-transform: uppercase;
 }
-
 @mixin wdc-type-variant-hint() {
   color: $wdc-color-licorice-300;
 }
-
 @mixin wdc-type-variant-error() {
   color: $wdc-color-peach-500;
 }
-
 @mixin wdc-type-variant-link() {
   color: $wdc-color-blueberry-500;
   text-decoration: none;
@@ -126,15 +119,12 @@
     outline: 2px solid $wdc-color-blueberry-100;
   }
 }
-
 @mixin wdc-type-variant-mono() {
   font-family: $wdc-font-family-mono;
 }
-
 @mixin wdc-type-variant-inverse() {
   color: $wdc-color-french-vanilla-100;
 }
-
 @mixin wdc-type-variant-white() {
   @include wdc-type-variant-inverse();
 }
