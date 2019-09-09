@@ -15,7 +15,7 @@ interface PopupWrapperState {
 
 const popupStoryContainer: CSSObject = {
   position: 'absolute',
-  width: '50%',
+  width: '400px',
 };
 
 class PopupWrapper extends React.Component<{}, PopupWrapperState> {
@@ -36,7 +36,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
             Delete Item
           </Button>
           {open ? (
-            <div className="wdc-popup wdc-popup-animation-origin-top-center">
+            <div className="wdc-popup wdc-popup-padding-s wdc-popup-animation-origin-top-center">
               <div className="wdc-popup-close">
                 <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
                   <SystemIcon icon={xIcon} />

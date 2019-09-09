@@ -53,6 +53,18 @@ import {SystemIcon} from '@workday/canvas-kit-react';
 </div>;
 ```
 
+### Padding
+
+The default padding for the Popup is set to `32px`. You can adjust padding based on these classes
+`wdc-popup-no-padding` or `wdc-popup-padding-s` which sets the padding to `16px`
+
+```html
+<div class="wdc-popup wdc-popup-no-padding">
+  <div class="wdc-popup-title">Popup Title</div>
+  <div>Popup content</div>
+</div>
+```
+
 ### Animation Origin Modifiers
 
 Eight directions are available. Each direction will change the the animation origin. Use origin
