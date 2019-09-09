@@ -1,7 +1,7 @@
-# Canvas Kit Grid System
+# Canvas Kit Layout
 
-Canvas Kit Grid System is based on a 12 column grid. The Canvas Grid System uses the flexbox layout
-for positioning of columns.
+Canvas Kit Layout is based on a 12 column grid. It uses the flexbox layout for positioning of
+columns.
 
 ## Installation
 
@@ -12,27 +12,27 @@ yarn add @workday/canvas-kit-css
 or
 
 ```sh
-yarn add @workday/canvas-kit-css-grid-system
+yarn add @workday/canvas-kit-css-layout
 ```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
 
 ```scss
-@import '~@workday/canvas-kit-css-grid-system/index.scss';
+@import '~@workday/canvas-kit-css-layout/index.scss';
 ```
 
 ## Usage
 
-### Grid Options
+### Layout Options
 
-|              | Small         | Medium        | Large         | Extra Large  |
-| ------------ | ------------- | ------------- | ------------- | ------------ |
-| Breakpoint   | > 320px       | > 768px       | > 992px       | > 1200px     |
-| Gutter Width | 16px          | 16px          | 24px          | 40px         |
-| Class Prefix | `wdc-col-sm-` | `wdc-col-md-` | `wdc-col-lg-` | `wdc-col-xl` |
+|               | Small         | Medium        | Large         | Extra Large  |
+| ------------- | ------------- | ------------- | ------------- | ------------ |
+| Breakpoint    | > 320px       | > 768px       | > 992px       | > 1200px     |
+| Spacing Width | 16px          | 16px          | 24px          | 40px         |
+| Class Prefix  | `wdc-col-sm-` | `wdc-col-md-` | `wdc-col-lg-` | `wdc-col-xl` |
 
-### Responsive Grids
+### Responsive Layout
 
 Responsive modifiers allow you to specify different column sizes for different breakpoints.
 
@@ -53,9 +53,9 @@ Responsive modifiers allow you to specify different column sizes for different b
 </div>
 ```
 
-### Fluid Grids
+### Fluid Layout
 
-Fluid grids are percentage based columns for resizing content.
+Fluid layouts use percentage based columns for resizing content.
 
 ```html
 <div class="wdc-row">
@@ -92,7 +92,7 @@ Fluid grids are percentage based columns for resizing content.
 </div>
 ```
 
-### Grids with Offsets
+### Offsets
 
 Offsets for columns.
 
@@ -177,7 +177,7 @@ Vertical position for columns.
 </div>
 ```
 
-### Grid Distribution
+### Distribution
 
 Position content with `wdc-row-around` and `wdc-row-between`.
 
