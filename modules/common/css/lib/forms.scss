@@ -15,9 +15,8 @@
 
   &.wdc-form-focus:not([disabled]):not(.wdc-form-disabled),
   &:focus:not([disabled]):not(.wdc-form-disabled) {
-    border-color: $wdc-color-input-hover-border;
-    border-color: $wdc-color-blueberry-400;
-    box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400;
+    border-color: $wdc-color-input-focus-border;
+    box-shadow: inset 0 0 0 1px $wdc-color-input-focus-border;
     outline: none;
   }
 }
@@ -39,6 +38,7 @@
 
   &:disabled,
   &.wdc-form-disabled {
+    cursor: default;
     background: $wdc-color-soap-100;
     border-color: $wdc-color-input-disabled-border;
     pointer-events: none;
@@ -56,6 +56,7 @@
   outline: none;
 }
 
+// Common styles for checkboxes and radios
 @mixin wdc-form-selection-control() {
   padding: 6px 0;
   display: inline-block;
@@ -81,8 +82,8 @@
       color: $wdc-color-black-pepper-300;
       font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
       position: relative;
-      left: $wdc-spacing-xs + 18px;
-      padding-right: $wdc-spacing-xs + 18px;
+      left: $wdc-spacing-xs + $wdc-form-selection-control-spacing;
+      padding-right: $wdc-spacing-xs + $wdc-form-selection-control-spacing;
       cursor: pointer;
 
       // Input styling
@@ -93,8 +94,8 @@
         border-radius: 2px;
         border: 1px solid $wdc-color-licorice-200;
         box-sizing: border-box;
-        width: 18px;
-        height: 18px;
+        width: $wdc-form-selection-control-spacing;
+        height: $wdc-form-selection-control-spacing;
         transition: border 200ms ease, background-color 200ms;
         position: absolute;
         left: -30px;
@@ -109,8 +110,8 @@
         border-radius: 16px;
         margin-top: 1px;
         left: -30px;
-        width: 18px;
-        height: 18px;
+        width: $wdc-form-selection-control-spacing;
+        height: $wdc-form-selection-control-spacing;
         background: $wdc-color-soap-200;
         box-shadow: 0 0 0 0px $wdc-color-soap-200;
         transition: box-shadow 150ms ease-out;
@@ -131,6 +132,7 @@
 
     &:disabled + label {
       color: $wdc-color-licorice-100;
+      cursor: default;
 
       &::before {
         border-color: $wdc-color-soap-600;
