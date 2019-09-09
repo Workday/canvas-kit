@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Interpolation} from 'emotion';
 import styled from 'react-emotion';
 import {rgba} from 'polished';
-import {colors, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
+import {colors, spacing, spacingNumbers, statusColors} from '@workday/canvas-kit-react-core';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
 export enum TableRowState {
@@ -26,9 +26,9 @@ export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement>
   header?: boolean;
 }
 
-const errorColor = colors.cinnamon400;
+const errorColor = statusColors.error;
 const errorColorLight = colors.cinnamon200;
-const alertColor = colors.cantaloupe400;
+const alertColor = statusColors.warning;
 const alertColorLight = colors.cantaloupe200;
 
 function makeColoredRow(_bgColor: string, _borderColor: string): Interpolation {
