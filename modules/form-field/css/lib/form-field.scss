@@ -5,7 +5,7 @@
 
   .wdc-form-field {
     position: relative;
-    min-height: 32px;
+    min-height: $wdc-spacing-l;
     display: flex;
     flex-direction: column;
   }
@@ -43,7 +43,7 @@
 // Form Groups
 @mixin wdc-form-group() {
   .wdc-form-label:first-child {
-    margin-bottom: 12px;
+    margin-bottom: $wdc-spacing-xs;
   }
 
   .wdc-form-field-wrapper:last-child {
@@ -53,7 +53,7 @@
   .wdc-form-group-fields {
     display: inline-block;
     flex-grow: 1;
-    margin-top: -8px;
+    margin-top: -$wdc-spacing-xxs;
 
     .wdc-form-field {
       margin-bottom: 0;
