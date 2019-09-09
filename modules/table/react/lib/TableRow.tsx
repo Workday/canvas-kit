@@ -5,7 +5,7 @@ import {rgba} from 'polished';
 import {colors, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
-export enum TableRowStates {
+export enum TableRowState {
   Error,
   Alert,
   InputError,
@@ -18,7 +18,7 @@ export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement>
   /**
    * State of the row
    */
-  state?: TableRowStates;
+  state?: TableRowState;
 
   /**
    * Whether or not the row contains header elements
@@ -151,19 +151,19 @@ const Row = styled('tr')<TableRowProps>(
     const styles: Interpolation = [];
 
     switch (state) {
-      case TableRowStates.InputError:
+      case TableRowState.InputError:
         styles.push(makeBorderlessStyle(errorColor));
         break;
-      case TableRowStates.Error:
+      case TableRowState.Error:
         styles.push(makeColoredRowStyle(errorColor, errorColorLight));
         break;
-      case TableRowStates.InputAlert:
+      case TableRowState.InputAlert:
         styles.push(makeBorderlessStyle(alertColor));
         break;
-      case TableRowStates.Alert:
+      case TableRowState.Alert:
         styles.push(makeColoredRowStyle(alertColor, alertColorLight));
         break;
-      case TableRowStates.Selected:
+      case TableRowState.Selected:
         styles.push({
           'th, td': [
             makeColoredRow(colors.blueberry100, colors.blueberry500),
@@ -201,7 +201,7 @@ const Row = styled('tr')<TableRowProps>(
 );
 
 export default class TableRow extends React.Component<TableRowProps> {
-  public static State = TableRowStates;
+  public static State = TableRowState;
 
   public render() {
     const {state, header, children, ...elemProps} = this.props;
