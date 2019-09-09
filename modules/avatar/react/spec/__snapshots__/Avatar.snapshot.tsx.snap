@@ -118,7 +118,6 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
 >
   <div
     className="emotion-1"
-    size={64}
   >
     <span
       className="emotion-0"
@@ -308,7 +307,6 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
 >
   <div
     className="emotion-1"
-    size={64}
   >
     <span
       className="emotion-0"
@@ -556,7 +554,6 @@ exports[`Avatar Snapshots renders as expected 1`] = `
 >
   <div
     className="emotion-1"
-    size={32}
   >
     <span
       className="emotion-0"

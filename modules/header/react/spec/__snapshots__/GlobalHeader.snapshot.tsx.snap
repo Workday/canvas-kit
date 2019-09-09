@@ -557,11 +557,9 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
       aria-label="Avatar"
       className="emotion-16"
       disabled={true}
-      size={32}
     >
       <div
         className="emotion-15"
-        size={32}
       >
         <span
           className="emotion-14"
@@ -2201,11 +2199,9 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
       aria-label="Avatar"
       className="emotion-28"
       disabled={true}
-      size={32}
     >
       <div
         className="emotion-27"
-        size={32}
       >
         <span
           className="emotion-26"
@@ -2745,6 +2741,8 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
   width: 32px;
   height: 32px;
   background-color: transparent;
+  width: 40px;
+  height: 40px;
 }
 
 .emotion-9:hover:active {

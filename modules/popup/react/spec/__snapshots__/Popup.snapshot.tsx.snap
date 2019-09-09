@@ -245,7 +245,6 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
       aria-label="Close"
       className="emotion-1 emotion-2"
       onClick={[MockFunction]}
-      size="medium"
       title="Close"
     >
       <span
@@ -468,7 +467,6 @@ exports[`Popup Snapshots renders Popup with close icon 1`] = `
       aria-label="Close"
       className="emotion-1 emotion-2"
       onClick={[MockFunction]}
-      size="medium"
       title="Close"
     >
       <span
@@ -687,7 +685,6 @@ exports[`Popup Snapshots renders Popup with different padding 1`] = `
       aria-label="Close"
       className="emotion-1 emotion-2"
       onClick={[MockFunction]}
-      size="medium"
       title="Close"
     >
       <span

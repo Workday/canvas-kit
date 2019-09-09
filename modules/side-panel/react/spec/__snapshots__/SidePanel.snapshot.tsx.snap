@@ -590,7 +590,6 @@ exports[`SidePanel Snapshots renders a toggle button 1`] = `
       aria-pressed={false}
       className="emotion-3 emotion-4 emotion-5"
       onClick={[Function]}
-      size="small"
     >
       <span
         className="emotion-2"
@@ -928,7 +927,6 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
       aria-pressed={false}
       className="emotion-3 emotion-4 emotion-5"
       onClick={[Function]}
-      size="small"
     >
       <span
         className="emotion-2"
@@ -1155,7 +1153,6 @@ exports[`SidePanel Snapshots renders side panel on the right with correct toggle
       aria-pressed={false}
       className="emotion-5 emotion-6 emotion-7"
       onClick={[Function]}
-      size="small"
     >
       <span
         className="emotion-4"

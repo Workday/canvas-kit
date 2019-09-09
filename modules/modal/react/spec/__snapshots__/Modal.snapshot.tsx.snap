@@ -311,7 +311,6 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
         aria-label="Close"
         className="emotion-1 emotion-2"
         onClick={[MockFunction]}
-        size="medium"
         title="Close"
       >
         <span
@@ -568,7 +567,6 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
         aria-label="Close"
         className="emotion-1 emotion-2"
         onClick={[MockFunction]}
-        size="medium"
         title="Close"
       >
         <span
@@ -821,7 +819,6 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
         aria-label="Close"
         className="emotion-1 emotion-2"
         onClick={[MockFunction]}
-        size="medium"
         title="Close"
       >
         <span
