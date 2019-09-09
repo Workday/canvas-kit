@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Card from '@workday/canvas-kit-react-card';
 import styled from 'react-emotion';
-import {IconButton, ButtonSize} from '@workday/canvas-kit-react-button';
+import {IconButton, IconButtonSize} from '@workday/canvas-kit-react-button';
 import {CanvasDepthValue, spacing} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
 import {xIcon} from '@workday/canvas-system-icons-web';
@@ -16,7 +16,7 @@ export enum PopupPadding {
 export interface PopupProps {
   padding: PopupPadding;
   transformOrigin: TransformOrigin;
-  closeIconSize: ButtonSize.Small | ButtonSize.Medium;
+  closeIconSize: IconButtonSize;
   popupRef?: React.Ref<HTMLDivElement>;
   handleClose?: () => void;
   width?: number | string;
@@ -60,8 +60,8 @@ const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
     position: 'absolute',
   },
   ({closeIconSize}) => ({
-    right: closeIconSize === ButtonSize.Small ? closeIconSpacingSmall : closeIconSpacing,
-    top: closeIconSize === ButtonSize.Small ? closeIconSpacingSmall : closeIconSpacing,
+    right: closeIconSize === IconButton.Size.Small ? closeIconSpacingSmall : closeIconSpacing,
+    top: closeIconSize === IconButton.Size.Small ? closeIconSpacingSmall : closeIconSpacing,
   })
 );
 
@@ -70,7 +70,7 @@ export default class Popup extends React.Component<PopupProps> {
 
   static defaultProps = {
     padding: Popup.Padding.l,
-    closeIconSize: ButtonSize.Medium,
+    closeIconSize: IconButton.Size.Medium,
     transformOrigin: {
       horizontal: 'center',
       vertical: 'top',
@@ -89,6 +89,7 @@ export default class Popup extends React.Component<PopupProps> {
       popupRef,
       ...elemProps
     } = this.props;
+
     return (
       <Container
         transformOrigin={transformOrigin}

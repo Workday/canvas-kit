@@ -109,7 +109,7 @@ Default:
 
 ---
 
-#### `closeIconSize: ButtonSize`
+#### `closeIconSize: IconButtonSize`
 
 > The size of the close icon button (small or medium)
 

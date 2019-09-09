@@ -2,27 +2,39 @@ import * as React from 'react';
 import {getButtonStyle} from './ButtonBase';
 import styled from 'react-emotion';
 import isPropValid from '@emotion/is-prop-valid';
-import {IconButtonVariant, ButtonSize} from './types';
-import {BaseButtonProps} from './Button';
+import {IconButtonVariant, IconButtonSize} from './types';
 import {iconButtonStyles} from './ButtonStyles';
 import {colors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {focusRing} from '@workday/canvas-kit-react-common';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {CSSObject} from 'create-emotion';
 
-export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonVariant>> {
+export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Whether the icon button is toggled on or off
+   * Type of button.
    */
-  toggled: boolean;
+  variant: IconButtonVariant;
   /**
    * The accessibility label to indicate the action triggered by clicking the button
    */
   'aria-label': string;
   /**
-   * Size of icon button
+   * Size of icon button.
    */
-  size?: ButtonSize.Small | ButtonSize.Medium;
+  size?: IconButtonSize;
+  /**
+   * Whether the icon button is toggled on or off
+   */
+  toggled?: boolean;
+  /**
+   * Ref of button that the styled component renders.
+   */
+  buttonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * Icon for button.
+   */
+  icon?: CanvasSystemIcon;
   /**
    * Callback that fires when a button changes toggled states
    */
@@ -37,12 +49,12 @@ export const IconButtonCon = styled('button', {
   ({size, variant}) => {
     switch (size) {
       default:
-      case ButtonSize.Medium:
+      case IconButtonSize.Medium:
         return {
           margin: variant === IconButtonVariant.Plain ? '-8px' : undefined,
           ...iconButtonStyles.variants!.sizes.medium,
         };
-      case ButtonSize.Small:
+      case IconButtonSize.Small:
         return {
           margin: variant === IconButtonVariant.Plain ? '-6px' : undefined,
           ...iconButtonStyles.variants!.sizes.small,
@@ -163,13 +175,12 @@ function getAccentSelector(fillColor: string): CSSObject {
 
 export default class IconButton extends React.Component<IconButtonProps> {
   public static Variant = IconButtonVariant;
-  public static Size = ButtonSize;
+  public static Size = IconButtonSize;
 
   static defaultProps = {
     variant: IconButtonVariant.Circle,
-    size: ButtonSize.Medium,
-    toggled: undefined,
-  };
+    size: IconButtonSize.Medium,
+  } as const;
 
   componentDidUpdate(prevProps: IconButtonProps) {
     if (

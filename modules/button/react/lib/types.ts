@@ -7,6 +7,11 @@ export enum ButtonSize {
   Large = 'large',
 }
 
+export enum IconButtonSize {
+  Small = 'small',
+  Medium = 'medium',
+}
+
 // TODO (beta button): consolidate all these button types
 /**
  * The different button types.
