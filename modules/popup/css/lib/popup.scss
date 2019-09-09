@@ -20,45 +20,7 @@
     @include wdc-type-body();
   }
 
-  &-animation-origin-top-center {
-    animation-name: popupAnimationTopCenter;
-    transform-origin: top center;
-  }
-
-  &-animation-origin-right-center {
-    animation-name: popupAnimationRightCenter;
-    transform-origin: right center;
-  }
-
-  &-animation-origin-bottom-center {
-    animation-name: popupAnimationBottomCenter;
-    transform-origin: bottom center;
-  }
-
-  &-animation-origin-left-center {
-    animation-name: popupAnimationLeftCenter;
-    transform-origin: left center;
-  }
-
-  &-animation-origin-top-left {
-    animation-name: popupAnimationLeftCenter;
-    transform-origin: top left;
-  }
-
-  &-animation-origin-top-right {
-    animation-name: popupAnimationLeftCenter;
-    transform-origin: top right;
-  }
-
-  &-animation-origin-bottom-right {
-    animation-name: popupAnimationLeftCenter;
-    transform-origin: bottom right;
-  }
-
-  &-animation-origin-bottom-left {
-    animation-name: popupAnimationLeftCenter;
-    transform-origin: bottom right;
-  }
+  @include popupAnimationOrigins();
 }
 
 .wdc-popup.wdc-popup-no-padding {
