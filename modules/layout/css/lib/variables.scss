@@ -1,7 +1,7 @@
-// Grid Variables
+// Layout Variables
 
-$wdc-grid-system-columns: 12 !default;
+$wdc-layout-columns: 12 !default;
 
-// size, breakpoint, gutter
-$wdc-grid-system-breakpoints: sm 320px $wdc-spacing-s, md 768px $wdc-spacing-s,
+// size, breakpoint, spacing
+$wdc-layout-breakpoints: sm 320px $wdc-spacing-s, md 768px $wdc-spacing-s,
   lg 992px $wdc-spacing-m, xl 1200px $wdc-spacing-xl !default;

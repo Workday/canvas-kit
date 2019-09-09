@@ -5,10 +5,10 @@ import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('CSS/Grid System', module)
+storiesOf('CSS/Layout', module)
   .addDecorator(withReadme(README))
-  .add('Responsive Grids', () => (
-    <div className="story story-grid">
+  .add('Responsive Layout', () => (
+    <div className="story">
       <div>
         <div className="wdc-row">
           <div className="wdc-col-sm-2 wdc-col-md-5 wdc-col-lg-2 wdc-col-xl-1">
@@ -46,8 +46,8 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Fluid Grids', () => (
-    <div className="story story-grid">
+  .add('Fluid Layout', () => (
+    <div className="story">
       <div>
         <div className="wdc-row">
           <div className="wdc-col-11">
@@ -140,8 +140,8 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Grids with Offsets', () => (
-    <div className="story story-grid">
+  .add('Offsets', () => (
+    <div className="story">
       <div>
         <div className="wdc-row">
           <div className="wdc-col-offset-11 wdc-col-1">
@@ -206,8 +206,8 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Auto widths', () => (
-    <div className="story story-grid">
+  .add('Auto Widths', () => (
+    <div className="story">
       <div>
         <div className="wdc-row">
           <div className="wdc-col">
@@ -269,8 +269,8 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Grid Horizontal Positioning', () => (
-    <div className="story story-grid">
+  .add('Horizontal Positioning', () => (
+    <div className="story">
       <div>
         <div className="wdc-row wdc-row-start">
           <div className="wdc-col-1">
@@ -290,8 +290,8 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Grid Verical Positioning', () => (
-    <div className="story story-grid">
+  .add('Vertical Positioning', () => (
+    <div className="story">
       <div>
         <div className="wdc-row wdc-row-top">
           <div className="wdc-col">
@@ -320,8 +320,8 @@ storiesOf('CSS/Grid System', module)
       </div>
     </div>
   ))
-  .add('Grid Distribution', () => (
-    <div className="story story-grid">
+  .add('Distribution', () => (
+    <div className="story">
       <div>
         <div className="wdc-row wdc-row-around">
           <div className="wdc-col-1">
