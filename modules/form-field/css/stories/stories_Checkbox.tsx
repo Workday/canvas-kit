@@ -5,7 +5,7 @@ import README from '../../../checkbox/css/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-checkbox/index.scss';
 
-storiesOf('CSS/Form Field/Checkbox/Top Label', module)
+storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
