@@ -68,7 +68,7 @@ storiesOf('CSS/Form Field/TextArea/Top Label', module)
           </label>
           <div className="wdc-form-field">
             <div className="wdc-form-textarea wdc-form-disabled">
-              <textarea placeholder="Placeholder" disabled={true} />
+              <textarea id="textarea" placeholder="Placeholder" disabled={true} />
             </div>
           </div>
         </div>
@@ -178,6 +178,7 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
           <div className="wdc-form-field">
             <div className="wdc-form-textarea">
               <textarea
+                id="textarea"
                 className="wdc-form-textarea wdc-form-disabled"
                 placeholder="Placeholder"
                 disabled={true}

@@ -64,7 +64,7 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
           </label>
           <div className="wdc-form-field">
             <div className="wdc-form-textinput wdc-form-disabled">
-              <input type="text" placeholder="Placeholder" disabled={true} />
+              <input id="input" type="text" placeholder="Placeholder" disabled={true} />
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
           </label>
           <div className="wdc-form-field">
             <div className="wdc-form-textinput wdc-form-disabled">
-              <input type="text" placeholder="Placeholder" disabled={true} />
+              <input id="input" type="text" placeholder="Placeholder" disabled={true} />
             </div>
           </div>
         </div>
