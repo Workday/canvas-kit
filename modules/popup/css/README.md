@@ -53,9 +53,9 @@ import {SystemIcon} from '@workday/canvas-kit-react';
 </div>;
 ```
 
-### Animation Origin Directional Modifiers
+### Animation Origin Modifiers
 
-Eight directions are available. Each direction will change the the animation origin. Use directional
+Eight directions are available. Each direction will change the the animation origin. Use origin
 classes in addition to `.wdc-popup`.
 
 - `.wdc-popup-animation-origin-top-center`
@@ -68,19 +68,8 @@ classes in addition to `.wdc-popup`.
 - `.wdc-popup-animation-origin-bottom-left`
 
 ```html
-<div class="wdc-popup wdc-popup-right">
-  Right popup
-</div>
-
-<div class="wdc-popup wdc-popup-left">
-  Left popup
-</div>
-
-<div class="wdc-popup wdc-popup-top">
-  Top popup
-</div>
-
-<div class="wdc-popup wdc-popup-bottom">
-  Bottom popup
+<div class="wdc-popup wdc-popup-animation-origin-top-center">
+  <div class="wdc-popup-title">Popup Title</div>
+  <div>Popup content</div>
 </div>
 ```
