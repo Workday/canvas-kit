@@ -5,18 +5,11 @@ import README from './README.md';
 import {Button} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react';
-import {css} from 'emotion';
-import {CSSObject} from 'create-emotion';
 import './index.scss';
 
 interface PopupWrapperState {
   open: boolean;
 }
-
-const popupStoryContainer: CSSObject = {
-  position: 'absolute',
-  width: '400px',
-};
 
 class PopupWrapper extends React.Component<{}, PopupWrapperState> {
   state = {
@@ -29,36 +22,42 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
         style={{
           display: 'flex',
           justifyContent: 'center',
+          position: 'relative',
         }}
       >
-        <div className={css(popupStoryContainer)}>
-          <Button buttonType={Button.Types.Delete} onClick={this.onOpenPopupClick}>
-            Delete Item
-          </Button>
-          {open ? (
-            <div className="wdc-popup wdc-popup-padding-s wdc-popup-animation-origin-top-center">
-              <div className="wdc-popup-close">
-                <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
-                  <SystemIcon icon={xIcon} />
-                </button>
-              </div>
-              <h3 className="wdc-popup-title">Delete Item</h3>
-              <div style={{marginBottom: '24px'}} className="wdc-popup-body">
-                Are you sure you'd like to delete the item titled 'My Item'?
-              </div>
-              <Button
-                style={{marginRight: '16px'}}
-                onClick={this.onDeleteClick}
-                buttonType={Button.Types.Delete}
-              >
-                Delete
-              </Button>
-              <Button onClick={this.onCancelClick} buttonType={Button.Types.Secondary}>
-                Cancel
-              </Button>
+        <Button buttonType={Button.Types.Delete} onClick={this.onOpenPopupClick}>
+          Delete Item
+        </Button>
+        {open ? (
+          <div
+            className="wdc-popup wdc-popup-padding-s wdc-popup-animation-origin-top-center"
+            style={{
+              position: 'absolute',
+              width: '400px',
+              top: '40px',
+            }}
+          >
+            <div className="wdc-popup-close">
+              <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
+                <SystemIcon icon={xIcon} />
+              </button>
             </div>
-          ) : null}
-        </div>
+            <h3 className="wdc-popup-title">Delete Item</h3>
+            <div style={{marginBottom: '24px'}} className="wdc-popup-body">
+              Are you sure you'd like to delete the item titled 'My Item'?
+            </div>
+            <Button
+              style={{marginRight: '16px'}}
+              onClick={this.onDeleteClick}
+              buttonType={Button.Types.Delete}
+            >
+              Delete
+            </Button>
+            <Button onClick={this.onCancelClick} buttonType={Button.Types.Secondary}>
+              Cancel
+            </Button>
+          </div>
+        ) : null}
       </div>
     );
   }

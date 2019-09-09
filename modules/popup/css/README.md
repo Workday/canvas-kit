@@ -1,6 +1,6 @@
 # Canvas Kit Popup
 
-Popups with modifiers and containers implementing display on hover.
+A Popup component that allows you to render content in a container on top of a page.
 
 ## Installation
 
@@ -22,9 +22,6 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ```
 
 ## Usage
-
-> Popups are for more advanced use cases, usually displaying more complex information or affording
-> more complex interactions.
 
 Use `.wdc-popup` to create a popup. Use `.wdc-popup-title` within `.wdc-popup` to style the popup's
 title. `p` elements also have adjusted margins.
@@ -67,8 +64,9 @@ The default padding for the Popup is set to `32px`. You can adjust padding based
 
 ### Animation Origin Modifiers
 
-Eight directions are available. Each direction will change the the animation origin. Use origin
-classes in addition to `.wdc-popup`.
+Eight directions are available. Each direction will change the the animation origin when the popup
+enters the DOM. Use origin classes in addition to `.wdc-popup`. When something triggers your popup,
+it is good practice to have the popup animate from whatever triggered it.
 
 - `.wdc-popup-animation-origin-top-center`
 - `.wdc-popup-animation-origin-right-center`
