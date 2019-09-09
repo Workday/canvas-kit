@@ -32,20 +32,40 @@ title. `p` elements also have adjusted margins.
 ```html
 <div class="wdc-popup">
   <div class="wdc-popup-title">Popup Title</div>
-  <p>Popup line 1</p>
-  <p>Popup line 2</p>
+  <div>Popup content</div>
 </div>
 ```
 
-### Directional Modifiers
+### With Close Button
 
-Four directions are available. Each direction will change the orientation of the popup arrow. Use
-directional classes in addition to `.wdc-popup`.
+```jsx
+import {xIcon} from '@workday/canvas-system-icons-web';
+import {SystemIcon} from '@workday/canvas-kit-react';
 
-- `.wdc-popup-right`
-- `.wdc-popup-left`
-- `.wdc-popup-top`
-- `.wdc-popup-bottom`
+<div class="wdc-popup">
+  <div className="wdc-popup-close">
+    <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
+      <SystemIcon icon={xIcon} />
+    </button>
+  </div>
+  <div class="wdc-popup-title">Popup Title</div>
+  <div>Popup content</div>
+</div>;
+```
+
+### Animation Origin Directional Modifiers
+
+Eight directions are available. Each direction will change the the animation origin. Use directional
+classes in addition to `.wdc-popup`.
+
+- `.wdc-popup-animation-origin-top-center`
+- `.wdc-popup-animation-origin-right-center`
+- `.wdc-popup-animation-origin-bottom-center`
+- `.wdc-popup-animation-origin-left-center`
+- `.wdc-popup-animation-origin-top-left`
+- `.wdc-popup-animation-origin-top-right`
+- `.wdc-popup-animation-origin-bottom-right`
+- `.wdc-popup-animation-origin-bottom-left`
 
 ```html
 <div class="wdc-popup wdc-popup-right">
