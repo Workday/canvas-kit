@@ -15,7 +15,17 @@ NC='\033[0m' # No Color
 # Get module name
 read -p "Module/component name (@workday/canvas-kit-<TARGET>-<NAME>): " name
 
+echo
+read -p "Is this an unstable component? [Y/n] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+path="./modules/_unstable/$name"
+else
+$stable = true
 path="./modules/$name"
+fi
+
 reactPath="$path/react"
 wantsCss=false
 
@@ -269,12 +279,15 @@ EOF
 fi
 
 # Copy LICENSE
-echo -e "Adding License file to ${CYAN}$reactPath{NC}"
+echo -e "Adding License file to ${CYAN}$reactPath${NC}"
 cp LICENSE $reactPath
 
 # Install deps using Yarn workspaces (instead of Lerna bootstrap)
 echo -e "\nInstalling dependencies\n"
 yarn
+
+# Add modules as deps only if they're stable
+if [ "$stable" = true ] ; then
 
 # We always add the React module as dependency and set up export
 echo -e 'Adding module as dependency and adding export to index'
@@ -283,4 +296,6 @@ node "utils/create-module.js" "$name" "react";
 if [ "$wantsCss" = true ] ; then
   echo -e 'Adding module as CSS dependency and adding Sass module import'
   node "utils/create-module.js" "$name" "css";
+fi
+
 fi
