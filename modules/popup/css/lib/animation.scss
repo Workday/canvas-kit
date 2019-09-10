@@ -1,0 +1,62 @@
+$_wdc-popup-animation-directions: 'TopLeft' -1 -1, 'TopCenter' 0 -1, 'TopRight' 1 -1,
+  'BottomLeft' -1 1, 'BottomCenter' 0 1, 'BottomRight' 1 1;
+
+@each $position in $_wdc-popup-animation-directions {
+  $_direction: nth($position, 1);
+  $_xVal: nth($position, 2);
+  $_yVal: nth($position, 3);
+
+  @keyframes popupAnimation#{$_direction} {
+    from {
+      opacity: 0;
+      transform: translate($_xVal * $wdc-spacing-xxs, $_yVal * $wdc-spacing-xxs);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+}
+
+@mixin popupAnimationOrigins() {
+  &-animation-origin-top-center {
+    animation-name: popupAnimationTopCenter;
+    transform-origin: top center;
+  }
+
+  &-animation-origin-right-center {
+    animation-name: popupAnimationRightCenter;
+    transform-origin: right center;
+  }
+
+  &-animation-origin-bottom-center {
+    animation-name: popupAnimationBottomCenter;
+    transform-origin: bottom center;
+  }
+
+  &-animation-origin-left-center {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: left center;
+  }
+
+  &-animation-origin-top-left {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: top left;
+  }
+
+  &-animation-origin-top-right {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: top right;
+  }
+
+  &-animation-origin-bottom-right {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: bottom right;
+  }
+
+  &-animation-origin-bottom-left {
+    animation-name: popupAnimationLeftCenter;
+    transform-origin: bottom right;
+  }
+}

@@ -117,6 +117,7 @@
 
     &-plain {
       background-color: $wdc-btn-icon-bg;
+      margin: -8px;
 
       &:not([disabled]):not(.wdc-btn-disabled) {
         &.wdc-btn-hover,
