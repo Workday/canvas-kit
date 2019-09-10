@@ -157,7 +157,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, growing secondary 
 >
   <span
     className="emotion-0 emotion-1"
-    size="large"
   >
     Button
   </span>
@@ -319,7 +318,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button 1
 >
   <span
     className="emotion-0 emotion-1"
-    size="large"
   >
     Button
   </span>
@@ -498,13 +496,11 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
 >
   <span
     className="emotion-0 emotion-1"
-    size="large"
   >
     Button
   </span>
   <span
     className="button-label-data emotion-2 emotion-3"
-    size="large"
   >
     1:00
   </span>
@@ -711,7 +707,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
 >
   <span
     className="emotion-1 emotion-2"
-    size="large"
   >
     <span
       className="emotion-0"
@@ -724,7 +719,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
   </span>
   <span
     className="emotion-3 emotion-4"
-    size="large"
   >
     Button
   </span>
@@ -948,7 +942,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
 >
   <span
     className="emotion-1 emotion-2"
-    size="large"
   >
     <span
       className="emotion-0"
@@ -961,13 +954,11 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
   </span>
   <span
     className="emotion-3 emotion-4"
-    size="large"
   >
     Button
   </span>
   <span
     className="button-label-data emotion-5 emotion-6"
-    size="large"
   >
     1:00
   </span>
@@ -1129,7 +1120,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
 >
   <span
     className="emotion-0 emotion-1"
-    size="medium"
   >
     Button
   </span>
@@ -1309,13 +1299,11 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
 >
   <span
     className="emotion-0 emotion-1"
-    size="medium"
   >
     Button
   </span>
   <span
     className="button-label-data emotion-2 emotion-3"
-    size="medium"
   >
     1:00
   </span>
@@ -1522,7 +1510,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
 >
   <span
     className="emotion-1 emotion-2"
-    size="medium"
   >
     <span
       className="emotion-0"
@@ -1535,7 +1522,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   </span>
   <span
     className="emotion-3 emotion-4"
-    size="medium"
   >
     Button
   </span>
@@ -1760,7 +1746,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
 >
   <span
     className="emotion-1 emotion-2"
-    size="medium"
   >
     <span
       className="emotion-0"
@@ -1773,13 +1758,11 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   </span>
   <span
     className="emotion-3 emotion-4"
-    size="medium"
   >
     Button
   </span>
   <span
     className="button-label-data emotion-5 emotion-6"
-    size="medium"
   >
     1:00
   </span>
@@ -1941,7 +1924,6 @@ exports[`Button (Secondary) Snapshots (beta) renders a small, secondary button 1
 >
   <span
     className="emotion-0 emotion-1"
-    size="small"
   >
     Button
   </span>

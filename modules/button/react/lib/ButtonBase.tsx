@@ -36,7 +36,9 @@ export const ButtonBaseCon = styled('button', {
   ({grow}) => grow && {width: '100%', maxWidth: '100%'}
 );
 
-export const ButtonBaseLabel = styled('span')<ButtonProps<AllButtonVariants>>(
+export const ButtonBaseLabel = styled('span', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<ButtonProps<AllButtonVariants>>(
   ButtonStyles.labelBaseStyles.styles,
   ({size}) => {
     const {sizes} = ButtonStyles.labelBaseStyles.variants!;
@@ -73,21 +75,22 @@ export const ButtonBaseLabel = styled('span')<ButtonProps<AllButtonVariants>>(
   }
 );
 
-export const ButtonLabelData = styled('span')<ButtonProps>(
-  ButtonStyles.labelDataBaseStyles.styles,
-  ({size}) => {
-    const {sizes} = ButtonStyles.labelDataBaseStyles.variants!;
-    switch (size) {
-      case ButtonSize.Large:
-      default:
-        return sizes.large;
-      case ButtonSize.Medium:
-        return sizes.medium;
-    }
+export const ButtonLabelData = styled('span', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<ButtonProps>(ButtonStyles.labelDataBaseStyles.styles, ({size}) => {
+  const {sizes} = ButtonStyles.labelDataBaseStyles.variants!;
+  switch (size) {
+    case ButtonSize.Large:
+    default:
+      return sizes.large;
+    case ButtonSize.Medium:
+      return sizes.medium;
   }
-);
+});
 
-const ButtonLabelIconStyled = styled('span')<ButtonLabelIconProps>(
+const ButtonLabelIconStyled = styled('span', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<ButtonLabelIconProps>(
   ButtonStyles.labelIconBaseStyles.styles,
   ({size, dropdown}) => {
     if (dropdown) {

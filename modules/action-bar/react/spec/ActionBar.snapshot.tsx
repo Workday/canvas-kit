@@ -14,7 +14,7 @@ describe('Action Bar Snapshots', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('renders a action bar with one button', () => {
+  test('renders an action bar with one button', () => {
     const component = renderer.create(
       <ActionBar>
         <Button variant={Button.Variant.Primary}>Button</Button>
@@ -32,7 +32,7 @@ describe('Action Bar Snapshots', () => {
     expect(component).toMatchSnapshot();
   });
 
-  test('renders a action bar with two buttons', () => {
+  test('renders an action bar with two buttons', () => {
     const component = renderer.create(
       <ActionBar>
         <Button variant={Button.Variant.Primary}>Button</Button>
