@@ -6,6 +6,7 @@ module.exports = {
   collectCoverageFrom: [
     'modules/**/*.{tsx,ts}',
     '!modules/**/*.d.ts',
+    '!cypress/**/*',
     '!**/header/**/lib/Header.tsx',
     '!**/common/**/ControlledComponentWrapper.tsx',
     '!**/common/**/InputProviderDecorator.tsx',
@@ -26,6 +27,7 @@ module.exports = {
   moduleFileExtensions: ['tsx', 'ts', 'js', 'jsx', 'json'],
   snapshotSerializers: ['jest-emotion/serializer'],
   testMatch: ['**/?(*.)+(spec|test|snapshot).ts?(x)'],
+  testPathIgnorePatterns: ['/cypress/'],
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
   clearMocks: true,
   reporters: ['default', ['jest-junit', {suiteName: 'Canvas Kit tests'}]],
