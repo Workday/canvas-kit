@@ -10,6 +10,12 @@ Owners and UX Engineers). Cypress uses Mocha, Chai and jQuery under the hood all
 outline-style of test writing. It is very possible UX and Accessibility will give outlines for
 engineers to implement.
 
+**Note**: Cypress puts all tests under the `cypress/integration` folder. Unit tests live closer to
+the code. This deviation is currently how Cypress works and does encourage a separation of
+implementation code and specification code. Cypress can be used to test any website (ex:
+workday.com). This separation helps to change the mentality of not testing implementation, but
+defining specifications or acceptance criteria of our components from a user's perspective.
+
 ## Running tests
 
 The following with run Cypress in headless mode and run all tests
