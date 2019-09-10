@@ -1,3 +1,5 @@
+# Cypress Testing
+
 ## Intro
 
 [Cypress](cypress.io) is a browser-based testing tool created for developer experience. It makes
@@ -18,7 +20,7 @@ defining specifications or acceptance criteria of our components from a user's p
 
 ## Running tests
 
-The following with run Cypress in headless mode and run all tests
+The following will run Cypress in headless mode and run all tests
 
 ```
 yarn cypress run
