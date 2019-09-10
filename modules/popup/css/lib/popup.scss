@@ -1,203 +1,32 @@
 .wdc-popup {
-  @include wdc-type();
-  @include wdc-type-body();
-  @include wdc-depth-3();
-  display: inline-block;
-  background-color: $_wdc-popup-bg-color;
-  padding: $wdc-spacing-s;
-  border-radius: 3px;
-  border: 1px solid $_wdc-popup-border-color;
+  @include card-common();
   position: relative;
-  width: max-content;
-  max-width: $_wdc-popup-max-width;
+  animation-duration: 150ms;
+  margin: 0;
+  animation-timing-function: ease-out;
 
-  // Fallback for IE11
-  @media screen and (-ms-high-contrast: active),
-  screen and (-ms-high-contrast: none) {
-    width: auto;
-    min-width: $_wdc-popup-menu-min-width;
-  }
-
-  // Fallback for Edge and browsers that don't support max-content
-  @supports not (width: max-content) {
-    width: auto;
-    min-width: $_wdc-popup-menu-min-width;
-  }
-
-  &-right,
-  &-left,
-  &-top,
-  &-bottom {
-
-    &:before,
-    &:after {
-      content: ' ';
-      position: absolute;
-      border-style: solid;
-      border-color: transparent;
-    }
-
-    &:before {
-      border-width: $_wdc-popup-arrow-size + 1px;
-    }
-
-    &:after {
-      border-width: $_wdc-popup-arrow-size;
-    }
-  }
-
-  &-right {
-    margin-left: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: $_wdc-popup-arrow-offset;
-      right: 100%;
-    }
-
-    &:before {
-      margin-top: -($_wdc-popup-arrow-size + 1px);
-      border-right-color: $_wdc-popup-border-color;
-    }
-
-    &:after {
-      margin-top: -$_wdc-popup-arrow-size;
-      border-right-color: $_wdc-popup-bg-color;
-    }
-  }
-
-  &-left {
-    margin-right: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: $_wdc-popup-arrow-offset;
-      left: 100%;
-    }
-
-    &:before {
-      margin-top: -($_wdc-popup-arrow-size + 1px);
-      border-left-color: $_wdc-popup-border-color;
-    }
-
-    &:after {
-      margin-top: -$_wdc-popup-arrow-size;
-      border-left-color: $_wdc-popup-bg-color;
-    }
-  }
-
-  &-top {
-    margin-bottom: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      top: 100%;
-      left: $_wdc-popup-arrow-offset;
-    }
-
-    &:before {
-      margin-left: -($_wdc-popup-arrow-size + 1px);
-      border-top-color: $_wdc-popup-border-color;
-    }
-
-    &:after {
-      margin-left: -$_wdc-popup-arrow-size;
-      border-top-color: $_wdc-popup-bg-color;
-    }
-  }
-
-  &-bottom {
-    margin-top: $wdc-spacing-s;
-
-    &:before,
-    &:after {
-      bottom: 100%;
-      left: $_wdc-popup-arrow-offset;
-    }
-
-    &:before {
-      margin-left: -($_wdc-popup-arrow-size + 1px);
-      border-bottom-color: $_wdc-popup-border-color;
-    }
-
-    &:after {
-      margin-left: -$_wdc-popup-arrow-size;
-      border-bottom-color: $_wdc-popup-bg-color;
-    }
+  .wdc-popup-close {
+    position: absolute;
+    right: $wdc-spacing-xs;
+    top: $wdc-spacing-xs;
   }
 
   .wdc-popup-title {
-    font-weight: 500;
-    margin-bottom: $wdc-spacing-xxs;
+    @include wdc-type-h3();
+    margin-bottom: $wdc-spacing-m;
   }
 
-  p {
-    margin-top: 0;
-    margin-bottom: 0;
-
-    &:not(:first-child) {
-      margin-top: $wdc-spacing-xxxs;
-    }
+  .wdc-popup-body {
+    @include wdc-type-body();
   }
+
+  @include popupAnimationOrigins();
 }
 
-.wdc-popup-container {
-  display: inline-block;
-  position: relative;
+.wdc-popup.wdc-popup-no-padding {
+  padding: 0;
+}
 
-  .wdc-popup {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s;
-
-    &-right,
-    &-left,
-    &-top,
-    &-bottom {
-      position: absolute;
-      z-index: $_wdc-popup-z-index;
-    }
-
-    &-left,
-    &-right {
-      top: -$wdc-spacing-s;
-    }
-
-    &-right {
-      left: calc(100%);
-    }
-
-    &-left {
-      right: calc(100%);
-    }
-
-    &-top,
-    &-bottom {
-      left: 0;
-    }
-
-    &-top {
-      bottom: 100%;
-    }
-
-    &-bottom {
-      top: 100%;
-    }
-
-    &-tooltip {
-
-      &.wdc-popup-left,
-      &.wdc-popup-right {
-        top: -$wdc-spacing-xs;
-      }
-    }
-  }
-
-  &.wdc-popup-hover,
-  &:hover {
-    .wdc-popup {
-      visibility: visible;
-      opacity: 1;
-    }
-  }
+.wdc-popup.wdc-popup-padding-s {
+  padding: $wdc-spacing-s;
 }
