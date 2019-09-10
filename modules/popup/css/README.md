@@ -1,6 +1,6 @@
 # Canvas Kit Popup
 
-Popups with modifiers and containers implementing display on hover.
+A Popup component that allows you to render content in a container on top of a page.
 
 ## Installation
 
@@ -23,97 +23,63 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 
 ## Usage
 
-> Popups are for more advanced use cases, usually displaying more complex information or affording
-> more complex interactions.
-
 Use `.wdc-popup` to create a popup. Use `.wdc-popup-title` within `.wdc-popup` to style the popup's
 title. `p` elements also have adjusted margins.
 
 ```html
 <div class="wdc-popup">
   <div class="wdc-popup-title">Popup Title</div>
-  <p>Popup line 1</p>
-  <p>Popup line 2</p>
+  <div>Popup content</div>
 </div>
 ```
 
-### Directional Modifiers
+### With Close Button
 
-Four directions are available. Each direction will change the orientation of the popup arrow. Use
-directional classes in addition to `.wdc-popup`.
+```jsx
+import {xIcon} from '@workday/canvas-system-icons-web';
+import {SystemIcon} from '@workday/canvas-kit-react';
 
-- `.wdc-popup-right`
-- `.wdc-popup-left`
-- `.wdc-popup-top`
-- `.wdc-popup-bottom`
-
-```html
-<div class="wdc-popup wdc-popup-right">
-  Right popup
-</div>
-
-<div class="wdc-popup wdc-popup-left">
-  Left popup
-</div>
-
-<div class="wdc-popup wdc-popup-top">
-  Top popup
-</div>
-
-<div class="wdc-popup wdc-popup-bottom">
-  Bottom popup
-</div>
-```
-
-### Menus
-
-Use `.wdc-popup-menu` in addition to `.wdc-popup` to apply popup menu styling. Use a `ul` and `li`
-to list menu items. Menus are compatible with directional classes.
-
-```html
-<div class="wdc-popup wdc-popup-bottom wdc-popup-menu">
-  <ul>
-    <li>
-      <a href="#">Item 1</a>
-    </li>
-    <li>
-      Item 2
-    </li>
-  </ul>
-</div>
-```
-
-#### Menu Item States
-
-Use `.wdc-popup-menu-item-hover` or `.wdc-popup-menu-item-focus` on a `li` to apply hover/focus
-styling to a menu item.
-
-```html
-<div class="wdc-popup wdc-popup-bottom wdc-popup-menu">
-  <ul>
-    <li class="wdc-popup-menu-item-hover">
-      Item 1
-    </li>
-    <li class="wdc-popup-menu-item-focus">
-      Item 2
-    </li>
-  </ul>
-</div>
-```
-
-## Display on hover
-
-To display a popup on hover, wrap hoverable content within a `.wdc-popup-container`. Insert a
-`.wdc-popup` within the container. The popup will automatically be positioned according to its
-directional modifier.
-
-> A directional modifier is required for proper usage.
-
-```html
-<div class="wdc-popup-container">
-  Right popup
-  <div class="wdc-popup wdc-popup-right">
-    Popup
+<div class="wdc-popup">
+  <div className="wdc-popup-close">
+    <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
+      <SystemIcon icon={xIcon} />
+    </button>
   </div>
+  <div class="wdc-popup-title">Popup Title</div>
+  <div>Popup content</div>
+</div>;
+```
+
+### Padding
+
+The default padding for the Popup is set to `32px`. You can adjust padding based on these classes
+`wdc-popup-no-padding` or `wdc-popup-padding-s` which sets the padding to `16px`
+
+```html
+<div class="wdc-popup wdc-popup-no-padding">
+  <div class="wdc-popup-title">Popup Title</div>
+  <div>Popup content</div>
+</div>
+```
+
+### Animation Origin Modifiers
+
+Eight directions are available. Each direction will change the the animation origin when the popup
+enters the DOM. Use origin classes in addition to `.wdc-popup`. When something triggers your popup,
+it is good practice to have the popup animate from whatever triggered it.
+
+- `.wdc-popup-animation-origin-top-center`
+- `.wdc-popup-animation-origin-right-center`
+- `.wdc-popup-animation-origin-bottom-center`
+- `.wdc-popup-animation-origin-left-center`
+- `.wdc-popup-animation-origin-top-left`
+- `.wdc-popup-animation-origin-top-right`
+- `.wdc-popup-animation-origin-bottom-right`
+- `.wdc-popup-animation-origin-bottom-left`
+
+```html
+<div class="wdc-popup wdc-popup-animation-origin-top-center">
+  <div class="wdc-popup-title">Popup Title</div>
+  <div>Popup content</div>
 </div>
 ```
