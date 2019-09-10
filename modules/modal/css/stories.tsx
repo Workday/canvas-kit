@@ -1,0 +1,95 @@
+import React from 'react';
+import {storiesOf} from '@storybook/react';
+import withReadme from 'storybook-readme/with-readme';
+import README from './README.md';
+import {Button} from '@workday/canvas-kit-react-button';
+import {xIcon} from '@workday/canvas-system-icons-web';
+import {SystemIcon} from '@workday/canvas-kit-react';
+import './index.scss';
+
+interface ModalWrapperState {
+  open: boolean;
+}
+
+class ModalWrapper extends React.Component<{}, ModalWrapperState> {
+  state = {
+    open: false,
+  };
+  public render() {
+    const {open} = this.state;
+    return (
+      <div>
+        <Button buttonType={Button.Types.Delete} onClick={this.onOpenPopupClick}>
+          Delete Item
+        </Button>
+        {open ? (
+          <div className="wdc-modal" onClick={this.onOverlayClick}>
+            <div
+              className="wdc-popup wdc-popup-padding-s wdc-popup-animation-origin-bottom-center"
+              style={{width: '440px'}}
+            >
+              <div className="wdc-popup-close">
+                <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
+                  <SystemIcon icon={xIcon} />
+                </button>
+              </div>
+              <h3 className="wdc-popup-title">Delete Item</h3>
+              <div style={{marginBottom: '24px'}} className="wdc-popup-body">
+                Are you sure you'd like to delete the item titled 'My Item'?
+              </div>
+              <Button
+                style={{marginRight: '16px'}}
+                onClick={this.onDeleteClick}
+                buttonType={Button.Types.Delete}
+              >
+                Delete
+              </Button>
+              <Button onClick={this.onCancelClick} buttonType={Button.Types.Secondary}>
+                Cancel
+              </Button>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+
+  private onOverlayClick = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  private onCloseClick = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  private onDeleteClick = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  private onCancelClick = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  private onOpenPopupClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+    this.setState({
+      open: !this.state.open,
+    });
+  };
+}
+
+storiesOf('CSS/Modal', module)
+  .addDecorator(withReadme(README))
+  .add('Modal', () => (
+    <div className="story">
+      <h1 className="section-label">Modal</h1>
+      <ModalWrapper />
+    </div>
+  ));
