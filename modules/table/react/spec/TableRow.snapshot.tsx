@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import TableRow, {TableRowStates} from '../lib/TableRow';
+import TableRow, {TableRowState} from '../lib/TableRow';
 
 describe('Table Row Snapshots', () => {
   test('renders as expected', () => {
@@ -22,7 +22,7 @@ describe('Table Row Snapshots', () => {
   });
 
   describe('states', () => {
-    function createStateComponent(state: TableRowStates) {
+    function createStateComponent(state: TableRowState) {
       return renderer.create(
         <TableRow state={state}>
           <td>cell</td>
@@ -30,32 +30,32 @@ describe('Table Row Snapshots', () => {
       );
     }
     test('Error', () => {
-      const component = createStateComponent(TableRowStates.Error);
+      const component = createStateComponent(TableRowState.Error);
       expect(component).toMatchSnapshot();
     });
 
     test('Alert', () => {
-      const component = createStateComponent(TableRowStates.Alert);
+      const component = createStateComponent(TableRowState.Alert);
       expect(component).toMatchSnapshot();
     });
 
     test('Input Error', () => {
-      const component = createStateComponent(TableRowStates.InputError);
+      const component = createStateComponent(TableRowState.InputError);
       expect(component).toMatchSnapshot();
     });
 
     test('Input Alert', () => {
-      const component = createStateComponent(TableRowStates.InputAlert);
+      const component = createStateComponent(TableRowState.InputAlert);
       expect(component).toMatchSnapshot();
     });
 
     test('Hover', () => {
-      const component = createStateComponent(TableRowStates.Hover);
+      const component = createStateComponent(TableRowState.Hover);
       expect(component).toMatchSnapshot();
     });
 
     test('Selected', () => {
-      const component = createStateComponent(TableRowStates.Selected);
+      const component = createStateComponent(TableRowState.Selected);
       expect(component).toMatchSnapshot();
     });
   });
