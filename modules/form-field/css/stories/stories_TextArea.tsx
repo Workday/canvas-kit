@@ -8,106 +8,94 @@ import '@workday/canvas-kit-css-text-area/index.scss';
 storiesOf('CSS/Form Field/TextArea/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      <div className="wdc-form">
-        <div className="wdc-form-field-wrapper">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea">
-              <textarea id="textarea" />
-            </div>
+    <div className="wdc-form">
+      <div className="wdc-form-field-wrapper">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea">
+            <textarea id="textarea" />
           </div>
         </div>
       </div>
     </div>
   ))
   .add('With placeholder', () => (
-    <div className="story">
-      <div className="wdc-form">
-        <div className="wdc-form-field-wrapper">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea">
-              <textarea id="textarea" placeholder="Placeholder" />
-            </div>
+    <div className="wdc-form">
+      <div className="wdc-form-field-wrapper">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea">
+            <textarea id="textarea" placeholder="Placeholder" />
           </div>
         </div>
       </div>
     </div>
   ))
   .add('Disabled', () => (
-    <div className="story">
-      <div className="wdc-form">
-        <div className="wdc-form-field-wrapper">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea">
-              <textarea
-                id="textarea"
-                className="wdc-form-textarea wdc-form-disabled"
-                disabled={true}
-              />
-            </div>
+    <div className="wdc-form">
+      <div className="wdc-form-field-wrapper">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea">
+            <textarea
+              id="textarea"
+              className="wdc-form-textarea wdc-form-disabled"
+              disabled={true}
+            />
           </div>
         </div>
       </div>
     </div>
   ))
   .add('Disabled with placeholder', () => (
-    <div className="story">
-      <div className="wdc-form">
-        <div className="wdc-form-field-wrapper">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea wdc-form-disabled">
-              <textarea id="textarea" placeholder="Placeholder" disabled={true} />
-            </div>
+    <div className="wdc-form">
+      <div className="wdc-form-field-wrapper">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea wdc-form-disabled">
+            <textarea id="textarea" placeholder="Placeholder" disabled={true} />
           </div>
         </div>
       </div>
     </div>
   ))
   .add('Alert', () => (
-    <div className="story">
-      <div className="wdc-form">
-        <div className="wdc-form-field-wrapper wdc-form-field-alert">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea wdc-form-alert">
-              <textarea id="textarea" />
-            </div>
-            <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Helpful text goes here.
-            </div>
+    <div className="wdc-form">
+      <div className="wdc-form-field-wrapper wdc-form-field-alert">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea wdc-form-alert">
+            <textarea id="textarea" />
+          </div>
+          <div className="wdc-form-hint-message">
+            <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
     </div>
   ))
   .add('Error', () => (
-    <div className="story">
-      <div className="wdc-form">
-        <div className="wdc-form-field-wrapper wdc-form-field-error">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea wdc-form-error">
-              <textarea id="textarea" />
-            </div>
-            <div className="wdc-form-hint-message">
-              <strong>Error:</strong> Helpful text goes here.
-            </div>
+    <div className="wdc-form">
+      <div className="wdc-form-field-wrapper wdc-form-field-error">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea wdc-form-error">
+            <textarea id="textarea" />
+          </div>
+          <div className="wdc-form-hint-message">
+            <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
@@ -117,111 +105,99 @@ storiesOf('CSS/Form Field/TextArea/Top Label', module)
 storiesOf('CSS/Form Field/TextArea/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      <div className="wdc-form wdc-form-label-position-left">
-        <div className="wdc-form-field-wrapper">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea">
-              <textarea id="textarea" />
-            </div>
+    <div className="wdc-form wdc-form-label-position-left">
+      <div className="wdc-form-field-wrapper">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea">
+            <textarea id="textarea" />
           </div>
         </div>
       </div>
     </div>
   ))
   .add('With placeholder', () => (
-    <div className="story">
-      <div className="wdc-form wdc-form-label-position-left">
-        <div className="wdc-form-field-wrapper">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea">
-              <textarea id="textarea" placeholder="Placeholder" />
-            </div>
+    <div className="wdc-form wdc-form-label-position-left">
+      <div className="wdc-form-field-wrapper">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea">
+            <textarea id="textarea" placeholder="Placeholder" />
           </div>
         </div>
       </div>
     </div>
   ))
   .add('Disabled', () => (
-    <div className="story">
-      <div className="wdc-form wdc-form-label-position-left">
-        <div className="wdc-form-field-wrapper">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea">
-              <textarea
-                id="textarea"
-                className="wdc-form-textarea wdc-form-disabled"
-                disabled={true}
-              />
-            </div>
+    <div className="wdc-form wdc-form-label-position-left">
+      <div className="wdc-form-field-wrapper">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea">
+            <textarea
+              id="textarea"
+              className="wdc-form-textarea wdc-form-disabled"
+              disabled={true}
+            />
           </div>
         </div>
       </div>
     </div>
   ))
   .add('Disabled with placeholder', () => (
-    <div className="story">
-      <div className="wdc-form wdc-form-label-position-left">
-        <div className="wdc-form-field-wrapper">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea">
-              <textarea
-                id="textarea"
-                className="wdc-form-textarea wdc-form-disabled"
-                placeholder="Placeholder"
-                disabled={true}
-              />
-            </div>
+    <div className="wdc-form wdc-form-label-position-left">
+      <div className="wdc-form-field-wrapper">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea">
+            <textarea
+              id="textarea"
+              className="wdc-form-textarea wdc-form-disabled"
+              placeholder="Placeholder"
+              disabled={true}
+            />
           </div>
         </div>
       </div>
     </div>
   ))
   .add('Alert', () => (
-    <div className="story">
-      <div className="wdc-form wdc-form-label-position-left">
-        <div className="wdc-form-field-wrapper wdc-form-field-alert">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea wdc-form-alert">
-              <textarea id="textarea" />
-            </div>
-            <div className="wdc-form-hint-message">
-              <strong>Alert:</strong> Helpful text goes here.
-            </div>
+    <div className="wdc-form wdc-form-label-position-left">
+      <div className="wdc-form-field-wrapper wdc-form-field-alert">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea wdc-form-alert">
+            <textarea id="textarea" />
+          </div>
+          <div className="wdc-form-hint-message">
+            <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
       </div>
     </div>
   ))
   .add('Error', () => (
-    <div className="story">
-      <div className="wdc-form wdc-form-label-position-left">
-        <div className="wdc-form-field-wrapper wdc-form-field-error">
-          <label htmlFor="textarea" className="wdc-form-label">
-            Label
-          </label>
-          <div className="wdc-form-field">
-            <div className="wdc-form-textarea wdc-form-error">
-              <textarea id="textarea" />
-            </div>
-            <div className="wdc-form-hint-message">
-              <strong>Error:</strong> Helpful text goes here.
-            </div>
+    <div className="wdc-form wdc-form-label-position-left">
+      <div className="wdc-form-field-wrapper wdc-form-field-error">
+        <label htmlFor="textarea" className="wdc-form-label">
+          Label
+        </label>
+        <div className="wdc-form-field">
+          <div className="wdc-form-textarea wdc-form-error">
+            <textarea id="textarea" />
+          </div>
+          <div className="wdc-form-hint-message">
+            <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
       </div>

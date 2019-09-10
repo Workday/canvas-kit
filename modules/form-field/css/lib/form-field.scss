@@ -83,7 +83,7 @@
     }
 
     .wdc-form-group-fields {
-      margin-top: -2px;
+      margin-top: 0px;
       margin-bottom: 26px;
     }
 
@@ -98,7 +98,7 @@
 
         &.wdc-form-alert,
         &.wdc-form-error {
-          margin-top: 0;
+          margin: 0px;
         }
       }
     }
@@ -115,10 +115,6 @@
     margin-top: 10px;
     margin-right: $wdc-spacing-l;
     margin-bottom: 0;
-  }
-
-  input[type='checkbox'],
-  input[type='radio'] {
   }
 }
 

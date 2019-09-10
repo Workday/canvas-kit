@@ -306,10 +306,10 @@
     box-sizing: border-box;
     display: inline-block;
     font-family: sans-serif;
-    margin: -2px -8px;
-    padding: 2px 8px;
-    margin-top: -10px;
+    margin: -4px -12px;
+    padding: 4px 12px;
     text-align: left;
+    margin-top: -12px;
   }
 }
 
@@ -350,8 +350,12 @@
     margin-right: $wdc-spacing-s + $wdc-spacing-m;
   }
 
-  .wdc-form-group-fields {
-    margin-bottom: $wdc-spacing-m;
+  .wdc-form-field-wrapper .wdc-form-group-fields {
+    &.wdc-form-field-alert,
+    &.wdc-form-field-error {
+      margin-top: -4px;
+      margin-bottom: $wdc-spacing-m;
+    }
 
     & + .wdc-form-hint-message,
     & + .wdc-form-hint-message {

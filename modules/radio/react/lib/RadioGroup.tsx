@@ -53,8 +53,8 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow'>>(
       boxShadow: errorBorderColor
         ? `inset 0 0 0 1px ${errorBorderColor}, inset 0 0 0 3px ${errorRingColor}`
         : `inset 0 0 0 2px ${errorRingColor}`,
-      padding: `2px ${spacing.xxs}`,
-      margin: `-2px -${spacing.xxs}`,
+      padding: `${spacing.xxxs} ${spacing.xs}`,
+      margin: `-${spacing.xxxs} -${spacing.xs}`,
     };
   }
 );
