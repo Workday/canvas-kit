@@ -70,8 +70,9 @@ Canvas Kit uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme
 React components. Each and every component requires at least 80% unit test coverage and a thorough
 set of snapshot tests.
 
-Canvas Kit uses [Cypress](cypress.io) for UI tests. More info can be found
-[here](./CYPRESS_TESTS.md)
+Canvas Kit uses [Cypress](cypress.io) for UI tests. For info on why we chose Cypress, visit
+[Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
+visit [Writing Cypress Tests](.cypress/README.md)
 
 ### Git Guidelines
 

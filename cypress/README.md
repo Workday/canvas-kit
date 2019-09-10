@@ -1,4 +1,4 @@
-# Cypress Testing
+# Writing Cypress Tests
 
 ## Intro
 
@@ -17,6 +17,8 @@ the code. This deviation is currently how Cypress works and does encourage a sep
 implementation code and specification code. Cypress can be used to test any website (ex:
 workday.com). This separation helps to change the mentality of not testing implementation, but
 defining specifications or acceptance criteria of our components from a user's perspective.
+
+For more information on why we chose Cypress, visit [Why Cypress?](./WHY_CYPRESS.md)
 
 ## Running tests
 
