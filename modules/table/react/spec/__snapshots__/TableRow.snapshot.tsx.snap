@@ -342,7 +342,7 @@ exports[`Table Row Snapshots states Error 1`] = `
 
 .emotion-0 th,
 .emotion-0 td {
-  background-color: rgba(255,83,71,0.2);
+  background-color: rgba(222,46,33,0.2);
   position: relative;
   border-left-color: #fcc9c5;
   border-right-color: #fcc9c5;
@@ -358,7 +358,7 @@ exports[`Table Row Snapshots states Error 1`] = `
   content: "";
   width: calc(100% + 1px);
   height: 1px;
-  background-color: #ff5347;
+  background-color: #de2e21;
 }
 
 .emotion-0 th:after,
@@ -369,12 +369,12 @@ exports[`Table Row Snapshots states Error 1`] = `
 
 .emotion-0 th:first-child,
 .emotion-0 td:first-child {
-  box-shadow: inset 1px 0 0 #ff5347;
+  box-shadow: inset 1px 0 0 #de2e21;
 }
 
 .emotion-0 th:last-child,
 .emotion-0 td:last-child {
-  box-shadow: inset -1px 0 0 #ff5347;
+  box-shadow: inset -1px 0 0 #de2e21;
 }
 
 .emotion-0 th:last-child:before,
@@ -386,7 +386,7 @@ exports[`Table Row Snapshots states Error 1`] = `
 
 .emotion-0:hover th,
 .emotion-0:hover td {
-  background-color: rgba(255,83,71,0.2);
+  background-color: rgba(222,46,33,0.2);
 }
 
 <tr
@@ -572,7 +572,7 @@ exports[`Table Row Snapshots states Input Error 1`] = `
 
 .emotion-0 th,
 .emotion-0 td {
-  background-color: rgba(255,83,71,0.2);
+  background-color: rgba(222,46,33,0.2);
 }
 
 <tr
