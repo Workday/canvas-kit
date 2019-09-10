@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Popup from '../lib/Popup';
 import * as renderer from 'react-test-renderer';
-import {ButtonSize} from '@workday/canvas-kit-react';
+import {IconButtonSize} from '@workday/canvas-kit-react';
 
 describe('Popup Snapshots', () => {
   test('renders as expected', () => {
@@ -44,7 +44,7 @@ describe('Popup Snapshots', () => {
   test('renders Popup with a smaller close icon', () => {
     const component = renderer.create(
       <Popup
-        closeIconSize={ButtonSize.Small}
+        closeIconSize={IconButtonSize.Small}
         transformOrigin={{vertical: 'top', horizontal: 'center'}}
         padding={Popup.Padding.zero}
       >
