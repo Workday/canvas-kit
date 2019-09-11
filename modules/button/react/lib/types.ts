@@ -16,13 +16,13 @@ export enum IconButtonSize {
 /**
  * The different button types.
  */
-export enum ButtonVariant {
+export enum DeprecatedButtonVariant {
   Primary = 'primary',
   Secondary = 'secondary',
   Delete = 'delete',
 }
 
-export enum BetaButtonVariant {
+export enum ButtonVariant {
   Primary = 'betaPrimary',
   Secondary = 'betaSecondary',
   Delete = 'betaDelete',
@@ -58,7 +58,7 @@ export enum TextButtonVariant {
 }
 
 export type AllButtonVariants =
+  | DeprecatedButtonVariant
   | ButtonVariant
-  | BetaButtonVariant
   | TextButtonVariant
   | IconButtonVariant;

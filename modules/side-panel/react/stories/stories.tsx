@@ -11,7 +11,7 @@ import {colors, type} from '@workday/canvas-kit-react-core';
 import README from '../README.md';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {Header} from '@workday/canvas-kit-labs-react-header';
-import {beta_Button as Button, IconButton} from '@workday/canvas-kit-react-button';
+import {Button, IconButton} from '@workday/canvas-kit-react-button';
 import {AvatarButton} from '@workday/canvas-kit-react-avatar';
 import SidePanel from '../index';
 

@@ -2,12 +2,12 @@ import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, GenericStyle} from '@workday/canvas-kit-react-common';
 import {CSSObject} from 'create-emotion';
 import {
-  ButtonVariant,
+  DeprecatedButtonVariant,
   ButtonSize,
   IconPosition,
   AllButtonVariants,
   TextButtonVariant,
-  BetaButtonVariant,
+  ButtonVariant,
   IconButtonVariant,
 } from './types';
 import {ButtonColors} from './ButtonColors';
@@ -49,17 +49,17 @@ export const labelBaseStyles: ButtonGenericStyle = {
         letterSpacing: '.5px',
         padding: '0',
       },
-      [ButtonVariant.Primary]: {
+      [DeprecatedButtonVariant.Primary]: {
         fontSize: 'inherit',
         fontWeight: 'inherit',
         padding: '0',
       },
-      [ButtonVariant.Secondary]: {
+      [DeprecatedButtonVariant.Secondary]: {
         fontSize: 'inherit',
         fontWeight: 'inherit',
         padding: '0',
       },
-      [ButtonVariant.Delete]: {
+      [DeprecatedButtonVariant.Delete]: {
         fontSize: 'inherit',
         fontWeight: 'inherit',
         padding: '0',
@@ -149,14 +149,14 @@ export const canvasButtonStyles: ButtonGenericStyle = {
   },
   variants: {
     types: {
-      [ButtonVariant.Primary]: {
-        ...getButtonStateStyle(ButtonVariant.Primary),
+      [DeprecatedButtonVariant.Primary]: {
+        ...getButtonStateStyle(DeprecatedButtonVariant.Primary),
       },
-      [ButtonVariant.Secondary]: {
-        ...getButtonStateStyle(ButtonVariant.Secondary),
+      [DeprecatedButtonVariant.Secondary]: {
+        ...getButtonStateStyle(DeprecatedButtonVariant.Secondary),
       },
-      [ButtonVariant.Delete]: {
-        ...getButtonStateStyle(ButtonVariant.Delete),
+      [DeprecatedButtonVariant.Delete]: {
+        ...getButtonStateStyle(DeprecatedButtonVariant.Delete),
       },
     },
     sizes: {
@@ -198,26 +198,26 @@ export const betaButtonStyles: ButtonGenericStyle = {
   },
   variants: {
     types: {
-      [BetaButtonVariant.Primary]: {
-        ...getButtonStateStyle(BetaButtonVariant.Primary),
+      [ButtonVariant.Primary]: {
+        ...getButtonStateStyle(ButtonVariant.Primary),
       },
-      [BetaButtonVariant.Secondary]: {
-        ...getButtonStateStyle(BetaButtonVariant.Secondary),
+      [ButtonVariant.Secondary]: {
+        ...getButtonStateStyle(ButtonVariant.Secondary),
       },
-      [BetaButtonVariant.Delete]: {
-        ...getButtonStateStyle(BetaButtonVariant.Delete),
+      [ButtonVariant.Delete]: {
+        ...getButtonStateStyle(ButtonVariant.Delete),
       },
-      [BetaButtonVariant.Highlight]: {
-        ...getButtonStateStyle(BetaButtonVariant.Highlight),
+      [ButtonVariant.Highlight]: {
+        ...getButtonStateStyle(ButtonVariant.Highlight),
       },
-      [BetaButtonVariant.OutlinePrimary]: {
-        ...getButtonStateStyle(BetaButtonVariant.OutlinePrimary),
+      [ButtonVariant.OutlinePrimary]: {
+        ...getButtonStateStyle(ButtonVariant.OutlinePrimary),
       },
-      [BetaButtonVariant.OutlineSecondary]: {
-        ...getButtonStateStyle(BetaButtonVariant.OutlineSecondary),
+      [ButtonVariant.OutlineSecondary]: {
+        ...getButtonStateStyle(ButtonVariant.OutlineSecondary),
       },
-      [BetaButtonVariant.OutlineInverse]: {
-        ...getButtonStateStyle(BetaButtonVariant.OutlineInverse),
+      [ButtonVariant.OutlineInverse]: {
+        ...getButtonStateStyle(ButtonVariant.OutlineInverse),
       },
     },
     sizes: {
@@ -247,8 +247,8 @@ export const dropdownButtonStyles: ButtonGenericStyle = {
   },
   variants: {
     types: {
-      [BetaButtonVariant.Primary]: betaButtonStyles.variants!.types[BetaButtonVariant.Primary],
-      [BetaButtonVariant.Secondary]: betaButtonStyles.variants!.types[BetaButtonVariant.Secondary],
+      [ButtonVariant.Primary]: betaButtonStyles.variants!.types[ButtonVariant.Primary],
+      [ButtonVariant.Secondary]: betaButtonStyles.variants!.types[ButtonVariant.Secondary],
     },
     sizes: {
       [ButtonSize.Large]: betaButtonStyles.variants!.sizes.large,
@@ -449,12 +449,12 @@ function getButtonFocusRing(variant: AllButtonVariants): CSSObject {
   }
 
   switch (variant) {
-    case ButtonVariant.Primary:
-    case ButtonVariant.Secondary:
+    case DeprecatedButtonVariant.Primary:
+    case DeprecatedButtonVariant.Secondary:
     case TextButtonVariant.Default:
     case TextButtonVariant.AllCaps:
       return focusRing(2, 0);
-    case BetaButtonVariant.OutlineInverse:
+    case ButtonVariant.OutlineInverse:
       return focusRing(2, 2, true, false, buttonColors.focusRingInner, buttonColors.focusRingOuter);
     case IconButtonVariant.Plain:
       return focusRing(2);

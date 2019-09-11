@@ -3,11 +3,11 @@ import styled from 'react-emotion';
 import isPropValid from '@emotion/is-prop-valid';
 import {
   ButtonSize,
-  ButtonVariant,
+  DeprecatedButtonVariant,
   IconPosition,
   AllButtonVariants,
   TextButtonVariant,
-  BetaButtonVariant,
+  ButtonVariant,
   IconButtonVariant,
 } from './types';
 import {ButtonProps, BaseButtonProps} from './Button';
@@ -63,11 +63,11 @@ export const ButtonBaseLabel = styled('span', {
       case TextButtonVariant.AllCaps:
       case TextButtonVariant.InverseAllCaps:
         return types.textAllCaps;
-      case ButtonVariant.Primary:
+      case DeprecatedButtonVariant.Primary:
         return types.primary;
-      case ButtonVariant.Secondary:
+      case DeprecatedButtonVariant.Secondary:
         return types.secondary;
-      case ButtonVariant.Delete:
+      case DeprecatedButtonVariant.Delete:
         return types.delete;
       default:
         return {};
@@ -183,27 +183,27 @@ export function getButtonStyle(
   const {types} = baseButton.variants!;
 
   switch (variant) {
-    case ButtonVariant.Primary:
+    case DeprecatedButtonVariant.Primary:
     default:
+      return types[DeprecatedButtonVariant.Primary];
+    case DeprecatedButtonVariant.Secondary:
+      return types[DeprecatedButtonVariant.Secondary];
+    case DeprecatedButtonVariant.Delete:
+      return types[DeprecatedButtonVariant.Delete];
+    case ButtonVariant.Highlight:
+      return types[ButtonVariant.Highlight];
+    case ButtonVariant.OutlinePrimary:
+      return types[ButtonVariant.OutlinePrimary];
+    case ButtonVariant.OutlineSecondary:
+      return types[ButtonVariant.OutlineSecondary];
+    case ButtonVariant.OutlineInverse:
+      return types[ButtonVariant.OutlineInverse];
+    case ButtonVariant.Primary:
       return types[ButtonVariant.Primary];
     case ButtonVariant.Secondary:
       return types[ButtonVariant.Secondary];
     case ButtonVariant.Delete:
       return types[ButtonVariant.Delete];
-    case BetaButtonVariant.Highlight:
-      return types[BetaButtonVariant.Highlight];
-    case BetaButtonVariant.OutlinePrimary:
-      return types[BetaButtonVariant.OutlinePrimary];
-    case BetaButtonVariant.OutlineSecondary:
-      return types[BetaButtonVariant.OutlineSecondary];
-    case BetaButtonVariant.OutlineInverse:
-      return types[BetaButtonVariant.OutlineInverse];
-    case BetaButtonVariant.Primary:
-      return types[BetaButtonVariant.Primary];
-    case BetaButtonVariant.Secondary:
-      return types[BetaButtonVariant.Secondary];
-    case BetaButtonVariant.Delete:
-      return types[BetaButtonVariant.Delete];
     case TextButtonVariant.Default:
       return types[TextButtonVariant.Default];
     case TextButtonVariant.Inverse:
@@ -229,20 +229,20 @@ export function getButtonStyle(
   }
 }
 
-function getBaseButton(variant: ButtonVariant | BetaButtonVariant) {
-  switch (variant) {
+function getBaseButton(buttonType: DeprecatedButtonVariant | ButtonVariant) {
+  switch (buttonType) {
+    case DeprecatedButtonVariant.Primary:
+    case DeprecatedButtonVariant.Secondary:
+    case DeprecatedButtonVariant.Delete:
+    default:
+      return ButtonStyles.canvasButtonStyles;
     case ButtonVariant.Primary:
     case ButtonVariant.Secondary:
     case ButtonVariant.Delete:
-    default:
-      return ButtonStyles.canvasButtonStyles;
-    case BetaButtonVariant.Primary:
-    case BetaButtonVariant.Secondary:
-    case BetaButtonVariant.Delete:
-    case BetaButtonVariant.Highlight:
-    case BetaButtonVariant.OutlinePrimary:
-    case BetaButtonVariant.OutlineSecondary:
-    case BetaButtonVariant.OutlineInverse:
+    case ButtonVariant.Highlight:
+    case ButtonVariant.OutlinePrimary:
+    case ButtonVariant.OutlineSecondary:
+    case ButtonVariant.OutlineInverse:
       return ButtonStyles.betaButtonStyles;
   }
 }
