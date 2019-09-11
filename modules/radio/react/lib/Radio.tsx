@@ -8,7 +8,7 @@ import canvas, {
 } from '@workday/canvas-kit-react-core';
 import uuid from 'uuid/v4';
 
-export interface RadioProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
   id?: string;

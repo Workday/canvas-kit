@@ -83,7 +83,7 @@ export default class FormField extends React.Component<FormFieldProps> {
     if (React.isValidElement<any>(child)) {
       const props: GrowthBehavior &
         FormFieldErrorBehavior &
-        React.HTMLAttributes<HTMLInputElement> = {
+        React.InputHTMLAttributes<HTMLInputElement> = {
         ...child.props,
       };
 
