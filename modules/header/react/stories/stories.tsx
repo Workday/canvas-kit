@@ -86,13 +86,13 @@ storiesOf('Header', module)
         >
           <IconButton
             icon={notificationsIcon}
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             title="Notifications"
             aria-label="Notifications"
           />
           <IconButton
             icon={inboxIcon}
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             title="Inbox"
             aria-label="Inbox"
           />
@@ -112,13 +112,13 @@ storiesOf('Header', module)
         >
           <IconButton
             icon={notificationsIcon}
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             title="Notifications"
             aria-label="Notifications"
           />
           <IconButton
             icon={inboxIcon}
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             title="Inbox"
             aria-label="Inbox"
           />
@@ -129,13 +129,13 @@ storiesOf('Header', module)
         <GlobalHeader onSearchSubmit={handleSearchSubmitTest} onMenuClick={handleMenuClickTest}>
           <IconButton
             icon={notificationsIcon}
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             title="Notifications"
             aria-label="Notifications"
           />
           <IconButton
             icon={inboxIcon}
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             title="Inbox"
             aria-label="Inbox"
           />
@@ -152,13 +152,13 @@ storiesOf('Header', module)
       <div className={containerStyle}>
         <Header title="Icons Only" brandUrl="#" onSearchSubmit={handleSearchSubmitTest}>
           <IconButton
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <IconButton
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             icon={inboxIcon}
             title="Inbox"
             aria-label="Inbox"
@@ -177,13 +177,13 @@ storiesOf('Header', module)
         >
           {nav}
           <IconButton
-            buttonType={IconButton.Types.Inverse}
+            variant={IconButton.Variant.Inverse}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-          <Button buttonType={Button.Types.Primary}>Download</Button>
+          <Button variant={Button.Variant.Primary}>Download</Button>
         </Header>
       </div>
       <br />
@@ -204,18 +204,18 @@ storiesOf('Header', module)
         >
           {nav}
           <IconButton
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <IconButton
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             icon={inboxIcon}
             title="Inbox"
             aria-label="Inbox"
           />
-          <Button buttonType={Button.Types.Primary}>Logout</Button>
+          <Button variant={Button.Variant.Primary}>Logout</Button>
         </Header>
       </div>
       <br />
@@ -230,18 +230,18 @@ storiesOf('Header', module)
         >
           {nav}
           <IconButton
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <IconButton
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             icon={inboxIcon}
             title="Inbox"
             aria-label="Inbox"
           />
-          <Button buttonType={Button.Types.Primary}>Logout</Button>
+          <Button variant={Button.Variant.Primary}>Logout</Button>
         </Header>
       </div>
       <br />
@@ -255,18 +255,18 @@ storiesOf('Header', module)
         >
           {nav}
           <IconButton
-            buttonType={IconButton.Types.Inverse}
+            variant={IconButton.Variant.Inverse}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <IconButton
-            buttonType={IconButton.Types.Inverse}
+            variant={IconButton.Variant.Inverse}
             icon={inboxIcon}
             title="Inbox"
             aria-label="Inbox"
           />
-          <Button buttonType={Button.Types.Primary}>Logout</Button>
+          <Button variant={Button.Variant.Primary}>Logout</Button>
         </Header>
       </div>
     </div>
@@ -297,13 +297,13 @@ storiesOf('Header', module)
         >
           {nav}
           <IconButton
-            buttonType={IconButton.Types.Inverse}
+            variant={IconButton.Variant.Inverse}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-          <Button buttonType={Button.Types.Primary}>Download</Button>
+          <Button variant={Button.Variant.Primary}>Download</Button>
         </Header>
       </div>
       <br />
@@ -311,7 +311,7 @@ storiesOf('Header', module)
         <Header variant={Header.Variant.Full} title="" themeColor={Header.Theme.Blue} brandUrl="#">
           {nav}
           <IconButton
-            buttonType={IconButton.Types.Inverse}
+            variant={IconButton.Variant.Inverse}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
@@ -329,7 +329,7 @@ storiesOf('Header', module)
         >
           {nav}
           <IconButton
-            buttonType={IconButton.Types.Inverse}
+            variant={IconButton.Variant.Inverse}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
@@ -348,18 +348,18 @@ storiesOf('Header', module)
         >
           {nav}
           <IconButton
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <IconButton
-            buttonType={IconButton.Types.Circle}
+            variant={IconButton.Variant.Circle}
             icon={inboxIcon}
             title="Inbox"
             aria-label="Inbox"
           />
-          <Button buttonType={Button.Types.Primary}>Logout</Button>
+          <Button variant={Button.Variant.Primary}>Logout</Button>
         </Header>
       </div>
     </div>
@@ -374,40 +374,44 @@ storiesOf('Header', module)
       >
         {nav}
         <IconButton
-          buttonType={IconButton.Types.Inverse}
+          variant={IconButton.Variant.Inverse}
           icon={notificationsIcon}
           title="Notifications"
           aria-label="Notifications"
         />
         <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-        <Button buttonType={Button.Types.Primary}>Download</Button>
+        <Button variant={Button.Variant.Primary}>Download</Button>
       </Header>
       <Header title="Nav Collapses Later" breakpoints={{sm: 320, md: 420, lg: 768}}>
         {nav}
       </Header>
       <Header title="Nav Collapses Earlier" breakpoints={{sm: 320, md: 768, lg: 1280}}>
         {nav}
-        <IconButton buttonType={IconButton.Types.Circle} icon={notificationsIcon} />
+        <IconButton
+          variant={IconButton.Variant.Circle}
+          icon={notificationsIcon}
+          aria-label="Notifications"
+        />
         <Avatar onClick={handleAvatarClickTest} />
-        <Button buttonType={Button.Types.Primary}>Download</Button>
+        <Button variant={Button.Variant.Primary}>Download</Button>
       </Header>
       <Header
         title="Icons Drop Later"
         breakpoints={{...Header.defaultProps.breakpoints, md: 640, lg: 1140}}
       >
         <IconButton
-          buttonType={IconButton.Types.Circle}
+          variant={IconButton.Variant.Circle}
           icon={notificationsIcon}
           title="Notifications"
           aria-label="Notifications"
         />
         <IconButton
-          buttonType={IconButton.Types.Circle}
+          variant={IconButton.Variant.Circle}
           icon={inboxIcon}
           title="Inbox"
           aria-label="Inbox"
         />
-        <Button buttonType={Button.Types.Primary}>Logout</Button>
+        <Button variant={Button.Variant.Primary}>Logout</Button>
       </Header>
     </div>
   ));

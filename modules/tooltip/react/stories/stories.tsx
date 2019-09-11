@@ -38,7 +38,12 @@ class TooltipWrapper extends React.Component<{}, TooltipWrapperState> {
           onFocus={this.open}
           onBlur={this.close}
         >
-          <IconButton buttonType={IconButton.Types.Circle} icon={xIcon} aria-labelledBy={'123'} />
+          <IconButton
+            variant={IconButton.Variant.Circle}
+            icon={xIcon}
+            aria-labelledBy={'123'}
+            aria-label="Close"
+          />
         </div>
         <Popper open={open} anchorEl={this.state.anchorEl} placement={'top'}>
           <Tooltip id={'123'}>Close</Tooltip>

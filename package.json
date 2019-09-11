@@ -15,6 +15,7 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "@cypress/webpack-preprocessor": "^4.1.0",
+    "@emotion/is-prop-valid": "^0.8.2",
     "@storybook/addon-actions": "^5.0.11",
     "@storybook/addon-knobs": "^5.0.11",
     "@storybook/addon-options": "^5.0.11",

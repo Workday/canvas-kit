@@ -9,7 +9,7 @@ describe('Button Snapshots', () => {
   });
 
   test('renders a button with no type defined', () => {
-    const component = renderer.create(<Button buttonType={undefined}>Button</Button>);
+    const component = renderer.create(<Button variant={undefined}>Button</Button>);
     expect(component).toMatchSnapshot();
   });
 

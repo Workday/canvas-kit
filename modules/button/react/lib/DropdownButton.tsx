@@ -1,33 +1,38 @@
 import * as React from 'react';
 import {ButtonBaseLabel, ButtonLabelIcon, getButtonStyle, getButtonSize} from './ButtonBase';
 import styled from 'react-emotion';
+import isPropValid from '@emotion/is-prop-valid';
 import {BaseButtonProps} from './Button';
 import {dropdownButtonStyles} from './ButtonStyles';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
-import {ButtonSizes, BetaButtonTypes} from './types';
+import {ButtonSize, BetaButtonVariant} from './types';
 
-const DropdownButtonCon = styled('button')<BaseButtonProps>(
+const DropdownButtonCon = styled('button', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<BaseButtonProps>(
   dropdownButtonStyles.styles,
-  ({buttonType}) => getButtonStyle(dropdownButtonStyles, buttonType),
-  ({buttonSize}) => getButtonSize(dropdownButtonStyles, buttonSize)
+  ({variant}) => getButtonStyle(dropdownButtonStyles, variant),
+  ({size}) => getButtonSize(dropdownButtonStyles, size)
 );
 
 export default class DropdownButton extends React.Component<BaseButtonProps> {
-  public static Types = BetaButtonTypes;
-  public static Sizes = ButtonSizes;
+  public static Variant = BetaButtonVariant;
+  public static Size = ButtonSize;
 
   static defaultProps = {
-    buttonType: BetaButtonTypes.Primary,
-    buttonSize: ButtonSizes.Large,
+    variant: BetaButtonVariant.Primary,
+    size: ButtonSize.Large,
   };
 
   public render() {
-    const {children} = this.props;
+    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
     return (
-      <DropdownButtonCon {...this.props}>
-        <ButtonBaseLabel {...this.props}>{children}</ButtonBaseLabel>
-        <ButtonLabelIcon icon={caretDownIcon} {...this.props} dropdown={true} />
+      <DropdownButtonCon variant={variant} size={size} innerRef={buttonRef} {...elemProps}>
+        <ButtonBaseLabel variant={variant} size={size}>
+          {children}
+        </ButtonBaseLabel>
+        <ButtonLabelIcon size={size} icon={caretDownIcon} dropdown={true} />
       </DropdownButtonCon>
     );
   }

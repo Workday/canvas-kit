@@ -4,7 +4,7 @@ import {keyframes} from 'emotion';
 import uuid from 'uuid/v4';
 
 import Card from '@workday/canvas-kit-react-card';
-import {IconButton, ButtonSizes} from '@workday/canvas-kit-react-button';
+import {IconButton, IconButtonSize} from '@workday/canvas-kit-react-button';
 import {CanvasDepthValue, spacing} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
 import {xIcon} from '@workday/canvas-system-icons-web';
@@ -18,7 +18,7 @@ export enum PopupPadding {
 export interface PopupProps {
   padding: PopupPadding;
   transformOrigin: TransformOrigin;
-  closeIconSize: ButtonSizes.Small | ButtonSizes.Medium;
+  closeIconSize: IconButtonSize;
   popupRef?: React.Ref<HTMLDivElement>;
   handleClose?: () => void;
   width?: number | string;
@@ -62,8 +62,8 @@ const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
     position: 'absolute',
   },
   ({closeIconSize}) => ({
-    right: closeIconSize === ButtonSizes.Small ? closeIconSpacingSmall : closeIconSpacing,
-    top: closeIconSize === ButtonSizes.Small ? closeIconSpacingSmall : closeIconSpacing,
+    right: closeIconSize === IconButton.Size.Small ? closeIconSpacingSmall : closeIconSpacing,
+    top: closeIconSize === IconButton.Size.Small ? closeIconSpacingSmall : closeIconSpacing,
   })
 );
 
@@ -72,7 +72,7 @@ export default class Popup extends React.Component<PopupProps> {
 
   static defaultProps = {
     padding: Popup.Padding.l,
-    closeIconSize: ButtonSizes.Medium,
+    closeIconSize: IconButton.Size.Medium,
     transformOrigin: {
       horizontal: 'center',
       vertical: 'top',
@@ -94,6 +94,7 @@ export default class Popup extends React.Component<PopupProps> {
       popupRef,
       ...elemProps
     } = this.props;
+
     return (
       <Container
         transformOrigin={transformOrigin}
@@ -107,8 +108,8 @@ export default class Popup extends React.Component<PopupProps> {
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton
               ref={this.closeButtonRef}
-              buttonType={IconButton.Types.Plain}
-              buttonSize={closeIconSize}
+              variant={IconButton.Variant.Plain}
+              size={closeIconSize}
               onClick={handleClose}
               icon={xIcon}
               title="Close"

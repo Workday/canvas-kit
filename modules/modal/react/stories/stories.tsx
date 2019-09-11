@@ -12,15 +12,15 @@ const ModalExampleUseModal = () => {
 
   return (
     <>
-      <Button buttonType={Button.Types.Delete} {...targetProps}>
+      <Button variant={Button.Variant.Delete} {...targetProps}>
         Delete Item
       </Button>
       <Modal testId="TestModal" heading={'Delete Item'} closeOnEscape={true} {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} buttonType={Button.Types.Delete}>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
           Delete
         </Button>
-        <Button onClick={closeModal} buttonType={Button.Types.Secondary}>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
           Cancel
         </Button>
       </Modal>
@@ -42,7 +42,7 @@ const ModalExample = () => {
 
   return (
     <>
-      <Button buttonType={Button.Types.Delete} buttonRef={buttonRef} onClick={openModal}>
+      <Button variant={Button.Variant.Delete} buttonRef={buttonRef} onClick={openModal}>
         Delete Item
       </Button>
       <Modal
@@ -53,10 +53,10 @@ const ModalExample = () => {
         handleClose={closeModal}
       >
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} buttonType={Button.Types.Delete}>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
           Delete
         </Button>
-        <Button onClick={closeModal} buttonType={Button.Types.Secondary}>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
           Cancel
         </Button>
       </Modal>

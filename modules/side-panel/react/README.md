@@ -21,17 +21,8 @@ yarn add @workday/canvas-kit-react-side-panel
 
 ```tsx
 import * as React from 'react';
-import {
-  Button,
-  ButtonTypes,
-  IconButton,
-  IconButtonTypes,
-  ButtonSizes,
-} from '@workday/canvas-kit-react-button';
-import SidePanel, {
-  SidePanelOpenDirection,
-  SidePanelBackgroundColor,
-} from '@workday/canvas-kit-react-side-panel';
+import {Button, IconButton} from '@workday/canvas-kit-react-button';
+import SidePanel from '@workday/canvas-kit-react-side-panel';
 
 interface SidePanelState {
   open: boolean;
@@ -45,8 +36,8 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
     const {open} = this.state;
     return (
       <SidePanel
-        backgroundColor={SidePanelBackgroundColor.Gray}
-        openDirection={SidePanelOpenDirection.Left}
+        backgroundColor={SidePanel.BackgroundColor.Gray}
+        openDirection={SidePanel.OpenDirection.Left}
         open={open}
         onToggleClick={this.onClick}
         breakpoint={800}
@@ -54,9 +45,9 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
         header={'Side Panel Header'}
       >
         {open ? (
-          <Button buttonType={ButtonTypes.Primary}>Add New</Button>
+          <Button variant={Button.Variant.Primary}>Add New</Button>
         ) : (
-          <IconButton buttonSize={ButtonSizes.Small} buttonType={IconButtonTypes.Filled}>
+          <IconButton size={IconButton.Size.Small} variant={IconButton.Variant.Filled}>
             <SystemIcon icon={plusIcon} />
           </IconButton>
         )}

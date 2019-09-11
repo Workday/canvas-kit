@@ -15,7 +15,7 @@ import {
   IconButton,
   IconButtonToggleGroup,
   IconButtonToggleGroupProps,
-  IconButtonTypes,
+  IconButtonVariant,
 } from '../index';
 
 import README from '../README.md';
@@ -39,7 +39,7 @@ interface ToggleIconButtonWrapperState {
 }
 
 interface ToggleIconButtonWrapperProps {
-  buttonType: IconButtonTypes;
+  variant: IconButtonVariant;
 }
 
 export class ToggleIconButtonWrapper extends React.Component<
@@ -54,9 +54,10 @@ export class ToggleIconButtonWrapper extends React.Component<
     return (
       <IconButton
         toggled={this.state.isToggled}
-        buttonType={this.props.buttonType}
+        variant={this.props.variant}
         onClick={this.handleToggle}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
   }
@@ -97,22 +98,22 @@ storiesOf('Button/Icon Button', module)
   .add('Toggleable', () => (
     <div className="story">
       <h3>Square Icon Buttons</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Types.Square} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.Square} />
 
       <h3>Default Icon Buttons</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Types.Circle} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.Circle} />
 
       <h3>Filled Icon Buttons</h3>
-      <ToggleIconButtonWrapper buttonType={IconButton.Types.CircleFilled} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.CircleFilled} />
 
       <h3>Inverse Icon Buttons</h3>
       <div className={css(blueBackground)}>
-        <ToggleIconButtonWrapper buttonType={IconButton.Types.Inverse} />
+        <ToggleIconButtonWrapper variant={IconButton.Variant.Inverse} />
       </div>
 
       <h3>Inverse Filled Icon Buttons</h3>
       <div className={css(blueBackground)}>
-        <ToggleIconButtonWrapper buttonType={IconButton.Types.InverseFilled} />
+        <ToggleIconButtonWrapper variant={IconButton.Variant.InverseFilled} />
       </div>
 
       <h3>Two buttons Grouped</h3>
@@ -120,31 +121,37 @@ storiesOf('Button/Icon Button', module)
         <IconButtonToggleGroup>
           <IconButton
             icon={listViewIcon}
+            aria-label="List View"
             onClick={e => {
               alert("Here's your click event target: " + e.currentTarget);
             }}
           />
-          <IconButton icon={worksheetsIcon} />
+          <IconButton aria-label="Worksheets" icon={worksheetsIcon} />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>
 
       <h3>Four buttons Grouped</h3>
       <IconButtonToggleGroupWrapper>
         <IconButtonToggleGroup>
-          <IconButton icon={listViewIcon} value="list-view" />
-          <IconButton icon={worksheetsIcon} value="table-view" />
-          <IconButton icon={deviceTabletIcon} value="device-view" />
-          <IconButton icon={percentageIcon} value="percent-view" />
+          <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
+          <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+          <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+          <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>
 
       <h3>RTL - w/ initial selected item & disabled item</h3>
       <IconButtonToggleGroupWrapper>
         <IconButtonToggleGroup isRTL={true} value="table-view">
-          <IconButton icon={listViewIcon} value="list-view" />
-          <IconButton icon={worksheetsIcon} value="table-view" />
-          <IconButton icon={deviceTabletIcon} value="device-view" />
-          <IconButton icon={percentageIcon} value="percent-view" disabled={true} />
+          <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
+          <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+          <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+          <IconButton
+            icon={percentageIcon}
+            value="percent-view"
+            aria-label="Percent View"
+            disabled={true}
+          />
         </IconButtonToggleGroup>
       </IconButtonToggleGroupWrapper>
     </div>

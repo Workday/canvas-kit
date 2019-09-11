@@ -955,6 +955,7 @@ exports[`Dub Header Snapshots renders a header with SystemIcon and IconButton ch
     className="emotion-11 emotion-12"
   >
     <button
+      aria-label="Open Menu"
       className="canvas-header--menu-icon emotion-9 emotion-10"
     >
       <span
@@ -2429,6 +2430,7 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
     className="emotion-14 emotion-15"
   >
     <button
+      aria-label="Open Menu"
       className="canvas-header--menu-icon emotion-12 emotion-10"
     >
       <span
@@ -3118,6 +3120,7 @@ exports[`Dub Header Snapshots renders a header with nav elements 1`] = `
     className="emotion-11 emotion-12"
   >
     <button
+      aria-label="Open Menu"
       className="canvas-header--menu-icon emotion-9 emotion-10"
     >
       <span
@@ -3542,6 +3545,7 @@ exports[`Dub Header Snapshots renders a header with nav elements 2`] = `
     className="emotion-11 emotion-12"
   >
     <button
+      aria-label="Open Menu"
       className="canvas-header--menu-icon emotion-9 emotion-10"
     >
       <span
@@ -7602,6 +7606,7 @@ exports[`Full Header Snapshots renders a header with content with a search bar 1
     className="emotion-14 emotion-15"
   >
     <button
+      aria-label="Open Menu"
       className="canvas-header--menu-icon emotion-9 emotion-10"
     >
       <span
@@ -8297,6 +8302,7 @@ exports[`Full Header Snapshots renders a header with nav elements 1`] = `
     className="emotion-11 emotion-12"
   >
     <button
+      aria-label="Open Menu"
       className="canvas-header--menu-icon emotion-9 emotion-10"
     >
       <span
@@ -8724,6 +8730,7 @@ exports[`Full Header Snapshots renders a header with nav elements 2`] = `
     className="emotion-11 emotion-12"
   >
     <button
+      aria-label="Open Menu"
       className="canvas-header--menu-icon emotion-9 emotion-10"
     >
       <span
@@ -9151,6 +9158,7 @@ exports[`Full Header Snapshots renders a header with system icon children 1`] = 
     className="emotion-11 emotion-12"
   >
     <button
+      aria-label="Open Menu"
       className="canvas-header--menu-icon emotion-9 emotion-10"
     >
       <span

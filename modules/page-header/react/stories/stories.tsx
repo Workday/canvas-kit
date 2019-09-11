@@ -14,16 +14,16 @@ storiesOf('Page Header', module)
   .add('Product Page Header', () => (
     <div className="story">
       <PageHeader title="Product Context">
-        <IconButton icon={exportIcon} />
-        <IconButton icon={fullscreenIcon} />
+        <IconButton icon={exportIcon} aria-label="Export" />
+        <IconButton icon={fullscreenIcon} aria-label="Fullscreen" />
       </PageHeader>
     </div>
   ))
   .add('With Cap Width', () => (
     <div className="story">
       <PageHeader title="With Cap Width" capWidth={true}>
-        <IconButton icon={exportIcon} />
-        <IconButton icon={fullscreenIcon} />
+        <IconButton icon={exportIcon} aria-label="Export" />
+        <IconButton icon={fullscreenIcon} aria-label="Fullscreen" />
       </PageHeader>
     </div>
   ));

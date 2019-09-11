@@ -27,8 +27,8 @@ describe('Page Header', () => {
   test('should render a copy of the children', () => {
     const component = mount(
       <PageHeader title="With Children">
-        <IconButton icon={exportIcon} />
-        <IconButton icon={fullscreenIcon} />
+        <IconButton icon={exportIcon} aria-label="Export" />
+        <IconButton icon={fullscreenIcon} aria-label="Fullscreen" />
       </PageHeader>
     );
 
@@ -38,8 +38,10 @@ describe('Page Header', () => {
     // @ts-ignore
     expect(component.instance().renderChildren(null)).toEqual(null); // tests what happens when no children exist
     expect(
-      // @ts-ignore
-      component.instance().renderChildren(<IconButton icon={fullscreenIcon} />)
+      component
+        .instance()
+        // @ts-ignore
+        .renderChildren(<IconButton icon={fullscreenIcon} aria-label="Fullscreen" />)
     ).toHaveLength(1); // tests handling of IconButtons
     // @ts-ignore
     expect(component.instance().renderChildren(<PageHeader title="Page Header" />)[0].type).toBe(

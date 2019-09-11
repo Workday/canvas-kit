@@ -45,19 +45,15 @@ storiesOf('Button/Beta', module)
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Primary}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Primary}>
+        Primary
+      </Button>
+      <Button size={Button.Size.Large} variant={Button.Variant.Primary} icon={activityStreamIcon}>
         Primary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Primary}
-        icon={activityStreamIcon}
-      >
-        Primary
-      </Button>
-      <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Primary}
+        size={Button.Size.Large}
+        variant={Button.Variant.Primary}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
@@ -65,23 +61,23 @@ storiesOf('Button/Beta', module)
       </Button>
       <Button
         disabled={true}
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Primary}
+        size={Button.Size.Large}
+        variant={Button.Variant.Primary}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
         Primary
       </Button>
       <h3>Medium Primary</h3>
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Primary}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Primary}>
         Primary
       </Button>
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Primary} icon={editIcon}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Primary} icon={editIcon}>
         Primary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Primary}
+        size={Button.Size.Medium}
+        variant={Button.Variant.Primary}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
@@ -89,23 +85,23 @@ storiesOf('Button/Beta', module)
       </Button>
       <Button
         disabled={true}
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Primary}
+        size={Button.Size.Medium}
+        variant={Button.Variant.Primary}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
         Primary
       </Button>
       <h3>Small Primary</h3>
-      <Button buttonSize={Button.Sizes.Small} buttonType={Button.Types.Primary}>
+      <Button size={Button.Size.Small} variant={Button.Variant.Primary}>
         Primary
       </Button>
-      <Button disabled={true} buttonSize={Button.Sizes.Small} buttonType={Button.Types.Primary}>
+      <Button disabled={true} size={Button.Size.Small} variant={Button.Variant.Primary}>
         Primary
       </Button>
       <h3>Growing Primary</h3>
       <div className={css(buttonContainer)}>
-        <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Primary} grow={true}>
+        <Button size={Button.Size.Large} variant={Button.Variant.Primary} grow={true}>
           Primary
         </Button>
       </div>
@@ -114,19 +110,15 @@ storiesOf('Button/Beta', module)
   .add('Secondary', () => (
     <div className="story">
       <h3>Large Secondary</h3>
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Secondary}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Secondary}>
+        Secondary
+      </Button>
+      <Button size={Button.Size.Large} variant={Button.Variant.Secondary} icon={activityStreamIcon}>
         Secondary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Secondary}
-        icon={activityStreamIcon}
-      >
-        Secondary
-      </Button>
-      <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Secondary}
+        size={Button.Size.Large}
+        variant={Button.Variant.Secondary}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
@@ -134,23 +126,23 @@ storiesOf('Button/Beta', module)
       </Button>
       <Button
         disabled={true}
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Secondary}
+        size={Button.Size.Large}
+        variant={Button.Variant.Secondary}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
         Secondary
       </Button>
       <h3>Medium Secondary</h3>
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Secondary}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Secondary}>
         Secondary
       </Button>
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Secondary} icon={editIcon}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Secondary} icon={editIcon}>
         Secondary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Secondary}
+        size={Button.Size.Medium}
+        variant={Button.Variant.Secondary}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
@@ -158,22 +150,22 @@ storiesOf('Button/Beta', module)
       </Button>
       <Button
         disabled={true}
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Secondary}
+        size={Button.Size.Medium}
+        variant={Button.Variant.Secondary}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
         Secondary
       </Button>
       <h3>Small Secondary</h3>
-      <Button buttonSize={Button.Sizes.Small} buttonType={Button.Types.Secondary}>
+      <Button size={Button.Size.Small} variant={Button.Variant.Secondary}>
         Secondary
       </Button>
-      <Button disabled={true} buttonSize={Button.Sizes.Small} buttonType={Button.Types.Secondary}>
+      <Button disabled={true} size={Button.Size.Small} variant={Button.Variant.Secondary}>
         Secondary
       </Button>
       <h3>Growing Secondary</h3>
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Secondary} grow={true}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Secondary} grow={true}>
         Growing Secondary
       </Button>
     </div>
@@ -181,24 +173,24 @@ storiesOf('Button/Beta', module)
   .add('Delete', () => (
     <div className="story">
       <h3>Large Delete</h3>
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Delete}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Delete}>
         Delete
       </Button>
-      <Button disabled={true} buttonSize={Button.Sizes.Large} buttonType={Button.Types.Delete}>
+      <Button disabled={true} size={Button.Size.Large} variant={Button.Variant.Delete}>
         Delete
       </Button>
       <h3>Medium Delete</h3>
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Delete}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Delete}>
         Delete
       </Button>
-      <Button disabled={true} buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Delete}>
+      <Button disabled={true} size={Button.Size.Medium} variant={Button.Variant.Delete}>
         Delete
       </Button>
       <h3>Small Delete</h3>
-      <Button buttonSize={Button.Sizes.Small} buttonType={Button.Types.Delete}>
+      <Button size={Button.Size.Small} variant={Button.Variant.Delete}>
         Delete
       </Button>
-      <Button disabled={true} buttonSize={Button.Sizes.Small} buttonType={Button.Types.Delete}>
+      <Button disabled={true} size={Button.Size.Small} variant={Button.Variant.Delete}>
         Delete
       </Button>
     </div>
@@ -206,31 +198,27 @@ storiesOf('Button/Beta', module)
   .add('Highlight', () => (
     <div className="story">
       <h3>Large Highlight</h3>
-      <Button buttonType={Button.Types.Highlight} icon={activityStreamIcon}>
+      <Button variant={Button.Variant.Highlight} icon={activityStreamIcon}>
         Highlight
       </Button>
-      <Button buttonType={Button.Types.Highlight} icon={playCircleIcon} dataLabel={'2:00'}>
+      <Button variant={Button.Variant.Highlight} icon={playCircleIcon} dataLabel={'2:00'}>
         Highlight
       </Button>
       <Button
         disabled={true}
-        buttonType={Button.Types.Highlight}
+        variant={Button.Variant.Highlight}
         icon={playCircleIcon}
         dataLabel={'2:00'}
       >
         Highlight
       </Button>
       <h3>Medium Highlight</h3>
-      <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Highlight}
-        icon={playCircleIcon}
-      >
+      <Button size={Button.Size.Medium} variant={Button.Variant.Highlight} icon={playCircleIcon}>
         Highlight
       </Button>
       <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Highlight}
+        size={Button.Size.Medium}
+        variant={Button.Variant.Highlight}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
@@ -238,8 +226,8 @@ storiesOf('Button/Beta', module)
       </Button>
       <Button
         disabled={true}
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Highlight}
+        size={Button.Size.Medium}
+        variant={Button.Variant.Highlight}
         icon={playCircleIcon}
         dataLabel={'1:00'}
       >
@@ -247,11 +235,11 @@ storiesOf('Button/Beta', module)
       </Button>
       <h3>Growing</h3>
       <div className={css(buttonContainer)}>
-        <Button buttonType={Button.Types.Highlight} icon={activityStreamIcon} grow={true}>
+        <Button variant={Button.Variant.Highlight} icon={activityStreamIcon} grow={true}>
           Highlight
         </Button>
         <Button
-          buttonType={Button.Types.Highlight}
+          variant={Button.Variant.Highlight}
           icon={playCircleIcon}
           dataLabel={'2:00'}
           grow={true}
@@ -267,42 +255,34 @@ storiesOf('Button/Beta/Text', module)
   .add('Default', () => (
     <div className="story">
       <h3>Large</h3>
-      <TextButton buttonSize={TextButton.Sizes.Large} buttonType={TextButton.Types.Default}>
+      <TextButton size={TextButton.Size.Large} variant={TextButton.Variant.Default}>
         Text
       </TextButton>
-      <TextButton
-        disabled={true}
-        buttonSize={TextButton.Sizes.Large}
-        buttonType={TextButton.Types.Default}
-      >
+      <TextButton disabled={true} size={TextButton.Size.Large} variant={TextButton.Variant.Default}>
         Text
       </TextButton>
       <h3>Small</h3>
-      <TextButton buttonSize={TextButton.Sizes.Small} buttonType={TextButton.Types.Default}>
+      <TextButton size={TextButton.Size.Small} variant={TextButton.Variant.Default}>
         Text
       </TextButton>
-      <TextButton
-        disabled={true}
-        buttonSize={TextButton.Sizes.Small}
-        buttonType={TextButton.Types.Default}
-      >
+      <TextButton disabled={true} size={TextButton.Size.Small} variant={TextButton.Variant.Default}>
         Text
       </TextButton>
       <h3>All Caps</h3>
-      <TextButton buttonType={TextButton.Types.AllCaps}>All Caps</TextButton>
+      <TextButton variant={TextButton.Variant.AllCaps}>All Caps</TextButton>
       <h3>Icons</h3>
       <div className={css(buttonContainer)}>
         <TextButton
           icon={editIcon}
-          iconPosition={TextButton.IconPositions.Left}
-          buttonType={TextButton.Types.Default}
+          iconPosition={TextButton.IconPosition.Left}
+          variant={TextButton.Variant.Default}
         >
           Left Icon Large
         </TextButton>
         <TextButton
           icon={arrowRightIcon}
-          iconPosition={TextButton.IconPositions.Right}
-          buttonType={TextButton.Types.Default}
+          iconPosition={TextButton.IconPosition.Right}
+          variant={TextButton.Variant.Default}
         >
           Right Icon Large
         </TextButton>
@@ -313,47 +293,47 @@ storiesOf('Button/Beta/Text', module)
     <div className="story">
       <h3>Large Inverse</h3>
       <div className={css(blueBackground)}>
-        <TextButton buttonSize={TextButton.Sizes.Large} buttonType={TextButton.Types.Inverse}>
+        <TextButton size={TextButton.Size.Large} variant={TextButton.Variant.Inverse}>
           Text
         </TextButton>
         <TextButton
           disabled={true}
-          buttonSize={TextButton.Sizes.Large}
-          buttonType={TextButton.Types.Inverse}
+          size={TextButton.Size.Large}
+          variant={TextButton.Variant.Inverse}
         >
           Text
         </TextButton>
       </div>
       <h3>Small Inverse</h3>
       <div className={css(blueBackground)}>
-        <TextButton buttonSize={TextButton.Sizes.Small} buttonType={TextButton.Types.Inverse}>
+        <TextButton size={TextButton.Size.Small} variant={TextButton.Variant.Inverse}>
           Text
         </TextButton>
         <TextButton
           disabled={true}
-          buttonSize={TextButton.Sizes.Small}
-          buttonType={TextButton.Types.Inverse}
+          size={TextButton.Size.Small}
+          variant={TextButton.Variant.Inverse}
         >
           Text
         </TextButton>
       </div>
       <h3>All Caps Inverse</h3>
       <div className={css(blueBackground)}>
-        <TextButton buttonType={TextButton.Types.InverseAllCaps}>All Caps</TextButton>
+        <TextButton variant={TextButton.Variant.InverseAllCaps}>All Caps</TextButton>
       </div>
       <h3>Icons Inverse</h3>
       <div className={css(buttonContainer, blueBackground)}>
         <TextButton
           icon={editIcon}
-          iconPosition={TextButton.IconPositions.Left}
-          buttonType={TextButton.Types.Inverse}
+          iconPosition={TextButton.IconPosition.Left}
+          variant={TextButton.Variant.Inverse}
         >
           Left Icon Large
         </TextButton>
         <TextButton
           icon={arrowRightIcon}
-          iconPosition={TextButton.IconPositions.Right}
-          buttonType={TextButton.Types.Inverse}
+          iconPosition={TextButton.IconPosition.Right}
+          variant={TextButton.Variant.Inverse}
         >
           Right Icon Large
         </TextButton>
@@ -366,74 +346,66 @@ storiesOf('Button/Beta/Outline', module)
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.OutlinePrimary}>
+      <Button size={Button.Size.Large} variant={Button.Variant.OutlinePrimary}>
         Outline Primary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.OutlinePrimary}
+        size={Button.Size.Large}
+        variant={Button.Variant.OutlinePrimary}
         icon={activityStreamIcon}
       >
         Outline Primary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Large}
+        size={Button.Size.Large}
         dataLabel={'1:00'}
-        buttonType={Button.Types.OutlinePrimary}
+        variant={Button.Variant.OutlinePrimary}
         icon={playCircleIcon}
       >
         Outline Primary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Large}
+        size={Button.Size.Large}
         disabled={true}
         dataLabel={'1:00'}
-        buttonType={Button.Types.OutlinePrimary}
+        variant={Button.Variant.OutlinePrimary}
         icon={playCircleIcon}
       >
         Outline Primary
       </Button>
       <h3>Medium Primary</h3>
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.OutlinePrimary}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.OutlinePrimary}>
+        Outline Primary
+      </Button>
+      <Button size={Button.Size.Medium} variant={Button.Variant.OutlinePrimary} icon={editIcon}>
         Outline Primary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.OutlinePrimary}
-        icon={editIcon}
-      >
-        Outline Primary
-      </Button>
-      <Button
-        buttonSize={Button.Sizes.Medium}
+        size={Button.Size.Medium}
         dataLabel={'1:00'}
-        buttonType={Button.Types.OutlinePrimary}
+        variant={Button.Variant.OutlinePrimary}
         icon={playCircleIcon}
       >
         Outline Primary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Medium}
+        size={Button.Size.Medium}
         disabled={true}
         dataLabel={'1:00'}
-        buttonType={Button.Types.OutlinePrimary}
+        variant={Button.Variant.OutlinePrimary}
         icon={playCircleIcon}
       >
         Outline Primary
       </Button>
       <h3>Small Primary</h3>
-      <Button buttonSize={Button.Sizes.Small} buttonType={Button.Types.OutlinePrimary}>
+      <Button size={Button.Size.Small} variant={Button.Variant.OutlinePrimary}>
         Outline Primary
       </Button>
-      <Button
-        buttonSize={Button.Sizes.Small}
-        disabled={true}
-        buttonType={Button.Types.OutlinePrimary}
-      >
+      <Button size={Button.Size.Small} disabled={true} variant={Button.Variant.OutlinePrimary}>
         Outline Primary
       </Button>
       <h3>Growing Primary</h3>
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.OutlinePrimary} grow={true}>
+      <Button size={Button.Size.Large} variant={Button.Variant.OutlinePrimary} grow={true}>
         Growing Primary Outline
       </Button>
     </div>
@@ -441,78 +413,66 @@ storiesOf('Button/Beta/Outline', module)
   .add('Secondary', () => (
     <div className="story">
       <h3>Large Secondary</h3>
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.OutlineSecondary}>
+      <Button size={Button.Size.Large} variant={Button.Variant.OutlineSecondary}>
         Outline Secondary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.OutlineSecondary}
+        size={Button.Size.Large}
+        variant={Button.Variant.OutlineSecondary}
         icon={activityStreamIcon}
       >
         Outline Secondary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Large}
+        size={Button.Size.Large}
         dataLabel={'1:00'}
-        buttonType={Button.Types.OutlineSecondary}
+        variant={Button.Variant.OutlineSecondary}
         icon={playCircleIcon}
       >
         Outline Secondary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Large}
+        size={Button.Size.Large}
         disabled={true}
         dataLabel={'1:00'}
-        buttonType={Button.Types.OutlineSecondary}
+        variant={Button.Variant.OutlineSecondary}
         icon={playCircleIcon}
       >
         Outline Secondary
       </Button>
       <h3>Medium Secondary</h3>
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.OutlineSecondary}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.OutlineSecondary}>
+        Outline Secondary
+      </Button>
+      <Button size={Button.Size.Medium} variant={Button.Variant.OutlineSecondary} icon={editIcon}>
         Outline Secondary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.OutlineSecondary}
-        icon={editIcon}
-      >
-        Outline Secondary
-      </Button>
-      <Button
-        buttonSize={Button.Sizes.Medium}
+        size={Button.Size.Medium}
         dataLabel={'1:00'}
-        buttonType={Button.Types.OutlineSecondary}
+        variant={Button.Variant.OutlineSecondary}
         icon={playCircleIcon}
       >
         Outline Secondary
       </Button>
       <Button
-        buttonSize={Button.Sizes.Medium}
+        size={Button.Size.Medium}
         disabled={true}
         dataLabel={'1:00'}
-        buttonType={Button.Types.OutlineSecondary}
+        variant={Button.Variant.OutlineSecondary}
         icon={playCircleIcon}
       >
         Outline Secondary
       </Button>
       <h3>Small Secondary</h3>
-      <Button buttonSize={Button.Sizes.Small} buttonType={Button.Types.OutlineSecondary}>
+      <Button size={Button.Size.Small} variant={Button.Variant.OutlineSecondary}>
         Outline Secondary
       </Button>
-      <Button
-        buttonSize={Button.Sizes.Small}
-        disabled={true}
-        buttonType={Button.Types.OutlineSecondary}
-      >
+      <Button size={Button.Size.Small} disabled={true} variant={Button.Variant.OutlineSecondary}>
         Outline Secondary
       </Button>
       <h3>Growing Secondary</h3>
-      <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.OutlineSecondary}
-        grow={true}
-      >
+      <Button size={Button.Size.Large} variant={Button.Variant.OutlineSecondary} grow={true}>
         Growing Secondary Outline
       </Button>
     </div>
@@ -521,29 +481,29 @@ storiesOf('Button/Beta/Outline', module)
     <div className="story">
       <h3>Large Inverse</h3>
       <div className={css(blueBackground)}>
-        <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.OutlineInverse}>
+        <Button size={Button.Size.Large} variant={Button.Variant.OutlineInverse}>
           Outline Inverse
         </Button>
         <Button
-          buttonSize={Button.Sizes.Large}
-          buttonType={Button.Types.OutlineInverse}
+          size={Button.Size.Large}
+          variant={Button.Variant.OutlineInverse}
           icon={activityStreamIcon}
         >
           Outline Inverse
         </Button>
         <Button
-          buttonSize={Button.Sizes.Large}
+          size={Button.Size.Large}
           dataLabel={'1:00'}
-          buttonType={Button.Types.OutlineInverse}
+          variant={Button.Variant.OutlineInverse}
           icon={playCircleIcon}
         >
           Outline Inverse
         </Button>
         <Button
-          buttonSize={Button.Sizes.Large}
+          size={Button.Size.Large}
           disabled={true}
           dataLabel={'1:00'}
-          buttonType={Button.Types.OutlineInverse}
+          variant={Button.Variant.OutlineInverse}
           icon={playCircleIcon}
         >
           Outline Inverse
@@ -551,29 +511,25 @@ storiesOf('Button/Beta/Outline', module)
       </div>
       <h3>Medium Inverse</h3>
       <div className={css(blueBackground)}>
-        <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.OutlineInverse}>
+        <Button size={Button.Size.Medium} variant={Button.Variant.OutlineInverse}>
+          Outline Inverse
+        </Button>
+        <Button size={Button.Size.Medium} variant={Button.Variant.OutlineInverse} icon={editIcon}>
           Outline Inverse
         </Button>
         <Button
-          buttonSize={Button.Sizes.Medium}
-          buttonType={Button.Types.OutlineInverse}
-          icon={editIcon}
-        >
-          Outline Inverse
-        </Button>
-        <Button
-          buttonSize={Button.Sizes.Medium}
+          size={Button.Size.Medium}
           dataLabel={'1:00'}
-          buttonType={Button.Types.OutlineInverse}
+          variant={Button.Variant.OutlineInverse}
           icon={playCircleIcon}
         >
           Outline Inverse
         </Button>
         <Button
-          buttonSize={Button.Sizes.Medium}
+          size={Button.Size.Medium}
           disabled={true}
           dataLabel={'1:00'}
-          buttonType={Button.Types.OutlineInverse}
+          variant={Button.Variant.OutlineInverse}
           icon={playCircleIcon}
         >
           Outline Inverse
@@ -581,24 +537,16 @@ storiesOf('Button/Beta/Outline', module)
       </div>
       <h3>Small Inverse</h3>
       <div className={css(blueBackground)}>
-        <Button buttonSize={Button.Sizes.Small} buttonType={Button.Types.OutlineInverse}>
+        <Button size={Button.Size.Small} variant={Button.Variant.OutlineInverse}>
           Outline Inverse
         </Button>
-        <Button
-          buttonSize={Button.Sizes.Small}
-          disabled={true}
-          buttonType={Button.Types.OutlineInverse}
-        >
+        <Button size={Button.Size.Small} disabled={true} variant={Button.Variant.OutlineInverse}>
           Outline Inverse
         </Button>
       </div>
       <h3>Growing Inverse</h3>
       <div className={css(blueBackground)} style={{maxWidth: 'initial'}}>
-        <Button
-          buttonSize={Button.Sizes.Large}
-          buttonType={Button.Types.OutlineInverse}
-          grow={true}
-        >
+        <Button size={Button.Size.Large} variant={Button.Variant.OutlineInverse} grow={true}>
           Growing Inverse Outline
         </Button>
       </div>
@@ -610,30 +558,24 @@ storiesOf('Button/Beta/Dropdown', module)
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
-      <DropdownButton
-        buttonSize={DropdownButton.Sizes.Large}
-        buttonType={DropdownButton.Types.Primary}
-      >
+      <DropdownButton size={DropdownButton.Size.Large} variant={DropdownButton.Variant.Primary}>
         Dropdown Button
       </DropdownButton>
       <DropdownButton
         disabled={true}
-        buttonSize={DropdownButton.Sizes.Large}
-        buttonType={DropdownButton.Types.Primary}
+        size={DropdownButton.Size.Large}
+        variant={DropdownButton.Variant.Primary}
       >
         Dropdown Button
       </DropdownButton>
       <h3>Medium Primary</h3>
-      <DropdownButton
-        buttonSize={DropdownButton.Sizes.Medium}
-        buttonType={DropdownButton.Types.Primary}
-      >
+      <DropdownButton size={DropdownButton.Size.Medium} variant={DropdownButton.Variant.Primary}>
         Dropdown Button
       </DropdownButton>
       <DropdownButton
         disabled={true}
-        buttonSize={DropdownButton.Sizes.Medium}
-        buttonType={DropdownButton.Types.Primary}
+        size={DropdownButton.Size.Medium}
+        variant={DropdownButton.Variant.Primary}
       >
         Dropdown Button
       </DropdownButton>
@@ -642,30 +584,24 @@ storiesOf('Button/Beta/Dropdown', module)
   .add('Secondary', () => (
     <div className="story">
       <h3>Large Secondary</h3>
-      <DropdownButton
-        buttonSize={DropdownButton.Sizes.Large}
-        buttonType={DropdownButton.Types.Secondary}
-      >
+      <DropdownButton size={DropdownButton.Size.Large} variant={DropdownButton.Variant.Secondary}>
         Dropdown Button
       </DropdownButton>
       <DropdownButton
         disabled={true}
-        buttonSize={DropdownButton.Sizes.Large}
-        buttonType={DropdownButton.Types.Secondary}
+        size={DropdownButton.Size.Large}
+        variant={DropdownButton.Variant.Secondary}
       >
         Dropdown Button
       </DropdownButton>
       <h3>Medium Secondary</h3>
-      <DropdownButton
-        buttonSize={DropdownButton.Sizes.Medium}
-        buttonType={DropdownButton.Types.Secondary}
-      >
+      <DropdownButton size={DropdownButton.Size.Medium} variant={DropdownButton.Variant.Secondary}>
         Dropdown Button
       </DropdownButton>
       <DropdownButton
         disabled={true}
-        buttonSize={DropdownButton.Sizes.Medium}
-        buttonType={DropdownButton.Types.Secondary}
+        size={DropdownButton.Size.Medium}
+        variant={DropdownButton.Variant.Secondary}
       >
         Dropdown Button
       </DropdownButton>
