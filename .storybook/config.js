@@ -39,10 +39,10 @@ addParameters({
 configure(loadStories, module);
 injectGlobal(...fonts);
 
-function setCurrentStory(story, variation) {
+function setCurrentStory(categorization, story) {
   clearCurrentStory();
   addons.getChannel().emit(Events.SET_CURRENT_STORY, {
-    storyId: toId(story, variation),
+    storyId: toId(categorization, story),
   });
   forceReRender();
 }
