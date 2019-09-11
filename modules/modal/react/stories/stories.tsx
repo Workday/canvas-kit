@@ -19,7 +19,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
     const {open} = this.state;
     return (
       <>
-        <Button buttonType={Button.Types.Delete} onClick={this.handleClick}>
+        <Button variant={Button.Variant.Delete} onClick={this.handleClick}>
           Delete Item
         </Button>
         <Modal
@@ -36,11 +36,11 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
           <Button
             style={{marginRight: '16px'}}
             onClick={this.handleSubmit}
-            buttonType={Button.Types.Delete}
+            variant={Button.Variant.Delete}
           >
             Delete
           </Button>
-          <Button onClick={this.handleSubmit} buttonType={Button.Types.Secondary}>
+          <Button onClick={this.handleSubmit} variant={Button.Variant.Secondary}>
             Cancel
           </Button>
         </Modal>

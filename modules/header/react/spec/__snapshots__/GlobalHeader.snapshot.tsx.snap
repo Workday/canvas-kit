@@ -518,6 +518,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
     className="emotion-17 emotion-18"
   >
     <button
+      aria-label="Notifications"
       className="emotion-9 emotion-10"
       style={
         Object {
@@ -535,6 +536,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
       />
     </button>
     <button
+      aria-label="Inbox"
       className="emotion-9 emotion-10"
       style={
         Object {
@@ -555,11 +557,9 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
       aria-label="Avatar"
       className="emotion-16"
       disabled={true}
-      size={32}
     >
       <div
         className="emotion-15"
-        size={32}
       >
         <span
           className="emotion-14"
@@ -2160,6 +2160,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
     className="emotion-29 emotion-30"
   >
     <button
+      aria-label="Notifications"
       className="emotion-21 emotion-11"
       style={
         Object {
@@ -2177,6 +2178,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
       />
     </button>
     <button
+      aria-label="Inbox"
       className="emotion-21 emotion-11"
       style={
         Object {
@@ -2197,11 +2199,9 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
       aria-label="Avatar"
       className="emotion-28"
       disabled={true}
-      size={32}
     >
       <div
         className="emotion-27"
-        size={32}
       >
         <span
           className="emotion-26"
@@ -2741,6 +2741,8 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
   width: 32px;
   height: 32px;
   background-color: transparent;
+  width: 40px;
+  height: 40px;
 }
 
 .emotion-9:hover:active {
@@ -2823,9 +2825,9 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
 
 .emotion-9:not([disabled]):focus,
 .emotion-9:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-8 {
@@ -2892,6 +2894,7 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
     className="emotion-14 emotion-15"
   >
     <button
+      aria-label="Notifications"
       className="emotion-9 emotion-10"
     >
       <span
@@ -2904,6 +2907,7 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
       />
     </button>
     <button
+      aria-label="Inbox"
       className="emotion-9 emotion-10"
     >
       <span

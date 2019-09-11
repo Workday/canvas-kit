@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
+import isPropValid from '@emotion/is-prop-valid';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
@@ -37,7 +38,9 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const Container = styled('button')<Omit<AvatarProps, 'altText'>>(
+const Container = styled('button', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<Omit<AvatarProps, 'altText'>>(
   {
     display: 'flex',
     alignItems: 'center',

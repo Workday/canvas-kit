@@ -6,7 +6,7 @@ import {editIcon} from '@workday/canvas-system-icons-web';
 describe('Button (Highlight) Snapshots', () => {
   test('renders a large, highlight button with an icon', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Highlight} icon={editIcon}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Highlight} icon={editIcon}>
         Button
       </Button>
     );
@@ -15,11 +15,7 @@ describe('Button (Highlight) Snapshots', () => {
 
   test('renders a large, highlight button with a data label', () => {
     const component = renderer.create(
-      <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Highlight}
-        dataLabel={'1:00'}
-      >
+      <Button size={Button.Size.Large} variant={Button.Variant.Highlight} dataLabel={'1:00'}>
         Button
       </Button>
     );
@@ -29,8 +25,8 @@ describe('Button (Highlight) Snapshots', () => {
   test('renders a large, highlight button with an icon and data label', () => {
     const component = renderer.create(
       <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Highlight}
+        size={Button.Size.Large}
+        variant={Button.Variant.Highlight}
         icon={editIcon}
         dataLabel={'1:00'}
       >
@@ -42,7 +38,7 @@ describe('Button (Highlight) Snapshots', () => {
 
   test('renders a medium, highlight button with an icon', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Highlight} icon={editIcon}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Highlight} icon={editIcon}>
         Button
       </Button>
     );
@@ -52,8 +48,8 @@ describe('Button (Highlight) Snapshots', () => {
   test('renders a medium, highlight button with an icon and a data label', () => {
     const component = renderer.create(
       <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Highlight}
+        size={Button.Size.Medium}
+        variant={Button.Variant.Highlight}
         icon={editIcon}
         dataLabel={'1:00'}
       >
@@ -67,8 +63,8 @@ describe('Button (Highlight) Snapshots', () => {
     const component = renderer.create(
       <Button
         grow={true}
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Highlight}
+        size={Button.Size.Large}
+        variant={Button.Variant.Highlight}
         icon={editIcon}
       >
         Button

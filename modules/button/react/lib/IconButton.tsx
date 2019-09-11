@@ -1,72 +1,73 @@
 import * as React from 'react';
 import {getButtonStyle} from './ButtonBase';
 import styled from 'react-emotion';
-import {IconButtonTypes, ButtonSizes} from './types';
-import {BaseButtonProps} from './Button';
+import isPropValid from '@emotion/is-prop-valid';
+import {IconButtonVariant, IconButtonSize} from './types';
 import {iconButtonStyles} from './ButtonStyles';
 import {colors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {focusRing} from '@workday/canvas-kit-react-common';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {CSSObject} from 'create-emotion';
 
-export interface IconButtonProps extends Partial<BaseButtonProps<IconButtonTypes>> {
+export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Type of button.
+   */
+  variant: IconButtonVariant;
+  /**
+   * The accessibility label to indicate the action triggered by clicking the button
+   */
+  'aria-label': string;
+  /**
+   * Size of icon button.
+   */
+  size?: IconButtonSize;
   /**
    * Whether the icon button is toggled on or off
    */
-  toggled: boolean;
+  toggled?: boolean;
   /**
-   * Size of icon button
+   * Ref of button that the styled component renders.
    */
-  buttonSize?: ButtonSizes.Small | ButtonSizes.Medium;
+  buttonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * Icon for button.
+   */
+  icon?: CanvasSystemIcon;
   /**
    * Callback that fires when a button changes toggled states
    */
   onToggleChange?: (toggled: boolean | undefined) => void;
 }
 
-export const IconButtonCon = styled('button')<IconButtonProps>(
+export const IconButtonCon = styled('button', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<IconButtonProps>(
   iconButtonStyles.styles,
-  ({buttonType}) => getButtonStyle(iconButtonStyles, buttonType),
-  ({buttonSize, buttonType}) => {
-    if (buttonType === IconButtonTypes.Square || buttonType === IconButtonTypes.SquareFilled) {
-      switch (buttonSize) {
-        case ButtonSizes.Medium:
-          return iconButtonStyles.variants!.sizes.medium;
-        default:
-        case ButtonSizes.Small:
-          return {};
-      }
-    } else if (buttonType === IconButtonTypes.Plain) {
-      switch (buttonSize) {
-        default:
-        case ButtonSizes.Medium:
-          return {
-            margin: '-8px',
-            ...iconButtonStyles.variants!.sizes.medium,
-          };
-        case ButtonSizes.Small:
-          return {
-            margin: '-6px',
-            ...iconButtonStyles.variants!.sizes.small,
-          };
-      }
-    } else {
-      switch (buttonSize) {
-        default:
-        case ButtonSizes.Medium:
-          return iconButtonStyles.variants!.sizes.medium;
-        case ButtonSizes.Small:
-          return iconButtonStyles.variants!.sizes.small;
-      }
+  ({variant}) => getButtonStyle(iconButtonStyles, variant),
+  ({size, variant}) => {
+    switch (size) {
+      default:
+      case IconButtonSize.Medium:
+        return {
+          margin: variant === IconButtonVariant.Plain ? '-8px' : undefined,
+          ...iconButtonStyles.variants!.sizes.medium,
+        };
+      case IconButtonSize.Small:
+        return {
+          margin: variant === IconButtonVariant.Plain ? '-6px' : undefined,
+          ...iconButtonStyles.variants!.sizes.small,
+        };
     }
   },
-  ({buttonType, toggled}) => {
+  ({variant, toggled}) => {
     if (!toggled) {
       return {};
     }
 
-    switch (buttonType) {
-      case IconButtonTypes.SquareFilled:
+    switch (variant) {
+      case IconButtonVariant.SquareFilled:
       default:
         return {
           '&:focus&:hover, &:focus, &:active': {
@@ -85,7 +86,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.frenchVanilla100),
         };
-      case IconButtonTypes.Square:
+      case IconButtonVariant.Square:
         return {
           '&:focus:hover, &:focus, &:active': {
             backgroundColor: 'transparent',
@@ -102,7 +103,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getFillSelector(colors.blueberry400),
           ...getAccentSelector(colors.blueberry400),
         };
-      case IconButtonTypes.Circle:
+      case IconButtonVariant.Circle:
         return {
           '&:active': {
             ...getFillSelector(colors.blueberry400),
@@ -112,7 +113,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getFillSelector(colors.blueberry400),
           ...getAccentSelector(colors.frenchVanilla100),
         };
-      case IconButtonTypes.CircleFilled:
+      case IconButtonVariant.CircleFilled:
         return {
           backgroundColor: colors.blueberry400,
           '&:hover, &:focus&:hover': {
@@ -123,7 +124,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.blueberry400),
         };
-      case IconButtonTypes.Inverse:
+      case IconButtonVariant.Inverse:
         return {
           '&:hover span .wd-icon-fill, span .wd-icon-fill': {
             fill: colors.frenchVanilla100,
@@ -131,7 +132,7 @@ export const IconButtonCon = styled('button')<IconButtonProps>(
           ...getBackgroundSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.licorice200),
         };
-      case IconButtonTypes.InverseFilled:
+      case IconButtonVariant.InverseFilled:
         return {
           backgroundColor: 'rgba(0, 0, 0, 0.4)',
           '&:focus': {
@@ -173,13 +174,13 @@ function getAccentSelector(fillColor: string): CSSObject {
 }
 
 export default class IconButton extends React.Component<IconButtonProps> {
-  public static Types = IconButtonTypes;
-  public static Sizes = ButtonSizes;
+  public static Variant = IconButtonVariant;
+  public static Size = IconButtonSize;
 
   static defaultProps = {
-    buttonType: IconButtonTypes.Circle,
-    toggled: undefined,
-  };
+    variant: IconButtonVariant.Circle,
+    size: IconButtonSize.Medium,
+  } as const;
 
   componentDidUpdate(prevProps: IconButtonProps) {
     if (
@@ -192,17 +193,27 @@ export default class IconButton extends React.Component<IconButtonProps> {
 
   public render() {
     // onToggleChange will generate a warning if spread over a <button>
-    const {buttonRef, buttonSize, onToggleChange, toggled, ...elemProps} = this.props;
+    const {
+      buttonRef,
+      size,
+      variant,
+      onToggleChange,
+      icon,
+      toggled,
+      children,
+      ...elemProps
+    } = this.props;
+
     return (
-      // TODO (breaking change): need to remove buttonType and buttonSize prop here, doesn't make sense to expose
       <IconButtonCon
         toggled={toggled}
         innerRef={buttonRef}
-        buttonSize={buttonSize}
+        variant={variant}
+        size={size}
+        aria-pressed={toggled}
         {...elemProps}
-        aria-pressed={this.props.toggled}
       >
-        {this.props.icon ? <SystemIcon icon={this.props.icon} /> : this.props.children}
+        {icon ? <SystemIcon icon={icon} /> : children}
       </IconButtonCon>
     );
   }

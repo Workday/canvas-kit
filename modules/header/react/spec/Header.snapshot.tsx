@@ -75,8 +75,8 @@ describe('Dub Header Snapshots', () => {
       .create(
         <Header>
           <SystemIcon icon={notificationsIcon} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Square} />
-          <IconButton icon={inboxIcon} buttonType={IconButton.Types.Plain} />
+          <IconButton icon={inboxIcon} variant={IconButton.Variant.Square} aria-label="Inbox" />
+          <IconButton icon={inboxIcon} variant={IconButton.Variant.Plain} aria-label="Inbox" />
         </Header>
       )
       .toJSON();
@@ -92,7 +92,7 @@ describe('Dub Header Snapshots', () => {
     const tree = renderer
       .create(
         <Header onSearchSubmit={cb}>
-          <IconButton icon={notificationsIcon} />
+          <IconButton icon={notificationsIcon} aria-label="Notifications" />
         </Header>
       )
       .toJSON();
@@ -169,7 +169,7 @@ describe('Full Header Snapshots', () => {
     const tree = renderer
       .create(
         <Header variant={Header.Variant.Full}>
-          <IconButton icon={notificationsIcon} />
+          <IconButton icon={notificationsIcon} aria-label="Notifications" />
         </Header>
       )
       .toJSON();
@@ -196,7 +196,7 @@ describe('Full Header Snapshots', () => {
     const tree = renderer
       .create(
         <Header variant={Header.Variant.Full} themeColor={Header.Theme.Blue} onSearchSubmit={cb}>
-          <IconButton icon={notificationsIcon} />
+          <IconButton icon={notificationsIcon} aria-label="Notifications" />
         </Header>
       )
       .toJSON();

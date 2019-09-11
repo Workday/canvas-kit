@@ -136,7 +136,7 @@ describe('Button Focus', () => {
 
     render() {
       return (
-        <Button buttonType={Button.Types.Primary} buttonRef={this.buttonRef} {...this.props}>
+        <Button variant={Button.Variant.Primary} buttonRef={this.buttonRef} {...this.props}>
           {this.props.children}
         </Button>
       );
@@ -157,7 +157,7 @@ describe('Button Focus', () => {
     render() {
       return (
         <Button
-          buttonType={Button.Types.Primary}
+          variant={Button.Variant.Primary}
           buttonRef={(buttonElement: HTMLButtonElement) => {
             this.buttonElement = buttonElement;
           }}

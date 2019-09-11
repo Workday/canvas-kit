@@ -12,7 +12,7 @@ storiesOf('Action Bar', module)
   .add('Default', () => (
     <div className="story">
       <ActionBar>
-        <Button buttonType={Button.Types.Primary}>Button</Button>
+        <Button variant={Button.Variant.Primary}>Button</Button>
         <Button>Button</Button>
       </ActionBar>
     </div>
@@ -20,7 +20,7 @@ storiesOf('Action Bar', module)
   .add('With Three Buttons', () => (
     <div className="story">
       <ActionBar>
-        <Button buttonType={Button.Types.Primary}>Button</Button>
+        <Button variant={Button.Variant.Primary}>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
       </ActionBar>
@@ -29,7 +29,7 @@ storiesOf('Action Bar', module)
   .add('With Two Buttons Fixed', () => (
     <div className="story">
       <ActionBar fixed={true}>
-        <Button buttonType={Button.Types.Primary}>Button</Button>
+        <Button variant={Button.Variant.Primary}>Button</Button>
         <Button>Button</Button>
       </ActionBar>
     </div>
@@ -37,7 +37,7 @@ storiesOf('Action Bar', module)
   .add('With Three Buttons Fixed', () => (
     <div className="story">
       <ActionBar fixed={true}>
-        <Button buttonType={Button.Types.Primary}>Button</Button>
+        <Button variant={Button.Variant.Primary}>Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
       </ActionBar>

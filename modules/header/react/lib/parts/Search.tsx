@@ -184,8 +184,8 @@ const SearchSubmit = styled(IconButton)({
   padding: 0,
 });
 
-const iconButtonType = (inverse: boolean) =>
-  inverse ? IconButton.Types.Inverse : IconButton.Types.Plain;
+const iconButtonVariant = (inverse: boolean) =>
+  inverse ? IconButton.Variant.Inverse : IconButton.Variant.Plain;
 
 export class Search extends React.Component<SearchProps, SearchState> {
   static defaultProps = {
@@ -280,7 +280,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
           aria-label="Search"
           type="submit"
           icon={searchIcon}
-          buttonType={iconButtonType(themeColor !== HeaderTheme.White)}
+          variant={iconButtonVariant(themeColor !== HeaderTheme.White)}
           style={collapsedIconStyle}
           onClick={this.openMobileSearch}
         />
@@ -314,7 +314,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
               aria-label="Reset Search Input"
               icon={xIcon}
               type="reset"
-              buttonType={IconButton.Types.Circle}
+              variant={IconButton.Variant.Circle}
               style={{...iconStyle, ...closeIconStyle}}
               onClick={this.closeMobileSearch}
             />
@@ -350,7 +350,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
         <SearchSubmit
           aria-label="Search"
           icon={searchIcon}
-          buttonType={iconButtonType(!this.state.focused && themeColor !== HeaderTheme.White)}
+          variant={iconButtonVariant(!this.state.focused && themeColor !== HeaderTheme.White)}
           onClick={this.onSearchSubmit}
           type="submit"
           toggled={false}
@@ -371,7 +371,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
           value={this.state.value}
           aria-label="Reset Search Input"
           icon={xSmallIcon}
-          buttonType={iconButtonType(
+          variant={iconButtonVariant(
             !!this.state.value && !this.state.focused && themeColor !== HeaderTheme.White
           )}
           onClick={this.resetSearchInput}
