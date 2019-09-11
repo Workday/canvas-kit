@@ -6,7 +6,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {focusRing} from '@workday/canvas-kit-react-common';
 
-export interface BannerProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Action when interacting with the banner
    */

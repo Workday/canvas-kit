@@ -11,7 +11,7 @@ import {
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
 
-export interface MenuItemProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   onClick?: (event: React.SyntheticEvent) => void;
   children?: React.ReactNode;
   id?: string;
@@ -180,9 +180,7 @@ export default class MenuItem extends React.Component<MenuItemProps> {
           isFocused={!!isFocused}
           {...elemProps}
         >
-          {icon && iconProps && (
-            <StyledSystemIcon {...iconProps} />
-          )}
+          {icon && iconProps && <StyledSystemIcon {...iconProps} />}
           <LabelContainer>{children}</LabelContainer>
           {secondaryIcon && secondaryIconProps && (
             <SecondaryStyledSystemIcon {...secondaryIconProps} />
