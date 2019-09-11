@@ -10,7 +10,7 @@ describe('Modal', () => {
 
   test('should call a callback function', () => {
     const component = mount(
-      <Modal open={true} handleClose={cb}>
+      <Modal open={true} handleClose={cb} heading="Test">
         Hello World
       </Modal>
     );

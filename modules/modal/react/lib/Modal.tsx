@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {keyframes} from 'emotion';
-import {TransformOrigin} from '@workday/canvas-kit-react-common';
+import FocusTrap from 'focus-trap-react';
+
+import {TransformOrigin, FocusFirstFocusable} from '@workday/canvas-kit-react-common';
 import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
 
 export enum ModalWidth {
@@ -10,12 +12,27 @@ export enum ModalWidth {
 }
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * This will add a `data-testid` attribute to the Popup component, not the container
+   */
+  testId?: string;
   open: boolean;
   padding: PopupPadding;
   transformOrigin: TransformOrigin;
   width: ModalWidth;
+  /**
+   * Optional callback for the Modal handling closing. If this callback is provided
+   */
   handleClose?: () => void;
-  heading?: React.ReactNode;
+  /**
+   * Accessibility specifications state modals should be close when the escape key is pressed.
+   * However, we cannot guarantee that it is safe to simply bind an event listener and close in all
+   * cases. Some applications may use a Popup manager to make sure the correct popup is receiving
+   * the close command. If your application uses custom popup stacking, do not set this to true.
+   * Set this to true for simple applications and the modal will close when the escape key is pressed.
+   */
+  closeOnEscape: boolean;
+  heading: React.ReactNode;
 }
 
 const fadeIn = keyframes`
@@ -50,16 +67,28 @@ export default class Modal extends React.Component<ModalProps> {
     open: false,
     padding: Modal.Padding.l,
     width: Modal.Width.s,
+    closeOnEscape: false,
     transformOrigin: {
       horizontal: 'center',
       vertical: 'top',
     },
   };
 
-  private handleOutsideClick = (
-    handleClose: (() => void) | undefined,
-    e: React.MouseEvent<HTMLDivElement>
-  ) => {
+  private handleKeydown = (event: KeyboardEvent) => {
+    if (this.props.closeOnEscape && this.props.handleClose && event.keyCode === 27) {
+      this.props.handleClose();
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeydown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeydown);
+  }
+
+  private handleOutsideClick = (handleClose?: () => void, e: React.MouseEvent<HTMLDivElement>) => {
     const {target} = e;
     const modalNode = this.modalRef.current;
     if (modalNode && handleClose) {
@@ -70,22 +99,79 @@ export default class Modal extends React.Component<ModalProps> {
   };
 
   public render() {
-    const {open, handleClose, padding, width, heading, transformOrigin, ...elemProps} = this.props;
+    const {
+      open,
+      handleClose,
+      padding,
+      width,
+      heading,
+      transformOrigin,
+      testId,
+      ...elemProps
+    } = this.props;
     return (
       open && (
         <Container onClick={e => this.handleOutsideClick(handleClose, e)} {...elemProps}>
-          <Popup
-            popupRef={this.modalRef}
-            width={width}
-            heading={heading}
-            handleClose={handleClose}
-            padding={padding}
-            transformOrigin={transformOrigin}
-          >
-            {this.props.children}
-          </Popup>
+          <FocusTrap focusTrapOptions={{clickOutsideDeactivates: true}}>
+            <Popup
+              popupRef={this.modalRef}
+              width={width}
+              heading={heading}
+              handleClose={handleClose}
+              padding={padding}
+              transformOrigin={transformOrigin}
+              data-testid={testId}
+            >
+              <FocusFirstFocusable containerRef={this.modalRef} />
+              {this.props.children}
+            </Popup>
+          </FocusTrap>
         </Container>
       )
     );
   }
+}
+
+/**
+ * Convenience hook to set up props for both a target and the modal component.
+ * @returns An object containing convenience variables to mix into component parts of a Modal
+ * @example
+ * const myComponent = () => {
+ *   const {targetProps, modalProps, closeModal} = useModal();
+ *
+ *   return (
+ *     <>
+ *       <Button {...targetProps}>Delete Item</Button>
+ *       <Modal heading='Delete Item' {...modalProps}>
+ *         Are you sure?
+ *         <Button onClick={closeModal}>Cancel</Button>
+ *       </Modal>
+ *     </>
+ *   )
+ * }
+ */
+export function useModal() {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
+
+  return {
+    targetProps: {
+      onClick() {
+        setOpen(true);
+      },
+      buttonRef,
+    },
+    closeModal() {
+      setOpen(false);
+    },
+    modalProps: {
+      open,
+      handleClose() {
+        setOpen(false);
+        if (buttonRef.current) {
+          buttonRef.current.focus();
+        }
+      },
+    },
+  };
 }

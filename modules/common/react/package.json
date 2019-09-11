@@ -38,10 +38,12 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
+    "@types/tabbable": "^3.1.0",
     "@workday/canvas-kit-react-core": "^3.0.0-alpha.6",
     "emotion": "^9.2.12",
     "lodash": "^4.17.14",
     "popper.js": "^1.15.0",
-    "react-emotion": "^9.2.12"
+    "react-emotion": "^9.2.12",
+    "tabbable": "^4.0.0"
   }
 }
