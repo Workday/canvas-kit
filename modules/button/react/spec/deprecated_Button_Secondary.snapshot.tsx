@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import Button from '../lib/Button';
+import {deprecated_Button as Button} from '../lib/Button';
 
 describe('Button (Secondary) Snapshots', () => {
   test('renders a large, secondary button', () => {

@@ -77,7 +77,7 @@ export default class Button extends React.Component<ButtonProps> {
 
 // tslint:disable:class-name
 export class deprecated_Button extends React.Component<ButtonProps<DeprecatedButtonVariant>> {
-  public static Variant = ButtonVariant;
+  public static Variant = DeprecatedButtonVariant;
   public static Size = ButtonSize;
 
   static defaultProps = {
