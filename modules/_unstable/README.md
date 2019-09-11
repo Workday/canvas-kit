@@ -15,7 +15,7 @@ breaking changes. The goal of this module is to work unconstrained by our design
 versioning. This means that **breaking changes can be deployed to
 `@workday/canvas-kit-react-unstable` or `@workday/canvas-kit-css-unstable` at any time and it will
 not trigger a major version bump across our other modules**. Since we use a fixed version number for
-all components, all changes/additions to this module will only result in a patch version bump across
+all components, all changes/additions to this module will never result in a major version bump across
 our component library.
 
 **By consuming this module, you are indicating that you are prepared for the consequences of
