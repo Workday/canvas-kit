@@ -118,9 +118,14 @@
   },
   "lint-staged": {
     "linters": {
-      "*.{ts,tsx}": [
+      "modules/**/*.{ts,tsx}": [
         "prettier --config=./.prettierrc --ignore-path=./.prettierignore --write",
         "tslint --project tsconfig.json --fix",
+        "git add"
+      ],
+      "cypress/**/*.ts": [
+        "prettier --config=./.prettierrc --ignore-path=./.prettierignore --write",
+        "tslint --project cypress/tsconfig.json --fix",
         "git add"
       ],
       "*.{js,jsx,json,md}": [
