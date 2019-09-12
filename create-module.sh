@@ -194,6 +194,10 @@ cat > $tsconfig << EOF
 }
 EOF
 
+# Copy LICENSE
+echo -e "Adding License file to ${CYAN}$reactPath${NC}"
+cp LICENSE $reactPath
+
 ### CSS
 
 echo
@@ -280,11 +284,11 @@ cat > $readme << EOF
 # Canvas Kit CSS $upperName
 EOF
 
-fi
-
 # Copy LICENSE
-echo -e "Adding License file to ${CYAN}$reactPath${NC}"
-cp LICENSE $reactPath
+echo -e "Adding License file to ${CYAN}$cssPath${NC}"
+cp LICENSE $cssPath
+
+fi
 
 # Install deps using Yarn workspaces (instead of Lerna bootstrap)
 echo -e "\nInstalling dependencies\n"
