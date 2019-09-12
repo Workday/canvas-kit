@@ -1,10 +1,6 @@
 import * as React from 'react';
-<<<<<<< HEAD
 import {deprecated_Button as Button, ButtonProps} from '../lib/Button';
 import {DeprecatedButtonVariant} from '../lib/types';
-=======
-import {Button_deprecated as Button, ButtonProps} from '../lib/Button';
->>>>>>> e15350d... fix(button): Refactor deprecated name and add warning for deprecation
 import TextButton from '../lib/TextButton';
 import {mount} from 'enzyme';
 import ReactDOMServer from 'react-dom/server';
