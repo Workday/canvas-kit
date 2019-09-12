@@ -82,8 +82,8 @@
       color: $wdc-color-black-pepper-300;
       font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
       position: relative;
-      left: $wdc-spacing-xs + $wdc-form-selection-control-spacing;
-      padding-right: $wdc-spacing-xs + $wdc-form-selection-control-spacing;
+      left: $wdc-spacing-xs + $wdc-form-selection-control-size;
+      padding-right: $wdc-spacing-xs + $wdc-form-selection-control-size;
       cursor: pointer;
 
       // Input styling
@@ -94,8 +94,8 @@
         border-radius: 2px;
         border: 1px solid $wdc-color-licorice-200;
         box-sizing: border-box;
-        width: $wdc-form-selection-control-spacing;
-        height: $wdc-form-selection-control-spacing;
+        width: $wdc-form-selection-control-size;
+        height: $wdc-form-selection-control-size;
         transition: border 200ms ease, background-color 200ms;
         position: absolute;
         left: -30px;
@@ -110,8 +110,8 @@
         border-radius: 16px;
         margin-top: 1px;
         left: -30px;
-        width: $wdc-form-selection-control-spacing;
-        height: $wdc-form-selection-control-spacing;
+        width: $wdc-form-selection-control-size;
+        height: $wdc-form-selection-control-size;
         background: $wdc-color-soap-200;
         box-shadow: 0 0 0 0px $wdc-color-soap-200;
         transition: box-shadow 150ms ease-out;
