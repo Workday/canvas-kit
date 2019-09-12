@@ -95,6 +95,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       &.wdc-btn-active,
       &:active {
         background-color: $wdc-btn-bg-active;
+        border: 1px solid $wdc-btn-border;
       }
     }
   }
@@ -203,6 +204,8 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 
         &.wdc-btn-active,
         &:active {
+          border-color: $wdc-btn-bg-primary;
+          box-shadow: 0 0 0 2px $wdc-btn-border-primary-active;
           background-color: $wdc-btn-bg-primary;
         }
       }
