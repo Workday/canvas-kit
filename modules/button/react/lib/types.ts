@@ -16,6 +16,10 @@ export enum IconButtonSize {
 /**
  * The different button types.
  */
+
+/**
+ * @deprecated These type are deprecated along with deprecated_Button component
+ */
 export enum DeprecatedButtonVariant {
   Primary = 'primary',
   Secondary = 'secondary',
