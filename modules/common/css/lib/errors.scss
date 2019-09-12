@@ -37,14 +37,12 @@
     $_borderColor: $wdc-color-alert-light;
   }
 
-  & {
-    border-color: $_borderColor;
-    box-shadow: inset 0 0 0 1px $_borderColor;
+  border-color: $_borderColor;
+  box-shadow: inset 0 0 0 1px $_borderColor;
 
-    @if ($_type== 'alert') {
-      border-color: $wdc-color-alert-dark;
-      box-shadow: inset 0 0 0 2px $_borderColor;
-    }
+  @if ($_type== 'alert') {
+    border-color: $wdc-color-alert-dark;
+    box-shadow: inset 0 0 0 2px $_borderColor;
   }
 
   &.wdc-form-checkbox:not(.wdc-form-checked):not(:checked) + .wdc-form-label:before {

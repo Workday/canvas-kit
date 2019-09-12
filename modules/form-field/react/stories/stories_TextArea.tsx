@@ -14,179 +14,143 @@ const hintId = 'error-desc-id';
 storiesOf('Form Field/TextArea/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      <FormField label="Label" inputId="textarea-plain">
-        {controlComponent(<TextArea />)}
-      </FormField>
-    </div>
+    <FormField label="Label" inputId="textarea-plain">
+      {controlComponent(<TextArea />)}
+    </FormField>
   ))
   .add('With placeholder', () => (
-    <div className="story">
-      <FormField label="Label" inputId="textarea-placeholder">
-        {controlComponent(<TextArea placeholder="Placeholder" />)}
-      </FormField>
-    </div>
+    <FormField label="Label" inputId="textarea-placeholder">
+      {controlComponent(<TextArea placeholder="Placeholder" />)}
+    </FormField>
   ))
   .add('Disabled', () => (
-    <div className="story">
-      <FormField label="Label" inputId="textarea-disabled">
-        {controlComponent(<TextArea disabled={true} />)}
-      </FormField>
-    </div>
+    <FormField label="Label" inputId="textarea-disabled">
+      {controlComponent(<TextArea disabled={true} />)}
+    </FormField>
   ))
   .add('Disabled with placeholder', () => (
-    <div className="story">
-      <FormField label="Label" inputId="textarea-disabled-placeholder">
-        {controlComponent(<TextArea placeholder="Placeholder" disabled={true} />)}
-      </FormField>
-    </div>
+    <FormField label="Label" inputId="textarea-disabled-placeholder">
+      {controlComponent(<TextArea placeholder="Placeholder" disabled={true} />)}
+    </FormField>
   ))
   .add('Alert', () => (
-    <div className="story">
-      <FormField
-        label="Label"
-        inputId="textarea-alert"
-        error={FormField.ErrorType.Alert}
-        hintText={hintText}
-        hintId={hintId}
-      >
-        {controlComponent(<TextArea />)}
-      </FormField>
-    </div>
+    <FormField
+      label="Label"
+      inputId="textarea-alert"
+      error={FormField.ErrorType.Alert}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {controlComponent(<TextArea />)}
+    </FormField>
   ))
   .add('Error', () => (
-    <div className="story">
-      <FormField
-        label="Label"
-        inputId="textarea-error"
-        error={FormField.ErrorType.Error}
-        hintText={hintText}
-        hintId={hintId}
-      >
-        {controlComponent(<TextArea />)}
-      </FormField>
-    </div>
+    <FormField
+      label="Label"
+      inputId="textarea-error"
+      error={FormField.ErrorType.Error}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {controlComponent(<TextArea />)}
+    </FormField>
   ))
   .add('Grow', () => (
-    <div className="story">
-      <FormField label="Label" inputId="textarea-grow" grow={true}>
-        {controlComponent(<TextArea placeholder="Placeholder" />)}
-      </FormField>
-    </div>
+    <FormField label="Label" inputId="textarea-grow" grow={true}>
+      {controlComponent(<TextArea placeholder="Placeholder" />)}
+    </FormField>
   ))
   .add('Grow with Error', () => (
-    <div className="story">
-      <FormField
-        label="Label"
-        inputId="textarea-grow-error"
-        grow={true}
-        error={FormField.ErrorType.Error}
-        hintText={hintText}
-        hintId={hintId}
-      >
-        {controlComponent(<TextArea placeholder="Placeholder" />)}
-      </FormField>
-    </div>
+    <FormField
+      label="Label"
+      inputId="textarea-grow-error"
+      grow={true}
+      error={FormField.ErrorType.Error}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {controlComponent(<TextArea placeholder="Placeholder" />)}
+    </FormField>
   ));
 
 storiesOf('Form Field/TextArea/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      <FormField
-        labelPosition={FormField.LabelPosition.Left}
-        label="Label"
-        inputId="textarea-plain"
-      >
-        {controlComponent(<TextArea />)}
-      </FormField>
-    </div>
+    <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="textarea-plain">
+      {controlComponent(<TextArea />)}
+    </FormField>
   ))
   .add('With placeholder', () => (
-    <div className="story">
-      <FormField
-        labelPosition={FormField.LabelPosition.Left}
-        label="Label"
-        inputId="textarea-placeholder"
-      >
-        {controlComponent(<TextArea placeholder="Placeholder" />)}
-      </FormField>
-    </div>
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="textarea-placeholder"
+    >
+      {controlComponent(<TextArea placeholder="Placeholder" />)}
+    </FormField>
   ))
   .add('Disabled', () => (
-    <div className="story">
-      <FormField
-        labelPosition={FormField.LabelPosition.Left}
-        label="Label"
-        inputId="textarea-disabled"
-      >
-        {controlComponent(<TextArea disabled={true} />)}
-      </FormField>
-    </div>
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="textarea-disabled"
+    >
+      {controlComponent(<TextArea disabled={true} />)}
+    </FormField>
   ))
   .add('Disabled with placeholder', () => (
-    <div className="story">
-      <FormField
-        labelPosition={FormField.LabelPosition.Left}
-        label="Label"
-        inputId="textarea-disabled-placeholder"
-      >
-        {controlComponent(<TextArea placeholder="Placeholder" disabled={true} />)}
-      </FormField>
-    </div>
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="textarea-disabled-placeholder"
+    >
+      {controlComponent(<TextArea placeholder="Placeholder" disabled={true} />)}
+    </FormField>
   ))
   .add('Alert', () => (
-    <div className="story">
-      <FormField
-        labelPosition={FormField.LabelPosition.Left}
-        label="Label"
-        inputId="textarea-alert"
-        error={FormField.ErrorType.Alert}
-        hintText={hintText}
-        hintId={hintId}
-      >
-        {controlComponent(<TextArea />)}
-      </FormField>
-    </div>
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="textarea-alert"
+      error={FormField.ErrorType.Alert}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {controlComponent(<TextArea />)}
+    </FormField>
   ))
   .add('Error', () => (
-    <div className="story">
-      <FormField
-        labelPosition={FormField.LabelPosition.Left}
-        label="Label"
-        inputId="textarea-error"
-        error={FormField.ErrorType.Error}
-        hintText={hintText}
-        hintId={hintId}
-      >
-        {controlComponent(<TextArea />)}
-      </FormField>
-    </div>
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="textarea-error"
+      error={FormField.ErrorType.Error}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {controlComponent(<TextArea />)}
+    </FormField>
   ))
   .add('Grow', () => (
-    <div className="story">
-      <FormField
-        labelPosition={FormField.LabelPosition.Left}
-        label="Label"
-        inputId="textarea-grow"
-        grow={true}
-      >
-        {controlComponent(<TextArea placeholder="Placeholder" />)}
-      </FormField>
-    </div>
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="textarea-grow"
+      grow={true}
+    >
+      {controlComponent(<TextArea placeholder="Placeholder" />)}
+    </FormField>
   ))
   .add('Grow with Error', () => (
-    <div className="story">
-      <FormField
-        labelPosition={FormField.LabelPosition.Left}
-        label="Label"
-        inputId="textarea-grow-error"
-        grow={true}
-        error={FormField.ErrorType.Error}
-        hintText={hintText}
-        hintId={hintId}
-      >
-        {controlComponent(<TextArea placeholder="Placeholder" />)}
-      </FormField>
-    </div>
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="textarea-grow-error"
+      grow={true}
+      error={FormField.ErrorType.Error}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {controlComponent(<TextArea placeholder="Placeholder" />)}
+    </FormField>
   ));
