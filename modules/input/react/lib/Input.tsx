@@ -62,8 +62,18 @@ const StyledInput = styled('input')<InputProps>(
     }
 );
 
-export default class Input extends React.Component {
+export default class Input extends React.Component<InputProps> {
   public render() {
-    return <StyledInput />;
+    const {grow, inputRef, error, hasIcon, ...inputProps} = this.props;
+
+    return (
+      <StyledInput
+        hasIcon={hasIcon}
+        innerRef={inputRef}
+        grow={grow}
+        error={error}
+        {...inputProps}
+      />
+    );
   }
 }
