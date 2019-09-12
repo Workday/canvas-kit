@@ -290,16 +290,19 @@ cp LICENSE $reactPath
 echo -e "\nInstalling dependencies\n"
 yarn
 
-# Add modules as deps only if they're stable
-if [ "$stable" = true ] ; then
-
 # We always add the React module as dependency and set up export
 echo -e 'Adding module as dependency and adding export to index'
-node "utils/create-module.js" "$name" "react";
+if [ $stable ] ; then
+	node "utils/create-module.js" "$name" "react";
+else
+	node "utils/create-module.js" "$name" "react" "--unstable";
+fi
 
 if [ "$wantsCss" = true ] ; then
   echo -e 'Adding module as CSS dependency and adding Sass module import'
-  node "utils/create-module.js" "$name" "css";
-fi
-
+	if [ $stable ] ; then
+		node "utils/create-module.js" "$name" "css";
+	else
+		node "utils/create-module.js" "$name" "css" "--unstable";
+	fi
 fi
