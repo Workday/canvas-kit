@@ -30,6 +30,7 @@
   .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
     &:not([tabindex='-1']):focus {
       @extend .wdc-btn-delete.wdc-btn-focus;
+
     }
   }
 
