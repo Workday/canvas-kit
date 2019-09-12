@@ -46,6 +46,10 @@ mkdir $reactPath
 
 # Create package.json
 packageJson="$reactPath/package.json"
+if [ !$stable ] ; then
+	private=$'\n  "private": true,'
+fi
+
 echo -e "Creating ${CYAN}$packageJson${NC}"
 cat > $packageJson << EOF
 {
@@ -53,7 +57,7 @@ cat > $packageJson << EOF
   "version": "0.0.0",
   "description": "$description",
   "author": "Workday, Inc. (https://www.workday.com)",
-  "license": "Apache-2.0",
+  "license": "Apache-2.0",${private}
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
   "sideEffects": false,
