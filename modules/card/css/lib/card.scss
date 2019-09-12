@@ -20,6 +20,7 @@ $_wdc-container-positions: 'start' flex-start, 'end' flex-end, 'center' center,
   padding: $wdc-spacing-l;
   margin: $wdc-spacing-s 0;
   background-color: $wdc-color-french-vanilla-100;
+  box-sizing: border-box;
 
   .wdc-card-header {
     @include wdc-type-h3();
