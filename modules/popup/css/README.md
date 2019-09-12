@@ -29,7 +29,7 @@ title. `p` elements also have adjusted margins.
 ```html
 <div class="wdc-popup">
   <div class="wdc-popup-title">Popup Title</div>
-  <div>Popup content</div>
+  <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
 
@@ -46,7 +46,7 @@ import {SystemIcon} from '@workday/canvas-kit-react';
     </button>
   </div>
   <div class="wdc-popup-title">Popup Title</div>
-  <div>Popup content</div>
+  <div class="wdc-popup-body">Popup content</div>
 </div>;
 ```
 
@@ -58,7 +58,7 @@ The default padding for the Popup is set to `32px`. You can adjust padding based
 ```html
 <div class="wdc-popup wdc-popup-no-padding">
   <div class="wdc-popup-title">Popup Title</div>
-  <div>Popup content</div>
+  <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
 
@@ -80,6 +80,6 @@ it is good practice to have the popup animate from whatever triggered it.
 ```html
 <div class="wdc-popup wdc-popup-animation-origin-top-center">
   <div class="wdc-popup-title">Popup Title</div>
-  <div>Popup content</div>
+  <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
