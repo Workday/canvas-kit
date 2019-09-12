@@ -1,4 +1,5 @@
 .wdc-popup {
+  @include wdc-type();
   @include card-common();
   position: relative;
   animation-duration: 150ms;
