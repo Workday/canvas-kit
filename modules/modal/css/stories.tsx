@@ -24,10 +24,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
         </Button>
         {open ? (
           <div className="wdc-modal-bg" onClick={this.onOverlayClick}>
-            <div
-              className="wdc-modal wdc-modal-padding-s wdc-modal-animation-origin-bottom-center"
-              style={{width: '440px'}}
-            >
+            <div className="wdc-modal wdc-modal-padding-s" style={{width: '440px'}}>
               <div className="wdc-modal-close">
                 <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
                   <SystemIcon icon={xIcon} />

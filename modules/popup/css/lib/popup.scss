@@ -2,11 +2,7 @@
   @include wdc-type();
   @include card-common();
   position: relative;
-  animation-duration: 150ms;
   margin: 0;
-  animation-timing-function: ease-out;
-
-  @include popupAnimationOrigins();
 
   &-padding-s {
     padding: $wdc-spacing-s;
@@ -34,4 +30,9 @@
 
 .wdc-popup {
   @include wdc-popup-common();
+
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
+
+  @include popupAnimationOrigins();
 }

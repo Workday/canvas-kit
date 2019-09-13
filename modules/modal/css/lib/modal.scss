@@ -7,6 +7,17 @@
   }
 }
 
+@keyframes wdc-modal-animation {
+  from {
+    opacity: 0;
+    transform: translate(0, $wdc-spacing-xxs);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
 .wdc-modal-bg {
   align-items: center;
   animation-duration: 0.3s;
@@ -23,4 +34,8 @@
 
 .wdc-modal {
   @include wdc-popup-common();
+
+  animation-duration: 150ms;
+  animation-name: wdc-modal-animation;
+  animation-timing-function: ease-out;
 }

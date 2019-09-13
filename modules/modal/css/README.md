@@ -66,24 +66,3 @@ or `wdc-modal-no-padding` to set the padding to `0`.
   <div class="wdc-modal-body">Modal content</div>
 </div>
 ```
-
-### Animation Origin Modifiers
-
-Eight directions are available. Each direction will change the the animation origin when the modal
-enters the DOM. Use origin classes in addition to `.wdc-modal` to specify the direction.
-
-- `.wdc-modal-animation-origin-top-center`
-- `.wdc-modal-animation-origin-right-center`
-- `.wdc-modal-animation-origin-bottom-center`
-- `.wdc-modal-animation-origin-left-center`
-- `.wdc-modal-animation-origin-top-left`
-- `.wdc-modal-animation-origin-top-right`
-- `.wdc-modal-animation-origin-bottom-right`
-- `.wdc-modal-animation-origin-bottom-left`
-
-```html
-<div class="wdc-modal wdc-modal-animation-origin-top-center">
-  <div class="wdc-modal-title">Modal Title</div>
-  <div class="wdc-modal-body">Modal content</div>
-</div>
-```
