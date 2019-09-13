@@ -435,7 +435,7 @@ function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
       },
       '&:active': {
         borderColor: buttonColors.activeBorder,
-        ...getButtonFocusRing(buttonType),
+        ...getButtonFocusRing(variant),
       },
     },
   };
