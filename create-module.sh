@@ -14,8 +14,18 @@ NC='\033[0m' # No Color
 
 # Get module name
 read -p "Module/component name (@workday/canvas-kit-<TARGET>-<NAME>): " name
-
 echo
+
+if [ -d "$path" ]; then
+  echo -e "${RED}Module with name '$name' already exists."
+  exit 1
+fi
+
+# Get module info
+read -p "Module description: " description
+echo
+upperName="$(tr '[:lower:]' '[:upper:]' <<< ${name:0:1})${name:1}"
+
 read -p "Is this an unstable component? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -28,16 +38,6 @@ fi
 
 reactPath="$path/react"
 wantsCss=false
-
-if [ -d "$path" ]; then
-  echo -e "${RED}Module with name '$name' already exists."
-  exit 1
-fi
-
-# Get module info
-read -p "Module description: " description
-upperName="$(tr '[:lower:]' '[:upper:]' <<< ${name:0:1})${name:1}"
-
 
 # Create module directory
 echo -e "\nCreating ${CYAN}$path${NC}"
@@ -150,15 +150,27 @@ cat > $readme << EOF
 # Canvas Kit $upperName
 EOF
 
+## TODO: Need extra ../ for unstable
+
 # Create tsconfig.json
 tsconfig="$reactPath/tsconfig.json"
 echo -e "Creating ${CYAN}$tsconfig${NC}"
+
+if [ $stable ] ; then
 cat > $tsconfig << EOF
 {
   "extends": "../../../tsconfig.json",
   "exclude": ["node_modules", "ts-tmp", "dist", "spec", "stories"]
 }
 EOF
+else
+cat > $tsconfig << EOF
+{
+  "extends": "../../../../tsconfig.json",
+  "exclude": ["node_modules", "ts-tmp", "dist", "spec", "stories"]
+}
+EOF
+fi
 
 # Create tsconfig.cjs.json
 tsconfig="$reactPath/tsconfig.cjs.json"
@@ -291,15 +303,15 @@ echo -e "\nInstalling dependencies\n"
 yarn
 
 # Add modules as deps only if they're stable
-if [ "$stable" = true ] ; then
+if [ $stable ] ; then
 
-# We always add the React module as dependency and set up export
-echo -e 'Adding module as dependency and adding export to index'
-node "utils/create-module.js" "$name" "react";
+	# We always add the React module as dependency and set up export
+	echo -e 'Adding module as dependency and adding export to index'
+	node "utils/create-module.js" "$name" "react";
 
-if [ "$wantsCss" = true ] ; then
-  echo -e 'Adding module as CSS dependency and adding Sass module import'
-  node "utils/create-module.js" "$name" "css";
-fi
+	if [ $wantsCss ] ; then
+		echo -e 'Adding module as CSS dependency and adding Sass module import'
+		node "utils/create-module.js" "$name" "css";
+	fi
 
 fi
