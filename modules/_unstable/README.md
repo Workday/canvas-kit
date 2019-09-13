@@ -42,5 +42,3 @@ updating and ultimately performing a migration when components are promoted to a
 1. Run `yarn create-module`
 2. When asked `Is this an unstable component? [Y/n]`, enter `y` or `Y`.
 3. Your new module will be generated in accordance with the file structure above.
-4. Ensure the module is marked as private in `package.json` so that it's only included in the
-   `unstable` bundles
