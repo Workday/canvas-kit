@@ -1,20 +1,23 @@
 // Styles common to elements with text boxes like text inputs and selects
 @mixin wdc-form-common-box() {
   @include wdc-type();
-  @include wdc-type-body-2();
+  @include wdc-type-body();
   background-color: $wdc-color-input-background;
   display: block;
   border: 1px solid $wdc-color-input-border;
-  border-radius: 3px;
+  border-radius: $wdc-spacing-xxxs;
   min-width: $wdc-form-field-min-width;
   line-height: $wdc-spacing-s - 2;
   padding: $wdc-spacing-xxs;
   box-sizing: border-box;
   transition: 0.2s border-color, 0.2s box-shadow;
+  height: $wdc-spacing-xl;
 
-  &.wdc-form-hover:not([disabled]):not(.wdc-form-disabled),
-  &:hover:not([disabled]):not(.wdc-form-disabled) {
-    border-color: $wdc-color-input-hover-border;
+  &.wdc-form-focus:not([disabled]):not(.wdc-form-disabled),
+  &:focus:not([disabled]):not(.wdc-form-disabled) {
+    border-color: $wdc-color-input-focus-border;
+    box-shadow: inset 0 0 0 1px $wdc-color-input-focus-border;
+    outline: none;
   }
 }
 
@@ -32,46 +35,17 @@
   &:focus:not([disabled]) {
     @include wdc-form-focus();
   }
-}
-
-// Common styles for checkboxes and radios
-@mixin wdc-form-common-control() {
-  + .wdc-form-label {
-    margin-left: 8px;
-    display: inline;
-
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
-    &:before {
-      width: $wdc-spacing-s;
-      height: $wdc-spacing-s;
-      background: $wdc-color-input-background;
-      border: 1px solid $wdc-color-input-border;
-      border-radius: 2px;
-      transition: 0.2s border-color, 0.2s box-shadow;
-    }
-  }
-
-  & + .wdc-form-label {
-    @include wdc-type-body-2();
-    display: inline-block;
-    margin: 0 0 0 $wdc-spacing-xxs;
-    top: -4px;
-  }
 
   &:disabled,
   &.wdc-form-disabled {
+    cursor: default;
+    background: $wdc-color-soap-100;
     border-color: $wdc-color-input-disabled-border;
     pointer-events: none;
 
-    & + .wdc-form-label {
-      color: $wdc-color-input-disabled-text;
+    &::placeholder {
+      /* WebKit, Blink, Edge */
+      color: $wdc-color-licorice-100;
     }
   }
 }
@@ -80,4 +54,126 @@
   border-color: $wdc-color-common-focus-outline;
   box-shadow: 0 0 0 1px $wdc-color-common-focus-outline;
   outline: none;
+}
+
+// Common styles for checkboxes and radios
+@mixin wdc-form-selection-control() {
+  padding: 6px 0;
+  display: inline-block;
+  min-height: $wdc-spacing-s + $wdc-spacing-xxxs;
+
+  input {
+    border-radius: 2px;
+    width: $wdc-spacing-m;
+    height: $wdc-spacing-m;
+    margin: 0;
+    margin-top: -3px;
+    margin-left: -3px;
+    position: absolute;
+    opacity: 0;
+    &:hover + label::after {
+      box-shadow: 0 0 0 7px $wdc-color-soap-200;
+    }
+
+    & + label {
+      font-size: 14px;
+      line-height: $wdc-spacing-s + $wdc-spacing-xxxs;
+      font-weight: 400;
+      color: $wdc-color-black-pepper-300;
+      font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+      position: relative;
+      left: $wdc-spacing-xs + $wdc-form-selection-control-size;
+      padding-right: $wdc-spacing-xs + $wdc-form-selection-control-size;
+      cursor: pointer;
+
+      // Input styling
+      &::before {
+        content: '';
+        display: inline-block;
+        background-color: $wdc-color-french-vanilla-100;
+        border-radius: 2px;
+        border: 1px solid $wdc-color-licorice-200;
+        box-sizing: border-box;
+        width: $wdc-form-selection-control-size;
+        height: $wdc-form-selection-control-size;
+        transition: border 200ms ease, background-color 200ms;
+        position: absolute;
+        left: -30px;
+        margin-top: 1px;
+      }
+
+      // Ripple
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        border-radius: 16px;
+        margin-top: 1px;
+        left: -30px;
+        width: $wdc-form-selection-control-size;
+        height: $wdc-form-selection-control-size;
+        background: $wdc-color-soap-200;
+        box-shadow: 0 0 0 0px $wdc-color-soap-200;
+        transition: box-shadow 150ms ease-out;
+        z-index: -1;
+      }
+    }
+
+    &:hover + label::before {
+      border-color: $wdc-color-licorice-500;
+    }
+
+    &:checked + label {
+      &::before {
+        border-color: $wdc-color-blueberry-400;
+        background-color: $wdc-color-blueberry-400;
+      }
+    }
+
+    &:disabled + label {
+      color: $wdc-color-licorice-100;
+      cursor: default;
+
+      &::before {
+        border-color: $wdc-color-soap-600;
+        background-color: $wdc-color-soap-100;
+        background-size: 0px;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &:focus + label::before {
+      border-color: $wdc-color-blueberry-400;
+      box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400;
+    }
+
+    &:disabled:checked + label::before {
+      border-color: $wdc-color-blueberry-200;
+      background-color: $wdc-color-blueberry-200;
+      background-size: $wdc-spacing-m;
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+
+    [data-whatinput='keyboard'] & {
+      &:checked:focus + label::before {
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-400,
+          0 0 0 5px transparent;
+      }
+    }
+
+    [data-whatinput='initial'] &,
+    [data-whatinput='mouse'] &,
+    [data-whatinput='touch'] & {
+      &:checked:focus + label::before {
+        box-shadow: none;
+      }
+    }
+  }
 }

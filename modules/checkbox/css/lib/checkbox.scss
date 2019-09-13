@@ -1,114 +1,14 @@
-/* Checkboxes explained:
- * It's technically a bug that webkit browsers allow pseudo elements on inputs.
- * This means that styling a checked checkbox by using input:after is not
- * supported in Firefox, IE, etc. To get around this, we layer the before and
- * after pseudo elements of the adjacent label ontop of the native checkbox
- * to give the visual we want.
-
- * This wrapper is a helper to achieve the same visual when there is no label
- * (i.e. a checkbox in the first column of a table). We still require an empty
- * label so we can target it based on the checked checkbox.
- */
-.wdc-form-checkbox-nolabel {
-  width: $wdc-spacing-s;
-  height: $wdc-spacing-s;
-  position: relative;
-}
-
-// Checkboxes
-@mixin wdc-form-checkbox() {
-  @include wdc-form-common-control();
-
-  &.wdc-form-checked,
-  &:checked {
-    + .wdc-form-label:before {
-      border-color: $wdc-color-common-focus-outline;
-      background-color: $wdc-color-common-focus-outline;
-    }
-
-    + .wdc-form-label:after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: $wdc-spacing-s + 2px;
-      height: $wdc-spacing-s + 2px;
-      content: '';
-      background: svg-load(
-          '#{$_wdc-form-icons-path}/wd-icon-check.svg',
-          fill=$wdc-color-french-vanilla-100
-        )
-        center no-repeat;
-      background-size: $wdc-spacing-s;
-    }
-
-    &:focus:not([disabled]),
-    &.wdc-form-focus:not([disabled]) {
-      @include wdc-form-checkbox-checked-focus();
-    }
-  }
-
-  &:focus:not([disabled]),
-  &.wdc-form-focus:not([disabled]) {
-    @include wdc-form-checkbox-focus();
-  }
-}
-
-@mixin wdc-form-checkbox-checked-focus() {
-  + .wdc-form-label:before {
-    border-color: $wdc-color-input-background;
-    box-shadow: 0 0 0 1px $wdc-color-input-background, 0 0 0 3px $wdc-color-common-focus-outline,
-      inset 0 0 0 4px $wdc-color-common-focus-outline;
-  }
-}
-
-@mixin wdc-form-checkbox-focus() {
-  + .wdc-form-label:before {
-    border-color: $wdc-color-common-focus-outline;
-    box-shadow: 0 0 0 1px $wdc-color-common-focus-outline;
-    outline: none;
-  }
-}
-
 .wdc-form-checkbox {
-  @include wdc-form-checkbox();
-}
+  @include wdc-form-selection-control();
 
-[data-whatinput='keyboard'] .wdc-form-checkbox:not([diabled]) {
-  &:checked {
-    &:focus {
-      @include wdc-form-checkbox-checked-focus();
-    }
+  input+label::before {
+    background-image: svg-load('#{$_wdc-form-icons-path}/wd-icon-check-small.svg',
+      fill=$wdc-color-french-vanilla-100);
+    background-position: center center;
+    background-size: $wdc-spacing-s;
   }
 
-  &:focus {
-    @include wdc-form-checkbox-focus();
-  }
-}
-
-[data-whatinput='mouse'],
-[data-whatinput='touch'] {
-  .wdc-form-checkbox {
-    &.wdc-form-checked,
-    &:checked {
-      &:focus {
-        + .wdc-form-label:before {
-          border-color: $wdc-color-blueberry-500;
-          box-shadow: none;
-        }
-      }
-
-      &.wdc-form-focus {
-        + .wdc-form-label:before {
-          border-color: $wdc-color-soap-100;
-        }
-      }
-    }
-
-    &:focus {
-      + .wdc-form-label:before {
-        border-color: $wdc-color-licorice-100;
-        box-shadow: none;
-      }
-    }
+  input:checked+label::before {
+    background-size: $wdc-spacing-m;
   }
 }
