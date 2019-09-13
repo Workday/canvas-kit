@@ -24,7 +24,10 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ## Usage
 
 ```html
-<input type="radio" class="wdc-form-radio" id="radio" />
+<div className="wdc-form-radio">
+  <input type="radio" id="radio" />
+  <label htmlFor="radio">E-mail</label>
+</div>
 ```
 
 **Note:** While a base checkbox component is provided in this package, it is **not accessible** when

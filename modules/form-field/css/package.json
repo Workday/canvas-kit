@@ -20,6 +20,13 @@
     "@workday/canvas-kit-css-core": "^3.0.0-alpha.6",
     "@workday/canvas-system-icons-web": "^1.0.1"
   },
+  "devDependencies": {
+    "@workday/canvas-kit-css-checkbox": "^3.0.0-alpha.0",
+    "@workday/canvas-kit-css-text-area": "^3.0.0-alpha.0",
+    "@workday/canvas-kit-css-text-input": "^3.0.0-alpha.0",
+    "@workday/canvas-kit-css-radio": "^3.0.0-alpha.0",
+    "@workday/canvas-kit-css-select": "^3.0.0-alpha.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node ../../../utils/css-build.js index.scss"
