@@ -2824,9 +2824,9 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
 }
 
 .emotion-9:not([disabled]):focus {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-9:not([disabled]):active {
