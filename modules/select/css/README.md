@@ -28,14 +28,16 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 ## Usage
 
 ```html
-<select class="wdc-form-select" id="select">
-  <option disabled selected>
-    Select an option
-  </option>
-  <option>Option 1</option>
-  <option>Option 2</option>
-  <option>Option 3</option>
-</select>
+<div className="wdc-form-select">
+  <select id="select">
+    <option label="E-mail">E-mail</option>
+    <option label="Phone">Phone</option>
+    <option label="Fax (disabled)" disabled="{true}">
+      Fax (disabled)
+    </option>
+    <option label="Mail">Mail</option>
+  </select>
+</div>
 ```
 
 **Note:** While a base checkbox component is provided in this package, it is **not accessible** when

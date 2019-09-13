@@ -24,7 +24,9 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ## Usage
 
 ```html
-<input type="text" class="wdc-form-textinput" />
+<div className="wdc-form-textinput">
+  <input id="input" type="text" />
+</div>
 ```
 
 **Note:** While a base checkbox component is provided in this package, it is **not accessible** when
