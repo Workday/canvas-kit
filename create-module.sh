@@ -146,9 +146,19 @@ EOF
 # Create README.md
 readme="$reactPath/README.md"
 echo -e "Creating ${CYAN}$readme${NC}"
+if [ $stable ] ; then
 cat > $readme << EOF
 # Canvas Kit $upperName
 EOF
+else
+cat > $readme << EOF
+# Canvas Kit $upperName
+
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_unstable/README.md">
+  <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
+</a>  This component is work in progress and currently in pre-release.
+EOF
+fi
 
 ## TODO: Need extra ../ for unstable
 
@@ -288,9 +298,20 @@ EOF
 # Create README.md
 readme="$cssPath/README.md"
 echo -e "Creating ${CYAN}$readme${NC}"
+
+if [ $stable ] ; then
 cat > $readme << EOF
 # Canvas Kit CSS $upperName
 EOF
+else
+cat > $readme << EOF
+# Canvas Kit CSS $upperName
+
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_unstable/README.md">
+  <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
+</a>  This component is work in progress and currently in pre-release.
+EOF
+fi
 
 # Copy LICENSE
 echo -e "Adding License file to ${CYAN}$cssPath${NC}"

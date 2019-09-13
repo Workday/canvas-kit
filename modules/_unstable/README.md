@@ -43,6 +43,15 @@ version.**
 2. When asked `Is this an unstable component? [Y/n]`, enter `y` or `Y`.
 3. Your new module will be generated in accordance with the file structure above.
 
+## Migrating a Component into Unstable
+
+1. Copy it into the above module structure
+2. Add a warning to the README:
+   > <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_unstable/README.md">
+   >   <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
+   > </a>  This component is work in progress and currently in pre-release.
+3. Ensure a prerelease version is applied that matches the badge above
+
 ## Deploying
 
 - Components in Unstable are given prerelease versions. Their general version will align with the
