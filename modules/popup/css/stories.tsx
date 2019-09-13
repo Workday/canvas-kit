@@ -25,7 +25,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
           position: 'relative',
         }}
       >
-        <Button buttonType={Button.Types.Delete} onClick={this.onOpenPopupClick}>
+        <Button variant={Button.Variant.Delete} onClick={this.onOpenPopupClick}>
           Delete Item
         </Button>
         {open ? (
@@ -49,11 +49,11 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
             <Button
               style={{marginRight: '16px'}}
               onClick={this.onDeleteClick}
-              buttonType={Button.Types.Delete}
+              variant={Button.Variant.Delete}
             >
               Delete
             </Button>
-            <Button onClick={this.onCancelClick} buttonType={Button.Types.Secondary}>
+            <Button onClick={this.onCancelClick} variant={Button.Variant.Secondary}>
               Cancel
             </Button>
           </div>
