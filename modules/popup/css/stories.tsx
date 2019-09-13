@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
-import {Button} from '@workday/canvas-kit-react-button';
+import {beta_Button as Button} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react';
 import './index.scss';
