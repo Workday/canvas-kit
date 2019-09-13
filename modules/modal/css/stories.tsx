@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
-import {Button} from '@workday/canvas-kit-react-button';
+import {beta_Button as Button} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react';
 import './index.scss';
@@ -19,7 +19,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
     const {open} = this.state;
     return (
       <div>
-        <Button buttonType={Button.Types.Delete} onClick={this.onOpenPopupClick}>
+        <Button variant={Button.Variant.Delete} onClick={this.onOpenPopupClick}>
           Delete Item
         </Button>
         {open ? (
@@ -40,11 +40,11 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
               <Button
                 style={{marginRight: '16px'}}
                 onClick={this.onDeleteClick}
-                buttonType={Button.Types.Delete}
+                variant={Button.Variant.Delete}
               >
                 Delete
               </Button>
-              <Button onClick={this.onCancelClick} buttonType={Button.Types.Secondary}>
+              <Button onClick={this.onCancelClick} variant={Button.Variant.Secondary}>
                 Cancel
               </Button>
             </div>
