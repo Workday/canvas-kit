@@ -19,18 +19,12 @@ storiesOf('CSS/Form Field', module)
   ))
   .add('Hint', () => (
     <div className="story">
-      <div className="wdc-form">
-        <div className="wdc-form-field">
-          <span className="wdc-form-text" id="text">
-            Hint
-          </span>
-        </div>
-        <div className="wdc-form-error-message">
-          <strong>Error:</strong> Hint
-        </div>
-        <div className="wdc-form-alert-message">
-          <strong>Alert:</strong> Hint
-        </div>
+      <div className="wdc-form-hint-message">Hint</div>
+      <div className="wdc-form-hint-message">
+        <strong>Error:</strong> Hint
+      </div>
+      <div className="wdc-form-hint-message">
+        <strong>Alert:</strong> Hint
       </div>
     </div>
   ));

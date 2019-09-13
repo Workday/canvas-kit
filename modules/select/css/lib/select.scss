@@ -3,7 +3,7 @@
   background: $wdc-color-input-background
     svg-load('#{$_wdc-form-icons-path}/wd-icon-caret-down.svg', fill=$wdc-color-licorice-200)
     calc(100% - #{$wdc-spacing-xxs}) center no-repeat;
-  background-size: $wdc-spacing-s;
+  background-size: $wdc-spacing-m - $wdc-spacing-xxxs;
   color: $wdc-color-input-text;
   appearance: none;
   padding-right: $wdc-spacing-l;
@@ -27,17 +27,31 @@
     @include wdc-form-focus();
     background-image: svg-load(
       '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
-      fill=$wdc-color-blueberry-500
+      fill=$wdc-color-licorice-500
     );
   }
 
   &::-ms-expand {
     display: none;
   }
+
+  &:disabled,
+  &.wdc-form-disabled {
+    background-color: $wdc-color-soap-100;
+    border-color: $wdc-color-input-disabled-border;
+    pointer-events: none;
+    background-image: svg-load(
+      '#{$_wdc-form-icons-path}/wd-icon-caret-down.svg',
+      fill=$wdc-color-licorice-100
+    );
+    color: $wdc-color-licorice-100;
+  }
 }
 
 .wdc-form-select {
-  @include wdc-form-select();
+  select {
+    @include wdc-form-select();
+  }
 }
 
 [data-whatinput='keyboard'] .wdc-form-select:not([disabled]):focus {

@@ -1,9 +1,12 @@
 @mixin wdc-form-textarea() {
   @include wdc-form-text();
   overflow: auto; // IE 11
-  line-height: $wdc-spacing-s;
+  line-height: $wdc-spacing-xs + $wdc-spacing-xxs;
+  min-height: $wdc-form-textarea-min-height;
 }
 
 .wdc-form-textarea {
-  @include wdc-form-textarea();
+  textarea {
+    @include wdc-form-textarea();
+  }
 }
