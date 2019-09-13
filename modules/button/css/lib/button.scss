@@ -95,6 +95,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       &.wdc-btn-active,
       &:active {
         background-color: $wdc-btn-bg-active;
+        border: 1px solid $wdc-btn-border;
       }
     }
   }
@@ -203,6 +204,8 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
 
         &.wdc-btn-active,
         &:active {
+          border-color: $wdc-btn-bg-primary;
+          box-shadow: 0 0 0 2px $wdc-btn-border-primary-active;
           background-color: $wdc-btn-bg-primary;
         }
       }
@@ -319,17 +322,19 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     margin-right: $wdc-btn-split-icon-width;
 
     &:not([disabled]):not(.wdc-btn-disabled) {
-      &,
+      &.wdc-btn,
       &.wdc-btn-primary,
       &.wdc-btn-delete {
         &.wdc-btn-active,
         &:active {
           box-shadow: 0 0 0 2px $wdc-btn-border-active, inset -1px 0 0 0 $wdc-btn-border-active;
+          border-right: 0px;
         }
 
         &:focus,
         &.wdc-btn-focus {
           box-shadow: 0 0 0 2px $wdc-btn-border-active, inset -1px 0 0 0 $wdc-btn-border-active;
+          border-right: 0px;
         }
       }
     }
