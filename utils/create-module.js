@@ -8,9 +8,8 @@ const os = require('os');
 /**
  * Add the module as a dependency in modules/_canvas-kit-<TYPE>/package.json.
  */
-const addModuleAsDependencyByType = (cwd, moduleName, type, unstable) => {
-  const module = unstable ? `_unstable/_canvas-kit-${type}-unstable` : `_canvas-kit-${type}`;
-  const packagePath = path.join(cwd, `modules/${module}/package.json`);
+const addModuleAsDependencyByType = (cwd, moduleName, type) => {
+  const packagePath = path.join(cwd, `modules/_canvas-kit-${type}/package.json`);
   const packageContents = fs.readFileSync(packagePath);
   const json = JSON.parse(packageContents);
 
@@ -31,7 +30,7 @@ const addModuleAsDependencyByType = (cwd, moduleName, type, unstable) => {
  * Add export * from '@workday/canvas-kit-react-<MODULE_NAME>' to
  * modules/_canvas-kit-react/index.ts so that consumers can use.
  */
-const addExportToReactIndex = (cwd, moduleName, unstable) => {
+const addExportToReactIndex = (cwd, moduleName) => {
   const sortExports = lines => {
     const exportsAsObj = lines
       .filter(line => !line.includes("from '@workday/canvas-kit-react-core'"))
@@ -53,8 +52,7 @@ const addExportToReactIndex = (cwd, moduleName, unstable) => {
     return sorted;
   };
 
-  const module = unstable ? '_unstable/_canvas-kit-react-unstable' : '_canvas-kit-react';
-  const indexPath = path.join(cwd, `modules/${module}/index.ts`);
+  const indexPath = path.join(cwd, 'modules/_canvas-kit-react/index.ts');
   const lines = fs.readFileSync(indexPath, 'utf8').split('\n');
 
   // Add our module's export statement then sort
@@ -62,14 +60,12 @@ const addExportToReactIndex = (cwd, moduleName, unstable) => {
   lines.push(exportStatement);
   const sortedExports = sortExports(lines);
 
-  if (!unstable) {
-    // Place our canvas kit export at the top
-    sortedExports.unshift("export {default as canvas} from '@workday/canvas-kit-react-core';");
-  }
+  // Place our canvas kit export at the top
+  sortedExports.unshift("export {default as canvas} from '@workday/canvas-kit-react-core';");
   fs.writeFileSync(indexPath, sortedExports.join('\n'), 'utf8');
 };
 
-const addImportToSassIndex = (cwd, moduleName, unstable) => {
+const addImportToSassIndex = (cwd, moduleName) => {
   const sortImports = lines => {
     const importsAsObj = lines
       .filter(line => !line.includes('$wdc-system-icons-path'))
@@ -90,8 +86,7 @@ const addImportToSassIndex = (cwd, moduleName, unstable) => {
     return sorted;
   };
 
-  const module = unstable ? '_unstable/_canvas-kit-css-unstable' : '_canvas-kit-css';
-  const indexPath = path.join(cwd, `modules/${module}/index.scss`);
+  const indexPath = path.join(cwd, 'modules/_canvas-kit-css/index.scss');
   const lines = fs.readFileSync(indexPath, 'utf8').split('\n');
 
   // Add our module's import statement then sort
@@ -106,23 +101,23 @@ const addImportToSassIndex = (cwd, moduleName, unstable) => {
   fs.writeFileSync(indexPath, sortedImports.join('\n'), 'utf8');
 };
 
-const setupModuleByType = (cwd, moduleName, moduleType, unstable) => {
+const setupModuleByType = (cwd, moduleName, moduleType) => {
   // Add module as depedency based off `moduleType` ('css' or 'react')
-  addModuleAsDependencyByType(cwd, moduleName, moduleType, unstable);
+  addModuleAsDependencyByType(cwd, moduleName, moduleType);
   if (moduleType === 'css') {
-    addImportToSassIndex(cwd, moduleName, unstable);
+    addImportToSassIndex(cwd, moduleName);
   } else {
-    addExportToReactIndex(cwd, moduleName, unstable);
+    addExportToReactIndex(cwd, moduleName);
   }
 };
 
 // Only allow this script to be ran off command line
 if (require.main === module) {
   const cwd = process.cwd();
-  const [, , moduleName, moduleType, unstableFlag] = process.argv;
+  const [, , moduleName, moduleType] = process.argv;
 
   if (!['css', 'react'].includes(moduleType)) {
     throw Error(`Module type (second argument) must be either 'react' or 'css'`);
   }
-  setupModuleByType(cwd, moduleName, moduleType, !!unstableFlag);
+  setupModuleByType(cwd, moduleName, moduleType);
 }
