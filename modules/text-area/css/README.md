@@ -24,7 +24,9 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ## Usage
 
 ```html
-<textarea class="wdc-form-textarea" />
+<div className="wdc-form-textarea">
+  <textarea id="textarea" />
+</div>
 ```
 
 **Note:** While a base checkbox component is provided in this package, it is **not accessible** when

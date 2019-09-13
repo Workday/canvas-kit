@@ -1,6 +1,49 @@
-// Errors
-@mixin wdc-form-validation($_borderColor) {
+// Icons
+@svg-load errorIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-circle.svg) {
+  .wd-icon-fill {
+    fill: $wdc-color-error;
+  }
+
+  .wd-icon-accent {
+    fill: $wdc-color-error;
+  }
+
+  .wd-icon-background {
+    fill: $wdc-color-french-vanilla-100;
+  }
+}
+
+@svg-load alertIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-triangle.svg) {
+  .wd-icon-fill {
+    fill: $wdc-color-alert;
+  }
+
+  .wd-icon-accent {
+    fill: $wdc-color-alert;
+  }
+
+  .wd-icon-background {
+    fill: $wdc-color-french-vanilla-100;
+  }
+}
+
+// Errors and Alerts
+@mixin wdc-form-validation($_type) {
+  $_borderColor: $wdc-color-black-pepper-100 !default; // This should not be used, it is necessary for the @if / @else if to.
+
+  @if ($_type== 'error') {
+    $_borderColor: $wdc-color-error;
+  } @else if ($_type== 'alert') {
+    $_borderColor: $wdc-color-alert-light;
+  }
+
   border-color: $_borderColor;
+  box-shadow: inset 0 0 0 1px $_borderColor;
+
+  @if ($_type== 'alert') {
+    border-color: $wdc-color-alert-dark;
+    box-shadow: inset 0 0 0 2px $_borderColor;
+  }
 
   &.wdc-form-checkbox:not(.wdc-form-checked):not(:checked) + .wdc-form-label:before {
     border-color: $_borderColor;
@@ -8,20 +51,36 @@
 
   &.wdc-form-hover,
   &:hover {
-    &.wdc-form-textarea,
-    &.wdc-form-textinput,
-    &.wdc-form-select {
+    & {
       border-color: $_borderColor;
+
+      @if ($_type== 'alert') {
+        border-color: $wdc-color-alert-dark;
+        box-shadow: inset 0 0 0 2px $_borderColor;
+      }
     }
   }
 
-  &.wdc-form-focus,
-  &:focus {
-    &.wdc-form-textarea,
-    &.wdc-form-textinput,
-    &.wdc-form-select {
-      border-color: transparent;
-      box-shadow: 0 0 0 2px $wdc-color-common-focus-outline;
+  &.wdc-form-focus:not([disabled]):not(.wdc-form-disabled),
+  &:focus:not([disabled]):not(.wdc-form-disabled) {
+    & {
+      outline: none;
+      border-color: $_borderColor;
+
+      & {
+        box-shadow: inset 0 0 0 1px $_borderColor, 0 0 0 2px $wdc-color-input-background,
+          0 0 0 4px $wdc-color-common-focus-outline;
+      }
+
+      @if ($_type== 'alert') {
+        border-color: $wdc-color-alert-dark;
+        box-shadow: inset 0 0 0 2px $_borderColor;
+
+        & {
+          box-shadow: inset 0 0 0 2px $_borderColor, 0 0 0 2px $wdc-color-input-background,
+            0 0 0 4px $wdc-color-common-focus-outline;
+        }
+      }
     }
 
     &.wdc-form-checkbox + .wdc-form-label:before {
@@ -39,120 +98,221 @@
 }
 
 @mixin wdc-form-error {
-  @include wdc-form-validation($wdc-color-error);
+  @include wdc-form-validation('error');
 }
 
 .wdc-form-error {
-  @include wdc-form-error();
+  .wdc-form-textinput,
+  &.wdc-form-textinput {
+    input {
+      @include wdc-form-error;
+    }
+
+    &:after {
+      position: absolute;
+      top: $wdc-spacing-xxs;
+      left: $wdc-form-field-min-width - $wdc-spacing-l;
+      content: '';
+      width: 24px;
+      height: 24px;
+      background: svg-inline(errorIcon) center no-repeat;
+    }
+  }
+
+  .wdc-form-textarea,
+  &.wdc-form-textarea {
+    textarea {
+      @include wdc-form-error;
+    }
+  }
+
+  .wdc-form-select,
+  &.wdc-form-select {
+    select {
+      @include wdc-form-error;
+    }
+  }
+
+  .wdc-form-checkbox,
+  &.wdc-form-checkbox,
+  .wdc-form-radio,
+  &.wdc-form-radio {
+    input + label::before {
+      border: 1px solid #de2e21;
+      box-shadow: 0 0 0 1px #de2e21, 0 0 0 2px transparent;
+    }
+
+    input:hover + label::before {
+      border: 1px solid #de2e21;
+    }
+
+    input:checked + label::before {
+      border-color: $wdc-color-blueberry-400;
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px #de2e21, 0 0 0 5px transparent;
+    }
+
+    input:focus + label::before {
+      border-color: $wdc-color-blueberry-400;
+      border-width: 1px;
+      box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400, 0 0 0 0 $wdc-color-french-vanilla-100;
+    }
+
+    input:checked:focus + label::before {
+      border-color: $wdc-color-blueberry-400;
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px #de2e21, 0 0 0 5px transparent;
+    }
+
+    [data-whatinput='keyboard'] & {
+      input:focus + label::before {
+        border-color: $wdc-color-blueberry-400;
+        box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400;
+      }
+
+      input:checked:focus + label::before {
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-400,
+          0 0 0 5px transparent;
+      }
+    }
+
+    [data-whatinput='initial'] &,
+    [data-whatinput='mouse'] &,
+    [data-whatinput='touch'] & {
+      input:checked:focus + label::before {
+        border-color: $wdc-color-blueberry-400;
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px #de2e21,
+          0 0 0 5px transparent;
+      }
+    }
+  }
 }
 
 @mixin wdc-form-alert {
-  @include wdc-form-validation($wdc-color-alert);
+  @include wdc-form-validation('alert');
 }
 
 .wdc-form-alert {
-  @include wdc-form-alert();
+  .wdc-form-textinput,
+  &.wdc-form-textinput {
+    input {
+      @include wdc-form-alert;
+    }
+    &:after {
+      position: absolute;
+      top: $wdc-spacing-xxs;
+      left: $wdc-form-field-min-width - $wdc-spacing-l;
+      content: '';
+      width: 24px;
+      height: 24px;
+      background: svg-inline(alertIcon) center no-repeat;
+    }
+  }
+
+  .wdc-form-textarea,
+  &.wdc-form-textarea {
+    textarea {
+      @include wdc-form-alert;
+    }
+  }
+
+  .wdc-form-select,
+  &.wdc-form-select {
+    select {
+      @include wdc-form-alert;
+    }
+  }
+
+  .wdc-form-checkbox,
+  &.wdc-form-checkbox,
+  .wdc-form-radio,
+  &.wdc-form-radio {
+    input + label::before {
+      border: 1px solid $wdc-color-cantaloupe-400;
+      box-shadow: 0 0 0 1px $wdc-color-cantaloupe-400, 0 0 0 2px $wdc-color-cantaloupe-600;
+    }
+
+    input:hover + label::before {
+      border: 1px solid $wdc-color-cantaloupe-400;
+    }
+
+    input:checked + label::before {
+      border-color: $wdc-color-blueberry-400;
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-cantaloupe-400,
+        0 0 0 5px $wdc-color-cantaloupe-600;
+    }
+
+    input:focus + label::before {
+      border: 1px solid $wdc-color-cantaloupe-400;
+      box-shadow: 0 0 0 1px $wdc-color-cantaloupe-400, 0 0 0 2px $wdc-color-cantaloupe-600;
+    }
+
+    input:checked:focus + label::before {
+      border-color: $wdc-color-blueberry-400;
+      box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-cantaloupe-400,
+        0 0 0 5px $wdc-color-cantaloupe-600;
+    }
+
+    [data-whatinput='keyboard'] & {
+      input:focus + label::before {
+        border-color: $wdc-color-blueberry-400;
+        box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400;
+      }
+
+      input:checked:focus + label::before {
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-400,
+          0 0 0 5px transparent;
+      }
+    }
+
+    [data-whatinput='initial'] &,
+    [data-whatinput='mouse'] &,
+    [data-whatinput='touch'] & {
+      input:checked:focus + label::before {
+        border-color: $wdc-color-blueberry-400;
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-cantaloupe-400,
+          0 0 0 5px $wdc-color-cantaloupe-600;
+      }
+    }
+  }
 }
 
 // Messages
-@mixin wdc-form-validation-message($_color) {
+
+.wdc-form-hint-message {
   @include wdc-type();
   @include wdc-type-body();
   font-size: 13px;
   margin-top: $wdc-spacing-xxs;
-  strong {
-    color: $_color;
+
+  strong,
+  b {
+    font-weight: 500;
   }
 }
 
-@mixin wdc-form-error-message {
-  @include wdc-form-validation-message($wdc-color-error-dark);
-}
+@mixin wdc-form-field-validation($_type) {
+  $_boxShadow: $wdc-color-black-pepper-100 !default; // This should not be used, it is necessary for the @if / @else if to.
 
-.wdc-form-error-message {
-  @include wdc-form-error-message();
-}
+  @if ($_type== 'error') {
+    $_boxShadow: $wdc-color-error 0px 0px 0px 2px inset;
+  } @else if ($_type== 'alert') {
+    $_boxShadow: rgb(192, 108, 0) 0px 0px 0px 1px inset, rgb(255, 161, 38) 0px 0px 0px 3px inset;
+  }
 
-@mixin wdc-form-alert-message {
-  @include wdc-form-validation-message($wdc-color-alert-dark);
-}
-
-.wdc-form-alert-message {
-  @include wdc-form-alert-message();
-}
-
-// Form Field Errors
-@svg-load errorIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-circle.svg) {
-  .wd-icon-fill {
-    fill: none;
-  }
-  .wd-icon-accent {
-    fill: $wdc-color-french-vanilla-100;
-  }
-  .wd-icon-background {
-    fill: $wdc-color-error;
-  }
-}
-
-@svg-load alertIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-triangle.svg) {
-  width: 30;
-  height: 30;
-  .wd-icon-fill {
-    fill: none;
-  }
-  .wd-icon-accent {
-    fill: $wdc-color-french-vanilla-100;
-  }
-  .wd-icon-background {
-    fill: $wdc-color-alert;
-  }
-}
-
-@mixin wdc-form-field-validation($_icon, $_borderColor) {
-  $_wdc-form-error-icon-top: 6px;
-  $_wdc-form-error-icon-left: -($wdc-form-error-icon-size + $wdc-form-error-spacing);
-
-  .wdc-form-field,
-  &.wdc-form-group-fields {
-    position: relative;
-
-    &:after {
-      position: absolute;
-      top: $_wdc-form-error-icon-top;
-      left: $_wdc-form-error-icon-left;
-      content: '';
-      width: $wdc-form-error-icon-size;
-      height: $wdc-form-error-icon-size;
-      background: svg-inline($_icon) center no-repeat;
-    }
-  }
-  &.wdc-form-field-error-inline .wdc-form-field:after {
-    top: -1px;
-  }
-  &.wdc-form-group-fields {
-    padding: $wdc-spacing-s;
-    border-radius: 3px;
-    &:after {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-  &.wdc-form-group-fields {
-    border: 1px solid $wdc-color-error;
-
-    .wdc-form-field {
-      &:after {
-        display: none;
-      }
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
+  .wdc-form-group &.wdc-form-group-fields {
+    border-radius: 4px;
+    box-shadow: $_boxShadow;
+    box-sizing: border-box;
+    display: inline-block;
+    font-family: sans-serif;
+    margin: -4px -12px;
+    padding: 4px 12px;
+    text-align: left;
+    margin-top: -12px;
   }
 }
 
 @mixin wdc-form-field-error {
-  @include wdc-form-field-validation(errorIcon, $wdc-color-error);
+  @include wdc-form-field-validation('error');
 }
 
 .wdc-form-field-error {
@@ -160,14 +320,14 @@
 }
 
 @mixin wdc-form-field-alert {
-  @include wdc-form-field-validation(alertIcon, $wdc-color-alert);
+  @include wdc-form-field-validation('alert');
 }
 
 .wdc-form-field-alert {
   @include wdc-form-field-alert();
 }
 
-@mixin wdc-form-inline-labels-errors() {
+@mixin label-position-left-errors() {
   .wdc-form-field-wrapper {
     position: relative;
 
@@ -175,27 +335,35 @@
     & > .wdc-form-field {
       margin-left: $wdc-form-inline-label-width + $wdc-spacing-s;
     }
+
     & > .wdc-form-label + .wdc-form-field {
       margin-left: 0;
     }
   }
+
   .wdc-form-label {
     // Make room for error/alert icon
     min-width: $wdc-form-inline-label-width - $wdc-spacing-m;
     width: $wdc-form-inline-label-width - $wdc-spacing-m;
     margin-right: $wdc-spacing-s + $wdc-spacing-m;
   }
-  .wdc-form-group-fields {
-    margin-bottom: $wdc-spacing-m;
 
-    & + .wdc-form-alert-message,
-    & + .wdc-form-error-message {
+  .wdc-form-field-wrapper .wdc-form-group-fields {
+    &.wdc-form-field-alert,
+    &.wdc-form-field-error {
+      margin-top: -4px;
+      margin-bottom: $wdc-spacing-m;
+    }
+
+    & + .wdc-form-hint-message,
+    & + .wdc-form-hint-message {
       position: absolute;
       bottom: 0;
-      left: $wdc-form-inline-label-width + $wdc-spacing-s;
+      left: $wdc-form-inline-label-width + $wdc-spacing-s + $wdc-spacing-s;
     }
   }
 }
-.wdc-form-inline-labels {
-  @include wdc-form-inline-labels-errors();
+
+.wdc-form-label-position-left {
+  @include label-position-left-errors();
 }

@@ -3,7 +3,9 @@
 }
 
 .wdc-form-textinput {
-  @include wdc-form-textinput();
+  input {
+    @include wdc-form-textinput();
+  }
 }
 
 .wdc-form-text {
