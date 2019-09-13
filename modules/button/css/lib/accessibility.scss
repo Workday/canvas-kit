@@ -58,59 +58,58 @@
   @include wdc-focusable-buttons() {
     outline: none;
   }
-
-  .wdc-btn.wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus, &:not([tabindex='-1']):hover {
-      border-color: $wdc-btn-border-primary-hover;
-      box-shadow:none;
-    }
-    &:not([tabindex='-1']):active {
-      background-color: $wdc-btn-bg-primary;
-      border-color: $wdc-btn-border-primary-hover;
-      box-shadow:none;
-    }
-  }
-
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus, &:not([tabindex='-1']):hover {
+  
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']){
+    &:focus, &:hover {
       border-color: $wdc-btn-border-hover;
       box-shadow:none;
     }
-    &:not([tabindex='-1']):active {
+    &:active {
       background-color:$wdc-btn-bg;
       border-color: $wdc-btn-border-hover;
       box-shadow:none;
     }
-  }
-
-  .wdc-btn.wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus, &:not([tabindex='-1']):hover {
-      border-color: $wdc-btn-border-delete-hover;
-      box-shadow:none;
+    &.wdc-btn-delete {
+      &:focus, &:hover {
+        border-color: $wdc-btn-border-delete-hover;
+        box-shadow:none;
+      }
+      &:active {
+        background-color: $wdc-btn-bg-delete;
+        border-color: $wdc-btn-border-delete-hover;
+        box-shadow:none;
+      }
     }
-    &:not([tabindex='-1']):active {
-      background-color: $wdc-btn-bg-delete;
-      border-color: $wdc-btn-border-delete-hover;
-      box-shadow:none;
-    }
-  }
-  
-  .wdc-btn-icon-square:not([disabled]):not(.wdc-btn-disabled),
-  .wdc-btn-icon-square-filled:not([disabled]):not(.wdc-btn-disabled),
-  .wdc-btn-icon-circle:not([disabled]):not(.wdc-btn-disabled),
-  .wdc-btn-icon-circle-filled:not([disabled]):not(.wdc-btn-disabled),
-  .wdc-btn-icon-plain:not([disabled]):not(.wdc-btn-disabled),
-  .wdc-btn-icon-inverse:not([disabled]):not(.wdc-btn-disabled),
-  .wdc-btn-icon-inverse-filled:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus, &:not([tabindex='-1']):hover {
-      box-shadow:none;
-      border: transparent;
-    }
-    &:not([tabindex='-1']):active {
-      box-shadow:none;
-      border: transparent;
+    &.wdc-btn-primary {
+      &:focus, &:hover {
+        border-color: $wdc-btn-border-primary-hover;
+        box-shadow:none;
+      }
+      &:active {
+        background-color: $wdc-btn-bg-primary;
+        border-color: $wdc-btn-border-primary-hover;
+        box-shadow:none;
+      }
     }
   }
 
-  
+  .wdc-btn-icon,
+  .wdc-btn-icon-square,
+  .wdc-btn-icon-square-filled,
+  .wdc-btn-icon-circle,
+  .wdc-btn-icon-circle-filled,
+  .wdc-btn-icon-plain,
+  .wdc-btn-icon-inverse,
+  .wdc-btn-icon-inverse-filled {
+      &:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+      &:focus, &:hover {
+        box-shadow:none;
+        border: transparent;
+      }
+      &:active {
+        box-shadow:none;
+        border: transparent;
+      }
+    }
+  }
 }
