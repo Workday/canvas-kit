@@ -1,5 +1,4 @@
 @mixin wdc-focusable-buttons() {
-
   .wdc-a11y button:not([disabled]),
   .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
     &:not([tabindex='-1']):focus {
@@ -14,23 +13,19 @@
     outline: none;
   }
 
-  .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus {
-      @extend .wdc-btn-primary.wdc-btn-focus;
-    }
+  .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    @extend .wdc-btn-primary.wdc-btn-focus;
   }
 
-  .wdc-btn-split-icon:not([disabled]):not(.wdc-btn-disabled),
-  .wdc-btn-split-text:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus {
-      @extend .wdc-btn-split-text.wdc-btn-focus;
-    }
+  .wdc-btn-split-text:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    @extend .wdc-btn-split-text.wdc-btn-focus;
+  }
+  .wdc-btn-split-icon:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    @extend .wdc-btn-split-icon.wdc-btn-focus;
   }
 
-  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus {
-      @extend .wdc-btn-delete.wdc-btn-focus;
-    }
+  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    @extend .wdc-btn-delete.wdc-btn-focus;
   }
 }
 
@@ -40,55 +35,58 @@
     outline: none;
   }
 
-  .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus {
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+    &:focus,
+    &:hover {
+      border-color: $wdc-btn-border-hover;
       box-shadow: none;
     }
-  }
-
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus {
-      @include wdc-btn-box-shadow($wdc-btn-border);
-    }
-  }
-
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):hover {
-      @extend .wdc-btn-hover;
-      @include wdc-btn-box-shadow($wdc-btn-border-hover);
-    }
-  }
-
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):active {
-      @extend .wdc-btn-active;
-    }
-  }
-
-  .wdc-btn-primary.wdc-btn-split-text:not([disabled]):not(.wdc-btn-disabled),
-  .wdc-btn-primary.wdc-btn-split-icon:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus {
+    &:active {
+      background-color: $wdc-btn-bg;
+      border-color: $wdc-btn-border-hover;
       box-shadow: none;
     }
-  }
-
-  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus {
-      @include wdc-btn-box-shadow($wdc-btn-border-delete);
-      background: $wdc-btn-bg-delete;
-      color: $wdc-btn-color-delete;
+    &.wdc-btn-delete {
+      &:focus,
+      &:hover {
+        border-color: $wdc-btn-border-delete-hover;
+        box-shadow: none;
+      }
+      &:active {
+        background-color: $wdc-btn-bg-delete;
+        border-color: $wdc-btn-border-delete-hover;
+        box-shadow: none;
+      }
+    }
+    &.wdc-btn-primary {
+      &:focus,
+      &:hover {
+        border-color: $wdc-btn-border-primary-hover;
+        box-shadow: none;
+      }
+      &:active {
+        background-color: $wdc-btn-bg-primary;
+        border-color: $wdc-btn-border-primary-hover;
+        box-shadow: none;
+      }
     }
   }
 
-  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):hover {
-      @extend .wdc-btn-delete.wdc-btn-hover;
-    }
-  }
-
-  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):active {
-      @extend .wdc-btn-delete.wdc-btn-active;
+  .wdc-btn-icon,
+  .wdc-btn-icon-square,
+  .wdc-btn-icon-square-filled,
+  .wdc-btn-icon-circle,
+  .wdc-btn-icon-circle-filled,
+  .wdc-btn-icon-plain,
+  .wdc-btn-icon-inverse,
+  .wdc-btn-icon-inverse-filled {
+    &:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+      &:focus,
+      &:hover,
+      &:active {
+        box-shadow: none;
+        border: transparent;
+      }
     }
   }
 }
