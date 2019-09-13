@@ -7,7 +7,7 @@
   }
 }
 
-.wdc-modal {
+.wdc-modal-bg {
   align-items: center;
   animation-duration: 0.3s;
   animation-name: wdc-modal-animation;
@@ -19,4 +19,8 @@
   position: fixed;
   top: 0;
   width: 100vw;
+}
+
+.wdc-modal {
+  @include wdc-popup-common();
 }

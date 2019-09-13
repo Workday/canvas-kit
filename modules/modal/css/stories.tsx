@@ -23,18 +23,18 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
           Delete Item
         </Button>
         {open ? (
-          <div className="wdc-modal" onClick={this.onOverlayClick}>
+          <div className="wdc-modal-bg" onClick={this.onOverlayClick}>
             <div
-              className="wdc-popup wdc-popup-padding-s wdc-popup-animation-origin-bottom-center"
+              className="wdc-modal wdc-modal-padding-s wdc-modal-animation-origin-bottom-center"
               style={{width: '440px'}}
             >
-              <div className="wdc-popup-close">
+              <div className="wdc-modal-close">
                 <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
                   <SystemIcon icon={xIcon} />
                 </button>
               </div>
-              <h3 className="wdc-popup-title">Delete Item</h3>
-              <div style={{marginBottom: '24px'}} className="wdc-popup-body">
+              <h3 className="wdc-modal-title">Delete Item</h3>
+              <div style={{marginBottom: '24px'}} className="wdc-modal-body">
                 Are you sure you'd like to delete the item titled 'My Item'?
               </div>
               <Button
