@@ -88,7 +88,10 @@ export default class Modal extends React.Component<ModalProps> {
     document.removeEventListener('keydown', this.handleKeydown);
   }
 
-  private handleOutsideClick = (handleClose?: () => void, e: React.MouseEvent<HTMLDivElement>) => {
+  private handleOutsideClick = (
+    handleClose: (() => void) | undefined,
+    e: React.MouseEvent<HTMLDivElement>
+  ) => {
     const {target} = e;
     const modalNode = this.modalRef.current;
     if (modalNode && handleClose) {
@@ -107,8 +110,11 @@ export default class Modal extends React.Component<ModalProps> {
       heading,
       transformOrigin,
       testId,
+      children,
+      closeOnEscape,
       ...elemProps
     } = this.props;
+    console.log('elemProps', elemProps);
     return (
       open && (
         <Container onClick={e => this.handleOutsideClick(handleClose, e)} {...elemProps}>
@@ -123,7 +129,7 @@ export default class Modal extends React.Component<ModalProps> {
               data-testid={testId}
             >
               <FocusFirstFocusable containerRef={this.modalRef} />
-              {this.props.children}
+              {children}
             </Popup>
           </FocusTrap>
         </Container>
@@ -152,14 +158,14 @@ export default class Modal extends React.Component<ModalProps> {
  */
 export function useModal() {
   const [open, setOpen] = React.useState(false);
-  const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
+  const targetRef = React.useRef<HTMLElement>(); // cast to keep buttonRef happy
 
   return {
     targetProps: {
-      onClick() {
+      onClick(event: React.SyntheticEvent<HTMLElement>) {
+        targetRef.current = event.currentTarget;
         setOpen(true);
       },
-      buttonRef,
     },
     closeModal() {
       setOpen(false);
@@ -168,8 +174,9 @@ export function useModal() {
       open,
       handleClose() {
         setOpen(false);
-        if (buttonRef.current) {
-          buttonRef.current.focus();
+        if (targetRef.current) {
+          targetRef.current.focus();
+          targetRef.current = undefined;
         }
       },
     },

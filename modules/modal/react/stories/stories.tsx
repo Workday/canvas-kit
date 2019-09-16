@@ -7,7 +7,7 @@ import {beta_Button as Button} from '@workday/canvas-kit-react-button';
 import Modal, {useModal} from '..';
 import README from '../README.md';
 
-const ModalExampleUseModal = () => {
+const UseModalExample = () => {
   const {targetProps, modalProps, closeModal} = useModal();
 
   return (
@@ -27,6 +27,7 @@ const ModalExampleUseModal = () => {
     </>
   );
 };
+
 const ModalExample = () => {
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
@@ -64,6 +65,33 @@ const ModalExample = () => {
   );
 };
 
+const ModalNoXExample = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} {...targetProps}>
+        Delete Item
+      </Button>
+      <Modal
+        testId="TestModal"
+        heading={'Delete Item'}
+        closeOnEscape={true}
+        {...modalProps}
+        handleClose={undefined}
+      >
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+
 storiesOf('Modal', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -75,6 +103,12 @@ storiesOf('Modal', module)
   .add('UseModal', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
-      <ModalExampleUseModal />
+      <UseModalExample />
+    </div>
+  ))
+  .add('ModalNoX', () => (
+    <div className="story">
+      <h1 className="section-label">Modal</h1>
+      <ModalNoXExample />
     </div>
   ));

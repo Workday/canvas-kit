@@ -60,7 +60,7 @@ describe('Modal', () => {
             });
           });
 
-          it('should transfer focus to the first focusable element', () => {
+          it('should transfer focus to the x icon element', () => {
             h.modal
               .get()
               .pipe(h.modal.getCloseButton)
@@ -121,6 +121,24 @@ describe('Modal', () => {
             h.modal.get().should('not.be.visible');
           });
         });
+      });
+    });
+  });
+  context(`given the ModalNoX story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('modal', 'ModalNoX');
+    });
+
+    context('when the target button is clicked', () => {
+      beforeEach(() => {
+        getModalTargetButton().click();
+      });
+
+      it('should transfer focus to the header element', () => {
+        h.modal
+          .get()
+          .pipe(h.modal.getTitle)
+          .should('have.focus');
       });
     });
   });
