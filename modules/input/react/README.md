@@ -1,6 +1,6 @@
 # Canvas Kit Input
 
-Canvas-styled React components.
+A generic canvas-styled React input component.
 
 ## Installation
 

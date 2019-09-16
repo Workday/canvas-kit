@@ -4,7 +4,7 @@ import {inputColors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import InputIconContainer from './InputIconContainer';
-import Input from '../../../input/react/index';
+import Input from '@workday/canvas-kit-react-input';
 
 export interface TextInputProps
   extends GrowthBehavior,
