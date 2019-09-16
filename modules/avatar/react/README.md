@@ -18,7 +18,7 @@ yarn add @workday/canvas-kit-react-avatar
 
 ```tsx
 import * as React from 'react';
-import {Avatar, AvatarTheme} from '@workday/canvas-kit-react-avatar';
+import {Avatar, Variant} from '@workday/canvas-kit-react-avatar';
 
 // Basic
 <Avatar />
@@ -26,20 +26,20 @@ import {Avatar, AvatarTheme} from '@workday/canvas-kit-react-avatar';
 // Using static properties on Avatar
 <Avatar
   size={Avatar.Size.xs}
-  themeColor={Avatar.ThemeColor.Dark}
+  variant={Avatar.variant.Dark}
   onClick={() => { window.alert('Avatar Clicked') }}
 />
 
-// Using AvatarTheme import directly
-<Avatar size={Avatar.Size.xs} themeColor={AvatarTheme.Dark} />
+// Using Variant import directly
+<Avatar size={Avatar.Size.xs} variant={Variant.Dark} />
 ```
 
 ## Static Properties
 
-#### `ThemeColor: AvatarTheme`
+#### `variant: Variant`
 
 ```tsx
-<Avatar themeColor={Avatar.ThemeColor.Dark} />
+<Avatar variant={Avatar.variant.Dark} />
 ```
 
 ---
@@ -62,13 +62,13 @@ import {Avatar, AvatarTheme} from '@workday/canvas-kit-react-avatar';
 
 ### Optional
 
-#### `themeColor: AvatarTheme`
+#### `variant: Variant`
 
-> The theme of the avatar if using a default image.
+> The variant of the avatar if using a default image.
 
-Default: `AvatarTheme.Light`
+Default: `Variant.Light`
 
-| Theme   | Description                      |
+| Variant | Description                      |
 | ------- | -------------------------------- |
 | `Light` | Light grey background, dark icon |
 | `Dark`  | Dark blue background, white icon |
