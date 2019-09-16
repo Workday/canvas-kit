@@ -35,19 +35,16 @@ Use `.wdc-popup` to create a popup. The title and body content can be styled usi
 
 ### With Close Button
 
-```jsx
-import {xIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react';
-
-<div className="wdc-popup">
-  <div className="wdc-popup-close">
-    <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
-      <SystemIcon icon={xIcon} />
+```html
+<div class="wdc-popup">
+  <div class="wdc-popup-close">
+    <button onClick="{this.onCloseClick}" class="wdc-btn-icon-plain">
+      <i class="wdc-icon" data-icon="x" data-category="system" />
     </button>
   </div>
-  <div className="wdc-popup-title">Popup Title</div>
-  <div className="wdc-popup-body">Popup content</div>
-</div>;
+  <div class="wdc-popup-title">Popup Title</div>
+  <div class="wdc-popup-body">Popup content</div>
+</div>
 ```
 
 ### Padding
