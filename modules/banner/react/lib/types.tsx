@@ -1,4 +1,4 @@
-export enum BannerTheme {
+export enum BannerErrorType {
   Alert,
   Error,
 }

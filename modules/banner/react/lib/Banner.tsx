@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
-import {BannerVariant, BannerTheme} from './types';
+import {BannerVariant, BannerErrorType} from './types';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {focusRing} from '@workday/canvas-kit-react-common';
@@ -20,9 +20,9 @@ export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    */
   variant?: BannerVariant;
   /**
-   * Color theme of the banner
+   * Color of the banner based on the type of the error
    */
-  theme?: BannerTheme;
+  error?: BannerErrorType;
   /**
    * Text on the right, call to action
    */
@@ -51,14 +51,14 @@ const BannerWrapper = styled('button')<BannerProps>(
       cursor: 'pointer',
     },
   },
-  ({theme, variant}) => ({
-    backgroundColor: theme === BannerTheme.Error ? colors.cinnamon500 : colors.cantaloupe400,
-    color: theme === BannerTheme.Error ? colors.frenchVanilla100 : colors.blackPepper400,
+  ({error, variant}) => ({
+    backgroundColor: error === BannerErrorType.Error ? colors.cinnamon500 : colors.cantaloupe400,
+    color: error === BannerErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400,
     borderRadius:
       variant === BannerVariant.Sticky ? `${spacing.xxxs} 0 0 ${spacing.xxxs}` : spacing.xxxs,
     width: variant === BannerVariant.Sticky ? '222px' : '328px',
     '&:hover': {
-      backgroundColor: theme === BannerTheme.Error ? colors.cinnamon600 : colors.cantaloupe500,
+      backgroundColor: error === BannerErrorType.Error ? colors.cinnamon600 : colors.cantaloupe500,
     },
   })
 );
@@ -82,11 +82,11 @@ const BannerViewAll = styled('span')<BannerProps>(
 
 export default class Banner extends React.Component<BannerProps> {
   static Variant = BannerVariant;
-  static Theme = BannerTheme;
+  static ErrorType = BannerErrorType;
 
   public static defaultProps = {
     actionText: 'View All',
-    theme: BannerTheme.Alert,
+    error: BannerErrorType.Alert,
     variant: BannerVariant.Full,
   };
 
@@ -94,9 +94,9 @@ export default class Banner extends React.Component<BannerProps> {
     const {label, onClick, actionText, variant, ...props} = this.props;
 
     const bannerIcon =
-      this.props.theme === BannerTheme.Error ? exclamationCircleIcon : exclamationTriangleIcon;
+      this.props.error === BannerErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
     const iconColor =
-      this.props.theme === BannerTheme.Error ? colors.frenchVanilla100 : colors.blackPepper400;
+      this.props.error === BannerErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;
     const iconSize = 24;
 
     return (
