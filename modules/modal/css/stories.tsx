@@ -3,9 +3,9 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
 import {beta_Button as Button} from '@workday/canvas-kit-react-button';
-import {xIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react';
 import './index.scss';
+// @ts-ignore
+import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
 
 interface ModalWrapperState {
   open: boolean;
@@ -15,6 +15,15 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
   state = {
     open: false,
   };
+
+  public componentDidMount() {
+    initializeIcons();
+  }
+
+  public componentDidUpdate() {
+    initializeIcons();
+  }
+
   public render() {
     const {open} = this.state;
     return (
@@ -27,7 +36,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
             <div className="wdc-modal wdc-modal-padding-s" style={{width: '440px'}}>
               <div className="wdc-modal-close">
                 <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
-                  <SystemIcon icon={xIcon} />
+                  <i className="wdc-icon" data-icon="x" data-category="system" />
                 </button>
               </div>
               <h3 className="wdc-modal-title">Delete Item</h3>

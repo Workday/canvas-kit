@@ -38,21 +38,18 @@ respectively.
 
 ### With Close Button
 
-```jsx
-import {xIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react';
-
-<div className="wdc-modal-bg">
-  <div className="wdc-modal">
-    <div className="wdc-modal-close">
-      <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
-        <SystemIcon icon={xIcon} />
+```html
+<div class="wdc-modal-bg">
+  <div class="wdc-modal">
+    <div class="wdc-modal-close">
+      <button onClick="{this.onCloseClick}" class="wdc-btn-icon-plain">
+        <i class="wdc-icon" data-icon="x" data-category="system" />
       </button>
     </div>
-    <div className="wdc-modal-title">Modal Title</div>
-    <div className="wdc-modal-body">Modal content</div>
+    <div class="wdc-modal-title">Modal Title</div>
+    <div class="wdc-modal-body">Modal content</div>
   </div>
-</div>;
+</div>
 ```
 
 ### Padding
