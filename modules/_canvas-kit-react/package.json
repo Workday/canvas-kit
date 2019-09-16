@@ -50,7 +50,7 @@
     "@workday/canvas-kit-react-form-field": "^3.0.0-alpha.6",
     "@workday/canvas-kit-react-header": "^3.0.0-alpha.6",
     "@workday/canvas-kit-react-icon": "^3.0.0-alpha.6",
-    "@workday/canvas-kit-react-input": "3.0.0-aplha.6",
+    "@workday/canvas-kit-react-input": "0.0.0",
     "@workday/canvas-kit-react-layout": "^3.0.0-alpha.6",
     "@workday/canvas-kit-react-loading-animation": "^3.0.0-alpha.6",
     "@workday/canvas-kit-react-menu": "^3.0.0-alpha.6",
