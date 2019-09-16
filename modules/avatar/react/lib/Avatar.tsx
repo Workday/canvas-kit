@@ -6,16 +6,16 @@ import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
 import {userIcon} from '@workday/canvas-system-icons-web';
 
-export enum Variant {
+export enum AvatarVariant {
   Light,
   Dark,
 }
 
 export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * An Variant enum indicating which variant to use for the default state (Light vs. Dark)
+   * An AvatarVariant enum indicating which variant to use for the default state (Light vs. Dark)
    */
-  variant: Variant;
+  variant: AvatarVariant;
   /**
    * An SystemIconCircleSize enum or number value indicating the size of the avatar
    */
@@ -63,7 +63,7 @@ const Container = styled('button', {
     '&:not([disabled])': {
       '&:focus': {
         outline: 'none',
-        ...(variant === Variant.Dark ? focusRing(2, 2) : focusRing(2)),
+        ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
       },
     },
     ...hideMouseFocus,
@@ -71,11 +71,11 @@ const Container = styled('button', {
 );
 
 export default class Avatar extends React.Component<AvatarProps> {
-  static variant = Variant;
+  static variant = AvatarVariant;
   static Size = SystemIconCircleSize;
 
   static defaultProps = {
-    variant: Variant.Light,
+    variant: AvatarVariant.Light,
     size: SystemIconCircleSize.m,
     altText: 'Avatar',
   };
@@ -83,7 +83,7 @@ export default class Avatar extends React.Component<AvatarProps> {
   render() {
     const {buttonRef, variant, altText, size, url, onClick, ...elemProps} = this.props;
 
-    const background = variant === Variant.Dark ? colors.blueberry400 : colors.soap300;
+    const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
     return (
       <Container
         variant={variant}
