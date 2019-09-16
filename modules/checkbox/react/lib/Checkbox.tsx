@@ -265,7 +265,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <CheckboxLabel htmlFor={id} disabled={disabled}>
+          <CheckboxLabel htmlFor={id || this.id} disabled={disabled}>
             {label}
           </CheckboxLabel>
         )}
