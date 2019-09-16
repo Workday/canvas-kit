@@ -6,7 +6,7 @@ import {mount} from 'enzyme';
 import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
 
-describe('Button', () => {
+describe('Deprecated Button', () => {
   const cb = jest.fn();
   afterEach(() => {
     cb.mockReset();
