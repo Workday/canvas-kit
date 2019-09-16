@@ -54,7 +54,7 @@ import {Button} from '@workday/canvas-kit-react-button';
   </nav>
   <IconButton
     icon={notificationsIcon}
-    buttonType={IconButton.Types.Circle}
+    variant={IconButton.Variant.Circle}
     title="Notifications"
     aria-label="Notifications"
   />
@@ -64,7 +64,7 @@ import {Button} from '@workday/canvas-kit-react-button';
     }}
     altText="Profile"
   />
-  <Button buttonType={Button.Types.Primary}>Sign Up</Button>
+  <Button variant={Button.Variant.Primary}>Sign Up</Button>
 </Header>;
 ```
 
@@ -243,8 +243,8 @@ const handleBreakpointChange = key => console.log(`Breakpoint change: ${key}`)
   breakpoint={720}
   onBreakpointChange={handleBreakpointChange}
 >
-  <IconButton icon={notificationsIcon} buttonType={IconButton.Types.Circle} />
-  <IconButton icon={inboxIcon} buttonType={IconButton.Types.Circle} />
+  <IconButton icon={notificationsIcon} variant={IconButton.Variant.Circle} />
+  <IconButton icon={inboxIcon} variant={IconButton.Variant.Circle} />
   <HeaderAvatar />
 </GlobalHeader>
 ```

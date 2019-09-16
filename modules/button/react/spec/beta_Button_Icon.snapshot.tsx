@@ -5,13 +5,19 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 describe('Button (Icon) Snapshots', () => {
   test('renders a default icon button, toggled on', () => {
-    const component = renderer.create(<IconButton toggled={true} icon={activityStreamIcon} />);
+    const component = renderer.create(
+      <IconButton toggled={true} icon={activityStreamIcon} aria-label="Activity Stream" />
+    );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a plain icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Types.Plain} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.Plain}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -19,9 +25,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small plain icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonType={IconButton.Types.Plain}
-        buttonSize={IconButton.Sizes.Small}
+        variant={IconButton.Variant.Plain}
+        size={IconButton.Size.Small}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -30,9 +37,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium plain icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonType={IconButton.Types.Plain}
-        buttonSize={IconButton.Sizes.Medium}
+        variant={IconButton.Variant.Plain}
+        size={IconButton.Size.Medium}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -40,7 +48,11 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders a default icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Types.Circle} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.Circle}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -48,9 +60,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small default icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Sizes.Small}
-        buttonType={IconButton.Types.Circle}
+        size={IconButton.Size.Small}
+        variant={IconButton.Variant.Circle}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -59,9 +72,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium default icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Sizes.Medium}
-        buttonType={IconButton.Types.Circle}
+        size={IconButton.Size.Medium}
+        variant={IconButton.Variant.Circle}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -69,21 +83,35 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders a default icon button, toggled on', () => {
     const component = renderer.create(
-      <IconButton toggled={true} buttonType={IconButton.Types.Circle} icon={activityStreamIcon} />
+      <IconButton
+        toggled={true}
+        variant={IconButton.Variant.Circle}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a default icon button, toggled off', () => {
     const component = renderer.create(
-      <IconButton toggled={false} buttonType={IconButton.Types.Circle} icon={activityStreamIcon} />
+      <IconButton
+        toggled={false}
+        variant={IconButton.Variant.Circle}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders a filled icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Types.CircleFilled} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.CircleFilled}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -91,9 +119,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small filled icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Sizes.Small}
-        buttonType={IconButton.Types.CircleFilled}
+        size={IconButton.Size.Small}
+        variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -102,9 +131,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium filled icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Sizes.Medium}
-        buttonType={IconButton.Types.CircleFilled}
+        size={IconButton.Size.Medium}
+        variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -114,8 +144,9 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         toggled={true}
-        buttonType={IconButton.Types.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -125,8 +156,9 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         toggled={false}
-        buttonType={IconButton.Types.CircleFilled}
+        variant={IconButton.Variant.CircleFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -134,7 +166,11 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders an inverse icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Types.Inverse} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.Inverse}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -142,9 +178,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small inverse icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Sizes.Small}
-        buttonType={IconButton.Types.Inverse}
+        size={IconButton.Size.Small}
+        variant={IconButton.Variant.Inverse}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -153,9 +190,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium inverse icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Sizes.Medium}
-        buttonType={IconButton.Types.Inverse}
+        size={IconButton.Size.Medium}
+        variant={IconButton.Variant.Inverse}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -163,21 +201,35 @@ describe('Button (Icon) Snapshots', () => {
 
   test('renders an inverse icon button, toggled on', () => {
     const component = renderer.create(
-      <IconButton toggled={true} buttonType={IconButton.Types.Inverse} icon={activityStreamIcon} />
+      <IconButton
+        toggled={true}
+        variant={IconButton.Variant.Inverse}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders an inverse icon button, toggled off', () => {
     const component = renderer.create(
-      <IconButton toggled={false} buttonType={IconButton.Types.Inverse} icon={activityStreamIcon} />
+      <IconButton
+        toggled={false}
+        variant={IconButton.Variant.Inverse}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   test('renders an inverse filled icon button', () => {
     const component = renderer.create(
-      <IconButton buttonType={IconButton.Types.InverseFilled} icon={activityStreamIcon} />
+      <IconButton
+        variant={IconButton.Variant.InverseFilled}
+        icon={activityStreamIcon}
+        aria-label="Activity Stream"
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -185,9 +237,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a small inverse filled icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Sizes.Small}
-        buttonType={IconButton.Types.InverseFilled}
+        size={IconButton.Size.Small}
+        variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -196,9 +249,10 @@ describe('Button (Icon) Snapshots', () => {
   test('renders a medium inverse filled icon button', () => {
     const component = renderer.create(
       <IconButton
-        buttonSize={IconButton.Sizes.Medium}
-        buttonType={IconButton.Types.InverseFilled}
+        size={IconButton.Size.Medium}
+        variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -208,8 +262,9 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         toggled={true}
-        buttonType={IconButton.Types.InverseFilled}
+        variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();
@@ -219,8 +274,9 @@ describe('Button (Icon) Snapshots', () => {
     const component = renderer.create(
       <IconButton
         toggled={false}
-        buttonType={IconButton.Types.InverseFilled}
+        variant={IconButton.Variant.InverseFilled}
         icon={activityStreamIcon}
+        aria-label="Activity Stream"
       />
     );
     expect(component).toMatchSnapshot();

@@ -68,7 +68,6 @@ exports[`System Icon Circle Snapshots renders as expected 1`] = `
 
 <div
   className="emotion-1 emotion-2"
-  size={40}
 >
   <span
     className="emotion-0"
@@ -149,7 +148,6 @@ exports[`System Icon Circle Snapshots renders as expected with colored backgroun
 
 <div
   className="emotion-1 emotion-2"
-  size={40}
 >
   <span
     className="emotion-0"

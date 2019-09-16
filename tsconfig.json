@@ -18,7 +18,8 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
+    "types": ["jest"],
     "incremental": true
   },
-  "exclude": ["node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs"]
+  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs"]
 }

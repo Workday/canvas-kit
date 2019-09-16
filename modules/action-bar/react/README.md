@@ -26,7 +26,7 @@ import {Button} from '@workday/canvas-kit-react-button';
 import {ActionBar} from '@workday/canvas-kit-react-action-bar';
 
 <ActionBar>
-  <Button buttonType={ButtonTypes.Primary}>Button</Button>
+  <Button variant={ButtonVariant.Primary}>Button</Button>
   <Button>Button</Button>
   <Button>Button</Button>
 </ActionBar>;

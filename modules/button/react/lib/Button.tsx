@@ -1,22 +1,22 @@
 import * as React from 'react';
 import {ButtonBaseCon, ButtonBaseLabel, ButtonLabelData, ButtonLabelIcon} from './ButtonBase';
-import {ButtonTypes, ButtonSizes, BetaButtonTypes} from './types';
+import {ButtonVariant, ButtonSize, BetaButtonVariant} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {labelDataBaseStyles} from './ButtonStyles';
 
 // TODO (beta button): add README for new buttons when merging
 
-export interface BaseButtonProps<T = ButtonTypes | BetaButtonTypes>
+export interface BaseButtonProps<T = ButtonVariant | BetaButtonVariant>
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Type of button.
    */
-  buttonType?: T;
+  variant?: T;
   /**
    * Size of button.
    */
-  buttonSize?: ButtonSizes;
+  size?: ButtonSize;
   /**
    * Ref of button that the styled component renders.
    */
@@ -31,7 +31,7 @@ export interface BaseButtonProps<T = ButtonTypes | BetaButtonTypes>
   icon?: CanvasSystemIcon;
 }
 
-export interface ButtonProps<T = ButtonTypes | BetaButtonTypes>
+export interface ButtonProps<T = ButtonVariant | BetaButtonVariant>
   extends BaseButtonProps<T>,
     GrowthBehavior {
   /**
@@ -41,27 +41,27 @@ export interface ButtonProps<T = ButtonTypes | BetaButtonTypes>
 }
 
 export default class Button extends React.Component<ButtonProps> {
-  public static Types = ButtonTypes;
-  public static Sizes = ButtonSizes;
+  public static Variant = ButtonVariant;
+  public static Size = ButtonSize;
 
   static defaultProps = {
-    buttonSize: ButtonSizes.Large,
-    buttonType: ButtonTypes.Secondary,
+    size: ButtonSize.Large,
+    variant: ButtonVariant.Secondary,
     grow: false,
   };
 
   public render() {
-    const {buttonRef, ...elemProps} = this.props;
+    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
     return (
-      <ButtonBaseCon {...elemProps} innerRef={buttonRef}>
-        {elemProps.icon && <ButtonLabelIcon {...elemProps} />}
-        <ButtonBaseLabel buttonSize={elemProps.buttonSize} buttonType={elemProps.buttonType}>
-          {elemProps.children}
+      <ButtonBaseCon variant={variant} size={size} innerRef={buttonRef} {...elemProps}>
+        {icon && <ButtonLabelIcon size={size} icon={icon} />}
+        <ButtonBaseLabel size={size} variant={variant}>
+          {children}
         </ButtonBaseLabel>
-        {elemProps.dataLabel && (
-          <ButtonLabelData className={labelDataBaseStyles.classname} {...elemProps}>
-            {elemProps.dataLabel}
+        {dataLabel && (
+          <ButtonLabelData size={size} className={labelDataBaseStyles.classname}>
+            {dataLabel}
           </ButtonLabelData>
         )}
       </ButtonBaseCon>
@@ -70,22 +70,24 @@ export default class Button extends React.Component<ButtonProps> {
 }
 
 // tslint:disable:class-name
-export class beta_Button extends React.Component<ButtonProps<BetaButtonTypes>> {
-  public static Types = BetaButtonTypes;
-  public static Sizes = ButtonSizes;
+export class beta_Button extends React.Component<ButtonProps<BetaButtonVariant>> {
+  public static Variant = BetaButtonVariant;
+  public static Size = ButtonSize;
 
   static defaultProps = {
-    buttonSize: ButtonSizes.Medium,
-    buttonType: BetaButtonTypes.Secondary,
+    size: ButtonSize.Medium,
+    variant: BetaButtonVariant.Secondary,
     grow: false,
   };
 
   render() {
+    const {variant, size, icon} = this.props;
+
     // TODO (beta button): Move this logic back into Button compponent
     // Restrict Hightlight button to only being sized Large, Medium with an Icon
     if (
-      this.props.buttonType === BetaButtonTypes.Highlight &&
-      (this.props.icon === undefined || this.props.buttonSize === ButtonSizes.Small)
+      variant === BetaButtonVariant.Highlight &&
+      (icon === undefined || size === ButtonSize.Small)
     ) {
       return null;
     }

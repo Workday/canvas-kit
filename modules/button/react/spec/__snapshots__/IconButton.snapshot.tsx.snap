@@ -148,6 +148,7 @@ exports[`Icon Button Snapshots renders a medium icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
 >
   <span
@@ -314,6 +315,7 @@ exports[`Icon Button Snapshots renders a small icon button 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   className="emotion-1 emotion-2"
 >
   <span
@@ -504,6 +506,7 @@ exports[`Icon Button Snapshots renders an icon button, toggled 1`] = `
 }
 
 <button
+  aria-label="Activity Stream"
   aria-pressed={true}
   className="emotion-1 emotion-2"
 >
@@ -634,6 +637,7 @@ exports[`Icon Button Snapshots renders as expected 1`] = `
 }
 
 <button
+  aria-label="Hello"
   className="emotion-0 emotion-1"
 >
   <svg>
@@ -704,6 +708,8 @@ Array [
   width: 32px;
   height: 32px;
   background-color: transparent;
+  width: 40px;
+  height: 40px;
 }
 
 .emotion-1:hover:active {
@@ -786,12 +792,13 @@ Array [
 
 .emotion-1:not([disabled]):focus,
 .emotion-1:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -864,6 +871,8 @@ Array [
   height: 32px;
   background-color: #f0f1f2;
   border-color: #ced3d9;
+  width: 40px;
+  height: 40px;
 }
 
 .emotion-1:hover:active {
@@ -933,12 +942,13 @@ Array [
 
 .emotion-1:not([disabled]):focus,
 .emotion-1:not([disabled]):active {
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -1099,6 +1109,7 @@ Array [
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -1257,6 +1268,7 @@ Array [
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -1402,6 +1414,7 @@ Array [
 }
 
 <button
+    aria-label="Activity Stream"
     className="emotion-1 emotion-2"
   >
     <span
@@ -1654,6 +1667,7 @@ Array [
     }
   >
     <button
+      aria-label="Activity Stream"
       className="emotion-1 emotion-2"
     >
       <span
@@ -1666,6 +1680,7 @@ Array [
       />
     </button>
     <button
+      aria-label="Activity Stream"
       className="emotion-4 emotion-2"
     >
       <span

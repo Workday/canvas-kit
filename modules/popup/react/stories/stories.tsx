@@ -22,7 +22,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
     const {anchorEl, open} = this.state;
     return (
       <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Button buttonType={Button.Types.Delete} onClick={this.handleClick}>
+        <Button variant={Button.Variant.Delete} onClick={this.handleClick}>
           Delete Item
         </Button>
         <Popper placement={'bottom'} open={open} anchorEl={anchorEl}>
@@ -39,11 +39,11 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
             <Button
               style={{marginRight: '16px'}}
               onClick={this.handleSubmit}
-              buttonType={Button.Types.Delete}
+              variant={Button.Variant.Delete}
             >
               Delete
             </Button>
-            <Button onClick={this.handleSubmit} buttonType={Button.Types.Secondary}>
+            <Button onClick={this.handleSubmit} variant={Button.Variant.Secondary}>
               Cancel
             </Button>
           </Popup>

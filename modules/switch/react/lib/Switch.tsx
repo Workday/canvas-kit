@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import {colors, depth} from '@workday/canvas-kit-react-core';
 
-export interface SwitchProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
   id?: string;

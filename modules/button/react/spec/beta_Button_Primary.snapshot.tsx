@@ -6,7 +6,7 @@ import {editIcon} from '@workday/canvas-system-icons-web';
 describe('Button (Primary) Snapshots (beta)', () => {
   test('renders a large, primary button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Primary}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Primary}>
         Button
       </Button>
     );
@@ -15,7 +15,7 @@ describe('Button (Primary) Snapshots (beta)', () => {
 
   test('renders a large, primary button with an icon', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Primary} icon={editIcon}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Primary} icon={editIcon}>
         Button
       </Button>
     );
@@ -24,7 +24,7 @@ describe('Button (Primary) Snapshots (beta)', () => {
 
   test('renders a large, primary button with a data label', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Large} buttonType={Button.Types.Primary} dataLabel={'1:00'}>
+      <Button size={Button.Size.Large} variant={Button.Variant.Primary} dataLabel={'1:00'}>
         Button
       </Button>
     );
@@ -34,8 +34,8 @@ describe('Button (Primary) Snapshots (beta)', () => {
   test('renders a large, primary button with an icon and a data label', () => {
     const component = renderer.create(
       <Button
-        buttonSize={Button.Sizes.Large}
-        buttonType={Button.Types.Primary}
+        size={Button.Size.Large}
+        variant={Button.Variant.Primary}
         icon={editIcon}
         dataLabel={'1:00'}
       >
@@ -47,7 +47,7 @@ describe('Button (Primary) Snapshots (beta)', () => {
 
   test('renders a medium, primary button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Primary}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Primary}>
         Button
       </Button>
     );
@@ -56,7 +56,7 @@ describe('Button (Primary) Snapshots (beta)', () => {
 
   test('renders a medium, primary button with an icon', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Primary} icon={editIcon}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Primary} icon={editIcon}>
         Button
       </Button>
     );
@@ -65,7 +65,7 @@ describe('Button (Primary) Snapshots (beta)', () => {
 
   test('renders a medium, primary button with a data label', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Medium} buttonType={Button.Types.Primary} dataLabel={'1:00'}>
+      <Button size={Button.Size.Medium} variant={Button.Variant.Primary} dataLabel={'1:00'}>
         Button
       </Button>
     );
@@ -75,8 +75,8 @@ describe('Button (Primary) Snapshots (beta)', () => {
   test('renders a medium, primary button with an icon and a data label', () => {
     const component = renderer.create(
       <Button
-        buttonSize={Button.Sizes.Medium}
-        buttonType={Button.Types.Primary}
+        size={Button.Size.Medium}
+        variant={Button.Variant.Primary}
         icon={editIcon}
         dataLabel={'1:00'}
       >
@@ -88,7 +88,7 @@ describe('Button (Primary) Snapshots (beta)', () => {
 
   test('renders a small, primary button', () => {
     const component = renderer.create(
-      <Button buttonSize={Button.Sizes.Small} buttonType={Button.Types.Primary}>
+      <Button size={Button.Size.Small} variant={Button.Variant.Primary}>
         Button
       </Button>
     );
@@ -97,7 +97,7 @@ describe('Button (Primary) Snapshots (beta)', () => {
 
   test('renders a large, growing primary button', () => {
     const component = renderer.create(
-      <Button grow={true} buttonSize={Button.Sizes.Large} buttonType={Button.Types.Primary}>
+      <Button grow={true} size={Button.Size.Large} variant={Button.Variant.Primary}>
         Button
       </Button>
     );

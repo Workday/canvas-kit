@@ -89,7 +89,7 @@ import {Table, TableRow} from '@workday/canvas-kit-react-table';
 
 ## Static Properties
 
-#### `State: TableRowStates`
+#### `State: TableRowState`
 
 ```tsx
 <TableRow state={TableRow.State.Error}>
@@ -111,7 +111,7 @@ the entire row. This style produces a colored row without a darkened border.
 
 ### Optional
 
-#### `state: TableRowStates`
+#### `state: TableRowState`
 
 > The state of the row
 

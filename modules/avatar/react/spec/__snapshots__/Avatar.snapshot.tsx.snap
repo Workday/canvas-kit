@@ -115,11 +115,9 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
   aria-label="Avatar"
   className="emotion-2 emotion-3"
   disabled={true}
-  size={64}
 >
   <div
     className="emotion-1"
-    size={64}
   >
     <span
       className="emotion-0"
@@ -183,7 +181,6 @@ exports[`Avatar Snapshots renders a large avatar with a photo 1`] = `
   aria-label="Avatar"
   className="emotion-0 emotion-1"
   disabled={true}
-  size={64}
 >
   <img
     alt="Avatar"
@@ -307,11 +304,9 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
   aria-label="Avatar"
   className="emotion-2 emotion-3"
   disabled={true}
-  size={64}
 >
   <div
     className="emotion-1"
-    size={64}
   >
     <span
       className="emotion-0"
@@ -375,7 +370,6 @@ exports[`Avatar Snapshots renders an avatar with a photo 1`] = `
   aria-label="Avatar"
   className="emotion-0 emotion-1"
   disabled={true}
-  size={32}
 >
   <img
     alt="Avatar"
@@ -434,7 +428,6 @@ exports[`Avatar Snapshots renders an avatar with an aria label and an alt text 1
   aria-label="my avatar label"
   className="emotion-0 emotion-1"
   disabled={true}
-  size={64}
 >
   <img
     alt="my image"
@@ -558,11 +551,9 @@ exports[`Avatar Snapshots renders as expected 1`] = `
   aria-label="Avatar"
   className="emotion-2 emotion-3"
   disabled={true}
-  size={32}
 >
   <div
     className="emotion-1"
-    size={32}
   >
     <span
       className="emotion-0"

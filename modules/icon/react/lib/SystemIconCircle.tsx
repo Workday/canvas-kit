@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
+import isPropValid from '@emotion/is-prop-valid';
 import {colors} from '@workday/canvas-kit-react-core';
 import SystemIcon from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -20,7 +21,9 @@ export interface SystemIconCircleProps {
   size: SystemIconCircleSize | number;
 }
 
-const Container = styled('div')<Pick<SystemIconCircleProps, 'background' | 'size'>>(
+const Container = styled('div', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
+})<Pick<SystemIconCircleProps, 'background' | 'size'>>(
   {
     display: 'flex',
     alignItems: 'center',

@@ -173,7 +173,7 @@ describe('Header', () => {
 
       expect(wrapper.find(IconButton)).toHaveLength(1);
       expect(renderedIcon.props().icon).toBe(activityStreamIcon);
-      expect(renderedIcon.props().buttonType).toBe(IconButton.Types.Inverse);
+      expect(renderedIcon.props().variant).toBe(IconButton.Variant.Inverse);
       expect(renderedIcon.props().onClick).toBeTruthy();
     });
 
@@ -182,7 +182,7 @@ describe('Header', () => {
 
       const wrapper = mount<Header>(
         <Header>
-          <IconButton icon={activityStreamIcon} />
+          <IconButton icon={activityStreamIcon} aria-label="Activity Stream" />
         </Header>
       );
       const renderedIcon = wrapper.find(IconButton).first();
