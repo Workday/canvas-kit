@@ -18,11 +18,40 @@ yarn add @workday/canvas-kit-react-switch
 
 ## Usage
 
+#### Simple Example
+
+**Note:** While a base switch component is provided in this package, it is **not accessible** when
+used as is. It should be used in tandem with [`FormField`](../../form-field/react) to be made fully
+accessible (see below).
+
 ```tsx
 import * as React from 'react';
 import {Switch} from '@workday/canvas-kit-react-switch';
 
 <Switch disabled={false} checked={checked} onChange={this.handleCheck} />;
+```
+
+#### Accessible Example
+
+```tsx
+import * as React from 'react';
+import {Switch} from '@workday/canvas-kit-react-switch';
+import FormField from '@workday/canvas-kit-react-form-field';
+
+<FormField label="My Field" inputId="my-switch-field">
+  <Switch disabled={false} checked={checked} onChange={this.handleCheck} id="my-switch-field" />;
+</FormField>;
+```
+
+If use inside a FormField doesn't work for your use case, you can use the `aria-labelledBy`
+attribute.
+
+```tsx
+import * as React from 'react';
+import {Switch} from '@workday/canvas-kit-react-switch';
+<label id="123">Label</label>
+...
+<Switch disabled={false} checked={checked} onChange={this.handleCheck} aria-labelledBy="123" />;
 ```
 
 ## Static Properties
