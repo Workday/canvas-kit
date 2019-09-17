@@ -25,10 +25,10 @@ import Banner from '@workday/canvas-kit-react-banner';
 
 ## Static Properties
 
-#### `Theme: BannerTheme`
+#### `ErrorType: ErrorType`
 
 ```tsx
-<Banner theme={Banner.Theme.Error} label="3 errors" />
+<Banner error={Banner.ErrorType.Error} label="3 errors" />
 ```
 
 ---
@@ -57,10 +57,16 @@ import Banner from '@workday/canvas-kit-react-banner';
 
 > Set the banner variant as `full` or `sticky`
 
-#### `theme: BannerTheme`
+Default: `BannerVariant.Full`
 
-> Set the banner theme as `alert` or `error`
+#### `error: ErrorType`
+
+> Set the banner type as `alert` or `error`
+
+Default: `ErrorType.Alert`
 
 #### `actionText: string`
 
 > Set the action text in the `full` variant
+
+Default: `'View All'`
