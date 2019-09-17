@@ -18,7 +18,7 @@ yarn add @workday/canvas-kit-react-avatar
 
 ```tsx
 import * as React from 'react';
-import {Avatar, Variant} from '@workday/canvas-kit-react-avatar';
+import {Avatar, AvatarVariant} from '@workday/canvas-kit-react-avatar';
 
 // Basic
 <Avatar />
@@ -26,20 +26,20 @@ import {Avatar, Variant} from '@workday/canvas-kit-react-avatar';
 // Using static properties on Avatar
 <Avatar
   size={Avatar.Size.xs}
-  variant={Avatar.variant.Dark}
+  variant={Avatar.Variant.Dark}
   onClick={() => { window.alert('Avatar Clicked') }}
 />
 
-// Using Variant import directly
-<Avatar size={Avatar.Size.xs} variant={Variant.Dark} />
+// Using AvatarVariant import directly
+<Avatar size={Avatar.Size.xs} variant={AvatarVariant.Dark} />
 ```
 
 ## Static Properties
 
-#### `variant: Variant`
+#### `variant: AvatarVariant`
 
 ```tsx
-<Avatar variant={Avatar.variant.Dark} />
+<Avatar variant={Avatar.Variant.Dark} />
 ```
 
 ---
@@ -62,7 +62,7 @@ import {Avatar, Variant} from '@workday/canvas-kit-react-avatar';
 
 ### Optional
 
-#### `variant: Variant`
+#### `variant: AvatarVariant`
 
 > The variant of the avatar if using a default image.
 

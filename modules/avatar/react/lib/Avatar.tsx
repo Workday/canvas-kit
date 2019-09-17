@@ -71,7 +71,7 @@ const Container = styled('button', {
 );
 
 export default class Avatar extends React.Component<AvatarProps> {
-  static variant = AvatarVariant;
+  static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
 
   static defaultProps = {
