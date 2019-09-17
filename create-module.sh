@@ -26,11 +26,11 @@ read -p "Module description: " description
 echo
 upperName="$(tr '[:lower:]' '[:upper:]' <<< ${name:0:1})${name:1}"
 
-read -p "Is this an unstable component? [Y/n] " -n 1 -r
+read -p "Is this an unstable component (should it go in Canvas Kit Labs)? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-path="./modules/_unstable/$name"
+path="./modules/_labs/$name"
 else
 $stable = true
 path="./modules/$name"
@@ -154,13 +154,13 @@ else
 cat > $readme << EOF
 # Canvas Kit $upperName
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_unstable/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
   <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 EOF
 fi
 
-## TODO: Need extra ../ for unstable
+## TODO: Need extra ../ for labs
 
 # Create tsconfig.json
 tsconfig="$reactPath/tsconfig.json"
@@ -307,7 +307,7 @@ else
 cat > $readme << EOF
 # Canvas Kit CSS $upperName
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_unstable/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
   <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 EOF
