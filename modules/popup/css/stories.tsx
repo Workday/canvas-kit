@@ -2,10 +2,10 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
-import {Button} from '@workday/canvas-kit-react-button';
-import {xIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react';
+import {beta_Button as Button} from '@workday/canvas-kit-react-button';
 import './index.scss';
+// @ts-ignore
+import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
 
 interface PopupWrapperState {
   open: boolean;
@@ -15,6 +15,15 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
   state = {
     open: false,
   };
+
+  public componentDidMount() {
+    initializeIcons();
+  }
+
+  public componentDidUpdate() {
+    initializeIcons();
+  }
+
   public render() {
     const {open} = this.state;
     return (
@@ -39,7 +48,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
           >
             <div className="wdc-popup-close">
               <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
-                <SystemIcon icon={xIcon} />
+                <i className="wdc-icon" data-icon="x" data-category="system" />
               </button>
             </div>
             <h3 className="wdc-popup-title">Delete Item</h3>
@@ -89,7 +98,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
 
 storiesOf('CSS/Popup', module)
   .addDecorator(withReadme(README))
-  .add('All', () => (
+  .add('Default', () => (
     <div className="story">
       <PopupWrapper />
     </div>
