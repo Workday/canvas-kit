@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
-import {colors, inputColors, depth} from '@workday/canvas-kit-react-core';
+import {colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
 
 export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
@@ -30,7 +30,7 @@ const SwitchInput = styled('input')<SwitchProps>(
     height: switchHeight,
     width: switchWidth,
     margin: 0,
-    marginLeft: '6px',
+    marginLeft: spacing.xxxs,
     borderRadius: 999,
     '&:focus, &:active': {
       outline: 'none',
