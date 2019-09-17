@@ -66,7 +66,7 @@ import {Avatar, AvatarVariant} from '@workday/canvas-kit-react-avatar';
 
 > The variant of the avatar if using a default image.
 
-Default: `Variant.Light`
+Default: `AvatarVariant.Light`
 
 | Variant | Description                      |
 | ------- | -------------------------------- |
