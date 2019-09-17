@@ -6,7 +6,7 @@ import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
 import InputProvider from './lib/InputProvider';
 import spacing, {
   CanvasSpacing,
-  CanvasSpacingNumbers,
+  CanvasSpacingNumber,
   CanvasSpacingValue,
   space,
   SpaceProps,
@@ -44,7 +44,7 @@ export {
   CanvasDepth,
   CanvasDepthValue,
   CanvasSpacing,
-  CanvasSpacingNumbers,
+  CanvasSpacingNumber,
   CanvasSpacingValue,
   CanvasType,
   CanvasColor,
