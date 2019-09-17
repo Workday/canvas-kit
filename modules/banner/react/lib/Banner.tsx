@@ -95,12 +95,10 @@ export default class Banner extends React.Component<BannerProps> {
   };
 
   public render() {
-    const {label, onClick, actionText, variant, ...props} = this.props;
+    const {label, onClick, actionText, variant, error, ...props} = this.props;
 
-    const bannerIcon =
-      this.props.error === ErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
-    const iconColor =
-      this.props.error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;
+    const bannerIcon = error === ErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
+    const iconColor = error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;
     const iconSize = 24;
 
     return (
@@ -110,11 +108,12 @@ export default class Banner extends React.Component<BannerProps> {
         variant={variant}
         tabIndex={0}
         onClick={onClick}
+        error={error}
         {...props}
       >
         <BannerIcon icon={bannerIcon} color={iconColor} colorHover={iconColor} size={iconSize} />
-        <BannerLabel>{this.props.label}</BannerLabel>
-        <BannerViewAll variant={variant}>{this.props.actionText}</BannerViewAll>
+        <BannerLabel>{label}</BannerLabel>
+        <BannerViewAll variant={variant}>{actionText}</BannerViewAll>
       </BannerWrapper>
     );
   }
