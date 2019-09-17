@@ -16,11 +16,11 @@ describe('Banner Snapshots', () => {
     expect(component).toMatchSnapshot();
   });
   test('renders an error banner as expected', () => {
-    const component = renderer.create(<Banner theme={Banner.Theme.Error} />);
+    const component = renderer.create(<Banner error={Banner.ErrorType.Error} />);
     expect(component).toMatchSnapshot();
   });
   test('renders an alert banner as expected', () => {
-    const component = renderer.create(<Banner theme={Banner.Theme.Alert} />);
+    const component = renderer.create(<Banner error={Banner.ErrorType.Alert} />);
     expect(component).toMatchSnapshot();
   });
   test('renders a banner with a custom action text expected', () => {

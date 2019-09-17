@@ -1,10 +1,14 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
-import {BannerVariant, BannerTheme} from './types';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import {ErrorType, focusRing} from '@workday/canvas-kit-react-common';
+
+export enum BannerVariant {
+  Full,
+  Sticky,
+}
 
 export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -20,9 +24,9 @@ export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    */
   variant?: BannerVariant;
   /**
-   * Color theme of the banner
+   * Color of the banner based on the type of the error
    */
-  theme?: BannerTheme;
+  error?: ErrorType;
   /**
    * Text on the right, call to action
    */
@@ -51,14 +55,14 @@ const BannerWrapper = styled('button')<BannerProps>(
       cursor: 'pointer',
     },
   },
-  ({theme, variant}) => ({
-    backgroundColor: theme === BannerTheme.Error ? colors.cinnamon500 : colors.cantaloupe400,
-    color: theme === BannerTheme.Error ? colors.frenchVanilla100 : colors.blackPepper400,
+  ({error, variant}) => ({
+    backgroundColor: error === ErrorType.Error ? colors.cinnamon500 : colors.cantaloupe400,
+    color: error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400,
     borderRadius:
       variant === BannerVariant.Sticky ? `${spacing.xxxs} 0 0 ${spacing.xxxs}` : spacing.xxxs,
     width: variant === BannerVariant.Sticky ? '222px' : '328px',
     '&:hover': {
-      backgroundColor: theme === BannerTheme.Error ? colors.cinnamon600 : colors.cantaloupe500,
+      backgroundColor: error === ErrorType.Error ? colors.cinnamon600 : colors.cantaloupe500,
     },
   })
 );
@@ -82,21 +86,19 @@ const BannerViewAll = styled('span')<BannerProps>(
 
 export default class Banner extends React.Component<BannerProps> {
   static Variant = BannerVariant;
-  static Theme = BannerTheme;
+  static ErrorType = ErrorType;
 
   public static defaultProps = {
     actionText: 'View All',
-    theme: BannerTheme.Alert,
+    error: ErrorType.Alert,
     variant: BannerVariant.Full,
   };
 
   public render() {
-    const {label, onClick, actionText, variant, ...props} = this.props;
+    const {label, onClick, actionText, variant, error, ...props} = this.props;
 
-    const bannerIcon =
-      this.props.theme === BannerTheme.Error ? exclamationCircleIcon : exclamationTriangleIcon;
-    const iconColor =
-      this.props.theme === BannerTheme.Error ? colors.frenchVanilla100 : colors.blackPepper400;
+    const bannerIcon = error === ErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
+    const iconColor = error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;
     const iconSize = 24;
 
     return (
@@ -106,11 +108,12 @@ export default class Banner extends React.Component<BannerProps> {
         variant={variant}
         tabIndex={0}
         onClick={onClick}
+        error={error}
         {...props}
       >
         <BannerIcon icon={bannerIcon} color={iconColor} colorHover={iconColor} size={iconSize} />
-        <BannerLabel>{this.props.label}</BannerLabel>
-        <BannerViewAll variant={variant}>{this.props.actionText}</BannerViewAll>
+        <BannerLabel>{label}</BannerLabel>
+        <BannerViewAll variant={variant}>{actionText}</BannerViewAll>
       </BannerWrapper>
     );
   }
