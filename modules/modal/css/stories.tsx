@@ -93,7 +93,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
 
 storiesOf('CSS/Modal', module)
   .addDecorator(withReadme(README))
-  .add('Modal', () => (
+  .add('Default', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
       <ModalWrapper />
