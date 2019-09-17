@@ -30,6 +30,7 @@ const SwitchInput = styled('input')<SwitchProps>(
     height: switchHeight,
     width: switchWidth,
     margin: 0,
+    marginLeft: '6px',
     borderRadius: 999,
     '&:focus, &:active': {
       outline: 'none',
