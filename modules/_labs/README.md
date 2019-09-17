@@ -53,6 +53,7 @@ version.**
    >   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
    > </a>  This component is work in progress and currently in pre-release.
 4. Update any necessary paths (links to storybook utils, tsconfig, etc.)
+5. Change the storybook path to add a `Labs` prefix (e.g. `Labs/Menu/Default`)
 
 ## Promoting a Component out of Canvas Kit Labs
 

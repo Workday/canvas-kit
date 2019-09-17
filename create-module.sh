@@ -31,9 +31,11 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 path="./modules/_labs/$name"
+rootPath="../../../.."
 else
 $stable = true
 path="./modules/$name"
+rootPath="../../.."
 fi
 
 reactPath="$path/react"
@@ -123,9 +125,14 @@ EOF
 # Create stories.tsx
 mkdir "$reactPath/stories"
 storiesJs="$reactPath/stories/stories.tsx"
+if [ $stable ] ; then
+	storyPath="$upperName"
+else
+	storyPath="Labs/$upperName"
+fi
 echo -e "Creating ${CYAN}$storiesJs${NC}"
 cat > $storiesJs << EOF
-/// <reference path="../../../../typings.d.ts" />
+/// <reference path="${rootPath}/../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -133,7 +140,7 @@ import withReadme from 'storybook-readme/with-readme';
 import MyComponent from '../index';
 import README from '../README.md';
 
-storiesOf('Canvas Kit/$upperName', module)
+storiesOf('$storyPath', module)
   .addDecorator(withReadme(README))
   .add('All', () => (
     <div className="story">
@@ -160,8 +167,6 @@ cat > $readme << EOF
 EOF
 fi
 
-## TODO: Need extra ../ for labs
-
 # Create tsconfig.json
 tsconfig="$reactPath/tsconfig.json"
 echo -e "Creating ${CYAN}$tsconfig${NC}"
@@ -169,14 +174,14 @@ echo -e "Creating ${CYAN}$tsconfig${NC}"
 if [ $stable ] ; then
 cat > $tsconfig << EOF
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "${rootPath}/tsconfig.json",
   "exclude": ["node_modules", "ts-tmp", "dist", "spec", "stories"]
 }
 EOF
 else
 cat > $tsconfig << EOF
 {
-  "extends": "../../../../tsconfig.json",
+  "extends": "${rootPath}/tsconfig.json",
   "exclude": ["node_modules", "ts-tmp", "dist", "spec", "stories"]
 }
 EOF
@@ -277,6 +282,11 @@ EOF
 
 # Create stories.js
 storiesJs="$cssPath/stories.tsx"
+if [ $stable ] ; then
+	storyPath="CSS/$upperName"
+else
+	storyPath="Labs/CSS/$upperName"
+fi
 echo -e "Creating ${CYAN}$storiesJs${NC}"
 cat > $storiesJs << EOF
 import React from 'react'
@@ -285,7 +295,7 @@ import withReadme from 'storybook-readme/with-readme'
 import README from './README.md'
 import './index.scss'
 
-storiesOf('CSS/$upperName', module)
+storiesOf('$storyPath', module)
 	.addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
