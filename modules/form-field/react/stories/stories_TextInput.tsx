@@ -33,6 +33,11 @@ storiesOf('Form Field/Text Input/Top Label', module)
       {controlComponent(<TextInput placeholder="Placeholder" disabled={true} />)}
     </FormField>
   ))
+  .add('Required', () => (
+    <FormField label="Label" inputId="input-required" required={true}>
+      {controlComponent(<TextInput />)}
+    </FormField>
+  ))
   .add('Alert', () => (
     <FormField
       label="Label"
@@ -101,6 +106,16 @@ storiesOf('Form Field/Text Input/Left Label', module)
       inputId="input-disabled-placeholder"
     >
       {controlComponent(<TextInput placeholder="Placeholder" disabled={true} />)}
+    </FormField>
+  ))
+  .add('Required', () => (
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="input-required"
+      required={true}
+    >
+      {controlComponent(<TextInput />)}
     </FormField>
   ))
   .add('Alert', () => (

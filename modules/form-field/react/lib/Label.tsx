@@ -1,12 +1,13 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {spacing, type} from '@workday/canvas-kit-react-core';
+import {inputColors, spacing, type} from '@workday/canvas-kit-react-core';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {
   labelPosition: FormFieldLabelPosition;
   isLegend: boolean;
   htmlFor?: string;
+  required?: boolean;
 }
 
 const labelStyles = [
@@ -16,19 +17,32 @@ const labelStyles = [
     padding: 0,
   },
   (props: LabelProps) => {
-    if (props.labelPosition === FormFieldLabelPosition.Left) {
-      return {
-        display: 'inline-block',
-        verticalAlign: 'top',
-        marginTop: 10, // Input height - font line height / 2
-        marginRight: spacing.l,
-        width: 180,
-      };
-    }
-
     return {
-      display: 'block',
-      marginBottom: spacing.xxxs,
+      ...(props.labelPosition === FormFieldLabelPosition.Left
+        ? {
+            display: 'inline-block',
+            verticalAlign: 'top',
+            marginTop: 10, // Input height - font line height / 2
+            marginRight: spacing.l,
+            width: 180,
+          }
+        : {
+            display: 'block',
+            marginBottom: spacing.xxxs,
+          }),
+      ...(props.required
+        ? {
+            ':after': {
+              content: '"*"',
+              color: inputColors.error.border,
+              fontSize: '16px',
+              fontWeight: 400,
+              position: 'relative' as 'relative',
+              top: '1px',
+              paddingLeft: '2px',
+            },
+          }
+        : {}),
     };
   },
 ];

@@ -23,6 +23,11 @@ storiesOf('Form Field/Color Picker/Color Input/Top Label', module)
       {controlComponent(<ColorInput disabled={true} />)}
     </FormField>
   ))
+  .add('Required', () => (
+    <FormField label="Label" inputId="input-required" required={true}>
+      {controlComponent(<ColorInput />)}{' '}
+    </FormField>
+  ))
   .add('Alert', () => (
     <FormField
       label="Label"
@@ -73,6 +78,16 @@ storiesOf('Form Field/Color Picker/Color Input/Left Label', module)
   .add('Disabled', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="input-disabled">
       {controlComponent(<ColorInput disabled={true} />)}
+    </FormField>
+  ))
+  .add('Required', () => (
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="input-required"
+      required={true}
+    >
+      {controlComponent(<ColorInput />)}{' '}
     </FormField>
   ))
   .add('Alert', () => (
