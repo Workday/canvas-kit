@@ -57,7 +57,7 @@ import Banner from '@workday/canvas-kit-react-banner';
 
 > Set the banner variant as `full` or `sticky`
 
-#### `type: BannerErrorType`
+#### `type: ErrorType`
 
 > Set the banner type as `alert` or `error`
 
