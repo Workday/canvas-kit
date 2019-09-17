@@ -1,19 +1,19 @@
 import * as React from 'react';
-import {colors, BrandingColors, CanvasColor} from '@workday/canvas-kit-react-core';
+import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react-core';
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from 'create-emotion';
 import Icon from './Icon';
 import {SpanProps} from './types';
 
 export interface AppletIconStyles {
-  color?: BrandingColors;
+  color?: BrandingColor;
 }
 
 export const appletIconStyles = ({
-  color = BrandingColors.Blueberry,
+  color = BrandingColor.Blueberry,
 }: AppletIconStyles): CSSObject => {
   // Check if valid color
-  if (!Object.values(BrandingColors).includes(color)) {
+  if (!Object.values(BrandingColor).includes(color)) {
     throw Error(`Color "${color}" not found`);
   }
 
@@ -53,7 +53,7 @@ export interface AppletIconProps extends AppletIconStyles {
 }
 
 export default class AppletIcon extends React.Component<SpanProps & AppletIconProps> {
-  public static Colors = BrandingColors;
+  public static Colors = BrandingColor;
 
   public render() {
     const {icon, color, size, ...elemProps} = this.props;
