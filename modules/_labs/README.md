@@ -52,3 +52,15 @@ version.**
    > <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
    >   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
    > </a>  This component is work in progress and currently in pre-release.
+4. Update any necessary paths (links to storybook utils, tsconfig, etc.)
+
+## Promoting a Component out of Canvas Kit Labs
+
+1. Move the module folder from `modules/_labs` to `modules/`
+2. Rename the package in `package.json` to `@workday/canvas-kit-labs-<TARGET>-<COMPONENT>` (remove
+   `labs-`)
+3. Remove the warning from the README
+4. Update any necessary paths (links to storybook utils, tsconfig, etc.)
+
+**Note**: When components are promoted from Canvas Kit Labs, their old namespace is left orphaned in
+npm, so these version will still be available and will never be overwritten.
