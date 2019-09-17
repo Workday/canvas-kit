@@ -23,8 +23,8 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 
 ## Usage
 
-Use `.wdc-popup` to create a popup. Use `.wdc-popup-title` within `.wdc-popup` to style the popup's
-title. `p` elements also have adjusted margins.
+Use `.wdc-popup` to create a popup. The title and body content can be styled using
+`.wdc-popup-title` and `.wdc-popup-body`, respectively.
 
 ```html
 <div class="wdc-popup">
@@ -35,25 +35,22 @@ title. `p` elements also have adjusted margins.
 
 ### With Close Button
 
-```jsx
-import {xIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react';
-
+```html
 <div class="wdc-popup">
-  <div className="wdc-popup-close">
-    <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
-      <SystemIcon icon={xIcon} />
+  <div class="wdc-popup-close">
+    <button onClick="{this.onCloseClick}" class="wdc-btn-icon-plain">
+      <i class="wdc-icon" data-icon="x" data-category="system" />
     </button>
   </div>
   <div class="wdc-popup-title">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
-</div>;
+</div>
 ```
 
 ### Padding
 
-The default padding for the Popup is set to `32px`. You can adjust padding based on these classes
-`wdc-popup-no-padding` or `wdc-popup-padding-s` which sets the padding to `16px`
+The default padding for the popup is `32px`. Use `wdc-popup-padding-s` to set the padding to `16px`
+or `wdc-popup-no-padding` to set the padding to `0`.
 
 ```html
 <div class="wdc-popup wdc-popup-no-padding">
@@ -65,8 +62,9 @@ The default padding for the Popup is set to `32px`. You can adjust padding based
 ### Animation Origin Modifiers
 
 Eight directions are available. Each direction will change the the animation origin when the popup
-enters the DOM. Use origin classes in addition to `.wdc-popup`. When something triggers your popup,
-it is good practice to have the popup animate from whatever triggered it.
+enters the DOM. Use origin classes in addition to `.wdc-popup` to specify the direction. When
+something triggers your popup, it is good practice to have the popup animate from whatever triggered
+it.
 
 - `.wdc-popup-animation-origin-top-center`
 - `.wdc-popup-animation-origin-right-center`

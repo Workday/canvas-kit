@@ -1,33 +1,38 @@
-.wdc-popup {
+@mixin wdc-popup-common() {
   @include wdc-type();
   @include card-common();
   position: relative;
-  animation-duration: 150ms;
   margin: 0;
-  animation-timing-function: ease-out;
 
-  .wdc-popup-close {
+  &-padding-s {
+    padding: $wdc-spacing-s;
+  }
+
+  &-no-padding {
+    padding: 0;
+  }
+
+  &-close {
     position: absolute;
     right: $wdc-spacing-xs;
     top: $wdc-spacing-xs;
   }
 
-  .wdc-popup-title {
+  &-title {
     @include wdc-type-h3();
     margin-bottom: $wdc-spacing-m;
   }
 
-  .wdc-popup-body {
+  &-body {
     @include wdc-type-body();
   }
+}
+
+.wdc-popup {
+  @include wdc-popup-common();
+
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
 
   @include popupAnimationOrigins();
-}
-
-.wdc-popup.wdc-popup-no-padding {
-  padding: 0;
-}
-
-.wdc-popup.wdc-popup-padding-s {
-  padding: $wdc-spacing-s;
 }
