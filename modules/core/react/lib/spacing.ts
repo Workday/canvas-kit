@@ -4,7 +4,7 @@ import spacing, {
 } from '@workday/canvas-space-web';
 import {CSSObject} from 'create-emotion';
 
-export interface CanvasSpacingNumbers {
+export interface CanvasSpacingNumber {
   zero: number;
   xxxs: number;
   xxs: number;
@@ -21,7 +21,7 @@ function stripUnit(value: string): number {
   return parseInt(`${value}`.replace('px', ''), 10);
 }
 
-export const spacingNumbers: CanvasSpacingNumbers = {
+export const spacingNumbers: CanvasSpacingNumber = {
   zero: stripUnit(spacing.zero),
   xxxs: stripUnit(spacing.xxxs),
   xxs: stripUnit(spacing.xxs),
