@@ -6,16 +6,16 @@ import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
 import {userIcon} from '@workday/canvas-system-icons-web';
 
-export enum AvatarTheme {
+export enum AvatarVariant {
   Light,
   Dark,
 }
 
 export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * An AvatarTheme enum indicating which theme to use for the default state (Light vs. Dark)
+   * An AvatarVariant enum indicating which variant to use for the default state (Light vs. Dark)
    */
-  themeColor: AvatarTheme;
+  variant: AvatarVariant;
   /**
    * An SystemIconCircleSize enum or number value indicating the size of the avatar
    */
@@ -55,7 +55,7 @@ const Container = styled('button', {
       height: '100%',
     },
   },
-  ({themeColor, size, onClick}) => ({
+  ({variant, size, onClick}) => ({
     background: colors.soap200,
     height: size,
     width: size,
@@ -63,7 +63,7 @@ const Container = styled('button', {
     '&:not([disabled])': {
       '&:focus': {
         outline: 'none',
-        ...(themeColor === AvatarTheme.Dark ? focusRing(2, 2) : focusRing(2)),
+        ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
       },
     },
     ...hideMouseFocus,
@@ -71,22 +71,22 @@ const Container = styled('button', {
 );
 
 export default class Avatar extends React.Component<AvatarProps> {
-  static ThemeColor = AvatarTheme;
+  static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
 
   static defaultProps = {
-    themeColor: AvatarTheme.Light,
+    variant: AvatarVariant.Light,
     size: SystemIconCircleSize.m,
     altText: 'Avatar',
   };
 
   render() {
-    const {buttonRef, themeColor, altText, size, url, onClick, ...elemProps} = this.props;
+    const {buttonRef, variant, altText, size, url, onClick, ...elemProps} = this.props;
 
-    const background = themeColor === AvatarTheme.Dark ? colors.blueberry400 : colors.soap300;
+    const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
     return (
       <Container
-        themeColor={themeColor}
+        variant={variant}
         size={size}
         onClick={onClick}
         disabled={onClick ? false : true}

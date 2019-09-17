@@ -13,7 +13,7 @@ describe('Avatar Snapshots', () => {
   });
   test('renders a large, dark Avatar', () => {
     const component = renderer.create(
-      <Avatar size={Avatar.Size.xl} themeColor={Avatar.ThemeColor.Dark} />
+      <Avatar size={Avatar.Size.xl} variant={Avatar.Variant.Dark} />
     );
     expect(component).toMatchSnapshot();
   });
