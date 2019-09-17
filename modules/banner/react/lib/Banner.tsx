@@ -1,10 +1,14 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
-import {BannerVariant, BannerErrorType} from './types';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import {ErrorType, focusRing} from '@workday/canvas-kit-react-common';
+
+export enum BannerVariant {
+  Full,
+  Sticky,
+}
 
 export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -22,7 +26,7 @@ export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   /**
    * Color of the banner based on the type of the error
    */
-  error?: BannerErrorType;
+  error?: ErrorType;
   /**
    * Text on the right, call to action
    */
@@ -52,13 +56,13 @@ const BannerWrapper = styled('button')<BannerProps>(
     },
   },
   ({error, variant}) => ({
-    backgroundColor: error === BannerErrorType.Error ? colors.cinnamon500 : colors.cantaloupe400,
-    color: error === BannerErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400,
+    backgroundColor: error === ErrorType.Error ? colors.cinnamon500 : colors.cantaloupe400,
+    color: error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400,
     borderRadius:
       variant === BannerVariant.Sticky ? `${spacing.xxxs} 0 0 ${spacing.xxxs}` : spacing.xxxs,
     width: variant === BannerVariant.Sticky ? '222px' : '328px',
     '&:hover': {
-      backgroundColor: error === BannerErrorType.Error ? colors.cinnamon600 : colors.cantaloupe500,
+      backgroundColor: error === ErrorType.Error ? colors.cinnamon600 : colors.cantaloupe500,
     },
   })
 );
@@ -82,11 +86,11 @@ const BannerViewAll = styled('span')<BannerProps>(
 
 export default class Banner extends React.Component<BannerProps> {
   static Variant = BannerVariant;
-  static ErrorType = BannerErrorType;
+  static ErrorType = ErrorType;
 
   public static defaultProps = {
     actionText: 'View All',
-    error: BannerErrorType.Alert,
+    error: ErrorType.Alert,
     variant: BannerVariant.Full,
   };
 
@@ -94,9 +98,9 @@ export default class Banner extends React.Component<BannerProps> {
     const {label, onClick, actionText, variant, ...props} = this.props;
 
     const bannerIcon =
-      this.props.error === BannerErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
+      this.props.error === ErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
     const iconColor =
-      this.props.error === BannerErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;
+      this.props.error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;
     const iconSize = 24;
 
     return (
