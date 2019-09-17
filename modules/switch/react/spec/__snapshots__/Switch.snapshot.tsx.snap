@@ -12,16 +12,34 @@ exports[`Switch Snapshots renders a switch with custom prop 1`] = `
   height: 16px;
   width: 32px;
   margin: 0;
+  margin-left: 4px;
   border-radius: 999px;
-  cursor: pointer;
 }
 
 .emotion-0:focus,
 .emotion-0:active {
   outline: none;
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type {
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:active ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
 }
 
 .emotion-4 {
@@ -100,16 +118,34 @@ exports[`Switch Snapshots renders as expected 1`] = `
   height: 16px;
   width: 32px;
   margin: 0;
+  margin-left: 4px;
   border-radius: 999px;
-  cursor: pointer;
 }
 
 .emotion-0:focus,
 .emotion-0:active {
   outline: none;
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type {
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:active ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
 }
 
 .emotion-4 {
@@ -178,6 +214,41 @@ exports[`Switch Snapshots renders switch disabled checked 1`] = `
   width: 32px;
 }
 
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  margin-left: 4px;
+  border-radius: 999px;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type {
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:active ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
 .emotion-2 {
   width: 12px;
   height: 12px;
@@ -191,23 +262,6 @@ exports[`Switch Snapshots renders switch disabled checked 1`] = `
   -webkit-transition: transform 150ms ease;
   transition: transform 150ms ease;
   pointer-events: none;
-}
-
-.emotion-0 {
-  position: absolute;
-  height: 16px;
-  width: 32px;
-  margin: 0;
-  border-radius: 999px;
-  cursor: not-allowed;
-}
-
-.emotion-0:focus,
-.emotion-0:active {
-  outline: none;
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-4 {
@@ -263,6 +317,41 @@ exports[`Switch Snapshots renders switch disabled unchecked 1`] = `
   width: 32px;
 }
 
+.emotion-0 {
+  position: absolute;
+  height: 16px;
+  width: 32px;
+  margin: 0;
+  margin-left: 4px;
+  border-radius: 999px;
+}
+
+.emotion-0:focus,
+.emotion-0:active {
+  outline: none;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type {
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:active ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
 .emotion-2 {
   width: 12px;
   height: 12px;
@@ -276,23 +365,6 @@ exports[`Switch Snapshots renders switch disabled unchecked 1`] = `
   -webkit-transition: transform 150ms ease;
   transition: transform 150ms ease;
   pointer-events: none;
-}
-
-.emotion-0 {
-  position: absolute;
-  height: 16px;
-  width: 32px;
-  margin: 0;
-  border-radius: 999px;
-  cursor: not-allowed;
-}
-
-.emotion-0:focus,
-.emotion-0:active {
-  outline: none;
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
-  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-4 {
@@ -353,16 +425,34 @@ exports[`Switch Snapshots renders switch on 1`] = `
   height: 16px;
   width: 32px;
   margin: 0;
+  margin-left: 4px;
   border-radius: 999px;
-  cursor: pointer;
 }
 
 .emotion-0:focus,
 .emotion-0:active {
   outline: none;
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type {
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:active ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
 }
 
 .emotion-4 {
@@ -436,16 +526,34 @@ exports[`Switch Snapshots renders switch with id 1`] = `
   height: 16px;
   width: 32px;
   margin: 0;
+  margin-left: 4px;
   border-radius: 999px;
-  cursor: pointer;
 }
 
 .emotion-0:focus,
 .emotion-0:active {
   outline: none;
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type {
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:active ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
 }
 
 .emotion-4 {
@@ -523,16 +631,34 @@ exports[`Switch Snapshots renders switch with name and value 1`] = `
   height: 16px;
   width: 32px;
   margin: 0;
+  margin-left: 4px;
   border-radius: 999px;
-  cursor: pointer;
 }
 
 .emotion-0:focus,
 .emotion-0:active {
   outline: none;
-  -webkit-animation: animation-1h1pob6 100ms;
-  animation: animation-1h1pob6 100ms;
+}
+
+.emotion-0:focus ~ div:first-of-type,
+.emotion-0:active ~ div:first-of-type {
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:focus ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:focus ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
+}
+
+[data-whatinput="mouse"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="touch"] .emotion-0:active ~ div:first-of-type,
+[data-whatinput="pointer"] .emotion-0:active ~ div:first-of-type {
+  -webkit-animation: none;
+  animation: none;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 0px #0875e1;
 }
 
 .emotion-4 {
