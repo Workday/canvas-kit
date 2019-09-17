@@ -2,49 +2,64 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
+import {ControlledComponentWrapper} from '../../../../utils/storybook';
 
 import {Switch} from '../../../switch/react/index';
 import FormField from '../index';
 import README from '../../../switch/react/README.md';
 
-interface SwitchWrapperState {
-  isChecked: boolean;
-}
+const control = (child: React.ReactNode) => (
+  <ControlledComponentWrapper controlledProp={ControlledComponentWrapper.ControlledProp.Checked}>
+    {child}
+  </ControlledComponentWrapper>
+);
 
-class SwitchWrapper extends React.Component<{}, SwitchWrapperState> {
-  public constructor(props: {}) {
-    super(props);
-    this.state = {
-      isChecked: true,
-    };
-    this.handleCheck = this.handleCheck.bind(this);
-  }
-
-  public render() {
-    return (
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <Switch
-          disabled={false}
-          checked={this.state.isChecked}
-          onChange={this.handleCheck}
-          id="my-switch-field"
-        />
-      </div>
-    );
-  }
-
-  private handleCheck() {
-    this.setState({isChecked: !this.state.isChecked});
-  }
-}
-
-storiesOf('Form Field/Switch', module)
+storiesOf('Form Field/Switch/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <h1 className="section-label">Switch</h1>
-      <FormField label="My Switch Field" inputId="my-switch-field">
-        <SwitchWrapper />
-      </FormField>
+      <div style={{textAlign: 'left', marginBottom: '24px'}}>
+        <FormField label="Label" inputId="my-switch-field">
+          {control(<Switch />)}
+        </FormField>
+      </div>
+    </div>
+  ))
+  .add('Disabled', () => (
+    <div className="story">
+      <div style={{textAlign: 'left', marginBottom: '24px'}}>
+        <FormField label="Label" inputId="my-switch-field">
+          {control(<Switch disabled={true} />)}
+        </FormField>
+      </div>
+    </div>
+  ));
+
+storiesOf('Form Field/Switch/Left Label', module)
+  .addDecorator(withReadme(README))
+  .add('Default', () => (
+    <div className="story">
+      <div style={{textAlign: 'left', marginBottom: '24px'}}>
+        <FormField
+          label="Label"
+          inputId="my-switch-field"
+          labelPosition={FormField.LabelPosition.Left}
+        >
+          {control(<Switch />)}
+        </FormField>
+      </div>
+    </div>
+  ))
+  .add('Disabled', () => (
+    <div className="story">
+      <div style={{textAlign: 'left', marginBottom: '24px'}}>
+        <FormField
+          label="Label"
+          inputId="my-switch-field"
+          labelPosition={FormField.LabelPosition.Left}
+        >
+          {control(<Switch disabled={true} />)}
+        </FormField>
+      </div>
     </div>
   ));
