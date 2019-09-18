@@ -1,16 +1,16 @@
 export interface CanvasBorderRadiusNumber {
   zero: number;
-  s: number;
-  m: number;
-  l: number;
+  s: string;
+  m: string;
+  l: string;
   circle: string;
 }
 
 export const borderRadius: CanvasBorderRadiusNumber = {
   zero: 0,
-  s: 2,
-  m: 4,
-  l: 8,
+  s: '2px',
+  m: '4px',
+  l: '8px',
   circle: '100%',
 };
 
