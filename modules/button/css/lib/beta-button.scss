@@ -1,0 +1,140 @@
+@mixin wdc-btn-beta() {
+  @include wdc-type-body();
+  @include wdc-type-variant-btn();
+  display: inline-block;
+  text-decoration: none;
+  min-width: 96px;
+  max-width: $wdc-btn-max-width-l;
+  height: $wdc-btn-height-l;
+  padding: 0 14px;
+  background-color: $wdc-btn-bg;
+  border: none;
+  color: $wdc-btn-color;
+  border-radius: 999px;
+  transition: 0.2s background, 0.2s border-color, 0.2s box-shadow;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  box-sizing: border-box;
+  vertical-lign: middle;
+  border: 2px solid transparent;
+  font-weight: 700;
+
+  &.wdc-btn-hover,
+  &:hover {
+    background-color: $wdc-btn-bg-hover;
+  }
+
+  &.wdc-btn-active,
+  &:active {
+    @include wdc-btn-box-shadow($wdc-btn-bg-primary-beta-focus-ring);
+    background-color: $wdc-btn-bg-active;
+  }
+
+  &:focus,
+  &.wdc-btn-focus {
+    background-color: $wdc-btn-bg-focus;
+    box-shadow: $wdc-btn-bg-primary-beta-focus-ring;
+    outline: none;
+  }
+
+  &.wdc-btn-disabled,
+  &:disabled {
+    background-color: $wdc-btn-bg-disabled;
+    color: $wdc-btn-color-disabled;
+    cursor: default;
+  }
+
+  &.wdc-btn-large {
+    min-width: 112px;
+    height: 48px;
+    padding: 0 18px;
+  }
+
+  &.wdc-btn-small {
+    height: 32px;
+    padding: 0 14px;
+    min-width: 80px;
+    max-width: $wdc-btn-max-width-s;
+    -webkit-font-smoothing: subpixel-antialiased;
+
+    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
+    &:hover:not([disabled]):not(.wdc-btn-disabled) {
+      background-color: $wdc-color-soap-500;
+    }
+
+    &.wdc-btn-active:not([disabled]):not(.wdc-btn-disabled),
+    &:active:not([disabled]):not(.wdc-btn-disabled) {
+      background-color: $wdc-color-french-vanilla-100;
+      background: $wdc-color-french-vanilla-100;
+    }
+
+    &.wdc-btn-focus:not([disabled]):not(.wdc-btn-disabled),
+    &:focus:not([disabled]):not(.wdc-btn-disabled) {
+      box-shadow: 0 0 0 2px $wdc-btn-bg-focus;
+    }
+  }
+
+  &.wdc-btn-primary {
+    background-color: $wdc-btn-bg-primary-beta;
+    box-shadow: none;
+    color: $wdc-btn-color-primary;
+
+    &.wdc-btn-hover,
+    &:hover,
+    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
+    &:hover:not([disabled]):not(.wdc-btn-disabled) {
+      background-color: $wdc-btn-bg-primary-beta-hover;
+      box-shadow: none;
+    }
+
+    &.wdc-btn-active,
+    &:active {
+      background-color: $wdc-btn-bg-primary-beta-active;
+    }
+
+    &:focus,
+    &.wdc-btn-focus {
+      background-color: $wdc-btn-bg-primary-beta-focus;
+      box-shadow: $wdc-btn-bg-primary-beta-focus-ring;
+    }
+
+    &.wdc-btn-disabled,
+    &:disabled {
+      box-shadow: none;
+      background-color: $wdc-btn-bg-primary-beta-disabled;
+      color: $wdc-btn-color-primary;
+    }
+  }
+
+  &.wdc-btn-delete {
+    background-color: $wdc-btn-bg-delete-beta;
+    color: white;
+
+    &.wdc-btn-hover,
+    &:hover {
+      background-color: $wdc-btn-bg-delete-beta-hover;
+    }
+
+    &.wdc-btn-active,
+    &:active {
+      background-color: #80160e;
+    }
+
+    &:focus,
+    &.wdc-btn-focus {
+      color: $wdc-btn-color-delete-hover;
+      background-color: $wdc-btn-bg-delete-beta;
+    }
+
+    &.wdc-btn-disabled,
+    &:disabled {
+      color: $wdc-btn-color-delete-disabled;
+      background-color: $wdc-btn-bg-delete-disabled;
+    }
+  }
+}
+
+.wdc-btn-beta {
+  @include wdc-btn-beta();
+}
