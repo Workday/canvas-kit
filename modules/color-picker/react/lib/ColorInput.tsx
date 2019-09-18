@@ -6,7 +6,7 @@ import {
   GrowthBehavior,
   ErrorType,
 } from '@workday/canvas-kit-react-common';
-import {colors, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
+import {colors, borderRadius, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
 import {css} from 'emotion';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
@@ -76,7 +76,7 @@ const SwatchTile = styled('div')({
   marginTop: '10px', // Fix vertical alignment on IE11
   boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.25)',
   pointerEvents: 'none',
-  borderRadius: '2px',
+  borderRadius: borderRadius.s,
 });
 
 const swatchCheckIcon = css({
