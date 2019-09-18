@@ -153,13 +153,12 @@ EOF
 # Create README.md
 readme="$reactPath/README.md"
 echo -e "Creating ${CYAN}$readme${NC}"
-if [ $stable ] ; then
 cat > $readme << EOF
 # Canvas Kit $upperName
 EOF
-else
+if [ !$stable ] ; then
 cat > $readme << EOF
-# Canvas Kit $upperName
+# Canvas Kit CSS $upperName
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
   <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
@@ -171,21 +170,12 @@ fi
 tsconfig="$reactPath/tsconfig.json"
 echo -e "Creating ${CYAN}$tsconfig${NC}"
 
-if [ $stable ] ; then
 cat > $tsconfig << EOF
 {
   "extends": "${rootPath}/tsconfig.json",
   "exclude": ["node_modules", "ts-tmp", "dist", "spec", "stories"]
 }
 EOF
-else
-cat > $tsconfig << EOF
-{
-  "extends": "${rootPath}/tsconfig.json",
-  "exclude": ["node_modules", "ts-tmp", "dist", "spec", "stories"]
-}
-EOF
-fi
 
 # Create tsconfig.cjs.json
 tsconfig="$reactPath/tsconfig.cjs.json"
@@ -309,11 +299,10 @@ EOF
 readme="$cssPath/README.md"
 echo -e "Creating ${CYAN}$readme${NC}"
 
-if [ $stable ] ; then
 cat > $readme << EOF
 # Canvas Kit CSS $upperName
 EOF
-else
+if [ !$stable ] ; then
 cat > $readme << EOF
 # Canvas Kit CSS $upperName
 
