@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
-import {colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
+import { ErrorType, focusRing, mouseFocusBehavior } from '@workday/canvas-kit-react-common';
+import { borderRadius, colors, inputColors, depth, spacing } from '@workday/canvas-kit-react-core';
 
 export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
@@ -49,10 +49,10 @@ const SwitchInput = styled('input')<SwitchProps>(
       },
     }),
   },
-  ({disabled}) => ({
+  ({ disabled }) => ({
     cursor: disabled ? 'not-allowed' : 'pointer',
   }),
-  ({error}) => {
+  ({ error }) => {
     let errorRingColor;
     let errorRingBorderColor = 'transparent';
 
@@ -102,19 +102,19 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     marginTop: spacing.xxs,
     width: switchWidth,
     height: switchHeight,
-    borderRadius: 999,
+    borderRadius: borderRadius.circle,
     padding: '0px 2px',
     transition: 'background-color 200ms ease',
   },
-  ({checked, disabled}) => ({
+  ({ checked, disabled }) => ({
     backgroundColor: disabled ? colors.soap400 : checked ? colors.blueberry500 : colors.licorice200,
   })
 );
 
-const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({checked}) => ({
+const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({ checked }) => ({
   width: circleSize,
   height: circleSize,
-  borderRadius: 999,
+  borderRadius: borderRadius.circle,
   ...depth[1],
   backgroundColor: colors.frenchVanilla100,
   transform: checked ? `translateX(${translateLength})` : 'translateX(0)',
@@ -129,7 +129,7 @@ export default class Switch extends React.Component<SwitchProps> {
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {checked, disabled, id, inputRef, onChange, value, ...elemProps} = this.props;
+    const { checked, disabled, id, inputRef, onChange, value, ...elemProps } = this.props;
 
     return (
       <SwitchContainer>
