@@ -6,17 +6,22 @@ import withReadme from 'storybook-readme/with-readme';
 import {Label, Hint} from '../index';
 import README from '../README.md';
 
-storiesOf('Form Field', module)
+storiesOf('Form Field/Label', module)
   .addDecorator(withReadme(README))
-  .add('Label', () => (
+  .add('Default', () => (
     <div className="story">
       <Label>Label</Label>
     </div>
   ))
-  .add('Hint', () => (
+  .add('Required', () => (
     <div className="story">
-      <Hint>Hint</Hint>
-      <Hint error={Hint.ErrorType.Error}>Hint</Hint>
-      <Hint error={Hint.ErrorType.Alert}>Hint</Hint>
+      <Label required={true}>Label</Label>
     </div>
   ));
+storiesOf('Form Field/Hint', module).add('Hint', () => (
+  <div className="story">
+    <Hint>Hint</Hint>
+    <Hint error={Hint.ErrorType.Error}>Hint</Hint>
+    <Hint error={Hint.ErrorType.Alert}>Hint</Hint>
+  </div>
+));

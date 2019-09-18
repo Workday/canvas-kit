@@ -38,18 +38,6 @@ storiesOf('Form Field/Select/Top Label', module)
       )}
     </FormField>
   ))
-  .add('Required', () => (
-    <FormField label="Label" inputId="select-required" required={true}>
-      {controlComponent(
-        <Select name="contact">
-          <SelectOption value="email" label="E-mail" />
-          <SelectOption value="phone" label="Phone" />
-          <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
-          <SelectOption value="mail" label="Mail" />
-        </Select>
-      )}
-    </FormField>
-  ))
   .add('Alert', () => (
     <FormField
       label="Label"
@@ -137,23 +125,6 @@ storiesOf('Form Field/Select/Left Label', module)
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-disabled">
       {controlComponent(
         <Select name="contact" disabled={true}>
-          <SelectOption value="email" label="E-mail" />
-          <SelectOption value="phone" label="Phone" />
-          <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
-          <SelectOption value="mail" label="Mail" />
-        </Select>
-      )}
-    </FormField>
-  ))
-  .add('Required', () => (
-    <FormField
-      labelPosition={FormField.LabelPosition.Left}
-      label="Label"
-      inputId="select-required"
-      required={true}
-    >
-      {controlComponent(
-        <Select name="contact">
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />

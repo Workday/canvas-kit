@@ -29,22 +29,6 @@ storiesOf('Form Field/Radio/Top Label/Radio Group', module)
       </div>
     </div>
   ))
-  .add('Required', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField label="Label" useFieldset={true} required={true}>
-          <ControlledComponentWrapper>
-            <RadioGroup name="contact">
-              <Radio id="1" value="email" label="E-mail" />
-              <Radio id="2" value="phone" label="Phone" />
-              <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-              <Radio id="4" value="mail" label="Mail" />
-            </RadioGroup>
-          </ControlledComponentWrapper>
-        </FormField>
-      </div>
-    </div>
-  ))
   .add('Alert', () => (
     <div className="story">
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
@@ -113,27 +97,6 @@ storiesOf('Form Field/Radio/Left Label/Radio Group', module)
     <div className="story">
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField label="Label" useFieldset={true} labelPosition={FormField.LabelPosition.Left}>
-          <ControlledComponentWrapper>
-            <RadioGroup name="contact">
-              <Radio id="1" value="email" label="E-mail" />
-              <Radio id="2" value="phone" label="Phone" />
-              <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-              <Radio id="4" value="mail" label="Mail" />
-            </RadioGroup>
-          </ControlledComponentWrapper>
-        </FormField>
-      </div>
-    </div>
-  ))
-  .add('Required', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          labelPosition={FormField.LabelPosition.Left}
-          label="Label"
-          useFieldset={true}
-          required={true}
-        >
           <ControlledComponentWrapper>
             <RadioGroup name="contact">
               <Radio id="1" value="email" label="E-mail" />

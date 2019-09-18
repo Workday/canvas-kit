@@ -37,15 +37,6 @@ storiesOf('Form Field/Checkbox/Top Label', module)
       </div>
     </div>
   ))
-  .add('Required', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField label="Label" inputId="required-checkbox-field" required={true}>
-          {control(<Checkbox id="1" label="Checkbox option" />)}
-        </FormField>
-      </div>
-    </div>
-  ))
   .add('Alert', () => (
     <div className="story">
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
@@ -101,20 +92,6 @@ storiesOf('Form Field/Checkbox/Left Label', module)
           labelPosition={FormField.LabelPosition.Left}
         >
           {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
-        </FormField>
-      </div>
-    </div>
-  ))
-  .add('Required', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          labelPosition={FormField.LabelPosition.Left}
-          label="Label"
-          inputId="required-checkbox-field"
-          required={true}
-        >
-          {control(<Checkbox id="1" label="Checkbox option" />)}
         </FormField>
       </div>
     </div>

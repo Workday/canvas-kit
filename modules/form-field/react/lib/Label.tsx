@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {inputColors, spacing, type} from '@workday/canvas-kit-react-core';
+import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {
@@ -16,9 +16,9 @@ const labelStyles = [
     ...type.variant.label,
     padding: 0,
   },
-  (props: LabelProps) => {
+  ({labelPosition, required}: {labelPosition: FormFieldLabelPosition; required?: boolean}) => {
     return {
-      ...(props.labelPosition === FormFieldLabelPosition.Left
+      ...(labelPosition === FormFieldLabelPosition.Left
         ? {
             display: 'inline-block',
             verticalAlign: 'top',
@@ -30,14 +30,13 @@ const labelStyles = [
             display: 'block',
             marginBottom: spacing.xxxs,
           }),
-      ...(props.required
+      ...(required
         ? {
             ':after': {
               content: '"*"',
-              color: inputColors.error.border,
+              color: colors.cinnamon500,
               fontSize: '16px',
               fontWeight: 400,
-              position: 'relative' as 'relative',
               top: '1px',
               paddingLeft: '2px',
             },
