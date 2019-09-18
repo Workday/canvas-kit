@@ -1,21 +1,18 @@
 # Canvas Kit Labs
 
-This is a group of unstable/work in progress components.
-
-Since we have a rather rigorous process for getting components in at a production level, it can be
-valuable to make them available earlier for teams who need them during development. Many of our
-components are contributions from internal product teams. While these components can suit the
-contributing product's use case, it takes time to iterate on the API/functionality as we evaluate
-them in a more global context. The Labs modules allow us to do that as needed.
+This is a group of unstable/work in progress components. Canvas Kit Labs is an incubator for new and
+experimental components. Since we have a rather rigorous process for getting components in at a
+production level, it can be valuable to make them available earlier while we continuously iterate on
+the API/functionality. The Labs modules allow us to do that as needed.
 
 ## Breaking Changes
 
 Due to the nature of this bundle of components, we will be continuously iterating, likely making
 breaking changes. The goal of these module is to work unconstrained by our design system's semantic
-versioning. This means that **breaking changes can be deployed to labs modules at any time and it
-will not trigger a major version bump across our other modules**. Since we use a fixed version
-number for all components, all changes/additions in this bundle will never result in a major version
-bump across our component library.
+versioning. This means that **breaking changes can be deployed to Labs modules at any time and it
+will not trigger a major version bump across our other modules**. Regardless of the fact that we use
+a fixed version number for all components, all changes/additions in this bundle will never result in
+a major version bump across our component library.
 
 **By consuming any of these modules, you are indicating that you are prepared for the consequences
 of updating and ultimately performing a migration when components are promoted to a stable
