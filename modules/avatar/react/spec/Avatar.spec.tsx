@@ -5,22 +5,10 @@ import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
 
 describe('Avatar', () => {
-  const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
-  });
-
-  test('render a button with id', () => {
+  test('render a div with id', () => {
     const component = mount(<Avatar id="myAvatar" />);
-    expect(component.find('button').props().id).toBe('myAvatar');
-    component.unmount();
-  });
-
-  test('should call a callback function', () => {
-    const component = mount(<Avatar onClick={cb} />);
-    const avatar = component.find('button');
-    avatar.simulate('click');
-    expect(cb.mock.calls.length).toBe(1);
+    const container = component.at(0).getDOMNode();
+    expect(container.getAttribute('id')).toBe('myAvatar');
     component.unmount();
   });
 
@@ -33,14 +21,9 @@ describe('Avatar', () => {
 });
 
 describe('Avatar Accessibility', () => {
-  const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
-  });
-
-  test('Avatar should be using HTML5 <button> tag', () => {
+  test('Avatar should be using <div> tag', () => {
     const component = mount(<Avatar />);
-    expect(component.getDOMNode().tagName.toLowerCase()).toEqual('button');
+    expect(component.getDOMNode().tagName.toLowerCase()).toEqual('div');
     component.unmount();
   });
 

@@ -1,17 +1,12 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import isPropValid from '@emotion/is-prop-valid';
+import Avatar, {AvatarVariant} from './Avatar';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
-import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
-import {userIcon} from '@workday/canvas-system-icons-web';
+import {SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
 
-export enum AvatarVariant {
-  Light,
-  Dark,
-}
-
-export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface AvatarButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * An AvatarVariant enum indicating which variant to use for the default state (Light vs. Dark)
    */
@@ -40,7 +35,7 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const Container = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Omit<AvatarProps, 'altText'>>(
+})<Omit<AvatarButtonProps, 'altText'>>(
   {
     display: 'flex',
     alignItems: 'center',
@@ -50,10 +45,6 @@ const Container = styled('button', {
     borderRadius: '100%',
     boxSizing: 'border-box',
     overflow: 'hidden',
-    '& img': {
-      width: '100%',
-      height: '100%',
-    },
   },
   ({variant, size, onClick}) => ({
     background: colors.soap200,
@@ -70,7 +61,7 @@ const Container = styled('button', {
   })
 );
 
-export default class AvatarButton extends React.Component<AvatarProps> {
+export default class AvatarButton extends React.Component<AvatarButtonProps> {
   static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
 
@@ -83,7 +74,6 @@ export default class AvatarButton extends React.Component<AvatarProps> {
   render() {
     const {buttonRef, variant, altText, size, url, onClick, ...elemProps} = this.props;
 
-    const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
     return (
       <Container
         variant={variant}
@@ -94,11 +84,7 @@ export default class AvatarButton extends React.Component<AvatarProps> {
         aria-label={altText}
         {...elemProps}
       >
-        {url ? (
-          <img src={url} alt={altText} />
-        ) : (
-          <SystemIconCircle icon={userIcon} background={background} size={size} />
-        )}
+        <Avatar variant={variant} size={size} url={url} aria-label={altText} />
       </Container>
     );
   }
