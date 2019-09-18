@@ -1,6 +1,7 @@
 import * as canvasColorsWeb from '@workday/canvas-colors-web';
 
 import beta_type from './lib/beta_type';
+import {borderRadius} from './lib/radius';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
 import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
 import InputProvider from './lib/InputProvider';
@@ -30,6 +31,7 @@ const canvas = {
 export * from './lib/TypeWrappers';
 export * from '@workday/canvas-colors-web';
 export {
+  borderRadius,
   colors,
   depth,
   spacing,
