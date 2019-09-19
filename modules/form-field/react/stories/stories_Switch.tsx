@@ -14,6 +14,9 @@ const control = (child: React.ReactNode) => (
   </ControlledComponentWrapper>
 );
 
+const hintText = 'Helpful text goes here.';
+const hintId = 'error-desc-id';
+
 storiesOf('Form Field/Switch/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -30,6 +33,36 @@ storiesOf('Form Field/Switch/Top Label', module)
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField label="Label" inputId="my-switch-field">
           {control(<Switch disabled={true} />)}
+        </FormField>
+      </div>
+    </div>
+  ))
+  .add('Alert', () => (
+    <div className="story">
+      <div style={{textAlign: 'left', marginBottom: '24px'}}>
+        <FormField
+          label="Label"
+          inputId="my-switch-alert"
+          error={FormField.ErrorType.Alert}
+          hintText={hintText}
+          hintId={hintId}
+        >
+          {control(<Switch />)}
+        </FormField>
+      </div>
+    </div>
+  ))
+  .add('Error', () => (
+    <div className="story">
+      <div style={{textAlign: 'left', marginBottom: '24px'}}>
+        <FormField
+          label="Label"
+          inputId="my-switch-error"
+          error={FormField.ErrorType.Error}
+          hintText={hintText}
+          hintId={hintId}
+        >
+          {control(<Switch />)}
         </FormField>
       </div>
     </div>
@@ -59,6 +92,38 @@ storiesOf('Form Field/Switch/Left Label', module)
           labelPosition={FormField.LabelPosition.Left}
         >
           {control(<Switch disabled={true} />)}
+        </FormField>
+      </div>
+    </div>
+  ))
+  .add('Alert', () => (
+    <div className="story">
+      <div style={{textAlign: 'left', marginBottom: '24px'}}>
+        <FormField
+          label="Label"
+          inputId="my-switch-alert"
+          error={FormField.ErrorType.Alert}
+          hintText={hintText}
+          hintId={hintId}
+          labelPosition={FormField.LabelPosition.Left}
+        >
+          {control(<Switch />)}
+        </FormField>
+      </div>
+    </div>
+  ))
+  .add('Error', () => (
+    <div className="story">
+      <div style={{textAlign: 'left', marginBottom: '24px'}}>
+        <FormField
+          label="Label"
+          inputId="my-switch-error"
+          error={FormField.ErrorType.Error}
+          hintText={hintText}
+          hintId={hintId}
+          labelPosition={FormField.LabelPosition.Left}
+        >
+          {control(<Switch />)}
         </FormField>
       </div>
     </div>
