@@ -55,7 +55,6 @@ exports[`Label Snapshots renders required marking 1`] = `
   font-weight: 400;
   top: 1px;
   padding-left: 2px;
-  padding-right: 2px;
   -webkit-text-decoration: unset;
   text-decoration: unset;
 }
