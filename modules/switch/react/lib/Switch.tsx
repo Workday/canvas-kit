@@ -13,22 +13,23 @@ export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement>
   error?: ErrorType;
 }
 
-const circleSize = 12;
-const switchWidth = 32;
-const switchHeight = 16;
-const translateLength = switchWidth - switchHeight;
+const circleSize = spacing.xs;
+const switchWidth = spacing.l;
+const switchHeight = spacing.s;
+const switchTapArea = spacing.l;
+const translateLength = spacing.s;
 
 const SwitchContainer = styled('div')({
   position: 'relative',
-  height: switchHeight,
-  width: switchWidth,
+  height: switchTapArea,
+  width: switchTapArea,
 });
 
 const SwitchInput = styled('input')<SwitchProps>(
   {
     position: 'absolute',
-    height: switchHeight,
-    width: switchWidth,
+    height: switchTapArea,
+    width: switchTapArea,
     margin: 0,
     marginLeft: spacing.xxxs,
     borderRadius: 999,
@@ -97,6 +98,7 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
+    marginTop: spacing.xxs,
     width: switchWidth,
     height: switchHeight,
     borderRadius: 999,
@@ -114,7 +116,7 @@ const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({checked}) => 
   borderRadius: 999,
   ...depth[1],
   backgroundColor: colors.frenchVanilla100,
-  transform: checked ? `translateX(${translateLength}px)` : 'translateX(0)',
+  transform: checked ? `translateX(${translateLength})` : 'translateX(0)',
   transition: 'transform 150ms ease',
   pointerEvents: 'none',
 }));
