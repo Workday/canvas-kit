@@ -1,7 +1,7 @@
 {
   "name": "@workday/canvas-kit-css",
   "version": "3.0.0-alpha.6",
-  "description": "The button css for canvas-kit-css",
+  "description": "The parent module that contains all Workday Canvas Kit CSS components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "files": [
