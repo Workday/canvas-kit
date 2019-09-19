@@ -23,6 +23,7 @@ const Container = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<Pick<AvatarButtonProps, 'variant' | 'size' | 'onClick'>>(
   {
+    display: 'flex',
     padding: 0,
     border: 0,
     borderRadius: '100%',

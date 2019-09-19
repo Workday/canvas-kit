@@ -2,6 +2,10 @@
 
 exports[`AvatarButton Snapshots renders a large AvatarButton 1`] = `
 .emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding: 0;
   border: 0;
   border-radius: 100%;
@@ -147,6 +151,10 @@ exports[`AvatarButton Snapshots renders a large AvatarButton 1`] = `
 
 exports[`AvatarButton Snapshots renders a large avatar with a photo 1`] = `
 .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding: 0;
   border: 0;
   border-radius: 100%;
@@ -247,6 +255,10 @@ exports[`AvatarButton Snapshots renders a large avatar with a photo and a button
 }
 
 .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding: 0;
   border: 0;
   border-radius: 100%;
@@ -320,6 +332,10 @@ exports[`AvatarButton Snapshots renders a large, dark AvatarButton 1`] = `
 }
 
 .emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding: 0;
   border: 0;
   border-radius: 100%;
@@ -437,6 +453,10 @@ exports[`AvatarButton Snapshots renders a large, dark AvatarButton 1`] = `
 
 exports[`AvatarButton Snapshots renders an AvatarButton with a photo 1`] = `
 .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding: 0;
   border: 0;
   border-radius: 100%;
@@ -509,6 +529,10 @@ exports[`AvatarButton Snapshots renders an AvatarButton with a photo 1`] = `
 
 exports[`AvatarButton Snapshots renders an avatar with an aria label and an alt text 1`] = `
 .emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding: 0;
   border: 0;
   border-radius: 100%;
@@ -581,6 +605,10 @@ exports[`AvatarButton Snapshots renders an avatar with an aria label and an alt 
 
 exports[`AvatarButton Snapshots renders as expected 1`] = `
 .emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding: 0;
   border: 0;
   border-radius: 100%;
