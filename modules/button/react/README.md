@@ -2,18 +2,18 @@
 
 Clickable button elements that extend the native `<button>` element with Canvas styling.
 
-#### Disclaimer
+#### DEPRECATION WARNING
 
-> The documentation below is for the current Canvas buttons. The next iteration of our buttons have
-> been implemented in this module, but will not be documented until we're ready to roll them out
-> across all our products. We want to discourage their use until everyone can uptake them
-> simultaneously for consistencies sake.
+> We are rolling out our next iteration of our Buttons and will be deprecating the old ones on (this
+> time frame). The biggest change is with regards to colors and styling, but the behavior should
+> remain the same. Also, we've added a deprecation warning to the old buttons, and you must opt in
+> to them if you want to continue using them.
 >
 > The new buttons include new `ButtonVariant`, icon support, and the `ButtonSize` equate to
 > different button and font sizes.
 >
-> **If you would like to use the new buttons, please consult the design systems team and get
-> approval first**
+> **If you would like to use the old buttons, you must change your imports. For more information,
+> refer below.**
 
 ## Installation
 
@@ -27,7 +27,10 @@ or
 yarn add @workday/canvas-kit-react-button
 ```
 
-## Usage
+## Usage for new Button
+
+You will automatically be opt in to the new Buttons without changing your imports. Note, we are
+still suppoting the import for `beta_Button` as well.
 
 ```tsx
 import * as React from 'react';
@@ -101,6 +104,21 @@ Default: `false`
 #### `buttonRef: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
+
+## Deprecated Buttons
+
+The old buttons (orange primary, secondary, and delete) are still available, but under
+`deprecated_Button`. There's also a `@deprecated` warning on its' types and the component itself
+suggesting to migrate to the new buttons. For more information on how to migrate, refer to (insert
+lint to migration guide). These buttons will be deprecated on (insert this date). You can find these
+buttons under the `Deprecated` folder in storybook.
+
+```tsx
+import * as React from 'react';
+import {deprecated_Button as Button} from '@workday/canvas-kit-react-button';
+
+<Button>Button Label</Button>;
+```
 
 # Icon Button
 

@@ -5,8 +5,6 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {labelDataBaseStyles} from './ButtonStyles';
 
-// TODO (beta button): add README for new buttons when merging
-
 export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -53,7 +51,6 @@ export default class Button extends React.Component<ButtonProps> {
   public render() {
     const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
-    // TODO (beta button): Move this logic back into Button compponent
     // Restrict Hightlight button to only being sized Large, Medium with an Icon
     if (variant === ButtonVariant.Highlight && (icon === undefined || size === ButtonSize.Small)) {
       return null;
@@ -74,7 +71,9 @@ export default class Button extends React.Component<ButtonProps> {
     );
   }
 }
-
+/**
+ * @deprecated This is now deprecated, use Button component
+ */
 // tslint:disable:class-name
 export class deprecated_Button extends React.Component<ButtonProps<DeprecatedButtonVariant>> {
   public static Variant = DeprecatedButtonVariant;
@@ -86,21 +85,13 @@ export class deprecated_Button extends React.Component<ButtonProps<DeprecatedBut
     grow: false,
   };
 
+  public componentDidMount() {
+    console.warn('This component is now deprecated, consider using the new Button component');
+  }
+
   public render() {
     const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
-    return (
-      <ButtonBaseCon variant={variant} size={size} innerRef={buttonRef} {...elemProps}>
-        {icon && <ButtonLabelIcon size={size} icon={icon} />}
-        <ButtonBaseLabel size={size} variant={variant}>
-          {children}
-        </ButtonBaseLabel>
-        {dataLabel && (
-          <ButtonLabelData size={size} className={labelDataBaseStyles.classname}>
-            {dataLabel}
-          </ButtonLabelData>
-        )}
-      </ButtonBaseCon>
-    );
+    return <Button {...this.props} {...elemProps} />;
   }
 }
