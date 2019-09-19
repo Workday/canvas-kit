@@ -18,10 +18,12 @@ storiesOf('Form Field/Label', module)
       <Label required={true}>Label</Label>
     </div>
   ));
-storiesOf('Form Field/Hint', module).add('Hint', () => (
-  <div className="story">
-    <Hint>Hint</Hint>
-    <Hint error={Hint.ErrorType.Error}>Hint</Hint>
-    <Hint error={Hint.ErrorType.Alert}>Hint</Hint>
-  </div>
-));
+storiesOf('Form Field', module)
+  .addDecorator(withReadme(README))
+  .add('Hint', () => (
+    <div className="story">
+      <Hint>Hint</Hint>
+      <Hint error={Hint.ErrorType.Error}>Hint</Hint>
+      <Hint error={Hint.ErrorType.Alert}>Hint</Hint>
+    </div>
+  ));

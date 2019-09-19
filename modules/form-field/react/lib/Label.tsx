@@ -16,7 +16,7 @@ const labelStyles = [
     ...type.variant.label,
     padding: 0,
   },
-  ({labelPosition, required}: {labelPosition: FormFieldLabelPosition; required?: boolean}) => {
+  ({labelPosition}: {labelPosition: FormFieldLabelPosition}) => {
     return {
       ...(labelPosition === FormFieldLabelPosition.Left
         ? {
@@ -30,21 +30,18 @@ const labelStyles = [
             display: 'block',
             marginBottom: spacing.xxxs,
           }),
-      ...(required
-        ? {
-            ':after': {
-              content: '"*"',
-              color: colors.cinnamon500,
-              fontSize: '16px',
-              fontWeight: 400,
-              top: '1px',
-              paddingLeft: '2px',
-            },
-          }
-        : {}),
     };
   },
 ];
+
+const RequiredAstrisk = styled('abbr')({
+  color: colors.cinnamon500,
+  fontSize: '16px',
+  fontWeight: 400,
+  top: '1px',
+  paddingLeft: '2px',
+  textDecoration: 'unset',
+});
 
 // Used inside the fieldset component instead of a label for accessible radio groups
 const LegendComponent = styled('legend')<LabelProps>(...labelStyles);
@@ -60,7 +57,22 @@ export default class Label extends React.Component<LabelProps> {
 
   public render() {
     const {...props} = this.props;
-
-    return <>{props.isLegend ? <LegendComponent {...props} /> : <LabelComponent {...props} />}</>;
+    const children = !props.required
+      ? props.children
+      : [
+          props.children,
+          <RequiredAstrisk key={'0'} title="required">
+            *
+          </RequiredAstrisk>,
+        ];
+    return (
+      <>
+        {props.isLegend ? (
+          <LegendComponent {...props} children={children} />
+        ) : (
+          <LabelComponent {...props} children={children} />
+        )}
+      </>
+    );
   }
 }
