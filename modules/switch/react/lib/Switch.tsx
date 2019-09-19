@@ -48,7 +48,10 @@ const SwitchInput = styled('input')<SwitchProps>(
       },
     }),
   },
-  ({error, disabled}) => {
+  ({disabled}) => ({
+    cursor: disabled ? 'not-allowed' : 'pointer',
+  }),
+  ({error}) => {
     let errorRingColor;
     let errorRingBorderColor = 'transparent';
 
@@ -62,9 +65,6 @@ const SwitchInput = styled('input')<SwitchProps>(
     }
 
     const styles = {
-      '&': {
-        cursor: disabled ? 'not-allowed' : 'pointer',
-      },
       '& ~ div:first-of-type': {
         boxShadow: `
           0 0 0 2px ${colors.frenchVanilla100},
