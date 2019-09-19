@@ -2,19 +2,6 @@
 
 Clickable button elements that extend the native `<button>` element with Canvas styling.
 
-#### DEPRECATION WARNING
-
-> We are rolling out our next iteration of our Buttons and will be deprecating the old ones on (this
-> time frame). The biggest change is with regards to colors and styling, but the behavior should
-> remain the same. Also, we've added a deprecation warning to the old buttons, and you must opt in
-> to them if you want to continue using them.
->
-> The new buttons include new `ButtonVariant`, icon support, and the `ButtonSize` equate to
-> different button and font sizes.
->
-> **If you would like to use the old buttons, you must change your imports. For more information,
-> refer below.**
-
 ## Installation
 
 ```sh
@@ -27,10 +14,44 @@ or
 yarn add @workday/canvas-kit-react-button
 ```
 
-## Usage for new Button
+## Deprecation Warning
 
-You will automatically be opt in to the new Buttons without changing your imports. Note, we are
-still suppoting the import for `beta_Button` as well.
+> We are rolling out our next iteration of our buttons and will be deprecating the old ones(orange
+> primary, secondary, and delete) on (this time frame). The biggest change is with regards to colors
+> and styling, but the behavior should remain the same.
+>
+> We've added a deprecation warning to the old buttons as well as a console warn in the component
+> itself. The message should read `This is now deprecated, use Button component`.
+>
+> **If you would like to use the old buttons, you must change your imports. For more information,
+> refer below.**
+
+Deprecation tags have been added to all the pieces regarding the old buttons including it's types
+and the component itself. Tslint and your IDE should reflect this warning but you should still be
+able to compile your code.
+
+### New Button
+
+You will be opt in to the new buttons with (insert version number) without having to change your
+imports. Note, we are still suppoting the import for `beta_Button` as well. The new buttons include:
+blue primary button, secondary, delete, outline and dropdown.
+
+### Deprecated Buttons
+
+The old buttons (orange primary, secondary, and delete) are still available, but under
+`deprecated_Button`. There's also a `@deprecated` warning on its' types and the component itself
+suggesting to migrate to the new buttons. For more information on how to migrate, refer to (insert
+link to migration guide). These buttons will be deprecated on (insert this date). You can find these
+buttons under the `Deprecated` folder in storybook.
+
+```tsx
+import * as React from 'react';
+import {deprecated_Button as Button} from '@workday/canvas-kit-react-button';
+
+<Button>Button Label</Button>;
+```
+
+## Button
 
 ```tsx
 import * as React from 'react';
@@ -73,7 +94,7 @@ Default: `ButtonVariant.Secondary`
 
 | Theme       | Description                     |
 | ----------- | ------------------------------- |
-| `Primary`   | Orange background, white text   |
+| `Primary`   | Blue background, white text     |
 | `Secondary` | Gray background, dark gray text |
 | `Delete`    | Red background, dark text       |
 
@@ -104,21 +125,6 @@ Default: `false`
 #### `buttonRef: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
-
-## Deprecated Buttons
-
-The old buttons (orange primary, secondary, and delete) are still available, but under
-`deprecated_Button`. There's also a `@deprecated` warning on its' types and the component itself
-suggesting to migrate to the new buttons. For more information on how to migrate, refer to (insert
-lint to migration guide). These buttons will be deprecated on (insert this date). You can find these
-buttons under the `Deprecated` folder in storybook.
-
-```tsx
-import * as React from 'react';
-import {deprecated_Button as Button} from '@workday/canvas-kit-react-button';
-
-<Button>Button Label</Button>;
-```
 
 # Icon Button
 
