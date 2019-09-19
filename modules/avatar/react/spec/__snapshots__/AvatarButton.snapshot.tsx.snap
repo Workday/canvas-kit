@@ -2,23 +2,9 @@
 
 exports[`AvatarButton Snapshots renders a large AvatarButton 1`] = `
 .emotion-4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   padding: 0;
   border: 0;
   border-radius: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
   background: #f0f1f2;
   height: 64px;
   width: 64px;
@@ -161,23 +147,9 @@ exports[`AvatarButton Snapshots renders a large AvatarButton 1`] = `
 
 exports[`AvatarButton Snapshots renders a large avatar with a photo 1`] = `
 .emotion-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   padding: 0;
   border: 0;
   border-radius: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
   background: #f0f1f2;
   height: 64px;
   width: 64px;
@@ -275,23 +247,9 @@ exports[`AvatarButton Snapshots renders a large avatar with a photo and a button
 }
 
 .emotion-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   padding: 0;
   border: 0;
   border-radius: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
   background: #f0f1f2;
   height: 64px;
   width: 64px;
@@ -362,23 +320,9 @@ exports[`AvatarButton Snapshots renders a large, dark AvatarButton 1`] = `
 }
 
 .emotion-4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   padding: 0;
   border: 0;
   border-radius: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
   background: #f0f1f2;
   height: 64px;
   width: 64px;
@@ -493,23 +437,9 @@ exports[`AvatarButton Snapshots renders a large, dark AvatarButton 1`] = `
 
 exports[`AvatarButton Snapshots renders an AvatarButton with a photo 1`] = `
 .emotion-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   padding: 0;
   border: 0;
   border-radius: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
   background: #f0f1f2;
   height: 32px;
   width: 32px;
@@ -579,23 +509,9 @@ exports[`AvatarButton Snapshots renders an AvatarButton with a photo 1`] = `
 
 exports[`AvatarButton Snapshots renders an avatar with an aria label and an alt text 1`] = `
 .emotion-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   padding: 0;
   border: 0;
   border-radius: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
   background: #f0f1f2;
   height: 64px;
   width: 64px;
@@ -665,23 +581,9 @@ exports[`AvatarButton Snapshots renders an avatar with an aria label and an alt 
 
 exports[`AvatarButton Snapshots renders as expected 1`] = `
 .emotion-4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   padding: 0;
   border: 0;
   border-radius: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
   background: #f0f1f2;
   height: 32px;
   width: 32px;

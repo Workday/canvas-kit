@@ -127,7 +127,7 @@ import {AvatarButton, AvatarVariant} from '@workday/canvas-kit-react-avatar';
 
 ## Static Properties
 
-#### `variant: AvatarVariant`
+#### `Variant: AvatarVariant`
 
 ```tsx
 <AvatarButton variant={AvatarButton.Variant.Dark} />
@@ -153,7 +153,7 @@ import {AvatarButton, AvatarVariant} from '@workday/canvas-kit-react-avatar';
 
 ### Optional
 
-#### `variant: AvatarVariant`
+#### `Variant: AvatarVariant`
 
 > The variant of the avatar if using a default image.
 

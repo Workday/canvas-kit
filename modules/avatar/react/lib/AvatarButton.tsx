@@ -1,32 +1,18 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import isPropValid from '@emotion/is-prop-valid';
-import Avatar, {AvatarVariant} from './Avatar';
+import Avatar, {AvatarVariant, AvatarProps} from './Avatar';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import {SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
 
-export interface AvatarButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * An AvatarVariant enum indicating which variant to use for the default state (Light vs. Dark)
-   */
-  variant: AvatarVariant;
-  /**
-   * An SystemIconCircleSize enum or number value indicating the size of the avatar
-   */
-  size: SystemIconCircleSize | number;
-  /**
-   * Text describing what the avatar is showing
-   */
-  altText: string;
-  /**
-   * The url of the users avatar photo
-   */
-  url?: string;
+export interface AvatarButtonProps
+  extends AvatarProps,
+    React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * An event handler function that gets called when the avatar is clicked
    */
-  onClick?: (e: React.SyntheticEvent) => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   /**
    * Ref of button that the styled component renders.
    */
@@ -35,16 +21,11 @@ export interface AvatarButtonProps extends React.ButtonHTMLAttributes<HTMLButton
 
 const Container = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Omit<AvatarButtonProps, 'altText'>>(
+})<Pick<AvatarButtonProps, 'variant' | 'size' | 'onClick'>>(
   {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: 0,
     border: 0,
     borderRadius: '100%',
-    boxSizing: 'border-box',
-    overflow: 'hidden',
   },
   ({variant, size, onClick}) => ({
     background: colors.soap200,

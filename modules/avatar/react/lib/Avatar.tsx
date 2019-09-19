@@ -31,7 +31,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Container = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Omit<AvatarProps, 'altText'>>(
+})<Pick<AvatarProps, 'variant' | 'size'>>(
   {
     display: 'flex',
     alignItems: 'center',
