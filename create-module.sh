@@ -14,10 +14,7 @@ NC='\033[0m' # No Color
 
 # Get module name
 read -p "Module/component name (@workday/canvas-kit-<TARGET>-<NAME>): " name
-
-path="./modules/$name"
-reactPath="$path/react"
-wantsCss=false
+echo
 
 if [ -d "$path" ]; then
   echo -e "${RED}Module with name '$name' already exists."
@@ -26,8 +23,23 @@ fi
 
 # Get module info
 read -p "Module description: " description
+echo
 upperName="$(tr '[:lower:]' '[:upper:]' <<< ${name:0:1})${name:1}"
 
+read -p "Is this an unstable component (should it go in Canvas Kit Labs)? [Y/n] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+path="./modules/_labs/$name"
+rootPath="../../../.."
+else
+$stable = true
+path="./modules/$name"
+rootPath="../../.."
+fi
+
+reactPath="$path/react"
+wantsCss=false
 
 # Create module directory
 echo -e "\nCreating ${CYAN}$path${NC}"
@@ -113,9 +125,14 @@ EOF
 # Create stories.tsx
 mkdir "$reactPath/stories"
 storiesJs="$reactPath/stories/stories.tsx"
+if [ $stable ] ; then
+	storyPath="$upperName"
+else
+	storyPath="Labs/$upperName"
+fi
 echo -e "Creating ${CYAN}$storiesJs${NC}"
 cat > $storiesJs << EOF
-/// <reference path="../../../../typings.d.ts" />
+/// <reference path="${rootPath}/../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -123,7 +140,7 @@ import withReadme from 'storybook-readme/with-readme';
 import MyComponent from '../index';
 import README from '../README.md';
 
-storiesOf('Canvas Kit/$upperName', module)
+storiesOf('$storyPath', module)
   .addDecorator(withReadme(README))
   .add('All', () => (
     <div className="story">
@@ -139,13 +156,23 @@ echo -e "Creating ${CYAN}$readme${NC}"
 cat > $readme << EOF
 # Canvas Kit $upperName
 EOF
+if [ !$stable ] ; then
+cat > $readme << EOF
+# Canvas Kit CSS $upperName
+
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+  <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
+</a>  This component is work in progress and currently in pre-release.
+EOF
+fi
 
 # Create tsconfig.json
 tsconfig="$reactPath/tsconfig.json"
 echo -e "Creating ${CYAN}$tsconfig${NC}"
+
 cat > $tsconfig << EOF
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "${rootPath}/tsconfig.json",
   "exclude": ["node_modules", "ts-tmp", "dist", "spec", "stories"]
 }
 EOF
@@ -179,6 +206,10 @@ cat > $tsconfig << EOF
   }
 }
 EOF
+
+# Copy LICENSE
+echo -e "Adding License file to ${CYAN}$reactPath${NC}"
+cp LICENSE $reactPath
 
 ### CSS
 
@@ -241,6 +272,11 @@ EOF
 
 # Create stories.js
 storiesJs="$cssPath/stories.tsx"
+if [ $stable ] ; then
+	storyPath="CSS/$upperName"
+else
+	storyPath="Labs/CSS/$upperName"
+fi
 echo -e "Creating ${CYAN}$storiesJs${NC}"
 cat > $storiesJs << EOF
 import React from 'react'
@@ -249,7 +285,7 @@ import withReadme from 'storybook-readme/with-readme'
 import README from './README.md'
 import './index.scss'
 
-storiesOf('CSS/$upperName', module)
+storiesOf('$storyPath', module)
 	.addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -262,25 +298,40 @@ EOF
 # Create README.md
 readme="$cssPath/README.md"
 echo -e "Creating ${CYAN}$readme${NC}"
+
 cat > $readme << EOF
 # Canvas Kit CSS $upperName
 EOF
+if [ !$stable ] ; then
+cat > $readme << EOF
+# Canvas Kit CSS $upperName
 
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+  <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
+</a>  This component is work in progress and currently in pre-release.
+EOF
 fi
 
 # Copy LICENSE
-echo -e "Adding License file to ${CYAN}$reactPath{NC}"
-cp LICENSE $reactPath
+echo -e "Adding License file to ${CYAN}$cssPath${NC}"
+cp LICENSE $cssPath
+
+fi
 
 # Install deps using Yarn workspaces (instead of Lerna bootstrap)
 echo -e "\nInstalling dependencies\n"
 yarn
 
-# We always add the React module as dependency and set up export
-echo -e 'Adding module as dependency and adding export to index'
-node "utils/create-module.js" "$name" "react";
+# Add modules as deps only if they're stable
+if [ $stable ] ; then
 
-if [ "$wantsCss" = true ] ; then
-  echo -e 'Adding module as CSS dependency and adding Sass module import'
-  node "utils/create-module.js" "$name" "css";
+	# We always add the React module as dependency and set up export
+	echo -e 'Adding module as dependency and adding export to index'
+	node "utils/create-module.js" "$name" "react";
+
+	if [ $wantsCss ] ; then
+		echo -e 'Adding module as CSS dependency and adding Sass module import'
+		node "utils/create-module.js" "$name" "css";
+	fi
+
 fi
