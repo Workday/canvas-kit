@@ -13,7 +13,7 @@ module.exports = {
 };
 
 // Extra scopes supported outside the `modules` folder
-const scopes = [];
+const scopes = ['labs'];
 
 /**
  * @param {{ cwd: string}} context

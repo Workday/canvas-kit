@@ -104,3 +104,16 @@ Default: `false`
 
 > A ref to the underlying input checkbox element. Use this to imperatively switch or focus this
 > component.
+
+---
+
+#### `error: ErrorType`
+
+> The type of error to display, if any.
+
+| Type  | Description                     |
+| ----- | ------------------------------- |
+| Error | Red outline with error icon.    |
+| Alert | Yellow outline with alert icon. |
+
+Default: `undefined`
