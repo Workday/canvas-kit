@@ -57,6 +57,7 @@
     "fork-ts-checker-webpack-plugin": "^0.4.9",
     "happypack": "^5.0.0",
     "husky": "^0.14.3",
+    "inquirer": "^7.0.0",
     "jest": "^24.1.0",
     "jest-axe": "^3.2.0",
     "jest-emotion": "^9.2.11",
