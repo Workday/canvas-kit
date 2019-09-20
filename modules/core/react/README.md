@@ -240,9 +240,9 @@ Variants only come their augmenting styles and a base type object is required.
 #### Disclaimer
 
 > A new type hierarchy is in the process of being introduced into our products. You can find more
-> info about it in the [Lab Type](?path=/story/labs-core--type) section. We plan to maintain both
-> hierarchies for a short time, but there will be a breaking change when we replace the current one
-> with the new one.
+> info about it in the [Labs Type](?path=/story/labs-core-react--type) section. We plan to maintain
+> both hierarchies for a short time, but there will be a breaking change when we replace the current
+> one with the new one.
 
 ## Usage
 
