@@ -7,6 +7,8 @@ const inquirer = require('inquirer');
 
 const createReactModule = require('./createReactModule');
 const createCssModule = require('./createCssModule');
+const addReactDependency = require('./addDependencies').addReactDependency;
+const addSassDependency = require('./addDependencies').addSassDependency;
 
 const cwd = process.cwd();
 
@@ -71,7 +73,13 @@ inquirer
     console.log('\nInstalling dependencies');
     // Yarn
 
-    // Add modules as deps
+    if (!unstable) {
+      addReactDependency(name);
+
+      if (css) {
+        addSassDependency(name);
+      }
+    }
 
     console.log(`\nDone`);
   })
