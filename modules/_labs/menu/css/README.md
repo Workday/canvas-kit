@@ -1,5 +1,9 @@
 # Canvas Kit Menu
 
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
+</a>  This component is work in progress and currently in pre-release.
+
 Creates an actions menu of clickable items.
 
 Can be used to implement a menu button, context menu, etc.

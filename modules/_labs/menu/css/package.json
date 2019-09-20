@@ -1,5 +1,5 @@
 {
-  "name": "@workday/canvas-kit-css-menu",
+  "name": "@workday/canvas-kit-labs-css-menu",
   "version": "3.0.0-alpha.6",
   "description": "Menu CSS for Canvas kit CSS",
   "author": "Workday, Inc. (https://www.workday.com)",
@@ -20,7 +20,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ../../../utils/css-build.js index.scss"
+    "build": "node ../../../../utils/css-build.js index.scss"
   },
   "keywords": [
     "canvas",

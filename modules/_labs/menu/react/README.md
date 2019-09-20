@@ -1,5 +1,9 @@
 # Canvas Kit Menu
 
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
+</a>  This component is work in progress and currently in pre-release.
+
 Creates an actions menu of clickable items.
 
 Can be used to implement a menu button, context menu, etc. For a full suite of examples, have a look
@@ -49,9 +53,9 @@ import {userIcon} from '@workday/canvas-system-icons-web';
 
 For a semantic menu, this component will style a child `<ul>` element with a role of `menu`. If you
 implement your own `<MenuItem>` (see
-[menu stories](https://workday.github.io/canvas-kit/?path=/story/menu--default) for
-an example), make sure you use a `<li>` with a role of `menuItem`, tabindex of `-1`, and ids that
-follow the pattern `${MenuId}-${index}`.
+[menu stories](https://workday.github.io/canvas-kit/?path=/story/menu--default) for an example),
+make sure you use a `<li>` with a role of `menuItem`, tabindex of `-1`, and ids that follow the
+pattern `${MenuId}-${index}`.
 
 ## Accessibility
 
@@ -59,8 +63,8 @@ This component implements a actions menu using aria-activedescendant.
 [See the w3 example here](https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html).
 If used in conjunction with a menu button you will need to add your own keyboard shortcuts, aria
 attributes, and focus management. See the
-[menu stories](https://workday.github.io/canvas-kit/?path=/story/menu--default) for
-a fully fledged example.
+[menu stories](https://workday.github.io/canvas-kit/?path=/story/menu--default) for a fully fledged
+example.
 
 ## Keyboard Shortcuts
 
@@ -137,8 +141,8 @@ Default: `true`
 #### `onClose: () => void`
 
 > If specified, this callback is executed when the menu should close. Called after an item is
-> selected or the escape shortcut key is used. This will not fire if the menu item
-> sets shouldClose to false
+> selected or the escape shortcut key is used. This will not fire if the menu item sets shouldClose
+> to false
 
 ---
 
