@@ -1,11 +1,10 @@
 import {typeColors} from '@workday/canvas-colors-web';
-import canvasType, {CanvasTypeVariant} from './type';
-import {CSSProperties} from './types';
+import {CSSProperties, type, CanvasTypeVariant} from '@workday/canvas-kit-react-core';
 
 export const fontFamily = '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
 export const monoFontFamily = '"Roboto Mono", "Courier New", Courier, monospace';
 
-export interface BetaCanvasTypeHierarchy {
+export interface CanvasTypeHierarchy {
   brand1: CSSProperties;
   brand2: CSSProperties;
   h1: CSSProperties;
@@ -19,7 +18,7 @@ export interface BetaCanvasTypeHierarchy {
   [key: string]: CSSProperties;
 }
 
-const hierarchy: BetaCanvasTypeHierarchy = {
+const hierarchy: CanvasTypeHierarchy = {
   brand1: {
     fontSize: 56,
     lineHeight: 1.3,
@@ -101,7 +100,7 @@ const updatedVariants: Pick<CanvasTypeVariant, 'button' | 'caps'> = {
 export default {
   ...hierarchy,
   variant: {
-    ...canvasType.variant,
+    ...type.variant,
     ...updatedVariants,
   },
 };

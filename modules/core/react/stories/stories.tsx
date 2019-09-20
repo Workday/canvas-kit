@@ -116,15 +116,4 @@ storiesOf('Core', module)
         </section>
       </div>
     );
-  })
-  .add('Type (Beta)', () => {
-    return (
-      <div className="story">
-        <section>
-          <h1 style={canvas.beta_type.brand1}>Brand 1 Header</h1>
-          <h1 style={canvas.beta_type.brand2}>Brand 2 Header</h1>
-          {type(canvas.beta_type)}
-        </section>
-      </div>
-    );
   });
