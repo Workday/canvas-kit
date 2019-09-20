@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import isPropValid from '@emotion/is-prop-valid';
-import Avatar, {AvatarVariant, AvatarProps} from './Avatar';
+import Avatar, {AvatarVariant, AvatarLocalProps} from './Avatar';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import {SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
 
 export interface AvatarButtonProps
-  extends AvatarProps,
+  extends AvatarLocalProps,
     React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * An event handler function that gets called when the avatar is clicked

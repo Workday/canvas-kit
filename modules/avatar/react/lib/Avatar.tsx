@@ -10,7 +10,7 @@ export enum AvatarVariant {
   Dark,
 }
 
-export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AvatarLocalProps {
   /**
    * An AvatarVariant enum indicating which variant to use for the default state (Light vs. Dark)
    */
@@ -31,7 +31,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Container = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Pick<AvatarProps, 'variant' | 'size'>>(
+})<Pick<AvatarLocalProps, 'variant' | 'size'>>(
   {
     display: 'flex',
     alignItems: 'center',
@@ -53,7 +53,7 @@ const Container = styled('div', {
   })
 );
 
-export default class Avatar extends React.Component<AvatarProps> {
+export default class Avatar extends React.Component<AvatarLocalProps> {
   static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
 
