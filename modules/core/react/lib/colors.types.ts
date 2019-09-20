@@ -1,6 +1,6 @@
 import colors from '@workday/canvas-colors-web';
 
-export enum BrandingColors {
+export enum BrandingColor {
   Cinnamon = 'cinnamon',
   Peach = 'peach',
   ChiliMango = 'chiliMango',

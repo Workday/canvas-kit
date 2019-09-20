@@ -375,8 +375,8 @@ handling.
 }
 ```
 
-We provide a [helper](../canvas-kit-react-common/lib/styles/hideMouseFocus.ts) to hide the focus
-outlines on mouse input. Simply spread it in your styles (i.e. `...hideMouseFocus`).
+We provide a [helper](../../common/react/lib/styles/hideMouseFocus.ts) to hide the focus outlines on
+mouse input. Simply spread it in your styles (i.e. `...hideMouseFocus`).
 
 **Note:** It is best practice to show focus outlines by default and specifically hide them in the
 cases you would like (i.e. mouse/touch/pointer input).

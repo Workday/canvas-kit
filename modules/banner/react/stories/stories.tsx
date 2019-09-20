@@ -20,7 +20,7 @@ storiesOf('Banner/Alert', module)
         onClick={handleBannerClick}
         label={text('label', '3 Alerts')}
         actionText={text('actionText', 'View All')}
-        theme={Banner.Theme.Alert}
+        error={Banner.ErrorType.Alert}
         variant={select(
           'variant',
           {
@@ -38,7 +38,7 @@ storiesOf('Banner/Alert', module)
         onClick={handleBannerClick}
         label={text('label', '3 Alerts')}
         actionText={text('actionText', 'View All')}
-        theme={Banner.Theme.Alert}
+        error={Banner.ErrorType.Alert}
         variant={select(
           'variant',
           {
@@ -60,7 +60,7 @@ storiesOf('Banner/Error', module)
         onClick={handleBannerClick}
         label={text('label', '3 Errors')}
         actionText={text('actionText', 'View All')}
-        theme={Banner.Theme.Error}
+        error={Banner.ErrorType.Error}
         variant={select(
           'variant',
           {
@@ -78,7 +78,7 @@ storiesOf('Banner/Error', module)
         onClick={handleBannerClick}
         label={text('label', '3 Errors')}
         actionText={text('actionText', 'View All')}
-        theme={Banner.Theme.Error}
+        error={Banner.ErrorType.Error}
         variant={select(
           'variant',
           {

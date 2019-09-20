@@ -100,7 +100,7 @@ import { benefitsIcon } from '@workday/canvas-applet-icons-web'
 
 ## Static Properties
 
-#### `Colors: BrandingColors`
+#### `Colors: BrandingColor`
 
 > An enum of the various Canvas hues (`Pomegranate`, `Blueberry`, `Cinnamon`, etc.).
 
