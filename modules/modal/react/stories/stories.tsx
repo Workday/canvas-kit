@@ -7,28 +7,7 @@ import {beta_Button as Button} from '@workday/canvas-kit-react-button';
 import Modal, {useModal} from '..';
 import README from '../README.md';
 
-const UseModalExample = () => {
-  const {targetProps, modalProps, closeModal} = useModal();
-
-  return (
-    <>
-      <Button variant={Button.Variant.Delete} {...targetProps}>
-        Delete Item
-      </Button>
-      <Modal testId="TestModal" heading={'Delete Item'} closeOnEscape={true} {...modalProps}>
-        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
-          Delete
-        </Button>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
-          Cancel
-        </Button>
-      </Modal>
-    </>
-  );
-};
-
-const ModalExample = () => {
+const DefaultModalExample = () => {
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
   const openModal = () => {
@@ -65,7 +44,28 @@ const ModalExample = () => {
   );
 };
 
-const ModalNoXExample = () => {
+const UseModalExample = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} {...targetProps}>
+        Delete Item
+      </Button>
+      <Modal testId="TestModal" heading={'Delete Item'} closeOnEscape={true} {...modalProps}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+
+const NoCloseModalExample = () => {
   const {targetProps, modalProps, closeModal} = useModal();
 
   return (
@@ -92,12 +92,41 @@ const ModalNoXExample = () => {
   );
 };
 
+const CustomFocusModalExample = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+  const buttonRef = React.useRef() as React.RefObject<HTMLButtonElement>;
+
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} {...targetProps}>
+        Delete Item
+      </Button>
+      <Modal
+        testId="TestModal"
+        heading={'Delete Item'}
+        closeOnEscape={true}
+        {...modalProps}
+        firstFocusRef={buttonRef}
+        handleClose={undefined}
+      >
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary} buttonRef={buttonRef}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+
 storiesOf('Modal', module)
   .addDecorator(withReadme(README))
-  .add('Default', () => (
+  .add('DefaultModal', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
-      <ModalExample />
+      <DefaultModalExample />
     </div>
   ))
   .add('UseModal', () => (
@@ -106,9 +135,15 @@ storiesOf('Modal', module)
       <UseModalExample />
     </div>
   ))
-  .add('ModalNoX', () => (
+  .add('NoCloseModal', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
-      <ModalNoXExample />
+      <NoCloseModalExample />
+    </div>
+  ))
+  .add('CustomFocusModal', () => (
+    <div className="story">
+      <h1 className="section-label">Modal</h1>
+      <CustomFocusModalExample />
     </div>
   ));

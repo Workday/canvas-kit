@@ -3,7 +3,6 @@ import styled from 'react-emotion';
 import {keyframes} from 'emotion';
 import FocusTrap from 'focus-trap-react';
 
-import {TransformOrigin, FocusFirstFocusable} from '@workday/canvas-kit-react-common';
 import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
 
 export enum ModalWidth {
@@ -17,9 +16,8 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   testId?: string;
   open: boolean;
-  padding: PopupPadding;
-  transformOrigin: TransformOrigin;
-  width: ModalWidth;
+  padding?: PopupPadding;
+  width?: ModalWidth;
   /**
    * Optional callback for the Modal handling closing. If this callback is provided
    */
@@ -33,6 +31,16 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   closeOnEscape: boolean;
   heading: React.ReactNode;
+  /**
+   * Optional override of the auto-select functionality of the Modal. If this ref is defined, that element
+   * will receive focus when the modal is opened. There are many suggestions to what that element should
+   * be. Contact an accessibility specialist or go through the https://www.w3.org/TR/wai-aria-practices/
+   * document for instances where this might be useful. Make sure this is a focusable ref, like a button.
+   * If you're unsure, don't define this and leave it to the default behavior.
+   * If this ref is not provided the modal will try to use the close icon. If that icon is not available,
+   * it will make the modal heading focusable and focus on that instead.
+   */
+  firstFocusRef?: React.RefObject<HTMLElement>;
 }
 
 const fadeIn = keyframes`
@@ -57,6 +65,47 @@ const Container = styled('div')({
   animationName: `${fadeIn}`,
   animationDuration: '0.3s',
 });
+
+const transformOrigin = {
+  horizontal: 'center',
+  vertical: 'top',
+} as const;
+
+function onInitialFocus(
+  modalEl: HTMLElement | null,
+  firstFocusEl: HTMLElement | null = null
+): HTMLElement {
+  if (firstFocusEl) {
+    return firstFocusEl;
+  } else {
+    const firstFocusable = modalEl && modalEl.querySelector<HTMLElement>('[aria-label=Close],h3');
+    if (firstFocusable) {
+      if (firstFocusable.tagName === 'H3') {
+        // If there is no close icon, we need to transfer focus to the header.
+        // Setting tabIndex allows the header to be focusable.
+        // We do the header instead of the next focusable element to prevent useful context from being skipped
+        firstFocusable.tabIndex = 0;
+
+        const changeTabIndex = () => {
+          // We no longer need to focus on the header after it looses focus
+          // We simply want to transfer focus inside
+          firstFocusable.removeEventListener('blur', changeTabIndex);
+          // We must wait one frame to ensure tabbable checks are satisfied
+          // by all focus libraries...
+          requestAnimationFrame(() => {
+            firstFocusable.removeAttribute('tabIndex');
+          });
+        };
+        firstFocusable.addEventListener('blur', changeTabIndex);
+      }
+      return firstFocusable;
+    } else {
+      throw new Error(
+        'No focusable element was found. Please ensure modal has at least one focusable element'
+      );
+    }
+  }
+}
 
 export default class Modal extends React.Component<ModalProps> {
   private modalRef = React.createRef<HTMLDivElement>();
@@ -90,9 +139,9 @@ export default class Modal extends React.Component<ModalProps> {
 
   private handleOutsideClick = (
     handleClose: (() => void) | undefined,
-    e: React.MouseEvent<HTMLDivElement>
+    event: React.MouseEvent<HTMLDivElement>
   ) => {
-    const {target} = e;
+    const {target} = event;
     const modalNode = this.modalRef.current;
     if (modalNode && handleClose) {
       if (!modalNode.contains(target as Node)) {
@@ -108,17 +157,21 @@ export default class Modal extends React.Component<ModalProps> {
       padding,
       width,
       heading,
-      transformOrigin,
       testId,
       children,
       closeOnEscape,
+      firstFocusRef: firstFocusableRef,
       ...elemProps
     } = this.props;
-    console.log('elemProps', elemProps);
     return (
       open && (
-        <Container onClick={e => this.handleOutsideClick(handleClose, e)} {...elemProps}>
-          <FocusTrap focusTrapOptions={{clickOutsideDeactivates: true}}>
+        <FocusTrap
+          focusTrapOptions={{
+            initialFocus: () =>
+              onInitialFocus(this.modalRef.current, firstFocusableRef && firstFocusableRef.current),
+          }}
+        >
+          <Container onClick={e => this.handleOutsideClick(handleClose, e)} {...elemProps}>
             <Popup
               popupRef={this.modalRef}
               width={width}
@@ -128,11 +181,10 @@ export default class Modal extends React.Component<ModalProps> {
               transformOrigin={transformOrigin}
               data-testid={testId}
             >
-              <FocusFirstFocusable containerRef={this.modalRef} />
               {children}
             </Popup>
-          </FocusTrap>
-        </Container>
+          </Container>
+        </FocusTrap>
       )
     );
   }
@@ -158,12 +210,10 @@ export default class Modal extends React.Component<ModalProps> {
  */
 export function useModal() {
   const [open, setOpen] = React.useState(false);
-  const targetRef = React.useRef<HTMLElement>(); // cast to keep buttonRef happy
 
   return {
     targetProps: {
       onClick(event: React.SyntheticEvent<HTMLElement>) {
-        targetRef.current = event.currentTarget;
         setOpen(true);
       },
     },
@@ -174,10 +224,6 @@ export function useModal() {
       open,
       handleClose() {
         setOpen(false);
-        if (targetRef.current) {
-          targetRef.current.focus();
-          targetRef.current = undefined;
-        }
       },
     },
   };

@@ -8,4 +8,3 @@ export * from './lib/parts/_brand-assets';
 export * from './lib/types';
 export * from './lib/genericStyles';
 export * from './lib/Popper';
-export * from './lib/focus/FocusFirstFocusable';

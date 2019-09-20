@@ -37,7 +37,9 @@ import {Modal} from '@workday/canvas-kit-react-modal';
 
 ### Required
 
-> None
+#### `heading: ReactNode`
+
+> Heading at the top of the card.
 
 ---
 
@@ -78,21 +80,14 @@ Default: `PopupPadding.l`
 
 ---
 
-#### `transformOrigin: TransformOrigin`
+#### `firstFocusRef: React.RefObject<HTMLElement>`
 
-> Origin from which the popup will animate from
+Optional override of the auto-select functionality of the Modal. If this ref is defined, that
+element will receive focus when the modal is opened. There are many suggestions to what that element
+should be. Contact an accessibility specialist or go through the
+https://www.w3.org/TR/wai-aria-practices/ document for instances where this might be useful. Make
+sure this is focusable ref, like a button. If you're unsure, don't define this and leave it to the
+default behavior.
 
-Default:
-
-```js
-{
-  horizontal: 'center',
-  vertical: 'top',
-}
-```
-
----
-
-#### `heading: ReactNode`
-
-> Heading at the top of the card.
+If this ref is not provided the modal will try to use the close icon. If that icon is not available,
+it will make the modal heading focusable and focus on that instead.

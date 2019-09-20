@@ -53,6 +53,12 @@ Default: `null`
 
 ---
 
+#### `headingId: string`
+
+> Heading ID for accessibility. Useful tie to an `aria-labelledby`
+
+---
+
 #### `padding: 0 | CanvasSpacingValue`
 
 > Padding of the card. Style imported from `@workday/canvas-kit-react-core`.
