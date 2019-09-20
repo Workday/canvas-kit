@@ -301,10 +301,6 @@ describe('Modal', () => {
           cy.focused().should('have.text', 'Cancel');
           cy.focused()
             .tab()
-            .pipe(s => {
-              console.log(s);
-              return s;
-            })
             .should('contain', 'Delete')
             .tab()
             .should('contain', 'Cancel')

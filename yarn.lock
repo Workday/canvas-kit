@@ -6623,10 +6623,10 @@ cypress-pipe@^1.5.0:
   resolved "https://registry.yarnpkg.com/cypress-pipe/-/cypress-pipe-1.5.0.tgz#bf8603a8eb6969b3ebad49080957192b03be85a0"
   integrity sha512-yetAgWrnMoeNP7ZYW/tmMUxY13rAI2j2JPNRtEPoxjqdA7ZvOKak+3iDByTmle5ouBMj59nluTorn5C8RtxP8g==
 
-cypress-plugin-tab@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/cypress-plugin-tab/-/cypress-plugin-tab-1.0.2.tgz#fd4f0d3ea27d30e99ba4214bd893d5de494838ae"
-  integrity sha512-qgilIwV5OYma5LRP5I/KaWwGN+urzOTkS3riFNQoMRl4BHrr/Zl6U1qW08HhmC18+znAeN8jG7IA4SGJb9aHIA==
+cypress-plugin-tab@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/cypress-plugin-tab/-/cypress-plugin-tab-1.0.3.tgz#8a64a4c189c5d180dc0a97175097c0cc937c1213"
+  integrity sha512-uiadGT+IzoGxKCqYxQXyc5OhHkv4JAT5LWwNTs8R6pBJkBUUC/uZR2ys4jqhqX6mD/ZucAt5p+U9KMr8Ae4fQA==
   dependencies:
     ally.js "^1.4.1"
 

@@ -52,7 +52,7 @@
     "cssstats": "^3.3.0",
     "cypress": "^3.4.0",
     "cypress-pipe": "^1.5.0",
-    "cypress-plugin-tab": "^1.0.2",
+    "cypress-plugin-tab": "^1.0.3",
     "cz-conventional-changelog": "^2.1.0",
     "emotion-theming": "^10.0.10",
     "enzyme": "^3.6.0",
