@@ -1,8 +1,5 @@
 import {typeColors} from '@workday/canvas-colors-web';
-import {CSSProperties, type, CanvasTypeVariant} from '@workday/canvas-kit-react-core';
-
-export const fontFamily = '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
-export const monoFontFamily = '"Roboto Mono", "Courier New", Courier, monospace';
+import {CSSProperties, type, CanvasTypeVariant, fontFamily} from '@workday/canvas-kit-react-core';
 
 export interface CanvasTypeHierarchy {
   brand1: CSSProperties;
