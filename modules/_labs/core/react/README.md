@@ -1,4 +1,4 @@
-# Canvas Kit Core
+# Canvas Kit Labs React Core
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
   <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
@@ -17,7 +17,7 @@ respectively.
 The usage is the same as the current hierarchy, you just need a different import.
 
 ```tsx
-import {type} from '@workday/canvas-kit-react-labs-core';
+import {type} from '@workday/canvas-kit-labs-react-core';
 
 const MyLabel = styled('label')({
   ...type.body,

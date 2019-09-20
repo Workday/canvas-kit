@@ -1,4 +1,4 @@
-# Canvas Kit Menu
+# Canvas Kit Labs CSS Menu
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
@@ -11,20 +11,14 @@ Can be used to implement a menu button, context menu, etc.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-css
-```
-
-or
-
-```sh
-yarn add @workday/canvas-kit-css-menu
+yarn add @workday/canvas-kit-labs-css-menu
 ```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
 
 ```scss
-@import '~@workday/canvas-kit-css-menu/index.scss';
+@import '~@workday/canvas-kit-labs-css-menu/index.scss';
 ```
 
 ## Usage

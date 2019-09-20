@@ -10,7 +10,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/menu/react"
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/_labs/menu/react"
   },
   "files": [
     "dist/",

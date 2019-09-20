@@ -9,11 +9,11 @@
     "lib",
     "index.scss"
   ],
-  "style": "dist/canvas-kit-css-menu.min.css",
-  "main": "dist/canvas-kit-css-menu.min.css",
+  "style": "dist/canvas-kit-labs-css-menu.min.css",
+  "main": "dist/canvas-kit-labs-css-menu.min.css",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/menu/css"
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/_labs/menu/css"
   },
   "dependencies": {
     "@workday/canvas-kit-css-core": "^3.0.0-alpha.6"
