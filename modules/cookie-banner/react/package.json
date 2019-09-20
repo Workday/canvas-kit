@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-cookie-banner",
-  "version": "3.0.0-alpha.6",
+  "version": "3.0.0-alpha.7",
   "description": "Canvas styled cookie banner",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -38,8 +38,8 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-button": "^3.0.0-alpha.6",
-    "@workday/canvas-kit-react-core": "^3.0.0-alpha.6",
+    "@workday/canvas-kit-react-button": "^3.0.0-alpha.7",
+    "@workday/canvas-kit-react-core": "^3.0.0-alpha.7",
     "emotion": "^9.2.12",
     "react-emotion": "^9.2.12"
   }
