@@ -30,6 +30,7 @@ import TextInput from '@workday/canvas-kit-react-text-input';
   error={FormField.ErrorType.Error}
   hintText="This field is required."
   hintId="my-input-field-error"
+  required={true}
 >
   <TextInput value={this.state.value} onChange={() => {}}/>
 </FormField>
@@ -131,6 +132,14 @@ Default: `undefined`
 | Left | Display label blocked on top of input         |
 
 Default: `LabelPosition.Top`
+
+---
+
+#### `required: boolean`
+
+> It set, the label of the field will be suffixed by a red astrisk.
+
+Default: `false`
 
 ---
 
