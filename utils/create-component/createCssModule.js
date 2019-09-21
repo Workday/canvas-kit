@@ -9,7 +9,12 @@ const index = require('./templates/css/index');
 const stories = require('./templates/css/stories');
 const readme = require('./templates/css/readme');
 
-module.exports = (modulePath, name, description, unstable) => {
+module.exports = (componentPath, name, description, unstable) => {
+  console.log(`\nCreating @workday/canvas-kit-css-${name}`);
+
+  const modulePath = path.join(componentPath, 'css');
+  mkdirp(modulePath);
+
   const upperName = name; // TODO
   const storyPath = unstable ? `Labs/CSS/${upperName}` : `CSS/${upperName}`;
 
@@ -40,4 +45,5 @@ module.exports = (modulePath, name, description, unstable) => {
   mkdirp(path.join(modulePath, 'stories'));
 
   writeModuleFiles(files, modulePath);
+  // TODO: Add license file
 };

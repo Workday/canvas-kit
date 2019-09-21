@@ -10,7 +10,12 @@ const stories = require('./templates/react/stories');
 const readme = require('./templates/react/readme');
 const tsconfig = require('./templates/react/tsconfig');
 
-module.exports = (modulePath, name, description, unstable) => {
+module.exports = (componentPath, name, description, unstable) => {
+  console.log(`\nCreating @workday/canvas-kit-react-${name}`);
+
+  const modulePath = path.join(componentPath, 'react');
+  mkdirp(modulePath);
+
   const upperName = name; // TODO
   const rootPath = unstable ? '../../..' : '../..';
   const storyPath = unstable ? `Labs/${upperName}` : upperName;
@@ -55,4 +60,5 @@ module.exports = (modulePath, name, description, unstable) => {
   mkdirp(path.join(modulePath, 'stories'));
 
   writeModuleFiles(files, modulePath);
+  // Add license file
 };

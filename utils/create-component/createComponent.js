@@ -58,23 +58,8 @@ inquirer
 
     mkdirp(componentPath);
 
-    if (react) {
-      console.log(`\nCreating @workday/canvas-kit-react-${name}`);
-
-      const reactModulePath = path.join(componentPath, 'react');
-      mkdirp(reactModulePath);
-
-      createReactModule(reactModulePath, name, description, unstable);
-    }
-
-    if (css) {
-      console.log(`\nCreating @workday/canvas-kit-css-${name}`);
-
-      const cssModulePath = path.join(componentPath, 'css');
-      mkdirp(cssModulePath);
-
-      createCssModule(cssModulePath, name, description, unstable);
-    }
+    react && createReactModule(componentPath, name, description, unstable);
+    css && createCssModule(componentPath, name, description, unstable);
 
     console.log('\nInstalling dependencies');
     // Yarn

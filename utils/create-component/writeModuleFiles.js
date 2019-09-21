@@ -10,6 +10,10 @@ module.exports = (files, modulePath) => {
 
   Object.keys(files).map(key => {
     const file = files[key];
-    fs.writeFileSync(path.join(modulePath, file.path), file.contents);
+    const filePath = path.join(modulePath, file.path);
+
+    // TODO: strip cwd from filepath before logging
+    console.log(`Creating ${filePath}`);
+    fs.writeFileSync(filePath, file.contents);
   });
 };
