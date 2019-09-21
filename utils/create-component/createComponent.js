@@ -25,7 +25,7 @@ const questions = [
     message: 'Module/component name (in "kebab-case"):',
     validate: function(value) {
       return true;
-      // Check if file exists
+      // TODO: Check if file exists
     },
   },
   {
@@ -34,15 +34,16 @@ const questions = [
     message: 'Module description:',
   },
   {
-    type: 'confirm',
-    name: 'unstable',
-    message: 'Is this an unstable component (i.e. should it go in Canvas Kit Labs)?:',
-    default: false,
+    type: 'checkbox',
+    name: 'targets',
+    message: 'What target modules would you like to create?:',
+    choices: ['React', 'CSS'],
+    default: ['React'],
   },
   {
     type: 'confirm',
-    name: 'css',
-    message: 'Would you like to create a CSS module as well?:',
+    name: 'unstable',
+    message: 'Is this an unstable component (i.e. should it go in Canvas Kit Labs)?:',
     default: false,
   },
 ];
@@ -50,16 +51,21 @@ const questions = [
 inquirer
   .prompt(questions)
   .then(answers => {
-    const {name, description, unstable, css} = answers;
-
-    console.log(`\nCreating @workday/canvas-kit-react-${name}`);
-
+    const {name, description, unstable, targets} = answers;
+    const css = targets.includes('CSS');
+    const react = targets.includes('React');
     const componentPath = path.join(cwd, `modules/${name}`);
-    const reactModulePath = path.join(componentPath, 'react');
-    mkdirp(componentPath);
-    mkdirp(reactModulePath);
 
-    createReactModule(reactModulePath, name, description, unstable);
+    mkdirp(componentPath);
+
+    if (react) {
+      console.log(`\nCreating @workday/canvas-kit-react-${name}`);
+
+      const reactModulePath = path.join(componentPath, 'react');
+      mkdirp(reactModulePath);
+
+      createReactModule(reactModulePath, name, description, unstable);
+    }
 
     if (css) {
       console.log(`\nCreating @workday/canvas-kit-css-${name}`);
@@ -74,11 +80,8 @@ inquirer
     // Yarn
 
     if (!unstable) {
-      addReactDependency(name);
-
-      if (css) {
-        addSassDependency(name);
-      }
+      react && addReactDependency(name);
+      css && addSassDependency(name);
     }
 
     console.log(`\nDone`);
