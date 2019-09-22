@@ -1,5 +1,5 @@
-module.exports = (upperName, unstable) => {
-  let readme = `# Canvas Kit CSS ${upperName}`;
+module.exports = (titleCaseName, unstable) => {
+  let readme = `# Canvas Kit CSS ${titleCaseName}`;
 
   if (unstable) {
     readme += `\n

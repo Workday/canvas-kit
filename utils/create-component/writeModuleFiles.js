@@ -1,19 +1,25 @@
 const fs = require('fs');
 const path = require('path');
+const mkdirp = require('mkdirp');
+const getDirName = require('path').dirname;
+
+const cwd = process.cwd();
 
 /*
  * Function used by createCssModule and createReactModule to write
  * files to the component folders.
  */
 module.exports = (files, modulePath) => {
-  // TODO: Check based on path and add folders automatically
-
   Object.keys(files).map(key => {
     const file = files[key];
     const filePath = path.join(modulePath, file.path);
 
-    // TODO: strip cwd from filepath before logging
-    console.log(`Creating ${filePath}`);
-    fs.writeFileSync(filePath, file.contents);
+    console.log(`Creating ${filePath.replace(cwd, '')}`);
+
+    mkdirp(getDirName(filePath), function(err) {
+      if (err) return cb(err);
+
+      fs.writeFileSync(filePath, file.contents);
+    });
   });
 };

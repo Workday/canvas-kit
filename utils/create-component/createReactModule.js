@@ -1,7 +1,10 @@
 const path = require('path');
 const mkdirp = require('mkdirp');
+const cmd = require('node-cmd');
 
 const writeModuleFiles = require('./writeModuleFiles');
+const getPascalCaseName = require('./nameUtils').getPascalCaseName;
+const getTitleCaseName = require('./nameUtils').getTitleCaseName;
 
 const packageJson = require('./templates/react/packageJson');
 const component = require('./templates/react/component');
@@ -10,15 +13,18 @@ const stories = require('./templates/react/stories');
 const readme = require('./templates/react/readme');
 const tsconfig = require('./templates/react/tsconfig');
 
+const cwd = process.cwd();
+
 module.exports = (componentPath, name, description, unstable) => {
   console.log(`\nCreating @workday/canvas-kit-react-${name}`);
 
   const modulePath = path.join(componentPath, 'react');
   mkdirp(modulePath);
 
-  const upperName = name; // TODO
+  const pascalCaseName = getPascalCaseName(name);
+  const titleCaseName = getTitleCaseName(name);
   const rootPath = unstable ? '../../..' : '../..';
-  const storyPath = unstable ? `Labs/${upperName}` : upperName;
+  const storyPath = unstable ? `Labs/${titleCaseName}` : titleCaseName;
 
   const files = {
     package: {
@@ -26,20 +32,20 @@ module.exports = (componentPath, name, description, unstable) => {
       contents: packageJson(name, description),
     },
     component: {
-      path: `lib/${upperName}.tsx`,
-      contents: component(name),
+      path: `lib/${pascalCaseName}.tsx`,
+      contents: component(pascalCaseName),
     },
     index: {
       path: 'index.ts',
-      contents: index(name),
+      contents: index(pascalCaseName),
     },
     stories: {
       path: 'stories/stories.tsx',
-      contents: stories(storyPath, name, rootPath),
+      contents: stories(storyPath, pascalCaseName, rootPath),
     },
     readme: {
       path: 'README.md',
-      contents: readme(name, unstable),
+      contents: readme(titleCaseName, unstable),
     },
     tsconfig: {
       path: 'tsconfig.json',
@@ -55,10 +61,7 @@ module.exports = (componentPath, name, description, unstable) => {
     },
   };
 
-  // TODO: Check based on path and do this automatically
-  mkdirp(path.join(modulePath, 'lib'));
-  mkdirp(path.join(modulePath, 'stories'));
-
   writeModuleFiles(files, modulePath);
-  // Add license file
+
+  cmd.run(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };

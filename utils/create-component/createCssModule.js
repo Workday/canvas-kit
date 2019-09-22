@@ -1,7 +1,9 @@
 const path = require('path');
 const mkdirp = require('mkdirp');
+const cmd = require('node-cmd');
 
 const writeModuleFiles = require('./writeModuleFiles');
+const getTitleCaseName = require('./nameUtils').getTitleCaseName;
 
 const packageJson = require('./templates/css/packageJson');
 const component = require('./templates/css/component');
@@ -9,14 +11,16 @@ const index = require('./templates/css/index');
 const stories = require('./templates/css/stories');
 const readme = require('./templates/css/readme');
 
+const cwd = process.cwd();
+
 module.exports = (componentPath, name, description, unstable) => {
   console.log(`\nCreating @workday/canvas-kit-css-${name}`);
 
   const modulePath = path.join(componentPath, 'css');
   mkdirp(modulePath);
 
-  const upperName = name; // TODO
-  const storyPath = unstable ? `Labs/CSS/${upperName}` : `CSS/${upperName}`;
+  const titleCaseName = getTitleCaseName(name);
+  const storyPath = unstable ? `Labs/CSS/${titleCaseName}` : `CSS/${titleCaseName}`;
 
   const files = {
     package: {
@@ -37,13 +41,11 @@ module.exports = (componentPath, name, description, unstable) => {
     },
     readme: {
       path: 'README.md',
-      contents: readme(name, unstable),
+      contents: readme(titleCaseName, unstable),
     },
   };
 
-  mkdirp(path.join(modulePath, 'lib'));
-  mkdirp(path.join(modulePath, 'stories'));
-
   writeModuleFiles(files, modulePath);
-  // TODO: Add license file
+
+  cmd.run(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };

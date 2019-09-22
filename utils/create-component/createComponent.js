@@ -4,6 +4,7 @@
 const path = require('path');
 const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
+const cmd = require('node-cmd');
 
 const createReactModule = require('./createReactModule');
 const createCssModule = require('./createCssModule');
@@ -54,7 +55,7 @@ inquirer
     const {name, description, unstable, targets} = answers;
     const css = targets.includes('CSS');
     const react = targets.includes('React');
-    const componentPath = path.join(cwd, `modules/${name}`);
+    const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
     mkdirp(componentPath);
 
@@ -62,7 +63,7 @@ inquirer
     css && createCssModule(componentPath, name, description, unstable);
 
     console.log('\nInstalling dependencies');
-    // Yarn
+    cmd.run('yarn');
 
     if (!unstable) {
       react && addReactDependency(name);

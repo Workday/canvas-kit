@@ -1,7 +1,7 @@
-module.exports = name => `
-import MyComponent from './lib/MyComponent';
+module.exports = pascalCaseName => `
+import ${pascalCaseName} from './lib/${pascalCaseName}';
 
-export default MyComponent;
-export {MyComponent};
-export * from './lib/MyComponent';
+export default ${pascalCaseName};
+export {${pascalCaseName}};
+export * from './lib/${pascalCaseName}';
 `;
