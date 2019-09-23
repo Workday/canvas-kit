@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
@@ -24,10 +25,6 @@ const questions = [
     type: 'input',
     name: 'name',
     message: 'Module/component name (in "kebab-case"):',
-    validate: function(value) {
-      return true;
-      // TODO: Check if file exists
-    },
   },
   {
     type: 'input',
@@ -49,30 +46,45 @@ const questions = [
   },
 ];
 
+// TODO: Add review/confirmation
+// TODO: Add colors
+const confirmation = [];
+
 inquirer
   .prompt(questions)
   .then(answers => {
-    const {name, description, unstable, targets} = answers;
+    const {name, unstable, targets} = answers;
     const css = targets.includes('CSS');
     const react = targets.includes('React');
     const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
-    mkdirp(componentPath);
-
-    react && createReactModule(componentPath, name, description, unstable);
-    css && createCssModule(componentPath, name, description, unstable);
-
-    console.log('\nInstalling dependencies');
-    cmd.run('yarn');
-
-    if (!unstable) {
-      react && addReactDependency(name);
-      css && addSassDependency(name);
+    if (!fs.existsSync(componentPath)) {
+      mkdirp(componentPath);
     }
 
-    console.log(`\nDone`);
+    css && createModule(componentPath, 'css', createCssModule, addSassDependency, answers);
+    react && createModule(componentPath, 'react', createReactModule, addReactDependency, answers);
+
+    console.log(`\nDone.`);
   })
   .catch(e => {
     console.log('\nError creating component:\n');
     console.log(e.stack);
   });
+
+const createModule = (componentPath, target, moduleGenerator, dependencyGenerator, answers) => {
+  const {name, description, unstable} = answers;
+
+  const modulePath = path.join(componentPath, target);
+
+  if (fs.existsSync(modulePath)) {
+    console.log(`\nModule @workday/canvas-kit-${target}-${name} already exists. Skipping.`);
+  } else {
+    moduleGenerator(modulePath, name, description, unstable);
+
+    console.log('\nInstalling dependency.');
+    cmd.run('yarn');
+
+    dependencyGenerator(name);
+  }
+};

@@ -13,10 +13,9 @@ const readme = require('./templates/css/readme');
 
 const cwd = process.cwd();
 
-module.exports = (componentPath, name, description, unstable) => {
-  console.log(`\nCreating @workday/canvas-kit-css-${name}`);
+module.exports = (modulePath, name, description, unstable) => {
+  console.log(`\nCreating @workday/canvas-kit-css-${name}\n`);
 
-  const modulePath = path.join(componentPath, 'css');
   mkdirp(modulePath);
 
   const titleCaseName = getTitleCaseName(name);

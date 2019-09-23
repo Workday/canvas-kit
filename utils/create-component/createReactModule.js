@@ -15,10 +15,9 @@ const tsconfig = require('./templates/react/tsconfig');
 
 const cwd = process.cwd();
 
-module.exports = (componentPath, name, description, unstable) => {
-  console.log(`\nCreating @workday/canvas-kit-react-${name}`);
+module.exports = (modulePath, name, description, unstable) => {
+  console.log(`\nCreating @workday/canvas-kit-react-${name}\n`);
 
-  const modulePath = path.join(componentPath, 'react');
   mkdirp(modulePath);
 
   const pascalCaseName = getPascalCaseName(name);
