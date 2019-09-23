@@ -16,7 +16,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   testId?: string;
   open: boolean;
-  padding?: PopupPadding;
+  padding: PopupPadding;
   width?: ModalWidth;
   /**
    * Optional callback for the Modal handling closing. If this callback is provided
