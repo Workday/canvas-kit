@@ -117,10 +117,6 @@ export default class Modal extends React.Component<ModalProps> {
     padding: Modal.Padding.l,
     width: Modal.Width.s,
     closeOnEscape: false,
-    transformOrigin: {
-      horizontal: 'center',
-      vertical: 'top',
-    },
   };
 
   private handleKeydown = (event: KeyboardEvent) => {
