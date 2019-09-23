@@ -87,7 +87,7 @@ function onInitialFocus(
         firstFocusable.tabIndex = 0;
 
         const changeTabIndex = () => {
-          // We no longer need to focus on the header after it looses focus
+          // We no longer need to focus on the header after it loses focus
           // We simply want to transfer focus inside
           firstFocusable.removeEventListener('blur', changeTabIndex);
           // We must wait one frame to ensure tabbable checks are satisfied
