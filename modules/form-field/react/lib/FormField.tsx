@@ -1,9 +1,12 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing, inputColors} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, ErrorType} from '@workday/canvas-kit-react-common';
+import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import Hint from './Hint';
 import Label from './Label';
+import InputIconContainer from './InputIconContainer';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
@@ -132,6 +135,29 @@ export default class FormField extends React.Component<FormFieldProps> {
       ...elemProps
     } = this.props;
 
+    let icon: React.ReactElement<SystemIcon> | undefined;
+    switch (error) {
+      case ErrorType.Alert:
+        icon = (
+          <SystemIcon
+            icon={exclamationTriangleIcon}
+            color={inputColors.warning.icon}
+            colorHover={inputColors.warning.icon}
+          />
+        );
+        break;
+      case ErrorType.Error:
+        icon = (
+          <SystemIcon
+            icon={exclamationCircleIcon}
+            color={inputColors.error.icon}
+            colorHover={inputColors.error.icon}
+          />
+        );
+        break;
+      default:
+    }
+
     const field = (
       <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
         {typeof label === 'string' ? (
@@ -148,7 +174,9 @@ export default class FormField extends React.Component<FormFieldProps> {
         )}
 
         <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
-          {React.Children.map(children, this.renderChildren)}
+          <InputIconContainer icon={icon} grow={grow}>
+            {React.Children.map(children, this.renderChildren)}
+          </InputIconContainer>
           {hintText && (
             <Hint error={error} id={hintId}>
               {hintText}
