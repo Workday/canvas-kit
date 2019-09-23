@@ -16,11 +16,16 @@ module.exports = (name, description) => `
 		"type": "git",
 		"url": "https://github.com/Workday/canvas-kit/tree/master/modules/${name}/css"
 	},
-	"scripts": { TODO: ADD BUILD SCRIPTS },
+	"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ../../../utils/css-build.js index.scss"
+  },
 	"keywords": [
 		"canvas",
 		"canvas-kit",
-		"css",
+    "css",
+    "scss",
+    "sass",
 		"components",
 		"workday",
 		"${name}"

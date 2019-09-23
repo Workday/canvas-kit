@@ -45,6 +45,11 @@ const questions = [
     message: 'Is this an unstable component (i.e. should it go in Canvas Kit Labs)?:',
     default: false,
   },
+  /**
+   * Add question to add deps
+   * React: CK core, emotion, react-emotion
+   * CSS: CK Core
+   */
 ];
 
 inquirer

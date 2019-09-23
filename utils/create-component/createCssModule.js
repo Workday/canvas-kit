@@ -40,12 +40,12 @@ module.exports = (modulePath, name, description, unstable) => {
     },
     readme: {
       path: 'README.md',
-      contents: readme(titleCaseName, unstable),
+      contents: readme(name, titleCaseName, description, unstable),
     },
   };
 
   writeModuleFiles(files, modulePath);
 
-  console.log('Copying License file to ' + `${modulePath.replace(cwd, '')}/LICENSE`.cyan);
+  console.log('Copying License file to ' + `.${modulePath.replace(cwd, '')}/LICENSE`.cyan);
   cmd.run(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };
