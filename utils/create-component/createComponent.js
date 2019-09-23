@@ -10,8 +10,7 @@ const colors = require('colors');
 
 const createReactModule = require('./createReactModule');
 const createCssModule = require('./createCssModule');
-const addReactDependency = require('./addDependencies').addReactDependency;
-const addSassDependency = require('./addDependencies').addSassDependency;
+const addDependency = require('./addDependency');
 
 const cwd = process.cwd();
 
@@ -64,8 +63,8 @@ inquirer
       mkdirp(componentPath);
     }
 
-    css && createModule(componentPath, 'css', createCssModule, addSassDependency, answers);
-    react && createModule(componentPath, 'react', createReactModule, addReactDependency, answers);
+    css && createModule(componentPath, 'css', createCssModule, answers);
+    react && createModule(componentPath, 'react', createReactModule, answers);
 
     console.log(`\nDone.`.green);
   })
@@ -74,7 +73,7 @@ inquirer
     console.log(e.stack);
   });
 
-const createModule = (componentPath, target, moduleGenerator, dependencyGenerator, answers) => {
+const createModule = (componentPath, target, moduleGenerator, answers) => {
   const {name, description, unstable} = answers;
 
   const modulePath = path.join(componentPath, target);
@@ -84,9 +83,13 @@ const createModule = (componentPath, target, moduleGenerator, dependencyGenerato
   } else {
     moduleGenerator(modulePath, name, description, unstable);
 
-    console.log('\nInstalling dependency.');
+    console.log('\nBootstrapping dependencies.');
     cmd.run('yarn');
 
-    dependencyGenerator(name);
+    if (!unstable) {
+      console.log('\nAdding dependency to ' + `@workday/canvas-kit-${target}.`.cyan);
+
+      addDependency(name, target);
+    }
   }
 };

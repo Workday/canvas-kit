@@ -17,19 +17,21 @@ const tsconfig = require('./templates/react/tsconfig');
 const cwd = process.cwd();
 
 module.exports = (modulePath, name, description, unstable) => {
-  console.log('\nCreating ' + `@workday/canvas-kit-react-${name}\n`.blue.underline);
+  const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}react-${name}`;
+
+  console.log('\nCreating ' + `${moduleName}\n`.blue.underline);
 
   mkdirp(modulePath);
 
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
-  const rootPath = unstable ? '../../..' : '../..';
+  const rootPath = unstable ? '../../../..' : '../../..';
   const storyPath = unstable ? `Labs/${titleCaseName}` : titleCaseName;
 
   const files = {
     package: {
       path: 'package.json',
-      contents: packageJson(name, description),
+      contents: packageJson(name, moduleName, description, unstable),
     },
     component: {
       path: `lib/${pascalCaseName}.tsx`,

@@ -4,14 +4,13 @@ const os = require('os');
 
 const cwd = process.cwd();
 
-module.exports.addReactDependency = componentName => {
-  addModuleAsDependencyByType(componentName, 'react');
-  addExportToReactIndex(componentName);
-};
-
-module.exports.addSassDependency = componentName => {
-  addModuleAsDependencyByType(componentName, 'css');
-  addImportToSassIndex(componentName);
+module.exports = (componentName, target) => {
+  addModuleAsDependencyByType(componentName, target);
+  if (target === 'react') {
+    addExportToReactIndex(componentName);
+  } else if (target === 'css') {
+    addImportToSassIndex(componentName);
+  }
 };
 
 /**

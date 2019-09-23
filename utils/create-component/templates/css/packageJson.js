@@ -1,6 +1,6 @@
-module.exports = (name, description) => `
+module.exports = (name, moduleName, description, unstable) => `
 {
-  "name": "@workday/canvas-kit-css-${name}",
+  "name": "${moduleName}",
   "version": "0.0.0",
   "description": "${description}",
   "author": "Workday, Inc. (https://www.workday.com)",
@@ -14,11 +14,13 @@ module.exports = (name, description) => `
   "main": "dist/canvas-kit-css-${name}.min.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/${name}/css"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/${
+      unstable ? '_labs/' : ''
+    }${name}/css"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ../../../utils/css-build.js index.scss"
+    "test": "echo \\"Error: no test specified\\" && exit 1",
+    "build": "node ../../../${unstable ? '../' : ''}utils/css-build.js index.scss"
   },
   "keywords": [
     "canvas",

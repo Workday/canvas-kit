@@ -14,7 +14,9 @@ const readme = require('./templates/css/readme');
 const cwd = process.cwd();
 
 module.exports = (modulePath, name, description, unstable) => {
-  console.log('\nCreating '.underline + `@workday/canvas-kit-css-${name}\n`.blue.underline);
+  const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}css-${name}`;
+
+  console.log('\nCreating '.underline + `${moduleName}\n`.blue.underline);
 
   mkdirp(modulePath);
 
@@ -24,7 +26,7 @@ module.exports = (modulePath, name, description, unstable) => {
   const files = {
     package: {
       path: 'package.json',
-      contents: packageJson(name, description),
+      contents: packageJson(name, moduleName, description, unstable),
     },
     component: {
       path: `lib/${name}.scss`,

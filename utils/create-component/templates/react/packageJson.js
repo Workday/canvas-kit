@@ -1,6 +1,6 @@
-module.exports = (name, description) => `
+module.exports = (name, moduleName, description, unstable) => `
 {
-  "name": "@workday/canvas-kit-react-${name}",
+  "name": "${moduleName}",
   "version": "0.0.0",
   "description": "${description}",
   "author": "Workday, Inc. (https://www.workday.com)",
@@ -11,7 +11,9 @@ module.exports = (name, description) => `
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/${name}/react"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/${
+      unstable ? '_labs/' : ''
+    }${name}/react"
   },
   "files": [
     "dist/",
