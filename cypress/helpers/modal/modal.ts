@@ -9,7 +9,7 @@ export function get(testId?: string) {
 }
 
 export function getTitle($modal: JQuery) {
-  return $modal.find('h3');
+  return $modal.find('h3').first();
 }
 
 export function getCloseButton($modal: JQuery) {
