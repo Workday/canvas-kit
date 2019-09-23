@@ -8,6 +8,11 @@ describe('Label Snapshots', () => {
     expect(component).toMatchSnapshot();
   });
 
+  test('renders required marking', () => {
+    const component = renderer.create(<Label required={true} />);
+    expect(component).toMatchSnapshot();
+  });
+
   test('renders left label', () => {
     const component = renderer.create(<Label labelPosition={Label.Position.Left} />);
     expect(component).toMatchSnapshot();
