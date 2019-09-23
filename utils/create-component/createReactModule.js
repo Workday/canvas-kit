@@ -1,6 +1,7 @@
 const path = require('path');
 const mkdirp = require('mkdirp');
 const cmd = require('node-cmd');
+const colors = require('colors');
 
 const writeModuleFiles = require('./writeModuleFiles');
 const getPascalCaseName = require('./nameUtils').getPascalCaseName;
@@ -16,7 +17,7 @@ const tsconfig = require('./templates/react/tsconfig');
 const cwd = process.cwd();
 
 module.exports = (modulePath, name, description, unstable) => {
-  console.log(`\nCreating @workday/canvas-kit-react-${name}\n`);
+  console.log('\nCreating ' + `@workday/canvas-kit-react-${name}\n`.blue.underline);
 
   mkdirp(modulePath);
 
@@ -62,5 +63,6 @@ module.exports = (modulePath, name, description, unstable) => {
 
   writeModuleFiles(files, modulePath);
 
+  console.log('Copying License file to ' + `${modulePath.replace(cwd, '')}/LICENSE`.cyan);
   cmd.run(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };

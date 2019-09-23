@@ -6,6 +6,7 @@ const path = require('path');
 const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
 const cmd = require('node-cmd');
+const colors = require('colors');
 
 const createReactModule = require('./createReactModule');
 const createCssModule = require('./createCssModule');
@@ -14,11 +15,11 @@ const addSassDependency = require('./addDependencies').addSassDependency;
 
 const cwd = process.cwd();
 
-console.log(`\n
-This utility will walk you through creating a new Canvas Kit component.
+console.log('\nCanvas Kit Component Generator'.brightBlue.underline.bold);
 
-Press ^C at any time to quit.
-`);
+console.log('\nThis utility will walk you through creating a new Canvas Kit component.');
+
+console.log('\nPress ^C at any time to quit.\n'.gray);
 
 const questions = [
   {
@@ -46,10 +47,6 @@ const questions = [
   },
 ];
 
-// TODO: Add review/confirmation
-// TODO: Add colors
-const confirmation = [];
-
 inquirer
   .prompt(questions)
   .then(answers => {
@@ -65,10 +62,10 @@ inquirer
     css && createModule(componentPath, 'css', createCssModule, addSassDependency, answers);
     react && createModule(componentPath, 'react', createReactModule, addReactDependency, answers);
 
-    console.log(`\nDone.`);
+    console.log(`\nDone.`.green);
   })
   .catch(e => {
-    console.log('\nError creating component:\n');
+    console.log('\nError creating component:\n'.red);
     console.log(e.stack);
   });
 
@@ -78,7 +75,7 @@ const createModule = (componentPath, target, moduleGenerator, dependencyGenerato
   const modulePath = path.join(componentPath, target);
 
   if (fs.existsSync(modulePath)) {
-    console.log(`\nModule @workday/canvas-kit-${target}-${name} already exists. Skipping.`);
+    console.log(`\nModule @workday/canvas-kit-${target}-${name} already exists. Skipping.`.yellow);
   } else {
     moduleGenerator(modulePath, name, description, unstable);
 

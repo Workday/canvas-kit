@@ -14,7 +14,7 @@ module.exports = (files, modulePath) => {
     const file = files[key];
     const filePath = path.join(modulePath, file.path);
 
-    console.log(`Creating ${filePath.replace(cwd, '')}`);
+    console.log('Creating ' + `${filePath.replace(cwd, '')}`.cyan);
 
     mkdirp(getDirName(filePath), function(err) {
       if (err) return cb(err);

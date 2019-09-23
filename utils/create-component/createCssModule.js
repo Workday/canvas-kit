@@ -14,7 +14,7 @@ const readme = require('./templates/css/readme');
 const cwd = process.cwd();
 
 module.exports = (modulePath, name, description, unstable) => {
-  console.log(`\nCreating @workday/canvas-kit-css-${name}\n`);
+  console.log('\nCreating '.underline + `@workday/canvas-kit-css-${name}\n`.blue.underline);
 
   mkdirp(modulePath);
 
@@ -46,5 +46,6 @@ module.exports = (modulePath, name, description, unstable) => {
 
   writeModuleFiles(files, modulePath);
 
+  console.log('Copying License file to ' + `${modulePath.replace(cwd, '')}/LICENSE`.cyan);
   cmd.run(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };
