@@ -6,7 +6,7 @@ export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.PopperOptions;
 
 export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
-  anchorElement?: Element;
+  anchorElement: Element;
   children: React.ReactNode;
   containerElement?: Element;
   open: boolean;
@@ -69,15 +69,9 @@ export class Popper extends React.PureComponent<PopperProps> {
       return;
     }
 
-    if (this.props.anchorElement) {
-      this.popper = new PopperJS(this.props.anchorElement, popperNode, {
-        placement: this.props.placement,
-        ...this.props.popperOptions,
-      });
-    } else {
-      console.warn(
-        `Popper: anchorElement was not defined. A valid anchorElement must be provided to render a Popper`
-      );
-    }
+    this.popper = new PopperJS(this.props.anchorElement, popperNode, {
+      placement: this.props.placement,
+      ...this.props.popperOptions,
+    });
   };
 }
