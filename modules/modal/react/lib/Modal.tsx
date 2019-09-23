@@ -90,7 +90,7 @@ function onInitialFocus(
 
         const changeTabIndex = () => {
           // We no longer need to focus on the header after it looses focus
-          // We simply want to transfer focus inside
+          // We simply want to transfer focus inside the dialog
           firstFocusable.removeEventListener('blur', changeTabIndex);
           // We must wait one frame to ensure tabbable checks are satisfied
           // by all focus libraries...
@@ -122,7 +122,11 @@ export default class Modal extends React.Component<ModalProps> {
   };
 
   private handleKeydown = (event: KeyboardEvent) => {
-    if (this.props.closeOnEscape && this.props.handleClose && event.keyCode === 27) {
+    if (
+      this.props.closeOnEscape &&
+      this.props.handleClose &&
+      (event.key === 'Esc' || event.key === 'Escape')
+    ) {
       this.props.handleClose();
     }
   };
@@ -211,7 +215,7 @@ export function useModal() {
 
   return {
     targetProps: {
-      onClick(event: React.SyntheticEvent<HTMLElement>) {
+      onClick() {
         setOpen(true);
       },
     },
