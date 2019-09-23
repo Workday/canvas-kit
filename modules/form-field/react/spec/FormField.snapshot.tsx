@@ -12,6 +12,15 @@ describe('FormField Snapshots', () => {
     expect(component).toMatchSnapshot();
   });
 
+  test('renders required marking', () => {
+    const component = renderer.create(
+      <FormField required={true}>
+        <input type="text" />
+      </FormField>
+    );
+    expect(component).toMatchSnapshot();
+  });
+
   test('left label', () => {
     const component = renderer.create(
       <FormField labelPosition={FormField.LabelPosition.Left}>

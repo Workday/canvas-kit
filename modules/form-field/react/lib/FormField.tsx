@@ -13,6 +13,7 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, Gr
   hintId?: string;
   inputId?: string;
   error?: ErrorType;
+  required?: boolean;
   useFieldset?: boolean;
   children: React.ReactNode;
 }
@@ -127,13 +128,19 @@ export default class FormField extends React.Component<FormFieldProps> {
       useFieldset,
       labelPosition,
       error,
+      required,
       ...elemProps
     } = this.props;
 
     const field = (
       <FormFieldContainer labelPosition={labelPosition} {...elemProps}>
         {typeof label === 'string' ? (
-          <Label labelPosition={labelPosition} htmlFor={inputId} isLegend={useFieldset}>
+          <Label
+            labelPosition={labelPosition}
+            htmlFor={inputId}
+            isLegend={useFieldset}
+            required={!!required}
+          >
             {label}
           </Label>
         ) : (

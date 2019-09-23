@@ -1,12 +1,13 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {spacing, type} from '@workday/canvas-kit-react-core';
+import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {
   labelPosition: FormFieldLabelPosition;
   isLegend: boolean;
   htmlFor?: string;
+  required?: boolean;
 }
 
 const labelStyles = [
@@ -15,23 +16,32 @@ const labelStyles = [
     ...type.variant.label,
     padding: 0,
   },
-  (props: LabelProps) => {
-    if (props.labelPosition === FormFieldLabelPosition.Left) {
-      return {
-        display: 'inline-block',
-        verticalAlign: 'top',
-        marginTop: 10, // Input height - font line height / 2
-        marginRight: spacing.l,
-        width: 180,
-      };
-    }
-
+  ({labelPosition}: {labelPosition: FormFieldLabelPosition}) => {
     return {
-      display: 'block',
-      marginBottom: spacing.xxxs,
+      ...(labelPosition === FormFieldLabelPosition.Left
+        ? {
+            display: 'inline-block',
+            verticalAlign: 'top',
+            marginTop: 10, // Input height - font line height / 2
+            marginRight: spacing.l,
+            width: 180,
+          }
+        : {
+            display: 'block',
+            marginBottom: spacing.xxxs,
+          }),
     };
   },
 ];
+
+const RequiredAstrisk = styled('abbr')({
+  color: colors.cinnamon500,
+  fontSize: '16px',
+  fontWeight: 400,
+  top: '1px',
+  paddingLeft: '2px',
+  textDecoration: 'unset',
+});
 
 // Used inside the fieldset component instead of a label for accessible radio groups
 const LegendComponent = styled('legend')<LabelProps>(...labelStyles);
@@ -47,7 +57,22 @@ export default class Label extends React.Component<LabelProps> {
 
   public render() {
     const {...props} = this.props;
-
-    return <>{props.isLegend ? <LegendComponent {...props} /> : <LabelComponent {...props} />}</>;
+    const children = !props.required
+      ? props.children
+      : [
+          props.children,
+          <RequiredAstrisk key={'0'} title="required">
+            *
+          </RequiredAstrisk>,
+        ];
+    return (
+      <>
+        {props.isLegend ? (
+          <LegendComponent {...props} children={children} />
+        ) : (
+          <LabelComponent {...props} children={children} />
+        )}
+      </>
+    );
   }
 }
