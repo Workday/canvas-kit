@@ -7,7 +7,7 @@
   max-width: $wdc-btn-max-width-l;
   height: $wdc-btn-height-l;
   padding: 0 14px;
-  background-color: $wdc-btn-secondary-bg;
+  background-color: $wdc-btn-bg-secondary;
   color: $wdc-btn-secondary-text-color;
   border-radius: 999px;
   transition: 0.2s background, 0.2s border-color, 0.2s box-shadow;
@@ -21,17 +21,17 @@
 
   &.wdc-btn-hover,
   &:hover {
-    background-color: $wdc-btn-secondary-bg-hover;
+    background-color: $wdc-btn-bg-secondary-hover;
   }
 
   &.wdc-btn-active,
   &:active {
-    background-color: $wdc-btn-secondary-bg-active;
+    background-color: $wdc-btn-bg-secondary-active;
   }
 
   &:focus,
   &.wdc-btn-focus {
-    background-color: $wdc-btn-secondary-bg-focus;
+    background-color: $wdc-btn-bg-secondary-focus;
     box-shadow: $wdc-btn-focus-ring;
     outline: none;
   }

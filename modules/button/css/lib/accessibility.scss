@@ -25,7 +25,7 @@
 
   .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-primary):not(.wdc-btn-delete) {
     &:not([tabindex='-1']):focus:hover {
-      background-color: $wdc-btn-secondary-bg-hover;
+      background-color: $wdc-btn-bg-secondary-hover;
     }
   }
 
