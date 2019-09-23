@@ -29,10 +29,13 @@ export interface AvatarLocalProps {
   url?: string;
 }
 
+export interface AvatarProps extends AvatarLocalProps, React.HTMLAttributes<HTMLDivElement> {}
+
 const Container = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Pick<AvatarLocalProps, 'variant' | 'size'>>(
+})<Pick<AvatarProps, 'variant' | 'size'>>(
   {
+    background: colors.soap200,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -47,13 +50,12 @@ const Container = styled('div', {
     },
   },
   ({size}) => ({
-    background: colors.soap200,
     height: size,
     width: size,
   })
 );
 
-export default class Avatar extends React.Component<AvatarLocalProps> {
+export default class Avatar extends React.Component<AvatarProps> {
   static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
 
