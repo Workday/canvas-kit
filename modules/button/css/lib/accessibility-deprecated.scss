@@ -1,0 +1,93 @@
+@mixin wdc-focusable-buttons() {
+  .wdc-a11y button:not([disabled]),
+  .wdc-btn-deprecated.wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+[data-whatinput='keyboard'] {
+  @include wdc-focusable-buttons() {
+    box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-color-focus;
+    outline: none;
+  }
+
+  .wdc-btn-deprecated.wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):focus {
+      @extend .wdc-btn-primary.wdc-btn-focus;
+    }
+  }
+
+  .wdc-btn-deprecated.wdc-btn-split-icon:not([disabled]):not(.wdc-btn-disabled),
+  .wdc-btn-split-text:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):focus {
+      @extend .wdc-btn-split-text.wdc-btn-focus;
+    }
+  }
+
+  .wdc-btn-deprecated.wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):focus {
+      @extend .wdc-btn-delete.wdc-btn-focus;
+    }
+  }
+}
+
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  @include wdc-focusable-buttons() {
+    outline: none;
+  }
+
+  .wdc-btn-deprecated.wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):focus {
+      box-shadow: none;
+    }
+  }
+
+  .wdc-btn-deprecated:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):focus {
+      @include wdc-btn-box-shadow($wdc-btn-deprecated-border-color);
+    }
+  }
+
+  .wdc-btn-deprecated:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):hover {
+      @extend .wdc-btn-hover;
+      @include wdc-btn-box-shadow($wdc-btn-deprecated-border-color-hover);
+    }
+  }
+
+  .wdc-btn-deprecated:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):active {
+      @extend .wdc-btn-active;
+    }
+  }
+
+  .wdc-btn-deprecated.wdc-btn-primary.wdc-btn-split-text:not([disabled]):not(.wdc-btn-disabled),
+  .wdc-btn-primary.wdc-btn-split-icon:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):focus {
+      box-shadow: none;
+    }
+  }
+
+  .wdc-btn-deprecated.wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-beta) {
+    &:not([tabindex='-1']):focus {
+      @include wdc-btn-box-shadow($wdc-btn-deprecated-border-color-delete);
+      background: $wdc-btn-deprecated-bg-delete;
+      color: $wdc-btn-deprecated-color-delete;
+    }
+  }
+
+  .wdc-btn-deprecated.wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):hover {
+      @extend .wdc-btn-delete.wdc-btn-hover;
+    }
+  }
+
+  .wdc-btn-deprecated.wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):active {
+      @extend .wdc-btn-delete.wdc-btn-active;
+    }
+  }
+}
