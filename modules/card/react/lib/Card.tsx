@@ -41,7 +41,7 @@ const Box = styled('div')<CardProps>(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${colors.soap500}`,
-    borderRadius: borderRadius.m,
+    borderRadius: borderRadius.l,
     boxSizing: 'border-box',
   },
   ({depth}) => depth,
