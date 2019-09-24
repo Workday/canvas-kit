@@ -1,4 +1,4 @@
-import canvas from '@workday/canvas-kit-react-core';
+import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, GenericStyle} from '@workday/canvas-kit-react-common';
 import {CSSObject} from 'create-emotion';
 import {
@@ -137,7 +137,7 @@ export const canvasButtonStyles: ButtonGenericStyle = {
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: '13px',
-    borderRadius: '999px',
+    borderRadius: borderRadius.circle,
     border: '1px solid transparent',
     boxShadow: 'none',
     position: 'relative',
@@ -326,13 +326,13 @@ export const iconButtonStyles: ButtonGenericStyle = {
     },
     types: {
       [IconButtonVariant.Square]: {
-        borderRadius: '4px',
+        borderRadius: borderRadius.m,
         width: canvas.spacing.l,
         height: canvas.spacing.l,
         ...getButtonStateStyle(IconButtonVariant.Square),
       },
       [IconButtonVariant.SquareFilled]: {
-        borderRadius: '4px',
+        borderRadius: borderRadius.m,
         width: canvas.spacing.l,
         height: canvas.spacing.l,
         ...getButtonStateStyle(IconButtonVariant.SquareFilled),

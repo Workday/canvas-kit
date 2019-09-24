@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import IconButton, {IconButtonCon, IconButtonProps} from './IconButton';
 
 export interface IconButtonToggleGroupProps {
@@ -31,7 +31,7 @@ export interface IconButtonToggleGroupProps {
 
 const Container = styled('div')({
   [IconButtonCon as any]: {
-    borderRadius: 0,
+    borderRadius: borderRadius.zero,
     borderWidth: '1px',
     marginLeft: '-1px',
     '&:first-child': {
