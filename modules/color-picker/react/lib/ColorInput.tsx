@@ -26,7 +26,6 @@ const swatchTileSpacing = spacing.xxs;
 const swatchTileSize = 20;
 const swatchCheckIconSpacing = 8;
 const colorInputWidth = 116;
-const colorInputErrorWidth = 144;
 
 const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'error' | 'grow'>>(
   {
@@ -38,10 +37,6 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'err
       color: 'transparent',
     },
   },
-  ({error}) =>
-    typeof error !== 'undefined' && {
-      width: colorInputErrorWidth,
-    },
   ({grow}) =>
     grow && {
       minWidth: '100%',
