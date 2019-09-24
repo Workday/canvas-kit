@@ -31,7 +31,7 @@ export interface AvatarLocalProps {
 
 export interface AvatarProps extends AvatarLocalProps, React.HTMLAttributes<HTMLDivElement> {}
 
-const Container = styled('div', {
+export const AvatarStyledComponent = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<Pick<AvatarProps, 'variant' | 'size'>>(
   {
@@ -70,13 +70,13 @@ export default class Avatar extends React.Component<AvatarProps> {
 
     const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
     return (
-      <Container variant={variant} size={size} aria-label={altText} {...elemProps}>
+      <AvatarStyledComponent variant={variant} size={size} aria-label={altText} {...elemProps}>
         {url ? (
           <img src={url} alt={altText} />
         ) : (
           <SystemIconCircle icon={userIcon} background={background} size={size} />
         )}
-      </Container>
+      </AvatarStyledComponent>
     );
   }
 }

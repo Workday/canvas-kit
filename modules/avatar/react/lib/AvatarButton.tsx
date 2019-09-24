@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import isPropValid from '@emotion/is-prop-valid';
-import Avatar, {AvatarVariant, AvatarLocalProps} from './Avatar';
+import {AvatarStyledComponent, AvatarVariant, AvatarLocalProps} from './Avatar';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
-import {SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
+import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
+import {userIcon} from '@workday/canvas-system-icons-web';
 
 export interface AvatarButtonProps
   extends AvatarLocalProps,
@@ -19,29 +19,16 @@ export interface AvatarButtonProps
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const Container = styled('button', {
-  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Pick<AvatarButtonProps, 'variant' | 'size' | 'onClick'>>(
-  {
-    display: 'flex',
-    padding: 0,
-    border: 0,
-    borderRadius: '100%',
-  },
-  ({variant, size, onClick}) => ({
-    background: colors.soap200,
-    height: size,
-    width: size,
-    cursor: onClick ? 'pointer' : 'default',
-    '&:not([disabled])': {
-      '&:focus': {
-        outline: 'none',
-        ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
-      },
+const AvatarAsButton = styled(AvatarStyledComponent)<AvatarButtonProps>(({variant, onClick}) => ({
+  cursor: onClick ? 'pointer' : 'default',
+  '&:not([disabled])': {
+    '&:focus': {
+      outline: 'none',
+      ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
     },
-    ...hideMouseFocus,
-  })
-);
+  },
+  ...hideMouseFocus,
+})).withComponent('button');
 
 export default class AvatarButton extends React.Component<AvatarButtonProps> {
   static Variant = AvatarVariant;
@@ -56,18 +43,26 @@ export default class AvatarButton extends React.Component<AvatarButtonProps> {
   render() {
     const {buttonRef, variant, altText, size, url, onClick, ...elemProps} = this.props;
 
+    const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
+
     return (
-      <Container
+      <AvatarAsButton
         variant={variant}
         size={size}
+        url={url}
+        altText={altText}
         onClick={onClick}
         disabled={onClick ? false : true}
         innerRef={buttonRef}
         aria-label={altText}
         {...elemProps}
       >
-        <Avatar variant={variant} size={size} url={url} aria-label={altText} />
-      </Container>
+        {url ? (
+          <img src={url} alt={altText} />
+        ) : (
+          <SystemIconCircle icon={userIcon} background={background} size={size} />
+        )}
+      </AvatarAsButton>
     );
   }
 }
