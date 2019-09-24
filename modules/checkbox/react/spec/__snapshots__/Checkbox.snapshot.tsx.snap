@@ -19,7 +19,7 @@ exports[`Checkbox Snapshots alert renders as expected 1`] = `
 }
 
 .emotion-7::after {
-  border-radius: 100%;
+  border-radius: 999px;
   box-shadow: 0 0 0 0 #f0f1f2;
   content: "";
   display: inline-block;
@@ -295,7 +295,7 @@ exports[`Checkbox Snapshots checked alert renders as expected 1`] = `
 }
 
 .emotion-7::after {
-  border-radius: 100%;
+  border-radius: 999px;
   box-shadow: 0 0 0 0 #f0f1f2;
   content: "";
   display: inline-block;
@@ -571,7 +571,7 @@ exports[`Checkbox Snapshots checked error renders as expected 1`] = `
 }
 
 .emotion-7::after {
-  border-radius: 100%;
+  border-radius: 999px;
   box-shadow: 0 0 0 0 #f0f1f2;
   content: "";
   display: inline-block;
@@ -847,7 +847,7 @@ exports[`Checkbox Snapshots error renders as expected 1`] = `
 }
 
 .emotion-7::after {
-  border-radius: 100%;
+  border-radius: 999px;
   box-shadow: 0 0 0 0 #f0f1f2;
   content: "";
   display: inline-block;
@@ -1123,7 +1123,7 @@ exports[`Checkbox Snapshots renders as expected 1`] = `
 }
 
 .emotion-7::after {
-  border-radius: 100%;
+  border-radius: 999px;
   box-shadow: 0 0 0 0 #f0f1f2;
   content: "";
   display: inline-block;
@@ -1521,7 +1521,7 @@ exports[`Checkbox Snapshots renders as expected 2`] = `
 }
 
 .emotion-7::after {
-  border-radius: 100%;
+  border-radius: 999px;
   box-shadow: 0 0 0 0 #f0f1f2;
   content: "";
   display: inline-block;
@@ -1727,7 +1727,7 @@ exports[`Checkbox Snapshots renders as expected 3`] = `
 }
 
 .emotion-7::after {
-  border-radius: 100%;
+  border-radius: 999px;
   box-shadow: 0 0 0 0 #f0f1f2;
   content: "";
   display: inline-block;
@@ -1836,7 +1836,7 @@ exports[`Checkbox Snapshots renders as expected 4`] = `
 }
 
 .emotion-7::after {
-  border-radius: 100%;
+  border-radius: 999px;
   box-shadow: 0 0 0 0 #f0f1f2;
   content: "";
   display: inline-block;

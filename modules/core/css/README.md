@@ -79,16 +79,15 @@ Black Pepper
 
 ## Border Radius
 
-Border Radius variables in t-shirt size format. Spacing values are in `px` format, except for
-`cicle` which is in percentage.
+Border Radius variables in t-shirt size format. Spacing values are in `px` format.
 
-| Variable              | Size |
-| --------------------- | ---- |
-| `$wdc-spacing-zero`   | 0    |
-| `$wdc-spacing-s`      | 2px  |
-| `$wdc-spacing-m`      | 4px  |
-| `$wdc-spacing-l`      | 8px  |
-| `$wdc-spacing-circle` | 100% |
+| Variable              | Size  |
+| --------------------- | ----- |
+| `$wdc-spacing-zero`   | 0     |
+| `$wdc-spacing-s`      | 2px   |
+| `$wdc-spacing-m`      | 4px   |
+| `$wdc-spacing-l`      | 8px   |
+| `$wdc-spacing-circle` | 999px |
 
 ## Spacing
 

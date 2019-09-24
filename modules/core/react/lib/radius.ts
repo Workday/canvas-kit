@@ -1,4 +1,4 @@
-export interface CanvasBorderRadiusNumber {
+export interface CanvasBorderRadius {
   zero: number;
   s: string;
   m: string;
@@ -6,12 +6,12 @@ export interface CanvasBorderRadiusNumber {
   circle: string;
 }
 
-export const borderRadius: CanvasBorderRadiusNumber = {
+export const borderRadius: CanvasBorderRadius = {
   zero: 0,
   s: '2px',
   m: '4px',
   l: '8px',
-  circle: '100%',
+  circle: '999px',
 };
 
 export default borderRadius;

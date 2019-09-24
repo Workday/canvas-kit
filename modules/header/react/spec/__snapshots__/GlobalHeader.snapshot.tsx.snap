@@ -401,7 +401,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 32px;
@@ -428,7 +428,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   background: #e8ebed;
@@ -1651,7 +1651,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 32px;
@@ -1678,7 +1678,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   background: #e8ebed;

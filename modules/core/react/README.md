@@ -100,8 +100,7 @@ iconColors.hover;
 
 # Border Radius
 
-Border Radius variables are in a "t-shirt size" format. Border Radius values are in `px` format
-(`spacing`), except for `cicle` which is in percentage.
+Border Radius variables are in a "t-shirt size" format. Border Radius values are in `px` format.
 
 | Variable | Size (px) |
 | -------- | --------- |
@@ -109,7 +108,7 @@ Border Radius variables are in a "t-shirt size" format. Border Radius values are
 | `s`      | `'2px'`   |
 | `m`      | `'4px'`   |
 | `l`      | `'8px'`   |
-| `xxxl`   | `'100%'`  |
+| `circle` | `'999px'` |
 
 # Spacing
 
