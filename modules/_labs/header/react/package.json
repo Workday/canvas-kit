@@ -1,5 +1,5 @@
 {
-  "name": "@workday/canvas-kit-react-header",
+  "name": "@workday/canvas-kit-labs-react-header",
   "version": "3.0.0-alpha.8",
   "description": "A Canvas-styled application header",
   "author": "Workday, Inc. (https://www.workday.com)",
@@ -10,7 +10,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/header/react"
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/_labs/header/react"
   },
   "files": [
     "dist/",

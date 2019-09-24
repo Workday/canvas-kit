@@ -1,4 +1,4 @@
-/// <reference path="../../../../typings.d.ts" />
+/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -7,9 +7,9 @@ import {css, cx} from 'emotion';
 import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
-import {AvatarButton} from '../../../avatar/react/index';
-import {colors, spacing} from '../../../core/react/index';
-import {Button, IconButton} from '../../../button/react/index';
+import {AvatarButton} from '../../../../avatar/react/index';
+import {colors, spacing} from '../../../../core/react/index';
+import {Button, IconButton} from '../../../../button/react/index';
 import {GlobalHeader, Header, DubLogoTitle, WorkdayLogoTitle, HeaderVariant} from '../index';
 
 import README from '../README.md';
@@ -65,7 +65,7 @@ const nav = (
   </nav>
 );
 
-storiesOf('Header', module)
+storiesOf('Labs/Header/React', module)
   .addDecorator(withReadme(README))
   .add('Global Header', () => (
     <div className="story">

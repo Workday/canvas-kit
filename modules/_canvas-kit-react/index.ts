@@ -9,7 +9,6 @@ export * from '@workday/canvas-kit-react-color-picker';
 export * from '@workday/canvas-kit-react-common';
 export * from '@workday/canvas-kit-react-cookie-banner';
 export * from '@workday/canvas-kit-react-form-field';
-export * from '@workday/canvas-kit-react-header';
 export * from '@workday/canvas-kit-react-icon';
 export * from '@workday/canvas-kit-react-layout';
 export * from '@workday/canvas-kit-react-loading-animation';
