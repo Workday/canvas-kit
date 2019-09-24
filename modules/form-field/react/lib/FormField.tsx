@@ -9,6 +9,13 @@ import Label from './Label';
 import InputIconContainer from './InputIconContainer';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
+/**
+ * TODO:
+ *  - Consider adding error icon to props
+ *  - Figure out how to conditionally render based on input need
+ *    - This is because current implementation renders error icons when inputs do not
+ */
+
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
   labelPosition: FormFieldLabelPosition;
   label?: React.ReactNode;
@@ -16,6 +23,7 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, Gr
   hintId?: string;
   inputId?: string;
   error?: ErrorType;
+  hasErrorIcon?: boolean;
   required?: boolean;
   useFieldset?: boolean;
   children: React.ReactNode;
@@ -81,6 +89,7 @@ export default class FormField extends React.Component<FormFieldProps> {
   static defaultProps = {
     labelPosition: FormField.LabelPosition.Top,
     useFieldset: false,
+    hasErrorIcon: false,
   };
 
   private renderChildren = (child: React.ReactChild): React.ReactNode => {
@@ -131,6 +140,7 @@ export default class FormField extends React.Component<FormFieldProps> {
       useFieldset,
       labelPosition,
       error,
+      hasErrorIcon,
       required,
       ...elemProps
     } = this.props;
@@ -174,9 +184,13 @@ export default class FormField extends React.Component<FormFieldProps> {
         )}
 
         <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
-          <InputIconContainer icon={icon} grow={grow}>
-            {React.Children.map(children, this.renderChildren)}
-          </InputIconContainer>
+          {hasErrorIcon ? (
+            <InputIconContainer icon={icon} grow={grow}>
+              {React.Children.map(children, this.renderChildren)}
+            </InputIconContainer>
+          ) : (
+            <React.Fragment>{React.Children.map(children, this.renderChildren)}</React.Fragment>
+          )}
           {hintText && (
             <Hint error={error} id={hintId}>
               {hintText}

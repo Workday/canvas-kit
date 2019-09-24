@@ -28,6 +28,7 @@ storiesOf('Form Field/Color Picker/Color Input/Top Label', module)
       label="Label"
       inputId="input-alert"
       error={FormField.ErrorType.Alert}
+      hasErrorIcon={true}
       hintText={hintText}
       hintId={hintId}
     >
@@ -39,6 +40,7 @@ storiesOf('Form Field/Color Picker/Color Input/Top Label', module)
       label="Label"
       inputId="input-error"
       error={FormField.ErrorType.Error}
+      hasErrorIcon={true}
       hintText={hintText}
       hintId={hintId}
     >
@@ -56,6 +58,7 @@ storiesOf('Form Field/Color Picker/Color Input/Top Label', module)
       inputId="input-grow-error"
       grow={true}
       error={FormField.ErrorType.Error}
+      hasErrorIcon={true}
       hintText={hintText}
       hintId={hintId}
     >
@@ -81,6 +84,7 @@ storiesOf('Form Field/Color Picker/Color Input/Left Label', module)
       label="Label"
       inputId="input-alert"
       error={FormField.ErrorType.Alert}
+      hasErrorIcon={true}
       hintText={hintText}
       hintId={hintId}
     >
@@ -93,6 +97,7 @@ storiesOf('Form Field/Color Picker/Color Input/Left Label', module)
       label="Label"
       inputId="input-error"
       error={FormField.ErrorType.Error}
+      hasErrorIcon={true}
       hintText={hintText}
       hintId={hintId}
     >
@@ -116,6 +121,7 @@ storiesOf('Form Field/Color Picker/Color Input/Left Label', module)
       inputId="input-grow-error"
       grow={true}
       error={FormField.ErrorType.Error}
+      hasErrorIcon={true}
       hintText={hintText}
       hintId={hintId}
     >
