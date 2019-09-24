@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import isPropValid from '@emotion/is-prop-valid';
 import {colors} from '@workday/canvas-kit-react-core';
-import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
 import {userIcon} from '@workday/canvas-system-icons-web';
 
@@ -11,7 +10,7 @@ export enum AvatarVariant {
   Dark,
 }
 
-export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface AvatarLocalProps {
   /**
    * An AvatarVariant enum indicating which variant to use for the default state (Light vs. Dark)
    */
@@ -28,20 +27,15 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * The url of the users avatar photo
    */
   url?: string;
-  /**
-   * An event handler function that gets called when the avatar is clicked
-   */
-  onClick?: (e: React.SyntheticEvent) => void;
-  /**
-   * Ref of button that the styled component renders.
-   */
-  buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const Container = styled('button', {
+export interface AvatarProps extends AvatarLocalProps, React.HTMLAttributes<HTMLDivElement> {}
+
+export const AvatarStyledComponent = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Omit<AvatarProps, 'altText'>>(
+})<Pick<AvatarProps, 'variant' | 'size'>>(
   {
+    background: colors.soap200,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -55,18 +49,9 @@ const Container = styled('button', {
       height: '100%',
     },
   },
-  ({variant, size, onClick}) => ({
-    background: colors.soap200,
+  ({size}) => ({
     height: size,
     width: size,
-    cursor: onClick ? 'pointer' : 'default',
-    '&:not([disabled])': {
-      '&:focus': {
-        outline: 'none',
-        ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
-      },
-    },
-    ...hideMouseFocus,
   })
 );
 
@@ -81,25 +66,17 @@ export default class Avatar extends React.Component<AvatarProps> {
   };
 
   render() {
-    const {buttonRef, variant, altText, size, url, onClick, ...elemProps} = this.props;
+    const {variant, altText, size, url, ...elemProps} = this.props;
 
     const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
     return (
-      <Container
-        variant={variant}
-        size={size}
-        onClick={onClick}
-        disabled={onClick ? false : true}
-        innerRef={buttonRef}
-        aria-label={altText}
-        {...elemProps}
-      >
+      <AvatarStyledComponent variant={variant} size={size} aria-label={altText} {...elemProps}>
         {url ? (
           <img src={url} alt={altText} />
         ) : (
           <SystemIconCircle icon={userIcon} background={background} size={size} />
         )}
-      </Container>
+      </AvatarStyledComponent>
     );
   }
 }
