@@ -12,7 +12,7 @@ import README from '../README.md';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {Header} from '@workday/canvas-kit-react-header';
 import {beta_Button as Button, IconButton} from '@workday/canvas-kit-react-button';
-import {Avatar} from '@workday/canvas-kit-react-avatar';
+import {AvatarButton} from '@workday/canvas-kit-react-avatar';
 import SidePanel from '../index';
 
 interface SidePanelState {
@@ -171,7 +171,7 @@ storiesOf('Side Panel', module)
     <div className="story">
       <div style={{height: '67vh', position: 'relative'}}>
         <Header brandUrl="#">
-          <Avatar
+          <AvatarButton
             onClick={() => {
               alert('clicked avatar');
             }}
