@@ -1,39 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormField Snapshots grow 1`] = `
-.emotion-4 {
-  margin-bottom: 16px;
-}
-
 .emotion-2 {
-  display: block;
+  margin-bottom: 16px;
 }
 
 .emotion-0 {
   display: block;
-  position: relative;
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-0 emotion-1"
   >
-    <div
-      className="emotion-0 emotion-1"
-    >
-      <input
-        grow={true}
-        type="text"
-      />
-    </div>
+    <input
+      grow={true}
+      type="text"
+    />
   </div>
 </div>
 `;
 
 exports[`FormField Snapshots grow with left label 1`] = `
-.emotion-4 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -42,11 +33,6 @@ exports[`FormField Snapshots grow with left label 1`] = `
 }
 
 .emotion-0 {
-  display: block;
-  position: relative;
-}
-
-.emotion-2 {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
@@ -54,30 +40,21 @@ exports[`FormField Snapshots grow with left label 1`] = `
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-0 emotion-1"
   >
-    <div
-      className="emotion-0 emotion-1"
-    >
-      <input
-        grow={true}
-        type="text"
-      />
-    </div>
+    <input
+      grow={true}
+      type="text"
+    />
   </div>
 </div>
 `;
 
 exports[`FormField Snapshots left label 1`] = `
-.emotion-0 {
-  display: inline-block;
-  position: relative;
-}
-
-.emotion-4 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -85,7 +62,7 @@ exports[`FormField Snapshots left label 1`] = `
   margin-bottom: 24px;
 }
 
-.emotion-2 {
+.emotion-0 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -101,80 +78,58 @@ exports[`FormField Snapshots left label 1`] = `
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-0 emotion-1"
   >
-    <div
-      className="emotion-0 emotion-1"
-    >
-      <input
-        type="text"
-      />
-    </div>
+    <input
+      type="text"
+    />
   </div>
 </div>
 `;
 
 exports[`FormField Snapshots renders as expected 1`] = `
-.emotion-4 {
-  margin-bottom: 16px;
-}
-
 .emotion-2 {
-  display: inline-block;
+  margin-bottom: 16px;
 }
 
 .emotion-0 {
   display: inline-block;
-  position: relative;
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-0 emotion-1"
   >
-    <div
-      className="emotion-0 emotion-1"
-    >
-      <input
-        type="text"
-      />
-    </div>
+    <input
+      type="text"
+    />
   </div>
 </div>
 `;
 
 exports[`FormField Snapshots renders required marking 1`] = `
-.emotion-4 {
-  margin-bottom: 16px;
-}
-
 .emotion-2 {
-  display: inline-block;
+  margin-bottom: 16px;
 }
 
 .emotion-0 {
   display: inline-block;
-  position: relative;
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-0 emotion-1"
   >
-    <div
-      className="emotion-0 emotion-1"
-    >
-      <input
-        type="text"
-      />
-    </div>
+    <input
+      type="text"
+    />
   </div>
 </div>
 `;
