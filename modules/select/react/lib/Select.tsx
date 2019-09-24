@@ -13,7 +13,7 @@ export interface SelectProps extends GrowthBehavior, React.SelectHTMLAttributes<
   children: React.ReactElement<SelectOption>[];
   disabled?: boolean;
   error?: ErrorType;
-  onChange?: (e: React.SyntheticEvent) => void;
+  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
   value?: string;
 }
 

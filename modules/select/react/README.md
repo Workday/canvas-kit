@@ -86,7 +86,7 @@ A select component must have children of type `SelectOption`:
 
 ---
 
-#### `onChange: (e: React.SyntheticEvent<HTMLSelectElement>) => void`
+#### `onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void`
 
 > A callback that gets called everytime the select state changes.
 
