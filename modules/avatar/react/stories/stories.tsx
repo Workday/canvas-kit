@@ -10,7 +10,7 @@ import {withKnobs} from '@storybook/addon-knobs';
 const IMAGE_URL = 'https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png';
 
 const handleAvatarButtonClick = (e: React.SyntheticEvent) => {
-  alert('AvatarButton clicked');
+  console.log('AvatarButton clicked');
 };
 
 storiesOf('Avatar/Default', module)
