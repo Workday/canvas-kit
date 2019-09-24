@@ -5,11 +5,6 @@ exports[`ColorPreview Snapshots renders as expected 1`] = `
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-2 {
   font-size: 14px;
   line-height: 20px;
@@ -129,20 +124,16 @@ exports[`ColorPreview Snapshots renders as expected 1`] = `
 <div
   className="emotion-8 emotion-9"
 >
-  <div
-    className="emotion-3"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder=""
-      readOnly={true}
-      spellCheck={false}
-      type="text"
-      value=""
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2 emotion-3"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder=""
+    readOnly={true}
+    spellCheck={false}
+    type="text"
+    value=""
+  />
   <div
     className="emotion-4 emotion-5"
     style={
@@ -164,11 +155,6 @@ exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-2 {
   font-size: 14px;
   line-height: 20px;
@@ -288,20 +274,16 @@ exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
 <div
   className="emotion-8 emotion-9"
 >
-  <div
-    className="emotion-3"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder=""
-      readOnly={true}
-      spellCheck={false}
-      type="text"
-      value=""
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2 emotion-3"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder=""
+    readOnly={true}
+    spellCheck={false}
+    type="text"
+    value=""
+  />
   <div
     className="emotion-4 emotion-5"
     style={
@@ -323,11 +305,6 @@ exports[`ColorPreview Snapshots renders with a selected color 1`] = `
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-2 {
   font-size: 14px;
   line-height: 20px;
@@ -447,20 +424,16 @@ exports[`ColorPreview Snapshots renders with a selected color 1`] = `
 <div
   className="emotion-8 emotion-9"
 >
-  <div
-    className="emotion-3"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder=""
-      readOnly={true}
-      spellCheck={false}
-      type="text"
-      value="e6e"
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2 emotion-3"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder=""
+    readOnly={true}
+    spellCheck={false}
+    type="text"
+    value="e6e"
+  />
   <div
     className="emotion-4 emotion-5"
     style={
@@ -482,11 +455,6 @@ exports[`ColorPreview Snapshots renders with a selected color with # 1`] = `
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-2 {
   font-size: 14px;
   line-height: 20px;
@@ -606,20 +574,16 @@ exports[`ColorPreview Snapshots renders with a selected color with # 1`] = `
 <div
   className="emotion-8 emotion-9"
 >
-  <div
-    className="emotion-3"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder=""
-      readOnly={true}
-      spellCheck={false}
-      type="text"
-      value="e6e"
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2 emotion-3"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder=""
+    readOnly={true}
+    spellCheck={false}
+    type="text"
+    value="e6e"
+  />
   <div
     className="emotion-4 emotion-5"
     style={
