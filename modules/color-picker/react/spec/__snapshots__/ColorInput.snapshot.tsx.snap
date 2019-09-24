@@ -5,11 +5,6 @@ exports[`ColorInput Snapshots renders a dark checkIcon if hex value is light 1`]
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-1 {
   font-size: 14px;
   line-height: 20px;
@@ -161,19 +156,15 @@ exports[`ColorInput Snapshots renders a dark checkIcon if hex value is light 1`]
 <div
   className="emotion-10 emotion-11"
 >
-  <div
-    className="emotion-3 emotion-4"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder="FFFFFF"
-      spellCheck={false}
-      type="text"
-      value="ffffff"
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder="FFFFFF"
+    spellCheck={false}
+    type="text"
+    value="ffffff"
+  />
   <div
     className="emotion-5 emotion-6"
     style={
@@ -204,11 +195,6 @@ exports[`ColorInput Snapshots renders a disabled input 1`] = `
 }
 
 .emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
-.emotion-5 {
   position: absolute;
   cursor: pointer;
   height: 20px;
@@ -325,20 +311,16 @@ exports[`ColorInput Snapshots renders a disabled input 1`] = `
 <div
   className="emotion-9 emotion-10"
 >
-  <div
-    className="emotion-3 emotion-4"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      disabled={true}
-      maxLength={7}
-      onChange={[Function]}
-      placeholder="FFFFFF"
-      spellCheck={false}
-      type="text"
-      value="ffffff"
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    disabled={true}
+    maxLength={7}
+    onChange={[Function]}
+    placeholder="FFFFFF"
+    spellCheck={false}
+    type="text"
+    value="ffffff"
+  />
   <div
     className="emotion-5 emotion-6"
     style={
@@ -358,11 +340,6 @@ exports[`ColorInput Snapshots renders a disabled input 1`] = `
 
 exports[`ColorInput Snapshots renders a light checkIcon if hex value is dark 1`] = `
 .emotion-10 {
-  position: relative;
-}
-
-.emotion-3 {
-  display: inline-block;
   position: relative;
 }
 
@@ -517,19 +494,15 @@ exports[`ColorInput Snapshots renders a light checkIcon if hex value is dark 1`]
 <div
   className="emotion-10 emotion-11"
 >
-  <div
-    className="emotion-3 emotion-4"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder="FFFFFF"
-      spellCheck={false}
-      type="text"
-      value="e6e"
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder="FFFFFF"
+    spellCheck={false}
+    type="text"
+    value="e6e"
+  />
   <div
     className="emotion-5 emotion-6"
     style={
@@ -559,11 +532,6 @@ exports[`ColorInput Snapshots renders as expected 1`] = `
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-1 {
   font-size: 14px;
   line-height: 20px;
@@ -680,19 +648,15 @@ exports[`ColorInput Snapshots renders as expected 1`] = `
 <div
   className="emotion-9 emotion-10"
 >
-  <div
-    className="emotion-3 emotion-4"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder="FFFFFF"
-      spellCheck={false}
-      type="text"
-      value=""
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder="FFFFFF"
+    spellCheck={false}
+    type="text"
+    value=""
+  />
   <div
     className="emotion-5 emotion-6"
     style={
@@ -714,11 +678,6 @@ exports[`ColorInput Snapshots renders valid empty color input 1`] = `
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-1 {
   font-size: 14px;
   line-height: 20px;
@@ -835,20 +794,16 @@ exports[`ColorInput Snapshots renders valid empty color input 1`] = `
 <div
   className="emotion-9 emotion-10"
 >
-  <div
-    className="emotion-3 emotion-4"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      disabled={false}
-      maxLength={7}
-      onChange={[Function]}
-      placeholder="FFFFFF"
-      spellCheck={false}
-      type="text"
-      value=""
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    disabled={false}
+    maxLength={7}
+    onChange={[Function]}
+    placeholder="FFFFFF"
+    spellCheck={false}
+    type="text"
+    value=""
+  />
   <div
     className="emotion-5 emotion-6"
     style={
@@ -871,11 +826,6 @@ exports[`ColorInput Snapshots renders with a selected color 1`] = `
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-1 {
   font-size: 14px;
   line-height: 20px;
@@ -992,19 +942,15 @@ exports[`ColorInput Snapshots renders with a selected color 1`] = `
 <div
   className="emotion-9 emotion-10"
 >
-  <div
-    className="emotion-3 emotion-4"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder="FFFFFF"
-      spellCheck={false}
-      type="text"
-      value="e6e"
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder="FFFFFF"
+    spellCheck={false}
+    type="text"
+    value="e6e"
+  />
   <div
     className="emotion-5 emotion-6"
     style={
@@ -1026,11 +972,6 @@ exports[`ColorInput Snapshots renders with a selected color without # 1`] = `
   position: relative;
 }
 
-.emotion-3 {
-  display: inline-block;
-  position: relative;
-}
-
 .emotion-1 {
   font-size: 14px;
   line-height: 20px;
@@ -1147,19 +1088,15 @@ exports[`ColorInput Snapshots renders with a selected color without # 1`] = `
 <div
   className="emotion-9 emotion-10"
 >
-  <div
-    className="emotion-3 emotion-4"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder="FFFFFF"
-      spellCheck={false}
-      type="text"
-      value="e6e"
-    />
-  </div>
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder="FFFFFF"
+    spellCheck={false}
+    type="text"
+    value="e6e"
+  />
   <div
     className="emotion-5 emotion-6"
     style={
