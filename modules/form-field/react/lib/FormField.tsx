@@ -9,13 +9,6 @@ import Label from './Label';
 import InputIconContainer from './InputIconContainer';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
-/**
- * TODO:
- *  - Consider adding error icon to props
- *  - Figure out how to conditionally render based on input need
- *    - This is because current implementation renders error icons when inputs do not
- */
-
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
   labelPosition: FormFieldLabelPosition;
   label?: React.ReactNode;
