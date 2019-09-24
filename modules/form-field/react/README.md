@@ -76,19 +76,19 @@ Default: `undefined`
 
 ---
 
-#### `grow: boolean`
+#### `hasErrorIcon: boolean`
 
-> Whether or not the field will expand to the width of the container. This prop will be passed to
-> the input component if applicable.
+> Whether or not the input will have an icon displayed. If yes, extra padding will be added to the
+> right.
 
 Default: `false`
 
 ---
 
-#### `hasIcon: boolean`
+#### `grow: boolean`
 
-> Whether or not the input will have an icon displayed. If yes, extra padding will be added to the
-> right.
+> Whether or not the field will expand to the width of the container. This prop will be passed to
+> the input component if applicable.
 
 Default: `false`
 
