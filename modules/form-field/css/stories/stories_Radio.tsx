@@ -41,10 +41,8 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form">
-      <div className="wdc-form-field-wrapper wdc-form-group">
-        <label htmlFor="radioGroup" className="wdc-form-label">
-          Label
-        </label>
+      <fieldset className="wdc-form-field-wrapper wdc-form-group">
+        <legend className="wdc-form-label">Label</legend>
 
         <div className="wdc-form-group-fields">
           <div className="wdc-form-field">
@@ -75,15 +73,13 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio Group', module)
             </div>
           </div>
         </div>
-      </div>
+      </fieldset>
     </div>
   ))
   .add('Alert', () => (
     <div className="wdc-form">
-      <div className="wdc-form-field-wrapper wdc-form-group">
-        <label htmlFor="radioAlert" className="wdc-form-label">
-          Label
-        </label>
+      <fieldset className="wdc-form-field-wrapper wdc-form-group">
+        <legend className="wdc-form-label">Label</legend>
 
         <div className="wdc-form-group-fields wdc-form-field-alert">
           <div className="wdc-form-field">
@@ -139,15 +135,13 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio Group', module)
         <div className="wdc-form-hint-message" id="alert-message">
           <strong>Alert:</strong> Helpful text goes here.
         </div>
-      </div>
+      </fieldset>
     </div>
   ))
   .add('Error', () => (
     <div className="wdc-form">
-      <div className="wdc-form-field-wrapper wdc-form-group">
-        <label htmlFor="radioError" className="wdc-form-label">
-          Label
-        </label>
+      <fieldset className="wdc-form-field-wrapper wdc-form-group">
+        <legend className="wdc-form-label">Label</legend>
 
         <div className="wdc-form-group-fields wdc-form-field-error">
           <div className="wdc-form-field">
@@ -206,7 +200,7 @@ storiesOf('CSS/Form Field/Radio/Top Label/Radio Group', module)
         <div className="wdc-form-hint-message" id="error-message">
           <strong>Error:</strong> Helpful text goes here.
         </div>
-      </div>
+      </fieldset>
     </div>
   ));
 
@@ -214,10 +208,8 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
-      <div className="wdc-form-field-wrapper wdc-form-group">
-        <label htmlFor="radioGroup" className="wdc-form-label">
-          Label
-        </label>
+      <fieldset className="wdc-form-field-wrapper wdc-form-group">
+        <legend className="wdc-form-label">Label</legend>
 
         <div className="wdc-form-group-fields">
           <div className="wdc-form-field">
@@ -248,15 +240,13 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
             </div>
           </div>
         </div>
-      </div>
+      </fieldset>
     </div>
   ))
   .add('Alert', () => (
     <div className="wdc-form wdc-form-label-position-left">
-      <div className="wdc-form-field-wrapper wdc-form-group">
-        <label htmlFor="radioAlert" className="wdc-form-label">
-          Label
-        </label>
+      <fieldset className="wdc-form-field-wrapper wdc-form-group">
+        <legend className="wdc-form-label">Label</legend>
 
         <div className="wdc-form-group-fields wdc-form-field-alert">
           <div className="wdc-form-field">
@@ -312,15 +302,13 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
         <div className="wdc-form-hint-message" id="alert-message">
           <strong>Alert:</strong> Helpful text goes here.
         </div>
-      </div>
+      </fieldset>
     </div>
   ))
   .add('Error', () => (
     <div className="wdc-form wdc-form-label-position-left">
-      <div className="wdc-form-field-wrapper wdc-form-group">
-        <label htmlFor="radioError" className="wdc-form-label">
-          Label
-        </label>
+      <fieldset className="wdc-form-field-wrapper wdc-form-group">
+        <legend className="wdc-form-label">Label</legend>
 
         <div className="wdc-form-group-fields wdc-form-field-error">
           <div className="wdc-form-field">
@@ -379,6 +367,6 @@ storiesOf('CSS/Form Field/Radio/Left Label/Radio Group', module)
         <div className="wdc-form-hint-message" id="error-message">
           <strong>Error:</strong> Helpful text goes here.
         </div>
-      </div>
+      </fieldset>
     </div>
   ));
