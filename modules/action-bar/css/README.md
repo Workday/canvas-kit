@@ -30,7 +30,7 @@ button sets should be wrapped around `wdc-action-bar-container`.
 > is on the right only in task orchestration.
 
 ```html
-<div class="wdc-action-bar">
+<div class="wdc-action-bar" role="region" aria-label="Action Bar">
   <div class="wdc-action-bar-container">
     <button class="wdc-btn wdc-btn-primary">Button</button>
     <button class="wdc-btn">Button</button>
@@ -46,7 +46,7 @@ button sets should be wrapped around `wdc-action-bar-container`.
 > Fixes the toolbar to the bottom of the window (uses `position: fixed`)
 
 ```html
-<div class="wdc-action-bar wdc-action-bar-fixed">
+<div class="wdc-action-bar wdc-action-bar-fixed" role="region" aria-label="Action Bar">
   <div class="wdc-action-bar-container">
     <button class="wdc-btn wdc-btn-primary">Button</button>
   </div>
@@ -78,7 +78,7 @@ In some cases, you may want some buttons to retain their natural width at smalle
 instance, the **related actions** button.
 
 ```html
-<div class="wdc-action-bar">
+<div class="wdc-action-bar" role="region" aria-label="Action Bar">
 	<div class="wdc-action-bar-container">
 		<button class="wdc-btn wdc-btn-primary">Done</button>
 		<button class="wdc-btn wdc-action-bar-container-item-natural">

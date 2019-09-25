@@ -30,12 +30,12 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 Use `.wdc-menu` to create a menu.
 
 ```html
-<div class="wdc-menu">
+<div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
-    <li>
+    <li role="menuitem">
       <a href="#">Item 1</a>
     </li>
-    <li>Item 2</li>
+    <li role="menuitem">Item 2</li>
   </ul>
 </div>
 ```
@@ -47,9 +47,9 @@ Use `.wdc-menu` to create a menu.
 Use `.wdc-menu-grow` to expand the menu to fit its container.
 
 ```html
-<div className="wdc-menu wdc-menu-grow">
+<div className="wdc-menu wdc-menu-grow" role="menu" aria-label="Menu">
   <ul>
-    <li>This menu will expand to fit its container</li>
+    <li role="menuitem">This menu will expand to fit its container</li>
   </ul>
 </div>
 ```
@@ -59,9 +59,9 @@ Use `.wdc-menu-grow` to expand the menu to fit its container.
 Use `.wdc-menu-item-disabled` to create a disabled menu item.
 
 ```html
-<div class="wdc-menu">
+<div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
-    <li class="wdc-menu-item-disabled">
+    <li role="menuitem" class="wdc-menu-item-disabled" aria-disabled="true">
       Disabled item
     </li>
   </ul>
@@ -71,9 +71,9 @@ Use `.wdc-menu-item-disabled` to create a disabled menu item.
 Use `.wdc-menu-item-focused` to create a focused menu item.
 
 ```html
-<div class="wdc-menu">
+<div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
-    <li class="wdc-menu-item-focused">
+    <li role="menuitem" class="wdc-menu-item-focused">
       Focused item
     </li>
   </ul>
@@ -83,9 +83,9 @@ Use `.wdc-menu-item-focused` to create a focused menu item.
 Menu item modifiers may be combined.
 
 ```html
-<div class="wdc-menu">
+<div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
-    <li class="wdc-menu-item-disabled wdc-menu-item-focused">
+    <li role="menuitem" class="wdc-menu-item-disabled wdc-menu-item-focused">
       Disabled and focused item
     </li>
   </ul>
@@ -99,13 +99,13 @@ Menu items can include an icon as well as a secondary icon.
 Wrap the text for the menu item using a `<span>` with `.wdc-menu-item-label`.
 
 ```html
-<div class="wdc-menu">
+<div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
-    <li>
+    <li role="menuitem">
       <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
       <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
     </li>
-    <li>
+    <li role="menuitem">
       <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
       <span className="wdc-menu-item-label">
         Item with uploadCloud icon and an extLink secondary icon
@@ -120,9 +120,9 @@ If you're generating the icons using the React `SystemIcon` component, you'll ne
 `.wdc-menu-item-icon` to the icons.
 
 ```tsx
-<div class="wdc-menu">
+<div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
-    <li>
+    <li role="menuitem">
       <SystemIcon icon={uploadCloudIcon} className="wdc-menu-item-icon" />
       <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
     </li>
@@ -132,14 +132,18 @@ If you're generating the icons using the React `SystemIcon` component, you'll ne
 
 ### Divider
 
-Use `<hr />` to create a divider between menu items.
+Use `<hr />` to create a divider between menu items (use `role="separator"` for accessibility).
 
 ```html
-<div class="wdc-menu">
+<div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
-    <li>Item 1</li>
-    <hr />
-    <li>Item 2</li>
+    <li role="menuitem">Item 1</li>
+    <hr role="separator" />
+    <li role="menuitem">Item 2</li>
   </ul>
 </div>
 ```
+
+## Accessibility note
+
+Container with `role="menu"` should always have an `aria-labelledby` or `aria-label` attribute.

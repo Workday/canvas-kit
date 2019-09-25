@@ -45,13 +45,17 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
               width: '400px',
               top: '40px',
             }}
+            role="dialog"
+            aria-labelledby="popup-heading"
           >
             <div className="wdc-popup-close">
-              <button onClick={this.onCloseClick} className="wdc-btn-icon-plain">
+              <button onClick={this.onCloseClick} className="wdc-btn-icon-plain" aria-label="Close">
                 <i className="wdc-icon" data-icon="x" data-category="system" />
               </button>
             </div>
-            <h3 className="wdc-popup-title">Delete Item</h3>
+            <h3 className="wdc-popup-title" id="popup-heading">
+              Delete Item
+            </h3>
             <div style={{marginBottom: '24px'}} className="wdc-popup-body">
               Are you sure you'd like to delete the item titled 'My Item'?
             </div>

@@ -301,7 +301,9 @@ storiesOf('CSS/Button/Dropdown', module)
   .add('Default', () => (
     <div className="story">
       <section>
-        <button className="wdc-btn wdc-btn-dropdown">Dropdown</button>
+        <button className="wdc-btn wdc-btn-dropdown" aria-haspopup="true">
+          Dropdown
+        </button>
       </section>
     </div>
   ));
@@ -313,12 +315,12 @@ storiesOf('CSS/Button/Split', module)
       <section>
         <div className="wdc-btn-split">
           <button className="wdc-btn wdc-btn-primary wdc-btn-split-text">Split Button</button>
-          <button className="wdc-btn wdc-btn-primary wdc-btn-split-icon" />
+          <button className="wdc-btn wdc-btn-primary wdc-btn-split-icon" aria-haspopup="true" />
         </div>
 
         <div className="wdc-btn-split">
           <button className="wdc-btn wdc-btn-split-text">Split Button</button>
-          <button className="wdc-btn wdc-btn-split-icon" />
+          <button className="wdc-btn wdc-btn-split-icon" aria-haspopup="true" />
         </div>
       </section>
     </div>

@@ -14,28 +14,28 @@ class WithIconsDemo extends Component {
   render() {
     return (
       <div className="wdc-type">
-        <div className="wdc-menu" style={{width: '250px'}}>
+        <div className="wdc-menu" style={{width: '250px'}} role="menu" aria-label="Menu">
           <ul>
-            <li className="wdc-menu-item-focused">
+            <li role="menuitem" className="wdc-menu-item-focused">
               <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
               <span className="wdc-menu-item-label">First Item</span>
             </li>
-            <li>
+            <li role="menuitem">
               <i className="wdc-icon" data-icon="setup" data-category="system" />
               <span className="wdc-menu-item-label">
                 Second Item with really really really long label
               </span>
             </li>
-            <li className="wdc-menu-item-disabled">
+            <li role="menuitem" className="wdc-menu-item-disabled" aria-disabled="true">
               <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
               <span className="wdc-menu-item-label">Third Item (disabled)</span>
               <i className="wdc-icon" data-icon="extLink" data-category="system" />
             </li>
-            <li>
+            <li role="menuitem">
               <i className="wdc-icon" data-icon="user" data-category="system" />
             </li>
-            <hr />
-            <li>
+            <hr role="separator" />
+            <li role="menuitem">
               <i className="wdc-icon" data-icon="user" data-category="system" />
               <span className="wdc-menu-item-label">Fifth Item (with divider)</span>
             </li>
@@ -51,20 +51,22 @@ storiesOf('CSS/Menu', module)
   .add('Default', () => (
     <div className="story">
       <div className="wdc-type">
-        <div className="wdc-menu wdc-menu-grow">
+        <div className="wdc-menu wdc-menu-grow" role="menu" aria-label="Menu">
           <ul>
-            <li className="wdc-menu-item-focused">
+            <li role="menuitem" className="wdc-menu-item-focused">
               <a href="#">First Item</a>
             </li>
-            <li>Second Item with really really really long label</li>
-            <li className="wdc-menu-item-disabled">Third Item (disabled)</li>
-            <li>
+            <li role="menuitem">Second Item with really really really long label</li>
+            <li role="menuitem" className="wdc-menu-item-disabled" aria-disabled="true">
+              Third Item (disabled)
+            </li>
+            <li role="menuitem">
               <em>
                 Fourth Item (<b>with markup</b>)
               </em>
             </li>
-            <hr />
-            <li>Fifth Item (with divider)</li>
+            <hr role="separator" />
+            <li role="menuitem">Fifth Item (with divider)</li>
           </ul>
         </div>
       </div>
