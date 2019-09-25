@@ -31,8 +31,8 @@ Use table group elements (`<thead>`, `<tbody>`) as some styles are specific to t
 <table class="wdc-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
     </tr>
   </thead>
   <tbody>
@@ -92,8 +92,8 @@ Right align a cell's contents with `.wdc-table-cell-right`.
 <table class="wdc-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
     </tr>
   </thead>
   <tbody>
@@ -115,8 +115,8 @@ Use `.wdc-table-cell-center` on the `<td>` element containing the checkbox to ce
 <table class="wdc-table">
   <thead>
     <tr>
-      <th></th>
-      <th>Name</th>
+      <th scope="col"></th>
+      <th scope="col">Name</th>
     </tr>
   </thead>
   <tbody>
@@ -136,10 +136,10 @@ Explicitly apply hover styling to a table row by using `.wdc-table-row-hover`.
 <table class="wdc-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Position</th>
-      <th>Location</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Location</th>
     </tr>
   </thead>
   <tbody>
@@ -161,10 +161,10 @@ Apply selected styling to a table row by using `.wdc-table-row-selected`.
 <table class="wdc-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Position</th>
-      <th>Location</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Location</th>
     </tr>
   </thead>
   <tbody>
@@ -186,14 +186,21 @@ Apply selected styling to a table row by using `.wdc-table-row-error`.
 <table class="wdc-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
+      <th scope="col">ID</th>
+      <th scope="col" id="name-heading">Name</th>
     </tr>
   </thead>
   <tbody>
     <tr class="wdc-table-row-error">
       <td>1</td>
-      <td><input type="text" class="wdc-form-textinput" value="Alex Black" /></td>
+      <td>
+        <input
+          type="text"
+          class="wdc-form-textinput"
+          value="Alex Black"
+          aria-labelledby="name-heading"
+        />
+      </td>
     </tr>
   </tbody>
 </table>
@@ -207,14 +214,21 @@ Apply selected styling to a table row by using `.wdc-table-row-alert`.
 <table class="wdc-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
+      <th scope="col">ID</th>
+      <th scope="col" id="name-heading">Name</th>
     </tr>
   </thead>
   <tbody>
     <tr class="wdc-table-row-alert">
       <td>1</td>
-      <td><input type="text" class="wdc-form-textinput" value="Alex Black" /></td>
+      <td>
+        <input
+          type="text"
+          class="wdc-form-textinput"
+          value="Alex Black"
+          aria-labelledby="name-heading"
+        />
+      </td>
     </tr>
   </tbody>
 </table>
@@ -233,18 +247,32 @@ Signal errors and alerts for input fields by using
 <table class="wdc-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
+      <th scope="col">ID</th>
+      <th scope="col" id="name-heading">Name</th>
     </tr>
   </thead>
   <tbody>
     <tr class="wdc-table-row-alert-borderless">
       <td>1</td>
-      <td><input type="text" class="wdc-form-textinput wdc-form-alert" value="Alex Black" /></td>
+      <td>
+        <input
+          type="text"
+          class="wdc-form-textinput wdc-form-alert"
+          value="Alex Black"
+          aria-labelledby="name-heading"
+        />
+      </td>
     </tr>
     <tr class="wdc-table-row-error-borderless">
       <td>1</td>
-      <td><input type="text" class="wdc-form-textinput wdc-form-error" value="Aidan Brown" /></td>
+      <td>
+        <input
+          type="text"
+          class="wdc-form-textinput wdc-form-error"
+          value="Aidan Brown"
+          aria-labelledby="name-heading"
+        />
+      </td>
     </tr>
   </tbody>
 </table>

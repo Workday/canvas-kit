@@ -29,8 +29,8 @@ respectively.
 
 ```html
 <div class="wdc-modal-bg">
-  <div class="wdc-modal">
-    <div class="wdc-modal-title">Modal Title</div>
+  <div class="wdc-modal" role="dialog" aria-labelledby="modal-heading">
+    <div class="wdc-modal-title" id="modal-heading">Modal Title</div>
     <div class="wdc-modal-body">Modal content</div>
   </div>
 </div>
@@ -40,13 +40,13 @@ respectively.
 
 ```html
 <div class="wdc-modal-bg">
-  <div class="wdc-modal">
+  <div class="wdc-modal" role="dialog" aria-labelledby="modal-heading">
     <div class="wdc-modal-close">
-      <button onClick="{this.onCloseClick}" class="wdc-btn-icon-plain">
+      <button onClick="{this.onCloseClick}" class="wdc-btn-icon-plain" aria-label="Close">
         <i class="wdc-icon" data-icon="x" data-category="system" />
       </button>
     </div>
-    <div class="wdc-modal-title">Modal Title</div>
+    <div class="wdc-modal-title" id="modal-heading">Modal Title</div>
     <div class="wdc-modal-body">Modal content</div>
   </div>
 </div>
@@ -58,8 +58,8 @@ The default padding for the modal is `32px`. Use `wdc-modal-padding-s` to set th
 or `wdc-modal-no-padding` to set the padding to `0`.
 
 ```html
-<div class="wdc-modal wdc-modal-no-padding">
-  <div class="wdc-modal-title">Modal Title</div>
+<div class="wdc-modal wdc-modal-no-padding" role="dialog" aria-labelledby="modal-heading">
+  <div class="wdc-modal-title" id="modal-heading">Modal Title</div>
   <div class="wdc-modal-body">Modal content</div>
 </div>
 ```

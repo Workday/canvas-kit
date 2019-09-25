@@ -214,10 +214,13 @@ applied to form controls using the classes below.
 Use by adding `.wdc-btn-dropdown`.
 
 ```html
-<button class="wdc-btn wdc-btn-dropdown">
+<button class="wdc-btn wdc-btn-dropdown" aria-haspopup="true">
   Dropdown
 </button>
 ```
+
+**Accessibility note**: When an attached menu is displayed, add `aria-expanded="true"` to the
+button.
 
 ### Split Button
 
@@ -237,16 +240,19 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
   <button class="wdc-btn wdc-btn-split-text">
     Split Button
   </button>
-  <button class="wdc-btn wdc-btn-split-icon" />
+  <button class="wdc-btn wdc-btn-split-icon" aria-haspopup="true" />
 </div>
 
 <div class="wdc-btn-split">
   <button class="wdc-btn wdc-btn-primary wdc-btn-split-text">
     Split Button
   </button>
-  <button class="wdc-btn wdc-btn-primary wdc-btn-split-icon" />
+  <button class="wdc-btn wdc-btn-primary wdc-btn-split-icon" aria-haspopup="true" />
 </div>
 ```
+
+**Accessibility note**: When an attached menu is displayed, add `aria-expanded="true"` to the
+button.
 
 ## Accessibility Notes
 

@@ -115,8 +115,12 @@ Error styling is available as both classes and mixins. Using the class is prefer
   <div class="wdc-form-field-wrapper wdc-form-field-error">
     <label class="wdc-form-label">Input Label</label>
     <div class="wdc-form-field">
-      <input type="text" class="wdc-form-textinput wdc-form-error" />
-      <div class="wdc-form-hint-message"><strong>Error:</strong> Error message</div>
+      <div className="wdc-form-textinput wdc-form-error">
+        <input id="input" type="text" aria-describedby="error-message" aria-invalid="true" />
+      </div>
+      <div class="wdc-form-hint-message" id="error-message">
+        <strong>Error:</strong> Error message
+      </div>
     </div>
   </div>
 </div>
@@ -148,8 +152,12 @@ Use `.wdc-form-error`/`.wdc-form-alert` with `.wdc-form-textinput`.
   <div class="wdc-form-field-wrapper wdc-form-field-error">
     <label class="wdc-form-label">Input Label</label>
     <div class="wdc-form-field">
-      <input type="text" class="wdc-form-textinput wdc-form-error" />
-      <div class="wdc-form-hint-message"><strong>Error:</strong> Error message</div>
+      <div className="wdc-form-textinput wdc-form-error">
+        <input id="input" type="text" aria-describedby="error-message" aria-invalid="true" />
+      </div>
+      <div class="wdc-form-hint-message" id="error-message">
+        <strong>Error:</strong> Error message
+      </div>
     </div>
   </div>
 </div>
