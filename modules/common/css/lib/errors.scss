@@ -34,7 +34,7 @@
   @if ($_type== 'error') {
     $_borderColor: $wdc-color-error;
   } @else if ($_type== 'alert') {
-    $_borderColor: $wdc-color-alert-light;
+    $_borderColor: $wdc-color-alert;
   }
 
   border-color: $_borderColor;
