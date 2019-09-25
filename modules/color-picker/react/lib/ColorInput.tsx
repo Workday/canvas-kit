@@ -1,11 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {
-  pickForegroundColor,
-  expandHex,
-  GrowthBehavior,
-  ErrorType,
-} from '@workday/canvas-kit-react-common';
+import {pickForegroundColor, expandHex, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {colors, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
 import {css} from 'emotion';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
@@ -14,7 +9,6 @@ import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 
 export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   value: string;
-  error?: ErrorType;
   inputRef?: React.Ref<HTMLInputElement>;
   showCheck?: boolean;
   placeholder: string;
@@ -27,7 +21,7 @@ const swatchTileSize = 20;
 const swatchCheckIconSpacing = 8;
 const colorInputWidth = 116;
 
-const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'error' | 'grow'>>(
+const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'grow'>>(
   {
     boxSizing: 'border-box',
     paddingLeft: '46px',
