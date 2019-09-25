@@ -43,13 +43,38 @@
     cursor: default;
   }
 
-  &.wdc-btn-large {
+  &.wdc-btn-grow {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &.wdc-btn-dropdown {
+    padding-left: $wdc-spacing-l;
+    padding-right: $wdc-spacing-s;
+
+    &:after {
+      @include wdc-btn-icon-inline($_wdc-btn-caret-down-icon);
+      padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+      margin-left: $wdc-spacing-xxs;
+      line-height: 0;
+      float: right;
+      height: $wdc-spacing-s;
+      width: $wdc-spacing-s;
+    }
+
+    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled):after,
+    &:hover:not([disabled]):not(.wdc-btn-disabled):after {
+      background-image: $_wdc-btn-caret-down-icon-hover;
+    }
+  }
+
+  &.wdc-btn-size-l {
     min-width: 112px;
     height: 48px;
     padding: 0 18px;
   }
 
-  &.wdc-btn-small {
+  &.wdc-btn-size-s {
     height: $wdc-spacing-l;
     padding: 0 14px;
     min-width: $wdc-spacing-xxxl;
