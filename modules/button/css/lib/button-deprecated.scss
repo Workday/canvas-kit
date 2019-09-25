@@ -19,6 +19,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   box-shadow: 0 0 0 $wdc-btn-deprecated-border-size $color;
 }
 
+@warn "wdc-btn-deprecated mixin is deprecated, use wdc-btn";
 @mixin wdc-btn-deprecated() {
   @include wdc-type-body();
   @include wdc-type-variant-btn();

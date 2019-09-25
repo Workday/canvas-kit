@@ -25,6 +25,14 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 [postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
 inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
 
+## Deprecation Warning
+
+> We are rolling out our next iteration of our buttons and will be deprecating the old ones(orange
+> primary, secondary, and delete) on (this time frame).
+
+> We've renamed the old buttons to use `wdc-button-deprecated` mixin and have added a warning
+> message to that mixin suggesting to use `wdc-btn` mixin.
+
 ## Usage
 
 Button styles can be applied by using `.wdc-btn`. Most modifiers can be used by combining `.wdc-btn`

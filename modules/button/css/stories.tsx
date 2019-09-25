@@ -14,7 +14,7 @@ storiesOf('CSS/Button', module)
         <h3>Large Primary</h3>
         <button className="wdc-btn wdc-btn-primary wdc-btn-large">Primary</button>
         <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-large">
-          Primary Disbaled
+          Primary Disabled
         </button>
       </section>
 
