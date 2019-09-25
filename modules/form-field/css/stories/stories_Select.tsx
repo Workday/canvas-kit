@@ -90,7 +90,7 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
               <option label="Mail">Mail</option>
             </select>
           </div>
-          <div className="wdc-form-hint-message" aria-describedby="error-message">
+          <div className="wdc-form-hint-message" id="error-message">
             <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
