@@ -30,7 +30,7 @@ This component renders a responsive, Canvas-style header.
 ```tsx
 import * as React from 'react';
 import {Header} from '@workday/canvas-kit-react-header';
-import {Avatar} from '@workday/canvas-kit-react-avatar';
+import {AvatarButton} from '@workday/canvas-kit-react-avatar';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {notificationsIcon} from '@workday/canvas-system-icons-web';
 import {Button} from '@workday/canvas-kit-react-button';
@@ -58,7 +58,7 @@ import {Button} from '@workday/canvas-kit-react-button';
     title="Notifications"
     aria-label="Notifications"
   />
-  <Avatar
+  <AvatarButton
     onClick={() => {
       alert('clicked avatar');
     }}
@@ -220,20 +220,20 @@ The Global Header (or App Header) is used for Workday applications.
 
 ```tsx
 import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-react-header';
-import {Avatar} from '@workday/canvas-kit-react-avatar';
+import {AvatarButton} from '@workday/canvas-kit-react-avatar';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 const HeaderBrand = () => <DubLogoTitle themeColor={Header.Theme.White} />
-const HeaderAvatar = () => <Avatar onClick={handleMenuClick} url="https://my.cdn.amazonaws.com/assets/avatar_pic.png" />
+const HeaderAvatar = () => <AvatarButton onClick={handleMenuClick} url="https://my.cdn.amazonaws.com/assets/avatar_pic.png" />
 const handleSearchSubmit = query => console.log("Submitted query: ", query)
 const openMenu = e => console.log("Menu opened")
 const handleBreakpointChange = key => console.log(`Breakpoint change: ${key}`)
 
 /**
- * In this instance, the right-most child will be an Avatar component, when the GlobalHeader
+ * In this instance, the right-most child will be an AvatarButton component, when the GlobalHeader
  * shrinks below the specified breakpoint (720 in this case), the children get replaced by a menuToggle.
- * For most GlobalHeader implementations, the menuToggle is also the Avatar component.
+ * For most GlobalHeader implementations, the menuToggle is also the AvatarButton component.
  */
 <GlobalHeader
   brand={<HeaderBrand />}

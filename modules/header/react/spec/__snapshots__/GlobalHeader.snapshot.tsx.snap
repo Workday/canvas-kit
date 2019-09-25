@@ -380,6 +380,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
 }
 
 .emotion-16 {
+  background: #f0f1f2;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -397,31 +398,13 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #f0f1f2;
   height: 32px;
   width: 32px;
-  cursor: default;
 }
 
 .emotion-16 img {
   width: 100%;
   height: 100%;
-}
-
-.emotion-16:not([disabled]):focus {
-  outline: none;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
-}
-
-[data-whatinput='mouse'] .emotion-16:focus,
-[data-whatinput='touch'] .emotion-16:focus,
-[data-whatinput='pointer'] .emotion-16:focus {
-  outline: none;
-  box-shadow: none;
-  -webkit-animation: none;
-  animation: none;
 }
 
 .emotion-15 {
@@ -553,10 +536,9 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
         }
       />
     </button>
-    <button
+    <div
       aria-label="Avatar"
       className="emotion-16"
-      disabled={true}
     >
       <div
         className="emotion-15"
@@ -570,7 +552,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
           }
         />
       </div>
-    </button>
+    </div>
   </div>
 </div>
 `;
@@ -1630,6 +1612,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
 }
 
 .emotion-28 {
+  background: #f0f1f2;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1647,31 +1630,13 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   border-radius: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  background: #f0f1f2;
   height: 32px;
   width: 32px;
-  cursor: default;
 }
 
 .emotion-28 img {
   width: 100%;
   height: 100%;
-}
-
-.emotion-28:not([disabled]):focus {
-  outline: none;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
-}
-
-[data-whatinput='mouse'] .emotion-28:focus,
-[data-whatinput='touch'] .emotion-28:focus,
-[data-whatinput='pointer'] .emotion-28:focus {
-  outline: none;
-  box-shadow: none;
-  -webkit-animation: none;
-  animation: none;
 }
 
 .emotion-27 {
@@ -2195,10 +2160,9 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
         }
       />
     </button>
-    <button
+    <div
       aria-label="Avatar"
       className="emotion-28"
-      disabled={true}
     >
       <div
         className="emotion-27"
@@ -2212,7 +2176,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
           }
         />
       </div>
-    </button>
+    </div>
   </div>
 </div>
 `;

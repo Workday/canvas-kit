@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-header",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.0-alpha.8",
   "description": "A Canvas-styled application header",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -50,6 +50,6 @@
     "react-transition-group": "^2.5.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react-avatar": "^3.0.0-alpha.7"
+    "@workday/canvas-kit-react-avatar": "^3.0.0-alpha.8"
   }
 }
