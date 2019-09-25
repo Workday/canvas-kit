@@ -29,10 +29,10 @@ storiesOf('CSS/Table', module)
         <table className="wdc-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Location</th>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Position</th>
+              <th scope="col">Location</th>
             </tr>
           </thead>
           <tbody>
@@ -68,18 +68,25 @@ storiesOf('CSS/Table', module)
         <table className="wdc-table">
           <thead>
             <tr>
-              <th className="wdc-table-cell-center" />
-              <th className="wdc-table-cell-right">ID</th>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Location</th>
+              <th className="wdc-table-cell-center" scope="col" id="select-row" />
+              <th className="wdc-table-cell-right" scope="col">
+                ID
+              </th>
+              <th scope="col">Name</th>
+              <th scope="col">Position</th>
+              <th scope="col">Location</th>
             </tr>
           </thead>
           <tbody>
             <tr tabIndex={0}>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox1" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox1"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox1" className="wdc-form-label" />
                 </div>
               </td>
@@ -94,7 +101,12 @@ storiesOf('CSS/Table', module)
             <tr tabIndex={0}>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox2" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox2"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox2" className="wdc-form-label" />
                 </div>
               </td>
@@ -106,7 +118,12 @@ storiesOf('CSS/Table', module)
             <tr tabIndex={0}>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox3" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox3"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox3" className="wdc-form-label" />
                 </div>
               </td>
@@ -118,7 +135,12 @@ storiesOf('CSS/Table', module)
             <tr tabIndex={0}>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox4" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox4"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox4" className="wdc-form-label" />
                 </div>
               </td>
@@ -138,64 +160,113 @@ storiesOf('CSS/Table', module)
         <table className="wdc-table">
           <thead>
             <tr>
-              <th className="wdc-table-cell-center" />
-              <th className="wdc-table-cell-right">ID</th>
-              <th>Name</th>
+              <th className="wdc-table-cell-center" scope="col" id="select-row" />
+              <th className="wdc-table-cell-right" scope="col">
+                ID
+              </th>
+              <th scope="col" id="name-heading">
+                Name
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr tabIndex={0} className="wdc-table-row-alert">
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox1" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox1"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox1" className="wdc-form-label" />
                 </div>
               </td>
               <td className="wdc-table-cell-right">1</td>
               <td>
-                <input type="text" className="wdc-form-textinput" value="Aidan Brown" />
+                <input
+                  type="text"
+                  className="wdc-form-textinput"
+                  value="Aidan Brown"
+                  aria-labelledby="name-heading"
+                />
               </td>
             </tr>
             <tr tabIndex={0}>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox2" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox2"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox2" className="wdc-form-label" />
                 </div>
               </td>
               <td className="wdc-table-cell-right">2</td>
               <td>
-                <input type="text" className="wdc-form-textinput" value="Betty Chen" />
+                <input
+                  type="text"
+                  className="wdc-form-textinput"
+                  value="Betty Chen"
+                  aria-labelledby="name-heading"
+                />
               </td>
             </tr>
             <tr tabIndex={0} className="wdc-table-row-error">
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox3" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox3"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox3" className="wdc-form-label" />
                 </div>
               </td>
               <td className="wdc-table-cell-right">3</td>
               <td>
-                <input type="text" className="wdc-form-textinput" value="Helen Gonzalez" />
+                <input
+                  type="text"
+                  className="wdc-form-textinput"
+                  value="Helen Gonzalez"
+                  aria-labelledby="name-heading"
+                />
               </td>
             </tr>
             <tr tabIndex={0}>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox4" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox4"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox4" className="wdc-form-label" />
                 </div>
               </td>
               <td className="wdc-table-cell-right">4</td>
               <td>
-                <input type="text" className="wdc-form-textinput" value="Timothy May" />
+                <input
+                  type="text"
+                  className="wdc-form-textinput"
+                  value="Timothy May"
+                  aria-labelledby="name-heading"
+                />
               </td>
             </tr>
             <tr tabIndex={0} className="wdc-table-row-alert-borderless">
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox5" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox5"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox5" className="wdc-form-label" />
                 </div>
               </td>
@@ -205,31 +276,52 @@ storiesOf('CSS/Table', module)
                   type="text"
                   className="wdc-form-textinput wdc-form-alert"
                   value="Alex Black"
+                  aria-labelledby="name-heading"
                 />
               </td>
             </tr>
             <tr tabIndex={0}>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox6" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox6"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox6" className="wdc-form-label" />
                 </div>
               </td>
               <td className="wdc-table-cell-right">6</td>
               <td>
-                <input type="text" className="wdc-form-textinput" value="Catherine Jackson" />
+                <input
+                  type="text"
+                  className="wdc-form-textinput"
+                  value="Catherine Jackson"
+                  aria-labelledby="name-heading"
+                />
               </td>
             </tr>
             <tr tabIndex={0} className="wdc-table-row-error-borderless">
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
-                  <input type="checkbox" className="wdc-form-checkbox" id="checkbox7" />
+                  <input
+                    type="checkbox"
+                    className="wdc-form-checkbox"
+                    id="checkbox7"
+                    aria-labelledby="select-row"
+                  />
                   <label htmlFor="checkbox7" className="wdc-form-label" />
                 </div>
               </td>
               <td className="wdc-table-cell-right">7</td>
               <td>
-                <input type="text" className="wdc-form-textinput wdc-form-error" value="Emily Li" />
+                <input
+                  type="text"
+                  className="wdc-form-textinput wdc-form-error"
+                  value="Emily Li"
+                  aria-labelledby="name-heading"
+                />
               </td>
             </tr>
           </tbody>
