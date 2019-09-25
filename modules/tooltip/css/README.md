@@ -87,3 +87,9 @@ directional modifier.
   </div>
 </div>
 ```
+
+## Accessibility Note
+
+- Use `aria-describedby={id}` on the element your tooltip is connected to.
+- Make sure you show the tooltip when the element you're describing (e.g. an Icon Button) is focused
+  as well. This is only possible with Javascript.

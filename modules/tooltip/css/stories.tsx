@@ -21,10 +21,12 @@ storiesOf('CSS/Tooltip', module)
       <div className={containerStyle}>
         <h3>Hover over the icon.</h3>
         <div className="wdc-tooltip-container">
-          <button className="wdc-btn-icon-circle" aria-label="Activity Stream">
+          <button className="wdc-btn-icon-circle" aria-describedby="tooltip">
             <SystemIcon icon={xIcon} />
           </button>
-          <div className="wdc-tooltip wdc-tooltip-top">Close</div>
+          <div className="wdc-tooltip wdc-tooltip-top" id="tooltip">
+            Close
+          </div>
         </div>
       </div>
     </div>

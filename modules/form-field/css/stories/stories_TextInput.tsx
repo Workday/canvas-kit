@@ -71,9 +71,9 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
         </label>
         <div className="wdc-form-field  wdc-form-alert">
           <div className="wdc-form-textinput">
-            <input id="input" type="text" />
+            <input id="input" type="text" aria-describedby="alert-message" />
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="alert-message">
             <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
@@ -88,9 +88,9 @@ storiesOf('CSS/Form Field/Text Input/Top Label', module)
         </label>
         <div className="wdc-form-field  wdc-form-error">
           <div className="wdc-form-textinput">
-            <input id="input" type="text" />
+            <input id="input" type="text" aria-describedby="error-message" aria-invalid="true" />
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="error-message">
             <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
@@ -181,9 +181,9 @@ storiesOf('CSS/Form Field/Text Input/Left Label', module)
         </label>
         <div className="wdc-form-field wdc-form-error">
           <div className="wdc-form-textinput">
-            <input id="input" type="text" />
+            <input id="input" type="text" aria-describedby="error-message" aria-invalid="true" />
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="error-message">
             <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>

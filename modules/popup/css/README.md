@@ -27,8 +27,8 @@ Use `.wdc-popup` to create a popup. The title and body content can be styled usi
 `.wdc-popup-title` and `.wdc-popup-body`, respectively.
 
 ```html
-<div class="wdc-popup">
-  <div class="wdc-popup-title">Popup Title</div>
+<div class="wdc-popup" role="dialog" aria-labelledby="popup-heading">
+  <div class="wdc-popup-title" id="popup-heading">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
@@ -36,13 +36,13 @@ Use `.wdc-popup` to create a popup. The title and body content can be styled usi
 ### With Close Button
 
 ```html
-<div class="wdc-popup">
+<div class="wdc-popup" role="dialog" aria-labelledby="popup-heading">
   <div class="wdc-popup-close">
-    <button onClick="{this.onCloseClick}" class="wdc-btn-icon-plain">
+    <button onClick="{this.onCloseClick}" class="wdc-btn-icon-plain" aria-label="Close">
       <i class="wdc-icon" data-icon="x" data-category="system" />
     </button>
   </div>
-  <div class="wdc-popup-title">Popup Title</div>
+  <div class="wdc-popup-title" id="popup-heading">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
@@ -53,8 +53,8 @@ The default padding for the popup is `32px`. Use `wdc-popup-padding-s` to set th
 or `wdc-popup-no-padding` to set the padding to `0`.
 
 ```html
-<div class="wdc-popup wdc-popup-no-padding">
-  <div class="wdc-popup-title">Popup Title</div>
+<div class="wdc-popup wdc-popup-no-padding" role="dialog" aria-labelledby="popup-heading">
+  <div class="wdc-popup-title" id="popup-heading">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
@@ -76,8 +76,12 @@ it.
 - `.wdc-popup-animation-origin-bottom-left`
 
 ```html
-<div class="wdc-popup wdc-popup-animation-origin-top-center">
-  <div class="wdc-popup-title">Popup Title</div>
+<div
+  class="wdc-popup wdc-popup-animation-origin-top-center"
+  role="dialog"
+  aria-labelledby="popup-heading"
+>
+  <div class="wdc-popup-title" id="popup-heading">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
 </div>
 ```

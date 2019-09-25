@@ -57,7 +57,7 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
         </label>
         <div className="wdc-form-field">
           <div className="wdc-form-select wdc-form-alert">
-            <select id="select">
+            <select id="select" aria-describedby="alert-message">
               <option label="E-mail">E-mail</option>
               <option label="Phone">Phone</option>
               <option label="Fax (disabled)" disabled={true}>
@@ -66,7 +66,7 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
               <option label="Mail">Mail</option>
             </select>
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="alert-message">
             <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
@@ -81,7 +81,7 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
         </label>
         <div className="wdc-form-field">
           <div className="wdc-form-select wdc-form-error">
-            <select id="select">
+            <select id="select" aria-describedby="error-message" aria-invalid="true">
               <option label="E-mail">E-mail</option>
               <option label="Phone">Phone</option>
               <option label="Fax (disabled)" disabled={true}>
@@ -90,7 +90,7 @@ storiesOf('CSS/Form Field/Select/Top Label', module)
               <option label="Mail">Mail</option>
             </select>
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="error-message">
             <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
@@ -150,7 +150,7 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
         </label>
         <div className="wdc-form-field">
           <div className="wdc-form-select wdc-form-alert">
-            <select id="select">
+            <select id="select" aria-describedby="alert-message">
               <option label="E-mail">E-mail</option>
               <option label="Phone">Phone</option>
               <option label="Fax (disabled)" disabled={true}>
@@ -159,7 +159,7 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
               <option label="Mail">Mail</option>
             </select>
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="alert-message">
             <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
@@ -174,7 +174,7 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
         </label>
         <div className="wdc-form-field">
           <div className="wdc-form-select wdc-form-error">
-            <select id="select">
+            <select id="select" aria-describedby="error-message" aria-invalid="true">
               <option label="E-mail">E-mail</option>
               <option label="Phone">Phone</option>
               <option label="Fax (disabled)" disabled={true}>
@@ -183,7 +183,7 @@ storiesOf('CSS/Form Field/Select/Left Label', module)
               <option label="Mail">Mail</option>
             </select>
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="error-message">
             <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
