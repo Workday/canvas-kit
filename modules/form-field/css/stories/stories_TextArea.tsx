@@ -75,9 +75,9 @@ storiesOf('CSS/Form Field/TextArea/Top Label', module)
         </label>
         <div className="wdc-form-field">
           <div className="wdc-form-textarea wdc-form-alert">
-            <textarea id="textarea" />
+            <textarea id="textarea" aria-describedby="alert-message" />
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="alert-message">
             <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
@@ -92,9 +92,9 @@ storiesOf('CSS/Form Field/TextArea/Top Label', module)
         </label>
         <div className="wdc-form-field">
           <div className="wdc-form-textarea wdc-form-error">
-            <textarea id="textarea" />
+            <textarea id="textarea" aria-describedby="error-message" aria-invalid="true" />
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="error-message">
             <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
@@ -177,9 +177,9 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
         </label>
         <div className="wdc-form-field">
           <div className="wdc-form-textarea wdc-form-alert">
-            <textarea id="textarea" />
+            <textarea id="textarea" aria-describedby="alert-message" />
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="alert-message">
             <strong>Alert:</strong> Helpful text goes here.
           </div>
         </div>
@@ -194,9 +194,9 @@ storiesOf('CSS/Form Field/TextArea/Left Label', module)
         </label>
         <div className="wdc-form-field">
           <div className="wdc-form-textarea wdc-form-error">
-            <textarea id="textarea" />
+            <textarea id="textarea" aria-describedby="error-message" aria-invalid="true" />
           </div>
-          <div className="wdc-form-hint-message">
+          <div className="wdc-form-hint-message" id="error-message">
             <strong>Error:</strong> Helpful text goes here.
           </div>
         </div>
