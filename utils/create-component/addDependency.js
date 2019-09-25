@@ -1,20 +1,28 @@
-#!/usr/bin/env node
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
+const cwd = process.cwd();
+
+module.exports = (componentName, target) => {
+  addModuleAsDependencyByType(componentName, target);
+  if (target === 'react') {
+    addExportToReactIndex(componentName);
+  } else if (target === 'css') {
+    addImportToSassIndex(componentName);
+  }
+};
+
 /**
  * Add the module as a dependency in modules/_canvas-kit-<TYPE>/package.json.
  */
-const addModuleAsDependencyByType = (cwd, moduleName, type) => {
+const addModuleAsDependencyByType = (componentName, type) => {
   const packagePath = path.join(cwd, `modules/_canvas-kit-${type}/package.json`);
   const packageContents = fs.readFileSync(packagePath);
   const json = JSON.parse(packageContents);
 
   // Add module, sort dependencies, then write back out
-  json.dependencies[`@workday/canvas-kit-${type}-${moduleName}`] = `0.0.0`;
+  json.dependencies[`@workday/canvas-kit-${type}-${componentName}`] = `0.0.0`;
   let ordered = {};
   Object.keys(json.dependencies)
     .sort()
@@ -30,7 +38,7 @@ const addModuleAsDependencyByType = (cwd, moduleName, type) => {
  * Add export * from '@workday/canvas-kit-react-<MODULE_NAME>' to
  * modules/_canvas-kit-react/index.ts so that consumers can use.
  */
-const addExportToReactIndex = (cwd, moduleName) => {
+const addExportToReactIndex = componentName => {
   const sortExports = lines => {
     const exportsAsObj = lines
       .filter(line => !line.includes("from '@workday/canvas-kit-react-core'"))
@@ -56,7 +64,7 @@ const addExportToReactIndex = (cwd, moduleName) => {
   const lines = fs.readFileSync(indexPath, 'utf8').split('\n');
 
   // Add our module's export statement then sort
-  const exportStatement = `export * from '@workday/canvas-kit-react-${moduleName}';`;
+  const exportStatement = `export * from '@workday/canvas-kit-react-${componentName}';`;
   lines.push(exportStatement);
   const sortedExports = sortExports(lines);
 
@@ -65,7 +73,7 @@ const addExportToReactIndex = (cwd, moduleName) => {
   fs.writeFileSync(indexPath, sortedExports.join('\n'), 'utf8');
 };
 
-const addImportToSassIndex = (cwd, moduleName) => {
+const addImportToSassIndex = componentName => {
   const sortImports = lines => {
     const importsAsObj = lines
       .filter(line => !line.includes('$wdc-system-icons-path'))
@@ -90,34 +98,13 @@ const addImportToSassIndex = (cwd, moduleName) => {
   const lines = fs.readFileSync(indexPath, 'utf8').split('\n');
 
   // Add our module's import statement then sort
-  const importStatement = `@import '~@workday/canvas-kit-css-${moduleName}/index.scss';`;
+  const importStatement = `@import '~@workday/canvas-kit-css-${componentName}/index.scss';`;
   lines.push(importStatement);
   const sortedImports = sortImports(lines);
 
   // Place our system icons path at the top
   sortedImports.unshift(
-    "$wdc-system-icons-path: '../../node_modules/@workday/canvas-system-icons-web/dist/svg' !default;"
+    "$wdc-system-icons-path: '../../node_modules/@workday/canvas-system-icons-web/dist/svg' !default;\n"
   );
   fs.writeFileSync(indexPath, sortedImports.join('\n'), 'utf8');
 };
-
-const setupModuleByType = (cwd, moduleName, moduleType) => {
-  // Add module as depedency based off `moduleType` ('css' or 'react')
-  addModuleAsDependencyByType(cwd, moduleName, moduleType);
-  if (moduleType === 'css') {
-    addImportToSassIndex(cwd, moduleName);
-  } else {
-    addExportToReactIndex(cwd, moduleName);
-  }
-};
-
-// Only allow this script to be ran off command line
-if (require.main === module) {
-  const cwd = process.cwd();
-  const [, , moduleName, moduleType] = process.argv;
-
-  if (!['css', 'react'].includes(moduleType)) {
-    throw Error(`Module type (second argument) must be either 'react' or 'css'`);
-  }
-  setupModuleByType(cwd, moduleName, moduleType);
-}
