@@ -105,15 +105,6 @@ Default: `undefined`
 
 ---
 
-#### `hasIcon: boolean`
-
-> Whether or not the input will have an icon displayed. If yes, extra padding will be added to the
-> right.
-
-Default: `false`
-
----
-
 #### `inputRef: React.Ref<HTMLInputElement>`
 
 > The ref callback for the inner input element.
