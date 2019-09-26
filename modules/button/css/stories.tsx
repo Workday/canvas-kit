@@ -92,8 +92,16 @@ storiesOf('CSS/Button/Dropdown', module)
   .add('Default', () => (
     <div className="story">
       <section>
-        <button className="wdc-btn wdc-btn-dropdown" aria-haspopup="true">
+        <h3>Primary Large</h3>
+        <button
+          className="wdc-btn wdc-btn-primary wdc-btn-size-l wdc-btn-dropdown"
+          aria-haspopup="true"
+        >
           Dropdown
+        </button>
+        <h3>Secondary Medium</h3>
+        <button className="wdc-btn  wdc-btn-dropdown" aria-haspopup="true">
+          Dropdown Secondary
         </button>
       </section>
     </div>
@@ -197,11 +205,7 @@ storiesOf('CSS/Button/Deprecated', module)
         Delete
       </a>
 
-      <a
-        href="#"
-        className="wdc-btn-deprecated wdc-btn-delete wdc-btn wdc-btn-size-s"
-        role="button"
-      >
+      <a href="#" className="wdc-btn-deprecated wdc-btn-delete wdc-btn-size-s" role="button">
         Delete
       </a>
     </div>

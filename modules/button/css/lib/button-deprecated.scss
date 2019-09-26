@@ -1,8 +1,8 @@
-$_wdc-btn-caret-down-icon: svg-load(
+$_wdc-btn-deprecated-caret-down-icon: svg-load(
   '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
   fill=$wdc-btn-icon-color
 );
-$_wdc-btn-caret-down-icon-hover: svg-load(
+$_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
   '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
   fill=$wdc-btn-icon-hover-color
 );
@@ -112,6 +112,26 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   &.wdc-btn-grow {
     width: 100%;
     max-width: 100%;
+  }
+
+  &.wdc-btn-dropdown {
+    padding-left: $wdc-spacing-l;
+    padding-right: $wdc-spacing-s;
+
+    &:after {
+      @include wdc-btn-icon-inline($_wdc-btn-deprecated-caret-down-icon);
+      padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+      margin-left: $wdc-spacing-xxs;
+      line-height: 0;
+      float: right;
+      height: $wdc-spacing-s;
+      width: $wdc-spacing-s;
+    }
+
+    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled):after,
+    &:hover:not([disabled]):not(.wdc-btn-disabled):after {
+      background-image: $_wdc-btn-deprecated-caret-down-icon-hover;
+    }
   }
 
   &.wdc-btn-size-m {
@@ -338,11 +358,11 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     bottom: 0;
 
     // Caret icon
-    @include wdc-btn-icon-inline($_wdc-btn-caret-down-icon);
+    @include wdc-btn-icon-inline($_wdc-btn-deprecated-caret-down-icon);
 
     &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
     &:hover:not([disabled]):not(.wdc-btn-disabled) {
-      background-image: $_wdc-btn-caret-down-icon-hover;
+      background-image: $_wdc-btn-deprecated-caret-down-icon-hover;
     }
 
     &.wdc-btn-primary {
