@@ -1,6 +1,11 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {pickForegroundColor, expandHex, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {
+  pickForegroundColor,
+  expandHex,
+  GrowthBehavior,
+  ErrorType,
+} from '@workday/canvas-kit-react-common';
 import {colors, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
 import {css} from 'emotion';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
@@ -12,6 +17,7 @@ export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   inputRef?: React.Ref<HTMLInputElement>;
   showCheck?: boolean;
   placeholder: string;
+  error?: ErrorType;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onValidColorChange?: (color: string) => void;
 }
@@ -95,6 +101,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
       inputRef,
       disabled,
       placeholder,
+      error,
       ...elemProps
     } = this.props;
     const formattedValue = this.formatValue(value);
@@ -107,6 +114,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           type="text"
           placeholder={placeholder}
           value={formattedValue}
+          error={error}
           spellCheck={false}
           disabled={disabled}
           maxLength={7} // 7 to allow pasting with a hash
