@@ -78,15 +78,6 @@
     input {
       @include wdc-form-error;
     }
-
-    &:after {
-      position: absolute;
-      top: $wdc-spacing-xxs;
-      left: $wdc-form-field-min-width - $wdc-spacing-l;
-      content: '';
-      width: 24px;
-      height: 24px;
-    }
   }
 
   .wdc-form-textarea,
@@ -165,14 +156,6 @@
   &.wdc-form-textinput {
     input {
       @include wdc-form-alert;
-    }
-    &:after {
-      position: absolute;
-      top: $wdc-spacing-xxs;
-      left: $wdc-form-field-min-width - $wdc-spacing-l;
-      content: '';
-      width: 24px;
-      height: 24px;
     }
   }
 
