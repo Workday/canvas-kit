@@ -1,32 +1,3 @@
-// Icons
-@svg-load errorIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-circle.svg) {
-  .wd-icon-fill {
-    fill: $wdc-color-error;
-  }
-
-  .wd-icon-accent {
-    fill: $wdc-color-error;
-  }
-
-  .wd-icon-background {
-    fill: $wdc-color-french-vanilla-100;
-  }
-}
-
-@svg-load alertIcon url(#{$_wdc-form-icons-path}/wd-icon-exclamation-triangle.svg) {
-  .wd-icon-fill {
-    fill: $wdc-color-alert;
-  }
-
-  .wd-icon-accent {
-    fill: $wdc-color-alert;
-  }
-
-  .wd-icon-background {
-    fill: $wdc-color-french-vanilla-100;
-  }
-}
-
 // Errors and Alerts
 @mixin wdc-form-validation($_type) {
   $_borderColor: $wdc-color-black-pepper-100 !default; // This should not be used, it is necessary for the @if / @else if to.
@@ -107,16 +78,6 @@
     input {
       @include wdc-form-error;
     }
-
-    &:after {
-      position: absolute;
-      top: $wdc-spacing-xxs;
-      left: $wdc-form-field-min-width - $wdc-spacing-l;
-      content: '';
-      width: 24px;
-      height: 24px;
-      background: svg-inline(errorIcon) center no-repeat;
-    }
   }
 
   .wdc-form-textarea,
@@ -195,15 +156,6 @@
   &.wdc-form-textinput {
     input {
       @include wdc-form-alert;
-    }
-    &:after {
-      position: absolute;
-      top: $wdc-spacing-xxs;
-      left: $wdc-form-field-min-width - $wdc-spacing-l;
-      content: '';
-      width: 24px;
-      height: 24px;
-      background: svg-inline(alertIcon) center no-repeat;
     }
   }
 
