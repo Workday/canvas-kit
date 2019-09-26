@@ -85,15 +85,6 @@ Default: `false`
 
 ---
 
-#### `hasIcon: boolean`
-
-> Whether or not the input will have an icon displayed. If yes, extra padding will be added to the
-> right.
-
-Default: `false`
-
----
-
 #### `hintText: React.ReactNode`
 
 > The message displayed below the input field. Required if `error` is defined.
