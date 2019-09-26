@@ -33,6 +33,17 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 > We've renamed the old buttons to use `wdc-button-deprecated` mixin and have added a warning
 > message to that mixin suggesting to use `wdc-btn` mixin.
 
+### New Button
+
+You will be opt in to the new buttons with (insert version number) without having to change your
+class names. The new buttons include: blue primary button, secondary, delete, icon buttons and
+dropdown.
+
+### Deprecated Buttons
+
+The old buttons (orange primary, secondary, delete, and split) are still available, but you'll have
+to use the class name `wdc-btn-deprecated` for the old styling.
+
 ## Usage
 
 Button styles can be applied by using `.wdc-btn`. Most modifiers can be used by combining `.wdc-btn`
@@ -54,8 +65,8 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
 ### Button Options
 
 - [Sizes](#sizes)
-  - Large (Default)
-  - Medium
+  - Large
+  - Medium (Default)
   - Small
 - [Colors](#colors)
   - Default
