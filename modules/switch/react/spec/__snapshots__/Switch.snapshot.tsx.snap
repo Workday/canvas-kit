@@ -14,6 +14,7 @@ exports[`Switch Snapshots renders a switch with custom prop 1`] = `
   margin: 0;
   margin-left: 4px;
   border-radius: 999px;
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -122,6 +123,7 @@ exports[`Switch Snapshots renders as expected 1`] = `
   margin: 0;
   margin-left: 4px;
   border-radius: 999px;
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -240,6 +242,7 @@ exports[`Switch Snapshots renders switch disabled checked 1`] = `
   margin: 0;
   margin-left: 4px;
   border-radius: 999px;
+  opacity: 0;
   cursor: not-allowed;
 }
 
@@ -345,6 +348,7 @@ exports[`Switch Snapshots renders switch disabled unchecked 1`] = `
   margin: 0;
   margin-left: 4px;
   border-radius: 999px;
+  opacity: 0;
   cursor: not-allowed;
 }
 
@@ -435,6 +439,7 @@ exports[`Switch Snapshots renders switch on 1`] = `
   margin: 0;
   margin-left: 4px;
   border-radius: 999px;
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -538,6 +543,7 @@ exports[`Switch Snapshots renders switch with id 1`] = `
   margin: 0;
   margin-left: 4px;
   border-radius: 999px;
+  opacity: 0;
   cursor: pointer;
 }
 
@@ -645,6 +651,7 @@ exports[`Switch Snapshots renders switch with name and value 1`] = `
   margin: 0;
   margin-left: 4px;
   border-radius: 999px;
+  opacity: 0;
   cursor: pointer;
 }
 
