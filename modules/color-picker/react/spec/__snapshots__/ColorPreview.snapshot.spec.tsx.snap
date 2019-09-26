@@ -1,12 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ColorPreview Snapshots renders as expected 1`] = `
-.emotion-8 {
-  position: relative;
-}
-
-.emotion-3 {
-  display: inline-block;
+.emotion-7 {
   position: relative;
 }
 
@@ -100,7 +95,7 @@ exports[`ColorPreview Snapshots renders as expected 1`] = `
   color: transparent;
 }
 
-.emotion-4 {
+.emotion-3 {
   position: absolute;
   cursor: pointer;
   height: 20px;
@@ -115,7 +110,7 @@ exports[`ColorPreview Snapshots renders as expected 1`] = `
   border-radius: 2px;
 }
 
-.emotion-6 {
+.emotion-5 {
   position: absolute;
   left: 36px;
   top: 10px;
@@ -127,24 +122,20 @@ exports[`ColorPreview Snapshots renders as expected 1`] = `
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-7 emotion-8"
 >
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder=""
+    readOnly={true}
+    spellCheck={false}
+    type="text"
+    value=""
+  />
   <div
-    className="emotion-3"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder=""
-      readOnly={true}
-      spellCheck={false}
-      type="text"
-      value=""
-    />
-  </div>
-  <div
-    className="emotion-4 emotion-5"
+    className="emotion-3 emotion-4"
     style={
       Object {
         "backgroundColor": "",
@@ -152,7 +143,7 @@ exports[`ColorPreview Snapshots renders as expected 1`] = `
     }
   />
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-5 emotion-6"
   >
     #
   </span>
@@ -160,12 +151,7 @@ exports[`ColorPreview Snapshots renders as expected 1`] = `
 `;
 
 exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
-.emotion-8 {
-  position: relative;
-}
-
-.emotion-3 {
-  display: inline-block;
+.emotion-7 {
   position: relative;
 }
 
@@ -259,7 +245,7 @@ exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
   color: transparent;
 }
 
-.emotion-4 {
+.emotion-3 {
   position: absolute;
   cursor: pointer;
   height: 20px;
@@ -274,7 +260,7 @@ exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
   border-radius: 2px;
 }
 
-.emotion-6 {
+.emotion-5 {
   position: absolute;
   left: 36px;
   top: 10px;
@@ -286,24 +272,20 @@ exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-7 emotion-8"
 >
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder=""
+    readOnly={true}
+    spellCheck={false}
+    type="text"
+    value=""
+  />
   <div
-    className="emotion-3"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder=""
-      readOnly={true}
-      spellCheck={false}
-      type="text"
-      value=""
-    />
-  </div>
-  <div
-    className="emotion-4 emotion-5"
+    className="emotion-3 emotion-4"
     style={
       Object {
         "backgroundColor": "",
@@ -311,7 +293,7 @@ exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
     }
   />
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-5 emotion-6"
   >
     #
   </span>
@@ -319,12 +301,7 @@ exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
 `;
 
 exports[`ColorPreview Snapshots renders with a selected color 1`] = `
-.emotion-8 {
-  position: relative;
-}
-
-.emotion-3 {
-  display: inline-block;
+.emotion-7 {
   position: relative;
 }
 
@@ -418,7 +395,7 @@ exports[`ColorPreview Snapshots renders with a selected color 1`] = `
   color: transparent;
 }
 
-.emotion-4 {
+.emotion-3 {
   position: absolute;
   cursor: pointer;
   height: 20px;
@@ -433,7 +410,7 @@ exports[`ColorPreview Snapshots renders with a selected color 1`] = `
   border-radius: 2px;
 }
 
-.emotion-6 {
+.emotion-5 {
   position: absolute;
   left: 36px;
   top: 10px;
@@ -445,24 +422,20 @@ exports[`ColorPreview Snapshots renders with a selected color 1`] = `
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-7 emotion-8"
 >
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder=""
+    readOnly={true}
+    spellCheck={false}
+    type="text"
+    value="e6e"
+  />
   <div
-    className="emotion-3"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder=""
-      readOnly={true}
-      spellCheck={false}
-      type="text"
-      value="e6e"
-    />
-  </div>
-  <div
-    className="emotion-4 emotion-5"
+    className="emotion-3 emotion-4"
     style={
       Object {
         "backgroundColor": "#e6e",
@@ -470,7 +443,7 @@ exports[`ColorPreview Snapshots renders with a selected color 1`] = `
     }
   />
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-5 emotion-6"
   >
     #
   </span>
@@ -478,12 +451,7 @@ exports[`ColorPreview Snapshots renders with a selected color 1`] = `
 `;
 
 exports[`ColorPreview Snapshots renders with a selected color with # 1`] = `
-.emotion-8 {
-  position: relative;
-}
-
-.emotion-3 {
-  display: inline-block;
+.emotion-7 {
   position: relative;
 }
 
@@ -577,7 +545,7 @@ exports[`ColorPreview Snapshots renders with a selected color with # 1`] = `
   color: transparent;
 }
 
-.emotion-4 {
+.emotion-3 {
   position: absolute;
   cursor: pointer;
   height: 20px;
@@ -592,7 +560,7 @@ exports[`ColorPreview Snapshots renders with a selected color with # 1`] = `
   border-radius: 2px;
 }
 
-.emotion-6 {
+.emotion-5 {
   position: absolute;
   left: 36px;
   top: 10px;
@@ -604,24 +572,20 @@ exports[`ColorPreview Snapshots renders with a selected color with # 1`] = `
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-7 emotion-8"
 >
+  <input
+    className="emotion-0 emotion-1 emotion-2"
+    maxLength={7}
+    onChange={[Function]}
+    placeholder=""
+    readOnly={true}
+    spellCheck={false}
+    type="text"
+    value="e6e"
+  />
   <div
-    className="emotion-3"
-  >
-    <input
-      className="emotion-0 emotion-1 emotion-2"
-      maxLength={7}
-      onChange={[Function]}
-      placeholder=""
-      readOnly={true}
-      spellCheck={false}
-      type="text"
-      value="e6e"
-    />
-  </div>
-  <div
-    className="emotion-4 emotion-5"
+    className="emotion-3 emotion-4"
     style={
       Object {
         "backgroundColor": "#e6e",
@@ -629,7 +593,7 @@ exports[`ColorPreview Snapshots renders with a selected color with # 1`] = `
     }
   />
   <span
-    className="emotion-6 emotion-7"
+    className="emotion-5 emotion-6"
   >
     #
   </span>
