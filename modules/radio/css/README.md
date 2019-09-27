@@ -24,9 +24,9 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ## Usage
 
 ```html
-<div className="wdc-form-radio">
+<div class="wdc-form-radio">
   <input type="radio" id="radio" />
-  <label htmlFor="radio">E-mail</label>
+  <label for="radio">E-mail</label>
 </div>
 ```
 

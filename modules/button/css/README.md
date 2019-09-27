@@ -117,10 +117,10 @@ Filled buttons can be squared or circle. These buttons should be used with icons
 color background.
 
 ```html
-<button className="wdc-btn-icon-square-filled">
+<button class="wdc-btn-icon-square-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
-<button className="wdc-btn-size-s wdc-btn-icon-circle-filled">
+<button class="wdc-btn-size-s wdc-btn-icon-circle-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
 ```
@@ -130,10 +130,10 @@ color background.
 Inverse buttons are buttons that can be used on dark backgrounds.
 
 ```html
-<button className="wdc-btn-icon-inverse">
+<button class="wdc-btn-icon-inverse">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
-<button className="wdc-btn-size-s wdc-btn-icon-inverse-filled">
+<button class="wdc-btn-size-s wdc-btn-icon-inverse-filled">
   <SystemIcon icon="{activityStreamIcon}" />
 </button>
 ```

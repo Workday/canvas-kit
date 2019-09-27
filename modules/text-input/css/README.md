@@ -24,7 +24,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ## Usage
 
 ```html
-<div className="wdc-form-textinput">
+<div class="wdc-form-textinput">
   <input id="input" type="text" />
 </div>
 ```

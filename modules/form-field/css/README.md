@@ -53,7 +53,7 @@ by applying the `.wdc-form-label-position-left` class to `.wdc-form`.
 ```html
 <div class="wdc-form wdc-form-label-position-left">
   <div class="wdc-form-field-wrapper">
-    <label htmlFor="textinput" class="wdc-form-label wdc-form-label-required">Input Label</label>
+    <label for="textinput" class="wdc-form-label wdc-form-label-required">Input Label</label>
     <div class="wdc-form-field">
       <input
         type="text"
@@ -113,9 +113,9 @@ Error styling is available as both classes and mixins. Using the class is prefer
 ```html
 <div class="wdc-form">
   <div class="wdc-form-field-wrapper wdc-form-field-error">
-    <label class="wdc-form-label">Input Label</label>
+    <label class="wdc-form-label" for="input">Input Label</label>
     <div class="wdc-form-field">
-      <div className="wdc-form-textinput wdc-form-error">
+      <div class="wdc-form-textinput wdc-form-error">
         <input id="input" type="text" aria-describedby="error-message" aria-invalid="true" />
       </div>
       <div class="wdc-form-hint-message" id="error-message">
@@ -150,9 +150,9 @@ Use `.wdc-form-error`/`.wdc-form-alert` with `.wdc-form-textinput`.
 ```html
 <div class="wdc-form">
   <div class="wdc-form-field-wrapper wdc-form-field-error">
-    <label class="wdc-form-label">Input Label</label>
+    <label class="wdc-form-label" for="input">Input Label</label>
     <div class="wdc-form-field">
-      <div className="wdc-form-textinput wdc-form-error">
+      <div class="wdc-form-textinput wdc-form-error">
         <input id="input" type="text" aria-describedby="error-message" aria-invalid="true" />
       </div>
       <div class="wdc-form-hint-message" id="error-message">

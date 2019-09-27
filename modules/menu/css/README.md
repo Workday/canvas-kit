@@ -47,7 +47,7 @@ Use `.wdc-menu` to create a menu.
 Use `.wdc-menu-grow` to expand the menu to fit its container.
 
 ```html
-<div className="wdc-menu wdc-menu-grow" role="menu" aria-label="Menu">
+<div class="wdc-menu wdc-menu-grow" role="menu" aria-label="Menu">
   <ul>
     <li role="menuitem">This menu will expand to fit its container</li>
   </ul>
@@ -102,15 +102,15 @@ Wrap the text for the menu item using a `<span>` with `.wdc-menu-item-label`.
 <div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
     <li role="menuitem">
-      <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
-      <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
+      <i class="wdc-icon" data-icon="uploadCloud" data-category="system" />
+      <span class="wdc-menu-item-label">Item with uploadCloud icon</span>
     </li>
     <li role="menuitem">
-      <i className="wdc-icon" data-icon="uploadCloud" data-category="system" />
-      <span className="wdc-menu-item-label">
+      <i class="wdc-icon" data-icon="uploadCloud" data-category="system" />
+      <span class="wdc-menu-item-label">
         Item with uploadCloud icon and an extLink secondary icon
       </span>
-      <i className="wdc-icon" data-icon="extLink" data-category="system" />
+      <i class="wdc-icon" data-icon="extLink" data-category="system" />
     </li>
   </ul>
 </div>
@@ -123,8 +123,8 @@ If you're generating the icons using the React `SystemIcon` component, you'll ne
 <div class="wdc-menu" role="menu" aria-label="Menu">
   <ul>
     <li role="menuitem">
-      <SystemIcon icon={uploadCloudIcon} className="wdc-menu-item-icon" />
-      <span className="wdc-menu-item-label">Item with uploadCloud icon</span>
+      <SystemIcon icon={uploadCloudIcon} class="wdc-menu-item-icon" />
+      <span class="wdc-menu-item-label">Item with uploadCloud icon</span>
     </li>
   </ul>
 </div>

@@ -28,7 +28,7 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 ## Usage
 
 ```html
-<div className="wdc-form-select">
+<div class="wdc-form-select">
   <select id="select">
     <option label="E-mail">E-mail</option>
     <option label="Phone">Phone</option>
