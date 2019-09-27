@@ -100,7 +100,7 @@ describe('Modal', () => {
         context('when the Escape key is pressed', () => {
           beforeEach(() => {
             cy.get('body').trigger('keydown', {
-              keyCode: 27, // Escape
+              key: 'Escape',
             });
           });
 
@@ -140,6 +140,13 @@ describe('Modal', () => {
           .get()
           .pipe(h.modal.getTitle)
           .should('have.focus');
+      });
+
+      it('should not show a focus ring on the header', () => {
+        h.modal
+          .get()
+          .pipe(h.modal.getTitle)
+          .should('have.css', 'outlineStyle', 'none');
       });
     });
   });
@@ -217,7 +224,7 @@ describe('Modal', () => {
       context('when the Escape key is pressed', () => {
         beforeEach(() => {
           cy.get('body').trigger('keydown', {
-            keyCode: 27, // Escape
+            key: 'Escape',
           });
         });
 
@@ -312,7 +319,7 @@ describe('Modal', () => {
       context('when the Escape key is pressed', () => {
         beforeEach(() => {
           cy.get('body').trigger('keydown', {
-            keyCode: 27, // Escape
+            key: 'Escape',
           });
         });
 

@@ -6,7 +6,7 @@
  *   .should('have.attr', 'role', 'dialog')
  */
 export function get(testId?: string): Cypress.Chainable<JQuery> {
-  const selector = testId ? `[data-testid='${testId}']` : `[role=dialog]`;
+  const selector = testId ? `[data-testid='${testId}'] [role-dialog]` : `[role=dialog]`;
 
   return cy.get(selector);
 }
@@ -20,7 +20,8 @@ export function get(testId?: string): Cypress.Chainable<JQuery> {
  *   .should('equal', 'My Title')
  */
 export function getTitle($modal: JQuery): JQuery {
-  return $modal.find('h3').first();
+  const id = $modal.attr('aria-labelledby');
+  return $modal.find(`#${id}`).first();
 }
 
 /**
