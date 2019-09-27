@@ -36,9 +36,9 @@ Apply `.wdc-icon` to an element to enable icon injection. Icons may be configure
 `data-*` attributes.
 
 ```html
-<i className="wdc-icon" data-icon="shield" data-category="accent" />
-<i className="wdc-icon" data-icon="benefits" data-category="applet" />
-<i className="wdc-icon" data-icon="activityStream" data-category="system" />
+<i class="wdc-icon" data-icon="shield" data-category="accent" />
+<i class="wdc-icon" data-icon="benefits" data-category="applet" />
+<i class="wdc-icon" data-icon="activityStream" data-category="system" />
 ```
 
 ## Data Attributes
@@ -72,11 +72,11 @@ In some cases, a custom color value (e.g. `#FFFFFF`) may also be used (see below
 ## Usage
 
 ```html
-<i className="wdc-icon" data-icon="shield" data-category="accent" />
-<i className="wdc-icon" data-icon="shield" data-category="accent" data-color="pomegranate500" />
-<i className="wdc-icon" data-icon="shield" data-category="accent" data-size="80" />
+<i class="wdc-icon" data-icon="shield" data-category="accent" />
+<i class="wdc-icon" data-icon="shield" data-category="accent" data-color="pomegranate500" />
+<i class="wdc-icon" data-icon="shield" data-category="accent" data-size="80" />
 <i
-  className="wdc-icon"
+  class="wdc-icon"
   data-icon="shield"
   data-category="accent"
   data-color="frenchVanilla100"
@@ -112,9 +112,9 @@ Default: `null`
 ## Usage
 
 ```html
-<i className="wdc-icon" data-icon="benefits" data-category="applet" />
-<i className="wdc-icon" data-icon="benefits" data-category="applet" data-color="pomegranate" />
-<i className="wdc-icon" data-icon="benefits" data-category="applet" data-size="60" />
+<i class="wdc-icon" data-icon="benefits" data-category="applet" />
+<i class="wdc-icon" data-icon="benefits" data-category="applet" data-color="pomegranate" />
+<i class="wdc-icon" data-icon="benefits" data-category="applet" data-size="60" />
 ```
 
 ## Data Attributes
@@ -142,20 +142,20 @@ System icons contain up to 3 layers that may be colored independently: `accent`,
 `background`.
 
 ```html
-<i className="wdc-icon" data-icon="activityStream" data-category="system" />
+<i class="wdc-icon" data-icon="activityStream" data-category="system" />
 <i
-  className="wdc-icon"
+  class="wdc-icon"
   data-icon="activityStream"
   data-category="system"
   data-fill-color="blueberry500"
   data-accent-color="frenchVanilla100"
   data-background-color="blueberry500"
 />
-<i className="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
+<i class="wdc-icon" data-icon="activityStream" data-category="system" data-size="48" />
 
 <!-- Hover Colors -->
 <i
-  className="wdc-icon"
+  class="wdc-icon"
   data-icon="activityStream"
   data-category="system"
   data-fill-color="blueberry500"
@@ -168,13 +168,13 @@ System icons contain up to 3 layers that may be colored independently: `accent`,
 
 <!-- Circle Background -->
 <i
-  className="wdc-icon"
+  class="wdc-icon"
   data-icon="activityStream"
   data-category="system"
   data-circle-background="true"
 />
 <i
-  className="wdc-icon"
+  class="wdc-icon"
   data-icon="activityStream"
   data-category="system"
   data-circle-background="blueberry400"

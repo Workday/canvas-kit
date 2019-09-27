@@ -28,9 +28,9 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 ## Usage
 
 ```html
-<div className="wdc-form-checkbox">
+<div class="wdc-form-checkbox">
   <input type="checkbox" id="checkbox" />
-  <label htmlFor="checkbox">Checkbox option</label>
+  <label for="checkbox">Checkbox option</label>
 </div>
 ```
 

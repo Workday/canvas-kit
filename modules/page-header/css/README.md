@@ -30,10 +30,10 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
   <div class="wdc-page-header-container">
     <h2 class="wdc-page-header-title">Page Title</h2>
     <div class="wdc-icon-list">
-      <button className="wdc-btn-icon-inverse" aria-label="Export">
+      <button class="wdc-btn-icon-inverse" aria-label="Export">
         <i class="wdc-icon" data-icon="export" data-category="system" />
       </button>
-      <button className="wdc-btn-icon-inverse" aria-label="Fullscreen">
+      <button class="wdc-btn-icon-inverse" aria-label="Fullscreen">
         <i class="wdc-icon" data-icon="fullscreen" data-category="system" />
       </button>
     </div>
@@ -48,10 +48,10 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
   <div class="wdc-page-header-container wdc-page-header-cap-width">
     <h2 class="wdc-page-header-title">Page Title</h2>
     <div class="wdc-icon-list">
-      <button className="wdc-btn-icon-inverse" aria-label="Export">
+      <button class="wdc-btn-icon-inverse" aria-label="Export">
         <i class="wdc-icon" data-icon="export" data-category="system" />
       </button>
-      <button className="wdc-btn-icon-inverse" aria-label="Fullscreen">
+      <button class="wdc-btn-icon-inverse" aria-label="Fullscreen">
         <i class="wdc-icon" data-icon="fullscreen" data-category="system" />
       </button>
     </div>
