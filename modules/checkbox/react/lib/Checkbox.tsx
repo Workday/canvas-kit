@@ -237,7 +237,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
     const {
       checked,
       disabled,
-      id,
+      id = this.id,
       inputRef,
       label,
       onChange,
@@ -252,7 +252,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
           <CheckboxInput
             checked={checked}
             disabled={disabled}
-            id={id || this.id}
+            id={id}
             innerRef={inputRef}
             onChange={onChange}
             type="checkbox"
@@ -267,7 +267,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <CheckboxLabel htmlFor={id || this.id} disabled={disabled}>
+          <CheckboxLabel htmlFor={id} disabled={disabled}>
             {label}
           </CheckboxLabel>
         )}
