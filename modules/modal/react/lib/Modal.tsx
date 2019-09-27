@@ -115,7 +115,7 @@ export default class Modal extends React.Component<ModalProps> {
     open: false,
     padding: Modal.Padding.l,
     width: Modal.Width.s,
-    closeOnEscape: false,
+    closeOnEscape: true,
   };
 
   private handleKeydown = (event: KeyboardEvent) => {

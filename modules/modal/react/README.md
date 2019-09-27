@@ -86,6 +86,8 @@ Default: `PopupPadding.l`
 > close command. If your application uses custom popup stacking, do not set this to true. Set this
 > to true for simple applications and the modal will close when the escape key is pressed.
 
+Default: `true`
+
 ---
 
 #### `firstFocusRef: React.RefObject<HTMLElement>`
