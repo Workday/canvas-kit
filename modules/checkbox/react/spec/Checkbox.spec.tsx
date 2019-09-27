@@ -74,7 +74,7 @@ describe('Checkbox Accessibility', () => {
     expect(await axe(html)).toHaveNoViolations();
   });
 
-  test('Checkbox created a unique id for each instance', async () => {
+  test('Checkbox creates a unique id for each instance', async () => {
     const fragment = mount(
       <form>
         <Checkbox checked={true} onChange={jest.fn()} disabled={false} />;
