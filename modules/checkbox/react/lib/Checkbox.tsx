@@ -229,7 +229,9 @@ export default class Checkbox extends React.Component<CheckboxProps> {
     checked: false,
     label: '',
   };
+
   private id = uuid();
+
   public render() {
     // TODO: Standardize on prop spread location (see #150)
     const {
