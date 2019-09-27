@@ -73,4 +73,28 @@ describe('Checkbox Accessibility', () => {
     );
     expect(await axe(html)).toHaveNoViolations();
   });
+
+  test('Checkbox creates a unique id for each instance', async () => {
+    const fragment = mount(
+      <form>
+        <Checkbox checked={true} onChange={jest.fn()} disabled={false} />;
+        <Checkbox onChange={jest.fn()} disabled={false} />;
+      </form>
+    );
+
+    const id1 = fragment
+      .find('input')
+      .at(0)
+      .getDOMNode()
+      .getAttribute('id');
+
+    const id2 = fragment
+      .find('input')
+      .at(1)
+      .getDOMNode()
+      .getAttribute('id');
+
+    expect(id1).not.toEqual(id2);
+    fragment.unmount();
+  });
 });
