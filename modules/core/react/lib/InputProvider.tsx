@@ -196,6 +196,7 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   }
 
   componentWillUnmount() {
+    window.clearTimeout(this.eventTimer);
     this.enableListeners(false);
   }
 

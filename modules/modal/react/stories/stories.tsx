@@ -26,7 +26,7 @@ const DefaultModalExample = () => {
         Delete Item
       </Button>
       <Modal
-        testId="TestModal"
+        data-testid="TestModal"
         heading={'Delete Item'}
         closeOnEscape={true}
         open={open}
@@ -52,7 +52,7 @@ const UseModalExample = () => {
       <Button variant={Button.Variant.Delete} {...targetProps}>
         Delete Item
       </Button>
-      <Modal testId="TestModal" heading={'Delete Item'} closeOnEscape={true} {...modalProps}>
+      <Modal data-testid="TestModal" heading={'Delete Item'} closeOnEscape={true} {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
           Delete
@@ -74,7 +74,7 @@ const NoCloseModalExample = () => {
         Delete Item
       </Button>
       <Modal
-        testId="TestModal"
+        data-testid="TestModal"
         heading={'Delete Item'}
         closeOnEscape={true}
         {...modalProps}
@@ -102,7 +102,7 @@ const CustomFocusModalExample = () => {
         Delete Item
       </Button>
       <Modal
-        testId="TestModal"
+        data-testid="TestModal"
         heading={'Delete Item'}
         closeOnEscape={true}
         {...modalProps}

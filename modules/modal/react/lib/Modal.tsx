@@ -11,10 +11,6 @@ export enum ModalWidth {
 }
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * This will add a `data-testid` attribute to the Popup component, not the container
-   */
-  testId?: string;
   open: boolean;
   padding: PopupPadding;
   width: ModalWidth;
@@ -87,6 +83,7 @@ function onInitialFocus(
         // Setting tabIndex allows the header to be focusable.
         // We do the header instead of the next focusable element to prevent useful context from being skipped
         firstFocusable.tabIndex = 0;
+        firstFocusable.style.outline = 'none';
 
         const changeTabIndex = () => {
           // We no longer need to focus on the header after it loses focus
@@ -159,7 +156,6 @@ export default class Modal extends React.Component<ModalProps> {
       padding,
       width,
       heading,
-      testId,
       children,
       closeOnEscape,
       firstFocusRef: firstFocusableRef,
@@ -181,7 +177,6 @@ export default class Modal extends React.Component<ModalProps> {
               handleClose={handleClose}
               padding={padding}
               transformOrigin={transformOrigin}
-              data-testid={testId}
             >
               {children}
             </Popup>
