@@ -33,6 +33,7 @@ const SwitchInput = styled('input')<SwitchProps>(
     margin: 0,
     marginLeft: spacing.xxxs,
     borderRadius: 999,
+    opacity: 0,
     '&:focus, &:active': {
       outline: 'none',
       '& ~ div:first-of-type': {

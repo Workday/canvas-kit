@@ -14,10 +14,10 @@ import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 
 export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   value: string;
-  error?: ErrorType;
   inputRef?: React.Ref<HTMLInputElement>;
   showCheck?: boolean;
   placeholder: string;
+  error?: ErrorType;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onValidColorChange?: (color: string) => void;
 }
@@ -26,9 +26,8 @@ const swatchTileSpacing = spacing.xxs;
 const swatchTileSize = 20;
 const swatchCheckIconSpacing = 8;
 const colorInputWidth = 116;
-const colorInputErrorWidth = 144;
 
-const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'error' | 'grow'>>(
+const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'grow'>>(
   {
     boxSizing: 'border-box',
     paddingLeft: '46px',
@@ -38,10 +37,6 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'err
       color: 'transparent',
     },
   },
-  ({error}) =>
-    typeof error !== 'undefined' && {
-      width: colorInputErrorWidth,
-    },
   ({grow}) =>
     grow && {
       minWidth: '100%',
@@ -106,6 +101,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
       inputRef,
       disabled,
       placeholder,
+      error,
       ...elemProps
     } = this.props;
     const formattedValue = this.formatValue(value);
@@ -118,6 +114,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           type="text"
           placeholder={placeholder}
           value={formattedValue}
+          error={error}
           spellCheck={false}
           disabled={disabled}
           maxLength={7} // 7 to allow pasting with a hash

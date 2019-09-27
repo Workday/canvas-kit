@@ -7,7 +7,7 @@ import {css, cx} from 'emotion';
 import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
-import {Avatar} from '../../../avatar/react/index';
+import {AvatarButton} from '../../../avatar/react/index';
 import {colors, spacing} from '../../../core/react/index';
 import {Button, IconButton} from '../../../button/react/index';
 import {GlobalHeader, Header, DubLogoTitle, WorkdayLogoTitle, HeaderVariant} from '../index';
@@ -77,7 +77,7 @@ storiesOf('Header', module)
             </a>
           }
           menuToggle={
-            <Avatar
+            <AvatarButton
               onClick={handleMenuClickTest}
               url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
             />
@@ -96,7 +96,7 @@ storiesOf('Header', module)
             title="Inbox"
             aria-label="Inbox"
           />
-          <Avatar
+          <AvatarButton
             onClick={handleAvatarClickTest}
             url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
             altText="Profile"
@@ -106,7 +106,7 @@ storiesOf('Header', module)
       <div className={containerStyle}>
         <GlobalHeader
           brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}
-          menuToggle={<Avatar onClick={handleMenuClickTest} />}
+          menuToggle={<AvatarButton onClick={handleMenuClickTest} />}
           onSearchSubmit={handleSearchSubmitTest}
           breakpoint={700}
         >
@@ -122,7 +122,7 @@ storiesOf('Header', module)
             title="Inbox"
             aria-label="Inbox"
           />
-          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
+          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
       <div className={containerStyle}>
@@ -139,7 +139,7 @@ storiesOf('Header', module)
             title="Inbox"
             aria-label="Inbox"
           />
-          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
+          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
     </div>
@@ -163,7 +163,7 @@ storiesOf('Header', module)
             title="Inbox"
             aria-label="Inbox"
           />
-          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
+          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
         </Header>
       </div>
       <br />
@@ -182,7 +182,7 @@ storiesOf('Header', module)
             title="Notifications"
             aria-label="Notifications"
           />
-          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
+          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
           <Button variant={Button.Variant.Primary}>Download</Button>
         </Header>
       </div>
@@ -302,7 +302,7 @@ storiesOf('Header', module)
             title="Notifications"
             aria-label="Notifications"
           />
-          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
+          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
           <Button variant={Button.Variant.Primary}>Download</Button>
         </Header>
       </div>
@@ -316,7 +316,7 @@ storiesOf('Header', module)
             title="Notifications"
             aria-label="Notifications"
           />
-          <Avatar onClick={handleAvatarClickTest} />
+          <AvatarButton onClick={handleAvatarClickTest} />
         </Header>
       </div>
       <br />
@@ -334,7 +334,7 @@ storiesOf('Header', module)
             title="Notifications"
             aria-label="Notifications"
           />
-          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
+          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
         </Header>
       </div>
       <br />
@@ -379,7 +379,7 @@ storiesOf('Header', module)
           title="Notifications"
           aria-label="Notifications"
         />
-        <Avatar onClick={handleAvatarClickTest} altText="Profile" />
+        <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
         <Button variant={Button.Variant.Primary}>Download</Button>
       </Header>
       <Header title="Nav Collapses Later" breakpoints={{sm: 320, md: 420, lg: 768}}>
@@ -392,7 +392,7 @@ storiesOf('Header', module)
           icon={notificationsIcon}
           aria-label="Notifications"
         />
-        <Avatar onClick={handleAvatarClickTest} />
+        <AvatarButton onClick={handleAvatarClickTest} />
         <Button variant={Button.Variant.Primary}>Download</Button>
       </Header>
       <Header

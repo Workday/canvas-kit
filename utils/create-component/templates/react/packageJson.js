@@ -1,7 +1,8 @@
+module.exports = (name, moduleName, description, unstable) => `
 {
-  "name": "@workday/canvas-kit-react-color-picker",
-  "version": "3.0.0-alpha.9",
-  "description": "A Canvas-styled color picker",
+  "name": "${moduleName}",
+  "version": "0.0.0",
+  "description": "${description}",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
@@ -10,7 +11,9 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/color-picker/react"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/${
+      unstable ? '_labs/' : ''
+    }${name}/react"
   },
   "files": [
     "dist/",
@@ -19,7 +22,6 @@
   ],
   "scripts": {
     "watch": "yarn build:es6 -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
@@ -32,18 +34,10 @@
     "react",
     "components",
     "workday",
-    "color-picker"
+    "${name}"
   ],
-  "dependencies": {
-    "@workday/canvas-kit-react-common": "^3.0.0-alpha.7",
-    "@workday/canvas-kit-react-core": "^3.0.0-alpha.7",
-    "@workday/canvas-kit-react-icon": "^3.0.0-alpha.7",
-    "@workday/canvas-kit-react-text-input": "^3.0.0-alpha.9",
-    "@workday/canvas-system-icons-web": "^1.0.1",
-    "emotion": "^9.2.12",
-    "react-emotion": "^9.2.12"
-  },
   "peerDependencies": {
     "react": ">= 16.8 < 17"
   }
 }
+`;

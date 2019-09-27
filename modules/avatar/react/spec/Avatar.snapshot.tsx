@@ -4,7 +4,7 @@ import * as renderer from 'react-test-renderer';
 
 describe('Avatar Snapshots', () => {
   test('renders as expected', () => {
-    const component = renderer.create(<Avatar>Button</Avatar>);
+    const component = renderer.create(<Avatar>Avatar</Avatar>);
     expect(component).toMatchSnapshot();
   });
   test('renders a large Avatar', () => {

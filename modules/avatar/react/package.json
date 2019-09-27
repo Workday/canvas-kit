@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-avatar",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.0-alpha.8",
   "description": "A circular user photo (or a default)",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
