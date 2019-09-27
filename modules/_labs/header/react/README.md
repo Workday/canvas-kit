@@ -217,7 +217,6 @@ The Global Header (or App Header) is used for Workday applications.
 ## Usage
 
 ```tsx
-import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-labs-react-header';
 import {AvatarButton} from '@workday/canvas-kit-react-avatar';
 import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-labs-react-header';
 import {Avatar} from '@workday/canvas-kit-react-avatar';
