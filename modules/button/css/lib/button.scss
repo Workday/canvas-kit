@@ -23,12 +23,13 @@ $_wdc-btn-caret-down-icon-white: svg-load(
   padding: 0 14px;
   background-color: $wdc-btn-bg-secondary;
   color: $wdc-btn-secondary-text-color;
-  border-radius: 999px;
-  transition: 0.2s background, 0.2s border-color, 0.2s box-shadow;
+  border-radius: $wdc-border-radius-circle;
+  transition: 120ms background, 120ms border-color, 120ms box-shadow;
   text-align: center;
   font-size: 14px;
   cursor: pointer;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
   vertical-align: middle;
   border: 2px solid transparent;
   font-weight: 700;
@@ -97,7 +98,7 @@ $_wdc-btn-caret-down-icon-white: svg-load(
   &.wdc-btn-size-l {
     min-width: 112px;
     height: 48px;
-    padding: 0 18px;
+    padding: 0 $wdc-spacing-m;
     font-size: 16px;
   }
 
