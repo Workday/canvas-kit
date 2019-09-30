@@ -228,7 +228,7 @@ exports[`Dub Header Snapshots renders a default header 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 <div
@@ -493,7 +493,7 @@ exports[`Dub Header Snapshots renders a default header with title 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-2 {
@@ -774,7 +774,7 @@ exports[`Dub Header Snapshots renders a header with SystemIcon and IconButton ch
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-9 {
@@ -792,7 +792,7 @@ exports[`Dub Header Snapshots renders a header with SystemIcon and IconButton ch
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1182,7 +1182,7 @@ exports[`Dub Header Snapshots renders a header with a custom brand element 1`] =
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 <div
@@ -1431,7 +1431,7 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-8 {
@@ -1503,7 +1503,7 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1706,7 +1706,7 @@ exports[`Dub Header Snapshots renders a header with a search bar 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2129,7 +2129,7 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-12 {
@@ -2147,7 +2147,7 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2298,7 +2298,7 @@ exports[`Dub Header Snapshots renders a header with content with a search bar 1`
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2702,7 +2702,7 @@ exports[`Dub Header Snapshots renders a header with custom breakpoints 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 <div
@@ -2967,7 +2967,7 @@ exports[`Dub Header Snapshots renders a header with nav elements 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-9 {
@@ -2985,7 +2985,7 @@ exports[`Dub Header Snapshots renders a header with nav elements 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -3240,7 +3240,7 @@ exports[`Dub Header Snapshots renders a header with nav elements 2`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -3548,7 +3548,7 @@ exports[`Dub Header Snapshots renders a header with nav elements 2`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 <div
@@ -3827,7 +3827,7 @@ exports[`Dub Header Snapshots renders themed headers: <Header /> with blue theme
   height: 4px;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 <div
@@ -4067,7 +4067,7 @@ exports[`Dub Header Snapshots renders themed headers: <Header /> with transparen
   height: 4px;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-10 {
@@ -4357,7 +4357,7 @@ exports[`Dub Header Snapshots renders themed headers: <Header /> with white them
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 <div
@@ -4579,7 +4579,7 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   height: 4px;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-8 {
@@ -4651,7 +4651,7 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -4824,7 +4824,7 @@ exports[`Full Header Snapshots renders a blue header with a search bar and no ch
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -5254,7 +5254,7 @@ exports[`Full Header Snapshots renders a default header 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-10 {
@@ -5522,7 +5522,7 @@ exports[`Full Header Snapshots renders a default header with title 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-12 {
@@ -5851,7 +5851,7 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-10 {
@@ -5923,7 +5923,7 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -6126,7 +6126,7 @@ exports[`Full Header Snapshots renders a header in a lg screen with search 1`] =
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -6517,7 +6517,7 @@ exports[`Full Header Snapshots renders a header with a custom brand element 1`] 
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-4 {
@@ -6748,7 +6748,7 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-8 {
@@ -6820,7 +6820,7 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -7023,7 +7023,7 @@ exports[`Full Header Snapshots renders a header with a search bar 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -7449,7 +7449,7 @@ exports[`Full Header Snapshots renders a header with content with a search bar 1
   height: 4px;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-8 {
@@ -7545,7 +7545,7 @@ exports[`Full Header Snapshots renders a header with content with a search bar 1
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -7885,7 +7885,7 @@ exports[`Full Header Snapshots renders a header with custom breakpoints 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-10 {
@@ -8153,7 +8153,7 @@ exports[`Full Header Snapshots renders a header with nav elements 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-9 {
@@ -8171,7 +8171,7 @@ exports[`Full Header Snapshots renders a header with nav elements 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -8429,7 +8429,7 @@ exports[`Full Header Snapshots renders a header with nav elements 2`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -8737,7 +8737,7 @@ exports[`Full Header Snapshots renders a header with nav elements 2`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-13 {
@@ -9019,7 +9019,7 @@ exports[`Full Header Snapshots renders a header with system icon children 1`] = 
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-9 {
@@ -9037,7 +9037,7 @@ exports[`Full Header Snapshots renders a header with system icon children 1`] = 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -9452,7 +9452,7 @@ exports[`Full Header Snapshots renders themed headers: <Header /> with blue them
   height: 4px;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-2 {
@@ -9720,7 +9720,7 @@ exports[`Full Header Snapshots renders themed headers: <Header /> with transpare
   height: 4px;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-2 {
@@ -9988,7 +9988,7 @@ exports[`Full Header Snapshots renders themed headers: <Header /> with white the
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-10 {

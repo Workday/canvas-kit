@@ -42,7 +42,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -238,7 +238,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -446,7 +446,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -642,7 +642,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -849,7 +849,7 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1045,7 +1045,7 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;

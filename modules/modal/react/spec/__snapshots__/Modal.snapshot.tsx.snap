@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Modal Snapshots renders Modal with a different width 1`] = `
-.emotion-6 {
+.emotion-3 {
   position: fixed;
   top: 0;
   left: 0;
@@ -34,11 +34,11 @@ exports[`Modal Snapshots renders Modal with a different width 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-4 {
+.emotion-2 {
   position: relative;
   width: 800px;
-  -webkit-animation: animation-1htt9yb;
-  animation: animation-1htt9yb;
+  -webkit-animation: animation-221pkp;
+  animation: animation-221pkp;
   -webkit-animation-duration: 150ms;
   animation-duration: 150ms;
   -webkit-animation-timing-function: ease-out;
@@ -48,7 +48,7 @@ exports[`Modal Snapshots renders Modal with a different width 1`] = `
   transform-origin: top center;
 }
 
-.emotion-2 {
+.emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -59,20 +59,20 @@ exports[`Modal Snapshots renders Modal with a different width 1`] = `
 }
 
 <div
-  className="emotion-6 emotion-7"
+  className="emotion-3 emotion-4"
   onClick={[Function]}
 >
   <div
-    className="emotion-4 emotion-5"
+    className="emotion-2"
     role="dialog"
     width="800px"
   >
     <div
-      className="emotion-2 emotion-3"
+      className="emotion-1"
       width="800px"
     >
       <div
-        className="emotion-0 emotion-1"
+        className="emotion-0"
       >
         <span>
           hello world
@@ -84,7 +84,7 @@ exports[`Modal Snapshots renders Modal with a different width 1`] = `
 `;
 
 exports[`Modal Snapshots renders Modal with children elements 1`] = `
-.emotion-11 {
+.emotion-7 {
   position: fixed;
   top: 0;
   left: 0;
@@ -109,11 +109,11 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
   animation-duration: 0.3s;
 }
 
-.emotion-9 {
+.emotion-6 {
   position: relative;
   width: 440px;
-  -webkit-animation: animation-1htt9yb;
-  animation: animation-1htt9yb;
+  -webkit-animation: animation-221pkp;
+  animation: animation-221pkp;
   -webkit-animation-duration: 150ms;
   animation-duration: 150ms;
   -webkit-animation-timing-function: ease-out;
@@ -123,7 +123,7 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
   transform-origin: top center;
 }
 
-.emotion-5 {
+.emotion-4 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -152,7 +152,7 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -291,7 +291,7 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
   fill: transparent;
 }
 
-.emotion-7 {
+.emotion-5 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -302,16 +302,16 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
 }
 
 <div
-  className="emotion-11 emotion-12"
+  className="emotion-7 emotion-8"
   onClick={[Function]}
 >
   <div
-    className="emotion-9 emotion-10"
+    className="emotion-6"
     role="dialog"
     width="440px"
   >
     <div
-      className="emotion-3 emotion-4"
+      className="emotion-3"
     >
       <button
         aria-label="Close"
@@ -330,11 +330,11 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
       </button>
     </div>
     <div
-      className="emotion-7 emotion-8"
+      className="emotion-5"
       width="440px"
     >
       <div
-        className="emotion-5 emotion-6"
+        className="emotion-4"
       >
         <span>
           hello world
@@ -346,7 +346,7 @@ exports[`Modal Snapshots renders Modal with children elements 1`] = `
 `;
 
 exports[`Modal Snapshots renders Modal with close icon 1`] = `
-.emotion-11 {
+.emotion-7 {
   position: fixed;
   top: 0;
   left: 0;
@@ -371,11 +371,11 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
   animation-duration: 0.3s;
 }
 
-.emotion-9 {
+.emotion-6 {
   position: relative;
   width: 440px;
-  -webkit-animation: animation-1htt9yb;
-  animation: animation-1htt9yb;
+  -webkit-animation: animation-221pkp;
+  animation: animation-221pkp;
   -webkit-animation-duration: 150ms;
   animation-duration: 150ms;
   -webkit-animation-timing-function: ease-out;
@@ -385,7 +385,7 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
   transform-origin: top center;
 }
 
-.emotion-7 {
+.emotion-5 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -395,7 +395,7 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
   width: 440px;
 }
 
-.emotion-5 {
+.emotion-4 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -424,7 +424,7 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -564,16 +564,16 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
 }
 
 <div
-  className="emotion-11 emotion-12"
+  className="emotion-7 emotion-8"
   onClick={[Function]}
 >
   <div
-    className="emotion-9 emotion-10"
+    className="emotion-6"
     role="dialog"
     width="440px"
   >
     <div
-      className="emotion-3 emotion-4"
+      className="emotion-3"
     >
       <button
         aria-label="Close"
@@ -592,11 +592,11 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
       </button>
     </div>
     <div
-      className="emotion-7 emotion-8"
+      className="emotion-5"
       width="440px"
     >
       <div
-        className="emotion-5 emotion-6"
+        className="emotion-4"
       />
     </div>
   </div>
@@ -604,7 +604,7 @@ exports[`Modal Snapshots renders Modal with close icon 1`] = `
 `;
 
 exports[`Modal Snapshots renders Modal with different padding 1`] = `
-.emotion-11 {
+.emotion-7 {
   position: fixed;
   top: 0;
   left: 0;
@@ -629,11 +629,11 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
   animation-duration: 0.3s;
 }
 
-.emotion-9 {
+.emotion-6 {
   position: relative;
   width: 440px;
-  -webkit-animation: animation-1htt9yb;
-  animation: animation-1htt9yb;
+  -webkit-animation: animation-221pkp;
+  animation: animation-221pkp;
   -webkit-animation-duration: 150ms;
   animation-duration: 150ms;
   -webkit-animation-timing-function: ease-out;
@@ -643,7 +643,7 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
   transform-origin: top center;
 }
 
-.emotion-5 {
+.emotion-4 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -672,7 +672,7 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -811,7 +811,7 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
   fill: transparent;
 }
 
-.emotion-7 {
+.emotion-5 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -822,16 +822,16 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
 }
 
 <div
-  className="emotion-11 emotion-12"
+  className="emotion-7 emotion-8"
   onClick={[Function]}
 >
   <div
-    className="emotion-9 emotion-10"
+    className="emotion-6"
     role="dialog"
     width="440px"
   >
     <div
-      className="emotion-3 emotion-4"
+      className="emotion-3"
     >
       <button
         aria-label="Close"
@@ -850,11 +850,11 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
       </button>
     </div>
     <div
-      className="emotion-7 emotion-8"
+      className="emotion-5"
       width="440px"
     >
       <div
-        className="emotion-5 emotion-6"
+        className="emotion-4"
       />
     </div>
   </div>
@@ -862,7 +862,7 @@ exports[`Modal Snapshots renders Modal with different padding 1`] = `
 `;
 
 exports[`Modal Snapshots renders Modal with transformOrigin 1`] = `
-.emotion-6 {
+.emotion-3 {
   position: fixed;
   top: 0;
   left: 0;
@@ -887,11 +887,11 @@ exports[`Modal Snapshots renders Modal with transformOrigin 1`] = `
   animation-duration: 0.3s;
 }
 
-.emotion-4 {
+.emotion-2 {
   position: relative;
   width: 440px;
-  -webkit-animation: animation-1htt9yb;
-  animation: animation-1htt9yb;
+  -webkit-animation: animation-221pkp;
+  animation: animation-221pkp;
   -webkit-animation-duration: 150ms;
   animation-duration: 150ms;
   -webkit-animation-timing-function: ease-out;
@@ -909,7 +909,7 @@ exports[`Modal Snapshots renders Modal with transformOrigin 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-2 {
+.emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -920,20 +920,20 @@ exports[`Modal Snapshots renders Modal with transformOrigin 1`] = `
 }
 
 <div
-  className="emotion-6 emotion-7"
+  className="emotion-3 emotion-4"
   onClick={[Function]}
 >
   <div
-    className="emotion-4 emotion-5"
+    className="emotion-2"
     role="dialog"
     width="440px"
   >
     <div
-      className="emotion-2 emotion-3"
+      className="emotion-1"
       width="440px"
     >
       <div
-        className="emotion-0 emotion-1"
+        className="emotion-0"
       >
         <span>
           hello world
@@ -945,7 +945,7 @@ exports[`Modal Snapshots renders Modal with transformOrigin 1`] = `
 `;
 
 exports[`Modal Snapshots renders Modal without close icon 1`] = `
-.emotion-6 {
+.emotion-3 {
   position: fixed;
   top: 0;
   left: 0;
@@ -970,11 +970,11 @@ exports[`Modal Snapshots renders Modal without close icon 1`] = `
   animation-duration: 0.3s;
 }
 
-.emotion-4 {
+.emotion-2 {
   position: relative;
   width: 440px;
-  -webkit-animation: animation-1htt9yb;
-  animation: animation-1htt9yb;
+  -webkit-animation: animation-221pkp;
+  animation: animation-221pkp;
   -webkit-animation-duration: 150ms;
   animation-duration: 150ms;
   -webkit-animation-timing-function: ease-out;
@@ -992,7 +992,7 @@ exports[`Modal Snapshots renders Modal without close icon 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-2 {
+.emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -1003,20 +1003,20 @@ exports[`Modal Snapshots renders Modal without close icon 1`] = `
 }
 
 <div
-  className="emotion-6 emotion-7"
+  className="emotion-3 emotion-4"
   onClick={[Function]}
 >
   <div
-    className="emotion-4 emotion-5"
+    className="emotion-2"
     role="dialog"
     width="440px"
   >
     <div
-      className="emotion-2 emotion-3"
+      className="emotion-1"
       width="440px"
     >
       <div
-        className="emotion-0 emotion-1"
+        className="emotion-0"
       >
         <span>
           hello world
@@ -1028,7 +1028,7 @@ exports[`Modal Snapshots renders Modal without close icon 1`] = `
 `;
 
 exports[`Modal Snapshots renders as expected 1`] = `
-.emotion-6 {
+.emotion-3 {
   position: fixed;
   top: 0;
   left: 0;
@@ -1053,11 +1053,11 @@ exports[`Modal Snapshots renders as expected 1`] = `
   animation-duration: 0.3s;
 }
 
-.emotion-4 {
+.emotion-2 {
   position: relative;
   width: 440px;
-  -webkit-animation: animation-1htt9yb;
-  animation: animation-1htt9yb;
+  -webkit-animation: animation-221pkp;
+  animation: animation-221pkp;
   -webkit-animation-duration: 150ms;
   animation-duration: 150ms;
   -webkit-animation-timing-function: ease-out;
@@ -1067,7 +1067,7 @@ exports[`Modal Snapshots renders as expected 1`] = `
   transform-origin: top center;
 }
 
-.emotion-2 {
+.emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -1086,20 +1086,20 @@ exports[`Modal Snapshots renders as expected 1`] = `
 }
 
 <div
-  className="emotion-6 emotion-7"
+  className="emotion-3 emotion-4"
   onClick={[Function]}
 >
   <div
-    className="emotion-4 emotion-5"
+    className="emotion-2"
     role="dialog"
     width="440px"
   >
     <div
-      className="emotion-2 emotion-3"
+      className="emotion-1"
       width="440px"
     >
       <div
-        className="emotion-0 emotion-1"
+        className="emotion-0"
       />
     </div>
   </div>

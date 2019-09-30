@@ -223,7 +223,7 @@ exports[`Menu Snapshots renders a focused menu item 1`] = `
 `;
 
 exports[`Menu Snapshots renders a hidden menu 1`] = `
-.emotion-4 {
+.emotion-3 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -243,7 +243,7 @@ exports[`Menu Snapshots renders a hidden menu 1`] = `
 .emotion-0 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -262,7 +262,7 @@ exports[`Menu Snapshots renders a hidden menu 1`] = `
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-3"
   style={
     Object {
       "display": "inline-block",
@@ -271,7 +271,7 @@ exports[`Menu Snapshots renders a hidden menu 1`] = `
   }
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-2"
   >
     <ul
       aria-activedescendant="myId--1"
@@ -286,7 +286,7 @@ exports[`Menu Snapshots renders a hidden menu 1`] = `
 `;
 
 exports[`Menu Snapshots renders a menu with aria attributes 1`] = `
-.emotion-8 {
+.emotion-7 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -306,7 +306,7 @@ exports[`Menu Snapshots renders a menu with aria attributes 1`] = `
 .emotion-4 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -394,7 +394,7 @@ exports[`Menu Snapshots renders a menu with aria attributes 1`] = `
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-7"
   style={
     Object {
       "display": "inline-block",
@@ -403,7 +403,7 @@ exports[`Menu Snapshots renders a menu with aria attributes 1`] = `
   }
 >
   <div
-    className="emotion-6 emotion-7"
+    className="emotion-6"
   >
     <ul
       aria-activedescendant="myId-0"
@@ -446,7 +446,7 @@ exports[`Menu Snapshots renders a menu with grow=true 1`] = `
 .emotion-8 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -572,7 +572,7 @@ exports[`Menu Snapshots renders a menu with grow=true 1`] = `
   fill: #333d47;
 }
 
-.emotion-12 {
+.emotion-11 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -583,7 +583,7 @@ exports[`Menu Snapshots renders a menu with grow=true 1`] = `
 }
 
 <div
-  className="emotion-12 emotion-13"
+  className="emotion-11"
   style={
     Object {
       "display": "inline-block",
@@ -593,7 +593,7 @@ exports[`Menu Snapshots renders a menu with grow=true 1`] = `
   width="100%"
 >
   <div
-    className="emotion-10 emotion-11"
+    className="emotion-10"
   >
     <ul
       aria-activedescendant="myId-0"
@@ -637,7 +637,7 @@ exports[`Menu Snapshots renders a menu with grow=true 1`] = `
 `;
 
 exports[`Menu Snapshots renders an empty menu 1`] = `
-.emotion-4 {
+.emotion-3 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -657,7 +657,7 @@ exports[`Menu Snapshots renders an empty menu 1`] = `
 .emotion-0 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -676,7 +676,7 @@ exports[`Menu Snapshots renders an empty menu 1`] = `
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-3"
   style={
     Object {
       "display": "inline-block",
@@ -685,7 +685,7 @@ exports[`Menu Snapshots renders an empty menu 1`] = `
   }
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-2"
   >
     <ul
       aria-activedescendant="myId--1"
@@ -700,7 +700,7 @@ exports[`Menu Snapshots renders an empty menu 1`] = `
 `;
 
 exports[`Menu Snapshots renders an menu with one item 1`] = `
-.emotion-8 {
+.emotion-7 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -720,7 +720,7 @@ exports[`Menu Snapshots renders an menu with one item 1`] = `
 .emotion-4 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -808,7 +808,7 @@ exports[`Menu Snapshots renders an menu with one item 1`] = `
 }
 
 <div
-  className="emotion-8 emotion-9"
+  className="emotion-7"
   style={
     Object {
       "display": "inline-block",
@@ -817,7 +817,7 @@ exports[`Menu Snapshots renders an menu with one item 1`] = `
   }
 >
   <div
-    className="emotion-6 emotion-7"
+    className="emotion-6"
   >
     <ul
       aria-activedescendant="myId-0"
@@ -847,7 +847,7 @@ exports[`Menu Snapshots renders an menu with one item 1`] = `
 `;
 
 exports[`Menu Snapshots renders an menu with two items 1`] = `
-.emotion-12 {
+.emotion-11 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -867,7 +867,7 @@ exports[`Menu Snapshots renders an menu with two items 1`] = `
 .emotion-8 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -994,7 +994,7 @@ exports[`Menu Snapshots renders an menu with two items 1`] = `
 }
 
 <div
-  className="emotion-12 emotion-13"
+  className="emotion-11"
   style={
     Object {
       "display": "inline-block",
@@ -1003,7 +1003,7 @@ exports[`Menu Snapshots renders an menu with two items 1`] = `
   }
 >
   <div
-    className="emotion-10 emotion-11"
+    className="emotion-10"
   >
     <ul
       aria-activedescendant="myId-0"
@@ -1047,7 +1047,7 @@ exports[`Menu Snapshots renders an menu with two items 1`] = `
 `;
 
 exports[`Menu Snapshots renders with icon 1`] = `
-.emotion-12 {
+.emotion-11 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -1067,7 +1067,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
 .emotion-8 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -1243,7 +1243,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
 }
 
 <div
-  className="emotion-12 emotion-13"
+  className="emotion-11"
   style={
     Object {
       "display": "inline-block",
@@ -1252,7 +1252,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
   }
 >
   <div
-    className="emotion-10 emotion-11"
+    className="emotion-10"
   >
     <ul
       aria-activedescendant="myId-0"
