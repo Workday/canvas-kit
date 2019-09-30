@@ -1,5 +1,8 @@
 import {CSSObject} from 'create-emotion';
-import {stripUnit} from '@workday/canvas-kit-react-core';
+
+export function stripUnit(value: string): number {
+  return parseInt(`${value}`.replace('px', ''), 10);
+}
 
 export interface SpaceStyle {
   prop: string;

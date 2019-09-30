@@ -16,7 +16,7 @@ export interface CanvasSpacingNumber {
   xxxl: number;
 }
 
-export function stripUnit(value: string): number {
+function stripUnit(value: string): number {
   return parseInt(`${value}`.replace('px', ''), 10);
 }
 

@@ -9,7 +9,6 @@ import spacing, {
   CanvasSpacingNumber,
   CanvasSpacingValue,
   spacingNumbers,
-  stripUnit,
 } from './lib/spacing';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
 import {CSSProperties} from './lib/types';
@@ -33,7 +32,6 @@ export {
   depth,
   spacing,
   spacingNumbers,
-  stripUnit,
   type,
   fontFamily,
   monoFontFamily,
