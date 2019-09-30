@@ -11,7 +11,7 @@ export const inverseStyle = {
   display: 'inline-block',
   background: '#667380',
   padding: '2px 8px',
-  borderRadius: '3px',
+  borderRadius: '4px',
 };
 export const type = (hierarchy: any) => (
   <div style={{margin: '0 !important'}}>
@@ -87,7 +87,7 @@ storiesOf('Core', module)
       width: 200,
       height: 200,
       margin: 20,
-      borderRadius: 3,
+      borderRadius: 4,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
