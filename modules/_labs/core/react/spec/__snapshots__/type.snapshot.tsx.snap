@@ -1,0 +1,305 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Core Labs Type Snapshot renders type hierarchy 1`] = `
+.emotion-0 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  font-weight: 600;
+}
+
+.emotion-1 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  font-weight: 500;
+  -webkit-letter-spacing: 0.5px;
+  -moz-letter-spacing: 0.5px;
+  -ms-letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.emotion-2 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  font-weight: 500;
+}
+
+.emotion-3 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  color: #5e6a75;
+}
+
+.emotion-4 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  color: #de2e21;
+}
+
+.emotion-5 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #0875e1;
+  cursor: pointer;
+}
+
+.emotion-5:hover,
+.emotion-5:active {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  color: #0875e1;
+}
+
+.emotion-5:focus {
+  background: #d7eafc;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  outline: 2px solid #d7eafc;
+}
+
+.emotion-6 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  color: #ffffff;
+  display: inline-block;
+  background: #667380;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.emotion-7 {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #494949;
+  font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
+  font-family: "Roboto Mono","Courier New",Courier,monospace;
+}
+
+<div>
+  <h1
+    style={
+      Object {
+        "color": "#333333",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 56,
+        "fontWeight": 700,
+        "lineHeight": 1.3,
+      }
+    }
+  >
+    Brand 1 Header
+  </h1>
+  <h1
+    style={
+      Object {
+        "color": "#333333",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 48,
+        "fontWeight": 700,
+        "lineHeight": 1.3,
+      }
+    }
+  >
+    Brand 2 Header
+  </h1>
+  <h1
+    style={
+      Object {
+        "color": "#333333",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 40,
+        "fontWeight": 500,
+        "lineHeight": 1.3,
+      }
+    }
+  >
+    H1 Header
+  </h1>
+  <h2
+    style={
+      Object {
+        "color": "#333333",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 32,
+        "fontWeight": 700,
+        "lineHeight": 1.3,
+      }
+    }
+  >
+    H2 Header
+  </h2>
+  <h3
+    style={
+      Object {
+        "color": "#333333",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 24,
+        "fontWeight": 700,
+        "lineHeight": 1.3,
+      }
+    }
+  >
+    H3 Header
+  </h3>
+  <h4
+    style={
+      Object {
+        "color": "#333333",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 20,
+        "fontWeight": 700,
+        "lineHeight": 1.3,
+      }
+    }
+  >
+    H4 Header
+  </h4>
+  <h5
+    style={
+      Object {
+        "color": "#333333",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 20,
+        "fontWeight": 400,
+        "lineHeight": 1.3,
+      }
+    }
+  >
+    H5 Header
+  </h5>
+  <p
+    style={
+      Object {
+        "color": "#494949",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 16,
+        "fontWeight": 400,
+        "lineHeight": 1.5,
+      }
+    }
+  >
+    <strong>
+      Body: 
+    </strong>
+     Tacos chartreuse raclette single-origin coffee ethical tilde ennui. Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable. Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
+  </p>
+  <p
+    style={
+      Object {
+        "color": "#494949",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 14,
+        "fontWeight": 400,
+        "lineHeight": 1.5,
+      }
+    }
+  >
+    <strong>
+      Body 2: 
+    </strong>
+     Tacos chartreuse raclette single-origin coffee ethical tilde ennui. Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable. Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
+  </p>
+  <p
+    style={
+      Object {
+        "color": "#494949",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 13,
+        "fontWeight": 400,
+        "lineHeight": 1.5,
+      }
+    }
+  >
+    <strong>
+      Small: 
+    </strong>
+     Tacos chartreuse raclette single-origin coffee ethical tilde ennui. Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable. Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
+  </p>
+  <hr />
+  <h3
+    style={
+      Object {
+        "color": "#333333",
+        "fontFamily": "\\"Roboto\\", \\"Helvetica Neue\\", \\"Helvetica\\", Arial, sans-serif",
+        "fontSize": 24,
+        "fontWeight": 700,
+        "lineHeight": 1.3,
+      }
+    }
+  >
+    Variants
+  </h3>
+  <span
+    className="emotion-0"
+  >
+    Button Text
+  </span>
+  <br />
+  <span
+    className="emotion-1"
+  >
+    Caps Text
+  </span>
+  <br />
+  <label
+    className="emotion-2"
+  >
+    Label Text
+  </label>
+  <br />
+  <span
+    className="emotion-3"
+  >
+    Hint Text
+  </span>
+  <br />
+  <span
+    className="emotion-4"
+  >
+    Error Text
+  </span>
+  <br />
+  <a
+    className="emotion-5"
+    href="#"
+  >
+    Link Text
+  </a>
+  <br />
+  <span
+    className="emotion-6"
+  >
+    Inverse Text
+  </span>
+  <br />
+  <span
+    className="emotion-7"
+  >
+    Mono Text
+  </span>
+</div>
+`;

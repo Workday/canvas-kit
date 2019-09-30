@@ -1,7 +1,7 @@
 {
-  "name": "@workday/canvas-kit-react-header",
-  "version": "3.0.0-alpha.8",
-  "description": "A Canvas-styled application header",
+  "name": "@workday/canvas-kit-labs-react-menu",
+  "version": "3.0.0-alpha.7",
+  "description": "A container for navigation or action items",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
@@ -10,7 +10,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/header/react"
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/_labs/menu/react"
   },
   "files": [
     "dist/",
@@ -32,24 +32,25 @@
     "react",
     "components",
     "workday",
-    "header"
+    "menu"
   ],
-  "peerDependencies": {
-    "react": ">= 16.8 < 17"
+  "devDependencies": {
+    "@material-ui/core": "^4.1.0",
+    "@workday/canvas-system-icons-web": "^1.0.1",
+    "react-transition-group": "^2.5.0"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-button": "^3.0.0-alpha.7",
+    "@types/uuid": "^3.4.4",
+    "@workday/canvas-kit-react-card": "^3.0.0-alpha.7",
     "@workday/canvas-kit-react-common": "^3.0.0-alpha.7",
     "@workday/canvas-kit-react-core": "^3.0.0-alpha.7",
     "@workday/canvas-kit-react-icon": "^3.0.0-alpha.7",
-    "@workday/canvas-system-icons-web": "^1.0.1",
-    "chroma-js": "^1.4.0",
+    "@workday/design-assets-types": "^0.2.3",
     "emotion": "^9.2.12",
-    "lodash": "^4.17.14",
     "react-emotion": "^9.2.12",
-    "react-transition-group": "^2.5.0"
+    "uuid": "^3.3.2"
   },
-  "devDependencies": {
-    "@workday/canvas-kit-react-avatar": "^3.0.0-alpha.8"
+  "peerDependencies": {
+    "react": ">= 16.3 < 17"
   }
 }

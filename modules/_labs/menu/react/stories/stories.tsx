@@ -1,4 +1,4 @@
-/// <reference path="../../../../typings.d.ts" />
+/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
@@ -401,7 +401,7 @@ class Combobox extends React.Component<{}, ComboboxState> {
   };
 }
 
-storiesOf('Menu', module)
+storiesOf('Labs/Menu/React', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

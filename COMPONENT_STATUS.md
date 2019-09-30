@@ -3,7 +3,10 @@
 We will continue to update this list as we add or make significant changes to react modules that are
 part of Canvas.
 
-:white_check_mark: - Available  
+:white_check_mark: - Available
+
+:microscope: - [Labs Components](modules/_labs)
+
 :clock330: - In progress / needs an update.
 
 ## Primitives
@@ -49,7 +52,7 @@ part of Canvas.
 | Progress Bar                                   |                    |                    |
 | [Status Indicator](modules/status-indicator)   | :white_check_mark: |                    | [:blue_book:](https://design.workday.com/components/indicators/status-indicators) |
 | **Navigation**                                 |
-| [Header](modules/header)                       | :white_check_mark: |                    |      [:blue_book:](https://design.workday.com/components/navigation/headers)      |
+| [Header](modules/_labs/header)                 |    :microscope:    |                    |      [:blue_book:](https://design.workday.com/components/navigation/headers)      |
 | [Page Header](modules/page-header)             | :white_check_mark: | :white_check_mark: |    [:blue_book:](https://design.workday.com/components/navigation/page-header)    |
 | [Side Panel](modules/side-panel)               | :white_check_mark: |
 | **Popups**                                     |
@@ -57,7 +60,7 @@ part of Canvas.
 | [Modal](modules/modal)                         | :white_check_mark: | :white_check_mark: |
 | [Toast](modules/toast)                         | :white_check_mark: |                    |        [:blue_book:](https://design.workday.com/components/popups/toasts)         |  |  |
 | [Tooltip](modules/tooltip)                     | :white_check_mark: | :white_check_mark: |       [:blue_book:](https://design.workday.com/components/popups/tooltips)        |
-| [Menu](modules/menu)                           | :white_check_mark: | :white_check_mark: |         [:blue_book:](https://design.workday.com/components/popups/menus)         |  |
+| [Menu](modules/_labs/menu)                     |    :microscope:    | :white_check_mark: |         [:blue_book:](https://design.workday.com/components/popups/menus)         |  |
 | [Pop Up](modules/popup)                        | :white_check_mark: | :white_check_mark: |
 | **Miscellaneous**                              |
 | [Avatar](modules/avatar)                       | :white_check_mark: |                    |                                                                                   |

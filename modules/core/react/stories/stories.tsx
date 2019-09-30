@@ -4,7 +4,7 @@ import * as React from 'react';
 import styled, {css} from 'react-emotion';
 import withReadme from 'storybook-readme/with-readme';
 
-import canvas, {H1, space, spacing} from '..';
+import canvas, {H1} from '..';
 import README from '../README.md';
 
 export const inverseStyle = {
@@ -69,19 +69,6 @@ export const type = (hierarchy: any) => (
 
 storiesOf('Core', module)
   .addDecorator(withReadme(README))
-  .add('Space', () => {
-    const Box = styled('div')(space);
-
-    return (
-      <div className="story">
-        <div>
-          <Box style={{border: '1px solid #eee'}} p={spacing.xl} pb={64} m={40} mx={10}>
-            Margin and Padding
-          </Box>
-        </div>
-      </div>
-    );
-  })
   .add('Depth', () => {
     const Card = styled('div')({
       width: 200,
@@ -113,17 +100,6 @@ storiesOf('Core', module)
           <h1 style={canvas.type.dataViz2}>Data Viz 2 Header</h1>
           <H1>Styled Component H1 Header</H1>
           {type(canvas.type)}
-        </section>
-      </div>
-    );
-  })
-  .add('Type (Beta)', () => {
-    return (
-      <div className="story">
-        <section>
-          <h1 style={canvas.beta_type.brand1}>Brand 1 Header</h1>
-          <h1 style={canvas.beta_type.brand2}>Brand 2 Header</h1>
-          {type(canvas.beta_type)}
         </section>
       </div>
     );

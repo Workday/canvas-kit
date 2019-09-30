@@ -1,4 +1,8 @@
-# Canvas Kit Header
+# Canvas Kit Labs React Header
+
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+  <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
+</a>  This component is work in progress and currently in pre-release.
 
 A set of components to create headers for various Workday applications and sites.
 
@@ -12,13 +16,7 @@ For a full suite of examples, have a look at the [Header Stories](./stories.tsx)
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react
-```
-
-or
-
-```sh
-yarn add @workday/canvas-kit-react-header
+yarn add @workday/canvas-kit-labs-react-header
 ```
 
 # Header
@@ -29,7 +27,7 @@ This component renders a responsive, Canvas-style header.
 
 ```tsx
 import * as React from 'react';
-import {Header} from '@workday/canvas-kit-react-header';
+import {Header} from '@workday/canvas-kit-labs-react-header';
 import {AvatarButton} from '@workday/canvas-kit-react-avatar';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {notificationsIcon} from '@workday/canvas-system-icons-web';
@@ -219,8 +217,9 @@ The Global Header (or App Header) is used for Workday applications.
 ## Usage
 
 ```tsx
-import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-react-header';
 import {AvatarButton} from '@workday/canvas-kit-react-avatar';
+import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-labs-react-header';
+import {Avatar} from '@workday/canvas-kit-react-avatar';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
@@ -305,7 +304,7 @@ background color of the contained lockup
 ## Usage
 
 ```tsx
-import {Header, DubLogoTitle} from '@workday/canvas-kit-react-header';
+import {Header, DubLogoTitle} from '@workday/canvas-kit-labs-react-header';
 import {colors} from '@workday/canvas-kit-react-core';
 
 <Header
@@ -354,7 +353,7 @@ next to the title with custom components or markup.
 ## Usage
 
 ```tsx
-import {Header, WorkdayLogoTitle} from '@workday/canvas-kit-react-header';
+import {Header, WorkdayLogoTitle} from '@workday/canvas-kit-labs-react-header';
 
 <Header brand={<WorkdayLogoTitle title="Display Title" />} />;
 ```
