@@ -11,7 +11,7 @@ storiesOf('CSS/Core', module)
       display: 'inline-block',
       background: '#667380',
       padding: '2px 8px',
-      borderRadius: '3px',
+      borderRadius: '4px',
       marginTop: 0,
     };
 

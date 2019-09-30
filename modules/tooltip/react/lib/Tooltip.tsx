@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {borderRadius, colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
 import {keyframes} from 'emotion';
 
@@ -28,7 +28,7 @@ const TooltipContainer = styled('div')<TooltipProps>(
   {
     ...type.body,
     display: 'inline-flex',
-    borderRadius: spacing.xxxs,
+    borderRadius: borderRadius.m,
     padding: spacing.xxs,
     backgroundColor: 'rgba(0,0,0,.85)',
     color: colors.frenchVanilla100,

@@ -5,6 +5,7 @@ Canvas Kit Core contains values and base styles that are shared across the kit.
 Includes:
 
 - [Colors](#colors)
+- [Border Radius](#border-radius)
 - [Spacing](#spacing)
 - [Depth](#depth)
 - [Type](#type)
@@ -96,6 +97,18 @@ import {iconColors} from '@workday/canvas-kit-react-core';
 
 iconColors.hover;
 ```
+
+# Border Radius
+
+Border Radius variables are in a "t-shirt size" format. Border Radius values are in `px` format.
+
+| Variable | Size (px) |
+| -------- | --------- |
+| `zero`   | `0`       |
+| `s`      | `'2px'`   |
+| `m`      | `'4px'`   |
+| `l`      | `'8px'`   |
+| `circle` | `'999px'` |
 
 # Spacing
 
@@ -375,8 +388,8 @@ handling.
 }
 ```
 
-We provide a [helper](../../common/react/lib/styles/hideMouseFocus.ts) to hide the focus
-outlines on mouse input. Simply spread it in your styles (i.e. `...hideMouseFocus`).
+We provide a [helper](../../common/react/lib/styles/hideMouseFocus.ts) to hide the focus outlines on
+mouse input. Simply spread it in your styles (i.e. `...hideMouseFocus`).
 
 **Note:** It is best practice to show focus outlines by default and specifically hide them in the
 cases you would like (i.e. mouse/touch/pointer input).

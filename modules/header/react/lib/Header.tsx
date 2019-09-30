@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {css} from 'emotion';
 import styled from 'react-emotion';
-import {type, spacing} from '@workday/canvas-kit-react-core';
+import {type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {DubLogoTitle, Search, WorkdayLogoTitle} from './parts';
 import {themes} from './shared/themes';
 import {HeaderTheme, HeaderVariant, HeaderHeight} from './shared/types';
@@ -182,7 +182,7 @@ const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
               height: 4,
               width: '100%',
               backgroundColor: theme.chipColor,
-              borderRadius: '3px 3px 0 0',
+              borderRadius: `${borderRadius.m} ${borderRadius.m} 0 0`,
             },
           },
         },

@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import canvas, {
+  borderRadius,
   colors,
   iconColors,
   inputColors,
@@ -22,7 +23,6 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   error?: ErrorType;
 }
 
-const checkboxBorderRadius = 2;
 const checkboxHeight = 18;
 const checkboxTapArea = spacing.m;
 const checkboxContainerHeight = checkboxTapArea + spacing.xxs;
@@ -46,7 +46,7 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>(
   {
     height: checkboxHeight,
     '&::after': {
-      borderRadius: 999,
+      borderRadius: borderRadius.circle,
       boxShadow: '0 0 0 0 ' + colors.soap200,
       content: '""',
       display: 'inline-block',
@@ -69,7 +69,7 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>(
  */
 const CheckboxInput = styled('input')<CheckboxProps>(
   {
-    borderRadius: checkboxBorderRadius,
+    borderRadius: borderRadius.s,
     width: checkboxTapArea,
     height: checkboxTapArea,
     margin: 0,
@@ -177,7 +177,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
 const CheckboxBackground = styled('div')<CheckboxProps>({
   alignItems: 'center',
   backgroundColor: colors.frenchVanilla100,
-  borderRadius: checkboxBorderRadius,
+  borderRadius: borderRadius.s,
   border: '1px solid ' + inputColors.border,
   boxSizing: 'border-box',
   display: 'flex',

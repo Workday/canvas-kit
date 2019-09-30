@@ -251,7 +251,7 @@
   }
 
   .wdc-form-group &.wdc-form-group-fields {
-    border-radius: 4px;
+    border-radius: $wdc-border-radius-m;
     box-shadow: $_boxShadow;
     box-sizing: border-box;
     display: inline-block;

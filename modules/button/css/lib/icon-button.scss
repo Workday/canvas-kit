@@ -18,7 +18,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 999;
+    border-radius: $wdc-border-radius-circle;
 
     .wd-icon {
       display: inline-block;
@@ -275,7 +275,7 @@
 
     &-circle,
     &-circle-filled {
-      border-radius: 999;
+      border-radius: $wdc-border-radius-circle;
 
       &:not([disabled]):not(.wdc-btn-disabled) {
         &:focus,

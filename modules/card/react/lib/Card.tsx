@@ -5,6 +5,7 @@ import {
   depth as depthValues,
   type,
   spacing,
+  borderRadius,
   CanvasDepthValue,
   CanvasSpacingValue,
 } from '@workday/canvas-kit-react-core';
@@ -40,7 +41,7 @@ const Box = styled('div')<CardProps>(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${colors.soap500}`,
-    borderRadius: 3,
+    borderRadius: borderRadius.l,
     boxSizing: 'border-box',
   },
   ({depth}) => depth,

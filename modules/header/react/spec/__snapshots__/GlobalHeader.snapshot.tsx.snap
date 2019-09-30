@@ -228,7 +228,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-8 {
@@ -278,7 +278,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -401,7 +401,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 32px;
@@ -428,7 +428,7 @@ exports[`App GlobalHeader Snapshots renders a header with SystemIcon and IconBut
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   background: #e8ebed;
@@ -791,7 +791,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-8 {
@@ -863,7 +863,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1066,7 +1066,7 @@ exports[`App GlobalHeader Snapshots renders a header with a search bar 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1478,7 +1478,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-8 {
@@ -1528,7 +1528,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1651,7 +1651,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 32px;
@@ -1678,7 +1678,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   background: #e8ebed;
@@ -1743,7 +1743,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1946,7 +1946,7 @@ exports[`App GlobalHeader Snapshots renders a header with content with a search 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2445,7 +2445,7 @@ exports[`App GlobalHeader Snapshots renders an app header 1`] = `
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 <div
@@ -2689,7 +2689,7 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
   height: 4px;
   width: 100%;
   background-color: #0875e1;
-  border-radius: 3px 3px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .emotion-2 {
@@ -2728,7 +2728,7 @@ exports[`App GlobalHeader Snapshots renders an app header width Workday Logo 1`]
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;

@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import uuid from 'uuid/v4';
 import {MenuItemProps} from './MenuItem';
 import {Card} from '@workday/canvas-kit-react-card';
-import {commonColors, spacing} from '@workday/canvas-kit-react-core';
+import {commonColors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
 export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
@@ -26,7 +26,7 @@ const minWidth = 100;
 const List = styled('ul')({
   background: commonColors.background,
   minWidth: `${minWidth}px`,
-  borderRadius: '3px',
+  borderRadius: borderRadius.m,
   padding: 0,
   margin: `${spacing.xxs} 0`,
   '&:focus': {

@@ -16,7 +16,7 @@ $_wdc-container-positions: 'start' flex-start, 'end' flex-end, 'center' center,
 @mixin card-common() {
   @include wdc-depth-2();
   border: 1px solid $_wdc-card-border-color;
-  border-radius: 3px;
+  border-radius: $wdc-border-radius-l;
   padding: $wdc-spacing-l;
   margin: $wdc-spacing-s 0;
   background-color: $wdc-color-french-vanilla-100;

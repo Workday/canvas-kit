@@ -15,7 +15,7 @@ const blueBackground = css({
   margin: '0 10px',
   padding: '24px',
   maxWidth: 'max-content',
-  borderRadius: '3px',
+  borderRadius: '4px',
   button: {
     margin: '0 12px',
   },

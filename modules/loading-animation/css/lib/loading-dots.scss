@@ -33,7 +33,7 @@
   position: absolute;
   font-size: 0px;
   content: ' ';
-  border-radius: 100%;
+  border-radius: $wdc-border-radius-circle;
   transform: scale(0);
 }
 .wdc-loading-dots::after {

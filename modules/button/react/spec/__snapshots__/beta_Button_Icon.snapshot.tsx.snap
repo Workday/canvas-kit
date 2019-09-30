@@ -48,7 +48,7 @@ exports[`Button (Icon) Snapshots renders a default icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -215,7 +215,7 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled off 1`] 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -351,7 +351,7 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled on 1`] =
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -548,7 +548,7 @@ exports[`Button (Icon) Snapshots renders a default icon button, toggled on 2`] =
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -777,7 +777,7 @@ exports[`Button (Icon) Snapshots renders a filled icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -931,7 +931,7 @@ exports[`Button (Icon) Snapshots renders a filled icon button, toggled off 1`] =
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1086,7 +1086,7 @@ exports[`Button (Icon) Snapshots renders a filled icon button, toggled on 1`] = 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1273,7 +1273,7 @@ exports[`Button (Icon) Snapshots renders a medium default icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1440,7 +1440,7 @@ exports[`Button (Icon) Snapshots renders a medium filled icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1594,7 +1594,7 @@ exports[`Button (Icon) Snapshots renders a medium inverse filled icon button 1`]
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1752,7 +1752,7 @@ exports[`Button (Icon) Snapshots renders a medium inverse icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1901,7 +1901,7 @@ exports[`Button (Icon) Snapshots renders a medium plain icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2071,7 +2071,7 @@ exports[`Button (Icon) Snapshots renders a plain icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2241,7 +2241,7 @@ exports[`Button (Icon) Snapshots renders a small default icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2413,7 +2413,7 @@ exports[`Button (Icon) Snapshots renders a small filled icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2572,7 +2572,7 @@ exports[`Button (Icon) Snapshots renders a small inverse filled icon button 1`] 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2735,7 +2735,7 @@ exports[`Button (Icon) Snapshots renders a small inverse icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -2889,7 +2889,7 @@ exports[`Button (Icon) Snapshots renders a small plain icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -3064,7 +3064,7 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -3222,7 +3222,7 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button, toggled 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -3381,7 +3381,7 @@ exports[`Button (Icon) Snapshots renders an inverse filled icon button, toggled 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -3568,7 +3568,7 @@ exports[`Button (Icon) Snapshots renders an inverse icon button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -3717,7 +3717,7 @@ exports[`Button (Icon) Snapshots renders an inverse icon button, toggled off 1`]
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -3867,7 +3867,7 @@ exports[`Button (Icon) Snapshots renders an inverse icon button, toggled on 1`] 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;

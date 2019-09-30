@@ -16,7 +16,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -225,7 +225,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a le
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -446,7 +446,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a ri
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -621,7 +621,7 @@ exports[`Button (Text) Snapshots renders a large, text button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -776,7 +776,7 @@ exports[`Button (Text) Snapshots renders a large, text button with a left icon 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -989,7 +989,7 @@ exports[`Button (Text) Snapshots renders a large, text button with a right icon
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1227,7 +1227,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 1
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1435,7 +1435,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1655,7 +1655,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1822,7 +1822,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2022,7 +2022,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a lef
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2234,7 +2234,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a rig
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2407,7 +2407,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2615,7 +2615,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2835,7 +2835,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2984,7 +2984,7 @@ exports[`Button (Text) Snapshots renders a small, text button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3148,7 +3148,7 @@ exports[`Button (Text) Snapshots renders a small, text button with a left icon 1
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3361,7 +3361,7 @@ exports[`Button (Text) Snapshots renders a small, text button with a right icon 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3565,7 +3565,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps 1`] 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3774,7 +3774,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3995,7 +3995,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4188,7 +4188,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4388,7 +4388,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a lef
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4600,7 +4600,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a rig
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4773,7 +4773,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4981,7 +4981,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -5201,7 +5201,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;

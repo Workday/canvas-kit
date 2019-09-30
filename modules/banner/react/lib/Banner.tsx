@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {colors, spacing, borderRadius, type} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {ErrorType, focusRing} from '@workday/canvas-kit-react-common';
@@ -59,7 +59,7 @@ const BannerWrapper = styled('button')<BannerProps>(
     backgroundColor: error === ErrorType.Error ? colors.cinnamon500 : colors.cantaloupe400,
     color: error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400,
     borderRadius:
-      variant === BannerVariant.Sticky ? `${spacing.xxxs} 0 0 ${spacing.xxxs}` : spacing.xxxs,
+      variant === BannerVariant.Sticky ? `${borderRadius.m} 0 0 ${borderRadius.m}` : borderRadius.m,
     width: variant === BannerVariant.Sticky ? '222px' : '328px',
     '&:hover': {
       backgroundColor: error === ErrorType.Error ? colors.cinnamon600 : colors.cantaloupe500,

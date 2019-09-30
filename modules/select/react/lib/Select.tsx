@@ -1,7 +1,14 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
-import {colors, inputColors, spacingNumbers, type, spacing} from '@workday/canvas-kit-react-core';
+import {
+  colors,
+  borderRadius,
+  inputColors,
+  spacingNumbers,
+  type,
+  spacing,
+} from '@workday/canvas-kit-react-core';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import SelectOption from './SelectOption';
@@ -23,7 +30,7 @@ const SelectContainer = styled('select')<SelectProps>(
     border: `1px solid ${inputColors.border}`,
     display: 'block',
     backgroundColor: inputColors.background,
-    borderRadius: 4,
+    borderRadius: borderRadius.m,
     boxSizing: 'border-box',
     height: spacing.xl,
     minWidth: 280,

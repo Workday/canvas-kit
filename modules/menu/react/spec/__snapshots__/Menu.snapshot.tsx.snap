@@ -226,7 +226,7 @@ exports[`Menu Snapshots renders a hidden menu 1`] = `
 .emotion-3 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -243,7 +243,7 @@ exports[`Menu Snapshots renders a hidden menu 1`] = `
 .emotion-0 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -289,7 +289,7 @@ exports[`Menu Snapshots renders a menu with aria attributes 1`] = `
 .emotion-7 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -306,7 +306,7 @@ exports[`Menu Snapshots renders a menu with aria attributes 1`] = `
 .emotion-4 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -446,7 +446,7 @@ exports[`Menu Snapshots renders a menu with grow=true 1`] = `
 .emotion-8 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -575,7 +575,7 @@ exports[`Menu Snapshots renders a menu with grow=true 1`] = `
 .emotion-11 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -640,7 +640,7 @@ exports[`Menu Snapshots renders an empty menu 1`] = `
 .emotion-3 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -657,7 +657,7 @@ exports[`Menu Snapshots renders an empty menu 1`] = `
 .emotion-0 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -703,7 +703,7 @@ exports[`Menu Snapshots renders an menu with one item 1`] = `
 .emotion-7 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -720,7 +720,7 @@ exports[`Menu Snapshots renders an menu with one item 1`] = `
 .emotion-4 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -850,7 +850,7 @@ exports[`Menu Snapshots renders an menu with two items 1`] = `
 .emotion-11 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -867,7 +867,7 @@ exports[`Menu Snapshots renders an menu with two items 1`] = `
 .emotion-8 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }
@@ -1050,7 +1050,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
 .emotion-11 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -1067,7 +1067,7 @@ exports[`Menu Snapshots renders with icon 1`] = `
 .emotion-8 {
   background: #ffffff;
   min-width: 100px;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   margin: 8px 0;
 }

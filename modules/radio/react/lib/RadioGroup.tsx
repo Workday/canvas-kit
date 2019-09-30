@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import Radio, {RadioProps} from './Radio';
-import {spacing, inputColors, colors} from '@workday/canvas-kit-react-core';
+import {borderRadius, spacing, inputColors, colors} from '@workday/canvas-kit-react-core';
 import {ErrorType, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
 export interface RadioGroupProps extends GrowthBehavior {
@@ -48,7 +48,7 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow'>>(
       return {};
     }
     return {
-      borderRadius: 4,
+      borderRadius: borderRadius.m,
       transition: '100ms box-shadow',
       boxShadow: errorBorderColor
         ? `inset 0 0 0 1px ${errorBorderColor}, inset 0 0 0 3px ${errorRingColor}`
