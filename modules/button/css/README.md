@@ -31,7 +31,8 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 > primary, secondary, and delete) on (this time frame).
 
 > We've renamed the old buttons to use `wdc-button-deprecated` mixin and have added a warning
-> message to that mixin suggesting to use `wdc-btn` mixin.
+> message to that mixin suggesting to use `wdc-btn` mixin that will show up when you compile your
+> code.
 
 ### New Button
 

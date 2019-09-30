@@ -70,11 +70,11 @@ $_wdc-btn-caret-down-icon-white: svg-load(
 
     &:after {
       @include wdc-btn-icon-inline($_wdc-btn-caret-down-icon);
-      padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+      padding: (($wdc-btn-height-l - $wdc-btn-split-icon-height)/2) 0;
       margin-left: $wdc-spacing-xxs;
       line-height: 0;
       float: right;
-      height: $wdc-spacing-s;
+      height: $wdc-spacing-xs;
       width: $wdc-spacing-s;
     }
 
@@ -98,6 +98,7 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     min-width: 112px;
     height: 48px;
     padding: 0 18px;
+    font-size: 16px;
   }
 
   &.wdc-btn-size-s {

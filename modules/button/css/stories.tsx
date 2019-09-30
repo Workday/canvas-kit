@@ -8,7 +8,7 @@ import './index.scss';
 
 storiesOf('CSS/Button', module)
   .addDecorator(withReadme(README))
-  .add('All', () => (
+  .add('Primary', () => (
     <div className="story">
       <section>
         <h3>Large Primary</h3>
@@ -36,7 +36,10 @@ storiesOf('CSS/Button', module)
           Primary Disabled
         </button>
       </section>
-
+    </div>
+  ))
+  .add('Secondary', () => (
+    <div>
       <section>
         <h3>Large Secondary</h3>
         <button className="wdc-btn wdc-btn-size-l">Secondary</button>
@@ -60,7 +63,10 @@ storiesOf('CSS/Button', module)
           Secondary Disabled
         </button>
       </section>
-
+    </div>
+  ))
+  .add('Delete', () => (
+    <div>
       <section>
         <h3>Large Delete</h3>
         <button className="wdc-btn wdc-btn-delete wdc-btn-size-l">Delete</button>
