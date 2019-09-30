@@ -8,9 +8,8 @@ import spacing, {
   CanvasSpacing,
   CanvasSpacingNumber,
   CanvasSpacingValue,
-  space,
-  SpaceProps,
   spacingNumbers,
+  stripUnit,
 } from './lib/spacing';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
 import {CSSProperties} from './lib/types';
@@ -33,9 +32,8 @@ export {
   colors,
   depth,
   spacing,
-  space,
-  SpaceProps,
   spacingNumbers,
+  stripUnit,
   type,
   fontFamily,
   monoFontFamily,

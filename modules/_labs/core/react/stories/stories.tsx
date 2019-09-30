@@ -1,9 +1,10 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {css} from 'react-emotion';
+import styled, {css} from 'react-emotion';
 import withReadme from 'storybook-readme/with-readme';
-import type from '..';
+import {spacing} from '@workday/canvas-kit-react-core';
+import type, {space} from '..';
 
 import README from '../README.md';
 
@@ -73,4 +74,17 @@ storiesOf('Labs/Core/React', module)
         <span className={css(type.body, type.variant.mono)}>Mono Text</span>
       </section>
     </div>
-  ));
+  ))
+  .add('Space', () => {
+    const Box = styled('div')(space);
+
+    return (
+      <div className="story">
+        <div>
+          <Box style={{border: '1px solid #eee'}} p={spacing.xl} pb={64} m={40} mx={10}>
+            Margin and Padding
+          </Box>
+        </div>
+      </div>
+    );
+  });

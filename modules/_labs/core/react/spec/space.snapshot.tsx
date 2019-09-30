@@ -1,4 +1,4 @@
-import {space} from '../lib/spacing';
+import {space} from '../lib/space';
 
 describe('Space Function', () => {
   test('returns styled object', () => {
@@ -11,5 +11,11 @@ describe('Space Function', () => {
     const styles = space({mt: -12});
 
     expect(styles).toMatchObject({marginTop: '-12px'});
+  });
+
+  test('returns styled object when passed undefined', () => {
+    const styles = space({mt: undefined});
+
+    expect(styles).toMatchObject({});
   });
 });

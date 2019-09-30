@@ -29,3 +29,57 @@ const MyLabel = styled('label')({
 
 > When the breaking change is made, anyone using the current type guide will need to update the
 > references for `dataViz1` and `dataViz2`.
+
+## Margin & Padding Spacing
+
+Spacing functions provide margin and padding spacing. These are available with the `space` function.
+The `space` function utilizes the following props:
+
+**Margin Props**
+
+- `m` margin
+- `mt` margin-top
+- `mr` margin-right
+- `mb` margin-bottom
+- `ml` margin-left
+- `mx` margin-left & margin-right
+- `my` margin-top & margin-bottom
+
+**Padding Props**
+
+- `p` padding
+- `pt` padding-top
+- `pr` padding-right
+- `pb` padding-bottom
+- `pl` padding-left
+- `px` padding-left & padding-right
+- `py` padding-top & padding-bottom
+
+## Usage
+
+```tsx
+import {spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
+import {space} from '@workday/canvas-kit-labs-react-core';
+
+spacing.s; // 16px
+spacingNumbers.s; // 16
+
+...
+
+const Box = styled('div')(space)
+
+<Box p={spacing.xl} pb={64} m={40} mx={10}>
+  ...
+</Box>
+
+/*
+  margin-top: 40px;
+  margin-right: 10px;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  padding-top: 40px;
+  padding-right: 40px;
+  padding-bottom: 64px;
+  padding-left: 40px;
+*/
+```
