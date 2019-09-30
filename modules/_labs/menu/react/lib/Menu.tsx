@@ -38,8 +38,9 @@ const List = styled('ul')({
 export default class Menu extends React.Component<MenuProps, MenuState> {
   static defaultProps = {
     isOpen: true,
-    id: `menu-${uuid()}`,
   };
+
+  private id = uuid();
 
   private menuRef: React.RefObject<HTMLUListElement>;
   private firstCharacters: string[];
@@ -77,7 +78,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     // TODO: Standardize on prop spread location (see #150)
     const {
       children,
-      id,
+      id = this.id,
       isOpen,
       labeledBy,
       grow,
