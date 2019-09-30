@@ -3,8 +3,23 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {css} from 'emotion';
 import README from './README.md';
 import './index.scss';
+
+const blueBackground = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#0875e1',
+  margin: '0 10px',
+  padding: '24px',
+  maxWidth: 'max-content',
+  borderRadius: '4px',
+  button: {
+    margin: '0 12px',
+  },
+});
 
 storiesOf('CSS/Button', module)
   .addDecorator(withReadme(README))
