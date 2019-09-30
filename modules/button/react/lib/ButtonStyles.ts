@@ -261,7 +261,7 @@ export const textButtonStyles: ButtonGenericStyle = {
   classname: 'text-button',
   styles: {
     ...canvasButtonStyles.styles,
-    borderRadius: '3px;',
+    borderRadius: borderRadius.m,
     border: '0',
     margin: '0 8px',
     minWidth: 'auto',
@@ -303,7 +303,7 @@ export const iconButtonStyles: ButtonGenericStyle = {
     // TODO: Support data-whatinput='input' css
     ...canvasButtonStyles.styles,
     borderWidth: '0',
-    borderRadius: '50%',
+    borderRadius: borderRadius.circle,
     ['& .wd-icon']: {
       display: 'inline-block',
       verticalAlign: 'middle',

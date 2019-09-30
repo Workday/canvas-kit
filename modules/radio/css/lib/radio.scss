@@ -1,14 +1,14 @@
 .wdc-form-radio {
   @include wdc-form-selection-control();
 
-  input+label::before {
-    border-radius: 100%;
+  input + label::before {
+    border-radius: $wdc-border-radius-circle;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ccircle fill='%23FFFFFF' cx='12' cy='12' r='4'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E");
     background-position: center center;
     background-size: $wdc-spacing-m;
   }
 
-  input:checked+label::before {
+  input:checked + label::before {
     background-size: $wdc-spacing-m;
   }
 }

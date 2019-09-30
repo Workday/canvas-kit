@@ -18,7 +18,7 @@
     &:focus,
     &.wdc-icon-list-icon-focus {
       outline: none;
-      border-radius: 3px;
+      border-radius: $wdc-border-radius-m;
       box-shadow: 0 0 0 2px $wdc-color-blueberry-500;
     }
 

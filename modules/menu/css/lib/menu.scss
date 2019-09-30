@@ -4,15 +4,14 @@
   @include wdc-depth-2();
   display: inline-block;
   background-color: $_wdc-menu-bg-color;
-  border-radius: 3px;
+  border-radius: $wdc-border-radius-m;
   border: 1px solid $_wdc-menu-border-color;
   box-sizing: border-box;
   position: relative;
   width: max-content;
 
   // Fallback for IE11
-  @media screen and (-ms-high-contrast: active),
-  screen and (-ms-high-contrast: none) {
+  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
     width: auto;
     min-width: $_wdc-menu-menu-min-width;
   }
