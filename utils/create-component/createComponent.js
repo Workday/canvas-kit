@@ -66,7 +66,7 @@ inquirer
     css && createModule(componentPath, 'css', createCssModule, answers);
     react && createModule(componentPath, 'react', createReactModule, answers);
 
-    console.log(`\nDone.`.green);
+    console.log('\n');
   })
   .catch(e => {
     console.log('\nError creating component:\n'.red);
