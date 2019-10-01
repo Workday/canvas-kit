@@ -64,11 +64,11 @@ export const ButtonBaseLabel = styled('span', {
       case TextButtonVariant.InverseAllCaps:
         return types.textAllCaps;
       case DeprecatedButtonVariant.Primary:
-        return types.primary;
+        return types.deprecatedPrimary;
       case DeprecatedButtonVariant.Secondary:
-        return types.secondary;
+        return types.deprecatedSecondary;
       case DeprecatedButtonVariant.Delete:
-        return types.delete;
+        return types.deprecatedDelete;
       default:
         return {};
     }
@@ -235,7 +235,7 @@ function getBaseButton(buttonType: DeprecatedButtonVariant | ButtonVariant) {
     case DeprecatedButtonVariant.Secondary:
     case DeprecatedButtonVariant.Delete:
     default:
-      return ButtonStyles.canvasButtonStyles;
+      return ButtonStyles.deprecatedButtonStyles;
     case ButtonVariant.Primary:
     case ButtonVariant.Secondary:
     case ButtonVariant.Delete:
@@ -243,6 +243,6 @@ function getBaseButton(buttonType: DeprecatedButtonVariant | ButtonVariant) {
     case ButtonVariant.OutlinePrimary:
     case ButtonVariant.OutlineSecondary:
     case ButtonVariant.OutlineInverse:
-      return ButtonStyles.betaButtonStyles;
+      return ButtonStyles.canvasButtonStyles;
   }
 }

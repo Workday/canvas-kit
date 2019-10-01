@@ -21,15 +21,15 @@ export enum IconButtonSize {
  * @deprecated These type are deprecated along with deprecated_Button component
  */
 export enum DeprecatedButtonVariant {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Delete = 'delete',
+  Primary = 'deprecatedPrimary',
+  Secondary = 'deprecatedSecondary',
+  Delete = 'deprecatedDelete',
 }
 
 export enum ButtonVariant {
-  Primary = 'betaPrimary',
+  Primary = 'primary',
   Secondary = 'betaSecondary',
-  Delete = 'betaDelete',
+  Delete = 'delete',
   Highlight = 'highlight',
   OutlinePrimary = 'outlinePrimary',
   OutlineSecondary = 'outlineSecondary',

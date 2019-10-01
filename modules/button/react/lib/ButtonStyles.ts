@@ -129,8 +129,8 @@ export const labelIconBaseStyles: ButtonGenericStyle = {
 };
 
 // TODO (beta button): remove
-export const canvasButtonStyles: ButtonGenericStyle = {
-  classname: 'canvas-button',
+export const deprecatedButtonStyles: ButtonGenericStyle = {
+  classname: 'canvas-deprecated-button',
   styles: {
     boxSizing: 'border-box',
     display: 'inline-flex',
@@ -188,11 +188,10 @@ export const canvasButtonStyles: ButtonGenericStyle = {
   },
 };
 
-export const betaButtonStyles: ButtonGenericStyle = {
-  // TODO (beta button): rename classname from beta-button to something
-  classname: 'beta-button',
+export const canvasButtonStyles: ButtonGenericStyle = {
+  classname: 'canvas-button',
   styles: {
-    ...canvasButtonStyles.styles,
+    ...deprecatedButtonStyles.styles,
     verticalAlign: 'middle',
     border: '2px solid transparent',
   },
@@ -243,16 +242,16 @@ export const betaButtonStyles: ButtonGenericStyle = {
 export const dropdownButtonStyles: ButtonGenericStyle = {
   classname: 'dropdown-button',
   styles: {
-    ...betaButtonStyles.styles,
+    ...canvasButtonStyles.styles,
   },
   variants: {
     types: {
-      [ButtonVariant.Primary]: betaButtonStyles.variants!.types[ButtonVariant.Primary],
-      [ButtonVariant.Secondary]: betaButtonStyles.variants!.types[ButtonVariant.Secondary],
+      [ButtonVariant.Primary]: canvasButtonStyles.variants!.types[ButtonVariant.Primary],
+      [ButtonVariant.Secondary]: canvasButtonStyles.variants!.types[ButtonVariant.Secondary],
     },
     sizes: {
-      [ButtonSize.Large]: betaButtonStyles.variants!.sizes.large,
-      [ButtonSize.Medium]: betaButtonStyles.variants!.sizes.medium,
+      [ButtonSize.Large]: canvasButtonStyles.variants!.sizes.large,
+      [ButtonSize.Medium]: canvasButtonStyles.variants!.sizes.medium,
     },
   },
 };
@@ -260,7 +259,7 @@ export const dropdownButtonStyles: ButtonGenericStyle = {
 export const textButtonStyles: ButtonGenericStyle = {
   classname: 'text-button',
   styles: {
-    ...canvasButtonStyles.styles,
+    ...deprecatedButtonStyles.styles,
     borderRadius: borderRadius.m,
     border: '0',
     margin: '0 8px',
@@ -301,7 +300,7 @@ export const iconButtonStyles: ButtonGenericStyle = {
   classname: 'icon-button',
   styles: {
     // TODO: Support data-whatinput='input' css
-    ...canvasButtonStyles.styles,
+    ...deprecatedButtonStyles.styles,
     borderWidth: '0',
     borderRadius: borderRadius.circle,
     ['& .wd-icon']: {
