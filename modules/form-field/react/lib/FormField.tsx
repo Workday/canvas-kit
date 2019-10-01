@@ -38,6 +38,7 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
   }
 
   return {
+    display: 'block',
     marginBottom: spacing.s,
   };
 });

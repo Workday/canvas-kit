@@ -97,7 +97,43 @@ storiesOf('Form Field/Test', module)
         <Checkbox id="7" label="Checkbox option" />
       </FormField>
       <FormField label="Label" inputId="my-checkbox-field">
-        <Checkbox id="8" label="Checkbox option" />
+        {controlComponent(<Switch />)}
+      </FormField>
+      <FormField label="Label" inputId="my-checkbox-field">
+        <Checkbox id="7" label="Checkbox option" />
+      </FormField>
+      <FormField label="Label" inputId="my-checkbox-field">
+        <Checkbox id="7" label="Checkbox option" />
+      </FormField>
+      <FormField
+        label="Label"
+        inputId="my-checkbox-field"
+        labelPosition={FormField.LabelPosition.Left}
+      >
+        {controlComponent(<Switch />)}
+      </FormField>
+      <FormField
+        label="Label"
+        inputId="my-switch-error"
+        error={FormField.ErrorType.Error}
+        hintText={hintText}
+        hintId={hintId}
+        labelPosition={FormField.LabelPosition.Left}
+      >
+        {controlComponent(<Switch />)}
+      </FormField>
+      <FormField
+        label="Label"
+        inputId="my-checkbox-field"
+        labelPosition={FormField.LabelPosition.Left}
+      >
+        {controlComponent(<Switch />)}
+      </FormField>
+      <FormField label="Label" inputId="my-checkbox-field">
+        <Checkbox id="7" label="Checkbox option" />
+      </FormField>
+      <FormField label="Label" inputId="my-checkbox-field">
+        <Checkbox id="7" label="Checkbox option" />
       </FormField>
     </div>
   ));
