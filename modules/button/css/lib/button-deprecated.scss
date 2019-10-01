@@ -358,7 +358,7 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
     bottom: 0;
 
     // Caret icon
-    @include wdc-btn-icon-inline($_wdc-btn-deprecated-caret-down-icon);
+    @include wdc-btn-deprecated-icon-inline($_wdc-btn-deprecated-caret-down-icon);
 
     &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
     &:hover:not([disabled]):not(.wdc-btn-disabled) {
