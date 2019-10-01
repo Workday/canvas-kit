@@ -15,29 +15,30 @@
 
   .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
     @extend .wdc-btn-primary.wdc-btn-focus;
-  }
 
-  .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus:hover,
-    &:not([tabindex='-1']):hover:active,
-    &:not([tabindex='-1']):focus:active {
+    &:hover {
       background-color: $wdc-btn-bg-primary-hover;
     }
-  }
-
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-primary):not(.wdc-btn-delete) {
-    &:not([tabindex='-1']):focus:hover,
-    &:not([tabindex='-1']):hover:active,
-    &:not([tabindex='-1']):focus:active {
-      background-color: $wdc-btn-bg-secondary-hover;
+    &:active {
+      background-color: $wdc-btn-bg-primary-active;
     }
   }
 
-  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus:hover,
-    &:not([tabindex='-1']):hover:active,
-    &:not([tabindex='-1']):focus:active {
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-primary):not(.wdc-btn-delete):not([tabindex='-1']):focus {
+    &:hover {
+      background-color: $wdc-btn-bg-secondary-hover;
+    }
+    &:active {
+      background-color: $wdc-btn-bg-secondary-active;
+    }
+  }
+
+  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    &:hover {
       background-color: $wdc-btn-bg-delete-hover;
+    }
+    &:active {
+      background-color: $wdc-btn-bg-delete-active;
     }
   }
 }
