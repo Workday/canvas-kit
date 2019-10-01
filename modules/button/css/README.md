@@ -27,14 +27,16 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 
 ## Deprecation Warning
 
-> We are rolling out our next iteration of our buttons and will be deprecating the old ones(orange
-> primary, secondary, and delete) on (this time frame).
+> We are rolling out our next iteration of our buttons and have deprecated the old style (orange
+> primary, and accommodating secondary, delete, and split). These are still avialable, but will be
+> removed in the first major release after they are available for all Workday customers.
 
-### New Button
+### Migration path
 
-You will be opt in to the new buttons with (insert version number) without having to change your
-class names. The new buttons include: blue primary button, secondary, delete, icon buttons and
-dropdown.
+- Anywhere you were using `.wdc-button`, you will automatically get the updated styling. This will
+  be a visual breaking change. You should not need to make any code changes.
+- If for some reason, you need to continue to use the old style buttons, change the class to
+  `.wdc-button-deprecated` (see below).
 
 ### Deprecated Buttons
 
