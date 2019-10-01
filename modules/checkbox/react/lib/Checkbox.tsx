@@ -25,7 +25,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 
 const checkboxHeight = 18;
 const checkboxTapArea = spacing.m;
-const checkboxContainerHeight = checkboxTapArea + spacing.xxs;
+const checkboxContainerHeight = checkboxTapArea;
 const checkboxLabelDistance = spacing.xs;
 const checkboxWidth = 18;
 const rippleRadius = (spacing.l - checkboxWidth) / 2;
