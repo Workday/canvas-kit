@@ -18,11 +18,40 @@ yarn add @workday/canvas-kit-react-modal
 
 ```tsx
 import * as React from 'react';
-import {Modal} from '@workday/canvas-kit-react-modal';
+import {beta_Button as Button} from '@workday/canvas-kit-react-button';
+import {Modal, useModal} from '@workday/canvas-kit-react-modal';
 
-<Modal open width={Modal.Width.m} heading={'Modal Title'} handleClose={this.handleClose}>
-  {this.props.children}
-</Modal>;
+const DeleteItem = ({item, onDelete}) => {
+  const modal = useModal();
+
+  const deleteItem = event => {
+    modal.closeModal();
+    onDelete(event, item);
+  };
+
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} {...modal.targetProps}>
+        Delete Item
+      </Button>
+      <Modal heading={'Delete Item'} {...modal.modalProps}>
+        <p>Are you sure you'd like to delete the item titled '{item.name}'?</p>
+        <Button onClick={deleteItem} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+
+// usage
+<DeleteItem
+  item={{id: 1, name: 'My Item'}}
+  onDelete={(event, item) => console.log(`Deleted ${item.id}: '${item.name}'`)}
+/>;
 ```
 
 ## Static Properties

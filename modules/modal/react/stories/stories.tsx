@@ -46,7 +46,7 @@ const UseModalExample = () => {
       <Button variant={Button.Variant.Delete} {...targetProps}>
         Delete Item
       </Button>
-      <Modal data-testid="TestModal" heading={'Delete Item'} closeOnEscape={true} {...modalProps}>
+      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
           Delete
