@@ -60,7 +60,7 @@ includes custom `data-*` attributes such as `data-test-id` to help facilitate au
 
 ### Required
 
-#### `anchorElement: Element`
+#### `anchorElement: Element | null`
 
 > The reference element used to position the popper.
 

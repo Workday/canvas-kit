@@ -6,7 +6,7 @@ export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.PopperOptions;
 
 export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
-  anchorElement?: Element;
+  anchorElement: Element | null;
   children: React.ReactNode;
   containerElement?: Element;
   open: boolean;

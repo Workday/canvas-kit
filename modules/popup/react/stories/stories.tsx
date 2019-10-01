@@ -25,7 +25,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
         <Button variant={Button.Variant.Delete} onClick={this.handleClick}>
           Delete Item
         </Button>
-        <Popper placement={'bottom'} open={open} anchorElement={anchorEl || undefined}>
+        <Popper placement={'bottom'} open={open} anchorElement={anchorEl}>
           <Popup
             width={400}
             heading={'Delete Item'}
