@@ -121,19 +121,19 @@ storiesOf('Modal', module)
       <DefaultModalExample />
     </div>
   ))
-  .add('Use', () => (
+  .add('With useModal hook', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
       <UseModalExample />
     </div>
   ))
-  .add('NoClose', () => (
+  .add('Without close icon', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
       <NoCloseModalExample />
     </div>
   ))
-  .add('CustomFocus', () => (
+  .add('Custom focus', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
       <CustomFocusModalExample />

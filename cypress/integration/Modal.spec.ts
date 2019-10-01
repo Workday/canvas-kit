@@ -10,8 +10,8 @@ describe('Modal', () => {
     h.stories.visit();
   });
 
-  ['DefaultModal', 'UseModal'].forEach(story => {
-    context(`given the ${story} story is rendered`, () => {
+  ['Default', 'With useModal hook'].forEach(story => {
+    context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Modal', story);
       });
@@ -125,35 +125,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the NoCloseModal story is rendered`, () => {
+  context(`given the 'Without close icon' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('modal', 'NoCloseModal');
-    });
-
-    context('when the target button is clicked', () => {
-      beforeEach(() => {
-        getModalTargetButton().click();
-      });
-
-      it('should transfer focus to the header element', () => {
-        h.modal
-          .get()
-          .pipe(h.modal.getTitle)
-          .should('have.focus');
-      });
-
-      it('should not show a focus ring on the header', () => {
-        h.modal
-          .get()
-          .pipe(h.modal.getTitle)
-          .should('have.css', 'outlineStyle', 'none');
-      });
-    });
-  });
-
-  context(`given the NoCloseModal story is rendered`, () => {
-    beforeEach(() => {
-      h.stories.load('Modal', 'NoCloseModal');
+      h.stories.load('Modal', 'Without close icon');
     });
 
     context('when button is focused', () => {
@@ -173,6 +147,20 @@ describe('Modal', () => {
 
       it('should open the modal', () => {
         h.modal.get().should('be.visible');
+      });
+
+      it('should transfer focus to the header element', () => {
+        h.modal
+          .get()
+          .pipe(h.modal.getTitle)
+          .should('have.focus');
+      });
+
+      it('should not show a focus ring on the header', () => {
+        h.modal
+          .get()
+          .pipe(h.modal.getTitle)
+          .should('have.css', 'outlineStyle', 'none');
       });
 
       context('the modal', () => {
@@ -248,9 +236,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the CustomFocusModal story is rendered`, () => {
+  context(`given the 'Custom focus' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Modal', 'CustomFocusModal');
+      h.stories.load('Modal', 'Custom focus');
     });
 
     context('when button is focused', () => {
