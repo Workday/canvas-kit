@@ -41,6 +41,13 @@ dropdown.
 The old buttons (orange primary, secondary, delete, and split) are still available, but you'll have
 to use the class name `wdc-btn-deprecated` for the old styling.
 
+```html
+<button class="wdc-btn-deprecated">Primary</button>
+<button class="wdc-btn-deprecated wdc-btn-primary">Primary</button>
+<button class="wdc-btn-deprecated wdc-btn-delete">Primary</button>
+<button class="wdc-btn-deprecated wdc-btn-split">Primary</button>
+```
+
 ## Usage
 
 Button styles can be applied by using `.wdc-btn`. Most modifiers can be used by combining `.wdc-btn`
