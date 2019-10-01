@@ -51,7 +51,7 @@ import {Modal} from '@workday/canvas-kit-react-modal';
 
 Default: `false`
 
-### `width: ModalWidth`
+#### `width: ModalWidth`
 
 > You can choose between s or m for your modal width
 
@@ -62,7 +62,7 @@ Default: `ModalWidth.s`
 | `s`  | 440       |
 | `m`  | 800       |
 
-### `padding: PopupPadding`
+#### `padding: PopupPadding`
 
 > You can choose between zero, s, l for your padding
 
