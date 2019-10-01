@@ -17,15 +17,6 @@
     right: $wdc-spacing-xs;
     top: $wdc-spacing-xs;
   }
-
-  &-title {
-    @include wdc-type-h3();
-    margin-bottom: $wdc-spacing-m;
-  }
-
-  &-body {
-    @include wdc-type-body();
-  }
 }
 
 .wdc-popup {

@@ -53,7 +53,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
                 <i className="wdc-icon" data-icon="x" data-category="system" />
               </button>
             </div>
-            <h3 className="wdc-popup-title" id="popup-heading">
+            <h3 className="wdc-popup-heading" id="popup-heading">
               Delete Item
             </h3>
             <div style={{marginBottom: '24px'}} className="wdc-popup-body">

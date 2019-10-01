@@ -22,12 +22,14 @@ $_wdc-container-positions: 'start' flex-start, 'end' flex-end, 'center' center,
   background-color: $wdc-color-french-vanilla-100;
   box-sizing: border-box;
 
-  .wdc-card-header {
+  &-heading,
+  &-header,
+  &-title {
     @include wdc-type-h3();
     margin-bottom: $wdc-spacing-m;
   }
 
-  .wdc-card-body {
+  &-body {
     @include wdc-type-body();
   }
 }
