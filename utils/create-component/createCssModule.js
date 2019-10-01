@@ -38,7 +38,7 @@ module.exports = (modulePath, name, description, unstable) => {
     },
     stories: {
       path: 'stories/stories.tsx',
-      contents: stories(storyPath),
+      contents: stories(storyPath, name, titleCaseName),
     },
     readme: {
       path: 'README.md',
