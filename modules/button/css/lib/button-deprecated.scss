@@ -7,7 +7,7 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
   fill=$wdc-btn-icon-hover-color
 );
 
-@mixin wdc-btn-icon-inline($_icon) {
+@mixin wdc-btn-deprecated-icon-inline($_icon) {
   content: '';
   background-image: $_icon;
   background-position: center;
@@ -119,7 +119,7 @@ $_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
     padding-right: $wdc-spacing-s;
 
     &:after {
-      @include wdc-btn-icon-inline($_wdc-btn-deprecated-caret-down-icon);
+      @include wdc-btn-deprecated-icon-inline($_wdc-btn-deprecated-caret-down-icon);
       padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
       margin-left: $wdc-spacing-xxs;
       line-height: 0;

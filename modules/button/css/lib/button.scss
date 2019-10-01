@@ -12,6 +12,14 @@ $_wdc-btn-caret-down-icon-white: svg-load(
   fill=$wdc-btn-icon-color-white
 );
 
+@mixin wdc-btn-icon-inline($_icon) {
+  content: '';
+  background-image: $_icon;
+  background-position: center;
+  background-size: $wdc-spacing-s;
+  background-repeat: no-repeat;
+}
+
 @mixin wdc-btn() {
   @include wdc-type-body();
   @include wdc-type-variant-btn();
