@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 import styled from 'react-emotion';
-import uuid from 'uuid/v4';
 import {MenuItemProps} from './MenuItem';
 import {Card} from '@workday/canvas-kit-react-card';
 import {commonColors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
@@ -40,8 +39,6 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     isOpen: true,
   };
 
-  private id = uuid();
-
   private menuRef: React.RefObject<HTMLUListElement>;
   private firstCharacters: string[];
 
@@ -78,7 +75,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     // TODO: Standardize on prop spread location (see #150)
     const {
       children,
-      id = this.id,
+      id,
       isOpen,
       labeledBy,
       grow,
