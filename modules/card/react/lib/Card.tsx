@@ -57,6 +57,7 @@ const Box = styled('div')<CardProps>(
 
 const Header = styled('h3')(type.h3, {
   marginBottom: spacing.m,
+  marginTop: 0,
 });
 
 const Body = styled('div')(type.body);

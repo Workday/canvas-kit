@@ -27,6 +27,7 @@ $_wdc-container-positions: 'start' flex-start, 'end' flex-end, 'center' center,
   &-title {
     @include wdc-type-h3();
     margin-bottom: $wdc-spacing-m;
+    margin-top: 0;
   }
 
   &-body {
