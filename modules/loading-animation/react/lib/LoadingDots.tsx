@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {keyframes} from 'emotion';
 import styled from 'react-emotion';
-import canvas from '@workday/canvas-kit-react-core';
+import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 
 /**
  * Keyframe for the dots loading animation.
@@ -32,7 +32,7 @@ const LoadingAnimationDot = styled('div')<LoadingDotProps>(
     width: canvas.spacing.s,
     height: canvas.spacing.s,
     fontSize: '0px',
-    borderRadius: '100%',
+    borderRadius: borderRadius.circle,
     transform: 'scale(0)',
     display: 'inline-block',
     marginRight: canvas.spacing.xxs,

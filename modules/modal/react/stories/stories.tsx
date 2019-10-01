@@ -115,25 +115,25 @@ const CustomFocusModalExample = () => {
 
 storiesOf('Modal', module)
   .addDecorator(withReadme(README))
-  .add('DefaultModal', () => (
+  .add('Default', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
       <DefaultModalExample />
     </div>
   ))
-  .add('UseModal', () => (
+  .add('Use', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
       <UseModalExample />
     </div>
   ))
-  .add('NoCloseModal', () => (
+  .add('NoClose', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
       <NoCloseModalExample />
     </div>
   ))
-  .add('CustomFocusModal', () => (
+  .add('CustomFocus', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
       <CustomFocusModalExample />

@@ -16,7 +16,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -114,8 +114,14 @@ exports[`Button (Text) Snapshots renders a large, text all caps button 1`] = `
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -219,7 +225,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a le
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -317,8 +323,14 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a le
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -434,7 +446,7 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a ri
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -532,8 +544,14 @@ exports[`Button (Text) Snapshots renders a large, text all caps button with a ri
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -603,7 +621,7 @@ exports[`Button (Text) Snapshots renders a large, text button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -700,8 +718,14 @@ exports[`Button (Text) Snapshots renders a large, text button 1`] = `
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -752,7 +776,7 @@ exports[`Button (Text) Snapshots renders a large, text button with a left icon 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -849,8 +873,14 @@ exports[`Button (Text) Snapshots renders a large, text button with a left icon 
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -959,7 +989,7 @@ exports[`Button (Text) Snapshots renders a large, text button with a right icon
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1056,8 +1086,14 @@ exports[`Button (Text) Snapshots renders a large, text button with a right icon
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -1191,7 +1227,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 1
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1288,8 +1324,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 1
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -1393,7 +1435,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1490,8 +1532,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -1607,7 +1655,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1704,8 +1752,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button w
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -1768,7 +1822,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -1864,8 +1918,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse button 1`] = `
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -1962,7 +2022,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a lef
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2058,8 +2118,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a lef
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -2168,7 +2234,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a rig
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2264,8 +2330,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse button with a rig
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -2335,7 +2407,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2432,8 +2504,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -2537,7 +2615,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2634,8 +2712,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -2751,7 +2835,7 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2848,8 +2932,14 @@ exports[`Button (Text) Snapshots renders a large, text inverse all caps button 
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -2894,7 +2984,7 @@ exports[`Button (Text) Snapshots renders a small, text button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -2991,8 +3081,14 @@ exports[`Button (Text) Snapshots renders a small, text button 1`] = `
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3052,7 +3148,7 @@ exports[`Button (Text) Snapshots renders a small, text button with a left icon 1
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3149,8 +3245,14 @@ exports[`Button (Text) Snapshots renders a small, text button with a left icon 1
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3259,7 +3361,7 @@ exports[`Button (Text) Snapshots renders a small, text button with a right icon 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3356,8 +3458,14 @@ exports[`Button (Text) Snapshots renders a small, text button with a right icon 
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3457,7 +3565,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps 1`] 
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3555,8 +3663,14 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps 1`] 
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3660,7 +3774,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3758,8 +3872,14 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -3875,7 +3995,7 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -3973,8 +4093,14 @@ exports[`Button (Text) Snapshots renders a small, text button with all caps with
   fill: rgba(8,117,225,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -4062,7 +4188,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4158,8 +4284,14 @@ exports[`Button (Text) Snapshots renders a small, text inverse button 1`] = `
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -4256,7 +4388,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a lef
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4352,8 +4484,14 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a lef
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -4462,7 +4600,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a rig
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4558,8 +4696,14 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with a rig
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -4629,7 +4773,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4726,8 +4870,14 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-2:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -4831,7 +4981,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -4928,8 +5078,14 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
@@ -5045,7 +5201,7 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 0px;
   box-shadow: none;
   position: relative;
@@ -5142,8 +5298,14 @@ exports[`Button (Text) Snapshots renders a small, text inverse button with all c
   fill: rgba(255,255,255,0.5);
 }
 
-.emotion-5:not([disabled]):focus,
+.emotion-5:not([disabled]):focus {
+  -webkit-animation: animation-1dyr9ph 100ms;
+  animation: animation-1dyr9ph 100ms;
+  box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;
+}
+
 .emotion-5:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-1dyr9ph 100ms;
   animation: animation-1dyr9ph 100ms;
   box-shadow: 0 0 0 0px transparent,0 0 0 2px #ffffff;

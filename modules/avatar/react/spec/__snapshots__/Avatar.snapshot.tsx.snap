@@ -17,7 +17,7 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 64px;
@@ -44,7 +44,7 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   background: #e8ebed;
@@ -130,7 +130,7 @@ exports[`Avatar Snapshots renders a large avatar with a photo 1`] = `
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 64px;
@@ -170,7 +170,7 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 64px;
@@ -197,7 +197,7 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   background: #0875e1;
@@ -283,7 +283,7 @@ exports[`Avatar Snapshots renders an avatar with a photo 1`] = `
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 32px;
@@ -323,7 +323,7 @@ exports[`Avatar Snapshots renders an avatar with an aria label and an alt text 1
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 64px;
@@ -363,7 +363,7 @@ exports[`Avatar Snapshots renders as expected 1`] = `
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   height: 32px;
@@ -390,7 +390,7 @@ exports[`Avatar Snapshots renders as expected 1`] = `
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 100%;
+  border-radius: 999px;
   box-sizing: border-box;
   overflow: hidden;
   background: #e8ebed;

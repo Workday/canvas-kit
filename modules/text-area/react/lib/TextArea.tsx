@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
-import {inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
+import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 
 export interface TextAreaProps
   extends GrowthBehavior,
@@ -29,7 +29,7 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
     border: `1px solid ${inputColors.border}`,
     display: 'block',
     backgroundColor: inputColors.background,
-    borderRadius: 4,
+    borderRadius: borderRadius.m,
     boxSizing: 'border-box',
     minHeight: 64,
     minWidth: 280,

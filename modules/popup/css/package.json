@@ -16,7 +16,8 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/popup/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^3.0.0-alpha.6"
+    "@workday/canvas-kit-css-core": "^3.0.0-alpha.6",
+    "@workday/canvas-kit-css-card": "^3.0.0-alpha.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

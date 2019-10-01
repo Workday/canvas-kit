@@ -1,0 +1,351 @@
+@mixin wdc-btn-icon {
+  &,
+  &-square,
+  &-square-filled,
+  &-circle,
+  &-circle-filled,
+  &-plain,
+  &-inverse,
+  &-inverse-filled {
+    @include wdc-btn();
+    min-width: auto;
+    max-width: auto;
+    height: $wdc-btn-icon-height;
+    width: $wdc-btn-icon-width;
+    padding: 0;
+    line-height: 0;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $wdc-border-radius-circle;
+
+    .wd-icon {
+      display: inline-block;
+      vertical-align: middle;
+      height: $wdc-btn-icon-size-m;
+      width: $wdc-btn-icon-size-m;
+    }
+
+    &:not([disabled]):not(.wdc-btn-disabled) {
+      &.wdc-btn-hover,
+      &:hover {
+        background-color: $wdc-btn-icon-filled-hover-bg;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-hover-color;
+        }
+      }
+
+      &.wdc-btn-active,
+      &:active {
+        background-color: $wdc-btn-icon-filled-active-bg;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-active-color;
+        }
+
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-filled-active-bg;
+
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-active-color;
+          }
+        }
+      }
+
+      &:focus,
+      &.wdc-btn-focus {
+        box-shadow: 0 0 0 2px $wdc-btn-border-active;
+      }
+    }
+
+    &:disabled,
+    .wdc-btn-disabled {
+      background-color: $wdc-btn-icon-filled-disabled-bg;
+
+      .wd-icon-accent,
+      .wd-icon-fill {
+        fill: $wdc-btn-icon-disabled-color !important;
+      }
+    }
+
+    &-square,
+    &-circle {
+      background-color: $wdc-btn-icon-bg;
+
+      &:not([disabled]):not(.wdc-btn-disabled) {
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-hover-bg;
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-icon-active-bg;
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          background-color: $wdc-btn-icon-focus-bg;
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-hover-bg;
+          }
+
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-active-bg;
+          }
+        }
+      }
+
+      &:disabled,
+      .wdc-btn-disabled {
+        background-color: $wdc-btn-icon-disabled-bg;
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-disabled-color;
+        }
+      }
+    }
+
+    &-plain {
+      background-color: $wdc-btn-icon-bg;
+      margin: -8px;
+
+      &:not([disabled]):not(.wdc-btn-disabled) {
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-bg;
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-icon-bg;
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          background-color: $wdc-btn-icon-bg;
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-bg;
+          }
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-bg;
+          }
+        }
+      }
+
+      &:disabled,
+      .wdc-btn-disabled {
+        background-color: $wdc-btn-icon-disabled-bg;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-disabled-color;
+        }
+      }
+    }
+
+    &-inverse {
+      background-color: $wdc-btn-icon-inverse-bg;
+
+      .wd-icon-accent,
+      .wd-icon-fill {
+        fill: $wdc-btn-icon-inverse-color !important;
+      }
+
+      &:not([disabled]):not(.wdc-btn-disabled) {
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-inverse-hover-bg;
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-inverse-color;
+          }
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-icon-inverse-active-bg;
+
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-inverse-color;
+          }
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          background-color: $wdc-btn-icon-inverse-bg;
+          box-shadow: 0 0 0 0 white, 0 0 0 2px white;
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-inverse-hover-bg;
+          }
+
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-inverse-active-bg;
+          }
+        }
+      }
+
+      &:disabled,
+      .wdc-btn-disabled {
+        background-color: $wdc-btn-icon-inverse-bg;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-inverse-disabled-color !important;
+        }
+      }
+    }
+
+    &-inverse-filled {
+      background-color: $wdc-btn-icon-inverse-filled-bg;
+
+      .wd-icon-accent,
+      .wd-icon-fill {
+        fill: $wdc-btn-icon-inverse-color !important;
+      }
+
+      &:not([disabled]):not(.wdc-btn-disabled) {
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-inverse-filled-hover-bg;
+
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-inverse-color;
+          }
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-icon-inverse-filled-active-bg;
+
+          .wd-icon-accent,
+          .wd-icon-fill {
+            fill: $wdc-btn-icon-inverse-color;
+          }
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          background-color: $wdc-btn-icon-inverse-filled-bg;
+          box-shadow: 0 0 0 0 white, 0 0 0 2px white;
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-inverse-filled-bg;
+          }
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-inverse-filled-hover-bg;
+          }
+        }
+      }
+
+      &:disabled,
+      .wdc-btn-disabled {
+        background-color: $wdc-btn-icon-inverse-filled-bg;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-icon-inverse-disabled-color !important;
+        }
+      }
+    }
+
+    &-square,
+    &-square-filled {
+      border-radius: $wdc-btn-icon-border-radius;
+    }
+
+    &-circle,
+    &-circle-filled {
+      border-radius: $wdc-border-radius-circle;
+
+      &:not([disabled]):not(.wdc-btn-disabled) {
+        &:focus,
+        &.wdc-btn-focus {
+          box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
+        }
+      }
+    }
+
+    &-circle-filled,
+    &-square-filled {
+      background-color: $wdc-btn-icon-filled-bg;
+
+      &:not([disabled]):not(.wdc-btn-disabled) {
+        &.wdc-btn-hover,
+        &:hover {
+          background-color: $wdc-btn-icon-filled-hover-bg;
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          background-color: $wdc-btn-icon-filled-active-bg;
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          background-color: $wdc-btn-icon-filled-bg;
+
+          &.wdc-btn-hover,
+          &:hover {
+            background-color: $wdc-btn-icon-filled-bg;
+          }
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-icon-filled-hover-bg;
+          }
+        }
+      }
+
+      &:disabled,
+      .wdc-btn-disabled {
+        background-color: $wdc-btn-icon-filled-bg;
+      }
+    }
+
+    &.wdc-btn-size-s {
+      width: $wdc-spacing-l;
+      height: $wdc-spacing-l;
+      min-width: $wdc-spacing-l;
+      max-width: $wdc-spacing-l;
+
+      &.wdc-btn-icon {
+        &,
+        &-square,
+        &-square-filled,
+        &-circle,
+        &-circle-filled,
+        &-plain,
+        &-inverse,
+        &-inverse-filled {
+          span svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.wdc-btn-icon {
+  @include wdc-btn-icon();
+}

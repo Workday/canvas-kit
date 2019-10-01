@@ -47,7 +47,7 @@ exports[`Button (Delete) Snapshots renders a large, delete button 1`] = `
 
 .emotion-2:focus {
   background-color: #ffefee;
-  border-color: #0875e1;
+  border-color: #de2e21;
   color: #de2e21;
 }
 
@@ -59,7 +59,7 @@ exports[`Button (Delete) Snapshots renders a large, delete button 1`] = `
 .emotion-2:focus:active,
 .emotion-2:hover:active {
   background-color: #ffefee;
-  border-color: #ff5347;
+  border-color: #de2e21;
   color: #de2e21;
 }
 
@@ -78,9 +78,15 @@ exports[`Button (Delete) Snapshots renders a large, delete button 1`] = `
   color: #ff867d;
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  border-color: #de2e21;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
-  border-color: #0875e1;
+  border-color: #de2e21;
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
@@ -164,7 +170,7 @@ exports[`Button (Delete) Snapshots renders a medium, delete button 1`] = `
 
 .emotion-2:focus {
   background-color: #ffefee;
-  border-color: #0875e1;
+  border-color: #de2e21;
   color: #de2e21;
 }
 
@@ -176,7 +182,7 @@ exports[`Button (Delete) Snapshots renders a medium, delete button 1`] = `
 .emotion-2:focus:active,
 .emotion-2:hover:active {
   background-color: #ffefee;
-  border-color: #ff5347;
+  border-color: #de2e21;
   color: #de2e21;
 }
 
@@ -195,9 +201,15 @@ exports[`Button (Delete) Snapshots renders a medium, delete button 1`] = `
   color: #ff867d;
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  border-color: #de2e21;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
-  border-color: #0875e1;
+  border-color: #de2e21;
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
@@ -281,7 +293,7 @@ exports[`Button (Delete) Snapshots renders a small, delete button 1`] = `
 
 .emotion-2:focus {
   background-color: #ffefee;
-  border-color: #0875e1;
+  border-color: #de2e21;
   color: #de2e21;
 }
 
@@ -293,7 +305,7 @@ exports[`Button (Delete) Snapshots renders a small, delete button 1`] = `
 .emotion-2:focus:active,
 .emotion-2:hover:active {
   background-color: #ffefee;
-  border-color: #ff5347;
+  border-color: #de2e21;
   color: #de2e21;
 }
 
@@ -312,9 +324,15 @@ exports[`Button (Delete) Snapshots renders a small, delete button 1`] = `
   color: #ff867d;
 }
 
-.emotion-2:not([disabled]):focus,
+.emotion-2:not([disabled]):focus {
+  border-color: #de2e21;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-2:not([disabled]):active {
-  border-color: #0875e1;
+  border-color: #de2e21;
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
   box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;

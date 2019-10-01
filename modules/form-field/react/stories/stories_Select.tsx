@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {SectionDecorator, controlComponent} from '../../../../utils/storybook';
+import {controlComponent} from '../../../../utils/storybook';
 
 import FormField from '..';
 import README from '../../../select/react/README.md';
@@ -12,7 +12,6 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Select/Top Label', module)
-  .addDecorator(SectionDecorator('Select'))
   .addDecorator(withReadme(README))
   .add('Plain', () => (
     <FormField label="Label" inputId="select-plain">
@@ -107,7 +106,6 @@ storiesOf('Form Field/Select/Top Label', module)
   ));
 
 storiesOf('Form Field/Select/Left Label', module)
-  .addDecorator(SectionDecorator('Select'))
   .addDecorator(withReadme(README))
   .add('Plain', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-plain">

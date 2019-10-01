@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import isPropValid from '@emotion/is-prop-valid';
-import {colors} from '@workday/canvas-kit-react-core';
+import {borderRadius, colors} from '@workday/canvas-kit-react-core';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
 import {userIcon} from '@workday/canvas-system-icons-web';
 
@@ -41,7 +41,7 @@ export const AvatarStyledComponent = styled('div', {
     justifyContent: 'center',
     padding: 0,
     border: 0,
-    borderRadius: '100%',
+    borderRadius: borderRadius.circle,
     boxSizing: 'border-box',
     overflow: 'hidden',
     '& img': {

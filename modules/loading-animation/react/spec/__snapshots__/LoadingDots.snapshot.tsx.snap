@@ -10,7 +10,7 @@ exports[`LoadingDots Snapshots renders as expected 1`] = `
   width: 16px;
   height: 16px;
   font-size: 0px;
-  border-radius: 100%;
+  border-radius: 999px;
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
@@ -39,7 +39,7 @@ exports[`LoadingDots Snapshots renders as expected 1`] = `
   width: 16px;
   height: 16px;
   font-size: 0px;
-  border-radius: 100%;
+  border-radius: 999px;
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
@@ -68,7 +68,7 @@ exports[`LoadingDots Snapshots renders as expected 1`] = `
   width: 16px;
   height: 16px;
   font-size: 0px;
-  border-radius: 100%;
+  border-radius: 999px;
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
