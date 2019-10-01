@@ -18,19 +18,25 @@
   }
 
   .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus:hover {
+    &:not([tabindex='-1']):focus:hover,
+    &:not([tabindex='-1']):hover:active,
+    &:not([tabindex='-1']):focus:active {
       background-color: $wdc-btn-bg-primary-hover;
     }
   }
 
   .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-primary):not(.wdc-btn-delete) {
-    &:not([tabindex='-1']):focus:hover {
+    &:not([tabindex='-1']):focus:hover,
+    &:not([tabindex='-1']):hover:active,
+    &:not([tabindex='-1']):focus:active {
       background-color: $wdc-btn-bg-secondary-hover;
     }
   }
 
   .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus:hover {
+    &:not([tabindex='-1']):focus:hover,
+    &:not([tabindex='-1']):hover:active,
+    &:not([tabindex='-1']):focus:active {
       background-color: $wdc-btn-bg-delete-hover;
     }
   }
