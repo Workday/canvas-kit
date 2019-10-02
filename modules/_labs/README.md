@@ -39,6 +39,7 @@ ultimately performing a migration when components are promoted to a stable versi
 2. When asked `Is this an unstable component? [Y/n]`, enter `y` or `Y`.
 3. Your new module will be generated in accordance with the file structure above. It will get a
    package name of `@workday/canvas-kit-labs-<TARGET>-<COMPONENT>`.
+4. If you had the storybook server running, you may need to restart it.
 
 ## Migrating a Component into Canvas Kit Labs
 
