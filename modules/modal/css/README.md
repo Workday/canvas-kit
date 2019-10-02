@@ -24,13 +24,13 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ## Usage
 
 Use `.wdc-modal-bg` to create the background overlay and `.wdc-modal` to create the modal itself.
-The title and body content can be styled using `.wdc-modal-title` and `.wdc-modal-body`,
+The title and body content can be styled using `.wdc-modal-heading` and `.wdc-modal-body`,
 respectively.
 
 ```html
 <div class="wdc-modal-bg">
   <div class="wdc-modal" role="dialog" aria-labelledby="modal-heading">
-    <div class="wdc-modal-title" id="modal-heading">Modal Title</div>
+    <div class="wdc-modal-heading" id="modal-heading">Modal Title</div>
     <div class="wdc-modal-body">Modal content</div>
   </div>
 </div>
@@ -46,7 +46,7 @@ respectively.
         <i class="wdc-icon" data-icon="x" data-category="system" />
       </button>
     </div>
-    <div class="wdc-modal-title" id="modal-heading">Modal Title</div>
+    <div class="wdc-modal-heading" id="modal-heading">Modal Title</div>
     <div class="wdc-modal-body">Modal content</div>
   </div>
 </div>
@@ -59,7 +59,7 @@ or `wdc-modal-no-padding` to set the padding to `0`.
 
 ```html
 <div class="wdc-modal wdc-modal-no-padding" role="dialog" aria-labelledby="modal-heading">
-  <div class="wdc-modal-title" id="modal-heading">Modal Title</div>
+  <div class="wdc-modal-heading" id="modal-heading">Modal Title</div>
   <div class="wdc-modal-body">Modal content</div>
 </div>
 ```

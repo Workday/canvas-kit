@@ -1,7 +1,7 @@
 # Canvas Kit Card
 
 A card is a flexible and extensible content container that includes options for positioning. The
-card content includes classes for header and body.
+card content includes classes for heading and body.
 
 ## Installation
 
@@ -33,7 +33,7 @@ Card sizes follow the 12 column grid system. To adjust sizes append the size mod
 ```html
 <div class="wdc-card-container">
   <div class="wdc-card-4">
-    <h3 class="wdc-card-header">
+    <h3 class="wdc-card-heading">
       Card Header
     </h3>
     <div class="wdc-card-body">
@@ -41,7 +41,7 @@ Card sizes follow the 12 column grid system. To adjust sizes append the size mod
     </div>
   </div>
   <div class="wdc-card-4">
-    <h3 class="wdc-card-header">
+    <h3 class="wdc-card-heading">
       Card Header
     </h3>
     <div class="wdc-card-body">
@@ -49,7 +49,7 @@ Card sizes follow the 12 column grid system. To adjust sizes append the size mod
     </div>
   </div>
   <div class="wdc-card-4">
-    <h3 class="wdc-card-header">
+    <h3 class="wdc-card-heading">
       Card Header
     </h3>
     <div class="wdc-card-body">
@@ -68,7 +68,7 @@ Card padding may be removed by add the `.wdc-card-no-padding` modifier.
 ```html
 <div class="wdc-card-container">
   <div class="wdc-card-6 wdc-card-no-padding">
-    <h3 class="wdc-card-header">
+    <h3 class="wdc-card-heading">
       Card Header
     </h3>
     <div class="wdc-card-body">
@@ -76,7 +76,7 @@ Card padding may be removed by add the `.wdc-card-no-padding` modifier.
     </div>
   </div>
   <div class="wdc-card-6">
-    <h3 class="wdc-card-header">
+    <h3 class="wdc-card-heading">
       Card Header
     </h3>
     <div class="wdc-card-body">
@@ -95,7 +95,7 @@ Card positioning can be changed by adding a modifier to the container class,
 ```html
 <div class="wdc-card-container wdc-card-container-space-around">
   <div class="wdc-card-2">
-    <h3 class="wdc-card-header">
+    <h3 class="wdc-card-heading">
       Card Header
     </h3>
     <div class="wdc-card-body">
@@ -116,11 +116,11 @@ to set a custom depth for your card.
 ```html
 <div class="wdc-card-container">
   <div class="wdc-card wdc-depth-3">
-    <h3 class="wdc-card-header">Card Header</h3>
+    <h3 class="wdc-card-heading">Card Header</h3>
     <div class="wdc-card-body">.wdc-depth-3</div>
   </div>
   <div class="wdc-card-3 wdc-depth-4">
-    <h3 class="wdc-card-header">Card Header</h3>
+    <h3 class="wdc-card-heading">Card Header</h3>
     <div class="wdc-card-body">.wdc-depth-4</div>
   </div>
 </div>

@@ -15,7 +15,7 @@ export enum PopupPadding {
   l = '32px',
 }
 
-export interface PopupProps {
+export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   padding: PopupPadding;
   transformOrigin: TransformOrigin;
   closeIconSize: IconButtonSize;

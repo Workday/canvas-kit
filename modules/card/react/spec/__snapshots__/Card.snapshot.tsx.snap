@@ -54,6 +54,7 @@ exports[`Card Snapshots renders a card with heading 1`] = `
   color: #333333;
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   margin-bottom: 24px;
+  margin-top: 0;
 }
 
 <div

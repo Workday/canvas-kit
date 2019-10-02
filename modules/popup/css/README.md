@@ -24,11 +24,11 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 ## Usage
 
 Use `.wdc-popup` to create a popup. The title and body content can be styled using
-`.wdc-popup-title` and `.wdc-popup-body`, respectively.
+`.wdc-popup-heading` and `.wdc-popup-body`, respectively.
 
 ```html
 <div class="wdc-popup" role="dialog" aria-labelledby="popup-heading">
-  <div class="wdc-popup-title" id="popup-heading">Popup Title</div>
+  <div class="wdc-popup-heading" id="popup-heading">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
@@ -42,7 +42,7 @@ Use `.wdc-popup` to create a popup. The title and body content can be styled usi
       <i class="wdc-icon" data-icon="x" data-category="system" />
     </button>
   </div>
-  <div class="wdc-popup-title" id="popup-heading">Popup Title</div>
+  <div class="wdc-popup-heading" id="popup-heading">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
@@ -54,7 +54,7 @@ or `wdc-popup-no-padding` to set the padding to `0`.
 
 ```html
 <div class="wdc-popup wdc-popup-no-padding" role="dialog" aria-labelledby="popup-heading">
-  <div class="wdc-popup-title" id="popup-heading">Popup Title</div>
+  <div class="wdc-popup-heading" id="popup-heading">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
@@ -81,7 +81,7 @@ it.
   role="dialog"
   aria-labelledby="popup-heading"
 >
-  <div class="wdc-popup-title" id="popup-heading">Popup Title</div>
+  <div class="wdc-popup-heading" id="popup-heading">Popup Title</div>
   <div class="wdc-popup-body">Popup content</div>
 </div>
 ```
