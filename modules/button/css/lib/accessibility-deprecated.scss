@@ -1,0 +1,91 @@
+@mixin wdc-focusable-buttons() {
+  .wdc-a11y button:not([disabled]),
+  .wdc-btn-deprecated:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex='-1']):focus {
+      @content;
+    }
+  }
+}
+
+[data-whatinput='keyboard'] {
+  @include wdc-focusable-buttons() {
+    box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-focus;
+    outline: none;
+  }
+
+  .wdc-btn-deprecated.wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    @extend .wdc-btn-primary.wdc-btn-focus;
+  }
+
+  .wdc-btn-deprecated.wdc-btn-split-text:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    @extend .wdc-btn-split-text.wdc-btn-focus;
+  }
+  .wdc-btn-deprecated.wdc-btn-split-icon:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    @extend .wdc-btn-split-icon.wdc-btn-focus;
+  }
+
+  .wdc-btn-deprecated.wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+    @extend .wdc-btn-delete.wdc-btn-focus;
+  }
+}
+
+[data-whatinput='mouse'],
+[data-whatinput='touch'] {
+  @include wdc-focusable-buttons() {
+    outline: none;
+  }
+
+  .wdc-btn-deprecated.wdc-btn:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+    &:focus,
+    &:hover {
+      border-color: $wdc-btn-deprecated-border-hover;
+      box-shadow: none;
+    }
+    &:active {
+      background-color: $wdc-btn-deprecated-bg;
+      border-color: $wdc-btn-deprecated-border-hover;
+      box-shadow: none;
+    }
+    &.wdc-btn-delete {
+      &:focus,
+      &:hover {
+        border-color: $wdc-btn-deprecated-border-delete-hover;
+        box-shadow: none;
+      }
+      &:active {
+        background-color: $wdc-btn-deprecated-bg-delete;
+        border-color: $wdc-btn-deprecated-border-delete-hover;
+        box-shadow: none;
+      }
+    }
+    &.wdc-btn-primary {
+      &:focus,
+      &:hover {
+        border-color: $wdc-btn-deprecated-border-primary-hover;
+        box-shadow: none;
+      }
+      &:active {
+        background-color: $wdc-btn-deprecated-bg-primary;
+        border-color: $wdc-btn-deprecated-border-primary-hover;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .wdc-btn-icon-square,
+  .wdc-btn-icon-square-filled,
+  .wdc-btn-icon-circle,
+  .wdc-btn-icon-circle-filled,
+  .wdc-btn-icon-plain,
+  .wdc-btn-icon-inverse,
+  .wdc-btn-icon-inverse-filled {
+    &:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+      &:focus,
+      &:hover,
+      &:active {
+        box-shadow: none;
+        border: transparent;
+      }
+    }
+  }
+}

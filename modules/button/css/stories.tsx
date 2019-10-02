@@ -25,31 +25,140 @@ storiesOf('CSS/Button', module)
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
+      <section>
+        <h3>Large Primary</h3>
+        <button className="wdc-btn wdc-btn-primary wdc-btn-size-l">Primary</button>
+        <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-size-l">
+          Primary Disabled
+        </button>
+        <button className="wdc-btn wdc-btn-primary wdc-btn-size-l wdc-btn-grow">
+          Primary Grow
+        </button>
+      </section>
+
+      <section>
+        <h3>Medium Primary</h3>
+        <button className="wdc-btn wdc-btn-primary">Primary</button>
+        <button disabled={true} className="wdc-btn wdc-btn-primary">
+          Primary Disabled
+        </button>
+      </section>
+
+      <section>
+        <h3>Small Primary</h3>
+        <button className="wdc-btn wdc-btn-primary wdc-btn-size-s">Primary</button>
+        <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-size-s">
+          Primary Disabled
+        </button>
+      </section>
+    </div>
+  ))
+  .add('Secondary', () => (
+    <div>
+      <section>
+        <h3>Large Secondary</h3>
+        <button className="wdc-btn wdc-btn-size-l">Secondary</button>
+        <button disabled={true} className="wdc-btn wdc-btn-size-l">
+          Secondary Disabled
+        </button>
+      </section>
+
+      <section>
+        <h3>Medium Secondary</h3>
+        <button className="wdc-btn">Secondary</button>
+        <button disabled={true} className="wdc-btn">
+          Secondary Disabled
+        </button>
+      </section>
+
+      <section>
+        <h3>Small Secondary</h3>
+        <button className="wdc-btn wdc-btn-size-s">Secondary</button>
+        <button disabled={true} className="wdc-btn wdc-btn-size-s">
+          Secondary Disabled
+        </button>
+      </section>
+    </div>
+  ))
+  .add('Delete', () => (
+    <div>
+      <section>
+        <h3>Large Delete</h3>
+        <button className="wdc-btn wdc-btn-delete wdc-btn-size-l">Delete</button>
+        <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-size-l">
+          Delete Disabled
+        </button>
+      </section>
+
+      <section>
+        <h3>Medium Delete</h3>
+        <button className="wdc-btn wdc-btn-delete">Delete</button>
+        <button disabled={true} className="wdc-btn wdc-btn-delete">
+          Delete Disabled
+        </button>
+      </section>
+
+      <section>
+        <h3>Small Delete</h3>
+        <button className="wdc-btn wdc-btn-delete wdc-btn-size-s">Delete</button>
+        <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-size-s">
+          Delete Disabled
+        </button>
+      </section>
+    </div>
+  ));
+
+storiesOf('CSS/Button/Dropdown', module)
+  .addDecorator(withReadme(README))
+  .add('Default', () => (
+    <div className="story">
+      <section>
+        <h3>Primary Large</h3>
+        <button
+          className="wdc-btn wdc-btn-primary wdc-btn-size-l wdc-btn-dropdown"
+          aria-haspopup="true"
+        >
+          Dropdown
+        </button>
+        <h3>Secondary Medium</h3>
+        <button className="wdc-btn  wdc-btn-dropdown" aria-haspopup="true">
+          Dropdown Secondary
+        </button>
+      </section>
+    </div>
+  ));
+
+storiesOf('CSS/Button/Deprecated', module)
+  .addDecorator(withReadme(README))
+  .add('Primary', () => (
+    <div className="story">
       <h3>Large Primary</h3>
-      <button className="wdc-btn wdc-btn-primary">Primary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-primary">
+      <button className="wdc-btn-deprecated wdc-btn-primary">Primary Button</button>
+      <button disabled={true} className="wdc-btn-deprecated wdc-btn-primary">
         Primary Button
       </button>
       <h3>Medium Primary</h3>
-      <button className="wdc-btn wdc-btn-primary wdc-btn-size-m">Primary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-size-m">
+      <button className="wdc-btn-deprecated wdc-btn-primary wdc-btn-size-m">Primary Button</button>
+      <button disabled={true} className="wdc-btn-deprecated wdc-btn-primary wdc-btn-size-m">
         Primary Button
       </button>
       <h3>Small Primary</h3>
-      <button className="wdc-btn wdc-btn-primary wdc-btn-size-s">Primary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-size-s">
+      <button className="wdc-btn-deprecated wdc-btn-primary wdc-btn-size-s">Primary Button</button>
+      <button disabled={true} className="wdc-btn-deprecated wdc-btn-primary wdc-btn-size-s">
         Primary Button
       </button>
       <h3>Growing Primary</h3>
-      <button className="wdc-btn wdc-btn-primary wdc-btn-grow">Growing Primary Button</button>
+      <button className="wdc-btn-deprecated wdc-btn-primary wdc-btn-grow">
+        Growing Primary Button
+      </button>
       <h3>Links</h3>
-      <a href="#" className="wdc-btn wdc-btn-primary" role="button">
+      <a href="#" className="wdc-btn-deprecated wdc-btn-primary" role="button">
         Primary
       </a>
-      <a href="#" className="wdc-btn wdc-btn-primary wdc-btn-size-m" role="button">
+      <a href="#" className="wdc-btn-deprecated wdc-btn-primary wdc-btn-size-m" role="button">
         Primary
       </a>
-      <a href="#" className="wdc-btn wdc-btn-primary wdc-btn-size-s" role="button">
+      <a href="#" className="wdc-btn-deprecated wdc-btn-primary wdc-btn-size-s" role="button">
         Primary
       </a>
     </div>
@@ -57,32 +166,32 @@ storiesOf('CSS/Button', module)
   .add('Secondary', () => (
     <div className="story">
       <h3>Large Secondary</h3>
-      <button className="wdc-btn">Secondary Button</button>
-      <button disabled={true} className="wdc-btn">
+      <button className="wdc-btn-deprecated">Secondary Button</button>
+      <button disabled={true} className="wdc-btn-deprecated">
         Secondary Button
       </button>
       <h3>Medium Secondary</h3>
-      <button className="wdc-btn wdc-btn-size-m">Secondary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-size-m">
+      <button className="wdc-btn-deprecated wdc-btn-size-m">Secondary Button</button>
+      <button disabled={true} className="wdc-btn-deprecated wdc-btn-size-m">
         Secondary Button
       </button>
       <h3>Small Secondary</h3>
-      <button className="wdc-btn wdc-btn-size-s">Secondary Button</button>
+      <button className="wdc-btn-deprecated wdc-btn-size-s">Secondary Button</button>
       <button disabled={true} className="wdc-btn wdc-btn-size-s">
         Secondary Button
       </button>
       <h3>Growing Secondary</h3>
-      <button className="wdc-btn wdc-btn-grow">Growing Secondary Button</button>
+      <button className="wdc-btn-deprecated wdc-btn-grow">Growing Secondary Button</button>
       <h3>Links</h3>
-      <a href="#" className="wdc-btn" role="button">
+      <a href="#" className="wdc-btn-deprecated" role="button">
         Secondary
       </a>
 
-      <a href="#" className="wdc-btn wdc-btn-size-m" role="button">
+      <a href="#" className="wdc-btn-deprecated wdc-btn-size-m" role="button">
         Secondary
       </a>
 
-      <a href="#" className="wdc-btn wdc-btn-size-s" role="button">
+      <a href="#" className="wdc-btn-deprecated wdc-btn-size-s" role="button">
         Secondary
       </a>
     </div>
@@ -90,34 +199,60 @@ storiesOf('CSS/Button', module)
   .add('Delete', () => (
     <div className="story">
       <h3>Large Delete</h3>
-      <button className="wdc-btn wdc-btn-delete">Delete Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-delete">
+      <button className="wdc-btn-deprecated wdc-btn-delete">Delete Button</button>
+      <button disabled={true} className="wdc-btn-deprecated wdc-btn-delete">
         Delete Button
       </button>
       <h3>Medium Delete</h3>
-      <button className="wdc-btn wdc-btn-delete wdc-btn-size-m">Delete Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-size-m">
+      <button className="wdc-btn-deprecated wdc-btn-delete wdc-btn-size-m">Delete Button</button>
+      <button disabled={true} className="wdc-btn-deprecated wdc-btn-delete wdc-btn-size-m">
         Delete Button
       </button>
       <h3>Small Delete</h3>
-      <button className="wdc-btn wdc-btn-delete wdc-btn-size-s">Delete Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-size-s">
+      <button className="wdc-btn-deprecated wdc-btn-delete wdc-btn-size-s">Delete Button</button>
+      <button disabled={true} className="wdc-btn-deprecated wdc-btn-delete wdc-btn-size-s">
         Delete Button
       </button>
       <h3>Growing Delete</h3>
-      <button className="wdc-btn wdc-btn-delete wdc-btn-grow">Growing Delete Button</button>
+      <button className="wdc-btn-deprecated wdc-btn-delete wdc-btn-grow">
+        Growing Delete Button
+      </button>
       <h3>Links</h3>
-      <a href="#" className="wdc-btn wdc-btn-delete" role="button">
+      <a href="#" className="wdc-btn-deprecated wdc-btn-delete" role="button">
         Delete
       </a>
 
-      <a href="#" className="wdc-btn wdc-btn-delete wdc-btn-size-m" role="button">
+      <a href="#" className="wdc-btn-deprecated wdc-btn-delete wdc-btn-size-m" role="button">
         Delete
       </a>
 
-      <a href="#" className="wdc-btn wdc-btn-delete wdc-btn wdc-btn-size-s" role="button">
+      <a href="#" className="wdc-btn-deprecated wdc-btn-delete wdc-btn-size-s" role="button">
         Delete
       </a>
+    </div>
+  ))
+  .add('Dropdown', () => (
+    <div className="story">
+      <section>
+        <button className="wdc-btn-deprecated wdc-btn-dropdown">Dropdown</button>
+      </section>
+    </div>
+  ))
+  .add('Split', () => (
+    <div className="story">
+      <section>
+        <div className="wdc-btn-split">
+          <button className="wdc-btn-deprecated wdc-btn-primary wdc-btn-split-text">
+            Split Button
+          </button>
+          <button className="wdc-btn-deprecated wdc-btn-primary wdc-btn-split-icon" />
+        </div>
+
+        <div className="wdc-btn-split">
+          <button className="wdc-btn-deprecated wdc-btn-split-text">Split Button</button>
+          <button className="wdc-btn-deprecated wdc-btn-split-icon" />
+        </div>
+      </section>
     </div>
   ));
 
@@ -293,35 +428,5 @@ storiesOf('CSS/Button/Icon Button', module)
           <SystemIcon icon={activityStreamIcon} />
         </button>
       </div>
-    </div>
-  ));
-
-storiesOf('CSS/Button/Dropdown', module)
-  .addDecorator(withReadme(README))
-  .add('Default', () => (
-    <div className="story">
-      <section>
-        <button className="wdc-btn wdc-btn-dropdown" aria-haspopup="true">
-          Dropdown
-        </button>
-      </section>
-    </div>
-  ));
-
-storiesOf('CSS/Button/Split', module)
-  .addDecorator(withReadme(README))
-  .add('Default', () => (
-    <div className="story">
-      <section>
-        <div className="wdc-btn-split">
-          <button className="wdc-btn wdc-btn-primary wdc-btn-split-text">Split Button</button>
-          <button className="wdc-btn wdc-btn-primary wdc-btn-split-icon" aria-haspopup="true" />
-        </div>
-
-        <div className="wdc-btn-split">
-          <button className="wdc-btn wdc-btn-split-text">Split Button</button>
-          <button className="wdc-btn wdc-btn-split-icon" aria-haspopup="true" />
-        </div>
-      </section>
     </div>
   ));

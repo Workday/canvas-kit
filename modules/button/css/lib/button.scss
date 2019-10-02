@@ -7,6 +7,11 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   fill=$wdc-btn-icon-hover-color
 );
 
+$_wdc-btn-caret-down-icon-white: svg-load(
+  '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
+  fill=$wdc-btn-icon-color-white
+);
+
 @mixin wdc-btn-icon-inline($_icon) {
   content: '';
   background-image: $_icon;
@@ -15,96 +20,49 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   background-repeat: no-repeat;
 }
 
-@mixin wdc-btn-box-shadow($color) {
-  box-shadow: 0 0 0 $wdc-btn-border-size $color;
-}
-
 @mixin wdc-btn() {
   @include wdc-type-body();
   @include wdc-type-variant-btn();
   display: inline-block;
   text-decoration: none;
-  font-family: $wdc-font-family;
-  font-weight: $wdc-btn-font-weight;
-  min-width: $wdc-btn-min-width-l;
+  min-width: 96px;
   max-width: $wdc-btn-max-width-l;
   height: $wdc-btn-height-l;
-  padding: $wdc-btn-padding-l;
-  background-color: $wdc-btn-bg;
-  border: 1px solid $wdc-btn-border;
-  color: $wdc-btn-color;
-  border-radius: $wdc-btn-border-radius;
-  transition: all 120ms, box-shadow 100ms;
+  padding: 0 $wdc-spacing-m;
+  background-color: $wdc-btn-bg-secondary;
+  color: $wdc-btn-secondary-text-color;
+  border-radius: $wdc-border-radius-circle;
+  transition: 120ms background, 120ms border-color, 120ms box-shadow;
   text-align: center;
   font-size: 14px;
   cursor: pointer;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
-  outline: none;
-  line-height: 38px;
+  vertical-align: middle;
+  border: 2px solid transparent;
+  font-weight: 700;
 
-  .wd-icon {
-    height: $wdc-btn-icon-size-s;
-    width: $wdc-btn-icon-size-s;
+  &.wdc-btn-hover,
+  &:hover {
+    background-color: $wdc-btn-bg-secondary-hover;
   }
 
-  .wd-icon-background {
-    fill: transparent;
+  &.wdc-btn-active,
+  &:active {
+    background-color: $wdc-btn-bg-secondary-active;
   }
 
-  .wd-icon-accent,
-  .wd-icon-fill {
-    fill: $wdc-btn-icon-color;
-  }
-
-  .wdc-btn-icon-inline {
-    padding: (($wdc-btn-height-l - $wdc-btn-split-icon-height)/2) 0;
-    margin-left: $wdc-spacing-xxs;
-    line-height: 0;
-    float: right;
-  }
-
-  &:not([disabled]):not(.wdc-btn-disabled) {
-    &.wdc-btn-hover,
-    &:hover {
-      border-color: $wdc-btn-border-hover;
-      background-color: $wdc-btn-bg-hover;
-
-      .wd-icon-accent,
-      .wd-icon-fill {
-        fill: $wdc-btn-icon-hover-color;
-      }
-    }
-
-    &.wdc-btn-active,
-    &:active {
-      background-color: $wdc-btn-bg-active;
-    }
-
-    &:focus,
-    &.wdc-btn-focus {
-      background-color: $wdc-btn-bg-focus;
-      box-shadow: 0 0 0 2px $wdc-btn-border-active;
-      border-color: $wdc-btn-border-active;
-
-      &.wdc-btn-hover,
-      &:hover {
-        background-color: $wdc-btn-bg-hover;
-      }
-
-      &.wdc-btn-active,
-      &:active {
-        background-color: $wdc-btn-bg-active;
-        border: 1px solid $wdc-btn-border;
-      }
-    }
+  &:focus,
+  &.wdc-btn-focus {
+    background-color: $wdc-btn-bg-secondary-focus;
+    box-shadow: $wdc-btn-focus-ring;
+    outline: none;
   }
 
   &.wdc-btn-disabled,
   &:disabled {
-    box-shadow: none;
-    background-color: $wdc-btn-bg-disabled;
-    color: $wdc-btn-color-disabled;
+    background-color: $wdc-btn-bg-secondary-disabled;
+    color: $wdc-btn-secondary-disabled-text-color;
     cursor: default;
   }
 
@@ -116,6 +74,8 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
   &.wdc-btn-dropdown {
     padding-left: $wdc-spacing-l;
     padding-right: $wdc-spacing-s;
+    display: inline-flex;
+    align-items: center;
 
     &:after {
       @include wdc-btn-icon-inline($_wdc-btn-caret-down-icon);
@@ -123,7 +83,7 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
       margin-left: $wdc-spacing-xxs;
       line-height: 0;
       float: right;
-      height: $wdc-spacing-s;
+      height: $wdc-spacing-xs;
       width: $wdc-spacing-s;
     }
 
@@ -133,246 +93,87 @@ $_wdc-btn-caret-down-icon-hover: svg-load(
     }
   }
 
-  &.wdc-btn-size-m {
-    height: $wdc-btn-height-m;
-    line-height: $wdc-btn-height-m;
-    font-size: 13px;
-    padding: $wdc-btn-padding-m;
-    min-width: $wdc-btn-min-width-m;
-    max-width: $wdc-btn-max-width-m;
-
-    &.wdc-btn-disabled,
-    &:disabled {
-      background-color: $wdc-btn-bg-disabled;
-      color: $wdc-btn-color-disabled;
+  &.wdc-btn-primary.wdc-btn-dropdown {
+    &:after {
+      @include wdc-btn-icon-inline($_wdc-btn-caret-down-icon-white);
+    }
+    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled):after,
+    &:hover:not([disabled]):not(.wdc-btn-disabled):after {
+      background-image: $_wdc-btn-caret-down-icon-white;
     }
   }
 
+  &.wdc-btn-size-l {
+    min-width: 112px;
+    height: 48px;
+    padding: 0 $wdc-spacing-l;
+    font-size: 16px;
+  }
+
   &.wdc-btn-size-s {
-    height: $wdc-btn-height-s;
-    line-height: $wdc-spacing-s;
-    font-size: 10px;
-    padding: $wdc-btn-padding-s;
-    position: relative;
-    font-weight: 500;
-    min-width: $wdc-btn-min-width-s;
-    max-width: $wdc-btn-max-width-s;
-    -webkit-font-smoothing: antialiased;
+    height: $wdc-spacing-l;
+    padding: 0 $wdc-spacing-s;
+    min-width: $wdc-spacing-xxxl;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 
   &.wdc-btn-primary {
     background-color: $wdc-btn-bg-primary;
     box-shadow: none;
-    color: $wdc-btn-color-primary;
-    border-color: $wdc-btn-border-primary;
+    color: $wdc-btn-text-color;
 
-    .wd-icon-accent,
-    .wd-icon-fill {
-      fill: $wdc-btn-color-primary;
+    &.wdc-btn-hover,
+    &:hover {
+      background-color: $wdc-btn-bg-primary-hover;
+      box-shadow: none;
     }
 
-    &:not([disabled]):not(.wdc-btn-disabled) {
-      &.wdc-btn-hover,
-      &:hover {
-        border-color: $wdc-btn-border-primary-hover;
-        background-color: $wdc-btn-bg-primary-hover;
+    &.wdc-btn-active,
+    &:active {
+      background-color: $wdc-btn-bg-primary-active;
+    }
 
-        .wd-icon-accent,
-        .wd-icon-fill {
-          fill: $wdc-btn-color-primary;
-        }
-      }
+    &:focus,
+    &.wdc-btn-focus {
+      background-color: $wdc-btn-bg-primary-focus;
+      box-shadow: $wdc-btn-focus-ring;
+    }
 
-      &.wdc-btn-active,
-      &:active {
-        background-color: $wdc-btn-bg-primary;
-        box-shadow: 0 0 0 2px $wdc-btn-border-primary-active;
-        border-color: $wdc-btn-border-primary-active;
-      }
-
-      &:focus,
-      &.wdc-btn-focus {
-        background-color: $wdc-btn-bg-primary;
-        box-shadow: 0 0 0 2px $wdc-btn-border-primary-active;
-        border-color: $wdc-btn-border-primary-active;
-
-        &.wdc-btn-hover,
-        &:hover {
-          border-color: $wdc-btn-border-primary-active;
-          background-color: $wdc-btn-bg-primary-hover;
-        }
-
-        &.wdc-btn-active,
-        &:active {
-          border-color: $wdc-btn-bg-primary;
-          box-shadow: 0 0 0 2px $wdc-btn-border-primary-active;
-          background-color: $wdc-btn-bg-primary;
-        }
-      }
+    &:focus:hover {
+      background-color: $wdc-btn-bg-primary-hover;
     }
 
     &.wdc-btn-disabled,
     &:disabled {
       box-shadow: none;
       background-color: $wdc-btn-bg-primary-disabled;
-      color: $wdc-btn-color-primary;
-      border-color: $wdc-btn-border-primary-disabled;
-    }
-
-    &.wdc-btn-split-icon {
-      border-left: solid 1px $wdc-color-cantaloupe-500;
+      color: $wdc-btn-text-color;
     }
   }
 
   &.wdc-btn-delete {
     background-color: $wdc-btn-bg-delete;
-    color: $wdc-btn-color-delete;
-    border-color: $wdc-btn-border-delete;
+    color: $wdc-btn-text-color;
 
-    &:not([disabled]):not(.wdc-btn-disabled) {
-      &.wdc-btn-hover,
-      &:hover {
-        color: $wdc-btn-color-delete-hover;
-        background-color: $wdc-btn-bg-delete-hover;
-        border-color: $wdc-btn-border-delete-hover;
-
-        .wd-icon-accent,
-        .wd-icon-fill {
-          fill: $wdc-btn-color-delete;
-        }
-      }
-
-      &.wdc-btn-active,
-      &:active {
-        background-color: $wdc-btn-bg-delete;
-        color: $wdc-btn-color-delete;
-        border-color: $wdc-btn-border-delete;
-      }
-
-      &:focus,
-      &.wdc-btn-focus {
-        background-color: $wdc-btn-bg-delete;
-        color: $wdc-btn-color-delete;
-        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-btn-border-focus;
-        border-color: $wdc-btn-border-delete-active;
-
-        &.wdc-btn-hover,
-        &:hover {
-          color: $wdc-btn-color-delete-hover;
-          background-color: $wdc-btn-bg-delete-hover;
-          border-color: $wdc-btn-border-delete-hover;
-
-          &.wdc-btn-active,
-          &:active {
-            background-color: $wdc-btn-bg-delete;
-            color: $wdc-btn-color-delete;
-            border-color: $wdc-btn-border-delete-active;
-          }
-        }
-      }
-    }
-
-    &.wdc-btn-disabled,
-    &:disabled {
-      box-shadow: none;
-      color: $wdc-btn-color-delete-disabled;
-      background-color: $wdc-btn-bg-delete-disabled;
-      border-color: $wdc-btn-border-delete-disabled;
-    }
-  }
-
-  &::-moz-focus-inner {
-    // Hack to hide outline on FF
-    border: 0;
-  }
-}
-
-.wdc-btn-split {
-  min-width: $wdc-btn-min-width-l;
-  max-width: $wdc-btn-max-width-l;
-  display: inline-block;
-  position: relative;
-  box-sizing: border-box;
-
-  .wd-icon {
-    height: $wdc-btn-split-icon-height;
-  }
-
-  .wdc-btn-split-text,
-  .wdc-btn-split-icon {
     &.wdc-btn-hover,
     &:hover {
-      z-index: 1;
+      background-color: $wdc-btn-bg-delete-hover;
+    }
+
+    &.wdc-btn-active,
+    &:active {
+      background-color: $wdc-btn-bg-delete-active;
     }
 
     &:focus,
     &.wdc-btn-focus {
-      z-index: 2;
-    }
-  }
-
-  .wdc-btn-split-text {
-    position: relative;
-    display: inline-block;
-    min-width: $wdc-btn-min-width-l - $wdc-btn-split-icon-width;
-    max-width: $wdc-btn-max-width-l - $wdc-btn-split-icon-width;
-    border-top-right-radius: $wdc-btn-split-border-radius;
-    border-bottom-right-radius: $wdc-btn-split-border-radius;
-    border-right: 0px;
-    margin-right: $wdc-btn-split-icon-width;
-
-    &:not([disabled]):not(.wdc-btn-disabled) {
-      &.wdc-btn,
-      &.wdc-btn-primary,
-      &.wdc-btn-delete {
-        &.wdc-btn-active,
-        &:active {
-          box-shadow: 0 0 0 2px $wdc-btn-border-active, inset -1px 0 0 0 $wdc-btn-border-active;
-          border-right: 0px;
-        }
-
-        &:focus,
-        &.wdc-btn-focus {
-          box-shadow: 0 0 0 2px $wdc-btn-border-active, inset -1px 0 0 0 $wdc-btn-border-active;
-          border-right: 0px;
-        }
-      }
-    }
-  }
-
-  .wdc-btn-split-icon {
-    display: block;
-    border-top-left-radius: $wdc-btn-split-border-radius;
-    border-bottom-left-radius: $wdc-btn-split-border-radius;
-    min-width: $wdc-btn-split-icon-width;
-    max-width: $wdc-btn-split-icon-width;
-    padding: $wdc-btn-split-icon-padding;
-    line-height: 0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-
-    // Caret icon
-    @include wdc-btn-icon-inline($_wdc-btn-caret-down-icon);
-
-    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-    &:hover:not([disabled]):not(.wdc-btn-disabled) {
-      background-image: $_wdc-btn-caret-down-icon-hover;
+      background-color: $wdc-btn-bg-delete-focus;
     }
 
-    &.wdc-btn-primary {
-      $_wdc-btn-split-primary-icon: svg-load(
-        '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
-        fill=$wdc-btn-color-primary
-      );
-
-      background-image: $_wdc-btn-split-primary-icon;
-
-      &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-      &:hover:not([disabled]):not(.wdc-btn-disabled) {
-        background-image: $_wdc-btn-split-primary-icon;
-      }
+    &.wdc-btn-disabled,
+    &:disabled {
+      color: $wdc-btn-text-color;
+      background-color: $wdc-btn-bg-delete-disabled;
     }
   }
 }

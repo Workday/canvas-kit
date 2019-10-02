@@ -24,11 +24,11 @@ describe('Text Area Accessibility', () => {
     expect(await axe(html)).toHaveNoViolations();
   });
 
-  test('Text Area with `aria-labelledBy` should pass axe DOM accessibility guidelines', async () => {
+  test('Text Area with `aria-labelledby` should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(
       <>
         <label id="123">Label</label>
-        <TextArea placeholder="Placeholder" value={'Hello'} aria-labelledBy="123" />;
+        <TextArea placeholder="Placeholder" value={'Hello'} aria-labelledby="123" />;
       </>
     );
     expect(await axe(html)).toHaveNoViolations();
