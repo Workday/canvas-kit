@@ -32,11 +32,11 @@ describe('Text Input Accessibility', () => {
     expect(await axe(html)).toHaveNoViolations();
   });
 
-  test('Text Input with `aria-labelledBy` should pass axe DOM accessibility guidelines', async () => {
+  test('Text Input with `aria-labelledby` should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(
       <>
         <label id="123">Label</label>
-        <TextInput placeholder="Placeholder" value={'Hello'} aria-labelledBy="123" />;
+        <TextInput placeholder="Placeholder" value={'Hello'} aria-labelledby="123" />;
       </>
     );
     expect(await axe(html)).toHaveNoViolations();
