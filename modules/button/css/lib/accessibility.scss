@@ -50,21 +50,21 @@
     box-shadow: none;
   }
 
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):hover {
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+    &:hover {
       @extend .wdc-btn-hover;
     }
-  }
-
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):active {
+    &:active {
       @extend .wdc-btn-active;
     }
   }
 
-  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):hover {
+  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+    &:hover {
       @extend .wdc-btn-delete.wdc-btn-hover;
+    }
+    &:active {
+      @extend .wdc-btn-delete.wdc-btn-active;
     }
   }
 

@@ -115,11 +115,6 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     padding: 0 $wdc-spacing-s;
     min-width: $wdc-spacing-xxxl;
     -webkit-font-smoothing: subpixel-antialiased;
-
-    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-    &:hover:not([disabled]):not(.wdc-btn-disabled) {
-      background-color: $wdc-color-soap-500;
-    }
   }
 
   &.wdc-btn-primary {
@@ -128,9 +123,7 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     color: $wdc-btn-text-color;
 
     &.wdc-btn-hover,
-    &:hover,
-    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
-    &:hover:not([disabled]):not(.wdc-btn-disabled) {
+    &:hover {
       background-color: $wdc-btn-bg-primary-hover;
       box-shadow: none;
     }
