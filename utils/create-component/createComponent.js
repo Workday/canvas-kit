@@ -66,7 +66,7 @@ inquirer
     css && createModule(componentPath, 'css', createCssModule, answers);
     react && createModule(componentPath, 'react', createReactModule, answers);
 
-    console.log(`\nDone.`.green);
+    console.log('\n');
   })
   .catch(e => {
     console.log('\nError creating component:\n'.red);
@@ -79,7 +79,8 @@ const createModule = (componentPath, target, moduleGenerator, answers) => {
   const modulePath = path.join(componentPath, target);
 
   if (fs.existsSync(modulePath)) {
-    console.log(`\nModule @workday/canvas-kit-${target}-${name} already exists. Skipping.`.yellow);
+    const moduleName = `Module @workday/canvas-kit-${unstable ? 'labs-' : ''}${target}-${name}`;
+    console.log(`\nModule ${moduleName} already exists. Skipping.`.yellow);
   } else {
     moduleGenerator(modulePath, name, description, unstable);
 
