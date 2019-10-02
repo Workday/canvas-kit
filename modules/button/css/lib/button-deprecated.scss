@@ -1,0 +1,386 @@
+$_wdc-btn-deprecated-caret-down-icon: svg-load(
+  '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
+  fill=$wdc-btn-icon-color
+);
+$_wdc-btn-deprecated-caret-down-icon-hover: svg-load(
+  '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
+  fill=$wdc-btn-icon-hover-color
+);
+
+@mixin wdc-btn-deprecated-icon-inline($_icon) {
+  content: '';
+  background-image: $_icon;
+  background-position: center;
+  background-size: $wdc-spacing-s;
+  background-repeat: no-repeat;
+}
+
+@mixin wdc-btn-box-shadow($color) {
+  box-shadow: 0 0 0 $wdc-btn-deprecated-border-size $color;
+}
+
+@warn 'The mixin wdc-btn-deprecated is deprecated, use wdc-btn instead';
+@mixin wdc-btn-deprecated() {
+  @include wdc-type-body();
+  @include wdc-type-variant-btn();
+  display: inline-block;
+  text-decoration: none;
+  font-family: $wdc-font-family;
+  font-weight: $wdc-btn-deprecated-font-weight;
+  min-width: $wdc-btn-deprecated-min-width-l;
+  max-width: $wdc-btn-deprecated-max-width-l;
+  height: $wdc-btn-deprecated-height-l;
+  padding: $wdc-btn-deprecated-padding-l;
+  background-color: $wdc-btn-deprecated-bg;
+  border: 1px solid $wdc-btn-deprecated-border;
+  color: $wdc-btn-deprecated-color;
+  border-radius: $wdc-btn-deprecated-border-radius;
+  transition: all 120ms, box-shadow 100ms;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  outline: none;
+  line-height: 38px;
+
+  .wd-icon {
+    height: $wdc-btn-icon-size-s;
+    width: $wdc-btn-icon-size-s;
+  }
+
+  .wd-icon-background {
+    fill: transparent;
+  }
+
+  .wd-icon-accent,
+  .wd-icon-fill {
+    fill: $wdc-btn-icon-color;
+  }
+
+  .wdc-btn-icon-inline {
+    padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+    margin-left: $wdc-spacing-xxs;
+    line-height: 0;
+    float: right;
+  }
+
+  &:not([disabled]):not(.wdc-btn-disabled) {
+    &.wdc-btn-hover,
+    &:hover {
+      border-color: $wdc-btn-deprecated-border-hover;
+      background-color: $wdc-btn-deprecated-bg-hover;
+
+      .wd-icon-accent,
+      .wd-icon-fill {
+        fill: $wdc-btn-icon-hover-color;
+      }
+    }
+
+    &.wdc-btn-active,
+    &:active {
+      background-color: $wdc-btn-deprecated-bg-active;
+    }
+
+    &:focus,
+    &.wdc-btn-focus {
+      background-color: $wdc-btn-deprecated-bg-focus;
+      box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-active;
+      border-color: $wdc-btn-deprecated-border-active;
+
+      &.wdc-btn-hover,
+      &:hover {
+        background-color: $wdc-btn-deprecated-bg-hover;
+      }
+
+      &.wdc-btn-active,
+      &:active {
+        background-color: $wdc-btn-deprecated-bg-active;
+        border: 1px solid $wdc-btn-deprecated-border;
+      }
+    }
+  }
+
+  &.wdc-btn-disabled,
+  &:disabled {
+    box-shadow: none;
+    background-color: $wdc-btn-deprecated-bg-disabled;
+    color: $wdc-btn-deprecated-color-disabled;
+    cursor: default;
+  }
+
+  &.wdc-btn-grow {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &.wdc-btn-dropdown {
+    padding-left: $wdc-spacing-l;
+    padding-right: $wdc-spacing-s;
+
+    &:after {
+      @include wdc-btn-deprecated-icon-inline($_wdc-btn-deprecated-caret-down-icon);
+      padding: (($wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height)/2) 0;
+      margin-left: $wdc-spacing-xxs;
+      line-height: 0;
+      float: right;
+      height: $wdc-spacing-s;
+      width: $wdc-spacing-s;
+    }
+
+    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled):after,
+    &:hover:not([disabled]):not(.wdc-btn-disabled):after {
+      background-image: $_wdc-btn-deprecated-caret-down-icon-hover;
+    }
+  }
+
+  &.wdc-btn-size-m {
+    height: $wdc-btn-deprecated-height-m;
+    line-height: $wdc-btn-deprecated-height-m;
+    font-size: 13px;
+    padding: $wdc-btn-deprecated-padding-m;
+    min-width: $wdc-btn-deprecated-min-width-m;
+    max-width: $wdc-btn-deprecated-max-width-m;
+
+    &.wdc-btn-disabled,
+    &:disabled {
+      background-color: $wdc-btn-deprecated-bg-disabled;
+      color: $wdc-btn-deprecated-color-disabled;
+    }
+  }
+
+  &.wdc-btn-size-s {
+    height: $wdc-btn-deprecated-height-s;
+    line-height: $wdc-spacing-s;
+    font-size: 10px;
+    padding: $wdc-btn-deprecated-padding-s;
+    position: relative;
+    font-weight: 500;
+    min-width: $wdc-btn-deprecated-min-width-s;
+    max-width: $wdc-btn-deprecated-max-width-s;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  &.wdc-btn-primary {
+    background-color: $wdc-btn-deprecated-bg-primary;
+    box-shadow: none;
+    color: $wdc-btn-deprecated-color-primary;
+    border-color: $wdc-btn-deprecated-border-primary;
+
+    .wd-icon-accent,
+    .wd-icon-fill {
+      fill: $wdc-btn-deprecated-color-primary;
+    }
+
+    &:not([disabled]):not(.wdc-btn-disabled) {
+      &.wdc-btn-hover,
+      &:hover {
+        border-color: $wdc-btn-deprecated-border-primary-hover;
+        background-color: $wdc-btn-deprecated-bg-primary-hover;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-deprecated-color-primary;
+        }
+      }
+
+      &.wdc-btn-active,
+      &:active {
+        background-color: $wdc-btn-deprecated-bg-primary;
+        box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-primary-active;
+        border-color: $wdc-btn-deprecated-border-primary-active;
+      }
+
+      &:focus,
+      &.wdc-btn-focus {
+        background-color: $wdc-btn-deprecated-bg-primary;
+        box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-primary-active;
+        border-color: $wdc-btn-deprecated-border-primary-active;
+
+        &.wdc-btn-hover,
+        &:hover {
+          border-color: $wdc-btn-deprecated-border-primary-active;
+          background-color: $wdc-btn-deprecated-bg-primary-hover;
+        }
+
+        &.wdc-btn-active,
+        &:active {
+          border-color: $wdc-btn-deprecated-bg-primary;
+          box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-primary-active;
+          background-color: $wdc-btn-deprecated-bg-primary;
+        }
+      }
+    }
+
+    &.wdc-btn-disabled,
+    &:disabled {
+      box-shadow: none;
+      background-color: $wdc-btn-deprecated-bg-primary-disabled;
+      color: $wdc-btn-deprecated-color-primary;
+      border-color: $wdc-btn-deprecated-border-primary-disabled;
+    }
+
+    &.wdc-btn-split-icon {
+      border-left: solid 1px $wdc-color-cantaloupe-500;
+    }
+  }
+
+  &.wdc-btn-delete {
+    background-color: $wdc-btn-deprecated-bg-delete;
+    color: $wdc-btn-deprecated-color-delete;
+    border-color: $wdc-btn-deprecated-border-delete;
+
+    &:not([disabled]):not(.wdc-btn-disabled) {
+      &.wdc-btn-hover,
+      &:hover {
+        color: $wdc-btn-deprecated-color-delete-hover;
+        background-color: $wdc-btn-deprecated-bg-delete-hover;
+        border-color: $wdc-btn-deprecated-border-delete-hover;
+
+        .wd-icon-accent,
+        .wd-icon-fill {
+          fill: $wdc-btn-deprecated-color-delete;
+        }
+      }
+
+      &.wdc-btn-active,
+      &:active {
+        background-color: $wdc-btn-deprecated-bg-delete;
+        color: $wdc-btn-deprecated-color-delete;
+        border-color: $wdc-btn-deprecated-border-delete;
+      }
+
+      &:focus,
+      &.wdc-btn-focus {
+        background-color: $wdc-btn-deprecated-bg-delete;
+        color: $wdc-btn-deprecated-color-delete;
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100,
+          0 0 0 4px $wdc-btn-deprecated-border-focus;
+        border-color: $wdc-btn-deprecated-border-delete-active;
+
+        &.wdc-btn-hover,
+        &:hover {
+          color: $wdc-btn-deprecated-color-delete-hover;
+          background-color: $wdc-btn-deprecated-bg-delete-hover;
+          border-color: $wdc-btn-deprecated-border-delete-hover;
+
+          &.wdc-btn-active,
+          &:active {
+            background-color: $wdc-btn-deprecated-bg-delete;
+            color: $wdc-btn-deprecated-color-delete;
+            border-color: $wdc-btn-deprecated-border-delete-active;
+          }
+        }
+      }
+    }
+
+    &.wdc-btn-disabled,
+    &:disabled {
+      box-shadow: none;
+      color: $wdc-btn-deprecated-color-delete-disabled;
+      background-color: $wdc-btn-deprecated-bg-delete-disabled;
+      border-color: $wdc-btn-deprecated-border-delete-disabled;
+    }
+  }
+
+  &::-moz-focus-inner {
+    // Hack to hide outline on FF
+    border: 0;
+  }
+}
+
+.wdc-btn-split {
+  min-width: $wdc-btn-deprecated-min-width-l;
+  max-width: $wdc-btn-deprecated-max-width-l;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+
+  .wd-icon {
+    height: $wdc-btn-deprecated-split-icon-height;
+  }
+
+  .wdc-btn-split-text,
+  .wdc-btn-split-icon {
+    &.wdc-btn-hover,
+    &:hover {
+      z-index: 1;
+    }
+
+    &:focus,
+    &.wdc-btn-focus {
+      z-index: 2;
+    }
+  }
+
+  .wdc-btn-split-text {
+    position: relative;
+    display: inline-block;
+    min-width: $wdc-btn-deprecated-min-width-l - $wdc-btn-deprecated-split-icon-width;
+    max-width: $wdc-btn-deprecated-max-width-l - $wdc-btn-deprecated-split-icon-width;
+    border-top-right-radius: $wdc-btn-deprecated-split-border-radius;
+    border-bottom-right-radius: $wdc-btn-deprecated-split-border-radius;
+    border-right: 0px;
+    margin-right: $wdc-btn-deprecated-split-icon-width;
+
+    &:not([disabled]):not(.wdc-btn-disabled) {
+      &.wdc-btn,
+      &.wdc-btn-primary,
+      &.wdc-btn-delete {
+        &.wdc-btn-active,
+        &:active {
+          box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-active,
+            inset -1px 0 0 0 $wdc-btn-deprecated-border-active;
+          border-right: 0px;
+        }
+
+        &:focus,
+        &.wdc-btn-focus {
+          box-shadow: 0 0 0 2px $wdc-btn-deprecated-border-active,
+            inset -1px 0 0 0 $wdc-btn-deprecated-border-active;
+          border-right: 0px;
+        }
+      }
+    }
+  }
+
+  .wdc-btn-split-icon {
+    display: block;
+    border-top-left-radius: $wdc-btn-deprecated-split-border-radius;
+    border-bottom-left-radius: $wdc-btn-deprecated-split-border-radius;
+    min-width: $wdc-btn-deprecated-split-icon-width;
+    max-width: $wdc-btn-deprecated-split-icon-width;
+    padding: $wdc-btn-deprecated-split-icon-padding;
+    line-height: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    // Caret icon
+    @include wdc-btn-deprecated-icon-inline($_wdc-btn-deprecated-caret-down-icon);
+
+    &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
+    &:hover:not([disabled]):not(.wdc-btn-disabled) {
+      background-image: $_wdc-btn-deprecated-caret-down-icon-hover;
+    }
+
+    &.wdc-btn-primary {
+      $_wdc-btn-split-primary-icon: svg-load(
+        '#{$_wdc-btn-icons-path}/wd-icon-caret-down.svg',
+        fill=$wdc-btn-deprecated-color-primary
+      );
+
+      background-image: $_wdc-btn-split-primary-icon;
+
+      &.wdc-btn-hover:not([disabled]):not(.wdc-btn-disabled),
+      &:hover:not([disabled]):not(.wdc-btn-disabled) {
+        background-image: $_wdc-btn-split-primary-icon;
+      }
+    }
+  }
+}
+
+.wdc-btn-deprecated {
+  @include wdc-btn-deprecated();
+}

@@ -1,6 +1,10 @@
 @import '~@workday/canvas-kit-css-core/lib/mixins';
 @import '~@workday/canvas-kit-css-core/lib/variables';
+@import './lib/button-deprecated-variables.scss';
 @import './lib/variables.scss';
+@import './lib/icon-button-variables.scss';
+@import './lib/button-deprecated.scss';
 @import './lib/button.scss';
 @import './lib/icon-button.scss';
 @import './lib/accessibility.scss';
+@import './lib/accessibility-deprecated.scss';

@@ -1,0 +1,63 @@
+$_wdc-btn-icons-path: $wdc-system-icons-path !default;
+
+$wdc-btn-deprecated-font-weight: 500;
+$wdc-btn-deprecated-border-size: 1px;
+
+$wdc-btn-deprecated-height-l: $wdc-spacing-xl;
+$wdc-btn-deprecated-height-m: $wdc-spacing-m;
+$wdc-btn-deprecated-height-s: $wdc-spacing-s + ($wdc-btn-deprecated-border-size * 2);
+
+$wdc-btn-deprecated-min-width-l: 112px;
+$wdc-btn-deprecated-max-width-l: 288px;
+$wdc-btn-deprecated-min-width-m: 80px;
+$wdc-btn-deprecated-max-width-m: 200px;
+$wdc-btn-deprecated-min-width-s: 56px;
+$wdc-btn-deprecated-max-width-s: 120px;
+
+$wdc-btn-deprecated-padding-l: 0 $wdc-spacing-l;
+$wdc-btn-deprecated-padding-m: 0 $wdc-spacing-m;
+$wdc-btn-deprecated-padding-s: 0 $wdc-spacing-xxs;
+
+$wdc-btn-deprecated-border-radius: $wdc-spacing-xl;
+
+$wdc-btn-deprecated-bg: $wdc-color-soap-200;
+$wdc-btn-deprecated-bg-hover: $wdc-color-soap-500;
+$wdc-btn-deprecated-bg-active: $wdc-color-soap-200;
+$wdc-btn-deprecated-bg-focus: $wdc-color-soap-200;
+$wdc-btn-deprecated-bg-disabled: $wdc-color-french-vanilla-100;
+$wdc-btn-deprecated-bg-primary: $wdc-color-cantaloupe-400;
+$wdc-btn-deprecated-bg-primary-hover: $wdc-color-cantaloupe-500;
+$wdc-btn-deprecated-bg-primary-disabled: $wdc-color-cantaloupe-200;
+$wdc-btn-deprecated-bg-delete: $wdc-color-cinnamon-100;
+$wdc-btn-deprecated-bg-delete-hover: $wdc-color-cinnamon-400;
+$wdc-btn-deprecated-bg-delete-disabled: $wdc-color-cinnamon-100;
+
+$wdc-btn-deprecated-border: $wdc-color-soap-500;
+$wdc-btn-deprecated-border-hover: $wdc-color-licorice-100;
+$wdc-btn-deprecated-border-active: $wdc-color-blueberry-400;
+$wdc-btn-deprecated-border-focus: $wdc-color-blueberry-400;
+$wdc-btn-deprecated-border-disabled: $wdc-color-soap-500;
+$wdc-btn-deprecated-border-primary: $wdc-color-cantaloupe-400;
+$wdc-btn-deprecated-border-primary-hover: $wdc-color-cantaloupe-400;
+$wdc-btn-deprecated-border-primary-active: $wdc-color-blueberry-400;
+$wdc-btn-deprecated-border-primary-disabled: $wdc-color-cantaloupe-400;
+$wdc-btn-deprecated-border-delete: $wdc-color-cinnamon-400;
+$wdc-btn-deprecated-border-delete-hover: $wdc-color-cinnamon-600;
+$wdc-btn-deprecated-border-delete-active: $wdc-color-cinnamon-500;
+$wdc-btn-deprecated-border-delete-disabled: $wdc-color-cinnamon-200;
+
+$wdc-btn-deprecated-color: $wdc-color-black-pepper-400;
+$wdc-btn-deprecated-color-disabled: $wdc-color-soap-500;
+$wdc-btn-deprecated-color-primary: $wdc-color-french-vanilla-100;
+$wdc-btn-deprecated-color-delete: $wdc-color-cinnamon-500;
+$wdc-btn-deprecated-color-delete-hover: $wdc-color-french-vanilla-100;
+$wdc-btn-deprecated-color-delete-disabled: $wdc-color-cinnamon-300;
+
+$wdc-btn-deprecated-split-border-radius: 3px;
+$wdc-btn-deprecated-split-icon-height: $wdc-spacing-s;
+$wdc-btn-deprecated-split-icon-width: $wdc-spacing-xxxs + $wdc-spacing-m + $wdc-spacing-xxs;
+$wdc-btn-deprecated-split-icon-padding-v: (
+    $wdc-btn-deprecated-height-l - $wdc-btn-deprecated-split-icon-height
+  )/2;
+$wdc-btn-deprecated-split-icon-padding: $wdc-btn-deprecated-split-icon-padding-v $wdc-spacing-xxs
+  $wdc-btn-deprecated-split-icon-padding-v $wdc-spacing-xxxs;

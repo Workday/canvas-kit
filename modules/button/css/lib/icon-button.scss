@@ -60,7 +60,7 @@
 
       &:focus,
       &.wdc-btn-focus {
-        box-shadow: 0 0 0 2px $wdc-btn-border-active;
+        box-shadow: 0 0 0 2px $wdc-btn-bg-primary-focus;
       }
     }
 
@@ -280,7 +280,7 @@
       &:not([disabled]):not(.wdc-btn-disabled) {
         &:focus,
         &.wdc-btn-focus {
-          box-shadow: 0 0 0 2px white, 0 0 0 4px $wdc-btn-border-active;
+          box-shadow: $wdc-btn-focus-ring;
         }
       }
     }

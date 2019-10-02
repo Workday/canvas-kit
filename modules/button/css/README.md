@@ -25,6 +25,31 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 [postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
 inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
 
+## Deprecation Warning
+
+> We are rolling out our next iteration of our buttons and have deprecated the old style (orange
+> primary, and accommodating secondary, delete, and split). These are still avialable, but will be
+> removed in the first major release after they are available for all Workday customers.
+
+### Migration path
+
+- Anywhere you were using `.wdc-button`, you will automatically get the updated styling. This will
+  be a visual breaking change. You should not need to make any code changes.
+- If for some reason, you need to continue to use the old style buttons, change the class to
+  `.wdc-button-deprecated` (see below).
+
+### Deprecated Buttons
+
+The old buttons (orange primary, secondary, delete, and split) are still available, but you'll have
+to use the class name `wdc-btn-deprecated` for the old styling.
+
+```html
+<button class="wdc-btn-deprecated">Primary</button>
+<button class="wdc-btn-deprecated wdc-btn-primary">Primary</button>
+<button class="wdc-btn-deprecated wdc-btn-delete">Primary</button>
+<button class="wdc-btn-deprecated wdc-btn-split">Primary</button>
+```
+
 ## Usage
 
 Button styles can be applied by using `.wdc-btn`. Most modifiers can be used by combining `.wdc-btn`
@@ -46,8 +71,8 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
 ### Button Options
 
 - [Sizes](#sizes)
-  - Large (Default)
-  - Medium
+  - Large
+  - Medium (Default)
   - Small
 - [Colors](#colors)
   - Default

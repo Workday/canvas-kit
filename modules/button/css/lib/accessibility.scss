@@ -9,23 +9,37 @@
 
 [data-whatinput='keyboard'] {
   @include wdc-focusable-buttons() {
-    box-shadow: 0 0 0 2px $wdc-btn-border-focus;
+    box-shadow: $wdc-btn-focus-ring;
     outline: none;
   }
 
   .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
     @extend .wdc-btn-primary.wdc-btn-focus;
+
+    &:hover {
+      background-color: $wdc-btn-bg-primary-hover;
+    }
+    &:active {
+      background-color: $wdc-btn-bg-primary-active;
+    }
   }
 
-  .wdc-btn-split-text:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
-    @extend .wdc-btn-split-text.wdc-btn-focus;
-  }
-  .wdc-btn-split-icon:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
-    @extend .wdc-btn-split-icon.wdc-btn-focus;
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-primary):not(.wdc-btn-delete):not([tabindex='-1']):focus {
+    &:hover {
+      background-color: $wdc-btn-bg-secondary-hover;
+    }
+    &:active {
+      background-color: $wdc-btn-bg-secondary-active;
+    }
   }
 
   .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
-    @extend .wdc-btn-delete.wdc-btn-focus;
+    &:hover {
+      background-color: $wdc-btn-bg-delete-hover;
+    }
+    &:active {
+      background-color: $wdc-btn-bg-delete-active;
+    }
   }
 }
 
@@ -33,42 +47,24 @@
 [data-whatinput='touch'] {
   @include wdc-focusable-buttons() {
     outline: none;
+    box-shadow: none;
   }
 
   .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
-    &:focus,
     &:hover {
-      border-color: $wdc-btn-border-hover;
-      box-shadow: none;
+      @extend .wdc-btn-hover;
     }
     &:active {
-      background-color: $wdc-btn-bg;
-      border-color: $wdc-btn-border-hover;
-      box-shadow: none;
+      @extend .wdc-btn-active;
     }
-    &.wdc-btn-delete {
-      &:focus,
-      &:hover {
-        border-color: $wdc-btn-border-delete-hover;
-        box-shadow: none;
-      }
-      &:active {
-        background-color: $wdc-btn-bg-delete;
-        border-color: $wdc-btn-border-delete-hover;
-        box-shadow: none;
-      }
+  }
+
+  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+    &:hover {
+      @extend .wdc-btn-delete.wdc-btn-hover;
     }
-    &.wdc-btn-primary {
-      &:focus,
-      &:hover {
-        border-color: $wdc-btn-border-primary-hover;
-        box-shadow: none;
-      }
-      &:active {
-        background-color: $wdc-btn-bg-primary;
-        border-color: $wdc-btn-border-primary-hover;
-        box-shadow: none;
-      }
+    &:active {
+      @extend .wdc-btn-delete.wdc-btn-active;
     }
   }
 
