@@ -43,7 +43,7 @@ import FormField from '@workday/canvas-kit-react-form-field';
 </FormField>;
 ```
 
-If use inside a FormField doesn't work for your use case, you can use the `aria-labelledBy`
+If use inside a FormField doesn't work for your use case, you can use the `aria-labelledby`
 attribute.
 
 ```tsx
@@ -51,7 +51,7 @@ import * as React from 'react';
 import {Switch} from '@workday/canvas-kit-react-switch';
 <label id="123">Label</label>
 ...
-<Switch disabled={false} checked={checked} onChange={this.handleCheck} aria-labelledBy="123" />;
+<Switch disabled={false} checked={checked} onChange={this.handleCheck} aria-labelledby="123" />;
 ```
 
 ## Static Properties

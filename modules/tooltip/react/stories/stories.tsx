@@ -41,7 +41,7 @@ class TooltipWrapper extends React.Component<{}, TooltipWrapperState> {
           <IconButton
             variant={IconButton.Variant.Circle}
             icon={xIcon}
-            aria-labelledBy={'123'}
+            aria-labelledby={'123'}
             aria-label="Close"
           />
         </div>
