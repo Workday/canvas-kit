@@ -84,7 +84,7 @@ exports[`Action Bar Snapshots renders a fixed action bar with one button 1`] = `
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -302,7 +302,7 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -446,7 +446,7 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-6:hover:active {
@@ -727,7 +727,7 @@ exports[`Action Bar Snapshots renders an action bar with one button 1`] = `
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -941,7 +941,7 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -1085,7 +1085,7 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-6:hover:active {

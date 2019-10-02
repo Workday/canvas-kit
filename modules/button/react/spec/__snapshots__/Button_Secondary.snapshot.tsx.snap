@@ -47,7 +47,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, growing secondary 
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
   width: 100%;
   max-width: 100%;
 }
@@ -199,7 +199,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button 1
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-2:hover:active {
@@ -366,7 +366,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-4:hover:active {
@@ -555,7 +555,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-5:hover:active {
@@ -779,7 +779,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-7:hover:active {
@@ -1025,7 +1025,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -1192,7 +1192,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-4:hover:active {
@@ -1419,7 +1419,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-5:hover:active {
@@ -1643,7 +1643,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-7:hover:active {

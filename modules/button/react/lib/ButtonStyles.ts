@@ -223,12 +223,12 @@ export const canvasButtonStyles: ButtonGenericStyle = {
       [ButtonSize.Large]: {
         minWidth: '112px',
         height: '48px',
-        padding: '0 18px',
+        padding: '0 20px',
       },
       [ButtonSize.Medium]: {
         minWidth: '96px',
         height: canvas.spacing.xl,
-        padding: '0 14px',
+        padding: '0 16px',
       },
       [ButtonSize.Small]: {
         minWidth: '80px',

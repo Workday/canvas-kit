@@ -30,7 +30,7 @@ exports[`Button (Delete) Snapshots (beta) renders a large, delete button 1`] = `
   color: #ffffff;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-2:hover:active {
@@ -164,7 +164,7 @@ exports[`Button (Delete) Snapshots (beta) renders a large, growing delete button
   color: #ffffff;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
   width: 100%;
   max-width: 100%;
 }
@@ -266,7 +266,7 @@ exports[`Button (Delete) Snapshots (beta) renders a medium, delete button 1`] = 
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {

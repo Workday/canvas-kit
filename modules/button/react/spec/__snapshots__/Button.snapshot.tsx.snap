@@ -30,7 +30,7 @@ exports[`Button Snapshots renders a button with no type defined 1`] = `
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -214,7 +214,7 @@ exports[`Button Snapshots renders a growing button 1`] = `
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -366,7 +366,7 @@ exports[`Button Snapshots renders as expected 1`] = `
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {

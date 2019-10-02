@@ -101,7 +101,7 @@ exports[`Cookie Banner Snapshots renders a CookieBanner 1`] = `
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -344,7 +344,7 @@ exports[`Cookie Banner Snapshots renders a CookieBanner with settings 1`] = `
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -566,7 +566,7 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner 1`] = `
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -812,7 +812,7 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner with settings 1`]
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
