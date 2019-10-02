@@ -383,7 +383,7 @@ exports[`Button (Delete) Snapshots (beta) renders a small, delete button 1`] = `
   color: #ffffff;
   min-width: 80px;
   height: 32px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {

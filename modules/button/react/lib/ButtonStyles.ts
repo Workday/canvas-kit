@@ -233,7 +233,7 @@ export const canvasButtonStyles: ButtonGenericStyle = {
       [ButtonSize.Small]: {
         minWidth: '80px',
         height: canvas.spacing.l,
-        padding: '0 14px',
+        padding: '0 16px',
       },
     },
   },

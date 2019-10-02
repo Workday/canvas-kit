@@ -5087,7 +5087,7 @@ exports[`Button (Outline) Snapshots renders a small, outline inverse button 1`] 
   color: #ffffff;
   min-width: 80px;
   height: 32px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -5249,7 +5249,7 @@ exports[`Button (Outline) Snapshots renders a small, outline primary button 1`] 
   color: #0875e1;
   min-width: 80px;
   height: 32px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -5422,7 +5422,7 @@ exports[`Button (Outline) Snapshots renders a small, outline secondary button 1`
   color: #333333;
   min-width: 80px;
   height: 32px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
