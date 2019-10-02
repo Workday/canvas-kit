@@ -5,6 +5,7 @@ Canvas Kit Core contains values and base styles that are shared across the kit.
 Includes:
 
 - [Colors](#colors)
+- [Border Radius](#border-radius)
 - [Spacing](#spacing)
 - [Depth](#depth)
 - [Type](#type)
@@ -96,6 +97,18 @@ import {iconColors} from '@workday/canvas-kit-react-core';
 
 iconColors.hover;
 ```
+
+# Border Radius
+
+Border Radius variables are in a "t-shirt size" format. Border Radius values are in `px` format.
+
+| Variable | Size (px) |
+| -------- | --------- |
+| `zero`   | `0`       |
+| `s`      | `'2px'`   |
+| `m`      | `'4px'`   |
+| `l`      | `'8px'`   |
+| `circle` | `'999px'` |
 
 # Spacing
 
@@ -227,9 +240,9 @@ Variants only come their augmenting styles and a base type object is required.
 #### Disclaimer
 
 > A new type hierarchy is in the process of being introduced into our products. You can find more
-> info about it in the [Beta Type Hierarchy](#beta-type-hierarchy) section. We plan to maintain both
-> hierarchies for a short time, but there will be a breaking change when we replace the current one
-> with the new one.
+> info about it in the [Labs Type](?path=/story/labs-core-react--type) section. We plan to maintain
+> both hierarchies for a short time, but there will be a breaking change when we replace the current
+> one with the new one.
 
 ## Usage
 
@@ -261,34 +274,6 @@ import {type} from '@workday/canvas-kit-react-core';
 
 <label className={css(canvas.type.body, canvas.type.variant.label)}>Label Text</label>;
 ```
-
-## Beta Type Hierarchy
-
-> As stated above, a new type hierarchy is in the process of being introduced into our products. It
-> relies on larger font sizes/weights to increase legibility and promote reducing density in UI
-> design. Other than the visual size and weight changes across every level of hierarchy, there are a
-> few naming changes: `type.dataViz1` and `type.dataViz2` have been renamed to `type.brand1` and
-> `type.brand2`, respectively.
-
-### Usage
-
-The usage is the same as the current hierarchy, you just need a different import.
-
-```tsx
-import {beta_type as type} from '@workday/canvas-kit-react-core';
-
-const MyLabel = styled('label')({
-  ...type.body,
-  ...type.variant.label,
-});
-```
-
-### Breaking Change
-
-> When the breaking change is made, anyone using the current type guide will need to update the
-> references for `dataViz1` and `dataViz2`, and adjust any references they want to keep at the same
-> size (since the text will automatically get large). For those already using `beta_type`, they
-> simply need to drop `beta_` from their import.
 
 # Input Provider
 
@@ -375,8 +360,8 @@ handling.
 }
 ```
 
-We provide a [helper](../../common/react/lib/styles/hideMouseFocus.ts) to hide the focus
-outlines on mouse input. Simply spread it in your styles (i.e. `...hideMouseFocus`).
+We provide a [helper](../../common/react/lib/styles/hideMouseFocus.ts) to hide the focus outlines on
+mouse input. Simply spread it in your styles (i.e. `...hideMouseFocus`).
 
 **Note:** It is best practice to show focus outlines by default and specifically hide them in the
 cases you would like (i.e. mouse/touch/pointer input).

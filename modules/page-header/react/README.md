@@ -2,7 +2,7 @@
 
 A Canvas component that displays the header of a specific page within a website or application. It
 is generally used as a sub-header to the main application header
-(`@workday/canvas-kit-react-header`).
+(`@workday/canvas-kit-labs-react-header`).
 
 ## Installation
 

@@ -25,7 +25,7 @@ exports[`Popup Snapshots renders Popup with a smaller close icon 1`] = `
 .emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -92,7 +92,7 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -186,8 +186,14 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -228,7 +234,7 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
 .emotion-6 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -288,7 +294,7 @@ exports[`Popup Snapshots renders Popup with close icon 1`] = `
 .emotion-6 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 16px;
@@ -323,7 +329,7 @@ exports[`Popup Snapshots renders Popup with close icon 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -417,8 +423,14 @@ exports[`Popup Snapshots renders Popup with close icon 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -532,7 +544,7 @@ exports[`Popup Snapshots renders Popup with different padding 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -626,8 +638,14 @@ exports[`Popup Snapshots renders Popup with different padding 1`] = `
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-os2b9x 100ms;
+  animation: animation-os2b9x 100ms;
+  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
+  border-color: transparent;
   -webkit-animation: animation-os2b9x 100ms;
   animation: animation-os2b9x 100ms;
   box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
@@ -668,7 +686,7 @@ exports[`Popup Snapshots renders Popup with different padding 1`] = `
 .emotion-6 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 32px;
@@ -732,7 +750,7 @@ exports[`Popup Snapshots renders Popup with transformOrigin 1`] = `
 .emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -781,7 +799,7 @@ exports[`Popup Snapshots renders Popup without close icon 1`] = `
 .emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 0px;
@@ -822,7 +840,7 @@ exports[`Popup Snapshots renders as expected 1`] = `
 .emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
-  border-radius: 3px;
+  border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.1);
   padding: 16px;

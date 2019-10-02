@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
-import {colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
+import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
 
 export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
@@ -32,7 +32,7 @@ const SwitchInput = styled('input')<SwitchProps>(
     width: switchTapArea,
     margin: 0,
     marginLeft: spacing.xxxs,
-    borderRadius: 999,
+    borderRadius: borderRadius.circle,
     opacity: 0,
     '&:focus, &:active': {
       outline: 'none',
@@ -102,7 +102,7 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     marginTop: spacing.xxs,
     width: switchWidth,
     height: switchHeight,
-    borderRadius: 999,
+    borderRadius: borderRadius.circle,
     padding: '0px 2px',
     transition: 'background-color 200ms ease',
   },
@@ -114,7 +114,7 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
 const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({checked}) => ({
   width: circleSize,
   height: circleSize,
-  borderRadius: 999,
+  borderRadius: borderRadius.circle,
   ...depth[1],
   backgroundColor: colors.frenchVanilla100,
   transform: checked ? `translateX(${translateLength})` : 'translateX(0)',

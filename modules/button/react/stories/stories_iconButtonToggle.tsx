@@ -30,7 +30,7 @@ const blueBackground: CSSObject = {
   margin: '0 10px',
   padding: '24px',
   maxWidth: 'max-content',
-  borderRadius: '3px',
+  borderRadius: '4px',
 };
 
 // Wrapper to add state mgmt to IconButtons

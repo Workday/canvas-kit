@@ -1,0 +1,41 @@
+@keyframes wdc-modal-bg-animation {
+  from {
+    background: none;
+  }
+  to {
+    background: rgba(0,0,0,0.65);
+  }
+}
+
+@keyframes wdc-modal-animation {
+  from {
+    opacity: 0;
+    transform: translate(0, $wdc-spacing-xxs);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.wdc-modal-bg {
+  align-items: center;
+  animation-duration: 0.3s;
+  animation-name: wdc-modal-bg-animation;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+.wdc-modal {
+  @include wdc-popup-common();
+
+  animation-duration: 150ms;
+  animation-name: wdc-modal-animation;
+  animation-timing-function: ease-out;
+}

@@ -80,14 +80,4 @@ describe('Type Snapshots', () => {
     );
     expect(component).toMatchSnapshot();
   });
-  test('renders beta type hierarchy', () => {
-    const component = renderer.create(
-      <div>
-        <h1 style={canvas.beta_type.brand1}>Brand 1 Header</h1>
-        <h1 style={canvas.beta_type.brand2}>Brand 2 Header</h1>
-        {type(canvas.beta_type)}
-      </div>
-    );
-    expect(component).toMatchSnapshot();
-  });
 });

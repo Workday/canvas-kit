@@ -42,7 +42,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -127,7 +127,12 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   fill: #b9c0c7;
 }
 
-.emotion-4:not([disabled]):focus,
+.emotion-4:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-4:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -233,7 +238,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -316,7 +321,12 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with RTL true, with disabled
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -436,7 +446,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -521,7 +531,12 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   fill: #b9c0c7;
 }
 
-.emotion-4:not([disabled]):focus,
+.emotion-4:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-4:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -627,7 +642,7 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -710,7 +725,12 @@ exports[`Icon Toggle Button Snapshot Toggle buttons with more than two items (us
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -829,7 +849,7 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -914,7 +934,12 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   fill: #b9c0c7;
 }
 
-.emotion-1:not([disabled]):focus,
+.emotion-1:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-1:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;
@@ -1020,7 +1045,7 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   -ms-flex-pack: center;
   justify-content: center;
   font-size: 13px;
-  border-radius: 50%;
+  border-radius: 999px;
   border: 1px solid transparent;
   box-shadow: none;
   position: relative;
@@ -1103,7 +1128,12 @@ exports[`Icon Toggle Button Snapshot two buttons render as expected (w/ first se
   fill: #b9c0c7;
 }
 
-.emotion-4:not([disabled]):focus,
+.emotion-4:not([disabled]):focus {
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
+}
+
 .emotion-4:not([disabled]):active {
   -webkit-animation: animation-1h1pob6 100ms;
   animation: animation-1h1pob6 100ms;

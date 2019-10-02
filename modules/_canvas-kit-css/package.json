@@ -26,6 +26,7 @@
     "@workday/canvas-kit-css-layout": "^3.0.0-alpha.6",
     "@workday/canvas-kit-css-loading-animation": "^3.0.0-alpha.6",
     "@workday/canvas-kit-css-menu": "^3.0.0-alpha.6",
+    "@workday/canvas-kit-css-modal": "^3.0.0-alpha.6",
     "@workday/canvas-kit-css-page-header": "^3.0.0-alpha.6",
     "@workday/canvas-kit-css-popup": "^3.0.0-alpha.6",
     "@workday/canvas-kit-css-table": "^3.0.0-alpha.6",

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import isPropValid from '@emotion/is-prop-valid';
-import {colors} from '@workday/canvas-kit-react-core';
+import {colors, borderRadius} from '@workday/canvas-kit-react-core';
 import SystemIcon from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {pickForegroundColor} from '@workday/canvas-kit-react-common';
@@ -30,7 +30,7 @@ const Container = styled('div', {
     justifyContent: 'center',
     padding: 0,
     border: 0,
-    borderRadius: '100%',
+    borderRadius: borderRadius.circle,
     boxSizing: 'border-box',
     overflow: 'hidden',
     '& img': {

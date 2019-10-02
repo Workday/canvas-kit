@@ -1,0 +1,14 @@
+.wdc-form-checkbox {
+  @include wdc-form-selection-control();
+
+  input+label::before {
+    background-image: svg-load('#{$_wdc-form-icons-path}/wd-icon-check-small.svg',
+      fill=$wdc-color-french-vanilla-100);
+    background-position: center center;
+    background-size: $wdc-spacing-s;
+  }
+
+  input:checked+label::before {
+    background-size: $wdc-spacing-m;
+  }
+}
