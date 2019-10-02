@@ -21,7 +21,7 @@ export default class DropdownButton extends React.Component<BaseButtonProps> {
 
   static defaultProps = {
     variant: ButtonVariant.Primary,
-    size: ButtonSize.Large,
+    size: ButtonSize.Medium,
   };
 
   public render() {

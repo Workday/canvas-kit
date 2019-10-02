@@ -184,9 +184,9 @@ export function getButtonStyle(
 
   switch (variant) {
     case DeprecatedButtonVariant.Primary:
-    default:
       return types[DeprecatedButtonVariant.Primary];
     case DeprecatedButtonVariant.Secondary:
+    default:
       return types[DeprecatedButtonVariant.Secondary];
     case DeprecatedButtonVariant.Delete:
       return types[DeprecatedButtonVariant.Delete];
@@ -234,8 +234,6 @@ function getBaseButton(buttonType: DeprecatedButtonVariant | ButtonVariant) {
     case DeprecatedButtonVariant.Primary:
     case DeprecatedButtonVariant.Secondary:
     case DeprecatedButtonVariant.Delete:
-    default:
-      return ButtonStyles.deprecatedButtonStyles;
     case ButtonVariant.Primary:
     case ButtonVariant.Secondary:
     case ButtonVariant.Delete:
@@ -244,5 +242,7 @@ function getBaseButton(buttonType: DeprecatedButtonVariant | ButtonVariant) {
     case ButtonVariant.OutlineSecondary:
     case ButtonVariant.OutlineInverse:
       return ButtonStyles.canvasButtonStyles;
+    default:
+      return ButtonStyles.deprecatedButtonStyles;
   }
 }
