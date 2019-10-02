@@ -1,3 +1,4 @@
 import * as stories from './stories';
+import * as modal from './modal';
 
-export {stories};
+export {modal, stories};

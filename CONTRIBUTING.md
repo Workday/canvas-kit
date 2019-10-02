@@ -219,9 +219,9 @@ Code formatting will occur automatically before `git commit` for files staged us
 
 While we iterate on a new components' API and functionality, sometimes we want to make it available
 to consumers ASAP. If we introduced the component normally, this could result in many breaking
-changes to our codebase. To avoid this, we have introduced [Canvas Kit Labs](./modules/_labs) as a 
-place to incubate components. If there is a lot of debate/discussion/flux happening in your PR and 
-the component is needed right away, it may be moved to this location so it can be made available 
+changes to our codebase. To avoid this, we have introduced [Canvas Kit Labs](./modules/_labs) as a
+place to incubate components. If there is a lot of debate/discussion/flux happening in your PR and
+the component is needed right away, it may be moved to this location so it can be made available
 while we iterate on it. Visit the link above for more info.
 
 ### Editors

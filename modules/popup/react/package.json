@@ -44,7 +44,8 @@
     "@workday/canvas-kit-react-core": "^3.0.0-alpha.7",
     "@workday/canvas-system-icons-web": "^1.0.1",
     "emotion": "^9.2.12",
-    "react-emotion": "^9.2.12"
+    "react-emotion": "^9.2.12",
+    "uuid": "^3.3.2"
   },
   "peerDependencies": {
     "react": ">= 16.8 < 17"

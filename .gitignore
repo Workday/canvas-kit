@@ -26,3 +26,6 @@ junit.xml
 
 # docs
 docs
+
+# cypress
+cypress/videos

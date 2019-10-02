@@ -4,74 +4,138 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {beta_Button as Button} from '@workday/canvas-kit-react-button';
-import Modal from '..';
+import Modal, {useModal} from '..';
 import README from '../README.md';
 
-interface ModalWrapperState {
-  open: boolean;
-}
-
-class ModalWrapper extends React.Component<{}, ModalWrapperState> {
-  state = {
-    open: false,
+const DefaultModalExample = () => {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
+  const openModal = () => {
+    setOpen(true);
   };
-  public render() {
-    const {open} = this.state;
-    return (
-      <>
-        <Button variant={Button.Variant.Delete} onClick={this.handleClick}>
-          Delete Item
+  const closeModal = () => {
+    setOpen(false);
+    if (buttonRef.current) {
+      buttonRef.current.focus();
+    }
+  };
+
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} buttonRef={buttonRef} onClick={openModal}>
+        Delete Item
+      </Button>
+      <Modal data-testid="TestModal" heading={'Delete Item'} open={open} handleClose={closeModal}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+          Delete
         </Button>
-        <Modal
-          open={open}
-          width={Modal.Width.s}
-          heading={'Delete Item'}
-          padding={Modal.Padding.s}
-          handleClose={this.handleClose}
-          transformOrigin={{horizontal: 'center', vertical: 'bottom'}}
-        >
-          <div style={{marginBottom: '24px'}}>
-            Are you sure you'd like to delete the item titled 'My Item'?
-          </div>
-          <Button
-            style={{marginRight: '16px'}}
-            onClick={this.handleSubmit}
-            variant={Button.Variant.Delete}
-          >
-            Delete
-          </Button>
-          <Button onClick={this.handleSubmit} variant={Button.Variant.Secondary}>
-            Cancel
-          </Button>
-        </Modal>
-      </>
-    );
-  }
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
 
-  private handleClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
+const UseModalExample = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
 
-  private handleSubmit = () => {
-    this.setState({
-      open: false,
-    });
-  };
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} {...targetProps}>
+        Delete Item
+      </Button>
+      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
 
-  private handleClick = () => {
-    this.setState({
-      open: !this.state.open,
-    });
-  };
-}
+const NoCloseModalExample = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} {...targetProps}>
+        Delete Item
+      </Button>
+      <Modal
+        data-testid="TestModal"
+        heading={'Delete Item'}
+        {...modalProps}
+        handleClose={undefined}
+      >
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+
+const CustomFocusModalExample = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+  const buttonRef = React.useRef() as React.RefObject<HTMLButtonElement>;
+
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} {...targetProps}>
+        Delete Item
+      </Button>
+      <Modal
+        data-testid="TestModal"
+        heading={'Delete Item'}
+        {...modalProps}
+        firstFocusRef={buttonRef}
+        handleClose={undefined}
+      >
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary} buttonRef={buttonRef}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
 
 storiesOf('Modal', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
       <h1 className="section-label">Modal</h1>
-      <ModalWrapper />
+      <DefaultModalExample />
+    </div>
+  ))
+  .add('With useModal hook', () => (
+    <div className="story">
+      <h1 className="section-label">Modal</h1>
+      <UseModalExample />
+    </div>
+  ))
+  .add('Without close icon', () => (
+    <div className="story">
+      <h1 className="section-label">Modal</h1>
+      <NoCloseModalExample />
+    </div>
+  ))
+  .add('Custom focus', () => (
+    <div className="story">
+      <h1 className="section-label">Modal</h1>
+      <CustomFocusModalExample />
     </div>
   ));

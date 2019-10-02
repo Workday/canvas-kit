@@ -24,7 +24,7 @@ declare global {
  */
 export function load(categorization: string, story: string) {
   cy.window().then(win => {
-    win.setCurrentStory(categorization, story);
+    win.setCurrentStory(categorization.toLowerCase(), story.toLowerCase());
   });
 }
 

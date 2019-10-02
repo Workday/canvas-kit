@@ -18,11 +18,40 @@ yarn add @workday/canvas-kit-react-modal
 
 ```tsx
 import * as React from 'react';
-import {Modal} from '@workday/canvas-kit-react-modal';
+import {beta_Button as Button} from '@workday/canvas-kit-react-button';
+import {Modal, useModal} from '@workday/canvas-kit-react-modal';
 
-<Modal open width={Modal.Width.m} heading={'Modal Title'} handleClose={this.handleClose}>
-  {this.props.children}
-</Modal>;
+const DeleteItem = ({item, onDelete}) => {
+  const modal = useModal();
+
+  const deleteItem = event => {
+    modal.closeModal();
+    onDelete(event, item);
+  };
+
+  return (
+    <>
+      <Button variant={Button.Variant.Delete} {...modal.targetProps}>
+        Delete Item
+      </Button>
+      <Modal heading={'Delete Item'} {...modal.modalProps}>
+        <p>Are you sure you'd like to delete the item titled '{item.name}'?</p>
+        <Button onClick={deleteItem} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+
+// usage
+<DeleteItem
+  item={{id: 1, name: 'My Item'}}
+  onDelete={(event, item) => console.log(`Deleted ${item.id}: '${item.name}'`)}
+/>;
 ```
 
 ## Static Properties
@@ -37,7 +66,9 @@ import {Modal} from '@workday/canvas-kit-react-modal';
 
 ### Required
 
-> None
+#### `heading: ReactNode`
+
+> Heading at the top of the card.
 
 ---
 
@@ -49,7 +80,7 @@ import {Modal} from '@workday/canvas-kit-react-modal';
 
 Default: `false`
 
-### `width: ModalWidth`
+#### `width: ModalWidth`
 
 > You can choose between s or m for your modal width
 
@@ -60,7 +91,7 @@ Default: `ModalWidth.s`
 | `s`  | 440       |
 | `m`  | 800       |
 
-### `padding: PopupPadding`
+#### `padding: PopupPadding`
 
 > You can choose between zero, s, l for your padding
 
@@ -76,23 +107,26 @@ Default: `PopupPadding.l`
 
 > Callback to handle close of your Modal and any other event when the Modal is closed.
 
----
+#### `closeOnEscape: boolean`
 
-#### `transformOrigin: TransformOrigin`
+> Accessibility specifications state modals should be closed when the escape key is pressed.
+> However, we cannot guarantee that it is safe to simply bind an event listener and close in all
+> cases. Some applications may use a Popup manager to make sure the correct popup is receiving the
+> close command. If your application uses custom popup stacking, do not set this to true. Set this
+> to true for simple applications and the modal will close when the escape key is pressed.
 
-> Origin from which the popup will animate from
-
-Default:
-
-```js
-{
-  horizontal: 'center',
-  vertical: 'top',
-}
-```
+Default: `true`
 
 ---
 
-#### `heading: ReactNode`
+#### `firstFocusRef: React.RefObject<HTMLElement>`
 
-> Heading at the top of the card.
+Optional override of the auto-select functionality of the Modal. If this ref is defined, that
+element will receive focus when the modal is opened. There are many suggestions to what that element
+should be. Contact an accessibility specialist or go through the
+https://www.w3.org/TR/wai-aria-practices/ document for instances where this might be useful. Make
+sure this is focusable ref, like a button. If you're unsure, don't define this and leave it to the
+default behavior.
+
+If this ref is not provided the modal will try to use the close icon. If that icon is not available,
+it will make the modal heading focusable and focus on that instead.

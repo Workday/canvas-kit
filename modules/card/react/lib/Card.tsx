@@ -17,6 +17,11 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   heading?: React.ReactNode;
 
   /**
+   * Heading ID for accessibility. Useful tie to an `aria-labelledby`
+   */
+  headingId?: string;
+
+  /**
    * Padding of the card.
    */
   padding: CanvasSpacingValue;
@@ -63,11 +68,11 @@ export default class Card extends React.Component<CardProps> {
   };
 
   public render() {
-    const {heading, ...elemProps} = this.props;
+    const {heading, headingId, ...elemProps} = this.props;
 
     return (
       <Box {...elemProps}>
-        {heading && <Header>{heading}</Header>}
+        {heading && <Header id={headingId}>{heading}</Header>}
         <Body>{this.props.children}</Body>
       </Box>
     );

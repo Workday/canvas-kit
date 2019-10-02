@@ -2,9 +2,9 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import Popper from '@material-ui/core/Popper';
 
 import {beta_Button as Button} from '@workday/canvas-kit-react-button';
+import {Popper} from '@workday/canvas-kit-react-common';
 import {Popup} from '../index';
 import README from '../README.md';
 
@@ -25,7 +25,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
         <Button variant={Button.Variant.Delete} onClick={this.handleClick}>
           Delete Item
         </Button>
-        <Popper placement={'bottom'} open={open} anchorEl={anchorEl}>
+        <Popper placement={'bottom'} open={open} anchorElement={anchorEl}>
           <Popup
             width={400}
             heading={'Delete Item'}
