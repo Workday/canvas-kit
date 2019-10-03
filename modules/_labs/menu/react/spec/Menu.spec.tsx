@@ -394,6 +394,32 @@ describe('Menu Keyboard Shortcuts', () => {
     component.unmount();
   });
 
+  test('should call on close function tab is pressed', () => {
+    const component = mount(
+      <Menu onClose={cb}>
+        <MenuItem>Alpha</MenuItem>
+      </Menu>
+    );
+    const item = component.find('ul');
+    const tab = { keyCode: 9, key: 'Tab' };
+    item.simulate('keydown', tab);
+    expect(cb.mock.calls.length).toBe(1);
+    component.unmount();
+  });
+
+  test('should NOT call on close function tab is pressed and no function is set', () => {
+    const component = mount(
+      <Menu>
+        <MenuItem>Alpha</MenuItem>
+      </Menu>
+    );
+    const item = component.find('ul');
+    const tab = { keyCode: 9, key: 'Tab' };
+    item.simulate('keydown', tab);
+    expect(cb.mock.calls.length).toBe(0);
+    component.unmount();
+  });
+
   test('should call on close function escape is pressed', () => {
     const component = mount(
       <Menu onClose={cb}>

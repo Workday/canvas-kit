@@ -5,10 +5,7 @@ import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import uuid from 'uuid/v4';
 import {setupIcon, uploadCloudIcon, userIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-
 import Popper from '@material-ui/core/Popper';
-import {Transition} from 'react-transition-group';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {Button, ButtonProps} from '@workday/canvas-kit-react-button';
 import {Card} from '@workday/canvas-kit-react-card';
@@ -26,15 +23,12 @@ const FocusableButton = React.forwardRef(
     </Button>
   )
 );
-interface MenuItemProperties {
-  text?: string | JSX.Element;
-  icon?: CanvasSystemIcon;
-  secondaryIcon?: CanvasSystemIcon;
-  isDisabled?: boolean;
-  hasDivider?: boolean;
-  'aria-label'?: string;
+
+interface StoryMenuItemProps extends Omit<MenuItemProps, 'role'> {
+  text: React.ReactNode,
 }
-const createMenuItems = (hasIcons?: boolean): MenuItemProperties[] => {
+
+const createMenuItems = (hasIcons?: boolean): StoryMenuItemProps[] => {
   return [
     {
       text: `First Item`,
@@ -68,7 +62,7 @@ const createMenuItems = (hasIcons?: boolean): MenuItemProperties[] => {
     },
   ];
 };
-const buildItem = (item: MenuItemProperties, index: number) => (
+const buildItem = (item: StoryMenuItemProps, index: number) => (
   <MenuItem
     key={index}
     onClick={action(`onClick callback ${index + 1}`)}
@@ -104,21 +98,9 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
   }
   public render() {
     const {anchorEl, isOpen, selectedItemIndex} = this.state;
-    const duration = 250;
-    const defaultStyle = {
-      transition: `opacity ${duration}ms ease-in`,
-      opacity: 0,
-    };
-
-    const transitionStyles: {[key: string]: {opacity: number}} = {
-      entering: {opacity: 1},
-      entered: {opacity: 1},
-      exiting: {opacity: 0},
-      exited: {opacity: 0},
-    };
     return (
       <ClickAwayListener onClickAway={this.handleClose}>
-        <>
+        <div>
           <FocusableButton
             onClick={this.handleClick}
             onKeyDown={this.handleKeyDown}
@@ -133,33 +115,23 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
           <Popper
             transition={true}
             keepMounted={true}
-            container={document.querySelector('[data-whatinput]')}
             placement={'bottom-start'}
             open={isOpen}
             anchorEl={anchorEl}
           >
-            <Transition in={isOpen} timeout={duration}>
-              {state => (
-                <div
-                  style={{
-                    ...defaultStyle,
-                    ...transitionStyles[state],
-                  }}
-                >
-                  <Menu
-                    initialSelectedItem={selectedItemIndex}
-                    isOpen={isOpen}
-                    onClose={this.handleClose}
-                    id={this.menuId}
-                    labeledBy={this.controlButtonId}
-                  >
-                    {createMenuItems().map(buildItem)}
-                  </Menu>
-                </div>
-              )}
-            </Transition>
+            <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
+              <Menu
+                initialSelectedItem={selectedItemIndex}
+                isOpen={isOpen}
+                onClose={this.handleClose}
+                id={this.menuId}
+                labeledBy={this.controlButtonId}
+              >
+                {createMenuItems().map(buildItem)}
+              </Menu>
+            </div>
           </Popper>
-        </>
+        </div>
       </ClickAwayListener>
     );
   }
@@ -214,7 +186,7 @@ class ContextMenu extends React.Component<{}, ControlledMenuState> {
     const {anchorEl, isOpen, selectedItemIndex} = this.state;
     return (
       <ClickAwayListener onClickAway={this.handleClose}>
-        <>
+        <div>
           <div onContextMenu={this.handleContext}>Right click on this text.</div>
           <Popper
             transition={true}
@@ -223,7 +195,7 @@ class ContextMenu extends React.Component<{}, ControlledMenuState> {
             open={isOpen}
             anchorEl={anchorEl}
           >
-            <div style={{opacity: isOpen ? 1 : 0}}>
+            <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
               <Menu
                 initialSelectedItem={selectedItemIndex}
                 isOpen={isOpen}
@@ -234,7 +206,7 @@ class ContextMenu extends React.Component<{}, ControlledMenuState> {
               </Menu>
             </div>
           </Popper>
-        </>
+        </div>
       </ClickAwayListener>
     );
   }
@@ -319,6 +291,7 @@ class Combobox extends React.Component<{}, ComboboxState> {
               value={this.state.value}
               onChange={this.handleSearchInputChange}
               onKeyDown={this.handleKeyboardShortcuts}
+              autoComplete="off"
             />
           </div>
           <Card
