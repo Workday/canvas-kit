@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
+import uuid from 'uuid/v4';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
 
@@ -127,9 +128,11 @@ export default class Switch extends React.Component<SwitchProps> {
     checked: false,
   };
 
+  private id = uuid();
+
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {checked, disabled, id, inputRef, onChange, value, ...elemProps} = this.props;
+    const {checked, disabled, id = this.id, inputRef, onChange, value, ...elemProps} = this.props;
 
     return (
       <SwitchContainer>
