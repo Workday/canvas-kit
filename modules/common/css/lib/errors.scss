@@ -313,6 +313,7 @@
     &.wdc-form-field-alert,
     &.wdc-form-field-error {
       margin-top: -4px;
+      margin-left: $wdc-form-inline-label-width + 20px;
       margin-bottom: $wdc-spacing-m;
     }
 
