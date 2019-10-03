@@ -10,7 +10,7 @@ export interface ColumnProps {
   /**
    * Spacing of columns.
    */
-  spacing?: number;
+  spacing: number;
   /**
    * Widths of columns.
    */
@@ -35,19 +35,20 @@ const ColumnContainer = styled('div')<ColumnProps>(
       return;
     }
 
-    if (!spacing) {
-      return {padding: `0 ${canvas.spacing.xs}`};
-    }
-
     return {padding: `0 ${spacing}px`};
   },
-  ({columns, width}) => {
+  ({columns, width, spacing}) => {
     if (width) {
       return {width};
     }
 
     if (columns) {
-      return {width: `${(columns / 12) * 100}%`};
+      if (columns === 12) {
+        return {width: `${(columns / 12) * 100}%`};
+      } else {
+        const compensation = ((12 - columns) / 12) * (spacing * 2);
+        return {width: `calc(${(columns / 12) * 100}% - ${compensation}px)`};
+      }
     }
 
     return {flex: 1};

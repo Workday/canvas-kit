@@ -12,11 +12,11 @@ export interface LayoutProps {
   /**
    * Spacing of layout children.
    */
-  spacing?: number;
+  spacing: number;
   /**
    * Gutter of layout
    */
-  gutter?: number | string;
+  gutter: number | string;
   /**
    * If there should be a max-width
    */
@@ -53,9 +53,14 @@ const LayoutContainer = styled('div')<LayoutProps>(
   }
 );
 
+export function stripUnit(value: string): number {
+  return parseInt(`${value}`.replace('px', ''), 10);
+}
+
 export default class Layout extends React.Component<LayoutProps> {
   static defaultProps = {
     gutter: canvas.spacing.xs,
+    spacing: stripUnit(canvas.spacing.xs),
   };
 
   public static Column = Column;
