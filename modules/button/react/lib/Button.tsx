@@ -72,7 +72,7 @@ export default class Button extends React.Component<ButtonProps> {
   }
 }
 /**
- * @deprecated deprecated_Button in @workday/canvas-kit-react-button
+ * @deprecated deprecated_Button in @workday/canvas-kit-react-button will be removed soon. Use Button instead.
  */
 // tslint:disable:class-name
 export class deprecated_Button extends React.Component<ButtonProps<DeprecatedButtonVariant>> {

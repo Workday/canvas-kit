@@ -25,10 +25,11 @@ yarn add @workday/canvas-kit-react-button
 
 ### New Button
 
-Anywhere you were using `Button`, you will automatically get the updated styling. This will be a
-visual breaking change (padding and colors have changed). Note, we are still supporting the import
-for `beta_Button` as well. The new buttons include: blue primary button, and accompanying secondary,
-delete, outline, and dropdown buttons. The import and usage is documented below.
+Anywhere you were using `Button`, you will automatically get the updated styling (previously
+`beta_Button`). This will be a visual breaking change (padding and colors have changed). Note, we
+are still supporting the import for `beta_Button` as well. The new buttons include: blue primary
+button, and accompanying secondary, delete, outline, and dropdown buttons. The import and usage is
+documented below.
 
 ### Deprecated Buttons
 
