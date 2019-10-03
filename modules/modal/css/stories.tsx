@@ -48,7 +48,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
                   <i className="wdc-icon" data-icon="x" data-category="system" />
                 </button>
               </div>
-              <h3 className="wdc-modal-title" id="modal-heading">
+              <h3 className="wdc-modal-heading" id="modal-heading">
                 Delete Item
               </h3>
               <div style={{marginBottom: '24px'}} className="wdc-modal-body">

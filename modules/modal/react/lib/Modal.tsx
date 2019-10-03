@@ -66,7 +66,7 @@ const Container = styled('div')({
 
 const transformOrigin = {
   horizontal: 'center',
-  vertical: 'top',
+  vertical: 'bottom',
 } as const;
 
 function onInitialFocus(
@@ -161,6 +161,7 @@ export default class Modal extends React.Component<ModalProps> {
       firstFocusRef: firstFocusableRef,
       ...elemProps
     } = this.props;
+    
     return (
       open && (
         <FocusTrap
