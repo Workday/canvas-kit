@@ -21,7 +21,7 @@ const labelStyles = [
       ...(labelPosition === FormFieldLabelPosition.Left
         ? {
             marginRight: spacing.l,
-            width: 180,
+            minWidth: 180,
             display: 'flex',
             alignItems: 'center',
             maxHeight: spacing.xl,

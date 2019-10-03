@@ -26,7 +26,7 @@ exports[`Label Snapshots renders left label 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
   padding: 0;
   margin-right: 32px;
-  width: 180px;
+  min-width: 180px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

@@ -109,7 +109,7 @@
         display: inline-block;
         position: absolute;
         border-radius: $wdc-border-radius-circle;
-        margin-top: 1px;
+        top: -1px;
         left: -30px;
         width: $wdc-form-selection-control-size;
         height: $wdc-form-selection-control-size;

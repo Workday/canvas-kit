@@ -33,7 +33,7 @@ const rippleRadius = (spacing.l - checkboxWidth) / 2;
 const CheckboxContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  height: checkboxContainerHeight,
+  minHeight: checkboxContainerHeight,
   position: 'relative',
 });
 
@@ -77,6 +77,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     marginLeft: '-3px',
     position: 'absolute',
     opacity: 0,
+
     '&:not(:disabled)': {
       cursor: 'pointer',
     },

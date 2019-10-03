@@ -32,7 +32,7 @@ const rippleRadius = (spacing.l - radioWidth) / 2;
 const RadioContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  height: radioContainerHeight,
+  minHeight: radioContainerHeight,
   position: 'relative',
 });
 
