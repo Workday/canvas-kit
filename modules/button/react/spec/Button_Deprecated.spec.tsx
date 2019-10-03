@@ -1,11 +1,12 @@
 import * as React from 'react';
-import Button, {ButtonProps} from '../lib/Button';
+import {deprecated_Button as Button, ButtonProps} from '../lib/Button';
+import {DeprecatedButtonVariant} from '../lib/types';
 import TextButton from '../lib/TextButton';
 import {mount} from 'enzyme';
 import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
 
-describe('Button', () => {
+describe('Deprecated Button', () => {
   const cb = jest.fn();
   afterEach(() => {
     cb.mockReset();
@@ -119,10 +120,10 @@ describe('Button Focus', () => {
   });
 
   // expected usage to manage focus via buttonRef
-  class FocusableButton extends React.Component<ButtonProps> {
+  class FocusableButton extends React.Component<ButtonProps<DeprecatedButtonVariant>> {
     readonly buttonRef: React.RefObject<HTMLButtonElement>;
 
-    constructor(props: ButtonProps) {
+    constructor(props: ButtonProps<DeprecatedButtonVariant>) {
       super(props);
       this.buttonRef = React.createRef<HTMLButtonElement>();
     }
@@ -144,7 +145,7 @@ describe('Button Focus', () => {
   }
 
   // expected usage to manage focus via buttonRef cb
-  class FocusableButtonCB extends React.Component<ButtonProps> {
+  class FocusableButtonCB extends React.Component<ButtonProps<DeprecatedButtonVariant>> {
     private buttonElement: HTMLButtonElement;
 
     // focus on button in componentDidMount for purposes of tests

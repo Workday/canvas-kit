@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import {beta_Button as Button} from '../lib/Button';
+import Button from '../lib/Button';
 import {editIcon} from '@workday/canvas-system-icons-web';
 
 describe('Button (Highlight) Snapshots', () => {

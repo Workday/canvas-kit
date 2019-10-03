@@ -15,7 +15,7 @@ exports[`Button (Dropdown) Snapshots renders a large, dropdown primary button 1`
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -30,7 +30,7 @@ exports[`Button (Dropdown) Snapshots renders a large, dropdown primary button 1`
   color: #ffffff;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-5:hover:active {
@@ -290,7 +290,7 @@ exports[`Button (Dropdown) Snapshots renders a large, dropdown secondary button 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -305,7 +305,7 @@ exports[`Button (Dropdown) Snapshots renders a large, dropdown secondary button 
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-5:hover:active {
@@ -489,7 +489,7 @@ exports[`Button (Dropdown) Snapshots renders a medium, dropdown primary button 1
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -504,7 +504,7 @@ exports[`Button (Dropdown) Snapshots renders a medium, dropdown primary button 1
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-5:hover:active {
@@ -727,7 +727,7 @@ exports[`Button (Dropdown) Snapshots renders a medium, dropdown secondary button
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -742,7 +742,7 @@ exports[`Button (Dropdown) Snapshots renders a medium, dropdown secondary button
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-5:hover:active {

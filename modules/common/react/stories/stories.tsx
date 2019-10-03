@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {beta_Button as Button} from '../../../button/react/index';
+import {Button} from '../../../button/react/index';
 import {Popup} from '../../../popup/react/index';
 import {Popper} from '../index';
 import README from '../README.md';

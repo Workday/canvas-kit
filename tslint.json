@@ -7,6 +7,9 @@
     "class-name": true,
     "comment-format": [true, "check-space"],
     "curly": true,
+    "deprecation": {
+      "severity": "warning"
+    },
     "forin": true,
     "interface-name": [true, "never-prefix"],
     "jsdoc-format": true,

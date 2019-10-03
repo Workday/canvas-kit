@@ -16,16 +16,20 @@ export enum IconButtonSize {
 /**
  * The different button types.
  */
-export enum ButtonVariant {
-  Primary = 'primary',
-  Secondary = 'secondary',
-  Delete = 'delete',
+
+/**
+ * @deprecated These type are deprecated along with deprecated_Button component
+ */
+export enum DeprecatedButtonVariant {
+  Primary = 'deprecatedPrimary',
+  Secondary = 'deprecatedSecondary',
+  Delete = 'deprecatedDelete',
 }
 
-export enum BetaButtonVariant {
-  Primary = 'betaPrimary',
+export enum ButtonVariant {
+  Primary = 'primary',
   Secondary = 'betaSecondary',
-  Delete = 'betaDelete',
+  Delete = 'delete',
   Highlight = 'highlight',
   OutlinePrimary = 'outlinePrimary',
   OutlineSecondary = 'outlineSecondary',
@@ -58,7 +62,7 @@ export enum TextButtonVariant {
 }
 
 export type AllButtonVariants =
+  | DeprecatedButtonVariant
   | ButtonVariant
-  | BetaButtonVariant
   | TextButtonVariant
   | IconButtonVariant;

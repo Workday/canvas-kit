@@ -71,21 +71,20 @@ exports[`Action Bar Snapshots renders a fixed action bar with one button 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
-  background-color: #ffa126;
-  border-color: #ffa126;
+  vertical-align: middle;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -99,51 +98,88 @@ exports[`Action Bar Snapshots renders a fixed action bar with one button 1`] = `
   box-shadow: none;
 }
 
+.emotion-2 span .wd-icon-fill,
+.emotion-2 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #ffffff;
+}
+
 .emotion-2:focus {
-  background-color: #ffa126;
-  border-color: #0875e1;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:focus span .wd-icon-fill,
+.emotion-2:focus span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:hover:focus {
-  background-color: #f38b00;
+  background-color: #005cb9;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #ffa126;
-  border-color: #ffa126;
+  background-color: #004387;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:active span .wd-icon-fill,
+.emotion-2:focus:active span .wd-icon-fill,
+.emotion-2:hover:active span .wd-icon-fill,
+.emotion-2:active span .wd-icon-accent,
+.emotion-2:focus:active span .wd-icon-accent,
+.emotion-2:hover:active span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:hover {
-  background-color: #f38b00;
-  border-color: #ffa126;
+  background-color: #005cb9;
+  border-color: transparent;
   color: #ffffff;
+}
+
+.emotion-2:hover span .wd-icon-fill,
+.emotion-2:hover span .wd-icon-accent {
+  fill: #ffffff;
 }
 
 .emotion-2:disabled,
 .emotion-2:active:disabled,
 .emotion-2:focus:disabled,
 .emotion-2:hover:disabled {
-  background-color: #fcd49f;
-  border-color: #ffa126;
+  background-color: #a6d2ff;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:disabled span .wd-icon-fill,
+.emotion-2:active:disabled span .wd-icon-fill,
+.emotion-2:focus:disabled span .wd-icon-fill,
+.emotion-2:hover:disabled span .wd-icon-fill,
+.emotion-2:disabled span .wd-icon-accent,
+.emotion-2:active:disabled span .wd-icon-accent,
+.emotion-2:focus:disabled span .wd-icon-accent,
+.emotion-2:hover:disabled span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2:not([disabled]):active {
-  border-color: #ffa126;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-0 {
@@ -155,11 +191,8 @@ exports[`Action Bar Snapshots renders a fixed action bar with one button 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-0:hover:active {
@@ -256,21 +289,20 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
-  background-color: #ffa126;
-  border-color: #ffa126;
+  vertical-align: middle;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -284,51 +316,88 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   box-shadow: none;
 }
 
+.emotion-2 span .wd-icon-fill,
+.emotion-2 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #ffffff;
+}
+
 .emotion-2:focus {
-  background-color: #ffa126;
-  border-color: #0875e1;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:focus span .wd-icon-fill,
+.emotion-2:focus span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:hover:focus {
-  background-color: #f38b00;
+  background-color: #005cb9;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #ffa126;
-  border-color: #ffa126;
+  background-color: #004387;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:active span .wd-icon-fill,
+.emotion-2:focus:active span .wd-icon-fill,
+.emotion-2:hover:active span .wd-icon-fill,
+.emotion-2:active span .wd-icon-accent,
+.emotion-2:focus:active span .wd-icon-accent,
+.emotion-2:hover:active span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:hover {
-  background-color: #f38b00;
-  border-color: #ffa126;
+  background-color: #005cb9;
+  border-color: transparent;
   color: #ffffff;
+}
+
+.emotion-2:hover span .wd-icon-fill,
+.emotion-2:hover span .wd-icon-accent {
+  fill: #ffffff;
 }
 
 .emotion-2:disabled,
 .emotion-2:active:disabled,
 .emotion-2:focus:disabled,
 .emotion-2:hover:disabled {
-  background-color: #fcd49f;
-  border-color: #ffa126;
+  background-color: #a6d2ff;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:disabled span .wd-icon-fill,
+.emotion-2:active:disabled span .wd-icon-fill,
+.emotion-2:focus:disabled span .wd-icon-fill,
+.emotion-2:hover:disabled span .wd-icon-fill,
+.emotion-2:disabled span .wd-icon-accent,
+.emotion-2:active:disabled span .wd-icon-accent,
+.emotion-2:focus:disabled span .wd-icon-accent,
+.emotion-2:hover:disabled span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2:not([disabled]):active {
-  border-color: #ffa126;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-0 {
@@ -340,11 +409,8 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-0:hover:active {
@@ -367,21 +433,20 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
+  vertical-align: middle;
   background-color: #f0f1f2;
-  border-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
 }
 
 .emotion-6:hover:active {
@@ -395,51 +460,99 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   box-shadow: none;
 }
 
-.emotion-6:focus {
-  background-color: #f0f1f2;
-  border-color: #0875e1;
+.emotion-6 span .wd-icon-fill,
+.emotion-6 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-6 .button-label-data {
   color: #333333;
 }
 
+.emotion-6:focus {
+  background-color: #f0f1f2;
+  border-color: transparent;
+  color: #333333;
+}
+
+.emotion-6:focus span .wd-icon-fill,
+.emotion-6:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
 .emotion-6:hover:focus {
-  background-color: #ced3d9;
+  background-color: #dfe2e6;
 }
 
 .emotion-6:active,
 .emotion-6:focus:active,
 .emotion-6:hover:active {
-  background-color: #f0f1f2;
-  border-color: #ced3d9;
+  background-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
 }
 
+.emotion-6:active span .wd-icon-fill,
+.emotion-6:focus:active span .wd-icon-fill,
+.emotion-6:hover:active span .wd-icon-fill,
+.emotion-6:active span .wd-icon-accent,
+.emotion-6:focus:active span .wd-icon-accent,
+.emotion-6:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
 .emotion-6:hover {
-  background-color: #ced3d9;
-  border-color: #a1aab3;
+  background-color: #dfe2e6;
+  border-color: transparent;
   color: #333333;
+}
+
+.emotion-6:hover span .wd-icon-fill,
+.emotion-6:hover span .wd-icon-accent {
+  fill: #333d47;
 }
 
 .emotion-6:disabled,
 .emotion-6:active:disabled,
 .emotion-6:focus:disabled,
 .emotion-6:hover:disabled {
-  background-color: #ffffff;
-  border-color: #ced3d9;
-  color: #ced3d9;
+  background-color: #f6f7f8;
+  border-color: transparent;
+  color: #a1aab3;
+}
+
+.emotion-6:disabled span .wd-icon-fill,
+.emotion-6:active:disabled span .wd-icon-fill,
+.emotion-6:focus:disabled span .wd-icon-fill,
+.emotion-6:hover:disabled span .wd-icon-fill,
+.emotion-6:disabled span .wd-icon-accent,
+.emotion-6:active:disabled span .wd-icon-accent,
+.emotion-6:focus:disabled span .wd-icon-accent,
+.emotion-6:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-6:disabled .button-label-data,
+.emotion-6:active:disabled .button-label-data,
+.emotion-6:focus:disabled .button-label-data,
+.emotion-6:hover:disabled .button-label-data {
+  color: #a1aab3;
 }
 
 .emotion-6:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-6:not([disabled]):active {
-  border-color: #ced3d9;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 <div
@@ -601,21 +714,20 @@ exports[`Action Bar Snapshots renders an action bar with one button 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
-  background-color: #ffa126;
-  border-color: #ffa126;
+  vertical-align: middle;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -629,51 +741,88 @@ exports[`Action Bar Snapshots renders an action bar with one button 1`] = `
   box-shadow: none;
 }
 
+.emotion-2 span .wd-icon-fill,
+.emotion-2 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #ffffff;
+}
+
 .emotion-2:focus {
-  background-color: #ffa126;
-  border-color: #0875e1;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:focus span .wd-icon-fill,
+.emotion-2:focus span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:hover:focus {
-  background-color: #f38b00;
+  background-color: #005cb9;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #ffa126;
-  border-color: #ffa126;
+  background-color: #004387;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:active span .wd-icon-fill,
+.emotion-2:focus:active span .wd-icon-fill,
+.emotion-2:hover:active span .wd-icon-fill,
+.emotion-2:active span .wd-icon-accent,
+.emotion-2:focus:active span .wd-icon-accent,
+.emotion-2:hover:active span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:hover {
-  background-color: #f38b00;
-  border-color: #ffa126;
+  background-color: #005cb9;
+  border-color: transparent;
   color: #ffffff;
+}
+
+.emotion-2:hover span .wd-icon-fill,
+.emotion-2:hover span .wd-icon-accent {
+  fill: #ffffff;
 }
 
 .emotion-2:disabled,
 .emotion-2:active:disabled,
 .emotion-2:focus:disabled,
 .emotion-2:hover:disabled {
-  background-color: #fcd49f;
-  border-color: #ffa126;
+  background-color: #a6d2ff;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:disabled span .wd-icon-fill,
+.emotion-2:active:disabled span .wd-icon-fill,
+.emotion-2:focus:disabled span .wd-icon-fill,
+.emotion-2:hover:disabled span .wd-icon-fill,
+.emotion-2:disabled span .wd-icon-accent,
+.emotion-2:active:disabled span .wd-icon-accent,
+.emotion-2:focus:disabled span .wd-icon-accent,
+.emotion-2:hover:disabled span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2:not([disabled]):active {
-  border-color: #ffa126;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-0 {
@@ -685,11 +834,8 @@ exports[`Action Bar Snapshots renders an action bar with one button 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-0:hover:active {
@@ -782,21 +928,20 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
-  background-color: #ffa126;
-  border-color: #ffa126;
+  vertical-align: middle;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -810,51 +955,88 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   box-shadow: none;
 }
 
+.emotion-2 span .wd-icon-fill,
+.emotion-2 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #ffffff;
+}
+
 .emotion-2:focus {
-  background-color: #ffa126;
-  border-color: #0875e1;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:focus span .wd-icon-fill,
+.emotion-2:focus span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:hover:focus {
-  background-color: #f38b00;
+  background-color: #005cb9;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #ffa126;
-  border-color: #ffa126;
+  background-color: #004387;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:active span .wd-icon-fill,
+.emotion-2:focus:active span .wd-icon-fill,
+.emotion-2:hover:active span .wd-icon-fill,
+.emotion-2:active span .wd-icon-accent,
+.emotion-2:focus:active span .wd-icon-accent,
+.emotion-2:hover:active span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:hover {
-  background-color: #f38b00;
-  border-color: #ffa126;
+  background-color: #005cb9;
+  border-color: transparent;
   color: #ffffff;
+}
+
+.emotion-2:hover span .wd-icon-fill,
+.emotion-2:hover span .wd-icon-accent {
+  fill: #ffffff;
 }
 
 .emotion-2:disabled,
 .emotion-2:active:disabled,
 .emotion-2:focus:disabled,
 .emotion-2:hover:disabled {
-  background-color: #fcd49f;
-  border-color: #ffa126;
+  background-color: #a6d2ff;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-2:disabled span .wd-icon-fill,
+.emotion-2:active:disabled span .wd-icon-fill,
+.emotion-2:focus:disabled span .wd-icon-fill,
+.emotion-2:hover:disabled span .wd-icon-fill,
+.emotion-2:disabled span .wd-icon-accent,
+.emotion-2:active:disabled span .wd-icon-accent,
+.emotion-2:focus:disabled span .wd-icon-accent,
+.emotion-2:hover:disabled span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-2:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2:not([disabled]):active {
-  border-color: #ffa126;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-0 {
@@ -866,11 +1048,8 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-0:hover:active {
@@ -893,21 +1072,20 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
+  vertical-align: middle;
   background-color: #f0f1f2;
-  border-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
 }
 
 .emotion-6:hover:active {
@@ -921,51 +1099,99 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   box-shadow: none;
 }
 
-.emotion-6:focus {
-  background-color: #f0f1f2;
-  border-color: #0875e1;
+.emotion-6 span .wd-icon-fill,
+.emotion-6 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-6 .button-label-data {
   color: #333333;
 }
 
+.emotion-6:focus {
+  background-color: #f0f1f2;
+  border-color: transparent;
+  color: #333333;
+}
+
+.emotion-6:focus span .wd-icon-fill,
+.emotion-6:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
 .emotion-6:hover:focus {
-  background-color: #ced3d9;
+  background-color: #dfe2e6;
 }
 
 .emotion-6:active,
 .emotion-6:focus:active,
 .emotion-6:hover:active {
-  background-color: #f0f1f2;
-  border-color: #ced3d9;
+  background-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
 }
 
+.emotion-6:active span .wd-icon-fill,
+.emotion-6:focus:active span .wd-icon-fill,
+.emotion-6:hover:active span .wd-icon-fill,
+.emotion-6:active span .wd-icon-accent,
+.emotion-6:focus:active span .wd-icon-accent,
+.emotion-6:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
 .emotion-6:hover {
-  background-color: #ced3d9;
-  border-color: #a1aab3;
+  background-color: #dfe2e6;
+  border-color: transparent;
   color: #333333;
+}
+
+.emotion-6:hover span .wd-icon-fill,
+.emotion-6:hover span .wd-icon-accent {
+  fill: #333d47;
 }
 
 .emotion-6:disabled,
 .emotion-6:active:disabled,
 .emotion-6:focus:disabled,
 .emotion-6:hover:disabled {
-  background-color: #ffffff;
-  border-color: #ced3d9;
-  color: #ced3d9;
+  background-color: #f6f7f8;
+  border-color: transparent;
+  color: #a1aab3;
+}
+
+.emotion-6:disabled span .wd-icon-fill,
+.emotion-6:active:disabled span .wd-icon-fill,
+.emotion-6:focus:disabled span .wd-icon-fill,
+.emotion-6:hover:disabled span .wd-icon-fill,
+.emotion-6:disabled span .wd-icon-accent,
+.emotion-6:active:disabled span .wd-icon-accent,
+.emotion-6:focus:disabled span .wd-icon-accent,
+.emotion-6:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-6:disabled .button-label-data,
+.emotion-6:active:disabled .button-label-data,
+.emotion-6:focus:disabled .button-label-data,
+.emotion-6:hover:disabled .button-label-data {
+  color: #a1aab3;
 }
 
 .emotion-6:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-6:not([disabled]):active {
-  border-color: #ced3d9;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 <div

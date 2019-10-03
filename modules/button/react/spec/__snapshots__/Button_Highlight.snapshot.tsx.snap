@@ -17,7 +17,7 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -32,7 +32,7 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
   color: #005cb9;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-5:hover:active {
@@ -292,7 +292,7 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -307,7 +307,7 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
   color: #005cb9;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
   width: 100%;
   max-width: 100%;
 }
@@ -445,7 +445,7 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -460,7 +460,7 @@ exports[`Button (Highlight) Snapshots renders a large, highlight button with an 
   color: #005cb9;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-7:hover:active {
@@ -717,7 +717,7 @@ exports[`Button (Highlight) Snapshots renders a medium, highlight button with an
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -732,7 +732,7 @@ exports[`Button (Highlight) Snapshots renders a medium, highlight button with an
   color: #005cb9;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-5:hover:active {
@@ -930,7 +930,7 @@ exports[`Button (Highlight) Snapshots renders a medium, highlight button with an
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -945,7 +945,7 @@ exports[`Button (Highlight) Snapshots renders a medium, highlight button with an
   color: #005cb9;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-7:hover:active {

@@ -2,19 +2,6 @@
 
 Clickable button elements that extend the native `<button>` element with Canvas styling.
 
-#### Disclaimer
-
-> The documentation below is for the current Canvas buttons. The next iteration of our buttons have
-> been implemented in this module, but will not be documented until we're ready to roll them out
-> across all our products. We want to discourage their use until everyone can uptake them
-> simultaneously for consistencies sake.
->
-> The new buttons include new `ButtonVariant`, icon support, and the `ButtonSize` equate to
-> different button and font sizes.
->
-> **If you would like to use the new buttons, please consult the design systems team and get
-> approval first**
-
 ## Installation
 
 ```sh
@@ -27,7 +14,44 @@ or
 yarn add @workday/canvas-kit-react-button
 ```
 
-## Usage
+---
+
+## Deprecation Warning
+
+> We are rolling out our next iteration of our buttons and will be deprecating the old style (orange
+> primary, and accompanying secondary, and delete). These are still avialable, but will be removed
+> in the first major release after they are available for all Workday customers. The biggest change
+> is with regards to colors and styling, but the behavior should remain the same.
+
+### New Button
+
+Anywhere you were using `Button`, you will automatically get the updated styling (previously
+`beta_Button`). This will be a visual breaking change (padding and colors have changed). Note, we
+are still supporting the import for `beta_Button` as well. However, if you are using
+`import {beta_Button as Button}...` you can remove it now too since this too will be removed in a
+future release. The new buttons include: blue primary button, and accompanying secondary, delete,
+outline, and dropdown buttons. The import and usage is documented below.
+
+### Deprecated Buttons
+
+If you need to continue to use the old style buttons, you can use the `deprecated_Button` class.
+Usage will be the same as before, but you must change your imports. Note: this will be removed
+entirely in a future release.
+
+```tsx
+import * as React from 'react';
+import {deprecated_Button as Button} from '@workday/canvas-kit-react-button';
+
+<Button>Button Label</Button>;
+```
+
+Deprecation tags have been added to all the pieces regarding the old buttons including it's types
+and the component itself. Tslint and your IDE should reflect this warning but you should still be
+able to compile your code.
+
+---
+
+## Button
 
 ```tsx
 import * as React from 'react';
@@ -70,7 +94,7 @@ Default: `ButtonVariant.Secondary`
 
 | Theme       | Description                     |
 | ----------- | ------------------------------- |
-| `Primary`   | Orange background, white text   |
+| `Primary`   | Blue background, white text     |
 | `Secondary` | Gray background, dark gray text |
 | `Delete`    | Red background, dark text       |
 

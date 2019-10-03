@@ -25,10 +25,12 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 [postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) plugin to properly process and
 inline icons. Process your SASS through PostCSS once it has been compiled to CSS.
 
+---
+
 ## Deprecation Warning
 
 > We are rolling out our next iteration of our buttons and have deprecated the old style (orange
-> primary, and accommodating secondary, delete, and split). These are still avialable, but will be
+> primary, and accompanying secondary, delete, and split). These are still avialable, but will be
 > removed in the first major release after they are available for all Workday customers.
 
 ### Migration path
@@ -41,7 +43,8 @@ inline icons. Process your SASS through PostCSS once it has been compiled to CSS
 ### Deprecated Buttons
 
 The old buttons (orange primary, secondary, delete, and split) are still available, but you'll have
-to use the class name `wdc-btn-deprecated` for the old styling.
+to use the class name `wdc-btn-deprecated` for the old styling. Note: this will be removed entirely
+in a future release.
 
 ```html
 <button class="wdc-btn-deprecated">Primary</button>
@@ -49,6 +52,8 @@ to use the class name `wdc-btn-deprecated` for the old styling.
 <button class="wdc-btn-deprecated wdc-btn-delete">Primary</button>
 <button class="wdc-btn-deprecated wdc-btn-split">Primary</button>
 ```
+
+---
 
 ## Usage
 

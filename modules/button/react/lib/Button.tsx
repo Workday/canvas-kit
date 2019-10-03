@@ -1,13 +1,11 @@
 import * as React from 'react';
 import {ButtonBaseCon, ButtonBaseLabel, ButtonLabelData, ButtonLabelIcon} from './ButtonBase';
-import {ButtonVariant, ButtonSize, BetaButtonVariant} from './types';
+import {DeprecatedButtonVariant, ButtonSize, ButtonVariant} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {labelDataBaseStyles} from './ButtonStyles';
 
-// TODO (beta button): add README for new buttons when merging
-
-export interface BaseButtonProps<T = ButtonVariant | BetaButtonVariant>
+export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Type of button.
@@ -31,7 +29,7 @@ export interface BaseButtonProps<T = ButtonVariant | BetaButtonVariant>
   icon?: CanvasSystemIcon;
 }
 
-export interface ButtonProps<T = ButtonVariant | BetaButtonVariant>
+export interface ButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
   extends BaseButtonProps<T>,
     GrowthBehavior {
   /**
@@ -45,13 +43,18 @@ export default class Button extends React.Component<ButtonProps> {
   public static Size = ButtonSize;
 
   static defaultProps = {
-    size: ButtonSize.Large,
+    size: ButtonSize.Medium,
     variant: ButtonVariant.Secondary,
     grow: false,
   };
 
   public render() {
     const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
+
+    // Restrict Hightlight button to only being sized Large, Medium with an Icon
+    if (variant === ButtonVariant.Highlight && (icon === undefined || size === ButtonSize.Small)) {
+      return null;
+    }
 
     return (
       <ButtonBaseCon variant={variant} size={size} innerRef={buttonRef} {...elemProps}>
@@ -68,30 +71,27 @@ export default class Button extends React.Component<ButtonProps> {
     );
   }
 }
-
+/**
+ * @deprecated deprecated_Button in @workday/canvas-kit-react-button will be removed soon. Use Button instead.
+ */
 // tslint:disable:class-name
-export class beta_Button extends React.Component<ButtonProps<BetaButtonVariant>> {
-  public static Variant = BetaButtonVariant;
+export class deprecated_Button extends React.Component<ButtonProps<DeprecatedButtonVariant>> {
+  public static Variant = DeprecatedButtonVariant;
   public static Size = ButtonSize;
 
   static defaultProps = {
-    size: ButtonSize.Medium,
-    variant: BetaButtonVariant.Secondary,
+    size: ButtonSize.Large,
+    variant: DeprecatedButtonVariant.Secondary,
     grow: false,
   };
 
-  render() {
-    const {variant, size, icon} = this.props;
+  public componentDidMount() {
+    console.warn('This component is now deprecated, consider using the new Button component');
+  }
 
-    // TODO (beta button): Move this logic back into Button compponent
-    // Restrict Hightlight button to only being sized Large, Medium with an Icon
-    if (
-      variant === BetaButtonVariant.Highlight &&
-      (icon === undefined || size === ButtonSize.Small)
-    ) {
-      return null;
-    }
+  public render() {
+    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
-    return <Button {...this.props} />;
+    return <Button {...this.props} {...elemProps} />;
   }
 }
