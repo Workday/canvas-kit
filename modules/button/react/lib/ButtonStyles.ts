@@ -128,7 +128,6 @@ export const labelIconBaseStyles: ButtonGenericStyle = {
   },
 };
 
-// TODO (beta button): remove
 export const deprecatedButtonStyles: ButtonGenericStyle = {
   classname: 'canvas-deprecated-button',
   styles: {
@@ -194,6 +193,7 @@ export const canvasButtonStyles: ButtonGenericStyle = {
     ...deprecatedButtonStyles.styles,
     verticalAlign: 'middle',
     border: '2px solid transparent',
+    fontSize: '14px',
   },
   variants: {
     types: {

@@ -32,7 +32,7 @@ exports[`Button (Primary) Snapshots (beta) renders a large, growing primary butt
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -173,7 +173,7 @@ exports[`Button (Primary) Snapshots (beta) renders a large, primary button 1`] =
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -329,7 +329,7 @@ exports[`Button (Primary) Snapshots (beta) renders a large, primary button with
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -507,7 +507,7 @@ exports[`Button (Primary) Snapshots (beta) renders a large, primary button with
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -720,7 +720,7 @@ exports[`Button (Primary) Snapshots (beta) renders a large, primary button with
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -955,7 +955,7 @@ exports[`Button (Primary) Snapshots (beta) renders a medium, primary button 1`] 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1111,7 +1111,7 @@ exports[`Button (Primary) Snapshots (beta) renders a medium, primary button with
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1327,7 +1327,7 @@ exports[`Button (Primary) Snapshots (beta) renders a medium, primary button with
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1540,7 +1540,7 @@ exports[`Button (Primary) Snapshots (beta) renders a medium, primary button with
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1739,7 +1739,7 @@ exports[`Button (Primary) Snapshots (beta) renders a small, primary button 1`] =
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;

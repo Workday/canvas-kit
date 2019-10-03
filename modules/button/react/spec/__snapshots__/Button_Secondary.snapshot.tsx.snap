@@ -32,7 +32,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, growing secondary 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -184,7 +184,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button 1
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -351,7 +351,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -540,7 +540,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -764,7 +764,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a large, secondary button w
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1010,7 +1010,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1177,7 +1177,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1404,7 +1404,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1628,7 +1628,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a medium, secondary button 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1838,7 +1838,7 @@ exports[`Button (Secondary) Snapshots (beta) renders a small, secondary button 1
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
