@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Type Snapshots renders current type hierarchy 1`] = `
-.emotion-10 {
+.emotion-5 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -10,7 +10,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   font-weight: 500;
 }
 
-.emotion-11 {
+.emotion-6 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -20,7 +20,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   text-transform: uppercase;
 }
 
-.emotion-13 {
+.emotion-8 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -29,7 +29,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   color: #5e6a75;
 }
 
-.emotion-14 {
+.emotion-9 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -38,7 +38,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   color: #de2e21;
 }
 
-.emotion-15 {
+.emotion-10 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -50,21 +50,21 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   cursor: pointer;
 }
 
-.emotion-15:hover,
-.emotion-15:active {
+.emotion-10:hover,
+.emotion-10:active {
   -webkit-text-decoration: underline;
   text-decoration: underline;
   color: #0875e1;
 }
 
-.emotion-15:focus {
+.emotion-10:focus {
   background: #d7eafc;
   -webkit-text-decoration: underline;
   text-decoration: underline;
   outline: 2px solid #d7eafc;
 }
 
-.emotion-16 {
+.emotion-11 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -77,7 +77,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   border-radius: 3px;
 }
 
-.emotion-17 {
+.emotion-12 {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -94,7 +94,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-2 {
+.emotion-1 {
   font-size: 24px;
   line-height: 32px;
   font-weight: 700;
@@ -102,7 +102,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-4 {
+.emotion-2 {
   font-size: 20px;
   line-height: 28px;
   font-weight: 700;
@@ -110,7 +110,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-6 {
+.emotion-3 {
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
@@ -118,7 +118,7 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-8 {
+.emotion-4 {
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -155,27 +155,27 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
   </h1>
   <div>
     <h1
-      className="emotion-0 emotion-1"
+      className="emotion-0"
     >
       H1 Header
     </h1>
     <h2
-      className="emotion-2 emotion-3"
+      className="emotion-1"
     >
       H2 Header
     </h2>
     <h3
-      className="emotion-4 emotion-5"
+      className="emotion-2"
     >
       H3 Header
     </h3>
     <h4
-      className="emotion-6 emotion-7"
+      className="emotion-3"
     >
       H4 Header
     </h4>
     <h5
-      className="emotion-8 emotion-9"
+      className="emotion-4"
     >
       H5 Header
     </h5>
@@ -307,50 +307,50 @@ exports[`Type Snapshots renders current type hierarchy 1`] = `
       Variants
     </h3>
     <span
-      className="emotion-10"
+      className="emotion-5"
     >
       Button Text
     </span>
     <br />
     <span
-      className="emotion-11"
+      className="emotion-6"
     >
       Caps Text
     </span>
     <br />
     <label
-      className="emotion-10"
+      className="emotion-5"
     >
       Label Text
     </label>
     <br />
     <span
-      className="emotion-13"
+      className="emotion-8"
     >
       Hint Text
     </span>
     <br />
     <span
-      className="emotion-14"
+      className="emotion-9"
     >
       Error Text
     </span>
     <br />
     <a
-      className="emotion-15"
+      className="emotion-10"
       href="#"
     >
       Link Text
     </a>
     <br />
     <span
-      className="emotion-16"
+      className="emotion-11"
     >
       Inverse Text
     </span>
     <br />
     <span
-      className="emotion-17"
+      className="emotion-12"
     >
       Mono Text
     </span>

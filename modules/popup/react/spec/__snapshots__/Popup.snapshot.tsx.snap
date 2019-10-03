@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Popup Snapshots renders Popup with a smaller close icon 1`] = `
-.emotion-4 {
+.emotion-2 {
   position: relative;
   -webkit-animation: animation-1htt9yb;
   animation: animation-1htt9yb;
@@ -22,7 +22,7 @@ exports[`Popup Snapshots renders Popup with a smaller close icon 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-2 {
+.emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -32,14 +32,14 @@ exports[`Popup Snapshots renders Popup with a smaller close icon 1`] = `
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
   role="dialog"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-1"
   >
     <div
-      className="emotion-0 emotion-1"
+      className="emotion-0"
     >
       <span>
         hello world
@@ -50,7 +50,7 @@ exports[`Popup Snapshots renders Popup with a smaller close icon 1`] = `
 `;
 
 exports[`Popup Snapshots renders Popup with children elements 1`] = `
-.emotion-9 {
+.emotion-7 {
   position: relative;
   -webkit-animation: animation-1htt9yb;
   animation: animation-1htt9yb;
@@ -231,7 +231,7 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
   fill: transparent;
 }
 
-.emotion-7 {
+.emotion-6 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -241,7 +241,7 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
 }
 
 <div
-  className="emotion-9 emotion-10"
+  className="emotion-7 emotion-8"
   role="dialog"
 >
   <div
@@ -264,10 +264,10 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
     </button>
   </div>
   <div
-    className="emotion-7 emotion-8"
+    className="emotion-6"
   >
     <div
-      className="emotion-5 emotion-6"
+      className="emotion-5"
     >
       <span>
         hello world
@@ -278,7 +278,7 @@ exports[`Popup Snapshots renders Popup with children elements 1`] = `
 `;
 
 exports[`Popup Snapshots renders Popup with close icon 1`] = `
-.emotion-9 {
+.emotion-7 {
   position: relative;
   -webkit-animation: animation-1htt9yb;
   animation: animation-1htt9yb;
@@ -291,7 +291,7 @@ exports[`Popup Snapshots renders Popup with close icon 1`] = `
   transform-origin: top center;
 }
 
-.emotion-7 {
+.emotion-6 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -469,7 +469,7 @@ exports[`Popup Snapshots renders Popup with close icon 1`] = `
 }
 
 <div
-  className="emotion-9 emotion-10"
+  className="emotion-7 emotion-8"
   role="dialog"
 >
   <div
@@ -492,17 +492,17 @@ exports[`Popup Snapshots renders Popup with close icon 1`] = `
     </button>
   </div>
   <div
-    className="emotion-7 emotion-8"
+    className="emotion-6"
   >
     <div
-      className="emotion-5 emotion-6"
+      className="emotion-5"
     />
   </div>
 </div>
 `;
 
 exports[`Popup Snapshots renders Popup with different padding 1`] = `
-.emotion-9 {
+.emotion-7 {
   position: relative;
   -webkit-animation: animation-1htt9yb;
   animation: animation-1htt9yb;
@@ -683,7 +683,7 @@ exports[`Popup Snapshots renders Popup with different padding 1`] = `
   fill: transparent;
 }
 
-.emotion-7 {
+.emotion-6 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -693,7 +693,7 @@ exports[`Popup Snapshots renders Popup with different padding 1`] = `
 }
 
 <div
-  className="emotion-9 emotion-10"
+  className="emotion-7 emotion-8"
   role="dialog"
 >
   <div
@@ -716,17 +716,17 @@ exports[`Popup Snapshots renders Popup with different padding 1`] = `
     </button>
   </div>
   <div
-    className="emotion-7 emotion-8"
+    className="emotion-6"
   >
     <div
-      className="emotion-5 emotion-6"
+      className="emotion-5"
     />
   </div>
 </div>
 `;
 
 exports[`Popup Snapshots renders Popup with transformOrigin 1`] = `
-.emotion-4 {
+.emotion-2 {
   position: relative;
   -webkit-animation: animation-1htt9yb;
   animation: animation-1htt9yb;
@@ -747,7 +747,7 @@ exports[`Popup Snapshots renders Popup with transformOrigin 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-2 {
+.emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -757,14 +757,14 @@ exports[`Popup Snapshots renders Popup with transformOrigin 1`] = `
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
   role="dialog"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-1"
   >
     <div
-      className="emotion-0 emotion-1"
+      className="emotion-0"
     >
       <span>
         hello world
@@ -775,7 +775,7 @@ exports[`Popup Snapshots renders Popup with transformOrigin 1`] = `
 `;
 
 exports[`Popup Snapshots renders Popup without close icon 1`] = `
-.emotion-4 {
+.emotion-2 {
   position: relative;
   -webkit-animation: animation-1htt9yb;
   animation: animation-1htt9yb;
@@ -796,7 +796,7 @@ exports[`Popup Snapshots renders Popup without close icon 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 }
 
-.emotion-2 {
+.emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -806,14 +806,14 @@ exports[`Popup Snapshots renders Popup without close icon 1`] = `
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
   role="dialog"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-1"
   >
     <div
-      className="emotion-0 emotion-1"
+      className="emotion-0"
     >
       <span>
         hello world
@@ -824,7 +824,7 @@ exports[`Popup Snapshots renders Popup without close icon 1`] = `
 `;
 
 exports[`Popup Snapshots renders as expected 1`] = `
-.emotion-4 {
+.emotion-2 {
   position: relative;
   -webkit-animation: animation-1htt9yb;
   animation: animation-1htt9yb;
@@ -837,7 +837,7 @@ exports[`Popup Snapshots renders as expected 1`] = `
   transform-origin: top center;
 }
 
-.emotion-2 {
+.emotion-1 {
   background-color: #ffffff;
   border: 1px solid #ced3d9;
   border-radius: 8px;
@@ -855,14 +855,14 @@ exports[`Popup Snapshots renders as expected 1`] = `
 }
 
 <div
-  className="emotion-4 emotion-5"
+  className="emotion-2 emotion-3"
   role="dialog"
 >
   <div
-    className="emotion-2 emotion-3"
+    className="emotion-1"
   >
     <div
-      className="emotion-0 emotion-1"
+      className="emotion-0"
     />
   </div>
 </div>
