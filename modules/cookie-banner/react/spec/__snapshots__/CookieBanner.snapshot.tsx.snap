@@ -88,21 +88,20 @@ exports[`Cookie Banner Snapshots renders a CookieBanner 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
-  background-color: #ffa126;
-  border-color: #ffa126;
+  vertical-align: middle;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -118,51 +117,88 @@ exports[`Cookie Banner Snapshots renders a CookieBanner 1`] = `
   box-shadow: none;
 }
 
+.emotion-4 span .wd-icon-fill,
+.emotion-4 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #ffffff;
+}
+
 .emotion-4:focus {
-  background-color: #ffa126;
-  border-color: #0875e1;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-4:focus span .wd-icon-fill,
+.emotion-4:focus span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-4:hover:focus {
-  background-color: #f38b00;
+  background-color: #005cb9;
 }
 
 .emotion-4:active,
 .emotion-4:focus:active,
 .emotion-4:hover:active {
-  background-color: #ffa126;
-  border-color: #ffa126;
+  background-color: #004387;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-4:active span .wd-icon-fill,
+.emotion-4:focus:active span .wd-icon-fill,
+.emotion-4:hover:active span .wd-icon-fill,
+.emotion-4:active span .wd-icon-accent,
+.emotion-4:focus:active span .wd-icon-accent,
+.emotion-4:hover:active span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-4:hover {
-  background-color: #f38b00;
-  border-color: #ffa126;
+  background-color: #005cb9;
+  border-color: transparent;
   color: #ffffff;
+}
+
+.emotion-4:hover span .wd-icon-fill,
+.emotion-4:hover span .wd-icon-accent {
+  fill: #ffffff;
 }
 
 .emotion-4:disabled,
 .emotion-4:active:disabled,
 .emotion-4:focus:disabled,
 .emotion-4:hover:disabled {
-  background-color: #fcd49f;
-  border-color: #ffa126;
+  background-color: #a6d2ff;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-4:disabled span .wd-icon-fill,
+.emotion-4:active:disabled span .wd-icon-fill,
+.emotion-4:focus:disabled span .wd-icon-fill,
+.emotion-4:hover:disabled span .wd-icon-fill,
+.emotion-4:disabled span .wd-icon-accent,
+.emotion-4:active:disabled span .wd-icon-accent,
+.emotion-4:focus:disabled span .wd-icon-accent,
+.emotion-4:hover:disabled span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-4:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-4:not([disabled]):active {
-  border-color: #ffa126;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2 {
@@ -174,11 +210,8 @@ exports[`Cookie Banner Snapshots renders a CookieBanner 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-2:hover:active {
@@ -298,21 +331,20 @@ exports[`Cookie Banner Snapshots renders a CookieBanner with settings 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
-  background-color: #ffa126;
-  border-color: #ffa126;
+  vertical-align: middle;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -328,51 +360,88 @@ exports[`Cookie Banner Snapshots renders a CookieBanner with settings 1`] = `
   box-shadow: none;
 }
 
+.emotion-6 span .wd-icon-fill,
+.emotion-6 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #ffffff;
+}
+
 .emotion-6:focus {
-  background-color: #ffa126;
-  border-color: #0875e1;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-6:focus span .wd-icon-fill,
+.emotion-6:focus span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-6:hover:focus {
-  background-color: #f38b00;
+  background-color: #005cb9;
 }
 
 .emotion-6:active,
 .emotion-6:focus:active,
 .emotion-6:hover:active {
-  background-color: #ffa126;
-  border-color: #ffa126;
+  background-color: #004387;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-6:active span .wd-icon-fill,
+.emotion-6:focus:active span .wd-icon-fill,
+.emotion-6:hover:active span .wd-icon-fill,
+.emotion-6:active span .wd-icon-accent,
+.emotion-6:focus:active span .wd-icon-accent,
+.emotion-6:hover:active span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-6:hover {
-  background-color: #f38b00;
-  border-color: #ffa126;
+  background-color: #005cb9;
+  border-color: transparent;
   color: #ffffff;
+}
+
+.emotion-6:hover span .wd-icon-fill,
+.emotion-6:hover span .wd-icon-accent {
+  fill: #ffffff;
 }
 
 .emotion-6:disabled,
 .emotion-6:active:disabled,
 .emotion-6:focus:disabled,
 .emotion-6:hover:disabled {
-  background-color: #fcd49f;
-  border-color: #ffa126;
+  background-color: #a6d2ff;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-6:disabled span .wd-icon-fill,
+.emotion-6:active:disabled span .wd-icon-fill,
+.emotion-6:focus:disabled span .wd-icon-fill,
+.emotion-6:hover:disabled span .wd-icon-fill,
+.emotion-6:disabled span .wd-icon-accent,
+.emotion-6:active:disabled span .wd-icon-accent,
+.emotion-6:focus:disabled span .wd-icon-accent,
+.emotion-6:hover:disabled span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-6:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-6:not([disabled]):active {
-  border-color: #ffa126;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-4 {
@@ -384,11 +453,8 @@ exports[`Cookie Banner Snapshots renders a CookieBanner with settings 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-4:hover:active {
@@ -487,21 +553,20 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
-  background-color: #ffa126;
-  border-color: #ffa126;
+  vertical-align: middle;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -517,51 +582,88 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner 1`] = `
   box-shadow: none;
 }
 
+.emotion-4 span .wd-icon-fill,
+.emotion-4 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #ffffff;
+}
+
 .emotion-4:focus {
-  background-color: #ffa126;
-  border-color: #0875e1;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-4:focus span .wd-icon-fill,
+.emotion-4:focus span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-4:hover:focus {
-  background-color: #f38b00;
+  background-color: #005cb9;
 }
 
 .emotion-4:active,
 .emotion-4:focus:active,
 .emotion-4:hover:active {
-  background-color: #ffa126;
-  border-color: #ffa126;
+  background-color: #004387;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-4:active span .wd-icon-fill,
+.emotion-4:focus:active span .wd-icon-fill,
+.emotion-4:hover:active span .wd-icon-fill,
+.emotion-4:active span .wd-icon-accent,
+.emotion-4:focus:active span .wd-icon-accent,
+.emotion-4:hover:active span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-4:hover {
-  background-color: #f38b00;
-  border-color: #ffa126;
+  background-color: #005cb9;
+  border-color: transparent;
   color: #ffffff;
+}
+
+.emotion-4:hover span .wd-icon-fill,
+.emotion-4:hover span .wd-icon-accent {
+  fill: #ffffff;
 }
 
 .emotion-4:disabled,
 .emotion-4:active:disabled,
 .emotion-4:focus:disabled,
 .emotion-4:hover:disabled {
-  background-color: #fcd49f;
-  border-color: #ffa126;
+  background-color: #a6d2ff;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-4:disabled span .wd-icon-fill,
+.emotion-4:active:disabled span .wd-icon-fill,
+.emotion-4:focus:disabled span .wd-icon-fill,
+.emotion-4:hover:disabled span .wd-icon-fill,
+.emotion-4:disabled span .wd-icon-accent,
+.emotion-4:active:disabled span .wd-icon-accent,
+.emotion-4:focus:disabled span .wd-icon-accent,
+.emotion-4:hover:disabled span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-4:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-4:not([disabled]):active {
-  border-color: #ffa126;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2 {
@@ -573,11 +675,8 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-2:hover:active {
@@ -700,21 +799,20 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner with settings 1`]
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
-  background-color: #ffa126;
-  border-color: #ffa126;
+  vertical-align: middle;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -730,51 +828,88 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner with settings 1`]
   box-shadow: none;
 }
 
+.emotion-6 span .wd-icon-fill,
+.emotion-6 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #ffffff;
+}
+
 .emotion-6:focus {
-  background-color: #ffa126;
-  border-color: #0875e1;
+  background-color: #0875e1;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-6:focus span .wd-icon-fill,
+.emotion-6:focus span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-6:hover:focus {
-  background-color: #f38b00;
+  background-color: #005cb9;
 }
 
 .emotion-6:active,
 .emotion-6:focus:active,
 .emotion-6:hover:active {
-  background-color: #ffa126;
-  border-color: #ffa126;
+  background-color: #004387;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-6:active span .wd-icon-fill,
+.emotion-6:focus:active span .wd-icon-fill,
+.emotion-6:hover:active span .wd-icon-fill,
+.emotion-6:active span .wd-icon-accent,
+.emotion-6:focus:active span .wd-icon-accent,
+.emotion-6:hover:active span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-6:hover {
-  background-color: #f38b00;
-  border-color: #ffa126;
+  background-color: #005cb9;
+  border-color: transparent;
   color: #ffffff;
+}
+
+.emotion-6:hover span .wd-icon-fill,
+.emotion-6:hover span .wd-icon-accent {
+  fill: #ffffff;
 }
 
 .emotion-6:disabled,
 .emotion-6:active:disabled,
 .emotion-6:focus:disabled,
 .emotion-6:hover:disabled {
-  background-color: #fcd49f;
-  border-color: #ffa126;
+  background-color: #a6d2ff;
+  border-color: transparent;
   color: #ffffff;
 }
 
+.emotion-6:disabled span .wd-icon-fill,
+.emotion-6:active:disabled span .wd-icon-fill,
+.emotion-6:focus:disabled span .wd-icon-fill,
+.emotion-6:hover:disabled span .wd-icon-fill,
+.emotion-6:disabled span .wd-icon-accent,
+.emotion-6:active:disabled span .wd-icon-accent,
+.emotion-6:focus:disabled span .wd-icon-accent,
+.emotion-6:hover:disabled span .wd-icon-accent {
+  fill: #ffffff;
+}
+
 .emotion-6:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-6:not([disabled]):active {
-  border-color: #ffa126;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-4 {
@@ -786,11 +921,8 @@ exports[`Cookie Banner Snapshots renders a closed CookieBanner with settings 1`]
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-4:hover:active {

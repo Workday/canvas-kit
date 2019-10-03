@@ -2,12 +2,12 @@ import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, GenericStyle} from '@workday/canvas-kit-react-common';
 import {CSSObject} from 'create-emotion';
 import {
-  ButtonVariant,
+  DeprecatedButtonVariant,
   ButtonSize,
   IconPosition,
   AllButtonVariants,
   TextButtonVariant,
-  BetaButtonVariant,
+  ButtonVariant,
   IconButtonVariant,
 } from './types';
 import {ButtonColors} from './ButtonColors';
@@ -49,17 +49,17 @@ export const labelBaseStyles: ButtonGenericStyle = {
         letterSpacing: '.5px',
         padding: '0',
       },
-      [ButtonVariant.Primary]: {
+      [DeprecatedButtonVariant.Primary]: {
         fontSize: 'inherit',
         fontWeight: 'inherit',
         padding: '0',
       },
-      [ButtonVariant.Secondary]: {
+      [DeprecatedButtonVariant.Secondary]: {
         fontSize: 'inherit',
         fontWeight: 'inherit',
         padding: '0',
       },
-      [ButtonVariant.Delete]: {
+      [DeprecatedButtonVariant.Delete]: {
         fontSize: 'inherit',
         fontWeight: 'inherit',
         padding: '0',
@@ -128,9 +128,8 @@ export const labelIconBaseStyles: ButtonGenericStyle = {
   },
 };
 
-// TODO (beta button): remove
-export const canvasButtonStyles: ButtonGenericStyle = {
-  classname: 'canvas-button',
+export const deprecatedButtonStyles: ButtonGenericStyle = {
+  classname: 'canvas-deprecated-button',
   styles: {
     boxSizing: 'border-box',
     display: 'inline-flex',
@@ -149,14 +148,14 @@ export const canvasButtonStyles: ButtonGenericStyle = {
   },
   variants: {
     types: {
-      [ButtonVariant.Primary]: {
-        ...getButtonStateStyle(ButtonVariant.Primary),
+      [DeprecatedButtonVariant.Primary]: {
+        ...getButtonStateStyle(DeprecatedButtonVariant.Primary),
       },
-      [ButtonVariant.Secondary]: {
-        ...getButtonStateStyle(ButtonVariant.Secondary),
+      [DeprecatedButtonVariant.Secondary]: {
+        ...getButtonStateStyle(DeprecatedButtonVariant.Secondary),
       },
-      [ButtonVariant.Delete]: {
-        ...getButtonStateStyle(ButtonVariant.Delete),
+      [DeprecatedButtonVariant.Delete]: {
+        ...getButtonStateStyle(DeprecatedButtonVariant.Delete),
       },
     },
     sizes: {
@@ -188,53 +187,53 @@ export const canvasButtonStyles: ButtonGenericStyle = {
   },
 };
 
-export const betaButtonStyles: ButtonGenericStyle = {
-  // TODO (beta button): rename classname from beta-button to something
-  classname: 'beta-button',
+export const canvasButtonStyles: ButtonGenericStyle = {
+  classname: 'canvas-button',
   styles: {
-    ...canvasButtonStyles.styles,
+    ...deprecatedButtonStyles.styles,
     verticalAlign: 'middle',
     border: '2px solid transparent',
+    fontSize: '14px',
   },
   variants: {
     types: {
-      [BetaButtonVariant.Primary]: {
-        ...getButtonStateStyle(BetaButtonVariant.Primary),
+      [ButtonVariant.Primary]: {
+        ...getButtonStateStyle(ButtonVariant.Primary),
       },
-      [BetaButtonVariant.Secondary]: {
-        ...getButtonStateStyle(BetaButtonVariant.Secondary),
+      [ButtonVariant.Secondary]: {
+        ...getButtonStateStyle(ButtonVariant.Secondary),
       },
-      [BetaButtonVariant.Delete]: {
-        ...getButtonStateStyle(BetaButtonVariant.Delete),
+      [ButtonVariant.Delete]: {
+        ...getButtonStateStyle(ButtonVariant.Delete),
       },
-      [BetaButtonVariant.Highlight]: {
-        ...getButtonStateStyle(BetaButtonVariant.Highlight),
+      [ButtonVariant.Highlight]: {
+        ...getButtonStateStyle(ButtonVariant.Highlight),
       },
-      [BetaButtonVariant.OutlinePrimary]: {
-        ...getButtonStateStyle(BetaButtonVariant.OutlinePrimary),
+      [ButtonVariant.OutlinePrimary]: {
+        ...getButtonStateStyle(ButtonVariant.OutlinePrimary),
       },
-      [BetaButtonVariant.OutlineSecondary]: {
-        ...getButtonStateStyle(BetaButtonVariant.OutlineSecondary),
+      [ButtonVariant.OutlineSecondary]: {
+        ...getButtonStateStyle(ButtonVariant.OutlineSecondary),
       },
-      [BetaButtonVariant.OutlineInverse]: {
-        ...getButtonStateStyle(BetaButtonVariant.OutlineInverse),
+      [ButtonVariant.OutlineInverse]: {
+        ...getButtonStateStyle(ButtonVariant.OutlineInverse),
       },
     },
     sizes: {
       [ButtonSize.Large]: {
         minWidth: '112px',
         height: '48px',
-        padding: '0 18px',
+        padding: '0 20px',
       },
       [ButtonSize.Medium]: {
         minWidth: '96px',
         height: canvas.spacing.xl,
-        padding: '0 14px',
+        padding: '0 16px',
       },
       [ButtonSize.Small]: {
         minWidth: '80px',
         height: canvas.spacing.l,
-        padding: '0 14px',
+        padding: '0 16px',
       },
     },
   },
@@ -243,16 +242,16 @@ export const betaButtonStyles: ButtonGenericStyle = {
 export const dropdownButtonStyles: ButtonGenericStyle = {
   classname: 'dropdown-button',
   styles: {
-    ...betaButtonStyles.styles,
+    ...canvasButtonStyles.styles,
   },
   variants: {
     types: {
-      [BetaButtonVariant.Primary]: betaButtonStyles.variants!.types[BetaButtonVariant.Primary],
-      [BetaButtonVariant.Secondary]: betaButtonStyles.variants!.types[BetaButtonVariant.Secondary],
+      [ButtonVariant.Primary]: canvasButtonStyles.variants!.types[ButtonVariant.Primary],
+      [ButtonVariant.Secondary]: canvasButtonStyles.variants!.types[ButtonVariant.Secondary],
     },
     sizes: {
-      [ButtonSize.Large]: betaButtonStyles.variants!.sizes.large,
-      [ButtonSize.Medium]: betaButtonStyles.variants!.sizes.medium,
+      [ButtonSize.Large]: canvasButtonStyles.variants!.sizes.large,
+      [ButtonSize.Medium]: canvasButtonStyles.variants!.sizes.medium,
     },
   },
 };
@@ -260,7 +259,7 @@ export const dropdownButtonStyles: ButtonGenericStyle = {
 export const textButtonStyles: ButtonGenericStyle = {
   classname: 'text-button',
   styles: {
-    ...canvasButtonStyles.styles,
+    ...deprecatedButtonStyles.styles,
     borderRadius: borderRadius.m,
     border: '0',
     margin: '0 8px',
@@ -301,7 +300,7 @@ export const iconButtonStyles: ButtonGenericStyle = {
   classname: 'icon-button',
   styles: {
     // TODO: Support data-whatinput='input' css
-    ...canvasButtonStyles.styles,
+    ...deprecatedButtonStyles.styles,
     borderWidth: '0',
     borderRadius: borderRadius.circle,
     ['& .wd-icon']: {
@@ -449,12 +448,12 @@ function getButtonFocusRing(variant: AllButtonVariants): CSSObject {
   }
 
   switch (variant) {
-    case ButtonVariant.Primary:
-    case ButtonVariant.Secondary:
+    case DeprecatedButtonVariant.Primary:
+    case DeprecatedButtonVariant.Secondary:
     case TextButtonVariant.Default:
     case TextButtonVariant.AllCaps:
       return focusRing(2, 0);
-    case BetaButtonVariant.OutlineInverse:
+    case ButtonVariant.OutlineInverse:
       return focusRing(2, 2, true, false, buttonColors.focusRingInner, buttonColors.focusRingOuter);
     case IconButtonVariant.Plain:
       return focusRing(2);

@@ -32,7 +32,7 @@ exports[`Button (Outline) Snapshots renders a large, growing outline primary but
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -47,7 +47,7 @@ exports[`Button (Outline) Snapshots renders a large, growing outline primary but
   color: #0875e1;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
   width: 100%;
   max-width: 100%;
 }
@@ -190,7 +190,7 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button 1`] 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -205,7 +205,7 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button 1`] 
   color: #ffffff;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-2:hover:active {
@@ -386,7 +386,7 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -401,7 +401,7 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
   color: #ffffff;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-4:hover:active {
@@ -615,7 +615,7 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -630,7 +630,7 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
   color: #ffffff;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-5:hover:active {
@@ -868,7 +868,7 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -883,7 +883,7 @@ exports[`Button (Outline) Snapshots renders a large, outline inverse button wit
   color: #ffffff;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-7:hover:active {
@@ -1047,7 +1047,7 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button 1`] 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1062,7 +1062,7 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button 1`] 
   color: #0875e1;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-2:hover:active {
@@ -1203,7 +1203,7 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1218,7 +1218,7 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
   color: #0875e1;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-4:hover:active {
@@ -1381,7 +1381,7 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1396,7 +1396,7 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
   color: #0875e1;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-5:hover:active {
@@ -1594,7 +1594,7 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1609,7 +1609,7 @@ exports[`Button (Outline) Snapshots renders a large, outline primary button wit
   color: #0875e1;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-7:hover:active {
@@ -1846,7 +1846,7 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button 1`
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1861,7 +1861,7 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button 1`
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-2:hover:active {
@@ -2019,7 +2019,7 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -2034,7 +2034,7 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-4:hover:active {
@@ -2225,7 +2225,7 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -2240,7 +2240,7 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-5:hover:active {
@@ -2455,7 +2455,7 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -2470,7 +2470,7 @@ exports[`Button (Outline) Snapshots renders a large, outline secondary button wi
   color: #333333;
   min-width: 112px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .emotion-7:hover:active {
@@ -2628,7 +2628,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button 1`]
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -2643,7 +2643,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button 1`]
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -2825,7 +2825,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -2840,7 +2840,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-4:hover:active {
@@ -3054,7 +3054,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -3069,7 +3069,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-5:hover:active {
@@ -3308,7 +3308,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -3323,7 +3323,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline inverse button wit
   color: #ffffff;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-7:hover:active {
@@ -3487,7 +3487,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button 1`]
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -3502,7 +3502,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button 1`]
   color: #0875e1;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -3643,7 +3643,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -3658,7 +3658,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
   color: #0875e1;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-4:hover:active {
@@ -3859,7 +3859,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -3874,7 +3874,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
   color: #0875e1;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-5:hover:active {
@@ -4072,7 +4072,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -4087,7 +4087,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline primary button wit
   color: #0875e1;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-7:hover:active {
@@ -4288,7 +4288,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button 1
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -4303,7 +4303,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button 1
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -4462,7 +4462,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -4477,7 +4477,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-4:hover:active {
@@ -4668,7 +4668,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -4683,7 +4683,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-5:hover:active {
@@ -4899,7 +4899,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -4914,7 +4914,7 @@ exports[`Button (Outline) Snapshots renders a medium, outline secondary button w
   color: #333333;
   min-width: 96px;
   height: 40px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-7:hover:active {
@@ -5072,7 +5072,7 @@ exports[`Button (Outline) Snapshots renders a small, outline inverse button 1`] 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -5087,7 +5087,7 @@ exports[`Button (Outline) Snapshots renders a small, outline inverse button 1`] 
   color: #ffffff;
   min-width: 80px;
   height: 32px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -5234,7 +5234,7 @@ exports[`Button (Outline) Snapshots renders a small, outline primary button 1`] 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -5249,7 +5249,7 @@ exports[`Button (Outline) Snapshots renders a small, outline primary button 1`] 
   color: #0875e1;
   min-width: 80px;
   height: 32px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -5407,7 +5407,7 @@ exports[`Button (Outline) Snapshots renders a small, outline secondary button 1`
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -5422,7 +5422,7 @@ exports[`Button (Outline) Snapshots renders a small, outline secondary button 1`
   color: #333333;
   min-width: 80px;
   height: 32px;
-  padding: 0 14px;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {

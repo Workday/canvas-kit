@@ -5,7 +5,7 @@ import isPropValid from '@emotion/is-prop-valid';
 import {BaseButtonProps} from './Button';
 import {dropdownButtonStyles} from './ButtonStyles';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
-import {ButtonSize, BetaButtonVariant} from './types';
+import {ButtonSize, ButtonVariant} from './types';
 
 const DropdownButtonCon = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
@@ -16,12 +16,12 @@ const DropdownButtonCon = styled('button', {
 );
 
 export default class DropdownButton extends React.Component<BaseButtonProps> {
-  public static Variant = BetaButtonVariant;
+  public static Variant = ButtonVariant;
   public static Size = ButtonSize;
 
   static defaultProps = {
-    variant: BetaButtonVariant.Primary,
-    size: ButtonSize.Large,
+    variant: ButtonVariant.Primary,
+    size: ButtonSize.Medium,
   };
 
   public render() {

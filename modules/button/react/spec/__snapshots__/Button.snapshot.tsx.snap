@@ -17,21 +17,20 @@ exports[`Button Snapshots renders a button with no type defined 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
+  vertical-align: middle;
   background-color: #f0f1f2;
-  border-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -45,51 +44,99 @@ exports[`Button Snapshots renders a button with no type defined 1`] = `
   box-shadow: none;
 }
 
-.emotion-2:focus {
-  background-color: #f0f1f2;
-  border-color: #0875e1;
+.emotion-2 span .wd-icon-fill,
+.emotion-2 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-2 .button-label-data {
   color: #333333;
 }
 
+.emotion-2:focus {
+  background-color: #f0f1f2;
+  border-color: transparent;
+  color: #333333;
+}
+
+.emotion-2:focus span .wd-icon-fill,
+.emotion-2:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
 .emotion-2:hover:focus {
-  background-color: #ced3d9;
+  background-color: #dfe2e6;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #f0f1f2;
-  border-color: #ced3d9;
+  background-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
 }
 
+.emotion-2:active span .wd-icon-fill,
+.emotion-2:focus:active span .wd-icon-fill,
+.emotion-2:hover:active span .wd-icon-fill,
+.emotion-2:active span .wd-icon-accent,
+.emotion-2:focus:active span .wd-icon-accent,
+.emotion-2:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
 .emotion-2:hover {
-  background-color: #ced3d9;
-  border-color: #a1aab3;
+  background-color: #dfe2e6;
+  border-color: transparent;
   color: #333333;
+}
+
+.emotion-2:hover span .wd-icon-fill,
+.emotion-2:hover span .wd-icon-accent {
+  fill: #333d47;
 }
 
 .emotion-2:disabled,
 .emotion-2:active:disabled,
 .emotion-2:focus:disabled,
 .emotion-2:hover:disabled {
-  background-color: #ffffff;
-  border-color: #ced3d9;
-  color: #ced3d9;
+  background-color: #f6f7f8;
+  border-color: transparent;
+  color: #a1aab3;
+}
+
+.emotion-2:disabled span .wd-icon-fill,
+.emotion-2:active:disabled span .wd-icon-fill,
+.emotion-2:focus:disabled span .wd-icon-fill,
+.emotion-2:hover:disabled span .wd-icon-fill,
+.emotion-2:disabled span .wd-icon-accent,
+.emotion-2:active:disabled span .wd-icon-accent,
+.emotion-2:focus:disabled span .wd-icon-accent,
+.emotion-2:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-2:disabled .button-label-data,
+.emotion-2:active:disabled .button-label-data,
+.emotion-2:focus:disabled .button-label-data,
+.emotion-2:hover:disabled .button-label-data {
+  color: #a1aab3;
 }
 
 .emotion-2:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2:not([disabled]):active {
-  border-color: #ced3d9;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-0 {
@@ -101,11 +148,8 @@ exports[`Button Snapshots renders a button with no type defined 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-0:hover:active {
@@ -133,11 +177,8 @@ exports[`Button Snapshots renders a growing button 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-0:hover:active {
@@ -160,21 +201,20 @@ exports[`Button Snapshots renders a growing button 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
+  vertical-align: middle;
   background-color: #f0f1f2;
-  border-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
   width: 100%;
   max-width: 100%;
 }
@@ -190,51 +230,99 @@ exports[`Button Snapshots renders a growing button 1`] = `
   box-shadow: none;
 }
 
-.emotion-2:focus {
-  background-color: #f0f1f2;
-  border-color: #0875e1;
+.emotion-2 span .wd-icon-fill,
+.emotion-2 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-2 .button-label-data {
   color: #333333;
 }
 
+.emotion-2:focus {
+  background-color: #f0f1f2;
+  border-color: transparent;
+  color: #333333;
+}
+
+.emotion-2:focus span .wd-icon-fill,
+.emotion-2:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
 .emotion-2:hover:focus {
-  background-color: #ced3d9;
+  background-color: #dfe2e6;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #f0f1f2;
-  border-color: #ced3d9;
+  background-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
 }
 
+.emotion-2:active span .wd-icon-fill,
+.emotion-2:focus:active span .wd-icon-fill,
+.emotion-2:hover:active span .wd-icon-fill,
+.emotion-2:active span .wd-icon-accent,
+.emotion-2:focus:active span .wd-icon-accent,
+.emotion-2:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
 .emotion-2:hover {
-  background-color: #ced3d9;
-  border-color: #a1aab3;
+  background-color: #dfe2e6;
+  border-color: transparent;
   color: #333333;
+}
+
+.emotion-2:hover span .wd-icon-fill,
+.emotion-2:hover span .wd-icon-accent {
+  fill: #333d47;
 }
 
 .emotion-2:disabled,
 .emotion-2:active:disabled,
 .emotion-2:focus:disabled,
 .emotion-2:hover:disabled {
-  background-color: #ffffff;
-  border-color: #ced3d9;
-  color: #ced3d9;
+  background-color: #f6f7f8;
+  border-color: transparent;
+  color: #a1aab3;
+}
+
+.emotion-2:disabled span .wd-icon-fill,
+.emotion-2:active:disabled span .wd-icon-fill,
+.emotion-2:focus:disabled span .wd-icon-fill,
+.emotion-2:hover:disabled span .wd-icon-fill,
+.emotion-2:disabled span .wd-icon-accent,
+.emotion-2:active:disabled span .wd-icon-accent,
+.emotion-2:focus:disabled span .wd-icon-accent,
+.emotion-2:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-2:disabled .button-label-data,
+.emotion-2:active:disabled .button-label-data,
+.emotion-2:focus:disabled .button-label-data,
+.emotion-2:hover:disabled .button-label-data {
+  color: #a1aab3;
 }
 
 .emotion-2:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2:not([disabled]):active {
-  border-color: #ced3d9;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 <button
@@ -265,21 +353,20 @@ exports[`Button Snapshots renders as expected 1`] = `
   justify-content: center;
   font-size: 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   box-shadow: none;
   position: relative;
   cursor: pointer;
   outline: none;
   -webkit-transition: all 120ms linear;
   transition: all 120ms linear;
+  vertical-align: middle;
   background-color: #f0f1f2;
-  border-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
+  min-width: 96px;
   height: 40px;
-  padding: 0 32px;
-  min-width: 112px;
-  max-width: 288px;
-  font-weight: 500;
+  padding: 0 16px;
 }
 
 .emotion-2:hover:active {
@@ -293,51 +380,99 @@ exports[`Button Snapshots renders as expected 1`] = `
   box-shadow: none;
 }
 
-.emotion-2:focus {
-  background-color: #f0f1f2;
-  border-color: #0875e1;
+.emotion-2 span .wd-icon-fill,
+.emotion-2 span .wd-icon-accent {
+  -webkit-transition: fill 120ms ease-in;
+  transition: fill 120ms ease-in;
+  fill: #7b858f;
+}
+
+.emotion-2 .button-label-data {
   color: #333333;
 }
 
+.emotion-2:focus {
+  background-color: #f0f1f2;
+  border-color: transparent;
+  color: #333333;
+}
+
+.emotion-2:focus span .wd-icon-fill,
+.emotion-2:focus span .wd-icon-accent {
+  fill: #7b858f;
+}
+
 .emotion-2:hover:focus {
-  background-color: #ced3d9;
+  background-color: #dfe2e6;
 }
 
 .emotion-2:active,
 .emotion-2:focus:active,
 .emotion-2:hover:active {
-  background-color: #f0f1f2;
-  border-color: #ced3d9;
+  background-color: #ced3d9;
+  border-color: transparent;
   color: #333333;
 }
 
+.emotion-2:active span .wd-icon-fill,
+.emotion-2:focus:active span .wd-icon-fill,
+.emotion-2:hover:active span .wd-icon-fill,
+.emotion-2:active span .wd-icon-accent,
+.emotion-2:focus:active span .wd-icon-accent,
+.emotion-2:hover:active span .wd-icon-accent {
+  fill: #333d47;
+}
+
 .emotion-2:hover {
-  background-color: #ced3d9;
-  border-color: #a1aab3;
+  background-color: #dfe2e6;
+  border-color: transparent;
   color: #333333;
+}
+
+.emotion-2:hover span .wd-icon-fill,
+.emotion-2:hover span .wd-icon-accent {
+  fill: #333d47;
 }
 
 .emotion-2:disabled,
 .emotion-2:active:disabled,
 .emotion-2:focus:disabled,
 .emotion-2:hover:disabled {
-  background-color: #ffffff;
-  border-color: #ced3d9;
-  color: #ced3d9;
+  background-color: #f6f7f8;
+  border-color: transparent;
+  color: #a1aab3;
+}
+
+.emotion-2:disabled span .wd-icon-fill,
+.emotion-2:active:disabled span .wd-icon-fill,
+.emotion-2:focus:disabled span .wd-icon-fill,
+.emotion-2:hover:disabled span .wd-icon-fill,
+.emotion-2:disabled span .wd-icon-accent,
+.emotion-2:active:disabled span .wd-icon-accent,
+.emotion-2:focus:disabled span .wd-icon-accent,
+.emotion-2:hover:disabled span .wd-icon-accent {
+  fill: #b9c0c7;
+}
+
+.emotion-2:disabled .button-label-data,
+.emotion-2:active:disabled .button-label-data,
+.emotion-2:focus:disabled .button-label-data,
+.emotion-2:hover:disabled .button-label-data {
+  color: #a1aab3;
 }
 
 .emotion-2:not([disabled]):focus {
-  border-color: #0875e1;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-2:not([disabled]):active {
-  border-color: #ced3d9;
-  -webkit-animation: animation-os2b9x 100ms;
-  animation: animation-os2b9x 100ms;
-  box-shadow: 0 0 0 0px #ffffff,0 0 0 2px #0875e1;
+  border-color: transparent;
+  -webkit-animation: animation-1h1pob6 100ms;
+  animation: animation-1h1pob6 100ms;
+  box-shadow: 0 0 0 2px #ffffff,0 0 0 4px #0875e1;
 }
 
 .emotion-0 {
@@ -349,11 +484,8 @@ exports[`Button Snapshots renders as expected 1`] = `
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
-  padding: 0 12px;
-  font-size: inherit;
-  font-weight: inherit;
-  padding: 0px;
+  font-size: 14px;
+  padding: 0 8px;
 }
 
 .emotion-0:hover:active {
