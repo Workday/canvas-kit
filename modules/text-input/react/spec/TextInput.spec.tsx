@@ -7,7 +7,7 @@ import FormField from '@workday/canvas-kit-react-form-field';
 
 describe('TextInput', () => {
   test('TextInput should spread extra props', () => {
-    const component = mount(<TextInput data-propspread="test" />);
+    const component = mount(<TextInput data-propspread="test" onChange={jest.fn()} />);
     const input = component
       .find('input') // TODO: Standardize on prop spread location (see #150)
       .getDOMNode();
@@ -36,7 +36,13 @@ describe('Text Input Accessibility', () => {
     const html = ReactDOMServer.renderToString(
       <>
         <label id="123">Label</label>
-        <TextInput placeholder="Placeholder" value={'Hello'} aria-labelledby="123" />;
+        <TextInput
+          placeholder="Placeholder"
+          value={'Hello'}
+          aria-labelledby="123"
+          onChange={jest.fn()}
+        />
+        ;
       </>
     );
     expect(await axe(html)).toHaveNoViolations();
