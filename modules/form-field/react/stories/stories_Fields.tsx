@@ -58,16 +58,6 @@ storiesOf('Form Field/Test', module)
       </FormField>
       <FormField
         label="Label"
-        inputId="my-switch-error"
-        error={FormField.ErrorType.Error}
-        hintText={hintText}
-        hintId={hintId}
-        labelPosition={FormField.LabelPosition.Left}
-      >
-        {controlComponent(<Switch />)}
-      </FormField>
-      <FormField
-        label="Label"
         inputId="textarea-placeholder"
         labelPosition={FormField.LabelPosition.Left}
       >
@@ -105,13 +95,7 @@ storiesOf('Form Field/Test', module)
       <FormField label="Label" inputId="my-checkbox-field">
         <Checkbox id="7" label="Checkbox option" />
       </FormField>
-      <FormField
-        label="Label"
-        inputId="my-checkbox-field"
-        labelPosition={FormField.LabelPosition.Left}
-      >
-        {controlComponent(<Switch />)}
-      </FormField>
+
       <FormField
         label="Label"
         inputId="my-switch-error"

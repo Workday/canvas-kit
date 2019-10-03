@@ -33,13 +33,13 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
   if (labelPosition === FormFieldLabelPosition.Left) {
     return {
       display: 'flex',
-      marginBottom: spacing.s,
+      marginBottom: spacing.m,
     };
   }
 
   return {
     display: 'block',
-    marginBottom: spacing.s,
+    marginBottom: spacing.m,
   };
 });
 
