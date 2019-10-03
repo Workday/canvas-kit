@@ -65,7 +65,7 @@ export default class Layout extends React.Component<LayoutProps> {
       return;
     }
 
-    if (typeof child.type === typeof Column) {
+    if (child.type === Column) {
       const childProps = child.props;
 
       if (childProps.spacing || childProps.spacing === 0) {
