@@ -69,7 +69,7 @@ exports[`Action Bar Snapshots renders a fixed action bar with one button 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -287,7 +287,7 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -431,7 +431,7 @@ exports[`Action Bar Snapshots renders a fixed action bar with two buttons 1`] = 
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -712,7 +712,7 @@ exports[`Action Bar Snapshots renders an action bar with one button 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -926,7 +926,7 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
@@ -1070,7 +1070,7 @@ exports[`Action Bar Snapshots renders an action bar with two buttons 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 999px;
   border: 2px solid transparent;
   box-shadow: none;
