@@ -57,20 +57,20 @@ describe('Checkbox', () => {
 describe('Checkbox Accessibility', () => {
   test('Checkbox should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(
-      <Checkbox id={'123'} label={'Label'} onChange={cb} />
+      <Checkbox id={'123'} label={'Label'} onChange={jest.fn()} />
     );
     expect(await axe(html)).toHaveNoViolations();
   });
 
   test('Checkbox without a defined id should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(<Checkbox label={'Label'} onChange={cb} />);
+    const html = ReactDOMServer.renderToString(<Checkbox label={'Label'} onChange={jest.fn()} />);
     expect(await axe(html)).toHaveNoViolations();
   });
 
   test('Checkbox wrapped in a FormField should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(
       <FormField label="My Field" inputId="my-checkbox-field">
-        <Checkbox disabled={false} checked={true} id="my-checkbox-field" onChange={cb} />;
+        <Checkbox disabled={false} checked={true} id="my-checkbox-field" onChange={jest.fn()} />;
       </FormField>
     );
     expect(await axe(html)).toHaveNoViolations();

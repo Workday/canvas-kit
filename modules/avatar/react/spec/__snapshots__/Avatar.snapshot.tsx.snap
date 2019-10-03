@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Avatar Snapshots renders a large Avatar 1`] = `
-.emotion-2 {
+.emotion-3 {
   background: #f0f1f2;
   display: -webkit-box;
   display: -webkit-flex;
@@ -24,7 +24,7 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
   width: 64px;
 }
 
-.emotion-2 img {
+.emotion-3 img {
   width: 100%;
   height: 100%;
 }
@@ -96,10 +96,10 @@ exports[`Avatar Snapshots renders a large Avatar 1`] = `
 
 <div
   aria-label="Avatar"
-  className="emotion-2 emotion-3"
+  className="emotion-3 emotion-4"
 >
   <div
-    className="emotion-1"
+    className="emotion-1 emotion-2"
   >
     <span
       className="emotion-0"
@@ -154,7 +154,7 @@ exports[`Avatar Snapshots renders a large avatar with a photo 1`] = `
 `;
 
 exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
-.emotion-2 {
+.emotion-3 {
   background: #f0f1f2;
   display: -webkit-box;
   display: -webkit-flex;
@@ -177,7 +177,7 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
   width: 64px;
 }
 
-.emotion-2 img {
+.emotion-3 img {
   width: 100%;
   height: 100%;
 }
@@ -249,10 +249,10 @@ exports[`Avatar Snapshots renders a large, dark Avatar 1`] = `
 
 <div
   aria-label="Avatar"
-  className="emotion-2 emotion-3"
+  className="emotion-3 emotion-4"
 >
   <div
-    className="emotion-1"
+    className="emotion-1 emotion-2"
   >
     <span
       className="emotion-0"
@@ -347,7 +347,7 @@ exports[`Avatar Snapshots renders an avatar with an aria label and an alt text 1
 `;
 
 exports[`Avatar Snapshots renders as expected 1`] = `
-.emotion-2 {
+.emotion-3 {
   background: #f0f1f2;
   display: -webkit-box;
   display: -webkit-flex;
@@ -370,7 +370,7 @@ exports[`Avatar Snapshots renders as expected 1`] = `
   width: 32px;
 }
 
-.emotion-2 img {
+.emotion-3 img {
   width: 100%;
   height: 100%;
 }
@@ -442,10 +442,10 @@ exports[`Avatar Snapshots renders as expected 1`] = `
 
 <div
   aria-label="Avatar"
-  className="emotion-2 emotion-3"
+  className="emotion-3 emotion-4"
 >
   <div
-    className="emotion-1"
+    className="emotion-1 emotion-2"
   >
     <span
       className="emotion-0"
