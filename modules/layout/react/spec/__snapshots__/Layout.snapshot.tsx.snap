@@ -26,6 +26,7 @@ exports[`Layout Snapshots renders a layout and column with no gutter and no spac
 
 <div
   className="emotion-2 emotion-3"
+  spacing={12}
 >
   <div
     className="emotion-0 emotion-1"
@@ -47,7 +48,7 @@ exports[`Layout Snapshots renders a layout and columns with 12 column grid width
 
 .emotion-0 {
   padding: 0 12px;
-  width: 33.33333333333333%;
+  width: calc(33.33333333333333% - 16px);
 }
 
 .emotion-0:first-child {
@@ -60,7 +61,7 @@ exports[`Layout Snapshots renders a layout and columns with 12 column grid width
 
 .emotion-2 {
   padding: 0 12px;
-  width: 66.66666666666666%;
+  width: calc(66.66666666666666% - 8px);
 }
 
 .emotion-2:first-child {
@@ -73,12 +74,15 @@ exports[`Layout Snapshots renders a layout and columns with 12 column grid width
 
 <div
   className="emotion-4 emotion-5"
+  spacing={12}
 >
   <div
     className="emotion-0 emotion-1"
+    spacing={12}
   />
   <div
     className="emotion-2 emotion-1"
+    spacing={12}
   />
 </div>
 `;
@@ -125,6 +129,7 @@ exports[`Layout Snapshots renders a layout and columns with custom spacing 1`] =
 
 <div
   className="emotion-6 emotion-7"
+  spacing={60}
 >
   <div
     className="emotion-0 emotion-1"
@@ -182,13 +187,16 @@ exports[`Layout Snapshots renders a layout and columns with fixed width 1`] = `
 
 <div
   className="emotion-4 emotion-5"
+  spacing={12}
 >
   <div
     className="emotion-0 emotion-1"
+    spacing={12}
     width="400px"
   />
   <div
     className="emotion-2 emotion-1"
+    spacing={12}
   />
 </div>
 `;
@@ -206,6 +214,7 @@ exports[`Layout Snapshots renders a layout with an empty div 1`] = `
 
 <div
   className="emotion-0 emotion-1"
+  spacing={12}
 />
 `;
 
@@ -239,9 +248,11 @@ exports[`Layout Snapshots renders a layout with capWidth 1`] = `
 
 <div
   className="emotion-2 emotion-3"
+  spacing={12}
 >
   <div
     className="emotion-0 emotion-1"
+    spacing={12}
   />
 </div>
 `;
@@ -274,9 +285,11 @@ exports[`Layout Snapshots renders a layout with conditional columns 1`] = `
 
 <div
   className="emotion-2 emotion-3"
+  spacing={12}
 >
   <div
     className="emotion-0 emotion-1"
+    spacing={12}
   />
 </div>
 `;
@@ -309,15 +322,19 @@ exports[`Layout Snapshots renders a layout with fluid columns 1`] = `
 
 <div
   className="emotion-6 emotion-7"
+  spacing={12}
 >
   <div
     className="emotion-0 emotion-1"
+    spacing={12}
   />
   <div
     className="emotion-0 emotion-1"
+    spacing={12}
   />
   <div
     className="emotion-0 emotion-1"
+    spacing={12}
   />
 </div>
 `;
@@ -350,9 +367,11 @@ exports[`Layout Snapshots renders layout and column 1`] = `
 
 <div
   className="emotion-2 emotion-3"
+  spacing={12}
 >
   <div
     className="emotion-0 emotion-1"
+    spacing={12}
   />
 </div>
 `;
