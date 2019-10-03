@@ -51,7 +51,7 @@ describe('Radio Input', () => {
   });
 
   test('Radio input should spread extra props', () => {
-    const component = mount(<Radio data-propspread="test" />);
+    const component = mount(<Radio data-propspread="test" onChange={jest.fn()} />);
     const input = component
       .find('input') // TODO: Standardize on prop spread location (see #150)
       .getDOMNode();
@@ -86,19 +86,21 @@ describe('Radio Input', () => {
 
 describe('Radio Accessibility', () => {
   test('Radio should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(<Radio id={'123'} label={'Label'} />);
+    const html = ReactDOMServer.renderToString(
+      <Radio id={'123'} label={'Label'} onChange={jest.fn()} />
+    );
     expect(await axe(html)).toHaveNoViolations();
   });
 
   test('Radio without a defined id should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(<Radio label={'Label'} />);
+    const html = ReactDOMServer.renderToString(<Radio label={'Label'} onChange={jest.fn()} />);
     expect(await axe(html)).toHaveNoViolations();
   });
 
   test('Radio using FormField should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(
       <FormField label="My Field" inputId="my-radio-field">
-        <Radio disabled={false} checked={true} id="my-radio-field" />
+        <Radio disabled={false} checked={true} id="my-radio-field" onChange={jest.fn()} />
       </FormField>
     );
     expect(await axe(html)).toHaveNoViolations();
