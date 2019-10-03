@@ -4,28 +4,28 @@ import * as renderer from 'react-test-renderer';
 
 describe('Switch Snapshots', () => {
   test('renders as expected', () => {
-    const component = renderer.create(<Switch checked={false} onChange={jest.fn()} />);
+    const component = renderer.create(<Switch id={'123'} checked={false} onChange={jest.fn()} />);
     expect(component).toMatchSnapshot();
   });
   test('renders switch on', () => {
-    const component = renderer.create(<Switch checked={true} onChange={jest.fn()} />);
+    const component = renderer.create(<Switch id={'123'} checked={true} onChange={jest.fn()} />);
     expect(component).toMatchSnapshot();
   });
   test('renders switch disabled unchecked', () => {
     const component = renderer.create(
-      <Switch disabled={true} checked={false} onChange={jest.fn()} />
+      <Switch id={'123'} disabled={true} checked={false} onChange={jest.fn()} />
     );
     expect(component).toMatchSnapshot();
   });
   test('renders switch disabled checked', () => {
     const component = renderer.create(
-      <Switch disabled={true} checked={true} onChange={jest.fn()} />
+      <Switch id={'123'} disabled={true} checked={true} onChange={jest.fn()} />
     );
     expect(component).toMatchSnapshot();
   });
   test('renders switch with name and value', () => {
     const component = renderer.create(
-      <Switch value="user" disabled={false} checked={true} onChange={jest.fn()} />
+      <Switch id={'123'} value="user" disabled={false} checked={true} onChange={jest.fn()} />
     );
     expect(component).toMatchSnapshot();
   });
