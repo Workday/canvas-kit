@@ -71,11 +71,11 @@
     position: absolute;
     opacity: 0;
 
-    &:hover+label::after {
+    &:hover + label::after {
       box-shadow: 0 0 0 7px $wdc-color-soap-200;
     }
 
-    &+label {
+    & + label {
       font-size: 14px;
       line-height: $wdc-spacing-s + $wdc-spacing-xxxs;
       font-weight: 400;
@@ -120,18 +120,18 @@
       }
     }
 
-    &:hover+label::before {
+    &:hover + label::before {
       border-color: $wdc-color-licorice-500;
     }
 
-    &:checked+label {
+    &:checked + label {
       &::before {
         border-color: $wdc-color-blueberry-400;
         background-color: $wdc-color-blueberry-400;
       }
     }
 
-    &:disabled+label {
+    &:disabled + label {
       color: $wdc-color-licorice-100;
       cursor: default;
 
@@ -146,12 +146,12 @@
       }
     }
 
-    &:focus+label::before {
+    &:focus + label::before {
       border-color: $wdc-color-blueberry-400;
       box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400;
     }
 
-    &:disabled:checked+label::before {
+    &:disabled:checked + label::before {
       border-color: $wdc-color-blueberry-200;
       background-color: $wdc-color-blueberry-200;
       background-size: $wdc-spacing-m;
@@ -163,7 +163,7 @@
     }
 
     [data-whatinput='keyboard'] & {
-      &:checked:focus+label::before {
+      &:checked:focus + label::before {
         box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-400,
           0 0 0 5px transparent;
       }
@@ -172,7 +172,7 @@
     [data-whatinput='initial'] &,
     [data-whatinput='mouse'] &,
     [data-whatinput='touch'] & {
-      &:checked:focus+label::before {
+      &:checked:focus + label::before {
         box-shadow: none;
       }
     }
