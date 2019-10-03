@@ -115,7 +115,7 @@
 
   .wdc-form-label {
     height: 100%;
-    max-height: 40px;
+    max-height: $wdc-spacing-xl;
     min-width: $wdc-form-inline-label-width;
     width: $wdc-form-inline-label-width;
     margin-right: $wdc-spacing-l;
