@@ -6,16 +6,18 @@ exports[`Radio Snapshots renders as expected 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 32px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-6::after {
@@ -178,10 +180,10 @@ exports[`Radio Snapshots renders as expected 2`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 32px;
   position: relative;
 }
@@ -239,6 +241,8 @@ exports[`Radio Snapshots renders as expected 2`] = `
 
 .emotion-6 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-6::after {
@@ -345,16 +349,18 @@ exports[`Radio Snapshots renders as expected 3`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 32px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-6::after {
@@ -512,16 +518,18 @@ exports[`Radio Snapshots renders as expected 4`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 32px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-6::after {
@@ -684,16 +692,18 @@ exports[`Radio Snapshots renders radio group with alert as expected 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 32px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-6::after {
@@ -1009,16 +1019,18 @@ exports[`Radio Snapshots renders radio group with error as expected 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 32px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-6::after {

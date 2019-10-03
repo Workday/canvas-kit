@@ -6,16 +6,18 @@ exports[`Checkbox Snapshots alert renders as expected 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 24px;
   position: relative;
 }
 
 .emotion-7 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-7::after {
@@ -282,16 +284,18 @@ exports[`Checkbox Snapshots checked alert renders as expected 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 24px;
   position: relative;
 }
 
 .emotion-7 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-7::after {
@@ -558,16 +562,18 @@ exports[`Checkbox Snapshots checked error renders as expected 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 24px;
   position: relative;
 }
 
 .emotion-7 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-7::after {
@@ -834,16 +840,18 @@ exports[`Checkbox Snapshots error renders as expected 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 24px;
   position: relative;
 }
 
 .emotion-7 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-7::after {
@@ -1110,16 +1118,18 @@ exports[`Checkbox Snapshots renders as expected 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 24px;
   position: relative;
 }
 
 .emotion-7 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-7::after {
@@ -1345,10 +1355,10 @@ exports[`Checkbox Snapshots renders as expected 2`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 24px;
   position: relative;
 }
@@ -1518,6 +1528,8 @@ exports[`Checkbox Snapshots renders as expected 2`] = `
 
 .emotion-7 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-7::after {
@@ -1576,10 +1588,10 @@ exports[`Checkbox Snapshots renders as expected 3`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 24px;
   position: relative;
 }
@@ -1724,6 +1736,8 @@ exports[`Checkbox Snapshots renders as expected 3`] = `
 
 .emotion-7 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-7::after {
@@ -1823,16 +1837,18 @@ exports[`Checkbox Snapshots renders as expected 4`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
   min-height: 24px;
   position: relative;
 }
 
 .emotion-7 {
   height: 18px;
+  width: 18px;
+  margin-top: 1px;
 }
 
 .emotion-7::after {
