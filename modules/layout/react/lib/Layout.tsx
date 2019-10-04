@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import {GenericStyle} from '@workday/canvas-kit-react-common';
 import Column, {ColumnProps} from './Column';
-import canvas from '@workday/canvas-kit-react-core';
+import canvas, {spacingNumbers} from '@workday/canvas-kit-react-core';
 
 export interface LayoutProps {
   /**
@@ -53,14 +53,10 @@ const LayoutContainer = styled('div')<LayoutProps>(
   }
 );
 
-export function stripUnit(value: string): number {
-  return parseInt(`${value}`.replace('px', ''), 10);
-}
-
 export default class Layout extends React.Component<LayoutProps> {
   static defaultProps = {
     gutter: canvas.spacing.xs,
-    spacing: stripUnit(canvas.spacing.xs),
+    spacing: spacingNumbers.xs,
   };
 
   public static Column = Column;
