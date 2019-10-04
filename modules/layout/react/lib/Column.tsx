@@ -45,7 +45,7 @@ const ColumnContainer = styled('div')<ColumnProps>(
       if (columns === 12) {
         return {width: `100%`};
       } else {
-        const compensation = ((12 - columns) / 12) * (spacing! * 2);
+        const compensation = ((12 - columns) / 12) * ((spacing || 0) * 2);
         return {width: `calc(${(columns / 12) * 100}% - ${compensation}px)`};
       }
     }
