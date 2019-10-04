@@ -63,9 +63,11 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       this.setFirstCharacters();
       this.setInitialSelectedItem();
     }
-    if (this.props.isOpen && !prevProps.isOpen && this.menuRef.current) {
-      this.menuRef.current.focus();
+    if (this.props.isOpen && !prevProps.isOpen) {
       this.setInitialSelectedItem();
+    }
+    if (this.props.isOpen && this.menuRef.current) {
+      this.menuRef.current.focus();
     }
   }
 
@@ -179,6 +181,12 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           const skipTo = event.key === 'Home' ? firstItem : lastItem;
           isShortcut = true;
           nextSelectedIndex = skipTo;
+          break;
+
+        case 'Tab':
+          if (this.props.onClose) {
+            this.props.onClose()
+          }
           break;
 
         case 'Escape':
