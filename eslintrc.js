@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
+    'jest/globals': true,
   },
   extends: [
     //   'eslint:recommended',
@@ -22,7 +23,19 @@ module.exports = {
     project: ['tsconfig.json', 'cypress/tsconfig.json'],
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', '@typescript-eslint/tslint', 'react', 'prettier', 'react-hooks'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  plugins: [
+    '@typescript-eslint',
+    '@typescript-eslint/tslint',
+    'jest',
+    'react',
+    'prettier',
+    'react-hooks',
+  ],
   rules: {
     '@typescript-eslint/class-name-casing': 'error',
     '@typescript-eslint/indent': 'off',
