@@ -1,0 +1,17 @@
+align does not yet have an ESLint equivalent.
+comment-format does not yet have an ESLint equivalent.
+deprecation does not yet have an ESLint equivalent.
+jsdoc-format does not yet have an ESLint equivalent.
+jsx-boolean-value does not yet have an ESLint equivalent.
+jsx-key does not yet have an ESLint equivalent.
+jsx-no-bind does not yet have an ESLint equivalent.
+jsx-no-string-ref does not yet have an ESLint equivalent.
+jsx-self-close does not yet have an ESLint equivalent.
+no-duplicate-imports does not yet have an ESLint equivalent.
+no-duplicate-variable does not yet have an ESLint equivalent.
+no-shadowed-variable does not yet have an ESLint equivalent.
+no-unused-expression does not yet have an ESLint equivalent.
+one-line does not yet have an ESLint equivalent.
+triple-equals does not yet have an ESLint equivalent.
+typedef does not yet have an ESLint equivalent.
+variable-name does not yet have an ESLint equivalent.
