@@ -31,7 +31,7 @@ const rippleRadius = (spacing.l - radioWidth) / 2;
 
 const RadioContainer = styled('div')({
   display: 'flex',
-  alignItems: 'flex-start',
+  alignItems: 'center',
   minHeight: radioContainerHeight,
   position: 'relative',
 });
@@ -45,7 +45,8 @@ const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>(
   {
     height: radioHeight,
     width: radioWidth,
-    marginTop: '1px',
+    marginTop: '7px',
+    alignSelf: 'flex-start',
     '&::after': {
       borderRadius: borderRadius.circle,
       boxShadow: '0 0 0 0 ' + colors.soap200,

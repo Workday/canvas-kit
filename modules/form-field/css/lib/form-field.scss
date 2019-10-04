@@ -51,7 +51,6 @@
   .wdc-form-group-fields {
     display: inline-block;
     flex-grow: 1;
-    margin-top: 0;
 
     .wdc-form-field {
       min-height: $wdc-spacing-l;
@@ -69,6 +68,7 @@
 }
 
 .wdc-form-group {
+  // This reset default styling of `fieldset`
   padding: 0;
   margin: 0;
   border: 0;
