@@ -135,12 +135,8 @@
   },
   "lint-staged": {
     "linters": {
-      "modules/**/*.{ts,tsx}": [
-        "eslint -c ./eslintrc.js --fix",
-        "git add"
-      ],
-      "cypress/**/*.ts": [
-        "tslint --project cypress/tsconfig.json --fix",
+      "*.{ts,tsx}": [
+        "yarn format:lint",
         "git add"
       ],
       "*.{js,jsx,json,md}": [
