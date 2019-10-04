@@ -121,7 +121,7 @@
     "lint": "node utils/check-lockfile-links.js && eslint -c ./eslintrc.js .",
     "format:prettier": "prettier --config=./.prettierrc --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format:lint": "yarn lint --fix",
-    "format": "yarn format:prettier && yarn format:lint",
+    "format": "yarn format:lint",
     "test": "TZ=UTC jest",
     "updateSnaps": "TZ=UTC jest -u",
     "bump": "lerna version",
@@ -136,17 +136,14 @@
   "lint-staged": {
     "linters": {
       "modules/**/*.{ts,tsx}": [
-        "prettier --config=./.prettierrc --ignore-path=./.prettierignore --write",
         "eslint -c ./eslintrc.js --fix",
         "git add"
       ],
       "cypress/**/*.ts": [
-        "prettier --config=./.prettierrc --ignore-path=./.prettierignore --write",
         "tslint --project cypress/tsconfig.json --fix",
         "git add"
       ],
       "*.{js,jsx,json,md}": [
-        "prettier --config=./.prettierrc --ignore-path=./.prettierignore --write",
         "git add"
       ],
       "yarn.lock": [

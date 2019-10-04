@@ -4,16 +4,16 @@ module.exports = {
     es6: true,
     node: true,
   },
-  // extends: [
-  //   'eslint:recommended',
-  //   'plugin:import/recommended',
-  //   'plugin:react/recommended',
-  //   'plugin:@typescript-eslint/eslint-recommended',
-  //   'plugin:@typescript-eslint/recommended',
-  //   'prettier',
-  //   'prettier/react',
-  //   'prettier/@typescript-eslint',
-  // ],
+  extends: [
+    //   'eslint:recommended',
+    //   'plugin:import/recommended',
+    //   'plugin:react/recommended',
+    //   'plugin:@typescript-eslint/eslint-recommended',
+    //   'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'prettier/react',
+    'prettier/@typescript-eslint',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
