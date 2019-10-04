@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  unit_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Install Packages
+      run: yarn install --production=false
+    - name: Linting
+      run: yarn lint
+    - name: Build
+      run: yarn build
+    - name: Unit tests
+      run: yarn test
+
+  integration_test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Install Packages
+      run: yarn install --production=false
+    - name: storybook
+      run: yarn start & npx wait-on http://localhost:9001
+    - name: Integration tests
+      run: yarn cypress run --record --key ${{ secrets.CYPRESS_KEY }}
+      env:
+        # Cypress gathers info about a commit and PR to show in the dashboard. Github Actions isn't officially supported as a CI provider, so we'll help it along
+        TRAVIS: 1 # Pretend to be Travis. More info: https://github.com/cypress-io/cypress/blob/develop/packages/server/lib/util/ci_provider.js
+        TRAVIS_PULL_REQUEST_BRANCH: ${{ github.head_ref }} # Tell Cypress what the PR branch name is
