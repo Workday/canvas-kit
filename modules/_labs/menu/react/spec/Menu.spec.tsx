@@ -401,7 +401,7 @@ describe('Menu Keyboard Shortcuts', () => {
       </Menu>
     );
     const item = component.find('ul');
-    const tab = { keyCode: 9, key: 'Tab' };
+    const tab = {keyCode: 9, key: 'Tab'};
     item.simulate('keydown', tab);
     expect(cb.mock.calls.length).toBe(1);
     component.unmount();
@@ -414,7 +414,7 @@ describe('Menu Keyboard Shortcuts', () => {
       </Menu>
     );
     const item = component.find('ul');
-    const tab = { keyCode: 9, key: 'Tab' };
+    const tab = {keyCode: 9, key: 'Tab'};
     item.simulate('keydown', tab);
     expect(cb.mock.calls.length).toBe(0);
     component.unmount();

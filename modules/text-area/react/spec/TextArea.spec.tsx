@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import {mount} from 'enzyme';
 import ReactDOMServer from 'react-dom/server';
 import TextArea from '../lib/TextArea';
-import { axe } from 'jest-axe';
+import {axe} from 'jest-axe';
 import FormField from '@workday/canvas-kit-react-form-field';
 
 describe('TextArea', () => {

@@ -185,7 +185,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
 
         case 'Tab':
           if (this.props.onClose) {
-            this.props.onClose()
+            this.props.onClose();
           }
           break;
 

@@ -25,7 +25,7 @@ const FocusableButton = React.forwardRef(
 );
 
 interface StoryMenuItemProps extends Omit<MenuItemProps, 'role'> {
-  text: React.ReactNode,
+  text: React.ReactNode;
 }
 
 const createMenuItems = (hasIcons?: boolean): StoryMenuItemProps[] => {
