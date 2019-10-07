@@ -10,14 +10,14 @@ exports[`Radio Snapshots renders as expected 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 32px;
+  min-height: 24px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
   width: 18px;
-  margin-top: 7px;
+  margin-top: 3px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
@@ -156,6 +156,7 @@ exports[`Radio Snapshots renders as expected 1`] = `
     disabled={false}
   >
     <input
+      aria-checked={true}
       checked={true}
       className="emotion-0 emotion-1"
       disabled={false}
@@ -187,7 +188,7 @@ exports[`Radio Snapshots renders as expected 2`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 32px;
+  min-height: 24px;
   position: relative;
 }
 
@@ -245,7 +246,7 @@ exports[`Radio Snapshots renders as expected 2`] = `
 .emotion-6 {
   height: 18px;
   width: 18px;
-  margin-top: 7px;
+  margin-top: 3px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
@@ -328,6 +329,7 @@ exports[`Radio Snapshots renders as expected 2`] = `
     disabled={true}
   >
     <input
+      aria-checked={true}
       checked={true}
       className="emotion-0 emotion-1"
       disabled={true}
@@ -359,14 +361,14 @@ exports[`Radio Snapshots renders as expected 3`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 32px;
+  min-height: 24px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
   width: 18px;
-  margin-top: 7px;
+  margin-top: 3px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
@@ -500,6 +502,7 @@ exports[`Radio Snapshots renders as expected 3`] = `
     disabled={true}
   >
     <input
+      aria-checked={false}
       checked={false}
       className="emotion-0 emotion-1"
       disabled={true}
@@ -531,14 +534,14 @@ exports[`Radio Snapshots renders as expected 4`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 32px;
+  min-height: 24px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
   width: 18px;
-  margin-top: 7px;
+  margin-top: 3px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
@@ -677,6 +680,7 @@ exports[`Radio Snapshots renders as expected 4`] = `
     disabled={false}
   >
     <input
+      aria-checked={false}
       checked={false}
       className="emotion-0 emotion-1"
       disabled={false}
@@ -708,14 +712,14 @@ exports[`Radio Snapshots renders radio group with alert as expected 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 32px;
+  min-height: 24px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
   width: 18px;
-  margin-top: 7px;
+  margin-top: 3px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
@@ -966,6 +970,18 @@ exports[`Radio Snapshots renders radio group with alert as expected 1`] = `
   margin: -4px -12px;
 }
 
+.emotion-20 > div {
+  margin: 8px 0px;
+}
+
+.emotion-20 > div:first-child {
+  margin-top: 4px;
+}
+
+.emotion-20 > div:last-child {
+  margin-bottom: 4px;
+}
+
 <div
   className="emotion-20 emotion-21"
 >
@@ -977,6 +993,7 @@ exports[`Radio Snapshots renders radio group with alert as expected 1`] = `
       disabled={false}
     >
       <input
+        aria-checked={true}
         checked={true}
         className="emotion-0 emotion-1"
         disabled={false}
@@ -1005,6 +1022,7 @@ exports[`Radio Snapshots renders radio group with alert as expected 1`] = `
       disabled={false}
     >
       <input
+        aria-checked={false}
         checked={false}
         className="emotion-10 emotion-1"
         disabled={false}
@@ -1038,14 +1056,14 @@ exports[`Radio Snapshots renders radio group with error as expected 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 32px;
+  min-height: 24px;
   position: relative;
 }
 
 .emotion-6 {
   height: 18px;
   width: 18px;
-  margin-top: 7px;
+  margin-top: 3px;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
@@ -1296,6 +1314,18 @@ exports[`Radio Snapshots renders radio group with error as expected 1`] = `
   margin: -4px -12px;
 }
 
+.emotion-20 > div {
+  margin: 8px 0px;
+}
+
+.emotion-20 > div:first-child {
+  margin-top: 4px;
+}
+
+.emotion-20 > div:last-child {
+  margin-bottom: 4px;
+}
+
 <div
   className="emotion-20 emotion-21"
 >
@@ -1307,6 +1337,7 @@ exports[`Radio Snapshots renders radio group with error as expected 1`] = `
       disabled={false}
     >
       <input
+        aria-checked={true}
         checked={true}
         className="emotion-0 emotion-1"
         disabled={false}
@@ -1335,6 +1366,7 @@ exports[`Radio Snapshots renders radio group with error as expected 1`] = `
       disabled={false}
     >
       <input
+        aria-checked={false}
         checked={false}
         className="emotion-10 emotion-1"
         disabled={false}
