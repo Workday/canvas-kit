@@ -52,7 +52,7 @@ process. If you have any questions, please reach out!
 #### Automation on Commit
 
 Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your staged code through
-[Prettier](https://prettier.io) and [tslint](https://palantir.github.io/tslint/).
+[Prettier](https://prettier.io) and [eslint](https://eslint.org).
 
 #### Storybook
 
@@ -207,10 +207,10 @@ This will add files to your workspace that you'll need to commit.
 
 Refer to the [API & Pattern Guidelines](API_PATTERN_GUIDELINES.md).
 
-Rules are enforced using [TSLint](https://palantir.github.io/tslint/) and code formatting is
-provided through [Prettier](https://prettier.io).
+Rules are enforced using [ESLint](https://eslint.org) and code formatting is provided through
+[Prettier](https://prettier.io).
 
-To lint using TSLint, use `yarn lint`. To format and lint your code (careful - this can rewrite
+To lint using ESLint, use `yarn lint`. To format and lint your code (careful - this can rewrite
 files), use `yarn format`.
 
 Code formatting will occur automatically before `git commit` for files staged using `git add`.
@@ -226,13 +226,13 @@ while we iterate on it. Visit the link above for more info.
 
 ### Editors
 
-Install the Prettier and TSLint plugins for your respective editors for quicker and easier
+Install the Prettier and ESLint plugins for your respective editors for quicker and easier
 formatting.
 
 #### Visual Studio Code
 
 Install [prettier-vscode](https://github.com/prettier/prettier-vscode) and
-[vscode-tslint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)
+[vscode-eslint](https://github.com/microsoft/vscode-eslint)
 
 Consider adding the following options:
 
@@ -241,7 +241,7 @@ Consider adding the following options:
 #### Atom
 
 Install [prettier-atom](https://github.com/prettier/prettier-atom) and
-[linter-tslint](https://github.com/AtomLinter/linter-tslint)
+[linter-eslint](https://atom.io/packages/linter-eslint)
 
 #### Emacs
 
@@ -251,5 +251,5 @@ Install [prettier-emacs](https://github.com/prettier/prettier-emacs) and
 #### Other Editors
 
 Check [Prettier](https://prettier.io/docs/en/editors.html) and
-[TSLint](https://palantir.github.io/tslint/usage/third-party-tools/) documentation for additional
-editor plugins.
+[ESLint](https://eslint.org/docs/user-guide/integrations) documentation for additional editor
+plugins.
