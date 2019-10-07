@@ -35,6 +35,7 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // Compensate for border
+    margin: 0, // Fix Safari
     '&::webkit-resizer': {
       display: 'none',
     },

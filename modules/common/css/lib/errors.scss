@@ -259,7 +259,6 @@
     margin: -4px -12px;
     padding: 4px 12px;
     text-align: left;
-    margin-top: -12px;
   }
 }
 
@@ -304,6 +303,7 @@
     &.wdc-form-field-alert,
     &.wdc-form-field-error {
       margin-top: -4px;
+      margin-left: $wdc-form-inline-label-width + 20px;
       margin-bottom: $wdc-spacing-m;
     }
 
