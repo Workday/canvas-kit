@@ -90,9 +90,6 @@ module.exports = {
     '@typescript-eslint/tslint/config': [
       'error',
       {
-        // rulesDirectory: [
-        //   '/Users/alex.nicholls/code/design/canvas-kit/node_modules/tslint-react/rules',
-        // ],
         rules: {
           // align: [true, 'parameters', 'arguments', 'statements'],
           'comment-format': [true, 'check-space'],
