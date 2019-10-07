@@ -1,4 +1,4 @@
-import {CSSObject} from 'create-emotion';
+import {CSSObject} from '@emotion/core';
 
 /**
  * A utility to hide the default canvas style focus ring when using mouse input.

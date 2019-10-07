@@ -8,7 +8,7 @@ import {colors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {CSSObject} from 'create-emotion';
+import {CSSObject} from '@emotion/core';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**

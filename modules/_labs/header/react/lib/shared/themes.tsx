@@ -1,11 +1,12 @@
-import {colors, iconColors, depth, CSSProperties} from '@workday/canvas-kit-react-core';
+import {CSSObject} from '@emotion/core';
+import {colors, iconColors, depth} from '@workday/canvas-kit-react-core';
 import chroma from 'chroma-js';
 import {HeaderTheme} from './types';
 
 export interface ThemeAttributes {
   color: string;
   background: string;
-  depth: CSSProperties;
+  depth: CSSObject;
   systemIcon: {
     color: string;
     colorHover: string;

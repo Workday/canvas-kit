@@ -1,38 +1,38 @@
 import canvasColors, {typeColors, statusColors} from '@workday/canvas-colors-web';
-import {CSSProperties} from './types';
+import {CSSObject} from '@emotion/core';
 
 export const fontFamily = '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
 export const monoFontFamily = '"Roboto Mono", "Courier New", Courier, monospace';
 
 export interface CanvasTypeHierarchy {
-  dataViz1: CSSProperties;
-  dataViz2: CSSProperties;
-  h1: CSSProperties;
-  h2: CSSProperties;
-  h3: CSSProperties;
-  h4: CSSProperties;
-  h5: CSSProperties;
-  body: CSSProperties;
-  body2: CSSProperties;
-  small: CSSProperties;
-  [key: string]: CSSProperties;
+  dataViz1: CSSObject;
+  dataViz2: CSSObject;
+  h1: CSSObject;
+  h2: CSSObject;
+  h3: CSSObject;
+  h4: CSSObject;
+  h5: CSSObject;
+  body: CSSObject;
+  body2: CSSObject;
+  small: CSSObject;
+  [key: string]: CSSObject;
 }
 
 export interface CanvasTypeVariant {
-  label: CSSProperties;
-  button: CSSProperties;
-  caps: CSSProperties;
-  hint: CSSProperties;
-  error: CSSProperties;
-  inverse: CSSProperties;
-  mono: CSSProperties;
-  link: CSSProperties;
-  [key: string]: CSSProperties;
+  label: CSSObject;
+  button: CSSObject;
+  caps: CSSObject;
+  hint: CSSObject;
+  error: CSSObject;
+  inverse: CSSObject;
+  mono: CSSObject;
+  link: CSSObject;
+  [key: string]: CSSObject;
 }
 
 export interface CanvasType extends CanvasTypeHierarchy {
   variant: CanvasTypeVariant;
-  [key: string]: CanvasTypeHierarchy | CSSProperties;
+  [key: string]: CanvasTypeHierarchy | CSSObject;
 }
 
 const hierarchy: CanvasTypeHierarchy = {

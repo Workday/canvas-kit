@@ -11,7 +11,6 @@ import spacing, {
   spacingNumbers,
 } from './lib/spacing';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
-import {CSSProperties} from './lib/types';
 
 const {default: colors, ...semanticColors} = canvasColorsWeb;
 const canvas = {
@@ -44,7 +43,6 @@ export {
   CanvasType,
   CanvasTypeVariant,
   CanvasColor,
-  CSSProperties,
   InputProvider,
 };
 export default canvas;
