@@ -37,6 +37,7 @@ const ToastSystemIcon = styled(SystemIcon)({
 
 const ActionButton = styled('button')({
   display: 'block',
+  backgroundColor: 'transparent',
   border: 'none',
   padding: 0,
   marginTop: spacing.xxxs,

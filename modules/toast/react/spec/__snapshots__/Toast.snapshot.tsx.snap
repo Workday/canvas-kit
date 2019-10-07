@@ -692,6 +692,7 @@ exports[`Toast Snapshots renders with an action link 1`] = `
 
 .emotion-6 {
   display: block;
+  background-color: transparent;
   border: none;
   padding: 0;
   margin-top: 4px;
