@@ -21,6 +21,7 @@ exports[`ColorPreview Snapshots renders as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -171,6 +172,7 @@ exports[`ColorPreview Snapshots renders valid empty color input 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -321,6 +323,7 @@ exports[`ColorPreview Snapshots renders with a selected color 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -471,6 +474,7 @@ exports[`ColorPreview Snapshots renders with a selected color with # 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;

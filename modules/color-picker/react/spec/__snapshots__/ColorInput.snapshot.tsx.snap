@@ -21,6 +21,7 @@ exports[`ColorInput Snapshots renders a dark checkIcon if hex value is light 1`]
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -225,6 +226,7 @@ exports[`ColorInput Snapshots renders a disabled input 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -359,6 +361,7 @@ exports[`ColorInput Snapshots renders a light checkIcon if hex value is dark 1`]
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -548,6 +551,7 @@ exports[`ColorInput Snapshots renders as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -694,6 +698,7 @@ exports[`ColorInput Snapshots renders valid empty color input 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -842,6 +847,7 @@ exports[`ColorInput Snapshots renders with a selected color 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
@@ -988,6 +994,7 @@ exports[`ColorInput Snapshots renders with a selected color without # 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   box-sizing: border-box;
   padding-left: 46px;
   min-width: 116px;
