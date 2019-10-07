@@ -1,9 +1,10 @@
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-import {css} from 'emotion';
 import README from './README.md';
 import './index.scss';
 
@@ -374,7 +375,7 @@ storiesOf('CSS/Button/Icon Button', module)
   .add('Inverse', () => (
     <div className="story">
       <h3>Medium Inverse</h3>
-      <div className={blueBackground}>
+      <div css={blueBackground}>
         <button className="wdc-btn-icon-inverse" aria-label="Activity Stream">
           <SystemIcon icon={activityStreamIcon} />
         </button>
@@ -383,7 +384,7 @@ storiesOf('CSS/Button/Icon Button', module)
         </button>
       </div>
       <h3>Small Inverse</h3>
-      <div className={blueBackground}>
+      <div css={blueBackground}>
         <button className="wdc-btn-size-s wdc-btn-icon-inverse" aria-label="Activity Stream">
           <SystemIcon icon={activityStreamIcon} />
         </button>
@@ -400,7 +401,7 @@ storiesOf('CSS/Button/Icon Button', module)
   .add('Inverse Filled', () => (
     <div className="story">
       <h3>Medium Inverse</h3>
-      <div className={blueBackground}>
+      <div css={blueBackground}>
         <button className="wdc-btn-icon-inverse-filled" aria-label="Activity Stream">
           <SystemIcon icon={activityStreamIcon} />
         </button>
@@ -413,7 +414,7 @@ storiesOf('CSS/Button/Icon Button', module)
         </button>
       </div>
       <h3>Small Inverse</h3>
-      <div className={blueBackground}>
+      <div css={blueBackground}>
         <button
           className="wdc-btn-size-s wdc-btn-icon-circle wdc-btn-icon-inverse-filled"
           aria-label="Activity Stream"

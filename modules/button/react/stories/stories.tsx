@@ -1,4 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -12,7 +14,6 @@ import {
 
 import {Button, DropdownButton, TextButton} from '../index';
 import README from '../README.md';
-import {css} from 'emotion';
 import {CSSObject} from 'create-emotion';
 
 const blueBackground: CSSObject = {
@@ -98,7 +99,7 @@ storiesOf('Button', module)
         Primary
       </Button>
       <h3>Growing Primary</h3>
-      <div className={css(buttonContainer)}>
+      <div css={buttonContainer}>
         <Button size={Button.Size.Large} variant={Button.Variant.Primary} grow={true}>
           Primary
         </Button>
@@ -232,7 +233,7 @@ storiesOf('Button', module)
         Highlight
       </Button>
       <h3>Growing</h3>
-      <div className={css(buttonContainer)}>
+      <div css={buttonContainer}>
         <Button variant={Button.Variant.Highlight} icon={activityStreamIcon} grow={true}>
           Highlight
         </Button>
@@ -269,7 +270,7 @@ storiesOf('Button/Text', module)
       <h3>All Caps</h3>
       <TextButton variant={TextButton.Variant.AllCaps}>All Caps</TextButton>
       <h3>Icons</h3>
-      <div className={css(buttonContainer)}>
+      <div css={buttonContainer}>
         <TextButton
           icon={editIcon}
           iconPosition={TextButton.IconPosition.Left}
@@ -290,7 +291,7 @@ storiesOf('Button/Text', module)
   .add('Inverse', () => (
     <div className="story">
       <h3>Large Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <TextButton size={TextButton.Size.Large} variant={TextButton.Variant.Inverse}>
           Text
         </TextButton>
@@ -303,7 +304,7 @@ storiesOf('Button/Text', module)
         </TextButton>
       </div>
       <h3>Small Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <TextButton size={TextButton.Size.Small} variant={TextButton.Variant.Inverse}>
           Text
         </TextButton>
@@ -316,11 +317,11 @@ storiesOf('Button/Text', module)
         </TextButton>
       </div>
       <h3>All Caps Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <TextButton variant={TextButton.Variant.InverseAllCaps}>All Caps</TextButton>
       </div>
       <h3>Icons Inverse</h3>
-      <div className={css(buttonContainer, blueBackground)}>
+      <div css={{...buttonContainer, ...blueBackground}}>
         <TextButton
           icon={editIcon}
           iconPosition={TextButton.IconPosition.Left}
@@ -478,7 +479,7 @@ storiesOf('Button/Outline', module)
   .add('Inverse', () => (
     <div className="story">
       <h3>Large Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <Button size={Button.Size.Large} variant={Button.Variant.OutlineInverse}>
           Outline Inverse
         </Button>
@@ -508,7 +509,7 @@ storiesOf('Button/Outline', module)
         </Button>
       </div>
       <h3>Medium Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <Button size={Button.Size.Medium} variant={Button.Variant.OutlineInverse}>
           Outline Inverse
         </Button>
@@ -534,7 +535,7 @@ storiesOf('Button/Outline', module)
         </Button>
       </div>
       <h3>Small Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <Button size={Button.Size.Small} variant={Button.Variant.OutlineInverse}>
           Outline Inverse
         </Button>
@@ -543,7 +544,7 @@ storiesOf('Button/Outline', module)
         </Button>
       </div>
       <h3>Growing Inverse</h3>
-      <div className={css(blueBackground)} style={{maxWidth: 'initial'}}>
+      <div css={blueBackground} style={{maxWidth: 'initial'}}>
         <Button size={Button.Size.Large} variant={Button.Variant.OutlineInverse} grow={true}>
           Growing Inverse Outline
         </Button>

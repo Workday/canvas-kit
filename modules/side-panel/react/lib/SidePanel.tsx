@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import throttle from 'lodash/throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';

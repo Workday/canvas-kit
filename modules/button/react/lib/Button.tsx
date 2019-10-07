@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {ButtonBaseCon, ButtonBaseLabel, ButtonLabelData, ButtonLabelIcon} from './ButtonBase';
 import {DeprecatedButtonVariant, ButtonSize, ButtonVariant} from './types';
@@ -63,7 +65,7 @@ export default class Button extends React.Component<ButtonProps> {
           {children}
         </ButtonBaseLabel>
         {dataLabel && (
-          <ButtonLabelData size={size} className={labelDataBaseStyles.classname}>
+          <ButtonLabelData size={size} css={labelDataBaseStyles.classname}>
             {dataLabel}
           </ButtonLabelData>
         )}

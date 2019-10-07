@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {AvatarStyledComponent, AvatarVariant, AvatarLocalProps} from './Avatar';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';

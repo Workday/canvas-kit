@@ -45,7 +45,7 @@ import {type} from '@workday/canvas-kit-react-core';
 
 render(
   // Uses the official 'body' style from Canvas' typography styles
-  return <p className={css(type.body)}>Lorem Ipsum...</p>
+  return <p css={css(type.body)}>Lorem Ipsum...</p>
 )
 ```
 

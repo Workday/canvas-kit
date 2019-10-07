@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, {keyframes} from 'react-emotion';
+import styled from '@emotion/styled';
+import {keyframes} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
 
 const TRANSPARENCY_POSITION = 45;

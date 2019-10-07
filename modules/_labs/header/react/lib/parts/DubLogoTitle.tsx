@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {colors, spacing} from '@workday/canvas-kit-react-core';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import chroma from 'chroma-js';

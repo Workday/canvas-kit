@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Interpolation} from 'emotion';
-import styled from 'react-emotion';
+import {Interpolation} from '@emotion/core';
+import styled from '@emotion/styled';
 import {rgba} from 'polished';
 import {colors, spacing, spacingNumbers, statusColors} from '@workday/canvas-kit-react-core';
 import {borderColor, borderWidth, cellBorder} from './Table';

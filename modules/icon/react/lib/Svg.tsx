@@ -1,6 +1,6 @@
+/** @jsx jsx */
+import {Interpolation, css, jsx} from '@emotion/core';
 import * as React from 'react';
-import {cx, css} from 'react-emotion';
-import {Interpolation} from 'emotion';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {SpanProps} from './types';
 import {validateIconType} from './utils';
@@ -37,7 +37,7 @@ export default class Svg extends React.Component<SvgProps> {
         dangerouslySetInnerHTML={{__html: src.svg}}
         // Need to combine iconStyle with the className prop, otherwise we'll clobber it
         // (we'll need to do something like this for each HTML <span> prop we explicitly set in this component)
-        className={cx(assetStyle, elemProps.className)}
+        css={css(assetStyle, elemProps.className)}
       />
     );
   }

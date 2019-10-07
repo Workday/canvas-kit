@@ -1,8 +1,8 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {borderRadius, colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
-import {keyframes} from 'emotion';
+import {keyframes} from '@emotion/core';
 
 export interface TooltipProps {
   transformOrigin: TransformOrigin;

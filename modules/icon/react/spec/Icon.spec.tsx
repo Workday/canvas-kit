@@ -4,7 +4,7 @@ import Icon from '../lib/Icon';
 import {CanvasIconTypes} from '@workday/design-assets-types';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {createMatchers} from 'jest-emotion';
-import * as emotion from 'emotion';
+import * as emotion from '@emotion/core';
 
 expect.extend(createMatchers(emotion)); // TODO: This syntax changes in jest-emotion 10
 

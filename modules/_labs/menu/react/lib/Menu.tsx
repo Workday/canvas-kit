@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import uuid from 'uuid/v4';
 import {MenuItemProps} from './MenuItem';
 import {Card} from '@workday/canvas-kit-react-card';
