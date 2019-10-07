@@ -25,7 +25,7 @@ describe('Button', () => {
     it('should render the correct text', () => {
       cy.get('button')
         .first()
-        .should('contain', 'Delete Button');
+        .should('contain', 'Delete');
     });
   });
 });
