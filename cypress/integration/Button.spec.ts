@@ -13,7 +13,7 @@ describe('Button', () => {
     it('should render the correct text', () => {
       cy.get('button')
         .first()
-        .should('contain', 'Primary Button');
+        .should('contain', 'Primary');
     });
   });
 
