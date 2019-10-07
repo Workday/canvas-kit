@@ -14,7 +14,7 @@ const hintId = 'error-desc-id';
 storiesOf('Form Field/Radio/Top Label/Radio Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
+    <div>
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField label="Label" useFieldset={true}>
           <ControlledComponentWrapper>
@@ -30,7 +30,7 @@ storiesOf('Form Field/Radio/Top Label/Radio Group', module)
     </div>
   ))
   .add('Alert', () => (
-    <div className="story">
+    <div>
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField
           label="Label"
@@ -52,7 +52,7 @@ storiesOf('Form Field/Radio/Top Label/Radio Group', module)
     </div>
   ))
   .add('Error with Grow', () => (
-    <div className="story">
+    <div>
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField
           label="Label"
@@ -78,7 +78,7 @@ storiesOf('Form Field/Radio/Top Label/Radio Group', module)
 storiesOf('Form Field/Radio/Top Label/Radio', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
+    <div>
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField label="Label">
           <ControlledComponentWrapper
@@ -94,7 +94,7 @@ storiesOf('Form Field/Radio/Top Label/Radio', module)
 storiesOf('Form Field/Radio/Left Label/Radio Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
+    <div>
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField label="Label" useFieldset={true} labelPosition={FormField.LabelPosition.Left}>
           <ControlledComponentWrapper>
@@ -110,7 +110,7 @@ storiesOf('Form Field/Radio/Left Label/Radio Group', module)
     </div>
   ))
   .add('Alert', () => (
-    <div className="story">
+    <div>
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField
           label="Label"
@@ -133,7 +133,7 @@ storiesOf('Form Field/Radio/Left Label/Radio Group', module)
     </div>
   ))
   .add('Error with Grow', () => (
-    <div className="story">
+    <div>
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField
           label="Label"
@@ -160,7 +160,7 @@ storiesOf('Form Field/Radio/Left Label/Radio Group', module)
 storiesOf('Form Field/Radio/Left Label/Radio', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
+    <div>
       <div style={{textAlign: 'left', marginBottom: '24px'}}>
         <FormField label="Label" labelPosition={FormField.LabelPosition.Left}>
           <ControlledComponentWrapper
