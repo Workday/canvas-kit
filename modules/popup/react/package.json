@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-popup",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.0-beta.0",
   "description": "Popup to display some content on top of another",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -38,10 +38,10 @@
     "@material-ui/core": "^3.9.2"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-button": "^3.0.0-alpha.7",
-    "@workday/canvas-kit-react-card": "^3.0.0-alpha.7",
-    "@workday/canvas-kit-react-common": "^3.0.0-alpha.7",
-    "@workday/canvas-kit-react-core": "^3.0.0-alpha.7",
+    "@workday/canvas-kit-react-button": "^3.0.0-beta.0",
+    "@workday/canvas-kit-react-card": "^3.0.0-beta.0",
+    "@workday/canvas-kit-react-common": "^3.0.0-beta.0",
+    "@workday/canvas-kit-react-core": "^3.0.0-beta.0",
     "@workday/canvas-system-icons-web": "^1.0.1",
     "emotion": "^9.2.12",
     "react-emotion": "^9.2.12",
