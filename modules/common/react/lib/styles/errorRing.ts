@@ -1,5 +1,5 @@
 import {ErrorType} from '../types';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from 'create-emotion';
 import {colors, inputColors} from '@workday/canvas-kit-react-core';
 
 export default function errorRing(error?: ErrorType): CSSObject {

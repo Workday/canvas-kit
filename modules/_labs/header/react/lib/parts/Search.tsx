@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from 'create-emotion';
 import {CSSTransition} from 'react-transition-group';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import {colors, borderRadius, spacing, spacingNumbers, type} from '@workday/canvas-kit-react-core';
@@ -156,7 +156,7 @@ const SearchInput = styled('input')<Pick<SearchProps, 'themeColor' | 'collapse'>
   }
 );
 
-const iconStyle: CSSObject = {
+const iconStyle: React.CSSProperties = {
   position: 'absolute',
   top: '50%',
   transform: 'translateY(-50%)',

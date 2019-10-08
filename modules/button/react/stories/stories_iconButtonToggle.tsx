@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
-import {css, jsx, CSSObject} from '@emotion/core';
+import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -21,6 +21,7 @@ import {
 } from '../index';
 
 import README from '../README.md';
+import {CSSObject} from 'create-emotion';
 
 const blueBackground: CSSObject = {
   display: 'flex',

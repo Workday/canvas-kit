@@ -1,19 +1,18 @@
 import {typeColors} from '@workday/canvas-colors-web';
-import {type, CanvasTypeVariant, fontFamily} from '@workday/canvas-kit-react-core';
-import {CSSObject} from '@emotion/core';
+import {CSSProperties, type, CanvasTypeVariant, fontFamily} from '@workday/canvas-kit-react-core';
 
 export interface CanvasTypeHierarchy {
-  brand1: CSSObject;
-  brand2: CSSObject;
-  h1: CSSObject;
-  h2: CSSObject;
-  h3: CSSObject;
-  h4: CSSObject;
-  h5: CSSObject;
-  body: CSSObject;
-  body2: CSSObject;
-  small: CSSObject;
-  [key: string]: CSSObject;
+  brand1: CSSProperties;
+  brand2: CSSProperties;
+  h1: CSSProperties;
+  h2: CSSProperties;
+  h3: CSSProperties;
+  h4: CSSProperties;
+  h5: CSSProperties;
+  body: CSSProperties;
+  body2: CSSProperties;
+  small: CSSProperties;
+  [key: string]: CSSProperties;
 }
 
 const hierarchy: CanvasTypeHierarchy = {

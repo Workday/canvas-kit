@@ -1,6 +1,6 @@
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, GenericStyle} from '@workday/canvas-kit-react-common';
-import {CSSObject} from '@emotion/core';
+import {CSSObject} from 'create-emotion';
 import {
   DeprecatedButtonVariant,
   ButtonSize,
