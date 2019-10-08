@@ -22,14 +22,14 @@ const translateLength = spacing.s;
 
 const SwitchContainer = styled('div')({
   position: 'relative',
-  height: switchTapArea,
+  height: spacing.m,
   width: switchTapArea,
 });
 
 const SwitchInput = styled('input')<SwitchProps>(
   {
     position: 'absolute',
-    height: switchTapArea,
+    height: spacing.m,
     width: switchTapArea,
     margin: 0,
     marginLeft: spacing.xxxs,
@@ -100,7 +100,7 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
-    marginTop: spacing.xxs,
+    marginTop: spacing.xxxs,
     width: switchWidth,
     height: switchHeight,
     borderRadius: borderRadius.circle,

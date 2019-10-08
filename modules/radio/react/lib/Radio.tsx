@@ -24,7 +24,7 @@ const radioBorderRadius = 9;
 const radioDot = 8;
 const radioHeight = 18;
 const radioTapArea = spacing.m;
-const radioContainerHeight = radioTapArea + spacing.xxs;
+const radioContainerHeight = radioTapArea;
 const radioLabelDistance = spacing.xs;
 const radioWidth = 18;
 const rippleRadius = (spacing.l - radioWidth) / 2;
@@ -32,7 +32,7 @@ const rippleRadius = (spacing.l - radioWidth) / 2;
 const RadioContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  height: radioContainerHeight,
+  minHeight: radioContainerHeight,
   position: 'relative',
 });
 
@@ -44,6 +44,9 @@ const RadioContainer = styled('div')({
 const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>(
   {
     height: radioHeight,
+    width: radioWidth,
+    marginTop: '3px',
+    alignSelf: 'flex-start',
     '&::after': {
       borderRadius: borderRadius.circle,
       boxShadow: '0 0 0 0 ' + colors.soap200,
@@ -211,6 +214,7 @@ export default class Radio extends React.Component<RadioProps> {
             onChange={onChange}
             type="radio"
             value={value}
+            aria-checked={checked}
             {...elemProps}
           />
           <RadioBackground checked={checked} disabled={disabled}>

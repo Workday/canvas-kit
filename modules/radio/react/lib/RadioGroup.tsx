@@ -33,6 +33,15 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow'>>(
   {
     display: 'inline-block',
     boxSizing: 'border-box',
+    '& > div': {
+      margin: `${spacing.xxs} ${spacing.zero}`,
+      '&:first-child': {
+        marginTop: spacing.xxxs,
+      },
+      '&:last-child': {
+        marginBottom: spacing.xxxs,
+      },
+    },
   },
   ({grow}) => grow && {width: '100%'},
   ({error}) => {

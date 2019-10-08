@@ -20,111 +20,71 @@ const hintId = 'error-desc-id';
 storiesOf('Form Field/Switch/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField label="Label" inputId="my-switch-field">
-          {control(<Switch />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField label="Label" inputId="my-switch-field">
+      {control(<Switch />)}
+    </FormField>
   ))
   .add('Disabled', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField label="Label" inputId="my-switch-field">
-          {control(<Switch disabled={true} />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField label="Label" inputId="my-switch-field">
+      {control(<Switch disabled={true} />)}
+    </FormField>
   ))
   .add('Alert', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-switch-alert"
-          error={FormField.ErrorType.Alert}
-          hintText={hintText}
-          hintId={hintId}
-        >
-          {control(<Switch />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-switch-alert"
+      error={FormField.ErrorType.Alert}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {control(<Switch />)}
+    </FormField>
   ))
   .add('Error', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-switch-error"
-          error={FormField.ErrorType.Error}
-          hintText={hintText}
-          hintId={hintId}
-        >
-          {control(<Switch />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-switch-error"
+      error={FormField.ErrorType.Error}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {control(<Switch />)}
+    </FormField>
   ));
 
 storiesOf('Form Field/Switch/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-switch-field"
-          labelPosition={FormField.LabelPosition.Left}
-        >
-          {control(<Switch />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField label="Label" inputId="my-switch-field" labelPosition={FormField.LabelPosition.Left}>
+      {control(<Switch />)}
+    </FormField>
   ))
   .add('Disabled', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-switch-field"
-          labelPosition={FormField.LabelPosition.Left}
-        >
-          {control(<Switch disabled={true} />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField label="Label" inputId="my-switch-field" labelPosition={FormField.LabelPosition.Left}>
+      {control(<Switch disabled={true} />)}
+    </FormField>
   ))
   .add('Alert', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-switch-alert"
-          error={FormField.ErrorType.Alert}
-          hintText={hintText}
-          hintId={hintId}
-          labelPosition={FormField.LabelPosition.Left}
-        >
-          {control(<Switch />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-switch-alert"
+      error={FormField.ErrorType.Alert}
+      hintText={hintText}
+      hintId={hintId}
+      labelPosition={FormField.LabelPosition.Left}
+    >
+      {control(<Switch />)}
+    </FormField>
   ))
   .add('Error', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-switch-error"
-          error={FormField.ErrorType.Error}
-          hintText={hintText}
-          hintId={hintId}
-          labelPosition={FormField.LabelPosition.Left}
-        >
-          {control(<Switch />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-switch-error"
+      error={FormField.ErrorType.Error}
+      hintText={hintText}
+      hintId={hintId}
+      labelPosition={FormField.LabelPosition.Left}
+    >
+      {control(<Switch />)}
+    </FormField>
   ));

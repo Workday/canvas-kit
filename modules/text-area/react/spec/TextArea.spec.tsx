@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import {mount} from 'enzyme';
 import ReactDOMServer from 'react-dom/server';
 import TextArea from '../lib/TextArea';
-import { axe } from 'jest-axe';
+import {axe} from 'jest-axe';
 import FormField from '@workday/canvas-kit-react-form-field';
 
 describe('TextArea', () => {
@@ -36,7 +36,7 @@ describe('Text Area Accessibility', () => {
     const html = ReactDOMServer.renderToString(
       <>
         <label id="123">Label</label>
-        <TextArea placeholder="Placeholder" value={'Hello'} aria-labelledBy="123" onChange={cb} />;
+        <TextArea placeholder="Placeholder" value={'Hello'} aria-labelledby="123" onChange={cb} />;
       </>
     );
     expect(await axe(html)).toHaveNoViolations();

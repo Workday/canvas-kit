@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.0.0-beta.0 (2019-10-07)
+
+### Infrastructure:
+
+- docs: Update component_status.md
+- ci: Create github action for CI and add Cypress to CI ([#240](https://github.com/Workday/canvas-kit/pull/240))
+
+### Components:
+
+- feat(modal): Implement CSS Modal to match React implementation ([#185](https://github.com/Workday/canvas-kit/pull/185))
+- refactor: A11y updates for CSS stories and Readmes ([#221](https://github.com/Workday/canvas-kit/pull/221))
+- fix: Address misc. bugs in create-component script ([#232](https://github.com/Workday/canvas-kit/pull/232))
+- fix: Change casing for aria-labelledby attr ([#236](https://github.com/Workday/canvas-kit/pull/236))
+- fix: Move uuid from defaultProps to component instance ([#228](https://github.com/Workday/canvas-kit/pull/228))
+- fix(checkbox): Change default id to be unique per instance ([#192](https://github.com/Workday/canvas-kit/pull/192))
+- fix(menu): Add Menu example with icons and grow support ([#147](https://github.com/Workday/canvas-kit/pull/147))
+- fix(button): Fix accessibility styling for CSS buttons ([#186](https://github.com/Workday/canvas-kit/pull/186))
+- fix(menu): Always focus selected menu item and add tab accessibility ([#239](https://github.com/Workday/canvas-kit/pull/239))
+- refactor(card): Update CSS styles to match React implementation ([#113](https://github.com/Workday/canvas-kit/pull/113))
+- refactor(icon): Update CSS styles to match React implementation ([#159](https://github.com/Workday/canvas-kit/pull/159))
+- refactor(tooltip): Update CSS story to match the React version ([#198](https://github.com/Workday/canvas-kit/pull/198))
+- refactor: Fix references to react attributes in css readmes
+
+### Breaking Changes:
+
+- fix: Update alert colors and error colors
+- test: Add Cypress modal specifications ([#184](https://github.com/Workday/canvas-kit/pull/184))
+- feat(button): Promote React beta Button ([#191](https://github.com/Workday/canvas-kit/pull/191))
+- feat(button): Add blue css buttons ([#231](https://github.com/Workday/canvas-kit/pull/231))
+- feat(core): Add border radius variables to CSS and React ([#204](https://github.com/Workday/canvas-kit/pull/204))
+- feat(banner): Update CSS styles to match React ([#50](https://github.com/Workday/canvas-kit/pull/50))
+- refactor(tooltip): Update CSS styles to match React implementation ([#49](https://github.com/Workday/canvas-kit/pull/49))
+- refactor(forms): Split CSS forms module into individual modules ([#24](https://github.com/Workday/canvas-kit/pull/24))
+- refactor(loading-animation): Update CSS styles to match React implementation ([#83](https://github.com/Workday/canvas-kit/pull/83))
+- refactor(menu): Update CSS styles to match React implementation ([#117](https://github.com/Workday/canvas-kit/pull/117))
+- refactor(button): Update CSS styles to match React implementation ([#53](https://github.com/Workday/canvas-kit/pull/53))
+- fix(button): CSS button fixes ([#156](https://github.com/Workday/canvas-kit/pull/156))
+- refactor(page-header): Refactor CSS to match React implementation ([#151](https://github.com/Workday/canvas-kit/pull/151))
+- refactor(layout): Update CSS naming to match React implementation ([#168](https://github.com/Workday/canvas-kit/pull/168))
+- refactor(popup): Refactor CSS to match React implementation ([#155](https://github.com/Workday/canvas-kit/pull/155))
+- fix(popup): CSS cleanup ([#188](https://github.com/Workday/canvas-kit/pull/188))
+- refactor(form): Update CSS form styles and structure to match React implementation ([#112](https://github.com/Workday/canvas-kit/pull/112))
+- fix(button): Update incorrect delete button colors
+- refactor(text-input): Remove error icon in CSS ([#222](https://github.com/Workday/canvas-kit/pull/222))
+- refactor: Add components to labs module ([#210](https://github.com/Workday/canvas-kit/pull/210))
+- fix: Card, Popup and Modal cleanup ([#233](https://github.com/Workday/canvas-kit/pull/233))
+- fix(form): Form field spacing ([#234](https://github.com/Workday/canvas-kit/pull/234))
+
 # 3.0.0-alpha.9 (2019-09-26)
 
 ### Infrastructure:

@@ -20,11 +20,11 @@ const labelStyles = [
     return {
       ...(labelPosition === FormFieldLabelPosition.Left
         ? {
-            display: 'inline-block',
-            verticalAlign: 'top',
-            marginTop: 10, // Input height - font line height / 2
             marginRight: spacing.l,
-            width: 180,
+            minWidth: 180,
+            display: 'flex',
+            alignItems: 'center',
+            maxHeight: spacing.xl,
           }
         : {
             display: 'block',

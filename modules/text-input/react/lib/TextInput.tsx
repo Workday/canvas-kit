@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import { GrowthBehavior, ErrorType, errorRing } from '@workday/canvas-kit-react-common';
-import { borderRadius, inputColors, spacingNumbers, type } from '@workday/canvas-kit-react-core';
+import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
+import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 
 export interface TextInputProps
   extends GrowthBehavior,
-  React.InputHTMLAttributes<HTMLInputElement> {
+    React.InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   error?: ErrorType;
   inputRef?: React.Ref<HTMLInputElement>;
@@ -28,6 +28,7 @@ const Input = styled('input')<TextInputProps>(
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // Compensate for border
+    margin: 0, // Fix Safari
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -48,10 +49,10 @@ const Input = styled('input')<TextInputProps>(
       },
     },
   },
-  ({ error }) => ({
+  ({error}) => ({
     ...errorRing(error),
   }),
-  ({ grow }) =>
+  ({grow}) =>
     grow && {
       width: '100%',
     }
@@ -66,7 +67,7 @@ export default class TextInput extends React.Component<TextInputProps> {
 
   render() {
     // TODO: Standardize on prop spread location (see #150)
-    const { grow, inputRef, error, ...inputProps } = this.props;
+    const {grow, inputRef, error, ...inputProps} = this.props;
 
     return <Input innerRef={inputRef} grow={grow} error={error} {...inputProps} />;
   }
