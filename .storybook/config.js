@@ -13,6 +13,7 @@ import {InputProviderDecorator} from '../utils/storybook';
 const req = require.context('../modules', true, /stories.*\.tsx?$/);
 
 function loadStories() {
+  require('./WelcomeStory/WelcomeStory');
   req.keys().forEach(req);
 }
 
