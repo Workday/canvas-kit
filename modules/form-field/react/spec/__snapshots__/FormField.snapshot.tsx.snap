@@ -2,7 +2,8 @@
 
 exports[`FormField Snapshots grow 1`] = `
 .emotion-2 {
-  margin-bottom: 16px;
+  display: block;
+  margin-bottom: 24px;
 }
 
 .emotion-0 {
@@ -67,7 +68,6 @@ exports[`FormField Snapshots left label 1`] = `
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  min-height: 40px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -92,7 +92,8 @@ exports[`FormField Snapshots left label 1`] = `
 
 exports[`FormField Snapshots renders as expected 1`] = `
 .emotion-2 {
-  margin-bottom: 16px;
+  display: block;
+  margin-bottom: 24px;
 }
 
 .emotion-0 {
@@ -114,7 +115,8 @@ exports[`FormField Snapshots renders as expected 1`] = `
 
 exports[`FormField Snapshots renders required marking 1`] = `
 .emotion-2 {
-  margin-bottom: 16px;
+  display: block;
+  margin-bottom: 24px;
 }
 
 .emotion-0 {

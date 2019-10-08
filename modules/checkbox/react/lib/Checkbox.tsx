@@ -25,7 +25,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 
 const checkboxHeight = 18;
 const checkboxTapArea = spacing.m;
-const checkboxContainerHeight = checkboxTapArea + spacing.xxs;
+const checkboxContainerHeight = checkboxTapArea;
 const checkboxLabelDistance = spacing.xs;
 const checkboxWidth = 18;
 const rippleRadius = (spacing.l - checkboxWidth) / 2;
@@ -33,7 +33,7 @@ const rippleRadius = (spacing.l - checkboxWidth) / 2;
 const CheckboxContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  height: checkboxContainerHeight,
+  minHeight: checkboxContainerHeight,
   position: 'relative',
 });
 
@@ -45,6 +45,9 @@ const CheckboxContainer = styled('div')({
 const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>(
   {
     height: checkboxHeight,
+    width: checkboxWidth,
+    marginTop: '3px',
+    alignSelf: 'flex-start',
     '&::after': {
       borderRadius: borderRadius.circle,
       boxShadow: '0 0 0 0 ' + colors.soap200,
@@ -77,6 +80,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     marginLeft: '-3px',
     position: 'absolute',
     opacity: 0,
+
     '&:not(:disabled)': {
       cursor: 'pointer',
     },

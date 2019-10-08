@@ -17,6 +17,7 @@ exports[`TextInput Snapshots alert 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   border-color: #c06c00;
   -webkit-transition: 100ms box-shadow;
   transition: 100ms box-shadow;
@@ -103,6 +104,7 @@ exports[`TextInput Snapshots error 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   border-color: #de2e21;
   -webkit-transition: 100ms box-shadow;
   transition: 100ms box-shadow;
@@ -189,6 +191,7 @@ exports[`TextInput Snapshots grow 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   width: 100%;
 }
 
@@ -263,6 +266,7 @@ exports[`TextInput Snapshots renders as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
 }
 
 .emotion-0::-webkit-input-placeholder {

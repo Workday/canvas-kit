@@ -36,7 +36,7 @@ describe('Text Area Accessibility', () => {
     const html = ReactDOMServer.renderToString(
       <>
         <label id="123">Label</label>
-        <TextArea placeholder="Placeholder" value={'Hello'} aria-labelledBy="123" onChange={cb} />;
+        <TextArea placeholder="Placeholder" value={'Hello'} aria-labelledby="123" onChange={cb} />;
       </>
     );
     expect(await axe(html)).toHaveNoViolations();
