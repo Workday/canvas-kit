@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {CSSObject} from 'create-emotion';
+import {CSSObject} from '@emotion/core';
 import {CSSTransition} from 'react-transition-group';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import {colors, borderRadius, spacing, spacingNumbers, type} from '@workday/canvas-kit-react-core';
