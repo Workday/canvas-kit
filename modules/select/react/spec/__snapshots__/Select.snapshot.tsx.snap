@@ -30,6 +30,7 @@ exports[`Select Snapshots renders a disabled option as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   -moz-appearance: none;
   -webkit-appearance: none;
 }
@@ -176,6 +177,7 @@ exports[`Select Snapshots renders a disabled select as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   -moz-appearance: none;
   -webkit-appearance: none;
 }
@@ -386,6 +388,7 @@ exports[`Select Snapshots renders a growing select as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   -moz-appearance: none;
   -webkit-appearance: none;
   width: 100%;
@@ -546,6 +549,7 @@ exports[`Select Snapshots renders an alert on select as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   -moz-appearance: none;
   -webkit-appearance: none;
   border-color: #c06c00;
@@ -718,6 +722,7 @@ exports[`Select Snapshots renders an error on select as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   -moz-appearance: none;
   -webkit-appearance: none;
   border-color: #de2e21;
@@ -848,6 +853,7 @@ exports[`Select Snapshots renders as expected 1`] = `
   -webkit-transition: 0.2s box-shadow,0.2s border-color;
   transition: 0.2s box-shadow,0.2s border-color;
   padding: 8px;
+  margin: 0;
   -moz-appearance: none;
   -webkit-appearance: none;
 }

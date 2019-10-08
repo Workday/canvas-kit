@@ -20,111 +20,79 @@ const hintId = 'error-desc-id';
 storiesOf('Form Field/Checkbox/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField label="Label" inputId="my-checkbox-field">
-          {control(<Checkbox id="1" label="Checkbox option" />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField label="Label" inputId="my-checkbox-field">
+      {control(<Checkbox id="1" label="Checkbox option" />)}
+    </FormField>
   ))
   .add('Disabled', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField label="Label" inputId="my-checkbox-field">
-          {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField label="Label" inputId="my-checkbox-field">
+      {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+    </FormField>
   ))
   .add('Alert', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-checkbox-alert"
-          error={FormField.ErrorType.Alert}
-          hintText={hintText}
-          hintId={hintId}
-        >
-          {control(<Checkbox id="1" label="Checkbox option" />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-checkbox-alert"
+      error={FormField.ErrorType.Alert}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {control(<Checkbox id="1" label="Checkbox option" />)}
+    </FormField>
   ))
   .add('Error', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-checkbox-error"
-          error={FormField.ErrorType.Error}
-          hintText={hintText}
-          hintId={hintId}
-        >
-          {control(<Checkbox id="1" label="Checkbox option" />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-checkbox-error"
+      error={FormField.ErrorType.Error}
+      hintText={hintText}
+      hintId={hintId}
+    >
+      {control(<Checkbox id="1" label="Checkbox option" />)}
+    </FormField>
   ));
 
 storiesOf('Form Field/Checkbox/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-checkbox-field"
-          labelPosition={FormField.LabelPosition.Left}
-        >
-          {control(<Checkbox id="1" label="Checkbox option" />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-checkbox-field"
+      labelPosition={FormField.LabelPosition.Left}
+    >
+      {control(<Checkbox id="1" label="Checkbox option" />)}
+    </FormField>
   ))
   .add('Disabled', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-checkbox-field"
-          labelPosition={FormField.LabelPosition.Left}
-        >
-          {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-checkbox-field"
+      labelPosition={FormField.LabelPosition.Left}
+    >
+      {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+    </FormField>
   ))
   .add('Alert', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-checkbox-alert"
-          error={FormField.ErrorType.Alert}
-          hintText={hintText}
-          hintId={hintId}
-          labelPosition={FormField.LabelPosition.Left}
-        >
-          {control(<Checkbox id="1" label="Checkbox option" />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-checkbox-alert"
+      error={FormField.ErrorType.Alert}
+      hintText={hintText}
+      hintId={hintId}
+      labelPosition={FormField.LabelPosition.Left}
+    >
+      {control(<Checkbox id="1" label="Checkbox option" />)}
+    </FormField>
   ))
   .add('Error', () => (
-    <div className="story">
-      <div style={{textAlign: 'left', marginBottom: '24px'}}>
-        <FormField
-          label="Label"
-          inputId="my-checkbox-error"
-          error={FormField.ErrorType.Error}
-          hintText={hintText}
-          hintId={hintId}
-          labelPosition={FormField.LabelPosition.Left}
-        >
-          {control(<Checkbox id="1" label="Checkbox option" />)}
-        </FormField>
-      </div>
-    </div>
+    <FormField
+      label="Label"
+      inputId="my-checkbox-error"
+      error={FormField.ErrorType.Error}
+      hintText={hintText}
+      hintId={hintId}
+      labelPosition={FormField.LabelPosition.Left}
+    >
+      {control(<Checkbox id="1" label="Checkbox option" />)}
+    </FormField>
   ));

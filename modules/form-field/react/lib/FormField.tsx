@@ -38,7 +38,8 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
   }
 
   return {
-    marginBottom: spacing.s,
+    display: 'block',
+    marginBottom: spacing.m,
   };
 });
 
@@ -59,7 +60,6 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPos
     if (labelPosition === FormFieldLabelPosition.Left) {
       return {
         display: 'inline-flex',
-        minHeight: 40,
         alignItems: 'center',
         flexWrap: 'wrap',
       };

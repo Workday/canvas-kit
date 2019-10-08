@@ -3,13 +3,13 @@
 exports[`Switch Snapshots renders a switch with custom prop 1`] = `
 .emotion-6 {
   position: relative;
-  height: 32px;
+  height: 24px;
   width: 32px;
 }
 
 .emotion-0 {
   position: absolute;
-  height: 32px;
+  height: 24px;
   width: 32px;
   margin: 0;
   margin-left: 4px;
@@ -56,7 +56,7 @@ exports[`Switch Snapshots renders a switch with custom prop 1`] = `
   -ms-flex-align: center;
   align-items: center;
   pointer-events: none;
-  margin-top: 8px;
+  margin-top: 4px;
   width: 32px;
   height: 16px;
   border-radius: 999px;
@@ -112,13 +112,13 @@ exports[`Switch Snapshots renders a switch with custom prop 1`] = `
 exports[`Switch Snapshots renders as expected 1`] = `
 .emotion-6 {
   position: relative;
-  height: 32px;
+  height: 24px;
   width: 32px;
 }
 
 .emotion-0 {
   position: absolute;
-  height: 32px;
+  height: 24px;
   width: 32px;
   margin: 0;
   margin-left: 4px;
@@ -165,7 +165,7 @@ exports[`Switch Snapshots renders as expected 1`] = `
   -ms-flex-align: center;
   align-items: center;
   pointer-events: none;
-  margin-top: 8px;
+  margin-top: 4px;
   width: 32px;
   height: 16px;
   border-radius: 999px;
@@ -217,7 +217,7 @@ exports[`Switch Snapshots renders as expected 1`] = `
 exports[`Switch Snapshots renders switch disabled checked 1`] = `
 .emotion-6 {
   position: relative;
-  height: 32px;
+  height: 24px;
   width: 32px;
 }
 
@@ -238,7 +238,7 @@ exports[`Switch Snapshots renders switch disabled checked 1`] = `
 
 .emotion-0 {
   position: absolute;
-  height: 32px;
+  height: 24px;
   width: 32px;
   margin: 0;
   margin-left: 4px;
@@ -285,7 +285,7 @@ exports[`Switch Snapshots renders switch disabled checked 1`] = `
   -ms-flex-align: center;
   align-items: center;
   pointer-events: none;
-  margin-top: 8px;
+  margin-top: 4px;
   width: 32px;
   height: 16px;
   border-radius: 999px;
@@ -324,7 +324,7 @@ exports[`Switch Snapshots renders switch disabled checked 1`] = `
 exports[`Switch Snapshots renders switch disabled unchecked 1`] = `
 .emotion-6 {
   position: relative;
-  height: 32px;
+  height: 24px;
   width: 32px;
 }
 
@@ -345,7 +345,7 @@ exports[`Switch Snapshots renders switch disabled unchecked 1`] = `
 
 .emotion-0 {
   position: absolute;
-  height: 32px;
+  height: 24px;
   width: 32px;
   margin: 0;
   margin-left: 4px;
@@ -392,7 +392,7 @@ exports[`Switch Snapshots renders switch disabled unchecked 1`] = `
   -ms-flex-align: center;
   align-items: center;
   pointer-events: none;
-  margin-top: 8px;
+  margin-top: 4px;
   width: 32px;
   height: 16px;
   border-radius: 999px;
@@ -431,13 +431,13 @@ exports[`Switch Snapshots renders switch disabled unchecked 1`] = `
 exports[`Switch Snapshots renders switch on 1`] = `
 .emotion-6 {
   position: relative;
-  height: 32px;
+  height: 24px;
   width: 32px;
 }
 
 .emotion-0 {
   position: absolute;
-  height: 32px;
+  height: 24px;
   width: 32px;
   margin: 0;
   margin-left: 4px;
@@ -484,7 +484,7 @@ exports[`Switch Snapshots renders switch on 1`] = `
   -ms-flex-align: center;
   align-items: center;
   pointer-events: none;
-  margin-top: 8px;
+  margin-top: 4px;
   width: 32px;
   height: 16px;
   border-radius: 999px;
@@ -536,13 +536,13 @@ exports[`Switch Snapshots renders switch on 1`] = `
 exports[`Switch Snapshots renders switch with id 1`] = `
 .emotion-6 {
   position: relative;
-  height: 32px;
+  height: 24px;
   width: 32px;
 }
 
 .emotion-0 {
   position: absolute;
-  height: 32px;
+  height: 24px;
   width: 32px;
   margin: 0;
   margin-left: 4px;
@@ -589,7 +589,7 @@ exports[`Switch Snapshots renders switch with id 1`] = `
   -ms-flex-align: center;
   align-items: center;
   pointer-events: none;
-  margin-top: 8px;
+  margin-top: 4px;
   width: 32px;
   height: 16px;
   border-radius: 999px;
@@ -644,13 +644,13 @@ exports[`Switch Snapshots renders switch with id 1`] = `
 exports[`Switch Snapshots renders switch with name and value 1`] = `
 .emotion-6 {
   position: relative;
-  height: 32px;
+  height: 24px;
   width: 32px;
 }
 
 .emotion-0 {
   position: absolute;
-  height: 32px;
+  height: 24px;
   width: 32px;
   margin: 0;
   margin-left: 4px;
@@ -697,7 +697,7 @@ exports[`Switch Snapshots renders switch with name and value 1`] = `
   -ms-flex-align: center;
   align-items: center;
   pointer-events: none;
-  margin-top: 8px;
+  margin-top: 4px;
   width: 32px;
   height: 16px;
   border-radius: 999px;
