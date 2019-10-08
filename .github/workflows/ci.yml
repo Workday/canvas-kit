@@ -41,8 +41,4 @@ jobs:
         # Cypress gathers info about a commit and PR to show in the dashboard. Github Actions isn't officially supported as a CI provider, so we'll help it along
         TRAVIS: true # Pretend to be Travis. More info: https://github.com/cypress-io/cypress/blob/develop/packages/server/lib/util/ci_provider.js
         TRAVIS_PULL_REQUEST_BRANCH: ${{ github.head_ref }} # Tell Cypress what the PR branch name is
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
-        # Tell Cypress how to handle forks: https://github.com/bahmutov/is-fork-pr/blob/master/src/index.js
-        TRAVIS_PULL_REQUEST: ${{ github.event.pull_request.number }}
-        TRAVIS_REPO_SLUG: ${{ github.event.pull_request.base.repo.full_name }}
-        TRAVIS_PULL_REQUEST_SLUG: ${{ github.event.pull_request.head.repo.full_name }}
+        CYPRESS_RECORD_KEY: 3a9347b6-36ab-4a36-823d-709f4078b148
