@@ -101,7 +101,7 @@ export default class Popup extends React.Component<PopupProps> {
         width={width}
         role="dialog"
         aria-labelledby={heading ? this.id : undefined}
-        innerRef={popupRef}
+        ref={popupRef}
         {...elemProps}
       >
         {handleClose && (

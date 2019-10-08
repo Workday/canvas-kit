@@ -207,7 +207,7 @@ export default class IconButton extends React.Component<IconButtonProps> {
     return (
       <IconButtonCon
         toggled={toggled}
-        innerRef={buttonRef}
+        ref={buttonRef}
         variant={variant}
         size={size}
         aria-pressed={toggled}

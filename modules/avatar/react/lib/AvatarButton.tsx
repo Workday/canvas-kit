@@ -53,7 +53,7 @@ export default class AvatarButton extends React.Component<AvatarButtonProps> {
         altText={altText}
         onClick={onClick}
         disabled={onClick ? false : true}
-        innerRef={buttonRef}
+        ref={buttonRef}
         aria-label={altText}
         {...elemProps}
       >

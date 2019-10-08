@@ -140,7 +140,7 @@ export default class Switch extends React.Component<SwitchProps> {
           checked={checked}
           disabled={disabled}
           id={id}
-          innerRef={inputRef}
+          ref={inputRef}
           onChange={onChange}
           role="checkbox"
           tabIndex={0}

@@ -257,7 +257,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
             checked={checked}
             disabled={disabled}
             id={id}
-            innerRef={inputRef}
+            ref={inputRef}
             onChange={onChange}
             type="checkbox"
             value={value}

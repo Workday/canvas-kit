@@ -106,7 +106,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           aria-labelledby={labeledBy}
           aria-activedescendant={`${id}-${selectedItemIndex}`}
           onKeyDown={this.handleKeyboardShortcuts}
-          innerRef={this.menuRef}
+          ref={this.menuRef}
           {...elemProps}
         >
           {React.Children.map(children, (menuItem: React.ReactElement<MenuItemProps>, index) => {

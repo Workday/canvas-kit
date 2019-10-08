@@ -28,7 +28,7 @@ export default class DropdownButton extends React.Component<BaseButtonProps> {
     const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
     return (
-      <DropdownButtonCon variant={variant} size={size} innerRef={buttonRef} {...elemProps}>
+      <DropdownButtonCon variant={variant} size={size} ref={buttonRef} {...elemProps}>
         <ButtonBaseLabel variant={variant} size={size}>
           {children}
         </ButtonBaseLabel>

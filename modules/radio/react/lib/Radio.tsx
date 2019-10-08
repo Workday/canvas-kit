@@ -209,7 +209,7 @@ export default class Radio extends React.Component<RadioProps> {
             checked={checked}
             disabled={disabled}
             id={id}
-            innerRef={inputRef}
+            ref={inputRef}
             name={name}
             onChange={onChange}
             type="radio"

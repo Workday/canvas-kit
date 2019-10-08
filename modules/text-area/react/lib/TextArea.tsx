@@ -76,6 +76,6 @@ export default class TextArea extends React.Component<TextAreaProps> {
   render() {
     const {grow, inputRef, resize, ...inputProps} = this.props;
 
-    return <TextAreaContainer innerRef={inputRef} grow={grow} resize={resize} {...inputProps} />;
+    return <TextAreaContainer ref={inputRef} grow={grow} resize={resize} {...inputProps} />;
   }
 }
