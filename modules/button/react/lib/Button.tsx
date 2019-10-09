@@ -65,7 +65,7 @@ export default class Button extends React.Component<ButtonProps> {
           {children}
         </ButtonBaseLabel>
         {dataLabel && (
-          <ButtonLabelData size={size} css={labelDataBaseStyles.classname}>
+          <ButtonLabelData size={size} className={labelDataBaseStyles.classname}>
             {dataLabel}
           </ButtonLabelData>
         )}
