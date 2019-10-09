@@ -17,6 +17,7 @@
     "@cypress/webpack-preprocessor": "^4.1.0",
     "@emotion/is-prop-valid": "^0.8.2",
     "@storybook/addon-actions": "^5.2.3",
+    "@storybook/addon-docs": "^5.2.3",
     "@storybook/addon-knobs": "^5.2.3",
     "@storybook/addon-options": "^5.2.3",
     "@storybook/addon-viewport": "^5.2.3",
