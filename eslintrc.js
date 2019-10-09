@@ -1,3 +1,5 @@
+const prettierConfig = require('./.prettierrc');
+
 module.exports = {
   env: {
     browser: true,
@@ -71,21 +73,7 @@ module.exports = {
     'react/jsx-no-bind': 'warn', // Update
     curly: 'error',
     radix: 'error',
-    'prettier/prettier': [
-      'error',
-      {
-        arrowParens: 'avoid',
-        bracketSpacing: false,
-        jsxBracketSameLine: false,
-        printWidth: 100,
-        proseWrap: 'always',
-        semi: true,
-        singleQuote: true,
-        tabWidth: 2,
-        trailingComma: 'es5',
-        useTabs: false,
-      },
-    ],
+    'prettier/prettier': ['error', prettierConfig],
     // NOTE: Commented out everything below that caused problems. A lot of this is likely included in the stuff above.
     '@typescript-eslint/tslint/config': [
       'error',
