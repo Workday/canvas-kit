@@ -246,7 +246,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div css={css(containerStyle, ...backgroundStyle)}>
+      <div css={[containerStyle, backgroundStyle]}>
         <Header
           variant={Header.Variant.Dub}
           title="Transparent"
@@ -321,7 +321,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div css={css(containerStyle, backgroundStyle)}>
+      <div css={[containerStyle, backgroundStyle]}>
         <Header
           variant={Header.Variant.Full}
           title="Transparent"

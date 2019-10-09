@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
-import {css, jsx, CSSObject} from '@emotion/core';
+import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -267,7 +267,7 @@ storiesOf('Button/Icon Button', module)
   .add('Inverse', () => (
     <div className="story">
       <h3>Medium Inverse</h3>
-      <div css={css(blueBackground)}>
+      <div css={blueBackground}>
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Medium}
@@ -282,7 +282,7 @@ storiesOf('Button/Icon Button', module)
         />
       </div>
       <h3>Small Inverse</h3>
-      <div css={css(blueBackground)}>
+      <div css={blueBackground}>
         <IconButton
           icon={activityStreamIcon}
           size={IconButton.Size.Small}
@@ -297,7 +297,7 @@ storiesOf('Button/Icon Button', module)
         />
       </div>
       <h3>Toggleable Inverse</h3>
-      <div css={css(blueBackground)}>
+      <div css={blueBackground}>
         <ToggleIconButtonWrapper variant={IconButton.Variant.Inverse} />
       </div>
     </div>
@@ -305,7 +305,7 @@ storiesOf('Button/Icon Button', module)
   .add('Inverse Filled', () => (
     <div className="story">
       <h3>Medium Inverse Filled</h3>
-      <div css={css(blueBackground)}>
+      <div css={blueBackground}>
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Medium}
@@ -320,7 +320,7 @@ storiesOf('Button/Icon Button', module)
         />
       </div>
       <h3>Small Inverse Filled</h3>
-      <div css={css(blueBackground)}>
+      <div css={blueBackground}>
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Small}
@@ -335,7 +335,7 @@ storiesOf('Button/Icon Button', module)
         />
       </div>
       <h3>Toggleable Inverse Filled</h3>
-      <div css={css(blueBackground)}>
+      <div css={blueBackground}>
         <ToggleIconButtonWrapper variant={IconButton.Variant.InverseFilled} />
       </div>
     </div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {shallow, render} from 'enzyme';
+import {mount, render} from 'enzyme';
 import Icon from '../lib/Icon';
 import {CanvasIconTypes} from '@workday/design-assets-types';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
