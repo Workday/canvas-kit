@@ -13,9 +13,9 @@ yarn add @workday/canvas-kit-react-fonts
 ## Usage
 
 Canvas Kit components uses the CSS-in-JS library [emotion](https://emotion.sh) for styling. So the
-preferred method for adding fonts to a project is to use the library's `injectGlobal` method. It
-will apply emotion styles globally to your project. If you're using Canvas Kit components already,
-you should have emotion added to your project. If not, start by adding it as a dependency:
+preferred method for adding fonts to a project is to use the library's `Global` component. It will
+apply emotion styles globally to your project. If you're using Canvas Kit components already, you
+should have emotion added to your project. If not, start by adding it as a dependency:
 
 ```sh
 yarn add emotion
@@ -24,11 +24,11 @@ yarn add emotion
 Then in your index or main file of your project...
 
 ```tsx
-import {injectGlobal} from 'emotion';
+import {Global, css} from '@emotion/core';
 import fonts from '@workday/canvas-kit-react-fonts';
 
 // Inject all of Canvas' @font-face declarations to <head> via emotion
-injectGlobal(...fonts);
+<Global styles={css(fonts)} />;
 ```
 
 Finally, use one of our official typography styles from the `canvas-kit-react-core` module. If you
