@@ -17,6 +17,8 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   breakpoint?: number;
   openWidth?: number;
   backgroundColor?: SidePanelBackgroundColor;
+  hideNavigationLabel: string;
+  showNavigationLabel: string;
 }
 
 export interface SidePanelState {
@@ -130,6 +132,8 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     openWidth: 300,
     openDirection: SidePanelOpenDirection.Left,
     backgroundColor: SidePanelBackgroundColor.White,
+    hideNavigationLabel: 'hide navigation',
+    showNavigationLabel: 'show navigation',
   };
 
   constructor(props: SidePanelProps) {
@@ -158,6 +162,8 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
       onBreakpointChange,
       openWidth,
       backgroundColor,
+      showNavigationLabel,
+      hideNavigationLabel,
       ...elemProps
     } = this.props;
 
@@ -180,7 +186,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
           {onToggleClick && (
             <ToggleButton
               openDirection={openDirection}
-              aria-label={`${open ? 'hide navigation' : 'show navigation'}`}
+              aria-label={open ? hideNavigationLabel : showNavigationLabel}
               toggled={false}
               size={IconButton.Size.Small}
               onClick={this.onToggleClick}

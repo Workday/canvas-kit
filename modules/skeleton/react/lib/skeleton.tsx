@@ -2,6 +2,10 @@ import * as React from 'react';
 import styled, {keyframes} from 'react-emotion';
 import canvas from '@workday/canvas-kit-react-core';
 
+export interface SkeletonProps {
+  loadingLabel: string;
+}
+
 const TRANSPARENCY_POSITION = 45;
 const WHITE_SHEEN_WIDTH = 10;
 const DURATION = 5;
@@ -44,8 +48,11 @@ export interface SkeletonState {
   height: number;
 }
 
-export default class Skeleton extends React.Component<{}, SkeletonState> {
+export default class Skeleton extends React.Component<SkeletonProps, SkeletonState> {
   private ref: React.RefObject<HTMLDivElement> = React.createRef();
+  static defaultProps = {
+    skeletonLabel: 'Loading',
+  };
 
   state = {
     width: 0,
@@ -57,10 +64,11 @@ export default class Skeleton extends React.Component<{}, SkeletonState> {
     const {width, height} = this.state;
     const diagonal = Math.sqrt(width * width + height * height) + WHITE_SHEEN_WIDTH;
     const topPosition = (-1 * (diagonal - height)) / 2;
+    const {loadingLabel} = this.props;
 
     return (
       <SkeletonContainer
-        aria-label={'Loading'}
+        aria-label={loadingLabel}
         aria-live={'polite'}
         role={'status'}
         innerRef={this.ref}
