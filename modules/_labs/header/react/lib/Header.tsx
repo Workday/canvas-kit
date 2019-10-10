@@ -61,6 +61,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    * An event handler function that gets called when the screen size changes to a different breakpoint key
    */
   onBreakpointChange?: (key: string | number) => void;
+  searchLabel: string;
 }
 
 export interface HeaderState {
@@ -297,6 +298,7 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
   static defaultProps = {
     themeColor: HeaderTheme.White,
     variant: HeaderVariant.Dub,
+    searchLabel: 'Search',
     breakpoints: {
       sm: 320,
       md: 768,
@@ -453,6 +455,7 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
       onSearchSubmit,
       breakpoints,
       onBreakpointChange,
+      searchLabel,
       children,
       ...elemProps
     } = this.props;
@@ -496,7 +499,7 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
             rightAlign={!children}
             themeColor={themeColor}
             collapse={collapseSearch}
-            placeholder="Search"
+            placeholder={searchLabel}
           />
         )}
         <ChildrenSlot

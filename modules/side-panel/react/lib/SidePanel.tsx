@@ -43,7 +43,9 @@ const Header = styled('h2')({
   marginTop: spacing.zero,
 });
 
-const SidePanelContainer = styled('div')<SidePanelProps>(
+const SidePanelContainer = styled('div')<
+  Pick<SidePanelProps, 'open' | 'backgroundColor' | 'padding' | 'openWidth' | 'openDirection'>
+>(
   {
     overflow: 'hidden',
     height: '100%',
