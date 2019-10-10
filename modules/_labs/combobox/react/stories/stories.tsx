@@ -41,7 +41,7 @@ class Autocomplete extends React.Component<Omit<ComboboxProps, 'children' | 'cle
   }
 }
 
-storiesOf('Canvas Kit/Combobox', module)
+storiesOf('Labs/Combobox/React', module)
   .addDecorator(withReadme(README))
   .add('Autocomplete', () => (
     <FormField label="Autocomplete example">

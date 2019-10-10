@@ -1,15 +1,17 @@
 import * as React from 'react';
 import styled, {css} from 'react-emotion';
 import { CSSObject } from 'create-emotion';
-import { HeaderHeight, HeaderTheme } from '../shared/types';
-import { colors, spacing, spacingNumbers } from '@workday/canvas-kit-react-core';
-import { focusRing, GrowthBehavior } from '@workday/canvas-kit-react-common';
-import { IconButton } from '@workday/canvas-kit-react-button';
+import { type, colors, spacing, spacingNumbers } from '@workday/canvas-kit-react-core';
+import { GrowthBehavior } from '@workday/canvas-kit-react-common';
+import { IconButton, IconButtonVariant } from '@workday/canvas-kit-react-button';
 import { searchIcon } from '@workday/canvas-system-icons-web';
-import {FormField} from '@workday/canvas-kit-react-form-field';
+import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react-form-field';
 import {Combobox} from '@workday/canvas-kit-react-combobox';
 import {TextInput} from '@workday/canvas-kit-react-text-input';
 import {MenuItemProps} from '@workday/canvas-kit-react-menu';
+import {SearchThemeAttributes, searchThemes} from '../shared/themes'
+import {SearchTheme} from '../shared/types'
+import chroma from 'chroma-js';
 
 export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -27,12 +29,10 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
 
   accessibleId?: string;
 
-  headerHeight: HeaderHeight
-
   /**
    * The theme of the header the search input is being rendered in
    */
-  themeColor: HeaderTheme; // TODO should this be variant??????????????
+  searchTheme: SearchTheme | SearchThemeAttributes;
 
   placeholder: string
 
@@ -59,22 +59,28 @@ export interface SearchBarState {
   isFocused: boolean;
 }
 
+function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
+  return {
+    background: isFocused && theme.backgroundFocused ? theme.backgroundFocused : theme.background,
+    color: isFocused && theme.colorFocused ? theme.colorFocused : theme.color,
+    placeholderColor: isFocused && theme.placeholderColorFocused ? theme.placeholderColorFocused : theme.placeholderColor,
+    boxShadow: isFocused && theme.boxShadowFocused ? theme.boxShadowFocused : theme.boxShadow,
+  }
+}
+
+
 const mobileTransitionDuration = 250;
 
-const SearchContainer = styled('form')<Pick<SearchBarProps, 'rightAlign' | 'isCollapsed' | 'grow'>>(
+const SearchContainer = styled('form')<Pick<SearchBarProps, | 'isCollapsed' | 'grow'>>(
   {
     position: 'relative',
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
+    marginLeft: spacing.m,
+    maxWidth: '480px',
   },
-  ({ rightAlign, isCollapsed, grow }) => {
-    const rightAlignStyles: CSSObject = rightAlign
-      ? {
-        display: 'flex',
-        maxWidth: '480px',
-      }
-      : {};
+  ({ isCollapsed, grow }) => {
     const collapseStyles: CSSObject = isCollapsed
       ? {
         top: 0,
@@ -108,7 +114,7 @@ const SearchContainer = styled('form')<Pick<SearchBarProps, 'rightAlign' | 'isCo
         maxWidth: '100%',
       }
       : {};
-    return { ...rightAlignStyles, ...collapseStyles, ...growStyles };
+    return { ...collapseStyles, ...growStyles };
   },
 );
 
@@ -119,17 +125,55 @@ const SearchSubmit = styled(IconButton)({
   position: `absolute`,
   margin: `${spacing.xxxs} ${spacing.xxs}`,
   bottom: `${spacing.zero}`,
-  zIndex: 1,
+  zIndex: 3,
 });
 
-const iconButtonType = (shouldInverse: boolean) => (
-  shouldInverse ? IconButton.Variant.Inverse : IconButton.Variant.Plain
+const SearchInput = styled(TextInput)<Pick<SearchBarProps, 'isCollapsed'> & {inputColors: SearchThemeAttributes}>(
+  ({isCollapsed, inputColors}) => {
+    const collapseStyles = isCollapsed
+      ? {
+        ...type.h3,
+        fontWeight: 400,
+        padding: `${spacing.xs} 0`,
+        margin: `${spacing.xs} ${spacing.s}`,
+        maxWidth: 'none',
+        width: `calc(100% - ${spacing.l} - ${spacing.xl})`,
+      }
+      : {};
+
+    return {
+      ...type.body,
+      backgroundColor: inputColors.background,
+      boxShadow: inputColors.boxShadow,
+      color: inputColors.color,
+      maxWidth: '480px',
+      paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
+      paddingRight: spacing.xl,
+      border: 'none',
+      WebkitAppearance: 'none',
+      transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
+      zIndex: 2,
+      '&::-webkit-search-cancel-button': {
+        display: 'none',
+      },
+      '&::placeholder': {
+        color: inputColors.placeholderColor,
+      },
+      '&:not([disabled])': {
+        '&:focus, &:active': {
+          outline: 'none',
+          boxShadow: inputColors.boxShadow,
+        },
+      },
+      ...collapseStyles,
+    };
+  }
 );
 
 export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
+  static Theme = SearchTheme;
   static defaultProps = {
-    themeColor: HeaderTheme.White,
-    headerHeight: HeaderHeight.Small,
+    searchTheme: SearchTheme.Light,
     placeholder: 'Search',
     accessibleLabel: 'Search',
     showClearButton: true,
@@ -142,6 +186,18 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     mobileToggle: false,
     searchQuery: '',
     isFocused: false,
+  };
+
+  getThemeColors = () => getInputColors(
+    typeof this.props.searchTheme === 'number'
+      ? searchThemes[this.props.searchTheme]
+      : { ...searchThemes[SearchTheme.Transparent], ...this.props.searchTheme },
+    this.state.isFocused,
+  );
+
+  getIconButtonType = (): IconButtonVariant => {
+    const isDarkBackground = chroma(this.getThemeColors().background || `rgba(0, 0, 0, 0)`).get('lab.l') < 70
+    return isDarkBackground ? IconButton.Variant.Inverse : IconButton.Variant.Plain
   };
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -167,6 +223,14 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     }
   }
 
+  handleFocus = () => {
+    this.setState({ isFocused: true });
+  };
+
+  handleBlur = () => {
+    this.setState({ isFocused: false });
+  };
+
   handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault();
     this.setState({ searchQuery: event.target.value });
@@ -181,93 +245,62 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     }
   }
 
-  clearButtonType = iconButtonType(
-    !!this.state.searchQuery && !this.state.isFocused && this.props.themeColor !== HeaderTheme.White
-  );
-
   render() {
     const {
       grow,
-      themeColor,
-      rightAlign,
-      isCollapsed,
       onSubmit,
+      isCollapsed,
       onInputChange,
       autocompleteItems,
       accessibleId,
+      searchTheme,
+      placeholder,
+      rightAlign,
       accessibleLabel,
+      showClearButton,
+      clearButtonLabel,
       ...elemProps
     } = this.props;
-
-    const inputColors = getInputColors(themeColor);
 
     return (
       <SearchContainer
         role="search"
-        rightAlign={rightAlign}
         isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
         innerRef={this.formRef}
         {...elemProps}
       >
         <SearchSubmit
-          aria-label={this.props.accessibleLabel}
+          aria-label={accessibleLabel}
           icon={searchIcon}
-          variant={iconButtonType(!this.state.isFocused && themeColor !== HeaderTheme.White)}
+          variant={this.getIconButtonType()}
           type="submit"
-          toggled={undefined}
         />
         <FormField
           grow={grow}
-          label={this.props.accessibleLabel}
-          hiddenLabel={true}
+          label={accessibleLabel}
+          labelPosition={FormFieldLabelPosition.Hidden}
           inputId={accessibleId}
-          className={css({marginBottom: spacingNumbers.zero})}
+          className={css({marginBottom: spacingNumbers.zero, width: grow ? '100%' : 'auto'})}
         >
           <Combobox
-            clearButtonType={this.clearButtonType}
-            autocompleteItems={this.props.autocompleteItems}
+            clearButtonVariant={this.getIconButtonType()}
+            autocompleteItems={autocompleteItems}
             onChange={this.handleSearchInputChange}
-            showClearButton={this.props.showClearButton}
-            clearButtonLabel={this.props.clearButtonLabel}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            showClearButton={showClearButton}
+            clearButtonLabel={clearButtonLabel}
           >
-            <TextInput
+            <SearchInput
               inputRef={this.inputRef}
               value={this.state.searchQuery}
-              placeholder={this.props.placeholder}
-              className={css({
-                paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
-                paddingRight: spacing.xl,
-                border: 'none',
-                background: inputColors.background,
-                color: inputColors.color,
-                '&::placeholder': {
-                  color: inputColors.placeholderColor,
-                },
-              })}
+              placeholder={placeholder}
+              inputColors={this.getThemeColors()}
             />
           </Combobox>
         </FormField>
       </SearchContainer>
     );
-  }
-}
-
-function getInputColors(themeColor: HeaderTheme) {
-  if (themeColor === HeaderTheme.White) {
-    return {
-      background: colors.soap200,
-      color: colors.blackPepper300,
-      placeholderColor: colors.licorice300,
-      focusBackground: colors.soap200,
-      focusBoxShadow: focusRing().boxShadow,
-    };
-  } else {
-    return {
-      background: 'rgba(0,0,0,0.2)',
-      color: colors.frenchVanilla100,
-      placeholderColor: colors.frenchVanilla100,
-      focusBackground: colors.frenchVanilla100,
-    };
   }
 }

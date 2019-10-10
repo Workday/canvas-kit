@@ -56,7 +56,6 @@ const childrenSpacing = spacing.s;
 
 const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
   {
-    overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
     boxSizing: 'border-box',

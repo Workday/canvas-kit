@@ -16,7 +16,6 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, Gr
   error?: ErrorType;
   required?: boolean;
   useFieldset?: boolean;
-  hiddenLabel?: boolean;
   children: React.ReactNode;
 }
 
@@ -48,7 +47,7 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
 const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
   ({grow, labelPosition}) => {
     if (grow) {
-      if (labelPosition === FormFieldLabelPosition.Left) {
+      if (labelPosition === FormFieldLabelPosition.Left || labelPosition === FormFieldLabelPosition.Hidden) {
         return {
           flexGrow: 1,
         };
@@ -120,7 +119,6 @@ export default class FormField extends React.Component<FormFieldProps> {
   render() {
     const {
       label,
-      hiddenLabel,
       hintText,
       hintId,
       inputId,
@@ -141,7 +139,7 @@ export default class FormField extends React.Component<FormFieldProps> {
             htmlFor={inputId}
             isLegend={useFieldset}
             required={!!required}
-            accessibleHide={hiddenLabel}
+            accessibleHide={labelPosition === FormFieldLabelPosition.Hidden}
           >
             {label}
           </Label>

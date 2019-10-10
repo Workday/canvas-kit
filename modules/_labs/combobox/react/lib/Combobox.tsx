@@ -1,13 +1,14 @@
 
 import * as React from 'react';
-import styled, { css } from 'react-emotion';
-import { accessibleHide, GrowthBehavior } from '@workday/canvas-kit-react-common';
-import { depth, spacing, commonColors } from '@workday/canvas-kit-react-core';
-import { MenuItemProps } from '@workday/canvas-kit-react-menu';
-import { Card } from '@workday/canvas-kit-react-card';
-import { IconButton, IconButtonVariant } from '@workday/canvas-kit-react-button';
-import { xSmallIcon } from '@workday/canvas-system-icons-web';
-import { TextInputProps } from '@workday/canvas-kit-react-text-input';
+import styled from '@emotion/styled';
+import {css, CSSObject} from '@emotion/core';
+import {accessibleHide, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react-core';
+import {MenuItemProps} from '@workday/canvas-kit-react-menu';
+import {Card} from '@workday/canvas-kit-react-card';
+import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
+import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {TextInputProps} from '@workday/canvas-kit-react-text-input';
 import uuid from 'uuid/v4';
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
@@ -18,7 +19,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * The type of icon button to use for clearing input
    */
-  clearButtonType?: IconButtonVariant;
+  clearButtonVariant?: IconButtonVariant;
   /**
    * Show button to clear input field
    */
@@ -36,6 +37,14 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
+   * Callback to listen when the TextInput focuses
+   */
+  onFocus?: React.FocusEventHandler;
+  /**
+   * Callback to listen when the TextInput blurs
+   */
+  onBlur?: React.FocusEventHandler;
+  /**
    * The Form Field component to wrap.
    */
   children: React.ReactElement<TextInputProps>
@@ -43,14 +52,19 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
 
 export interface ComboboxState {
   value: string;
-  focused: boolean;
+  isFocused: boolean;
   showingAutocomplete: boolean;
   selectedAutocompleteIndex: number | null;
 }
 
-const Container = styled('div')({
-  display: 'inline-block',
-})
+const Container = styled('div')<Pick<ComboboxProps, 'grow'>>(
+  {
+    display: 'inline-block',
+  },
+  ({ grow }) => ({
+    width: grow ? '100%' : 'auto',
+  })
+)
 
 const Status = styled('div')({
   ...accessibleHide,
@@ -62,20 +76,22 @@ const InputContainer = styled('div')({
   position: 'relative',
 });
 
+
 const MenuContainer = styled(Card)<Pick<ComboboxProps, 'grow'>>(
   {
     position: 'absolute',
     zIndex: 1,
     left: 0,
     top: '100%',
-    borderRadius: 4,
+    borderRadius: borderRadius.m,
     minWidth: 280,
     background: commonColors.background,
     border: `none`,
+    marginTop: `-${borderRadius.m}`
   },
-  ({ grow }) => grow && {
-    width: '100%',
-  }
+  ({ grow }) => ({
+    width: grow ? '100%' : 'auto',
+  })
 );
 
 const AutocompleteList = styled('ul')({
@@ -89,9 +105,10 @@ const ResetButton = styled(IconButton)<Pick<ComboboxState, 'value'>>(
     height: spacing.l,
     marginLeft: `-${spacing.xl}`,
     padding: 0,
+    zIndex: 2,
   },
   ({ value }) => ({
-    display: value ? 'block' : 'none',
+    visibility: value ? 'visible' : 'hidden',
   })
 );
 
@@ -109,7 +126,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   };
 
   state: Readonly<ComboboxState> = {
-    focused: false,
+    isFocused: false,
     value: '',
     showingAutocomplete: !!this.props.autocompleteItems && this.props.autocompleteItems.length > 0,
     selectedAutocompleteIndex: null,
@@ -124,11 +141,11 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   componentDidUpdate(prevProps: ComboboxProps, prevState: ComboboxState) {
     const listboxOrFocusChanged =
       this.props.autocompleteItems !== prevProps.autocompleteItems ||
-      this.state.focused !== prevState.focused ||
+      this.state.isFocused !== prevState.isFocused ||
       this.state.value !== prevState.value;
     if (this.props.autocompleteItems && listboxOrFocusChanged) {
       this.setState({
-        showingAutocomplete: this.props.autocompleteItems.length > 0 && this.state.focused,
+        showingAutocomplete: this.props.autocompleteItems.length > 0 && this.state.isFocused,
       });
     }
   }
@@ -173,7 +190,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     if (menuItemProps.isDisabled) {
       return;
     }
-    this.setState({ showingAutocomplete: false, focused: false });
+    this.setState({ showingAutocomplete: false, isFocused: false });
     this.setInputValue(this.getTextFromElement(menuItemProps.children))
     if (menuItemProps.onClick) {
       menuItemProps.onClick(event);
@@ -186,11 +203,15 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     }
   };
 
-  setFocus = () => {
-    this.setState({ focused: true });
+  handleFocus = (event: React.FocusEvent) => {
+    this.setState({ isFocused: true });
+
+    if (this.props.onFocus) {
+      this.props.onFocus(event)
+    }
   };
 
-  setBlur = (event: React.FocusEvent) => {
+  handleBlur = (event: React.FocusEvent) => {
     if (this.comboboxRef.current) {
       let target: EventTarget | null = event.relatedTarget;
       if (target === null) {
@@ -202,7 +223,11 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
       }
     }
 
-    this.setState({ focused: false });
+    this.setState({ isFocused: false });
+
+    if (this.props.onBlur) {
+      this.props.onBlur(event)
+    }
   };
 
   resetSearchInput = (): void => {
@@ -264,8 +289,16 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     }
 
     return React.Children.map(child, (inputElement) => {
+      let cssOverride: CSSObject = { zIndex: 2 }
+      if (this.props.showClearButton) {
+        cssOverride = {
+          ...cssOverride,
+          paddingRight: spacing.xl
+        }
+      }
       const newTextInputProps: Partial<TextInputProps> = {
         id: this.props.id,
+        grow: this.props.grow,
         value: this.state.value,
         inputRef: this.inputRef,
         'aria-autocomplete': 'list',
@@ -273,9 +306,9 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         'aria-activedescendant': this.state.selectedAutocompleteIndex != null ? `${this.props.id}-${optionIdPart}-${this.state.selectedAutocompleteIndex}` : '',
         onChange: this.handleSearchInputChange,
         onKeyDown: this.handleKeyboardShortcuts,
-        onFocus: this.setFocus,
-        onBlur: this.setBlur,
-        css: this.props.showClearButton ? css({ paddingLeft: spacing.xl }) : {}
+        onFocus: this.handleFocus,
+        onBlur: this.handleBlur,
+        className: css(cssOverride),
       }
       return React.cloneElement(inputElement, { ...inputElement.props, ...newTextInputProps });
     })
@@ -285,11 +318,13 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     const {
       autocompleteItems,
       children,
-      clearButtonType = IconButton.Variant.Plain,
+      clearButtonVariant = IconButton.Variant.Plain,
       grow,
       id,
       initialValue,
       onChange,
+      onFocus,
+      onBlur,
       showClearButton,
       ...elemProps
     } = this.props;
@@ -300,6 +335,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         aria-haspopup='listbox'
         aria-owns={`${id}-${listBoxIdPart}`}
         aria-expanded={autocompleteItems && autocompleteItems.length > 0}
+        grow={grow}
         {...elemProps}
       >
         <Status role="status" aria-live="polite">
@@ -312,11 +348,12 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
               value={this.state.value}
               aria-label={this.props.clearButtonLabel}
               icon={xSmallIcon}
-              variant={clearButtonType}
+              variant={clearButtonVariant}
               toggled={undefined}
               onClick={this.resetSearchInput}
-            />
-          )}
+              onBlur={this.handleBlur}
+        />
+      )}
           {this.state.showingAutocomplete && (
             <MenuContainer padding={spacing.zero} depth={depth[1]} grow={grow}>
               <AutocompleteList
