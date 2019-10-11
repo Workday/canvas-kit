@@ -68,8 +68,7 @@ within a single repository.
 #### Testing
 
 Canvas Kit uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) to unit test our
-React components. Each and every component requires at least 80% unit test coverage and a thorough
-set of snapshot tests.
+React components. Each and every component requires at least 80% unit test coverage.
 
 Canvas Kit uses [Cypress](cypress.io) for UI tests. For info on why we chose Cypress, visit
 [Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
@@ -110,8 +109,7 @@ fix: Add missing static class variable to IconButton and Avatar
 - Use the imperative mood (e.g. "fix", not "fixed")
 - Start with a verb
 - Use the body of the commit if more context is needed
-- If you have similar/identical commits one after another (i.e. snapshot updates), consider using
-  `--amend` or squashing.
+- If you have similar/identical commits one after another, consider using `--amend` or squashing.
 
 > **DON'T**
 
@@ -197,11 +195,6 @@ This will build all modules' CSS and JS.
 **`yarn test`**
 
 This will start the unit tests and run code coverage.
-
-**`yarn updateSnaps`**
-
-If you know you've made a breaking visual change, use this command to update your snapshot tests.
-This will add files to your workspace that you'll need to commit.
 
 ### Code Style Guide
 

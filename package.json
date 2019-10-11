@@ -116,7 +116,6 @@
     "format:tslint": "tslint --project tsconfig.json --fix",
     "format": "yarn format:prettier && yarn format:tslint",
     "test": "TZ=UTC jest",
-    "updateSnaps": "TZ=UTC jest -u",
     "bump": "lerna version",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
