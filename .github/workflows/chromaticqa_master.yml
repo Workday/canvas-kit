@@ -1,0 +1,25 @@
+name: ChromaticQA Master Rebasing
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  visual_rebasing:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Install Packages
+      run: yarn install
+    - name: ChromaticQA
+      # auto-accept changes to master assuming they came from approved PRs.
+      # https://docs.chromaticqa.com/setup_ci#maintain-a-clean-master-branch
+      run: yarn chromatic --auto-accept-changes
+      env:
+        CI: true # Tells Chromatic to treat as a CI run (it doesn't auto-detect Github Actions)
+        CHROMATIC_APP_CODE: dlpro96xybh

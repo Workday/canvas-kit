@@ -7,6 +7,7 @@ import addons from '@storybook/addons';
 import Events from '@storybook/core-events';
 import {toId} from '@storybook/router';
 import ReactDOM from 'react-dom';
+import 'storybook-chromatic';
 
 import {commonColors, typeColors, fontFamily} from '../modules/core/react';
 import {InputProviderDecorator} from '../utils/storybook';
