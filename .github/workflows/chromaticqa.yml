@@ -1,0 +1,31 @@
+name: ChromaticQA
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  visual_regression:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        # Use 'head' instead of 'merge': https://docs.chromaticqa.com/setup_ci#pull-request-builds
+        # 'head' is the HEAD of the PR branch. 'merge' is the hidden merge commit created by github
+        ref: refs/pull/${{ github.event.pull_request.number}}/head
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Install Packages
+      run: yarn install
+    - name: ChromaticQA
+      # Chromatic has a separate Github check that handles changes. We need to exit
+      # zero, otherwise this Github workflow will have to be rerun _after_ a visual review.
+      # This extra step is unnecessary with the Chromatic check we have integrated.
+      # http://docs.chromaticqa.com/setup_ci#command-exit-code
+      run: yarn chromatic --exit-zero-on-changes
+      env:
+        CI: true
+        CHROMATIC_APP_CODE: dlpro96xybh
