@@ -6,8 +6,6 @@ cache:
 git:
   depth: 3
 stages:
-- name: testing
-  if: type = pull_request
 - name: npm publish
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
 - name: master check and build storybook
@@ -21,9 +19,6 @@ install:
 - yarn build
 jobs:
   include:
-  - stage: testing
-    script:
-    - yarn test
   - stage: npm publish
     deploy:
       provider: script

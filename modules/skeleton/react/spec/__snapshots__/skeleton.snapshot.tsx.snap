@@ -18,7 +18,6 @@ exports[`Skeleton Single Span 1`] = `
   height: 10px;
   top: -5px;
   position: absolute;
-  z-index: 999;
 }
 
 <div
