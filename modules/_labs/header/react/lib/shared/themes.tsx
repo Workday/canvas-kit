@@ -69,13 +69,14 @@ export const themes: Themes = {
 
 export interface SearchThemeAttributes {
   background?: string
-  backgroundFocused?: string
+  backgroundFocus?: string
+  backgroundHover?: string
   color?: string
-  colorFocused?: string
+  colorFocus?: string
   placeholderColor?: string
-  placeholderColorFocused?: string
+  placeholderColorFocus?: string
   boxShadow?: string | string[]
-  boxShadowFocused?: string | string[]
+  boxShadowFocus?: string | string[]
 }
 
 export interface SearchThemes {
@@ -85,29 +86,30 @@ export interface SearchThemes {
 export const searchThemes: SearchThemes = {
   [SearchTheme.Transparent]: {
     background: 'rgba(0, 0, 0, 0)',
-    backgroundFocused: 'rgba(0, 0, 0, 0)',
+    backgroundFocus: 'rgba(0, 0, 0, 0)',
     color: colors.blackPepper300,
-    colorFocused: colors.blackPepper300,
+    colorFocus: colors.blackPepper300,
     placeholderColor: colors.licorice300,
-    placeholderColorFocused: colors.licorice300,
+    placeholderColorFocus: colors.licorice300,
     boxShadow: 'none',
-    boxShadowFocused: 'none',
+    boxShadowFocus: 'none',
   },
   [SearchTheme.Light]: {
     background: colors.soap200,
-    backgroundFocused: colors.soap200,
+    backgroundFocus: colors.soap200,
+    backgroundHover: colors.soap300,
     color: colors.blackPepper300,
     placeholderColor: colors.licorice300,
     boxShadow: 'none',
-    boxShadowFocused: focusRing().boxShadow,
+    boxShadowFocus: focusRing().boxShadow,
   },
   [SearchTheme.Dark]: {
     background: 'rgba(0,0,0,0.2)',
-    backgroundFocused: colors.frenchVanilla100,
+    backgroundFocus: colors.frenchVanilla100,
     color: colors.frenchVanilla100,
-    colorFocused: colors.blackPepper300,
+    colorFocus: colors.blackPepper300,
     placeholderColor: colors.frenchVanilla100,
-    placeholderColorFocused: colors.licorice300,
+    placeholderColorFocus: colors.licorice300,
     boxShadow: 'none',
   },
 }

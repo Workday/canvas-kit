@@ -95,10 +95,12 @@ class SearchWithAutoComplete extends React.Component<Partial<SearchBarProps>, { 
             .map((x: any, i: string) => autocompleteResult(i))
             .splice(0, 5)
         }
+        isCollapsed={boolean('isCollapsed', false)}
         onInputChange={this.autocompleteCallback}
         placeholder={`Search with Autocomplete`}
         accessibleId={searchId}
         grow={true}
+        searchTheme={SearchBar.Theme.Dark}
         onSubmit={(event) => {
           const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value
           action(`search submitted ${formInputValue}`)()
@@ -126,7 +128,7 @@ storiesOf('Labs/Header/React', module)
               url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
             />
           }
-          leftSlot={<SearchBar grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
           isCollapsed={boolean('isCollapsed', false)}
           onMenuClick={handleMenuClickTest}
         >
@@ -153,7 +155,7 @@ storiesOf('Labs/Header/React', module)
         <GlobalHeader
           brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}
           menuToggle={<AvatarButton onClick={handleMenuClickTest} />}
-          leftSlot={<SearchBar grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
           isCollapsed={boolean('isCollapsed', false)}
         >
           <IconButton
@@ -173,7 +175,7 @@ storiesOf('Labs/Header/React', module)
       </div>
       <div css={containerStyle}>
         <GlobalHeader
-          leftSlot={<SearchBar grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
           onMenuClick={handleMenuClickTest}
           isCollapsed={boolean('isCollapsed', false)}
         >
@@ -199,14 +201,14 @@ storiesOf('Labs/Header/React', module)
       <div css={containerStyle}>
         <Header
           title="Required"
-          leftSlot={<SearchBar rightAlign={true} grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} rightAlign={true} grow={true} onSubmit={handleSearchSubmitTest} />}
           isCollapsed={boolean('isCollapsed', false)}/>
       </div>
       <div css={containerStyle}>
         <Header
           title="Icons Only"
           brandUrl="#"
-          leftSlot={<SearchBar grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
           isCollapsed={boolean('isCollapsed', false)}
         >
           <IconButton
@@ -260,7 +262,7 @@ storiesOf('Labs/Header/React', module)
             />
           }
           brandUrl="#"
-          leftSlot={<SearchBar grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
           isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
@@ -287,7 +289,7 @@ storiesOf('Labs/Header/React', module)
           themeColor={Header.Theme.White}
           centeredNav={true}
           brandUrl="#"
-          leftSlot={<SearchBar grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
           isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
@@ -313,7 +315,14 @@ storiesOf('Labs/Header/React', module)
           title="Transparent"
           themeColor={Header.Theme.Transparent}
           brandUrl="#"
-          leftSlot={<SearchBar grow={true} onSubmit={handleSearchSubmitTest} searchTheme={SearchBar.Theme.Dark} />}
+          leftSlot={
+            <SearchBar
+              isCollapsed={boolean('isCollapsed', false)}
+              grow={true}
+              onSubmit={handleSearchSubmitTest}
+              searchTheme={SearchBar.Theme.Dark}
+            />
+          }
           isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
