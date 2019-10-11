@@ -66,7 +66,7 @@ storiesOf('Button', module)
       >
         Primary
       </Button>
-      <h3>Medium Primary</h3>
+      <h2>Medium Primary</h2>
       <Button size={Button.Size.Medium} variant={Button.Variant.Primary}>
         Primary
       </Button>
