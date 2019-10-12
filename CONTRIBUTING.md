@@ -147,14 +147,8 @@ fix: Add missing static class variable to IconButton and Avatar
 ## Getting Started
 
 1.  Clone the respository and run `yarn`
-2.  Run `yarn build`
-3.  Run `yarn start` to start [Storybook](https://storybook.js.org/)
-4.  Visit [http://localhost:9001/](http://localhost:9001/)
-5.  To quickly rebuild on file changes, run `yarn watch` in another terminal. This will rebuild
-    modules for each file change. **Note** this command will take a lot of memory (1-2GB). If you
-    are working on a specific module, you can navigate to the module your are working on and run
-    `yarn watch` from there. This will only watch a specific module at a fraction of the memory
-    requirements
+2.  Run `yarn start` to start [Storybook](https://storybook.js.org/)
+3.  Visit [http://localhost:9001/](http://localhost:9001/)
 
 ### Creating a module
 
@@ -188,7 +182,8 @@ will (in addition to creating required scaffolding):
 
 **`yarn build`**
 
-This will build all modules' CSS and JS.
+This will build all modules' CSS and JS. This should only be done before publishing. It is not
+needed for development.
 
 ### Testing Modules
 
