@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import canvas from '@workday/canvas-kit-react-core';
 
 export interface ColumnProps {
   /**
@@ -35,19 +34,20 @@ const ColumnContainer = styled('div')<ColumnProps>(
       return;
     }
 
-    if (!spacing) {
-      return {padding: `0 ${canvas.spacing.xs}`};
-    }
-
     return {padding: `0 ${spacing}px`};
   },
-  ({columns, width}) => {
+  ({columns, width, spacing}) => {
     if (width) {
       return {width};
     }
 
     if (columns) {
-      return {width: `${(columns / 12) * 100}%`};
+      if (columns === 12) {
+        return {width: `100%`};
+      } else {
+        const compensation = ((12 - columns) / 12) * ((spacing || 0) * 2);
+        return {width: `calc(${(columns / 12) * 100}% - ${compensation}px)`};
+      }
     }
 
     return {flex: 1};
