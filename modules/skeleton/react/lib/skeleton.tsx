@@ -36,7 +36,7 @@ const SkeletonAnimator = styled('div')<{diagonal: number; topPosition: number; w
   }
 );
 
-const SkeletonContainer = styled('div')({
+const SkeletonContainer = styled('div')<SkeletonProps>({
   overflow: 'hidden',
   width: '100%',
   height: '100%',
@@ -51,7 +51,7 @@ export interface SkeletonState {
 export default class Skeleton extends React.Component<SkeletonProps, SkeletonState> {
   private ref: React.RefObject<HTMLDivElement> = React.createRef();
   static defaultProps = {
-    skeletonLabel: 'Loading',
+    loadingLabel: 'Loading',
   };
 
   state = {
