@@ -74,7 +74,7 @@ export default class Button extends React.Component<ButtonProps> {
 /**
  * @deprecated deprecated_Button in @workday/canvas-kit-react-button will be removed soon. Use Button instead.
  */
-// tslint:disable:class-name
+// eslint-disable-next-line @typescript-eslint/class-name-casing
 export class deprecated_Button extends React.Component<ButtonProps<DeprecatedButtonVariant>> {
   public static Variant = DeprecatedButtonVariant;
   public static Size = ButtonSize;

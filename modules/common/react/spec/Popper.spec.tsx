@@ -6,7 +6,7 @@ jest.mock('react-dom', () => ({
 jest.mock('popper.js', () => {
   return jest.fn().mockImplementation(() => {
     return {
-      destroy: () => {}, // tslint:disable-line:no-empty
+      destroy: () => {}, // eslint-disable-line no-empty-function
     };
   });
 });

@@ -28,7 +28,6 @@ const SkeletonAnimator = styled('div')<{diagonal: number; topPosition: number; w
       height: diagonal,
       top: topPosition,
       position: 'absolute',
-      zIndex: 999,
     };
   }
 );
