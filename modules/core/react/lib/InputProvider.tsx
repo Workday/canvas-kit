@@ -331,7 +331,7 @@ export default class InputProvider extends React.Component<InputProviderProps, I
     /* istanbul ignore next function for coverage */
     this.eventTimer = window.setTimeout(() => {
       this.setState({isBuffering: false});
-    },                                  100);
+    }, 100);
   }
 
   detectScrolling(event: React.MouseEvent) {

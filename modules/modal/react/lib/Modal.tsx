@@ -161,7 +161,7 @@ export default class Modal extends React.Component<ModalProps> {
       firstFocusRef: firstFocusableRef,
       ...elemProps
     } = this.props;
-    
+
     return (
       open && (
         <FocusTrap

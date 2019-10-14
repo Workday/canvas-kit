@@ -128,7 +128,6 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
 
 const Container = styled('span')<Pick<StatusIndicatorProps, 'type' | 'emphasis'>>(
   statusIndicatorStyles.styles,
-  // tslint:disable:no-shadowed-variable
   ({type, emphasis}) => ({
     ...statusIndicatorStyles.variants[type][emphasis],
   })
