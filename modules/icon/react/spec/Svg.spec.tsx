@@ -3,10 +3,6 @@ import {shallow, render} from 'enzyme';
 import Svg from '../lib/Svg';
 import {CanvasIconTypes} from '@workday/design-assets-types';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
-import {createMatchers} from 'jest-emotion';
-import * as emotion from 'emotion';
-
-expect.extend(createMatchers(emotion)); // TODO: This syntax changes in jest-emotion 10
 
 describe('Icon component', () => {
   test('Mismatched icon types catches error and returns null', () => {

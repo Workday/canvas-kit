@@ -18,8 +18,6 @@ jobs:
       run: yarn install --production=false
     - name: Linting
       run: yarn lint
-    - name: Build
-      run: yarn build
     - name: Unit tests
       run: yarn test
 

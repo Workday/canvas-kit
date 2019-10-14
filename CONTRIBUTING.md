@@ -52,7 +52,7 @@ process. If you have any questions, please reach out!
 #### Automation on Commit
 
 Upon commit, [lint-staged](https://github.com/okonet/lint-staged) will run your staged code through
-[Prettier](https://prettier.io) and [tslint](https://palantir.github.io/tslint/).
+[Prettier](https://prettier.io) and [eslint](https://eslint.org).
 
 #### Storybook
 
@@ -68,8 +68,7 @@ within a single repository.
 #### Testing
 
 Canvas Kit uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) to unit test our
-React components. Each and every component requires at least 80% unit test coverage and a thorough
-set of snapshot tests.
+React components. Each and every component requires at least 80% unit test coverage.
 
 Canvas Kit uses [Cypress](cypress.io) for UI tests. For info on why we chose Cypress, visit
 [Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
@@ -110,8 +109,7 @@ fix: Add missing static class variable to IconButton and Avatar
 - Use the imperative mood (e.g. "fix", not "fixed")
 - Start with a verb
 - Use the body of the commit if more context is needed
-- If you have similar/identical commits one after another (i.e. snapshot updates), consider using
-  `--amend` or squashing.
+- If you have similar/identical commits one after another, consider using `--amend` or squashing.
 
 > **DON'T**
 
@@ -149,14 +147,8 @@ fix: Add missing static class variable to IconButton and Avatar
 ## Getting Started
 
 1.  Clone the respository and run `yarn`
-2.  Run `yarn build`
-3.  Run `yarn start` to start [Storybook](https://storybook.js.org/)
-4.  Visit [http://localhost:9001/](http://localhost:9001/)
-5.  To quickly rebuild on file changes, run `yarn watch` in another terminal. This will rebuild
-    modules for each file change. **Note** this command will take a lot of memory (1-2GB). If you
-    are working on a specific module, you can navigate to the module your are working on and run
-    `yarn watch` from there. This will only watch a specific module at a fraction of the memory
-    requirements
+2.  Run `yarn start` to start [Storybook](https://storybook.js.org/)
+3.  Visit [http://localhost:9001/](http://localhost:9001/)
 
 ### Creating a module
 
@@ -190,7 +182,8 @@ will (in addition to creating required scaffolding):
 
 **`yarn build`**
 
-This will build all modules' CSS and JS.
+This will build all modules' CSS and JS. This should only be done before publishing. It is not
+needed for development.
 
 ### Testing Modules
 
@@ -198,19 +191,14 @@ This will build all modules' CSS and JS.
 
 This will start the unit tests and run code coverage.
 
-**`yarn updateSnaps`**
-
-If you know you've made a breaking visual change, use this command to update your snapshot tests.
-This will add files to your workspace that you'll need to commit.
-
 ### Code Style Guide
 
 Refer to the [API & Pattern Guidelines](API_PATTERN_GUIDELINES.md).
 
-Rules are enforced using [TSLint](https://palantir.github.io/tslint/) and code formatting is
-provided through [Prettier](https://prettier.io).
+Rules are enforced using [ESLint](https://eslint.org) and code formatting is provided through
+[Prettier](https://prettier.io).
 
-To lint using TSLint, use `yarn lint`. To format and lint your code (careful - this can rewrite
+To lint using ESLint, use `yarn lint`. To format and lint your code (careful - this can rewrite
 files), use `yarn format`.
 
 Code formatting will occur automatically before `git commit` for files staged using `git add`.
@@ -226,13 +214,13 @@ while we iterate on it. Visit the link above for more info.
 
 ### Editors
 
-Install the Prettier and TSLint plugins for your respective editors for quicker and easier
+Install the Prettier and ESLint plugins for your respective editors for quicker and easier
 formatting.
 
 #### Visual Studio Code
 
 Install [prettier-vscode](https://github.com/prettier/prettier-vscode) and
-[vscode-tslint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)
+[vscode-eslint](https://github.com/microsoft/vscode-eslint)
 
 Consider adding the following options:
 
@@ -241,7 +229,7 @@ Consider adding the following options:
 #### Atom
 
 Install [prettier-atom](https://github.com/prettier/prettier-atom) and
-[linter-tslint](https://github.com/AtomLinter/linter-tslint)
+[linter-eslint](https://atom.io/packages/linter-eslint)
 
 #### Emacs
 
@@ -251,5 +239,5 @@ Install [prettier-emacs](https://github.com/prettier/prettier-emacs) and
 #### Other Editors
 
 Check [Prettier](https://prettier.io/docs/en/editors.html) and
-[TSLint](https://palantir.github.io/tslint/usage/third-party-tools/) documentation for additional
-editor plugins.
+[ESLint](https://eslint.org/docs/user-guide/integrations) documentation for additional editor
+plugins.
