@@ -124,7 +124,6 @@
     "format:prettier": "prettier --config=./.prettierrc --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format": "yarn lint --fix",
     "test": "TZ=UTC jest",
-    "updateSnaps": "TZ=UTC jest -u",
     "bump": "lerna version",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"

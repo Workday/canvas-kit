@@ -68,8 +68,7 @@ within a single repository.
 #### Testing
 
 Canvas Kit uses [Jest](https://jestjs.io/) and [Enzyme](https://airbnb.io/enzyme/) to unit test our
-React components. Each and every component requires at least 80% unit test coverage and a thorough
-set of snapshot tests.
+React components. Each and every component requires at least 80% unit test coverage.
 
 Canvas Kit uses [Cypress](cypress.io) for UI tests. For info on why we chose Cypress, visit
 [Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
@@ -110,8 +109,7 @@ fix: Add missing static class variable to IconButton and Avatar
 - Use the imperative mood (e.g. "fix", not "fixed")
 - Start with a verb
 - Use the body of the commit if more context is needed
-- If you have similar/identical commits one after another (i.e. snapshot updates), consider using
-  `--amend` or squashing.
+- If you have similar/identical commits one after another, consider using `--amend` or squashing.
 
 > **DON'T**
 
@@ -149,14 +147,8 @@ fix: Add missing static class variable to IconButton and Avatar
 ## Getting Started
 
 1.  Clone the respository and run `yarn`
-2.  Run `yarn build`
-3.  Run `yarn start` to start [Storybook](https://storybook.js.org/)
-4.  Visit [http://localhost:9001/](http://localhost:9001/)
-5.  To quickly rebuild on file changes, run `yarn watch` in another terminal. This will rebuild
-    modules for each file change. **Note** this command will take a lot of memory (1-2GB). If you
-    are working on a specific module, you can navigate to the module your are working on and run
-    `yarn watch` from there. This will only watch a specific module at a fraction of the memory
-    requirements
+2.  Run `yarn start` to start [Storybook](https://storybook.js.org/)
+3.  Visit [http://localhost:9001/](http://localhost:9001/)
 
 ### Creating a module
 
@@ -190,18 +182,14 @@ will (in addition to creating required scaffolding):
 
 **`yarn build`**
 
-This will build all modules' CSS and JS.
+This will build all modules' CSS and JS. This should only be done before publishing. It is not
+needed for development.
 
 ### Testing Modules
 
 **`yarn test`**
 
 This will start the unit tests and run code coverage.
-
-**`yarn updateSnaps`**
-
-If you know you've made a breaking visual change, use this command to update your snapshot tests.
-This will add files to your workspace that you'll need to commit.
 
 ### Code Style Guide
 
