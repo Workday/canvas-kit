@@ -80,6 +80,12 @@ Default: `PopupPadding.l`
 
 ---
 
+#### `closeLabel: string`
+
+> Aria label string for the close icon button
+
+---
+
 #### `depth: CanvasDepthValue`
 
 > Depth of the card. Style imported from `@workday/canvas-kit-react-core`.
