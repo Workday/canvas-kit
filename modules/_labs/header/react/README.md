@@ -185,6 +185,14 @@ Default:
 
 ---
 
+#### `searchLabel: string`
+
+> Default placeholder text for search
+
+Default: 'Search'
+
+---
+
 #### `onMenuClick: (React.SyntheticEvent) => void`
 
 > A click handler for when the user clicks the mobile collapsed nav icon.

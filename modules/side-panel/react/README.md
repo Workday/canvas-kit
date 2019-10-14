@@ -124,6 +124,18 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
 
 ---
 
+#### `hideNavigationLabel: string`
+
+> Aria label for hiding the navigation
+
+---
+
+#### `showNavigationLabel: string`
+
+> Aria label for showing the navigation
+
+---
+
 #### `backgroundColor: SidePanelBackgroundColor`
 
 > Determines the background color of the side panel when it's `open`
