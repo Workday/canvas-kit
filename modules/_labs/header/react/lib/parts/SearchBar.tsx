@@ -71,7 +71,7 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
 
 const formCollapsedBackground = colors.frenchVanilla100;
 
-const SearchContainer = styled('form')<Pick<SearchBarProps, | 'isCollapsed' | 'grow'> & Pick<SearchBarState, 'mobileToggle'>>(
+const SearchForm = styled('form')<Pick<SearchBarProps, | 'isCollapsed' | 'grow'> & Pick<SearchBarState, 'mobileToggle'>>(
   {
     position: 'relative',
     flexGrow: 1,
@@ -92,6 +92,7 @@ const SearchContainer = styled('form')<Pick<SearchBarProps, | 'isCollapsed' | 'g
         backgroundColor: mobileToggle ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
         transition: 'background-color 120ms',
         maxWidth: mobileToggle ? 'none' : spacingNumbers.xl + spacingNumbers.xxs,
+        minWidth: spacingNumbers.xl + spacingNumbers.xs,
         overflow: mobileToggle ? 'none' : 'hidden',
         zIndex: 1,
       }
@@ -106,22 +107,30 @@ const SearchContainer = styled('form')<Pick<SearchBarProps, | 'isCollapsed' | 'g
   },
 );
 
+const SearchContainer = styled('div')({
+  position: `relative`,
+  width: `100%`,
+  minHeight: spacingNumbers.xl + spacingNumbers.xxxs,
+})
+
 const SearchSubmit = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'>>(
   ({ isCollapsed }) => {
     const collapseStyles: CSSObject = isCollapsed
       ? {
         width: spacing.xl,
         height: spacing.xl,
+        margin: `auto ${spacing.xxs}`,
       }
       : {
         width: spacing.l,
         height: spacing.l,
-        position: `absolute`,
       };
 
     return {
+      position: `absolute`,
       margin: `${spacing.xxxs} ${spacing.xxs}`,
-      bottom: `${spacing.zero}`,
+      top: spacing.zero,
+      bottom: spacing.zero,
       zIndex: 3,
       ...collapseStyles,
     }
@@ -139,8 +148,11 @@ const CloseButton = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & Pic
       };
 
     return {
-      margin: `${spacing.xxxs} ${spacing.xxs}`,
-      bottom: `${spacing.zero}`,
+      position: `absolute`,
+      top: spacing.zero,
+      right: spacing.zero,
+      bottom: spacing.zero,
+      margin: `auto ${spacing.xxs}`,
       zIndex: 3,
       ...collapseStyles,
     }
@@ -153,8 +165,8 @@ const SearchInput = styled(TextInput)<Pick<SearchBarProps, 'isCollapsed'> & { in
       ? {
         ...type.h3,
         fontWeight: 400,
-        paddingLeft: spacing.xs,
-        paddingRight: spacing.xs,
+        paddingLeft: spacingNumbers.xl + spacingNumbers.s,
+        paddingRight: spacingNumbers.xl + spacingNumbers.s,
         margin: `${spacing.xs} 0`,
         maxWidth: 'none',
         width: '100%',
@@ -163,14 +175,13 @@ const SearchInput = styled(TextInput)<Pick<SearchBarProps, 'isCollapsed'> & { in
         display: mobileToggle ? 'inline-block' : 'none'
       }
       : {
-        ...type.body,
         maxWidth: '480px',
         paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
         paddingRight: spacing.xl,
         backgroundColor: inputColors.background,
       };
-
     return {
+      ...type.body,
       boxShadow: inputColors.boxShadow,
       color: inputColors.color,
       border: 'none',
@@ -308,57 +319,59 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     } = this.props;
 
     return (
-      <SearchContainer
+      <SearchForm
         role='search'
         isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
         mobileToggle={this.state.mobileToggle}
         {...elemProps}
       >
-        <SearchSubmit
-          aria-label={accessibleLabel}
-          icon={searchIcon}
-          isCollapsed={isCollapsed}
-          variant={this.getIconButtonType()}
-          onClick={this.openMobileSearch}
-          buttonRef={this.submitRef}
-          type={this.props.isCollapsed && !this.state.mobileToggle ? 'button' : 'submit'}
-        />
-        <FormField
-          grow={grow}
-          label={accessibleLabel}
-          labelPosition={FormFieldLabelPosition.Hidden}
-          inputId={accessibleId}
-          className={css({marginBottom: spacingNumbers.zero, width: grow ? '100%' : 'auto'})}
-        >
-          <Combobox
-            clearButtonVariant={this.getIconButtonType()}
-            autocompleteItems={autocompleteItems}
-            onChange={this.handleSearchInputChange}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            showClearButton={!isCollapsed && showClearButton}
-            clearButtonLabel={clearButtonLabel}
+        <SearchContainer>
+          <SearchSubmit
+            aria-label={accessibleLabel}
+            icon={searchIcon}
+            isCollapsed={isCollapsed}
+            variant={this.getIconButtonType()}
+            onClick={this.openMobileSearch}
+            buttonRef={this.submitRef}
+            type={this.props.isCollapsed && !this.state.mobileToggle ? 'button' : 'submit'}
+          />
+          <FormField
+            grow={grow}
+            label={accessibleLabel}
+            labelPosition={FormFieldLabelPosition.Hidden}
+            inputId={accessibleId}
+            className={css({marginBottom: spacingNumbers.zero, width: grow ? '100%' : 'auto'})}
           >
-            <SearchInput
-              inputRef={this.inputRef}
-              value={this.state.searchQuery}
-              placeholder={placeholder}
-              isCollapsed={isCollapsed}
-              mobileToggle={this.state.mobileToggle}
-              inputColors={this.getThemeColors()}
-            />
-          </Combobox>
-        </FormField>
-        <CloseButton
-          aria-label={clearButtonLabel || 'Cancel'}
-          icon={xIcon}
-          isCollapsed={isCollapsed}
-          variant={IconButton.Variant.Plain}
-          mobileToggle={this.state.mobileToggle}
-          onClick={this.closeMobileSearch}
-        />
-      </SearchContainer>
+            <Combobox
+              clearButtonVariant={this.getIconButtonType()}
+              autocompleteItems={autocompleteItems}
+              onChange={this.handleSearchInputChange}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              showClearButton={!isCollapsed && showClearButton}
+              clearButtonLabel={clearButtonLabel}
+            >
+              <SearchInput
+                inputRef={this.inputRef}
+                value={this.state.searchQuery}
+                placeholder={placeholder}
+                isCollapsed={isCollapsed}
+                mobileToggle={this.state.mobileToggle}
+                inputColors={this.getThemeColors()}
+              />
+            </Combobox>
+          </FormField>
+          <CloseButton
+            aria-label={clearButtonLabel || 'Cancel'}
+            icon={xIcon}
+            isCollapsed={isCollapsed}
+            variant={IconButton.Variant.Plain}
+            mobileToggle={this.state.mobileToggle}
+            onClick={this.closeMobileSearch}
+          />
+        </SearchContainer>
+      </SearchForm>
     );
   }
 }
