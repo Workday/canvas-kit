@@ -44,7 +44,7 @@ describe('FormField', () => {
   });
 
   test('Set aria-describedby', () => {
-    const InputComponent: React.SFC<GrowthBehavior> = () => <input type="text" />;
+    const InputComponent: React.FunctionComponent<GrowthBehavior> = () => <input type="text" />;
     const hintText = 'Hint Text';
     const hintId = 'hint-id';
     const component = mount(
@@ -65,7 +65,7 @@ describe('FormField', () => {
   });
 
   test('Sets id on input & htmlFor on label', () => {
-    const InputComponent: React.SFC = () => <input type="text" />;
+    const InputComponent: React.FunctionComponent = () => <input type="text" />;
     const inputId = 'input-id';
 
     const component = mount(
@@ -81,7 +81,7 @@ describe('FormField', () => {
   });
 
   test('Sets grow prop', () => {
-    const InputComponent: React.SFC<GrowthBehavior> = () => <input type="text" />;
+    const InputComponent: React.FunctionComponent<GrowthBehavior> = () => <input type="text" />;
 
     const component = mount(
       <FormField grow={true}>
@@ -95,7 +95,9 @@ describe('FormField', () => {
   });
 
   test('Sets error prop with aria label', () => {
-    const InputComponent: React.SFC<FormFieldErrorBehavior> = () => <input type="text" />;
+    const InputComponent: React.FunctionComponent<FormFieldErrorBehavior> = () => (
+      <input type="text" />
+    );
 
     const component = mount(
       <FormField error={FormField.ErrorType.Error}>
@@ -118,7 +120,9 @@ describe('FormField', () => {
   });
 
   test('Uses fieldset and legend when useFieldset=true (for RadioGroup)', () => {
-    const InputComponent: React.SFC<FormFieldErrorBehavior> = () => <input type="text" />;
+    const InputComponent: React.FunctionComponent<FormFieldErrorBehavior> = () => (
+      <input type="text" />
+    );
 
     const component = mount(
       <FormField useFieldset={true} label="Label">
@@ -133,7 +137,9 @@ describe('FormField', () => {
   });
 
   test('FormField should spread extra props', () => {
-    const InputComponent: React.SFC<FormFieldErrorBehavior> = () => <input type="text" />;
+    const InputComponent: React.FunctionComponent<FormFieldErrorBehavior> = () => (
+      <input type="text" />
+    );
     const component = mount(
       <FormField data-propspread="test">
         <InputComponent />

@@ -130,7 +130,7 @@ module.exports = async ({config}) => {
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
       tsconfig: path.join(__dirname, 'tsconfig.json'),
-      tslint: path.join(__dirname, '../tslint.json'),
+      eslint: true,
     })
   );
 
