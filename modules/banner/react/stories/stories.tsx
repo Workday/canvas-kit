@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {withKnobs, select, text} from '@storybook/addon-knobs';
+import {select, text} from '@storybook/addon-knobs';
 import withReadme from 'storybook-readme/with-readme';
 
 import Banner from '../index';
@@ -14,7 +14,6 @@ const handleBannerClick = (e: React.SyntheticEvent) => {
 storiesOf('Banner/Alert', module)
   .addParameters({component: Banner})
   .addDecorator(withReadme(README))
-  .addDecorator(withKnobs)
   .add('Full', () => (
     <div className="story">
       <Banner
@@ -55,7 +54,6 @@ storiesOf('Banner/Alert', module)
 storiesOf('Banner/Error', module)
   .addParameters({component: Banner})
   .addDecorator(withReadme(README))
-  .addDecorator(withKnobs)
   .add('Full', () => (
     <div className="story">
       <Banner

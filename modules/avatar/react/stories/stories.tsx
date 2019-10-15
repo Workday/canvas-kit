@@ -5,13 +5,20 @@ import withReadme from 'storybook-readme/with-readme';
 
 import Avatar, {AvatarButton} from '../index';
 import README from '../README.md';
-import {withKnobs} from '@storybook/addon-knobs';
 
 const IMAGE_URL = 'https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png';
 
 const handleAvatarButtonClick = (e: React.SyntheticEvent) => {
   console.log('AvatarButton clicked');
 };
+
+/// TEST
+
+import Test from '../lib/Test';
+
+storiesOf('_TEST', module).add('Test', () => <Test>some text</Test>);
+
+/// TEST
 
 storiesOf('Avatar/Default', module)
   .addDecorator(withReadme(README))
