@@ -33,5 +33,5 @@ export function getTitle($modal: JQuery): JQuery {
  *   .click()
  */
 export function getCloseButton($modal: JQuery): JQuery {
-  return $modal.find('[data-close=close]');
+  return $modal.find('[data-close]');
 }
