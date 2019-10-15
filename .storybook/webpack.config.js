@@ -21,12 +21,34 @@ const babelLoader = {
   },
 };
 
+// const docgenLoader = {
+//   loader: require.resolve('react-docgen-typescript-loader'),
+//   options: {
+//     tsconfigPath: path.join(__dirname, 'tsconfig.json'),
+//     skipPropsWithoutDoc: true,
+//   },
+// };
+
 const customRules = [
   {
     test: /\.tsx?$/,
     exclude: /node_modules/,
     include: [modulesPath, utilsPath],
-    loader: 'happypack/loader?id=ts',
+    use: 'happypack/loader?id=ts',
+  },
+  {
+    test: /stories.*\.tsx?$/,
+    exclude: /node_modules/,
+    include: [modulesPath],
+    use: [
+      {
+        loader: require.resolve('@storybook/source-loader'),
+        options: {
+          parser: 'typescript',
+        },
+      },
+    ],
+    enforce: 'pre',
   },
   {
     test: /\.scss$/,
@@ -124,6 +146,17 @@ module.exports = async ({config}) => {
             happyPackMode: true,
             configFile: path.join(__dirname, './tsconfig.json'),
           },
+        },
+        // docgenLoader,
+      ],
+    }),
+    new HappyPack({
+      id: 'storybook',
+      threads: 2,
+      loaders: [
+        {
+          loader: require.resolve('@storybook/source-loader'),
+          options: {parser: 'typescript'},
         },
       ],
     }),

@@ -1,4 +1,5 @@
 import {configure, addDecorator, addParameters, forceReRender} from '@storybook/react';
+import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
 import {withKnobs} from '@storybook/addon-knobs/react';
 import {create} from '@storybook/theming';
 import addons from '@storybook/addons';
@@ -12,7 +13,13 @@ import {InputProviderDecorator, FontsDecorator} from '../utils/storybook';
 const req = require.context('../modules', true, /stories.*\.tsx?$/);
 
 function loadStories() {
-  req.keys().forEach(req);
+  const allExports = [];
+  req.keys().forEach(fname => {
+    const story = req(fname);
+    if (story.default) allExports.push(story);
+  });
+
+  return allExports;
 }
 
 addDecorator(withKnobs);
@@ -28,9 +35,10 @@ addParameters({
       mainBackground: commonColors.backgroundAlt,
     }),
   },
-});
-
-addParameters({
+  docs: {
+    container: DocsContainer,
+    page: DocsPage,
+  },
   readme: {
     codeTheme: 'github',
   },
