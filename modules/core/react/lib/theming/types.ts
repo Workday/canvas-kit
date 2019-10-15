@@ -28,3 +28,12 @@ export interface CanvasTheme {
 export interface Themeable {
   theme?: CanvasTheme;
 }
+
+/**
+ * For custom themes that do not overwrite every default.
+ */
+type RecursivePartial<T> = {
+  [P in keyof T]?: RecursivePartial<T[P]>;
+};
+
+export type PartialCanvasTheme = RecursivePartial<CanvasTheme>;
