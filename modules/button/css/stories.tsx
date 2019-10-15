@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import {css, jsx} from '@emotion/core';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
