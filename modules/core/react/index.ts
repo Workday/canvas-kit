@@ -12,7 +12,7 @@ import spacing, {
   spacingNumbers,
 } from './lib/spacing';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
-import {CSSProperties, CanvasTheme} from './lib/types';
+import {CSSProperties} from './lib/types';
 
 const {default: colors, ...semanticColors} = canvasColorsWeb;
 const canvas = {
@@ -25,6 +25,8 @@ const canvas = {
   ...semanticColors,
 };
 
+export * from './lib/theming/types';
+export * from './lib/theming/theme';
 export * from './lib/TypeWrappers';
 export * from '@workday/canvas-colors-web';
 export {
@@ -46,7 +48,6 @@ export {
   CanvasTypeVariant,
   CanvasColor,
   CSSProperties,
-  CanvasTheme,
   InputProvider,
   CanvasProvider,
 };

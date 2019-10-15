@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {Themeable} from '@workday/canvas-kit-react-common';
+import {Themeable, defaultCanvasTheme} from '@workday/canvas-kit-react-core';
 
 export interface TestProps extends Themeable {}
 
