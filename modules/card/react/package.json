@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-card",
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0-beta.1",
   "description": "Common Canvas card component for React",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -38,7 +38,7 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-core": "^3.0.0-beta.0",
+    "@workday/canvas-kit-react-core": "^3.0.0-beta.1",
     "emotion": "^9.2.12",
     "react-emotion": "^9.2.12"
   }

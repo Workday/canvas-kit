@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-menu",
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0-beta.1",
   "description": "A container for navigation or action items",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -41,10 +41,10 @@
   },
   "dependencies": {
     "@types/uuid": "^3.4.4",
-    "@workday/canvas-kit-react-card": "^3.0.0-beta.0",
-    "@workday/canvas-kit-react-common": "^3.0.0-beta.0",
-    "@workday/canvas-kit-react-core": "^3.0.0-beta.0",
-    "@workday/canvas-kit-react-icon": "^3.0.0-beta.0",
+    "@workday/canvas-kit-react-card": "^3.0.0-beta.1",
+    "@workday/canvas-kit-react-common": "^3.0.0-beta.1",
+    "@workday/canvas-kit-react-core": "^3.0.0-beta.1",
+    "@workday/canvas-kit-react-icon": "^3.0.0-beta.1",
     "@workday/design-assets-types": "^0.2.3",
     "emotion": "^9.2.12",
     "react-emotion": "^9.2.12",
