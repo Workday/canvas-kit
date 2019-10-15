@@ -38,7 +38,7 @@ same module.
 Examples:
 
 ```tsx
-import {css} from 'react-emotion';
+import {css} from '@emotion/core';
 import {type} from '@workday/canvas-kit-react-core';
 
 ...
@@ -52,7 +52,7 @@ render(
 or
 
 ```tsx
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {fontFamily, monoFontFamily} from '@workday/canvas-kit-react-core';
 
 // Custom typography using the official Canvas font list

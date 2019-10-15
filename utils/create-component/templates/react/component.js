@@ -1,6 +1,6 @@
 module.exports = pascalCaseName => `
 import * as React from 'react'
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 export interface ${pascalCaseName}Props extends React.HTMLAttributes<HTMLDivElement> {
 
