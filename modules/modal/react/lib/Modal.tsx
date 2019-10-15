@@ -79,7 +79,7 @@ function onInitialFocus(
     const firstFocusable =
       modalEl &&
       modalEl.querySelector<HTMLElement>(
-        `[data-close=close],#${modalEl.getAttribute('aria-labelledby')}`
+        `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
       );
     if (firstFocusable) {
       if (firstFocusable.tagName === 'H3') {
