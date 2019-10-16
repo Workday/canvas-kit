@@ -43,9 +43,6 @@ const customRules = [
     use: [
       {
         loader: require.resolve('@storybook/source-loader'),
-        options: {
-          parser: 'typescript',
-        },
       },
     ],
     enforce: 'pre',
