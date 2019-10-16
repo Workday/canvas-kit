@@ -3,6 +3,7 @@ import styled from 'react-emotion';
 import {GenericStyle} from '@workday/canvas-kit-react-common';
 import Column, {ColumnProps} from './Column';
 import canvas, {spacingNumbers} from '@workday/canvas-kit-react-core';
+import isPropValid from '@emotion/is-prop-valid';
 
 export interface LayoutProps {
   /**
@@ -32,7 +33,9 @@ const LayoutStyles: GenericStyle = {
   },
 };
 
-const LayoutContainer = styled('div')<LayoutProps>(
+const LayoutContainer = styled('div', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'spacing',
+})<LayoutProps>(
   LayoutStyles.styles,
   ({gutter}) => {
     if (gutter === 0) {
