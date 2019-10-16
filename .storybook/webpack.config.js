@@ -1,6 +1,7 @@
 const path = require('path');
 const HappyPack = require('happypack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const utilsPath = path.resolve(__dirname, '../utils');
@@ -20,14 +21,6 @@ const babelLoader = {
     ],
   },
 };
-
-// const docgenLoader = {
-//   loader: require.resolve('react-docgen-typescript-loader'),
-//   options: {
-//     tsconfigPath: path.join(__dirname, 'tsconfig.json'),
-//     skipPropsWithoutDoc: true,
-//   },
-// };
 
 const customRules = [
   {
@@ -144,24 +137,14 @@ module.exports = async ({config}) => {
             configFile: path.join(__dirname, './tsconfig.json'),
           },
         },
-        // docgenLoader,
-      ],
-    }),
-    new HappyPack({
-      id: 'storybook',
-      threads: 2,
-      loaders: [
-        {
-          loader: require.resolve('@storybook/source-loader'),
-          options: {parser: 'typescript'},
-        },
       ],
     }),
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
       tsconfig: path.join(__dirname, 'tsconfig.json'),
       eslint: true,
-    })
+    }),
+    new DocgenPlugin()
   );
 
   return config;
