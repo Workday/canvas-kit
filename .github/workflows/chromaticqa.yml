@@ -16,12 +16,7 @@ jobs:
         node-version: 10.x
     - name: Install Packages
       run: yarn install
-    - name: ChromaticQA
-      # Chromatic has a separate Github check that handles changes. We need to exit
-      # zero, otherwise this Github workflow will have to be rerun _after_ a visual review.
-      # This extra step is unnecessary with the Chromatic check we have integrated.
-      # http://docs.chromaticqa.com/setup_ci#command-exit-code
-      run: yarn chromatic --exit-zero-on-changes
-      env:
-        CI: true
-        CHROMATIC_APP_CODE: dlpro96xybh
+    - uses: chromaui/action@releases/v1
+      with:
+        appCode: dlpro96xybh
+        token: ${{ secrets.GITHUB_TOKEN }}
