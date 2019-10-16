@@ -97,7 +97,7 @@ storiesOf('Button', module)
       <Button disabled={true} size={Button.Size.Small} variant={Button.Variant.Primary}>
         Primary
       </Button>
-      <h3>Growing Primary</h3>
+      <h2>Growing Primary</h2>
       <div className={css(buttonContainer)}>
         <Button size={Button.Size.Large} variant={Button.Variant.Primary} grow={true}>
           Primary
