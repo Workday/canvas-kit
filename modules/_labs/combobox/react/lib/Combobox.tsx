@@ -161,7 +161,17 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
       if (nativeInputValue && nativeInputValue.set) {
         nativeInputValue.set.call(this.inputRef.current, newValue);
       }
-      const event = new Event('input', { bubbles: true });
+
+      let event: Event
+      if (typeof (Event) === 'function') {
+        // modern browsers
+        event = new Event('input', { bubbles: true });
+      } else {
+        // IE 11
+        event = document.createEvent('Event');
+        event.initEvent('input', true);
+      }
+
       this.inputRef.current.dispatchEvent(event);
     }
   }
