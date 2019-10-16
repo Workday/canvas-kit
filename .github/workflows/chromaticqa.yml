@@ -24,6 +24,6 @@ jobs:
       run: yarn chromatic --exit-zero-on-changes
       env:
         CI: true
-        CHROMATIC_BRANCH: ${{ event.payload.pull_request.head.ref }}
-        CHROMATIC_SHA: ${{ github.event.payload.pull_request.head.sha }}
+        CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref }}
+        CHROMATIC_SHA: ${{ github.event.pull_request.head.sha }}
         CHROMATIC_APP_CODE: dlpro96xybh
