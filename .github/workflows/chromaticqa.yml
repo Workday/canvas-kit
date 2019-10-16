@@ -11,10 +11,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      with:
-        # Use 'head' instead of 'merge': https://docs.chromaticqa.com/setup_ci#pull-request-builds
-        # 'head' is the HEAD of the PR branch. 'merge' is the hidden merge commit created by github
-        ref: refs/pull/${{ github.event.pull_request.number}}/head
     - uses: actions/setup-node@v1
       with:
         node-version: 10.x
@@ -28,4 +24,6 @@ jobs:
       run: yarn chromatic --exit-zero-on-changes
       env:
         CI: true
+        CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref }}
+        CHROMATIC_SHA: ${{ github.event.pull_request.head.sha }}
         CHROMATIC_APP_CODE: dlpro96xybh
