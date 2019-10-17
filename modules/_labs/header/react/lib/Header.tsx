@@ -45,7 +45,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * React element for the left of the header, this is typically a search bar component
    */
-  leftSlot?: React.ReactElement
+  leftSlot?: React.ReactElement;
   /**
    * A boolean indicating if the header should be rendered in collapsed mode
    */
@@ -180,24 +180,24 @@ const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor
     marginRight: spacing.m,
     // TODO: remove this when we get real icon buttons
     '> .canvas-header--menu-icon': {
-      cursor: 'pointer'
+      cursor: 'pointer',
     },
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
     height: '100%',
     '> *': {
-      marginLeft: childrenSpacing
-    }
+      marginLeft: childrenSpacing,
+    },
   },
   ({centeredNav = false, isCollapsed}) => ({
     '> *:not(.canvas-header--menu-icon)': {
-      display: isCollapsed ? 'none' : 'flex'
+      display: isCollapsed ? 'none' : 'flex',
     },
     '> *:last-child': {
-      marginRight: isCollapsed ? '' : 0
+      marginRight: isCollapsed ? '' : 0,
     },
-    flexGrow: !isCollapsed && centeredNav ? 1 : 'unset'
+    flexGrow: !isCollapsed && centeredNav ? 1 : 'unset',
   }),
   navStyle
 );
@@ -238,17 +238,21 @@ class MenuIconButton extends React.Component<
     const {themeColor, menuToggle, onMenuClick} = this.props;
     if (menuToggle) {
       const menuToggleElement = menuToggle as React.ReactElement<any>;
-      const onClick = menuToggleElement.props.onClick ? menuToggleElement.props.onClick : onMenuClick;
+      const onClick = menuToggleElement.props.onClick
+        ? menuToggleElement.props.onClick
+        : onMenuClick;
 
       return React.cloneElement(menuToggleElement, {
         onClick,
-        className: 'canvas-header--menu-icon'
+        className: 'canvas-header--menu-icon',
       });
     }
 
     return (
       <IconButton
-        variant={themeColor === HeaderTheme.White ? IconButton.Variant.Circle : IconButton.Variant.Inverse}
+        variant={
+          themeColor === HeaderTheme.White ? IconButton.Variant.Circle : IconButton.Variant.Inverse
+        }
         icon={justifyIcon}
         className={'canvas-header--menu-icon'}
         aria-label="Open Menu"

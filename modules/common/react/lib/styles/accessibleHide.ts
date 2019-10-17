@@ -1,4 +1,4 @@
-import { CSSObject } from 'create-emotion';
+import { CSSObject } from '@emotion/core';
 
 /**
  * A utility to hide content normal users while still making accessible to screenreaders

@@ -49,8 +49,6 @@ describe('Header', () => {
     cb.mockReset();
   });
 
-
-
   test('Header should spread extra props', () => {
     const component = mount(<Header data-propspread="test" />);
     const container = component.at(0).getDOMNode();
@@ -114,14 +112,13 @@ describe('Header', () => {
     });
 
     describe('When rendered in collapsed mode', () => {
-
       test('Calls onMenuClick when the menuToggle does not have an onClick prop', () => {
         const onMenuClick = jest.fn();
         const wrapper = mount<Header>(
           <Header
             isCollapsed={true}
             onMenuClick={onMenuClick}
-            menuToggle={<IconButton aria-label="Activity Stream" icon={activityStreamIcon}/>}
+            menuToggle={<IconButton aria-label="Activity Stream" icon={activityStreamIcon} />}
           />
         );
 
@@ -137,7 +134,13 @@ describe('Header', () => {
           <Header
             isCollapsed={true}
             onMenuClick={onMenuClick}
-            menuToggle={<IconButton aria-label="Activity Stream" icon={activityStreamIcon} onClick={onIconClick}/>}
+            menuToggle={
+              <IconButton
+                aria-label="Activity Stream"
+                icon={activityStreamIcon}
+                onClick={onIconClick}
+              />
+            }
           />
         );
 
@@ -152,7 +155,13 @@ describe('Header', () => {
         const wrapper = mount<Header>(
           <Header
             isCollapsed={true}
-            menuToggle={<IconButton aria-label="Activity Stream" icon={activityStreamIcon} onClick={onIconClick}/>}
+            menuToggle={
+              <IconButton
+                aria-label="Activity Stream"
+                icon={activityStreamIcon}
+                onClick={onIconClick}
+              />
+            }
           />
         );
 
@@ -160,7 +169,6 @@ describe('Header', () => {
 
         expect(onIconClick).toHaveBeenCalled();
       });
-
     });
   });
 });

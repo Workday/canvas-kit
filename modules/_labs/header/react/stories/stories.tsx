@@ -1,11 +1,11 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
-import {css, jsx} from '@emotion/core';
+import {jsx} from '@emotion/core';
+import styled from '@emotion/styled';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import styled from '@emotion/styled';
-import { action } from '@storybook/addon-actions';
+import {action} from '@storybook/addon-actions';
 import chroma from 'chroma-js';
 
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
@@ -14,11 +14,19 @@ import {AvatarButton} from '../../../../avatar/react/index';
 import {colors, spacing} from '../../../../core/react/index';
 import {Button, IconButton} from '../../../../button/react/index';
 import {MenuItem} from '../../../menu/react/index';
-import {GlobalHeader, Header, DubLogoTitle, WorkdayLogoTitle, HeaderVariant, SearchBar, SearchBarProps} from '../index';
+import {
+  GlobalHeader,
+  Header,
+  DubLogoTitle,
+  WorkdayLogoTitle,
+  HeaderVariant,
+  SearchBar,
+  SearchBarProps,
+} from '../index';
 
 import README from '../README.md';
 import bgImg from '../static/workday-bg.jpg';
-import {boolean, withKnobs} from "@storybook/addon-knobs";
+import {boolean, withKnobs} from '@storybook/addon-knobs';
 
 const containerStyle = {
   backgroundColor: colors.soap100,
@@ -71,42 +79,48 @@ const nav = (
   </nav>
 );
 
-const searchId = 'searchInputId'
-class SearchWithAutoComplete extends React.Component<Partial<SearchBarProps>, { currentText: string }> {
+const searchId = 'searchInputId';
+class SearchWithAutoComplete extends React.Component<
+  Partial<SearchBarProps>,
+  {currentText: string}
+> {
   state = {
     currentText: '',
   };
 
   autocompleteCallback = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ currentText: event.target.value });
+    this.setState({currentText: event.target.value});
   };
 
   render() {
     const autocompleteResult = (textModifier: string) => (
       <MenuItem onClick={action(`Clicked Result ${textModifier}`)}>
-        Result <span>num<span>ber</span></span> {textModifier}
+        Result{' '}
+        <span>
+          num<span>ber</span>
+        </span>{' '}
+        {textModifier}
       </MenuItem>
     );
     return (
       <SearchBar
         {...this.props}
-        autocompleteItems={
-          Array.apply(null, Array(this.state.currentText.length))
-            .map((x: any, i: string) => autocompleteResult(i))
-            .splice(0, 5)
-        }
+        autocompleteItems={Array.apply(null, Array(this.state.currentText.length))
+          .map((x: any, i: string) => autocompleteResult(i))
+          .splice(0, 5)}
         isCollapsed={boolean('isCollapsed', false)}
         onInputChange={this.autocompleteCallback}
         placeholder={`Search with Autocomplete`}
         accessibleId={searchId}
         grow={true}
         searchTheme={SearchBar.Theme.Dark}
-        onSubmit={(event) => {
-          const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value
-          action(`search submitted ${formInputValue}`)()
+        onSubmit={event => {
+          const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0]
+            .value;
+          action(`search submitted ${formInputValue}`)();
         }}
       />
-    )
+    );
   }
 }
 
@@ -128,7 +142,13 @@ storiesOf('Labs/Header/React', module)
               url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
             />
           }
-          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={
+            <SearchBar
+              isCollapsed={boolean('isCollapsed', false)}
+              grow={true}
+              onSubmit={handleSearchSubmitTest}
+            />
+          }
           isCollapsed={boolean('isCollapsed', false)}
           onMenuClick={handleMenuClickTest}
         >
@@ -155,7 +175,13 @@ storiesOf('Labs/Header/React', module)
         <GlobalHeader
           brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}
           menuToggle={<AvatarButton onClick={handleMenuClickTest} />}
-          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={
+            <SearchBar
+              isCollapsed={boolean('isCollapsed', false)}
+              grow={true}
+              onSubmit={handleSearchSubmitTest}
+            />
+          }
           isCollapsed={boolean('isCollapsed', false)}
         >
           <IconButton
@@ -175,7 +201,13 @@ storiesOf('Labs/Header/React', module)
       </div>
       <div css={containerStyle}>
         <GlobalHeader
-          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={
+            <SearchBar
+              isCollapsed={boolean('isCollapsed', false)}
+              grow={true}
+              onSubmit={handleSearchSubmitTest}
+            />
+          }
           onMenuClick={handleMenuClickTest}
           isCollapsed={boolean('isCollapsed', false)}
         >
@@ -201,14 +233,28 @@ storiesOf('Labs/Header/React', module)
       <div css={containerStyle}>
         <Header
           title="Required"
-          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} rightAlign={true} grow={true} onSubmit={handleSearchSubmitTest} />}
-          isCollapsed={boolean('isCollapsed', false)}/>
+          leftSlot={
+            <SearchBar
+              isCollapsed={boolean('isCollapsed', false)}
+              rightAlign={true}
+              grow={true}
+              onSubmit={handleSearchSubmitTest}
+            />
+          }
+          isCollapsed={boolean('isCollapsed', false)}
+        />
       </div>
       <div css={containerStyle}>
         <Header
           title="Icons Only"
           brandUrl="#"
-          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={
+            <SearchBar
+              isCollapsed={boolean('isCollapsed', false)}
+              grow={true}
+              onSubmit={handleSearchSubmitTest}
+            />
+          }
           isCollapsed={boolean('isCollapsed', false)}
         >
           <IconButton
@@ -262,7 +308,13 @@ storiesOf('Labs/Header/React', module)
             />
           }
           brandUrl="#"
-          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={
+            <SearchBar
+              isCollapsed={boolean('isCollapsed', false)}
+              grow={true}
+              onSubmit={handleSearchSubmitTest}
+            />
+          }
           isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
@@ -289,7 +341,13 @@ storiesOf('Labs/Header/React', module)
           themeColor={Header.Theme.White}
           centeredNav={true}
           brandUrl="#"
-          leftSlot={<SearchBar isCollapsed={boolean('isCollapsed', false)} grow={true} onSubmit={handleSearchSubmitTest} />}
+          leftSlot={
+            <SearchBar
+              isCollapsed={boolean('isCollapsed', false)}
+              grow={true}
+              onSubmit={handleSearchSubmitTest}
+            />
+          }
           isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}

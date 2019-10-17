@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {css, CSSObject} from '@emotion/core';
@@ -15,7 +14,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * Initial value to set the input to
    */
-  initialValue?: any;
+  initialValue?: string;
   /**
    * The type of icon button to use for clearing input
    */
@@ -47,7 +46,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * The Form Field component to wrap.
    */
-  children: React.ReactElement<TextInputProps>
+  children: React.ReactElement<TextInputProps>;
 }
 
 export interface ComboboxState {
@@ -61,10 +60,10 @@ const Container = styled('div')<Pick<ComboboxProps, 'grow'>>(
   {
     display: 'inline-block',
   },
-  ({ grow }) => ({
+  ({grow}) => ({
     width: grow ? '100%' : 'auto',
   })
-)
+);
 
 const Status = styled('div')({
   ...accessibleHide,
@@ -76,7 +75,6 @@ const InputContainer = styled('div')({
   position: 'relative',
 });
 
-
 const MenuContainer = styled(Card)<Pick<ComboboxProps, 'grow'>>(
   {
     position: 'absolute',
@@ -84,12 +82,12 @@ const MenuContainer = styled(Card)<Pick<ComboboxProps, 'grow'>>(
     left: 0,
     top: '100%',
     borderRadius: borderRadius.m,
-    minWidth: 280,
+    minWidth: 280, // The min-width of text inputs
     background: commonColors.background,
     border: `none`,
-    marginTop: `-${borderRadius.m}`
+    marginTop: `-${borderRadius.m}`,
   },
-  ({ grow }) => ({
+  ({grow}) => ({
     width: grow ? '100%' : 'auto',
   })
 );
@@ -107,7 +105,7 @@ const ResetButton = styled(IconButton)<Pick<ComboboxState, 'value'>>(
     padding: 0,
     zIndex: 2,
   },
-  ({ value }) => ({
+  ({value}) => ({
     visibility: value ? 'visible' : 'hidden',
   })
 );
@@ -115,6 +113,7 @@ const ResetButton = styled(IconButton)<Pick<ComboboxState, 'value'>>(
 const listBoxIdPart = `listbox`;
 const labelIdPart = `label`;
 const optionIdPart = `option`;
+const getOptionId = (baseId?: string, index?: number) => `${baseId}-${optionIdPart}-${index}`;
 
 export default class Combobox extends React.Component<ComboboxProps, ComboboxState> {
   private inputRef = this.props.children.props.inputRef || React.createRef<HTMLInputElement>();
@@ -134,7 +133,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
 
   componentDidMount() {
     if (this.props.initialValue) {
-      this.setInputValue(this.props.initialValue)
+      this.setInputValue(this.props.initialValue);
     }
   }
 
@@ -151,21 +150,24 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   }
 
   setInputValue = (newValue: string) => {
-    this.setState({ value: newValue })
+    this.setState({value: newValue});
     // Changing value prop programmatically doesn't fire an Synthetic event or trigger native onChange.
     // We can not just update .value= in setState because React library overrides input value setter
     // but we can call the function directly on the input as context.
     // This will cause onChange events to fire no matter how value is updated.
     if (this.inputRef && this.inputRef.current) {
-      const nativeInputValue = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(this.inputRef.current), 'value')
+      const nativeInputValue = Object.getOwnPropertyDescriptor(
+        Object.getPrototypeOf(this.inputRef.current),
+        'value'
+      );
       if (nativeInputValue && nativeInputValue.set) {
         nativeInputValue.set.call(this.inputRef.current, newValue);
       }
 
-      let event: Event
-      if (typeof (Event) === 'function') {
+      let event: Event;
+      if (typeof Event === 'function') {
         // modern browsers
-        event = new Event('input', { bubbles: true });
+        event = new Event('input', {bubbles: true});
       } else {
         // IE 11
         event = document.createEvent('Event');
@@ -174,34 +176,36 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
 
       this.inputRef.current.dispatchEvent(event);
     }
-  }
+  };
 
   getTextFromElement = (children?: React.ReactNode) => {
     let text = '';
-    React.Children.map(children, (child) => {
+    React.Children.map(children, child => {
       if (child == null || typeof child === 'boolean' || child === {}) {
         text += '';
       } else if (typeof child === 'string' || typeof child === 'number') {
-        text += child.toString()
+        text += child.toString();
       } else if (Array.isArray(child)) {
         text += this.getTextFromElement(child);
       } else if ('props' in child) {
-        text += this.getTextFromElement(child.props.children)
+        text += this.getTextFromElement(child.props.children);
       }
     });
     return text;
   };
 
   buildStatusString = (listCount: number): string => {
-    return `There ${listCount === 1 ? 'is' : 'are'} ${listCount} suggestion${listCount === 1 ? '' : 's'}.`;
+    return `There ${listCount === 1 ? 'is' : 'are'} ${listCount} suggestion${
+      listCount === 1 ? '' : 's'
+    }.`;
   };
 
   handleAutocompleteClick = (event: React.SyntheticEvent, menuItemProps: MenuItemProps): void => {
     if (menuItemProps.isDisabled) {
       return;
     }
-    this.setState({ showingAutocomplete: false, isFocused: false });
-    this.setInputValue(this.getTextFromElement(menuItemProps.children))
+    this.setState({showingAutocomplete: false, isFocused: false});
+    this.setInputValue(this.getTextFromElement(menuItemProps.children));
     if (menuItemProps.onClick) {
       menuItemProps.onClick(event);
     }
@@ -214,10 +218,10 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   };
 
   handleFocus = (event: React.FocusEvent) => {
-    this.setState({ isFocused: true });
+    this.setState({isFocused: true});
 
     if (this.props.onFocus) {
-      this.props.onFocus(event)
+      this.props.onFocus(event);
     }
   };
 
@@ -233,15 +237,15 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
       }
     }
 
-    this.setState({ isFocused: false });
+    this.setState({isFocused: false});
 
     if (this.props.onBlur) {
-      this.props.onBlur(event)
+      this.props.onBlur(event);
     }
   };
 
   resetSearchInput = (): void => {
-    this.setInputValue('')
+    this.setInputValue('');
     this.focusInput();
   };
 
@@ -281,30 +285,31 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
 
       default:
     }
-    this.setState({ selectedAutocompleteIndex: nextIndex });
+    this.setState({selectedAutocompleteIndex: nextIndex});
   };
 
   handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (this.props.onChange) {
-      this.props.onChange(event)
+      this.props.onChange(event);
     }
-    this.setState({ value: event.target.value });
+    this.setState({value: event.target.value});
   };
 
-  isValidSingleChild = (child: React.ReactNode) => (React.isValidElement(child) && React.Children.only(child))
+  isValidSingleChild = (child: React.ReactNode) =>
+    React.isValidElement(child) && React.Children.only(child);
 
   renderChildren = (child: React.ReactElement<TextInputProps>): React.ReactNode => {
     if (!this.isValidSingleChild(child)) {
-      return child
+      return null;
     }
 
-    return React.Children.map(child, (inputElement) => {
-      let cssOverride: CSSObject = { zIndex: 2 }
+    return React.Children.map(child, inputElement => {
+      let cssOverride: CSSObject = {zIndex: 2};
       if (this.props.showClearButton) {
         cssOverride = {
           ...cssOverride,
-          paddingRight: spacing.xl
-        }
+          paddingRight: spacing.xl,
+        };
       }
       const newTextInputProps: Partial<TextInputProps> = {
         id: this.props.id,
@@ -313,16 +318,19 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         inputRef: this.inputRef,
         'aria-autocomplete': 'list',
         'aria-controls': `${this.props.id}-${listBoxIdPart}`,
-        'aria-activedescendant': this.state.selectedAutocompleteIndex != null ? `${this.props.id}-${optionIdPart}-${this.state.selectedAutocompleteIndex}` : '',
+        'aria-activedescendant':
+          this.state.selectedAutocompleteIndex != null
+            ? getOptionId(this.props.id, this.state.selectedAutocompleteIndex)
+            : '',
         onChange: this.handleSearchInputChange,
         onKeyDown: this.handleKeyboardShortcuts,
         onFocus: this.handleFocus,
         onBlur: this.handleBlur,
         className: css(cssOverride),
-      }
-      return React.cloneElement(inputElement, { ...inputElement.props, ...newTextInputProps });
-    })
-  }
+      };
+      return React.cloneElement(inputElement, {...inputElement.props, ...newTextInputProps});
+    });
+  };
 
   render() {
     const {
@@ -341,15 +349,17 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
 
     return (
       <Container
-        role='combobox'
-        aria-haspopup='listbox'
+        role="combobox"
+        aria-haspopup="listbox"
         aria-owns={`${id}-${listBoxIdPart}`}
-        aria-expanded={autocompleteItems && autocompleteItems.length > 0}
+        aria-expanded={this.state.showingAutocomplete}
         grow={grow}
         {...elemProps}
       >
         <Status role="status" aria-live="polite">
-          {autocompleteItems ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length) : ''}
+          {autocompleteItems
+            ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length)
+            : ''}
         </Status>
         <InputContainer innerRef={this.comboboxRef}>
           {React.Children.map(children, this.renderChildren)}
@@ -362,8 +372,8 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
               toggled={undefined}
               onClick={this.resetSearchInput}
               onBlur={this.handleBlur}
-        />
-      )}
+            />
+          )}
           {this.state.showingAutocomplete && (
             <MenuContainer padding={spacing.zero} depth={depth[1]} grow={grow}>
               <AutocompleteList
@@ -374,7 +384,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
                 {(autocompleteItems || []).map((listboxItem: React.ReactElement, index) => (
                   <React.Fragment key={index}>
                     {React.cloneElement(listboxItem, {
-                      id: `${id}-${optionIdPart}-${index}`,
+                      id: getOptionId(id, index),
                       role: 'option',
                       isFocused: this.state.selectedAutocompleteIndex === index,
                       'aria-selected': this.state.selectedAutocompleteIndex === index,

@@ -23,12 +23,12 @@ export interface GlobalHeaderProps {
   /**
    * React element for the left of the header, this is typically a search bar component
    */
-  leftSlot?: React.ReactElement
+  leftSlot?: React.ReactElement;
 }
 
 export default class GlobalHeader extends React.Component<GlobalHeaderProps> {
   static defaultProps = {
-    brand: <DubLogoTitle />
+    brand: <DubLogoTitle />,
   };
   public render() {
     const {

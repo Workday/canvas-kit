@@ -332,7 +332,7 @@ describe('Menu Keyboard Shortcuts', () => {
       </Menu>
     );
     const item = component.find('ul');
-    const zero = { keyCode: 48, key: '0' };
+    const zero = {keyCode: 48, key: '0'};
     item.simulate('keydown', zero);
     expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-0`);
     component.unmount();

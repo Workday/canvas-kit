@@ -47,7 +47,10 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
 const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
   ({grow, labelPosition}) => {
     if (grow) {
-      if (labelPosition === FormFieldLabelPosition.Left || labelPosition === FormFieldLabelPosition.Hidden) {
+      if (
+        labelPosition === FormFieldLabelPosition.Left ||
+        labelPosition === FormFieldLabelPosition.Hidden
+      ) {
         return {
           flexGrow: 1,
         };

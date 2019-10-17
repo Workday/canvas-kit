@@ -290,4 +290,4 @@ storiesOf('Labs/Menu/React', module)
         </Menu>
       </div>
     );
-  })
+  });

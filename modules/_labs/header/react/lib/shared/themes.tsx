@@ -68,15 +68,15 @@ export const themes: Themes = {
 };
 
 export interface SearchThemeAttributes {
-  background?: string
-  backgroundFocus?: string
-  backgroundHover?: string
-  color?: string
-  colorFocus?: string
-  placeholderColor?: string
-  placeholderColorFocus?: string
-  boxShadow?: string | string[]
-  boxShadowFocus?: string | string[]
+  background?: string;
+  backgroundFocus?: string;
+  backgroundHover?: string;
+  color?: string;
+  colorFocus?: string;
+  placeholderColor?: string;
+  placeholderColorFocus?: string;
+  boxShadow?: string | string[];
+  boxShadowFocus?: string | string[];
 }
 
 export interface SearchThemes {
@@ -112,5 +112,4 @@ export const searchThemes: SearchThemes = {
     placeholderColorFocus: colors.licorice300,
     boxShadow: 'none',
   },
-}
-
+};
