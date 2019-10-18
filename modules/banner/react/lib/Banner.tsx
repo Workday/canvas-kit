@@ -1,6 +1,13 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, spacing, borderRadius, type, Themeable} from '@workday/canvas-kit-react-core';
+import {
+  colors,
+  spacing,
+  borderRadius,
+  type,
+  Themeable,
+  getTheme,
+} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {ErrorType, focusRing} from '@workday/canvas-kit-react-common';
@@ -51,19 +58,22 @@ const BannerWrapper = styled('button')<BannerProps>(
       cursor: 'pointer',
     },
   },
-  ({error, theme}) => ({
-    backgroundColor:
-      error === ErrorType.Error ? theme.palette.error.main : theme.palette.alert.main,
-    color: error === ErrorType.Error ? theme.palette.error.contrast : colors.blackPepper400,
-    '&:hover': {
+  ({error, theme}) => {
+    theme = getTheme(theme); // eslint-disable-line no-param-reassign
+    return {
       backgroundColor:
-        error === ErrorType.Error ? theme.palette.error.dark : theme.palette.alert.dark,
-    },
-    '&:focus': {
-      outline: 'none',
-      ...focusRing(2, 2, undefined, undefined, undefined, theme.palette.common.focusOutline),
-    },
-  }),
+        error === ErrorType.Error ? theme.palette.error.main : theme.palette.alert.main,
+      color: error === ErrorType.Error ? theme.palette.error.contrast : colors.blackPepper400,
+      '&:hover': {
+        backgroundColor:
+          error === ErrorType.Error ? theme.palette.error.dark : theme.palette.alert.dark,
+      },
+      '&:focus': {
+        outline: 'none',
+        ...focusRing(2, 2, undefined, undefined, undefined, theme.palette.common.focusOutline),
+      },
+    };
+  },
   ({variant}) => ({
     borderRadius:
       variant === BannerVariant.Sticky ? `${borderRadius.m} 0 0 ${borderRadius.m}` : borderRadius.m,

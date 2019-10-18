@@ -46,6 +46,17 @@ export const defaultCanvasTheme: CanvasTheme = {
   // Depth?
 };
 
+/**
+ * Currently a work around for a default theme if no ThemeProvider exists.
+ * Tracked on https://github.com/emotion-js/emotion/issues/1193.
+ */
+export function getTheme(theme: Object): CanvasTheme {
+  if (Object.entries(theme).length === 0) {
+    return defaultCanvasTheme;
+  }
+  return theme as CanvasTheme;
+}
+
 // TODO: Should we use PartialCanvasTheme here?
 export function createCanvasTheme(partialTheme: Object): CanvasTheme {
   return deepmerge(defaultCanvasTheme, partialTheme);
