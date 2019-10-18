@@ -16,14 +16,18 @@ import {CanvasTheme} from './types';
 
 export const defaultCanvasTheme: CanvasTheme = {
   palette: {
-    common: {
-      focusOutline: colors.blueberry400,
-    },
     primary: {
       light: colors.blueberry200,
       main: colors.blueberry400,
       dark: colors.blueberry500,
       darkest: colors.blueberry600,
+      contrast: colors.frenchVanilla100,
+    },
+    alert: {
+      light: colors.cantaloupe300,
+      main: colors.cantaloupe400,
+      dark: colors.cantaloupe500,
+      darkest: colors.cantaloupe600,
       contrast: colors.frenchVanilla100,
     },
     error: {
@@ -33,12 +37,8 @@ export const defaultCanvasTheme: CanvasTheme = {
       darkest: '#80160E',
       contrast: colors.frenchVanilla100,
     },
-    alert: {
-      light: colors.cantaloupe300,
-      main: colors.cantaloupe400,
-      dark: colors.cantaloupe500,
-      darkest: colors.cantaloupe600,
-      contrast: colors.frenchVanilla100,
+    common: {
+      focusOutline: colors.blueberry400,
     },
   },
   // Typography

@@ -7,6 +7,12 @@ type CanvasThemePalette = {
   dark: string;
   darkest: string;
   contrast: string;
+  [index: string]: string;
+};
+
+type CanvasThemeCommonPalette = {
+  focusOutline: string;
+  [index: string]: string;
 };
 
 /**
@@ -14,12 +20,11 @@ type CanvasThemePalette = {
  */
 export interface CanvasTheme {
   palette: {
-    common: {
-      focusOutline: string;
-    };
+    common: CanvasThemeCommonPalette;
     primary: CanvasThemePalette;
     error: CanvasThemePalette;
     alert: CanvasThemePalette;
+    [index: string]: CanvasThemePalette | CanvasThemeCommonPalette;
   };
 }
 
