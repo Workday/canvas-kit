@@ -6,7 +6,6 @@ export * from '@workday/canvas-kit-react-button';
 export * from '@workday/canvas-kit-react-card';
 export * from '@workday/canvas-kit-react-checkbox';
 export * from '@workday/canvas-kit-react-color-picker';
-export * from '@workday/canvas-kit-react-combobox';
 export * from '@workday/canvas-kit-react-common';
 export * from '@workday/canvas-kit-react-cookie-banner';
 export * from '@workday/canvas-kit-react-form-field';

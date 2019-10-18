@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import {css, CSSObject} from '@emotion/core';
 import {accessibleHide, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react-core';
-import {MenuItemProps} from '@workday/canvas-kit-react-menu';
+import {MenuItemProps} from '@workday/canvas-kit-labs-react-menu';
 import {Card} from '@workday/canvas-kit-react-card';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
