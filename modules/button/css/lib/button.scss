@@ -16,13 +16,14 @@ $_wdc-btn-caret-down-icon-white: svg-load(
   content: '';
   background-image: $_icon;
   background-position: center;
-  background-size: $wdc-spacing-s;
+  background-size: $wdc-spacing-m;
   background-repeat: no-repeat;
 }
 
 @mixin wdc-btn() {
   @include wdc-type-body();
   @include wdc-type-variant-btn();
+  @include wdc-type();
   display: inline-block;
   text-decoration: none;
   min-width: 96px;
@@ -41,6 +42,9 @@ $_wdc-btn-caret-down-icon-white: svg-load(
   vertical-align: middle;
   border: 2px solid transparent;
   font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   &.wdc-btn-hover,
   &:hover {
@@ -73,7 +77,7 @@ $_wdc-btn-caret-down-icon-white: svg-load(
 
   &.wdc-btn-dropdown {
     padding-left: $wdc-spacing-l;
-    padding-right: $wdc-spacing-s;
+    padding-right: $wdc-spacing-l;
     display: inline-flex;
     align-items: center;
 
@@ -114,7 +118,6 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     height: $wdc-spacing-l;
     padding: 0 $wdc-spacing-s;
     min-width: $wdc-spacing-xxxl;
-    -webkit-font-smoothing: subpixel-antialiased;
   }
 
   &.wdc-btn-primary {

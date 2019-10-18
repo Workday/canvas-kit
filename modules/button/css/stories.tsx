@@ -177,7 +177,7 @@ storiesOf('CSS/Button/Deprecated', module)
       </button>
       <h3>Small Secondary</h3>
       <button className="wdc-btn-deprecated wdc-btn-size-s">Secondary Button</button>
-      <button disabled={true} className="wdc-btn wdc-btn-size-s">
+      <button disabled={true} className="wdc-btn-deprecated wdc-btn-size-s">
         Secondary Button
       </button>
       <h3>Growing Secondary</h3>
