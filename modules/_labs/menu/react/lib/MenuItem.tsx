@@ -150,6 +150,8 @@ export default class MenuItem extends React.Component<MenuItemProps> {
     role: 'menuItem',
   };
 
+  onClick = (event: React.MouseEvent) => this.handleClick(event);
+
   render(): React.ReactNode {
     const {
       onClick,
@@ -174,7 +176,7 @@ export default class MenuItem extends React.Component<MenuItemProps> {
           tabIndex={-1}
           id={id}
           role={role}
-          onClick={event => this.handleClick(event)}
+          onClick={this.onClick}
           aria-disabled={!!isDisabled}
           isDisabled={!!isDisabled}
           isFocused={!!isFocused}

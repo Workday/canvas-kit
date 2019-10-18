@@ -91,6 +91,11 @@ class SearchWithAutoComplete extends React.Component<
     this.setState({currentText: event.target.value});
   };
 
+  onSubmit = event => {
+    const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value;
+    action(`search submitted ${formInputValue}`)();
+  }
+
   render() {
     const autocompleteResult = (textModifier: string) => (
       <MenuItem onClick={action(`Clicked Result ${textModifier}`)}>
@@ -112,11 +117,7 @@ class SearchWithAutoComplete extends React.Component<
         placeholder={`Search with Autocomplete`}
         grow={true}
         searchTheme={SearchBar.Theme.Dark}
-        onSubmit={event => {
-          const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0]
-            .value;
-          action(`search submitted ${formInputValue}`)();
-        }}
+        onSubmit={this.onSubmit}
       />
     );
   }

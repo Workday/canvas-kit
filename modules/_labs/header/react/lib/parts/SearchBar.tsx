@@ -6,7 +6,7 @@ import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react-form-field';
-import {Combobox} from '@workday/canvas-kit-labs-react-menu';
+import {Combobox} from '@workday/canvas-kit-labs-react-combobox';
 import {TextInput} from '@workday/canvas-kit-react-text-input';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react-menu';
 import {SearchThemeAttributes, searchThemes} from '../shared/themes';
