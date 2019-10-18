@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'react-emotion';
+import isPropValid from '@emotion/is-prop-valid';
 
 export interface ColumnProps {
   /**
@@ -20,7 +21,9 @@ export interface ColumnProps {
   width?: number | string;
 }
 
-const ColumnContainer = styled('div')<ColumnProps>(
+const ColumnContainer = styled('div', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'spacing',
+})<ColumnProps>(
   {
     '&:first-child': {
       paddingLeft: 0,

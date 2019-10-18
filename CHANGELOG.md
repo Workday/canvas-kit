@@ -3,15 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.0.0-beta.1 (2019-10-14)
+
+### Infrastructure:
+- ci: Fix fork failures ([#241](https://github.com/Workday/canvas-kit/pull/241)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Fix Cypress tests (maybe?) ([#248](https://github.com/Workday/canvas-kit/pull/248)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Add ChromaticQA to CI ([#254](https://github.com/Workday/canvas-kit/pull/254)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Remove Travis from pull requests ([#258](https://github.com/Workday/canvas-kit/pull/258)) [@NicholasBoll](https://github.com/NicholasBoll)
+- build: Replace TSLint with ESLint ([#242](https://github.com/Workday/canvas-kit/pull/242)) [@anicholls](https://github.com/anicholls)
+- chore: Remove snapshot tests ([#259](https://github.com/Workday/canvas-kit/pull/259)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Components:
+- chore(core): Add react-emotion as a dep ([#256](https://github.com/Workday/canvas-kit/pull/256)) [@lychyi](https://github.com/lychyi)
+- fix(toast): Fix background color on Safari ([#245](https://github.com/Workday/canvas-kit/pull/245)) [@stephanerangaya](https://github.com/stephanerangaya)
+- fix(layout): Compensate column width calculations ([#238](https://github.com/Workday/canvas-kit/pull/238)) [@sahlhoff](https://github.com/sahlhoff)
+
+### Breaking Changes:
+- fix(skeleton): Remove z-index ([#257](https://github.com/Workday/canvas-kit/pull/257)) [@lychyi](https://github.com/lychyi)
+
 # 3.0.0-beta.0 (2019-10-07)
 
 ### Infrastructure:
-
 - docs: Update component_status.md
 - ci: Create github action for CI and add Cypress to CI ([#240](https://github.com/Workday/canvas-kit/pull/240))
 
 ### Components:
-
 - feat(modal): Implement CSS Modal to match React implementation ([#185](https://github.com/Workday/canvas-kit/pull/185))
 - refactor: A11y updates for CSS stories and Readmes ([#221](https://github.com/Workday/canvas-kit/pull/221))
 - fix: Address misc. bugs in create-component script ([#232](https://github.com/Workday/canvas-kit/pull/232))
@@ -27,7 +43,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - refactor: Fix references to react attributes in css readmes
 
 ### Breaking Changes:
-
 - fix: Update alert colors and error colors
 - test: Add Cypress modal specifications ([#184](https://github.com/Workday/canvas-kit/pull/184))
 - feat(button): Promote React beta Button ([#191](https://github.com/Workday/canvas-kit/pull/191))
