@@ -27,8 +27,6 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
 
   autocompleteItems?: React.ReactElement<MenuItemProps>[];
 
-  accessibleId?: string;
-
   /**
    * The theme of the header the search input is being rendered in
    */
@@ -36,12 +34,15 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
 
   placeholder: string;
 
+  initialValue?: string;
+
   /**
    * False if the search input should grow to left align it. True if it should right align.
    */
   rightAlign?: boolean;
 
-  accessibleLabel: string;
+  inputLabel: string;
+  submitLabel: string;
 
   /**
    * Show button to clear input field
@@ -51,10 +52,12 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * Aria Label for clear button
    */
   clearButtonLabel?: string;
+  openButtonLabel: string;
+  closeButtonLabel: string;
 }
 
 export interface SearchBarState {
-  collapsedToggle: boolean;
+  showForm: boolean;
   searchQuery: string;
   isFocused: boolean;
 }
@@ -75,7 +78,7 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
 const formCollapsedBackground = colors.frenchVanilla100;
 
 const SearchForm = styled('form')<
-  Pick<SearchBarProps, 'isCollapsed' | 'grow'> & Pick<SearchBarState, 'collapsedToggle'>
+  Pick<SearchBarProps, 'isCollapsed' | 'grow'> & Pick<SearchBarState, 'showForm'>
 >(
   {
     position: 'relative',
@@ -85,7 +88,7 @@ const SearchForm = styled('form')<
     marginLeft: spacing.m,
     maxWidth: '480px',
   },
-  ({isCollapsed, grow, collapsedToggle}) => {
+  ({isCollapsed, grow, showForm}) => {
     const collapseStyles: CSSObject = isCollapsed
       ? {
           top: 0,
@@ -93,12 +96,12 @@ const SearchForm = styled('form')<
           left: 0,
           bottom: 0,
           margin: 0,
-          position: collapsedToggle ? 'absolute' : 'relative',
-          backgroundColor: collapsedToggle ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
+          position: showForm ? 'absolute' : 'relative',
+          backgroundColor: showForm ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
           transition: 'background-color 120ms',
-          maxWidth: collapsedToggle ? 'none' : spacingNumbers.xl + spacingNumbers.xxs,
+          maxWidth: showForm ? 'none' : spacingNumbers.xl + spacingNumbers.xxs,
           minWidth: spacingNumbers.xl + spacingNumbers.xs,
-          overflow: collapsedToggle ? 'none' : 'hidden',
+          overflow: showForm ? 'visible' : 'hidden',
           zIndex: 1,
         }
       : {};
@@ -118,33 +121,36 @@ const SearchContainer = styled('div')({
   minHeight: spacingNumbers.xl + spacingNumbers.xxxs,
 });
 
-const SearchSubmit = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'>>(({isCollapsed}) => {
-  const collapseStyles: CSSObject = isCollapsed
-    ? {
-        width: spacing.xl,
-        height: spacing.xl,
-        margin: `auto ${spacing.xxs}`,
-      }
-    : {
-        width: spacing.l,
-        height: spacing.l,
-      };
+const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isHidden: boolean}>(
+  ({isCollapsed, isHidden}) => {
+    const collapseStyles: CSSObject = isCollapsed
+      ? {
+          width: spacing.xl,
+          height: spacing.xl,
+          margin: `auto ${spacing.xxs}`,
+        }
+      : {
+          width: spacing.l,
+          height: spacing.l,
+        };
 
-  return {
-    position: `absolute`,
-    margin: `${spacing.xxxs} ${spacing.xxs}`,
-    top: spacing.zero,
-    bottom: spacing.zero,
-    zIndex: 3,
-    ...collapseStyles,
-  };
-});
+    return {
+      position: `absolute`,
+      margin: `${spacing.xxxs} ${spacing.xxs}`,
+      top: spacing.zero,
+      bottom: spacing.zero,
+      zIndex: 3,
+      display: isHidden ? 'none' : 'flex',
+      ...collapseStyles,
+    };
+  }
+);
 
 const CloseButton = styled(IconButton)<
-  Pick<SearchBarProps, 'isCollapsed'> & Pick<SearchBarState, 'collapsedToggle'>
->(({isCollapsed, collapsedToggle}) => {
+  Pick<SearchBarProps, 'isCollapsed'> & Pick<SearchBarState, 'showForm'>
+>(({isCollapsed, showForm}) => {
   const collapseStyles: CSSObject =
-    isCollapsed && collapsedToggle
+    isCollapsed && showForm
       ? {
           display: 'inline-block',
         }
@@ -163,12 +169,17 @@ const CloseButton = styled(IconButton)<
   };
 });
 
+const SearchField = styled(FormField)<
+  Pick<SearchBarProps, 'isCollapsed'> & Pick<SearchBarState, 'showForm'>
+>(({isCollapsed, showForm}) => {
+  return {
+    display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
+  };
+});
+
 const SearchInput = styled(TextInput)<
-  Pick<SearchBarProps, 'isCollapsed'> & {inputColors: ReturnType<typeof getInputColors>} & Pick<
-      SearchBarState,
-      'collapsedToggle'
-    >
->(({isCollapsed, inputColors, collapsedToggle}) => {
+  Pick<SearchBarProps, 'isCollapsed'> & {inputColors: ReturnType<typeof getInputColors>}
+>(({isCollapsed, inputColors}) => {
   const collapseStyles: CSSObject = isCollapsed
     ? {
         ...type.h3,
@@ -180,7 +191,6 @@ const SearchInput = styled(TextInput)<
         width: '100%',
         minWidth: 0,
         backgroundColor: `rgba(0, 0, 0, 0)`,
-        display: collapsedToggle ? 'inline-block' : 'none',
       }
     : {
         maxWidth: '480px',
@@ -219,15 +229,18 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   static Theme = SearchTheme;
   static defaultProps = {
     placeholder: 'Search',
-    accessibleLabel: 'Search',
+    inputLabel: 'Search',
+    submitLabel: 'Search',
+    openButtonLabel: 'Open Search',
+    closeButtonLabel: 'Cancel',
     showClearButton: true,
   };
 
   private inputRef = React.createRef<HTMLInputElement>();
-  private submitRef = React.createRef<HTMLButtonElement>();
+  private openRef = React.createRef<HTMLButtonElement>();
 
   state: Readonly<SearchBarState> = {
-    collapsedToggle: false,
+    showForm: false,
     searchQuery: '',
     isFocused: false,
   };
@@ -246,15 +259,15 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   private getThemeColors = (): ReturnType<typeof getInputColors> => {
     const theme =
-      this.props.isCollapsed && this.state.collapsedToggle
+      this.props.isCollapsed && this.state.showForm
         ? searchThemes[SearchTheme.Transparent]
         : this.getTheme();
     return getInputColors(theme, this.state.isFocused);
   };
 
   getIconButtonType = (): IconButtonVariant => {
-    let background = this.getThemeColors().background || `rgba(0, 0, 0, 0)`;
-    if (this.props.isCollapsed && this.state.collapsedToggle) {
+    let background = this.getThemeColors().background || `#fff`;
+    if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
     const isDarkBackground = chroma(background).get('lab.l') < 70;
@@ -271,17 +284,23 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   };
 
   openCollapsedSearch = (): void => {
-    if (this.props.isCollapsed && !this.state.collapsedToggle) {
-      this.setState({collapsedToggle: true});
+    if (this.props.isCollapsed && !this.state.showForm) {
+      this.setState({showForm: true});
     }
   };
 
   closeCollapsedSearch = (): void => {
-    if (this.props.isCollapsed && this.state.collapsedToggle) {
-      this.setState({collapsedToggle: false});
+    if (this.props.isCollapsed && this.state.showForm) {
+      this.setState({showForm: false});
     }
-    this.focusSubmit();
   };
+
+  componentDidUpdate(prevProps: SearchBarProps, prevState: SearchBarState) {
+    const showFormToggled = this.state.showForm !== prevState.showForm;
+    if (showFormToggled) {
+      this.state.showForm ? this.focusInput() : this.focusOpen();
+    }
+  }
 
   focusInput = (): void => {
     if (this.inputRef.current) {
@@ -289,9 +308,9 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     }
   };
 
-  focusSubmit = (): void => {
-    if (this.submitRef.current) {
-      this.submitRef.current.focus();
+  focusOpen = (): void => {
+    if (this.openRef.current) {
+      this.openRef.current.focus();
     }
   };
 
@@ -318,13 +337,16 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       isCollapsed,
       onInputChange,
       autocompleteItems,
-      accessibleId,
+      initialValue,
       searchTheme,
       placeholder,
       rightAlign,
-      accessibleLabel,
+      inputLabel,
+      submitLabel,
       showClearButton,
       clearButtonLabel,
+      closeButtonLabel,
+      openButtonLabel,
       ...elemProps
     } = this.props;
 
@@ -333,27 +355,38 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
         role="search"
         isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
-        collapsedToggle={this.state.collapsedToggle}
+        showForm={this.state.showForm}
         {...elemProps}
       >
         <SearchContainer>
-          <SearchSubmit
-            aria-label={accessibleLabel}
+          <SearchIcon
+            aria-label={submitLabel}
+            icon={searchIcon}
+            isCollapsed={isCollapsed}
+            variant={this.getIconButtonType()}
+            type="submit"
+            isHidden={!!isCollapsed && !this.state.showForm}
+          />
+          <SearchIcon
+            aria-label={openButtonLabel}
             icon={searchIcon}
             isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
             onClick={this.openCollapsedSearch}
-            buttonRef={this.submitRef}
-            type={this.props.isCollapsed && !this.state.collapsedToggle ? 'button' : 'submit'}
+            buttonRef={this.openRef}
+            type="button"
+            isHidden={!isCollapsed || (!!isCollapsed && this.state.showForm)}
           />
-          <FormField
+          <SearchField
             grow={grow}
-            label={accessibleLabel}
+            label={inputLabel}
             labelPosition={FormFieldLabelPosition.Hidden}
-            inputId={accessibleId}
             className={css({marginBottom: spacingNumbers.zero, width: grow ? '100%' : 'auto'})}
+            isCollapsed={isCollapsed}
+            showForm={this.state.showForm}
           >
             <Combobox
+              initialValue={initialValue}
               clearButtonVariant={this.getIconButtonType()}
               autocompleteItems={autocompleteItems}
               onChange={this.handleSearchInputChange}
@@ -367,18 +400,18 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                 value={this.state.searchQuery}
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}
-                collapsedToggle={this.state.collapsedToggle}
                 inputColors={this.getThemeColors()}
               />
             </Combobox>
-          </FormField>
+          </SearchField>
           <CloseButton
-            aria-label={clearButtonLabel || 'Cancel'}
+            aria-label={closeButtonLabel}
             icon={xIcon}
             isCollapsed={isCollapsed}
             variant={IconButton.Variant.Plain}
-            collapsedToggle={this.state.collapsedToggle}
+            showForm={this.state.showForm}
             onClick={this.closeCollapsedSearch}
+            type="button"
           />
         </SearchContainer>
       </SearchForm>

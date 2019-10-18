@@ -24,7 +24,7 @@ class Autocomplete extends React.Component<
 
   render() {
     const autocompleteResult = (textModifier: string) => (
-      <MenuItem onClick={action(`Clicked Result ${textModifier}`)}>
+      <MenuItem isDisabled={true} onClick={action(`Clicked Result ${textModifier}`)}>
         Result{' '}
         <span>
           num<span>ber</span>

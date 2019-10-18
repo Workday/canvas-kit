@@ -97,7 +97,7 @@ const AutocompleteList = styled('ul')({
   margin: `${spacing.xxs} 0`,
 });
 
-const ResetButton = styled(IconButton)<Pick<ComboboxState, 'value'>>(
+const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   {
     width: spacing.l,
     height: spacing.l,
@@ -105,8 +105,8 @@ const ResetButton = styled(IconButton)<Pick<ComboboxState, 'value'>>(
     padding: 0,
     zIndex: 2,
   },
-  ({value}) => ({
-    visibility: value ? 'visible' : 'hidden',
+  ({shouldShow}) => ({
+    visibility: shouldShow ? 'visible' : 'hidden',
   })
 );
 
@@ -127,7 +127,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   state: Readonly<ComboboxState> = {
     isFocused: false,
     value: '',
-    showingAutocomplete: !!this.props.autocompleteItems && this.props.autocompleteItems.length > 0,
+    showingAutocomplete: false,
     selectedAutocompleteIndex: null,
   };
 
@@ -278,6 +278,9 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         if (this.state.selectedAutocompleteIndex != null) {
           const item = this.props.autocompleteItems[this.state.selectedAutocompleteIndex];
           this.handleAutocompleteClick(event, item.props);
+          if (item.props.isDisabled) {
+            nextIndex = currentIndex;
+          }
           event.stopPropagation();
           event.preventDefault();
         }
@@ -365,7 +368,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
           {React.Children.map(children, this.renderChildren)}
           {showClearButton && (
             <ResetButton
-              value={this.state.value}
+              shouldShow={!!this.state.value}
               aria-label={this.props.clearButtonLabel}
               icon={xSmallIcon}
               variant={clearButtonVariant}

@@ -104,7 +104,7 @@ export const searchThemes: SearchThemes = {
     boxShadowFocus: focusRing().boxShadow,
   },
   [SearchTheme.Dark]: {
-    background: 'rgba(0,0,0,0.2)',
+    background: 'rgba(0, 0, 0, 0.2)',
     backgroundFocus: colors.frenchVanilla100,
     color: colors.frenchVanilla100,
     colorFocus: colors.blackPepper300,

@@ -79,7 +79,6 @@ const nav = (
   </nav>
 );
 
-const searchId = 'searchInputId';
 class SearchWithAutoComplete extends React.Component<
   Partial<SearchBarProps>,
   {currentText: string}
@@ -111,9 +110,8 @@ class SearchWithAutoComplete extends React.Component<
         isCollapsed={boolean('isCollapsed', false)}
         onInputChange={this.autocompleteCallback}
         placeholder={`Search with Autocomplete`}
-        accessibleId={searchId}
         grow={true}
-        searchTheme={SearchBar.Theme.Dark}
+        searchTheme={{placeholderColor: 'red', color: 'black'}}
         onSubmit={event => {
           const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0]
             .value;
