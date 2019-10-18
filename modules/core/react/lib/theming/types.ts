@@ -5,6 +5,7 @@ type CanvasThemePalette = {
   light: string;
   main: string;
   dark: string;
+  darkest: string;
   contrast: string;
 };
 
