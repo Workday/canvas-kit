@@ -11,7 +11,7 @@ import {TextInput} from '../../../../text-input/react/index';
 import README from '../README.md';
 
 class Autocomplete extends React.Component<
-  Omit<ComboboxProps, 'children' | 'clearButtonType' | 'clearButtonLabel'>,
+  Omit<ComboboxProps, 'children' | 'clearButtonType' | 'clearButtonLabel' | 'clearButtonVariant'>,
   {currentText: string}
 > {
   state = {
@@ -24,7 +24,7 @@ class Autocomplete extends React.Component<
 
   render() {
     const autocompleteResult = (textModifier: string) => (
-      <MenuItem isDisabled={true} onClick={action(`Clicked Result ${textModifier}`)}>
+      <MenuItem onClick={action(`Clicked Result ${textModifier}`)}>
         Result{' '}
         <span>
           num<span>ber</span>
@@ -34,11 +34,13 @@ class Autocomplete extends React.Component<
     );
     return (
       <Combobox
+        {...this.props}
         autocompleteItems={Array.apply(null, Array(this.state.currentText.length))
           .map((x: any, i: string) => autocompleteResult(i))
           .splice(0, 5)}
         onChange={this.autocompleteCallback}
         showClearButton={true}
+        labelId="autocomplete-123"
       >
         <TextInput placeholder="Autocomplete" autoFocus={true} />
       </Combobox>
@@ -49,7 +51,7 @@ class Autocomplete extends React.Component<
 storiesOf('Labs/Combobox/React', module)
   .addDecorator(withReadme(README))
   .add('Autocomplete', () => (
-    <FormField label="Autocomplete example">
+    <FormField id="autocomplete-123" label="Autocomplete example">
       <Autocomplete />
     </FormField>
   ));

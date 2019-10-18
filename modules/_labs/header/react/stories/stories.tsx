@@ -111,7 +111,7 @@ class SearchWithAutoComplete extends React.Component<
         onInputChange={this.autocompleteCallback}
         placeholder={`Search with Autocomplete`}
         grow={true}
-        searchTheme={{placeholderColor: 'red', color: 'black'}}
+        searchTheme={SearchBar.Theme.Dark}
         onSubmit={event => {
           const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0]
             .value;

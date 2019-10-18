@@ -12,6 +12,7 @@ import {MenuItemProps} from '@workday/canvas-kit-react-menu';
 import {SearchThemeAttributes, searchThemes} from '../shared/themes';
 import {SearchTheme} from '../shared/types';
 import chroma from 'chroma-js';
+import uuid from 'uuid/v4';
 
 export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
@@ -22,38 +23,54 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * True if the search input should be collapsed into a toggle icon (for responsive).
    */
   isCollapsed?: boolean;
-
+  /**
+   * Callback to listen when the TextInput changes
+   */
   onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
-
+  /**
+   * An array of menu items to show under the search bar
+   */
   autocompleteItems?: React.ReactElement<MenuItemProps>[];
-
   /**
    * The theme of the header the search input is being rendered in
    */
   searchTheme?: SearchTheme | SearchThemeAttributes;
-
+  /**
+   * Placeholder for search input
+   */
   placeholder: string;
-
+  /**
+   * Initial value to set the input to
+   */
   initialValue?: string;
-
   /**
    * False if the search input should grow to left align it. True if it should right align.
    */
   rightAlign?: boolean;
-
+  /**
+   * Screenreader label for text input
+   */
   inputLabel: string;
+  /**
+   * Screenreader label for submit button
+   */
   submitLabel: string;
-
+  /**
+   * Screenreader Label for clear button
+   */
+  clearButtonLabel?: string;
+  /**
+   * Screenreader Label to open collapsed search bar
+   */
+  openButtonLabel: string;
+  /**
+   * Screenreader Label to close collapsed search bar
+   */
+  closeButtonLabel: string;
   /**
    * Show button to clear input field
    */
   showClearButton: boolean;
-  /**
-   * Aria Label for clear button
-   */
-  clearButtonLabel?: string;
-  openButtonLabel: string;
-  closeButtonLabel: string;
 }
 
 export interface SearchBarState {
@@ -238,6 +255,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
+  private labelId = uuid();
 
   state: Readonly<SearchBarState> = {
     showForm: false,
@@ -353,6 +371,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     return (
       <SearchForm
         role="search"
+        aria-labelledby={this.labelId}
         isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
         showForm={this.state.showForm}
@@ -379,6 +398,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
           />
           <SearchField
             grow={grow}
+            id={this.labelId}
             label={inputLabel}
             labelPosition={FormFieldLabelPosition.Hidden}
             className={css({marginBottom: spacingNumbers.zero, width: grow ? '100%' : 'auto'})}
@@ -394,6 +414,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
               onBlur={this.handleBlur}
               showClearButton={!isCollapsed && showClearButton}
               clearButtonLabel={clearButtonLabel}
+              labelId={this.labelId}
             >
               <SearchInput
                 inputRef={this.inputRef}

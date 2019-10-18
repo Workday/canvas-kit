@@ -12,13 +12,17 @@ import uuid from 'uuid/v4';
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
+   * The TextInput component to wrap.
+   */
+  children: React.ReactElement<TextInputProps>;
+  /**
    * Initial value to set the input to
    */
   initialValue?: string;
   /**
    * The type of icon button to use for clearing input
    */
-  clearButtonVariant?: IconButtonVariant;
+  clearButtonVariant: IconButtonVariant;
   /**
    * Show button to clear input field
    */
@@ -28,7 +32,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   clearButtonLabel: string;
   /**
-   * An array of menu items to show under the search bar
+   * An array of menu items to show under the TextInput
    */
   autocompleteItems?: React.ReactElement<MenuItemProps>[];
   /**
@@ -44,9 +48,9 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   onBlur?: React.FocusEventHandler;
   /**
-   * The Form Field component to wrap.
+   * The id of the form field.
    */
-  children: React.ReactElement<TextInputProps>;
+  labelId?: string;
 }
 
 export interface ComboboxState {
@@ -111,17 +115,17 @@ const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
 );
 
 const listBoxIdPart = `listbox`;
-const labelIdPart = `label`;
 const optionIdPart = `option`;
 const getOptionId = (baseId?: string, index?: number) => `${baseId}-${optionIdPart}-${index}`;
 
 export default class Combobox extends React.Component<ComboboxProps, ComboboxState> {
   private inputRef = this.props.children.props.inputRef || React.createRef<HTMLInputElement>();
   private comboboxRef = React.createRef<HTMLDivElement>();
+  private id = uuid();
 
   static defaultProps = {
-    id: `combobox-${uuid()}`,
     clearButtonLabel: `Reset Search Input`,
+    clearButtonVariant: IconButton.Variant.Plain,
   };
 
   state: Readonly<ComboboxState> = {
@@ -263,11 +267,15 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
       case 'ArrowUp':
         const upIndex = currentIndex != null ? currentIndex - 1 : lastItem;
         nextIndex = upIndex < 0 ? lastItem : upIndex;
+        event.stopPropagation();
+        event.preventDefault();
         break;
 
       case 'ArrowDown':
         const downIndex = currentIndex != null ? currentIndex + 1 : firstItem;
         nextIndex = downIndex >= autoCompleteItemCount ? firstItem : downIndex;
+        event.stopPropagation();
+        event.preventDefault();
         break;
 
       case 'Escape':
@@ -315,6 +323,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         };
       }
       const newTextInputProps: Partial<TextInputProps> = {
+        type: 'text',
         id: this.props.id,
         grow: this.props.grow,
         value: this.state.value,
@@ -339,14 +348,15 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     const {
       autocompleteItems,
       children,
-      clearButtonVariant = IconButton.Variant.Plain,
+      clearButtonVariant,
       grow,
-      id,
+      id = this.id,
       initialValue,
       onChange,
       onFocus,
       onBlur,
       showClearButton,
+      labelId,
       ...elemProps
     } = this.props;
 
@@ -382,7 +392,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
               <AutocompleteList
                 role="listbox"
                 id={`${id}-${listBoxIdPart}`}
-                aria-labelledby={`${id}-${labelIdPart}`}
+                aria-labelledby={labelId}
               >
                 {(autocompleteItems || []).map((listboxItem: React.ReactElement, index) => (
                   <React.Fragment key={index}>

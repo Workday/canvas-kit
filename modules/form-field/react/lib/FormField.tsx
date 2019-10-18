@@ -12,10 +12,10 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, Gr
   label?: React.ReactNode;
   hintText?: React.ReactNode;
   hintId?: string;
-  inputId?: string;
+  inputId: string;
   error?: ErrorType;
   required?: boolean;
-  useFieldset?: boolean;
+  useFieldset: boolean;
   children: React.ReactNode;
 }
 
@@ -109,9 +109,7 @@ export default class FormField extends React.Component<FormFieldProps> {
         }
       }
 
-      if (this.props.inputId) {
-        props.id = this.props.inputId;
-      }
+      props.id = this.props.inputId;
 
       return React.cloneElement(child, props);
     }
