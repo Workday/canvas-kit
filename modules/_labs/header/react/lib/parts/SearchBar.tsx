@@ -103,7 +103,6 @@ const SearchForm = styled('form')<
     display: 'flex',
     alignItems: 'center',
     marginLeft: spacing.m,
-    maxWidth: '480px',
   },
   ({isCollapsed, grow, showForm}) => {
     const collapseStyles: CSSObject = isCollapsed
@@ -213,6 +212,7 @@ const SearchInput = styled(TextInput)<
       }
     : {
         maxWidth: '480px',
+        minWidth: '120px',
         paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
         paddingRight: spacing.xl,
         backgroundColor: inputColors.background,
