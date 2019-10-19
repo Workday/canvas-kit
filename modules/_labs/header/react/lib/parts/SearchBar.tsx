@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, {css} from 'react-emotion';
+import styled from 'react-emotion';
 import {CSSObject} from 'create-emotion';
 import {type, colors, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
@@ -187,10 +187,12 @@ const CloseButton = styled(IconButton)<
 });
 
 const SearchField = styled(FormField)<
-  Pick<SearchBarProps, 'isCollapsed'> & Pick<SearchBarState, 'showForm'>
->(({isCollapsed, showForm}) => {
+  Pick<SearchBarProps, 'isCollapsed' | 'grow'> & Pick<SearchBarState, 'showForm'>
+>(({isCollapsed, showForm, grow}) => {
   return {
     display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
+    width: grow ? '100%' : 'auto',
+    marginBottom: spacingNumbers.zero,
   };
 });
 
@@ -399,9 +401,10 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
           <SearchField
             grow={grow}
             id={this.labelId}
+            inputId={`input-${this.labelId}`}
             label={inputLabel}
             labelPosition={FormFieldLabelPosition.Hidden}
-            className={css({marginBottom: spacingNumbers.zero, width: grow ? '100%' : 'auto'})}
+            useFieldset={false}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
           >
