@@ -91,10 +91,10 @@ class SearchWithAutoComplete extends React.Component<
     this.setState({currentText: event.target.value});
   };
 
-  onSubmit = event => {
+  onSubmit = (event: React.FormEvent) => {
     const formInputValue = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value;
     action(`search submitted ${formInputValue}`)();
-  }
+  };
 
   render() {
     const autocompleteResult = (textModifier: string) => (
