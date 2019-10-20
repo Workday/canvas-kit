@@ -57,13 +57,13 @@ const Pages: React.FC<{
         const active = page === currentPage;
 
         return active ? (
-          <ActivePage key={page} aria-current={true} aria-label={`Current page ${page}`}>
+          <ActivePage key={page} aria-current={true} aria-label={`Current page, page ${page}`}>
             {page}
           </ActivePage>
         ) : (
           <IconButton
             key={page}
-            aria-label={`Navigate to page ${page}`}
+            aria-label={`Goto page ${page}`}
             variant={IconButton.Variant.Square}
             size={IconButton.Size.Small}
             onClick={e => clickHandler(e, page)}
