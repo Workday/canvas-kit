@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'react-emotion';
-import {CSSObject} from 'create-emotion';
 
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
@@ -18,7 +17,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   pageSize: number;
   currentPage: number;
   onPageChange: (page: number, e: React.MouseEvent<HTMLButtonElement>) => void;
-  label: (parts: PaginationLabelProps) => string;
+  label?: (parts: PaginationLabelProps) => string;
 }
 
 const Label = styled('div')({
