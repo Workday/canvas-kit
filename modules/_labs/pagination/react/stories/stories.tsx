@@ -36,7 +36,9 @@ storiesOf('Labs/Pagination', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <PaginationExample />
-      <PaginationExample2 />
+      <div>
+        <PaginationExample />
+        <PaginationExample2 />
+      </div>
     </div>
   ));
