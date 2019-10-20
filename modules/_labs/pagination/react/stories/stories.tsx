@@ -14,7 +14,7 @@ const PaginationExample = () => {
       items={50}
       pageSize={10}
       currentPage={currentPage}
-      onPageChange={(e, p) => setCurrentPage(p)}
+      onPageChange={p => setCurrentPage(p)}
     />
   );
 };
@@ -27,7 +27,7 @@ const PaginationExample2 = () => {
       items={48}
       pageSize={13}
       currentPage={currentPage}
-      onPageChange={(e, p) => setCurrentPage(p)}
+      onPageChange={p => setCurrentPage(p)}
     />
   );
 };

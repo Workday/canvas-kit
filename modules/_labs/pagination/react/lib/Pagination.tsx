@@ -10,7 +10,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   items: number;
   pageSize: number;
   currentPage: number;
-  onPageChange: (e: React.MouseEvent<HTMLButtonElement>, page: number) => void;
+  onPageChange: (page: number, e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const centeredStyle: CSSObject = {
@@ -44,7 +44,7 @@ const ActivePage = styled('div')(centeredStyle, {
 const Pages: React.FC<{
   numPages: number;
   currentPage: number;
-  clickHandler: (e: React.MouseEvent<HTMLButtonElement>, page: number) => void;
+  clickHandler: (page: number, e: React.MouseEvent<HTMLButtonElement>) => void;
 }> = props => {
   // Create an array [1,..., numPages]
   const {numPages, currentPage, clickHandler} = props;
@@ -66,7 +66,7 @@ const Pages: React.FC<{
             aria-label={`Goto page ${page}`}
             variant={IconButton.Variant.Square}
             size={IconButton.Size.Small}
-            onClick={e => clickHandler(e, page)}
+            onClick={e => clickHandler(page, e)}
           >
             {page}
           </IconButton>
@@ -90,7 +90,7 @@ const Pagination: React.FC<PaginationProps> = props => {
         variant={IconButton.Variant.Square}
         size={IconButton.Size.Small}
         icon={chevronLeftSmallIcon}
-        onClick={e => onPageChange(e, currentPage - 1)}
+        onClick={e => onPageChange(currentPage - 1, e)}
       />
       <Pages numPages={numPages} currentPage={currentPage} clickHandler={onPageChange} />
       <IconButton
@@ -100,7 +100,7 @@ const Pagination: React.FC<PaginationProps> = props => {
         variant={IconButton.Variant.Square}
         size={IconButton.Size.Small}
         icon={chevronRightSmallIcon}
-        onClick={e => onPageChange(e, currentPage + 1)}
+        onClick={e => onPageChange(currentPage + 1, e)}
       />
     </Container>
   );
