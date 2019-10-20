@@ -9,7 +9,14 @@ import README from '../README.md';
 const PaginationExample = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  return <Pagination currentPage={currentPage} onPageChange={(e, p) => setCurrentPage(p)} />;
+  return (
+    <Pagination
+      items={50}
+      pageSize={10}
+      currentPage={currentPage}
+      onPageChange={(e, p) => setCurrentPage(p)}
+    />
+  );
 };
 
 const PaginationExample2 = () => {
@@ -17,8 +24,8 @@ const PaginationExample2 = () => {
 
   return (
     <Pagination
-      items={90}
-      pageSize={10}
+      items={48}
+      pageSize={13}
       currentPage={currentPage}
       onPageChange={(e, p) => setCurrentPage(p)}
     />

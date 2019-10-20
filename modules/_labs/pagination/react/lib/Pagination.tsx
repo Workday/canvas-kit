@@ -7,8 +7,8 @@ import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-syste
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
-  items?: number;
-  pageSize?: number;
+  items: number;
+  pageSize: number;
   currentPage: number;
   onPageChange: (e: React.MouseEvent<HTMLButtonElement>, page: number) => void;
 }
@@ -57,12 +57,12 @@ const Pages: React.FC<{
         const active = page === currentPage;
 
         return active ? (
-          <ActivePage aria-current={true} aria-label={`Current page ${page}`}>
+          <ActivePage key={page} aria-current={true} aria-label={`Current page ${page}`}>
             {page}
           </ActivePage>
         ) : (
           <IconButton
-            key={`${page}`}
+            key={page}
             aria-label={`Navigate to page ${page}`}
             variant={IconButton.Variant.Square}
             size={IconButton.Size.Small}
@@ -77,7 +77,7 @@ const Pages: React.FC<{
 };
 
 const Pagination: React.FC<PaginationProps> = props => {
-  const {items = 100, pageSize = 10, currentPage = 1, onPageChange, ...elemProps} = props;
+  const {items, pageSize, currentPage = 1, onPageChange, ...elemProps} = props;
 
   const numPages = Math.ceil(items / pageSize);
 
