@@ -94,8 +94,10 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
 
 const formCollapsedBackground = colors.frenchVanilla100;
 
+const maxWidth = '480px';
+
 const SearchForm = styled('form')<
-  Pick<SearchBarProps, 'isCollapsed' | 'grow'> & Pick<SearchBarState, 'showForm'>
+  Pick<SearchBarProps, 'isCollapsed' | 'grow' | 'rightAlign'> & Pick<SearchBarState, 'showForm'>
 >(
   {
     position: 'relative',
@@ -104,7 +106,7 @@ const SearchForm = styled('form')<
     alignItems: 'center',
     marginLeft: spacing.m,
   },
-  ({isCollapsed, grow, showForm}) => {
+  ({ isCollapsed, grow, rightAlign, showForm}) => {
     const collapseStyles: CSSObject = isCollapsed
       ? {
           top: 0,
@@ -127,7 +129,12 @@ const SearchForm = styled('form')<
           maxWidth: '100%',
         }
       : {};
-    return {...collapseStyles, ...growStyles};
+    const rightAlignStyles: CSSObject = rightAlign
+        ? {
+            maxWidth
+          }
+        : {};
+    return { ...collapseStyles, ...growStyles, ...rightAlignStyles};
   }
 );
 
@@ -210,7 +217,7 @@ const SearchInput = styled(TextInput)<
         backgroundColor: `rgba(0, 0, 0, 0)`,
       }
     : {
-        maxWidth: '480px',
+        maxWidth,
         minWidth: '120px',
         paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
         paddingRight: spacing.xl,
@@ -379,6 +386,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
         isCollapsed={isCollapsed}
         onSubmit={this.handleSubmit}
         showForm={this.state.showForm}
+        rightAlign={rightAlign}
         {...elemProps}
       >
         <SearchContainer>
