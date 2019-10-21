@@ -143,7 +143,6 @@ const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isH
       ? {
           width: spacing.xl,
           height: spacing.xl,
-          margin: `auto ${spacing.xxs}`,
         }
       : {
           width: spacing.l,
@@ -152,7 +151,7 @@ const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isH
 
     return {
       position: `absolute`,
-      margin: `${spacing.xxxs} ${spacing.xxs}`,
+      margin: `auto ${spacing.xxs}`,
       top: spacing.zero,
       bottom: spacing.zero,
       zIndex: 3,
@@ -225,6 +224,9 @@ const SearchInput = styled(TextInput)<
     WebkitAppearance: 'none',
     transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
     zIndex: 2,
+    height: 44,
+    paddingTop: spacing.xs,
+    paddingBottom: spacing.xs,
     '&::-webkit-search-cancel-button': {
       display: 'none',
     },
