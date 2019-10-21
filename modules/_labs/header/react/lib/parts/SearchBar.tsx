@@ -106,7 +106,7 @@ const SearchForm = styled('form')<
     alignItems: 'center',
     marginLeft: spacing.m,
   },
-  ({ isCollapsed, grow, rightAlign, showForm}) => {
+  ({isCollapsed, grow, rightAlign, showForm}) => {
     const collapseStyles: CSSObject = isCollapsed
       ? {
           top: 0,
@@ -130,11 +130,11 @@ const SearchForm = styled('form')<
         }
       : {};
     const rightAlignStyles: CSSObject = rightAlign
-        ? {
-            maxWidth
-          }
-        : {};
-    return { ...collapseStyles, ...growStyles, ...rightAlignStyles};
+      ? {
+          maxWidth,
+        }
+      : {};
+    return {...collapseStyles, ...growStyles, ...rightAlignStyles};
   }
 );
 
