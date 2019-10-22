@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {css, CSSObject} from '@emotion/core';
+import {CSSObject, jsx} from '@emotion/core';
 import {accessibleHide, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react-core';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react-menu';
@@ -337,9 +337,14 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         onKeyDown: this.handleKeyboardShortcuts,
         onFocus: this.handleFocus,
         onBlur: this.handleBlur,
-        className: css(cssOverride),
+        css: cssOverride,
       };
-      return React.cloneElement(inputElement, {...inputElement.props, ...newTextInputProps});
+      const cloneElement = (element: React.ReactElement<TextInputProps>, props: TextInputProps) =>
+        jsx(element.type, {
+          ...element.props,
+          ...props,
+        });
+      return cloneElement(inputElement, {...inputElement.props, ...newTextInputProps});
     });
   };
 
@@ -373,7 +378,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
             ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length)
             : ''}
         </Status>
-        <InputContainer innerRef={this.comboboxRef}>
+        <InputContainer ref={this.comboboxRef}>
           {React.Children.map(children, this.renderChildren)}
           {showClearButton && (
             <ResetButton

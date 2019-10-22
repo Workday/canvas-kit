@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'react-emotion';
-import {CSSObject} from 'create-emotion';
+import styled from '@emotion/styled';
+import {CSSObject} from '@emotion/core';
 import {type, colors, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
