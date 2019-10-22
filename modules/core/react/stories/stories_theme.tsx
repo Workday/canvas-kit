@@ -57,7 +57,7 @@ const PaletteTitle = styled(Swatch)(
 
 const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
   return (
-    <Component bg={color} contrast={contrast}>
+    <Component bg={color} contrast={contrast} key={color}>
       {name}
       {contrast && <span>{name}</span>}
     </Component>
@@ -76,7 +76,7 @@ const ThemeDemo = (props: any) => {
           const contrast = palette.contrast;
 
           return (
-            <Palette>
+            <Palette key={name}>
               {createSwatch(name, bg, contrast, PaletteTitle)}
               {Object.keys(palette).map(key => {
                 if (key === 'contrast') {
