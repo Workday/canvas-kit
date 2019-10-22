@@ -104,8 +104,8 @@ const SearchForm = styled('form')<
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
-    marginLeft: spacing.m,
     width: '100%',
+    marginLeft: spacing.m,
   },
   ({ isCollapsed, showForm, rightAlign, grow}) => {
     const collapseStyles: CSSObject = isCollapsed
@@ -130,13 +130,14 @@ const SearchForm = styled('form')<
         maxWidth: grow ? '100%' : maxWidth,
       }
       : {};
-    return {...collapseStyles, ...rightAlignStyles};
+    return {...rightAlignStyles, ...collapseStyles};
   }
 );
 
 const SearchContainer = styled('div')({
   position: `relative`,
   width: `100%`,
+  textAlign: 'left',
   minHeight: spacingNumbers.xl + spacingNumbers.xxxs,
 });
 

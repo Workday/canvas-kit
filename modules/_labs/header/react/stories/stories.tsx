@@ -233,6 +233,7 @@ storiesOf('Labs/Header/React', module)
             <SearchBar
               isCollapsed={boolean('isCollapsed', false)}
               rightAlign={true}
+              autocompleteItems={[<MenuItem>Hello</MenuItem>]}
               onSubmit={handleSearchSubmitTest}
             />
           }
@@ -498,4 +499,8 @@ storiesOf('Labs/Header/React', module)
       </div>
     </div>
   ))
-  .add('Search Form', () => <SearchWithAutoComplete />);
+  .add('Search Form', () => (
+    <div className={css({background: 'grey', padding: '12px'})}>
+      <SearchWithAutoComplete className={css({marginLeft: spacing.zero})} />
+    </div>)
+  );

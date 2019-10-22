@@ -39,10 +39,12 @@ class Autocomplete extends React.Component<
           .map((x: any, i: string) => autocompleteResult(i))
           .splice(0, 5)}
         onChange={this.autocompleteCallback}
-        showClearButton={true}
+        showClearButton={this.props.showClearButton == null ? true : this.props.showClearButton}
         labelId="autocomplete-123"
+        onFocus={action(`Focus`)}
+        onBlur={action(`Blur`)}
       >
-        <TextInput placeholder="Autocomplete" autoFocus={true} />
+        <TextInput placeholder="Autocomplete" />
       </Combobox>
     );
   }
@@ -55,8 +57,13 @@ storiesOf('Labs/Combobox/React', module)
       <Autocomplete />
     </FormField>
   ))
+  .add('No clear button', () => (
+    <FormField id="autocomplete-123" label="No clear button">
+      <Autocomplete showClearButton={false} />
+    </FormField>
+  ))
   .add('Grow', () => (
-    <FormField grow={true} id="autocomplete-123" label="Autocomplete example">
+    <FormField grow={true} id="autocomplete-123" label="Grow example">
       <Autocomplete />
     </FormField>
-  ));
+  ))

@@ -79,21 +79,19 @@ const InputContainer = styled('div')({
   position: 'relative',
 });
 
-const MenuContainer = styled(Card)<Pick<ComboboxProps, 'grow'>>(
+const MenuContainer = styled(Card)(
   {
     position: 'absolute',
     zIndex: 1,
     left: 0,
     top: '100%',
     borderRadius: borderRadius.m,
-    minWidth: 280, // The min-width of text inputs
     background: commonColors.background,
     border: `none`,
     marginTop: `-${borderRadius.m}`,
+    width: '100%',
+    minWidth: 0,
   },
-  ({grow}) => ({
-    width: grow ? '100%' : 'auto',
-  })
 );
 
 const AutocompleteList = styled('ul')({
@@ -105,12 +103,15 @@ const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   {
     width: spacing.l,
     height: spacing.l,
-    marginLeft: `-${spacing.xl}`,
+    margin: `-${spacing.s}`,
+    left: `-${spacing.m}`,
     padding: 0,
     zIndex: 2,
+    transition: 'opacity 120ms',
   },
   ({shouldShow}) => ({
     visibility: shouldShow ? 'visible' : 'hidden',
+    opacity: shouldShow ? 1 : 0,
   })
 );
 
@@ -388,7 +389,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
             />
           )}
           {this.state.showingAutocomplete && (
-            <MenuContainer padding={spacing.zero} depth={depth[1]} grow={grow}>
+            <MenuContainer padding={spacing.zero} depth={depth[1]}>
               <AutocompleteList
                 role="listbox"
                 id={`${id}-${listBoxIdPart}`}
