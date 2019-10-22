@@ -1,9 +1,11 @@
 /// <reference path="../../../../typings.d.ts" />
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
-import styled, {css} from 'react-emotion';
+import styled from '@emotion/styled';
 
 import {Button} from '../../../button/react/index';
 import {type} from '../../../core/react/index';
@@ -78,11 +80,7 @@ storiesOf('Cookie Banner', module)
           notice: (
             <React.Fragment>
               {CookieBanner.DefaultNotice} Please review our{' '}
-              <a
-                href="https://www.workday.com/en-us/privacy.html"
-                target="__blank"
-                className={css(type.link)}
-              >
+              <a href="https://www.workday.com/en-us/privacy.html" target="__blank" css={type.link}>
                 Privacy Policy
               </a>
               .

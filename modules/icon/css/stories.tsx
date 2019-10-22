@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core';
+import {Component} from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
-import {css} from 'emotion';
 import {colors} from '../../core/react/index';
 // @ts-ignore
 import initializeIcons from './lib/canvas-kit-css-icon';
@@ -22,7 +23,7 @@ class IconDemo extends Component {
   }
 
   render() {
-    return <div className={containerStyle}>{this.props.children}</div>;
+    return <div css={containerStyle}>{this.props.children}</div>;
   }
 }
 

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import PageHeader from '../lib/PageHeader';
 import {mount} from 'enzyme';
-import {createMatchers} from 'jest-emotion';
-import * as emotion from 'emotion';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
+import {matchers} from 'jest-emotion';
 
-expect.extend(createMatchers(emotion));
+expect.extend(matchers);
 
 describe('Page Header', () => {
   const cb = jest.fn();

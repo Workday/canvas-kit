@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ButtonBaseLabel, ButtonLabelIcon, getButtonStyle} from './ButtonBase';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {ButtonSize, IconPosition, TextButtonVariant} from './types';
 import {BaseButtonProps} from './Button';
@@ -53,13 +53,7 @@ export default class TextButton extends React.Component<TextButtonProps> {
     } = this.props;
 
     return (
-      <TextButtonCon
-        onClick={onClick}
-        innerRef={buttonRef}
-        size={size}
-        variant={variant}
-        {...elemProps}
-      >
+      <TextButtonCon onClick={onClick} ref={buttonRef} size={size} variant={variant} {...elemProps}>
         {icon && iconPosition === IconPosition.Left && (
           <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
         )}

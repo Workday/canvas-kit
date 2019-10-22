@@ -52,9 +52,9 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
           </IconButton>
         )}
         <ul>
-          <li className={listItemStyles}>{open && <span>Home</span>}</li>
-          <li className={listItemStyles}>{open && <span>Favorites</span>}</li>
-          <li className={listItemStyles}>{open && <span>Items</span>}</li>
+          <li css={listItemStyles}>{open && <span>Home</span>}</li>
+          <li css={listItemStyles}>{open && <span>Favorites</span>}</li>
+          <li css={listItemStyles}>{open && <span>Items</span>}</li>
         </ul>
       </SidePanel>
     );

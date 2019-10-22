@@ -1,4 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
+/** @jsx jsx */
+import {css, jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -19,8 +21,6 @@ import {
 } from '../index';
 
 import README from '../README.md';
-import {css} from 'emotion';
-import {CSSObject} from 'create-emotion';
 
 const blueBackground: CSSObject = {
   display: 'flex',
@@ -107,12 +107,12 @@ storiesOf('Button/Icon Button', module)
       <ToggleIconButtonWrapper variant={IconButton.Variant.CircleFilled} />
 
       <h3>Inverse Icon Buttons</h3>
-      <div className={css(blueBackground)}>
+      <div css={css(blueBackground)}>
         <ToggleIconButtonWrapper variant={IconButton.Variant.Inverse} />
       </div>
 
       <h3>Inverse Filled Icon Buttons</h3>
-      <div className={css(blueBackground)}>
+      <div css={css(blueBackground)}>
         <ToggleIconButtonWrapper variant={IconButton.Variant.InverseFilled} />
       </div>
 

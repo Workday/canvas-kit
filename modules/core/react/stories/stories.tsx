@@ -1,7 +1,8 @@
 /// <reference path="../../../../typings.d.ts" />
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
-import * as React from 'react';
-import styled, {css} from 'react-emotion';
+import styled from '@emotion/styled';
 import withReadme from 'storybook-readme/with-readme';
 
 import canvas, {H1} from '..';
@@ -45,25 +46,23 @@ export const type = (hierarchy: any) => (
 
     <h3 style={hierarchy.h3}>Variants</h3>
 
-    <span className={css(hierarchy.body, hierarchy.variant.button)}>Button Text</span>
+    <span css={[hierarchy.body, hierarchy.variant.button]}>Button Text</span>
     <br />
-    <span className={css(hierarchy.body, hierarchy.variant.caps)}>Caps Text</span>
+    <span css={[hierarchy.body, hierarchy.variant.caps]}>Caps Text</span>
     <br />
-    <label className={css(hierarchy.body, hierarchy.variant.label)}>Label Text</label>
+    <label css={[hierarchy.body, hierarchy.variant.label]}>Label Text</label>
     <br />
-    <span className={css(hierarchy.body, hierarchy.variant.hint)}>Hint Text</span>
+    <span css={[hierarchy.body, hierarchy.variant.hint]}>Hint Text</span>
     <br />
-    <span className={css(hierarchy.body, hierarchy.variant.error)}>Error Text</span>
+    <span css={[hierarchy.body, hierarchy.variant.error]}>Error Text</span>
     <br />
-    <a href="#" className={css(hierarchy.body, hierarchy.variant.link)}>
+    <a href="#" css={[hierarchy.body, hierarchy.variant.link]}>
       Link Text
     </a>
     <br />
-    <span className={css(hierarchy.body, hierarchy.variant.inverse, inverseStyle)}>
-      Inverse Text
-    </span>
+    <span css={[hierarchy.body, hierarchy.variant.inverse, inverseStyle]}>Inverse Text</span>
     <br />
-    <span className={css(hierarchy.body, hierarchy.variant.mono)}>Mono Text</span>
+    <span css={[hierarchy.body, hierarchy.variant.mono]}>Mono Text</span>
   </div>
 );
 

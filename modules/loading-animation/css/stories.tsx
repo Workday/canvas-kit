@@ -1,8 +1,8 @@
-import React from 'react';
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
-import {css} from 'emotion';
 import './index.scss';
 
 const containerStyle = css({
@@ -13,7 +13,7 @@ storiesOf('CSS/Loading Animations', module)
   .addDecorator(withReadme(README))
   .add('Loading Dots', () => (
     <div className="story">
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <div className="wdc-loading-dots">
           <span />
         </div>

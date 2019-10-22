@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {colors, type} from '@workday/canvas-kit-react-core';
 
 export const borderWidth = 1;

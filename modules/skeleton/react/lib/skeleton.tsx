@@ -1,5 +1,6 @@
 import * as React from 'react';
-import styled, {keyframes} from 'react-emotion';
+import styled from '@emotion/styled';
+import {keyframes} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
 
 export interface SkeletonProps {
@@ -71,7 +72,7 @@ export default class Skeleton extends React.Component<SkeletonProps, SkeletonSta
         aria-label={loadingLabel}
         aria-live={'polite'}
         role={'status'}
-        innerRef={this.ref}
+        ref={this.ref}
         {...elemProps}
       >
         <SkeletonAnimator diagonal={diagonal} topPosition={topPosition} width={width} />

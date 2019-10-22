@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 import {spacing, type} from '@workday/canvas-kit-react-core';
 
