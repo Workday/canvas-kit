@@ -110,7 +110,7 @@ export default class Popup extends React.Component<PopupProps> {
         {handleClose && (
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton
-              data-close="close"
+              data-close="close" // Allows for grabbing focus to the close button rather than relying on the aria label "Close" which will change based on different languages
               ref={this.closeButtonRef}
               variant={IconButton.Variant.Plain}
               size={closeIconSize}

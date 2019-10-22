@@ -124,15 +124,15 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
 
 ---
 
-#### `hideNavigationLabel: string`
+#### `closeNavigationLabel: string`
 
-> Aria label for hiding the navigation
+> Aria label for closing the navigation
 
 ---
 
-#### `showNavigationLabel: string`
+#### `openNavigationLabel: string`
 
-> Aria label for showing the navigation
+> Aria label for opening the navigation
 
 ---
 
