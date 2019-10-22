@@ -54,4 +54,9 @@ storiesOf('Labs/Combobox/React', module)
     <FormField id="autocomplete-123" label="Autocomplete example">
       <Autocomplete />
     </FormField>
+  ))
+  .add('Grow', () => (
+    <FormField grow={true} id="autocomplete-123" label="Autocomplete example">
+      <Autocomplete />
+    </FormField>
   ));

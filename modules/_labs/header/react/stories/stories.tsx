@@ -144,7 +144,6 @@ storiesOf('Labs/Header/React', module)
           leftSlot={
             <SearchBar
               isCollapsed={boolean('isCollapsed', false)}
-              grow={true}
               onSubmit={handleSearchSubmitTest}
             />
           }
@@ -177,7 +176,6 @@ storiesOf('Labs/Header/React', module)
           leftSlot={
             <SearchBar
               isCollapsed={boolean('isCollapsed', false)}
-              grow={true}
               onSubmit={handleSearchSubmitTest}
             />
           }
@@ -203,7 +201,6 @@ storiesOf('Labs/Header/React', module)
           leftSlot={
             <SearchBar
               isCollapsed={boolean('isCollapsed', false)}
-              grow={true}
               onSubmit={handleSearchSubmitTest}
             />
           }
@@ -236,7 +233,6 @@ storiesOf('Labs/Header/React', module)
             <SearchBar
               isCollapsed={boolean('isCollapsed', false)}
               rightAlign={true}
-              grow={true}
               onSubmit={handleSearchSubmitTest}
             />
           }
@@ -250,7 +246,6 @@ storiesOf('Labs/Header/React', module)
           leftSlot={
             <SearchBar
               isCollapsed={boolean('isCollapsed', false)}
-              grow={true}
               onSubmit={handleSearchSubmitTest}
             />
           }
