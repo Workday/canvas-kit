@@ -12,7 +12,7 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, Gr
   label?: React.ReactNode;
   hintText?: React.ReactNode;
   hintId?: string;
-  inputId: string;
+  inputId?: string;
   error?: ErrorType;
   required?: boolean;
   useFieldset: boolean;
@@ -82,8 +82,9 @@ export default class FormField extends React.Component<FormFieldProps> {
   static defaultProps = {
     labelPosition: FormField.LabelPosition.Top,
     useFieldset: false,
-    inputId: `form-field-${uuid()}`,
   };
+
+  private inputId: string = this.props.inputId || `form-field-${uuid()}`;
 
   private renderChildren = (child: React.ReactElement): React.ReactNode => {
     if (React.isValidElement<any>(child)) {
@@ -109,7 +110,7 @@ export default class FormField extends React.Component<FormFieldProps> {
         }
       }
 
-      props.id = this.props.inputId;
+      props.id = this.inputId;
 
       return React.cloneElement(child, props);
     }
@@ -137,7 +138,7 @@ export default class FormField extends React.Component<FormFieldProps> {
         {typeof label === 'string' ? (
           <Label
             labelPosition={labelPosition}
-            htmlFor={inputId}
+            htmlFor={this.inputId}
             isLegend={useFieldset}
             required={!!required}
             accessibleHide={labelPosition === FormFieldLabelPosition.Hidden}

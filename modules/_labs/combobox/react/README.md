@@ -23,19 +23,15 @@ import {MenuItem} from '@workday/canvas-kit-labs-react-menu';
 import {TextInput} from '@workday/canvas-kit-labs-react-text-input';
 import {FormField} from '@workday/canvas-kit-labs-react-form-field';
 
-const handleInputChange = event => console.log('Adjust menu items here')
+const autocompleteCallback = event => console.log('Adjust menu items here')
 
 
 <FormField id='id-123' label='Example'>
   <Combobox
     autocompleteItems={[<MenuItem>Item 1</MenuItem>]}
-    isCollapsed={false}
-    onInputChange={this.autocompleteCallback}
-    placeholder='Search with Autocomplete'
-    grow={true}
-    searchTheme={SearchBar.Theme.Dark}
-    onSubmit={handleSearchSubmit}
-    labelId='id-123'
+    onChange={autocompleteCallback}
+    onFocus={action(`Focus`)}
+    onBlur={action(`Blur`)}
   />
     <TextInput placeholder="Autocomplete" autoFocus={true} />
   </Combobox>
