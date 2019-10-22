@@ -8,11 +8,7 @@ export interface CanvasProviderProps {
   theme: CanvasTheme;
 }
 
-/**
- * TODO:
- * - Opt in for fonts
- * - Make themes work without provider
- */
+// TODO: Opt in for fonts
 
 export default class CanvasProvider extends React.Component<CanvasProviderProps> {
   static defaultProps = {
