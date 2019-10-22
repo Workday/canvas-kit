@@ -84,7 +84,7 @@ export default class FormField extends React.Component<FormFieldProps> {
     useFieldset: false,
   };
 
-  private inputId: string = this.props.inputId || `form-field-${uuid()}`;
+  private inputId: string = this.props.inputId || uuid();
 
   private renderChildren = (child: React.ReactElement): React.ReactNode => {
     if (React.isValidElement<any>(child)) {
