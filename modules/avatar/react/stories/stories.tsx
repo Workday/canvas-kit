@@ -12,14 +12,6 @@ const handleAvatarButtonClick = (e: React.SyntheticEvent) => {
   console.log('AvatarButton clicked');
 };
 
-/// TEST
-
-import Test from '../lib/Test';
-
-storiesOf('_TEST', module).add('Test', () => <Test>some text</Test>);
-
-/// TEST
-
 storiesOf('Avatar/Default', module)
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
