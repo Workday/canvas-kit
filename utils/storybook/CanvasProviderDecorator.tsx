@@ -1,4 +1,15 @@
 import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-react-core';
+import {
+  CanvasProvider,
+  defaultCanvasTheme,
+  createCanvasTheme,
+} from '@workday/canvas-kit-react-core';
+import {object} from '@storybook/addon-knobs';
 
-export default (storyFn: () => React.ReactNode) => <CanvasProvider>{storyFn()}</CanvasProvider>;
+const label = 'theme';
+
+export default (storyFn: () => React.ReactNode) => (
+  <CanvasProvider theme={createCanvasTheme(object(label, defaultCanvasTheme))}>
+    {storyFn()}
+  </CanvasProvider>
+);
