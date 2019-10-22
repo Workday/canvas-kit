@@ -93,10 +93,12 @@ const theme: PartialCanvasTheme = {
 </CanvasProvider>;
 ```
 
-This will change the theme for all components. However, it is possible to set a theme for a specific
-component or set of components within your React tree. This is generally discouraged for consistency
-reasons, but may be required in some contexts (a green `Switch` component for example). To do this,
-you must use Emotion's `ThemeProvider` component.
+### Nesting Theme Providers
+
+It is possible to set a theme for a specific component or set of components within your React tree.
+This is generally discouraged for consistency reasons, but may be required in some contexts (a green
+`Switch` component for example). To do this, you must use Emotion's `ThemeProvider` component. The
+inner theme will override the outer theme.
 
 ```tsx
 import * as React from 'react';

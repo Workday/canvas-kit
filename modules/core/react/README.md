@@ -9,7 +9,8 @@ Includes:
 - [Spacing](#spacing)
 - [Depth](#depth)
 - [Type](#type)
-- [Input Provider](#input-provider)
+- [Providers](#providers)
+- [Theming](#theming)
 
 ## Installation
 
@@ -283,16 +284,60 @@ import {type} from '@workday/canvas-kit-react-core';
 <label css={[canvas.type.body, canvas.type.variant.label]}>Label Text</label>;
 ```
 
-# Input Provider
+# Providers
+
+Providers are higher order (wrapping) components used to provide global configuration to Canvas
+components.
+
+## Canvas Provider
+
+This provider includes all of the Canvas Providers below. This is the way most consumers should use
+the provider. This provider is required for our theming capabilities, so you can find more
+information in the [theming documentation](./lib/theming/README.md).
+
+**We strongly encourage you to use this in your application to wrap all Canvas components.**
+
+```tsx
+import * as React from 'react';
+import {CanvasProvider} from '@workday/canvas-kit-react';
+
+<CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
+```
+
+### Storybook Decorator
+
+We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
+stories in a `CanvasProvider` (including `InputProvider`) automatically.
+
+Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
+
+```js
+import {CanvasProviderDecorator} from '../utils/storybook';
+
+addDecorator(CanvasProviderDecorator);
+```
+
+Or, add it to stories individually:
+
+```js
+import {CanvasProviderDecorator} from '../../../../utils/storybook';
+
+storiesOf('My Story', module)
+  .addDecorator(CanvasProviderDecorator)
+  .add('All', () => <YourJSX />);
+```
+
+## Input Provider
 
 This is a higher order (wrapping) component for providing css-referencable data attributes for the
 users current input. Focus outlines are required for accesibility, but they can be unnecessary
 visual noise when using a mouse. This allows us to hide focus outlines (as desired) while the user
 is interacting with components using a mouse, touch, etc. and show them when keyboard navigation
 begins. This logic is heavily influenced by [what-input](https://github.com/ten1seven/what-input).
+You can use it to style your own components as well using the examples below.
 
-**We strongly encourage you to use this in your application to wrap all Canvas components**. You can
-use it to style your own components as well.
+Preferably you would use the `CanvasProvider` as `InputProvider` functionality is included within
+it. However, if you want `InputProvider` functionality on it's own, you can use this.
 
 ### Definitions
 
@@ -320,17 +365,17 @@ type updates from the events above, the intent type will also be updated to the 
   - `mousewheel`
   - `DOMMouseScroll`
 
-## Usage
+### Usage
 
 As an external consumer, you should reference the following example.
 
 If you are contributing a component, you must add the necessary styling (see below) and use the
-[`InputProviderDecorator`](#storybook-decorator) in your stories. _DO NOT_ wrap any canvas kit
-components in an `InputProvider`.
+[`InputProviderDecorator`](#storybook-decorator) in your stories. _DO NOT_ use an `InputProvider`
+directly within any canvas kit components.
 
 ```tsx
 import * as React from 'react';
-import {InputProvider} from '../../../../utils/storybook';
+import {InputProvider} from '@workday/canvas-kit-react';
 
 <InputProvider>{/* All your components containing any Canvas components */}</InputProvider>;
 ```
@@ -374,7 +419,7 @@ mouse input. Simply spread it in your styles (i.e. `...hideMouseFocus`).
 **Note:** It is best practice to show focus outlines by default and specifically hide them in the
 cases you would like (i.e. mouse/touch/pointer input).
 
-## Static Properties
+### Static Properties
 
 #### `InputTypes`
 
@@ -387,42 +432,20 @@ cases you would like (i.e. mouse/touch/pointer input).
 
 ---
 
-## Component Props
+### Component Props
 
-### Required
+#### Required
 
 > None
 
-### Optional
+#### Optional
 
-#### `provideIntent: boolean`
+##### `provideIntent: boolean`
 
 > Whether you would like the attribute `data-whatintent` rendered (see definition of intent above).
 > Note: detecting intent will add scroll and mouse positioning listeners which could affect
 > performance.
 
-## Storybook Decorator
+# Theming
 
-We provide a [storybook decorator](../../utils/storybook/InputProviderDecorator.tsx) to wrap your
-stories in an `InputProvider` automatically.
-
-Example:
-
-```js
-import {InputProviderDecorator} from '../../../../utils/storybook';
-
-storiesOf('My Story', module)
-  .addDecorator(InputProviderDecorator)
-  .add('All', () => <YourJSX />);
-```
-
-You can also add this [storybook decorator](../../utils/storybook/InputProviderDecorator.tsx) to
-your `/.storybook/config.js` configuration file so it wraps all your stories automatically.
-
-Example:
-
-```js
-import {InputProviderDecorator} from '../utils/storybook';
-
-addDecorator(InputProviderDecorator);
-```
+Theming documentation has it's own README. You can find it [here](./lib/theming/README.md)
