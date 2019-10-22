@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'react-emotion';
-import {CSSObject} from 'create-emotion';
+import styled from '@emotion/styled';
+import {CSSObject} from '@emotion/core';
 import {CSSTransition} from 'react-transition-group';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import {colors, borderRadius, spacing, spacingNumbers, type} from '@workday/canvas-kit-react-core';
@@ -304,7 +304,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
               placeholder={placeholder}
               themeColor={themeColor}
               collapse={collapse}
-              innerRef={this.inputRef}
+              ref={this.inputRef}
               onFocus={this.setFocused.bind(this, true)}
               onBlur={this.setFocused.bind(this, false)}
               onChange={this.handleSearchInputChange}
@@ -360,7 +360,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
           themeColor={themeColor}
           collapse={collapse}
           value={this.state.value}
-          innerRef={this.inputRef}
+          ref={this.inputRef}
           onMouseEnter={() => this.handleHover(true)}
           onMouseLeave={() => this.handleHover(false)}
           onChange={this.handleSearchInputChange}

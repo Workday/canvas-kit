@@ -38,9 +38,9 @@
     "@workday/canvas-kit-react-button": "^3.0.0-beta.1",
     "@workday/canvas-kit-react-core": "^3.0.0-beta.1",
     "@workday/canvas-system-icons-web": "^1.0.1",
-    "emotion": "^9.2.12",
-    "lodash": "^4.17.14",
-    "react-emotion": "^9.2.12"
+    "@emotion/core": "^10.0.21",
+    "@emotion/styled": "^10.0.17",
+    "lodash": "^4.17.14"
   },
   "peerDependencies": {
     "react": ">= 16.8 < 17"

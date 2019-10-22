@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'react-emotion';
-import {keyframes} from 'emotion';
+import styled from '@emotion/styled';
+import {keyframes} from '@emotion/core';
 import uuid from 'uuid/v4';
 
 import Card from '@workday/canvas-kit-react-card';
@@ -101,7 +101,7 @@ export default class Popup extends React.Component<PopupProps> {
         width={width}
         role="dialog"
         aria-labelledby={heading ? this.id : undefined}
-        innerRef={popupRef}
+        ref={popupRef}
         {...elemProps}
       >
         {handleClose && (

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'react-emotion';
-import {keyframes} from 'emotion';
+import styled from '@emotion/styled';
+import {keyframes} from '@emotion/core';
 import FocusTrap from 'focus-trap-react';
 
 import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';

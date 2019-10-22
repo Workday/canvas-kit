@@ -1,7 +1,8 @@
 /// <reference path="../../../../../typings.d.ts" />
-import * as React from 'react';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
-import styled, {css} from 'react-emotion';
+import styled from '@emotion/styled';
 import withReadme from 'storybook-readme/with-readme';
 import {spacing} from '@workday/canvas-kit-react-core';
 import type, {space} from '..';
@@ -55,23 +56,23 @@ storiesOf('Labs/Core/React', module)
 
         <h3 style={type.h3}>Variants</h3>
 
-        <span className={css(type.body, type.variant.button)}>Button Text</span>
+        <span css={[type.body, type.variant.button]}>Button Text</span>
         <br />
-        <span className={css(type.body, type.variant.caps)}>Caps Text</span>
+        <span css={[type.body, type.variant.caps]}>Caps Text</span>
         <br />
-        <label className={css(type.body, type.variant.label)}>Label Text</label>
+        <label css={[type.body, type.variant.label]}>Label Text</label>
         <br />
-        <span className={css(type.body, type.variant.hint)}>Hint Text</span>
+        <span css={[type.body, type.variant.hint]}>Hint Text</span>
         <br />
-        <span className={css(type.body, type.variant.error)}>Error Text</span>
+        <span css={[type.body, type.variant.error]}>Error Text</span>
         <br />
-        <a href="#" className={css(type.body, type.variant.link)}>
+        <a href="#" css={[type.body, type.variant.link]}>
           Link Text
         </a>
         <br />
-        <span className={css(type.body, type.variant.inverse, inverseStyle)}>Inverse Text</span>
+        <span css={[type.body, type.variant.inverse, inverseStyle]}>Inverse Text</span>
         <br />
-        <span className={css(type.body, type.variant.mono)}>Mono Text</span>
+        <span css={[type.body, type.variant.mono]}>Mono Text</span>
       </section>
     </div>
   ))

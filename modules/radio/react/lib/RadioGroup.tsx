@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import Radio, {RadioProps} from './Radio';
 import {borderRadius, spacing, inputColors, colors} from '@workday/canvas-kit-react-core';
 import {ErrorType, GrowthBehavior} from '@workday/canvas-kit-react-common';

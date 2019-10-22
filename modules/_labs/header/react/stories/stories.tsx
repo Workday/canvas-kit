@@ -1,9 +1,10 @@
 /// <reference path="../../../../../typings.d.ts" />
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import styled from 'react-emotion';
-import {css, cx} from 'emotion';
+import styled from '@emotion/styled';
 import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
@@ -69,7 +70,7 @@ storiesOf('Labs/Header/React', module)
   .addDecorator(withReadme(README))
   .add('Global Header', () => (
     <div className="story">
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <GlobalHeader
           brand={
             <a href="#">
@@ -103,7 +104,7 @@ storiesOf('Labs/Header/React', module)
           />
         </GlobalHeader>
       </div>
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <GlobalHeader
           brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}
           menuToggle={<AvatarButton onClick={handleMenuClickTest} />}
@@ -125,7 +126,7 @@ storiesOf('Labs/Header/React', module)
           <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <GlobalHeader onSearchSubmit={handleSearchSubmitTest} onMenuClick={handleMenuClickTest}>
           <IconButton
             icon={notificationsIcon}
@@ -146,10 +147,10 @@ storiesOf('Labs/Header/React', module)
   ))
   .add('Dub Header', () => (
     <div className="story">
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header title="Required" onSearchSubmit={handleSearchSubmitTest} />
       </div>
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header title="Icons Only" brandUrl="#" onSearchSubmit={handleSearchSubmitTest}>
           <IconButton
             variant={IconButton.Variant.Circle}
@@ -167,7 +168,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header
           title="Kitchen Sink"
           themeColor={Header.Theme.Blue}
@@ -187,7 +188,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header
           variant={Header.Variant.Dub}
           title="Ignored when brand prop exists..."
@@ -219,7 +220,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header
           variant={Header.Variant.Dub}
           title="Centered Menu"
@@ -245,7 +246,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div className={cx(containerStyle, backgroundStyle)}>
+      <div css={[containerStyle, backgroundStyle]}>
         <Header
           variant={Header.Variant.Dub}
           title="Transparent"
@@ -273,10 +274,10 @@ storiesOf('Labs/Header/React', module)
   ))
   .add('Full Header', () => (
     <div className="story">
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header variant={Header.Variant.Full} />
       </div>
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header
           variant={Header.Variant.Full}
           title="Design"
@@ -287,7 +288,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header
           variant={Header.Variant.Full}
           title="Kitchen Sink"
@@ -307,7 +308,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header variant={Header.Variant.Full} title="" themeColor={Header.Theme.Blue} brandUrl="#">
           {nav}
           <IconButton
@@ -320,7 +321,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div className={cx(containerStyle, backgroundStyle)}>
+      <div css={[containerStyle, backgroundStyle]}>
         <Header
           variant={Header.Variant.Full}
           title="Transparent"
@@ -338,7 +339,7 @@ storiesOf('Labs/Header/React', module)
         </Header>
       </div>
       <br />
-      <div className={containerStyle}>
+      <div css={containerStyle}>
         <Header
           variant={Header.Variant.Full}
           title=""

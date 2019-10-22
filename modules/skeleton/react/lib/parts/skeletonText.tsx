@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {TEXT_BORDER_RADIUS} from './utils';
 import canvas from '@workday/canvas-kit-react-core';
 

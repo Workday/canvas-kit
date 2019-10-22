@@ -46,7 +46,7 @@ const questions = [
   },
   /**
    * Add question to add deps
-   * React: CK core, emotion, react-emotion
+   * React: CK core, emotion
    * CSS: CK Core
    */
 ];

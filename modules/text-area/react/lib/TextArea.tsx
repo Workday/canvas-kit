@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
 import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 
@@ -76,6 +76,6 @@ export default class TextArea extends React.Component<TextAreaProps> {
   render() {
     const {grow, inputRef, resize, ...inputProps} = this.props;
 
-    return <TextAreaContainer innerRef={inputRef} grow={grow} resize={resize} {...inputProps} />;
+    return <TextAreaContainer ref={inputRef} grow={grow} resize={resize} {...inputProps} />;
   }
 }

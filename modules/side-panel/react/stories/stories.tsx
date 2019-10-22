@@ -1,10 +1,11 @@
 /// <reference path="../../../../typings.d.ts" />
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {homeIcon, starIcon, rocketIcon, plusIcon} from '@workday/canvas-system-icons-web';
-import styled from 'react-emotion';
-import {css} from 'emotion';
+import styled from '@emotion/styled';
 import {select, number} from '@storybook/addon-knobs';
 
 import {colors, type} from '@workday/canvas-kit-react-core';
@@ -116,19 +117,19 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
         )}
         {/* TODO replace this with our list component */}
         <UnorderedList>
-          <ListItem className={listItemStyles}>
+          <ListItem css={listItemStyles}>
             <span>
               <SystemIcon icon={homeIcon} />
             </span>
             {open && <ListTitle>Home</ListTitle>}
           </ListItem>
-          <ListItem className={listItemStyles}>
+          <ListItem css={listItemStyles}>
             <span>
               <SystemIcon icon={starIcon} />
             </span>
             {open && <ListTitle>Favorites</ListTitle>}
           </ListItem>
-          <ListItem className={listItemStyles}>
+          <ListItem css={listItemStyles}>
             <span>
               <SystemIcon icon={rocketIcon} />
             </span>
