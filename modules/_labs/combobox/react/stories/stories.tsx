@@ -66,4 +66,4 @@ storiesOf('Labs/Combobox/React', module)
     <FormField grow={true} id="autocomplete-123" label="Grow example">
       <Autocomplete />
     </FormField>
-  ))
+  ));

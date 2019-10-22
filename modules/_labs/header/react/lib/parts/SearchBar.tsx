@@ -107,7 +107,7 @@ const SearchForm = styled('form')<
     width: '100%',
     marginLeft: spacing.m,
   },
-  ({ isCollapsed, showForm, rightAlign, grow}) => {
+  ({isCollapsed, showForm, rightAlign, grow}) => {
     const collapseStyles: CSSObject = isCollapsed
       ? {
           top: 0,
@@ -126,9 +126,9 @@ const SearchForm = styled('form')<
       : {};
     const rightAlignStyles: CSSObject = rightAlign
       ? {
-        textAlign: 'right',
-        maxWidth: grow ? '100%' : maxWidth,
-      }
+          textAlign: 'right',
+          maxWidth: grow ? '100%' : maxWidth,
+        }
       : {};
     return {...rightAlignStyles, ...collapseStyles};
   }
@@ -202,7 +202,7 @@ const SearchField = styled(FormField)<
     marginBottom: spacingNumbers.zero,
     '> div': {
       display: 'block',
-    }
+    },
   };
 });
 

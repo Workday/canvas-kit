@@ -502,5 +502,5 @@ storiesOf('Labs/Header/React', module)
   .add('Search Form', () => (
     <div className={css({background: 'grey', padding: '12px'})}>
       <SearchWithAutoComplete className={css({marginLeft: spacing.zero})} />
-    </div>)
-  );
+    </div>
+  ));

@@ -79,20 +79,18 @@ const InputContainer = styled('div')({
   position: 'relative',
 });
 
-const MenuContainer = styled(Card)(
-  {
-    position: 'absolute',
-    zIndex: 1,
-    left: 0,
-    top: '100%',
-    borderRadius: borderRadius.m,
-    background: commonColors.background,
-    border: `none`,
-    marginTop: `-${borderRadius.m}`,
-    width: '100%',
-    minWidth: 0,
-  },
-);
+const MenuContainer = styled(Card)({
+  position: 'absolute',
+  zIndex: 1,
+  left: 0,
+  top: '100%',
+  borderRadius: borderRadius.m,
+  background: commonColors.background,
+  border: `none`,
+  marginTop: `-${borderRadius.m}`,
+  width: '100%',
+  minWidth: 0,
+});
 
 const AutocompleteList = styled('ul')({
   padding: 0,
