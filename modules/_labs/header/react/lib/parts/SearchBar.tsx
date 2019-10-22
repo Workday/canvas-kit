@@ -197,6 +197,7 @@ const SearchField = styled(FormField)<
   return {
     display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
     width: grow ? '100%' : 'auto',
+    maxWidth: isCollapsed ? 'none' : maxWidth,
     marginBottom: spacingNumbers.zero,
   };
 });
