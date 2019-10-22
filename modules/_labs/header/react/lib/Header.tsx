@@ -272,6 +272,7 @@ class MenuIconButton extends React.Component<
       variant:
         themeColor === HeaderTheme.White ? IconButton.Variant.Circle : IconButton.Variant.Inverse,
       icon: justifyIcon,
+      onClick: onMenuClick,
     };
 
     const menuSlot =
