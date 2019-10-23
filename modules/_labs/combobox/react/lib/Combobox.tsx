@@ -264,7 +264,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
 
     switch (event.key) {
       case 'ArrowUp':
-      case "Up": // IE/Edge specific value
+      case 'Up': // IE/Edge specific value
         const upIndex = currentIndex != null ? currentIndex - 1 : lastItem;
         nextIndex = upIndex < 0 ? lastItem : upIndex;
         event.stopPropagation();
@@ -272,7 +272,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         break;
 
       case 'ArrowDown':
-      case "Down": // IE/Edge specific value
+      case 'Down': // IE/Edge specific value
         const downIndex = currentIndex != null ? currentIndex + 1 : firstItem;
         nextIndex = downIndex >= autoCompleteItemCount ? firstItem : downIndex;
         event.stopPropagation();
@@ -280,7 +280,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         break;
 
       case 'Escape':
-      case "Esc": // IE/Edge specific value
+      case 'Esc': // IE/Edge specific value
         this.resetSearchInput();
         break;
 

@@ -169,8 +169,8 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       switch (event.key) {
         case 'ArrowUp':
         case 'ArrowDown':
-        case "Down": // IE/Edge specific value
-        case "Up": // IE/Edge specific value
+        case 'Down': // IE/Edge specific value
+        case 'Up': // IE/Edge specific value
           const direction = event.key === 'ArrowUp' ? -1 : 1;
           isShortcut = true;
           const nextIndex = this.state.selectedItemIndex + direction;
@@ -192,7 +192,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           break;
 
         case 'Escape':
-        case "Esc": // IE/Edge specific value
+        case 'Esc': // IE/Edge specific value
           isShortcut = true;
           if (this.props.onClose) {
             this.props.onClose();
