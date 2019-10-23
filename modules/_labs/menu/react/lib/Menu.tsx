@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import uuid from 'uuid/v4';
 import {MenuItemProps} from './MenuItem';
 import {Card} from '@workday/canvas-kit-react-card';
@@ -106,7 +106,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           aria-labelledby={labeledBy}
           aria-activedescendant={`${id}-${selectedItemIndex}`}
           onKeyDown={this.handleKeyboardShortcuts}
-          innerRef={this.menuRef}
+          ref={this.menuRef}
           {...elemProps}
         >
           {React.Children.map(children, (menuItem: React.ReactElement<MenuItemProps>, index) => {

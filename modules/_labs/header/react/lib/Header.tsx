@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {css} from 'emotion';
-import styled from 'react-emotion';
+import {css} from '@emotion/core';
+import styled from '@emotion/styled';
 import {type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {DubLogoTitle, Search, WorkdayLogoTitle} from './parts';
 import {themes} from './shared/themes';

@@ -38,6 +38,6 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "emotion": "^9.2.12"
+    "@emotion/core": "^10.0.21"
   }
 }

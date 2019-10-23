@@ -1,5 +1,7 @@
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core';
 import * as React from 'react';
-import styled, {css} from 'react-emotion';
+import styled from '@emotion/styled';
 import {colors, commonColors, type, spacing} from '@workday/canvas-kit-react-core';
 import Button from '@workday/canvas-kit-react-button';
 
@@ -92,7 +94,7 @@ export default class CookieBanner extends React.Component<CookieBannerProps> {
     return (
       <Banner isClosed={isClosed} {...elemProps}>
         <BannerItem>{notice}</BannerItem>
-        <BannerItem className={rowStyle}>
+        <BannerItem css={rowStyle}>
           {onClickSettings && (
             <CookieSettings onClick={onClickSettings}>Cookie Settings</CookieSettings>
           )}

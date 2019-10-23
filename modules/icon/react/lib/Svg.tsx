@@ -1,13 +1,13 @@
+/** @jsx jsx */
+import {CSSObject, jsx, ClassNames} from '@emotion/core';
 import * as React from 'react';
-import {cx, css} from 'react-emotion';
-import {Interpolation} from 'emotion';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {SpanProps} from './types';
 import {validateIconType} from './utils';
 
 export interface SvgProps {
   src: CanvasIcon;
-  styles?: Interpolation;
+  styles?: CSSObject;
   elemProps: SpanProps;
   type: CanvasIconTypes;
 }
@@ -28,17 +28,24 @@ export default class Svg extends React.Component<SvgProps> {
       return null;
     }
 
-    const assetStyles = [{display: 'inline-block', '& svg': {display: 'block'}}, styles];
-    const assetStyle = css(assetStyles);
-
     return (
-      <span
-        {...elemProps}
-        dangerouslySetInnerHTML={{__html: src.svg}}
-        // Need to combine iconStyle with the className prop, otherwise we'll clobber it
-        // (we'll need to do something like this for each HTML <span> prop we explicitly set in this component)
-        className={cx(assetStyle, elemProps.className)}
-      />
+      <ClassNames>
+        {({css, cx}) => (
+          <span
+            {...elemProps}
+            dangerouslySetInnerHTML={{__html: src.svg}}
+            // Need to combine iconStyle with the className prop, otherwise we'll clobber it
+            // (we'll need to do something like this for each HTML <span> prop we explicitly set in this component)
+            className={cx(
+              css(styles, {
+                display: 'inline-block',
+                '& svg': {display: 'block'},
+              }),
+              elemProps.className
+            )}
+          />
+        )}
+      </ClassNames>
     );
   }
 }

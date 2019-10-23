@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import IconButton, {IconButtonCon, IconButtonProps} from './IconButton';
 

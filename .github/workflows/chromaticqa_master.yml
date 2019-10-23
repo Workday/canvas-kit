@@ -22,4 +22,5 @@ jobs:
       run: yarn chromatic --auto-accept-changes
       env:
         CI: true # Tells Chromatic to treat as a CI run (it doesn't auto-detect Github Actions)
-        CHROMATIC_APP_CODE: dlpro96xybh
+        CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+

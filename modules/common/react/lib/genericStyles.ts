@@ -1,4 +1,4 @@
-import {CSSObject} from 'create-emotion';
+import {CSSObject} from '@emotion/core';
 
 /**
  * Our schema for generic styles for a whole component.

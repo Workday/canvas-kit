@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -257,7 +257,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
             checked={checked}
             disabled={disabled}
             id={id}
-            innerRef={inputRef}
+            ref={inputRef}
             onChange={onChange}
             type="checkbox"
             value={value}
