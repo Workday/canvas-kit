@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {withKnobs, select, text} from '@storybook/addon-knobs/react';
+import {withKnobs, select, text} from '@storybook/addon-knobs';
 import withReadme from 'storybook-readme/with-readme';
 
 import Banner from '../index';
