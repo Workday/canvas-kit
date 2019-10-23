@@ -34,4 +34,11 @@ export function load(categorization: string, story: string) {
  */
 export function visit() {
   cy.visit('iframe.html');
+  cy.injectAxe();
+  cy.configureAxe({
+    rules: [
+      {id: 'landmark-one-main', enabled: false}, // stories don't require navigation rules
+      {id: 'page-has-heading-one', enabled: false}, // stories don't require a single heading
+    ],
+  });
 }
