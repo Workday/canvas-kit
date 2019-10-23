@@ -8,6 +8,7 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
   isLegend: boolean;
   htmlFor?: string;
   required?: boolean;
+  requiredLabel: string;
 }
 
 const labelStyles = [
@@ -53,6 +54,7 @@ export default class Label extends React.Component<LabelProps> {
   static defaultProps = {
     labelPosition: Label.Position.Top,
     isLegend: false,
+    requiredLabel: 'required',
   };
 
   public render() {
@@ -61,7 +63,7 @@ export default class Label extends React.Component<LabelProps> {
       ? props.children
       : [
           props.children,
-          <RequiredAstrisk key={'0'} title="required">
+          <RequiredAstrisk key={'0'} title={props.requiredLabel}>
             *
           </RequiredAstrisk>,
         ];

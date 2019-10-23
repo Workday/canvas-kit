@@ -76,7 +76,11 @@ function onInitialFocus(
   if (firstFocusEl) {
     return firstFocusEl;
   } else {
-    const firstFocusable = modalEl && modalEl.querySelector<HTMLElement>('[aria-label=Close],h3');
+    const firstFocusable =
+      modalEl &&
+      modalEl.querySelector<HTMLElement>(
+        `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
+      );
     if (firstFocusable) {
       if (firstFocusable.tagName === 'H3') {
         // If there is no close icon, we need to transfer focus to the header.

@@ -17,6 +17,8 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   breakpoint?: number;
   openWidth?: number;
   backgroundColor?: SidePanelBackgroundColor;
+  closeNavigationLabel: string;
+  openNavigationLabel: string;
 }
 
 export interface SidePanelState {
@@ -41,7 +43,9 @@ const Header = styled('h2')({
   marginTop: spacing.zero,
 });
 
-const SidePanelContainer = styled('div')<SidePanelProps>(
+const SidePanelContainer = styled('div')<
+  Pick<SidePanelProps, 'open' | 'backgroundColor' | 'padding' | 'openWidth' | 'openDirection'>
+>(
   {
     overflow: 'hidden',
     height: '100%',
@@ -130,6 +134,8 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     openWidth: 300,
     openDirection: SidePanelOpenDirection.Left,
     backgroundColor: SidePanelBackgroundColor.White,
+    closeNavigationLabel: 'close navigation',
+    openNavigationLabel: 'open navigation',
   };
 
   constructor(props: SidePanelProps) {
@@ -158,6 +164,8 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
       onBreakpointChange,
       openWidth,
       backgroundColor,
+      openNavigationLabel,
+      closeNavigationLabel,
       ...elemProps
     } = this.props;
 
@@ -180,7 +188,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
           {onToggleClick && (
             <ToggleButton
               openDirection={openDirection}
-              aria-label={`${open ? 'hide navigation' : 'show navigation'}`}
+              aria-label={open ? closeNavigationLabel : openNavigationLabel}
               toggled={false}
               size={IconButton.Size.Small}
               onClick={this.onToggleClick}

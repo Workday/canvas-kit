@@ -97,3 +97,9 @@ Default: `undefined`
 > Custom cookie notice text or element to display.
 
 Default: `CookieBanner.DefaultNotice`
+
+#### `settingsLabel: string`
+
+> Default label for cookie settings
+
+Default: 'Cookie Settings'

@@ -33,6 +33,14 @@ export interface SearchProps extends React.HtmlHTMLAttributes<HTMLFormElement> {
    * An function that gets called and passed the current input value when the search form is submitted
    */
   onSearchSubmit?: (query: string) => void;
+  /**
+   * String for translation, defaults to "Reset Search Input"
+   */
+  resetSearchLabel: string;
+  /**
+   * String for aria-label, defaults to "Search"
+   */
+  searchLabel: string;
 }
 
 export interface SearchState {
@@ -192,6 +200,8 @@ export class Search extends React.Component<SearchProps, SearchState> {
     themeColor: HeaderTheme.White,
     headerHeight: HeaderHeight.Small,
     placeholder: 'Search',
+    resetSearchLabel: 'Reset Search Input',
+    searchLabel: 'Search',
   };
 
   private inputRef: React.RefObject<HTMLInputElement>;
@@ -271,13 +281,15 @@ export class Search extends React.Component<SearchProps, SearchState> {
       rightAlign,
       collapse,
       onSearchSubmit,
+      resetSearchLabel,
+      searchLabel,
       ...elemProps
     } = this.props;
 
     return (
       <React.Fragment>
         <IconButton
-          aria-label="Search"
+          aria-label={searchLabel}
           type="submit"
           icon={searchIcon}
           variant={iconButtonVariant(themeColor !== HeaderTheme.White)}
@@ -311,7 +323,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
               value={this.state.value}
             />
             <IconButton
-              aria-label="Reset Search Input"
+              aria-label={resetSearchLabel}
               icon={xIcon}
               type="reset"
               variant={IconButton.Variant.Circle}
@@ -332,6 +344,8 @@ export class Search extends React.Component<SearchProps, SearchState> {
       rightAlign,
       collapse,
       onSearchSubmit,
+      resetSearchLabel,
+      searchLabel,
       ...elemProps
     } = this.props;
 
@@ -348,7 +362,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
         {...elemProps}
       >
         <SearchSubmit
-          aria-label="Search"
+          aria-label={searchLabel}
           icon={searchIcon}
           variant={iconButtonVariant(!this.state.focused && themeColor !== HeaderTheme.White)}
           onClick={this.onSearchSubmit}
@@ -369,7 +383,7 @@ export class Search extends React.Component<SearchProps, SearchState> {
         />
         <SearchReset
           value={this.state.value}
-          aria-label="Reset Search Input"
+          aria-label={resetSearchLabel}
           icon={xSmallIcon}
           variant={iconButtonVariant(
             !!this.state.value && !this.state.focused && themeColor !== HeaderTheme.White

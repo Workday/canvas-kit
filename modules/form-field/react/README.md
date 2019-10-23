@@ -106,6 +106,12 @@ Default: `undefined`
 
 ---
 
+#### `requiredlabel: string`
+
+> The required label text displayed for the required input.
+
+---
+
 #### `inputId: string`
 
 > The ID of the input child. If an ID is not specified on the input child, this will be used as it's
