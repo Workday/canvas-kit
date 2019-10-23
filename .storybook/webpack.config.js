@@ -144,8 +144,8 @@ module.exports = async ({config}) => {
       checkSyntacticErrors: true,
       tsconfig: path.join(__dirname, 'tsconfig.json'),
       eslint: true,
-    })
-    // new DocgenPlugin()
+    }),
+    new DocgenPlugin()
   );
 
   return config;
