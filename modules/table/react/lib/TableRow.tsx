@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Interpolation} from 'emotion';
-import styled from 'react-emotion';
+import {CSSObject} from '@emotion/core';
+import styled from '@emotion/styled';
 import {rgba} from 'polished';
 import {colors, spacing, spacingNumbers, statusColors} from '@workday/canvas-kit-react-core';
 import {borderColor, borderWidth, cellBorder} from './Table';
@@ -31,7 +31,7 @@ const errorColorLight = colors.cinnamon200;
 const alertColor = statusColors.warning;
 const alertColorLight = colors.cantaloupe200;
 
-function makeColoredRow(_bgColor: string, _borderColor: string): Interpolation {
+function makeColoredRow(_bgColor: string, _borderColor: string): CSSObject {
   return {
     backgroundColor: _bgColor,
     position: 'relative',
@@ -65,7 +65,7 @@ function makeColoredRow(_bgColor: string, _borderColor: string): Interpolation {
   };
 }
 
-function makeColoredRowStyle(_bgColor: string, _borderColor: string): Interpolation {
+function makeColoredRowStyle(_bgColor: string, _borderColor: string): CSSObject {
   const lightenedBg = rgba(_bgColor, 0.2);
   return {
     'th, td': [
@@ -83,7 +83,7 @@ function makeColoredRowStyle(_bgColor: string, _borderColor: string): Interpolat
   };
 }
 
-function makeBorderlessStyle(_bgColor: string): Interpolation {
+function makeBorderlessStyle(_bgColor: string): CSSObject {
   return {
     'th, td': {
       backgroundColor: rgba(_bgColor, 0.2),
@@ -148,23 +148,17 @@ const Row = styled('tr')<TableRowProps>(
       },
     },
   ({state}) => {
-    const styles: Interpolation = [];
-
     switch (state) {
       case TableRowState.InputError:
-        styles.push(makeBorderlessStyle(errorColor));
-        break;
+        return makeBorderlessStyle(errorColor);
       case TableRowState.Error:
-        styles.push(makeColoredRowStyle(errorColor, errorColorLight));
-        break;
+        return makeColoredRowStyle(errorColor, errorColorLight);
       case TableRowState.InputAlert:
-        styles.push(makeBorderlessStyle(alertColor));
-        break;
+        return makeBorderlessStyle(alertColor);
       case TableRowState.Alert:
-        styles.push(makeColoredRowStyle(alertColor, alertColorLight));
-        break;
+        return makeColoredRowStyle(alertColor, alertColorLight);
       case TableRowState.Selected:
-        styles.push({
+        return {
           'th, td': [
             makeColoredRow(colors.blueberry100, colors.blueberry500),
             {
@@ -173,10 +167,9 @@ const Row = styled('tr')<TableRowProps>(
               },
             },
           ],
-        });
-        break;
+        };
       default:
-        styles.push({
+        return {
           '&:hover': {
             'th, td': {
               backgroundColor: colors.soap300,
@@ -193,10 +186,8 @@ const Row = styled('tr')<TableRowProps>(
               },
             ],
           },
-        });
+        };
     }
-
-    return styles;
   }
 );
 

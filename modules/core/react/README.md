@@ -272,7 +272,7 @@ To combine objects inline, you can also use emotion's `css` function.
 ```tsx
 import {type} from '@workday/canvas-kit-react-core';
 
-<label className={css(canvas.type.body, canvas.type.variant.label)}>Label Text</label>;
+<label css={[canvas.type.body, canvas.type.variant.label]}>Label Text</label>;
 ```
 
 # Input Provider

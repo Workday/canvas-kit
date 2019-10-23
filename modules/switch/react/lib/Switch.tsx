@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import uuid from 'uuid/v4';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
@@ -140,7 +140,7 @@ export default class Switch extends React.Component<SwitchProps> {
           checked={checked}
           disabled={disabled}
           id={id}
-          innerRef={inputRef}
+          ref={inputRef}
           onChange={onChange}
           role="checkbox"
           tabIndex={0}

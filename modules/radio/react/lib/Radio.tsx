@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -209,7 +209,7 @@ export default class Radio extends React.Component<RadioProps> {
             checked={checked}
             disabled={disabled}
             id={id}
-            innerRef={inputRef}
+            ref={inputRef}
             name={name}
             onChange={onChange}
             type="radio"

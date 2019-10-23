@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled, {CSSObject} from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {borderRadius, colors} from '@workday/canvas-kit-react-core';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
@@ -31,23 +31,27 @@ export interface AvatarLocalProps {
 
 export interface AvatarProps extends AvatarLocalProps, React.HTMLAttributes<HTMLDivElement> {}
 
-export const AvatarStyledComponent = styled('div', {
+export const avatarStyles: CSSObject = {
+  background: colors.soap200,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 0,
+  border: 0,
+  borderRadius: borderRadius.circle,
+  boxSizing: 'border-box',
+  overflow: 'hidden',
+  '& img': {
+    width: '100%',
+    height: '100%',
+  },
+};
+
+const StyledContainer = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<Pick<AvatarProps, 'variant' | 'size'>>(
   {
-    background: colors.soap200,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 0,
-    border: 0,
-    borderRadius: borderRadius.circle,
-    boxSizing: 'border-box',
-    overflow: 'hidden',
-    '& img': {
-      width: '100%',
-      height: '100%',
-    },
+    ...avatarStyles,
   },
   ({size}) => ({
     height: size,
@@ -70,13 +74,13 @@ export default class Avatar extends React.Component<AvatarProps> {
 
     const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
     return (
-      <AvatarStyledComponent variant={variant} size={size} aria-label={altText} {...elemProps}>
+      <StyledContainer variant={variant} size={size} aria-label={altText} {...elemProps}>
         {url ? (
           <img src={url} alt={altText} />
         ) : (
           <SystemIconCircle icon={userIcon} background={background} size={size} />
         )}
-      </AvatarStyledComponent>
+      </StyledContainer>
     );
   }
 }

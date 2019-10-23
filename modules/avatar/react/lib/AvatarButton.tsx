@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'react-emotion';
-import {AvatarStyledComponent, AvatarVariant, AvatarLocalProps} from './Avatar';
+import styled from '@emotion/styled';
+import {AvatarVariant, AvatarLocalProps, avatarStyles} from './Avatar';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
@@ -19,16 +19,23 @@ export interface AvatarButtonProps
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const AvatarAsButton = styled(AvatarStyledComponent)<AvatarButtonProps>(({variant, onClick}) => ({
-  cursor: onClick ? 'pointer' : 'default',
-  '&:not([disabled])': {
-    '&:focus': {
-      outline: 'none',
-      ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
+const AvatarAsButton = styled('button')<AvatarButtonProps>(
+  {...avatarStyles},
+  ({size}) => ({
+    height: size,
+    width: size,
+  }),
+  ({variant, onClick}) => ({
+    cursor: onClick ? 'pointer' : 'default',
+    '&:not([disabled])': {
+      '&:focus': {
+        outline: 'none',
+        ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
+      },
     },
-  },
-  ...hideMouseFocus,
-})).withComponent('button');
+    ...hideMouseFocus,
+  })
+);
 
 export default class AvatarButton extends React.Component<AvatarButtonProps> {
   static Variant = AvatarVariant;
@@ -53,7 +60,7 @@ export default class AvatarButton extends React.Component<AvatarButtonProps> {
         altText={altText}
         onClick={onClick}
         disabled={onClick ? false : true}
-        innerRef={buttonRef}
+        ref={buttonRef}
         aria-label={altText}
         {...elemProps}
       >

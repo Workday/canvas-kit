@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {getButtonStyle} from './ButtonBase';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {IconButtonVariant, IconButtonSize} from './types';
 import {iconButtonStyles} from './ButtonStyles';
@@ -8,7 +8,7 @@ import {colors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {CSSObject} from 'create-emotion';
+import {CSSObject} from '@emotion/core';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -207,7 +207,7 @@ export default class IconButton extends React.Component<IconButtonProps> {
     return (
       <IconButtonCon
         toggled={toggled}
-        innerRef={buttonRef}
+        ref={buttonRef}
         variant={variant}
         size={size}
         aria-pressed={toggled}

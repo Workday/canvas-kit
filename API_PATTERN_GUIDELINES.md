@@ -182,9 +182,7 @@ const { type, size, icon, ...elemProps } = this.props
 
 - When a consumer
   [needs a reference to an underlying element](https://reactjs.org/docs/refs-and-the-dom.html#when-to-use-refs)
-  (to manage focus, check DOM ancestors, etc.), use emotion components' `innerRef` prop. Note: with
-  emotion 10,
-  this[ will change to `ref`](https://medium.com/emotion-js/announcing-emotion-10-f1a4b17b8ccd#71bb)
+  (to manage focus, check DOM ancestors, etc.), use emotion components' `ref` prop.
 - When providing a ref prop, indicate what element it's tied to (generally by using the type of
   element if it's descriptive enough for your component). E.g. `inputRef`
 

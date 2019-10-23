@@ -1,7 +1,5 @@
 import {configure, addDecorator, addParameters, forceReRender} from '@storybook/react';
 import {withKnobs} from '@storybook/addon-knobs/react';
-import {injectGlobal} from 'emotion';
-import fonts from '../modules/fonts/react';
 import {create} from '@storybook/theming';
 import addons from '@storybook/addons';
 import Events from '@storybook/core-events';
@@ -10,7 +8,7 @@ import ReactDOM from 'react-dom';
 import 'storybook-chromatic';
 
 import {commonColors, typeColors, fontFamily} from '../modules/core/react';
-import {InputProviderDecorator} from '../utils/storybook';
+import {InputProviderDecorator, FontsDecorator} from '../utils/storybook';
 const req = require.context('../modules', true, /stories.*\.tsx?$/);
 
 function loadStories() {
@@ -19,6 +17,7 @@ function loadStories() {
 
 addDecorator(withKnobs);
 addDecorator(InputProviderDecorator);
+addDecorator(FontsDecorator);
 
 addParameters({
   options: {
@@ -38,7 +37,6 @@ addParameters({
 });
 
 configure(loadStories, module);
-injectGlobal(...fonts);
 
 function setCurrentStory(categorization, story) {
   clearCurrentStory();
