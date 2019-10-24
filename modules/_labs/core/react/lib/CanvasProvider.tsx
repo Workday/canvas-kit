@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ThemeProvider} from 'emotion-theming';
-import InputProvider from './InputProvider';
+import {InputProvider} from '@workday/canvas-kit-react-core';
 import {CanvasTheme} from './theming/types';
 import {defaultCanvasTheme} from './theming/theme';
 

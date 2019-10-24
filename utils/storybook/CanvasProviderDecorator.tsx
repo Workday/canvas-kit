@@ -3,7 +3,7 @@ import {
   CanvasProvider,
   defaultCanvasTheme,
   createCanvasTheme,
-} from '@workday/canvas-kit-react-core';
+} from '@workday/canvas-kit-labs-react-core';
 import {object} from '@storybook/addon-knobs';
 
 const label = 'theme';

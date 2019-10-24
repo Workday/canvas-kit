@@ -1,4 +1,4 @@
-/// <reference path="../../../../typings.d.ts" />
+/// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
@@ -6,9 +6,9 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {useTheme} from 'emotion-theming';
 
-import {H1, colors} from '..';
+import {CanvasTheme} from '../lib/theming/types';
 import README from '../lib/theming/README.md';
-import {type, spacing, borderRadius, CanvasTheme} from '@workday/canvas-kit-react-core';
+import {H1, colors, type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 
 const Palettes = styled('div')({
   display: 'flex',
@@ -92,7 +92,7 @@ const ThemeDemo = (props: any) => {
   );
 };
 
-storiesOf('Core', module)
+storiesOf('Labs/Core/React', module)
   .addDecorator(withReadme(README))
   .add('Theme', () => {
     return <ThemeDemo />;

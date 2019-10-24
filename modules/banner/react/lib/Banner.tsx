@@ -1,13 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {
-  colors,
-  spacing,
-  borderRadius,
-  type,
-  Themeable,
-  getTheme,
-} from '@workday/canvas-kit-react-core';
+import {colors, spacing, borderRadius, type} from '@workday/canvas-kit-react-core';
+import {Themeable, getTheme} from '@workday/canvas-kit-labs-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {ErrorType, focusRing} from '@workday/canvas-kit-react-common';

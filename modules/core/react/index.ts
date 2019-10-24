@@ -4,7 +4,6 @@ import {borderRadius} from './lib/radius';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
 import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
 import InputProvider from './lib/InputProvider';
-import CanvasProvider from './lib/CanvasProvider';
 import spacing, {
   CanvasSpacing,
   CanvasSpacingNumber,
@@ -13,7 +12,6 @@ import spacing, {
 } from './lib/spacing';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
 import {CSSProperties} from './lib/types';
-import {breakpoints, CanvasBreakpoints, BreakpointKey} from './lib/theming/breakpoints';
 
 const {default: colors, ...semanticColors} = canvasColorsWeb;
 const canvas = {
@@ -26,13 +24,10 @@ const canvas = {
   ...semanticColors,
 };
 
-export * from './lib/theming/types';
-export * from './lib/theming/theme';
 export * from './lib/TypeWrappers';
 export * from '@workday/canvas-colors-web';
 export {
   borderRadius,
-  breakpoints,
   colors,
   depth,
   spacing,
@@ -41,8 +36,6 @@ export {
   fontFamily,
   monoFontFamily,
   BrandingColor,
-  BreakpointKey,
-  CanvasBreakpoints,
   CanvasDepth,
   CanvasDepthValue,
   CanvasSpacing,
@@ -53,6 +46,5 @@ export {
   CanvasColor,
   CSSProperties,
   InputProvider,
-  CanvasProvider,
 };
 export default canvas;
