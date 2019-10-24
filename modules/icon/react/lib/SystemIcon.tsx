@@ -44,7 +44,7 @@ export const systemIconStyles = ({
     fill: accentHover || colorHover,
   },
   '& .wd-icon-background': {
-    background: background,
+    fill: background,
   },
   ':hover .wd-icon-background': {
     fill: backgroundHover,
