@@ -45,7 +45,7 @@ const Title = styled('h2')({
   color: colors.frenchVanilla100,
   padding: `${spacing.xs} 0`,
   margin: 0,
-  'white-space': 'nowrap',
+  whiteSpace: 'nowrap',
 });
 
 const IconList = styled('div')({

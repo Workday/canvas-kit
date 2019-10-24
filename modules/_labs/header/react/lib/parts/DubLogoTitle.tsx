@@ -43,7 +43,7 @@ const Title = styled('h3')<DubTitleProps>(
     padding: `${spacing.xxs} ${spacing.s}`,
     paddingRight: spacing.l,
     marginLeft: spacing.s,
-    'white-space': 'nowrap',
+    whiteSpace: 'nowrap',
   },
   ({themeColor}) => ({
     color: themeColor === HeaderTheme.White ? colors.blueberry500 : colors.frenchVanilla100,
