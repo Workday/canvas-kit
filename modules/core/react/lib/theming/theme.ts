@@ -1,6 +1,7 @@
 import colors from '@workday/canvas-colors-web';
 import deepmerge from 'deepmerge';
 import {CanvasTheme} from './types';
+import {breakpoints, up, down, between, only} from './breakpoints';
 
 /**
  * Considerations:
@@ -41,8 +42,14 @@ export const defaultCanvasTheme: CanvasTheme = {
       focusOutline: colors.blueberry400,
     },
   },
+  breakpoints: {
+    values: breakpoints,
+    up,
+    down,
+    between,
+    only,
+  },
   // Typography
-  // Breakpoints
   // Depth?
 };
 

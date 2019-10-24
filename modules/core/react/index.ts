@@ -13,6 +13,7 @@ import spacing, {
 } from './lib/spacing';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
 import {CSSProperties} from './lib/types';
+import {breakpoints, CanvasBreakpoints, BreakpointKey} from './lib/theming/breakpoints';
 
 const {default: colors, ...semanticColors} = canvasColorsWeb;
 const canvas = {
@@ -31,6 +32,7 @@ export * from './lib/TypeWrappers';
 export * from '@workday/canvas-colors-web';
 export {
   borderRadius,
+  breakpoints,
   colors,
   depth,
   spacing,
@@ -39,6 +41,8 @@ export {
   fontFamily,
   monoFontFamily,
   BrandingColor,
+  BreakpointKey,
+  CanvasBreakpoints,
   CanvasDepth,
   CanvasDepthValue,
   CanvasSpacing,

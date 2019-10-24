@@ -1,3 +1,5 @@
+import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
+
 /**
  * A single palette within a Canvas theme
  */
@@ -25,6 +27,13 @@ export interface CanvasTheme {
     error: CanvasThemePalette;
     alert: CanvasThemePalette;
     [index: string]: CanvasThemePalette | CanvasThemeCommonPalette;
+  };
+  breakpoints: {
+    values: CanvasBreakpoints;
+    up: (key: BreakpointFnParam) => string;
+    down: (key: BreakpointFnParam) => string;
+    only: (key: BreakpointFnParam) => string;
+    between: (start: BreakpointFnParam, end: BreakpointFnParam) => string;
   };
 }
 
