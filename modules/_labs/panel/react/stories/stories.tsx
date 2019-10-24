@@ -3,24 +3,29 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Panel, PanelDirection} from '../index';
+import {Panel, PanelDirection, PanelHeader} from '../index';
 import README from '../README.md';
 import {spacing} from '@workday/canvas-kit-react-core';
-import {xIcon} from '@workday/canvas-system-icons-web';
 
 storiesOf('Labs/Panel', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
+        <Panel openDirection={PanelDirection.Right} padding={spacing.s} showDropShadow={true}>
+          Content
+        </Panel>
+      </div>
+    </div>
+  ))
+  .add('With Header', () => (
+    <div className="story">
+      <div style={{height: '80vh', position: 'relative'}}>
         <Panel
+          header={<PanelHeader headerTitle={'Panel Header'} />}
           openDirection={PanelDirection.Left}
           padding={spacing.l}
-          showHeader={true}
           showDropShadow={true}
-          headerActionEl={<div>hello</div>}
-          icon={xIcon}
-          headerTitle={'Panel Title'}
         ></Panel>
       </div>
     </div>
