@@ -124,3 +124,12 @@ Default: A uniquely generated id
 | Alert | Yellow outline with alert icon. |
 
 Default: `undefined`
+
+---
+
+#### `indeterminate: boolean`
+
+> Used on a checkbox with nested child checkboxes to denote that some, but not all, child checkboxes
+> are selected.
+
+Default: `false`
