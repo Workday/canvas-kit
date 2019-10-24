@@ -52,6 +52,31 @@ export interface SearchState {
 
 const mobileTransitionDuration = 250;
 
+function getInputColors(themeColor: HeaderTheme, collapsed: boolean) {
+  if (collapsed) {
+    return {
+      background: 'transparent',
+      color: colors.blackPepper300,
+      placeholderColor: colors.licorice300,
+    };
+  } else if (themeColor === HeaderTheme.White) {
+    return {
+      background: colors.soap200,
+      color: colors.blackPepper300,
+      placeholderColor: colors.licorice300,
+      focusBackground: colors.soap200,
+      focusBoxShadow: focusRing().boxShadow,
+    };
+  } else {
+    return {
+      background: 'rgba(0,0,0,0.2)',
+      color: colors.frenchVanilla100,
+      placeholderColor: colors.frenchVanilla100,
+      focusBackground: colors.frenchVanilla100,
+    };
+  }
+}
+
 const SearchContainer = styled('form')<Pick<SearchProps, 'rightAlign' | 'collapse'>>(
   {
     position: 'relative',
@@ -394,30 +419,5 @@ export class Search extends React.Component<SearchProps, SearchState> {
         />
       </SearchContainer>
     );
-  }
-}
-
-function getInputColors(themeColor: HeaderTheme, collapsed: boolean) {
-  if (collapsed) {
-    return {
-      background: 'transparent',
-      color: colors.blackPepper300,
-      placeholderColor: colors.licorice300,
-    };
-  } else if (themeColor === HeaderTheme.White) {
-    return {
-      background: colors.soap200,
-      color: colors.blackPepper300,
-      placeholderColor: colors.licorice300,
-      focusBackground: colors.soap200,
-      focusBoxShadow: focusRing().boxShadow,
-    };
-  } else {
-    return {
-      background: 'rgba(0,0,0,0.2)',
-      color: colors.frenchVanilla100,
-      placeholderColor: colors.frenchVanilla100,
-      focusBackground: colors.frenchVanilla100,
-    };
   }
 }
