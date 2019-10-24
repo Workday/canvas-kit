@@ -66,10 +66,23 @@ export default class Panel extends React.Component<PanelProps, {}> {
   };
 
   public render() {
-    const {children, padding, width, openDirection, header, showDropShadow} = this.props;
+    const {
+      children,
+      padding,
+      width,
+      openDirection,
+      header,
+      showDropShadow,
+      ...elemProps
+    } = this.props;
 
     return (
-      <PanelContainer showDropShadow={showDropShadow} width={width} openDirection={openDirection}>
+      <PanelContainer
+        {...elemProps}
+        showDropShadow={showDropShadow}
+        width={width}
+        openDirection={openDirection}
+      >
         {header ? header : undefined}
         <ChildrenContainer padding={padding}>{children}</ChildrenContainer>
       </PanelContainer>

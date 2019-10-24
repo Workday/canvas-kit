@@ -9,7 +9,7 @@ export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   headerTitle?: string;
   handleClose?: () => void;
   iconLabel: string;
-  icon?: CanvasSystemIcon;
+  icon: CanvasSystemIcon;
   headerColor: CanvasColor | string;
 }
 
@@ -44,10 +44,10 @@ export default class PanelHeader extends React.Component<PanelProps, {}> {
   };
 
   public render() {
-    const {handleClose, headerTitle, iconLabel, icon, headerColor} = this.props;
+    const {handleClose, headerTitle, iconLabel, icon, headerColor, ...elemProps} = this.props;
 
     return (
-      <HeaderContainer headerColor={headerColor}>
+      <HeaderContainer {...elemProps} headerColor={headerColor}>
         <HeaderTitle aria-labelby={headerTitle} title={headerTitle}>
           {headerTitle}
         </HeaderTitle>

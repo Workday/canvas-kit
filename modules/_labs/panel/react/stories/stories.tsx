@@ -12,9 +12,7 @@ storiesOf('Labs/Panel', module)
   .add('Default', () => (
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
-        <Panel openDirection={PanelDirection.Right} padding={spacing.s} showDropShadow={true}>
-          Content
-        </Panel>
+        <Panel openDirection={PanelDirection.Left} padding={spacing.s}></Panel>
       </div>
     </div>
   ))
