@@ -10,7 +10,6 @@ Includes:
 - [Depth](#depth)
 - [Type](#type)
 - [Providers](#providers)
-- [Theming](#theming)
 
 ## Installation
 
@@ -289,44 +288,6 @@ import {type} from '@workday/canvas-kit-react-core';
 Providers are higher order (wrapping) components used to provide global configuration to Canvas
 components.
 
-## Canvas Provider
-
-This provider includes all of the Canvas Providers below. This is the way most consumers should use
-the provider. This provider is required for our theming capabilities, so you can find more
-information in the [theming documentation](./lib/theming/README.md).
-
-**We strongly encourage you to use this in your application to wrap all Canvas components.**
-
-```tsx
-import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-react';
-
-<CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
-```
-
-### Storybook Decorator
-
-We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
-stories in a `CanvasProvider` (including `InputProvider`) automatically.
-
-Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
-
-```js
-import {CanvasProviderDecorator} from '../utils/storybook';
-
-addDecorator(CanvasProviderDecorator);
-```
-
-Or, add it to stories individually:
-
-```js
-import {CanvasProviderDecorator} from '../../../../utils/storybook';
-
-storiesOf('My Story', module)
-  .addDecorator(CanvasProviderDecorator)
-  .add('All', () => <YourJSX />);
-```
-
 ## Input Provider
 
 This is a higher order (wrapping) component for providing css-referencable data attributes for the
@@ -446,6 +407,25 @@ cases you would like (i.e. mouse/touch/pointer input).
 > Note: detecting intent will add scroll and mouse positioning listeners which could affect
 > performance.
 
-# Theming
+### Storybook Decorator
 
-Theming documentation has it's own README. You can find it [here](./lib/theming/README.md)
+We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
+stories in an `InputProvider` automatically.
+
+Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
+
+```js
+import {InputProviderDecorator} from '../utils/storybook';
+
+addDecorator(InputProviderDecorator);
+```
+
+Or, add it to stories individually:
+
+```js
+import {InputProviderDecorator} from '../../../../utils/storybook';
+
+storiesOf('My Story', module)
+  .addDecorator(InputProviderDecorator)
+  .add('All', () => <YourJSX />);
+```
