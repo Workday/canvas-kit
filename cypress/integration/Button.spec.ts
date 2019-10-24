@@ -10,6 +10,10 @@ describe('Button', () => {
       h.stories.load('button', 'primary');
     });
 
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
     it('should render the correct text', () => {
       cy.get('button')
         .first()
@@ -20,6 +24,10 @@ describe('Button', () => {
   context('given delete buttons are rendered', () => {
     beforeEach(() => {
       h.stories.load('button', 'delete');
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
     });
 
     it('should render the correct text', () => {

@@ -3528,6 +3528,13 @@
   resolved "https://registry.yarnpkg.com/@types/chroma-js/-/chroma-js-1.4.1.tgz#7c52d461173d569ba1f27e0c2dd26ee76691ec82"
   integrity sha512-i9hUiO3bwgmzZUDwBuR65WqsBQ/nwN+H2fKX0bykXCdd8cFQEuIj8vI7FXjyb2f5z5h+pv76I/uakikKSgaqTA==
 
+"@types/cypress-axe@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@types/cypress-axe/-/cypress-axe-0.4.0.tgz#670bc90f9f0000c97c6111ebdd55c6268456f28f"
+  integrity sha512-YIVaZxl/Dg2RElmcrm2UkSZKeFWeIRE13gDcg9V6cxkI5rVx5Ic365aBumixoIygXygL49kAUDyo4WH7/Wj/JQ==
+  dependencies:
+    axe-core "^3.1.2"
+
 "@types/enzyme-adapter-react-16@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@types/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.0.5.tgz#1bf30a166f49be69eeda4b81e3f24113c8b4e9d5"
@@ -4693,6 +4700,11 @@ axe-core@^3.0.3:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.2.2.tgz#b06d6e9ae4636d706068843272bfaeed3fe97362"
   integrity sha512-gAy4kMSPpuRJV3mwictJqlg5LhE84Vw2CydKdC4tvrLhR6+G3KW51zbL/vYujcLA2jvWOq3HMHrVeNuw+mrLVA==
+
+axe-core@^3.1.2, axe-core@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.4.0.tgz#a57ee620c182d5389aff229586aaae06bc541abe"
+  integrity sha512-5C0OdgxPv/DrQguO6Taj5F1dY5OlkWg4SVmZIVABFYKWlnAc5WTLPzG+xJSgIwf2fmY+NiNGiZXhXx2qT0u/9Q==
 
 axios@0.19.0:
   version "0.19.0"
@@ -7075,6 +7087,11 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
+
+cypress-axe@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/cypress-axe/-/cypress-axe-0.5.1.tgz#bc45e042ed9ba8f556bceb2157e5015d082829d4"
+  integrity sha512-oj+diADUnnjmiT7635kQuaDx7MG4nMk64oWCuDEIbWpe7Q3v+FzBE3ou8pg346LagGyqDFv8r7GYt6JWve6+Vg==
 
 cypress-pipe@^1.5.0:
   version "1.5.0"

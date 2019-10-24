@@ -29,6 +29,11 @@ storiesOf('Form Field/Checkbox/Top Label', module)
       {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
     </FormField>
   ))
+  .add('Indeterminate', () => (
+    <FormField label="Label" inputId="my-checkbox-field">
+      {control(<Checkbox id="1" label="Checkbox option" indeterminate={true} />)}
+    </FormField>
+  ))
   .add('Alert', () => (
     <FormField
       label="Label"
@@ -70,6 +75,15 @@ storiesOf('Form Field/Checkbox/Left Label', module)
       labelPosition={FormField.LabelPosition.Left}
     >
       {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+    </FormField>
+  ))
+  .add('Indeterminate', () => (
+    <FormField
+      label="Label"
+      inputId="my-checkbox-field"
+      labelPosition={FormField.LabelPosition.Left}
+    >
+      {control(<Checkbox id="1" label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
   .add('Alert', () => (
