@@ -54,7 +54,6 @@ const BannerWrapper = styled('button')<BannerProps>(
   },
   ({error, theme}) => {
     theme = getTheme(theme); // eslint-disable-line no-param-reassign
-    console.log(theme.breakpoints.only('m'));
     return {
       backgroundColor:
         error === ErrorType.Error ? theme.palette.error.main : theme.palette.alert.main,
