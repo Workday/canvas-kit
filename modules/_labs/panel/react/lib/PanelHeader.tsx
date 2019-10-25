@@ -24,7 +24,7 @@ export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Changes the border color to match something close to the header background color
    */
-  borderColor?: CanvasColor | string;
+  borderColor: CanvasColor | string;
 }
 
 const headerHeight = 56;
@@ -70,7 +70,7 @@ export default class PanelHeader extends React.Component<PanelHeaderProps, {}> {
     } = this.props;
 
     return (
-      <HeaderContainer {...elemProps} headerColor={headerColor}>
+      <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
         <HeaderTitle aria-labelby={headerTitle} title={headerTitle}>
           {headerTitle}
         </HeaderTitle>
