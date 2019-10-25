@@ -19,6 +19,7 @@ module.exports = ({config, mode}) => {
   // Add `.ts` and `.tsx` as a resolvable extension.
   config.resolve.extensions = ['.ts', '.tsx', '.js', '.jsx'];
 
+  // Load all module files and transpile using babel + ts
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
     include: [modulesPath, utilsPath],
@@ -36,6 +37,19 @@ module.exports = ({config, mode}) => {
         ],
       ],
     },
+  });
+
+  // Load the source code of story files to display in docs.
+  config.module.rules.push({
+    test: /stories.*\.tsx?$/,
+    include: [modulesPath],
+    loaders: [
+      {
+        loader: require.resolve('@storybook/source-loader'),
+        options: {parser: 'typescript'},
+      },
+    ],
+    enforce: 'pre',
   });
 
   config.plugins.push(new DocgenPlugin());
