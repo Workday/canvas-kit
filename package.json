@@ -71,8 +71,6 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.1.2",
     "file-loader": "^1.1.5",
-    "fork-ts-checker-webpack-plugin": "^0.4.9",
-    "happypack": "^5.0.0",
     "husky": "^0.14.3",
     "inquirer": "^7.0.0",
     "jest": "^24.1.0",
