@@ -7,12 +7,11 @@ import {
   IconPosition,
   AllButtonVariants,
   TextButtonVariant,
-  ButtonVariant,
-  IconButtonVariant,
 } from './types';
 import {ButtonProps, BaseButtonProps} from './Button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import * as ButtonStyles from './ButtonStyles';
+import {getBaseButton, getButtonSize, getButtonStyle} from './utils';
 
 export const ButtonBaseCon = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
@@ -159,90 +158,5 @@ export class ButtonLabelIcon extends React.Component<ButtonLabelIconProps> {
         <SystemIcon size={iconSize} icon={icon} />
       </ButtonLabelIconStyled>
     );
-  }
-}
-
-export function getButtonSize(baseButton: ButtonStyles.ButtonGenericStyle, size?: ButtonSize) {
-  const {sizes} = baseButton.variants!;
-
-  switch (size) {
-    case ButtonSize.Large:
-      return sizes.large;
-    case ButtonSize.Medium:
-    default:
-      return sizes.medium;
-    case ButtonSize.Small:
-      return sizes.small;
-  }
-}
-
-export function getButtonStyle(
-  baseButton: ButtonStyles.ButtonGenericStyle,
-  variant?: AllButtonVariants
-) {
-  const {types} = baseButton.variants!;
-
-  switch (variant) {
-    case DeprecatedButtonVariant.Primary:
-      return types[DeprecatedButtonVariant.Primary];
-    case DeprecatedButtonVariant.Secondary:
-      return types[DeprecatedButtonVariant.Secondary];
-    case DeprecatedButtonVariant.Delete:
-      return types[DeprecatedButtonVariant.Delete];
-    case ButtonVariant.Highlight:
-      return types[ButtonVariant.Highlight];
-    case ButtonVariant.OutlinePrimary:
-      return types[ButtonVariant.OutlinePrimary];
-    case ButtonVariant.OutlineSecondary:
-      return types[ButtonVariant.OutlineSecondary];
-    case ButtonVariant.OutlineInverse:
-      return types[ButtonVariant.OutlineInverse];
-    case ButtonVariant.Primary:
-      return types[ButtonVariant.Primary];
-    case ButtonVariant.Secondary:
-    default:
-      return types[ButtonVariant.Secondary];
-    case ButtonVariant.Delete:
-      return types[ButtonVariant.Delete];
-    case TextButtonVariant.Default:
-      return types[TextButtonVariant.Default];
-    case TextButtonVariant.Inverse:
-      return types[TextButtonVariant.Inverse];
-    case TextButtonVariant.AllCaps:
-      return types[TextButtonVariant.AllCaps];
-    case TextButtonVariant.InverseAllCaps:
-      return types[TextButtonVariant.InverseAllCaps];
-    case IconButtonVariant.Square:
-      return types[IconButtonVariant.Square];
-    case IconButtonVariant.SquareFilled:
-      return types[IconButtonVariant.SquareFilled];
-    case IconButtonVariant.Plain:
-      return types[IconButtonVariant.Plain];
-    case IconButtonVariant.Circle:
-      return types[IconButtonVariant.Circle];
-    case IconButtonVariant.CircleFilled:
-      return types[IconButtonVariant.CircleFilled];
-    case IconButtonVariant.Inverse:
-      return types[IconButtonVariant.Inverse];
-    case IconButtonVariant.InverseFilled:
-      return types[IconButtonVariant.InverseFilled];
-  }
-}
-
-function getBaseButton(buttonType: DeprecatedButtonVariant | ButtonVariant) {
-  switch (buttonType) {
-    case DeprecatedButtonVariant.Primary:
-    case DeprecatedButtonVariant.Secondary:
-    case DeprecatedButtonVariant.Delete:
-      return ButtonStyles.deprecatedButtonStyles;
-    case ButtonVariant.Primary:
-    case ButtonVariant.Secondary:
-    case ButtonVariant.Delete:
-    case ButtonVariant.Highlight:
-    case ButtonVariant.OutlinePrimary:
-    case ButtonVariant.OutlineSecondary:
-    case ButtonVariant.OutlineInverse:
-    default:
-      return ButtonStyles.canvasButtonStyles;
   }
 }

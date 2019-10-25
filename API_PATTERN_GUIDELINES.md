@@ -24,6 +24,7 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 - [Code Style](#code-style)
   - [Default Props](#default-props)
   - [Class Function Binding](#class-function-binding)
+  - [Arrow and Bound Functions in Render](#arrow-and-bound-functions-in-render)
   - [Element Choice](#element-choice)
   - [Styled Components](#styled-components)
   - [Exports](#exports)
@@ -246,6 +247,16 @@ foo();
   `this.onChange = this.onChange.bind(this)`).
 - We recommend using an arrow function for your class function to avoid this
 - Since we avoid state where possible, doing so often enables you to remove the constructor
+
+#### Arrow and Bound Functions in Render
+
+- A `.bind()` call or arrow function in a JSX prop will create a brand new function on every single
+  render.
+- This is bad for performance, as it may cause unnecessary re-renders, so avoid it where possible.
+- This is available as an
+  [ESLint rule (react/jsx-no-bind)](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md).
+  However, we are still using these in several places (particularly stories) for better code
+  readability so we decided to disable it for now.
 
 #### Element Choice
 

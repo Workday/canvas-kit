@@ -174,7 +174,7 @@ export default class MenuItem extends React.Component<MenuItemProps> {
           tabIndex={-1}
           id={id}
           role={role}
-          onClick={event => this.handleClick(event)}
+          onClick={this.handleClick}
           aria-disabled={!!isDisabled}
           isDisabled={!!isDisabled}
           isFocused={!!isFocused}

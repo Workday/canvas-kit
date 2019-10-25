@@ -40,7 +40,7 @@ const Title = styled('h3')<WorkdayLogoTitleProps>(
     padding: spacing.s,
     paddingLeft: spacing.m,
     paddingRight: spacing.l,
-    'white-space': 'nowrap',
+    whiteSpace: 'nowrap',
     display: 'initial',
   },
   ({themeColor}) => ({
