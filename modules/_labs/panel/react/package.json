@@ -2,7 +2,7 @@
 {
   "name": "@workday/canvas-kit-labs-react-panel",
   "version": "0.0.0",
-  "description": "",
+  "description": "A Panel component that allows for custom content to be added",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",

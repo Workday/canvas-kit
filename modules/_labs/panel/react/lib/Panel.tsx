@@ -3,10 +3,25 @@ import styled from '@emotion/styled';
 import {colors, spacing, CanvasSpacingValue} from '@workday/canvas-kit-react-core';
 
 export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Adjust padding for the contents of the Panel. Default: `spacing.s`
+   */
   padding?: CanvasSpacingValue;
+  /**
+   * Determines the side in which the Panel can open from. Default: `PanelDirection.Right`
+   */
   openDirection?: PanelDirection;
+  /**
+   * Sets the width of the Panel. Default: `360px`
+   */
   width?: number;
+  /**
+   * Allows to either show or hide a drop shadow on the Panel. Default: `false`
+   */
   showDropShadow?: boolean;
+  /**
+   * Optional to pass a PanelHeader component shows an optional string and close button
+   */
   header?: React.ReactElement;
 }
 
@@ -83,7 +98,7 @@ export default class Panel extends React.Component<PanelProps, {}> {
         width={width}
         openDirection={openDirection}
       >
-        {header ? header : undefined}
+        {header && header}
         <ChildrenContainer padding={padding}>{children}</ChildrenContainer>
       </PanelContainer>
     );

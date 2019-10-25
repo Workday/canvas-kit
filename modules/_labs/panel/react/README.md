@@ -4,39 +4,24 @@
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 
-
-
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react
-```
-
-or
-
-```sh
-yarn add @workday/canvas-kit-react-panel
+yarn add @workday/canvas-kit-labs-react-panel
 ```
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import Panel from '@workday/canvas-kit-react-panel';
+import {Panel, PanelDirection, PanelHeader} from '@workday/canvas-kit-labs-react-panel';
 
-<Panel />;
+<div style={{height: '100vh', position: 'relative'}}>
+  <Panel
+    header={<PanelHeader headerTitle={'Panel Header'} />}
+    openDirection={PanelDirection.Left}
+    padding={spacing.l}
+    showDropShadow={true}
+  ></Panel>
+</div>;
 ```
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-> None
-
-### Optional
-
-> None
