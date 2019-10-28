@@ -1,5 +1,5 @@
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, GenericStyle} from '@workday/canvas-kit-react-common';
+import {GenericStyle} from '@workday/canvas-kit-react-common';
 import {CSSObject} from '@emotion/core';
 import {
   DeprecatedButtonVariant,
@@ -10,7 +10,7 @@ import {
   ButtonVariant,
   IconButtonVariant,
 } from './types';
-import {ButtonColors} from './ButtonColors';
+import {getButtonStateStyle} from './utils';
 
 export const CANVAS_BUTTON_HEIGHT_LARGE: number = 40;
 export const CANVAS_BUTTON_HEIGHT_MEDIUM: number = 24;
@@ -354,115 +354,3 @@ export const iconButtonStyles: ButtonGenericStyle = {
     },
   },
 };
-
-function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
-  const buttonColors = ButtonColors[variant];
-
-  if (buttonColors == null) {
-    return {};
-  }
-
-  return {
-    backgroundColor: buttonColors.background,
-    borderColor: buttonColors.border,
-    color: buttonColors.text,
-    ...(buttonColors.labelIcon && {
-      'span .wd-icon-fill, span .wd-icon-accent': {
-        transition: 'fill 120ms ease-in',
-        fill: buttonColors.labelIcon,
-      },
-    }),
-    ...(buttonColors.labelData && {
-      ['.' + labelDataBaseStyles.classname]: {
-        color: buttonColors.labelData,
-      },
-    }),
-    ':focus': {
-      backgroundColor: buttonColors.focusBackground,
-      borderColor: buttonColors.focusBorder,
-      color: buttonColors.focusText,
-      ...(buttonColors.labelDataFocus && {
-        ['.' + labelDataBaseStyles.classname]: {color: buttonColors.labelDataFocus},
-      }),
-      ...(buttonColors.labelIconFocus && {
-        'span .wd-icon-fill, span .wd-icon-accent': {fill: buttonColors.labelIconFocus},
-      }),
-    },
-    ':hover:focus': {
-      backgroundColor: buttonColors.hoverBackground,
-    },
-    ':active, :focus:active, :hover:active': {
-      backgroundColor: buttonColors.activeBackground,
-      borderColor: buttonColors.activeBorder,
-      color: buttonColors.activeText,
-      ...(buttonColors.labelDataActive && {
-        ['.' + labelDataBaseStyles.classname]: {color: buttonColors.labelDataActive},
-      }),
-      ...(buttonColors.labelIconActive && {
-        'span .wd-icon-fill, span .wd-icon-accent': {fill: buttonColors.labelIconActive},
-      }),
-    },
-    ':hover': {
-      backgroundColor: buttonColors.hoverBackground,
-      borderColor: buttonColors.hoverBorder,
-      color: buttonColors.hoverText,
-      ...(buttonColors.labelDataHover && {
-        ['.' + labelDataBaseStyles.classname]: {
-          transition: 'color 120ms ease-in',
-          color: buttonColors.labelDataHover,
-        },
-      }),
-      ...(buttonColors.labelIconHover && {
-        'span .wd-icon-fill, span .wd-icon-accent': {fill: buttonColors.labelIconHover},
-      }),
-    },
-    ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
-      backgroundColor: buttonColors.disabledBackground,
-      borderColor: buttonColors.disabledBorder,
-      color: buttonColors.disabledText,
-      ...(buttonColors.labelIconDisabled && {
-        'span .wd-icon-fill, span .wd-icon-accent': {fill: buttonColors.labelIconDisabled},
-      }),
-      ...(buttonColors.labelDataDisabled && {
-        ['.' + labelDataBaseStyles.classname]: {color: buttonColors.labelDataDisabled},
-      }),
-    },
-    '&:not([disabled])': {
-      '&:focus': {
-        borderColor: buttonColors.focusBorder,
-        ...getButtonFocusRing(variant),
-      },
-      '&:active': {
-        borderColor: buttonColors.activeBorder,
-        ...getButtonFocusRing(variant),
-      },
-    },
-  };
-}
-
-function getButtonFocusRing(variant: AllButtonVariants): CSSObject {
-  const buttonColors = ButtonColors[variant];
-
-  if (buttonColors == null) {
-    return {};
-  }
-
-  switch (variant) {
-    case DeprecatedButtonVariant.Primary:
-    case DeprecatedButtonVariant.Secondary:
-    case TextButtonVariant.Default:
-    case TextButtonVariant.AllCaps:
-      return focusRing(2, 0);
-    case ButtonVariant.OutlineInverse:
-      return focusRing(2, 2, true, false, buttonColors.focusRingInner, buttonColors.focusRingOuter);
-    case IconButtonVariant.Plain:
-      return focusRing(2);
-    case IconButtonVariant.Inverse:
-    case IconButtonVariant.InverseFilled:
-    case TextButtonVariant.Inverse:
-    case TextButtonVariant.InverseAllCaps:
-      return focusRing(2, 0, true, false, buttonColors.focusRingInner, buttonColors.focusRingOuter);
-    default:
-      return focusRing(2, 2);
-  }
-}
