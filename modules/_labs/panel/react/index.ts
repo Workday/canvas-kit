@@ -1,5 +1,5 @@
 import Panel from './lib/Panel';
 import PanelHeader from './lib/PanelHeader';
-export default Panel;
 export {Panel, PanelHeader};
+export default Panel;
 export * from './lib/Panel';

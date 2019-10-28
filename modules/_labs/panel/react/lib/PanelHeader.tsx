@@ -12,7 +12,7 @@ export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Callback to handle closing the Panel
    */
-  handleClose?: () => void;
+  onClose: () => void;
   /**
    * String to add aria-label to the icon button
    */
@@ -60,19 +60,12 @@ export default class PanelHeader extends React.Component<PanelHeaderProps, {}> {
   };
 
   public render() {
-    const {
-      handleClose,
-      headerTitle,
-      iconLabel,
-      headerColor,
-      borderColor,
-      ...elemProps
-    } = this.props;
+    const {onClose, headerTitle, iconLabel, headerColor, borderColor, ...elemProps} = this.props;
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
         <HeaderTitle title={headerTitle}>{headerTitle}</HeaderTitle>
-        <IconButton onClick={handleClose} aria-label={iconLabel} icon={xIcon}></IconButton>
+        <IconButton onClick={onClose} aria-label={iconLabel} icon={xIcon}></IconButton>
       </HeaderContainer>
     );
   }

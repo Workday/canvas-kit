@@ -20,7 +20,12 @@ storiesOf('Labs/Panel', module)
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
         <Panel
-          header={<PanelHeader headerTitle={'Panel Header'} />}
+          header={
+            <PanelHeader
+              onClose={() => console.warn('close clicked')}
+              headerTitle={'Panel Header'}
+            />
+          }
           openDirection={PanelDirection.Left}
           padding={spacing.l}
           showDropShadow={true}

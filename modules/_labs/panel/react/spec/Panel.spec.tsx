@@ -25,7 +25,7 @@ fdescribe('Panel', () => {
 
   test('should call a close function when a Panel Header is passed', () => {
     const component = mount(
-      <Panel header={<PanelHeader handleClose={cb} headerTitle={'Title'}></PanelHeader>} />
+      <Panel header={<PanelHeader onClose={cb} headerTitle={'Title'}></PanelHeader>} />
     );
     const panel = component.find('button');
     panel.simulate('click');
