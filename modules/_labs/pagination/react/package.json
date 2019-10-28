@@ -1,4 +1,3 @@
-
 {
   "name": "@workday/canvas-kit-labs-react-pagination",
   "version": "0.0.0",
@@ -36,5 +35,9 @@
   ],
   "peerDependencies": {
     "react": ">= 16.8 < 17"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.21",
+    "@emotion/styled": "^10.0.17"
   }
 }
