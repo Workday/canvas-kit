@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {ButtonBaseLabel, ButtonLabelIcon, getButtonStyle, getButtonSize} from './ButtonBase';
+import {ButtonBaseLabel, ButtonLabelIcon} from './ButtonBase';
+import {getButtonStyle, getButtonSize} from './utils';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {BaseButtonProps} from './Button';
