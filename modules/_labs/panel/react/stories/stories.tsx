@@ -7,7 +7,7 @@ import {Panel, PanelDirection, PanelHeader} from '../index';
 import README from '../README.md';
 import {spacing} from '@workday/canvas-kit-react-core';
 
-storiesOf('Labs/Panel', module)
+storiesOf('Labs/Panel/React', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
