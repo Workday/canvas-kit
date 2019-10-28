@@ -71,9 +71,7 @@ export default class PanelHeader extends React.Component<PanelHeaderProps, {}> {
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
-        <HeaderTitle aria-labelby={headerTitle} title={headerTitle}>
-          {headerTitle}
-        </HeaderTitle>
+        <HeaderTitle title={headerTitle}>{headerTitle}</HeaderTitle>
         <IconButton onClick={handleClose} aria-label={iconLabel} icon={xIcon}></IconButton>
       </HeaderContainer>
     );
