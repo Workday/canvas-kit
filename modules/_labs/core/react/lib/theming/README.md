@@ -28,6 +28,27 @@ import {CanvasProvider} from '@workday/canvas-kit-react';
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```
 
+## Component Props
+
+### Required
+
+> None
+
+### Optional
+
+#### `theme: CanvasTheme`
+
+> The theme to be used throughout the children of the `CanvasProvider` component.
+
+Default: `defaultCanvasTheme`
+
+#### `setThemeGlobal: boolean`
+
+> Indicates whether to set a global theme on the window object. This should be used if your
+> application is not using a single react tree (React contexts only work within a single tree).
+
+Default: `false`
+
 ## Theme Object
 
 The Canvas theme is based on the following object:

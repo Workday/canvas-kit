@@ -58,10 +58,13 @@ export const defaultCanvasTheme: CanvasTheme = {
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
 export function getTheme(theme: Object): CanvasTheme {
-  if (Object.entries(theme).length === 0) {
-    return defaultCanvasTheme;
+  if (Object.entries(theme).length !== 0) {
+    return theme as CanvasTheme;
+  } else if (window.wdCanvasTheme) {
+    return window.wdCanvasTheme;
   }
-  return theme as CanvasTheme;
+
+  return defaultCanvasTheme;
 }
 
 // TODO: Should we use PartialCanvasTheme here?
