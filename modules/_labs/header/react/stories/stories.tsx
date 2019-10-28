@@ -67,6 +67,7 @@ const nav = (
 );
 
 storiesOf('Labs/Header/React', module)
+  .addParameters({component: Header})
   .addDecorator(withReadme(README))
   .add('Global Header', () => (
     <div className="story">

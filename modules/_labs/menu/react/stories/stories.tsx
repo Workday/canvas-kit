@@ -375,6 +375,7 @@ class Combobox extends React.Component<{}, ComboboxState> {
 }
 
 storiesOf('Labs/Menu/React', module)
+  .addParameters({component: Menu})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

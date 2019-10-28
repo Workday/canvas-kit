@@ -12,6 +12,7 @@ const handleBannerClick = (e: React.SyntheticEvent) => {
 };
 
 storiesOf('Banner/Alert', module)
+  .addParameters({component: Banner})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .add('Full', () => (
@@ -52,6 +53,7 @@ storiesOf('Banner/Alert', module)
   ));
 
 storiesOf('Banner/Error', module)
+  .addParameters({component: Banner})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .add('Full', () => (

@@ -20,6 +20,7 @@ const FlexContainer = styled('div')({
 });
 
 storiesOf('Skeleton', module)
+  .addParameters({component: Skeleton})
   .addDecorator(withReadme(README))
   .add('Complete', () => {
     return (

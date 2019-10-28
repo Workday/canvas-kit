@@ -8,6 +8,7 @@ import FormField from '../index';
 import README from '../../../color-picker/react/README.md';
 
 storiesOf('Form Field/Color Picker/Color Preview/Top Label', module)
+  .addParameters({component: ColorPreview})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="input-plain">
@@ -16,6 +17,7 @@ storiesOf('Form Field/Color Picker/Color Preview/Top Label', module)
   ));
 
 storiesOf('Form Field/Color Picker/Color Preview/Left Label', module)
+  .addParameters({component: ColorPreview})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="input-plain">
