@@ -60,8 +60,20 @@ export const defaultCanvasTheme: CanvasTheme = {
       focusOutline: colors.blueberry400,
     },
   },
+  breakpoints: {
+    values: {
+      zero: 0,
+      s: 600,
+      m: 960,
+      l: 1280,
+      xl: 1920,
+    },
+    up: (key: BreakpointFnParam) => string,
+    down: (key: BreakpointFnParam) => string,
+    between: (key: BreakpointFnParam) => string,
+    only: (start: BreakpointFnParam, end: BreakpointFnParam) => string,
+  },
   // Typography
-  // Breakpoints
   // Depth?
 };
 ```
