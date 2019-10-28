@@ -12,7 +12,12 @@ storiesOf('Labs/Panel', module)
   .add('Default', () => (
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
-        <Panel openDirection={PanelDirection.Left} padding={spacing.s}></Panel>
+        <Panel openDirection={PanelDirection.Left} padding={spacing.s}>
+          <div style={{fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif'}}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+            sit amet blandit leo lobortis eget.
+          </div>
+        </Panel>
       </div>
     </div>
   ))
