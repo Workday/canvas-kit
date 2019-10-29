@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-
+import {action} from '@storybook/addon-actions';
 import {Panel, PanelDirection, PanelHeader} from '../index';
 import README from '../README.md';
 import {spacing} from '@workday/canvas-kit-react-core';
@@ -25,12 +25,7 @@ storiesOf('Labs/Panel/React', module)
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
         <Panel
-          header={
-            <PanelHeader
-              onClose={() => console.warn('close clicked')}
-              headerTitle={'Panel Header'}
-            />
-          }
+          header={<PanelHeader onClose={action('onClose callback')} headerTitle={'Panel Header'} />}
           openDirection={PanelDirection.Left}
           padding={spacing.l}
           showDropShadow={true}
