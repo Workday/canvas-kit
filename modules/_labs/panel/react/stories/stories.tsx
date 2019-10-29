@@ -30,6 +30,19 @@ const title = 'Panel Header';
 const showDropShadowLabel = 'Show Drop Shadow';
 const showDropShadow = true;
 
+const paddingLabel = 'Padding';
+const paddingOptions = {
+  zero: spacing.zero,
+  xxxs: spacing.xxxs,
+  xxs: spacing.xxs,
+  xs: spacing.xs,
+  s: spacing.s,
+  m: spacing.s,
+  l: spacing.l,
+};
+
+const paddingDefault = paddingOptions.s;
+
 storiesOf('Labs/Panel/React', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -50,7 +63,7 @@ storiesOf('Labs/Panel/React', module)
         <Panel
           header={<PanelHeader onClose={action('onClose callback')} title={'Panel Header'} />}
           openDirection={PanelDirection.Left}
-          padding={spacing.l}
+          padding={spacing.s}
           showDropShadow={true}
         ></Panel>
       </div>
@@ -69,9 +82,12 @@ storiesOf('Labs/Panel/React', module)
             />
           }
           openDirection={select(label, options, defaultValue)}
-          padding={spacing.l}
+          padding={select(paddingLabel, paddingOptions, paddingDefault)}
           showDropShadow={boolean(showDropShadowLabel, showDropShadow)}
-        ></Panel>
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+          sit amet blandit leo lobortis eget.
+        </Panel>
       </div>
     </div>
   ));
