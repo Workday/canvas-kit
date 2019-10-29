@@ -13,7 +13,9 @@ export interface CanvasProviderProps {
 
 declare global {
   interface Window {
-    wdCanvasTheme: CanvasTheme;
+    wdCanvas: {
+      theme?: CanvasTheme;
+    };
   }
 }
 
@@ -25,7 +27,10 @@ export default class CanvasProvider extends React.Component<CanvasProviderProps>
 
   componentDidMount() {
     if (this.props.setThemeGlobal) {
-      window.wdCanvasTheme = this.props.theme;
+      if (!window.wdCanvas) {
+        window.wdCanvas = {};
+      }
+      window.wdCanvas.theme = this.props.theme;
     }
   }
 

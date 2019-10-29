@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, spacing, borderRadius, type} from '@workday/canvas-kit-react-core';
-import {Themeable, getTheme} from '@workday/canvas-kit-labs-react-core';
+import {Themeable, useTheme} from '@workday/canvas-kit-labs-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {ErrorType, focusRing} from '@workday/canvas-kit-react-common';
@@ -53,7 +53,7 @@ const BannerWrapper = styled('button')<BannerProps>(
     },
   },
   ({error, theme}) => {
-    theme = getTheme(theme); // eslint-disable-line no-param-reassign
+    theme = useTheme(theme); // eslint-disable-line no-param-reassign
     return {
       backgroundColor:
         error === ErrorType.Error ? theme.palette.error.main : theme.palette.alert.main,
