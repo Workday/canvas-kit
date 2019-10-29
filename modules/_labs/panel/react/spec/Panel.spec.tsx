@@ -1,35 +1,29 @@
 import * as React from 'react';
-import Panel, {PanelHeader} from '../index';
-import {mount} from 'enzyme';
-// import ReactDOMServer from 'react-dom/server';
-// import {axe} from 'jest-axe';
+import {render, fireEvent} from '@testing-library/react';
+
+import {Panel, PanelHeader, PanelDirection} from '../index';
 
 fdescribe('Panel', () => {
-  const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
-  });
-  test('render a div with id', () => {
-    const component = mount(<Panel id="myPanel" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('id')).toBe('myPanel');
-    component.unmount();
-  });
-
-  test('Panel should spread extra props', () => {
-    const component = mount(<Panel data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
-  });
-
-  test('should call a close function when a Panel Header is passed', () => {
-    const component = mount(
-      <Panel header={<PanelHeader onClose={cb} headerTitle={'Title'}></PanelHeader>} />
+  test('should call a callback function', async () => {
+    const cb = jest.fn();
+    const {findByLabelText} = render(
+      <Panel
+        header={
+          <PanelHeader iconLabel={'Close'} headerTitle={'Header Title'} onClose={cb}></PanelHeader>
+        }
+      >
+        Hello World
+      </Panel>
     );
-    const panel = component.find('button');
-    panel.simulate('click');
-    expect(cb.mock.calls.length).toBe(1);
-    component.unmount();
+
+    fireEvent.click(await findByLabelText('Close'));
+
+    expect(cb).toHaveBeenCalledTimes(1);
+  });
+
+  test('Modal should spread extra props', async () => {
+    const {container} = render(<Panel data-id={'1234'} openDirection={PanelDirection.Right} />);
+
+    expect(container.firstChild).toHaveAttribute('data-id', '1234');
   });
 });
