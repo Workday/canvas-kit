@@ -16,6 +16,17 @@ module.exports = ({config, mode}) => {
     rule => !/js\|mjs\|jsx\|ts\|tsx/.test(rule.test.toString())
   );
 
+  // Override CRA postcss presets
+  config.module.rules.forEach(rule => {
+    if (rule.test.toString().includes('scss|sass')) {
+      rule.use[2].options.plugins = () => [
+        require('postcss-discard-duplicates'),
+        require('autoprefixer'),
+        require('postcss-inline-svg'),
+      ];
+    }
+  });
+
   // Add `.ts` and `.tsx` as a resolvable extension.
   config.resolve.extensions = ['.ts', '.tsx', '.js', '.jsx'];
 
