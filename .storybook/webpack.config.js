@@ -3,6 +3,7 @@ const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const utilsPath = path.resolve(__dirname, '../utils');
+const postcssConfigPath = path.resolve(__dirname, './postcss.config');
 
 module.exports = ({config, mode}) => {
   // Exclude all node_modules from babel-loader
@@ -19,11 +20,11 @@ module.exports = ({config, mode}) => {
   // Override CRA postcss presets
   config.module.rules.forEach(rule => {
     if (rule.test.toString().includes('scss|sass')) {
-      rule.use[2].options.plugins = () => [
-        require('postcss-discard-duplicates'),
-        require('autoprefixer'),
-        require('postcss-inline-svg'),
-      ];
+      delete rule.use[2].options.plugins;
+
+      rule.use[2].options.config = {
+        path: postcssConfigPath,
+      };
     }
   });
 
