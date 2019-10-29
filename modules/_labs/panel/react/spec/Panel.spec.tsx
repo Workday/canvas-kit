@@ -3,14 +3,12 @@ import {render, fireEvent} from '@testing-library/react';
 
 import {Panel, PanelHeader, PanelDirection} from '../index';
 
-fdescribe('Panel', () => {
+describe('Panel', () => {
   test('should call a callback function', async () => {
     const cb = jest.fn();
     const {findByLabelText} = render(
       <Panel
-        header={
-          <PanelHeader iconLabel={'Close'} headerTitle={'Header Title'} onClose={cb}></PanelHeader>
-        }
+        header={<PanelHeader iconLabel={'Close'} title={'Header Title'} onClose={cb}></PanelHeader>}
       >
         Hello World
       </Panel>

@@ -1,14 +1,15 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+import {typeColors} from '@workday/canvas-colors-web';
 import {colors, spacing, H4, CanvasColor} from '@workday/canvas-kit-react-core';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * String to add to a Panel
+   * String to add a title to a Panel
    */
-  headerTitle?: string;
+  title?: string;
   /**
    * Callback to handle closing the Panel
    */
@@ -25,6 +26,14 @@ export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    * Changes the border color to match something close to the header background color
    */
   borderColor: CanvasColor | string;
+  /**
+   * If the background of the header is dark, this will switch the icon so that it is white
+   */
+  showInverseButton?: boolean;
+  /**
+   * If you have a dark header color, you can change the title color of the text
+   */
+  titleColor?: CanvasColor | string;
 }
 
 const headerHeight = 56;
@@ -45,27 +54,49 @@ const HeaderContainer = styled('div')<Pick<PanelHeaderProps, 'headerColor' | 'bo
   })
 );
 
-const HeaderTitle = styled(H4)({
-  whiteSpace: 'nowrap',
-  textOverflow: 'ellipsis',
-  overflow: 'hidden',
-  paddingRight: spacing.xxxs,
-});
+const HeaderTitle = styled(H4)<Pick<PanelHeaderProps, 'titleColor'>>(
+  {
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    paddingRight: spacing.xxxs,
+  },
+  ({titleColor}) => ({
+    color: titleColor ? titleColor : typeColors.heading,
+  })
+);
 
 export default class PanelHeader extends React.Component<PanelHeaderProps, {}> {
   static defaultProps = {
     iconLabel: 'Close',
     headerColor: colors.soap100,
     borderColor: colors.soap500,
+    showInverseButton: false,
   };
 
   public render() {
-    const {onClose, headerTitle, iconLabel, headerColor, borderColor, ...elemProps} = this.props;
+    const {
+      onClose,
+      title,
+      iconLabel,
+      headerColor,
+      borderColor,
+      showInverseButton,
+      titleColor,
+      ...elemProps
+    } = this.props;
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
-        <HeaderTitle title={headerTitle}>{headerTitle}</HeaderTitle>
-        <IconButton onClick={onClose} aria-label={iconLabel} icon={xIcon}></IconButton>
+        <HeaderTitle titleColor={titleColor} title={title}>
+          {title}
+        </HeaderTitle>
+        <IconButton
+          variant={showInverseButton ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
+          onClick={onClose}
+          aria-label={iconLabel}
+          icon={xIcon}
+        ></IconButton>
       </HeaderContainer>
     );
   }
