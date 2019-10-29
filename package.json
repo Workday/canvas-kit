@@ -22,8 +22,6 @@
     "@storybook/addon-storysource": "^5.2.4",
     "@storybook/addon-viewport": "^5.2.3",
     "@storybook/components": "^5.2.3",
-    "@storybook/preset-scss": "^1.0.2",
-    "@storybook/preset-typescript": "^1.1.0",
     "@storybook/react": "^5.2.5",
     "@storybook/source-loader": "^5.2.4",
     "@testing-library/jest-dom": "^4.1.0",
