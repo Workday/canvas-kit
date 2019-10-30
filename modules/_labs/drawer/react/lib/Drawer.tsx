@@ -2,36 +2,36 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, spacing, CanvasSpacingValue} from '@workday/canvas-kit-react-core';
 
-export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Adjust padding for the contents of the Panel. Default: `spacing.s`
+   * Adjust padding for the contents of the Drawer. Default: `spacing.s`
    */
   padding?: CanvasSpacingValue;
   /**
-   * Determines the side in which the Panel can open from. Default: `PanelDirection.Right`
+   * Determines the side in which the Drawer can open from. Default: `DrawerDirection.Right`
    */
-  openDirection?: PanelDirection;
+  openDirection?: DrawerDirection;
   /**
-   * Sets the width of the Panel. Default: `360px`
+   * Sets the width of the Drawer. Default: `360px`
    */
   width?: number;
   /**
-   * Allows to either show or hide a drop shadow on the Panel. Default: `false`
+   * Allows to either show or hide a drop shadow on the Drawer. Default: `false`
    */
   showDropShadow?: boolean;
   /**
-   * Optional to pass a PanelHeader component shows an optional string and close button
+   * Optional to pass a DrawerHeader component shows an optional string and close button
    */
   header?: React.ReactElement;
 }
 
-export enum PanelDirection {
+export enum DrawerDirection {
   Left,
   Right,
 }
 
-const PanelContainer = styled('div')<
-  Pick<PanelProps, 'width' | 'showDropShadow' | 'openDirection'>
+const DrawerContainer = styled('div')<
+  Pick<DrawerProps, 'width' | 'showDropShadow' | 'openDirection'>
 >(
   {
     height: '100%',
@@ -45,21 +45,21 @@ const PanelContainer = styled('div')<
   }),
   ({showDropShadow, openDirection}) => ({
     boxShadow:
-      openDirection === PanelDirection.Right && showDropShadow
+      openDirection === DrawerDirection.Right && showDropShadow
         ? '-8px 0px 16px 0 rgba(0,0,0,0.12)'
-        : openDirection === PanelDirection.Left && showDropShadow
+        : openDirection === DrawerDirection.Left && showDropShadow
         ? '8px 0px 16px 0 rgba(0,0,0,0.12)'
         : undefined,
   }),
   ({openDirection}) => ({
-    borderLeft: openDirection === PanelDirection.Right ? `1px solid ${colors.soap400}` : undefined,
-    borderRight: openDirection === PanelDirection.Left ? `1px solid ${colors.soap400}` : undefined,
-    right: openDirection === PanelDirection.Right ? spacing.zero : undefined,
-    left: openDirection === PanelDirection.Left ? spacing.zero : undefined,
+    borderLeft: openDirection === DrawerDirection.Right ? `1px solid ${colors.soap400}` : undefined,
+    borderRight: openDirection === DrawerDirection.Left ? `1px solid ${colors.soap400}` : undefined,
+    right: openDirection === DrawerDirection.Right ? spacing.zero : undefined,
+    left: openDirection === DrawerDirection.Left ? spacing.zero : undefined,
   })
 );
 
-const ChildrenContainer = styled('div')<Pick<PanelProps, 'padding'>>(
+const ChildrenContainer = styled('div')<Pick<DrawerProps, 'padding'>>(
   {
     height: '100%',
     overflowY: 'auto',
@@ -71,10 +71,10 @@ const ChildrenContainer = styled('div')<Pick<PanelProps, 'padding'>>(
   })
 );
 
-export default class Panel extends React.Component<PanelProps, {}> {
-  static OpenDirection = PanelDirection;
+export default class Drawer extends React.Component<DrawerProps, {}> {
+  static OpenDirection = DrawerDirection;
   static defaultProps = {
-    openDirection: PanelDirection.Right,
+    openDirection: DrawerDirection.Right,
     padding: spacing.s,
     width: 360,
     showDropShadow: false,
@@ -92,7 +92,7 @@ export default class Panel extends React.Component<PanelProps, {}> {
     } = this.props;
 
     return (
-      <PanelContainer
+      <DrawerContainer
         {...elemProps}
         showDropShadow={showDropShadow}
         width={width}
@@ -100,7 +100,7 @@ export default class Panel extends React.Component<PanelProps, {}> {
       >
         {header && header}
         <ChildrenContainer padding={padding}>{children}</ChildrenContainer>
-      </PanelContainer>
+      </DrawerContainer>
     );
   }
 }

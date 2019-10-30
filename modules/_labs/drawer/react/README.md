@@ -1,4 +1,4 @@
-# Canvas Kit React Panel
+# Canvas Kit React Drawer
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
@@ -7,21 +7,21 @@
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-panel
+yarn add @workday/canvas-kit-labs-react-drawer
 ```
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {Panel, PanelDirection, PanelHeader} from '@workday/canvas-kit-labs-react-panel';
+import {Drawer, DrawerDirection, DrawerHeader} from '@workday/canvas-kit-labs-react-drawer';
 
 <div style={{height: '100vh', position: 'relative'}}>
-  <Panel
-    header={<PanelHeader headerTitle={'Panel Header'} />}
-    openDirection={PanelDirection.Left}
+  <Drawer
+    header={<DrawerHeader headerTitle={'Drawer Header'} />}
+    openDirection={DrawerDirection.Left}
     padding={spacing.l}
     showDropShadow={true}
-  ></Panel>
+  ></Drawer>
 </div>;
 ```

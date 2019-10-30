@@ -1,8 +1,8 @@
 
 {
-  "name": "@workday/canvas-kit-labs-react-panel",
+  "name": "@workday/canvas-kit-labs-react-drawer",
   "version": "0.0.0",
-  "description": "A Panel component that allows for custom content to be added",
+  "description": "A Drawer component that allows for custom content to be added",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
@@ -11,7 +11,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_labs/panel/react"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_labs/drawer/react"
   },
   "files": [
     "dist/",
@@ -32,7 +32,7 @@
     "react",
     "components",
     "workday",
-    "panel"
+    "drawer"
   ],
   "dependencies": {
     "@workday/canvas-kit-react-core": "^3.0.0-beta.1",

@@ -5,13 +5,13 @@ import {colors, spacing, H4, CanvasColor} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
-export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * String to add a title to a Panel
+   * String to add a title to a Drawer
    */
   title?: string;
   /**
-   * Callback to handle closing the Panel
+   * Callback to handle closing the Drawer
    */
   onClose: () => void;
   /**
@@ -19,7 +19,7 @@ export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   iconLabel: string;
   /**
-   * The background color in which the Panel header will be
+   * The background color in which the Drawer header will be
    */
   headerColor: CanvasColor | string;
   /**
@@ -38,7 +38,7 @@ export interface PanelHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const headerHeight = 56;
 
-const HeaderContainer = styled('div')<Pick<PanelHeaderProps, 'headerColor' | 'borderColor'>>(
+const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'borderColor'>>(
   {
     height: headerHeight,
     display: 'flex',
@@ -54,7 +54,7 @@ const HeaderContainer = styled('div')<Pick<PanelHeaderProps, 'headerColor' | 'bo
   })
 );
 
-const HeaderTitle = styled(H4)<Pick<PanelHeaderProps, 'titleColor'>>(
+const HeaderTitle = styled(H4)<Pick<DrawerHeaderProps, 'titleColor'>>(
   {
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
@@ -66,7 +66,7 @@ const HeaderTitle = styled(H4)<Pick<PanelHeaderProps, 'titleColor'>>(
   })
 );
 
-export default class PanelHeader extends React.Component<PanelHeaderProps, {}> {
+export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
   static defaultProps = {
     iconLabel: 'Close',
     headerColor: colors.soap100,

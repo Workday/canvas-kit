@@ -1,17 +1,19 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 
-import {Panel, PanelHeader, PanelDirection} from '../index';
+import {Drawer, DrawerHeader, DrawerDirection} from '../index';
 
-describe('Panel', () => {
+describe('Drawer', () => {
   test('should call a callback function', async () => {
     const cb = jest.fn();
     const {findByLabelText} = render(
-      <Panel
-        header={<PanelHeader iconLabel={'Close'} title={'Header Title'} onClose={cb}></PanelHeader>}
+      <Drawer
+        header={
+          <DrawerHeader iconLabel={'Close'} title={'Header Title'} onClose={cb}></DrawerHeader>
+        }
       >
         Hello World
-      </Panel>
+      </Drawer>
     );
 
     fireEvent.click(await findByLabelText('Close'));
@@ -20,7 +22,7 @@ describe('Panel', () => {
   });
 
   test('Modal should spread extra props', async () => {
-    const {container} = render(<Panel data-id={'1234'} openDirection={PanelDirection.Right} />);
+    const {container} = render(<Drawer data-id={'1234'} openDirection={DrawerDirection.Right} />);
 
     expect(container.firstChild).toHaveAttribute('data-id', '1234');
   });
