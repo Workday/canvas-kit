@@ -57,6 +57,7 @@ The Canvas theme is based on the following object:
 export const defaultCanvasTheme: CanvasTheme = {
   palette: {
     primary: {
+      lightest: colors.blueberry100,
       light: colors.blueberry200,
       main: colors.blueberry400,
       dark: colors.blueberry500,
@@ -64,6 +65,7 @@ export const defaultCanvasTheme: CanvasTheme = {
       contrast: colors.frenchVanilla100,
     },
     alert: {
+      lightest: colors.cantaloupe100,
       light: colors.cantaloupe300,
       main: colors.cantaloupe400,
       dark: colors.cantaloupe500,
@@ -71,10 +73,27 @@ export const defaultCanvasTheme: CanvasTheme = {
       contrast: colors.frenchVanilla100,
     },
     error: {
+      lightest: colors.cinnamon100,
       light: colors.cinnamon300,
       main: colors.cinnamon500,
       dark: colors.cinnamon600,
       darkest: '#80160E',
+      contrast: colors.frenchVanilla100,
+    },
+    success: {
+      lightest: colors.greenApple100,
+      light: colors.greenApple300,
+      main: colors.greenApple600,
+      dark: '',
+      darkest: '',
+      contrast: colors.frenchVanilla100,
+    },
+    neutral: {
+      lightest: colors.soap200,
+      light: colors.soap300,
+      main: colors.soap600,
+      dark: colors.licorice300,
+      darkest: colors.licorice400,
       contrast: colors.frenchVanilla100,
     },
     common: {
@@ -82,20 +101,12 @@ export const defaultCanvasTheme: CanvasTheme = {
     },
   },
   breakpoints: {
-    values: {
-      zero: 0,
-      s: 600,
-      m: 960,
-      l: 1280,
-      xl: 1920,
-    },
-    up: (key: BreakpointFnParam) => string,
-    down: (key: BreakpointFnParam) => string,
-    between: (key: BreakpointFnParam) => string,
-    only: (start: BreakpointFnParam, end: BreakpointFnParam) => string,
+    values: breakpoints,
+    up,
+    down,
+    between,
+    only,
   },
-  // Typography
-  // Depth?
 };
 ```
 

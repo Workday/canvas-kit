@@ -4,17 +4,16 @@ import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
  * A single palette within a Canvas theme
  */
 type CanvasThemePalette = {
+  lightest: string;
   light: string;
   main: string;
   dark: string;
   darkest: string;
   contrast: string;
-  [index: string]: string;
 };
 
 type CanvasThemeCommonPalette = {
   focusOutline: string;
-  [index: string]: string;
 };
 
 /**
