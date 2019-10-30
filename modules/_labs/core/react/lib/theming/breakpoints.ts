@@ -17,7 +17,7 @@ export type CanvasBreakpoints = {
   [key: string]: number;
 };
 
-export const breakpointKeys = ['zero', 's', 'm', 'l', 'xl'];
+export const breakpointKeys = ['zero', 's', 'm', 'l', 'xl'] as const;
 
 export const breakpoints: CanvasBreakpoints = {
   zero: 0,
