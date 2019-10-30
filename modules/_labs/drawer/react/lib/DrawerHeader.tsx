@@ -66,6 +66,10 @@ const HeaderTitle = styled(H4)<Pick<DrawerHeaderProps, 'titleColor'>>(
   })
 );
 
+const CloseButton = styled(IconButton)({
+  margin: '-8px', // for inverse and plain button, we always want this margin
+});
+
 export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
   static defaultProps = {
     iconLabel: 'Close',
@@ -91,12 +95,12 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
         <HeaderTitle titleColor={titleColor} title={title}>
           {title}
         </HeaderTitle>
-        <IconButton
+        <CloseButton
           variant={showInverseButton ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
           onClick={onClose}
           aria-label={iconLabel}
           icon={xIcon}
-        ></IconButton>
+        ></CloseButton>
       </HeaderContainer>
     );
   }
