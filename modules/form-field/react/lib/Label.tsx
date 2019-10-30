@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {accessibleHide as accessibleHideCSS} from '@workday/canvas-kit-react-common';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {
@@ -9,6 +10,7 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
   htmlFor?: string;
   required?: boolean;
   requiredLabel: string;
+  accessibleHide?: boolean;
 }
 
 const labelStyles = [
@@ -17,7 +19,10 @@ const labelStyles = [
     ...type.variant.label,
     padding: 0,
   },
-  ({labelPosition}: {labelPosition: FormFieldLabelPosition}) => {
+  ({labelPosition, accessibleHide}: Pick<LabelProps, 'labelPosition' | 'accessibleHide'>) => {
+    if (accessibleHide) {
+      return accessibleHideCSS;
+    }
     return {
       ...(labelPosition === FormFieldLabelPosition.Left
         ? {
