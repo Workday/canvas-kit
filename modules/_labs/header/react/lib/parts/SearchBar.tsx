@@ -387,6 +387,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     return (
       <SearchForm
         role="search"
+        action="."
         rightAlign={rightAlign}
         grow={grow}
         aria-labelledby={this.labelId}
@@ -441,6 +442,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}
                 inputColors={this.getThemeColors()}
+                name="search"
               />
             </SearchCombobox>
           </SearchField>
