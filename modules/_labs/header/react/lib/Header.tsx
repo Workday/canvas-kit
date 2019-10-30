@@ -1,15 +1,13 @@
 import * as React from 'react';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import {type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import {DubLogoTitle, Search, WorkdayLogoTitle} from './parts';
+import {borderRadius, spacing, type} from '@workday/canvas-kit-react-core';
+import {DubLogoTitle, WorkdayLogoTitle} from './parts';
 import {themes} from './shared/themes';
-import {HeaderTheme, HeaderVariant, HeaderHeight} from './shared/types';
+import {HeaderHeight, HeaderTheme, HeaderVariant} from './shared/types';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
 import {justifyIcon} from '@workday/canvas-system-icons-web';
-import throttle from 'lodash/throttle';
-import {makeMq} from '@workday/canvas-kit-react-common';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -45,34 +43,19 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onMenuClick?: (e: React.SyntheticEvent) => void;
   /**
-   * An event handler function that gets called when the search field is submitted
+   * React element for the left of the header, this is typically a search bar component
    */
-  onSearchSubmit?: (query: string) => void;
+  leftSlot?: React.ReactElement;
   /**
-   * An object that allows for custom specified breakpoints (sm, md, lg)
+   * A boolean indicating if the header should be rendered in collapsed mode
    */
-  breakpoints: {
-    [key: string]: number;
-    sm: number;
-    md: number;
-    lg: number;
-  };
-  /**
-   * An event handler function that gets called when the screen size changes to a different breakpoint key
-   */
-  onBreakpointChange?: (key: string | number) => void;
-  searchLabel: string;
-}
-
-export interface HeaderState {
-  screenSize: keyof HeaderProps['breakpoints'];
+  isCollapsed?: boolean;
 }
 
 const childrenSpacing = spacing.s;
 
 const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
   {
-    overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
     boxSizing: 'border-box',
@@ -192,45 +175,30 @@ const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
   });
 };
 
-const ChildrenSlot = styled('div')<Pick<HeaderProps, 'breakpoints' | 'centeredNav' | 'themeColor'>>(
-  ({centeredNav = false, breakpoints}) => {
-    const mq = makeMq(breakpoints);
-
-    return {
-      marginRight: spacing.m,
-
-      // TODO: remove this when we get real icon buttons
-      '> .canvas-header--menu-icon': {
-        cursor: 'pointer',
-      },
-      [mq.sm]: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        height: '100%',
-        marginRight: spacing.m,
-
-        '> *': {
-          marginLeft: childrenSpacing,
-        },
-        '> *:not(.canvas-header--menu-icon)': {
-          display: 'none',
-        },
-      },
-      [mq.md]: {
-        '> *:last-child': {
-          marginRight: 0,
-        },
-
-        '> *:not(.canvas-header--menu-icon)': {
-          display: 'flex',
-        },
-      },
-      [mq.lg]: {
-        flexGrow: centeredNav ? 1 : 'unset',
-      },
-    };
+const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed'>>(
+  {
+    marginRight: spacing.m,
+    // TODO: remove this when we get real icon buttons
+    '> .canvas-header--menu-icon': {
+      cursor: 'pointer',
+    },
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    height: '100%',
+    '> *': {
+      marginLeft: childrenSpacing,
+    },
   },
+  ({centeredNav = false, isCollapsed}) => ({
+    '> *:not(.canvas-header--menu-icon)': {
+      display: isCollapsed ? 'none' : 'flex',
+    },
+    '> *:last-child': {
+      marginRight: isCollapsed ? '' : 0,
+    },
+    flexGrow: !isCollapsed && centeredNav ? 1 : 'unset',
+  }),
   navStyle
 );
 
@@ -268,107 +236,39 @@ class MenuIconButton extends React.Component<
 > {
   render() {
     const {themeColor, menuToggle, onMenuClick} = this.props;
-    const menuIconButtonProps = {
-      variant:
-        themeColor === HeaderTheme.White ? IconButton.Variant.Circle : IconButton.Variant.Inverse,
-      icon: justifyIcon,
-      onClick: onMenuClick,
-    };
+    if (menuToggle) {
+      const menuToggleElement = menuToggle as React.ReactElement<any>;
+      const onClick = menuToggleElement.props.onClick
+        ? menuToggleElement.props.onClick
+        : onMenuClick;
 
-    const menuSlot =
-      menuToggle &&
-      React.cloneElement(menuToggle as React.ReactElement<any>, {
-        onClick: onMenuClick,
+      return React.cloneElement(menuToggleElement, {
+        onClick,
+        className: 'canvas-header--menu-icon',
       });
+    }
 
-    return menuToggle ? (
-      menuSlot
-    ) : (
+    return (
       <IconButton
-        {...menuIconButtonProps}
-        className="canvas-header--menu-icon"
+        variant={
+          themeColor === HeaderTheme.White ? IconButton.Variant.Circle : IconButton.Variant.Inverse
+        }
+        icon={justifyIcon}
+        className={'canvas-header--menu-icon'}
         aria-label="Open Menu"
+        onClick={onMenuClick}
       />
     );
   }
 }
 
-export default class Header extends React.Component<HeaderProps, HeaderState> {
+export default class Header extends React.Component<HeaderProps, {}> {
   static Theme = HeaderTheme;
   static Variant = HeaderVariant;
   static defaultProps = {
     themeColor: HeaderTheme.White,
     variant: HeaderVariant.Dub,
-    searchLabel: 'Search',
-    breakpoints: {
-      sm: 320,
-      md: 768,
-      lg: 1120,
-    },
   };
-
-  constructor(props: HeaderProps) {
-    super(props);
-
-    const screenSize =
-      typeof window !== 'undefined' && window.innerWidth
-        ? this.getScreenSize(window.innerWidth, props.breakpoints)
-        : 'md';
-
-    this.state = {
-      screenSize: screenSize,
-    };
-    this.updateScreenSize = throttle(this.updateScreenSize.bind(this), 150);
-  }
-
-  /**
-   * Returns which breakpoint size to use (sm, md, lg)
-   * @param {number} width Current screen width
-   * @param {Object} breakpoints Specification of breakpoint pixel values for sm, md, lg screens
-   * @returns {string}
-   */
-  getScreenSize(width: number, breakpoints: HeaderProps['breakpoints']): string {
-    const sizes = Object.keys(breakpoints);
-    let screenSize = sizes[0];
-
-    sizes.forEach(k => {
-      if (width >= breakpoints[k]) {
-        screenSize = k;
-      }
-    });
-
-    return screenSize;
-  }
-
-  /**
-   * Updates the state screen size/width if it has changed (syncs w/ browser paints using RAF)
-   */
-  updateScreenSize(): void {
-    requestAnimationFrame(() => {
-      const currentScreenSize = this.getScreenSize(window.innerWidth, this.props.breakpoints);
-
-      if (currentScreenSize !== this.state.screenSize) {
-        this.setState({
-          screenSize: currentScreenSize,
-        });
-
-        if (this.props.onBreakpointChange) {
-          this.props.onBreakpointChange(currentScreenSize);
-        }
-      }
-    });
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this.updateScreenSize);
-    if (this.props.onBreakpointChange) {
-      this.props.onBreakpointChange(this.state.screenSize);
-    }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateScreenSize);
-  }
 
   /**
    * Helper that recursively maps ReactNodes to their theme-based equivalent.
@@ -453,10 +353,8 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
       brand,
       brandUrl,
       onMenuClick,
-      onSearchSubmit,
-      breakpoints,
-      onBreakpointChange,
-      searchLabel,
+      leftSlot,
+      isCollapsed,
       children,
       ...elemProps
     } = this.props;
@@ -466,22 +364,10 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
        - Search isn't enabled and the nav shouldn't be centered
        - Search is enabled, and there aren't any children
     */
-    const growBrand =
-      this.state.screenSize !== 'lg' ||
-      (!onSearchSubmit && !centeredNav) ||
-      (onSearchSubmit && !children);
+    const growBrand = isCollapsed || (!leftSlot && !centeredNav) || (leftSlot && !children);
 
     // Ignore centeredNav if search is enabled
-    const shouldCenteredNav = onSearchSubmit ? false : centeredNav;
-
-    // Collapse search at sm breakpoint if no children, at md breakpoint if children
-    const collapseSearch = Boolean(
-      (!children && this.state.screenSize === 'sm') || (children && this.state.screenSize !== 'lg')
-    );
-
-    // Screen size is smaller than our largest breakpoint so turn nav into a hamburger
-    // TODO: This needs to get changed to IconButton when we get it restyled for headers
-    const collapseMenu = children && this.state.screenSize !== 'lg';
+    const shouldCenteredNav = leftSlot ? false : centeredNav;
 
     return (
       <HeaderShell variant={variant} themeColor={themeColor} {...elemProps}>
@@ -494,21 +380,15 @@ export default class Header extends React.Component<HeaderProps, HeaderState> {
             <Brand variant={variant} brand={brand} title={title} themeColor={themeColor} />
           )}
         </BrandSlot>
-        {onSearchSubmit && (
-          <Search
-            onSearchSubmit={onSearchSubmit}
-            rightAlign={!children}
-            themeColor={themeColor}
-            collapse={collapseSearch}
-            placeholder={searchLabel}
-          />
-        )}
+        {leftSlot}
         <ChildrenSlot
-          breakpoints={breakpoints}
           themeColor={themeColor}
           centeredNav={shouldCenteredNav}
+          isCollapsed={isCollapsed}
         >
-          {collapseMenu ? (
+          {isCollapsed ? (
+            // Screen size is smaller than our largest breakpoint so turn nav into a hamburger
+            // TODO: This needs to get changed to IconButton when we get it restyled for headers
             <MenuIconButton
               themeColor={themeColor}
               menuToggle={menuToggle}

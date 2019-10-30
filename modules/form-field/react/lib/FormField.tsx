@@ -5,6 +5,7 @@ import {GrowthBehavior, ErrorType} from '@workday/canvas-kit-react-common';
 import Hint from './Hint';
 import Label from './Label';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
+import uuid from 'uuid/v4';
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
   labelPosition: FormFieldLabelPosition;
@@ -14,7 +15,7 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, Gr
   inputId?: string;
   error?: ErrorType;
   required?: boolean;
-  useFieldset?: boolean;
+  useFieldset: boolean;
   children: React.ReactNode;
 }
 
@@ -46,7 +47,10 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
 const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
   ({grow, labelPosition}) => {
     if (grow) {
-      if (labelPosition === FormFieldLabelPosition.Left) {
+      if (
+        labelPosition === FormFieldLabelPosition.Left ||
+        labelPosition === FormFieldLabelPosition.Hidden
+      ) {
         return {
           flexGrow: 1,
         };
@@ -80,7 +84,9 @@ export default class FormField extends React.Component<FormFieldProps> {
     useFieldset: false,
   };
 
-  private renderChildren = (child: React.ReactChild): React.ReactNode => {
+  private inputId: string = this.props.inputId || uuid();
+
+  private renderChildren = (child: React.ReactElement): React.ReactNode => {
     if (React.isValidElement<any>(child)) {
       const props: GrowthBehavior &
         FormFieldErrorBehavior &
@@ -88,14 +94,11 @@ export default class FormField extends React.Component<FormFieldProps> {
         ...child.props,
       };
 
-      if (this.props.grow && React.isValidElement<GrowthBehavior>(child)) {
+      if (this.props.grow) {
         props.grow = this.props.grow;
       }
 
-      if (
-        typeof this.props.error !== 'undefined' &&
-        React.isValidElement<FormFieldErrorBehavior>(child)
-      ) {
+      if (typeof this.props.error !== 'undefined') {
         props.error = this.props.error;
 
         if (this.props.hintId) {
@@ -107,9 +110,7 @@ export default class FormField extends React.Component<FormFieldProps> {
         }
       }
 
-      if (!child.props.id && this.props.inputId) {
-        props.id = this.props.inputId;
-      }
+      props.id = this.inputId;
 
       return React.cloneElement(child, props);
     }
@@ -137,9 +138,10 @@ export default class FormField extends React.Component<FormFieldProps> {
         {typeof label === 'string' ? (
           <Label
             labelPosition={labelPosition}
-            htmlFor={inputId}
+            htmlFor={this.inputId}
             isLegend={useFieldset}
             required={!!required}
+            accessibleHide={labelPosition === FormFieldLabelPosition.Hidden}
           >
             {label}
           </Label>

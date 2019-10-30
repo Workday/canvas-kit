@@ -49,83 +49,6 @@ describe('Header', () => {
     cb.mockReset();
   });
 
-  test('getScreenSize should return current screen size', () => {
-    const breakpoints = {
-      sm: 10,
-      md: 20,
-      lg: 30,
-    };
-    const widths = {
-      sm: 15,
-      md: 25,
-      lg: 35,
-    };
-    const component = shallow<Header>(<Header />);
-    expect(component.instance().getScreenSize(widths.sm, breakpoints)).toBe('sm');
-    expect(component.instance().getScreenSize(widths.md, breakpoints)).toBe('md');
-    expect(component.instance().getScreenSize(widths.lg, breakpoints)).toBe('lg');
-  });
-
-  describe('onBreakpointChange', () => {
-    test('should return the default breakpoint on initialization', () => {
-      const breakpoints = {sm: 10, md: 20, lg: 30};
-      const mockFunction = jest.fn();
-      shallow<Header>(<Header breakpoints={breakpoints} onBreakpointChange={mockFunction} />);
-      expect(mockFunction).toHaveBeenCalledTimes(1);
-      expect(mockFunction).toHaveBeenCalledWith('lg');
-    });
-
-    test('should update the breakpoint when the screen size changes ', () => {
-      const breakpoints = {sm: 10, md: 20, lg: 30};
-      const mockFunction = jest.fn();
-      shallow<Header>(<Header breakpoints={breakpoints} onBreakpointChange={mockFunction} />);
-      mockFunction.mockReset();
-
-      window.resizeBy(25, 25);
-      expect(mockFunction).toHaveBeenCalledTimes(1);
-      expect(mockFunction).toHaveBeenCalledWith('md');
-    });
-
-    test('changing window size should trigger onBreakpointChange with a custom breakpoint key', () => {
-      const breakpoints = {sm: 0, md: 1, custom: 20, lg: 600};
-      const mockFunction = jest.fn();
-      shallow<Header>(<Header breakpoints={breakpoints} onBreakpointChange={mockFunction} />);
-      mockFunction.mockReset();
-
-      window.resizeBy(25, 25);
-      expect(mockFunction).toHaveBeenCalledTimes(1);
-      expect(mockFunction).toHaveBeenCalledWith('custom');
-    });
-  });
-
-  test('resize eventlisteners are throttled', () => {
-    const spy = jest.spyOn(Header.prototype, 'updateScreenSize');
-    mount<Header>(<Header />);
-
-    expect(spy).not.toHaveBeenCalled();
-
-    window.resizeBy(319, 720);
-    window.resizeBy(320, 720);
-    window.resizeBy(321, 720);
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
-
-  test('resize eventlisteners are correctly unmounted', () => {
-    const spy = jest.spyOn(Header.prototype, 'updateScreenSize');
-    const wrapper = mount<Header>(<Header />);
-
-    expect(spy).not.toHaveBeenCalled();
-
-    window.resizeBy(319, 720);
-    expect(spy).toHaveBeenCalledTimes(1);
-
-    spy.mockReset();
-
-    wrapper.unmount();
-    window.resizeBy(320, 720);
-    expect(spy).not.toHaveBeenCalled();
-  });
-
   test('Header should spread extra props', () => {
     const component = mount(<Header data-propspread="test" />);
     const container = component.at(0).getDOMNode();
@@ -177,18 +100,75 @@ describe('Header', () => {
       expect(renderedIcon.props().onClick).toBeTruthy();
     });
 
-    test('Renders a child hamburger menu (IconButton) when width is at "sm" breakpoint', () => {
-      window.resizeBy(319, 768);
-
+    test('Renders a child hamburger menu (IconButton) when isCollapsed is true', () => {
       const wrapper = mount<Header>(
-        <Header>
+        <Header isCollapsed={true}>
           <IconButton icon={activityStreamIcon} aria-label="Activity Stream" />
         </Header>
       );
       const renderedIcon = wrapper.find(IconButton).first();
 
-      expect(wrapper.state().screenSize).toBe('sm');
       expect(renderedIcon.props().icon).toBe(justifyIcon);
+    });
+
+    describe('When rendered in collapsed mode', () => {
+      test('Calls onMenuClick when the menuToggle does not have an onClick prop', () => {
+        const onMenuClick = jest.fn();
+        const wrapper = mount<Header>(
+          <Header
+            isCollapsed={true}
+            onMenuClick={onMenuClick}
+            menuToggle={<IconButton aria-label="Activity Stream" icon={activityStreamIcon} />}
+          />
+        );
+
+        wrapper.find('button').simulate('click');
+
+        expect(onMenuClick).toHaveBeenCalled();
+      });
+
+      test('Does not overwrite the menuToggle onClick prop when onMenuClick is defined', () => {
+        const onMenuClick = jest.fn();
+        const onIconClick = jest.fn();
+        const wrapper = mount<Header>(
+          <Header
+            isCollapsed={true}
+            onMenuClick={onMenuClick}
+            menuToggle={
+              <IconButton
+                aria-label="Activity Stream"
+                icon={activityStreamIcon}
+                onClick={onIconClick}
+              />
+            }
+          />
+        );
+
+        wrapper.find('button').simulate('click');
+
+        expect(onMenuClick).not.toHaveBeenCalled();
+        expect(onIconClick).toHaveBeenCalled();
+      });
+
+      test('Does not overwrite the menuToggle onClick prop when onMenuClick is undefined', () => {
+        const onIconClick = jest.fn();
+        const wrapper = mount<Header>(
+          <Header
+            isCollapsed={true}
+            menuToggle={
+              <IconButton
+                aria-label="Activity Stream"
+                icon={activityStreamIcon}
+                onClick={onIconClick}
+              />
+            }
+          />
+        );
+
+        wrapper.find('button').simulate('click');
+
+        expect(onIconClick).toHaveBeenCalled();
+      });
     });
   });
 });

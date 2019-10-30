@@ -15,7 +15,6 @@ import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 
 export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   value: string;
-  inputRef?: React.Ref<HTMLInputElement>;
   showCheck?: boolean;
   placeholder: string;
   error?: ErrorType;
