@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-icon",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0",
   "description": "Canvas icons",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -38,11 +38,11 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-common": "^3.0.0-beta.1",
-    "@workday/canvas-kit-react-core": "^3.0.0-beta.1",
-    "@workday/design-assets-types": "^0.2.3",
     "@emotion/core": "^10.0.21",
-    "@emotion/styled": "^10.0.17"
+    "@emotion/styled": "^10.0.17",
+    "@workday/canvas-kit-react-common": "^3.0.0",
+    "@workday/canvas-kit-react-core": "^3.0.0",
+    "@workday/design-assets-types": "^0.2.3"
   },
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^1.0.0",
