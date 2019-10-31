@@ -3,7 +3,7 @@ import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
 /**
  * A single palette within a Canvas theme
  */
-type CanvasThemePalette = {
+export type CanvasThemePalette = {
   lightest: string;
   light: string;
   main: string;
@@ -25,7 +25,8 @@ export interface CanvasTheme {
     primary: CanvasThemePalette;
     error: CanvasThemePalette;
     alert: CanvasThemePalette;
-    [index: string]: CanvasThemePalette | CanvasThemeCommonPalette;
+    success: CanvasThemePalette;
+    neutral: CanvasThemePalette;
   };
   breakpoints: {
     values: CanvasBreakpoints;
@@ -51,3 +52,4 @@ type RecursivePartial<T> = {
 };
 
 export type PartialCanvasTheme = RecursivePartial<CanvasTheme>;
+export type PartialCanvasThemePalette = RecursivePartial<CanvasThemePalette>;

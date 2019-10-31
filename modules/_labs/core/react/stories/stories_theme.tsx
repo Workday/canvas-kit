@@ -57,7 +57,7 @@ const PaletteTitle = styled(Swatch)(
 
 const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
   return (
-    <Component bg={color} contrast={contrast} key={color}>
+    <Component bg={color} contrast={contrast} key={`${name}-${color}`}>
       {name}
       {contrast && <span>{name}</span>}
     </Component>
