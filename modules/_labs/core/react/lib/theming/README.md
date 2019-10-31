@@ -36,6 +36,19 @@ import {CanvasProvider} from '@workday/canvas-kit-labs-react-core';
 
 Default: `defaultCanvasTheme`
 
+#### `direction: ContentDirection`
+
+> The direction (LTR or RTL) to be used throughout the children of the `CanvasProvider` component.
+
+Default: `ContentDirection.LTR`
+
+#### `setThemeGlobal: boolean`
+
+> Indicates whether to set a global theme on the window object. This should be used if your
+> application is not using a single react tree (React contexts only work within a single tree).
+
+Default: `false`
+
 ## Theme Object
 
 The Canvas theme is based on the following object:
@@ -100,6 +113,7 @@ export const defaultCanvasTheme: CanvasTheme = {
     between,
     only,
   },
+  direction: ContentDirection.LTR,
 };
 ```
 
@@ -108,8 +122,9 @@ own use cases.
 
 ## Custom Theme
 
-The `CanvasProvider` accepts a full or partial theme object to give a branded look to the component
-library. Pass your theme into `createCanvasTheme` and use the return value for the `theme` prop.
+The `CanvasProvider` accepts a full or partial theme object to give a branded look or a different
+direction to the component library. Pass your theme into `createCanvasTheme` and use the return
+value for the `theme` prop.
 
 If you only set a `main` color, the rest of the respective palette will be automatically generated
 (note text `contrast` color will always return white if not specified).
@@ -132,6 +147,20 @@ const theme: PartialCanvasTheme = {
 };
 
 <CanvasProvider theme={createCanvasTheme(theme)}>
+  {/* Your app with Canvas components */}
+</CanvasProvider>;
+```
+
+Example changing the direction:
+
+```tsx
+import {
+  CanvasProvider,
+  createCanvasTheme,
+  ContentDirection,
+} from '@workday/canvas-kit-labs-react-core';
+
+<CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
   {/* Your app with Canvas components */}
 </CanvasProvider>;
 ```
