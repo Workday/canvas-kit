@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-side-panel",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0",
   "description": "A Canvas-styled side panel",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -35,11 +35,11 @@
     "side-panel"
   ],
   "dependencies": {
-    "@workday/canvas-kit-react-button": "^3.0.0-beta.1",
-    "@workday/canvas-kit-react-core": "^3.0.0-beta.1",
-    "@workday/canvas-system-icons-web": "^1.0.1",
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
+    "@workday/canvas-kit-react-button": "^3.0.0",
+    "@workday/canvas-kit-react-core": "^3.0.0",
+    "@workday/canvas-system-icons-web": "^1.0.1",
     "lodash": "^4.17.14"
   },
   "peerDependencies": {
