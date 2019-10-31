@@ -18,7 +18,14 @@ import {Drawer, DrawerDirection, DrawerHeader} from '@workday/canvas-kit-labs-re
 
 <div style={{height: '100vh', position: 'relative'}}>
   <Drawer
-    header={<DrawerHeader headerTitle={'Drawer Header'} />}
+    header={
+      <DrawerHeader
+        onClose={() => {
+          window.alert('onClose Clicked');
+        }}
+        headerTitle={'Drawer Header'}
+      />
+    }
     openDirection={DrawerDirection.Left}
     padding={spacing.l}
     showDropShadow={true}

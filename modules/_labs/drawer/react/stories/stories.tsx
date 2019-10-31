@@ -76,7 +76,7 @@ storiesOf('Labs/Drawer/React', module)
           header={
             <DrawerHeader
               headerColor={text(headerColor, headerColorDefaultValue)}
-              showInverseButton={boolean(showInverselabel, showInverseIconDefaultValue)}
+              inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
               onClose={action('onClose callback')}
               title={text(headerTitle, title)}
             />

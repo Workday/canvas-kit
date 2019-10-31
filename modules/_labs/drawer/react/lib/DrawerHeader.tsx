@@ -27,13 +27,9 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
    */
   borderColor: CanvasColor | string;
   /**
-   * If the background of the header is dark, this will switch the icon so that it is white
+   * Changes the icon and header to white for dark background colors on the header
    */
-  showInverseButton?: boolean;
-  /**
-   * If you have a dark header color, you can change the title color of the text
-   */
-  titleColor?: CanvasColor | string;
+  inverse?: boolean;
 }
 
 const headerHeight = 56;
@@ -54,15 +50,15 @@ const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'b
   })
 );
 
-const HeaderTitle = styled(H4)<Pick<DrawerHeaderProps, 'titleColor'>>(
+const HeaderTitle = styled(H4)<Pick<DrawerHeaderProps, 'inverse'>>(
   {
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     paddingRight: spacing.xxxs,
   },
-  ({titleColor}) => ({
-    color: titleColor ? titleColor : typeColors.heading,
+  ({inverse}) => ({
+    color: inverse ? colors.frenchVanilla100 : typeColors.heading,
   })
 );
 
@@ -76,27 +72,19 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
     headerColor: colors.soap100,
     borderColor: colors.soap500,
     showInverseButton: false,
+    inverse: false,
   };
 
   public render() {
-    const {
-      onClose,
-      title,
-      iconLabel,
-      headerColor,
-      borderColor,
-      showInverseButton,
-      titleColor,
-      ...elemProps
-    } = this.props;
+    const {onClose, title, iconLabel, headerColor, borderColor, inverse, ...elemProps} = this.props;
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
-        <HeaderTitle titleColor={titleColor} title={title}>
+        <HeaderTitle inverse={inverse} title={title}>
           {title}
         </HeaderTitle>
         <CloseButton
-          variant={showInverseButton ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
+          variant={inverse ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
           onClick={onClose}
           aria-label={iconLabel}
           icon={xIcon}

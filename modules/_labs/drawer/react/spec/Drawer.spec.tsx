@@ -21,7 +21,7 @@ describe('Drawer', () => {
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
-  test('Modal should spread extra props', async () => {
+  test('Drawer should spread extra props', async () => {
     const {container} = render(<Drawer data-id={'1234'} openDirection={DrawerDirection.Right} />);
 
     expect(container.firstChild).toHaveAttribute('data-id', '1234');
