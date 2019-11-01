@@ -48,6 +48,6 @@
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^1.0.0",
     "@workday/canvas-applet-icons-web": "^0.17.50",
-    "@workday/canvas-system-icons-web": "^1.0.1"
+    "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }

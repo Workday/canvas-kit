@@ -57,9 +57,11 @@ export default class Tooltip extends React.Component<TooltipProps, {}> {
     },
   };
 
+  public onClick() {}
+
   public render() {
     return (
-      <TooltipContainer {...this.props} role="tooltip">
+      <TooltipContainer {...this.props} onClick={this.onClick.bind(this)} role="tooltip">
         {this.props.children}
       </TooltipContainer>
     );
