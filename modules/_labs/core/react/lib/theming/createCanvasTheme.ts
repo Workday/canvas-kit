@@ -34,9 +34,13 @@ function shiftColor(hexColor: string, darken: boolean = true) {
     }
   }
 
-  const newColor = darken ? chroma(hexColor).darken() : chroma(hexColor).brighten();
-
-  return newColor.hex();
+  try {
+    const newColor = darken ? chroma(hexColor).darken() : chroma(hexColor).brighten();
+    return newColor.hex();
+  } catch (e) {
+    console.warn(`Invalid color '${hexColor}' used in theme`);
+    return hexColor;
+  }
 }
 
 function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | {} {
