@@ -12,11 +12,17 @@ import {CanvasColor} from '@workday/canvas-kit-react-core';
 
 const {gradients, primary, ...allColors} = colors;
 
-// TODO: Make darken prop more readable.
-function shiftColor(hexColor: string, darken: boolean = true) {
+enum ColorDirection {
+  Darken,
+  Brighten,
+}
+
+function shiftColor(hexColor: string, direction: ColorDirection) {
   const canvasColor = Object.keys(allColors).find(
     key => allColors[key as CanvasColor] === hexColor
   );
+
+  const darken = direction === ColorDirection.Darken;
 
   if (canvasColor) {
     const colorRegex = /([a-zAz]*)(\d{3})/g;
@@ -56,10 +62,10 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
     return {};
   }
 
-  const dark = shades.dark || shiftColor(shades.main);
-  const darkest = shades.darkest || shiftColor(dark);
-  const light = shades.light || shiftColor(shades.main, false);
-  const lightest = shades.lightest || shiftColor(light, false);
+  const dark = shades.dark || shiftColor(shades.main, ColorDirection.Darken);
+  const darkest = shades.darkest || shiftColor(dark, ColorDirection.Darken);
+  const light = shades.light || shiftColor(shades.main, ColorDirection.Brighten);
+  const lightest = shades.lightest || shiftColor(light, ColorDirection.Brighten);
 
   return {
     lightest,
