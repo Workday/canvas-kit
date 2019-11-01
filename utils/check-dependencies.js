@@ -19,6 +19,17 @@ function findCharacter(pkg, dependency) {
   return `    "${dependency}": "`.length + 1;
 }
 
+function formatErrorMessage(error) {
+  if (true) {
+    // if (process.env.GITHUB_ACTION) {
+    return `\n${error.file}\n##[error]  ${error.line}:${error.character}  error  ${error.message}`;
+  } else {
+    return `${error.file}\n  ${colors.dim(`${error.line}:${error.character}`)}  ${colors.red(
+      'error'
+    )}  ${error.message}\n`;
+  }
+}
+
 async function main() {
   const packageFiles = await glob('**/package.json', {ignore: '**/node_modules/**'});
   const dependencies = {};
@@ -49,11 +60,7 @@ async function main() {
 
 main().then(errors => {
   errors.forEach(error => {
-    console.error(
-      `${error.file}\n  ${colors.dim(`${error.line}:${error.character}`)}  ${colors.red(
-        'error'
-      )}  ${error.message}\n`
-    );
+    console.error(formatErrorMessage(error));
   });
   process.exit(errors.length);
 });
