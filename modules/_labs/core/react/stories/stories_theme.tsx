@@ -6,7 +6,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {useTheme} from 'emotion-theming';
 
-import {CanvasTheme} from '../lib/theming/types';
+import {CanvasTheme, CanvasThemePalette} from '../lib/theming/types';
 import README from '../lib/theming/README.md';
 import {H1, colors, type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 
@@ -64,6 +64,9 @@ const createSwatch = (name: string, color: string, contrast: string, Component =
   );
 };
 
+type Palette = keyof CanvasTheme['palette'];
+type Swatch = keyof CanvasThemePalette;
+
 const ThemeDemo = (props: any) => {
   const theme = useTheme() as CanvasTheme;
   return (
@@ -71,8 +74,8 @@ const ThemeDemo = (props: any) => {
       <H1>Default Canvas Theme</H1>
       <Palettes>
         {Object.keys(theme.palette).map(name => {
-          const palette = theme.palette[name];
-          const bg = palette.main || colors.soap200;
+          const palette = theme.palette[name as Palette] as CanvasThemePalette;
+          const bg = (palette.main && palette.main) || colors.soap200;
           const contrast = palette.contrast;
 
           return (
@@ -82,7 +85,7 @@ const ThemeDemo = (props: any) => {
                 if (key === 'contrast') {
                   return;
                 }
-                return createSwatch(key, palette[key], contrast);
+                return createSwatch(key, palette[key as Swatch], contrast);
               })}
             </Palette>
           );
