@@ -56,10 +56,10 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
     return {};
   }
 
-  const dark = shiftColor(shades.main);
-  const darkest = shiftColor(dark);
-  const light = shiftColor(shades.main, false);
-  const lightest = shiftColor(light, false);
+  const dark = shades.dark || shiftColor(shades.main);
+  const darkest = shades.darkest || shiftColor(dark);
+  const light = shades.light || shiftColor(shades.main, false);
+  const lightest = shades.lightest || shiftColor(light, false);
 
   return {
     lightest,
