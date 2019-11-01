@@ -64,7 +64,7 @@ async function main() {
 
 main().then(errors => {
   errors.forEach(error => {
-    console.error(formatErrorMessage(error));
+    console.log(formatErrorMessage(error));
   });
   process.exit(errors.length);
 });
