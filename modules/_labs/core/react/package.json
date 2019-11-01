@@ -37,8 +37,8 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.21",
     "@workday/canvas-colors-web": "^0.17.12",
-    "@workday/canvas-kit-react-core": "^3.0.0",
-    "emotion": "^9.2.12"
+    "@workday/canvas-kit-react-core": "^3.0.0"
   }
 }
