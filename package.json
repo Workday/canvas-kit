@@ -60,6 +60,7 @@
     "cypress-pipe": "^1.5.0",
     "cypress-plugin-tab": "^1.0.3",
     "cz-conventional-changelog": "^2.1.0",
+    "dependency-check": "^4.1.0",
     "emotion-theming": "^10.0.10",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
@@ -73,6 +74,7 @@
     "eslint-plugin-react-hooks": "^2.1.2",
     "file-loader": "^1.1.5",
     "fork-ts-checker-webpack-plugin": "^0.4.9",
+    "glob": "^7.1.5",
     "happypack": "^5.0.0",
     "husky": "^0.14.3",
     "inquirer": "^7.0.0",
@@ -129,7 +131,8 @@
     "test": "TZ=UTC jest",
     "bump": "lerna version",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "check-deps": "node utils/check-dependencies-exist.js"
   },
   "config": {
     "commitizen": {
