@@ -26,7 +26,7 @@ function findCharacter(pkg, dependency) {
 
 function formatErrorMessage(error) {
   if (process.env.GITHUB_ACTION) {
-    return `\n${error.file}\n##[warning]  ${error.line}:${error.character}  warning  ${error.message}  versions-must-match`;
+    return `\n${error.file}\n  ${error.line}:${error.character}  error  ${error.message}  versions-must-match`;
   } else {
     return `${error.file}\n  ${colors.dim(`${error.line}:${error.character}`)}  ${colors.red(
       'error'
