@@ -40,3 +40,18 @@ jobs:
         TRAVIS: true # Pretend to be Travis. More info: https://github.com/cypress-io/cypress/blob/develop/packages/server/lib/util/ci_provider.js
         TRAVIS_PULL_REQUEST_BRANCH: ${{ github.head_ref }} # Tell Cypress what the PR branch name is
         CYPRESS_RECORD_KEY: 3a9347b6-36ab-4a36-823d-709f4078b148
+
+	dependency_test:
+		runs-on: ubuntu-latest
+
+		steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Install Packages
+      run: yarn install --production=false
+    - name: Building
+      run: yarn build
+		- name: Checking Dependencies
+			run: yarn check-deps
