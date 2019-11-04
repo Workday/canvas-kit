@@ -114,6 +114,7 @@ const CustomFocusModalExample = () => {
 };
 
 storiesOf('Modal', module)
+  .addParameters({component: Modal})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

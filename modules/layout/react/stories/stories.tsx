@@ -8,6 +8,7 @@ import Layout from '../index';
 import README from '../README.md';
 
 storiesOf('Layout', module)
+  .addParameters({component: Layout})
   .addDecorator(withReadme(README))
   .add('Page Layout', () => (
     <div className="story">
