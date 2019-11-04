@@ -244,6 +244,7 @@ class CustomMenuItem extends React.Component<MenuItemProps> {
 }
 
 storiesOf('Labs/Menu/React', module)
+  .addParameters({component: Menu})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

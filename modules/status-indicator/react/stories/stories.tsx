@@ -8,6 +8,7 @@ import StatusIndicator from '../index';
 import README from '../README.md';
 
 storiesOf('Status Indicator', module)
+  .addParameters({component: StatusIndicator})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

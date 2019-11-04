@@ -7,6 +7,7 @@ import {Label, Hint} from '../index';
 import README from '../README.md';
 
 storiesOf('Form Field/Label', module)
+  .addParameters({component: Label})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -19,6 +20,7 @@ storiesOf('Form Field/Label', module)
     </div>
   ));
 storiesOf('Form Field', module)
+  .addParameters({component: Hint})
   .addDecorator(withReadme(README))
   .add('Hint', () => (
     <div className="story">
