@@ -43,11 +43,11 @@
     "@emotion/styled": "^10.0.17",
     "@workday/canvas-kit-react-common": "^3.0.0",
     "@workday/canvas-kit-react-core": "^3.0.0",
-    "@workday/design-assets-types": "^0.2.3"
+    "@workday/design-assets-types": "^0.2.4"
   },
   "devDependencies": {
     "@workday/canvas-accent-icons-web": "^1.0.0",
     "@workday/canvas-applet-icons-web": "^0.17.50",
-    "@workday/canvas-system-icons-web": "^1.0.1"
+    "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }
