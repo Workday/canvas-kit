@@ -7,11 +7,6 @@ const path = require('path');
 const {promisify} = require('util');
 const glob = promisify(require('glob'));
 
-// disable colors in CI
-if (process.env.GITHUB_ACTION) {
-  colors.disable();
-}
-
 const readFile = promisify(fs.readFile);
 
 function findLine(pkg, dependency) {
@@ -25,13 +20,9 @@ function findCharacter(pkg, dependency) {
 }
 
 function formatErrorMessage(error) {
-  if (process.env.GITHUB_ACTION) {
-    return `\n${error.file}\n  ${error.line}:${error.character}  error  ${error.message}  versions-must-match`;
-  } else {
-    return `${error.file}\n  ${colors.dim(`${error.line}:${error.character}`)}  ${colors.red(
-      'error'
-    )}  ${error.message}\n`;
-  }
+  return `${error.file}\n  ${colors.dim(`${error.line}:${error.character}`)}  ${colors.red(
+    'error'
+  )}  ${error.message}  ${colors.dim('versions-must-match')}\n`;
 }
 
 async function main() {
