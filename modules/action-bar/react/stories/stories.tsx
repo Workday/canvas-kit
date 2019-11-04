@@ -9,6 +9,7 @@ import README from '../README.md';
 
 storiesOf('Action Bar', module)
   .addDecorator(withReadme(README))
+  .addParameters({component: ActionBar})
   .add('Default', () => (
     <div className="story">
       <ActionBar>

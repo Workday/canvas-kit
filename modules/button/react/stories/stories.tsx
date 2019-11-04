@@ -38,6 +38,7 @@ const buttonContainer = {
 };
 
 storiesOf('Button', module)
+  .addParameters({component: Button})
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
@@ -248,6 +249,7 @@ storiesOf('Button', module)
   ));
 
 storiesOf('Button/Text', module)
+  .addParameters({component: TextButton})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -339,6 +341,7 @@ storiesOf('Button/Text', module)
   ));
 
 storiesOf('Button/Outline', module)
+  .addParameters({component: Button})
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
@@ -551,6 +554,7 @@ storiesOf('Button/Outline', module)
   ));
 
 storiesOf('Button/Dropdown', module)
+  .addParameters({component: DropdownButton})
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">

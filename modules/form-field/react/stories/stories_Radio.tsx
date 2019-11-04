@@ -12,6 +12,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Radio/Top Label/Radio Group', module)
+  .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" useFieldset={true}>
@@ -64,6 +65,7 @@ storiesOf('Form Field/Radio/Top Label/Radio Group', module)
   ));
 
 storiesOf('Form Field/Radio/Top Label/Radio', module)
+  .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label">
@@ -76,6 +78,7 @@ storiesOf('Form Field/Radio/Top Label/Radio', module)
   ));
 
 storiesOf('Form Field/Radio/Left Label/Radio Group', module)
+  .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" useFieldset={true} labelPosition={FormField.LabelPosition.Left}>
@@ -130,6 +133,7 @@ storiesOf('Form Field/Radio/Left Label/Radio Group', module)
   ));
 
 storiesOf('Form Field/Radio/Left Label/Radio', module)
+  .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" labelPosition={FormField.LabelPosition.Left}>

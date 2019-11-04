@@ -1,104 +1,15 @@
 const path = require('path');
-const HappyPack = require('happypack');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
 const utilsPath = path.resolve(__dirname, '../utils');
+const postcssConfigPath = path.resolve(__dirname, './postcss.config');
 
-const babelLoader = {
-  loader: 'babel-loader',
-  options: {
-    plugins: [
-      '@babel/plugin-transform-modules-commonjs',
-      [
-        'emotion',
-        {
-          autoLabel: true,
-          labelFormat: '[filename]__[local]',
-        },
-      ],
-    ],
-  },
-};
-
-const customRules = [
-  {
-    test: /\.tsx?$/,
-    exclude: /node_modules/,
-    include: [modulesPath, utilsPath],
-    loader: 'happypack/loader?id=ts',
-  },
-  {
-    test: /\.scss$/,
-    include: modulesPath,
-    use: [
-      {
-        loader: 'style-loader', // creates style nodes from JS strings
-        options: {
-          insertAt: {
-            before: '[data-emotion]',
-          },
-        },
-      },
-      {
-        loader: 'css-loader',
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          config: {
-            path: require.resolve('./postcss.config.js'),
-          },
-          sourceMap: true,
-        },
-      },
-      {
-        loader: 'sass-loader', // compiles Sass to CSS
-        options: {
-          includePaths: [modulesPath],
-          sourceMap: true,
-        },
-      },
-    ],
-  },
-  {
-    test: /\.css$/,
-    use: [
-      {
-        loader: 'style-loader',
-        options: {
-          insertAt: {
-            before: '[data-emotion]',
-          },
-        },
-      },
-      'css-loader',
-    ],
-  },
-  {
-    test: /\.(jpe?g|png|gif|svg|ttf)$/i,
-    use: [
-      {
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]',
-        },
-      },
-    ],
-  },
-];
-
-// TODO: We merge with Create React App's webpack.config.js since we include `react-scripts` as a devDep
-// There is some config from CRA that we need in order to build Storybook correctly
-// If you build without it, you get weird behavior like Button backgrounds disappearing
-module.exports = async ({config}) => {
+module.exports = ({config, mode}) => {
   // Exclude all node_modules from babel-loader
   config.module.rules
     .find(rule => /mjs\|jsx/.test(rule.test.toString()))
     .exclude.push(/node_modules/);
-
-  // Remove any scss/sass rules that ship with storybook
-  config.module.rules = config.module.rules.filter(rule => !/scss|sass/.test(rule.test.toString()));
 
   // Filter out extraneous rules added by CRA (react-scripts)
   // react-scripts automatically adds js/ts matchers for a `src` folder which we don't use so these rules are moot
@@ -106,33 +17,54 @@ module.exports = async ({config}) => {
     rule => !/js\|mjs\|jsx\|ts\|tsx/.test(rule.test.toString())
   );
 
-  // Add our custom rules
-  config.module.rules.push(...customRules);
+  // Override CRA postcss presets
+  config.module.rules.forEach(rule => {
+    if (rule.test.toString().includes('scss|sass')) {
+      delete rule.use[2].options.plugins;
+
+      rule.use[2].options.config = {
+        path: postcssConfigPath,
+      };
+    }
+  });
 
   // Add `.ts` and `.tsx` as a resolvable extension.
   config.resolve.extensions = ['.ts', '.tsx', '.js', '.jsx'];
 
-  config.plugins.push(
-    new HappyPack({
-      id: 'ts',
-      threads: 2,
-      loaders: [
-        babelLoader,
-        {
-          path: 'ts-loader',
-          query: {
-            happyPackMode: true,
-            configFile: path.join(__dirname, './tsconfig.json'),
+  // Load all module files and transpile using babel + ts
+  config.module.rules.push({
+    test: /\.(ts|tsx)$/,
+    include: [modulesPath, utilsPath],
+    loader: require.resolve('babel-loader'),
+    options: {
+      presets: [['react-app', {flow: false, typescript: true}]],
+      plugins: [
+        '@babel/plugin-transform-modules-commonjs',
+        [
+          'emotion',
+          {
+            autoLabel: true,
+            labelFormat: '[filename]__[local]',
           },
-        },
+        ],
       ],
-    }),
-    new ForkTsCheckerWebpackPlugin({
-      checkSyntacticErrors: true,
-      tsconfig: path.join(__dirname, 'tsconfig.json'),
-      eslint: true,
-    })
-  );
+    },
+  });
+
+  // Load the source code of story files to display in docs.
+  config.module.rules.push({
+    test: /stories.*\.tsx?$/,
+    include: [modulesPath],
+    loaders: [
+      {
+        loader: require.resolve('@storybook/source-loader'),
+        options: {parser: 'typescript'},
+      },
+    ],
+    enforce: 'pre',
+  });
+
+  config.plugins.push(new DocgenPlugin());
 
   return config;
 };

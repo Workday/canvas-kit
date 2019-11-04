@@ -8,7 +8,7 @@ export interface RadioGroupProps extends GrowthBehavior {
   /**
    * React children must be of type Radio and have at least two.
    */
-  children: React.ReactElement<Radio>[];
+  children: React.ReactElement<RadioProps>[];
 
   /**
    * The value or index of the Radio that should be toggled on.
