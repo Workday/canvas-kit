@@ -80,6 +80,7 @@ const createTable = (filter?: TableFilters) => {
 };
 
 storiesOf('Table', module)
+  .addParameters({component: Table})
   .addDecorator(withReadme(README))
   .add('Default', () => {
     return <div className="story">{createTable()}</div>;

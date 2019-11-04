@@ -10,6 +10,7 @@ import PageHeader from '../index';
 import README from '../README.md';
 
 storiesOf('Page Header', module)
+  .addParameters({component: PageHeader})
   .addDecorator(withReadme(README))
   .add('Product Page Header', () => (
     <div className="story">

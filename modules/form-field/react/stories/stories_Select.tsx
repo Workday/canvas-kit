@@ -12,6 +12,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Select/Top Label', module)
+  .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Plain', () => (
     <FormField label="Label" inputId="select-plain">
@@ -106,6 +107,7 @@ storiesOf('Form Field/Select/Top Label', module)
   ));
 
 storiesOf('Form Field/Select/Left Label', module)
+  .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Plain', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-plain">

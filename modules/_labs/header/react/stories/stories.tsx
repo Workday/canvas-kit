@@ -124,6 +124,7 @@ class SearchWithAutoComplete extends React.Component<
 }
 
 storiesOf('Labs/Header/React', module)
+  .addParameters({component: Header})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .add('Global Header', () => (

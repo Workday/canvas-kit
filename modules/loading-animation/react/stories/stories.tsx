@@ -7,6 +7,7 @@ import {LoadingDots} from '../index';
 import README from '../README.md';
 
 storiesOf('Loading Animation', module)
+  .addParameters({component: LoadingDots})
   .addDecorator(withReadme(README))
   .add('Loading Dots', () => (
     <div className="story">
