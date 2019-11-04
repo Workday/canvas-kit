@@ -46,7 +46,7 @@
     "@workday/canvas-kit-react-common": "^3.0.0",
     "@workday/canvas-kit-react-core": "^3.0.0",
     "@workday/canvas-kit-react-text-input": "^3.0.1",
-    "@workday/canvas-system-icons-web": "^1.0.18",
+    "@workday/canvas-system-icons-web": "^1.0.20",
     "uuid": "^3.3.3"
   }
 }
