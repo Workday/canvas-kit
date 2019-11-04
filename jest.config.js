@@ -24,6 +24,9 @@ module.exports = {
       statements: 65,
     },
   },
+  transform: {
+    '^.+\\.[tj]sx?$': 'ts-jest',
+  },
   moduleFileExtensions: ['tsx', 'ts', 'js', 'jsx', 'json'],
   testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
   testPathIgnorePatterns: ['/cypress/'],
