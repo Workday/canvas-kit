@@ -79,6 +79,7 @@
     "jest-junit": "^6.4.0",
     "lerna": "^3.13.1",
     "lint-staged": "8.0.5",
+    "markdown-to-jsx": "^6.10.3",
     "mkdirp": "^0.5.1",
     "node-cmd": "^3.0.0",
     "node-fetch": "^2.1.2",
