@@ -135,7 +135,7 @@ const Container = styled('span')<Pick<StatusIndicatorProps, 'type' | 'emphasis'>
 
 const StatusLabel = styled('span')({
   fontWeight: 'bold',
-  '-webkit-font-smoothing': 'antialiased',
+  WebkitFontSmoothing: 'antialiased',
   textTransform: 'uppercase',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
