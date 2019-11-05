@@ -74,11 +74,8 @@ storiesOf('Labs/Drawer/React', module)
       <div style={{height: '80vh', position: 'relative'}}>
         <Drawer
           role={'test'}
-          ariaLabel={'yes'}
-          ariaLabeledBy={'asrgrtgvgrt'}
           header={
             <DrawerHeader
-              id={'hello'}
               headerColor={text(headerColor, headerColorDefaultValue)}
               inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
               onClose={action('onClose callback')}
