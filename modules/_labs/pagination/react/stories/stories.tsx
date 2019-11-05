@@ -34,11 +34,10 @@ const PaginationExample2 = () => {
 
   return (
     <Wrapper>
-      <h3>Page: {currentPage}</h3>
+      <h3>Single Page - Page: {currentPage}</h3>
       <Pagination
-        total={48}
-        label={{itemLabel: 'user'}}
-        pageSize={13}
+        total={1}
+        pageSize={100}
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
       />
@@ -51,23 +50,7 @@ const PaginationExample3 = () => {
 
   return (
     <Wrapper>
-      <h3>Page: {currentPage}</h3>
-      <Pagination
-        total={1}
-        pageSize={100}
-        currentPage={currentPage}
-        onPageChange={p => setCurrentPage(p)}
-      />
-    </Wrapper>
-  );
-};
-
-const PaginationExample4 = () => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-
-  return (
-    <Wrapper>
-      <h3>Page: {currentPage}</h3>
+      <h3>More Than Five Pages - Page: {currentPage}</h3>
       <Pagination
         total={100}
         pageSize={10}
@@ -89,8 +72,6 @@ storiesOf('Labs/Pagination', module)
         <PaginationExample2 />
         <br />
         <PaginationExample3 />
-        <br />
-        <PaginationExample4 />
       </div>
     </div>
   ));

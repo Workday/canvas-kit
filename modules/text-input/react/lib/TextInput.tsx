@@ -1,7 +1,7 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
-import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
+import {errorRing, ErrorType, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
+import * as React from 'react';
 
 export interface TextInputProps
   extends GrowthBehavior,
@@ -14,6 +14,9 @@ export interface TextInputProps
   readOnly?: boolean;
   type?: string;
   value?: any;
+  width?: number;
+  min?: number;
+  max?: number;
 }
 
 const Input = styled('input')<TextInputProps>(
@@ -25,7 +28,6 @@ const Input = styled('input')<TextInputProps>(
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',
     height: 40,
-    minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // Compensate for border
     margin: 0, // Fix Safari
@@ -51,6 +53,10 @@ const Input = styled('input')<TextInputProps>(
   },
   ({error}) => ({
     ...errorRing(error),
+  }),
+  ({width}) => ({
+    minWidth: width || 280,
+    width: width || 280,
   }),
   ({grow}) =>
     grow && {
