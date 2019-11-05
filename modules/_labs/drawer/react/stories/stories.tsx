@@ -76,15 +76,15 @@ storiesOf('Labs/Drawer/React', module)
           role={'test'}
           ariaLabel={'yes'}
           ariaLabeledBy={'asrgrtgvgrt'}
-          // header={
-          //   <DrawerHeader
-          //     id={'hello'}
-          //     headerColor={text(headerColor, headerColorDefaultValue)}
-          //     inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
-          //     onClose={action('onClose callback')}
-          //     title={text(headerTitle, title)}
-          //   />
-          // }
+          header={
+            <DrawerHeader
+              id={'hello'}
+              headerColor={text(headerColor, headerColorDefaultValue)}
+              inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
+              onClose={action('onClose callback')}
+              title={text(headerTitle, title)}
+            />
+          }
           openDirection={select(label, options, defaultValue)}
           padding={select(paddingLabel, paddingOptions, paddingDefault)}
           showDropShadow={boolean(showDropShadowLabel, showDropShadow)}
