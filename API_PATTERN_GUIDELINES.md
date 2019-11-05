@@ -24,6 +24,7 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 - [Code Style](#code-style)
   - [Default Props](#default-props)
   - [Class Function Binding](#class-function-binding)
+  - [Arrow and Bound Functions in Render](#arrow-and-bound-functions-in-render)
   - [Element Choice](#element-choice)
   - [Styled Components](#styled-components)
   - [Exports](#exports)
@@ -182,9 +183,7 @@ const { type, size, icon, ...elemProps } = this.props
 
 - When a consumer
   [needs a reference to an underlying element](https://reactjs.org/docs/refs-and-the-dom.html#when-to-use-refs)
-  (to manage focus, check DOM ancestors, etc.), use emotion components' `innerRef` prop. Note: with
-  emotion 10,
-  this[ will change to `ref`](https://medium.com/emotion-js/announcing-emotion-10-f1a4b17b8ccd#71bb)
+  (to manage focus, check DOM ancestors, etc.), use emotion components' `ref` prop.
 - When providing a ref prop, indicate what element it's tied to (generally by using the type of
   element if it's descriptive enough for your component). E.g. `inputRef`
 
@@ -248,6 +247,16 @@ foo();
   `this.onChange = this.onChange.bind(this)`).
 - We recommend using an arrow function for your class function to avoid this
 - Since we avoid state where possible, doing so often enables you to remove the constructor
+
+#### Arrow and Bound Functions in Render
+
+- A `.bind()` call or arrow function in a JSX prop will create a brand new function on every single
+  render.
+- This is bad for performance, as it may cause unnecessary re-renders, so avoid it where possible.
+- This is available as an
+  [ESLint rule (react/jsx-no-bind)](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md).
+  However, we are still using these in several places (particularly stories) for better code
+  readability so we decided to disable it for now.
 
 #### Element Choice
 

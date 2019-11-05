@@ -1,4 +1,4 @@
-import {CSSObject} from 'create-emotion';
+import {CSSObject} from '@emotion/core';
 
 export function stripUnit(value: string): number {
   return parseInt(`${value}`.replace('px', ''), 10);

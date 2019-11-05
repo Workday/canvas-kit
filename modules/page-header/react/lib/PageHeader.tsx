@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 
@@ -45,7 +45,7 @@ const Title = styled('h2')({
   color: colors.frenchVanilla100,
   padding: `${spacing.xs} 0`,
   margin: 0,
-  'white-space': 'nowrap',
+  whiteSpace: 'nowrap',
 });
 
 const IconList = styled('div')({

@@ -22,6 +22,7 @@ const graphicExample: CanvasGraphic = {
 };
 
 storiesOf('Icon', module)
+  .addParameters({component: AccentIcon})
   .addDecorator(withReadme(README))
   .add('Accent Icon', () => (
     <div className="story">
@@ -39,7 +40,10 @@ storiesOf('Icon', module)
       <br />
       <AccentIcon icon={shieldIcon} size={80} />
     </div>
-  ))
+  ));
+
+storiesOf('Icon', module)
+  .addParameters({component: AppletIcon})
   .add('Applet Icon', () => (
     <div className="story">
       <AppletIcon icon={benefitsIcon} />
@@ -47,7 +51,10 @@ storiesOf('Icon', module)
       <br />
       <AppletIcon icon={benefitsIcon} size={60} />
     </div>
-  ))
+  ));
+
+storiesOf('Icon', module)
+  .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
       <SystemIcon icon={activityStreamIcon} />
@@ -82,7 +89,10 @@ storiesOf('Icon', module)
       <SystemIconCircle icon={activityStreamIcon} />
       <SystemIconCircle icon={activityStreamIcon} background={colors.blueberry400} />
     </div>
-  ))
+  ));
+
+storiesOf('Icon', module)
+  .addParameters({component: Graphic})
   .add('Graphic', () => (
     <div className="story">
       <Graphic src={graphicExample} />

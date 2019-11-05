@@ -1,5 +1,4 @@
-import {keyframes} from 'react-emotion';
-import {CSSObject} from 'create-emotion';
+import {keyframes, CSSObject} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
 import memoize from 'lodash/memoize';
 

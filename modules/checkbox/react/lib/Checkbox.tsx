@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -21,6 +21,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   onChange?: (e: React.SyntheticEvent) => void;
   value?: string;
   error?: ErrorType;
+  indeterminate?: boolean;
 }
 
 const checkboxHeight = 18;
@@ -218,6 +219,12 @@ const CheckboxCheck = styled('div')<Pick<CheckboxProps, 'checked'>>(
   })
 );
 
+const IndeterminateBox = styled('div')({
+  width: '10px',
+  height: '2px',
+  backgroundColor: canvas.colors.frenchVanilla100,
+});
+
 const CheckboxLabel = styled('label')<{disabled?: boolean}>(
   {
     ...canvas.type.body,
@@ -247,6 +254,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
       onChange,
       value,
       error,
+      indeterminate,
       ...elemProps
     } = this.props;
 
@@ -257,7 +265,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
             checked={checked}
             disabled={disabled}
             id={id}
-            innerRef={inputRef}
+            ref={inputRef}
             onChange={onChange}
             type="checkbox"
             value={value}
@@ -266,7 +274,11 @@ export default class Checkbox extends React.Component<CheckboxProps> {
           />
           <CheckboxBackground checked={checked} disabled={disabled}>
             <CheckboxCheck checked={checked}>
-              <SystemIcon icon={checkSmallIcon} color={iconColors.inverse} />
+              {indeterminate ? (
+                <IndeterminateBox />
+              ) : (
+                <SystemIcon icon={checkSmallIcon} color={iconColors.inverse} />
+              )}
             </CheckboxCheck>
           </CheckboxBackground>
         </CheckboxInputWrapper>

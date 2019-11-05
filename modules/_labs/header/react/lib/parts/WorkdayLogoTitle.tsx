@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {HeaderHeight, HeaderTheme, HeaderVariant} from '../shared/types';
 import {miniWdayLogoBlue, wdayLogoWhite, wdayLogoBlue} from '@workday/canvas-kit-react-common'; // TODO: Replace with real SVGs from @workday/brand-assets
 import {colors, spacing} from '@workday/canvas-kit-react-core';
@@ -40,7 +40,7 @@ const Title = styled('h3')<WorkdayLogoTitleProps>(
     padding: spacing.s,
     paddingLeft: spacing.m,
     paddingRight: spacing.l,
-    'white-space': 'nowrap',
+    whiteSpace: 'nowrap',
     display: 'initial',
   },
   ({themeColor}) => ({

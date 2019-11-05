@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'react-emotion';
-import {keyframes} from 'emotion';
+import styled from '@emotion/styled';
+import {keyframes} from '@emotion/core';
 import uuid from 'uuid/v4';
 
 import Card from '@workday/canvas-kit-react-card';
@@ -24,6 +24,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   width?: number | string;
   heading?: React.ReactNode;
   depth?: CanvasDepthValue;
+  closeLabel: string;
 }
 
 const closeIconSpacing = spacing.xs;
@@ -73,6 +74,7 @@ export default class Popup extends React.Component<PopupProps> {
   static defaultProps = {
     padding: Popup.Padding.l,
     closeIconSize: IconButton.Size.Medium,
+    closeLabel: 'Close',
     transformOrigin: {
       horizontal: 'center',
       vertical: 'top',
@@ -92,6 +94,7 @@ export default class Popup extends React.Component<PopupProps> {
       closeIconSize,
       transformOrigin,
       popupRef,
+      closeLabel,
       ...elemProps
     } = this.props;
 
@@ -101,19 +104,20 @@ export default class Popup extends React.Component<PopupProps> {
         width={width}
         role="dialog"
         aria-labelledby={heading ? this.id : undefined}
-        innerRef={popupRef}
+        ref={popupRef}
         {...elemProps}
       >
         {handleClose && (
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton
+              data-close="close" // Allows for grabbing focus to the close button rather than relying on the aria label "Close" which will change based on different languages
               ref={this.closeButtonRef}
               variant={IconButton.Variant.Plain}
               size={closeIconSize}
               onClick={handleClose}
               icon={xIcon}
-              title="Close"
-              aria-label="Close"
+              title={closeLabel}
+              aria-label={closeLabel}
             />
           </CloseIconContainer>
         )}

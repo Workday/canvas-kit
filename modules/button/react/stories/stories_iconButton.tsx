@@ -1,4 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
+/** @jsx jsx */
+import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -19,8 +21,6 @@ import {
 } from '../index';
 
 import README from '../README.md';
-import {css} from 'emotion';
-import {CSSObject} from 'create-emotion';
 import {IconButtonProps} from '../lib/IconButton';
 
 const blueBackground: CSSObject = {
@@ -103,6 +103,7 @@ export class IconButtonToggleGroupWrapper extends React.Component<
 }
 
 storiesOf('Button/Icon Button', module)
+  .addParameters({component: IconButton})
   .addDecorator(withReadme(README))
   .add('Circle', () => (
     <div className="story">
@@ -267,7 +268,7 @@ storiesOf('Button/Icon Button', module)
   .add('Inverse', () => (
     <div className="story">
       <h3>Medium Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Medium}
@@ -282,7 +283,7 @@ storiesOf('Button/Icon Button', module)
         />
       </div>
       <h3>Small Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <IconButton
           icon={activityStreamIcon}
           size={IconButton.Size.Small}
@@ -297,7 +298,7 @@ storiesOf('Button/Icon Button', module)
         />
       </div>
       <h3>Toggleable Inverse</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <ToggleIconButtonWrapper variant={IconButton.Variant.Inverse} />
       </div>
     </div>
@@ -305,7 +306,7 @@ storiesOf('Button/Icon Button', module)
   .add('Inverse Filled', () => (
     <div className="story">
       <h3>Medium Inverse Filled</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Medium}
@@ -320,7 +321,7 @@ storiesOf('Button/Icon Button', module)
         />
       </div>
       <h3>Small Inverse Filled</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <IconButton
           {...commonIconButtonProps}
           size={IconButton.Size.Small}
@@ -335,13 +336,14 @@ storiesOf('Button/Icon Button', module)
         />
       </div>
       <h3>Toggleable Inverse Filled</h3>
-      <div className={css(blueBackground)}>
+      <div css={blueBackground}>
         <ToggleIconButtonWrapper variant={IconButton.Variant.InverseFilled} />
       </div>
     </div>
   ));
 
 storiesOf('Button/Icon Button Toggle Group', module)
+  .addParameters({component: IconButtonToggleGroup})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

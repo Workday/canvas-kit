@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ColorInput from './ColorInput';
 import {TextInputProps} from '@workday/canvas-kit-react-text-input';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {colors} from '@workday/canvas-kit-react-core';
 
 export interface ColorPreviewProps extends TextInputProps {

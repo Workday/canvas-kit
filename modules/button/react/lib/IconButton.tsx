@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {getButtonStyle} from './ButtonBase';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {IconButtonVariant, IconButtonSize} from './types';
 import {iconButtonStyles} from './ButtonStyles';
+import {getButtonStyle} from './utils';
 import {colors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {CSSObject} from 'create-emotion';
+import {CSSObject} from '@emotion/core';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -39,6 +39,30 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * Callback that fires when a button changes toggled states
    */
   onToggleChange?: (toggled: boolean | undefined) => void;
+}
+
+function getFillSelector(fillColor: string): CSSObject {
+  return {
+    '&:focus span .wd-icon-fill, &:hover span .wd-icon-fill, span .wd-icon-fill': {
+      fill: fillColor,
+    },
+  };
+}
+
+function getBackgroundSelector(fillColor: string): CSSObject {
+  return {
+    '&:hover span .wd-icon-background, span .wd-icon-background': {
+      fill: fillColor,
+    },
+  };
+}
+
+function getAccentSelector(fillColor: string): CSSObject {
+  return {
+    '&:focus span .wd-icon-accent, &:hover span .wd-icon-accent, span .wd-icon-accent': {
+      fill: fillColor,
+    },
+  };
 }
 
 export const IconButtonCon = styled('button', {
@@ -149,30 +173,6 @@ export const IconButtonCon = styled('button', {
   }
 );
 
-function getFillSelector(fillColor: string): CSSObject {
-  return {
-    '&:focus span .wd-icon-fill, &:hover span .wd-icon-fill, span .wd-icon-fill': {
-      fill: fillColor,
-    },
-  };
-}
-
-function getBackgroundSelector(fillColor: string): CSSObject {
-  return {
-    '&:hover span .wd-icon-background, span .wd-icon-background': {
-      fill: fillColor,
-    },
-  };
-}
-
-function getAccentSelector(fillColor: string): CSSObject {
-  return {
-    '&:focus span .wd-icon-accent, &:hover span .wd-icon-accent, span .wd-icon-accent': {
-      fill: fillColor,
-    },
-  };
-}
-
 export default class IconButton extends React.Component<IconButtonProps> {
   public static Variant = IconButtonVariant;
   public static Size = IconButtonSize;
@@ -207,7 +207,7 @@ export default class IconButton extends React.Component<IconButtonProps> {
     return (
       <IconButtonCon
         toggled={toggled}
-        innerRef={buttonRef}
+        ref={buttonRef}
         variant={variant}
         size={size}
         aria-pressed={toggled}

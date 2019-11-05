@@ -18,6 +18,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Checkbox/Top Label', module)
+  .addParameters({component: Checkbox})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="my-checkbox-field">
@@ -27,6 +28,11 @@ storiesOf('Form Field/Checkbox/Top Label', module)
   .add('Disabled', () => (
     <FormField label="Label" inputId="my-checkbox-field">
       {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+    </FormField>
+  ))
+  .add('Indeterminate', () => (
+    <FormField label="Label" inputId="my-checkbox-field">
+      {control(<Checkbox id="1" label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
   .add('Alert', () => (
@@ -53,6 +59,7 @@ storiesOf('Form Field/Checkbox/Top Label', module)
   ));
 
 storiesOf('Form Field/Checkbox/Left Label', module)
+  .addParameters({component: Checkbox})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField
@@ -70,6 +77,15 @@ storiesOf('Form Field/Checkbox/Left Label', module)
       labelPosition={FormField.LabelPosition.Left}
     >
       {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+    </FormField>
+  ))
+  .add('Indeterminate', () => (
+    <FormField
+      label="Label"
+      inputId="my-checkbox-field"
+      labelPosition={FormField.LabelPosition.Left}
+    >
+      {control(<Checkbox id="1" label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
   .add('Alert', () => (

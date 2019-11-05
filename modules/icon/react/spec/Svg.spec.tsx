@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {shallow, render} from 'enzyme';
+import {render as rtlRender} from '@testing-library/react';
 import Svg from '../lib/Svg';
 import {CanvasIconTypes} from '@workday/design-assets-types';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
@@ -24,15 +25,18 @@ describe('Icon component', () => {
     const testProps = {
       className: customClassName,
     };
-    const component = shallow(
+    const {container} = rtlRender(
       <Svg src={shieldIcon} elemProps={testProps} type={CanvasIconTypes.Accent} styles={{}} />
     );
-    const classNames = component.props().className.split(' ');
 
-    expect(component.props().className.includes(customClassName));
+    expect(container.firstChild).toHaveClass(customClassName);
 
     // The user defined class (customClassName), should always be last
-    expect(classNames.pop()).toBe(customClassName);
-    component.unmount();
+    expect(
+      container
+        .querySelector('span')!
+        .className.split(' ')
+        .reverse()[0]
+    ).toBe(customClassName);
   });
 });

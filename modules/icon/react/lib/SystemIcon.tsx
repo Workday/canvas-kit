@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {iconColors} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
-import {CSSObject} from 'create-emotion';
+import {CSSObject} from '@emotion/core';
 import Icon from './Icon';
 import {SpanProps} from './types';
 

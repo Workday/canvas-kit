@@ -1,5 +1,7 @@
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core';
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {
   pickForegroundColor,
   expandHex,
@@ -7,14 +9,12 @@ import {
   ErrorType,
 } from '@workday/canvas-kit-react-common';
 import {colors, borderRadius, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
-import {css} from 'emotion';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 
 export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   value: string;
-  inputRef?: React.Ref<HTMLInputElement>;
   showCheck?: boolean;
   placeholder: string;
   error?: ErrorType;
@@ -129,7 +129,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           <SystemIcon
             fill={pickForegroundColor(formattedValue)}
             fillHover={pickForegroundColor(formattedValue)}
-            className={swatchCheckIcon}
+            css={swatchCheckIcon}
             icon={checkSmallIcon}
           />
         ) : null}

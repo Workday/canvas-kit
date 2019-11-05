@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import Radio, {RadioProps} from './Radio';
 import {borderRadius, spacing, inputColors, colors} from '@workday/canvas-kit-react-core';
 import {ErrorType, GrowthBehavior} from '@workday/canvas-kit-react-common';
@@ -8,7 +8,7 @@ export interface RadioGroupProps extends GrowthBehavior {
   /**
    * React children must be of type Radio and have at least two.
    */
-  children: React.ReactElement<Radio>[];
+  children: React.ReactElement<RadioProps>[];
 
   /**
    * The value or index of the Radio that should be toggled on.

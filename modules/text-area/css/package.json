@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-text-area",
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0",
   "description": "The text-area css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -30,7 +30,7 @@
     "workday"
   ],
   "dependencies": {
-    "@workday/canvas-kit-css-common": "^3.0.0-beta.0",
-    "@workday/canvas-kit-css-core": "^3.0.0-beta.0"
+    "@workday/canvas-kit-css-common": "^3.0.0",
+    "@workday/canvas-kit-css-core": "^3.0.0"
   }
 }

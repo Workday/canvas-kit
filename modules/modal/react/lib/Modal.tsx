@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from 'react-emotion';
-import {keyframes} from 'emotion';
+import styled from '@emotion/styled';
+import {keyframes} from '@emotion/core';
 import FocusTrap from 'focus-trap-react';
 
 import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
@@ -76,7 +76,11 @@ function onInitialFocus(
   if (firstFocusEl) {
     return firstFocusEl;
   } else {
-    const firstFocusable = modalEl && modalEl.querySelector<HTMLElement>('[aria-label=Close],h3');
+    const firstFocusable =
+      modalEl &&
+      modalEl.querySelector<HTMLElement>(
+        `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
+      );
     if (firstFocusable) {
       if (firstFocusable.tagName === 'H3') {
         // If there is no close icon, we need to transfer focus to the header.
@@ -136,15 +140,12 @@ export default class Modal extends React.Component<ModalProps> {
     document.removeEventListener('keydown', this.handleKeydown);
   }
 
-  private handleOutsideClick = (
-    handleClose: (() => void) | undefined,
-    event: React.MouseEvent<HTMLDivElement>
-  ) => {
+  private handleOutsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const {target} = event;
     const modalNode = this.modalRef.current;
-    if (modalNode && handleClose) {
+    if (modalNode && this.props.handleClose) {
       if (!modalNode.contains(target as Node)) {
-        handleClose();
+        this.props.handleClose();
       }
     }
   };
@@ -170,7 +171,7 @@ export default class Modal extends React.Component<ModalProps> {
               onInitialFocus(this.modalRef.current, firstFocusableRef && firstFocusableRef.current),
           }}
         >
-          <Container onClick={e => this.handleOutsideClick(handleClose, e)} {...elemProps}>
+          <Container onClick={this.handleOutsideClick} {...elemProps}>
             <Popup
               popupRef={this.modalRef}
               width={width}

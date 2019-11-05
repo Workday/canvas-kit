@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {colors, spacing} from '@workday/canvas-kit-react-core';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import chroma from 'chroma-js';
@@ -43,7 +43,7 @@ const Title = styled('h3')<DubTitleProps>(
     padding: `${spacing.xxs} ${spacing.s}`,
     paddingRight: spacing.l,
     marginLeft: spacing.s,
-    'white-space': 'nowrap',
+    whiteSpace: 'nowrap',
   },
   ({themeColor}) => ({
     color: themeColor === HeaderTheme.White ? colors.blueberry500 : colors.frenchVanilla100,

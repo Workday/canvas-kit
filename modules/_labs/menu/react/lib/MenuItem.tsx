@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {
   colors,
   commonColors,
@@ -35,7 +35,7 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    transition: 'background-color 80ms',
+    transition: 'background-color 80ms, color 80ms',
     '&:focus': {
       outline: 'none',
     },
@@ -174,7 +174,7 @@ export default class MenuItem extends React.Component<MenuItemProps> {
           tabIndex={-1}
           id={id}
           role={role}
-          onClick={event => this.handleClick(event)}
+          onClick={this.handleClick}
           aria-disabled={!!isDisabled}
           isDisabled={!!isDisabled}
           isFocused={!!isFocused}

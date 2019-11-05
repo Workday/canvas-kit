@@ -16,6 +16,7 @@ const handleAvatarButtonClick = (e: React.SyntheticEvent) => {
 storiesOf('Avatar/Default', module)
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
+  .addParameters({component: Avatar})
   .add('Light', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
@@ -68,6 +69,7 @@ storiesOf('Avatar/Default', module)
 storiesOf('Avatar/AvatarButton', module)
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
+  .addParameters({component: AvatarButton})
   .add('Light', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>

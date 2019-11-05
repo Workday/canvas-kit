@@ -1,6 +1,7 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {accessibleHide as accessibleHideCSS} from '@workday/canvas-kit-react-common';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {
@@ -8,6 +9,8 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
   isLegend: boolean;
   htmlFor?: string;
   required?: boolean;
+  requiredLabel: string;
+  accessibleHide?: boolean;
 }
 
 const labelStyles = [
@@ -16,7 +19,10 @@ const labelStyles = [
     ...type.variant.label,
     padding: 0,
   },
-  ({labelPosition}: {labelPosition: FormFieldLabelPosition}) => {
+  ({labelPosition, accessibleHide}: Pick<LabelProps, 'labelPosition' | 'accessibleHide'>) => {
+    if (accessibleHide) {
+      return accessibleHideCSS;
+    }
     return {
       ...(labelPosition === FormFieldLabelPosition.Left
         ? {
@@ -53,6 +59,7 @@ export default class Label extends React.Component<LabelProps> {
   static defaultProps = {
     labelPosition: Label.Position.Top,
     isLegend: false,
+    requiredLabel: 'required',
   };
 
   public render() {
@@ -61,7 +68,7 @@ export default class Label extends React.Component<LabelProps> {
       ? props.children
       : [
           props.children,
-          <RequiredAstrisk key={'0'} title="required">
+          <RequiredAstrisk key={'0'} title={props.requiredLabel}>
             *
           </RequiredAstrisk>,
         ];

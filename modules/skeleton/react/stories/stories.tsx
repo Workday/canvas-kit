@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {number} from '@storybook/addon-knobs';
@@ -20,6 +20,7 @@ const FlexContainer = styled('div')({
 });
 
 storiesOf('Skeleton', module)
+  .addParameters({component: Skeleton})
   .addDecorator(withReadme(README))
   .add('Complete', () => {
     return (

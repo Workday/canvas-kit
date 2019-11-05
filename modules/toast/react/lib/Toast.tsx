@@ -6,7 +6,7 @@ import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TransformOrigin} from '@workday/canvas-kit-react-common';
 import {IconButtonSize} from '@workday/canvas-kit-react-button';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 export interface ToastProps {
   icon: CanvasSystemIcon;
@@ -52,7 +52,7 @@ const Message = styled('div')({
 
 export default class Toast extends React.Component<ToastProps> {
   static defaultProps = {
-    icon: checkIcon,
+    icon: checkIcon as CanvasSystemIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
     iconColor: colors.greenApple400,
   };
 

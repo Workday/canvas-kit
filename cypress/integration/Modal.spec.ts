@@ -16,6 +16,10 @@ describe('Modal', () => {
         h.stories.load('Modal', story);
       });
 
+      it('should not have any axe errors', () => {
+        cy.checkA11y();
+      });
+
       context('when button is focused', () => {
         beforeEach(() => {
           getModalTargetButton().focus();
@@ -33,6 +37,10 @@ describe('Modal', () => {
 
         it('should open the modal', () => {
           h.modal.get().should('be.visible');
+        });
+
+        it('should not have any axe errors', () => {
+          cy.checkA11y();
         });
 
         context('the modal', () => {
@@ -130,6 +138,10 @@ describe('Modal', () => {
       h.stories.load('Modal', 'Without close icon');
     });
 
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
     context('when button is focused', () => {
       beforeEach(() => {
         getModalTargetButton().focus();
@@ -147,6 +159,10 @@ describe('Modal', () => {
 
       it('should open the modal', () => {
         h.modal.get().should('be.visible');
+      });
+
+      it('should not have any axe errors', () => {
+        cy.checkA11y();
       });
 
       it('should transfer focus to the header element', () => {

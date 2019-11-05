@@ -52,9 +52,9 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
           </IconButton>
         )}
         <ul>
-          <li className={listItemStyles}>{open && <span>Home</span>}</li>
-          <li className={listItemStyles}>{open && <span>Favorites</span>}</li>
-          <li className={listItemStyles}>{open && <span>Items</span>}</li>
+          <li css={listItemStyles}>{open && <span>Home</span>}</li>
+          <li css={listItemStyles}>{open && <span>Favorites</span>}</li>
+          <li css={listItemStyles}>{open && <span>Items</span>}</li>
         </ul>
       </SidePanel>
     );
@@ -121,6 +121,18 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
 #### `header: string | React.ReactNode`
 
 > Custom title or element to display as a header to the side panel.
+
+---
+
+#### `closeNavigationLabel: string`
+
+> Aria label for closing the navigation
+
+---
+
+#### `openNavigationLabel: string`
+
+> Aria label for opening the navigation
 
 ---
 

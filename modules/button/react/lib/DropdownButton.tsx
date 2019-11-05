@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {ButtonBaseLabel, ButtonLabelIcon, getButtonStyle, getButtonSize} from './ButtonBase';
-import styled from 'react-emotion';
+import {ButtonBaseLabel, ButtonLabelIcon} from './ButtonBase';
+import {getButtonStyle, getButtonSize} from './utils';
+import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {BaseButtonProps} from './Button';
 import {dropdownButtonStyles} from './ButtonStyles';
@@ -28,7 +29,7 @@ export default class DropdownButton extends React.Component<BaseButtonProps> {
     const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
 
     return (
-      <DropdownButtonCon variant={variant} size={size} innerRef={buttonRef} {...elemProps}>
+      <DropdownButtonCon variant={variant} size={size} ref={buttonRef} {...elemProps}>
         <ButtonBaseLabel variant={variant} size={size}>
           {children}
         </ButtonBaseLabel>

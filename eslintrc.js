@@ -37,6 +37,7 @@ module.exports = {
     'react',
     'prettier',
     'react-hooks',
+    'emotion',
   ],
   rules: {
     '@typescript-eslint/class-name-casing': 'error',
@@ -44,6 +45,11 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'error',
     '@typescript-eslint/member-delimiter-style': 'off',
     '@typescript-eslint/type-annotation-spacing': 'off',
+    'emotion/jsx-import': 'error',
+    'emotion/no-vanilla': 'error',
+    'emotion/import-from-emotion': 'error',
+    'emotion/styled-import': 'error',
+    'emotion/syntax-preference': ['error', 'object'],
     'arrow-parens': ['off', 'as-needed'],
     'default-case': 'error',
     'dot-notation': 'error',
@@ -70,7 +76,7 @@ module.exports = {
     'prefer-const': 'error',
     'quote-props': 'off',
     'space-before-function-paren': 'off',
-    'react/jsx-no-bind': 'warn', // Update
+    'react/jsx-no-bind': 'off', // Keep perf implications in mind, but was giving too many warnings and hurting readability
     curly: 'error',
     radix: 'error',
     'prettier/prettier': ['error', prettierConfig],
@@ -82,7 +88,7 @@ module.exports = {
           // align: [true, 'parameters', 'arguments', 'statements'],
           'comment-format': [true, 'check-space'],
           // deprecation: true, // turned off for button deprecation
-          'jsdoc-format': true,  // eslint-plugin-jsdoc
+          'jsdoc-format': true, // eslint-plugin-jsdoc
           // 'jsx-no-string-ref': true,
           // 'jsx-self-close': true,
           'no-duplicate-imports': true,

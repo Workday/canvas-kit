@@ -18,6 +18,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Switch/Top Label', module)
+  .addParameters({component: Switch})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="my-switch-field">
@@ -53,6 +54,7 @@ storiesOf('Form Field/Switch/Top Label', module)
   ));
 
 storiesOf('Form Field/Switch/Left Label', module)
+  .addParameters({component: Switch})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="my-switch-field" labelPosition={FormField.LabelPosition.Left}>
