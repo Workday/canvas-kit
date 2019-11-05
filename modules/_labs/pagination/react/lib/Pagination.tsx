@@ -3,16 +3,17 @@ import {type} from '@workday/canvas-kit-labs-react-core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
+import _ from 'lodash';
 import * as React from 'react';
 
 export interface PaginationLabelProps {
   from?: number;
   to?: number;
-  items?: number;
+  total?: number;
   itemLabel: string;
 }
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
-  items: number;
+  total: number;
   pageSize: number;
   currentPage: number;
   onPageChange: (page: number, e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -56,6 +57,8 @@ const ActivePage = styled('div')({
   borderRadius: borderRadius.m,
 });
 
+const PAGES_TO_SHOW = 5;
+
 const Pages: React.FC<{
   numPages: number;
   currentPage: number;
@@ -63,12 +66,16 @@ const Pages: React.FC<{
 }> = props => {
   // Create an array [1,..., numPages]
   const {numPages, currentPage, clickHandler} = props;
-  const pages = Array.from(Array(numPages).keys());
+
+  const MAX_PAGES = numPages === PAGES_TO_SHOW + 1 ? PAGES_TO_SHOW + 1 : PAGES_TO_SHOW;
+  const pageToStart = Math.max(currentPage - 1, 0);
+  const start = Math.floor(pageToStart / MAX_PAGES) * MAX_PAGES + 1;
+  const end = Math.min(start + MAX_PAGES, numPages + 1);
+  const pages = _.range(start, end);
 
   return (
     <React.Fragment>
-      {pages.map(p => {
-        const page = p + 1;
+      {pages.map(page => {
         const active = page === currentPage;
 
         return active ? (
@@ -92,15 +99,15 @@ const Pages: React.FC<{
 };
 
 const Pagination: React.FC<PaginationProps> = props => {
-  const {items, pageSize, currentPage = 1, onPageChange, label, ...elemProps} = props;
+  const {total, pageSize, currentPage = 1, onPageChange, label, ...elemProps} = props;
 
-  const numPages = Math.ceil(items / pageSize);
+  const numPages = Math.ceil(total / pageSize);
 
   const labelFrom = (label && label.from) || (currentPage - 1) * pageSize + 1;
   const labelTo =
-    (label && label.to) || currentPage * pageSize >= items ? items : currentPage * pageSize;
-  const labelItems = (label && label.items) || items;
-  const item = (label && label.itemLabel) || 'items';
+    (label && label.to) || currentPage * pageSize >= total ? total : currentPage * pageSize;
+  const labelItems = (label && label.total) || total;
+  const item = `${(label && label.itemLabel) || 'item'}${total > 1 ? 's' : ''}`;
 
   const itemLabel = `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
 
