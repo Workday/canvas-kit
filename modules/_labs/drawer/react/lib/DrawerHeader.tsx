@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {typeColors} from '@workday/canvas-colors-web';
 import {colors, spacing, H4, CanvasColor} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
