@@ -4,7 +4,6 @@ import {typeColors} from '@workday/canvas-colors-web';
 import {colors, spacing, H4, CanvasColor} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
-import uuid from 'uuid/v4';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -80,8 +79,6 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
     inverse: false,
   };
 
-  private id = uuid();
-
   public render() {
     const {
       onClose,
@@ -90,7 +87,7 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
       headerColor,
       borderColor,
       inverse,
-      id = this.id,
+      id,
       ...elemProps
     } = this.props;
 

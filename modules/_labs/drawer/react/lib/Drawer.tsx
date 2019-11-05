@@ -26,11 +26,11 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * aria-labeledby when there's a header for accessibility
    */
-  ariaLabeledBy?: string;
+  'aria-labelledby'?: string;
   /**
    * aria-label when there is NO header for accesssibility
    */
-  ariaLabel?: string;
+  'aria-label'?: string;
   /**
    * Optional role for the drawer
    */
@@ -100,23 +100,19 @@ export default class Drawer extends React.Component<DrawerProps, {}> {
       openDirection,
       header,
       showDropShadow,
-      ariaLabeledBy,
-      ariaLabel,
       role,
       ...elemProps
     } = this.props;
 
     return (
       <DrawerContainer
-        aria-labelledby={header ? ariaLabeledBy : undefined}
         role={role}
-        aria-label={!header ? ariaLabel : undefined}
         {...elemProps}
         showDropShadow={showDropShadow}
         width={width}
         openDirection={openDirection}
       >
-        {header && header}
+        {header}
         <ChildrenContainer padding={padding}>{children}</ChildrenContainer>
       </DrawerContainer>
     );
