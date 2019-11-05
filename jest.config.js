@@ -24,9 +24,6 @@ module.exports = {
       statements: 65,
     },
   },
-  moduleNameMapper: {
-    '@workday/canvas-kit-react-(.*)': '<rootDir>/modules/$1/react',
-  },
   moduleFileExtensions: ['tsx', 'ts', 'js', 'jsx', 'json'],
   testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
   testPathIgnorePatterns: ['/cypress/'],

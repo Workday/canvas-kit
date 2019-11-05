@@ -30,6 +30,12 @@ module.exports = wallaby => {
 
       // Wallaby compiles, instruments and copies files found in `files` to the projectCacheDir. We need to tell Jest about this file
       jestConfig.setupFilesAfterEnv = [`${w.projectCacheDir}/jest/setupTests.js`];
+
+      // Tell Wallaby how to resolve symlinked modules. Without this, Wallaby will look at source TS files and not at its compiled & instrumented files
+      jestConfig.moduleNameMapper = {
+        '@workday/canvas-kit-react-(.*)': '<rootDir>/modules/$1/react',
+      },
+
       w.testFramework.configure(jestConfig);
     },
   };
