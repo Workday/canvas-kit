@@ -73,14 +73,18 @@ storiesOf('Labs/Drawer/React', module)
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
         <Drawer
-          header={
-            <DrawerHeader
-              headerColor={text(headerColor, headerColorDefaultValue)}
-              inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
-              onClose={action('onClose callback')}
-              title={text(headerTitle, title)}
-            />
-          }
+          role={'test'}
+          ariaLabel={'yes'}
+          ariaLabeledBy={'asrgrtgvgrt'}
+          // header={
+          //   <DrawerHeader
+          //     id={'hello'}
+          //     headerColor={text(headerColor, headerColorDefaultValue)}
+          //     inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
+          //     onClose={action('onClose callback')}
+          //     title={text(headerTitle, title)}
+          //   />
+          // }
           openDirection={select(label, options, defaultValue)}
           padding={select(paddingLabel, paddingOptions, paddingDefault)}
           showDropShadow={boolean(showDropShadowLabel, showDropShadow)}

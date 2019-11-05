@@ -23,6 +23,18 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Optional to pass a DrawerHeader component shows an optional string and close button
    */
   header?: React.ReactElement;
+  /**
+   * aria-labeledby when there's a header for accessibility
+   */
+  ariaLabeledBy?: string;
+  /**
+   * aria-label when there is NO header for accesssibility
+   */
+  ariaLabel?: string;
+  /**
+   * Optional role for the drawer
+   */
+  role?: string;
 }
 
 export enum DrawerDirection {
@@ -88,11 +100,17 @@ export default class Drawer extends React.Component<DrawerProps, {}> {
       openDirection,
       header,
       showDropShadow,
+      ariaLabeledBy,
+      ariaLabel,
+      role,
       ...elemProps
     } = this.props;
 
     return (
       <DrawerContainer
+        aria-labelledby={header ? ariaLabeledBy : undefined}
+        role={role}
+        aria-label={!header ? ariaLabel : undefined}
         {...elemProps}
         showDropShadow={showDropShadow}
         width={width}

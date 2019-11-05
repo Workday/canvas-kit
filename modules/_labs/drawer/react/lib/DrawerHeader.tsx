@@ -4,6 +4,7 @@ import {typeColors} from '@workday/canvas-colors-web';
 import {colors, spacing, H4, CanvasColor} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
+import uuid from 'uuid/v4';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -30,6 +31,10 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
    * Changes the icon and header to white for dark background colors on the header
    */
   inverse?: boolean;
+  /**
+   * Unique id for the header for accessibility
+   */
+  id?: string;
 }
 
 const headerHeight = 56;
@@ -75,12 +80,23 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
     inverse: false,
   };
 
+  private id = uuid();
+
   public render() {
-    const {onClose, title, iconLabel, headerColor, borderColor, inverse, ...elemProps} = this.props;
+    const {
+      onClose,
+      title,
+      iconLabel,
+      headerColor,
+      borderColor,
+      inverse,
+      id = this.id,
+      ...elemProps
+    } = this.props;
 
     return (
       <HeaderContainer borderColor={borderColor} {...elemProps} headerColor={headerColor}>
-        <HeaderTitle inverse={inverse} title={title}>
+        <HeaderTitle id={id} inverse={inverse} title={title}>
           {title}
         </HeaderTitle>
         <CloseButton
