@@ -6,7 +6,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {Label, Hint} from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Inputs/Label', module)
+storiesOf('Components|Inputs/Form Field/Label', module)
   .addParameters({component: Label})
   .addDecorator(withReadme(README))
   .add('Default', () => (
