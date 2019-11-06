@@ -45,6 +45,7 @@ const Pages: React.FC<{
 
   let pagesToDisplay = 5;
   let start = 1;
+
   if (mobile) {
     start = currentPage;
     if (currentPage >= numPages - 1) {
@@ -68,6 +69,20 @@ const Pages: React.FC<{
   const end = Math.min(start + pagesToDisplay, numPages + 1);
   const pages = _.range(start, end);
 
+  const PaginationButton: React.FC<{
+    page: number;
+  }> = props => (
+    <IconButton
+      key={props.page}
+      aria-label={`Go to page ${props.page}`}
+      variant={IconButton.Variant.Square}
+      size={IconButton.Size.Small}
+      onClick={e => clickHandler(props.page, e)}
+    >
+      {props.page}
+    </IconButton>
+  );
+
   return (
     <>
       {pages.map(page => {
@@ -79,15 +94,7 @@ const Pages: React.FC<{
           <>
             {lastPage && !mobile && (
               <>
-                <IconButton
-                  key={1}
-                  aria-label={`Go to page 1`}
-                  variant={IconButton.Variant.Square}
-                  size={IconButton.Size.Small}
-                  onClick={e => clickHandler(1, e)}
-                >
-                  {1}
-                </IconButton>
+                <PaginationButton page={1} />
                 <Ellipse />
               </>
             )}
@@ -97,29 +104,13 @@ const Pages: React.FC<{
                 {page}
               </ActivePage>
             ) : (
-              <IconButton
-                key={page}
-                aria-label={`Goto page ${page}`}
-                variant={IconButton.Variant.Square}
-                size={IconButton.Size.Small}
-                onClick={e => clickHandler(page, e)}
-              >
-                {page}
-              </IconButton>
+              <PaginationButton page={page} />
             )}
 
             {more && (
               <>
                 <Ellipse />
-                <IconButton
-                  key={numPages}
-                  aria-label={`Goto page ${numPages}`}
-                  variant={IconButton.Variant.Square}
-                  size={IconButton.Size.Small}
-                  onClick={e => clickHandler(numPages, e)}
-                >
-                  {numPages}
-                </IconButton>
+                <PaginationButton page={numPages} />
               </>
             )}
           </>

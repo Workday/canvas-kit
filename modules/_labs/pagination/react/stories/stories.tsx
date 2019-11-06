@@ -21,6 +21,7 @@ const PaginationExample = () => {
       <h3>Pagination with 5 Pages</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
+        key="1"
         total={50}
         pageSize={10}
         currentPage={currentPage}
@@ -38,6 +39,7 @@ const PaginationExample2 = () => {
       <h3>Pagination With a Single Page</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
+        key="2"
         total={1}
         pageSize={100}
         currentPage={currentPage}
@@ -55,6 +57,7 @@ const PaginationExample3 = () => {
       <h3>Pagination with 4 Pages</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
+        key="3"
         total={10}
         pageSize={3}
         currentPage={currentPage}
@@ -72,6 +75,7 @@ const PaginationExample4 = () => {
       <h3>Pagination with over 5 Pages</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
+        key="4"
         total={11}
         pageSize={2}
         currentPage={currentPage}
@@ -89,6 +93,7 @@ const PaginationExample5 = () => {
       <h3>Pagination With Large Number of Pages and Customized Label</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
+        key="5"
         dataLabel="user"
         total={1000}
         pageSize={10}
