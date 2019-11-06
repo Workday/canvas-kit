@@ -13,12 +13,11 @@ const Wrapper = styled('div')({
   textAlign: 'center',
 });
 
-const PaginationExample = () => {
+const DefaultPaginationExample = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   return (
     <Wrapper>
-      <h3>Pagination with 5 Pages</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="1"
@@ -31,12 +30,11 @@ const PaginationExample = () => {
   );
 };
 
-const PaginationExample2 = () => {
+const PaginationExample5 = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   return (
     <Wrapper>
-      <h3>Pagination With a Single Page</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="2"
@@ -49,12 +47,11 @@ const PaginationExample2 = () => {
   );
 };
 
-const PaginationExample3 = () => {
+const WithCustomLabel = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   return (
     <Wrapper>
-      <h3>Pagination with 4 Pages</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="3"
@@ -62,6 +59,8 @@ const PaginationExample3 = () => {
         pageSize={3}
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
+        showLabel
+        dataLabel="user"
       />
     </Wrapper>
   );
@@ -72,7 +71,6 @@ const PaginationExample4 = () => {
 
   return (
     <Wrapper>
-      <h3>Pagination with over 5 Pages</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="4"
@@ -85,12 +83,11 @@ const PaginationExample4 = () => {
   );
 };
 
-const PaginationExample5 = () => {
+const WithGoToExample = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
 
   return (
     <Wrapper>
-      <h3>Pagination With Large Number of Pages and Customized Label</h3>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="5"
@@ -98,6 +95,8 @@ const PaginationExample5 = () => {
         total={1000}
         pageSize={10}
         currentPage={currentPage}
+        showLabel
+        showGoTo
         onPageChange={p => setCurrentPage(p)}
       />
     </Wrapper>
@@ -110,15 +109,27 @@ storiesOf('Labs/Pagination', module)
     <div className="story">
       <div>
         <br />
-        <PaginationExample />
-        <br />
-        <PaginationExample2 />
-        <br />
-        <PaginationExample3 />
+        <DefaultPaginationExample />
         <br />
         <PaginationExample4 />
         <br />
         <PaginationExample5 />
+      </div>
+    </div>
+  ))
+  .add('With Go To', () => (
+    <div className="story">
+      <div>
+        <br />
+        <WithGoToExample />
+      </div>
+    </div>
+  ))
+  .add('With Custom Label', () => (
+    <div className="story">
+      <div>
+        <br />
+        <WithCustomLabel />
       </div>
     </div>
   ));

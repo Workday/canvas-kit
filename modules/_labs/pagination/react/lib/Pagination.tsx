@@ -13,7 +13,8 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   pageSize: number;
   currentPage: number;
   onPageChange: (page: number) => void;
-  hideLabel?: boolean;
+  showGoTo?: boolean;
+  showLabel?: boolean;
   dataLabel?: string;
 }
 
@@ -42,7 +43,16 @@ const Container = styled('nav')({
 });
 
 const Pagination: React.FC<PaginationProps> = props => {
-  const {total, pageSize, currentPage, onPageChange, dataLabel, hideLabel, ...elemProps} = props;
+  const {
+    total,
+    pageSize,
+    currentPage,
+    onPageChange,
+    dataLabel,
+    showLabel,
+    showGoTo,
+    ...elemProps
+  } = props;
 
   const numPages = Math.ceil(total / pageSize);
 
@@ -52,7 +62,7 @@ const Pagination: React.FC<PaginationProps> = props => {
   const item = `${dataLabel || 'item'}${total > 1 ? 's' : ''}`;
 
   const itemLabel =
-    hideLabel ||
+    showLabel &&
     `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
 
   return (
@@ -77,7 +87,7 @@ const Pagination: React.FC<PaginationProps> = props => {
           icon={chevronRightSmallIcon}
           onClick={e => onPageChange(currentPage + 1)}
         />
-        <GoTo onSubmit={onPageChange} max={numPages} />
+        {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} />}
       </Container>
       <Label>{itemLabel}</Label>
     </>

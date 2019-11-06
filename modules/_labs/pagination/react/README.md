@@ -28,13 +28,14 @@ const [currentPage, setCurrentPage] = React.useState(1);
 
 return (
   <Wrapper>
-    <h3>Pagination With a Single Page</h3>
     <h4>Current Page: {currentPage}</h4>
     <Pagination
-      total={1}
-      pageSize={100}
+      total={100}
+      pageSize={10}
       currentPage={currentPage}
       onPageChange={p => setCurrentPage(p)}
+      showLabel
+      showGoTo
       dataLabel="user"
     />
   </Wrapper>
@@ -67,9 +68,14 @@ return (
 
 ### Optional
 
-#### hideLabel?: boolean
+#### showLabel?: boolean
 
-> hides the label below the pagination bar
+> shows a label below the pagination bar describing the items currently being viewed
+
+#### showGoTo?: boolean
+
+> shows a box adjacent to the pagination bar where a page can be entered and is submitted when
+> 'Enter' key is pressed
 
 #### dataLabel?: string
 
