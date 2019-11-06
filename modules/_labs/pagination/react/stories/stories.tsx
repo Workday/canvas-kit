@@ -18,7 +18,8 @@ const PaginationExample = () => {
 
   return (
     <Wrapper>
-      <h3>Page: {currentPage}</h3>
+      <h3>Pagination with 5 Pages</h3>
+      <h4>Current Page: {currentPage}</h4>
       <Pagination
         total={50}
         pageSize={10}
@@ -34,7 +35,8 @@ const PaginationExample2 = () => {
 
   return (
     <Wrapper>
-      <h3>Single Page - Page: {currentPage}</h3>
+      <h3>Pagination With a Single Page</h3>
+      <h4>Current Page: {currentPage}</h4>
       <Pagination
         total={1}
         pageSize={100}
@@ -50,9 +52,45 @@ const PaginationExample3 = () => {
 
   return (
     <Wrapper>
-      <h3>More Than Five Pages - Page: {currentPage}</h3>
+      <h3>Pagination with 4 Pages</h3>
+      <h4>Current Page: {currentPage}</h4>
       <Pagination
-        total={100}
+        total={10}
+        pageSize={3}
+        currentPage={currentPage}
+        onPageChange={p => setCurrentPage(p)}
+      />
+    </Wrapper>
+  );
+};
+
+const PaginationExample4 = () => {
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  return (
+    <Wrapper>
+      <h3>Pagination with over 5 Pages</h3>
+      <h4>Current Page: {currentPage}</h4>
+      <Pagination
+        total={11}
+        pageSize={2}
+        currentPage={currentPage}
+        onPageChange={p => setCurrentPage(p)}
+      />
+    </Wrapper>
+  );
+};
+
+const PaginationExample5 = () => {
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  return (
+    <Wrapper>
+      <h3>Pagination With Large Number of Pages and Customized Label</h3>
+      <h4>Current Page: {currentPage}</h4>
+      <Pagination
+        dataLabel="user"
+        total={1000}
         pageSize={10}
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
@@ -72,6 +110,10 @@ storiesOf('Labs/Pagination', module)
         <PaginationExample2 />
         <br />
         <PaginationExample3 />
+        <br />
+        <PaginationExample4 />
+        <br />
+        <PaginationExample5 />
       </div>
     </div>
   ));
