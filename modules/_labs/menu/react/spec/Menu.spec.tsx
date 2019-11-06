@@ -323,6 +323,21 @@ describe('Menu Keyboard Shortcuts', () => {
     component.unmount();
   });
 
+  test('should select an item when it starts with a number', () => {
+    const id: string = 'myId';
+    const component = mount(
+      <Menu isOpen={false} initialSelectedItem={1} id={id}>
+        <MenuItem>0</MenuItem>
+        <MenuItem>1</MenuItem>
+      </Menu>
+    );
+    const item = component.find('ul');
+    const zero = {keyCode: 48, key: '0'};
+    item.simulate('keydown', zero);
+    expect(item.getDOMNode().getAttribute('aria-activedescendant')).toEqual(`${id}-0`);
+    component.unmount();
+  });
+
   test('should loop around selected items using down arrow', () => {
     const id: string = 'myId';
     const component = mount(

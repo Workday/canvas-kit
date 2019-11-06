@@ -12,6 +12,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/TextArea/Top Label', module)
+  .addParameters({component: TextArea})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="textarea-plain">
@@ -74,6 +75,7 @@ storiesOf('Form Field/TextArea/Top Label', module)
   ));
 
 storiesOf('Form Field/TextArea/Left Label', module)
+  .addParameters({component: TextArea})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="textarea-plain">

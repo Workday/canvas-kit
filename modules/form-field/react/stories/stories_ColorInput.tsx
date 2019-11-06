@@ -12,6 +12,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Form Field/Color Picker/Color Input/Top Label', module)
+  .addParameters({component: ColorInput})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="input-plain">
@@ -64,6 +65,7 @@ storiesOf('Form Field/Color Picker/Color Input/Top Label', module)
   ));
 
 storiesOf('Form Field/Color Picker/Color Input/Left Label', module)
+  .addParameters({component: ColorInput})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="input-plain">

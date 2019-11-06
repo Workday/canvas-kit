@@ -4,10 +4,11 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {spacing} from '../../../core/react/index';
-import Card from '../index';
 import README from '../README.md';
+import Card from '../index';
 
 storiesOf('Card', module)
+  .addParameters({component: Card})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

@@ -7,6 +7,7 @@ import {deprecated_Button as Button} from '../index';
 import README from '../README.md';
 
 storiesOf('Button/Deprecated', module)
+  .addParameters({component: Button})
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">

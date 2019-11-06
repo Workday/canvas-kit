@@ -15,4 +15,8 @@ export enum HeaderHeight {
   Large = '80px',
 }
 
-export type BreakpointType = 'sm' | 'md' | 'lg';
+export enum SearchTheme {
+  Light,
+  Dark,
+  Transparent,
+}

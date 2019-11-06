@@ -1,6 +1,10 @@
 import * as React from 'react';
 import GlobalHeader from '../lib/GlobalHeader';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
+import Header from '../lib/Header';
+import {SearchBar} from '../lib/parts/SearchBar';
+import {DubLogoTitle} from '../lib/parts';
+import {HeaderTheme, HeaderVariant} from '../lib/shared/types';
 
 declare global {
   interface Window {
@@ -71,30 +75,35 @@ describe('GlobalHeader', () => {
           .contains('Test')
       ).toBeTruthy();
     });
-  });
 
-  describe('onBreakpointChange', () => {
-    test('should return the default breakpoint on initialization', () => {
-      const largeBreakpoint = 30;
-      const mockFunction = jest.fn();
-      mount<GlobalHeader>(
-        <GlobalHeader breakpoint={largeBreakpoint} onBreakpointChange={mockFunction} />
-      );
-      expect(mockFunction).toHaveBeenCalledTimes(1);
-      expect(mockFunction).toHaveBeenCalledWith('lg');
-    });
+    test('Passes props to Header correctly', () => {
+      const propsHeader1 = {
+        brand: <div>Brand</div>,
+        menuToggle: <div>MenuToggle</div>,
+        onMenuClick: jest.fn(),
+        leftSlot: <SearchBar onSubmit={jest.fn()} />,
+        isCollapsed: true,
+      };
+      const propsHeader2 = {
+        menuToggle: 'abcde',
+        isCollapsed: false,
+      };
+      const defaultProps = {
+        brand: <DubLogoTitle />,
+        variant: HeaderVariant.Global,
+        children: undefined,
+        themeColor: HeaderTheme.White,
+      };
 
-    test('should update the breakpoint when the screen size changes ', () => {
-      const largeBreakpoint = 30;
-      const mockFunction = jest.fn();
-      mount<GlobalHeader>(
-        <GlobalHeader breakpoint={largeBreakpoint} onBreakpointChange={mockFunction} />
-      );
-      mockFunction.mockReset();
+      const childPropsHeader1 = shallow(<GlobalHeader {...propsHeader1} />)
+        .find(Header)
+        .props();
+      const childPropsHeader2 = shallow(<GlobalHeader {...propsHeader2} />)
+        .find(Header)
+        .props();
 
-      window.resizeBy(25, 25);
-      expect(mockFunction).toHaveBeenCalledTimes(1);
-      expect(mockFunction).toHaveBeenCalledWith('md');
+      expect(childPropsHeader1).toEqual({...defaultProps, ...propsHeader1});
+      expect(childPropsHeader2).toEqual({...defaultProps, ...propsHeader2});
     });
   });
 });
