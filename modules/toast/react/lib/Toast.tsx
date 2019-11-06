@@ -52,7 +52,7 @@ const Message = styled('div')({
 
 export default class Toast extends React.Component<ToastProps> {
   static defaultProps = {
-    icon: checkIcon,
+    icon: checkIcon as CanvasSystemIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
     iconColor: colors.greenApple400,
   };
 

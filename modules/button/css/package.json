@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@workday/canvas-kit-css-core": "^3.0.0",
-    "@workday/canvas-system-icons-web": "^1.0.1"
+    "@workday/canvas-system-icons-web": "^1.0.20"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
