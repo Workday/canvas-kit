@@ -116,3 +116,12 @@ Each module is independently versioned using [Lerna](https://github.com/lerna/le
 ## License
 
 The Workday Canvas Kits are licensed under the Apache 2.0 License.
+
+## Supported Browsers
+
+- IE11
+- Microsoft Edge: last 2 versions
+- Mozilla Firefox: last 2 versions
+- Google Chrome: last 2 versions
+- Apple Safari: last 2 versions
+- Opera: last 2 versions
