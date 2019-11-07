@@ -38,33 +38,31 @@ const GoTo: React.FC<{
     return textAsInteger;
   };
   return (
-    <>
-      <GoToWrapper>
-        <GoToLabel>Go To</GoToLabel>
-        <InputWrapper>
-          <TextInput
-            data-testid="goToPage"
-            width={53}
-            height={32}
-            min={1}
-            max={max}
-            value={value}
-            type="number"
-            onChange={e => {
-              setValue(e.target.value);
-            }}
-            onKeyDown={e => {
-              if (e.keyCode === 13) {
-                const page = validatePage(value);
-                if (page) {
-                  onSubmit(page, e);
-                }
+    <GoToWrapper>
+      <GoToLabel>Go To</GoToLabel>
+      <InputWrapper>
+        <TextInput
+          data-testid="goToPage"
+          width={53}
+          height={32}
+          min={1}
+          max={max}
+          value={value}
+          type="number"
+          onChange={e => {
+            setValue(e.target.value);
+          }}
+          onKeyDown={e => {
+            if (e.keyCode === 13) {
+              const page = validatePage(value);
+              if (page) {
+                onSubmit(page, e);
               }
-            }}
-          />
-        </InputWrapper>
-      </GoToWrapper>
-    </>
+            }
+          }}
+        />
+      </InputWrapper>
+    </GoToWrapper>
   );
 };
 
