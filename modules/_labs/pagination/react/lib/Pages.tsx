@@ -73,6 +73,7 @@ const Pages: React.FC<{
     page: number;
   }> = props => (
     <IconButton
+      data-testid={`paginationButton${props.page}`}
       key={props.page}
       aria-label={`Go to page ${props.page}`}
       variant={IconButton.Variant.Square}
@@ -100,7 +101,12 @@ const Pages: React.FC<{
             )}
 
             {active ? (
-              <ActivePage key={page} aria-current={true} aria-label={`Current page, page ${page}`}>
+              <ActivePage
+                data-testid="paginationIconButtonActive"
+                key={page}
+                aria-current={true}
+                aria-label={`Current page, page ${page}`}
+              >
                 {page}
               </ActivePage>
             ) : (

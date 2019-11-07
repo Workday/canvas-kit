@@ -69,6 +69,7 @@ const Pagination: React.FC<PaginationProps> = props => {
     <>
       <Container aria-label={`Pagination Navigation`} {...elemProps}>
         <IconButton
+          data-testid="leftPaginationArrow"
           disabled={currentPage - 1 <= 0}
           aria-disabled={currentPage - 1 <= 0}
           aria-label={'Goto previous page'}
@@ -79,6 +80,7 @@ const Pagination: React.FC<PaginationProps> = props => {
         />
         <Pages numPages={numPages} currentPage={currentPage} clickHandler={onPageChange} />
         <IconButton
+          data-testid="rightPaginationArrow"
           disabled={currentPage + 1 > numPages}
           aria-disabled={currentPage + 1 > numPages}
           aria-label={'Goto next page'}
@@ -89,7 +91,7 @@ const Pagination: React.FC<PaginationProps> = props => {
         />
         {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} />}
       </Container>
-      <Label>{itemLabel}</Label>
+      <Label data-testid="paginationLabel">{itemLabel}</Label>
     </>
   );
 };

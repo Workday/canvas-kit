@@ -42,6 +42,7 @@ const GoTo: React.FC<{
         <GoToLabel>Go To</GoToLabel>
         <InputWrapper>
           <TextInput
+            data-testid="goToPage"
             width={53}
             height={32}
             min={1}

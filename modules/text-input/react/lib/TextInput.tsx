@@ -10,7 +10,7 @@ export interface TextInputProps
   inputRef?: React.RefObject<HTMLInputElement>;
 }
 
-const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow'>>(
+const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 'height'>>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
