@@ -44,6 +44,7 @@ const paddingOptions = {
 const paddingDefault = paddingOptions.s;
 
 storiesOf('Labs/Drawer/React', module)
+  .addParameters({component: Drawer})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -61,7 +62,13 @@ storiesOf('Labs/Drawer/React', module)
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
         <Drawer
-          header={<DrawerHeader onClose={action('onClose callback')} title={'Drawer Header'} />}
+          header={
+            <DrawerHeader
+              closeIconLabel={'Close'}
+              onClose={action('onClose callback')}
+              title={'Drawer Header'}
+            />
+          }
           openDirection={DrawerDirection.Left}
           padding={spacing.s}
           showDropShadow={true}
@@ -73,9 +80,35 @@ storiesOf('Labs/Drawer/React', module)
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
         <Drawer
-          role={'test'}
           header={
             <DrawerHeader
+              closeIconLabel={'Close'}
+              headerColor={text(headerColor, headerColorDefaultValue)}
+              inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
+              onClose={action('onClose callback')}
+              title={text(headerTitle, title)}
+            />
+          }
+          openDirection={select(label, options, defaultValue)}
+          padding={select(paddingLabel, paddingOptions, paddingDefault)}
+          showDropShadow={boolean(showDropShadowLabel, showDropShadow)}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+          sit amet blandit leo lobortis eget.
+        </Drawer>
+      </div>
+    </div>
+  ))
+  .add('Accessible', () => (
+    <div className="story">
+      <div style={{height: '80vh', position: 'relative'}}>
+        <Drawer
+          aria-labelledby={'accessibleDrawer'}
+          role={'region'}
+          header={
+            <DrawerHeader
+              id={'accessibleDrawer'}
+              closeIconLabel={'Close'}
               headerColor={text(headerColor, headerColorDefaultValue)}
               inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
               onClose={action('onClose callback')}

@@ -7,7 +7,11 @@ describe('Drawer', () => {
   test('should call a callback function', async () => {
     const cb = jest.fn();
     const {findByLabelText} = render(
-      <DrawerHeader iconLabel={'Close'} title={'Header Title'} onClose={cb}></DrawerHeader>
+      <DrawerHeader
+        closeIconLabel={'Close'}
+        headerText={'Header Title'}
+        onClose={cb}
+      ></DrawerHeader>
     );
 
     fireEvent.click(await findByLabelText('Close'));

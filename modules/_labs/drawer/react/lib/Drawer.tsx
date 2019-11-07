@@ -24,15 +24,15 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   header?: React.ReactElement;
   /**
-   * aria-labeledby when there's a header for accessibility
+   * Usey when there's a header for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element
    */
   'aria-labelledby'?: string;
   /**
-   * aria-label when there is NO header for accesssibility
+   * Use when there is NO `header` for accessibility
    */
   'aria-label'?: string;
   /**
-   * Optional role for the drawer
+   * Optional role for the drawer. If this attribute is used, also provide an `aria-labelledby` attribute to link the `header` element to this role
    */
   role?: string;
 }

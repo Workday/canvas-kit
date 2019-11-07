@@ -2,22 +2,22 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {typeColors} from '@workday/canvas-colors-web';
 import {colors, spacing, H4, CanvasColor} from '@workday/canvas-kit-react-core';
-import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
+import {IconButton, IconButtonVariant, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * String to add a title to a Drawer
+   * The text of the header. Will also be applied as the `title` attribute of the header element
    */
-  title?: string;
+  headerText?: string;
   /**
-   * Callback to handle closing the Drawer
+   * Callback to handle closing the Drawer when the user clicks the close icon in the header
    */
-  onClose: () => void;
+  onClose: IconButtonProps['onClick'];
   /**
-   * String to add aria-label to the icon button
+   * Add an `aria-label` to the close icon button. Default 'Close'. Useful for i18n
    */
-  iconLabel: string;
+  closeIconLabel: string;
   /**
    * The background color in which the Drawer header will be
    */
@@ -83,7 +83,7 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
     const {
       onClose,
       title,
-      iconLabel,
+      closeIconLabel,
       headerColor,
       borderColor,
       inverse,
@@ -99,7 +99,7 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
         <CloseButton
           variant={inverse ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
           onClick={onClose}
-          aria-label={iconLabel}
+          aria-label={closeIconLabel}
           icon={xIcon}
         ></CloseButton>
       </HeaderContainer>
