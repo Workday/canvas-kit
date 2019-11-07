@@ -91,8 +91,7 @@ const WithGoToExample = () => {
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="5"
-        dataLabel="user"
-        total={100000}
+        total={100}
         pageSize={1}
         currentPage={currentPage}
         showLabel
