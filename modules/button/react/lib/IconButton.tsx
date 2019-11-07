@@ -1,15 +1,14 @@
-import {CSSObject} from '@emotion/core';
-import isPropValid from '@emotion/is-prop-valid';
+import * as React from 'react';
 import styled from '@emotion/styled';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import isPropValid from '@emotion/is-prop-valid';
+import {IconButtonVariant, IconButtonSize} from './types';
+import {iconButtonStyles} from './ButtonStyles';
+import {getButtonStyle} from './utils';
 import {colors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {focusRing} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import * as React from 'react';
-
-import {iconButtonStyles} from './ButtonStyles';
-import {IconButtonSize, IconButtonVariant} from './types';
-import {getButtonStyle} from './utils';
+import {CSSObject} from '@emotion/core';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
