@@ -6,7 +6,8 @@ import React from 'react';
 const GoToLabel = styled('div')({
   margin: 'auto',
   paddingRight: '8px',
-  ...type.body2,
+  ...type.body,
+  ...type.variant.label,
 });
 
 const GoToWrapper = styled('div')({

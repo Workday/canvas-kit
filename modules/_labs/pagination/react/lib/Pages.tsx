@@ -17,15 +17,21 @@ const ActivePage = styled('div')({
   borderRadius: borderRadius.m,
 });
 
+const NoPointerEvents = styled('div')({
+  pointerEvents: 'none',
+});
+
 const Ellipse = () => (
-  <IconButton
-    key={'ellipse'}
-    aria-label={`Navigation Ellipse`}
-    variant={IconButton.Variant.Square}
-    size={IconButton.Size.Small}
-  >
-    ...
-  </IconButton>
+  <NoPointerEvents>
+    <IconButton
+      key={'ellipse'}
+      aria-label={`Navigation Ellipse`}
+      variant={IconButton.Variant.Square}
+      size={IconButton.Size.Small}
+    >
+      ...
+    </IconButton>
+  </NoPointerEvents>
 );
 
 const Pages: React.FC<{

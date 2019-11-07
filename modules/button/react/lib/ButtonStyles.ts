@@ -1,14 +1,15 @@
-import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
-import {GenericStyle} from '@workday/canvas-kit-react-common';
 import {CSSObject} from '@emotion/core';
+import {GenericStyle} from '@workday/canvas-kit-react-common';
+import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
+
 import {
-  DeprecatedButtonVariant,
-  ButtonSize,
-  IconPosition,
   AllButtonVariants,
-  TextButtonVariant,
+  ButtonSize,
   ButtonVariant,
+  DeprecatedButtonVariant,
   IconButtonVariant,
+  IconPosition,
+  TextButtonVariant,
 } from './types';
 import {getButtonStateStyle} from './utils';
 
@@ -311,7 +312,8 @@ export const iconButtonStyles: ButtonGenericStyle = {
   variants: {
     sizes: {
       [ButtonSize.Small]: {
-        width: canvas.spacing.l,
+        minWidth: canvas.spacing.l,
+        width: 'auto',
         height: canvas.spacing.l,
         'span svg': {
           width: '20px',
