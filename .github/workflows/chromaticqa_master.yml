@@ -16,11 +16,12 @@ jobs:
         node-version: 10.x
     - name: Install Packages
       run: yarn install
-    - name: ChromaticQA
-      # auto-accept changes to master assuming they came from approved PRs.
-      # https://docs.chromaticqa.com/setup_ci#maintain-a-clean-master-branch
-      run: yarn chromatic --auto-accept-changes
-      env:
-        CI: true # Tells Chromatic to treat as a CI run (it doesn't auto-detect Github Actions)
-        CHROMATIC_APP_CODE: ${{ secrets.CHROMATIC_APP_CODE }}
+
+    # auto-accept changes to master assuming they came from approved PRs.
+    # https://docs.chromaticqa.com/setup_ci#maintain-a-clean-master-branch
+    - uses: chromaui/action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        appCode: dlpro96xybh
+        autoAcceptChanges: true
 
