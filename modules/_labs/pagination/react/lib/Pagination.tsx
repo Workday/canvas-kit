@@ -61,9 +61,7 @@ const Pagination: React.FC<PaginationProps> = props => {
   const labelItems = total;
   const item = `${dataLabel || 'item'}${total > 1 ? 's' : ''}`;
 
-  const itemLabel =
-    showLabel &&
-    `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
+  const itemLabel = `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
 
   return (
     <>
@@ -91,7 +89,7 @@ const Pagination: React.FC<PaginationProps> = props => {
         />
         {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} />}
       </Container>
-      <Label data-testid="paginationLabel">{itemLabel}</Label>
+      {showLabel && <Label data-testid="paginationLabel">{itemLabel}</Label>}
     </>
   );
 };

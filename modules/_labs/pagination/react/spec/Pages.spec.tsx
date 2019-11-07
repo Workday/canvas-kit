@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 import _ from 'lodash';
-import * as React from 'react';
+import React from 'react';
 
 import Pagination from '..';
 
@@ -79,7 +79,7 @@ describe('Pagination Pages', () => {
       for (let i = 1; i < page; i++) {
         expect(getByTestId(`paginationButton${i}`));
       }
-      expect(queryByTestId(`paginationButton${i}`)).toBeNull();
+      expect(queryByTestId(`paginationButton${page}`)).toBeNull();
     });
   });
 

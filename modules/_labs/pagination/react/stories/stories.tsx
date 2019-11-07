@@ -60,7 +60,7 @@ const WithCustomLabel = () => {
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
         showLabel
-        dataLabel="user"
+        dataLabel="candidate"
       />
     </Wrapper>
   );

@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react';
+import {queryByTestId, render} from '@testing-library/react';
 import * as React from 'react';
 
 import Pagination from '..';
@@ -20,7 +20,7 @@ describe('Pagination Component', () => {
     expect(getByTestId('paginationLabel')).toHaveTextContent('11–20 of 100 items');
   });
 
-  it(`Test pagination label can be changed`, () => {
+  it(`Test pagination label can have a custom data item`, () => {
     const currentPage = 2;
 
     const {getByTestId} = render(
@@ -47,7 +47,6 @@ describe('Pagination Component', () => {
         currentPage={currentPage}
         onPageChange={p => null}
         showLabel
-        dataLabel="user"
       />
     );
 
@@ -64,10 +63,29 @@ describe('Pagination Component', () => {
         currentPage={currentPage}
         onPageChange={p => null}
         showLabel
-        dataLabel="user"
       />
     );
 
     expect(getByTestId('rightPaginationArrow')).toBeDisabled();
+  });
+
+  it(`label should not display`, () => {
+    const currentPage = 2;
+
+    const {queryByTestId} = render(
+      <Pagination total={100} pageSize={10} currentPage={currentPage} onPageChange={p => null} />
+    );
+
+    expect(queryByTestId('paginationLabel')).toBeNull();
+  });
+
+  it(`GoTo should not display`, () => {
+    const currentPage = 2;
+
+    const {queryByTestId} = render(
+      <Pagination total={100} pageSize={10} currentPage={currentPage} onPageChange={p => null} />
+    );
+
+    expect(queryByTestId('goToPage')).toBeNull();
   });
 });
