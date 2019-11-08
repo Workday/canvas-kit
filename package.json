@@ -90,6 +90,7 @@
     "postcss-discard-duplicates": "^4.0.2",
     "postcss-inline-svg": "^3.1.1",
     "postcss-loader": "^2.1.4",
+    "precinct": "^6.1.2",
     "prettier": "^1.12.1",
     "prismjs": "^1.15.0",
     "react": "^16.8.6",

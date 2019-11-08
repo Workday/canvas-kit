@@ -70,39 +70,39 @@ function formatErrorMessage(error) {
 }
 
 // Note: Requires dist folders to exist (yarn build to be run)
-glob(`${path.resolve(__dirname)}/../modules/**/react/dist/commonjs/index.js`, undefined, function(
-  er,
-  files
-) {
+glob(`${path.resolve(__dirname)}/../modules/**/react`, undefined, function(er, modules) {
   if (er) {
-    console.error('Could not find modules/**/react/dist/commonjs/index.js files');
+    console.error('Could not find any modules/**/react/ folders');
     return;
   }
 
   const checks = [];
 
-  for (let file of files) {
+  for (let reactModule of modules) {
     checks.push(
       new Promise((resolve, reject) => {
         /* Note: dependency-check can accept multiple files, but due to how it caches imported modules,
-         * it needs to be run separately for each module. */
-        exec(`yarn run dependency-check ${file} --no-dev`, (err, stdout, stderr) => {
-          if (err) {
-            const match = file.match(moduleRegex);
-            const pkg = require(path.resolve(process.cwd(), match[0], 'package.json'));
+         * it needs to be run separately for each module. Precinct detective needed to handle ES6 & TS. */
+        exec(
+          `yarn run dependency-check ${reactModule}/index.{ts,tsx,js,jsx} -e ts,tsx,js,jsx,json --detective precinct --no-dev`,
+          (err, stdout, stderr) => {
+            if (err) {
+              const match = reactModule.match(moduleRegex);
+              const pkg = require(path.resolve(process.cwd(), match[0], 'package.json'));
 
-            const depErrors = getDepErrors(
-              pkg,
-              stderr.replace('\nerror Command failed with exit code 1.', '').trim()
-            );
+              const depErrors = getDepErrors(
+                pkg,
+                stderr.replace('\nerror Command failed with exit code 1.', '').trim()
+              );
 
-            resolve({
-              file: path.join(process.cwd(), match[0], 'package.json'),
-              errors: depErrors,
-            });
+              resolve({
+                file: path.join(process.cwd(), match[0], 'package.json'),
+                errors: depErrors,
+              });
+            }
+            resolve(null);
           }
-          resolve(null);
-        });
+        );
       })
     );
   }
