@@ -34,7 +34,7 @@ return (
     onPageChange={p => setCurrentPage(p)}
     showLabel
     showGoTo
-    dataLabel="user"
+    dataLabel="candidate"
   />
 );
 ```
