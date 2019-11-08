@@ -67,11 +67,11 @@ return (
 
 #### showLabel?: boolean
 
-> shows a label below the pagination bar describing the items currently being viewed
+> Shows a label below the pagination bar describing the items currently being viewed
 
 #### showGoTo?: boolean
 
-> shows a box adjacent to the pagination bar where a page can be entered and is submitted when
+> Shows a box adjacent to the pagination bar where a page can be entered and is submitted when
 > 'Enter' key is pressed
 
 #### dataLabel?: string
