@@ -27,18 +27,15 @@ import Pagination from '@workday/canvas-kit-react-pagination';
 const [currentPage, setCurrentPage] = React.useState(1);
 
 return (
-  <Wrapper>
-    <h4>Current Page: {currentPage}</h4>
-    <Pagination
-      total={100}
-      pageSize={10}
-      currentPage={currentPage}
-      onPageChange={p => setCurrentPage(p)}
-      showLabel
-      showGoTo
-      dataLabel="user"
-    />
-  </Wrapper>
+  <Pagination
+    total={100}
+    pageSize={10}
+    currentPage={currentPage}
+    onPageChange={p => setCurrentPage(p)}
+    showLabel
+    showGoTo
+    dataLabel="user"
+  />
 );
 ```
 
