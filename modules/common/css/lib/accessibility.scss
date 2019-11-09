@@ -22,7 +22,7 @@
   }
 }
 
-.wdc-accessible-hide {
+@mixin wdc-accessible-hide() {
   clip: 'rect(1px, 1px, 1px, 1px)'; // Deprecated but still used by most browsers, clip-path will be taking its place soon.
   clip-path: 'polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px)';
   position: 'absolute';
@@ -33,4 +33,8 @@
   margin: '-1px';
   padding: 0;
   border: 0;
+}
+
+.wdc-accessible-hide {
+  @include wdc-accessible-hide();
 }
