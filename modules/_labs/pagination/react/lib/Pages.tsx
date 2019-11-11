@@ -22,7 +22,7 @@ const NoPointerEvents = styled('div')({
 });
 
 const Ellipse = () => (
-  <NoPointerEvents>
+  <NoPointerEvents tabIndex={-1}>
     <IconButton
       key={'ellipse'}
       aria-label={`Navigation Ellipse`}

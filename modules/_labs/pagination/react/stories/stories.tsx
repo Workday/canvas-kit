@@ -91,8 +91,8 @@ const WithGoToExample = () => {
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="5"
-        total={100}
-        pageSize={1}
+        total={1000}
+        pageSize={10}
         currentPage={currentPage}
         showLabel
         showGoTo

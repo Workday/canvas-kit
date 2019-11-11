@@ -76,4 +76,4 @@ return (
 
 #### dataLabel?: string
 
-> Replaces the default 'item' label with a data type, ex 'user'
+> Replaces the default 'item' label with a data type, ex 'candidate'
