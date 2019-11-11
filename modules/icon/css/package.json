@@ -6,7 +6,8 @@
   "license": "Apache-2.0",
   "files": [
     "dist",
-    "lib"
+    "lib",
+    "index.scss"
   ],
   "style": "dist/canvas-kit-css-icon.min.css",
   "main": "dist/canvas-kit-css-icon.min.js",
