@@ -60,7 +60,11 @@ const WithCustomLabel = () => {
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
         showLabel
-        dataLabel="candidate"
+        customLabel={(from: number, to: number, items: number, item: string) =>
+          `${from.toLocaleString()}\u2013${to.toLocaleString()} of ${items.toLocaleString()} ${
+            items > 1 ? 'candidates' : 'candidate'
+          }`
+        }
       />
     </Wrapper>
   );

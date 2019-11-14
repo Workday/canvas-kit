@@ -15,7 +15,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   onPageChange: (page: number) => void;
   showGoTo?: boolean;
   showLabel?: boolean;
-  dataLabel?: string;
+  customLabel?: (from: number, to: number, items: number, itemLabel: string) => string;
 }
 
 const Label = styled('div')({
@@ -48,7 +48,7 @@ const Pagination: React.FC<PaginationProps> = props => {
     pageSize,
     currentPage,
     onPageChange,
-    dataLabel,
+    customLabel,
     showLabel,
     showGoTo,
     ...elemProps
@@ -59,9 +59,11 @@ const Pagination: React.FC<PaginationProps> = props => {
   const labelFrom = (currentPage - 1) * pageSize + 1;
   const labelTo = currentPage * pageSize >= total ? total : currentPage * pageSize;
   const labelItems = total;
-  const item = `${dataLabel || 'item'}${total > 1 ? 's' : ''}`;
+  const item = `item${total > 1 ? 's' : ''}`;
 
-  const itemLabel = `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
+  const itemLabel = customLabel
+    ? customLabel(labelFrom, labelTo, labelItems, 'item')
+    : `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
 
   return (
     <>

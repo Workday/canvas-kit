@@ -49,31 +49,31 @@ return (
 
 #### total: number
 
-> The total number of items
+> The total number of items.
 
 #### pageSize: number
 
-> The number of items to display per page
+> The number of items to display per page.
 
 #### currentPage: number
 
-> The current page being displayed
+> The current page being displayed.
 
 #### onPageChange: (page: number) => void
 
-> Dispatch which is invoked when the page is changed
+> Dispatch which is invoked when the page is changed.
 
 ### Optional
 
 #### showLabel?: boolean
 
-> Shows a label below the pagination bar describing the items currently being viewed
+> Shows a label below the pagination bar describing the items currently being viewed.
 
 #### showGoTo?: boolean
 
 > Shows a box adjacent to the pagination bar where a page can be entered and is submitted when
-> 'Enter' key is pressed
+> 'Enter' key is pressed.
 
-#### dataLabel?: string
+#### customLabel?: (from: number, to: number, items: number, itemLabel: string) => string;
 
-> Replaces the default 'item' label with a data type, ex 'candidate'
+> A function to build a custom label below the pagination bar.
