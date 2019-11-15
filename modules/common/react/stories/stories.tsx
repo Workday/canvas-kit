@@ -49,7 +49,7 @@ class PopperPopup extends React.Component<{}, PopperPopupState> {
   };
 }
 
-storiesOf('Tokens|Common', module)
+storiesOf('Components|Popups/Popper', module)
   .addParameters({component: Popper})
   .addDecorator(withReadme(README))
   .add('Popper', () => (
