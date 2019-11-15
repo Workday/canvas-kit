@@ -8,6 +8,9 @@ import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 import uuid from 'uuid/v4';
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
+  /**
+   * The Postiion of the FormField Label (Top vs Left vs Hidden)
+   */
   labelPosition: FormFieldLabelPosition;
   label?: React.ReactNode;
   hintText?: React.ReactNode;

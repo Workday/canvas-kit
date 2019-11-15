@@ -7,8 +7,17 @@ import {commonColors, spacing, borderRadius} from '@workday/canvas-kit-react-cor
 import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
 export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
+  /**
+   * The MenuItemProps to wrap
+   */
   children?: React.ReactElement<MenuItemProps> | React.ReactElement<MenuItemProps>[];
+  /**
+   * Determines if the menu is open
+   */
   isOpen?: boolean;
+  /**
+   * Sets the width of the Menu
+   */
   width?: number | string;
   onSelect?: () => void;
   onClose?: () => void;

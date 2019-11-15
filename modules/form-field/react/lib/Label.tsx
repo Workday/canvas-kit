@@ -5,11 +5,29 @@ import {accessibleHide as accessibleHideCSS} from '@workday/canvas-kit-react-com
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {
+  /**
+   * Position of the Label
+   */
   labelPosition: FormFieldLabelPosition;
+  /**
+   * If the label should be styled as a legend
+   */
   isLegend: boolean;
+  /**
+   * The id of a labelable form-related element. Synonymous of "for"
+   */
   htmlFor?: string;
+  /**
+   * If the Label should have asterisk to indicated that it is required
+   */
   required?: boolean;
+  /**
+   * Title of the required Label
+   */
   requiredLabel: string;
+  /**
+   * Title of the required Label
+   */
   accessibleHide?: boolean;
 }
 

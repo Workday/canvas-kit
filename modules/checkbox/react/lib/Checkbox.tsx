@@ -13,11 +13,26 @@ import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * Boolean if the Checkbox is selected
+   */
   checked: boolean;
+  /**
+   * Boolean to disable the Checkbox
+   */
   disabled?: boolean;
+  /**
+   * Id for the Checkbox
+   */
   id?: string;
   inputRef?: React.Ref<HTMLInputElement>;
+  /**
+   * Label for the Checkbox
+   */
   label?: string;
+  /**
+   * Callback when the checkbox is toggled
+   */
   onChange?: (e: React.SyntheticEvent) => void;
   value?: string;
   error?: ErrorType;
