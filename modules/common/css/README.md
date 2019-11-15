@@ -38,4 +38,8 @@ or
 
 ## Forms
 
-`forms` has shared styles for inputs
+`forms` has shared styles for inputs.
+
+## Accessibility
+
+`accessibility` has focus for inputs and method to provide screen reader only content.
