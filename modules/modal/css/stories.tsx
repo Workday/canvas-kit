@@ -102,7 +102,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
   };
 }
 
-storiesOf('CSS/Modal', module)
+storiesOf('CSS|Popups/Modal', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

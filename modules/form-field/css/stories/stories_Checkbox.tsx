@@ -5,7 +5,7 @@ import README from '../../../checkbox/css/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-checkbox/index.scss';
 
-storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox', module)
+storiesOf('CSS|Inputs/Checkbox/Top Label/Checkbox', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form">
@@ -71,7 +71,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox', module)
     </div>
   ));
 
-storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
+storiesOf('CSS|Inputs/Checkbox/Left Label/Checkbox', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
@@ -137,7 +137,7 @@ storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox', module)
     </div>
   ));
 
-storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
+storiesOf('CSS|Inputs/Checkbox/Top Label/Checkbox Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form">
@@ -253,7 +253,7 @@ storiesOf('CSS/Form Field/Checkbox/Top Label/Checkbox Group', module)
     </div>
   ));
 
-storiesOf('CSS/Form Field/Checkbox/Left Label/Checkbox Group', module)
+storiesOf('CSS|Inputs/Checkbox/Left Label/Checkbox Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">

@@ -9,7 +9,7 @@ const containerStyle = css({
   paddingTop: '12px',
 });
 
-storiesOf('CSS/Loading Animations', module)
+storiesOf('CSS|Indicators/Loading Animations', module)
   .addDecorator(withReadme(README))
   .add('Loading Dots', () => (
     <div className="story">

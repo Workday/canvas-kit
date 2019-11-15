@@ -4,7 +4,7 @@ import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
 import './index.scss';
 
-storiesOf('CSS/Card', module)
+storiesOf('CSS|Containers/Card', module)
   .addDecorator(withReadme(README))
   .add('All', () => (
     <div className="story">
