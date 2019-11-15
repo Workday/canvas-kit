@@ -1,35 +1,71 @@
 language: node_js
+
 node_js:
-- "8"
+  - "10"
+
+# if using Ubuntu 16 need this library
+# https://github.com/cypress-io/cypress-documentation/pull/1647
+addons:
+  apt:
+    packages:
+    - libgconf-2-4
+
+# cache both yarn and Cypress binary
 cache:
   yarn: true
+  directories:
+    - ~/.cache
+
 git:
   depth: 3
+
 stages:
-- name: npm publish
-  if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
-- name: master check and build storybook
+- name: pull_request
+  if: type = pull_request
+
+- name: master
   if: branch = master AND type != pull_request
+
+- name: tag
+  if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
+
 before_install:
-- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
-- export PATH="$HOME/.yarn/bin:$PATH"
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
+  - export PATH="$HOME/.yarn/bin:$PATH"
+
 install:
-- yarn install --production=false
-- yarn lint
-- yarn build
+  - yarn install --production=false
+
 jobs:
   include:
-  - stage: npm publish
+  - stage: pull_request
+    script:
+      - yarn lint
+      - yarn test
+      - yarn chromatic
+      - yarn start & npx wait-on http://localhost:9001
+      - yarn cypress run --record
+      - kill $(jobs -p) || true
+    env:
+      - CHROMATIC_APP_CODE="dlpro96xybh"
+      - CYPRESS_RECORD_KEY="3a9347b6-36ab-4a36-823d-709f4078b148"
+
+  - stage: tag
+    script:
+      - yarn build
     deploy:
       provider: script
       script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish from-package --yes --pre-dist-tag prerelease
       skip_cleanup: true
       on:
         tags: true
-  - stage: master check and build storybook
+
+  - stage: master
     script:
-    - yarn test
-    - yarn build-storybook
+      - yarn chromatic --auto-accept-changes
+      - yarn build-storybook
+    env:
+      - CHROMATIC_APP_CODE="dlpro96xybh"
     deploy:
       provider: pages
       skip_cleanup: true
@@ -37,6 +73,7 @@ jobs:
       github_token: "$GH_STORYBOOK_TOKEN"
       on:
         branch: master
+
 env:
   global:
   - secure: 2mf5LOhqAmYsMKOoVK+4F9Yym0Y7CvrgyHZcSMsezFB/8PowxdPKDfHuwV8I5DsRQuFzv1G9xmdlrV7qWKf48bJwyFRXulAdzsElrkrXDVhW3nmzt/vpqSA/YJWqB1gsBolp1dOrC0dblNTNzCxHPHgl0y8x8A6ZpT4oUY14iVO+olg5hkD6Yx+M17+Oe1q5r7GUF5auFazZr3BeyJ5oxdIIUVeZRitJU0KxScaZmBv/pwfCKrmrfGk/GSt11WJgTA5pRG+HQZ253uy/Oxsh4JKJXCoeEp1taSnxzJpVeA9iq3Ywj+C64sAqS4NVM/wtLFxDz7RZ3w+B6MbdnAYWarYotuNWtpduiHp9rzfOhYr1DmD9uxCQ+bnt0pwfLY010wsXwnBljxTvVvUwEvMRVTgwzSDwQIbhepb3Br+KduRIZOLAa/mbk6uFQOBJrDfkcug5xZUcoNii2WMtGxdq4gRZ4mWXjiXNOKgm27zu+IRM09z9aUbRTCVsNp8TP23GnhMMdoEhxZECWwHrwT6+QrLeih9tkA7YYlPrjaA33+vajSDzNyLWBxvk7JPIwDZiaObSWOh2XD3XBSnLHN/Pt0udrWxW7Zdtumg/u2zvWRhaQCIPN8fdgYMTEYQ4a1U+hR3gKl6DhF1mgkVqo1Q98g4lY+JMaS8/HG+YCmY5HzI=
