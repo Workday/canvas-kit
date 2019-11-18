@@ -30,7 +30,9 @@ export interface GenericButtonColors extends CanvasButtonColors {
   labelIconFocusHover?: string;
 }
 
-export type ButtonColorCollection = {[key in AllButtonVariants]: GenericButtonColors | null};
+export type ButtonColorCollection = {
+  [key in AllButtonVariants]: GenericButtonColors | null;
+};
 
 export const ButtonColors: ButtonColorCollection = {
   // TODO (beta button): remove in favor of beta buttons, consider moving from design-assets too
@@ -300,12 +302,17 @@ export const ButtonColors: ButtonColorCollection = {
   },
   [IconButtonVariant.Inverse]: {
     background: 'transparent',
-    activeBackground: 'rgba(0, 0, 0, 0.4)',
+    activeBackground: canvas.colors.frenchVanilla100,
+    focusBackground: canvas.colors.frenchVanilla100,
     disabledBackground: 'transparent',
     hoverBackground: 'rgba(0, 0, 0, 0.2)',
     labelIcon: canvas.colors.frenchVanilla100,
     labelIconHover: canvas.colors.frenchVanilla100,
+    labelIconActive: canvas.colors.licorice500,
+    labelIconFocus: canvas.colors.licorice200,
     labelIconDisabled: 'rgba(255, 255, 255, 0.75)',
+    focusRingInner: 'currentColor',
+    focusBorder: 'transparent',
     focusRingOuter: canvas.colors.frenchVanilla100,
     focusHover: canvas.colors.frenchVanilla100,
     activeHover: 'rgba(255, 255, 255, 0.85)',
@@ -313,15 +320,20 @@ export const ButtonColors: ButtonColorCollection = {
   },
   [IconButtonVariant.InverseFilled]: {
     background: 'rgba(0, 0, 0, 0.2)',
-    activeBackground: 'rgba(0, 0, 0, 0.4)',
+    activeBackground: canvas.colors.frenchVanilla100,
     disabledBackground: 'rgba(0, 0, 0, 0.2)',
     hoverBackground: 'rgba(0, 0, 0, 0.3)',
+    focusBackground: canvas.colors.frenchVanilla100,
     labelIcon: canvas.colors.frenchVanilla100,
     labelIconHover: canvas.colors.frenchVanilla100,
-    labelIconActive: canvas.colors.frenchVanilla100,
+    labelIconActive: canvas.colors.licorice200,
+    labelIconFocus: canvas.colors.licorice200,
     labelIconDisabled: 'rgba(255, 255, 255, 0.75)',
+    focusRingInner: 'currentColor',
+    focusBorder: 'transparent',
     focusRingOuter: canvas.colors.frenchVanilla100,
     focusHover: canvas.colors.frenchVanilla100,
+    labelIconFocusHover: canvas.colors.licorice500,
   },
 };
 

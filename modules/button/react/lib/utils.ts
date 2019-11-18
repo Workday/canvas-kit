@@ -115,6 +115,7 @@ export function getButtonFocusRing(variant: AllButtonVariants): CSSObject {
       return focusRing(2);
     case IconButtonVariant.Inverse:
     case IconButtonVariant.InverseFilled:
+      return focusRing(2, 2, true, false, buttonColors.focusRingInner, buttonColors.focusRingOuter);
     case TextButtonVariant.Inverse:
     case TextButtonVariant.InverseAllCaps:
       return focusRing(2, 0, true, false, buttonColors.focusRingInner, buttonColors.focusRingOuter);
@@ -159,7 +160,9 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
         },
       }),
       ...(buttonColors.labelIconHover && {
-        'span .wd-icon-fill, span .wd-icon-accent': {fill: buttonColors.labelIconHover},
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconHover,
+        },
       }),
     },
   };
@@ -170,10 +173,14 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
       borderColor: buttonColors.activeBorder,
       color: buttonColors.activeText,
       ...(buttonColors.labelDataActive && {
-        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {color: buttonColors.labelDataActive},
+        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {
+          color: buttonColors.labelDataActive,
+        },
       }),
       ...(buttonColors.labelIconActive && {
-        'span .wd-icon-fill, span .wd-icon-accent': {fill: buttonColors.labelIconActive},
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconActive,
+        },
       }),
     },
   };
@@ -185,14 +192,15 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
       borderColor: buttonColors.focusBorder,
       color: buttonColors.focusText,
       ...(buttonColors.labelDataFocus && {
-        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {color: buttonColors.labelDataFocus},
+        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {
+          color: buttonColors.labelDataFocus,
+        },
       }),
       ...(buttonColors.labelIconFocus && {
-        'span .wd-icon-fill, span .wd-icon-accent': {fill: buttonColors.labelIconFocus},
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconFocus,
+        },
       }),
-    },
-    ':hover:focus': {
-      backgroundColor: buttonColors.hoverBackground,
     },
     ...activeStyles,
     ...hoverStyles,
@@ -201,10 +209,14 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
       borderColor: buttonColors.disabledBorder,
       color: buttonColors.disabledText,
       ...(buttonColors.labelIconDisabled && {
-        'span .wd-icon-fill, span .wd-icon-accent': {fill: buttonColors.labelIconDisabled},
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconDisabled,
+        },
       }),
       ...(buttonColors.labelDataDisabled && {
-        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {color: buttonColors.labelDataDisabled},
+        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {
+          color: buttonColors.labelDataDisabled,
+        },
       }),
     },
     '&:not([disabled])': {
@@ -219,12 +231,10 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
     },
     ...mouseFocusBehavior({
       '&:focus': {
-        ...baseStyles,
+        // ...baseStyles,
         outline: 'none',
         boxShadow: 'none',
         animation: 'none',
-        ...hoverStyles,
-        ...activeStyles,
       },
     }),
   };
