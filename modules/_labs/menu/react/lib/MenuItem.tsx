@@ -26,7 +26,7 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
 
 const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
   {
-    ...type.body2,
+    ...type.body3,
     padding: `${spacing.xxs} ${spacing.s}`,
     height: spacing.xl,
     boxSizing: 'border-box',

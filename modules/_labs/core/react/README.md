@@ -7,10 +7,11 @@
 ## Type
 
 This new type hierarchy is in the process of being introduced into our products. It relies on larger
-font sizes/weights to increase legibility and promote reducing density in UI design. Other than the
-visual size and weight changes across every level of hierarchy, there are a few naming changes:
-`type.dataViz1` and `type.dataViz2` have been renamed to `type.brand1` and `type.brand2`,
-respectively.
+font sizes/weights to increase legibility and promote reducing density in UI design. The font size,
+line height and weight has changed across every level of the hierarchy. The `dataViz` and `h` levels
+have been combined into `title`. This was to eliminate confusion of heading usage between product
+use cases (often using smaller type styles) and marketing use cases (using larger type styles). It
+also avoids the oddity of using `type.h1` on an `<h3>` element for example.
 
 ### Usage
 
@@ -20,15 +21,26 @@ The usage is the same as the current hierarchy, you just need a different import
 import {type} from '@workday/canvas-kit-labs-react-core';
 
 const MyLabel = styled('label')({
-  ...type.body,
+  ...type.body2,
   ...type.variant.label,
 });
 ```
 
-### Breaking Change
+### Sizes
 
-> When the breaking change is made, anyone using the current type guide will need to update the
-> references for `dataViz1` and `dataViz2`.
+| Name     | Size(px) | Usage Examples                                       |
+| -------- | -------- | ---------------------------------------------------- |
+| `title1` | 56       | Marketing headings for large marquees/heros          |
+| `title2` | 48       | Marketing headings                                   |
+| `title3` | 40       | Marketing headings                                   |
+| `title4` | 32       | Marketing headings                                   |
+| `title5` | 24       | Page headers                                         |
+| `title6` | 20       | Sub-headings                                         |
+| `body1`  | 20       | Large paragraph text for marketing, articles, etc.   |
+| `body2`  | 16       | Paragraphs, large buttons, navigation, sub-headings  |
+| `body3`  | 14       | Buttons, form labels, hint text, menus, descriptions |
+| `small1` | 12       | Caption, pills, satus indicators                     |
+| `small2` | 10       | Data visualization labels, Mobile labels             |
 
 ## Margin & Padding Spacing
 

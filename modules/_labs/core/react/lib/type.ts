@@ -2,78 +2,90 @@ import {typeColors} from '@workday/canvas-colors-web';
 import {CSSProperties, type, CanvasTypeVariant, fontFamily} from '@workday/canvas-kit-react-core';
 
 export interface CanvasTypeHierarchy {
-  brand1: CSSProperties;
-  brand2: CSSProperties;
-  h1: CSSProperties;
-  h2: CSSProperties;
-  h3: CSSProperties;
-  h4: CSSProperties;
-  h5: CSSProperties;
-  body: CSSProperties;
+  title1: CSSProperties;
+  title2: CSSProperties;
+  title3: CSSProperties;
+  title4: CSSProperties;
+  title5: CSSProperties;
+  title6: CSSProperties;
+  body1: CSSProperties;
   body2: CSSProperties;
-  small: CSSProperties;
+  body3: CSSProperties;
+  small1: CSSProperties;
+  small2: CSSProperties;
   [key: string]: CSSProperties;
 }
 
+const headingLineHeight = 1.25;
+const headingFontWeight = 700;
+const bodyLineHeight = 1.5;
+const bodyFontWeight = 400;
+
 const hierarchy: CanvasTypeHierarchy = {
-  brand1: {
+  title1: {
     fontSize: 56,
-    lineHeight: 1.3,
-    fontWeight: 700,
+    lineHeight: headingLineHeight,
+    fontWeight: headingFontWeight,
     color: typeColors.heading,
   },
-  brand2: {
+  title2: {
     fontSize: 48,
-    lineHeight: 1.3,
-    fontWeight: 700,
+    lineHeight: headingLineHeight,
+    fontWeight: headingFontWeight,
     color: typeColors.heading,
   },
-  h1: {
+  title3: {
     fontSize: 40,
-    lineHeight: 1.3,
-    fontWeight: 500,
+    lineHeight: headingLineHeight,
+    fontWeight: headingFontWeight,
     color: typeColors.heading,
   },
-  h2: {
+  title4: {
     fontSize: 32,
-    lineHeight: 1.3,
-    fontWeight: 700,
+    lineHeight: headingLineHeight,
+    fontWeight: headingFontWeight,
     color: typeColors.heading,
   },
-  h3: {
+  title5: {
     fontSize: 24,
-    lineHeight: 1.3,
-    fontWeight: 700,
+    lineHeight: headingLineHeight,
+    fontWeight: headingFontWeight,
     color: typeColors.heading,
   },
-  h4: {
+  title6: {
     fontSize: 20,
-    lineHeight: 1.3,
-    fontWeight: 700,
+    lineHeight: headingLineHeight,
+    fontWeight: headingFontWeight,
     color: typeColors.heading,
   },
-  h5: {
+  body1: {
     fontSize: 20,
-    lineHeight: 1.3,
-    fontWeight: 400,
-    color: typeColors.heading,
-  },
-  body: {
-    fontSize: 16,
-    lineHeight: 1.5,
-    fontWeight: 400,
+    lineHeight: bodyLineHeight,
+    fontWeight: bodyFontWeight,
     color: typeColors.body,
   },
   body2: {
-    fontSize: 14,
-    lineHeight: 1.5,
-    fontWeight: 400,
+    fontSize: 16,
+    lineHeight: bodyLineHeight,
+    fontWeight: bodyFontWeight,
     color: typeColors.body,
   },
-  small: {
-    fontSize: 13,
-    lineHeight: 1.5,
-    fontWeight: 400,
+  body3: {
+    fontSize: 14,
+    lineHeight: bodyLineHeight,
+    fontWeight: bodyFontWeight,
+    color: typeColors.body,
+  },
+  small1: {
+    fontSize: 12,
+    lineHeight: bodyLineHeight,
+    fontWeight: bodyFontWeight,
+    color: typeColors.body,
+  },
+  small2: {
+    fontSize: 10,
+    lineHeight: bodyLineHeight,
+    fontWeight: bodyFontWeight,
     color: typeColors.body,
   },
 };

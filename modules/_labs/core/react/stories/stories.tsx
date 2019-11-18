@@ -21,15 +21,14 @@ storiesOf('Labs/Core/React', module)
   .add('Type', () => (
     <div className="story">
       <section>
-        <h1 style={type.brand1}>Brand 1 Header</h1>
-        <h2 style={type.brand2}>Brand 2 header</h2>
-        <h1 style={type.h1}>H1 Header</h1>
-        <h2 style={type.h2}>H2 Header</h2>
-        <h3 style={type.h3}>H3 Header</h3>
-        <h4 style={type.h4}>H4 Header</h4>
-        <h5 style={type.h5}>H5 Header</h5>
-        <p style={type.body}>
-          <strong>Body: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde
+        <h1 style={type.title1}>Title 1 Header</h1>
+        <h2 style={type.title2}>Title 2 header</h2>
+        <h3 style={type.title3}>Title 3 Header</h3>
+        <h4 style={type.title4}>Title 4 Header</h4>
+        <h5 style={type.title5}>Title 5 Header</h5>
+        <h6 style={type.title6}>Title 6 Header</h6>
+        <p style={type.body1}>
+          <strong>Body 1: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde
           ennui. Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth
           kitsch next level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris
           sustainable. Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw
@@ -44,8 +43,24 @@ storiesOf('Labs/Core/React', module)
           denim, thundercats salvia intelligentsia jean shorts officia. Heirloom craft beer put a
           bird on it occaecat
         </p>
-        <p style={type.small}>
-          <strong>Small: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde
+        <p style={type.body3}>
+          <strong>Body 3: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde
+          ennui. Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth
+          kitsch next level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris
+          sustainable. Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw
+          denim, thundercats salvia intelligentsia jean shorts officia. Heirloom craft beer put a
+          bird on it occaecat
+        </p>
+        <p style={type.small1}>
+          <strong>Small 1: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde
+          ennui. Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth
+          kitsch next level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris
+          sustainable. Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw
+          denim, thundercats salvia intelligentsia jean shorts officia. Heirloom craft beer put a
+          bird on it occaecat
+        </p>
+        <p style={type.small2}>
+          <strong>Small 2: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde
           ennui. Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth
           kitsch next level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris
           sustainable. Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw
@@ -54,25 +69,25 @@ storiesOf('Labs/Core/React', module)
         </p>
         <hr />
 
-        <h3 style={type.h3}>Variants</h3>
+        <h3 style={type.title5}>Variants</h3>
 
-        <span css={[type.body, type.variant.button]}>Button Text</span>
+        <span css={[type.body2, type.variant.button]}>Button Text</span>
         <br />
-        <span css={[type.body, type.variant.caps]}>Caps Text</span>
+        <span css={[type.body2, type.variant.caps]}>Caps Text</span>
         <br />
-        <label css={[type.body, type.variant.label]}>Label Text</label>
+        <label css={[type.body2, type.variant.label]}>Label Text</label>
         <br />
-        <span css={[type.body, type.variant.hint]}>Hint Text</span>
+        <span css={[type.body2, type.variant.hint]}>Hint Text</span>
         <br />
-        <span css={[type.body, type.variant.error]}>Error Text</span>
+        <span css={[type.body2, type.variant.error]}>Error Text</span>
         <br />
-        <a href="#" css={[type.body, type.variant.link]}>
+        <a href="#" css={[type.body2, type.variant.link]}>
           Link Text
         </a>
         <br />
-        <span css={[type.body, type.variant.inverse, inverseStyle]}>Inverse Text</span>
+        <span css={[type.body2, type.variant.inverse, inverseStyle]}>Inverse Text</span>
         <br />
-        <span css={[type.body, type.variant.mono]}>Mono Text</span>
+        <span css={[type.body2, type.variant.mono]}>Mono Text</span>
       </section>
     </div>
   ))
