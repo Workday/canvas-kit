@@ -7,7 +7,7 @@ describe('Button', () => {
 
   context('given primary buttons are rendered', () => {
     beforeEach(() => {
-      h.stories.load('button', 'primary');
+      h.stories.load('components-buttons-button', 'primary');
     });
 
     it('should not have any axe errors', () => {
@@ -23,7 +23,7 @@ describe('Button', () => {
 
   context('given delete buttons are rendered', () => {
     beforeEach(() => {
-      h.stories.load('button', 'delete');
+      h.stories.load('components-buttons-button', 'delete');
     });
 
     it('should not have any axe errors', () => {
