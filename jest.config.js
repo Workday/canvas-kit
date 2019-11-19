@@ -10,7 +10,6 @@ module.exports = {
     '!**/header/**/lib/Header.tsx',
     '!**/common/**/ControlledComponentWrapper.tsx',
     '!**/common/**/InputProviderDecorator.tsx',
-    '!**/common/**/SectionDecorator.tsx',
     '!**/index.{ts,tsx,js,jsx}',
     '!**/stories*.{ts,tsx,js,jsx}',
   ],
