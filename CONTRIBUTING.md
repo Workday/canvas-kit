@@ -74,6 +74,8 @@ Canvas Kit uses [Cypress](cypress.io) for UI tests. For info on why we chose Cyp
 [Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
 visit [Writing Cypress Tests](./cypress/README.md)
 
+Visual regression testing is provided by [ChromaticQA](https://www.chromaticqa.com/). Snapshots of our stories are rendered in Chrome, Firefox, and IE11.
+
 ### Git Guidelines
 
 #### Branches
