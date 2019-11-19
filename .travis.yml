@@ -62,7 +62,7 @@ jobs:
 
   - stage: master
     script:
-      - yarn chromatic --auto-accept-changes
+      - yarn chromatic --auto-accept-changes --exit-zero-on-changess
       - yarn build-storybook
     env:
       - CHROMATIC_APP_CODE="dlpro96xybh"
