@@ -42,7 +42,7 @@ jobs:
     script:
       - yarn lint
       - yarn test
-      - yarn chromatic
+      - yarn chromatic --exit-zero-on-changes
       - yarn start & npx wait-on http://localhost:9001
       - yarn cypress run --record
       - kill $(jobs -p) || true
