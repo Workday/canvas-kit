@@ -1,8 +1,7 @@
 import {Meta} from '@storybook/addon-docs/blocks';
-import Markdown from 'markdown-to-jsx';
 import Contributing from '../../CONTRIBUTING.md';
-import 'github-markdown-css';
+import MarkdownWrapper from '../../utils/storybook/MarkdownWrapper.tsx';
 
 <Meta title="Welcome|Contributing" />
 
-<Markdown class="markdown-body">{Contributing}</Markdown>
+<MarkdownWrapper content={Contributing} />
