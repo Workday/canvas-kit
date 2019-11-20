@@ -202,6 +202,9 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
         },
       }),
     },
+    ':hover:focus': {
+      backgroundColor: buttonColors.hoverBackground,
+    },
     ...activeStyles,
     ...hoverStyles,
     ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
@@ -231,10 +234,121 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
     },
     ...mouseFocusBehavior({
       '&:focus': {
-        // ...baseStyles,
+        ...baseStyles,
         outline: 'none',
         boxShadow: 'none',
         animation: 'none',
+        ...hoverStyles,
+        ...activeStyles,
+      },
+    }),
+  };
+}
+
+export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
+  const buttonColors = ButtonColors[variant];
+
+  if (buttonColors == null) {
+    return {};
+  }
+
+  const baseStyles = {
+    backgroundColor: buttonColors.background,
+    ...(buttonColors.labelIcon && {
+      'span .wd-icon-fill, span .wd-icon-accent': {
+        transition: 'fill 120ms ease-in',
+        fill: buttonColors.labelIcon,
+      },
+    }),
+    ...(buttonColors.labelData && {
+      ['.' + ButtonStyles.labelDataBaseStyles.classname]: {
+        color: buttonColors.labelData,
+      },
+    }),
+  };
+
+  const hoverStyles = {
+    ':hover': {
+      backgroundColor: buttonColors.hoverBackground,
+      ...(buttonColors.labelIconHover && {
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconHover,
+        },
+      }),
+    },
+  };
+
+  const activeStyles = {
+    ':active, :focus:active, :hover:active': {
+      backgroundColor: buttonColors.activeBackground,
+      ...(buttonColors.labelDataActive && {
+        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {
+          color: buttonColors.labelDataActive,
+        },
+      }),
+      ...(buttonColors.labelIconActive && {
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconActive,
+        },
+      }),
+    },
+  };
+
+  return {
+    ...baseStyles,
+    ':focus': {
+      backgroundColor: buttonColors.focusBackground,
+      ...(buttonColors.labelDataFocus && {
+        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {
+          color: buttonColors.labelDataFocus,
+        },
+      }),
+      ...(buttonColors.labelIconFocus && {
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconFocus,
+        },
+      }),
+    },
+    ...activeStyles,
+    ...hoverStyles,
+    ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
+      backgroundColor: buttonColors.disabledBackground,
+      borderColor: buttonColors.disabledBorder,
+      color: buttonColors.disabledText,
+      ...(buttonColors.labelIconDisabled && {
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconDisabled,
+        },
+      }),
+      ...(buttonColors.labelDataDisabled && {
+        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {
+          color: buttonColors.labelDataDisabled,
+        },
+      }),
+    },
+    '&:not([disabled])': {
+      '&:focus': {
+        borderColor: buttonColors.focusBorder,
+        ...getButtonFocusRing(variant),
+      },
+      '&:active': {
+        borderColor: buttonColors.activeBorder,
+        ...getButtonFocusRing(variant),
+      },
+      '&:focus:hover': {
+        backgroundColor: buttonColors.focusBackground,
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconFocusHover,
+        },
+      },
+    },
+    ...mouseFocusBehavior({
+      '&:focus': {
+        ...baseStyles,
+        outline: 'none',
+        boxShadow: 'none',
+        animation: 'none',
+        ...hoverStyles,
       },
     }),
   };

@@ -130,6 +130,10 @@ export const IconButtonCon = styled('button', {
         };
       case IconButtonVariant.Circle:
         return {
+          '&:focus:hover, &:focus': {
+            ...getFillSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+          },
           '&:active': {
             ...getFillSelector(colors.blueberry400),
             ...getAccentSelector(colors.frenchVanilla100),
@@ -144,6 +148,7 @@ export const IconButtonCon = styled('button', {
           '&:hover, &:focus&:hover': {
             backgroundColor: colors.blueberry500,
             ...getAccentSelector(colors.blueberry500),
+            ...getFillSelector(colors.frenchVanilla100),
           },
           ...getBackgroundSelector(colors.frenchVanilla100),
           ...getFillSelector(colors.frenchVanilla100),
@@ -151,17 +156,19 @@ export const IconButtonCon = styled('button', {
         };
       case IconButtonVariant.Inverse:
         return {
-          '&:focus&:hover, &:focus, &:active': {
+          '&:focus&:hover, &:focus, &:active, &:focus:hover': {
             backgroundColor: colors.frenchVanilla100,
+            ...focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
+            ...getFillSelector(colors.licorice200),
+            ...getAccentSelector(colors.licorice200),
           },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.frenchVanilla100,
-            '&:hover span .wd-icon-fill, span .wd-icon-fill, span .wd-icon-accent': {
-              fill: colors.licorice200,
-            },
+          '&:not([disabled]):focus:': {
             ...(toggled
               ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
               : {}),
+          },
+          '&:hover, &:focus:hover': {
+            backgroundColor: colors.frenchVanilla100,
           },
           ...getAccentSelector(colors.licorice200),
         };
