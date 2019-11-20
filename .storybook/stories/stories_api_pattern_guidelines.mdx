@@ -1,7 +1,8 @@
 import {Meta} from '@storybook/addon-docs/blocks';
 import Markdown from 'markdown-to-jsx';
 import ApiPatternGuidelines from '../../API_PATTERN_GUIDELINES.md';
+import 'github-markdown-css';
 
 <Meta title="Welcome|API Pattern Guidelines" />
 
-<Markdown>{ApiPatternGuidelines}</Markdown>
+<Markdown class="markdown-body">{ApiPatternGuidelines}</Markdown>

@@ -1,7 +1,8 @@
 import {Meta} from '@storybook/addon-docs/blocks';
 import Markdown from 'markdown-to-jsx';
 import Readme from '../../README.md';
+import 'github-markdown-css';
 
 <Meta title="Welcome|Getting Started" />
 
-<Markdown>{Readme}</Markdown>
+<Markdown class="markdown-body">{Readme}</Markdown>
