@@ -1,18 +1,18 @@
 import * as React from 'react';
 import 'github-markdown-css';
 import EmojiConvertor from 'emoji-js';
-import Markdown from 'markdown-to-jsx';
+import MarkdownToJSX from 'markdown-to-jsx';
 
 const emoji = new EmojiConvertor();
 
-interface MarkdownWrapperProps {
+interface MarkdownProps {
   content: string;
 }
 
-export default class MarkdownWrapper extends React.Component<MarkdownWrapperProps> {
+export default class Markdown extends React.Component<MarkdownProps> {
   render() {
     const ConvertedContent = emoji.replace_colons(this.props.content);
 
-    return <Markdown class="markdown-body">{ConvertedContent}</Markdown>;
+    return <MarkdownToJSX className="markdown-body">{ConvertedContent}</MarkdownToJSX>;
   }
 }
