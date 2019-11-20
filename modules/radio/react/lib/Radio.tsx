@@ -10,13 +10,37 @@ import canvas, {
 import uuid from 'uuid/v4';
 
 export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * Whether or not the radio input is checked (`true`) or not checked (`false`)
+   */
   checked: boolean;
+  /**
+   * Whether or not the radio input is disabled (not able to be checked on or off)
+   */
   disabled?: boolean;
+  /**
+   * The HTML attribute `id` for the underlying radio input and label component. This is required if `label` is defined.
+   */
   id?: string;
+  /**
+   * A ref to the underlying radio input element. Use this to imperatively check or focus this component.
+   */
   inputRef?: React.Ref<HTMLInputElement>;
+  /**
+   * The content of the label associated to the radio input component.
+   */
   label?: string;
+  /**
+   * If specified, will be passed as the common `name` prop to all `Radio` children. This enables you to avoid specifying `name` on each child.
+   */
   name?: string;
+  /**
+   * Callback function when a radio input is selected. The value (if defined) or the index of the input will be returned.
+   */
   onChange?: (e: React.SyntheticEvent) => void;
+  /**
+   * Identify which item is selected (toggled=true). If a string is passed, the Radio with the corresponding value will be selected. If a number is passed, the Radio with the corresponding index will be selected.
+   */
   value?: string;
 }
 

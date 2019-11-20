@@ -11,8 +11,17 @@ export enum ModalWidth {
 }
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   *  Allows you to open/close modal
+   */
   open: boolean;
+  /**
+   * You can choose between zero, s, l for your padding
+   */
   padding: PopupPadding;
+  /**
+   * You can choose between s or m for your modal width
+   */
   width: ModalWidth;
   /**
    * Optional callback for the Modal handling closing. If this callback is provided the Modal will have
@@ -28,6 +37,9 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    * Set this to true for simple applications and the modal will close when the escape key is pressed.
    */
   closeOnEscape: boolean;
+  /**
+   * Heading at the top of the card.
+   */
   heading: React.ReactNode;
   /**
    * Optional override of the auto-select functionality of the Modal. If this ref is defined, that element

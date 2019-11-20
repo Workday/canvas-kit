@@ -6,18 +6,48 @@ import Icon from './Icon';
 import {SpanProps} from './types';
 
 export interface SystemIconStyles {
+  /**
+   * `.wd-icon-accent` color. This will override `color`
+   */
   accent?: string;
+  /**
+   * `.wd-icon-accent` color on hover. This will override `colorHover`
+   */
   accentHover?: string;
+  /**
+   * `.wd-icon-background` color
+   */
   background?: string;
+  /**
+   * `.wd-icon-background` color on hover.
+   */
   backgroundHover?: string;
+  /**
+   * Icon color. This will define `accent` and `fill`. `accent` and `fill` will override this property if defined
+   */
   color?: string;
+  /**
+   * Hover color of the icon. This will define `accentHover` and `fillHover`
+   */
   colorHover?: string;
+  /**
+   * `.wd-icon-fill` color. This will override `color`
+   */
   fill?: string;
+  /**
+   * `.wd-icon-fill` color on hover. This will override `colorHover`
+   */
   fillHover?: string;
 }
 
 export interface SystemIconProps extends SystemIconStyles {
+  /**
+   * Icon to display from `@workday/canvas-system-icons-web`
+   */
   icon: CanvasSystemIcon;
+  /**
+   * Size of the icon in `px`
+   */
   size?: number;
 }
 

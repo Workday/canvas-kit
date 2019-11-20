@@ -5,12 +5,24 @@ import Svg from './Svg';
 import {SpanProps} from './types';
 
 export interface GraphicStyles {
+  /**
+   *  Graphic width in `px`. `width` takes precedence over `height` in order to preserve the graphic's
+   */
   width?: number | string;
+  /**
+   * Graphic height in `px`. If set, `width` will be set to `100%`
+   */
   height?: number | string;
+  /**
+   * Expand graphic to fit container. `grow` takes precedence over both `width` and `height`.
+   */
   grow?: boolean;
 }
 
 export interface GraphicProps extends GraphicStyles {
+  /**
+   * Graphic to display from `@workday/canvas-graphics-web`
+   */
   src: CanvasGraphic;
 }
 

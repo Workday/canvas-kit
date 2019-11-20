@@ -5,12 +5,33 @@ import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-reac
 import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
 
 export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   *  Whether or not the switch is on (`true`) or off (`false`)
+   */
   checked: boolean;
+  /**
+   *  Whether or not the switch is disabled (not able to be switched on or off)
+   */
   disabled?: boolean;
+  /**
+   * The HTML attribute `id` for the underlying input checkbox component.
+   */
   id?: string;
+  /**
+   * A callback that gets called everytime the switch checked state changes.
+   */
   onChange?: (e: React.SyntheticEvent) => void;
+  /**
+   * The `value` attribute of the input checkbox.
+   */
   value?: string;
+  /**
+   * A ref to the underlying input checkbox element. Use this to imperatively switch or focus this component.
+   */
   inputRef?: React.Ref<HTMLInputElement>;
+  /**
+   * The type of error to display, if any.
+   */
   error?: ErrorType;
 }
 

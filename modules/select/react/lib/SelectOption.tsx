@@ -5,8 +5,17 @@ import * as React from 'react';
 // change the visual of the dropdown later on
 
 export interface SelectOptionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
+  /**
+   * The value of the SelectOption
+   */
   value?: string;
+  /**
+   * The label of the SelectOption
+   */
   label?: string;
+  /**
+   * Whether or not the SelectOption is disabled
+   */
   disabled: boolean;
 }
 

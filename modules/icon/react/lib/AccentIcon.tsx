@@ -6,12 +6,24 @@ import Icon from './Icon';
 import {SpanProps} from './types';
 
 export interface AccentIconStyles {
+  /**
+   * The fill color for the icon
+   */
   color?: string;
+  /**
+   * Toggle for transparent accent icon background. If false, the background fill will be white.
+   */
   transparent?: boolean;
 }
 
 export interface AccentIconProps extends AccentIconStyles {
+  /**
+   *  Icon to display from `@workday/canvas-accent-icons-web`
+   */
   icon: CanvasAccentIcon;
+  /**
+   * Size of the Icon
+   */
   size?: number;
 }
 

@@ -48,7 +48,13 @@ export const appletIconStyles = ({
 };
 
 export interface AppletIconProps extends AppletIconStyles {
+  /**
+   * The icon to display from `@workday/canvas-applet-icons-web`
+   */
   icon: CanvasAppletIcon;
+  /**
+   * The size of the icon
+   */
   size?: number;
 }
 

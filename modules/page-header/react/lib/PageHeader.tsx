@@ -4,8 +4,17 @@ import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 
 export interface PageHeaderProps {
+  /**
+   * The title of the page header.
+   */
   title: string;
+  /**
+   * Use the page header in the non-product page. In this context, content is centered and the page header is responsive in all three breakpoints.
+   */
   capWidth: boolean;
+  /**
+   * The breakpoint at which the header's container spacing increases from 's' size to 'xl' size.
+   */
   breakpoint?: number;
 }
 
