@@ -1,7 +1,6 @@
-
 {
   "name": "@workday/canvas-kit-labs-react-drawer",
-  "version": "0.0.0",
+  "version": "3.1.0",
   "description": "A Drawer component that allows for custom content to be added",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -35,10 +34,10 @@
     "drawer"
   ],
   "dependencies": {
-    "@workday/canvas-kit-react-core": "^3.0.0",
-    "@workday/canvas-kit-react-button": "^3.0.1",
     "@emotion/core": "^10.0.21",
-    "@emotion/styled": "^10.0.17"
+    "@emotion/styled": "^10.0.17",
+    "@workday/canvas-kit-react-button": "^3.1.0",
+    "@workday/canvas-kit-react-core": "^3.1.0"
   },
   "peerDependencies": {
     "react": ">= 16.8 < 17"
