@@ -5,7 +5,13 @@ import styled from '@emotion/styled';
 import {colors} from '@workday/canvas-kit-react-core';
 
 export interface ColorPreviewProps extends TextInputProps {
+  /**
+   * The value entered by the user into the color input
+   */
   value: string;
+  /**
+   * An id linked to the color preview input to be used with an associated form label
+   */
   id?: string;
 }
 

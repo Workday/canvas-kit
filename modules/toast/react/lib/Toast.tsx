@@ -9,12 +9,30 @@ import {IconButtonSize} from '@workday/canvas-kit-react-button';
 import styled from '@emotion/styled';
 
 export interface ToastProps {
+  /**
+   *  Pass whatever icon you'd like to display on the left side of the Toast You can import icons from '@workday/canvas-system-icons-web'
+   */
   icon: CanvasSystemIcon;
+  /**
+   * The color of the icon
+   */
   iconColor: CanvasColor | string; // TODO: Fix
   children: string;
+  /**
+   * Callback to handle close of your Toast and any other event when the Toast is closed.
+   */
   onClose?: () => void;
+  /**
+   * Callback to handle an action link.
+   */
   onActionClick?: () => void;
+  /**
+   * The text to display for the link.
+   */
   actionText?: string;
+  /**
+   * Origin from which the toast will animate from.
+   */
   transformOrigin?: TransformOrigin;
 }
 const toastWidth = 360;

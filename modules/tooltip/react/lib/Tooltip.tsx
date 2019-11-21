@@ -5,7 +5,13 @@ import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react
 import {keyframes} from '@emotion/core';
 
 export interface TooltipProps {
+  /**
+   *  Origin from which the popup will animate from.
+   */
   transformOrigin: TransformOrigin;
+  /**
+   * Unique id of the tooltip
+   */
   id?: string;
 }
 

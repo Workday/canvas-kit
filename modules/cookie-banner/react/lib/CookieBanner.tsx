@@ -28,6 +28,9 @@ export interface CookieBannerProps {
    */
   notice: string | React.ReactNode;
 
+  /**
+   * Default label for cookie settings.
+   */
   settingsLabel: string;
 }
 

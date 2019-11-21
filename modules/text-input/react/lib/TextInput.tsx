@@ -6,7 +6,13 @@ import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-k
 export interface TextInputProps
   extends GrowthBehavior,
     React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   *  The type of error to display, if any.
+   */
   error?: ErrorType;
+  /**
+   * The ref callback for the inner input element.
+   */
   inputRef?: React.RefObject<HTMLInputElement>;
 }
 

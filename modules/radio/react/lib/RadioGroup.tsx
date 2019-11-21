@@ -13,12 +13,17 @@ export interface RadioGroupProps extends GrowthBehavior {
   /**
    * The value or index of the Radio that should be toggled on.
    * If a string is passed, the Radio with the corresponding value will be selected.
-   * If a number is passed, ihe Radio with the corresponding index will be selected.
    */
   value?: string | number;
 
+  /**
+   *  If specified, will be passed as the common `name` prop to all `Radio` children. This enables you to avoid specifying `name` on each child.
+   */
   name?: string;
 
+  /**
+   * The type of error to display, if any.
+   */
   error?: ErrorType;
 
   /**

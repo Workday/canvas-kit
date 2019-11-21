@@ -6,13 +6,37 @@ import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-k
 export interface TextAreaProps
   extends GrowthBehavior,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  /**
+   * Whether or not the text area is disabled.
+   */
   disabled?: boolean;
+  /**
+   * The type of error to display, if any.
+   */
   error?: ErrorType;
+  /**
+   * The ref callback for the inner text area element.
+   */
   inputRef?: React.Ref<HTMLTextAreaElement>;
+  /**
+   * The callback fired when the value is changed.
+   */
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  /**
+   * Placeholder text to be displayed if there is no input value.
+   */
   placeholder?: string;
+  /**
+   * If true, user will be unable to interact with the field.
+   */
   readOnly?: boolean;
+  /**
+   * Set resize constraints on the text area
+   */
   resize: TextAreaResizeDirection;
+  /**
+   * Text Area value
+   */
   value?: any;
 }
 
