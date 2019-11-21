@@ -42,13 +42,6 @@ import {CanvasProvider} from '@workday/canvas-kit-react';
 
 Default: `defaultCanvasTheme`
 
-#### `setThemeGlobal: boolean`
-
-> Indicates whether to set a global theme on the window object. This should be used if your
-> application is not using a single react tree (React contexts only work within a single tree).
-
-Default: `false`
-
 ## Theme Object
 
 The Canvas theme is based on the following object:
@@ -160,8 +153,39 @@ const theme: PartialCanvasTheme = {
 
 <CanvasProvider>
   {/* All your components containing any Canvas components */}
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={createCanvasTheme(theme)}>
     <Switch checked={true} />
   </ThemeProvider>
 </CanvasProvider>;
 ```
+
+### Context Alternative
+
+If, for whatever reason, you're not able to use React Contexts, we offer an alternative. A good
+example of this is an app with many small React trees.
+
+Simply set your theme on the window object like so:
+
+```tsx
+// If using typescript, you will need to declare this on the window object
+declare global {
+  interface Window {
+    wdCanvas: {
+      theme?: CanvasTheme;
+    };
+  }
+}
+
+const theme: PartialCanvasTheme = {
+  palette: {
+    primary: {
+      main: colors.greenApple400,
+    },
+  },
+};
+
+window.wdCanvas.theme = createCanvasTheme(theme);
+```
+
+If the theme is not available via a context, Canvas Kit components will attempt to pull it from this
+variable before falling back to the default theme.
