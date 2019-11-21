@@ -19,6 +19,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   backgroundColor?: SidePanelBackgroundColor;
   closeNavigationLabel: string;
   openNavigationLabel: string;
+  role?: string;
 }
 
 export interface SidePanelState {
@@ -136,6 +137,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     backgroundColor: SidePanelBackgroundColor.White,
     closeNavigationLabel: 'close navigation',
     openNavigationLabel: 'open navigation',
+    role: 'region',
   };
 
   constructor(props: SidePanelProps) {
@@ -166,13 +168,13 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
       backgroundColor,
       openNavigationLabel,
       closeNavigationLabel,
+      role,
       ...elemProps
     } = this.props;
 
     return (
       <SidePanelContainer
-        role="region"
-        aria-orientation="vertical"
+        role={role}
         padding={padding}
         openDirection={openDirection}
         openWidth={openWidth}
