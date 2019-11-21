@@ -11,7 +11,7 @@ import README from '../../../text-input/react/README.md';
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-storiesOf('Components|Inputs/Text Input/Top Label', module)
+storiesOf('React Components|Inputs/Text Input/Top Label', module)
   .addParameters({component: TextInput})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -74,7 +74,7 @@ storiesOf('Components|Inputs/Text Input/Top Label', module)
     </FormField>
   ));
 
-storiesOf('Components|Inputs/Text Input/Left Label', module)
+storiesOf('React Components|Inputs/Text Input/Left Label', module)
   .addParameters({component: TextInput})
   .addDecorator(withReadme(README))
   .add('Default', () => (

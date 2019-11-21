@@ -61,7 +61,7 @@ class BannerContainer extends React.Component<Props, State> {
   }
 }
 
-storiesOf('Components|Indicators/Cookie Banner', module)
+storiesOf('React Components|Indicators/Cookie Banner', module)
   .addParameters({component: CookieBanner})
   .addDecorator(withReadme(README))
   .add('Default', () => (

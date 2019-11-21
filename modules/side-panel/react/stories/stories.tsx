@@ -154,7 +154,7 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
   };
 }
 
-storiesOf('Components|Containers/Side Panel', module)
+storiesOf('React Components|Containers/Side Panel', module)
   .addParameters({component: SidePanel})
   .addDecorator(withReadme(README))
   .add('Default', () => (

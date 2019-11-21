@@ -37,7 +37,7 @@ const buttonContainer = {
   },
 };
 
-storiesOf('Components|Buttons/Button', module)
+storiesOf('React Components|Buttons/Button', module)
   .addParameters({component: Button})
   .addDecorator(withReadme(README))
   .add('Primary', () => (
@@ -248,7 +248,7 @@ storiesOf('Components|Buttons/Button', module)
     </div>
   ));
 
-storiesOf('Components|Buttons/Text', module)
+storiesOf('React Components|Buttons/Text', module)
   .addParameters({component: TextButton})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -340,7 +340,7 @@ storiesOf('Components|Buttons/Text', module)
     </div>
   ));
 
-storiesOf('Components|Buttons/Outline', module)
+storiesOf('React Components|Buttons/Outline', module)
   .addParameters({component: Button})
   .addDecorator(withReadme(README))
   .add('Primary', () => (
@@ -553,7 +553,7 @@ storiesOf('Components|Buttons/Outline', module)
     </div>
   ));
 
-storiesOf('Components|Buttons/Dropdown', module)
+storiesOf('React Components|Buttons/Dropdown', module)
   .addParameters({component: DropdownButton})
   .addDecorator(withReadme(README))
   .add('Primary', () => (

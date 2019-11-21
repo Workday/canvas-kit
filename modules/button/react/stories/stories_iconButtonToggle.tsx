@@ -93,7 +93,7 @@ export class IconButtonToggleGroupWrapper extends React.Component<
   };
 }
 
-storiesOf('Components|Buttons/Icon Button', module)
+storiesOf('React Components|Buttons/Icon Button', module)
   .addParameters({component: IconButton})
   .addDecorator(withReadme(README))
   .add('Toggleable', () => (

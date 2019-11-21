@@ -7,7 +7,7 @@ import {Card} from '../../../card/react/index';
 import Layout from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Containers/Layout', module)
+storiesOf('React Components|Containers/Layout', module)
   .addParameters({component: Layout})
   .addDecorator(withReadme(README))
   .add('Page Layout', () => (

@@ -4,7 +4,7 @@ import withReadme from 'storybook-readme/with-readme';
 import README from '../README.md';
 import '../index.scss';
 
-storiesOf('CSS|Inputs/Form Field', module)
+storiesOf('CSS Components|Inputs/Form Field', module)
   .addDecorator(withReadme(README))
   .add('Label', () => (
     <div className="story">

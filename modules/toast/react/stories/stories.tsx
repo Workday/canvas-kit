@@ -69,7 +69,7 @@ class ToastWrapper extends React.Component<{state?: string}> {
   }
 }
 
-storiesOf('Components|Popups/Toast', module)
+storiesOf('React Components|Popups/Toast', module)
   .addParameters({component: Toast})
   .addDecorator(withReadme(README))
   .add('Successful', () => (

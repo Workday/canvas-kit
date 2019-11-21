@@ -13,7 +13,7 @@ const handleAvatarButtonClick = (e: React.SyntheticEvent) => {
   console.log('AvatarButton clicked');
 };
 
-storiesOf('Components|Indicators/Avatar/Default', module)
+storiesOf('React Components|Indicators/Avatar/Default', module)
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .addParameters({component: Avatar})
@@ -66,7 +66,7 @@ storiesOf('Components|Indicators/Avatar/Default', module)
     </div>
   ));
 
-storiesOf('Components|Indicators/Avatar/Avatar Button', module)
+storiesOf('React Components|Indicators/Avatar/Avatar Button', module)
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .addParameters({component: AvatarButton})

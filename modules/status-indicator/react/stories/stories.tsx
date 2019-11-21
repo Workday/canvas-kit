@@ -7,7 +7,7 @@ import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 import StatusIndicator from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Indicators/Status Indicator', module)
+storiesOf('React Components|Indicators/Status Indicator', module)
   .addParameters({component: StatusIndicator})
   .addDecorator(withReadme(README))
   .add('Default', () => (

@@ -79,7 +79,7 @@ const createTable = (filter?: TableFilters) => {
   );
 };
 
-storiesOf('Components|Containers/Table', module)
+storiesOf('React Components|Containers/Table', module)
   .addParameters({component: Table})
   .addDecorator(withReadme(README))
   .add('Default', () => {

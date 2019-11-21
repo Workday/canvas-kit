@@ -5,7 +5,7 @@ import README from '../../../text-input/css/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-text-input/index.scss';
 
-storiesOf('CSS|Inputs/Text Input/Top Label', module)
+storiesOf('CSS Components|Inputs/Text Input/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form">
@@ -98,7 +98,7 @@ storiesOf('CSS|Inputs/Text Input/Top Label', module)
     </div>
   ));
 
-storiesOf('CSS|Inputs/Text Input/Left Label', module)
+storiesOf('CSS Components|Inputs/Text Input/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">

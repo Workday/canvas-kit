@@ -66,7 +66,7 @@ class TooltipWrapper extends React.Component<{}, TooltipWrapperState> {
   };
 }
 
-storiesOf('Components|Popups/Tooltip', module)
+storiesOf('React Components|Popups/Tooltip', module)
   .addParameters({component: Tooltip})
   .addDecorator(withReadme(README))
   .add('Default', () => (

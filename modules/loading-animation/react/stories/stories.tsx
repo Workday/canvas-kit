@@ -6,7 +6,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {LoadingDots} from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Indicators/Loading Animation', module)
+storiesOf('React Components|Indicators/Loading Animation', module)
   .addParameters({component: LoadingDots})
   .addDecorator(withReadme(README))
   .add('Loading Dots', () => (

@@ -11,7 +11,7 @@ import README from '../../../color-picker/react/README.md';
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-storiesOf('Components|Inputs/Color Picker/Color Input/Top Label', module)
+storiesOf('React Components|Inputs/Color Picker/Color Input/Top Label', module)
   .addParameters({component: ColorInput})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -64,7 +64,7 @@ storiesOf('Components|Inputs/Color Picker/Color Input/Top Label', module)
     </FormField>
   ));
 
-storiesOf('Components|Inputs/Color Picker/Color Input/Left Label', module)
+storiesOf('React Components|Inputs/Color Picker/Color Input/Left Label', module)
   .addParameters({component: ColorInput})
   .addDecorator(withReadme(README))
   .add('Default', () => (

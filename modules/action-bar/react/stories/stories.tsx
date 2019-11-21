@@ -7,7 +7,7 @@ import {Button} from '../../../button/react/index';
 import {ActionBar} from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Buttons/Action Bar', module)
+storiesOf('React Components|Buttons/Action Bar', module)
   .addDecorator(withReadme(README))
   .addParameters({component: ActionBar})
   .add('Default', () => (

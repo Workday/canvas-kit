@@ -14,7 +14,7 @@ const containerStyle = css({
   },
 });
 
-storiesOf('CSS|Popups/Tooltip', module)
+storiesOf('CSS Components|Popups/Tooltip', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
