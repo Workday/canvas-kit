@@ -1,0 +1,29 @@
+import {Meta, Story, Preview, Props} from '@storybook/addon-docs/blocks';
+
+import {spacing} from '../../../core/react/index';
+import README from '../README.md';
+import Card from '../index';
+
+<Meta title="Card" component={Card} />
+
+# Card
+
+<Preview>
+  <Story name="Default">
+    <div className="story">
+      <Card heading="Title">Card contents</Card>
+    </div>
+  </Story>
+</Preview>
+
+<Props of={Card} />
+
+## No Padding
+
+<Preview>
+  <Story name="With No Padding">
+    <Card heading="Title" padding={spacing.zero}>
+      No Padding
+    </Card>
+  </Story>
+</Preview>
