@@ -34,6 +34,16 @@ addDecorator(withKnobs);
 addDecorator(InputProviderDecorator);
 addDecorator(FontsDecorator);
 
+const sectionOrder = ['Welcome', 'Tokens', 'Components', 'Labs'];
+const sectionRegex = /^([^|\/]*)/g;
+
+/* a = Welcome|Getting Started b = Components|Buttons
+  regex, get chars up to |
+  Compare order to list of sections
+    - if different, sort based on that
+    - if same, use alpha
+ */
+
 addParameters({
   options: {
     theme: create({
@@ -42,6 +52,20 @@ addParameters({
       mainTextFace: fontFamily,
       mainBackground: commonColors.backgroundAlt,
     }),
+    storySort: (a, b) => {
+      const aMatch = a[1].kind.match(sectionRegex);
+      const bMatch = b[1].kind.match(sectionRegex);
+
+      if (aMatch && bMatch) {
+        const aSection = aMatch[0];
+        const bSection = bMatch[0];
+        if (aSection !== bSection) {
+          return sectionOrder.indexOf(aSection) - sectionOrder.indexOf(bSection);
+        }
+      }
+
+      return a[1].id.localeCompare(b[1].id);
+    },
   },
   docs: {
     container: DocsContainer,
