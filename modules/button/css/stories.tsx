@@ -21,7 +21,7 @@ const blueBackground = css({
   },
 });
 
-storiesOf('CSS Components|Buttons/Button', module)
+storiesOf('Components|Buttons/Button/CSS', module)
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
@@ -108,7 +108,7 @@ storiesOf('CSS Components|Buttons/Button', module)
     </div>
   ));
 
-storiesOf('CSS Components|Buttons/Dropdown', module)
+storiesOf('Components|Buttons/Button/CSS/Dropdown', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -128,7 +128,7 @@ storiesOf('CSS Components|Buttons/Dropdown', module)
     </div>
   ));
 
-storiesOf('CSS Components|Buttons/Deprecated', module)
+storiesOf('Components|Buttons/Button/CSS/Deprecated', module)
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
@@ -256,7 +256,7 @@ storiesOf('CSS Components|Buttons/Deprecated', module)
     </div>
   ));
 
-storiesOf('CSS Components|Buttons/Icon Button', module)
+storiesOf('Components|Buttons/Button/CSS/Icon Button', module)
   .addDecorator(withReadme(README))
   .add('Square', () => (
     <div className="story">

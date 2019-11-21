@@ -6,7 +6,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {Label, Hint} from '../index';
 import README from '../README.md';
 
-storiesOf('React Components|Inputs/Form Field/Label', module)
+storiesOf('Components|Inputs/Form Field/React/Label', module)
   .addParameters({component: Label})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -19,7 +19,7 @@ storiesOf('React Components|Inputs/Form Field/Label', module)
       <Label required={true}>Label</Label>
     </div>
   ));
-storiesOf('React Components|Inputs/Form Field', module)
+storiesOf('Components|Inputs/Form Field/React', module)
   .addParameters({component: Hint})
   .addDecorator(withReadme(README))
   .add('Hint', () => (

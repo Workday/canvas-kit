@@ -11,7 +11,7 @@ import {Select, SelectOption} from '@workday/canvas-kit-react-select';
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-storiesOf('React Components|Inputs/Select/Top Label', module)
+storiesOf('Components|Inputs/Select/React/Top Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Plain', () => (
@@ -106,7 +106,7 @@ storiesOf('React Components|Inputs/Select/Top Label', module)
     </FormField>
   ));
 
-storiesOf('React Components|Inputs/Select/Left Label', module)
+storiesOf('Components|Inputs/Select/React/Left Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Plain', () => (

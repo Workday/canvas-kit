@@ -17,7 +17,7 @@ const control = (child: React.ReactNode) => (
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-storiesOf('React Components|Inputs/Switch/Top Label', module)
+storiesOf('Components|Inputs/Switch/React/Top Label', module)
   .addParameters({component: Switch})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -53,7 +53,7 @@ storiesOf('React Components|Inputs/Switch/Top Label', module)
     </FormField>
   ));
 
-storiesOf('React Components|Inputs/Switch/Left Label', module)
+storiesOf('Components|Inputs/Switch/React/Left Label', module)
   .addParameters({component: Switch})
   .addDecorator(withReadme(README))
   .add('Default', () => (

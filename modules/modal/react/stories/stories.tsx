@@ -113,7 +113,7 @@ const CustomFocusModalExample = () => {
   );
 };
 
-storiesOf('React Components|Popups/Modal', module)
+storiesOf('Components|Popups/Modal/React', module)
   .addParameters({component: Modal})
   .addDecorator(withReadme(README))
   .add('Default', () => (
