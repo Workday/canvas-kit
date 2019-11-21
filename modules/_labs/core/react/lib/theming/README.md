@@ -94,7 +94,13 @@ export const defaultCanvasTheme: CanvasTheme = {
     },
   },
   breakpoints: {
-    values: breakpoints,
+    values: {
+      zero: 0,
+      s: 600,
+      m: 960,
+      l: 1280,
+      xl: 1920,
+    },
     up,
     down,
     between,
@@ -102,6 +108,9 @@ export const defaultCanvasTheme: CanvasTheme = {
   },
 };
 ```
+
+Any changes will be reflected across all supported components. You are also able to consume for your
+own use cases.
 
 ## Custom Theme
 
@@ -189,3 +198,41 @@ window.wdCanvas.theme = createCanvasTheme(theme);
 
 If the theme is not available via a context, Canvas Kit components will attempt to pull it from this
 variable before falling back to the default theme.
+
+## Breakpoints
+
+Our breakpoint system is customized within the theme object. `theme.breakpoints.values` contains the
+various widths that our components adjust at:
+
+| Name   | Size (px) |
+| ------ | --------- |
+| `zero` | 0         |
+| `s`    | 600       |
+| `m`    | 960       |
+| `l`    | 1280      |
+| `xl`   | 1920      |
+
+There are also several functions to help with generating media queries:
+
+#### `up: (key: BreakpointFnParam) => string`
+
+> Returns a media query reflecting your specified size and up. Works with the enum (e.g.
+> BreakpointKey.m) or the string (e.g. 'm'). Example: theme.breakpoints.up(BreakpointKey.m) =>
+> '@media (min-width:960px)'
+
+#### `down: (key: BreakpointFnParam) => string`
+
+> Returns a media query reflecting your specified size and down. Works with the enum or the string
+> (e.g. 'm'). Example: theme.breakpoints.down(BreakpointKey.m) => '@media (max-width:1279.5px)'
+
+#### `between: (start: BreakpointFnParam, end: BreakpointFnParam) => string`
+
+> Returns a media query reflecting the sizes between your specified breakpoints. Works with the enum
+> or the string (e.g. 'm'). Example: theme.breakpoints.between(BreakpointKey.m, BreakpointKey.l) =>
+> '@media (min-width:960px) and (max-width:1919.5px)'
+
+#### `only: (key: BreakpointFnParam) => string`
+
+> Returns a media query reflecting the size swithin your specified breakpoint. Works with the enum
+> or the string (e.g. 'm'). Example: theme.breakpointsonly(BreakpointKey.m) => '@media
+> (min-width:960px) and (max-width:1279.5px)'
