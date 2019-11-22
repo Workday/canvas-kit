@@ -3,6 +3,14 @@ import {ThemeContext} from '@emotion/core';
 import {CanvasTheme} from './types';
 import {defaultCanvasTheme} from './theme';
 
+declare global {
+  interface Window {
+    wdCanvas: {
+      theme?: CanvasTheme;
+    };
+  }
+}
+
 /**
  * Hook function to get the correct theme object.
  * @param {Object=} theme - The theme object returned from the emotion ThemeContext
