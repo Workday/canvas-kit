@@ -9,7 +9,7 @@ const accessibleHide: CSSObject = {
   clipPath: 'polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px)',
   position: 'absolute',
   overflow: 'hidden',
-  wordWrap: 'normal',
+  whiteSpace: 'nowrap',
   height: '1px',
   width: '1px',
   margin: '-1px',
