@@ -39,7 +39,7 @@
     "@emotion/styled": "^10.0.17",
     "@workday/canvas-kit-react-common": "^3.0.0",
     "@workday/canvas-kit-react-popup": "^3.0.1",
-    "focus-trap-react": "^6.0.0"
+    "focus-trap-js": "1.0.7"
   },
   "peerDependencies": {
     "react": ">= 16.8 < 17"

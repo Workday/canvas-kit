@@ -31,7 +31,7 @@ const ActionBarContainer = styled('div')(
 const ChildrenContainer = styled('div')({
   display: 'inline-block',
   padding: `0 ${spacing.m}`,
-  '*:not(:first-child)': {
+  '*:not(:first-of-type)': {
     marginLeft: spacing.s,
   },
   '@media (max-width: 575px)': {
@@ -41,7 +41,7 @@ const ChildrenContainer = styled('div')({
     flexDirection: 'row-reverse',
     '> *': {
       flex: 1,
-      '&:not(:first-child)': {
+      '&:not(:first-of-type)': {
         marginRight: spacing.s,
         marginLeft: 0,
       },

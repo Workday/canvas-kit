@@ -34,7 +34,7 @@ const Container = styled('div')({
     borderRadius: borderRadius.zero,
     borderWidth: '1px',
     marginLeft: '-1px',
-    '&:first-child': {
+    '&:first-of-type': {
       borderTopLeftRadius: spacing.xxxs,
       borderBottomLeftRadius: spacing.xxxs,
       marginLeft: 0,

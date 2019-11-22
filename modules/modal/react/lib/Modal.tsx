@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
-import FocusTrap from 'focus-trap-react';
+import tabTrappingKey from 'focus-trap-js';
 
 import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
 
@@ -12,8 +12,8 @@ export enum ModalWidth {
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
-  padding: PopupPadding;
-  width: ModalWidth;
+  padding?: PopupPadding;
+  width?: ModalWidth;
   /**
    * Optional callback for the Modal handling closing. If this callback is provided the Modal will have
    * an 'X' icon in the top-right corner. Without this callback, there is no 'X' icon and the Escape
@@ -27,7 +27,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    * the close command. If your application uses custom popup stacking, do not set this to true.
    * Set this to true for simple applications and the modal will close when the escape key is pressed.
    */
-  closeOnEscape: boolean;
+  closeOnEscape?: boolean;
   heading: React.ReactNode;
   /**
    * Optional override of the auto-select functionality of the Modal. If this ref is defined, that element
@@ -69,125 +69,124 @@ const transformOrigin = {
   vertical: 'bottom',
 } as const;
 
-function onInitialFocus(
-  modalEl: HTMLElement | null,
-  firstFocusEl: HTMLElement | null = null
-): HTMLElement {
-  if (firstFocusEl) {
-    return firstFocusEl;
+function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
+  const firstFocusable = modalEl.querySelector<HTMLElement>(
+    `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
+  );
+  if (firstFocusable) {
+    if (firstFocusable.tagName === 'H3') {
+      // If there is no close icon, we need to transfer focus to the header.
+      // Setting tabIndex allows the header to be focusable.
+      // We do the header instead of the next focusable element to prevent useful context from being skipped
+      firstFocusable.tabIndex = 0;
+      firstFocusable.style.outline = 'none';
+
+      const changeTabIndex = () => {
+        // We no longer need to focus on the header after it loses focus
+        // We simply want to transfer focus inside
+        firstFocusable.removeEventListener('blur', changeTabIndex);
+        // We must wait one frame to ensure tabbable checks are satisfied
+        // by all focus libraries...
+        requestAnimationFrame(() => {
+          firstFocusable.removeAttribute('tabIndex');
+        });
+      };
+      firstFocusable.addEventListener('blur', changeTabIndex);
+    }
+    return firstFocusable;
   } else {
-    const firstFocusable =
-      modalEl &&
-      modalEl.querySelector<HTMLElement>(
-        `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
-      );
-    if (firstFocusable) {
-      if (firstFocusable.tagName === 'H3') {
-        // If there is no close icon, we need to transfer focus to the header.
-        // Setting tabIndex allows the header to be focusable.
-        // We do the header instead of the next focusable element to prevent useful context from being skipped
-        firstFocusable.tabIndex = 0;
-        firstFocusable.style.outline = 'none';
-
-        const changeTabIndex = () => {
-          // We no longer need to focus on the header after it loses focus
-          // We simply want to transfer focus inside
-          firstFocusable.removeEventListener('blur', changeTabIndex);
-          // We must wait one frame to ensure tabbable checks are satisfied
-          // by all focus libraries...
-          requestAnimationFrame(() => {
-            firstFocusable.removeAttribute('tabIndex');
-          });
-        };
-        firstFocusable.addEventListener('blur', changeTabIndex);
-      }
-      return firstFocusable;
-    } else {
-      throw new Error(
-        'No focusable element was found. Please ensure modal has at least one focusable element'
-      );
-    }
-  }
-}
-
-export default class Modal extends React.Component<ModalProps> {
-  private modalRef = React.createRef<HTMLDivElement>();
-
-  static Padding = PopupPadding;
-  static Width = ModalWidth;
-  static defaultProps = {
-    open: false,
-    padding: Modal.Padding.l,
-    width: Modal.Width.s,
-    closeOnEscape: true,
-  };
-
-  private handleKeydown = (event: KeyboardEvent) => {
-    if (
-      this.props.closeOnEscape &&
-      this.props.handleClose &&
-      (event.key === 'Esc' || event.key === 'Escape')
-    ) {
-      this.props.handleClose();
-    }
-  };
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeydown);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeydown);
-  }
-
-  private handleOutsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const {target} = event;
-    const modalNode = this.modalRef.current;
-    if (modalNode && this.props.handleClose) {
-      if (!modalNode.contains(target as Node)) {
-        this.props.handleClose();
-      }
-    }
-  };
-
-  public render() {
-    const {
-      open,
-      handleClose,
-      padding,
-      width,
-      heading,
-      children,
-      closeOnEscape,
-      firstFocusRef: firstFocusableRef,
-      ...elemProps
-    } = this.props;
-
-    return (
-      open && (
-        <FocusTrap
-          focusTrapOptions={{
-            initialFocus: () =>
-              onInitialFocus(this.modalRef.current, firstFocusableRef && firstFocusableRef.current),
-          }}
-        >
-          <Container onClick={this.handleOutsideClick} {...elemProps}>
-            <Popup
-              popupRef={this.modalRef}
-              width={width}
-              heading={heading}
-              handleClose={handleClose}
-              padding={padding}
-              transformOrigin={transformOrigin}
-            >
-              {children}
-            </Popup>
-          </Container>
-        </FocusTrap>
-      )
+    throw new Error(
+      'No focusable element was found. Please ensure modal has at least one focusable element'
     );
   }
 }
+
+const useKeyDownListener = (handleKeydown: EventListenerOrEventListenerObject) => {
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleKeydown);
+    return () => {
+      document.removeEventListener('keydown', handleKeydown);
+    };
+  }, []);
+};
+
+const useInitialFocus = (
+  modalRef: React.RefObject<HTMLElement>,
+  firstFocusableRef: React.RefObject<HTMLElement> | undefined
+) => {
+  React.useEffect(() => {
+    if (modalRef.current) {
+      const elem =
+        (firstFocusableRef && firstFocusableRef.current) ||
+        getFirstElementToFocus(modalRef.current);
+      elem.focus();
+    }
+  }, [modalRef]);
+};
+
+const Modal = ({
+  open,
+  handleClose,
+  padding,
+  width,
+  heading,
+  children,
+  closeOnEscape,
+  firstFocusRef,
+  ...elemProps
+}: ModalProps): JSX.Element | null => {
+  const modalRef = React.useRef<HTMLDivElement>(null);
+
+  const handleKeydown = (event: KeyboardEvent) => {
+    if (modalRef.current) {
+      tabTrappingKey(event, modalRef.current);
+    }
+
+    if (closeOnEscape && handleClose && (event.key === 'Esc' || event.key === 'Escape')) {
+      handleClose();
+    }
+  };
+
+  useKeyDownListener(handleKeydown);
+  useInitialFocus(modalRef, firstFocusRef);
+
+  const handleOutsideClick = ({target}: React.MouseEvent<HTMLDivElement>) => {
+    const modalEl = modalRef.current;
+    if (modalEl && !modalEl.contains(target as Node) && handleClose) {
+      handleClose();
+    }
+  };
+
+  if (open) {
+    return (
+      <Container onClick={handleOutsideClick} {...elemProps}>
+        <Popup
+          popupRef={modalRef}
+          width={width}
+          heading={heading}
+          handleClose={handleClose}
+          padding={padding}
+          transformOrigin={transformOrigin}
+        >
+          {children}
+        </Popup>
+      </Container>
+    );
+  }
+  return null;
+};
+
+Modal.Padding = PopupPadding;
+Modal.Width = ModalWidth;
+
+Modal.propTypes = {
+  open: false,
+  padding: Modal.Padding.l,
+  width: Modal.Width.s,
+  closeOnEscape: true,
+};
+
+export default Modal;
 
 /**
  * Convenience hook to set up props for both a target and the modal component.
