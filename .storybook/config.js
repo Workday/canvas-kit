@@ -34,15 +34,22 @@ addDecorator(withKnobs);
 addDecorator(InputProviderDecorator);
 addDecorator(FontsDecorator);
 
-const sectionOrder = ['Welcome', 'Tokens', 'Components', 'Labs'];
-const sectionRegex = /^([^|\/]*)/g;
+/** If the string contains a phrase, prefix it. This is useful for making ordering sections */
+const prefix = (phrase, prefix) => value => (value.indexOf(phrase) > -1 ? prefix + value : value);
+const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
 
-/* a = Welcome|Getting Started b = Components|Buttons
-  regex, get chars up to |
-  Compare order to list of sections
-    - if different, sort based on that
-    - if same, use alpha
- */
+function storySort(a, b) {
+  const prefixFn = pipe(
+    prefix('welcome-', '0'),
+    prefix('getting-started', '0'),
+    prefix('tokens-', '1'),
+    prefix('components-', '2'),
+    prefix('labs-', '3')
+  );
+  const left = prefixFn(a[0]);
+  const right = prefixFn(b[0]);
+  return left === right ? 0 : left.localeCompare(right);
+}
 
 addParameters({
   options: {
@@ -52,20 +59,7 @@ addParameters({
       mainTextFace: fontFamily,
       mainBackground: commonColors.backgroundAlt,
     }),
-    storySort: (a, b) => {
-      const aMatch = a[1].kind.match(sectionRegex);
-      const bMatch = b[1].kind.match(sectionRegex);
-
-      if (aMatch && bMatch) {
-        const aSection = aMatch[0];
-        const bSection = bMatch[0];
-        if (aSection !== bSection) {
-          return sectionOrder.indexOf(aSection) - sectionOrder.indexOf(bSection);
-        }
-      }
-
-      return a[1].id.localeCompare(b[1].id);
-    },
+    storySort,
   },
   docs: {
     container: DocsContainer,
