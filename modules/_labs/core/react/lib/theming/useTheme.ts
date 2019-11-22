@@ -16,7 +16,7 @@ import {defaultCanvasTheme} from './theme';
  * ThemeProvider or context exists.
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
-export function useTheme(theme?: Object): CanvasTheme {
+export default function useTheme(theme?: Object): CanvasTheme {
   if (theme && Object.entries(theme).length !== 0) {
     return theme as CanvasTheme;
   }
