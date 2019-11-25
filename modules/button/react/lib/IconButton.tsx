@@ -49,14 +49,6 @@ function getFillSelector(fillColor: string): CSSObject {
   };
 }
 
-function getBackgroundSelector(fillColor: string): CSSObject {
-  return {
-    '&:hover span .wd-icon-background, span .wd-icon-background': {
-      fill: fillColor,
-    },
-  };
-}
-
 function getAccentSelector(fillColor: string): CSSObject {
   return {
     '&:focus span .wd-icon-accent, &:hover span .wd-icon-accent, span .wd-icon-accent': {
@@ -206,7 +198,6 @@ export const IconButtonCon = styled('button', {
             ...getFillSelector(colors.licorice500),
             ...getAccentSelector(colors.licorice500),
           },
-          backgroundColor: colors.blueberry400,
           borderColor: colors.blueberry400,
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.frenchVanilla100),
