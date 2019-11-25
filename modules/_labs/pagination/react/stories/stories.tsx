@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import {boolean, number, withKnobs} from '@storybook/addon-knobs';
 import {storiesOf} from '@storybook/react';
-import * as React from 'react';
+import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
 import Pagination from '..';
@@ -15,31 +16,15 @@ const Wrapper = styled('div')({
 
 const DefaultPaginationExample = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
-
   return (
     <Wrapper>
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="1"
-        total={50}
-        pageSize={10}
-        currentPage={currentPage}
-        onPageChange={p => setCurrentPage(p)}
-      />
-    </Wrapper>
-  );
-};
-
-const PaginationExample5 = () => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-
-  return (
-    <Wrapper>
-      <h4>Current Page: {currentPage}</h4>
-      <Pagination
-        key="2"
-        total={1}
-        pageSize={100}
+        total={number('total', 50) || 50}
+        pageSize={number('pageSize', 10) || 10}
+        showLabel={boolean('showLabel', false)}
+        showGoTo={boolean('showGoTo', false)}
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
       />
@@ -55,33 +40,17 @@ const WithCustomLabel = () => {
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="3"
-        total={10}
-        pageSize={3}
+        total={number('total', 10) || 10}
+        pageSize={number('pageSize', 3) || 3}
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
         showLabel
+        showGoTo={boolean('showGoTo', false)}
         customLabel={(from: number, to: number, items: number, item: string) =>
           `${from.toLocaleString()}\u2013${to.toLocaleString()} of ${items.toLocaleString()} ${
             items > 1 ? 'candidates' : 'candidate'
           }`
         }
-      />
-    </Wrapper>
-  );
-};
-
-const PaginationExample4 = () => {
-  const [currentPage, setCurrentPage] = React.useState(1);
-
-  return (
-    <Wrapper>
-      <h4>Current Page: {currentPage}</h4>
-      <Pagination
-        key="4"
-        total={11}
-        pageSize={2}
-        currentPage={currentPage}
-        onPageChange={p => setCurrentPage(p)}
       />
     </Wrapper>
   );
@@ -95,11 +64,11 @@ const WithGoToExample = () => {
       <h4>Current Page: {currentPage}</h4>
       <Pagination
         key="5"
-        total={1000}
-        pageSize={10}
+        total={number('total', 1000) || 1000}
+        pageSize={number('pageSize', 10) || 10}
         currentPage={currentPage}
-        showLabel
-        showGoTo
+        showLabel={boolean('showLabel', true)}
+        showGoTo={boolean('showGoTo', true)}
         onPageChange={p => setCurrentPage(p)}
       />
     </Wrapper>
@@ -108,15 +77,12 @@ const WithGoToExample = () => {
 
 storiesOf('Labs/Pagination', module)
   .addDecorator(withReadme(README))
+  .addDecorator(withKnobs)
   .add('Default', () => (
     <div className="story">
       <div>
         <br />
         <DefaultPaginationExample />
-        <br />
-        <PaginationExample4 />
-        <br />
-        <PaginationExample5 />
       </div>
     </div>
   ))

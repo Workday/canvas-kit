@@ -49,6 +49,7 @@ const GoTo: React.FC<{
           max={max}
           value={value}
           type="number"
+          aria-label="Go to"
           onChange={e => {
             setValue(e.target.value);
           }}

@@ -4,7 +4,7 @@ import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import _ from 'lodash';
 import React from 'react';
 
-const ActivePage = styled('div')({
+const ActivePage = styled('button')({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -15,6 +15,7 @@ const ActivePage = styled('div')({
   backgroundColor: canvas.colors.blueberry400,
   color: canvas.colors.frenchVanilla100,
   borderRadius: borderRadius.m,
+  ':focus': {outline: 'none'},
 });
 
 const NoPointerEvents = styled('div')({
@@ -22,12 +23,13 @@ const NoPointerEvents = styled('div')({
 });
 
 const Ellipse = () => (
-  <NoPointerEvents tabIndex={-1}>
+  <NoPointerEvents>
     <IconButton
       key={'ellipse'}
       aria-label={`Navigation Ellipse`}
       variant={IconButton.Variant.Square}
       size={IconButton.Size.Small}
+      tabIndex={-1}
     >
       ...
     </IconButton>
@@ -37,7 +39,7 @@ const Ellipse = () => (
 const Pages: React.FC<{
   numPages: number;
   currentPage: number;
-  clickHandler: (page: number, e: React.MouseEvent<HTMLButtonElement>) => void;
+  clickHandler: (page: number) => void;
 }> = props => {
   const {numPages, currentPage, clickHandler} = props;
   const [width, setWidth] = React.useState(window.innerWidth);
@@ -81,10 +83,10 @@ const Pages: React.FC<{
     <IconButton
       data-testid={`paginationButton${props.page}`}
       key={props.page}
-      aria-label={`Go to page ${props.page}`}
+      aria-label={`Page ${props.page}`}
       variant={IconButton.Variant.Square}
       size={IconButton.Size.Small}
-      onClick={e => clickHandler(props.page, e)}
+      onClick={e => clickHandler(props.page)}
     >
       {props.page}
     </IconButton>
@@ -111,7 +113,8 @@ const Pages: React.FC<{
                 data-testid="paginationIconButtonActive"
                 key={page}
                 aria-current={true}
-                aria-label={`Current page, page ${page}`}
+                aria-label={`Page ${page}, Selected`}
+                autoFocus
               >
                 {page}
               </ActivePage>

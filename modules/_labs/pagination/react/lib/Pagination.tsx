@@ -72,7 +72,7 @@ const Pagination: React.FC<PaginationProps> = props => {
           data-testid="leftPaginationArrow"
           disabled={currentPage - 1 <= 0}
           aria-disabled={currentPage - 1 <= 0}
-          aria-label={'Goto previous page'}
+          aria-label={'Previous Page'}
           variant={IconButton.Variant.Square}
           size={IconButton.Size.Small}
           icon={chevronLeftSmallIcon}
@@ -83,7 +83,7 @@ const Pagination: React.FC<PaginationProps> = props => {
           data-testid="rightPaginationArrow"
           disabled={currentPage + 1 > numPages}
           aria-disabled={currentPage + 1 > numPages}
-          aria-label={'Goto next page'}
+          aria-label={'Next Page'}
           variant={IconButton.Variant.Square}
           size={IconButton.Size.Small}
           icon={chevronRightSmallIcon}
