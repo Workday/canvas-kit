@@ -5,7 +5,7 @@ import README from '../../../text-input/css/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-text-input/index.scss';
 
-storiesOf('Components|Inputs/TextInput/CSS/Top Label', module)
+storiesOf('Components|Inputs/Text Input/CSS/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form">
