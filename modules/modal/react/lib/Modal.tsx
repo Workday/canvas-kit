@@ -62,6 +62,7 @@ const Container = styled('div')({
   background: 'rgba(0,0,0,0.65)',
   animationName: `${fadeIn}`,
   animationDuration: '0.3s',
+  zIndex: 1,
 });
 
 const transformOrigin = {
