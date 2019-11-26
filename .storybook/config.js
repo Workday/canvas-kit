@@ -9,13 +9,22 @@ import ReactDOM from 'react-dom';
 
 import {commonColors, typeColors, fontFamily} from '../modules/core/react';
 import {InputProviderDecorator, FontsDecorator} from '../utils/storybook';
-const req = require.context('../modules', true, /stories.*\.tsx?$/);
+
+const reqMDXWelcome = require.context('./stories', true, /\.mdx$/);
+const reqMDX = require.context('../modules', true, /\.mdx$/);
+const reqCSF = require.context('../modules', true, /stories.*\.tsx?$/);
+
+const allReqs = [reqMDXWelcome, reqMDX, reqCSF];
 
 function loadStories() {
   const allExports = [];
-  req.keys().forEach(fname => {
-    const story = req(fname);
-    if (story.default) allExports.push(story);
+
+  allReqs.forEach(req => {
+    req.keys().forEach(fname => {
+      const story = req(fname);
+
+      if (story.default) allExports.push(story);
+    });
   });
 
   return allExports;

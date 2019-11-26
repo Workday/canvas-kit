@@ -172,7 +172,6 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     return (
       <SidePanelContainer
         role="region"
-        aria-orientation="vertical"
         padding={padding}
         openDirection={openDirection}
         openWidth={openWidth}

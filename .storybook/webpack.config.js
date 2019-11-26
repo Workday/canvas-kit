@@ -1,7 +1,9 @@
 const path = require('path');
 const DocgenPlugin = require('./docgen-plugin');
+const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
+const welcomeSectionPath = path.resolve(__dirname, './');
 const utilsPath = path.resolve(__dirname, '../utils');
 const postcssConfigPath = path.resolve(__dirname, './postcss.config');
 
@@ -49,6 +51,22 @@ module.exports = ({config, mode}) => {
         ],
       ],
     },
+  });
+
+  config.module.rules.push({
+    test: /\.mdx$/,
+    include: [modulesPath, welcomeSectionPath],
+    exclude: [/node_modules/],
+    use: [
+      {
+        loader: 'babel-loader',
+        options: {plugins: ['@babel/plugin-transform-react-jsx']},
+      },
+      {
+        loader: '@mdx-js/loader',
+        options: {compilers: [createCompiler()]},
+      },
+    ],
   });
 
   // Load the source code of story files to display in docs.
