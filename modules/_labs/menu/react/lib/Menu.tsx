@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import * as React from 'react';
 import styled from '@emotion/styled';
 import uuid from 'uuid/v4';
 import {MenuItemProps} from './MenuItem';
@@ -112,13 +112,13 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           {React.Children.map(children, (menuItem: React.ReactElement<MenuItemProps>, index) => {
             const itemId = `${id}-${index}`;
             return (
-              <Fragment key={itemId}>
+              <React.Fragment key={itemId}>
                 {React.cloneElement(menuItem, {
                   onClick: (event: React.MouseEvent) => this.handleClick(event, menuItem.props),
                   id: itemId,
                   isFocused: selectedItemIndex === index,
                 })}
-              </Fragment>
+              </React.Fragment>
             );
           })}
         </List>
