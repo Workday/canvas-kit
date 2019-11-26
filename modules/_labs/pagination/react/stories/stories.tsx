@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {boolean, number, withKnobs} from '@storybook/addon-knobs';
+import {boolean, number} from '@storybook/addon-knobs';
 import {storiesOf} from '@storybook/react';
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
@@ -77,7 +77,6 @@ const WithGoToExample = () => {
 
 storiesOf('Labs/Pagination', module)
   .addDecorator(withReadme(README))
-  .addDecorator(withKnobs)
   .add('Default', () => (
     <div className="story">
       <div>
