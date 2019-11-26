@@ -1,19 +1,20 @@
 @mixin wdc-focusable-buttons() {
   .wdc-a11y button:not([disabled]),
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
-    &:not([tabindex='-1']):focus {
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled),
+  .wdc-btn-text:not([disabled]):not(.wdc-btn-disabled) {
+    &:not([tabindex="-1"]):focus {
       @content;
     }
   }
 }
 
-[data-whatinput='keyboard'] {
+[data-whatinput="keyboard"] {
   @include wdc-focusable-buttons() {
     box-shadow: $wdc-btn-focus-ring;
     outline: none;
   }
 
-  .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+  .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex="-1"]):focus {
     @extend .wdc-btn-primary.wdc-btn-focus;
 
     &:hover {
@@ -24,7 +25,7 @@
     }
   }
 
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-primary):not(.wdc-btn-delete):not([tabindex='-1']):focus {
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-primary):not(.wdc-btn-delete):not([tabindex="-1"]):focus {
     &:hover {
       background-color: $wdc-btn-bg-secondary-hover;
     }
@@ -33,7 +34,7 @@
     }
   }
 
-  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
+  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex="-1"]):focus {
     &:hover {
       background-color: $wdc-btn-bg-delete-hover;
     }
@@ -43,14 +44,14 @@
   }
 }
 
-[data-whatinput='mouse'],
-[data-whatinput='touch'] {
+[data-whatinput="mouse"],
+[data-whatinput="touch"] {
   @include wdc-focusable-buttons() {
     outline: none;
     box-shadow: none;
   }
 
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled):not([tabindex="-1"]) {
     &:hover {
       @extend .wdc-btn-hover;
     }
@@ -59,7 +60,7 @@
     }
   }
 
-  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+  .wdc-btn-delete:not([disabled]):not(.wdc-btn-disabled):not([tabindex="-1"]) {
     &:hover {
       @extend .wdc-btn-delete.wdc-btn-hover;
     }
@@ -76,7 +77,7 @@
   .wdc-btn-icon-plain,
   .wdc-btn-icon-inverse,
   .wdc-btn-icon-inverse-filled {
-    &:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']) {
+    &:not([disabled]):not(.wdc-btn-disabled):not([tabindex="-1"]) {
       &:focus,
       &:hover,
       &:active {
