@@ -1,23 +1,18 @@
-import {
-  configure,
-  addDecorator,
-  addParameters,
-  forceReRender
-} from "@storybook/react";
-import { DocsPage, DocsContainer } from "@storybook/addon-docs/blocks";
-import { withKnobs } from "@storybook/addon-knobs/react";
-import { create } from "@storybook/theming";
-import addons from "@storybook/addons";
-import Events from "@storybook/core-events";
-import { toId } from "@storybook/router";
-import ReactDOM from "react-dom";
+import {configure, addDecorator, addParameters, forceReRender} from '@storybook/react';
+import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
+import {withKnobs} from '@storybook/addon-knobs/react';
+import {create} from '@storybook/theming';
+import addons from '@storybook/addons';
+import Events from '@storybook/core-events';
+import {toId} from '@storybook/router';
+import ReactDOM from 'react-dom';
 
-import { commonColors, typeColors, fontFamily } from "../modules/core/react";
-import { CanvasProviderDecorator, FontsDecorator } from "../utils/storybook";
+import {commonColors, typeColors, fontFamily} from '../modules/core/react';
+import {CanvasProviderDecorator, FontsDecorator} from '../utils/storybook';
 
-const reqMDXWelcome = require.context("./stories", true, /\.mdx$/);
-const reqMDX = require.context("../modules", true, /\.mdx$/);
-const reqCSF = require.context("../modules", true, /stories.*\.tsx?$/);
+const reqMDXWelcome = require.context('./stories', true, /\.mdx$/);
+const reqMDX = require.context('../modules', true, /\.mdx$/);
+const reqCSF = require.context('../modules', true, /stories.*\.tsx?$/);
 
 const allReqs = [reqMDXWelcome, reqMDX, reqCSF];
 
@@ -42,19 +37,19 @@ addDecorator(CanvasProviderDecorator);
 addParameters({
   options: {
     theme: create({
-      brandTitle: "Canvas Kit",
+      brandTitle: 'Canvas Kit',
       mainTextColor: typeColors.body,
       mainTextFace: fontFamily,
-      mainBackground: commonColors.backgroundAlt
-    })
+      mainBackground: commonColors.backgroundAlt,
+    }),
   },
   docs: {
     container: DocsContainer,
-    page: DocsPage
+    page: DocsPage,
   },
   readme: {
-    codeTheme: "github"
-  }
+    codeTheme: 'github',
+  },
 });
 
 configure(loadStories, module);
@@ -62,13 +57,13 @@ configure(loadStories, module);
 function setCurrentStory(categorization, story) {
   clearCurrentStory();
   addons.getChannel().emit(Events.SET_CURRENT_STORY, {
-    storyId: toId(categorization, story)
+    storyId: toId(categorization, story),
   });
   forceReRender();
 }
 
 function clearCurrentStory() {
-  var root = document.querySelector("#root");
+  var root = document.querySelector('#root');
   ReactDOM.unmountComponentAtNode(root);
 }
 
