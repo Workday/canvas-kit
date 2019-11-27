@@ -35,7 +35,7 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow'>>(
     boxSizing: 'border-box',
     '& > div': {
       margin: `${spacing.xxs} ${spacing.zero}`,
-      '&:first-of-type': {
+      '&:first-child': {
         marginTop: spacing.xxxs,
       },
       '&:last-child': {

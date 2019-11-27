@@ -61,7 +61,7 @@ const BannerItem = styled('div')({
   marginLeft: spacing.s,
   marginRight: spacing.s,
   '@media (max-width: 450px)': {
-    '&:not(:first-of-type)': {
+    '&:not(:first-child)': {
       marginTop: spacing.s,
     },
   },

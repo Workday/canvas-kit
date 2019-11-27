@@ -25,7 +25,7 @@ const ColumnContainer = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'spacing',
 })<ColumnProps>(
   {
-    '&:first-of-type': {
+    '&:first-child': {
       paddingLeft: 0,
     },
     '&:last-child': {
