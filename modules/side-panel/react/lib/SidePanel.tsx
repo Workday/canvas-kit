@@ -91,13 +91,13 @@ const SidePanelContainer = styled('div')<
   })
 );
 
-const ChildrenContainer = styled('div')<Pick<SidePanelProps, 'openWidth'>>(
+const ChildrenContainer = styled('div')<Pick<SidePanelProps, 'openWidth' | 'open'>>(
   {
     transition: 'none',
     zIndex: 1, // show above SidePanelFooter when screen is small vertically
   },
-  ({openWidth}) => ({
-    width: openWidth,
+  ({open, openWidth}) => ({
+    width: open ? openWidth : closedWidth,
   })
 );
 
@@ -172,7 +172,6 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     return (
       <SidePanelContainer
         role="region"
-        aria-orientation="vertical"
         padding={padding}
         openDirection={openDirection}
         openWidth={openWidth}
@@ -180,7 +179,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
         open={open}
         {...elemProps}
       >
-        <ChildrenContainer openWidth={openWidth}>
+        <ChildrenContainer open={open} openWidth={openWidth}>
           {header && open ? <Header>{header}</Header> : null}
           {this.props.children}
         </ChildrenContainer>
