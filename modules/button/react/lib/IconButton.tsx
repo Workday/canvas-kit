@@ -49,6 +49,14 @@ function getFillSelector(fillColor: string): CSSObject {
   };
 }
 
+function getBackgroundSelector(fillColor: string): CSSObject {
+  return {
+    '&:hover span .wd-icon-background, span .wd-icon-background': {
+      fill: fillColor,
+    },
+  };
+}
+
 function getAccentSelector(fillColor: string): CSSObject {
   return {
     '&:focus span .wd-icon-accent, &:hover span .wd-icon-accent, span .wd-icon-accent': {
@@ -108,7 +116,8 @@ export const IconButtonCon = styled('button', {
           '&:focus:hover, &:focus, &:active': {
             backgroundColor: 'transparent',
             ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry400),
           },
           '&:not([disabled]):focus': {
             ...(toggled ? focusRing(2, 0) : {}),
@@ -125,7 +134,8 @@ export const IconButtonCon = styled('button', {
           '&:focus:hover, &:focus, &:active': {
             backgroundColor: 'transparent',
             ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry400),
           },
           '&:not([disabled]):focus': {
             ...(toggled ? focusRing(2, 0) : {}),
@@ -158,7 +168,7 @@ export const IconButtonCon = styled('button', {
         };
       case IconButtonVariant.Inverse:
         return {
-          '&:focus&:hover, &:focus, &:active': {
+          '&:focus:hover, &:focus, &:active': {
             backgroundColor: colors.frenchVanilla100,
             ...getFillSelector(colors.licorice500),
             ...getAccentSelector(colors.licorice500),
@@ -170,9 +180,8 @@ export const IconButtonCon = styled('button', {
               : {}),
           },
           '&:hover': {
-            backgroundColor: colors.frenchVanilla100,
-            ...getFillSelector(colors.licorice500),
-            ...getAccentSelector(colors.licorice500),
+            ...getFillSelector(colors.frenchVanilla100),
+            ...getAccentSelector(colors.frenchVanilla100),
           },
           backgroundColor: colors.blueberry400,
           borderColor: colors.blueberry400,
