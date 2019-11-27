@@ -169,22 +169,17 @@ export const IconButtonCon = styled('button', {
       case IconButtonVariant.Inverse:
         return {
           '&:focus:hover, &:focus, &:active': {
-            backgroundColor: colors.frenchVanilla100,
-            ...getFillSelector(colors.licorice500),
-            ...getAccentSelector(colors.licorice500),
+            // backgroundColor: colors.frenchVanilla100,
+            ...getFillSelector(colors.frenchVanilla100),
+            ...getAccentSelector(colors.frenchVanilla100),
           },
           '&:not([disabled]):focus': {
-            backgroundColor: colors.frenchVanilla100,
+            // backgroundColor: colors.frenchVanilla100,
             ...(toggled
               ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
               : {}),
           },
-          '&:hover': {
-            ...getFillSelector(colors.frenchVanilla100),
-            ...getAccentSelector(colors.frenchVanilla100),
-          },
-          backgroundColor: colors.blueberry400,
-          borderColor: colors.blueberry400,
+          // borderColor: colors.blueberry400,å
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.frenchVanilla100),
         };
