@@ -12,8 +12,8 @@ export enum ModalWidth {
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
-  padding?: PopupPadding;
-  width?: ModalWidth;
+  padding: PopupPadding;
+  width: ModalWidth;
   /**
    * Optional callback for the Modal handling closing. If this callback is provided the Modal will have
    * an 'X' icon in the top-right corner. Without this callback, there is no 'X' icon and the Escape
@@ -27,7 +27,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    * the close command. If your application uses custom popup stacking, do not set this to true.
    * Set this to true for simple applications and the modal will close when the escape key is pressed.
    */
-  closeOnEscape?: boolean;
+  closeOnEscape: boolean;
   heading: React.ReactNode;
   /**
    * Optional override of the auto-select functionality of the Modal. If this ref is defined, that element
@@ -179,7 +179,7 @@ const Modal = ({
 Modal.Padding = PopupPadding;
 Modal.Width = ModalWidth;
 
-Modal.propTypes = {
+Modal.defaultProps = {
   open: false,
   padding: Modal.Padding.l,
   width: Modal.Width.s,
