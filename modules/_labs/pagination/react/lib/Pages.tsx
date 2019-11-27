@@ -15,7 +15,8 @@ const ActivePage = styled('button')({
   backgroundColor: canvas.colors.blueberry400,
   color: canvas.colors.frenchVanilla100,
   borderRadius: borderRadius.m,
-  ':focus': {outline: 'none'},
+  border: 'none',
+  outline: 'none',
 });
 
 const NoPointerEvents = styled('div')({
