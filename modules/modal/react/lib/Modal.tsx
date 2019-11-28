@@ -10,8 +10,7 @@ export enum ModalWidth {
   m = '800px',
 }
 
-export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
-  open: boolean;
+export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
   padding: PopupPadding;
   width: ModalWidth;
   /**
@@ -39,6 +38,10 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
    * it will make the modal heading focusable and focus on that instead.
    */
   firstFocusRef?: React.RefObject<HTMLElement>;
+}
+
+export interface ModalProps extends ModalContentProps {
+  open: boolean;
 }
 
 const fadeIn = keyframes`
@@ -112,20 +115,18 @@ const useKeyDownListener = (handleKeydown: EventListenerOrEventListenerObject) =
 
 const useInitialFocus = (
   modalRef: React.RefObject<HTMLElement>,
-  firstFocusableRef: React.RefObject<HTMLElement> | undefined
+  firstFocusRef: React.RefObject<HTMLElement> | undefined
 ) => {
   React.useEffect(() => {
     if (modalRef.current) {
       const elem =
-        (firstFocusableRef && firstFocusableRef.current) ||
-        getFirstElementToFocus(modalRef.current);
+        (firstFocusRef && firstFocusRef.current) || getFirstElementToFocus(modalRef.current);
       elem.focus();
     }
   }, [modalRef]);
 };
 
-const Modal = ({
-  open,
+const ModalContent = ({
   handleClose,
   padding,
   width,
@@ -134,7 +135,7 @@ const Modal = ({
   closeOnEscape,
   firstFocusRef,
   ...elemProps
-}: ModalProps): JSX.Element | null => {
+}: ModalContentProps): JSX.Element | null => {
   const modalRef = React.useRef<HTMLDivElement>(null);
 
   const handleKeydown = (event: KeyboardEvent) => {
@@ -157,24 +158,24 @@ const Modal = ({
     }
   };
 
-  if (open) {
-    return (
-      <Container onClick={handleOutsideClick} {...elemProps}>
-        <Popup
-          popupRef={modalRef}
-          width={width}
-          heading={heading}
-          handleClose={handleClose}
-          padding={padding}
-          transformOrigin={transformOrigin}
-        >
-          {children}
-        </Popup>
-      </Container>
-    );
-  }
-  return null;
+  return (
+    <Container onClick={handleOutsideClick} {...elemProps}>
+      <Popup
+        popupRef={modalRef}
+        width={width}
+        heading={heading}
+        handleClose={handleClose}
+        padding={padding}
+        transformOrigin={transformOrigin}
+      >
+        {children}
+      </Popup>
+    </Container>
+  );
 };
+
+const Modal = ({open, ...modalProps}: ModalProps): JSX.Element | null =>
+  open ? <ModalContent {...modalProps} /> : null;
 
 Modal.Padding = PopupPadding;
 Modal.Width = ModalWidth;
