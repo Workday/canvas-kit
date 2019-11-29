@@ -11,8 +11,8 @@ export interface ModalProps extends ModalContentProps {
   open: boolean;
 }
 
-const Modal = ({open, ...modalProps}: ModalProps): JSX.Element | null =>
-  open ? <ModalContent {...modalProps} /> : null;
+const Modal = ({open, ...modalContentProps}: ModalProps): JSX.Element | null =>
+  open ? <ModalContent {...modalContentProps} /> : null;
 
 Modal.Padding = PopupPadding;
 Modal.Width = ModalWidth;

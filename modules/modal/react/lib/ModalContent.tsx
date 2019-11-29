@@ -135,7 +135,7 @@ const ModalContent = ({
   heading,
   padding,
   ...elemProps
-}: ModalContentProps): JSX.Element | null => {
+}: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
 
   const handleKeydown = (event: KeyboardEvent) => {
