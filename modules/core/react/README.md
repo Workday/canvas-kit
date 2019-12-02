@@ -208,6 +208,14 @@ depth['2'];
 Type styles are available as objects to use alone or with
 [Emotion](https://github.com/emotion-js/emotion).
 
+## Fonts
+
+To use the Canvas Kit font
+[install and import the `@workday/canvas-kit-react-fonts` module](https://github.com/Workday/canvas-kit/tree/master/modules/fonts/react).
+Note that this module sources fonts from the Workday CDN.
+
+## Hierarchy
+
 Our type module is a combination of hierarchy and variants. The hierarchy has the font size, weight,
 etc. for different levels of type (e.g. `canvas.type.h1`, `canvas.type.body`, etc.). The variants
 (e.g. `canvas.type.variant.label`) are applied to a hierarchy level to achieve certain styling.
