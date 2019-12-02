@@ -160,7 +160,7 @@ Use `.wdc-form-error`/`.wdc-form-alert` with `.wdc-form-textinput`.
 <div class="wdc-form">
   <div class="wdc-form-field-wrapper wdc-form-field-error">
     <label class="wdc-form-label" for="input">Input Label</label>
-    <div class="wdc-form-field wdc-form-textinput">
+    <div class="wdc-form-field">
       <div class="wdc-form-textinput wdc-form-error">
         <input id="input" type="text" aria-describedby="error-message" aria-invalid="true" />
       </div>
