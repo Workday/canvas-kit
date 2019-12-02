@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-header",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A Canvas-styled application header",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -40,7 +40,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
-    "@workday/canvas-kit-labs-react-combobox": "^3.1.0",
+    "@workday/canvas-kit-labs-react-combobox": "^3.1.1",
     "@workday/canvas-kit-react-button": "^3.1.0",
     "@workday/canvas-kit-react-common": "^3.1.0",
     "@workday/canvas-kit-react-core": "^3.1.0",
@@ -52,7 +52,7 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-menu": "^3.1.0",
+    "@workday/canvas-kit-labs-react-menu": "^3.1.1",
     "@workday/canvas-kit-react-avatar": "^3.1.0"
   }
 }
