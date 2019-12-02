@@ -229,8 +229,8 @@ function styleSystemIconHovers(selector) {
   });
 }
 
-function injectIcons(iconsPath = null, selector = '.wdc-icon') {
-  const icons = document.querySelectorAll(selector);
+function injectIcons(iconsPath = null, selector = '.wdc-icon', iconRoot = document) {
+  const icons = iconRoot.querySelectorAll(selector);
 
   // Add data source
   icons.forEach(i => {
