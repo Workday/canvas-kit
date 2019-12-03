@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-common",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "The common css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
