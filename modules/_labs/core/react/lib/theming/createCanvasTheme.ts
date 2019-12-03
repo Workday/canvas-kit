@@ -1,5 +1,5 @@
 import chroma from 'chroma-js';
-import deepmerge from 'deepmerge';
+import merge from 'lodash/merge';
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme} from './theme';
 import {
@@ -93,5 +93,5 @@ export default function createCanvasTheme(partialTheme: PartialCanvasTheme): Can
     breakpoints,
   };
 
-  return deepmerge(defaultCanvasTheme, mergable) as CanvasTheme;
+  return merge(defaultCanvasTheme, mergable) as CanvasTheme;
 }
