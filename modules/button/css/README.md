@@ -287,6 +287,7 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 
 ```html
 <button class="wdc-btn-text">Text Button</button>
+<a href="#" class="wdc-btn-text">Text Link</a>
 <button class="wdc-btn-text wdc-btn-text-inverse">Hovered Button</button>
 ```
 

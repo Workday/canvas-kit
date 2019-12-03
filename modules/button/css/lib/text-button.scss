@@ -9,6 +9,8 @@
   font-size: 16px;
   padding: 0 $wdc-spacing-xxs;
   border-radius: $wdc-border-radius-m;
+  display: inline-flex;
+  align-items: center;
   &:hover:not([disabled]) {
     background-color: transparent;
     text-decoration: underline;
@@ -20,10 +22,14 @@
   }
 
   &.wdc-btn-disabled,
-  &:disabled {
+  &.wdc-btn-disabled:hover,
+  &:disabled,
+  &:disabled:hover {
     box-shadow: none;
     background-color: transparent;
     color: rgba(8, 117, 225, 0.5);
+    text-decoration: none;
+    pointer-events: none;
   }
 
   &.wdc-btn-text-size-s {

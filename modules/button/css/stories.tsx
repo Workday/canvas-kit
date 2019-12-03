@@ -153,10 +153,10 @@ storiesOf("CSS/Button/Text", module)
   .add("Default", () => (
     <div className="story">
       <h3>Large</h3>
-      <button className="wdc-btn-text">Text</button>
-      <button disabled={true} className="wdc-btn-text">
+      <a href="#" className="wdc-btn-text">
         Text
-      </button>
+      </a>
+      <a className="wdc-btn-text wdc-btn-disabled">Text</a>
       <h3>Small</h3>
       <button className="wdc-btn-text wdc-btn-text-size-s">Text</button>
       <button disabled={true} className="wdc-btn-text wdc-btn-text-size-s">
