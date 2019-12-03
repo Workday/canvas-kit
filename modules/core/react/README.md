@@ -332,7 +332,7 @@ As an external consumer, you should reference the following example.
 
 If you are contributing a component, you must add the necessary styling (see below) and use the
 [`InputProviderDecorator`](#storybook-decorator) in your stories. _DO NOT_ use an `InputProvider`
-directly within any canvas kit components.
+directly within any Canvas Kit components.
 
 ```tsx
 import * as React from 'react';

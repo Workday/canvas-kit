@@ -117,6 +117,9 @@ own use cases.
 The `CanvasProvider` accepts a full or partial theme object to give a branded look to the component
 library. Pass your theme into `createCanvasTheme` and use the return value for the `theme` prop.
 
+If you only set a `main` color, the rest of the respective palette will be automatically generated
+(note text `contrast` color will always return white if not specified).
+
 Example:
 
 ```tsx
