@@ -8,7 +8,7 @@
   color: $wdc-btn-text;
   font-size: 16px;
   padding: 0 $wdc-spacing-xxs;
-  border-radius: $wdc-btn-text-border-radius;
+  border-radius: $wdc-border-radius-m;
   &:hover:not([disabled]) {
     background-color: transparent;
     text-decoration: underline;

@@ -14,6 +14,10 @@
     outline: none;
   }
 
+  .wdc-btn-text:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-text-inverse):not([tabindex="-1"]):focus {
+    box-shadow: $wdc-btn-text-focus-ring;
+  }
+
   .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex="-1"]):focus {
     @extend .wdc-btn-primary.wdc-btn-focus;
 
