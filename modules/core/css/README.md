@@ -147,40 +147,15 @@ Mixin: `wdc-depth-3`
 Class: `.wdc-depth-4`  
 Mixin: `wdc-depth-4`
 
-## Fonts
-
-To use the Canvas Kit Fonts install and import the `@workday/canvas-kit-css-fonts` module. Using the
-Canvas Kit Fonts module is the preferred method to using Workday's typography. You will be able to
-add the fonts into your project with an import statement.
-
-```scss
-@import '~@workday/canvas-kit-css-fonts/index.scss';
-```
-
-Canvas Kit uses Roboto (Light, Regular, Medium, Bold) and Roboto Mono provided by
-`canvas-kit-css-assets`.
-
-All Roboto fonts are included as weights of Roboto:
-
-| Font           | Weight |
-| -------------- | ------ |
-| Roboto Light   | 300    |
-| Roboto Regular | 400    |
-| Roboto Medium  | 500    |
-| Roboto Bold    | 700    |
-
-Roboto Mono is included as weight 400.
-
-**Usage**
-
-```scss
-.fontClass {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-}
-```
-
 ## Type
+
+### Fonts
+
+To use the Canvas Kit font
+[install and import the `@workday/canvas-kit-css-fonts` module](https://github.com/Workday/canvas-kit/tree/master/modules/fonts/css).
+Note that this module sources fonts from the Workday CDN.
+
+### Hierarchy
 
 Type styles are available as classes and mixins. Using the class is preferred. Use mixins to
 override CSS only if necessary,
