@@ -130,7 +130,7 @@
     "commitmsg": "commitlint --edit $HUSKY_GIT_PARAMS",
     "build-storybook": "build-storybook -c .storybook -o docs",
     "lint": "node utils/check-lockfile-links.js && node utils/check-mismatched-dependencies.js && eslint -c ./eslintrc.js --ext=jsx,ts,tsx .",
-    "format:prettier": "prettier --config=./.prettierrc --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
+    "format:prettier": "prettier --config=./.prettierrc.js --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format": "yarn lint --fix",
     "test": "TZ=UTC jest",
     "bump": "lerna version",
