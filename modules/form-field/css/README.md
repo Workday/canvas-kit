@@ -55,11 +55,7 @@ by applying the `.wdc-form-label-position-left` class to `.wdc-form`.
   <div class="wdc-form-field-wrapper">
     <label for="textinput" class="wdc-form-label wdc-form-label-required">Input Label</label>
     <div class="wdc-form-field wdc-form-textinput">
-      <input
-        type="text"
-        placeholder="Here's a placeholder"
-        id="textinput"
-      />
+      <input type="text" placeholder="Here's a placeholder" id="textinput" />
     </div>
   </div>
 </div>
@@ -78,7 +74,8 @@ If you need to toggle this programmatically (i.e. for mobile responsive), you ca
 
 ## Accessibility
 
-If you need to hide your label visually please still include one and hide using the `.wdc-accessible-hide` class.
+If you need to hide your label visually please still include one and hide using the
+`.wdc-accessible-hide` class.
 
 ```html
 <label for="textinput" class="wdc-form-label wdc-accessible-hide">Label for screenreaders</label>
@@ -86,8 +83,8 @@ If you need to hide your label visually please still include one and hide using 
   <input type="text" id="textinput" />
 </div>
 ```
-See [canvas-kit-core](../../core/css#accessibility) for accessibility guidelines.
 
+See [canvas-kit-core](../../core/css#accessibility) for accessibility guidelines.
 
 ## Form Controls
 
@@ -99,9 +96,9 @@ Group form labels and fields using `.wdc-form-field`.
 
 Use `.wdc-form-label` on `<label>` elements.
 
-**Required field labels**
-Labels for required fields should use `.wdc-form-label-required` to add a red asterisk next to the
-label. You can also add the required attribute to the input to get build in required input behavior.
+**Required field labels** Labels for required fields should use `.wdc-form-label-required` to add a
+red asterisk next to the label. You can also add the required attribute to the input to get build in
+required input behavior.
 
 ```html
 <div class="wdc-form-field-wrapper">
@@ -140,9 +137,9 @@ Error styling is available as both classes and mixins. Using the class is prefer
 Use `.wdc-form-field-error` for errors and `.wdc-form-field-alert` for alerts. Applying error and
 alert styling will display an icon on the right inside the input.
 
-**Messages**
-Add messages to errors and alerts by wrapping your message with `.wdc-form-hint-message` or
-`.wdc-form-hint-message`. Using `strong` will bolden text with the respective error/alert color.
+**Messages** Add messages to errors and alerts by wrapping your message with
+`.wdc-form-hint-message` or `.wdc-form-hint-message`. Using `strong` will bolden text with the
+respective error/alert color.
 
 Place the message element after the form controls.
 
