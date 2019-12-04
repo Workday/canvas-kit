@@ -93,6 +93,7 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
   - Icon Button
   - Dropdown Button
   - Split Button
+  - Text Button
 
 ## Sizes
 
@@ -170,7 +171,7 @@ Inverse buttons are buttons that can be used on dark backgrounds.
 
 ### Primary
 
-> Primary buttons are orange and draw attention to the primary action on a screen. They should only
+> Primary buttons are blue and draw attention to the primary action on a screen. They should only
 > appear once. Not all screens need require a primary button. The primary button should be always be
 > the leftmost button in a group of buttons.
 
@@ -280,6 +281,16 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
   <button class="wdc-btn wdc-btn-primary wdc-btn-split-icon" aria-haspopup="true" />
 </div>
 ```
+
+### Text Button
+> Use by adding `.wdc-btn-text` when you want text to behave like a button. If you want display text on a dark background you can use `.wdc-btn-text-inverse`.
+
+```html
+<button class="wdc-btn-text">Text Button</button>
+<a href="#" class="wdc-btn-text">Text Link</a>
+<button class="wdc-btn-text wdc-btn-text-inverse">Hovered Button</button>
+```
+
 
 **Accessibility note**: When an attached menu is displayed, add `aria-expanded="true"` to the
 button.
