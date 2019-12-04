@@ -203,7 +203,7 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
       }),
     },
     ':hover:focus': {
-      backgroundColor: buttonColors.hoverBackground,
+      backgroundColor: 'orange',
     },
     ...activeStyles,
     ...hoverStyles,
