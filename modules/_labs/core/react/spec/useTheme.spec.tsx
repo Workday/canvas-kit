@@ -46,8 +46,10 @@ describe('useTheme', () => {
   });
 
   test('with no theme or context provided, useTheme should attempt to pull the theme from the window global', () => {
-    window.wdCanvas = {
-      theme: customTheme,
+    window.workday = {
+      canvas: {
+        theme: customTheme,
+      },
     };
     const theme = useTheme();
 

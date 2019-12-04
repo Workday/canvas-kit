@@ -181,8 +181,10 @@ Simply set your theme on the window object like so:
 // If using typescript, you will need to declare this on the window object
 declare global {
   interface Window {
-    wdCanvas: {
-      theme?: CanvasTheme;
+    workday: {
+      canvas: {
+        theme?: CanvasTheme;
+      };
     };
   }
 }
@@ -195,7 +197,18 @@ const theme: PartialCanvasTheme = {
   },
 };
 
-window.wdCanvas.theme = createCanvasTheme(theme);
+window.workday.canvas.theme = createCanvasTheme(theme);
+```
+
+Note if any of the window object hasn't been defined, you will need to change your assignment. For
+example:
+
+```tsx
+window.workday = {
+  canvas: {
+    theme: createCanvasTheme(theme);
+  }
+}
 ```
 
 If the theme is not available via a context, Canvas Kit components will attempt to pull it from this

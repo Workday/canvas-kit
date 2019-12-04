@@ -4,8 +4,10 @@ import {ThemeContext, defaultCanvasTheme} from './theme';
 
 declare global {
   interface Window {
-    wdCanvas: {
-      theme?: CanvasTheme;
+    workday: {
+      canvas: {
+        theme?: CanvasTheme;
+      };
     };
   }
 }
@@ -37,8 +39,8 @@ export default function useTheme(theme?: Object): CanvasTheme {
     // Context not supported or invalid (probably called from within a class component)
   }
 
-  if (window.wdCanvas && window.wdCanvas.theme) {
-    return window.wdCanvas.theme;
+  if (window.workday && window.workday.canvas && window.workday.canvas.theme) {
+    return window.workday.canvas.theme;
   }
 
   return defaultCanvasTheme;
