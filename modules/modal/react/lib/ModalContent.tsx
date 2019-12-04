@@ -112,7 +112,7 @@ const useInitialFocus = (
 ) => {
   const handlerRef = document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (modalRef.current) {
       const elem =
         (firstFocusRef && firstFocusRef.current) || getFirstElementToFocus(modalRef.current);
