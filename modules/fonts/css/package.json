@@ -1,7 +1,8 @@
+
 {
-  "name": "@workday/canvas-kit-css-common",
-  "version": "3.1.1",
-  "description": "The common css for canvas-kit-css",
+  "name": "@workday/canvas-kit-css-fonts",
+  "version": "0.0.0",
+  "description": "Fonts for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "files": [
@@ -9,11 +10,11 @@
     "lib",
     "index.scss"
   ],
-  "style": "dist/canvas-kit-css-common.min.css",
-  "main": "dist/canvas-kit-css-common.min.css",
+  "style": "dist/canvas-kit-css-fonts.min.css",
+  "main": "dist/canvas-kit-css-fonts.min.css",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/common/css"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/fonts/css"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -25,9 +26,8 @@
     "css",
     "scss",
     "sass",
-    "workday"
-  ],
-  "dependencies": {
-    "@workday/canvas-kit-css-core": "^3.1.0"
-  }
+    "components",
+    "workday",
+    "fonts"
+  ]
 }
