@@ -50,7 +50,7 @@ class Autocomplete extends React.Component<
   }
 }
 
-storiesOf('Labs/Combobox/React', module)
+storiesOf('Labs|Combobox/React', module)
   .addDecorator(withReadme(README))
   .add('Autocomplete', () => (
     <FormField id="autocomplete-123" label="Autocomplete example">

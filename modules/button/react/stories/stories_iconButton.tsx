@@ -102,7 +102,7 @@ export class IconButtonToggleGroupWrapper extends React.Component<
   };
 }
 
-storiesOf('Button/Icon Button', module)
+storiesOf('Components|Buttons/Button/React/Icon Button', module)
   .addParameters({component: IconButton})
   .addDecorator(withReadme(README))
   .add('Circle', () => (
@@ -342,7 +342,7 @@ storiesOf('Button/Icon Button', module)
     </div>
   ));
 
-storiesOf('Button/Icon Button Toggle Group', module)
+storiesOf('Components|Buttons/Button/React/Icon Button Toggle Group', module)
   .addParameters({component: IconButtonToggleGroup})
   .addDecorator(withReadme(README))
   .add('Default', () => (

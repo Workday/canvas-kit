@@ -21,7 +21,7 @@ const graphicExample: CanvasGraphic = {
   tags: [],
 };
 
-storiesOf('Icon', module)
+storiesOf('Tokens|Icon/React', module)
   .addParameters({component: AccentIcon})
   .addDecorator(withReadme(README))
   .add('Accent Icon', () => (
@@ -42,7 +42,7 @@ storiesOf('Icon', module)
     </div>
   ));
 
-storiesOf('Icon', module)
+storiesOf('Tokens|Icon/React', module)
   .addParameters({component: AppletIcon})
   .add('Applet Icon', () => (
     <div className="story">
@@ -53,7 +53,7 @@ storiesOf('Icon', module)
     </div>
   ));
 
-storiesOf('Icon', module)
+storiesOf('Tokens|Icon/React', module)
   .addParameters({component: SystemIcon})
   .add('System Icon', () => (
     <div className="story">
@@ -91,7 +91,7 @@ storiesOf('Icon', module)
     </div>
   ));
 
-storiesOf('Icon', module)
+storiesOf('Tokens|Icon/React', module)
   .addParameters({component: Graphic})
   .add('Graphic', () => (
     <div className="story">
