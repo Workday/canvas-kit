@@ -253,6 +253,7 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
   }
 
   const baseStyles = {
+    borderColor: buttonColors.border,
     backgroundColor: buttonColors.background,
     ...(buttonColors.labelIcon && {
       'span .wd-icon-fill, span .wd-icon-accent': {
