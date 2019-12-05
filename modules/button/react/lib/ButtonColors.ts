@@ -320,7 +320,7 @@ export const ButtonColors: ButtonColorCollection = {
   },
   [IconButtonVariant.InverseFilled]: {
     background: 'rgba(0, 0, 0, 0.2)',
-    activeBackground: 'rgba(0, 0, 0, 0.3)',
+    activeBackground: 'rgba(0, 0, 0, 0.4)',
     focusBackground: 'rgba(0, 0, 0, 0.2)',
     disabledBackground: 'transparent',
     hoverBackground: 'rgba(0, 0, 0, 0.3)',

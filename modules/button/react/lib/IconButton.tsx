@@ -173,7 +173,7 @@ export const IconButtonCon = styled('button', {
             ...getFillSelector(colors.blueberry400),
             ...getAccentSelector(colors.blueberry400),
           },
-          '&:focus&:hover': {
+          '&:focus&:hover, &:active': {
             backgroundColor: toggled ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.3)',
             ...getFillSelector(colors.blueberry400),
             ...getAccentSelector(colors.blueberry400),
@@ -184,6 +184,9 @@ export const IconButtonCon = styled('button', {
               ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
               : {}),
           },
+          // '&:active': {
+          //   backgroundColor: toggled ? 'orange' : 'blue'
+          // },
           backgroundColor: colors.blueberry400,
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.frenchVanilla100),
