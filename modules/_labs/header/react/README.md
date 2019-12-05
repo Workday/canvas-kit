@@ -164,7 +164,8 @@ Default: `DubLogoTitle` (for "Dub" variants) or `WorkdayLogoTitle` (for "Full" v
 
 > Indicates whether the children in the header should be collapsed.
 >
-> - The `nav` element collapses into a hamburger icon menu. Any `IconButton` or `SystemIcon` will also collapse.
+> - The `nav` element collapses into a hamburger icon menu. Any `IconButton` or `SystemIcon` will
+>   also collapse.
 
 ---
 
@@ -181,7 +182,6 @@ Default: `DubLogoTitle` (for "Dub" variants) or `WorkdayLogoTitle` (for "Full" v
 #### `leftSlot: React.ReactElement`
 
 > A React element for the left of the header, this is typically a search bar component
-
 
 # Global Header
 
@@ -373,11 +373,11 @@ A component that contains a search bar with autocomplete functionality.
 import {SearchBar} from '@workday/canvas-kit-labs-react-header';
 import {MenuItem} from '@workday/canvas-kit-labs-react-menu';
 
-const handleInputChange = event => console.log('Adjust menu items here')
+const handleInputChange = event => console.log('Adjust menu items here');
 const handleSearchSubmit = event => {
   const query = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value;
-  console.log("Submitted query: ", query)
-}
+  console.log('Submitted query: ', query);
+};
 
 <SearchBar
   autocompleteItems={[<MenuItem>Item 1</MenuItem>]}
@@ -387,7 +387,7 @@ const handleSearchSubmit = event => {
   grow={true}
   searchTheme={SearchBar.Theme.Dark}
   onSubmit={handleSearchSubmit}
-/>
+/>;
 ```
 
 ## Static Properties
@@ -412,7 +412,8 @@ const handleSearchSubmit = event => {
 
 #### `onInputChange: React.ChangeEventHandler<HTMLInputElement>`
 
-> Callback to listen when the TextInput changes. This is usually used to update the autocomplete items.
+> Callback to listen when the TextInput changes. This is usually used to update the autocomplete
+> items.
 
 ---
 
@@ -424,14 +425,14 @@ const handleSearchSubmit = event => {
 
 #### `searchTheme?: SearchTheme | SearchThemeAttributes`
 
-> The theme of the header the search input is being rendered in.
-> There are 3 build in themes, but the styles are customizable via SearchThemeAttributes.
+> The theme of the header the search input is being rendered in. There are 3 build in themes, but
+> the styles are customizable via SearchThemeAttributes.
 
-| Theme       | Description                                                                                               |
-| ----------- | --------------------------------------------------------------------------------------------------------- |
-| Light       | White background with dark-colored text, blue focus ring.                                                 |
-| Dark        | Dark semi transparent background with white text. Inverts on focus.                                       |
-| Transparent | Transparent background (intended for light-colored header) with dark text. Also used in collapsed state.  |
+| Theme       | Description                                                                                              |
+| ----------- | -------------------------------------------------------------------------------------------------------- |
+| Light       | White background with dark-colored text, blue focus ring.                                                |
+| Dark        | Dark semi transparent background with white text. Inverts on focus.                                      |
+| Transparent | Transparent background (intended for light-colored header) with dark text. Also used in collapsed state. |
 
 Default: `SearchTheme.Light`
 

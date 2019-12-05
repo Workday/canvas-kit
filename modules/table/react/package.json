@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-table",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Canvas data grids",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -40,7 +40,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
-    "@workday/canvas-kit-react-core": "^3.0.0",
+    "@workday/canvas-kit-react-core": "^3.1.0",
     "polished": "^2.3.0"
   }
 }

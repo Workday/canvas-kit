@@ -13,7 +13,7 @@ describe('Modal', () => {
   ['Default', 'With useModal hook'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Modal', story);
+        h.stories.load('Components|Popups/Modal/React', story);
       });
 
       it('should not have any axe errors', () => {
@@ -135,7 +135,7 @@ describe('Modal', () => {
 
   context(`given the 'Without close icon' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Modal', 'Without close icon');
+      h.stories.load('Components|Popups/Modal/React', 'Without close icon');
     });
 
     it('should not have any axe errors', () => {
@@ -254,7 +254,7 @@ describe('Modal', () => {
 
   context(`given the 'Custom focus' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Modal', 'Custom focus');
+      h.stories.load('Components|Popups/Modal/React', 'Custom focus');
     });
 
     context('when button is focused', () => {

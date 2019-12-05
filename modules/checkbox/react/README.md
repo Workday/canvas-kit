@@ -37,7 +37,8 @@ import Checkbox from '@workday/canvas-kit-react-checkbox';
 import FormField from '@workday/canvas-kit-react-form-field';
 
 <FormField label="My Field" inputId="my-checkbox-field">
-  <Checkbox disabled={false} checked={checked} onChange={this.handleCheck} id="my-checkbox-field" />;
+  <Checkbox disabled={false} checked={checked} onChange={this.handleCheck} id="my-checkbox-field" />
+  ;
 </FormField>;
 ```
 

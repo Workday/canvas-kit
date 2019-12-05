@@ -13,15 +13,15 @@ const blueBackground = css({
   justifyContent: 'center',
   backgroundColor: '#0875e1',
   margin: '0 10px',
-  padding: '24px',
+  padding: '12px',
   maxWidth: 'max-content',
   borderRadius: '4px',
   button: {
-    margin: '0 12px',
+    margin: '12px',
   },
 });
 
-storiesOf('CSS/Button', module)
+storiesOf('Components|Buttons/Button/CSS', module)
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
@@ -108,7 +108,7 @@ storiesOf('CSS/Button', module)
     </div>
   ));
 
-storiesOf('CSS/Button/Dropdown', module)
+storiesOf('Components|Buttons/Button/CSS/Dropdown', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -125,6 +125,53 @@ storiesOf('CSS/Button/Dropdown', module)
           Dropdown Secondary
         </button>
       </section>
+    </div>
+  ));
+
+storiesOf('Components|Buttons/Button/CSS/Text', module)
+  .addDecorator(withReadme(README))
+  .add('Default', () => (
+    <div className="story">
+      <h3>Large</h3>
+      <a href="#" className="wdc-btn-text">
+        Text
+      </a>
+      <a className="wdc-btn-text wdc-btn-disabled">Text</a>
+      <h3>Small</h3>
+      <button className="wdc-btn-text wdc-btn-text-size-s">Text</button>
+      <button disabled={true} className="wdc-btn-text wdc-btn-text-size-s">
+        Text
+      </button>
+      <h3>All Caps</h3>
+      <button className="wdc-btn-text wdc-btn-text-all-caps">All caps</button>
+      <button disabled={true} className="wdc-btn-text wdc-btn-text-all-caps">
+        All caps
+      </button>
+    </div>
+  ))
+  .add('Inverse', () => (
+    <div className="story">
+      <h3>Large Inverse</h3>
+      <div css={blueBackground}>
+        <button className="wdc-btn-text wdc-btn-text-inverse">Text</button>
+        <button disabled={true} className="wdc-btn-text wdc-btn-text-inverse">
+          Text
+        </button>
+      </div>
+
+      <h3>Small Inverse</h3>
+      <div css={blueBackground}>
+        <button className="wdc-btn-text wdc-btn-text-inverse wdc-btn-text-size-s">Text</button>
+        <button disabled={true} className="wdc-btn-text wdc-btn-text-inverse wdc-btn-text-size-s">
+          Text
+        </button>
+      </div>
+      <h3>All Caps Inverse</h3>
+      <div css={blueBackground}>
+        <button className="wdc-btn-text wdc-btn-text-inverse wdc-btn-text-all-caps">
+          All caps
+        </button>
+      </div>
     </div>
   ));
 
@@ -256,7 +303,7 @@ storiesOf('CSS/Button/Deprecated', module)
     </div>
   ));
 
-storiesOf('CSS/Button/Icon Button', module)
+storiesOf('Components|Buttons/Button/CSS/Icon Button', module)
   .addDecorator(withReadme(README))
   .add('Square', () => (
     <div className="story">

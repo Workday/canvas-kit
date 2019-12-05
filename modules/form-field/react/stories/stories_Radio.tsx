@@ -11,7 +11,7 @@ import README from '../../../radio/react/README.md';
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-storiesOf('Form Field/Radio/Top Label/Radio Group', module)
+storiesOf('Components|Inputs/Radio/React/Top Label/Radio Group', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -64,7 +64,7 @@ storiesOf('Form Field/Radio/Top Label/Radio Group', module)
     </FormField>
   ));
 
-storiesOf('Form Field/Radio/Top Label/Radio', module)
+storiesOf('Components|Inputs/Radio/React/Top Label/Radio', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -77,7 +77,7 @@ storiesOf('Form Field/Radio/Top Label/Radio', module)
     </FormField>
   ));
 
-storiesOf('Form Field/Radio/Left Label/Radio Group', module)
+storiesOf('Components|Inputs/Radio/React/Left Label/Radio Group', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -132,7 +132,7 @@ storiesOf('Form Field/Radio/Left Label/Radio Group', module)
     </FormField>
   ));
 
-storiesOf('Form Field/Radio/Left Label/Radio', module)
+storiesOf('Components|Inputs/Radio/React/Left Label/Radio', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => (
