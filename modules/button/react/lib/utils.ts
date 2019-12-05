@@ -202,9 +202,9 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
         },
       }),
     },
-    ':hover:focus': {
-      backgroundColor: 'orange',
-    },
+    // ':hover:focus': {
+    //   backgroundColor: 'orange',
+    // },
     ...activeStyles,
     ...hoverStyles,
     ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
