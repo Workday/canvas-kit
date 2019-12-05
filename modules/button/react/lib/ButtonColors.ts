@@ -302,7 +302,7 @@ export const ButtonColors: ButtonColorCollection = {
   },
   [IconButtonVariant.Inverse]: {
     background: 'transparent',
-    activeBackground: canvas.colors.frenchVanilla100,
+    activeBackground: 'rgba(0, 0, 0, 0.3)',
     focusBackground: 'rgba(0, 0, 0, 0.2)',
     disabledBackground: 'transparent',
     hoverBackground: 'rgba(0, 0, 0, 0.2)',
@@ -320,7 +320,7 @@ export const ButtonColors: ButtonColorCollection = {
   },
   [IconButtonVariant.InverseFilled]: {
     background: 'rgba(0, 0, 0, 0.2)',
-    activeBackground: canvas.colors.frenchVanilla100,
+    activeBackground: 'rgba(0, 0, 0, 0.3)',
     focusBackground: 'rgba(0, 0, 0, 0.2)',
     disabledBackground: 'transparent',
     hoverBackground: 'rgba(0, 0, 0, 0.3)',

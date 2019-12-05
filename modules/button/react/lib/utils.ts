@@ -287,11 +287,12 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
           color: buttonColors.labelDataActive,
         },
       }),
-      ...(buttonColors.labelIconActive && {
-        'span .wd-icon-fill, span .wd-icon-accent': {
-          fill: buttonColors.labelIconActive,
-        },
-      }),
+      ...(buttonColors.labelIconActive &&
+        {
+          // 'span .wd-icon-fill, span .wd-icon-accent': {
+          //   fill: buttonColors.labelIconActive
+          // }
+        }),
     },
   };
 
@@ -350,6 +351,7 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
         boxShadow: 'none',
         animation: 'none',
         ...hoverStyles,
+        ...activeStyles,
       },
     }),
   };
