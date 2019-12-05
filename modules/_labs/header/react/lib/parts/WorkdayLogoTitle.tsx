@@ -14,6 +14,9 @@ export type WorkdayLogoTitleProps = {
    * The title to display in the header. Not used if `brand` is provided
    */
   title?: string;
+  /**
+   * Specifies the variation of the header.
+   */
   variant?: HeaderVariant;
 };
 

@@ -16,22 +16,26 @@ import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 export interface ColorInputProps extends TextInputProps, GrowthBehavior {
   /**
    * The value entered by the user into the color input
+   * @default ''
    */
   value: string;
   /**
    * Optionally show a check icon when a custom hex color has been selected
+   * @default false
    */
   showCheck?: boolean;
   /**
    * Placeholder for the input
+   * @default FFFFFF
    */
   placeholder: string;
   /**
    * The type of error to display, if any.
+   * @default undefined
    */
   error?: ErrorType;
   /**
-   * A onChange callback from the input. Value can be accessed from `e.currentTarget.value`. Should be used to control the input.
+   * An onChange callback from the input. Value can be accessed from `e.currentTarget.value`. Should be used to control the input.
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /**

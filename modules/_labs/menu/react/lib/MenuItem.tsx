@@ -12,15 +12,45 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
 
 export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
+  /**
+   *  This is the primary action to take when a menu item is clicked. If the item is a child of the Menu component, this callback will be decorated with the onSelect and onClose Menu callbacks. This callback will not fire if the item is disabled, see below.
+   */
   onClick?: (event: React.SyntheticEvent) => void;
+  /**
+   * The menu item content is pretty flexible and can contain any strings or JSX.
+   */
   children?: React.ReactNode;
+  /**
+   * The unique id for the menu item used for aria attributes. If the item is a child of the Menu component, this property will be generated and overridden.
+   */
   id?: string;
+  /**
+   * Icon to be displayed before what you supplied for the children.
+   */
   icon?: CanvasSystemIcon;
+  /**
+   * Icon to be displayed after what you supplied for the children.
+   */
   secondaryIcon?: CanvasSystemIcon;
+  /**
+   * Adds a top border on the menu item.
+   */
   hasDivider?: boolean;
+  /**
+   * Allows you to disable a menu item so it is not clickable.
+   */
   isDisabled?: boolean;
+  /**
+   * Whether or not this is the currently selected menu item. If the item is a child of the Menu component, this property will be generated and overridden.
+   */
   isFocused?: boolean;
+  /**
+   * Allows you to override the role of the item, e.g. you can use this element as a option in a combobox.
+   */
   role: string;
+  /**
+   * Allows the onClose Menu callback to be fired after the menu item has been clicked.
+   */
   shouldClose?: boolean;
 }
 

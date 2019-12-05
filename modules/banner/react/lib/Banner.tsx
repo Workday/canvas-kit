@@ -16,19 +16,19 @@ export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    */
   onClick?: (e: React.SyntheticEvent) => void;
   /**
-   * Text inside the banner
+   * Label of the banner
    */
   label?: React.ReactNode;
   /**
-   * Size and position of the banner
+   * Set the banner variant as `full` or `sticky`
    */
   variant?: BannerVariant;
   /**
-   * Color of the banner based on the type of the error
+   * Set the banner type as `alert` or `error`
    */
   error?: ErrorType;
   /**
-   * Text on the right, call to action
+   * Set the action text in the `full` variant
    */
   actionText?: string;
 }

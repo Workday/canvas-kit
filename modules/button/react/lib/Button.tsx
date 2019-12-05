@@ -10,11 +10,11 @@ import {labelDataBaseStyles} from './ButtonStyles';
 export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Type of button.
+   * The type of button.
    */
   variant?: T;
   /**
-   * Size of button.
+   * The size of button.
    */
   size?: ButtonSize;
   /**

@@ -22,12 +22,12 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   headingId?: string;
 
   /**
-   * Padding of the card.
+   * Padding of the card. Style imported from `@workday/canvas-kit-react-core`.
    */
   padding: CanvasSpacingValue;
 
   /**
-   * Depth of the card.
+   * Depth of the card. Style imported from `@workday/canvas-kit-react-core`.
    */
   depth: CanvasDepthValue;
 

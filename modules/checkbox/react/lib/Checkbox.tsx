@@ -14,28 +14,40 @@ import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * Boolean if the Checkbox is selected
+   * Whether or not the checkbox is checked (`true`) or not checked (`false`)
    */
   checked: boolean;
   /**
-   * Boolean to disable the Checkbox
+   * Whether or not the checkbox is disabled (`true`) or not checked (`false`)
    */
   disabled?: boolean;
   /**
-   * Id for the Checkbox
+   * The HTML attribute `id` for the underlying input checkbox and label component. This is required if `label` is defined.
    */
   id?: string;
+  /**
+   * A ref to the underlying input checkbox element. Use this to imperatively check or focus this component.
+   */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
-   * Label for the Checkbox
+   * The content of the label associated to the input checkbox component.
    */
   label?: string;
   /**
-   * Callback when the checkbox is toggled
+   * A callback that gets called everytime the checkbox state changes.
    */
   onChange?: (e: React.SyntheticEvent) => void;
+  /**
+   * The `value` attribute of the input checkbox.
+   */
   value?: string;
+  /**
+   * The type of error to display, if any.
+   */
   error?: ErrorType;
+  /**
+   * Used on a checkbox with nested child checkboxes to denote that some, but not all, child checkboxes are selected.
+   */
   indeterminate?: boolean;
 }
 
