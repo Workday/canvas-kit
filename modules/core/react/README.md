@@ -380,6 +380,9 @@ mouse input. Simply spread it in your styles (i.e. `...hideMouseFocus`).
 **Note:** It is best practice to show focus outlines by default and specifically hide them in the
 cases you would like (i.e. mouse/touch/pointer input).
 
+**Note:** Multiple InputProviders in the same tree are not supported. Any nested `InputProvider`
+will remove itself from the DOM (rendering only its children) and not attach any event listeners.
+
 ### Static Properties
 
 #### `InputTypes`
