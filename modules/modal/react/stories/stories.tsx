@@ -25,7 +25,7 @@ const DefaultModalExample = () => {
       <Button variant={Button.Variant.Delete} buttonRef={buttonRef} onClick={openModal}>
         Delete Item
       </Button>
-      <Modal data-testid="TestModal" heading={'Delete Item'} open={open} handleClose={closeModal}>
+      <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
           Delete
