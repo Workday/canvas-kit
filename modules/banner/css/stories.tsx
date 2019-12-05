@@ -5,7 +5,7 @@ import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('CSS/Banner/Alert ', module)
+storiesOf('Components|Indicators/Banner/CSS/Alert ', module)
   .addDecorator(withReadme(README))
   .add('Full', () => (
     <div className="story">
@@ -23,7 +23,7 @@ storiesOf('CSS/Banner/Alert ', module)
     </div>
   ));
 
-storiesOf('CSS/Banner/Error ', module)
+storiesOf('Components|Indicators/Banner/CSS/Error ', module)
   .addDecorator(withReadme(README))
   .add('Full', () => (
     <div className="story">

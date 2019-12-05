@@ -1,6 +1,7 @@
 @mixin wdc-focusable-buttons() {
   .wdc-a11y button:not([disabled]),
-  .wdc-btn:not([disabled]):not(.wdc-btn-disabled) {
+  .wdc-btn:not([disabled]):not(.wdc-btn-disabled),
+  .wdc-btn-text:not([disabled]):not(.wdc-btn-disabled) {
     &:not([tabindex='-1']):focus {
       @content;
     }
@@ -11,6 +12,10 @@
   @include wdc-focusable-buttons() {
     box-shadow: $wdc-btn-focus-ring;
     outline: none;
+  }
+
+  .wdc-btn-text:not([disabled]):not(.wdc-btn-disabled):not(.wdc-btn-text-inverse):not([tabindex='-1']):focus {
+    box-shadow: $wdc-btn-text-focus-ring;
   }
 
   .wdc-btn-primary:not([disabled]):not(.wdc-btn-disabled):not([tabindex='-1']):focus {
