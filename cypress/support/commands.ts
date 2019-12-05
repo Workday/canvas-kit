@@ -1,4 +1,5 @@
 import * as axe from 'axe-core';
+import {Promise} from 'cypress/types/bluebird';
 
 declare global {
   interface Window {
@@ -15,12 +16,27 @@ Cypress.Commands.add('injectAxe', () => {
   });
 });
 
-const raf = () =>
-  new Cypress.Promise(resolve => {
-    (cy as any).state('window').requestAnimationFrame(resolve);
+// Add better logging to cy.tab
+Cypress.Commands.overwrite('tab', (originalFn, subject) => {
+  const prevSubject = cy.$$(subject || cy.state('window').document.activeElement);
+
+  const log = Cypress.log({
+    $el: prevSubject,
+    consoleProps() {
+      return {
+        'Applied To': prevSubject.toArray()[0],
+      };
+    },
   });
 
-// Overwrite `tab` to allow React hooks to add event listeners
-// I can't reproduce the issue locally, but CI is failing around tabbing
-// only when hooks are involved...
-Cypress.Commands.overwrite('tab', (originalFn, subject) => raf().then(() => originalFn(subject)));
+  log.snapshot('before', {next: 'after'});
+
+  return Cypress.Promise.try(() => originalFn(subject))
+    .then(value => {
+      log.set('$el', value).snapshot();
+      return value;
+    })
+    .finally(() => {
+      log.end();
+    });
+});
