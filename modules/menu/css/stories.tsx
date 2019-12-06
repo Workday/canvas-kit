@@ -46,7 +46,7 @@ class WithIconsDemo extends Component {
   }
 }
 
-storiesOf('CSS/Menu', module)
+storiesOf('Components|Popups/Menu/CSS', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

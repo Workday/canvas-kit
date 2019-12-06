@@ -23,8 +23,23 @@ declare global {
  * h.stories.load('Button', 'Primary')
  */
 export function load(categorization: string, story: string) {
-  cy.window().then(win => {
-    win.setCurrentStory(categorization.toLowerCase(), story.toLowerCase());
+  const log = Cypress.log({
+    name: 'Load',
+    message: [categorization, story],
+    $el: Cypress.$('#root'),
+  });
+  log.snapshot('before');
+
+  cy.window({log: false}).then(win => {
+    const now = performance.now();
+    win.setCurrentStory(categorization.replace(/[|/]/g, '-').toLowerCase(), story.toLowerCase());
+    log.set('consoleProps', () => ({
+      categorization,
+      story,
+      renderTime: performance.now() - now,
+    }));
+    log.snapshot('after');
+    log.end();
   });
 }
 

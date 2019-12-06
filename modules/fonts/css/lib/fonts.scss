@@ -1,0 +1,43 @@
+$_wdc-core-fonts-path: 'https://design.workdaycdn.com/beta/assets/fonts@1.0.0/roboto/ttf' !default;
+$_wdc-font-family: 'Roboto';
+$_wdc-font-family-mono: 'Roboto Mono';
+
+@font-face {
+  font-family: $_wdc-font-family;
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'),
+    url(#{$_wdc-core-fonts-path}/Roboto-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: $_wdc-font-family;
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'),
+    url(#{$_wdc-core-fonts-path}/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: $_wdc-font-family;
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+    url(#{$_wdc-core-fonts-path}/Roboto-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: $_wdc-font-family;
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+    url(#{$_wdc-core-fonts-path}/Roboto-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: $_wdc-font-family-mono;
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Mono'), local('RobotoMono-Regular'),
+    url(#{$_wdc-core-fonts-path}/RobotoMono-Regular.ttf) format('truetype');
+}

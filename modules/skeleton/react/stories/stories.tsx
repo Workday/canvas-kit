@@ -19,7 +19,7 @@ const FlexContainer = styled('div')({
   display: 'flex',
 });
 
-storiesOf('Skeleton', module)
+storiesOf('Components|Indicators/Skeleton/React', module)
   .addParameters({component: Skeleton})
   .addDecorator(withReadme(README))
   .add('Complete', () => {

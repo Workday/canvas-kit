@@ -34,6 +34,23 @@ addDecorator(withKnobs);
 addDecorator(InputProviderDecorator);
 addDecorator(FontsDecorator);
 
+/** If the string contains a phrase, prefix it. This is useful for making ordering sections */
+const prefix = (phrase, prefix) => value => (value.indexOf(phrase) > -1 ? prefix + value : value);
+const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
+
+function storySort(a, b) {
+  const prefixFn = pipe(
+    prefix('welcome-', '0'),
+    prefix('getting-started', '0'),
+    prefix('tokens-', '1'),
+    prefix('components-', '2'),
+    prefix('labs-', '3')
+  );
+  const left = prefixFn(a[0]);
+  const right = prefixFn(b[0]);
+  return left === right ? 0 : left.localeCompare(right);
+}
+
 addParameters({
   options: {
     theme: create({
@@ -42,6 +59,7 @@ addParameters({
       mainTextFace: fontFamily,
       mainBackground: commonColors.backgroundAlt,
     }),
+    storySort,
   },
   docs: {
     container: DocsContainer,

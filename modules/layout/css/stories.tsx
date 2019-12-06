@@ -5,7 +5,7 @@ import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('CSS/Layout', module)
+storiesOf('Components|Containers/Layout/CSS', module)
   .addDecorator(withReadme(README))
   .add('Responsive Layout', () => (
     <div className="story">
