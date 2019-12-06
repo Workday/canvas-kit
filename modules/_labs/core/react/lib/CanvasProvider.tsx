@@ -8,28 +8,17 @@ export interface CanvasProviderProps {
   theme: CanvasTheme;
 }
 
-function useTheme(theme: CanvasTheme, setThemeGlobal: boolean) {
-  if (setThemeGlobal) {
-    if (!window.wdCanvas) {
-      window.wdCanvas = {};
-    }
-    window.wdCanvas.theme = theme;
-  }
-
-  document.body.dir = theme.direction;
-}
-
 export default class CanvasProvider extends React.Component<CanvasProviderProps> {
   static defaultProps = {
     theme: defaultCanvasTheme,
   };
 
   componentDidMount() {
-    useTheme(this.props.theme, this.props.setThemeGlobal);
+    document.body.dir = this.props.theme.direction;
   }
 
   componentDidUpdate() {
-    useTheme(this.props.theme, this.props.setThemeGlobal);
+    document.body.dir = this.props.theme.direction;
   }
 
   render() {
