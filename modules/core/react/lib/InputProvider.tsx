@@ -12,6 +12,7 @@ export interface InputProviderState {
   isScrolling: boolean; // Unused if props.provideIntent is not defined
   mousePosX: number | null; // Unused if props.provideIntent is not defined
   mousePosY: number | null; // Unused if props.provideIntent is not defined
+  nested: boolean; // True if nested within another input provider
 }
 
 export enum InputType {
@@ -121,11 +122,14 @@ const detectWheel = () => {
   return wheelType;
 };
 
+const containerClass = 'wdc-input-provider';
+
 /**
  * This component takes heavy inspiration from what-input (https://github.com/ten1seven/what-input)
  */
 export default class InputProvider extends React.Component<InputProviderProps, InputProviderState> {
   private eventTimer: number | undefined;
+  private ref: React.RefObject<HTMLDivElement> = React.createRef();
 
   constructor(props: any) {
     super(props);
@@ -171,6 +175,7 @@ export default class InputProvider extends React.Component<InputProviderProps, I
       isScrolling: false,
       mousePosX: null,
       mousePosY: null,
+      nested: false,
     };
 
     this.setInput = this.setInput.bind(this);
@@ -182,6 +187,14 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   provideIntent = this.props.provideIntent;
 
   componentDidMount() {
+    if (
+      this.ref.current &&
+      this.ref.current.parentElement &&
+      this.ref.current.parentElement.closest(`.${containerClass}`)
+    ) {
+      this.setState({nested: true});
+      return;
+    }
     this.enableListeners(true);
   }
 
@@ -203,6 +216,7 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   shouldComponentUpdate(nextProps: {}, nextState: InputProviderState) {
     if (
       nextProps !== this.props ||
+      nextState.nested !== this.state.nested ||
       nextState.currentInput !== this.state.currentInput ||
       nextState.currentIntent !== this.state.currentIntent
     ) {
@@ -347,9 +361,18 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   }
 
   render() {
+    if (this.state.nested) {
+      return this.props.children;
+    }
+
     const intent = this.provideIntent ? this.state.currentIntent : null;
     return (
-      <div data-whatinput={this.state.currentInput} data-whatintent={intent}>
+      <div
+        className={containerClass}
+        ref={this.ref}
+        data-whatinput={this.state.currentInput}
+        data-whatintent={intent}
+      >
         {this.props.children}
       </div>
     );
