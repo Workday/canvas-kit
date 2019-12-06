@@ -7,6 +7,7 @@ import {
   PartialCanvasTheme,
   CanvasThemePalette,
   PartialCanvasThemePalette,
+  ContentDirection,
 } from './types';
 import {CanvasColor} from '@workday/canvas-kit-react-core';
 
@@ -78,8 +79,8 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
 }
 
 export default function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
-  const {palette = {}, breakpoints = {}} = partialTheme;
-  const {primary, alert, error, success, neutral, common = {}} = palette;
+  const {palette = {}, breakpoints = {}, direction = ContentDirection.LTR} = partialTheme;
+  const {primary, alert, error, success, neutral, common = {}} = palette!;
 
   const mergable: PartialCanvasTheme = {
     palette: {
@@ -91,6 +92,7 @@ export default function createCanvasTheme(partialTheme: PartialCanvasTheme): Can
       neutral: fillPalette(neutral),
     },
     breakpoints,
+    direction,
   };
 
   return merge(defaultCanvasTheme, mergable) as CanvasTheme;

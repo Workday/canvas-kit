@@ -5,9 +5,11 @@ import {breakpoints, CanvasBreakpoints, BreakpointKey} from './lib/theming/break
 import createCanvasTheme from './lib/theming/createCanvasTheme';
 import styled from './lib/theming/styled';
 import useTheme from './lib/theming/useTheme';
+import applyDirection from './lib/theming/applyDirection';
 
 export default type;
 export {
+  applyDirection,
   breakpoints,
   type,
   space,
@@ -21,3 +23,4 @@ export {
 export * from './lib/type';
 export * from './lib/theming/types';
 export * from './lib/theming/theme';
+export * from './lib/theming/applyDirection';
