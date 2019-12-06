@@ -13,6 +13,7 @@ export interface CanvasTypeHierarchy {
   body3: CSSProperties;
   small1: CSSProperties;
   small2: CSSProperties;
+  small3: CSSProperties;
   [key: string]: CSSProperties;
 }
 
@@ -77,12 +78,18 @@ const hierarchy: CanvasTypeHierarchy = {
     color: typeColors.body,
   },
   small1: {
-    fontSize: 12,
+    fontSize: 13,
     lineHeight: bodyLineHeight,
     fontWeight: bodyFontWeight,
     color: typeColors.body,
   },
   small2: {
+    fontSize: 12,
+    lineHeight: bodyLineHeight,
+    fontWeight: bodyFontWeight,
+    color: typeColors.body,
+  },
+  small3: {
     fontSize: 10,
     lineHeight: bodyLineHeight,
     fontWeight: bodyFontWeight,

@@ -39,8 +39,9 @@ const MyLabel = styled('label')({
 | `body1`  | 20       | Large paragraph text for marketing, articles, etc.   |
 | `body2`  | 16       | Paragraphs, large buttons, navigation, sub-headings  |
 | `body3`  | 14       | Buttons, form labels, hint text, menus, descriptions |
-| `small1` | 12       | Caption, pills, satus indicators                     |
-| `small2` | 10       | Data visualization labels, Mobile labels             |
+| `small1` | 13       | Tables, Captions                                     |
+| `small2` | 12       | Pills, Status Indicators, Small Labels               |
+| `small3` | 10       | Data visualization labels, Mobile labels             |
 
 ## Margin & Padding Spacing
 

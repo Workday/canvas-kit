@@ -67,6 +67,14 @@ storiesOf('Labs/Core/React', module)
           denim, thundercats salvia intelligentsia jean shorts officia. Heirloom craft beer put a
           bird on it occaecat
         </p>
+        <p style={type.small3}>
+          <strong>Small 1: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde
+          ennui. Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth
+          kitsch next level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris
+          sustainable. Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw
+          denim, thundercats salvia intelligentsia jean shorts officia. Heirloom craft beer put a
+          bird on it occaecat
+        </p>
         <hr />
 
         <h3 style={type.title5}>Variants</h3>
