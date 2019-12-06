@@ -5,6 +5,7 @@ import withReadme from 'storybook-readme/with-readme';
 
 import Avatar, {AvatarButton} from '../index';
 import README from '../README.md';
+import {withKnobs} from '@storybook/addon-knobs';
 
 const IMAGE_URL = 'https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png';
 
@@ -14,6 +15,7 @@ const handleAvatarButtonClick = (e: React.SyntheticEvent) => {
 
 storiesOf('Components|Indicators/Avatar/React/Default', module)
   .addDecorator(withReadme(README))
+  .addDecorator(withKnobs)
   .addParameters({component: Avatar})
   .add('Light', () => (
     <div className="story">
@@ -66,6 +68,7 @@ storiesOf('Components|Indicators/Avatar/React/Default', module)
 
 storiesOf('Components|Indicators/Avatar/React/Avatar Button', module)
   .addDecorator(withReadme(README))
+  .addDecorator(withKnobs)
   .addParameters({component: AvatarButton})
   .add('Light', () => (
     <div className="story">
