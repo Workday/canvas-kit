@@ -175,6 +175,7 @@ export default class InputProvider extends React.Component<InputProviderProps, I
       isScrolling: false,
       mousePosX: null,
       mousePosY: null,
+      nested: false,
     };
 
     this.setInput = this.setInput.bind(this);
