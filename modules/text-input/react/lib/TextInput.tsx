@@ -7,7 +7,7 @@ export interface TextInputProps
   extends GrowthBehavior,
     React.InputHTMLAttributes<HTMLInputElement> {
   error?: ErrorType;
-  inputRef?: React.RefObject<HTMLInputElement>;
+  inputRef?: React.Ref<HTMLInputElement>;
 }
 
 const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow'>>(
