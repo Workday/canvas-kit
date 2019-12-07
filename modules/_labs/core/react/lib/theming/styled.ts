@@ -11,8 +11,8 @@ function styled<Props>(node: any) {
   return (...args: Interpolation<Props>[]) => {
     const newArgs: Interpolations = args.map(
       interpolation => (props: Props & {theme: CanvasTheme; direction: ContentDirection}) => {
-        const theme = useTheme(props.theme);
-        const direction = props.direction || theme.direction;
+        props.theme = useTheme(props.theme);
+        const direction = props.direction || props.theme.direction;
 
         // TODO: Add support for RTL prop.
         const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;
