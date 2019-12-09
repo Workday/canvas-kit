@@ -315,7 +315,7 @@ export const ButtonColors: ButtonColorCollection = {
     focusBorder: 'transparent',
     focusRingOuter: canvas.colors.frenchVanilla100,
     focusHover: 'rgba(0, 0, 0, 0.3)',
-    activeHover: 'rgba(255, 255, 255, 0.85)',
+    activeHover: canvas.colors.frenchVanilla100,
     labelIconFocusHover: canvas.colors.licorice500,
   },
   [IconButtonVariant.InverseFilled]: {
@@ -333,7 +333,7 @@ export const ButtonColors: ButtonColorCollection = {
     focusBorder: 'transparent',
     focusRingOuter: canvas.colors.frenchVanilla100,
     focusHover: 'rgba(0, 0, 0, 0.3)',
-    activeHover: 'rgba(255, 255, 255, 0.85)',
+    activeHover: canvas.colors.frenchVanilla100,
     labelIconFocusHover: canvas.colors.licorice500,
   },
 };

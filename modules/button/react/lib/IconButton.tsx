@@ -171,12 +171,14 @@ export const IconButtonCon = styled('button', {
           '&:focus': {
             backgroundColor: colors.frenchVanilla100,
             ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry400),
           },
           '&:focus&:hover, &:active': {
-            backgroundColor: toggled ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.3)',
+            backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
             ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry400),
           },
           '&:not([disabled]):focus': {
             backgroundColor: colors.frenchVanilla100,
@@ -184,9 +186,6 @@ export const IconButtonCon = styled('button', {
               ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
               : {}),
           },
-          // '&:active': {
-          //   backgroundColor: toggled ? 'orange' : 'blue'
-          // },
           backgroundColor: colors.blueberry400,
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.frenchVanilla100),
@@ -196,12 +195,14 @@ export const IconButtonCon = styled('button', {
           '&:focus': {
             backgroundColor: colors.frenchVanilla100,
             ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry400),
           },
           '&:focus&:hover': {
-            backgroundColor: toggled ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.3)',
+            backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
             ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry400),
           },
           '&:not([disabled]):focus': {
             backgroundColor: colors.frenchVanilla100,
