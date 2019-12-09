@@ -1,6 +1,7 @@
 import * as React from 'react';
+import {ThemeContext} from '@emotion/core';
 import {CanvasTheme} from './types';
-import {ThemeContext, defaultCanvasTheme} from './theme';
+import {defaultCanvasTheme} from './theme';
 
 declare global {
   interface Window {
