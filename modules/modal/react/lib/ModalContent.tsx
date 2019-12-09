@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
-import tabTrappingKey from 'focus-trap-js';
 import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
+import {useDocumentListener, useFocusTrap} from '@workday/canvas-kit-react-common';
 
 import {ModalWidth} from './Modal';
 
@@ -65,7 +65,10 @@ const transformOrigin = {
   vertical: 'bottom',
 } as const;
 
-function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
+function getFirstElementToFocus(modalEl: HTMLElement | null): HTMLElement {
+  if (!modalEl) {
+    throw new Error('A modal element must be provided');
+  }
   const firstFocusable = modalEl.querySelector<HTMLElement>(
     `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
   );
@@ -97,35 +100,6 @@ function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
   }
 }
 
-const useKeyDownListener = (handleKeydown: EventListenerOrEventListenerObject) => {
-  React.useEffect(() => {
-    document.addEventListener('keydown', handleKeydown);
-    return () => {
-      document.removeEventListener('keydown', handleKeydown);
-    };
-  }, [handleKeydown]);
-};
-
-const useInitialFocus = (
-  modalRef: React.RefObject<HTMLElement>,
-  firstFocusRef: React.RefObject<HTMLElement> | undefined
-) => {
-  const handlerRef = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
-  React.useLayoutEffect(() => {
-    if (modalRef.current) {
-      const elem =
-        (firstFocusRef && firstFocusRef.current) || getFirstElementToFocus(modalRef.current);
-      elem.focus();
-    }
-    return () => {
-      if (handlerRef) {
-        handlerRef.focus();
-      }
-    };
-  }, [modalRef, firstFocusRef]);
-};
-
 const ModalContent = ({
   handleClose,
   children,
@@ -136,20 +110,19 @@ const ModalContent = ({
   padding,
   ...elemProps
 }: ModalContentProps): JSX.Element => {
-  const modalRef = React.useRef<HTMLDivElement>(null);
+  const modalRef = React.useRef<HTMLDivElement | null>(null);
 
   const handleKeydown = (event: KeyboardEvent) => {
-    if (modalRef.current) {
-      tabTrappingKey(event, modalRef.current);
-    }
-
     if (closeOnEscape && handleClose && (event.key === 'Esc' || event.key === 'Escape')) {
       handleClose();
     }
   };
 
-  useKeyDownListener(handleKeydown);
-  useInitialFocus(modalRef, firstFocusRef);
+  useFocusTrap(
+    modalRef,
+    () => (firstFocusRef && firstFocusRef.current) || getFirstElementToFocus(modalRef.current)
+  );
+  useDocumentListener('keydown', handleKeydown);
 
   const handleOutsideClick = ({target}: React.MouseEvent<HTMLDivElement>) => {
     const modalEl = modalRef.current;
