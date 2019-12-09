@@ -16,18 +16,22 @@ export interface SystemIconStyles {
   accentHover?: string;
   /**
    * `.wd-icon-background` color
+   * @default transparent
    */
   background?: string;
   /**
    * `.wd-icon-background` color on hover.
+   * @default transparent
    */
   backgroundHover?: string;
   /**
    * Icon color. This will define `accent` and `fill`. `accent` and `fill` will override this property if defined
+   * @default colors.primary.iconStandard
    */
   color?: string;
   /**
    * Hover color of the icon. This will define `accentHover` and `fillHover`
+   * @default colors.primary.iconHover
    */
   colorHover?: string;
   /**

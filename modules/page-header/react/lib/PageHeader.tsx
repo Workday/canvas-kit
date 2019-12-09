@@ -14,6 +14,7 @@ export interface PageHeaderProps {
   capWidth: boolean;
   /**
    * The breakpoint at which the header's container spacing increases from 's' size to 'xl' size.
+   * @default 768
    */
   breakpoint?: number;
 }

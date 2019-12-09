@@ -10,13 +10,18 @@ import styled from '@emotion/styled';
 
 export interface ToastProps {
   /**
-   *  Pass whatever icon you'd like to display on the left side of the Toast You can import icons from '@workday/canvas-system-icons-web'
+   *  Icon to display from `@workday/canvas-system-icons-web`
+   * @default checkIcon
    */
   icon: CanvasSystemIcon;
   /**
    * The color of the icon
+   * @default colors.greenApple400
    */
   iconColor: CanvasColor | string; // TODO: Fix
+  /**
+   * The message text for the Toast.
+   */
   children: string;
   /**
    * Callback to handle close of your Toast and any other event when the Toast is closed.
@@ -32,6 +37,7 @@ export interface ToastProps {
   actionText?: string;
   /**
    * Origin from which the toast will animate from.
+   * @default {horizontal: 'center', vertical: 'top'}
    */
   transformOrigin?: TransformOrigin;
 }

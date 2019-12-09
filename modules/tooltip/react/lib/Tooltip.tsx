@@ -6,13 +6,18 @@ import {keyframes} from '@emotion/core';
 
 export interface TooltipProps {
   /**
-   *  Origin from which the popup will animate from.
+   *  Origin from which the Tooltip will animate from.
+   * @default {horizontal: 'center', vertical: 'top'}
    */
   transformOrigin: TransformOrigin;
   /**
-   * Unique id of the tooltip
+   * Unique id of the Tooltip.
    */
   id?: string;
+  /**
+   * The content for the Tooltip.
+   */
+  children?: string;
 }
 
 const tooltipAnimation = (transformOrigin: TransformOrigin) => {

@@ -9,23 +9,20 @@ export interface RadioGroupProps extends GrowthBehavior {
    * React children must be of type Radio and have at least two.
    */
   children: React.ReactElement<RadioProps>[];
-
   /**
    * The value or index of the Radio that should be toggled on.
    * If a string is passed, the Radio with the corresponding value will be selected.
    */
   value?: string | number;
-
   /**
    *  If specified, will be passed as the common `name` prop to all `Radio` children. This enables you to avoid specifying `name` on each child.
    */
   name?: string;
-
   /**
    * The type of error to display, if any.
+   * @default undefined
    */
   error?: ErrorType;
-
   /**
    * Callback function when a button is selected, optional.
    * If the selected button has a value, it will be returned.

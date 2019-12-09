@@ -7,7 +7,15 @@ import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
 import {ModalWidth} from './Modal';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   *  You can choose between zero, s, l for your padding
+   * @default PopupPadding.l
+   */
   padding: PopupPadding;
+  /**
+   * You can choose between s or m for your modal width
+   * @default ModalWidth.s
+   */
   width: ModalWidth;
   /**
    * Optional callback for the Modal handling closing. If this callback is provided the Modal will have
@@ -23,6 +31,9 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * Set this to true for simple applications and the modal will close when the escape key is pressed.
    */
   closeOnEscape: boolean;
+  /**
+   * Heading at the top of the card.
+   */
   heading: React.ReactNode;
   /**
    * Optional override of the auto-select functionality of the Modal. If this ref is defined, that element

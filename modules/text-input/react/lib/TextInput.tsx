@@ -8,10 +8,12 @@ export interface TextInputProps
     React.InputHTMLAttributes<HTMLInputElement> {
   /**
    *  The type of error to display, if any.
+   * @default undefined
    */
   error?: ErrorType;
   /**
    * The ref callback for the inner input element.
+   * @default undefined
    */
   inputRef?: React.RefObject<HTMLInputElement>;
 }

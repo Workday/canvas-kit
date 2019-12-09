@@ -17,11 +17,13 @@ export enum TableRowState {
 export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
    * State of the row
+   * @default undefined
    */
   state?: TableRowState;
 
   /**
    * Whether or not the row contains header elements
+   * @default false
    */
   header?: boolean;
 }

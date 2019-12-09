@@ -8,6 +8,10 @@ const TextContainer = styled('div')({
 });
 
 export interface SkeletonTextProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The number of "lines" that it will display. If there's more than one line, then the last line will have a width of `60%`
+   * @default 2
+   */
   lineCount: number;
 }
 

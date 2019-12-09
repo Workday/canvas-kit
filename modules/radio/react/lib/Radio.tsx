@@ -12,14 +12,17 @@ import uuid from 'uuid/v4';
 export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * Whether or not the radio input is checked (`true`) or not checked (`false`)
+   * @default false
    */
   checked: boolean;
   /**
    * Whether or not the radio input is disabled (not able to be checked on or off)
+   * @default false
    */
   disabled?: boolean;
   /**
    * The HTML attribute `id` for the underlying radio input and label component. This is required if `label` is defined.
+   * @default A uniquely generated id
    */
   id?: string;
   /**

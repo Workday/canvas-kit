@@ -8,15 +8,16 @@ export interface ColumnProps {
    */
   children?: React.ReactNode;
   /**
-   * Spacing of columns.
+   * The left and right padding for the column (inherits from Layout prop).
+   * @default 12
    */
   spacing?: number;
   /**
-   * Widths of columns.
+   * The size of the 12 column grid.
    */
   columns?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   /**
-   * Fixed width of columns
+   * The width of the columns. This will take precedence over the `columns` prop.
    */
   width?: number | string;
 }

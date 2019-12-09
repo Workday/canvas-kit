@@ -26,7 +26,7 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
    */
   requiredLabel: string;
   /**
-   * Title of the required Label
+   * If true, the `accessibleHide` style is applied to the label
    */
   accessibleHide?: boolean;
 }

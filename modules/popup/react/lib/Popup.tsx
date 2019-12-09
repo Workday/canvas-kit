@@ -18,10 +18,12 @@ export enum PopupPadding {
 export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    *  You can choose between zero, s, l for your padding
+   * @default PopupPadding.l (32)
    */
   padding: PopupPadding;
   /**
    * Origin from which the popup will animate from
+   * @default {horizontal: 'center', vertical: 'top'}
    */
   transformOrigin: TransformOrigin;
   /**
@@ -46,6 +48,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   heading?: React.ReactNode;
   /**
    * Depth of the card. Style imported from `@workday/canvas-kit-react-core`.
+   * @default depth[2]
    */
   depth?: CanvasDepthValue;
   /**

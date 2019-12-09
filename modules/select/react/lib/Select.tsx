@@ -20,10 +20,12 @@ export interface SelectProps extends GrowthBehavior, React.SelectHTMLAttributes<
   children: React.ReactElement<SelectOption>[];
   /**
    * Whether or not the select is disabled (not able to be selected)
+   * @default false
    */
   disabled?: boolean;
   /**
    * The type of error to display, if any.
+   * @default undefined
    */
   error?: ErrorType;
   /**

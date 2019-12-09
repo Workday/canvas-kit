@@ -6,11 +6,13 @@ import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas
 
 export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   *  Whether or not the switch is on (`true`) or off (`false`)
+   * Whether or not the switch is on (`true`) or off (`false`)
+   * @default false
    */
   checked: boolean;
   /**
-   *  Whether or not the switch is disabled (not able to be switched on or off)
+   * Whether or not the switch is disabled (not able to be switched on or off)
+   * @default false
    */
   disabled?: boolean;
   /**
@@ -31,6 +33,7 @@ export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement>
   inputRef?: React.Ref<HTMLInputElement>;
   /**
    * The type of error to display, if any.
+   * @default undefined
    */
   error?: ErrorType;
 }

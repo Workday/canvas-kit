@@ -34,10 +34,12 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   padding?: CanvasSpacingValue;
   /**
    * The width at which the window size must be in order for `onBreakPointChange` to fire.
+   * @default 768px
    */
   breakpoint?: number;
   /**
    * Determines the width of the side panel when it's open.
+   * @default 300px
    */
   openWidth?: number;
   /**
@@ -46,6 +48,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   backgroundColor?: SidePanelBackgroundColor;
   /**
    * Aria label for closing the navigation
+   * @default SidePanelBackgroundColor.White
    */
   closeNavigationLabel: string;
   /**

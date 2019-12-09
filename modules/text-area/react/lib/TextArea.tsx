@@ -8,6 +8,7 @@ export interface TextAreaProps
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Whether or not the text area is disabled.
+   * @default false
    */
   disabled?: boolean;
   /**
@@ -28,10 +29,12 @@ export interface TextAreaProps
   placeholder?: string;
   /**
    * If true, user will be unable to interact with the field.
+   * @default false
    */
   readOnly?: boolean;
   /**
    * Set resize constraints on the text area
+   * @default TextArea.ResizeDirection.Both
    */
   resize: TextAreaResizeDirection;
   /**

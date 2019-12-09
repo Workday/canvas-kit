@@ -15,11 +15,12 @@ export interface LayoutProps {
    */
   spacing: number;
   /**
-   * Gutter of layout
+   * The padding of the outside container.
+   * @default 12
    */
   gutter: number | string;
   /**
-   * If there should be a max-width
+   * If the max width of container is 1280px.
    */
   capWidth?: boolean;
 }

@@ -12,13 +12,41 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, Gr
    * The Postiion of the FormField Label (Top vs Left vs Hidden)
    */
   labelPosition: FormFieldLabelPosition;
+  /**
+   * The label text displayed for the input.
+   */
   label?: React.ReactNode;
+  /**
+   * The message displayed below the input field. Required if `error` is defined.
+   * @default undefined
+   */
   hintText?: React.ReactNode;
+  /**
+   * The ID of message displayed below the input field. Required for accessibile aria-definedby attribute. Required if `error` and `hintText` are defined.
+   */
   hintId?: string;
+  /**
+   * The ID of the input child. If an ID is not specified on the input child, this will be used as it's ID. Used for label's `htmlFor` attribute. This is required for accessiblity if `label` is defined.
+   */
   inputId?: string;
+  /**
+   * The type of error to display, if any. This prop will be passed to the input component if applicable.
+   * @default undefined
+   */
   error?: ErrorType;
+  /**
+   * It set, the label of the field will be suffixed by a red astrisk.
+   * @default false
+   */
   required?: boolean;
+  /**
+   * If true, FormField uses a `fieldset` and a `legend` element instead of a div and a label. This is required for accessibility on radio groups. If you're using a `RadioGroup` inside of FormField, make sure you set this to true.
+   * @default false
+   */
   useFieldset: boolean;
+  /**
+   * The input component to wrap.
+   */
   children: React.ReactNode;
 }
 

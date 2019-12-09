@@ -6,6 +6,10 @@ import Icon from './Icon';
 import {SpanProps} from './types';
 
 export interface AppletIconStyles {
+  /**
+   * Icon color hue. Must use a member of the `AppletIcon.Colors` static enum.
+   * @default AppletIcon.Colors.Blueberry
+   */
   color?: BrandingColor;
 }
 
@@ -53,7 +57,8 @@ export interface AppletIconProps extends AppletIconStyles {
    */
   icon: CanvasAppletIcon;
   /**
-   * The size of the icon
+   * Size of the icon in `px`.
+   * @default 92
    */
   size?: number;
 }

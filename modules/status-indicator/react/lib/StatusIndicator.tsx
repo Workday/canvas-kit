@@ -109,19 +109,20 @@ export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
 
 export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
-   * Type of status indicator (e.g. Gray, Orange etc.).
+   * Type of status indicator. The Canvas system has predefined types that are meant to indicate various kinds of statuses.
+   * @default StatusIndicatorEmphasis.High
    */
   type: StatusIndicatorType;
   /**
-   * Emphasis of status indicator (e.g. High v Low).
+   * Emphasis of status indicator. Currently supports High(default) and Low emphasis.
    */
   emphasis: StatusIndicatorEmphasis;
   /**
-   * Label of status indicator.
+   * Label of the status message.
    */
   label: string;
   /**
-   * Icon to be used along with the status label.
+   * Icon to be used with the label text.
    */
   icon?: CanvasSystemIcon;
 }
