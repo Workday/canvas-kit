@@ -51,7 +51,6 @@ export interface CanvasTheme {
  */
 export interface Themeable {
   theme?: CanvasTheme;
-  direction?: ContentDirection;
 }
 
 /**
