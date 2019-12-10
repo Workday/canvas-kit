@@ -6,7 +6,7 @@ import {iconButtonStyles} from './ButtonStyles';
 import {getButtonStyle} from './utils';
 import {colors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/core';
 
@@ -106,6 +106,11 @@ export const IconButtonCon = styled('button', {
           '&:hover': {
             backgroundColor: colors.blueberry500,
           },
+          ...mouseFocusBehavior({
+            '&:focus:active': {
+              backgroundColor: `${colors.blueberry500} !important`,
+            },
+          }),
           backgroundColor: colors.blueberry400,
           borderColor: colors.blueberry400,
           ...getFillSelector(colors.frenchVanilla100),
@@ -150,17 +155,22 @@ export const IconButtonCon = styled('button', {
       case IconButtonVariant.CircleFilled:
         return {
           '&:focus&:hover, &:focus, &:active': {
-            backgroundColor: colors.blueberry400,
+            backgroundColor: colors.blueberry500,
             ...getFillSelector(colors.frenchVanilla100),
             ...getAccentSelector(colors.frenchVanilla100),
           },
           '&:not([disabled]):focus': {
-            backgroundColor: colors.blueberry500,
+            backgroundColor: colors.blueberry400,
             ...(toggled ? focusRing(2, 2) : {}),
           },
           '&:hover': {
             backgroundColor: colors.blueberry500,
           },
+          ...mouseFocusBehavior({
+            '&:focus:active': {
+              backgroundColor: `${colors.blueberry500} !important`,
+            },
+          }),
           backgroundColor: colors.blueberry400,
           borderColor: colors.blueberry400,
           ...getFillSelector(colors.frenchVanilla100),
@@ -186,6 +196,11 @@ export const IconButtonCon = styled('button', {
               ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
               : {}),
           },
+          ...mouseFocusBehavior({
+            '&:focus:active': {
+              backgroundColor: `${colors.frenchVanilla100} !important`,
+            },
+          }),
           backgroundColor: colors.blueberry400,
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.frenchVanilla100),
@@ -198,7 +213,7 @@ export const IconButtonCon = styled('button', {
             ...getAccentSelector(colors.frenchVanilla100),
             ...getBackgroundSelector(colors.blueberry400),
           },
-          '&:focus&:hover': {
+          '&:focus&:hover, &:active': {
             backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
             ...getFillSelector(colors.blueberry400),
             ...getAccentSelector(colors.frenchVanilla100),
@@ -210,6 +225,11 @@ export const IconButtonCon = styled('button', {
               ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
               : {}),
           },
+          ...mouseFocusBehavior({
+            '&:focus:active': {
+              backgroundColor: `${colors.frenchVanilla100} !important`,
+            },
+          }),
           backgroundColor: colors.blueberry400,
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.frenchVanilla100),

@@ -335,6 +335,7 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
         borderColor: buttonColors.activeBorder,
         ...getButtonFocusRing(variant),
       },
+
       '&:hover:focus': {
         backgroundColor: buttonColors.focusHover,
         'span .wd-icon-fill, span .wd-icon-accent': {
