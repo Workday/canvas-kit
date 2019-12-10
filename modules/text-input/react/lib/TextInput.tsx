@@ -15,7 +15,7 @@ export interface TextInputProps
    * The ref callback for the inner input element.
    * @default undefined
    */
-  inputRef?: React.RefObject<HTMLInputElement>;
+  inputRef?: React.Ref<HTMLInputElement>;
 }
 
 const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow'>>(

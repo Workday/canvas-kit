@@ -8,7 +8,7 @@ import {toId} from '@storybook/router';
 import ReactDOM from 'react-dom';
 
 import {commonColors, typeColors, fontFamily} from '../modules/core/react';
-import {InputProviderDecorator, FontsDecorator} from '../utils/storybook';
+import {CanvasProviderDecorator, FontsDecorator} from '../utils/storybook';
 
 const reqMDXWelcome = require.context('./stories', true, /\.mdx$/);
 const reqMDX = require.context('../modules', true, /\.mdx$/);
@@ -31,8 +31,25 @@ function loadStories() {
 }
 
 addDecorator(withKnobs);
-addDecorator(InputProviderDecorator);
 addDecorator(FontsDecorator);
+addDecorator(CanvasProviderDecorator);
+
+/** If the string contains a phrase, prefix it. This is useful for making ordering sections */
+const prefix = (phrase, prefix) => value => (value.indexOf(phrase) > -1 ? prefix + value : value);
+const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
+
+function storySort(a, b) {
+  const prefixFn = pipe(
+    prefix('welcome-', '0'),
+    prefix('getting-started', '0'),
+    prefix('tokens-', '1'),
+    prefix('components-', '2'),
+    prefix('labs-', '3')
+  );
+  const left = prefixFn(a[0]);
+  const right = prefixFn(b[0]);
+  return left === right ? 0 : left.localeCompare(right);
+}
 
 /** If the string contains a phrase, prefix it. This is useful for making ordering sections */
 const prefix = (phrase, prefix) => value => (value.indexOf(phrase) > -1 ? prefix + value : value);

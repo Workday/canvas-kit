@@ -175,7 +175,7 @@ storiesOf('Components|Buttons/Button/CSS/Text', module)
     </div>
   ));
 
-storiesOf('CSS/Button/Deprecated', module)
+storiesOf('Components|Buttons/Button/CSS/Deprecated', module)
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">

@@ -277,4 +277,16 @@ describe('InputProvider', () => {
 
     testInput(mockEvent, expectedInputType, expectedInputType, shimmedWindowProps);
   });
+
+  test(`nested input provider should not attach events and remove itself from the DOM`, () => {
+    const component = mount(
+      <InputProvider>
+        <InputProvider>
+          <h1>Test</h1>
+        </InputProvider>
+      </InputProvider>
+    );
+    expect(component.find('.wdc-input-provider').length).toBe(1);
+    component.unmount();
+  });
 });
