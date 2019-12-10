@@ -74,6 +74,11 @@ return (
 > Shows a box adjacent to the pagination bar where a page can be entered and is submitted when
 > 'Enter' key is pressed.
 
+#### goToLabel?: string
+
+> Determines the label next to the Go To box. Defaults to 'Go To'. Only usable while showGoTo is set
+> to true.
+
 #### customLabel?: (from: number, to: number, items: number, itemLabel: string) => string;
 
 > A function to build a custom label below the pagination bar.

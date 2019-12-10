@@ -2,9 +2,15 @@ import styled from '@emotion/styled';
 import {type} from '@workday/canvas-kit-react-core';
 import TextInput from '@workday/canvas-kit-react-text-input';
 import React from 'react';
+import uuid from 'uuid/v4';
 
-const GoToLabel = styled('div')({
-  margin: 'auto',
+interface GoToProps {
+  onSubmit: (page: number) => void;
+  max: number;
+  goToLabel?: string;
+}
+const GoToLabel = styled('label')({
+  margin: 'auto 0',
   paddingRight: '8px',
   ...type.body,
   ...type.variant.label,
@@ -12,19 +18,15 @@ const GoToLabel = styled('div')({
 
 const GoToWrapper = styled('div')({
   display: 'flex',
-  paddingLeft: '1px',
+  paddingLeft: '12px',
 });
 
-const InputWrapper = styled('div')({
+const InputWrapper = styled('form')({
   minWidth: '10px',
-  maxWidth: '45px',
 });
 
-const GoTo: React.FC<{
-  onSubmit: (page: number, e: React.SyntheticEvent) => void;
-  max: number;
-}> = props => {
-  const {onSubmit, max} = props;
+const GoTo: React.FC<GoToProps> = props => {
+  const {onSubmit, max, goToLabel} = props;
   const [value, setValue] = React.useState('');
 
   const validatePage = (text: string) => {
@@ -37,10 +39,19 @@ const GoTo: React.FC<{
     }
     return textAsInteger;
   };
+
+  const goToId = uuid();
+  const formSubmit = (e: any) => {
+    e.preventDefault();
+    const page = validatePage(value);
+    if (page) {
+      onSubmit(page);
+    }
+  };
   return (
     <GoToWrapper>
-      <GoToLabel>Go To</GoToLabel>
-      <InputWrapper>
+      <GoToLabel htmlFor={goToId}>{goToLabel || 'Go To'}</GoToLabel>
+      <InputWrapper onSubmit={formSubmit}>
         <TextInput
           data-testid="goToPage"
           width={53}
@@ -48,18 +59,10 @@ const GoTo: React.FC<{
           min={1}
           max={max}
           value={value}
+          id={goToId}
           type="number"
-          aria-label="Go to"
-          onChange={e => {
+          onChange={(e: any) => {
             setValue(e.target.value);
-          }}
-          onKeyDown={e => {
-            if (e.keyCode === 13) {
-              const page = validatePage(value);
-              if (page) {
-                onSubmit(page, e);
-              }
-            }
           }}
         />
       </InputWrapper>

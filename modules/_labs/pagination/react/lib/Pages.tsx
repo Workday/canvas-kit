@@ -1,56 +1,47 @@
-import styled from '@emotion/styled-base';
+/** @jsx jsx */
+import {css, jsx} from '@emotion/core';
 import {IconButton} from '@workday/canvas-kit-react-button';
-import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
+import canvas from '@workday/canvas-kit-react-core';
 import _ from 'lodash';
-import React from 'react';
+import React, {useRef} from 'react';
 
-const ActivePage = styled('button')({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: 13,
-  fontWeight: 700,
-  height: 32,
-  width: 32,
-  backgroundColor: canvas.colors.blueberry400,
-  color: canvas.colors.frenchVanilla100,
-  borderRadius: borderRadius.m,
-  border: 'none',
-  outline: 'none',
-});
+interface PagesProps {
+  numPages: number;
+  currentPage: number;
+  onPageClick: (page: number) => void;
+  mobile: boolean;
+}
 
-const NoPointerEvents = styled('div')({
+interface PaginationButtonProps {
+  page: number;
+  onPageClick: (page: number) => void;
+  active?: boolean;
+}
+
+const noPointerEvents = css({
   pointerEvents: 'none',
 });
 
+const activeStyling = css(noPointerEvents, {
+  color: canvas.colors.frenchVanilla100,
+});
+
 const Ellipse = () => (
-  <NoPointerEvents>
-    <IconButton
-      key={'ellipse'}
-      aria-label={`Navigation Ellipse`}
-      variant={IconButton.Variant.Square}
-      size={IconButton.Size.Small}
-      tabIndex={-1}
-    >
-      ...
-    </IconButton>
-  </NoPointerEvents>
+  <IconButton
+    key={'ellipse'}
+    aria-label={`Navigation Ellipse`}
+    variant={IconButton.Variant.Square}
+    size={IconButton.Size.Small}
+    tabIndex={-1}
+    css={noPointerEvents}
+  >
+    ...
+  </IconButton>
 );
 
-const Pages: React.FC<{
-  numPages: number;
-  currentPage: number;
-  clickHandler: (page: number) => void;
-}> = props => {
-  const {numPages, currentPage, clickHandler} = props;
-  const [width, setWidth] = React.useState(window.innerWidth);
-
-  React.useEffect(() => {
-    const handleWindowSizeChange = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => window.removeEventListener('resize', handleWindowSizeChange);
-  }, []);
-  const mobile = width < 500;
+const Pages: React.FC<PagesProps> = props => {
+  const {numPages, currentPage, onPageClick, mobile} = props;
+  const lastPage = useRef<number>(0);
 
   let pagesToDisplay = 5;
   let start = 1;
@@ -78,62 +69,46 @@ const Pages: React.FC<{
   const end = Math.min(start + pagesToDisplay, numPages + 1);
   const pages = _.range(start, end);
 
-  const PaginationButton: React.FC<{
-    page: number;
-  }> = props => (
-    <IconButton
-      data-testid={`paginationButton${props.page}`}
-      key={props.page}
-      aria-label={`Page ${props.page}`}
-      variant={IconButton.Variant.Square}
-      size={IconButton.Size.Small}
-      onClick={e => clickHandler(props.page)}
-    >
-      {props.page}
-    </IconButton>
-  );
+  const less = end === numPages + 1 && numPages > pagesToDisplay && !mobile;
+  const more = end < numPages;
 
-  return (
-    <>
-      {pages.map(page => {
-        const active = page === currentPage;
-        const more = page === end - 1 && page < numPages;
-        const lastPage = page === start && end === numPages + 1 && numPages > pagesToDisplay;
+  if (less) {
+    pages.unshift(1);
+  }
+  if (more) {
+    pages.push(numPages);
+  }
+  const onClick = (page: number) => {
+    lastPage.current = currentPage;
+    onPageClick(page);
+  };
+  const buttons = pages.map((page, index) => (
+    <PaginationButton onPageClick={onClick} page={page} key={page} active={page === currentPage} />
+  ));
 
-        return (
-          <>
-            {lastPage && !mobile && (
-              <>
-                <PaginationButton page={1} />
-                <Ellipse />
-              </>
-            )}
+  if (less) {
+    buttons.splice(1, 0, <Ellipse />);
+  }
+  if (more) {
+    buttons.splice(buttons.length - 1, 0, <Ellipse />);
+  }
 
-            {active ? (
-              <ActivePage
-                data-testid="paginationIconButtonActive"
-                key={page}
-                aria-current={true}
-                aria-label={`Page ${page}, Selected`}
-                autoFocus
-              >
-                {page}
-              </ActivePage>
-            ) : (
-              <PaginationButton page={page} />
-            )}
-
-            {more && (
-              <>
-                <Ellipse />
-                <PaginationButton page={numPages} />
-              </>
-            )}
-          </>
-        );
-      })}
-    </>
-  );
+  return <React.Fragment>{buttons}</React.Fragment>;
 };
+
+const PaginationButton: React.FC<PaginationButtonProps> = props => (
+  <IconButton
+    data-testid={`paginationButton${props.active ? 'Active' : props.page}`}
+    aria-label={`${props.active ? 'Selected, ' : ''}Page ${props.page}`}
+    aria-pressed={undefined}
+    variant={props.active ? IconButton.Variant.SquareFilled : IconButton.Variant.Square}
+    size={IconButton.Size.Small}
+    onClick={_ => props.onPageClick(props.page)}
+    toggled={props.active}
+    css={props.active ? activeStyling : ''}
+  >
+    {props.page}
+  </IconButton>
+);
 
 export default Pages;

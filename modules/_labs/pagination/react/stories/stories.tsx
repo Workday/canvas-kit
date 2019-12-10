@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {boolean, number} from '@storybook/addon-knobs';
+import {boolean, number, text} from '@storybook/addon-knobs';
 import {storiesOf} from '@storybook/react';
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
@@ -25,6 +25,7 @@ const DefaultPaginationExample = () => {
         pageSize={number('pageSize', 10) || 10}
         showLabel={boolean('showLabel', false)}
         showGoTo={boolean('showGoTo', false)}
+        goToLabel={text('goToLabel', '')}
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
       />
@@ -38,7 +39,7 @@ const WithCustomLabel = () => {
   return (
     <Wrapper>
       <h4>Current Page: {currentPage}</h4>
-      <Pagination
+      <n
         key="3"
         total={number('total', 10) || 10}
         pageSize={number('pageSize', 3) || 3}
@@ -46,6 +47,7 @@ const WithCustomLabel = () => {
         onPageChange={p => setCurrentPage(p)}
         showLabel
         showGoTo={boolean('showGoTo', false)}
+        goToLabel={text('goToLabel', '')}
         customLabel={(from: number, to: number, items: number, item: string) =>
           `${from.toLocaleString()}\u2013${to.toLocaleString()} of ${items.toLocaleString()} ${
             items > 1 ? 'candidates' : 'candidate'
@@ -69,6 +71,7 @@ const WithGoToExample = () => {
         currentPage={currentPage}
         showLabel={boolean('showLabel', true)}
         showGoTo={boolean('showGoTo', true)}
+        goToLabel={text('goToLabel', 'Go To')}
         onPageChange={p => setCurrentPage(p)}
       />
     </Wrapper>

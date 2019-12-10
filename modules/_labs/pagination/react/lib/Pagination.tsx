@@ -3,7 +3,7 @@ import {type} from '@workday/canvas-kit-labs-react-core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas from '@workday/canvas-kit-react-core';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import * as React from 'react';
+import React, {useState} from 'react';
 
 import GoTo from './GoTo';
 import Pages from './Pages';
@@ -16,6 +16,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   showGoTo?: boolean;
   showLabel?: boolean;
   customLabel?: (from: number, to: number, items: number, itemLabel: string) => string;
+  goToLabel?: string;
 }
 
 const Label = styled('div')({
@@ -24,21 +25,20 @@ const Label = styled('div')({
   justifyContent: 'center',
   ...type.small,
   color: canvas.typeColors.hint,
+  width: '100%',
+  paddingTop: '12px',
 });
 
 const Container = styled('nav')({
   display: 'flex',
   alignItems: 'center',
+  flexFlow: 'row wrap',
   justifyContent: 'center',
-  marginBottom: canvas.spacing.xs,
+});
+
+const ButtonsContainer = styled('div')({
   '& > * ': {
     margin: `${0} ${canvas.spacing.xxxs}`,
-  },
-  '&:first-child': {
-    marginLeft: 0,
-  },
-  '&:last-child': {
-    marginRight: 0,
   },
 });
 
@@ -51,8 +51,11 @@ const Pagination: React.FC<PaginationProps> = props => {
     customLabel,
     showLabel,
     showGoTo,
+    goToLabel,
     ...elemProps
   } = props;
+
+  const [mobile, setMobile] = useState(false);
 
   const numPages = Math.ceil(total / pageSize);
 
@@ -65,33 +68,52 @@ const Pagination: React.FC<PaginationProps> = props => {
     ? customLabel(labelFrom, labelTo, labelItems, 'item')
     : `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
 
+  const wrapperRef = React.createRef<HTMLElement>();
+
+  React.useEffect(() => {
+    const container = wrapperRef.current as HTMLElement;
+    setMobile(container.clientWidth < 500);
+
+    const handleWindowSizeChange = () => {
+      setMobile(container.clientWidth < 500);
+    };
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => window.removeEventListener('resize', handleWindowSizeChange);
+  }, [wrapperRef.current]);
+
   return (
     <>
-      <Container aria-label={`Pagination Navigation`} {...elemProps}>
-        <IconButton
-          data-testid="leftPaginationArrow"
-          disabled={currentPage - 1 <= 0}
-          aria-disabled={currentPage - 1 <= 0}
-          aria-label={'Previous Page'}
-          variant={IconButton.Variant.Square}
-          size={IconButton.Size.Small}
-          icon={chevronLeftSmallIcon}
-          onClick={e => onPageChange(currentPage - 1)}
-        />
-        <Pages numPages={numPages} currentPage={currentPage} clickHandler={onPageChange} />
-        <IconButton
-          data-testid="rightPaginationArrow"
-          disabled={currentPage + 1 > numPages}
-          aria-disabled={currentPage + 1 > numPages}
-          aria-label={'Next Page'}
-          variant={IconButton.Variant.Square}
-          size={IconButton.Size.Small}
-          icon={chevronRightSmallIcon}
-          onClick={e => onPageChange(currentPage + 1)}
-        />
-        {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} />}
+      <Container ref={wrapperRef} aria-label={`Pagination`} {...elemProps}>
+        <ButtonsContainer>
+          <IconButton
+            data-testid="leftPaginationArrow"
+            disabled={currentPage - 1 <= 0}
+            aria-label={'Previous Page'}
+            variant={IconButton.Variant.Square}
+            size={IconButton.Size.Small}
+            icon={chevronLeftSmallIcon}
+            onClick={e => onPageChange(currentPage - 1)}
+          />
+          <Pages
+            mobile={mobile}
+            numPages={numPages}
+            currentPage={currentPage}
+            onPageClick={onPageChange}
+          />
+          <IconButton
+            data-testid="rightPaginationArrow"
+            disabled={currentPage + 1 > numPages}
+            aria-disabled={currentPage + 1 > numPages}
+            aria-label={'Next Page'}
+            variant={IconButton.Variant.Square}
+            size={IconButton.Size.Small}
+            icon={chevronRightSmallIcon}
+            onClick={e => onPageChange(currentPage + 1)}
+          />
+        </ButtonsContainer>
+        {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} goToLabel={goToLabel} />}
+        {showLabel && <Label data-testid="paginationLabel">{itemLabel}</Label>}
       </Container>
-      {showLabel && <Label data-testid="paginationLabel">{itemLabel}</Label>}
     </>
   );
 };
