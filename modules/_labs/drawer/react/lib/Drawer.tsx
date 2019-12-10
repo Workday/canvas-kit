@@ -5,18 +5,22 @@ import {colors, spacing, CanvasSpacingValue} from '@workday/canvas-kit-react-cor
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Adjust padding for the contents of the Drawer.
+   * @default spacing.s
    */
   padding?: CanvasSpacingValue;
   /**
    * Determines the side in which the Drawer can open from.
+   * @default DrawerDirection.Right
    */
   openDirection?: DrawerDirection;
   /**
    * Sets the width of the Drawer.
+   * @default 360px
    */
   width?: number;
   /**
    * Allows to either show or hide a drop shadow on the Drawer.
+   * @default false
    */
   showDropShadow?: boolean;
   /**
