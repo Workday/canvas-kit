@@ -5,13 +5,7 @@ Canvas Kit Core contains wrappers and types to enabling theming of Canvas compon
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react
-```
-
-or
-
-```sh
-yarn add @workday/canvas-kit-react-core
+yarn add @workday/canvas-kit-labs-react-core
 ```
 
 ## Usage
@@ -23,7 +17,7 @@ our Canvas Components.
 
 ```tsx
 import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-react';
+import {CanvasProvider} from '@workday/canvas-kit-labs-react-core';
 
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```
@@ -127,7 +121,7 @@ import {
   CanvasProvider,
   PartialCanvasTheme,
   createCanvasTheme,
-} from '@workday/canvas-kit-react-core';
+} from '@workday/canvas-kit-labs-react-core';
 
 const theme: PartialCanvasTheme = {
   palette: {
@@ -152,7 +146,7 @@ inner theme will override the outer theme.
 ```tsx
 import * as React from 'react';
 import {ThemeProvider} from 'emotion-theming';
-import {CanvasProvider, CanvasTheme} from '@workday/canvas-kit-react';
+import {CanvasProvider, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '@workday/canvas-kit-react-switch';
 
 const theme: PartialCanvasTheme = {
