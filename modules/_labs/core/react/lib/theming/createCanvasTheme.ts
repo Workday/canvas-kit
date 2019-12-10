@@ -93,5 +93,5 @@ export default function createCanvasTheme(partialTheme: PartialCanvasTheme): Can
     breakpoints,
   };
 
-  return merge({...defaultCanvasTheme}, mergable) as CanvasTheme;
+  return merge({}, defaultCanvasTheme, mergable) as CanvasTheme;
 }
