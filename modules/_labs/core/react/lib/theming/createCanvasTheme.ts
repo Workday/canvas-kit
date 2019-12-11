@@ -81,7 +81,7 @@ export default function createCanvasTheme(partialTheme: PartialCanvasTheme): Can
   const {palette = {}, breakpoints = {}} = partialTheme;
   const {primary, alert, error, success, neutral, common = {}} = palette;
 
-  const mergable: PartialCanvasTheme = {
+  const mergeable: PartialCanvasTheme = {
     palette: {
       common,
       primary: fillPalette(primary),
@@ -93,5 +93,5 @@ export default function createCanvasTheme(partialTheme: PartialCanvasTheme): Can
     breakpoints,
   };
 
-  return merge({}, defaultCanvasTheme, mergable) as CanvasTheme;
+  return merge({}, defaultCanvasTheme, mergeable) as CanvasTheme;
 }
