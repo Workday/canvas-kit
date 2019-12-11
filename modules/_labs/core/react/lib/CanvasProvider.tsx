@@ -13,14 +13,6 @@ export default class CanvasProvider extends React.Component<CanvasProviderProps>
     theme: defaultCanvasTheme,
   };
 
-  componentDidMount() {
-    document.body.dir = this.props.theme.direction;
-  }
-
-  componentDidUpdate() {
-    document.body.dir = this.props.theme.direction;
-  }
-
   render() {
     const {children, theme} = this.props;
 
