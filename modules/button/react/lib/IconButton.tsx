@@ -39,6 +39,11 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * Callback that fires when a button changes toggled states
    */
   onToggleChange?: (toggled: boolean | undefined) => void;
+  /**
+   * Only used for visual snapshots and development
+   * @ignore
+   */
+  shouldChangeStateSeparator?: boolean;
 }
 
 function getFillSelector(fillColor: string): CSSObject {
@@ -65,11 +70,31 @@ function getAccentSelector(fillColor: string): CSSObject {
   };
 }
 
+const changeStateSeparator = (shouldChange = false, obj?: CSSObject): CSSObject | undefined => {
+  if (!shouldChange || !obj) {
+    return obj;
+  }
+
+  return Object.keys(obj).reduce((result, key) => {
+    const newKey = key
+      .replace(/^:/, '&:')
+      .replace(/:/g, '.')
+      .replace(/\.not/g, ':not')
+      .replace(/\.disabled/, ':disabled');
+    const value =
+      typeof obj[key] === 'object' ? changeStateSeparator(true, obj[key] as CSSObject) : obj[key];
+    const newObj = {...result, [newKey]: value};
+    return newObj;
+  }, {});
+};
+
 export const IconButtonCon = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<IconButtonProps>(
-  iconButtonStyles.styles,
-  ({variant}) => getButtonStyle(iconButtonStyles, variant),
+  ({shouldChangeStateSeparator}) =>
+    changeStateSeparator(shouldChangeStateSeparator, iconButtonStyles.styles),
+  ({variant, shouldChangeStateSeparator}) =>
+    changeStateSeparator(shouldChangeStateSeparator, getButtonStyle(iconButtonStyles, variant)),
   ({size, variant}) => {
     switch (size) {
       default:
@@ -85,157 +110,161 @@ export const IconButtonCon = styled('button', {
         };
     }
   },
-  ({variant, toggled}) => {
-    if (!toggled) {
-      return {};
-    }
+  ({variant, toggled, shouldChangeStateSeparator}) =>
+    changeStateSeparator(
+      shouldChangeStateSeparator,
+      (function() {
+        if (!toggled) {
+          return {};
+        }
 
-    switch (variant) {
-      case IconButtonVariant.SquareFilled:
-      default:
-        return {
-          '&:focus&:hover, &:focus, &:active': {
-            backgroundColor: colors.blueberry400,
-            ...getFillSelector(colors.frenchVanilla100),
-            ...getAccentSelector(colors.frenchVanilla100),
-          },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.blueberry500,
-            ...(toggled ? focusRing(2, 2) : {}),
-          },
-          '&:hover': {
-            backgroundColor: colors.blueberry500,
-          },
-          ...mouseFocusBehavior({
-            '&:focus:active': {
-              backgroundColor: `${colors.blueberry500} !important`,
-            },
-          }),
-          backgroundColor: colors.blueberry400,
-          borderColor: colors.blueberry400,
-          ...getFillSelector(colors.frenchVanilla100),
-          ...getAccentSelector(colors.frenchVanilla100),
-        };
-      case IconButtonVariant.Square:
-        return {
-          '&:focus:hover, &:focus, &:active': {
-            backgroundColor: 'transparent',
-            ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.frenchVanilla100),
-            ...getBackgroundSelector(colors.blueberry400),
-          },
-          '&:not([disabled]):focus': {
-            ...(toggled ? focusRing(2, 0) : {}),
-          },
-          '&:hover, &:focus:hover': {
-            backgroundColor: colors.soap300,
-          },
-          backgroundColor: colors.frenchVanilla100,
-          ...getFillSelector(colors.blueberry400),
-          ...getAccentSelector(colors.blueberry400),
-        };
-      case IconButtonVariant.Circle:
-        return {
-          '&:focus:hover, &:focus, &:active': {
-            backgroundColor: 'transparent',
-            ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.frenchVanilla100),
-            ...getBackgroundSelector(colors.blueberry400),
-          },
-          '&:not([disabled]):focus': {
-            ...(toggled ? focusRing(2, 0) : {}),
-          },
-          '&:hover, &:focus:hover': {
-            backgroundColor: colors.soap300,
-          },
-          backgroundColor: colors.frenchVanilla100,
-          ...getFillSelector(colors.blueberry400),
-          ...getAccentSelector(colors.blueberry400),
-        };
-      case IconButtonVariant.CircleFilled:
-        return {
-          '&:focus&:hover, &:focus, &:active': {
-            backgroundColor: colors.blueberry500,
-            ...getFillSelector(colors.frenchVanilla100),
-            ...getAccentSelector(colors.frenchVanilla100),
-          },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.blueberry400,
-            ...(toggled ? focusRing(2, 2) : {}),
-          },
-          '&:hover': {
-            backgroundColor: colors.blueberry500,
-          },
-          ...mouseFocusBehavior({
-            '&:focus:active': {
-              backgroundColor: `${colors.blueberry500} !important`,
-            },
-          }),
-          backgroundColor: colors.blueberry400,
-          borderColor: colors.blueberry400,
-          ...getFillSelector(colors.frenchVanilla100),
-          ...getAccentSelector(colors.frenchVanilla100),
-        };
-      case IconButtonVariant.Inverse:
-        return {
-          '&:focus': {
-            backgroundColor: colors.frenchVanilla100,
-            ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.frenchVanilla100),
-            ...getBackgroundSelector(colors.blueberry400),
-          },
-          '&:focus&:hover, &:active': {
-            backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
-            ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.frenchVanilla100),
-            ...getBackgroundSelector(colors.blueberry400),
-          },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.frenchVanilla100,
-            ...(toggled
-              ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
-              : {}),
-          },
-          ...mouseFocusBehavior({
-            '&:focus:active': {
-              backgroundColor: `${colors.frenchVanilla100} !important`,
-            },
-          }),
-          backgroundColor: colors.blueberry400,
-          ...getFillSelector(colors.frenchVanilla100),
-          ...getAccentSelector(colors.frenchVanilla100),
-        };
-      case IconButtonVariant.InverseFilled:
-        return {
-          '&:focus': {
-            backgroundColor: colors.frenchVanilla100,
-            ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.frenchVanilla100),
-            ...getBackgroundSelector(colors.blueberry400),
-          },
-          '&:focus&:hover, &:active': {
-            backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
-            ...getFillSelector(colors.blueberry400),
-            ...getAccentSelector(colors.frenchVanilla100),
-            ...getBackgroundSelector(colors.blueberry400),
-          },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.frenchVanilla100,
-            ...(toggled
-              ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
-              : {}),
-          },
-          ...mouseFocusBehavior({
-            '&:focus:active': {
-              backgroundColor: `${colors.frenchVanilla100} !important`,
-            },
-          }),
-          backgroundColor: colors.blueberry400,
-          ...getFillSelector(colors.frenchVanilla100),
-          ...getAccentSelector(colors.frenchVanilla100),
-        };
-    }
-  }
+        switch (variant) {
+          case IconButtonVariant.SquareFilled:
+          default:
+            return {
+              '&:focus&:hover, &:focus, &:active': {
+                backgroundColor: colors.blueberry400,
+                ...getFillSelector(colors.frenchVanilla100),
+                ...getAccentSelector(colors.frenchVanilla100),
+              },
+              '&:not([disabled]):focus': {
+                backgroundColor: colors.blueberry500,
+                ...(toggled ? focusRing(2, 2) : {}),
+              },
+              '&:hover': {
+                backgroundColor: colors.blueberry500,
+              },
+              ...mouseFocusBehavior({
+                '&:focus:active': {
+                  backgroundColor: `${colors.blueberry500} !important`,
+                },
+              }),
+              backgroundColor: colors.blueberry400,
+              borderColor: colors.blueberry400,
+              ...getFillSelector(colors.frenchVanilla100),
+              ...getAccentSelector(colors.frenchVanilla100),
+            };
+          case IconButtonVariant.Square:
+            return {
+              '&:focus:hover, &:focus, &:active': {
+                backgroundColor: 'transparent',
+                ...getFillSelector(colors.blueberry400),
+                ...getAccentSelector(colors.frenchVanilla100),
+                ...getBackgroundSelector(colors.blueberry400),
+              },
+              '&:not([disabled]):focus': {
+                ...(toggled ? focusRing(2, 0) : {}),
+              },
+              '&:hover, &:focus:hover': {
+                backgroundColor: colors.soap300,
+              },
+              backgroundColor: colors.frenchVanilla100,
+              ...getFillSelector(colors.blueberry400),
+              ...getAccentSelector(colors.blueberry400),
+            };
+          case IconButtonVariant.Circle:
+            return {
+              '&:focus:hover, &:focus, &:active': {
+                backgroundColor: 'transparent',
+                ...getFillSelector(colors.blueberry400),
+                ...getAccentSelector(colors.frenchVanilla100),
+                ...getBackgroundSelector(colors.blueberry400),
+              },
+              '&:not([disabled]):focus': {
+                ...(toggled ? focusRing(2, 0) : {}),
+              },
+              '&:hover, &:focus:hover': {
+                backgroundColor: colors.soap300,
+              },
+              backgroundColor: colors.frenchVanilla100,
+              ...getFillSelector(colors.blueberry400),
+              ...getAccentSelector(colors.blueberry400),
+            };
+          case IconButtonVariant.CircleFilled:
+            return {
+              '&:focus&:hover, &:focus, &:active': {
+                backgroundColor: colors.blueberry500,
+                ...getFillSelector(colors.frenchVanilla100),
+                ...getAccentSelector(colors.frenchVanilla100),
+              },
+              '&:not([disabled]):focus': {
+                backgroundColor: colors.blueberry400,
+                ...(toggled ? focusRing(2, 2) : {}),
+              },
+              '&:hover': {
+                backgroundColor: colors.blueberry500,
+              },
+              ...mouseFocusBehavior({
+                '&:focus:active': {
+                  backgroundColor: `${colors.blueberry500} !important`,
+                },
+              }),
+              backgroundColor: colors.blueberry400,
+              borderColor: colors.blueberry400,
+              ...getFillSelector(colors.frenchVanilla100),
+              ...getAccentSelector(colors.frenchVanilla100),
+            };
+          case IconButtonVariant.Inverse:
+            return {
+              '&:focus': {
+                backgroundColor: colors.frenchVanilla100,
+                ...getFillSelector(colors.blueberry400),
+                ...getAccentSelector(colors.frenchVanilla100),
+                ...getBackgroundSelector(colors.blueberry400),
+              },
+              '&:focus&:hover, &:active': {
+                backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
+                ...getFillSelector(colors.blueberry400),
+                ...getAccentSelector(colors.frenchVanilla100),
+                ...getBackgroundSelector(colors.blueberry400),
+              },
+              '&:not([disabled]):focus': {
+                backgroundColor: colors.frenchVanilla100,
+                ...(toggled
+                  ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
+                  : {}),
+              },
+              ...mouseFocusBehavior({
+                '&:focus:active': {
+                  backgroundColor: `${colors.frenchVanilla100} !important`,
+                },
+              }),
+              backgroundColor: colors.blueberry400,
+              ...getFillSelector(colors.frenchVanilla100),
+              ...getAccentSelector(colors.frenchVanilla100),
+            };
+          case IconButtonVariant.InverseFilled:
+            return {
+              '&:focus': {
+                backgroundColor: colors.frenchVanilla100,
+                ...getFillSelector(colors.blueberry400),
+                ...getAccentSelector(colors.frenchVanilla100),
+                ...getBackgroundSelector(colors.blueberry400),
+              },
+              '&:focus&:hover, &:active': {
+                backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
+                ...getFillSelector(colors.blueberry400),
+                ...getAccentSelector(colors.frenchVanilla100),
+                ...getBackgroundSelector(colors.blueberry400),
+              },
+              '&:not([disabled]):focus': {
+                backgroundColor: colors.frenchVanilla100,
+                ...(toggled
+                  ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
+                  : {}),
+              },
+              ...mouseFocusBehavior({
+                '&:focus:active': {
+                  backgroundColor: `${colors.frenchVanilla100} !important`,
+                },
+              }),
+              backgroundColor: colors.blueberry400,
+              ...getFillSelector(colors.frenchVanilla100),
+              ...getAccentSelector(colors.frenchVanilla100),
+            };
+        }
+      })()
+    )
 );
 
 export default class IconButton extends React.Component<IconButtonProps> {

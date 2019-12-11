@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
-import {jsx, CSSObject} from '@emotion/core';
+import {jsx, css, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -23,11 +23,10 @@ import {
 import README from '../README.md';
 import {IconButtonProps} from '../lib/IconButton';
 
-const blueBackground: CSSObject = {
+const iconButtonLayout: CSSObject = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#0875e1',
   margin: '0 10px',
   padding: '24px',
   maxWidth: 'max-content',
@@ -35,6 +34,11 @@ const blueBackground: CSSObject = {
   button: {
     margin: '0 12px',
   },
+};
+
+const blueBackground: CSSObject = {
+  ...iconButtonLayout,
+  backgroundColor: '#0875e1',
 };
 
 const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
@@ -102,7 +106,7 @@ export class IconButtonToggleGroupWrapper extends React.Component<
   };
 }
 
-storiesOf('Button/Icon Button', module)
+storiesOf('Components|Buttons/Button/React/Icon Button', module)
   .addParameters({component: IconButton})
   .addDecorator(withReadme(README))
   .add('Circle', () => (
@@ -340,9 +344,153 @@ storiesOf('Button/Icon Button', module)
         <ToggleIconButtonWrapper variant={IconButton.Variant.InverseFilled} />
       </div>
     </div>
-  ));
+  ))
+  .add('States', () => {
+    const states = ['Default', 'hover', 'focus', 'active', 'focus active', 'focus hover'];
+    const variants = [
+      'Inverse',
+      'InverseFilled',
+      'Plain',
+      'Circle',
+      'CircleFilled',
+      'Square',
+      'SquareFilled',
+    ] as const;
 
-storiesOf('Button/Icon Button Toggle Group', module)
+    return (
+      <div data-whatinput="keyboard">
+        <h3>Not toggleable</h3>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              {states.map(state => (
+                <th key={state}>{state}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {variants.map(variant => (
+              <tr key={variant}>
+                <th>{variant}</th>
+                {states.map(state => (
+                  <td key={state}>
+                    <div css={variant.includes('Inverse') ? blueBackground : iconButtonLayout}>
+                      <IconButton
+                        className={state}
+                        variant={IconButton.Variant[variant]}
+                        aria-label="test"
+                        icon={activityStreamIcon}
+                        shouldChangeStateSeparator={true}
+                      ></IconButton>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <hr />
+        <h3>toggled: true</h3>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              {states.map(state => (
+                <th key={state}>{state}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {variants.map(variant => (
+              <tr key={variant}>
+                <th>{variant}</th>
+                {states.map(state => (
+                  <td key={state}>
+                    <div css={variant.includes('Inverse') ? blueBackground : iconButtonLayout}>
+                      <IconButton
+                        className={state}
+                        variant={IconButton.Variant[variant]}
+                        aria-label="test"
+                        icon={activityStreamIcon}
+                        shouldChangeStateSeparator={true}
+                        toggled={true}
+                      ></IconButton>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <hr />
+        <h3>toggled: false</h3>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              {states.map(state => (
+                <th key={state}>{state}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {variants.map(variant => (
+              <tr key={variant}>
+                <th>{variant}</th>
+                {states.map(state => (
+                  <td key={state}>
+                    <div css={variant.includes('Inverse') ? blueBackground : iconButtonLayout}>
+                      <IconButton
+                        className={state}
+                        variant={IconButton.Variant[variant]}
+                        aria-label="test"
+                        icon={activityStreamIcon}
+                        shouldChangeStateSeparator={true}
+                        toggled={false}
+                      ></IconButton>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <hr />
+        <h3>disabled</h3>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+            {variants.map(variant => (
+              <tr key={variant}>
+                <th>{variant}</th>
+
+                <td>
+                  <div css={variant.includes('Inverse') ? blueBackground : iconButtonLayout}>
+                    <IconButton
+                      disabled
+                      className=""
+                      variant={IconButton.Variant[variant]}
+                      aria-label="test"
+                      icon={activityStreamIcon}
+                      shouldChangeStateSeparator={true}
+                    ></IconButton>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  });
+
+storiesOf('Components|Buttons/Button/React/Icon Button Toggle Group', module)
   .addParameters({component: IconButtonToggleGroup})
   .addDecorator(withReadme(README))
   .add('Default', () => (
