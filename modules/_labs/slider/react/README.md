@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 
-slider component 
+slider component
 
 ## Installation
 
@@ -24,19 +24,78 @@ yarn add @workday/canvas-kit-react-slider
 import * as React from 'react';
 import Slider from '@workday/canvas-kit-react-slider';
 
-<Slider />;
+const sliderProps: SliderProps = {
+  max: 100,
+  min: 0,
+  startValue: 27,
+  useInputRange: true,
+};
+
+<Slider {...sliderProps} />;
 ```
-
-## Static Properties
-
-> None
 
 ## Component Props
 
 ### Required
 
-> None
+#### `max: number`
+
+> Max number for the slider
+
+---
+
+#### `min: number`
+
+> Min number for the slider
+
+---
+
+#### `startValue: number`
+
+> The starting value for the slider
+
+---
 
 ### Optional
 
-> None
+#### step: number
+
+> How much to increase or decrease the value by
+
+---
+
+#### useInputRange: boolean
+
+> If specified, the input box for the value will show up
+
+---
+
+#### onChange?: (newValue: number) => void
+
+> If specified, this callback is executed when the value is changed
+
+---
+
+#### onSliderStartDrag?: (newValue: number) => void
+
+> If specified, this callback is executed when the mouse is pressed
+
+---
+
+#### onKeyDown?: (newValue: number) => void
+
+> If specified, this callback is executed when a key is pressed
+
+---
+
+#### onKeyUp?: (newValue: number) => void
+
+> If specified, this callback is executed when a key is released
+
+---
+
+#### onSliderEndDrag?: (newValue: number) => void
+
+> If specified, this callback is executed when the mouse is released
+
+---
