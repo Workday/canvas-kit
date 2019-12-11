@@ -68,18 +68,18 @@ describe('ActionBar', () => {
 
   test('check the click callbacks', () => {
     const onChange = jest.fn();
-    const onSliderStartDrag = jest.fn();
+    const onEndDrag = jest.fn();
     const onKeyDown = jest.fn();
     const onKeyUp = jest.fn();
-    const onSliderEndDrag = jest.fn();
+    const onStartDrag = jest.fn();
 
     const modifiedSliderProps: SliderProps = {
       ...defaultSliderProps,
       onChange,
-      onSliderEndDrag,
+      onEndDrag,
       onKeyDown,
       onKeyUp,
-      onSliderStartDrag,
+      onStartDrag,
     };
 
     const wrapper = mount(<Slider {...modifiedSliderProps} />);
@@ -91,8 +91,8 @@ describe('ActionBar', () => {
     input.simulate('keyup', {key: 'Enter'});
 
     expect(onChange).toHaveBeenCalled();
-    expect(onSliderStartDrag).toHaveBeenCalled();
-    expect(onSliderEndDrag).toHaveBeenCalled();
+    expect(onStartDrag).toHaveBeenCalled();
+    expect(onEndDrag).toHaveBeenCalled();
     expect(onKeyDown).toHaveBeenCalled();
     expect(onKeyUp).toHaveBeenCalled();
   });

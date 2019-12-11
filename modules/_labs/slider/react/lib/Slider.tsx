@@ -1,6 +1,7 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import {colors} from '@workday/canvas-kit-react-core';
+
+import styled from '@emotion/styled';
 
 export interface SliderProps {
   max: number;
@@ -10,10 +11,10 @@ export interface SliderProps {
   useInputRange?: boolean;
 
   onChange?: (newValue: number) => void;
-  onSliderStartDrag?: (newValue: number) => void;
+  onStartDrag?: (newValue: number) => void;
   onKeyDown?: (newValue: number) => void;
   onKeyUp?: (newValue: number) => void;
-  onSliderEndDrag?: (newValue: number) => void;
+  onEndDrag?: (newValue: number) => void;
 }
 
 const Container = styled('div')({
@@ -124,8 +125,8 @@ export const Slider: React.FC<SliderProps> = ({
   min,
   step,
   useInputRange,
-  onSliderStartDrag,
-  onSliderEndDrag,
+  onStartDrag,
+  onEndDrag,
   onChange,
   onKeyDown,
   onKeyUp,
@@ -142,14 +143,14 @@ export const Slider: React.FC<SliderProps> = ({
   };
 
   const onSliderDragStart = () => {
-    if (onSliderStartDrag) {
-      onSliderStartDrag(value);
+    if (onStartDrag) {
+      onStartDrag(value);
     }
   };
 
   const onSliderDragEnd = () => {
-    if (onSliderEndDrag) {
-      onSliderEndDrag(value);
+    if (onEndDrag) {
+      onEndDrag(value);
     }
   };
 
