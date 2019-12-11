@@ -36,12 +36,6 @@ import {CanvasProvider} from '@workday/canvas-kit-labs-react-core';
 
 Default: `defaultCanvasTheme`
 
-#### `direction: ContentDirection`
-
-> The direction (LTR or RTL) to be used throughout the children of the `CanvasProvider` component.
-
-Default: `ContentDirection.LTR`
-
 #### `setThemeGlobal: boolean`
 
 > Indicates whether to set a global theme on the window object. This should be used if your
