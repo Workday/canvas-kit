@@ -79,8 +79,8 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
 }
 
 export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
-  const {palette = {}, breakpoints = {}, direction = ContentDirection.LTR} = partialTheme;
-  const {primary, alert, error, success, neutral, common = {}} = palette;
+  const {palette = {}, breakpoints = {}, direction} = partialTheme;
+  const {primary, alert, error, success, neutral, common = {}} = palette!;
 
   const mergeable: PartialCanvasTheme = {
     palette: {
