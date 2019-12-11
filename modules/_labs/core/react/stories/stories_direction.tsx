@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Banner} from '@workday/canvas-kit-react-banner';
+import {IconButton, IconButtonProps} from '../../../../button/react/index';
 
 import README from '../lib/theming/README.md';
 
@@ -12,9 +12,13 @@ import {
   createCanvasTheme,
   ContentDirection,
 } from '@workday/canvas-kit-labs-react-core';
+import { rewind30Icon, fastForward15Icon, mediaPauseIcon } from '@workday/canvas-system-icons-web';
+import { Card } from '@workday/canvas-kit-react';
 
-const handleBannerClick = (e: React.SyntheticEvent) => {
-  alert(`onClick triggered`);
+
+const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
+  'aria-label': 'Activity Stream',
+  title: 'Activity Stream',
 };
 
 storiesOf('Labs/Core/React', module)
@@ -23,13 +27,29 @@ storiesOf('Labs/Core/React', module)
     <div className="story">
       <section>
         <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
-          <Banner
-            onClick={handleBannerClick}
-            label="3 Alerts"
-            actionText="View All"
-            error={Banner.ErrorType.Alert}
-            variant={Banner.Variant.Full}
-          />
+          <Card heading="مشغل وسائط" style={{width: '186px'}}>
+        
+            <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.LTR})}>
+              <IconButton
+                {...commonIconButtonProps}
+                variant={IconButton.Variant.Circle}
+                size={IconButton.Size.Medium}
+                icon={rewind30Icon}
+              />
+              <IconButton
+                {...commonIconButtonProps}
+                variant={IconButton.Variant.Circle}
+                size={IconButton.Size.Medium}
+                icon={mediaPauseIcon}
+              />
+              <IconButton
+                {...commonIconButtonProps}
+                variant={IconButton.Variant.Circle}
+                size={IconButton.Size.Medium}
+                icon={fastForward15Icon}
+              />
+            </CanvasProvider>
+          </Card>
         </CanvasProvider>
       </section>
     </div>
