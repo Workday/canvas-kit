@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
 import {
   colors,
@@ -13,7 +13,10 @@ import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import SelectOption from './SelectOption';
 
-export interface SelectProps extends GrowthBehavior, React.SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps
+  extends Themeable,
+    GrowthBehavior,
+    React.SelectHTMLAttributes<HTMLSelectElement> {
   /**
    * React children must be of type SelectOption and have at least two.
    */

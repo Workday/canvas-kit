@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import {css, jsx} from '@emotion/core';
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {
   pickForegroundColor,
   expandHex,
@@ -13,7 +13,12 @@ import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 
-export interface ColorInputProps extends TextInputProps, GrowthBehavior {
+
+import {
+  ContentDirection,
+} from '@workday/canvas-kit-labs-react-core';
+
+export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavior {
   value: string;
   showCheck?: boolean;
   placeholder: string;
@@ -30,9 +35,9 @@ const colorInputWidth = 116;
 const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'grow'>>(
   {
     boxSizing: 'border-box',
-    paddingLeft: '46px',
     minWidth: colorInputWidth,
     width: colorInputWidth,
+    ...type.variant.mono,
     '&:focus::placeholder': {
       color: 'transparent',
     },
@@ -44,23 +49,36 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'gro
     },
   ({disabled}) => ({
     backgroundColor: disabled ? colors.soap200 : '',
+  }),
+  ({theme}) => ({
+    paddingLeft: theme.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */' ,
   })
 );
 
-const ColorInputContainer = styled('div')({
-  position: 'relative',
-});
+const ColorInputContainer = styled('div')<Pick<ColorInputProps, 'grow'>>(
+  {
+    position: 'relative',
+    width: colorInputWidth,
+  },
+  ({grow}) =>
+    grow && {
+      minWidth: '100%',
+      width: '100%',
+    },  
+);
 
 const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
   {
     position: 'absolute',
-    left: 36,
     top: 10,
     ...type.body,
     ...type.variant.hint,
   },
   ({disabled}) => ({
     color: disabled ? inputColors.disabled.text : undefined,
+  }),
+  ({theme}) => ({
+    left: theme.direction === ContentDirection.LTR ? '36px' : '88px',
   })
 );
 
@@ -107,8 +125,10 @@ export default class ColorInput extends React.Component<ColorInputProps> {
     const formattedValue = this.formatValue(value);
 
     return (
-      <ColorInputContainer>
+      <ColorInputContainer 
+      {...elemProps}>
         <CustomHexInput
+          dir="ltr"
           inputRef={inputRef}
           onChange={this.handleChange}
           type="text"
