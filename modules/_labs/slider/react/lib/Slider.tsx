@@ -133,8 +133,6 @@ export const Slider: React.FC<SliderProps> = ({
 }) => {
   const [value, setValue] = React.useState(startValue);
 
-  console.log(value);
-
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value);
     setValue(value);
