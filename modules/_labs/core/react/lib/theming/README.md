@@ -178,7 +178,7 @@ const theme: PartialCanvasTheme = {
       main: colors.greenApple400,
     },
   },
-  direction: ContentDirection.RTL
+  direction: ContentDirection.LTR
 };
 
 <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
