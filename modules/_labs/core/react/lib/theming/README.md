@@ -36,13 +36,6 @@ import {CanvasProvider} from '@workday/canvas-kit-labs-react-core';
 
 Default: `defaultCanvasTheme`
 
-#### `setThemeGlobal: boolean`
-
-> Indicates whether to set a global theme on the window object. This should be used if your
-> application is not using a single react tree (React contexts only work within a single tree).
-
-Default: `false`
-
 ## Theme Object
 
 The Canvas theme is based on the following object:
@@ -145,7 +138,11 @@ const theme: PartialCanvasTheme = {
 </CanvasProvider>;
 ```
 
-Example changing the direction:
+### Bidirectionality
+
+The `CanvasProvider` also provide support for bidirectionality, useful for RTL languages. The direction, part of the theme, is set using `ContentDirection.LTR` or  `ContentDirection.RTL`.
+
+Your can nest `CanvasProvider` if you need to set a different direction for some components in your React tree (See below: Nesting CanvasProvider components).
 
 ```tsx
 import {
@@ -159,17 +156,20 @@ import {
 </CanvasProvider>;
 ```
 
-### Nesting Theme Providers
+### Nesting CanvasProvider components
 
 It is possible to set a theme for a specific component or set of components within your React tree.
 This is generally discouraged for consistency reasons, but may be required in some contexts (a green
-`Switch` component for example). To do this, you must use Emotion's `ThemeProvider` component. The
-inner theme will override the outer theme.
+`Switch` component for example, or changing the direction of a set of components). To do this, you can nest CanvasProvider components with a different theme.
 
 ```tsx
 import * as React from 'react';
-import {ThemeProvider} from 'emotion-theming';
-import {CanvasProvider, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
+import {
+  CanvasProvider,
+  createCanvasTheme,
+  PartialCanvasTheme,
+  ContentDirection,
+} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '@workday/canvas-kit-react-switch';
 
 const theme: PartialCanvasTheme = {
@@ -178,13 +178,15 @@ const theme: PartialCanvasTheme = {
       main: colors.greenApple400,
     },
   },
+  direction: ContentDirection.RTL
 };
 
-<CanvasProvider>
+<CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
   {/* All your components containing any Canvas components */}
-  <ThemeProvider theme={createCanvasTheme(theme)}>
+  <CanvasProvider theme={createCanvasTheme(theme)}>
     <Switch checked={true} />
-  </ThemeProvider>
+    {/* Content that should be LTR */}
+  </CanvasProvider>
 </CanvasProvider>;
 ```
 
