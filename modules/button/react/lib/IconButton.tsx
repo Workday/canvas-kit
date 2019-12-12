@@ -123,12 +123,12 @@ export const IconButtonCon = styled('button', {
           default:
             return {
               '&:focus&:hover, &:focus, &:active': {
-                backgroundColor: colors.blueberry400,
+                backgroundColor: colors.blueberry500,
                 ...getFillSelector(colors.frenchVanilla100),
                 ...getAccentSelector(colors.frenchVanilla100),
               },
               '&:not([disabled]):focus': {
-                backgroundColor: colors.blueberry500,
+                backgroundColor: colors.blueberry400,
                 ...(toggled ? focusRing(2, 2) : {}),
               },
               '&:hover': {

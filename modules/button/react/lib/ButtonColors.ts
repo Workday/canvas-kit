@@ -25,9 +25,7 @@ export interface GenericButtonColors extends CanvasButtonColors {
   labelIconDisabled?: string;
   labelIconFocus?: string;
   labelIconHover?: string;
-  activeHover?: string;
   focusHover?: string;
-  labelIconFocusHover?: string;
 }
 
 export type ButtonColorCollection = {
@@ -315,8 +313,6 @@ export const ButtonColors: ButtonColorCollection = {
     focusBorder: 'transparent',
     focusRingOuter: canvas.colors.frenchVanilla100,
     focusHover: 'rgba(0, 0, 0, 0.3)',
-    activeHover: canvas.colors.frenchVanilla100,
-    labelIconFocusHover: canvas.colors.licorice500,
   },
   [IconButtonVariant.InverseFilled]: {
     background: 'rgba(0, 0, 0, 0.2)',
@@ -333,8 +329,6 @@ export const ButtonColors: ButtonColorCollection = {
     focusBorder: 'transparent',
     focusRingOuter: canvas.colors.frenchVanilla100,
     focusHover: 'rgba(0, 0, 0, 0.3)',
-    activeHover: canvas.colors.frenchVanilla100,
-    labelIconFocusHover: canvas.colors.licorice500,
   },
 };
 
