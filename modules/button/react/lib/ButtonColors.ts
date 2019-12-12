@@ -25,6 +25,7 @@ export interface GenericButtonColors extends CanvasButtonColors {
   labelIconDisabled?: string;
   labelIconFocus?: string;
   labelIconHover?: string;
+  labelIconFocusHover?: string;
   focusHover?: string;
 }
 
@@ -250,6 +251,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconHover: canvas.colors.licorice500,
     labelIconActive: canvas.colors.licorice500,
     labelIconFocus: canvas.colors.licorice200,
+    labelIconFocusHover: canvas.colors.licorice500,
     labelIconDisabled: canvas.colors.soap600,
   },
   [IconButtonVariant.SquareFilled]: {
@@ -285,6 +287,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIcon: canvas.colors.licorice200,
     labelIconHover: canvas.colors.licorice500,
     labelIconActive: canvas.colors.licorice500,
+    labelIconFocusHover: canvas.colors.licorice500,
     labelIconFocus: canvas.colors.licorice200,
     labelIconDisabled: canvas.colors.soap600,
   },

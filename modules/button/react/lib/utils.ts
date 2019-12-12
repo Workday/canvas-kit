@@ -339,7 +339,7 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
       '&:hover:focus': {
         backgroundColor: buttonColors.focusHover,
         'span .wd-icon-fill, span .wd-icon-accent': {
-          fill: buttonColors.labelIconFocus,
+          fill: buttonColors.labelIconFocusHover,
         },
       },
     },
