@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {IconButton, IconButtonProps} from '../../../../button/react/index';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 
 import README from '../lib/theming/README.md';
 

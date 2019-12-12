@@ -145,4 +145,4 @@ Theming documentation has its own README. You can find it [here](./lib/theming/R
 ## Bidirectionality
 
 Bidirectionality is provided by Theming. You can find Theming documentation
-[here](./lib/theming/README.md)
+[here](./lib/theming/README.md#bidirectionality)

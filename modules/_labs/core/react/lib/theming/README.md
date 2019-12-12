@@ -140,9 +140,11 @@ const theme: PartialCanvasTheme = {
 
 ### Bidirectionality
 
-The `CanvasProvider` also provide support for bidirectionality, useful for RTL languages. The direction, part of the theme, is set using `ContentDirection.LTR` or  `ContentDirection.RTL`.
+The `CanvasProvider` also provides support for bidirectionality, useful for RTL languages. The direction, part of the theme, is set using `ContentDirection.LTR` or  `ContentDirection.RTL`.
 
-Your can nest `CanvasProvider` if you need to set a different direction for some components in your React tree (See below: Nesting CanvasProvider components).
+You can nest `CanvasProvider` if you need to set a different direction for some components in your React tree (See below: Nesting CanvasProvider components).
+
+`CanvasProvider` wraps your components with a `bdo` element that has the `dir` attribute set to the value of the theme direction. Styled components using the [Canvas `styled` function](https://github.com/Workday/canvas-kit/blob/master/modules/_labs/core/react/lib/theming/styled.ts) will have their styles automatically flipped if dictated by the closest theme object.
 
 ```tsx
 import {
