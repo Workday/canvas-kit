@@ -112,8 +112,8 @@ function colorIconHoverClasses(iconSelector, classNames, fillColor) {
   }
 }
 
-function colorIcons(selector) {
-  const icons = document.querySelectorAll(selector);
+function colorIcons(selector, iconRoot = document) {
+  const icons = iconRoot.querySelectorAll(selector);
 
   icons.forEach(i => {
     const category = getIconCategory(i);
@@ -132,8 +132,8 @@ function colorIcons(selector) {
   });
 }
 
-function sizeIcons(selector) {
-  const icons = document.querySelectorAll(selector);
+function sizeIcons(selector, iconRoot = document) {
+  const icons = iconRoot.querySelectorAll(selector);
 
   icons.forEach(i => {
     const size = i.getAttribute('data-size');
@@ -144,29 +144,29 @@ function sizeIcons(selector) {
   });
 }
 
-function styleAccentIcons(selector) {
+function styleAccentIcons(selector, iconRoot = document) {
   // Style transparent accent icons
   const selectorFragment = '[data-category="accent"][data-transparent]';
   const transparentSelector = `${selector}${selectorFragment}`;
-  const transparentIcons = document.querySelectorAll(transparentSelector);
+  const transparentIcons = iconRoot.querySelectorAll(transparentSelector);
 
   transparentIcons.forEach(i => {
     i.querySelector('.french-vanilla-100').style.fill = 'transparent';
   });
 }
 
-function styleSystemIcons(selector) {
-  styleSystemIconCircles(selector);
-  styleSystemIconHovers(selector);
+function styleSystemIcons(selector, iconRoot = document) {
+  styleSystemIconCircles(selector, iconRoot);
+  styleSystemIconHovers(selector, iconRoot);
 }
 
-function styleSystemIconCircles(selector) {
+function styleSystemIconCircles(selector, iconRoot = document) {
   const selectorFragment = '[data-category="system"][data-circle-background]';
   const circleSelector = `${selector}${selectorFragment}`;
-  const iconCircles = document.querySelectorAll(circleSelector);
+  const iconCircles = iconRoot.querySelectorAll(circleSelector);
 
   iconCircles.forEach(i => {
-    const circle = document.createElement('div');
+    const circle = iconRoot.createElement('div');
     circle.setAttribute('class', 'wdc-icon-circle-container');
 
     const size = i.getAttribute('data-size') || 40;
@@ -189,7 +189,7 @@ function styleSystemIconCircles(selector) {
   });
 }
 
-function styleSystemIconHovers(selector) {
+function styleSystemIconHovers(selector, iconRoot = document) {
   const selectorFragment = '[data-category="system"]:not([data-circle-background])';
   const hoverableSelector = `${selector}${selectorFragment}`;
 
@@ -202,7 +202,7 @@ function styleSystemIconHovers(selector) {
   );
 
   // Style individual hovers
-  const hoverableSystemIcons = document.querySelectorAll(hoverableSelector);
+  const hoverableSystemIcons = iconRoot.querySelectorAll(hoverableSelector);
 
   hoverableSystemIcons.forEach((i, index) => {
     const iconClassName = `hoverable-system-icon-${index}`;
@@ -229,8 +229,8 @@ function styleSystemIconHovers(selector) {
   });
 }
 
-function injectIcons(iconsPath = null, selector = '.wdc-icon') {
-  const icons = document.querySelectorAll(selector);
+function injectIcons(iconsPath = null, selector = '.wdc-icon', iconRoot = document) {
+  const icons = iconRoot.querySelectorAll(selector);
 
   // Add data source
   icons.forEach(i => {
@@ -240,14 +240,14 @@ function injectIcons(iconsPath = null, selector = '.wdc-icon') {
   });
 
   SVGInjector(icons, {}, () => {
-    sizeIcons(selector);
+    sizeIcons(selector, iconRoot);
 
-    styleAccentIcons(selector);
-    styleSystemIcons(selector);
+    styleAccentIcons(selector, iconRoot);
+    styleSystemIcons(selector, iconRoot);
 
     // colorIcons must be called at the end of this block (since previous calls
     // in this block may have adjusted coloring)
-    colorIcons(selector);
+    colorIcons(selector, iconRoot);
   });
 }
 
