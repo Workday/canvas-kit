@@ -1,0 +1,61 @@
+@mixin wdc-btn-text {
+  @include wdc-btn();
+  border: 0;
+  margin: 0 $wdc-spacing-xxs;
+  min-width: auto;
+  background-color: transparent;
+  border-color: transparent;
+  color: $wdc-btn-text;
+  font-size: 16px;
+  padding: 0 $wdc-spacing-xxs;
+  border-radius: $wdc-border-radius-m;
+  display: inline-flex;
+  align-items: center;
+  &:hover:not([disabled]) {
+    background-color: transparent;
+    text-decoration: underline;
+    color: $wdc-btn-text-hover;
+  }
+
+  &:focus {
+    background-color: transparent;
+  }
+
+  &.wdc-btn-disabled,
+  &.wdc-btn-disabled:hover,
+  &:disabled,
+  &:disabled:hover {
+    box-shadow: none;
+    background-color: transparent;
+    color: rgba(8, 117, 225, 0.5);
+    text-decoration: none;
+    pointer-events: none;
+  }
+
+  &.wdc-btn-text-size-s {
+    height: $wdc-spacing-l;
+    font-size: 14px;
+  }
+
+  &.wdc-btn-text-all-caps {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  &.wdc-btn-text-inverse {
+    color: $wdc-btn-text-color-inverse;
+    &.wdc-btn-disabled,
+    &:disabled {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:hover:not([disabled]) {
+      color: $wdc-btn-text-color-inverse;
+    }
+  }
+}
+
+.wdc-btn-text {
+  @include wdc-btn-text();
+}

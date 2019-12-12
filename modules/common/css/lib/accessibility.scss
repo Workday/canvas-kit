@@ -23,14 +23,14 @@
 }
 
 @mixin wdc-accessible-hide() {
-  clip: 'rect(1px, 1px, 1px, 1px)'; // Deprecated but still used by most browsers, clip-path will be taking its place soon.
-  clip-path: 'polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px)';
-  position: 'absolute';
-  overflow: 'hidden';
-  white-space: 'nowrap';
-  height: '1px';
-  width: '1px';
-  margin: '-1px';
+  clip: rect(1px, 1px, 1px, 1px); // Deprecated but still used by most browsers, clip-path will be taking its place soon.
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
   padding: 0;
   border: 0;
 }

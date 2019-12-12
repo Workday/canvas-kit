@@ -4,6 +4,13 @@
   <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 
+Includes:
+
+- [Type](#type)
+- [Margin & Padding Spacing](#margin-padding-spacing)
+- [Providers](#providers)
+- [Theming](#theming)
+
 ## Type
 
 This new type hierarchy is in the process of being introduced into our products. It relies on larger
@@ -83,3 +90,54 @@ const Box = styled('div')(space)
   padding-left: 40px;
 */
 ```
+
+## Providers
+
+Providers are higher order (wrapping) components used to provide global configuration to Canvas
+components.
+
+### Canvas Provider
+
+This provider includes all of the Canvas Providers below. This is the way most consumers should use
+the provider. This provider is required for our theming capabilities, so you can find more
+information in the [theming documentation](./lib/theming/README.md).
+
+**We strongly encourage you to use this in your application to wrap all Canvas components.**
+
+```tsx
+import * as React from 'react';
+import {CanvasProvider} from '@workday/canvas-kit-react';
+
+<CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
+```
+
+#### Storybook Decorator
+
+We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
+stories in a `CanvasProvider` (including `InputProvider`) automatically.
+
+Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
+
+```js
+import {CanvasProviderDecorator} from '../utils/storybook';
+
+addDecorator(CanvasProviderDecorator);
+```
+
+Or, add it to stories individually:
+
+```js
+import {CanvasProviderDecorator} from '../../../../utils/storybook';
+
+storiesOf('My Story', module)
+  .addDecorator(CanvasProviderDecorator)
+  .add('All', () => <YourJSX />);
+```
+
+### Input Provider
+
+See the [@workday/canvas-kit-react-core docs](../../../core/react/README.md#input-provider)
+
+## Theming
+
+Theming documentation has its own README. You can find it [here](./lib/theming/README.md)
