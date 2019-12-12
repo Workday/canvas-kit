@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
-import {jsx, css, CSSObject} from '@emotion/core';
+import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -379,7 +379,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
                       <IconButton
                         className={state}
                         variant={IconButton.Variant[variant]}
-                        aria-label="test"
+                        aria-label="Activity Icon"
                         icon={activityStreamIcon}
                         shouldChangeStateSeparator={true}
                       ></IconButton>
@@ -411,7 +411,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
                       <IconButton
                         className={state}
                         variant={IconButton.Variant[variant]}
-                        aria-label="test"
+                        aria-label="Activity Icon"
                         icon={activityStreamIcon}
                         shouldChangeStateSeparator={true}
                         toggled={true}
@@ -444,7 +444,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
                       <IconButton
                         className={state}
                         variant={IconButton.Variant[variant]}
-                        aria-label="test"
+                        aria-label="Activity Icon"
                         icon={activityStreamIcon}
                         shouldChangeStateSeparator={true}
                         toggled={false}
@@ -476,7 +476,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
                       disabled
                       className=""
                       variant={IconButton.Variant[variant]}
-                      aria-label="test"
+                      aria-label="Activity Icon"
                       icon={activityStreamIcon}
                       shouldChangeStateSeparator={true}
                     ></IconButton>
