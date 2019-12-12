@@ -7,7 +7,6 @@ import {
   PartialCanvasTheme,
   CanvasThemePalette,
   PartialCanvasThemePalette,
-  ContentDirection,
 } from './types';
 import {CanvasColor} from '@workday/canvas-kit-react-core';
 
