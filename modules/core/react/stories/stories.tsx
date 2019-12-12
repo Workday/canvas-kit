@@ -66,7 +66,7 @@ export const type = (hierarchy: any) => (
   </div>
 );
 
-storiesOf('Core', module)
+storiesOf('Tokens|Core/React', module)
   .addDecorator(withReadme(README))
   .add('Depth', () => {
     const Card = styled('div')({

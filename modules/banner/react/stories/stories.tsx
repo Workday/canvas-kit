@@ -11,7 +11,7 @@ const handleBannerClick = (e: React.SyntheticEvent) => {
   alert(`onClick triggered`);
 };
 
-storiesOf('Banner/Alert', module)
+storiesOf('Components|Indicators/Banner/React/Alert', module)
   .addParameters({component: Banner})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
@@ -52,7 +52,7 @@ storiesOf('Banner/Alert', module)
     </div>
   ));
 
-storiesOf('Banner/Error', module)
+storiesOf('Components|Indicators/Banner/React/Error', module)
   .addParameters({component: Banner})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
