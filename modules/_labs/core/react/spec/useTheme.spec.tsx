@@ -30,7 +30,7 @@ describe('useTheme', () => {
     expect(theme).toBe(customTheme);
   });
 
-  test('with context available, calling useTheme within a component should return context theme', () => {
+  test('with no window context available, calling useTheme within a component should return context theme', () => {
     const container = mount(
       <CanvasProvider theme={customTheme}>
         <Component />
