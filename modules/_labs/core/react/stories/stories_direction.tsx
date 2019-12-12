@@ -12,9 +12,8 @@ import {
   createCanvasTheme,
   ContentDirection,
 } from '@workday/canvas-kit-labs-react-core';
-import { rewind30Icon, fastForward15Icon, mediaPauseIcon } from '@workday/canvas-system-icons-web';
-import { Card } from '@workday/canvas-kit-react';
-
+import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-system-icons-web';
+import {Card} from '@workday/canvas-kit-react';
 
 const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
   'aria-label': 'Activity Stream',
@@ -28,7 +27,6 @@ storiesOf('Labs/Core/React', module)
       <section>
         <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
           <Card heading="مشغل وسائط" style={{width: '186px'}}>
-        
             <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.LTR})}>
               <IconButton
                 {...commonIconButtonProps}

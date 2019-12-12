@@ -9,11 +9,9 @@ export interface CanvasProviderProps {
   theme: CanvasTheme;
 }
 
-const DirectionContainer = styled('bdo')<{dir: ContentDirection}>(
-  ({dir}) => ({
-    direction: dir,
-  })
-); 
+const DirectionContainer = styled('bdo')<{dir: ContentDirection}>(({dir}) => ({
+  direction: dir,
+}));
 
 export default class CanvasProvider extends React.Component<CanvasProviderProps> {
   static defaultProps = {
