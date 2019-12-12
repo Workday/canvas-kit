@@ -1,4 +1,3 @@
-import * as React from 'react';
 import colors from '@workday/canvas-colors-web';
 import {CanvasTheme} from './types';
 import {breakpoints, up, down, between, only} from './breakpoints';
@@ -57,6 +56,3 @@ export const defaultCanvasTheme: CanvasTheme = {
     only,
   },
 };
-
-export const ThemeContext = React.createContext(defaultCanvasTheme);
-export const ThemeProvider = ThemeContext.Provider;
