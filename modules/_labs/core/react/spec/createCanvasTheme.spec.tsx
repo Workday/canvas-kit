@@ -1,5 +1,4 @@
-import {defaultCanvasTheme} from '../lib/theming/theme';
-import createCanvasTheme from '../lib/theming/createCanvasTheme';
+import {defaultCanvasTheme, createCanvasTheme} from '../lib/theming';
 import lodash from 'lodash';
 
 describe('useTheme', () => {

@@ -77,7 +77,7 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
   };
 }
 
-export default function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
+export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
   const {palette = {}, breakpoints = {}} = partialTheme;
   const {primary, alert, error, success, neutral, common = {}} = palette;
 

@@ -5,9 +5,13 @@ import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import CanvasProvider from '../lib/CanvasProvider';
-import createCanvasTheme from '../lib/theming/createCanvasTheme';
-import useTheme from '../lib/theming/useTheme';
-import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming/types';
+import {
+  CanvasTheme,
+  CanvasThemePalette,
+  Themeable,
+  createCanvasTheme,
+  useTheme,
+} from '../lib/theming';
 import README from '../lib/theming/README.md';
 import {H1, colors, type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 

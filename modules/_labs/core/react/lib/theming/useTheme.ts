@@ -26,7 +26,7 @@ declare global {
  * ThemeProvider or context exists.
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
-export default function useTheme(theme?: Object): CanvasTheme {
+export function useTheme(theme?: Object): CanvasTheme {
   if (theme && Object.entries(theme).length !== 0) {
     return theme as CanvasTheme;
   }
