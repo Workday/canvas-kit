@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
 import CanvasProvider from '../lib/CanvasProvider';
-import {defaultCanvasTheme} from '../lib/theming/theme';
-import createCanvasTheme from '../lib/theming/createCanvasTheme';
-import useTheme from '../lib/theming/useTheme';
+import {defaultCanvasTheme, createCanvasTheme, useTheme} from '../lib/theming';
 
 describe('useTheme', () => {
   const customTheme = createCanvasTheme({
@@ -30,7 +28,7 @@ describe('useTheme', () => {
     expect(theme).toBe(customTheme);
   });
 
-  test('with context available, calling useTheme within a component should return context theme', () => {
+  test('with no window context available, calling useTheme within a component should return context theme', () => {
     const container = mount(
       <CanvasProvider theme={customTheme}>
         <Component />

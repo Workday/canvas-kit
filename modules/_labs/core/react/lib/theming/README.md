@@ -8,12 +8,6 @@ Canvas Kit Core contains wrappers and types to enabling theming of Canvas compon
 yarn add @workday/canvas-kit-labs-react-core
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-labs-react-core
-```
-
 ## Usage
 
 Wrap all of your Canvas components with the `CanvasProvider` higher order component. Usually this
@@ -146,12 +140,13 @@ const theme: PartialCanvasTheme = {
 
 It is possible to set a theme for a specific component or set of components within your React tree.
 This is generally discouraged for consistency reasons, but may be required in some contexts (a green
-`Switch` component for example). To do this, you must use the `ThemeProvider` component. The inner
-theme will override the outer theme.
+`Switch` component for example). To do this, you must use Emotion's `ThemeProvider` component. The
+inner theme will override the outer theme.
 
 ```tsx
 import * as React from 'react';
-import {CanvasProvider, CanvasTheme, ThemeProvider} from '@workday/canvas-kit-labs-react-core';
+import {ThemeProvider} from 'emotion-theming';
+import {CanvasProvider, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '@workday/canvas-kit-react-switch';
 
 const theme: PartialCanvasTheme = {
@@ -164,7 +159,7 @@ const theme: PartialCanvasTheme = {
 
 <CanvasProvider>
   {/* All your components containing any Canvas components */}
-  <ThemeProvider value={createCanvasTheme(theme)}>
+  <ThemeProvider theme={createCanvasTheme(theme)}>
     <Switch checked={true} />
   </ThemeProvider>
 </CanvasProvider>;

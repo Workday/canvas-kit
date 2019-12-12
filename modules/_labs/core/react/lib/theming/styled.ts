@@ -1,6 +1,5 @@
 import {default as emotionStyled, CreateStyled, Interpolation} from '@emotion/styled';
-import {CanvasTheme} from './types';
-import useTheme from './useTheme';
+import {CanvasTheme, useTheme} from './';
 
 // Pulled from https://github.com/emotion-js/emotion/blob/master/packages/styled-base/src/utils.js#L6 (not exported)
 type Interpolations = Array<any>;
