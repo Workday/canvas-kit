@@ -67,7 +67,7 @@ const BannerWrapper = styled('button')<BannerProps>(
   })
 );
 
-const BannerIcon = styled(SystemIcon)<BannerProps>({
+const BannerIcon = styled(SystemIcon)({
   marginRight: spacing.xs,
 });
 
