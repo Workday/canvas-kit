@@ -7,6 +7,11 @@ import React, {useState} from 'react';
 
 import GoTo from './GoTo';
 import Pages from './Pages';
+import {
+  defaultAriaLabels,
+  PaginationAriaLabels,
+  PaginationAriaLabelsDefault,
+} from './PaginationAriaLabels';
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   total: number;
@@ -17,6 +22,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   showLabel?: boolean;
   customLabel?: (from: number, to: number, items: number, itemLabel: string) => string;
   goToLabel?: string;
+  customAriaLabels?: PaginationAriaLabels;
 }
 
 const Label = styled('div')({
@@ -52,6 +58,7 @@ const Pagination: React.FC<PaginationProps> = props => {
     showLabel,
     showGoTo,
     goToLabel,
+    customAriaLabels,
     ...elemProps
   } = props;
 
@@ -72,23 +79,32 @@ const Pagination: React.FC<PaginationProps> = props => {
 
   React.useEffect(() => {
     const container = wrapperRef.current as HTMLElement;
-    setMobile(container.clientWidth < 500);
+    setMobile((container.clientWidth || window.innerWidth) < 500);
 
     const handleWindowSizeChange = () => {
-      setMobile(container.clientWidth < 500);
+      setMobile((container.clientWidth || window.innerWidth) < 500);
     };
     window.addEventListener('resize', handleWindowSizeChange);
     return () => window.removeEventListener('resize', handleWindowSizeChange);
   }, [wrapperRef.current]);
 
+  const ariaLabels: PaginationAriaLabelsDefault = {
+    ...defaultAriaLabels,
+    ...customAriaLabels,
+  };
+
   return (
     <>
-      <Container ref={wrapperRef} aria-label={`Pagination`} {...elemProps}>
+      <Container
+        ref={wrapperRef}
+        aria-label={ariaLabels.paginationContainerAriaLabel}
+        {...elemProps}
+      >
         <ButtonsContainer>
           <IconButton
             data-testid="leftPaginationArrow"
             disabled={currentPage - 1 <= 0}
-            aria-label={'Previous Page'}
+            aria-label={ariaLabels.previousPageAriaLabel}
             variant={IconButton.Variant.Square}
             size={IconButton.Size.Small}
             icon={chevronLeftSmallIcon}
@@ -99,12 +115,13 @@ const Pagination: React.FC<PaginationProps> = props => {
             numPages={numPages}
             currentPage={currentPage}
             onPageClick={onPageChange}
+            ariaLabels={ariaLabels}
           />
           <IconButton
             data-testid="rightPaginationArrow"
             disabled={currentPage + 1 > numPages}
             aria-disabled={currentPage + 1 > numPages}
-            aria-label={'Next Page'}
+            aria-label={ariaLabels.nextPageAriaLabel}
             variant={IconButton.Variant.Square}
             size={IconButton.Size.Small}
             icon={chevronRightSmallIcon}

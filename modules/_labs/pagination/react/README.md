@@ -79,6 +79,21 @@ return (
 > Determines the label next to the Go To box. Defaults to 'Go To'. Only usable while showGoTo is set
 > to true.
 
-#### customLabel?: (from: number, to: number, items: number, itemLabel: string) => string;
+#### customLabel?: (from: number, to: number, items: number, itemLabel: string) => string
 
 > A function to build a custom label below the pagination bar.
+
+#### customAriaLabels?: PaginationAriaLabels
+
+> An object to customize aria labels within the pagination component. All labels are optional and
+> have default values.
+
+```
+PaginationAriaLabels {
+  paginationContainerAriaLabel?: string;
+  previousPageAriaLabel?: string;
+  nextPageAriaLabel?: string;
+  navigationEllipseAriaLabel?: string;
+  pageButtonAriaLabel?: (page: number, selected: boolean) => string;
+}
+```

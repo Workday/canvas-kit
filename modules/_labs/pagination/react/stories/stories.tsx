@@ -5,6 +5,7 @@ import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
 import Pagination from '..';
+import {defaultAriaLabels, PaginationAriaLabels} from '../lib/PaginationAriaLabels';
 import README from '../README.md';
 
 /// <reference path="../../../../../typings.d.ts" />
@@ -14,8 +15,20 @@ const Wrapper = styled('div')({
   textAlign: 'center',
 });
 
+const getAriaLabels = () =>
+  Object.keys(defaultAriaLabels)
+    .filter(key => key !== 'pageButtonAriaLabel')
+    .reduce(
+      (accum: object, labelKey: keyof PaginationAriaLabels) => ({
+        ...accum,
+        [labelKey]: text(labelKey, defaultAriaLabels[labelKey].toString()),
+      }),
+      {}
+    );
+
 const DefaultPaginationExample = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
+
   return (
     <Wrapper>
       <h4>Current Page: {currentPage}</h4>
@@ -28,6 +41,7 @@ const DefaultPaginationExample = () => {
         goToLabel={text('goToLabel', '')}
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
+        customAriaLabels={getAriaLabels()}
       />
     </Wrapper>
   );
@@ -39,7 +53,7 @@ const WithCustomLabel = () => {
   return (
     <Wrapper>
       <h4>Current Page: {currentPage}</h4>
-      <n
+      <Pagination
         key="3"
         total={number('total', 10) || 10}
         pageSize={number('pageSize', 3) || 3}
@@ -53,6 +67,7 @@ const WithCustomLabel = () => {
             items > 1 ? 'candidates' : 'candidate'
           }`
         }
+        customAriaLabels={getAriaLabels()}
       />
     </Wrapper>
   );
@@ -73,6 +88,7 @@ const WithGoToExample = () => {
         showGoTo={boolean('showGoTo', true)}
         goToLabel={text('goToLabel', 'Go To')}
         onPageChange={p => setCurrentPage(p)}
+        customAriaLabels={getAriaLabels()}
       />
     </Wrapper>
   );

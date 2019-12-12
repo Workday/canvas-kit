@@ -1,21 +1,25 @@
-/** @jsx jsx */
 import {css, jsx} from '@emotion/core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas from '@workday/canvas-kit-react-core';
 import _ from 'lodash';
 import React, {useRef} from 'react';
 
+import {PaginationAriaLabelsDefault} from './PaginationAriaLabels';
+
+/** @jsx jsx */
 interface PagesProps {
   numPages: number;
   currentPage: number;
   onPageClick: (page: number) => void;
   mobile: boolean;
+  ariaLabels: PaginationAriaLabelsDefault;
 }
 
 interface PaginationButtonProps {
   page: number;
   onPageClick: (page: number) => void;
   active?: boolean;
+  ariaLabel: string;
 }
 
 const noPointerEvents = css({
@@ -26,10 +30,10 @@ const activeStyling = css(noPointerEvents, {
   color: canvas.colors.frenchVanilla100,
 });
 
-const Ellipse = () => (
+const Ellipse = ({ariaLabel}: {ariaLabel: string}) => (
   <IconButton
     key={'ellipse'}
-    aria-label={`Navigation Ellipse`}
+    aria-label={ariaLabel}
     variant={IconButton.Variant.Square}
     size={IconButton.Size.Small}
     tabIndex={-1}
@@ -40,7 +44,7 @@ const Ellipse = () => (
 );
 
 const Pages: React.FC<PagesProps> = props => {
-  const {numPages, currentPage, onPageClick, mobile} = props;
+  const {numPages, currentPage, onPageClick, mobile, ariaLabels} = props;
   const lastPage = useRef<number>(0);
 
   let pagesToDisplay = 5;
@@ -82,15 +86,22 @@ const Pages: React.FC<PagesProps> = props => {
     lastPage.current = currentPage;
     onPageClick(page);
   };
-  const buttons = pages.map((page, index) => (
-    <PaginationButton onPageClick={onClick} page={page} key={page} active={page === currentPage} />
+  const buttons = pages.map(page => (
+    <PaginationButton
+      onPageClick={onClick}
+      page={page}
+      key={page}
+      active={page === currentPage}
+      ariaLabel={ariaLabels.pageButtonAriaLabel(page, page === currentPage)}
+    />
   ));
 
+  const ellipseAriaLabel = ariaLabels.navigationEllipseAriaLabel;
   if (less) {
-    buttons.splice(1, 0, <Ellipse />);
+    buttons.splice(1, 0, <Ellipse ariaLabel={ellipseAriaLabel} />);
   }
   if (more) {
-    buttons.splice(buttons.length - 1, 0, <Ellipse />);
+    buttons.splice(buttons.length - 1, 0, <Ellipse ariaLabel={ellipseAriaLabel} />);
   }
 
   return <React.Fragment>{buttons}</React.Fragment>;
@@ -99,7 +110,7 @@ const Pages: React.FC<PagesProps> = props => {
 const PaginationButton: React.FC<PaginationButtonProps> = props => (
   <IconButton
     data-testid={`paginationButton${props.active ? 'Active' : props.page}`}
-    aria-label={`${props.active ? 'Selected, ' : ''}Page ${props.page}`}
+    aria-label={props.ariaLabel}
     aria-pressed={undefined}
     variant={props.active ? IconButton.Variant.SquareFilled : IconButton.Variant.Square}
     size={IconButton.Size.Small}

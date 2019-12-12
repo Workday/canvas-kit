@@ -75,7 +75,7 @@ describe('Pagination Pages', () => {
         PaginationComponent(page * pageSize, pageSize, currentPage)
       );
 
-      expect(getByTestId('paginationIconButtonActive'));
+      expect(getByTestId('paginationButtonActive'));
       for (let i = 1; i < page; i++) {
         expect(getByTestId(`paginationButton${i}`));
       }
@@ -89,7 +89,7 @@ describe('Pagination Pages', () => {
     const {queryAllByTestId, queryByTestId} = render(PaginationComponent(1, 1, currentPage));
 
     expect(queryByTestId(`paginationButton1`)).toBeNull();
-    const allActive = queryAllByTestId('paginationIconButtonActive');
+    const allActive = queryAllByTestId('paginationButtonActive');
     expect(allActive).toHaveLength(1);
   });
 

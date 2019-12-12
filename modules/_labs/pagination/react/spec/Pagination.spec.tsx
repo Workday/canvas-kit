@@ -12,7 +12,7 @@ describe('Pagination Component', () => {
         total={100}
         pageSize={10}
         currentPage={currentPage}
-        onPageChange={p => null}
+        onPageChange={() => null}
         showLabel
       />
     );
@@ -20,7 +20,7 @@ describe('Pagination Component', () => {
     expect(getByTestId('paginationLabel')).toHaveTextContent('11–20 of 100 items');
   });
 
-  it(`Test pagination label can have a custom data item`, () => {
+  it(`Test pagination label can have a custom data label`, () => {
     const currentPage = 2;
 
     const {getByTestId} = render(
@@ -28,9 +28,13 @@ describe('Pagination Component', () => {
         total={100}
         pageSize={10}
         currentPage={currentPage}
-        onPageChange={p => null}
+        onPageChange={() => null}
         showLabel
-        dataLabel="user"
+        customLabel={(from: number, to: number, items: number, item: string) =>
+          `${from.toLocaleString()}\u2013${to.toLocaleString()} of ${items.toLocaleString()} ${
+            items > 1 ? 'users' : 'user'
+          }`
+        }
       />
     );
 

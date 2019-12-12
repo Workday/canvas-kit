@@ -4,14 +4,12 @@ import * as React from 'react';
 import Pagination from '..';
 
 describe('Pagination Go To', () => {
-  const enter = {keyCode: 13, key: 'Enter'};
-
   const setPage = (input: HTMLElement, page: number | string) => {
     fireEvent.change(input, {target: {value: page}});
-    fireEvent.keyDown(input, enter);
+    fireEvent.submit(input);
   };
 
-  test('Setting page in Go To should change page when valid', () => {
+  test('Setting page in Go To should change page when valid', async () => {
     let currentPage = 1;
     const setCurrentPage = (page: number) => (currentPage = page);
 
@@ -23,20 +21,19 @@ describe('Pagination Go To', () => {
         onPageChange={p => setCurrentPage(p)}
         showLabel
         showGoTo
-        dataLabel="user"
       />
     );
 
     const goToBox = getByTestId('goToPage');
 
     setPage(goToBox, 3);
-    expect(currentPage).toBe(3);
+    await expect(currentPage).toBe(3);
 
     setPage(goToBox, 5);
-    expect(currentPage).toBe(5);
+    await expect(currentPage).toBe(5);
 
     setPage(goToBox, 10);
-    expect(currentPage).toBe(10);
+    await expect(currentPage).toBe(10);
   });
 
   test('Setting page in Go To to invalid numbers should not change page', () => {
@@ -51,7 +48,6 @@ describe('Pagination Go To', () => {
         onPageChange={p => setCurrentPage(p)}
         showLabel
         showGoTo
-        dataLabel="user"
       />
     );
 
