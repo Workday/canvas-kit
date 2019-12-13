@@ -14,7 +14,17 @@ describe('TextInput', () => {
     expect(input.getAttribute('data-propspread')).toBe('test');
     component.unmount();
   });
+
+  test('TextInput should grow', () => {
+    const component = mount(<TextInput grow={true} onChange={jest.fn()} />);
+    const input = component
+      .find('input');
+    expect(input.prop('style')).toHaveProperty('width', '100%');;
+    component.unmount();
+  });
 });
+
+
 
 describe('Text Input Accessibility', () => {
   test('Text Input in a FormField should pass axe DOM accessibility guidelines', async () => {
