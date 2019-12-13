@@ -65,7 +65,6 @@ describe('Checkbox', () => {
         const html = ReactDOMServer.renderToString(
           <FormField label="My Field" inputId="my-checkbox-field">
             <Checkbox disabled={false} checked={true} id="my-checkbox-field" onChange={jest.fn()} />
-            ;
           </FormField>
         );
         expect(await axe(html)).toHaveNoViolations();
@@ -94,8 +93,7 @@ describe('Checkbox', () => {
         const {getByLabelText} = render(
           <Checkbox data-propspread={attr} onChange={cb} label={label} />
         );
-        const input = getByLabelText(label);
-        expect(input).toHaveAttribute('data-propspread', attr);
+        expect(getByLabelText(label)).toHaveAttribute('data-propspread', attr);
       });
     });
   });
@@ -103,9 +101,16 @@ describe('Checkbox', () => {
   describe('when clicked', () => {
     test('should call a callback function', () => {
       const {getByLabelText} = render(<Checkbox onChange={cb} label={label} />);
-      const checkbox = getByLabelText(label) as HTMLInputElement;
-      fireEvent.click(checkbox);
+      fireEvent.click(getByLabelText(label));
       expect(cb).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when provided an input ref', () => {
+    test('input ref should be defined', () => {
+      const ref: React.RefObject<HTMLInputElement> = React.createRef();
+      render(<Checkbox inputRef={ref} onChange={cb} label={label} />);
+      expect(ref.current).toBeDefined();
     });
   });
 });
