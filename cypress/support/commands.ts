@@ -34,7 +34,7 @@ Cypress.Commands.overwrite('tab', (originalFn, subject) => {
   return Cypress.Promise.try(() => originalFn(subject))
     .then(value => {
       log.set('$el', value).snapshot();
-      return value;
+      return Cypress.$(value);
     })
     .finally(() => {
       log.end();
