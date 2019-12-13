@@ -31,6 +31,7 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 - [Documentation](#documentation)
   - [Readmes](#readmes)
   - [Storybook Structure](#storybook-structure)
+  - [Prop Descriptions](#prop-description)
 
 ## Canvas
 
@@ -310,3 +311,31 @@ export * from './lib/AnotherComponent';
 - Avoid helper functions to reduce duplication that make it harder to parse.
 - Avoid sharing wrappers, components, etc. from other story files.
 - Essentially, try to keep each example as standalone and referencable as possible.
+
+#### Prop Descriptions
+
+We us [JSDoc](https://devdocs.io/jsdoc/) standards for our prop type definitions. The base pattern
+we are using for documentation is the following: `The <property> of the <component>`. It is best to
+be as specific as possible.
+
+Base pattern for prop enums:
+
+```
+  /**
+   * The size of the Button.
+   * @default ButtonSize.Medium
+   */
+  size?: ButtonSize;
+```
+
+Base pattern for booleans:
+
+```
+  /**
+   * If true, this sets the Button to disabled.
+   * @default false
+   */
+  size?: ButtonSize;
+```
+
+Note: for booleans with a true/false outcome we explicitly set in the documentation `@default false`
