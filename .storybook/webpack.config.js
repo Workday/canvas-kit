@@ -60,7 +60,10 @@ module.exports = ({config, mode}) => {
     use: [
       {
         loader: 'babel-loader',
-        options: {plugins: ['@babel/plugin-transform-react-jsx']},
+        options: {
+          presets: ['@babel/preset-env'],
+          plugins: ['@babel/plugin-transform-react-jsx']
+        },
       },
       {
         loader: '@mdx-js/loader',
