@@ -22,17 +22,17 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ))
   .add('Disabled', () => (
     <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+      {control(<Checkbox label="Checkbox option" disabled={true} />)}
     </FormField>
   ))
   .add('Indeterminate', () => (
     <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox id="1" label="Checkbox option" indeterminate={true} />)}
+      {control(<Checkbox label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
   .add('Alert', () => (
@@ -43,7 +43,7 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ))
   .add('Error', () => (
@@ -54,7 +54,7 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ));
 
@@ -67,7 +67,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       inputId="my-checkbox-field"
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ))
   .add('Disabled', () => (
@@ -76,7 +76,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       inputId="my-checkbox-field"
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+      {control(<Checkbox label="Checkbox option" disabled={true} />)}
     </FormField>
   ))
   .add('Indeterminate', () => (
@@ -85,7 +85,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       inputId="my-checkbox-field"
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" indeterminate={true} />)}
+      {control(<Checkbox label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
   .add('Alert', () => (
@@ -97,7 +97,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       hintId={hintId}
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ))
   .add('Error', () => (
@@ -109,6 +109,6 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       hintId={hintId}
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ));
