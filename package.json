@@ -16,6 +16,7 @@
     "@commitlint/config-conventional": "^8.1.0",
     "@cypress/webpack-preprocessor": "^4.1.0",
     "@emotion/is-prop-valid": "^0.8.2",
+<<<<<<< 4f57f5c5a851ee4612327d39c041365da096ef8b
     "@storybook/addon-actions": "^5.2.8",
     "@storybook/addon-docs": "^5.2.8",
     "@storybook/addon-knobs": "^5.2.8",
@@ -25,6 +26,17 @@
     "@storybook/react": "^5.2.8",
     "@storybook/source-loader": "^5.2.8",
     "@testing-library/jest-dom": "^4.1.0",
+=======
+    "@storybook/addon-actions": "^5.2.3",
+    "@storybook/addon-docs": "^5.2.3",
+    "@storybook/addon-knobs": "^5.2.3",
+    "@storybook/addon-storysource": "^5.2.4",
+    "@storybook/addon-viewport": "^5.2.3",
+    "@storybook/components": "^5.2.3",
+    "@storybook/react": "^5.2.5",
+    "@storybook/source-loader": "^5.2.4",
+    "@testing-library/jest-dom": "^4.2.4",
+>>>>>>> chore: Upgrade @testing-library/jest-dom to access new matchers
     "@testing-library/react": "^9.1.4",
     "@types/chroma-js": "^1.4.3",
     "@types/cypress-axe": "^0.4.0",
