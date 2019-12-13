@@ -1,5 +1,5 @@
 import colors from '@workday/canvas-colors-web';
-import {CanvasTheme} from './types';
+import {CanvasTheme, ContentDirection} from './types';
 import {breakpoints, up, down, between, only} from './breakpoints';
 
 export const defaultCanvasTheme: CanvasTheme = {
@@ -55,4 +55,5 @@ export const defaultCanvasTheme: CanvasTheme = {
     between,
     only,
   },
+  direction: ContentDirection.LTR,
 };

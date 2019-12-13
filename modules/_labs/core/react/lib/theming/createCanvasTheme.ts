@@ -78,8 +78,8 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
 }
 
 export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
-  const {palette = {}, breakpoints = {}} = partialTheme;
-  const {primary, alert, error, success, neutral, common = {}} = palette;
+  const {palette = {}, breakpoints = {}, direction} = partialTheme;
+  const {primary, alert, error, success, neutral, common = {}} = palette!;
 
   const mergeable: PartialCanvasTheme = {
     palette: {
@@ -91,6 +91,7 @@ export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme
       neutral: fillPalette(neutral),
     },
     breakpoints,
+    direction,
   };
 
   return merge({}, defaultCanvasTheme, mergeable) as CanvasTheme;
