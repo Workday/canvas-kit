@@ -37,6 +37,7 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
   searchTheme?: SearchTheme | SearchThemeAttributes;
   /**
    * Placeholder for search input
+   * @default Search
    */
   placeholder: string;
   /**
@@ -49,26 +50,32 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
   rightAlign?: boolean;
   /**
    * Screenreader label for text input
+   * @default Search
    */
   inputLabel: string;
   /**
    * Screenreader label for submit button
+   * @default Search
    */
   submitLabel: string;
   /**
    * Screenreader Label for clear button
+   * @default Reset Search Form
    */
   clearButtonLabel?: string;
   /**
    * Screenreader Label to open collapsed search bar
+   * @default Open Search
    */
   openButtonLabel: string;
   /**
    * Screenreader Label to close collapsed search bar
+   * @default Cancel
    */
   closeButtonLabel: string;
   /**
    * Show button to clear input field
+   * @default true
    */
   showClearButton: boolean;
 }

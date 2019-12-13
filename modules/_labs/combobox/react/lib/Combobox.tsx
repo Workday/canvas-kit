@@ -21,6 +21,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   initialValue?: string;
   /**
    * The type of icon button to use for clearing input
+   * @default IconButton.Variant.Plain
    */
   clearButtonVariant: IconButtonVariant;
   /**
@@ -29,6 +30,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   showClearButton?: boolean;
   /**
    * Aria Label for clear button
+   * @default Reset Search Input
    */
   clearButtonLabel: string;
   /**

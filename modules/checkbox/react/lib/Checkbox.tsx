@@ -15,6 +15,7 @@ import uuid from 'uuid/v4';
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * Whether or not the checkbox is checked (`true`) or not checked (`false`)
+   * @default false
    */
   checked: boolean;
   /**
@@ -31,6 +32,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   inputRef?: React.Ref<HTMLInputElement>;
   /**
    * The content of the label associated to the input checkbox component.
+   * @default ''
    */
   label?: string;
   /**

@@ -21,14 +21,17 @@ export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   label?: React.ReactNode;
   /**
    * Set the banner variant as `full` or `sticky`
+   * @default BannerVariant.Full
    */
   variant?: BannerVariant;
   /**
    * Set the banner type as `alert` or `error`
+   * @default ErrorType.Alert
    */
   error?: ErrorType;
   /**
    * Set the action text in the `full` variant
+   * @default Avatar
    */
   actionText?: string;
 }

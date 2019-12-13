@@ -8,11 +8,12 @@ import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
 export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
   /**
-   * One or more MenuItem components.
+   * One or more MenuItem components or a component that has the same interface as `MenuItem`.
    */
   children?: React.ReactElement<MenuItemProps> | React.ReactElement<MenuItemProps>[];
   /**
    * Allows you to show and hide the menu from a parent component. Usefully for things like menu buttons.
+   * @default true
    */
   isOpen?: boolean;
   /**

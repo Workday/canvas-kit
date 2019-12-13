@@ -11,10 +11,12 @@ export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * The type of button.
+   * @default ButtonVariant.Secondary
    */
   variant?: T;
   /**
    * The size of button.
+   * @default ButtonSize.Medium
    */
   size?: ButtonSize;
   /**

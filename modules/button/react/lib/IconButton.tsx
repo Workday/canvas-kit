@@ -13,6 +13,7 @@ import {CSSObject} from '@emotion/core';
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Type of button.
+   * @default IconButtonVariant.Circle
    */
   variant: IconButtonVariant;
   /**
@@ -21,6 +22,7 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   'aria-label': string;
   /**
    * Size of icon button.
+   * @default IconButtonSize.Medium
    */
   size?: IconButtonSize;
   /**

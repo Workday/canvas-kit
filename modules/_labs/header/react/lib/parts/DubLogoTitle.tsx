@@ -8,6 +8,7 @@ import {dubLogoWhite, dubLogoBlue} from '@workday/canvas-kit-react-common'; // T
 export type DubTitleProps = {
   /**
    * A HeaderTheme enum indicating which theme to use (White, Blue or Transparent)
+   * @default HeaderTheme.White
    */
   themeColor: HeaderTheme;
   /**

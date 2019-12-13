@@ -13,6 +13,7 @@ export interface IconButtonToggleGroupProps {
    * The value or index of the IconButton that should be toggled on.
    * If a string is passed, the IconButton with the corresponding value will be selected.
    * If a number is passed, ihe IconButton with the corresponding index will be selected.
+   * @default 0
    */
   value?: string | number;
 
