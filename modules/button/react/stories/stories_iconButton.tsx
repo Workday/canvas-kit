@@ -108,7 +108,6 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
   .add('Circle', () => (
     <div className="story">
       <h3>Medium Default</h3>
-
       <IconButton
         {...commonIconButtonProps}
         variant={IconButton.Variant.Circle}
