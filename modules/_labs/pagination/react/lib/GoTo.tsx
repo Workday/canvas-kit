@@ -53,7 +53,6 @@ const GoTo: React.FC<GoToProps> = props => {
       <GoToLabel htmlFor={goToId}>{goToLabel || 'Go To'}</GoToLabel>
       <InputWrapper onSubmit={formSubmit}>
         <TextInput
-          data-testid="goToPage"
           width={53}
           height={32}
           min={1}

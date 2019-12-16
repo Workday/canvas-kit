@@ -109,7 +109,6 @@ const Pages: React.FC<PagesProps> = props => {
 
 const PaginationButton: React.FC<PaginationButtonProps> = props => (
   <IconButton
-    data-testid={`paginationButton${props.active ? 'Active' : props.page}`}
     aria-label={props.ariaLabel}
     aria-pressed={undefined}
     variant={props.active ? IconButton.Variant.SquareFilled : IconButton.Variant.Square}

@@ -12,8 +12,9 @@ describe('Pagination Go To', () => {
   test('Setting page in Go To should change page when valid', async () => {
     let currentPage = 1;
     const setCurrentPage = (page: number) => (currentPage = page);
+    const goToLabel = 'goToPage';
 
-    const {getByTestId} = render(
+    const {getByLabelText} = render(
       <Pagination
         total={100}
         pageSize={10}
@@ -21,10 +22,11 @@ describe('Pagination Go To', () => {
         onPageChange={p => setCurrentPage(p)}
         showLabel
         showGoTo
+        goToLabel={goToLabel}
       />
     );
 
-    const goToBox = getByTestId('goToPage');
+    const goToBox = getByLabelText(goToLabel);
 
     setPage(goToBox, 3);
     await expect(currentPage).toBe(3);
@@ -39,8 +41,9 @@ describe('Pagination Go To', () => {
   test('Setting page in Go To to invalid numbers should not change page', () => {
     let currentPage = 1;
     const setCurrentPage = (page: number) => (currentPage = page);
+    const goToLabel = 'goToPage';
 
-    const {getByTestId} = render(
+    const {getByLabelText} = render(
       <Pagination
         total={100}
         pageSize={10}
@@ -48,10 +51,11 @@ describe('Pagination Go To', () => {
         onPageChange={p => setCurrentPage(p)}
         showLabel
         showGoTo
+        goToLabel={goToLabel}
       />
     );
 
-    const goToBox = getByTestId('goToPage');
+    const goToBox = getByLabelText(goToLabel);
 
     setPage(goToBox, -1);
     expect(currentPage).toBe(1);

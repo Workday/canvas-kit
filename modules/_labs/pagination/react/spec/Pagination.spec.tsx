@@ -7,7 +7,7 @@ describe('Pagination Component', () => {
   it(`Test pagination label shows up`, () => {
     const currentPage = 2;
 
-    const {getByTestId} = render(
+    const {getByText} = render(
       <Pagination
         total={100}
         pageSize={10}
@@ -17,13 +17,13 @@ describe('Pagination Component', () => {
       />
     );
 
-    expect(getByTestId('paginationLabel')).toHaveTextContent('11–20 of 100 items');
+    expect(getByText('11–20 of 100 items'));
   });
 
   it(`Test pagination label can have a custom data label`, () => {
     const currentPage = 2;
 
-    const {getByTestId} = render(
+    const {getByText} = render(
       <Pagination
         total={100}
         pageSize={10}
@@ -38,58 +38,69 @@ describe('Pagination Component', () => {
       />
     );
 
-    expect(getByTestId('paginationLabel')).toHaveTextContent('11–20 of 100 users');
+    expect(getByText('11–20 of 100 users'));
   });
 
   it(`Left arrow should be disabled`, () => {
     const currentPage = 1;
+    const ariaLabel = 'leftPaginationArrow';
 
-    const {getByTestId} = render(
+    const {getByLabelText} = render(
       <Pagination
         total={10}
         pageSize={1}
         currentPage={currentPage}
         onPageChange={p => null}
         showLabel
+        customAriaLabels={{previousPageAriaLabel: ariaLabel}}
       />
     );
 
-    expect(getByTestId('leftPaginationArrow')).toBeDisabled();
+    expect(getByLabelText(ariaLabel)).toBeDisabled();
   });
 
   it(`Right arrow should be disabled`, () => {
     const currentPage = 10;
+    const ariaLabel = 'rightPaginationArrow';
 
-    const {getByTestId} = render(
+    const {getByLabelText} = render(
       <Pagination
         total={10}
         pageSize={1}
         currentPage={currentPage}
         onPageChange={p => null}
         showLabel
+        customAriaLabels={{nextPageAriaLabel: ariaLabel}}
       />
     );
 
-    expect(getByTestId('rightPaginationArrow')).toBeDisabled();
+    expect(getByLabelText(ariaLabel)).toBeDisabled();
   });
 
   it(`label should not display`, () => {
     const currentPage = 2;
 
-    const {queryByTestId} = render(
+    const {queryByText} = render(
       <Pagination total={100} pageSize={10} currentPage={currentPage} onPageChange={p => null} />
     );
 
-    expect(queryByTestId('paginationLabel')).toBeNull();
+    expect(queryByText('11–20 of 100 items')).toBeNull();
   });
 
   it(`GoTo should not display`, () => {
     const currentPage = 2;
+    const goToLabel = 'goToPage';
 
-    const {queryByTestId} = render(
-      <Pagination total={100} pageSize={10} currentPage={currentPage} onPageChange={p => null} />
+    const {queryByText} = render(
+      <Pagination
+        total={100}
+        pageSize={10}
+        currentPage={currentPage}
+        onPageChange={p => null}
+        goToLabel={goToLabel}
+      />
     );
 
-    expect(queryByTestId('goToPage')).toBeNull();
+    expect(queryByText(goToLabel)).toBeNull();
   });
 });
