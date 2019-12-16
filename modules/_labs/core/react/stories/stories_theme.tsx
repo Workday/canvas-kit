@@ -4,8 +4,14 @@ import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-
-import {CanvasTheme, CanvasThemePalette, useTheme} from '../index';
+import CanvasProvider from '../lib/CanvasProvider';
+import {
+  CanvasTheme,
+  CanvasThemePalette,
+  Themeable,
+  createCanvasTheme,
+  useTheme,
+} from '../lib/theming';
 import README from '../lib/theming/README.md';
 import {H1, colors, type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 
@@ -54,6 +60,22 @@ const PaletteTitle = styled(Swatch)(
   })
 );
 
+const customTheme = createCanvasTheme({
+  palette: {
+    primary: {
+      main: colors.greenApple400,
+    },
+  },
+});
+const ThemedComponent = styled('h1')<Themeable>(({theme}) => ({
+  ...type.h3,
+  background: theme.palette.primary.main,
+  color: theme.palette.primary.contrast,
+  borderRadius: borderRadius.m,
+  padding: spacing.xs,
+  display: 'inline-block',
+}));
+
 const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
   return (
     <Component bg={color} contrast={contrast} key={`${name}-${color}`}>
@@ -90,6 +112,11 @@ const ThemeDemo = (props: any) => {
           );
         })}
       </Palettes>
+      <hr style={{margin: '80px 0'}} />
+      <H1>Custom Theme</H1>
+      <CanvasProvider theme={customTheme}>
+        <ThemedComponent>Themed Component</ThemedComponent>
+      </CanvasProvider>
     </div>
   );
 };
