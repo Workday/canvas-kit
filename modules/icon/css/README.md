@@ -253,7 +253,7 @@ Default: `24`
 ## Default Options
 
 ```js
-initializeIcons((iconPath = null), (selector = '.wdc-icon'));
+initializeIcons((iconPath = null), (selector = '.wdc-icon'), iconRoot = document);
 ```
 
 ## Icon Path
@@ -284,6 +284,15 @@ selector when injecting.
 
 ```js
 initializeIcons(null, '.wdc-custom-icon');
+```
+
+## Scope Icon Injection
+
+Pass a DOM Element to scope where to look for icons. You can use this to narrow the search instead of looking
+at the whole document or to target a shadowDOM
+
+```js
+initializeIcons(null, '.wdc-icon', myElement);
 ```
 
 # Canvas Kit CSS Icon List
