@@ -7,24 +7,32 @@ import styled from '@emotion/styled';
 
 export interface CanvasProviderProps {
   theme: CanvasTheme;
+  provideInputProvider: boolean;
 }
 
 const DirectionContainer = styled('bdo')<{dir: ContentDirection}>(({dir}) => ({
-  direction: dir,
+  direction: dir
 }));
 
-export default class CanvasProvider extends React.Component<CanvasProviderProps> {
+export default class CanvasProvider extends React.Component<
+  CanvasProviderProps
+> {
   static defaultProps = {
     theme: defaultCanvasTheme,
+    provideInputProvider: true
   };
 
   render() {
-    const {children, theme} = this.props;
+    const {children, theme, provideInputProvider} = this.props;
 
     return (
       <ThemeProvider theme={theme}>
         <DirectionContainer dir={theme.direction}>
-          <InputProvider>{children}</InputProvider>
+          {provideInputProvider ? (
+            <InputProvider>{children}</InputProvider>
+          ) : (
+            children
+          )}
         </DirectionContainer>
       </ThemeProvider>
     );

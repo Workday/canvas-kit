@@ -4,6 +4,7 @@ import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
+import {CanvasProvider} from '@workday/canvas-kit-labs-react-core';
 
 import {
   activityStreamIcon,
@@ -62,12 +63,14 @@ export class ToggleIconButtonWrapper extends React.Component<
 
   public render() {
     return (
+      // <CanvasProvider provideInputProvider={false}>
       <IconButton
         {...commonIconButtonProps}
         toggled={this.state.isToggled}
         variant={this.props.variant}
         onClick={this.handleToggle}
       />
+      // </CanvasProvider>
     );
   }
 
@@ -108,6 +111,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
   .add('Circle', () => (
     <div className="story">
       <h3>Medium Default</h3>
+
       <IconButton
         {...commonIconButtonProps}
         variant={IconButton.Variant.Circle}

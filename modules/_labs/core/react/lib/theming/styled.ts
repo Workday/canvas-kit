@@ -1,4 +1,9 @@
-import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '@emotion/styled';
+import {
+  default as emotionStyled,
+  CreateStyled,
+  Interpolation,
+  CSSObject
+} from '@emotion/styled';
 import {CanvasTheme, ContentDirection, useTheme} from './';
 import rtlCSSJS from 'rtl-css-js';
 
@@ -10,7 +15,9 @@ type Interpolations = Array<any>;
 function styled<Props>(node: any) {
   return (...args: Interpolation<Props>[]) => {
     const newArgs: Interpolations = args.map(
-      interpolation => (props: Props & {theme: CanvasTheme; direction: ContentDirection}) => {
+      interpolation => (
+        props: Props & {theme: CanvasTheme; direction: ContentDirection}
+      ) => {
         props.theme = useTheme(props.theme);
         const direction = props.theme.direction;
         const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;

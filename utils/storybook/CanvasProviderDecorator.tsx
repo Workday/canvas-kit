@@ -5,11 +5,21 @@ import {
   createCanvasTheme,
 } from '@workday/canvas-kit-labs-react-core';
 import {object} from '@storybook/addon-knobs';
+import {makeDecorator} from '@storybook/addons';
 
 const label = 'theme';
 
-export default (storyFn: () => React.ReactNode) => (
-  <CanvasProvider theme={createCanvasTheme(object(label, defaultCanvasTheme))}>
-    {storyFn()}
-  </CanvasProvider>
-);
+export default makeDecorator({
+  name: 'withCanvasProviderDecorator',
+  parameterName: 'canvasProviderDecorator',
+  wrapper: (storyFn, context, {parameters}) => {
+    return (
+      <CanvasProvider
+        provideInputProvider={parameters ? parameters.disabled : undefined}
+        theme={createCanvasTheme(object(label, defaultCanvasTheme))}
+      >
+        {storyFn(context)}
+      </CanvasProvider>
+    );
+  },
+});
