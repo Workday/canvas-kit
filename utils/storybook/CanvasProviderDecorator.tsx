@@ -15,7 +15,7 @@ export default makeDecorator({
   wrapper: (storyFn, context, {parameters}) => {
     return (
       <CanvasProvider
-        includeInputProvider={parameters ? parameters.disabled : undefined}
+        provideInputProvider={parameters ? parameters.disabled : undefined}
         theme={createCanvasTheme(object(label, defaultCanvasTheme))}
       >
         {storyFn(context)}
