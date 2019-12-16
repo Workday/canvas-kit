@@ -63,14 +63,12 @@ export class ToggleIconButtonWrapper extends React.Component<
 
   public render() {
     return (
-      // <CanvasProvider provideInputProvider={false}>
       <IconButton
         {...commonIconButtonProps}
         toggled={this.state.isToggled}
         variant={this.props.variant}
         onClick={this.handleToggle}
       />
-      // </CanvasProvider>
     );
   }
 
