@@ -31,7 +31,7 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 - [Documentation](#documentation)
   - [Readmes](#readmes)
   - [Storybook Structure](#storybook-structure)
-  - [Prop Descriptions](#prop-description)
+  - [Prop Descriptions](#prop-descriptions)
 
 ## Canvas
 
