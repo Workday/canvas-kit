@@ -1,4 +1,4 @@
-import {queryByTestId, render} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import * as React from 'react';
 
 import Pagination from '..';

@@ -3,7 +3,7 @@ import {type} from '@workday/canvas-kit-labs-react-core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas from '@workday/canvas-kit-react-core';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import React, {useState} from 'react';
+import React from 'react';
 
 import GoTo from './GoTo';
 import Pages from './Pages';
@@ -12,6 +12,7 @@ import {
   PaginationAriaLabels,
   PaginationAriaLabelsDefault,
 } from './PaginationAriaLabels';
+import useIsMobile from './useIsMobile';
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   total: number;
@@ -62,8 +63,6 @@ const Pagination: React.FC<PaginationProps> = props => {
     ...elemProps
   } = props;
 
-  const [mobile, setMobile] = useState(false);
-
   const numPages = Math.ceil(total / pageSize);
 
   const labelFrom = (currentPage - 1) * pageSize + 1;
@@ -76,17 +75,7 @@ const Pagination: React.FC<PaginationProps> = props => {
     : `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
 
   const wrapperRef = React.createRef<HTMLElement>();
-
-  React.useEffect(() => {
-    const container = wrapperRef.current as HTMLElement;
-    setMobile((container.clientWidth || window.innerWidth) < 500);
-
-    const handleWindowSizeChange = () => {
-      setMobile((container.clientWidth || window.innerWidth) < 500);
-    };
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => window.removeEventListener('resize', handleWindowSizeChange);
-  }, [wrapperRef.current]);
+  const mobile = useIsMobile(wrapperRef);
 
   const ariaLabels: PaginationAriaLabelsDefault = {
     ...defaultAriaLabels,
