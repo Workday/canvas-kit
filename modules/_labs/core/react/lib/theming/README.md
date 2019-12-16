@@ -100,6 +100,7 @@ export const defaultCanvasTheme: CanvasTheme = {
     between,
     only,
   },
+  direction: ContentDirection.LTR,
 };
 ```
 
@@ -108,8 +109,9 @@ own use cases.
 
 ## Custom Theme
 
-The `CanvasProvider` accepts a full or partial theme object to give a branded look to the component
-library. Pass your theme into `createCanvasTheme` and use the return value for the `theme` prop.
+The `CanvasProvider` accepts a full or partial theme object to give a branded look or a different
+direction to the component library. Pass your theme into `createCanvasTheme` and use the return
+value for the `theme` prop.
 
 If you only set a `main` color, the rest of the respective palette will be automatically generated
 (note text `contrast` color will always return white if not specified).
@@ -136,17 +138,40 @@ const theme: PartialCanvasTheme = {
 </CanvasProvider>;
 ```
 
-### Nesting Theme Providers
+### Bidirectionality
+
+The `CanvasProvider` also provides support for bidirectionality, useful for RTL languages. The direction, part of the theme, is set using `ContentDirection.LTR` or  `ContentDirection.RTL`.
+
+You can nest `CanvasProvider` if you need to set a different direction for some components in your React tree (See below: Nesting CanvasProvider components).
+
+`CanvasProvider` wraps your components with a `bdo` element that has the `dir` attribute set to the value of the theme direction. Styled components using the [Canvas `styled` function](https://github.com/Workday/canvas-kit/blob/master/modules/_labs/core/react/lib/theming/styled.ts) will have their styles automatically flipped if dictated by the closest theme object.
+
+```tsx
+import {
+  CanvasProvider,
+  createCanvasTheme,
+  ContentDirection,
+} from '@workday/canvas-kit-labs-react-core';
+
+<CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
+  {/* Your app with Canvas components */}
+</CanvasProvider>;
+```
+
+### Nesting CanvasProvider components
 
 It is possible to set a theme for a specific component or set of components within your React tree.
 This is generally discouraged for consistency reasons, but may be required in some contexts (a green
-`Switch` component for example). To do this, you must use Emotion's `ThemeProvider` component. The
-inner theme will override the outer theme.
+`Switch` component for example, or changing the direction of a set of components). To do this, you can nest CanvasProvider components with a different theme.
 
 ```tsx
 import * as React from 'react';
-import {ThemeProvider} from 'emotion-theming';
-import {CanvasProvider, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
+import {
+  CanvasProvider,
+  createCanvasTheme,
+  PartialCanvasTheme,
+  ContentDirection,
+} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '@workday/canvas-kit-react-switch';
 
 const theme: PartialCanvasTheme = {
@@ -155,13 +180,15 @@ const theme: PartialCanvasTheme = {
       main: colors.greenApple400,
     },
   },
+  direction: ContentDirection.LTR
 };
 
-<CanvasProvider>
+<CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
   {/* All your components containing any Canvas components */}
-  <ThemeProvider theme={createCanvasTheme(theme)}>
+  <CanvasProvider theme={createCanvasTheme(theme)}>
     <Switch checked={true} />
-  </ThemeProvider>
+    {/* Content that should be LTR */}
+  </CanvasProvider>
 </CanvasProvider>;
 ```
 

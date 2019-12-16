@@ -106,6 +106,7 @@
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-node-resolve": "^5.1.0",
     "rollup-plugin-terser": "^5.0.0",
+    "rtl-css-js": "^1.13.1",
     "sass-loader": "^8.0.0",
     "storybook-chromatic": "^3.1.0",
     "storybook-readme": "^5.0.8",
