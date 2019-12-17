@@ -10,12 +10,12 @@ import {makeDecorator} from '@storybook/addons';
 const label = 'theme';
 
 export default makeDecorator({
-  name: 'withCanvasProviderDecorator',
+  name: 'canvasProviderDecorator',
   parameterName: 'canvasProviderDecorator',
   wrapper: (storyFn, context, {parameters}) => {
     return (
       <CanvasProvider
-        includeInputProvider={parameters ? parameters.disabled : undefined}
+        disableInputProvider={parameters ? parameters.disableInputProvider : undefined}
         theme={createCanvasTheme(object(label, defaultCanvasTheme))}
       >
         {storyFn(context)}
