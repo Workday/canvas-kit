@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
+import {convertToStaticStates} from '@workday/canvas-kit-react-common';
 import {
   ButtonSize,
   DeprecatedButtonVariant,
@@ -16,23 +17,25 @@ import {getBaseButton, getButtonSize, getButtonStyle} from './utils';
 export const ButtonBaseCon = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<ButtonProps>(
-  /* istanbul ignore next line for coverage */
-  ({variant, size}) => {
-    if (variant === undefined) {
-      return {};
-    }
+  convertToStaticStates(
+    /* istanbul ignore next line for coverage */
+    ({variant, size}) => {
+      if (variant === undefined) {
+        return {};
+      }
 
-    const baseButton = getBaseButton(variant);
-    const buttonStyles = getButtonStyle(baseButton, variant);
-    const sizeStyles = size !== undefined ? getButtonSize(baseButton, size) : {};
+      const baseButton = getBaseButton(variant);
+      const buttonStyles = getButtonStyle(baseButton, variant);
+      const sizeStyles = size !== undefined ? getButtonSize(baseButton, size) : {};
 
-    return {
-      ...baseButton.styles,
-      ...buttonStyles,
-      ...sizeStyles,
-    };
-  },
-  ({grow}) => grow && {width: '100%', maxWidth: '100%'}
+      return {
+        ...baseButton.styles,
+        ...buttonStyles,
+        ...sizeStyles,
+      };
+    },
+    ({grow}) => grow && {width: '100%', maxWidth: '100%'}
+  )
 );
 
 export const ButtonBaseLabel = styled('span', {

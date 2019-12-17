@@ -43,66 +43,14 @@ storiesOf('Components|Buttons/Button/React', module)
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.Primary}>
-        Primary
-      </Button>
-      <Button size={Button.Size.Large} variant={Button.Variant.Primary} icon={activityStreamIcon}>
-        Primary
-      </Button>
       <Button
         size={Button.Size.Large}
         variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
+        shouldChangeStyleToStaticStates={true}
+        className="focus"
       >
         Primary
       </Button>
-      <Button
-        disabled={true}
-        size={Button.Size.Large}
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Primary
-      </Button>
-      <h3>Medium Primary</h3>
-      <Button size={Button.Size.Medium} variant={Button.Variant.Primary}>
-        Primary
-      </Button>
-      <Button size={Button.Size.Medium} variant={Button.Variant.Primary} icon={editIcon}>
-        Primary
-      </Button>
-      <Button
-        size={Button.Size.Medium}
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Primary
-      </Button>
-      <Button
-        disabled={true}
-        size={Button.Size.Medium}
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Primary
-      </Button>
-      <h3>Small Primary</h3>
-      <Button size={Button.Size.Small} variant={Button.Variant.Primary}>
-        Primary
-      </Button>
-      <Button disabled={true} size={Button.Size.Small} variant={Button.Variant.Primary}>
-        Primary
-      </Button>
-      <h3>Growing Primary</h3>
-      <div css={buttonContainer}>
-        <Button size={Button.Size.Large} variant={Button.Variant.Primary} grow={true}>
-          Primary
-        </Button>
-      </div>
     </div>
   ))
   .add('Secondary', () => (
