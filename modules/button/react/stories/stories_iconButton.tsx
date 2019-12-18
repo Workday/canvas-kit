@@ -105,9 +105,6 @@ export class IconButtonToggleGroupWrapper extends React.Component<
 storiesOf('Components|Buttons/Button/React/Icon Button', module)
   .addParameters({
     component: IconButton,
-    canvasProviderDecorator: {
-      disableInputProvider: true,
-    },
   })
   .addDecorator(withReadme(README))
   .add('Circle', () => (
