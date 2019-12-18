@@ -7,15 +7,15 @@ import {SpanProps} from './types';
 
 export interface SystemIconStyles {
   /**
-   * `.wd-icon-accent` color. This will override `color`
+   * The `.wd-icon-accent` color. This will override `color`.
    */
   accent?: string;
   /**
-   * `.wd-icon-accent` color on hover. This will override `colorHover`
+   * The `.wd-icon-accent` color on hover. This will override `colorHover`.
    */
   accentHover?: string;
   /**
-   * `.wd-icon-background` color
+   * The `.wd-icon-background` color.
    * @default transparent
    */
   background?: string;

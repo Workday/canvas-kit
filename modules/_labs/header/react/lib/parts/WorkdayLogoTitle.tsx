@@ -7,17 +7,17 @@ import chroma from 'chroma-js';
 
 export type WorkdayLogoTitleProps = {
   /**
-   * A HeaderTheme enum indicating which theme to use (White, Blue or Transparent)
+   * A HeaderTheme enum indicating which theme to use (White, Blue or Transparent).
    * @default HeaderTheme.White
    */
   themeColor: HeaderTheme;
   /**
-   * The title to display in the header. Not used if `brand` is provided
+   * The title to display in the header. This is not used if `brand` is provided.
    * @default ''
    */
   title?: string;
   /**
-   * Specifies the variation of the header.
+   * The variation of the header.
    */
   variant?: HeaderVariant;
 };

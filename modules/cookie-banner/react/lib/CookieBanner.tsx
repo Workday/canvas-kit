@@ -7,7 +7,7 @@ import Button from '@workday/canvas-kit-react-button';
 
 export interface CookieBannerProps {
   /**
-   * Whether or not the banner is closed.
+   * If true, the banner is closed.
    * @default false
    */
   isClosed?: boolean;
@@ -26,12 +26,14 @@ export interface CookieBannerProps {
   onClickSettings?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 
   /**
-   * Custom cookie notice text or element to display.
+   * The custom cookie notice text or element to display.
+   * @default CookieBanner.DefaultNotice
    */
   notice: string | React.ReactNode;
 
   /**
-   * Default label for cookie settings.
+   * The label for cookie settings.
+   * @default Cookie Settings
    */
   settingsLabel: string;
 }

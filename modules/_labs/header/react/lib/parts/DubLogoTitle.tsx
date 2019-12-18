@@ -12,11 +12,11 @@ export type DubTitleProps = {
    */
   themeColor: HeaderTheme;
   /**
-   * The title to display in the header. Not used if `brand` is provided
+   * The title to display in the header. This is not used if `brand` is provided.
    */
   title?: string;
   /**
-   * The background color/gradient to be used behind the logo
+   * The background color/gradient behind the logo
    */
   bgColor?: string;
 };

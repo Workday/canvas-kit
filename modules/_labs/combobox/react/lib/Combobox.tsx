@@ -12,24 +12,25 @@ import uuid from 'uuid/v4';
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
-   * The TextInput component to wrap.
+   * The TextInput component to wrap
    */
   children: React.ReactElement<TextInputProps>;
   /**
-   * Initial value to set the input to
+   * Sets the initial value of the input.
    */
   initialValue?: string;
   /**
-   * The type of icon button to use for clearing input
+   * The type of icon button to use for clearing input.
    * @default IconButton.Variant.Plain
    */
   clearButtonVariant: IconButtonVariant;
   /**
-   * Show button to clear input field
+   * If true, shows button to clear input field.
+   * @default false
    */
   showClearButton?: boolean;
   /**
-   * Aria Label for clear button
+   * Aria Label for the clear button
    * @default Reset Search Input
    */
   clearButtonLabel: string;
@@ -50,7 +51,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   onBlur?: React.FocusEventHandler;
   /**
-   * The id of the form field.
+   * The id of the form field
    */
   labelId?: string;
 }

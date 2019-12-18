@@ -17,39 +17,40 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
    */
   onClick?: (event: React.SyntheticEvent) => void;
   /**
-   * The menu item content is pretty flexible and can contain any strings or JSX.
-   */
-  children?: React.ReactNode;
-  /**
    * The unique id for the menu item used for aria attributes. If the item is a child of the Menu component, this property will be generated and overridden.
    */
   id?: string;
   /**
-   * Icon to be displayed before what you supplied for the children.
+   * The icon to be displayed before what you supplied for the children.
    */
   icon?: CanvasSystemIcon;
   /**
-   * Icon to be displayed after what you supplied for the children.
+   * The icon to be displayed after what you supplied for the children.
    */
   secondaryIcon?: CanvasSystemIcon;
   /**
-   * Adds a top border on the menu item.
+   * If true, adds a top border on the menu item.
+   * @default false
    */
   hasDivider?: boolean;
   /**
-   * Allows you to disable a menu item so it is not clickable.
+   * If true, disables a menu item so it is not clickable.
+   * @default false
    */
   isDisabled?: boolean;
   /**
-   * Whether or not this is the currently selected menu item. If the item is a child of the Menu component, this property will be generated and overridden.
+   * If true, this is the currently selected menu item. If the item is a child of the Menu component, this property will be generated and overridden.
+   * @default false
    */
   isFocused?: boolean;
   /**
    * Allows you to override the role of the item, e.g. you can use this element as a option in a combobox.
+   * @default menuItem
    */
   role: string;
   /**
-   * Allows the onClose Menu callback to be fired after the menu item has been clicked.
+   * If true, allows the onClose Menu callback to be fired after the menu item has been clicked.
+   * @default true
    */
   shouldClose?: boolean;
 }

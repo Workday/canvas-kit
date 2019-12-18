@@ -4,22 +4,22 @@ import {colors, spacing, CanvasSpacingValue} from '@workday/canvas-kit-react-cor
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Adjust padding for the contents of the Drawer.
+   * The padding for the contents of the Drawer
    * @default spacing.s
    */
   padding?: CanvasSpacingValue;
   /**
-   * Determines the side in which the Drawer can open from.
+   * Determines the side in which the Drawer can open from
    * @default DrawerDirection.Right
    */
   openDirection?: DrawerDirection;
   /**
-   * Sets the width of the Drawer.
+   * Sets the width of the Drawer
    * @default 360px
    */
   width?: number;
   /**
-   * Allows to either show or hide a drop shadow on the Drawer.
+   * If true, shows a drop shadow on the Drawer.
    * @default false
    */
   showDropShadow?: boolean;
@@ -28,15 +28,15 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   header?: React.ReactElement;
   /**
-   * Use when there's a header for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element
+   * Use when there's a header for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element.
    */
   'aria-labelledby'?: string;
   /**
-   * Use when there is NO `header` for accessibility
+   * Use when there is NO `header` for accessibility.
    */
   'aria-label'?: string;
   /**
-   * Optional role for the drawer. If this attribute is used, also provide an `aria-labelledby` attribute to link the `header` element to this role
+   * If this attribute is used, also provide an `aria-labelledby` attribute to link the `header` element to this role.
    */
   role?: string;
 }

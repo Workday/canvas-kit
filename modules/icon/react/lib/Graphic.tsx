@@ -6,17 +6,17 @@ import {SpanProps} from './types';
 
 export interface GraphicStyles {
   /**
-   *  Graphic width in `px`. `width` takes precedence over `height` in order to preserve the graphic's
+   *  The graphic width in `px`. `width` takes precedence over `height` in order to preserve the graphic's
    * @default width of graphic
    */
   width?: number | string;
   /**
-   * Graphic height in `px`. If set, `width` will be set to `100%`
+   * The graphic height in `px`. If set, `width` will be set to `100%`.
    * @default height of graphic
    */
   height?: number | string;
   /**
-   * Expand graphic to fit container. `grow` takes precedence over both `width` and `height`.
+   * If true, expands graphic to fit container. `grow` takes precedence over both `width` and `height`.
    * @default false
    */
   grow?: boolean;
@@ -24,7 +24,7 @@ export interface GraphicStyles {
 
 export interface GraphicProps extends GraphicStyles {
   /**
-   * Graphic to display from `@workday/canvas-graphics-web`
+   * The graphic to display from `@workday/canvas-graphics-web`.
    */
   src: CanvasGraphic;
 }

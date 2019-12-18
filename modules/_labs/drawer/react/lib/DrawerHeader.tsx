@@ -7,19 +7,19 @@ import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The text of the header. Will also be applied as the `title` attribute of the header element
+   * Sets the text of the header. This text will also be applied as the `title` attribute of the header element.
    */
   headerText?: string;
   /**
-   * Callback to handle closing the Drawer when the user clicks the close icon in the header
+   * Callback to handle closing the Drawer when the user clicks the close icon in the header.
    */
   onClose: IconButtonProps['onClick'];
   /**
-   * Add an `aria-label` to the close icon button. Default 'Close'. Useful for i18n
+   * Add an `aria-label` to the close icon button. Default 'Close'. Useful for i18n.
    */
   closeIconLabel: string;
   /**
-   * The background color in which the Drawer header will be
+   * Sets the background color for the Drawer header.
    */
   headerColor: CanvasColor | string;
   /**

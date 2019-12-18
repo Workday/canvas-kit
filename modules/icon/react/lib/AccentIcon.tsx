@@ -12,7 +12,7 @@ export interface AccentIconStyles {
    */
   color?: string;
   /**
-   * Toggle for transparent accent icon background. If false, the background fill will be white.
+   * If true, the background will be transparent. If false, the background fill will be white.
    */
   transparent?: boolean;
 }

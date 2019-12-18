@@ -12,25 +12,25 @@ export enum BannerVariant {
 
 export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Action when interacting with the banner
+   * Action when interacting with the banner.
    */
   onClick?: (e: React.SyntheticEvent) => void;
   /**
-   * Label of the banner
+   * The label of the banner
    */
   label?: React.ReactNode;
   /**
-   * Set the banner variant as `full` or `sticky`
+   * Sets the banner variant as `full` or `sticky`.
    * @default BannerVariant.Full
    */
   variant?: BannerVariant;
   /**
-   * Set the banner type as `alert` or `error`
+   * Sets the banner type as `alert` or `error`.
    * @default ErrorType.Alert
    */
   error?: ErrorType;
   /**
-   * Set the action text in the `full` variant
+   * Set the action text in the `full` variant.
    * @default Avatar
    */
   actionText?: string;
