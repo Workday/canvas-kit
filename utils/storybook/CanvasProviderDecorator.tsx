@@ -12,10 +12,10 @@ const label = 'theme';
 export default makeDecorator({
   name: 'canvasProviderDecorator',
   parameterName: 'canvasProviderDecorator',
-  wrapper: (storyFn, context, {parameters}) => {
+  wrapper: (storyFn, context, {parameters = {}}) => {
     return (
       <CanvasProvider
-        disableInputProvider={parameters ? parameters.disableInputProvider : undefined}
+        disableInputProvider={parameters.disableInputProvider}
         theme={createCanvasTheme(object(label, defaultCanvasTheme))}
       >
         {storyFn(context)}
