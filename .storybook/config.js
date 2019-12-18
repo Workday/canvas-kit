@@ -39,13 +39,16 @@ const prefix = (phrase, prefix) => value => (value.indexOf(phrase) > -1 ? prefix
 const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
 
 function storySort(a, b) {
+  // console.warn('b', b);
   const prefixFn = pipe(
     prefix('welcome-', '0'),
     prefix('getting-started', '0'),
     prefix('tokens-', '1'),
-    prefix('components-', '2'),
+    prefix('components-', '3'),
+    prefix('states', '4'),
     prefix('labs-', '3')
   );
+
   const left = prefixFn(a[0]);
   const right = prefixFn(b[0]);
   return left === right ? 0 : left.localeCompare(right);
