@@ -51,6 +51,10 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    * The id of the form field.
    */
   labelId?: string;
+  /**
+   * Toggle the use of ARIA 1.0 or ARIA 1.1
+   */
+  useLegacyAriaAttributes: boolean;
 }
 
 export interface ComboboxState {
@@ -125,6 +129,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   static defaultProps = {
     clearButtonLabel: `Reset Search Input`,
     clearButtonVariant: IconButton.Variant.Plain,
+    useLegacyAriaAttributes: true,
   };
 
   state: Readonly<ComboboxState> = {
@@ -308,8 +313,33 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     this.setState({value: event.target.value});
   };
 
-  isValidSingleChild = (child: React.ReactNode) =>
-    React.isValidElement(child) && React.Children.only(child);
+  isValidSingleChild = (child: React.ReactNode) => {
+    return React.isValidElement(child) && React.Children.only(child);
+  };
+
+  getInputAriaAttributes = (): React.InputHTMLAttributes<HTMLInputElement> => {
+    const legacyAttributes = {
+      role: 'combobox',
+      'aria-owns': `${this.props.id}-${listBoxIdPart}`,
+      'aria-haspopup': true,
+      'aria-expanded': this.state.showingAutocomplete,
+    };
+    const modernAttributes = {
+      'aria-controls': `${this.props.id}-${listBoxIdPart}`,
+    };
+    return this.props.useLegacyAriaAttributes ? legacyAttributes : modernAttributes;
+  };
+
+  getContainerAriaAttributes = (): React.HTMLAttributes<HTMLDivElement> => {
+    const legacyAttributes = {};
+    const modernAttributes: React.HTMLAttributes<HTMLDivElement> = {
+      role: 'combobox',
+      'aria-haspopup': 'listbox',
+      'aria-owns': `${this.props.id}-${listBoxIdPart}`,
+      'aria-expanded': this.state.showingAutocomplete,
+    };
+    return this.props.useLegacyAriaAttributes ? legacyAttributes : modernAttributes;
+  };
 
   renderChildren = (child: React.ReactElement<TextInputProps>): React.ReactNode => {
     if (!this.isValidSingleChild(child)) {
@@ -331,7 +361,6 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         value: this.state.value,
         inputRef: this.inputRef,
         'aria-autocomplete': 'list',
-        'aria-controls': `${this.props.id}-${listBoxIdPart}`,
         'aria-activedescendant':
           this.state.selectedAutocompleteIndex != null
             ? getOptionId(this.props.id, this.state.selectedAutocompleteIndex)
@@ -341,6 +370,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         onFocus: this.handleFocus,
         onBlur: this.handleBlur,
         css: cssOverride,
+        ...this.getInputAriaAttributes(),
       };
       const cloneElement = (element: React.ReactElement<TextInputProps>, props: TextInputProps) =>
         jsx(element.type, {
@@ -364,18 +394,12 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
       onBlur,
       showClearButton,
       labelId,
+      useLegacyAriaAttributes,
       ...elemProps
     } = this.props;
 
     return (
-      <Container
-        role="combobox"
-        aria-haspopup="listbox"
-        aria-owns={`${id}-${listBoxIdPart}`}
-        aria-expanded={this.state.showingAutocomplete}
-        grow={grow}
-        {...elemProps}
-      >
+      <Container grow={grow} {...this.getContainerAriaAttributes()} {...elemProps}>
         <Status role="status" aria-live="polite">
           {autocompleteItems
             ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length)

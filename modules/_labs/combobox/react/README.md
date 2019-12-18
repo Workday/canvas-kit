@@ -5,7 +5,12 @@
 </a>  This component is work in progress and currently in pre-release.
 
 A specialized input wrapper that adds an autocomplete list. Based on W3 spec for
-[List Autocomplete with Manual Selection](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html)
+[List Autocomplete with Manual Selection Aria 1.1](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html)
+and
+[List Autocomplete with Manual Selection Aria 1.0](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.0pattern/combobox-autocomplete-list.html)
+
+See here for
+[differences between ARIA 1.0 and 1.1](https://www.levelaccess.com/differences-aria-1-0-1-1-changes-rolecombobox/)
 
 For a full suite of examples, have a look at the [Combobox Stories](./stories.tsx).
 
@@ -102,3 +107,12 @@ Default: `'Reset Search Input'`
 #### `onBlur: React.FocusEventHandler`
 
 > Callback to listen when the TextInput blurs.
+
+---
+
+#### `useLegacyAriaAttributes: boolean`
+
+> Toggle whether to use legacy ARIA 1.0, or the newer ARIA 1.1 spec. Many screenreader browser
+> combinations have shortcomings with ARIA 1.1 so it is defaulted to use 1.0
+
+Default: `true`
