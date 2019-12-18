@@ -7,38 +7,38 @@ export interface TextAreaProps
   extends GrowthBehavior,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * Whether or not the text area is disabled.
+   * If true, disable the TextArea.
    * @default false
    */
   disabled?: boolean;
   /**
-   * The type of error to display, if any.
+   * The type of error associated with the TextArea (if applicable).
    */
   error?: ErrorType;
   /**
-   * The ref callback for the inner text area element.
+   * The ref to the inner textarea element.
    */
   inputRef?: React.Ref<HTMLTextAreaElement>;
   /**
-   * The callback fired when the value is changed.
+   * The function called when the TextArea state changes.
    */
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
   /**
-   * Placeholder text to be displayed if there is no input value.
+   * The placeholder text of the TextArea.
    */
   placeholder?: string;
   /**
-   * If true, user will be unable to interact with the field.
+   * If true, set the TextArea to read-only. The user will be unable to interact with the TextArea.
    * @default false
    */
   readOnly?: boolean;
   /**
-   * Set resize constraints on the text area
+   * The resize constraints of the TextArea.
    * @default TextArea.ResizeDirection.Both
    */
   resize: TextAreaResizeDirection;
   /**
-   * Text Area value
+   * The value of the TextArea.
    */
   value?: any;
 }

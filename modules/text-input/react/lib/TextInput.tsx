@@ -7,13 +7,11 @@ export interface TextInputProps
   extends GrowthBehavior,
     React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   *  The type of error to display, if any.
-   * @default undefined
+   * The type of error associated with the TextInput (if applicable).
    */
   error?: ErrorType;
   /**
-   * The ref callback for the inner input element.
-   * @default undefined
+   * The ref to the inner text input element.
    */
   inputRef?: React.Ref<HTMLInputElement>;
 }

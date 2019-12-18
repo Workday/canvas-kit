@@ -9,43 +9,42 @@ import uuid from 'uuid/v4';
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
   /**
-   * The Postiion of the FormField Label (Top vs Left vs Hidden)
+   * The position of the FormField label.
+   * @default FormField.LabelPosition.Top
    */
   labelPosition: FormFieldLabelPosition;
   /**
-   * The label text displayed for the input.
+   * The text of the FormField label.
    */
   label?: React.ReactNode;
   /**
-   * The message displayed below the input field. Required if `error` is defined.
-   * @default undefined
+   * The text of the message displayed below the input component. This is required if `error` is defined.
    */
   hintText?: React.ReactNode;
   /**
-   * The ID of message displayed below the input field. Required for accessibile aria-definedby attribute. Required if `error` and `hintText` are defined.
+   * The HTML `id` of the message displayed below the input component. This is required for the `aria-describedby` accessibility attribute if `error` and `hintText` are defined.
    */
   hintId?: string;
   /**
-   * The ID of the input child. If an ID is not specified on the input child, this will be used as it's ID. Used for label's `htmlFor` attribute. This is required for accessiblity if `label` is defined.
+   * The HTML `id` of the input component. If an `id` is not specified for the input, this will be used as it's `id`. This is referenced by the label's `htmlFor` attribute. This is required for accessiblity if `label` is defined.
    */
   inputId?: string;
   /**
-   * The type of error to display, if any. This prop will be passed to the input component if applicable.
-   * @default undefined
+   * The type of error associated with the FormField (if applicable). This is passed to the input component.
    */
   error?: ErrorType;
   /**
-   * It set, the label of the field will be suffixed by a red astrisk.
+   * If true, style the FormField label to indicate that it is required.
    * @default false
    */
   required?: boolean;
   /**
-   * If true, FormField uses a `fieldset` and a `legend` element instead of a div and a label. This is required for accessibility on radio groups. If you're using a `RadioGroup` inside of FormField, make sure you set this to true.
+   * If true, render the FormField using a `fieldset` and a `legend` instead of a `div` and a `label`. This must be set to `true` if you're using a Radio Group inside of a FormField (for accessibility reasons).
    * @default false
    */
   useFieldset: boolean;
   /**
-   * The input component to wrap.
+   * The input component wrapped by the FormField.
    */
   children: React.ReactNode;
 }

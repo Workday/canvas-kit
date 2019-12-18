@@ -5,8 +5,7 @@ import {spacing, type} from '@workday/canvas-kit-react-core';
 
 export interface HintProps extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * The ErrorType for the hint (Error vs Alert)
-   * @default undefined
+   * The type of error associated with the Hint (if applicable).
    */
   error?: ErrorType;
 }

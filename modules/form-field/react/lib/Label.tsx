@@ -6,27 +6,32 @@ import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
 export interface LabelProps extends FormFieldLabelPositionBehavior {
   /**
-   * Position of the Label
+   * The position of the Label.
+   * @default Label.Position.Top
    */
   labelPosition: FormFieldLabelPosition;
   /**
-   * If the label should be styled as a legend
+   * If true, style the Label as a legend.
+   * @default false
    */
   isLegend: boolean;
   /**
-   * The id of a labelable form-related element. Synonymous of "for"
+   * The id of a labelable form-related element. Synonymous with `for`.
    */
   htmlFor?: string;
   /**
-   * If the Label should have asterisk to indicated that it is required
+   * If true, style the Label to indicate that it is required.
+   * @default false
    */
   required?: boolean;
   /**
-   * Title of the required Label
+   * The title of the required label.
+   * @default required
    */
   requiredLabel: string;
   /**
-   * If true, the `accessibleHide` style is applied to the label
+   * If true, apply the `accessibleHide` styles to the Label.
+   * @default false
    */
   accessibleHide?: boolean;
 }

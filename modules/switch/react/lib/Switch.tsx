@@ -6,34 +6,33 @@ import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas
 
 export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * Whether or not the switch is on (`true`) or off (`false`)
+   * If true, turn the Switch on.
    * @default false
    */
   checked: boolean;
   /**
-   * Whether or not the switch is disabled (not able to be switched on or off)
+   * If true, disable the Switch.
    * @default false
    */
   disabled?: boolean;
   /**
-   * The HTML attribute `id` for the underlying input checkbox component.
+   * The HTML `id` of the underlying checkbox input element.
    */
   id?: string;
   /**
-   * A callback that gets called everytime the switch checked state changes.
+   * The function called when the Switch state changes.
    */
   onChange?: (e: React.SyntheticEvent) => void;
   /**
-   * The `value` attribute of the input checkbox.
+   * The value of the Switch.
    */
   value?: string;
   /**
-   * A ref to the underlying input checkbox element. Use this to imperatively switch or focus this component.
+   * The ref to the underlying checkbox input element. Use this to imperatively switch or focus the Switch.
    */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
-   * The type of error to display, if any.
-   * @default undefined
+   * The type of error associated with the Switch (if applicable).
    */
   error?: ErrorType;
 }

@@ -14,41 +14,43 @@ import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * Whether or not the checkbox is checked (`true`) or not checked (`false`)
+   * If true, check the Checkbox.
    * @default false
    */
   checked: boolean;
   /**
-   * Whether or not the checkbox is disabled (`true`) or not checked (`false`)
+   * If true, disable the Checkbox.
+   * @default false
    */
   disabled?: boolean;
   /**
-   * The HTML attribute `id` for the underlying input checkbox and label component. This is required if `label` is defined.
+   * The HTML `id` of the underlying checkbox input element. This is required if `label` is defined as a non-empty string.
    */
   id?: string;
   /**
-   * A ref to the underlying input checkbox element. Use this to imperatively check or focus this component.
+   * The ref to the underlying checkbox input element. Use this to imperatively check or focus the Checkbox.
    */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
-   * The content of the label associated to the input checkbox component.
+   * The text of the Checkbox label.
    * @default ''
    */
   label?: string;
   /**
-   * A callback that gets called everytime the checkbox state changes.
+   * The function called when the Checkbox state changes.
    */
   onChange?: (e: React.SyntheticEvent) => void;
   /**
-   * The `value` attribute of the input checkbox.
+   * The value of the Checkbox.
    */
   value?: string;
   /**
-   * The type of error to display, if any.
+   * The type of error associated with the Checkbox (if applicable).
    */
   error?: ErrorType;
   /**
-   * Used on a checkbox with nested child checkboxes to denote that some, but not all, child checkboxes are selected.
+   * If true, set the Checkbox to an indeterminate state. Use this on a Checkbox with nested child Checkboxes to denote that some (but not all) child Checkboxes are checked.
+   * @default false
    */
   indeterminate?: boolean;
 }

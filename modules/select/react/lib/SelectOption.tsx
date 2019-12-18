@@ -6,15 +6,15 @@ import * as React from 'react';
 
 export interface SelectOptionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
   /**
-   * The value of the SelectOption
+   * The value of the SelectOption.
    */
   value?: string;
   /**
-   * The label of the SelectOption
+   * The text of the SelectOption label.
    */
   label?: string;
   /**
-   * Whether or not the SelectOption is disabled
+   * If true, disable the SelectOption.
    * @default false
    */
   disabled: boolean;

@@ -6,12 +6,11 @@ import {colors} from '@workday/canvas-kit-react-core';
 
 export interface ColorPreviewProps extends TextInputProps {
   /**
-   * The value entered by the user into the color input
-   * @default FFFFFF
+   * The value of the ColorPreview.
    */
   value: string;
   /**
-   * An id linked to the color preview input to be used with an associated form label
+   * The HTML `id` of the underlying text input element.
    */
   id?: string;
 }

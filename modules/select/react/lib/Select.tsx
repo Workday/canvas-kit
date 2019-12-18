@@ -15,25 +15,24 @@ import SelectOption from './SelectOption';
 
 export interface SelectProps extends GrowthBehavior, React.SelectHTMLAttributes<HTMLSelectElement> {
   /**
-   * React children must be of type SelectOption and have at least two.
+   * The SelectOption children of the Select (must be at least two).
    */
   children: React.ReactElement<SelectOption>[];
   /**
-   * Whether or not the select is disabled (not able to be selected)
+   * If true, disable the Select.
    * @default false
    */
   disabled?: boolean;
   /**
-   * The type of error to display, if any.
-   * @default undefined
+   * The type of error associated with the Select (if applicable).
    */
   error?: ErrorType;
   /**
-   * A callback that gets called everytime the select state changes.
+   * The function called when the Select state changes.
    */
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
   /**
-   * The `value` attribute of the select.
+   * The value of the Select.
    */
   value?: string;
 }
