@@ -43,12 +43,7 @@ storiesOf('Components|Buttons/Button/React', module)
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
-      <Button
-        size={Button.Size.Large}
-        variant={Button.Variant.Primary}
-        shouldChangeStyleToStaticStates={true}
-        className="focus"
-      >
+      <Button size={Button.Size.Large} variant={Button.Variant.Primary}>
         Primary
       </Button>
     </div>
