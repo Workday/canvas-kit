@@ -39,12 +39,11 @@ const prefix = (phrase, prefix) => value => (value.indexOf(phrase) > -1 ? prefix
 const pipe = (...fns) => value => fns.reduce((result, fn) => fn(result), value);
 
 function storySort(a, b) {
-  // console.warn('b', b);
   const prefixFn = pipe(
     prefix('welcome-', '0'),
     prefix('getting-started', '0'),
     prefix('tokens-', '1'),
-    prefix('components-', '3'),
+    prefix('components-', '2'),
     prefix('states', '4'),
     prefix('labs-', '3')
   );

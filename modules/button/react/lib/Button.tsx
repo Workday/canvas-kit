@@ -4,7 +4,7 @@ import * as React from 'react';
 import {ButtonBaseCon, ButtonBaseLabel, ButtonLabelData, ButtonLabelIcon} from './ButtonBase';
 import {DeprecatedButtonVariant, ButtonSize, ButtonVariant} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {GrowthBehavior, ChangeStaticStateProps} from '@workday/canvas-kit-react-common';
+import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {labelDataBaseStyles} from './ButtonStyles';
 
 export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
@@ -33,8 +33,7 @@ export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
 
 export interface ButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
   extends BaseButtonProps<T>,
-    GrowthBehavior,
-    ChangeStaticStateProps {
+    GrowthBehavior {
   /**
    * Button cannot be empty.
    */
