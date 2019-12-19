@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {controlComponent} from '../../../../utils/storybook';
 
-import {TextInput} from '../../../text-input/react/index';
+import {TextInput, InputIconContainer} from '../../../text-input/react/index';
 import FormField from '../index';
 import README from '../../../text-input/react/README.md';
 
@@ -17,6 +17,8 @@ storiesOf('Components|Inputs/Text Input/React/Top Label', module)
   .add('Default', () => (
     <FormField label="Label" inputId="input-plain">
       {controlComponent(<TextInput />)}
+      <InputIconContainer grow={true}>Content</InputIconContainer>
+      <InputIconContainer grow={false}>Content</InputIconContainer>
     </FormField>
   ))
   .add('With placeholder', () => (

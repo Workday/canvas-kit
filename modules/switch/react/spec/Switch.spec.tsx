@@ -41,4 +41,5 @@ describe('Switch', () => {
     expect(id1).not.toEqual(id2);
     fragment.unmount();
   });
+  
 });

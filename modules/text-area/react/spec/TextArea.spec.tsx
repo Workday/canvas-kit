@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
 import ReactDOMServer from 'react-dom/server';
-import TextArea from '../lib/TextArea';
+import TextArea, { TextAreaResizeDirection } from '../lib/TextArea';
 import {axe} from 'jest-axe';
 import FormField from '@workday/canvas-kit-react-form-field';
 
@@ -16,6 +16,61 @@ describe('TextArea', () => {
     expect(container.getAttribute('data-propspread')).toBe('test');
     component.unmount();
   });
+});
+
+test('Text Area should grow', () => {
+  const component = mount(<TextArea  grow={true}>Content</TextArea>);
+  
+  const textarea = component
+    .find('textarea');
+    expect(getComputedStyle(textarea.getDOMNode()).getPropertyValue('width')).toBe('100%');
+  component.unmount();
+});
+
+test('Text Area should not grow', () => {
+  const component = mount(<TextArea  grow={false}>Content</TextArea>);
+  
+  const textarea = component
+    .find('textarea');
+    expect(getComputedStyle(textarea.getDOMNode()).getPropertyValue('width')).toBe('');
+  component.unmount();
+});
+
+test('Text Area should resize', () => {
+  const component = mount(<TextArea  resize={TextAreaResizeDirection.Both}>Content</TextArea>);
+  
+  const textarea = component
+    .find('textarea');
+    expect(getComputedStyle(textarea.getDOMNode()).getPropertyValue('resize')).toBe('both');
+  component.unmount();
+});
+
+test('Text Area should resize horizontally', () => {
+  const component = mount(<TextArea  resize={TextAreaResizeDirection.Horizontal}>Content</TextArea>);
+  
+  const textarea = component
+    .find('textarea');
+    expect(getComputedStyle(textarea.getDOMNode()).getPropertyValue('resize')).toBe('horizontal');
+  component.unmount();
+});
+
+test('Text Area should resize vertically', () => {
+  const component = mount(<TextArea  resize={TextAreaResizeDirection.Vertical}>Content</TextArea>);
+  
+  const textarea = component
+    .find('textarea');
+    expect(getComputedStyle(textarea.getDOMNode()).getPropertyValue('resize')).toBe('vertical');
+  component.unmount();
+});
+
+
+test('Text Area should not resize', () => {
+  const component = mount(<TextArea  resize={TextAreaResizeDirection.None}>Content</TextArea>);
+  
+  const textarea = component
+    .find('textarea');
+    expect(getComputedStyle(textarea.getDOMNode()).getPropertyValue('resize')).toBe('none');
+  component.unmount();
 });
 
 describe('Text Area Accessibility', () => {

@@ -1,39 +1,39 @@
-import * as h from '../helpers';
+// import * as h from '../helpers';
 
-describe('Button', () => {
-  before(() => {
-    h.stories.visit();
-  });
+// describe('Button', () => {
+//   before(() => {
+//     h.stories.visit();
+//   });
 
-  context('given primary buttons are rendered', () => {
-    beforeEach(() => {
-      h.stories.load('Components|Buttons/Button/React', 'Primary');
-    });
+//   context('given primary buttons are rendered', () => {
+//     beforeEach(() => {
+//       h.stories.load('Components|Buttons/Button/React', 'Primary');
+//     });
 
-    it('should not have any axe errors', () => {
-      cy.checkA11y();
-    });
+//     it('should not have any axe errors', () => {
+//       cy.checkA11y();
+//     });
 
-    it('should render the correct text', () => {
-      cy.get('button')
-        .first()
-        .should('contain', 'Primary');
-    });
-  });
+//     it('should render the correct text', () => {
+//       cy.get('button')
+//         .first()
+//         .should('contain', 'Primary');
+//     });
+//   });
 
-  context('given delete buttons are rendered', () => {
-    beforeEach(() => {
-      h.stories.load('Components|Buttons/Button/React', 'Delete');
-    });
+//   context('given delete buttons are rendered', () => {
+//     beforeEach(() => {
+//       h.stories.load('Components|Buttons/Button/React', 'Delete');
+//     });
 
-    it('should not have any axe errors', () => {
-      cy.checkA11y();
-    });
+//     it('should not have any axe errors', () => {
+//       cy.checkA11y();
+//     });
 
-    it('should render the correct text', () => {
-      cy.get('button')
-        .first()
-        .should('contain', 'Delete');
-    });
-  });
-});
+//     it('should render the correct text', () => {
+//       cy.get('button')
+//         .first()
+//         .should('contain', 'Delete');
+//     });
+//   });
+// });
