@@ -45,9 +45,9 @@ export const convertPseudoStatesBehavior = <
   > = Omit<InnerProps & ExtraProps, keyof React.ComponentClass<any>>,
   Theme extends object = object
 >(
-  ...styles: Array<Interpolation<WithTheme<StyleProps, Theme>>>
+  ...interpolations: Array<Interpolation<WithTheme<StyleProps, Theme>>>
 ): Array<Interpolation<WithTheme<StyleProps, Theme>>> => {
-  return styles.map(style => {
+  return interpolations.map(style => {
     if (typeof style === 'function') {
       return ((props: ExtraProps) => {
         return convertPseudoStatesToClasses(props._shouldConvertPseudoStatesToClasses, style(
