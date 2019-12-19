@@ -60,13 +60,13 @@ $_wdc-btn-caret-down-icon-white: svg-load(
   &.wdc-btn-hover,
   &:hover {
     background-color: $wdc-btn-bg-secondary-hover;
-    @include wdc-icon-color(#333d47);
+    @include wdc-icon-color($wdc-btn-icon-color-interaction);
   }
 
   &.wdc-btn-active,
   &:active {
     background-color: $wdc-btn-bg-secondary-active;
-    @include wdc-icon-color(#333d47);
+    @include wdc-icon-color($wdc-btn-icon-color-interaction);
   }
 
   &:focus,
@@ -74,11 +74,11 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     background-color: $wdc-btn-bg-secondary-focus;
     box-shadow: $wdc-btn-focus-ring;
     outline: none;
-    @include wdc-icon-color(#7b858f);
+    @include wdc-icon-color($wdc-btn-icon-color);
   }
 
   &:focus:hover {
-    @include wdc-icon-color(#333d47);
+    @include wdc-icon-color($wdc-btn-icon-color-interaction);
   }
 
   &.wdc-btn-disabled,
@@ -99,17 +99,15 @@ $_wdc-btn-caret-down-icon-white: svg-load(
 
     &,
     .wdc-icon-position-left & {
-      margin: 0 $wdc-spacing-xxs;
-      margin-left: 0;
+      margin: 0 $wdc-spacing-xxs 0 0;
     }
   
     .wdc-icon-position-right & {
-      margin: 0 $wdc-spacing-xxs;
-      margin-right: 0;
+      margin: 0 0 0 $wdc-spacing-xxs;
     }
   }
 
-  @include wdc-icon-color(#7b858f);
+  @include wdc-icon-color($wdc-btn-icon-color);
 
 
   &.wdc-btn-dropdown {

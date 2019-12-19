@@ -293,7 +293,7 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 ```
 
 ### Inline Icon
-You can use a [System Icon](/?path=/story/css-icon--system-icon) either before or after the text of Primary, Secondary, Delete and Text buttons. The class `.wdc-icon-position-left` (default) or  `.wdc-icon-position-right` adjust the margin of the icon.
+You can use a [System Icon](../../icon/css/README.md) either before or after the text of Primary, Secondary, Delete and Text buttons. The class `.wdc-icon-position-left` (default) or  `.wdc-icon-position-right` adjust the margin of the icon.
 
 `System Icon` requires a JavaScript import for the injector:
 
@@ -308,10 +308,6 @@ initializeIcons();
   <i className="wdc-icon" data-icon="edit" data-category="system" />Edit
 </button>
 
-
-<a href="#" className="wdc-btn-text">
-  <i className="wdc-icon wdc-icon-position-left" data-icon="edit" data-category="system" /> Edit
-</a>
 <a href="#" className="wdc-btn-text">
   Continue <i className="wdc-icon wdc-icon-position-right" data-icon="arrowRight" data-category="system" />
 </a>

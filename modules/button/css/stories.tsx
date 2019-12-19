@@ -8,7 +8,6 @@ import {
   activityStreamIcon,
 } from '@workday/canvas-system-icons-web';
 import README from './README.md';
-// import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
 import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
 import './index.scss';
 
