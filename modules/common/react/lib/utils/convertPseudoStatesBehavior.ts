@@ -8,16 +8,16 @@ import {Overwrapped} from '@emotion/styled-base/types/helper';
  * @param obj The styled object passed to the function to replace any pseudo selectors with a class name
  */
 
-export interface ChangeStaticStateProps {
+export interface ConvertPseudoStatesBehaviorProps {
   /** @ignore */
-  shouldChangeStyleToStaticStates?: boolean;
+  _shouldConvertPseudoStatesToClasses?: boolean;
 }
 
-export const changeStyleToStaticStates = (
-  shouldChangePseudoSelectors = false,
+export const convertPseudoStatesToClasses = (
+  _shouldConvertPseudoStatesToClasses = false,
   obj?: CSSObject
 ): CSSObject | undefined => {
-  if (!shouldChangePseudoSelectors || !obj) {
+  if (!_shouldConvertPseudoStatesToClasses || !obj) {
     return obj;
   }
 
@@ -29,16 +29,16 @@ export const changeStyleToStaticStates = (
       .replace(/\.disabled/, ':disabled');
     const value =
       typeof obj[key] === 'object'
-        ? changeStyleToStaticStates(true, obj[key] as CSSObject)
+        ? convertPseudoStatesToClasses(true, obj[key] as CSSObject)
         : obj[key];
     const newObj = {...result, [newKey]: value};
     return newObj;
   }, {});
 };
 
-export const convertToStaticStates = <
+export const convertPseudoStatesBehavior = <
   InnerProps,
-  ExtraProps extends ChangeStaticStateProps,
+  ExtraProps extends ConvertPseudoStatesBehaviorProps,
   StyleProps extends Omit<
     Overwrapped<InnerProps, StyleProps>,
     keyof React.ComponentClass<any>
@@ -50,13 +50,13 @@ export const convertToStaticStates = <
   return styles.map(style => {
     if (typeof style === 'function') {
       return ((props: ExtraProps) => {
-        return changeStyleToStaticStates(props.shouldChangeStyleToStaticStates, style(
+        return convertPseudoStatesToClasses(props._shouldConvertPseudoStatesToClasses, style(
           props as any
         ) as CSSObject);
       }) as any;
     } else {
       return (props: ExtraProps) =>
-        changeStyleToStaticStates(props.shouldChangeStyleToStaticStates, style as CSSObject);
+        convertPseudoStatesToClasses(props._shouldConvertPseudoStatesToClasses, style as CSSObject);
     }
   });
 };
