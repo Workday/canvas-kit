@@ -400,11 +400,6 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
 
     return (
       <Container grow={grow} {...this.getContainerAriaAttributes()} {...elemProps}>
-        <Status role="status" aria-live="polite">
-          {autocompleteItems
-            ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length)
-            : ''}
-        </Status>
         <InputContainer ref={this.comboboxRef}>
           {React.Children.map(children, this.renderChildren)}
           {showClearButton && (
@@ -443,6 +438,11 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
             </MenuContainer>
           )}
         </InputContainer>
+        <Status role="status" aria-live="polite">
+          {autocompleteItems
+            ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length)
+            : ''}
+        </Status>
       </Container>
     );
   }
