@@ -8,7 +8,7 @@ import {Overwrapped} from '@emotion/styled-base/types/helper';
  * @param obj The styled object passed to the function to replace any pseudo selectors with a class name
  */
 
-export interface ConvertPseudoStatesBehaviorProps {
+export interface ConvertPseudoStatesBehavior {
   /** @ignore */
   _shouldConvertPseudoStatesToClasses?: boolean;
 }
@@ -38,7 +38,7 @@ export const convertPseudoStatesToClasses = (
 
 export const convertPseudoStatesBehavior = <
   InnerProps,
-  ExtraProps extends ConvertPseudoStatesBehaviorProps,
+  ExtraProps extends ConvertPseudoStatesBehavior,
   StyleProps extends Omit<
     Overwrapped<InnerProps, StyleProps>,
     keyof React.ComponentClass<any>
