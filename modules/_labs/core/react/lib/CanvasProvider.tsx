@@ -26,7 +26,7 @@ export default class CanvasProvider extends React.Component<CanvasProviderProps>
     return (
       <ThemeProvider theme={theme}>
         <DirectionContainer dir={theme.direction}>
-          {!disableInputProvider ? <InputProvider>{children}</InputProvider> : children}
+          {disableInputProvider ? children : <InputProvider>{children}</InputProvider>}
         </DirectionContainer>
       </ThemeProvider>
     );
