@@ -10,7 +10,7 @@ type Interpolations = Array<any>;
 function styled<Props>(node: any) {
   return (...args: Interpolation<Props>[]) => {
     const newArgs: Interpolations = args.map(
-      interpolation => (props: Props & {theme: CanvasTheme; direction: ContentDirection}) => {
+      interpolation => (props: Props & {theme: CanvasTheme}) => {
         props.theme = useTheme(props.theme);
         const direction = props.theme.direction;
         const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;
