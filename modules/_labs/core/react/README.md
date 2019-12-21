@@ -111,18 +111,6 @@ import {CanvasProvider} from '@workday/canvas-kit-react';
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```
 
-If you'd like to disable `InputProvider` you can pass `disableInputProvider` which will disable
-InputProvider for all your components that are being wrapped by CanvasProvider
-
-```tsx
-import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-react';
-
-<CanvasProvider disableInputProvider={true}>
-  {/* All your components containing any Canvas components */}
-</CanvasProvider>;
-```
-
 #### Storybook Decorator
 
 We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
@@ -143,17 +131,6 @@ import {CanvasProviderDecorator} from '../../../../utils/storybook';
 
 storiesOf('My Story', module)
   .addDecorator(CanvasProviderDecorator)
-  .add('All', () => <YourJSX />);
-```
-
-If you want to disable `InputProvider` for a specific story, you can add a parameter to disable it:
-
-```js
-import {CanvasProviderDecorator} from '../../../../utils/storybook';
-
-storiesOf('My Story', module)
-  .addDecorator(CanvasProviderDecorator)
-  .addParameters(canvasProviderDecorator: { disableInputProvider: true })
   .add('All', () => <YourJSX />);
 ```
 
