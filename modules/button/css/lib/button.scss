@@ -152,13 +152,11 @@ $_wdc-btn-caret-down-icon-white: svg-load(
       
       &,
       &.wdc-icon-position-left {
-        margin: 0 $wdc-spacing-xs;
-        margin-left: -$wdc-spacing-xxxs;
+        margin: 0 $wdc-spacing-xs 0 -$wdc-spacing-xxxs;
       }
     
       &.wdc-icon-position-right {
-        margin: 0 $wdc-spacing-xs;
-        margin-right: -$wdc-spacing-xxxs;
+        margin: 0 -$wdc-spacing-xxxs 0 $wdc-spacing-xs;
       }
     }
   }
@@ -207,7 +205,6 @@ $_wdc-btn-caret-down-icon-white: svg-load(
       color: $wdc-btn-text-color;
       @include wdc-icon-color($wdc-btn-text-color);
     }
-    
   }
 
   &.wdc-btn-delete {
