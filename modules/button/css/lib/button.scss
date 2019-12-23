@@ -152,11 +152,11 @@ $_wdc-btn-caret-down-icon-white: svg-load(
       
       &,
       &.wdc-icon-position-left {
-        margin: 0 $wdc-spacing-xs 0 -$wdc-spacing-xxxs;
+        margin: 0 $wdc-spacing-xs 0 (-$wdc-spacing-xxxs);
       }
     
       &.wdc-icon-position-right {
-        margin: 0 -$wdc-spacing-xxxs 0 $wdc-spacing-xs;
+        margin: 0 (-$wdc-spacing-xxxs) 0 $wdc-spacing-xs;
       }
     }
   }
