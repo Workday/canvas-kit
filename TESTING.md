@@ -2,8 +2,8 @@
 
 `canvas-kit` has 3 levels of testing: unit, functional and visual. Each area has special use-cases even though tests at various levels may overlap. Here's a simplified explanation of what each level is meant to test:
 
-- *Unit*: This level is meant to test the expected outputs of developer APIs (e.g., When a developer passes in a set of props, then expect a specific output).
-- *Functional*: This level is browser-based testing and is where UI behavior and accessibility requirements are specified.
+- *Unit*: This level is meant to test the input/output of units of functionality (e.g., utility functions or input props of components to output DOM).
+- *Functional*: This level is browser-based testing and is where UI behavior and accessibility requirements are specified (e.g., Given a modal example, When clicking on the button, Then the modal should be open).
 - *Visual*: This level is where all styling is tested. Some props have only visual effects and it is difficult to reason about at any other level.
 
 Tests are supposed to be a source of feedback and confidence. To achieve that, a test should be clear about intent and failures. Developers tend to ignore passing tests and focus only on failing tests. If the intent of the test cannot be determined, it is difficult to fix the test. If the failure isn't immediately obvious, too much time is spent fixing the test. Canvas Kit adopts a BDD (behavior-driven development) approach of testing. The most common way to think is about behavior is "given/when/then". These behaviors are a series of specifications and not necessarily "tests". Testing in this repo is not just testing the correctness of our components, but running a series of specifications. Specifications tend to be more granular to give context of what code is expected to do. A "test" simply has to pass. A specification requires meaning.
