@@ -54,7 +54,6 @@ const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>(
       height: radioHeight,
       transition: 'box-shadow 150ms ease-out',
       width: radioWidth,
-      pointerEvents: 'none',
     },
   },
   ({disabled}) => ({

@@ -58,7 +58,6 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>(
       height: checkboxHeight,
       transition: 'box-shadow 150ms ease-out',
       width: checkboxWidth,
-      pointerEvents: 'none',
     },
   },
   ({disabled}) => ({

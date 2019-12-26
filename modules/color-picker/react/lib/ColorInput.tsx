@@ -55,6 +55,13 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'gro
   })
 );
 
+// Note regarding:
+//   ({theme}) => ({
+//     paddingLeft: theme.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */' ,
+//   })
+//
+// We're using @noflip because ColorInput should stay LTR, therefore, we need to adjust the padding using ContentDirection, not using rtl-css-js.
+
 const ColorInputContainer = styled('div')<Pick<ColorInputProps, 'grow'>>(
   {
     position: 'relative',
@@ -72,7 +79,8 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
     position: 'absolute',
     top: 10,
     ...type.body,
-    ...type.variant.hint,
+    ...type.variant.mono,
+    color: colors.blackPepper300,
   },
   ({disabled}) => ({
     color: disabled ? inputColors.disabled.text : undefined,
@@ -81,6 +89,15 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
     left: theme.direction === ContentDirection.LTR ? '36px' : '88px',
   })
 );
+
+// Note regarding:
+//   left: theme.direction === ContentDirection.LTR ? '36px' : '88px',
+//
+// This returns:
+//    - LTR -> left: 36px;
+//    - RTL -> right: 88px;
+//
+// It's because we're changing the value of this attribute based on ContentDirection but the attribute itself is getting flipped by rtl-css-js.
 
 const SwatchTile = styled('div')({
   position: 'absolute',
@@ -125,8 +142,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
     const formattedValue = this.formatValue(value);
 
     return (
-      <ColorInputContainer 
-      {...elemProps}>
+      <ColorInputContainer>
         <CustomHexInput
           dir="ltr"
           inputRef={inputRef}
