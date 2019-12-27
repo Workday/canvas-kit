@@ -4,97 +4,92 @@ import Switch from '../lib/Switch';
 
 describe('Switch', () => {
   const cb = jest.fn();
-  const testId = 'test';
-  const testProps = {
-    'data-testid': testId,
-    onChange: cb,
-  };
 
   afterEach(() => {
-    cb.mockReset();
+    cb.mockClear();
     cleanup();
   });
 
-  it('should be unchecked by default', () => {
-    const {getByTestId} = render(<Switch {...testProps} />);
-    expect(getByTestId(testId)).not.toHaveAttribute('checked');
+  it('should be unchecked (`checked=false`) by default', () => {
+    const {getByRole} = render(<Switch onChange={cb} />);
+    expect(getByRole('checkbox')).toHaveProperty('checked', false);
   });
 
-  it('should apply extra props to an input', () => {
-    const {getByTestId} = render(<Switch {...testProps} />);
-    expect(getByTestId(testId).tagName.toLowerCase()).toBe('input');
+  it('should apply extra props to the input element', () => {
+    const testId = 'test';
+    const {container} = render(<Switch data-testid="test" onChange={cb} />);
+    expect(container.querySelector('input')).toHaveAttribute('data-testid', testId);
   });
 
   it('should be checked if the checked prop is true', () => {
-    const {getByTestId} = render(<Switch {...testProps} checked={true} />);
-    expect(getByTestId(testId)).toHaveAttribute('checked');
+    const {getByRole} = render(<Switch checked={true} onChange={cb} />);
+    expect(getByRole('checkbox')).toHaveProperty('checked', true);
   });
 
   it('should be disabled if the disabled prop is true', () => {
-    const {getByTestId} = render(<Switch disabled={true} {...testProps} />);
-    expect(getByTestId(testId)).toHaveAttribute('disabled');
+    const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
+    expect(getByRole('checkbox')).toHaveProperty('disabled', true);
   });
 
   it('should have a reference to the input', () => {
     const inputRef = React.createRef<HTMLInputElement>();
 
-    render(<Switch inputRef={inputRef} {...testProps} />);
+    render(<Switch inputRef={inputRef} onChange={cb} />);
     expect(inputRef.current!.tagName.toLowerCase()).toBe('input');
   });
 
   it('should have a unique id by default', () => {
-    const {getByTestId} = render(<Switch disabled={true} {...testProps} />);
-    expect(getByTestId(testId)).toHaveAttribute('disabled');
+    const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
+    expect(getByRole('checkbox')).toHaveProperty('disabled', true);
   });
 
   it('should keep the same unique id if re-rendered', () => {
-    const {getByTestId, rerender} = render(<Switch checked={false} {...testProps} />);
+    const {getByRole, rerender} = render(<Switch checked={false} onChange={cb} />);
 
-    const uniqueId = getByTestId(testId).getAttribute('id');
-    expect(getByTestId(testId)).toHaveAttribute('id', uniqueId);
+    const uniqueId = getByRole('checkbox').getAttribute('id');
+    expect(getByRole('checkbox')).toHaveProperty('id', uniqueId);
 
-    rerender(<Switch checked={true} {...testProps} />);
+    rerender(<Switch checked={true} onChange={cb} />);
 
-    expect(getByTestId(testId)).toHaveAttribute('checked');
-    expect(getByTestId(testId)).toHaveAttribute('id', uniqueId);
+    expect(getByRole('checkbox')).toHaveProperty('checked');
+    expect(getByRole('checkbox')).toHaveProperty('id', uniqueId);
   });
 
   it('should create a unique id for each instance', () => {
-    const testId2 = 'test2';
+    const testIds = ['test1', 'test2'];
     const {getByTestId} = render(
       <>
-        <Switch {...testProps} />
-        <Switch {...testProps} data-testid={testId2} />
+        <Switch data-testid={testIds[0]} onChange={cb} />
+        <Switch data-testid={testIds[1]} onChange={cb} />
       </>
     );
 
-    expect(getByTestId(testId).id).not.toBe(getByTestId(testId2).id);
+    expect(getByTestId(testIds[0]).id).not.toBe(getByTestId(testIds[1]).id);
   });
 
   it('should fire the onChange event handler when clicked', () => {
-    const {getByTestId} = render(<Switch {...testProps} />);
+    const cb = jest.fn();
+    const {getByRole} = render(<Switch checked={true} onChange={cb} />);
 
-    fireEvent.click(getByTestId(testId));
-    fireEvent.click(getByTestId(testId));
+    fireEvent.click(getByRole('checkbox'));
+    fireEvent.click(getByRole('checkbox'));
     expect(cb).toHaveBeenCalledTimes(2);
   });
 
-  it('should have the `role="checkbox"`', () => {
-    const {getByTestId} = render(<Switch {...testProps} />);
-    expect(getByTestId(testId)).toHaveAttribute('role', 'checkbox');
-  });
-
   it('should be of `type="checkbox"`', () => {
-    const {getByTestId} = render(<Switch {...testProps} />);
-    expect(getByTestId(testId)).toHaveAttribute('type', 'checkbox');
+    const {getByRole} = render(<Switch onChange={cb} />);
+    expect(getByRole('checkbox')).toHaveProperty('type', 'checkbox');
   });
 
   it('should maintain a tabIndex of 0', () => {
-    const {getByTestId} = render(<Switch {...testProps} />);
-    expect(getByTestId(testId)).toHaveAttribute('tabIndex', '0');
+    const {getByRole} = render(<Switch onChange={cb} />);
+    expect(getByRole('checkbox')).toHaveProperty('tabIndex', 0);
   });
 
-  // it('should pass all other props to the input', () => {});
+  it('should have a "not-allowed" pointer when disabled', () => {
+    const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
+    expect(getByRole('checkbox')).toHaveStyleRule('cursor', 'not-allowed');
+  });
 
   // Background and Circle should sync with the input
 });
