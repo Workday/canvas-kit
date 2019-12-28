@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render, cleanup, fireEvent} from '@testing-library/react';
+import {render, fireEvent} from '@testing-library/react';
 import canvas from '@workday/canvas-kit-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 import Switch from '../lib/Switch';
@@ -28,7 +28,6 @@ describe('Switch', () => {
 
   afterEach(() => {
     cb.mockClear();
-    cleanup();
   });
 
   it('should be unchecked by default', () => {
@@ -108,13 +107,6 @@ describe('Switch', () => {
   });
 
   describe('Switch styles', () => {
-    const cb = jest.fn();
-
-    afterEach(() => {
-      cb.mockReset();
-      cleanup();
-    });
-
     describe('When disabled', () => {
       test('the input element should have a "not-allowed" cursor when disabled', () => {
         const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
