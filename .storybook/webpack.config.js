@@ -7,7 +7,19 @@ const welcomeSectionPath = path.resolve(__dirname, './');
 const utilsPath = path.resolve(__dirname, '../utils');
 const postcssConfigPath = path.resolve(__dirname, './postcss.config');
 
-module.exports = ({config, mode}) => {
+module.exports = ({ config, mode }) => {
+  // This is so we get consistent results when loading .ts/tsx and .mdx files
+  const babelPresetEnvConfig = [
+    '@babel/preset-env',
+    {
+      'useBuiltIns': 'entry',
+      'corejs': {
+        version: 3,
+        proposals: true
+      }
+    }
+  ];
+
   // Exclude all node_modules from babel-loader
   config.module.rules
     .find(rule => /mjs\|jsx/.test(rule.test.toString()))
@@ -39,8 +51,14 @@ module.exports = ({config, mode}) => {
     include: [modulesPath, utilsPath],
     loader: require.resolve('babel-loader'),
     options: {
-      presets: [['react-app', {flow: false, typescript: true}]],
+      presets: [
+        '@babel/preset-typescript',
+        '@babel/preset-react',
+        babelPresetEnvConfig,
+      ],
       plugins: [
+        '@babel/proposal-class-properties',
+        '@babel/proposal-object-rest-spread',
         '@babel/plugin-transform-modules-commonjs',
         [
           'emotion',
@@ -60,11 +78,14 @@ module.exports = ({config, mode}) => {
     use: [
       {
         loader: 'babel-loader',
-        options: {plugins: ['@babel/plugin-transform-react-jsx']},
+        options: {
+          presets: [babelPresetEnvConfig],
+          plugins: ['@babel/plugin-transform-react-jsx']
+        },
       },
       {
         loader: '@mdx-js/loader',
-        options: {compilers: [createCompiler()]},
+        options: { compilers: [createCompiler()] },
       },
     ],
   });
@@ -76,7 +97,7 @@ module.exports = ({config, mode}) => {
     loaders: [
       {
         loader: require.resolve('@storybook/source-loader'),
-        options: {parser: 'typescript'},
+        options: { parser: 'typescript' },
       },
     ],
     enforce: 'pre',

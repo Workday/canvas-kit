@@ -53,6 +53,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "colors": "^1.4.0",
     "commitizen": "^3.1.1",
+    "core-js": "^3.5.0",
     "css-loader": "^3.2.0",
     "css-mqpacker": "^7.0.0",
     "cssstats": "^3.3.0",
