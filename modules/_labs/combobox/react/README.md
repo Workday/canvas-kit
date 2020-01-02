@@ -107,12 +107,3 @@ Default: `'Reset Search Input'`
 #### `onBlur: React.FocusEventHandler`
 
 > Callback to listen when the TextInput blurs.
-
----
-
-#### `useLegacyAriaAttributes: boolean`
-
-> Toggle whether to use legacy ARIA 1.0, or the newer ARIA 1.1 spec. Many screenreader browser
-> combinations have shortcomings with ARIA 1.1 so it is defaulted to use 1.0
-
-Default: `true`

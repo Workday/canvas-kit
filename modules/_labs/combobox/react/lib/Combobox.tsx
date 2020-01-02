@@ -51,10 +51,6 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    * The id of the form field.
    */
   labelId?: string;
-  /**
-   * Toggle the use of ARIA 1.0 or ARIA 1.1
-   */
-  useLegacyAriaAttributes: boolean;
 }
 
 export interface ComboboxState {
@@ -317,30 +313,6 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     return React.isValidElement(child) && React.Children.only(child);
   };
 
-  getInputAriaAttributes = (): React.InputHTMLAttributes<HTMLInputElement> => {
-    const legacyAttributes = {
-      role: 'combobox',
-      'aria-owns': `${this.props.id}-${listBoxIdPart}`,
-      'aria-haspopup': true,
-      'aria-expanded': this.state.showingAutocomplete,
-    };
-    const modernAttributes = {
-      'aria-controls': `${this.props.id}-${listBoxIdPart}`,
-    };
-    return this.props.useLegacyAriaAttributes ? legacyAttributes : modernAttributes;
-  };
-
-  getContainerAriaAttributes = (): React.HTMLAttributes<HTMLDivElement> => {
-    const legacyAttributes = {};
-    const modernAttributes: React.HTMLAttributes<HTMLDivElement> = {
-      role: 'combobox',
-      'aria-haspopup': 'listbox',
-      'aria-owns': `${this.props.id}-${listBoxIdPart}`,
-      'aria-expanded': this.state.showingAutocomplete,
-    };
-    return this.props.useLegacyAriaAttributes ? legacyAttributes : modernAttributes;
-  };
-
   renderChildren = (child: React.ReactElement<TextInputProps>): React.ReactNode => {
     if (!this.isValidSingleChild(child)) {
       return null;
@@ -370,7 +342,10 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         onFocus: this.handleFocus,
         onBlur: this.handleBlur,
         css: cssOverride,
-        ...this.getInputAriaAttributes(),
+        role: 'combobox',
+        'aria-owns': `${this.props.id}-${listBoxIdPart}`,
+        'aria-haspopup': true,
+        'aria-expanded': this.state.showingAutocomplete,
       };
       const cloneElement = (element: React.ReactElement<TextInputProps>, props: TextInputProps) =>
         jsx(element.type, {
@@ -394,12 +369,11 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
       onBlur,
       showClearButton,
       labelId,
-      useLegacyAriaAttributes,
       ...elemProps
     } = this.props;
 
     return (
-      <Container grow={grow} {...this.getContainerAriaAttributes()} {...elemProps}>
+      <Container grow={grow} {...elemProps}>
         <InputContainer ref={this.comboboxRef}>
           {React.Children.map(children, this.renderChildren)}
           {showClearButton && (

@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
-import {boolean, withKnobs} from '@storybook/addon-knobs';
+import {withKnobs} from '@storybook/addon-knobs';
 
 import Combobox, {ComboboxProps} from '../index';
 import FormField from '../../../../form-field/react/index';
@@ -18,7 +18,6 @@ class Autocomplete extends React.Component<
     | 'clearButtonType'
     | 'clearButtonLabel'
     | 'clearButtonVariant'
-    | 'useLegacyAriaAttributes'
   >,
   {currentText: string}
 > {
@@ -48,7 +47,6 @@ class Autocomplete extends React.Component<
           .splice(0, 5)}
         onChange={this.autocompleteCallback}
         showClearButton={this.props.showClearButton == null ? true : this.props.showClearButton}
-        useLegacyAriaAttributes={boolean('useLegacyAriaAttributes', true)}
         labelId="autocomplete-123"
         onFocus={action(`Focus`)}
         onBlur={action(`Blur`)}
