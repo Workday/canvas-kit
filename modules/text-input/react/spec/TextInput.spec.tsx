@@ -1,50 +1,75 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
-import ReactDOMServer from 'react-dom/server';
+import {render, fireEvent} from '@testing-library/react';
 import TextInput from '../lib/TextInput';
+import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
 import FormField from '@workday/canvas-kit-react-form-field';
 
-describe('TextInput', () => {
-  test('TextInput should spread extra props', () => {
-    const component = mount(<TextInput data-propspread="test" onChange={jest.fn()} />);
-    const input = component
-      .find('input') // TODO: Standardize on prop spread location (see #150)
-      .getDOMNode();
-    expect(input.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
-  });
-});
+const id = 'Test Text Input';
+const label = "Test Text Input";
+const placeholder = "Test Text Input";
+const value = 'Test Text Input';
 
-describe('Text Input Accessibility', () => {
-  test('Text Input in a FormField should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(
-      <FormField
-        label="My Field"
-        inputId="my-input-field"
-        hintText="Helpful text to resolve error"
-        hintId="my-input-field-error"
-        error={FormField.ErrorType.Error}
-      >
-        <TextInput placeholder="Placeholder" value={'Hello'} onChange={jest.fn()} />;
-      </FormField>
-    );
-    expect(await axe(html)).toHaveNoViolations();
-  });
+describe('Text Input', () => {
+  const cb = jest.fn();
+  afterEach(() => {
+    cb.mockReset();
+  })
 
-  test('Text Input with `aria-labelledby` should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(
-      <>
-        <label id="123">Label</label>
-        <TextInput
-          placeholder="Placeholder"
-          value={'Hello'}
-          aria-labelledby="123"
-          onChange={jest.fn()}
-        />
-        ;
-      </>
-    );
-    expect(await axe(html)).toHaveNoViolations();
+  describe('when rendered', () => {
+    describe('with an placeholder', () => {
+      test('should render a text input with placeholder', () => {
+        const {getByPlaceholderText} = render(<TextInput onChange={cb} placeholder={placeholder}/>);
+        expect(getByPlaceholderText(placeholder)).toHaveAttribute('placeholder', placeholder);
+      })
+    })
+    
+    describe('with a id', () => {
+      test('should render a text input with a id', () => {
+        const {getByPlaceholderText} = render(<TextInput id={id} onChange={cb} value={value} placeholder={placeholder}/>);
+        expect(getByPlaceholderText(placeholder)).toHaveAttribute('id', id);
+      })
+    })
+
+    describe('with a value', () => {
+      test('should render a text input with a value', () => {
+        const {getByDisplayValue} = render(<TextInput onChange={cb} value={value}/>);
+        expect(getByDisplayValue(value)).toBeDefined();
+      })
+    })
+
+    describe('with disabled attribute', () => {
+      test('should render a disabled text input', () => {
+        const {getByDisplayValue} = render(<TextInput onChange={cb} disabled={true} value={value}/>);
+        expect(getByDisplayValue(value)).toBeDisabled();
+      })
+    })
+
+    describe('wrapped in a FormField', () => {
+      test('should pass axe DOM accessibility guidelines', async () => {
+        const html = ReactDOMServer.renderToString(
+          <FormField label="My Field" inputId="my-text-input-field">
+            <TextInput id="my-text-input-field" onChange={cb}/>
+          </FormField>
+        );
+        expect(await axe(html)).toHaveNoViolations();
+      });
+    });
+
+    describe('with extra, arbitrary props', () => {
+      test('should spread extra props', () => {
+        const attr = 'test';
+        const {getByPlaceholderText} = render(<TextInput onChange={cb} data-propspread={attr} placeholder={placeholder}/>);
+        expect(getByPlaceholderText(placeholder)).toHaveAttribute('data-propspread', attr);
+      });
+    });
+  })
+
+  describe('when provided an input ref', () => {
+    test('input ref should be defined', () => {
+      const ref: React.RefObject<HTMLInputElement> = React.createRef();
+      render(<TextInput inputRef={ref}/>);
+      expect(ref.current).toBeDefined();
+    });
   });
-});
+})
