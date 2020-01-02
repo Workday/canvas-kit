@@ -126,7 +126,7 @@ describe('Switch', () => {
         expect(getByRole('checkbox')).toHaveStyleRule('cursor', 'pointer');
       });
 
-      test('the background element should have a blue background color when not disabled and checked', () => {
+      test('the background element should have a non-neutral background when not disabled and checked', () => {
         const {container} = render(<Switch checked onChange={cb} />);
         const backgroundElement = getBackground(container);
         expect(backgroundElement).toHaveStyleRule('background-color', canvas.colors.blueberry500);
@@ -144,7 +144,7 @@ describe('Switch', () => {
         expect(circleElement).toHaveStyleRule('transform', 'translateX(0)');
       });
 
-      test('the circle element should be to the very right (`translateX(`spacing.s`)`) when unchecked', () => {
+      test('the circle element should be to the very right (`translateX(spacing.s)`) when unchecked', () => {
         const {container} = render(<Switch checked onChange={cb} />);
         const circleElement = getCircle(container);
         expect(circleElement).toHaveStyleRule('transform', `translateX(${canvas.spacing.s})`);
