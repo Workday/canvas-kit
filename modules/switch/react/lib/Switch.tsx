@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import uuid from 'uuid/v4';
+import {styled} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
 
