@@ -176,7 +176,7 @@ The outline would look like:
 Tests should rely on aria attributes as much as possible for selecting and asserting. Test IDs
 should be used only to disambiguate DOM elements.
 
-Read [Into to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html)
+Read [Intro to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html)
 for a good idea of how Cypress works. The core concept to Cypress is enqueued command chains that
 typically wrap jQuery collections. Cypress uses jQuery, Mocha, Chai, Sinon, Lodash and Moment. All
 are exposed to the developer of the test.
@@ -186,13 +186,89 @@ nodes. Cypress control when and how often a command is run to ensure assertions 
 out. This is most confusing to those who approach Cypress commands as Promises.
 [Commands are not Promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Not-Promises).
 
+For example, imagine the following Cypress code:
+
+```ts
+cy.get('body')
+  .contains('button', 'Delete Item')
+  .click();
+
+cy.get('[data-testid="MyResult"]').should('contain', 'Success!');
+```
+
+The Cypress Command queue will show `['get', 'contains', 'click', 'get', 'should']`, but it will not
+run these commands immediately. There is also no need to use `.then` to wait for any previous
+condition to be met first. The Cypress run time will do the following:
+
+- Run `$('body')` every 50ms until `$('body')` returns a non-empty jQuery collection
+- Run a function that gets all `button` elements inside of the `body` element that have text content
+  that contains 'Delete Item' and that jQuery collection is not empty
+- Ensure the previous element is clickable (visible, not covered, has actual width/height), waiting
+  50ms to detect animations (waiting for animations to complete), etc. Basically make sure a user
+  could actually click on it.
+- Run `$('[data-testid="MyResult"]')` every 50ms until it returns a non-empty jQuery collection.
+  Usually clicking has side-effects like network requests to the server before the side-effect is
+  reflected in the DOM. Since Cypress implicitly retries, this command will _eventually_ return a
+  non-empty jQuery collection and the author doesn't need to explicitly do anything. Note this
+  selector _could_ return a non-empty jQuery collection instantly, but it might not contain
+  "Success!" yet...
+- Run internal `chai` + `chai-jquery` matchers (`expect($el).to.contain('Success!')`) until an error
+  is no longer thrown. `.should` will rerun the previous command _and_ the assertion until the
+  condition is met or a timeout occurs. This is the secret sauce to the stability of Cypress tests
+  compared to WebDriver. `.should` can also receive a function that will be run until no error is
+  thrown. If an error is never thrown, it will only be run once.
+
+Cypress is very easy to get started with, but there isn't enough documentation about how to scale a
+complicated suite of Cypress tests.
+
+### Component helpers
+
 Component helpers should be written to help with automation. These component helpers are useful for
 a more readable implementation as well as more maintainable test code. Component helpers can also be
 exported by this repository for use in downstream testing (Cypress tests in applications that use
-Canvas Kit).
+Canvas Kit). Helpers contain implementation details about how components are composed internally.
+The goal is that if the Component implementation changes, the component helpers should be the only
+code that needs to change to keep tests passing.
 
 Component helpers come in 3 flavors:
 
-- **Starter**
-- **Transform**
-- **Action**
+- **Starter**: This helper types starts a Cypress chain. The return type is always
+  `Cypress.Chainable<JQuery>` and usually contains a `cy.get` and the selector usually contains
+  something that is unique to that component type. For example, the Modal helper uses
+  `[role=dialog]` with an option to disambiguate with a `data-testid`.
+- **Transform**: Imagine a web application is a collection of boxes that determine how components of
+  an application are laid out. A transform helper takes in a larger box and returns a smaller box,
+  further reducing the scope. Ideally these helpers contain no Cypress commands (which are
+  asynchronous), only jQuery calls (which are synchronous). Synchronous helper functions can be run
+  more than once at the discretion of the Cypress runtime. A good use-case for this type is to
+  replace CSS selectors
+- **Action**: Cypress comes with many baked in action commands such as `click` and `type`. A custom
+  action is useful to give a higher level semantic meaning to a series of low-level commands. For
+  example, a Select component might compose a Popup and a virtualized menu. This action may include
+  opening the select, finding the popup element, seeing if the desired item is currently visible,
+  scrolling the virtualized menu until the desired item is visible and clicking on the item. This
+  code would be repeated for every instance and has implementation knowledge of the component. A
+  high-level semantic action might be called "select" that wraps up this implementation detail to
+  free up automation and development engineers to think about the test case and not about
+  implementation details.
+
+### How to write a functional test
+
+A functional test describes the behavior and specifications of components. Functional tests should
+follow recommendations of behavior driven development where "specs" read like a specification and
+specs are broken down to a single assertion. Functional specifications should be readable by
+non-developers for verification. Most bugs occur when behavior is unspecified. UX issues are when
+specified behavior is not intuitive.
+
+All functional specifications start with a Storybook story. Stories serve both as a starting point
+for functional tests and visual tests. A specification is a starting point (a "given"), a series of
+actions on a component (a set of "when"s) and some type of expected outcome (a "then").
+
+For example:
+
+- Given the Default Modal story is rendered
+- When I click on the "Delete Item" button
+- Then the Modal should be open
+
+Put together, a sentence is formed: "Given the Default Modal story is rendered when I click on the
+"Delete Item" button then the Modal should be open"
