@@ -113,35 +113,59 @@ storiesOf('Components|Inputs/Switch/React/Visual Testing', module)
   .addDecorator(withReadme(README))
   .add('States', () => (
     <StaticStates>
-      <h3>Focus/Active states should all render with the same blue focus outline</h3>
       <Table>
         <thead>
           <tr>
-            <th>Error Type</th>
-            <th>No Style</th>
-            <th>Focus Style</th>
-            <th>Active Style</th>
+            <th></th>
+            <th>No state</th>
+            <th>Focused</th>
+            <th>Active</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>No Error (Default)</td>
-            <td>{control(<Switch />)}</td>
-            <td>{control(<Switch className="focus" />)}</td>
-            <td>{control(<Switch className="active" />)}</td>
-          </tr>
-          <tr>
-            <td>Alert</td>
-            <td>{control(<Switch error={ErrorType.Alert} />)}</td>
-            <td>{control(<Switch error={ErrorType.Alert} className="focus" />)}</td>
-            <td>{control(<Switch error={ErrorType.Alert} className="active" />)}</td>
-          </tr>
-          <tr>
-            <td>Error</td>
-            <td>{control(<Switch error={ErrorType.Error} />)}</td>
-            <td>{control(<Switch error={ErrorType.Error} className="focus" />)}</td>
-            <td>{control(<Switch error={ErrorType.Error} className="active" />)}</td>
-          </tr>
+          {[false, true].map(checked => {
+            return [false, true].map(disabled => {
+              return ['Default', 'Alert', 'Error'].map(variant => {
+                const type =
+                  variant === 'Alert'
+                    ? ErrorType.Alert
+                    : variant === 'Error'
+                    ? ErrorType.Error
+                    : undefined;
+
+                return (
+                  <tr
+                    key={`${checked ? 'checked' : 'unchecked'} ${
+                      disabled ? 'disabled' : 'enabled'
+                    } ${variant}`}
+                  >
+                    <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
+                      checked ? 'checked' : 'unchecked'
+                    })`}</td>
+                    <td>
+                      <Switch checked={checked} disabled={disabled} error={type} />
+                    </td>
+                    <td>
+                      <Switch
+                        checked={checked}
+                        disabled={disabled}
+                        error={type}
+                        className="focus"
+                      />
+                    </td>
+                    <td>
+                      <Switch
+                        checked={checked}
+                        disabled={disabled}
+                        error={type}
+                        className="active"
+                      />
+                    </td>
+                  </tr>
+                );
+              });
+            });
+          })}
         </tbody>
       </Table>
     </StaticStates>
