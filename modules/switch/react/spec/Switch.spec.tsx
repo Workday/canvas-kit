@@ -112,70 +112,11 @@ describe('Switch', () => {
         const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
         expect(getByRole('checkbox')).toHaveStyleRule('cursor', 'not-allowed');
       });
-
-      test('the background element should have a pale background color when disabled', () => {
-        const {container} = render(<Switch disabled={true} onChange={cb} />);
-        const backgroundElement = getBackground(container);
-        expect(backgroundElement).toHaveStyleRule('background-color', canvas.colors.soap400);
-      });
     });
-
     describe('When not disabled', () => {
       test('the input element should have a "pointer" cursor when not disabled', () => {
         const {getByRole} = render(<Switch onChange={cb} />);
         expect(getByRole('checkbox')).toHaveStyleRule('cursor', 'pointer');
-      });
-
-      test('the background element should have a non-neutral background when not disabled and checked', () => {
-        const {container} = render(<Switch checked onChange={cb} />);
-        const backgroundElement = getBackground(container);
-        expect(backgroundElement).toHaveStyleRule('background-color', canvas.colors.blueberry500);
-      });
-
-      test('the background element should have a neutral background color when not disabled and unhecked', () => {
-        const {container} = render(<Switch checked={false} onChange={cb} />);
-        const backgroundElement = getBackground(container);
-        expect(backgroundElement).toHaveStyleRule('background-color', canvas.colors.licorice200);
-      });
-
-      test('the circle element should be to the very left (`translateX(0)`) when unchecked', () => {
-        const {container} = render(<Switch checked={false} disabled={true} onChange={cb} />);
-        const circleElement = getCircle(container);
-        expect(circleElement).toHaveStyleRule('transform', 'translateX(0)');
-      });
-
-      test('the circle element should be to the very right (`translateX(spacing.s)`) when unchecked', () => {
-        const {container} = render(<Switch checked onChange={cb} />);
-        const circleElement = getCircle(container);
-        expect(circleElement).toHaveStyleRule('transform', `translateX(${canvas.spacing.s})`);
-      });
-    });
-
-    describe('When in error state', () => {
-      test('the input should have an error-colored border when the error type is "error"', () => {
-        const {getByRole} = render(<Switch checked onChange={cb} error={ErrorType.Error} />);
-        const bs = expectedBoxShadow(
-          canvas.colors.frenchVanilla100,
-          canvas.inputColors.error.border,
-          'transparent'
-        );
-
-        expect(getByRole('checkbox')).toHaveStyleRule('box-shadow', bs, {
-          target: ' ~ div:first-of-type',
-        });
-      });
-
-      test('the input should have an alert-colored border when the error type is "alert"', () => {
-        const {getByRole} = render(<Switch checked onChange={cb} error={ErrorType.Alert} />);
-        const bs = expectedBoxShadow(
-          canvas.colors.frenchVanilla100,
-          canvas.inputColors.warning.border,
-          canvas.colors.cantaloupe600
-        );
-
-        expect(getByRole('checkbox')).toHaveStyleRule('box-shadow', bs, {
-          target: ' ~ div:first-of-type',
-        });
       });
     });
   });
