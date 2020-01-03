@@ -12,13 +12,7 @@ import {TextInput} from '../../../../text-input/react/index';
 import README from '../README.md';
 
 class Autocomplete extends React.Component<
-  Omit<
-    ComboboxProps,
-    | 'children'
-    | 'clearButtonType'
-    | 'clearButtonLabel'
-    | 'clearButtonVariant'
-  >,
+  Omit<ComboboxProps, 'children' | 'clearButtonType' | 'clearButtonLabel' | 'clearButtonVariant'>,
   {currentText: string}
 > {
   state = {
