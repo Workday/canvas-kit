@@ -19,21 +19,20 @@ describe('Non-disabled Switch', () => {
       });
 
       context('when the tab key is pressed', () => {
-        it('should be the focused item on the page', () => {
+        beforeEach(() => {
           cy.tab();
+        });
+        it('should be the focused item on the page', () => {
           getSwitch().should('have.focus');
         });
       });
 
       context('when the switch is clicked', () => {
-        it('should be toggled', () => {
-          getSwitch()
-            .invoke('prop', 'checked')
-            .as('checked');
+        beforeEach(() => {
           getSwitch().click();
-          getSwitch().should(this.checked ? 'not.be.checked' : 'be.checked');
-          getSwitch().click();
-          getSwitch().should(this.checked ? 'be.checked' : 'not.be.checked');
+        });
+        it('should be checked', () => {
+          getSwitch().should('be.checked');
         });
       });
     });
@@ -54,16 +53,6 @@ describe('Disabled Switch', () => {
     });
     it('should be disabled', () => {
       getSwitch().should('be.disabled');
-    });
-    it('should not toggle when clicked', () => {
-      getSwitch()
-        .invoke('prop', 'checked')
-        .as('beforeClick');
-      getSwitch().click({force: true});
-      getSwitch()
-        .invoke('prop', 'checked')
-        .as('afterClick');
-      expect(this.beforeClick).to.eq(this.afterClick);
     });
   });
 });
