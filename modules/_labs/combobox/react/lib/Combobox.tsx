@@ -125,7 +125,6 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   static defaultProps = {
     clearButtonLabel: `Reset Search Input`,
     clearButtonVariant: IconButton.Variant.Plain,
-    useLegacyAriaAttributes: true,
   };
 
   state: Readonly<ComboboxState> = {
