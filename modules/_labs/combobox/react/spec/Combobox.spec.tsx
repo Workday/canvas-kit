@@ -147,7 +147,7 @@ describe('Combobox', () => {
     fireEvent.keyDown(input, enter);
 
     expect(input).toHaveValue(menuText);
-    expect(await queryByRole('listbox')).toBeNull();
+    expect(await queryByRole('listbox')).not.toBeNull();
     expect(input.getAttribute('aria-activedescendant')).toEqual('');
     expect(cb.mock.calls.length).toBe(1);
   });
