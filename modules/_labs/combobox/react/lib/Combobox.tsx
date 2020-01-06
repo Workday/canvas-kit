@@ -291,6 +291,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
           if (item.props.isDisabled) {
             nextIndex = currentIndex;
           }
+          this.setState({isFocused: true});
           event.stopPropagation();
           event.preventDefault();
         }
