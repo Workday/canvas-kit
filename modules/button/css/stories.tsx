@@ -4,9 +4,7 @@ import {Component} from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
-import {
-  activityStreamIcon,
-} from '@workday/canvas-system-icons-web';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import README from './README.md';
 import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
 import './index.scss';
@@ -48,9 +46,10 @@ storiesOf('Components|Buttons/Button/CSS', module)
       <section>
         <h3>Large Primary</h3>
         <IconDemo>
-        <button className="wdc-btn wdc-btn-primary wdc-btn-size-l">Primary</button>
+          <button className="wdc-btn wdc-btn-primary wdc-btn-size-l">Primary</button>
           <button className="wdc-btn wdc-btn-primary wdc-btn-size-l">
-            <i className="wdc-icon" data-icon="activityStream" data-category="system" />Primary
+            <i className="wdc-icon" data-icon="activityStream" data-category="system" />
+            Primary
           </button>
         </IconDemo>
         <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-size-l">
@@ -64,9 +63,10 @@ storiesOf('Components|Buttons/Button/CSS', module)
       <section>
         <h3>Medium Primary</h3>
         <IconDemo>
-        <button className="wdc-btn wdc-btn-primary">Primary</button>
+          <button className="wdc-btn wdc-btn-primary">Primary</button>
           <button className="wdc-btn wdc-btn-primary">
-            <i className="wdc-icon" data-icon="edit" data-category="system" />Primary
+            <i className="wdc-icon" data-icon="edit" data-category="system" />
+            Primary
           </button>
         </IconDemo>
         <button disabled={true} className="wdc-btn wdc-btn-primary">
@@ -88,9 +88,10 @@ storiesOf('Components|Buttons/Button/CSS', module)
       <section>
         <h3>Large Secondary</h3>
         <IconDemo>
-        <button className="wdc-btn wdc-btn-size-l">Secondary</button>
+          <button className="wdc-btn wdc-btn-size-l">Secondary</button>
           <button className="wdc-btn wdc-btn-size-l">
-            <i className="wdc-icon" data-icon="activityStream" data-category="system" />Secondary
+            <i className="wdc-icon" data-icon="activityStream" data-category="system" />
+            Secondary
           </button>
         </IconDemo>
         <button disabled={true} className="wdc-btn wdc-btn-size-l">
@@ -101,9 +102,10 @@ storiesOf('Components|Buttons/Button/CSS', module)
       <section>
         <h3>Medium Secondary</h3>
         <IconDemo>
-        <button className="wdc-btn">Secondary</button>
+          <button className="wdc-btn">Secondary</button>
           <button className="wdc-btn">
-            <i className="wdc-icon" data-icon="edit" data-category="system" />Secondary
+            <i className="wdc-icon" data-icon="edit" data-category="system" />
+            Secondary
           </button>
         </IconDemo>
         <button disabled={true} className="wdc-btn">
@@ -190,10 +192,16 @@ storiesOf('Components|Buttons/Button/CSS/Text', module)
       <h3>Icons</h3>
       <IconDemo>
         <a href="#" className="wdc-btn-text">
-          <i className="wdc-icon wdc-icon-position-left" data-icon="edit" data-category="system" />Left Icon Large
+          <i className="wdc-icon wdc-icon-position-left" data-icon="edit" data-category="system" />
+          Left Icon Large
         </a>
         <a href="#" className="wdc-btn-text">
-          Left Icon Large<i className="wdc-icon wdc-icon-position-right" data-icon="arrowRight" data-category="system" />
+          Left Icon Large
+          <i
+            className="wdc-icon wdc-icon-position-right"
+            data-icon="arrowRight"
+            data-category="system"
+          />
         </a>
       </IconDemo>
     </div>
@@ -226,10 +234,20 @@ storiesOf('Components|Buttons/Button/CSS/Text', module)
       <div css={blueBackground}>
         <IconDemo>
           <a href="#" className="wdc-btn-text wdc-btn-text-inverse">
-            <i className="wdc-icon wdc-icon-position-left" data-icon="edit" data-category="system" />Left Icon Large
+            <i
+              className="wdc-icon wdc-icon-position-left"
+              data-icon="edit"
+              data-category="system"
+            />
+            Left Icon Large
           </a>
           <a href="#" className="wdc-btn-text wdc-btn-text-inverse">
-            Left Icon Large<i className="wdc-icon wdc-icon-position-right" data-icon="arrowRight" data-category="system" />
+            Left Icon Large
+            <i
+              className="wdc-icon wdc-icon-position-right"
+              data-icon="arrowRight"
+              data-category="system"
+            />
           </a>
         </IconDemo>
       </div>
