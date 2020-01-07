@@ -35,7 +35,7 @@
     "menu"
   ],
   "devDependencies": {
-    "@material-ui/core": "^4.1.0",
+    "@material-ui/core": "^3.9.2",
     "@workday/canvas-system-icons-web": "^1.0.20",
     "react-transition-group": "^2.5.0"
   },
