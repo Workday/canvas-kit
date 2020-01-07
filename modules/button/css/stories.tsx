@@ -6,8 +6,10 @@ import withReadme from 'storybook-readme/with-readme';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import README from './README.md';
-import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
 import './index.scss';
+
+// @ts-ignore
+import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
 
 const blueBackground = css({
   display: 'flex',
