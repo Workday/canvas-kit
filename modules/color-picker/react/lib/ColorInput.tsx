@@ -8,15 +8,17 @@ import {
   GrowthBehavior,
   ErrorType,
 } from '@workday/canvas-kit-react-common';
-import {colors, borderRadius, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
+import {
+  colors,
+  borderRadius,
+  spacing,
+  type,
+  inputColors,
+  ContentDirection,
+} from '@workday/canvas-kit-react-core';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
-
-
-import {
-  ContentDirection,
-} from '@workday/canvas-kit-labs-react-core';
 
 export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavior {
   value: string;
@@ -51,16 +53,11 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'gro
     backgroundColor: disabled ? colors.soap200 : '',
   }),
   ({theme}) => ({
-    paddingLeft: theme.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */' ,
+    paddingLeft:
+      theme.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */',
+    // We're using @noflip because ColorInput should stay LTR, therefore, we need to adjust the padding using ContentDirection, not using rtl-css-js.
   })
 );
-
-// Note regarding:
-//   ({theme}) => ({
-//     paddingLeft: theme.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */' ,
-//   })
-//
-// We're using @noflip because ColorInput should stay LTR, therefore, we need to adjust the padding using ContentDirection, not using rtl-css-js.
 
 const ColorInputContainer = styled('div')<Pick<ColorInputProps, 'grow'>>(
   {
@@ -71,7 +68,7 @@ const ColorInputContainer = styled('div')<Pick<ColorInputProps, 'grow'>>(
     grow && {
       minWidth: '100%',
       width: '100%',
-    },  
+    }
 );
 
 const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
@@ -87,17 +84,13 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
   }),
   ({theme}) => ({
     left: theme.direction === ContentDirection.LTR ? '36px' : '88px',
+    //    - LTR -> left: 36px;
+    //    - RTL -> right: 88px;
+    //
+    // It's because we're changing the value of this attribute based on ContentDirection but the attribute itself is getting flipped by rtl-css-js.
+    // We're doing this to adjust the spacing of the # sign as it should always stay on the left of the input in both LTR and RTL.
   })
 );
-
-// Note regarding:
-//   left: theme.direction === ContentDirection.LTR ? '36px' : '88px',
-//
-// This returns:
-//    - LTR -> left: 36px;
-//    - RTL -> right: 88px;
-//
-// It's because we're changing the value of this attribute based on ContentDirection but the attribute itself is getting flipped by rtl-css-js.
 
 const SwatchTile = styled('div')({
   position: 'absolute',
