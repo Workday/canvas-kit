@@ -75,7 +75,7 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    */
   closeButtonLabel: string;
   /**
-   * It true, show button to clear input field.
+   * If true, show button to clear input field.
    * @default true
    */
   showClearButton?: boolean;

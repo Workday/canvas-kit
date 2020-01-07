@@ -12,7 +12,7 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
    */
   children?: React.ReactElement<MenuItemProps> | React.ReactElement<MenuItemProps>[];
   /**
-   * It true, sets the menu to open from a parent component. Usefully for things like menu buttons.
+   * If true, sets the menu to open from a parent component. Usefully for things like menu buttons.
    * @default true
    */
   isOpen?: boolean;
