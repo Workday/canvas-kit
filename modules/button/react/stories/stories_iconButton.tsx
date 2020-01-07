@@ -3,6 +3,7 @@
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import withReadme from 'storybook-readme/with-readme';
 
 import {
@@ -358,7 +359,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
     ] as const;
 
     return (
-      <div data-whatinput="keyboard">
+      <StaticStates>
         <h3>Not toggleable</h3>
         <table>
           <thead>
@@ -381,7 +382,6 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
                         variant={IconButton.Variant[variant]}
                         aria-label="Activity Icon"
                         icon={activityStreamIcon}
-                        shouldChangeStateSeparator={true}
                       ></IconButton>
                     </div>
                   </td>
@@ -413,7 +413,6 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
                         variant={IconButton.Variant[variant]}
                         aria-label="Activity Icon"
                         icon={activityStreamIcon}
-                        shouldChangeStateSeparator={true}
                         toggled={true}
                       ></IconButton>
                     </div>
@@ -446,7 +445,6 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
                         variant={IconButton.Variant[variant]}
                         aria-label="Activity Icon"
                         icon={activityStreamIcon}
-                        shouldChangeStateSeparator={true}
                         toggled={false}
                       ></IconButton>
                     </div>
@@ -478,7 +476,6 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
                       variant={IconButton.Variant[variant]}
                       aria-label="Activity Icon"
                       icon={activityStreamIcon}
-                      shouldChangeStateSeparator={true}
                     ></IconButton>
                   </div>
                 </td>
@@ -486,7 +483,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
             ))}
           </tbody>
         </table>
-      </div>
+      </StaticStates>
     );
   });
 
