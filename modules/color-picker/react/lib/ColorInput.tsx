@@ -1,21 +1,14 @@
 /** @jsx jsx */
 import {css, jsx} from '@emotion/core';
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
+import {styled, Themeable, ContentDirection} from '@workday/canvas-kit-labs-react-core';
 import {
   pickForegroundColor,
   expandHex,
   GrowthBehavior,
   ErrorType,
 } from '@workday/canvas-kit-react-common';
-import {
-  colors,
-  borderRadius,
-  spacing,
-  type,
-  inputColors,
-  ContentDirection,
-} from '@workday/canvas-kit-react-core';
+import {colors, borderRadius, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
