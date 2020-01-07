@@ -14,10 +14,6 @@ export interface TooltipProps {
    * Unique id of the Tooltip.
    */
   id?: string;
-  /**
-   * The content for the Tooltip.
-   */
-  children?: string;
 }
 
 const tooltipAnimation = (transformOrigin: TransformOrigin) => {
