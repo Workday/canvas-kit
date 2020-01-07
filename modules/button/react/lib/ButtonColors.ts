@@ -321,7 +321,7 @@ export const ButtonColors: ButtonColorCollection = {
     background: 'rgba(0, 0, 0, 0.2)',
     activeBackground: 'rgba(0, 0, 0, 0.4)',
     focusBackground: 'rgba(0, 0, 0, 0.2)',
-    disabledBackground: 'transparent',
+    disabledBackground: 'rgba(0, 0, 0, 0.2)',
     hoverBackground: 'rgba(0, 0, 0, 0.3)',
     labelIcon: canvas.colors.frenchVanilla100,
     labelIconHover: canvas.colors.frenchVanilla100,
