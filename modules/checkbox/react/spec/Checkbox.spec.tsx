@@ -5,8 +5,6 @@ import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
 import FormField from '@workday/canvas-kit-react-form-field';
 
-const label = 'Test Checkbox';
-
 describe('Checkbox', () => {
   const cb = jest.fn();
   afterEach(() => {
@@ -17,8 +15,8 @@ describe('Checkbox', () => {
     describe('with an id', () => {
       test('should render a checkbox input with id', () => {
         const id = 'myCheckbox';
-        const {getByLabelText} = render(<Checkbox id={id} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toHaveAttribute('id', id);
+        const {getByRole} = render(<Checkbox id={id} onChange={cb} />);
+        expect(getByRole('checkbox')).toHaveAttribute('id', id);
       });
     });
 
@@ -32,33 +30,31 @@ describe('Checkbox', () => {
 
     describe('with checked=true', () => {
       test('should render a checked checkbox input', () => {
-        const {getByLabelText} = render(<Checkbox checked={true} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toHaveProperty('checked', true);
+        const {getByRole} = render(<Checkbox checked={true} onChange={cb} />);
+        expect(getByRole('checkbox')).toHaveProperty('checked', true);
       });
     });
 
     describe('with defaultChecked=true', () => {
       test('should render a checked checkbox input', () => {
-        const {getByLabelText} = render(
-          <Checkbox defaultChecked={true} onChange={cb} label={label} />
-        );
-        expect(getByLabelText(label)).toHaveProperty('checked', true);
+        const {getByRole} = render(<Checkbox defaultChecked={true} onChange={cb} />);
+        expect(getByRole('checkbox')).toHaveProperty('checked', true);
       });
     });
 
     describe('with defaultChecked=false and checked=true', () => {
       test('should render a checked checkbox input', () => {
-        const {getByLabelText} = render(
-          <Checkbox defaultChecked={false} checked={true} onChange={cb} label={label} />
+        const {getByRole} = render(
+          <Checkbox defaultChecked={false} checked={true} onChange={cb} />
         );
-        expect(getByLabelText(label)).toHaveProperty('checked', true);
+        expect(getByRole('checkbox')).toHaveProperty('checked', true);
       });
     });
 
     describe('with disabled attribute', () => {
       test('should render a disabled checkbox input', () => {
-        const {getByLabelText} = render(<Checkbox disabled={true} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toHaveProperty('disabled', true);
+        const {getByRole} = render(<Checkbox disabled={true} onChange={cb} />);
+        expect(getByRole('checkbox')).toHaveProperty('disabled', true);
       });
     });
 
@@ -93,13 +89,13 @@ describe('Checkbox', () => {
       test('should create a unique id for each instance', async () => {
         const {getByLabelText} = render(
           <form>
-            <Checkbox checked={true} onChange={jest.fn()} disabled={false} label={label + 1} />;
-            <Checkbox onChange={jest.fn()} disabled={false} label={label + 2} />;
+            <Checkbox checked={true} onChange={jest.fn()} disabled={false} label="label1" />;
+            <Checkbox onChange={jest.fn()} disabled={false} label="label2" />;
           </form>
         );
 
-        const id1 = getByLabelText(label + 1).getAttribute('id');
-        const id2 = getByLabelText(label + 2).getAttribute('id');
+        const id1 = getByLabelText('label1').getAttribute('id');
+        const id2 = getByLabelText('label2').getAttribute('id');
 
         expect(id1).not.toEqual(id2);
       });
@@ -108,18 +104,16 @@ describe('Checkbox', () => {
     describe('with extra, arbitrary props', () => {
       test('should spread extra props', () => {
         const attr = 'test';
-        const {getByLabelText} = render(
-          <Checkbox data-propspread={attr} onChange={cb} label={label} />
-        );
-        expect(getByLabelText(label)).toHaveAttribute('data-propspread', attr);
+        const {getByRole} = render(<Checkbox data-propspread={attr} onChange={cb} />);
+        expect(getByRole('checkbox')).toHaveAttribute('data-propspread', attr);
       });
     });
   });
 
   describe('when clicked', () => {
     test('should call a callback function', () => {
-      const {getByLabelText} = render(<Checkbox onChange={cb} label={label} />);
-      fireEvent.click(getByLabelText(label));
+      const {getByRole} = render(<Checkbox onChange={cb} />);
+      fireEvent.click(getByRole('checkbox'));
       expect(cb).toHaveBeenCalledTimes(1);
     });
   });
@@ -127,7 +121,7 @@ describe('Checkbox', () => {
   describe('when provided an input ref', () => {
     test('input ref should be defined', () => {
       const ref: React.RefObject<HTMLInputElement> = React.createRef();
-      render(<Checkbox inputRef={ref} onChange={cb} label={label} />);
+      render(<Checkbox inputRef={ref} onChange={cb} />);
       expect(ref.current).toBeDefined();
     });
   });
