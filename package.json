@@ -109,7 +109,7 @@
     "rollup-plugin-terser": "^5.0.0",
     "rtl-css-js": "^1.13.1",
     "sass-loader": "^8.0.0",
-    "storybook-chromatic": "^3.1.0",
+    "storybook-chromatic": "^3.4.1",
     "storybook-readme": "^5.0.8",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
