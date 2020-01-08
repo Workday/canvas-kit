@@ -71,7 +71,7 @@ what the intent of each specification is. If one fails, it will be easier to dia
 The assertions also make use of `jest-dom` which gives more context into _how_ it fails. Instead of
 a generic assertion, the CLI will output something like
 `Expected <div data-testid="test" aria-label="bar">bar</div> to have an "aria-label" of "foo" but received "bar"`.
-The specification should tell us which spec failed and the assertion gives insight into how.
+**The specification should tell us which spec failed and the assertion gives insight into how.**
 
 ## Unit tests
 
