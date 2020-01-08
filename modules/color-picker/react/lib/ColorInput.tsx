@@ -123,12 +123,13 @@ export default class ColorInput extends React.Component<ColorInputProps> {
       disabled,
       placeholder,
       error,
+      grow,
       ...elemProps
     } = this.props;
     const formattedValue = this.formatValue(value);
 
     return (
-      <ColorInputContainer>
+      <ColorInputContainer grow={grow}>
         <CustomHexInput
           dir="ltr"
           inputRef={inputRef}
@@ -139,6 +140,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           error={error}
           spellCheck={false}
           disabled={disabled}
+          grow={grow}
           maxLength={7} // 7 to allow pasting with a hash
           {...elemProps}
         />
