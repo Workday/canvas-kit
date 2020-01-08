@@ -33,7 +33,7 @@ describe('Checkbox', () => {
     describe('with checked=true', () => {
       test('should render a checked checkbox input', () => {
         const {getByLabelText} = render(<Checkbox checked={true} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toBeChecked();
+        expect(getByLabelText(label)).toHaveProperty('checked', true);
       });
     });
 
@@ -42,7 +42,7 @@ describe('Checkbox', () => {
         const {getByLabelText} = render(
           <Checkbox defaultChecked={true} onChange={cb} label={label} />
         );
-        expect(getByLabelText(label)).toBeChecked();
+        expect(getByLabelText(label)).toHaveProperty('checked', true);
       });
     });
 
@@ -51,14 +51,14 @@ describe('Checkbox', () => {
         const {getByLabelText} = render(
           <Checkbox defaultChecked={false} checked={true} onChange={cb} label={label} />
         );
-        expect(getByLabelText(label)).toBeChecked();
+        expect(getByLabelText(label)).toHaveProperty('checked', true);
       });
     });
 
     describe('with disabled attribute', () => {
       test('should render a disabled checkbox input', () => {
         const {getByLabelText} = render(<Checkbox disabled={true} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toBeDisabled();
+        expect(getByLabelText(label)).toHaveProperty('disabled', true);
       });
     });
 
