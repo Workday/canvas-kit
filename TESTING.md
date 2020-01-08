@@ -5,12 +5,13 @@ even though tests at various levels may overlap. Here's a simplified explanation
 is meant to test:
 
 - **Unit**: This level is meant to test the input/output of units of functionality (e.g., utility
-  functions or input props of components to output DOM).
+  functions or input props of components that output DOM).
 - **Functional**: This level is browser-based testing and is where UI behavior and accessibility
   requirements are specified (e.g., Given a modal example, When clicking on the button, Then the
-  modal should be open).
+  modal should be open). Functional tests are against Storybook Stories.
 - **Visual**: This level is where all styling is tested. Some props have only visual effects and it
-  is difficult to reason about at any other level.
+  is difficult to reason about at any other level. All Storybook Stories are automatically visual
+  regression tests.
 
 Tests are supposed to be a source of feedback and confidence. To achieve that, a test should be
 clear about intent and failures. Developers tend to ignore passing tests and focus only on failing
@@ -36,14 +37,14 @@ test('SomeComponent should render correctly', async () => {
 ```
 
 This is a "test" and not a specification, but a test that asserts multiple outputs. If any of the
-expectations fail, the CI will output something like "Failed: SomeComponent should render
-correctly". The message doesn't give any indication of why any of the expectations would fail.
-Further more, the failures don't give much indication as to what is failing. Without looking at the
-code, the failure message of the expectation will say something like "Expected 2 to equal 1" or
-"Expected 'bar' to equal 'foo'". Often to find out why the test fails, the source code of the test
-has to be consulted and the test has to be debugged. After that, there is no context to why the
-failure even matters. This test doesn't give much feedback or confidence on failure and thus isn't a
-very useful test.
+expectations fail, the CI will output something like
+`Failed: SomeComponent should render correctly`. The message doesn't give any indication of why any
+of the expectations would fail. Furthermore, the failures don't give much indication as to what is
+failing. Without looking at the code, the failure message of the expectation will say something like
+"Expected 2 to equal 1" or "Expected 'bar' to equal 'foo'". Often to find out why the test fails,
+the source code of the test has to be consulted and the test has to be debugged. After that, there
+is no context to why the failure even matters. This test doesn't give much feedback or confidence on
+failure and thus isn't a very useful test.
 
 **Good**:
 
@@ -118,8 +119,6 @@ const child = await getByTestId('test');
 expect(component).toContainElement(child);
 ```
 
-The first test has the DOM structure encoded in it. The second
-
 This example is more flexible. The component can be refactored with DOM elements added or removed
 and the test will still pass as long as the `div` is a child of the component somewhere (the
 specification is met). Also this example will have a more useful failure message since
@@ -130,9 +129,10 @@ a string.
 
 Canvas Kit uses [Cypress][https://cypress.io] for browser-based behavior testing (additional info:
 [Why Cypress?](./cypress/WHY_CYPRESS.md)). Functional tests ensure the code meets functional
-specifications from a user's perspective. Specifications can come from many different stakeholders
-including product management, user research and accessibility. A functional test should read in the
-Given/When/Then format and fits in well as acceptance criteria.
+specifications from a user's perspective. All functional tests are written against a Storybook
+Story. Specifications can come from many different stakeholders including product management, user
+research, and accessibility. A functional test should read in the Given/When/Then format and fit in
+well as acceptance criteria.
 
 Example of a usability specification: "Given the modal example, when a user clicks the 'Delete Item'
 button, then the modal opens".
@@ -142,10 +142,10 @@ Item' button, then the focus should be transferred to the first focusable elemen
 
 The BDD-style (behavior-driven development) syntax lends well to the nesting of actions performed on
 a example (also called "story" borrowed from Storybook nomenclature). The wording used inside the
-BDD blocks should read in English and be understandable by non-developers. The implementation should
-be as readable as possible by non-developers for trust and verification. The intent of the wording
-of the BDD-style syntax is to parse into an outline form to go into documentation as a verification
-of what specifications are covered.
+BDD blocks should read in plain English and be understandable by non-developers. The implementation
+should be as readable as possible by non-developers for trust and verification. The intent of the
+wording of the BDD-style syntax is to parse into an outline form and go into documentation as a
+verification of what specifications are covered.
 
 Example:
 
@@ -173,16 +173,16 @@ The outline would look like:
   - when the target button is clicked
     - then it should open the modal
 
-Tests should rely on aria attributes as much as possible for selecting and asserting. Test IDs
+Tests should rely on ARIA attributes as much as possible for selecting and asserting. Test IDs
 should be used only to disambiguate DOM elements.
 
 Read [Intro to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html)
-for a good idea of how Cypress works. The core concept to Cypress is enqueued command chains that
+for an intro to how Cypress works. The core concept to Cypress is enqueued command chains that
 typically wrap jQuery collections. Cypress uses jQuery, Mocha, Chai, Sinon, Lodash and Moment. All
 are exposed to the developer of the test.
 
 Let's break that down. Cypress has a jQuery-like chainable API to select and interact with DOM
-nodes. Cypress control when and how often a command is run to ensure assertions either pass or time
+nodes. Cypress controls when and how often a command is run to ensure assertions either pass or time
 out. This is most confusing to those who approach Cypress commands as Promises.
 [Commands are not Promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Not-Promises).
 
@@ -198,22 +198,22 @@ cy.get('[data-testid="MyResult"]').should('contain', 'Success!');
 
 The Cypress Command queue will show `['get', 'contains', 'click', 'get', 'should']`, but it will not
 run these commands immediately. There is also no need to use `.then` to wait for any previous
-condition to be met first. The Cypress run time will do the following:
+condition to be met first. The Cypress run-time will do the following:
 
-- Run `$('body')` every 50ms until `$('body')` returns a non-empty jQuery collection
+- Run `$('body')` every 50ms until `$('body')` returns a non-empty jQuery collection.
 - Run a function that gets all `button` elements inside of the `body` element that have text content
-  that contains 'Delete Item' and that jQuery collection is not empty
+  that contains 'Delete Item' and that jQuery collection is not empty.
 - Ensure the previous element is clickable (visible, not covered, has actual width/height), waiting
-  50ms to detect animations (waiting for animations to complete), etc. Basically make sure a user
+  50ms to detect animations (waiting for animations to complete), etc. Basically, make sure a user
   could actually click on it.
 - Run `$('[data-testid="MyResult"]')` every 50ms until it returns a non-empty jQuery collection.
   Usually clicking has side-effects like network requests to the server before the side-effect is
   reflected in the DOM. Since Cypress implicitly retries, this command will _eventually_ return a
-  non-empty jQuery collection and the author doesn't need to explicitly do anything. Note this
+  non-empty jQuery collection and the author doesn't need to explicitly do anything. Note: this
   selector _could_ return a non-empty jQuery collection instantly, but it might not contain
   "Success!" yet...
 - Run internal `chai` + `chai-jquery` matchers (`expect($el).to.contain('Success!')`) until an error
-  is no longer thrown. `.should` will rerun the previous command _and_ the assertion until the
+  is no longer thrown. `.should` will re-run the previous command _and_ the assertion until the
   condition is met or a timeout occurs. This is the secret sauce to the stability of Cypress tests
   compared to WebDriver. `.should` can also receive a function that will be run until no error is
   thrown. If an error is never thrown, it will only be run once.
@@ -225,14 +225,14 @@ complicated suite of Cypress tests.
 
 Component helpers should be written to help with automation. These component helpers are useful for
 a more readable implementation as well as more maintainable test code. Component helpers can also be
-exported by this repository for use in downstream testing (Cypress tests in applications that use
-Canvas Kit). Helpers contain implementation details about how components are composed internally.
-The goal is that if the Component implementation changes, the component helpers should be the only
-code that needs to change to keep tests passing.
+exported by this repository for use in downstream testing (e.g. Cypress tests in applications that
+use Canvas Kit). Helpers contain implementation details about how components are composed
+internally. The goal is that if the component's implementation changes, the component helpers should
+be the only code that needs to change to keep tests passing.
 
 Component helpers come in 3 flavors:
 
-- **Starter**: This helper types starts a Cypress chain. The return type is always
+- **Starter**: This helper type starts a Cypress chain. The return type is always
   `Cypress.Chainable<JQuery>` and usually contains a `cy.get` and the selector usually contains
   something that is unique to that component type. For example, the Modal helper uses
   `[role=dialog]` with an option to disambiguate with a `data-testid`.
@@ -241,7 +241,7 @@ Component helpers come in 3 flavors:
   further reducing the scope. Ideally these helpers contain no Cypress commands (which are
   asynchronous), only jQuery calls (which are synchronous). Synchronous helper functions can be run
   more than once at the discretion of the Cypress runtime. A good use-case for this type is to
-  replace CSS selectors
+  replace CSS selectors.
 - **Action**: Cypress comes with many baked in action commands such as `click` and `type`. A custom
   action is useful to give a higher level semantic meaning to a series of low-level commands. For
   example, a Select component might compose a Popup and a virtualized menu. This action may include
@@ -252,23 +252,42 @@ Component helpers come in 3 flavors:
   free up automation and development engineers to think about the test case and not about
   implementation details.
 
-### How to write a functional test
+## Visual Tests
 
-A functional test describes the behavior and specifications of components. Functional tests should
-follow recommendations of behavior driven development where "specs" read like a specification and
-specs are broken down to a single assertion. Functional specifications should be readable by
-non-developers for verification. Most bugs occur when behavior is unspecified. UX issues are when
-specified behavior is not intuitive.
+A Storybook story is the unit of all visual regression tests. Storybook is made to be a Component
+explorer and where all states of components can be demonstrated without launching full application
+instance. This includes loading states, error states, etc. Visual regression is a good extension to
+the idea. The only modification required to visually capture all states is to force every state to
+the initial rendering of a story vs using a dynamic solution like
+[knobs](https://github.com/storybookjs/storybook/tree/next/addons/knobs).
 
-All functional specifications start with a Storybook story. Stories serve both as a starting point
-for functional tests and visual tests. A specification is a starting point (a "given"), a series of
-actions on a component (a set of "when"s) and some type of expected outcome (a "then").
+Not all visual states are application states (E.g. `focus`, `hover`, and `active` on a button
+element). For these pseudo-selectors, the `StaticStates` wrapper can be used where pseudo-selectors
+are turned into CSS class names instead (E.g. `:focus` turns into `.focus`) and a class name can be
+added to the component. Note: this turns off the psuedo-selectors entirely.
 
-For example:
+The following will render a button where the focus styling is always applied:
 
-- Given the Default Modal story is rendered
-- When I click on the "Delete Item" button
-- Then the Modal should be open
+```ts
+export const States = () => {
+  <StaticStates>
+    <Button className="focus">My Button</Button>
+  </StaticStates>;
+};
+```
 
-Put together, a sentence is formed: "Given the Default Modal story is rendered when I click on the
-"Delete Item" button then the Modal should be open"
+**Note:** This will only work correctly if the component passes on extra attributes to a container
+that contains pseudo-selector code (most components do this). If a pseudo-selector is defined on an
+element inside the container, this won't work.
+
+`StaticStates` allows for visual styling, like focus rings, to be tested automatically.
+
+Some components may be harder to test statically due to animations or require user interaction
+normally. For example, Toasts animate in and Tooltips require a user to mouse-over the target
+element. Components should be written in a way that allows these animations to be disabled.
+
+## Summary
+
+- Unit tests should cover APIs exposed to developers
+- Functional tests should be written as a series of specifications of behavior and accessibility
+- Visual tests should cover all visually representable states of components
