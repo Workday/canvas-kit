@@ -285,12 +285,6 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
           color: buttonColors.labelDataActive,
         },
       }),
-      ...(buttonColors.labelIconActive &&
-        {
-          // 'span .wd-icon-fill, span .wd-icon-accent': {
-          //   fill: buttonColors.labelIconActive
-          // }
-        }),
     },
   };
 

@@ -39,11 +39,6 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * Callback that fires when a button changes toggled states
    */
   onToggleChange?: (toggled: boolean | undefined) => void;
-  /**
-   * Only used for visual snapshots and development
-   * @ignore
-   */
-  shouldChangeStateSeparator?: boolean;
 }
 
 function getFillSelector(fillColor: string): CSSObject {
