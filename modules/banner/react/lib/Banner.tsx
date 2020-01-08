@@ -1,16 +1,16 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import {colors, spacing, borderRadius, type} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {ErrorType, focusRing} from '@workday/canvas-kit-react-common';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 
 export enum BannerVariant {
   Full,
   Sticky,
 }
 
-export interface BannerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface BannerProps extends Themeable, React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Action when interacting with the banner
    */

@@ -98,7 +98,8 @@ function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
 }
 
 const useKeyDownListener = (handleKeydown: EventListenerOrEventListenerObject) => {
-  React.useEffect(() => {
+  // `useLayoutEffect` for automation
+  React.useLayoutEffect(() => {
     document.addEventListener('keydown', handleKeydown);
     return () => {
       document.removeEventListener('keydown', handleKeydown);

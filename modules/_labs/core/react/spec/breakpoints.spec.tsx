@@ -1,4 +1,4 @@
-import {BreakpointKey, up, down, between, only} from '../lib/theming/breakpoints';
+import {BreakpointKey, up, down, between, only} from '../lib/theming';
 
 describe('Breakpoints', () => {
   test('up function works with enum', () => {
