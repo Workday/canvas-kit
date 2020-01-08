@@ -268,7 +268,7 @@ added to the component. Note: this turns off the psuedo-selectors entirely.
 
 The following will render a button where the focus styling is always applied:
 
-```ts
+```tsx
 export const States = () => {
   <StaticStates>
     <Button className="focus">My Button</Button>
