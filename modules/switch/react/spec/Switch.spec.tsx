@@ -4,25 +4,6 @@ import canvas from '@workday/canvas-kit-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 import Switch from '../lib/Switch';
 
-// Implementation details of the switch. These are meant to be helpers.
-
-// The switch track
-const getBackground = (container: HTMLElement) => {
-  return container.querySelector('div')!.querySelector('div');
-};
-
-// The switch thumb
-const getCircle = (container: HTMLElement) => {
-  return container
-    .querySelector('div')!
-    .querySelector('div')!
-    .querySelector('div');
-};
-
-const expectedBoxShadow = (c1: string, c2: string, c3: string) => {
-  return `0 0 0 2px ${c1}, 0 0 0 4px ${c2}, 0 0 0 5px ${c3}`;
-};
-
 describe('Switch', () => {
   const cb = jest.fn();
 
@@ -56,11 +37,6 @@ describe('Switch', () => {
 
     render(<Switch inputRef={inputRef} onChange={cb} />);
     expect(inputRef.current!.tagName.toLowerCase()).toBe('input');
-  });
-
-  it('should have a unique id by default', () => {
-    const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
-    expect(getByRole('checkbox')).toHaveProperty('disabled', true);
   });
 
   it('should keep the same unique id if re-rendered', () => {
