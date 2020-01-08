@@ -25,7 +25,7 @@ do. A "test" simply has to pass. A specification requires meaning.
 
 **Bad**:
 
-```ts
+```tsx
 test('SomeComponent should render correctly', async () => {
   const {getByTestId} = render(<SomeComponent data-testid="test" text="foo" />);
 
@@ -48,7 +48,7 @@ failure and thus isn't a very useful test.
 
 **Good**:
 
-```ts
+```tsx
 describe('SomeComponent', () => {
   it('should render the "text" prop as the text', async () => {
     const {getByTestId} = render(<SomeComponent data-testid="test" text="foo" />);
@@ -91,7 +91,7 @@ will be guaranteed. The more implementation details, the more difficult the test
 
 **Bad**:
 
-```ts
+```tsx
 const {container} = render(
   <SomeComponent>
     <div data-testid="test">Test</div>
@@ -106,7 +106,7 @@ the test making the test tightly coupled and fragile.
 
 **Good**:
 
-```ts
+```tsx
 const {getByTestId} = render(
   <SomeComponent data-testid="container">
     <div data-testid="test">Test</div>
