@@ -120,7 +120,7 @@ describe('Checkbox', () => {
 
   describe('when provided an input ref', () => {
     test('input ref should be defined', () => {
-      const ref: React.RefObject<HTMLInputElement> = React.createRef();
+      const ref = React.createRef<HTMLInputElement>();
       render(<Checkbox inputRef={ref} onChange={cb} />);
       expect(ref.current).toBeDefined();
     });
