@@ -169,41 +169,18 @@ storiesOf('Components|Inputs/Checkbox/React', module)
                       <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
                         checked ? (indeterminate ? 'indeterminate' : 'checked') : 'unchecked'
                       })`}</td>
-                      <td>
-                        <Checkbox
-                          defaultChecked={checked}
-                          disabled={disabled}
-                          indeterminate={indeterminate}
-                          error={type}
-                        />
-                      </td>
-                      <td>
-                        <Checkbox
-                          defaultChecked={checked}
-                          disabled={disabled}
-                          indeterminate={indeterminate}
-                          error={type}
-                          className="hover"
-                        />
-                      </td>
-                      <td>
-                        <Checkbox
-                          defaultChecked={checked}
-                          disabled={disabled}
-                          indeterminate={indeterminate}
-                          error={type}
-                          className="focus"
-                        />
-                      </td>
-                      <td>
-                        <Checkbox
-                          defaultChecked={checked}
-                          disabled={disabled}
-                          indeterminate={indeterminate}
-                          error={type}
-                          className="active"
-                        />
-                      </td>
+
+                      {['', 'focus', 'hover', 'active'].map(className => (
+                        <td>
+                          <Checkbox
+                            checked={checked}
+                            disabled={disabled}
+                            indeterminate={indeterminate}
+                            error={type}
+                            className={className}
+                          />
+                        </td>
+                      ))}
                     </tr>
                   );
                 });
