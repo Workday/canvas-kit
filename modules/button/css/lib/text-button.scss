@@ -11,14 +11,29 @@
   border-radius: $wdc-border-radius-m;
   display: inline-flex;
   align-items: center;
+  @include wdc-icon-color($wdc-btn-text);
+
+  .wdc-icon[data-category="system"]:not([data-circle-background]) {
+    &,
+    &.wdc-icon-position-left {
+      margin: 0 $wdc-spacing-xxs 0 0;
+    }
+  
+    &.wdc-icon-position-right {
+      margin: 0 0 0 $wdc-spacing-xxs;
+    }
+  }
+
   &:hover:not([disabled]) {
     background-color: transparent;
     text-decoration: underline;
     color: $wdc-btn-text-hover;
+    @include wdc-icon-color($wdc-btn-text-hover);
   }
 
   &:focus {
     background-color: transparent;
+    @include wdc-icon-color($wdc-btn-text-hover);
   }
 
   &.wdc-btn-disabled,
@@ -30,6 +45,7 @@
     color: rgba(8, 117, 225, 0.5);
     text-decoration: none;
     pointer-events: none;
+    @include wdc-icon-color(rgba(8, 117, 225, 0.5));
   }
 
   &.wdc-btn-text-size-s {
@@ -45,13 +61,17 @@
 
   &.wdc-btn-text-inverse {
     color: $wdc-btn-text-color-inverse;
+    @include wdc-icon-color($wdc-btn-text-color-inverse);
+
     &.wdc-btn-disabled,
     &:disabled {
       color: rgba(255, 255, 255, 0.5);
+      @include wdc-icon-color(rgba(255, 255, 255, 0.5));
     }
 
     &:hover:not([disabled]) {
       color: $wdc-btn-text-color-inverse;
+      @include wdc-icon-color($wdc-btn-text-color-inverse);
     }
   }
 }
