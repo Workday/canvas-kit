@@ -9,7 +9,7 @@ const id = 'color-input';
 const placeholder = '000000';
 const value = 'eee';
 
-describe('Color Input', () => {
+describe('ColorInput', () => {
   const cb = jest.fn();
   afterEach(() => {
     cb.mockReset();
@@ -17,7 +17,7 @@ describe('Color Input', () => {
 
   describe('when rendered', () => {
     describe('with a placeholder', () => {
-      test('should render a color input with a placeholder', () => {
+      test('should render a ColorInput with a placeholder', () => {
         const {getByTestId} = render(
           <ColorInput onChange={cb} placeholder={placeholder} data-testid={id} />
         );
@@ -26,23 +26,21 @@ describe('Color Input', () => {
     });
 
     describe('with an id', () => {
-      test('should render a color input with a id', () => {
-        const {getByTestId} = render(
-          <ColorInput id="my-id" onChange={cb} value={value} data-testid={id} />
-        );
+      test('should render a ColorInput with an id', () => {
+        const {getByTestId} = render(<ColorInput id="my-id" data-testid={id} />);
         expect(getByTestId(id)).toHaveAttribute('id', 'my-id');
       });
     });
 
     describe('with a value', () => {
-      test('should render a color input with a value', () => {
-        const {getByTestId} = render(<ColorInput onChange={cb} value={value} data-testid={id} />);
-        expect(getByTestId(id)).toBeDefined();
+      test('should render a ColorInput with a value', () => {
+        const {getByTestId} = render(<ColorInput value={value} data-testid={id} />);
+        expect(getByTestId(id).value).toBe(value);
       });
     });
 
     describe('with a value and check', () => {
-      test('should render a color input with a value and check', () => {
+      test('should render a ColorInput with a value and check', () => {
         const {container} = render(<ColorInput value={value} showCheck={true} />);
 
         expect(container.querySelector('svg')).toHaveClass('wd-icon-check-small');
@@ -50,7 +48,7 @@ describe('Color Input', () => {
     });
 
     describe('with a value and background', () => {
-      test('should render a color input with a value and the value as a background', () => {
+      test('should render a ColorInput with a value and the value as a background', () => {
         const {container} = render(<ColorInput value={value} />);
 
         expect(container.querySelector('div div div[class^="css"]')).toHaveStyle(
@@ -60,8 +58,8 @@ describe('Color Input', () => {
     });
 
     describe('with disabled attribute', () => {
-      test('should render a disabled color input', () => {
-        const {getByTestId} = render(<ColorInput onChange={cb} disabled={true} data-testid={id} />);
+      test('should render a disabled ColorInput', () => {
+        const {getByTestId} = render(<ColorInput disabled={true} data-testid={id} />);
         expect(getByTestId(id)).toBeDisabled();
       });
     });
@@ -69,7 +67,7 @@ describe('Color Input', () => {
     describe('wrapped in a FormField', () => {
       test('should pass axe DOM accessibility guidelines', async () => {
         const html = ReactDOMServer.renderToString(
-          <FormField label="My Field" inputId="my-text-input-field">
+          <FormField label="My Field" inputId="my-color-input-field">
             <ColorInput id="my-color-input" />
           </FormField>
         );
@@ -80,9 +78,7 @@ describe('Color Input', () => {
     describe('with extra, arbitrary props', () => {
       test('should spread extra props', () => {
         const attr = 'test';
-        const {getByTestId} = render(
-          <ColorInput onChange={cb} data-propspread={attr} data-testid={id} />
-        );
+        const {getByTestId} = render(<ColorInput data-propspread={attr} data-testid={id} />);
         expect(getByTestId(id)).toHaveAttribute('data-propspread', attr);
       });
     });
