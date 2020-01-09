@@ -48,7 +48,7 @@ storiesOf('Components|Inputs/Color Picker/Color Input/React/Top Label', module)
   ))
   .add('Grow', () => (
     <FormField label="Label" inputId="input-grow" grow={true}>
-      {controlComponent(<ColorInput placeholder="Placeholder" />)}
+      {controlComponent(<ColorInput />)}
     </FormField>
   ))
   .add('Grow with Error', () => (
@@ -60,7 +60,7 @@ storiesOf('Components|Inputs/Color Picker/Color Input/React/Top Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {controlComponent(<ColorInput placeholder="Placeholder" />)}
+      {controlComponent(<ColorInput />)}
     </FormField>
   ));
 
@@ -108,7 +108,7 @@ storiesOf('Components|Inputs/Color Picker/Color Input/React/Left Label', module)
       inputId="input-grow"
       grow={true}
     >
-      {controlComponent(<ColorInput placeholder="Placeholder" />)}
+      {controlComponent(<ColorInput />)}
     </FormField>
   ))
   .add('Grow with Error', () => (
@@ -121,6 +121,6 @@ storiesOf('Components|Inputs/Color Picker/Color Input/React/Left Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {controlComponent(<ColorInput placeholder="Placeholder" />)}
+      {controlComponent(<ColorInput />)}
     </FormField>
   ));
