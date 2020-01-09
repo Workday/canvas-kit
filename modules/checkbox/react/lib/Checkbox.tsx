@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -12,7 +12,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import uuid from 'uuid/v4';
 
-export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
   id?: string;
@@ -45,6 +45,7 @@ const CheckboxContainer = styled('div')({
  */
 const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>(
   {
+    display: 'flex',
     height: checkboxHeight,
     width: checkboxWidth,
     marginTop: '3px',
@@ -57,7 +58,6 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>(
       height: checkboxHeight,
       transition: 'box-shadow 150ms ease-out',
       width: checkboxWidth,
-      zIndex: 1,
     },
   },
   ({disabled}) => ({

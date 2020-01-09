@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -9,7 +9,7 @@ import canvas, {
 } from '@workday/canvas-kit-react-core';
 import uuid from 'uuid/v4';
 
-export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
   id?: string;
@@ -43,10 +43,9 @@ const RadioContainer = styled('div')({
  */
 const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>(
   {
+    display: 'flex',
     height: radioHeight,
     width: radioWidth,
-    marginTop: '3px',
-    alignSelf: 'flex-start',
     '&::after': {
       borderRadius: borderRadius.circle,
       boxShadow: '0 0 0 0 ' + colors.soap200,
@@ -55,7 +54,6 @@ const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>(
       height: radioHeight,
       transition: 'box-shadow 150ms ease-out',
       width: radioWidth,
-      zIndex: 1,
     },
   },
   ({disabled}) => ({
