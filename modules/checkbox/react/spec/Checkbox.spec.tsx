@@ -2,8 +2,6 @@ import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import Checkbox from '../lib/Checkbox';
 import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
-import FormField from '@workday/canvas-kit-react-form-field';
 
 describe('Checkbox', () => {
   const cb = jest.fn();
@@ -64,31 +62,6 @@ describe('Checkbox', () => {
     it('should render a disabled checkbox input', () => {
       const {getByRole} = render(<Checkbox disabled={true} onChange={cb} />);
       expect(getByRole('checkbox')).toHaveProperty('disabled', true);
-    });
-  });
-
-  it('when rendered should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(
-      <Checkbox id={'123'} label={'Label'} onChange={cb} />
-    );
-    expect(await axe(html)).toHaveNoViolations();
-  });
-
-  describe('when rendered without a defined id', () => {
-    it('should pass axe DOM accessibility guidelines', async () => {
-      const html = ReactDOMServer.renderToString(<Checkbox label={'Label'} onChange={cb} />);
-      expect(await axe(html)).toHaveNoViolations();
-    });
-  });
-
-  describe('when rendered wrapped in a FormField', () => {
-    it('should pass axe DOM accessibility guidelines', async () => {
-      const html = ReactDOMServer.renderToString(
-        <FormField label="My Field" inputId="my-checkbox-field">
-          <Checkbox disabled={false} checked={true} id="my-checkbox-field" onChange={cb} />
-        </FormField>
-      );
-      expect(await axe(html)).toHaveNoViolations();
     });
   });
 
