@@ -11,6 +11,18 @@ describe('Checkbox', () => {
     cb.mockReset();
   });
 
+  describe('when rendered', () => {
+    it('should render an input with type=checkbox', () => {
+      const {getByRole} = render(<Checkbox onChange={cb} />);
+      expect(getByRole('checkbox')).toHaveProperty('type', 'checkbox');
+    });
+
+    it('should be unchecked by default', () => {
+      const {getByRole} = render(<Checkbox onChange={cb} />);
+      expect(getByRole('checkbox')).toHaveProperty('checked', false);
+    });
+  });
+
   describe('when rendered with an id', () => {
     it('should render a checkbox input with id', () => {
       const id = 'myCheckbox';
