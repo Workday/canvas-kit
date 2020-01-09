@@ -70,7 +70,6 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
     top: 10,
     ...type.body,
     ...type.variant.mono,
-    color: colors.blackPepper300,
   },
   ({disabled}) => ({
     color: disabled ? inputColors.disabled.text : undefined,
