@@ -92,7 +92,7 @@ export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme
       neutral: fillPalette(neutral),
     },
     breakpoints,
-    direction: direction === ContentDirection.RTL ? direction : ContentDirection.LTR
+    direction: direction === ContentDirection.RTL ? direction : ContentDirection.LTR,
   };
 
   return merge({}, defaultCanvasTheme, mergeable) as CanvasTheme;
