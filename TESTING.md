@@ -4,14 +4,14 @@
 even though tests at various levels may overlap. Here's a simplified explanation of what each level
 is meant to test:
 
-- **Unit**: This level is meant to test the input/output of units of functionality (e.g., utility
+- **Unit**: This level is meant to test the input/output of units of functionality (e.g. utility
   functions or input props of components that output DOM).
 - **Functional**: This level is browser-based testing and is where UI behavior and accessibility
   requirements are specified (e.g., Given a modal example, When clicking on the button, Then the
   modal should be open). Functional tests are against Storybook Stories.
-- **Visual**: This level is where all styling is tested. Some props have only visual effects and it
+- **Visual**: This level is where all styling is tested. Some props only have visual effects and it
   is difficult to reason about at any other level. All Storybook Stories are automatically visual
-  regression tests.
+  regression tested.
 
 Tests are supposed to be a source of feedback and confidence. To achieve that, a test should be
 clear about intent and failures. Developers tend to ignore passing tests and focus only on failing
@@ -66,10 +66,10 @@ describe('SomeComponent', () => {
 });
 ```
 
-This series of specifications give more context to the test. It is more code, but it is more clear
-what the intent of each specification is. If one fails, it will be easier to diagnose what and why.
-The assertions also make use of `jest-dom` which gives more context into _how_ it fails. Instead of
-a generic assertion, the CLI will output something like
+This series of specifications give more context to the test. It is more code, but it is clearer what
+the intent of each specification is. If one fails, it will be easier to diagnose what and why. The
+assertions also make use of `jest-dom` which gives more context into _how_ it fails. Instead of a
+generic assertion, the CLI will output something like
 `Expected <div data-testid="test" aria-label="bar">bar</div> to have an "aria-label" of "foo" but received "bar"`.
 **The specification should tell us which spec failed and the assertion gives insight into how.**
 
@@ -236,8 +236,8 @@ Component helpers come in 3 flavors:
   `Cypress.Chainable<JQuery>` and usually contains a `cy.get` and the selector usually contains
   something that is unique to that component type. For example, the Modal helper uses
   `[role=dialog]` with an option to disambiguate with a `data-testid`.
-- **Transform**: Imagine a web application is a collection of boxes that determine how components of
-  an application are laid out. A transform helper takes in a larger box and returns a smaller box,
+- **Scoping**: Imagine a web application is a collection of boxes that determine how components of
+  an application are laid out. A scoping helper takes in a larger box and returns a smaller box,
   further reducing the scope. Ideally these helpers contain no Cypress commands (which are
   asynchronous), only jQuery calls (which are synchronous). Synchronous helper functions can be run
   more than once at the discretion of the Cypress runtime. A good use-case for this type is to
@@ -254,11 +254,11 @@ Component helpers come in 3 flavors:
 
 ## Visual Tests
 
-A Storybook story is the unit of all visual regression tests. Storybook is made to be a Component
-explorer and where all states of components can be demonstrated without launching full application
-instance. This includes loading states, error states, etc. Visual regression is a good extension to
-the idea. The only modification required to visually capture all states is to force every state to
-the initial rendering of a story vs using a dynamic solution like
+Canvas Kit uses [ChromaticQA](https://www.chromaticqa.com/) for visual tests which are run on every
+Storybook story. All the visual states should be represented by one or more stories. This way all of
+the visual states of a component can be visually regression tested without requiring the test to
+interact with the UI. These states should include loading states, error states, etc. Stories created
+for visual regression tests should avoid dynamic solutions like
 [knobs](https://github.com/storybookjs/storybook/tree/next/addons/knobs).
 
 Not all visual states are application states (E.g. `focus`, `hover`, and `active` on a button
