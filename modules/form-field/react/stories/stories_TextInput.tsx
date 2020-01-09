@@ -1,6 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import withReadme from 'storybook-readme/with-readme';
 import {controlComponent} from '../../../../utils/storybook';
 
@@ -152,3 +153,47 @@ storiesOf('Components|Inputs/Text Input/React/Left Label', module)
       {controlComponent(<TextInput placeholder="Placeholder" />)}
     </FormField>
   ));
+
+storiesOf('Components|Inputs/Text Input/React/States', module)
+  .addParameters({component: TextInput})
+  .addDecorator(withReadme(README))
+  .add('All', () => {
+    const states = ['default', 'hover', 'focus active', 'disabled'];
+    const variants = [
+      undefined,
+      FormField.ErrorType.Alert,
+      FormField.ErrorType.Error,
+    ] as const;
+
+    return (
+      <StaticStates>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              {states.map(state => (
+                <th key={state}>{state}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {variants.map(variant => (
+              <tr key={variant}>
+                <th>{variant}</th>
+                {states.map(state => (
+                  <td key={state}>
+                    <FormField
+                      labelPosition={FormField.LabelPosition.Hidden}
+                      error={state === 'disabled' ? '' : variant}
+                    >
+                      {controlComponent(<TextInput className={state === 'disabled' ? undefined : state} disabled={state === 'disabled' ? true : false}/>)}
+                    </FormField>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </StaticStates>
+    );
+  });

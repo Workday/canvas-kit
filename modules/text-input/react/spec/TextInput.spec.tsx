@@ -45,17 +45,6 @@ describe('Text Input', () => {
       })
     })
 
-    describe('wrapped in a FormField', () => {
-      test('should pass axe DOM accessibility guidelines', async () => {
-        const html = ReactDOMServer.renderToString(
-          <FormField label="My Field" inputId="my-text-input-field">
-            <TextInput id="my-text-input-field" onChange={cb}/>
-          </FormField>
-        );
-        expect(await axe(html)).toHaveNoViolations();
-      });
-    });
-
     describe('with extra, arbitrary props', () => {
       test('should spread extra props', () => {
         const attr = 'test';
