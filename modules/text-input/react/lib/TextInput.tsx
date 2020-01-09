@@ -43,6 +43,9 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow'>>(
         color: inputColors.disabled.text,
       },
     },
+    '::-ms-clear': {
+      display: 'none',
+    },
   },
   ({error}) => ({
     ...errorRing(error),
