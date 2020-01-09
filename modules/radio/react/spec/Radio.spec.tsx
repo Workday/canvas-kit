@@ -24,7 +24,7 @@ describe('Radio', () => {
 
     describe('with a value', () => {
       test('should render a radio input with value', () => {
-        const value = 'myRadio';
+        const value = 'myradio';
         const {getByDisplayValue} = render(<Radio value={value} onChange={cb} />);
         expect(getByDisplayValue(value)).toBeDefined();
       });
@@ -33,14 +33,23 @@ describe('Radio', () => {
     describe('with checked=true', () => {
       test('should render a checked radio input', () => {
         const {getByLabelText} = render(<Radio checked={true} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toBeChecked();
+        expect(getByLabelText(label)).toHaveProperty('checked', true);
+      });
+    });
+
+    describe('with defaultChecked=false and checked=true', () => {
+      test('should render a checked radio input', () => {
+        const {getByLabelText} = render(
+          <Radio defaultChecked={false} checked={true} onChange={cb} label={label} />
+        );
+        expect(getByLabelText(label)).toHaveProperty('checked', true);
       });
     });
 
     describe('with disabled attribute', () => {
       test('should render a disabled radio input', () => {
         const {getByLabelText} = render(<Radio disabled={true} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toBeDisabled();
+        expect(getByLabelText(label)).toHaveProperty('disabled', true);
       });
     });
 
