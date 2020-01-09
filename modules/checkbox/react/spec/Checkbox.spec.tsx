@@ -60,16 +60,14 @@ describe('Checkbox', () => {
 
     test('should pass axe DOM accessibility guidelines', async () => {
       const html = ReactDOMServer.renderToString(
-        <Checkbox id={'123'} label={'Label'} onChange={jest.fn()} />
+        <Checkbox id={'123'} label={'Label'} onChange={cb} />
       );
       expect(await axe(html)).toHaveNoViolations();
     });
 
     describe('without a defined id', () => {
       test('should pass axe DOM accessibility guidelines', async () => {
-        const html = ReactDOMServer.renderToString(
-          <Checkbox label={'Label'} onChange={jest.fn()} />
-        );
+        const html = ReactDOMServer.renderToString(<Checkbox label={'Label'} onChange={cb} />);
         expect(await axe(html)).toHaveNoViolations();
       });
     });
@@ -78,7 +76,7 @@ describe('Checkbox', () => {
       test('should pass axe DOM accessibility guidelines', async () => {
         const html = ReactDOMServer.renderToString(
           <FormField label="My Field" inputId="my-checkbox-field">
-            <Checkbox disabled={false} checked={true} id="my-checkbox-field" onChange={jest.fn()} />
+            <Checkbox disabled={false} checked={true} id="my-checkbox-field" onChange={cb} />
           </FormField>
         );
         expect(await axe(html)).toHaveNoViolations();
@@ -89,8 +87,8 @@ describe('Checkbox', () => {
       test('should create a unique id for each instance', async () => {
         const {getByLabelText} = render(
           <form>
-            <Checkbox checked={true} onChange={jest.fn()} disabled={false} label="label1" />;
-            <Checkbox onChange={jest.fn()} disabled={false} label="label2" />;
+            <Checkbox checked={true} onChange={cb} disabled={false} label="label1" />;
+            <Checkbox onChange={cb} disabled={false} label="label2" />;
           </form>
         );
 
@@ -98,6 +96,18 @@ describe('Checkbox', () => {
         const id2 = getByLabelText('label2').getAttribute('id');
 
         expect(id1).not.toEqual(id2);
+      });
+
+      test('should keep the same unique id if re-rendered', () => {
+        const {getByRole, rerender} = render(<Checkbox checked={false} onChange={cb} />);
+
+        const uniqueId = getByRole('checkbox').getAttribute('id');
+        expect(getByRole('checkbox')).toHaveProperty('id', uniqueId);
+
+        rerender(<Checkbox checked={true} onChange={cb} />);
+
+        expect(getByRole('checkbox')).toHaveProperty('checked');
+        expect(getByRole('checkbox')).toHaveProperty('id', uniqueId);
       });
     });
 
