@@ -1,8 +1,5 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
-import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
-import FormField from '@workday/canvas-kit-react-form-field';
 import ColorPreview from '../lib/ColorPreview';
 
 const id = 'color-preview';
@@ -56,17 +53,6 @@ describe('ColorPreview', () => {
       });
     });
 
-    describe('wrapped in a FormField', () => {
-      test('should pass axe DOM accessibility guidelines', async () => {
-        const html = ReactDOMServer.renderToString(
-          <FormField label="My Field" inputId="my-colorpreview">
-            <ColorPreview value={value} id="my-colorpreview" />
-          </FormField>
-        );
-        expect(await axe(html)).toHaveNoViolations();
-      });
-    });
-
     describe('when provided an input ref', () => {
       test('input ref should be defined', () => {
         const ref: React.RefObject<HTMLInputElement> = React.createRef();
@@ -98,16 +84,5 @@ describe('ColorPreview', () => {
         expect(getByTestId(id)).toHaveAttribute('data-propspread', attr);
       });
     });
-  });
-});
-
-describe('ColorPreview Accessibility', () => {
-  test('ColorPreview should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(
-      <FormField label="Label" inputId="input-plain">
-        <ColorPreview value={value} />
-      </FormField>
-    );
-    expect(await axe(html)).toHaveNoViolations();
   });
 });

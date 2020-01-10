@@ -2,7 +2,6 @@ import * as React from 'react';
 import ColorInput from '../lib/ColorInput';
 import {render, fireEvent} from '@testing-library/react';
 import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
 import FormField from '@workday/canvas-kit-react-form-field';
 
 const id = 'color-input';
@@ -61,17 +60,6 @@ describe('ColorInput', () => {
       test('should render a disabled ColorInput', () => {
         const {getByTestId} = render(<ColorInput disabled={true} data-testid={id} />);
         expect(getByTestId(id)).toBeDisabled();
-      });
-    });
-
-    describe('wrapped in a FormField', () => {
-      test('should pass axe DOM accessibility guidelines', async () => {
-        const html = ReactDOMServer.renderToString(
-          <FormField label="My Field" inputId="my-color-input-field">
-            <ColorInput id="my-color-input" />
-          </FormField>
-        );
-        expect(await axe(html)).toHaveNoViolations();
       });
     });
 
@@ -157,17 +145,6 @@ describe('ColorInput', () => {
       expect(cb).toHaveBeenCalledTimes(0);
       fireEvent.change(getByTestId(id), event);
       expect(cb).toHaveBeenCalledTimes(0);
-    });
-  });
-
-  describe('ColorInput Accessibility', () => {
-    test('ColorInput should pass axe DOM accessibility guidelines', async () => {
-      const html = ReactDOMServer.renderToString(
-        <FormField label="Label" inputId="input-plain">
-          <ColorInput />
-        </FormField>
-      );
-      expect(await axe(html)).toHaveNoViolations();
     });
   });
 });
