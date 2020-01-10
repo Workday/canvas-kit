@@ -47,7 +47,10 @@ jobs:
       - yarn cypress run --record
       - kill $(jobs -p) || true
     env:
-      - CHROMATIC_APP_CODE="dlpro96xybh"
+      # Travis doesn't support encryption on forks: https://docs.travis-ci.com/user/pull-requests#pull-requests-and-security-restrictions
+      # If these keys become compromised, we will rotate and disable these features
+      # on forked PRs until a suitable workaround is found
+      - CHROMATIC_APP_CODE="m1dh5kc7oj"
       - CYPRESS_RECORD_KEY="3a9347b6-36ab-4a36-823d-709f4078b148"
 
   - stage: tag
@@ -65,7 +68,7 @@ jobs:
       - yarn chromatic --auto-accept-changes
       - yarn build-storybook
     env:
-      - CHROMATIC_APP_CODE="dlpro96xybh"
+      - CHROMATIC_APP_CODE="m1dh5kc7oj"
     deploy:
       provider: pages
       skip_cleanup: true

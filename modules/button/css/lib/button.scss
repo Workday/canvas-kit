@@ -20,6 +20,17 @@ $_wdc-btn-caret-down-icon-white: svg-load(
   background-repeat: no-repeat;
 }
 
+@mixin wdc-icon-color($_color) {
+  .wdc-icon[data-category="system"]:not([data-circle-background]) {
+    &, &:hover {
+      .wd-icon-fill,
+      .wd-icon-accent {
+        fill: $_color;
+      }
+    }
+  }
+}
+
 @mixin wdc-btn() {
   @include wdc-type-body();
   @include wdc-type-variant-btn();
@@ -49,11 +60,13 @@ $_wdc-btn-caret-down-icon-white: svg-load(
   &.wdc-btn-hover,
   &:hover {
     background-color: $wdc-btn-bg-secondary-hover;
+    @include wdc-icon-color($wdc-btn-icon-color-interaction);
   }
 
   &.wdc-btn-active,
   &:active {
     background-color: $wdc-btn-bg-secondary-active;
+    @include wdc-icon-color($wdc-btn-icon-color-interaction);
   }
 
   &:focus,
@@ -61,6 +74,11 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     background-color: $wdc-btn-bg-secondary-focus;
     box-shadow: $wdc-btn-focus-ring;
     outline: none;
+    @include wdc-icon-color($wdc-btn-icon-color);
+  }
+
+  &:focus:hover {
+    @include wdc-icon-color($wdc-btn-icon-color-interaction);
   }
 
   &.wdc-btn-disabled,
@@ -68,12 +86,29 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     background-color: $wdc-btn-bg-secondary-disabled;
     color: $wdc-btn-secondary-disabled-text-color;
     cursor: default;
+    @include wdc-icon-color($wdc-btn-secondary-disabled-text-color);
   }
 
   &.wdc-btn-grow {
     width: 100%;
     max-width: 100%;
   }
+
+  .wdc-icon[data-category="system"]:not([data-circle-background]) {
+    vertical-align: -7px;
+
+    &,
+    .wdc-icon-position-left & {
+      margin: 0 $wdc-spacing-xxs 0 0;
+    }
+  
+    .wdc-icon-position-right & {
+      margin: 0 0 0 $wdc-spacing-xxs;
+    }
+  }
+
+  @include wdc-icon-color($wdc-btn-icon-color);
+
 
   &.wdc-btn-dropdown {
     padding-left: $wdc-spacing-l;
@@ -112,6 +147,18 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     height: 48px;
     padding: 0 $wdc-spacing-l;
     font-size: 16px;
+    .wdc-icon[data-category="system"]:not([data-circle-background]) {
+      vertical-align: -6px;
+      
+      &,
+      &.wdc-icon-position-left {
+        margin: 0 $wdc-spacing-xs 0 (-$wdc-spacing-xxxs);
+      }
+    
+      &.wdc-icon-position-right {
+        margin: 0 (-$wdc-spacing-xxxs) 0 $wdc-spacing-xs;
+      }
+    }
   }
 
   &.wdc-btn-size-s {
@@ -124,26 +171,31 @@ $_wdc-btn-caret-down-icon-white: svg-load(
     background-color: $wdc-btn-bg-primary;
     box-shadow: none;
     color: $wdc-btn-text-color;
+    @include wdc-icon-color($wdc-btn-text-color);
 
     &.wdc-btn-hover,
     &:hover {
       background-color: $wdc-btn-bg-primary-hover;
       box-shadow: none;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
 
     &.wdc-btn-active,
     &:active {
       background-color: $wdc-btn-bg-primary-active;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
 
     &:focus,
     &.wdc-btn-focus {
       background-color: $wdc-btn-bg-primary-focus;
       box-shadow: $wdc-btn-focus-ring;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
 
     &:focus:hover {
       background-color: $wdc-btn-bg-primary-hover;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
 
     &.wdc-btn-disabled,
@@ -151,32 +203,38 @@ $_wdc-btn-caret-down-icon-white: svg-load(
       box-shadow: none;
       background-color: $wdc-btn-bg-primary-disabled;
       color: $wdc-btn-text-color;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
   }
 
   &.wdc-btn-delete {
     background-color: $wdc-btn-bg-delete;
     color: $wdc-btn-text-color;
+    @include wdc-icon-color($wdc-btn-text-color);
 
     &.wdc-btn-hover,
     &:hover {
       background-color: $wdc-btn-bg-delete-hover;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
 
     &.wdc-btn-active,
     &:active {
       background-color: $wdc-btn-bg-delete-active;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
 
     &:focus,
     &.wdc-btn-focus {
       background-color: $wdc-btn-bg-delete-focus;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
 
     &.wdc-btn-disabled,
     &:disabled {
       color: $wdc-btn-text-color;
       background-color: $wdc-btn-bg-delete-disabled;
+      @include wdc-icon-color($wdc-btn-text-color);
     }
   }
 }
