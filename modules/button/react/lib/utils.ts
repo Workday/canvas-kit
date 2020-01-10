@@ -280,9 +280,9 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
   const activeStyles = {
     ':active, :focus:active, :hover:active': {
       backgroundColor: buttonColors.activeBackground,
-      ...(buttonColors.labelDataActive && {
-        ['.' + ButtonStyles.labelDataBaseStyles.classname]: {
-          color: buttonColors.labelDataActive,
+      ...(buttonColors.labelIconHover && {
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconActive,
         },
       }),
     },
@@ -322,6 +322,7 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
     },
     '&:not([disabled])': {
       '&:focus': {
+        background: buttonColors.focusBackground,
         borderColor: buttonColors.focusBorder,
         ...getButtonFocusRing(variant),
       },
