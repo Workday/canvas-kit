@@ -238,9 +238,10 @@ export const IconButtonCon = styled('button', {
         };
       case IconButtonVariant.Inverse:
         return {
-          ...getFillSelector(colors.frenchVanilla100),
-          ...getAccentSelector(colors.blueberry400),
-          ...getBackgroundSelector(colors.frenchVanilla100),
+          ...getFillSelector(colors.blueberry400),
+          ...getAccentSelector(colors.frenchVanilla100),
+          ...getBackgroundSelector(colors.blueberry400),
+          backgroundColor: colors.frenchVanilla100,
           '&:focus': {
             backgroundColor: colors.frenchVanilla100,
             ...getFillSelector(colors.blueberry400),
@@ -248,12 +249,15 @@ export const IconButtonCon = styled('button', {
             ...getBackgroundSelector(colors.blueberry400),
           },
           '&:focus&:hover, &:active': {
-            backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
+            backgroundColor: colors.frenchVanilla100,
             ...getFillSelector(colors.blueberry400),
             ...getAccentSelector(colors.frenchVanilla100),
             ...getBackgroundSelector(colors.blueberry400),
           },
 
+          '&:hover': {
+            backgroundColor: colors.frenchVanilla100,
+          },
           '&:not([disabled]):focus': {
             backgroundColor: colors.frenchVanilla100,
             ...(toggled
@@ -268,6 +272,10 @@ export const IconButtonCon = styled('button', {
         };
       case IconButtonVariant.InverseFilled:
         return {
+          ...getFillSelector(colors.blueberry400),
+          ...getAccentSelector(colors.frenchVanilla100),
+          ...getBackgroundSelector(colors.blueberry400),
+          backgroundColor: colors.frenchVanilla100,
           '&:focus': {
             backgroundColor: colors.frenchVanilla100,
             ...getFillSelector(colors.blueberry400),
@@ -275,10 +283,14 @@ export const IconButtonCon = styled('button', {
             ...getBackgroundSelector(colors.blueberry400),
           },
           '&:focus&:hover, &:active': {
-            backgroundColor: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
+            backgroundColor: colors.frenchVanilla100,
             ...getFillSelector(colors.blueberry400),
             ...getAccentSelector(colors.frenchVanilla100),
             ...getBackgroundSelector(colors.blueberry400),
+          },
+
+          '&:hover': {
+            backgroundColor: colors.frenchVanilla100,
           },
           '&:not([disabled]):focus': {
             backgroundColor: colors.frenchVanilla100,
@@ -291,9 +303,6 @@ export const IconButtonCon = styled('button', {
               backgroundColor: `${colors.frenchVanilla100} !important`,
             },
           }),
-          backgroundColor: colors.blueberry400,
-          ...getFillSelector(colors.frenchVanilla100),
-          ...getAccentSelector(colors.frenchVanilla100),
         };
     }
   }
