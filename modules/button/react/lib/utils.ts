@@ -256,7 +256,7 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
     ...(buttonColors.labelIcon && {
       'span .wd-icon-fill, span .wd-icon-accent': {
         transition: 'fill 120ms ease-in',
-        fill: buttonColors.labelIcon,
+        fill: 'red',
       },
     }),
     ...(buttonColors.labelData && {
