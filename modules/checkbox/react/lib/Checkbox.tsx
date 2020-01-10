@@ -13,7 +13,7 @@ import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
-  checked?: boolean;
+  checked: boolean;
   disabled?: boolean;
   id?: string;
   inputRef?: React.Ref<HTMLInputElement>;
@@ -237,6 +237,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
   static ErrorType = ErrorType;
 
   public static defaultProps = {
+    checked: false,
     label: '',
   };
 
@@ -246,7 +247,6 @@ export default class Checkbox extends React.Component<CheckboxProps> {
     // TODO: Standardize on prop spread location (see #150)
     const {
       checked,
-      defaultChecked,
       disabled,
       id = this.id,
       inputRef,
@@ -258,13 +258,11 @@ export default class Checkbox extends React.Component<CheckboxProps> {
       ...elemProps
     } = this.props;
 
-    const isChecked = checked || (checked === undefined && defaultChecked) || false;
-
     return (
       <CheckboxContainer>
         <CheckboxInputWrapper disabled={disabled}>
           <CheckboxInput
-            checked={isChecked}
+            checked={checked}
             disabled={disabled}
             id={id}
             ref={inputRef}
@@ -274,8 +272,8 @@ export default class Checkbox extends React.Component<CheckboxProps> {
             error={error}
             {...elemProps}
           />
-          <CheckboxBackground checked={isChecked} disabled={disabled}>
-            <CheckboxCheck checked={isChecked}>
+          <CheckboxBackground checked={checked} disabled={disabled}>
+            <CheckboxCheck checked={checked}>
               {indeterminate ? (
                 <IndeterminateBox />
               ) : (

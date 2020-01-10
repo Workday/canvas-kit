@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import Checkbox from '../lib/Checkbox';
-import ReactDOMServer from 'react-dom/server';
 
 describe('Checkbox', () => {
   const cb = jest.fn();
@@ -40,20 +39,6 @@ describe('Checkbox', () => {
   describe('when rendered with checked=true', () => {
     it('should render a checked checkbox input', () => {
       const {getByRole} = render(<Checkbox checked={true} onChange={cb} />);
-      expect(getByRole('checkbox')).toHaveProperty('checked', true);
-    });
-  });
-
-  describe('when rendered with defaultChecked=true', () => {
-    it('should render a checked checkbox input', () => {
-      const {getByRole} = render(<Checkbox defaultChecked={true} onChange={cb} />);
-      expect(getByRole('checkbox')).toHaveProperty('checked', true);
-    });
-  });
-
-  describe('when rendered with defaultChecked=false and checked=true', () => {
-    it('should render a checked checkbox input', () => {
-      const {getByRole} = render(<Checkbox defaultChecked={false} checked={true} onChange={cb} />);
       expect(getByRole('checkbox')).toHaveProperty('checked', true);
     });
   });
