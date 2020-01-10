@@ -17,7 +17,15 @@ type CanvasThemeCommonPalette = {
 };
 
 /**
- * The format of a Canvas theme for components that suport it.
+ * Direction of page content for internationalization
+ */
+export enum ContentDirection {
+  LTR = 'ltr',
+  RTL = 'rtl',
+}
+
+/**
+ * The format of a Canvas theme for components that support it.
  */
 export interface CanvasTheme {
   palette: {
@@ -35,6 +43,7 @@ export interface CanvasTheme {
     only: (key: BreakpointFnParam) => string;
     between: (start: BreakpointFnParam, end: BreakpointFnParam) => string;
   };
+  direction: ContentDirection;
 }
 
 /**

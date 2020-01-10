@@ -1,5 +1,5 @@
-import {defaultCanvasTheme} from '../lib/theming/theme';
-import createCanvasTheme from '../lib/theming/createCanvasTheme';
+import {defaultCanvasTheme, createCanvasTheme} from '../lib/theming';
+import lodash from 'lodash';
 
 describe('useTheme', () => {
   test('calling without any input provides the default theme', () => {
@@ -50,5 +50,19 @@ describe('useTheme', () => {
     };
 
     expect(theme).toEqual(expected);
+  });
+
+  test('custom theme should not override defaultCanvasTheme when merged', () => {
+    const input = {
+      palette: {
+        primary: {
+          main: 'orange',
+        },
+      },
+    };
+    const original = lodash.cloneDeep(defaultCanvasTheme);
+    createCanvasTheme(input);
+
+    expect(original).toEqual(defaultCanvasTheme);
   });
 });

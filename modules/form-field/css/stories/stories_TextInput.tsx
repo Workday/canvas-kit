@@ -98,7 +98,7 @@ storiesOf('Components|Inputs/Text Input/CSS/Top Label', module)
     </div>
   ));
 
-storiesOf('Components|Inputs/TextInput/CSS/Left Label', module)
+storiesOf('Components|Inputs/Text Input/CSS/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">

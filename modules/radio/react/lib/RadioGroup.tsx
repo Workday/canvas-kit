@@ -1,10 +1,10 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import Radio, {RadioProps} from './Radio';
 import {borderRadius, spacing, inputColors, colors} from '@workday/canvas-kit-react-core';
 import {ErrorType, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
-export interface RadioGroupProps extends GrowthBehavior {
+export interface RadioGroupProps extends Themeable, GrowthBehavior {
   /**
    * The Radio button children of the RadioGroup (must be at least two).
    */

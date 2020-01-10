@@ -141,3 +141,8 @@ See the [@workday/canvas-kit-react-core docs](../../../core/react/README.md#inpu
 ## Theming
 
 Theming documentation has its own README. You can find it [here](./lib/theming/README.md)
+
+## Bidirectionality
+
+Bidirectionality is provided by Theming. You can find Theming documentation
+[here](./lib/theming/README.md#bidirectionality)
