@@ -34,6 +34,7 @@ module.exports = wallaby => {
       // Tell Jest how to resolve symlinked modules. Without this, Jest will look at source TS files and not at Wallaby's compiled & instrumented files
       (jestConfig.moduleNameMapper = {
         '@workday/canvas-kit-react-(.*)': '<rootDir>/modules/$1/react',
+        '@workday/canvas-kit-labs-react-(.*)': '<rootDir>/modules/_labs/$1/react',
       }),
         w.testFramework.configure(jestConfig);
     },

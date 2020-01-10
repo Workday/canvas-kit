@@ -1,10 +1,10 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import uuid from 'uuid/v4';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
 
-export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
   id?: string;

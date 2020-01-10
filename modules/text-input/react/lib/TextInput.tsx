@@ -1,10 +1,11 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
 import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 
 export interface TextInputProps
-  extends GrowthBehavior,
+  extends Themeable,
+    GrowthBehavior,
     React.InputHTMLAttributes<HTMLInputElement> {
   error?: ErrorType;
   inputRef?: React.Ref<HTMLInputElement>;
@@ -41,6 +42,9 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow'>>(
       '&::placeholder': {
         color: inputColors.disabled.text,
       },
+    },
+    '::-ms-clear': {
+      display: 'none',
     },
   },
   ({error}) => ({
