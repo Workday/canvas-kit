@@ -129,7 +129,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
     </FormField>
   ));
 
-storiesOf('Components|Inputs/Checkbox/React', module)
+storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
   .addParameters({component: Checkbox})
   .addDecorator(withReadme(README))
   .add('States', () => (
@@ -160,17 +160,17 @@ storiesOf('Components|Inputs/Checkbox/React', module)
                     return;
                   }
 
+                  const key = `${checked ? 'checked' : 'unchecked'}-${
+                    disabled ? 'disabled' : 'enabled'
+                  }-${indeterminate ? 'indeterminate' : ''}-${variant}`;
+
                   return (
-                    <tr
-                      key={`${checked ? 'checked' : 'unchecked'} ${
-                        disabled ? 'disabled' : 'enabled'
-                      }  ${indeterminate ? 'indeterminate' : ''} ${variant}`}
-                    >
+                    <tr key={key}>
                       <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
                         checked ? (indeterminate ? 'indeterminate' : 'checked') : 'unchecked'
                       })`}</td>
 
-                      {['', 'focus', 'hover', 'active'].map(className => (
+                      {['', 'hover', 'focus', 'active'].map(className => (
                         <td>
                           <Checkbox
                             checked={checked}
@@ -178,6 +178,8 @@ storiesOf('Components|Inputs/Checkbox/React', module)
                             indeterminate={indeterminate}
                             error={type}
                             className={className}
+                            key={`${key}-${className}`}
+                            onChange={() => {}} // eslint-disable-line no-empty-function
                           />
                         </td>
                       ))}

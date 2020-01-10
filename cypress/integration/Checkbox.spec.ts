@@ -14,7 +14,7 @@ describe('Checkbox', () => {
         h.stories.load('Components|Inputs/Checkbox/React/Top Label', story);
       });
 
-      it('should not have any axe errors', () => {
+      it('should pass accessibility checks', () => {
         cy.checkA11y();
       });
 
