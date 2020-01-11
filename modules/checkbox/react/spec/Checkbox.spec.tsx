@@ -79,7 +79,7 @@ describe('Checkbox', () => {
   });
 
   describe('when rendered with extra, arbitrary props', () => {
-    it('should spread extra props', () => {
+    it('should spread extra props onto the checkbox', () => {
       const attr = 'test';
       const {getByRole} = render(<Checkbox data-propspread={attr} onChange={cb} />);
       expect(getByRole('checkbox')).toHaveAttribute('data-propspread', attr);
