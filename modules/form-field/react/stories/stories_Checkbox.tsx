@@ -171,14 +171,13 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
                       })`}</td>
 
                       {['', 'hover', 'focus', 'active'].map(className => (
-                        <td>
+                        <td key={`${key}-${className}`}>
                           <Checkbox
                             checked={checked}
                             disabled={disabled}
                             indeterminate={indeterminate}
                             error={type}
                             className={className}
-                            key={`${key}-${className}`}
                             onChange={() => {}} // eslint-disable-line no-empty-function
                           />
                         </td>
