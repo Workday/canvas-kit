@@ -338,7 +338,7 @@ export default class IconButton extends React.Component<IconButtonProps> {
       children,
       ...elemProps
     } = this.props;
-    console.warn('toggled', toggled);
+
     return (
       <IconButtonCon
         toggled={toggled}
