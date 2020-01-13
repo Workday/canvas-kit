@@ -30,7 +30,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   showClearButton?: boolean;
   /**
-   * Aria Label for the clear button
+   * The `aria-label` for the clear button
    * @default Reset Search Input
    */
   clearButtonLabel: string;
