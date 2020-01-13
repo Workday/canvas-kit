@@ -154,15 +154,15 @@ storiesOf('Components|Inputs/Text Input/React/Left Label', module)
     </FormField>
   ));
 
-storiesOf('Components|Inputs/Text Input/React/States', module)
+storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
   .addParameters({component: TextInput})
   .addDecorator(withReadme(README))
   .add('All', () => {
     const states = ['default', 'hover', 'focus active', 'disabled'];
     const variants = [
-      undefined,
-      FormField.ErrorType.Alert,
-      FormField.ErrorType.Error,
+      [undefined, "Default"],
+      [FormField.ErrorType.Alert, "Alert"],
+      [FormField.ErrorType.Error, "Error"],
     ] as const;
 
     return (
@@ -178,13 +178,13 @@ storiesOf('Components|Inputs/Text Input/React/States', module)
           </thead>
           <tbody>
             {variants.map(variant => (
-              <tr key={variant}>
-                <th>{variant}</th>
+              <tr key={variant[0]}>
+                <th>{variant[1]}</th>
                 {states.map(state => (
                   <td key={state}>
                     <FormField
                       labelPosition={FormField.LabelPosition.Hidden}
-                      error={state === 'disabled' ? '' : variant}
+                      error={state === 'disabled' ? '' : variant[0]}
                     >
                       {controlComponent(<TextInput className={state === 'disabled' ? undefined : state} disabled={state === 'disabled' ? true : false}/>)}
                     </FormField>

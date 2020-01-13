@@ -18,35 +18,35 @@ describe('Text Input', () => {
 
   describe('when rendered', () => {
     describe('with an placeholder', () => {
-      test('should render a text input with placeholder', () => {
+      it('should render a text input with placeholder', () => {
         const {getByPlaceholderText} = render(<TextInput onChange={cb} placeholder={placeholder}/>);
         expect(getByPlaceholderText(placeholder)).toHaveAttribute('placeholder', placeholder);
       })
     })
     
     describe('with a id', () => {
-      test('should render a text input with a id', () => {
+      it('should render a text input with a id', () => {
         const {getByPlaceholderText} = render(<TextInput id={id} onChange={cb} value={value} placeholder={placeholder}/>);
         expect(getByPlaceholderText(placeholder)).toHaveAttribute('id', id);
       })
     })
 
     describe('with a value', () => {
-      test('should render a text input with a value', () => {
+      it('should render a text input with a value', () => {
         const {getByDisplayValue} = render(<TextInput onChange={cb} value={value}/>);
         expect(getByDisplayValue(value)).toBeDefined();
       })
     })
 
     describe('with disabled attribute', () => {
-      test('should render a disabled text input', () => {
+      it('should render a disabled text input', () => {
         const {getByDisplayValue} = render(<TextInput onChange={cb} disabled={true} value={value}/>);
         expect(getByDisplayValue(value)).toBeDisabled();
       })
     })
 
     describe('with extra, arbitrary props', () => {
-      test('should spread extra props', () => {
+      it('should spread extra props onto the text input', () => {
         const attr = 'test';
         const {getByPlaceholderText} = render(<TextInput onChange={cb} data-propspread={attr} placeholder={placeholder}/>);
         expect(getByPlaceholderText(placeholder)).toHaveAttribute('data-propspread', attr);
@@ -55,7 +55,7 @@ describe('Text Input', () => {
   })
 
   describe('when provided an input ref', () => {
-    test('input ref should be defined', () => {
+    it('should render a text input with ref defined', () => {
       const ref: React.RefObject<HTMLInputElement> = React.createRef();
       render(<TextInput inputRef={ref}/>);
       expect(ref.current).toBeDefined();
