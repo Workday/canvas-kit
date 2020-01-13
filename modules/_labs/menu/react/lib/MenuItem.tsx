@@ -17,7 +17,7 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
    */
   onClick?: (event: React.SyntheticEvent) => void;
   /**
-   * The unique id for the menu item used for aria attributes. If the item is a child of the Menu component, this property will be generated and overridden.
+   * The unique id for the menu item used for ARIA attributes. If the item is a child of the `Menu` component, this property will be generated and overridden.
    */
   id?: string;
   /**
