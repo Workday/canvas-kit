@@ -314,7 +314,7 @@ export * from './lib/AnotherComponent';
 
 #### Prop Descriptions
 
-We us [JSDoc](https://devdocs.io/jsdoc/) standards for our prop type definitions. The base pattern
+We use [JSDoc](https://devdocs.io/jsdoc/) standards for our prop type definitions. The base pattern
 we are using for documentation is the following: `The <property> of the <component>`. It is best to
 be as specific as possible.
 
