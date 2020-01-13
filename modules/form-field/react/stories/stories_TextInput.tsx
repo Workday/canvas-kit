@@ -157,7 +157,7 @@ storiesOf('Components|Inputs/Text Input/React/Left Label', module)
 storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
   .addParameters({component: TextInput})
   .addDecorator(withReadme(README))
-  .add('All', () => {
+  .add('States', () => {
     const states = ['default', 'hover', 'focus active', 'disabled'];
     const variants = [
       [undefined, "Default"],
