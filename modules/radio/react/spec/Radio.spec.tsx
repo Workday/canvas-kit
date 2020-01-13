@@ -1,11 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import Radio from '../lib/Radio';
-import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
-import FormField from '../../../form-field/react';
-
-const label = 'Test Radio';
 
 describe('Radio', () => {
   const cb = jest.fn();
@@ -14,110 +9,96 @@ describe('Radio', () => {
   });
 
   describe('when rendered', () => {
-    describe('with an id', () => {
-      test('should render a radio input with id', () => {
-        const id = 'myRadio';
-        const {getByLabelText} = render(<Radio id={id} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toHaveAttribute('id', id);
-      });
+    it('should render an input with type=radio', () => {
+      const {getByRole} = render(<Radio onChange={cb} />);
+      expect(getByRole('radio')).toHaveProperty('type', 'radio');
     });
 
-    describe('with a value', () => {
-      test('should render a radio input with value', () => {
-        const value = 'myradio';
-        const {getByDisplayValue} = render(<Radio value={value} onChange={cb} />);
-        expect(getByDisplayValue(value)).toBeDefined();
-      });
+    it('should be unchecked by default', () => {
+      const {getByRole} = render(<Radio onChange={cb} />);
+      expect(getByRole('radio')).toHaveProperty('checked', false);
     });
+  });
 
-    describe('with checked=true', () => {
-      test('should render a checked radio input', () => {
-        const {getByLabelText} = render(<Radio checked={true} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toHaveProperty('checked', true);
-      });
+  describe('when rendered with an id', () => {
+    it('should render a radio input with id', () => {
+      const id = 'myRadio';
+      const {getByRole} = render(<Radio id={id} onChange={cb} />);
+      expect(getByRole('radio')).toHaveAttribute('id', id);
     });
+  });
 
-    describe('with defaultChecked=false and checked=true', () => {
-      test('should render a checked radio input', () => {
-        const {getByLabelText} = render(
-          <Radio defaultChecked={false} checked={true} onChange={cb} label={label} />
-        );
-        expect(getByLabelText(label)).toHaveProperty('checked', true);
-      });
+  describe('when rendered with a value', () => {
+    it('should render a radio input with value', () => {
+      const value = 'myRadio';
+      const {getByDisplayValue} = render(<Radio value={value} onChange={cb} />);
+      expect(getByDisplayValue(value)).toBeDefined();
     });
+  });
 
-    describe('with disabled attribute', () => {
-      test('should render a disabled radio input', () => {
-        const {getByLabelText} = render(<Radio disabled={true} onChange={cb} label={label} />);
-        expect(getByLabelText(label)).toHaveProperty('disabled', true);
-      });
+  describe('when rendered with checked=true', () => {
+    it('should render a checked radio input', () => {
+      const {getByRole} = render(<Radio checked={true} onChange={cb} />);
+      expect(getByRole('radio')).toHaveProperty('checked', true);
     });
+  });
 
-    test('should pass axe DOM accessibility guidelines', async () => {
-      const html = ReactDOMServer.renderToString(
-        <Radio id={'123'} label={'Label'} onChange={jest.fn()} />
+  describe('when rendered with disabled attribute', () => {
+    it('should render a disabled radio input', () => {
+      const {getByRole} = render(<Radio disabled={true} onChange={cb} />);
+      expect(getByRole('radio')).toHaveProperty('disabled', true);
+    });
+  });
+
+  describe('when rendered without an id', () => {
+    it('should create a unique id for each instance', async () => {
+      const {getByLabelText} = render(
+        <form>
+          <Radio checked={true} onChange={cb} disabled={false} label="label1" />;
+          <Radio onChange={cb} disabled={false} label="label2" />;
+        </form>
       );
-      expect(await axe(html)).toHaveNoViolations();
+
+      const id1 = getByLabelText('label1').getAttribute('id');
+      const id2 = getByLabelText('label2').getAttribute('id');
+
+      expect(id1).not.toEqual(id2);
     });
 
-    describe('without a defined id', () => {
-      test('should pass axe DOM accessibility guidelines', async () => {
-        const html = ReactDOMServer.renderToString(<Radio label={'Label'} onChange={jest.fn()} />);
-        expect(await axe(html)).toHaveNoViolations();
-      });
+    it('should keep the same unique id if re-rendered', () => {
+      const {getByRole, rerender} = render(<Radio checked={false} onChange={cb} />);
+
+      const uniqueId = getByRole('radio').getAttribute('id');
+      expect(getByRole('radio')).toHaveProperty('id', uniqueId);
+
+      rerender(<Radio checked={true} onChange={cb} />);
+
+      expect(getByRole('radio')).toHaveProperty('checked');
+      expect(getByRole('radio')).toHaveProperty('id', uniqueId);
     });
+  });
 
-    describe('wrapped in a FormField', () => {
-      test('should pass axe DOM accessibility guidelines', async () => {
-        const html = ReactDOMServer.renderToString(
-          <FormField label="My Field" inputId="my-radio-field">
-            <Radio disabled={false} checked={true} id="my-radio-field" onChange={jest.fn()} />
-          </FormField>
-        );
-        expect(await axe(html)).toHaveNoViolations();
-      });
+  describe('when rendered with extra, arbitrary props', () => {
+    it('should spread extra props onto the radio', () => {
+      const attr = 'test';
+      const {getByRole} = render(<Radio data-propspread={attr} onChange={cb} />);
+      expect(getByRole('radio')).toHaveAttribute('data-propspread', attr);
     });
+  });
 
-    describe('without an id', () => {
-      test('should create a unique id for each instance', async () => {
-        const {getByLabelText} = render(
-          <form>
-            <Radio checked={true} onChange={jest.fn()} disabled={false} label={label + 1} />;
-            <Radio onChange={jest.fn()} disabled={false} label={label + 2} />;
-          </form>
-        );
-
-        const id1 = getByLabelText(label + 1).getAttribute('id');
-        const id2 = getByLabelText(label + 2).getAttribute('id');
-
-        expect(id1).not.toEqual(id2);
-      });
-    });
-
-    describe('with extra, arbitrary props', () => {
-      test('should spread extra props', () => {
-        const attr = 'test';
-        const {getByLabelText} = render(
-          <Radio data-propspread={attr} onChange={cb} label={label} />
-        );
-        expect(getByLabelText(label)).toHaveAttribute('data-propspread', attr);
-      });
+  describe('when rendered with an input ref', () => {
+    it('input ref should be defined', () => {
+      const ref = React.createRef<HTMLInputElement>();
+      render(<Radio inputRef={ref} onChange={cb} />);
+      expect(ref.current).toBeDefined();
     });
   });
 
   describe('when clicked', () => {
-    test('should call a callback function', () => {
-      const {getByLabelText} = render(<Radio onChange={cb} label={label} />);
-      fireEvent.click(getByLabelText(label));
+    it('should call a callback function', () => {
+      const {getByRole} = render(<Radio onChange={cb} />);
+      fireEvent.click(getByRole('radio'));
       expect(cb).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('when provided an input ref', () => {
-    test('input ref should be defined', () => {
-      const ref: React.RefObject<HTMLInputElement> = React.createRef();
-      render(<Radio inputRef={ref} onChange={cb} label={label} />);
-      expect(ref.current).toBeDefined();
     });
   });
 });

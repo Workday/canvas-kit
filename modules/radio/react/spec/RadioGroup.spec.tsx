@@ -1,9 +1,6 @@
 import * as React from 'react';
-import {render, fireEvent, getByLabelText, getByDisplayValue} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import {Radio, RadioGroup} from '../index';
-import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
-import FormField from '@workday/canvas-kit-react-form-field';
 
 describe('Radio Group', () => {
   const cb = jest.fn();
