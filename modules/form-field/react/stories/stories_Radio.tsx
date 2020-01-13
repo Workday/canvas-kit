@@ -143,4 +143,13 @@ storiesOf('Components|Inputs/Radio/React/Left Label/Radio', module)
         <Radio id="1" value="email" label="E-mail" />
       </ControlledComponentWrapper>
     </FormField>
+  ))
+  .add('Disabled', () => (
+    <FormField label="Label" labelPosition={FormField.LabelPosition.Left}>
+      <ControlledComponentWrapper
+        controlledProp={ControlledComponentWrapper.ControlledProp.Checked}
+      >
+        <Radio disabled={true} id="1" value="email" label="E-mail" />
+      </ControlledComponentWrapper>
+    </FormField>
   ));
