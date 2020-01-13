@@ -161,8 +161,8 @@ storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
     const states = ['default', 'hover', 'focus active', 'disabled'];
     const variants = [
       [undefined, undefined],
-      [FormField.ErrorType.Alert, "Alert"],
-      [FormField.ErrorType.Error, "Error"],
+      [FormField.ErrorType.Alert, 'Alert'],
+      [FormField.ErrorType.Error, 'Error'],
     ] as const;
 
     return (
@@ -186,7 +186,12 @@ storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
                       labelPosition={FormField.LabelPosition.Hidden}
                       error={state === 'disabled' ? '' : variant[0]}
                     >
-                      {controlComponent(<TextInput className={state === 'disabled' ? undefined : state} disabled={state === 'disabled' ? true : false}/>)}
+                      {controlComponent(
+                        <TextInput
+                          className={state === 'disabled' ? undefined : state}
+                          disabled={state === 'disabled' ? true : false}
+                        />
+                      )}
                     </FormField>
                   </td>
                 ))}
