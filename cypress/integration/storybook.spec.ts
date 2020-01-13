@@ -8,7 +8,7 @@ describe('Storybook', () => {
     cy.get('iframe#storybook-preview-iframe')
       .pipe(
         getIframeBody,
-        {timeout: 10000}
+        {timeout: 20000}
       )
       .should('contain', 'Workday Canvas Kit');
   });
