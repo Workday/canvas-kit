@@ -18,14 +18,14 @@ describe('Text Area', () => {
 
   describe('when rendered', () => {
     describe('with an placeholder', () => {
-      test('should render a text area with placeholder', () => {
+      it('should render a text area with placeholder', () => {
         const {getByPlaceholderText} = render(<TextArea onChange={cb} placeholder={placeholder} />);
         expect(getByPlaceholderText(placeholder)).toHaveAttribute('placeholder', placeholder);
       });
     });
 
     describe('with a id', () => {
-      test('should render a text area with a id', () => {
+      it('should render a text area with a id', () => {
         const {getByPlaceholderText} = render(
           <TextArea id={id} onChange={cb} value={value} placeholder={placeholder} />
         );
@@ -34,14 +34,14 @@ describe('Text Area', () => {
     });
 
     describe('with a value', () => {
-      test('should render a text area with a value', () => {
+      it('should render a text area with a value', () => {
         const {getByDisplayValue} = render(<TextArea onChange={cb} value={value} />);
         expect(getByDisplayValue(value)).toBeDefined();
       });
     });
 
     describe('with disabled attribute', () => {
-      test('should render a disabled text area', () => {
+      it('should render a disabled text area', () => {
         const {getByDisplayValue} = render(
           <TextArea onChange={cb} disabled={true} value={value} />
         );
@@ -50,7 +50,7 @@ describe('Text Area', () => {
     });
 
     describe('with extra, arbitrary props', () => {
-      test('should spread extra props', () => {
+      it('should spread extra props', () => {
         const attr = 'test';
         const {getByPlaceholderText} = render(
           <TextArea onChange={cb} data-propspread={attr} placeholder={placeholder} />
@@ -60,8 +60,8 @@ describe('Text Area', () => {
     });
   });
 
-  describe('when provided an area ref', () => {
-    test('area ref should be defined', () => {
+  describe('when provided an input ref', () => {
+    it('should render a text area with ref defined', () => {
       const ref: React.RefObject<HTMLAreaElement> = React.createRef();
       render(<TextArea inputRef={ref} />);
       expect(ref.current).toBeDefined();
