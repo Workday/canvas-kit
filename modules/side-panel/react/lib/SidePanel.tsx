@@ -52,7 +52,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   closeNavigationLabel: string;
   /**
-   * Aria label for opening the navigation
+   * The `aria-label` for opening the navigation
    */
   openNavigationLabel: string;
 }
