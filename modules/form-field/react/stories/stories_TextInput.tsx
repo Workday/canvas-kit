@@ -160,7 +160,7 @@ storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
   .add('States', () => {
     const states = ['default', 'hover', 'focus active', 'disabled'];
     const variants = [
-      [undefined, "Default"],
+      [undefined, undefined],
       [FormField.ErrorType.Alert, "Alert"],
       [FormField.ErrorType.Error, "Error"],
     ] as const;
