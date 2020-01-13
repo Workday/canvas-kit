@@ -179,9 +179,7 @@ storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
                   ? FormField.ErrorType.Error
                   : undefined;
 
-              const key = `${
-                disabled ? 'disabled' : 'enabled'
-              }-${variant}`;
+              const key = `${disabled ? 'disabled' : 'enabled'}-${variant}`;
 
               return (
                 <tr key={key}>
