@@ -3,6 +3,8 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {ControlledComponentWrapper} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
+import styled from '@emotion/styled';
 
 import {Radio, RadioGroup} from '../../../radio/react';
 import FormField from '../index';
@@ -10,6 +12,20 @@ import README from '../../../radio/react/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
+
+const Table = styled('table')({
+  width: '100%',
+  thead: {
+    textAlign: 'left',
+    paddingBottom: 16,
+  },
+  'td, th': {
+    minWidth: 100,
+    paddingBottom: 16,
+    paddingRight: 16,
+    textAlign: 'left',
+  },
+});
 
 storiesOf('Components|Inputs/Radio/React/Top Label/Radio Group', module)
   .addParameters({component: RadioGroup})
@@ -152,4 +168,44 @@ storiesOf('Components|Inputs/Radio/React/Left Label/Radio', module)
         <Radio disabled={true} id="1" value="email" label="E-mail" />
       </ControlledComponentWrapper>
     </FormField>
+  ));
+
+storiesOf('Components|Inputs/Radio/React/Visual', module)
+  .addParameters({component: Radio})
+  .addDecorator(withReadme(README))
+  .add('States', () => (
+    <StaticStates>
+      <Table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>No state</th>
+            <th>Hover</th>
+            <th>Focused</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[false, true].map(checked => {
+            const key = `${checked ? 'checked' : 'unchecked'}`;
+
+            return (
+              <tr key={key}>
+                <td>{`${checked ? 'checked' : 'unchecked'}`}</td>
+
+                {['', 'hover', 'focus', 'active'].map(className => (
+                  <td key={`${key}-${className}`}>
+                    <Radio
+                      checked={checked}
+                      className={className}
+                      onChange={() => {}} // eslint-disable-line no-empty-function
+                    />
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </StaticStates>
   ));
