@@ -37,7 +37,7 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
    */
   id?: string;
   /**
-   * An html id of the element that labels the menu. Often used with menu buttons.
+   * An HTML id of the element that labels the menu. Often used with menu buttons.
    */
   labeledBy?: string;
 }
