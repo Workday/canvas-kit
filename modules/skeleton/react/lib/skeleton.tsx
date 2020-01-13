@@ -5,7 +5,8 @@ import canvas from '@workday/canvas-kit-react-core';
 
 export interface SkeletonProps {
   /**
-   *  The aria loading label.
+   * The `aria-label` that describes loading.
+   * @default 'Loading'
    */
   loadingLabel: string;
 }
