@@ -47,7 +47,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   backgroundColor?: SidePanelBackgroundColor;
   /**
-   * Aria label for closing the navigation
+   * The `aria-label` for closing the navigation
    * @default SidePanelBackgroundColor.White
    */
   closeNavigationLabel: string;
