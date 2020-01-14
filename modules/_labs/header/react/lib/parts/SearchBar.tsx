@@ -58,7 +58,7 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label for submit button
    * @default Search
    */
-  submitLabel?: string;
+  submitLabel: string;
   /**
    * The screenreader Label for clear button
    * @default Reset Search Form
