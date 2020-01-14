@@ -345,7 +345,11 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
         <ToggleIconButtonWrapper variant={IconButton.Variant.InverseFilled} />
       </div>
     </div>
-  ))
+  ));
+
+storiesOf('Components|Buttons/Button/React/Icon Button/Visual', module)
+  .addParameters({component: IconButton})
+  .addDecorator(withReadme(README))
   .add('States', () => {
     const states = ['Default', 'hover', 'focus', 'active', 'focus active', 'focus hover'];
     const variants = [
