@@ -29,6 +29,11 @@ describe('Switch', () => {
       const {getByRole} = render(<Switch onChange={cb} />);
       expect(getByRole(role)).toHaveProperty('checked', false);
     });
+
+    test('should have a "pointer" cursor', () => {
+      const {getByRole} = render(<Switch onChange={cb} />);
+      expect(getByRole(role)).toHaveStyleRule('cursor', 'pointer');
+    });
   });
 
   describe('when rendered with checked=true', () => {
@@ -81,6 +86,10 @@ describe('Switch', () => {
       const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
       expect(getByRole(role)).toHaveProperty('disabled', true);
     });
+    it('should have a "not-allowed" cursor', () => {
+      const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
+      expect(getByRole(role)).toHaveStyleRule('cursor', 'not-allowed');
+    });
   });
 
   describe('when rendered with extra, arbitrary props', () => {
@@ -117,21 +126,6 @@ describe('Switch', () => {
       fireEvent.click(getByRole(role));
 
       expect(cb).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('Switch styles', () => {
-    describe('When disabled', () => {
-      test('the element should have a "not-allowed" cursor when disabled', () => {
-        const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
-        expect(getByRole(role)).toHaveStyleRule('cursor', 'not-allowed');
-      });
-    });
-    describe('When not disabled', () => {
-      test('the element should have a "pointer" cursor when not disabled', () => {
-        const {getByRole} = render(<Switch onChange={cb} />);
-        expect(getByRole(role)).toHaveStyleRule('cursor', 'pointer');
-      });
     });
   });
 });
