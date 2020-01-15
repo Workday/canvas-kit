@@ -93,7 +93,7 @@ describe('Checkbox', () => {
       render(<Checkbox inputRef={ref} onChange={cb} />);
 
       expect(ref.current).not.toBeNull();
-      expect(ref.current).toHaveAttribute('role', 'checkbox');
+      expect(ref.current).toHaveAttribute('type', 'checkbox');
     });
   });
 
