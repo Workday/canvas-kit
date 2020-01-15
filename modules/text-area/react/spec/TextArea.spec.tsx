@@ -1,8 +1,6 @@
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import {render, fireEvent, getByTestId} from '@testing-library/react';
 import TextArea from '../lib/TextArea';
-import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
 import FormField from '@workday/canvas-kit-react-form-field';
 
 const id = 'Test Text Area';
@@ -19,8 +17,11 @@ describe('Text Area', () => {
   describe('when rendered', () => {
     describe('with an placeholder', () => {
       it('should render a text area with placeholder', () => {
-        const {getByPlaceholderText} = render(<TextArea onChange={cb} placeholder={placeholder} />);
-        expect(getByPlaceholderText(placeholder)).toHaveAttribute('placeholder', placeholder);
+        const {getByPlaceholderText} = render(
+          <TextArea onChange={cb} data-testid={id} placeholder={placeholder} />
+        );
+        const container = document.body;
+        expect(getByTestId(container, id)).toHaveAttribute('placeholder', placeholder);
       });
     });
 
