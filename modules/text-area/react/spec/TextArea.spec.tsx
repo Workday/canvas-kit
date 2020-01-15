@@ -62,10 +62,11 @@ describe('Text Area', () => {
   });
 
   describe('when provided an input ref', () => {
-    it('should render a text area with ref defined', () => {
-      const ref: React.RefObject<HTMLAreaElement> = React.createRef();
-      render(<TextArea inputRef={ref} />);
-      expect(ref.current).toBeDefined();
+    it('should set the ref to the input element', () => {
+      const ref: React.RefObject<HTMLInputElement> = React.createRef();
+      render(<TextArea inputRef={ref} id={id}/>);
+      expect(ref.current).not.toBeNull();
+      expect(ref.current).toHaveAttribute('id', id);
     });
   });
 });
