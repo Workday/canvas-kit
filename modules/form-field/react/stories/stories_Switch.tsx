@@ -118,6 +118,7 @@ storiesOf('Components|Inputs/Switch/React/Visual Testing', module)
           <tr>
             <th></th>
             <th>No state</th>
+            <th>Hover</th>
             <th>Focused</th>
             <th>Active</th>
           </tr>
@@ -133,34 +134,26 @@ storiesOf('Components|Inputs/Switch/React/Visual Testing', module)
                     ? ErrorType.Error
                     : undefined;
 
+                const key = `${checked ? 'checked' : 'unchecked'} ${
+                  disabled ? 'disabled' : 'enabled'
+                } ${variant}`;
+
                 return (
-                  <tr
-                    key={`${checked ? 'checked' : 'unchecked'} ${
-                      disabled ? 'disabled' : 'enabled'
-                    } ${variant}`}
-                  >
+                  <tr key={key}>
                     <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
                       checked ? 'checked' : 'unchecked'
                     })`}</td>
-                    <td>
-                      <Switch checked={checked} disabled={disabled} error={type} />
-                    </td>
-                    <td>
-                      <Switch
-                        checked={checked}
-                        disabled={disabled}
-                        error={type}
-                        className="focus"
-                      />
-                    </td>
-                    <td>
-                      <Switch
-                        checked={checked}
-                        disabled={disabled}
-                        error={type}
-                        className="active"
-                      />
-                    </td>
+                    {['', 'hover', 'focus', 'active'].map(className => (
+                      <td key={`${key} + ${className}`}>
+                        <Switch
+                          checked={checked}
+                          onChange={() => {}} // eslint-disable-line no-empty-function
+                          disabled={disabled}
+                          error={type}
+                          className={className}
+                        />
+                      </td>
+                    ))}
                   </tr>
                 );
               });
