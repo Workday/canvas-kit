@@ -314,28 +314,80 @@ export * from './lib/AnotherComponent';
 
 #### Prop Descriptions
 
-We use [JSDoc](https://devdocs.io/jsdoc/) standards for our prop type definitions. The base pattern
-we are using for documentation is the following: `The <property> of the <component>`. It is best to
-be as specific as possible.
+We use [JSDoc](https://devdocs.io/jsdoc/) standards for our prop type definitions.
 
-Base pattern for prop enums:
+The base pattern for prop descriptions is: `The <property> of the <component>.` For example:
 
 ```
-  /**
-   * The size of the Button.
-   * @default ButtonSize.Medium
-   */
-  size?: ButtonSize;
+/**
+  * The value of the Checkbox.
+  */
+value?: string;
 ```
 
-Base pattern for booleans:
+Be as specific as possible. For example, suppose there is a `label` prop for `Checkbox` which specifies the text of the label. Rather than describe `label` as `The label of the Checkbox`, the following is preferable:
 
 ```
-  /**
-   * If true, this sets the Button to disabled.
-   * @default false
-   */
-  size?: ButtonSize;
+/**
+  * The text of the Checkbox label.
+  */
+label?: string;
 ```
 
-Note: for booleans with a true/false outcome we explicitly set in the documentation `@default false`
+Feel free to provide additional detail in the description:
+
+```
+/**
+  * The value of the Slider. Goes to 11.
+  */
+value: number;
+```
+
+Be sure to specify a proper `@default` for enum props:
+
+```
+/**
+  * The size of the Button.
+  * @default ButtonSize.Medium
+  */
+size?: ButtonSize;
+```
+
+Use a modified pattern for function props: `The function called when <something happens>.` For example:
+
+```
+/**
+  * The function called when the Checkbox state changes.
+  */
+onChange?: (e: React.SyntheticEvent) => void;
+```
+
+The pattern for booleans is also different: `If true, <do something>.` For standard 2-state booleans, set `@default false` in the description. For example:
+
+```
+/**
+  * If true, set the Checkbox to disabled.
+  * @default false
+  */
+disabled?: boolean;
+```
+
+For 3-state booleans, you will need to describe all 3 cases: `If true <do something>. If false <do something else>. If undefined <do yet another thing>.`
+
+We also recommend the following pattern for errors:
+
+```
+/**
+  * The type of error associated with the Checkbox (if applicable).
+  */
+error?: ErrorType;
+```
+
+There are exceptions to these guidelines. Occasionally, you may encounter props which don't play nicely with the suggested patterns. Rather than following the patterns to the letter, adjust them to provide a better description if necessary. For example, rather than ambiguously describing `id` as `The id of the Checkbox`, provide a more explicit description:
+
+```
+/**
+  * The HTML `id` of the underlying checkbox input element.
+  */
+id?: string;
+```
