@@ -2,7 +2,9 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
+import styled from '@emotion/styled';
 import {controlComponent} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
 
 import {ColorInput} from '../../../color-picker/react/index';
 import FormField from '../index';
@@ -10,6 +12,20 @@ import README from '../../../color-picker/react/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
+
+const Table = styled('table')({
+  width: '100%',
+  thead: {
+    textAlign: 'left',
+    paddingBottom: 16,
+  },
+  'td, th': {
+    minWidth: 100,
+    paddingBottom: 16,
+    paddingRight: 16,
+    textAlign: 'left',
+  },
+});
 
 storiesOf('Components|Inputs/Color Picker/Color Input/React/Top Label', module)
   .addParameters({component: ColorInput})
@@ -133,4 +149,62 @@ storiesOf('Components|Inputs/Color Picker/Color Input/React/Left Label', module)
     >
       {controlComponent(<ColorInput />)}
     </FormField>
+  ));
+
+storiesOf('Components|Inputs/Color Picker/Color Input/React/Visual Testing', module)
+  .addParameters({component: ColorInput})
+  .addDecorator(withReadme(README))
+  .add('States', () => (
+    <StaticStates>
+      <Table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>No state</th>
+            <th>Hover</th>
+            <th>Focused</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[false, true].map(checked => {
+            return [false, true].map(disabled => {
+              return ['Default', 'Alert', 'Error'].map(variant => {
+                const type =
+                  variant === 'Alert'
+                    ? FormField.ErrorType.Alert
+                    : variant === 'Error'
+                    ? FormField.ErrorType.Error
+                    : undefined;
+
+                const key = `${checked ? 'checked' : 'unchecked'}-${
+                  disabled ? 'disabled' : 'enabled'
+                }-${variant}`;
+
+                return (
+                  <tr key={key}>
+                    <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
+                      checked ? 'checked' : 'unchecked'
+                    })`}</td>
+
+                    {['', 'hover', 'focus', 'active'].map(className => (
+                      <td key={`${key}-${className}`}>
+                        <ColorInput
+                          showCheck={checked}
+                          disabled={disabled}
+                          error={type}
+                          value={checked ? '#005cb9' : ''}
+                          className={className}
+                          onChange={() => {}} // eslint-disable-line no-empty-function
+                        />
+                      </td>
+                    ))}
+                  </tr>
+                );
+              });
+            });
+          })}
+        </tbody>
+      </Table>
+    </StaticStates>
   ));
