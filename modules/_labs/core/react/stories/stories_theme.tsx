@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import CanvasProvider from '../lib/CanvasProvider';
+import {TextInput} from '@workday/canvas-kit-react-text-input';
 import {
   CanvasTheme,
   CanvasThemePalette,
@@ -65,15 +66,21 @@ const customTheme = createCanvasTheme({
     primary: {
       main: colors.greenApple400,
     },
+    common: {
+      focusOutline: colors.greenApple400,
+    },
   },
 });
-const ThemedComponent = styled('h1')<Themeable>(({theme}) => ({
+const ThemedComponent = styled(TextInput)<Themeable>(({theme}) => ({
   ...type.h3,
   background: theme.palette.primary.main,
   color: theme.palette.primary.contrast,
   borderRadius: borderRadius.m,
   padding: spacing.xs,
   display: 'inline-block',
+  '&:focus': {
+    outline: theme.palette.common.focusOutline,
+  },
 }));
 
 const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
@@ -115,7 +122,7 @@ const ThemeDemo = (props: any) => {
       <hr style={{margin: '80px 0'}} />
       <H1>Custom Theme</H1>
       <CanvasProvider theme={customTheme}>
-        <ThemedComponent>Themed Component</ThemedComponent>
+        <ThemedComponent placeholder="test"></ThemedComponent>
       </CanvasProvider>
     </div>
   );

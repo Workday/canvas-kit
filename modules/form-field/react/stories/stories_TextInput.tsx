@@ -7,9 +7,26 @@ import {controlComponent} from '../../../../utils/storybook';
 import {TextInput} from '../../../text-input/react/index';
 import FormField from '../index';
 import README from '../../../text-input/react/README.md';
+import {colors} from '@workday/canvas-kit-react-core';
+import {createCanvasTheme, CanvasProvider, Themeable} from '@workday/canvas-kit-labs-react-core';
+import {ErrorType} from '@workday/canvas-kit-react-common';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
+
+const customTheme = createCanvasTheme({
+  palette: {
+    primary: {
+      main: colors.greenApple400,
+    },
+    common: {
+      focusOutline: colors.greenApple400,
+    },
+    alert: {
+      main: 'pink',
+    },
+  },
+});
 
 storiesOf('Components|Inputs/Text Input/React/Top Label', module)
   .addParameters({component: TextInput})
@@ -151,4 +168,15 @@ storiesOf('Components|Inputs/Text Input/React/Left Label', module)
     >
       {controlComponent(<TextInput placeholder="Placeholder" />)}
     </FormField>
+  ));
+
+storiesOf('Components|Inputs/Text Input/React/Visual', module)
+  .addParameters({component: TextInput})
+  .addDecorator(withReadme(README))
+  .add('Theming', () => (
+    <div>
+      <CanvasProvider theme={customTheme}>
+        <TextInput error={ErrorType.Alert} placeholder="Placeholder" />
+      </CanvasProvider>
+    </div>
   ));
