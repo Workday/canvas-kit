@@ -1,8 +1,6 @@
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import {render, fireEvent, getByTestId} from '@testing-library/react';
 import TextInput from '../lib/TextInput';
-import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
 import FormField from '@workday/canvas-kit-react-form-field';
 
 const id = 'Test Text Input';
@@ -20,9 +18,10 @@ describe('Text Input', () => {
     describe('with an placeholder', () => {
       it('should render a text input with placeholder', () => {
         const {getByPlaceholderText} = render(
-          <TextInput onChange={cb} placeholder={placeholder} />
+          <TextInput onChange={cb} data-testid={id} placeholder={placeholder} />
         );
-        expect(getByPlaceholderText(placeholder)).toHaveAttribute('placeholder', placeholder);
+        const container = document.body;
+        expect(getByTestId(container, id)).toHaveAttribute('placeholder', placeholder);
       });
     });
 
