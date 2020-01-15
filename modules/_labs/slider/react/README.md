@@ -27,7 +27,7 @@ import Slider from '@workday/canvas-kit-react-slider';
 const sliderProps: SliderProps = {
   max: 100,
   min: 0,
-  startValue: 27,
+  startValue: 50,
   useInputRange: true,
 };
 
