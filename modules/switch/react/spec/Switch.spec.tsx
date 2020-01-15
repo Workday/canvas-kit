@@ -20,7 +20,7 @@ describe('Switch', () => {
   });
 
   describe('when rendered', () => {
-    it('should render an element with `type=checkbox`', () => {
+    it('should render an input element with `type=checkbox`', () => {
       const {getByRole} = render(<Switch onChange={cb} />);
       expect(getByRole(role)).toHaveProperty('type', 'checkbox');
     });
@@ -37,14 +37,14 @@ describe('Switch', () => {
   });
 
   describe('when rendered with checked=true', () => {
-    it('should render a checked checkbox', () => {
+    it('should render a checked checkbox input', () => {
       const {getByRole} = render(<Switch checked={true} onChange={cb} />);
       expect(getByRole(role)).toHaveProperty('checked', true);
     });
   });
 
   describe('when rendered with an id', () => {
-    it('should render a checkbox with that id', () => {
+    it('should render a checkbox input with that id', () => {
       const id = 'switchy';
       const {getByRole} = render(<Switch id={id} onChange={cb} />);
 
@@ -82,7 +82,7 @@ describe('Switch', () => {
   });
 
   describe('when rendered with the disabled prop', () => {
-    it('should render a disabled checkbox', () => {
+    it('should render a disabled checkbox input', () => {
       const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
       expect(getByRole(role)).toHaveProperty('disabled', true);
     });
@@ -93,7 +93,7 @@ describe('Switch', () => {
   });
 
   describe('when rendered with extra, arbitrary props', () => {
-    it('should apply those extra props to the checkbox', () => {
+    it('should apply those extra props to the checkbox input', () => {
       const testValue = 'test';
 
       const {getByRole} = render(<Switch data-propspread={testValue} onChange={cb} />);
@@ -102,20 +102,13 @@ describe('Switch', () => {
   });
 
   describe('when rendered with an input ref', () => {
-    it('the current property should not be null', () => {
+    it("it should set the ref's current property to the checkbox input element", () => {
       const ref = React.createRef<HTMLInputElement>();
 
       render(<Switch inputRef={ref} onChange={cb} />);
 
       expect(ref.current).not.toBeNull();
-    });
-
-    it('the current property should refer to the checkbox', () => {
-      const ref = React.createRef<HTMLInputElement>();
-
-      render(<Switch inputRef={ref} onChange={cb} />);
-
-      expect(ref.current).toHaveAttribute('role', 'checkbox');
+      expect(ref.current).toHaveAttribute('role', role);
     });
   });
 
