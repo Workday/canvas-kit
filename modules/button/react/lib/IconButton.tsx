@@ -103,9 +103,11 @@ export const IconButtonCon = styled('button', {
             ...getBackgroundSelector(colors.frenchVanilla100),
             backgroundColor: colors.blueberry500,
           },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.blueberry500,
-            ...(toggled ? focusRing(2, 2) : {}),
+          '&:not([disabled])': {
+            '&:focus, &:focus:active': {
+              backgroundColor: colors.blueberry500,
+              ...(toggled ? focusRing(2, 2) : {}),
+            },
           },
           '&:hover, &:active': {
             ...getFillSelector(colors.frenchVanilla100),
@@ -135,9 +137,11 @@ export const IconButtonCon = styled('button', {
             ...getBackgroundSelector(colors.frenchVanilla100),
             backgroundColor: colors.blueberry500,
           },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.blueberry500,
-            ...(toggled ? focusRing(2, 2) : {}),
+          '&:not([disabled])': {
+            '&:focus, &:focus:active': {
+              backgroundColor: colors.blueberry500,
+              ...(toggled ? focusRing(2, 2) : {}),
+            },
           },
           '&:hover, &:active': {
             ...getFillSelector(colors.frenchVanilla100),
@@ -185,9 +189,11 @@ export const IconButtonCon = styled('button', {
             ...getBackgroundSelector(colors.frenchVanilla100),
             backgroundColor: colors.blueberry500,
           },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.blueberry500,
-            ...(toggled ? focusRing(2, 2) : {}),
+          '&:not([disabled])': {
+            '&:focus, &:focus:active': {
+              backgroundColor: colors.blueberry500,
+              ...(toggled ? focusRing(2, 2) : {}),
+            },
           },
           '&:hover, &:active': {
             ...getFillSelector(colors.frenchVanilla100),
@@ -217,9 +223,11 @@ export const IconButtonCon = styled('button', {
             ...getBackgroundSelector(colors.frenchVanilla100),
             backgroundColor: colors.blueberry500,
           },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.blueberry500,
-            ...(toggled ? focusRing(2, 2) : {}),
+          '&:not([disabled])': {
+            '&:focus, &:focus:active': {
+              backgroundColor: colors.blueberry500,
+              ...(toggled ? focusRing(2, 2) : {}),
+            },
           },
           '&:hover, &:active': {
             ...getFillSelector(colors.frenchVanilla100),
@@ -254,15 +262,23 @@ export const IconButtonCon = styled('button', {
             ...getAccentSelector(colors.frenchVanilla100),
             ...getBackgroundSelector(colors.blueberry400),
           },
+          '&:focus:active': {
+            backgroundColor: colors.frenchVanilla100,
+          },
 
           '&:hover': {
             backgroundColor: colors.frenchVanilla100,
           },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.frenchVanilla100,
-            ...(toggled
-              ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
-              : {}),
+          '&:not([disabled])': {
+            '&:focus': {
+              backgroundColor: colors.frenchVanilla100,
+              ...(toggled
+                ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
+                : {}),
+            },
+            '&:focus:active': {
+              backgroundColor: colors.frenchVanilla100,
+            },
           },
           ...mouseFocusBehavior({
             '&:focus:active': {
@@ -292,11 +308,13 @@ export const IconButtonCon = styled('button', {
           '&:hover': {
             backgroundColor: colors.frenchVanilla100,
           },
-          '&:not([disabled]):focus': {
-            backgroundColor: colors.frenchVanilla100,
-            ...(toggled
-              ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
-              : {}),
+          '&:not([disabled])': {
+            '&:focus, &:focus:active': {
+              backgroundColor: colors.frenchVanilla100,
+              ...(toggled
+                ? focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100)
+                : {}),
+            },
           },
           ...mouseFocusBehavior({
             '&:focus:active': {

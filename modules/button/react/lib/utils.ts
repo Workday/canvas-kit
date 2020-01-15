@@ -303,8 +303,8 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
         },
       }),
     },
-    ...activeStyles,
     ...hoverStyles,
+    ...activeStyles,
     ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
       backgroundColor: buttonColors.disabledBackground,
       borderColor: buttonColors.disabledBorder,
@@ -336,6 +336,9 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
         'span .wd-icon-fill, span .wd-icon-accent': {
           fill: buttonColors.labelIconFocusHover,
         },
+      },
+      '&:focus:active': {
+        backgroundColor: buttonColors.activeBackground,
       },
     },
     ...mouseFocusBehavior({

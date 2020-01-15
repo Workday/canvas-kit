@@ -243,7 +243,7 @@ export const ButtonColors: ButtonColorCollection = {
   [TextButtonVariant.InverseAllCaps]: null,
   [IconButtonVariant.Square]: {
     background: 'transparent',
-    activeBackground: canvas.colors.soap400,
+    activeBackground: canvas.colors.soap500,
     disabledBackground: 'transparent',
     focusBackground: canvas.colors.soap300,
     hoverBackground: canvas.colors.soap300,
@@ -282,7 +282,7 @@ export const ButtonColors: ButtonColorCollection = {
   },
   [IconButtonVariant.Circle]: {
     background: 'transparent',
-    activeBackground: canvas.colors.soap400,
+    activeBackground: canvas.colors.soap500,
     disabledBackground: 'transparent',
     focusBackground: canvas.colors.soap300,
     hoverBackground: canvas.colors.soap300,
