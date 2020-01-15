@@ -87,10 +87,13 @@ describe('Checkbox', () => {
   });
 
   describe('when rendered with an input ref', () => {
-    it('input ref should be defined', () => {
+    it('should set the ref to the checkbox input element', () => {
       const ref = React.createRef<HTMLInputElement>();
+
       render(<Checkbox inputRef={ref} onChange={cb} />);
-      expect(ref.current).toBeDefined();
+
+      expect(ref.current).not.toBeNull();
+      expect(ref.current).toHaveAttribute('role', 'checkbox');
     });
   });
 
