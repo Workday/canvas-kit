@@ -74,9 +74,6 @@ const ThemedComponent = styled('h1')<Themeable>(({theme}) => ({
   borderRadius: borderRadius.m,
   padding: spacing.xs,
   display: 'inline-block',
-  '&:focus': {
-    outline: theme.palette.common.focusOutline,
-  },
 }));
 
 const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
