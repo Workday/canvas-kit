@@ -195,6 +195,17 @@ storiesOf('Components|Inputs/Text Input/React/Visual', module)
         <InputContainer>
           <TextInput error={ErrorType.Error} placeholder="Custom Error" />
         </InputContainer>
+        <InputContainer>
+          <FormField
+            label="Label"
+            inputId="input-alert"
+            error={FormField.ErrorType.Alert}
+            hintText={hintText}
+            hintId={hintId}
+          >
+            {controlComponent(<TextInput placeholder="With Form" />)}
+          </FormField>
+        </InputContainer>
       </CanvasProvider>
     </div>
   ));
