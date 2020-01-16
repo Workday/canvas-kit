@@ -27,6 +27,19 @@ describe('Select', () => {
     });
   });
 
+  describe('when rendered with a value', () => {
+    it('it should render a select whose selected option matches value', () => {
+      const selectedValue = 'mySelectValue';
+      const {getByDisplayValue} = render(
+        <Select onChange={cb} value={selectedValue}>
+          <SelectOption value="optionValue1" label="optionValue1" />
+          <SelectOption value={selectedValue} label={selectedValue} />
+        </Select>
+      );
+      expect(getByDisplayValue(selectedValue)).toBeDefined();
+    });
+  });
+
   describe('when rendered with extra, arbitrary props', () => {
     it('should spread extra props onto the select', () => {
       const attr = 'test';
@@ -39,8 +52,8 @@ describe('Select', () => {
     it('should render two options', () => {
       const {getAllByRole} = render(
         <Select onChange={cb}>
-          <SelectOption value="testValue1" label="testValue1" />
-          <SelectOption value="testValue2" label="testValue2" />
+          <SelectOption value="optionValue1" label="optionValue1" />
+          <SelectOption value="optionValue2" label="optionValue2" />
         </Select>
       );
       expect(getAllByRole('option')).toHaveLength(2);
