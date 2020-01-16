@@ -184,6 +184,7 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
                             error={type}
                             className={className}
                             onChange={() => {}} // eslint-disable-line no-empty-function
+                            label="Checkbox"
                           />
                         </td>
                       ))}
