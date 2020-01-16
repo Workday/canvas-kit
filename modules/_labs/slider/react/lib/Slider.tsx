@@ -22,8 +22,6 @@ const Container = styled('div')({
   width: '328px',
   minWidth: '200px',
   height: '32px',
-  // margin: '0 !important',
-  // zIndex: 1,
 });
 
 const Interval = styled('div')({
@@ -33,7 +31,6 @@ const Interval = styled('div')({
 });
 
 const SliderInput = styled('input')({
-  // position: 'relative',
   outline: 'none',
   padding: 0,
   margin: 0,
@@ -44,16 +41,13 @@ const SliderInput = styled('input')({
   cursor: 'pointer',
   WebkitAppearance: 'none',
   MozAppearance: 'none',
-  // zIndex: 0,
   background: 'transparent',
   position: 'absolute',
   zIndex: 1,
   // webkit
   '::-webkit-slider-runnable-track': {
-    // width: '100%',
     height: '5px',
     borderRadius: '100px',
-    // background: colors.soap300,
     background: 'transparent',
     boxSizing: 'border-box',
     color: colors.blueberry400,
@@ -77,11 +71,8 @@ const SliderInput = styled('input')({
   },
   // firefox
   '::-moz-range-track': {
-    // background: colors.soap300,
     background: 'transparent',
     height: '5px',
-    // position: 'relative',
-    zIndex: -1,
   },
   '::-moz-focus-outer': {
     border: '0',
@@ -90,8 +81,6 @@ const SliderInput = styled('input')({
     background: colors.blueberry400,
     borderRadius: '100px',
     height: '5px',
-    // position: 'relative',
-    zIndex: -1,
   },
   '::-moz-range-thumb': {
     background: colors.blueberry400,
@@ -100,7 +89,7 @@ const SliderInput = styled('input')({
     height: '16px',
     width: '16px',
     position: 'absolute',
-    zIndex: 50000,
+    zIndex: 5,
     '&:focus, &:active': {
       background: colors.blueberry400,
       boxShadow: `0 0 0 2px ${colors.frenchVanilla100}, 0 0 0 4px ${colors.blueberry400}`,
@@ -142,19 +131,14 @@ const ProgressBar = styled('progress')<{value: number; max: number}>({
   '::-moz-progress-bar': {
     background: colors.blueberry400,
     borderRadius: '100px',
-    // position: 'relative',
-    // zIndex: -1,
   },
   '::-webkit-progress-value': {
     background: colors.blueberry400,
     borderRadius: '100px',
     transition: 'none',
-    // position: 'relative',
-    // zIndex: -1,
   },
   '::-webkit-progress-bar': {
     background: colors.soap300,
-    // zIndex: -1,
   },
   '::-ms-fill': {
     border: 'none',
@@ -167,7 +151,6 @@ const Wrapper = styled('div')({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  margin: '0 !important', // delete later, getting from storybook
 });
 
 const InputValueBox = styled('input')({
