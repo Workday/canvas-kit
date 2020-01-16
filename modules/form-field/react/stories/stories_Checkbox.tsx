@@ -145,8 +145,8 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
           </tr>
         </thead>
         <tbody>
-          {[false, true].map(checked => {
-            return [false, true].map(disabled => {
+          {[false, true].map(disabled => {
+            return [false, true].map(checked => {
               return [false, true].map(indeterminate => {
                 return ['Default', 'Alert', 'Error'].map(variant => {
                   const type =
@@ -164,13 +164,18 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
                     disabled ? 'disabled' : 'enabled'
                   }-${indeterminate ? 'indeterminate' : ''}-${variant}`;
 
+                  const pseudoStates = ['', 'hover'];
+                  if (!disabled) {
+                    pseudoStates.push('focus', 'active');
+                  }
+
                   return (
                     <tr key={key}>
                       <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
                         checked ? (indeterminate ? 'indeterminate' : 'checked') : 'unchecked'
                       })`}</td>
 
-                      {['', 'hover', 'focus', 'active'].map(className => (
+                      {pseudoStates.map(className => (
                         <td key={`${key}-${className}`}>
                           <Checkbox
                             checked={checked}
