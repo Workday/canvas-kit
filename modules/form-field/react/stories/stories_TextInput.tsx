@@ -8,23 +8,32 @@ import {TextInput} from '../../../text-input/react/index';
 import FormField from '../index';
 import README from '../../../text-input/react/README.md';
 import {colors} from '@workday/canvas-kit-react-core';
+import styled from '@emotion/styled';
 import {createCanvasTheme, CanvasProvider} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
+const InputContainer = styled('div')({
+  padding: 8,
+});
 const customTheme = createCanvasTheme({
   palette: {
-    primary: {
-      main: colors.greenApple400,
-    },
     common: {
-      focusOutline: '#D36AC2',
+      focusOutline: '#269AE4',
     },
     alert: {
-      main: '#D36AC2',
-      darkest: '#a8559b',
+      main: '#DE4BB0',
+      darkest: '#DE4BB0b',
+    },
+    neutral: {
+      main: '#269AE4',
+      dark: '#269AE4',
+    },
+    error: {
+      main: '#CD201D',
+      darkest: '#CD201D',
     },
   },
 });
@@ -177,7 +186,15 @@ storiesOf('Components|Inputs/Text Input/React/Visual', module)
   .add('Theming', () => (
     <div>
       <CanvasProvider theme={customTheme}>
-        <TextInput error={ErrorType.Alert} placeholder="Placeholder" />
+        <InputContainer>
+          <TextInput error={ErrorType.Alert} placeholder="Custom Alert" />
+        </InputContainer>
+        <InputContainer>
+          <TextInput placeholder="Default" />
+        </InputContainer>
+        <InputContainer>
+          <TextInput error={ErrorType.Error} placeholder="Custom Error" />
+        </InputContainer>
       </CanvasProvider>
     </div>
   ));

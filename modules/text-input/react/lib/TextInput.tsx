@@ -56,6 +56,9 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
     },
   ({theme, error}) => {
     return {
+      '&:hover': {
+        borderColor: theme.palette.neutral.dark,
+      },
       '&:focus:not([disabled])': {
         borderColor: theme.palette.common.focusOutline,
         boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
