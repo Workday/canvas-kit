@@ -8,7 +8,7 @@ import {TextInput} from '../../../text-input/react/index';
 import FormField from '../index';
 import README from '../../../text-input/react/README.md';
 import {colors} from '@workday/canvas-kit-react-core';
-import {createCanvasTheme, CanvasProvider, Themeable} from '@workday/canvas-kit-labs-react-core';
+import {createCanvasTheme, CanvasProvider} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 
 const hintText = 'Helpful text goes here.';
@@ -20,10 +20,11 @@ const customTheme = createCanvasTheme({
       main: colors.greenApple400,
     },
     common: {
-      focusOutline: colors.greenApple400,
+      focusOutline: '#D36AC2',
     },
     alert: {
-      main: 'pink',
+      main: '#D36AC2',
+      darkest: '#a8559b',
     },
   },
 });

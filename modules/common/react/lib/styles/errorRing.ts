@@ -32,7 +32,7 @@ export default function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSOb
       borderColor: errorBorderColor,
       boxShadow: `${errorBoxShadow},
         0 0 0 2px ${colors.frenchVanilla100},
-        0 0 0 4px ${inputColors.focusBorder}`,
+        0 0 0 4px ${theme ? theme.palette.common.focusOutline : inputColors.focusBorder}`,
     },
   };
 }

@@ -57,7 +57,7 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
   ({theme, error}) => {
     return {
       '&:focus:not([disabled])': {
-        borderColor: inputColors.focusBorder,
+        borderColor: theme.palette.common.focusOutline,
         boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
         outline: 'none',
       },
