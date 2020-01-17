@@ -79,15 +79,15 @@ describe('ColorInput', () => {
       });
     });
 
-    describe('when provided a value with a hashtag', () => {
-      test('the value is stripped', () => {
+    describe('when provided a value with a hash', () => {
+      test('the hash is stripped from the value', () => {
         const {getByTestId} = render(<ColorInput value={'#eee'} data-testid={id} />);
         expect(getByTestId(id).value).toBe(value);
       });
     });
 
     describe('when provided more than 6 characters as the value', () => {
-      test('the value is stripped', () => {
+      test('the value is truncated to a length of 6', () => {
         const {getByTestId} = render(<ColorInput value={'123456789'} data-testid={id} />);
         expect(getByTestId(id).value).toBe('123456');
       });

@@ -61,7 +61,7 @@ describe('ColorPreview', () => {
       });
     });
 
-    describe('when provided a value with a hashtag', () => {
+    describe('when provided a value with a hash', () => {
       test('the value is stripped', () => {
         const {getByTestId} = render(<ColorPreview value={'#eee'} data-testid={id} />);
         expect(getByTestId(id).value).toBe(value);
