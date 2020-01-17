@@ -1,8 +1,6 @@
 import * as React from 'react';
 import ColorInput from '../lib/ColorInput';
 import {render, fireEvent} from '@testing-library/react';
-import ReactDOMServer from 'react-dom/server';
-import FormField from '@workday/canvas-kit-react-form-field';
 
 const id = 'color-input';
 const placeholder = '000000';
