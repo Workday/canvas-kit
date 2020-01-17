@@ -93,14 +93,6 @@ describe('ColorInput', () => {
   });
 
   describe('when changed', () => {
-    test('should update value', () => {
-      const {getByTestId} = render(<ColorInput value="" data-testid={id} />);
-
-      expect(getByTestId(id).value).toBe('');
-      getByTestId(id).value = value;
-      expect(getByTestId(id).value).toBe(value);
-    });
-
     test('should call onChange callback on value change', () => {
       const {getByTestId} = render(<ColorInput onChange={cb} data-testid={id} />);
 
