@@ -16,10 +16,12 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   menuToggle?: React.ReactNode;
   /**
    * A HeaderTheme enum indicating which theme to use (White, Blue or Transparent)
+   * @default HeaderTheme.White
    */
   themeColor: HeaderTheme;
   /**
    * A HeaderVariant enum indicating whether to use the Dub (small) or Full (large) version
+   * @default HeaderVariant.Dub
    */
   variant: HeaderVariant;
   /**
@@ -35,11 +37,12 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   brandUrl?: string;
   /**
-   * True if the nav should be centered. False if it should be aligned right
+   * If true, the nav is centered. If false, the nav is right aligned.
+   * @default false
    */
   centeredNav?: boolean;
   /**
-   * An event handler function that gets called when the responsive menu icon is clicked
+   * The function called when the responsive menu icon is clicked.
    */
   onMenuClick?: (e: React.SyntheticEvent) => void;
   /**
@@ -47,7 +50,8 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   leftSlot?: React.ReactElement;
   /**
-   * A boolean indicating if the header should be rendered in collapsed mode
+   * If true, the header is rendered in collapsed mode.
+   * @default false
    */
   isCollapsed?: boolean;
 }

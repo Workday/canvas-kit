@@ -16,7 +16,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   children: React.ReactElement<TextInputProps>;
   /**
-   * Sets the initial value of the input.
+   * The initial value of the input.
    */
   initialValue?: string;
   /**

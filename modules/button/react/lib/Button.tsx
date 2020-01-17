@@ -10,25 +10,25 @@ import {labelDataBaseStyles} from './ButtonStyles';
 export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * The type of button
+   * The type of the button.
    * @default ButtonVariant.Secondary
    */
   variant?: T;
   /**
-   * The size of the button
+   * The size of the button.
    * @default ButtonSize.Medium
    */
   size?: ButtonSize;
   /**
-   * The ref of the button that the styled component renders
+   * The ref of the button that the styled component renders.
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
   /**
-   * The data label of the button
+   * The data label of the button.
    */
   dataLabel?: String;
   /**
-   * The icon for the button
+   * The icon for the button.
    */
   icon?: CanvasSystemIcon;
 }

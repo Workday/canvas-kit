@@ -8,12 +8,12 @@ import {ModalWidth} from './Modal';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   *  You can choose between zero, s, l for your padding
+   *  The padding for the Modal. You can choose between zero, s, l for your padding.
    * @default PopupPadding.l
    */
   padding: PopupPadding;
   /**
-   * You can choose between s or m for your modal width
+   * The width of the Modal. You can choose between s or m for your modal width
    * @default ModalWidth.s
    */
   width: ModalWidth;
@@ -32,7 +32,7 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    */
   closeOnEscape: boolean;
   /**
-   * Heading at the top of the card.
+   * The heading at the top of the card.
    */
   heading: React.ReactNode;
   /**

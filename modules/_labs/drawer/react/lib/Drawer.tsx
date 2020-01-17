@@ -14,7 +14,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   openDirection?: DrawerDirection;
   /**
-   * Sets the width of the Drawer
+   * The width of the Drawer
    * @default 360px
    */
   width?: number;

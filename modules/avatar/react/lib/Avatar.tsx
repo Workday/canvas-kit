@@ -12,12 +12,12 @@ export enum AvatarVariant {
 
 export interface AvatarLocalProps {
   /**
-   * An AvatarVariant enum indicating which variant to use for the default state (Light vs. Dark).
+   * The variant to use for the default state (Light vs. Dark).
    * @default AvatarVariant.Light
    */
   variant: AvatarVariant;
   /**
-   * A SystemIconCircleSize enum or number value indicating the size of the avatar.
+   * The size of the avatar.
    * @default SystemIconCircleSize.m
    */
   size: SystemIconCircleSize | number;

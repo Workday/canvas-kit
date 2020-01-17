@@ -20,37 +20,37 @@ export interface SystemIconStyles {
    */
   background?: string;
   /**
-   * `.wd-icon-background` color on hover.
+   * The `.wd-icon-background` color on hover.
    * @default transparent
    */
   backgroundHover?: string;
   /**
-   * Icon color. This will define `accent` and `fill`. `accent` and `fill` will override this property if defined
+   * The icon color. This will define `accent` and `fill`. `accent` and `fill` will override this property if defined
    * @default colors.primary.iconStandard
    */
   color?: string;
   /**
-   * Hover color of the icon. This will define `accentHover` and `fillHover`
+   * The hover color of the icon. This will define `accentHover` and `fillHover`
    * @default colors.primary.iconHover
    */
   colorHover?: string;
   /**
-   * `.wd-icon-fill` color. This will override `color`
+   * The `.wd-icon-fill` color. This will override `color`
    */
   fill?: string;
   /**
-   * `.wd-icon-fill` color on hover. This will override `colorHover`
+   * The `.wd-icon-fill` color on hover. This will override `colorHover`
    */
   fillHover?: string;
 }
 
 export interface SystemIconProps extends SystemIconStyles {
   /**
-   * Icon to display from `@workday/canvas-system-icons-web`
+   * The icon to display from `@workday/canvas-system-icons-web`
    */
   icon: CanvasSystemIcon;
   /**
-   * Size of the icon in `px`
+   * The size of the icon in `px`
    */
   size?: number;
 }

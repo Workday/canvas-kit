@@ -9,7 +9,8 @@ export interface PageHeaderProps {
    */
   title: string;
   /**
-   * Use the page header in the non-product page. In this context, content is centered and the page header is responsive in all three breakpoints.
+   * If true, content is centered and the page header is responsive in all three breakpoints. Used for page headers in non-product pages.
+   * @default false
    */
   capWidth: boolean;
   /**

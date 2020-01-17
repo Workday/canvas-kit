@@ -6,6 +6,7 @@ import {DubLogoTitle} from './parts';
 export interface GlobalHeaderProps {
   /**
    * A React node that will replace the dub logo and title if provided.
+   * @default DubLogoTitle
    */
   brand: React.ReactNode;
   /**
@@ -13,11 +14,12 @@ export interface GlobalHeaderProps {
    */
   menuToggle?: React.ReactNode;
   /**
-   * An event handler function that gets called when the responsive menu icon is clicked
+   * The function called when the responsive menu icon is clicked
    */
   onMenuClick?: (e: React.SyntheticEvent) => void;
   /**
-   * A boolean indicating if the header should be rendered in collapsed mode
+   * If true, renders the header in collapsed mode.
+   * @default false
    */
   isCollapsed?: boolean;
   /**

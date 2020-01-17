@@ -12,7 +12,7 @@ import {
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The heading at the top of the card
+   * The heading at the top of the card.
    */
   heading?: React.ReactNode;
 
@@ -34,12 +34,12 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   depth: CanvasDepthValue;
 
   /**
-   * The width of the card
+   * The width of the card.
    */
   width?: number | string;
 
   /**
-   * The height of the card
+   * The height of the card.
    */
   height?: number | string;
 }

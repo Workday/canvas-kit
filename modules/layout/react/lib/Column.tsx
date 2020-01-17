@@ -4,7 +4,7 @@ import isPropValid from '@emotion/is-prop-valid';
 
 export interface ColumnProps {
   /**
-   * Column cannot be empty.
+   * The column cannot be empty.
    */
   children?: React.ReactNode;
   /**

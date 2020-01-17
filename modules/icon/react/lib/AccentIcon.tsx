@@ -7,7 +7,7 @@ import {SpanProps} from './types';
 
 export interface AccentIconStyles {
   /**
-   * The fill color for the icon
+   * The fill color for the icon.
    * @default colors.blueberry500
    */
   color?: string;
@@ -23,7 +23,7 @@ export interface AccentIconProps extends AccentIconStyles {
    */
   icon: CanvasAccentIcon;
   /**
-   * Size of the Icon
+   * Size of the Icon.
    * @default 56
    */
   size?: number;

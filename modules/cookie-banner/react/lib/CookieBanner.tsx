@@ -13,13 +13,13 @@ export interface CookieBannerProps {
   isClosed?: boolean;
 
   /**
-   * Callback executed upon accepting cookies.
+   * The function called upon accepting cookies.
    * The function should set `isClosed` to true.
    */
   onAccept: (e: React.MouseEvent<HTMLButtonElement>) => void;
 
   /**
-   * Callback executed upon clicking the "Cookie Settings" button.
+   * The function called upon clicking the "Cookie Settings" button.
    * Adding this will automatically display the "Cookie Settings" button.
    * @default undefined
    */

@@ -17,15 +17,15 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
    */
   isOpen?: boolean;
   /**
-   * Width of the card. If nothing is passed in the menu will collapse around the content.
+   * The width of the card. If nothing is passed in the menu will collapse around the content.
    */
   width?: number | string;
   /**
-   * If specified, this callback is executed after any menu option is selected.
+   * The function called after any menu option is selected.
    */
   onSelect?: () => void;
   /**
-   * If specified, this callback is executed when the menu should close. Called after an item is selected or the escape shortcut key is used. This will not fire if the menu item sets shouldClose to false
+   * The function called when the menu should close. Called after an item is selected or the escape shortcut key is used. This will not fire if the menu item sets shouldClose to false
    */
   onClose?: () => void;
   /**

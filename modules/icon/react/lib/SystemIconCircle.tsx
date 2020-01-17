@@ -17,16 +17,16 @@ export enum SystemIconCircleSize {
 
 export interface SystemIconCircleProps {
   /**
-   * Background color from `@workday/canvas-colors-web`.
+   * The background color from `@workday/canvas-colors-web`.
    * @default colors.soap300
    */
   background: string;
   /**
-   * Icon to display from `@workday/canvas-accent-icons-web`.
+   * The icon to display from `@workday/canvas-accent-icons-web`.
    */
   icon: CanvasSystemIcon;
   /**
-   * Size of the icon.
+   * The size of the icon.
    * @default SystemIconCircleSize.l (40)
    */
   size: SystemIconCircleSize | number;
