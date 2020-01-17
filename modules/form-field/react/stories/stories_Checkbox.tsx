@@ -3,8 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import styled from '@emotion/styled';
-import {ControlledComponentWrapper} from '../../../../utils/storybook';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
+import {ControlledComponentWrapper, StaticStatesTable} from '../../../../utils/storybook';
 
 import {Checkbox} from '../../../checkbox/react/index';
 import FormField from '../index';
@@ -133,79 +132,32 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
   .addParameters({component: Checkbox})
   .addDecorator(withReadme(README))
   .add('States', () => (
-    <StaticStates>
-      <Table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Default</th>
-            <th>Hover</th>
-            <th>Focus</th>
-            <th>Focus Hover</th>
-            <th>Active</th>
-            <th>Disabled</th>
-            <th>Disabled Hover</th>
-          </tr>
-        </thead>
-        <tbody>
-          {[false, true].map(checked => {
-            return [false, true].map(indeterminate => {
-              return ['Default', 'Alert', 'Error'].map(variant => {
-                const type =
-                  variant === 'Alert'
-                    ? Checkbox.ErrorType.Alert
-                    : variant === 'Error'
-                    ? Checkbox.ErrorType.Error
-                    : undefined;
-
-                if (indeterminate && !checked) {
-                  return;
-                }
-
-                const key = `${checked ? 'checked' : 'unchecked'}-${
-                  indeterminate ? 'indeterminate' : ''
-                }-${variant}`;
-
-                const states = [
-                  '',
-                  'hover',
-                  'focus',
-                  'focus hover',
-                  'active',
-                  'active hover',
-                  'disabled',
-                  'disabled hover',
-                ];
-
-                return (
-                  <tr key={key}>
-                    <td>{`${variant} (${
-                      checked ? (indeterminate ? 'indeterminate' : 'checked') : 'unchecked'
-                    })`}</td>
-
-                    {states.map(className => {
-                      const disabled = className.includes('disabled');
-
-                      return (
-                        <td key={`${key}-${className}`}>
-                          <Checkbox
-                            checked={checked}
-                            disabled={disabled}
-                            indeterminate={indeterminate}
-                            error={type}
-                            className={className}
-                            onChange={() => {}} // eslint-disable-line no-empty-function
-                            label="Checkbox"
-                          />
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              });
-            });
-          })}
-        </tbody>
-      </Table>
-    </StaticStates>
+    <StaticStatesTable
+      componentProps={{
+        checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
+        indeterminate: [{value: true, label: 'Indeterminate'}, {value: false, label: ''}],
+        error: [
+          {value: undefined, label: ''},
+          {value: Checkbox.ErrorType.Alert, label: 'Alert'},
+          {value: Checkbox.ErrorType.Error, label: 'Error'},
+        ],
+      }}
+      verifyProps={props => {
+        if (props.indeterminate && !props.checked) {
+          return false;
+        }
+        return true;
+      }}
+      renderComponent={(props, disabled, className) => (
+        <Checkbox
+          checked={props.checked}
+          disabled={disabled}
+          indeterminate={props.indeterminate}
+          error={props.error}
+          className={className}
+          onChange={() => {}} // eslint-disable-line no-empty-function
+          label="Checkbox"
+        />
+      )}
+    />
   ));
