@@ -11,10 +11,16 @@ interface ComponentProps {
   [key: string]: any;
 }
 
+/**
+ * A helper to generate a table of all possible states for component visual testing.
+ *
+ * This uses our `StaticStates` system. Note: This system requires the use of Canvas'
+ * `styled` wrapper within the component, instead of the default emotion one.
+ */
 export interface StaticStatesTableProps {
   /**
    * The pseudo states + disabled state of the component. These correspond to the columns of the table.
-   * @default [ '', 'hover', 'focus', 'focus hover', 'active', 'active hover', 'disabled', 'disabled hover' ]
+   * @default [ 'default', 'hover', 'focus', 'focus hover', 'active', 'active hover', 'disabled', 'disabled hover' ]
    */
   states: string[];
   /**
@@ -57,7 +63,7 @@ export default class StaticStatesTable extends React.Component<StaticStatesTable
   public static defaultProps = {
     componentProps: {},
     states: [
-      '',
+      'default',
       'hover',
       'focus',
       'focus hover',
@@ -99,6 +105,11 @@ export default class StaticStatesTable extends React.Component<StaticStatesTable
     );
   };
 
+  /**
+   * Recursively map the prop combinations to get every possible combination.
+   * For each possible combination call `renderPropCombination`
+   * @returns React.ReactNode
+   */
   mapProps = (
     values: {[key: string]: ComponentPropValue} = {},
     remainingProps: string[] = Object.keys(this.props.componentProps)
@@ -123,13 +134,10 @@ export default class StaticStatesTable extends React.Component<StaticStatesTable
             <tr>
               <th>Variants</th>
               {this.props.states.map((state, index) => {
-                const name =
-                  state === ''
-                    ? 'Default'
-                    : state.replace(
-                        /\w\S*/g,
-                        txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-                      );
+                const name = state.replace(
+                  /\w\S*/g,
+                  txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+                );
 
                 return <th key={`StateHeading${index}`}>{name}</th>;
               })}
