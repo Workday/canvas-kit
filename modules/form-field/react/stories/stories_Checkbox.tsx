@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import styled from '@emotion/styled';
 import {ControlledComponentWrapper, StaticStatesTable} from '../../../../utils/storybook';
 
 import {Checkbox} from '../../../checkbox/react/index';
@@ -17,20 +16,6 @@ const control = (child: React.ReactNode) => (
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
-
-const Table = styled('table')({
-  width: '100%',
-  thead: {
-    textAlign: 'left',
-    paddingBottom: 16,
-  },
-  'td, th': {
-    minWidth: 100,
-    paddingBottom: 16,
-    paddingRight: 16,
-    textAlign: 'left',
-  },
-});
 
 storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
   .addParameters({component: Checkbox})
