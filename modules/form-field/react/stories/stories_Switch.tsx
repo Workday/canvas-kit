@@ -124,8 +124,8 @@ storiesOf('Components|Inputs/Switch/React/Visual Testing', module)
           </tr>
         </thead>
         <tbody>
-          {[false, true].map(checked => {
-            return [false, true].map(disabled => {
+          {[false, true].map(disabled => {
+            return [false, true].map(checked => {
               return ['Default', 'Alert', 'Error'].map(variant => {
                 const type =
                   variant === 'Alert'
@@ -138,12 +138,18 @@ storiesOf('Components|Inputs/Switch/React/Visual Testing', module)
                   disabled ? 'disabled' : 'enabled'
                 } ${variant}`;
 
+                const pseudoStates = ['', 'hover'];
+
+                if (!disabled) {
+                  pseudoStates.push('focus', 'active');
+                }
+
                 return (
                   <tr key={key}>
                     <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
                       checked ? 'checked' : 'unchecked'
                     })`}</td>
-                    {['', 'hover', 'focus', 'active'].map(className => (
+                    {pseudoStates.map(className => (
                       <td key={`${key} + ${className}`}>
                         <Switch
                           checked={checked}
