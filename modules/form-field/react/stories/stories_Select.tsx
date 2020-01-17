@@ -2,7 +2,9 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
+import styled from '@emotion/styled';
 import {controlComponent} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
 
 import FormField from '..';
 import README from '../../../select/react/README.md';
@@ -10,6 +12,20 @@ import {Select, SelectOption} from '../../../select/react';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
+
+const Table = styled('table')({
+  width: '100%',
+  thead: {
+    textAlign: 'left',
+    paddingBottom: 16,
+  },
+  'td, th': {
+    minWidth: 100,
+    paddingBottom: 16,
+    paddingRight: 16,
+    textAlign: 'left',
+  },
+});
 
 storiesOf('Components|Inputs/Select/React/Top Label', module)
   .addParameters({component: Select})
@@ -207,4 +223,56 @@ storiesOf('Components|Inputs/Select/React/Left Label', module)
         </Select>
       )}
     </FormField>
+  ));
+
+storiesOf('Components|Inputs/Select/React/Visual Testing', module)
+  .addParameters({component: Select})
+  .addDecorator(withReadme(README))
+  .add('States', () => (
+    <StaticStates>
+      <Table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>No state</th>
+            <th>Hover</th>
+            <th>Focused</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[false, true].map(disabled => {
+            return ['Plain', 'Alert', 'Error'].map(variant => {
+              const type =
+                variant === 'Alert'
+                  ? FormField.ErrorType.Alert
+                  : variant === 'Error'
+                  ? FormField.ErrorType.Error
+                  : undefined;
+
+              const key = `${disabled ? 'disabled' : 'enabled'}-${variant}`;
+
+              return (
+                <tr key={key}>
+                  <td>{`${disabled ? 'Disabled ' : ''}${variant}`}</td>
+
+                  {['', 'hover', 'focus', 'active'].map(className => (
+                    <td key={`${key}-${className}`}>
+                      <Select
+                        disabled={disabled}
+                        error={type}
+                        className={className}
+                        onChange={() => {}} // eslint-disable-line no-empty-function
+                      >
+                        <SelectOption value="email" label="E-mail" />
+                      </Select>
+                    </td>
+                  ))}
+                </tr>
+              );
+            });
+          })}
+        </tbody>
+      </Table>
+    </StaticStates>
   ));
