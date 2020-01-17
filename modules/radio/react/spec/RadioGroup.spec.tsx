@@ -10,7 +10,6 @@ describe('Radio Group', () => {
 
   describe('when rendered rendered with a name', () => {
     test('should render a radio group with a name', () => {
-      const id = 'myRadio';
       const {getByTestId} = render(
         <RadioGroup name="contact" data-testid="radiogroup">
           <Radio id="1" value="email" label="E-mail" />
