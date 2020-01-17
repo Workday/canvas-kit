@@ -138,44 +138,55 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
         <thead>
           <tr>
             <th></th>
-            <th>No state</th>
+            <th>Default</th>
             <th>Hover</th>
-            <th>Focused</th>
+            <th>Focus</th>
+            <th>Focus Hover</th>
             <th>Active</th>
+            <th>Disabled</th>
+            <th>Disabled Hover</th>
           </tr>
         </thead>
         <tbody>
-          {[false, true].map(disabled => {
-            return [false, true].map(checked => {
-              return [false, true].map(indeterminate => {
-                return ['Default', 'Alert', 'Error'].map(variant => {
-                  const type =
-                    variant === 'Alert'
-                      ? Checkbox.ErrorType.Alert
-                      : variant === 'Error'
-                      ? Checkbox.ErrorType.Error
-                      : undefined;
+          {[false, true].map(checked => {
+            return [false, true].map(indeterminate => {
+              return ['Default', 'Alert', 'Error'].map(variant => {
+                const type =
+                  variant === 'Alert'
+                    ? Checkbox.ErrorType.Alert
+                    : variant === 'Error'
+                    ? Checkbox.ErrorType.Error
+                    : undefined;
 
-                  if (indeterminate && !checked) {
-                    return;
-                  }
+                if (indeterminate && !checked) {
+                  return;
+                }
 
-                  const key = `${checked ? 'checked' : 'unchecked'}-${
-                    disabled ? 'disabled' : 'enabled'
-                  }-${indeterminate ? 'indeterminate' : ''}-${variant}`;
+                const key = `${checked ? 'checked' : 'unchecked'}-${
+                  indeterminate ? 'indeterminate' : ''
+                }-${variant}`;
 
-                  const pseudoStates = ['', 'hover'];
-                  if (!disabled) {
-                    pseudoStates.push('focus', 'active');
-                  }
+                const states = [
+                  '',
+                  'hover',
+                  'focus',
+                  'focus hover',
+                  'active',
+                  'active hover',
+                  'disabled',
+                  'disabled hover',
+                ];
 
-                  return (
-                    <tr key={key}>
-                      <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
-                        checked ? (indeterminate ? 'indeterminate' : 'checked') : 'unchecked'
-                      })`}</td>
+                return (
+                  <tr key={key}>
+                    <td>{`${variant} (${
+                      checked ? (indeterminate ? 'indeterminate' : 'checked') : 'unchecked'
+                    })`}</td>
 
-                      {pseudoStates.map(className => (
+                    {states.map(className => {
+                      const disabled = className.includes('disabled');
+
+                      return (
                         <td key={`${key}-${className}`}>
                           <Checkbox
                             checked={checked}
@@ -187,10 +198,10 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
                             label="Checkbox"
                           />
                         </td>
-                      ))}
-                    </tr>
-                  );
-                });
+                      );
+                    })}
+                  </tr>
+                );
               });
             });
           })}
