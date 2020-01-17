@@ -3,10 +3,10 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import Slider from '../index';
 import {SliderProps} from '../lib/Slider';
+import FormField from '../../../../form-field/react/index';
 import README from '../README.md';
-// import FormField from '../index';
+import Slider from '../index';
 
 const sliderProps: SliderProps = {
   max: 100,
@@ -19,9 +19,7 @@ const sliderProps: SliderProps = {
 storiesOf('Labs|Slider/React', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
-    <div className="story">
-      {/* <FormField label="Label"> */}
+    <FormField label="Label">
       <Slider {...sliderProps} />
-      {/* </FormField> */}
-    </div>
+    </FormField>
   ));

@@ -1,5 +1,11 @@
 import * as React from 'react';
-import {colors} from '@workday/canvas-kit-react-core';
+import {
+  borderRadius,
+  colors,
+  spacingNumbers as spacing,
+  type,
+} from '@workday/canvas-kit-react-core';
+import {focusRing} from '@workday/canvas-kit-react-common';
 
 import styled from '@emotion/styled';
 
@@ -17,17 +23,25 @@ export interface SliderProps {
   onEndDrag?: (newValue: number) => void;
 }
 
+const sliderContainerHeight = spacing.l;
+const sliderContainerWidth = 328;
+const sliderContainerMinWidth = 200;
+const sliderTrackRadius = 100;
+const sliderTrackHeight = 5;
+const sliderThumbHeight = spacing.s;
+const sliderThumbWidth = spacing.s;
+
 const Container = styled('div')({
   position: 'relative',
-  width: '328px',
-  minWidth: '200px',
-  height: '32px',
+  width: sliderContainerWidth,
+  minWidth: sliderContainerMinWidth,
+  height: spacing.l,
 });
 
 const Interval = styled('div')({
   fontSize: 'small',
   color: colors.licorice300,
-  padding: '8px',
+  padding: spacing.xxs,
 });
 
 const SliderInput = styled('input')({
@@ -35,8 +49,8 @@ const SliderInput = styled('input')({
   padding: 0,
   margin: 0,
   border: 'none',
-  width: '328px',
-  minWidth: '200px',
+  width: sliderContainerWidth,
+  minWidth: sliderContainerMinWidth,
   height: '100%',
   cursor: 'pointer',
   WebkitAppearance: 'none',
@@ -46,8 +60,8 @@ const SliderInput = styled('input')({
   zIndex: 1,
   // webkit
   '::-webkit-slider-runnable-track': {
-    height: '5px',
-    borderRadius: '100px',
+    height: sliderTrackHeight,
+    borderRadius: sliderTrackRadius,
     background: 'transparent',
     boxSizing: 'border-box',
     color: colors.blueberry400,
@@ -55,44 +69,41 @@ const SliderInput = styled('input')({
   '::-webkit-slider-thumb': {
     WebkitAppearance: 'none',
     background: colors.blueberry400,
-    boxShadow: `0 8px 16px 0 hsla(82, 97%, 11%, 0.18)`,
     border: 'none',
     outline: 'none',
-    borderRadius: '50%',
-    height: '16px',
-    width: '16px',
+    borderRadius: borderRadius.circle,
+    height: sliderThumbHeight,
+    width: sliderThumbWidth,
     marginTop: '-6px', // alignment fix for chrome
     position: 'relative',
     zIndex: 100,
     '&:focus, &:active': {
-      background: colors.blueberry400,
-      boxShadow: `0 0 0 2px ${colors.frenchVanilla100}, 0 0 0 4px ${colors.blueberry400}`,
+      ...focusRing(2, 2),
     },
   },
   // firefox
   '::-moz-range-track': {
     background: 'transparent',
-    height: '5px',
+    height: sliderTrackHeight,
   },
   '::-moz-focus-outer': {
     border: '0',
   },
   '::-moz-range-progress': {
     background: colors.blueberry400,
-    borderRadius: '100px',
-    height: '5px',
+    borderRadius: sliderTrackRadius,
+    height: sliderTrackHeight,
   },
   '::-moz-range-thumb': {
     background: colors.blueberry400,
     border: 'none',
-    borderRadius: '50%',
-    height: '16px',
-    width: '16px',
+    borderRadius: borderRadius.circle,
+    height: sliderThumbHeight,
+    width: sliderThumbWidth,
     position: 'absolute',
     zIndex: 5,
     '&:focus, &:active': {
-      background: colors.blueberry400,
-      boxShadow: `0 0 0 2px ${colors.frenchVanilla100}, 0 0 0 4px ${colors.blueberry400}`,
+      ...focusRing(2, 2),
     },
   },
   // IE
@@ -112,7 +123,7 @@ const SliderInput = styled('input')({
 
 const ProgressBarContainer = styled('div')({
   position: 'absolute',
-  height: '5px',
+  height: sliderTrackHeight,
   top: '50%',
   width: '100%',
   transform: 'translateY(-50%)',
@@ -121,20 +132,20 @@ const ProgressBarContainer = styled('div')({
 
 const ProgressBar = styled('progress')<{value: number; max: number}>({
   appearance: 'none',
-  width: '328px',
-  minWidth: '200px',
-  height: '5px',
+  width: sliderContainerWidth,
+  minWidth: sliderContainerMinWidth,
+  height: sliderTrackHeight,
   overflow: 'hidden',
   display: 'block',
   border: 'none',
-  borderRadius: '100px',
+  borderRadius: sliderTrackRadius,
   '::-moz-progress-bar': {
     background: colors.blueberry400,
-    borderRadius: '100px',
+    borderRadius: sliderTrackRadius,
   },
   '::-webkit-progress-value': {
     background: colors.blueberry400,
-    borderRadius: '100px',
+    borderRadius: sliderTrackRadius,
     transition: 'none',
   },
   '::-webkit-progress-bar': {
@@ -143,7 +154,7 @@ const ProgressBar = styled('progress')<{value: number; max: number}>({
   '::-ms-fill': {
     border: 'none',
     background: colors.blueberry400,
-    borderRadius: '100px',
+    borderRadius: sliderTrackRadius,
   },
 });
 
@@ -154,15 +165,18 @@ const Wrapper = styled('div')({
 });
 
 const InputValueBox = styled('input')({
+  ...type.body,
   width: '48px',
-  height: '40px',
+  height: spacing.xl,
   border: `1px solid ${colors.licorice100}`,
-  borderRadius: '4px',
-  fontsize: '14px',
-  lineHeight: '20px',
-  textIndent: '4px',
+  borderRadius: borderRadius.m,
+  textIndent: spacing.xxxs,
 });
 
+/**
+ * This function is mainly used to find the percent fill value for the background gradients.
+ * Without it, the gradients pass the the dragger on tails ends every so slightly and is slightly visible in some browsers.
+ */
 const valueToPercent = (max: number, min: number, value: number): number => {
   const percent = ((value - min) * 100) / (max - min);
   const minPercent = 0;
