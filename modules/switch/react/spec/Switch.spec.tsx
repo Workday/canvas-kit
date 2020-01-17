@@ -102,7 +102,7 @@ describe('Switch', () => {
   });
 
   describe('when rendered with an input ref', () => {
-    it("it should set the ref's current property to the checkbox input element", () => {
+    it("should set the ref's current property to the checkbox input element", () => {
       const ref = React.createRef<HTMLInputElement>();
 
       render(<Switch inputRef={ref} onChange={cb} />);
