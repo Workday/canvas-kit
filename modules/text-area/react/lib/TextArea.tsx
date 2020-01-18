@@ -8,7 +8,7 @@ export interface TextAreaProps
     GrowthBehavior,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * If true, disable the TextArea.
+   * If true, set the TextArea to the disabled state.
    * @default false
    */
   disabled?: boolean;

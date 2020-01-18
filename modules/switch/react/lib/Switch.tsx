@@ -6,12 +6,12 @@ import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas
 
 export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * If true, turn the Switch on.
+   * If true, set the Switch to the on state.
    * @default false
    */
   checked: boolean;
   /**
-   * If true, disable the Switch.
+   * If true, set the Switch to the disabled state.
    * @default false
    */
   disabled?: boolean;

@@ -11,12 +11,12 @@ import uuid from 'uuid/v4';
 
 export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * If true, check the Radio button.
+   * If true, set the Radio button to the checked state.
    * @default false
    */
   checked: boolean;
   /**
-   * If true, disable the Radio button.
+   * If true, set the Radio button to the disabled state.
    * @default false
    */
   disabled?: boolean;

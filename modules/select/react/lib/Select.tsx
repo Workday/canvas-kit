@@ -22,7 +22,7 @@ export interface SelectProps
    */
   children: React.ReactElement<SelectOption>[];
   /**
-   * If true, disable the Select.
+   * If true, set the Select to the disabled state.
    * @default false
    */
   disabled?: boolean;

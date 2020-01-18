@@ -366,7 +366,7 @@ The pattern for booleans is also different: `If true, <do something>.` For stand
 
 ```
 /**
-  * If true, set the Checkbox to disabled.
+  * If true, set the Checkbox to the disabled state.
   * @default false
   */
 disabled?: boolean;

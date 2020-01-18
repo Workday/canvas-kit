@@ -14,12 +14,12 @@ import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * If true, check the Checkbox.
+   * If true, set the Checkbox to the checked state.
    * @default false
    */
   checked: boolean;
   /**
-   * If true, disable the Checkbox.
+   * If true, set the Checkbox to the disabled state.
    * @default false
    */
   disabled?: boolean;
