@@ -6,12 +6,12 @@ import {keyframes} from '@emotion/core';
 
 export interface TooltipProps {
   /**
-   *  Origin from which the Tooltip will animate from.
+   * The origin from which the Tooltip will animate.
    * @default {horizontal: 'center', vertical: 'top'}
    */
   transformOrigin: TransformOrigin;
   /**
-   * Unique id of the Tooltip.
+   * The unique id of the Tooltip.
    */
   id?: string;
 }

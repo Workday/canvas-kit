@@ -38,7 +38,7 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /**
-   * The function called when a valid hex value is entered in the ColorInput. The color passed to the callback function is prefixed with a hash and expanded if necessary (e.g., "03F" is converted to "#0033FF").
+   * The function called when a valid hex value is entered in the ColorInput. The `color` argument passed to the callback function is prefixed with a hash and expanded if necessary (e.g., `03F` is converted to `#0033FF`).
    */
   onValidColorChange?: (color: string) => void;
 }

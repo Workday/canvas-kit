@@ -10,33 +10,33 @@ import styled from '@emotion/styled';
 
 export interface ToastProps {
   /**
-   *  Icon to display from `@workday/canvas-system-icons-web`
+   * The icon of the Toast.
    * @default checkIcon
    */
   icon: CanvasSystemIcon;
   /**
-   * The color of the icon
+   * The color of the Toast icon.
    * @default colors.greenApple400
    */
   iconColor: CanvasColor | string; // TODO: Fix
   /**
-   * The message text for the Toast.
+   * The text of the Toast message.
    */
   children: string;
   /**
-   * Callback to handle close of your Toast and any other event when the Toast is closed.
+   * The function called when the Toast is closed.
    */
   onClose?: () => void;
   /**
-   * Callback to handle an action link.
+   * The function called when the Toast action is clicked.
    */
   onActionClick?: () => void;
   /**
-   * The text to display for the link.
+   * The text of the Toast action.
    */
   actionText?: string;
   /**
-   * Origin from which the toast will animate from.
+   * The origin from which the Toast will animate.
    * @default {horizontal: 'center', vertical: 'top'}
    */
   transformOrigin?: TransformOrigin;

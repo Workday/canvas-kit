@@ -9,50 +9,54 @@ import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-we
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Determines if the side panel is open or closed.
+   * If true, set the SidePanel to the open state.
+   * @default false;
    */
   open: boolean;
   /**
-   * Callback that handles clicking toggle button to open or close the side panel. The toggle button will only show if this prop is defined.
+   * The function called when the toggle button is clicked. The toggle button is only shown if this prop is defined.
    */
   onToggleClick?: () => void;
   /**
-   * Custom title or element to display as a header to the side panel.
+   * The text or element to display as the SidePanel header.
    */
   header?: string | React.ReactNode;
   /**
-   * Determines from what side the side panel opens `SidePanelOpenDirection.Left` or `SidePanelOpenDirection.Right`.
+   * The side from which the SidePanel opens. Accepts `SidePanelOpenDirection.Left` or `SidePanelOpenDirection.Right`.
+   * @default SidePanelOpenDirection.Left
    */
   openDirection?: SidePanelOpenDirection;
   /**
-   * A function that is called when the screen size changes and reaches `breakpoint`. For example, if the user has their window at 1000px of width, and then resizes, this will get called when the window size reaches the value of the `breakpoint` prop. A boolean for whether the current window size is above or below the breakpoint is provided so you can control `open` based on the change.
+   * The function called when the window width changes and reaches a width equivalent to `breakpoint`. For example, if the window is resized from a width of `1000px`, this will be called when the window reaches a width equivalent to `breakpoint`. The `aboveBreakpoint` argument passed to the callback function indicates whether the current window width is above or below `breakpoint` so you can control `open` based on the change.
    */
   onBreakpointChange?: (aboveBreakpoint: boolean) => void;
   /**
-   * Adjust padding of the side panel when it's open.
+   * The padding of the SidePanel when it's open.
    */
   padding?: CanvasSpacingValue;
   /**
-   * The width at which the window size must be in order for `onBreakPointChange` to fire.
+   * The window width at which the SidePanel triggers `onBreakPointChange`.
    * @default 768px
    */
   breakpoint?: number;
   /**
-   * Determines the width of the side panel when it's open.
+   * The width of the SidePanel when it's open.
    * @default 300px
    */
   openWidth?: number;
   /**
-   * Determines the background color of the side panel when it's `open`
+   * The background color of the SidePanel when it's open.
+   * @default SidePanelBackgroundColor.White
    */
   backgroundColor?: SidePanelBackgroundColor;
   /**
-   * The `aria-label` for closing the navigation
-   * @default SidePanelBackgroundColor.White
+   * The `aria-label` that describes closing the navigation.
+   * @default 'close navigation'
    */
   closeNavigationLabel: string;
   /**
-   * The `aria-label` for opening the navigation
+   * The `aria-label` that describes opening the navigation.
+   * @default 'open navigation'
    */
   openNavigationLabel: string;
 }
