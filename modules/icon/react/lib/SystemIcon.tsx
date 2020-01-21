@@ -7,50 +7,50 @@ import {SpanProps} from './types';
 
 export interface SystemIconStyles {
   /**
-   * The `.wd-icon-accent` color. This will override `color`.
+   * The accent color of the SystemIcon. This overrides `color`.
    */
   accent?: string;
   /**
-   * The `.wd-icon-accent` color on hover. This will override `colorHover`.
+   * The accent color of the SystemIcon on hover. This overrides `colorHover`.
    */
   accentHover?: string;
   /**
-   * The `.wd-icon-background` color.
+   * The background color of the SystemIcon.
    * @default transparent
    */
   background?: string;
   /**
-   * The `.wd-icon-background` color on hover.
+   * The background color of the SystemIcon on hover.
    * @default transparent
    */
   backgroundHover?: string;
   /**
-   * The icon color. This will define `accent` and `fill`. `accent` and `fill` will override this property if defined
+   * The color of the SystemIcon. This defines `accent` and `fill`. `color` may be overriden by `accent` and `fill`.
    * @default colors.primary.iconStandard
    */
   color?: string;
   /**
-   * The hover color of the icon. This will define `accentHover` and `fillHover`
+   * The hover color of the SystemIcon. This defines `accentHover` and `fillHover`. `colorHover` may be overriden by `accentHover` and `fillHover`.
    * @default colors.primary.iconHover
    */
   colorHover?: string;
   /**
-   * The `.wd-icon-fill` color. This will override `color`
+   * The fill color of the SystemIcon. This overrides `color`.
    */
   fill?: string;
   /**
-   * The `.wd-icon-fill` color on hover. This will override `colorHover`
+   * The fill color of the SystemIcon on hover. This overrides `colorHover`.
    */
   fillHover?: string;
 }
 
 export interface SystemIconProps extends SystemIconStyles {
   /**
-   * The icon to display from `@workday/canvas-system-icons-web`
+   * The icon to display from `@workday/canvas-system-icons-web`.
    */
   icon: CanvasSystemIcon;
   /**
-   * The size of the icon in `px`
+   * The size of the SystemIcon in `px`.
    */
   size?: number;
 }

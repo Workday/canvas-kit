@@ -6,17 +6,17 @@ import {SpanProps} from './types';
 
 export interface GraphicStyles {
   /**
-   *  The graphic width in `px`. `width` takes precedence over `height` in order to preserve the graphic's
+   * The width of the Graphic in `px`. The Graphic's `width` takes precedence over its `height` in order to preserve its proportions.
    * @default width of graphic
    */
   width?: number | string;
   /**
-   * The graphic height in `px`. If set, `width` will be set to `100%`.
+   * The height of the Graphic in `px`. If the Graphic's `height` is set, its `width` will be set to `100%`.
    * @default height of graphic
    */
   height?: number | string;
   /**
-   * If true, expands graphic to fit container. `grow` takes precedence over both `width` and `height`.
+   * If true, expand the Graphic to fit its container. `grow` takes precedence over both `width` and `height`.
    * @default false
    */
   grow?: boolean;
