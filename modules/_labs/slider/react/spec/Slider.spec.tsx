@@ -24,7 +24,7 @@ describe('ActionBar', () => {
   test('render the input value box with the given value', () => {
     const modifiedSliderProps: SliderProps = {
       ...defaultSliderProps,
-      useInputRange: true,
+      showTextInput: true,
     };
     const wrapper = mount(<Slider {...modifiedSliderProps} />);
     expect(wrapper.find('InputValueBox').props().value).toEqual(defaultSliderProps.startValue);
@@ -40,7 +40,7 @@ describe('ActionBar', () => {
   test('change value through the input value box', () => {
     const modifiedSliderProps: SliderProps = {
       ...defaultSliderProps,
-      useInputRange: true,
+      showTextInput: true,
     };
     const wrapper = mount(<Slider {...modifiedSliderProps} />);
     const input = wrapper.find('InputValueBox').find('input');
@@ -54,7 +54,7 @@ describe('ActionBar', () => {
   test('slider value changes and reflects the value of the input box', () => {
     const modifiedSliderProps: SliderProps = {
       ...defaultSliderProps,
-      useInputRange: true,
+      showTextInput: true,
     };
     const wrapper = mount(<Slider {...modifiedSliderProps} />);
     const input = wrapper.find('SliderInput').find('input');
@@ -69,17 +69,13 @@ describe('ActionBar', () => {
   test('check the click callbacks', () => {
     const onChange = jest.fn();
     const onEndDrag = jest.fn();
-    const onKeyDown = jest.fn();
-    const onKeyUp = jest.fn();
-    const onStartDrag = jest.fn();
+    const onDragStart = jest.fn();
 
     const modifiedSliderProps: SliderProps = {
       ...defaultSliderProps,
       onChange,
       onEndDrag,
-      onKeyDown,
-      onKeyUp,
-      onStartDrag,
+      onDragStart,
     };
 
     const wrapper = mount(<Slider {...modifiedSliderProps} />);
@@ -91,9 +87,7 @@ describe('ActionBar', () => {
     input.simulate('keyup', {key: 'Enter'});
 
     expect(onChange).toHaveBeenCalled();
-    expect(onStartDrag).toHaveBeenCalled();
+    expect(onDragStart).toHaveBeenCalled();
     expect(onEndDrag).toHaveBeenCalled();
-    expect(onKeyDown).toHaveBeenCalled();
-    expect(onKeyUp).toHaveBeenCalled();
   });
 });

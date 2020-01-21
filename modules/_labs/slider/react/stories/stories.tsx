@@ -13,7 +13,7 @@ const sliderProps: SliderProps = {
   min: 0,
   step: 1,
   startValue: 50,
-  useInputRange: true,
+  showTextInput: true,
 };
 
 storiesOf('Labs|Slider/React', module)

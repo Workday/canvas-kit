@@ -9,13 +9,13 @@ slider component
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react
+yarn add @workday/canvas-kit-labs-react
 ```
 
 or
 
 ```sh
-yarn add @workday/canvas-kit-react-slider
+yarn add @workday/canvas-kit-labs-react-slider
 ```
 
 ## Usage
@@ -27,8 +27,9 @@ import Slider from '@workday/canvas-kit-react-slider';
 const sliderProps: SliderProps = {
   max: 100,
   min: 0,
+  step: 1,
   startValue: 50,
-  useInputRange: true,
+  showTextInput: true,
 };
 
 <Slider {...sliderProps} />;
@@ -40,19 +41,19 @@ const sliderProps: SliderProps = {
 
 #### `max: number`
 
-> Max number for the slider
+> Max number for the slider.
 
 ---
 
 #### `min: number`
 
-> Min number for the slider
+> Min number for the slider.
 
 ---
 
 #### `startValue: number`
 
-> The starting value for the slider
+> The starting value for the slider.
 
 ---
 
@@ -60,42 +61,42 @@ const sliderProps: SliderProps = {
 
 #### step: number
 
-> How much to increase or decrease the value by
+> How much to increase or decrease the value by when using the input slider.
 
 ---
 
-#### useInputRange: boolean
+#### showTextInput: boolean
 
-> If specified, the input box for the value will show up
+> If specified, this will show a text input to the right of the slider to manually enter the range value using number keys.
 
 ---
 
 #### onChange?: (newValue: number) => void
 
-> If specified, this callback is executed when the value is changed
+> If specified, this callback is executed when the value is changed.
 
 ---
 
 #### onSliderStartDrag?: (newValue: number) => void
 
-> If specified, this callback is executed when the mouse is pressed
+> If specified, this callback is executed when the mouse is pressed.
 
 ---
 
 #### onKeyDown?: (newValue: number) => void
 
-> If specified, this callback is executed when a key is pressed
+> If specified, this callback is executed when a key is pressed.
 
 ---
 
 #### onKeyUp?: (newValue: number) => void
 
-> If specified, this callback is executed when a key is released
+> If specified, this callback is executed when a key is released.
 
 ---
 
 #### onSliderEndDrag?: (newValue: number) => void
 
-> If specified, this callback is executed when the mouse is released
+> If specified, this callback is executed when the mouse is released.
 
 ---

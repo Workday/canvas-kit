@@ -14,12 +14,10 @@ export interface SliderProps {
   min: number;
   startValue: number;
   step?: number;
-  useInputRange?: boolean;
+  showTextInput?: boolean;
 
   onChange?: (newValue: number) => void;
-  onStartDrag?: (newValue: number) => void;
-  onKeyDown?: (newValue: number) => void;
-  onKeyUp?: (newValue: number) => void;
+  onDragStart?: (newValue: number) => void;
   onEndDrag?: (newValue: number) => void;
 }
 
@@ -35,7 +33,7 @@ const Container = styled('div')({
   position: 'relative',
   width: sliderContainerWidth,
   minWidth: sliderContainerMinWidth,
-  height: spacing.l,
+  height: sliderContainerHeight,
 });
 
 const Interval = styled('div')({
@@ -45,6 +43,7 @@ const Interval = styled('div')({
 });
 
 const SliderInput = styled('input')({
+  position: 'absolute',
   outline: 'none',
   padding: 0,
   margin: 0,
@@ -56,8 +55,6 @@ const SliderInput = styled('input')({
   WebkitAppearance: 'none',
   MozAppearance: 'none',
   background: 'transparent',
-  position: 'absolute',
-  zIndex: 1,
   // webkit
   '::-webkit-slider-runnable-track': {
     height: sliderTrackHeight,
@@ -76,7 +73,6 @@ const SliderInput = styled('input')({
     width: sliderThumbWidth,
     marginTop: '-6px', // alignment fix for chrome
     position: 'relative',
-    zIndex: 100,
     '&:focus, &:active': {
       ...focusRing(2, 2),
     },
@@ -101,7 +97,6 @@ const SliderInput = styled('input')({
     height: sliderThumbHeight,
     width: sliderThumbWidth,
     position: 'absolute',
-    zIndex: 5,
     '&:focus, &:active': {
       ...focusRing(2, 2),
     },
@@ -110,7 +105,6 @@ const SliderInput = styled('input')({
   '::-ms-thumb': {
     background: colors.blueberry400,
     border: 'none',
-    zIndex: 5,
     position: 'relative',
   },
   '::-ms-fill-lower': {
@@ -127,10 +121,9 @@ const ProgressBarContainer = styled('div')({
   top: '50%',
   width: '100%',
   transform: 'translateY(-50%)',
-  zIndex: -1, // for firefox
 });
 
-const ProgressBar = styled('progress')<{value: number; max: number}>({
+const ProgressBar = styled('progress')({
   appearance: 'none',
   width: sliderContainerWidth,
   minWidth: sliderContainerMinWidth,
@@ -190,12 +183,10 @@ export const Slider: React.FC<SliderProps> = ({
   max,
   min,
   step,
-  useInputRange,
-  onStartDrag,
+  showTextInput,
+  onDragStart,
   onEndDrag,
   onChange,
-  onKeyDown,
-  onKeyUp,
   startValue,
 }) => {
   const [value, setValue] = React.useState(startValue);
@@ -210,8 +201,8 @@ export const Slider: React.FC<SliderProps> = ({
   };
 
   const onSliderDragStart = () => {
-    if (onStartDrag) {
-      onStartDrag(value);
+    if (onDragStart) {
+      onDragStart(value);
     }
   };
 
@@ -221,47 +212,27 @@ export const Slider: React.FC<SliderProps> = ({
     }
   };
 
-  const onKeyDownHandler = (event: React.ChangeEvent<any>): void => {
-    const value = Number(event.target.value);
-    setValue(value);
-    if (onKeyDown) {
-      onKeyDown(value);
-    }
-  };
-
-  const onKeyUpHandler = (event: React.ChangeEvent<any>) => {
-    const value = Number(event.target.value);
-    if (onKeyUp) {
-      onKeyUp(value);
-    }
-  };
-
   return (
     <Wrapper>
       <Interval>{min}</Interval>
       <Container>
-        <SliderInput
-          type="range"
-          ref={inputRef}
-          aria-valuemax={max}
-          max={max}
-          aria-valuemin={min}
-          min={min}
-          step={step}
-          aria-valuenow={value}
-          value={value}
-          onChange={onChangeHandler}
-          onMouseDown={onSliderDragStart}
-          onKeyDown={onKeyDownHandler}
-          onKeyUp={onKeyUpHandler}
-          onMouseUp={onSliderDragEnd}
-        />
         <ProgressBarContainer>
           <ProgressBar value={valueToPercent(max, min, value)} max={100} />
         </ProgressBarContainer>
+        <SliderInput
+          type="range"
+          ref={inputRef}
+          max={max}
+          min={min}
+          step={step}
+          value={value}
+          onChange={onChangeHandler}
+          onMouseDown={onSliderDragStart}
+          onMouseUp={onSliderDragEnd}
+        />
       </Container>
       <Interval>{max}</Interval>
-      {useInputRange && (
+      {showTextInput && (
         <InputValueBox type="text" min={min} max={max} value={value} onChange={onChangeHandler} />
       )}
     </Wrapper>
