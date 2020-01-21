@@ -9,13 +9,13 @@ slider component
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react
+yarn add @workday/canvas-kit-labs-react
 ```
 
 or
 
 ```sh
-yarn add @workday/canvas-kit-react-slider
+yarn add @workday/canvas-kit-labs-react-slider
 ```
 
 ## Usage
@@ -27,6 +27,7 @@ import Slider from '@workday/canvas-kit-react-slider';
 const sliderProps: SliderProps = {
   max: 100,
   min: 0,
+  step: 1,
   startValue: 50,
   useInputRange: true,
 };

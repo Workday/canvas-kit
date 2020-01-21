@@ -35,7 +35,7 @@ const Container = styled('div')({
   position: 'relative',
   width: sliderContainerWidth,
   minWidth: sliderContainerMinWidth,
-  height: spacing.l,
+  height: sliderContainerHeight,
 });
 
 const Interval = styled('div')({
@@ -45,6 +45,9 @@ const Interval = styled('div')({
 });
 
 const SliderInput = styled('input')({
+  MozAppearance: 'none',
+  WebkitAppearance: 'none',
+  position: 'absolute',
   outline: 'none',
   padding: 0,
   margin: 0,
@@ -53,11 +56,7 @@ const SliderInput = styled('input')({
   minWidth: sliderContainerMinWidth,
   height: '100%',
   cursor: 'pointer',
-  WebkitAppearance: 'none',
-  MozAppearance: 'none',
   background: 'transparent',
-  position: 'absolute',
-  zIndex: 1,
   // webkit
   '::-webkit-slider-runnable-track': {
     height: sliderTrackHeight,
@@ -76,7 +75,6 @@ const SliderInput = styled('input')({
     width: sliderThumbWidth,
     marginTop: '-6px', // alignment fix for chrome
     position: 'relative',
-    zIndex: 100,
     '&:focus, &:active': {
       ...focusRing(2, 2),
     },
@@ -101,7 +99,6 @@ const SliderInput = styled('input')({
     height: sliderThumbHeight,
     width: sliderThumbWidth,
     position: 'absolute',
-    zIndex: 5,
     '&:focus, &:active': {
       ...focusRing(2, 2),
     },
@@ -110,7 +107,6 @@ const SliderInput = styled('input')({
   '::-ms-thumb': {
     background: colors.blueberry400,
     border: 'none',
-    zIndex: 5,
     position: 'relative',
   },
   '::-ms-fill-lower': {
@@ -127,10 +123,9 @@ const ProgressBarContainer = styled('div')({
   top: '50%',
   width: '100%',
   transform: 'translateY(-50%)',
-  zIndex: -1, // for firefox
 });
 
-const ProgressBar = styled('progress')<{value: number; max: number}>({
+const ProgressBar = styled('progress')({
   appearance: 'none',
   width: sliderContainerWidth,
   minWidth: sliderContainerMinWidth,
@@ -240,6 +235,9 @@ export const Slider: React.FC<SliderProps> = ({
     <Wrapper>
       <Interval>{min}</Interval>
       <Container>
+        <ProgressBarContainer>
+          <ProgressBar value={valueToPercent(max, min, value)} max={100} />
+        </ProgressBarContainer>
         <SliderInput
           type="range"
           ref={inputRef}
@@ -256,9 +254,6 @@ export const Slider: React.FC<SliderProps> = ({
           onKeyUp={onKeyUpHandler}
           onMouseUp={onSliderDragEnd}
         />
-        <ProgressBarContainer>
-          <ProgressBar value={valueToPercent(max, min, value)} max={100} />
-        </ProgressBarContainer>
       </Container>
       <Interval>{max}</Interval>
       {useInputRange && (
