@@ -1,9 +1,6 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
+import {render, fireEvent} from '@testing-library/react';
 import Checkbox from '../lib/Checkbox';
-import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
-import FormField from '@workday/canvas-kit-react-form-field';
 
 describe('Checkbox', () => {
   const cb = jest.fn();
@@ -11,92 +8,100 @@ describe('Checkbox', () => {
     cb.mockReset();
   });
 
-  test('render an checkbox input with id', () => {
-    const component = mount(<Checkbox id="myCheckbox" onChange={cb} />);
-    expect(component.find('input').props().id).toBe('myCheckbox');
-    component.unmount();
+  describe('when rendered', () => {
+    it('should render an input with type=checkbox', () => {
+      const {getByRole} = render(<Checkbox onChange={cb} />);
+      expect(getByRole('checkbox')).toHaveProperty('type', 'checkbox');
+    });
+
+    it('should be unchecked by default', () => {
+      const {getByRole} = render(<Checkbox onChange={cb} />);
+      expect(getByRole('checkbox')).toHaveProperty('checked', false);
+    });
   });
 
-  test('render an checkbox input with value', () => {
-    const component = mount(<Checkbox value="myCheckbox" onChange={cb} />);
-    expect(component.find('input').props().value).toBe('myCheckbox');
-    component.unmount();
+  describe('when rendered with an id', () => {
+    it('should render a checkbox input with id', () => {
+      const id = 'myCheckbox';
+      const {getByRole} = render(<Checkbox id={id} onChange={cb} />);
+      expect(getByRole('checkbox')).toHaveAttribute('id', id);
+    });
   });
 
-  test('render an checked checkbox input', () => {
-    const component = mount(<Checkbox checked={true} onChange={cb} />);
-    expect(component.find('input').props().checked).toBe(true);
-    component.unmount();
+  describe('when rendered with a value', () => {
+    it('should render a checkbox input with value', () => {
+      const value = 'myCheckbox';
+      const {getByDisplayValue} = render(<Checkbox value={value} onChange={cb} />);
+      expect(getByDisplayValue(value)).toBeDefined();
+    });
   });
 
-  test('render an disabled checkbox input', () => {
-    const component = mount(<Checkbox disabled={true} onChange={cb} />);
-    expect(component.find('input').props().disabled).toBe(true);
-    component.unmount();
+  describe('when rendered with checked=true', () => {
+    it('should render a checked checkbox input', () => {
+      const {getByRole} = render(<Checkbox checked={true} onChange={cb} />);
+      expect(getByRole('checkbox')).toHaveProperty('checked', true);
+    });
   });
 
-  test('should call a callback function', () => {
-    const component = mount(<Checkbox onChange={cb} />);
-    const input = component.find('input');
-    input.simulate('change');
-
-    expect(cb.mock.calls.length).toBe(1);
-    component.unmount();
+  describe('when rendered with disabled attribute', () => {
+    it('should render a disabled checkbox input', () => {
+      const {getByRole} = render(<Checkbox disabled={true} onChange={cb} />);
+      expect(getByRole('checkbox')).toHaveProperty('disabled', true);
+    });
   });
 
-  test('Checkbox should spread extra props', () => {
-    const component = mount(<Checkbox data-propspread="test" onChange={cb} />);
-    const input = component
-      .find('input') // TODO: Standardize on prop spread location (see #150)
-      .getDOMNode();
-    expect(input.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
-  });
-});
+  describe('when rendered without an id', () => {
+    it('should create a unique id for each instance', async () => {
+      const {getByLabelText} = render(
+        <form>
+          <Checkbox checked={true} onChange={cb} disabled={false} label="label1" />;
+          <Checkbox onChange={cb} disabled={false} label="label2" />;
+        </form>
+      );
 
-describe('Checkbox Accessibility', () => {
-  test('Checkbox should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(
-      <Checkbox id={'123'} label={'Label'} onChange={jest.fn()} />
-    );
-    expect(await axe(html)).toHaveNoViolations();
-  });
+      const id1 = getByLabelText('label1').getAttribute('id');
+      const id2 = getByLabelText('label2').getAttribute('id');
 
-  test('Checkbox without a defined id should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(<Checkbox label={'Label'} onChange={jest.fn()} />);
-    expect(await axe(html)).toHaveNoViolations();
-  });
+      expect(id1).not.toEqual(id2);
+    });
 
-  test('Checkbox wrapped in a FormField should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(
-      <FormField label="My Field" inputId="my-checkbox-field">
-        <Checkbox disabled={false} checked={true} id="my-checkbox-field" onChange={jest.fn()} />;
-      </FormField>
-    );
-    expect(await axe(html)).toHaveNoViolations();
+    it('should keep the same unique id if re-rendered', () => {
+      const {getByRole, rerender} = render(<Checkbox checked={false} onChange={cb} />);
+
+      const uniqueId = getByRole('checkbox').getAttribute('id');
+      expect(getByRole('checkbox')).toHaveProperty('id', uniqueId);
+
+      rerender(<Checkbox checked={true} onChange={cb} />);
+
+      expect(getByRole('checkbox')).toHaveProperty('checked');
+      expect(getByRole('checkbox')).toHaveProperty('id', uniqueId);
+    });
   });
 
-  test('Checkbox creates a unique id for each instance', async () => {
-    const fragment = mount(
-      <form>
-        <Checkbox checked={true} onChange={jest.fn()} disabled={false} />;
-        <Checkbox onChange={jest.fn()} disabled={false} />;
-      </form>
-    );
+  describe('when rendered with extra, arbitrary props', () => {
+    it('should spread extra props onto the checkbox', () => {
+      const attr = 'test';
+      const {getByRole} = render(<Checkbox data-propspread={attr} onChange={cb} />);
+      expect(getByRole('checkbox')).toHaveAttribute('data-propspread', attr);
+    });
+  });
 
-    const id1 = fragment
-      .find('input')
-      .at(0)
-      .getDOMNode()
-      .getAttribute('id');
+  describe('when rendered with an input ref', () => {
+    it('should set the ref to the checkbox input element', () => {
+      const ref = React.createRef<HTMLInputElement>();
 
-    const id2 = fragment
-      .find('input')
-      .at(1)
-      .getDOMNode()
-      .getAttribute('id');
+      render(<Checkbox inputRef={ref} onChange={cb} />);
 
-    expect(id1).not.toEqual(id2);
-    fragment.unmount();
+      expect(ref.current).not.toBeNull();
+      expect(ref.current).toHaveAttribute('type', 'checkbox');
+    });
+  });
+
+  describe('when clicked', () => {
+    it('should call a callback function', () => {
+      const {getByRole} = render(<Checkbox onChange={cb} />);
+      fireEvent.click(getByRole('checkbox'));
+      expect(cb).toHaveBeenCalledTimes(1);
+    });
   });
 });
