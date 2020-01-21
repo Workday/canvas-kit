@@ -265,6 +265,7 @@ storiesOf('Components|Inputs/Select/React/Visual Testing', module)
                         onChange={() => {}} // eslint-disable-line no-empty-function
                       >
                         <SelectOption value="email" label="E-mail" />
+                        <SelectOption value="phone" label="Phone" />
                       </Select>
                     </td>
                   ))}
