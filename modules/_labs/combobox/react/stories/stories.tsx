@@ -3,6 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
+import {withKnobs} from '@storybook/addon-knobs';
 
 import Combobox, {ComboboxProps} from '../index';
 import FormField from '../../../../form-field/react/index';
@@ -52,18 +53,19 @@ class Autocomplete extends React.Component<
 
 storiesOf('Labs|Combobox/React', module)
   .addDecorator(withReadme(README))
+  .addDecorator(withKnobs)
   .add('Autocomplete', () => (
     <FormField id="autocomplete-123" label="Autocomplete example">
+      <Autocomplete />
+    </FormField>
+  ))
+  .add('Grow', () => (
+    <FormField grow={true} id="autocomplete-123" label="Grow example">
       <Autocomplete />
     </FormField>
   ))
   .add('No clear button', () => (
     <FormField id="autocomplete-123" label="No clear button">
       <Autocomplete showClearButton={false} />
-    </FormField>
-  ))
-  .add('Grow', () => (
-    <FormField grow={true} id="autocomplete-123" label="Grow example">
-      <Autocomplete />
     </FormField>
   ));
