@@ -127,7 +127,7 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
           {value: Checkbox.ErrorType.Error, label: 'Error'},
         ],
       }}
-      verifyProps={props => {
+      shouldRender={props => {
         if (props.indeterminate && !props.checked) {
           return false;
         }

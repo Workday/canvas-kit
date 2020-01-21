@@ -40,9 +40,8 @@ export interface StaticStatesTableProps {
    * The validation function called to check the validity of the current prop combination.
    * Return false if you would like to skip this prop combination (table row).
    * Return true otherwise.
-   * @default (props) => true
    */
-  verifyProps(props: ComponentProps): boolean;
+  shouldRender?(props: ComponentProps): boolean;
 }
 
 const Table = styled('table')({
@@ -72,11 +71,10 @@ export default class StaticStatesTable extends React.Component<StaticStatesTable
       'disabled',
       'disabled hover',
     ],
-    verifyProps: (props: ComponentProps) => true,
   };
 
   renderPropCombination = (componentProps: {[key: string]: ComponentPropValue}) => {
-    const {verifyProps, states, renderComponent} = this.props;
+    const {shouldRender, states, renderComponent} = this.props;
 
     const key = Object.keys(componentProps)
       .map(prop => componentProps[prop].label.toLowerCase())
@@ -90,7 +88,7 @@ export default class StaticStatesTable extends React.Component<StaticStatesTable
       props[prop] = componentProps[prop].value;
     });
 
-    if (!verifyProps(props)) {
+    if (!shouldRender || shouldRender(props)) {
       return;
     }
 
