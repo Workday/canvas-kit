@@ -41,7 +41,7 @@ export interface StaticStatesTableProps {
    * Return false if you would like to skip this prop combination (table row).
    * Return true otherwise.
    */
-  shouldRender?(props: ComponentProps): boolean;
+  shouldRenderRow?(props: ComponentProps): boolean;
 }
 
 const Table = styled('table')({
@@ -74,7 +74,7 @@ export default class StaticStatesTable extends React.Component<StaticStatesTable
   };
 
   renderPropCombination = (componentProps: {[key: string]: ComponentPropValue}) => {
-    const {shouldRender, states, renderComponent} = this.props;
+    const {shouldRenderRow, states, renderComponent} = this.props;
 
     const key = Object.keys(componentProps)
       .map(prop => componentProps[prop].label.toLowerCase())
@@ -88,7 +88,7 @@ export default class StaticStatesTable extends React.Component<StaticStatesTable
       props[prop] = componentProps[prop].value;
     });
 
-    if (!shouldRender || shouldRender(props)) {
+    if (!shouldRenderRow || shouldRenderRow(props)) {
       return;
     }
 
