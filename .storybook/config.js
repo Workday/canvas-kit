@@ -49,7 +49,7 @@ function storySort(a, b) {
     prefix('components-', '2'),
     prefix('labs-', '3'),
     prefix('default', 'aa'),
-    prefix('states', 'zz')
+    prefix('visual-testing', 'zz')
   );
 
   const left = prefixFn(a[0]);
