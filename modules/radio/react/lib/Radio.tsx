@@ -41,27 +41,11 @@ const RadioContainer = styled('div')({
  * :hover on the radio when you hover on it's corresponding label.
  * This stops the ripple from showing when you hover on the label.
  */
-const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>(
-  {
-    display: 'flex',
-    height: radioHeight,
-    width: radioWidth,
-    '&::after': {
-      borderRadius: borderRadius.circle,
-      boxShadow: '0 0 0 0 ' + colors.soap200,
-      content: '""',
-      display: 'inline-block',
-      height: radioHeight,
-      transition: 'box-shadow 150ms ease-out',
-      width: radioWidth,
-    },
-  },
-  ({disabled}) => ({
-    '&:hover::after': {
-      boxShadow: disabled ? undefined : '0 0 0 ' + rippleRadius + 'px ' + colors.soap200,
-    },
-  })
-);
+const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>({
+  display: 'flex',
+  height: radioHeight,
+  width: radioWidth,
+});
 
 /**
  * Note: `~ div:first-of-type` refers to `RadioBackground`
@@ -91,6 +75,26 @@ const RadioInput = styled('input')<RadioProps>(
       ...focusRing(2, 2),
     },
   },
+
+  // Ripple
+  {
+    '& ~ div:first-of-type::after': {
+      borderRadius: borderRadius.circle,
+      boxShadow: `0 0 0 0 ${colors.soap200}`,
+      content: '""',
+      display: 'inline-block',
+      height: radioHeight,
+      transition: 'box-shadow 150ms ease-out',
+      width: radioWidth,
+      position: 'absolute',
+      zIndex: -1,
+    },
+  },
+  ({disabled}) => ({
+    '&:hover ~ div:first-of-type::after': {
+      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+    },
+  }),
   ({checked, disabled}) => ({
     cursor: disabled ? undefined : 'pointer',
     '&:focus:hover ~ div:first-of-type': {
