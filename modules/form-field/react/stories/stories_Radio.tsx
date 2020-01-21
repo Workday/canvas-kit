@@ -84,7 +84,7 @@ storiesOf('Components|Inputs/Radio/React/Left Label/Radio Group', module)
     <FormField label="Label" useFieldset={true} labelPosition={FormField.LabelPosition.Left}>
       <ControlledComponentWrapper>
         <RadioGroup name="contact">
-          <Radio id="1" value="email" label="E-mail" name="email" />
+          <Radio id="1" value="email" label="E-mail" />
           <Radio id="2" value="phone" label="Phone" />
           <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
           <Radio id="4" value="mail" label="Mail" />
