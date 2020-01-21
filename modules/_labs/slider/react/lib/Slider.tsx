@@ -43,6 +43,8 @@ const Interval = styled('div')({
 });
 
 const SliderInput = styled('input')({
+  MozAppearance: 'none',
+  WebkitAppearance: 'none',
   position: 'absolute',
   outline: 'none',
   padding: 0,
@@ -52,8 +54,6 @@ const SliderInput = styled('input')({
   minWidth: sliderContainerMinWidth,
   height: '100%',
   cursor: 'pointer',
-  WebkitAppearance: 'none',
-  MozAppearance: 'none',
   background: 'transparent',
   // webkit
   '::-webkit-slider-runnable-track': {
