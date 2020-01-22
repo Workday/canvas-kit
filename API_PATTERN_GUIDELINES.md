@@ -343,14 +343,14 @@ Feel free to provide additional detail in the description:
 value: number;
 ```
 
-Be sure to specify a proper `@default` for enum props:
+Be sure to specify a proper `@default` for enum props. Listing the named values which are accepted by the enum prop is encouraged:
 
 ```
 /**
-  * The size of the Button.
-  * @default ButtonSize.Medium
+  * The side from which the SidePanel opens. Accepts `Left` or `Right`.
+  * @default SidePanelOpenDirection.Left
   */
-size?: ButtonSize;
+openDirection?: SidePanelOpenDirection;
 ```
 
 Use a modified pattern for function props: `The function called when <something happens>.` For example:
@@ -372,6 +372,16 @@ The pattern for booleans is also different: `If true, <do something>.` For stand
 disabled?: boolean;
 ```
 
+Provide additional detail for 2-state booleans where the `false` outcome cannot be inferred:
+
+```
+/**
+  * If true, center the Header navigation. If false, right-align the Header navigation.
+  * @default false
+  */
+centeredNav?: boolean;
+```
+
 For 3-state booleans, you will need to describe all 3 cases: `If true <do something>. If false <do something else>. If undefined <do yet another thing>.`
 
 We also recommend the following pattern for errors:
@@ -383,7 +393,7 @@ We also recommend the following pattern for errors:
 error?: ErrorType;
 ```
 
-There are exceptions to these guidelines. Occasionally, you may encounter props which don't play nicely with the suggested patterns. Rather than following the patterns to the letter, adjust them to provide a better description if necessary. For example, rather than ambiguously describing `id` as `The id of the Checkbox`, provide a more explicit description:
+Occasionally, you may encounter props which don't play nicely with the suggested guidelines. Rather than following the patterns to the letter, adjust them to provide a better description if necessary. For example, rather than ambiguously describing `id` as `The id of the Checkbox`, provide a more explicit description:
 
 ```
 /**
