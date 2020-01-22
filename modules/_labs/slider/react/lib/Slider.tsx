@@ -15,6 +15,7 @@ export interface SliderProps {
   startValue: number;
   step?: number;
   showTextInput?: boolean;
+  id?: string;
 
   onChange?: (newValue: number) => void;
   onDragStart?: (newValue: number) => void;
@@ -180,6 +181,7 @@ const valueToPercent = (max: number, min: number, value: number): number => {
 };
 
 export const Slider: React.FC<SliderProps> = ({
+  id,
   max,
   min,
   step,
@@ -220,6 +222,7 @@ export const Slider: React.FC<SliderProps> = ({
           <ProgressBar value={valueToPercent(max, min, value)} max={100} />
         </ProgressBarContainer>
         <SliderInput
+          id={id}
           type="range"
           ref={inputRef}
           max={max}
