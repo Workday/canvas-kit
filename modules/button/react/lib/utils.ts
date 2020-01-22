@@ -306,6 +306,7 @@ export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
     ...hoverStyles,
     ...activeStyles,
     ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
+      pointerEvents: 'none',
       backgroundColor: buttonColors.disabledBackground,
       borderColor: buttonColors.disabledBorder,
       color: buttonColors.disabledText,

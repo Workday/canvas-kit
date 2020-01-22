@@ -100,7 +100,7 @@ export const IconButtonCon = styled('button', {
           ...getFillSelector(colors.frenchVanilla100),
           ...getAccentSelector(colors.blueberry400),
           ...getBackgroundSelector(colors.frenchVanilla100),
-          '&:focus&:hover, &:focus, &:active': {
+          '&:focus&:hover, &:focus, &:active, &:active:hover': {
             ...getFillSelector(colors.frenchVanilla100),
             ...getAccentSelector(colors.blueberry400),
             ...getBackgroundSelector(colors.frenchVanilla100),
@@ -117,6 +117,12 @@ export const IconButtonCon = styled('button', {
             ...getAccentSelector(colors.blueberry400),
             ...getBackgroundSelector(colors.frenchVanilla100),
             backgroundColor: colors.blueberry500,
+          },
+          '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+            backgroundColor: colors.blueberry200,
+            ...getFillSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry400),
           },
           ...mouseFocusBehavior({
             '&:focus:active': {
@@ -135,7 +141,7 @@ export const IconButtonCon = styled('button', {
           ...getFillSelector(colors.blueberry400),
           ...getAccentSelector(colors.frenchVanilla100),
           ...getBackgroundSelector(colors.blueberry400),
-          '&:focus:hover, &:focus, &:active': {
+          '&:focus:hover, &:focus, &:active, &:active:hover': {
             ...getFillSelector(colors.blueberry400),
             ...getAccentSelector(colors.frenchVanilla100),
             ...getBackgroundSelector(colors.blueberry400),
@@ -145,6 +151,11 @@ export const IconButtonCon = styled('button', {
             ...getAccentSelector(colors.frenchVanilla100),
             ...getBackgroundSelector(colors.blueberry400),
             ...(toggled ? focusRing(2, 0) : {}),
+          },
+          '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+            ...getFillSelector(colors.blueberry200),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry200),
           },
         };
 
@@ -161,7 +172,7 @@ export const IconButtonCon = styled('button', {
             ...getAccentSelector(colors.frenchVanilla100),
             ...getBackgroundSelector(colors.blueberry400),
           },
-          '&:focus&:hover, &:active': {
+          '&:focus&:hover, &:active, &:active:hover': {
             backgroundColor: colors.frenchVanilla100,
             ...getFillSelector(colors.blueberry400),
             ...getAccentSelector(colors.frenchVanilla100),
@@ -184,6 +195,12 @@ export const IconButtonCon = styled('button', {
             '&:focus:active': {
               backgroundColor: colors.frenchVanilla100,
             },
+          },
+          '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+            backgroundColor: 'rgba(255,255,255,0.75)',
+            ...getFillSelector(colors.blueberry400),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry400),
           },
           ...mouseFocusBehavior({
             '&:focus:active': {
