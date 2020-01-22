@@ -3,7 +3,7 @@
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {StaticStatesTable} from '../../../../utils/storybook';
 import withReadme from 'storybook-readme/with-readme';
 
 import {
@@ -350,146 +350,85 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
 storiesOf('Components|Buttons/Button/React/Icon Button/Visual', module)
   .addParameters({component: IconButton})
   .addDecorator(withReadme(README))
-  .add('States', () => {
-    const states = ['Default', 'hover', 'focus', 'active', 'focus active', 'focus hover'];
-    const variants = [
-      'Inverse',
-      'InverseFilled',
-      'Plain',
-      'Circle',
-      'CircleFilled',
-      'Square',
-      'SquareFilled',
-    ] as const;
-
-    return (
-      <StaticStates>
-        <h3>Not toggleable</h3>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              {states.map(state => (
-                <th key={state}>{state}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {variants.map(variant => (
-              <tr key={variant}>
-                <th>{variant}</th>
-                {states.map(state => (
-                  <td key={state}>
-                    <div css={variant.includes('Inverse') ? blueBackground : iconButtonLayout}>
-                      <IconButton
-                        className={state}
-                        variant={IconButton.Variant[variant]}
-                        aria-label="Activity Icon"
-                        icon={activityStreamIcon}
-                      ></IconButton>
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <hr />
-        <h3>toggled: true</h3>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              {states.map(state => (
-                <th key={state}>{state}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {variants.map(variant => (
-              <tr key={variant}>
-                <th>{variant}</th>
-                {states.map(state => (
-                  <td key={state}>
-                    <div css={variant.includes('Inverse') ? blueBackground : iconButtonLayout}>
-                      <IconButton
-                        className={state}
-                        variant={IconButton.Variant[variant]}
-                        aria-label="Activity Icon"
-                        icon={activityStreamIcon}
-                        toggled={true}
-                      ></IconButton>
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <hr />
-        <h3>toggled: false</h3>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              {states.map(state => (
-                <th key={state}>{state}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {variants.map(variant => (
-              <tr key={variant}>
-                <th>{variant}</th>
-                {states.map(state => (
-                  <td key={state}>
-                    <div css={variant.includes('Inverse') ? blueBackground : iconButtonLayout}>
-                      <IconButton
-                        className={state}
-                        variant={IconButton.Variant[variant]}
-                        aria-label="Activity Icon"
-                        icon={activityStreamIcon}
-                        toggled={false}
-                      ></IconButton>
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <hr />
-        <h3>disabled</h3>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Default</th>
-            </tr>
-          </thead>
-          <tbody>
-            {variants.map(variant => (
-              <tr key={variant}>
-                <th>{variant}</th>
-
-                <td>
-                  <div css={variant.includes('Inverse') ? blueBackground : iconButtonLayout}>
-                    <IconButton
-                      disabled
-                      className=""
-                      variant={IconButton.Variant[variant]}
-                      aria-label="Activity Icon"
-                      icon={activityStreamIcon}
-                    ></IconButton>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </StaticStates>
-    );
-  });
+  .add('States', () => (
+    <div className="story">
+      <h3>Toggled Off</h3>
+      <StaticStatesTable
+        componentProps={{
+          variant: [
+            {value: IconButton.Variant.Inverse, label: 'Inverse'},
+            {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+            {value: IconButton.Variant.Plain, label: 'Plain'},
+            {value: IconButton.Variant.Circle, label: 'Circle'},
+            {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+            {value: IconButton.Variant.Square, label: 'Square'},
+            {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+          ],
+        }}
+        shouldRenderRow={props => {
+          return true;
+        }}
+        renderComponent={(props, disabled, className) => {
+          return (
+            <div
+              css={
+                props.variant === 'inverse' || props.variant === 'inverseFilled'
+                  ? blueBackground
+                  : iconButtonLayout
+              }
+            >
+              <IconButton
+                variant={props.variant}
+                disabled={disabled}
+                icon={activityStreamIcon}
+                aria-label="Activity Stream"
+                className={className}
+                onChange={() => {}} // eslint-disable-line no-empty-function
+              />
+            </div>
+          );
+        }}
+      />
+      <h3>Toggled On</h3>
+      <StaticStatesTable
+        componentProps={{
+          variant: [
+            {value: IconButton.Variant.Inverse, label: 'Inverse'},
+            {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+            {value: IconButton.Variant.Plain, label: 'Plain'},
+            {value: IconButton.Variant.Circle, label: 'Circle'},
+            {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+            {value: IconButton.Variant.Square, label: 'Square'},
+            {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+          ],
+        }}
+        shouldRenderRow={props => {
+          return true;
+        }}
+        renderComponent={(props, disabled, className) => {
+          return (
+            <div
+              css={
+                props.variant === 'inverse' || props.variant === 'inverseFilled'
+                  ? blueBackground
+                  : iconButtonLayout
+              }
+            >
+              <IconButton
+                variant={props.variant}
+                disabled={disabled}
+                icon={activityStreamIcon}
+                aria-label="Activity Stream"
+                className={className}
+                toggled={true}
+                onChange={() => {}} // eslint-disable-line no-empty-function
+              />
+            </div>
+          );
+        }}
+      />
+    </div>
+  ));
 
 storiesOf('Components|Buttons/Button/React/Icon Button Toggle Group', module)
   .addParameters({component: IconButtonToggleGroup})

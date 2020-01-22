@@ -88,7 +88,7 @@ export default class StaticStatesTable extends React.Component<StaticStatesTable
       props[prop] = componentProps[prop].value;
     });
 
-    if (!shouldRenderRow || shouldRenderRow(props)) {
+    if (shouldRenderRow && !shouldRenderRow(props)) {
       return;
     }
 
