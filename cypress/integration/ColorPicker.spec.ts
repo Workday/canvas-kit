@@ -18,7 +18,7 @@ describe('ColorPicker', () => {
           h.stories.load(colorInputStory, story);
         });
 
-        it('should not have any axe errors', () => {
+        it('should pass accessibility checks', () => {
           cy.checkA11y();
         });
       });
@@ -29,7 +29,7 @@ describe('ColorPicker', () => {
         h.stories.load(colorInputStory, 'Disabled');
       });
 
-      it('should not have any axe errors', () => {
+      it('should pass accessibility checks', () => {
         cy.checkA11y();
       });
 
@@ -43,7 +43,7 @@ describe('ColorPicker', () => {
       h.stories.load(colorPreviewStory, 'Default');
     });
 
-    it('should not have any axe errors', () => {
+    it('should pass accessibility checks', () => {
       cy.checkA11y();
     });
   });
