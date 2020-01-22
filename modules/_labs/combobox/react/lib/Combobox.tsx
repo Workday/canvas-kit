@@ -25,7 +25,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   clearButtonVariant: IconButtonVariant;
   /**
-   * If true, render the Combobox with a button to clear the input field.
+   * If true, render the Combobox with a button to clear the text input.
    * @default false
    */
   showClearButton?: boolean;
@@ -35,19 +35,19 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    */
   clearButtonLabel: string;
   /**
-   * The autocomplete items of the Combobox. This array of menu items is shown under the TextInput.
+   * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
   autocompleteItems?: React.ReactElement<MenuItemProps>[];
   /**
-   * The function called when the TextInput changes.
+   * The function called when the Combobox text input changes.
    */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
-   * The function called when the TextInput focuses.
+   * The function called when the Combobox text input focuses.
    */
   onFocus?: React.FocusEventHandler;
   /**
-   * The function called when the TextInput blurs.
+   * The function called when the Combobox text input blurs.
    */
   onBlur?: React.FocusEventHandler;
   /**

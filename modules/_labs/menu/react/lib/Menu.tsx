@@ -33,11 +33,11 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
    */
   initialSelectedItem?: number;
   /**
-   * The unique id of the Menu used for ARIA and HTML id attributes.
+   * The unique id of the Menu used for ARIA and HTML `id` attributes.
    */
   id?: string;
   /**
-   * The HTML id of the element that labels the Menu. Often used with menu buttons.
+   * The HTML `id` of the element that labels the Menu. Often used with menu buttons.
    */
   labeledBy?: string;
 }
