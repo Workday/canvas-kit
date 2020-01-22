@@ -14,7 +14,7 @@ export interface SelectOptionProps extends React.OptionHTMLAttributes<HTMLOption
    */
   label?: string;
   /**
-   * If true, disable the SelectOption.
+   * If true, set the SelectOption to the disabled state.
    * @default false
    */
   disabled: boolean;

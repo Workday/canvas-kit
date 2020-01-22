@@ -1,5 +1,5 @@
 /**
- * The Postiion of the FormField Label (Top vs Left vs Hidden)
+ * The position of the FormField label (Top vs Left vs Hidden).
  */
 export enum FormFieldLabelPosition {
   Top,
