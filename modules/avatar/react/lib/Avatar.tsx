@@ -12,7 +12,7 @@ export enum AvatarVariant {
 
 export interface AvatarLocalProps {
   /**
-   * The variant of the Avatar default state. Accepts `AvatarVariant.Light` or `AvatarVariant.Dark`.
+   * The variant of the Avatar default state. Accepts `Light` or `Dark`.
    * @default AvatarVariant.Light
    */
   variant: AvatarVariant;

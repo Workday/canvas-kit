@@ -9,7 +9,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   padding?: CanvasSpacingValue;
   /**
-   * The direction from which the Drawer opens. Accepts `DrawerDirection.Left` or `DrawerDirection.Right`.
+   * The direction from which the Drawer opens. Accepts `Left` or `Right`.
    * @default DrawerDirection.Right
    */
   openDirection?: DrawerDirection;

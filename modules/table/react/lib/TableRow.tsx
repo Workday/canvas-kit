@@ -16,7 +16,7 @@ export enum TableRowState {
 
 export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
-   * The state of the TableRow. Accepts `TableRowState.Error`, `TableRowState.Alert`, `TableRowState.InputError`, `TableRowState.InputAlert`, `TableRowState.Hover`, or `TableRowState.Selected`.
+   * The state of the TableRow. Accepts `Error`, `Alert`, `InputError`, `InputAlert`, `Hover`, or `Selected`.
    */
   state?: TableRowState;
 

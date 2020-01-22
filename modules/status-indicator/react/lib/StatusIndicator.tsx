@@ -109,11 +109,11 @@ export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
 
 export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
-   * The type of the StatusIndicator. Accepts `StatusIndicatorType.Gray`, `StatusIndicatorType.Orange`, `StatusIndicatorType.Blue`, `StatusIndicatorType.Green`, `StatusIndicatorType.Red`, or `StatusIndicatorType.Transparent`.
+   * The type of the StatusIndicator. Accepts `Gray`, `Orange`, `Blue`, `Green`, `Red`, or `Transparent`.
    */
   type: StatusIndicatorType;
   /**
-   * The emphasis of the StatusIndicator. Accepts `StatusIndicatorEmphasis.High` or `StatusIndicatorEmphasis.Low`.
+   * The emphasis of the StatusIndicator. Accepts `High` or `Low`.
    * @default StatusIndicatorEmphasis.High
    */
   emphasis: StatusIndicatorEmphasis;

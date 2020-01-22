@@ -8,12 +8,12 @@ import {ModalWidth} from './Modal';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The padding of the Modal. Accepts `PopupPadding.zero`, `PopupPadding.s`, or `PopupPadding.l`.
+   * The padding of the Modal. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
    */
   padding: PopupPadding;
   /**
-   * The width of the Modal. Accepts `ModalWidth.s` or `ModalWidth.l`.
+   * The width of the Modal. Accepts `s` or `l`.
    * @default ModalWidth.s
    */
   width: ModalWidth;

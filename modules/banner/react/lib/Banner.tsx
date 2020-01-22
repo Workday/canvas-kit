@@ -20,7 +20,7 @@ export interface BannerProps extends Themeable, React.ButtonHTMLAttributes<HTMLB
    */
   label?: React.ReactNode;
   /**
-   * The variant of the Banner. Accepts `BannerVariant.Full` or `BannerVariant.Sticky`.
+   * The variant of the Banner. Accepts `Full` or `Sticky`.
    * @default BannerVariant.Full
    */
   variant?: BannerVariant;

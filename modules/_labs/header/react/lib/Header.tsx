@@ -15,12 +15,12 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   menuToggle?: React.ReactNode;
   /**
-   * The theme of the Header. Accepts `HeaderTheme.White`, `HeaderTheme.Blue`, or `HeaderTheme.Transparent`.
+   * The theme of the Header. Accepts `White`, `Blue`, or `Transparent`.
    * @default HeaderTheme.White
    */
   themeColor: HeaderTheme;
   /**
-   * The variant of the Header. Accepts `HeaderVariant.Dub` (small) or `HeaderVariant.Full` (large).
+   * The variant of the Header. Accepts `Dub` (small) or `Full` (large).
    * @default HeaderVariant.Dub
    */
   variant: HeaderVariant;

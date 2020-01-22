@@ -17,7 +17,7 @@ export enum PopupPadding {
 
 export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The padding of the Popup. Accepts `PopupPadding.zero`, `PopupPadding.s`, or `PopupPadding.l`.
+   * The padding of the Popup. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
    */
   padding: PopupPadding;
@@ -27,8 +27,8 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   transformOrigin: TransformOrigin;
   /**
-   * The size of the Popup close button. Accepts `IconButton.Size.Small` or `IconButton.Size.Medium`.
-   * @default IconButton.Size.Medium
+   * The size of the Popup close button. Accepts `Small` or `Medium`.
+   * @default IconButtonSize.Medium
    */
   closeIconSize: IconButtonSize;
   /**

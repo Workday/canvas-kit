@@ -22,7 +22,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   header?: string | React.ReactNode;
   /**
-   * The side from which the SidePanel opens. Accepts `SidePanelOpenDirection.Left` or `SidePanelOpenDirection.Right`.
+   * The side from which the SidePanel opens. Accepts `Left` or `Right`.
    * @default SidePanelOpenDirection.Left
    */
   openDirection?: SidePanelOpenDirection;
