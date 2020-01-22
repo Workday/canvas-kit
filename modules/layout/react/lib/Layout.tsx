@@ -7,20 +7,21 @@ import isPropValid from '@emotion/is-prop-valid';
 
 export interface LayoutProps {
   /**
-   * The layout cannot be empty.
+   * The children of the Layout (cannot be empty).
    */
   children: React.ReactElement<ColumnProps>[] | React.ReactNode;
   /**
-   * The spacing of the layout children.
+   * The spacing of the Layout children.
    */
   spacing: number;
   /**
-   * The padding of the outside container.
+   * The padding of the Layout's outside container.
    * @default 12
    */
   gutter: number | string;
   /**
-   * If true, the max width of container is 1280px.
+   * If true, set the max width of the Layout container to `1280px`.
+   * @default false
    */
   capWidth?: boolean;
 }

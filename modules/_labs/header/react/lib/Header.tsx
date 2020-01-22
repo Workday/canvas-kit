@@ -11,33 +11,33 @@ import {justifyIcon} from '@workday/canvas-system-icons-web';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * A React node that will replace the menuToggle if provided.
+   * The custom menu toggle node of the Header. This React node replaces the default menu toggle.
    */
   menuToggle?: React.ReactNode;
   /**
-   * A HeaderTheme enum indicating which theme to use (White, Blue or Transparent)
+   * The theme of the Header. Accepts `HeaderTheme.White`, `HeaderTheme.Blue`, or `HeaderTheme.Transparent`.
    * @default HeaderTheme.White
    */
   themeColor: HeaderTheme;
   /**
-   * A HeaderVariant enum indicating whether to use the Dub (small) or Full (large) version
+   * The variant of the Header. Accepts `HeaderVariant.Dub` (small) or `HeaderVariant.Full` (large).
    * @default HeaderVariant.Dub
    */
   variant: HeaderVariant;
   /**
-   * The title to display in the header. Not used if `brand` is provided
+   * The text of the Header title. Not used if `brand` is provided.
    */
   title?: string;
   /**
-   * A React node that will replace the dub logo and title if provided.
+   * The custom brand node of the Header. This React node replaces the dub logo and title.
    */
   brand?: React.ReactNode;
   /**
-   * The URL href of the logo link
+   * The url of the Header logo link.
    */
   brandUrl?: string;
   /**
-   * If true, the nav is centered. If false, the nav is right aligned.
+   * If true, center the Header navigation. If false, right-align the Header navigation.
    * @default false
    */
   centeredNav?: boolean;
@@ -46,11 +46,11 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onMenuClick?: (e: React.SyntheticEvent) => void;
   /**
-   * React element for the left of the header, this is typically a search bar component
+   * The React element to render in the left slot of the Header. This is typically a search bar component.
    */
   leftSlot?: React.ReactElement;
   /**
-   * If true, the header is rendered in collapsed mode.
+   * If true, render the Header in collapsed mode.
    * @default false
    */
   isCollapsed?: boolean;

@@ -17,43 +17,43 @@ export enum PopupPadding {
 
 export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   *  The padding for the popup. You can choose between zero, s, l for your padding
-   * @default PopupPadding.l (32)
+   * The padding of the Popup. Accepts `PopupPadding.zero`, `PopupPadding.s`, or `PopupPadding.l`.
+   * @default PopupPadding.l
    */
   padding: PopupPadding;
   /**
-   * The origin from which the popup will animate from
+   * The origin from which the Popup will animate.
    * @default {horizontal: 'center', vertical: 'top'}
    */
   transformOrigin: TransformOrigin;
   /**
-   * The size of the close icon button (small or medium)
+   * The size of the Popup close button. Accepts `IconButton.Size.Small` or `IconButton.Size.Medium`.
    * @default IconButton.Size.Medium
    */
   closeIconSize: IconButtonSize;
   /**
-   * The ref to the underlying popup container element. Use this to check click targets against when closing a popup.
+   * The ref to the underlying popup container element. Use this to check click targets against when closing the Popup.
    */
   popupRef?: React.Ref<HTMLDivElement>;
   /**
-   * The function to handle close of your Popup and any other event when the Popup is closed.
+   * The function called when the Popup is closed.
    */
   handleClose?: () => void;
   /**
-   * The width of the card.
+   * The width of the Popup.
    */
   width?: number | string;
   /**
-   * The heading at the top of the card.
+   * The heading of the Popup.
    */
   heading?: React.ReactNode;
   /**
-   * The depth of the card. Style imported from `@workday/canvas-kit-react-core`.
+   * The depth of the Popup. Imported from `@workday/canvas-kit-react-core`.
    * @default depth[2]
    */
   depth?: CanvasDepthValue;
   /**
-   * The `aria-label` string for the close icon button.
+   * The `aria-label` for the Popup close button.
    * @default Close
    */
   closeLabel: string;

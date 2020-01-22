@@ -4,7 +4,7 @@ import {colors, commonColors, spacing} from '@workday/canvas-kit-react-core';
 
 export interface ActionBarProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * If true, the actionBar is fixed to the bottom of the screen.
+   * If true, fix the ActionBar to the bottom of the screen.
    * @default false
    */
   fixed?: boolean;

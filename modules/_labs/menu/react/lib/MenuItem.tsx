@@ -13,43 +13,43 @@ import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
 
 export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   /**
-   *  This is the primary action to take when a menu item is clicked. If the item is a child of the Menu component, this callback will be decorated with the onSelect and onClose Menu callbacks. This callback will not fire if the item is disabled, see below.
+   * The function called when the MenuItem is clicked. If the item is a child of the Menu component, this callback will be decorated with the onSelect and onClose Menu callbacks. This callback will not fire if the item is disabled (see below).
    */
   onClick?: (event: React.SyntheticEvent) => void;
   /**
-   * The unique id for the menu item used for ARIA attributes. If the item is a child of the `Menu` component, this property will be generated and overridden.
+   * The unique id for the MenuItem used for ARIA attributes. If the item is a child of the `Menu` component, this property will be generated and overridden.
    */
   id?: string;
   /**
-   * The icon to be displayed before what you supplied for the children.
+   * The icon of the MenuItem. This icon is displayed before what you supplied for the children.
    */
   icon?: CanvasSystemIcon;
   /**
-   * The icon to be displayed after what you supplied for the children.
+   * The secondary icon of the MenuItem. This icon is displayed after what you supplied for the children.
    */
   secondaryIcon?: CanvasSystemIcon;
   /**
-   * If true, adds a top border on the menu item.
+   * If true, render a top border on the MenuItem.
    * @default false
    */
   hasDivider?: boolean;
   /**
-   * If true, disables a menu item so it is not clickable.
+   * If true, set the MenuItem to the disabled state so it is not clickable.
    * @default false
    */
   isDisabled?: boolean;
   /**
-   * If true, this is the currently selected menu item. If the item is a child of the Menu component, this property will be generated and overridden.
+   * If true, set the MenuItem to be the currently selected item. If the item is a child of the Menu component, this property will be generated and overridden.
    * @default false
    */
   isFocused?: boolean;
   /**
-   * Allows you to override the role of the item, e.g. you can use this element as a option in a combobox.
+   * The role of the MenuItem. Use this to override the role of the item (e.g. you can use this element as an option in a Combobox).
    * @default menuItem
    */
   role: string;
   /**
-   * If true, allows the onClose Menu callback to be fired after the menu item has been clicked.
+   * If true, allow the onClose Menu callback to be fired after the MenuItem has been clicked.
    * @default true
    */
   shouldClose?: boolean;

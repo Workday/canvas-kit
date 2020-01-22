@@ -8,36 +8,36 @@ import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
 export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
   /**
-   * One or more MenuItem components or a component that has the same interface as `MenuItem`.
+   * The MenuItem children of the Menu (must be at least one). Also accepts other components which share the same interface as `MenuItem`.
    */
   children?: React.ReactElement<MenuItemProps> | React.ReactElement<MenuItemProps>[];
   /**
-   * If true, sets the menu to open from a parent component. Usefully for things like menu buttons.
+   * If true, set the Menu to the open state. Useful for showing and hiding the Menu from a parent component such as a menu button.
    * @default true
    */
   isOpen?: boolean;
   /**
-   * The width of the card. If nothing is passed in the menu will collapse around the content.
+   * The width of the Menu. If no value is provided, the Menu will collapse around its content.
    */
   width?: number | string;
   /**
-   * The function called after any menu option is selected.
+   * The function called when a menu item is selected.
    */
   onSelect?: () => void;
   /**
-   * The function called when the menu should close. Called after an item is selected or the escape shortcut key is used. This will not fire if the menu item sets shouldClose to false
+   * The function called when the Menu should close. This is called after a menu item is selected or if the escape shortcut key is used. This will not fire if the menu item sets `shouldClose` to false.
    */
   onClose?: () => void;
   /**
-   * Zero based index of which menu item should initially receive focus.
+   * The zero-based index of the menu item which should initially receive focus.
    */
   initialSelectedItem?: number;
   /**
-   * A unique id for the menu that is used for ARIA and HTML id attributes.
+   * The unique id of the Menu used for ARIA and HTML id attributes.
    */
   id?: string;
   /**
-   * An HTML id of the element that labels the menu. Often used with menu buttons.
+   * The HTML id of the element that labels the Menu. Often used with menu buttons.
    */
   labeledBy?: string;
 }

@@ -9,7 +9,7 @@ export enum ModalWidth {
 
 export interface ModalProps extends ModalContentProps {
   /**
-   * Allows you to open/close modal
+   * If true, set the Modal to the open state.
    * @default false
    */
   open: boolean;

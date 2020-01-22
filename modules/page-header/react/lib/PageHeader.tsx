@@ -5,16 +5,16 @@ import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 
 export interface PageHeaderProps {
   /**
-   * The title of the page header.
+   * The text of the PageHeader title.
    */
   title: string;
   /**
-   * If true, content is centered and the page header is responsive in all three breakpoints. Used for page headers in non-product pages.
+   * If true, center the PageHeader content and make the PageHeader responsive in all three breakpoints. Enable this for PageHeaders in non-product pages.
    * @default false
    */
   capWidth: boolean;
   /**
-   * The breakpoint at which the header's container spacing increases from 's' size to 'xl' size.
+   * The breakpoint (in `px`) at which the PageHeader's container spacing increases from size `s` to size `xl`.
    * @default 768
    */
   breakpoint?: number;

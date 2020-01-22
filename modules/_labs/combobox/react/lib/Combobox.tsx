@@ -12,46 +12,46 @@ import uuid from 'uuid/v4';
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
-   * The TextInput component to wrap
+   * The TextInput child of the Combobox.
    */
   children: React.ReactElement<TextInputProps>;
   /**
-   * The initial value of the input.
+   * The initial value of the Combobox.
    */
   initialValue?: string;
   /**
-   * The type of icon button to use for clearing input.
+   * The variant of the Combobox clear button.
    * @default IconButton.Variant.Plain
    */
   clearButtonVariant: IconButtonVariant;
   /**
-   * If true, shows button to clear input field.
+   * If true, render the Combobox with a button to clear the input field.
    * @default false
    */
   showClearButton?: boolean;
   /**
-   * The `aria-label` for the clear button
+   * The `aria-label` for the Combobox clear button.
    * @default Reset Search Input
    */
   clearButtonLabel: string;
   /**
-   * An array of menu items to show under the TextInput
+   * The autocomplete items of the Combobox. This array of menu items is shown under the TextInput.
    */
   autocompleteItems?: React.ReactElement<MenuItemProps>[];
   /**
-   * Callback to listen when the TextInput changes
+   * The function called when the TextInput changes.
    */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
-   * Callback to listen when the TextInput focuses
+   * The function called when the TextInput focuses.
    */
   onFocus?: React.FocusEventHandler;
   /**
-   * Callback to listen when the TextInput blurs
+   * The function called when the TextInput blurs.
    */
   onBlur?: React.FocusEventHandler;
   /**
-   * The id of the form field
+   * The id of the form field.
    */
   labelId?: string;
 }

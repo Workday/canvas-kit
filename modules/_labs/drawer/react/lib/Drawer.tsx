@@ -4,39 +4,39 @@ import {colors, spacing, CanvasSpacingValue} from '@workday/canvas-kit-react-cor
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The padding for the contents of the Drawer
+   * The padding of the Drawer contents.
    * @default spacing.s
    */
   padding?: CanvasSpacingValue;
   /**
-   * Determines the side in which the Drawer can open from
+   * The direction from which the Drawer opens. Accepts `DrawerDirection.Left` or `DrawerDirection.Right`.
    * @default DrawerDirection.Right
    */
   openDirection?: DrawerDirection;
   /**
-   * The width of the Drawer
-   * @default 360px
+   * The width of the Drawer in `px`.
+   * @default 360
    */
   width?: number;
   /**
-   * If true, shows a drop shadow on the Drawer.
+   * If true, render the Drawer with a drop shadow.
    * @default false
    */
   showDropShadow?: boolean;
   /**
-   * Optional to pass a DrawerHeader component shows an optional string and close button
+   * The optional DrawerHeader component of the Drawer. Shows an optional string and close button.
    */
   header?: React.ReactElement;
   /**
-   * Use when there's a header for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element.
+   * The `aria-labelledby` of the Drawer. Set this when there is a `header` for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element.
    */
   'aria-labelledby'?: string;
   /**
-   * Use when there is NO `header` for accessibility.
+   * The `aria-label` for the Drawer. Set this when there is NO `header` for accessibility.
    */
   'aria-label'?: string;
   /**
-   * If this attribute is used, also provide an `aria-labelledby` attribute to link the `header` element to this role.
+   * The role of the Drawer. If `role` is provided, you must also set `aria-labelledby` to link `header` to the `role`.
    */
   role?: string;
 }

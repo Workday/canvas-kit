@@ -12,26 +12,26 @@ export enum BannerVariant {
 
 export interface BannerProps extends Themeable, React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * The function that gets called on banner click.
+   * The function called when the Banner is clicked.
    */
   onClick?: (e: React.SyntheticEvent) => void;
   /**
-   * The label of the banner.
+   * The label of the Banner.
    */
   label?: React.ReactNode;
   /**
-   * The variant for the banner (`full` or `sticky`).
+   * The variant of the Banner. Accepts `BannerVariant.Full` or `BannerVariant.Sticky`.
    * @default BannerVariant.Full
    */
   variant?: BannerVariant;
   /**
-   * The error type for the banner (`alert` or `error`).
+   * The type of error associated with the Banner (if applicable).
    * @default ErrorType.Alert
    */
   error?: ErrorType;
   /**
-   * The action text in the `full` variant.
-   * @default Avatar
+   * The text of the Banner action.
+   * @default 'View All'
    */
   actionText?: string;
 }
