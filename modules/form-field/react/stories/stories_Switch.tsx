@@ -2,13 +2,11 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {ControlledComponentWrapper} from '../../../../utils/storybook';
+import {ControlledComponentWrapper, StaticStatesTable} from '../../../../utils/storybook';
 
-import styled from '@emotion/styled';
 import {Switch} from '../../../switch/react/index';
 import FormField from '../index';
 import README from '../../../switch/react/README.md';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 
 const control = (child: React.ReactNode) => (
@@ -19,20 +17,6 @@ const control = (child: React.ReactNode) => (
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
-
-const Table = styled('table')({
-  width: '100%',
-  thead: {
-    textAlign: 'left',
-    paddingBottom: 16,
-  },
-  'td, th': {
-    minWidth: 100,
-    paddingBottom: 16,
-    paddingRight: 16,
-    textAlign: 'left',
-  },
-});
 
 storiesOf('Components|Inputs/Switch/React/Top Label', module)
   .addParameters({component: Switch})
@@ -112,60 +96,22 @@ storiesOf('Components|Inputs/Switch/React/Visual Testing', module)
   .addParameters({component: Switch})
   .addDecorator(withReadme(README))
   .add('States', () => (
-    <StaticStates>
-      <Table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>No state</th>
-            <th>Hover</th>
-            <th>Focused</th>
-            <th>Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          {[false, true].map(disabled => {
-            return [false, true].map(checked => {
-              return ['Default', 'Alert', 'Error'].map(variant => {
-                const type =
-                  variant === 'Alert'
-                    ? ErrorType.Alert
-                    : variant === 'Error'
-                    ? ErrorType.Error
-                    : undefined;
-
-                const key = `${checked ? 'checked' : 'unchecked'} ${
-                  disabled ? 'disabled' : 'enabled'
-                } ${variant}`;
-
-                const pseudoStates = ['', 'hover'];
-
-                if (!disabled) {
-                  pseudoStates.push('focus', 'active');
-                }
-
-                return (
-                  <tr key={key}>
-                    <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
-                      checked ? 'checked' : 'unchecked'
-                    })`}</td>
-                    {pseudoStates.map(className => (
-                      <td key={`${key} + ${className}`}>
-                        <Switch
-                          checked={checked}
-                          onChange={() => {}} // eslint-disable-line no-empty-function
-                          disabled={disabled}
-                          error={type}
-                          className={className}
-                        />
-                      </td>
-                    ))}
-                  </tr>
-                );
-              });
-            });
-          })}
-        </tbody>
-      </Table>
-    </StaticStates>
+    <StaticStatesTable
+      componentProps={{
+        checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
+        error: [
+          {value: null, label: ''},
+          {value: ErrorType.Alert, label: 'Alert'},
+          {value: ErrorType.Error, label: 'Error'},
+        ],
+      }}
+      renderComponent={(props, disabled, className) => (
+        <Switch
+          checked={props.checked}
+          error={props.error}
+          disabled={disabled}
+          className={className}
+        />
+      )}
+    />
   ));
