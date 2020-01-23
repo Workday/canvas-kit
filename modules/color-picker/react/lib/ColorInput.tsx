@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import {css, jsx} from '@emotion/core';
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable, ContentDirection} from '@workday/canvas-kit-labs-react-core';
 import {
   pickForegroundColor,
   expandHex,
@@ -13,7 +13,7 @@ import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 
-export interface ColorInputProps extends TextInputProps, GrowthBehavior {
+export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavior {
   value: string;
   showCheck?: boolean;
   placeholder: string;
@@ -30,9 +30,9 @@ const colorInputWidth = 116;
 const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'grow'>>(
   {
     boxSizing: 'border-box',
-    paddingLeft: '46px',
     minWidth: colorInputWidth,
     width: colorInputWidth,
+    ...type.variant.mono,
     '&:focus::placeholder': {
       color: 'transparent',
     },
@@ -44,23 +44,43 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'gro
     },
   ({disabled}) => ({
     backgroundColor: disabled ? colors.soap200 : '',
+  }),
+  ({theme}) => ({
+    paddingLeft:
+      theme.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */',
+    // We're using @noflip because ColorInput should stay LTR, therefore, we need to adjust the padding using ContentDirection, not using rtl-css-js.
   })
 );
 
-const ColorInputContainer = styled('div')({
-  position: 'relative',
-});
+const ColorInputContainer = styled('div')<Pick<ColorInputProps, 'grow'>>(
+  {
+    position: 'relative',
+    width: colorInputWidth,
+  },
+  ({grow}) =>
+    grow && {
+      minWidth: '100%',
+      width: '100%',
+    }
+);
 
 const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
   {
     position: 'absolute',
-    left: 36,
     top: 10,
     ...type.body,
-    ...type.variant.hint,
+    ...type.variant.mono,
   },
   ({disabled}) => ({
     color: disabled ? inputColors.disabled.text : undefined,
+  }),
+  ({theme}) => ({
+    left: theme.direction === ContentDirection.LTR ? '36px' : '88px',
+    //    - LTR -> left: 36px;
+    //    - RTL -> right: 88px;
+    //
+    // It's because we're changing the value of this attribute based on ContentDirection but the attribute itself is getting flipped by rtl-css-js.
+    // We're doing this to adjust the spacing of the # sign as it should always stay on the left of the input in both LTR and RTL.
   })
 );
 
@@ -102,13 +122,15 @@ export default class ColorInput extends React.Component<ColorInputProps> {
       disabled,
       placeholder,
       error,
+      grow,
       ...elemProps
     } = this.props;
     const formattedValue = this.formatValue(value);
 
     return (
-      <ColorInputContainer>
+      <ColorInputContainer grow={grow}>
         <CustomHexInput
+          dir="ltr"
           inputRef={inputRef}
           onChange={this.handleChange}
           type="text"
@@ -117,6 +139,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           error={error}
           spellCheck={false}
           disabled={disabled}
+          grow={grow}
           maxLength={7} // 7 to allow pasting with a hash
           {...elemProps}
         />

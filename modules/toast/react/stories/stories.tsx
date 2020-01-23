@@ -15,7 +15,7 @@ const toastData = {
     messages: [
       'Your workbook was successfully processed.',
       'Your data has been successfully updated.',
-      'Your data has been sucessfully downloaded.',
+      'Your data has been successfully downloaded.',
       'View Data',
     ],
   },
