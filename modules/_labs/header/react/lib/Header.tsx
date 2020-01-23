@@ -94,7 +94,7 @@ const BrandLink = styled('a')({
   },
 });
 
-const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
+const navStyle = ({ themeColor, centeredNav }: Pick<HeaderProps, 'themeColor' | 'centeredNav'>) => {
   const theme = themes[themeColor];
 
   return css({
@@ -103,7 +103,7 @@ const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
       flexGrow: 1,
       justifyContent: 'center',
       height: 'inherit',
-      marginLeft: spacing.xl,
+      marginLeft: !centeredNav ? spacing.xl : 0,
 
       '& ul': {
         color: theme.linkColor,
@@ -183,7 +183,6 @@ const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor
       cursor: 'pointer',
     },
     display: 'flex',
-    flexGrow: 0,
     alignItems: 'center',
     justifyContent: 'flex-end',
     height: '100%',
@@ -198,6 +197,7 @@ const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor
     '> *:last-child': {
       marginRight: isCollapsed ? '' : 0,
     },
+    width: !isCollapsed ? '100%' : 'auto',
     flexGrow: !isCollapsed && centeredNav ? 1 : 'unset',
   }),
   navStyle

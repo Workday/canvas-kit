@@ -333,7 +333,7 @@ storiesOf('Labs|Header/React', module)
       <div css={containerStyle}>
         <Header
           variant={Header.Variant.Dub}
-          title="Centered Menu"
+          title="Centered Menu With Search"
           themeColor={Header.Theme.White}
           centeredNav={true}
           brandUrl="#"
@@ -344,6 +344,32 @@ storiesOf('Labs|Header/React', module)
               onSubmit={handleSearchSubmitTest}
             />
           }
+          isCollapsed={boolean('isCollapsed', false)}
+        >
+          {nav}
+          <IconButton
+            variant={IconButton.Variant.Circle}
+            icon={notificationsIcon}
+            title="Notifications"
+            aria-label="Notifications"
+          />
+          <IconButton
+            variant={IconButton.Variant.Circle}
+            icon={inboxIcon}
+            title="Inbox"
+            aria-label="Inbox"
+          />
+          <Button variant={Button.Variant.Primary}>Logout</Button>
+        </Header>
+      </div>
+      <br />
+      <div css={containerStyle}>
+        <Header
+          variant={Header.Variant.Dub}
+          title="Centered Menu Without Search"
+          themeColor={Header.Theme.White}
+          centeredNav={true}
+          brandUrl="#"
           isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}
