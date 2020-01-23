@@ -183,6 +183,7 @@ const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor
       cursor: 'pointer',
     },
     display: 'flex',
+    flexGrow: 0,
     alignItems: 'center',
     justifyContent: 'flex-end',
     height: '100%',
