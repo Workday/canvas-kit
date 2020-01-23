@@ -94,7 +94,7 @@ const BrandLink = styled('a')({
   },
 });
 
-const navStyle = ({ themeColor, centeredNav }: Pick<HeaderProps, 'themeColor' | 'centeredNav'>) => {
+const navStyle = ({themeColor, centeredNav}: Pick<HeaderProps, 'themeColor' | 'centeredNav'>) => {
   const theme = themes[themeColor];
 
   return css({
