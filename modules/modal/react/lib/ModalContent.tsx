@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import tabTrappingKey from 'focus-trap-js';
@@ -34,6 +35,8 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * it will make the modal heading focusable and focus on that instead.
    */
   firstFocusRef?: React.RefObject<HTMLElement>;
+
+  shouldUsePortal?: boolean;
 }
 
 const fadeIn = keyframes`
@@ -135,6 +138,7 @@ const ModalContent = ({
   width,
   heading,
   padding,
+  shouldUsePortal,
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -160,7 +164,28 @@ const ModalContent = ({
     }
   };
 
-  return (
+  React.useEffect(() => {
+    const siblings = [...((document.body.children as any) as HTMLElement[])].filter(
+      el => el !== modalRef.current!.parentElement
+    );
+    const prevAriaHidden = siblings.map(el => el.getAttribute('aria-hidden'));
+    siblings.forEach(el => {
+      el.setAttribute('aria-hidden', 'true');
+    });
+
+    return () => {
+      siblings.forEach((el, index) => {
+        const prev = prevAriaHidden[index];
+        if (prev) {
+          el.setAttribute('aria-hidden', prev);
+        } else {
+          el.removeAttribute('aria-hidden');
+        }
+      });
+    };
+  }, []);
+
+  const content = (
     <Container onClick={handleOutsideClick} {...elemProps}>
       <Popup
         popupRef={modalRef}
@@ -174,6 +199,8 @@ const ModalContent = ({
       </Popup>
     </Container>
   );
+
+  return shouldUsePortal ? ReactDOM.createPortal(content, document.body) : content;
 };
 
 export default ModalContent;

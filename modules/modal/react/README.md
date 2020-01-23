@@ -117,6 +117,18 @@ Default: `PopupPadding.l`
 
 Default: `true`
 
+### `shouldUsePortal: boolean`
+
+> Accessibility specifications state modals should be outside the main content and that the main
+> content have `aria-hidden="true"` applied. This property is defaulted to false with a deprecation
+> notice that it will be removed and this behavior will default to `true`. The deprecation is a
+> warning message to set it to true and fix any potential visual issues this causes. It is possible
+> setting this to true will cause an issue if the application uses `zIndex` values on a parent
+> element to the modal. If `zIndex` cannot be avoided on the application, set a `zIndex` on the
+> `Modal` component instead of a parent element.
+
+Default: `false`
+
 ---
 
 #### `firstFocusRef: React.RefObject<HTMLElement>`
