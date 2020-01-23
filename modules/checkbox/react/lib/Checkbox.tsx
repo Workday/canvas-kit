@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -12,7 +12,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import uuid from 'uuid/v4';
 
-export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
   id?: string;
@@ -43,29 +43,13 @@ const CheckboxContainer = styled('div')({
  * :hover on the checkbox when you hover on it's corresponding label.
  * This stops the ripple from showing when you hover on the label.
  */
-const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>(
-  {
-    height: checkboxHeight,
-    width: checkboxWidth,
-    marginTop: '3px',
-    alignSelf: 'flex-start',
-    '&::after': {
-      borderRadius: borderRadius.circle,
-      boxShadow: '0 0 0 0 ' + colors.soap200,
-      content: '""',
-      display: 'inline-block',
-      height: checkboxHeight,
-      transition: 'box-shadow 150ms ease-out',
-      width: checkboxWidth,
-      zIndex: 1,
-    },
-  },
-  ({disabled}) => ({
-    '&:hover::after': {
-      boxShadow: disabled ? undefined : '0 0 0 ' + rippleRadius + 'px ' + colors.soap200,
-    },
-  })
-);
+const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
+  display: 'flex',
+  height: checkboxHeight,
+  width: checkboxWidth,
+  marginTop: '3px',
+  alignSelf: 'flex-start',
+});
 
 /**
  * Note: `~ div:first-of-type` refers to `CheckboxBackground`
@@ -110,7 +94,6 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     '&:focus ~ div:first-of-type': {
       borderColor: colors.blueberry400,
       borderWidth: '2px',
-      zIndex: 2,
       boxShadow: 'none',
     },
     '&:checked:focus ~ div:first-of-type': {
@@ -136,6 +119,26 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       },
     }),
   },
+
+  // Ripple
+  {
+    '& ~ div:first-of-type::after': {
+      borderRadius: borderRadius.circle,
+      boxShadow: `0 0 0 0 ${colors.soap200}`,
+      content: '""',
+      display: 'inline-block',
+      height: checkboxHeight,
+      transition: 'box-shadow 150ms ease-out',
+      width: checkboxWidth,
+      position: 'absolute',
+      zIndex: -1,
+    },
+  },
+  ({disabled}) => ({
+    '&:hover ~ div:first-of-type::after': {
+      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+    },
+  }),
   ({error}) => {
     let errorRingColor;
     let errorRingBorderColor = 'transparent';

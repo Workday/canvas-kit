@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {spacing} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, ErrorType} from '@workday/canvas-kit-react-common';
 import Hint from './Hint';
@@ -7,7 +7,10 @@ import Label from './Label';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 import uuid from 'uuid/v4';
 
-export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
+export interface FormFieldProps
+  extends Themeable,
+    React.HTMLAttributes<HTMLDivElement>,
+    GrowthBehavior {
   labelPosition: FormFieldLabelPosition;
   label?: React.ReactNode;
   hintText?: React.ReactNode;
