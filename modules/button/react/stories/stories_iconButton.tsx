@@ -3,7 +3,8 @@
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {StaticStatesTable} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
+import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 import withReadme from 'storybook-readme/with-readme';
 
 import {
@@ -353,23 +354,40 @@ storiesOf('Components|Buttons/Button/React/Icon Button/Visual', module)
   .add('States', () => (
     <div className="story">
       <h3>Toggled Off</h3>
-      <StaticStatesTable
-        componentProps={{
-          variant: [
-            {value: IconButton.Variant.Inverse, label: 'Inverse'},
-            {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
-            {value: IconButton.Variant.Plain, label: 'Plain'},
-            {value: IconButton.Variant.Circle, label: 'Circle'},
-            {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
-            {value: IconButton.Variant.Square, label: 'Square'},
-            {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
-          ],
-        }}
-        shouldRenderRow={props => {
-          return true;
-        }}
-        renderComponent={(props, disabled, className) => {
-          return (
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={permutateProps({
+            variant: [
+              {value: IconButton.Variant.Inverse, label: 'Inverse'},
+              {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+              {value: IconButton.Variant.Plain, label: 'Plain'},
+              {value: IconButton.Variant.Circle, label: 'Circle'},
+              {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+              {value: IconButton.Variant.Square, label: 'Square'},
+              {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+            ],
+          })}
+          columnProps={permutateProps(
+            {
+              className: [
+                {label: 'Default', value: ''},
+                {label: 'Hover', value: 'hover'},
+                {label: 'Focus', value: 'focus'},
+                {label: 'Focus Hover', value: 'focus hover'},
+                {label: 'Active', value: 'active'},
+                {label: 'Active Hover', value: 'active hover'},
+              ],
+              disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+            },
+            props => {
+              if (props.disabled && !['', 'hover'].includes(props.className)) {
+                return false;
+              }
+              return true;
+            }
+          )}
+        >
+          {props => (
             <div
               css={
                 props.variant === 'inverse' || props.variant === 'inverseFilled'
@@ -378,35 +396,51 @@ storiesOf('Components|Buttons/Button/React/Icon Button/Visual', module)
               }
             >
               <IconButton
-                variant={props.variant}
-                disabled={disabled}
                 icon={activityStreamIcon}
                 aria-label="Activity Stream"
-                className={className}
+                {...props}
                 onChange={() => {}} // eslint-disable-line no-empty-function
               />
             </div>
-          );
-        }}
-      />
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
+
       <h3>Toggled On</h3>
-      <StaticStatesTable
-        componentProps={{
-          variant: [
-            {value: IconButton.Variant.Inverse, label: 'Inverse'},
-            {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
-            {value: IconButton.Variant.Plain, label: 'Plain'},
-            {value: IconButton.Variant.Circle, label: 'Circle'},
-            {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
-            {value: IconButton.Variant.Square, label: 'Square'},
-            {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
-          ],
-        }}
-        shouldRenderRow={props => {
-          return true;
-        }}
-        renderComponent={(props, disabled, className) => {
-          return (
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={permutateProps({
+            variant: [
+              {value: IconButton.Variant.Inverse, label: 'Inverse'},
+              {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+              {value: IconButton.Variant.Plain, label: 'Plain'},
+              {value: IconButton.Variant.Circle, label: 'Circle'},
+              {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+              {value: IconButton.Variant.Square, label: 'Square'},
+              {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+            ],
+          })}
+          columnProps={permutateProps(
+            {
+              className: [
+                {label: 'Default', value: ''},
+                {label: 'Hover', value: 'hover'},
+                {label: 'Focus', value: 'focus'},
+                {label: 'Focus Hover', value: 'focus hover'},
+                {label: 'Active', value: 'active'},
+                {label: 'Active Hover', value: 'active hover'},
+              ],
+              disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+            },
+            props => {
+              if (props.disabled && !['', 'hover'].includes(props.className)) {
+                return false;
+              }
+              return true;
+            }
+          )}
+        >
+          {props => (
             <div
               css={
                 props.variant === 'inverse' || props.variant === 'inverseFilled'
@@ -415,18 +449,16 @@ storiesOf('Components|Buttons/Button/React/Icon Button/Visual', module)
               }
             >
               <IconButton
-                variant={props.variant}
-                disabled={disabled}
+                toggled={true}
                 icon={activityStreamIcon}
                 aria-label="Activity Stream"
-                className={className}
-                toggled={true}
+                {...props}
                 onChange={() => {}} // eslint-disable-line no-empty-function
               />
             </div>
-          );
-        }}
-      />
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
     </div>
   ));
 
