@@ -73,6 +73,17 @@ generic assertion, the CLI will output something like
 `Expected <div data-testid="test" aria-label="bar">bar</div> to have an "aria-label" of "foo" but received "bar"`.
 **The specification should tell us which spec failed and the assertion gives insight into how.**
 
+### Selectors
+
+Accessible components tend to have `role`s and ARIA attributes to help with selection of specific
+elements within a component. React Testing Library comes with some selection helpers based on these
+attributes. CSS class names should not be used for selecting components. `data-testid` should be
+used as a last resort and usually is reserved for examples or an application to help disambiguate
+components. Hard-coded `data-testid` should be avoided in component source code, but are fine in
+unit and functional tests provided the test supplies the `data-testid` to make the test more
+understandable. Additional info can be found
+[here](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).
+
 ## Unit tests
 
 Canvas Kit uses [Jest](https://jestjs.io/),
