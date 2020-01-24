@@ -93,8 +93,6 @@ Default: `false`
 | Error | Red outline with error icon.    |
 | Alert | Yellow outline with alert icon. |
 
-Default: `undefined`
-
 # Color Preview
 
 A component to show a color swatch
@@ -119,8 +117,6 @@ import {ColorPreview} from '@workday/canvas-kit-color-preview';
 #### `value: string`
 
 > The value entered by the user into the color input
-
-Default: `#FFFFFF`
 
 ---
 

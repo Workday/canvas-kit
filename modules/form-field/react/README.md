@@ -186,8 +186,6 @@ import {Hint} from '@workday/canvas-kit-react-form-field';
 | Error | Displays "Error:" prefix        |
 | Alert | Yellow outline with alert icon. |
 
-Default: `undefined`
-
 ---
 
 # Label

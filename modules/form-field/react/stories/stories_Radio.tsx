@@ -12,7 +12,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Components|Inputs/Radio/React/Top Label/Radio Group', module)
-  .addParameters({component: Radio})
+  .addParameters({component: RadioGroup})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" useFieldset={true}>
@@ -78,7 +78,7 @@ storiesOf('Components|Inputs/Radio/React/Top Label/Radio', module)
   ));
 
 storiesOf('Components|Inputs/Radio/React/Left Label/Radio Group', module)
-  .addParameters({component: Radio})
+  .addParameters({component: RadioGroup})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" useFieldset={true} labelPosition={FormField.LabelPosition.Left}>

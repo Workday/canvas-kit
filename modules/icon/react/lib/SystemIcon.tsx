@@ -6,18 +6,52 @@ import Icon from './Icon';
 import {SpanProps} from './types';
 
 export interface SystemIconStyles {
+  /**
+   * The accent color of the SystemIcon. This overrides `color`.
+   */
   accent?: string;
+  /**
+   * The accent color of the SystemIcon on hover. This overrides `colorHover`.
+   */
   accentHover?: string;
+  /**
+   * The background color of the SystemIcon.
+   * @default transparent
+   */
   background?: string;
+  /**
+   * The background color of the SystemIcon on hover.
+   * @default transparent
+   */
   backgroundHover?: string;
+  /**
+   * The color of the SystemIcon. This defines `accent` and `fill`. `color` may be overriden by `accent` and `fill`.
+   * @default colors.primary.iconStandard
+   */
   color?: string;
+  /**
+   * The hover color of the SystemIcon. This defines `accentHover` and `fillHover`. `colorHover` may be overriden by `accentHover` and `fillHover`.
+   * @default colors.primary.iconHover
+   */
   colorHover?: string;
+  /**
+   * The fill color of the SystemIcon. This overrides `color`.
+   */
   fill?: string;
+  /**
+   * The fill color of the SystemIcon on hover. This overrides `colorHover`.
+   */
   fillHover?: string;
 }
 
 export interface SystemIconProps extends SystemIconStyles {
+  /**
+   * The icon to display from `@workday/canvas-system-icons-web`.
+   */
   icon: CanvasSystemIcon;
+  /**
+   * The size of the SystemIcon in `px`.
+   */
   size?: number;
 }
 
