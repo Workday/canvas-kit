@@ -101,9 +101,9 @@ const navStyle = ({themeColor, centeredNav}: Pick<HeaderProps, 'themeColor' | 'c
     nav: {
       display: 'flex',
       flexGrow: 1,
-      justifyContent: 'center',
       height: 'inherit',
       marginLeft: !centeredNav ? spacing.xl : 0,
+      justifyContent: !centeredNav ? 'flex-end' : 'center',
 
       '& ul': {
         color: theme.linkColor,
@@ -197,8 +197,7 @@ const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor
     '> *:last-child': {
       marginRight: isCollapsed ? '' : 0,
     },
-    width: !isCollapsed ? '100%' : 'auto',
-    flexGrow: !isCollapsed && centeredNav ? 1 : 'unset',
+    width: !isCollapsed ? '100%' : '',
   }),
   navStyle
 );
