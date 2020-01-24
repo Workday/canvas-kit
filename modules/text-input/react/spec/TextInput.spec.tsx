@@ -19,7 +19,7 @@ describe('Text Input', () => {
     });
   });
 
-  describe('when rendered with an placeholder', () => {
+  describe('when rendered with a placeholder', () => {
     it('should render a text input with placeholder', () => {
       const {getByRole} = render(<TextInput onChange={cb} placeholder={placeholder} />);
       expect(getByRole('textbox')).toHaveAttribute('placeholder', placeholder);

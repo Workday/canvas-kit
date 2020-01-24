@@ -1,10 +1,8 @@
 import * as React from 'react';
-import {render, fireEvent, getByTestId} from '@testing-library/react';
+import {render, fireEvent} from '@testing-library/react';
 import TextArea from '../lib/TextArea';
-import FormField from '@workday/canvas-kit-react-form-field';
 
 const id = 'Test Text Area';
-const label = 'Test Text Area';
 const placeholder = 'Test Text Area';
 const value = 'Test Text Area';
 
@@ -14,50 +12,39 @@ describe('Text Area', () => {
     cb.mockReset();
   });
 
-  describe('when rendered', () => {
-    describe('with an placeholder', () => {
-      it('should render a text area with placeholder', () => {
-        const {getByPlaceholderText} = render(
-          <TextArea onChange={cb} data-testid={id} placeholder={placeholder} />
-        );
-        const container = document.body;
-        expect(getByTestId(container, id)).toHaveAttribute('placeholder', placeholder);
-      });
+  describe('when rendered with a placeholder', () => {
+    it('should render a text area with placeholder', () => {
+      const {getByRole} = render(<TextArea onChange={cb} placeholder={placeholder} />);
+      expect(getByRole('textbox')).toHaveAttribute('placeholder', placeholder);
     });
+  });
 
-    describe('with a id', () => {
-      it('should render a text area with a id', () => {
-        const {getByPlaceholderText} = render(
-          <TextArea id={id} onChange={cb} value={value} placeholder={placeholder} />
-        );
-        expect(getByPlaceholderText(placeholder)).toHaveAttribute('id', id);
-      });
+  describe('when rendered with an id', () => {
+    it('should render a text area with a id', () => {
+      const {getByRole} = render(<TextArea id={id} onChange={cb} />);
+      expect(getByRole('textbox')).toHaveAttribute('id', id);
     });
+  });
 
-    describe('with a value', () => {
-      it('should render a text area with a value', () => {
-        const {getByDisplayValue} = render(<TextArea onChange={cb} value={value} />);
-        expect(getByDisplayValue(value)).toBeDefined();
-      });
+  describe('when rendered with a value', () => {
+    it('should render a text area with a value', () => {
+      const {getByDisplayValue} = render(<TextArea onChange={cb} value={value} />);
+      expect(getByDisplayValue(value)).toBeDefined();
     });
+  });
 
-    describe('with disabled attribute', () => {
-      it('should render a disabled text area', () => {
-        const {getByDisplayValue} = render(
-          <TextArea onChange={cb} disabled={true} value={value} />
-        );
-        expect(getByDisplayValue(value)).toBeDisabled();
-      });
+  describe('when rendered with disabled attribute', () => {
+    it('should render a disabled text area', () => {
+      const {getByRole} = render(<TextArea onChange={cb} disabled={true} />);
+      expect(getByRole('textbox')).toBeDisabled();
     });
+  });
 
-    describe('with extra, arbitrary props', () => {
-      it('should spread extra props', () => {
-        const attr = 'test';
-        const {getByPlaceholderText} = render(
-          <TextArea onChange={cb} data-propspread={attr} placeholder={placeholder} />
-        );
-        expect(getByPlaceholderText(placeholder)).toHaveAttribute('data-propspread', attr);
-      });
+  describe('when rendered with extra, arbitrary props', () => {
+    it('should spread extra props', () => {
+      const attr = 'test';
+      const {getByRole} = render(<TextArea onChange={cb} data-propspread={attr} />);
+      expect(getByRole('textbox')).toHaveAttribute('data-propspread', attr);
     });
   });
 
@@ -67,6 +54,14 @@ describe('Text Area', () => {
       render(<TextArea inputRef={ref} id={id} />);
       expect(ref.current).not.toBeNull();
       expect(ref.current).toHaveAttribute('id', id);
+    });
+  });
+
+  describe('when typed into', () => {
+    it('should call a callback function', () => {
+      const {getByRole} = render(<TextArea onChange={cb} />);
+      fireEvent.change(getByRole('textbox'), {target: {value: 'Test'}});
+      expect(cb).toHaveBeenCalledTimes(1);
     });
   });
 });
