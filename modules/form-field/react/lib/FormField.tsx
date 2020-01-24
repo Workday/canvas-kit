@@ -20,7 +20,15 @@ export interface FormFieldProps
   required?: boolean;
   useFieldset: boolean;
   children: React.ReactNode;
+  /**
+   * The Label for the error messages. This props is only added for translation, otherwise it shouldn't change
+   * @default Error
+   */
   errorLabel?: string;
+  /**
+   * The Label for the error messages. This props is only added for translation, otherwise it shouldn't change
+   * @default Alert
+   */
   alertLabel?: string;
 }
 

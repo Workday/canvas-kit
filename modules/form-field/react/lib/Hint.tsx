@@ -5,7 +5,15 @@ import {spacing, type} from '@workday/canvas-kit-react-core';
 
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
   error?: ErrorType;
+  /**
+   * The Label for the error messages. This props is only added for translation, otherwise it shouldn't change
+   * @default Error
+   */
   errorLabel?: string;
+  /**
+   * The Label for the error messages. This props is only added for translation, otherwise it shouldn't change
+   * @default Alert
+   */
   alertLabel?: string;
 }
 
