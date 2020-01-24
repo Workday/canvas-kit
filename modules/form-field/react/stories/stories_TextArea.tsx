@@ -1,9 +1,9 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import withReadme from 'storybook-readme/with-readme';
-import {controlComponent} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {controlComponent, ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 
 import {TextArea} from '../../../text-area/react/index';
 import FormField from '../index';
@@ -163,47 +163,51 @@ storiesOf('Components|Inputs/TextArea/React/Visual Testing', module)
   .addDecorator(withReadme(README))
   .add('States', () => (
     <StaticStates>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>No state</th>
-            <th>Hover</th>
-            <th>Focused</th>
-            <th>Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          {[false, true].map(disabled => {
-            return ['Default', 'Alert', 'Error'].map(variant => {
-              const type =
-                variant === 'Alert'
-                  ? FormField.ErrorType.Alert
-                  : variant === 'Error'
-                  ? FormField.ErrorType.Error
-                  : undefined;
-
-              const key = `${disabled ? 'disabled' : 'enabled'}-${variant}`;
-
-              return (
-                <tr key={key}>
-                  <td>{`${disabled ? 'Disabled ' : ''}${variant}`}</td>
-
-                  {['', 'hover', 'focus', 'active'].map(className => (
-                    <td key={`${key}-${className}`}>
-                      <TextArea
-                        disabled={disabled}
-                        error={type}
-                        className={className}
-                        onChange={() => {}} // eslint-disable-line no-empty-function
-                      />
-                    </td>
-                  ))}
-                </tr>
-              );
-            });
-          })}
-        </tbody>
-      </table>
+      <ComponentStatesTable
+        rowProps={permutateProps(
+          {
+            value: [{value: 'Input value', label: 'With Value'}, {value: '', label: 'No Value'}],
+            placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
+            error: [
+              {value: undefined, label: ''},
+              {value: TextArea.ErrorType.Alert, label: 'Alert'},
+              {value: TextArea.ErrorType.Error, label: 'Error'},
+            ],
+          },
+          props => {
+            if (props.value === '' && !props.placeholder) {
+              return false;
+            }
+            return true;
+          }
+        )}
+        columnProps={permutateProps(
+          {
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+            ],
+            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          },
+          props => {
+            if (props.disabled && !['', 'hover'].includes(props.className)) {
+              return false;
+            }
+            return true;
+          }
+        )}
+      >
+        {props => (
+          <TextArea
+            {...props}
+            style={{minWidth: 60, width: 100}}
+            onChange={() => {}} // eslint-disable-line no-empty-function
+          />
+        )}
+      </ComponentStatesTable>
     </StaticStates>
   ));
