@@ -42,7 +42,8 @@ jobs:
     script:
       - yarn lint
       - yarn test
-      - yarn chromatic --exit-zero-on-changes
+      - yarn chromatic --exit-zero-on-changes --app-code="dlpro96xybh" # v1 for cross-browser
+      - yarn chromatic --exit-zero-on-changes # v2 for visual review features and Storybook hosting
       - yarn start & npx wait-on http://localhost:9001
       - yarn cypress run --record
       - kill $(jobs -p) || true
@@ -65,7 +66,8 @@ jobs:
 
   - stage: master
     script:
-      - yarn chromatic --auto-accept-changes
+      - yarn chromatic --auto-accept-changes --app-code="dlpro96xybh" # v1
+      - yarn chromatic --auto-accept-changes # v2
       - yarn build-storybook
     env:
       - CHROMATIC_APP_CODE="m1dh5kc7oj"

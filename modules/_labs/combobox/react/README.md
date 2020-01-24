@@ -4,9 +4,6 @@
   <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 
-A specialized input wrapper that adds an autocomplete list. Based on W3 spec for
-[List Autocomplete with Manual Selection](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html)
-
 For a full suite of examples, have a look at the [Combobox Stories](./stories.tsx).
 
 ## Installation
@@ -14,6 +11,14 @@ For a full suite of examples, have a look at the [Combobox Stories](./stories.ts
 ```sh
 yarn add @workday/canvas-kit-labs-react-combobox
 ```
+
+## Accessibility
+
+This module uses the ARIA 1.0 Combobox spec.
+The newer ARIA 1.1 spec does not have full browser/screenreader support yet.
+
+See here for
+[differences between ARIA 1.0 and 1.1](https://www.levelaccess.com/differences-aria-1-0-1-1-changes-rolecombobox/)
 
 ## Usage
 

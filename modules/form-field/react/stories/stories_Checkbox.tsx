@@ -2,7 +2,12 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {ControlledComponentWrapper} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {
+  ControlledComponentWrapper,
+  ComponentStatesTable,
+  permutateProps,
+} from '../../../../utils/storybook';
 
 import {Checkbox} from '../../../checkbox/react/index';
 import FormField from '../index';
@@ -22,17 +27,17 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ))
   .add('Disabled', () => (
     <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+      {control(<Checkbox label="Checkbox option" disabled={true} />)}
     </FormField>
   ))
   .add('Indeterminate', () => (
     <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox id="1" label="Checkbox option" indeterminate={true} />)}
+      {control(<Checkbox label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
   .add('Alert', () => (
@@ -43,7 +48,7 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ))
   .add('Error', () => (
@@ -54,7 +59,7 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ));
 
@@ -67,7 +72,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       inputId="my-checkbox-field"
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ))
   .add('Disabled', () => (
@@ -76,7 +81,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       inputId="my-checkbox-field"
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" disabled={true} />)}
+      {control(<Checkbox label="Checkbox option" disabled={true} />)}
     </FormField>
   ))
   .add('Indeterminate', () => (
@@ -85,7 +90,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       inputId="my-checkbox-field"
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" indeterminate={true} />)}
+      {control(<Checkbox label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
   .add('Alert', () => (
@@ -97,7 +102,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       hintId={hintId}
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
   ))
   .add('Error', () => (
@@ -109,6 +114,60 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       hintId={hintId}
       labelPosition={FormField.LabelPosition.Left}
     >
-      {control(<Checkbox id="1" label="Checkbox option" />)}
+      {control(<Checkbox label="Checkbox option" />)}
     </FormField>
+  ));
+
+storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
+  .addParameters({component: Checkbox})
+  .addDecorator(withReadme(README))
+  .add('States', () => (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={permutateProps(
+          {
+            checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
+            indeterminate: [{value: true, label: 'Indeterminate'}, {value: false, label: ''}],
+            error: [
+              {value: undefined, label: ''},
+              {value: Checkbox.ErrorType.Alert, label: 'Alert'},
+              {value: Checkbox.ErrorType.Error, label: 'Error'},
+            ],
+          },
+          props => {
+            if (props.indeterminate && !props.checked) {
+              return false;
+            }
+            return true;
+          }
+        )}
+        columnProps={permutateProps(
+          {
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+            ],
+            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          },
+          props => {
+            if (props.disabled && !['', 'hover'].includes(props.className)) {
+              return false;
+            }
+            return true;
+          }
+        )}
+      >
+        {props => (
+          <Checkbox
+            {...props}
+            onChange={() => {}} // eslint-disable-line no-empty-function
+            label="Checkbox"
+          />
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
   ));
