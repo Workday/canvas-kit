@@ -4,6 +4,9 @@ import {ErrorType} from '@workday/canvas-kit-react-common';
 import {spacing, type} from '@workday/canvas-kit-react-core';
 
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
+  /**
+   * The type of error associated with the Hint (if applicable).
+   */
   error?: ErrorType;
   /**
    * The Label for the error messages. This props is only added for translation, otherwise it shouldn't change

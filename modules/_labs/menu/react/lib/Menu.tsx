@@ -7,13 +7,38 @@ import {commonColors, spacing, borderRadius} from '@workday/canvas-kit-react-cor
 import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
 export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
+  /**
+   * The MenuItem children of the Menu (must be at least one). Also accepts other components which share the same interface as `MenuItem`.
+   */
   children?: React.ReactElement<MenuItemProps> | React.ReactElement<MenuItemProps>[];
+  /**
+   * If true, set the Menu to the open state. Useful for showing and hiding the Menu from a parent component such as a menu button.
+   * @default true
+   */
   isOpen?: boolean;
+  /**
+   * The width of the Menu. If no value is provided, the Menu will collapse around its content.
+   */
   width?: number | string;
+  /**
+   * The function called when a menu item is selected.
+   */
   onSelect?: () => void;
+  /**
+   * The function called when the Menu should close. This is called after a menu item is selected or if the escape shortcut key is used. This will not fire if the menu item sets `shouldClose` to false.
+   */
   onClose?: () => void;
+  /**
+   * The zero-based index of the menu item which should initially receive focus.
+   */
   initialSelectedItem?: number;
+  /**
+   * The unique id of the Menu used for ARIA and HTML `id` attributes.
+   */
   id?: string;
+  /**
+   * The HTML `id` of the element that labels the Menu. Often used with menu buttons.
+   */
   labeledBy?: string;
 }
 

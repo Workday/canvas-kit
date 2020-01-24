@@ -12,32 +12,34 @@ import {
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Heading at the top of the card.
+   * The heading of the Card.
    */
   heading?: React.ReactNode;
 
   /**
-   * Heading ID for accessibility. Useful tie to an `aria-labelledby`
+   * The id of the Card heading. Tie this to an `aria-labelledby` for accessibility.
    */
   headingId?: string;
 
   /**
-   * Padding of the card.
+   * The padding of the Card. Imported from `@workday/canvas-kit-react-core`.
+   * @default spacing.l
    */
   padding: CanvasSpacingValue;
 
   /**
-   * Depth of the card.
+   * The depth of the Card. Imported from `@workday/canvas-kit-react-core`.
+   * @default depthValues[2]
    */
   depth: CanvasDepthValue;
 
   /**
-   * Width of the card.
+   * The width of the Card.
    */
   width?: number | string;
 
   /**
-   * Height of the card.
+   * The height of the Card.
    */
   height?: number | string;
 }

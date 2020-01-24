@@ -12,19 +12,22 @@ export enum AvatarVariant {
 
 export interface AvatarLocalProps {
   /**
-   * An AvatarVariant enum indicating which variant to use for the default state (Light vs. Dark)
+   * The variant of the Avatar default state. Accepts `Light` or `Dark`.
+   * @default AvatarVariant.Light
    */
   variant: AvatarVariant;
   /**
-   * An SystemIconCircleSize enum or number value indicating the size of the avatar
+   * The size of the Avatar.
+   * @default SystemIconCircleSize.m
    */
   size: SystemIconCircleSize | number;
   /**
-   * Text describing what the avatar is showing
+   * The alt text of the Avatar image.
+   * @default Avatar
    */
   altText: string;
   /**
-   * The url of the users avatar photo
+   * The url of the Avatar image.
    */
   url?: string;
 }
