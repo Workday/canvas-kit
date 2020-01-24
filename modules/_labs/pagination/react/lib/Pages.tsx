@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import {css, jsx} from '@emotion/core';
+import type from '@workday/canvas-kit-labs-react-core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas from '@workday/canvas-kit-react-core';
 import _ from 'lodash';
@@ -68,12 +69,10 @@ const Pages: React.FC<PagesProps> = props => {
   if (more) {
     pages.push(numPages);
   }
-  const onClick = (page: number) => {
-    onPageClick(page);
-  };
+
   const buttons = pages.map(page => (
     <PaginationButton
-      onPageClick={onClick}
+      onPageClick={(page: number) => onPageClick(page)}
       page={page}
       key={page}
       active={page === currentPage}
@@ -82,21 +81,20 @@ const Pages: React.FC<PagesProps> = props => {
   ));
 
   const ellipse = (
-    <IconButton
+    <span
       key={'ellipse'}
       aria-label={ariaLabels.navigationEllipseAriaLabel}
-      variant={IconButton.Variant.Square}
-      size={IconButton.Size.Small}
       tabIndex={-1}
-      css={noPointerEvents}
+      style={type.small}
     >
       ...
-    </IconButton>
+    </span>
   );
 
   if (less) {
     buttons.splice(1, 0, ellipse);
-  } else if (more) {
+  }
+  if (more) {
     buttons.splice(buttons.length - 1, 0, ellipse);
   }
 
