@@ -9,13 +9,13 @@ export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraph
    */
   error?: ErrorType;
   /**
-   * The Label for the error messages. This props is only added for translation, otherwise it shouldn't change
-   * @default Error
+   * The label for the error message hint text if `hintText` and `error` are defined. This prop should only be used for translating the default string 'Error'.
+   * @default 'Error'
    */
   errorLabel?: string;
   /**
-   * The Label for the error messages. This props is only added for translation, otherwise it shouldn't change
-   * @default Alert
+   * The label for the alert message hint text if `hintText` and `error` are defined. This prop should only be used for translating the default string 'Alert'.
+   * @default 'Alert'
    */
   alertLabel?: string;
 }
