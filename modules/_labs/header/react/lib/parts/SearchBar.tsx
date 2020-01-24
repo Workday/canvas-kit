@@ -16,61 +16,70 @@ import uuid from 'uuid/v4';
 
 export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes<HTMLFormElement> {
   /**
-   * An function that gets called and passed the current input value when the search form is submitted
+   * The function called when the SearchBar form is submitted. The current input value is passed to the callback function.
    */
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   /**
-   * True if the search input should be collapsed into a toggle icon (for responsive).
+   * If true, collapse the SearchBar text input into a toggle icon. Useful for responsive layouts.
+   * @default false
    */
   isCollapsed?: boolean;
   /**
-   * Callback to listen when the TextInput changes
+   * The function called when the SearchBar text input changes.
    */
   onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
-   * An array of menu items to show under the search bar
+   * The autocomplete items of the SearchBar. This array of menu items is shown under the search bar.
    */
   autocompleteItems?: React.ReactElement<MenuItemProps>[];
   /**
-   * The theme of the header the search input is being rendered in
+   * The theme of the header the search input is being rendered in.
    */
   searchTheme?: SearchTheme | SearchThemeAttributes;
   /**
-   * Placeholder for search input
+   * The placeholder text of the SearchBar text input.
+   * @default Search
    */
-  placeholder: string;
+  placeholder?: string;
   /**
-   * Initial value to set the input to
+   * The initial value of the SearchBar text input.
    */
   initialValue?: string;
   /**
-   * False if the search input should grow to left align it. True if it should right align.
+   * If true, right-align the SearchBar. If false, the text input should grow to left-align the SearchBar.
+   * @default false
    */
   rightAlign?: boolean;
   /**
-   * Screenreader label for text input
+   * The screenreader label text for the SearchBar text input.
+   * @default Search
    */
-  inputLabel: string;
+  inputLabel?: string;
   /**
-   * Screenreader label for submit button
+   * The screenreader label text for the SearchBar submit button.
+   * @default Search
    */
   submitLabel: string;
   /**
-   * Screenreader Label for clear button
+   * The screenreader label text for the SearchBar clear button.
+   * @default Reset Search Form
    */
   clearButtonLabel?: string;
   /**
-   * Screenreader Label to open collapsed search bar
+   * The screenreader label text for the button to open the collapsed SearchBar.
+   * @default Open Search
    */
   openButtonLabel: string;
   /**
-   * Screenreader Label to close collapsed search bar
+   * The screenreader label text for the button to close the open SearchBar.
+   * @default Cancel
    */
   closeButtonLabel: string;
   /**
-   * Show button to clear input field
+   * If true, render the SearchBar with a button to clear the text input.
+   * @default true
    */
-  showClearButton: boolean;
+  showClearButton?: boolean;
 }
 
 export interface SearchBarState {

@@ -18,7 +18,7 @@ const keyframesLoading = keyframes`
 
 type LoadingDotProps = {
   /**
-   * The animation-delay value, in ms, for the loading dots.
+   * The animation delay of the LoadingDots (in ms).
    */
   animationDelay: number;
 };

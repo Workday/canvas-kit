@@ -5,7 +5,14 @@ import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react
 import {keyframes} from '@emotion/core';
 
 export interface TooltipProps {
+  /**
+   * The origin from which the Tooltip will animate.
+   * @default {horizontal: 'center', vertical: 'top'}
+   */
   transformOrigin: TransformOrigin;
+  /**
+   * The unique id of the Tooltip.
+   */
   id?: string;
 }
 

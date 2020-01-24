@@ -12,31 +12,34 @@ import {CSSObject} from '@emotion/core';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Type of button.
+   * The type of the IconButton.
+   * @default IconButtonVariant.Circle
    */
   variant: IconButtonVariant;
   /**
-   * The accessibility label to indicate the action triggered by clicking the button
+   * The accessibility label to indicate the action triggered by clicking the IconButton.
    */
   'aria-label': string;
   /**
-   * Size of icon button.
+   * The size of the IconButton.
+   * @default IconButtonSize.Medium
    */
   size?: IconButtonSize;
   /**
-   * Whether the icon button is toggled on or off
+   * If true, toggle the IconButton on.
+   * @default false
    */
   toggled?: boolean;
   /**
-   * Ref of button that the styled component renders.
+   * The ref to the button that the styled component renders.
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
   /**
-   * Icon for button.
+   * The icon of the IconButton.
    */
   icon?: CanvasSystemIcon;
   /**
-   * Callback that fires when a button changes toggled states
+   * The function called when the IconButton toggled state changes.
    */
   onToggleChange?: (toggled: boolean | undefined) => void;
 }

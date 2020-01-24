@@ -102,7 +102,7 @@ Default: `ButtonVariant.Secondary`
 
 #### `size: ButtonSize`
 
-> The type of the button
+> The size of the button
 
 Default: `ButtonSize.Large`
 
@@ -280,9 +280,9 @@ methods.
 
 #### `value: string | number`
 
-> Identify which item is selected (toggled=true).  
-> If a string is passed, the IconButton with the corresponding value will be selected.  
-> If a number is passed, the IconButton with the corresponding index will be selected.
+> Identify which item is selected (toggled=true). If a string is passed, the IconButton with the
+> corresponding value will be selected. If a number is passed, the IconButton with the corresponding
+> index will be selected.
 
 ---
 

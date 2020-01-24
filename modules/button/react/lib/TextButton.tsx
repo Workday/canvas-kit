@@ -8,6 +8,10 @@ import {BaseButtonProps} from './Button';
 import {textButtonStyles} from './ButtonStyles';
 
 export interface TextButtonProps extends BaseButtonProps<TextButtonVariant> {
+  /**
+   * The position of the TextButton icon. Accepts `Left` or `Right`.
+   * @default IconPosition.Left
+   */
   iconPosition?: IconPosition;
 }
 
