@@ -43,7 +43,7 @@ export default class Hint extends React.Component<HintProps> {
 
     return (
       <Message {...this.props}>
-        {typeof error !== 'undefined' && <Label>{hintLabel && `${hintLabel}: `}</Label>}
+        {typeof error !== 'undefined' && hintLabel && <Label>{hintLabel}: </Label>}
         {children}
       </Message>
     );
