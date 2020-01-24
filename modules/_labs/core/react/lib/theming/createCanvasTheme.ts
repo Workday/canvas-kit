@@ -7,6 +7,7 @@ import {
   PartialCanvasTheme,
   CanvasThemePalette,
   PartialCanvasThemePalette,
+  ContentDirection,
 } from './types';
 import {CanvasColor} from '@workday/canvas-kit-react-core';
 
@@ -91,7 +92,7 @@ export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme
       neutral: fillPalette(neutral),
     },
     breakpoints,
-    direction,
+    direction: direction === ContentDirection.RTL ? direction : ContentDirection.LTR,
   };
 
   return merge({}, defaultCanvasTheme, mergeable) as CanvasTheme;

@@ -12,39 +12,42 @@ import uuid from 'uuid/v4';
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
-   * The TextInput component to wrap.
+   * The TextInput child of the Combobox.
    */
   children: React.ReactElement<TextInputProps>;
   /**
-   * Initial value to set the input to
+   * The initial value of the Combobox.
    */
   initialValue?: string;
   /**
-   * The type of icon button to use for clearing input
+   * The variant of the Combobox clear button.
+   * @default IconButton.Variant.Plain
    */
   clearButtonVariant: IconButtonVariant;
   /**
-   * Show button to clear input field
+   * If true, render the Combobox with a button to clear the text input.
+   * @default false
    */
   showClearButton?: boolean;
   /**
-   * Aria Label for clear button
+   * The `aria-label` for the Combobox clear button.
+   * @default Reset Search Input
    */
   clearButtonLabel: string;
   /**
-   * An array of menu items to show under the TextInput
+   * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
   autocompleteItems?: React.ReactElement<MenuItemProps>[];
   /**
-   * Callback to listen when the TextInput changes
+   * The function called when the Combobox text input changes.
    */
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /**
-   * Callback to listen when the TextInput focuses
+   * The function called when the Combobox text input focuses.
    */
   onFocus?: React.FocusEventHandler;
   /**
-   * Callback to listen when the TextInput blurs
+   * The function called when the Combobox text input blurs.
    */
   onBlur?: React.FocusEventHandler;
   /**
@@ -291,6 +294,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
           if (item.props.isDisabled) {
             nextIndex = currentIndex;
           }
+          this.setState({isFocused: true});
           event.stopPropagation();
           event.preventDefault();
         }
@@ -308,8 +312,9 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     this.setState({value: event.target.value});
   };
 
-  isValidSingleChild = (child: React.ReactNode) =>
-    React.isValidElement(child) && React.Children.only(child);
+  isValidSingleChild = (child: React.ReactNode) => {
+    return React.isValidElement(child) && React.Children.only(child);
+  };
 
   renderChildren = (child: React.ReactElement<TextInputProps>): React.ReactNode => {
     if (!this.isValidSingleChild(child)) {
@@ -331,7 +336,6 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         value: this.state.value,
         inputRef: this.inputRef,
         'aria-autocomplete': 'list',
-        'aria-controls': `${this.props.id}-${listBoxIdPart}`,
         'aria-activedescendant':
           this.state.selectedAutocompleteIndex != null
             ? getOptionId(this.props.id, this.state.selectedAutocompleteIndex)
@@ -341,6 +345,10 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
         onFocus: this.handleFocus,
         onBlur: this.handleBlur,
         css: cssOverride,
+        role: 'combobox',
+        'aria-owns': `${this.props.id}-${listBoxIdPart}`,
+        'aria-haspopup': true,
+        'aria-expanded': this.state.showingAutocomplete,
       };
       const cloneElement = (element: React.ReactElement<TextInputProps>, props: TextInputProps) =>
         jsx(element.type, {
@@ -368,19 +376,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     } = this.props;
 
     return (
-      <Container
-        role="combobox"
-        aria-haspopup="listbox"
-        aria-owns={`${id}-${listBoxIdPart}`}
-        aria-expanded={this.state.showingAutocomplete}
-        grow={grow}
-        {...elemProps}
-      >
-        <Status role="status" aria-live="polite">
-          {autocompleteItems
-            ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length)
-            : ''}
-        </Status>
+      <Container grow={grow} {...elemProps}>
         <InputContainer ref={this.comboboxRef}>
           {React.Children.map(children, this.renderChildren)}
           {showClearButton && (
@@ -419,6 +415,11 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
             </MenuContainer>
           )}
         </InputContainer>
+        <Status role="status" aria-live="polite">
+          {autocompleteItems
+            ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length)
+            : ''}
+        </Status>
       </Container>
     );
   }

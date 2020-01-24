@@ -94,6 +94,7 @@ buttons are used in a sequence of screens (e.g. Task Orchestration) and on mobil
   - Dropdown Button
   - Split Button
   - Text Button
+  - Inline Icon
 
 ## Sizes
 
@@ -289,6 +290,27 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 <button class="wdc-btn-text">Text Button</button>
 <a href="#" class="wdc-btn-text">Text Link</a>
 <button class="wdc-btn-text wdc-btn-text-inverse">Hovered Button</button>
+```
+
+### Inline Icon
+You can use a [System Icon](../../icon/css/README.md) either before or after the text of Primary, Secondary, Delete and Text buttons. The class `.wdc-icon-position-left` (default) or  `.wdc-icon-position-right` adjust the margin of the icon.
+
+`System Icon` requires a JavaScript import for the injector:
+
+```javascript
+import initializeIcons from '@workday/canvas-kit-css-icon';
+
+initializeIcons();
+```
+
+```html
+<button className="wdc-btn wdc-btn-primary wdc-btn-size-l">
+  <i className="wdc-icon" data-icon="edit" data-category="system" />Edit
+</button>
+
+<a href="#" className="wdc-btn-text">
+  Continue <i className="wdc-icon wdc-icon-position-right" data-icon="arrowRight" data-category="system" />
+</a>
 ```
 
 

@@ -4,6 +4,10 @@ import {keyframes} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
 
 export interface SkeletonProps {
+  /**
+   * The `aria-label` that describes loading.
+   * @default 'Loading'
+   */
   loadingLabel: string;
 }
 

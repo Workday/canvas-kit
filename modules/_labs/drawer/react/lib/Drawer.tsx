@@ -4,35 +4,39 @@ import {colors, spacing, CanvasSpacingValue} from '@workday/canvas-kit-react-cor
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Adjust padding for the contents of the Drawer. Default: `spacing.s`
+   * The padding of the Drawer contents.
+   * @default spacing.s
    */
   padding?: CanvasSpacingValue;
   /**
-   * Determines the side in which the Drawer can open from. Default: `DrawerDirection.Right`
+   * The direction from which the Drawer opens. Accepts `Left` or `Right`.
+   * @default DrawerDirection.Right
    */
   openDirection?: DrawerDirection;
   /**
-   * Sets the width of the Drawer. Default: `360px`
+   * The width of the Drawer in `px`.
+   * @default 360
    */
   width?: number;
   /**
-   * Allows to either show or hide a drop shadow on the Drawer. Default: `false`
+   * If true, render the Drawer with a drop shadow.
+   * @default false
    */
   showDropShadow?: boolean;
   /**
-   * Optional to pass a DrawerHeader component shows an optional string and close button
+   * The optional DrawerHeader component of the Drawer. Shows an optional string and close button.
    */
   header?: React.ReactElement;
   /**
-   * Usey when there's a header for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element
+   * The `aria-labelledby` of the Drawer. Set this when there is a `header` for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element.
    */
   'aria-labelledby'?: string;
   /**
-   * Use when there is NO `header` for accessibility
+   * The `aria-label` for the Drawer. Set this when there is NO `header` for accessibility.
    */
   'aria-label'?: string;
   /**
-   * Optional role for the drawer. If this attribute is used, also provide an `aria-labelledby` attribute to link the `header` element to this role
+   * The role of the Drawer. If `role` is provided, you must also set `aria-labelledby` to link `header` to the `role`.
    */
   role?: string;
 }
