@@ -8,16 +8,56 @@ import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * If true, set the SidePanel to the open state.
+   * @default false;
+   */
   open: boolean;
+  /**
+   * The function called when the toggle button is clicked. The toggle button is only shown if this prop is defined.
+   */
   onToggleClick?: () => void;
+  /**
+   * The text or element to display as the SidePanel header.
+   */
   header?: string | React.ReactNode;
+  /**
+   * The side from which the SidePanel opens. Accepts `Left` or `Right`.
+   * @default SidePanelOpenDirection.Left
+   */
   openDirection?: SidePanelOpenDirection;
+  /**
+   * The function called when the window width changes and reaches a width equivalent to `breakpoint`. For example, if the window is resized from a width of `1000px`, this will be called when the window reaches a width equivalent to `breakpoint`. The `aboveBreakpoint` argument passed to the callback function indicates whether the current window width is above or below `breakpoint` so you can control `open` based on the change.
+   */
   onBreakpointChange?: (aboveBreakpoint: boolean) => void;
+  /**
+   * The padding of the SidePanel when it's open.
+   */
   padding?: CanvasSpacingValue;
+  /**
+   * The window width at which the SidePanel triggers `onBreakPointChange`.
+   * @default 768px
+   */
   breakpoint?: number;
+  /**
+   * The width of the SidePanel when it's open.
+   * @default 300px
+   */
   openWidth?: number;
+  /**
+   * The background color of the SidePanel when it's open.
+   * @default SidePanelBackgroundColor.White
+   */
   backgroundColor?: SidePanelBackgroundColor;
+  /**
+   * The `aria-label` that describes closing the navigation.
+   * @default 'close navigation'
+   */
   closeNavigationLabel: string;
+  /**
+   * The `aria-label` that describes opening the navigation.
+   * @default 'open navigation'
+   */
   openNavigationLabel: string;
 }
 

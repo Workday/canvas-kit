@@ -6,12 +6,27 @@ import Icon from './Icon';
 import {SpanProps} from './types';
 
 export interface AccentIconStyles {
+  /**
+   * The fill color of the AccentIcon.
+   * @default colors.blueberry500
+   */
   color?: string;
+  /**
+   * If true, set the background fill of the AccentIcon to `transparent`. If false, set the background fill of the AccentIcon to `colors.frenchVanilla100`.
+   * @default false
+   */
   transparent?: boolean;
 }
 
 export interface AccentIconProps extends AccentIconStyles {
+  /**
+   *  The icon to display from `@workday/canvas-accent-icons-web`.
+   */
   icon: CanvasAccentIcon;
+  /**
+   * The size of the AccentIcon in `px`.
+   * @default 56
+   */
   size?: number;
 }
 
