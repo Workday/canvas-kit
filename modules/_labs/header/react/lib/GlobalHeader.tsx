@@ -5,23 +5,25 @@ import {DubLogoTitle} from './parts';
 
 export interface GlobalHeaderProps {
   /**
-   * A React node that will replace the dub logo and title if provided.
+   * The custom brand node of the GlobalHeader. This React node replaces the dub logo and title.
+   * @default DubLogoTitle
    */
   brand: React.ReactNode;
   /**
-   * A React node that will replace the menuToggle if provided.
+   * The custom menu toggle node of the GlobalHeader. This React node replaces the default menu toggle.
    */
   menuToggle?: React.ReactNode;
   /**
-   * An event handler function that gets called when the responsive menu icon is clicked
+   * The function called when the responsive menu icon is clicked.
    */
   onMenuClick?: (e: React.SyntheticEvent) => void;
   /**
-   * A boolean indicating if the header should be rendered in collapsed mode
+   * If true, render the GlobalHeader in collapsed mode.
+   * @default false
    */
   isCollapsed?: boolean;
   /**
-   * React element for the left of the header, this is typically a search bar component
+   * The React element to render in the left slot of the GlobalHeader. This is typically a SearchBar component.
    */
   leftSlot?: React.ReactElement;
 }
