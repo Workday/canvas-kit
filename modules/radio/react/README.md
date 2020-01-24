@@ -174,9 +174,8 @@ import FormField from '@workday/canvas-kit-react-form-field';
 
 #### `value: string | number`
 
-> Identify which item is selected (toggled=true).  
-> If a string is passed, the Radio with the corresponding value will be selected.  
-> If a number is passed, the Radio with the corresponding index will be selected.
+> Identify which item is selected (toggled=true). If a string is passed, the Radio with the
+> corresponding value will be selected.
 
 ---
 

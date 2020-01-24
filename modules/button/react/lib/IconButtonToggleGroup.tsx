@@ -5,26 +5,24 @@ import IconButton, {IconButtonCon, IconButtonProps} from './IconButton';
 
 export interface IconButtonToggleGroupProps {
   /**
-   * React children must be of type IconButton and have at least two.
+   * The IconButton children of the IconButtonToggleGroup (must be at least two).
    */
   children: React.ReactElement<IconButtonProps>[];
 
   /**
-   * The value or index of the IconButton that should be toggled on.
-   * If a string is passed, the IconButton with the corresponding value will be selected.
-   * If a number is passed, ihe IconButton with the corresponding index will be selected.
+   * The value or index of the IconButton that the IconButtonToggleGroup should be toggled on to. If a string is provided, the IconButton with the corresponding value will be selected. If a number is provided, the IconButton with the corresponding index will be selected.
+   * @default 0
    */
   value?: string | number;
 
   /**
-   * Internationalization config
+   * If true, render the IconButtonToggleGroup from right to left.
+   * @default false
    */
   isRTL?: boolean;
 
   /**
-   * Callback function when a button is selected, optional.
-   * If the selected button has a value, it will be returned.
-   * Otherwise, the index of the button in the group will be returned.
+   * The function called when a button in the IconButtonToggleGroup is selected. If the selected button has a value, that value will be passed to the callback function; otherwise, the index of the button will be passed.
    */
   onChange?: (value: string | number) => void;
 }
