@@ -19,7 +19,7 @@ describe('Text Input', () => {
     });
   });
 
-  describe('when rendered with a placeholder', () => {
+  describe('when rendered with an placeholder', () => {
     it('should render a text input with placeholder', () => {
       const {getByRole} = render(<TextInput onChange={cb} placeholder={placeholder} />);
       expect(getByRole('textbox')).toHaveAttribute('placeholder', placeholder);
@@ -56,10 +56,11 @@ describe('Text Input', () => {
   });
 
   describe('when provided an input ref', () => {
-    it('should set the ref to the input element', async () => {
+    it('should set the ref to the input element', () => {
       const ref: React.RefObject<HTMLInputElement> = React.createRef();
-      const {findByRole} = render(<TextInput inputRef={ref} />);
-      expect(await findByRole('textbox')).toEqual(ref.current);
+      render(<TextInput inputRef={ref} id={id} />);
+      expect(ref.current).not.toBeNull();
+      expect(ref.current).toHaveAttribute('id', id);
     });
   });
 
