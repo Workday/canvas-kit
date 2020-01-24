@@ -27,6 +27,16 @@ describe('Text Area', () => {
           getTextArea().should('be.focused');
         });
       });
+
+      context('when text is entered', () => {
+        beforeEach(() => {
+          getTextArea().type('Test');
+        });
+
+        it('should reflect the text typed', () => {
+          getTextArea().should('have.value', 'Test');
+        });
+      });
     });
   });
 
