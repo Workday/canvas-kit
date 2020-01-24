@@ -122,10 +122,10 @@ export const IconButtonCon = styled('button', {
             backgroundColor: colors.blueberry500,
           },
           '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
-            backgroundColor: colors.blueberry200,
-            ...getFillSelector(colors.blueberry400),
+            backgroundColor: colors.blueberry100,
+            ...getFillSelector(colors.blueberry300),
             ...getAccentSelector(colors.frenchVanilla100),
-            ...getBackgroundSelector(colors.blueberry400),
+            ...getBackgroundSelector(colors.blueberry300),
           },
           ...mouseFocusBehavior({
             '&:focus:active': {
