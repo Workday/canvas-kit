@@ -20,7 +20,7 @@ export default function errorRing(error?: ErrorType): CSSObject {
     borderColor: errorBorderColor,
     transition: '100ms box-shadow',
     boxShadow: errorBoxShadow,
-    '&:hover': {
+    '&:hover, &:disabled': {
       borderColor: errorBorderColor,
     },
     '&:focus:not([disabled])': {
