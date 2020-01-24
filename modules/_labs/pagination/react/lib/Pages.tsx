@@ -1,12 +1,12 @@
+/** @jsx jsx */
 import {css, jsx} from '@emotion/core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas from '@workday/canvas-kit-react-core';
 import _ from 'lodash';
-import React, {useRef} from 'react';
+import React from 'react';
 
 import {PaginationAriaLabelsDefault} from './PaginationAriaLabels';
 
-/** @jsx jsx */
 interface PagesProps {
   numPages: number;
   currentPage: number;
@@ -30,22 +30,8 @@ const activeStyling = css(noPointerEvents, {
   color: canvas.colors.frenchVanilla100,
 });
 
-const Ellipse = ({ariaLabel}: {ariaLabel: string}) => (
-  <IconButton
-    key={'ellipse'}
-    aria-label={ariaLabel}
-    variant={IconButton.Variant.Square}
-    size={IconButton.Size.Small}
-    tabIndex={-1}
-    css={noPointerEvents}
-  >
-    ...
-  </IconButton>
-);
-
 const Pages: React.FC<PagesProps> = props => {
   const {numPages, currentPage, onPageClick, mobile, ariaLabels} = props;
-  const lastPage = useRef<number>(0);
 
   let pagesToDisplay = 5;
   let start = 1;
@@ -83,7 +69,6 @@ const Pages: React.FC<PagesProps> = props => {
     pages.push(numPages);
   }
   const onClick = (page: number) => {
-    lastPage.current = currentPage;
     onPageClick(page);
   };
   const buttons = pages.map(page => (
@@ -96,12 +81,23 @@ const Pages: React.FC<PagesProps> = props => {
     />
   ));
 
-  const ellipseAriaLabel = ariaLabels.navigationEllipseAriaLabel;
+  const ellipse = (
+    <IconButton
+      key={'ellipse'}
+      aria-label={ariaLabels.navigationEllipseAriaLabel}
+      variant={IconButton.Variant.Square}
+      size={IconButton.Size.Small}
+      tabIndex={-1}
+      css={noPointerEvents}
+    >
+      ...
+    </IconButton>
+  );
+
   if (less) {
-    buttons.splice(1, 0, <Ellipse ariaLabel={ellipseAriaLabel} />);
-  }
-  if (more) {
-    buttons.splice(buttons.length - 1, 0, <Ellipse ariaLabel={ellipseAriaLabel} />);
+    buttons.splice(1, 0, ellipse);
+  } else if (more) {
+    buttons.splice(buttons.length - 1, 0, ellipse);
   }
 
   return <React.Fragment>{buttons}</React.Fragment>;

@@ -74,8 +74,7 @@ const Pagination: React.FC<PaginationProps> = props => {
     ? customLabel(labelFrom, labelTo, labelItems, 'item')
     : `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
 
-  const wrapperRef = React.createRef<HTMLElement>();
-  const mobile = useIsMobile(wrapperRef);
+  const mobile = useIsMobile();
 
   const ariaLabels: PaginationAriaLabelsDefault = {
     ...defaultAriaLabels,
@@ -84,11 +83,7 @@ const Pagination: React.FC<PaginationProps> = props => {
 
   return (
     <>
-      <Container
-        ref={wrapperRef}
-        aria-label={ariaLabels.paginationContainerAriaLabel}
-        {...elemProps}
-      >
+      <Container aria-label={ariaLabels.paginationContainerAriaLabel} {...elemProps}>
         <ButtonsContainer>
           <IconButton
             disabled={currentPage - 1 <= 0}
