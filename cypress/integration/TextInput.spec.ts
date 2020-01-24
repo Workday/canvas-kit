@@ -27,6 +27,16 @@ describe('TextInput', () => {
           getTextInput().should('be.focused');
         });
       });
+
+      context('when text is entered', () => {
+        beforeEach(() => {
+          getTextInput().type('Test');
+        });
+
+        it('should reflect the text typed', () => {
+          getTextInput().should('have.value', 'Test');
+        });
+      });
     });
   });
 
