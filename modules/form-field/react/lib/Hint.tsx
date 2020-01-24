@@ -5,6 +5,8 @@ import {spacing, type} from '@workday/canvas-kit-react-core';
 
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
   error?: ErrorType;
+  errorLabel?: string;
+  alertLabel?: string;
 }
 
 const Label = styled('span')(type.body2, type.variant.label);
@@ -13,24 +15,27 @@ const Message = styled('p')(type.body2, {width: '100%', margin: `${spacing.xxs} 
 
 export default class Hint extends React.Component<HintProps> {
   static ErrorType = ErrorType;
-
+  static defaultProps = {
+    errorLabel: 'Error',
+    alertLabel: 'Alert',
+  };
   public render() {
-    const {children, error} = this.props;
+    const {children, error, errorLabel, alertLabel} = this.props;
 
-    let errorLabel: string | undefined;
+    let hintLabel: string | undefined;
     switch (error) {
       case Hint.ErrorType.Error:
-        errorLabel = 'Error';
+        hintLabel = errorLabel;
         break;
       case Hint.ErrorType.Alert:
-        errorLabel = 'Alert';
+        hintLabel = alertLabel;
         break;
       default:
     }
 
     return (
       <Message {...this.props}>
-        {typeof error !== 'undefined' && <Label>{errorLabel && `${errorLabel}: `}</Label>}
+        {typeof error !== 'undefined' && <Label>{hintLabel && `${hintLabel}: `}</Label>}
         {children}
       </Message>
     );

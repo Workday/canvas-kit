@@ -20,6 +20,8 @@ export interface FormFieldProps
   required?: boolean;
   useFieldset: boolean;
   children: React.ReactNode;
+  errorLabel?: string;
+  alertLabel?: string;
 }
 
 export interface FormFieldErrorBehavior {
@@ -85,6 +87,8 @@ export default class FormField extends React.Component<FormFieldProps> {
   static defaultProps = {
     labelPosition: FormField.LabelPosition.Top,
     useFieldset: false,
+    alertLabel: 'Alert',
+    errorLabel: 'Error',
   };
 
   private inputId: string = this.props.inputId || uuid();
@@ -127,6 +131,8 @@ export default class FormField extends React.Component<FormFieldProps> {
       hintText,
       hintId,
       inputId,
+      errorLabel,
+      alertLabel,
       grow,
       children,
       useFieldset,
@@ -155,7 +161,7 @@ export default class FormField extends React.Component<FormFieldProps> {
         <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
           {React.Children.map(children, this.renderChildren)}
           {hintText && (
-            <Hint error={error} id={hintId}>
+            <Hint errorLabel={errorLabel} alertLabel={alertLabel} error={error} id={hintId}>
               {hintText}
             </Hint>
           )}
