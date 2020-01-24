@@ -7,22 +7,34 @@ import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
 import {ModalWidth} from './Modal';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The padding of the Modal. Accepts `zero`, `s`, or `l`.
+   * @default PopupPadding.l
+   */
   padding: PopupPadding;
+  /**
+   * The width of the Modal. Accepts `s` or `l`.
+   * @default ModalWidth.s
+   */
   width: ModalWidth;
   /**
-   * Optional callback for the Modal handling closing. If this callback is provided the Modal will have
+   * The function called when the Modal is closed.
+   * If this callback is provided, the Modal will have
    * an 'X' icon in the top-right corner. Without this callback, there is no 'X' icon and the Escape
    * key handling and clicking on the overlay will not do anything.
    */
   handleClose?: () => void;
   /**
+   * If true, set the Modal to close when the escape key is pressed (only recommended for simple applications).
    * Accessibility specifications state modals should be closed when the escape key is pressed.
    * However, we cannot guarantee that it is safe to simply bind an event listener and close in all
    * cases. Some applications may use a Popup manager to make sure the correct popup is receiving
    * the close command. If your application uses custom popup stacking, do not set this to true.
-   * Set this to true for simple applications and the modal will close when the escape key is pressed.
    */
   closeOnEscape: boolean;
+  /**
+   * The heading of the Modal.
+   */
   heading: React.ReactNode;
   /**
    * Optional override of the auto-select functionality of the Modal. If this ref is defined, that element

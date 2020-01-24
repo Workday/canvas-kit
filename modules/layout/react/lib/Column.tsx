@@ -4,19 +4,20 @@ import isPropValid from '@emotion/is-prop-valid';
 
 export interface ColumnProps {
   /**
-   * Column cannot be empty.
+   * The children of the Column (cannot be empty).
    */
   children?: React.ReactNode;
   /**
-   * Spacing of columns.
+   * The left and right padding of the Column (inherits from Layout prop).
+   * @default 12
    */
   spacing?: number;
   /**
-   * Widths of columns.
+   * The size of the 12-column grid.
    */
   columns?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   /**
-   * Fixed width of columns
+   * The width of the columns. This will take precedence over `columns`.
    */
   width?: number | string;
 }

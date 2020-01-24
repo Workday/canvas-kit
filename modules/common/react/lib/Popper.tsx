@@ -6,12 +6,36 @@ export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.PopperOptions;
 
 export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The reference element used to position the Popper.
+   */
   anchorElement: Element | null;
+  /**
+   * The children of the Popper (to be used as its content).
+   */
   children: React.ReactNode;
+  /**
+   * The element that contains the portal children when `portal` is true.
+   */
   containerElement?: Element;
+  /**
+   * If true, set the Popper to the open state.
+   * @default true
+   */
   open: boolean;
+  /**
+   * The placement of the popper relative to the `anchorElement`. Accepts `auto`, `top`, `right`, `bottom`, or `left`. Each placement can also be modified using any of the following variations: `-start` or `-end`.
+   * @default bottom
+   */
   placement: Placement;
+  /**
+   * The additional options passed to the Popper's `popper.js` instance.
+   */
   popperOptions?: PopperOptions;
+  /**
+   * If true, attach the Popper to the `containerElement`. If false, render the Popper within the DOM hierarchy of its parent.
+   * @default true
+   */
   portal: boolean;
 }
 

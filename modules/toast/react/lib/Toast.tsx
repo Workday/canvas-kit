@@ -9,12 +9,36 @@ import {IconButtonSize} from '@workday/canvas-kit-react-button';
 import styled from '@emotion/styled';
 
 export interface ToastProps {
+  /**
+   * The icon of the Toast.
+   * @default checkIcon
+   */
   icon: CanvasSystemIcon;
+  /**
+   * The color of the Toast icon.
+   * @default colors.greenApple400
+   */
   iconColor: CanvasColor | string; // TODO: Fix
+  /**
+   * The text of the Toast message.
+   */
   children: string;
+  /**
+   * The function called when the Toast is closed.
+   */
   onClose?: () => void;
+  /**
+   * The function called when the Toast action is clicked.
+   */
   onActionClick?: () => void;
+  /**
+   * The text of the Toast action.
+   */
   actionText?: string;
+  /**
+   * The origin from which the Toast will animate.
+   * @default {horizontal: 'center', vertical: 'top'}
+   */
   transformOrigin?: TransformOrigin;
 }
 const toastWidth = 360;
