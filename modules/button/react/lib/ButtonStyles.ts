@@ -10,7 +10,7 @@ import {
   ButtonVariant,
   IconButtonVariant,
 } from './types';
-import {getButtonStateStyle} from './utils';
+import {getButtonStateStyle, getIconButtonStateStyle} from './utils';
 
 export const CANVAS_BUTTON_HEIGHT_LARGE: number = 40;
 export const CANVAS_BUTTON_HEIGHT_MEDIUM: number = 24;
@@ -328,28 +328,28 @@ export const iconButtonStyles: ButtonGenericStyle = {
         borderRadius: borderRadius.m,
         width: canvas.spacing.l,
         height: canvas.spacing.l,
-        ...getButtonStateStyle(IconButtonVariant.Square),
+        ...getIconButtonStateStyle(IconButtonVariant.Square),
       },
       [IconButtonVariant.SquareFilled]: {
         borderRadius: borderRadius.m,
         width: canvas.spacing.l,
         height: canvas.spacing.l,
-        ...getButtonStateStyle(IconButtonVariant.SquareFilled),
+        ...getIconButtonStateStyle(IconButtonVariant.SquareFilled),
       },
       [IconButtonVariant.Plain]: {
-        ...getButtonStateStyle(IconButtonVariant.Plain),
+        ...getIconButtonStateStyle(IconButtonVariant.Plain),
       },
       [IconButtonVariant.Circle]: {
-        ...getButtonStateStyle(IconButtonVariant.Circle),
+        ...getIconButtonStateStyle(IconButtonVariant.Circle),
       },
       [IconButtonVariant.CircleFilled]: {
-        ...getButtonStateStyle(IconButtonVariant.CircleFilled),
+        ...getIconButtonStateStyle(IconButtonVariant.CircleFilled),
       },
       [IconButtonVariant.Inverse]: {
-        ...getButtonStateStyle(IconButtonVariant.Inverse),
+        ...getIconButtonStateStyle(IconButtonVariant.Inverse),
       },
       [IconButtonVariant.InverseFilled]: {
-        ...getButtonStateStyle(IconButtonVariant.InverseFilled),
+        ...getIconButtonStateStyle(IconButtonVariant.InverseFilled),
       },
     },
   },

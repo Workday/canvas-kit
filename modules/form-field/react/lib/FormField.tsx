@@ -50,6 +50,16 @@ export interface FormFieldProps
    * The input component wrapped by the FormField.
    */
   children: React.ReactNode;
+  /**
+   * The label for the error message hint text if `hintText` and `error` are defined. This prop should only be used for translating the default string 'Error'.
+   * @default 'Error'
+   */
+  errorLabel?: string;
+  /**
+   * The label for the alert message hint text if `hintText` and `error` are defined. This prop should only be used for translating the default string 'Alert'.
+   * @default 'Alert'
+   */
+  alertLabel?: string;
 }
 
 export interface FormFieldErrorBehavior {
@@ -115,6 +125,8 @@ export default class FormField extends React.Component<FormFieldProps> {
   static defaultProps = {
     labelPosition: FormField.LabelPosition.Top,
     useFieldset: false,
+    alertLabel: 'Alert',
+    errorLabel: 'Error',
   };
 
   private inputId: string = this.props.inputId || uuid();
@@ -157,6 +169,8 @@ export default class FormField extends React.Component<FormFieldProps> {
       hintText,
       hintId,
       inputId,
+      errorLabel,
+      alertLabel,
       grow,
       children,
       useFieldset,
@@ -185,7 +199,7 @@ export default class FormField extends React.Component<FormFieldProps> {
         <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
           {React.Children.map(children, this.renderChildren)}
           {hintText && (
-            <Hint error={error} id={hintId}>
+            <Hint errorLabel={errorLabel} alertLabel={alertLabel} error={error} id={hintId}>
               {hintText}
             </Hint>
           )}
