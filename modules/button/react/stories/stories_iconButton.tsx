@@ -352,7 +352,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button/Visual', module)
   .addParameters({component: IconButton})
   .addDecorator(withReadme(README))
   .add('States', () => (
-    <>
+    <React.Fragment>
       {[false, true].map(toggled => (
         <div>
           <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
@@ -410,7 +410,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button/Visual', module)
           </StaticStates>
         </div>
       ))}
-    </>
+    </React.Fragment>
   ));
 
 storiesOf('Components|Buttons/Button/React/Icon Button Toggle Group', module)
