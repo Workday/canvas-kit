@@ -1,10 +1,8 @@
 import * as React from 'react';
-import {render, fireEvent, getByTestId} from '@testing-library/react';
+import {render, fireEvent} from '@testing-library/react';
 import TextInput from '../lib/TextInput';
-import FormField from '@workday/canvas-kit-react-form-field';
 
 const id = 'Test Text Input';
-const label = 'Test Text Input';
 const placeholder = 'Test Text Input';
 const value = 'Test Text Input';
 
@@ -15,49 +13,45 @@ describe('Text Input', () => {
   });
 
   describe('when rendered', () => {
-    describe('with an placeholder', () => {
-      it('should render a text input with placeholder', () => {
-        const {getByPlaceholderText} = render(
-          <TextInput onChange={cb} data-testid={id} placeholder={placeholder} />
-        );
-        const container = document.body;
-        expect(getByTestId(container, id)).toHaveAttribute('placeholder', placeholder);
-      });
+    it('should render an input with type=text', () => {
+      const {getByRole} = render(<TextInput onChange={cb} />);
+      expect(getByRole('textbox')).toHaveProperty('type', 'text');
     });
+  });
 
-    describe('with a id', () => {
-      it('should render a text input with a id', () => {
-        const {getByPlaceholderText} = render(
-          <TextInput id={id} onChange={cb} value={value} placeholder={placeholder} />
-        );
-        expect(getByPlaceholderText(placeholder)).toHaveAttribute('id', id);
-      });
+  describe('when rendered with an placeholder', () => {
+    it('should render a text input with placeholder', () => {
+      const {getByRole} = render(<TextInput onChange={cb} placeholder={placeholder} />);
+      expect(getByRole('textbox')).toHaveAttribute('placeholder', placeholder);
     });
+  });
 
-    describe('with a value', () => {
-      it('should render a text input with a value', () => {
-        const {getByDisplayValue} = render(<TextInput onChange={cb} value={value} />);
-        expect(getByDisplayValue(value)).toBeDefined();
-      });
+  describe('when rendered with an id', () => {
+    it('should render a text input with a id', () => {
+      const {getByRole} = render(<TextInput id={id} onChange={cb} />);
+      expect(getByRole('textbox')).toHaveAttribute('id', id);
     });
+  });
 
-    describe('with disabled attribute', () => {
-      it('should render a disabled text input', () => {
-        const {getByDisplayValue} = render(
-          <TextInput onChange={cb} disabled={true} value={value} />
-        );
-        expect(getByDisplayValue(value)).toBeDisabled();
-      });
+  describe('when rendered with a value', () => {
+    it('should render a text input with a value', () => {
+      const {getByDisplayValue} = render(<TextInput onChange={cb} value={value} />);
+      expect(getByDisplayValue(value)).toBeDefined();
     });
+  });
 
-    describe('with extra, arbitrary props', () => {
-      it('should spread extra props onto the text input', () => {
-        const attr = 'test';
-        const {getByPlaceholderText} = render(
-          <TextInput onChange={cb} data-propspread={attr} placeholder={placeholder} />
-        );
-        expect(getByPlaceholderText(placeholder)).toHaveAttribute('data-propspread', attr);
-      });
+  describe('when rendered with disabled attribute', () => {
+    it('should render a disabled text input', () => {
+      const {getByRole} = render(<TextInput onChange={cb} disabled={true} />);
+      expect(getByRole('textbox')).toBeDisabled();
+    });
+  });
+
+  describe('when rendered with extra, arbitrary props', () => {
+    it('should spread extra props onto the text input', () => {
+      const attr = 'test';
+      const {getByRole} = render(<TextInput onChange={cb} data-propspread={attr} />);
+      expect(getByRole('textbox')).toHaveAttribute('data-propspread', attr);
     });
   });
 
@@ -67,6 +61,14 @@ describe('Text Input', () => {
       render(<TextInput inputRef={ref} id={id} />);
       expect(ref.current).not.toBeNull();
       expect(ref.current).toHaveAttribute('id', id);
+    });
+  });
+
+  describe('when typed into', () => {
+    it('should call a callback function', () => {
+      const {getByRole} = render(<TextInput onChange={cb} />);
+      fireEvent.change(getByRole('textbox'), {target: {value: 'Test'}});
+      expect(cb).toHaveBeenCalledTimes(1);
     });
   });
 });
