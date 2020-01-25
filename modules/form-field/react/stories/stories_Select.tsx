@@ -3,8 +3,8 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import styled from '@emotion/styled';
-import {controlComponent} from '../../../../utils/storybook';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {controlComponent, ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 
 import FormField from '..';
 import README from '../../../select/react/README.md';
@@ -230,50 +230,42 @@ storiesOf('Components|Inputs/Select/React/Visual Testing', module)
   .addDecorator(withReadme(README))
   .add('States', () => (
     <StaticStates>
-      <Table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>No state</th>
-            <th>Hover</th>
-            <th>Focused</th>
-            <th>Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          {[false, true].map(disabled => {
-            return ['Plain', 'Alert', 'Error'].map(variant => {
-              const type =
-                variant === 'Alert'
-                  ? FormField.ErrorType.Alert
-                  : variant === 'Error'
-                  ? FormField.ErrorType.Error
-                  : undefined;
-
-              const key = `${disabled ? 'disabled' : 'enabled'}-${variant}`;
-
-              return (
-                <tr key={key}>
-                  <td>{`${disabled ? 'Disabled ' : ''}${variant}`}</td>
-
-                  {['', 'hover', 'focus', 'active'].map(className => (
-                    <td key={`${key}-${className}`}>
-                      <Select
-                        disabled={disabled}
-                        error={type}
-                        className={className}
-                        onChange={() => {}} // eslint-disable-line no-empty-function
-                      >
-                        <SelectOption value="email" label="E-mail" />
-                        <SelectOption value="phone" label="Phone" />
-                      </Select>
-                    </td>
-                  ))}
-                </tr>
-              );
-            });
-          })}
-        </tbody>
-      </Table>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Default'},
+          {label: 'Alert', props: {error: Select.ErrorType.Alert}},
+          {label: 'Error', props: {error: Select.ErrorType.Error}},
+        ]}
+        columnProps={permutateProps(
+          {
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+            ],
+            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          },
+          props => {
+            if (props.disabled && !['', 'hover'].includes(props.className)) {
+              return false;
+            }
+            return true;
+          }
+        )}
+      >
+        {props => (
+          <Select
+            {...props}
+            style={{minWidth: 60, width: 100}}
+            onChange={() => {}} // eslint-disable-line no-empty-function
+          >
+            <SelectOption value="email" label="E-mail" />
+            <SelectOption value="phone" label="Phone" />
+          </Select>
+        )}
+      </ComponentStatesTable>
     </StaticStates>
   ));
