@@ -67,6 +67,7 @@ const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     position: 'relative',
+    overflow: 'hidden',
   },
   ({variant, themeColor}) => ({
     // Only the variant Full has a large header, all the other one (Dub, Global) have a small header height
@@ -82,7 +83,7 @@ const BrandSlot = styled('div')(
     height: '100%',
   },
   (props: {grow?: boolean}) => ({
-    flexGrow: props.grow ? 1 : 'unset',
+    flex: props.grow ? `1 0 auto` : 'unset',
   })
 );
 
@@ -104,7 +105,7 @@ const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
   return css({
     nav: {
       display: 'flex',
-      flexGrow: 1,
+      flex: `1 0 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
       justifyContent: 'center',
       height: 'inherit',
       marginLeft: spacing.xl,
@@ -201,7 +202,7 @@ const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor
     '> *:last-child': {
       marginRight: isCollapsed ? '' : 0,
     },
-    flexGrow: !isCollapsed && centeredNav ? 1 : 'unset',
+    flex: !isCollapsed && centeredNav ? `1 0 auto` : 'unset',
   }),
   navStyle
 );

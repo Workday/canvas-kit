@@ -110,10 +110,9 @@ const SearchForm = styled('form')<
 >(
   {
     position: 'relative',
-    flexGrow: 1,
+    flex: `1 0 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
     display: 'flex',
     alignItems: 'center',
-    width: '100%',
     marginLeft: spacing.m,
   },
   ({isCollapsed, showForm, rightAlign, grow}) => {
