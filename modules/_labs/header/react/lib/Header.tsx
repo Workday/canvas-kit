@@ -180,7 +180,7 @@ const navStyle = ({themeColor, leftSlot}: Pick<HeaderProps, 'themeColor' | 'left
 };
 
 const ChildrenSlot = styled('div')<
-  Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed' | 'leftslot'>
+  Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed' | 'leftSlot'>
 >(
   {
     marginRight: spacing.m,
