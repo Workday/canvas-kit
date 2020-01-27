@@ -103,17 +103,19 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
 
 const formCollapsedBackground = colors.frenchVanilla100;
 
-const maxWidth = '480px';
+const maxWidth = 480;
+const minWidth = 120;
 
 const SearchForm = styled('form')<
   Pick<SearchBarProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchBarState, 'showForm'>
 >(
   {
     position: 'relative',
-    flex: `1 0 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
+    flex: `1 1 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
     display: 'flex',
     alignItems: 'center',
     marginLeft: spacing.m,
+    minWidth: minWidth,
   },
   ({isCollapsed, showForm, rightAlign, grow}) => {
     const collapseStyles: CSSObject = isCollapsed
@@ -230,7 +232,7 @@ const SearchInput = styled(TextInput)<
       }
     : {
         maxWidth: grow ? '100%' : maxWidth,
-        minWidth: '120px',
+        minWidth: minWidth,
         paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
         paddingRight: spacing.xl,
         backgroundColor: inputColors.background,
