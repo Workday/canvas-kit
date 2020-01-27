@@ -98,7 +98,7 @@ const BrandLink = styled('a')({
   },
 });
 
-const navStyle = ({themeColor, leftSlot}: Pick<HeaderProps, 'themeColor' | 'leftSlot'>) => {
+const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
   const theme = themes[themeColor];
 
   return css({
@@ -107,7 +107,7 @@ const navStyle = ({themeColor, leftSlot}: Pick<HeaderProps, 'themeColor' | 'left
       flex: `1 0 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
       justifyContent: 'center',
       height: 'inherit',
-      marginLeft: leftSlot ? spacing.xl : 0,
+      marginLeft: spacing.xl,
 
       '& ul': {
         color: theme.linkColor,
@@ -179,9 +179,7 @@ const navStyle = ({themeColor, leftSlot}: Pick<HeaderProps, 'themeColor' | 'left
   });
 };
 
-const ChildrenSlot = styled('div')<
-  Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed' | 'leftSlot'>
->(
+const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed'>>(
   {
     marginRight: spacing.m,
     // TODO: remove this when we get real icon buttons
@@ -391,7 +389,6 @@ export default class Header extends React.Component<HeaderProps, {}> {
           themeColor={themeColor}
           centeredNav={shouldCenteredNav}
           isCollapsed={isCollapsed}
-          leftSlot={leftSlot}
         >
           {isCollapsed ? (
             // Screen size is smaller than our largest breakpoint so turn nav into a hamburger
