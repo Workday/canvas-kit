@@ -67,7 +67,6 @@ const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     position: 'relative',
-    overflow: 'hidden',
   },
   ({variant, themeColor}) => ({
     // Only the variant Full has a large header, all the other one (Dub, Global) have a small header height
@@ -99,7 +98,7 @@ const BrandLink = styled('a')({
   },
 });
 
-const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
+const navStyle = ({themeColor, leftSlot}: Pick<HeaderProps, 'themeColor' | 'leftSlot'>) => {
   const theme = themes[themeColor];
 
   return css({
@@ -108,7 +107,7 @@ const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
       flex: `1 0 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
       justifyContent: 'center',
       height: 'inherit',
-      marginLeft: spacing.xl,
+      marginLeft: leftSlot ? spacing.xl : 0,
 
       '& ul': {
         color: theme.linkColor,
@@ -180,7 +179,9 @@ const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
   });
 };
 
-const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed'>>(
+const ChildrenSlot = styled('div')<
+  Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed' | 'leftslot'>
+>(
   {
     marginRight: spacing.m,
     // TODO: remove this when we get real icon buttons
@@ -390,6 +391,7 @@ export default class Header extends React.Component<HeaderProps, {}> {
           themeColor={themeColor}
           centeredNav={shouldCenteredNav}
           isCollapsed={isCollapsed}
+          leftSlot={leftSlot}
         >
           {isCollapsed ? (
             // Screen size is smaller than our largest breakpoint so turn nav into a hamburger
