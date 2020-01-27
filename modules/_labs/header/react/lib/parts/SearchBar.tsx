@@ -105,6 +105,7 @@ const formCollapsedBackground = colors.frenchVanilla100;
 
 const maxWidth = 480;
 const minWidth = 120;
+const height = 44;
 
 const SearchForm = styled('form')<
   Pick<SearchBarProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchBarState, 'showForm'>
@@ -148,7 +149,8 @@ const SearchContainer = styled('div')({
   position: `relative`,
   width: `100%`,
   textAlign: 'left',
-  minHeight: spacingNumbers.xl + spacingNumbers.xxxs,
+  minHeight: height,
+  height: height, // Needed to keep IE11 vertically centered
 });
 
 const SearchCombobox = styled(Combobox)({
@@ -208,6 +210,7 @@ const SearchField = styled(FormField)<
   return {
     display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
     width: '100%',
+    height: height,
     maxWidth: isCollapsed || grow ? '100%' : maxWidth,
     marginBottom: spacingNumbers.zero,
     '> div': {
@@ -245,7 +248,7 @@ const SearchInput = styled(TextInput)<
     WebkitAppearance: 'none',
     transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
     zIndex: 2,
-    height: 44,
+    height: height,
     paddingTop: spacing.xs,
     paddingBottom: spacing.xs,
     width: '100%',
