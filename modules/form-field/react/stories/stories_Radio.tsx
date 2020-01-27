@@ -2,7 +2,12 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {ControlledComponentWrapper, StaticStatesTable} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
+import {
+  ControlledComponentWrapper,
+  ComponentStatesTable,
+  permutateProps,
+} from '../../../../utils/storybook';
 
 import {Radio, RadioGroup} from '../../../radio/react';
 import FormField from '../index';
@@ -158,21 +163,91 @@ storiesOf('Components|Inputs/Radio/React/Visual', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('States', () => (
-    <StaticStatesTable
-      componentProps={{
-        checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
-      }}
-      shouldRenderRow={props => {
-        return true;
-      }}
-      renderComponent={(props, disabled, className) => (
-        <Radio
-          checked={props.checked}
-          disabled={disabled}
-          className={className}
-          onChange={() => {}} // eslint-disable-line no-empty-function
-          label="Radio"
-        />
-      )}
-    />
+    <div>
+      <h3>Radio</h3>
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={permutateProps({
+            checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
+          })}
+          columnProps={permutateProps(
+            {
+              className: [
+                {label: 'Default', value: ''},
+                {label: 'Hover', value: 'hover'},
+                {label: 'Focus', value: 'focus'},
+                {label: 'Focus Hover', value: 'focus hover'},
+                {label: 'Active', value: 'active'},
+                {label: 'Active Hover', value: 'active hover'},
+              ],
+              disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+            },
+            props => {
+              if (props.disabled && !['', 'hover'].includes(props.className)) {
+                return false;
+              }
+              return true;
+            }
+          )}
+        >
+          {props => (
+            <Radio
+              {...props}
+              onChange={() => {}} // eslint-disable-line no-empty-function
+              label="Checkbox"
+            />
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
+      <h3>Radio Group</h3>
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={permutateProps(
+            {
+              error: [
+                {value: undefined, label: 'No Error'},
+                {value: FormField.ErrorType.Alert, label: 'Alert'},
+                {value: FormField.ErrorType.Error, label: 'Error'},
+              ],
+            },
+            props => {
+              if (props.indeterminate && !props.checked) {
+                return false;
+              }
+              return true;
+            }
+          )}
+          columnProps={permutateProps(
+            {
+              errorState: [{label: 'Default', value: ''}],
+            },
+            props => {
+              if (props.disabled && !['', 'hover'].includes(props.className)) {
+                return false;
+              }
+              return true;
+            }
+          )}
+        >
+          {props => (
+            <FormField
+              useFieldset={true}
+              hintText={hintText}
+              hintId={hintId}
+              labelPosition={FormField.LabelPosition.Left}
+              {...props}
+            >
+              <ControlledComponentWrapper>
+                <RadioGroup name="contact">
+                  <Radio id="1" value="email" label="E-mail" />
+                  <Radio id="2" value="phone" label="Phone" />
+                  <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
+                  <Radio id="4" value="mail" label="Mail" />
+                </RadioGroup>
+              </ControlledComponentWrapper>
+            </FormField>
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
+    </div>
   ));
