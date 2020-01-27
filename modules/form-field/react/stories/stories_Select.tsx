@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import styled from '@emotion/styled';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {controlComponent, ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 
@@ -12,20 +11,6 @@ import {Select, SelectOption} from '../../../select/react';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
-
-const Table = styled('table')({
-  width: '100%',
-  thead: {
-    textAlign: 'left',
-    paddingBottom: 16,
-  },
-  'td, th': {
-    minWidth: 100,
-    paddingBottom: 16,
-    paddingRight: 16,
-    textAlign: 'left',
-  },
-});
 
 storiesOf('Components|Inputs/Select/React/Top Label', module)
   .addParameters({component: Select})
@@ -232,7 +217,7 @@ storiesOf('Components|Inputs/Select/React/Visual Testing', module)
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Default'},
+          {label: 'Default', props: {}},
           {label: 'Alert', props: {error: Select.ErrorType.Alert}},
           {label: 'Error', props: {error: Select.ErrorType.Error}},
         ]}
