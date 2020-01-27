@@ -32,8 +32,9 @@ const Lockup = styled('div')<WorkdayLogoTitleProps>(
     alignItems: 'center',
     justifyContent: 'center',
   },
-  ({variant}) => ({
+  ({variant, title}) => ({
     height: variant === HeaderVariant.Global ? HeaderHeight.Small : HeaderHeight.Large,
+    paddingRight: title ? 0 : spacing.xl,
   })
 );
 
