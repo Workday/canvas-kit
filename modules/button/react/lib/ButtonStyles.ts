@@ -312,7 +312,7 @@ export const iconButtonStyles: ButtonGenericStyle = {
   variants: {
     sizes: {
       [ButtonSize.Small]: {
-        minWidth: canvas.spacing.l,
+        minWidth: canvas.spacing.l, // min-width is set so buttons don't collapse in IE11
         width: 'auto',
         height: canvas.spacing.l,
         'span svg': {
@@ -321,6 +321,7 @@ export const iconButtonStyles: ButtonGenericStyle = {
         },
       },
       [ButtonSize.Medium]: {
+        minWidth: canvas.spacing.xl,
         width: canvas.spacing.xl,
         height: canvas.spacing.xl,
       },
@@ -328,12 +329,14 @@ export const iconButtonStyles: ButtonGenericStyle = {
     types: {
       [IconButtonVariant.Square]: {
         borderRadius: borderRadius.m,
+        minWidth: canvas.spacing.l,
         width: canvas.spacing.l,
         height: canvas.spacing.l,
         ...getIconButtonStateStyle(IconButtonVariant.Square),
       },
       [IconButtonVariant.SquareFilled]: {
         borderRadius: borderRadius.m,
+        minWidth: canvas.spacing.l,
         width: canvas.spacing.l,
         height: canvas.spacing.l,
         ...getIconButtonStateStyle(IconButtonVariant.SquareFilled),
