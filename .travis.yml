@@ -21,7 +21,7 @@ git:
 
 stages:
 - name: pull_request
-  if: type = pull_request
+  if: type = pull_request AND branch != release
 
 - name: master
   if: branch = master AND type != pull_request
