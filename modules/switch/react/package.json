@@ -38,16 +38,9 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@workday/canvas-kit-labs-react-core": "^3.3.0",
     "@workday/canvas-kit-react-common": "^3.3.0",
     "@workday/canvas-kit-react-core": "^3.2.0",
     "uuid": "^3.3.3"
-=======
-    "@emotion/core": "^10.0.21",
-    "@emotion/styled": "^10.0.17",
-    "@workday/canvas-kit-react-common": "^3.3.0",
-    "@workday/canvas-kit-react-core": "^3.2.0"
->>>>>>> chore: Release v3.3.0 (#425)
   }
 }

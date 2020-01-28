@@ -47,11 +47,4 @@
     "lodash": "^4.17.14",
     "rtl-css-js": "^1.13.1"
   },
-  "devDependencies": {
-<<<<<<< HEAD
-    "@workday/canvas-system-icons-web": "^1.0.20"
-=======
-    "@workday/canvas-kit-react-button": "^3.3.0"
->>>>>>> chore: Release v3.3.0 (#425)
-  }
 }
