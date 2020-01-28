@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.3.1 (2020-01-28)
+
+- test(switch): Redo switch tests in react-testing-library ([#386](https://github.com/Workday/canvas-kit/pull/386)) [@lychyi](https://github.com/lychyi)
+- fix(labs): Remove global type from useTheme hook ([#430](https://github.com/Workday/canvas-kit/pull/430)) [@lychyi](https://github.com/lychyi)
+- chore: Prevent build on travis release ([#431](https://github.com/Workday/canvas-kit/pull/431)) [@lychyi](https://github.com/lychyi)
+
 # 3.3.0 (2020-01-03)
 
 ### Infrastructure:
