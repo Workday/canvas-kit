@@ -36,8 +36,8 @@ storiesOf('Components|Inputs/Color Picker/Color Input/React/Top Label', module)
     </FormField>
   ))
   .add('Checked', () => (
-    <FormField label="Label" inputId="input-checked">
-      <ColorInput value={'#005cb9'} showCheck={true} />
+    <FormField label="Label" inputId="input-plain">
+      {controlComponent(<ColorInput showCheck />)}
     </FormField>
   ))
   .add('Disabled', () => (
@@ -95,7 +95,7 @@ storiesOf('Components|Inputs/Color Picker/Color Input/React/Left Label', module)
   ))
   .add('Checked', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="input-checked">
-      <ColorInput value={'#005cb9'} showCheck={true} />
+      <ColorInput value={'#005cb9'} showCheck />
     </FormField>
   ))
   .add('Disabled', () => (
