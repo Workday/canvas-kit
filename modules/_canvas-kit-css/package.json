@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "The parent module that contains all Workday Canvas Kit CSS components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,14 +16,14 @@
     "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_canvas-kit-css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-action-bar": "^3.2.0",
+    "@workday/canvas-kit-css-action-bar": "^3.3.0",
     "@workday/canvas-kit-css-banner": "^3.2.0",
-    "@workday/canvas-kit-css-button": "^3.2.0",
+    "@workday/canvas-kit-css-button": "^3.3.0",
     "@workday/canvas-kit-css-card": "^3.2.0",
     "@workday/canvas-kit-css-checkbox": "^3.2.0",
     "@workday/canvas-kit-css-common": "^3.2.0",
     "@workday/canvas-kit-css-core": "^3.2.0",
-    "@workday/canvas-kit-css-form-field": "^3.2.0",
+    "@workday/canvas-kit-css-form-field": "^3.3.0",
     "@workday/canvas-kit-css-icon": "^3.2.0",
     "@workday/canvas-kit-css-layout": "^3.2.0",
     "@workday/canvas-kit-css-loading-animation": "^3.2.0",
