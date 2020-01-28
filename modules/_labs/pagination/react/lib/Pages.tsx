@@ -27,7 +27,11 @@ const noPointerEvents = css({
   pointerEvents: 'none',
 });
 
-const activeStyling = css(noPointerEvents, {
+const noTransitions = css({
+  '&:not(:hover)': {transition: 'none !important'},
+});
+
+const activeStyling = css(noPointerEvents, noTransitions, {
   color: canvas.colors.frenchVanilla100,
 });
 
@@ -109,7 +113,7 @@ const PaginationButton: React.FC<PaginationButtonProps> = props => (
     size={IconButton.Size.Small}
     onClick={_ => props.onPageClick(props.page)}
     toggled={props.active}
-    css={props.active ? activeStyling : ''}
+    css={props.active ? activeStyling : noTransitions}
   >
     {props.page}
   </IconButton>
