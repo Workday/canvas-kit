@@ -27,17 +27,11 @@ describe('ColorInput', () => {
       });
     });
 
-    describe('with a value', () => {
-      test('should render a ColorInput with a value', () => {
-        const {getByRole} = render(<ColorInput value={value} />);
-        expect(getByRole('textbox').value).toBe(value);
-      });
-    });
-
     describe('with a value and check', () => {
       test('should render a ColorInput with a value and check', () => {
-        const {container} = render(<ColorInput value={value} showCheck={true} />);
+        const {container, getByRole} = render(<ColorInput value={value} showCheck={true} />);
 
+        expect(getByRole('textbox').value).toBe(value);
         expect(container.querySelector('svg')).toHaveClass('wd-icon-check-small');
       });
     });
