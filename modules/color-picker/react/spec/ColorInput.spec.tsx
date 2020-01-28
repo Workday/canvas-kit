@@ -15,24 +15,22 @@ describe('ColorInput', () => {
   describe('when rendered', () => {
     describe('with a placeholder', () => {
       test('should render a ColorInput with a placeholder', () => {
-        const {getByTestId} = render(
-          <ColorInput onChange={cb} placeholder={placeholder} data-testid={id} />
-        );
-        expect(getByTestId(id)).toHaveAttribute('placeholder', placeholder);
+        const {getByRole} = render(<ColorInput onChange={cb} placeholder={placeholder} />);
+        expect(getByRole('textbox')).toHaveAttribute('placeholder', placeholder);
       });
     });
 
     describe('with an id', () => {
       test('should render a ColorInput with an id', () => {
-        const {getByTestId} = render(<ColorInput id="my-id" data-testid={id} />);
-        expect(getByTestId(id)).toHaveAttribute('id', 'my-id');
+        const {getByRole} = render(<ColorInput id="my-id" />);
+        expect(getByRole('textbox')).toHaveAttribute('id', 'my-id');
       });
     });
 
     describe('with a value', () => {
       test('should render a ColorInput with a value', () => {
-        const {getByTestId} = render(<ColorInput value={value} data-testid={id} />);
-        expect(getByTestId(id).value).toBe(value);
+        const {getByRole} = render(<ColorInput value={value} />);
+        expect(getByRole('textbox').value).toBe(value);
       });
     });
 
@@ -56,16 +54,16 @@ describe('ColorInput', () => {
 
     describe('with disabled attribute', () => {
       test('should render a disabled ColorInput', () => {
-        const {getByTestId} = render(<ColorInput disabled={true} data-testid={id} />);
-        expect(getByTestId(id)).toBeDisabled();
+        const {getByRole} = render(<ColorInput disabled={true} />);
+        expect(getByRole('textbox')).toBeDisabled();
       });
     });
 
     describe('with extra, arbitrary props', () => {
       test('should spread extra props', () => {
         const attr = 'test';
-        const {getByTestId} = render(<ColorInput data-propspread={attr} data-testid={id} />);
-        expect(getByTestId(id)).toHaveAttribute('data-propspread', attr);
+        const {getByRole} = render(<ColorInput data-propspread={attr} />);
+        expect(getByRole('textbox')).toHaveAttribute('data-propspread', attr);
       });
     });
 
@@ -79,61 +77,61 @@ describe('ColorInput', () => {
 
     describe('when provided a value with a hash', () => {
       test('the hash is stripped from the value', () => {
-        const {getByTestId} = render(<ColorInput value={'#eee'} data-testid={id} />);
-        expect(getByTestId(id).value).toBe(value);
+        const {getByRole} = render(<ColorInput value={'#eee'} />);
+        expect(getByRole('textbox').value).toBe(value);
       });
     });
 
     describe('when provided more than 6 characters as the value', () => {
       test('the value is truncated to a length of 6', () => {
-        const {getByTestId} = render(<ColorInput value={'123456789'} data-testid={id} />);
-        expect(getByTestId(id).value).toBe('123456');
+        const {getByRole} = render(<ColorInput value={'123456789'} />);
+        expect(getByRole('textbox').value).toBe('123456');
       });
     });
   });
 
   describe('when changed', () => {
     test('should call onChange callback on value change', () => {
-      const {getByTestId} = render(<ColorInput onChange={cb} data-testid={id} />);
+      const {getByRole} = render(<ColorInput onChange={cb} />);
 
       const event = {
         target: {value: value},
       };
 
       expect(cb).toHaveBeenCalledTimes(0);
-      fireEvent.change(getByTestId(id), event);
+      fireEvent.change(getByRole('textbox'), event);
       expect(cb).toHaveBeenCalledTimes(1);
     });
 
     test('should strip value on change', () => {
-      const {getByTestId, rerender} = render(<ColorInput value="" data-testid={id} />);
+      const {getByRole, rerender} = render(<ColorInput value="" />);
 
-      expect(getByTestId(id).value).toBe('');
-      rerender(<ColorInput value="#eee" data-testid={id} />);
-      expect(getByTestId(id).value).toBe(value);
+      expect(getByRole('textbox').value).toBe('');
+      rerender(<ColorInput value="#eee" />);
+      expect(getByRole('textbox').value).toBe(value);
     });
 
     test('should call onValidColorChange prop onChange', () => {
-      const {getByTestId} = render(<ColorInput onValidColorChange={cb} data-testid={id} />);
+      const {getByRole} = render(<ColorInput onValidColorChange={cb} />);
 
       const event = {
         target: {value: value},
       };
 
       expect(cb).toHaveBeenCalledTimes(0);
-      fireEvent.change(getByTestId(id), event);
+      fireEvent.change(getByRole('textbox'), event);
       expect(cb).toHaveBeenCalledWith('#eeeeee');
     });
 
     test('should not call onValidColorChange prop onChange if hex code is not valid', () => {
-      const {getByTestId} = render(<ColorInput onValidColorChange={cb} data-testid={id} />);
+      const {getByRole} = render(<ColorInput onValidColorChange={cb} />);
 
       const event = {
         target: {value: 'e6ee'},
       };
 
       expect(cb).toHaveBeenCalledTimes(0);
-      fireEvent.change(getByTestId(id), event);
+      fireEvent.change(getByRole('textbox'), event);
       expect(cb).toHaveBeenCalledTimes(0);
     });
   });
