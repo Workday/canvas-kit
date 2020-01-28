@@ -30,4 +30,5 @@ module.exports = {
   clearMocks: true,
   reporters: ['default', ['jest-junit', {suiteName: 'Canvas Kit tests'}]],
   testURL: 'http://localhost',
+  setupFiles: ['core-js'],
 };
