@@ -2,12 +2,11 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {controlComponent} from '../../../../utils/storybook';
+import {controlComponent, customThemePallete} from '../../../../utils/storybook';
 
 import {TextInput} from '../../../text-input/react/index';
 import FormField from '../index';
 import README from '../../../text-input/react/README.md';
-import {colors} from '@workday/canvas-kit-react-core';
 import {object} from '@storybook/addon-knobs';
 import styled from '@emotion/styled';
 import {createCanvasTheme, CanvasProvider} from '@workday/canvas-kit-labs-react-core';
@@ -19,25 +18,6 @@ const hintId = 'error-desc-id';
 const InputContainer = styled('div')({
   padding: 8,
 });
-const customTheme = {
-  palette: {
-    common: {
-      focusOutline: '#269AE4',
-    },
-    alert: {
-      main: '#DE4BB0',
-      darkest: '#DE4BB0b',
-    },
-    neutral: {
-      main: '#269AE4',
-      dark: '#269AE4',
-    },
-    error: {
-      main: '#CD201D',
-      darkest: '#CD201D',
-    },
-  },
-};
 
 storiesOf('Components|Inputs/Text Input/React/Top Label', module)
   .addParameters({component: TextInput})
@@ -186,7 +166,7 @@ storiesOf('Components|Inputs/Text Input/React/Visual', module)
   .addDecorator(withReadme(README))
   .add('Theming', () => (
     <div>
-      <CanvasProvider theme={createCanvasTheme(object('Custom Theme', customTheme))}>
+      <CanvasProvider theme={createCanvasTheme(object('Custom Theme', customThemePallete))}>
         <InputContainer>
           <TextInput error={ErrorType.Alert} placeholder="Custom Alert" />
         </InputContainer>
