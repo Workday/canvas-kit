@@ -31,6 +31,7 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 - [Documentation](#documentation)
   - [Readmes](#readmes)
   - [Storybook Structure](#storybook-structure)
+  - [Prop Descriptions](#prop-descriptions)
 
 ## Canvas
 
@@ -310,3 +311,93 @@ export * from './lib/AnotherComponent';
 - Avoid helper functions to reduce duplication that make it harder to parse.
 - Avoid sharing wrappers, components, etc. from other story files.
 - Essentially, try to keep each example as standalone and referencable as possible.
+
+#### Prop Descriptions
+
+We use [JSDoc](https://devdocs.io/jsdoc/) standards for our prop type definitions.
+
+The base pattern for prop descriptions is: `The <property> of the <component>.` For example:
+
+```
+/**
+  * The value of the Checkbox.
+  */
+value?: string;
+```
+
+Be as specific as possible. For example, suppose there is a `label` prop for `Checkbox` which specifies the text of the label. Rather than describe `label` as `The label of the Checkbox`, the following is preferable:
+
+```
+/**
+  * The text of the Checkbox label.
+  */
+label?: string;
+```
+
+Feel free to provide additional detail in the description:
+
+```
+/**
+  * The value of the Slider. Goes to 11.
+  */
+value: number;
+```
+
+Be sure to specify a proper `@default` for enum props. Listing the named values which are accepted by the enum prop is encouraged:
+
+```
+/**
+  * The side from which the SidePanel opens. Accepts `Left` or `Right`.
+  * @default SidePanelOpenDirection.Left
+  */
+openDirection?: SidePanelOpenDirection;
+```
+
+Use a modified pattern for function props: `The function called when <something happens>.` For example:
+
+```
+/**
+  * The function called when the Checkbox state changes.
+  */
+onChange?: (e: React.SyntheticEvent) => void;
+```
+
+The pattern for booleans is also different: `If true, <do something>.` For standard 2-state booleans, set `@default false` in the description. For example:
+
+```
+/**
+  * If true, set the Checkbox to the disabled state.
+  * @default false
+  */
+disabled?: boolean;
+```
+
+Provide additional detail for 2-state booleans where the `false` outcome cannot be inferred:
+
+```
+/**
+  * If true, center the Header navigation. If false, right-align the Header navigation.
+  * @default false
+  */
+centeredNav?: boolean;
+```
+
+For 3-state booleans, you will need to describe all 3 cases: `If true <do something>. If false <do something else>. If undefined <do yet another thing>.`
+
+We also recommend the following pattern for errors:
+
+```
+/**
+  * The type of error associated with the Checkbox (if applicable).
+  */
+error?: ErrorType;
+```
+
+Occasionally, you may encounter props which don't play nicely with the suggested guidelines. Rather than following the patterns to the letter, adjust them to provide a better description if necessary. For example, rather than ambiguously describing `id` as `The id of the Checkbox`, provide a more explicit description:
+
+```
+/**
+  * The HTML `id` of the underlying checkbox input element.
+  */
+id?: string;
+```

@@ -3,6 +3,8 @@
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
+import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 import withReadme from 'storybook-readme/with-readme';
 
 import {
@@ -23,11 +25,10 @@ import {
 import README from '../README.md';
 import {IconButtonProps} from '../lib/IconButton';
 
-const blueBackground: CSSObject = {
+const iconButtonLayout: CSSObject = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#0875e1',
   margin: '0 10px',
   padding: '24px',
   maxWidth: 'max-content',
@@ -35,6 +36,11 @@ const blueBackground: CSSObject = {
   button: {
     margin: '0 12px',
   },
+};
+
+const blueBackground: CSSObject = {
+  ...iconButtonLayout,
+  backgroundColor: '#0875e1',
 };
 
 const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
@@ -340,6 +346,71 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
         <ToggleIconButtonWrapper variant={IconButton.Variant.InverseFilled} />
       </div>
     </div>
+  ));
+
+storiesOf('Components|Buttons/Button/React/Icon Button/Visual', module)
+  .addParameters({component: IconButton})
+  .addDecorator(withReadme(README))
+  .add('States', () => (
+    <React.Fragment>
+      {[false, true].map(toggled => (
+        <div>
+          <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
+          <StaticStates>
+            <ComponentStatesTable
+              rowProps={permutateProps({
+                variant: [
+                  {value: IconButton.Variant.Inverse, label: 'Inverse'},
+                  {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+                  {value: IconButton.Variant.Plain, label: 'Plain'},
+                  {value: IconButton.Variant.Circle, label: 'Circle'},
+                  {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+                  {value: IconButton.Variant.Square, label: 'Square'},
+                  {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+                ],
+              })}
+              columnProps={permutateProps(
+                {
+                  className: [
+                    {label: 'Default', value: ''},
+                    {label: 'Hover', value: 'hover'},
+                    {label: 'Focus', value: 'focus'},
+                    {label: 'Focus Hover', value: 'focus hover'},
+                    {label: 'Active', value: 'active'},
+                    {label: 'Active Hover', value: 'active hover'},
+                  ],
+                  disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+                },
+                props => {
+                  if (props.disabled && !['', 'hover'].includes(props.className)) {
+                    return false;
+                  }
+                  return true;
+                }
+              )}
+            >
+              {props => (
+                <div
+                  css={
+                    props.variant === 'inverse' || props.variant === 'inverseFilled'
+                      ? blueBackground
+                      : iconButtonLayout
+                  }
+                >
+                  <IconButton
+                    toggled={toggled}
+                    icon={activityStreamIcon}
+                    aria-label="Activity Stream"
+                    {...props}
+                    onChange={() => {}} // eslint-disable-line no-empty-function
+                  />
+                </div>
+              )}
+            </ComponentStatesTable>
+          </StaticStates>
+        </div>
+      ))}
+    </React.Fragment>
   ));
 
 storiesOf('Components|Buttons/Button/React/Icon Button Toggle Group', module)

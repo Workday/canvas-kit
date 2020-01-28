@@ -16,14 +16,46 @@ export enum PopupPadding {
 }
 
 export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The padding of the Popup. Accepts `zero`, `s`, or `l`.
+   * @default PopupPadding.l
+   */
   padding: PopupPadding;
+  /**
+   * The origin from which the Popup will animate.
+   * @default {horizontal: 'center', vertical: 'top'}
+   */
   transformOrigin: TransformOrigin;
+  /**
+   * The size of the Popup close button. Accepts `Small` or `Medium`.
+   * @default IconButtonSize.Medium
+   */
   closeIconSize: IconButtonSize;
+  /**
+   * The ref to the underlying popup container element. Use this to check click targets against when closing the Popup.
+   */
   popupRef?: React.Ref<HTMLDivElement>;
+  /**
+   * The function called when the Popup is closed.
+   */
   handleClose?: () => void;
+  /**
+   * The width of the Popup.
+   */
   width?: number | string;
+  /**
+   * The heading of the Popup.
+   */
   heading?: React.ReactNode;
+  /**
+   * The depth of the Popup. Imported from `@workday/canvas-kit-react-core`.
+   * @default depth[2]
+   */
   depth?: CanvasDepthValue;
+  /**
+   * The `aria-label` for the Popup close button.
+   * @default Close
+   */
   closeLabel: string;
 }
 
