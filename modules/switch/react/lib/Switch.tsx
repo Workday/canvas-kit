@@ -147,6 +147,8 @@ const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({checked}) => 
 }));
 
 export default class Switch extends React.Component<SwitchProps> {
+  static ErrorType = ErrorType;
+
   public static defaultProps = {
     checked: false,
   };

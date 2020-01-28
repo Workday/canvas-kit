@@ -103,18 +103,20 @@ function getInputColors(theme: SearchThemeAttributes, isFocused?: boolean) {
 
 const formCollapsedBackground = colors.frenchVanilla100;
 
-const maxWidth = '480px';
+const maxWidth = 480;
+const minWidth = 120;
+const height = 44;
 
 const SearchForm = styled('form')<
   Pick<SearchBarProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchBarState, 'showForm'>
 >(
   {
     position: 'relative',
-    flexGrow: 1,
+    flex: `1 1 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
     display: 'flex',
     alignItems: 'center',
-    width: '100%',
     marginLeft: spacing.m,
+    minWidth: minWidth,
   },
   ({isCollapsed, showForm, rightAlign, grow}) => {
     const collapseStyles: CSSObject = isCollapsed
@@ -147,7 +149,8 @@ const SearchContainer = styled('div')({
   position: `relative`,
   width: `100%`,
   textAlign: 'left',
-  minHeight: spacingNumbers.xl + spacingNumbers.xxxs,
+  minHeight: height,
+  height: height, // Needed to keep IE11 vertically centered
 });
 
 const SearchCombobox = styled(Combobox)({
@@ -207,6 +210,7 @@ const SearchField = styled(FormField)<
   return {
     display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
     width: '100%',
+    height: height,
     maxWidth: isCollapsed || grow ? '100%' : maxWidth,
     marginBottom: spacingNumbers.zero,
     '> div': {
@@ -231,7 +235,7 @@ const SearchInput = styled(TextInput)<
       }
     : {
         maxWidth: grow ? '100%' : maxWidth,
-        minWidth: '120px',
+        minWidth: minWidth,
         paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
         paddingRight: spacing.xl,
         backgroundColor: inputColors.background,
@@ -244,7 +248,7 @@ const SearchInput = styled(TextInput)<
     WebkitAppearance: 'none',
     transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
     zIndex: 2,
-    height: 44,
+    height: height,
     paddingTop: spacing.xs,
     paddingBottom: spacing.xs,
     width: '100%',
