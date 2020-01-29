@@ -24,6 +24,7 @@
     "@storybook/components": "^5.2.8",
     "@storybook/react": "^5.2.8",
     "@storybook/source-loader": "^5.2.8",
+    "@testing-library/cypress": "^5.1.0",
     "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/react": "^9.1.4",
     "@types/chroma-js": "^1.4.3",

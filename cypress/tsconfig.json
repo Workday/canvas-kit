@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["cypress"]
+    "types": ["cypress", "@types/testing-library__cypress"]
   },
   "strict": true,
   "include": ["**/*.ts"],
