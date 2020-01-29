@@ -6,7 +6,7 @@
  *   .should('have.attr', 'role', 'dialog')
  */
 export function get(testId?: string): Cypress.Chainable<JQuery> {
-  const selector = testId ? `[data-testid='${testId}'] [role-dialog]` : `[role=dialog]`;
+  const selector = testId ? `[data-testid='${testId}'] [role=dialog]` : `[role=dialog]`;
 
   return cy.get(selector);
 }
