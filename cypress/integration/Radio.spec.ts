@@ -20,10 +20,10 @@ describe('Radio', () => {
 
       context('when clicked', () => {
         beforeEach(() => {
-          getRadio().click();
+          cy.getByLabelText('E-mail').click();
         });
 
-        it('should be checked', () => {
+        it.only('should be checked', () => {
           getRadio().should('be.checked');
         });
       });

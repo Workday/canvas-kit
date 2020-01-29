@@ -1,16 +1,5 @@
 import * as h from '../helpers';
 
-const getInidivualRadio = (index: number) => {
-  return cy
-    .get('div[name="contact"]')
-    .children()
-    .eq(index)
-    .children()
-    .eq(0)
-    .children()
-    .eq(0);
-};
-
 describe('Radio Group', () => {
   before(() => {
     h.stories.visit();
@@ -27,12 +16,12 @@ describe('Radio Group', () => {
 
       context('when clicking one radio and then selecting another radio', () => {
         beforeEach(() => {
-          getInidivualRadio(0).click();
-          getInidivualRadio(1).click();
+          cy.getByLabelText('E-mail').click();
+          cy.getByLabelText('Mail').click();
         });
 
         it('should one have one radio selected', () => {
-          getInidivualRadio(1).should('be.checked');
+          cy.getByLabelText('Mail').should('be.checked');
         });
       });
     });

@@ -2,5 +2,7 @@
   "compilerOptions": {
     "types": ["cypress"]
   },
+  "strict": true,
+  "include": ["**/*.ts"],
   "exclude": []
 }

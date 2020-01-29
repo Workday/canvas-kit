@@ -4,3 +4,4 @@ import 'cypress-axe';
 import 'cypress-storybook/cypress';
 
 import './commands';
+import './query';

@@ -1,5 +1,6 @@
 import * as axe from 'axe-core';
 import {Promise} from 'cypress/types/bluebird';
+import './query';
 
 declare global {
   interface Window {
