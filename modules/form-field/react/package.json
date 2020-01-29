@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-form-field",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Form field component to wrap inputs",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
