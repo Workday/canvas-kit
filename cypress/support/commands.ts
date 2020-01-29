@@ -1,6 +1,5 @@
 import * as axe from 'axe-core';
 import {Promise} from 'cypress/types/bluebird';
-import '@testing-library/cypress/add-commands';
 import './query';
 
 declare global {
