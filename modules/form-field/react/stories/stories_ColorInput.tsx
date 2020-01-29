@@ -2,9 +2,8 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import styled from '@emotion/styled';
-import {controlComponent} from '../../../../utils/storybook';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {controlComponent, ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 
 import {ColorInput} from '../../../color-picker/react/index';
 import FormField from '../index';
@@ -12,20 +11,6 @@ import README from '../../../color-picker/react/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
-
-const Table = styled('table')({
-  width: '100%',
-  thead: {
-    textAlign: 'left',
-    paddingBottom: 16,
-  },
-  'td, th': {
-    minWidth: 100,
-    paddingBottom: 16,
-    paddingRight: 16,
-    textAlign: 'left',
-  },
-});
 
 storiesOf('Components|Inputs/Color Picker/Color Input/React/Top Label', module)
   .addParameters({component: ColorInput})
@@ -156,55 +141,49 @@ storiesOf('Components|Inputs/Color Picker/Color Input/React/Visual Testing', mod
   .addDecorator(withReadme(README))
   .add('States', () => (
     <StaticStates>
-      <Table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>No state</th>
-            <th>Hover</th>
-            <th>Focused</th>
-            <th>Active</th>
-          </tr>
-        </thead>
-        <tbody>
-          {[false, true].map(checked => {
-            return [false, true].map(disabled => {
-              return ['Default', 'Alert', 'Error'].map(variant => {
-                const type =
-                  variant === 'Alert'
-                    ? FormField.ErrorType.Alert
-                    : variant === 'Error'
-                    ? FormField.ErrorType.Error
-                    : undefined;
-
-                const key = `${checked ? 'checked' : 'unchecked'}-${
-                  disabled ? 'disabled' : 'enabled'
-                }-${variant}`;
-
-                return (
-                  <tr key={key}>
-                    <td>{`${disabled ? 'Disabled ' : ''}${variant} (${
-                      checked ? 'checked' : 'unchecked'
-                    })`}</td>
-
-                    {['', 'hover', 'focus', 'active'].map(className => (
-                      <td key={`${key}-${className}`}>
-                        <ColorInput
-                          showCheck={checked}
-                          disabled={disabled}
-                          error={type}
-                          value={checked ? '#005cb9' : ''}
-                          className={className}
-                          onChange={() => {}} // eslint-disable-line no-empty-function
-                        />
-                      </td>
-                    ))}
-                  </tr>
-                );
-              });
-            });
-          })}
-        </tbody>
-      </Table>
+      <ComponentStatesTable
+        rowProps={permutateProps(
+          {
+            value: [{value: '#005cb9', label: 'Hex Value'}, {value: '', label: 'No Value'}],
+            placeholder: [{value: undefined, label: ''}, {value: '000', label: 'Placeholder'}],
+            showCheck: [{value: undefined, label: ''}, {value: true, label: 'Checked'}],
+            error: [
+              {value: undefined, label: ''},
+              {value: FormField.ErrorType.Alert, label: 'Alert'},
+              {value: FormField.ErrorType.Error, label: 'Error'},
+            ],
+          },
+          props => {
+            if (props.value !== '' && props.placeholder) {
+              return false;
+            } else if (props.value === '' && props.showCheck) {
+              return false;
+            } else {
+              return true;
+            }
+          }
+        )}
+        columnProps={permutateProps(
+          {
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+            ],
+            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          },
+          props => {
+            if (props.disabled && !['', 'hover'].includes(props.className)) {
+              return false;
+            }
+            return true;
+          }
+        )}
+      >
+        {props => <ColorInput {...props} />}
+      </ComponentStatesTable>
     </StaticStates>
   ));
