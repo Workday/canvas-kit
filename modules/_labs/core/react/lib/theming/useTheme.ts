@@ -3,16 +3,6 @@ import {ThemeContext} from '@emotion/core';
 import {CanvasTheme} from './types';
 import {defaultCanvasTheme} from './theme';
 
-declare global {
-  interface Window {
-    workday: {
-      canvas: {
-        theme?: CanvasTheme;
-      };
-    };
-  }
-}
-
 /**
  * Hook function to get the correct theme object.
  * @param {Object=} theme - The theme object returned from the emotion ThemeContext
@@ -40,7 +30,9 @@ export function useTheme(theme?: Object): CanvasTheme {
     // Context not supported or invalid (probably called from within a class component)
   }
 
+  // @ts-ignore
   if (window.workday && window.workday.canvas && window.workday.canvas.theme) {
+    // @ts-ignore
     return window.workday.canvas.theme;
   }
 
