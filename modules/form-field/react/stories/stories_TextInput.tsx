@@ -161,31 +161,33 @@ storiesOf('Components|Inputs/Text Input/React/Left Label', module)
   ));
 
 storiesOf('Components|Inputs/Text Input/React/Visual', module)
-  .addParameters({component: TextInput})
+  .addParameters({
+    canvasProviderDecorator: {
+      showCustomThemePalette: true,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('Theming', () => (
     <div>
-      <CanvasProvider theme={createCanvasTheme(customThemePalette)}>
-        <InputContainer>
-          <TextInput error={ErrorType.Alert} placeholder="Custom Alert" />
-        </InputContainer>
-        <InputContainer>
-          <TextInput placeholder="Default" />
-        </InputContainer>
-        <InputContainer>
-          <TextInput error={ErrorType.Error} placeholder="Custom Error" />
-        </InputContainer>
-        <InputContainer>
-          <FormField
-            label="Label"
-            inputId="input-alert"
-            error={FormField.ErrorType.Alert}
-            hintText={hintText}
-            hintId={hintId}
-          >
-            {controlComponent(<TextInput placeholder="With Form" />)}
-          </FormField>
-        </InputContainer>
-      </CanvasProvider>
+      <InputContainer>
+        <TextInput error={ErrorType.Alert} placeholder="Custom Alert" />
+      </InputContainer>
+      <InputContainer>
+        <TextInput placeholder="Default" />
+      </InputContainer>
+      <InputContainer>
+        <TextInput error={ErrorType.Error} placeholder="Custom Error" />
+      </InputContainer>
+      <InputContainer>
+        <FormField
+          label="Label"
+          inputId="input-alert"
+          error={FormField.ErrorType.Alert}
+          hintText={hintText}
+          hintId={hintId}
+        >
+          {controlComponent(<TextInput placeholder="With Form" />)}
+        </FormField>
+      </InputContainer>
     </div>
   ));

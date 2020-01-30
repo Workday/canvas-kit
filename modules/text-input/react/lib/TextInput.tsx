@@ -58,16 +58,16 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
     if (!theme) {
       return {};
     }
-    console.warn('theme', theme.palette);
+    console.warn(theme.palette);
     return {
       '&:hover': {
         borderColor: theme.palette.neutral.main,
       },
-      // '&:focus:not([disabled])': {
-      //   borderColor: theme.palette.common.focusOutline,
-      //   boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
-      //   outline: 'none',
-      // },
+      '&:focus:not([disabled])': {
+        borderColor: theme.palette.common.focusOutline,
+        boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
+        outline: 'none',
+      },
       // '&:disabled': {
       //   backgroundColor: inputColors.disabled.background,
       //   borderColor: inputColors.disabled.border,
