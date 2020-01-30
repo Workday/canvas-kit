@@ -34,9 +34,6 @@
     "workday",
     "popup"
   ],
-  "devDependencies": {
-    "@material-ui/core": "^3.9.2"
-  },
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",

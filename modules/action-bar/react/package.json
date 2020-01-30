@@ -41,8 +41,5 @@
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
     "@workday/canvas-kit-react-core": "^3.2.0"
-  },
-  "devDependencies": {
-    "@workday/canvas-kit-react-button": "^3.3.0"
   }
 }

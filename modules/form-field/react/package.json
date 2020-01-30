@@ -44,11 +44,5 @@
     "@workday/canvas-kit-react-common": "^3.3.0",
     "@workday/canvas-kit-react-core": "^3.2.0",
     "uuid": "^3.3.3"
-  },
-  "devDependencies": {
-    "@workday/canvas-kit-react-checkbox": "^3.3.2",
-    "@workday/canvas-kit-react-radio": "^3.3.2",
-    "@workday/canvas-kit-react-select": "^3.3.2",
-    "@workday/canvas-kit-react-text-input": "^3.3.2"
   }
 }

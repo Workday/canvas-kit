@@ -44,6 +44,9 @@
     "@workday/canvas-kit-react-text-input": "^3.3.2",
     "@workday/canvas-system-icons-web": "^1.0.20"
   },
+  "devDependencies": {
+    "@workday/canvas-kit-react-form-field": "^3.3.0"
+  },
   "peerDependencies": {
     "react": ">= 16.8 < 17"
   }

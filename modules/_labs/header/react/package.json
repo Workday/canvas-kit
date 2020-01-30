@@ -52,7 +52,6 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-menu": "^3.3.0",
-    "@workday/canvas-kit-react-avatar": "^3.3.0"
+    "@workday/canvas-kit-labs-react-menu": "^3.3.0"
   }
 }

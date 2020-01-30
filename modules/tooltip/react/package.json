@@ -42,5 +42,9 @@
     "@emotion/styled": "^10.0.17",
     "@workday/canvas-kit-react-common": "^3.3.0",
     "@workday/canvas-kit-react-core": "^3.2.0"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }
