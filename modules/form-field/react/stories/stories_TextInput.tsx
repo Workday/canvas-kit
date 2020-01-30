@@ -2,12 +2,11 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {controlComponent, customThemePallete} from '../../../../utils/storybook';
+import {controlComponent, customThemePalette} from '../../../../utils/storybook';
 
 import {TextInput} from '../../../text-input/react/index';
 import FormField from '../index';
 import README from '../../../text-input/react/README.md';
-import {object} from '@storybook/addon-knobs';
 import styled from '@emotion/styled';
 import {createCanvasTheme, CanvasProvider} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
@@ -166,7 +165,7 @@ storiesOf('Components|Inputs/Text Input/React/Visual', module)
   .addDecorator(withReadme(README))
   .add('Theming', () => (
     <div>
-      <CanvasProvider theme={createCanvasTheme(object('Custom Theme', customThemePallete))}>
+      <CanvasProvider theme={createCanvasTheme(customThemePalette)}>
         <InputContainer>
           <TextInput error={ErrorType.Alert} placeholder="Custom Alert" />
         </InputContainer>
