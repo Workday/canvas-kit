@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-form-field",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Form field component to wrap inputs",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -46,9 +46,9 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react-checkbox": "^3.3.0",
-    "@workday/canvas-kit-react-radio": "^3.3.0",
-    "@workday/canvas-kit-react-select": "^3.3.0",
-    "@workday/canvas-kit-react-text-input": "^3.3.0"
+    "@workday/canvas-kit-react-checkbox": "^3.3.2",
+    "@workday/canvas-kit-react-radio": "^3.3.2",
+    "@workday/canvas-kit-react-select": "^3.3.2",
+    "@workday/canvas-kit-react-text-input": "^3.3.2"
   }
 }
