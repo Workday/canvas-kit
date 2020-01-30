@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-text-area",
-  "version": "3.3.0",
+  "version": "3.3.2",
   "description": "Canvas-styled text area",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
