@@ -5,20 +5,24 @@ import {
   spacingNumbers as spacing,
   type,
 } from '@workday/canvas-kit-react-core';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import {focusRing, Popper} from '@workday/canvas-kit-react-common';
+
+import Tooltip from '@workday/canvas-kit-react-tooltip';
 
 import styled from '@emotion/styled';
 
 export interface SliderProps {
   max: number;
   min: number;
-  startValue: number;
   step?: number;
   showTextInput?: boolean;
+  inputRef?: React.RefObject<HTMLInputElement>;
+  id?: string;
+  value?: number | string;
 
-  onChange?: (newValue: number) => void;
-  onDragStart?: (newValue: number) => void;
-  onEndDrag?: (newValue: number) => void;
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
+  onSliderDragStart?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+  onSliderDragEnd?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
 }
 
 const sliderContainerHeight = spacing.l;
@@ -29,7 +33,7 @@ const sliderTrackHeight = 5;
 const sliderThumbHeight = spacing.s;
 const sliderThumbWidth = spacing.s;
 
-const Container = styled('div')({
+const SliderContainer = styled('div')({
   position: 'relative',
   width: sliderContainerWidth,
   minWidth: sliderContainerMinWidth,
@@ -166,75 +170,119 @@ const InputValueBox = styled('input')({
   textIndent: spacing.xxxs,
 });
 
-/**
- * This function is mainly used to find the percent fill value for the background gradients.
- * Without it, the gradients pass the the dragger on tails ends every so slightly and is slightly visible in some browsers.
- */
-const valueToPercent = (max: number, min: number, value: number): number => {
-  const percent = ((value - min) * 100) / (max - min);
-  const minPercent = 0;
-  const maxPercent = 100;
-  const outMin = 1;
-  const outMax = 99;
-  return ((percent - minPercent) * (outMax - outMin)) / (maxPercent - minPercent) + outMin;
-};
-
 export const Slider: React.FC<SliderProps> = ({
+  id,
+  inputRef = React.useRef<HTMLInputElement>(null),
   max,
   min,
   step,
   showTextInput,
-  onDragStart,
-  onEndDrag,
+  onSliderDragStart,
+  onSliderDragEnd,
   onChange,
-  startValue,
+  value,
 }) => {
-  const [value, setValue] = React.useState(startValue);
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(event.target.value);
-    setValue(value);
+  const sliderPosition = Number(value) / (max - min);
+
+  const sliderWidth =
+    inputRef && inputRef.current && inputRef.current.parentElement
+      ? inputRef.current.parentElement.clientWidth
+      : 0;
+
+  const halfThumbWidth = sliderThumbWidth / 2;
+  const pixelPosition = sliderPosition * sliderWidth;
+  const distFromCenter = pixelPosition - sliderWidth / 2;
+  const ratioDistFromCenter = distFromCenter / sliderWidth / 2;
+  const offset = ratioDistFromCenter * halfThumbWidth;
+
+  const popperOptions = {
+    modifiers: {
+      offset: {
+        offset: pixelPosition - offset - sliderWidth / 2,
+      },
+    },
+  };
+
+  const handleMouseUp = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    setIsOpen(false);
+    if (onSliderDragEnd) {
+      onSliderDragEnd(e);
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    setIsOpen(true);
+    if (onSliderDragStart) {
+      onSliderDragStart(e);
+    }
+  };
+
+  const handleOnChange = (
+    e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setIsOpen(true);
     if (onChange) {
-      onChange(value);
+      onChange(e);
     }
   };
 
-  const onSliderDragStart = () => {
-    if (onDragStart) {
-      onDragStart(value);
+  const getTooltipValue = (value: number | string | undefined) => {
+    if (value === undefined) {
+      return value;
     }
-  };
-
-  const onSliderDragEnd = () => {
-    if (onEndDrag) {
-      onEndDrag(value);
+    if (Number(value) > max) {
+      return max;
     }
+    if (Number(value) < min) {
+      return min;
+    }
+    return value;
   };
 
   return (
-    <Wrapper>
-      <Interval>{min}</Interval>
-      <Container>
-        <ProgressBarContainer>
-          <ProgressBar value={valueToPercent(max, min, value)} max={100} />
-        </ProgressBarContainer>
-        <SliderInput
-          type="range"
-          ref={inputRef}
-          max={max}
-          min={min}
-          step={step}
-          value={value}
-          onChange={onChangeHandler}
-          onMouseDown={onSliderDragStart}
-          onMouseUp={onSliderDragEnd}
-        />
-      </Container>
-      <Interval>{max}</Interval>
-      {showTextInput && (
-        <InputValueBox type="text" min={min} max={max} value={value} onChange={onChangeHandler} />
-      )}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Interval>{min}</Interval>
+        <SliderContainer>
+          <ProgressBarContainer>
+            <ProgressBar value={value} max={100} />
+          </ProgressBarContainer>
+          <SliderInput
+            type="range"
+            id={id}
+            ref={inputRef}
+            max={max}
+            min={min}
+            step={step}
+            value={value}
+            onChange={handleOnChange}
+            onInput={handleOnChange}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseEnter={e => setIsOpen(true)}
+            onMouseLeave={e => setIsOpen(false)}
+            aria-labelledby={'123'}
+          />
+        </SliderContainer>
+        <Interval>{max}</Interval>
+        {showTextInput && (
+          <InputValueBox type="number" min={min} max={max} value={value} onChange={onChange} />
+        )}
+      </Wrapper>
+      {/* Something is currently incorrect with how popperOptions are being
+       * used within Popper -- they are not rerendering the Tooltip on
+       * change events as expected.
+       */}
+      <Popper
+        open={isOpen}
+        anchorElement={inputRef.current}
+        placement={'top'}
+        popperOptions={popperOptions}
+      >
+        <Tooltip id={'123'}>{getTooltipValue(value)}</Tooltip>
+      </Popper>
+    </>
   );
 };

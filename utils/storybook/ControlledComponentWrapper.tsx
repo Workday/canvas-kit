@@ -5,14 +5,19 @@ enum ControlledProp {
   Checked = 'checked',
 }
 
-export default class ControlledComponentWrapper extends React.Component<any, {}> {
+export interface ControlledComponentProps {
+  initialValue?: string | number;
+  controlledProp: ControlledProp;
+}
+
+export default class ControlledComponentWrapper extends React.Component<ControlledComponentProps> {
   static ControlledProp = ControlledProp;
   static defaultProps = {
     controlledProp: ControlledProp.Value,
   };
 
   state = {
-    value: '', // Used for string based components (e.g. text input)
+    value: this.props.initialValue || '', // Used for string based components (e.g. text input)
     checked: false, // Used for boolean components (e.g. checkbox)
   };
 
@@ -46,8 +51,14 @@ export default class ControlledComponentWrapper extends React.Component<any, {}>
   }
 }
 
-export const controlComponent = (child: React.ReactNode, controlledProp?: ControlledProp) => {
+export const controlComponent = (
+  child: React.ReactNode,
+  controlledProp?: ControlledProp,
+  initialValue?: string | number
+) => {
   return (
-    <ControlledComponentWrapper controlledProp={controlledProp}>{child}</ControlledComponentWrapper>
+    <ControlledComponentWrapper controlledProp={controlledProp} initialValue={initialValue}>
+      {child}
+    </ControlledComponentWrapper>
   );
 };

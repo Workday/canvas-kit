@@ -11,7 +11,7 @@ describe('ActionBar', () => {
   const defaultSliderProps: SliderProps = {
     max: 100,
     min: 1,
-    startValue: 50,
+    value: 50,
   };
   test('render with required props', () => {
     const wrapper = mount(<Slider {...defaultSliderProps} />);
@@ -27,7 +27,7 @@ describe('ActionBar', () => {
       showTextInput: true,
     };
     const wrapper = mount(<Slider {...modifiedSliderProps} />);
-    expect(wrapper.find('InputValueBox').props().value).toEqual(defaultSliderProps.startValue);
+    expect(wrapper.find('InputValueBox').props().value).toEqual(defaultSliderProps.value);
     wrapper.unmount();
   });
 
@@ -74,8 +74,8 @@ describe('ActionBar', () => {
     const modifiedSliderProps: SliderProps = {
       ...defaultSliderProps,
       onChange,
-      onEndDrag,
-      onDragStart,
+      onSliderDragEnd: onEndDrag,
+      onSliderDragStart: onDragStart,
     };
 
     const wrapper = mount(<Slider {...modifiedSliderProps} />);

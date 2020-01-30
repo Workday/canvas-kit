@@ -2,6 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
+import {ControlledComponentWrapper} from '../../../../../utils/storybook';
 
 import {SliderProps} from '../lib/Slider';
 import FormField from '../../../../form-field/react/index';
@@ -12,7 +13,6 @@ const sliderProps: SliderProps = {
   max: 100,
   min: 0,
   step: 1,
-  startValue: 50,
   showTextInput: true,
 };
 
@@ -20,6 +20,8 @@ storiesOf('Labs|Slider/React', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label">
-      <Slider {...sliderProps} />
+      <ControlledComponentWrapper initialValue={50}>
+        <Slider {...sliderProps} />
+      </ControlledComponentWrapper>
     </FormField>
   ));
