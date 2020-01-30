@@ -136,7 +136,8 @@
     "test": "TZ=UTC jest",
     "bump": "lerna version",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "depcheck": "./utils/check-dependencies-exist.js"
   },
   "config": {
     "commitizen": {
@@ -161,5 +162,8 @@
   "workspaces": [
     "modules/**"
   ],
-  "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, ie 11"
+  "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, ie 11",
+  "dependencies": {
+    "depcheck": "^0.9.2"
+  }
 }
