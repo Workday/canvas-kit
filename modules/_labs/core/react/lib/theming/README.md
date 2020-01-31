@@ -200,17 +200,6 @@ example of this is an app with many small React trees.
 Simply set your theme on the window object like so:
 
 ```tsx
-// If using typescript, you will need to declare this on the window object
-declare global {
-  interface Window {
-    workday: {
-      canvas: {
-        theme?: CanvasTheme;
-      };
-    };
-  }
-}
-
 const theme: PartialCanvasTheme = {
   palette: {
     primary: {

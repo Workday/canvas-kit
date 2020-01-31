@@ -6,25 +6,24 @@ import {ErrorType, GrowthBehavior} from '@workday/canvas-kit-react-common';
 
 export interface RadioGroupProps extends Themeable, GrowthBehavior {
   /**
-   * React children must be of type Radio and have at least two.
+   * The Radio button children of the RadioGroup (must be at least two).
    */
   children: React.ReactElement<RadioProps>[];
-
   /**
-   * The value or index of the Radio that should be toggled on.
-   * If a string is passed, the Radio with the corresponding value will be selected.
-   * If a number is passed, ihe Radio with the corresponding index will be selected.
+   * The selected value of the RadioGroup. If a string is provided, the Radio button with the corresponding value will be selected. If a number is provided, the Radio button with the corresponding index will be selected.
+   * @default 0
    */
   value?: string | number;
-
-  name?: string;
-
-  error?: ErrorType;
-
   /**
-   * Callback function when a button is selected, optional.
-   * If the selected button has a value, it will be returned.
-   * Otherwise, the index of the button in the group will be returned.
+   * The common `name` passed to all Radio button children of the RadioGroup. This enables you to avoid specifying the `name` for each child.
+   */
+  name?: string;
+  /**
+   * The type of error associated with the RadioGroup (if applicable).
+   */
+  error?: ErrorType;
+  /**
+   * The function called when the RadioGroup state changes. The value passed to the callback function will be the value of the selected Radio button if it has one; otherwise, the index of the selected Radio button will be passed in.
    */
   onChange?: (value: string | number) => void;
 }

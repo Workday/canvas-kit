@@ -2,21 +2,15 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {controlComponent, customThemePalette} from '../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {controlComponent, ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 
 import {TextInput} from '../../../text-input/react/index';
 import FormField from '../index';
 import README from '../../../text-input/react/README.md';
-import styled from '@emotion/styled';
-import {createCanvasTheme, CanvasProvider} from '@workday/canvas-kit-labs-react-core';
-import {ErrorType} from '@workday/canvas-kit-react-common';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
-
-const InputContainer = styled('div')({
-  padding: 8,
-});
 
 storiesOf('Components|Inputs/Text Input/React/Top Label', module)
   .addParameters({component: TextInput})
@@ -160,37 +154,111 @@ storiesOf('Components|Inputs/Text Input/React/Left Label', module)
     </FormField>
   ));
 
-storiesOf('Components|Inputs/Text Input/React/Visual', module)
+storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
+  .addParameters({component: TextInput})
+  .addDecorator(withReadme(README))
+  .add('States', () => (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={permutateProps(
+          {
+            value: [{value: 'Input value', label: 'With Value'}, {value: '', label: 'No Value'}],
+            placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
+            error: [
+              {value: undefined, label: ''},
+              {value: TextInput.ErrorType.Alert, label: 'Alert'},
+              {value: TextInput.ErrorType.Error, label: 'Error'},
+            ],
+          },
+          props => {
+            if (props.value === '' && !props.placeholder) {
+              return false;
+            }
+            return true;
+          }
+        )}
+        columnProps={permutateProps(
+          {
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+            ],
+            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          },
+          props => {
+            if (props.disabled && !['', 'hover'].includes(props.className)) {
+              return false;
+            }
+            return true;
+          }
+        )}
+      >
+        {props => (
+          <TextInput
+            {...props}
+            style={{minWidth: 60, width: 100}}
+            onChange={() => {}} // eslint-disable-line no-empty-function
+          />
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  ))
   .addParameters({
     canvasProviderDecorator: {
       showCustomThemePalette: true,
     },
   })
-  .addDecorator(withReadme(README))
   .add('Theming', () => (
-    <div>
-      <InputContainer>
-        <TextInput error={ErrorType.Alert} placeholder="Custom Alert" />
-      </InputContainer>
-      <InputContainer>
-        <TextInput placeholder="Default" />
-      </InputContainer>
-      <InputContainer>
-        <TextInput error={ErrorType.Error} placeholder="Custom Error" />
-      </InputContainer>
-      <InputContainer>
-        <TextInput disabled={true} placeholder="Disabled" />
-      </InputContainer>
-      <InputContainer>
-        <FormField
-          label="Label"
-          inputId="input-alert"
-          error={FormField.ErrorType.Alert}
-          hintText={hintText}
-          hintId={hintId}
-        >
-          {controlComponent(<TextInput placeholder="With Form" />)}
-        </FormField>
-      </InputContainer>
-    </div>
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={permutateProps(
+          {
+            value: [{value: 'Input value', label: 'With Value'}, {value: '', label: 'No Value'}],
+            placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
+            error: [
+              {value: undefined, label: ''},
+              {value: TextInput.ErrorType.Alert, label: 'Alert'},
+              {value: TextInput.ErrorType.Error, label: 'Error'},
+            ],
+          },
+          props => {
+            if (props.value === '' && !props.placeholder) {
+              return false;
+            }
+            return true;
+          }
+        )}
+        columnProps={permutateProps(
+          {
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+            ],
+            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          },
+          props => {
+            if (props.disabled && !['', 'hover'].includes(props.className)) {
+              return false;
+            }
+            return true;
+          }
+        )}
+      >
+        {props => (
+          <TextInput
+            {...props}
+            style={{minWidth: 60, width: 100}}
+            onChange={() => {}} // eslint-disable-line no-empty-function
+          />
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
   ));

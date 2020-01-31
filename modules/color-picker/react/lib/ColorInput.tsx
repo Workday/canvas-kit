@@ -14,11 +14,32 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 
 export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavior {
+  /**
+   * The value of the ColorInput.
+   * @default ''
+   */
   value: string;
+  /**
+   * If true, show a checkmark in the swatch tile when a custom hex color is entered in the ColorInput.
+   * @default false
+   */
   showCheck?: boolean;
+  /**
+   * The placeholder text of the ColorInput.
+   * @default FFFFFF
+   */
   placeholder: string;
+  /**
+   * The type of error associated with the ColorInput (if applicable).
+   */
   error?: ErrorType;
+  /**
+   * The function called when the ColorInput state changes.
+   */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * The function called when a valid hex value is entered in the ColorInput. The `color` argument passed to the callback function is prefixed with a hash and expanded if necessary (e.g., `03F` is converted to `#0033FF`).
+   */
   onValidColorChange?: (color: string) => void;
 }
 

@@ -13,14 +13,45 @@ import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * If true, set the Checkbox to the checked state.
+   * @default false
+   */
   checked: boolean;
+  /**
+   * If true, set the Checkbox to the disabled state.
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * The HTML `id` of the underlying checkbox input element. This is required if `label` is defined as a non-empty string.
+   */
   id?: string;
+  /**
+   * The ref to the underlying checkbox input element. Use this to imperatively check or focus the Checkbox.
+   */
   inputRef?: React.Ref<HTMLInputElement>;
+  /**
+   * The text of the Checkbox label.
+   * @default ''
+   */
   label?: string;
+  /**
+   * The function called when the Checkbox state changes.
+   */
   onChange?: (e: React.SyntheticEvent) => void;
+  /**
+   * The value of the Checkbox.
+   */
   value?: string;
+  /**
+   * The type of error associated with the Checkbox (if applicable).
+   */
   error?: ErrorType;
+  /**
+   * If true, set the Checkbox to an indeterminate state. Use this on a Checkbox with nested child Checkboxes to denote that some (but not all) child Checkboxes are checked.
+   * @default false
+   */
   indeterminate?: boolean;
 }
 
@@ -43,29 +74,13 @@ const CheckboxContainer = styled('div')({
  * :hover on the checkbox when you hover on it's corresponding label.
  * This stops the ripple from showing when you hover on the label.
  */
-const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>(
-  {
-    display: 'flex',
-    height: checkboxHeight,
-    width: checkboxWidth,
-    marginTop: '3px',
-    alignSelf: 'flex-start',
-    '&::after': {
-      borderRadius: borderRadius.circle,
-      boxShadow: '0 0 0 0 ' + colors.soap200,
-      content: '""',
-      display: 'inline-block',
-      height: checkboxHeight,
-      transition: 'box-shadow 150ms ease-out',
-      width: checkboxWidth,
-    },
-  },
-  ({disabled}) => ({
-    '&:hover::after': {
-      boxShadow: disabled ? undefined : '0 0 0 ' + rippleRadius + 'px ' + colors.soap200,
-    },
-  })
-);
+const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
+  display: 'flex',
+  height: checkboxHeight,
+  width: checkboxWidth,
+  marginTop: '3px',
+  alignSelf: 'flex-start',
+});
 
 /**
  * Note: `~ div:first-of-type` refers to `CheckboxBackground`
@@ -110,7 +125,6 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     '&:focus ~ div:first-of-type': {
       borderColor: colors.blueberry400,
       borderWidth: '2px',
-      zIndex: 2,
       boxShadow: 'none',
     },
     '&:checked:focus ~ div:first-of-type': {
@@ -136,6 +150,26 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       },
     }),
   },
+
+  // Ripple
+  {
+    '& ~ div:first-of-type::after': {
+      borderRadius: borderRadius.circle,
+      boxShadow: `0 0 0 0 ${colors.soap200}`,
+      content: '""',
+      display: 'inline-block',
+      height: checkboxHeight,
+      transition: 'box-shadow 150ms ease-out',
+      width: checkboxWidth,
+      position: 'absolute',
+      zIndex: -1,
+    },
+  },
+  ({disabled}) => ({
+    '&:hover ~ div:first-of-type::after': {
+      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+    },
+  }),
   ({error}) => {
     let errorRingColor;
     let errorRingBorderColor = 'transparent';
