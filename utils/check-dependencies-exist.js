@@ -50,6 +50,21 @@ function formatErrorMessage(errors) {
         if (key === 'file') return;
 
         if (errors[key].constructor === Object) {
+          if (key.startsWith('invalid')) {
+            return Object.keys(errors[key])
+              .map(file => {
+                const line = errors[key][file].line;
+                const column = errors[key][file].column;
+                const message = errors[key][file].formatted;
+
+                return (
+                  labelMap[key].color(labelMap[key].label.padEnd(20)) +
+                  colors.dim(`  ${line}:${column}  `) +
+                  message
+                );
+              })
+              .join('\n');
+          }
           return Object.keys(errors[key])
             .map(pkg =>
               errors[key][pkg]
