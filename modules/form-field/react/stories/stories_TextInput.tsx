@@ -179,6 +179,9 @@ storiesOf('Components|Inputs/Text Input/React/Visual', module)
         <TextInput error={ErrorType.Error} placeholder="Custom Error" />
       </InputContainer>
       <InputContainer>
+        <TextInput disabled={true} placeholder="Disabled" />
+      </InputContainer>
+      <InputContainer>
         <FormField
           label="Label"
           inputId="input-alert"

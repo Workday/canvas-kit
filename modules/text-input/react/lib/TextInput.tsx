@@ -55,10 +55,6 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
       width: '100%',
     },
   ({theme, error}) => {
-    if (!theme) {
-      return {};
-    }
-    console.warn(theme.palette);
     return {
       '&:hover': {
         borderColor: theme.palette.neutral.main,
@@ -68,14 +64,14 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
         boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
         outline: 'none',
       },
-      // '&:disabled': {
-      //   backgroundColor: inputColors.disabled.background,
-      //   borderColor: inputColors.disabled.border,
-      //   color: inputColors.disabled.text,
-      //   '&::placeholder': {
-      //     color: inputColors.disabled.text,
-      //   },
-      // },
+      '&:disabled': {
+        backgroundColor: theme.palette.neutral.light,
+        borderColor: theme.palette.neutral.dark,
+        color: theme.palette.neutral.main,
+        '&::placeholder': {
+          color: theme.palette.neutral.main,
+        },
+      },
       ...errorRing(error, theme),
     };
   }
