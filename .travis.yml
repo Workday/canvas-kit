@@ -41,6 +41,7 @@ jobs:
   - stage: pull_request
     script:
       - yarn lint
+      - yarn depcheck
       - yarn test
       - yarn chromatic --exit-zero-on-changes --app-code="dlpro96xybh" # v1 for cross-browser
       - yarn chromatic --exit-zero-on-changes # v2 for visual review features and Storybook hosting
