@@ -43,8 +43,5 @@
     "@workday/canvas-kit-react-common": "^3.3.0",
     "@workday/canvas-kit-react-core": "^3.2.0",
     "uuid": "^3.3.3"
-  },
-  "devDependencies": {
-    "@workday/canvas-kit-react-form-field": "^3.3.0"
   }
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Combobox from '../lib/Combobox';
-import {MenuItem} from '../../../menu/react/index';
+import {MenuItem} from '../../../menu/react';
 import {TextInput} from '../../../../text-input/react';
 import {render, fireEvent} from '@testing-library/react';
 

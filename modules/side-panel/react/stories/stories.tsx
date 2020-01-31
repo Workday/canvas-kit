@@ -10,10 +10,10 @@ import {select, number} from '@storybook/addon-knobs';
 
 import {colors, type} from '@workday/canvas-kit-react-core';
 import README from '../README.md';
-import {SystemIcon} from '../../../icon/react/index';
-import {Header} from '../../../_labs/header/react/index';
-import {Button, IconButton} from '../../../button/react/index';
-import {AvatarButton} from '../../../avatar/react/index';
+import {SystemIcon} from '../../../icon/react';
+import {Header} from '../../../_labs/header/react';
+import {Button, IconButton} from '../../../button/react';
+import {AvatarButton} from '../../../avatar/react';
 import SidePanel from '../index';
 
 interface SidePanelState {

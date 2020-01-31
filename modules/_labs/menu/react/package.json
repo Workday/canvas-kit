@@ -37,8 +37,7 @@
   ],
   "devDependencies": {
     "@material-ui/core": "^3.9.2",
-    "@workday/canvas-system-icons-web": "^1.0.20",
-    "@workday/canvas-kit-react-button": "^3.3.0"
+    "@workday/canvas-system-icons-web": "^1.0.20"
   },
   "dependencies": {
     "@emotion/core": "^10.0.21",

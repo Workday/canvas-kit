@@ -7,8 +7,8 @@ import README from '../lib/theming/README.md';
 
 import {CanvasProvider, createCanvasTheme, ContentDirection} from '../index';
 import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-system-icons-web';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
-import {Card} from '@workday/canvas-kit-react-card';
+import {IconButton, IconButtonProps} from '../../../../button/react';
+import {Card} from '../../../../card/react';
 
 const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
   'aria-label': 'Activity Stream',

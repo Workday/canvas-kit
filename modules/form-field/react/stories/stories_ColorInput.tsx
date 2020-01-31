@@ -5,7 +5,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {controlComponent, ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 
-import {ColorInput} from '../../../color-picker/react/index';
+import {ColorInput} from '../../../color-picker/react';
 import FormField from '../index';
 import README from '../../../color-picker/react/README.md';
 

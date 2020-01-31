@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {ControlledComponentWrapper} from '../../../../utils/storybook';
 
-import {Radio, RadioGroup} from '../../../radio/react/index';
+import {Radio, RadioGroup} from '../../../radio/react';
 import FormField from '../index';
 import README from '../../../radio/react/README.md';
 
