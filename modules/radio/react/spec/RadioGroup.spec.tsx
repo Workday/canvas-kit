@@ -55,18 +55,4 @@ describe('Radio Group', () => {
       expect(getByTestId('radiogroup')).toHaveAttribute('data-propspread', attr);
     });
   });
-  describe('when clicked', () => {
-    it('should call a callback function', async () => {
-      const mockFunction = jest.fn((value: number) => value);
-      mockFunction(1);
-      const {getByTestId} = render(
-        <RadioGroup data-testid="radiogroup" onChange={mockFunction} name="contact" value={1}>
-          <Radio id="1" value="email" label="E-mail" />
-          <Radio id="2" value="phone" label="Phone" />
-        </RadioGroup>
-      );
-      fireEvent.click(await getByTestId('radiogroup'));
-      expect(mockFunction).toHaveBeenCalledTimes(1);
-    });
-  });
 });
