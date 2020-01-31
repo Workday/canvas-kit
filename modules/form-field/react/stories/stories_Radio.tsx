@@ -194,7 +194,7 @@ storiesOf('Components|Inputs/Radio/React/Visual', module)
             <Radio
               {...props}
               onChange={() => {}} // eslint-disable-line no-empty-function
-              label="Checkbox"
+              label="Radio"
             />
           )}
         </ComponentStatesTable>
@@ -202,37 +202,19 @@ storiesOf('Components|Inputs/Radio/React/Visual', module)
       <h3>Radio Group</h3>
       <StaticStates>
         <ComponentStatesTable
-          rowProps={permutateProps(
-            {
-              error: [
-                {value: undefined, label: 'No Error'},
-                {value: FormField.ErrorType.Alert, label: 'Alert'},
-                {value: FormField.ErrorType.Error, label: 'Error'},
-              ],
-            },
-            props => {
-              if (props.indeterminate && !props.checked) {
-                return false;
-              }
-              return true;
-            }
-          )}
-          columnProps={permutateProps(
-            {
-              errorState: [{label: 'Default', value: ''}],
-            },
-            props => {
-              if (props.disabled && !['', 'hover'].includes(props.className)) {
-                return false;
-              }
-              return true;
-            }
-          )}
+          rowProps={permutateProps({
+            error: [
+              {value: undefined, label: 'No Error'},
+              {value: FormField.ErrorType.Alert, label: 'Alert'},
+              {value: FormField.ErrorType.Error, label: 'Error'},
+            ],
+          })}
+          columnProps={[{label: 'Default', props: {}}]}
         >
           {props => (
             <FormField
               useFieldset={true}
-              hintText={hintText}
+              hintText={props.error ? hintText : undefined}
               hintId={hintId}
               labelPosition={FormField.LabelPosition.Left}
               {...props}
@@ -240,9 +222,7 @@ storiesOf('Components|Inputs/Radio/React/Visual', module)
               <ControlledComponentWrapper>
                 <RadioGroup name="contact">
                   <Radio id="1" value="email" label="E-mail" />
-                  <Radio id="2" value="phone" label="Phone" />
-                  <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-                  <Radio id="4" value="mail" label="Mail" />
+                  <Radio id="2" value="fax" label="Fax (disabled)" disabled={true} />
                 </RadioGroup>
               </ControlledComponentWrapper>
             </FormField>
