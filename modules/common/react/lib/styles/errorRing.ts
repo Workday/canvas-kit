@@ -8,7 +8,7 @@ export default function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSOb
   let errorBoxShadow;
 
   if (error === ErrorType.Error) {
-    errorBorderColor = theme ? theme.palette.error.darkest : inputColors.error.border;
+    errorBorderColor = theme ? theme.palette.error.main : inputColors.error.border;
     errorBoxShadow = `inset 0 0 0 1px ${
       theme ? theme.palette.error.main : inputColors.error.border
     }`;

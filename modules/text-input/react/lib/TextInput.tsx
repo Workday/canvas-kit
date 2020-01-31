@@ -71,8 +71,8 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
         outline: 'none',
       },
       '&:disabled': {
-        backgroundColor: theme.palette.neutral.light,
-        borderColor: theme.palette.neutral.dark,
+        backgroundColor: theme.palette.neutral.lightest,
+        borderColor: theme.palette.neutral.main,
         color: theme.palette.neutral.main,
         '&::placeholder': {
           color: theme.palette.neutral.main,
