@@ -137,7 +137,7 @@
     "bump": "lerna version",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "depcheck": "./utils/check-dependencies-exist.js"
+    "depcheck": "lerna run depcheck"
   },
   "config": {
     "commitizen": {

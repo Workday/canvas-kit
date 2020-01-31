@@ -2,7 +2,6 @@
 'use strict';
 
 const path = require('path');
-const glob = require('glob');
 const colors = require('colors');
 const depCheck = require('depcheck');
 
@@ -76,57 +75,32 @@ function formatErrorMessage(errors) {
   );
 }
 
-const searchPath = `${path.resolve(__dirname)}/../modules/**/react`;
+const modulePath = process.cwd();
 
-glob(searchPath, undefined, function(er, modules) {
-  if (er) {
-    console.error('Could not find any modules/**/react/ folders');
+depCheck(modulePath, depCheckOptions, unused => {
+  const errorKeys = Object.keys(unused).filter(key => {
+    if (key === 'using') {
+      return false;
+    }
+    if (unused[key].constructor === Object) {
+      return Object.keys(unused[key]).length;
+    } else {
+      return unused[key].length;
+    }
+  });
+
+  if (!errorKeys.length) {
     return;
   }
 
-  console.log(`\nChecking dependencies in ${colors.dim(searchPath)}...\n`);
+  const result = {
+    file: modulePath + '/package.json',
+  };
+  errorKeys.forEach(key => (result[key] = unused[key]));
 
-  const checks = [];
-
-  for (let reactModule of modules) {
-    checks.push(
-      new Promise((resolve, reject) => {
-        depCheck(reactModule, depCheckOptions, unused => {
-          const result = {
-            file: reactModule + '/package.json',
-          };
-
-          Object.keys(unused)
-            .filter(key => {
-              if (key === 'using') {
-                return false;
-              }
-              if (unused[key].constructor === Object) {
-                return Object.keys(unused[key]).length;
-              } else {
-                return unused[key].length;
-              }
-            })
-            .forEach(key => (result[key] = unused[key]));
-
-          resolve(result);
-          resolve(null);
-        });
-      })
-    );
-  }
-
-  Promise.all(checks)
-    .then(values => {
-      const realErrors = values.filter(v => Object.keys(v).length > 1); // Exclude when file is the only key
-      realErrors.forEach(errors => {
-        console.log(formatErrorMessage(errors) + '\n');
-      });
-      if (realErrors.length) {
-        process.exit(1);
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  console.log(formatErrorMessage(result) + '\n');
+  process.exit(1);
+}).catch(err => {
+  console.error(err);
+  process.exit(1);
 });
