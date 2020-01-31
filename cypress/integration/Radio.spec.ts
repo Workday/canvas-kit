@@ -5,6 +5,9 @@ const getRadio = () => {
 };
 
 describe('Radio', () => {
+  before(() => {
+    h.stories.visit();
+  });
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components|Inputs/Radio/React/Left Label/Radio', 'Disabled');
