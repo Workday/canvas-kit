@@ -7,8 +7,8 @@ import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
 import styled from '@emotion/styled';
 
-import {Button} from '../../../button/react/index';
-import {type} from '../../../core/react/index';
+import {Button} from '../../../button/react';
+import {type} from '../../../core/react';
 import CookieBanner from '../index';
 import README from '../README.md';
 

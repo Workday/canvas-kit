@@ -3,7 +3,7 @@ import {mount} from 'enzyme';
 import Radio from '../lib/Radio';
 import ReactDOMServer from 'react-dom/server';
 import {axe} from 'jest-axe';
-import FormField from '@workday/canvas-kit-react-form-field';
+import FormField from '../../../form-field/react';
 
 describe('Radio Input', () => {
   const cb = jest.fn();

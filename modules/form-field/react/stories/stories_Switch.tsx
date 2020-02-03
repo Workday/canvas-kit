@@ -8,7 +8,7 @@ import {
   permutateProps,
 } from '../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core/lib/StaticStates';
-import {Switch} from '../../../switch/react/index';
+import {Switch} from '../../../switch/react';
 import FormField from '../index';
 import README from '../../../switch/react/README.md';
 

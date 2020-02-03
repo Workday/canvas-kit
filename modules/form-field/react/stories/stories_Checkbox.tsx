@@ -9,7 +9,7 @@ import {
   permutateProps,
 } from '../../../../utils/storybook';
 
-import {Checkbox} from '../../../checkbox/react/index';
+import {Checkbox} from '../../../checkbox/react';
 import FormField from '../index';
 import README from '../../../checkbox/react/README.md';
 

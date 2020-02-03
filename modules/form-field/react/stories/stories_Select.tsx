@@ -6,7 +6,7 @@ import {controlComponent} from '../../../../utils/storybook';
 
 import FormField from '..';
 import README from '../../../select/react/README.md';
-import {Select, SelectOption} from '@workday/canvas-kit-react-select';
+import {Select, SelectOption} from '../../../select/react';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';

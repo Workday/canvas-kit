@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {ColorPreview} from '../../../color-picker/react/index';
+import {ColorPreview} from '../../../color-picker/react';
 import FormField from '../index';
 import README from '../../../color-picker/react/README.md';
 
