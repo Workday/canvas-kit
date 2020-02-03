@@ -24,7 +24,8 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6"
+    "build": "npm-run-all --parallel build:cjs build:es6",
+    "depcheck": "node ../../../utils/check-dependencies-exist.js"
   },
   "keywords": [
     "canvas",
@@ -44,5 +45,8 @@
     "@workday/canvas-kit-react-core": "^3.2.0",
     "@workday/canvas-kit-react-icon": "^3.3.0",
     "@workday/design-assets-types": "^0.2.4"
+  },
+  "devDependencies": {
+    "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }

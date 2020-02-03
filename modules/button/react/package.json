@@ -25,7 +25,8 @@
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:babel": "babel --no-babelrc --plugins babel-plugin-emotion dist --out-dir dist",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --sequential build:es6 build:babel build:cjs"
+    "build": "npm-run-all --sequential build:es6 build:babel build:cjs",
+    "depcheck": "node ../../../utils/check-dependencies-exist.js"
   },
   "keywords": [
     "canvas",
@@ -42,6 +43,7 @@
     "@emotion/core": "^10.0.21",
     "@emotion/is-prop-valid": "^0.8.2",
     "@emotion/styled": "^10.0.17",
+    "@workday/canvas-kit-labs-react-core": "^3.3.0",
     "@workday/canvas-kit-react-common": "^3.3.0",
     "@workday/canvas-kit-react-core": "^3.2.0",
     "@workday/canvas-kit-react-icon": "^3.3.0",

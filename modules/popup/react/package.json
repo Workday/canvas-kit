@@ -24,7 +24,8 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6"
+    "build": "npm-run-all --parallel build:cjs build:es6",
+    "depcheck": "node ../../../utils/check-dependencies-exist.js"
   },
   "keywords": [
     "canvas",
@@ -34,9 +35,6 @@
     "workday",
     "popup"
   ],
-  "devDependencies": {
-    "@material-ui/core": "^3.9.2"
-  },
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
