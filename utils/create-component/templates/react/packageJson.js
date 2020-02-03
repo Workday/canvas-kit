@@ -26,7 +26,8 @@ module.exports = (name, moduleName, description, unstable) => `
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6"
+    "build": "npm-run-all --parallel build:cjs build:es6",
+    "depcheck": "node ../../../${unstable ? '../' : ''}utils/check-dependencies-exist.js"
   },
   "keywords": [
     "canvas",

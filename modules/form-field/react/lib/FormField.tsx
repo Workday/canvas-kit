@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {spacing} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, ErrorType} from '@workday/canvas-kit-react-common';
 import Hint from './Hint';
@@ -7,16 +7,59 @@ import Label from './Label';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 import uuid from 'uuid/v4';
 
-export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement>, GrowthBehavior {
+export interface FormFieldProps
+  extends Themeable,
+    React.HTMLAttributes<HTMLDivElement>,
+    GrowthBehavior {
+  /**
+   * The position of the FormField label.
+   * @default FormField.FormFieldLabelPosition.Top
+   */
   labelPosition: FormFieldLabelPosition;
+  /**
+   * The text of the FormField label.
+   */
   label?: React.ReactNode;
+  /**
+   * The text of the message displayed below the input component. This is required if `error` is defined.
+   */
   hintText?: React.ReactNode;
+  /**
+   * The HTML `id` of the message displayed below the input component. This is required for the `aria-describedby` accessibility attribute if `error` and `hintText` are defined.
+   */
   hintId?: string;
+  /**
+   * The HTML `id` of the input component. If an `id` is not specified for the input, this will be used as it's `id`. This is referenced by the label's `htmlFor` attribute. This is required for accessiblity if `label` is defined.
+   */
   inputId?: string;
+  /**
+   * The type of error associated with the FormField (if applicable). This is passed to the input component.
+   */
   error?: ErrorType;
+  /**
+   * If true, style the FormField label to indicate that it is required.
+   * @default false
+   */
   required?: boolean;
+  /**
+   * If true, render the FormField using a `fieldset` and a `legend` instead of a `div` and a `label`. This must be set to `true` if you're using a Radio Group inside of a FormField (for accessibility reasons).
+   * @default false
+   */
   useFieldset: boolean;
+  /**
+   * The input component wrapped by the FormField.
+   */
   children: React.ReactNode;
+  /**
+   * The label for the error message hint text if `hintText` and `error` are defined. This prop should only be used for translating the default string 'Error'.
+   * @default 'Error'
+   */
+  errorLabel?: string;
+  /**
+   * The label for the alert message hint text if `hintText` and `error` are defined. This prop should only be used for translating the default string 'Alert'.
+   * @default 'Alert'
+   */
+  alertLabel?: string;
 }
 
 export interface FormFieldErrorBehavior {
@@ -82,6 +125,8 @@ export default class FormField extends React.Component<FormFieldProps> {
   static defaultProps = {
     labelPosition: FormField.LabelPosition.Top,
     useFieldset: false,
+    alertLabel: 'Alert',
+    errorLabel: 'Error',
   };
 
   private inputId: string = this.props.inputId || uuid();
@@ -124,6 +169,8 @@ export default class FormField extends React.Component<FormFieldProps> {
       hintText,
       hintId,
       inputId,
+      errorLabel,
+      alertLabel,
       grow,
       children,
       useFieldset,
@@ -152,7 +199,7 @@ export default class FormField extends React.Component<FormFieldProps> {
         <FormFieldInputContainer grow={grow} labelPosition={labelPosition}>
           {React.Children.map(children, this.renderChildren)}
           {hintText && (
-            <Hint error={error} id={hintId}>
+            <Hint errorLabel={errorLabel} alertLabel={alertLabel} error={error} id={hintId}>
               {hintText}
             </Hint>
           )}

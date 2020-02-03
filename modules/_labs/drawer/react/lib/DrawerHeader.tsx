@@ -1,37 +1,38 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {typeColors} from '@workday/canvas-colors-web';
-import {colors, spacing, H4, CanvasColor} from '@workday/canvas-kit-react-core';
+import {colors, spacing, H4, CanvasColor, typeColors} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonVariant, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The text of the header. Will also be applied as the `title` attribute of the header element
+   * The text of the DrawerHeader. This text will also be applied as the `title` attribute of the header element.
    */
   headerText?: string;
   /**
-   * Callback to handle closing the Drawer when the user clicks the close icon in the header
+   * The function called when the DrawerHeader close button is clicked.
    */
   onClose: IconButtonProps['onClick'];
   /**
-   * Add an `aria-label` to the close icon button. Default 'Close'. Useful for i18n
+   * The `aria-label` for the DrawHeader close button. Useful for i18n.
+   * @default Close
    */
   closeIconLabel: string;
   /**
-   * The background color in which the Drawer header will be
+   * The background color of the DrawerHeader.
    */
   headerColor: CanvasColor | string;
   /**
-   * Changes the border color to match something close to the header background color
+   * The border color of the DrawerHeader. This should match something close to `headerColor`.
    */
   borderColor: CanvasColor | string;
   /**
-   * Changes the icon and header to white for dark background colors on the header
+   * If true, render the icon and header in white. Useful for preserving contrast with a dark `headerColor`.
+   * @default false
    */
   inverse?: boolean;
   /**
-   * Unique id for the header for accessibility
+   * The unique id of the DrawerHeader for accessibility.
    */
   id?: string;
 }

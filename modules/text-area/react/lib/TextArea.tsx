@@ -1,18 +1,46 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
 import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 
 export interface TextAreaProps
-  extends GrowthBehavior,
+  extends Themeable,
+    GrowthBehavior,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  /**
+   * If true, set the TextArea to the disabled state.
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * The type of error associated with the TextArea (if applicable).
+   */
   error?: ErrorType;
+  /**
+   * The ref to the inner textarea element.
+   */
   inputRef?: React.Ref<HTMLTextAreaElement>;
+  /**
+   * The function called when the TextArea state changes.
+   */
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  /**
+   * The placeholder text of the TextArea.
+   */
   placeholder?: string;
+  /**
+   * If true, set the TextArea to read-only. The user will be unable to interact with the TextArea.
+   * @default false
+   */
   readOnly?: boolean;
+  /**
+   * The resize constraints of the TextArea.
+   * @default TextArea.ResizeDirection.Both
+   */
   resize: TextAreaResizeDirection;
+  /**
+   * The value of the TextArea.
+   */
   value?: any;
 }
 
@@ -41,6 +69,9 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
     },
     '&::placeholder': {
       color: inputColors.placeholder,
+    },
+    '&:hover': {
+      borderColor: inputColors.hoverBorder,
     },
     '&:focus:not([disabled])': {
       borderColor: inputColors.focusBorder,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -9,14 +9,42 @@ import canvas, {
 } from '@workday/canvas-kit-react-core';
 import uuid from 'uuid/v4';
 
-export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * If true, set the Radio button to the checked state.
+   * @default false
+   */
   checked: boolean;
+  /**
+   * If true, set the Radio button to the disabled state.
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * The HTML `id` of the underlying radio input element. This is required if `label` is defined as a non-empty string.
+   * @default A uniquely generated id
+   */
   id?: string;
+  /**
+   * The ref to the underlying radio input element. Use this to imperatively check or focus the Radio button.
+   */
   inputRef?: React.Ref<HTMLInputElement>;
+  /**
+   * The text of the Radio button label.
+   * @default ''
+   */
   label?: string;
+  /**
+   * The name of the Radio button.
+   */
   name?: string;
+  /**
+   * The function called when the Radio button state changes.
+   */
   onChange?: (e: React.SyntheticEvent) => void;
+  /**
+   * The value of the Radio button.
+   */
   value?: string;
 }
 
@@ -41,29 +69,11 @@ const RadioContainer = styled('div')({
  * :hover on the radio when you hover on it's corresponding label.
  * This stops the ripple from showing when you hover on the label.
  */
-const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>(
-  {
-    height: radioHeight,
-    width: radioWidth,
-    marginTop: '3px',
-    alignSelf: 'flex-start',
-    '&::after': {
-      borderRadius: borderRadius.circle,
-      boxShadow: '0 0 0 0 ' + colors.soap200,
-      content: '""',
-      display: 'inline-block',
-      height: radioHeight,
-      transition: 'box-shadow 150ms ease-out',
-      width: radioWidth,
-      zIndex: 1,
-    },
-  },
-  ({disabled}) => ({
-    '&:hover::after': {
-      boxShadow: disabled ? undefined : '0 0 0 ' + rippleRadius + 'px ' + colors.soap200,
-    },
-  })
-);
+const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>({
+  display: 'flex',
+  height: radioHeight,
+  width: radioWidth,
+});
 
 /**
  * Note: `~ div:first-of-type` refers to `RadioBackground`
@@ -93,6 +103,26 @@ const RadioInput = styled('input')<RadioProps>(
       ...focusRing(2, 2),
     },
   },
+
+  // Ripple
+  {
+    '& ~ div:first-of-type::after': {
+      borderRadius: borderRadius.circle,
+      boxShadow: `0 0 0 0 ${colors.soap200}`,
+      content: '""',
+      display: 'inline-block',
+      height: radioHeight,
+      transition: 'box-shadow 150ms ease-out',
+      width: radioWidth,
+      position: 'absolute',
+      zIndex: -1,
+    },
+  },
+  ({disabled}) => ({
+    '&:hover ~ div:first-of-type::after': {
+      boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
+    },
+  }),
   ({checked, disabled}) => ({
     cursor: disabled ? undefined : 'pointer',
     '&:focus:hover ~ div:first-of-type': {

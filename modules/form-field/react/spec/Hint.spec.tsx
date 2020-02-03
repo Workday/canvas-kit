@@ -1,28 +1,22 @@
 import * as React from 'react';
-import {shallow, mount} from 'enzyme';
+import {render} from '@testing-library/react';
 import Hint from '../lib/Hint';
 
 describe('Hint', () => {
-  test('Error label is set', () => {
-    const component = shallow(<Hint error={Hint.ErrorType.Error} />);
-
-    expect(component.render().text()).toEqual(expect.stringContaining('Error:'));
-
-    component.unmount();
+  describe('when rendered with an ErrorType', () => {
+    it('should render an error label when error type is Error', async () => {
+      const {getByText} = render(<Hint error={Hint.ErrorType.Error} />);
+      expect(getByText('Error:')).toBeDefined();
+    });
+    it('should render an alert label when error type is Alert', async () => {
+      const {getByText} = render(<Hint error={Hint.ErrorType.Alert} />);
+      expect(getByText('Alert:')).toBeDefined();
+    });
   });
-
-  test('Alert label is set', () => {
-    const component = shallow(<Hint error={Hint.ErrorType.Alert} />);
-
-    expect(component.render().text()).toEqual(expect.stringContaining('Alert:'));
-
-    component.unmount();
-  });
-
-  test('Hint should spread extra props', () => {
-    const component = mount(<Hint data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  describe('when rendered with a custom Error string', () => {
+    it('should render a custom label for type Error', async () => {
+      const {getByText} = render(<Hint errorLabel={'Hay un error'} error={Hint.ErrorType.Error} />);
+      expect(getByText('Hay un error:')).toBeDefined();
+    });
   });
 });

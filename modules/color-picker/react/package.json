@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-color-picker",
-  "version": "3.1.0",
+  "version": "3.3.2",
   "description": "A Canvas-styled color picker",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -24,7 +24,8 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6"
+    "build": "npm-run-all --parallel build:cjs build:es6",
+    "depcheck": "node ../../../utils/check-dependencies-exist.js"
   },
   "keywords": [
     "canvas",
@@ -37,10 +38,11 @@
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
-    "@workday/canvas-kit-react-common": "^3.1.0",
-    "@workday/canvas-kit-react-core": "^3.1.0",
-    "@workday/canvas-kit-react-icon": "^3.1.0",
-    "@workday/canvas-kit-react-text-input": "^3.1.0",
+    "@workday/canvas-kit-labs-react-core": "^3.3.0",
+    "@workday/canvas-kit-react-common": "^3.3.0",
+    "@workday/canvas-kit-react-core": "^3.2.0",
+    "@workday/canvas-kit-react-icon": "^3.3.0",
+    "@workday/canvas-kit-react-text-input": "^3.3.2",
     "@workday/canvas-system-icons-web": "^1.0.20"
   },
   "peerDependencies": {

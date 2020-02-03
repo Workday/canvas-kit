@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
 import {
   colors,
@@ -13,14 +13,30 @@ import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import SelectOption from './SelectOption';
 
-export interface SelectProps extends GrowthBehavior, React.SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps
+  extends Themeable,
+    GrowthBehavior,
+    React.SelectHTMLAttributes<HTMLSelectElement> {
   /**
-   * React children must be of type SelectOption and have at least two.
+   * The SelectOption children of the Select (must be at least two).
    */
   children: React.ReactElement<SelectOption>[];
+  /**
+   * If true, set the Select to the disabled state.
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * The type of error associated with the Select (if applicable).
+   */
   error?: ErrorType;
+  /**
+   * The function called when the Select state changes.
+   */
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+  /**
+   * The value of the Select.
+   */
   value?: string;
 }
 
