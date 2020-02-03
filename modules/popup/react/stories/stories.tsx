@@ -18,6 +18,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
     open: false,
     anchorEl: null,
   };
+
   public render() {
     const {anchorEl, open} = this.state;
     return (
@@ -80,4 +81,27 @@ storiesOf('Components|Popups/Popup/React', module)
     <div className="story">
       <PopupWrapper />
     </div>
-  ));
+  ))
+  .add(
+    'Open',
+    () => (
+      <Popup width={400} heading={'Delete Item'} padding={Popup.Padding.s} handleClose={() => null}>
+        <div style={{marginBottom: '24px'}}>
+          Are you sure you'd like to delete the item titled 'My Item'?
+        </div>
+
+        <Button style={{marginRight: '16px'}} onClick={() => null} variant={Button.Variant.Delete}>
+          Delete
+        </Button>
+        <Button onClick={() => null} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Popup>
+    ),
+    {
+      chromatic: {
+        viewports: [320],
+        pauseAnimationAtEnd: true,
+      },
+    }
+  );
