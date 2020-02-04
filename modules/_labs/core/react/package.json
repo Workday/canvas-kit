@@ -46,5 +46,8 @@
     "emotion-theming": "^10.0.10",
     "lodash": "^4.17.14",
     "rtl-css-js": "^1.13.1"
+  },
+  "devDependencies": {
+    "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }
