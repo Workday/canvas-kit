@@ -3,13 +3,13 @@
 
   input + label::before {
     border-radius: $wdc-border-radius-circle;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ccircle fill='%23FFFFFF' cx='12' cy='12' r='4'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ccircle fill='%23FFFFFF' cx='9' cy='9' r='4'%3E%3C/circle%3E%3C/g%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: center -4px;
-    background-size: $wdc-spacing-m;
+    background-position: center center;
+    background-size: 18px 18px;
   }
 
   input:checked + label::before {
-    background-size: $wdc-spacing-m;
+    background-size: 18px 18px;
   }
 }
