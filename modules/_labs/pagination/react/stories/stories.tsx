@@ -1,3 +1,4 @@
+/// <reference path="../../../../../typings.d.ts" />
 import styled from '@emotion/styled';
 import {boolean, number, text} from '@storybook/addon-knobs';
 import {storiesOf} from '@storybook/react';
@@ -5,26 +6,19 @@ import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
 import Pagination from '..';
-import {defaultAriaLabels, PaginationAriaLabels} from '../lib/PaginationAriaLabels';
 import README from '../README.md';
-
-/// <reference path="../../../../../typings.d.ts" />
 
 const Wrapper = styled('div')({
   display: 'block',
   textAlign: 'center',
 });
 
-const getAriaLabels = () =>
-  Object.keys(defaultAriaLabels)
-    .filter(key => key !== 'pageButtonAriaLabel')
-    .reduce(
-      (accum: object, labelKey: keyof PaginationAriaLabels) => ({
-        ...accum,
-        [labelKey]: text(labelKey, defaultAriaLabels[labelKey].toString()),
-      }),
-      {}
-    );
+const getAriaLabels = () => ({
+  paginationContainerAriaLabel: text('paginationContainerAriaLabel', 'Pagination'),
+  previousPageAriaLabel: text('previousPageAriaLabel', 'Previous Page'),
+  nextPageAriaLabel: text('nextPageAriaLabel', 'Next Page'),
+  navigationEllipseAriaLabel: text('navigationEllipseAriaLabel', 'Navigation Ellipse'),
+});
 
 const DefaultPaginationExample = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -41,7 +35,7 @@ const DefaultPaginationExample = () => {
         goToLabel={text('goToLabel', '')}
         currentPage={currentPage}
         onPageChange={p => setCurrentPage(p)}
-        customAriaLabels={getAriaLabels()}
+        {...getAriaLabels()}
       />
     </Wrapper>
   );
@@ -67,7 +61,7 @@ const WithCustomLabel = () => {
             items > 1 ? 'candidates' : 'candidate'
           }`
         }
-        customAriaLabels={getAriaLabels()}
+        {...getAriaLabels()}
       />
     </Wrapper>
   );
@@ -88,7 +82,7 @@ const WithGoToExample = () => {
         showGoTo={boolean('showGoTo', true)}
         goToLabel={text('goToLabel', 'Go To')}
         onPageChange={p => setCurrentPage(p)}
-        customAriaLabels={getAriaLabels()}
+        {...getAriaLabels()}
       />
     </Wrapper>
   );

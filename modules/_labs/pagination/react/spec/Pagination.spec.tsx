@@ -52,7 +52,7 @@ describe('Pagination Component', () => {
         currentPage={currentPage}
         onPageChange={p => null}
         showLabel
-        customAriaLabels={{previousPageAriaLabel: ariaLabel}}
+        previousPageAriaLabel={ariaLabel}
       />
     );
 
@@ -70,7 +70,7 @@ describe('Pagination Component', () => {
         currentPage={currentPage}
         onPageChange={p => null}
         showLabel
-        customAriaLabels={{nextPageAriaLabel: ariaLabel}}
+        nextPageAriaLabel={ariaLabel}
       />
     );
 

@@ -6,14 +6,13 @@ import canvas from '@workday/canvas-kit-react-core';
 import _ from 'lodash';
 import React from 'react';
 
-import {PaginationAriaLabelsDefault} from './PaginationAriaLabels';
-
 interface PagesProps {
   numPages: number;
   currentPage: number;
   onPageClick: (page: number) => void;
   mobile: boolean;
-  ariaLabels: PaginationAriaLabelsDefault;
+  navigationEllipseAriaLabel: string;
+  pageButtonAriaLabel: (page: number, selected: boolean) => string;
 }
 
 interface PaginationButtonProps {
@@ -36,7 +35,14 @@ const activeStyling = css(noPointerEvents, noTransitions, {
 });
 
 const Pages: React.FC<PagesProps> = props => {
-  const {numPages, currentPage, onPageClick, mobile, ariaLabels} = props;
+  const {
+    numPages,
+    currentPage,
+    onPageClick,
+    mobile,
+    pageButtonAriaLabel,
+    navigationEllipseAriaLabel,
+  } = props;
 
   let pagesToDisplay = 5;
   let start = 1;
@@ -80,14 +86,15 @@ const Pages: React.FC<PagesProps> = props => {
       page={page}
       key={page}
       active={page === currentPage}
-      ariaLabel={ariaLabels.pageButtonAriaLabel(page, page === currentPage)}
+      ariaLabel={pageButtonAriaLabel(page, page === currentPage)}
     />
   ));
 
   const ellipse = (
     <span
+      css={noPointerEvents}
       key={'ellipse'}
-      aria-label={ariaLabels.navigationEllipseAriaLabel}
+      aria-label={navigationEllipseAriaLabel}
       tabIndex={-1}
       style={type.small}
     >

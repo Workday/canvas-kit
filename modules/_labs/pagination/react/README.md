@@ -83,17 +83,23 @@ return (
 
 > A function to build a custom label below the pagination bar.
 
-#### customAriaLabels?: PaginationAriaLabels
+#### paginationContainerAriaLabel?: string;
 
-> An object to customize aria labels within the pagination component. All labels are optional and
-> have default values.
+> Customizes the aria label for the Pagination Container Div. Default is 'Pagination'.
 
-```
-PaginationAriaLabels {
-  paginationContainerAriaLabel?: string;
-  previousPageAriaLabel?: string;
-  nextPageAriaLabel?: string;
-  navigationEllipseAriaLabel?: string;
-  pageButtonAriaLabel?: (page: number, selected: boolean) => string;
-}
-```
+#### previousPageAriaLabel?: string;
+
+> Customizes the aria label for the Previous Page Arrow. Default is 'Previous Page'.
+
+#### nextPageAriaLabel?: string;
+
+> Customizes the aria label for the Next Page Arrow. Default is 'Next Page'.
+
+#### navigationEllipseAriaLabel?: string;
+
+> Customizes the aria label for the Navigation Ellipses. Default is 'Navigation Ellipse'.
+
+#### pageButtonAriaLabel?: (page: number, selected: boolean) => string;
+
+> Customizes each page button. Default is (page: number, selected: boolean) =>
+> `${selected ? 'Selected, ' : ''}Page ${page}`

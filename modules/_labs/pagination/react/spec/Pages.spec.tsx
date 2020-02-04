@@ -3,7 +3,6 @@ import _ from 'lodash';
 import React from 'react';
 
 import Pagination from '..';
-import {PaginationAriaLabels} from '../lib/PaginationAriaLabels';
 
 describe('Pagination Pages', () => {
   window.resizeTo = function resizeTo(width: number, height: number) {
@@ -26,21 +25,19 @@ describe('Pagination Pages', () => {
     pageSize: number,
     currentPage: number,
     setCurrentPage: (p: number) => void,
-    ariaLabels?: PaginationAriaLabels
+    pageButtonAriaLabel?: (page: number, active: boolean) => string
   ) => (
     <Pagination
       total={total}
       pageSize={pageSize}
       currentPage={currentPage}
       onPageChange={setCurrentPage ? p => setCurrentPage(p) : p => null}
-      customAriaLabels={ariaLabels}
+      pageButtonAriaLabel={pageButtonAriaLabel}
     />
   );
 
-  const ariaLabels = {
-    pageButtonAriaLabel: (page: number, active: boolean) =>
-      `paginationButton${active ? 'Active' : page}`,
-  };
+  const pageButtonAriaLabel = (page: number, active: boolean) =>
+    `paginationButton${active ? 'Active' : page}`;
 
   _.range(1, 10).forEach(page => {
     it(`Clicking page ${page + 1} brings you to page ${page}`, () => {
@@ -48,7 +45,7 @@ describe('Pagination Pages', () => {
 
       const setCurrentPage = (page: number) => (currentPage = page);
       const {getByLabelText} = render(
-        PaginationComponent(10, 1, currentPage, setCurrentPage, ariaLabels)
+        PaginationComponent(10, 1, currentPage, setCurrentPage, pageButtonAriaLabel)
       );
 
       getByLabelText(`paginationButton${page + 1}`).click();
@@ -61,7 +58,7 @@ describe('Pagination Pages', () => {
 
     const setCurrentPage = (page: number) => (currentPage = page);
     const {getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, setCurrentPage, ariaLabels)
+      PaginationComponent(10, 1, currentPage, setCurrentPage, pageButtonAriaLabel)
     );
 
     getByLabelText('paginationButton1').click();
@@ -73,7 +70,7 @@ describe('Pagination Pages', () => {
 
     const setCurrentPage = (page: number) => (currentPage = page);
     const {getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, setCurrentPage, ariaLabels)
+      PaginationComponent(10, 1, currentPage, setCurrentPage, pageButtonAriaLabel)
     );
 
     getByLabelText('paginationButton10').click();
@@ -86,7 +83,7 @@ describe('Pagination Pages', () => {
       const pageSize = 10;
 
       const {queryByLabelText, getByLabelText} = render(
-        PaginationComponent(page * pageSize, pageSize, currentPage, () => null, ariaLabels)
+        PaginationComponent(page * pageSize, pageSize, currentPage, () => null, pageButtonAriaLabel)
       );
 
       expect(getByLabelText('paginationButtonActive'));
@@ -101,7 +98,7 @@ describe('Pagination Pages', () => {
     const currentPage = 1;
 
     const {queryAllByLabelText, queryByLabelText} = render(
-      PaginationComponent(1, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(1, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(queryByLabelText(`paginationButton1`)).toBeNull();
@@ -113,7 +110,7 @@ describe('Pagination Pages', () => {
     const currentPage = 1;
 
     const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(getByLabelText('paginationButton10'));
@@ -124,7 +121,7 @@ describe('Pagination Pages', () => {
     const currentPage = 50;
 
     const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(getByLabelText('paginationButton100'));
@@ -135,7 +132,7 @@ describe('Pagination Pages', () => {
     const currentPage = 10;
 
     const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(getByLabelText('paginationButton1'));
@@ -146,7 +143,7 @@ describe('Pagination Pages', () => {
     const currentPage = 97;
 
     const {getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(getByLabelText('paginationButton1'));
@@ -156,7 +153,7 @@ describe('Pagination Pages', () => {
     const currentPage = 96;
 
     const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(getByLabelText('paginationButton100'));
@@ -167,7 +164,7 @@ describe('Pagination Pages', () => {
     const currentPage = 4;
 
     const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(getByLabelText('paginationButton100'));
@@ -178,7 +175,7 @@ describe('Pagination Pages', () => {
     const currentPage = 3;
 
     const {getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(getByLabelText('paginationButton1'));
@@ -189,7 +186,7 @@ describe('Pagination Pages', () => {
     const currentPage = 3;
 
     const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     for (let i = 1; i < 6; i++) {
@@ -204,7 +201,7 @@ describe('Pagination Pages', () => {
     const currentPage = 4;
 
     const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     expect(queryByLabelText('paginationButton1')).toBeNull();
@@ -221,7 +218,7 @@ describe('Pagination Pages', () => {
 
     window.resizeTo(450, window.innerHeight);
     const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, ariaLabels)
+      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
     );
 
     for (let i = 1; i < 10; i++) {
@@ -237,7 +234,7 @@ describe('Pagination Pages', () => {
       window.resizeTo(450, window.innerHeight);
 
       const {queryByLabelText, getByLabelText} = render(
-        PaginationComponent(10, 1, page, () => null, ariaLabels)
+        PaginationComponent(10, 1, page, () => null, pageButtonAriaLabel)
       );
 
       for (let i = 8; i < 10; i++) {
