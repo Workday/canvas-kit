@@ -3,17 +3,12 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
-
 import README from '../lib/theming/README.md';
 
-import {
-  CanvasProvider,
-  createCanvasTheme,
-  ContentDirection,
-} from '@workday/canvas-kit-labs-react-core';
+import {CanvasProvider, createCanvasTheme, ContentDirection} from '../index';
 import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-system-icons-web';
-import {Card} from '@workday/canvas-kit-react';
+import {IconButton, IconButtonProps} from '../../../../button/react';
+import {Card} from '../../../../card/react';
 
 const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
   'aria-label': 'Activity Stream',

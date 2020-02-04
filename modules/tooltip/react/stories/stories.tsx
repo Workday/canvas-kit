@@ -5,7 +5,7 @@ import withReadme from 'storybook-readme/with-readme';
 import Popper from '@material-ui/core/Popper';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
-import {IconButton} from '../../../button/react/index';
+import {IconButton} from '../../../button/react';
 import Tooltip from '../index';
 import README from '../README.md';
 

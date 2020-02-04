@@ -70,6 +70,9 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
     '&::placeholder': {
       color: inputColors.placeholder,
     },
+    '&:hover': {
+      borderColor: inputColors.hoverBorder,
+    },
     '&:focus:not([disabled])': {
       borderColor: inputColors.focusBorder,
       boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
