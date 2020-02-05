@@ -11,22 +11,26 @@ ${
 ${description}
 
 ## Installation
-
+${
+  !unstable
+    ? `
 \`\`\`sh
 yarn add @workday/canvas-kit-css
 \`\`\`
 
 or
-
+`
+    : ''
+}
 \`\`\`sh
-yarn add @workday/canvas-kit-css-${name}
+yarn add @workday/canvas-kit${unstable ? '-labs' : ''}-css-${name}
 \`\`\`
 
 Add your \`node_modules\` directory to your SASS \`includePaths\`. You will then be able to import
 \`index.scss\`.
 
 \`\`\`scss
-@import '~@workday/canvas-kit-css-${name}/index.scss';
+@import '~@workday/canvas-kit${unstable ? '-labs' : ''}-css-${name}/index.scss';
 \`\`\`
 
 ## Usage
