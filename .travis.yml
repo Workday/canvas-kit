@@ -17,7 +17,7 @@ cache:
     - ~/.cache
 
 git:
-  depth: 3
+  depth: 50
 
 stages:
 - name: pull_request
@@ -70,16 +70,21 @@ jobs:
       - yarn chromatic --auto-accept-changes --app-code="dlpro96xybh" # v1
       - yarn chromatic --auto-accept-changes # v2
       - yarn build-storybook
-      - npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish --yes --canary --preid next --pre-dist-tag next
+      - yarn build
     env:
       - CHROMATIC_APP_CODE="m1dh5kc7oj"
     deploy:
-      provider: pages
-      skip_cleanup: true
-      local_dir: docs
-      github_token: "$GH_STORYBOOK_TOKEN"
-      on:
-        branch: master
+      - provider: script
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish --yes --canary --preid next --dist-tag next
+        skip_cleanup: true
+        on:
+          tags: true
+      - provider: pages
+        skip_cleanup: true
+        local_dir: docs
+        github_token: "$GH_STORYBOOK_TOKEN"
+        on:
+          branch: master
 
 env:
   global:
