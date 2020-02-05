@@ -70,6 +70,7 @@ jobs:
       - yarn chromatic --auto-accept-changes --app-code="dlpro96xybh" # v1
       - yarn chromatic --auto-accept-changes # v2
       - yarn build-storybook
+      - npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish --yes --canary --preid next --pre-dist-tag next
     env:
       - CHROMATIC_APP_CODE="m1dh5kc7oj"
     deploy:
