@@ -78,7 +78,7 @@ jobs:
         script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish --yes --canary --preid next --dist-tag next
         skip_cleanup: true
         on:
-          tags: true
+          branch: master
       - provider: pages
         skip_cleanup: true
         local_dir: docs
