@@ -16,12 +16,12 @@ describe('Radio Group', () => {
 
       context('when clicking one radio and then selecting another radio', () => {
         beforeEach(() => {
-          cy.getByLabelText('E-mail').click();
-          cy.getByLabelText('Mail').click();
+          cy.findByLabelText('E-mail').click();
+          cy.findByLabelText('Mail').click();
         });
 
         it('should one have one radio selected', () => {
-          cy.getByLabelText('Mail').should('be.checked');
+          cy.findByLabelText('Mail').should('be.checked');
         });
       });
     });

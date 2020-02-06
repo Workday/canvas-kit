@@ -5,4 +5,3 @@ import 'cypress-storybook/cypress';
 import '@testing-library/cypress/add-commands';
 
 import './commands';
-import './query';
