@@ -4,7 +4,7 @@ import {
   defaultCanvasTheme,
   createCanvasTheme,
 } from '@workday/canvas-kit-labs-react-core';
-import {customThemePalette} from '../storybook';
+import {customColorTheme} from '../storybook';
 import {object} from '@storybook/addon-knobs';
 
 const label = 'theme';
@@ -17,9 +17,7 @@ export default makeDecorator({
   wrapper: (storyFn, context, {parameters}) => {
     return (
       <CanvasProvider
-        theme={createCanvasTheme(
-          object(label, parameters ? customThemePalette : defaultCanvasTheme)
-        )}
+        theme={createCanvasTheme(object(label, parameters ? customColorTheme : defaultCanvasTheme))}
       >
         {storyFn(context)}
       </CanvasProvider>

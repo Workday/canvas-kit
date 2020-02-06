@@ -62,21 +62,10 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
     },
   ({theme, error}) => {
     return {
-      '&:hover': {
-        borderColor: theme.palette.neutral.main,
-      },
       '&:focus:not([disabled])': {
         borderColor: theme.palette.common.focusOutline,
         boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
         outline: 'none',
-      },
-      '&:disabled': {
-        backgroundColor: theme.palette.neutral.lightest,
-        borderColor: theme.palette.neutral.main,
-        color: theme.palette.neutral.main,
-        '&::placeholder': {
-          color: theme.palette.neutral.main,
-        },
       },
       ...errorRing(error, theme),
     };

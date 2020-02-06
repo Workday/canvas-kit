@@ -211,6 +211,9 @@ storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
     canvasProviderDecorator: {
       showCustomThemePalette: true,
     },
+    docs: {
+      disable: true,
+    },
   })
   .add('Theming', () => (
     <StaticStates>

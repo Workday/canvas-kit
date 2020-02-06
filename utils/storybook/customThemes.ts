@@ -1,4 +1,4 @@
-export const customThemePalette = {
+export const customColorTheme = {
   palette: {
     primary: {
       main: 'purple',
