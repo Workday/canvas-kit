@@ -10,10 +10,10 @@ import chroma from 'chroma-js';
 
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
-import {AvatarButton} from '../../../../avatar/react/index';
-import {colors, spacing} from '../../../../core/react/index';
-import {Button, IconButton} from '../../../../button/react/index';
-import {MenuItem} from '../../../menu/react/index';
+import {AvatarButton} from '../../../../avatar/react';
+import {colors, spacing} from '../../../../core/react';
+import {Button, IconButton} from '../../../../button/react';
+import {MenuItem} from '../../../menu/react';
 import {
   GlobalHeader,
   Header,
@@ -344,6 +344,32 @@ storiesOf('Labs|Header/React', module)
               onSubmit={handleSearchSubmitTest}
             />
           }
+          isCollapsed={boolean('isCollapsed', false)}
+        >
+          {nav}
+          <IconButton
+            variant={IconButton.Variant.Circle}
+            icon={notificationsIcon}
+            title="Notifications"
+            aria-label="Notifications"
+          />
+          <IconButton
+            variant={IconButton.Variant.Circle}
+            icon={inboxIcon}
+            title="Inbox"
+            aria-label="Inbox"
+          />
+          <Button variant={Button.Variant.Primary}>Logout</Button>
+        </Header>
+      </div>
+      <br />
+      <div css={containerStyle}>
+        <Header
+          variant={Header.Variant.Dub}
+          title="Centered Menu Without Search"
+          themeColor={Header.Theme.White}
+          centeredNav={true}
+          brandUrl="#"
           isCollapsed={boolean('isCollapsed', false)}
         >
           {nav}

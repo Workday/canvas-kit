@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button} from '@workday/canvas-kit-react-button';
+import {Button} from '../../../button/react';
 import Modal, {useModal} from '..';
 import README from '../README.md';
 

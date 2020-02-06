@@ -6,9 +6,9 @@ import {action} from '@storybook/addon-actions';
 import {withKnobs} from '@storybook/addon-knobs';
 
 import Combobox, {ComboboxProps} from '../index';
-import FormField from '../../../../form-field/react/index';
-import {MenuItem} from '../../../menu/react/index';
-import {TextInput} from '../../../../text-input/react/index';
+import FormField from '../../../../form-field/react';
+import {MenuItem} from '../../../menu/react';
+import {TextInput} from '../../../../text-input/react';
 import README from '../README.md';
 
 class Autocomplete extends React.Component<
@@ -52,6 +52,7 @@ class Autocomplete extends React.Component<
 }
 
 storiesOf('Labs|Combobox/React', module)
+  .addParameters({component: Combobox})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .add('Autocomplete', () => (

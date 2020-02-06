@@ -13,14 +13,45 @@ import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * If true, set the Checkbox to the checked state.
+   * @default false
+   */
   checked: boolean;
+  /**
+   * If true, set the Checkbox to the disabled state.
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * The HTML `id` of the underlying checkbox input element. This is required if `label` is defined as a non-empty string.
+   */
   id?: string;
+  /**
+   * The ref to the underlying checkbox input element. Use this to imperatively check or focus the Checkbox.
+   */
   inputRef?: React.Ref<HTMLInputElement>;
+  /**
+   * The text of the Checkbox label.
+   * @default ''
+   */
   label?: string;
+  /**
+   * The function called when the Checkbox state changes.
+   */
   onChange?: (e: React.SyntheticEvent) => void;
+  /**
+   * The value of the Checkbox.
+   */
   value?: string;
+  /**
+   * The type of error associated with the Checkbox (if applicable).
+   */
   error?: ErrorType;
+  /**
+   * If true, set the Checkbox to an indeterminate state. Use this on a Checkbox with nested child Checkboxes to denote that some (but not all) child Checkboxes are checked.
+   * @default false
+   */
   indeterminate?: boolean;
 }
 
