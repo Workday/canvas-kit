@@ -87,7 +87,7 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
  * and was easier to use than a component selector in this case.
  */
 const CheckboxInput = styled('input')<CheckboxProps>(
-  {
+  ({theme}) => ({
     borderRadius: borderRadius.s,
     width: checkboxTapArea,
     height: checkboxTapArea,
@@ -106,16 +106,16 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       borderColor: inputColors.hoverBorder,
     },
     '&:checked ~ div:first-of-type': {
-      borderColor: colors.blueberry400,
-      backgroundColor: colors.blueberry400,
+      borderColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main,
     },
     '&:disabled ~ div:first-of-type': {
       borderColor: inputColors.disabled.border,
       backgroundColor: inputColors.disabled.background,
     },
     '&:disabled:checked ~ div:first-of-type': {
-      borderColor: colors.blueberry200,
-      backgroundColor: colors.blueberry200,
+      borderColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.primary.light,
     },
 
     // Focus
@@ -123,7 +123,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       outline: 'none',
     },
     '&:focus ~ div:first-of-type': {
-      borderColor: colors.blueberry400,
+      borderColor: theme.palette.primary.main,
       borderWidth: '2px',
       boxShadow: 'none',
     },
@@ -142,14 +142,14 @@ const CheckboxInput = styled('input')<CheckboxProps>(
         },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: colors.blueberry400,
+        borderColor: theme.palette.primary.main,
       },
       '&:disabled:checked ~ div:first-of-type': {
-        borderColor: colors.blueberry200,
-        backgroundColor: colors.blueberry200,
+        borderColor: theme.palette.primary.light,
+        backgroundColor: theme.palette.primary.light,
       },
     }),
-  },
+  }),
 
   // Ripple
   {
@@ -170,15 +170,15 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
   }),
-  ({error}) => {
+  ({theme, error}) => {
     let errorRingColor;
     let errorRingBorderColor = 'transparent';
 
     if (error === ErrorType.Error) {
-      errorRingColor = inputColors.error.border;
+      errorRingColor = theme.palette.error.main;
     } else if (error === ErrorType.Alert) {
-      errorRingColor = inputColors.warning.border;
-      errorRingBorderColor = colors.cantaloupe600;
+      errorRingColor = theme.palette.alert.main;
+      errorRingBorderColor = theme.palette.alert.darkest;
     } else {
       return;
     }
@@ -192,7 +192,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
         borderColor: errorRingColor,
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: colors.blueberry400,
+        borderColor: theme.palette.primary.main,
         boxShadow: `
             0 0 0 2px ${colors.frenchVanilla100},
             0 0 0 4px ${errorRingColor},
