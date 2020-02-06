@@ -17,7 +17,7 @@ cache:
     - ~/.cache
 
 git:
-  depth: 50
+  depth: 3
 
 stages:
 - name: pull_request
@@ -75,7 +75,7 @@ jobs:
       - CHROMATIC_APP_CODE="m1dh5kc7oj"
     deploy:
       - provider: script
-        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish --yes --canary --preid next --dist-tag next
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish --yes --force-publish="*" --canary --preid next --dist-tag next
         skip_cleanup: true
         on:
           branch: master
