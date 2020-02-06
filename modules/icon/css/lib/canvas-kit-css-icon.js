@@ -1,8 +1,12 @@
 import SVGInjector from 'svg-injector';
 import toSlug from 'to-slug-case';
 import canvasColors from '@workday/canvas-colors-web';
-import {pickForegroundColor} from '@workday/canvas-kit-react-common';
-import {appendStyle, getHue, getColor} from './utils';
+import {
+  appendStyle,
+  getHue,
+  getColor,
+  pickForegroundColor,
+} from './utils';
 
 const cdnUrl = 'https://design.workdaycdn.com/beta/assets/web-icons';
 
