@@ -11,7 +11,7 @@ describe('Radio', () => {
 
   context(`given the Default story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Radio/React/Left Label/Radio', story);
+      h.stories.load('Components|Inputs/Radio/React/Left Label/Radio', 'Default');
     });
 
     it('should pass accessibility checks', () => {
@@ -23,15 +23,12 @@ describe('Radio', () => {
         cy.findByLabelText('E-mail').click();
       });
 
-      it.only('should be checked', () => {
+      it('should be checked', () => {
         getRadio().should('be.checked');
       });
     });
   });
 
-  before(() => {
-    h.stories.visit();
-  });
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components|Inputs/Radio/React/Left Label/Radio', 'Disabled');
