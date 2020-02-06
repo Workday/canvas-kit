@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {
+  ErrorType,
+  focusRing,
+  themedFocusRing,
+  mouseFocusBehavior,
+} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
@@ -128,7 +133,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       boxShadow: 'none',
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing(2, 2, false),
+      ...themedFocusRing(theme, {width: 2, separation: 2, animate: false}),
       '& span': {
         marginLeft: '-7px',
       },
