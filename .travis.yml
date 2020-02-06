@@ -17,7 +17,7 @@ cache:
     - ~/.cache
 
 git:
-  depth: 3
+  depth: false
 
 stages:
 - name: pull_request
