@@ -18,22 +18,26 @@ ${
 ${description}
 
 ## Installation
-
+${
+  !unstable
+    ? `
 \`\`\`sh
 yarn add @workday/canvas-kit-react
 \`\`\`
 
 or
-
+`
+    : ''
+}
 \`\`\`sh
-yarn add @workday/canvas-kit-react-${name}
+yarn add @workday/canvas-kit${unstable ? '-labs' : ''}-react-${name}
 \`\`\`
 
 ## Usage
 
 \`\`\`tsx
 import * as React from 'react';
-import ${pascalCaseName} from '@workday/canvas-kit-react-${name}';
+import ${pascalCaseName} from '@workday/canvas-kit${unstable ? '-labs' : ''}-react-${name}';
 
 <${pascalCaseName} />;
 \`\`\`
