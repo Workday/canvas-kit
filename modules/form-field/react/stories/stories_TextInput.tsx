@@ -16,56 +16,6 @@ import README from '../../../text-input/react/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
-const TextInputVisual = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          value: [{value: 'Input value', label: 'With Value'}, {value: '', label: 'No Value'}],
-          placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
-          error: [
-            {value: undefined, label: ''},
-            {value: TextInput.ErrorType.Alert, label: 'Alert'},
-            {value: TextInput.ErrorType.Error, label: 'Error'},
-          ],
-        },
-        props => {
-          if (props.value === '' && !props.placeholder) {
-            return false;
-          }
-          return true;
-        }
-      )}
-      columnProps={permutateProps(
-        {
-          className: [
-            {label: 'Default', value: ''},
-            {label: 'Hover', value: 'hover'},
-            {label: 'Focus', value: 'focus'},
-            {label: 'Focus Hover', value: 'focus hover'},
-            {label: 'Active', value: 'active'},
-            {label: 'Active Hover', value: 'active hover'},
-          ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-        },
-        props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
-        }
-      )}
-    >
-      {props => (
-        <TextInput
-          {...props}
-          style={{minWidth: 60, width: 100}}
-          onChange={() => {}} // eslint-disable-line no-empty-function
-        />
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
 
 storiesOf('Components|Inputs/Text Input/React/Top Label', module)
   .addParameters({component: TextInput})
@@ -209,13 +159,64 @@ storiesOf('Components|Inputs/Text Input/React/Left Label', module)
     </FormField>
   ));
 
+const TextInputStates = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={permutateProps(
+        {
+          value: [{value: 'Input value', label: 'With Value'}, {value: '', label: 'No Value'}],
+          placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
+          error: [
+            {value: undefined, label: ''},
+            {value: TextInput.ErrorType.Alert, label: 'Alert'},
+            {value: TextInput.ErrorType.Error, label: 'Error'},
+          ],
+        },
+        props => {
+          if (props.value === '' && !props.placeholder) {
+            return false;
+          }
+          return true;
+        }
+      )}
+      columnProps={permutateProps(
+        {
+          className: [
+            {label: 'Default', value: ''},
+            {label: 'Hover', value: 'hover'},
+            {label: 'Focus', value: 'focus'},
+            {label: 'Focus Hover', value: 'focus hover'},
+            {label: 'Active', value: 'active'},
+            {label: 'Active Hover', value: 'active hover'},
+          ],
+          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+        },
+        props => {
+          if (props.disabled && !['', 'hover'].includes(props.className)) {
+            return false;
+          }
+          return true;
+        }
+      )}
+    >
+      {props => (
+        <TextInput
+          {...props}
+          style={{minWidth: 60, width: 100}}
+          onChange={() => {}} // eslint-disable-line no-empty-function
+        />
+      )}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+
 storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
   .addParameters({component: TextInput})
   .addDecorator(withReadme(README))
-  .add('States', () => <TextInputVisual />)
+  .add('States', () => <TextInputStates />)
   .addParameters({
     canvasProviderDecorator: {
       theme: customColorTheme,
     },
   })
-  .add('Theming', () => <TextInputVisual />);
+  .add('Theming', () => <TextInputStates />);
