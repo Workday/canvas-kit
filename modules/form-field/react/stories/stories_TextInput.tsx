@@ -3,7 +3,12 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {controlComponent, ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
+import {
+  controlComponent,
+  ComponentStatesTable,
+  permutateProps,
+  customColorTheme,
+} from '../../../../utils/storybook';
 
 import {TextInput} from '../../../text-input/react/index';
 import FormField from '../index';
@@ -209,10 +214,7 @@ storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
   ))
   .addParameters({
     canvasProviderDecorator: {
-      showCustomThemePalette: true,
-    },
-    docs: {
-      disable: true,
+      customColorTheme: customColorTheme,
     },
   })
   .add('Theming', () => (
