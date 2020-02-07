@@ -53,9 +53,6 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
       display: 'none',
     },
   },
-  ({error}) => ({
-    ...errorRing(error),
-  }),
   ({grow}) =>
     grow && {
       width: '100%',
