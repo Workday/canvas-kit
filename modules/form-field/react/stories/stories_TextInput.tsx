@@ -214,7 +214,7 @@ storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
   ))
   .addParameters({
     canvasProviderDecorator: {
-      customColorTheme: customColorTheme,
+      theme: customColorTheme,
     },
   })
   .add('Theming', () => (

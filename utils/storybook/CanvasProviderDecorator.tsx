@@ -16,7 +16,7 @@ export default makeDecorator({
   wrapper: (storyFn, context, {parameters = {}}) => {
     return (
       <CanvasProvider
-        theme={createCanvasTheme(object(label, parameters.customColorTheme || defaultCanvasTheme))}
+        theme={createCanvasTheme(object(label, parameters.theme || defaultCanvasTheme))}
       >
         {storyFn(context)}
       </CanvasProvider>
