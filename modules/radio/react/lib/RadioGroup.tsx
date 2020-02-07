@@ -28,7 +28,7 @@ export interface RadioGroupProps extends Themeable, GrowthBehavior {
   onChange?: (value: string | number) => void;
 }
 
-const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow'>>(
+const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'>>(
   {
     display: 'inline-block',
     boxSizing: 'border-box',
@@ -43,15 +43,15 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow'>>(
     },
   },
   ({grow}) => grow && {width: '100%'},
-  ({error}) => {
+  ({error, theme}) => {
     let errorBorderColor;
     let errorRingColor;
 
     if (error === ErrorType.Error) {
-      errorRingColor = inputColors.error.border;
+      errorRingColor = theme.palette.error.main;
     } else if (error === ErrorType.Alert) {
-      errorRingColor = inputColors.warning.border;
-      errorBorderColor = colors.cantaloupe600;
+      errorRingColor = theme.palette.alert.main;
+      errorBorderColor = theme.palette.error.darkest;
     } else {
       return {};
     }
