@@ -1,4 +1,6 @@
-export const customColorTheme = {
+import {PartialCanvasTheme} from '@workday/canvas-kit-labs-react-core';
+
+export const customColorTheme: PartialCanvasTheme = {
   palette: {
     primary: {
       main: 'purple',
