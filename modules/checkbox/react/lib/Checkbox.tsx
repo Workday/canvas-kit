@@ -107,8 +107,10 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     },
 
     // States
-    '&:not(:checked):not(:disabled):not(:focus):hover ~ div:first-of-type': {
-      borderColor: inputColors.hoverBorder,
+    '&:not(:checked):not(:disabled):not(:focus):hover, &:not(:checked):not(:disabled):active': {
+      '~ div:first-of-type': {
+        borderColor: inputColors.hoverBorder,
+      },
     },
     '&:checked ~ div:first-of-type': {
       borderColor: theme.palette.primary.main,
@@ -140,7 +142,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        border: `1px solid ${inputColors.border}`,
+        border: `1px solid ${inputColors.hoverBorder}`,
         boxShadow: 'none',
         '& span': {
           marginLeft: '-6px',
@@ -193,8 +195,10 @@ const CheckboxInput = styled('input')<CheckboxProps>(
         border: `1px solid ${errorRingColor}`,
         boxShadow: `0 0 0 1px ${errorRingColor}, 0 0 0 2px ${errorRingBorderColor}`,
       },
-      '&:not(:checked):not(:disabled):not(:focus):hover ~ div:first-of-type': {
-        borderColor: errorRingColor,
+      '&:not(:checked):not(:disabled):not(:focus):hover, &:not(:checked):not(:disabled):active': {
+        '~ div:first-of-type': {
+          borderColor: errorRingColor,
+        },
       },
       '&:checked ~ div:first-of-type': {
         borderColor: theme.palette.primary.main,
