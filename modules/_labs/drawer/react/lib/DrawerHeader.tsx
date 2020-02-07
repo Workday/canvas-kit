@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {typeColors} from '@workday/canvas-colors-web';
-import {colors, spacing, H4, CanvasColor} from '@workday/canvas-kit-react-core';
+import {colors, spacing, H4, CanvasColor, typeColors} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonVariant, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 

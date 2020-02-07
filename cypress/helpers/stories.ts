@@ -1,18 +1,3 @@
-declare global {
-  interface Window {
-    /**
-     * Load a story. This will invoke the storybook router,
-     * unmount a previous story, mount the current story and force a rerender
-     * This should be in a `beforeEach` block to force a fresh new story
-     * @param categorization Categorization information found in the `.add` function - usually used for menu navigation
-     * @param story The specific story example in the `.add` function
-     * @example
-     * setCurrentStory('Button', 'Primary')
-     */
-    setCurrentStory(categorization: string, story: string);
-  }
-}
-
 /**
  * Load a story. This will invoke the storybook router,
  * unmount a previous story, mount the current story and force a rerender
@@ -23,24 +8,7 @@ declare global {
  * h.stories.load('Button', 'Primary')
  */
 export function load(categorization: string, story: string) {
-  const log = Cypress.log({
-    name: 'Load',
-    message: [categorization, story],
-    $el: Cypress.$('#root'),
-  });
-  log.snapshot('before');
-
-  cy.window({log: false}).then(win => {
-    const now = performance.now();
-    win.setCurrentStory(categorization.replace(/[|/]/g, '-').toLowerCase(), story.toLowerCase());
-    log.set('consoleProps', () => ({
-      categorization,
-      story,
-      renderTime: performance.now() - now,
-    }));
-    log.snapshot('after');
-    log.end();
-  });
+  return cy.loadStory(categorization, story);
 }
 
 /**
@@ -48,7 +16,7 @@ export function load(categorization: string, story: string) {
  * To load a story, use h.stories.load(storyName, variant)
  */
 export function visit() {
-  cy.visit('iframe.html');
+  cy.visitStorybook();
   cy.injectAxe();
   cy.configureAxe({
     rules: [

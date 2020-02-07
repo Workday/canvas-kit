@@ -10,7 +10,7 @@ import {
   customColorTheme,
 } from '../../../../utils/storybook';
 
-import {TextInput} from '../../../text-input/react/index';
+import {TextInput} from '../../../text-input/react';
 import FormField from '../index';
 import README from '../../../text-input/react/README.md';
 

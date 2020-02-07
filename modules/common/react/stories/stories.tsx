@@ -3,8 +3,8 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button} from '../../../button/react/index';
-import {Popup} from '../../../popup/react/index';
+import {Button} from '../../../button/react';
+import {Popup} from '../../../popup/react';
 import {Popper} from '../index';
 import README from '../README.md';
 

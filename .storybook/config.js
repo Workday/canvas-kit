@@ -1,11 +1,8 @@
-import {configure, addDecorator, addParameters, forceReRender} from '@storybook/react';
+import {configure, addDecorator, addParameters} from '@storybook/react';
 import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
 import {withKnobs} from '@storybook/addon-knobs/react';
 import {create} from '@storybook/theming';
-import addons from '@storybook/addons';
-import Events from '@storybook/core-events';
-import {toId} from '@storybook/router';
-import ReactDOM from 'react-dom';
+import 'cypress-storybook/react';
 
 import {commonColors, typeColors, fontFamily} from '../modules/core/react';
 import {CanvasProviderDecorator, FontsDecorator} from '../utils/storybook';
@@ -78,18 +75,3 @@ addParameters({
 });
 
 configure(loadStories, module);
-
-function setCurrentStory(categorization, story) {
-  clearCurrentStory();
-  addons.getChannel().emit(Events.SET_CURRENT_STORY, {
-    storyId: toId(categorization, story),
-  });
-  forceReRender();
-}
-
-function clearCurrentStory() {
-  var root = document.querySelector('#root');
-  ReactDOM.unmountComponentAtNode(root);
-}
-
-window.setCurrentStory = setCurrentStory;

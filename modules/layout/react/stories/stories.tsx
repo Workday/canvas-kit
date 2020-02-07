@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Card} from '../../../card/react/index';
+import {Card} from '../../../card/react';
 import Layout from '../index';
 import README from '../README.md';
 

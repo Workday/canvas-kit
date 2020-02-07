@@ -1,17 +1,17 @@
 import * as h from '../helpers';
 
-const getSwitch = () => {
-  return cy.findByRole('checkbox');
+const getTextArea = () => {
+  return cy.get(`textarea`);
 };
 
-describe('Switch', () => {
+describe('Text Area', () => {
   before(() => {
     h.stories.visit();
   });
   ['Default', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components|Inputs/Switch/React/Top Label', story);
+        h.stories.load('Components|Inputs/TextArea/React/Top Label', story);
       });
 
       it('should pass accessibility checks', () => {
@@ -20,11 +20,21 @@ describe('Switch', () => {
 
       context('when clicked', () => {
         beforeEach(() => {
-          getSwitch().click();
+          getTextArea().click();
         });
 
-        it('should be checked', () => {
-          getSwitch().should('be.checked');
+        it('should be focused', () => {
+          getTextArea().should('be.focused');
+        });
+      });
+
+      context('when text is entered', () => {
+        beforeEach(() => {
+          getTextArea().type('Test');
+        });
+
+        it('should reflect the text typed', () => {
+          getTextArea().should('have.value', 'Test');
         });
       });
     });
@@ -32,7 +42,7 @@ describe('Switch', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Switch/React/Top Label', 'Disabled');
+      h.stories.load('Components|Inputs/TextArea/React/Top Label', 'Disabled');
     });
 
     it('should pass accessibility checks', () => {
@@ -40,7 +50,7 @@ describe('Switch', () => {
     });
 
     it('should be disabled', () => {
-      getSwitch().should('be.disabled');
+      getTextArea().should('be.disabled');
     });
   });
 });

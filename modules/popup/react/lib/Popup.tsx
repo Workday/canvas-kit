@@ -80,6 +80,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 const Container = styled('div')<Pick<PopupProps, 'transformOrigin' | 'width'>>(
   {
     position: 'relative',
+    maxWidth: `calc(100vw - ${spacing.l})`,
   },
   ({width}) => width && {width},
   ({transformOrigin}) => ({
@@ -157,7 +158,7 @@ export default class Popup extends React.Component<PopupProps> {
           depth={depth}
           heading={heading}
           headingId={heading ? this.id : undefined}
-          width={width}
+          width="100%"
           padding={padding}
         >
           {this.props.children}
