@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {themedFocusRing} from '@workday/canvas-kit-react-common';
+import {themedFocusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
@@ -108,37 +108,15 @@ const RadioInput = styled('input')<RadioProps>(
       zIndex: -1,
     },
   },
-  ({disabled}) => ({
+  ({checked, disabled, theme}) => ({
+    cursor: disabled ? undefined : 'pointer',
     '&:hover ~ div:first-of-type::after': {
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
-  }),
-  ({checked, disabled, theme}) => ({
-    cursor: disabled ? undefined : 'pointer',
-    '&:focus, &:active, &focus:hover, &:active:hover': {
-      '& ~ div:first-of-type': {
-        borderColor: theme.palette.primary.main,
-        borderWidth: '2px',
-        zIndex: 2,
-      },
+    '&:focus:hover:checked ~ div:first-of-type::after': {
+      ...themedFocusRing(theme, {width: 2, separation: 2, innerColor: colors.soap200}),
     },
-    '&:checked:focus ~ div:first-of-type': {
-      ...themedFocusRing(theme, {width: 2, separation: 2}),
-    },
-    '&:focus:hover ~ div:first-of-type': {
-      borderColor: disabled ? inputColors.border : theme.palette.primary.main,
-    },
-    [`[data-whatinput="mouse"] &:focus ~ div:first-of-type,
-      [data-whatinput="touch"] &:focus ~ div:first-of-type,
-      [data-whatinput="pointer"] &:focus ~ div:first-of-type`]: {
-      ...themedFocusRing(theme, {width: 0}),
-      borderWidth: '1px',
-      borderColor: checked ? theme.palette.common.focusOutline : inputColors.border,
-      '&:hover': {
-        borderColor: checked ? theme.palette.common.focusOutline : inputColors.hoverBorder,
-      },
-    },
-    [`[data-whatinput="mouse"] &:hover ~ div:first-of-type`]: {
+    '&:hover ~ div:first-of-type': {
       backgroundColor: checked
         ? theme.palette.primary.main
         : disabled
@@ -151,6 +129,26 @@ const RadioInput = styled('input')<RadioProps>(
         : inputColors.hoverBorder,
       borderWidth: '1px',
     },
+    '&:focus, &focus:hover': {
+      '& ~ div:first-of-type': {
+        borderColor: checked ? theme.palette.primary.main : theme.palette.common.focusOutline,
+        borderWidth: '2px',
+        zIndex: 2,
+      },
+    },
+    '&:checked:focus ~ div:first-of-type': {
+      ...themedFocusRing(theme, {width: 2, separation: 2}),
+    },
+    ...mouseFocusBehavior({
+      '&:focus ~ div:first-of-type': {
+        ...themedFocusRing(theme, {width: 0}),
+        borderWidth: '1px',
+        borderColor: checked ? theme.palette.common.focusOutline : inputColors.border,
+      },
+      '&:focus:hover, &:focus:active ~ div:first-of-type': {
+        borderColor: checked ? theme.palette.common.focusOutline : inputColors.hoverBorder,
+      },
+    }),
   })
 );
 
