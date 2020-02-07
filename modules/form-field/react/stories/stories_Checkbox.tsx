@@ -7,6 +7,7 @@ import {
   ControlledComponentWrapper,
   ComponentStatesTable,
   permutateProps,
+  customColorTheme,
 } from '../../../../utils/storybook';
 
 import {Checkbox} from '../../../checkbox/react';
@@ -175,7 +176,7 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
   .add('States', () => <CheckboxStates />)
   .addParameters({
     canvasProviderDecorator: {
-      showCustomThemePalette: true,
+      theme: customColorTheme,
     },
   })
   .add('Theming', () => <CheckboxStates />);
