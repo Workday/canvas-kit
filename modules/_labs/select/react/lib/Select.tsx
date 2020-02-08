@@ -28,30 +28,25 @@ export interface SelectProps
 }
 
 export interface SelectState {
+  label: string;
   value: string;
   showingMenu: boolean;
 }
 
-const SelectContainer = styled('select')<SelectProps & {showingMenu: boolean}>(
+const SelectContainer = styled('input')<SelectProps>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
-    // borderBottom: 0,
+    cursor: 'default',
     display: 'block',
     backgroundColor: inputColors.background,
     borderRadius: borderRadius.m,
-    // borderRadius: `${borderRadius.m} ${borderRadius.m} 0 0`,
     boxSizing: 'border-box',
     height: spacing.xl,
     minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // IE11 bugfix: add padding so text is displayed properly
     margin: 0, // Fix Safari
-    MozAppearance: 'none', // FF bugfix: hide arrow so it doesn't show under ours
-    WebkitAppearance: 'none',
-    option: {
-      display: 'none',
-    },
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -61,7 +56,6 @@ const SelectContainer = styled('select')<SelectProps & {showingMenu: boolean}>(
     '&:focus:not([disabled])': {
       borderColor: inputColors.focusBorder,
       boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-      // borderWidth: `2px`,
       outline: 'none',
     },
     '&:disabled': {
@@ -76,11 +70,6 @@ const SelectContainer = styled('select')<SelectProps & {showingMenu: boolean}>(
   ({error}) => ({
     ...errorRing(error),
   }),
-  // ({showingMenu}) =>
-  //   showingMenu && {
-  //     borderBottom: 0,
-  //     borderRadius: `${borderRadius.m} ${borderRadius.m} 0 0`,
-  //   },
   ({grow}) =>
     grow && {
       width: '100%',
@@ -102,7 +91,6 @@ const SelectDropdown = styled('ul')({
   backgroundColor: colors.frenchVanilla100,
   border: `2px solid ${inputColors.focusBorder}`,
   borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
-  // boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
   borderTop: 0,
   boxSizing: 'border-box',
   listStyle: 'none',
@@ -139,14 +127,41 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   state: Readonly<SelectState> = {
+    label: '',
     value: '',
     showingMenu: false,
   };
 
+  constructor(props: SelectProps) {
+    super(props);
+    this.textInput = React.createRef();
+  }
+
   componentDidMount() {
-    if (this.props.value) {
-      this.setState({value: this.props.value});
+    const {children, value} = this.props;
+    const childrenArray = React.Children.toArray(children);
+
+    // if value exists, set state to that value...
+    if (value) {
+      const matchingChild = childrenArray.filter(child => child.props.value === value);
+
+      if (matchingChild.length) {
+        const {label: childLabel, value: childValue} = matchingChild[0].props;
+        this.setState({
+          label: childLabel,
+          value: childValue,
+        });
+        return;
+      }
     }
+
+    // ... otherwise, set state to the first option
+    const firstOption = childrenArray[0];
+    // console.log('setting firstOption label:', firstOption.props.label);
+    this.setState({
+      label: firstOption.props.label,
+      value: firstOption.props.value,
+    });
   }
 
   handleSelectClick = (event: React.MouseEvent<HTMLSelectElement>): void => {
@@ -159,17 +174,20 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   handleOptionClick = (event: React.MouseEvent, optionProps: SelectOptionProps): void => {
     this.setState({value: optionProps.value});
+    this.setState({label: optionProps.label});
     this.setState({showingMenu: false});
-  };
 
-  renderOptions = (child: React.ReactElement<SelectOptionProps>): React.ReactNode => {
-    const {value, label, disabled} = child.props;
+    const textInput = this.textInput.current;
+    // console.log('handleOptionClick, textInput value:', textInput.value);
 
-    return (
-      <option value={value} disabled={disabled}>
-        {label}
-      </option>
-    );
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype,
+      'value'
+    ).set;
+    nativeInputValueSetter.call(this.textInput.current, optionProps.value);
+
+    const ev2 = new Event('input', {bubbles: true});
+    this.textInput.current.dispatchEvent(ev2);
   };
 
   renderChildren = (child: React.ReactElement<SelectOptionProps>): React.ReactNode => {
@@ -183,9 +201,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {error, disabled, grow, children, onChange, ...elemProps} = this.props;
+    // IMPORTANT: Destructure value here so it doesn't override
+    // value below (which is set to label) with the ...elemProps
+    // spread
+    const {error, disabled, grow, children, onChange, value, ...elemProps} = this.props;
 
-    const {value} = this.state;
+    const {label} = this.state;
+    // console.log('in Select render with label', label);
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
@@ -193,28 +215,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           disabled={disabled}
           grow={grow}
           error={error}
-          value={value}
+          value={label}
           onBlur={this.handleSelectBlur}
           onChange={onChange}
           onClick={this.handleSelectClick}
+          readOnly
+          ref={this.textInput}
           showingMenu={this.state.showingMenu}
+          type="text"
           {...elemProps}
-        >
-          {/* {children} */}
-          {React.Children.map(children, this.renderOptions)}
-        </SelectContainer>
+        />
         {this.state.showingMenu && (
-          <SelectDropdown>
-            {/* {children} */}
-            {React.Children.map(children, this.renderChildren)}
-            {/* <SelectOption value="option-a" label="Option A" />
-            <SelectOption value="option-b" label="Option B" />
-            <SelectOption value="option-c" label="Option C" />
-            <SelectOption value="option-d" label="Option D" />
-            <SelectOption value="option-e" label="Option E" />
-            <SelectOption value="option-f" label="Option F" disabled={true} />
-            <SelectOption value="option-g" label="Option G" /> */}
-          </SelectDropdown>
+          <SelectDropdown>{React.Children.map(children, this.renderChildren)}</SelectDropdown>
         )}
         <SelectDropdownIcon
           icon={caretDownSmallIcon}
