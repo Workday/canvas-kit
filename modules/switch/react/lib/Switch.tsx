@@ -1,8 +1,13 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import uuid from 'uuid/v4';
-import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
-import {borderRadius, colors, inputColors, depth, spacing} from '@workday/canvas-kit-react-core';
+import {
+  ErrorType,
+  themedFocusRing,
+  mouseFocusBehavior,
+  getErrorColors,
+} from '@workday/canvas-kit-react-common';
+import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react-core';
 
 export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -58,46 +63,42 @@ const SwitchInput = styled('input')<SwitchProps>(
     marginLeft: spacing.xxxs,
     borderRadius: borderRadius.circle,
     opacity: 0,
+  },
+  ({theme}) => ({
     '&:focus, &:active': {
       outline: 'none',
       '& ~ div:first-of-type': {
-        ...focusRing(2, 2, false),
+        ...themedFocusRing(theme, {separation: 2, animate: false}),
       },
     },
     ...mouseFocusBehavior({
       '&:focus, &:active': {
         '& ~ div:first-of-type': {
-          ...focusRing(0, 0),
+          ...themedFocusRing(theme, {width: 0}),
           animation: 'none',
         },
       },
     }),
-  },
+  }),
   ({disabled}) => ({
     cursor: disabled ? 'not-allowed' : 'pointer',
   }),
-  ({error}) => {
-    let errorRingColor;
-    let errorRingBorderColor = 'transparent';
+  ({error, theme}) => {
+    const errorColors = getErrorColors(error, theme);
 
-    if (error === ErrorType.Error) {
-      errorRingColor = inputColors.error.border;
-    } else if (error === ErrorType.Alert) {
-      errorRingColor = inputColors.warning.border;
-      errorRingBorderColor = colors.cantaloupe600;
-    } else {
-      return;
+    if (errorColors.outer === errorColors.inner) {
+      errorColors.outer = 'transparent';
     }
 
     const styles = {
       '& ~ div:first-of-type': {
         boxShadow: `
           0 0 0 2px ${colors.frenchVanilla100},
-          0 0 0 4px ${errorRingColor},
-          0 0 0 5px ${errorRingBorderColor}`,
+          0 0 0 4px ${errorColors.inner},
+          0 0 0 5px ${errorColors.outer}`,
       },
       '&:focus ~ div:first-of-type': {
-        ...focusRing(2, 2, false),
+        ...themedFocusRing(theme, {separation: 2, animate: false}),
       },
     };
     return {
@@ -108,8 +109,8 @@ const SwitchInput = styled('input')<SwitchProps>(
         '&:focus ~ div:first-of-type, &:active ~ div:first-of-type': {
           boxShadow: `
             0 0 0 2px ${colors.frenchVanilla100},
-            0 0 0 4px ${errorRingColor},
-            0 0 0 5px ${errorRingBorderColor}`,
+            0 0 0 4px ${errorColors.inner},
+            0 0 0 5px ${errorColors.outer}`,
         },
       }),
     };
@@ -130,8 +131,12 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     padding: '0px 2px',
     transition: 'background-color 200ms ease',
   },
-  ({checked, disabled}) => ({
-    backgroundColor: disabled ? colors.soap400 : checked ? colors.blueberry500 : colors.licorice200,
+  ({checked, disabled, theme}) => ({
+    backgroundColor: disabled
+      ? colors.soap400
+      : checked
+      ? theme.palette.primary.main
+      : colors.licorice200,
   })
 );
 
