@@ -19,7 +19,7 @@ export default function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSOb
     }`;
   } else if (error === ErrorType.Alert) {
     errorBorderColor = theme
-      ? chroma.contrast(theme.palette.error.main, colors.frenchVanilla100) >= 3
+      ? chroma.contrast(theme.palette.alert.main, colors.frenchVanilla100) >= 3
         ? theme.palette.alert.main
         : theme.palette.alert.darkest
       : colors.cantaloupe600;
