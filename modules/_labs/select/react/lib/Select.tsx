@@ -16,14 +16,12 @@ import {default as SelectOption, SelectOptionProps} from './SelectOption';
 export interface SelectProps
   extends Themeable,
     GrowthBehavior,
-    React.SelectHTMLAttributes<HTMLSelectElement> {
-  /**
-   * React children must be of type SelectOption and have at least two.
-   */
+    React.InputHTMLAttributes<HTMLInputElement> {
+  // React children must be of type SelectOption and have at least two.
   children: React.ReactElement<SelectOption>[];
   disabled?: boolean;
   error?: ErrorType;
-  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value?: string;
 }
 
@@ -32,7 +30,7 @@ export interface SelectState {
   showingMenu: boolean;
 }
 
-const SelectInput = styled('input')<SelectProps>(
+const SelectInput = styled('input')<SelectProps & {showingMenu: boolean}>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -134,6 +132,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   componentDidMount() {
     const {children, value} = this.props;
+
     const childrenArray = React.Children.toArray(children);
 
     // if value exists, set state to that value...
@@ -141,10 +140,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       const matchingChild = childrenArray.filter(child => child.props.value === value);
 
       if (matchingChild.length) {
-        const {label: childLabel, value: childValue} = matchingChild[0].props;
-        this.setState({
-          label: childLabel,
-        });
+        const {label} = matchingChild[0].props;
+        this.setState({label});
         return;
       }
     }
@@ -157,7 +154,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     });
   }
 
-  handleSelectClick = (event: React.MouseEvent<HTMLSelectElement>): void => {
+  handleSelectClick = (event: React.MouseEvent<HTMLInputElement>): void => {
     this.setState({showingMenu: !this.state.showingMenu});
   };
 

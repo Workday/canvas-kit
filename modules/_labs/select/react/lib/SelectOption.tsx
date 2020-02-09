@@ -3,8 +3,8 @@ import {styled} from '@workday/canvas-kit-labs-react-core';
 import {borderRadius, colors, commonColors, type} from '@workday/canvas-kit-react-core';
 
 export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
-  value?: string;
-  label?: string;
+  value: string;
+  label: string;
   disabled: boolean;
 }
 
