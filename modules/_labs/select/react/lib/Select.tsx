@@ -29,7 +29,6 @@ export interface SelectProps
 
 export interface SelectState {
   label: string;
-  value: string;
   showingMenu: boolean;
 }
 
@@ -128,7 +127,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   state: Readonly<SelectState> = {
     label: '',
-    value: '',
     showingMenu: false,
   };
 
@@ -149,7 +147,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         const {label: childLabel, value: childValue} = matchingChild[0].props;
         this.setState({
           label: childLabel,
-          value: childValue,
         });
         return;
       }
@@ -160,7 +157,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // console.log('setting firstOption label:', firstOption.props.label);
     this.setState({
       label: firstOption.props.label,
-      value: firstOption.props.value,
     });
   }
 
@@ -173,7 +169,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleOptionClick = (event: React.MouseEvent, optionProps: SelectOptionProps): void => {
-    this.setState({value: optionProps.value});
     this.setState({label: optionProps.label});
     this.setState({showingMenu: false});
 
