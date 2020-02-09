@@ -32,7 +32,7 @@ export interface SelectState {
   showingMenu: boolean;
 }
 
-const SelectContainer = styled('input')<SelectProps>(
+const SelectInput = styled('input')<SelectProps>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -119,6 +119,8 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
 );
 
 export default class Select extends React.Component<SelectProps, SelectState> {
+  private inputRef = React.createRef<HTMLInputElement>();
+
   static ErrorType = ErrorType;
 
   static defaultProps = {
@@ -129,11 +131,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     label: '',
     showingMenu: false,
   };
-
-  constructor(props: SelectProps) {
-    super(props);
-    this.textInput = React.createRef();
-  }
 
   componentDidMount() {
     const {children, value} = this.props;
@@ -168,28 +165,38 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.setState({showingMenu: false});
   };
 
-  handleOptionClick = (event: React.MouseEvent, optionProps: SelectOptionProps): void => {
+  handleOptionClick = (optionProps: SelectOptionProps): void => {
     this.setState({label: optionProps.label});
     this.setState({showingMenu: false});
 
-    const textInput = this.textInput.current;
-    // console.log('handleOptionClick, textInput value:', textInput.value);
+    if (this.inputRef && this.inputRef.current) {
+      const nativeInputValue = Object.getOwnPropertyDescriptor(
+        Object.getPrototypeOf(this.inputRef.current),
+        'value'
+      );
+      if (nativeInputValue && nativeInputValue.set) {
+        nativeInputValue.set.call(this.inputRef.current, optionProps.value);
+      }
 
-    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-      window.HTMLInputElement.prototype,
-      'value'
-    ).set;
-    nativeInputValueSetter.call(this.textInput.current, optionProps.value);
+      let event: Event;
+      if (typeof Event === 'function') {
+        // modern browsers
+        event = new Event('input', {bubbles: true});
+      } else {
+        // IE 11
+        event = document.createEvent('Event');
+        event.initEvent('input', true);
+      }
 
-    const ev2 = new Event('input', {bubbles: true});
-    this.textInput.current.dispatchEvent(ev2);
+      this.inputRef.current.dispatchEvent(event);
+    }
   };
 
   renderChildren = (child: React.ReactElement<SelectOptionProps>): React.ReactNode => {
     return React.cloneElement(child, {
       onMouseDown: (event: React.MouseEvent) => {
         event.preventDefault();
-        this.handleOptionClick(event, child.props);
+        this.handleOptionClick(child.props);
       },
     });
   };
@@ -206,7 +213,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
-        <SelectContainer
+        <SelectInput
           disabled={disabled}
           grow={grow}
           error={error}
@@ -215,7 +222,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           onChange={onChange}
           onClick={this.handleSelectClick}
           readOnly
-          ref={this.textInput}
+          ref={this.inputRef}
           showingMenu={this.state.showingMenu}
           type="text"
           {...elemProps}
