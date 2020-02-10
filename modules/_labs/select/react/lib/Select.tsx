@@ -26,7 +26,9 @@ export interface SelectProps
 }
 
 export interface SelectState {
+  focusedItemIndex: number;
   label: string;
+  selectedItemIndex: number;
   showingMenu: boolean;
 }
 
@@ -126,8 +128,15 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   state: Readonly<SelectState> = {
+    focusedItemIndex: 0,
     label: '',
+    selectedItemIndex: 0,
     showingMenu: false,
+  };
+
+  private indexByValue = (value: string): number => {
+    const childrenArray = React.Children.toArray(this.props.children);
+    return childrenArray.findIndex(child => child.props.value === value);
   };
 
   componentDidMount() {
@@ -137,11 +146,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     // if value exists, set state to that value...
     if (value) {
-      const matchingChild = childrenArray.filter(child => child.props.value === value);
+      const childIndex = this.indexByValue(value);
 
-      if (matchingChild.length) {
-        const {label} = matchingChild[0].props;
-        this.setState({label});
+      if (childIndex !== -1) {
+        this.setState({
+          focusedItemIndex: childIndex,
+          label: childrenArray[childIndex].props.label,
+          selectedItemIndex: childIndex,
+        });
         return;
       }
     }
@@ -163,8 +175,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleOptionClick = (optionProps: SelectOptionProps): void => {
-    this.setState({label: optionProps.label});
-    this.setState({showingMenu: false});
+    const index = this.indexByValue(optionProps.value);
+    this.setState({
+      focusedItemIndex: index,
+      label: optionProps.label,
+      selectedItemIndex: index,
+      showingMenu: false,
+    });
 
     if (this.inputRef && this.inputRef.current) {
       const nativeInputValue = Object.getOwnPropertyDescriptor(
@@ -189,12 +206,21 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  renderChildren = (child: React.ReactElement<SelectOptionProps>): React.ReactNode => {
+  handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
+    console.log(event.key);
+  };
+
+  renderChildren = (
+    child: React.ReactElement<SelectOptionProps>,
+    index: number
+  ): React.ReactNode => {
     return React.cloneElement(child, {
+      focused: this.state.focusedItemIndex === index,
       onMouseDown: (event: React.MouseEvent) => {
         event.preventDefault();
         this.handleOptionClick(child.props);
       },
+      selected: this.state.selectedItemIndex === index,
     });
   };
 
@@ -218,6 +244,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           onBlur={this.handleSelectBlur}
           onChange={onChange}
           onClick={this.handleSelectClick}
+          onKeyDown={this.handleKeyboardShortcuts}
           readOnly
           ref={this.inputRef}
           showingMenu={this.state.showingMenu}
