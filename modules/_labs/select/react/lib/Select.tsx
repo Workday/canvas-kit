@@ -18,7 +18,7 @@ export interface SelectProps
     GrowthBehavior,
     React.InputHTMLAttributes<HTMLInputElement> {
   // React children must be of type SelectOption and have at least two.
-  children: React.ReactElement<SelectOption>[];
+  children?: React.ReactElement<SelectOption>[];
   disabled?: boolean;
   error?: ErrorType;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -143,7 +143,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private indexByValue = (value: string): number => {
-    const childrenArray = React.Children.toArray(this.props.children);
+    const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
+      SelectOptionProps
+    >[];
     return childrenArray.findIndex(child => child.props.value === value);
   };
 
@@ -164,7 +166,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   componentDidMount() {
     const {children, value} = this.props;
 
-    const childrenArray = React.Children.toArray(children);
+    const childrenArray = React.Children.toArray(children) as React.ReactElement<
+      SelectOptionProps
+    >[];
 
     // if value exists, set state to that value...
     if (value) {
@@ -244,7 +248,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
     // console.log(event.key);
 
-    const children = React.Children.toArray(this.props.children);
+    const children = React.Children.toArray(this.props.children) as React.ReactElement<
+      SelectOptionProps
+    >[];
     const itemCount = children.length;
     let isShortcut = false;
     let nextFocusedIndex = 0;
