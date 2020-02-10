@@ -24,8 +24,8 @@ See here for
 
 ```tsx
 import {MenuItem} from '@workday/canvas-kit-labs-react-menu';
-import {TextInput} from '@workday/canvas-kit-labs-react-text-input';
-import {FormField} from '@workday/canvas-kit-labs-react-form-field';
+import {TextInput} from '@workday/canvas-kit-react-text-input';
+import {FormField} from '@workday/canvas-kit-react-form-field';
 
 const autocompleteCallback = event => console.log('Adjust menu items here')
 
