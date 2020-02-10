@@ -171,7 +171,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleSelectBlur = (event: React.FocusEvent): void => {
-    this.setState({showingMenu: false});
+    this.setState({
+      focusedItemIndex: this.state.selectedItemIndex,
+      showingMenu: false,
+    });
   };
 
   handleOptionClick = (optionProps: SelectOptionProps): void => {
@@ -207,7 +210,44 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    console.log(event.key);
+    // console.log(event.key);
+
+    const children = React.Children.toArray(this.props.children);
+    const itemCount = children.length;
+    let isShortcut = false;
+    let nextFocusedIndex = 0;
+
+    switch (event.key) {
+      case 'ArrowUp':
+      case 'ArrowDown':
+        if (!this.state.showingMenu) {
+          this.setState({showingMenu: true});
+        } else {
+          const direction = event.key === 'ArrowUp' ? -1 : 1;
+          isShortcut = true;
+          const nextIndex = this.state.focusedItemIndex + direction;
+          nextFocusedIndex = nextIndex < 0 ? 0 : nextIndex >= itemCount ? itemCount - 1 : nextIndex;
+          this.setState({focusedItemIndex: nextFocusedIndex});
+        }
+        break;
+
+      case 'Spacebar':
+      case ' ':
+      case 'Enter':
+        const child = children[this.state.focusedItemIndex] as React.ReactElement<
+          SelectOptionProps
+        >;
+        this.handleOptionClick(child.props);
+        isShortcut = true;
+        break;
+
+      default:
+    }
+
+    if (isShortcut) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
   };
 
   renderChildren = (
