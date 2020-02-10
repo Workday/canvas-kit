@@ -22,6 +22,7 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
 const Option = styled('li')<SelectOptionProps>(
   {
     ...type.body,
+    cursor: 'default',
     padding: '6px 8px',
     '&:first-child': {
       borderTop: `1px solid ${colors.soap400}`,
@@ -30,21 +31,23 @@ const Option = styled('li')<SelectOptionProps>(
       borderRadius: `0 0 ${borderRadius.s} ${borderRadius.s}`,
     },
   },
-  ({disabled}) =>
-    disabled && {
-      color: colors.licorice100,
-    },
-  ({focused}) => {
-    if (focused) {
-      return {
-        backgroundColor: commonColors.focusBackground,
-        color: typeColors.inverse,
-      };
-    } else {
+  ({disabled, focused}) => {
+    if (!disabled && !focused) {
       return {
         '&:hover': {
           backgroundColor: commonColors.hoverBackground,
         },
+      };
+    }
+    if (disabled) {
+      return {
+        color: colors.licorice100,
+      };
+    }
+    if (focused) {
+      return {
+        backgroundColor: commonColors.focusBackground,
+        color: typeColors.inverse,
       };
     }
   },

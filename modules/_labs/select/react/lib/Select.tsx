@@ -178,6 +178,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleOptionClick = (optionProps: SelectOptionProps): void => {
+    // disabled options cannot be clicked
+    if (optionProps.disabled) {
+      return;
+    }
+
     const index = this.indexByValue(optionProps.value);
     this.setState({
       focusedItemIndex: index,
@@ -225,7 +230,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         } else {
           const direction = event.key === 'ArrowUp' ? -1 : 1;
           isShortcut = true;
-          const nextIndex = this.state.focusedItemIndex + direction;
+          let nextIndex = this.state.focusedItemIndex + direction;
+          while (nextIndex < itemCount && nextIndex >= 0 && children[nextIndex].props.disabled) {
+            nextIndex += direction;
+          }
           nextFocusedIndex = nextIndex < 0 ? 0 : nextIndex >= itemCount ? itemCount - 1 : nextIndex;
           this.setState({focusedItemIndex: nextFocusedIndex});
         }
