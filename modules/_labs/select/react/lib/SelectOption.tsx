@@ -44,34 +44,34 @@ const Option = styled('li')<SelectOptionProps>(
       borderRadius: `0 0 ${borderRadius.s} ${borderRadius.s}`,
     },
   },
-  ({disabled, focused}) => {
-    if (!disabled && !focused) {
-      return {
-        '&:hover': {
-          backgroundColor: commonColors.hoverBackground,
-        },
-      };
-    }
-    if (disabled) {
-      return {
-        color: colors.licorice100,
-      };
-    }
-    if (focused) {
+  ({disabled, focused, selected}) => {
+    if (selected) {
       return {
         backgroundColor: commonColors.focusBackground,
         color: typeColors.inverse,
+        // '&:before': {
+        //   content: '"✓"',
+        //   marginRight: spacing.xxxs,
+        // },
       };
+    } else if (focused) {
+      return {
+        backgroundColor: commonColors.hoverBackground,
+      };
+    } else {
+      if (disabled) {
+        return {
+          color: colors.licorice100,
+        };
+      } else {
+        return {
+          '&:hover': {
+            backgroundColor: commonColors.hoverBackground,
+          },
+        };
+      }
     }
   },
-  ({selected}) =>
-    selected &&
-    {
-      // '&:before': {
-      //   content: '"✓"',
-      //   marginRight: spacing.xxxs,
-      // },
-    },
   ({justSelected}) =>
     justSelected && {
       animation: `${blinkAnimation} 0.15s infinite`,
