@@ -11,14 +11,13 @@ import {
 } from '@workday/canvas-kit-react-core';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
-import {default as SelectOption, SelectOptionProps} from './SelectOption';
+import {SelectOptionProps} from './SelectOption';
 
 export interface SelectProps
   extends Themeable,
     GrowthBehavior,
     React.InputHTMLAttributes<HTMLInputElement> {
-  // React children must be of type SelectOption and have at least two.
-  children?: React.ReactElement<SelectOption>[];
+  children?: React.ReactElement<SelectOptionProps>[];
   disabled?: boolean;
   error?: ErrorType;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
