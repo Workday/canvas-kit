@@ -34,8 +34,8 @@ const autocompleteCallback = event => console.log('Adjust menu items here')
   <Combobox
     autocompleteItems={[<MenuItem>Item 1</MenuItem>]}
     onChange={autocompleteCallback}
-    onFocus={action(`Focus`)}
-    onBlur={action(`Blur`)}
+    onFocus={() => { console.log('focus') }}
+    onBlur={(} => { console.log('blur') }
   />
     <TextInput placeholder="Autocomplete" autoFocus={true} />
   </Combobox>
