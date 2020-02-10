@@ -26,7 +26,7 @@ export interface SelectProps
 }
 
 export interface SelectState {
-  focusedItemIndex: number;
+  focusedItemIndex: number | null;
   justSelectedItemIndex: number | null;
   label: string;
   selectedItemIndex: number;
@@ -35,7 +35,7 @@ export interface SelectState {
 
 const dismissMenuTimeout = 300;
 
-const SelectInput = styled('input')<SelectProps & {showingMenu: boolean}>(
+const SelectInput = styled('input')<SelectProps>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -49,6 +49,10 @@ const SelectInput = styled('input')<SelectProps & {showingMenu: boolean}>(
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // IE11 bugfix: add padding so text is displayed properly
     margin: 0, // Fix Safari
+    // prevent selection of text when tabbing to input
+    '&::selection': {
+      background: 'transparent',
+    },
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -131,7 +135,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   state: Readonly<SelectState> = {
-    focusedItemIndex: 0,
+    focusedItemIndex: null,
     justSelectedItemIndex: null,
     label: '',
     selectedItemIndex: 0,
@@ -141,6 +145,20 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private indexByValue = (value: string): number => {
     const childrenArray = React.Children.toArray(this.props.children);
     return childrenArray.findIndex(child => child.props.value === value);
+  };
+
+  private toggleMenu = (show: boolean): void => {
+    if (show) {
+      this.setState({
+        focusedItemIndex: this.state.selectedItemIndex,
+        showingMenu: true,
+      });
+    } else {
+      this.setState({
+        focusedItemIndex: null,
+        showingMenu: false,
+      });
+    }
   };
 
   componentDidMount() {
@@ -154,7 +172,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
       if (childIndex !== -1) {
         this.setState({
-          focusedItemIndex: childIndex,
           label: childrenArray[childIndex].props.label,
           selectedItemIndex: childIndex,
         });
@@ -171,14 +188,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   handleSelectClick = (event: React.MouseEvent<HTMLInputElement>): void => {
-    this.setState({showingMenu: !this.state.showingMenu});
+    this.toggleMenu(!this.state.showingMenu);
   };
 
   handleSelectBlur = (event: React.FocusEvent): void => {
-    this.setState({
-      focusedItemIndex: this.state.selectedItemIndex,
-      showingMenu: false,
-    });
+    this.toggleMenu(false);
   };
 
   handleOptionClick = (optionProps: SelectOptionProps): void => {
@@ -189,18 +203,19 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     const index = this.indexByValue(optionProps.value);
     this.setState({
-      focusedItemIndex: index,
       justSelectedItemIndex: index,
-      label: optionProps.label,
       selectedItemIndex: index,
     });
 
-    // flash selected item briefly before dismissing menu
+    // offer visual feedback (flashing animation) briefly
+    // before dismissing menu; set new label when menu has been
+    // dismissed
     setTimeout(() => {
       this.setState({
         justSelectedItemIndex: null,
-        showingMenu: false,
+        label: optionProps.label,
       });
+      this.toggleMenu(false);
     }, dismissMenuTimeout);
 
     if (this.inputRef && this.inputRef.current) {
@@ -238,8 +253,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       case 'ArrowUp':
       case 'ArrowDown':
         if (!this.state.showingMenu) {
-          this.setState({showingMenu: true});
-        } else {
+          this.toggleMenu(true);
+        } else if (this.state.focusedItemIndex !== null) {
           const direction = event.key === 'ArrowUp' ? -1 : 1;
           isShortcut = true;
           let nextIndex = this.state.focusedItemIndex + direction;
@@ -254,11 +269,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       case 'Spacebar':
       case ' ':
       case 'Enter':
-        const child = children[this.state.focusedItemIndex] as React.ReactElement<
-          SelectOptionProps
-        >;
-        this.handleOptionClick(child.props);
-        isShortcut = true;
+        if (this.state.focusedItemIndex !== null) {
+          const child = children[this.state.focusedItemIndex] as React.ReactElement<
+            SelectOptionProps
+          >;
+          this.handleOptionClick(child.props);
+          isShortcut = true;
+        }
         break;
 
       default:
@@ -308,7 +325,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           onKeyDown={this.handleKeyboardShortcuts}
           readOnly
           ref={this.inputRef}
-          showingMenu={this.state.showingMenu}
           type="text"
           {...elemProps}
         />

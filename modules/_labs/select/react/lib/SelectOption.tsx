@@ -21,7 +21,7 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
   justSelected?: boolean;
 }
 
-const blinkAnimation = keyframes`
+const flashAnimation = keyframes`
   0%, 49% {
     background-color: ${commonColors.focusBackground};
     color: ${typeColors.inverse};
@@ -37,7 +37,7 @@ const Option = styled('li')<SelectOptionProps>(
     ...type.body,
     cursor: 'default',
     padding: '6px 8px',
-    '&:first-child': {
+    '&:first-of-type': {
       borderTop: `1px solid ${colors.soap400}`,
     },
     '&:last-child': {
@@ -74,7 +74,7 @@ const Option = styled('li')<SelectOptionProps>(
   },
   ({justSelected}) =>
     justSelected && {
-      animation: `${blinkAnimation} 0.15s infinite`,
+      animation: `${flashAnimation} 0.15s infinite`,
     }
 );
 
