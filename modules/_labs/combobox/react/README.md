@@ -23,20 +23,20 @@ See here for
 ## Usage
 
 ```tsx
+import {Combobox} from '@workday/canvas-kit-labs-react-combobox';
 import {MenuItem} from '@workday/canvas-kit-labs-react-menu';
 import {TextInput} from '@workday/canvas-kit-react-text-input';
 import {FormField} from '@workday/canvas-kit-react-form-field';
 
 const autocompleteCallback = event => console.log('Adjust menu items here')
 
-
 <FormField id='id-123' label='Example'>
   <Combobox
     autocompleteItems={[<MenuItem>Item 1</MenuItem>]}
     onChange={autocompleteCallback}
     onFocus={() => { console.log('focus') }}
-    onBlur={(} => { console.log('blur') }
-  />
+    onBlur={() => { console.log('blur') }}
+  >
     <TextInput placeholder="Autocomplete" autoFocus={true} />
   </Combobox>
 </FormField>
