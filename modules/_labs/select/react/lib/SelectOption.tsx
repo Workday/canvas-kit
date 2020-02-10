@@ -1,10 +1,11 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
+import {keyframes} from '@emotion/core';
 import {
   borderRadius,
   colors,
   commonColors,
-  spacing,
+  // spacing,
   type,
   typeColors,
 } from '@workday/canvas-kit-react-core';
@@ -17,7 +18,19 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
   disabled: boolean;
   focused?: boolean;
   selected?: boolean;
+  justSelected?: boolean;
 }
+
+const blinkAnimation = keyframes`
+  0%, 49% {
+    background-color: ${commonColors.focusBackground};
+    color: ${typeColors.inverse};
+  }
+  50%, 100% {
+    background-color: transparent;
+    color: inherit;
+  }
+`;
 
 const Option = styled('li')<SelectOptionProps>(
   {
@@ -52,11 +65,16 @@ const Option = styled('li')<SelectOptionProps>(
     }
   },
   ({selected}) =>
-    selected && {
-      '&:before': {
-        content: '"✓"',
-        marginRight: spacing.xxxs,
-      },
+    selected &&
+    {
+      // '&:before': {
+      //   content: '"✓"',
+      //   marginRight: spacing.xxxs,
+      // },
+    },
+  ({justSelected}) =>
+    justSelected && {
+      animation: `${blinkAnimation} 0.15s infinite`,
     }
 );
 

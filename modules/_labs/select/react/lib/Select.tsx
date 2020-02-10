@@ -27,10 +27,13 @@ export interface SelectProps
 
 export interface SelectState {
   focusedItemIndex: number;
+  justSelectedItemIndex: number | null;
   label: string;
   selectedItemIndex: number;
   showingMenu: boolean;
 }
+
+const dismissMenuTimeout = 300;
 
 const SelectInput = styled('input')<SelectProps & {showingMenu: boolean}>(
   {
@@ -75,7 +78,7 @@ const SelectInput = styled('input')<SelectProps & {showingMenu: boolean}>(
     }
 );
 
-const SelectDropdownIcon = styled(SystemIcon)({
+const SelectMenuIcon = styled(SystemIcon)({
   position: 'absolute',
   top: spacing.xxxs,
   right: spacing.xxxs,
@@ -86,7 +89,7 @@ const SelectDropdownIcon = styled(SystemIcon)({
   },
 });
 
-const SelectDropdown = styled('ul')({
+const SelectMenu = styled('ul')({
   backgroundColor: colors.frenchVanilla100,
   border: `2px solid ${inputColors.focusBorder}`,
   borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
@@ -129,6 +132,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   state: Readonly<SelectState> = {
     focusedItemIndex: 0,
+    justSelectedItemIndex: null,
     label: '',
     selectedItemIndex: 0,
     showingMenu: false,
@@ -186,10 +190,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     const index = this.indexByValue(optionProps.value);
     this.setState({
       focusedItemIndex: index,
+      justSelectedItemIndex: index,
       label: optionProps.label,
       selectedItemIndex: index,
-      showingMenu: false,
     });
+
+    // flash selected item briefly before dismissing menu
+    setTimeout(() => {
+      this.setState({
+        justSelectedItemIndex: null,
+        showingMenu: false,
+      });
+    }, dismissMenuTimeout);
 
     if (this.inputRef && this.inputRef.current) {
       const nativeInputValue = Object.getOwnPropertyDescriptor(
@@ -264,6 +276,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   ): React.ReactNode => {
     return React.cloneElement(child, {
       focused: this.state.focusedItemIndex === index,
+      justSelected: this.state.justSelectedItemIndex === index,
       onMouseDown: (event: React.MouseEvent) => {
         event.preventDefault();
         this.handleOptionClick(child.props);
@@ -300,9 +313,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           {...elemProps}
         />
         {this.state.showingMenu && (
-          <SelectDropdown>{React.Children.map(children, this.renderChildren)}</SelectDropdown>
+          <SelectMenu>{React.Children.map(children, this.renderChildren)}</SelectMenu>
         )}
-        <SelectDropdownIcon
+        <SelectMenuIcon
           icon={caretDownSmallIcon}
           color={disabled ? colors.licorice100 : colors.licorice200}
           colorHover={disabled ? colors.licorice100 : colors.licorice500}
