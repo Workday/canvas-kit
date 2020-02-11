@@ -12,6 +12,6 @@ insert_final_newline = true
 trim_trailing_whitespace = false
 
 # 2 space indentation
-[*.{html,css,scss,js,ts,tsx,json,md}]
+[*.{html,css,scss,js,ts,tsx,json,md,yml}]
 indent_style = space
 indent_size = 2
