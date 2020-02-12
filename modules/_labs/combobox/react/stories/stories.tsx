@@ -3,11 +3,12 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
+import {withKnobs} from '@storybook/addon-knobs';
 
 import Combobox, {ComboboxProps} from '../index';
-import FormField from '../../../../form-field/react/index';
-import {MenuItem} from '../../../menu/react/index';
-import {TextInput} from '../../../../text-input/react/index';
+import FormField from '../../../../form-field/react';
+import {MenuItem} from '../../../menu/react';
+import {TextInput} from '../../../../text-input/react';
 import README from '../README.md';
 
 class Autocomplete extends React.Component<
@@ -51,19 +52,21 @@ class Autocomplete extends React.Component<
 }
 
 storiesOf('Labs|Combobox/React', module)
+  .addParameters({component: Combobox})
   .addDecorator(withReadme(README))
+  .addDecorator(withKnobs)
   .add('Autocomplete', () => (
     <FormField id="autocomplete-123" label="Autocomplete example">
+      <Autocomplete />
+    </FormField>
+  ))
+  .add('Grow', () => (
+    <FormField grow={true} id="autocomplete-123" label="Grow example">
       <Autocomplete />
     </FormField>
   ))
   .add('No clear button', () => (
     <FormField id="autocomplete-123" label="No clear button">
       <Autocomplete showClearButton={false} />
-    </FormField>
-  ))
-  .add('Grow', () => (
-    <FormField grow={true} id="autocomplete-123" label="Grow example">
-      <Autocomplete />
     </FormField>
   ));

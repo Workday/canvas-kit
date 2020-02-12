@@ -10,7 +10,9 @@ storiesOf('Components|Inputs/Checkbox/CSS/Top Label/Checkbox', module)
   .add('Default', () => (
     <div className="wdc-form">
       <div className="wdc-form-field-wrapper">
-        <label className="wdc-form-label">Label</label>
+        <label className="wdc-form-label" htmlFor="checkbox">
+          Label
+        </label>
         <div className="wdc-form-field">
           <div className="wdc-form-checkbox">
             <input type="checkbox" id="checkbox" />
@@ -23,7 +25,9 @@ storiesOf('Components|Inputs/Checkbox/CSS/Top Label/Checkbox', module)
   .add('Disabled', () => (
     <div className="wdc-form">
       <div className="wdc-form-field-wrapper">
-        <label className="wdc-form-label">Label</label>
+        <label className="wdc-form-label" htmlFor="checkbox">
+          Label
+        </label>
         <div className="wdc-form-field">
           <div className="wdc-form-checkbox">
             <input type="checkbox" id="checkbox" disabled={true} />
@@ -36,7 +40,9 @@ storiesOf('Components|Inputs/Checkbox/CSS/Top Label/Checkbox', module)
   .add('Alert', () => (
     <div className="wdc-form">
       <div className="wdc-form-field-wrapper wdc-form-field-alert wdc-form-field-error-inline">
-        <label className="wdc-form-label">Label</label>
+        <label className="wdc-form-label" htmlFor="checkbox">
+          Label
+        </label>
         <div className="wdc-form-field">
           <div className="wdc-form-checkbox wdc-form-alert">
             <input type="checkbox" id="checkbox-alert" aria-describedby="alert-message" />
@@ -52,7 +58,9 @@ storiesOf('Components|Inputs/Checkbox/CSS/Top Label/Checkbox', module)
   .add('Error', () => (
     <div className="wdc-form">
       <div className="wdc-form-field-wrapper wdc-form-field-error wdc-form-field-error-inline">
-        <label className="wdc-form-label">Label</label>
+        <label className="wdc-form-label" htmlFor="checkbox">
+          Label
+        </label>
         <div className="wdc-form-field">
           <div className="wdc-form-checkbox wdc-form-error">
             <input
@@ -76,7 +84,9 @@ storiesOf('Components|Inputs/Checkbox/CSS/Left Label/Checkbox', module)
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper">
-        <label className="wdc-form-label">Label</label>
+        <label className="wdc-form-label" htmlFor="checkbox">
+          Label
+        </label>
         <div className="wdc-form-field">
           <div className="wdc-form-checkbox">
             <input type="checkbox" id="checkbox" />
@@ -89,7 +99,9 @@ storiesOf('Components|Inputs/Checkbox/CSS/Left Label/Checkbox', module)
   .add('Disabled', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper">
-        <label className="wdc-form-label">Label</label>
+        <label className="wdc-form-label" htmlFor="checkbox">
+          Label
+        </label>
         <div className="wdc-form-field">
           <div className="wdc-form-checkbox">
             <input type="checkbox" id="checkbox" disabled={true} />
@@ -102,7 +114,9 @@ storiesOf('Components|Inputs/Checkbox/CSS/Left Label/Checkbox', module)
   .add('Alert', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper wdc-form-field-alert">
-        <label className="wdc-form-label">Label</label>
+        <label className="wdc-form-label" htmlFor="checkbox">
+          Label
+        </label>
         <div className="wdc-form-field">
           <div className="wdc-form-checkbox wdc-form-alert">
             <input type="checkbox" id="checkbox-alert" aria-describedby="alert-message" />
@@ -118,7 +132,9 @@ storiesOf('Components|Inputs/Checkbox/CSS/Left Label/Checkbox', module)
   .add('Error', () => (
     <div className="wdc-form wdc-form-label-position-left">
       <div className="wdc-form-field-wrapper wdc-form-field-error">
-        <label className="wdc-form-label">Label</label>
+        <label className="wdc-form-label" htmlFor="checkbox">
+          Label
+        </label>
         <div className="wdc-form-field">
           <div className="wdc-form-checkbox wdc-form-error">
             <input

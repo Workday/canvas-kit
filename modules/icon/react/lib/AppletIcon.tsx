@@ -6,6 +6,10 @@ import Icon from './Icon';
 import {SpanProps} from './types';
 
 export interface AppletIconStyles {
+  /**
+   * The icon color hue. Must use a member of the `AppletIcon.Colors` static enum.
+   * @default AppletIcon.Colors.Blueberry
+   */
   color?: BrandingColor;
 }
 
@@ -48,7 +52,14 @@ export const appletIconStyles = ({
 };
 
 export interface AppletIconProps extends AppletIconStyles {
+  /**
+   * The icon to display from `@workday/canvas-applet-icons-web`.
+   */
   icon: CanvasAppletIcon;
+  /**
+   * The size of the AppletIcon in `px`.
+   * @default 92
+   */
   size?: number;
 }
 

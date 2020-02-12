@@ -7,11 +7,17 @@ export interface TextInputProps
   extends Themeable,
     GrowthBehavior,
     React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * The type of error associated with the TextInput (if applicable).
+   */
   error?: ErrorType;
+  /**
+   * The ref to the inner text input element.
+   */
   inputRef?: React.Ref<HTMLInputElement>;
 }
 
-const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow'>>(
+const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -47,13 +53,20 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow'>>(
       display: 'none',
     },
   },
-  ({error}) => ({
-    ...errorRing(error),
-  }),
   ({grow}) =>
     grow && {
       width: '100%',
-    }
+    },
+  ({theme, error}) => {
+    return {
+      '&:focus:not([disabled])': {
+        borderColor: theme.palette.common.focusOutline,
+        boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
+        outline: 'none',
+      },
+      ...errorRing(error, theme),
+    };
+  }
 );
 
 export default class TextInput extends React.Component<TextInputProps> {

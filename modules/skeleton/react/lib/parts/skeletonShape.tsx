@@ -19,8 +19,20 @@ const Shape = styled('div')<{
 });
 
 export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   *  The width of the shape in `px` or `%`.
+   * @default 100%
+   */
   width?: number | string;
+  /**
+   * The height of the shape in `px` or `%`.
+   * @default 100%
+   */
   height?: number | string;
+  /**
+   * The borderRadius of the shape in `px` or `%`.
+   * @default 0
+   */
   borderRadius?: number | string;
 }
 

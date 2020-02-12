@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import withReadme from 'storybook-readme/with-readme';
 
-import {colors} from '../../../core/react/index';
+import {colors} from '../../../core/react';
 import Toast from '../index';
 import README from '../README.md';
 
@@ -15,7 +15,7 @@ const toastData = {
     messages: [
       'Your workbook was successfully processed.',
       'Your data has been successfully updated.',
-      'Your data has been sucessfully downloaded.',
+      'Your data has been successfully downloaded.',
       'View Data',
     ],
   },
