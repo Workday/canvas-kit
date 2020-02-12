@@ -18,7 +18,7 @@ cmd('pwd')
     console.log(output);
 
     data.packages = pkgRegex
-      .exec(lerna)[1]
+      .exec(output)[1]
       .replace(/\n|\r/g, '')
       .split(' - ')
       .filter(pkg => pkg.length);
