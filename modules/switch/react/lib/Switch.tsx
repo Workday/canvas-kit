@@ -121,13 +121,17 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     padding: '0px 2px',
     transition: 'background-color 200ms ease',
   },
-  ({checked, disabled, theme}) => ({
-    backgroundColor: disabled
-      ? colors.soap400
-      : checked
-      ? theme.palette.primary.main
-      : colors.licorice200,
-  })
+  ({checked, disabled, theme}) => {
+    if (checked) {
+      return {
+        backgroundColor: disabled ? theme.palette.primary.light : theme.palette.primary.main,
+      };
+    } else {
+      return {
+        backgroundColor: disabled ? colors.soap400 : colors.licorice200,
+      };
+    }
+  }
 );
 
 const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({checked}) => ({
