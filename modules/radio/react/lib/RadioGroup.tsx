@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import Radio, {RadioProps} from './Radio';
-import {borderRadius, spacing, inputColors, colors} from '@workday/canvas-kit-react-core';
-import {ErrorType, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {borderRadius, spacing} from '@workday/canvas-kit-react-core';
+import {ErrorType, GrowthBehavior, getErrorColors} from '@workday/canvas-kit-react-common';
 
 export interface RadioGroupProps extends Themeable, GrowthBehavior {
   /**
@@ -32,6 +32,9 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
   {
     display: 'inline-block',
     boxSizing: 'border-box',
+    borderRadius: borderRadius.m,
+    padding: `${spacing.xxxs} ${spacing.xs}`,
+    margin: `-${spacing.xxxs} -${spacing.xs}`,
     '& > div': {
       margin: `${spacing.xxs} ${spacing.zero}`,
       '&:first-child': {
@@ -44,25 +47,13 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
   },
   ({grow}) => grow && {width: '100%'},
   ({error, theme}) => {
-    let errorBorderColor;
-    let errorRingColor;
-
-    if (error === ErrorType.Error) {
-      errorRingColor = theme.palette.error.main;
-    } else if (error === ErrorType.Alert) {
-      errorRingColor = theme.palette.alert.main;
-      errorBorderColor = theme.palette.error.darkest;
-    } else {
-      return {};
-    }
+    const errorColors = getErrorColors(error, theme);
     return {
-      borderRadius: borderRadius.m,
       transition: '100ms box-shadow',
-      boxShadow: errorBorderColor
-        ? `inset 0 0 0 1px ${errorBorderColor}, inset 0 0 0 3px ${errorRingColor}`
-        : `inset 0 0 0 2px ${errorRingColor}`,
-      padding: `${spacing.xxxs} ${spacing.xs}`,
-      margin: `-${spacing.xxxs} -${spacing.xs}`,
+      boxShadow:
+        errorColors.outer !== errorColors.inner
+          ? `inset 0 0 0 1px ${errorColors.outer}, inset 0 0 0 3px ${errorColors.inner}`
+          : `inset 0 0 0 2px ${errorColors.inner}`,
     };
   }
 );

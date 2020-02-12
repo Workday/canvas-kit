@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {ErrorType, themedFocusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {
+  ErrorType,
+  themedFocusRing,
+  mouseFocusBehavior,
+  getErrorColors,
+} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
@@ -173,34 +178,28 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     },
   }),
   ({theme, error}) => {
-    let errorRingColor;
-    let errorRingBorderColor = 'transparent';
+    const errorColors = getErrorColors(error, theme);
 
-    if (error === ErrorType.Error) {
-      errorRingColor = theme.palette.error.main;
-    } else if (error === ErrorType.Alert) {
-      errorRingColor = theme.palette.alert.main;
-      errorRingBorderColor = theme.palette.alert.darkest;
-    } else {
-      return;
+    if (errorColors.outer === errorColors.inner) {
+      errorColors.outer = 'transparent';
     }
 
     const errorStyles = {
       '& ~ div:first-of-type': {
-        border: `1px solid ${errorRingColor}`,
-        boxShadow: `0 0 0 1px ${errorRingColor}, 0 0 0 2px ${errorRingBorderColor}`,
+        border: `1px solid ${errorColors.inner}`,
+        boxShadow: `0 0 0 1px ${errorColors.inner}, 0 0 0 2px ${errorColors.outer}`,
       },
       '&:not(:checked):not(:disabled):not(:focus):hover, &:not(:checked):not(:disabled):active': {
         '~ div:first-of-type': {
-          borderColor: errorRingColor,
+          borderColor: errorColors.inner,
         },
       },
       '&:checked ~ div:first-of-type': {
         borderColor: theme.palette.primary.main,
         boxShadow: `
             0 0 0 2px ${colors.frenchVanilla100},
-            0 0 0 4px ${errorRingColor},
-            0 0 0 5px ${errorRingBorderColor}`,
+            0 0 0 4px ${errorColors.inner},
+            0 0 0 5px ${errorColors.outer}`,
       },
     };
     return {
@@ -209,8 +208,8 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       ...mouseFocusBehavior({
         ...errorStyles,
         '&:not(:checked):focus ~ div:first-of-type': {
-          border: `1px solid ${errorRingColor}`,
-          boxShadow: `0 0 0 1px ${errorRingColor}, 0 0 0 2px ${errorRingBorderColor}`,
+          border: `1px solid ${errorColors.inner}`,
+          boxShadow: `0 0 0 1px ${errorColors.inner}, 0 0 0 2px ${errorColors.outer}`,
         },
       }),
     };
