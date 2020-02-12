@@ -64,22 +64,6 @@ const SwitchInput = styled('input')<SwitchProps>(
     borderRadius: borderRadius.circle,
     opacity: 0,
   },
-  ({theme}) => ({
-    '&:focus, &:active': {
-      outline: 'none',
-      '& ~ div:first-of-type': {
-        ...themedFocusRing(theme, {separation: 2, animate: false}),
-      },
-    },
-    ...mouseFocusBehavior({
-      '&:focus, &:active': {
-        '& ~ div:first-of-type': {
-          ...themedFocusRing(theme, {width: 0}),
-          animation: 'none',
-        },
-      },
-    }),
-  }),
   ({disabled}) => ({
     cursor: disabled ? 'not-allowed' : 'pointer',
   }),
@@ -91,6 +75,12 @@ const SwitchInput = styled('input')<SwitchProps>(
     }
 
     const styles = {
+      '&:focus': {
+        outline: 'none',
+        '& ~ div:first-of-type': {
+          ...themedFocusRing(theme, {separation: 2, animate: false}),
+        },
+      },
       '& ~ div:first-of-type': {
         boxShadow: `
           0 0 0 2px ${colors.frenchVanilla100},
