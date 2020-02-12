@@ -60,9 +60,7 @@ jobs:
       - yarn build
     deploy:
       provider: script
-      script:
-        - npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN
-        - yarn lerna publish from-package --yes --pre-dist-tag prerelease
+      script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && yarn lerna publish from-package --yes --pre-dist-tag prerelease
       skip_cleanup: true
       on:
         tags: true
@@ -77,12 +75,7 @@ jobs:
       - CHROMATIC_APP_CODE="m1dh5kc7oj"
     deploy:
       - provider: script
-        script:
-          - npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN
-          - yarn lerna publish --yes --force-publish="*" --canary --preid next --dist-tag next
-          - git rev-parse --short HEAD | read sha
-          - node utils/get-lerna-version.js | read version
-          - curl -X POST --data-urlencode "payload={\"text\": \"*New canary build published from <https://github.com/Workday/canvas-kit/commit/$sha|merge commit $sha> (v$version)*\n\n\`yarn add @workday/canvas-kit-{module}@$version\`\nor\n\`yarn add @workday/canvas-kit-{module}@next\`\"}" $SLACK_WEBHOOK
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js $SLACK_WEBHOOK $TRAVIS_BUILD_WEB_URL
         skip_cleanup: true
         on:
           branch: master
