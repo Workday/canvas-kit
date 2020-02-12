@@ -20,6 +20,7 @@ const tildeImporter = (url: string): {file: string} => {
   if (url[0] === '~') {
     url = `./node_modules/${url.substr(1)}`;
   }
+
   return {file: url};
 };
 ```

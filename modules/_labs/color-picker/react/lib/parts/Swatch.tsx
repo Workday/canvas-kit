@@ -9,7 +9,6 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 const whiteColor = colors.frenchVanilla100;
 
 export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  id: string;
   color: string;
   style?: React.CSSProperties;
 }
@@ -38,8 +37,8 @@ export interface SwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   style?: React.CSSProperties;
 }
 
-export const Swatch: React.FunctionComponent<SwatchProps> = ({id, color, showCheck, style}) => (
-  <Container id={id} color={color} style={style}>
+export const Swatch: React.FunctionComponent<SwatchProps> = ({color, showCheck, style}) => (
+  <Container color={color} style={style}>
     {showCheck && (
       <SystemIcon
         fill={pickForegroundColor(color)}
