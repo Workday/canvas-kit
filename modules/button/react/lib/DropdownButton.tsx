@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ButtonBaseLabel, ButtonLabelIcon} from './ButtonBase';
 import {getButtonStyle, getButtonSize} from './utils';
-import styled from '@emotion/styled';
+import {styled} from '@workday/canvas-kit-labs-react-core';
 import isPropValid from '@emotion/is-prop-valid';
 import {BaseButtonProps} from './Button';
 import {dropdownButtonStyles} from './ButtonStyles';
