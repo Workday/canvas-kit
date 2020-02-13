@@ -1,26 +1,29 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx, CSSObject} from '@emotion/core';
+import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {Button, DropdownButton, TextButton} from '../index';
+import {Button, DropdownButton, TextButton, IconButton} from '../index';
 
-const blueBackground: CSSObject = {
+const buttonLayout: CSSObject = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  flexWrap: 'wrap',
-  backgroundColor: '#0875e1',
-  margin: '0 10px',
-  padding: '12px',
-  maxWidth: 'max-content',
-  borderRadius: '3px',
-  button: {
-    margin: '12px',
-  },
 };
+
+const blueBackground: CSSObject = {
+  ...buttonLayout,
+  backgroundColor: '#0875e1',
+  padding: '12px',
+  borderRadius: '4px',
+};
+
+const Container = props => (
+  <div css={props.blue ? blueBackground : buttonLayout}>{props.children}</div>
+);
 
 const ButtonStates = () => (
   <StaticStates>
@@ -68,13 +71,11 @@ const ButtonStates = () => (
         }
       )}
     >
-      {props => {
-        const button = <Button {...props}>Test</Button>;
-        if (props.variant === Button.Variant.OutlineInverse) {
-          return <div css={blueBackground}>{button}</div>;
-        }
-        return button;
-      }}
+      {props => (
+        <Container blue={props.variant === Button.Variant.OutlineInverse}>
+          <Button {...props}>Test</Button>
+        </Container>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -125,7 +126,11 @@ const DropdownButtonStates = () => (
         }
       )}
     >
-      {props => <DropdownButton {...props}>Test</DropdownButton>}
+      {props => (
+        <Container>
+          <DropdownButton {...props}>Test</DropdownButton>
+        </Container>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -173,17 +178,77 @@ const TextButtonStates = () => (
         }
       )}
     >
-      {props => {
-        const button = <TextButton {...props}>Test</TextButton>;
-        if (
-          [TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(props.variant)
-        ) {
-          return <div css={blueBackground}>{button}</div>;
-        }
-        return button;
-      }}
+      {props => (
+        <Container
+          blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
+            props.variant
+          )}
+        >
+          <TextButton {...props}>Test</TextButton>
+        </Container>
+      )}
     </ComponentStatesTable>
   </StaticStates>
+);
+
+const IconButtonStates = () => (
+  <React.Fragment>
+    {[false, true].map(toggled => (
+      <div>
+        <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
+        <StaticStates>
+          <ComponentStatesTable
+            rowProps={permutateProps({
+              variant: [
+                {value: IconButton.Variant.Inverse, label: 'Inverse'},
+                {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+                {value: IconButton.Variant.Plain, label: 'Plain'},
+                {value: IconButton.Variant.Circle, label: 'Circle'},
+                {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+                {value: IconButton.Variant.Square, label: 'Square'},
+                {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+              ],
+            })}
+            columnProps={permutateProps(
+              {
+                className: [
+                  {label: 'Default', value: ''},
+                  {label: 'Hover', value: 'hover'},
+                  {label: 'Focus', value: 'focus'},
+                  {label: 'Focus Hover', value: 'focus hover'},
+                  {label: 'Active', value: 'active'},
+                  {label: 'Active Hover', value: 'active hover'},
+                ],
+                disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+              },
+              props => {
+                if (props.disabled && !['', 'hover'].includes(props.className)) {
+                  return false;
+                }
+                return true;
+              }
+            )}
+          >
+            {props => (
+              <Container
+                blue={[IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].includes(
+                  props.variant
+                )}
+              >
+                <IconButton
+                  toggled={toggled}
+                  icon={playCircleIcon}
+                  aria-label="Play"
+                  {...props}
+                  onChange={() => {}} // eslint-disable-line no-empty-function
+                />
+              </Container>
+            )}
+          </ComponentStatesTable>
+        </StaticStates>
+      </div>
+    ))}
+  </React.Fragment>
 );
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
@@ -197,3 +262,7 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Dropdown', module)
 storiesOf('Components|Buttons/Button/React/Visual Testing/Text', module)
   .addParameters({component: TextButton})
   .add('States', () => <TextButtonStates />);
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Icon Button', module)
+  .addParameters({component: IconButton})
+  .add('States', () => <IconButtonStates />);
