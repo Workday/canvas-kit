@@ -9,23 +9,15 @@ const [
   SLACK_WEBHOOK,
   TRAVIS_BUILD_URL = 'https://travis-ci.org/Workday/canvas-kit/branches',
 ] = process.argv.slice(2);
-const pkgRegex = /Successfully published:\n((.|\n)*)lerna success published (\d*) packages/gm;
-const versionRegex = /@workday\/[a-z-]*@(\d*.\d*.\d*-next.\d*\+\w*)/gm;
+const regex = /@workday\/[a-z-]*@(\d*.\d*.\d*-next.\d*\+\w*)/gm;
 const data = {};
 
 cmd('yarn lerna publish --yes --force-publish="*" --canary --preid next --dist-tag next')
   .then(output => {
     console.log(output);
 
-    data.packages = pkgRegex
-      .exec(output)[1]
-      .replace(/\n|\r/g, '')
-      .split(' - ')
-      .filter(pkg => pkg.length);
-
-    if (data.packages.length) {
-      data.version = versionRegex.exec(data.packages[0])[1];
-    }
+    data.packages = output.match(regex);
+    data.version = regex.exec(data.packages[0])[1];
 
     return cmd('git rev-parse --short HEAD');
   })
