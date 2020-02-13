@@ -13,7 +13,7 @@ const pkgRegex = /Successfully published:\n((.|\n)*)lerna success published (\d*
 const versionRegex = /@workday\/[a-z-]*@(\d*.\d*.\d*-next.\d*\+\w*)/gm;
 const data = {};
 
-cmd('pwd')
+cmd('yarn lerna publish --yes --force-publish="*" --canary --preid next --dist-tag next')
   .then(output => {
     console.log(output);
 
