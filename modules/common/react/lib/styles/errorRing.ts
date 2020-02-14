@@ -41,6 +41,9 @@ export function getErrorColors(error?: ErrorType, theme?: CanvasTheme) {
 }
 
 export default function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSObject {
+  if (error !== ErrorType.Error && error !== ErrorType.Alert) {
+    return {};
+  }
   const errorColors = getErrorColors(error, theme);
   const errorBoxShadow = `inset 0 0 0 ${errorColors.outer === errorColors.inner ? 1 : 2}px ${
     errorColors.inner
