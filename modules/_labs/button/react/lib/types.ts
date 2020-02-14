@@ -58,3 +58,31 @@ export enum DeprecatedButtonVariant {
   Secondary = 'deprecatedSecondary',
   Delete = 'deprecatedDelete',
 }
+
+export type AllButtonVariants =
+  | ButtonVariant
+  | DropdownButtonVariant
+  | TextButtonVariant
+  | IconButtonVariant
+  | DeprecatedButtonVariant;
+
+/**
+ * The object used for passing in colors to the ButtonContainer
+ */
+export interface ButtonStateColors {
+  background?: string;
+  border?: string;
+  icon?: string;
+  label?: string;
+  labelData?: string;
+}
+export interface ButtonColors {
+  default: ButtonStateColors;
+  hover: ButtonStateColors;
+  active: ButtonStateColors;
+  focus: ButtonStateColors;
+  disabled: ButtonStateColors;
+}
+export type ButtonColorCollection = {
+  [key in AllButtonVariants]?: ButtonColors;
+};

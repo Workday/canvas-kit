@@ -1,6 +1,8 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {caretDownIcon} from '@workday/canvas-system-icons-web';
 import {DropdownButtonVariant, ButtonSize} from './types';
+import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
+import {buttonColors} from './Button';
 
 export interface DropdownButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -19,14 +21,20 @@ export interface DropdownButtonProps extends React.HTMLAttributes<HTMLButtonElem
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const Container = styled('button')<DropdownButtonProps>({});
-
 const DropdownButton = (props: DropdownButtonProps) => {
   const {variant, size, buttonRef, children, ...elemProps} = props;
   return (
-    <Container variant={variant} size={size} buttonRef={buttonRef} {...elemProps}>
-      {children}
-    </Container>
+    <ButtonContainer
+      colors={buttonColors[variant]}
+      size={size}
+      buttonRef={buttonRef}
+      {...elemProps}
+    >
+      <ButtonLabel size={size} variant={variant}>
+        {children}
+      </ButtonLabel>
+      <ButtonLabelIcon size={size} icon={caretDownIcon} dropdown={true} />
+    </ButtonContainer>
   );
 };
 

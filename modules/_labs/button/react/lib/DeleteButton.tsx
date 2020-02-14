@@ -1,6 +1,7 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
-import {ButtonSize} from './types';
+import {colors} from '@workday/canvas-kit-react-core';
+import {ButtonSize, ButtonColors} from './types';
+import {ButtonContainer} from './parts';
 
 export interface DeleteButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -14,14 +15,39 @@ export interface DeleteButtonProps extends React.HTMLAttributes<HTMLButtonElemen
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const Container = styled('button')<DeleteButtonProps>({});
+const deleteButtonColors: ButtonColors = {
+  default: {
+    background: colors.cinnamon500,
+    border: colors.cinnamon500,
+    label: colors.frenchVanilla100,
+  },
+  hover: {
+    background: colors.cinnamon600,
+    border: colors.cinnamon600,
+    label: colors.frenchVanilla100,
+  },
+  active: {
+    background: '#80160E',
+    border: 'transparent',
+    label: colors.frenchVanilla100,
+  },
+  focus: {
+    background: colors.cinnamon500,
+    label: colors.frenchVanilla100,
+  },
+  disabled: {
+    background: colors.cinnamon200,
+    border: 'transparent',
+    label: colors.frenchVanilla100,
+  },
+};
 
 const DeleteButton = (props: DeleteButtonProps) => {
   const {size, buttonRef, children, ...elemProps} = props;
   return (
-    <Container size={size} buttonRef={buttonRef} {...elemProps}>
+    <ButtonContainer colors={deleteButtonColors} size={size} buttonRef={buttonRef} {...elemProps}>
       {children}
-    </Container>
+    </ButtonContainer>
   );
 };
 
