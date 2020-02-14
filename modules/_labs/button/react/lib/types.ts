@@ -19,23 +19,11 @@ export enum ButtonIconPosition {
 }
 
 /**
- * Hightlight Button
- */
-export enum HighlightButtonSize {
-  Medium = 'medium',
-  Large = 'large',
-}
-
-/**
  * Dropdown Button
  */
 export enum DropdownButtonVariant {
   Primary = 'primary',
   Secondary = 'secondary',
-}
-export enum DropdownButtonSize {
-  Medium = 'medium',
-  Large = 'large',
 }
 
 /**
@@ -50,10 +38,6 @@ export enum IconButtonVariant {
   Inverse = 'inverse',
   InverseFilled = 'inverseFilled',
 }
-export enum IconButtonSize {
-  Small = 'small',
-  Medium = 'medium',
-}
 
 /**
  * Text Button
@@ -63,10 +47,6 @@ export enum TextButtonVariant {
   Inverse = 'textInverse',
   AllCaps = 'textAllCaps',
   InverseAllCaps = 'textInverseAllCaps',
-}
-export enum TextButtonSize {
-  Small = 'small',
-  Large = 'large',
 }
 
 /**

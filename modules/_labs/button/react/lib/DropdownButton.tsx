@@ -1,18 +1,18 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {DropdownButtonVariant, DropdownButtonSize} from './types';
+import {DropdownButtonVariant, ButtonSize} from './types';
 
 export interface DropdownButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * The variant of the Button.
-   * @default ButtonVariant.Secondary
+   * @default DropdownButtonVariant.Secondary
    */
   variant: DropdownButtonVariant;
   /**
    * The size of the Button.
    * @default ButtonSize.Medium
    */
-  size: DropdownButtonSize;
+  size: ButtonSize.Medium | ButtonSize.Large;
   /**
    * The ref to the button that the styled component renders.
    */
@@ -31,11 +31,14 @@ const DropdownButton = (props: DropdownButtonProps) => {
 };
 
 DropdownButton.Variant = DropdownButtonVariant;
-DropdownButton.Size = DropdownButtonSize;
+DropdownButton.Size = {
+  Medium: ButtonSize.Medium,
+  Large: ButtonSize.Large,
+};
 
 DropdownButton.defaultProps = {
   variant: DropdownButtonVariant.Secondary,
-  size: DropdownButtonSize.Medium,
+  size: ButtonSize.Medium,
 };
 
 export default DropdownButton;

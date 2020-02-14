@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {TextButtonVariant, TextButtonSize} from './types';
+import {TextButtonVariant, ButtonSize} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -11,9 +11,9 @@ export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement>
   variant: TextButtonVariant;
   /**
    * The size of the TextButton.
-   * @default TextButtonSize.Medium
+   * @default ButtonSize.Medium
    */
-  size: TextButtonSize;
+  size: ButtonSize.Small | ButtonSize.Large;
   /**
    * The ref to the button that the styled component renders.
    */
@@ -35,10 +35,13 @@ const TextButton = (props: TextButtonProps) => {
   );
 };
 
-TextButton.Size = TextButtonSize;
+TextButton.Size = {
+  Small: ButtonSize.Small,
+  Large: ButtonSize.Large,
+};
 
 TextButton.defaultProps = {
-  size: TextButtonSize.Small,
+  size: ButtonSize.Small,
 };
 
 export default TextButton;

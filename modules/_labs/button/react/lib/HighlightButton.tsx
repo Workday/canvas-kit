@@ -1,14 +1,14 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {HighlightButtonSize} from './types';
+import {ButtonSize} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 export interface HighlightButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * The size of the HighlightButton.
-   * @default HighlightButtonSize.Medium
+   * @default ButtonSize.Medium
    */
-  size: HighlightButtonSize;
+  size: ButtonSize.Medium | ButtonSize.Large;
   /**
    * The ref to the button that the styled component renders.
    */
@@ -34,10 +34,13 @@ const HighlightButton = (props: HighlightButtonProps) => {
   );
 };
 
-HighlightButton.Size = HighlightButtonSize;
+HighlightButton.Size = {
+  Medium: ButtonSize.Medium,
+  Large: ButtonSize.Large,
+};
 
 HighlightButton.defaultProps = {
-  size: HighlightButtonSize.Medium,
+  size: ButtonSize.Medium,
 };
 
 export default HighlightButton;
