@@ -221,6 +221,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       this.toggleMenu(false);
     }, dismissMenuTimeout);
 
+    // code inspired by: https://stackoverflow.com/a/46012210
+    // we want to programatically change the value of the
+    // SelectInput in such a way that triggers its change event
     if (this.inputRef && this.inputRef.current) {
       const nativeInputValue = Object.getOwnPropertyDescriptor(
         Object.getPrototypeOf(this.inputRef.current),
