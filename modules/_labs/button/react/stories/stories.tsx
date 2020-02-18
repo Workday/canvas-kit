@@ -6,7 +6,14 @@ import {storiesOf} from '@storybook/react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, permutateProps} from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {Button, DropdownButton, TextButton} from '../index';
+import {
+  Button,
+  DropdownButton,
+  TextButton,
+  DeleteButton,
+  HighlightButton,
+  deprecated_Button as DeprecatedButton,
+} from '../index';
 
 const buttonLayout: CSSObject = {
   display: 'flex',
@@ -25,30 +32,10 @@ const Container = props => (
   <div css={props.blue ? blueBackground : buttonLayout}>{props.children}</div>
 );
 
-const ButtonStates = () => (
+const getButtonStates = (rowProps, renderFn) => (
   <StaticStates>
     <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          variant: [
-            {value: Button.Variant.Primary, label: 'Primary'},
-            {value: Button.Variant.Secondary, label: 'Secondary'},
-            {value: Button.Variant.OutlinePrimary, label: 'Outline Primary'},
-            {value: Button.Variant.OutlineSecondary, label: 'Outline Secondary'},
-            {value: Button.Variant.OutlineInverse, label: 'Outline Inverse'},
-          ],
-          size: [
-            {value: Button.Size.Small, label: 'Small'},
-            {value: Button.Size.Medium, label: 'Medium'},
-            {value: Button.Size.Large, label: 'Large'},
-          ],
-          icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-          dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
-        },
-        props => {
-          return true;
-        }
-      )}
+      rowProps={permutateProps(rowProps)}
       columnProps={permutateProps(
         {
           className: [
@@ -69,108 +56,137 @@ const ButtonStates = () => (
         }
       )}
     >
-      {props => (
-        <Container blue={props.variant === Button.Variant.OutlineInverse}>
-          <Button {...props}>Test</Button>
-        </Container>
-      )}
+      {renderFn}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-const DropdownButtonStates = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={permutateProps({
-        variant: [
-          {value: DropdownButton.Variant.Primary, label: 'Primary'},
-          {value: DropdownButton.Variant.Secondary, label: 'Secondary'},
-        ],
-        size: [
-          {value: DropdownButton.Size.Medium, label: 'Medium'},
-          {value: DropdownButton.Size.Large, label: 'Large'},
-        ],
-        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
-      })}
-      columnProps={permutateProps(
-        {
-          className: [
-            {label: 'Default', value: ''},
-            {label: 'Hover', value: 'hover'},
-            {label: 'Focus', value: 'focus'},
-            {label: 'Focus Hover', value: 'focus hover'},
-            {label: 'Active', value: 'active'},
-            {label: 'Active Hover', value: 'active hover'},
-          ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-        },
-        props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
-        }
-      )}
-    >
-      {props => (
-        <Container>
-          <DropdownButton {...props}>Test</DropdownButton>
-        </Container>
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
+const ButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: Button.Variant.Primary, label: 'Primary'},
+        {value: Button.Variant.Secondary, label: 'Secondary'},
+        {value: Button.Variant.OutlinePrimary, label: 'Outline Primary'},
+        {value: Button.Variant.OutlineSecondary, label: 'Outline Secondary'},
+        {value: Button.Variant.OutlineInverse, label: 'Outline Inverse'},
+      ],
+      size: [
+        {value: Button.Size.Small, label: 'Small'},
+        {value: Button.Size.Medium, label: 'Medium'},
+        {value: Button.Size.Large, label: 'Large'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    props => (
+      <Container blue={props.variant === Button.Variant.OutlineInverse}>
+        <Button {...props}>Test</Button>
+      </Container>
+    )
+  );
 
-const TextButtonStates = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={permutateProps({
-        variant: [
-          {value: TextButton.Variant.Default, label: 'Default'},
-          {value: TextButton.Variant.AllCaps, label: 'All Caps'},
-          {value: TextButton.Variant.Inverse, label: 'Inverse'},
-          {value: TextButton.Variant.InverseAllCaps, label: 'Inverse All Caps'},
-        ],
-        size: [
-          {value: TextButton.Size.Small, label: 'Small'},
-          {value: TextButton.Size.Large, label: 'Large'},
-        ],
-        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
-      })}
-      columnProps={permutateProps(
-        {
-          className: [
-            {label: 'Default', value: ''},
-            {label: 'Hover', value: 'hover'},
-            {label: 'Focus', value: 'focus'},
-            {label: 'Focus Hover', value: 'focus hover'},
-            {label: 'Active', value: 'active'},
-            {label: 'Active Hover', value: 'active hover'},
-          ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-        },
-        props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
-        }
-      )}
-    >
-      {props => (
-        <Container
-          blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
-            props.variant
-          )}
-        >
-          <TextButton {...props}>Test</TextButton>
-        </Container>
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
+const DeleteButtonStates = () =>
+  getButtonStates(
+    {
+      size: [
+        {value: DropdownButton.Size.Medium, label: 'Medium'},
+        {value: DropdownButton.Size.Large, label: 'Large'},
+      ],
+    },
+    props => (
+      <Container>
+        <DeleteButton {...props}>Test</DeleteButton>
+      </Container>
+    )
+  );
+
+const DeprecatedButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: DeprecatedButton.Variant.Primary, label: 'Primary'},
+        {value: DeprecatedButton.Variant.Secondary, label: 'Secondary'},
+        {value: DeprecatedButton.Variant.Delete, label: 'Secondary'},
+      ],
+      size: [
+        {value: Button.Size.Small, label: 'Small'},
+        {value: Button.Size.Medium, label: 'Medium'},
+        {value: Button.Size.Large, label: 'Large'},
+      ],
+    },
+    props => (
+      <Container>
+        <DeprecatedButton {...props}>Test</DeprecatedButton>
+      </Container>
+    )
+  );
+
+const DropdownButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: DropdownButton.Variant.Primary, label: 'Primary'},
+        {value: DropdownButton.Variant.Secondary, label: 'Secondary'},
+      ],
+      size: [
+        {value: DropdownButton.Size.Medium, label: 'Medium'},
+        {value: DropdownButton.Size.Large, label: 'Large'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    props => (
+      <Container>
+        <DropdownButton {...props}>Test</DropdownButton>
+      </Container>
+    )
+  );
+
+const HighlightButtonStates = () =>
+  getButtonStates(
+    {
+      size: [
+        {value: Button.Size.Small, label: 'Small'},
+        {value: Button.Size.Medium, label: 'Medium'},
+        {value: Button.Size.Large, label: 'Large'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    props => (
+      <Container>
+        <HighlightButton {...props}>Test</HighlightButton>
+      </Container>
+    )
+  );
+
+const TextButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: TextButton.Variant.Default, label: 'Default'},
+        {value: TextButton.Variant.AllCaps, label: 'All Caps'},
+        {value: TextButton.Variant.Inverse, label: 'Inverse'},
+        {value: TextButton.Variant.InverseAllCaps, label: 'Inverse All Caps'},
+      ],
+      size: [
+        {value: TextButton.Size.Small, label: 'Small'},
+        {value: TextButton.Size.Large, label: 'Large'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    props => (
+      <Container
+        blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
+          props.variant
+        )}
+      >
+        <TextButton {...props}>Test</TextButton>
+      </Container>
+    )
+  );
 
 // const IconButtonStates = () => (
 //   <React.Fragment>
@@ -236,11 +252,23 @@ storiesOf('Labs|Button/React/Visual Testing/Button', module)
   .addParameters({component: Button})
   .add('States', () => <ButtonStates />);
 
-storiesOf('Labs|Button/React/Visual Testing/Dropdown', module)
+storiesOf('Labs|Button/React/Visual Testing/Delete Button', module)
+  .addParameters({component: DeleteButton})
+  .add('States', () => <DeleteButtonStates />);
+
+storiesOf('Labs|Button/React/Visual Testing/Deprecated Button', module)
+  .addParameters({component: DeprecatedButton})
+  .add('States', () => <DeprecatedButtonStates />);
+
+storiesOf('Labs|Button/React/Visual Testing/Dropdown Button', module)
   .addParameters({component: DropdownButton})
   .add('States', () => <DropdownButtonStates />);
 
-storiesOf('Labs|Button/React/Visual Testing/Text', module)
+storiesOf('Labs|Button/React/Visual Testing/Highlight Button', module)
+  .addParameters({component: HighlightButton})
+  .add('States', () => <HighlightButtonStates />);
+
+storiesOf('Labs|Button/React/Visual Testing/Text Button', module)
   .addParameters({component: TextButton})
   .add('States', () => <TextButtonStates />);
 
