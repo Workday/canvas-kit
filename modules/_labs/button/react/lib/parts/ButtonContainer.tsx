@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
+import {styled} from '@workday/canvas-kit-labs-react-core';
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {ButtonSize, ButtonColors} from '../types';
