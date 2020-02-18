@@ -1,10 +1,12 @@
 import * as React from 'react';
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {focusRing, mouseFocusBehavior, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {DeprecatedButtonVariant, ButtonSize} from './types';
 import styled from '@emotion/styled';
 
-export interface DeprecatedButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface DeprecatedButtonProps
+  extends React.HTMLAttributes<HTMLButtonElement>,
+    GrowthBehavior {
   /**
    * The variant of the Button.
    * @default DeprecatedButtonVariant.Secondary

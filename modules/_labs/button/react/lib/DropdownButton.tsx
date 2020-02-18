@@ -1,10 +1,13 @@
 import * as React from 'react';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
+import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {DropdownButtonVariant, ButtonSize} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 import {buttonColors} from './Button';
 
-export interface DropdownButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface DropdownButtonProps
+  extends React.HTMLAttributes<HTMLButtonElement>,
+    GrowthBehavior {
   /**
    * The variant of the Button.
    * @default DropdownButtonVariant.Secondary
