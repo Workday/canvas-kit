@@ -1,13 +1,7 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {
-  TextButtonVariant,
-  ButtonSize,
-  ButtonIconPosition,
-  IconButtonVariant,
-  ButtonColorCollection,
-} from './types';
+import {TextButtonVariant, ButtonSize, ButtonIconPosition, ButtonColorCollection} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 
 export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -133,7 +127,7 @@ const TextButton = (props: TextButtonProps) => {
 };
 
 TextButton.IconPosition = ButtonIconPosition;
-TextButton.Variant = IconButtonVariant;
+TextButton.Variant = TextButtonVariant;
 TextButton.Size = {
   Small: ButtonSize.Small,
   Large: ButtonSize.Medium,
