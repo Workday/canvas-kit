@@ -42,15 +42,11 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 const IconButton = (props: IconButtonProps) => {
   const {buttonRef, size, variant, onToggleChange, icon, toggled, children, ...elemProps} = props;
 
-  // onToggleChange will generate a warning if spread over a <button>
-  // componentDidUpdate(prevProps: IconButtonProps) {
-  //   if (
-  //     prevProps.toggled !== this.props.toggled &&
-  //     typeof this.props.onToggleChange === 'function'
-  //   ) {
-  //     this.props.onToggleChange(this.props.toggled);
-  //   }
-  // }
+  React.useEffect(() => {
+    if (typeof props.onToggleChange === 'function') {
+      props.onToggleChange(toggled);
+    }
+  }, [props.toggled]);
 
   const containerStyles = {
     padding: 0,
