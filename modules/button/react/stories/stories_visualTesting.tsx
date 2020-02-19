@@ -5,7 +5,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
-import {playCircleIcon} from '@workday/canvas-system-icons-web';
+import {playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {Button, DropdownButton, TextButton, IconButton} from '../index';
 
 const buttonLayout: CSSObject = {
@@ -202,6 +202,10 @@ const IconButtonStates = () => (
                 {value: IconButton.Variant.Square, label: 'Square'},
                 {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
               ],
+              size: [
+                {value: IconButton.Size.Small, label: 'Small'},
+                {value: IconButton.Size.Medium, label: 'Medium'},
+              ],
             })}
             columnProps={permutateProps(
               {
@@ -231,7 +235,7 @@ const IconButtonStates = () => (
               >
                 <IconButton
                   toggled={toggled}
-                  icon={playCircleIcon}
+                  icon={activityStreamIcon}
                   aria-label="Play"
                   {...props}
                   onChange={() => {}} // eslint-disable-line no-empty-function

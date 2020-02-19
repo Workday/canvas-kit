@@ -1,5 +1,6 @@
 import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
+import {CSSObject} from '@emotion/core';
 import {styled} from '@workday/canvas-kit-labs-react-core';
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
@@ -19,6 +20,11 @@ export interface ButtonContainerProps
    * The ref to the button that the styled component renders.
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * Any extra styles necessary for a given parent component.
+   * This avoids using the inline `style` attribute when the shape needs to be customized (e.g. for IconButton)
+   */
+  extraStyles?: CSSObject;
 }
 
 export const ButtonContainer = styled('button', {
@@ -182,5 +188,6 @@ export const ButtonContainer = styled('button', {
         },
       }),
     };
-  }
+  },
+  ({extraStyles}) => extraStyles
 );
