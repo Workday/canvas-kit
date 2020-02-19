@@ -36,7 +36,6 @@ describe('Icon Button', () => {
     const testClassName = 'test classname';
     const {getByRole} = render(
       <IconButton
-        data-testid={iconButtonIdentifier}
         className={testClassName}
         aria-label="Activity Stream"
       >
