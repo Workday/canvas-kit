@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-form-field",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "The form css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@workday/canvas-kit-css-checkbox": "^3.2.0",
-    "@workday/canvas-kit-css-radio": "^3.2.0",
+    "@workday/canvas-kit-css-radio": "^3.4.0",
     "@workday/canvas-kit-css-select": "^3.2.0",
     "@workday/canvas-kit-css-text-area": "^3.2.0",
     "@workday/canvas-kit-css-text-input": "^3.2.0"
