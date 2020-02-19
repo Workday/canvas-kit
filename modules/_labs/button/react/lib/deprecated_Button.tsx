@@ -160,10 +160,9 @@ const Container = styled('button')<DeprecatedButtonProps>(
 const DeprecatedButton = (props: DeprecatedButtonProps) => {
   const {variant, size, buttonRef, children, ...elemProps} = props;
 
-  // TODO: Deprecated message
-  // public componentDidMount() {
-  //   console.warn('This component is now deprecated, consider using the new Button component');
-  // }
+  React.useEffect(() => {
+    console.warn('This component is now deprecated, consider using the new Button component');
+  }, []);
 
   return (
     <Container variant={variant} size={size} buttonRef={buttonRef} {...elemProps}>
