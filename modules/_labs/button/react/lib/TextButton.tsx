@@ -34,61 +34,39 @@ export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement>
 const textButtonColors: ButtonColorCollection = {
   [TextButtonVariant.Default]: {
     default: {
-      background: 'transparent',
-      border: 'transparent',
       icon: colors.blueberry400,
       label: colors.blueberry400,
     },
     hover: {
-      border: 'transparent',
       icon: colors.blueberry500,
       label: colors.blueberry500,
     },
     active: {
-      background: 'transparent',
-      border: 'transparent',
       icon: colors.blueberry500,
       label: colors.blueberry500,
     },
     focus: {
-      background: 'transparent',
-      icon: colors.blueberry400,
-      label: colors.blueberry400,
+      icon: colors.blueberry500,
+      label: colors.blueberry500,
     },
     disabled: {
-      background: 'transparent',
-      border: 'transparent',
       icon: 'rgba(8, 117, 225, 0.5)',
       label: 'rgba(8, 117, 225, 0.5)',
     },
   },
   [TextButtonVariant.Inverse]: {
     default: {
-      background: 'transparent',
-      border: 'transparent',
       icon: colors.frenchVanilla100,
       label: colors.frenchVanilla100,
     },
-    hover: {
-      border: 'transparent',
-      icon: 'currentColor',
-    },
-    active: {
-      background: 'transparent',
-      border: 'transparent',
-      icon: colors.frenchVanilla100,
-      label: colors.frenchVanilla100,
-    },
+    // TODO: Make these optional
+    hover: {},
+    active: {},
     focus: {
-      background: 'transparent',
-      icon: colors.frenchVanilla100,
-      label: colors.frenchVanilla100,
       // TODO: focusRingInner: 'transparent',
       // TODO: focusRingOuter: colors.frenchVanilla100,
     },
     disabled: {
-      background: 'transparent',
-      border: 'transparent',
       icon: 'rgba(255, 255, 255, 0.5)',
       label: 'rgba(255, 255, 255, 0.5)',
     },

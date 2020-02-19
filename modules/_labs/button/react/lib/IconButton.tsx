@@ -98,7 +98,6 @@ IconButton.defaultProps = {
 
 export default IconButton;
 
-// TODO: Check if 'transparent' styles can be omitted
 // TODO: this method won't account for icon fill
 const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): ButtonColors => {
   switch (variant) {
@@ -107,7 +106,7 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
     default:
       return {
         default: {
-          background: toggled ? colors.blueberry400 : 'transparent',
+          background: toggled ? colors.blueberry400 : undefined,
           icon: toggled ? colors.frenchVanilla100 : colors.licorice200,
         },
         hover: {
@@ -123,7 +122,7 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
           icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
         },
         disabled: {
-          background: toggled ? colors.blueberry100 : 'transparent',
+          background: toggled ? colors.blueberry100 : undefined,
           icon: toggled ? colors.blueberry300 : colors.soap600,
         },
       };
@@ -154,31 +153,25 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
     case IconButtonVariant.Plain:
       return {
         default: {
-          background: 'transparent',
           icon: toggled ? colors.blueberry400 : colors.licorice200,
         },
         hover: {
-          background: 'transparent',
           icon: toggled ? colors.blueberry400 : colors.licorice500,
         },
         active: {
-          background: 'transparent',
-          border: 'transparent',
           icon: toggled ? colors.blueberry400 : colors.licorice500,
         },
         focus: {
-          background: 'transparent',
           icon: toggled ? colors.blueberry400 : colors.licorice500,
         },
         disabled: {
-          background: 'transparent',
           icon: toggled ? colors.blueberry200 : colors.soap600,
         },
       };
     case IconButtonVariant.Inverse:
       return {
         default: {
-          background: toggled ? colors.frenchVanilla100 : 'transparent',
+          background: toggled ? colors.frenchVanilla100 : undefined,
           icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
         },
         hover: {
@@ -194,11 +187,10 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
           icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
         },
         disabled: {
-          background: toggled ? 'rgba(255,255,255,0.75)' : 'transparent',
+          background: toggled ? 'rgba(255,255,255,0.75)' : undefined,
           icon: toggled ? colors.blueberry400 : 'rgba(255, 255, 255, 0.75)',
         },
         // focusRingInner: 'currentColor',
-        // focusBorder: 'transparent',
         // focusRingOuter: colors.frenchVanilla100,
         // focusHover: 'rgba(0, 0, 0, 0.3)',
       };
@@ -225,7 +217,6 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
           icon: toggled ? colors.blueberry400 : 'rgba(255, 255, 255, 0.75)',
         },
         // focusRingInner: 'currentColor',
-        // focusBorder: 'transparent',
         // focusRingOuter: colors.frenchVanilla100,
         // focusHover: 'rgba(0, 0, 0, 0.3)',
       };

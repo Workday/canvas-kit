@@ -18,27 +18,19 @@ export interface DeleteButtonProps extends React.HTMLAttributes<HTMLButtonElemen
 const deleteButtonColors: ButtonColors = {
   default: {
     background: colors.cinnamon500,
-    border: colors.cinnamon500,
     label: colors.frenchVanilla100,
   },
   hover: {
     background: colors.cinnamon600,
-    border: colors.cinnamon600,
-    label: colors.frenchVanilla100,
   },
   active: {
     background: '#80160E',
-    border: 'transparent',
-    label: colors.frenchVanilla100,
   },
   focus: {
     background: colors.cinnamon500,
-    label: colors.frenchVanilla100,
   },
   disabled: {
     background: colors.cinnamon200,
-    border: 'transparent',
-    label: colors.frenchVanilla100,
   },
 };
 

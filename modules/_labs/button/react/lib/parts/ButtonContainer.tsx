@@ -38,6 +38,7 @@ export const ButtonContainer = styled('button', {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
+    background: 'none',
     borderRadius: borderRadius.circle,
     boxShadow: 'none',
     position: 'relative',
