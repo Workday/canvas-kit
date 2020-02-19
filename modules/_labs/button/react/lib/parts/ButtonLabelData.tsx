@@ -16,11 +16,7 @@ const Container = styled('span', {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
-    fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif',
     fontWeight: 400,
-    fontSize: '16px',
-    WebkitFontSmoothing: 'antialiased',
-    MozOsxFontSmoothing: 'grayscale',
     '&:hover:active': {
       backgroundColor: 'transparent',
     },

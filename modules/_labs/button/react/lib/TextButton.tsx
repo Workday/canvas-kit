@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {colors} from '@workday/canvas-kit-react-core';
+import {type} from '@workday/canvas-kit-labs-react-core';
+import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TextButtonVariant, ButtonSize, ButtonIconPosition, ButtonColorCollection} from './types';
-import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
+import {ButtonContainer, ButtonLabelIcon} from './parts';
 
 export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -30,7 +31,7 @@ export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement>
   icon?: CanvasSystemIcon;
 }
 
-export const textButtonColors: ButtonColorCollection = {
+const textButtonColors: ButtonColorCollection = {
   [TextButtonVariant.Default]: {
     default: {
       background: 'transparent',
@@ -96,29 +97,44 @@ export const textButtonColors: ButtonColorCollection = {
 textButtonColors[TextButtonVariant.AllCaps] = textButtonColors[TextButtonVariant.Default];
 textButtonColors[TextButtonVariant.InverseAllCaps] = textButtonColors[TextButtonVariant.Inverse];
 
-/* TODO: Figure out how to add extra styles:
-  {
-    fontSize: '13px',
-    borderRadius: borderRadius.m,
-    border: '0',
-    padding: `0 ${canvas.spacing.xxs}px`,
-    margin: `0 ${canvas.spacing.xxs}px`,
-    minWidth: 'auto',
-    '&:hover:not([disabled])': {textDecoration: 'underline'},
-  },
-  */
+const containerStyles = {
+  borderRadius: borderRadius.m,
+  border: '0',
+  padding: `0 ${spacing.xxs}`,
+  margin: `0 ${spacing.xxs}`,
+  minWidth: 'auto',
+  '&:hover:not([disabled])': {textDecoration: 'underline'},
+};
 
 const TextButton = (props: TextButtonProps) => {
   const {buttonRef, children, iconPosition, size, variant, icon, ...elemProps} = props;
 
+  // Note: We don't use ButtonLabel because they label styles differ from other button types
+  const allContainerStyles =
+    variant === TextButtonVariant.AllCaps || variant === TextButtonVariant.InverseAllCaps
+      ? {
+          ...containerStyles,
+          ...type.variant.caps,
+          fontSize: size === ButtonSize.Medium ? type.body.fontSize : undefined,
+          letterSpacing: '.5px',
+        }
+      : {
+          ...containerStyles,
+          fontSize: size === ButtonSize.Medium ? type.body.fontSize : undefined,
+        };
+
   return (
-    <ButtonContainer colors={textButtonColors[variant]} ref={buttonRef} size={size} {...elemProps}>
+    <ButtonContainer
+      colors={textButtonColors[variant]}
+      ref={buttonRef}
+      size={size}
+      extraStyles={allContainerStyles}
+      {...elemProps}
+    >
       {icon && iconPosition === ButtonIconPosition.Left && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
-      <ButtonLabel size={size} variant={variant}>
-        {children}
-      </ButtonLabel>
+      {children}
       {icon && iconPosition === ButtonIconPosition.Right && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
@@ -130,7 +146,7 @@ TextButton.IconPosition = ButtonIconPosition;
 TextButton.Variant = TextButtonVariant;
 TextButton.Size = {
   Small: ButtonSize.Small,
-  Large: ButtonSize.Medium,
+  Medium: ButtonSize.Medium,
 };
 
 TextButton.defaultProps = {

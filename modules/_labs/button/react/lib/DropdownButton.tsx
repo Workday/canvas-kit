@@ -33,9 +33,7 @@ const DropdownButton = (props: DropdownButtonProps) => {
       buttonRef={buttonRef}
       {...elemProps}
     >
-      <ButtonLabel size={size} variant={variant}>
-        {children}
-      </ButtonLabel>
+      <ButtonLabel size={size}>{children}</ButtonLabel>
       <ButtonLabelIcon size={size} icon={caretDownIcon} dropdown={true} />
     </ButtonContainer>
   );

@@ -173,7 +173,7 @@ const TextButtonStates = () =>
       ],
       size: [
         {value: TextButton.Size.Small, label: 'Small'},
-        {value: TextButton.Size.Large, label: 'Large'},
+        {value: TextButton.Size.Medium, label: 'Medium'},
       ],
       icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
       dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],

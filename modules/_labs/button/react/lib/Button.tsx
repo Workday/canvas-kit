@@ -37,9 +37,7 @@ const Button = (props: ButtonProps) => {
     // eslint-disable-next-line no-use-before-define
     <ButtonContainer colors={buttonColors[variant]} size={size} ref={buttonRef} {...elemProps}>
       {icon && <ButtonLabelIcon size={size} icon={icon} />}
-      <ButtonLabel size={size} variant={variant}>
-        {children}
-      </ButtonLabel>
+      <ButtonLabel size={size}>{children}</ButtonLabel>
       {dataLabel && <ButtonLabelData size={size}>{dataLabel}</ButtonLabelData>}
     </ButtonContainer>
   );

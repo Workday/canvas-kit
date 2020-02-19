@@ -27,7 +27,7 @@ export interface HighlightButtonProps
   icon?: CanvasSystemIcon;
 }
 
-export const highlightButtonColors: ButtonColors = {
+const highlightButtonColors: ButtonColors = {
   default: {
     background: colors.soap200,
     border: colors.soap200,

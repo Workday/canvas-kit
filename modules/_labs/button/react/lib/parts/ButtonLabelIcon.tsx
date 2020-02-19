@@ -20,6 +20,7 @@ const ButtonLabelIconStyled = styled('span', {
     // TODO: Is this needed?
     paddingLeft: size === ButtonSize.Large ? 8 : size === ButtonSize.Medium ? 4 : 0,
     display: size === ButtonSize.Small ? 'none' : 'inline-block',
+    height: size === ButtonSize.Small ? 20 : 24,
   }),
   // ({size, dropdown}) => {
   //   if (dropdown) {

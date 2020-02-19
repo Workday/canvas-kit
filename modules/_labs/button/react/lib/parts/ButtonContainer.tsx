@@ -1,7 +1,7 @@
 import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
 import {CSSObject} from '@emotion/core';
-import {styled} from '@workday/canvas-kit-labs-react-core';
+import {styled, type} from '@workday/canvas-kit-labs-react-core';
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {ButtonSize, ButtonColors} from '../types';
@@ -31,6 +31,9 @@ export const ButtonContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<ButtonContainerProps>(
   {
+    ...type.body2,
+    ...type.variant.button,
+    lineHeight: 'normal',
     boxSizing: 'border-box',
     display: 'inline-flex',
     alignItems: 'center',
@@ -42,7 +45,10 @@ export const ButtonContainer = styled('button', {
     outline: 'none',
     verticalAlign: 'middle',
     border: '2px solid transparent',
-    fontSize: '14px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
     transition:
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
     '&:hover:active': {transitionDuration: '40ms'}, // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
@@ -52,6 +58,7 @@ export const ButtonContainer = styled('button', {
     switch (size) {
       case ButtonSize.Large:
         return {
+          fontSize: type.body.fontSize,
           minWidth: '112px',
           height: '48px',
           padding: '0 20px',
