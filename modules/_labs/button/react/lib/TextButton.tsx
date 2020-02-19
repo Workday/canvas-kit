@@ -59,7 +59,6 @@ const textButtonColors: ButtonColorCollection = {
       icon: colors.frenchVanilla100,
       label: colors.frenchVanilla100,
     },
-    // TODO: Make these optional
     hover: {},
     active: {},
     focus: {

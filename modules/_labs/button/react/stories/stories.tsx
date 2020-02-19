@@ -108,7 +108,7 @@ const DeprecatedButtonStates = () =>
       variant: [
         {value: DeprecatedButton.Variant.Primary, label: 'Primary'},
         {value: DeprecatedButton.Variant.Secondary, label: 'Secondary'},
-        {value: DeprecatedButton.Variant.Delete, label: 'Secondary'},
+        {value: DeprecatedButton.Variant.Delete, label: 'Delete'},
       ],
       size: [
         {value: Button.Size.Small, label: 'Small'},

@@ -43,13 +43,13 @@ const Container = styled('button')<DeprecatedButtonProps>(
   },
   ({size}) => {
     switch (size) {
-      case ButtonSize.Small:
+      case ButtonSize.Large:
         return {
           height: '40px',
-          padding: `0 ${canvas.spacing.xxs}`,
-          minWidth: '56px',
-          maxWidth: '120px',
-          fontSize: '10px',
+          padding: `0 ${canvas.spacing.l}`,
+          minWidth: '112px',
+          maxWidth: '288px',
+          fontSize: '14px',
           fontWeight: 500,
         };
       case ButtonSize.Medium:
@@ -62,13 +62,13 @@ const Container = styled('button')<DeprecatedButtonProps>(
           fontSize: '13px',
           fontWeight: 500,
         };
-      case ButtonSize.Large:
+      case ButtonSize.Small:
         return {
           height: '18px',
-          padding: `0 ${canvas.spacing.l}`,
-          minWidth: '112px',
-          maxWidth: '288px',
-          fontSize: '14px',
+          padding: `0 ${canvas.spacing.xxs}`,
+          minWidth: '56px',
+          maxWidth: '120px',
+          fontSize: '10px',
           fontWeight: 500,
         };
     }
@@ -159,6 +159,12 @@ const Container = styled('button')<DeprecatedButtonProps>(
 
 const DeprecatedButton = (props: DeprecatedButtonProps) => {
   const {variant, size, buttonRef, children, ...elemProps} = props;
+
+  // TODO: Deprecated message
+  // public componentDidMount() {
+  //   console.warn('This component is now deprecated, consider using the new Button component');
+  // }
+
   return (
     <Container variant={variant} size={size} buttonRef={buttonRef} {...elemProps}>
       {children}
