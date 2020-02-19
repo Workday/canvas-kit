@@ -1,6 +1,4 @@
 import * as React from 'react';
-import isPropValid from '@emotion/is-prop-valid';
-import {styled} from '@workday/canvas-kit-labs-react-core';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -40,27 +38,6 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    */
   onToggleChange?: (toggled: boolean | undefined) => void;
 }
-export const IconButtonCon = styled('span', {
-  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Pick<IconButtonProps, 'size'>>(
-  {
-    ['& .wd-icon']: {
-      display: 'inline-block',
-      verticalAlign: 'middle',
-    },
-  },
-  ({size}) => {
-    if (size === ButtonSize.Small) {
-      return {
-        'span svg': {
-          width: '20px',
-          height: '20px',
-        },
-      };
-    }
-    return;
-  }
-);
 
 const IconButton = (props: IconButtonProps) => {
   const {buttonRef, size, variant, onToggleChange, icon, toggled, children, ...elemProps} = props;
@@ -85,6 +62,12 @@ const IconButton = (props: IconButtonProps) => {
       variant === IconButtonVariant.Square || variant === IconButtonVariant.SquareFilled
         ? borderRadius.m
         : borderRadius.circle,
+    ['& .wd-icon']: {
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      width: size === ButtonSize.Small ? '20px' : undefined,
+      height: size === ButtonSize.Small ? '20px' : undefined,
+    },
   };
 
   return (
@@ -97,7 +80,7 @@ const IconButton = (props: IconButtonProps) => {
       aria-pressed={toggled}
       {...elemProps}
     >
-      <IconButtonCon size={size}>{icon ? <SystemIcon icon={icon} /> : children}</IconButtonCon>
+      {icon ? <SystemIcon icon={icon} /> : children}
     </ButtonContainer>
   );
 };
