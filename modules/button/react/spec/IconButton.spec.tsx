@@ -24,17 +24,17 @@ describe('Icon Button', () => {
   });
 
   it('should have an identifier class', () => {
-    const {getByTestId} = render(
-      <IconButton data-testid={iconButtonIdentifier} aria-label="Activity Stream">
+    const {getByRole} = render(
+      <IconButton aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </IconButton>
     );
 
-    expect(getByTestId(iconButtonIdentifier).className).toContain(iconButtonIdentifier);
+    expect(getByRole('button').className).toContain(iconButtonIdentifier);
   });
   it('should compose custom classNames with the identifier class', () => {
     const testClassName = 'test classname';
-    const {getByTestId} = render(
+    const {getByRole} = render(
       <IconButton
         data-testid={iconButtonIdentifier}
         className={testClassName}
@@ -44,9 +44,7 @@ describe('Icon Button', () => {
       </IconButton>
     );
 
-    expect(getByTestId(iconButtonIdentifier).className).toContain(
-      `${iconButtonIdentifier} ${testClassName}`
-    );
+    expect(getByRole('button').className).toContain(`${iconButtonIdentifier} ${testClassName}`);
   });
 
   test('should call a callback function', () => {
