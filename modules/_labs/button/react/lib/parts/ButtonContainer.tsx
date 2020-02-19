@@ -2,7 +2,7 @@ import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
 import {CSSObject} from '@emotion/core';
 import {styled, type} from '@workday/canvas-kit-labs-react-core';
-import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
+import {borderRadius, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {ButtonSize, ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
@@ -53,6 +53,12 @@ export const ButtonContainer = styled('button', {
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
     '&:hover:active': {transitionDuration: '40ms'}, // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
     '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
+    '& > *:first-child': {
+      paddingLeft: 0,
+    },
+    '& > *:last-child': {
+      paddingRight: 0,
+    },
   },
   ({size}) => {
     switch (size) {
@@ -61,20 +67,29 @@ export const ButtonContainer = styled('button', {
           fontSize: type.body.fontSize,
           minWidth: '112px',
           height: '48px',
-          padding: '0 20px',
+          padding: `0 ${spacing.l}`,
+          '& > * ': {
+            padding: `0 ${spacingNumbers.xs / 2}px`,
+          },
         };
       case ButtonSize.Medium:
       default:
         return {
           minWidth: '96px',
-          height: canvas.spacing.xl,
-          padding: '0 16px',
+          height: spacing.xl,
+          padding: `0 ${spacing.m}`,
+          '& > * ': {
+            padding: `0 ${spacingNumbers.xxs / 2}px`,
+          },
         };
       case ButtonSize.Small:
         return {
           minWidth: '80px',
-          height: canvas.spacing.l,
-          padding: '0 16px',
+          height: spacing.l,
+          padding: `0 ${spacing.s}`,
+          '& > * ': {
+            padding: `0 ${spacingNumbers.xxxs / 2}px`,
+          },
         };
     }
   },

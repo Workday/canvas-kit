@@ -1,42 +1,16 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
-import isPropValid from '@emotion/is-prop-valid';
-import {ButtonSize} from '../types';
-import {ButtonProps} from '../Button';
-
-type ButtonLabelDataProps = Pick<ButtonProps, 'size'> & React.HTMLAttributes<HTMLSpanElement>;
 
 export const buttonLabelDataClassName = 'button-label-data';
 
-const Container = styled('span', {
-  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<ButtonLabelDataProps>(
-  {
-    position: 'relative', // Fixes an IE issue with text within button moving on click
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    fontWeight: 400,
-    '&:hover:active': {
-      backgroundColor: 'transparent',
-    },
-  },
-  ({size}) => {
-    switch (size) {
-      case ButtonSize.Large:
-      default:
-        return {
-          paddingRight: '12px',
-        };
-      case ButtonSize.Medium:
-        return {
-          paddingRight: '8px',
-          fontSize: '14px',
-        };
-    }
-  }
-);
+const Container = styled('span')({
+  position: 'relative', // Fixes an IE issue with text within button moving on click
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  fontWeight: 400,
+});
 
-export const ButtonLabelData = (props: ButtonLabelDataProps) => (
+export const ButtonLabelData = (props: any) => (
   <Container className={buttonLabelDataClassName} {...props} />
 );

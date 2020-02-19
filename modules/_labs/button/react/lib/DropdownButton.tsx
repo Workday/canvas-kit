@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
-import {DropdownButtonVariant, ButtonSize} from './types';
+import {DropdownButtonVariant, ButtonSize, ButtonIconPosition} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 import {buttonColors} from './Button';
 
@@ -33,8 +33,13 @@ const DropdownButton = (props: DropdownButtonProps) => {
       buttonRef={buttonRef}
       {...elemProps}
     >
-      <ButtonLabel size={size}>{children}</ButtonLabel>
-      <ButtonLabelIcon size={size} icon={caretDownIcon} dropdown={true} />
+      <ButtonLabel>{children}</ButtonLabel>
+      <ButtonLabelIcon
+        size={size}
+        icon={caretDownIcon}
+        iconPosition={ButtonIconPosition.Right}
+        dropdown={true}
+      />
     </ButtonContainer>
   );
 };

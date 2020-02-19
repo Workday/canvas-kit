@@ -70,8 +70,8 @@ const HighlightButton = (props: HighlightButtonProps) => {
       {...elemProps}
     >
       {icon && <ButtonLabelIcon size={size} icon={icon} />}
-      <ButtonLabel size={size}>{children}</ButtonLabel>
-      {dataLabel && <ButtonLabelData size={size}>{dataLabel}</ButtonLabelData>}
+      <ButtonLabel>{children}</ButtonLabel>
+      {dataLabel && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
     </ButtonContainer>
   );
 };

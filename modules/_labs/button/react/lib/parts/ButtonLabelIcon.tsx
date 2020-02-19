@@ -17,24 +17,12 @@ const ButtonLabelIconStyled = styled('span', {
     display: 'flex',
   },
   ({size}) => ({
-    // TODO: Is this needed?
-    paddingLeft: size === ButtonSize.Large ? 8 : size === ButtonSize.Medium ? 4 : 0,
     display: size === ButtonSize.Small ? 'none' : 'inline-block',
     height: size === ButtonSize.Small ? 20 : 24,
   }),
-  // ({size, dropdown}) => {
-  //   if (dropdown) {
-  //     switch (size) {
-  //       case ButtonSize.Large:
-  //       default:
-  //         return {padding: '0 8px 0 0'};
-  //       case ButtonSize.Medium:
-  //         return {padding: '0 4px 0 0'};
-  //     }
-  //   }
-  // },
-  ({iconPosition}) => ({
-    padding: iconPosition === ButtonIconPosition.Right ? '0 0 0 8px' : '0 8px 0 0',
+  ({iconPosition, dropdown}) => ({
+    marginLeft: iconPosition === ButtonIconPosition.Right ? undefined : `-${dropdown ? 8 : 4}px`,
+    marginRight: iconPosition === ButtonIconPosition.Right ? `-${dropdown ? 8 : 4}px` : undefined,
   })
 );
 

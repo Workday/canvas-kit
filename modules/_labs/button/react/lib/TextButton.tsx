@@ -3,7 +3,7 @@ import {type} from '@workday/canvas-kit-labs-react-core';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TextButtonVariant, ButtonSize, ButtonIconPosition, ButtonColorCollection} from './types';
-import {ButtonContainer, ButtonLabelIcon} from './parts';
+import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
 export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -101,7 +101,6 @@ const containerStyles = {
   borderRadius: borderRadius.m,
   border: '0',
   padding: `0 ${spacing.xxs}`,
-  margin: `0 ${spacing.xxs}`,
   minWidth: 'auto',
   '&:hover:not([disabled])': {textDecoration: 'underline'},
 };
@@ -115,6 +114,7 @@ const TextButton = (props: TextButtonProps) => {
       ? {
           ...containerStyles,
           ...type.variant.caps,
+          ...type.variant.button,
           fontSize: size === ButtonSize.Medium ? type.body.fontSize : undefined,
           letterSpacing: '.5px',
         }
@@ -134,7 +134,7 @@ const TextButton = (props: TextButtonProps) => {
       {icon && iconPosition === ButtonIconPosition.Left && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
-      {children}
+      <ButtonLabel>{children}</ButtonLabel>
       {icon && iconPosition === ButtonIconPosition.Right && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}

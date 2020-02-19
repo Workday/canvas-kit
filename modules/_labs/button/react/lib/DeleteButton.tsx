@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {ButtonSize, ButtonColors} from './types';
-import {ButtonContainer} from './parts';
+import {ButtonContainer, ButtonLabel} from './parts';
 
 export interface DeleteButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -46,7 +46,7 @@ const DeleteButton = (props: DeleteButtonProps) => {
   const {size, buttonRef, children, ...elemProps} = props;
   return (
     <ButtonContainer colors={deleteButtonColors} size={size} buttonRef={buttonRef} {...elemProps}>
-      {children}
+      <ButtonLabel>{children}</ButtonLabel>
     </ButtonContainer>
   );
 };
