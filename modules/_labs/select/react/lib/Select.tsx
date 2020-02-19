@@ -206,6 +206,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     const index = this.indexByValue(optionProps.value);
     this.setState({
+      focusedItemIndex: null,
       justSelectedItemIndex: index,
       selectedItemIndex: index,
     });

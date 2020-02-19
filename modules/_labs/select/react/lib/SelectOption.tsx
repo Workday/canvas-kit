@@ -45,23 +45,19 @@ const Option = styled('li')<SelectOptionProps>(
     },
   },
   ({disabled, focused, selected}) => {
-    if (selected) {
+    if (disabled) {
       return {
-        backgroundColor: commonColors.focusBackground,
-        color: typeColors.inverse,
-        // '&:before': {
-        //   content: '"✓"',
-        //   marginRight: spacing.xxxs,
-        // },
-      };
-    } else if (focused) {
-      return {
-        backgroundColor: commonColors.hoverBackground,
+        color: colors.licorice100,
       };
     } else {
-      if (disabled) {
+      if (selected) {
         return {
-          color: colors.licorice100,
+          backgroundColor: colors.blueberry100,
+        };
+      } else if (focused) {
+        return {
+          backgroundColor: commonColors.focusBackground,
+          color: typeColors.inverse,
         };
       } else {
         return {
