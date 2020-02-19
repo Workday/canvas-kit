@@ -71,10 +71,10 @@ export const systemIconStyles = ({
   ':hover .wd-icon-fill': {
     fill: fillHover || colorHover,
   },
-  '& .wd-icon-accent': {
+  '& .wd-icon-accent, & .wd-icon-accent2': {
     fill: accent || color,
   },
-  ':hover .wd-icon-accent': {
+  ':hover .wd-icon-accent, :hover .wd-icon-accent2': {
     fill: accentHover || colorHover,
   },
   '& .wd-icon-background': {
