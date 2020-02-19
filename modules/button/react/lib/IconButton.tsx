@@ -8,7 +8,7 @@ import {colors} from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {CSSObject} from '@emotion/core';
+import {ClassNames, CSSObject} from '@emotion/core';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -67,6 +67,8 @@ function getAccentSelector(fillColor: string): CSSObject {
     },
   };
 }
+
+export const iconButtonIdentifier = 'wdc-ckr-icon-button';
 
 export const IconButtonCon = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
@@ -243,20 +245,26 @@ export default class IconButton extends React.Component<IconButtonProps> {
       icon,
       toggled,
       children,
+      className,
       ...elemProps
     } = this.props;
 
     return (
-      <IconButtonCon
-        toggled={toggled}
-        ref={buttonRef}
-        variant={variant}
-        size={size}
-        aria-pressed={toggled}
-        {...elemProps}
-      >
-        {icon ? <SystemIcon icon={icon} /> : children}
-      </IconButtonCon>
+      <ClassNames>
+        {({cx}) => (
+          <IconButtonCon
+            toggled={toggled}
+            ref={buttonRef}
+            variant={variant}
+            size={size}
+            aria-pressed={toggled}
+            className={cx(iconButtonIdentifier, className)}
+            {...elemProps}
+          >
+            {icon ? <SystemIcon icon={icon} /> : children}
+          </IconButtonCon>
+        )}
+      </ClassNames>
     );
   }
 }
