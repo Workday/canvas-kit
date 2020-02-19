@@ -35,10 +35,7 @@ describe('Icon Button', () => {
   it('should compose custom classNames with the identifier class', () => {
     const testClassName = 'test classname';
     const {getByRole} = render(
-      <IconButton
-        className={testClassName}
-        aria-label="Activity Stream"
-      >
+      <IconButton className={testClassName} aria-label="Activity Stream">
         <SystemIcon icon={activityStreamIcon} />
       </IconButton>
     );
