@@ -89,15 +89,7 @@ const containerStyles = {
 };
 
 const TextButton = (props: TextButtonProps) => {
-  const {
-    variant = TextButtonVariant.Default,
-    size = ButtonSize.Medium,
-    iconPosition = ButtonIconPosition.Left,
-    buttonRef,
-    children,
-    icon,
-    ...elemProps
-  } = props;
+  const {buttonRef, children, iconPosition, size, variant, icon, ...elemProps} = props;
 
   // Note: We don't use ButtonLabel because they label styles differ from other button types
   const allContainerStyles =
@@ -138,6 +130,12 @@ TextButton.Variant = TextButtonVariant;
 TextButton.Size = {
   Small: ButtonSize.Small,
   Medium: ButtonSize.Medium,
+};
+
+TextButton.defaultProps = {
+  iconPosition: ButtonIconPosition.Left,
+  variant: TextButtonVariant.Default,
+  size: ButtonSize.Medium,
 };
 
 export default TextButton;

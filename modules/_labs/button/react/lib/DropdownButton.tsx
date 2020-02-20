@@ -25,13 +25,7 @@ export interface DropdownButtonProps
 }
 
 const DropdownButton = (props: DropdownButtonProps) => {
-  const {
-    variant = DropdownButtonVariant.Secondary,
-    size = ButtonSize.Medium,
-    buttonRef,
-    children,
-    ...elemProps
-  } = props;
+  const {variant, size, buttonRef, children, ...elemProps} = props;
   return (
     <ButtonContainer
       colors={getButtonColors(variant)}
@@ -54,6 +48,11 @@ DropdownButton.Variant = DropdownButtonVariant;
 DropdownButton.Size = {
   Medium: ButtonSize.Medium,
   Large: ButtonSize.Large,
+};
+
+DropdownButton.defaultProps = {
+  variant: DropdownButtonVariant.Secondary,
+  size: ButtonSize.Medium,
 };
 
 export default DropdownButton;

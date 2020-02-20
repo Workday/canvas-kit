@@ -31,15 +31,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement>, Gr
 }
 
 const Button = (props: ButtonProps) => {
-  const {
-    variant = ButtonVariant.Secondary,
-    size = ButtonSize.Medium,
-    buttonRef,
-    dataLabel,
-    icon,
-    children,
-    ...elemProps
-  } = props;
+  const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = props;
 
   return (
     // eslint-disable-next-line no-use-before-define
@@ -53,6 +45,11 @@ const Button = (props: ButtonProps) => {
 
 Button.Variant = ButtonVariant;
 Button.Size = ButtonSize;
+
+Button.defaultProps = {
+  variant: ButtonVariant.Secondary,
+  size: ButtonSize.Medium,
+};
 
 export default Button;
 
