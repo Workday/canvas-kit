@@ -16,7 +16,7 @@ export interface DeleteButtonProps extends React.HTMLAttributes<HTMLButtonElemen
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const deleteButtonColors: ButtonColors = {
+const getDeleteButtonColors = (): ButtonColors => ({
   default: {
     background: colors.cinnamon500,
     label: colors.frenchVanilla100,
@@ -33,12 +33,17 @@ const deleteButtonColors: ButtonColors = {
   disabled: {
     background: colors.cinnamon200,
   },
-};
+});
 
 const DeleteButton = (props: DeleteButtonProps) => {
   const {size = ButtonSize.Medium, buttonRef, children, ...elemProps} = props;
   return (
-    <ButtonContainer colors={deleteButtonColors} size={size} buttonRef={buttonRef} {...elemProps}>
+    <ButtonContainer
+      colors={getDeleteButtonColors()}
+      size={size}
+      buttonRef={buttonRef}
+      {...elemProps}
+    >
       <ButtonLabel>{children}</ButtonLabel>
     </ButtonContainer>
   );

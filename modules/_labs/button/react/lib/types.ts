@@ -88,6 +88,3 @@ export interface ButtonColors {
   };
   disabled: ButtonStateColors;
 }
-export type ButtonColorCollection = {
-  [key in AllButtonVariants]?: ButtonColors;
-};

@@ -3,7 +3,7 @@ import {caretDownIcon} from '@workday/canvas-system-icons-web';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {DropdownButtonVariant, ButtonSize, ButtonIconPosition} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
-import {buttonColors} from './Button';
+import {getButtonColors} from './Button';
 
 export interface DropdownButtonProps
   extends React.HTMLAttributes<HTMLButtonElement>,
@@ -34,7 +34,7 @@ const DropdownButton = (props: DropdownButtonProps) => {
   } = props;
   return (
     <ButtonContainer
-      colors={buttonColors[variant]}
+      colors={getButtonColors(variant)}
       size={size}
       buttonRef={buttonRef}
       {...elemProps}

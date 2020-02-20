@@ -3,7 +3,7 @@ import {type} from '@workday/canvas-kit-labs-react-core';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {TextButtonVariant, ButtonSize, ButtonIconPosition, ButtonColorCollection} from './types';
+import {TextButtonVariant, ButtonSize, ButtonIconPosition, ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
 export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -32,48 +32,53 @@ export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement>
   icon?: CanvasSystemIcon;
 }
 
-const textButtonColors: ButtonColorCollection = {
-  [TextButtonVariant.Default]: {
-    default: {
-      icon: colors.blueberry400,
-      label: colors.blueberry400,
-    },
-    hover: {
-      icon: colors.blueberry500,
-      label: colors.blueberry500,
-    },
-    active: {
-      icon: colors.blueberry500,
-      label: colors.blueberry500,
-    },
-    focus: {
-      icon: colors.blueberry500,
-      label: colors.blueberry500,
-      focusRing: focusRing(2, 0),
-    },
-    disabled: {
-      icon: 'rgba(8, 117, 225, 0.5)',
-      label: 'rgba(8, 117, 225, 0.5)',
-    },
-  },
-  [TextButtonVariant.Inverse]: {
-    default: {
-      icon: colors.frenchVanilla100,
-      label: colors.frenchVanilla100,
-    },
-    hover: {},
-    active: {},
-    focus: {
-      focusRing: focusRing(2, 0, true, false, undefined, 'currentColor'),
-    },
-    disabled: {
-      icon: 'rgba(255, 255, 255, 0.5)',
-      label: 'rgba(255, 255, 255, 0.5)',
-    },
-  },
+const getTextButtonColors = (variant: TextButtonVariant): ButtonColors => {
+  switch (variant) {
+    case TextButtonVariant.Default:
+    case TextButtonVariant.AllCaps:
+    default:
+      return {
+        default: {
+          icon: colors.blueberry400,
+          label: colors.blueberry400,
+        },
+        hover: {
+          icon: colors.blueberry500,
+          label: colors.blueberry500,
+        },
+        active: {
+          icon: colors.blueberry500,
+          label: colors.blueberry500,
+        },
+        focus: {
+          icon: colors.blueberry500,
+          label: colors.blueberry500,
+          focusRing: focusRing(2, 0),
+        },
+        disabled: {
+          icon: 'rgba(8, 117, 225, 0.5)',
+          label: 'rgba(8, 117, 225, 0.5)',
+        },
+      };
+    case TextButtonVariant.Inverse:
+    case TextButtonVariant.InverseAllCaps:
+      return {
+        default: {
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        hover: {},
+        active: {},
+        focus: {
+          focusRing: focusRing(2, 0, true, false, undefined, 'currentColor'),
+        },
+        disabled: {
+          icon: 'rgba(255, 255, 255, 0.5)',
+          label: 'rgba(255, 255, 255, 0.5)',
+        },
+      };
+  }
 };
-textButtonColors[TextButtonVariant.AllCaps] = textButtonColors[TextButtonVariant.Default];
-textButtonColors[TextButtonVariant.InverseAllCaps] = textButtonColors[TextButtonVariant.Inverse];
 
 const containerStyles = {
   borderRadius: borderRadius.m,
@@ -111,7 +116,7 @@ const TextButton = (props: TextButtonProps) => {
 
   return (
     <ButtonContainer
-      colors={textButtonColors[variant]}
+      colors={getTextButtonColors(variant)}
       ref={buttonRef}
       size={size}
       extraStyles={allContainerStyles}

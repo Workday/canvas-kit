@@ -27,7 +27,7 @@ export interface HighlightButtonProps
   icon?: CanvasSystemIcon;
 }
 
-const highlightButtonColors: ButtonColors = {
+const getHighlightButtonColors = (): ButtonColors => ({
   default: {
     background: colors.soap200,
     border: colors.soap200,
@@ -58,13 +58,13 @@ const highlightButtonColors: ButtonColors = {
     icon: colors.soap600,
     label: colors.licorice100,
   },
-};
+});
 
 const HighlightButton = (props: HighlightButtonProps) => {
   const {size = ButtonSize.Medium, buttonRef, dataLabel, icon, children, ...elemProps} = props;
   return (
     <ButtonContainer
-      colors={highlightButtonColors}
+      colors={getHighlightButtonColors()}
       size={size}
       buttonRef={buttonRef}
       {...elemProps}
