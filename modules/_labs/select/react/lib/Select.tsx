@@ -165,6 +165,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return childrenArray.findIndex(child => child.props.value === value);
   };
 
+  // toggle the menu on/off. note this show/hides the menu
+  // immediately -- if you wish to animate the menu out, call
+  // animateOutMenu
   private toggleMenu = (show: boolean): void => {
     if (show) {
       this.setState({
@@ -177,6 +180,15 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         showingMenu: false,
       });
     }
+  };
+
+  private animateOutMenu = (): void => {
+    this.setState({isMenuDismissing: true});
+
+    this.removeMenuTimer = setTimeout(() => {
+      this.setState({isMenuDismissing: false});
+      this.toggleMenu(false);
+    }, dismissMenuDuration);
   };
 
   // menu may not be interacted with while it is dismissing, or
@@ -225,11 +237,15 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   handleSelectClick = (event: React.MouseEvent<HTMLInputElement>): void => {
-    this.toggleMenu(!this.state.showingMenu);
+    if (this.state.showingMenu) {
+      this.animateOutMenu();
+    } else {
+      this.toggleMenu(true);
+    }
   };
 
   handleSelectBlur = (event: React.FocusEvent): void => {
-    this.toggleMenu(false);
+    this.animateOutMenu();
   };
 
   handleOptionClick = (optionProps: SelectOptionProps): void => {
