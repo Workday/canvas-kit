@@ -26,13 +26,15 @@ export interface SelectProps
 
 export interface SelectState {
   focusedItemIndex: number | null;
+  isDismissing: boolean;
   justSelectedItemIndex: number | null;
   label: string;
   selectedItemIndex: number;
   showingMenu: boolean;
 }
 
-const dismissMenuTimeout = 300;
+const dismissMenuDelay = 300;
+const dismissMenuDuration = 200;
 
 const SelectInput = styled('input')<SelectProps>(
   {
@@ -101,10 +103,15 @@ const SelectMenu = styled('ul')({
   listStyle: 'none',
   margin: 0,
   minWidth: 280,
+  opacity: 1,
   padding: 0,
   position: 'absolute',
   top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
+  transition: '0.2s opacity',
   zIndex: 1,
+  '&.isDismissing': {
+    opacity: 0,
+  },
 });
 
 const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
@@ -135,6 +142,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   state: Readonly<SelectState> = {
     focusedItemIndex: null,
+    isDismissing: false,
     justSelectedItemIndex: null,
     label: '',
     selectedItemIndex: 0,
@@ -204,6 +212,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       return;
     }
 
+    // time 0
+    // offer visual feedback briefly before beginning the
+    // menu dismissal animation;
     const index = this.indexByValue(optionProps.value);
     this.setState({
       focusedItemIndex: null,
@@ -211,16 +222,25 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       selectedItemIndex: index,
     });
 
-    // offer visual feedback (flashing animation) briefly
-    // before dismissing menu; set new label when menu has been
-    // dismissed
+    // time dismissMenuDelay
+    // begin the menu dismissal animation
     setTimeout(() => {
       this.setState({
+        isDismissing: true,
+      });
+    }, dismissMenuDelay);
+
+    // time dismissMenuDelay + dismissMenuDuration
+    // complete the menu dismissal animation, update the
+    // select label, reset state, and hide the menu
+    setTimeout(() => {
+      this.setState({
+        isDismissing: false,
         justSelectedItemIndex: null,
         label: optionProps.label,
       });
       this.toggleMenu(false);
-    }, dismissMenuTimeout);
+    }, dismissMenuDelay + dismissMenuDuration);
 
     // code inspired by: https://stackoverflow.com/a/46012210
     // we want to programatically change the value of the
@@ -318,7 +338,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // spread
     const {error, disabled, grow, children, onChange, value, ...elemProps} = this.props;
 
-    const {label} = this.state;
+    const {label, isDismissing} = this.state;
     // console.log('in Select render with label', label);
 
     return (
@@ -338,7 +358,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           {...elemProps}
         />
         {this.state.showingMenu && (
-          <SelectMenu>{React.Children.map(children, this.renderChildren)}</SelectMenu>
+          <SelectMenu className={isDismissing ? 'isDismissing' : ''}>
+            {React.Children.map(children, this.renderChildren)}
+          </SelectMenu>
         )}
         <SelectMenuIcon
           icon={caretDownSmallIcon}
