@@ -142,7 +142,7 @@ export const ButtonContainer = styled('button', {
     };
 
     const hoverStyles = {
-      ':hover': {
+      '&:hover': {
         backgroundColor: colors.hover.background,
         borderColor: colors.hover.border,
         color: colors.hover.label,
@@ -157,7 +157,7 @@ export const ButtonContainer = styled('button', {
     };
 
     const activeStyles = {
-      ':active, :focus:active, :hover:active': {
+      '&:active, &:focus:active, &:hover:active': {
         backgroundColor: colors.active.background,
         borderColor: colors.active.border,
         color: colors.active.label,
@@ -172,10 +172,11 @@ export const ButtonContainer = styled('button', {
 
     return {
       ...baseStyles,
-      ':focus': {
+      '&:focus': {
         backgroundColor: colors.focus.background,
         borderColor: colors.focus.border,
         color: colors.focus.label,
+        ...(colors.focus.focusRing || focusRing(2, 2)),
         ...(colors.focus.labelData && {
           ['.' + buttonLabelDataClassName]: {
             color: colors.focus.labelData,
@@ -186,7 +187,7 @@ export const ButtonContainer = styled('button', {
 
       ...activeStyles,
       ...hoverStyles,
-      ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
+      '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
         backgroundColor: colors.disabled.background,
         borderColor: colors.disabled.border,
         color: colors.disabled.label,
@@ -196,16 +197,6 @@ export const ButtonContainer = styled('button', {
             color: colors.disabled.labelData,
           },
         }),
-      },
-      '&:not([disabled])': {
-        '&:focus': {
-          borderColor: colors.focus.border,
-          ...(colors.focus.focusRing || focusRing(2, 2)),
-        },
-        '&:active': {
-          borderColor: colors.active.border,
-          ...(colors.focus.focusRing || focusRing(2, 2)),
-        },
       },
       ...mouseFocusBehavior({
         '&:focus': {
