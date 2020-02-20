@@ -113,9 +113,6 @@ const RadioInput = styled('input')<RadioProps>(
     '&:hover ~ div:first-of-type::after': {
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
-    '&:focus:hover:checked ~ div:first-of-type::after': {
-      ...themedFocusRing(theme, {width: 2, separation: 2, innerColor: colors.soap200}),
-    },
     '&:hover ~ div:first-of-type': {
       backgroundColor: checked
         ? theme.palette.primary.main
@@ -143,10 +140,10 @@ const RadioInput = styled('input')<RadioProps>(
       '&:focus ~ div:first-of-type': {
         ...themedFocusRing(theme, {width: 0}),
         borderWidth: '1px',
-        borderColor: checked ? theme.palette.common.focusOutline : inputColors.border,
+        borderColor: checked ? theme.palette.primary.main : inputColors.border,
       },
-      '&:focus:hover, &:focus:active ~ div:first-of-type': {
-        borderColor: checked ? theme.palette.common.focusOutline : inputColors.hoverBorder,
+      '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
+        borderColor: checked ? theme.palette.primary.main : inputColors.hoverBorder,
       },
     }),
   })
