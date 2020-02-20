@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
+import {focusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {ButtonVariant, ButtonSize, ButtonColorCollection} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
@@ -183,8 +183,7 @@ export const buttonColors: ButtonColorCollection = {
       icon: colors.licorice500,
       label: colors.blackPepper400,
       labelData: colors.licorice300,
-      // TODO: focusRingInner: 'currentColor',
-      // TODO: focusRingOuter: colors.frenchVanilla100,
+      focusRing: focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
     },
     disabled: {
       background: 'transparent',

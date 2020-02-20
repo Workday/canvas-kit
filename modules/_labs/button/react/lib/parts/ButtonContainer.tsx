@@ -200,13 +200,11 @@ export const ButtonContainer = styled('button', {
       '&:not([disabled])': {
         '&:focus': {
           borderColor: colors.focus.border,
-          // TODO ...getButtonFocusRing(colors),
-          ...focusRing(2, 0),
+          ...(colors.focus.focusRing || focusRing(2, 2)),
         },
         '&:active': {
           borderColor: colors.active.border,
-          // TODO ...getButtonFocusRing(colors),
-          ...focusRing(2, 0),
+          ...(colors.focus.focusRing || focusRing(2, 2)),
         },
       },
       ...mouseFocusBehavior({

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {type} from '@workday/canvas-kit-labs-react-core';
+import {focusRing} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TextButtonVariant, ButtonSize, ButtonIconPosition, ButtonColorCollection} from './types';
@@ -48,6 +49,7 @@ const textButtonColors: ButtonColorCollection = {
     focus: {
       icon: colors.blueberry500,
       label: colors.blueberry500,
+      focusRing: focusRing(2, 0),
     },
     disabled: {
       icon: 'rgba(8, 117, 225, 0.5)',
@@ -62,8 +64,7 @@ const textButtonColors: ButtonColorCollection = {
     hover: {},
     active: {},
     focus: {
-      // TODO: focusRingInner: 'transparent',
-      // TODO: focusRingOuter: colors.frenchVanilla100,
+      focusRing: focusRing(2, 0, true, false, undefined, 'currentColor'),
     },
     disabled: {
       icon: 'rgba(255, 255, 255, 0.5)',

@@ -1,3 +1,5 @@
+import {CSSObject} from '@emotion/core';
+
 /**
  * Standard button Button
  */
@@ -81,7 +83,9 @@ export interface ButtonColors {
   default: ButtonStateColors;
   hover: ButtonStateColors;
   active: ButtonStateColors;
-  focus: ButtonStateColors;
+  focus: ButtonStateColors & {
+    focusRing?: CSSObject;
+  };
   disabled: ButtonStateColors;
 }
 export type ButtonColorCollection = {

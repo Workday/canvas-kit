@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
+import {focusRing} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {IconButtonVariant, ButtonSize, ButtonColors} from './types';
@@ -95,6 +96,7 @@ IconButton.defaultProps = {
 
 export default IconButton;
 
+// TODO: Background is still showing on disabled sometimes.
 const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): ButtonColors => {
   switch (variant) {
     case IconButton.Variant.Square:
@@ -159,6 +161,7 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
         },
         focus: {
           icon: toggled ? colors.blueberry400 : colors.licorice500,
+          focusRing: focusRing(2, 0),
         },
         disabled: {
           icon: toggled ? colors.blueberry200 : colors.soap600,
@@ -181,14 +184,12 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
         focus: {
           background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
+          focusRing: focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : undefined,
           icon: toggled ? colors.blueberry400 : 'rgba(255, 255, 255, 0.75)',
         },
-        // focusRingInner: 'currentColor',
-        // focusRingOuter: colors.frenchVanilla100,
-        // focusHover: 'rgba(0, 0, 0, 0.3)',
       };
     case IconButtonVariant.InverseFilled:
       return {
@@ -207,14 +208,12 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
         focus: {
           background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
+          focusRing: focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? colors.blueberry400 : 'rgba(255, 255, 255, 0.75)',
         },
-        // focusRingInner: 'currentColor',
-        // focusRingOuter: colors.frenchVanilla100,
-        // focusHover: 'rgba(0, 0, 0, 0.3)',
       };
   }
 };
