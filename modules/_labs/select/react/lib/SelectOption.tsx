@@ -9,6 +9,7 @@ import {
   type,
   typeColors,
 } from '@workday/canvas-kit-react-core';
+import {dismissMenuDelay} from './Select';
 // import { SystemIcon } from '@workday/canvas-kit-react-icon';
 // import { checkSmallIcon } from '@workday/canvas-system-icons-web';
 
@@ -74,7 +75,7 @@ const Option = styled('li')<SelectOptionProps>(
   },
   ({justSelected}) =>
     justSelected && {
-      animation: `${flashAnimation} 0.3s 1`,
+      animation: `${flashAnimation} ${dismissMenuDelay / 1000}s 1`,
       // retain the styles set by the last keyframe
       animationFillMode: 'forwards',
     }

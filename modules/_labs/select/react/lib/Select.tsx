@@ -37,7 +37,7 @@ export interface SelectState {
   showingMenu: boolean;
 }
 
-const dismissMenuDelay = 300;
+export const dismissMenuDelay = 200;
 const dismissMenuDuration = 200;
 
 const SelectInput = styled('input')<SelectProps>(
