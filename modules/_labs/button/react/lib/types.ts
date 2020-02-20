@@ -73,6 +73,7 @@ export interface ButtonStateColors {
   background?: string;
   border?: string;
   icon?: string;
+  iconFill?: boolean;
   label?: string;
   labelData?: string;
 }

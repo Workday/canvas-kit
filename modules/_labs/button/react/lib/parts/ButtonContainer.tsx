@@ -2,7 +2,7 @@ import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
 import {CSSObject} from '@emotion/core';
 import {styled, type} from '@workday/canvas-kit-labs-react-core';
-import {borderRadius, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
+import canvas, {borderRadius, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {ButtonSize, ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
@@ -21,10 +21,35 @@ export interface ButtonContainerProps
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
   /**
+   * Whether the icon should received filled (colored background layer) or regular styles.
+   * Corresponds to `toggled` in IconButton
+   */
+  fillIcon?: boolean;
+  /**
    * Any extra styles necessary for a given parent component.
    * This avoids using the inline `style` attribute when the shape needs to be customized (e.g. for IconButton)
    */
   extraStyles?: CSSObject;
+}
+
+function getIconColorSelectors(color: string, fill?: boolean): CSSObject {
+  return {
+    '&:focus span, &:hover span, & span': {
+      '.wd-icon-fill': {
+        fill: color,
+      },
+      '.wd-icon-background': {
+        fill: fill ? color : undefined,
+      },
+      '.wd-icon-accent, .wd-icon-accent2': {
+        fill: fill
+          ? color === canvas.colors.frenchVanilla100
+            ? canvas.colors.blueberry400
+            : canvas.colors.frenchVanilla100
+          : color,
+      },
+    },
+  };
 }
 
 export const ButtonContainer = styled('button', {
@@ -95,7 +120,7 @@ export const ButtonContainer = styled('button', {
     }
   },
   ({grow}) => grow && {width: '100%', maxWidth: '100%'},
-  ({colors}) => {
+  ({colors, fillIcon}) => {
     if (!colors) {
       return;
     }
@@ -104,10 +129,10 @@ export const ButtonContainer = styled('button', {
       borderColor: colors.default.border,
       color: colors.default.label,
       ...(colors.default.icon && {
-        'span .wd-icon-fill, span .wd-icon-accent': {
+        '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2, .wd-icon-background': {
           transition: 'fill 120ms ease-in',
-          fill: colors.default.icon,
         },
+        ...getIconColorSelectors(colors.default.icon, fillIcon),
       }),
       ...(colors.default.labelData && {
         ['.' + buttonLabelDataClassName]: {
@@ -127,11 +152,7 @@ export const ButtonContainer = styled('button', {
             color: colors.hover.labelData,
           },
         }),
-        ...(colors.hover.icon && {
-          'span .wd-icon-fill, span .wd-icon-accent': {
-            fill: colors.hover.icon,
-          },
-        }),
+        ...(colors.hover.icon && getIconColorSelectors(colors.hover.icon, fillIcon)),
       },
     };
 
@@ -145,11 +166,7 @@ export const ButtonContainer = styled('button', {
             color: colors.active.labelData,
           },
         }),
-        ...(colors.active.icon && {
-          'span .wd-icon-fill, span .wd-icon-accent': {
-            fill: colors.active.icon,
-          },
-        }),
+        ...(colors.active.icon && getIconColorSelectors(colors.active.icon, fillIcon)),
       },
     };
 
@@ -164,11 +181,7 @@ export const ButtonContainer = styled('button', {
             color: colors.focus.labelData,
           },
         }),
-        ...(colors.focus.icon && {
-          'span .wd-icon-fill, span .wd-icon-accent': {
-            fill: colors.focus.icon,
-          },
-        }),
+        ...(colors.focus.icon && getIconColorSelectors(colors.focus.icon, fillIcon)),
       },
 
       ...activeStyles,
@@ -177,11 +190,7 @@ export const ButtonContainer = styled('button', {
         backgroundColor: colors.disabled.background,
         borderColor: colors.disabled.border,
         color: colors.disabled.label,
-        ...(colors.disabled.icon && {
-          'span .wd-icon-fill, span .wd-icon-accent': {
-            fill: colors.disabled.icon,
-          },
-        }),
+        ...(colors.disabled.icon && getIconColorSelectors(colors.disabled.icon, fillIcon)),
         ...(colors.disabled.labelData && {
           ['.' + buttonLabelDataClassName]: {
             color: colors.disabled.labelData,

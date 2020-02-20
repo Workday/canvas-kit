@@ -72,6 +72,7 @@ const IconButton = (props: IconButtonProps) => {
       colors={getIconButtonColors(variant, toggled)}
       size={size}
       buttonRef={buttonRef}
+      fillIcon={toggled}
       extraStyles={containerStyles}
       aria-pressed={toggled}
       {...elemProps}
@@ -94,7 +95,6 @@ IconButton.defaultProps = {
 
 export default IconButton;
 
-// TODO: this method won't account for icon fill
 const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): ButtonColors => {
   switch (variant) {
     case IconButton.Variant.Square:
