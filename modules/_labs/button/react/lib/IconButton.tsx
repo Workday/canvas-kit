@@ -96,7 +96,6 @@ IconButton.defaultProps = {
 
 export default IconButton;
 
-// TODO: Background is still showing on disabled sometimes.
 const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): ButtonColors => {
   switch (variant) {
     case IconButton.Variant.Square:
@@ -120,7 +119,7 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
           icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
         },
         disabled: {
-          background: toggled ? colors.blueberry100 : undefined,
+          background: toggled ? colors.blueberry100 : 'transparent',
           icon: toggled ? colors.blueberry300 : colors.soap600,
         },
       };
@@ -187,7 +186,7 @@ const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): But
           focusRing: focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
         },
         disabled: {
-          background: toggled ? 'rgba(255,255,255,0.75)' : undefined,
+          background: toggled ? 'rgba(255,255,255,0.75)' : 'transparent',
           icon: toggled ? colors.blueberry400 : 'rgba(255, 255, 255, 0.75)',
         },
       };
