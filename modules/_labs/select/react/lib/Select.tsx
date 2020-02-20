@@ -24,9 +24,13 @@ export interface SelectProps
   value?: string;
 }
 
+interface SelectMenuProps {
+  isDismissing: boolean;
+}
+
 export interface SelectState {
   focusedItemIndex: number | null;
-  isDismissing: boolean;
+  isMenuDismissing: boolean;
   justSelectedItemIndex: number | null;
   label: string;
   selectedItemIndex: number;
@@ -94,25 +98,28 @@ const SelectMenuIcon = styled(SystemIcon)({
   },
 });
 
-const SelectMenu = styled('ul')({
-  backgroundColor: colors.frenchVanilla100,
-  border: `2px solid ${inputColors.focusBorder}`,
-  borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
-  borderTop: 0,
-  boxSizing: 'border-box',
-  listStyle: 'none',
-  margin: 0,
-  minWidth: 280,
-  opacity: 1,
-  padding: 0,
-  position: 'absolute',
-  top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
-  transition: '0.2s opacity',
-  zIndex: 1,
-  '&.isDismissing': {
-    opacity: 0,
+const SelectMenu = styled('ul')<SelectMenuProps>(
+  {
+    backgroundColor: colors.frenchVanilla100,
+    border: `2px solid ${inputColors.focusBorder}`,
+    borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
+    borderTop: 0,
+    boxSizing: 'border-box',
+    listStyle: 'none',
+    margin: 0,
+    minWidth: 280,
+    opacity: 1,
+    padding: 0,
+    position: 'absolute',
+    top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
+    transition: `${dismissMenuDuration / 1000}s opacity`,
+    zIndex: 1,
   },
-});
+  ({isDismissing}) =>
+    isDismissing && {
+      opacity: 0,
+    }
+);
 
 const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
   {
@@ -142,7 +149,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   state: Readonly<SelectState> = {
     focusedItemIndex: null,
-    isDismissing: false,
+    isMenuDismissing: false,
     justSelectedItemIndex: null,
     label: '',
     selectedItemIndex: 0,
@@ -226,16 +233,16 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // begin the menu dismissal animation
     setTimeout(() => {
       this.setState({
-        isDismissing: true,
+        isMenuDismissing: true,
       });
     }, dismissMenuDelay);
 
     // time dismissMenuDelay + dismissMenuDuration
-    // complete the menu dismissal animation, update the
-    // select label, reset state, and hide the menu
+    // complete the menu dismissal animation, update the select
+    // label, reset justSelected state, and hide the menu
     setTimeout(() => {
       this.setState({
-        isDismissing: false,
+        isMenuDismissing: false,
         justSelectedItemIndex: null,
         label: optionProps.label,
       });
@@ -338,7 +345,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // spread
     const {error, disabled, grow, children, onChange, value, ...elemProps} = this.props;
 
-    const {label, isDismissing} = this.state;
+    const {label, isMenuDismissing} = this.state;
     // console.log('in Select render with label', label);
 
     return (
@@ -358,7 +365,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           {...elemProps}
         />
         {this.state.showingMenu && (
-          <SelectMenu className={isDismissing ? 'isDismissing' : ''}>
+          <SelectMenu isDismissing={isMenuDismissing}>
             {React.Children.map(children, this.renderChildren)}
           </SelectMenu>
         )}

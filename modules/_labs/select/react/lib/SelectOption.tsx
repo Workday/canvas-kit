@@ -75,6 +75,8 @@ const Option = styled('li')<SelectOptionProps>(
   ({justSelected}) =>
     justSelected && {
       animation: `${flashAnimation} 0.3s 1`,
+      // retain the styles set by the last keyframe
+      animationFillMode: 'forwards',
     }
 );
 
