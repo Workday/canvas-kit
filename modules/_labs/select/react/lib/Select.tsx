@@ -140,6 +140,8 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
 
 export default class Select extends React.Component<SelectProps, SelectState> {
   private inputRef = React.createRef<HTMLInputElement>();
+  private persistMenuTimer: ReturnType<typeof setTimeout>;
+  private removeMenuTimer: ReturnType<typeof setTimeout>;
 
   static ErrorType = ErrorType;
 
@@ -205,6 +207,16 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     });
   }
 
+  componentWillUnmount() {
+    // clear timers
+    if (this.persistMenuTimer) {
+      clearTimeout(this.persistMenuTimer);
+    }
+    if (this.removeMenuTimer) {
+      clearTimeout(this.removeMenuTimer);
+    }
+  }
+
   handleSelectClick = (event: React.MouseEvent<HTMLInputElement>): void => {
     this.toggleMenu(!this.state.showingMenu);
   };
@@ -231,7 +243,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     // time dismissMenuDelay
     // begin the menu dismissal animation
-    setTimeout(() => {
+    this.persistMenuTimer = setTimeout(() => {
       this.setState({
         isMenuDismissing: true,
       });
@@ -240,7 +252,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // time dismissMenuDelay + dismissMenuDuration
     // complete the menu dismissal animation, update the select
     // label, reset justSelected state, and hide the menu
-    setTimeout(() => {
+    this.removeMenuTimer = setTimeout(() => {
       this.setState({
         isMenuDismissing: false,
         justSelectedItemIndex: null,
