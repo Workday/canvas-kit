@@ -25,6 +25,7 @@ export interface SelectProps
 }
 
 interface SelectMenuProps extends GrowthBehavior {
+  error?: ErrorType;
   isDismissing: boolean;
 }
 
@@ -98,18 +99,15 @@ const SelectMenuIcon = styled(SystemIcon)({
   },
 });
 
-const SelectMenu = styled('ul')<SelectMenuProps>(
+const SelectMenu = styled('div')<SelectMenuProps>(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `2px solid ${inputColors.focusBorder}`,
     borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
     borderTop: 0,
     boxSizing: 'border-box',
-    listStyle: 'none',
-    margin: 0,
     minWidth: 280,
     opacity: 1,
-    padding: 0,
     position: 'absolute',
     top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
     transition: `${dismissMenuDuration / 1000}s opacity`,
@@ -122,6 +120,33 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
   ({grow}) =>
     grow && {
       width: '100%',
+    },
+  ({error}) => {
+    if (error === ErrorType.Error) {
+      return {
+        borderColor: inputColors.error.border,
+      };
+    } else if (error === ErrorType.Alert) {
+      return {
+        borderColor: colors.cantaloupe600,
+        borderWidth: '1px',
+      };
+    } else {
+      return;
+    }
+  }
+);
+
+const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
+  {
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+  },
+  ({error}) =>
+    error === ErrorType.Alert && {
+      border: `2px solid ${inputColors.warning.border}`,
+      borderTop: 0,
     }
 );
 
@@ -369,6 +394,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     index: number
   ): React.ReactNode => {
     return React.cloneElement(child, {
+      error: this.props.error,
       focused: this.state.focusedOptionIndex === index,
       justSelected: this.state.justSelectedOptionIndex === index,
       onMouseDown: (event: React.MouseEvent) => {
@@ -407,8 +433,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           {...elemProps}
         />
         {this.state.showingMenu && (
-          <SelectMenu isDismissing={isMenuDismissing} grow={grow}>
-            {React.Children.map(children, this.renderChildren)}
+          <SelectMenu error={error} grow={grow} isDismissing={isMenuDismissing}>
+            <SelectMenuList error={error}>
+              {React.Children.map(children, this.renderChildren)}
+            </SelectMenuList>
           </SelectMenu>
         )}
         <SelectMenuIcon

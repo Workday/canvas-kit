@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
+import {ErrorType} from '@workday/canvas-kit-react-common';
 import {keyframes} from '@emotion/core';
 import {
   borderRadius,
@@ -15,6 +16,7 @@ import {dismissMenuDelay} from './Select';
 
 export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
   disabled: boolean;
+  error?: ErrorType;
   focused?: boolean;
   justSelected?: boolean;
   label: string;
@@ -42,7 +44,6 @@ const Option = styled('li')<SelectOptionProps>(
   {
     ...type.body,
     cursor: 'default',
-    padding: '6px 8px',
     '&:first-of-type': {
       borderTop: `1px solid ${colors.soap400}`,
     },
@@ -74,6 +75,9 @@ const Option = styled('li')<SelectOptionProps>(
       return;
     }
   },
+  ({error}) => ({
+    padding: `6px ${error === ErrorType.Alert ? 7 : 8}px`,
+  }),
   ({justSelected}) =>
     justSelected && {
       animation: `${flashAnimation} ${dismissMenuDelay / 1000}s 1`,
