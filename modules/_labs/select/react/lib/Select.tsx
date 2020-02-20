@@ -29,11 +29,11 @@ interface SelectMenuProps {
 }
 
 export interface SelectState {
-  focusedItemIndex: number | null;
+  focusedOptionIndex: number | null;
   isMenuDismissing: boolean;
-  justSelectedItemIndex: number | null;
+  justSelectedOptionIndex: number | null;
   label: string;
-  selectedItemIndex: number;
+  selectedOptionIndex: number;
   showingMenu: boolean;
 }
 
@@ -150,11 +150,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   state: Readonly<SelectState> = {
-    focusedItemIndex: null,
+    focusedOptionIndex: null,
     isMenuDismissing: false,
-    justSelectedItemIndex: null,
+    justSelectedOptionIndex: null,
     label: '',
-    selectedItemIndex: 0,
+    selectedOptionIndex: 0,
     showingMenu: false,
   };
 
@@ -171,12 +171,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private toggleMenu = (show: boolean): void => {
     if (show) {
       this.setState({
-        focusedItemIndex: this.state.selectedItemIndex,
+        focusedOptionIndex: this.state.selectedOptionIndex,
         showingMenu: true,
       });
     } else {
       this.setState({
-        focusedItemIndex: null,
+        focusedOptionIndex: null,
         showingMenu: false,
       });
     }
@@ -195,7 +195,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   // when it is briefly persisted right after an option has been
   // selected
   private isMenuInteractive = (): boolean => {
-    return !this.state.isMenuDismissing && this.state.justSelectedItemIndex === null;
+    return !this.state.isMenuDismissing && this.state.justSelectedOptionIndex === null;
   };
 
   componentDidMount() {
@@ -212,7 +212,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       if (childIndex !== -1) {
         this.setState({
           label: childrenArray[childIndex].props.label,
-          selectedItemIndex: childIndex,
+          selectedOptionIndex: childIndex,
         });
         return;
       }
@@ -261,9 +261,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // menu dismissal animation;
     const index = this.indexByValue(optionProps.value);
     this.setState({
-      focusedItemIndex: null,
-      justSelectedItemIndex: index,
-      selectedItemIndex: index,
+      focusedOptionIndex: null,
+      justSelectedOptionIndex: index,
+      selectedOptionIndex: index,
     });
 
     // time dismissMenuDelay
@@ -280,7 +280,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.removeMenuTimer = setTimeout(() => {
       this.setState({
         isMenuDismissing: false,
-        justSelectedItemIndex: null,
+        justSelectedOptionIndex: null,
         label: optionProps.label,
       });
       this.toggleMenu(false);
@@ -327,23 +327,23 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       case 'ArrowDown':
         if (!this.state.showingMenu) {
           this.toggleMenu(true);
-        } else if (this.state.focusedItemIndex !== null) {
+        } else if (this.state.focusedOptionIndex !== null) {
           const direction = event.key === 'ArrowUp' ? -1 : 1;
           isShortcut = true;
-          let nextIndex = this.state.focusedItemIndex + direction;
+          let nextIndex = this.state.focusedOptionIndex + direction;
           while (nextIndex < itemCount && nextIndex >= 0 && children[nextIndex].props.disabled) {
             nextIndex += direction;
           }
           nextFocusedIndex = nextIndex < 0 ? 0 : nextIndex >= itemCount ? itemCount - 1 : nextIndex;
-          this.setState({focusedItemIndex: nextFocusedIndex});
+          this.setState({focusedOptionIndex: nextFocusedIndex});
         }
         break;
 
       case 'Spacebar':
       case ' ':
       case 'Enter':
-        if (this.state.focusedItemIndex !== null) {
-          const child = children[this.state.focusedItemIndex] as React.ReactElement<
+        if (this.state.focusedOptionIndex !== null) {
+          const child = children[this.state.focusedOptionIndex] as React.ReactElement<
             SelectOptionProps
           >;
           this.handleOptionClick(child.props);
@@ -365,13 +365,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     index: number
   ): React.ReactNode => {
     return React.cloneElement(child, {
-      focused: this.state.focusedItemIndex === index,
-      justSelected: this.state.justSelectedItemIndex === index,
+      focused: this.state.focusedOptionIndex === index,
+      justSelected: this.state.justSelectedOptionIndex === index,
       onMouseDown: (event: React.MouseEvent) => {
         event.preventDefault();
         this.handleOptionClick(child.props);
       },
-      selected: this.state.selectedItemIndex === index,
+      selected: this.state.selectedOptionIndex === index,
       suppressed: !this.isMenuInteractive(),
     });
   };
