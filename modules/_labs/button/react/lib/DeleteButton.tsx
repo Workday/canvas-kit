@@ -2,9 +2,9 @@ import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {ButtonSize, ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel} from './parts';
+import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 
-// TODO: Add missing growth behavior props
-export interface DeleteButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface DeleteButtonProps extends React.HTMLAttributes<HTMLButtonElement>, GrowthBehavior {
   /**
    * The size of the Button.
    * @default ButtonSize.Medium
