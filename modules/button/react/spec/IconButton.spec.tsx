@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import IconButton from '../lib/IconButton';
+import {render} from '@testing-library/react';
+import IconButton, {iconButtonIdentifier} from '../lib/IconButton';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import ReactDOMServer from 'react-dom/server';
@@ -20,6 +21,26 @@ describe('Icon Button', () => {
     );
     expect(component.find('button').props().id).toBe('myBtn');
     component.unmount();
+  });
+
+  it('should have an identifier class', () => {
+    const {getByRole} = render(
+      <IconButton aria-label="Activity Stream">
+        <SystemIcon icon={activityStreamIcon} />
+      </IconButton>
+    );
+
+    expect(getByRole('button').className).toContain(iconButtonIdentifier);
+  });
+  it('should compose custom classNames with the identifier class', () => {
+    const testClassName = 'test classname';
+    const {getByRole} = render(
+      <IconButton className={testClassName} aria-label="Activity Stream">
+        <SystemIcon icon={activityStreamIcon} />
+      </IconButton>
+    );
+
+    expect(getByRole('button').className).toContain(`${iconButtonIdentifier} ${testClassName}`);
   });
 
   test('should call a callback function', () => {
