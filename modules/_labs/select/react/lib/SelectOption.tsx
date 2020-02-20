@@ -22,13 +22,17 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
 }
 
 const flashAnimation = keyframes`
-  0%, 49% {
+  0%, 33% {
     background-color: ${commonColors.focusBackground};
     color: ${typeColors.inverse};
   }
-  50%, 100% {
-    background-color: transparent;
+  34%, 65% {
+    background-color: ${colors.blueberry100};
     color: inherit;
+  }
+  66%, 100% {
+    background-color: ${commonColors.focusBackground};
+    color: ${typeColors.inverse};
   }
 `;
 
@@ -70,7 +74,7 @@ const Option = styled('li')<SelectOptionProps>(
   },
   ({justSelected}) =>
     justSelected && {
-      animation: `${flashAnimation} 0.15s infinite`,
+      animation: `${flashAnimation} 0.3s 1`,
     }
 );
 
