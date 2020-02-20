@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {ErrorType, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {ErrorType, themedFocusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
@@ -87,7 +87,7 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
  * and was easier to use than a component selector in this case.
  */
 const CheckboxInput = styled('input')<CheckboxProps>(
-  {
+  ({theme}) => ({
     borderRadius: borderRadius.s,
     width: checkboxTapArea,
     height: checkboxTapArea,
@@ -102,20 +102,22 @@ const CheckboxInput = styled('input')<CheckboxProps>(
     },
 
     // States
-    '&:not(:checked):not(:disabled):not(:focus):hover ~ div:first-of-type': {
-      borderColor: inputColors.hoverBorder,
+    '&:not(:checked):not(:disabled):not(:focus):hover, &:not(:checked):not(:disabled):active': {
+      '~ div:first-of-type': {
+        borderColor: inputColors.hoverBorder,
+      },
     },
     '&:checked ~ div:first-of-type': {
-      borderColor: colors.blueberry400,
-      backgroundColor: colors.blueberry400,
+      borderColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main,
     },
     '&:disabled ~ div:first-of-type': {
       borderColor: inputColors.disabled.border,
       backgroundColor: inputColors.disabled.background,
     },
     '&:disabled:checked ~ div:first-of-type': {
-      borderColor: colors.blueberry200,
-      backgroundColor: colors.blueberry200,
+      borderColor: theme.palette.primary.light,
+      backgroundColor: theme.palette.primary.light,
     },
 
     // Focus
@@ -123,33 +125,33 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       outline: 'none',
     },
     '&:focus ~ div:first-of-type': {
-      borderColor: colors.blueberry400,
+      borderColor: theme.palette.primary.main,
       borderWidth: '2px',
       boxShadow: 'none',
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing(2, 2, false),
+      ...themedFocusRing(theme, {width: 2, separation: 2, animate: false}),
       '& span': {
         marginLeft: '-7px',
       },
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        border: `1px solid ${inputColors.border}`,
+        border: `1px solid ${inputColors.hoverBorder}`,
         boxShadow: 'none',
         '& span': {
           marginLeft: '-6px',
         },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: colors.blueberry400,
+        borderColor: theme.palette.primary.main,
       },
       '&:disabled:checked ~ div:first-of-type': {
-        borderColor: colors.blueberry200,
-        backgroundColor: colors.blueberry200,
+        borderColor: theme.palette.primary.light,
+        backgroundColor: theme.palette.primary.light,
       },
     }),
-  },
+  }),
 
   // Ripple
   {
@@ -170,15 +172,15 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
   }),
-  ({error}) => {
+  ({theme, error}) => {
     let errorRingColor;
     let errorRingBorderColor = 'transparent';
 
     if (error === ErrorType.Error) {
-      errorRingColor = inputColors.error.border;
+      errorRingColor = theme.palette.error.main;
     } else if (error === ErrorType.Alert) {
-      errorRingColor = inputColors.warning.border;
-      errorRingBorderColor = colors.cantaloupe600;
+      errorRingColor = theme.palette.alert.main;
+      errorRingBorderColor = theme.palette.alert.darkest;
     } else {
       return;
     }
@@ -188,11 +190,13 @@ const CheckboxInput = styled('input')<CheckboxProps>(
         border: `1px solid ${errorRingColor}`,
         boxShadow: `0 0 0 1px ${errorRingColor}, 0 0 0 2px ${errorRingBorderColor}`,
       },
-      '&:not(:checked):not(:disabled):not(:focus):hover ~ div:first-of-type': {
-        borderColor: errorRingColor,
+      '&:not(:checked):not(:disabled):not(:focus):hover, &:not(:checked):not(:disabled):active': {
+        '~ div:first-of-type': {
+          borderColor: errorRingColor,
+        },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: colors.blueberry400,
+        borderColor: theme.palette.primary.main,
         boxShadow: `
             0 0 0 2px ${colors.frenchVanilla100},
             0 0 0 4px ${errorRingColor},
