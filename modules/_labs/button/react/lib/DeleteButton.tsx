@@ -36,7 +36,7 @@ const deleteButtonColors: ButtonColors = {
 };
 
 const DeleteButton = (props: DeleteButtonProps) => {
-  const {size, buttonRef, children, ...elemProps} = props;
+  const {size = ButtonSize.Medium, buttonRef, children, ...elemProps} = props;
   return (
     <ButtonContainer colors={deleteButtonColors} size={size} buttonRef={buttonRef} {...elemProps}>
       <ButtonLabel>{children}</ButtonLabel>
@@ -45,9 +45,5 @@ const DeleteButton = (props: DeleteButtonProps) => {
 };
 
 DeleteButton.Size = ButtonSize;
-
-DeleteButton.defaultProps = {
-  size: ButtonSize.Medium,
-};
 
 export default DeleteButton;

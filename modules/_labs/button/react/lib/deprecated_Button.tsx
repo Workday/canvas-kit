@@ -158,7 +158,13 @@ const Container = styled('button')<DeprecatedButtonProps>(
 );
 
 const DeprecatedButton = (props: DeprecatedButtonProps) => {
-  const {variant, size, buttonRef, children, ...elemProps} = props;
+  const {
+    variant = DeprecatedButtonVariant.Secondary,
+    size = ButtonSize.Medium,
+    buttonRef,
+    children,
+    ...elemProps
+  } = props;
 
   React.useEffect(() => {
     console.warn('This component is now deprecated, consider using the new Button component');
@@ -173,10 +179,5 @@ const DeprecatedButton = (props: DeprecatedButtonProps) => {
 
 DeprecatedButton.Variant = DeprecatedButtonVariant;
 DeprecatedButton.Size = ButtonSize;
-
-DeprecatedButton.defaultProps = {
-  variant: DeprecatedButtonVariant.Secondary,
-  size: ButtonSize.Medium,
-};
 
 export default DeprecatedButton;

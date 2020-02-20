@@ -61,7 +61,7 @@ const highlightButtonColors: ButtonColors = {
 };
 
 const HighlightButton = (props: HighlightButtonProps) => {
-  const {size, buttonRef, dataLabel, icon, children, ...elemProps} = props;
+  const {size = ButtonSize.Medium, buttonRef, dataLabel, icon, children, ...elemProps} = props;
   return (
     <ButtonContainer
       colors={highlightButtonColors}
@@ -79,10 +79,6 @@ const HighlightButton = (props: HighlightButtonProps) => {
 HighlightButton.Size = {
   Medium: ButtonSize.Medium,
   Large: ButtonSize.Large,
-};
-
-HighlightButton.defaultProps = {
-  size: ButtonSize.Medium,
 };
 
 export default HighlightButton;

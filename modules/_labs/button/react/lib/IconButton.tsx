@@ -41,7 +41,16 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 }
 
 const IconButton = (props: IconButtonProps) => {
-  const {buttonRef, size, variant, onToggleChange, icon, toggled, children, ...elemProps} = props;
+  const {
+    variant = IconButtonVariant.Circle,
+    size = ButtonSize.Medium,
+    buttonRef,
+    onToggleChange,
+    icon,
+    toggled,
+    children,
+    ...elemProps
+  } = props;
 
   React.useEffect(() => {
     if (typeof props.onToggleChange === 'function') {
@@ -87,11 +96,6 @@ IconButton.Variant = IconButtonVariant;
 IconButton.Size = {
   Small: ButtonSize.Small,
   Medium: ButtonSize.Medium,
-};
-
-IconButton.defaultProps = {
-  variant: IconButtonVariant.Circle,
-  size: ButtonSize.Medium,
 };
 
 export default IconButton;
