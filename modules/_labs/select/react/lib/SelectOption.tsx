@@ -14,12 +14,13 @@ import {dismissMenuDelay} from './Select';
 // import { checkSmallIcon } from '@workday/canvas-system-icons-web';
 
 export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
-  value: string;
-  label: string;
   disabled: boolean;
   focused?: boolean;
-  selected?: boolean;
   justSelected?: boolean;
+  label: string;
+  selected?: boolean;
+  suppressed?: boolean;
+  value: string;
 }
 
 const flashAnimation = keyframes`
@@ -49,28 +50,28 @@ const Option = styled('li')<SelectOptionProps>(
       borderRadius: `0 0 ${borderRadius.s} ${borderRadius.s}`,
     },
   },
-  ({disabled, focused, selected}) => {
+  ({disabled, focused, selected, suppressed}) => {
     if (disabled) {
       return {
         color: colors.licorice100,
       };
+    } else if (selected) {
+      return {
+        backgroundColor: colors.blueberry100,
+      };
+    } else if (focused) {
+      return {
+        backgroundColor: commonColors.focusBackground,
+        color: typeColors.inverse,
+      };
+    } else if (!suppressed) {
+      return {
+        '&:hover': {
+          backgroundColor: commonColors.hoverBackground,
+        },
+      };
     } else {
-      if (selected) {
-        return {
-          backgroundColor: colors.blueberry100,
-        };
-      } else if (focused) {
-        return {
-          backgroundColor: commonColors.focusBackground,
-          color: typeColors.inverse,
-        };
-      } else {
-        return {
-          '&:hover': {
-            backgroundColor: commonColors.hoverBackground,
-          },
-        };
-      }
+      return;
     }
   },
   ({justSelected}) =>

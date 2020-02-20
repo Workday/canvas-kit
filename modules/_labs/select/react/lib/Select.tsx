@@ -179,6 +179,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
+  // menu may not be interacted with while it is dismissing, or
+  // when it is briefly persisted right after an option has been
+  // selected
+  private isMenuInteractive = (): boolean => {
+    return !this.state.isMenuDismissing && this.state.justSelectedItemIndex === null;
+  };
+
   componentDidMount() {
     const {children, value} = this.props;
 
@@ -226,8 +233,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleOptionClick = (optionProps: SelectOptionProps): void => {
-    // disabled options cannot be clicked
-    if (optionProps.disabled) {
+    // abort immediately if:
+    // * the menu is a non-interactive state
+    // * a disabled option was clicked (we ignore these clicks)
+    if (!this.isMenuInteractive() || optionProps.disabled) {
       return;
     }
 
@@ -347,6 +356,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         this.handleOptionClick(child.props);
       },
       selected: this.state.selectedItemIndex === index,
+      suppressed: !this.isMenuInteractive(),
     });
   };
 
