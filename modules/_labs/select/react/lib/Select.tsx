@@ -24,7 +24,7 @@ export interface SelectProps
   value?: string;
 }
 
-interface SelectMenuProps {
+interface SelectMenuProps extends GrowthBehavior {
   isDismissing: boolean;
 }
 
@@ -118,6 +118,10 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
   ({isDismissing}) =>
     isDismissing && {
       opacity: 0,
+    },
+  ({grow}) =>
+    grow && {
+      width: '100%',
     }
 );
 
@@ -403,7 +407,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           {...elemProps}
         />
         {this.state.showingMenu && (
-          <SelectMenu isDismissing={isMenuDismissing}>
+          <SelectMenu isDismissing={isMenuDismissing} grow={grow}>
             {React.Children.map(children, this.renderChildren)}
           </SelectMenu>
         )}
