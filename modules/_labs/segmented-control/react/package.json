@@ -41,8 +41,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/is-prop-valid": "^0.8.2",
-    "@workday/canvas-kit-labs-react-core": "^3.3.0",
+    "@workday/canvas-kit-labs-react-core": "^3.4.0",
     "@workday/canvas-kit-labs-react-button": "^0.0.0",
-    "@workday/canvas-kit-react-core": "^3.2.0"
+    "@workday/canvas-kit-react-core": "^3.4.0"
   }
 }
