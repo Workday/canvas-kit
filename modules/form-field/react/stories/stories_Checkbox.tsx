@@ -171,7 +171,12 @@ const CheckboxStates = () => (
 );
 
 storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
-  .addParameters({component: Checkbox})
+  .addParameters({
+    component: Checkbox,
+    chromatic: {
+      disable: false,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('States', () => <CheckboxStates />)
   .addParameters({

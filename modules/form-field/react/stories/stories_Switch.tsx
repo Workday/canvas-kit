@@ -146,7 +146,12 @@ const SwitchStates = () => (
 );
 
 storiesOf('Components|Inputs/Switch/React/Visual Testing', module)
-  .addParameters({component: Switch})
+  .addParameters({
+    component: Switch,
+    chromatic: {
+      disable: false,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('States', () => <SwitchStates />)
   .addParameters({

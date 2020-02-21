@@ -191,7 +191,12 @@ const ColorInputStates = () => (
 );
 
 storiesOf('Components|Inputs/Color Picker/Color Input/React/Visual Testing', module)
-  .addParameters({component: ColorInput})
+  .addParameters({
+    component: ColorInput,
+    chromatic: {
+      disable: false,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('States', () => <ColorInputStates />)
   .addParameters({
