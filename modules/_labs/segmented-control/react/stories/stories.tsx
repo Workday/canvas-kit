@@ -11,7 +11,7 @@ import {
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {IconButton, IconButtonVariant, ButtonSize} from '@workday/canvas-kit-labs-react-button';
+import {IconButton} from '@workday/canvas-kit-labs-react-button';
 import {SegmentedControl, SegmentedControlProps} from '../index';
 
 import README from '../README.md';
@@ -47,20 +47,13 @@ storiesOf('Labs|Segmented Control/React', module)
     <SegmentedControlWrapper>
       <SegmentedControl>
         <IconButton
-          variant={IconButton.Variant.Circle}
-          size={ButtonSize.Medium}
           icon={listViewIcon}
           aria-label="List View"
           onClick={e => {
             action('Existing IconButton onClick callback')(e);
           }}
         />
-        <IconButton
-          variant={IconButton.Variant.Circle}
-          size={ButtonSize.Medium}
-          aria-label="Worksheets"
-          icon={worksheetsIcon}
-        />
+        <IconButton aria-label="Table View" icon={worksheetsIcon} />
       </SegmentedControl>
     </SegmentedControlWrapper>
   ))
@@ -68,49 +61,10 @@ storiesOf('Labs|Segmented Control/React', module)
   .add('Four Buttons', () => (
     <SegmentedControlWrapper>
       <SegmentedControl>
-        <IconButton
-          variant={IconButton.Variant.Circle}
-          size={ButtonSize.Medium}
-          icon={listViewIcon}
-          value="list-view"
-          aria-label="List View"
-        />
-        <IconButton
-          variant={IconButton.Variant.Circle}
-          size={ButtonSize.Medium}
-          icon={worksheetsIcon}
-          value="table-view"
-          aria-label="Table View"
-        />
-        <IconButton
-          variant={IconButton.Variant.Circle}
-          size={ButtonSize.Medium}
-          icon={deviceTabletIcon}
-          value="device-view"
-          aria-label="Device View"
-        />
-        <IconButton
-          variant={IconButton.Variant.Circle}
-          size={ButtonSize.Medium}
-          icon={percentageIcon}
-          value="percent-view"
-          aria-label="Percent View"
-        />
-      </SegmentedControl>
-    </SegmentedControlWrapper>
-  ))
-  .add('Visual Testing/RTL', () => (
-    <SegmentedControlWrapper>
-      <SegmentedControl isRTL={true} value="table-view">
         <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
         <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
         <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
-        <IconButton
-          icon={percentageIcon}
-          value="percent-view"
-          aria-label="Percent View"
-          disabled={true}
-        />
+        <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
       </SegmentedControl>
     </SegmentedControlWrapper>
   ));

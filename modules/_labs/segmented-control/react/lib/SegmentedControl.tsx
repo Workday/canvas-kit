@@ -20,13 +20,6 @@ export interface SegmentedControlProps {
   value?: string | number;
 
   /**
-   * If true, render the SegmentedControls from right to left.
-   * // TODO: Remove
-   * @default false
-   */
-  isRTL?: boolean;
-
-  /**
    * The function called when a button in the SegmentedControl is toggled.
    * If the selected button has a value, that value will be passed to the callback function;
    * otherwise, the index of the button will be passed.
@@ -91,8 +84,6 @@ const onButtonClick = (
 
 const SegmentedControl = (props: SegmentedControlProps) => {
   const {value = 0, children, onChange, ...elemProps} = props;
-
-  // const children = this.props.isRTL ? [...this.props.children].reverse() : this.props.children;
 
   return (
     <SegmentedControlContainer {...elemProps}>
