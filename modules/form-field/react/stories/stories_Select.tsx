@@ -211,7 +211,12 @@ storiesOf('Components|Inputs/Select/React/Left Label', module)
   ));
 
 storiesOf('Components|Inputs/Select/React/Visual Testing', module)
-  .addParameters({component: Select})
+  .addParameters({
+    component: Select,
+    chromatic: {
+      disable: false,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('States', () => (
     <StaticStates>

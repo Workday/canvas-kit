@@ -23,7 +23,7 @@ export function useTheme(theme?: Object): CanvasTheme {
 
   try {
     const context = React.useContext(ThemeContext);
-    if (context) {
+    if (context && Object.entries(context).length !== 0) {
       return context as CanvasTheme;
     }
   } catch (e) {
