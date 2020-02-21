@@ -215,7 +215,12 @@ const TextAreaStates = () => (
 );
 
 storiesOf('Components|Inputs/TextArea/React/Visual Testing', module)
-  .addParameters({component: TextArea})
+  .addParameters({
+    component: TextArea,
+    chromatic: {
+      disable: false,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('States', () => <TextAreaStates />)
   .addParameters({

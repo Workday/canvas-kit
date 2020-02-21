@@ -231,7 +231,12 @@ const RadioStates = () => (
 );
 
 storiesOf('Components|Inputs/Radio/React/Visual Testing', module)
-  .addParameters({component: Radio})
+  .addParameters({
+    component: Radio,
+    chromatic: {
+      disable: false,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('States', () => <RadioStates />)
   .addParameters({
