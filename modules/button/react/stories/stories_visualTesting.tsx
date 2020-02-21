@@ -21,7 +21,7 @@ const blueBackground: CSSObject = {
   borderRadius: '4px',
 };
 
-const Container = props => (
+const Container = (props: any) => (
   <div css={props.blue ? blueBackground : buttonLayout}>{props.children}</div>
 );
 
