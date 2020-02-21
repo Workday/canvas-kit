@@ -8,11 +8,12 @@ const cmd = promisify(require('node-cmd').get);
 const [
   SLACK_WEBHOOK,
   TRAVIS_BUILD_URL = 'https://travis-ci.org/Workday/canvas-kit/branches',
+  PREID = 'next',
 ] = process.argv.slice(2);
 const regex = /@workday\/[a-z-]*@(\d*.\d*.\d*-next.\d*\+\w*)/gm;
 const data = {};
 
-cmd('yarn lerna publish --yes --force-publish="*" --canary --preid next --dist-tag next')
+cmd(`yarn lerna publish --yes --force-publish="*" --canary --preid ${PREID} --dist-tag ${PREID}`)
   .then(output => {
     console.log(output);
 
