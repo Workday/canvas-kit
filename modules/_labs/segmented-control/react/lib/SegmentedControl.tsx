@@ -31,13 +31,16 @@ const SegmentedControlContainer = styled('div')({
   '& button': {
     borderRadius: borderRadius.zero,
     border: `1px solid ${colors.soap500}`,
-    marginLeft: '-1px',
+    borderLeft: 'none',
     '&[aria-pressed="true"]': {
       borderColor: colors.blueberry400,
+      '&:hover, &:focus:hover': {
+        background: colors.blueberry400,
+      },
     },
     '&:first-of-type': {
       borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-      marginLeft: 0,
+      borderLeft: `1px solid ${colors.soap500}`,
     },
     '&:last-of-type': {
       borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
