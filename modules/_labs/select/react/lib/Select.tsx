@@ -99,16 +99,21 @@ const SelectMenuIcon = styled(SystemIcon)({
   },
 });
 
-const SelectMenu = styled('div')<SelectMenuProps>(
+const SelectMenu = styled('ul')<SelectMenuProps>(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `2px solid ${inputColors.focusBorder}`,
     borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
     borderTop: 0,
     boxSizing: 'border-box',
+    listStyle: 'none',
+    margin: 0,
     minWidth: 280,
     opacity: 1,
+    padding: 0,
     position: 'absolute',
+    // offset the menu by the height of the select (spacingNumbers.xl)
+    // minus the borderRadius of the select (borderRadius.m)
     top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
     transition: `${dismissMenuDuration / 1000}s opacity`,
     zIndex: 1,
@@ -130,24 +135,25 @@ const SelectMenu = styled('div')<SelectMenuProps>(
       return {
         borderColor: colors.cantaloupe600,
         borderWidth: '1px',
+        padding: '0 2px 2px 2px',
+
+        // apply the inner border to the menu using a pseudo element
+        '&:before': {
+          bottom: 0,
+          border: `2px solid ${inputColors.warning.border}`,
+          borderTop: 0,
+          content: '" "',
+          left: 0,
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          zIndex: -1,
+        },
       };
     } else {
       return;
     }
   }
-);
-
-const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
-  {
-    listStyle: 'none',
-    margin: 0,
-    padding: 0,
-  },
-  ({error}) =>
-    error === ErrorType.Alert && {
-      border: `2px solid ${inputColors.warning.border}`,
-      borderTop: 0,
-    }
 );
 
 const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
@@ -434,9 +440,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         />
         {this.state.showingMenu && (
           <SelectMenu error={error} grow={grow} isDismissing={isMenuDismissing}>
-            <SelectMenuList error={error}>
-              {React.Children.map(children, this.renderChildren)}
-            </SelectMenuList>
+            {React.Children.map(children, this.renderChildren)}
           </SelectMenu>
         )}
         <SelectMenuIcon
