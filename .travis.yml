@@ -65,7 +65,7 @@ jobs:
       on:
         tags: true
 
-  - stage: master
+  - stage: trunk
     script:
       - yarn chromatic --auto-accept-changes --app-code="dlpro96xybh" # v1
       - yarn chromatic --auto-accept-changes # v2
@@ -79,6 +79,12 @@ jobs:
         skip_cleanup: true
         on:
           branch: master
+      - provider: script
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js $SLACK_WEBHOOK $TRAVIS_BUILD_WEB_URL prerelease
+        skip_cleanup: true
+        on:
+          all_branches: true
+          condition: $TRAVIS_BRANCH =~ ^prerelease\/v\d*$
       - provider: pages
         skip_cleanup: true
         local_dir: docs
