@@ -224,6 +224,11 @@ storiesOf('Labs|Select/React/Left Label', module)
   ));
 
 storiesOf('Labs|Select/React/Visual Testing', module)
+  .addParameters({
+    chromatic: {
+      disable: false,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('States', () => (
     <StaticStates>
