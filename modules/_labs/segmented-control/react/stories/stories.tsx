@@ -34,7 +34,12 @@ storiesOf('Labs|Segmented Control/React', module)
           aria-label="List View"
           onClick={e => action('Existing IconButton onClick callback')(e)}
         />
-        <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+        <IconButton
+          icon={worksheetsIcon}
+          value="table-view"
+          aria-label="Table View"
+          disabled={true}
+        />
         <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
         <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
       </SegmentedControl>
