@@ -403,10 +403,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       error: this.props.error,
       focused: this.state.focusedOptionIndex === index,
       justSelected: this.state.justSelectedOptionIndex === index,
+
+      // We must use mousedown here instead of click. If we use
+      // click, the select is blurred before the click registers.
+      // When the select is blurred, the menu starts dismissing.
+      // When the menu starts dismissing, the component becomes
+      // non-interactive. And then when the click finally registers,
+      // it's ignored because the component is non-interactive.
       onMouseDown: (event: React.MouseEvent) => {
         event.preventDefault();
         this.handleOptionClick(child.props);
       },
+
       selected: this.state.selectedOptionIndex === index,
       suppressed: !this.isMenuInteractive(),
     });
