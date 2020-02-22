@@ -16,12 +16,16 @@ import {SelectOptionProps} from './SelectOption';
 export interface SelectProps
   extends Themeable,
     GrowthBehavior,
-    React.InputHTMLAttributes<HTMLInputElement> {
+    Pick<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
   children?: React.ReactElement<SelectOptionProps>[];
   disabled?: boolean;
   error?: ErrorType;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value?: string;
+}
+
+interface SelectButtonProps extends GrowthBehavior, React.ButtonHTMLAttributes<HTMLButtonElement> {
+  error?: ErrorType;
 }
 
 interface SelectMenuProps extends GrowthBehavior {
@@ -41,7 +45,7 @@ export interface SelectState {
 export const dismissMenuDelay = 200;
 const dismissMenuDuration = 200;
 
-const SelectInput = styled('input')<SelectProps>(
+const SelectButton = styled('button')<SelectButtonProps>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -52,6 +56,7 @@ const SelectInput = styled('input')<SelectProps>(
     boxSizing: 'border-box',
     height: spacing.xl,
     minWidth: 280,
+    textAlign: 'left',
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // IE11 bugfix: add padding so text is displayed properly
     margin: 0, // Fix Safari
@@ -112,7 +117,7 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
     opacity: 1,
     padding: 0,
     position: 'absolute',
-    // offset the menu by the height of the select (spacingNumbers.xl)
+    // Offset the menu by the height of the select (spacingNumbers.xl)
     // minus the borderRadius of the select (borderRadius.m)
     top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
     transition: `${dismissMenuDuration / 1000}s opacity`,
@@ -137,7 +142,7 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
         borderWidth: '1px',
         padding: '0 2px 2px 2px',
 
-        // apply the inner border to the menu using a pseudo element
+        // Apply the inner border to the menu using a pseudo element
         '&:before': {
           bottom: 0,
           border: `2px solid ${inputColors.warning.border}`,
@@ -155,6 +160,10 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
     }
   }
 );
+
+const SelectInput = styled('input')({
+  display: 'none',
+});
 
 const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
   {
@@ -200,7 +209,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return childrenArray.findIndex(child => child.props.value === value);
   };
 
-  // toggle the menu on/off. note this show/hides the menu
+  // Toggle the menu on/off. note this show/hides the menu
   // immediately -- if you wish to animate the menu out, call
   // animateOutMenu
   private toggleMenu = (show: boolean): void => {
@@ -226,7 +235,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }, dismissMenuDuration);
   };
 
-  // menu may not be interacted with while it is dismissing, or
+  // Menu may not be interacted with while it is dismissing, or
   // when it is briefly persisted right after an option has been
   // selected
   private isMenuInteractive = (): boolean => {
@@ -240,7 +249,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       SelectOptionProps
     >[];
 
-    // if value exists, set state to that value...
+    // If value exists, set state to that value...
     if (value) {
       const childIndex = this.indexByValue(value);
 
@@ -262,7 +271,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentWillUnmount() {
-    // clear timers
+    // Clear timers
     if (this.persistMenuTimer) {
       clearTimeout(this.persistMenuTimer);
     }
@@ -271,7 +280,26 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   }
 
-  handleSelectClick = (event: React.MouseEvent<HTMLInputElement>): void => {
+  handleSelectMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    // We must use mousedown here instead of click.
+    //
+    // Assume the select button already has focus and the menu is
+    // currently hidden in Firefox/Safari.
+    //
+    // If we use click, the button is blurred before the click
+    // registers. When the button is blurred, the menu begins to
+    // animate out. Right after the click is registered and we
+    // show the menu, it's immediately removed at the end of the
+    // animate out. So we never see the menu.
+
+    // Suppress the button from being blurred in Firefox/Safari
+    event.preventDefault();
+
+    // Focus the button immediately on mousedown (again, required by
+    // Firefox/Safari since the button isn't granted focus on click,
+    // see: https://zellwk.com/blog/inconsistent-button-behavior/)
+    event.currentTarget.focus();
+
     if (this.state.showingMenu) {
       this.animateOutMenu();
     } else {
@@ -422,29 +450,30 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    // IMPORTANT: Destructure value here so it doesn't override
-    // value below (which is set to label) with the ...elemProps
-    // spread
-    const {error, disabled, grow, children, onChange, value, ...elemProps} = this.props;
+    const {error, disabled, grow, children, name, onChange, value, ...elemProps} = this.props;
 
     const {label, isMenuDismissing} = this.state;
     // console.log('in Select render with label', label);
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
-        <SelectInput
+        <SelectButton
           disabled={disabled}
           grow={grow}
           error={error}
-          value={label}
           onBlur={this.handleSelectBlur}
-          onChange={onChange}
-          onClick={this.handleSelectClick}
+          onMouseDown={this.handleSelectMouseDown}
           onKeyDown={this.handleKeyboardShortcuts}
-          readOnly
+          {...elemProps}
+        >
+          {label}
+        </SelectButton>
+        <SelectInput
+          name={name}
+          onChange={onChange}
           ref={this.inputRef}
           type="text"
-          {...elemProps}
+          value={value}
         />
         {this.state.showingMenu && (
           <SelectMenu error={error} grow={grow} isDismissing={isMenuDismissing}>
