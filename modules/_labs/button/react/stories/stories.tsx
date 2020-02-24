@@ -232,29 +232,64 @@ const IconButtonStates = () => (
 );
 
 storiesOf('Labs|Button/React/Visual Testing/Button', module)
-  .addParameters({component: Button})
+  .addParameters({
+    component: Button,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <ButtonStates />);
 
 storiesOf('Labs|Button/React/Visual Testing/Delete Button', module)
-  .addParameters({component: DeleteButton})
+  .addParameters({
+    component: DeleteButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <DeleteButtonStates />);
 
 storiesOf('Labs|Button/React/Visual Testing/Deprecated Button', module)
-  .addParameters({component: DeprecatedButton})
+  .addParameters({
+    component: DeprecatedButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <DeprecatedButtonStates />);
 
 storiesOf('Labs|Button/React/Visual Testing/Dropdown Button', module)
-  .addParameters({component: DropdownButton})
+  .addParameters({
+    component: DropdownButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <DropdownButtonStates />);
 
 storiesOf('Labs|Button/React/Visual Testing/Highlight Button', module)
-  .addParameters({component: HighlightButton})
+  .addParameters({
+    component: HighlightButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <HighlightButtonStates />);
 
 storiesOf('Labs|Button/React/Visual Testing/Text Button', module)
-  .addParameters({component: TextButton})
+  .addParameters({
+    component: TextButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <TextButtonStates />);
 
 storiesOf('Labs|Button/React/Visual Testing/Icon Button', module)
-  .addParameters({component: IconButton})
+  .addParameters({
+    component: IconButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <IconButtonStates />);
