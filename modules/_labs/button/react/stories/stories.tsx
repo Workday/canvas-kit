@@ -192,7 +192,7 @@ const TextButtonStates = () =>
 const IconButtonStates = () => (
   <React.Fragment>
     {[false, true].map(toggled => (
-      <div>
+      <div key={`toggled-${toggled}`}>
         <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
         {getButtonStates(
           {
