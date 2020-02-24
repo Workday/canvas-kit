@@ -211,7 +211,12 @@ const TextInputStates = () => (
 );
 
 storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
-  .addParameters({component: TextInput})
+  .addParameters({
+    component: TextInput,
+    chromatic: {
+      disable: false,
+    },
+  })
   .addDecorator(withReadme(README))
   .add('States', () => <TextInputStates />)
   .addParameters({
