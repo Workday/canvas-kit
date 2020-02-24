@@ -63,12 +63,7 @@ const getHighlightButtonColors = (): ButtonColors => ({
 const HighlightButton = (props: HighlightButtonProps) => {
   const {size, buttonRef, dataLabel, icon, children, ...elemProps} = props;
   return (
-    <ButtonContainer
-      colors={getHighlightButtonColors()}
-      size={size}
-      buttonRef={buttonRef}
-      {...elemProps}
-    >
+    <ButtonContainer colors={getHighlightButtonColors()} size={size} ref={buttonRef} {...elemProps}>
       {icon && <ButtonLabelIcon size={size} icon={icon} />}
       <ButtonLabel>{children}</ButtonLabel>
       {dataLabel && <ButtonLabelData>{dataLabel}</ButtonLabelData>}

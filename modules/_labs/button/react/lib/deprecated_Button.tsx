@@ -165,7 +165,7 @@ const DeprecatedButton = (props: DeprecatedButtonProps) => {
   }, []);
 
   return (
-    <Container variant={variant} size={size} buttonRef={buttonRef} {...elemProps}>
+    <Container variant={variant} size={size} ref={buttonRef} {...elemProps}>
       {children}
     </Container>
   );

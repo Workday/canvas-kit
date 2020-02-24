@@ -27,12 +27,7 @@ export interface DropdownButtonProps
 const DropdownButton = (props: DropdownButtonProps) => {
   const {variant, size, buttonRef, children, ...elemProps} = props;
   return (
-    <ButtonContainer
-      colors={getButtonColors(variant)}
-      size={size}
-      buttonRef={buttonRef}
-      {...elemProps}
-    >
+    <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
       <ButtonLabel>{children}</ButtonLabel>
       <ButtonLabelIcon
         size={size}

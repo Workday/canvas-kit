@@ -19,7 +19,7 @@ export interface ButtonContainerProps
   /**
    * The ref to the button that the styled component renders.
    */
-  buttonRef?: React.Ref<HTMLButtonElement>;
+  ref?: React.Ref<HTMLButtonElement>;
   /**
    * Whether the icon should received filled (colored background layer) or regular styles.
    * Corresponds to `toggled` in IconButton

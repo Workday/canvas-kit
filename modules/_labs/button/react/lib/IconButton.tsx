@@ -72,7 +72,7 @@ const IconButton = (props: IconButtonProps) => {
       // eslint-disable-next-line no-use-before-define
       colors={getIconButtonColors(variant, toggled)}
       size={size}
-      buttonRef={buttonRef}
+      ref={buttonRef}
       fillIcon={toggled}
       extraStyles={containerStyles}
       aria-pressed={toggled}
