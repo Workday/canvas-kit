@@ -43,9 +43,16 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 const IconButton = (props: IconButtonProps) => {
   const {buttonRef, size, variant, onToggleChange, icon, toggled, children, ...elemProps} = props;
 
+  const isInitialMount = React.useRef(true);
+
+  // Only call onToggleChange on update - not on first mount
   React.useEffect(() => {
-    if (typeof props.onToggleChange === 'function') {
-      props.onToggleChange(toggled);
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      if (props.toggled && typeof props.onToggleChange === 'function') {
+        props.onToggleChange(toggled);
+      }
     }
   }, [props.toggled]);
 
