@@ -29,11 +29,11 @@ const blueBackground: CSSObject = {
   borderRadius: '4px',
 };
 
-const Container = props => (
+const Container = (props: any) => (
   <div css={props.blue ? blueBackground : buttonLayout}>{props.children}</div>
 );
 
-const getButtonStates = (rowProps, renderFn) => (
+const getButtonStates = (rowProps: any, renderFn: (props: any) => React.ReactNode) => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(rowProps)}
@@ -49,7 +49,7 @@ const getButtonStates = (rowProps, renderFn) => (
           ],
           disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
         },
-        props => {
+        (props: any) => {
           if (props.disabled && !['', 'hover'].includes(props.className)) {
             return false;
           }
@@ -80,7 +80,7 @@ const ButtonStates = () =>
       icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
       dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
     },
-    props => (
+    (props: any) => (
       <Container blue={props.variant === Button.Variant.OutlineInverse}>
         <Button {...props}>Test</Button>
       </Container>
@@ -95,7 +95,7 @@ const DeleteButtonStates = () =>
         {value: DropdownButton.Size.Large, label: 'Large'},
       ],
     },
-    props => (
+    (props: any) => (
       <Container>
         <DeleteButton {...props}>Test</DeleteButton>
       </Container>
@@ -116,7 +116,7 @@ const DeprecatedButtonStates = () =>
         {value: Button.Size.Large, label: 'Large'},
       ],
     },
-    props => (
+    (props: any) => (
       <Container>
         <DeprecatedButton {...props}>Test</DeprecatedButton>
       </Container>
@@ -137,7 +137,7 @@ const DropdownButtonStates = () =>
       icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
       dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
     },
-    props => (
+    (props: any) => (
       <Container>
         <DropdownButton {...props}>Test</DropdownButton>
       </Container>
@@ -155,7 +155,7 @@ const HighlightButtonStates = () =>
       icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
       dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
     },
-    props => (
+    (props: any) => (
       <Container>
         <HighlightButton {...props}>Test</HighlightButton>
       </Container>
@@ -178,7 +178,7 @@ const TextButtonStates = () =>
       icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
       dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
     },
-    props => (
+    (props: any) => (
       <Container
         blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
           props.variant
@@ -210,7 +210,7 @@ const IconButtonStates = () => (
               {value: IconButton.Size.Medium, label: 'Medium'},
             ],
           },
-          props => (
+          (props: any) => (
             <Container
               blue={[IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].includes(
                 props.variant
