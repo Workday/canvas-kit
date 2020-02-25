@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
-import {keyframes} from '@emotion/core';
+import {keyframes, CSSObject} from '@emotion/core';
 import {
   colors,
   borderRadius,
@@ -46,6 +46,27 @@ const fadeOutAnimation = keyframes`
   from {opacity: 1;}
   to {opacity: 0;}
 `;
+
+// Helper to render the menu border in its various states. We
+// render the inner border of the menu using a pseudo element since
+// we cannot exclude the top border using an inset box-shadow.
+const menuBorder = (borderColor: string, innerWidth = 1, outerColor = borderColor): CSSObject => {
+  return {
+    borderColor: outerColor,
+    padding: `0 ${innerWidth}px ${innerWidth}px ${innerWidth}px`,
+    '&:before': {
+      bottom: 0,
+      border: `${innerWidth}px solid ${borderColor}`,
+      borderTop: 0,
+      content: '" "',
+      left: 0,
+      position: 'absolute',
+      right: 0,
+      top: 0,
+      zIndex: -1,
+    },
+  };
+};
 
 const SelectButton = styled('button')<Pick<SelectProps, 'error' | 'grow'>>(
   {
@@ -116,7 +137,7 @@ const SelectMenu = styled('ul')<
     // fades out
     animationFillMode: 'forwards',
     backgroundColor: colors.frenchVanilla100,
-    border: `2px solid ${inputColors.focusBorder}`,
+    border: `1px solid ${inputColors.border}`,
     borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
     borderTop: 0,
     boxSizing: 'border-box',
@@ -144,29 +165,20 @@ const SelectMenu = styled('ul')<
   ({error}) => {
     if (error === ErrorType.Error) {
       return {
-        borderColor: inputColors.error.border,
+        ...menuBorder(inputColors.error.border),
       };
     } else if (error === ErrorType.Alert) {
       return {
-        borderColor: colors.cantaloupe600,
-        borderWidth: '1px',
-        padding: '0 2px 2px 2px',
-
-        // Apply the inner border to the menu using a pseudo element
-        '&:before': {
-          bottom: 0,
-          border: `2px solid ${inputColors.warning.border}`,
-          borderTop: 0,
-          content: '" "',
-          left: 0,
-          position: 'absolute',
-          right: 0,
-          top: 0,
-          zIndex: -1,
-        },
+        ...menuBorder(inputColors.warning.border, 2, colors.cantaloupe600),
       };
     } else {
-      return;
+      return {
+        // TODO: figure out how to use SelectButton rather than
+        // button in this selector
+        'button:focus ~ &': {
+          ...menuBorder(inputColors.focusBorder),
+        },
+      };
     }
   }
 );
