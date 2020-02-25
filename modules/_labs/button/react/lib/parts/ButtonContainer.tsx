@@ -8,7 +8,7 @@ import {ButtonSize, ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
 
 export interface ButtonContainerProps
-  extends React.HTMLAttributes<HTMLButtonElement>,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     GrowthBehavior {
   colors?: ButtonColors;
   /**

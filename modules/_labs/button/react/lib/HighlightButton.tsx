@@ -6,7 +6,7 @@ import {ButtonSize, ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface HighlightButtonProps
-  extends React.HTMLAttributes<HTMLButtonElement>,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     GrowthBehavior {
   /**
    * The size of the HighlightButton.

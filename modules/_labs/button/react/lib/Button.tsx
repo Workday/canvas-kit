@@ -5,7 +5,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonVariant, ButtonSize, ButtonColors, DropdownButtonVariant} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement>, GrowthBehavior {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, GrowthBehavior {
   /**
    * The variant of the Button.
    * @default ButtonVariant.Secondary

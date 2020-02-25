@@ -5,7 +5,7 @@ import {DeprecatedButtonVariant, ButtonSize} from './types';
 import styled from '@emotion/styled';
 
 export interface DeprecatedButtonProps
-  extends React.HTMLAttributes<HTMLButtonElement>,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     GrowthBehavior {
   /**
    * The variant of the Button.

@@ -6,7 +6,7 @@ import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 import {getButtonColors} from './Button';
 
 export interface DropdownButtonProps
-  extends React.HTMLAttributes<HTMLButtonElement>,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     GrowthBehavior {
   /**
    * The variant of the Button.

@@ -6,7 +6,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TextButtonVariant, ButtonSize, ButtonIconPosition, ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
-export interface TextButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * The variant of the TextButton.
    * @default TextButtonVariant.Default
