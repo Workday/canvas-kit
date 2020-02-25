@@ -31,20 +31,20 @@ interface SelectButtonProps extends GrowthBehavior, React.ButtonHTMLAttributes<H
 
 interface SelectMenuProps extends GrowthBehavior {
   error?: ErrorType;
-  isDismissing: boolean;
+  isHiding: boolean;
 }
 
 export interface SelectState {
   focusedOptionIndex: number | null;
-  isMenuDismissing: boolean;
+  isMenuHiding: boolean;
+  isMenuVisible: boolean;
   justSelectedOptionIndex: number | null;
   label: string;
   selectedOptionIndex: number;
-  showingMenu: boolean;
 }
 
-export const dismissMenuDelay = 200;
-const dismissMenuDuration = 200;
+export const selectionPersistMenuDuration = 200;
+const toggleMenuAnimationDuration = 200;
 
 const fadeInAnimation = keyframes`
   from {opacity: 0;}
@@ -117,7 +117,11 @@ const SelectMenuIcon = styled(SystemIcon)({
 
 const SelectMenu = styled('ul')<SelectMenuProps>(
   {
-    animation: `${fadeInAnimation} ${dismissMenuDuration / 1000}s`,
+    animationName: fadeInAnimation,
+    animationDuration: `${toggleMenuAnimationDuration / 1000}s`,
+    // Required to prevent the occasional menu flash when the menu
+    // fades out
+    animationFillMode: 'forwards',
     backgroundColor: colors.frenchVanilla100,
     border: `2px solid ${inputColors.focusBorder}`,
     borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
@@ -131,15 +135,14 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
     // Offset the menu by the height of the select (spacingNumbers.xl)
     // minus the borderRadius of the select (borderRadius.m)
     top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
-    transition: `${dismissMenuDuration / 1000}s opacity`,
+    // TODO: don't think we need this transition, but verify in
+    // IE11 before deleting it
+    // transition: `${toggleMenuAnimationDuration / 1000}s opacity`,
     zIndex: 1,
   },
-  ({isDismissing}) =>
-    isDismissing && {
-      animation: `${fadeOutAnimation} ${dismissMenuDuration / 1000}s`,
-      // Required to prevent the occasional menu flash when the menu
-      // fades out
-      animationFillMode: 'forwards',
+  ({isHiding}) =>
+    isHiding && {
+      animationName: fadeOutAnimation,
     },
   ({grow}) =>
     grow && {
@@ -210,11 +213,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   state: Readonly<SelectState> = {
     focusedOptionIndex: null,
-    isMenuDismissing: false,
+    isMenuHiding: false,
+    isMenuVisible: false,
     justSelectedOptionIndex: null,
     label: '',
     selectedOptionIndex: 0,
-    showingMenu: false,
   };
 
   private indexByValue = (value: string): number => {
@@ -228,26 +231,26 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (show) {
       this.setState({
         focusedOptionIndex: this.state.selectedOptionIndex,
-        showingMenu: true,
+        isMenuVisible: true,
       });
     } else {
-      this.setState({isMenuDismissing: true});
+      this.setState({isMenuHiding: true});
 
       this.removeMenuTimer = setTimeout(() => {
         this.setState({
           focusedOptionIndex: null,
-          isMenuDismissing: false,
-          showingMenu: false,
+          isMenuHiding: false,
+          isMenuVisible: false,
         });
-      }, dismissMenuDuration);
+      }, toggleMenuAnimationDuration);
     }
   };
 
-  // Menu may not be interacted with while it is dismissing, or
-  // when it is briefly persisted right after an option has been
+  // Menu may not be interacted with while it is hiding, or when
+  // it is briefly persisted right after an option has been
   // selected
   private isMenuInteractive = (): boolean => {
-    return !this.state.isMenuDismissing && this.state.justSelectedOptionIndex === null;
+    return !this.state.isMenuHiding && this.state.justSelectedOptionIndex === null;
   };
 
   componentDidMount() {
@@ -311,7 +314,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // see: https://zellwk.com/blog/inconsistent-button-behavior/)
     event.currentTarget.focus();
 
-    this.toggleMenu(!this.state.showingMenu);
+    this.toggleMenu(!this.state.isMenuVisible);
   };
 
   handleSelectBlur = (event: React.FocusEvent): void => {
@@ -335,20 +338,20 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       selectedOptionIndex: index,
     });
 
-    // Time: dismissMenuDelay
+    // Time: selectionPersistMenuDuration
     // Hide the menu
     this.selectionPersistMenuTimer = setTimeout(() => {
       this.toggleMenu(false);
-    }, dismissMenuDelay);
+    }, selectionPersistMenuDuration);
 
-    // Time: dismissMenuDelay + dismissMenuDuration
+    // Time: selectionPersistMenuDuration + toggleMenuAnimationDuration
     // Update the select label and reset justSelected state
     this.selectionCompletionTimer = setTimeout(() => {
       this.setState({
         justSelectedOptionIndex: null,
         label: optionProps.label,
       });
-    }, dismissMenuDelay + dismissMenuDuration);
+    }, selectionPersistMenuDuration + toggleMenuAnimationDuration);
 
     // Code inspired by: https://stackoverflow.com/a/46012210
     // We want to programatically change the value of the
@@ -389,7 +392,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     switch (event.key) {
       case 'ArrowUp':
       case 'ArrowDown':
-        if (!this.state.showingMenu) {
+        if (!this.state.isMenuVisible) {
           this.toggleMenu(true);
         } else if (this.state.focusedOptionIndex !== null) {
           const direction = event.key === 'ArrowUp' ? -1 : 1;
@@ -435,8 +438,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
       // We must use mousedown here instead of click. If we use
       // click, the select is blurred before the click registers.
-      // When the select is blurred, the menu starts dismissing.
-      // When the menu starts dismissing, the component becomes
+      // When the select is blurred, the menu starts to hide.
+      // When the menu starts to hide, the component becomes
       // non-interactive. And then when the click finally registers,
       // it's ignored because the component is non-interactive.
       onMouseDown: (event: React.MouseEvent) => {
@@ -453,7 +456,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // TODO: Standardize on prop spread location (see #150)
     const {error, disabled, grow, children, name, onChange, value, ...elemProps} = this.props;
 
-    const {label, isMenuDismissing} = this.state;
+    const {label, isMenuHiding} = this.state;
     // console.log('in Select render with label', label);
 
     return (
@@ -476,8 +479,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           type="text"
           value={value}
         />
-        {this.state.showingMenu && (
-          <SelectMenu error={error} grow={grow} isDismissing={isMenuDismissing}>
+        {this.state.isMenuVisible && (
+          <SelectMenu error={error} grow={grow} isHiding={isMenuHiding}>
             {React.Children.map(children, this.renderChildren)}
           </SelectMenu>
         )}

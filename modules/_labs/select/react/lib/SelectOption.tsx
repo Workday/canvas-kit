@@ -2,17 +2,8 @@ import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 import {keyframes} from '@emotion/core';
-import {
-  borderRadius,
-  colors,
-  commonColors,
-  // spacing,
-  type,
-  typeColors,
-} from '@workday/canvas-kit-react-core';
-import {dismissMenuDelay} from './Select';
-// import { SystemIcon } from '@workday/canvas-kit-react-icon';
-// import { checkSmallIcon } from '@workday/canvas-system-icons-web';
+import {borderRadius, colors, commonColors, type, typeColors} from '@workday/canvas-kit-react-core';
+import {selectionPersistMenuDuration} from './Select';
 
 export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
   disabled: boolean;
@@ -80,8 +71,8 @@ const Option = styled('li')<SelectOptionProps>(
   }),
   ({justSelected}) =>
     justSelected && {
-      animation: `${flashAnimation} ${dismissMenuDelay / 1000}s 1`,
-      // retain the styles set by the last keyframe
+      animation: `${flashAnimation} ${selectionPersistMenuDuration / 1000}s 1`,
+      // Retain the styles set by the last keyframe
       animationFillMode: 'forwards',
     }
 );
@@ -96,7 +87,6 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
 
     return (
       <Option tabIndex={-1} value={value} label={label} disabled={disabled} {...elemProps}>
-        {/* <SystemIcon icon={checkSmallIcon} /> */}
         {label}
       </Option>
     );
