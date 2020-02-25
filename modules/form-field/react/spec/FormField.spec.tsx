@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
 import FormField, {FormFieldErrorBehavior} from '../lib/FormField';
+import {ErrorType} from '@workday/canvas-kit-react-common';
 
 describe('FormField', () => {
   const cb = jest.fn();
@@ -72,6 +73,37 @@ describe('FormField', () => {
       );
 
       expect(container.querySelector('div')).toHaveAttribute('data-propspread', 'test');
+    });
+  });
+  describe('when rendered a hint id', () => {
+    it('the input and hint text should have matching ids for accessibility', () => {
+      const label = 'Label';
+      const hintId = 'hintId';
+      const hintText = 'Helpful text goes here.';
+      const {container} = render(
+        <FormField error={ErrorType.Error} hintId={hintId} hintText={hintText} label={label}>
+          <input type="text" />
+        </FormField>
+      );
+
+      expect(container.querySelector('p')).toHaveAttribute('id', 'hintId');
+      expect(container.querySelector('input')).toHaveAttribute('aria-describedby', 'hintId');
+    });
+  });
+
+  describe('when rendered a input id', () => {
+    it('the input and label should have matching ids for accessibility', () => {
+      const label = 'Label';
+      const inputId = 'inputId';
+      const hintText = 'Helpful text goes here.';
+      const {container} = render(
+        <FormField inputId={inputId} hintText={hintText} label={label}>
+          <input type="text" />
+        </FormField>
+      );
+
+      expect(container.querySelector('label')).toHaveAttribute('for', 'inputId');
+      expect(container.querySelector('input')).toHaveAttribute('id', 'inputId');
     });
   });
 });
