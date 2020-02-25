@@ -34,7 +34,7 @@ export interface SelectState {
   selectedOptionIndex: number;
 }
 
-export const selectionPersistMenuDuration = 200;
+export const selectionPersistMenuDuration = 150;
 const toggleMenuAnimationDuration = 200;
 
 const fadeInAnimation = keyframes`
