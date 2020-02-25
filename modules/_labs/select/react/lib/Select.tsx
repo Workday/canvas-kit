@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
+import {keyframes} from '@emotion/core';
 import {
   colors,
   borderRadius,
@@ -44,6 +45,16 @@ export interface SelectState {
 
 export const dismissMenuDelay = 200;
 const dismissMenuDuration = 200;
+
+const fadeInAnimation = keyframes`
+  from {opacity: 0;}
+  to {opacity: 1;}
+`;
+
+const fadeOutAnimation = keyframes`
+  from {opacity: 1;}
+  to {opacity: 0;}
+`;
 
 const SelectButton = styled('button')<SelectButtonProps>(
   {
@@ -106,6 +117,7 @@ const SelectMenuIcon = styled(SystemIcon)({
 
 const SelectMenu = styled('ul')<SelectMenuProps>(
   {
+    animation: `${fadeInAnimation} ${dismissMenuDuration / 1000}s`,
     backgroundColor: colors.frenchVanilla100,
     border: `2px solid ${inputColors.focusBorder}`,
     borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
@@ -114,7 +126,6 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
     listStyle: 'none',
     margin: 0,
     minWidth: 280,
-    opacity: 1,
     padding: 0,
     position: 'absolute',
     // Offset the menu by the height of the select (spacingNumbers.xl)
@@ -125,7 +136,10 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
   },
   ({isDismissing}) =>
     isDismissing && {
-      opacity: 0,
+      animation: `${fadeOutAnimation} ${dismissMenuDuration / 1000}s`,
+      // Required to prevent the occasional menu flash when the menu
+      // fades out
+      animationFillMode: 'forwards',
     },
   ({grow}) =>
     grow && {
@@ -184,8 +198,9 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
 
 export default class Select extends React.Component<SelectProps, SelectState> {
   private inputRef = React.createRef<HTMLInputElement>();
-  private persistMenuTimer: ReturnType<typeof setTimeout>;
   private removeMenuTimer: ReturnType<typeof setTimeout>;
+  private selectionPersistMenuTimer: ReturnType<typeof setTimeout>;
+  private selectionCompletionTimer: ReturnType<typeof setTimeout>;
 
   static ErrorType = ErrorType;
 
@@ -209,9 +224,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return childrenArray.findIndex(child => child.props.value === value);
   };
 
-  // Toggle the menu on/off. note this show/hides the menu
-  // immediately -- if you wish to animate the menu out, call
-  // animateOutMenu
   private toggleMenu = (show: boolean): void => {
     if (show) {
       this.setState({
@@ -219,20 +231,16 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         showingMenu: true,
       });
     } else {
-      this.setState({
-        focusedOptionIndex: null,
-        showingMenu: false,
-      });
+      this.setState({isMenuDismissing: true});
+
+      this.removeMenuTimer = setTimeout(() => {
+        this.setState({
+          focusedOptionIndex: null,
+          isMenuDismissing: false,
+          showingMenu: false,
+        });
+      }, dismissMenuDuration);
     }
-  };
-
-  private animateOutMenu = (): void => {
-    this.setState({isMenuDismissing: true});
-
-    this.removeMenuTimer = setTimeout(() => {
-      this.setState({isMenuDismissing: false});
-      this.toggleMenu(false);
-    }, dismissMenuDuration);
   };
 
   // Menu may not be interacted with while it is dismissing, or
@@ -272,11 +280,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   componentWillUnmount() {
     // Clear timers
-    if (this.persistMenuTimer) {
-      clearTimeout(this.persistMenuTimer);
-    }
     if (this.removeMenuTimer) {
       clearTimeout(this.removeMenuTimer);
+    }
+    if (this.selectionPersistMenuTimer) {
+      clearTimeout(this.selectionPersistMenuTimer);
+    }
+    if (this.selectionCompletionTimer) {
+      clearTimeout(this.selectionCompletionTimer);
     }
   }
 
@@ -300,28 +311,23 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // see: https://zellwk.com/blog/inconsistent-button-behavior/)
     event.currentTarget.focus();
 
-    if (this.state.showingMenu) {
-      this.animateOutMenu();
-    } else {
-      this.toggleMenu(true);
-    }
+    this.toggleMenu(!this.state.showingMenu);
   };
 
   handleSelectBlur = (event: React.FocusEvent): void => {
-    this.animateOutMenu();
+    this.toggleMenu(false);
   };
 
   handleOptionClick = (optionProps: SelectOptionProps): void => {
-    // abort immediately if:
+    // Abort immediately if:
     // * the menu is a non-interactive state
     // * a disabled option was clicked (we ignore these clicks)
     if (!this.isMenuInteractive() || optionProps.disabled) {
       return;
     }
 
-    // time 0
-    // offer visual feedback briefly before beginning the
-    // menu dismissal animation;
+    // Time: 0
+    // Offer visual feedback briefly before hiding the menu
     const index = this.indexByValue(optionProps.value);
     this.setState({
       focusedOptionIndex: null,
@@ -329,28 +335,23 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       selectedOptionIndex: index,
     });
 
-    // time dismissMenuDelay
-    // begin the menu dismissal animation
-    this.persistMenuTimer = setTimeout(() => {
-      this.setState({
-        isMenuDismissing: true,
-      });
+    // Time: dismissMenuDelay
+    // Hide the menu
+    this.selectionPersistMenuTimer = setTimeout(() => {
+      this.toggleMenu(false);
     }, dismissMenuDelay);
 
-    // time dismissMenuDelay + dismissMenuDuration
-    // complete the menu dismissal animation, update the select
-    // label, reset justSelected state, and hide the menu
-    this.removeMenuTimer = setTimeout(() => {
+    // Time: dismissMenuDelay + dismissMenuDuration
+    // Update the select label and reset justSelected state
+    this.selectionCompletionTimer = setTimeout(() => {
       this.setState({
-        isMenuDismissing: false,
         justSelectedOptionIndex: null,
         label: optionProps.label,
       });
-      this.toggleMenu(false);
     }, dismissMenuDelay + dismissMenuDuration);
 
-    // code inspired by: https://stackoverflow.com/a/46012210
-    // we want to programatically change the value of the
+    // Code inspired by: https://stackoverflow.com/a/46012210
+    // We want to programatically change the value of the
     // SelectInput in such a way that triggers its change event
     if (this.inputRef && this.inputRef.current) {
       const nativeInputValue = Object.getOwnPropertyDescriptor(
@@ -363,7 +364,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
       let event: Event;
       if (typeof Event === 'function') {
-        // modern browsers
+        // Modern browsers
         event = new Event('input', {bubbles: true});
       } else {
         // IE 11
