@@ -27,8 +27,8 @@ export interface SelectProps
 
 export interface SelectState {
   focusedOptionIndex: number | null;
+  isMenuHidden: boolean;
   isMenuHiding: boolean;
-  isMenuVisible: boolean;
   justSelectedOptionIndex: number | null;
   label: string;
   selectedOptionIndex: number;
@@ -128,7 +128,7 @@ const SelectMenuIcon = styled(SystemIcon)({
 });
 
 const SelectMenu = styled('ul')<
-  Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHiding'>
+  Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHidden' | 'isMenuHiding'>
 >(
   {
     animationName: fadeInAnimation,
@@ -154,6 +154,10 @@ const SelectMenu = styled('ul')<
     // transition: `${toggleMenuAnimationDuration / 1000}s opacity`,
     zIndex: 1,
   },
+  ({isMenuHidden}) =>
+    isMenuHidden && {
+      display: 'none',
+    },
   ({isMenuHiding}) =>
     isMenuHiding && {
       animationName: fadeOutAnimation,
@@ -218,8 +222,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   state: Readonly<SelectState> = {
     focusedOptionIndex: null,
+    isMenuHidden: true,
     isMenuHiding: false,
-    isMenuVisible: false,
     justSelectedOptionIndex: null,
     label: '',
     selectedOptionIndex: 0,
@@ -236,7 +240,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (show) {
       this.setState({
         focusedOptionIndex: this.state.selectedOptionIndex,
-        isMenuVisible: true,
+        isMenuHidden: false,
       });
     } else {
       this.setState({isMenuHiding: true});
@@ -245,7 +249,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         this.setState({
           focusedOptionIndex: null,
           isMenuHiding: false,
-          isMenuVisible: false,
+          isMenuHidden: true,
         });
       }, toggleMenuAnimationDuration);
     }
@@ -319,7 +323,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // see: https://zellwk.com/blog/inconsistent-button-behavior/)
     event.currentTarget.focus();
 
-    this.toggleMenu(!this.state.isMenuVisible);
+    this.toggleMenu(this.state.isMenuHidden);
   };
 
   handleSelectBlur = (event: React.FocusEvent): void => {
@@ -397,7 +401,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     switch (event.key) {
       case 'ArrowUp':
       case 'ArrowDown':
-        if (!this.state.isMenuVisible) {
+        if (this.state.isMenuHidden) {
           this.toggleMenu(true);
         } else if (this.state.focusedOptionIndex !== null) {
           const direction = event.key === 'ArrowUp' ? -1 : 1;
@@ -461,7 +465,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // TODO: Standardize on prop spread location (see #150)
     const {error, disabled, grow, children, name, onChange, value, ...elemProps} = this.props;
 
-    const {label, isMenuHiding} = this.state;
+    const {isMenuHidden, isMenuHiding, label} = this.state;
     // console.log('in Select render with label', label);
 
     return (
@@ -485,11 +489,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           type="text"
           value={value}
         />
-        {this.state.isMenuVisible && (
-          <SelectMenu error={error} grow={grow} isMenuHiding={isMenuHiding}>
-            {React.Children.map(children, this.renderChildren)}
-          </SelectMenu>
-        )}
+        <SelectMenu
+          error={error}
+          grow={grow}
+          isMenuHidden={isMenuHidden}
+          isMenuHiding={isMenuHiding}
+        >
+          {React.Children.map(children, this.renderChildren)}
+        </SelectMenu>
         <SelectMenuIcon
           icon={caretDownSmallIcon}
           color={disabled ? colors.licorice100 : colors.licorice200}
