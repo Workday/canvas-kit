@@ -9,7 +9,7 @@ describe('FormField', () => {
   });
 
   describe('when rendered', () => {
-    it('should render an input with a label', () => {
+    it('should render a label with text Label', () => {
       const label = 'Label';
       const {container} = render(
         <FormField label={label}>
@@ -29,36 +29,35 @@ describe('FormField', () => {
         </FormField>
       );
 
-      expect(container.querySelector('p').innerHTML).toBe('Helpful text goes here.');
+      expect(container.querySelector('p')).toContainHTML('Helpful text goes here.');
     });
   });
 
   describe('when rendered as required', () => {
     it('should add a required element to the label to indicate that it is required', () => {
       const label = 'Label';
-      const {container} = render(
+      const {getByText} = render(
         <FormField label={label} required={true}>
           <input type="text" />
         </FormField>
       );
 
-      expect(container.querySelector('label')).toContainHTML('abbr');
+      expect(getByText('*')).toHaveAttribute('title', 'required');
     });
   });
 
   describe('when rendered with useFieldset set to true', () => {
     it('should render the FormField using a fieldset and a legend instead of a div and a label', () => {
       const label = 'Label';
-      const {getByTestId} = render(
-        <div data-testid="myForm">
-          <FormField useFieldset={true} label={label} required={true}>
-            <input type="text" />
-          </FormField>
-        </div>
+      const {container} = render(
+        <FormField useFieldset={true} label={label} required={true}>
+          <input type="text" />
+        </FormField>
       );
 
-      expect(getByTestId('myForm')).toContainHTML('fieldset');
-      expect(getByTestId('myForm')).toContainHTML('legend');
+      const fieldset = container.querySelector('fieldset');
+      expect(container).toContainElement(fieldset);
+      expect(container).toContainHTML('legend');
     });
   });
 
@@ -72,7 +71,7 @@ describe('FormField', () => {
         </FormField>
       );
 
-      expect(container.querySelector('div').getAttribute('data-propspread')).toBe('test');
+      expect(container.querySelector('div')).toHaveAttribute('data-propspread', 'test');
     });
   });
 });
