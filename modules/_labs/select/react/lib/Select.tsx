@@ -25,15 +25,6 @@ export interface SelectProps
   value?: string;
 }
 
-interface SelectButtonProps extends GrowthBehavior, React.ButtonHTMLAttributes<HTMLButtonElement> {
-  error?: ErrorType;
-}
-
-interface SelectMenuProps extends GrowthBehavior {
-  error?: ErrorType;
-  isHiding: boolean;
-}
-
 export interface SelectState {
   focusedOptionIndex: number | null;
   isMenuHiding: boolean;
@@ -56,7 +47,7 @@ const fadeOutAnimation = keyframes`
   to {opacity: 0;}
 `;
 
-const SelectButton = styled('button')<SelectButtonProps>(
+const SelectButton = styled('button')<Pick<SelectProps, 'error' | 'grow'>>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -115,7 +106,9 @@ const SelectMenuIcon = styled(SystemIcon)({
   },
 });
 
-const SelectMenu = styled('ul')<SelectMenuProps>(
+const SelectMenu = styled('ul')<
+  Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHiding'>
+>(
   {
     animationName: fadeInAnimation,
     animationDuration: `${toggleMenuAnimationDuration / 1000}s`,
@@ -140,8 +133,8 @@ const SelectMenu = styled('ul')<SelectMenuProps>(
     // transition: `${toggleMenuAnimationDuration / 1000}s opacity`,
     zIndex: 1,
   },
-  ({isHiding}) =>
-    isHiding && {
+  ({isMenuHiding}) =>
+    isMenuHiding && {
       animationName: fadeOutAnimation,
     },
   ({grow}) =>
@@ -480,7 +473,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           value={value}
         />
         {this.state.isMenuVisible && (
-          <SelectMenu error={error} grow={grow} isHiding={isMenuHiding}>
+          <SelectMenu error={error} grow={grow} isMenuHiding={isMenuHiding}>
             {React.Children.map(children, this.renderChildren)}
           </SelectMenu>
         )}
