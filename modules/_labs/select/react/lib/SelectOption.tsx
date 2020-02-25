@@ -2,7 +2,7 @@ import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 import {keyframes} from '@emotion/core';
-import {borderRadius, colors, commonColors, type, typeColors} from '@workday/canvas-kit-react-core';
+import {colors, commonColors, type, typeColors} from '@workday/canvas-kit-react-core';
 import {selectionPersistMenuDuration} from './Select';
 
 export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
@@ -37,9 +37,6 @@ const Option = styled('li')<SelectOptionProps>(
     cursor: 'default',
     '&:first-of-type': {
       borderTop: `1px solid ${colors.soap400}`,
-    },
-    '&:last-child': {
-      borderRadius: `0 0 ${borderRadius.s} ${borderRadius.s}`,
     },
   },
   ({disabled, focused, selected, suppressed}) => {
