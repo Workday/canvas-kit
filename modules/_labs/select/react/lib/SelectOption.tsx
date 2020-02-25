@@ -86,7 +86,7 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
     const {value, label, disabled, ...elemProps} = this.props;
 
     return (
-      <Option tabIndex={-1} value={value} label={label} disabled={disabled} {...elemProps}>
+      <Option value={value} label={label} disabled={disabled} {...elemProps}>
         {label}
       </Option>
     );
