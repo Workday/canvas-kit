@@ -455,12 +455,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
         <SelectButton
+          aria-haspopup="listbox"
           disabled={disabled}
-          grow={grow}
           error={error}
+          grow={grow}
           onBlur={this.handleSelectBlur}
-          onMouseDown={this.handleSelectMouseDown}
           onKeyDown={this.handleKeyboardShortcuts}
+          onMouseDown={this.handleSelectMouseDown}
           {...elemProps}
         >
           {label}
