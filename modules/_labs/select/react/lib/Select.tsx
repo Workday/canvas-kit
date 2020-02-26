@@ -323,7 +323,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // see: https://zellwk.com/blog/inconsistent-button-behavior/)
     event.currentTarget.focus();
 
-    this.toggleMenu(this.state.isMenuHidden);
+    // Only toggle the menu if the the left button was clicked
+    // (ignore right-clicks)
+    if (event.nativeEvent.which === 1) {
+      this.toggleMenu(this.state.isMenuHidden);
+    }
   };
 
   handleSelectBlur = (event: React.FocusEvent): void => {
