@@ -52,7 +52,7 @@ export enum TextAreaResizeDirection {
 }
 
 const TextAreaContainer = styled('textarea')<TextAreaProps>(
-  {
+  ({theme, error}) => ({
     ...type.body,
     border: `1px solid ${inputColors.border}`,
     display: 'block',
@@ -74,8 +74,8 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
       borderColor: inputColors.hoverBorder,
     },
     '&:focus:not([disabled])': {
-      borderColor: inputColors.focusBorder,
-      boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
+      borderColor: theme.palette.common.focusOutline,
+      boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
       outline: 'none',
     },
     '&:disabled': {
@@ -86,10 +86,9 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
         color: inputColors.disabled.text,
       },
     },
-  },
-  ({error}) => ({
-    ...errorRing(error),
+    ...errorRing(error, theme),
   }),
+
   ({resize, grow}) => ({
     width: grow ? '100%' : undefined,
     resize: grow ? TextAreaResizeDirection.Vertical : resize,

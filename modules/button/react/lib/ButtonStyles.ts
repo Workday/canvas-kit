@@ -142,7 +142,8 @@ export const deprecatedButtonStyles: ButtonGenericStyle = {
     position: 'relative',
     cursor: 'pointer',
     outline: 'none',
-    transition: 'all 120ms linear',
+    transition:
+      'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
     '&:hover:active': {transitionDuration: '40ms'}, // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
     '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
   },
