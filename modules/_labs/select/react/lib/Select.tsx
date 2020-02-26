@@ -13,6 +13,7 @@ import {
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {SelectOptionProps} from './SelectOption';
+import uuid from 'uuid/v4';
 
 export interface SelectProps
   extends Themeable,
@@ -220,6 +221,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     disabled: false,
   };
 
+  private optionIds: string[];
+
   state: Readonly<SelectState> = {
     focusedOptionIndex: null,
     isMenuHidden: true,
@@ -227,6 +230,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     justSelectedOptionIndex: null,
     label: '',
     selectedOptionIndex: 0,
+  };
+
+  private setOptionIds = (): void => {
+    this.optionIds = React.Children.map(
+      this.props.children,
+      (child: React.ReactElement<SelectOptionProps>) => child.props.id || uuid()
+    );
   };
 
   private indexByValue = (value: string): number => {
@@ -261,6 +271,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private isMenuInteractive = (): boolean => {
     return !this.state.isMenuHiding && this.state.justSelectedOptionIndex === null;
   };
+
+  constructor(props: SelectProps) {
+    super(props);
+    this.setOptionIds();
+  }
 
   componentDidMount() {
     const {children, value} = this.props;
@@ -342,9 +357,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       return;
     }
 
+    const index = this.indexByValue(optionProps.value);
+
     // Time: 0
     // Offer visual feedback briefly before hiding the menu
-    const index = this.indexByValue(optionProps.value);
     this.setState({
       focusedOptionIndex: null,
       justSelectedOptionIndex: index,
@@ -447,6 +463,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return React.cloneElement(child, {
       error: this.props.error,
       focused: this.state.focusedOptionIndex === index,
+      id: this.optionIds[index],
       justSelected: this.state.justSelectedOptionIndex === index,
 
       // We must use mousedown here instead of click. If we use

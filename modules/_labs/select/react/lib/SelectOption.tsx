@@ -9,6 +9,7 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
   disabled: boolean;
   error?: ErrorType;
   focused?: boolean;
+  id?: string;
   justSelected?: boolean;
   label: string;
   selected?: boolean;
@@ -80,12 +81,13 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
   };
 
   public render() {
-    const {disabled, label, selected, value, ...elemProps} = this.props;
+    const {disabled, id, label, selected, value, ...elemProps} = this.props;
 
     return (
       <Option
         aria-selected={selected === true ? 'true' : undefined}
         disabled={disabled}
+        id={id}
         label={label}
         role="option"
         value={value}
