@@ -80,10 +80,17 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
   };
 
   public render() {
-    const {value, label, disabled, ...elemProps} = this.props;
+    const {disabled, label, selected, value, ...elemProps} = this.props;
 
     return (
-      <Option value={value} label={label} disabled={disabled} {...elemProps}>
+      <Option
+        aria-selected={selected === true ? 'true' : undefined}
+        disabled={disabled}
+        label={label}
+        role="option"
+        value={value}
+        {...elemProps}
+      >
         {label}
       </Option>
     );

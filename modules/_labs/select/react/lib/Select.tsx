@@ -471,6 +471,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
         <SelectButton
+          aria-expanded={!isMenuHidden ? 'true' : undefined}
           aria-haspopup="listbox"
           disabled={disabled}
           error={error}
@@ -494,6 +495,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           grow={grow}
           isMenuHidden={isMenuHidden}
           isMenuHiding={isMenuHiding}
+          role="listbox"
         >
           {React.Children.map(children, this.renderChildren)}
         </SelectMenu>
