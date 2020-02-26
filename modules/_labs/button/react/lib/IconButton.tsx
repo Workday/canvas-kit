@@ -76,7 +76,6 @@ const IconButton = (props: IconButtonProps) => {
 
   return (
     <ButtonContainer
-      // eslint-disable-next-line no-use-before-define
       colors={getIconButtonColors(variant, toggled)}
       size={size}
       ref={buttonRef}
