@@ -48,6 +48,15 @@ const ButtonStates = () => (
           dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
         },
         props => {
+          if (props.size === Button.Size.Small && (props.icon || props.dataLabel)) {
+            return false;
+          }
+          if (props.variant === Button.Variant.Highlight && !props.icon) {
+            return false;
+          }
+          if (props.variant === Button.Variant.Delete && (props.icon || props.dataLabel)) {
+            return false;
+          }
           return true;
         }
       )}
@@ -83,29 +92,16 @@ const ButtonStates = () => (
 const DropdownButtonStates = () => (
   <StaticStates>
     <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          variant: [
-            {value: DropdownButton.Variant.Primary, label: 'Primary'},
-            {value: DropdownButton.Variant.Secondary, label: 'Secondary'},
-            {value: DropdownButton.Variant.Highlight, label: 'Highlight'},
-            {value: DropdownButton.Variant.OutlinePrimary, label: 'Outline Primary'},
-            {value: DropdownButton.Variant.OutlineSecondary, label: 'Outline Secondary'},
-            {value: DropdownButton.Variant.OutlineInverse, label: 'Outline Inverse'},
-            {value: DropdownButton.Variant.Delete, label: 'Delete'},
-          ],
-          size: [
-            {value: DropdownButton.Size.Small, label: 'Small'},
-            {value: DropdownButton.Size.Medium, label: 'Medium'},
-            {value: DropdownButton.Size.Large, label: 'Large'},
-          ],
-          icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-          dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
-        },
-        props => {
-          return true;
-        }
-      )}
+      rowProps={permutateProps({
+        variant: [
+          {value: DropdownButton.Variant.Primary, label: 'Primary'},
+          {value: DropdownButton.Variant.Secondary, label: 'Secondary'},
+        ],
+        size: [
+          {value: DropdownButton.Size.Medium, label: 'Medium'},
+          {value: DropdownButton.Size.Large, label: 'Large'},
+        ],
+      })}
       columnProps={permutateProps(
         {
           className: [
@@ -148,11 +144,9 @@ const TextButtonStates = () => (
           ],
           size: [
             {value: TextButton.Size.Small, label: 'Small'},
-            {value: TextButton.Size.Medium, label: 'Medium'},
             {value: TextButton.Size.Large, label: 'Large'},
           ],
           icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-          dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
         },
         props => {
           return true;
