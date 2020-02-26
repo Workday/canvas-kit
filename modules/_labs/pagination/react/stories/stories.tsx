@@ -17,7 +17,6 @@ const getAriaLabels = () => ({
   paginationContainerAriaLabel: text('paginationContainerAriaLabel', 'Pagination'),
   previousPageAriaLabel: text('previousPageAriaLabel', 'Previous Page'),
   nextPageAriaLabel: text('nextPageAriaLabel', 'Next Page'),
-  navigationEllipseAriaLabel: text('navigationEllipseAriaLabel', 'Navigation Ellipse'),
 });
 
 const DefaultPaginationExample = () => {
@@ -25,7 +24,9 @@ const DefaultPaginationExample = () => {
 
   return (
     <Wrapper>
-      <h4>Current Page: {currentPage}</h4>
+      <h4>
+        Current Page: <span data-testid="pageNumber">{currentPage}</span>
+      </h4>
       <Pagination
         key="1"
         total={number('total', 50) || 50}
@@ -56,7 +57,7 @@ const WithCustomLabel = () => {
         showLabel
         showGoTo={boolean('showGoTo', false)}
         goToLabel={text('goToLabel', '')}
-        customLabel={(from: number, to: number, items: number, item: string) =>
+        customLabel={(from: number, to: number, items: number) =>
           `${from.toLocaleString()}\u2013${to.toLocaleString()} of ${items.toLocaleString()} ${
             items > 1 ? 'candidates' : 'candidate'
           }`
@@ -89,6 +90,9 @@ const WithGoToExample = () => {
 };
 
 storiesOf('Labs/Pagination', module)
+  .addParameters({
+    component: Pagination,
+  })
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -106,6 +110,12 @@ storiesOf('Labs/Pagination', module)
       </div>
     </div>
   ))
+  .addParameters({
+    chromatic: {
+      disable: false,
+      viewports: [500, 1000],
+    },
+  })
   .add('With Custom Label', () => (
     <div className="story">
       <div>

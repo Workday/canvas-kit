@@ -1,248 +1,123 @@
-import {render} from '@testing-library/react';
-import _ from 'lodash';
-import React from 'react';
+import {getPages} from '../lib/Pages';
 
-import Pagination from '..';
+describe('Pages', () => {
+  describe('Desktop', () => {
+    describe('when current page is 1', () => {
+      it('should handle one page', () => {
+        expect(getPages(1, 1, false)).toEqual([[1], []]);
+      });
 
-describe('Pagination Pages', () => {
-  window.resizeTo = function resizeTo(width: number, height: number) {
-    Object.assign(this, {
-      innerWidth: width,
-      innerHeight: height,
-      outerWidth: width,
-      outerHeight: height,
-    }).dispatchEvent(new this.Event('resize'));
-  };
+      it('should handle 2 pages', () => {
+        expect(getPages(2, 1, false)).toEqual([[1, 2], []]);
+      });
 
-  const originalWidth = window.innerWidth;
+      it('should handle 3 pages', () => {
+        expect(getPages(3, 1, false)).toEqual([[1, 2, 3], []]);
+      });
 
-  afterAll(() => {
-    window.resizeTo(originalWidth, window.innerHeight);
-  });
+      it('should handle 4 pages', () => {
+        expect(getPages(4, 1, false)).toEqual([[1, 2, 3, 4], []]);
+      });
 
-  const PaginationComponent = (
-    total: number,
-    pageSize: number,
-    currentPage: number,
-    setCurrentPage: (p: number) => void,
-    pageButtonAriaLabel?: (page: number, active: boolean) => string
-  ) => (
-    <Pagination
-      total={total}
-      pageSize={pageSize}
-      currentPage={currentPage}
-      onPageChange={setCurrentPage ? p => setCurrentPage(p) : p => null}
-      pageButtonAriaLabel={pageButtonAriaLabel}
-    />
-  );
+      it('should handle 5 pages', () => {
+        expect(getPages(5, 1, false)).toEqual([[1, 2, 3, 4, 5], []]);
+      });
 
-  const pageButtonAriaLabel = (page: number, active: boolean) =>
-    `paginationButton${active ? 'Active' : page}`;
+      it('should handle 6 pages', () => {
+        expect(getPages(6, 1, false)).toEqual([[1, 2, 3, 4, 5, 6], []]);
+      });
 
-  _.range(1, 10).forEach(page => {
-    it(`Clicking page ${page + 1} brings you to page ${page}`, () => {
-      let currentPage = page;
+      it('should handle 7 pages', () => {
+        expect(getPages(7, 1, false)).toEqual([[1, 2, 3, 4, 5, 6, 7], []]);
+      });
 
-      const setCurrentPage = (page: number) => (currentPage = page);
-      const {getByLabelText} = render(
-        PaginationComponent(10, 1, currentPage, setCurrentPage, pageButtonAriaLabel)
-      );
+      it('should split after 8 pages', () => {
+        expect(getPages(8, 1, false)).toEqual([[1, 2, 3, 4, 5], [8]]);
+      });
+    });
 
-      getByLabelText(`paginationButton${page + 1}`).click();
-      expect(currentPage).toEqual(page + 1);
+    describe('when page count is 10', () => {
+      it('should show first 5 pages when current page is 1', () => {
+        expect(getPages(10, 1, false)).toEqual([[1, 2, 3, 4, 5], [10]]);
+      });
+
+      it('should show first 5 pages when current page is 2', () => {
+        expect(getPages(10, 2, false)).toEqual([[1, 2, 3, 4, 5], [10]]);
+      });
+
+      it('should show first 5 pages when current page is 3', () => {
+        expect(getPages(10, 3, false)).toEqual([[1, 2, 3, 4, 5], [10]]);
+      });
+
+      it('should keep 4th page centered in available pages on left side', () => {
+        expect(getPages(10, 4, false)).toEqual([[2, 3, 4, 5, 6], [10]]);
+      });
+
+      it('should keep 5th page centered in available pages on left side', () => {
+        expect(getPages(10, 5, false)).toEqual([[3, 4, 5, 6, 7], [10]]);
+      });
+
+      it('should keep 6th page centered in available pages on left side', () => {
+        expect(getPages(10, 6, false)).toEqual([[4, 5, 6, 7, 8], [10]]);
+      });
+
+      it('should show first page and the last 5 numbers when the current page is 7 (within 4 pages of the last page)', () => {
+        expect(getPages(10, 7, false)).toEqual([[1], [6, 7, 8, 9, 10]]);
+      });
+
+      it('should show first page and the last 5 numbers when the current page is 8 (within 4 pages of the last page)', () => {
+        expect(getPages(10, 8, false)).toEqual([[1], [6, 7, 8, 9, 10]]);
+      });
+
+      it('should show first page and the last 5 numbers when the current page is 8 (within 4 pages of the last page)', () => {
+        expect(getPages(10, 8, false)).toEqual([[1], [6, 7, 8, 9, 10]]);
+      });
+
+      it('should show first page and the last 5 numbers when the current page is 9 (within 4 pages of the last page)', () => {
+        expect(getPages(10, 9, false)).toEqual([[1], [6, 7, 8, 9, 10]]);
+      });
+
+      it('should show first page and the last 5 numbers when the current page is 10 (within 4 pages of the last page)', () => {
+        expect(getPages(10, 10, false)).toEqual([[1], [6, 7, 8, 9, 10]]);
+      });
     });
   });
 
-  it('Clicking the first page on the last page brings you to first page', () => {
-    let currentPage = 10;
+  describe('mobile', () => {
+    describe('when current page is 1', () => {
+      it('should show all pages when page count is 1', () => {
+        expect(getPages(1, 1, true)).toEqual([[1], []]);
+      });
 
-    const setCurrentPage = (page: number) => (currentPage = page);
-    const {getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, setCurrentPage, pageButtonAriaLabel)
-    );
+      it('should show all pages when page count is 2', () => {
+        expect(getPages(2, 1, true)).toEqual([[1, 2], []]);
+      });
 
-    getByLabelText('paginationButton1').click();
-    expect(currentPage).toEqual(1);
-  });
-
-  it('Clicking the last page on the first page brings you to last page', () => {
-    let currentPage = 1;
-
-    const setCurrentPage = (page: number) => (currentPage = page);
-    const {getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, setCurrentPage, pageButtonAriaLabel)
-    );
-
-    getByLabelText('paginationButton10').click();
-    expect(currentPage).toEqual(10);
-  });
-
-  _.range(2, 6).forEach(page => {
-    it(`Test pagination with ${page} pages`, () => {
-      const currentPage = page;
-      const pageSize = 10;
-
-      const {queryByLabelText, getByLabelText} = render(
-        PaginationComponent(page * pageSize, pageSize, currentPage, () => null, pageButtonAriaLabel)
-      );
-
-      expect(getByLabelText('paginationButtonActive'));
-      for (let i = 1; i < page; i++) {
-        expect(getByLabelText(`paginationButton${i}`));
-      }
-      expect(queryByLabelText(`paginationButton${page}`)).toBeNull();
+      it('should show all pages when page count is 3', () => {
+        expect(getPages(3, 1, true)).toEqual([[1, 2, 3], []]);
+      });
     });
-  });
 
-  it('Test pagination with 1 page', () => {
-    const currentPage = 1;
+    describe('when page count is 5', () => {
+      it('should show first 5 pages when current page is 1', () => {
+        expect(getPages(5, 1, true)).toEqual([[1], [5]]);
+      });
 
-    const {queryAllByLabelText, queryByLabelText} = render(
-      PaginationComponent(1, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
+      it('should show first 5 pages when current page is 2', () => {
+        expect(getPages(5, 2, true)).toEqual([[2], [5]]);
+      });
 
-    expect(queryByLabelText(`paginationButton1`)).toBeNull();
-    const allActive = queryAllByLabelText('paginationButtonActive');
-    expect(allActive).toHaveLength(1);
-  });
+      it('should show first 5 pages when current page is 3', () => {
+        expect(getPages(5, 3, true)).toEqual([[3], [5]]);
+      });
 
-  it('Last page should be visible on first page', () => {
-    const currentPage = 1;
+      it('should keep 4th page centered in available pages on left side', () => {
+        expect(getPages(5, 4, true)).toEqual([[3, 4, 5], []]);
+      });
 
-    const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    expect(getByLabelText('paginationButton10'));
-    expect(queryByLabelText('paginationButton1')).toBeNull();
-  });
-
-  it('Last page should be visible on middle page', () => {
-    const currentPage = 50;
-
-    const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    expect(getByLabelText('paginationButton100'));
-    expect(queryByLabelText('paginationButton1')).toBeNull();
-  });
-
-  it('First page should be visible on last page', () => {
-    const currentPage = 10;
-
-    const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    expect(getByLabelText('paginationButton1'));
-    expect(queryByLabelText('paginationButton10')).toBeNull();
-  });
-
-  it('First page should be visible 97/100 page', () => {
-    const currentPage = 97;
-
-    const {getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    expect(getByLabelText('paginationButton1'));
-  });
-
-  it('First page should not be visible 96/100 page', () => {
-    const currentPage = 96;
-
-    const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    expect(getByLabelText('paginationButton100'));
-    expect(queryByLabelText('paginationButton1')).toBeNull();
-  });
-
-  it('First page should not be visible 4/100 page', () => {
-    const currentPage = 4;
-
-    const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    expect(getByLabelText('paginationButton100'));
-    expect(queryByLabelText('paginationButton1')).toBeNull();
-  });
-
-  it('First page should be visible 3/100 page', () => {
-    const currentPage = 3;
-
-    const {getByLabelText} = render(
-      PaginationComponent(100, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    expect(getByLabelText('paginationButton1'));
-    expect(getByLabelText('paginationButton100'));
-  });
-
-  it('Numbers should not shift when three selected', () => {
-    const currentPage = 3;
-
-    const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    for (let i = 1; i < 6; i++) {
-      if (i !== 3) {
-        expect(getByLabelText(`paginationButton${i}`));
-      }
-    }
-    expect(queryByLabelText('paginationButton3')).toBeNull();
-  });
-
-  it('Numbers should shift when middle number clicked', () => {
-    const currentPage = 4;
-
-    const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    expect(queryByLabelText('paginationButton1')).toBeNull();
-    for (let i = 2; i < 7; i++) {
-      if (i !== 4) {
-        expect(getByLabelText(`paginationButton${i}`));
-      }
-    }
-    expect(queryByLabelText('paginationButton4')).toBeNull();
-  });
-
-  it('Only two numbers visible on mobile', () => {
-    const currentPage = 8;
-
-    window.resizeTo(450, window.innerHeight);
-    const {queryByLabelText, getByLabelText} = render(
-      PaginationComponent(10, 1, currentPage, () => null, pageButtonAriaLabel)
-    );
-
-    for (let i = 1; i < 10; i++) {
-      if (i !== 4) {
-        expect(queryByLabelText(`paginationButton${i}`)).toBeNull();
-      }
-    }
-    expect(getByLabelText('paginationButton10'));
-  });
-
-  _.range(9, 11).forEach(page => {
-    it(`Three numbers visible on last page - currentPage of ${page} - and first page not visible on mobile`, () => {
-      window.resizeTo(450, window.innerHeight);
-
-      const {queryByLabelText, getByLabelText} = render(
-        PaginationComponent(10, 1, page, () => null, pageButtonAriaLabel)
-      );
-
-      for (let i = 8; i < 10; i++) {
-        if (i !== page) {
-          expect(getByLabelText(`paginationButton${i}`));
-        }
-      }
-      expect(queryByLabelText('paginationButton1')).toBeNull();
+      it('should keep 5th page centered in available pages on left side', () => {
+        expect(getPages(5, 5, true)).toEqual([[3, 4, 5], []]);
+      });
     });
   });
 });

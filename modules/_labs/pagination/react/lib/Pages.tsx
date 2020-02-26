@@ -7,19 +7,11 @@ import _ from 'lodash';
 import React from 'react';
 
 interface PagesProps {
-  numPages: number;
-  currentPage: number;
+  total: number;
+  current: number;
   onPageClick: (page: number) => void;
-  mobile: boolean;
-  navigationEllipseAriaLabel: string;
+  isMobile: boolean;
   pageButtonAriaLabel: (page: number, selected: boolean) => string;
-}
-
-interface PaginationButtonProps {
-  page: number;
-  onPageClick: (page: number) => void;
-  active?: boolean;
-  ariaLabel: string;
 }
 
 const noPointerEvents = css({
@@ -34,96 +26,73 @@ const activeStyling = css(noPointerEvents, noTransitions, {
   color: canvas.colors.frenchVanilla100,
 });
 
+/**
+ * Given some information about the page, return a tuple of left and right number
+ * arrays. The left array will be numbers before a split and the right array will
+ * be numbers after the split. An empty right array means there is no split.
+ * @param total Total pages
+ * @param current current page
+ * @param isMobile mobile mode
+ */
+export function getPages(total: number, current: number, isMobile: boolean): [number[], number[]] {
+  const max = isMobile ? 3 : 7; // max pages to be shown at once
+  const maxWithSplit = isMobile ? 2 : 6; // max amount of pages shown if pages are split
+  const padNumber = isMobile ? 0 : 2; // padding pages around active page
+  const showEndThreshold = isMobile ? 1 : 4; // how many pages to last page where first page is show again and last pages are visible
+
+  // show all pages on left side
+  if (total <= max) {
+    return [_.range(1, total + 1), []];
+  }
+
+  // Mobile shows last pages without first page, unlike desktop
+  if (isMobile && current >= total - showEndThreshold) {
+    return [_.range(total - max + 1, total + 1), []];
+  }
+
+  // show padding pages around current page on left and last page on right
+  if (current <= total - showEndThreshold) {
+    const minPage = Math.max(1, current - padNumber);
+    const maxPage = Math.max(maxWithSplit, current + padNumber + 1);
+    return [_.range(minPage, maxPage), [total]];
+  }
+
+  // show first page on left and last pages on the right
+  return [[1], _.range(total - maxWithSplit + padNumber, total + 1)];
+}
+
 const Pages: React.FC<PagesProps> = props => {
-  const {
-    numPages,
-    currentPage,
-    onPageClick,
-    mobile,
-    pageButtonAriaLabel,
-    navigationEllipseAriaLabel,
-  } = props;
+  const {total, current, onPageClick, isMobile, pageButtonAriaLabel} = props;
 
-  let pagesToDisplay = 5;
-  let start = 1;
-
-  if (mobile) {
-    start = currentPage;
-    if (currentPage >= numPages - 1) {
-      start = Math.max(numPages - 2, 1);
-      pagesToDisplay = 3;
-    } else {
-      pagesToDisplay = 1;
-    }
-  } else {
-    const midwayAndMorePages = currentPage > 2 && numPages > pagesToDisplay;
-    if (midwayAndMorePages) {
-      const oneOfLastThreePages = currentPage >= numPages - 3;
-      if (oneOfLastThreePages) {
-        start = numPages - 4;
-      } else {
-        start = currentPage - 2;
-      }
-    }
-  }
-
-  const end = Math.min(start + pagesToDisplay, numPages + 1);
-  const pages = _.range(start, end);
-
-  const less = end === numPages + 1 && numPages > pagesToDisplay && !mobile;
-  const more = end < numPages;
-
-  if (less) {
-    pages.unshift(1);
-  }
-  if (more) {
-    pages.push(numPages);
-  }
-
-  const buttons = pages.map(page => (
-    <PaginationButton
-      onPageClick={(page: number) => onPageClick(page)}
-      page={page}
+  const pageToButton = (page: number) => (
+    <IconButton
       key={page}
-      active={page === currentPage}
-      ariaLabel={pageButtonAriaLabel(page, page === currentPage)}
-    />
-  ));
-
-  const ellipse = (
-    <span
-      css={noPointerEvents}
-      key={'ellipse'}
-      aria-label={navigationEllipseAriaLabel}
-      tabIndex={-1}
-      style={type.small}
+      aria-label={pageButtonAriaLabel(page, page === current)}
+      aria-pressed={undefined}
+      variant={page === current ? IconButton.Variant.SquareFilled : IconButton.Variant.Square}
+      size={IconButton.Size.Small}
+      onClick={_ => onPageClick(page)}
+      toggled={page === current}
+      css={page === current ? activeStyling : noTransitions}
     >
-      ...
-    </span>
+      {page}
+    </IconButton>
   );
 
-  if (less) {
-    buttons.splice(1, 0, ellipse);
-  }
-  if (more) {
-    buttons.splice(buttons.length - 1, 0, ellipse);
-  }
+  const [left, right] = getPages(total, current, isMobile);
+
+  const ellipsis =
+    right.length === 0
+      ? []
+      : [
+          <span css={noPointerEvents} key={'ellipsis'} style={type.small}>
+            ...
+          </span>,
+        ];
+
+  const buttons = [...left.map(pageToButton), ...ellipsis, ...right.map(pageToButton)];
 
   return <React.Fragment>{buttons}</React.Fragment>;
 };
-
-const PaginationButton: React.FC<PaginationButtonProps> = props => (
-  <IconButton
-    aria-label={props.ariaLabel}
-    aria-pressed={undefined}
-    variant={props.active ? IconButton.Variant.SquareFilled : IconButton.Variant.Square}
-    size={IconButton.Size.Small}
-    onClick={_ => props.onPageClick(props.page)}
-    toggled={props.active}
-    css={props.active ? activeStyling : noTransitions}
-  >
-    {props.page}
-  </IconButton>
-);
 
 export default Pages;

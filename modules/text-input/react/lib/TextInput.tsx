@@ -17,9 +17,7 @@ export interface TextInputProps
   inputRef?: React.Ref<HTMLInputElement>;
 }
 
-const Input = styled('input')<
-  Pick<TextInputProps, 'error' | 'grow' | 'width' | 'height' | 'theme'>
->(
+const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 'theme'>>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -56,9 +54,6 @@ const Input = styled('input')<
   ({width}) => ({
     minWidth: width || 280,
     width: width || 280,
-  }),
-  ({height}) => ({
-    height: height || 40,
   }),
   ({grow}) =>
     grow && {

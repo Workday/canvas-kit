@@ -26,8 +26,9 @@ const InputWrapper = styled('form')({
 });
 
 const GoTo: React.FC<GoToProps> = props => {
-  const {onSubmit, max, goToLabel} = props;
+  const {onSubmit, max, goToLabel = 'Go To'} = props;
   const [value, setValue] = React.useState('');
+  const [goToId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
 
   const validatePage = (text: string) => {
     const textAsInteger = parseInt(text, 10);
@@ -40,7 +41,6 @@ const GoTo: React.FC<GoToProps> = props => {
     return textAsInteger;
   };
 
-  const goToId = uuid();
   const formSubmit = (e: any) => {
     e.preventDefault();
     const page = validatePage(value);
@@ -50,7 +50,7 @@ const GoTo: React.FC<GoToProps> = props => {
   };
   return (
     <GoToWrapper>
-      <GoToLabel htmlFor={goToId}>{goToLabel || 'Go To'}</GoToLabel>
+      <GoToLabel htmlFor={goToId}>{goToLabel}</GoToLabel>
       <InputWrapper onSubmit={formSubmit}>
         <TextInput
           width={53}
@@ -60,7 +60,7 @@ const GoTo: React.FC<GoToProps> = props => {
           value={value}
           id={goToId}
           type="number"
-          onChange={(e: any) => {
+          onChange={e => {
             setValue(e.target.value);
           }}
         />

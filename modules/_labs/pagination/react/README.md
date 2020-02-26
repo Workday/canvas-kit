@@ -85,7 +85,7 @@ return (
 
 #### paginationContainerAriaLabel?: string;
 
-> Customizes the aria label for the Pagination Container Div. Default is 'Pagination'.
+> Customizes the aria label for the Pagination container div. Default is 'Pagination'.
 
 #### previousPageAriaLabel?: string;
 
@@ -94,10 +94,6 @@ return (
 #### nextPageAriaLabel?: string;
 
 > Customizes the aria label for the Next Page Arrow. Default is 'Next Page'.
-
-#### navigationEllipseAriaLabel?: string;
-
-> Customizes the aria label for the Navigation Ellipses. Default is 'Navigation Ellipse'.
 
 #### pageButtonAriaLabel?: (page: number, selected: boolean) => string;
 

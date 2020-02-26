@@ -10,19 +10,30 @@ import Pages from './Pages';
 import useIsMobile from './useIsMobile';
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
+  /** The total number of items. */
   total: number;
+  /** The number of items to display per page. */
   pageSize: number;
+  /** The current page being displayed. */
   currentPage: number;
+  /** Dispatch which is invoked when the page is changed. */
   onPageChange: (page: number) => void;
-  showGoTo?: boolean;
-  showLabel?: boolean;
-  customLabel?: (from: number, to: number, items: number, itemLabel: string) => string;
-  goToLabel?: string;
-  paginationContainerAriaLabel?: string;
-  previousPageAriaLabel?: string;
-  nextPageAriaLabel?: string;
-  navigationEllipseAriaLabel?: string;
-  pageButtonAriaLabel?: (page: number, selected: boolean) => string;
+  /** Shows a box adjacent to the pagination bar where a page can be entered and is submitted when 'Enter' key is pressed. */
+  showGoTo: boolean;
+  /** Shows a label below the pagination bar describing the items currently being viewed. */
+  showLabel: boolean;
+  /** A function to build a custom label below the pagination bar. */
+  customLabel: (from: number, to: number, total: number) => string;
+  /** Determines the label next to the Go To box. Only usable while showGoTo is set to true. */
+  goToLabel: string;
+  /** Customizes the aria label for the Pagination container div. */
+  paginationContainerAriaLabel: string;
+  /** Customizes the aria label for the Previous Page Arrow. */
+  previousPageAriaLabel: string;
+  /** Customizes the aria label for the Next Page Arrow. */
+  nextPageAriaLabel: string;
+  /** Customizes each page button. */
+  pageButtonAriaLabel: (page: number, selected: boolean) => string;
 }
 
 const Label = styled('div')({
@@ -48,7 +59,16 @@ const ButtonsContainer = styled('div')({
   },
 });
 
-const Pagination: React.FC<PaginationProps> = props => {
+const defaultCustomLabel: PaginationProps['customLabel'] = (from, to, total) => {
+  const item = `item${total > 1 ? 's' : ''}`;
+
+  return `${from.toLocaleString()}\u2013${to.toLocaleString()} of ${total.toLocaleString()} ${item}`;
+};
+
+const defaultPageButtonAriaLabel: PaginationProps['pageButtonAriaLabel'] = (page, selected) =>
+  `${selected ? 'Selected, ' : ''}Page ${page}`;
+
+const Pagination = (props: PaginationProps) => {
   const {
     total,
     pageSize,
@@ -61,7 +81,6 @@ const Pagination: React.FC<PaginationProps> = props => {
     paginationContainerAriaLabel,
     previousPageAriaLabel,
     nextPageAriaLabel,
-    navigationEllipseAriaLabel,
     pageButtonAriaLabel,
     ...elemProps
   } = props;
@@ -70,43 +89,32 @@ const Pagination: React.FC<PaginationProps> = props => {
 
   const labelFrom = (currentPage - 1) * pageSize + 1;
   const labelTo = currentPage * pageSize >= total ? total : currentPage * pageSize;
-  const labelItems = total;
-  const item = `item${total > 1 ? 's' : ''}`;
 
-  const itemLabel = customLabel
-    ? customLabel(labelFrom, labelTo, labelItems, 'item')
-    : `${labelFrom.toLocaleString()}\u2013${labelTo.toLocaleString()} of ${labelItems.toLocaleString()} ${item}`;
-
-  const mobile = useIsMobile(500);
+  const isMobile = useIsMobile(500);
 
   return (
     <>
-      <Container aria-label={paginationContainerAriaLabel || 'Pagination'} {...elemProps}>
+      <Container aria-label={paginationContainerAriaLabel} {...elemProps}>
         <ButtonsContainer>
           <IconButton
             disabled={currentPage - 1 <= 0}
-            aria-label={previousPageAriaLabel || 'Previous Page'}
+            aria-label={previousPageAriaLabel}
             variant={IconButton.Variant.Square}
             size={IconButton.Size.Small}
             icon={chevronLeftSmallIcon}
             onClick={e => onPageChange(currentPage - 1)}
           />
           <Pages
-            mobile={mobile}
-            numPages={numPages}
-            currentPage={currentPage}
+            isMobile={isMobile}
+            total={numPages}
+            current={currentPage}
             onPageClick={onPageChange}
-            navigationEllipseAriaLabel={navigationEllipseAriaLabel || 'Navigation Ellipse'}
-            pageButtonAriaLabel={
-              pageButtonAriaLabel && typeof pageButtonAriaLabel === 'function'
-                ? pageButtonAriaLabel
-                : (page: number, selected: boolean) => `${selected ? 'Selected, ' : ''}Page ${page}`
-            }
+            pageButtonAriaLabel={pageButtonAriaLabel}
           />
           <IconButton
             disabled={currentPage + 1 > numPages}
             aria-disabled={currentPage + 1 > numPages}
-            aria-label={nextPageAriaLabel || 'Next Page'}
+            aria-label={nextPageAriaLabel}
             variant={IconButton.Variant.Square}
             size={IconButton.Size.Small}
             icon={chevronRightSmallIcon}
@@ -114,10 +122,21 @@ const Pagination: React.FC<PaginationProps> = props => {
           />
         </ButtonsContainer>
         {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} goToLabel={goToLabel} />}
-        {showLabel && <Label>{itemLabel}</Label>}
+        {showLabel && <Label>{customLabel(labelFrom, labelTo, total)}</Label>}
       </Container>
     </>
   );
+};
+
+Pagination.defaultProps = {
+  showGoTo: false,
+  showLabel: false,
+  goToLabel: 'Go To',
+  paginationContainerAriaLabel: 'Pagination',
+  previousPageAriaLabel: 'Previous Page',
+  nextPageAriaLabel: 'Next Page',
+  pageButtonAriaLabel: defaultPageButtonAriaLabel,
+  customLabel: defaultCustomLabel,
 };
 
 export default Pagination;
