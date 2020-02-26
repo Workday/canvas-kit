@@ -252,17 +252,37 @@ const IconButtonStates = () => (
 );
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
-  .addParameters({component: Button})
+  .addParameters({
+    component: Button,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <ButtonStates />);
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Dropdown', module)
-  .addParameters({component: DropdownButton})
+  .addParameters({
+    component: DropdownButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <DropdownButtonStates />);
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Text', module)
-  .addParameters({component: TextButton})
+  .addParameters({
+    component: TextButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <TextButtonStates />);
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Icon Button', module)
-  .addParameters({component: IconButton})
+  .addParameters({
+    component: IconButton,
+    chromatic: {
+      disable: false,
+    },
+  })
   .add('States', () => <IconButtonStates />);
