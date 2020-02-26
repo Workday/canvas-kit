@@ -235,7 +235,7 @@ const SearchInput = styled(TextInput)<
       }
     : {
         maxWidth: grow ? '100%' : maxWidth,
-        minWidth: minWidth,
+        minWidth: '100%',
         paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
         paddingRight: spacing.xl,
         backgroundColor: inputColors.background,
@@ -251,7 +251,6 @@ const SearchInput = styled(TextInput)<
     height: height,
     paddingTop: spacing.xs,
     paddingBottom: spacing.xs,
-    width: '100%',
     '&::-webkit-search-cancel-button': {
       display: 'none',
     },
