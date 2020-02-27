@@ -299,7 +299,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     // ... otherwise, set state to the first option
     const firstOption = childrenArray[0];
-    // console.log('setting firstOption label:', firstOption.props.label);
     this.setState({
       label: firstOption.props.label,
     });
@@ -409,8 +408,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    // console.log(event.key);
-
     const children = React.Children.toArray(this.props.children) as React.ReactElement<
       SelectOptionProps
     >[];
@@ -497,7 +494,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     } = this.props;
 
     const {isMenuHidden, isMenuHiding, label} = this.state;
-    // console.log('in Select render with label', label);
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
