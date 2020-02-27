@@ -43,8 +43,7 @@ jobs:
       - yarn lint
       - yarn depcheck
       - yarn test
-      - yarn chromatic --exit-zero-on-changes --app-code="dlpro96xybh" # v1 for cross-browser
-      - yarn chromatic --exit-zero-on-changes # v2 for visual review features and Storybook hosting
+      - yarn chromatic --exit-zero-on-changes --app-code="ro4ew4rqdrl"
       - yarn start & npx wait-on http://localhost:9001
       - yarn cypress run --record
       - kill $(jobs -p) || true
