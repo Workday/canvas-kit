@@ -90,6 +90,7 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
         id={id}
         label={label}
         role="option"
+        selected={selected}
         value={value}
         {...elemProps}
       >
