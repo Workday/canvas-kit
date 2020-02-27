@@ -484,7 +484,17 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {error, disabled, grow, children, name, onChange, value, ...elemProps} = this.props;
+    const {
+      'aria-labelledby': ariaLabelledBy,
+      children,
+      disabled,
+      error,
+      grow,
+      name,
+      onChange,
+      value,
+      ...elemProps
+    } = this.props;
 
     const {isMenuHidden, isMenuHiding, label} = this.state;
     // console.log('in Select render with label', label);
@@ -512,6 +522,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           value={value}
         />
         <SelectMenu
+          aria-labelledby={ariaLabelledBy}
           error={error}
           grow={grow}
           isMenuHidden={isMenuHidden}
