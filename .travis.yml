@@ -66,12 +66,9 @@ jobs:
 
   - stage: master
     script:
-      - yarn chromatic --auto-accept-changes --app-code="dlpro96xybh" # v1
-      - yarn chromatic --auto-accept-changes # v2
+      - yarn chromatic --auto-accept-changes --app-code="ro4ew4rqdrl" # v1
       - yarn build-storybook
       - yarn build
-    env:
-      - CHROMATIC_APP_CODE="m1dh5kc7oj"
     deploy:
       - provider: script
         script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js $SLACK_WEBHOOK $TRAVIS_BUILD_WEB_URL
