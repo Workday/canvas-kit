@@ -6,11 +6,11 @@ describe('Button', () => {
   });
 
   context('given Default pagination story is rendered', () => {
-    context('when screen width is larger than 500', () => {
-      beforeEach(() => {
-        h.stories.load('Labs/Pagination', 'Default');
-      });
+    beforeEach(() => {
+      h.stories.load('Labs/Pagination', 'Default');
+    });
 
+    context('when screen width is larger than 500', () => {
       it('should not have any axe errors', () => {
         cy.checkA11y();
       });
@@ -166,16 +166,67 @@ describe('Button', () => {
             cy.findByLabelText(/Page 10$/).should('exist');
           });
         });
+
+        context('when page 8 is selected', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Page 10').click();
+            cy.findByLabelText('Page 8').click();
+          });
+
+          it('should show page 1 and pages 6 through 10', () => {
+            cy.findByLabelText(/Page 1$/).should('exist');
+            cy.findByLabelText(/Page 6$/).should('exist');
+            cy.findByLabelText(/Page 7$/).should('exist');
+            cy.findByLabelText(/Page 8$/).should('exist');
+            cy.findByLabelText(/Page 9$/).should('exist');
+            cy.findByLabelText(/Page 10$/).should('exist');
+          });
+        });
+
+        context('when page 9 is selected', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Page 10').click();
+            cy.findByLabelText('Page 9').click();
+          });
+
+          it('should show page 1 and pages 6 through 10', () => {
+            cy.findByLabelText(/Page 1$/).should('exist');
+            cy.findByLabelText(/Page 6$/).should('exist');
+            cy.findByLabelText(/Page 7$/).should('exist');
+            cy.findByLabelText(/Page 8$/).should('exist');
+            cy.findByLabelText(/Page 9$/).should('exist');
+            cy.findByLabelText(/Page 10$/).should('exist');
+          });
+        });
+
+        context('when page 10 is selected', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Page 10').click();
+          });
+
+          it('should show page 1 and pages 6 through 10', () => {
+            cy.findByLabelText(/Page 1$/).should('exist');
+            cy.findByLabelText(/Page 6$/).should('exist');
+            cy.findByLabelText(/Page 7$/).should('exist');
+            cy.findByLabelText(/Page 8$/).should('exist');
+            cy.findByLabelText(/Page 9$/).should('exist');
+            cy.findByLabelText(/Page 10$/).should('exist');
+          });
+
+          it('should disable the next page button', () => {
+            cy.findByLabelText('Next Page').should('be.disabled');
+          });
+        });
       });
     });
   });
 
   context('given Default pagination story is rendered', () => {
-    context('when screen width is larger than 500', () => {
-      beforeEach(() => {
-        h.stories.load('Labs/Pagination', 'With Go To');
-      });
+    beforeEach(() => {
+      h.stories.load('Labs/Pagination', 'With Go To');
+    });
 
+    context('when screen width is larger than 500', () => {
       it('should not have any axe errors', () => {
         cy.checkA11y();
       });
@@ -223,6 +274,10 @@ describe('Button', () => {
 
       it('should show 3 numbers', () => {
         cy.findAllByLabelText(/Page \d+$/).should('have.length', 3);
+      });
+
+      it('should disable the next page button', () => {
+        cy.findByLabelText('Next Page').should('be.disabled');
       });
     });
 

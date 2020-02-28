@@ -113,7 +113,6 @@ const Pagination = (props: PaginationProps) => {
           />
           <IconButton
             disabled={currentPage + 1 > numPages}
-            aria-disabled={currentPage + 1 > numPages}
             aria-label={nextPageAriaLabel}
             variant={IconButton.Variant.Square}
             size={IconButton.Size.Small}

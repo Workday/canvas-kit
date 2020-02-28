@@ -3,7 +3,7 @@ import {css, jsx} from '@emotion/core';
 import type from '@workday/canvas-kit-labs-react-core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas from '@workday/canvas-kit-react-core';
-import _ from 'lodash';
+import range from 'lodash/range';
 import React from 'react';
 
 interface PagesProps {
@@ -42,23 +42,23 @@ export function getPages(total: number, current: number, isMobile: boolean): [nu
 
   // show all pages on left side
   if (total <= max) {
-    return [_.range(1, total + 1), []];
+    return [range(1, total + 1), []];
   }
 
   // Mobile shows last pages without first page, unlike desktop
   if (isMobile && current >= total - showEndThreshold) {
-    return [_.range(total - max + 1, total + 1), []];
+    return [range(total - max + 1, total + 1), []];
   }
 
   // show padding pages around current page on left and last page on right
   if (current <= total - showEndThreshold) {
     const minPage = Math.max(1, current - padNumber);
     const maxPage = Math.max(maxWithSplit, current + padNumber + 1);
-    return [_.range(minPage, maxPage), [total]];
+    return [range(minPage, maxPage), [total]];
   }
 
   // show first page on left and last pages on the right
-  return [[1], _.range(total - maxWithSplit + padNumber, total + 1)];
+  return [[1], range(total - maxWithSplit + padNumber, total + 1)];
 }
 
 const Pages: React.FC<PagesProps> = props => {

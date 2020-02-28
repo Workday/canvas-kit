@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 
 const useIsMobile = (threshold: number) => {
-  const [isMobile, setMobile] = useState(window.innerWidth < 500);
+  const [isMobile, setMobile] = useState(window.innerWidth < threshold);
 
   useEffect(() => {
     const handleWindowSizeChange = () => {
