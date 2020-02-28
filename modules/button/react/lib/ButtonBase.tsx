@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled} from '@workday/canvas-kit-labs-react-core';
 import isPropValid from '@emotion/is-prop-valid';
 import {
   ButtonSize,
