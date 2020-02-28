@@ -48,24 +48,12 @@ const fadeOutAnimation = keyframes`
   to {opacity: 0;}
 `;
 
-// Helper to render the menu border in its various states. We
-// render the inner border of the menu using a pseudo element since
-// we cannot exclude the top border using an inset box-shadow.
-const menuBorder = (borderColor: string, innerWidth = 1, outerColor = borderColor): CSSObject => {
+const menuListBorderCSS = (borderColor: string, borderWidth = 1): CSSObject => {
+  const border = `${borderWidth}px solid ${borderColor}`;
   return {
-    borderColor: outerColor,
-    padding: `0 ${innerWidth}px ${innerWidth}px ${innerWidth}px`,
-    '&:before': {
-      bottom: 0,
-      border: `${innerWidth}px solid ${borderColor}`,
-      borderTop: 0,
-      content: '" "',
-      left: 0,
-      position: 'absolute',
-      right: 0,
-      top: 0,
-      zIndex: -1,
-    },
+    borderBottom: border,
+    borderLeft: border,
+    borderRight: border,
   };
 };
 
@@ -128,7 +116,7 @@ const SelectMenuIcon = styled(SystemIcon)({
   },
 });
 
-const SelectMenu = styled('ul')<
+const SelectMenu = styled('div')<
   Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHidden' | 'isMenuHiding'>
 >(
   {
@@ -142,10 +130,7 @@ const SelectMenu = styled('ul')<
     borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
     borderTop: 0,
     boxSizing: 'border-box',
-    listStyle: 'none',
-    margin: 0,
     minWidth: 280,
-    padding: 0,
     position: 'absolute',
     // Offset the menu by the height of the select (spacingNumbers.xl)
     // minus the borderRadius of the select (borderRadius.m)
@@ -170,19 +155,42 @@ const SelectMenu = styled('ul')<
   ({error}) => {
     if (error === ErrorType.Error) {
       return {
-        ...menuBorder(inputColors.error.border),
+        borderColor: inputColors.error.border,
       };
     } else if (error === ErrorType.Alert) {
       return {
-        ...menuBorder(inputColors.warning.border, 2, colors.cantaloupe600),
+        borderColor: colors.cantaloupe600,
       };
     } else {
       return {
-        // TODO: figure out how to use SelectButton rather than
-        // button in this selector
-        'button:focus ~ &': {
-          ...menuBorder(inputColors.focusBorder),
-        },
+        borderColor: inputColors.focusBorder,
+      };
+    }
+  }
+);
+
+const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
+  {
+    borderTop: `1px solid ${colors.soap400} !important`,
+    listStyle: 'none',
+    margin: 0,
+    // TODO: figure out proper maxHeight
+    maxHeight: 200,
+    overflowY: 'auto',
+    padding: 0,
+  },
+  ({error}) => {
+    if (error === ErrorType.Error) {
+      return {
+        ...menuListBorderCSS(inputColors.error.border),
+      };
+    } else if (error === ErrorType.Alert) {
+      return {
+        ...menuListBorderCSS(inputColors.warning.border, 2),
+      };
+    } else {
+      return {
+        ...menuListBorderCSS(inputColors.focusBorder),
       };
     }
   }
@@ -518,14 +526,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           value={value}
         />
         <SelectMenu
-          aria-labelledby={ariaLabelledBy}
           error={error}
           grow={grow}
           isMenuHidden={isMenuHidden}
           isMenuHiding={isMenuHiding}
-          role="listbox"
         >
-          {React.Children.map(children, this.renderChildren)}
+          <SelectMenuList aria-labelledby={ariaLabelledBy} error={error} role="listbox">
+            {React.Children.map(children, this.renderChildren)}
+          </SelectMenuList>
         </SelectMenu>
         <SelectMenuIcon
           icon={caretDownSmallIcon}

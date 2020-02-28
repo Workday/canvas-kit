@@ -36,9 +36,6 @@ const Option = styled('li')<SelectOptionProps>(
   {
     ...type.body,
     cursor: 'default',
-    '&:first-of-type': {
-      borderTop: `1px solid ${colors.soap400}`,
-    },
   },
   ({disabled, focused, selected, suppressed}) => {
     if (disabled) {
