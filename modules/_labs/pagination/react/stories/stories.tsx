@@ -96,7 +96,7 @@ storiesOf('Labs|Pagination/React/Visual Testing', module)
       disable: false,
     },
   })
-  .add('Default', () => {
+  .add('States', () => {
     const defaults = {
       total: 1000,
       pageSize: 10,

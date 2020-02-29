@@ -25,6 +25,7 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 
     backgroundColor: inputColors.background,
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',
+    height: 40,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // Compensate for border
     margin: 0, // Fix Safari
@@ -53,7 +54,7 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 
   },
   ({width}) => ({
     minWidth: width || 280,
-    width: width || 280,
+    width,
   }),
   ({grow}) =>
     grow && {
