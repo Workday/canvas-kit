@@ -7,7 +7,7 @@ describe('Button', () => {
 
   context('given Default pagination story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Labs/Pagination', 'Default');
+      h.stories.load('Labs/Pagination/React', 'Default');
     });
 
     context('when screen width is larger than 500', () => {
@@ -223,7 +223,7 @@ describe('Button', () => {
 
   context('given Default pagination story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Labs/Pagination', 'With Go To');
+      h.stories.load('Labs/Pagination/React', 'With Go To');
     });
 
     context('when screen width is larger than 500', () => {
@@ -260,7 +260,7 @@ describe('Button', () => {
   context('when screen width is smaller than 500', () => {
     beforeEach(() => {
       cy.viewport(414, 736); // iPhone 6/7/8 Plus
-      h.stories.load('Labs/Pagination', 'Default');
+      h.stories.load('Labs/Pagination/React', 'Default');
     });
 
     it('should show 2 page buttons', () => {

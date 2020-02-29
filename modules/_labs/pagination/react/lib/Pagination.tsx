@@ -7,7 +7,6 @@ import React from 'react';
 
 import GoTo from './GoTo';
 import Pages from './Pages';
-import useIsMobile from './useIsMobile';
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /** The total number of items. */
@@ -34,6 +33,8 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   nextPageAriaLabel: string;
   /** Customizes each page button. */
   pageButtonAriaLabel: (page: number, selected: boolean) => string;
+  /** Optional width to pass to component. This is the width the container deems is available. You can use a measure component to get this. */
+  width?: number;
 }
 
 const Label = styled('div')({
@@ -82,15 +83,15 @@ const Pagination = (props: PaginationProps) => {
     previousPageAriaLabel,
     nextPageAriaLabel,
     pageButtonAriaLabel,
+    width,
     ...elemProps
   } = props;
 
   const numPages = Math.ceil(total / pageSize);
+  const isMobile = width ? width < 500 : false;
 
   const labelFrom = (currentPage - 1) * pageSize + 1;
   const labelTo = currentPage * pageSize >= total ? total : currentPage * pageSize;
-
-  const isMobile = useIsMobile(500);
 
   return (
     <>

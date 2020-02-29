@@ -4,8 +4,9 @@ import {boolean, number, text} from '@storybook/addon-knobs';
 import {storiesOf} from '@storybook/react';
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
+import {ComponentStatesTable} from '../../../../../utils/storybook';
 
-import Pagination from '..';
+import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 import README from '../README.md';
 
 const Wrapper = styled('div')({
@@ -19,7 +20,7 @@ const getAriaLabels = () => ({
   nextPageAriaLabel: text('nextPageAriaLabel', 'Next Page'),
 });
 
-storiesOf('Labs/Pagination', module)
+storiesOf('Labs|Pagination/React', module)
   .addParameters({
     component: Pagination,
   })
@@ -64,12 +65,6 @@ storiesOf('Labs/Pagination', module)
       </Wrapper>
     );
   })
-  .addParameters({
-    chromatic: {
-      disable: false,
-      viewports: [499, 1000],
-    },
-  })
   .add('With Custom Label', () => {
     const [currentPage, setCurrentPage] = React.useState(1);
 
@@ -81,7 +76,7 @@ storiesOf('Labs/Pagination', module)
           pageSize={number('pageSize', 3) || 3}
           currentPage={currentPage}
           onPageChange={p => setCurrentPage(p)}
-          showLabel={boolean('showLabel', false)}
+          showLabel={boolean('showLabel', true)}
           showGoTo={boolean('showGoTo', false)}
           goToLabel={text('goToLabel', 'Go To')}
           customLabel={(from: number, to: number, items: number) =>
@@ -92,5 +87,47 @@ storiesOf('Labs/Pagination', module)
           {...getAriaLabels()}
         />
       </Wrapper>
+    );
+  });
+
+storiesOf('Labs|Pagination/React/Visual Testing', module)
+  .addParameters({
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('Default', () => {
+    const defaults = {
+      total: 1000,
+      pageSize: 10,
+      showLabel: true,
+      showGoTo: true,
+      currentPage: 1,
+      onPageChange: (_: any) => {
+        /* don't do anything */
+      },
+    };
+    return (
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Basic 3 Pages', props: {total: 30, showGoTo: false}},
+          {label: 'Basic 7 Pages', props: {total: 70, showGoTo: false}},
+          {label: 'First Page', props: {currentPage: 1}},
+          {label: 'Middle Page', props: {currentPage: 50}},
+          {label: 'Last Page', props: {currentPage: 100}},
+        ]}
+        columnProps={[
+          {
+            label: 'Desktop',
+            props: {width: 800},
+          },
+          {
+            label: 'Mobile',
+            props: {width: 499},
+          },
+        ]}
+      >
+        {props => <Pagination {...defaults} {...props} />}
+      </ComponentStatesTable>
     );
   });
