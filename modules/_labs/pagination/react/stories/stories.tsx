@@ -2,12 +2,27 @@
 import styled from '@emotion/styled';
 import {boolean, number, text} from '@storybook/addon-knobs';
 import {storiesOf} from '@storybook/react';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {ComponentStatesTable} from '../../../../../utils/storybook';
 
 import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 import README from '../README.md';
+
+const useWindowWidth = () => {
+  // lock to these widths to avoid re-rendering component on every width change
+  const [width, setWidth] = useState(window.innerWidth > 500 ? 800 : 450);
+
+  useEffect(() => {
+    const handleWindowSizeChange = () => {
+      setWidth(window.innerWidth > 500 ? 800 : 450);
+    };
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => window.removeEventListener('resize', handleWindowSizeChange);
+  }, []);
+
+  return width;
+};
 
 const Wrapper = styled('div')({
   display: 'block',
@@ -27,6 +42,7 @@ storiesOf('Labs|Pagination/React', module)
   .addDecorator(withReadme(README))
   .add('Default', () => {
     const [currentPage, setCurrentPage] = React.useState(1);
+    const width = useWindowWidth();
 
     return (
       <Wrapper>
@@ -41,6 +57,7 @@ storiesOf('Labs|Pagination/React', module)
           goToLabel={text('goToLabel', 'Go To')}
           currentPage={currentPage}
           onPageChange={p => setCurrentPage(p)}
+          width={width}
           {...getAriaLabels()}
         />
       </Wrapper>
@@ -48,6 +65,7 @@ storiesOf('Labs|Pagination/React', module)
   })
   .add('With Go To', () => {
     const [currentPage, setCurrentPage] = React.useState(1);
+    const width = useWindowWidth();
 
     return (
       <Wrapper>
@@ -60,6 +78,7 @@ storiesOf('Labs|Pagination/React', module)
           showGoTo={boolean('showGoTo', true)}
           goToLabel={text('goToLabel', 'Go To')}
           onPageChange={p => setCurrentPage(p)}
+          width={width}
           {...getAriaLabels()}
         />
       </Wrapper>
@@ -67,6 +86,7 @@ storiesOf('Labs|Pagination/React', module)
   })
   .add('With Custom Label', () => {
     const [currentPage, setCurrentPage] = React.useState(1);
+    const width = useWindowWidth();
 
     return (
       <Wrapper>
@@ -84,6 +104,7 @@ storiesOf('Labs|Pagination/React', module)
               items > 1 ? 'candidates' : 'candidate'
             }`
           }
+          width={width}
           {...getAriaLabels()}
         />
       </Wrapper>
