@@ -4,15 +4,6 @@ import React from 'react';
 
 import Pagination from '..';
 
-function resizeTo(width: number, height: number) {
-  Object.assign(window, {
-    innerWidth: width,
-    innerHeight: height,
-    outerWidth: width,
-    outerHeight: height,
-  }).dispatchEvent(new Event('resize'));
-}
-
 const defaultProps = {
   total: 10,
   pageSize: 1,
@@ -23,12 +14,6 @@ const defaultProps = {
 };
 
 describe('Pagination Pages', () => {
-  const originalWidth = window.innerWidth;
-
-  afterAll(() => {
-    resizeTo(originalWidth, window.innerHeight);
-  });
-
   it('should show the page total', () => {
     const {getByText} = render(<Pagination {...defaultProps} total={10} />);
 
@@ -279,9 +264,9 @@ describe('Pagination Pages', () => {
 
   _.range(9, 11).forEach(page => {
     it(`Three numbers visible on last page - currentPage of ${page} - and first page not visible on mobile`, () => {
-      resizeTo(450, window.innerHeight);
-
-      const {queryByText, getByText} = render(<Pagination {...defaultProps} currentPage={page} />);
+      const {queryByText, getByText} = render(
+        <Pagination {...defaultProps} currentPage={page} width={450} />
+      );
 
       expect(getByText('8'));
       expect(getByText('9'));
