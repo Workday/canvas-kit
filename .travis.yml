@@ -75,16 +75,10 @@ jobs:
       - CHROMATIC_APP_CODE="m1dh5kc7oj"
     deploy:
       - provider: script
-        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js $SLACK_WEBHOOK $TRAVIS_BUILD_WEB_URL
-        skip_cleanup: true
-        on:
-          branch: master
-      - provider: script
-        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js $SLACK_WEBHOOK $TRAVIS_BUILD_WEB_URL prerelease
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js
         skip_cleanup: true
         on:
           all_branches: true
-          condition: $TRAVIS_BRANCH =~ ^prerelease\/v\d*$
       - provider: pages
         skip_cleanup: true
         local_dir: docs
