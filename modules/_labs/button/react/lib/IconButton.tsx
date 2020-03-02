@@ -50,11 +50,11 @@ const IconButton = (props: IconButtonProps) => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      if (props.toggled && typeof props.onToggleChange === 'function') {
-        props.onToggleChange(toggled);
+      if (toggled && typeof onToggleChange === 'function') {
+        onToggleChange(toggled);
       }
     }
-  }, [props.toggled]);
+  }, [toggled, onToggleChange]);
 
   const containerStyles = {
     padding: 0,
