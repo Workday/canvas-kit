@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
+import {spacing} from '@workday/canvas-kit-react-core';
 import isPropValid from '@emotion/is-prop-valid';
 import {ButtonSize, ButtonIconPosition} from '../types';
 import {ButtonProps} from '../Button';
@@ -10,6 +11,8 @@ export interface ButtonLabelIconProps extends Pick<ButtonProps, 'size' | 'icon'>
   iconPosition?: ButtonIconPosition;
 }
 
+const SMALL_ICON_SIZE = 20;
+
 const ButtonLabelIconStyled = styled('span', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<ButtonLabelIconProps>(
@@ -18,11 +21,17 @@ const ButtonLabelIconStyled = styled('span', {
   },
   ({size}) => ({
     display: size === ButtonSize.Small ? 'none' : 'inline-block',
-    height: size === ButtonSize.Small ? 20 : 24,
+    height: size === ButtonSize.Small ? SMALL_ICON_SIZE : undefined,
   }),
   ({iconPosition, dropdown}) => ({
-    marginLeft: iconPosition === ButtonIconPosition.Right ? undefined : `-${dropdown ? 8 : 4}px`,
-    marginRight: iconPosition === ButtonIconPosition.Right ? `-${dropdown ? 8 : 4}px` : undefined,
+    marginLeft:
+      iconPosition === ButtonIconPosition.Right
+        ? undefined
+        : `-${dropdown ? spacing.xxs : spacing.xxxs}px`,
+    marginRight:
+      iconPosition === ButtonIconPosition.Right
+        ? `-${dropdown ? spacing.xxs : spacing.xxxs}px`
+        : undefined,
   })
 );
 
@@ -33,7 +42,7 @@ export const ButtonLabelIcon = (props: ButtonLabelIconProps) => {
     return null;
   }
 
-  const iconSize = size === ButtonSize.Small ? 20 : 24;
+  const iconSize = size === ButtonSize.Small ? SMALL_ICON_SIZE : undefined;
 
   return (
     <ButtonLabelIconStyled
