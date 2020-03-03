@@ -91,7 +91,7 @@ const containerStyles = {
 const TextButton = (props: TextButtonProps) => {
   const {buttonRef, children, iconPosition, size, variant, icon, ...elemProps} = props;
 
-  // Note: We don't use ButtonLabel because they label styles differ from other button types
+  // Note: We don't use ButtonLabel because the label styles differ from other button types
   const allContainerStyles =
     variant === TextButtonVariant.AllCaps || variant === TextButtonVariant.InverseAllCaps
       ? {
