@@ -91,11 +91,19 @@ function formatErrorMessage(errors) {
 }
 
 const modulePath = process.cwd();
+const packageName = require(path.join(modulePath, 'package.json')).name;
 
 depCheck(modulePath, depCheckOptions, unused => {
   const errorKeys = Object.keys(unused).filter(key => {
     if (key === 'using') {
       return false;
+    }
+    if (key === 'missing') {
+      // Make sure this package name doesn't count - it would be a circular dependency on itself
+      delete unused['missing'][packageName];
+      if (Object.keys(unused['missing']).length === 0) {
+        return false;
+      }
     }
     if (unused[key].constructor === Object) {
       return Object.keys(unused[key]).length;
