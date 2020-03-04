@@ -41,7 +41,7 @@
     "@workday/canvas-kit-react-button": "^3.4.0",
     "@workday/canvas-kit-react-color-picker": "^3.4.0",
     "@workday/canvas-kit-react-common": "^3.4.0",
-    "@workday/canvas-kit-react-core": "^3.2.0",
+    "@workday/canvas-kit-react-core": "^3.4.0",
     "@workday/canvas-kit-react-form-field": "^3.4.0",
     "@workday/canvas-kit-react-icon": "^3.4.0",
     "@workday/canvas-kit-react-text-input": "^3.4.0",
