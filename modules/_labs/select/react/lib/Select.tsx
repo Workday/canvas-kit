@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  ErrorType,
+  errorRing,
+  getErrorColors,
+} from '@workday/canvas-kit-react-common';
 import {keyframes, CSSObject} from '@emotion/core';
 import {
   colors,
@@ -57,7 +62,9 @@ const menuListBorderCSS = (borderColor: string, borderWidth = 1): CSSObject => {
   };
 };
 
-const SelectButton = styled('button')<Pick<SelectProps, 'error' | 'grow'>>(
+const SelectButton = styled('button')<
+  Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHidden'>
+>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -102,7 +109,25 @@ const SelectButton = styled('button')<Pick<SelectProps, 'error' | 'grow'>>(
   ({grow}) =>
     grow && {
       width: '100%',
+    },
+  // TODO: If we end up retaining focus on the SelectButton when the menu
+  // is active (instead of shifting focus to the menu), remove this block
+  // and instead modify errorRing to optionally display the focus ring
+  ({error, isMenuHidden}) => {
+    if (!isMenuHidden) {
+      const errorColors = getErrorColors(error);
+      const errorBoxShadow = `inset 0 0 0 ${errorColors.outer === errorColors.inner ? 1 : 2}px ${
+        errorColors.inner
+      }`;
+      return {
+        '&:focus:not([disabled])': {
+          boxShadow: errorBoxShadow,
+        },
+      };
+    } else {
+      return;
     }
+  }
 );
 
 const SelectMenuIcon = styled(SystemIcon)({
@@ -511,6 +536,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           disabled={disabled}
           error={error}
           grow={grow}
+          isMenuHidden={isMenuHidden}
           onBlur={this.handleSelectBlur}
           onKeyDown={this.handleKeyboardShortcuts}
           onMouseDown={this.handleSelectMouseDown}
