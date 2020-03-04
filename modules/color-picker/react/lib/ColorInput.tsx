@@ -73,7 +73,7 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'gro
   })
 );
 
-export const ColorInputContainer = styled('div')<Pick<ColorInputProps, 'grow'>>(
+const ColorInputContainer = styled('div')<Pick<ColorInputProps, 'grow'>>(
   {
     position: 'relative',
     width: colorInputWidth,

@@ -5,7 +5,14 @@ import {borderRadius, colors, spacing, type, inputColors} from '@workday/canvas-
 
 import {Swatch} from './Swatch';
 
-export const ResetButton: React.FunctionComponent<Props> = ({id, onClick, resetColor, label}) => {
+export interface ResetButtonProps {
+  id?: string;
+  label: string;
+  resetColor: string;
+  onClick: Function;
+}
+
+export const ResetButton = ({id, onClick, resetColor, label}: ResetButtonProps) => {
   const handleResetColor = () => onClick(resetColor);
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -16,18 +23,11 @@ export const ResetButton: React.FunctionComponent<Props> = ({id, onClick, resetC
 
   return (
     <Container id={id} onClick={handleResetColor} onKeyDown={handleKeyDown}>
-      <Swatch color={resetColor} showCheck={false} />
-      <Label id="canvas-color-picker--reset-label">{label || 'Reset'}</Label>
+      <Swatch color={resetColor} isSelected={false} />
+      <Label>{label}</Label>
     </Container>
   );
 };
-
-export interface Props {
-  id?: string;
-  label?: string;
-  resetColor: string;
-  onClick: Function;
-}
 
 export const Label = styled('div')({
   marginLeft: spacing.xxs,
@@ -42,7 +42,7 @@ export const Container = styled('button')({
 
   width: `calc(100% + 8px)`,
   height: spacing.l,
-  margin: '-8px 0px 8px 0px',
+  margin: `-${spacing.xxs} 0px ${spacing.xxs} 0px`,
   padding: '0px 8px',
 
   ...type.body2,

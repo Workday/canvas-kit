@@ -33,16 +33,23 @@ const ColorPickerPopup: React.FunctionComponent = () => {
         <ColorPicker
           resetColor={colors.blueberry400}
           resetLabel={'Reset'}
-          showCustomInput={true}
-          onChange={handleSubmit}
-          onReset={() => handleSubmit(colors.blueberry400)}
+          showCustomHexInput={true}
+          onColorChange={handleSubmit}
+          onColorReset={() => handleSubmit(colors.blueberry400)}
           onSubmitClick={() => setIsOpen(false)}
-          selectedColor={color}
+          value={color}
+          style={{marginTop: 8}}
         />
       </Popper>
     </div>
   );
 };
+
+const StyledSwatch = styled(Swatch)({
+  marginRight: 8,
+  border: '1px solid rgba(0, 0, 0, 0.25)',
+  boxSizing: 'border-box',
+});
 
 const SelectedColorButton = styled('button')({
   display: 'flex',
@@ -56,14 +63,15 @@ const SelectedColorButton = styled('button')({
   width: 144,
   height: 40,
   borderRadius: 4,
-  border: `1px solid ${colors.licorice200}`,
+  boxShadow: `0 0 0 1px ${colors.licorice200}`,
+  border: 'none',
   cursor: 'pointer',
 
   '&:focus, &:active': {
-    borderStyle: 'outset',
+    border: 'none',
     outline: 'none',
     boxSizing: 'border-box',
-    border: `2px solid ${colors.blueberry400}`,
+    boxShadow: `0 0 0 2px ${colors.blueberry400}`,
   },
 });
 
@@ -81,25 +89,62 @@ const ColorPickerInputPopup: React.FunctionComponent = () => {
     },
     [setIsOpen]
   );
+
+  const colorSet = [
+    colors.cinnamon400,
+    colors.peach400,
+    colors.chiliMango400,
+    colors.cantaloupe400,
+    colors.sourLemon400,
+    colors.juicyPear400,
+    colors.kiwi400,
+    colors.greenApple400,
+
+    colors.watermelon400,
+    colors.jewel400,
+    colors.toothpaste400,
+    colors.blueberry400,
+    colors.plum400,
+    colors.berrySmoothie400,
+    colors.blackberry400,
+    colors.islandPunch400,
+
+    colors.grapeSoda400,
+    colors.pomegranate400,
+    colors.fruitPunch400,
+    colors.rootBeer400,
+    colors.toastedMarshmallow400,
+    colors.licorice400,
+    colors.cappuccino400,
+    colors.blackPepper400,
+
+    colors.frenchVanilla100,
+    colors.frenchVanilla200,
+    colors.frenchVanilla300,
+    colors.frenchVanilla400,
+    colors.blackPepper100,
+    colors.blackPepper200,
+    colors.blackPepper400,
+    colors.blackPepper600,
+  ];
+
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <SelectedColorButton ref={buttonRef} onClick={handleClick}>
-        <Swatch
-          style={{marginRight: 8, border: '1px solid rgba(0, 0, 0, 0.25)'}}
-          color={color}
-          showCheck={false}
-        />
+        <StyledSwatch color={color} isSelected={false} />
         Selected Color
       </SelectedColorButton>
       <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current}>
         <ColorPicker
           resetColor={colors.blueberry400}
           resetLabel={'Reset'}
-          showCustomInput={true}
-          onChange={handleSubmit}
-          onReset={() => handleSubmit(colors.blueberry400)}
+          showCustomHexInput={true}
+          onColorChange={handleSubmit}
+          onColorReset={() => handleSubmit(colors.blueberry400)}
           onSubmitClick={() => setIsOpen(false)}
-          selectedColor={color}
+          value={color}
+          colorSet={colorSet}
+          style={{marginTop: 8}}
         />
       </Popper>
     </div>
@@ -112,25 +157,25 @@ storiesOf('Labs/Color Picker', module)
   .add('ColorPicker Default', () => (
     <div className="story">
       <h3>Without Reset Button and Custom Input</h3>
-      <ColorPicker showCustomInput={false} onChange={console.log} />
+      <ColorPicker showCustomHexInput={false} onColorChange={console.log} />
       <div style={{height: 100}}></div>
       <h3>With Reset Button and Custom Input</h3>
       <ColorPicker
         resetColor={colors.blueberry400}
         resetLabel={'Reset'}
-        showCustomInput={true}
-        onChange={console.log}
-        onReset={() => console.log('reset')}
+        showCustomHexInput={true}
+        onColorChange={console.log}
+        onColorReset={() => console.log('reset')}
       />
     </div>
   ))
   .add('ColorPicker Popper examples', () => (
     <div className="story">
-      <h3>Color Picker with Reset Button and Custom Input</h3>
+      <h3>Color Picker with Reset Button and Custom Input,</h3>
       <h5>as a Popup on a button target</h5>
       <ColorPickerPopup />
       <div style={{height: 200}}></div>
-      <h5>as a Popup on a custom color button target</h5>
+      <h5>as a Popup on a custom color button target, with a custom color palette</h5>
       <ColorPickerInputPopup />
     </div>
   ));

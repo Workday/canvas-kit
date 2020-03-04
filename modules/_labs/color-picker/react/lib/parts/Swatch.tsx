@@ -1,19 +1,18 @@
+import {borderRadius, colors} from '@workday/canvas-kit-react-core';
+import {pickForegroundColor} from '@workday/canvas-kit-react-common';
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, borderRadius} from '@workday/canvas-kit-react-core';
-import {pickForegroundColor} from '@workday/canvas-kit-react-common';
 
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
-const whiteColor = colors.frenchVanilla100;
-
-export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   color: string;
+  isSelected?: boolean;
   style?: React.CSSProperties;
 }
 
-export const Container = styled('div')<ContainerProps>(
+export const Container = styled('div')<SwatchProps>(
   {
     width: 20,
     height: 20,
@@ -21,25 +20,25 @@ export const Container = styled('div')<ContainerProps>(
     borderRadius: borderRadius.s,
   },
   ({color}) => ({
-    backgroundColor: color || colors.blueberry400,
+    backgroundColor: color,
   }),
-  ({color}) =>
-    color === whiteColor
+  ({isSelected}) =>
+    isSelected
       ? {
-          boxShadow: `inset 0px 0px 0px 1px ${colors.licorice200}`,
+          boxShadow: `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`,
+        }
+      : {},
+  ({color}) =>
+    color === colors.frenchVanilla100
+      ? {
+          boxShadow: `inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25)`,
         }
       : {}
 );
 
-export interface SwatchProps extends React.HTMLAttributes<HTMLDivElement> {
-  color: string;
-  showCheck: boolean;
-  style?: React.CSSProperties;
-}
-
-export const Swatch: React.FunctionComponent<SwatchProps> = ({color, showCheck, style}) => (
-  <Container color={color} style={style}>
-    {showCheck && (
+export const Swatch = ({color, isSelected = false, ...elemProps}: SwatchProps) => (
+  <Container color={color} {...elemProps}>
+    {isSelected && (
       <SystemIcon
         fill={pickForegroundColor(color)}
         fillHover={pickForegroundColor(color)}

@@ -5,29 +5,47 @@ import {focusRing} from '@workday/canvas-kit-react-common';
 
 import {Swatch} from './Swatch';
 
-export const SwatchContainer = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+export interface SwatchBookProps {
+  colors: string[];
+  value?: string;
+  onSelect: (color: string) => void;
+}
 
-  position: 'relative',
+interface SwatchContainerProps {
+  isSelected: boolean;
+}
 
-  width: 20,
-  height: 20,
+export const SwatchContainer = styled('div')<SwatchContainerProps>(
+  {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
 
-  borderRadius: borderRadius.s,
+    position: 'relative',
 
-  transition: 'box-shadow 120ms ease',
+    width: 20,
+    height: 20,
 
-  '&:hover': {
-    boxShadow: `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`,
+    borderRadius: borderRadius.s,
+
+    transition: 'box-shadow 120ms ease',
+
+    '&:hover': {
+      boxShadow: `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`,
+    },
+
+    '&:focus': {
+      outline: 'none',
+      ...focusRing(2, 2),
+    },
   },
-
-  '&:focus': {
-    outline: 'none',
-    ...focusRing(2, 2),
-  },
-});
+  ({isSelected}) =>
+    isSelected
+      ? {
+          boxShadow: `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`,
+        }
+      : {}
+);
 
 const Container = styled('div')({
   display: 'grid',
@@ -36,22 +54,10 @@ const Container = styled('div')({
   cursor: 'pointer',
 });
 
-export interface SwatchBookProps {
-  colors: string[];
-  selectedColor?: string;
-  onSelect: (color: string) => void;
-}
-
-export const SwatchBook: React.FunctionComponent<SwatchBookProps> = ({
-  colors,
-  selectedColor,
-  onSelect,
-}) => (
+export const SwatchBook: React.FunctionComponent<SwatchBookProps> = ({colors, value, onSelect}) => (
   <Container>
     {colors.map(color => {
-      const isSelected = selectedColor
-        ? color.toLowerCase() === selectedColor.toLowerCase()
-        : false;
+      const isSelected = value ? color.toLowerCase() === value.toLowerCase() : false;
       const swatchBackground = {backgroundColor: color};
 
       const handleClick = () => onSelect(color);
@@ -70,11 +76,12 @@ export const SwatchBook: React.FunctionComponent<SwatchBookProps> = ({
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           tabIndex={0}
+          isSelected={isSelected}
         >
           <Swatch
             className="canvas-color-picker--swatch"
             color={swatchBackground.backgroundColor}
-            showCheck={isSelected}
+            isSelected={isSelected}
           />
         </SwatchContainer>
       );

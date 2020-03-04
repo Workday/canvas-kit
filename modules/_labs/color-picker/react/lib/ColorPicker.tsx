@@ -1,27 +1,57 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
-import {ColorInput} from '@workday/canvas-kit-react-color-picker';
-import {borderRadius, colors, spacing} from '@workday/canvas-kit-react-core';
-import {Label} from '@workday/canvas-kit-react-form-field';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react-core';
 import {checkIcon} from '@workday/canvas-system-icons-web';
+import {ColorInput} from '@workday/canvas-kit-react-color-picker';
+import {IconButton} from '@workday/canvas-kit-react-button';
+import * as React from 'react';
+import FormField from '@workday/canvas-kit-react-form-field';
+import styled from '@emotion/styled';
 
-import {SwatchBook} from './parts/SwatchBook';
 import {ResetButton} from './parts/ColorReset';
+import {SwatchBook} from './parts/SwatchBook';
 
-export interface ColorPickerProps {
-  ariaLabel?: string;
+export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The function called when the ColorPicker state changes.
+   */
+  onColorChange: (color: string) => void;
+  /**
+   * The value of the ColorPicker.
+   */
+  value?: string;
+  /**
+   * The array of colors to be rendered in the swatchbook.
+   */
+  colorSet?: string[];
 
-  onChange: (color: string) => void;
-  selectedColor?: string;
-  customColors?: string[];
-
-  showCustomInput?: boolean;
-  customInputLabel?: string;
+  /**
+   * If true, render an input for entering a custom hex color.
+   * @default false
+   */
+  showCustomHexInput?: boolean;
+  /**
+   * The label text of the custom hex input.
+   * @default 'Custom Hex Color'
+   */
+  customHexInputLabel?: string;
+  /**
+   * The function called when the submit icon is clicked.
+   */
   onSubmitClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 
-  onReset?: Function;
+  /**
+   * The function called when the color rest button is selected.
+   * It is required to be set for the reset button to render.
+   */
+  onColorReset?: (color: string) => void;
+  /**
+   * The color that the reset button resets to.
+   * It is required to be set for the reset button to render.
+   */
   resetColor?: string;
+  /**
+   * The label text of the reset button.
+   * @default 'Reset'
+   */
   resetLabel?: string;
 }
 
@@ -57,7 +87,6 @@ const defaultColors = [
 const Container = styled('div')({
   width: 224,
   padding: spacing.s,
-
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -66,7 +95,7 @@ const Container = styled('div')({
   border: `1px solid ${colors.soap400}`,
   borderRadius: borderRadius.m,
 
-  boxShadow: '0 8px 16px 0 rgba(0, 0, 0, 0.12)',
+  ...depth['3'],
 });
 
 const ColorInputWrapper = styled('div')({
@@ -77,9 +106,10 @@ const ColorInputWrapper = styled('div')({
   justifyContent: 'space-between',
 });
 
-const ColorInputAndLabel = styled('div')({
+const ColorInputAndLabel = styled(FormField)({
   display: 'flex',
   flexDirection: 'column',
+  margin: 0,
 });
 
 const CheckButton = styled(IconButton)({
@@ -100,21 +130,20 @@ const isCustomColor = (colors: string[], hexCode?: string) => {
 };
 
 export const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({
-  ariaLabel,
-  customColors,
-  customInputLabel,
-  onChange,
+  colorSet = defaultColors,
+  customHexInputLabel = 'Custom Hex Color',
+  onColorChange,
+  onColorReset,
   onSubmitClick,
-  onReset,
-  resetLabel,
+  resetLabel = 'Reset',
   resetColor,
-  selectedColor,
-  showCustomInput,
+  value,
+  showCustomHexInput = false,
+  ...elemProps
 }) => {
-  const colorList = customColors ? customColors : defaultColors;
-  const [validHexValue, setValidHexValue] = React.useState<string>('');
-  const [customHexValue, setCustomHexValue] = React.useState<string>(
-    isCustomColor(colorList, selectedColor) ? selectedColor! : ''
+  const [validHexValue, setValidHexValue] = React.useState('');
+  const [customHexValue, setCustomHexValue] = React.useState(
+    isCustomColor(colorSet, value) ? value! : ''
   );
 
   const onCustomHexChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,31 +157,27 @@ export const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({
 
   const onCustomInputKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' && validHexValue) {
-      onChange(validHexValue);
+      onColorChange(validHexValue);
     }
   };
 
-  const inputLabel = customInputLabel || 'Custom Hex Color';
   const placeholder = customHexValue === '' ? undefined : customHexValue.toUpperCase();
 
   return (
-    <Container aria-label={ariaLabel}>
-      {onReset && resetColor && (
+    <Container {...elemProps}>
+      {onColorReset && resetColor && (
         <ResetButton
           id="canvas-color-picker--reset"
-          onClick={onReset}
+          onClick={onColorReset}
           resetColor={resetColor}
           label={resetLabel}
         />
       )}
-      <SwatchBook colors={colorList} onSelect={onChange} selectedColor={selectedColor} />
-      {showCustomInput && (
+      <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
+      {showCustomHexInput && (
         <ColorInputWrapper>
-          <ColorInputAndLabel>
-            <Label>{inputLabel}</Label>
+          <ColorInputAndLabel label={customHexInputLabel}>
             <HexColorInput
-              aria-label="Color Input"
-              id="#canvas-color-picker--custom-input"
               onChange={onCustomHexChange}
               onKeyDown={onCustomInputKeyDown}
               onValidColorChange={onValidHexChange}
@@ -162,7 +187,7 @@ export const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({
             />
           </ColorInputAndLabel>
           <CheckButton
-            aria-label={inputLabel}
+            aria-label={customHexInputLabel}
             variant={IconButton.Variant.CircleFilled}
             icon={checkIcon}
             onClick={onSubmitClick}

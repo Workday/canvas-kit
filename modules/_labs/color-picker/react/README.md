@@ -54,10 +54,10 @@ const MyComponent: React.FunctionComponent = () => {
         onReset={() => handleSubmit(colors.kiwi400)}
         resetColor={colors.kiwi400}
         resetLabel={getTranslatedResetLabel()}
-        selectedColor={backgroundColor}
+        value={backgroundColor}
         showCustomInput={true}
-        onSubmitCLick={handleSubmit}
-      />;
+        onSubmitClick={handleSubmit}
+      />
     </Popper>
   )
 }
@@ -107,21 +107,21 @@ Default: `Reset`
 
 ---
 
-#### `selectedColor: string`
+#### `value: string`
 
 > The hex value of the color to display styled in a selected state. If the value doesn't match one
 > of the available colors, the hex value will be displayed in the custom input.
 
 ---
 
-#### `customColors: string[]`
+#### `colorSet: string[]`
 
 > The hex values of the colors to display in the color picker grid. If no custom colors are
 > provided, a default set will be rendered.
 
 ---
 
-#### `showCustomInput: boolean`
+#### `showCustomHexInput: boolean`
 
 > When `true` the `ColorInput` component and a submit button will be displayed at the bottom of the
 > picker allowing the user to enter a custom hex value.
