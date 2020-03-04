@@ -11,7 +11,7 @@ export interface DeleteButtonProps
    * The size of the Button.
    * @default 'medium'
    */
-  size: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -37,8 +37,7 @@ const getDeleteButtonColors = (): ButtonColors => ({
   },
 });
 
-const DeleteButton = (props: DeleteButtonProps) => {
-  const {size, buttonRef, children, ...elemProps} = props;
+const DeleteButton = ({size = 'medium', buttonRef, children, ...elemProps}: DeleteButtonProps) => {
   return (
     <ButtonContainer colors={getDeleteButtonColors()} size={size} ref={buttonRef} {...elemProps}>
       <ButtonLabel>{children}</ButtonLabel>
@@ -51,9 +50,5 @@ DeleteButton.Size = {
   Medium: 'medium',
   Large: 'large',
 } as const;
-
-DeleteButton.defaultProps = {
-  size: 'medium',
-};
 
 export default DeleteButton;

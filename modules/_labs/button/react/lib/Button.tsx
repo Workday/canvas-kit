@@ -10,12 +10,12 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * The variant of the Button.
    * @default ButtonVariant.Secondary
    */
-  variant: ButtonVariant;
+  variant?: ButtonVariant;
   /**
    * The size of the Button.
    * @default 'medium'
    */
-  size: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -30,9 +30,15 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   icon?: CanvasSystemIcon;
 }
 
-const Button = (props: ButtonProps) => {
-  const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = props;
-
+const Button = ({
+  variant = ButtonVariant.Secondary,
+  size = 'medium',
+  buttonRef,
+  dataLabel,
+  icon,
+  children,
+  ...elemProps
+}: ButtonProps) => {
   return (
     <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
       {icon && <ButtonLabelIcon size={size} icon={icon} />}
@@ -48,11 +54,6 @@ Button.Size = {
   Medium: 'medium',
   Large: 'large',
 } as const;
-
-Button.defaultProps = {
-  variant: ButtonVariant.Secondary,
-  size: 'medium',
-};
 
 export default Button;
 

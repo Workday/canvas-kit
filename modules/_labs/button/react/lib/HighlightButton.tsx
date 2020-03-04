@@ -12,7 +12,7 @@ export interface HighlightButtonProps
    * The size of the HighlightButton.
    * @default 'medium'
    */
-  size: 'medium' | 'large';
+  size?: 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -60,8 +60,14 @@ const getHighlightButtonColors = (): ButtonColors => ({
   },
 });
 
-const HighlightButton = (props: HighlightButtonProps) => {
-  const {size, buttonRef, dataLabel, icon, children, ...elemProps} = props;
+const HighlightButton = ({
+  size = 'medium',
+  buttonRef,
+  dataLabel,
+  icon,
+  children,
+  ...elemProps
+}: HighlightButtonProps) => {
   return (
     <ButtonContainer colors={getHighlightButtonColors()} size={size} ref={buttonRef} {...elemProps}>
       {icon && <ButtonLabelIcon size={size} icon={icon} />}
@@ -75,9 +81,5 @@ HighlightButton.Size = {
   Medium: 'medium',
   Large: 'large',
 } as const;
-
-HighlightButton.defaultProps = {
-  size: 'medium',
-};
 
 export default HighlightButton;

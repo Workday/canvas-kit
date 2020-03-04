@@ -15,7 +15,7 @@ export interface ButtonContainerProps
    * The size of the Button.
    * @default 'medium'
    */
-  size: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */

@@ -35,8 +35,13 @@ const ButtonLabelIconStyled = styled('span', {
   })
 );
 
-export const ButtonLabelIcon = (props: ButtonLabelIconProps) => {
-  const {icon, size, dropdown, iconPosition, ...elemProps} = props;
+export const ButtonLabelIcon = ({
+  icon,
+  size,
+  dropdown,
+  iconPosition,
+  ...elemProps
+}: ButtonLabelIconProps) => {
   /* istanbul ignore next line for coverage */
   if (icon === undefined) {
     return null;

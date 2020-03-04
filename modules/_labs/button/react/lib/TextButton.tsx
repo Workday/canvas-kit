@@ -11,17 +11,17 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * The variant of the TextButton.
    * @default TextButtonVariant.Default
    */
-  variant: TextButtonVariant;
+  variant?: TextButtonVariant;
   /**
    * The size of the TextButton.
    * @default 'medium'
    */
-  size: 'small' | 'medium';
+  size?: 'small' | 'medium';
   /**
    * The position of the TextButton icon. Accepts `Left` or `Right`.
    * @default IconPosition.Left
    */
-  iconPosition: ButtonIconPosition;
+  iconPosition?: ButtonIconPosition;
   /**
    * The ref to the button that the styled component renders.
    */
@@ -88,9 +88,15 @@ const containerStyles = {
   '&:hover:not([disabled])': {textDecoration: 'underline'},
 };
 
-const TextButton = (props: TextButtonProps) => {
-  const {buttonRef, children, iconPosition, size, variant, icon, ...elemProps} = props;
-
+const TextButton = ({
+  variant = TextButtonVariant.Default,
+  size = 'medium',
+  iconPosition = ButtonIconPosition.Left,
+  buttonRef,
+  children,
+  icon,
+  ...elemProps
+}: TextButtonProps) => {
   // Note: We don't use ButtonLabel because the label styles differ from other button types
   const allContainerStyles =
     variant === TextButtonVariant.AllCaps || variant === TextButtonVariant.InverseAllCaps
@@ -131,11 +137,5 @@ TextButton.Size = {
   Small: 'small',
   Medium: 'medium',
 } as const;
-
-TextButton.defaultProps = {
-  iconPosition: ButtonIconPosition.Left,
-  variant: TextButtonVariant.Default,
-  size: 'medium',
-};
 
 export default TextButton;

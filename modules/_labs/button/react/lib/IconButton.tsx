@@ -8,19 +8,19 @@ import {ButtonContainer} from './parts';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * The type of the IconButton.
-   * @default IconButtonVariant.Circle
-   */
-  variant: IconButtonVariant;
-  /**
    * The accessibility label to indicate the action triggered by clicking the IconButton.
    */
   'aria-label': string;
   /**
+   * The type of the IconButton.
+   * @default IconButtonVariant.Circle
+   */
+  variant?: IconButtonVariant;
+  /**
    * The size of the IconButton.
    * @default 'medium'
    */
-  size: 'small' | 'medium';
+  size?: 'small' | 'medium';
   /**
    * If true, toggle the IconButton on.
    * @default false
@@ -40,9 +40,16 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   onToggleChange?: (toggled: boolean | undefined) => void;
 }
 
-const IconButton = (props: IconButtonProps) => {
-  const {buttonRef, size, variant, onToggleChange, icon, toggled, children, ...elemProps} = props;
-
+const IconButton = ({
+  variant = IconButtonVariant.Circle,
+  size = 'medium',
+  buttonRef,
+  onToggleChange,
+  icon,
+  toggled,
+  children,
+  ...elemProps
+}: IconButtonProps) => {
   const isInitialMount = React.useRef(true);
 
   // Only call onToggleChange on update - not on first mount
@@ -94,11 +101,6 @@ IconButton.Size = {
   Small: 'small',
   Medium: 'medium',
 } as const;
-
-IconButton.defaultProps = {
-  variant: IconButtonVariant.Circle,
-  size: 'medium',
-};
 
 export default IconButton;
 

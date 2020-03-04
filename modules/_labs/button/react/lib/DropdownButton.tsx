@@ -12,20 +12,25 @@ export interface DropdownButtonProps
    * The variant of the Button.
    * @default DropdownButtonVariant.Secondary
    */
-  variant: DropdownButtonVariant;
+  variant?: DropdownButtonVariant;
   /**
    * The size of the Button.
    * @default 'medium'
    */
-  size: 'medium' | 'large';
+  size?: 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const DropdownButton = (props: DropdownButtonProps) => {
-  const {variant, size, buttonRef, children, ...elemProps} = props;
+const DropdownButton = ({
+  variant = DropdownButtonVariant.Secondary,
+  size = 'medium',
+  buttonRef,
+  children,
+  ...elemProps
+}: DropdownButtonProps) => {
   return (
     <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
       <ButtonLabel>{children}</ButtonLabel>
@@ -44,10 +49,5 @@ DropdownButton.Size = {
   Medium: 'medium',
   Large: 'large',
 } as const;
-
-DropdownButton.defaultProps = {
-  variant: DropdownButtonVariant.Secondary,
-  size: 'medium',
-};
 
 export default DropdownButton;
