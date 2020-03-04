@@ -40,13 +40,13 @@ jobs:
   include:
   - stage: pull_request
     script:
-      - yarn lint
-      - yarn depcheck
-      - yarn test
+      # - yarn lint
+      # - yarn depcheck
+      # - yarn test
       - yarn chromatic --exit-zero-on-changes --app-code="dlpro96xybh" # v1 for cross-browser
-      - yarn chromatic --exit-zero-on-changes # v2 for visual review features and Storybook hosting
-      - yarn start & npx wait-on http://localhost:9001
-      - yarn cypress run --record
+      # - yarn chromatic --exit-zero-on-changes # v2 for visual review features and Storybook hosting
+      # - yarn start & npx wait-on http://localhost:9001
+      # - yarn cypress run --record
       - kill $(jobs -p) || true
     env:
       # Travis doesn't support encryption on forks: https://docs.travis-ci.com/user/pull-requests#pull-requests-and-security-restrictions
