@@ -2,7 +2,7 @@ import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonSize, ButtonColors} from './types';
+import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface HighlightButtonProps
@@ -10,9 +10,9 @@ export interface HighlightButtonProps
     GrowthBehavior {
   /**
    * The size of the HighlightButton.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size: ButtonSize.Medium | ButtonSize.Large;
+  size: 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -72,12 +72,12 @@ const HighlightButton = (props: HighlightButtonProps) => {
 };
 
 HighlightButton.Size = {
-  Medium: ButtonSize.Medium,
-  Large: ButtonSize.Large,
-};
+  Medium: 'medium',
+  Large: 'large',
+} as const;
 
 HighlightButton.defaultProps = {
-  size: ButtonSize.Medium,
+  size: 'medium',
 };
 
 export default HighlightButton;

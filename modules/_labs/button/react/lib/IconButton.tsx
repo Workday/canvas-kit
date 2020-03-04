@@ -3,7 +3,7 @@ import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {IconButtonVariant, ButtonSize, ButtonColors} from './types';
+import {IconButtonVariant, ButtonColors} from './types';
 import {ButtonContainer} from './parts';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,9 +18,9 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   'aria-label': string;
   /**
    * The size of the IconButton.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size: ButtonSize.Small | ButtonSize.Medium;
+  size: 'small' | 'medium';
   /**
    * If true, toggle the IconButton on.
    * @default false
@@ -59,9 +59,9 @@ const IconButton = (props: IconButtonProps) => {
   const containerStyles = {
     padding: 0,
     margin: variant === IconButtonVariant.Plain ? '-8px' : undefined,
-    minWidth: size === ButtonSize.Small ? spacing.l : spacing.xl, // min-width is set so buttons don't collapse in IE11
-    width: size === ButtonSize.Small ? spacing.l : spacing.xl,
-    height: size === ButtonSize.Small ? spacing.l : spacing.xl,
+    minWidth: size === 'small' ? spacing.l : spacing.xl, // min-width is set so buttons don't collapse in IE11
+    width: size === 'small' ? spacing.l : spacing.xl,
+    height: size === 'small' ? spacing.l : spacing.xl,
     borderRadius:
       variant === IconButtonVariant.Square || variant === IconButtonVariant.SquareFilled
         ? borderRadius.m
@@ -69,8 +69,8 @@ const IconButton = (props: IconButtonProps) => {
     ['& .wd-icon']: {
       display: 'inline-block',
       verticalAlign: 'middle',
-      width: size === ButtonSize.Small ? '20px' : undefined,
-      height: size === ButtonSize.Small ? '20px' : undefined,
+      width: size === 'small' ? '20px' : undefined,
+      height: size === 'small' ? '20px' : undefined,
     },
   };
 
@@ -91,13 +91,13 @@ const IconButton = (props: IconButtonProps) => {
 
 IconButton.Variant = IconButtonVariant;
 IconButton.Size = {
-  Small: ButtonSize.Small,
-  Medium: ButtonSize.Medium,
-};
+  Small: 'small',
+  Medium: 'medium',
+} as const;
 
 IconButton.defaultProps = {
   variant: IconButtonVariant.Circle,
-  size: ButtonSize.Medium,
+  size: 'medium',
 };
 
 export default IconButton;

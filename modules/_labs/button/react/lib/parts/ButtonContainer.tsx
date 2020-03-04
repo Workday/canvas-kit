@@ -4,7 +4,7 @@ import {CSSObject} from '@emotion/core';
 import {styled, type} from '@workday/canvas-kit-labs-react-core';
 import canvas, {borderRadius, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
-import {ButtonSize, ButtonColors} from '../types';
+import {ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
 
 export interface ButtonContainerProps
@@ -13,9 +13,9 @@ export interface ButtonContainerProps
   colors?: ButtonColors;
   /**
    * The size of the Button.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size: ButtonSize;
+  size: 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -88,7 +88,7 @@ export const ButtonContainer = styled('button', {
   },
   ({size}) => {
     switch (size) {
-      case ButtonSize.Large:
+      case 'large':
         return {
           fontSize: type.body.fontSize,
           minWidth: '112px',
@@ -98,7 +98,7 @@ export const ButtonContainer = styled('button', {
             padding: `0 ${spacingNumbers.xs / 2}px`,
           },
         };
-      case ButtonSize.Medium:
+      case 'medium':
       default:
         return {
           minWidth: '96px',
@@ -108,7 +108,7 @@ export const ButtonContainer = styled('button', {
             padding: `0 ${spacingNumbers.xxs / 2}px`,
           },
         };
-      case ButtonSize.Small:
+      case 'small':
         return {
           minWidth: '80px',
           height: spacing.l,

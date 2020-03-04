@@ -2,7 +2,7 @@ import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonVariant, ButtonSize, ButtonColors, DropdownButtonVariant} from './types';
+import {ButtonVariant, ButtonColors, DropdownButtonVariant} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, GrowthBehavior {
@@ -13,9 +13,9 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant: ButtonVariant;
   /**
    * The size of the Button.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size: ButtonSize;
+  size: 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -43,11 +43,15 @@ const Button = (props: ButtonProps) => {
 };
 
 Button.Variant = ButtonVariant;
-Button.Size = ButtonSize;
+Button.Size = {
+  Small: 'small',
+  Medium: 'medium',
+  Large: 'large',
+} as const;
 
 Button.defaultProps = {
   variant: ButtonVariant.Secondary,
-  size: ButtonSize.Medium,
+  size: 'medium',
 };
 
 export default Button;

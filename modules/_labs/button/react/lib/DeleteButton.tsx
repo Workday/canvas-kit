@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
-import {ButtonSize, ButtonColors} from './types';
+import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel} from './parts';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 
@@ -9,9 +9,9 @@ export interface DeleteButtonProps
     GrowthBehavior {
   /**
    * The size of the Button.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size: ButtonSize;
+  size: 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -46,10 +46,14 @@ const DeleteButton = (props: DeleteButtonProps) => {
   );
 };
 
-DeleteButton.Size = ButtonSize;
+DeleteButton.Size = {
+  Small: 'small',
+  Medium: 'medium',
+  Large: 'large',
+} as const;
 
 DeleteButton.defaultProps = {
-  size: ButtonSize.Medium,
+  size: 'medium',
 };
 
 export default DeleteButton;

@@ -10,11 +10,6 @@ export enum ButtonVariant {
   OutlineSecondary = 'outlineSecondary',
   OutlineInverse = 'outlineInverse',
 }
-export enum ButtonSize {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-}
 export enum ButtonIconPosition {
   Left = 'iconPositionLeft',
   Right = 'iconPositionRight',

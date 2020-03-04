@@ -1,7 +1,7 @@
 import * as React from 'react';
 import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, mouseFocusBehavior, GrowthBehavior} from '@workday/canvas-kit-react-common';
-import {DeprecatedButtonVariant, ButtonSize} from './types';
+import {DeprecatedButtonVariant} from './types';
 import styled from '@emotion/styled';
 
 export interface DeprecatedButtonProps
@@ -14,9 +14,9 @@ export interface DeprecatedButtonProps
   variant: DeprecatedButtonVariant;
   /**
    * The size of the Button.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size: ButtonSize;
+  size: 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -43,7 +43,7 @@ const Container = styled('button')<DeprecatedButtonProps>(
   },
   ({size}) => {
     switch (size) {
-      case ButtonSize.Large:
+      case 'large':
         return {
           height: '40px',
           padding: `0 ${canvas.spacing.l}`,
@@ -52,7 +52,7 @@ const Container = styled('button')<DeprecatedButtonProps>(
           fontSize: '14px',
           fontWeight: 500,
         };
-      case ButtonSize.Medium:
+      case 'medium':
       default:
         return {
           height: '24px',
@@ -62,7 +62,7 @@ const Container = styled('button')<DeprecatedButtonProps>(
           fontSize: '13px',
           fontWeight: 500,
         };
-      case ButtonSize.Small:
+      case 'small':
         return {
           height: '18px',
           padding: `0 ${canvas.spacing.xxs}`,
@@ -172,11 +172,15 @@ const DeprecatedButton = (props: DeprecatedButtonProps) => {
 };
 
 DeprecatedButton.Variant = DeprecatedButtonVariant;
-DeprecatedButton.Size = ButtonSize;
+DeprecatedButton.Size = {
+  Small: 'small',
+  Medium: 'medium',
+  Large: 'large',
+} as const;
 
 DeprecatedButton.defaultProps = {
   variant: DeprecatedButtonVariant.Secondary,
-  size: ButtonSize.Medium,
+  size: 'medium',
 };
 
 export default DeprecatedButton;

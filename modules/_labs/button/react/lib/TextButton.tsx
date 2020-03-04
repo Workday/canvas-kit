@@ -3,7 +3,7 @@ import {type} from '@workday/canvas-kit-labs-react-core';
 import {focusRing} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {TextButtonVariant, ButtonSize, ButtonIconPosition, ButtonColors} from './types';
+import {TextButtonVariant, ButtonIconPosition, ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
 export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -14,9 +14,9 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   variant: TextButtonVariant;
   /**
    * The size of the TextButton.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size: ButtonSize.Small | ButtonSize.Medium;
+  size: 'small' | 'medium';
   /**
    * The position of the TextButton icon. Accepts `Left` or `Right`.
    * @default IconPosition.Left
@@ -98,12 +98,12 @@ const TextButton = (props: TextButtonProps) => {
           ...containerStyles,
           ...type.variant.caps,
           ...type.variant.button,
-          fontSize: size === ButtonSize.Medium ? type.body.fontSize : undefined,
+          fontSize: size === 'medium' ? type.body.fontSize : undefined,
           letterSpacing: '.5px',
         }
       : {
           ...containerStyles,
-          fontSize: size === ButtonSize.Medium ? type.body.fontSize : undefined,
+          fontSize: size === 'medium' ? type.body.fontSize : undefined,
         };
 
   return (
@@ -128,14 +128,14 @@ const TextButton = (props: TextButtonProps) => {
 TextButton.IconPosition = ButtonIconPosition;
 TextButton.Variant = TextButtonVariant;
 TextButton.Size = {
-  Small: ButtonSize.Small,
-  Medium: ButtonSize.Medium,
-};
+  Small: 'small',
+  Medium: 'medium',
+} as const;
 
 TextButton.defaultProps = {
   iconPosition: ButtonIconPosition.Left,
   variant: TextButtonVariant.Default,
-  size: ButtonSize.Medium,
+  size: 'medium',
 };
 
 export default TextButton;

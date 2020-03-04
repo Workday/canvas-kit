@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
-import {DropdownButtonVariant, ButtonSize, ButtonIconPosition} from './types';
+import {DropdownButtonVariant, ButtonIconPosition} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 import {getButtonColors} from './Button';
 
@@ -15,9 +15,9 @@ export interface DropdownButtonProps
   variant: DropdownButtonVariant;
   /**
    * The size of the Button.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size: ButtonSize.Medium | ButtonSize.Large;
+  size: 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -41,13 +41,13 @@ const DropdownButton = (props: DropdownButtonProps) => {
 
 DropdownButton.Variant = DropdownButtonVariant;
 DropdownButton.Size = {
-  Medium: ButtonSize.Medium,
-  Large: ButtonSize.Large,
-};
+  Medium: 'medium',
+  Large: 'large',
+} as const;
 
 DropdownButton.defaultProps = {
   variant: DropdownButtonVariant.Secondary,
-  size: ButtonSize.Medium,
+  size: 'medium',
 };
 
 export default DropdownButton;

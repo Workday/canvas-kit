@@ -2,7 +2,7 @@ import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
 import {spacing} from '@workday/canvas-kit-react-core';
 import isPropValid from '@emotion/is-prop-valid';
-import {ButtonSize, ButtonIconPosition} from '../types';
+import {ButtonIconPosition} from '../types';
 import {ButtonProps} from '../Button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
@@ -20,8 +20,8 @@ const ButtonLabelIconStyled = styled('span', {
     display: 'flex',
   },
   ({size}) => ({
-    display: size === ButtonSize.Small ? 'none' : 'inline-block',
-    height: size === ButtonSize.Small ? SMALL_ICON_SIZE : undefined,
+    display: size === 'small' ? 'none' : 'inline-block',
+    height: size === 'small' ? SMALL_ICON_SIZE : undefined,
   }),
   ({iconPosition, dropdown}) => ({
     marginLeft:
@@ -42,7 +42,7 @@ export const ButtonLabelIcon = (props: ButtonLabelIconProps) => {
     return null;
   }
 
-  const iconSize = size === ButtonSize.Small ? SMALL_ICON_SIZE : undefined;
+  const iconSize = size === 'small' ? SMALL_ICON_SIZE : undefined;
 
   return (
     <ButtonLabelIconStyled
