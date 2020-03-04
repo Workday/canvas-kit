@@ -3,18 +3,19 @@ import {fireEvent, render} from '@testing-library/react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {ColorPicker, ColorPickerProps} from '@workday/canvas-kit-labs-react-color-picker';
 
-describe('<ColorPicker /> component', () => {
+describe('Color Picker', () => {
   const renderColorPicker = (props?: Partial<ColorPickerProps>) => {
     return render(<ColorPicker onColorChange={jest.fn()} {...props} />);
   };
+  describe('when clicking a color swatch', () => {
+    it('should call onColorChange handler when clicking a color swatch', () => {
+      const onColorChange = jest.fn();
+      const {container} = renderColorPicker({onColorChange: onColorChange});
+      const colorSwatch = container.querySelector('#canvas-color-picker--color-333333')!;
 
-  it('should call onColorChange handler when clicking a color swatch', () => {
-    const onColorChange = jest.fn();
-    const {container} = renderColorPicker({onColorChange: onColorChange});
-    const colorSwatch = container.querySelector('#canvas-color-picker--color-333333')!;
-
-    fireEvent.click(colorSwatch);
-    expect(onColorChange).toHaveBeenCalledWith(colors.blackPepper400);
+      fireEvent.click(colorSwatch);
+      expect(onColorChange).toHaveBeenCalledWith(colors.blackPepper400);
+    });
   });
 
   it('should display custom hex codes in the custom input', () => {
@@ -78,25 +79,29 @@ describe('<ColorPicker /> component', () => {
       expect(resetButton).not.toBeNull();
     });
 
-    it('should call onColorReset handler when clicking', () => {
-      const onColorReset = jest.fn();
-      const resetColor = colors.blueberry400;
-      const {container} = renderColorPicker({onColorReset, resetColor});
-      const reset = container.querySelector('#canvas-color-picker--reset')!;
+    describe('when clicking reset', () => {
+      it('should call onColorReset', () => {
+        const onColorReset = jest.fn();
+        const resetColor = colors.blueberry400;
+        const {container} = renderColorPicker({onColorReset, resetColor});
+        const reset = container.querySelector('#canvas-color-picker--reset')!;
 
-      fireEvent.click(reset);
-      expect(onColorReset).toHaveBeenCalled();
+        fireEvent.click(reset);
+        expect(onColorReset).toHaveBeenCalled();
+      });
     });
 
-    it('should call onColorReset handler when selecting with ENTER', () => {
-      const onColorReset = jest.fn();
-      const resetColor = colors.blueberry400;
-      const {container} = renderColorPicker({onColorReset, resetColor});
-      const reset = container.querySelector('#canvas-color-picker--reset')!;
+    describe('when selecting with ENTER', () => {
+      it('should call onColorReset handler', () => {
+        const onColorReset = jest.fn();
+        const resetColor = colors.blueberry400;
+        const {container} = renderColorPicker({onColorReset, resetColor});
+        const reset = container.querySelector('#canvas-color-picker--reset')!;
 
-      fireEvent.mouseEnter(reset);
-      fireEvent.keyDown(reset, {key: 'Enter'});
-      expect(onColorReset).toHaveBeenCalled();
+        fireEvent.mouseEnter(reset);
+        fireEvent.keyDown(reset, {key: 'Enter'});
+        expect(onColorReset).toHaveBeenCalled();
+      });
     });
   });
 });
