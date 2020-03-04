@@ -99,8 +99,15 @@ depCheck(modulePath, depCheckOptions, unused => {
       return false;
     }
     if (key === 'missing') {
-      // Make sure this package name doesn't count - it would be a circular dependency on itself
-      delete unused['missing'][packageName];
+      // Self-referencing imports are only okay in stories. It allows story code more copy/paste friendly. Stories are not packaged, so no circular dependency actually exists
+      if (unused['missing'][packageName]) {
+        unused['missing'][packageName] = unused['missing'][packageName].filter(
+          file => file.indexOf('stories') === -1
+        );
+        if (unused['missing'][packageName].length === 0) {
+          delete unused['missing'][packageName];
+        }
+      }
       if (Object.keys(unused['missing']).length === 0) {
         return false;
       }
