@@ -5,7 +5,7 @@ import withReadme from 'storybook-readme/with-readme';
 import FormField from '../lib/FormField';
 import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {TextInput} from '@workday/canvas-kit-react-text-input';
+import {TextInput} from '../../../text-input/react';
 import {Label, Hint} from '../index';
 import README from '../README.md';
 import {FormFieldLabelPosition} from '../lib/types';
