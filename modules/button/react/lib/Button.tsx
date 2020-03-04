@@ -1,24 +1,21 @@
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
 import * as React from 'react';
-import {ButtonBaseCon, ButtonBaseLabel, ButtonLabelData, ButtonLabelIcon} from './ButtonBase';
-import {DeprecatedButtonVariant, ButtonSize, ButtonVariant} from './types';
+import {colors} from '@workday/canvas-kit-react-core';
+import {focusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {GrowthBehavior} from '@workday/canvas-kit-react-common';
-import {labelDataBaseStyles} from './ButtonStyles';
+import {ButtonVariant, ButtonColors, DropdownButtonVariant} from './types';
+import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
-export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, GrowthBehavior {
   /**
    * The variant of the Button.
    * @default ButtonVariant.Secondary
    */
-  variant?: T;
+  variant?: ButtonVariant;
   /**
    * The size of the Button.
-   * @default ButtonSize.Medium
+   * @default 'medium'
    */
-  size?: ButtonSize;
+  size?: 'small' | 'medium' | 'large';
   /**
    * The ref to the button that the styled component renders.
    */
@@ -33,69 +30,181 @@ export interface BaseButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
   icon?: CanvasSystemIcon;
 }
 
-export interface ButtonProps<T = ButtonVariant | DeprecatedButtonVariant>
-  extends BaseButtonProps<T>,
-    GrowthBehavior {
-  /**
-   * The children of the Button (cannot be empty).
-   */
-  children: React.ReactNode;
-}
+const Button = ({
+  variant = ButtonVariant.Secondary,
+  size = 'medium',
+  buttonRef,
+  dataLabel,
+  icon,
+  children,
+  ...elemProps
+}: ButtonProps) => {
+  return (
+    <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
+      {icon && <ButtonLabelIcon size={size} icon={icon} />}
+      <ButtonLabel>{children}</ButtonLabel>
+      {dataLabel && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+    </ButtonContainer>
+  );
+};
 
-export default class Button extends React.Component<ButtonProps> {
-  public static Variant = ButtonVariant;
-  public static Size = ButtonSize;
+Button.Variant = ButtonVariant;
+Button.Size = {
+  Small: 'small',
+  Medium: 'medium',
+  Large: 'large',
+} as const;
 
-  static defaultProps = {
-    size: ButtonSize.Medium,
-    variant: ButtonVariant.Secondary,
-    grow: false,
-  };
+export default Button;
 
-  public render() {
-    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
-
-    // Restrict Hightlight button to only being sized Large, Medium with an Icon
-    if (variant === ButtonVariant.Highlight && (icon === undefined || size === ButtonSize.Small)) {
-      return null;
-    }
-
-    return (
-      <ButtonBaseCon variant={variant} size={size} ref={buttonRef} {...elemProps}>
-        {icon && <ButtonLabelIcon size={size} icon={icon} />}
-        <ButtonBaseLabel size={size} variant={variant}>
-          {children}
-        </ButtonBaseLabel>
-        {dataLabel && (
-          <ButtonLabelData size={size} className={labelDataBaseStyles.classname}>
-            {dataLabel}
-          </ButtonLabelData>
-        )}
-      </ButtonBaseCon>
-    );
+export const getButtonColors = (variant: ButtonVariant | DropdownButtonVariant): ButtonColors => {
+  switch (variant) {
+    case ButtonVariant.Primary:
+    case DropdownButtonVariant.Primary:
+      return {
+        default: {
+          background: colors.blueberry400,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        hover: {
+          background: colors.blueberry500,
+        },
+        active: {
+          background: colors.blueberry600,
+        },
+        focus: {
+          background: colors.blueberry400,
+        },
+        disabled: {
+          background: colors.blueberry200,
+        },
+      };
+    case ButtonVariant.Secondary:
+    case DropdownButtonVariant.Secondary:
+    default:
+      return {
+        default: {
+          background: colors.soap200,
+          icon: colors.licorice200,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
+        },
+        hover: {
+          background: colors.soap400,
+          icon: colors.licorice500,
+        },
+        active: {
+          background: colors.soap500,
+          icon: colors.licorice500,
+        },
+        focus: {
+          background: colors.soap200,
+          icon: colors.licorice500,
+        },
+        disabled: {
+          background: colors.soap100,
+          icon: colors.soap600,
+          label: colors.licorice100,
+          labelData: colors.licorice100,
+        },
+      };
+    case ButtonVariant.OutlinePrimary:
+      return {
+        default: {
+          border: colors.blueberry400,
+          icon: colors.blueberry400,
+          label: colors.blueberry400,
+        },
+        hover: {
+          background: colors.blueberry400,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        active: {
+          background: colors.blueberry500,
+          border: colors.blueberry500,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        focus: {
+          background: colors.blueberry400,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        disabled: {
+          background: colors.frenchVanilla100,
+          border: colors.soap500,
+          icon: colors.soap600,
+          label: colors.licorice100,
+        },
+      };
+    case ButtonVariant.OutlineSecondary:
+      return {
+        default: {
+          border: colors.soap500,
+          icon: colors.licorice200,
+          label: colors.blackPepper400,
+        },
+        hover: {
+          background: colors.licorice500,
+          border: colors.licorice500,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        active: {
+          background: colors.licorice600,
+          border: colors.licorice600,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        focus: {
+          background: colors.licorice500,
+          border: colors.licorice500,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        disabled: {
+          background: colors.frenchVanilla100,
+          border: colors.soap500,
+          icon: colors.soap600,
+          label: colors.licorice100,
+        },
+      };
+    case ButtonVariant.OutlineInverse:
+      return {
+        default: {
+          border: colors.frenchVanilla100,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        hover: {
+          background: colors.frenchVanilla100,
+          icon: colors.licorice500,
+          label: colors.blackPepper400,
+          labelData: colors.licorice300,
+        },
+        active: {
+          background: colors.soap300,
+          border: colors.soap300,
+          icon: colors.licorice500,
+          label: colors.blackPepper400,
+          labelData: colors.licorice300,
+        },
+        focus: {
+          background: colors.frenchVanilla100,
+          icon: colors.licorice500,
+          label: colors.blackPepper400,
+          labelData: colors.licorice300,
+          focusRing: focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
+        },
+        disabled: {
+          background: 'transparent',
+          border: 'rgba(255, 255, 255, 0.75)',
+          icon: 'rgba(255, 255, 255, 0.75)',
+          label: 'rgba(255, 255, 255, 0.75)',
+          labelData: 'rgba(255, 255, 255, 0.75)',
+        },
+      };
   }
-}
-/**
- * @deprecated deprecated_Button in @workday/canvas-kit-react-button will be removed soon. Use Button instead.
- */
-// eslint-disable-next-line @typescript-eslint/class-name-casing
-export class deprecated_Button extends React.Component<ButtonProps<DeprecatedButtonVariant>> {
-  public static Variant = DeprecatedButtonVariant;
-  public static Size = ButtonSize;
-
-  static defaultProps = {
-    size: ButtonSize.Large,
-    variant: DeprecatedButtonVariant.Secondary,
-    grow: false,
-  };
-
-  public componentDidMount() {
-    console.warn('This component is now deprecated, consider using the new Button component');
-  }
-
-  public render() {
-    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
-
-    return <Button {...this.props} {...elemProps} />;
-  }
-}
+};

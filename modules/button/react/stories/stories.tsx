@@ -1,610 +1,295 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx, CSSObject} from '@emotion/core';
+import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import withReadme from 'storybook-readme/with-readme';
-
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
+import {playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {
-  editIcon,
-  playCircleIcon,
-  arrowRightIcon,
-  activityStreamIcon,
-} from '@workday/canvas-system-icons-web';
+  Button,
+  DropdownButton,
+  TextButton,
+  DeleteButton,
+  HighlightButton,
+  IconButton,
+  deprecated_Button as DeprecatedButton,
+} from '../index';
 
-import {Button, DropdownButton, TextButton} from '../index';
-import README from '../README.md';
-
-const blueBackground: CSSObject = {
+const buttonLayout: CSSObject = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  flexWrap: 'wrap',
+};
+
+const blueBackground: CSSObject = {
+  ...buttonLayout,
   backgroundColor: '#0875e1',
-  margin: '0 10px',
   padding: '12px',
-  maxWidth: 'max-content',
-  borderRadius: '3px',
-  button: {
-    margin: '12px',
-  },
+  borderRadius: '4px',
 };
 
-const buttonContainer = {
-  display: 'flex',
-  alignItems: 'center',
-  '& button + button': {
-    marginLeft: 10,
-  },
-};
+const Container = (props: any) => (
+  <div css={props.blue ? blueBackground : buttonLayout}>{props.children}</div>
+);
 
-storiesOf('Components|Buttons/Button/React', module)
-  .addParameters({component: Button})
-  .addDecorator(withReadme(README))
-  .add('Primary', () => (
-    <div className="story">
-      <h3>Large Primary</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.Primary}>
-        Primary
-      </Button>
-      <Button size={Button.Size.Large} variant={Button.Variant.Primary} icon={activityStreamIcon}>
-        Primary
-      </Button>
-      <Button
-        size={Button.Size.Large}
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Primary
-      </Button>
-      <Button
-        disabled={true}
-        size={Button.Size.Large}
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Primary
-      </Button>
-      <h3>Medium Primary</h3>
-      <Button size={Button.Size.Medium} variant={Button.Variant.Primary}>
-        Primary
-      </Button>
-      <Button size={Button.Size.Medium} variant={Button.Variant.Primary} icon={editIcon}>
-        Primary
-      </Button>
-      <Button
-        size={Button.Size.Medium}
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Primary
-      </Button>
-      <Button
-        disabled={true}
-        size={Button.Size.Medium}
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Primary
-      </Button>
-      <h3>Small Primary</h3>
-      <Button size={Button.Size.Small} variant={Button.Variant.Primary}>
-        Primary
-      </Button>
-      <Button disabled={true} size={Button.Size.Small} variant={Button.Variant.Primary}>
-        Primary
-      </Button>
-      <h3>Growing Primary</h3>
-      <div css={buttonContainer}>
-        <Button size={Button.Size.Large} variant={Button.Variant.Primary} grow={true}>
-          Primary
-        </Button>
-      </div>
-    </div>
-  ))
-  .add('Secondary', () => (
-    <div className="story">
-      <h3>Large Secondary</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.Secondary}>
-        Secondary
-      </Button>
-      <Button size={Button.Size.Large} variant={Button.Variant.Secondary} icon={activityStreamIcon}>
-        Secondary
-      </Button>
-      <Button
-        size={Button.Size.Large}
-        variant={Button.Variant.Secondary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Secondary
-      </Button>
-      <Button
-        disabled={true}
-        size={Button.Size.Large}
-        variant={Button.Variant.Secondary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Secondary
-      </Button>
-      <h3>Medium Secondary</h3>
-      <Button size={Button.Size.Medium} variant={Button.Variant.Secondary}>
-        Secondary
-      </Button>
-      <Button size={Button.Size.Medium} variant={Button.Variant.Secondary} icon={editIcon}>
-        Secondary
-      </Button>
-      <Button
-        size={Button.Size.Medium}
-        variant={Button.Variant.Secondary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Secondary
-      </Button>
-      <Button
-        disabled={true}
-        size={Button.Size.Medium}
-        variant={Button.Variant.Secondary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Secondary
-      </Button>
-      <h3>Small Secondary</h3>
-      <Button size={Button.Size.Small} variant={Button.Variant.Secondary}>
-        Secondary
-      </Button>
-      <Button disabled={true} size={Button.Size.Small} variant={Button.Variant.Secondary}>
-        Secondary
-      </Button>
-      <h3>Growing Secondary</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.Secondary} grow={true}>
-        Growing Secondary
-      </Button>
-    </div>
-  ))
-  .add('Delete', () => (
-    <div className="story">
-      <h3>Large Delete</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.Delete}>
-        Delete
-      </Button>
-      <Button disabled={true} size={Button.Size.Large} variant={Button.Variant.Delete}>
-        Delete
-      </Button>
-      <h3>Medium Delete</h3>
-      <Button size={Button.Size.Medium} variant={Button.Variant.Delete}>
-        Delete
-      </Button>
-      <Button disabled={true} size={Button.Size.Medium} variant={Button.Variant.Delete}>
-        Delete
-      </Button>
-      <h3>Small Delete</h3>
-      <Button size={Button.Size.Small} variant={Button.Variant.Delete}>
-        Delete
-      </Button>
-      <Button disabled={true} size={Button.Size.Small} variant={Button.Variant.Delete}>
-        Delete
-      </Button>
-    </div>
-  ))
-  .add('Highlight', () => (
-    <div className="story">
-      <h3>Large Highlight</h3>
-      <Button variant={Button.Variant.Highlight} icon={activityStreamIcon}>
-        Highlight
-      </Button>
-      <Button variant={Button.Variant.Highlight} icon={playCircleIcon} dataLabel={'2:00'}>
-        Highlight
-      </Button>
-      <Button
-        disabled={true}
-        variant={Button.Variant.Highlight}
-        icon={playCircleIcon}
-        dataLabel={'2:00'}
-      >
-        Highlight
-      </Button>
-      <h3>Medium Highlight</h3>
-      <Button size={Button.Size.Medium} variant={Button.Variant.Highlight} icon={playCircleIcon}>
-        Highlight
-      </Button>
-      <Button
-        size={Button.Size.Medium}
-        variant={Button.Variant.Highlight}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Highlight
-      </Button>
-      <Button
-        disabled={true}
-        size={Button.Size.Medium}
-        variant={Button.Variant.Highlight}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
-        Highlight
-      </Button>
-      <h3>Growing</h3>
-      <div css={buttonContainer}>
-        <Button variant={Button.Variant.Highlight} icon={activityStreamIcon} grow={true}>
-          Highlight
-        </Button>
-        <Button
-          variant={Button.Variant.Highlight}
-          icon={playCircleIcon}
-          dataLabel={'2:00'}
-          grow={true}
-        >
-          Highlight
-        </Button>
-      </div>
-    </div>
-  ));
+const getButtonStates = (rowProps: any, renderFn: (props: any) => React.ReactNode) => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={permutateProps(rowProps)}
+      columnProps={permutateProps(
+        {
+          className: [
+            {label: 'Default', value: ''},
+            {label: 'Hover', value: 'hover'},
+            {label: 'Focus', value: 'focus'},
+            {label: 'Focus Hover', value: 'focus hover'},
+            {label: 'Active', value: 'active'},
+            {label: 'Active Hover', value: 'active hover'},
+          ],
+          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+        },
+        (props: any) => {
+          if (props.disabled && !['', 'hover'].includes(props.className)) {
+            return false;
+          }
+          return true;
+        }
+      )}
+    >
+      {renderFn}
+    </ComponentStatesTable>
+  </StaticStates>
+);
 
-storiesOf('Components|Buttons/Button/React/Text', module)
-  .addParameters({component: TextButton})
-  .addDecorator(withReadme(README))
-  .add('Default', () => (
-    <div className="story">
-      <h3>Large</h3>
-      <TextButton size={TextButton.Size.Large} variant={TextButton.Variant.Default}>
-        Text
-      </TextButton>
-      <TextButton disabled={true} size={TextButton.Size.Large} variant={TextButton.Variant.Default}>
-        Text
-      </TextButton>
-      <h3>Small</h3>
-      <TextButton size={TextButton.Size.Small} variant={TextButton.Variant.Default}>
-        Text
-      </TextButton>
-      <TextButton disabled={true} size={TextButton.Size.Small} variant={TextButton.Variant.Default}>
-        Text
-      </TextButton>
-      <h3>All Caps</h3>
-      <TextButton variant={TextButton.Variant.AllCaps}>All Caps</TextButton>
-      <h3>Icons</h3>
-      <div css={buttonContainer}>
-        <TextButton
-          icon={editIcon}
-          iconPosition={TextButton.IconPosition.Left}
-          variant={TextButton.Variant.Default}
-        >
-          Left Icon Large
-        </TextButton>
-        <TextButton
-          icon={arrowRightIcon}
-          iconPosition={TextButton.IconPosition.Right}
-          variant={TextButton.Variant.Default}
-        >
-          Right Icon Large
-        </TextButton>
-      </div>
-    </div>
-  ))
-  .add('Inverse', () => (
-    <div className="story">
-      <h3>Large Inverse</h3>
-      <div css={blueBackground}>
-        <TextButton size={TextButton.Size.Large} variant={TextButton.Variant.Inverse}>
-          Text
-        </TextButton>
-        <TextButton
-          disabled={true}
-          size={TextButton.Size.Large}
-          variant={TextButton.Variant.Inverse}
-        >
-          Text
-        </TextButton>
-      </div>
-      <h3>Small Inverse</h3>
-      <div css={blueBackground}>
-        <TextButton size={TextButton.Size.Small} variant={TextButton.Variant.Inverse}>
-          Text
-        </TextButton>
-        <TextButton
-          disabled={true}
-          size={TextButton.Size.Small}
-          variant={TextButton.Variant.Inverse}
-        >
-          Text
-        </TextButton>
-      </div>
-      <h3>All Caps Inverse</h3>
-      <div css={blueBackground}>
-        <TextButton variant={TextButton.Variant.InverseAllCaps}>All Caps</TextButton>
-      </div>
-      <h3>Icons Inverse</h3>
-      <div css={{...buttonContainer, ...blueBackground}}>
-        <TextButton
-          icon={editIcon}
-          iconPosition={TextButton.IconPosition.Left}
-          variant={TextButton.Variant.Inverse}
-        >
-          Left Icon Large
-        </TextButton>
-        <TextButton
-          icon={arrowRightIcon}
-          iconPosition={TextButton.IconPosition.Right}
-          variant={TextButton.Variant.Inverse}
-        >
-          Right Icon Large
-        </TextButton>
-      </div>
-    </div>
-  ));
+const ButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: Button.Variant.Primary, label: 'Primary'},
+        {value: Button.Variant.Secondary, label: 'Secondary'},
+        {value: Button.Variant.OutlinePrimary, label: 'Outline Primary'},
+        {value: Button.Variant.OutlineSecondary, label: 'Outline Secondary'},
+        {value: Button.Variant.OutlineInverse, label: 'Outline Inverse'},
+      ],
+      size: [
+        {value: Button.Size.Small, label: 'Small'},
+        {value: Button.Size.Medium, label: 'Medium'},
+        {value: Button.Size.Large, label: 'Large'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    (props: any) => (
+      <Container blue={props.variant === Button.Variant.OutlineInverse}>
+        <Button {...props}>Test</Button>
+      </Container>
+    )
+  );
 
-storiesOf('Components|Buttons/Button/React/Outline', module)
-  .addParameters({component: Button})
-  .addDecorator(withReadme(README))
-  .add('Primary', () => (
-    <div className="story">
-      <h3>Large Primary</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.OutlinePrimary}>
-        Outline Primary
-      </Button>
-      <Button
-        size={Button.Size.Large}
-        variant={Button.Variant.OutlinePrimary}
-        icon={activityStreamIcon}
-      >
-        Outline Primary
-      </Button>
-      <Button
-        size={Button.Size.Large}
-        dataLabel={'1:00'}
-        variant={Button.Variant.OutlinePrimary}
-        icon={playCircleIcon}
-      >
-        Outline Primary
-      </Button>
-      <Button
-        size={Button.Size.Large}
-        disabled={true}
-        dataLabel={'1:00'}
-        variant={Button.Variant.OutlinePrimary}
-        icon={playCircleIcon}
-      >
-        Outline Primary
-      </Button>
-      <h3>Medium Primary</h3>
-      <Button size={Button.Size.Medium} variant={Button.Variant.OutlinePrimary}>
-        Outline Primary
-      </Button>
-      <Button size={Button.Size.Medium} variant={Button.Variant.OutlinePrimary} icon={editIcon}>
-        Outline Primary
-      </Button>
-      <Button
-        size={Button.Size.Medium}
-        dataLabel={'1:00'}
-        variant={Button.Variant.OutlinePrimary}
-        icon={playCircleIcon}
-      >
-        Outline Primary
-      </Button>
-      <Button
-        size={Button.Size.Medium}
-        disabled={true}
-        dataLabel={'1:00'}
-        variant={Button.Variant.OutlinePrimary}
-        icon={playCircleIcon}
-      >
-        Outline Primary
-      </Button>
-      <h3>Small Primary</h3>
-      <Button size={Button.Size.Small} variant={Button.Variant.OutlinePrimary}>
-        Outline Primary
-      </Button>
-      <Button size={Button.Size.Small} disabled={true} variant={Button.Variant.OutlinePrimary}>
-        Outline Primary
-      </Button>
-      <h3>Growing Primary</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.OutlinePrimary} grow={true}>
-        Growing Primary Outline
-      </Button>
-    </div>
-  ))
-  .add('Secondary', () => (
-    <div className="story">
-      <h3>Large Secondary</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.OutlineSecondary}>
-        Outline Secondary
-      </Button>
-      <Button
-        size={Button.Size.Large}
-        variant={Button.Variant.OutlineSecondary}
-        icon={activityStreamIcon}
-      >
-        Outline Secondary
-      </Button>
-      <Button
-        size={Button.Size.Large}
-        dataLabel={'1:00'}
-        variant={Button.Variant.OutlineSecondary}
-        icon={playCircleIcon}
-      >
-        Outline Secondary
-      </Button>
-      <Button
-        size={Button.Size.Large}
-        disabled={true}
-        dataLabel={'1:00'}
-        variant={Button.Variant.OutlineSecondary}
-        icon={playCircleIcon}
-      >
-        Outline Secondary
-      </Button>
-      <h3>Medium Secondary</h3>
-      <Button size={Button.Size.Medium} variant={Button.Variant.OutlineSecondary}>
-        Outline Secondary
-      </Button>
-      <Button size={Button.Size.Medium} variant={Button.Variant.OutlineSecondary} icon={editIcon}>
-        Outline Secondary
-      </Button>
-      <Button
-        size={Button.Size.Medium}
-        dataLabel={'1:00'}
-        variant={Button.Variant.OutlineSecondary}
-        icon={playCircleIcon}
-      >
-        Outline Secondary
-      </Button>
-      <Button
-        size={Button.Size.Medium}
-        disabled={true}
-        dataLabel={'1:00'}
-        variant={Button.Variant.OutlineSecondary}
-        icon={playCircleIcon}
-      >
-        Outline Secondary
-      </Button>
-      <h3>Small Secondary</h3>
-      <Button size={Button.Size.Small} variant={Button.Variant.OutlineSecondary}>
-        Outline Secondary
-      </Button>
-      <Button size={Button.Size.Small} disabled={true} variant={Button.Variant.OutlineSecondary}>
-        Outline Secondary
-      </Button>
-      <h3>Growing Secondary</h3>
-      <Button size={Button.Size.Large} variant={Button.Variant.OutlineSecondary} grow={true}>
-        Growing Secondary Outline
-      </Button>
-    </div>
-  ))
-  .add('Inverse', () => (
-    <div className="story">
-      <h3>Large Inverse</h3>
-      <div css={blueBackground}>
-        <Button size={Button.Size.Large} variant={Button.Variant.OutlineInverse}>
-          Outline Inverse
-        </Button>
-        <Button
-          size={Button.Size.Large}
-          variant={Button.Variant.OutlineInverse}
-          icon={activityStreamIcon}
-        >
-          Outline Inverse
-        </Button>
-        <Button
-          size={Button.Size.Large}
-          dataLabel={'1:00'}
-          variant={Button.Variant.OutlineInverse}
-          icon={playCircleIcon}
-        >
-          Outline Inverse
-        </Button>
-        <Button
-          size={Button.Size.Large}
-          disabled={true}
-          dataLabel={'1:00'}
-          variant={Button.Variant.OutlineInverse}
-          icon={playCircleIcon}
-        >
-          Outline Inverse
-        </Button>
-      </div>
-      <h3>Medium Inverse</h3>
-      <div css={blueBackground}>
-        <Button size={Button.Size.Medium} variant={Button.Variant.OutlineInverse}>
-          Outline Inverse
-        </Button>
-        <Button size={Button.Size.Medium} variant={Button.Variant.OutlineInverse} icon={editIcon}>
-          Outline Inverse
-        </Button>
-        <Button
-          size={Button.Size.Medium}
-          dataLabel={'1:00'}
-          variant={Button.Variant.OutlineInverse}
-          icon={playCircleIcon}
-        >
-          Outline Inverse
-        </Button>
-        <Button
-          size={Button.Size.Medium}
-          disabled={true}
-          dataLabel={'1:00'}
-          variant={Button.Variant.OutlineInverse}
-          icon={playCircleIcon}
-        >
-          Outline Inverse
-        </Button>
-      </div>
-      <h3>Small Inverse</h3>
-      <div css={blueBackground}>
-        <Button size={Button.Size.Small} variant={Button.Variant.OutlineInverse}>
-          Outline Inverse
-        </Button>
-        <Button size={Button.Size.Small} disabled={true} variant={Button.Variant.OutlineInverse}>
-          Outline Inverse
-        </Button>
-      </div>
-      <h3>Growing Inverse</h3>
-      <div css={blueBackground} style={{maxWidth: 'initial'}}>
-        <Button size={Button.Size.Large} variant={Button.Variant.OutlineInverse} grow={true}>
-          Growing Inverse Outline
-        </Button>
-      </div>
-    </div>
-  ));
+const DeleteButtonStates = () =>
+  getButtonStates(
+    {
+      size: [
+        {value: DropdownButton.Size.Medium, label: 'Medium'},
+        {value: DropdownButton.Size.Large, label: 'Large'},
+      ],
+    },
+    (props: any) => (
+      <Container>
+        <DeleteButton {...props}>Test</DeleteButton>
+      </Container>
+    )
+  );
 
-storiesOf('Components|Buttons/Button/React/Dropdown', module)
-  .addParameters({component: DropdownButton})
-  .addDecorator(withReadme(README))
-  .add('Primary', () => (
-    <div className="story">
-      <h3>Large Primary</h3>
-      <DropdownButton size={DropdownButton.Size.Large} variant={DropdownButton.Variant.Primary}>
-        Dropdown Button
-      </DropdownButton>
-      <DropdownButton
-        disabled={true}
-        size={DropdownButton.Size.Large}
-        variant={DropdownButton.Variant.Primary}
+const DeprecatedButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: DeprecatedButton.Variant.Primary, label: 'Primary'},
+        {value: DeprecatedButton.Variant.Secondary, label: 'Secondary'},
+        {value: DeprecatedButton.Variant.Delete, label: 'Delete'},
+      ],
+      size: [
+        {value: Button.Size.Small, label: 'Small'},
+        {value: Button.Size.Medium, label: 'Medium'},
+        {value: Button.Size.Large, label: 'Large'},
+      ],
+    },
+    (props: any) => (
+      <Container>
+        <DeprecatedButton {...props}>Test</DeprecatedButton>
+      </Container>
+    )
+  );
+
+const DropdownButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: DropdownButton.Variant.Primary, label: 'Primary'},
+        {value: DropdownButton.Variant.Secondary, label: 'Secondary'},
+      ],
+      size: [
+        {value: DropdownButton.Size.Medium, label: 'Medium'},
+        {value: DropdownButton.Size.Large, label: 'Large'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    (props: any) => (
+      <Container>
+        <DropdownButton {...props}>Test</DropdownButton>
+      </Container>
+    )
+  );
+
+const HighlightButtonStates = () =>
+  getButtonStates(
+    {
+      size: [
+        {value: Button.Size.Small, label: 'Small'},
+        {value: Button.Size.Medium, label: 'Medium'},
+        {value: Button.Size.Large, label: 'Large'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    (props: any) => (
+      <Container>
+        <HighlightButton {...props}>Test</HighlightButton>
+      </Container>
+    )
+  );
+
+const TextButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: TextButton.Variant.Default, label: 'Default'},
+        {value: TextButton.Variant.AllCaps, label: 'All Caps'},
+        {value: TextButton.Variant.Inverse, label: 'Inverse'},
+        {value: TextButton.Variant.InverseAllCaps, label: 'Inverse All Caps'},
+      ],
+      size: [
+        {value: TextButton.Size.Small, label: 'Small'},
+        {value: TextButton.Size.Medium, label: 'Medium'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    (props: any) => (
+      <Container
+        blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
+          props.variant
+        )}
       >
-        Dropdown Button
-      </DropdownButton>
-      <h3>Medium Primary</h3>
-      <DropdownButton size={DropdownButton.Size.Medium} variant={DropdownButton.Variant.Primary}>
-        Dropdown Button
-      </DropdownButton>
-      <DropdownButton
-        disabled={true}
-        size={DropdownButton.Size.Medium}
-        variant={DropdownButton.Variant.Primary}
-      >
-        Dropdown Button
-      </DropdownButton>
-    </div>
-  ))
-  .add('Secondary', () => (
-    <div className="story">
-      <h3>Large Secondary</h3>
-      <DropdownButton size={DropdownButton.Size.Large} variant={DropdownButton.Variant.Secondary}>
-        Dropdown Button
-      </DropdownButton>
-      <DropdownButton
-        disabled={true}
-        size={DropdownButton.Size.Large}
-        variant={DropdownButton.Variant.Secondary}
-      >
-        Dropdown Button
-      </DropdownButton>
-      <h3>Medium Secondary</h3>
-      <DropdownButton size={DropdownButton.Size.Medium} variant={DropdownButton.Variant.Secondary}>
-        Dropdown Button
-      </DropdownButton>
-      <DropdownButton
-        disabled={true}
-        size={DropdownButton.Size.Medium}
-        variant={DropdownButton.Variant.Secondary}
-      >
-        Dropdown Button
-      </DropdownButton>
-    </div>
-  ));
+        <TextButton {...props}>Test</TextButton>
+      </Container>
+    )
+  );
+
+const IconButtonStates = () => (
+  <React.Fragment>
+    {[false, true].map(toggled => (
+      <div key={`toggled-${toggled}`}>
+        <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
+        {getButtonStates(
+          {
+            variant: [
+              {value: IconButton.Variant.Inverse, label: 'Inverse'},
+              {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+              {value: IconButton.Variant.Plain, label: 'Plain'},
+              {value: IconButton.Variant.Circle, label: 'Circle'},
+              {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+              {value: IconButton.Variant.Square, label: 'Square'},
+              {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+            ],
+            size: [
+              {value: IconButton.Size.Small, label: 'Small'},
+              {value: IconButton.Size.Medium, label: 'Medium'},
+            ],
+          },
+          (props: any) => (
+            <Container
+              blue={[IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].includes(
+                props.variant
+              )}
+            >
+              <IconButton
+                toggled={toggled}
+                icon={activityStreamIcon}
+                aria-label="Play"
+                {...props}
+                onChange={() => {}} // eslint-disable-line no-empty-function
+              />
+            </Container>
+          )
+        )}
+      </div>
+    ))}
+  </React.Fragment>
+);
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
+  .addParameters({
+    component: Button,
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('States', () => <ButtonStates />);
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Delete Button', module)
+  .addParameters({
+    component: DeleteButton,
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('States', () => <DeleteButtonStates />);
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Deprecated Button', module)
+  .addParameters({
+    component: DeprecatedButton,
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('States', () => <DeprecatedButtonStates />);
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Dropdown Button', module)
+  .addParameters({
+    component: DropdownButton,
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('States', () => <DropdownButtonStates />);
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Highlight Button', module)
+  .addParameters({
+    component: HighlightButton,
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('States', () => <HighlightButtonStates />);
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Text Button', module)
+  .addParameters({
+    component: TextButton,
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('States', () => <TextButtonStates />);
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Icon Button', module)
+  .addParameters({
+    component: IconButton,
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('States', () => <IconButtonStates />);
