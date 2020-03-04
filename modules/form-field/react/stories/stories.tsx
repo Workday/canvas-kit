@@ -20,23 +20,13 @@ const FormFieldStates = () => (
         {label: 'Hidden Label', props: {labelPosition: FormFieldLabelPosition.Hidden}},
         {label: 'Grow', props: {grow: true}},
       ]}
-      columnProps={permutateProps(
-        {
-          error: [
-            {value: undefined, label: 'No Error'},
-            {value: FormField.ErrorType.Alert, label: 'Alert'},
-            {value: FormField.ErrorType.Error, label: 'Error'},
-          ],
-
-          // disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-        }
-        // props => {
-        //   if (props.disabled && !['', 'hover'].includes(props.className)) {
-        //     return false;
-        //   }
-        //   return true;
-        // }
-      )}
+      columnProps={permutateProps({
+        error: [
+          {value: undefined, label: 'Default'},
+          {value: FormField.ErrorType.Alert, label: 'Alert'},
+          {value: FormField.ErrorType.Error, label: 'Error'},
+        ],
+      })}
     >
       {props => (
         <FormField {...props} hintText="Helpful text goes here." label="Label">
@@ -63,13 +53,6 @@ storiesOf('Components|Inputs/Form Field/React/Label', module)
 storiesOf('Components|Inputs/Form Field/React', module)
   .addParameters({component: Hint})
   .addDecorator(withReadme(README))
-  .add('Default', () => (
-    <div className="story">
-      <FormField error={FormField.ErrorType.Error} label="Label">
-        <input />
-      </FormField>
-    </div>
-  ))
   .add('Hint', () => (
     <div className="story">
       <Hint>Hint</Hint>

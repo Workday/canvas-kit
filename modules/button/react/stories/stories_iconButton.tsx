@@ -118,7 +118,6 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
         {...commonIconButtonProps}
         variant={IconButton.Variant.Circle}
         size={IconButton.Size.Medium}
-        fill="orange"
       />
       <IconButton
         variant={IconButton.Variant.Circle}
