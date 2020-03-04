@@ -1,5 +1,6 @@
 import {keyframes, CSSObject} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
+import {CanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import memoize from 'lodash/memoize';
 
 type FocusRingParams = {
@@ -43,12 +44,12 @@ export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.s
 
 /**
  * A utility to create a canvas style focus ring around your widget.
- * By default, this mixin will create a 1px focus ring tightly wrapped
- * to the widget (no whitespace).
+ * By default, this mixin will create a 2px focus ring tightly wrapped
+ * to the container (no whitespace).
  *
  * @param ringWidth        Allows the user to specify the thickness in px of the focus ring.
  * @param separationWidth  Allows the user to define the width in px of the whitespace
- *                         that there should be between the widget and the focus ring.
+ *                         that there should be between the component and the focus ring.
  * @param animate          Set property to false to opt out of the standard grow out of the middle animation
  * @param inset            Determines whether or not the focus ring is inset
  * @param innerShadowColor Allows the user to specify the inner shadow color
@@ -79,4 +80,51 @@ export default function focusRing(
   }
 
   return calculateFocusRing(argsToPass);
+}
+
+interface ThemedFocusRingOptions {
+  width?: number;
+  separation?: number;
+  animate?: boolean;
+  inset?: boolean;
+  innerColor?: string;
+  outerColor?: string;
+  memoize?: boolean;
+}
+
+/**
+ * A utility to create a canvas style focus ring around your widget.
+ * By default, this mixin will create a 2px focus ring tightly wrapped
+ * to the container (no whitespace).
+ *
+ * @returns {CSSObject} the css object for the focus ring style
+ */
+export function themedFocusRing(
+  theme: CanvasTheme,
+  options: ThemedFocusRingOptions = {}
+): CSSObject {
+  const {
+    width = 2,
+    separation = 0,
+    animate = true,
+    inset = false,
+    innerColor = canvas.colors.frenchVanilla100,
+    outerColor = theme.palette.common.focusOutline,
+    memoize = true,
+  } = options;
+
+  const args: FocusRingParams = {
+    ringWidth: width,
+    separationWidth: separation,
+    innerShadowColor: innerColor,
+    outerShadowColor: outerColor,
+    animate,
+    inset,
+  };
+
+  if (memoize) {
+    return memoizedFocusRing(args);
+  }
+
+  return calculateFocusRing(args);
 }

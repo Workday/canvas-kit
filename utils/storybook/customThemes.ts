@@ -18,7 +18,7 @@ export const customColorTheme: PartialCanvasTheme = {
       main: 'gray',
     },
     common: {
-      focusOutline: 'purple',
+      focusOutline: 'turquoise',
     },
   },
 };

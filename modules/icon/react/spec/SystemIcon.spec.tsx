@@ -21,8 +21,11 @@ describe('System Icon', () => {
     const componentStyle = systemIconStyles({color, colorHover, background, backgroundHover});
     expect(componentStyle['& .wd-icon-fill']).toHaveProperty('fill', color);
     expect(componentStyle[':hover .wd-icon-fill']).toHaveProperty('fill', colorHover);
-    expect(componentStyle['& .wd-icon-accent']).toHaveProperty('fill', color);
-    expect(componentStyle[':hover .wd-icon-accent']).toHaveProperty('fill', colorHover);
+    expect(componentStyle['& .wd-icon-accent, & .wd-icon-accent2']).toHaveProperty('fill', color);
+    expect(componentStyle[':hover .wd-icon-accent, :hover .wd-icon-accent2']).toHaveProperty(
+      'fill',
+      colorHover
+    );
     expect(componentStyle['& .wd-icon-background']).toHaveProperty('fill', color);
     expect(componentStyle[':hover .wd-icon-background']).toHaveProperty('fill', colorHover);
   });
@@ -44,8 +47,11 @@ describe('System Icon', () => {
     });
     expect(componentStyle['& .wd-icon-fill']).toHaveProperty('fill', fill);
     expect(componentStyle[':hover .wd-icon-fill']).toHaveProperty('fill', fillHover);
-    expect(componentStyle['& .wd-icon-accent']).toHaveProperty('fill', accent);
-    expect(componentStyle[':hover .wd-icon-accent']).toHaveProperty('fill', accentHover);
+    expect(componentStyle['& .wd-icon-accent, & .wd-icon-accent2']).toHaveProperty('fill', accent);
+    expect(componentStyle[':hover .wd-icon-accent, :hover .wd-icon-accent2']).toHaveProperty(
+      'fill',
+      accentHover
+    );
   });
 
   test('SystemIcon should spread extra props', () => {

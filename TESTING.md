@@ -10,8 +10,8 @@ is meant to test:
   requirements are specified (e.g., Given a modal example, When clicking on the button, Then the
   modal should be open). Functional tests are against Storybook Stories.
 - **Visual**: This level is where all styling is tested. Some props only have visual effects and it
-  is difficult to reason about at any other level. All Storybook Stories are automatically visual
-  regression tested.
+  is difficult to reason about at any other level. All Storybook stories can be candidates for
+  visual regression based on an opt-in parameter.
 
 Tests are supposed to be a source of feedback and confidence. To achieve that, a test should be
 clear about intent and failures. Developers tend to ignore passing tests and focus only on failing
@@ -265,12 +265,39 @@ Component helpers come in 3 flavors:
 
 ## Visual Tests
 
-Canvas Kit uses [ChromaticQA](https://www.chromaticqa.com/) for visual tests which are run on every
-Storybook story. All the visual states should be represented by one or more stories. This way all of
-the visual states of a component can be visually regression tested without requiring the test to
-interact with the UI. These states should include loading states, error states, etc. Stories created
-for visual regression tests should avoid dynamic solutions like
+Canvas Kit uses [ChromaticQA](https://www.chromaticqa.com/) for visual tests which are run on stories
+that are opted-in through a special parameter. All the visual states should be represented at least
+one story. This way all of the visual states of a component can be visually regression tested without
+requiring the test to interact with the UI. These states should include loading states, error states,
+etc. Stories created for visual regression tests should avoid dynamic solutions like
 [knobs](https://github.com/storybookjs/storybook/tree/next/addons/knobs).
+
+To make a story runnable in Chromatic for visual testing, add the following to the story's parameter
+list:
+
+```tsx
+// default Storybook API
+storiesOf('Some Category', module)
+  .add('My Visual Story', () => { /** story contents */ })
+  .addParameter({
+    chromatic: {
+      disable: false,
+    },
+  });
+
+// CSF
+export const MyVisualStory = () => {
+  // story contents
+};
+
+MyVisualStory.story = {
+  parameters: {
+    chromatic: {
+      disabled: false,
+    },
+  }
+};
+```
 
 Not all visual states are application states (E.g. `focus`, `hover`, and `active` on a button
 element). For these pseudo-selectors, the `StaticStates` wrapper can be used where pseudo-selectors

@@ -23,7 +23,15 @@ function getPackages(context) {
   const ctx = context || {};
   const cwd = ctx.cwd || process.cwd();
 
-  return readdir(path.resolve(cwd, 'modules'))
+  return Promise.all([
+    readdir(path.resolve(cwd, 'modules'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/_labs'), {withFileTypes: true}),
+  ])
+    .then(([core, labs]) => [...core, ...labs])
+    .then(files => files.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
     .then(files => scopes.concat(files))
-    .then(files => files.map(file => file.replace('_canvas-kit-', '')));
+    .then(files => files.map(file => file.replace(/^(_.+)|(labs)/, '')).filter(name => name));
 }
+
+// To test the output of this function, run the following:
+// node -p "require('./commitlint.config.js').rules['scope-enum']().then(val => console.log(val))"
