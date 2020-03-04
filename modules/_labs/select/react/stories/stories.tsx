@@ -19,27 +19,36 @@ const hintId = 'error-desc-id';
 storiesOf('Labs|Select/React/Top Label', module)
   .addDecorator(withReadme(README))
   .add('Plain', () => (
-    <div className="story">
-      <FormField label="Label" inputId="select-contact">
-        {controlComponent(
-          <Select name="contact">
-            <SelectOption value="email" label="E-mail" />
-            <SelectOption value="phone" label="Phone" />
-            <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
-            <SelectOption value="mail" label="Mail" />
-          </Select>
-        )}
-      </FormField>
-      <FormField label="Label" inputId="select-location">
-        {controlComponent(
-          <Select name="location">
-            <SelectOption value="pleasanton" label="Pleasanton" />
-            <SelectOption value="san-francisco" label="San Francisco" />
-            <SelectOption value="san-mateo" label="San Mateo" />
-          </Select>
-        )}
-      </FormField>
-    </div>
+    <FormField label="Label" inputId="select-plain">
+      {controlComponent(
+        <Select name="contact">
+          <SelectOption value="email" label="E-mail" />
+          <SelectOption value="phone" label="Phone" />
+          <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
+          <SelectOption value="mail" label="Mail" />
+        </Select>
+      )}
+    </FormField>
+  ))
+  .add('Scrollable', () => (
+    <FormField label="Label" inputId="select-scrollable">
+      {controlComponent(
+        <Select name="location">
+          <SelectOption value="atlanta" label="Atlanta" />
+          <SelectOption value="austin" label="Austin" />
+          <SelectOption value="beaverton" label="Beaverton" />
+          <SelectOption value="boston" label="Boston" />
+          <SelectOption value="boulder" label="Boulder" />
+          <SelectOption value="chicago" label="Chicago" />
+          <SelectOption value="dallas" label="Dallas" />
+          <SelectOption value="denver" label="Denver" />
+          <SelectOption value="dublin" label="Dublin" />
+          <SelectOption value="pleasanton" label="Pleasanton" />
+          <SelectOption value="san-francisco" label="San Francisco" />
+          <SelectOption value="san-mateo" label="San Mateo" />
+        </Select>
+      )}
+    </FormField>
   ))
   .add('Disabled', () => (
     <FormField label="Label" inputId="select-disabled">
