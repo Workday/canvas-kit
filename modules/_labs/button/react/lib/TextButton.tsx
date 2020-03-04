@@ -19,7 +19,7 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   size?: 'small' | 'medium';
   /**
    * The position of the TextButton icon. Accepts `Left` or `Right`.
-   * @default IconPosition.Left
+   * @default ButtonIconPosition.Left
    */
   iconPosition?: ButtonIconPosition;
   /**

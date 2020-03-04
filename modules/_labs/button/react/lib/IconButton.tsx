@@ -22,8 +22,8 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    */
   size?: 'small' | 'medium';
   /**
-   * If true, toggle the IconButton on.
-   * @default false
+   * The toggled state of the button. If defined as a boolean, then it manages the toggled state: on (`true`) or off (`false`).
+   * @default undefined
    */
   toggled?: boolean;
   /**
