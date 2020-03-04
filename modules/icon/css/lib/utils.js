@@ -38,11 +38,9 @@ export function getColor(color) {
   if (!/[0-9]{3}$/.test(color)) {
     findColor = `${color}500`;
   }
-  const foundColor = Object.keys(canvasColors).find(colorName => colorName === findColor);
+  const foundColor = canvasColors[findColor];
 
-  if (!foundColor) return null;
-
-  return canvasColors[foundColor];
+  return foundColor ? foundColor : null;
 }
 
 export function appendStyle(css) {
