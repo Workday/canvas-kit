@@ -5,11 +5,14 @@ import React from 'react';
 import uuid from 'uuid/v4';
 
 interface GoToProps {
+  /** Will be called when the user submits the form. In this case, it is when the enter key is pressed */
   onSubmit: (page: number) => void;
+  /** Max number of pages we could go to */
   max: number;
-  goToLabel?: string;
+  /** Label for the "Go To" input */
+  label?: string;
 }
-const GoToLabel = styled('label')({
+const StyledLabel = styled('label')({
   margin: 'auto 0',
   paddingRight: '8px',
   ...type.body,
@@ -21,12 +24,11 @@ const GoToWrapper = styled('div')({
   paddingLeft: '12px',
 });
 
-const InputWrapper = styled('form')({
+const StyledForm = styled('form')({
   minWidth: '10px',
 });
 
-const GoTo: React.FC<GoToProps> = props => {
-  const {onSubmit, max, goToLabel = 'Go To'} = props;
+const GoTo = ({onSubmit, max, label = 'Go To'}: GoToProps) => {
   const [value, setValue] = React.useState('');
   const [goToId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
 
@@ -50,8 +52,8 @@ const GoTo: React.FC<GoToProps> = props => {
   };
   return (
     <GoToWrapper>
-      <GoToLabel htmlFor={goToId}>{goToLabel}</GoToLabel>
-      <InputWrapper onSubmit={formSubmit}>
+      <StyledLabel htmlFor={goToId}>{label}</StyledLabel>
+      <StyledForm onSubmit={formSubmit}>
         <TextInput
           width={53}
           height={32}
@@ -64,7 +66,7 @@ const GoTo: React.FC<GoToProps> = props => {
             setValue(e.target.value);
           }}
         />
-      </InputWrapper>
+      </StyledForm>
     </GoToWrapper>
   );
 };

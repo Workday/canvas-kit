@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
+import React from 'react';
+
 import {type} from '@workday/canvas-kit-labs-react-core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas from '@workday/canvas-kit-react-core';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import React from 'react';
 
 import GoTo from './GoTo';
 import Pages from './Pages';
@@ -31,13 +32,13 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   previousPageAriaLabel: string;
   /** Customizes the aria label for the Next Page Arrow. */
   nextPageAriaLabel: string;
-  /** Customizes each page button. */
+  /** Customizes the aria-label on each page button. */
   pageButtonAriaLabel: (page: number, selected: boolean) => string;
   /** Optional width to pass to component. This is the width the container deems is available. You can use a measure component to get this. */
   width?: number;
 }
 
-const Label = styled('div')({
+const StyledLabel = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -47,7 +48,7 @@ const Label = styled('div')({
   paddingTop: '12px',
 });
 
-const Container = styled('nav')({
+const StyledContainer = styled('nav')({
   display: 'flex',
   alignItems: 'center',
   flexFlow: 'row wrap',
@@ -56,7 +57,7 @@ const Container = styled('nav')({
 
 const ButtonsContainer = styled('div')({
   '& > * ': {
-    margin: `${0} ${canvas.spacing.xxxs}`,
+    margin: `0 ${canvas.spacing.xxxs}`,
   },
 });
 
@@ -95,7 +96,7 @@ const Pagination = (props: PaginationProps) => {
 
   return (
     <>
-      <Container aria-label={paginationContainerAriaLabel} {...elemProps}>
+      <StyledContainer aria-label={paginationContainerAriaLabel} {...elemProps}>
         <ButtonsContainer>
           <IconButton
             disabled={currentPage - 1 <= 0}
@@ -121,9 +122,9 @@ const Pagination = (props: PaginationProps) => {
             onClick={e => onPageChange(currentPage + 1)}
           />
         </ButtonsContainer>
-        {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} goToLabel={goToLabel} />}
-        {showLabel && <Label>{customLabel(labelFrom, labelTo, total)}</Label>}
-      </Container>
+        {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} label={goToLabel} />}
+        {showLabel && <StyledLabel>{customLabel(labelFrom, labelTo, total)}</StyledLabel>}
+      </StyledContainer>
     </>
   );
 };

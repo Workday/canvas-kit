@@ -1,10 +1,11 @@
 /** @jsx jsx */
 import {css, jsx} from '@emotion/core';
+import range from 'lodash/range';
+import React from 'react';
+
 import type from '@workday/canvas-kit-labs-react-core';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import canvas from '@workday/canvas-kit-react-core';
-import range from 'lodash/range';
-import React from 'react';
 
 interface PagesProps {
   total: number;
@@ -16,6 +17,12 @@ interface PagesProps {
 
 const noPointerEvents = css({
   pointerEvents: 'none',
+});
+
+const ellipsisStyle = css(noPointerEvents, {
+  width: canvas.spacing.l,
+  textAlign: 'center',
+  display: 'inline-block',
 });
 
 const noTransitions = css({
@@ -61,9 +68,7 @@ export function getPages(total: number, current: number, isMobile: boolean): [nu
   return [[1], range(total - maxWithSplit + padNumber, total + 1)];
 }
 
-const Pages: React.FC<PagesProps> = props => {
-  const {total, current, onPageClick, isMobile, pageButtonAriaLabel} = props;
-
+const Pages = ({total, current, onPageClick, isMobile, pageButtonAriaLabel}: PagesProps) => {
   const pageToButton = (page: number) => (
     <IconButton
       key={page}
@@ -85,7 +90,7 @@ const Pages: React.FC<PagesProps> = props => {
     right.length === 0
       ? []
       : [
-          <span css={noPointerEvents} key={'ellipsis'} style={type.small}>
+          <span css={ellipsisStyle} key={'ellipsis'} style={type.small}>
             ...
           </span>,
         ];
