@@ -1,12 +1,7 @@
 import SVGInjector from 'svg-injector';
 import toSlug from 'to-slug-case';
 import canvasColors from '@workday/canvas-colors-web';
-import {
-  appendStyle,
-  getHue,
-  getColor,
-  pickForegroundColor,
-} from './utils';
+import {appendStyle, getHue, getColor, pickForegroundColor} from './utils';
 
 const cdnUrl = 'https://design.workdaycdn.com/beta/assets/web-icons';
 
@@ -122,10 +117,12 @@ function colorIcons(selector, iconRoot = document) {
   icons.forEach(i => {
     const category = getIconCategory(i);
 
-    Object.entries(category.colorables).forEach(([attr, className]) => {
+    Object.keys(category.colorables).forEach(attr => {
+      const className = category.colorables[attr];
       if (typeof className === 'function') {
-        Object.entries(className(i.getAttribute(attr))).forEach(([cName, color]) => {
-          colorIconClass(i, cName, color);
+        const classnames = className(i.getAttribute(attr));
+        Object.keys(classnames).forEach(cName => {
+          colorIconClass(i, cName, classnames[cName]);
         });
         return;
       }
