@@ -257,6 +257,8 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
 
 export default class Select extends React.Component<SelectProps, SelectState> {
   private inputRef = React.createRef<HTMLInputElement>();
+  private focusedOptionRef = React.createRef<HTMLLIElement>();
+
   private removeMenuTimer: ReturnType<typeof setTimeout>;
   private selectionPersistMenuTimer: ReturnType<typeof setTimeout>;
   private selectionCompletionTimer: ReturnType<typeof setTimeout>;
@@ -348,6 +350,19 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.setState({
       label: firstOption.props.label,
     });
+  }
+
+  componentDidUpdate(prevProps: SelectProps, prevState: SelectState) {
+    // scroll focused option into view if it changed since the
+    // last render
+    if (this.state.focusedOptionIndex !== prevState.focusedOptionIndex) {
+      const focusedOption = this.focusedOptionRef.current;
+      if (focusedOption) {
+        // TODO: consider polyfill for scrollIntoViewIfNeeded
+        // https://gist.github.com/hsablonniere/2581101
+        focusedOption.scrollIntoView(false);
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -520,6 +535,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         this.handleOptionClick(child.props);
       },
 
+      optionRef: this.state.focusedOptionIndex === index ? this.focusedOptionRef : undefined,
       selected: this.state.selectedOptionIndex === index,
       suppressed: !this.isMenuInteractive(),
     });

@@ -12,6 +12,7 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
   id?: string;
   justSelected?: boolean;
   label: string;
+  optionRef?: React.Ref<HTMLLIElement>;
   selected?: boolean;
   suppressed?: boolean;
   value: string;
@@ -78,7 +79,7 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
   };
 
   public render() {
-    const {disabled, id, label, selected, value, ...elemProps} = this.props;
+    const {disabled, id, label, optionRef, selected, value, ...elemProps} = this.props;
 
     return (
       <Option
@@ -86,6 +87,7 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
         disabled={disabled}
         id={id}
         label={label}
+        ref={optionRef}
         role="option"
         selected={selected}
         value={value}
