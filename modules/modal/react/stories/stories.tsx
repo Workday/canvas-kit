@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button} from '../../../button/react';
+import {Button, DeleteButton} from '../../../button/react';
 import Modal, {useModal} from '..';
 import README from '../README.md';
 
@@ -22,14 +22,14 @@ const DefaultModalExample = () => {
 
   return (
     <>
-      <Button variant={Button.Variant.Delete} buttonRef={buttonRef} onClick={openModal}>
+      <DeleteButton buttonRef={buttonRef} onClick={openModal}>
         Delete Item
-      </Button>
+      </DeleteButton>
       <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
-        </Button>
+        </DeleteButton>
         <Button onClick={closeModal} variant={Button.Variant.Secondary}>
           Cancel
         </Button>
@@ -43,14 +43,12 @@ const UseModalExample = () => {
 
   return (
     <>
-      <Button variant={Button.Variant.Delete} {...targetProps}>
-        Delete Item
-      </Button>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
-        </Button>
+        </DeleteButton>
         <Button onClick={closeModal} variant={Button.Variant.Secondary}>
           Cancel
         </Button>
@@ -64,9 +62,7 @@ const NoCloseModalExample = () => {
 
   return (
     <>
-      <Button variant={Button.Variant.Delete} {...targetProps}>
-        Delete Item
-      </Button>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <Modal
         data-testid="TestModal"
         heading={'Delete Item'}
@@ -74,9 +70,9 @@ const NoCloseModalExample = () => {
         handleClose={undefined}
       >
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
-        </Button>
+        </DeleteButton>
         <Button onClick={closeModal} variant={Button.Variant.Secondary}>
           Cancel
         </Button>
@@ -91,9 +87,7 @@ const CustomFocusModalExample = () => {
 
   return (
     <>
-      <Button variant={Button.Variant.Delete} {...targetProps}>
-        Delete Item
-      </Button>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <Modal
         data-testid="TestModal"
         heading={'Delete Item'}
@@ -102,9 +96,9 @@ const CustomFocusModalExample = () => {
         handleClose={undefined}
       >
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
+        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
-        </Button>
+        </DeleteButton>
         <Button onClick={closeModal} variant={Button.Variant.Secondary} buttonRef={buttonRef}>
           Cancel
         </Button>
