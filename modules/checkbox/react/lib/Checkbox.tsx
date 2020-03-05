@@ -42,10 +42,6 @@ export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTML
    */
   label?: string;
   /**
-   * The function called when the Checkbox state changes.
-   */
-  onChange?: (e: React.SyntheticEvent) => void;
-  /**
    * The value of the Checkbox.
    */
   value?: string;
