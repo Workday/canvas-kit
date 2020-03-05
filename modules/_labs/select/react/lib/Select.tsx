@@ -84,8 +84,19 @@ const menuBorderCSS = (error?: ErrorType): CSSObject => {
   };
 };
 
-const menuListBorderCSS = (borderColor: string, borderWidth = 1): CSSObject => {
+const menuListBorderCSS = (error?: ErrorType): CSSObject => {
+  let borderColor = inputColors.focusBorder;
+  let borderWidth = 1;
+
+  if (error === ErrorType.Error) {
+    borderColor = inputColors.error.border;
+  } else if (error === ErrorType.Alert) {
+    borderColor = inputColors.warning.border;
+    borderWidth = 2;
+  }
+
   const border = `${borderWidth}px solid ${borderColor}`;
+
   return {
     borderBottom: border,
     borderLeft: border,
@@ -222,21 +233,9 @@ const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
     overflowY: 'auto',
     padding: 0,
   },
-  ({error}) => {
-    if (error === ErrorType.Error) {
-      return {
-        ...menuListBorderCSS(inputColors.error.border),
-      };
-    } else if (error === ErrorType.Alert) {
-      return {
-        ...menuListBorderCSS(inputColors.warning.border, 2),
-      };
-    } else {
-      return {
-        ...menuListBorderCSS(inputColors.focusBorder),
-      };
-    }
-  }
+  ({error}) => ({
+    ...menuListBorderCSS(error),
+  })
 );
 
 const SelectInput = styled('input')({
