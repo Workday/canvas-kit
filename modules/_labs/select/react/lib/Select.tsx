@@ -320,6 +320,57 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return !this.state.isMenuHiding && this.state.justSelectedOptionIndex === null;
   };
 
+  // TODO: move code for scrollIntoViewIfNeeded to a centralized place.
+  // Lifted from https://gist.github.com/hsablonniere/2581101
+  // This scrolling behavior is preferable even to the WebKit-proprietary
+  // scrollIntoViewIfNeeded method.
+  private scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
+    const parent: HTMLElement | null = elem.parentElement;
+
+    if (elem && parent) {
+      const parentComputedStyle = window.getComputedStyle(parent, null),
+        parentBorderTopWidth = parseInt(
+          parentComputedStyle.getPropertyValue('border-top-width'),
+          10
+        ),
+        parentBorderLeftWidth = parseInt(
+          parentComputedStyle.getPropertyValue('border-left-width'),
+          10
+        ),
+        overTop = elem.offsetTop - parent.offsetTop < parent.scrollTop,
+        overBottom =
+          elem.offsetTop - parent.offsetTop + elem.clientHeight - parentBorderTopWidth >
+          parent.scrollTop + parent.clientHeight,
+        overLeft = elem.offsetLeft - parent.offsetLeft < parent.scrollLeft,
+        overRight =
+          elem.offsetLeft - parent.offsetLeft + elem.clientWidth - parentBorderLeftWidth >
+          parent.scrollLeft + parent.clientWidth,
+        alignWithTop = overTop && !overBottom;
+
+      if ((overTop || overBottom) && centerIfNeeded) {
+        parent.scrollTop =
+          elem.offsetTop -
+          parent.offsetTop -
+          parent.clientHeight / 2 -
+          parentBorderTopWidth +
+          elem.clientHeight / 2;
+      }
+
+      if ((overLeft || overRight) && centerIfNeeded) {
+        parent.scrollLeft =
+          elem.offsetLeft -
+          parent.offsetLeft -
+          parent.clientWidth / 2 -
+          parentBorderLeftWidth +
+          elem.clientWidth / 2;
+      }
+
+      if ((overTop || overBottom || overLeft || overRight) && !centerIfNeeded) {
+        elem.scrollIntoView(alignWithTop);
+      }
+    }
+  };
+
   constructor(props: SelectProps) {
     super(props);
     this.setOptionIds();
@@ -358,9 +409,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (this.state.focusedOptionIndex !== prevState.focusedOptionIndex) {
       const focusedOption = this.focusedOptionRef.current;
       if (focusedOption) {
-        // TODO: consider polyfill for scrollIntoViewIfNeeded
-        // https://gist.github.com/hsablonniere/2581101
-        focusedOption.scrollIntoView(false);
+        this.scrollIntoViewIfNeeded(focusedOption, false);
       }
     }
   }
