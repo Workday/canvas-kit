@@ -11,6 +11,11 @@ export enum ButtonIconPosition {
   Left = 'iconPositionLeft',
   Right = 'iconPositionRight',
 }
+export const ButtonSize = {
+  Small: 'small',
+  Medium: 'medium',
+  Large: 'large',
+} as const;
 
 /**
  * Outline Button

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {OutlineButtonVariant, ButtonColors} from './types';
+import {OutlineButtonVariant, ButtonColors, ButtonSize} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface OutlineButtonProps
@@ -56,11 +56,7 @@ const OutlineButton = ({
 );
 
 OutlineButton.Variant = OutlineButtonVariant;
-OutlineButton.Size = {
-  Small: 'small',
-  Medium: 'medium',
-  Large: 'large',
-} as const;
+OutlineButton.Size = ButtonSize;
 
 export default OutlineButton;
 

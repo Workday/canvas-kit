@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
-import {ButtonColors} from './types';
+import {ButtonColors, ButtonSize} from './types';
 import {ButtonContainer, ButtonLabel} from './parts';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 
@@ -43,10 +43,6 @@ const DeleteButton = ({size = 'medium', buttonRef, children, ...elemProps}: Dele
   </ButtonContainer>
 );
 
-DeleteButton.Size = {
-  Small: 'small',
-  Medium: 'medium',
-  Large: 'large',
-} as const;
+DeleteButton.Size = ButtonSize;
 
 export default DeleteButton;
