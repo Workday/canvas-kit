@@ -91,8 +91,9 @@ const DeleteButtonStates = () =>
   getButtonStates(
     {
       size: [
-        {value: DropdownButton.Size.Medium, label: 'Medium'},
-        {value: DropdownButton.Size.Large, label: 'Large'},
+        {value: DeleteButton.Size.Small, label: 'Small'},
+        {value: DeleteButton.Size.Medium, label: 'Medium'},
+        {value: DeleteButton.Size.Large, label: 'Large'},
       ],
     },
     (props: any) => (
