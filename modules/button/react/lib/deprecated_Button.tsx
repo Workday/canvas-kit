@@ -1,5 +1,5 @@
 import * as React from 'react';
-import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
+import canvas, {borderRadius, type} from '@workday/canvas-kit-react-core';
 import {focusRing, mouseFocusBehavior, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {DeprecatedButtonVariant} from './types';
 import styled from '@emotion/styled';
@@ -25,11 +25,13 @@ export interface DeprecatedButtonProps
 
 const Container = styled('button')<DeprecatedButtonProps>(
   {
+    fontFamily: type.body.fontFamily,
+    fontSize: type.body.fontSize,
+    ...type.variant.button,
     boxSizing: 'border-box',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '13px',
     borderRadius: borderRadius.circle,
     border: '1px solid transparent',
     boxShadow: 'none',
@@ -49,8 +51,6 @@ const Container = styled('button')<DeprecatedButtonProps>(
           padding: `0 ${canvas.spacing.l}`,
           minWidth: '112px',
           maxWidth: '288px',
-          fontSize: '14px',
-          fontWeight: 500,
         };
       case 'medium':
       default:
@@ -59,8 +59,7 @@ const Container = styled('button')<DeprecatedButtonProps>(
           padding: `0 ${canvas.spacing.m}`,
           minWidth: '80px',
           maxWidth: '200px',
-          fontSize: '13px',
-          fontWeight: 500,
+          fontSize: type.body2.fontSize,
         };
       case 'small':
         return {
@@ -69,10 +68,11 @@ const Container = styled('button')<DeprecatedButtonProps>(
           minWidth: '56px',
           maxWidth: '120px',
           fontSize: '10px',
-          fontWeight: 500,
+          lineHeight: 'normal',
         };
     }
   },
+  ({grow}) => grow && {width: '100%', maxWidth: '100%'},
   ({variant}) => {
     let buttonColors;
     switch (variant) {
@@ -159,7 +159,7 @@ const Container = styled('button')<DeprecatedButtonProps>(
 
 const DeprecatedButton = ({
   variant = DeprecatedButtonVariant.Secondary,
-  size = 'medium',
+  size = 'large',
   buttonRef,
   children,
   ...elemProps
