@@ -29,13 +29,10 @@ storiesOf('Components|Buttons/Button/React', module)
       </HighlightButton>
 
       <h3>Medium Highlight</h3>
+      <HighlightButton size="medium" icon={activityStreamIcon}>
+        Highlight
+      </HighlightButton>
       <HighlightButton size="medium" icon={playCircleIcon}>
-        Highlight
-      </HighlightButton>
-      <HighlightButton size="medium" icon={playCircleIcon} dataLabel={'1:00'}>
-        Highlight
-      </HighlightButton>
-      <HighlightButton disabled={true} size="medium" icon={playCircleIcon} dataLabel={'1:00'}>
         Highlight
       </HighlightButton>
 

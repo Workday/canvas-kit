@@ -3,7 +3,7 @@ import {colors} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors} from './types';
-import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
+import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 
 export interface HighlightButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -17,10 +17,6 @@ export interface HighlightButtonProps
    * The ref to the button that the styled component renders.
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
-  /**
-   * The data label of the HighlightButton.
-   */
-  dataLabel?: String;
   /**
    * The icon of the HighlightButton.
    */
@@ -63,7 +59,6 @@ const getHighlightButtonColors = (): ButtonColors => ({
 const HighlightButton = ({
   size = 'medium',
   buttonRef,
-  dataLabel,
   icon,
   children,
   ...elemProps
@@ -72,7 +67,6 @@ const HighlightButton = ({
     <ButtonContainer colors={getHighlightButtonColors()} size={size} ref={buttonRef} {...elemProps}>
       {icon && <ButtonLabelIcon size={size} icon={icon} />}
       <ButtonLabel>{children}</ButtonLabel>
-      {dataLabel && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
     </ButtonContainer>
   );
 };

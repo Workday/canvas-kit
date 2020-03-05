@@ -154,7 +154,6 @@ const HighlightButtonStates = () =>
         {value: Button.Size.Large, label: 'Large'},
       ],
       icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
     },
     (props: any) => (
       <Container>

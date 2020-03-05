@@ -335,12 +335,6 @@ Default: `false`
 
 ---
 
-#### `dataLabel: String`
-
-> The data label of the button (generally used for media timestamps)
-
----
-
 ### `icon: CanvasSystemIcon`
 
 > The icon of the button
