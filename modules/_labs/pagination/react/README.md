@@ -9,20 +9,14 @@ Contains a component for a pagination bar and dispatches for page changes
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react
-```
-
-or
-
-```sh
-yarn add @workday/canvas-kit-react-pagination
+yarn add @workday/canvas-kit-labs-react-pagination
 ```
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import Pagination from '@workday/canvas-kit-react-pagination';
+import Pagination from '@workday/canvas-kit-labs-react-pagination';
 
 const [currentPage, setCurrentPage] = React.useState(1);
 
