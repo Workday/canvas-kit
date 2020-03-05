@@ -2078,7 +2078,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.6.2", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.6.2", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4":
   version "7.8.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.4.tgz#d79f5a2040f7caa24d53e563aad49cbc05581308"
   integrity sha512-neAp3zt80trRVBI1x0azq6c57aNBqYZH8KhMm3TaB7wEI5Q4A2SHfBHE8w9gOhI/lrqxtEbXZgQIrHP+wvSGwQ==
@@ -6038,6 +6038,11 @@ assign-symbols@^1.0.0:
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
 
+ast-metadata-inferer@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/ast-metadata-inferer/-/ast-metadata-inferer-0.1.1.tgz#66e24fae9d30ca961fac4880b7fc466f09b25165"
+  integrity sha512-hc9w8Qrgg9Lf9iFcZVhNjUnhrd2BBpTlyCnegPVvCe6O0yMrF57a6Cmh7k+xUsfUOMh9wajOL5AsGOBNEyTCcw==
+
 ast-types-flow@0.0.7, ast-types-flow@^0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/ast-types-flow/-/ast-types-flow-0.0.7.tgz#f70b735c6bca1a5c9c22d982c3e39e7feba3bdad"
@@ -7440,6 +7445,11 @@ caniuse-api@^3.0.0:
     caniuse-lite "^1.0.0"
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
+
+caniuse-db@^1.0.30001017:
+  version "1.0.30001031"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001031.tgz#0185ae081003bf59cd249097e2f8e5cb9335d85a"
+  integrity sha512-tIRT8VWRiZ+lSwe5qEOBCAUsXmTqaZk7Tkec1ooSSfgvVkZrtfw0jfOV5r2Of8sA3VtDkpY+dJXQpTGg8n9zEA==
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000955, caniuse-lite@^1.0.30000971, caniuse-lite@^1.0.30000975:
   version "1.0.30000975"
@@ -9841,6 +9851,19 @@ eslint-module-utils@^2.4.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
+eslint-plugin-compat@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-compat/-/eslint-plugin-compat-3.5.1.tgz#09f9c05dcfa9b5cd69345d7ab333749813ed8b14"
+  integrity sha512-dhfW12vZxxKLEVhrPoblmEopgwpYU2Sd4GdXj5OSfbQ+as9+1aY+S5pqnJYJvXXNWFFJ6aspLkCyk4NMQ/pgtA==
+  dependencies:
+    "@babel/runtime" "^7.7.7"
+    ast-metadata-inferer "^0.1.1"
+    browserslist "^4.8.2"
+    caniuse-db "^1.0.30001017"
+    lodash.memoize "4.1.2"
+    mdn-browser-compat-data "^1.0.3"
+    semver "^6.3.0"
+
 eslint-plugin-emotion@^10.0.14:
   version "10.0.14"
   resolved "https://registry.yarnpkg.com/eslint-plugin-emotion/-/eslint-plugin-emotion-10.0.14.tgz#c643ff2f34f85ae77a65b2056915e939cf7e8129"
@@ -10362,7 +10385,7 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
-extend@^3.0.0, extend@~3.0.2:
+extend@3.0.2, extend@^3.0.0, extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
@@ -14718,7 +14741,7 @@ lodash.map@^4.5.1:
   resolved "https://registry.yarnpkg.com/lodash.map/-/lodash.map-4.6.0.tgz#771ec7839e3473d9c4cde28b19394c3562f4f6d3"
   integrity sha1-dx7Hg540c9nEzeKLGTlMNWL09tM=
 
-lodash.memoize@^4.1.2:
+lodash.memoize@4.1.2, lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
@@ -15095,6 +15118,13 @@ mdast-util-to-hast@6.0.2:
     unist-util-position "^3.0.0"
     unist-util-visit "^1.1.0"
     xtend "^4.0.1"
+
+mdn-browser-compat-data@^1.0.3:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-1.0.10.tgz#1f845219f8c19123792e29a2af86992b362d646a"
+  integrity sha512-UusipwyfBuSYQ9+bJXCuLXRg1rPVZic3RSGKtMHPGNFAdIOvXKOrZ9pAN+4udGVW17QOZuR73NpV95BmUfWHxw==
+  dependencies:
+    extend "3.0.2"
 
 mdn-data@2.0.4:
   version "2.0.4"
