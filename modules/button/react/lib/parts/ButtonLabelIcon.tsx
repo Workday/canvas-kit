@@ -11,6 +11,7 @@ export interface ButtonLabelIconProps extends Pick<ButtonProps, 'size' | 'icon'>
   iconPosition?: ButtonIconPosition;
 }
 
+const ICON_SIZE = 24;
 const SMALL_ICON_SIZE = 20;
 
 const ButtonLabelIconStyled = styled('span', {
@@ -20,16 +21,17 @@ const ButtonLabelIconStyled = styled('span', {
     display: 'inline-block',
   },
   ({size}) => ({
-    height: size === 'small' ? SMALL_ICON_SIZE : undefined,
+    width: size === 'small' ? SMALL_ICON_SIZE : ICON_SIZE,
+    height: size === 'small' ? SMALL_ICON_SIZE : ICON_SIZE,
   }),
   ({iconPosition, dropdown}) => ({
     marginLeft:
       iconPosition === ButtonIconPosition.Right
         ? undefined
-        : `-${dropdown ? spacing.xxs : spacing.xxxs}px`,
+        : `-${dropdown ? spacing.xxs : spacing.xxxs}`,
     marginRight:
       iconPosition === ButtonIconPosition.Right
-        ? `-${dropdown ? spacing.xxs : spacing.xxxs}px`
+        ? `-${dropdown ? spacing.xxs : spacing.xxxs}  `
         : undefined,
   })
 );
