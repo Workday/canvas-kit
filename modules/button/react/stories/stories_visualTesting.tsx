@@ -62,175 +62,6 @@ const getButtonStates = (rowProps: any, renderFn: (props: any) => React.ReactNod
   </StaticStates>
 );
 
-const ButtonStates = () =>
-  getButtonStates(
-    {
-      variant: [
-        {value: Button.Variant.Primary, label: 'Primary'},
-        {value: Button.Variant.Secondary, label: 'Secondary'},
-        {value: Button.Variant.OutlinePrimary, label: 'Outline Primary'},
-        {value: Button.Variant.OutlineSecondary, label: 'Outline Secondary'},
-        {value: Button.Variant.OutlineInverse, label: 'Outline Inverse'},
-      ],
-      size: [
-        {value: Button.Size.Small, label: 'Small'},
-        {value: Button.Size.Medium, label: 'Medium'},
-        {value: Button.Size.Large, label: 'Large'},
-      ],
-      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
-    },
-    (props: any) => (
-      <Container blue={props.variant === Button.Variant.OutlineInverse}>
-        <Button {...props}>Test</Button>
-      </Container>
-    )
-  );
-
-const DeleteButtonStates = () =>
-  getButtonStates(
-    {
-      size: [
-        {value: DeleteButton.Size.Small, label: 'Small'},
-        {value: DeleteButton.Size.Medium, label: 'Medium'},
-        {value: DeleteButton.Size.Large, label: 'Large'},
-      ],
-    },
-    (props: any) => (
-      <Container>
-        <DeleteButton {...props}>Test</DeleteButton>
-      </Container>
-    )
-  );
-
-const DeprecatedButtonStates = () =>
-  getButtonStates(
-    {
-      variant: [
-        {value: DeprecatedButton.Variant.Primary, label: 'Primary'},
-        {value: DeprecatedButton.Variant.Secondary, label: 'Secondary'},
-        {value: DeprecatedButton.Variant.Delete, label: 'Delete'},
-      ],
-      size: [
-        {value: Button.Size.Small, label: 'Small'},
-        {value: Button.Size.Medium, label: 'Medium'},
-        {value: Button.Size.Large, label: 'Large'},
-      ],
-    },
-    (props: any) => (
-      <Container>
-        <DeprecatedButton {...props}>Test</DeprecatedButton>
-      </Container>
-    )
-  );
-
-const DropdownButtonStates = () =>
-  getButtonStates(
-    {
-      variant: [
-        {value: DropdownButton.Variant.Primary, label: 'Primary'},
-        {value: DropdownButton.Variant.Secondary, label: 'Secondary'},
-      ],
-      size: [
-        {value: DropdownButton.Size.Medium, label: 'Medium'},
-        {value: DropdownButton.Size.Large, label: 'Large'},
-      ],
-      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
-    },
-    (props: any) => (
-      <Container>
-        <DropdownButton {...props}>Test</DropdownButton>
-      </Container>
-    )
-  );
-
-const HighlightButtonStates = () =>
-  getButtonStates(
-    {
-      size: [
-        {value: Button.Size.Small, label: 'Small'},
-        {value: Button.Size.Medium, label: 'Medium'},
-        {value: Button.Size.Large, label: 'Large'},
-      ],
-      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-    },
-    (props: any) => (
-      <Container>
-        <HighlightButton {...props}>Test</HighlightButton>
-      </Container>
-    )
-  );
-
-const TextButtonStates = () =>
-  getButtonStates(
-    {
-      variant: [
-        {value: TextButton.Variant.Default, label: 'Default'},
-        {value: TextButton.Variant.AllCaps, label: 'All Caps'},
-        {value: TextButton.Variant.Inverse, label: 'Inverse'},
-        {value: TextButton.Variant.InverseAllCaps, label: 'Inverse All Caps'},
-      ],
-      size: [
-        {value: TextButton.Size.Small, label: 'Small'},
-        {value: TextButton.Size.Medium, label: 'Medium'},
-      ],
-      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
-    },
-    (props: any) => (
-      <Container
-        blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
-          props.variant
-        )}
-      >
-        <TextButton {...props}>Test</TextButton>
-      </Container>
-    )
-  );
-
-const IconButtonStates = () => (
-  <React.Fragment>
-    {[false, true].map(toggled => (
-      <div key={`toggled-${toggled}`}>
-        <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
-        {getButtonStates(
-          {
-            variant: [
-              {value: IconButton.Variant.Inverse, label: 'Inverse'},
-              {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
-              {value: IconButton.Variant.Plain, label: 'Plain'},
-              {value: IconButton.Variant.Circle, label: 'Circle'},
-              {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
-              {value: IconButton.Variant.Square, label: 'Square'},
-              {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
-            ],
-            size: [
-              {value: IconButton.Size.Small, label: 'Small'},
-              {value: IconButton.Size.Medium, label: 'Medium'},
-            ],
-          },
-          (props: any) => (
-            <Container
-              blue={[IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].includes(
-                props.variant
-              )}
-            >
-              <IconButton
-                toggled={toggled}
-                icon={activityStreamIcon}
-                aria-label="Play"
-                {...props}
-                onChange={() => {}} // eslint-disable-line no-empty-function
-              />
-            </Container>
-          )
-        )}
-      </div>
-    ))}
-  </React.Fragment>
-);
-
 storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
   .addParameters({
     component: Button,
@@ -238,7 +69,31 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
       disable: false,
     },
   })
-  .add('States', () => <ButtonStates />);
+  .add('States', () =>
+    getButtonStates(
+      {
+        variant: [
+          {value: Button.Variant.Primary, label: 'Primary'},
+          {value: Button.Variant.Secondary, label: 'Secondary'},
+          {value: Button.Variant.OutlinePrimary, label: 'Outline Primary'},
+          {value: Button.Variant.OutlineSecondary, label: 'Outline Secondary'},
+          {value: Button.Variant.OutlineInverse, label: 'Outline Inverse'},
+        ],
+        size: [
+          {value: Button.Size.Small, label: 'Small'},
+          {value: Button.Size.Medium, label: 'Medium'},
+          {value: Button.Size.Large, label: 'Large'},
+        ],
+        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+      },
+      (props: any) => (
+        <Container blue={props.variant === Button.Variant.OutlineInverse}>
+          <Button {...props}>Test</Button>
+        </Container>
+      )
+    )
+  );
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Delete Button', module)
   .addParameters({
@@ -247,7 +102,22 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Delete Button', module
       disable: false,
     },
   })
-  .add('States', () => <DeleteButtonStates />);
+  .add('States', () =>
+    getButtonStates(
+      {
+        size: [
+          {value: DeleteButton.Size.Small, label: 'Small'},
+          {value: DeleteButton.Size.Medium, label: 'Medium'},
+          {value: DeleteButton.Size.Large, label: 'Large'},
+        ],
+      },
+      (props: any) => (
+        <Container>
+          <DeleteButton {...props}>Test</DeleteButton>
+        </Container>
+      )
+    )
+  );
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Deprecated Button', module)
   .addParameters({
@@ -256,7 +126,27 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Deprecated Button', mo
       disable: false,
     },
   })
-  .add('States', () => <DeprecatedButtonStates />);
+  .add('States', () =>
+    getButtonStates(
+      {
+        variant: [
+          {value: DeprecatedButton.Variant.Primary, label: 'Primary'},
+          {value: DeprecatedButton.Variant.Secondary, label: 'Secondary'},
+          {value: DeprecatedButton.Variant.Delete, label: 'Delete'},
+        ],
+        size: [
+          {value: Button.Size.Small, label: 'Small'},
+          {value: Button.Size.Medium, label: 'Medium'},
+          {value: Button.Size.Large, label: 'Large'},
+        ],
+      },
+      (props: any) => (
+        <Container>
+          <DeprecatedButton {...props}>Test</DeprecatedButton>
+        </Container>
+      )
+    )
+  );
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Dropdown Button', module)
   .addParameters({
@@ -265,7 +155,27 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Dropdown Button', modu
       disable: false,
     },
   })
-  .add('States', () => <DropdownButtonStates />);
+  .add('States', () =>
+    getButtonStates(
+      {
+        variant: [
+          {value: DropdownButton.Variant.Primary, label: 'Primary'},
+          {value: DropdownButton.Variant.Secondary, label: 'Secondary'},
+        ],
+        size: [
+          {value: DropdownButton.Size.Medium, label: 'Medium'},
+          {value: DropdownButton.Size.Large, label: 'Large'},
+        ],
+        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+      },
+      (props: any) => (
+        <Container>
+          <DropdownButton {...props}>Test</DropdownButton>
+        </Container>
+      )
+    )
+  );
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Highlight Button', module)
   .addParameters({
@@ -274,7 +184,23 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Highlight Button', mod
       disable: false,
     },
   })
-  .add('States', () => <HighlightButtonStates />);
+  .add('States', () =>
+    getButtonStates(
+      {
+        size: [
+          {value: Button.Size.Small, label: 'Small'},
+          {value: Button.Size.Medium, label: 'Medium'},
+          {value: Button.Size.Large, label: 'Large'},
+        ],
+        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      },
+      (props: any) => (
+        <Container>
+          <HighlightButton {...props}>Test</HighlightButton>
+        </Container>
+      )
+    )
+  );
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Text Button', module)
   .addParameters({
@@ -283,7 +209,33 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Text Button', module)
       disable: false,
     },
   })
-  .add('States', () => <TextButtonStates />);
+  .add('States', () =>
+    getButtonStates(
+      {
+        variant: [
+          {value: TextButton.Variant.Default, label: 'Default'},
+          {value: TextButton.Variant.AllCaps, label: 'All Caps'},
+          {value: TextButton.Variant.Inverse, label: 'Inverse'},
+          {value: TextButton.Variant.InverseAllCaps, label: 'Inverse All Caps'},
+        ],
+        size: [
+          {value: TextButton.Size.Small, label: 'Small'},
+          {value: TextButton.Size.Medium, label: 'Medium'},
+        ],
+        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+      },
+      (props: any) => (
+        <Container
+          blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
+            props.variant
+          )}
+        >
+          <TextButton {...props}>Test</TextButton>
+        </Container>
+      )
+    )
+  );
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Icon Button', module)
   .addParameters({
@@ -292,4 +244,44 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Icon Button', module)
       disable: false,
     },
   })
-  .add('States', () => <IconButtonStates />);
+  .add('States', () => (
+    <React.Fragment>
+      {[false, true].map(toggled => (
+        <div key={`toggled-${toggled}`}>
+          <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
+          {getButtonStates(
+            {
+              variant: [
+                {value: IconButton.Variant.Inverse, label: 'Inverse'},
+                {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+                {value: IconButton.Variant.Plain, label: 'Plain'},
+                {value: IconButton.Variant.Circle, label: 'Circle'},
+                {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+                {value: IconButton.Variant.Square, label: 'Square'},
+                {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+              ],
+              size: [
+                {value: IconButton.Size.Small, label: 'Small'},
+                {value: IconButton.Size.Medium, label: 'Medium'},
+              ],
+            },
+            (props: any) => (
+              <Container
+                blue={[IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].includes(
+                  props.variant
+                )}
+              >
+                <IconButton
+                  toggled={toggled}
+                  icon={activityStreamIcon}
+                  aria-label="Play"
+                  {...props}
+                  onChange={() => {}} // eslint-disable-line no-empty-function
+                />
+              </Container>
+            )
+          )}
+        </div>
+      ))}
+    </React.Fragment>
+  ));
