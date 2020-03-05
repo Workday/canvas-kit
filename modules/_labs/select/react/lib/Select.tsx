@@ -53,6 +53,37 @@ const fadeOutAnimation = keyframes`
   to {opacity: 0;}
 `;
 
+const menuBorderCSS = (error?: ErrorType): CSSObject => {
+  let borderColor = inputColors.focusBorder;
+  let dividerBorderColor = borderColor;
+  let dividerBorderWidth = 1;
+
+  if (error === ErrorType.Error) {
+    borderColor = inputColors.error.border;
+    dividerBorderColor = inputColors.error.border;
+  } else if (error === ErrorType.Alert) {
+    borderColor = colors.cantaloupe600;
+    dividerBorderColor = inputColors.warning.border;
+    dividerBorderWidth = 2;
+  }
+
+  const dividerBorder = `${dividerBorderWidth}px solid ${dividerBorderColor}`;
+
+  return {
+    borderColor: borderColor,
+
+    // render the divider using a pseudo-element
+    '&:before': {
+      backgroundColor: colors.soap400,
+      content: '""',
+      display: 'block',
+      height: 1,
+      borderLeft: dividerBorder,
+      borderRight: dividerBorder,
+    },
+  };
+};
+
 const menuListBorderCSS = (borderColor: string, borderWidth = 1): CSSObject => {
   const border = `${borderWidth}px solid ${borderColor}`;
   return {
@@ -165,6 +196,9 @@ const SelectMenu = styled('div')<
     // transition: `${toggleMenuAnimationDuration / 1000}s opacity`,
     zIndex: 1,
   },
+  ({error}) => ({
+    ...menuBorderCSS(error),
+  }),
   ({isMenuHidden}) =>
     isMenuHidden && {
       display: 'none',
@@ -176,27 +210,11 @@ const SelectMenu = styled('div')<
   ({grow}) =>
     grow && {
       width: '100%',
-    },
-  ({error}) => {
-    if (error === ErrorType.Error) {
-      return {
-        borderColor: inputColors.error.border,
-      };
-    } else if (error === ErrorType.Alert) {
-      return {
-        borderColor: colors.cantaloupe600,
-      };
-    } else {
-      return {
-        borderColor: inputColors.focusBorder,
-      };
     }
-  }
 );
 
 const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
   {
-    borderTop: `1px solid ${colors.soap400} !important`,
     listStyle: 'none',
     margin: 0,
     // TODO: figure out proper maxHeight
