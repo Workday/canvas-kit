@@ -4,6 +4,7 @@ import {
   DeleteButton,
   DropdownButton,
   HighlightButton,
+  OutlineButton,
   TextButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
@@ -14,6 +15,7 @@ const map: any = {
   'Delete Button': DeleteButton,
   'Dropdown Button': DropdownButton,
   'Highlight Button': HighlightButton,
+  'Outline Button': OutlineButton,
   'Text Button': TextButton,
   'Deprecated Button': DeprecatedButton,
 };

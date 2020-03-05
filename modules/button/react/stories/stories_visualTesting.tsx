@@ -12,6 +12,7 @@ import {
   TextButton,
   DeleteButton,
   HighlightButton,
+  OutlineButton,
   IconButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
@@ -75,9 +76,6 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
         variant: [
           {value: Button.Variant.Primary, label: 'Primary'},
           {value: Button.Variant.Secondary, label: 'Secondary'},
-          {value: Button.Variant.OutlinePrimary, label: 'Outline Primary'},
-          {value: Button.Variant.OutlineSecondary, label: 'Outline Secondary'},
-          {value: Button.Variant.OutlineInverse, label: 'Outline Inverse'},
         ],
         size: [
           {value: Button.Size.Small, label: 'Small'},
@@ -88,7 +86,7 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
         dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
       },
       (props: any) => (
-        <Container blue={props.variant === Button.Variant.OutlineInverse}>
+        <Container>
           <Button {...props}>Test</Button>
         </Container>
       )
@@ -197,6 +195,37 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Highlight Button', mod
       (props: any) => (
         <Container>
           <HighlightButton {...props}>Test</HighlightButton>
+        </Container>
+      )
+    )
+  );
+
+storiesOf('Components|Buttons/Button/React/Visual Testing/Outline Button', module)
+  .addParameters({
+    component: Button,
+    chromatic: {
+      disable: false,
+    },
+  })
+  .add('States', () =>
+    getButtonStates(
+      {
+        variant: [
+          {value: OutlineButton.Variant.Primary, label: 'Outline Primary'},
+          {value: OutlineButton.Variant.Secondary, label: 'Outline Secondary'},
+          {value: OutlineButton.Variant.Inverse, label: 'Outline Inverse'},
+        ],
+        size: [
+          {value: Button.Size.Small, label: 'Small'},
+          {value: Button.Size.Medium, label: 'Medium'},
+          {value: Button.Size.Large, label: 'Large'},
+        ],
+        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+      },
+      (props: any) => (
+        <Container blue={props.variant === OutlineButton.Variant.Inverse}>
+          <OutlineButton {...props}>Test</OutlineButton>
         </Container>
       )
     )

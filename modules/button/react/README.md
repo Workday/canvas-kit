@@ -55,6 +55,7 @@ able to compile your code.
 - [DeleteButton](#deletebutton)
 - [DropdownButton](#dropdownbutton)
 - [HighlightButton](#highlightbutton)
+- [OutlineButton](#outlinebutton)
 - [TextButton](#textbutton)
 - [Icon Button](#icon-button)
 
@@ -101,13 +102,10 @@ import {Button} from '@workday/canvas-kit-react-button';
 
 Default: `ButtonVariant.Secondary`
 
-| Theme              | Description                                   |
-| ------------------ | --------------------------------------------- |
-| `Primary`          | Blue background, white text                   |
-| `Secondary`        | Gray background, dark gray text               |
-| `OutlinePrimary`   | Transparent background, blue border and text  |
-| `OutlineSecondary` | Transparent background, gray border and text  |
-| `OutlineInverse`   | Transparent background, white border and text |
+| Theme       | Description                     |
+| ----------- | ------------------------------- |
+| `Primary`   | Blue background, white text     |
+| `Secondary` | Gray background, dark gray text |
 
 ---
 
@@ -332,6 +330,95 @@ Default: `false`
 #### `buttonRef: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button
+
+---
+
+# OutlineButton
+
+```tsx
+import * as React from 'react';
+import {OutlineButton} from '@workday/canvas-kit-react-button';
+
+<OutlineButton>Button Label</OutlineButton>;
+```
+
+## Static Properties
+
+#### `Size: 'small' | 'medium' | 'large'`
+
+```tsx
+<OutlineButton size={OutlineButton.Size.Small}>Small Button</OutlineButton>
+```
+
+---
+
+#### `Variant: OutlineButtonVariant`
+
+```tsx
+<OutlineButton variant={OutlineButton.Variant.Primary}>Primary Button</OutlineButton>
+```
+
+## Component Props
+
+### Required
+
+#### `children: ReactNode`
+
+> Buttons cannot be empty
+
+### Optional
+
+#### `variant: ButtonVariant`
+
+> The type of the button
+
+Default: `OutlineButtonVariant.Secondary`
+
+| Theme       | Description                                   |
+| ----------- | --------------------------------------------- |
+| `Primary`   | Transparent background, blue border and text  |
+| `Secondary` | Transparent background, gray border and text  |
+| `Inverse`   | Transparent background, white border and text |
+
+---
+
+#### `size: 'small' | 'medium' | 'large'`
+
+> The size of the button
+
+Default: `'medium'`
+
+| Theme    | Description                            |
+| -------- | -------------------------------------- |
+| `small`  | 24px tall, small padding, small text   |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
+
+---
+
+#### `grow: boolean`
+
+> If true, the button will grow to its container's width.
+
+Default: `false`
+
+---
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+#### `dataLabel: String`
+
+> The data label of the button (generally used for media timestamps)
 
 ---
 

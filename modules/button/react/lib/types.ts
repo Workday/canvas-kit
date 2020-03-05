@@ -1,14 +1,11 @@
 import {CSSObject} from '@emotion/core';
 
 /**
- * Standard button Button
+ * Standard Button
  */
 export enum ButtonVariant {
   Primary = 'primary',
   Secondary = 'secondary',
-  OutlinePrimary = 'outlinePrimary',
-  OutlineSecondary = 'outlineSecondary',
-  OutlineInverse = 'outlineInverse',
 }
 export enum ButtonIconPosition {
   Left = 'iconPositionLeft',
@@ -16,11 +13,20 @@ export enum ButtonIconPosition {
 }
 
 /**
+ * Outline Button
+ */
+export enum OutlineButtonVariant {
+  Primary = 'outlinePrimary',
+  Secondary = 'outlineSecondary',
+  Inverse = 'outlineInverse',
+}
+
+/**
  * Dropdown Button
  */
 export enum DropdownButtonVariant {
-  Primary = 'primary',
-  Secondary = 'secondary',
+  Primary = 'dropdownPrimary',
+  Secondary = 'dropdownSecondary',
 }
 
 /**
