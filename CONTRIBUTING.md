@@ -69,7 +69,8 @@ within a single repository.
 
 Canvas Kit uses [Jest](https://jestjs.io/) and
 [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) to unit test
-our React components. Each and every component requires at least 80% unit test coverage.
+our React components. For more information about our testing strategy and how we write unit tests,
+visit our [Testing Readme](./TESTING.md)
 
 Canvas Kit uses [Cypress](cypress.io) for UI tests. For info on why we chose Cypress, visit
 [Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
