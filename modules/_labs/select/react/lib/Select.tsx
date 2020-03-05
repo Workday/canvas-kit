@@ -121,10 +121,6 @@ const SelectButton = styled('button')<
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // IE11 bugfix: add padding so text is displayed properly
     margin: 0, // Fix Safari
-    // prevent selection of text when tabbing to input
-    '&::selection': {
-      background: 'transparent',
-    },
     '&::placeholder': {
       color: inputColors.placeholder,
     },
