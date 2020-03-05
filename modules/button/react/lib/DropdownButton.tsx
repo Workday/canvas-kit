@@ -30,19 +30,17 @@ const DropdownButton = ({
   buttonRef,
   children,
   ...elemProps
-}: DropdownButtonProps) => {
-  return (
-    <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
-      <ButtonLabel>{children}</ButtonLabel>
-      <ButtonLabelIcon
-        size={size}
-        icon={caretDownIcon}
-        iconPosition={ButtonIconPosition.Right}
-        dropdown={true}
-      />
-    </ButtonContainer>
-  );
-};
+}: DropdownButtonProps) => (
+  <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
+    <ButtonLabel>{children}</ButtonLabel>
+    <ButtonLabelIcon
+      size={size}
+      icon={caretDownIcon}
+      iconPosition={ButtonIconPosition.Right}
+      dropdown={true}
+    />
+  </ButtonContainer>
+);
 
 DropdownButton.Variant = DropdownButtonVariant;
 DropdownButton.Size = {

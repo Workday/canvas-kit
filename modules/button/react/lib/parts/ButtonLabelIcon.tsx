@@ -17,10 +17,9 @@ const ButtonLabelIconStyled = styled('span', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<ButtonLabelIconProps>(
   {
-    display: 'flex',
+    display: 'inline-block',
   },
   ({size}) => ({
-    display: size === 'small' ? 'none' : 'inline-block',
     height: size === 'small' ? SMALL_ICON_SIZE : undefined,
   }),
   ({iconPosition, dropdown}) => ({

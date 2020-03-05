@@ -22,10 +22,12 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   buttonRef?: React.Ref<HTMLButtonElement>;
   /**
    * The data label of the Button.
+   * Note: not displayed at `small` size
    */
   dataLabel?: String;
   /**
    * The icon of the Button.
+   * Note: not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
 }
@@ -38,15 +40,13 @@ const Button = ({
   icon,
   children,
   ...elemProps
-}: ButtonProps) => {
-  return (
-    <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
-      {icon && <ButtonLabelIcon size={size} icon={icon} />}
-      <ButtonLabel>{children}</ButtonLabel>
-      {dataLabel && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-    </ButtonContainer>
-  );
-};
+}: ButtonProps) => (
+  <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
+    {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+    <ButtonLabel>{children}</ButtonLabel>
+    {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+  </ButtonContainer>
+);
 
 Button.Variant = ButtonVariant;
 Button.Size = {

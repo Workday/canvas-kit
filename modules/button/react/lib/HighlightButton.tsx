@@ -62,14 +62,12 @@ const HighlightButton = ({
   icon,
   children,
   ...elemProps
-}: HighlightButtonProps) => {
-  return (
-    <ButtonContainer colors={getHighlightButtonColors()} size={size} ref={buttonRef} {...elemProps}>
-      {icon && <ButtonLabelIcon size={size} icon={icon} />}
-      <ButtonLabel>{children}</ButtonLabel>
-    </ButtonContainer>
-  );
-};
+}: HighlightButtonProps) => (
+  <ButtonContainer colors={getHighlightButtonColors()} size={size} ref={buttonRef} {...elemProps}>
+    {icon && <ButtonLabelIcon size={size} icon={icon} />}
+    <ButtonLabel>{children}</ButtonLabel>
+  </ButtonContainer>
+);
 
 HighlightButton.Size = {
   Medium: 'medium',

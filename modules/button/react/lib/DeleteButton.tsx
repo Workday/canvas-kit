@@ -37,13 +37,11 @@ const getDeleteButtonColors = (): ButtonColors => ({
   },
 });
 
-const DeleteButton = ({size = 'medium', buttonRef, children, ...elemProps}: DeleteButtonProps) => {
-  return (
-    <ButtonContainer colors={getDeleteButtonColors()} size={size} ref={buttonRef} {...elemProps}>
-      <ButtonLabel>{children}</ButtonLabel>
-    </ButtonContainer>
-  );
-};
+const DeleteButton = ({size = 'medium', buttonRef, children, ...elemProps}: DeleteButtonProps) => (
+  <ButtonContainer colors={getDeleteButtonColors()} size={size} ref={buttonRef} {...elemProps}>
+    <ButtonLabel>{children}</ButtonLabel>
+  </ButtonContainer>
+);
 
 DeleteButton.Size = {
   Small: 'small',

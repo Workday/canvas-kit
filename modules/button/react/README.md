@@ -139,13 +139,17 @@ Default: `false`
 
 #### `dataLabel: String`
 
-> The data label of the button (generally used for media timestamps)
+> The data label of the button (generally used for media timestamps).
+>
+> Note: not displayed at `small` size.
 
 ---
 
 ### `icon: CanvasSystemIcon`
 
-> The icon of the button
+> The icon of the button.
+>
+> Note: not displayed at `small` size.
 
 ---
 
@@ -419,12 +423,16 @@ Default: `false`
 #### `dataLabel: String`
 
 > The data label of the button (generally used for media timestamps)
+>
+> Note: not displayed at `small` size.
 
 ---
 
 ### `icon: CanvasSystemIcon`
 
 > The icon of the button
+>
+> Note: not displayed at `small` size.
 
 ---
 
