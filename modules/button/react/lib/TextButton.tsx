@@ -30,12 +30,15 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * The icon of the TextButton.
    */
   icon?: CanvasSystemIcon;
+  /**
+   * The capitialization of the text in the button.
+   */
+  allCaps?: boolean;
 }
 
 const getTextButtonColors = (variant: TextButtonVariant): ButtonColors => {
   switch (variant) {
     case TextButtonVariant.Default:
-    case TextButtonVariant.AllCaps:
     default:
       return {
         default: {
@@ -61,7 +64,6 @@ const getTextButtonColors = (variant: TextButtonVariant): ButtonColors => {
         },
       };
     case TextButtonVariant.Inverse:
-    case TextButtonVariant.InverseAllCaps:
       return {
         default: {
           icon: colors.frenchVanilla100,
@@ -95,22 +97,22 @@ const TextButton = ({
   buttonRef,
   children,
   icon,
+  allCaps,
   ...elemProps
 }: TextButtonProps) => {
   // Note: We don't use ButtonLabel because the label styles differ from other button types
-  const allContainerStyles =
-    variant === TextButtonVariant.AllCaps || variant === TextButtonVariant.InverseAllCaps
-      ? {
-          ...containerStyles,
-          ...type.variant.caps,
-          ...type.variant.button,
-          fontSize: size === 'medium' ? type.body.fontSize : undefined,
-          letterSpacing: '.5px',
-        }
-      : {
-          ...containerStyles,
-          fontSize: size === 'medium' ? type.body.fontSize : undefined,
-        };
+  const allContainerStyles = allCaps
+    ? {
+        ...containerStyles,
+        ...type.variant.caps,
+        ...type.variant.button,
+        fontSize: size === 'medium' ? type.body.fontSize : undefined,
+        letterSpacing: '.5px',
+      }
+    : {
+        ...containerStyles,
+        fontSize: size === 'medium' ? type.body.fontSize : undefined,
+      };
 
   return (
     <ButtonContainer

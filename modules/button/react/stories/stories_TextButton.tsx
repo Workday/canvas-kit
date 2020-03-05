@@ -54,7 +54,7 @@ storiesOf('Components|Buttons/Button/React/Text', module)
       </TextButton>
 
       <h3>All Caps</h3>
-      <TextButton variant={TextButton.Variant.AllCaps}>All Caps</TextButton>
+      <TextButton allCaps={true}>All Caps</TextButton>
 
       <h3>Icons</h3>
       <div css={buttonContainer}>
@@ -99,7 +99,9 @@ storiesOf('Components|Buttons/Button/React/Text', module)
 
       <h3>All Caps Inverse</h3>
       <div css={blueBackground}>
-        <TextButton variant={TextButton.Variant.InverseAllCaps}>All Caps</TextButton>
+        <TextButton variant={TextButton.Variant.Inverse} allCaps={true}>
+          All Caps
+        </TextButton>
       </div>
 
       <h3>Icons Inverse</h3>

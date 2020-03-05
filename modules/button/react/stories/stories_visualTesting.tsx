@@ -214,23 +214,17 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Text Button', module)
       {
         variant: [
           {value: TextButton.Variant.Default, label: 'Default'},
-          {value: TextButton.Variant.AllCaps, label: 'All Caps'},
           {value: TextButton.Variant.Inverse, label: 'Inverse'},
-          {value: TextButton.Variant.InverseAllCaps, label: 'Inverse All Caps'},
         ],
         size: [
           {value: TextButton.Size.Small, label: 'Small'},
           {value: TextButton.Size.Medium, label: 'Medium'},
         ],
         icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+        allCaps: [{value: undefined, label: ''}, {value: true, label: 'All Caps'}],
       },
       (props: any) => (
-        <Container
-          blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
-            props.variant
-          )}
-        >
+        <Container blue={props.variant === TextButton.Variant.Inverse}>
           <TextButton {...props}>Test</TextButton>
         </Container>
       )

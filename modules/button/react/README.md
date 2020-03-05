@@ -382,12 +382,10 @@ import {TextButton} from '@workday/canvas-kit-react-button';
 
 Default: `TextButtonVariant.Default`
 
-| Theme            | Description               |
-| ---------------- | ------------------------- |
-| `Default`        | Blue text                 |
-| `Inverse`        | White text                |
-| `AllCaps`        | Blue text, all uppercase  |
-| `InverseAllCaps` | White text, all uppercase |
+| Theme     | Description |
+| --------- | ----------- |
+| `Default` | Blue text   |
+| `Inverse` | White text  |
 
 ---
 
@@ -421,7 +419,13 @@ Default: `ButtonIconPosition.Left`
 
 ### `icon: CanvasSystemIcon`
 
-> The icon of the button
+> The icon of the button.
+
+---
+
+### `allCaps: boolean`
+
+> The capitialization of the text in the button.
 
 ---
 

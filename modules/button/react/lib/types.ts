@@ -42,8 +42,6 @@ export enum IconButtonVariant {
 export enum TextButtonVariant {
   Default = 'text',
   Inverse = 'textInverse',
-  AllCaps = 'textAllCaps',
-  InverseAllCaps = 'textInverseAllCaps',
 }
 
 /**
