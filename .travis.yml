@@ -23,8 +23,8 @@ stages:
 - name: pull_request
   if: type = pull_request
 
-- name: master
-  if: branch = master AND type != pull_request
+- name: trunk
+  if: branch = master OR branch =~ /^prerelease\// AND type != pull_request
 
 - name: tag
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
@@ -65,7 +65,7 @@ jobs:
       on:
         tags: true
 
-  - stage: master
+  - stage: trunk
     script:
       - yarn chromatic --auto-accept-changes --app-code="dlpro96xybh" # v1
       - yarn chromatic --auto-accept-changes # v2
@@ -75,10 +75,10 @@ jobs:
       - CHROMATIC_APP_CODE="m1dh5kc7oj"
     deploy:
       - provider: script
-        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js $SLACK_WEBHOOK $TRAVIS_BUILD_WEB_URL
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js
         skip_cleanup: true
         on:
-          branch: master
+          all_branches: true
       - provider: pages
         skip_cleanup: true
         local_dir: docs

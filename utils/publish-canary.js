@@ -5,14 +5,26 @@ const request = require('request');
 const {promisify} = require('util');
 const cmd = promisify(require('node-cmd').get);
 
-const [
+const {
   SLACK_WEBHOOK,
+  TRAVIS_BRANCH,
   TRAVIS_BUILD_URL = 'https://travis-ci.org/Workday/canvas-kit/branches',
-] = process.argv.slice(2);
+} = process.env;
+
 const regex = /@workday\/[a-z-]*@(\d*.\d*.\d*-next.\d*\+\w*)/gm;
 const data = {};
+let preid;
 
-cmd('yarn lerna publish --yes --force-publish="*" --canary --preid next --dist-tag next')
+if (TRAVIS_BRANCH === 'master') {
+  preid = 'next';
+} else if (TRAVIS_BRANCH.match(/^prerelease\/v\d*$/g)) {
+  preid = 'prerelease';
+} else {
+  console.error('No travis branch provided');
+  process.exit(1);
+}
+
+cmd(`yarn lerna publish --yes --force-publish="*" --canary --preid ${preid} --dist-tag ${preid}`)
   .then(output => {
     console.log(output);
 
