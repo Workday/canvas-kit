@@ -69,7 +69,7 @@ jobs:
   - stage: master
     script:
       - yarn build-storybook # build storybok to .storybook and then we can use it in chromatic
-      - yarn chromatic --quiet --auto-accept-changes --storybook-build-dir .storybook
+      - yarn chromatic --quiet --auto-accept-changes --storybook-build-dir docs
       - yarn build
     env:
       - CHROMATIC_APP_CODE="dlpro96xybh"
