@@ -43,8 +43,7 @@ jobs:
       - yarn lint
       - yarn depcheck
       - yarn test
-      - yarn chromatic --exit-zero-on-changes --app-code="dlpro96xybh" # v1 for cross-browser
-      - yarn chromatic --exit-zero-on-changes # v2 for visual review features and Storybook hosting
+      - yarn chromatic --quiet --exit-zero-on-changes
       - yarn start & npx wait-on http://localhost:9001
       - yarn cypress run --record
       - kill $(jobs -p) || true
@@ -52,7 +51,7 @@ jobs:
       # Travis doesn't support encryption on forks: https://docs.travis-ci.com/user/pull-requests#pull-requests-and-security-restrictions
       # If these keys become compromised, we will rotate and disable these features
       # on forked PRs until a suitable workaround is found
-      - CHROMATIC_APP_CODE="m1dh5kc7oj"
+      - CHROMATIC_APP_CODE="dlpro96xybh"
       - CYPRESS_RECORD_KEY="3a9347b6-36ab-4a36-823d-709f4078b148"
 
   - stage: tag
@@ -67,12 +66,11 @@ jobs:
 
   - stage: master
     script:
-      - yarn chromatic --auto-accept-changes --app-code="dlpro96xybh" # v1
-      - yarn chromatic --auto-accept-changes # v2
-      - yarn build-storybook
+      - yarn chromatic --quiet --auto-accept-changes
+      - yarn build-storybook # chromatic runs `build-storybook`, but puts it into a random directory. We just build it again
       - yarn build
     env:
-      - CHROMATIC_APP_CODE="m1dh5kc7oj"
+      - CHROMATIC_APP_CODE="dlpro96xybh"
     deploy:
       - provider: script
         script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js $SLACK_WEBHOOK $TRAVIS_BUILD_WEB_URL

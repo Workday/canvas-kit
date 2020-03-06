@@ -1,14 +1,15 @@
-import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
-import {GenericStyle} from '@workday/canvas-kit-react-common';
 import {CSSObject} from '@emotion/core';
+import {GenericStyle} from '@workday/canvas-kit-react-common';
+import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
+
 import {
-  DeprecatedButtonVariant,
-  ButtonSize,
-  IconPosition,
   AllButtonVariants,
-  TextButtonVariant,
+  ButtonSize,
   ButtonVariant,
+  DeprecatedButtonVariant,
   IconButtonVariant,
+  IconPosition,
+  TextButtonVariant,
 } from './types';
 import {getButtonStateStyle, getIconButtonStateStyle} from './utils';
 
@@ -313,7 +314,7 @@ export const iconButtonStyles: ButtonGenericStyle = {
     sizes: {
       [ButtonSize.Small]: {
         minWidth: canvas.spacing.l, // min-width is set so buttons don't collapse in IE11
-        width: canvas.spacing.l,
+        width: 'auto',
         height: canvas.spacing.l,
         'span svg': {
           width: '20px',

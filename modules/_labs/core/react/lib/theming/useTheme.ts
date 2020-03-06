@@ -17,13 +17,13 @@ import {defaultCanvasTheme} from './theme';
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
 export function useTheme(theme?: Object): CanvasTheme {
-  if (theme && Object.entries(theme).length !== 0) {
+  if (theme && Object.keys(theme).length !== 0) {
     return theme as CanvasTheme;
   }
 
   try {
     const context = React.useContext(ThemeContext);
-    if (context && Object.entries(context).length !== 0) {
+    if (context && Object.keys(context).length !== 0) {
       return context as CanvasTheme;
     }
   } catch (e) {

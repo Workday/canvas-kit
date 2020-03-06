@@ -16,7 +16,7 @@ export const inverseStyle = {
   borderRadius: '3px',
 };
 
-storiesOf('Labs/Core/React', module)
+storiesOf('Labs|Core/React', module)
   .addDecorator(withReadme(README))
   .add('Type', () => (
     <div className="story">
