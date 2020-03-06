@@ -121,7 +121,7 @@ const ThemeDemo = (props: any) => {
   );
 };
 
-storiesOf('Labs/Core/React', module)
+storiesOf('Labs|Core/React', module)
   .addDecorator(withReadme(README))
   .add('Theme', () => {
     return <ThemeDemo />;

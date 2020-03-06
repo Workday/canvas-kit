@@ -73,8 +73,8 @@ addParameters({
     codeTheme: 'github',
   },
   chromatic: {
-    disable: true
-  }
+    disable: true,
+  },
 });
 
 configure(loadStories, module);
