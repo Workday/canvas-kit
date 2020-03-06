@@ -113,7 +113,7 @@ Default: `undefined`
 
 ---
 
-#### `onChange: React.ChangeEventHandler<HTMLInputElement>`
+#### `onChange: (e: React.ChangeEvent<HTMLInputElement>) => void`
 
 > The callback fired when the value is changed.
 

@@ -41,7 +41,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * The function called when the Combobox text input changes.
    */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * The function called when the Combobox text input focuses.
    */
