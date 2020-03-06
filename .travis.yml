@@ -10,11 +10,13 @@ addons:
     packages:
     - libgconf-2-4
 
-# cache both yarn and Cypress binary
+# cache both yarn and Cypress binar
+# also cache TypeScript builds, this only rebuilds when code changes
 cache:
   yarn: true
   directories:
     - ~/.cache
+    - .build-info
 
 git:
   depth: false
@@ -66,8 +68,8 @@ jobs:
 
   - stage: master
     script:
-      - yarn chromatic --quiet --auto-accept-changes
-      - yarn build-storybook # chromatic runs `build-storybook`, but puts it into a random directory. We just build it again
+      - yarn build-storybook # build storybok to .storybook and then we can use it in chromatic
+      - yarn chromatic --quiet --auto-accept-changes --storybook-build-dir .storybook
       - yarn build
     env:
       - CHROMATIC_APP_CODE="dlpro96xybh"
