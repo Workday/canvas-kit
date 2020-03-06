@@ -607,7 +607,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       ...elemProps
     } = this.props;
 
-    const {isMenuHidden, isMenuHiding, label} = this.state;
+    const {focusedOptionIndex, isMenuHidden, isMenuHiding, label} = this.state;
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
@@ -638,7 +638,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           isMenuHidden={isMenuHidden}
           isMenuHiding={isMenuHiding}
         >
-          <SelectMenuList aria-labelledby={ariaLabelledBy} error={error} role="listbox">
+          <SelectMenuList
+            aria-activedescendant={
+              focusedOptionIndex !== null ? this.optionIds[focusedOptionIndex] : undefined
+            }
+            aria-labelledby={ariaLabelledBy}
+            error={error}
+            role="listbox"
+          >
             {React.Children.map(children, this.renderChildren)}
           </SelectMenuList>
         </SelectMenu>
