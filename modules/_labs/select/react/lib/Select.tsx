@@ -40,7 +40,10 @@ export interface SelectState {
   selectedOptionIndex: number;
 }
 
-export const selectionPersistMenuDuration = 200;
+// TODO: Reduce selection animation duration to 0 to disable
+// animation, but consider removing animation code entirely
+// if we don't need it.
+export const selectionPersistMenuDuration = 0;
 const toggleMenuAnimationDuration = 200;
 
 const fadeInAnimation = keyframes`
