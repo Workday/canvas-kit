@@ -11,11 +11,11 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
   focused?: boolean;
   id?: string;
   justSelected?: boolean;
-  label: string;
+  label?: string;
   optionRef?: React.Ref<HTMLLIElement>;
   selected?: boolean;
   suppressed?: boolean;
-  value: string;
+  value?: string;
 }
 
 const flashAnimation = keyframes`
@@ -79,18 +79,15 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
   };
 
   public render() {
-    const {disabled, id, label, optionRef, selected, value, ...elemProps} = this.props;
+    const {id, label, optionRef, selected, ...elemProps} = this.props;
 
     return (
       <Option
         aria-selected={selected === true ? 'true' : undefined}
-        disabled={disabled}
         id={id}
-        label={label}
         ref={optionRef}
         role="option"
         selected={selected}
-        value={value}
         {...elemProps}
       >
         {label}

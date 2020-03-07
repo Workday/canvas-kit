@@ -273,6 +273,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private optionIds: string[];
+  private optionLabels: string[];
+  private optionValues: string[];
 
   state: Readonly<SelectState> = {
     focusedOptionIndex: null,
@@ -290,11 +292,31 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     );
   };
 
+  private setOptionLabels = (): void => {
+    this.optionLabels = React.Children.map(
+      this.props.children,
+      (child: React.ReactElement<SelectOptionProps>) => child.props.label || ''
+    );
+  };
+
+  // Store option values (in case we need to populate them if they're
+  // undefined)
+  private setOptionValues = (): void => {
+    this.optionValues = React.Children.map(
+      this.props.children,
+      (child: React.ReactElement<SelectOptionProps>) => {
+        const {label, value} = child.props;
+        if (value !== undefined) {
+          return value;
+        } else {
+          return label !== undefined ? label : '';
+        }
+      }
+    );
+  };
+
   private indexByValue = (value: string): number => {
-    const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
-      SelectOptionProps
-    >[];
-    return childrenArray.findIndex(child => child.props.value === value);
+    return this.optionValues.findIndex(optionValue => optionValue === value);
   };
 
   private toggleMenu = (show: boolean): void => {
@@ -377,14 +399,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   constructor(props: SelectProps) {
     super(props);
     this.setOptionIds();
+    this.setOptionLabels();
+    this.setOptionValues();
   }
 
   componentDidMount() {
-    const {children, value} = this.props;
-
-    const childrenArray = React.Children.toArray(children) as React.ReactElement<
-      SelectOptionProps
-    >[];
+    const {value} = this.props;
 
     // If value exists, set state to that value...
     if (value) {
@@ -392,7 +412,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
       if (childIndex !== -1) {
         this.setState({
-          label: childrenArray[childIndex].props.label,
+          label: this.optionLabels[childIndex],
           selectedOptionIndex: childIndex,
         });
         return;
@@ -400,9 +420,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
 
     // ... otherwise, set state to the first option
-    const firstOption = childrenArray[0];
     this.setState({
-      label: firstOption.props.label,
+      label: this.optionLabels[0],
     });
   }
 
@@ -461,15 +480,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.toggleMenu(false);
   };
 
-  handleOptionClick = (optionProps: SelectOptionProps): void => {
+  handleOptionClick = (index: number): void => {
+    const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
+      SelectOptionProps
+    >[];
+    const optionProps = childrenArray[index].props;
+
     // Abort immediately if:
     // * the menu is a non-interactive state
     // * a disabled option was clicked (we ignore these clicks)
     if (!this.isMenuInteractive() || optionProps.disabled) {
       return;
     }
-
-    const index = this.indexByValue(optionProps.value);
 
     // Time: 0
     // Offer visual feedback briefly before hiding the menu
@@ -490,7 +512,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.selectionCompletionTimer = setTimeout(() => {
       this.setState({
         justSelectedOptionIndex: null,
-        label: optionProps.label,
+        label: this.optionLabels[index],
       });
     }, selectionPersistMenuDuration + toggleMenuAnimationDuration);
 
@@ -503,7 +525,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         'value'
       );
       if (nativeInputValue && nativeInputValue.set) {
-        nativeInputValue.set.call(this.inputRef.current, optionProps.value);
+        nativeInputValue.set.call(this.inputRef.current, this.optionValues[index]);
       }
 
       let event: Event;
@@ -549,10 +571,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       case ' ':
       case 'Enter':
         if (this.state.focusedOptionIndex !== null) {
-          const child = children[this.state.focusedOptionIndex] as React.ReactElement<
-            SelectOptionProps
-          >;
-          this.handleOptionClick(child.props);
+          this.handleOptionClick(this.state.focusedOptionIndex);
           isShortcut = true;
         }
         break;
@@ -584,12 +603,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       // it's ignored because the component is non-interactive.
       onMouseDown: (event: React.MouseEvent) => {
         event.preventDefault();
-        this.handleOptionClick(child.props);
+        this.handleOptionClick(index);
       },
 
       optionRef: this.state.focusedOptionIndex === index ? this.focusedOptionRef : undefined,
       selected: this.state.selectedOptionIndex === index,
       suppressed: !this.isMenuInteractive(),
+      value: this.optionValues[index],
     });
   };
 
