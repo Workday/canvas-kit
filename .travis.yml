@@ -41,10 +41,7 @@ jobs:
   include:
   - stage: pull_request
     script:
-      - yarn lint
-      - yarn depcheck
-      - yarn test
-      - yarn build-storybook
+      - npx concurrently "yarn lint" "yarn depcheck" "yarn test" "yarn build-storybook"
       - yarn chromatic --quiet --exit-zero-on-changes --storybook-build-dir docs
       - yarn http-server docs -p 9001 & npx wait-on http://localhost:9001
       - yarn cypress run --record
