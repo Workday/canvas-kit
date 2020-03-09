@@ -11,7 +11,6 @@ const {
   TRAVIS_BUILD_URL = 'https://travis-ci.org/Workday/canvas-kit/branches',
 } = process.env;
 
-const regex = /@workday\/[a-z-]*@(\d*.\d*.\d*-next.\d*\+\w*)/gm;
 const data = {};
 let preid;
 
@@ -23,6 +22,8 @@ if (TRAVIS_BRANCH === 'master') {
   console.error('No travis branch provided');
   process.exit(1);
 }
+
+const regex = new RegExp('@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-' + preid + '.\\d*\\+\\w*)', 'g');
 
 cmd(`yarn lerna publish --yes --force-publish="*" --canary --preid ${preid} --dist-tag ${preid}`)
   .then(output => {
