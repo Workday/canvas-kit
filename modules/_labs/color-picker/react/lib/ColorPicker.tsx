@@ -169,12 +169,7 @@ export const ColorPicker = ({
   return (
     <Container data-testid="canvas-color-picker" {...elemProps}>
       {onColorReset && resetColor && (
-        <ResetButton
-          id="canvas-color-picker--reset"
-          onClick={onColorReset}
-          resetColor={resetColor}
-          label={resetLabel}
-        />
+        <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}
       <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
       {showCustomHexInput && (

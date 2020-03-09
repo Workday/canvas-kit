@@ -6,17 +6,16 @@ import {borderRadius, colors, spacing, type, inputColors} from '@workday/canvas-
 import {Swatch} from './Swatch';
 
 export interface ResetButtonProps {
-  id?: string;
   label: string;
   resetColor: string;
   onClick: Function;
 }
 
-export const ResetButton = ({id, onClick, resetColor, label}: ResetButtonProps) => {
+export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
   const handleResetColor = () => onClick(resetColor);
 
   return (
-    <Container id={id} onClick={handleResetColor}>
+    <Container onClick={handleResetColor}>
       <Swatch color={resetColor} isSelected={false} />
       <Label>{label}</Label>
     </Container>
