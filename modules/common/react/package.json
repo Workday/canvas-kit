@@ -39,7 +39,7 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.21",
+    "@emotion/core": "^10.0.28",
     "@workday/canvas-kit-labs-react-core": "^3.4.0",
     "@workday/canvas-kit-react-core": "^3.4.0",
     "chroma-js": "^2.1.0",
