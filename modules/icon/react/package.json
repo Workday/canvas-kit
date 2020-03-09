@@ -39,9 +39,9 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.21",
+    "@emotion/core": "^10.0.28",
     "@emotion/is-prop-valid": "^0.8.2",
-    "@emotion/styled": "^10.0.17",
+    "@emotion/styled": "^10.0.27",
     "@workday/canvas-kit-react-common": "^3.4.0",
     "@workday/canvas-kit-react-core": "^3.4.0",
     "@workday/design-assets-types": "^0.2.4"
