@@ -15,14 +15,8 @@ export interface ResetButtonProps {
 export const ResetButton = ({id, onClick, resetColor, label}: ResetButtonProps) => {
   const handleResetColor = () => onClick(resetColor);
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      handleResetColor();
-    }
-  };
-
   return (
-    <Container id={id} onClick={handleResetColor} onKeyDown={handleKeyDown}>
+    <Container id={id} onClick={handleResetColor}>
       <Swatch color={resetColor} isSelected={false} />
       <Label>{label}</Label>
     </Container>
