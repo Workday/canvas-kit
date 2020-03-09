@@ -31,21 +31,16 @@ export const Container = styled('button')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
-
   borderRadius: borderRadius.m,
-
-  width: `calc(100% + 8px)`,
+  width: `calc(100% + ${spacing.xxs})`,
   height: spacing.l,
   margin: `-${spacing.xxs} 0px ${spacing.xxs} 0px`,
-  padding: '0px 8px',
-
+  padding: `0px ${spacing.xxs}`,
   ...type.body2,
   whiteSpace: 'nowrap',
-
   border: 'none',
   outline: 'none',
   background: 'none',
-
   cursor: 'pointer',
   transition: 'color 120ms ease, background-color 120ms ease',
 

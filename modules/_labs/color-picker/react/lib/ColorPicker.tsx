@@ -88,11 +88,9 @@ const Container = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-
   background: colors.frenchVanilla100,
   border: `1px solid ${colors.soap400}`,
   borderRadius: borderRadius.m,
-
   ...depth['3'],
 });
 
@@ -127,7 +125,7 @@ const isCustomColor = (colors: string[], hexCode?: string) => {
   return !colors.includes(lowercaseHex);
 };
 
-export const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({
+export const ColorPicker = ({
   colorSet = defaultColors,
   customHexInputLabel = 'Custom Hex Color',
   onColorChange,
@@ -138,7 +136,7 @@ export const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({
   value = '',
   showCustomHexInput = false,
   ...elemProps
-}) => {
+}: ColorPickerProps) => {
   const [validHexValue, setValidHexValue] = React.useState('');
   const [customHexValue, setCustomHexValue] = React.useState(
     isCustomColor(colorSet, value) ? value : ''

@@ -16,7 +16,6 @@ export const Container = styled('div')<SwatchProps>(
   {
     width: 20,
     height: 20,
-
     borderRadius: borderRadius.s,
 
     display: 'flex',

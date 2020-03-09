@@ -20,15 +20,12 @@ export const SwatchContainer = styled('div')<SwatchContainerProps>(
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-
     position: 'relative',
-
     width: 20,
     height: 20,
 
     cursor: 'pointer',
     borderRadius: borderRadius.s,
-
     transition: 'box-shadow 120ms ease',
 
     '&:hover': {
@@ -54,7 +51,7 @@ const Container = styled('div')({
   gridGap: spacing.xxs,
 });
 
-export const SwatchBook: React.FunctionComponent<SwatchBookProps> = ({colors, value, onSelect}) => (
+export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
   <Container>
     {colors.map(color => {
       const isSelected = value ? color.toLowerCase() === value.toLowerCase() : false;
