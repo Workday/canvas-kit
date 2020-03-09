@@ -135,13 +135,13 @@ export const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({
   onSubmitClick,
   resetLabel = 'Reset',
   resetColor,
-  value,
+  value = '',
   showCustomHexInput = false,
   ...elemProps
 }) => {
   const [validHexValue, setValidHexValue] = React.useState('');
   const [customHexValue, setCustomHexValue] = React.useState(
-    isCustomColor(colorSet, value) ? value! : ''
+    isCustomColor(colorSet, value) ? value : ''
   );
 
   const onCustomHexChange = (event: React.ChangeEvent<HTMLInputElement>) => {
