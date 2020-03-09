@@ -41,14 +41,16 @@ jobs:
   include:
   - stage: pull_request
     script:
-      - yarn lint
-      - yarn depcheck
-      - yarn test
-      - yarn build-storybook
-      - yarn chromatic --quiet --exit-zero-on-changes --storybook-build-dir docs
-      - yarn http-server docs -p 9001 & npx wait-on http://localhost:9001
-      - yarn cypress run --record
-      - kill $(jobs -p) || true
+      - >-
+        yarn lint &&
+        yarn depcheck &&
+        yarn test
+      - >- 
+        yarn build-storybook &&
+        yarn chromatic --quiet --exit-zero-on-changes --storybook-build-dir docs &&
+        yarn http-server docs -p 9001 & npx wait-on http://localhost:9001 &&
+        yarn cypress run --record &&
+        kill $(jobs -p) || true
     env:
       # Travis doesn't support encryption on forks: https://docs.travis-ci.com/user/pull-requests#pull-requests-and-security-restrictions
       # If these keys become compromised, we will rotate and disable these features
@@ -68,9 +70,11 @@ jobs:
 
   - stage: master
     script:
-      - yarn build-storybook # build storybok to .storybook and then we can use it in chromatic
-      - yarn chromatic --quiet --auto-accept-changes --storybook-build-dir docs
-      - yarn build
+      # build storybok to .storybook and then we can use it in chromatic
+      - >-
+        yarn build-storybook &&
+        yarn chromatic --quiet --auto-accept-changes --storybook-build-dir docs &&
+        yarn build
     env:
       - CHROMATIC_APP_CODE="dlpro96xybh"
     deploy:
