@@ -124,7 +124,6 @@
     "tslint-config-prettier": "^1.14.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.5.1",
-    "typescript-eslint": "^0.0.1-alpha.0",
     "wait-on": "^4.0.1"
   },
   "scripts": {
