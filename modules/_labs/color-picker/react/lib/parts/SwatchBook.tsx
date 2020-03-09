@@ -68,13 +68,13 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
       return (
         <SwatchContainer
           key={color}
-          id={`canvas-color-picker--color-${formattedColor}`}
+          className={`wdc-color-picker--color-${formattedColor}`}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           tabIndex={0}
           isSelected={isSelected}
         >
-          <Swatch className="canvas-color-picker--swatch" color={color} isSelected={isSelected} />
+          <Swatch color={color} isSelected={isSelected} />
         </SwatchContainer>
       );
     })}
