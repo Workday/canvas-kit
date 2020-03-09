@@ -55,11 +55,10 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
   <Container>
     {colors.map(color => {
       const isSelected = value ? color.toLowerCase() === value.toLowerCase() : false;
-      const swatchBackground = {backgroundColor: color};
 
       const handleClick = () => onSelect(color);
       const handleKeyDown = (event: React.KeyboardEvent) =>
-        event.key === 'Enter' && onSelect(color);
+        (event.key === 'Enter' || event.key === ' ') && onSelect(color);
 
       const formatHex = (value: string) => {
         return value.replace(/#/g, '').substring(0, 6);
@@ -75,11 +74,7 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
           tabIndex={0}
           isSelected={isSelected}
         >
-          <Swatch
-            className="canvas-color-picker--swatch"
-            color={swatchBackground.backgroundColor}
-            isSelected={isSelected}
-          />
+          <Swatch className="canvas-color-picker--swatch" color={color} isSelected={isSelected} />
         </SwatchContainer>
       );
     })}

@@ -9,7 +9,6 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 export interface SwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   color: string;
   isSelected?: boolean;
-  style?: React.CSSProperties;
 }
 
 export const Container = styled('div')<SwatchProps>(
