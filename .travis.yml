@@ -25,7 +25,7 @@ stages:
   if: type = pull_request
 
 - name: trunk
-  if: branch = master OR branch =~ /^prerelease\// AND type != pull_request
+  if: (branch = master OR branch =~ /^prerelease\//) AND type != pull_request
 
 - name: tag
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
