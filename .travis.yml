@@ -10,7 +10,8 @@ addons:
     packages:
     - libgconf-2-4
 
-# cache both yarn and Cypress binary
+# cache both yarn and Cypress binar
+# also cache TypeScript builds, this only rebuilds when code changes
 cache:
   yarn: true
   directories:
@@ -40,19 +41,23 @@ jobs:
   include:
   - stage: pull_request
     script:
-      - yarn lint
-      - yarn depcheck
-      - yarn test
-      - yarn chromatic --exit-zero-on-changes --app-code="dlpro96xybh" # v1 for cross-browser
-      - yarn chromatic --exit-zero-on-changes # v2 for visual review features and Storybook hosting
-      - yarn start & npx wait-on http://localhost:9001
-      - yarn cypress run --record
-      - kill $(jobs -p) || true
+      - >-
+        yarn concurrently
+        "yarn lint"
+        "yarn depcheck"
+        "yarn test"
+      - >- # Chromatic and Cypress rely on Storybook being built, this will exit early if build-storybook fails
+        yarn build-storybook &&
+        yarn http-server docs -p 9001 & yarn wait-on http://localhost:9001 &&
+        yarn concurrently
+        "chromatic --quiet --exit-zero-on-changes --storybook-build-dir docs"
+        "yarn cypress run --record" &&
+        kill $(jobs -p) || true
     env:
       # Travis doesn't support encryption on forks: https://docs.travis-ci.com/user/pull-requests#pull-requests-and-security-restrictions
       # If these keys become compromised, we will rotate and disable these features
       # on forked PRs until a suitable workaround is found
-      - CHROMATIC_APP_CODE="m1dh5kc7oj"
+      - CHROMATIC_APP_CODE="dlpro96xybh"
       - CYPRESS_RECORD_KEY="3a9347b6-36ab-4a36-823d-709f4078b148"
 
   - stage: tag
@@ -67,12 +72,12 @@ jobs:
 
   - stage: trunk
     script:
-      - yarn chromatic --auto-accept-changes --app-code="dlpro96xybh" # v1
-      - yarn chromatic --auto-accept-changes # v2
-      - yarn build-storybook
+      - >- # Chromatic relies on a built Storybook, so exit early if build-storybook fails
+        yarn build-storybook &&
+        yarn chromatic --quiet --auto-accept-changes --storybook-build-dir docs
       - yarn build
     env:
-      - CHROMATIC_APP_CODE="m1dh5kc7oj"
+      - CHROMATIC_APP_CODE="dlpro96xybh"
     deploy:
       - provider: script
         script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js
