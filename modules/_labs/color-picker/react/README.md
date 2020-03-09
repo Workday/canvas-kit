@@ -50,12 +50,12 @@ const MyComponent: React.FunctionComponent = () => {
     </Button>
     <Popper placement={'bottom'} open={isColorPickerOpen} anchorElement={buttonRef.current}>
       <ColorPicker
-        onChange={color => setBackgroundColor(color)}
-        onReset={() => handleSubmit(colors.kiwi400)}
+        onColorChange={color => setBackgroundColor(color)}
+        onColorReset={() => handleSubmit(colors.kiwi400)}
         resetColor={colors.kiwi400}
         resetLabel={getTranslatedResetLabel()}
         value={backgroundColor}
-        showCustomInput={true}
+        showCustomHexInput={true}
         onSubmitClick={handleSubmit}
       />
     </Popper>
@@ -71,7 +71,7 @@ const MyComponent: React.FunctionComponent = () => {
 
 ### Required
 
-#### `onChange: (color: string) => void`
+#### `onColorChange: (color: string) => void`
 
 > This handler is called when the user selects a color through either a mouse or keyboard event. It
 > is called with the hex value of the color selected by the user, or with a custom hex value entered
@@ -79,7 +79,7 @@ const MyComponent: React.FunctionComponent = () => {
 
 ### Optional
 
-#### `onReset: Function`
+#### `onColorReset: Function`
 
 > When this handler is provided, a Reset button will be displayed at the top of the picker using the
 > `resetLabel` provided. This handler is called when the reset button is selected through either a
@@ -92,7 +92,7 @@ const MyComponent: React.FunctionComponent = () => {
 > The color to display as part of the Reset button. It is strongly recommended that consumers
 > provide a properly globalized value.
 
-> Note: This prop is only necessary when the `onReset` handler is provided.
+> Note: This prop is only necessary when the `onColorReset` handler is provided.
 
 ---
 
@@ -101,7 +101,7 @@ const MyComponent: React.FunctionComponent = () => {
 > The text to display as part of the Reset button. It is strongly recommended that consumers provide
 > a properly globalized value.
 
-> Note: This prop is only necessary when the `onReset` handler is provided.
+> Note: This prop is only necessary when the `onColorReset` handler is provided.
 
 Default: `Reset`
 
@@ -130,12 +130,12 @@ Default: `false`
 
 ---
 
-#### `customInputLabel: string`
+#### `customHexInputLabel: string`
 
 > The text to display abover the custom input. It is strongly recommended that consumers provide a
 > properly globalized value.
 
-> Note: This prop is only used when `showCustomInput` is `true`.
+> Note: This prop is only used when `showCustomHexInput` is `true`.
 
 Default: `Custom Hex Color`
 
@@ -146,6 +146,6 @@ Default: `Custom Hex Color`
 > When this handler is provided, an action can be tied to clicking the check button provided. This
 > handler is called when the check button is selected through a keyboard event only.
 
-> Note: This prop is only used when `showCustomInput` is `true`.
+> Note: This prop is only used when `showCustomHexInput` is `true`.
 
 ---
