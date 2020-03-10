@@ -650,7 +650,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           onChange={onChange}
           ref={this.inputRef}
           type="text"
-          value={value}
+          value={value || this.optionValues[0]}
         />
         <SelectMenu
           error={error}
