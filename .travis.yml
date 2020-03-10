@@ -13,7 +13,7 @@ addons:
 # cache both yarn and Cypress binary
 cache:
   yarn: true
-  npm: false
+  npm: false # caching node_modules is expensive and time consuming, we create longer builds with this
   directories:
     - ~/.cache
 
@@ -90,9 +90,6 @@ jobs:
         github_token: "$GH_STORYBOOK_TOKEN"
         on:
           branch: master
-before_cache:
-  # Removes any modules that cache inside node_modules, like the Terser plugin for Webpack
-  - rm -rf ./node_modules/.cache/
 
 env:
   global:
