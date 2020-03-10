@@ -19,17 +19,21 @@ const noPointerEvents = css({
   pointerEvents: 'none',
 });
 
+const autoWidth = css({
+  width: 'auto',
+});
+
 const ellipsisStyle = css(noPointerEvents, {
   width: canvas.spacing.l,
   textAlign: 'center',
   display: 'inline-block',
 });
 
-const noTransitions = css({
+const noTransitions = css(autoWidth, {
   '&:not(:hover)': {transition: 'none !important'},
 });
 
-const activeStyling = css(noPointerEvents, noTransitions, {
+const activeStyling = css(noPointerEvents, noTransitions, autoWidth, {
   color: canvas.colors.frenchVanilla100,
 });
 
