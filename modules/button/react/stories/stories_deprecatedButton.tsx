@@ -16,6 +16,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Primary} disabled={true}>
         Primary Button
       </Button>
+
       <h3>Medium Primary</h3>
       <Button variant={Button.Variant.Primary} size={Button.Size.Medium}>
         Primary Button
@@ -23,6 +24,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Primary} size={Button.Size.Medium} disabled={true}>
         Primary Button
       </Button>
+
       <h3>Small Primary</h3>
       <Button variant={Button.Variant.Primary} size={Button.Size.Small}>
         Primary Button
@@ -30,6 +32,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Primary} size={Button.Size.Small} disabled={true}>
         Primary Button
       </Button>
+
       <h3>Growing Primary</h3>
       <Button variant={Button.Variant.Primary} grow={true}>
         Growing Primary Button
@@ -43,6 +46,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Secondary} disabled={true}>
         Secondary Button
       </Button>
+
       <h3>Medium Secondary</h3>
       <Button variant={Button.Variant.Secondary} size={Button.Size.Medium}>
         Secondary Button
@@ -50,6 +54,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Secondary} size={Button.Size.Medium} disabled={true}>
         Secondary Button
       </Button>
+
       <h3>Small Secondary</h3>
       <Button variant={Button.Variant.Secondary} size={Button.Size.Small}>
         Secondary Button
@@ -57,6 +62,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Secondary} size={Button.Size.Small} disabled={true}>
         Secondary Button
       </Button>
+
       <h3>Growing Secondary</h3>
       <Button variant={Button.Variant.Secondary} grow={true}>
         Growing Secondary Button
@@ -70,6 +76,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Delete} disabled={true}>
         Delete Button
       </Button>
+
       <h3>Medium Delete</h3>
       <Button variant={Button.Variant.Delete} size={Button.Size.Medium}>
         Delete Button
@@ -77,6 +84,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Delete} size={Button.Size.Medium} disabled={true}>
         Delete Button
       </Button>
+
       <h3>Small Delete</h3>
       <Button variant={Button.Variant.Delete} size={Button.Size.Small}>
         Delete Button
@@ -84,6 +92,7 @@ storiesOf('Components|Buttons/Button/React/Deprecated', module)
       <Button variant={Button.Variant.Delete} size={Button.Size.Small} disabled={true}>
         Delete Button
       </Button>
+
       <h3>Growing Delete</h3>
       <Button variant={Button.Variant.Delete} grow={true}>
         Growing Delete Button

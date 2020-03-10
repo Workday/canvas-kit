@@ -1,40 +1,51 @@
 import * as React from 'react';
-import {ButtonBaseLabel, ButtonLabelIcon} from './ButtonBase';
-import {getButtonStyle, getButtonSize} from './utils';
-import {styled} from '@workday/canvas-kit-labs-react-core';
-import isPropValid from '@emotion/is-prop-valid';
-import {BaseButtonProps} from './Button';
-import {dropdownButtonStyles} from './ButtonStyles';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
-import {ButtonSize, ButtonVariant} from './types';
+import {GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {DropdownButtonVariant, ButtonIconPosition} from './types';
+import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
+import {getButtonColors} from './Button';
 
-const DropdownButtonCon = styled('button', {
-  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<BaseButtonProps>(
-  dropdownButtonStyles.styles,
-  ({variant}) => getButtonStyle(dropdownButtonStyles, variant),
-  ({size}) => getButtonSize(dropdownButtonStyles, size)
+export interface DropdownButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    GrowthBehavior {
+  /**
+   * The variant of the Button.
+   * @default DropdownButtonVariant.Secondary
+   */
+  variant?: DropdownButtonVariant;
+  /**
+   * The size of the Button.
+   * @default 'medium'
+   */
+  size?: 'medium' | 'large';
+  /**
+   * The ref to the button that the styled component renders.
+   */
+  buttonRef?: React.Ref<HTMLButtonElement>;
+}
+
+const DropdownButton = ({
+  variant = DropdownButtonVariant.Secondary,
+  size = 'medium',
+  buttonRef,
+  children,
+  ...elemProps
+}: DropdownButtonProps) => (
+  <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
+    <ButtonLabel>{children}</ButtonLabel>
+    <ButtonLabelIcon
+      size={size}
+      icon={caretDownIcon}
+      iconPosition={ButtonIconPosition.Right}
+      dropdown={true}
+    />
+  </ButtonContainer>
 );
 
-export default class DropdownButton extends React.Component<BaseButtonProps> {
-  public static Variant = ButtonVariant;
-  public static Size = ButtonSize;
+DropdownButton.Variant = DropdownButtonVariant;
+DropdownButton.Size = {
+  Medium: 'medium',
+  Large: 'large',
+} as const;
 
-  static defaultProps = {
-    variant: ButtonVariant.Primary,
-    size: ButtonSize.Medium,
-  };
-
-  public render() {
-    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
-
-    return (
-      <DropdownButtonCon variant={variant} size={size} ref={buttonRef} {...elemProps}>
-        <ButtonBaseLabel variant={variant} size={size}>
-          {children}
-        </ButtonBaseLabel>
-        <ButtonLabelIcon size={size} icon={caretDownIcon} dropdown={true} />
-      </DropdownButtonCon>
-    );
-  }
-}
+export default DropdownButton;

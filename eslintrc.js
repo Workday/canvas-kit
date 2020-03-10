@@ -75,7 +75,7 @@ module.exports = {
     'no-param-reassign': 'error',
     'no-undef-init': 'error',
     'no-unused-labels': 'error',
-    'no-use-before-define': 'warn', // Decide on this
+    'no-use-before-define': ['warn', {functions: false, classes: true}],
     'no-var': 'error',
     'prefer-const': 'error',
     'quote-props': 'off',

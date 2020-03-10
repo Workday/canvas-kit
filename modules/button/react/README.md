@@ -22,15 +22,13 @@ yarn add @workday/canvas-kit-react-button
 > primary, and accompanying secondary, and delete). These are still avialable, but will be removed
 > in the first major release after they are available for all Workday customers. The biggest change
 > is with regards to colors and styling, but the behavior should remain the same.
-
-### New Button
-
-Anywhere you were using `Button`, you will automatically get the updated styling (previously
-`beta_Button`). This will be a visual breaking change (padding and colors have changed). Note, we
-are still supporting the import for `beta_Button` as well. However, if you are using
-`import {beta_Button as Button}...` you can remove it now too since this too will be removed in a
-future release. The new buttons include: blue primary button, and accompanying secondary, delete,
-outline, and dropdown buttons. The import and usage is documented below.
+>
+> ### New Button
+>
+> Anywhere you were using `Button`, you will automatically get the updated styling (previously
+> `beta_Button`). This will be a visual breaking change (padding and colors have changed). The new
+> buttons include: blue primary button, and accompanying secondary, delete, outline, highlight, and
+> dropdown buttons. The import and usage is documented below.
 
 ### Deprecated Buttons
 
@@ -51,7 +49,19 @@ able to compile your code.
 
 ---
 
-## Button
+## Table of Contents
+
+- [Button](#button)
+- [DeleteButton](#deletebutton)
+- [DropdownButton](#dropdownbutton)
+- [HighlightButton](#highlightbutton)
+- [OutlineButton](#outlinebutton)
+- [TextButton](#textbutton)
+- [Icon Button](#icon-button)
+
+---
+
+# Button
 
 ```tsx
 import * as React from 'react';
@@ -62,7 +72,7 @@ import {Button} from '@workday/canvas-kit-react-button';
 
 ## Static Properties
 
-#### `Sizes: ButtonSize`
+#### `Size: 'small' | 'medium' | 'large'`
 
 ```tsx
 <Button size={Button.Size.Small}>Small Button</Button>
@@ -70,7 +80,7 @@ import {Button} from '@workday/canvas-kit-react-button';
 
 ---
 
-#### `Types: ButtonVariant`
+#### `Variant: ButtonVariant`
 
 ```tsx
 <Button variant={Button.Variant.Primary}>Primary Button</Button>
@@ -96,21 +106,20 @@ Default: `ButtonVariant.Secondary`
 | ----------- | ------------------------------- |
 | `Primary`   | Blue background, white text     |
 | `Secondary` | Gray background, dark gray text |
-| `Delete`    | Red background, dark text       |
 
 ---
 
-#### `size: ButtonSize`
+#### `size: 'small' | 'medium' | 'large'`
 
 > The size of the button
 
-Default: `ButtonSize.Large`
+Default: `'medium'`
 
 | Theme    | Description                            |
 | -------- | -------------------------------------- |
-| `Small`  | 18px tall, small padding, small text   |
-| `Medium` | 24px tall, medium padding, medium text |
-| `Large`  | 40px tall, large padding, larger text  |
+| `small`  | 24px tall, small padding, small text   |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
 
 ---
 
@@ -126,6 +135,395 @@ Default: `false`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
+---
+
+#### `dataLabel: String`
+
+> The data label of the button (generally used for media timestamps).
+>
+> Note: not displayed at `small` size.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button.
+>
+> Note: not displayed at `small` size.
+
+---
+
+# DeleteButton
+
+```tsx
+import * as React from 'react';
+import {DeleteButton} from '@workday/canvas-kit-react-button';
+
+<DeleteButton>Button Label</DeleteButton>;
+```
+
+## Static Properties
+
+#### `Size: 'small' | 'medium' | 'large'`
+
+```tsx
+<DeleteButton size={DeleteButton.Size.Small}>Small Button</DeleteButton>
+```
+
+## Component Props
+
+### Required
+
+#### `children: ReactNode`
+
+> Buttons cannot be empty
+
+### Optional
+
+#### `size: 'small' | 'medium' | 'large'`
+
+> The size of the button
+
+Default: `'medium'`
+
+| Theme    | Description                            |
+| -------- | -------------------------------------- |
+| `small`  | 24px tall, small padding, small text   |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
+
+---
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+#### `grow: boolean`
+
+> If true, the button will grow to its container's width.
+
+Default: `false`
+
+---
+
+# DropdownButton
+
+```tsx
+import * as React from 'react';
+import {DropdownButton} from '@workday/canvas-kit-react-button';
+
+<DropdownButton>Button Label</DropdownButton>;
+```
+
+## Static Properties
+
+#### `Size: 'medium' | 'large'`
+
+```tsx
+<DropdownButton size={DropdownButton.Size.Large}>Large Button</DropdownButton>
+```
+
+---
+
+#### `Variant: DropdownButtonVariant`
+
+```tsx
+<DropdownButton variant={DropdownButton.Variant.Primary}>Primary Button</DropdownButton>
+```
+
+## Component Props
+
+### Required
+
+#### `children: ReactNode`
+
+> Buttons cannot be empty
+
+### Optional
+
+#### `variant: ButtonVariant`
+
+> The type of the button
+
+Default: `DropdownButtonVariant.Secondary`
+
+| Theme       | Description                          |
+| ----------- | ------------------------------------ |
+| `Primary`   | Blue background, white text/icon     |
+| `Secondary` | Gray background, dark gray text/icon |
+
+---
+
+#### `size: 'medium' | 'large'`
+
+> The size of the button
+
+Default: `'medium'`
+
+| Theme    | Description                            |
+| -------- | -------------------------------------- |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
+
+---
+
+#### `grow: boolean`
+
+> If true, the button will grow to its container's width.
+
+Default: `false`
+
+---
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+# HighlightButton
+
+```tsx
+import * as React from 'react';
+import {HighlightButton} from '@workday/canvas-kit-react-button';
+
+<HighlightButton>Button Label</HighlightButton>;
+```
+
+## Static Properties
+
+#### `Size: 'medium' | 'large'`
+
+```tsx
+<HighlightButton size={HighlightButton.Size.Large}>Large Button</HighlightButton>
+```
+
+## Component Props
+
+### Required
+
+#### `children: ReactNode`
+
+> Buttons cannot be empty
+
+### Optional
+
+#### `size: 'medium' | 'large'`
+
+> The size of the button
+
+Default: `'medium'`
+
+| Theme    | Description                            |
+| -------- | -------------------------------------- |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
+
+---
+
+#### `grow: boolean`
+
+> If true, the button will grow to its container's width.
+
+Default: `false`
+
+---
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button
+
+---
+
+# OutlineButton
+
+```tsx
+import * as React from 'react';
+import {OutlineButton} from '@workday/canvas-kit-react-button';
+
+<OutlineButton>Button Label</OutlineButton>;
+```
+
+## Static Properties
+
+#### `Size: 'small' | 'medium' | 'large'`
+
+```tsx
+<OutlineButton size={OutlineButton.Size.Small}>Small Button</OutlineButton>
+```
+
+---
+
+#### `Variant: OutlineButtonVariant`
+
+```tsx
+<OutlineButton variant={OutlineButton.Variant.Primary}>Primary Button</OutlineButton>
+```
+
+## Component Props
+
+### Required
+
+#### `children: ReactNode`
+
+> Buttons cannot be empty
+
+### Optional
+
+#### `variant: ButtonVariant`
+
+> The type of the button
+
+Default: `OutlineButtonVariant.Secondary`
+
+| Theme       | Description                                   |
+| ----------- | --------------------------------------------- |
+| `Primary`   | Transparent background, blue border and text  |
+| `Secondary` | Transparent background, gray border and text  |
+| `Inverse`   | Transparent background, white border and text |
+
+---
+
+#### `size: 'small' | 'medium' | 'large'`
+
+> The size of the button
+
+Default: `'medium'`
+
+| Theme    | Description                            |
+| -------- | -------------------------------------- |
+| `small`  | 24px tall, small padding, small text   |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
+
+---
+
+#### `grow: boolean`
+
+> If true, the button will grow to its container's width.
+
+Default: `false`
+
+---
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+#### `dataLabel: String`
+
+> The data label of the button (generally used for media timestamps)
+>
+> Note: not displayed at `small` size.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button
+>
+> Note: not displayed at `small` size.
+
+---
+
+# TextButton
+
+```tsx
+import * as React from 'react';
+import {TextButton} from '@workday/canvas-kit-react-button';
+
+<TextButton>Button Label</TextButton>;
+```
+
+## Static Properties
+
+#### `Size: 'small' | 'medium'`
+
+```tsx
+<TextButton size={TextButton.Size.Small}>Small Button</TextButton>
+```
+
+---
+
+#### `Variant: ButtonVariant`
+
+```tsx
+<TextButton variant={TextButton.Variant.Inverse}>Inverse Button</TextButton>
+```
+
+## Component Props
+
+### Required
+
+#### `children: ReactNode`
+
+> Buttons cannot be empty
+
+### Optional
+
+#### `variant: TextButtonVariant`
+
+> The type of the button
+
+Default: `TextButtonVariant.Default`
+
+| Theme     | Description |
+| --------- | ----------- |
+| `Default` | Blue text   |
+| `Inverse` | White text  |
+
+---
+
+#### `size: 'small' | 'medium' | 'large'`
+
+> The size of the button
+
+Default: `'medium'`
+
+| Theme    | Description                            |
+| -------- | -------------------------------------- |
+| `small`  | 24px tall, small padding, small text   |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
+
+---
+
+#### `iconPosition: ButtonIconPosition`
+
+> The position of the TextButton icon.
+
+Default: `ButtonIconPosition.Left`
+
+---
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button.
+
+---
+
+### `allCaps: boolean`
+
+> The capitialization of the text in the button.
+
+---
+
 # Icon Button
 
 > Button containing an icon. Icon may be a component from
@@ -139,16 +537,12 @@ import {IconButton} from '@workday/canvas-kit-react-button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-<IconButton title="Activity Stream" aria-label="Activity Stream">
-  <SystemIcon icon={activityStreamIcon} />
-</IconButton>;
-
 <IconButton icon={activityStreamIcon} title="Activity Stream" aria-label="Activity Stream" />;
 ```
 
 ## Static Properties
 
-#### `Sizes: ButtonSize`
+#### `Size: 'small' | 'medium'`
 
 ```tsx
 <IconButton size={IconButton.Size.Small} icon={xIcon} />
@@ -156,7 +550,7 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ---
 
-#### `Types: IconButtonVariant`
+#### `Variant: IconButtonVariant`
 
 ```tsx
 <IconButton variant={IconButton.Variant.Plain} icon={xIcon} />
@@ -196,18 +590,16 @@ Default: `IconButtonVariant.Circle`
 
 ---
 
-#### `size: ButtonSize.Small | ButtonSize.Medium`
+#### `size: 'small' | 'medium`
 
 > The size of the icon button
 
-Default: `ButtonSize.Medium`
+Default: `'medium'`
 
-| Theme                       | Description                   | Is Default |
-| --------------------------- | ----------------------------- | ---------- |
-| `Small`                     | 32px Diameter, 20px Icon Size | False      |
-| `Medium`                    | 40px Diameter, 24px Icon Size | True       |
-| `Small` (Square Icon Type)  | 32px x 32px, 24px Icon Size   | True       |
-| `Medium` (Square Icon Type) | 40px x 40px, 24px Icon Size   | False      |
+| Theme    | Description                   | Is Default |
+| -------- | ----------------------------- | ---------- |
+| `Small`  | 32px Diameter, 20px Icon Size | False      |
+| `Medium` | 40px Diameter, 24px Icon Size | True       |
 
 ---
 
@@ -231,68 +623,19 @@ Default: `undefined`
 
 ---
 
-#### `value: string`
+#### `buttonRef: React.Ref<HTMLButtonElement>`
 
-> Value of the button. Must be unique if used within an IconButtonToggleGroup.
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button. Optional because IconButton can also wrap a SystemIcon component.
+
+---
 
 ## Accessibility Notes
 
 > The content of an IconButton is not always clear to the user. In order to better convey what the
 > icon represents, the IconButton should be initialized with `title` and `aria-label` attributes.
-
-# Icon Button Toggle Group
-
-> Group of buttons containing an icon. This is a
-> [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.
-
-## Usage
-
-```tsx
-import * as React from 'react';
-import {IconButton, IconButtonToggleGroup} from '@workday/canvas-kit-react-button';
-import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
-
-<IconButtonToggleGroup>
-  <IconButton icon={listViewIcon} value="list-view" title="List View" aria-label="List View" />
-  <IconButton icon={worksheetsIcon} value="table-view" title="Worksheets" aria-label="Worksheets" />
-</IconButtonToggleGroup>;
-```
-
-**Note:** while managing state using a unique `value` for each `IconButton` child is encouraged, you
-can also use indexes and omit the `value` field. It is strongly recommended to not mix these two
-methods.
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-#### `children: React.ReactElement<IconButton>[]`
-
-> Icon buttons to toggle between.
-
----
-
-### Optional
-
-#### `value: string | number`
-
-> Identify which item is selected (toggled=true). If a string is passed, the IconButton with the
-> corresponding value will be selected. If a number is passed, the IconButton with the corresponding
-> index will be selected.
-
----
-
-#### `isRTL: boolean`
-
-> Identify whether to render from right to left
-
----
-
-#### `onChange: (value:string | number)=> void`
-
-> Callback function when a toggle button is selected. The value (if defined) or the index of the
-> button will be returned.
