@@ -12,12 +12,12 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
   /**
    * The function called when the DrawerHeader close button is clicked.
    */
-  onClose: IconButtonProps['onClick'];
+  onClose?: IconButtonProps['onClick'];
   /**
    * The `aria-label` for the DrawHeader close button. Useful for i18n.
    * @default Close
    */
-  closeIconLabel: string;
+  closeIconLabel?: string;
   /**
    * The background color of the DrawerHeader.
    */
@@ -97,12 +97,14 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
         <HeaderTitle id={id} inverse={inverse} title={title}>
           {title}
         </HeaderTitle>
-        <CloseButton
-          variant={inverse ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
-          onClick={onClose}
-          aria-label={closeIconLabel}
-          icon={xIcon}
-        ></CloseButton>
+        {onClose && closeIconLabel ? (
+          <CloseButton
+            variant={inverse ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
+            onClick={onClose}
+            aria-label={closeIconLabel}
+            icon={xIcon}
+          />
+        ) : null}
       </HeaderContainer>
     );
   }
