@@ -19,6 +19,11 @@ describe('Drawer', () => {
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
+  test('should not render a close icon button', async () => {
+    const {container} = render(<DrawerHeader headerText={'Header Title'} />);
+    expect(container.firstChild.childNodes.length).toEqual(1);
+  });
+
   test('Drawer should spread extra props', async () => {
     const {container} = render(<Drawer data-id={'1234'} openDirection={DrawerDirection.Right} />);
 

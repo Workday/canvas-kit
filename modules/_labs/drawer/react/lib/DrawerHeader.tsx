@@ -73,7 +73,7 @@ const CloseButton = styled(IconButton)({
 
 export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
   static defaultProps = {
-    iconLabel: 'Close',
+    closeIconLabel: 'Close',
     headerColor: colors.soap100,
     borderColor: colors.soap500,
     showInverseButton: false,
@@ -97,14 +97,14 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
         <HeaderTitle id={id} inverse={inverse} title={title}>
           {title}
         </HeaderTitle>
-        {onClose && closeIconLabel ? (
+        {onClose && closeIconLabel && (
           <CloseButton
             variant={inverse ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
             onClick={onClose}
             aria-label={closeIconLabel}
             icon={xIcon}
           />
-        ) : null}
+        )}
       </HeaderContainer>
     );
   }
