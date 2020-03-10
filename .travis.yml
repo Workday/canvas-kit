@@ -12,7 +12,6 @@ addons:
 
 # cache both yarn and Cypress binary
 cache:
-  yarn: true
   npm: false # caching node_modules is expensive and time consuming, we create longer builds with this
   directories:
     - ~/.cache
