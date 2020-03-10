@@ -10,8 +10,7 @@ addons:
     packages:
     - libgconf-2-4
 
-# cache both yarn and Cypress binar
-# also cache TypeScript builds, this only rebuilds when code changes
+# cache both yarn and Cypress binary
 cache:
   yarn: true
   directories:
