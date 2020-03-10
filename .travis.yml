@@ -13,6 +13,7 @@ addons:
 # cache both yarn and Cypress binary
 cache:
   yarn: true
+  npm: false
   directories:
     - ~/.cache
 
