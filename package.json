@@ -135,6 +135,7 @@
     "create-module": "./utils/create-component/createComponent.js",
     "create-component": "./utils/create-component/createComponent.js",
     "precommit": "lint-staged",
+    "chromatic": "chromatic",
     "commit": "git-cz",
     "commitmsg": "commitlint --edit $HUSKY_GIT_PARAMS",
     "build-storybook": "build-storybook -c .storybook -o docs",
