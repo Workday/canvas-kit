@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
+// import {toBeInTheDocument} from '@testing-library/jest-dom/matchers';
 
 import {Drawer, DrawerHeader, DrawerDirection} from '../index';
 
@@ -15,13 +16,12 @@ describe('Drawer', () => {
     );
 
     fireEvent.click(await findByLabelText('Close'));
-
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
   test('should not render a close icon button', async () => {
     const {container} = render(<DrawerHeader headerText={'Header Title'} />);
-    expect(container.firstChild.childNodes.length).toEqual(1);
+    expect(container.querySelector('svg')).not.toBeInTheDocument();
   });
 
   test('Drawer should spread extra props', async () => {
