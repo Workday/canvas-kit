@@ -1,28 +1,28 @@
 import canvasColors from '@workday/canvas-colors-web';
 
-function getBrandingColors(colors) {
-  const brandingColors = Object.keys(colors.gradients).map(c => `${c}500`);
+function getBrandingColors() {
+  const brandingColors = Object.keys(canvasColors.gradients).map(c => `${c}500`);
 
-  return Object.entries(colors)
-    .filter(([colorName]) => brandingColors.includes(colorName))
-    .reduce((result, [name, value]) => {
+  Object.keys(canvasColors)
+    .filter(colorName => brandingColors.includes(colorName))
+    .reduce((result, name) => {
       const obj = {};
-      obj[name.replace('500', '')] = value;
+      obj[name.replace('500', '')] = canvasColors[name];
       return Object.assign({}, result, obj);
     }, {});
 }
 
-export const brandingColors = getBrandingColors(canvasColors);
+export const brandingColors = getBrandingColors();
 
 export function getHue(color) {
-  const hue = Object.entries(canvasColors).filter(
-    ([colorName]) => color === colorName.replace(/[0-9]*$/, '')
+  const hue = Object.keys(canvasColors).filter(
+    colorName => color === colorName.replace(/[0-9]*$/, '')
   );
 
   if (hue.length > 0) {
-    return hue.reduce((result, [name, value]) => {
+    return hue.reduce((result, name) => {
       const obj = {};
-      obj[name.replace(/^[a-zA-Z]*/g, '')] = value;
+      obj[name.replace(/^[a-zA-Z]*/g, '')] = canvasColors[name];
       return Object.assign({}, result, obj);
     });
   }
@@ -38,12 +38,9 @@ export function getColor(color) {
   if (!/[0-9]{3}$/.test(color)) {
     findColor = `${color}500`;
   }
+  const foundColor = canvasColors[findColor];
 
-  const foundColor = Object.entries(canvasColors).find(([colorName]) => colorName === findColor);
-
-  if (!foundColor) return null;
-
-  return foundColor[1];
+  return foundColor ? foundColor : null;
 }
 
 export function appendStyle(css) {
@@ -72,7 +69,7 @@ function expandHex(hex) {
   return hex.replace(shorthandRegex, function(m, r, g, b) {
     return r + r + g + g + b + b;
   });
-};
+}
 
 function hexToRgb(hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(expandHex(hex));
@@ -83,9 +80,9 @@ function hexToRgb(hex) {
         b: parseInt(result[3], 16),
       }
     : null;
-};
+}
 
- /**
+/**
  *
  * Chooses luminance color depending on the rgb value of the background color.
  * Eventually should be replaced by by Chroma 2.0

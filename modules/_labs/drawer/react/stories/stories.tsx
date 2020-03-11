@@ -43,7 +43,7 @@ const paddingOptions = {
 
 const paddingDefault = paddingOptions.s;
 
-storiesOf('Labs/Drawer/React', module)
+storiesOf('Labs|Drawer/React', module)
   .addParameters({component: Drawer})
   .addDecorator(withReadme(README))
   .add('Default', () => (

@@ -16,7 +16,7 @@ const testInput = (
   });
 
   // Spoof window environments with different browser event types
-  const windowRef = Object.assign({}, window);
+  const windowRef = {...window};
   if (shimWindowProps) {
     for (const prop of Object.keys(shimWindowProps)) {
       // @ts-ignore

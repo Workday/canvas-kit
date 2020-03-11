@@ -38,8 +38,8 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.21",
-    "@emotion/styled": "^10.0.17",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "@workday/canvas-colors-web": "^0.17.13",
     "@workday/canvas-kit-react-core": "^3.4.0",
     "chroma-js": "^2.1.0",
