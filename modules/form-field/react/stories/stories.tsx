@@ -6,7 +6,6 @@ import FormField from '../lib/FormField';
 import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {TextInput} from '../../../text-input/react';
-import {Label, Hint} from '../index';
 import README from '../README.md';
 import {FormFieldLabelPosition} from '../lib/types';
 
@@ -37,27 +36,52 @@ const FormFieldStates = () => (
   </StaticStates>
 );
 
-storiesOf('Components|Inputs/Form Field/React/Label', module)
-  .addParameters({component: Label})
+storiesOf('Components|Inputs/Form Field/React', module)
+  .addParameters({component: FormField})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <Label>Label</Label>
+      <FormField label="Label">
+        <TextInput></TextInput>
+      </FormField>
     </div>
   ))
-  .add('Required', () => (
-    <div className="story">
-      <Label required={true}>Label</Label>
-    </div>
-  ));
-storiesOf('Components|Inputs/Form Field/React', module)
-  .addParameters({component: Hint})
-  .addDecorator(withReadme(README))
   .add('Hint', () => (
     <div className="story">
-      <Hint>Hint</Hint>
-      <Hint error={Hint.ErrorType.Error}>Hint</Hint>
-      <Hint error={Hint.ErrorType.Alert}>Hint</Hint>
+      <FormField label="Label" hintText={'Helpful text goes here'}>
+        <TextInput></TextInput>
+      </FormField>
+    </div>
+  ))
+  .add('Hint Alert', () => (
+    <div className="story">
+      <FormField
+        error={FormField.ErrorType.Alert}
+        label="Label"
+        hintId={'hintId'}
+        hintText={'Helpful text goes here'}
+      >
+        <TextInput></TextInput>
+      </FormField>
+    </div>
+  ))
+  .add('Hint Error', () => (
+    <div className="story">
+      <FormField
+        error={FormField.ErrorType.Error}
+        label="Label"
+        hintId={'hintId'}
+        hintText={'Helpful text goes here'}
+      >
+        <TextInput></TextInput>
+      </FormField>
+    </div>
+  ))
+  .add('Label Required', () => (
+    <div className="story">
+      <FormField required={true} label="Label">
+        <TextInput></TextInput>
+      </FormField>
     </div>
   ));
 
