@@ -11,7 +11,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_labs/button/react"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/button/react"
   },
   "files": [
     "dist/",
