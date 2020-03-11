@@ -33,7 +33,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
   .addParameters({component: IconButton})
   .addDecorator(withReadme(README))
   .add('Circle', () => {
-    const [toggled, setToggled] = React.useState();
+    const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
       setToggled(!toggled);
     };
@@ -82,7 +82,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
     );
   })
   .add('Square', () => {
-    const [toggled, setToggled] = React.useState();
+    const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
       setToggled(!toggled);
     };
@@ -131,7 +131,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
     );
   })
   .add('Square Filled', () => {
-    const [toggled, setToggled] = React.useState();
+    const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
       setToggled(!toggled);
     };
@@ -178,7 +178,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
     );
   })
   .add('Plain', () => {
-    const [toggled, setToggled] = React.useState();
+    const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
       setToggled(!toggled);
     };
@@ -225,7 +225,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
     );
   })
   .add('Circle Filled', () => {
-    const [toggled, setToggled] = React.useState();
+    const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
       setToggled(!toggled);
     };
@@ -272,7 +272,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
     );
   })
   .add('Inverse', () => {
-    const [toggled, setToggled] = React.useState();
+    const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
       setToggled(!toggled);
     };
@@ -325,7 +325,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
     );
   })
   .add('Inverse Filled', () => {
-    const [toggled, setToggled] = React.useState();
+    const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
       setToggled(!toggled);
     };
