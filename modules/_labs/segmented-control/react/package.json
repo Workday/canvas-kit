@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@workday/canvas-kit-labs-react-core": "^3.4.0",
-    "@workday/canvas-kit-labs-react-button": "^0.0.0",
+    "@workday/canvas-kit-react-button": "^3.4.0",
     "@workday/canvas-kit-react-common": "^3.4.0",
     "@workday/canvas-kit-react-core": "^3.4.0",
     "@workday/canvas-system-icons-web": "^1.0.20"

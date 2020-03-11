@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import {IconButton} from '@workday/canvas-kit-labs-react-button';
+import {render, fireEvent} from '@testing-library/react';
 import SegmentedControl from '../lib/SegmentedControl';
+import {IconButton} from '@workday/canvas-kit-react-button';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 describe('Segmented Control', () => {
@@ -10,64 +11,88 @@ describe('Segmented Control', () => {
     cb.mockReset();
   });
 
-  test('renders two buttons as expected', () => {
-    const component = mount(
-      <SegmentedControl>
-        <IconButton icon={listViewIcon} value="list-view" aria-label="List View" onClick={cb} />
-        <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
-      </SegmentedControl>
-    );
-    expect(component.find('button').length).toEqual(2);
-
-    component
-      .find('button')
-      .at(0)
-      .simulate('click');
-
-    expect(cb.mock.calls.length).toBe(1);
+  describe('when rendered', () => {
+    it('should render two icon buttons', () => {
+      const {getAllByRole} = render(
+        <SegmentedControl>
+          <IconButton icon={listViewIcon} aria-label="List View" />
+          <IconButton icon={worksheetsIcon} aria-label="Table View" />
+        </SegmentedControl>
+      );
+      expect(getAllByRole('button').length).toEqual(2);
+    });
   });
 
-  test('renders two buttons with disabled button', () => {
-    const component = mount(
-      <SegmentedControl onChange={cb}>
-        <IconButton icon={listViewIcon} value="list-view" aria-label="List View" disabled={true} />
-        <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
-        <span /> {/* ensure random elements don't break anything */}
-      </SegmentedControl>
-    );
+  describe('when clicked', () => {
+    it('should call SegmentedControl onChange callback', () => {
+      const {getAllByRole} = render(
+        <SegmentedControl onChange={cb}>
+          <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
+          <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+          <span /> {/* ensure random elements don't break anything */}
+        </SegmentedControl>
+      );
+      fireEvent.click(getAllByRole('button')[1]);
 
-    // clicking on a disabled button shouldn't trigger callback
-    component
-      .find('button')
-      .at(0)
-      .simulate('click');
+      expect(cb).toHaveBeenCalledTimes(1);
+      expect(cb.mock.calls[0][0]).toBe('table-view');
+    });
 
-    expect(cb.mock.calls.length).toBe(0);
+    it('should preserve existing IconButton onClick callbacks', () => {
+      const existingCb = jest.fn();
+      const {getAllByRole} = render(
+        <SegmentedControl onChange={cb}>
+          <IconButton icon={listViewIcon} value="list-view" aria-label="List View" />
+          <IconButton
+            icon={worksheetsIcon}
+            value="table-view"
+            aria-label="Table View"
+            onClick={existingCb}
+          />
+        </SegmentedControl>
+      );
+      fireEvent.click(getAllByRole('button')[1]);
 
-    // clicking on an active button should trigger callback
-    component
-      .find('button')
-      .at(1)
-      .simulate('click');
+      expect(cb).toHaveBeenCalledTimes(1);
+      expect(existingCb).toHaveBeenCalledTimes(1);
+    });
 
-    expect(cb.mock.calls.length).toBe(1);
-    expect(cb.mock.calls[0][0]).toBe('table-view');
+    it('disabled buttons should trigger callback', () => {
+      const {getAllByRole} = render(
+        <SegmentedControl onChange={cb}>
+          <IconButton
+            icon={listViewIcon}
+            value="list-view"
+            aria-label="List View"
+            disabled={true}
+          />
+          <IconButton icon={worksheetsIcon} value="table-view" aria-label="Table View" />
+        </SegmentedControl>
+      );
+      fireEvent.click(getAllByRole('button')[0]);
+
+      expect(cb).toHaveBeenCalledTimes(0);
+
+      fireEvent.click(getAllByRole('button')[1]);
+
+      expect(cb).toHaveBeenCalledTimes(1);
+      expect(cb.mock.calls[0][0]).toBe('table-view');
+    });
   });
 
-  test('behavior when no values are used', () => {
-    const component = mount(
-      <SegmentedControl onChange={cb}>
-        <IconButton icon={listViewIcon} aria-label="List View" />
-        <IconButton icon={worksheetsIcon} aria-label="Table View" />
-      </SegmentedControl>
-    );
+  describe('when clicked without value', () => {
+    it('should call callback with index', () => {
+      const {getAllByRole} = render(
+        <SegmentedControl onChange={cb}>
+          <IconButton icon={listViewIcon} aria-label="List View" />
+          <IconButton icon={worksheetsIcon} aria-label="Table View" />
+        </SegmentedControl>
+      );
 
-    component
-      .find('button')
-      .at(1)
-      .simulate('click');
+      fireEvent.click(getAllByRole('button')[1]);
 
-    expect(cb.mock.calls.length).toBe(1);
-    expect(cb.mock.calls[0][0]).toBe(1);
+      expect(cb).toHaveBeenCalledTimes(1);
+      expect(cb.mock.calls[0][0]).toBe(1);
+    });
   });
 });
