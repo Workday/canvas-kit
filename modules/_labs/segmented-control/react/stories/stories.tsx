@@ -11,7 +11,7 @@ import {
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {IconButton} from '@workday/canvas-kit-labs-react-button';
+import {IconButton} from '@workday/canvas-kit-react-button';
 import {SegmentedControl} from '../index';
 
 import README from '../README.md';
@@ -20,7 +20,7 @@ storiesOf('Labs|Segmented Control/React', module)
   .addParameters({component: SegmentedControl})
   .addDecorator(withReadme(README))
   .add('Default', () => {
-    const [value, setValue] = React.useState();
+    const [value, setValue] = React.useState<string | number>();
     const handleToggle = (selectedValue: string | number) => {
       setValue(selectedValue);
       action('Segmented Control selection change')(selectedValue);
