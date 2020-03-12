@@ -86,8 +86,8 @@ describe('FormField', () => {
         </FormField>
       );
 
-      expect(container.querySelector('p')).toHaveAttribute('id', 'hintId');
-      expect(container.querySelector('input')).toHaveAttribute('aria-describedby', 'hintId');
+      expect(container.querySelector('p')).toHaveAttribute('id', hintId);
+      expect(container.querySelector('input')).toHaveAttribute('aria-describedby', hintId);
     });
   });
 
@@ -102,8 +102,19 @@ describe('FormField', () => {
         </FormField>
       );
 
-      expect(container.querySelector('label')).toHaveAttribute('for', 'inputId');
-      expect(container.querySelector('input')).toHaveAttribute('id', 'inputId');
+      expect(container.querySelector('label')).toHaveAttribute('for', inputId);
+      expect(container.querySelector('input')).toHaveAttribute('id', inputId);
+    });
+  });
+  describe('when rendered with an error', () => {
+    it('the input should have aria-invalid for accessibility', () => {
+      const label = 'Label';
+      const {container} = render(
+        <FormField error={FormField.ErrorType.Error} label={label}>
+          <input type="text" />
+        </FormField>
+      );
+      expect(container.querySelector('input')).toHaveAttribute('aria-invalid', 'true');
     });
   });
 });
