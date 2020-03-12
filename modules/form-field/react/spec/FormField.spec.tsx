@@ -117,4 +117,16 @@ describe('FormField', () => {
       expect(container.querySelector('input')).toHaveAttribute('aria-invalid', 'true');
     });
   });
+  describe('when rendered with no inputId', () => {
+    it('the input should have a unique id', () => {
+      const label = 'Label';
+      const {container} = render(
+        <FormField error={FormField.ErrorType.Error} label={label}>
+          <input type="text" />
+        </FormField>
+      );
+      const uniqueId = container.querySelector('input').getAttribute('id');
+      expect(container.querySelector('input')).toHaveAttribute('id', uniqueId);
+    });
+  });
 });
