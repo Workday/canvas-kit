@@ -44,8 +44,9 @@ class Autocomplete extends React.Component<
         labelId="autocomplete-123"
         onFocus={action(`Focus`)}
         onBlur={action(`Blur`)}
+        initialValue={`Test`}
       >
-        <TextInput placeholder="Autocomplete" />
+        <TextInput autoFocus placeholder="Autocomplete" />
       </Combobox>
     );
   }
