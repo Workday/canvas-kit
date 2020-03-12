@@ -85,7 +85,6 @@ const ColorPickerInputPopup: React.FunctionComponent = () => {
 
   const handleSubmit = React.useCallback((submitColor: string) => {
     setColor(submitColor.toUpperCase());
-    // setIsOpen(false);
   }, []);
 
   const colorSet = [

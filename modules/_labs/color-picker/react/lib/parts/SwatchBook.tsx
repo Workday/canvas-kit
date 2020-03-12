@@ -52,7 +52,6 @@ const Container = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(8, auto)',
   gridGap: spacing.xxs,
-  // cursor: 'pointer',
 });
 
 export const SwatchBook: React.FunctionComponent<SwatchBookProps> = ({colors, value, onSelect}) => (
