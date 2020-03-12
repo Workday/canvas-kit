@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CSSObject} from '@emotion/core';
 import styled from '@emotion/styled';
 import {borderRadius, colors, spacing} from '@workday/canvas-kit-react-core';
-import {focusRing, mouseFocusBehavior, hideMouseFocus} from '@workday/canvas-kit-react-common';
+import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 
 import {Swatch} from './Swatch';
 

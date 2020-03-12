@@ -34,7 +34,7 @@ storiesOf('Labs|Color Picker/React', module)
   .add('Popup', () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [color, setColor] = React.useState('');
-    const buttonRef = React.useRef();
+    const buttonRef = React.useRef(null);
 
     const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -52,7 +52,7 @@ storiesOf('Labs|Color Picker/React', module)
         <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={toggleOpen}>
           Toggle Color Picker
         </Button>
-        <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current}>
+        <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current!}>
           <ColorPicker
             resetColor={colors.blueberry400}
             resetLabel={'Reset'}
@@ -70,7 +70,7 @@ storiesOf('Labs|Color Picker/React', module)
   .add('Popup w/ Custom Target', () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [color, setColor] = React.useState(colors.peach400);
-    const buttonRef = React.useRef();
+    const buttonRef = React.useRef(null);
 
     const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -175,7 +175,7 @@ storiesOf('Labs|Color Picker/React', module)
         <Popper
           placement={'bottom'}
           open={isOpen}
-          anchorElement={buttonRef.current}
+          anchorElement={buttonRef.current!}
           popperOptions={popperOptions}
         >
           <ColorPicker

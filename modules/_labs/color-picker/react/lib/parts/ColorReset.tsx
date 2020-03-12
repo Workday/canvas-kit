@@ -9,7 +9,7 @@ import {Swatch} from './Swatch';
 export interface ResetButtonProps {
   label: string;
   resetColor: string;
-  onClick: () => void;
+  onClick: (color: string) => void;
 }
 
 export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
