@@ -36,7 +36,7 @@ storiesOf('Labs|Color Picker/React', module)
     const [color, setColor] = React.useState('');
     const buttonRef = React.useRef();
 
-    const handleClick = () => setIsOpen(!isOpen);
+    const toggleOpen = () => setIsOpen(!isOpen);
 
     const handleSubmit = React.useCallback(
       (submitColor: string) => {
@@ -49,7 +49,7 @@ storiesOf('Labs|Color Picker/React', module)
 
     return (
       <>
-        <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={handleClick}>
+        <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={toggleOpen}>
           Toggle Color Picker
         </Button>
         <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current}>
@@ -59,7 +59,7 @@ storiesOf('Labs|Color Picker/React', module)
             showCustomHexInput={true}
             onColorChange={handleSubmit}
             onColorReset={() => handleSubmit(colors.blueberry400)}
-            onSubmitClick={() => handleSubmit}
+            onSubmitClick={toggleOpen}
             value={color}
             style={{marginTop: 8}}
           />
@@ -184,7 +184,7 @@ storiesOf('Labs|Color Picker/React', module)
             showCustomHexInput={true}
             onColorChange={handleSubmit}
             onColorReset={() => handleSubmit(colors.blueberry400)}
-            onSubmitClick={() => handleSubmit}
+            onSubmitClick={toggleOpen}
             value={color}
             colorSet={colorSet}
             style={{marginTop: 8}}
