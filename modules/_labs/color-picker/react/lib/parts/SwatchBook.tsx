@@ -53,7 +53,7 @@ const Container = styled('div')({
 
 export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
   <Container>
-    {colors.map(color => {
+    {colors.map((color, index) => {
       const isSelected = value ? color.toLowerCase() === value.toLowerCase() : false;
 
       const handleClick = () => onSelect(color);
@@ -67,7 +67,7 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
 
       return (
         <SwatchContainer
-          key={color}
+          key={index + '-' + color}
           className={`wdc-color-picker--color-${formattedColor}`}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
