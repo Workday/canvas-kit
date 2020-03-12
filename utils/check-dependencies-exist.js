@@ -91,11 +91,26 @@ function formatErrorMessage(errors) {
 }
 
 const modulePath = process.cwd();
+const packageName = require(path.join(modulePath, 'package.json')).name;
 
 depCheck(modulePath, depCheckOptions, unused => {
   const errorKeys = Object.keys(unused).filter(key => {
     if (key === 'using') {
       return false;
+    }
+    if (key === 'missing') {
+      // Self-referencing imports are only okay in stories. It allows story code more copy/paste friendly. Stories are not packaged, so no circular dependency actually exists
+      if (unused['missing'][packageName]) {
+        unused['missing'][packageName] = unused['missing'][packageName].filter(
+          file => file.indexOf('stories') === -1
+        );
+        if (unused['missing'][packageName].length === 0) {
+          delete unused['missing'][packageName];
+        }
+      }
+      if (Object.keys(unused['missing']).length === 0) {
+        return false;
+      }
     }
     if (unused[key].constructor === Object) {
       return Object.keys(unused[key]).length;

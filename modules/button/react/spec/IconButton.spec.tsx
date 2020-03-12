@@ -1,10 +1,7 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
-import IconButton from '../lib/IconButton';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {IconButton} from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-import ReactDOMServer from 'react-dom/server';
-import {axe} from 'jest-axe';
+import {render, fireEvent} from '@testing-library/react';
 
 describe('Icon Button', () => {
   const cb = jest.fn();
@@ -12,110 +9,89 @@ describe('Icon Button', () => {
     cb.mockReset();
   });
 
-  test('render an icon button with id', () => {
-    const component = mount(
-      <IconButton id="myBtn" aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />
-      </IconButton>
-    );
-    expect(component.find('button').props().id).toBe('myBtn');
-    component.unmount();
+  describe('when rendered', () => {
+    it('should render a button', () => {
+      const {getByRole} = render(
+        <IconButton aria-label="Activity Stream" icon={activityStreamIcon} />
+      );
+      expect(getByRole('button')).toBeDefined();
+    });
   });
 
-  test('should call a callback function', () => {
-    const component = mount(
-      <IconButton onClick={cb} aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />
-      </IconButton>
-    );
-    const button = component.find('button');
-    button.simulate('click');
-    expect(cb.mock.calls.length).toBe(1);
-    component.unmount();
+  describe('when rendered with an id', () => {
+    it('should render a button with id', () => {
+      const id = 'myButton';
+      const {getByRole} = render(
+        <IconButton aria-label="Activity Stream" icon={activityStreamIcon} id={id} />
+      );
+      expect(getByRole('button')).toHaveAttribute('id', id);
+    });
   });
 
-  test('should not call a callback function when disabled', () => {
-    const component = mount(
-      <IconButton onClick={cb} disabled={true} aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />
-      </IconButton>
-    );
-    const button = component.find('button');
-    button.simulate('click');
-    expect(cb.mock.calls.length).toBe(0);
-    component.unmount();
+  describe('when rendered with disabled attribute', () => {
+    it('should render a disabled button', () => {
+      const {getByRole} = render(
+        <IconButton aria-label="Activity Stream" icon={activityStreamIcon} disabled={true} />
+      );
+      expect(getByRole('button')).toHaveProperty('disabled', true);
+    });
   });
 
-  test('should call onToggleChange when toggle prop changes', () => {
-    const wrapper = mount(
-      <IconButton toggled={false} onToggleChange={cb} aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />
-      </IconButton>
-    );
-
-    wrapper.setProps({toggled: true});
-    wrapper.update();
-    wrapper.setProps({toggled: true});
-    wrapper.update();
-    wrapper.setProps({toggled: undefined});
-    wrapper.update();
-
-    expect(cb.mock.calls.length).toBe(2);
-  });
-});
-
-describe('Icon Button Accessibility', () => {
-  const cb = jest.fn();
-  afterEach(() => {
-    cb.mockReset();
+  describe('when rendered with extra, arbitrary props', () => {
+    it('should spread extra props onto the button', () => {
+      const attr = 'test';
+      const {getByRole} = render(
+        <IconButton aria-label="Activity Stream" icon={activityStreamIcon} data-propspread={attr} />
+      );
+      expect(getByRole('button')).toHaveAttribute('data-propspread', attr);
+    });
   });
 
-  test('icon button should be using HTML5 <button> tag', () => {
-    const component = mount(
-      <IconButton aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />{' '}
-      </IconButton>
-    );
-    expect(component.getDOMNode().tagName.toLowerCase()).toEqual('button');
-    component.unmount();
+  describe('when rendered with a button ref', () => {
+    it('should set the ref to the checkbox input element', () => {
+      const ref = React.createRef<HTMLButtonElement>();
+
+      render(<IconButton aria-label="Activity Stream" icon={activityStreamIcon} buttonRef={ref} />);
+
+      expect(ref.current).not.toBeNull();
+      expect(ref.current!.tagName.toLowerCase()).toEqual('button');
+    });
   });
 
-  test('enabled icon button should NOT have disabled attribute set', () => {
-    const component = mount(
-      <IconButton disabled={false} aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />{' '}
-      </IconButton>
-    );
-    expect(
-      component
-        .find('button')
-        .getDOMNode()
-        .hasAttribute('disabled')
-    ).toEqual(false);
-    component.unmount();
+  describe('when clicked', () => {
+    it('should call a callback function', () => {
+      const {getByRole} = render(
+        <IconButton aria-label="Activity Stream" icon={activityStreamIcon} onClick={cb} />
+      );
+      fireEvent.click(getByRole('button'));
+      expect(cb).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test('disabled icon button should have disabled attribute set', () => {
-    const component = mount(
-      <IconButton disabled={true} aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />{' '}
-      </IconButton>
-    );
-    expect(
-      component
-        .find('button')
-        .getDOMNode()
-        .hasAttribute('disabled')
-    ).toEqual(true);
-    component.unmount();
-  });
+  describe('when toggled', () => {
+    test('should call onToggleChange when toggle prop changes', () => {
+      const {getByRole, rerender} = render(
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          toggled={false}
+          onToggleChange={cb}
+        />
+      );
 
-  test('IconButton should pass axe DOM accessibility guidelines', async () => {
-    const html = ReactDOMServer.renderToString(
-      <IconButton title="Activity Stream" aria-label="Activity Stream">
-        <SystemIcon icon={activityStreamIcon} />{' '}
-      </IconButton>
-    );
-    expect(await axe(html)).toHaveNoViolations();
+      expect(getByRole('button')).toHaveAttribute('aria-pressed', 'false');
+      rerender(
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          toggled={true}
+          onToggleChange={cb}
+        />
+      );
+
+      expect(getByRole('button')).toHaveAttribute('aria-pressed', 'true');
+      expect(cb).toHaveBeenCalledTimes(1);
+      expect(cb).toHaveBeenCalledWith(true);
+    });
   });
 });

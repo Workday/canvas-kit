@@ -1,41 +1,42 @@
-/**
- * The different button sizes.
- */
-export enum ButtonSize {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-}
-
-export enum IconButtonSize {
-  Small = 'small',
-  Medium = 'medium',
-}
-
-// TODO (beta button): consolidate all these button types
-/**
- * The different button types.
- */
+import {CSSObject} from '@emotion/core';
 
 /**
- * @deprecated These type are deprecated along with deprecated_Button component
+ * Standard Button
  */
-export enum DeprecatedButtonVariant {
-  Primary = 'deprecatedPrimary',
-  Secondary = 'deprecatedSecondary',
-  Delete = 'deprecatedDelete',
-}
-
 export enum ButtonVariant {
   Primary = 'primary',
-  Secondary = 'betaSecondary',
-  Delete = 'delete',
-  Highlight = 'highlight',
-  OutlinePrimary = 'outlinePrimary',
-  OutlineSecondary = 'outlineSecondary',
-  OutlineInverse = 'outlineInverse',
+  Secondary = 'secondary',
+}
+export enum ButtonIconPosition {
+  Left = 'iconPositionLeft',
+  Right = 'iconPositionRight',
+}
+export const ButtonSize = {
+  Small: 'small',
+  Medium: 'medium',
+  Large: 'large',
+} as const;
+
+/**
+ * Outline Button
+ */
+export enum OutlineButtonVariant {
+  Primary = 'outlinePrimary',
+  Secondary = 'outlineSecondary',
+  Inverse = 'outlineInverse',
 }
 
+/**
+ * Dropdown Button
+ */
+export enum DropdownButtonVariant {
+  Primary = 'dropdownPrimary',
+  Secondary = 'dropdownSecondary',
+}
+
+/**
+ * Icon Button
+ */
 export enum IconButtonVariant {
   Square = 'square',
   SquareFilled = 'squareFilled',
@@ -47,22 +48,47 @@ export enum IconButtonVariant {
 }
 
 /**
- * The different icon positions.
+ * Text Button
  */
-export enum IconPosition {
-  Left = 'iconPositionLeft',
-  Right = 'iconPositionRight',
-}
-
 export enum TextButtonVariant {
   Default = 'text',
   Inverse = 'textInverse',
-  AllCaps = 'textAllCaps',
-  InverseAllCaps = 'textInverseAllCaps',
+}
+
+/**
+ * Old orange buttons
+ * @deprecated These type are deprecated along with deprecated_Button component
+ */
+export enum DeprecatedButtonVariant {
+  Primary = 'deprecatedPrimary',
+  Secondary = 'deprecatedSecondary',
+  Delete = 'deprecatedDelete',
 }
 
 export type AllButtonVariants =
-  | DeprecatedButtonVariant
   | ButtonVariant
+  | DropdownButtonVariant
   | TextButtonVariant
-  | IconButtonVariant;
+  | IconButtonVariant
+  | DeprecatedButtonVariant;
+
+/**
+ * The object used for passing in colors to the ButtonContainer
+ */
+export interface ButtonStateColors {
+  background?: string;
+  border?: string;
+  icon?: string;
+  iconFill?: boolean;
+  label?: string;
+  labelData?: string;
+}
+export interface ButtonColors {
+  default: ButtonStateColors;
+  hover: ButtonStateColors;
+  active: ButtonStateColors;
+  focus: ButtonStateColors & {
+    focusRing?: CSSObject;
+  };
+  disabled: ButtonStateColors;
+}
