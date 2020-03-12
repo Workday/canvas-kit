@@ -147,9 +147,7 @@ export const ColorPicker = ({
     setValidHexValue('');
   };
 
-  const onValidHexChange = (validHexValue: string) => {
-    setValidHexValue(validHexValue);
-  };
+  const onValidCustomHexChange = (validHexValue: string) => setValidHexValue(validHexValue);
 
   const onCustomInputKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' && validHexValue) {
@@ -164,8 +162,6 @@ export const ColorPicker = ({
     onColorChange(validHexValue);
   };
 
-  const placeholder = customHexValue === '' ? undefined : customHexValue.toUpperCase();
-
   return (
     <Container data-testid="canvas-color-picker" {...elemProps}>
       {onColorReset && resetColor && (
@@ -178,10 +174,9 @@ export const ColorPicker = ({
             <HexColorInput
               onChange={onCustomHexChange}
               onKeyDown={onCustomInputKeyDown}
-              onValidColorChange={onValidHexChange}
+              onValidColorChange={onValidCustomHexChange}
               value={customHexValue}
-              placeholder={placeholder}
-              showCheck={!!placeholder}
+              showCheck={value === validHexValue || value === customHexValue}
             />
           </ColorInputAndLabel>
           <CheckButton
