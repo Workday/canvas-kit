@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useRef} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
@@ -52,14 +52,14 @@ storiesOf('Labs|Color Picker/React', module)
         <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={handleClick}>
           Toggle Color Picker
         </Button>
-        <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current}>
+        <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current}>
           <ColorPicker
             resetColor={colors.blueberry400}
             resetLabel={'Reset'}
             showCustomHexInput={true}
             onColorChange={handleSubmit}
             onColorReset={() => handleSubmit(colors.blueberry400)}
-            onSubmitClick={handleSubmit}
+            onSubmitClick={() => handleSubmit}
             value={color}
             style={{marginTop: 8}}
           />
@@ -149,20 +149,42 @@ storiesOf('Labs|Color Picker/React', module)
       },
     });
 
+    const popperOptions = {
+      modifiers: {
+        offset: {
+          enabled: true,
+          offset: '4px, 82px',
+        },
+      },
+    };
+
     return (
       <>
-        <SelectedColorButton ref={buttonRef} onClick={toggleOpen}>
-          <StyledSwatch color={color} isSelected={false} />
+        <SelectedColorButton
+          data-testid="color-picker-selected-color-button"
+          ref={buttonRef}
+          onClick={toggleOpen}
+        >
+          <StyledSwatch
+            data-testid="color-picker-selected-color-button-swatch"
+            color={color}
+            isSelected={false}
+          />
           Selected Color
         </SelectedColorButton>
-        <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current}>
+        <Popper
+          placement={'bottom'}
+          open={isOpen}
+          anchorElement={buttonRef.current}
+          popperOptions={popperOptions}
+        >
           <ColorPicker
             resetColor={colors.blueberry400}
             resetLabel={'Reset'}
             showCustomHexInput={true}
             onColorChange={handleSubmit}
             onColorReset={() => handleSubmit(colors.blueberry400)}
-            onSubmitClick={handleSubmit}
+            onSubmitClick={() => handleSubmit}
             value={color}
             colorSet={colorSet}
             style={{marginTop: 8}}

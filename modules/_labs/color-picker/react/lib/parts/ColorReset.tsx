@@ -8,14 +8,14 @@ import {Swatch} from './Swatch';
 export interface ResetButtonProps {
   label: string;
   resetColor: string;
-  onClick: Function;
+  onClick: () => void;
 }
 
 export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
   const handleResetColor = () => onClick(resetColor);
 
   return (
-    <Container onClick={handleResetColor}>
+    <Container data-testid="color-picker-reset" onClick={handleResetColor}>
       <Swatch color={resetColor} isSelected={false} />
       <Label>{label}</Label>
     </Container>

@@ -14,11 +14,7 @@ const expandHex = (hex: string) => {
 const hexToRgb = (hex: string) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(expandHex(hex));
   return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+    ? `rgb(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)})`
     : null;
 };
 
@@ -125,8 +121,8 @@ describe('ColorPicker', () => {
 
     context('given the color picker is open', () => {
       beforeEach(() => {
-        h.stories.load(colorPickerStory, 'ColorPicker Popper examples');
-        cy.get('[data-testid=color-picker-popup-button]').click();
+        h.stories.load(colorPickerStory, 'Popup w/ Custom Target');
+        cy.get('[data-testid="color-picker-selected-color-button"]').click();
       });
 
       it('should pass accessibility checks', () => {
@@ -138,6 +134,7 @@ describe('ColorPicker', () => {
           cy.get(`input`)
             .click()
             .type('abc{enter}');
+          cy.get('[data-testid="color-picker-selected-color-button"]').click();
         });
 
         it('should reflect the custom value', () => {
@@ -145,7 +142,7 @@ describe('ColorPicker', () => {
         });
 
         it('should set the color picker value to the input color', () => {
-          cy.get('[data-testid="color-picker-popup-button-swatch"]').should(
+          cy.get('[data-testid="color-picker-selected-color-button-swatch"]').should(
             'have.css',
             'background-color',
             hexToRgb('AABBCC')
@@ -156,19 +153,20 @@ describe('ColorPicker', () => {
       context('when a swatch is clicked', () => {
         const color = 'f31167';
         beforeEach(() => {
-          cy.get(`#canvas-color-picker--color-${color}`).click();
+          cy.get(`.wdc-color-picker--color-${color}`).click();
+          cy.get('[data-testid="color-picker-selected-color-button"]').click();
         });
 
         it('should have active state', () => {
-          cy.get(`#canvas-color-picker--color-${color}`).should('have.css', 'box-shadow');
+          cy.get(`.wdc-color-picker--color-${color}`).should('have.css', 'box-shadow');
         });
 
         it('should have check icon', () => {
-          cy.get(`#canvas-color-picker--color-${color}`).find('#wd-icon');
+          cy.get(`.wdc-color-picker--color-${color}`).find('.wd-icon');
         });
 
         it('should set the color picker value to the swatch color', () => {
-          cy.get('[data-testid="color-picker-popup-button-swatch"]').should(
+          cy.get('[data-testid="color-picker-selected-color-button-swatch"]').should(
             'have.css',
             'background-color',
             hexToRgb(color)
@@ -179,11 +177,12 @@ describe('ColorPicker', () => {
       context('when color reset is clicked', () => {
         const resetColor = hexToRgb('0875e1');
         beforeEach(() => {
-          cy.get('#canvas-color-picker--reset').click();
+          cy.get('[data-testid="color-picker-reset"]').click();
+          cy.get('[data-testid="color-picker-selected-color-button"]').click();
         });
 
         it('should set the color picker value to the reset color', () => {
-          cy.get('[data-testid="color-picker-popup-button-swatch"]').should(
+          cy.get('[data-testid="color-picker-selected-color-button-swatch"]').should(
             'have.css',
             'background-color',
             resetColor
