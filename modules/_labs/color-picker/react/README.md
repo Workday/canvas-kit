@@ -31,36 +31,41 @@ import {colors} from '@workday/canvas-kit-react-core';
 import {Button} from '@workday/canvas-kit-react-button';
 import {Popper} from '@workday/canvas-kit-react-common';
 
-
 const MyComponent: React.FunctionComponent = () => {
-  const [backgroundColor, setBackgroundColor] = React.useState<string>(colors.kiwi400);
-  const [isColorPickerOpen, setIsColorPickerOpen] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [color, setColor] = React.useState('');
   const buttonRef = React.useRef(null);
 
-  const handleClick = () => setIsColorPickerOpen(!isColorPickerOpen);
+  const toggleOpen = () => setIsOpen(!isOpen);
 
-  const handleSubmit = (color: string) => {
-    setBackgroundColor(color)
-    setIsColorPickerOpen(false)
-  };
+  const handleSubmit = React.useCallback(
+    (submitColor: string) => {
+      setColor(submitColor.toUpperCase());
+      setIsOpen(false);
+    },
+    [setIsOpen]
+  );
 
   return (
-    <Button onClick={handleClick} buttonRef={buttonRef}>
-      Click me
-    </Button>
-    <Popper placement={'bottom'} open={isColorPickerOpen} anchorElement={buttonRef.current}>
-      <ColorPicker
-        onColorChange={color => setBackgroundColor(color)}
-        onColorReset={() => handleSubmit(colors.kiwi400)}
-        resetColor={colors.kiwi400}
-        resetLabel={getTranslatedResetLabel()}
-        value={backgroundColor}
-        showCustomHexInput={true}
-        onSubmitClick={handleSubmit}
-      />
-    </Popper>
-  )
-}
+    <>
+      <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={toggleOpen}>
+        Toggle Color Picker
+      </Button>
+      <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current!}>
+        <ColorPicker
+          resetColor={colors.blueberry400}
+          resetLabel={'Reset'}
+          showCustomHexInput={true}
+          onColorChange={handleSubmit}
+          onColorReset={() => handleSubmit(colors.blueberry400)}
+          onSubmitClick={toggleOpen}
+          value={color}
+          style={{marginTop: 8}}
+        />
+      </Popper>
+    </>
+  );
+};
 ```
 
 ## Static Properties
