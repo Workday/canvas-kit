@@ -55,7 +55,6 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "colors": "^1.4.0",
     "commitizen": "^3.1.1",
-    "concurrently": "^5.1.0",
     "core-js": "^3.5.0",
     "css-loader": "^3.2.0",
     "css-mqpacker": "^7.0.0",
@@ -123,8 +122,7 @@
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.14.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.5.1",
-    "wait-on": "^4.0.1"
+    "typescript": "^3.5.1"
   },
   "scripts": {
     "start": "node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook",
@@ -137,6 +135,7 @@
     "create-module": "./utils/create-component/createComponent.js",
     "create-component": "./utils/create-component/createComponent.js",
     "precommit": "lint-staged",
+    "chromatic": "chromatic",
     "commit": "git-cz",
     "commitmsg": "commitlint --edit $HUSKY_GIT_PARAMS",
     "build-storybook": "build-storybook -c .storybook -o docs",
