@@ -68,13 +68,7 @@ const DefaultModalExample = () => {
         <iframe title="iframe test" src="https://workday.com/" width="300" height="300"></iframe>
       </div>
 
-      <Modal
-        data-testid="TestModal"
-        heading="Delete Item"
-        open={open}
-        handleClose={closeModal}
-        shouldUsePortal
-      >
+      <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
           Delete
@@ -95,7 +89,7 @@ const UseModalExample = () => {
       <Button variant={Button.Variant.Delete} {...targetProps}>
         Delete Item
       </Button>
-      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps} shouldUsePortal>
+      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
           Delete
@@ -121,7 +115,6 @@ const NoCloseModalExample = () => {
         heading={'Delete Item'}
         {...modalProps}
         handleClose={undefined}
-        shouldUsePortal
       >
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>
@@ -150,7 +143,6 @@ const CustomFocusModalExample = () => {
         {...modalProps}
         firstFocusRef={buttonRef}
         handleClose={undefined}
-        shouldUsePortal
       >
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Delete}>

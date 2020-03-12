@@ -15,21 +15,8 @@ export interface ModalProps extends ModalContentProps {
   open: boolean;
 }
 
-const Modal = ({
-  open,
-  shouldUsePortal = false,
-  ...modalContentProps
-}: ModalProps): JSX.Element | null => {
-  if (process.env.NODE_ENV !== 'production') {
-    React.useEffect(() => {
-      if (shouldUsePortal === false) {
-        console.warn(
-          `Deprecation: @workday/canvas-kit-react Modal::shouldUsePortal should be set to 'true'. This fix is for accessibility, but may visually break your application if zIndex is used on a parent element to the Modal instead of the Modal component directly. Please set this boolean and fix any visual breakages. This flag will be removed in v4`
-        );
-      }
-    }, []);
-  }
-  return open ? <ModalContent shouldUsePortal={shouldUsePortal} {...modalContentProps} /> : null;
+const Modal = ({open, ...modalContentProps}: ModalProps): JSX.Element | null => {
+  return open ? <ModalContent {...modalContentProps} /> : null;
 };
 
 Modal.Padding = PopupPadding;

@@ -47,8 +47,6 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * it will make the modal heading focusable and focus on that instead.
    */
   firstFocusRef?: React.RefObject<HTMLElement>;
-
-  shouldUsePortal?: boolean;
 }
 
 const fadeIn = keyframes`
@@ -150,7 +148,6 @@ const ModalContent = ({
   width,
   heading,
   padding,
-  shouldUsePortal,
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -212,7 +209,7 @@ const ModalContent = ({
     </Container>
   );
 
-  return shouldUsePortal ? ReactDOM.createPortal(content, document.body) : content;
+  return ReactDOM.createPortal(content, document.body);
 };
 
 export default ModalContent;
