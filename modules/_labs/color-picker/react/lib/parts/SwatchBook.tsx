@@ -1,7 +1,8 @@
 import * as React from 'react';
+import {CSSObject} from '@emotion/core';
 import styled from '@emotion/styled';
 import {borderRadius, colors, spacing} from '@workday/canvas-kit-react-core';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import {focusRing, mouseFocusBehavior, hideMouseFocus} from '@workday/canvas-kit-react-common';
 
 import {Swatch} from './Swatch';
 
@@ -14,6 +15,8 @@ export interface SwatchBookProps {
 interface SwatchContainerProps {
   isSelected: boolean;
 }
+
+const accessibilityBorder = `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`;
 
 export const SwatchContainer = styled('div')<SwatchContainerProps>(
   {
@@ -29,7 +32,7 @@ export const SwatchContainer = styled('div')<SwatchContainerProps>(
     transition: 'box-shadow 120ms ease',
 
     '&:hover': {
-      boxShadow: `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`,
+      boxShadow: accessibilityBorder,
     },
 
     '&:focus': {
@@ -38,11 +41,17 @@ export const SwatchContainer = styled('div')<SwatchContainerProps>(
     },
   },
   ({isSelected}) =>
-    isSelected
-      ? {
-          boxShadow: `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`,
-        }
-      : {}
+    mouseFocusBehavior({
+      '&:focus': {
+        animation: 'none',
+      },
+      '&:hover': {
+        boxShadow: accessibilityBorder,
+      },
+      '&': {
+        boxShadow: isSelected ? accessibilityBorder : undefined,
+      },
+    }) as CSSObject
 );
 
 const Container = styled('div')({

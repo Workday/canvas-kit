@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import {borderRadius, colors, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
+import {borderRadius, colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 
 import {Swatch} from './Swatch';
 
@@ -48,14 +49,11 @@ export const Container = styled('button')({
   },
 
   '&:active': {
-    color: inputColors.focusBorder,
-
-    path: {
-      fill: inputColors.focusBorder,
-    },
+    backgroundColor: colors.soap400,
   },
 
   '&:focus': {
-    boxShadow: `inset 0px 0px 0px 2px ${colors.blueberry400}`,
+    ...focusRing(),
   },
+  ...hideMouseFocus,
 });
