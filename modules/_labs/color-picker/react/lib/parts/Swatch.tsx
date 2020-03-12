@@ -18,6 +18,10 @@ export const Container = styled('div')<SwatchProps>(
     height: 20,
 
     borderRadius: borderRadius.s,
+
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   ({color}) => ({
     backgroundColor: color,

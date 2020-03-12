@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useCallback, useRef} from 'react';
 import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -9,20 +9,21 @@ import {Button} from '@workday/canvas-kit-react-button';
 import {ColorPicker, Swatch} from '../index';
 import README from '../README.md';
 
-const ColorPickerPopup: React.FunctionComponent = () => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const [color, setColor] = React.useState<string>('');
-  const buttonRef = React.useRef(null);
+const ColorPickerPopup = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [color, setColor] = useState<string>('');
+  const buttonRef = useRef(null);
 
   const handleClick = () => setIsOpen(!isOpen);
 
-  const handleSubmit = React.useCallback(
-    (submitColor: string) => {
-      setColor(submitColor.toUpperCase());
-      setIsOpen(false);
-    },
-    [setIsOpen]
-  );
+  const handleSubmit = () =>
+    useCallback(
+      (submitColor: string) => {
+        setColor(submitColor.toUpperCase());
+        setIsOpen(false);
+      },
+      [setIsOpen]
+    );
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
@@ -35,8 +36,8 @@ const ColorPickerPopup: React.FunctionComponent = () => {
           resetLabel={'Reset'}
           showCustomHexInput={true}
           onColorChange={handleSubmit}
-          onColorReset={() => handleSubmit(colors.blueberry400)}
-          onSubmitClick={() => setIsOpen(false)}
+          onColorReset={() => handleSubmit()(colors.blueberry400)}
+          onSubmitClick={handleSubmit}
           value={color}
           style={{marginTop: 8}}
         />
@@ -82,13 +83,10 @@ const ColorPickerInputPopup: React.FunctionComponent = () => {
 
   const handleClick = () => setIsOpen(!isOpen);
 
-  const handleSubmit = React.useCallback(
-    (submitColor: string) => {
-      setColor(submitColor.toUpperCase());
-      setIsOpen(false);
-    },
-    [setIsOpen]
-  );
+  const handleSubmit = React.useCallback((submitColor: string) => {
+    setColor(submitColor.toUpperCase());
+    // setIsOpen(false);
+  }, []);
 
   const colorSet = [
     colors.cinnamon400,
@@ -129,9 +127,16 @@ const ColorPickerInputPopup: React.FunctionComponent = () => {
   ];
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <div
+      data-testid="color-picker-popup-button"
+      style={{display: 'flex', justifyContent: 'center'}}
+    >
       <SelectedColorButton ref={buttonRef} onClick={handleClick}>
-        <StyledSwatch color={color} isSelected={false} />
+        <StyledSwatch
+          data-testid="color-picker-popup-button-swatch"
+          color={color}
+          isSelected={false}
+        />
         Selected Color
       </SelectedColorButton>
       <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current}>
@@ -141,7 +146,7 @@ const ColorPickerInputPopup: React.FunctionComponent = () => {
           showCustomHexInput={true}
           onColorChange={handleSubmit}
           onColorReset={() => handleSubmit(colors.blueberry400)}
-          onSubmitClick={() => setIsOpen(false)}
+          onSubmitClick={handleClick}
           value={color}
           colorSet={colorSet}
           style={{marginTop: 8}}
@@ -151,7 +156,7 @@ const ColorPickerInputPopup: React.FunctionComponent = () => {
   );
 };
 
-storiesOf('Labs/Color Picker', module)
+storiesOf('Labs|Color Picker/React', module)
   .addParameters({component: ColorPicker})
   .addDecorator(withReadme(README))
   .add('ColorPicker Default', () => (
@@ -171,7 +176,7 @@ storiesOf('Labs/Color Picker', module)
   ))
   .add('ColorPicker Popper examples', () => (
     <div className="story">
-      <h3>Color Picker with Reset Button and Custom Input,</h3>
+      <h3>Color Picker with Reset Button and Custom Input</h3>
       <h5>as a Popup on a button target</h5>
       <ColorPickerPopup />
       <div style={{height: 200}}></div>

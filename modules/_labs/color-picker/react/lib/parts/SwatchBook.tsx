@@ -26,6 +26,7 @@ export const SwatchContainer = styled('div')<SwatchContainerProps>(
     width: 20,
     height: 20,
 
+    cursor: 'pointer',
     borderRadius: borderRadius.s,
 
     transition: 'box-shadow 120ms ease',
@@ -51,7 +52,7 @@ const Container = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(8, auto)',
   gridGap: spacing.xxs,
-  cursor: 'pointer',
+  // cursor: 'pointer',
 });
 
 export const SwatchBook: React.FunctionComponent<SwatchBookProps> = ({colors, value, onSelect}) => (

@@ -22,7 +22,6 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * The array of colors to be rendered in the swatchbook.
    */
   colorSet?: string[];
-
   /**
    * If true, render an input for entering a custom hex color.
    * @default false
@@ -37,7 +36,6 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * The function called when the submit icon is clicked.
    */
   onSubmitClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-
   /**
    * The function called when the color rest button is selected.
    * It is required to be set for the reset button to render.
@@ -161,10 +159,17 @@ export const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({
     }
   };
 
+  const onCheckClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (onSubmitClick) {
+      onSubmitClick(event);
+    }
+    onColorChange(validHexValue);
+  };
+
   const placeholder = customHexValue === '' ? undefined : customHexValue.toUpperCase();
 
   return (
-    <Container {...elemProps}>
+    <Container data-testid="canvas-color-picker" {...elemProps}>
       {onColorReset && resetColor && (
         <ResetButton
           id="canvas-color-picker--reset"
@@ -190,7 +195,7 @@ export const ColorPicker: React.FunctionComponent<ColorPickerProps> = ({
             aria-label={customHexInputLabel}
             variant={IconButton.Variant.CircleFilled}
             icon={checkIcon}
-            onClick={onSubmitClick}
+            onClick={onCheckClick}
           />
         </ColorInputWrapper>
       )}
