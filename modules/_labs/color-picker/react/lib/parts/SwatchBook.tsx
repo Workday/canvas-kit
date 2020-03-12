@@ -40,8 +40,9 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
       ...focusRing(2, 2),
     },
   },
-  ({isSelected}) =>
-    mouseFocusBehavior({
+  ({isSelected}) => ({
+    boxShadow: isSelected ? accessibilityBorder : undefined,
+    ...mouseFocusBehavior({
       '&:focus': {
         animation: 'none',
       },
@@ -51,7 +52,8 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
       '&': {
         boxShadow: isSelected ? accessibilityBorder : undefined,
       },
-    }) as CSSObject
+    }),
+  })
 );
 
 const Container = styled('div')({
