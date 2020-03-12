@@ -12,22 +12,11 @@ export interface ResetButtonProps {
   onClick: (color: string) => void;
 }
 
-export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
-  const handleResetColor = () => onClick(resetColor);
-
-  return (
-    <Container data-testid="color-picker-reset" onClick={handleResetColor}>
-      <Swatch color={resetColor} isSelected={false} />
-      <Label>{label}</Label>
-    </Container>
-  );
-};
-
-export const Label = styled('div')({
+const Label = styled('div')({
   marginLeft: spacing.xxs,
 });
 
-export const Container = styled('button')({
+const Container = styled('button')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
@@ -57,3 +46,14 @@ export const Container = styled('button')({
   },
   ...hideMouseFocus,
 });
+
+export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
+  const handleResetColor = () => onClick(resetColor);
+
+  return (
+    <Container data-testid="color-picker-reset" onClick={handleResetColor}>
+      <Swatch color={resetColor} isSelected={false} />
+      <Label>{label}</Label>
+    </Container>
+  );
+};

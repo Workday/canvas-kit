@@ -11,7 +11,7 @@ export interface SwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   isSelected?: boolean;
 }
 
-export const Container = styled('div')<SwatchProps>(
+const Container = styled('div')<SwatchProps>(
   {
     width: 20,
     height: 20,

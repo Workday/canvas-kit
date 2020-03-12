@@ -18,7 +18,7 @@ interface SwatchContainerProps {
 
 const accessibilityBorder = `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`;
 
-export const SwatchContainer = styled('div')<SwatchContainerProps>(
+const SwatchContainer = styled('div')<SwatchContainerProps>(
   {
     display: 'flex',
     alignItems: 'center',
