@@ -13,11 +13,10 @@ const FormFieldStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
-        {label: 'Error States', props: {required: false}},
         {label: 'Required', props: {required: true}},
-        {label: 'Left Label', props: {labelPosition: FormFieldLabelPosition.Left}},
         {label: 'Hidden Label', props: {labelPosition: FormFieldLabelPosition.Hidden}},
         {label: 'Grow', props: {grow: true}},
+        {label: 'Left Label', props: {labelPosition: FormFieldLabelPosition.Left}},
       ]}
       columnProps={permutateProps({
         error: [
@@ -29,7 +28,7 @@ const FormFieldStates = () => (
     >
       {props => (
         <FormField {...props} hintText="Helpful text goes here." label="Label">
-          <TextInput></TextInput>
+          <TextInput />
         </FormField>
       )}
     </ComponentStatesTable>
@@ -42,14 +41,14 @@ storiesOf('Components|Inputs/Form Field/React', module)
   .add('Default', () => (
     <div className="story">
       <FormField label="Label">
-        <TextInput></TextInput>
+        <TextInput />
       </FormField>
     </div>
   ))
   .add('Hint', () => (
     <div className="story">
       <FormField label="Label" hintText={'Helpful text goes here'}>
-        <TextInput></TextInput>
+        <TextInput />
       </FormField>
     </div>
   ))
@@ -61,7 +60,7 @@ storiesOf('Components|Inputs/Form Field/React', module)
         hintId={'hintId'}
         hintText={'Helpful text goes here'}
       >
-        <TextInput></TextInput>
+        <TextInput />
       </FormField>
     </div>
   ))
@@ -73,14 +72,14 @@ storiesOf('Components|Inputs/Form Field/React', module)
         hintId={'hintId'}
         hintText={'Helpful text goes here'}
       >
-        <TextInput></TextInput>
+        <TextInput />
       </FormField>
     </div>
   ))
   .add('Label Required', () => (
     <div className="story">
       <FormField required={true} label="Label">
-        <TextInput></TextInput>
+        <TextInput />
       </FormField>
     </div>
   ));

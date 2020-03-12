@@ -17,7 +17,7 @@ describe('FormField', () => {
           <input type="text" />
         </FormField>
       );
-      expect(container.querySelector('label')).toContainHTML('Label');
+      expect(container.querySelector('label')).toContainHTML(label);
     });
   });
   describe('when rendered with hint text', () => {
@@ -30,7 +30,7 @@ describe('FormField', () => {
         </FormField>
       );
 
-      expect(container.querySelector('p')).toContainHTML('Helpful text goes here.');
+      expect(container.querySelector('p')).toContainHTML(hintText);
     });
   });
 
