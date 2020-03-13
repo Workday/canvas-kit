@@ -266,6 +266,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private selectionPersistMenuTimer: ReturnType<typeof setTimeout>;
   private selectionCompletionTimer: ReturnType<typeof setTimeout>;
 
+  // For type-ahead functionality
+  private keysSoFar = '';
+  private clearKeysSoFarTimeout = 500;
+  private clearKeysSoFarTimer: ReturnType<typeof setTimeout>;
+
   static ErrorType = ErrorType;
 
   static defaultProps = {
@@ -464,6 +469,55 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
+  private handleKeyboardTypeAhead = (key: string, numOptions: number) => {
+    this.keysSoFar += key;
+    this.startClearKeysSoFarTimer();
+
+    // Set the starting point of the search to the next option after
+    // the currently focused option
+    let start = this.state.focusedOptionIndex + 1;
+    let matchIndex;
+
+    // If the starting point is beyond the list of options, reset it
+    // to the beginning of the list
+    start = start === numOptions ? 0 : start;
+
+    // First, look for a match from start to end
+    matchIndex = this.getIndexByStartString(start, this.keysSoFar);
+
+    // If a match isn't found between start and end, wrap the search
+    // around and search again from the beginning (0) to start
+    if (matchIndex === -1) {
+      matchIndex = this.getIndexByStartString(0, this.keysSoFar, start);
+    }
+
+    // A match was found...
+    if (matchIndex > -1) {
+      // If the menu is hidden, immediately select the matched option
+      if (this.state.isMenuHidden) {
+        this.setState({
+          focusedOptionIndex: matchIndex,
+          label: this.optionLabels[matchIndex],
+          selectedOptionIndex: matchIndex,
+        });
+        this.updateInput(this.optionValues[matchIndex]);
+
+        // Otherwise (the menu is visible), simply focus the matched option
+      } else {
+        this.setState({focusedOptionIndex: matchIndex});
+      }
+    }
+  };
+
+  private startClearKeysSoFarTimer = () => {
+    if (this.clearKeysSoFarTimer) {
+      clearTimeout(this.clearKeysSoFarTimer);
+    }
+    this.clearKeysSoFarTimer = setTimeout(() => {
+      this.keysSoFar = '';
+    }, this.clearKeysSoFarTimeout);
+  };
+
   constructor(props: SelectProps) {
     super(props);
     this.setOptionIds();
@@ -511,6 +565,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
     if (this.selectionCompletionTimer) {
       clearTimeout(this.selectionCompletionTimer);
+    }
+    if (this.clearKeysSoFarTimer) {
+      clearTimeout(this.clearKeysSoFarTimer);
     }
   }
 
@@ -588,50 +645,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
       SelectOptionProps
     >[];
-    const itemCount = childrenArray.length;
+    const numOptions = childrenArray.length;
     let isShortcut = false;
     let nextFocusedIndex = 0;
 
-    // Keyboard support: type-ahead
+    // Check for type-ahead first
     if (event.key.length === 1 && event.key.match(/\S/)) {
       isShortcut = true;
-
-      // Set the starting point of the search to the next option after
-      // the currently focused option
-      let start = this.state.focusedOptionIndex + 1;
-      let matchIndex;
-
-      // If the starting point is beyond the list of options, reset it
-      // to the beginning of the list
-      start = start === childrenArray.length ? 0 : start;
-
-      // First, look for a match from start to end
-      matchIndex = this.getIndexByStartString(start, event.key);
-
-      // If a match isn't found between start and end, wrap the search
-      // around and search again from the beginning (0) to start
-      if (matchIndex === -1) {
-        matchIndex = this.getIndexByStartString(0, event.key, start);
-      }
-
-      // A match was found...
-      if (matchIndex > -1) {
-        // If the menu is hidden, immediately select the matched option
-        if (this.state.isMenuHidden) {
-          this.setState({
-            focusedOptionIndex: matchIndex,
-            label: this.optionLabels[matchIndex],
-            selectedOptionIndex: matchIndex,
-          });
-          this.updateInput(this.optionValues[matchIndex]);
-
-          // Otherwise (the menu is visible), simply focus the matched option
-        } else {
-          this.setState({focusedOptionIndex: matchIndex});
-        }
-      }
-
-      // Keyboard support: everything else
+      this.handleKeyboardTypeAhead(event.key, numOptions);
     } else {
       switch (event.key) {
         case 'ArrowUp':
@@ -645,14 +666,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             isShortcut = true;
             let nextIndex = this.state.focusedOptionIndex + direction;
             while (
-              nextIndex < itemCount &&
+              nextIndex < numOptions &&
               nextIndex >= 0 &&
               childrenArray[nextIndex].props.disabled
             ) {
               nextIndex += direction;
             }
             nextFocusedIndex =
-              nextIndex < 0 ? 0 : nextIndex >= itemCount ? itemCount - 1 : nextIndex;
+              nextIndex < 0 ? 0 : nextIndex >= numOptions ? numOptions - 1 : nextIndex;
             this.setState({focusedOptionIndex: nextFocusedIndex});
           }
           break;
@@ -660,12 +681,22 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         case 'Home':
         case 'End':
           isShortcut = true;
-          nextFocusedIndex = event.key === 'Home' ? 0 : itemCount - 1;
+          nextFocusedIndex = event.key === 'Home' ? 0 : numOptions - 1;
           this.setState({focusedOptionIndex: nextFocusedIndex});
           break;
 
         case 'Spacebar':
         case ' ':
+          isShortcut = true;
+          // If the user is in the middle of typing a string, treat
+          // space key as type-ahead rather than option selection
+          if (this.keysSoFar !== '') {
+            this.handleKeyboardTypeAhead(' ', numOptions);
+          } else {
+            this.handleOptionClick(this.state.focusedOptionIndex);
+          }
+          break;
+
         case 'Enter':
           isShortcut = true;
           this.handleOptionClick(this.state.focusedOptionIndex);
