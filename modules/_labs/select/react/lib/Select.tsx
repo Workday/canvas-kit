@@ -32,7 +32,7 @@ export interface SelectProps
 }
 
 export interface SelectState {
-  focusedOptionIndex: number | null;
+  focusedOptionIndex: number;
   isMenuHidden: boolean;
   isMenuHiding: boolean;
   justSelectedOptionIndex: number | null;
@@ -277,7 +277,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private optionValues: string[];
 
   state: Readonly<SelectState> = {
-    focusedOptionIndex: null,
+    focusedOptionIndex: 0,
     isMenuHidden: true,
     isMenuHiding: false,
     justSelectedOptionIndex: null,
@@ -325,12 +325,17 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         focusedOptionIndex: this.state.selectedOptionIndex,
         isMenuHidden: false,
       });
+
+      // Force a render so we can scroll to the focused option in
+      // case that option was focused while the menu was hidden
+      // (i.e., the user triggered type-ahead while the Select was
+      // focused with its menu hidden)
+      this.forceUpdate(this.scrollFocusedOptionIntoView);
     } else {
       this.setState({isMenuHiding: true});
 
       this.removeMenuTimer = setTimeout(() => {
         this.setState({
-          focusedOptionIndex: null,
           isMenuHiding: false,
           isMenuHidden: true,
         });
@@ -343,6 +348,34 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   // selected
   private isMenuInteractive = (): boolean => {
     return !this.state.isMenuHiding && this.state.justSelectedOptionIndex === null;
+  };
+
+  // Code inspired by: https://stackoverflow.com/a/46012210
+  // In order for Select to be usable as a controlled component, we
+  // need to programatically change the value of the SelectInput
+  // in such a way that triggers its change event
+  private updateInput = (value: string): void => {
+    if (this.inputRef && this.inputRef.current) {
+      const nativeInputValue = Object.getOwnPropertyDescriptor(
+        Object.getPrototypeOf(this.inputRef.current),
+        'value'
+      );
+      if (nativeInputValue && nativeInputValue.set) {
+        nativeInputValue.set.call(this.inputRef.current, value);
+      }
+
+      let event: Event;
+      if (typeof Event === 'function') {
+        // Modern browsers
+        event = new Event('input', {bubbles: true});
+      } else {
+        // IE 11
+        event = document.createEvent('Event');
+        event.initEvent('input', true);
+      }
+
+      this.inputRef.current.dispatchEvent(event);
+    }
   };
 
   // TODO: move code for scrollIntoViewIfNeeded to a centralized place.
@@ -396,6 +429,28 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
+  private scrollFocusedOptionIntoView = () => {
+    const focusedOption = this.focusedOptionRef.current;
+    if (focusedOption) {
+      this.scrollIntoViewIfNeeded(focusedOption, false);
+    }
+  };
+
+  private getIndexByStartString = (
+    startIndex: number,
+    startString: string,
+    endIndex: number = this.optionLabels.length
+  ): number => {
+    for (let i = startIndex; i < endIndex; i++) {
+      const label = this.optionLabels[i].toLowerCase();
+      if (label.indexOf(startString.toLowerCase()) === 0) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+
   constructor(props: SelectProps) {
     super(props);
     this.setOptionIds();
@@ -429,10 +484,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // scroll focused option into view if it changed since the
     // last render
     if (this.state.focusedOptionIndex !== prevState.focusedOptionIndex) {
-      const focusedOption = this.focusedOptionRef.current;
-      if (focusedOption) {
-        this.scrollIntoViewIfNeeded(focusedOption, false);
-      }
+      this.scrollFocusedOptionIntoView();
     }
   }
 
@@ -496,7 +548,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // Time: 0
     // Offer visual feedback briefly before hiding the menu
     this.setState({
-      focusedOptionIndex: null,
+      focusedOptionIndex: index,
       justSelectedOptionIndex: index,
       selectedOptionIndex: index,
     });
@@ -516,30 +568,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       });
     }, selectionPersistMenuDuration + toggleMenuAnimationDuration);
 
-    // Code inspired by: https://stackoverflow.com/a/46012210
-    // We want to programatically change the value of the
-    // SelectInput in such a way that triggers its change event
-    if (this.inputRef && this.inputRef.current) {
-      const nativeInputValue = Object.getOwnPropertyDescriptor(
-        Object.getPrototypeOf(this.inputRef.current),
-        'value'
-      );
-      if (nativeInputValue && nativeInputValue.set) {
-        nativeInputValue.set.call(this.inputRef.current, this.optionValues[index]);
-      }
-
-      let event: Event;
-      if (typeof Event === 'function') {
-        // Modern browsers
-        event = new Event('input', {bubbles: true});
-      } else {
-        // IE 11
-        event = document.createEvent('Event');
-        event.initEvent('input', true);
-      }
-
-      this.inputRef.current.dispatchEvent(event);
-    }
+    this.updateInput(this.optionValues[index]);
   };
 
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
@@ -550,42 +579,83 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     let isShortcut = false;
     let nextFocusedIndex = 0;
 
-    switch (event.key) {
-      case 'ArrowUp':
-      case 'Up': // IE/Edge specific value
-      case 'ArrowDown':
-      case 'Down': // IE/Edge specific value
+    // Keyboard support: type-ahead
+    if (event.key.length === 1 && event.key.match(/\S/)) {
+      isShortcut = true;
+
+      // Set the starting point of the search to the next option after
+      // the currently focused option
+      let start = this.state.focusedOptionIndex + 1;
+      let matchIndex;
+
+      // If the starting point is beyond the list of options, reset it
+      // to the beginning of the list
+      start = start === children.length ? 0 : start;
+
+      // First, look for a match from start to end
+      matchIndex = this.getIndexByStartString(start, event.key);
+
+      // If a match isn't found between start and end, wrap the search
+      // around and search again from the beginning (0) to start
+      if (matchIndex === -1) {
+        matchIndex = this.getIndexByStartString(0, event.key, start);
+      }
+
+      // A match was found...
+      if (matchIndex > -1) {
+        // If the menu is hidden, immediately select the matched option
         if (this.state.isMenuHidden) {
-          this.toggleMenu(true);
-        } else if (this.state.focusedOptionIndex !== null) {
-          const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
-          isShortcut = true;
-          let nextIndex = this.state.focusedOptionIndex + direction;
-          while (nextIndex < itemCount && nextIndex >= 0 && children[nextIndex].props.disabled) {
-            nextIndex += direction;
-          }
-          nextFocusedIndex = nextIndex < 0 ? 0 : nextIndex >= itemCount ? itemCount - 1 : nextIndex;
-          this.setState({focusedOptionIndex: nextFocusedIndex});
+          this.setState({
+            focusedOptionIndex: matchIndex,
+            label: this.optionLabels[matchIndex],
+            selectedOptionIndex: matchIndex,
+          });
+          this.updateInput(this.optionValues[matchIndex]);
+
+          // Otherwise (the menu is visible), simply focus the matched option
+        } else {
+          this.setState({focusedOptionIndex: matchIndex});
         }
-        break;
+      }
 
-      case 'Home':
-      case 'End':
-        isShortcut = true;
-        nextFocusedIndex = event.key === 'Home' ? 0 : itemCount - 1;
-        this.setState({focusedOptionIndex: nextFocusedIndex});
-        break;
+      // Keyboard support: everything else
+    } else {
+      switch (event.key) {
+        case 'ArrowUp':
+        case 'Up': // IE/Edge specific value
+        case 'ArrowDown':
+        case 'Down': // IE/Edge specific value
+          if (this.state.isMenuHidden) {
+            this.toggleMenu(true);
+          } else {
+            const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
+            isShortcut = true;
+            let nextIndex = this.state.focusedOptionIndex + direction;
+            while (nextIndex < itemCount && nextIndex >= 0 && children[nextIndex].props.disabled) {
+              nextIndex += direction;
+            }
+            nextFocusedIndex =
+              nextIndex < 0 ? 0 : nextIndex >= itemCount ? itemCount - 1 : nextIndex;
+            this.setState({focusedOptionIndex: nextFocusedIndex});
+          }
+          break;
 
-      case 'Spacebar':
-      case ' ':
-      case 'Enter':
-        if (this.state.focusedOptionIndex !== null) {
+        case 'Home':
+        case 'End':
+          isShortcut = true;
+          nextFocusedIndex = event.key === 'Home' ? 0 : itemCount - 1;
+          this.setState({focusedOptionIndex: nextFocusedIndex});
+          break;
+
+        case 'Spacebar':
+        case ' ':
+        case 'Enter':
           isShortcut = true;
           this.handleOptionClick(this.state.focusedOptionIndex);
-        }
-        break;
+          break;
 
-      default:
+        default:
+      }
     }
 
     if (isShortcut) {
@@ -668,9 +738,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           isMenuHiding={isMenuHiding}
         >
           <SelectMenuList
-            aria-activedescendant={
-              focusedOptionIndex !== null ? this.optionIds[focusedOptionIndex] : undefined
-            }
+            aria-activedescendant={!isMenuHidden ? this.optionIds[focusedOptionIndex] : undefined}
             aria-labelledby={ariaLabelledBy}
             error={error}
             role="listbox"
