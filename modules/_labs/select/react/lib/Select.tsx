@@ -585,10 +585,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    const children = React.Children.toArray(this.props.children) as React.ReactElement<
+    const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
       SelectOptionProps
     >[];
-    const itemCount = children.length;
+    const itemCount = childrenArray.length;
     let isShortcut = false;
     let nextFocusedIndex = 0;
 
@@ -603,7 +603,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
       // If the starting point is beyond the list of options, reset it
       // to the beginning of the list
-      start = start === children.length ? 0 : start;
+      start = start === childrenArray.length ? 0 : start;
 
       // First, look for a match from start to end
       matchIndex = this.getIndexByStartString(start, event.key);
@@ -644,7 +644,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
             isShortcut = true;
             let nextIndex = this.state.focusedOptionIndex + direction;
-            while (nextIndex < itemCount && nextIndex >= 0 && children[nextIndex].props.disabled) {
+            while (
+              nextIndex < itemCount &&
+              nextIndex >= 0 &&
+              childrenArray[nextIndex].props.disabled
+            ) {
               nextIndex += direction;
             }
             nextFocusedIndex =
