@@ -328,12 +328,19 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private getIndexByStartString = (
     startIndex: number,
     startString: string,
-    endIndex: number = this.optionLabels.length
+    endIndex: number = this.optionLabels.length,
+    ignoreDisabled: boolean = true
   ): number => {
+    const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
+      SelectOptionProps
+    >[];
+
     for (let i = startIndex; i < endIndex; i++) {
       const label = this.optionLabels[i].toLowerCase();
       if (label.indexOf(startString.toLowerCase()) === 0) {
-        return i;
+        if (!ignoreDisabled || (ignoreDisabled && !childrenArray[i].props.disabled)) {
+          return i;
+        }
       }
     }
 
