@@ -228,7 +228,6 @@ const SearchInput = styled(TextInput)<
         fontWeight: 400,
         paddingLeft: spacingNumbers.xl + spacingNumbers.s,
         paddingRight: spacingNumbers.xl + spacingNumbers.s,
-        margin: `${spacing.xs} 0`,
         maxWidth: 'none',
         minWidth: 0,
         backgroundColor: `rgba(0, 0, 0, 0)`,
