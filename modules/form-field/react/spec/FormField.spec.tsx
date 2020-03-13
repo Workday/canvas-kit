@@ -12,12 +12,13 @@ describe('FormField', () => {
   describe('when rendered', () => {
     it('should render a label with text Label', () => {
       const label = 'Label';
-      const {container} = render(
+      const {getByText} = render(
         <FormField label={label}>
           <input type="text" />
         </FormField>
       );
-      expect(container.querySelector('label')).toContainHTML(label);
+
+      expect(getByText('Label')).toContainHTML(label);
     });
   });
   describe('when rendered with hint text', () => {
