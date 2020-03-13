@@ -315,8 +315,29 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     );
   };
 
-  private indexByValue = (value: string): number => {
-    return this.optionValues.findIndex(optionValue => optionValue === value);
+  private getIndexByValue = (value: string): number => {
+    for (let i = 0; i < this.optionValues.length; i++) {
+      if (this.optionValues[i] === value) {
+        return i;
+      }
+    }
+
+    return -1;
+  };
+
+  private getIndexByStartString = (
+    startIndex: number,
+    startString: string,
+    endIndex: number = this.optionLabels.length
+  ): number => {
+    for (let i = startIndex; i < endIndex; i++) {
+      const label = this.optionLabels[i].toLowerCase();
+      if (label.indexOf(startString.toLowerCase()) === 0) {
+        return i;
+      }
+    }
+
+    return -1;
   };
 
   private toggleMenu = (show: boolean): void => {
@@ -436,21 +457,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  private getIndexByStartString = (
-    startIndex: number,
-    startString: string,
-    endIndex: number = this.optionLabels.length
-  ): number => {
-    for (let i = startIndex; i < endIndex; i++) {
-      const label = this.optionLabels[i].toLowerCase();
-      if (label.indexOf(startString.toLowerCase()) === 0) {
-        return i;
-      }
-    }
-
-    return -1;
-  };
-
   constructor(props: SelectProps) {
     super(props);
     this.setOptionIds();
@@ -463,7 +469,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     // If value exists, set state to that value...
     if (value) {
-      const childIndex = this.indexByValue(value);
+      const childIndex = this.getIndexByValue(value);
 
       if (childIndex !== -1) {
         this.setState({
