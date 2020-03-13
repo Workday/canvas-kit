@@ -569,12 +569,19 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         }
         break;
 
+      case 'Home':
+      case 'End':
+        isShortcut = true;
+        nextFocusedIndex = event.key === 'Home' ? 0 : itemCount - 1;
+        this.setState({focusedOptionIndex: nextFocusedIndex});
+        break;
+
       case 'Spacebar':
       case ' ':
       case 'Enter':
         if (this.state.focusedOptionIndex !== null) {
-          this.handleOptionClick(this.state.focusedOptionIndex);
           isShortcut = true;
+          this.handleOptionClick(this.state.focusedOptionIndex);
         }
         break;
 
