@@ -104,8 +104,9 @@ const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   {
     width: spacing.l,
     height: spacing.l,
-    margin: `-${spacing.s}`,
-    left: `-${spacing.m}`,
+    position: 'absolute',
+    margin: 0,
+    right: 0,
     padding: 0,
     zIndex: 2,
     transition: 'opacity 120ms',

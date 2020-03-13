@@ -127,9 +127,6 @@ The Workday Canvas Kits are licensed under the Apache 2.0 License.
 - Opera: last 2 versions
 
 ## Thank you
-<a href="https://www.netlify.com">
-  <img src="https://www.netlify.com/img/global/badges/netlify-dark.svg"/>
-</a>
 
 Visual Testing by [ChromaticQA](https://www.chromaticqa.com/)
 

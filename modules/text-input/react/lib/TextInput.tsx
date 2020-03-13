@@ -17,7 +17,7 @@ export interface TextInputProps
   inputRef?: React.Ref<HTMLInputElement>;
 }
 
-const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
+const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 'theme'>>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -26,7 +26,6 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',
     height: 40,
-    minWidth: 280,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: spacingNumbers.xxs, // Compensate for border
     margin: 0, // Fix Safari
@@ -53,6 +52,10 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'theme'>>(
       display: 'none',
     },
   },
+  ({width}) => ({
+    minWidth: width || 280,
+    width,
+  }),
   ({grow}) =>
     grow && {
       width: '100%',

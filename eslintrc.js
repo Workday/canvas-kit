@@ -16,6 +16,7 @@ module.exports = {
     'prettier',
     'prettier/react',
     'prettier/@typescript-eslint',
+    'plugin:compat/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -29,6 +30,9 @@ module.exports = {
     react: {
       version: 'detect',
     },
+  },
+  env: {
+    browser: true,
   },
   plugins: [
     '@typescript-eslint',

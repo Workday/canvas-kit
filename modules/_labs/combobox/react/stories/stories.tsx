@@ -42,10 +42,11 @@ class Autocomplete extends React.Component<
         onChange={this.autocompleteCallback}
         showClearButton={this.props.showClearButton == null ? true : this.props.showClearButton}
         labelId="autocomplete-123"
-        onFocus={action(`Focus`)}
-        onBlur={action(`Blur`)}
+        onFocus={action('Focus')}
+        onBlur={action('Blur')}
+        initialValue="Test"
       >
-        <TextInput placeholder="Autocomplete" />
+        <TextInput autoFocus placeholder="Autocomplete" />
       </Combobox>
     );
   }

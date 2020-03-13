@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-skeleton",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "A component that renders a skeleton.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -39,8 +39,8 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.21",
-    "@emotion/styled": "^10.0.17",
-    "@workday/canvas-kit-react-core": "^3.4.0"
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@workday/canvas-kit-react-core": "^3.5.0"
   }
 }

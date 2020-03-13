@@ -43,7 +43,7 @@ const paddingOptions = {
 
 const paddingDefault = paddingOptions.s;
 
-storiesOf('Labs/Drawer/React', module)
+storiesOf('Labs|Drawer/React', module)
   .addParameters({component: Drawer})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -73,6 +73,18 @@ storiesOf('Labs/Drawer/React', module)
           padding={spacing.s}
           showDropShadow={true}
         ></Drawer>
+      </div>
+    </div>
+  ))
+  .add('With Header, No Close Icon', () => (
+    <div className="story">
+      <div style={{height: '80vh', position: 'relative'}}>
+        <Drawer
+          header={<DrawerHeader title={'Drawer Header'} />}
+          openDirection={DrawerDirection.Left}
+          padding={spacing.s}
+          showDropShadow={true}
+        />
       </div>
     </div>
   ))
