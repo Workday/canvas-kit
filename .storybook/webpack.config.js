@@ -45,6 +45,22 @@ module.exports = ({ config, mode }) => {
   // Add `.ts` and `.tsx` as a resolvable extension.
   config.resolve.extensions = ['.ts', '.tsx', '.js', '.jsx'];
 
+  // This is required for @storybook/addon-docs until we can upgrade to Storybook 6
+  // If left out, then a dep of addon-docs, acorn-jsx, is shipped as ES6 which will cause issues in browsers like IE11\
+  // See: https://github.com/storybookjs/storybook/issues/8884
+  config.module.rules.push({
+    test: /\.?js$/,
+    include: new RegExp(`node_modules\\${path.sep}acorn-jsx`), // https://github.com/storybookjs/storybook/pull/9790/files#diff-3f9960d4367e0d7176bea0f6d79a54e7R55
+    use: [
+      {
+        loader: 'babel-loader',
+        options: {
+          presets: [[require.resolve('@babel/preset-env'), { modules: 'commonjs' }]],
+        },
+      },
+    ]
+  });
+
   // Load all module files and transpile using babel + ts
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
