@@ -602,7 +602,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.toggleMenu(false);
   };
 
-  handleOptionClick = (index: number): void => {
+  handleOptionMouseDown = (index: number): void => {
     const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
       SelectOptionProps
     >[];
@@ -693,13 +693,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           if (this.keysSoFar !== '') {
             this.handleKeyboardTypeAhead(' ', numOptions);
           } else {
-            this.handleOptionClick(this.state.focusedOptionIndex);
+            this.handleOptionMouseDown(this.state.focusedOptionIndex);
           }
           break;
 
         case 'Enter':
           isShortcut = true;
-          this.handleOptionClick(this.state.focusedOptionIndex);
+          this.handleOptionMouseDown(this.state.focusedOptionIndex);
           break;
 
         default:
@@ -730,7 +730,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       // it's ignored because the component is non-interactive.
       onMouseDown: (event: React.MouseEvent) => {
         event.preventDefault();
-        this.handleOptionClick(index);
+        this.handleOptionMouseDown(index);
       },
 
       optionRef: this.state.focusedOptionIndex === index ? this.focusedOptionRef : undefined,
