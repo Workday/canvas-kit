@@ -354,16 +354,17 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   private toggleMenu = (show: boolean): void => {
     if (show) {
-      this.setState({
-        focusedOptionIndex: this.state.selectedOptionIndex,
-        isMenuHidden: false,
-      });
-
-      // Force a render so we can scroll to the focused option in
+      // After applying state update, scroll to the focused option in
       // case that option was focused while the menu was hidden
       // (i.e., the user triggered type-ahead while the Select was
       // focused with its menu hidden)
-      this.forceUpdate(this.scrollFocusedOptionIntoView);
+      this.setState(
+        {
+          focusedOptionIndex: this.state.selectedOptionIndex,
+          isMenuHidden: false,
+        },
+        this.scrollFocusedOptionIntoView
+      );
     } else {
       this.setState({isMenuHiding: true});
 
