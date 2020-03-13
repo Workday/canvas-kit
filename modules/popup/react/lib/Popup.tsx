@@ -4,7 +4,7 @@ import {keyframes} from '@emotion/core';
 import uuid from 'uuid/v4';
 
 import Card from '@workday/canvas-kit-react-card';
-import {IconButton, IconButtonSize} from '@workday/canvas-kit-react-button';
+import {IconButton} from '@workday/canvas-kit-react-button';
 import {CanvasDepthValue, spacing} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
 import {xIcon} from '@workday/canvas-system-icons-web';
@@ -27,10 +27,10 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   transformOrigin: TransformOrigin;
   /**
-   * The size of the Popup close button. Accepts `Small` or `Medium`.
-   * @default IconButtonSize.Medium
+   * The size of the Popup close button. Accepts `small` or `medium`.
+   * @default 'medium'
    */
-  closeIconSize: IconButtonSize;
+  closeIconSize: 'small' | 'medium';
   /**
    * The ref to the underlying popup container element. Use this to check click targets against when closing the Popup.
    */
@@ -106,7 +106,7 @@ export default class Popup extends React.Component<PopupProps> {
 
   static defaultProps = {
     padding: Popup.Padding.l,
-    closeIconSize: IconButton.Size.Medium,
+    closeIconSize: 'medium',
     closeLabel: 'Close',
     transformOrigin: {
       horizontal: 'center',
@@ -144,7 +144,7 @@ export default class Popup extends React.Component<PopupProps> {
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton
               data-close="close" // Allows for grabbing focus to the close button rather than relying on the aria label "Close" which will change based on different languages
-              ref={this.closeButtonRef}
+              buttonRef={this.closeButtonRef}
               variant={IconButton.Variant.Plain}
               size={closeIconSize}
               onClick={handleClose}

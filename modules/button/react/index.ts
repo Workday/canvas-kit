@@ -1,4 +1,4 @@
-export {default as Button, default as beta_Button, ButtonProps} from './lib/Button';
+export {default, default as Button, default as beta_Button, ButtonProps} from './lib/Button';
 
 export {default as DeleteButton, DeleteButtonProps} from './lib/DeleteButton';
 export {default as deprecated_Button, DeprecatedButtonProps} from './lib/deprecated_Button';
