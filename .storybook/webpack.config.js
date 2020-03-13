@@ -7,17 +7,17 @@ const welcomeSectionPath = path.resolve(__dirname, './');
 const utilsPath = path.resolve(__dirname, '../utils');
 const postcssConfigPath = path.resolve(__dirname, './postcss.config');
 
-module.exports = ({ config, mode }) => {
+module.exports = ({config, mode}) => {
   // This is so we get consistent results when loading .ts/tsx and .mdx files
   const babelPresetEnvConfig = [
     '@babel/preset-env',
     {
-      'useBuiltIns': 'entry',
-      'corejs': {
+      useBuiltIns: 'entry',
+      corejs: {
         version: 3,
-        proposals: true
-      }
-    }
+        proposals: true,
+      },
+    },
   ];
 
   // Exclude all node_modules from babel-loader
@@ -55,10 +55,10 @@ module.exports = ({ config, mode }) => {
       {
         loader: 'babel-loader',
         options: {
-          presets: [[require.resolve('@babel/preset-env'), { modules: 'commonjs' }]],
+          presets: [[require.resolve('@babel/preset-env'), {modules: 'commonjs'}]],
         },
       },
-    ]
+    ],
   });
 
   // Load all module files and transpile using babel + ts
@@ -67,11 +67,7 @@ module.exports = ({ config, mode }) => {
     include: [modulesPath, utilsPath],
     loader: require.resolve('babel-loader'),
     options: {
-      presets: [
-        '@babel/preset-typescript',
-        '@babel/preset-react',
-        babelPresetEnvConfig,
-      ],
+      presets: ['@babel/preset-typescript', '@babel/preset-react', babelPresetEnvConfig],
       plugins: [
         '@babel/proposal-class-properties',
         '@babel/proposal-object-rest-spread',
@@ -96,12 +92,12 @@ module.exports = ({ config, mode }) => {
         loader: 'babel-loader',
         options: {
           presets: [babelPresetEnvConfig],
-          plugins: ['@babel/plugin-transform-react-jsx']
+          plugins: ['@babel/plugin-transform-react-jsx'],
         },
       },
       {
         loader: '@mdx-js/loader',
-        options: { compilers: [createCompiler()] },
+        options: {compilers: [createCompiler()]},
       },
     ],
   });
@@ -113,13 +109,19 @@ module.exports = ({ config, mode }) => {
     loaders: [
       {
         loader: require.resolve('@storybook/source-loader'),
-        options: { parser: 'typescript' },
+        options: {parser: 'typescript'},
       },
     ],
     enforce: 'pre',
   });
 
   config.plugins.push(new DocgenPlugin());
+
+  // Remove progress updates to reduce log lines in Travis
+  // See: https://github.com/storybookjs/storybook/issues/2029
+  if (process.env.TRAVIS) {
+    config.plugins = config.plugins.filter(plugin => plugin.constructor.name !== 'ProgressPlugin');
+  }
 
   return config;
 };
