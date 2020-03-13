@@ -76,6 +76,18 @@ storiesOf('Labs|Drawer/React', module)
       </div>
     </div>
   ))
+  .add('With Header, No Close Icon', () => (
+    <div className="story">
+      <div style={{height: '80vh', position: 'relative'}}>
+        <Drawer
+          header={<DrawerHeader title={'Drawer Header'} />}
+          openDirection={DrawerDirection.Left}
+          padding={spacing.s}
+          showDropShadow={true}
+        />
+      </div>
+    </div>
+  ))
   .add('Configurable', () => (
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
