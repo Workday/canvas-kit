@@ -1,11 +1,6 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {
-  GrowthBehavior,
-  ErrorType,
-  errorRing,
-  getErrorColors,
-} from '@workday/canvas-kit-react-common';
+import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
 import {keyframes, CSSObject} from '@emotion/core';
 import {
   colors,
@@ -55,6 +50,12 @@ const fadeOutAnimation = keyframes`
   from {opacity: 1;}
   to {opacity: 0;}
 `;
+
+const focusButtonCSS = (): CSSObject => ({
+  borderColor: inputColors.focusBorder,
+  boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
+  outline: 'none',
+});
 
 const menuBorderCSS = (error?: ErrorType): CSSObject => {
   let borderColor = inputColors.focusBorder;
@@ -131,9 +132,7 @@ const SelectButton = styled('button')<
       borderColor: inputColors.hoverBorder,
     },
     '&:focus:not([disabled])': {
-      borderColor: inputColors.focusBorder,
-      boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-      outline: 'none',
+      ...focusButtonCSS(),
     },
     '&:disabled': {
       backgroundColor: inputColors.disabled.background,
@@ -147,28 +146,17 @@ const SelectButton = styled('button')<
   ({error}) => ({
     ...errorRing(error),
   }),
+  ({error, isMenuHidden}) =>
+    !isMenuHidden &&
+    error === undefined && {
+      // If the menu is active, style the button as if it had
+      // focus (unless there's an error)
+      ...focusButtonCSS(),
+    },
   ({grow}) =>
     grow && {
       width: '100%',
-    },
-  // TODO: If we end up retaining focus on the SelectButton when the menu
-  // is active (instead of shifting focus to the menu), remove this block
-  // and instead modify errorRing to optionally display the focus ring
-  ({error, isMenuHidden}) => {
-    if (!isMenuHidden) {
-      const errorColors = getErrorColors(error);
-      const errorBoxShadow = `inset 0 0 0 ${errorColors.outer === errorColors.inner ? 1 : 2}px ${
-        errorColors.inner
-      }`;
-      return {
-        '&:focus:not([disabled])': {
-          boxShadow: errorBoxShadow,
-        },
-      };
-    } else {
-      return;
     }
-  }
 );
 
 const SelectMenuIcon = styled(SystemIcon)({
@@ -231,6 +219,9 @@ const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'> & Pick<SelectStat
     maxHeight: 200,
     overflowY: 'auto',
     padding: 0,
+    '&:focus': {
+      outline: 'none',
+    },
   },
   ({error}) => ({
     ...menuListBorderCSS(error),
@@ -265,9 +256,12 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
 );
 
 export default class Select extends React.Component<SelectProps, SelectState> {
+  private buttonRef = React.createRef<HTMLButtonElement>();
   private inputRef = React.createRef<HTMLInputElement>();
+  private menuRef = React.createRef<HTMLUListElement>();
   private focusedOptionRef = React.createRef<HTMLLIElement>();
 
+  private focusMenuTimer: ReturnType<typeof setTimeout>;
   private removeMenuTimer: ReturnType<typeof setTimeout>;
   private selectionPersistMenuTimer: ReturnType<typeof setTimeout>;
   private selectionCompletionTimer: ReturnType<typeof setTimeout>;
@@ -360,25 +354,48 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   private toggleMenu = (show: boolean): void => {
     if (show) {
-      // After applying state update, scroll to the focused option in
-      // case that option was focused while the menu was hidden
-      // (i.e., the user triggered type-ahead while the Select was
-      // focused with its menu hidden)
       this.setState(
         {
           focusedOptionIndex: this.state.selectedOptionIndex,
           isMenuHidden: false,
         },
-        this.scrollFocusedOptionIntoView
+        () => {
+          // After applying state update, scroll to the focused option in
+          // case that option was focused while the menu was hidden
+          // (i.e., the user triggered type-ahead while the Select was
+          // focused with its menu hidden)
+          this.scrollFocusedOptionIntoView();
+
+          // Shift focus to the menu
+          if (this.focusMenuTimer) {
+            clearTimeout(this.focusMenuTimer);
+          }
+          // TODO: I'm not sure why, but this focus doesn't work unless
+          // it's wrapped in a setTimeout.
+          this.focusMenuTimer = setTimeout(() => {
+            if (this.menuRef.current) {
+              this.menuRef.current.focus();
+              // console.log('AFTER FOCUS document.activeElement:', document.activeElement);
+            }
+          }, 0);
+        }
       );
     } else {
       this.setState({isMenuHiding: true});
 
       this.removeMenuTimer = setTimeout(() => {
-        this.setState({
-          isMenuHiding: false,
-          isMenuHidden: true,
-        });
+        this.setState(
+          {
+            isMenuHiding: false,
+            isMenuHidden: true,
+          },
+          () => {
+            // Shift focus back to the button
+            if (this.buttonRef.current) {
+              this.buttonRef.current.focus();
+            }
+          }
+        );
       }, toggleMenuAnimationDuration);
     }
   };
@@ -564,6 +581,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   componentWillUnmount() {
     // Clear timers
+    if (this.focusMenuTimer) {
+      clearTimeout(this.focusMenuTimer);
+    }
     if (this.removeMenuTimer) {
       clearTimeout(this.removeMenuTimer);
     }
@@ -579,34 +599,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   handleSelectMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    // We must use mousedown here instead of click.
-    //
-    // Assume the select button already has focus and the menu is
-    // currently hidden in Firefox/Safari.
-    //
-    // If we use click, the button is blurred before the click
-    // registers. When the button is blurred, the menu begins to
-    // animate out. Right after the click is registered and we
-    // show the menu, it's immediately removed at the end of the
-    // animate out. So we never see the menu.
-
-    // Suppress the button from being blurred in Firefox/Safari
-    event.preventDefault();
-
-    // Focus the button immediately on mousedown (again, required by
-    // Firefox/Safari since the button isn't granted focus on click,
-    // see: https://zellwk.com/blog/inconsistent-button-behavior/)
-    event.currentTarget.focus();
-
     // Only toggle the menu if the the left button was clicked
     // (ignore right-clicks)
     if (event.nativeEvent.which === 1) {
       this.toggleMenu(this.state.isMenuHidden);
     }
-  };
-
-  handleSelectBlur = (event: React.FocusEvent): void => {
-    this.toggleMenu(false);
   };
 
   handleOptionMouseDown = (index: number): void => {
@@ -646,6 +643,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }, selectionPersistMenuDuration + toggleMenuAnimationDuration);
 
     this.updateInput(this.optionValues[index]);
+  };
+
+  handleMenuBlur = (event: React.FocusEvent): void => {
+    this.toggleMenu(false);
   };
 
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
@@ -772,9 +773,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           error={error}
           grow={grow}
           isMenuHidden={isMenuHidden}
-          onBlur={this.handleSelectBlur}
           onKeyDown={this.handleKeyboardShortcuts}
           onMouseDown={this.handleSelectMouseDown}
+          ref={this.buttonRef}
           {...elemProps}
         >
           {label}
@@ -791,13 +792,17 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           grow={grow}
           isMenuHidden={isMenuHidden}
           isMenuHiding={isMenuHiding}
+          onKeyDown={this.handleKeyboardShortcuts}
         >
           <SelectMenuList
             aria-activedescendant={!isMenuHidden ? this.optionIds[focusedOptionIndex] : undefined}
             aria-labelledby={ariaLabelledBy}
             error={error}
             isMenuHidden={isMenuHidden}
+            onBlur={this.handleMenuBlur}
+            ref={this.menuRef}
             role="listbox"
+            tabIndex={-1}
           >
             {React.Children.map(children, this.renderChildren)}
           </SelectMenuList>
