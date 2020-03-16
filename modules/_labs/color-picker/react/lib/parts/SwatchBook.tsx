@@ -25,7 +25,6 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
     position: 'relative',
     width: 20,
     height: 20,
-
     cursor: 'pointer',
     borderRadius: borderRadius.s,
     transition: 'box-shadow 120ms ease',

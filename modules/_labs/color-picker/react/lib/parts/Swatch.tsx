@@ -16,10 +16,13 @@ const Container = styled('div')<SwatchProps>(
     width: 20,
     height: 20,
     borderRadius: borderRadius.s,
-
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '& > *': {
+      // Account for 24px icon
+      margin: -2,
+    },
   },
   ({color}) => ({
     backgroundColor: color,
@@ -45,7 +48,6 @@ export const Swatch = ({color, isSelected = false, ...elemProps}: SwatchProps) =
         fill={pickForegroundColor(color)}
         fillHover={pickForegroundColor(color)}
         icon={checkSmallIcon}
-        size={20}
         color={color}
       />
     )}
