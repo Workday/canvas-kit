@@ -43,6 +43,7 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
     ...mouseFocusBehavior({
       '&:focus': {
         animation: 'none',
+        boxShadow: 'none',
       },
       '&:hover': {
         boxShadow: accessibilityBorder,

@@ -27,22 +27,17 @@ const Container = styled('div')<SwatchProps>(
   ({color}) => ({
     backgroundColor: color,
   }),
-  ({isSelected}) =>
-    isSelected
-      ? {
-          boxShadow: `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`,
-        }
-      : {},
-  ({color}) =>
-    color === colors.frenchVanilla100
-      ? {
-          boxShadow: `inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25)`,
-        }
-      : {}
+  ({isSelected}) => ({
+    boxShadow: isSelected ? 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25)' : undefined,
+  }),
+  ({color}) => ({
+    boxShadow:
+      color === colors.frenchVanilla100 ? 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25)' : undefined,
+  })
 );
 
 export const Swatch = ({color, isSelected = false, ...elemProps}: SwatchProps) => (
-  <Container color={color} {...elemProps}>
+  <Container color={color} isSelected={isSelected} {...elemProps}>
     {isSelected && (
       <SystemIcon
         fill={pickForegroundColor(color)}
