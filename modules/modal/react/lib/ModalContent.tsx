@@ -47,6 +47,11 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * it will make the modal heading focusable and focus on that instead.
    */
   firstFocusRef?: React.RefObject<HTMLElement>;
+  /**
+   * Is used to configure where the Modal will portal into.
+   * @default document.body
+   */
+  container?: HTMLElement;
 }
 
 const fadeIn = keyframes`
@@ -148,6 +153,7 @@ const ModalContent = ({
   width,
   heading,
   padding,
+  container = document.body,
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -174,7 +180,7 @@ const ModalContent = ({
   };
 
   React.useEffect(() => {
-    const siblings = [...((document.body.children as any) as HTMLElement[])].filter(
+    const siblings = [...((container.children as any) as HTMLElement[])].filter(
       el => el !== modalRef.current!.parentElement
     );
     const prevAriaHidden = siblings.map(el => el.getAttribute('aria-hidden'));
