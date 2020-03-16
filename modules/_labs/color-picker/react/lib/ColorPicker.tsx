@@ -90,7 +90,7 @@ const Container = styled('div')({
   alignItems: 'center',
   background: colors.frenchVanilla100,
   border: `1px solid ${colors.soap400}`,
-  borderRadius: borderRadius.m,
+  borderRadius: borderRadius.l,
   ...depth['3'],
 });
 
