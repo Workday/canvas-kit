@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import {borderRadius, colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 
 import {Swatch} from './Swatch';
@@ -20,11 +20,10 @@ const Container = styled('button')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
-  borderRadius: borderRadius.m,
-  width: `calc(100% + ${spacing.xxs})`,
+  width: `calc(100% + ${spacing.l})`,
   height: spacing.l,
   margin: `-${spacing.xxs} 0px ${spacing.xxs} 0px`,
-  padding: `0px ${spacing.xxs}`,
+  padding: '0px 20px',
   ...type.body2,
   whiteSpace: 'nowrap',
   border: 'none',
