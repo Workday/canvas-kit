@@ -48,7 +48,13 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    */
   firstFocusRef?: React.RefObject<HTMLElement>;
   /**
-   * Is used to configure where the Modal will portal into.
+   * The containing element for the Modal elements. The Modal uses
+   * {@link https://reactjs.org/docs/portals.html Portals} to place the DOM elements
+   * of the Modal in a different place in the DOM to prevent issues with overflowed containers.
+   * When the modal is opened, `aria-hidden` will be added to siblings to hide background
+   * content from assistive technology like it is visibly hidden from sighted users. This property
+   * should be set to the element that the application root goes - not containing element of content.
+   * This should be a sibling or higher than the header and navigation elements of the application.
    * @default document.body
    */
   container?: HTMLElement;
