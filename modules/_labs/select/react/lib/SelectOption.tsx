@@ -37,6 +37,8 @@ const Option = styled('li')<SelectOptionProps>(
   {
     ...type.body,
     cursor: 'default',
+    // In case label is empty/undefined for some reason
+    minHeight: type.body.lineHeight,
   },
   ({disabled, focused, selected, suppressed}) => {
     if (disabled) {
