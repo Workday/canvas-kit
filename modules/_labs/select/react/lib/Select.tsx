@@ -223,7 +223,7 @@ const SelectMenu = styled('div')<
     }
 );
 
-const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
+const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'> & Pick<SelectState, 'isMenuHidden'>>(
   {
     listStyle: 'none',
     margin: 0,
@@ -234,7 +234,13 @@ const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
   },
   ({error}) => ({
     ...menuListBorderCSS(error),
-  })
+  }),
+  // Element with role="listbox" needs to be hidden as well to
+  // prevent screen readers from picking it up
+  ({isMenuHidden}) =>
+    isMenuHidden && {
+      display: 'none',
+    }
 );
 
 const SelectInput = styled('input')({
@@ -790,6 +796,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             aria-activedescendant={!isMenuHidden ? this.optionIds[focusedOptionIndex] : undefined}
             aria-labelledby={ariaLabelledBy}
             error={error}
+            isMenuHidden={isMenuHidden}
             role="listbox"
           >
             {React.Children.map(children, this.renderChildren)}
