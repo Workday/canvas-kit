@@ -6,7 +6,6 @@ function getModalTargetButton() {
 
 describe('Modal', () => {
   before(() => {
-    cy.viewport(500, 300);
     h.stories.visit();
   });
 
@@ -37,6 +36,30 @@ describe('Modal', () => {
 
         it('should open the modal', () => {
           h.modal.get().should('be.visible');
+        });
+
+        it('should place the portal as a child of the body element', () => {
+          cy.get('body').then($body => {
+            h.modal
+              .get()
+              .parent() // wrapper
+              .parent()
+              .should($el => {
+                expect($el[0]).to.equal($body[0]);
+              });
+          });
+        });
+
+        it('should hide non-modal content from assistive technology', () => {
+          h.modal
+            .get()
+            .parent()
+            .siblings()
+            .should($siblings => {
+              $siblings.each((_, $sibling) => {
+                expect($sibling).to.have.attr('aria-hidden', 'true');
+              });
+            });
         });
 
         it('should not have any axe errors', () => {
@@ -159,6 +182,30 @@ describe('Modal', () => {
 
       it('should open the modal', () => {
         h.modal.get().should('be.visible');
+      });
+
+      it('should place the portal as a child of the body element', () => {
+        cy.get('body').then($body => {
+          h.modal
+            .get()
+            .parent() // wrapper
+            .parent()
+            .should($el => {
+              expect($el[0]).to.equal($body[0]);
+            });
+        });
+      });
+
+      it('should hide non-modal content from assistive technology', () => {
+        h.modal
+          .get()
+          .parent()
+          .siblings()
+          .should($siblings => {
+            $siblings.each((_, $sibling) => {
+              expect($sibling).to.have.attr('aria-hidden', 'true');
+            });
+          });
       });
 
       it('should not have any axe errors', () => {
