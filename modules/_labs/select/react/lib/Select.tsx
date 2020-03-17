@@ -171,7 +171,7 @@ const SelectMenuIcon = styled(SystemIcon)({
 });
 
 const SelectMenu = styled('div')<
-  Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHidden' | 'isMenuHiding'>
+  Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHiding'>
 >(
   {
     animationName: fadeInAnimation,
@@ -197,10 +197,6 @@ const SelectMenu = styled('div')<
   ({error}) => ({
     ...menuBorderCSS(error),
   }),
-  ({isMenuHidden}) =>
-    isMenuHidden && {
-      display: 'none',
-    },
   ({isMenuHiding}) =>
     isMenuHiding && {
       animationName: fadeOutAnimation,
@@ -211,7 +207,7 @@ const SelectMenu = styled('div')<
     }
 );
 
-const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'> & Pick<SelectState, 'isMenuHidden'>>(
+const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
   {
     listStyle: 'none',
     margin: 0,
@@ -225,13 +221,7 @@ const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'> & Pick<SelectStat
   },
   ({error}) => ({
     ...menuListBorderCSS(error),
-  }),
-  // Element with role="listbox" needs to be hidden as well to
-  // prevent screen readers from picking it up
-  ({isMenuHidden}) =>
-    isMenuHidden && {
-      display: 'none',
-    }
+  })
 );
 
 const SelectInput = styled('input')({
@@ -787,26 +777,26 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           type="text"
           value={value || this.optionValues[0]}
         />
-        <SelectMenu
-          error={error}
-          grow={grow}
-          isMenuHidden={isMenuHidden}
-          isMenuHiding={isMenuHiding}
-          onKeyDown={this.handleKeyboardShortcuts}
-        >
-          <SelectMenuList
-            aria-activedescendant={!isMenuHidden ? this.optionIds[focusedOptionIndex] : undefined}
-            aria-labelledby={ariaLabelledBy}
+        {!isMenuHidden && (
+          <SelectMenu
             error={error}
-            isMenuHidden={isMenuHidden}
-            onBlur={this.handleMenuBlur}
-            ref={this.menuRef}
-            role="listbox"
-            tabIndex={-1}
+            grow={grow}
+            isMenuHiding={isMenuHiding}
+            onKeyDown={this.handleKeyboardShortcuts}
           >
-            {React.Children.map(children, this.renderChildren)}
-          </SelectMenuList>
-        </SelectMenu>
+            <SelectMenuList
+              aria-activedescendant={this.optionIds[focusedOptionIndex]}
+              aria-labelledby={ariaLabelledBy}
+              error={error}
+              onBlur={this.handleMenuBlur}
+              ref={this.menuRef}
+              role="listbox"
+              tabIndex={-1}
+            >
+              {React.Children.map(children, this.renderChildren)}
+            </SelectMenuList>
+          </SelectMenu>
+        )}
         <SelectMenuIcon
           icon={caretDownSmallIcon}
           color={disabled ? colors.licorice100 : colors.licorice200}
