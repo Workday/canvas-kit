@@ -221,7 +221,7 @@ const ModalContent = ({
     </Container>
   );
 
-  return ReactDOM.createPortal(content, document.body);
+  return ReactDOM.createPortal(content, container);
 };
 
 export default ModalContent;
