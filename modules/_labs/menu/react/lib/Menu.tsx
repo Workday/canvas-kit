@@ -125,7 +125,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
         width={cardWidth}
       >
         <List
-          role="role"
+          role="menu"
           tabIndex={0}
           id={id}
           aria-labelledby={labeledBy}
