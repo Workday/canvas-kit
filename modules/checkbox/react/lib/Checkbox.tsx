@@ -58,6 +58,10 @@ export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTML
    * @default false
    */
   indeterminate?: boolean;
+  /**
+   * If set the Checkbox label may be truncated
+   */
+  width?: number;
 }
 
 const checkboxHeight = 18;
@@ -262,12 +266,16 @@ const IndeterminateBox = styled('div')({
   backgroundColor: canvas.colors.frenchVanilla100,
 });
 
-const CheckboxLabel = styled('label')<{disabled?: boolean}>(
+const CheckboxLabel = styled('label')<{disabled?: boolean; width?: number}>(
   {
     ...canvas.type.body,
     paddingLeft: checkboxLabelDistance,
   },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
+  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'}),
+  ({width}) =>
+    width
+      ? {width: `${width}px`, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}
+      : 'auto'
 );
 
 export default class Checkbox extends React.Component<CheckboxProps> {
@@ -292,6 +300,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
       value,
       error,
       indeterminate,
+      width,
       ...elemProps
     } = this.props;
 
@@ -320,7 +329,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <CheckboxLabel htmlFor={id} disabled={disabled}>
+          <CheckboxLabel htmlFor={id} disabled={disabled} width={width}>
             {label}
           </CheckboxLabel>
         )}
