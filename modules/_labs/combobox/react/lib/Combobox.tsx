@@ -126,11 +126,6 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   private comboboxRef = React.createRef<HTMLDivElement>();
   private id = uuid();
 
-  static defaultProps = {
-    clearButtonLabel: `Reset Search Input`,
-    clearButtonVariant: IconButton.Variant.Plain,
-  };
-
   state: Readonly<ComboboxState> = {
     isFocused: false,
     value: '',
@@ -364,7 +359,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     const {
       autocompleteItems,
       children,
-      clearButtonVariant,
+      clearButtonVariant = IconButton.Variant.Plain,
       grow,
       id = this.id,
       initialValue,
@@ -373,6 +368,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
       onBlur,
       showClearButton,
       labelId,
+      clearButtonLabel = 'Reset Search Input',
       ...elemProps
     } = this.props;
 
@@ -383,7 +379,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
           {showClearButton && (
             <ResetButton
               shouldShow={!!this.state.value}
-              aria-label={this.props.clearButtonLabel}
+              aria-label={clearButtonLabel}
               icon={xSmallIcon}
               variant={clearButtonVariant}
               toggled={undefined}
