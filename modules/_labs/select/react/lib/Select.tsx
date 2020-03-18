@@ -71,7 +71,7 @@ const menuBorderCSS = (error?: ErrorType): CSSObject => {
   return {
     borderColor: borderColor,
 
-    // render the divider using a pseudo-element
+    // Render the divider using a pseudo-element
     '&:before': {
       backgroundColor: colors.soap400,
       content: '""',
@@ -184,7 +184,7 @@ const SelectMenu = styled('div')<
     // Offset the menu by the height of the select (spacingNumbers.xl)
     // minus the borderRadius of the select (borderRadius.m)
     top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
-    // TODO: don't think we need this transition, but verify in
+    // TODO: Don't think we need this transition, but verify in
     // IE11 before deleting it
     // transition: `${toggleMenuAnimationDuration / 1000}s opacity`,
     zIndex: 1,
@@ -206,7 +206,7 @@ const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
   {
     listStyle: 'none',
     margin: 0,
-    // TODO: figure out proper maxHeight
+    // TODO: Figure out proper maxHeight
     maxHeight: 200,
     overflowY: 'auto',
     padding: 0,
@@ -415,7 +415,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  // TODO: move code for scrollIntoViewIfNeeded to a centralized place.
+  // TODO: Move code for scrollIntoViewIfNeeded to a centralized place.
   // Lifted from https://gist.github.com/hsablonniere/2581101
   // This scrolling behavior is preferable even to the WebKit-proprietary
   // scrollIntoViewIfNeeded method.
@@ -580,15 +580,15 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  handleOptionMouseDown = (index: number): void => {
+  handleOptionSelection = (index: number): void => {
     const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
       SelectOptionProps
     >[];
     const optionProps = childrenArray[index].props;
 
     // Abort immediately if:
-    // * the menu is a non-interactive state
-    // * a disabled option was clicked (we ignore these clicks)
+    // * The menu is a non-interactive state
+    // * A disabled option was clicked (we ignore these clicks)
     if (!this.isMenuInteractive() || optionProps.disabled) {
       return;
     }
@@ -659,13 +659,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           if (this.keysSoFar !== '') {
             this.handleKeyboardTypeAhead(' ', numOptions);
           } else {
-            this.handleOptionMouseDown(this.state.focusedOptionIndex);
+            this.handleOptionSelection(this.state.focusedOptionIndex);
           }
           break;
 
         case 'Enter':
           isShortcut = true;
-          this.handleOptionMouseDown(this.state.focusedOptionIndex);
+          this.handleOptionSelection(this.state.focusedOptionIndex);
           break;
 
         default:
@@ -686,18 +686,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       error: this.props.error,
       focused: this.state.focusedOptionIndex === index,
       id: this.optionIds[index],
-
-      // We must use mousedown here instead of click. If we use
-      // click, the select is blurred before the click registers.
-      // When the select is blurred, the menu starts to hide.
-      // When the menu starts to hide, the component becomes
-      // non-interactive. And then when the click finally registers,
-      // it's ignored because the component is non-interactive.
       onMouseDown: (event: React.MouseEvent) => {
         event.preventDefault();
-        this.handleOptionMouseDown(index);
+        this.handleOptionSelection(index);
       },
-
       optionRef: this.state.focusedOptionIndex === index ? this.focusedOptionRef : undefined,
       selected: this.state.selectedOptionIndex === index,
       suppressed: !this.isMenuInteractive(),
