@@ -41,6 +41,11 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
       {control(<Checkbox label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
+  .add('Truncate ', () => (
+    <FormField label="Label" inputId="my-checkbox-field">
+      {control(<Checkbox label="Long label" width={60} />)}
+    </FormField>
+  ))
   .add('Alert', () => (
     <FormField
       label="Label"
@@ -92,6 +97,11 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       labelPosition={FormField.LabelPosition.Left}
     >
       {control(<Checkbox label="Checkbox option" indeterminate={true} />)}
+    </FormField>
+  ))
+  .add('Truncate ', () => (
+    <FormField label="Label" inputId="my-checkbox-field">
+      {control(<Checkbox label="Long label" width={60} />)}
     </FormField>
   ))
   .add('Alert', () => (
