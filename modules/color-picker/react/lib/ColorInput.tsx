@@ -177,7 +177,9 @@ export default class ColorInput extends React.Component<ColorInputProps> {
             icon={checkSmallIcon}
           />
         ) : null}
-        <PoundSignPrefix disabled={disabled}>#</PoundSignPrefix>
+        <PoundSignPrefix aria-hidden={true} disabled={disabled}>
+          #
+        </PoundSignPrefix>
       </ColorInputContainer>
     );
   }
