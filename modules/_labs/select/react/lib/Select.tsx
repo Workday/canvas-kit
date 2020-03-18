@@ -30,15 +30,10 @@ export interface SelectState {
   focusedOptionIndex: number;
   isMenuHidden: boolean;
   isMenuHiding: boolean;
-  justSelectedOptionIndex: number | null;
   label: string;
   selectedOptionIndex: number;
 }
 
-// TODO: Reduce selection animation duration to 0 to disable
-// animation, but consider removing animation code entirely
-// if we don't need it.
-export const selectionPersistMenuDuration = 0;
 const toggleMenuAnimationDuration = 200;
 
 const fadeInAnimation = keyframes`
@@ -253,8 +248,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   private focusMenuTimer: ReturnType<typeof setTimeout>;
   private removeMenuTimer: ReturnType<typeof setTimeout>;
-  private selectionPersistMenuTimer: ReturnType<typeof setTimeout>;
-  private selectionCompletionTimer: ReturnType<typeof setTimeout>;
 
   // For type-ahead functionality
   private keysSoFar = '';
@@ -275,7 +268,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     focusedOptionIndex: 0,
     isMenuHidden: true,
     isMenuHiding: false,
-    justSelectedOptionIndex: null,
     label: '',
     selectedOptionIndex: 0,
   };
@@ -390,11 +382,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  // Menu may not be interacted with while it is hiding, or when
-  // it is briefly persisted right after an option has been
-  // selected
+  // Menu may not be interacted with while it is hiding
   private isMenuInteractive = (): boolean => {
-    return !this.state.isMenuHiding && this.state.justSelectedOptionIndex === null;
+    return !this.state.isMenuHiding;
   };
 
   // Code inspired by: https://stackoverflow.com/a/46012210
@@ -577,12 +567,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (this.removeMenuTimer) {
       clearTimeout(this.removeMenuTimer);
     }
-    if (this.selectionPersistMenuTimer) {
-      clearTimeout(this.selectionPersistMenuTimer);
-    }
-    if (this.selectionCompletionTimer) {
-      clearTimeout(this.selectionCompletionTimer);
-    }
     if (this.clearKeysSoFarTimer) {
       clearTimeout(this.clearKeysSoFarTimer);
     }
@@ -609,29 +593,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       return;
     }
 
-    // Time: 0
-    // Offer visual feedback briefly before hiding the menu
     this.setState({
       focusedOptionIndex: index,
-      justSelectedOptionIndex: index,
+      label: this.optionLabels[index],
       selectedOptionIndex: index,
     });
 
-    // Time: selectionPersistMenuDuration
-    // Hide the menu
-    this.selectionPersistMenuTimer = setTimeout(() => {
-      this.toggleMenu(false);
-    }, selectionPersistMenuDuration);
-
-    // Time: selectionPersistMenuDuration + toggleMenuAnimationDuration
-    // Update the select label and reset justSelected state
-    this.selectionCompletionTimer = setTimeout(() => {
-      this.setState({
-        justSelectedOptionIndex: null,
-        label: this.optionLabels[index],
-      });
-    }, selectionPersistMenuDuration + toggleMenuAnimationDuration);
-
+    this.toggleMenu(false);
     this.updateInput(this.optionValues[index]);
   };
 
@@ -718,7 +686,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       error: this.props.error,
       focused: this.state.focusedOptionIndex === index,
       id: this.optionIds[index],
-      justSelected: this.state.justSelectedOptionIndex === index,
 
       // We must use mousedown here instead of click. If we use
       // click, the select is blurred before the click registers.

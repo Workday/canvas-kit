@@ -1,37 +1,19 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
-import {keyframes} from '@emotion/core';
 import {colors, commonColors, type, typeColors} from '@workday/canvas-kit-react-core';
-import {selectionPersistMenuDuration} from './Select';
 
 export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
   disabled: boolean;
   error?: ErrorType;
   focused?: boolean;
   id?: string;
-  justSelected?: boolean;
   label?: string;
   optionRef?: React.Ref<HTMLLIElement>;
   selected?: boolean;
   suppressed?: boolean;
   value?: string;
 }
-
-const flashAnimation = keyframes`
-  0%, 33% {
-    background-color: ${commonColors.focusBackground};
-    color: ${typeColors.inverse};
-  }
-  34%, 65% {
-    background-color: ${colors.blueberry100};
-    color: inherit;
-  }
-  66%, 100% {
-    background-color: ${commonColors.focusBackground};
-    color: ${typeColors.inverse};
-  }
-`;
 
 const Option = styled('li')<SelectOptionProps>(
   {
@@ -66,13 +48,7 @@ const Option = styled('li')<SelectOptionProps>(
   },
   ({error}) => ({
     padding: `6px ${error === ErrorType.Alert ? 7 : 8}px`,
-  }),
-  ({justSelected}) =>
-    justSelected && {
-      animation: `${flashAnimation} ${selectionPersistMenuDuration / 1000}s 1`,
-      // Retain the styles set by the last keyframe
-      animationFillMode: 'forwards',
-    }
+  })
 );
 
 export default class SelectOption extends React.Component<SelectOptionProps> {
