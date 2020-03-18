@@ -1,6 +1,6 @@
 
 {
-  "name": "@workday/canvas-kit-labs-react-segmented-control",
+  "name": "@workday/canvas-kit-react-segmented-control",
   "version": "0.0.0",
   "description": "A linear set of two or more segments, each of which functions as a mutually exclusive button",
   "author": "Workday, Inc. (https://www.workday.com)",
@@ -11,7 +11,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_labs/segmented-control/react"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/segmented-control/react"
   },
   "files": [
     "dist/",
@@ -25,7 +25,7 @@
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
     "build": "npm-run-all --parallel build:cjs build:es6",
-    "depcheck": "node ../../../../utils/check-dependencies-exist.js"
+    "depcheck": "node ../../../utils/check-dependencies-exist.js"
   },
   "keywords": [
     "canvas",

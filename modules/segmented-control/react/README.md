@@ -12,7 +12,7 @@ is a
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-segmented-control
+yarn add @workday/canvas-kit-react-segmented-control
 ```
 
 ## Usage
