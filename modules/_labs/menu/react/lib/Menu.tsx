@@ -40,6 +40,11 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
    * The HTML `id` of the element that labels the Menu. Often used with menu buttons.
    */
   labeledBy?: string;
+  /**
+   * The role of the Menu. Use this to override the role of the item (e.g. you can use this element as an option in a Combobox).
+   * @default menu
+   */
+  role: string;
 }
 
 export interface MenuState {
@@ -63,6 +68,7 @@ const List = styled('ul')({
 export default class Menu extends React.Component<MenuProps, MenuState> {
   static defaultProps = {
     isOpen: true,
+    role: 'menu',
   };
 
   private id = uuid();
@@ -112,6 +118,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       width,
       onSelect,
       onClose,
+      role,
       initialSelectedItem,
       ...elemProps
     } = this.props;
@@ -125,7 +132,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
         width={cardWidth}
       >
         <List
-          role="menu"
+          role={role}
           tabIndex={0}
           id={id}
           aria-labelledby={labeledBy}
