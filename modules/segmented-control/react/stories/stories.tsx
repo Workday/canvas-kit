@@ -1,4 +1,4 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';

@@ -55,6 +55,7 @@
     "@workday/canvas-kit-react-page-header": "^3.5.0",
     "@workday/canvas-kit-react-popup": "^3.5.0",
     "@workday/canvas-kit-react-radio": "^3.5.0",
+    "@workday/canvas-kit-react-segmented-control": "0.0.0",
     "@workday/canvas-kit-react-select": "^3.5.0",
     "@workday/canvas-kit-react-side-panel": "^3.5.0",
     "@workday/canvas-kit-react-skeleton": "^3.5.0",
