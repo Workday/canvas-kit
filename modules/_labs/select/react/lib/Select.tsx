@@ -342,12 +342,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           isMenuHidden: false,
         },
         () => {
-          // After applying state update, scroll to the focused option in
-          // case that option was focused while the menu was hidden
-          // (i.e., the user triggered type-ahead while the Select was
-          // focused with its menu hidden)
-          this.scrollFocusedOptionIntoView();
-
           // Shift focus to the menu
           if (this.focusMenuTimer) {
             clearTimeout(this.focusMenuTimer);
@@ -552,9 +546,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentDidUpdate(prevProps: SelectProps, prevState: SelectState) {
-    // scroll focused option into view if it changed since the
-    // last render
-    if (this.state.focusedOptionIndex !== prevState.focusedOptionIndex) {
+    const {isMenuHidden, focusedOptionIndex} = this.state;
+
+    // Scroll focused option into view if any of the following is true:
+    // * The menu is displayed AND the focused option changed since the
+    //   last render
+    // * The menu was just displayed (in case the user triggered
+    //   type-ahead while the Select was focused with its menu hidden)
+    const scrollIntoView =
+      (!isMenuHidden && focusedOptionIndex !== prevState.focusedOptionIndex) ||
+      (!isMenuHidden && prevState.isMenuHidden);
+
+    if (scrollIntoView) {
       this.scrollFocusedOptionIntoView();
     }
   }
