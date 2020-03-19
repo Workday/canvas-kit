@@ -37,13 +37,13 @@ export interface ButtonProps
 }
 
 const Button = ({
+  theme = useTheme(),
   variant = ButtonVariant.Secondary,
   size = 'medium',
   buttonRef,
   dataLabel,
   icon,
   children,
-  theme = useTheme(),
   ...elemProps
 }: ButtonProps) => (
   <ButtonContainer
