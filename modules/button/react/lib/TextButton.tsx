@@ -39,20 +39,14 @@ export default class TextButton extends React.Component<TextButtonProps> {
   public static Variant = TextButtonVariant;
   public static Size = ButtonSize;
 
-  static defaultProps = {
-    iconPosition: IconPosition.Left,
-    variant: TextButtonVariant.Default,
-    size: ButtonSize.Large,
-  };
-
   public render() {
     const {
       buttonRef,
       onClick,
       children,
-      iconPosition,
-      size,
-      variant,
+      iconPosition = IconPosition.Left,
+      size = ButtonSize.Large,
+      variant = TextButtonVariant.Default,
       icon,
       ...elemProps
     } = this.props;
