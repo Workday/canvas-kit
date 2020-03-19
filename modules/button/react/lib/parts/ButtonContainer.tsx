@@ -3,7 +3,11 @@ import isPropValid from '@emotion/is-prop-valid';
 import {CSSObject} from '@emotion/core';
 import {styled, type} from '@workday/canvas-kit-labs-react-core';
 import canvas, {borderRadius, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
-import {GrowthBehavior, focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  mouseFocusBehavior,
+  themedFocusRing,
+} from '@workday/canvas-kit-react-common';
 import {ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
 
@@ -120,7 +124,7 @@ export const ButtonContainer = styled('button', {
     }
   },
   ({grow}) => grow && {width: '100%', maxWidth: '100%'},
-  ({colors, fillIcon}) => {
+  ({colors, fillIcon, theme}) => {
     if (!colors) {
       return;
     }
@@ -176,7 +180,7 @@ export const ButtonContainer = styled('button', {
         backgroundColor: colors.focus.background,
         borderColor: colors.focus.border,
         color: colors.focus.label,
-        ...(colors.focus.focusRing || focusRing(2, 2)),
+        ...(colors.focus.focusRing || themedFocusRing(theme, {separation: 2})),
         ...(colors.focus.labelData && {
           ['.' + buttonLabelDataClassName]: {
             color: colors.focus.labelData,

@@ -4,7 +4,7 @@ import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps, customColorTheme} from '../../../../utils/storybook';
 import {playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {
   Button,
@@ -63,6 +63,28 @@ const getButtonStates = (rowProps: any, renderFn: (props: any) => React.ReactNod
   </StaticStates>
 );
 
+const ButtonStates = () =>
+  getButtonStates(
+    {
+      variant: [
+        {value: Button.Variant.Primary, label: 'Primary'},
+        {value: Button.Variant.Secondary, label: 'Secondary'},
+      ],
+      size: [
+        {value: Button.Size.Small, label: 'Small'},
+        {value: Button.Size.Medium, label: 'Medium'},
+        {value: Button.Size.Large, label: 'Large'},
+      ],
+      icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+      dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+    },
+    (props: any) => (
+      <Container>
+        <Button {...props}>Test</Button>
+      </Container>
+    )
+  );
+
 storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
   .addParameters({
     component: Button,
@@ -70,28 +92,13 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
       disable: false,
     },
   })
-  .add('States', () =>
-    getButtonStates(
-      {
-        variant: [
-          {value: Button.Variant.Primary, label: 'Primary'},
-          {value: Button.Variant.Secondary, label: 'Secondary'},
-        ],
-        size: [
-          {value: Button.Size.Small, label: 'Small'},
-          {value: Button.Size.Medium, label: 'Medium'},
-          {value: Button.Size.Large, label: 'Large'},
-        ],
-        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
-      },
-      (props: any) => (
-        <Container>
-          <Button {...props}>Test</Button>
-        </Container>
-      )
-    )
-  );
+  .add('States', () => <ButtonStates />)
+  .addParameters({
+    canvasProviderDecorator: {
+      theme: customColorTheme,
+    },
+  })
+  .add('Theming', () => <ButtonStates />);
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Delete Button', module)
   .addParameters({
