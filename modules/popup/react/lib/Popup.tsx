@@ -5,7 +5,7 @@ import uuid from 'uuid/v4';
 
 import Card from '@workday/canvas-kit-react-card';
 import {IconButton, IconButtonSize} from '@workday/canvas-kit-react-button';
-import {CanvasDepthValue, spacing} from '@workday/canvas-kit-react-core';
+import {CanvasDepthValue, spacing, depth as depthValues} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
@@ -20,17 +20,17 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    * The padding of the Popup. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
    */
-  padding: PopupPadding;
+  padding?: PopupPadding;
   /**
    * The origin from which the Popup will animate.
    * @default {horizontal: 'center', vertical: 'top'}
    */
-  transformOrigin: TransformOrigin;
+  transformOrigin?: TransformOrigin;
   /**
    * The size of the Popup close button. Accepts `Small` or `Medium`.
    * @default IconButtonSize.Medium
    */
-  closeIconSize: IconButtonSize;
+  closeIconSize?: IconButtonSize;
   /**
    * The ref to the underlying popup container element. Use this to check click targets against when closing the Popup.
    */
@@ -56,7 +56,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    * The `aria-label` for the Popup close button.
    * @default Close
    */
-  closeLabel: string;
+  closeLabel?: string;
 }
 
 const closeIconSpacing = spacing.xs;
@@ -83,7 +83,7 @@ const Container = styled('div')<Pick<PopupProps, 'transformOrigin' | 'width'>>(
     maxWidth: `calc(100vw - ${spacing.l})`,
   },
   ({width}) => width && {width},
-  ({transformOrigin}) => ({
+  ({transformOrigin = {horizontal: 'center', vertical: 'top'}}) => ({
     animation: popupAnimation(transformOrigin),
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
@@ -104,30 +104,23 @@ const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
 export default class Popup extends React.Component<PopupProps> {
   static Padding = PopupPadding;
 
-  static defaultProps = {
-    padding: Popup.Padding.l,
-    closeIconSize: IconButton.Size.Medium,
-    closeLabel: 'Close',
-    transformOrigin: {
-      horizontal: 'center',
-      vertical: 'top',
-    },
-  };
-
   private id = uuid();
   private closeButtonRef = React.createRef<any>();
 
   public render() {
     const {
       handleClose,
-      padding,
+      padding = Popup.Padding.l,
       width,
       heading,
-      depth,
-      closeIconSize,
-      transformOrigin,
+      depth = depthValues[2],
+      closeIconSize = IconButton.Size.Medium,
+      transformOrigin = {
+        horizontal: 'center',
+        vertical: 'top',
+      },
       popupRef,
-      closeLabel,
+      closeLabel = 'Close',
       ...elemProps
     } = this.props;
 
