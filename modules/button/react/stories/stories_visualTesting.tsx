@@ -274,11 +274,19 @@ buttonStories.forEach(({name, component, states}) => {
         disable: false,
       },
     })
-    .add('States', () => states as React.ReactElement)
-    .addParameters({
-      canvasProviderDecorator: {
-        theme: customColorTheme,
-      },
-    })
-    .add('Theming', () => states as React.ReactElement);
+    .add('States', () => states as React.ReactElement);
+
+  if (component !== DeprecatedButton) {
+    storiesOf(`Components|Buttons/Button/React/Visual Testing/${name}`, module)
+      .addParameters({
+        component: component,
+        chromatic: {
+          disable: false,
+        },
+        canvasProviderDecorator: {
+          theme: customColorTheme,
+        },
+      })
+      .add('Theming', () => states as React.ReactElement);
+  }
 });
