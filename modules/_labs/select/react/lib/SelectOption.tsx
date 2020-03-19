@@ -4,14 +4,49 @@ import {ErrorType} from '@workday/canvas-kit-react-common';
 import {colors, commonColors, type, typeColors} from '@workday/canvas-kit-react-core';
 
 export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
-  disabled: boolean;
+  /**
+   * If true, set the SelectOption to the disabled state.
+   * @default false
+   */
+  disabled?: boolean;
+  /**
+   * @ignore
+   * The type of error associated with the SelectOption (if applicable). This prop is managed by the parent Select and should NOT be explicitly set on the SelectOption.
+   */
   error?: ErrorType;
+  /**
+   * @ignore
+   * If true, set the SelectOption to the focused state. This prop is managed by the parent Select and should NOT be explicitly set on the SelectOption.
+   * @default false
+   */
   focused?: boolean;
+  /**
+   * The HTML `id` of the SelectOption.
+   */
   id?: string;
+  /**
+   * The label of the SelectOption.
+   */
   label?: string;
+  /**
+   * The ref to the list item that the styled component renders. Use this to imperatively manipulate the SelectOption (e.g., to scroll to it if it's out of view in the Select menu).
+   */
   optionRef?: React.Ref<HTMLLIElement>;
+  /**
+   * @ignore
+   * If true, set the SelectOption to the selected state. This prop is managed by the parent Select and should NOT be explicitly set on the SelectOption.
+   * @default false
+   */
   selected?: boolean;
+  /**
+   * @ignore
+   * If true, set the SelectOption to the suppressed (from user interaction) state. This prop is managed by the parent Select and should NOT be explicitly set on the SelectOption.
+   * @default false
+   */
   suppressed?: boolean;
+  /**
+   * The value of the SelectOption.
+   */
   value?: string;
 }
 

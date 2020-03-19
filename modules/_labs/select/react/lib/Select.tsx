@@ -20,9 +20,17 @@ export interface SelectProps
     GrowthBehavior,
     Pick<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
     Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
+  /**
+   * The SelectOption children of the Select.
+   */
   children?: React.ReactElement<SelectOptionProps>[];
-  disabled?: boolean;
+  /**
+   * The type of error associated with the Select (if applicable).
+   */
   error?: ErrorType;
+  /**
+   * The value of the Select.
+   */
   value?: string;
 }
 

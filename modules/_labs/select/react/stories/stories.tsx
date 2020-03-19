@@ -17,6 +17,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 storiesOf('Labs|Select/React/Top Label', module)
+  .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Plain', () => (
     <FormField label="Label" inputId="select-plain">
