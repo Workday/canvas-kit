@@ -59,7 +59,7 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label text for the SearchBar submit button.
    * @default Search
    */
-  submitLabel: string;
+  submitLabel?: string;
   /**
    * The screenreader label text for the SearchBar clear button.
    * @default Reset Search Form
@@ -69,12 +69,12 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label text for the button to open the collapsed SearchBar.
    * @default Open Search
    */
-  openButtonLabel: string;
+  openButtonLabel?: string;
   /**
    * The screenreader label text for the button to close the open SearchBar.
    * @default Cancel
    */
-  closeButtonLabel: string;
+  closeButtonLabel?: string;
   /**
    * If true, render the SearchBar with a button to clear the text input.
    * @default true
@@ -154,7 +154,7 @@ const SearchContainer = styled('div')({
 });
 
 const SearchCombobox = styled(Combobox)({
-  width: `100%`,
+  width: '100%',
 });
 
 const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isHidden: boolean}>(
@@ -272,14 +272,6 @@ const SearchInput = styled(TextInput)<
 
 export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   static Theme = SearchTheme;
-  static defaultProps = {
-    placeholder: 'Search',
-    inputLabel: 'Search',
-    submitLabel: 'Search',
-    openButtonLabel: 'Open Search',
-    closeButtonLabel: 'Cancel',
-    showClearButton: true,
-  };
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
@@ -385,14 +377,14 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       autocompleteItems,
       initialValue,
       searchTheme,
-      placeholder,
+      placeholder = 'Search',
       rightAlign,
-      inputLabel,
-      submitLabel,
-      showClearButton,
-      clearButtonLabel,
-      closeButtonLabel,
-      openButtonLabel,
+      inputLabel = 'Search',
+      submitLabel = 'Search',
+      showClearButton = true,
+      clearButtonLabel = 'Reset Search Form',
+      closeButtonLabel = 'Cancel',
+      openButtonLabel = 'Open Search',
       ...elemProps
     } = this.props;
 
@@ -445,7 +437,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               showClearButton={!isCollapsed && showClearButton}
-              clearButtonLabel={clearButtonLabel || 'Reset Search Form'}
+              clearButtonAriaLabel={clearButtonLabel}
               labelId={this.labelId}
             >
               <SearchInput
