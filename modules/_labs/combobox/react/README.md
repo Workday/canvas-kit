@@ -76,7 +76,7 @@ Default: `IconButton.Variant.Plain`
 
 ---
 
-#### `clearButtonLabel: string`
+#### `clearButtonLabelAriaLabel: string`
 
 > Screenreader Label for the clear button.
 

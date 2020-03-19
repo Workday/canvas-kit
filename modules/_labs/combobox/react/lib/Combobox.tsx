@@ -33,7 +33,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    * The `aria-label` for the Combobox clear button.
    * @default Reset Search Input
    */
-  clearButtonLabel?: string;
+  clearButtonLabelAriaLabel?: string;
   /**
    * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
@@ -368,7 +368,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
       onBlur,
       showClearButton,
       labelId,
-      clearButtonLabel = 'Reset Search Input',
+      clearButtonLabelAriaLabel = 'Reset Search Input',
       ...elemProps
     } = this.props;
 
@@ -379,7 +379,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
           {showClearButton && (
             <ResetButton
               shouldShow={!!this.state.value}
-              aria-label={clearButtonLabel}
+              aria-label={clearButtonLabelAriaLabel}
               icon={xSmallIcon}
               variant={clearButtonVariant}
               toggled={undefined}
