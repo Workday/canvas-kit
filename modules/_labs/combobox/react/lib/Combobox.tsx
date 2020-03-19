@@ -23,7 +23,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    * The variant of the Combobox clear button.
    * @default IconButton.Variant.Plain
    */
-  clearButtonVariant: IconButtonVariant;
+  clearButtonVariant?: IconButtonVariant;
   /**
    * If true, render the Combobox with a button to clear the text input.
    * @default false
@@ -33,7 +33,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    * The `aria-label` for the Combobox clear button.
    * @default Reset Search Input
    */
-  clearButtonLabel: string;
+  clearButtonLabel?: string;
   /**
    * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
