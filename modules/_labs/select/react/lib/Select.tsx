@@ -410,6 +410,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   // TODO: Move code for scrollIntoViewIfNeeded to a centralized place.
+  // TODO: This code also has minor issues (sometimes it scrolls
+  // unnecessarily, the centerIfNeeded doesn't always center)
   // Lifted from https://gist.github.com/hsablonniere/2581101
   // This scrolling behavior is preferable even to the WebKit-proprietary
   // scrollIntoViewIfNeeded method.
@@ -460,10 +462,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  private scrollFocusedOptionIntoView = () => {
+  private scrollFocusedOptionIntoView = (center: boolean) => {
     const focusedOption = this.focusedOptionRef.current;
     if (focusedOption) {
-      this.scrollIntoViewIfNeeded(focusedOption, false);
+      this.scrollIntoViewIfNeeded(focusedOption, center);
     }
   };
 
@@ -548,17 +550,16 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   componentDidUpdate(prevProps: SelectProps, prevState: SelectState) {
     const {isMenuHidden, focusedOptionIndex} = this.state;
 
-    // Scroll focused option into view if any of the following is true:
-    // * The menu is displayed AND the focused option changed since the
-    //   last render
-    // * The menu was just displayed (in case the user triggered
-    //   type-ahead while the Select was focused with its menu hidden)
-    const scrollIntoView =
-      (!isMenuHidden && focusedOptionIndex !== prevState.focusedOptionIndex) ||
-      (!isMenuHidden && prevState.isMenuHidden);
+    // If the menu was just displayed, scroll the focused option into
+    // center view
+    if (!isMenuHidden && prevState.isMenuHidden) {
+      this.scrollFocusedOptionIntoView(true);
 
-    if (scrollIntoView) {
-      this.scrollFocusedOptionIntoView();
+      // Otherwise, if the menu is displayed AND the focused option changed
+      // since the last render, scroll the focused option into view, but
+      // do NOT center it
+    } else if (!isMenuHidden && focusedOptionIndex !== prevState.focusedOptionIndex) {
+      this.scrollFocusedOptionIntoView(false);
     }
   }
 
