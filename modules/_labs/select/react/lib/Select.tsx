@@ -246,7 +246,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private menuRef = React.createRef<HTMLUListElement>();
   private focusedOptionRef = React.createRef<HTMLLIElement>();
 
-  private focusMenuTimer: ReturnType<typeof setTimeout>;
   private removeMenuTimer: ReturnType<typeof setTimeout>;
 
   // For type-ahead functionality
@@ -354,17 +353,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         },
         () => {
           // Shift focus to the menu
-          if (this.focusMenuTimer) {
-            clearTimeout(this.focusMenuTimer);
+          if (this.menuRef.current) {
+            this.menuRef.current.focus();
           }
-          // TODO: I'm not sure why, but this focus doesn't work unless
-          // it's wrapped in a setTimeout.
-          this.focusMenuTimer = setTimeout(() => {
-            if (this.menuRef.current) {
-              this.menuRef.current.focus();
-              // console.log('AFTER FOCUS document.activeElement:', document.activeElement);
-            }
-          }, 0);
         }
       );
     } else {
@@ -579,9 +570,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   componentWillUnmount() {
     // Clear timers
-    if (this.focusMenuTimer) {
-      clearTimeout(this.focusMenuTimer);
-    }
     if (this.removeMenuTimer) {
       clearTimeout(this.removeMenuTimer);
     }
@@ -591,6 +579,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   handleSelectMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    // It's important that we cancel the default handling of the event here.
+    // Otherwise, the menu will be toggled on, focused, and then IMMEDIATELY
+    // blurred (and therefore disappear) because the default handling of the
+    // mousedown event assigns focus right back to the button.
+    event.preventDefault();
+
     // Only toggle the menu if the the left button was clicked
     // (ignore right-clicks)
     if (event.nativeEvent.which === 1) {
