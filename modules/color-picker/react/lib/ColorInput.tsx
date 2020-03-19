@@ -18,7 +18,7 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
    * The value of the ColorInput.
    * @default ''
    */
-  value: string;
+  value?: string;
   /**
    * If true, show a checkmark in the swatch tile when a custom hex color is entered in the ColorInput.
    * @default false
@@ -28,7 +28,7 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
    * The placeholder text of the ColorInput.
    * @default FFFFFF
    */
-  placeholder: string;
+  placeholder?: string;
   /**
    * The type of error associated with the ColorInput (if applicable).
    */
@@ -127,21 +127,16 @@ const swatchCheckIcon = css({
 });
 
 export default class ColorInput extends React.Component<ColorInputProps> {
-  static defaultProps = {
-    value: '',
-    placeholder: 'FFFFFF',
-  };
-
   public render() {
     // TODO: Standardize on prop spread location (see #150)
     const {
       showCheck,
-      value,
+      value = '',
       onChange,
       onValidColorChange,
       inputRef,
       disabled,
-      placeholder,
+      placeholder = 'FFFFFF',
       error,
       grow,
       ...elemProps

@@ -65,16 +65,17 @@ const Header = styled('h3')(type.h3, {
 const Body = styled('div')(type.body);
 
 export default class Card extends React.Component<CardProps> {
-  public static defaultProps = {
-    depth: depthValues[2],
-    padding: spacing.l,
-  };
-
   public render() {
-    const {heading, headingId, ...elemProps} = this.props;
+    const {
+      heading,
+      headingId,
+      depth = depthValues[2],
+      padding = spacing.l,
+      ...elemProps
+    } = this.props;
 
     return (
-      <Box {...elemProps}>
+      <Box {...elemProps} depth={depth} padding={padding}>
         {heading && <Header id={headingId}>{heading}</Header>}
         <Body>{this.props.children}</Body>
       </Box>

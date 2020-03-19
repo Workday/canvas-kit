@@ -22,7 +22,7 @@ export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTML
    * If true, set the Checkbox to the checked state.
    * @default false
    */
-  checked: boolean;
+  checked?: boolean;
   /**
    * If true, set the Checkbox to the disabled state.
    * @default false
@@ -273,21 +273,16 @@ const CheckboxLabel = styled('label')<{disabled?: boolean}>(
 export default class Checkbox extends React.Component<CheckboxProps> {
   static ErrorType = ErrorType;
 
-  public static defaultProps = {
-    checked: false,
-    label: '',
-  };
-
   private id = uuid();
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
     const {
-      checked,
+      checked = false,
       disabled,
       id = this.id,
       inputRef,
-      label,
+      label = '',
       onChange,
       value,
       error,
