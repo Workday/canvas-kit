@@ -1,12 +1,14 @@
 import * as React from 'react';
+import {Themeable, CanvasTheme, useTheme} from '@workday/canvas-kit-labs-react-core';
 import {colors} from '@workday/canvas-kit-react-core';
-import {focusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {themedFocusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {OutlineButtonVariant, ButtonColors, ButtonSize} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface OutlineButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    Themeable,
     GrowthBehavior {
   /**
    * The variant of the Button.
@@ -35,6 +37,7 @@ export interface OutlineButtonProps
 }
 
 const OutlineButton = ({
+  theme = useTheme(),
   variant = OutlineButtonVariant.Secondary,
   size = 'medium',
   buttonRef,
@@ -44,7 +47,7 @@ const OutlineButton = ({
   ...elemProps
 }: OutlineButtonProps) => (
   <ButtonContainer
-    colors={getOutlineButtonColors(variant)}
+    colors={getOutlineButtonColors(variant, theme)}
     size={size}
     ref={buttonRef}
     {...elemProps}
@@ -60,33 +63,36 @@ OutlineButton.Size = ButtonSize;
 
 export default OutlineButton;
 
-export const getOutlineButtonColors = (variant: OutlineButtonVariant): ButtonColors => {
+export const getOutlineButtonColors = (
+  variant: OutlineButtonVariant,
+  theme: CanvasTheme
+): ButtonColors => {
   switch (variant) {
     case OutlineButtonVariant.Primary:
       return {
         default: {
-          border: colors.blueberry400,
-          icon: colors.blueberry400,
-          label: colors.blueberry400,
+          border: theme.palette.primary.main,
+          icon: theme.palette.primary.main,
+          label: theme.palette.primary.main,
         },
         hover: {
-          background: colors.blueberry400,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
+          background: theme.palette.primary.main,
+          icon: theme.palette.primary.contrast,
+          label: theme.palette.primary.contrast,
         },
         active: {
-          background: colors.blueberry500,
-          border: colors.blueberry500,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
+          background: theme.palette.primary.dark,
+          border: theme.palette.primary.dark,
+          icon: theme.palette.primary.contrast,
+          label: theme.palette.primary.contrast,
         },
         focus: {
-          background: colors.blueberry400,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
+          background: theme.palette.primary.main,
+          icon: theme.palette.primary.contrast,
+          label: theme.palette.primary.contrast,
         },
         disabled: {
-          background: colors.frenchVanilla100,
+          background: theme.palette.primary.contrast,
           border: colors.soap500,
           icon: colors.soap600,
           label: colors.licorice100,
@@ -103,23 +109,23 @@ export const getOutlineButtonColors = (variant: OutlineButtonVariant): ButtonCol
         hover: {
           background: colors.licorice500,
           border: colors.licorice500,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
+          icon: theme.palette.primary.contrast,
+          label: theme.palette.primary.contrast,
         },
         active: {
           background: colors.licorice600,
           border: colors.licorice600,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
+          icon: theme.palette.primary.contrast,
+          label: theme.palette.primary.contrast,
         },
         focus: {
           background: colors.licorice500,
           border: colors.licorice500,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
+          icon: theme.palette.primary.contrast,
+          label: theme.palette.primary.contrast,
         },
         disabled: {
-          background: colors.frenchVanilla100,
+          background: theme.palette.primary.contrast,
           border: colors.soap500,
           icon: colors.soap600,
           label: colors.licorice100,
@@ -128,12 +134,12 @@ export const getOutlineButtonColors = (variant: OutlineButtonVariant): ButtonCol
     case OutlineButtonVariant.Inverse:
       return {
         default: {
-          border: colors.frenchVanilla100,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
+          border: theme.palette.primary.contrast,
+          icon: theme.palette.primary.contrast,
+          label: theme.palette.primary.contrast,
         },
         hover: {
-          background: colors.frenchVanilla100,
+          background: theme.palette.primary.contrast,
           icon: colors.licorice500,
           label: colors.blackPepper400,
           labelData: colors.licorice300,
@@ -146,11 +152,15 @@ export const getOutlineButtonColors = (variant: OutlineButtonVariant): ButtonCol
           labelData: colors.licorice300,
         },
         focus: {
-          background: colors.frenchVanilla100,
+          background: theme.palette.primary.contrast,
           icon: colors.licorice500,
           label: colors.blackPepper400,
           labelData: colors.licorice300,
-          focusRing: focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
+          focusRing: themedFocusRing(theme, {
+            separation: 2,
+            innerColor: 'currentColor',
+            outerColor: theme.palette.primary.contrast,
+          }),
         },
         disabled: {
           background: 'transparent',
