@@ -76,15 +76,15 @@ const Pagination = (props: PaginationProps) => {
     pageSize,
     currentPage,
     onPageChange,
-    customLabel,
-    showLabel,
-    showGoTo,
-    goToLabel,
-    paginationContainerAriaLabel,
-    previousPageAriaLabel,
-    nextPageAriaLabel,
-    pageButtonAriaLabel,
     width,
+    showGoTo = false,
+    showLabel = false,
+    goToLabel = 'Go To',
+    paginationContainerAriaLabel = 'Pagination',
+    previousPageAriaLabel = 'Previous Page',
+    nextPageAriaLabel = 'Next Page',
+    pageButtonAriaLabel = defaultPageButtonAriaLabel,
+    customLabel = defaultCustomLabel,
     ...elemProps
   } = props;
 
@@ -127,17 +127,6 @@ const Pagination = (props: PaginationProps) => {
       </StyledContainer>
     </>
   );
-};
-
-Pagination.defaultProps = {
-  showGoTo: false,
-  showLabel: false,
-  goToLabel: 'Go To',
-  paginationContainerAriaLabel: 'Pagination',
-  previousPageAriaLabel: 'Previous Page',
-  nextPageAriaLabel: 'Next Page',
-  pageButtonAriaLabel: defaultPageButtonAriaLabel,
-  customLabel: defaultCustomLabel,
 };
 
 export default Pagination;

@@ -176,11 +176,6 @@ const setIconProps = (
 };
 
 export default class MenuItem extends React.Component<MenuItemProps> {
-  static defaultProps = {
-    shouldClose: true,
-    role: 'menuitem',
-  };
-
   render(): React.ReactNode {
     const {
       onClick,
