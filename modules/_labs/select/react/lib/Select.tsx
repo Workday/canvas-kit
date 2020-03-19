@@ -272,6 +272,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     selectedOptionIndex: 0,
   };
 
+  // Store option ids since we may need to generate them if they're
+  // undefined
   private setOptionIds = (): void => {
     this.optionIds = React.Children.map(
       this.props.children,
@@ -279,6 +281,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     );
   };
 
+  // Store option labels so we can search on them for type-ahead
   private setOptionLabels = (): void => {
     this.optionLabels = React.Children.map(
       this.props.children,
@@ -286,8 +289,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     );
   };
 
-  // Store option values (in case we need to populate them if they're
-  // undefined)
+  // Store option values since we may need to populate them based on the
+  // option label if the value is undefined
   private setOptionValues = (): void => {
     this.optionValues = React.Children.map(
       this.props.children,
@@ -300,6 +303,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         }
       }
     );
+  };
+
+  // Store various option props (ids, labels, values) since the Select
+  // may need to populate them and/or access them
+  private setOptionLookups = (): void => {
+    this.setOptionIds();
+    this.setOptionLabels();
+    this.setOptionValues();
   };
 
   private getIndexByValue = (value: string): number => {
@@ -520,9 +531,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   constructor(props: SelectProps) {
     super(props);
-    this.setOptionIds();
-    this.setOptionLabels();
-    this.setOptionValues();
+    this.setOptionLookups();
   }
 
   componentDidMount() {
@@ -548,7 +557,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentDidUpdate(prevProps: SelectProps, prevState: SelectState) {
+    const {children} = this.props;
     const {isMenuHidden, focusedOptionIndex} = this.state;
+
+    if (children !== prevProps.children) {
+      this.setOptionLookups();
+    }
 
     // If the menu was just displayed, scroll the focused option into
     // center view
