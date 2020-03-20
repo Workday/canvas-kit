@@ -86,18 +86,21 @@ export class deprecated_Button extends React.Component<ButtonProps<DeprecatedBut
   public static Variant = DeprecatedButtonVariant;
   public static Size = ButtonSize;
 
-  static defaultProps = {
-    size: ButtonSize.Large,
-    variant: DeprecatedButtonVariant.Secondary,
-    grow: false,
-  };
-
   public componentDidMount() {
     console.warn('This component is now deprecated, consider using the new Button component');
   }
 
   public render() {
-    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
+    const {
+      variant = DeprecatedButtonVariant.Secondary,
+      grow = false,
+      size = ButtonSize.Large,
+      buttonRef,
+      dataLabel,
+      icon,
+      children,
+      ...elemProps
+    } = this.props;
 
     return <Button {...this.props} {...elemProps} />;
   }

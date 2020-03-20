@@ -58,8 +58,6 @@ export class Popper extends React.PureComponent<PopperProps> {
       return this.renderPopper();
     }
 
-    // do not use defaultProps for containerElement because document may not be statically available
-    // at require time in some testing environments; instead we safely default at runtime
     return ReactDOM.createPortal(this.renderPopper(), this.props.containerElement || document.body);
   }
 

@@ -15,7 +15,7 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * The type of the IconButton.
    * @default IconButtonVariant.Circle
    */
-  variant: IconButtonVariant;
+  variant?: IconButtonVariant;
   /**
    * The accessibility label to indicate the action triggered by clicking the IconButton.
    */
@@ -221,11 +221,6 @@ export default class IconButton extends React.Component<IconButtonProps> {
   public static Variant = IconButtonVariant;
   public static Size = IconButtonSize;
 
-  static defaultProps = {
-    variant: IconButtonVariant.Circle,
-    size: IconButtonSize.Medium,
-  } as const;
-
   componentDidUpdate(prevProps: IconButtonProps) {
     if (
       prevProps.toggled !== this.props.toggled &&
@@ -239,8 +234,8 @@ export default class IconButton extends React.Component<IconButtonProps> {
     // onToggleChange will generate a warning if spread over a <button>
     const {
       buttonRef,
-      size,
-      variant,
+      size = IconButtonSize.Medium,
+      variant = IconButtonVariant.Circle,
       onToggleChange,
       icon,
       toggled,

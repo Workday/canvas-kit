@@ -20,13 +20,16 @@ export default class DropdownButton extends React.Component<BaseButtonProps> {
   public static Variant = ButtonVariant;
   public static Size = ButtonSize;
 
-  static defaultProps = {
-    variant: ButtonVariant.Primary,
-    size: ButtonSize.Medium,
-  };
-
   public render() {
-    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
+    const {
+      variant = ButtonVariant.Primary,
+      size = ButtonSize.Medium,
+      buttonRef,
+      dataLabel,
+      icon,
+      children,
+      ...elemProps
+    } = this.props;
 
     return (
       <DropdownButtonCon variant={variant} size={size} ref={buttonRef} {...elemProps}>
