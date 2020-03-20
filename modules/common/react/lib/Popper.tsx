@@ -17,7 +17,7 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The element that contains the portal children when `portal` is true.
    */
-  containerElement?: Element;
+  containerElement?: Element | null;
   /**
    * If true, set the Popper to the open state.
    * @default true

@@ -45,7 +45,6 @@
     "@workday/canvas-kit-react-core": "^3.5.0"
   },
   "devDependencies": {
-    "@material-ui/core": "^3.9.2",
     "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }
