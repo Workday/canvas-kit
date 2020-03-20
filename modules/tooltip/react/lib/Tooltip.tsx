@@ -57,16 +57,15 @@ const TooltipContainer = styled('div')<TooltipProps>(
 );
 
 export default class Tooltip extends React.Component<TooltipProps, {}> {
-  static defaultProps = {
-    transformOrigin: {
-      horizontal: 'center',
-      vertical: 'bottom',
-    },
-  };
-
   public render() {
+    const {
+      transformOrigin = {
+        horizontal: 'center',
+        vertical: 'bottom',
+      },
+    } = this.props;
     return (
-      <TooltipContainer {...this.props} role="tooltip">
+      <TooltipContainer transformOrigin={transformOrigin} role="tooltip">
         {this.props.children}
       </TooltipContainer>
     );

@@ -46,14 +46,17 @@ export default class Button extends React.Component<ButtonProps> {
   public static Variant = ButtonVariant;
   public static Size = ButtonSize;
 
-  static defaultProps = {
-    size: ButtonSize.Medium,
-    variant: ButtonVariant.Secondary,
-    grow: false,
-  };
-
   public render() {
-    const {variant, size, buttonRef, dataLabel, icon, children, ...elemProps} = this.props;
+    const {
+      variant = ButtonVariant.Secondary,
+      grow = false,
+      size = ButtonSize.Medium,
+      buttonRef,
+      dataLabel,
+      icon,
+      children,
+      ...elemProps
+    } = this.props;
 
     // Restrict Hightlight button to only being sized Large, Medium with an Icon
     if (variant === ButtonVariant.Highlight && (icon === undefined || size === ButtonSize.Small)) {

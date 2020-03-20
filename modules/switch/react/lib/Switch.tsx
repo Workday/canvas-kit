@@ -14,7 +14,7 @@ export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLIn
    * If true, set the Switch to the on state.
    * @default false
    */
-  checked: boolean;
+  checked?: boolean;
   /**
    * If true, set the Switch to the disabled state.
    * @default false
@@ -148,15 +148,19 @@ const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({checked}) => 
 export default class Switch extends React.Component<SwitchProps> {
   static ErrorType = ErrorType;
 
-  public static defaultProps = {
-    checked: false,
-  };
-
   private id = uuid();
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {checked, disabled, id = this.id, inputRef, onChange, value, ...elemProps} = this.props;
+    const {
+      checked = false,
+      disabled,
+      id = this.id,
+      inputRef,
+      onChange,
+      value,
+      ...elemProps
+    } = this.props;
 
     return (
       <SwitchContainer>
