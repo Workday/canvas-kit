@@ -118,7 +118,7 @@ export default class Popup extends React.Component<PopupProps> {
       transformOrigin = {
         horizontal: 'center',
         vertical: 'top',
-      },
+      } as const,
       popupRef,
       closeLabel = 'Close',
       ...elemProps

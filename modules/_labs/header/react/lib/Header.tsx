@@ -18,12 +18,12 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    * The theme of the Header. Accepts `White`, `Blue`, or `Transparent`.
    * @default HeaderTheme.White
    */
-  themeColor: HeaderTheme;
+  themeColor?: HeaderTheme;
   /**
    * The variant of the Header. Accepts `Dub` (small) or `Full` (large).
    * @default HeaderVariant.Dub
    */
-  variant: HeaderVariant;
+  variant?: HeaderVariant;
   /**
    * The text of the Header title. Not used if `brand` is provided.
    */
@@ -68,7 +68,7 @@ const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
     MozOsxFontSmoothing: 'grayscale',
     position: 'relative',
   },
-  ({variant, themeColor}) => ({
+  ({variant, themeColor = HeaderTheme.White}) => ({
     // Only the variant Full has a large header, all the other one (Dub, Global) have a small header height
     height: variant === HeaderVariant.Full ? HeaderHeight.Large : HeaderHeight.Small,
     background: themes[themeColor].background,
@@ -210,7 +210,7 @@ class Brand extends React.Component<
   Pick<HeaderProps, 'variant' | 'brand' | 'title' | 'themeColor'>
 > {
   render() {
-    const {variant, brand, themeColor, title} = this.props;
+    const {variant, brand, themeColor = HeaderTheme.White, title} = this.props;
 
     switch (variant) {
       case HeaderVariant.Global: {
@@ -239,7 +239,7 @@ class MenuIconButton extends React.Component<
   Pick<HeaderProps, 'themeColor' | 'menuToggle' | 'onMenuClick'>
 > {
   render() {
-    const {themeColor, menuToggle, onMenuClick} = this.props;
+    const {themeColor = HeaderTheme.White, menuToggle, onMenuClick} = this.props;
     if (menuToggle) {
       const menuToggleElement = menuToggle as React.ReactElement<any>;
       const onClick = menuToggleElement.props.onClick
@@ -269,10 +269,6 @@ class MenuIconButton extends React.Component<
 export default class Header extends React.Component<HeaderProps, {}> {
   static Theme = HeaderTheme;
   static Variant = HeaderVariant;
-  static defaultProps = {
-    themeColor: HeaderTheme.White,
-    variant: HeaderVariant.Dub,
-  };
 
   /**
    * Helper that recursively maps ReactNodes to their theme-based equivalent.
@@ -350,8 +346,8 @@ export default class Header extends React.Component<HeaderProps, {}> {
   render() {
     const {
       menuToggle,
-      themeColor,
-      variant,
+      themeColor = HeaderTheme.White,
+      variant = HeaderVariant.Dub,
       centeredNav,
       title,
       brand,

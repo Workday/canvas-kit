@@ -470,7 +470,7 @@ describe('Menu Keyboard Shortcuts', () => {
     const item = component.find('ul');
     const enter = {keyCode: 13, key: 'Enter'};
     const space = {keyCode: 32, key: ' '};
-    item.simulate('keydown', enter);
+    item.simulate('keydown', enter); /*? */
     item.simulate('keydown', space);
     expect(cb.mock.calls.length).toBe(2);
     component.unmount();
