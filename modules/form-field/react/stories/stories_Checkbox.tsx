@@ -43,7 +43,7 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
   ))
   .add('Truncate ', () => (
     <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox label="Long label" width={60} />)}
+      {control(<Checkbox label="Long label" overflow="truncate" />)}
     </FormField>
   ))
   .add('Alert', () => (
@@ -101,7 +101,7 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
   ))
   .add('Truncate ', () => (
     <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox label="Long label" width={60} />)}
+      {control(<Checkbox label="Long label" overflow="truncate" />)}
     </FormField>
   ))
   .add('Alert', () => (

@@ -16,8 +16,12 @@ import canvas, {
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import uuid from 'uuid/v4';
+import {OverflowBehavior} from '@workday/canvas-kit-labs-react-header';
 
-export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps
+  extends OverflowBehavior,
+    Themeable,
+    React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * If true, set the Checkbox to the checked state.
    * @default false
@@ -58,10 +62,6 @@ export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTML
    * @default false
    */
   indeterminate?: boolean;
-  /**
-   * If set the Checkbox label may be truncated
-   */
-  width?: number;
 }
 
 const checkboxHeight = 18;
@@ -266,16 +266,30 @@ const IndeterminateBox = styled('div')({
   backgroundColor: canvas.colors.frenchVanilla100,
 });
 
-const CheckboxLabel = styled('label')<{disabled?: boolean; width?: number}>(
+const CheckboxLabel = styled('label')<{
+  disabled?: boolean;
+  overflow?: OverflowBehavior['overflow'];
+}>(
   {
     ...canvas.type.body,
     paddingLeft: checkboxLabelDistance,
   },
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'}),
-  ({width}) =>
-    width
-      ? {width: `${width}px`, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}
-      : 'auto'
+  ({overflow}) => {
+    if (overflow === 'wrap') {
+      return {
+        wordWrap: 'break-word',
+      };
+    } else if (overflow === 'truncate') {
+      return {
+        width: '100%',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      };
+    }
+    return 'default';
+  }
 );
 
 export default class Checkbox extends React.Component<CheckboxProps> {
@@ -300,7 +314,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
       value,
       error,
       indeterminate,
-      width,
+      overflow,
       ...elemProps
     } = this.props;
 
@@ -329,7 +343,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
           </CheckboxBackground>
         </CheckboxInputWrapper>
         {label && (
-          <CheckboxLabel htmlFor={id} disabled={disabled} width={width}>
+          <CheckboxLabel htmlFor={id} disabled={disabled} overflow={overflow}>
             {label}
           </CheckboxLabel>
         )}
