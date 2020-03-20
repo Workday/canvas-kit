@@ -69,12 +69,6 @@ const IconList = styled('div')({
 });
 
 export default class PageHeader extends React.Component<PageHeaderProps> {
-  static defaultProps = {
-    title: '',
-    capWidth: false,
-    breakpoint: 768,
-  };
-
   private renderChildren(children: React.ReactNode): React.ReactNode {
     return React.Children.map(children, child => {
       if (!React.isValidElement(child)) {
@@ -93,7 +87,7 @@ export default class PageHeader extends React.Component<PageHeaderProps> {
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {title, children, breakpoint, capWidth, ...elemProps} = this.props;
+    const {title = '', children, breakpoint = 768, capWidth = false, ...elemProps} = this.props;
 
     return (
       <Header>

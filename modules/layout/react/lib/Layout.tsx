@@ -59,11 +59,6 @@ const LayoutContainer = styled('div', {
 );
 
 export default class Layout extends React.Component<LayoutProps> {
-  static defaultProps = {
-    gutter: canvas.spacing.xs,
-    spacing: spacingNumbers.xs,
-  };
-
   public static Column = Column;
 
   private renderChild = (child: React.ReactElement<ColumnProps>): React.ReactNode => {
@@ -87,10 +82,16 @@ export default class Layout extends React.Component<LayoutProps> {
   };
 
   public render() {
-    const {children, gutter, capWidth, ...elemProps} = this.props;
+    const {
+      children,
+      gutter = canvas.spacing.xs,
+      spacing = spacingNumbers.xs,
+      capWidth,
+      ...elemProps
+    } = this.props;
 
     return (
-      <LayoutContainer gutter={gutter} capWidth={capWidth} {...elemProps}>
+      <LayoutContainer spacing={spacing} gutter={gutter} capWidth={capWidth} {...elemProps}>
         {React.Children.map(children, this.renderChild)}
       </LayoutContainer>
     );
