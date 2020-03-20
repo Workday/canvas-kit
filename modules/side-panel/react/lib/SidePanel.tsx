@@ -53,12 +53,12 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    * The `aria-label` that describes closing the navigation.
    * @default 'close navigation'
    */
-  closeNavigationLabel: string;
+  closeNavigationLabel?: string;
   /**
    * The `aria-label` that describes opening the navigation.
    * @default 'open navigation'
    */
-  openNavigationLabel: string;
+  openNavigationLabel?: string;
 }
 
 export interface SidePanelState {
@@ -169,15 +169,6 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
   static OpenDirection = SidePanelOpenDirection;
   static BackgroundColor = SidePanelBackgroundColor;
 
-  static defaultProps = {
-    breakpoint: 768,
-    openWidth: 300,
-    openDirection: SidePanelOpenDirection.Left,
-    backgroundColor: SidePanelBackgroundColor.White,
-    closeNavigationLabel: 'close navigation',
-    openNavigationLabel: 'open navigation',
-  };
-
   constructor(props: SidePanelProps) {
     super(props);
     this.handleResize = throttle(this.handleResize.bind(this), 150);
@@ -201,11 +192,12 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
       open,
       openDirection,
       padding,
+      breakpoint = 768,
       onBreakpointChange,
-      openWidth,
-      backgroundColor,
-      openNavigationLabel,
-      closeNavigationLabel,
+      openWidth = 300,
+      backgroundColor = SidePanelBackgroundColor.White,
+      openNavigationLabel = 'open navigation',
+      closeNavigationLabel = 'close navigation',
       ...elemProps
     } = this.props;
 

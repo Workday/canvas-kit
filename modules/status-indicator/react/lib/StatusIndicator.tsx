@@ -116,7 +116,7 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
    * The emphasis of the StatusIndicator. Accepts `High` or `Low`.
    * @default StatusIndicatorEmphasis.High
    */
-  emphasis: StatusIndicatorEmphasis;
+  emphasis?: StatusIndicatorEmphasis;
   /**
    * The text of the StatusIndicator.
    */
@@ -146,12 +146,9 @@ const StatusLabel = styled('span')({
 export default class StatusIndicator extends React.Component<StatusIndicatorProps> {
   public static Type = StatusIndicatorType;
   public static Emphasis = StatusIndicatorEmphasis;
-  static defaultProps = {
-    emphasis: StatusIndicatorEmphasis.High,
-  };
 
   public render() {
-    const {type, emphasis, icon, label, ...elemProps} = this.props;
+    const {type, emphasis = StatusIndicatorEmphasis.High, icon, label, ...elemProps} = this.props;
     const variant = statusIndicatorStyles.variants[type][emphasis]!;
 
     return (
