@@ -96,7 +96,7 @@ storiesOf('Labs|Combobox/React', module)
     </FormField>
   ))
   .add('Complex Menu Items', () => (
-    <FormField id="autocomplete-123" label="No clear button">
+    <FormField id="autocomplete-123" label="Complex Menu Items">
       <Autocomplete showClearButton={false} useComplexMenu={true} />
     </FormField>
   ));
