@@ -10,6 +10,10 @@ import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react-text-input';
 import uuid from 'uuid/v4';
 
+export interface ComboBoxMenuItemProps extends MenuItemProps {
+  shortText?: string;
+}
+
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
    * The TextInput child of the Combobox.
@@ -37,7 +41,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
-  autocompleteItems?: React.ReactElement<MenuItemProps>[];
+  autocompleteItems?: React.ReactElement<ComboBoxMenuItemProps>[];
   /**
    * The function called when the Combobox text input changes.
    */
@@ -207,12 +211,15 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     }.`;
   };
 
-  handleAutocompleteClick = (event: React.SyntheticEvent, menuItemProps: MenuItemProps): void => {
+  handleAutocompleteClick = (
+    event: React.SyntheticEvent,
+    menuItemProps: ComboBoxMenuItemProps
+  ): void => {
     if (menuItemProps.isDisabled) {
       return;
     }
     this.setState({showingAutocomplete: false, isFocused: false});
-    this.setInputValue(this.getTextFromElement(menuItemProps.children));
+    this.setInputValue(menuItemProps.shortText || this.getTextFromElement(menuItemProps.children));
     if (menuItemProps.onClick) {
       menuItemProps.onClick(event);
     }

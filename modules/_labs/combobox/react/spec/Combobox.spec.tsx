@@ -91,6 +91,29 @@ describe('Combobox', () => {
     expect(input.getAttribute('aria-activedescendant')).toEqual('');
   });
 
+  test('Clicking on item with shortText should set short value', async () => {
+    const placeholderText = 'placeholder';
+    const menuText = 'menuText';
+    const longText = 'longMenuText';
+    const autocompleteItems = [
+      <MenuItem onClick={cb} shortText={menuText}>
+        <span>{longText}</span>
+      </MenuItem>,
+    ];
+    const {findByPlaceholderText, findByText} = render(
+      <Combobox autocompleteItems={autocompleteItems}>
+        <TextInput placeholder={placeholderText} />
+      </Combobox>
+    );
+
+    const input = await findByPlaceholderText(placeholderText);
+
+    fireEvent.focus(input);
+    fireEvent.click(await findByText(longText));
+
+    expect(input).toHaveValue(menuText);
+  });
+
   test('Escape key should clear value', async () => {
     const placeholderText = 'placeholder';
     const newText = 'new text';

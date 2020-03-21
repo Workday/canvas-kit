@@ -84,9 +84,10 @@ Default: `'Reset Search Input'`
 
 ---
 
-#### `autocompleteItems: React.ReactElement<MenuItemProps>[]`
+#### `autocompleteItems: React.ReactElement<ComboBoxMenuItemProps>[]`
 
-> An array of MenuItems to show under the input.
+> An array of MenuItems to show under the input. This includes a short text field not found in other
+> menu item props used for more complex autocomplete menus.
 
 ---
 
