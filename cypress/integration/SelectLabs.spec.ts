@@ -171,17 +171,20 @@ describe('Select', () => {
     });
   });
 
-  // context(`given the 'Disabled' story is rendered`, () => {
-  //   beforeEach(() => {
-  //     h.stories.load('Components|Inputs/Select/React/Top Label', 'Disabled');
-  //   });
+  // TODO: Re-enable these tests
+  /*
+  context(`given the 'Disabled' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components|Inputs/Select/React/Top Label', 'Disabled');
+    });
 
-  //   it('should pass accessibility checks', () => {
-  //     cy.checkA11y();
-  //   });
+    it('should pass accessibility checks', () => {
+      cy.checkA11y();
+    });
 
-  //   it('should be disabled', () => {
-  //     getSelect().should('be.disabled');
-  //   });
-  // });
+    it('should be disabled', () => {
+      getSelect().should('be.disabled');
+    });
+  });
+  */
 });

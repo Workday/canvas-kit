@@ -7,7 +7,10 @@ describe('Select', () => {
   const cb = jest.fn();
 
   const selectButtonRole = 'button';
-  const optionRole = 'option';
+
+  // TODO: Delete helpers related to old tests
+
+  // const optionRole = 'option';
 
   // const getFirstMatchingOption = (options: HTMLElement[], value: string) => {
   //   return options.filter((option: HTMLElement) => option.getAttribute('data-value') === value)[0];
