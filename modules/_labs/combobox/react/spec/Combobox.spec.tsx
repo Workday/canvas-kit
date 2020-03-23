@@ -306,7 +306,7 @@ describe('Combobox', () => {
     );
 
     const input = await findByPlaceholderText(placeholderText);
-    const status = await findByRole('status');
+    const status = await findByRole('log');
 
     fireEvent.focus(input);
     expect(status).toHaveTextContent('There is 1 suggestion.');
@@ -322,4 +322,10 @@ describe('Combobox', () => {
 
     expect(container.firstChild).toHaveAttribute('data-propspread', data);
   });
+
+  // test('Groups headers should be non intractable ', async () => {
+  //   <Combobox onChange={cb} autocompleteItems={autocompleteItems}>
+  //     <TextInput placeholder={placeholderText} />
+  //   </Combobox>
+  // });
 });

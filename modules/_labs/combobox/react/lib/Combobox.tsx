@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from '@emotion/styled';
 import {CSSObject, jsx} from '@emotion/core';
-import {accessibleHide, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react-core';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react-menu';
 import {Card} from '@workday/canvas-kit-react-card';
@@ -9,6 +9,16 @@ import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react-text-input';
 import uuid from 'uuid/v4';
+import flatten from 'lodash/flatten';
+import AutocompleteList from './AutocompleteList';
+import Status from './Status';
+
+export interface ComboBoxMenuItemGroup {
+  // A non intractable header that logically separates autocomplete items
+  header: React.ReactElement<MenuItemProps>;
+  // A group of logically distinct autocomplete items
+  items: React.ReactElement<MenuItemProps>[];
+}
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
@@ -37,7 +47,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
-  autocompleteItems?: React.ReactElement<MenuItemProps>[];
+  autocompleteItems?: React.ReactElement<MenuItemProps>[] | ComboBoxMenuItemGroup[];
   /**
    * The function called when the Combobox text input changes.
    */
@@ -69,10 +79,6 @@ const Container = styled('div')<Pick<ComboboxProps, 'grow'>>(
   })
 );
 
-const Status = styled('div')({
-  ...accessibleHide,
-});
-
 const InputContainer = styled('div')({
   display: `flex`,
   alignItems: `center`,
@@ -92,11 +98,6 @@ const MenuContainer = styled(Card)({
   minWidth: 0,
 });
 
-const AutocompleteList = styled('ul')({
-  padding: 0,
-  margin: `${spacing.xxs} 0`,
-});
-
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   {
     width: spacing.l,
@@ -114,9 +115,10 @@ const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   })
 );
 
-const listBoxIdPart = `listbox`;
+export const listBoxIdPart = `listbox`;
 const optionIdPart = `option`;
-const getOptionId = (baseId?: string, index?: number) => `${baseId}-${optionIdPart}-${index}`;
+export const getOptionId = (baseId?: string, index?: number) =>
+  `${baseId}-${optionIdPart}-${index}`;
 
 const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
@@ -160,18 +162,40 @@ const Combobox = ({
   id,
   ...elemProps
 }: ComboboxProps) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const [showingAutocomplete, setShowingAutocomplete] = useState(false);
+  const [isFocused, setIsFocused] = useState<boolean>();
+  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
+  const [showingAutocomplete, setShowingAutocomplete] = useState<boolean>();
   const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState<number | null>(null);
+  const [interactiveAutocompleteItems, setInteractiveAutocompleteItems] = useState<
+    React.ReactElement<MenuItemProps>[]
+  >([]);
+  const [announcementText, setAnnouncementText] = useState('');
 
   const inputRef: React.RefObject<HTMLInputElement> =
     (typeof children.props.inputRef !== 'function' && children.props.inputRef) || useRef(null);
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
+
   const [randomComponentId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
+  const [randomLabelId] = React.useState(() => uuid());
 
   const componentId = id || randomComponentId;
+  const formLabelId = labelId || randomLabelId;
 
-  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
+  const getInteractiveAutocompleteItems = (): React.ReactElement<MenuItemProps>[] => {
+    if (autocompleteItems && autocompleteItems.length && 'header' in autocompleteItems[0]) {
+      return flatten((autocompleteItems as ComboBoxMenuItemGroup[]).map(group => group.items));
+    }
+    return (autocompleteItems as React.ReactElement<MenuItemProps>[]) || [];
+  };
+
+  useEffect(() => {
+    const shouldShow = interactiveAutocompleteItems.length > 0 && isFocused;
+    setShowingAutocomplete(shouldShow);
+    if (shouldShow) {
+      setAnnouncementText(buildStatusString(interactiveAutocompleteItems.length));
+    }
+  }, [interactiveAutocompleteItems, isFocused, value]);
+
   const setInputValue = (newValue: string) => {
     _setValue(newValue);
     const inputDomElement = inputRef.current;
@@ -209,10 +233,9 @@ const Combobox = ({
   }, []);
 
   useEffect(() => {
-    if (autocompleteItems) {
-      setShowingAutocomplete(autocompleteItems.length > 0 && isFocused);
-    }
-  }, [autocompleteItems, isFocused, value]);
+    const items = getInteractiveAutocompleteItems();
+    setInteractiveAutocompleteItems(items);
+  }, [autocompleteItems]);
 
   const handleAutocompleteClick = (
     event: React.SyntheticEvent,
@@ -268,10 +291,10 @@ const Combobox = ({
   };
 
   const handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    if (event.ctrlKey || event.altKey || event.metaKey || !autocompleteItems) {
+    if (event.ctrlKey || event.altKey || event.metaKey || !interactiveAutocompleteItems.length) {
       return;
     }
-    const autoCompleteItemCount = autocompleteItems.length;
+    const autoCompleteItemCount = interactiveAutocompleteItems.length;
     const firstItem = 0;
     const lastItem = autoCompleteItemCount - 1;
     let nextIndex = null;
@@ -302,7 +325,7 @@ const Combobox = ({
 
       case 'Enter':
         if (selectedAutocompleteIndex != null) {
-          const item = autocompleteItems[selectedAutocompleteIndex];
+          const item = interactiveAutocompleteItems[selectedAutocompleteIndex];
           handleAutocompleteClick(event, item.props);
           if (item.props.isDisabled) {
             nextIndex = selectedAutocompleteIndex;
@@ -377,36 +400,19 @@ const Combobox = ({
             onBlur={handleBlur}
           />
         )}
-        {showingAutocomplete && (
+        {showingAutocomplete && autocompleteItems && (
           <MenuContainer padding={spacing.zero} depth={depth[1]}>
             <AutocompleteList
-              role="listbox"
-              id={`${componentId}-${listBoxIdPart}`}
-              aria-labelledby={labelId}
-            >
-              {(autocompleteItems || []).map((listboxItem: React.ReactElement, index) => (
-                <React.Fragment key={index}>
-                  {React.cloneElement(listboxItem, {
-                    id: getOptionId(componentId, index),
-                    role: 'option',
-                    isFocused: selectedAutocompleteIndex === index,
-                    'aria-selected': selectedAutocompleteIndex === index,
-                    onClick: (event: React.MouseEvent) => {
-                      event.preventDefault();
-                      handleAutocompleteClick(event, listboxItem.props);
-                    },
-                  })}
-                </React.Fragment>
-              ))}
-            </AutocompleteList>
+              comboboxId={componentId}
+              autocompleteItems={autocompleteItems}
+              selectedIndex={selectedAutocompleteIndex}
+              handleAutocompleteClick={handleAutocompleteClick}
+              labelId={formLabelId}
+            />
           </MenuContainer>
         )}
       </InputContainer>
-      <Status role="status" aria-live="polite">
-        {autocompleteItems
-          ? showingAutocomplete && buildStatusString(autocompleteItems.length)
-          : ''}
-      </Status>
+      <Status announcementText={announcementText} />
     </Container>
   );
 };
