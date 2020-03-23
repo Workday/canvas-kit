@@ -89,18 +89,13 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
 
 const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
   ({grow, labelPosition}) => {
-    if (grow) {
-      if (
-        labelPosition === FormFieldLabelPosition.Left ||
-        labelPosition === FormFieldLabelPosition.Hidden
-      ) {
-        return {
-          flexGrow: 1,
-        };
-      }
-
+    if (
+      grow &&
+      (labelPosition === FormFieldLabelPosition.Left ||
+        labelPosition === FormFieldLabelPosition.Hidden)
+    ) {
       return {
-        display: 'block',
+        flexGrow: 1,
       };
     }
 
@@ -111,10 +106,7 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPos
         flexWrap: 'wrap',
       };
     }
-
-    return {
-      display: 'inline-block',
-    };
+    return;
   }
 );
 
