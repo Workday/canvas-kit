@@ -50,7 +50,7 @@ export interface CanvasTheme {
  * Indicates a component is themeable with a CanvasTheme
  */
 export interface Themeable {
-  theme: CanvasTheme;
+  theme?: CanvasTheme;
 }
 
 /**
