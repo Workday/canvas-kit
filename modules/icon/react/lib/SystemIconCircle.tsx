@@ -61,13 +61,13 @@ const Container = styled('div', {
 export default class SystemIconCircle extends React.Component<SystemIconCircleProps> {
   static Size = SystemIconCircleSize;
 
-  static defaultProps = {
-    background: colors.soap300,
-    size: SystemIconCircleSize.l,
-  };
-
   render() {
-    const {background, size, icon, ...elemProps} = this.props;
+    const {
+      background = colors.soap200,
+      size = SystemIconCircleSize.l,
+      icon,
+      ...elemProps
+    } = this.props;
 
     const iconColor = pickForegroundColor(background, 'rgba(0,0,0,0.65)');
     const iconSize = size * 0.625;

@@ -83,10 +83,12 @@ describe('GlobalHeader', () => {
         onMenuClick: jest.fn(),
         leftSlot: <SearchBar onSubmit={jest.fn()} />,
         isCollapsed: true,
+        themeColor: HeaderTheme.White,
       };
       const propsHeader2 = {
         menuToggle: 'abcde',
         isCollapsed: false,
+        themeColor: HeaderTheme.White,
       };
       const defaultProps = {
         brand: <DubLogoTitle />,

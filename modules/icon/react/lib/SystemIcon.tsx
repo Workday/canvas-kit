@@ -85,7 +85,7 @@ export const systemIconStyles = ({
   },
 });
 
-export default class SystemIcon extends React.Component<SpanProps & SystemIconProps> {
+export default class SystemIcon extends React.Component<SystemIconProps> {
   render() {
     const {
       icon,
@@ -113,13 +113,7 @@ export default class SystemIcon extends React.Component<SpanProps & SystemIconPr
     });
 
     return (
-      <Icon
-        src={icon}
-        type={CanvasIconTypes.System}
-        size={size}
-        styles={style}
-        elemProps={elemProps}
-      />
+      <Icon src={icon} type={CanvasIconTypes.System} size={size} styles={style} {...elemProps} />
     );
   }
 }

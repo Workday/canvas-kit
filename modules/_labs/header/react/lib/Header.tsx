@@ -98,7 +98,7 @@ const BrandLink = styled('a')({
   },
 });
 
-const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
+const navStyle = ({themeColor = HeaderTheme.White}: Pick<HeaderProps, 'themeColor'>) => {
   const theme = themes[themeColor];
 
   return css({
