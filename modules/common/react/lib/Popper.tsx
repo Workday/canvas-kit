@@ -22,12 +22,12 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    * If true, set the Popper to the open state.
    * @default true
    */
-  open?: boolean;
+  open: boolean;
   /**
    * The placement of the popper relative to the `anchorElement`. Accepts `auto`, `top`, `right`, `bottom`, or `left`. Each placement can also be modified using any of the following variations: `-start` or `-end`.
    * @default bottom
    */
-  placement?: Placement;
+  placement: Placement;
   /**
    * The additional options passed to the Popper's `popper.js` instance.
    */
@@ -36,11 +36,17 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    * If true, attach the Popper to the `containerElement`. If false, render the Popper within the DOM hierarchy of its parent.
    * @default true
    */
-  portal?: boolean;
+  portal: boolean;
 }
 
 export class Popper extends React.PureComponent<PopperProps> {
   private popper: PopperJS | null;
+
+  static defaultProps = {
+    open: true,
+    placement: 'bottom',
+    portal: true,
+  };
 
   public componentWillUnmount() {
     if (this.popper) {
@@ -58,6 +64,8 @@ export class Popper extends React.PureComponent<PopperProps> {
       return this.renderPopper();
     }
 
+    // do not use defaultProps for containerElement because document may not be statically available
+    // at require time in some testing environments; instead we safely default at runtime
     return ReactDOM.createPortal(this.renderPopper(), this.props.containerElement || document.body);
   }
 
@@ -66,10 +74,10 @@ export class Popper extends React.PureComponent<PopperProps> {
       anchorElement,
       children,
       containerElement,
-      open = true,
-      placement = 'bottom',
+      open,
+      placement,
       popperOptions,
-      portal = 'true',
+      portal,
       ...elemProps
     } = this.props;
 
