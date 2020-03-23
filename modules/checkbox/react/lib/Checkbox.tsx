@@ -5,6 +5,7 @@ import {
   themedFocusRing,
   mouseFocusBehavior,
   getErrorColors,
+  OverflowBehavior,
 } from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -16,7 +17,6 @@ import canvas, {
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import uuid from 'uuid/v4';
-import {OverflowBehavior} from '@workday/canvas-kit-labs-react-header';
 
 export interface CheckboxProps
   extends OverflowBehavior,
@@ -288,7 +288,7 @@ const CheckboxLabel = styled('label')<{
         textOverflow: 'ellipsis',
       };
     }
-    return 'default';
+    return;
   }
 );
 

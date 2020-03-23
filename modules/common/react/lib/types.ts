@@ -9,6 +9,16 @@ export interface GrowthBehavior {
 }
 
 /**
+ * The overflow behavior of text within a component.
+ */
+export interface OverflowBehavior {
+  /**
+   * 'wrap' if the text should wrap. 'truncate' if it should ellipsize. undefined if it should behave normally.
+   */
+  overflow?: 'wrap' | 'truncate';
+}
+
+/**
  * TransformOrigin behavior for things like popups and tooltips
  */
 export interface TransformOrigin {

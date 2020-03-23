@@ -20,7 +20,3 @@ export enum SearchTheme {
   Dark,
   Transparent,
 }
-
-export interface OverflowBehavior {
-  overflow?: 'default' | 'wrap' | 'truncate';
-}
