@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from '@emotion/styled';
-import { CSSObject, jsx } from '@emotion/core';
-import { accessibleHide, GrowthBehavior } from '@workday/canvas-kit-react-common';
-import { depth, spacing, commonColors, borderRadius } from '@workday/canvas-kit-react-core';
-import { MenuItemProps } from '@workday/canvas-kit-labs-react-menu';
-import { Card } from '@workday/canvas-kit-react-card';
-import { IconButton, IconButtonVariant } from '@workday/canvas-kit-react-button';
-import { xSmallIcon } from '@workday/canvas-system-icons-web';
-import { TextInputProps } from '@workday/canvas-kit-react-text-input';
+import {CSSObject, jsx} from '@emotion/core';
+import {accessibleHide, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react-core';
+import {MenuItemProps} from '@workday/canvas-kit-labs-react-menu';
+import {Card} from '@workday/canvas-kit-react-card';
+import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
+import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {TextInputProps} from '@workday/canvas-kit-react-text-input';
 import uuid from 'uuid/v4';
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
@@ -60,12 +60,11 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   getStatusText?: (listCount: number) => string;
 }
 
-
 const Container = styled('div')<Pick<ComboboxProps, 'grow'>>(
   {
     display: 'inline-block',
   },
-  ({ grow }) => ({
+  ({grow}) => ({
     width: grow ? '100%' : 'auto',
   })
 );
@@ -98,7 +97,7 @@ const AutocompleteList = styled('ul')({
   margin: `${spacing.xxs} 0`,
 });
 
-const ResetButton = styled(IconButton)<{ shouldShow: boolean }>(
+const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   {
     width: spacing.l,
     height: spacing.l,
@@ -109,7 +108,7 @@ const ResetButton = styled(IconButton)<{ shouldShow: boolean }>(
     zIndex: 2,
     transition: 'opacity 120ms',
   },
-  ({ shouldShow }) => ({
+  ({shouldShow}) => ({
     visibility: shouldShow ? 'visible' : 'hidden',
     opacity: shouldShow ? 1 : 0,
   })
@@ -138,7 +137,7 @@ const getTextFromElement = (children?: React.ReactNode) => {
 const buildStatusString = (listCount: number): string => {
   return `There ${listCount === 1 ? 'is' : 'are'} ${listCount} suggestion${
     listCount === 1 ? '' : 's'
-    }.`;
+  }.`;
 };
 
 const isValidSingleChild = (child: React.ReactNode) => {
@@ -161,10 +160,10 @@ const Combobox: React.FC<ComboboxProps> = ({
   id,
   ...elemProps
 }) => {
-  const [isFocused, setIsFocused] = useState(false)
-  const [value, _setValue] = useState('') // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
-  const [showingAutocomplete, setShowingAutocomplete] = useState(false)
-  const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState<number | null>(null)
+  const [isFocused, setIsFocused] = useState(false);
+  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
+  const [showingAutocomplete, setShowingAutocomplete] = useState(false);
+  const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState<number | null>(null);
 
   const inputRef: React.RefObject<HTMLInputElement> = children.props.inputRef || useRef(null);
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
@@ -176,17 +175,17 @@ const Combobox: React.FC<ComboboxProps> = ({
     if (initialValue) {
       setInputValue(initialValue);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (autocompleteItems) {
-      setShowingAutocomplete(autocompleteItems.length > 0 && isFocused)
+      setShowingAutocomplete(autocompleteItems.length > 0 && isFocused);
     }
-  }, [autocompleteItems, isFocused, value])
+  }, [autocompleteItems, isFocused, value]);
 
   const setInputValue = (newValue: string) => {
-    _setValue(newValue)
-    const inputDomElement = inputRef.current
+    _setValue(newValue);
+    const inputDomElement = inputRef.current;
     // Changing value prop programmatically doesn't fire an Synthetic event or trigger native onChange.
     // We can not just update .value= in setState because React library overrides input value setter
     // but we can call the function directly on the input as context.
@@ -203,7 +202,7 @@ const Combobox: React.FC<ComboboxProps> = ({
       let event: Event;
       if (typeof Event === 'function') {
         // modern browsers
-        event = new Event('input', { bubbles: true });
+        event = new Event('input', {bubbles: true});
       } else {
         // IE 11
         event = document.createEvent('Event');
@@ -214,12 +213,15 @@ const Combobox: React.FC<ComboboxProps> = ({
     }
   };
 
-  const handleAutocompleteClick = (event: React.SyntheticEvent, menuItemProps: MenuItemProps): void => {
+  const handleAutocompleteClick = (
+    event: React.SyntheticEvent,
+    menuItemProps: MenuItemProps
+  ): void => {
     if (menuItemProps.isDisabled) {
       return;
     }
     setShowingAutocomplete(false);
-    setIsFocused(false)
+    setIsFocused(false);
     setInputValue(getTextFromElement(menuItemProps.children));
     if (menuItemProps.onClick) {
       menuItemProps.onClick(event);
@@ -233,7 +235,7 @@ const Combobox: React.FC<ComboboxProps> = ({
   };
 
   const handleFocus = (event: React.FocusEvent) => {
-    setIsFocused(true)
+    setIsFocused(true);
 
     if (onFocus) {
       onFocus(event);
@@ -252,7 +254,7 @@ const Combobox: React.FC<ComboboxProps> = ({
       }
     }
 
-    setIsFocused(false)
+    setIsFocused(false);
 
     if (onBlur) {
       onBlur(event);
@@ -276,7 +278,8 @@ const Combobox: React.FC<ComboboxProps> = ({
     switch (event.key) {
       case 'ArrowUp':
       case 'Up': // IE/Edge specific value
-        const upIndex = selectedAutocompleteIndex != null ? selectedAutocompleteIndex - 1 : lastItem;
+        const upIndex =
+          selectedAutocompleteIndex != null ? selectedAutocompleteIndex - 1 : lastItem;
         nextIndex = upIndex < 0 ? lastItem : upIndex;
         event.stopPropagation();
         event.preventDefault();
@@ -284,7 +287,8 @@ const Combobox: React.FC<ComboboxProps> = ({
 
       case 'ArrowDown':
       case 'Down': // IE/Edge specific value
-        const downIndex = selectedAutocompleteIndex != null ? selectedAutocompleteIndex + 1 : firstItem;
+        const downIndex =
+          selectedAutocompleteIndex != null ? selectedAutocompleteIndex + 1 : firstItem;
         nextIndex = downIndex >= autoCompleteItemCount ? firstItem : downIndex;
         event.stopPropagation();
         event.preventDefault();
@@ -302,7 +306,7 @@ const Combobox: React.FC<ComboboxProps> = ({
           if (item.props.isDisabled) {
             nextIndex = selectedAutocompleteIndex;
           }
-          setIsFocused(true)
+          setIsFocused(true);
           event.stopPropagation();
           event.preventDefault();
         }
@@ -321,7 +325,7 @@ const Combobox: React.FC<ComboboxProps> = ({
   };
 
   const renderChildren = (inputElement: React.ReactElement<TextInputProps>): React.ReactNode => {
-    let cssOverride: CSSObject = { zIndex: 2 };
+    let cssOverride: CSSObject = {zIndex: 2};
     if (showClearButton) {
       cssOverride = {
         ...cssOverride,
@@ -354,7 +358,7 @@ const Combobox: React.FC<ComboboxProps> = ({
         ...element.props,
         ...props,
       });
-    return cloneElement(inputElement, { ...inputElement.props, ...newTextInputProps });
+    return cloneElement(inputElement, {...inputElement.props, ...newTextInputProps});
   };
 
   return (
@@ -404,6 +408,6 @@ const Combobox: React.FC<ComboboxProps> = ({
       </Status>
     </Container>
   );
-}
+};
 
 export default Combobox;
