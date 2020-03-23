@@ -59,8 +59,8 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           focusRing: themedFocusRing(theme),
         },
         disabled: {
-          icon: theme.palette.primary.lightest,
-          label: theme.palette.primary.lightest,
+          icon: theme.palette.primary.light,
+          label: theme.palette.primary.light,
         },
       };
     case TextButtonVariant.Inverse:
