@@ -19,4 +19,22 @@ describe('Icon component', () => {
     const component = render(<Svg src={shieldIcon} type={CanvasIconTypes.Accent} />);
     expect(component.find('svg')).toHaveLength(1);
   });
+
+  test('Custom className overrides base iconStyle class', () => {
+    const customClassName = 'custom-class-name';
+
+    const {container} = rtlRender(
+      <Svg src={shieldIcon} className={customClassName} type={CanvasIconTypes.Accent} styles={{}} />
+    );
+
+    expect(container.firstChild).toHaveClass(customClassName);
+
+    // The user defined class (customClassName), should always be last
+    expect(
+      container
+        .querySelector('span')!
+        .className.split(' ')
+        .reverse()[0]
+    ).toBe(customClassName);
+  });
 });

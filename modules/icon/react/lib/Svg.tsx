@@ -35,7 +35,8 @@ export default class Svg extends React.Component<SvgProps> {
               css(styles, {
                 display: 'inline-block',
                 '& svg': {display: 'block'},
-              })
+              }),
+              elemProps.className
             )}
           />
         )}
