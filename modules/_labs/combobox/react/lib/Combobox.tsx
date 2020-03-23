@@ -14,6 +14,11 @@ export interface ComboBoxMenuItemProps extends MenuItemProps {
   shortText?: string;
 }
 
+export interface ComboBoxMenuItemGroup {
+  header: React.ReactElement<MenuItemProps>;
+  items: React.ReactElement<ComboBoxMenuItemProps>[];
+}
+
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
    * The TextInput child of the Combobox.
@@ -42,6 +47,10 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
   autocompleteItems?: React.ReactElement<ComboBoxMenuItemProps>[];
+  /**
+   * The autocomplete items of the Combobox. This prop takes precedent over autocompleteItems and displays the items with a header.
+   */
+  autocompleteItemGroup?: ComboBoxMenuItemGroup[];
   /**
    * The function called when the Combobox text input changes.
    */
@@ -148,14 +157,34 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     }
   }
 
+  getAutoCompleteItems = () => {
+    let items: React.ReactElement<ComboBoxMenuItemProps>[] = []
+    console.log(this.props.autocompleteItemGroup)
+    if (this.props.autocompleteItemGroup && this.props.autocompleteItemGroup.length) {
+      items = this.props.autocompleteItemGroup.reduce((total, groupItem) => {
+        console.log(groupItem)
+        return [
+          ...total,
+          ...groupItem.items,
+        ]
+      }, items)
+    } else if (this.props.autocompleteItems && this.props.autocompleteItems.length) {
+      items = this.props.autocompleteItems
+    }
+    return items
+  }
+
   componentDidUpdate(prevProps: ComboboxProps, prevState: ComboboxState) {
     const listboxOrFocusChanged =
       this.props.autocompleteItems !== prevProps.autocompleteItems ||
+      this.props.autocompleteItems !== prevProps.autocompleteItems ||
       this.state.isFocused !== prevState.isFocused ||
       this.state.value !== prevState.value;
-    if (this.props.autocompleteItems && listboxOrFocusChanged) {
+    const total = this.getAutoCompleteItems()
+    console.log(total)
+    if (total && listboxOrFocusChanged) {
       this.setState({
-        showingAutocomplete: this.props.autocompleteItems.length > 0 && this.state.isFocused,
+        showingAutocomplete: total.length > 0 && this.state.isFocused,
       });
     }
   }
@@ -264,11 +293,12 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
   };
 
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    if (event.ctrlKey || event.altKey || event.metaKey || !this.props.autocompleteItems) {
+    const autocompleteItems = this.getAutoCompleteItems()
+    if (event.ctrlKey || event.altKey || event.metaKey || !autocompleteItems) {
       return;
     }
     const currentIndex = this.state.selectedAutocompleteIndex;
-    const autoCompleteItemCount = this.props.autocompleteItems.length;
+    const autoCompleteItemCount = autocompleteItems.length;
     const firstItem = 0;
     const lastItem = autoCompleteItemCount - 1;
     let nextIndex = null;
@@ -297,7 +327,7 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
 
       case 'Enter':
         if (this.state.selectedAutocompleteIndex != null) {
-          const item = this.props.autocompleteItems[this.state.selectedAutocompleteIndex];
+          const item = autocompleteItems[this.state.selectedAutocompleteIndex];
           this.handleAutocompleteClick(event, item.props);
           if (item.props.isDisabled) {
             nextIndex = currentIndex;
@@ -367,9 +397,76 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
     });
   };
 
+  createList = () => {
+    console.log(this.props)
+    if (this.props.autocompleteItemGroup && this.props.autocompleteItemGroup.length) {
+      let itemIndex = 0
+      return (
+        (this.props.autocompleteItemGroup).map(({header, items}, groupIndex) => {
+          const groupLabel = `itemGroup-${this.id}-${groupIndex}`
+          return (
+            <AutocompleteList
+              role="group"
+              aria-labelledby={groupLabel}
+            >
+              {React.cloneElement(header, {
+                id: groupLabel,
+                role: 'presentation',
+              })}
+              {(items).map((listboxItem: React.ReactElement) => {
+                const item = (
+                  <React.Fragment key={itemIndex}>
+                    {React.cloneElement(listboxItem, {
+                      id: getOptionId(this.id, itemIndex),
+                      role: 'option',
+                      isFocused: this.state.selectedAutocompleteIndex === itemIndex,
+                      'aria-selected': this.state.selectedAutocompleteIndex === itemIndex,
+                      onClick: (event: React.MouseEvent) => {
+                        event.preventDefault();
+                        this.handleAutocompleteClick(event, listboxItem.props);
+                      },
+                    })}
+                  </React.Fragment>
+                )
+                itemIndex++
+                return item
+              })}
+            </AutocompleteList>
+          )
+        })
+      )
+    } else if (this.props.autocompleteItems && this.props.autocompleteItems.length) {
+      return (
+        <AutocompleteList
+          role="listbox"
+          id={`${this.id}-${listBoxIdPart}`}
+          aria-labelledby={this.props.labelId}
+        >
+          {(this.props.autocompleteItems || []).map((listboxItem: React.ReactElement, index) => (
+            <React.Fragment key={index}>
+              {React.cloneElement(listboxItem, {
+                id: getOptionId(this.id, index),
+                role: 'option',
+                isFocused: this.state.selectedAutocompleteIndex === index,
+                'aria-selected': this.state.selectedAutocompleteIndex === index,
+                onClick: (event: React.MouseEvent) => {
+                  event.preventDefault();
+                  this.handleAutocompleteClick(event, listboxItem.props);
+                },
+              })}
+            </React.Fragment>
+          ))}
+        </AutocompleteList>
+      )
+    } else {
+      return null
+    }
+  }
+
   render() {
     const {
       autocompleteItems,
+      autocompleteItemGroup,
       children,
       clearButtonVariant,
       grow,
@@ -400,32 +497,14 @@ export default class Combobox extends React.Component<ComboboxProps, ComboboxSta
           )}
           {this.state.showingAutocomplete && (
             <MenuContainer padding={spacing.zero} depth={depth[1]}>
-              <AutocompleteList
-                role="listbox"
-                id={`${id}-${listBoxIdPart}`}
-                aria-labelledby={labelId}
-              >
-                {(autocompleteItems || []).map((listboxItem: React.ReactElement, index) => (
-                  <React.Fragment key={index}>
-                    {React.cloneElement(listboxItem, {
-                      id: getOptionId(id, index),
-                      role: 'option',
-                      isFocused: this.state.selectedAutocompleteIndex === index,
-                      'aria-selected': this.state.selectedAutocompleteIndex === index,
-                      onClick: (event: React.MouseEvent) => {
-                        event.preventDefault();
-                        this.handleAutocompleteClick(event, listboxItem.props);
-                      },
-                    })}
-                  </React.Fragment>
-                ))}
-              </AutocompleteList>
+              {console.log('hey')}
+              {this.createList()}
             </MenuContainer>
           )}
         </InputContainer>
         <Status role="status" aria-live="polite">
-          {autocompleteItems
-            ? this.state.showingAutocomplete && this.buildStatusString(autocompleteItems.length)
+          {this.getAutoCompleteItems()
+            ? this.state.showingAutocomplete && this.buildStatusString(this.getAutoCompleteItems().length)
             : ''}
         </Status>
       </Container>

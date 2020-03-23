@@ -56,13 +56,33 @@ class Autocomplete extends React.Component<
   };
 
   render() {
-    const Results = this.props.useComplexMenu ? complexAutocompleteResult : autocompleteResult;
+    const results = this.props.useComplexMenu
+      ? {
+        autocompleteItemGroup: [
+          {
+            header: <MenuItem><em style={{fontWeight: `bold`}}>First Group</em></MenuItem>,
+            items: Array.apply(null, Array(this.state.currentText.length))
+            .map((_: any, i: number) => complexAutocompleteResult(`${i}`))
+            .splice(0, 2)
+          },
+          {
+            header: <MenuItem><em style={{fontWeight: `bold`}}>Second Group</em></MenuItem>,
+            items: Array.apply(null, Array(this.state.currentText.length))
+              .map((_: any, i: number) => complexAutocompleteResult(`${i}`))
+              .splice(0, 2)
+          },
+        ]
+      }
+      : {
+        autocompleteItems: Array.apply(null, Array(this.state.currentText.length))
+          .map((_: any, i: number) => autocompleteResult(`${i}`))
+          .splice(0, 5)
+    };
+
     return (
       <Combobox
         {...this.props}
-        autocompleteItems={Array.apply(null, Array(this.state.currentText.length))
-          .map((x: any, i: string) => Results(i))
-          .splice(0, 5)}
+        {...results}
         onChange={this.autocompleteCallback}
         showClearButton={this.props.showClearButton == null ? true : this.props.showClearButton}
         labelId="autocomplete-123"
@@ -97,6 +117,6 @@ storiesOf('Labs|Combobox/React', module)
   ))
   .add('Complex Menu Items', () => (
     <FormField id="autocomplete-123" label="Complex Menu Items">
-      <Autocomplete showClearButton={false} useComplexMenu={true} />
+      <Autocomplete useComplexMenu={true} />
     </FormField>
   ));
