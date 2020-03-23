@@ -13,6 +13,7 @@ import {
 import {Checkbox} from '../../../checkbox/react';
 import FormField from '../index';
 import README from '../../../checkbox/react/README.md';
+import {number, select, text, withKnobs} from '@storybook/addon-knobs';
 
 const control = (child: React.ReactNode) => (
   <ControlledComponentWrapper controlledProp={ControlledComponentWrapper.ControlledProp.Checked}>
@@ -22,6 +23,9 @@ const control = (child: React.ReactNode) => (
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
+const containerStyle = (width: number) => {
+  return {width};
+};
 
 storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
   .addParameters({component: Checkbox})
@@ -41,11 +45,28 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
       {control(<Checkbox label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
-  .add('Truncate ', () => (
-    <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox label="Long label" overflow="truncate" />)}
-    </FormField>
-  ))
+  .addDecorator(withKnobs)
+  .add('Truncate', () => {
+    const selectLabel = 'overflow behavior';
+    const options = {
+      truncate: 'truncate',
+      wrap: 'wrap',
+      default: 'default',
+    };
+    const defaultValue = options.truncate;
+    return (
+      <FormField label="Label" inputId="my-checkbox-field">
+        <div style={containerStyle(number('container width', 100))}>
+          {control(
+            <Checkbox
+              label={text('label', 'long label')}
+              overflow={select(selectLabel, options, defaultValue)}
+            />
+          )}
+        </div>
+      </FormField>
+    );
+  })
   .add('Alert', () => (
     <FormField
       label="Label"
@@ -99,11 +120,28 @@ storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
       {control(<Checkbox label="Checkbox option" indeterminate={true} />)}
     </FormField>
   ))
-  .add('Truncate ', () => (
-    <FormField label="Label" inputId="my-checkbox-field">
-      {control(<Checkbox label="Long label" overflow="truncate" />)}
-    </FormField>
-  ))
+  .addDecorator(withKnobs)
+  .add('Truncate', () => {
+    const selectLabel = 'overflow behavior';
+    const options = {
+      truncate: 'truncate',
+      wrap: 'wrap',
+      default: 'default',
+    };
+    const defaultValue = options.truncate;
+    return (
+      <FormField label="Label" inputId="my-checkbox-field">
+        <div style={containerStyle(number('container width', 100))}>
+          {control(
+            <Checkbox
+              label={text('label', 'long label')}
+              overflow={select(selectLabel, options, defaultValue)}
+            />
+          )}
+        </div>
+      </FormField>
+    );
+  })
   .add('Alert', () => (
     <FormField
       label="Label"
