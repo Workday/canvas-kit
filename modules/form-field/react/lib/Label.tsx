@@ -50,7 +50,8 @@ const labelStyles = [
       ...(labelPosition === FormFieldLabelPosition.Left
         ? {
             marginRight: spacing.l,
-            minWidth: 180,
+            maxWidth: 180,
+            flexGrow: 1,
             display: 'flex',
             alignItems: 'center',
             maxHeight: spacing.xl,
