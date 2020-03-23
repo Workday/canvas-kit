@@ -31,7 +31,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
    * The depth of the Card. Imported from `@workday/canvas-kit-react-core`.
    * @default depthValues[2]
    */
-  depth: CanvasDepthValue;
+  depth?: CanvasDepthValue;
 
   /**
    * The width of the Card.
