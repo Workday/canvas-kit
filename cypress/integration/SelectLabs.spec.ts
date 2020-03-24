@@ -16,13 +16,17 @@ describe('Select', () => {
         h.stories.load('Labs|Select/React/Top Label', story);
       });
 
-      it('should pass accessibility checks', () => {
+      it('should not have any axe errors', () => {
         cy.checkA11y();
       });
 
       context('when the select button is clicked', () => {
         beforeEach(() => {
           h.selectLabs.getButton().click();
+        });
+
+        it('should not have any axe errors', () => {
+          cy.checkA11y();
         });
 
         context('the select button', () => {
@@ -93,6 +97,10 @@ describe('Select', () => {
         context('when the down key is pressed', () => {
           beforeEach(() => {
             h.selectLabs.getButton().type('{downarrow}');
+          });
+
+          it('should not have any axe errors', () => {
+            cy.checkA11y();
           });
 
           context('the listbox', () => {
