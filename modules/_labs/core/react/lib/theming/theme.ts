@@ -22,7 +22,7 @@ export const defaultCanvasTheme: CanvasTheme = {
     },
     error: {
       lightest: colors.cinnamon100,
-      light: colors.cinnamon300,
+      light: colors.cinnamon200,
       main: colors.cinnamon500,
       dark: colors.cinnamon600,
       darkest: '#80160E',

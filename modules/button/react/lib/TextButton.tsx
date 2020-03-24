@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {type} from '@workday/canvas-kit-labs-react-core';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import {Themeable, CanvasTheme, useTheme, type} from '@workday/canvas-kit-labs-react-core';
+import {themedFocusRing} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TextButtonVariant, ButtonIconPosition, ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
-export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Themeable {
   /**
    * The variant of the TextButton.
    * @default TextButtonVariant.Default
@@ -36,31 +36,31 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   allCaps?: boolean;
 }
 
-const getTextButtonColors = (variant: TextButtonVariant): ButtonColors => {
+const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): ButtonColors => {
   switch (variant) {
     case TextButtonVariant.Default:
     default:
       return {
         default: {
-          icon: colors.blueberry400,
-          label: colors.blueberry400,
+          icon: theme.palette.primary.main,
+          label: theme.palette.primary.main,
         },
         hover: {
-          icon: colors.blueberry500,
-          label: colors.blueberry500,
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
         },
         active: {
-          icon: colors.blueberry500,
-          label: colors.blueberry500,
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
         },
         focus: {
-          icon: colors.blueberry500,
-          label: colors.blueberry500,
-          focusRing: focusRing(2, 0),
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
+          focusRing: themedFocusRing(theme),
         },
         disabled: {
-          icon: 'rgba(8, 117, 225, 0.5)',
-          label: 'rgba(8, 117, 225, 0.5)',
+          icon: theme.palette.primary.light,
+          label: theme.palette.primary.light,
         },
       };
     case TextButtonVariant.Inverse:
@@ -72,7 +72,7 @@ const getTextButtonColors = (variant: TextButtonVariant): ButtonColors => {
         hover: {},
         active: {},
         focus: {
-          focusRing: focusRing(2, 0, true, false, undefined, 'currentColor'),
+          focusRing: themedFocusRing(theme, {outerColor: 'currentColor'}),
         },
         disabled: {
           icon: 'rgba(255, 255, 255, 0.5)',
@@ -91,6 +91,7 @@ const containerStyles = {
 };
 
 const TextButton = ({
+  theme = useTheme(),
   variant = TextButtonVariant.Default,
   size = 'medium',
   iconPosition = ButtonIconPosition.Left,
@@ -116,7 +117,7 @@ const TextButton = ({
 
   return (
     <ButtonContainer
-      colors={getTextButtonColors(variant)}
+      colors={getTextButtonColors(variant, theme)}
       ref={buttonRef}
       size={size}
       extraStyles={allContainerStyles}

@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {colors} from '@workday/canvas-kit-react-core';
+import {Themeable, CanvasTheme, useTheme} from '@workday/canvas-kit-labs-react-core';
 import {ButtonColors, ButtonSize} from './types';
 import {ButtonContainer, ButtonLabel} from './parts';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 
 export interface DeleteButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    Themeable,
     GrowthBehavior {
   /**
    * The size of the Button.
@@ -18,27 +19,33 @@ export interface DeleteButtonProps
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const getDeleteButtonColors = (): ButtonColors => ({
+const getDeleteButtonColors = (theme: CanvasTheme): ButtonColors => ({
   default: {
-    background: colors.cinnamon500,
-    label: colors.frenchVanilla100,
+    background: theme.palette.error.main,
+    label: theme.palette.error.contrast,
   },
   hover: {
-    background: colors.cinnamon600,
+    background: theme.palette.error.dark,
   },
   active: {
-    background: '#80160E',
+    background: theme.palette.error.darkest,
   },
   focus: {
-    background: colors.cinnamon500,
+    background: theme.palette.error.main,
   },
   disabled: {
-    background: colors.cinnamon200,
+    background: theme.palette.error.light,
   },
 });
 
-const DeleteButton = ({size = 'medium', buttonRef, children, ...elemProps}: DeleteButtonProps) => (
-  <ButtonContainer colors={getDeleteButtonColors()} size={size} ref={buttonRef} {...elemProps}>
+const DeleteButton = ({
+  theme = useTheme(),
+  size = 'medium',
+  buttonRef,
+  children,
+  ...elemProps
+}: DeleteButtonProps) => (
+  <ButtonContainer colors={getDeleteButtonColors(theme)} size={size} ref={buttonRef} {...elemProps}>
     <ButtonLabel>{children}</ButtonLabel>
   </ButtonContainer>
 );

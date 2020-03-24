@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Themeable, CanvasTheme, useTheme} from '@workday/canvas-kit-labs-react-core';
 import {colors} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -7,6 +8,7 @@ import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 
 export interface HighlightButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    Themeable,
     GrowthBehavior {
   /**
    * The size of the HighlightButton.
@@ -23,30 +25,30 @@ export interface HighlightButtonProps
   icon?: CanvasSystemIcon;
 }
 
-const getHighlightButtonColors = (): ButtonColors => ({
+const getHighlightButtonColors = (theme: CanvasTheme): ButtonColors => ({
   default: {
     background: colors.soap200,
     border: colors.soap200,
-    icon: colors.blueberry500,
-    label: colors.blueberry500,
+    icon: theme.palette.primary.dark,
+    label: theme.palette.primary.dark,
   },
   hover: {
     background: colors.soap400,
     border: 'transparent',
-    icon: colors.blueberry500,
-    label: colors.blueberry500,
+    icon: theme.palette.primary.dark,
+    label: theme.palette.primary.dark,
   },
   active: {
     background: colors.soap500,
     border: 'transparent',
-    icon: colors.blueberry500,
-    label: colors.blueberry500,
+    icon: theme.palette.primary.dark,
+    label: theme.palette.primary.dark,
   },
   focus: {
     background: colors.soap200,
     border: 'transparent',
-    icon: colors.blueberry500,
-    label: colors.blueberry500,
+    icon: theme.palette.primary.dark,
+    label: theme.palette.primary.dark,
   },
   disabled: {
     background: colors.soap100,
@@ -57,13 +59,19 @@ const getHighlightButtonColors = (): ButtonColors => ({
 });
 
 const HighlightButton = ({
+  theme = useTheme(),
   size = 'medium',
   buttonRef,
   icon,
   children,
   ...elemProps
 }: HighlightButtonProps) => (
-  <ButtonContainer colors={getHighlightButtonColors()} size={size} ref={buttonRef} {...elemProps}>
+  <ButtonContainer
+    colors={getHighlightButtonColors(theme)}
+    size={size}
+    ref={buttonRef}
+    {...elemProps}
+  >
     {icon && <ButtonLabelIcon size={size} icon={icon} />}
     <ButtonLabel>{children}</ButtonLabel>
   </ButtonContainer>
