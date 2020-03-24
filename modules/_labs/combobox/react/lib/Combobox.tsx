@@ -161,27 +161,15 @@ const Combobox = ({
   ...elemProps
 }: ComboboxProps) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
   const [showingAutocomplete, setShowingAutocomplete] = useState(false);
   const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState<number | null>(null);
 
-  const inputRef: React.RefObject<HTMLInputElement> = (typeof children.props.inputRef !== 'function' && children.props.inputRef) || useRef(null);
+  const inputRef: React.RefObject<HTMLInputElement> =
+    (typeof children.props.inputRef !== 'function' && children.props.inputRef) || useRef(null);
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
   const [randomComponentId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
 
   const componentId = id || randomComponentId;
-
-  useEffect(() => {
-    if (initialValue) {
-      setInputValue(initialValue);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (autocompleteItems) {
-      setShowingAutocomplete(autocompleteItems.length > 0 && isFocused);
-    }
-  }, [autocompleteItems, isFocused, value]);
 
   const setInputValue = (newValue: string) => {
     _setValue(newValue);
@@ -212,6 +200,19 @@ const Combobox = ({
       inputDomElement.dispatchEvent(event);
     }
   };
+  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
+
+  useEffect(() => {
+    if (initialValue) {
+      setInputValue(initialValue);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (autocompleteItems) {
+      setShowingAutocomplete(autocompleteItems.length > 0 && isFocused);
+    }
+  }, [autocompleteItems, isFocused, value]);
 
   const handleAutocompleteClick = (
     event: React.SyntheticEvent,
