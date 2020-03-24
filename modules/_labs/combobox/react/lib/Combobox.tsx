@@ -144,7 +144,7 @@ const isValidSingleChild = (child: React.ReactNode) => {
   return React.isValidElement(child) && React.Children.only(child);
 };
 
-const Combobox: React.FC<ComboboxProps> = ({
+const Combobox = ({
   autocompleteItems,
   children,
   grow,
@@ -159,13 +159,13 @@ const Combobox: React.FC<ComboboxProps> = ({
   getStatusText = buildStatusString,
   id,
   ...elemProps
-}) => {
+}: ComboboxProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
   const [showingAutocomplete, setShowingAutocomplete] = useState(false);
   const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState<number | null>(null);
 
-  const inputRef: React.RefObject<HTMLInputElement> = children.props.inputRef || useRef(null);
+  const inputRef: React.RefObject<HTMLInputElement> = (typeof children.props.inputRef !== 'function' && children.props.inputRef) || useRef(null);
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
   const [randomComponentId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
 
