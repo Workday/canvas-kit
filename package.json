@@ -47,8 +47,6 @@
     "@typescript-eslint/parser": "^2.3.2",
     "autoprefixer": "^9.5.0",
     "axe-core": "^3.4.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-emotion": "^10.0.29",
