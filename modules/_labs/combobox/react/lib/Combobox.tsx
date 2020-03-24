@@ -171,6 +171,7 @@ const Combobox = ({
 
   const componentId = id || randomComponentId;
 
+  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
   const setInputValue = (newValue: string) => {
     _setValue(newValue);
     const inputDomElement = inputRef.current;
@@ -200,7 +201,6 @@ const Combobox = ({
       inputDomElement.dispatchEvent(event);
     }
   };
-  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
 
   useEffect(() => {
     if (initialValue) {
