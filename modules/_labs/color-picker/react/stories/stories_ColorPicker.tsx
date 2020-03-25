@@ -1,15 +1,14 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
-import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
-import {colors, type} from '@workday/canvas-kit-react-core';
+import {colors} from '@workday/canvas-kit-react-core';
 import {Popper} from '@workday/canvas-kit-react-common';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
-import {ColorPicker, Swatch} from '../index';
+import {ColorPicker} from '../index';
 import README from '../README.md';
 
 storiesOf('Labs|Color Picker/React', module)
