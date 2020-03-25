@@ -474,7 +474,7 @@ Default: `'Search'`
 
 ---
 
-#### `clearButtonLabel: string`
+#### `clearButtonAriaLabel: string`
 
 > Screenreader Label for clear button
 
