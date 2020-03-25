@@ -59,12 +59,12 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label text for the SearchBar submit button.
    * @default Search
    */
-  submitLabel?: string;
+  submitLabel: string;
   /**
    * The screenreader label text for the SearchBar clear button.
    * @default Reset Search Form
    */
-  clearButtonLabel?: string;
+  clearButtonAriaLabel?: string;
   /**
    * The screenreader label text for the button to open the collapsed SearchBar.
    * @default Open Search
@@ -154,7 +154,7 @@ const SearchContainer = styled('div')({
 });
 
 const SearchCombobox = styled(Combobox)({
-  width: '100%',
+  width: `100%`,
 });
 
 const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isHidden: boolean}>(
@@ -272,6 +272,14 @@ const SearchInput = styled(TextInput)<
 
 export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   static Theme = SearchTheme;
+  static defaultProps = {
+    placeholder: 'Search',
+    inputLabel: 'Search',
+    submitLabel: 'Search',
+    openButtonLabel: 'Open Search',
+    closeButtonLabel: 'Cancel',
+    showClearButton: true,
+  };
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
@@ -377,14 +385,14 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       autocompleteItems,
       initialValue,
       searchTheme,
-      placeholder = 'Search',
       rightAlign,
+      clearButtonAriaLabel = 'Reset Search Form',
+      placeholder = 'Search',
       inputLabel = 'Search',
       submitLabel = 'Search',
-      showClearButton = true,
-      clearButtonLabel = 'Reset Search Form',
-      closeButtonLabel = 'Cancel',
       openButtonLabel = 'Open Search',
+      closeButtonLabel = 'Cancel',
+      showClearButton = true,
       ...elemProps
     } = this.props;
 
@@ -437,7 +445,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               showClearButton={!isCollapsed && showClearButton}
-              clearButtonAriaLabel={clearButtonLabel}
+              clearButtonAriaLabel={clearButtonAriaLabel}
               labelId={this.labelId}
             >
               <SearchInput
