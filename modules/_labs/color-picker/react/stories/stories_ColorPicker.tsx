@@ -6,7 +6,8 @@ import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import {colors, type} from '@workday/canvas-kit-react-core';
 import {Popper} from '@workday/canvas-kit-react-common';
-import {Button} from '@workday/canvas-kit-react-button';
+import {IconButton} from '@workday/canvas-kit-react-button';
+import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker, Swatch} from '../index';
 import README from '../README.md';
 
@@ -50,10 +51,14 @@ storiesOf('Labs|Color Picker/React', module)
 
     return (
       <>
-        <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={toggleOpen}>
-          Toggle Color Picker
-        </Button>
-        <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current!}>
+        <IconButton
+          icon={bgColorIcon}
+          aria-label="Select Background Color"
+          buttonRef={buttonRef}
+          variant={IconButton.Variant.SquareFilled}
+          onClick={toggleOpen}
+        />
+        <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current!}>
           <ColorPicker
             resetColor={colors.blueberry400}
             resetLabel={'Reset'}
