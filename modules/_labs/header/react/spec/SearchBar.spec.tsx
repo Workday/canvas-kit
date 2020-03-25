@@ -50,7 +50,7 @@ describe('Header Search', () => {
       <SearchBar
         onSubmit={cb}
         initialValue={text}
-        clearButtonLabel={label}
+        clearButtonAriaLabel={label}
         inputLabel={inputLabelText}
       />
     );

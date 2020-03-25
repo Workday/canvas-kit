@@ -116,7 +116,7 @@ describe('Combobox', () => {
     const clearLabel = 'clearLabel';
     const text = 'initial text';
     const {findByPlaceholderText, findByLabelText} = render(
-      <Combobox showClearButton={true} clearButtonLabel={clearLabel} initialValue={text}>
+      <Combobox showClearButton={true} clearButtonAriaLabel={clearLabel} initialValue={text}>
         <TextInput placeholder={placeholderText} />
       </Combobox>
     );
