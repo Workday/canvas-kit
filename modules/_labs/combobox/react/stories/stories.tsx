@@ -1,5 +1,5 @@
 /// <reference path="../../../../../typings.d.ts" />
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
@@ -21,30 +21,41 @@ const autocompleteResult = (textModifier: number): React.ReactElement<MenuItemPr
   </MenuItem>
 );
 
-const simpleAutoComplete = (count: number, total = 5) => (
+const simpleAutoComplete = (count: number, total = 5) =>
   Array.apply(null, Array(count))
     .map((_: React.ReactElement, i: number) => autocompleteResult(i))
-    .splice(0, total)
-);
+    .splice(0, total);
 
 const groupOfResults = (count: number): ComboBoxMenuItemGroup => ({
-  header: <MenuItem><strong>Group</strong></MenuItem>,
-  items: simpleAutoComplete(count, 2)
+  header: (
+    <MenuItem>
+      <strong>Group</strong>
+    </MenuItem>
+  ),
+  items: simpleAutoComplete(count, 2),
 });
 
-const Autocomplete: React.FC<Omit<ComboboxProps, 'children'> & {group?: boolean}> = ({showClearButton, group, ...props}) => {
-  const [currentText, setCurrentText] = useState('')
+const Autocomplete: React.FC<Omit<ComboboxProps, 'children'> & {group?: boolean}> = ({
+  showClearButton,
+  group,
+  ...props
+}) => {
+  const [currentText, setCurrentText] = useState('');
 
   const autocompleteCallback = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setCurrentText(event.target.value);
   };
 
-  const textLength = currentText.length
-  const groupLength = Math.floor(textLength / 2)
+  const textLength = currentText.length;
+  const groupLength = Math.floor(textLength / 2);
 
   return (
     <Combobox
-      autocompleteItems={group ? [groupOfResults(groupLength), groupOfResults(Math.min(1, groupLength))] : simpleAutoComplete(textLength)}
+      autocompleteItems={
+        group
+          ? [groupOfResults(groupLength), groupOfResults(Math.min(1, groupLength))]
+          : simpleAutoComplete(textLength)
+      }
       onChange={autocompleteCallback}
       showClearButton={showClearButton == null ? true : showClearButton}
       labelId="autocomplete-123"
@@ -56,7 +67,7 @@ const Autocomplete: React.FC<Omit<ComboboxProps, 'children'> & {group?: boolean}
       <TextInput autoFocus placeholder="Autocomplete" />
     </Combobox>
   );
-}
+};
 
 storiesOf('Labs|Combobox/React', module)
   .addParameters({component: Combobox})
