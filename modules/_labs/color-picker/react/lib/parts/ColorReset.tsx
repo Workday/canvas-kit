@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 
-import {Swatch} from './Swatch';
+import {ColorSwatch} from '@workday/canvas-kit-react-color-picker/lib/parts/ColorSwatch';
 
 export interface ResetButtonProps {
   label: string;
@@ -51,7 +51,7 @@ export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
 
   return (
     <Container data-testid="color-picker-reset" onClick={handleResetColor}>
-      <Swatch color={resetColor} isSelected={false} />
+      <ColorSwatch color={resetColor} />
       <Label>{label}</Label>
     </Container>
   );
