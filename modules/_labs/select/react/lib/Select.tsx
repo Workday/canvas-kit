@@ -586,18 +586,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   }
 
-  handleSelectMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    // It's important that we cancel the default handling of the event here.
-    // Otherwise, the menu will be toggled on, focused, and then IMMEDIATELY
-    // blurred (and therefore disappear) because the default handling of the
-    // mousedown event assigns focus right back to the button.
+  handleSelectClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    // Cancel default handling of the event to ensure we maintain
+    // control of focus
     event.preventDefault();
 
-    // Only toggle the menu if the the left button was clicked
-    // (ignore right-clicks)
-    if (event.nativeEvent.which === 1) {
-      this.toggleMenu(this.state.isMenuHidden);
-    }
+    this.toggleMenu(this.state.isMenuHidden);
+  };
+
+  handleSelectMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    // Cancel default handling of the event to ensure we maintain
+    // control of focus
+    event.preventDefault();
   };
 
   handleOptionSelection = (index: number): void => {
@@ -742,6 +742,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           error={error}
           grow={grow}
           isMenuHidden={isMenuHidden}
+          onClick={this.handleSelectClick}
           onKeyDown={this.handleKeyboardShortcuts}
           onMouseDown={this.handleSelectMouseDown}
           ref={this.buttonRef}
