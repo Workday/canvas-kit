@@ -20,7 +20,7 @@ export interface SystemIconCircleProps {
    * The background color of the SystemIconCircle from `@workday/canvas-colors-web`.
    * @default colors.soap300
    */
-  background: string;
+  background?: string;
   /**
    * The icon to display from `@workday/canvas-accent-icons-web`.
    */
@@ -29,7 +29,7 @@ export interface SystemIconCircleProps {
    * The size of the SystemIconCircle.
    * @default SystemIconCircleSize.l
    */
-  size: SystemIconCircleSize | number;
+  size?: SystemIconCircleSize | number;
 }
 
 const Container = styled('div', {

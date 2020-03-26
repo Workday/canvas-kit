@@ -2,8 +2,7 @@ import * as React from 'react';
 import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react-core';
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/core';
-import Icon, {IconProps} from './Icon';
-import {SpanProps} from './types';
+import Icon from './Icon';
 
 export interface AppletIconStyles {
   /**

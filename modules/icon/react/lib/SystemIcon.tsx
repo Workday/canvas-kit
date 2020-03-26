@@ -2,7 +2,7 @@ import * as React from 'react';
 import {iconColors} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/core';
-import Icon from './Icon';
+import Icon, {IconProps} from './Icon';
 
 export interface SystemIconStyles {
   /**
@@ -43,7 +43,7 @@ export interface SystemIconStyles {
   fillHover?: string;
 }
 
-export interface SystemIconProps extends SystemIconStyles {
+export interface SystemIconProps extends SystemIconStyles, Omit<IconProps, 'src' | 'type'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
