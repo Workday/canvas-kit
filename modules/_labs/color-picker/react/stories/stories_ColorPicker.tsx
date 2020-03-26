@@ -64,10 +64,6 @@ storiesOf('Labs|Color Picker/React', module)
     const inputRef = React.useRef(null);
     const popupRef = React.useRef(null);
 
-    const toggleOpen = () => {
-      setOpen(!isOpen);
-    };
-
     const resetColor = () => {
       setColor(defaultColor);
       setColorInputValue(defaultColor);
@@ -95,7 +91,8 @@ storiesOf('Labs|Color Picker/React', module)
       colors.blackPepper600,
     ];
 
-    const onBlur = e => {
+    const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      // @ts-ignore
       if (!popupRef.current || !popupRef.current.popper.popper.contains(e.relatedTarget)) {
         setOpen(false);
       }
