@@ -9,7 +9,7 @@ import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react-text-input';
 import uuid from 'uuid/v4';
-import flatten from 'lodash/flatten';
+import flatten from 'lodash.flatten';
 import AutocompleteList from './AutocompleteList';
 import Status from './Status';
 
