@@ -55,7 +55,7 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   shouldClose?: boolean;
 }
 
-const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
+const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused' | 'shouldClose'>>(
   {
     ...type.body2,
     padding: `${spacing.xxs} ${spacing.s}`,
@@ -176,11 +176,11 @@ const setIconProps = (
 };
 
 export default class MenuItem extends React.Component<MenuItemProps> {
-  // static defaultProps = {
-  //   shouldClose: true,
-  //   role: 'menuitem',
-  // };
-
+  // TODO If we destructure props, shouldClose will be undefined in https://github.com/Workday/canvas-kit/blob/f6d4d29e9bb2eb2af0b204e6f4ce2e5ed5a98e57/modules/_labs/menu/react/lib/Menu.tsx#L259,
+  static defaultProps = {
+    shouldClose: true,
+    role: 'menuitem',
+  };
   render(): React.ReactNode {
     const {
       onClick,
@@ -190,9 +190,8 @@ export default class MenuItem extends React.Component<MenuItemProps> {
       secondaryIcon,
       hasDivider,
       isDisabled,
-      shouldClose = true,
-      role = 'menuitem',
       isFocused,
+      role,
       ...elemProps
     } = this.props;
 
