@@ -62,14 +62,14 @@ const Option = styled('li')<SelectOptionProps>(
       return {
         color: colors.licorice100,
       };
-    } else if (selected) {
-      return {
-        backgroundColor: colors.blueberry100,
-      };
     } else if (focused) {
       return {
         backgroundColor: commonColors.focusBackground,
         color: typeColors.inverse,
+      };
+    } else if (selected) {
+      return {
+        backgroundColor: colors.blueberry100,
       };
     } else if (!suppressed) {
       return {
