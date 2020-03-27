@@ -632,6 +632,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       SelectOptionProps
     >[];
     const numOptions = childrenArray.length;
+
+    const {focusedOptionIndex, isMenuHidden} = this.state;
+
     let isShortcut = false;
     let nextFocusedIndex = 0;
 
@@ -646,11 +649,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         case 'ArrowDown':
         case 'Down': // IE/Edge specific value
           isShortcut = true;
-          if (this.state.isMenuHidden) {
+          if (isMenuHidden) {
             this.toggleMenu(true);
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
-            let nextIndex = this.state.focusedOptionIndex + direction;
+            let nextIndex = focusedOptionIndex + direction;
             while (
               nextIndex < numOptions &&
               nextIndex >= 0 &&
@@ -674,18 +677,26 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         case 'Spacebar':
         case ' ':
           isShortcut = true;
-          // If the user is in the middle of typing a string, treat
-          // space key as type-ahead rather than option selection
-          if (this.keysSoFar !== '') {
-            this.handleKeyboardTypeAhead(' ', numOptions);
+          if (isMenuHidden) {
+            this.toggleMenu(true);
           } else {
-            this.handleOptionSelection(this.state.focusedOptionIndex);
+            // If the user is in the middle of typing a string, treat
+            // space key as type-ahead rather than option selection
+            if (this.keysSoFar !== '') {
+              this.handleKeyboardTypeAhead(' ', numOptions);
+            } else {
+              this.handleOptionSelection(focusedOptionIndex);
+            }
           }
           break;
 
         case 'Enter':
           isShortcut = true;
-          this.handleOptionSelection(this.state.focusedOptionIndex);
+          if (isMenuHidden) {
+            this.toggleMenu(true);
+          } else {
+            this.handleOptionSelection(focusedOptionIndex);
+          }
           break;
 
         default:
