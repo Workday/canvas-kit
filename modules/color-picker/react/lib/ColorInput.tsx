@@ -1,17 +1,9 @@
-/** @jsx jsx */
-import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import {styled, Themeable, ContentDirection} from '@workday/canvas-kit-labs-react-core';
-import {
-  pickForegroundColor,
-  expandHex,
-  GrowthBehavior,
-  ErrorType,
-} from '@workday/canvas-kit-react-common';
-import {colors, borderRadius, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
-import {checkSmallIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {expandHex, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react-common';
+import {colors, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
+import {ColorSwatch} from './parts/ColorSwatch';
 
 export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavior {
   /**
@@ -43,9 +35,6 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
   onValidColorChange?: (color: string) => void;
 }
 
-const swatchTileSpacing = spacing.xxs;
-const swatchTileSize = 20;
-const swatchCheckIconSpacing = 8;
 const colorInputWidth = 116;
 
 const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'grow'>>(
@@ -105,25 +94,13 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
   })
 );
 
-const SwatchTile = styled('div')({
+const SwatchTile = styled(ColorSwatch)({
   position: 'absolute',
-  cursor: 'pointer',
-  height: swatchTileSize,
-  width: swatchTileSize,
-  top: spacing.zero,
-  bottom: spacing.zero,
-  left: swatchTileSpacing,
-  margin: 'auto',
+  top: 0,
+  left: spacing.xxs,
   marginTop: '10px', // Fix vertical alignment on IE11
   boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.25)',
   pointerEvents: 'none',
-  borderRadius: borderRadius.s,
-});
-
-const swatchCheckIcon = css({
-  position: 'absolute',
-  left: 6,
-  top: swatchCheckIconSpacing,
 });
 
 export default class ColorInput extends React.Component<ColorInputProps> {
@@ -165,18 +142,9 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           {...elemProps}
         />
         <SwatchTile
-          style={{
-            backgroundColor: this.isValidHex(formattedValue) ? `#${formattedValue}` : '',
-          }}
+          showCheck={showCheck}
+          color={this.isValidHex(formattedValue) ? `#${formattedValue}` : ''}
         />
-        {showCheck && this.isValidHex(formattedValue) ? (
-          <SystemIcon
-            fill={pickForegroundColor(formattedValue)}
-            fillHover={pickForegroundColor(formattedValue)}
-            css={swatchCheckIcon}
-            icon={checkSmallIcon}
-          />
-        ) : null}
         <PoundSignPrefix disabled={disabled}>#</PoundSignPrefix>
       </ColorInputContainer>
     );
