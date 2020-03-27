@@ -40,7 +40,7 @@ describe('ColorInput', () => {
       test('should render a ColorInput with a value and the value as a background', () => {
         const {container} = render(<ColorInput value={value} />);
 
-        expect(container.querySelector('div div div[class^="css"]')).toHaveStyle(
+        expect(container.querySelector('div div input + div')).toHaveStyle(
           'background-color: #eee;'
         );
       });
