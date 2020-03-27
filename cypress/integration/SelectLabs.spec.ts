@@ -25,37 +25,7 @@ describe('Select', () => {
           h.selectLabs.getButton().click();
         });
 
-        it('should not have any axe errors', () => {
-          cy.checkA11y();
-        });
-
-        context('the select button', () => {
-          it('should have an aria-expanded attribute set to "true"', () => {
-            h.selectLabs.getButton().should('have.attr', 'aria-expanded', 'true');
-          });
-        });
-
-        context('the listbox', () => {
-          it('should be visible', () => {
-            h.selectLabs.getListbox().should('be.visible');
-          });
-
-          it('should have focus', () => {
-            h.selectLabs.getListbox().should('be.focused');
-          });
-
-          it('should have an aria-activedescendant attribute with the same value as the id of the first option', () => {
-            h.selectLabs.getListbox().should($listbox => {
-              h.selectLabs.assertADMatchesOption($listbox, 0);
-            });
-          });
-        });
-
-        context('the first option', () => {
-          it('should have an aria-selected attribute set to "true"', () => {
-            h.selectLabs.getOption(0).should('have.attr', 'aria-selected', 'true');
-          });
-        });
+        h.selectLabs.testOpenListboxInitialState();
 
         context(
           `when the "${clickedLabel}" option (with the value "${clickedValue}") is clicked`,
@@ -94,32 +64,14 @@ describe('Select', () => {
           h.selectLabs.getButton().focus();
         });
 
-        context('when the down key is pressed', () => {
+        context('when the down arrow key is pressed', () => {
           beforeEach(() => {
             h.selectLabs.getButton().type('{downarrow}');
           });
 
-          it('should not have any axe errors', () => {
-            cy.checkA11y();
-          });
+          h.selectLabs.testOpenListboxInitialState();
 
-          context('the listbox', () => {
-            it('should be visible', () => {
-              h.selectLabs.getListbox().should('be.visible');
-            });
-
-            it('should have focus', () => {
-              h.selectLabs.getListbox().should('be.focused');
-            });
-
-            it('should have an aria-activedescendant attribute with the same value as the id of the first option', () => {
-              h.selectLabs.getListbox().should($listbox => {
-                h.selectLabs.assertADMatchesOption($listbox, 0);
-              });
-            });
-          });
-
-          context('when the down key is pressed for a second time', () => {
+          context('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
               h.selectLabs.getListbox().type('{downarrow}');
             });
@@ -132,7 +84,7 @@ describe('Select', () => {
               });
             });
 
-            context('when the down key is pressed for a third time', () => {
+            context('when the down arrow key is pressed for a third time', () => {
               beforeEach(() => {
                 h.selectLabs.getListbox().type('{downarrow}');
               });
@@ -173,7 +125,37 @@ describe('Select', () => {
                 });
               });
             });
+
+            context('when the up arrow key is pressed', () => {
+              beforeEach(() => {
+                h.selectLabs.getListbox().type('{uparrow}');
+              });
+
+              context('the listbox', () => {
+                it('should have an aria-activedescendant attribute with the same value as the id of the first option', () => {
+                  h.selectLabs.getListbox().should($listbox => {
+                    h.selectLabs.assertADMatchesOption($listbox, 0);
+                  });
+                });
+              });
+            });
           });
+        });
+
+        context('when the enter key is pressed', () => {
+          beforeEach(() => {
+            h.selectLabs.getButton().type('{enter}');
+          });
+
+          h.selectLabs.testOpenListboxInitialState();
+        });
+
+        context('when the space key is pressed', () => {
+          beforeEach(() => {
+            h.selectLabs.getButton().type(' ');
+          });
+
+          h.selectLabs.testOpenListboxInitialState();
         });
       });
     });

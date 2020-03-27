@@ -49,3 +49,45 @@ export const assertADMatchesOption = ($listbox: JQuery, optionIndex: number): vo
 
   expect(listboxAD).to.equal(optionId);
 };
+
+/**
+ * Tests the initial state of an unmodified Select (where no selection has been made) with a freshly opened listbox.
+ */
+export const testOpenListboxInitialState = (): void => {
+  context(
+    'the menu should be visible and focused, and all accessibility attributes should be properly set',
+    () => {
+      it('should not have any axe errors', () => {
+        cy.checkA11y();
+      });
+
+      context('the select button', () => {
+        it('should have an aria-expanded attribute set to "true"', () => {
+          getButton().should('have.attr', 'aria-expanded', 'true');
+        });
+      });
+
+      context('the listbox', () => {
+        it('should be visible', () => {
+          getListbox().should('be.visible');
+        });
+
+        it('should have focus', () => {
+          getListbox().should('be.focused');
+        });
+
+        it('should have an aria-activedescendant attribute with the same value as the id of the first option', () => {
+          getListbox().should($listbox => {
+            assertADMatchesOption($listbox, 0);
+          });
+        });
+      });
+
+      context('the first option', () => {
+        it('should have an aria-selected attribute set to "true"', () => {
+          getOption(0).should('have.attr', 'aria-selected', 'true');
+        });
+      });
+    }
+  );
+};
