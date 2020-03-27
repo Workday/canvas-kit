@@ -8,6 +8,7 @@ import {HeaderHeight, HeaderTheme, HeaderVariant} from './shared/types';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
 import {justifyIcon} from '@workday/canvas-system-icons-web';
+import {PickRequired} from '@workday/canvas-kit-react-common';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -58,7 +59,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const childrenSpacing = spacing.s;
 
-const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
+const HeaderShell = styled('div')<PickRequired<HeaderProps, 'themeColor', 'variant'>>(
   {
     display: 'flex',
     alignItems: 'center',
@@ -68,7 +69,7 @@ const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
     MozOsxFontSmoothing: 'grayscale',
     position: 'relative',
   },
-  ({variant, themeColor = HeaderTheme.White}) => ({
+  ({variant, themeColor}) => ({
     // Only the variant Full has a large header, all the other one (Dub, Global) have a small header height
     height: variant === HeaderVariant.Full ? HeaderHeight.Large : HeaderHeight.Small,
     background: themes[themeColor].background,
@@ -98,7 +99,7 @@ const BrandLink = styled('a')({
   },
 });
 
-const navStyle = ({themeColor = HeaderTheme.White}: Pick<HeaderProps, 'themeColor'>) => {
+const navStyle = ({themeColor}: PickRequired<HeaderProps, 'themeColor', 'css'>) => {
   const theme = themes[themeColor];
 
   return css({
@@ -179,7 +180,9 @@ const navStyle = ({themeColor = HeaderTheme.White}: Pick<HeaderProps, 'themeColo
   });
 };
 
-const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed'>>(
+const ChildrenSlot = styled('div')<
+  PickRequired<HeaderProps, 'themeColor', 'isCollapsed' | 'centeredNav'>
+>(
   {
     marginRight: spacing.m,
     // TODO: remove this when we get real icon buttons
@@ -194,7 +197,7 @@ const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor
       marginLeft: childrenSpacing,
     },
   },
-  ({centeredNav = false, isCollapsed}) => ({
+  ({centeredNav, isCollapsed}) => ({
     '> *:not(.canvas-header--menu-icon)': {
       display: isCollapsed ? 'none' : 'flex',
     },
@@ -210,7 +213,7 @@ class Brand extends React.Component<
   Pick<HeaderProps, 'variant' | 'brand' | 'title' | 'themeColor'>
 > {
   render() {
-    const {variant, brand, themeColor = HeaderTheme.White, title} = this.props;
+    const {variant = HeaderVariant.Dub, brand, themeColor = HeaderTheme.White, title} = this.props;
 
     switch (variant) {
       case HeaderVariant.Global: {

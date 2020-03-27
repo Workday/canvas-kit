@@ -92,12 +92,12 @@ export default class Drawer extends React.Component<DrawerProps, {}> {
 
   public render() {
     const {
-      children,
       padding = spacing.s,
       width = 360,
       openDirection = DrawerDirection.Right,
-      header,
       showDropShadow = false,
+      children,
+      header,
       role,
       ...elemProps
     } = this.props;

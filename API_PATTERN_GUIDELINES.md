@@ -235,8 +235,11 @@ foo();
 
 #### Default Props
 
-- We prefer to colocate our default props. If you're consuming our components, `defaultProps` does
-  not work if you're renaming our component on import.
+- Use `defaultProps` whenever you find yourself checking for the existence of something before
+  executing branching logic. It significantly reduces conditionals, facilitating easier testing and
+  less bugs.
+- We prefer to colocate our default props and destructure them which allows consumers to rename our
+  components on import.
 - Note: If you assign a default value to a prop, make sure to make the prop as optional in the
   interface.
 
@@ -257,11 +260,7 @@ const someInterface {
    */
   value?: string;
 }
-.
-.
-.
-.
-
+//...
 const {checked = false, disabled = false, value} = this.props;
 ```
 

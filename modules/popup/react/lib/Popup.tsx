@@ -2,11 +2,14 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import uuid from 'uuid/v4';
-
 import Card from '@workday/canvas-kit-react-card';
 import {IconButton, IconButtonSize} from '@workday/canvas-kit-react-button';
 import {CanvasDepthValue, spacing, depth as depthValues} from '@workday/canvas-kit-react-core';
-import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
+import {
+  TransformOrigin,
+  getTranslateFromOrigin,
+  PickRequired,
+} from '@workday/canvas-kit-react-common';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export enum PopupPadding {
@@ -77,13 +80,13 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   `;
 };
 
-const Container = styled('div')<Pick<PopupProps, 'transformOrigin' | 'width'>>(
+const Container = styled('div')<PickRequired<PopupProps, 'transformOrigin', 'width'>>(
   {
     position: 'relative',
     maxWidth: `calc(100vw - ${spacing.l})`,
   },
   ({width}) => width && {width},
-  ({transformOrigin = {horizontal: 'center', vertical: 'top'}}) => ({
+  ({transformOrigin}) => ({
     animation: popupAnimation(transformOrigin),
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
@@ -109,18 +112,18 @@ export default class Popup extends React.Component<PopupProps> {
 
   public render() {
     const {
-      handleClose,
-      padding = Popup.Padding.l,
-      width,
-      heading,
-      depth = depthValues[2],
-      closeIconSize = IconButton.Size.Medium,
       transformOrigin = {
         horizontal: 'center',
         vertical: 'top',
       } as const,
-      popupRef,
+      depth = depthValues[2],
       closeLabel = 'Close',
+      closeIconSize = IconButton.Size.Medium,
+      padding = Popup.Padding.l,
+      handleClose,
+      width,
+      heading,
+      popupRef,
       ...elemProps
     } = this.props;
 
