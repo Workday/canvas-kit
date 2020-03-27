@@ -10,7 +10,7 @@ describe('Select', () => {
   before(() => {
     h.stories.visit();
   });
-  ['Plain', 'Alert', 'Error'].forEach(story => {
+  ['Default', 'Alert', 'Error'].forEach(story => {
     context(`given the "${story}" story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Labs|Select/React/Top Label', story);

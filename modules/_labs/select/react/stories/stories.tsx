@@ -19,8 +19,8 @@ const hintId = 'error-desc-id';
 storiesOf('Labs|Select/React/Top Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
-  .add('Plain', () => (
-    <FormField label="Label" inputId="select-plain">
+  .add('Default', () => (
+    <FormField label="Label" inputId="select-default">
       {controlComponent(
         <Select name="contact">
           <SelectOption value="email" label="E-mail" />
@@ -133,14 +133,38 @@ storiesOf('Labs|Select/React/Top Label', module)
 
 storiesOf('Labs|Select/React/Left Label', module)
   .addDecorator(withReadme(README))
-  .add('Plain', () => (
-    <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-plain">
+  .add('Default', () => (
+    <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-default">
       {controlComponent(
         <Select name="contact">
           <SelectOption value="email" label="E-mail" />
           <SelectOption value="phone" label="Phone" />
           <SelectOption value="fax" label="Fax (disabled)" disabled={true} />
           <SelectOption value="mail" label="Mail" />
+        </Select>
+      )}
+    </FormField>
+  ))
+  .add('Scrollable', () => (
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="select-scrollable"
+    >
+      {controlComponent(
+        <Select name="location">
+          <SelectOption value="atlanta" label="Atlanta" />
+          <SelectOption value="austin" label="Austin" />
+          <SelectOption value="beaverton" label="Beaverton" />
+          <SelectOption value="boston" label="Boston" />
+          <SelectOption value="boulder" label="Boulder" />
+          <SelectOption value="chicago" label="Chicago" />
+          <SelectOption value="dallas" label="Dallas" />
+          <SelectOption value="denver" label="Denver" />
+          <SelectOption value="dublin" label="Dublin" />
+          <SelectOption value="pleasanton" label="Pleasanton" />
+          <SelectOption value="san-francisco" label="San Francisco" />
+          <SelectOption value="san-mateo" label="San Mateo" />
         </Select>
       )}
     </FormField>
