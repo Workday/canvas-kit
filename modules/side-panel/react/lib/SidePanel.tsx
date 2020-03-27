@@ -187,17 +187,17 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
 
   public render() {
     const {
-      header,
-      onToggleClick,
-      open,
-      openDirection,
-      padding,
-      breakpoint = 768,
-      onBreakpointChange,
-      openWidth = 300,
       backgroundColor = SidePanelBackgroundColor.White,
       openNavigationLabel = 'open navigation',
       closeNavigationLabel = 'close navigation',
+      openDirection = SidePanelOpenDirection.Left,
+      breakpoint = 768,
+      openWidth = 300,
+      header,
+      onToggleClick,
+      open,
+      padding,
+      onBreakpointChange,
       ...elemProps
     } = this.props;
 

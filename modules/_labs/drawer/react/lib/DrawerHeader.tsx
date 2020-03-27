@@ -74,12 +74,12 @@ const CloseButton = styled(IconButton)({
 export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
   public render() {
     const {
-      onClose,
-      title,
       closeIconLabel = 'Close',
       headerColor = colors.soap100,
       borderColor = colors.soap500,
       inverse = false,
+      onClose,
+      title,
       id,
       ...elemProps
     } = this.props;

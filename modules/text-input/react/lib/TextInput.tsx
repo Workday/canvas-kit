@@ -77,7 +77,7 @@ export default class TextInput extends React.Component<TextInputProps> {
 
   render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {grow, inputRef = React.createRef<HTMLInputElement>(), error, ...inputProps} = this.props;
+    const {inputRef = React.createRef<HTMLInputElement>(), grow, error, ...inputProps} = this.props;
 
     return <Input type="text" ref={inputRef} grow={grow} error={error} {...inputProps} />;
   }

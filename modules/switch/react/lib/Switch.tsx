@@ -26,6 +26,7 @@ export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLIn
   id?: string;
   /**
    * The function called when the Switch state changes.
+   * @default A uniquely generated id by uuid()
    */
   onChange?: (e: React.SyntheticEvent) => void;
   /**

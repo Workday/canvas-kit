@@ -38,11 +38,10 @@ export default class SkeletonText extends React.Component<SkeletonTextProps> {
       return null;
     }
 
-    return <TextContainer {...elemProps}>{this.createTextLines()}</TextContainer>;
+    return <TextContainer {...elemProps}>{this.createTextLines(lineCount)}</TextContainer>;
   }
 
-  private readonly createTextLines = () => {
-    const {lineCount = 2} = this.props;
+  private readonly createTextLines = (lineCount: number) => {
     const lines = [];
 
     const lineProps = {

@@ -272,14 +272,6 @@ const SearchInput = styled(TextInput)<
 
 export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   static Theme = SearchTheme;
-  static defaultProps = {
-    placeholder: 'Search',
-    inputLabel: 'Search',
-    submitLabel: 'Search',
-    openButtonLabel: 'Open Search',
-    closeButtonLabel: 'Cancel',
-    showClearButton: true,
-  };
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
@@ -378,6 +370,13 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   render() {
     const {
+      clearButtonAriaLabel = 'Reset Search Form',
+      placeholder = 'Search',
+      inputLabel = 'Search',
+      submitLabel = 'Search',
+      openButtonLabel = 'Open Search',
+      closeButtonLabel = 'Cancel',
+      showClearButton = true,
       grow,
       onSubmit,
       isCollapsed,
@@ -386,13 +385,6 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       initialValue,
       searchTheme,
       rightAlign,
-      clearButtonAriaLabel = 'Reset Search Form',
-      placeholder = 'Search',
-      inputLabel = 'Search',
-      submitLabel = 'Search',
-      openButtonLabel = 'Open Search',
-      closeButtonLabel = 'Cancel',
-      showClearButton = true,
       ...elemProps
     } = this.props;
 

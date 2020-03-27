@@ -22,7 +22,7 @@ export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInp
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying radio input element. This is required if `label` is defined as a non-empty string.
-   * @default A uniquely generated id
+   * @default A uniquely generated id by uuid()
    */
   id?: string;
   /**
