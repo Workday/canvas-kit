@@ -645,11 +645,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         case 'Up': // IE/Edge specific value
         case 'ArrowDown':
         case 'Down': // IE/Edge specific value
+          isShortcut = true;
           if (this.state.isMenuHidden) {
             this.toggleMenu(true);
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
-            isShortcut = true;
             let nextIndex = this.state.focusedOptionIndex + direction;
             while (
               nextIndex < numOptions &&
