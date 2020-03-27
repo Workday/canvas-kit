@@ -74,7 +74,6 @@ module.exports = {
     'no-use-before-define': ['warn', {functions: false, classes: true}],
     'no-var': 'error',
     'prefer-const': 'error',
-    'quote-props': ['error', 'as-needed', {keywords: true}],
     'space-before-function-paren': 'off',
     'react/jsx-no-bind': 'off', // Keep perf implications in mind, but was giving too many warnings and hurting readability
     curly: 'error',

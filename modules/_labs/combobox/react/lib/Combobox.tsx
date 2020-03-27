@@ -280,7 +280,7 @@ const Combobox = ({
       case 'ArrowUp':
       case 'Up': // IE/Edge specific value
         const upIndex =
-          selectedAutocompleteIndex != null ? selectedAutocompleteIndex - 1 : lastItem;
+          selectedAutocompleteIndex !== null ? selectedAutocompleteIndex - 1 : lastItem;
         nextIndex = upIndex < 0 ? lastItem : upIndex;
         event.stopPropagation();
         event.preventDefault();
@@ -289,7 +289,7 @@ const Combobox = ({
       case 'ArrowDown':
       case 'Down': // IE/Edge specific value
         const downIndex =
-          selectedAutocompleteIndex != null ? selectedAutocompleteIndex + 1 : firstItem;
+          selectedAutocompleteIndex !== null ? selectedAutocompleteIndex + 1 : firstItem;
         nextIndex = downIndex >= autoCompleteItemCount ? firstItem : downIndex;
         event.stopPropagation();
         event.preventDefault();
@@ -301,7 +301,7 @@ const Combobox = ({
         break;
 
       case 'Enter':
-        if (selectedAutocompleteIndex != null) {
+        if (selectedAutocompleteIndex !== null) {
           const item = autocompleteItems[selectedAutocompleteIndex];
           handleAutocompleteClick(event, item.props);
           if (item.props.isDisabled) {
