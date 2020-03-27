@@ -54,7 +54,7 @@ const labelStyles = [
             flexGrow: 1,
             display: 'flex',
             alignItems: 'center',
-            maxHeight: spacing.xl,
+            maxHeight: spacing.m,
           }
         : {
             display: 'block',

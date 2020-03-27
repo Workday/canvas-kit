@@ -88,6 +88,12 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
 });
 
 const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPositionBehavior>(
+  {
+    minWidth: 0, // Allows FormFieldContainer to flex this container if it was white-space: nowrap children
+    '& > *': {
+      width: '100%',
+    },
+  },
   ({grow, labelPosition}) => {
     if (
       grow &&

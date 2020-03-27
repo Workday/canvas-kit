@@ -199,7 +199,7 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
       })}
     >
       {({labelPosition, overflow}) => (
-        <div style={{width: 120}}>
+        <div style={{width: labelPosition === FormFieldLabelPosition.Top ? 120 : 200}}>
           <FormField label="Label" inputId="my-checkbox-field" labelPosition={labelPosition}>
             {control(<Checkbox label="This is a long label for testing" overflow={overflow} />)}
           </FormField>
