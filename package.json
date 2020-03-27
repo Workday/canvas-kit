@@ -106,7 +106,6 @@
     "react-docgen-typescript-loader": "^3.3.0",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.2.0",
-    "react-test-renderer": "^16.5.2",
     "replace-in-files": "^2.0.3",
     "request": "^2.88.2",
     "rimraf": "^2.6.3",
