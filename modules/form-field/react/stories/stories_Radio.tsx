@@ -11,7 +11,7 @@ import {
 } from '../../../../utils/storybook';
 
 import {Radio, RadioGroup} from '../../../radio/react';
-import FormField from '../index';
+import FormField, {FormFieldLabelPosition} from '../index';
 import README from '../../../radio/react/README.md';
 
 const hintText = 'Helpful text goes here.';
@@ -238,6 +238,38 @@ storiesOf('Components|Inputs/Radio/React/Visual Testing', module)
     },
   })
   .addDecorator(withReadme(README))
+  .add('Overflow', () => (
+    <ComponentStatesTable
+      rowProps={permutateProps({
+        overflow: [
+          {value: 'default', label: 'Default'},
+          {value: 'truncate', label: 'Truncated'},
+          {value: 'wrap', label: 'Wrapped'},
+        ],
+      })}
+      columnProps={permutateProps({
+        labelPosition: [
+          {value: FormFieldLabelPosition.Top, label: 'Top Label'},
+          {value: FormFieldLabelPosition.Left, label: 'Left Label'},
+        ],
+      })}
+    >
+      {({labelPosition, overflow}) => (
+        <div style={{width: labelPosition === FormFieldLabelPosition.Top ? 120 : 200}}>
+          <FormField label="Label" inputId="my-checkbox-field" labelPosition={labelPosition}>
+            <ControlledComponentWrapper>
+              <Radio
+                id="1"
+                value="long label"
+                label="This is a long label for testing"
+                overflow={overflow}
+              />
+            </ControlledComponentWrapper>
+          </FormField>
+        </div>
+      )}
+    </ComponentStatesTable>
+  ))
   .add('States', () => <RadioStates />)
   .addParameters({
     canvasProviderDecorator: {
