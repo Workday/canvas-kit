@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
+import isPropValid from '@emotion/is-prop-valid';
 import uuid from 'uuid/v4';
 import Card from '@workday/canvas-kit-react-card';
 import {IconButton, IconButtonSize} from '@workday/canvas-kit-react-button';
@@ -80,7 +81,9 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
   `;
 };
 
-const Container = styled('div')<PickRequired<PopupProps, 'transformOrigin', 'width'>>(
+const Container = styled('div', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'width',
+})<PickRequired<PopupProps, 'transformOrigin' | 'width'>>(
   {
     position: 'relative',
     maxWidth: `calc(100vw - ${spacing.l})`,

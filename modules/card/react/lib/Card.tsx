@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+import isPropValid from '@emotion/is-prop-valid';
 import {
   colors,
   depth as depthValues,
@@ -44,7 +45,9 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   height?: number | string;
 }
 
-const Box = styled('div')<CardProps>(
+const Box = styled('div', {
+  shouldForwardProp: prop => isPropValid(prop) && prop !== 'width' && prop !== 'height',
+})<CardProps>(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${colors.soap500}`,

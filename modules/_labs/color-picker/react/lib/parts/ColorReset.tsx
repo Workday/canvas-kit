@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import {borderRadius, colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 
-import {Swatch} from './Swatch';
+import {ColorSwatch} from '@workday/canvas-kit-react-color-picker/lib/parts/ColorSwatch';
 
 export interface ResetButtonProps {
   label: string;
@@ -20,11 +20,10 @@ const Container = styled('button')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
-  borderRadius: borderRadius.m,
-  width: `calc(100% + ${spacing.xxs})`,
+  width: `calc(100% + ${spacing.l})`,
   height: spacing.l,
-  margin: `-${spacing.xxs} 0px ${spacing.xxs} 0px`,
-  padding: `0px ${spacing.xxs}`,
+  margin: `-${spacing.xxs} -${spacing.s} ${spacing.xxs}`,
+  padding: `0px ${spacing.s}`,
   ...type.body2,
   whiteSpace: 'nowrap',
   border: 'none',
@@ -52,7 +51,7 @@ export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
 
   return (
     <Container data-testid="color-picker-reset" onClick={handleResetColor}>
-      <Swatch color={resetColor} isSelected={false} />
+      <ColorSwatch color={resetColor} />
       <Label>{label}</Label>
     </Container>
   );
