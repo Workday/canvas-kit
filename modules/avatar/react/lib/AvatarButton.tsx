@@ -43,10 +43,10 @@ export default class AvatarButton extends React.Component<AvatarButtonProps> {
 
   render() {
     const {
-      buttonRef,
       variant = AvatarVariant.Light,
       altText = 'Avatar',
       size = SystemIconCircleSize.m,
+      buttonRef,
       url,
       onClick,
       ...elemProps

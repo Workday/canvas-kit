@@ -72,11 +72,6 @@ const defaultPageButtonAriaLabel: PaginationProps['pageButtonAriaLabel'] = (page
 
 const Pagination = (props: PaginationProps) => {
   const {
-    total,
-    pageSize,
-    currentPage,
-    onPageChange,
-    width,
     showGoTo = false,
     showLabel = false,
     goToLabel = 'Go To',
@@ -85,6 +80,11 @@ const Pagination = (props: PaginationProps) => {
     nextPageAriaLabel = 'Next Page',
     pageButtonAriaLabel = defaultPageButtonAriaLabel,
     customLabel = defaultCustomLabel,
+    total,
+    pageSize,
+    currentPage,
+    onPageChange,
+    width,
     ...elemProps
   } = props;
 

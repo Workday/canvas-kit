@@ -233,9 +233,9 @@ export default class IconButton extends React.Component<IconButtonProps> {
   public render() {
     // onToggleChange will generate a warning if spread over a <button>
     const {
-      buttonRef,
       size = IconButtonSize.Medium,
       variant = IconButtonVariant.Circle,
+      buttonRef,
       onToggleChange,
       icon,
       toggled,

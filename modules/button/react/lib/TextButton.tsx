@@ -41,12 +41,12 @@ export default class TextButton extends React.Component<TextButtonProps> {
 
   public render() {
     const {
-      buttonRef,
-      onClick,
-      children,
       iconPosition = IconPosition.Left,
       size = ButtonSize.Large,
       variant = TextButtonVariant.Default,
+      buttonRef,
+      onClick,
+      children,
       icon,
       ...elemProps
     } = this.props;

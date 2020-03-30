@@ -55,7 +55,7 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   shouldClose?: boolean;
 }
 
-const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused' | 'shouldClose'>>(
+const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
   {
     ...type.body2,
     padding: `${spacing.xxs} ${spacing.s}`,

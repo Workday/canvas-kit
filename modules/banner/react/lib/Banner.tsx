@@ -93,11 +93,11 @@ export default class Banner extends React.Component<BannerProps> {
 
   public render() {
     const {
-      label,
-      onClick,
       actionText = 'View All',
       variant = BannerVariant.Full,
       error = ErrorType.Alert,
+      label,
+      onClick,
       ...props
     } = this.props;
 
