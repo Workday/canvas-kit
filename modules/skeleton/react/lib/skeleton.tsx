@@ -62,11 +62,10 @@ export default class Skeleton extends React.Component<SkeletonProps, SkeletonSta
   };
 
   render(): React.ReactNode {
-    const {children, ...elemProps} = this.props;
+    const {loadingLabel = 'Loading', children, ...elemProps} = this.props;
     const {width, height} = this.state;
     const diagonal = Math.sqrt(width * width + height * height) + WHITE_SHEEN_WIDTH;
     const topPosition = (-1 * (diagonal - height)) / 2;
-    const {loadingLabel = 'Loading'} = this.props;
 
     return (
       <SkeletonContainer

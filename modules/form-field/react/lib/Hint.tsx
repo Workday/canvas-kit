@@ -28,7 +28,7 @@ export default class Hint extends React.Component<HintProps> {
   static ErrorType = ErrorType;
 
   public render() {
-    const {children, error, errorLabel = 'Error', alertLabel = 'Alert'} = this.props;
+    const {errorLabel = 'Error', alertLabel = 'Alert', children, error} = this.props;
 
     let hintLabel: string | undefined;
     switch (error) {

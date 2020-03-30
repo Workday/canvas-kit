@@ -100,7 +100,7 @@ export default class TextArea extends React.Component<TextAreaProps> {
   static ResizeDirection = TextAreaResizeDirection;
 
   render() {
-    const {grow, inputRef, resize = TextAreaResizeDirection.Both, ...inputProps} = this.props;
+    const {resize = TextAreaResizeDirection.Both, grow, inputRef, ...inputProps} = this.props;
 
     return <TextAreaContainer ref={inputRef} grow={grow} resize={resize} {...inputProps} />;
   }

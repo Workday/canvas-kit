@@ -212,10 +212,10 @@ export default class Radio extends React.Component<RadioProps> {
     // TODO: Standardize on prop spread location (see #150)
     const {
       checked = false,
-      disabled,
       id = this.id,
-      inputRef,
       label = '',
+      disabled,
+      inputRef,
       name,
       onChange,
       value,

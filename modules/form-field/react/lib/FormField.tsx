@@ -158,16 +158,16 @@ export default class FormField extends React.Component<FormFieldProps> {
 
   render() {
     const {
+      errorLabel = 'Error',
+      alertLabel = 'Alert',
+      useFieldset = false,
+      labelPosition = FormField.LabelPosition.Top,
       label,
       hintText,
       hintId,
       inputId,
-      errorLabel = 'Error',
-      alertLabel = 'Alert',
       grow,
       children,
-      useFieldset = false,
-      labelPosition = FormField.LabelPosition.Top,
       error,
       required,
       ...elemProps

@@ -22,11 +22,11 @@ export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLIn
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying checkbox input element.
+   * @default A uniquely generated id by uuid()
    */
   id?: string;
   /**
    * The function called when the Switch state changes.
-   * @default A uniquely generated id by uuid()
    */
   onChange?: (e: React.SyntheticEvent) => void;
   /**
@@ -155,8 +155,8 @@ export default class Switch extends React.Component<SwitchProps> {
     // TODO: Standardize on prop spread location (see #150)
     const {
       checked = false,
-      disabled,
       id = this.id,
+      disabled = false,
       inputRef,
       onChange,
       value,

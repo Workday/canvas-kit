@@ -92,11 +92,11 @@ export default class CookieBanner extends React.Component<CookieBannerProps> {
 
   public render(): React.ReactNode {
     const {
+      notice = CookieBanner.DefaultNotice,
+      settingsLabel = 'Cookie Settings',
       isClosed,
       onAccept,
       onClickSettings,
-      notice = CookieBanner.DefaultNotice,
-      settingsLabel = 'Cookie Settings',
       ...elemProps
     } = this.props;
 

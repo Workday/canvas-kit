@@ -70,7 +70,7 @@ export default class AppletIcon extends React.Component<AppletIconProps> {
   public static Colors = BrandingColor;
 
   public render() {
-    const {icon, color, size, ...elemProps} = this.props;
+    const {size = 92, icon, color, ...elemProps} = this.props;
 
     return (
       <Icon

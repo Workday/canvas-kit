@@ -60,7 +60,7 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
 
 export default class Graphic extends React.Component<GraphicProps> {
   render() {
-    const {src, width, height, grow, ...elemProps} = this.props;
+    const {grow = false, src, width, height, ...elemProps} = this.props;
 
     return (
       <Svg

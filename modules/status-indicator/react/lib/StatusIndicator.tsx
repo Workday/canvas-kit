@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {GenericStyle} from '@workday/canvas-kit-react-common';
+import {GenericStyle, PickRequired} from '@workday/canvas-kit-react-common';
 import {borderRadius, colors, type, spacing} from '@workday/canvas-kit-react-core';
 import {CSSObject} from '@emotion/core';
 import styled from '@emotion/styled';
@@ -127,7 +127,7 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
   icon?: CanvasSystemIcon;
 }
 
-const Container = styled('span')<Pick<StatusIndicatorProps, 'type' | 'emphasis'>>(
+const Container = styled('span')<PickRequired<StatusIndicatorProps, 'emphasis', 'type'>>(
   statusIndicatorStyles.styles,
   ({type, emphasis}) => ({
     ...statusIndicatorStyles.variants[type][emphasis],
@@ -148,7 +148,7 @@ export default class StatusIndicator extends React.Component<StatusIndicatorProp
   public static Emphasis = StatusIndicatorEmphasis;
 
   public render() {
-    const {type, emphasis = StatusIndicatorEmphasis.High, icon, label, ...elemProps} = this.props;
+    const {emphasis = StatusIndicatorEmphasis.High, type, icon, label, ...elemProps} = this.props;
     const variant = statusIndicatorStyles.variants[type][emphasis]!;
 
     return (

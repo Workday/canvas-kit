@@ -117,7 +117,7 @@ export default class Select extends React.Component<SelectProps> {
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {error, disabled = false, grow, children, value, onChange, ...elemProps} = this.props;
+    const {disabled = false, error, grow, children, value, onChange, ...elemProps} = this.props;
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>

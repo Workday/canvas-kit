@@ -130,13 +130,13 @@ export default class ColorInput extends React.Component<ColorInputProps> {
   public render() {
     // TODO: Standardize on prop spread location (see #150)
     const {
-      showCheck,
+      placeholder = 'FFFFFF',
       value = '',
+      showCheck,
       onChange,
       onValidColorChange,
       inputRef,
       disabled,
-      placeholder = 'FFFFFF',
       error,
       grow,
       ...elemProps

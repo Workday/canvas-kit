@@ -87,13 +87,13 @@ export const systemIconStyles = ({
 export default class SystemIcon extends React.Component<SystemIconProps> {
   render() {
     const {
+      background = 'transparent',
+      backgroundHover = 'transparent',
+      color = iconColors.standard,
+      colorHover = iconColors.hover,
       icon,
       accent,
       accentHover,
-      background,
-      backgroundHover,
-      color,
-      colorHover,
       fill,
       fillHover,
       size,

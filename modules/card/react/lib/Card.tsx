@@ -67,10 +67,10 @@ const Body = styled('div')(type.body);
 export default class Card extends React.Component<CardProps> {
   public render() {
     const {
-      heading,
-      headingId,
       depth = depthValues[2],
       padding = spacing.l,
+      heading,
+      headingId,
       ...elemProps
     } = this.props;
 

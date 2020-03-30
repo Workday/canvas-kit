@@ -43,7 +43,7 @@ export const accentIconStyles = ({
 
 export default class AccentIcon extends React.Component<AccentIconProps> {
   render() {
-    const {icon, color, transparent, size, ...elemProps} = this.props;
+    const {transparent = false, size = 56, icon, color, ...elemProps} = this.props;
 
     return (
       <Icon

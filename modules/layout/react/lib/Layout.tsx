@@ -83,9 +83,9 @@ export default class Layout extends React.Component<LayoutProps> {
 
   public render() {
     const {
-      children,
       gutter = canvas.spacing.xs,
       spacing = spacingNumbers.xs,
+      children,
       capWidth,
       ...elemProps
     } = this.props;

@@ -280,10 +280,10 @@ export default class Checkbox extends React.Component<CheckboxProps> {
     // TODO: Standardize on prop spread location (see #150)
     const {
       checked = false,
-      disabled,
       id = this.id,
-      inputRef,
       label = '',
+      disabled,
+      inputRef,
       onChange,
       value,
       error,
