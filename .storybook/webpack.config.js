@@ -22,7 +22,20 @@ module.exports = ({config, mode}) => {
 
   config.module.rules.push({
     test: /\.scss$/,
-    use: ['style-loader', 'css-loader', 'sass-loader'],
+    use: [
+      'style-loader',
+      'css-loader',
+      'sass-loader',
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true,
+          config: {
+            path: postcssConfigPath,
+          },
+        },
+      },
+    ],
     include: modulesPath,
   });
 
