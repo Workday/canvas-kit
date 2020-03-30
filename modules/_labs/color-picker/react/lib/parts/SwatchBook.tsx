@@ -2,8 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {borderRadius, colors, spacing} from '@workday/canvas-kit-react-core';
 import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
-
-import {Swatch} from './Swatch';
+import {ColorSwatch} from '@workday/canvas-kit-react-color-picker/lib/parts/ColorSwatch';
 
 export interface SwatchBookProps {
   colors: string[];
@@ -25,7 +24,6 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
     position: 'relative',
     width: 20,
     height: 20,
-
     cursor: 'pointer',
     borderRadius: borderRadius.s,
     transition: 'box-shadow 120ms ease',
@@ -44,6 +42,7 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
     ...mouseFocusBehavior({
       '&:focus': {
         animation: 'none',
+        boxShadow: 'none',
       },
       '&:hover': {
         boxShadow: accessibilityBorder,
@@ -84,7 +83,7 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
           tabIndex={0}
           isSelected={isSelected}
         >
-          <Swatch color={color} isSelected={isSelected} />
+          <ColorSwatch color={color} showCheck={isSelected} />
         </SwatchContainer>
       );
     })}
