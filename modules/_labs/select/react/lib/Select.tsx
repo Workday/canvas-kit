@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
-import {keyframes, CSSObject} from '@emotion/core';
+import {CSSObject} from '@emotion/core';
 import {
   colors,
   borderRadius,
@@ -12,6 +12,7 @@ import {
 } from '@workday/canvas-kit-react-core';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {SelectMenu, menuFadeDuration} from './SelectMenu';
 import {SelectOptionProps} from './SelectOption';
 import uuid from 'uuid/v4';
 
@@ -42,74 +43,11 @@ export interface SelectState {
   selectedOptionIndex: number;
 }
 
-const toggleMenuAnimationDuration = 200;
-
-const fadeInAnimation = keyframes`
-  from {opacity: 0;}
-  to {opacity: 1;}
-`;
-
-const fadeOutAnimation = keyframes`
-  from {opacity: 1;}
-  to {opacity: 0;}
-`;
-
 const focusButtonCSS = (): CSSObject => ({
   borderColor: inputColors.focusBorder,
   boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
   outline: 'none',
 });
-
-const menuBorderCSS = (error?: ErrorType): CSSObject => {
-  let borderColor = inputColors.focusBorder;
-  let dividerBorderColor = borderColor;
-  let dividerBorderWidth = 1;
-
-  if (error === ErrorType.Error) {
-    borderColor = inputColors.error.border;
-    dividerBorderColor = inputColors.error.border;
-  } else if (error === ErrorType.Alert) {
-    borderColor = colors.cantaloupe600;
-    dividerBorderColor = inputColors.warning.border;
-    dividerBorderWidth = 2;
-  }
-
-  const dividerBorder = `${dividerBorderWidth}px solid ${dividerBorderColor}`;
-
-  return {
-    borderColor: borderColor,
-
-    // Render the divider using a pseudo-element
-    '&:before': {
-      backgroundColor: colors.soap400,
-      content: '""',
-      display: 'block',
-      height: 1,
-      borderLeft: dividerBorder,
-      borderRight: dividerBorder,
-    },
-  };
-};
-
-const menuListBorderCSS = (error?: ErrorType): CSSObject => {
-  let borderColor = inputColors.focusBorder;
-  let borderWidth = 1;
-
-  if (error === ErrorType.Error) {
-    borderColor = inputColors.error.border;
-  } else if (error === ErrorType.Alert) {
-    borderColor = inputColors.warning.border;
-    borderWidth = 2;
-  }
-
-  const border = `${borderWidth}px solid ${borderColor}`;
-
-  return {
-    borderBottom: border,
-    borderLeft: border,
-    borderRight: border,
-  };
-};
 
 const SelectButton = styled('button')<
   Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHidden'>
@@ -172,60 +110,6 @@ const SelectMenuIcon = styled(SystemIcon)({
     transition: '100ms fill',
   },
 });
-
-const SelectMenu = styled('div')<
-  Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHiding'>
->(
-  {
-    animationName: fadeInAnimation,
-    animationDuration: `${toggleMenuAnimationDuration / 1000}s`,
-    // Required to prevent the occasional menu flash when the menu
-    // fades out
-    animationFillMode: 'forwards',
-    backgroundColor: colors.frenchVanilla100,
-    border: `1px solid ${inputColors.border}`,
-    borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
-    borderTop: 0,
-    boxSizing: 'border-box',
-    minWidth: 280,
-    position: 'absolute',
-    // Offset the menu by the height of the select (spacingNumbers.xl)
-    // minus the borderRadius of the select (borderRadius.m)
-    top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
-    // TODO: Don't think we need this transition, but verify in
-    // IE11 before deleting it
-    // transition: `${toggleMenuAnimationDuration / 1000}s opacity`,
-    zIndex: 1,
-  },
-  ({error}) => ({
-    ...menuBorderCSS(error),
-  }),
-  ({isMenuHiding}) =>
-    isMenuHiding && {
-      animationName: fadeOutAnimation,
-    },
-  ({grow}) =>
-    grow && {
-      width: '100%',
-    }
-);
-
-const SelectMenuList = styled('ul')<Pick<SelectProps, 'error'>>(
-  {
-    listStyle: 'none',
-    margin: 0,
-    // TODO: Figure out proper maxHeight
-    maxHeight: 200,
-    overflowY: 'auto',
-    padding: 0,
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-  ({error}) => ({
-    ...menuListBorderCSS(error),
-  })
-);
 
 const SelectInput = styled('input')({
   display: 'none',
@@ -382,7 +266,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             }
           }
         );
-      }, toggleMenuAnimationDuration);
+      }, menuFadeDuration);
     }
   };
 
@@ -770,22 +654,16 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         />
         {!isMenuHidden && (
           <SelectMenu
+            aria-activedescendant={this.optionIds[focusedOptionIndex]}
+            aria-labelledby={ariaLabelledBy}
             error={error}
             grow={grow}
-            isMenuHiding={isMenuHiding}
+            isHiding={isMenuHiding}
+            menuRef={this.menuRef}
+            onBlur={this.handleMenuBlur}
             onKeyDown={this.handleKeyboardShortcuts}
           >
-            <SelectMenuList
-              aria-activedescendant={this.optionIds[focusedOptionIndex]}
-              aria-labelledby={ariaLabelledBy}
-              error={error}
-              onBlur={this.handleMenuBlur}
-              ref={this.menuRef}
-              role="listbox"
-              tabIndex={-1}
-            >
-              {React.Children.map(children, this.renderChildren)}
-            </SelectMenuList>
+            {React.Children.map(children, this.renderChildren)}
           </SelectMenu>
         )}
         <SelectMenuIcon
