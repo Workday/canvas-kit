@@ -13,12 +13,12 @@ export interface LayoutProps {
   /**
    * The spacing of the Layout children.
    */
-  spacing: number;
+  spacing?: number;
   /**
    * The padding of the Layout's outside container.
    * @default 12
    */
-  gutter: number | string;
+  gutter?: number | string;
   /**
    * If true, set the max width of the Layout container to `1280px`.
    * @default false
