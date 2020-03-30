@@ -44,6 +44,6 @@
     "@workday/canvas-kit-react-core": "^3.5.0",
     "chroma-js": "^2.1.0",
     "lodash": "^4.17.14",
-    "popper.js": "^1.15.0"
+    "@popperjs/core": "^2.1.1"
   }
 }

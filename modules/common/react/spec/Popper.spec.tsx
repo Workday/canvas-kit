@@ -1,104 +1,79 @@
-jest.mock('react-dom', () => ({
-  createPortal: jest.fn().mockImplementation(children => children),
-}));
+/// <reference types="@testing-library/jest-dom/extend-expect" />
 
-// https://github.com/FezVrasta/popper.js#how-to-use-popperjs-in-jest
-jest.mock('popper.js', () => {
-  return jest.fn().mockImplementation(() => {
-    return {
-      destroy: () => {}, // eslint-disable-line no-empty-function
-    };
-  });
-});
+import React from 'react';
+import {render, getByTestId} from '@testing-library/react';
 
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import {mount} from 'enzyme';
-import * as PopperJS from 'popper.js';
-import {Popper, PopperProps} from '../lib/Popper';
+import {Popper} from '..';
 
 describe('Popper', () => {
-  const dataTestId = 'TESTY_TEST';
+  it('should portal the popper content', () => {
+    render(<div data-testid="anchor">Anchor</div>);
+    const anchorElement = getByTestId(document.body, 'anchor');
 
-  const renderPopper = (props?: Partial<PopperProps>) => {
-    return mount(
-      <Popper anchorElement={document.body} data-test-id={dataTestId} {...props}>
-        <div id="content" />
+    const {container} = render(
+      <Popper anchorElement={anchorElement} data-testid="popper">
+        Contents
       </Popper>
     );
-  };
 
-  test('should render with Popper.js inside a portal', () => {
-    const component = renderPopper();
+    const popper = getByTestId(document.body, 'popper');
 
-    expect(PopperJS).toHaveBeenCalled();
-    expect(ReactDOM.createPortal).toHaveBeenCalled();
-    expect(component.find('#content').length).toBe(1);
-    component.unmount();
+    expect(container).not.toContainElement(popper);
   });
 
-  test('should render with Popper.js inline when portal is false', () => {
-    const component = renderPopper({portal: false});
+  it('should not portal the popper when `portal` is set to `false`', () => {
+    render(<div data-testid="anchor">Anchor</div>);
+    const anchorElement = getByTestId(document.body, 'anchor');
 
-    expect(PopperJS).toHaveBeenCalled();
-    expect(ReactDOM.createPortal).not.toHaveBeenCalled();
-    expect(component.find('#content').length).toBe(1);
-    component.unmount();
-  });
-
-  test('should render nothing when open is false', () => {
-    const component = renderPopper({open: false});
-
-    expect(PopperJS).not.toHaveBeenCalled();
-    expect(ReactDOM.createPortal).not.toHaveBeenCalled();
-    expect(component.find('#content').length).toBe(0);
-    component.unmount();
-  });
-
-  test('should use the given container for the portal', () => {
-    const containerElement = document.body;
-    const component = renderPopper({containerElement});
-
-    expect(ReactDOM.createPortal).toHaveBeenCalledWith(expect.anything(), containerElement);
-    component.unmount();
-  });
-
-  test('should pass placement to Popper.js', () => {
-    const placement = 'bottom-start';
-    const component = renderPopper({placement});
-
-    expect(PopperJS).toHaveBeenCalledWith(
-      expect.anything(),
-      expect.anything(),
-      expect.objectContaining({placement})
+    const {container} = render(
+      <Popper anchorElement={anchorElement} data-testid="popper" portal={false}>
+        Contents
+      </Popper>
     );
-    component.unmount();
+
+    const popper = getByTestId(document.body, 'popper');
+
+    expect(container).toContainElement(popper);
   });
 
-  test('should pass all popperOptions to Popper.js', () => {
-    const popperOptions = {eventsEnabled: false};
-    const component = renderPopper({popperOptions});
-
-    expect(PopperJS).toHaveBeenCalledWith(
-      expect.anything(),
-      expect.anything(),
-      expect.objectContaining(popperOptions)
+  it('should render children', () => {
+    const {getByTestId} = render(
+      <Popper anchorElement={document.body} data-testid="popper">
+        Contents
+      </Popper>
     );
-    component.unmount();
+
+    expect(getByTestId('popper')).toContainHTML('Contents');
   });
 
-  test('should include className attribute', () => {
-    const className = 'classy-popper';
-    const component = renderPopper({className});
+  it('should render children as a render prop', () => {
+    const {getByTestId} = render(
+      <Popper anchorElement={document.body} data-testid="popper">
+        {() => 'Contents'}
+      </Popper>
+    );
 
-    expect(component.find(`div.${className}`).length).toBe(1);
-    component.unmount();
+    expect(getByTestId('popper')).toContainHTML('Contents');
   });
 
-  test('should include data-* attributes', () => {
-    const component = renderPopper();
+  it('should call the children render prop with the placement', () => {
+    const renderProp = jest.fn();
+    render(
+      <Popper anchorElement={document.body} placement="bottom">
+        {renderProp}
+      </Popper>
+    );
 
-    expect(component.find(`div[data-test-id="${dataTestId}"]`).length).toBe(1);
-    component.unmount();
+    expect(renderProp).toBeCalledWith({placement: 'bottom'});
+  });
+
+  it('should forward extra properties to the containing element', () => {
+    const {getByTestId} = render(
+      <Popper anchorElement={document.body} data-testid="popper" data-extra="test">
+        Contents
+      </Popper>
+    );
+
+    expect(getByTestId('popper')).toHaveAttribute('data-extra', 'test');
   });
 });
