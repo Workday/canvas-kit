@@ -1,6 +1,10 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {themedFocusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {
+  themedFocusRing,
+  mouseFocusBehavior,
+  OverflowBehavior,
+} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
@@ -9,7 +13,10 @@ import canvas, {
 } from '@workday/canvas-kit-react-core';
 import uuid from 'uuid/v4';
 
-export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+export interface RadioProps
+  extends OverflowBehavior,
+    Themeable,
+    React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * If true, set the Radio button to the checked state.
    * @default false
@@ -197,12 +204,30 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
   })
 );
 
-const RadioLabel = styled('label')<{disabled?: boolean}>(
+const RadioLabel = styled('label')<{
+  disabled?: boolean;
+  overflow?: OverflowBehavior['overflow'];
+}>(
   {
     ...canvas.type.body,
     paddingLeft: radioLabelDistance,
   },
-  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
+  ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'}),
+  ({overflow}) => {
+    if (overflow === 'wrap') {
+      return {
+        wordWrap: 'break-word',
+      };
+    } else if (overflow === 'truncate') {
+      return {
+        width: '100%',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      };
+    }
+    return;
+  }
 );
 
 export default class Radio extends React.Component<RadioProps> {
@@ -224,6 +249,7 @@ export default class Radio extends React.Component<RadioProps> {
       name,
       onChange,
       value,
+      overflow,
       ...elemProps
     } = this.props;
 
@@ -247,7 +273,7 @@ export default class Radio extends React.Component<RadioProps> {
           </RadioBackground>
         </RadioInputWrapper>
         {label && (
-          <RadioLabel htmlFor={id} disabled={disabled}>
+          <RadioLabel htmlFor={id} disabled={disabled} overflow={overflow}>
             {label}
           </RadioLabel>
         )}
