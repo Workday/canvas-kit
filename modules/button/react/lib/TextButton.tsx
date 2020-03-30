@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Themeable, CanvasTheme, useTheme, type} from '@workday/canvas-kit-labs-react-core';
+import {Themeable, CanvasTheme, useTheme, styled, type} from '@workday/canvas-kit-labs-react-core';
 import {themedFocusRing} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -102,7 +102,14 @@ const containerStyles = {
   border: '0',
   padding: `0 ${spacing.xxs}`,
   minWidth: 'auto',
-  '&:hover:not([disabled])': {textDecoration: 'underline'},
+  '.wdc-text-button-label': {
+    borderBottom: '2px solid transparent',
+    paddingTop: '2px',
+    transition: 'border-color 0.3s',
+  },
+  '&:hover:not([disabled]) .wdc-text-button-label': {
+    borderBottomColor: 'currentColor',
+  },
 };
 
 const TextButton = ({
@@ -141,7 +148,7 @@ const TextButton = ({
       {icon && iconPosition === ButtonIconPosition.Left && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
-      <ButtonLabel>{children}</ButtonLabel>
+      <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
       {icon && iconPosition === ButtonIconPosition.Right && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
