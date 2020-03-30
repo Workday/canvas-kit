@@ -256,7 +256,7 @@ storiesOf('Components|Inputs/Radio/React/Visual Testing', module)
     >
       {({labelPosition, overflow}) => (
         <div style={{width: labelPosition === FormFieldLabelPosition.Top ? 120 : 200}}>
-          <FormField label="Label" inputId="my-checkbox-field" labelPosition={labelPosition}>
+          <FormField label="Label" labelPosition={labelPosition}>
             <ControlledComponentWrapper>
               <Radio
                 id="1"
