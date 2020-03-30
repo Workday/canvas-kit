@@ -46,10 +46,12 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           label: theme.palette.primary.main,
         },
         hover: {
+          background: colors.soap200,
           icon: theme.palette.primary.dark,
           label: theme.palette.primary.dark,
         },
         active: {
+          background: colors.soap300,
           icon: theme.palette.primary.dark,
           label: theme.palette.primary.dark,
         },
@@ -59,6 +61,7 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           focusRing: themedFocusRing(theme),
         },
         disabled: {
+          background: 'transparent',
           icon: theme.palette.primary.light,
           label: theme.palette.primary.light,
         },
@@ -69,12 +72,24 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           icon: colors.frenchVanilla100,
           label: colors.frenchVanilla100,
         },
-        hover: {},
+        hover: {
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+        },
         active: {},
         focus: {
-          focusRing: themedFocusRing(theme, {outerColor: 'currentColor'}),
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          focusRing: themedFocusRing(theme, {
+            separation: 2,
+            innerColor: 'currentColor',
+            outerColor: colors.frenchVanilla100,
+          }),
         },
         disabled: {
+          background: 'transparent',
           icon: 'rgba(255, 255, 255, 0.5)',
           label: 'rgba(255, 255, 255, 0.5)',
         },
