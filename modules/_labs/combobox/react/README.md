@@ -76,7 +76,7 @@ Default: `IconButton.Variant.Plain`
 
 ---
 
-#### `clearButtonLabel: string`
+#### `clearButtonAriaLabel: string`
 
 > Screenreader Label for the clear button.
 
@@ -106,3 +106,9 @@ Default: `'Reset Search Input'`
 #### `onBlur: React.FocusEventHandler`
 
 > Callback to listen when the TextInput blurs.
+
+---
+
+#### `getStatusText: (listCount: number) => string`
+
+> A function to generate the text for screen readers announcing the autocomplete count

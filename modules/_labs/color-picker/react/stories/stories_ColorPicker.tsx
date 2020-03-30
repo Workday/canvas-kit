@@ -1,59 +1,46 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
-import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
-import {colors, type} from '@workday/canvas-kit-react-core';
+import {ColorInput} from '@workday/canvas-kit-react-color-picker';
+import {colors} from '@workday/canvas-kit-react-core';
 import {Popper} from '@workday/canvas-kit-react-common';
-import {Button} from '@workday/canvas-kit-react-button';
-import {ColorPicker, Swatch} from '../index';
+import {IconButton} from '@workday/canvas-kit-react-button';
+import {bgColorIcon} from '@workday/canvas-system-icons-web';
+import {ColorPicker} from '../index';
 import README from '../README.md';
 
 storiesOf('Labs|Color Picker/React', module)
   .addParameters({component: ColorPicker})
   .addDecorator(withReadme(README))
   .add('Default', () => <ColorPicker onColorChange={color => action('color-change')(color)} />)
-  .add('Custom', () => {
-    const [color, setColor] = React.useState('');
-    const handleSubmit = (submitColor: string) => {
-      action('color-change')(submitColor);
-      setColor(submitColor.toUpperCase());
-    };
-
-    return (
-      <ColorPicker
-        resetColor={colors.blueberry400}
-        resetLabel={'Reset'}
-        showCustomHexInput={true}
-        onColorChange={handleSubmit}
-        onColorReset={() => handleSubmit(colors.blueberry400)}
-        value={color}
-      />
-    );
-  })
-  .add('Popup', () => {
-    const [isOpen, setIsOpen] = React.useState(false);
+  .add('Icon Button Popup', () => {
+    const [isOpen, setOpen] = React.useState(false);
     const [color, setColor] = React.useState('');
     const buttonRef = React.useRef(null);
 
-    const toggleOpen = () => setIsOpen(!isOpen);
+    const toggleOpen = () => setOpen(!isOpen);
 
     const handleSubmit = React.useCallback(
       (submitColor: string) => {
         action('color-change')(submitColor);
         setColor(submitColor.toUpperCase());
-        setIsOpen(false);
+        setOpen(false);
       },
-      [setIsOpen]
+      [setOpen]
     );
 
     return (
       <>
-        <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={toggleOpen}>
-          Toggle Color Picker
-        </Button>
-        <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current!}>
+        <IconButton
+          icon={bgColorIcon}
+          aria-label="Select Background Color"
+          buttonRef={buttonRef}
+          variant={IconButton.Variant.SquareFilled}
+          onClick={toggleOpen}
+        />
+        <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current!}>
           <ColorPicker
             resetColor={colors.blueberry400}
             resetLabel={'Reset'}
@@ -68,49 +55,31 @@ storiesOf('Labs|Color Picker/React', module)
       </>
     );
   })
-  .add('Popup w/ Custom Target', () => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [color, setColor] = React.useState(colors.peach400);
-    const buttonRef = React.useRef(null);
+  .add('Color Input Popup', () => {
+    const defaultColor = colors.blueberry400;
+    const [isOpen, setOpen] = React.useState(false);
+    const [color, setColor] = React.useState(defaultColor);
+    const [colorInputValidColor, setColorInputValidColor] = React.useState(defaultColor);
+    const [colorInputValue, setColorInputValue] = React.useState(defaultColor);
+    const inputRef = React.useRef(null);
+    const popupRef = React.useRef(null);
 
-    const toggleOpen = () => setIsOpen(!isOpen);
-
-    const handleSubmit = React.useCallback(
-      (submitColor: string) => {
-        action('color-change')(submitColor);
-        setColor(submitColor.toUpperCase());
-        setIsOpen(false);
-      },
-      [setIsOpen]
-    );
+    const resetColor = () => {
+      setColor(defaultColor);
+      setColorInputValue(defaultColor);
+      setColorInputValidColor(defaultColor);
+      setOpen(false);
+    };
 
     const colorSet = [
       colors.cinnamon400,
-      colors.peach400,
-      colors.chiliMango400,
       colors.cantaloupe400,
       colors.sourLemon400,
-      colors.juicyPear400,
-      colors.kiwi400,
       colors.greenApple400,
-
-      colors.watermelon400,
-      colors.jewel400,
-      colors.toothpaste400,
       colors.blueberry400,
-      colors.plum400,
-      colors.berrySmoothie400,
-      colors.blackberry400,
       colors.islandPunch400,
-
-      colors.grapeSoda400,
       colors.pomegranate400,
-      colors.fruitPunch400,
-      colors.rootBeer400,
       colors.toastedMarshmallow400,
-      colors.licorice400,
-      colors.cappuccino400,
-      colors.blackPepper400,
 
       colors.frenchVanilla100,
       colors.frenchVanilla200,
@@ -122,70 +91,43 @@ storiesOf('Labs|Color Picker/React', module)
       colors.blackPepper600,
     ];
 
-    const StyledSwatch = styled(Swatch)({
-      marginRight: 8,
-      border: '1px solid rgba(0, 0, 0, 0.25)',
-      boxSizing: 'border-box',
-    });
-
-    const SelectedColorButton = styled('button')({
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      padding: 8,
-      boxSizing: 'border-box',
-      ...type.body2,
-      width: 144,
-      height: 40,
-      borderRadius: 4,
-      boxShadow: `0 0 0 1px ${colors.licorice200}`,
-      border: 'none',
-      cursor: 'pointer',
-
-      '&:focus, &:active': {
-        border: 'none',
-        outline: 'none',
-        boxSizing: 'border-box',
-        boxShadow: `0 0 0 2px ${colors.blueberry400}`,
-      },
-    });
-
-    const popperOptions = {
-      modifiers: {
-        offset: {
-          enabled: true,
-          offset: '4px, 82px',
-        },
-      },
+    const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      // @ts-ignore
+      if (!popupRef.current || !popupRef.current.popper.popper.contains(e.relatedTarget)) {
+        setOpen(false);
+      }
     };
 
     return (
       <>
-        <SelectedColorButton
-          data-testid="color-picker-selected-color-button"
-          ref={buttonRef}
-          onClick={toggleOpen}
-        >
-          <StyledSwatch
-            data-testid="color-picker-selected-color-button-swatch"
-            color={color}
-            isSelected={false}
-          />
-          Selected Color
-        </SelectedColorButton>
+        <ColorInput
+          onChange={e => setColorInputValue(e.target.value)}
+          onValidColorChange={color => {
+            setColorInputValidColor(color.toUpperCase());
+            setColor(color.toUpperCase());
+          }}
+          value={colorInputValue}
+          showCheck={colorInputValidColor === color || colorInputValue === color}
+          onFocus={() => setOpen(true)}
+          onClick={() => setOpen(true)}
+          onBlur={onBlur}
+          inputRef={inputRef}
+        />
         <Popper
-          placement={'bottom'}
+          placement={'bottom-start'}
           open={isOpen}
-          anchorElement={buttonRef.current!}
-          popperOptions={popperOptions}
+          anchorElement={inputRef.current!}
+          ref={popupRef}
         >
           <ColorPicker
             resetColor={colors.blueberry400}
             resetLabel={'Reset'}
-            showCustomHexInput={true}
-            onColorChange={handleSubmit}
-            onColorReset={() => handleSubmit(colors.blueberry400)}
-            onSubmitClick={toggleOpen}
+            onColorChange={color => {
+              setColorInputValue(color.toUpperCase());
+              setColor(color.toUpperCase());
+              setOpen(false);
+            }}
+            onColorReset={resetColor}
             value={color}
             colorSet={colorSet}
             style={{marginTop: 8}}

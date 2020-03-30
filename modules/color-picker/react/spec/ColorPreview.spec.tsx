@@ -24,7 +24,7 @@ describe('ColorPreview', () => {
     describe('with a value', () => {
       test('should render ColorPreview with the value as a background', () => {
         const {container} = render(<ColorPreview value={value} data-testid={id} />);
-        expect(container.querySelector('div div div[class^="css"]')).toHaveStyle(
+        expect(container.querySelector('div div input + div')).toHaveStyle(
           'background-color: #eee;'
         );
       });
