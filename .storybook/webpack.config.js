@@ -20,23 +20,26 @@ module.exports = ({config, mode}) => {
     },
   ];
 
-  config.module.rules.push({
-    test: /\.scss$/,
-    use: [
-      'style-loader',
-      'css-loader',
-      'sass-loader',
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          config: {
-            path: postcssConfigPath,
-          },
-        },
-      },
-    ],
-    include: modulesPath,
+  // Exclude all node_modules from babel-loader
+  config.module.rules
+    .find(rule => /mjs\|jsx/.test(rule.test.toString()))
+    .exclude.push(/node_modules/);
+
+  // Filter out extraneous rules added by CRA (react-scripts)
+  // react-scripts automatically adds js/ts matchers for a `src` folder which we don't use so these rules are moot
+  config.module.rules = config.module.rules.filter(
+    rule => !/js\|mjs\|jsx\|ts\|tsx/.test(rule.test.toString())
+  );
+
+  // Override CRA postcss presets
+  config.module.rules.forEach(rule => {
+    if (rule.test.toString().includes('scss|sass')) {
+      delete rule.use[2].options.plugins;
+
+      rule.use[2].options.config = {
+        path: postcssConfigPath,
+      };
+    }
   });
 
   // Add `.ts` and `.tsx` as a resolvable extension.
