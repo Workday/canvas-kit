@@ -561,16 +561,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         case 'Spacebar':
         case ' ':
           isShortcut = true;
-          if (isMenuHidden) {
+          // If the user is in the middle of typing a string, treat
+          // space key as type-ahead rather than option selection
+          if (this.keysSoFar !== '') {
+            this.handleKeyboardTypeAhead(' ', numOptions);
+          } else if (isMenuHidden) {
             this.toggleMenu(true);
           } else {
-            // If the user is in the middle of typing a string, treat
-            // space key as type-ahead rather than option selection
-            if (this.keysSoFar !== '') {
-              this.handleKeyboardTypeAhead(' ', numOptions);
-            } else {
-              this.handleOptionSelection(focusedOptionIndex);
-            }
+            this.handleOptionSelection(focusedOptionIndex);
           }
           break;
 
