@@ -662,7 +662,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             aria-activedescendant={this.optionIds[focusedOptionIndex]}
             aria-labelledby={ariaLabelledBy}
             error={error}
-            grow={grow}
             isHiding={isMenuHiding}
             menuRef={this.menuRef}
             onBlur={this.handleMenuBlur}

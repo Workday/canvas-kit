@@ -6,8 +6,8 @@ import {colors, borderRadius, inputColors, spacingNumbers} from '@workday/canvas
 import {SelectProps} from './Select';
 
 interface SelectMenuProps
-  extends Pick<SelectProps, 'error' | 'grow'>,
-    React.HTMLAttributes<HTMLUListElement> {
+  extends React.HTMLAttributes<HTMLUListElement>,
+    Pick<SelectProps, 'error'> {
   isHiding?: boolean;
   menuRef?: React.Ref<HTMLUListElement>;
 }
@@ -75,7 +75,7 @@ const menuListBorderCSS = (error?: ErrorType): CSSObject => {
   };
 };
 
-const Menu = styled('div')<Pick<SelectProps, 'error' | 'grow'> & Pick<SelectMenuProps, 'isHiding'>>(
+const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isHiding'>>(
   {
     animationName: fadeInAnimation,
     animationDuration: `${menuFadeDuration / 1000}s`,
@@ -87,11 +87,11 @@ const Menu = styled('div')<Pick<SelectProps, 'error' | 'grow'> & Pick<SelectMenu
     borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
     borderTop: 0,
     boxSizing: 'border-box',
-    minWidth: 280,
     position: 'absolute',
     // Offset the menu by the height of the select (spacingNumbers.xl)
     // minus the borderRadius of the select (borderRadius.m)
     top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
+    width: '100%',
     zIndex: 1,
   },
   ({error}) => ({
@@ -100,10 +100,6 @@ const Menu = styled('div')<Pick<SelectProps, 'error' | 'grow'> & Pick<SelectMenu
   ({isHiding}) =>
     isHiding && {
       animationName: fadeOutAnimation,
-    },
-  ({grow}) =>
-    grow && {
-      width: '100%',
     }
 );
 
@@ -124,10 +120,10 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error'>>(
 );
 
 export const SelectMenu = (props: SelectMenuProps) => {
-  const {children, error, grow, isHiding, menuRef, ...elemProps} = props;
+  const {children, error, isHiding, menuRef, ...elemProps} = props;
 
   return (
-    <Menu error={error} grow={grow} isHiding={isHiding}>
+    <Menu error={error} isHiding={isHiding}>
       <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
         {children}
       </MenuList>
