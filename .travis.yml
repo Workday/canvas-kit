@@ -50,7 +50,8 @@ jobs:
         yarn http-server docs -p 9001 & npx wait-on http://localhost:9001 &&
         yarn run-p -l
         "chromatic -- --quiet --exit-zero-on-changes --exit-once-uploaded --storybook-build-dir docs"
-        "cypress:run -- --record" &&
+        "cypress:run -- --record"
+      - >-
         kill $(jobs -p) || true
     env:
       # Travis doesn't support encryption on forks: https://docs.travis-ci.com/user/pull-requests#pull-requests-and-security-restrictions

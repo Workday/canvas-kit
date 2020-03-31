@@ -344,7 +344,11 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   componentDidUpdate(prevProps: SearchBarProps, prevState: SearchBarState) {
     const showFormToggled = this.state.showForm !== prevState.showForm;
     if (showFormToggled) {
-      this.state.showForm ? this.focusInput() : this.focusOpen();
+      if (this.state.showForm) {
+        this.focusInput();
+      } else {
+        this.focusOpen();
+      }
     }
   }
 
