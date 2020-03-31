@@ -3,7 +3,7 @@
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {StaticStates, type} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, permutateProps, customColorTheme} from '../../../../utils/storybook';
 import {playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {
@@ -13,6 +13,7 @@ import {
   DeleteButton,
   HighlightButton,
   OutlineButton,
+  Hyperlink,
   IconButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
@@ -217,6 +218,36 @@ const buttonStories = [
           <TextButton {...props}>Test</TextButton>
         </Container>
       )
+    ),
+  },
+  {
+    name: 'Hyperlink',
+    component: Hyperlink,
+    states: (
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={[{label: 'Default', props: {}}]}
+          columnProps={permutateProps({
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+              {label: 'Visited', value: 'visited'},
+            ],
+          })}
+        >
+          {(props: any) => (
+            <Container blue={props.variant === TextButton.Variant.Inverse}>
+              <div css={type.body2}>
+                Here's a <Hyperlink {...props}>Link</Hyperlink> to something
+              </div>
+            </Container>
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
     ),
   },
   {

@@ -4,9 +4,10 @@ import {jsx, CSSObject} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
+import {type} from '@workday/canvas-kit-labs-react-core';
 import {editIcon, arrowRightIcon} from '@workday/canvas-system-icons-web';
 
-import {TextButton} from '../index';
+import {TextButton, Hyperlink} from '../index';
 import README from '../README.md';
 
 const blueBackground: CSSObject = {
@@ -120,6 +121,13 @@ storiesOf('Components|Buttons/Button/React/Text', module)
         >
           Right Icon
         </TextButton>
+      </div>
+    </div>
+  ))
+  .add('Hyperlink', () => (
+    <div className="story">
+      <div css={type.body}>
+        Here is a <Hyperlink>Link</Hyperlink> to something
       </div>
     </div>
   ));
