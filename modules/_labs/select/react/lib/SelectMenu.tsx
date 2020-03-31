@@ -92,9 +92,6 @@ const Menu = styled('div')<Pick<SelectProps, 'error' | 'grow'> & Pick<SelectMenu
     // Offset the menu by the height of the select (spacingNumbers.xl)
     // minus the borderRadius of the select (borderRadius.m)
     top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
-    // TODO: Don't think we need this transition, but verify in
-    // IE11 before deleting it
-    // transition: `${menuFadeDuration / 1000}s opacity`,
     zIndex: 1,
   },
   ({error}) => ({
