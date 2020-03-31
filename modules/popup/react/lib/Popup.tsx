@@ -83,7 +83,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 
 const Container = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'width',
-})<PickRequired<PopupProps, 'transformOrigin' | 'width'>>(
+})<PickRequired<PopupProps, 'transformOrigin', 'width'>>(
   {
     position: 'relative',
     maxWidth: `calc(100vw - ${spacing.l})`,
