@@ -12,7 +12,7 @@ export interface PageHeaderProps {
    * If true, center the PageHeader content and make the PageHeader responsive in all three breakpoints. Enable this for PageHeaders in non-product pages.
    * @default false
    */
-  capWidth: boolean;
+  capWidth?: boolean;
   /**
    * The breakpoint (in `px`) at which the PageHeader's container spacing increases from size `s` to size `xl`.
    * @default 768
