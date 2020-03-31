@@ -69,9 +69,6 @@ const SelectButton = styled('button')<
     '&::placeholder': {
       color: inputColors.placeholder,
     },
-    '&:hover': {
-      borderColor: inputColors.hoverBorder,
-    },
     '&:focus:not([disabled])': {
       ...focusButtonCSS(),
     },
@@ -84,16 +81,26 @@ const SelectButton = styled('button')<
       },
     },
   },
-  ({error}) => ({
-    ...errorRing(error),
-  }),
-  ({error, isMenuHidden}) =>
-    !isMenuHidden &&
-    error === undefined && {
-      // If the menu is active, style the button as if it had
-      // focus (unless there's an error)
-      ...focusButtonCSS(),
-    },
+  ({error, isMenuHidden}) => {
+    if (error === undefined) {
+      // If there isn't an error, only show hover styles if the
+      // menu is hidden (otherwise, if the menu is visible, style
+      // the button as if it had focus)
+      return isMenuHidden
+        ? {
+            '&:hover:not([disabled]:not(:focus))': {
+              borderColor: inputColors.hoverBorder,
+            },
+          }
+        : {
+            ...focusButtonCSS(),
+          };
+    } else {
+      return {
+        ...errorRing(error),
+      };
+    }
+  },
   ({grow}) =>
     grow && {
       width: '100%',
