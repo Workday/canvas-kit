@@ -10,6 +10,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - ci: Release canary builds for prerelease branches ([#481](https://github.com/Workday/canvas-kit/pull/481)) [@anicholls](https://github.com/anicholls)
 - ci: Fix prerelease canary builds ([#501](https://github.com/Workday/canvas-kit/pull/501)) [@anicholls](https://github.com/anicholls)
 - feat: Add script for easy promotion of labs components ([#522](https://github.com/Workday/canvas-kit/pull/522)) [@anicholls](https://github.com/anicholls)
+- chore: Manage dependencies ([#533](https://github.com/Workday/canvas-kit/pull/533)) [@anicholls](https://github.com/anicholls)
 
 ### Components
 
