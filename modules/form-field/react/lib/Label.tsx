@@ -97,9 +97,9 @@ export default class Label extends React.Component<LabelProps> {
     return (
       <>
         {isLegend ? (
-          <LegendComponent {...props} children={children} />
+          <LegendComponent isLegend={isLegend} {...props} children={children} />
         ) : (
-          <LabelComponent {...props} children={children} />
+          <LabelComponent labelPosition={labelPosition} {...props} children={children} />
         )}
       </>
     );
