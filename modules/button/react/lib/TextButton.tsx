@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Themeable, CanvasTheme, useTheme, styled, type} from '@workday/canvas-kit-labs-react-core';
+import {Themeable, CanvasTheme, useTheme, type} from '@workday/canvas-kit-labs-react-core';
 import {themedFocusRing} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
