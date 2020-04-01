@@ -84,12 +84,12 @@ export default class Label extends React.Component<LabelProps> {
       labelPosition = Label.Position.Top,
       isLegend = false,
       requiredLabel = 'required',
-      ...props
+      ...elemProps
     } = this.props;
-    const children = !props.required
-      ? props.children
+    const children = !this.props.required
+      ? this.props.children
       : [
-          props.children,
+          this.props.children,
           <RequiredAstrisk key={'0'} title={requiredLabel}>
             *
           </RequiredAstrisk>,
@@ -97,9 +97,9 @@ export default class Label extends React.Component<LabelProps> {
     return (
       <>
         {isLegend ? (
-          <LegendComponent isLegend={isLegend} {...props} children={children} />
+          <LegendComponent isLegend={isLegend} {...elemProps} children={children} />
         ) : (
-          <LabelComponent labelPosition={labelPosition} {...props} children={children} />
+          <LabelComponent labelPosition={labelPosition} {...elemProps} children={children} />
         )}
       </>
     );

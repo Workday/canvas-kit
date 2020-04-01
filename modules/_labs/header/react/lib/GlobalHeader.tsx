@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Header from './Header';
+import Header, {HeaderProps} from './Header';
 import {HeaderVariant} from './shared/types';
 import {DubLogoTitle} from './parts';
 

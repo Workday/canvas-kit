@@ -83,7 +83,6 @@ describe('GlobalHeader', () => {
         onMenuClick: jest.fn(),
         leftSlot: <SearchBar onSubmit={jest.fn()} />,
         isCollapsed: true,
-        themeColor: HeaderTheme.White,
       };
       const propsHeader2 = {
         menuToggle: 'abcde',
@@ -94,7 +93,6 @@ describe('GlobalHeader', () => {
         brand: <DubLogoTitle />,
         variant: HeaderVariant.Global,
         children: undefined,
-        themeColor: HeaderTheme.White,
       };
 
       const childPropsHeader1 = shallow(<GlobalHeader {...propsHeader1} />)
