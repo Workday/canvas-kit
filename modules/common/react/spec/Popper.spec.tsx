@@ -37,15 +37,6 @@ describe('Popper', () => {
     component.unmount();
   });
 
-  test('should render with Popper.js inline when portal is false', () => {
-    const component = renderPopper({portal: false});
-
-    expect(PopperJS).toHaveBeenCalled();
-    expect(ReactDOM.createPortal).not.toHaveBeenCalled();
-    expect(component.find('#content').length).toBe(1);
-    component.unmount();
-  });
-
   test('should render nothing when open is false', () => {
     const component = renderPopper({open: false});
 
