@@ -4,6 +4,7 @@ import {jsx, CSSObject} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
+import {colors} from '@workday/canvas-kit-react-core';
 import {type} from '@workday/canvas-kit-labs-react-core';
 import {editIcon, arrowRightIcon} from '@workday/canvas-system-icons-web';
 
@@ -15,7 +16,7 @@ const blueBackground: CSSObject = {
   alignItems: 'center',
   justifyContent: 'center',
   flexWrap: 'wrap',
-  backgroundColor: '#0875e1',
+  backgroundColor: colors.blueberry400,
   margin: '0 10px',
   padding: '12px',
   maxWidth: 'max-content',
@@ -126,8 +127,15 @@ storiesOf('Components|Buttons/Button/React/Text', module)
   ))
   .add('Hyperlink', () => (
     <div className="story">
+      <h3>Default</h3>
       <div css={type.body}>
         Here is a <Hyperlink>Link</Hyperlink> to something
+      </div>
+      <h3>Inverse</h3>
+      <div
+        css={{...blueBackground, ...type.body, display: 'block', color: colors.frenchVanilla100}}
+      >
+        Here is a <Hyperlink variant={Hyperlink.Variant.Inverse}>Link</Hyperlink> to something
       </div>
     </div>
   ));

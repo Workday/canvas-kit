@@ -539,11 +539,32 @@ line-height, etc.).
 
 ## Static Properties
 
-> None
+#### `Variant: ButtonVariant`
+
+```tsx
+<Hyperlink variant={Hyperlink.Variant.Inverse}>Link</Hyperlink>
+```
+
+> The style of the link for different backgrounds
+
+Default: `TextButtonVariant.Default`
+
+| Theme     | Description |
+| --------- | ----------- |
+| `Default` | Blue text   |
+| `Inverse` | White text  |
 
 ## Component Props
 
+### Required
+
 > None
+
+### Optional
+
+#### `href: string`
+
+> The href url of the anchor tag
 
 ---
 
