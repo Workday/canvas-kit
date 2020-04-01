@@ -1,43 +1,37 @@
 /// <reference types="@testing-library/jest-dom/extend-expect" />
 
 import * as React from 'react';
-import {render, cleanup, fireEvent} from '@testing-library/react';
+import {render, fireEvent} from '@testing-library/react';
 
-import Tooltip, {useTooltip} from '../lib/Tooltip';
-
-const TooltipWithHook = () => {
-  const {targetProps, tooltipProps} = useTooltip();
-
-  return (
-    <>
-      <button {...targetProps}>Hover</button>
-      <Tooltip {...tooltipProps}>Tooltip Content</Tooltip>
-    </>
-  );
-};
+import {Tooltip} from '..';
 
 describe('Tooltip', () => {
-  afterEach(cleanup);
+  describe('when "type" is "label"', () => {
+    it('should render an aria-label', () => {
+      const {getByText} = render(
+        <Tooltip title="Add">
+          <span>Test Text</span>
+        </Tooltip>
+      );
 
-  it('should spread extra props on the element', async () => {
-    const {container} = render(<Tooltip data-propspread="test" />);
-    const tooltip = container.firstElementChild;
-
-    expect(tooltip).toHaveAttribute('role', 'tooltip');
+      expect(getByText('Test Text')).toHaveAttribute('aria-label', 'Add');
+    });
   });
 
-  describe('useToolip', () => {
-    it('should add aria attributes to correlate the target and the tooltip', async () => {
-      const rendered = render(<TooltipWithHook />);
+  describe('when "type" is "describe"', () => {
+    it('should render aria-describedby', () => {
+      const {getByText, getByRole} = render(
+        <Tooltip type="describe" title="This is an extra description">
+          <span>Test Text</span>
+        </Tooltip>
+      );
 
-      const target = await rendered.findByText('Hover');
-      const tooltip = await rendered.findByRole('tooltip');
+      fireEvent.mouseEnter(getByText('Test Text')); // triggers the tooltip
 
-      await fireEvent.mouseOver(target); // assign the ID to the tooltip
+      expect(getByText('Test Text')).toHaveAttribute('aria-describedby');
 
-      expect(tooltip).toHaveAttribute('id');
-      const id = tooltip.getAttribute('id');
-      expect(target).toHaveAttribute('aria-describedby', id);
+      const id = getByText('Test Text').getAttribute('aria-describedby');
+      expect(getByRole('tooltip')).toHaveAttribute('id', id);
     });
   });
 });

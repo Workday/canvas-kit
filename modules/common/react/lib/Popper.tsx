@@ -31,7 +31,7 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The additional options passed to the Popper's `popper.js` instance.
    */
-  popperOptions?: PopperOptions;
+  popperOptions?: Partial<PopperOptions>;
   /**
    * If true, attach the Popper to the `containerElement`. If false, render the Popper within the DOM hierarchy of its parent.
    * @default true
@@ -45,7 +45,7 @@ export const Popper = ({
   containerElement,
   open = true,
   placement: popperPlacement = 'bottom',
-  popperOptions,
+  popperOptions = {},
   portal = true,
   ...elemProps
 }: PopperProps) => {
@@ -61,6 +61,8 @@ export const Popper = ({
       return undefined;
     }
 
+    console.log('popperOptions', popperOptions);
+
     if (open && ref.current) {
       const popper = PopperJS.createPopper(anchorElement, ref.current, {
         placement: popperPlacement,
@@ -68,6 +70,9 @@ export const Popper = ({
         onFirstUpdate: data => {
           if (data.placement) {
             setPlacement(data.placement);
+          }
+          if (popperOptions.onFirstUpdate) {
+            popperOptions.onFirstUpdate(data);
           }
         },
       });

@@ -1,112 +1,77 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
-import {borderRadius, colors, spacing, type} from '@workday/canvas-kit-react-core';
-import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
-import {keyframes} from '@emotion/core';
-import uuid from 'uuid/v4';
+import innerText from 'react-innertext';
 
-export interface TooltipProps {
+import {getTransformFromPlacement, Popper, Placement} from '@workday/canvas-kit-react-common';
+
+import {TooltipContainer} from './TooltipContainer';
+import {useTooltip} from './useTooltip';
+
+export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   /**
-   * The origin from which the Tooltip will animate.
-   * @default {horizontal: 'center', vertical: 'top'}
+   * Determines the tooltip type for accessibility.
+   * * `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip `title` prop is the same as the text content of the wrapped element. E.g. IconButtons or Ellipsis tooltips.
+   * * `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional information about the target.
+   *
+   * **Note**: Assistive technology settings may ignore "aria-describedby". Consider alternative
+   * way to inform a user of additional important information.
+   * @default 'label'
    */
-  transformOrigin: TransformOrigin;
+  type?: 'label' | 'describe';
   /**
-   * HTML id of the tooltip container - useful for accessibility.
-   * Should link the tooltip container to a `aria-describedby` on the target
+   * If present, this will switch the Tooltip into a simpler to use mode where the
+   * Tooltip component can wrap a target and `title` is the contents of the tooltip.
+   * This should be a string in most cases. HTML is supported, but only text is understood
+   * by assistive technology. This is true for both `label` and `describe` modes.
    */
-  id?: string;
+  title: React.ReactNode;
+  /**
+   * Adding a placement property will indicate you would like to use the built-in positioning library Popper.
+   */
+  placement?: Placement;
+  /**
+   * Contents of the tooltip. Note this is not the contents of the target of the tooltip
+   */
+  children: React.ReactNode;
 }
 
-const tooltipAnimation = (transformOrigin: TransformOrigin) => {
-  const translate = getTranslateFromOrigin(transformOrigin, spacing.xxxs);
+export const Tooltip = ({
+  type = 'label',
+  title,
+  placement = 'top',
+  children,
+  ...elemProps
+}: TooltipProps) => {
+  const titleText = innerText(title);
+  const {targetProps, popperProps, tooltipProps} = useTooltip({type, titleText});
 
-  return keyframes`
-    0% {
-      opacity: 0;
-      transform: translate(${translate.x}px, ${translate.y}px);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0);
-    }
-  `;
+  return (
+    <React.Fragment>
+      {React.cloneElement(children as React.ReactElement<any>, targetProps)}
+      <Popper
+        placement={placement}
+        {...popperProps}
+        popperOptions={{
+          modifiers: [
+            {
+              name: 'pointerEvents',
+              phase: 'beforeWrite',
+              enabled: true,
+              fn: ({state}) => {
+                state.styles.popper.pointerEvents = 'none';
+              },
+            },
+          ],
+        }}
+      >
+        {({placement}) => {
+          const transformOrigin = getTransformFromPlacement(placement);
+          return (
+            <TooltipContainer transformOrigin={transformOrigin} {...elemProps} {...tooltipProps}>
+              {title}
+            </TooltipContainer>
+          );
+        }}
+      </Popper>
+    </React.Fragment>
+  );
 };
-
-const TooltipContainer = styled('div')<TooltipProps>(
-  {
-    ...type.body,
-    display: 'inline-flex',
-    borderRadius: borderRadius.m,
-    padding: spacing.xxs,
-    backgroundColor: 'rgba(0,0,0,.85)',
-    color: colors.frenchVanilla100,
-    fontSize: 13,
-    margin: spacing.xxxs,
-    a: {
-      color: colors.frenchVanilla100,
-      textDecoration: 'underline',
-    },
-  },
-  ({transformOrigin}) => ({
-    // animation: tooltipAnimation(transformOrigin),
-    // animationDuration: '150ms',
-    // animationTimingFunction: 'ease-out',
-    // transformOrigin: transformOrigin
-    //   ? `${transformOrigin.vertical} ${transformOrigin.horizontal}`
-    //   : 'top center',
-  })
-);
-
-export default class Tooltip extends React.Component<TooltipProps, {}> {
-  static defaultProps = {
-    transformOrigin: {
-      horizontal: 'center',
-      vertical: 'bottom',
-    },
-  };
-
-  public render() {
-    return (
-      <TooltipContainer {...this.props} role="tooltip">
-        {this.props.children}
-      </TooltipContainer>
-    );
-  }
-}
-
-/**
- * Convenience hook for creating components with tooltips
- */
-export function useTooltip() {
-  const [isOpen, setOpen] = React.useState(false);
-  const [ref, setRef] = React.useState<null | HTMLElement>(null);
-  const id = React.useRef<string>();
-  const onClose = () => {
-    setOpen(false);
-  };
-  const onOpen = (event: React.SyntheticEvent<HTMLElement>) => {
-    setRef(event.currentTarget);
-    if (!id.current) {
-      id.current = uuid();
-    }
-    setOpen(true);
-  };
-
-  return {
-    targetProps: {
-      'aria-describedby': id.current,
-      onMouseEnter: onOpen,
-      onMouseLeave: onClose,
-      onFocus: onOpen,
-      onBlur: onClose,
-    },
-    popperProps: {
-      open: isOpen,
-      anchorElement: ref,
-    },
-    tooltipProps: {
-      id: id.current,
-    },
-  };
-}
