@@ -69,6 +69,7 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
     case TextButtonVariant.Inverse:
       return {
         default: {
+          background: 'transparent',
           icon: colors.frenchVanilla100,
           label: colors.frenchVanilla100,
         },
@@ -77,7 +78,11 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
         },
-        active: {},
+        active: {
+          background: colors.soap200,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+        },
         focus: {
           background: colors.frenchVanilla100,
           icon: colors.blackPepper400,
