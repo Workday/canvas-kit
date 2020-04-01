@@ -410,6 +410,11 @@ will remove itself from the DOM (rendering only its children) and not attach any
 > Note: detecting intent will add scroll and mouse positioning listeners which could affect
 > performance.
 
+##### `container: HTMLElement`
+
+> The containing element in which the InputProvider is rendered into. This property should be set to
+> the element that the application root goes - not containing element of content. 
+
 ### Storybook Decorator
 
 We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your

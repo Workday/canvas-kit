@@ -4,6 +4,7 @@ import elementClosestPolyfill from 'element-closest';
 
 export interface InputProviderProps {
   provideIntent?: boolean;
+  container?: HTMLElement;
 }
 
 export interface InputProviderState {
@@ -114,6 +115,10 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   private eventTimer: number | undefined;
   private ref: React.RefObject<HTMLDivElement> = React.createRef();
 
+  static defaultProps = {
+    container: document.body,
+  };
+
   constructor(props: any) {
     super(props);
 
@@ -170,9 +175,17 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   provideIntent = this.props.provideIntent;
 
   componentDidMount() {
+    const {container} = this.props;
+    if (container) {
+      // bail early if input provider is already handling this
+      if (container.classList.contains(containerClass)) {
+        return;
+      }
+      container.classList.add(containerClass);
+    }
+
     // For IE11 and under, we'll need to polyfill element.closest
     elementClosestPolyfill(window);
-
     if (
       this.ref.current &&
       this.ref.current.parentElement &&
@@ -185,6 +198,14 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   }
 
   componentDidUpdate() {
+    if (this.props.container) {
+      const {container} = this.props;
+      const intent = this.provideIntent ? this.state.currentIntent : null;
+      container.setAttribute('data-whatinput', this.state.currentInput);
+      if (intent) {
+        container.setAttribute('data-whatintent', intent);
+      }
+    }
     try {
       window.sessionStorage.setItem('what-input', this.state.currentInput);
       window.sessionStorage.setItem('what-intent', this.state.currentIntent);
@@ -195,6 +216,10 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   }
 
   componentWillUnmount() {
+    if (this.props.container) {
+      this.props.container.classList.remove(containerClass);
+    }
+
     window.clearTimeout(this.eventTimer);
     this.enableListeners(false);
   }
@@ -345,12 +370,16 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   }
 
   render() {
-    if (this.state.nested) {
+    const {container} = this.props;
+    if (this.state.nested || container) {
       return this.props.children;
     }
 
     const intent = this.provideIntent ? this.state.currentIntent : null;
-    return (
+
+    return container ? (
+      container
+    ) : (
       <div
         className={containerClass}
         ref={this.ref}
