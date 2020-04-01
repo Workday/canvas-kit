@@ -23,10 +23,9 @@ Extends from the Popup component.
 
 ```tsx
 import * as React from 'react';
-import Popper from '@material-ui/core/Popper';
+import {Popper} from '@workday/canvas-kit-react-common';
 import {Toast} from '@workday/canvas-kit-react-toast';
 
-// We use Popper from Material UI for our positioning
 <Popper placement={'top'} open={this.state.open} anchorEl={anchorEl}>
   <Toast onClose={this.handleClose}>{this.props.children}</Toast>
 </Popper>;

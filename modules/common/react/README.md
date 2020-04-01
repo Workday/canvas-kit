@@ -74,7 +74,13 @@ includes custom `data-*` attributes such as `data-test-id` to help facilitate au
 
 #### `containerElement: Element`
 
-> The element that contains the portal children when `portal` is true.
+> The containing element for Popper elements. The Popper uses {@link
+> https://reactjs.org/docs/portals.html Portals} to place the DOM elements of the Popper in a
+> different place in the DOM to prevent issues with overflowed containers. When the popper is
+> opened, `aria-hidden` will be added to siblings to hide background content from assistive
+> technology like it is visibly hidden from sighted users. This property should be set to the
+> element that the application root goes - not containing element of content. This should be a
+> sibling or higher than the header and navigation elements of the application.
 
 Default: `document.body`
 
@@ -112,10 +118,3 @@ Default: `bottom`
 > Addtional options passed to the `popper.js` instance.
 
 ---
-
-#### `portal: boolean`
-
-> Flag to determine whether to use a portal for the popper. When false, the popper stays within the
-> DOM hierarchy of it's parent. When true, the popper is attached to the `containerElement`.
-
-Default: `true`

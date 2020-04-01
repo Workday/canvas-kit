@@ -22,10 +22,9 @@ yarn add @workday/canvas-kit-react-popup
 
 ```tsx
 import * as React from 'react';
-import Popper from '@material-ui/core/Popper';
+import {Popper} from '@workday/canvas-kit-react-common';
 import {Popup} from '@workday/canvas-kit-react-popup';
 
-// We use Popper from Material UI for our positioning
 <Popper placement={'bottom'} open={this.state.open} anchorEl={anchorEl}>
   <Popup
     width={300}

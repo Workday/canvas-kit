@@ -15,9 +15,16 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * The element that contains the portal children when `portal` is true.
+   * The containing element for Popper elements. The Popper uses
+   * {@link https://reactjs.org/docs/portals.html Portals} to place the DOM elements
+   * of the Popper in a different place in the DOM to prevent issues with overflowed containers.
+   * When the popper is opened, `aria-hidden` will be added to siblings to hide background
+   * content from assistive technology like it is visibly hidden from sighted users. This property
+   * should be set to the element that the application root goes - not containing element of content.
+   * This should be a sibling or higher than the header and navigation elements of the application.
+   * @default document.body
    */
-  containerElement?: Element;
+  containerElement?: HTMLElement;
   /**
    * If true, set the Popper to the open state.
    * @default true
@@ -32,11 +39,6 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    * The additional options passed to the Popper's `popper.js` instance.
    */
   popperOptions?: PopperOptions;
-  /**
-   * If true, attach the Popper to the `containerElement`. If false, render the Popper within the DOM hierarchy of its parent.
-   * @default true
-   */
-  portal: boolean;
 }
 
 export class Popper extends React.PureComponent<PopperProps> {
@@ -45,7 +47,6 @@ export class Popper extends React.PureComponent<PopperProps> {
   static defaultProps = {
     open: true,
     placement: 'bottom',
-    portal: true,
   };
 
   public componentWillUnmount() {
@@ -58,10 +59,6 @@ export class Popper extends React.PureComponent<PopperProps> {
   public render() {
     if (!this.props.open) {
       return null;
-    }
-
-    if (!this.props.portal) {
-      return this.renderPopper();
     }
 
     // do not use defaultProps for containerElement because document may not be statically available
@@ -77,7 +74,6 @@ export class Popper extends React.PureComponent<PopperProps> {
       open,
       placement,
       popperOptions,
-      portal,
       ...elemProps
     } = this.props;
 
