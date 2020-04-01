@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.0.0-beta.0 (2020-03-30)
+
+### Infrastructure
+
+- ci: Release canary builds for prerelease branches ([#481](https://github.com/Workday/canvas-kit/pull/481)) [@anicholls](https://github.com/anicholls)
+- ci: Fix prerelease canary builds ([#501](https://github.com/Workday/canvas-kit/pull/501)) [@anicholls](https://github.com/anicholls)
+- feat: Add script for easy promotion of labs components ([#522](https://github.com/Workday/canvas-kit/pull/522)) [@anicholls](https://github.com/anicholls)
+- chore: Manage dependencies ([#533](https://github.com/Workday/canvas-kit/pull/533)) [@anicholls](https://github.com/anicholls)
+
+### Components
+
+- **[BREAKING]** refactor(button): Simplify Button components and prep for theming ([#471](https://github.com/Workday/canvas-kit/pull/471)) [@anicholls](https://github.com/anicholls)
+- **[BREAKING]** refactor: Rename and move IconButtonToggleGroup to SegmentedControl ([#505](https://github.com/Workday/canvas-kit/pull/505)) [@anicholls](https://github.com/anicholls)
+- **[BREAKING]** fix(modal): Use React portals for accessibility fixes ([#419](https://github.com/Workday/canvas-kit/pull/419)) [@NicholasBoll](https://github.com/NicholasBoll)
+- **[BREAKING]** chore: Promote SegmentedControl out of labs ([#524](https://github.com/Workday/canvas-kit/pull/524)) [@anicholls](https://github.com/anicholls)
+- fix(button): Misc. fixes after refactor ([#509](https://github.com/Workday/canvas-kit/pull/509)) [@anicholls](https://github.com/anicholls)
+- feat(button): Add theming support to buttons ([#527](https://github.com/Workday/canvas-kit/pull/527)) [@anicholls](https://github.com/anicholls)
+
 # 3.5.0 (2020-03-12)
 
 ### Infrastructure
