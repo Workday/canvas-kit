@@ -28,10 +28,10 @@ const ButtonLabelIconStyled = styled('span', {
     marginLeft:
       iconPosition === ButtonIconPosition.Right
         ? undefined
-        : `-${dropdown ? spacing.xxs : spacing.xxxs}`,
+        : `-${dropdown ? spacing.xxs : spacing.xxxs} !important`,
     marginRight:
       iconPosition === ButtonIconPosition.Right
-        ? `-${dropdown ? spacing.xxs : spacing.xxxs}  `
+        ? `-${dropdown ? spacing.xxs : spacing.xxxs} !important`
         : undefined,
   })
 );
