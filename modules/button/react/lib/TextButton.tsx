@@ -46,10 +46,12 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           label: theme.palette.primary.main,
         },
         hover: {
+          background: colors.soap200,
           icon: theme.palette.primary.dark,
           label: theme.palette.primary.dark,
         },
         active: {
+          background: colors.soap300,
           icon: theme.palette.primary.dark,
           label: theme.palette.primary.dark,
         },
@@ -59,6 +61,7 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           focusRing: themedFocusRing(theme),
         },
         disabled: {
+          background: 'transparent',
           icon: theme.palette.primary.light,
           label: theme.palette.primary.light,
         },
@@ -66,15 +69,32 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
     case TextButtonVariant.Inverse:
       return {
         default: {
+          background: 'transparent',
           icon: colors.frenchVanilla100,
           label: colors.frenchVanilla100,
         },
-        hover: {},
-        active: {},
+        hover: {
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+        },
+        active: {
+          background: colors.soap200,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+        },
         focus: {
-          focusRing: themedFocusRing(theme, {outerColor: 'currentColor'}),
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          focusRing: themedFocusRing(theme, {
+            separation: 2,
+            innerColor: 'currentColor',
+            outerColor: colors.frenchVanilla100,
+          }),
         },
         disabled: {
+          background: 'transparent',
           icon: 'rgba(255, 255, 255, 0.5)',
           label: 'rgba(255, 255, 255, 0.5)',
         },
@@ -87,7 +107,14 @@ const containerStyles = {
   border: '0',
   padding: `0 ${spacing.xxs}`,
   minWidth: 'auto',
-  '&:hover:not([disabled])': {textDecoration: 'underline'},
+  '.wdc-text-button-label': {
+    borderBottom: '2px solid transparent',
+    paddingTop: '2px',
+    transition: 'border-color 0.3s',
+  },
+  '&:hover:not([disabled]) .wdc-text-button-label': {
+    borderBottomColor: 'currentColor',
+  },
 };
 
 const TextButton = ({
@@ -126,7 +153,7 @@ const TextButton = ({
       {icon && iconPosition === ButtonIconPosition.Left && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
-      <ButtonLabel>{children}</ButtonLabel>
+      <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
       {icon && iconPosition === ButtonIconPosition.Right && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
