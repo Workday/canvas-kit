@@ -13,8 +13,23 @@ import {
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {SelectMenu, menuFadeDuration} from './SelectMenu';
-import {SelectOptionProps} from './SelectOption';
+import {default as SelectOption} from './SelectOption';
 import uuid from 'uuid/v4';
+
+export interface Option {
+  // This allows us to accept any keys in the Option
+  [key: string]: any;
+  disabled?: boolean;
+  id?: string;
+
+  // label and value are required keys
+  label: string;
+  value: string;
+}
+
+export interface RenderOptionFunction {
+  (option: Option): React.ReactNode;
+}
 
 export interface SelectProps
   extends Themeable,
@@ -22,13 +37,19 @@ export interface SelectProps
     Pick<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
     Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /**
-   * The SelectOption children of the Select.
-   */
-  children?: React.ReactElement<SelectOptionProps>[];
-  /**
    * The type of error associated with the Select (if applicable).
    */
   error?: ErrorType;
+  // TODO: Improve the options prop description
+  /**
+   * The options of the Select.
+   */
+  options: Array<Option>;
+  // TODO: Improve the renderOption prop description
+  /**
+   * The function called to render the content of each option.
+   */
+  renderOption?: RenderOptionFunction;
   /**
    * The value of the Select.
    */
@@ -170,34 +191,29 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   // Store option ids since we may need to generate them if they're
   // undefined
   private setOptionIds = (): void => {
-    this.optionIds = React.Children.map(
-      this.props.children,
-      (child: React.ReactElement<SelectOptionProps>) => child.props.id || uuid()
-    );
+    this.optionIds = this.props.options.map(option => {
+      return option.id || uuid();
+    });
   };
 
   // Store option labels so we can search on them for type-ahead
   private setOptionLabels = (): void => {
-    this.optionLabels = React.Children.map(
-      this.props.children,
-      (child: React.ReactElement<SelectOptionProps>) => child.props.label || ''
-    );
+    this.optionLabels = this.props.options.map(option => {
+      return option.label || '';
+    });
   };
 
   // Store option values since we may need to populate them based on the
   // option label if the value is undefined
   private setOptionValues = (): void => {
-    this.optionValues = React.Children.map(
-      this.props.children,
-      (child: React.ReactElement<SelectOptionProps>) => {
-        const {label, value} = child.props;
-        if (value !== undefined) {
-          return value;
-        } else {
-          return label !== undefined ? label : '';
-        }
+    this.optionValues = this.props.options.map(option => {
+      const {label, value} = option;
+      if (value !== undefined) {
+        return value;
+      } else {
+        return label !== undefined ? label : '';
       }
-    );
+    });
   };
 
   // Store various option props (ids, labels, values) since the Select
@@ -224,14 +240,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     endIndex: number = this.optionLabels.length,
     ignoreDisabled: boolean = true
   ): number => {
-    const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
-      SelectOptionProps
-    >[];
-
     for (let i = startIndex; i < endIndex; i++) {
       const label = this.optionLabels[i].toLowerCase();
       if (label.indexOf(startString.toLowerCase()) === 0) {
-        if (!ignoreDisabled || (ignoreDisabled && !childrenArray[i].props.disabled)) {
+        if (!ignoreDisabled || (ignoreDisabled && !this.props.options[i].disabled)) {
           return i;
         }
       }
@@ -489,15 +501,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleOptionSelection = (index: number): void => {
-    const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
-      SelectOptionProps
-    >[];
-    const optionProps = childrenArray[index].props;
+    const option = this.props.options[index];
 
     // Abort immediately if:
     // * The menu is a non-interactive state
     // * A disabled option was clicked (we ignore these clicks)
-    if (!this.isMenuInteractive() || optionProps.disabled) {
+    if (!this.isMenuInteractive() || option.disabled) {
       return;
     }
 
@@ -516,10 +525,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    const childrenArray = React.Children.toArray(this.props.children) as React.ReactElement<
-      SelectOptionProps
-    >[];
-    const numOptions = childrenArray.length;
+    // Abort immediately if the menu is a non-interactive state
+    if (!this.isMenuInteractive()) {
+      return;
+    }
+
+    const {options} = this.props;
+    const numOptions = options.length;
 
     const {focusedOptionIndex, isMenuHidden} = this.state;
 
@@ -542,11 +554,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
             let nextIndex = focusedOptionIndex + direction;
-            while (
-              nextIndex < numOptions &&
-              nextIndex >= 0 &&
-              childrenArray[nextIndex].props.disabled
-            ) {
+            while (nextIndex < numOptions && nextIndex >= 0 && options[nextIndex].disabled) {
               nextIndex += direction;
             }
             nextFocusedIndex =
@@ -595,23 +603,30 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  renderChildren = (
-    child: React.ReactElement<SelectOptionProps>,
-    index: number
-  ): React.ReactNode => {
-    return React.cloneElement(child, {
-      error: this.props.error,
-      focused: this.state.focusedOptionIndex === index,
-      id: this.optionIds[index],
-      onMouseDown: (event: React.MouseEvent) => {
-        event.preventDefault();
-        this.handleOptionSelection(index);
-      },
-      optionRef: this.state.focusedOptionIndex === index ? this.focusedOptionRef : undefined,
-      selected: this.state.selectedOptionIndex === index,
-      suppressed: !this.isMenuInteractive(),
-      value: this.optionValues[index],
+  renderOptions = (options: Array<Option>, renderOption: RenderOptionFunction) => {
+    return options.map((option, index) => {
+      const optionProps = {
+        'aria-selected': this.state.selectedOptionIndex === index ? true : undefined,
+        disabled: option.disabled,
+        error: this.props.error,
+        focused: this.state.focusedOptionIndex === index,
+        id: this.optionIds[index],
+        key: this.optionIds[index],
+        onMouseDown: (event: React.MouseEvent) => {
+          event.preventDefault();
+          this.handleOptionSelection(index);
+        },
+        optionRef: this.state.focusedOptionIndex === index ? this.focusedOptionRef : undefined,
+        suppressed: !this.isMenuInteractive(),
+        value: this.optionValues[index],
+      };
+
+      return <SelectOption {...optionProps}>{renderOption(option)}</SelectOption>;
     });
+  };
+
+  renderOption: RenderOptionFunction = option => {
+    return <div>{option.label}</div>;
   };
 
   public render() {
@@ -624,9 +639,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       grow,
       name,
       onChange,
+      options,
       value,
       ...elemProps
     } = this.props;
+
+    // Use default renderOption if renderOption prop isn't provided
+    const renderOption = this.props.renderOption || this.renderOption;
 
     const {focusedOptionIndex, isMenuHidden, isMenuHiding, label} = this.state;
 
@@ -664,7 +683,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             onBlur={this.handleMenuBlur}
             onKeyDown={this.handleKeyboardShortcuts}
           >
-            {React.Children.map(children, this.renderChildren)}
+            {this.renderOptions(options, renderOption)}
           </SelectMenu>
         )}
         <SelectMenuIcon

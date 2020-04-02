@@ -34,12 +34,6 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
   optionRef?: React.Ref<HTMLLIElement>;
   /**
    * @ignore
-   * If true, set the SelectOption to the selected state. This prop is managed by the parent Select and should NOT be explicitly set on the SelectOption.
-   * @default false
-   */
-  selected?: boolean;
-  /**
-   * @ignore
    * If true, set the SelectOption to the suppressed (from user interaction) state. This prop is managed by the parent Select and should NOT be explicitly set on the SelectOption.
    * @default false
    */
@@ -57,28 +51,39 @@ const Option = styled('li')<SelectOptionProps>(
     // In case label is empty/undefined for some reason
     minHeight: type.body.lineHeight,
   },
-  ({disabled, focused, selected, suppressed}) => {
+  ({disabled, focused, suppressed}) => {
     if (disabled) {
+      // If the option is disabled, return disabled styles...
       return {
         color: colors.licorice100,
       };
     } else if (focused) {
+      // ...else if the option is focused, return focused styles...
       return {
         backgroundColor: commonColors.focusBackground,
         color: typeColors.inverse,
       };
-    } else if (selected) {
-      return {
-        backgroundColor: colors.blueberry100,
-      };
-    } else if (!suppressed) {
-      return {
-        '&:hover': {
-          backgroundColor: commonColors.hoverBackground,
+    } else {
+      // ...else return hover and selected (via aria-selected) styles
+      const selectedStyles = {
+        '&[aria-selected="true"]': {
+          backgroundColor: colors.blueberry100,
         },
       };
-    } else {
-      return;
+      // Do not display hover styles if the option is suppressed
+      const hoverStyles = suppressed
+        ? {}
+        : {
+            '&:hover': {
+              backgroundColor: commonColors.hoverBackground,
+            },
+          };
+      return {
+        // Place selected styles after hover styles to have selected styles
+        // override hover styles
+        ...hoverStyles,
+        ...selectedStyles,
+      };
     }
   },
   ({error}) => ({
@@ -92,19 +97,11 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
   };
 
   public render() {
-    const {id, label, optionRef, selected, value, ...elemProps} = this.props;
+    const {children, id, label, optionRef, value, ...elemProps} = this.props;
 
     return (
-      <Option
-        aria-selected={selected === true ? 'true' : undefined}
-        data-value={value}
-        id={id}
-        ref={optionRef}
-        role="option"
-        selected={selected}
-        {...elemProps}
-      >
-        {label}
+      <Option data-value={value} id={id} ref={optionRef} role="option" {...elemProps}>
+        {children}
       </Option>
     );
   }

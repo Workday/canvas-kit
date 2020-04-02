@@ -8,6 +8,8 @@ describe('Select', () => {
 
   const selectButtonRole = 'button';
 
+  const options = [{label: 'Option 1', value: 'option1'}, {label: 'Option 2', value: 'option2'}];
+
   // TODO: Delete helpers related to old tests
 
   // const optionRole = 'option';
@@ -23,24 +25,14 @@ describe('Select', () => {
   describe('when rendered with the id prop', () => {
     it('should render a button with that id', () => {
       const id = 'selectButton';
-      const {getByRole} = render(
-        <Select id={id} onChange={cb}>
-          <SelectOption value="option1" label="Option 1" />
-          <SelectOption value="option2" label="Option 2" />
-        </Select>
-      );
+      const {getByRole} = render(<Select id={id} onChange={cb} options={options} />);
       expect(getByRole(selectButtonRole)).toHaveAttribute('id', id);
     });
   });
 
   describe('when rendered with the disabled prop', () => {
     it('should render a disabled button', () => {
-      const {getByRole} = render(
-        <Select disabled={true} onChange={cb}>
-          <SelectOption value="option1" label="Option 1" />
-          <SelectOption value="option2" label="Option 2" />
-        </Select>
-      );
+      const {getByRole} = render(<Select disabled={true} onChange={cb} options={options} />);
       expect(getByRole(selectButtonRole)).toHaveProperty('disabled', true);
     });
   });
