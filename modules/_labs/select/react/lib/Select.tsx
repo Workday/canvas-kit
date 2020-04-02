@@ -88,7 +88,7 @@ const SelectButton = styled('button')<
       // the button as if it had focus)
       return isMenuHidden
         ? {
-            '&:hover:not([disabled]:not(:focus))': {
+            '&:hover:not([disabled]):not(:focus)': {
               borderColor: inputColors.hoverBorder,
             },
           }
