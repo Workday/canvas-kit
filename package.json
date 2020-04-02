@@ -124,6 +124,10 @@
     "tslint-react": "^3.6.0",
     "typescript": "^3.8.3"
   },
+  "resolutions": {
+    "**/optimist/minimist": "1.2.5",
+    "**/commitizen/minimist": "1.2.5"
+  },
   "scripts": {
     "start": "node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
