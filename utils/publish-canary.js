@@ -5,14 +5,35 @@ const request = require('request');
 const {promisify} = require('util');
 const cmd = promisify(require('node-cmd').get);
 
-const [
+const {
   SLACK_WEBHOOK,
+  TRAVIS_BRANCH,
   TRAVIS_BUILD_URL = 'https://travis-ci.org/Workday/canvas-kit/branches',
-] = process.argv.slice(2);
-const regex = /@workday\/[a-z-]*@(\d*.\d*.\d*-next.\d*\+\w*)/gm;
-const data = {};
+} = process.env;
 
-cmd('yarn lerna publish --yes --force-publish="*" --canary --preid next --dist-tag next')
+const data = {};
+let preid;
+
+if (TRAVIS_BRANCH === 'master') {
+  preid = 'next';
+} else if (TRAVIS_BRANCH.match(/^prerelease\/v\d*$/g)) {
+  preid = 'prerelease';
+} else {
+  console.error('No travis branch provided');
+  process.exit(1);
+}
+
+const regex = new RegExp('@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-' + preid + '.\\d*\\+\\w*)', 'g');
+const lernaFlags = [
+  `--yes`,
+  `--force-publish="*"`,
+  `--canary`,
+  `--preid ${preid}`,
+  `--dist-tag ${preid}`,
+  preid === 'prerelease' ? 'major' : '',
+];
+
+cmd(`yarn lerna publish ${lernaFlags.join(' ')}`)
   .then(output => {
     console.log(output);
 
@@ -28,8 +49,8 @@ cmd('yarn lerna publish --yes --force-publish="*" --canary --preid next --dist-t
         json: {
           attachments: [
             {
-              fallback: 'Plain-text summary of the attachment.',
-              color: '#2eb886',
+              fallback: `New canary build published (v${data.version})`,
+              color: 'good',
               author_name: `New canary build published (v${data.version})`,
               author_link: TRAVIS_BUILD_URL,
               title: `Merge commit ${sha}`,

@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
-import {beta_Button as Button} from '@workday/canvas-kit-react-button';
+import '@workday/canvas-kit-css-button/index.scss';
 import './index.scss';
 // @ts-ignore
 import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
@@ -34,9 +34,9 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
           position: 'relative',
         }}
       >
-        <Button variant={Button.Variant.Delete} onClick={this.onOpenPopupClick}>
+        <button className="wdc-btn wdc-btn-delete" onClick={this.onOpenPopupClick}>
           Delete Item
-        </Button>
+        </button>
         {open ? (
           <div
             className="wdc-popup wdc-popup-padding-s wdc-popup-animation-origin-top-center"
@@ -59,16 +59,16 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
             <div style={{marginBottom: '24px'}} className="wdc-popup-body">
               Are you sure you'd like to delete the item titled 'My Item'?
             </div>
-            <Button
-              style={{marginRight: '16px'}}
+            <button
+              className="wdc-btn wdc-btn-delete"
               onClick={this.onDeleteClick}
-              variant={Button.Variant.Delete}
+              style={{marginRight: '16px'}}
             >
-              Delete
-            </Button>
-            <Button onClick={this.onCancelClick} variant={Button.Variant.Secondary}>
+              Delete Item
+            </button>
+            <button className="wdc-btn" onClick={this.onCancelClick}>
               Cancel
-            </Button>
+            </button>
           </div>
         ) : null}
       </div>

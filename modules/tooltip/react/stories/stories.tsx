@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import Popper from '@material-ui/core/Popper';
+import {Popper} from '@workday/canvas-kit-react-common';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 import {IconButton} from '../../../button/react';
@@ -45,7 +45,7 @@ class TooltipWrapper extends React.Component<{}, TooltipWrapperState> {
             aria-label="Close"
           />
         </div>
-        <Popper open={open} anchorEl={this.state.anchorEl} placement={'top'}>
+        <Popper open={open} anchorElement={this.state.anchorEl} placement={'top'}>
           <Tooltip id={'123'}>Close</Tooltip>
         </Popper>
       </div>

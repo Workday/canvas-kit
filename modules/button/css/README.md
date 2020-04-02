@@ -47,10 +47,10 @@ to use the class name `wdc-btn-deprecated` for the old styling. Note: this will 
 in a future release.
 
 ```html
-<button class="wdc-btn-deprecated">Primary</button>
+<button class="wdc-btn-deprecated">Secondary</button>
 <button class="wdc-btn-deprecated wdc-btn-primary">Primary</button>
-<button class="wdc-btn-deprecated wdc-btn-delete">Primary</button>
-<button class="wdc-btn-deprecated wdc-btn-split">Primary</button>
+<button class="wdc-btn-deprecated wdc-btn-delete">Delete</button>
+<button class="wdc-btn-deprecated wdc-btn-split">Split</button>
 ```
 
 ---
@@ -284,7 +284,9 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 ```
 
 ### Text Button
-> Use by adding `.wdc-btn-text` when you want text to behave like a button. If you want display text on a dark background you can use `.wdc-btn-text-inverse`.
+
+> Use by adding `.wdc-btn-text` when you want text to behave like a button. If you want display text
+> on a dark background you can use `.wdc-btn-text-inverse`.
 
 ```html
 <button class="wdc-btn-text">Text Button</button>
@@ -293,7 +295,10 @@ Apply primary styling to the button by adding `.wdc-btn-primary` to the buttons 
 ```
 
 ### Inline Icon
-You can use a [System Icon](../../icon/css/README.md) either before or after the text of Primary, Secondary, Delete and Text buttons. The class `.wdc-icon-position-left` (default) or  `.wdc-icon-position-right` adjust the margin of the icon.
+
+You can use a [System Icon](../../icon/css/README.md) either before or after the text of Primary,
+Secondary, Delete and Text buttons. The class `.wdc-icon-position-left` (default) or
+`.wdc-icon-position-right` adjust the margin of the icon.
 
 `System Icon` requires a JavaScript import for the injector:
 
@@ -309,10 +314,10 @@ initializeIcons();
 </button>
 
 <a href="#" className="wdc-btn-text">
-  Continue <i className="wdc-icon wdc-icon-position-right" data-icon="arrowRight" data-category="system" />
+  Continue
+  <i className="wdc-icon wdc-icon-position-right" data-icon="arrowRight" data-category="system" />
 </a>
 ```
-
 
 **Accessibility note**: When an attached menu is displayed, add `aria-expanded="true"` to the
 button.
