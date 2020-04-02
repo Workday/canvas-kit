@@ -13,6 +13,10 @@ export interface ModalProps extends ModalContentProps {
    * @default false
    */
   open: boolean;
+  /**
+   * The padding of the Modal. Accepts `zero`, `s`, or `l`.
+   * @default PopupPadding.l
+   */
 }
 
 const Modal = ({

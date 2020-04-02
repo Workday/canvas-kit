@@ -11,12 +11,12 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * The padding of the Modal. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
    */
-  padding: PopupPadding;
+  padding?: PopupPadding;
   /**
    * The width of the Modal. Accepts `s` or `l`.
    * @default ModalWidth.s
    */
-  width: ModalWidth;
+  width?: ModalWidth;
   /**
    * The function called when the Modal is closed.
    * If this callback is provided, the Modal will have
@@ -32,7 +32,7 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * the close command. If your application uses custom popup stacking, do not set this to true.
    * @default true
    */
-  closeOnEscape: boolean;
+  closeOnEscape?: boolean;
   /**
    * The heading of the Modal.
    */
@@ -141,13 +141,13 @@ const useInitialFocus = (
 };
 
 const ModalContent = ({
+  closeOnEscape = true,
+  width = ModalWidth.s,
+  padding = PopupPadding.l,
   handleClose,
   children,
-  closeOnEscape,
   firstFocusRef,
-  width,
   heading,
-  padding,
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
