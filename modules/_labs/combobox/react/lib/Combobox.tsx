@@ -215,7 +215,7 @@ const Combobox = ({
   }, [autocompleteItems, isFocused, value]);
 
   const handleAutocompleteClick = (
-    event: React.SyntheticEvent,
+    event: React.KeyboardEvent | React.MouseEvent,
     menuItemProps: MenuItemProps
   ): void => {
     if (menuItemProps.isDisabled) {
@@ -225,7 +225,7 @@ const Combobox = ({
     setIsFocused(false);
     setInputValue(getTextFromElement(menuItemProps.children));
     if (menuItemProps.onClick) {
-      menuItemProps.onClick(event);
+      menuItemProps.onClick(event as React.MouseEvent);
     }
   };
 
