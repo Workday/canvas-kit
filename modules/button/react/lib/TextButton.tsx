@@ -1,74 +1,171 @@
 import * as React from 'react';
-import {ButtonBaseLabel, ButtonLabelIcon} from './ButtonBase';
-import {getButtonStyle} from './utils';
-import {styled} from '@workday/canvas-kit-labs-react-core';
-import isPropValid from '@emotion/is-prop-valid';
-import {ButtonSize, IconPosition, TextButtonVariant} from './types';
-import {BaseButtonProps} from './Button';
-import {textButtonStyles} from './ButtonStyles';
+import {Themeable, CanvasTheme, useTheme, type} from '@workday/canvas-kit-labs-react-core';
+import {themedFocusRing} from '@workday/canvas-kit-react-common';
+import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {TextButtonVariant, ButtonIconPosition, ButtonColors} from './types';
+import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
-export interface TextButtonProps extends BaseButtonProps<TextButtonVariant> {
+export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Themeable {
+  /**
+   * The variant of the TextButton.
+   * @default TextButtonVariant.Default
+   */
+  variant?: TextButtonVariant;
+  /**
+   * The size of the TextButton.
+   * @default 'medium'
+   */
+  size?: 'small' | 'medium';
   /**
    * The position of the TextButton icon. Accepts `Left` or `Right`.
-   * @default IconPosition.Left
+   * @default ButtonIconPosition.Left
    */
-  iconPosition?: IconPosition;
+  iconPosition?: ButtonIconPosition;
+  /**
+   * The ref to the button that the styled component renders.
+   */
+  buttonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * The icon of the TextButton.
+   */
+  icon?: CanvasSystemIcon;
+  /**
+   * The capitialization of the text in the button.
+   */
+  allCaps?: boolean;
 }
 
-const TextButtonCon = styled('button', {
-  shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<TextButtonProps>(
-  textButtonStyles.styles,
-  ({variant}) => getButtonStyle(textButtonStyles, variant),
-  ({size}) => {
-    const {sizes} = textButtonStyles.variants!;
-
-    switch (size) {
-      case ButtonSize.Large:
-      default:
-        return sizes.large;
-      case ButtonSize.Medium:
-      case ButtonSize.Small:
-        return sizes.small;
-    }
+const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): ButtonColors => {
+  switch (variant) {
+    case TextButtonVariant.Default:
+    default:
+      return {
+        default: {
+          icon: theme.palette.primary.main,
+          label: theme.palette.primary.main,
+        },
+        hover: {
+          background: colors.soap200,
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
+        },
+        active: {
+          background: colors.soap300,
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
+        },
+        focus: {
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
+          focusRing: themedFocusRing(theme),
+        },
+        disabled: {
+          background: 'transparent',
+          icon: theme.palette.primary.light,
+          label: theme.palette.primary.light,
+        },
+      };
+    case TextButtonVariant.Inverse:
+      return {
+        default: {
+          background: 'transparent',
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
+        },
+        hover: {
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+        },
+        active: {
+          background: colors.soap200,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+        },
+        focus: {
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          focusRing: themedFocusRing(theme, {
+            separation: 2,
+            innerColor: 'currentColor',
+            outerColor: colors.frenchVanilla100,
+          }),
+        },
+        disabled: {
+          background: 'transparent',
+          icon: 'rgba(255, 255, 255, 0.5)',
+          label: 'rgba(255, 255, 255, 0.5)',
+        },
+      };
   }
-);
+};
 
-export default class TextButton extends React.Component<TextButtonProps> {
-  public static IconPosition = IconPosition;
-  public static Variant = TextButtonVariant;
-  public static Size = ButtonSize;
+const containerStyles = {
+  borderRadius: borderRadius.m,
+  border: '0',
+  padding: `0 ${spacing.xxs}`,
+  minWidth: 'auto',
+  '.wdc-text-button-label': {
+    borderBottom: '2px solid transparent',
+    paddingTop: '2px',
+    transition: 'border-color 0.3s',
+  },
+  '&:hover:not([disabled]) .wdc-text-button-label': {
+    borderBottomColor: 'currentColor',
+  },
+};
 
-  static defaultProps = {
-    iconPosition: IconPosition.Left,
-    variant: TextButtonVariant.Default,
-    size: ButtonSize.Large,
-  };
+const TextButton = ({
+  theme = useTheme(),
+  variant = TextButtonVariant.Default,
+  size = 'medium',
+  iconPosition = ButtonIconPosition.Left,
+  buttonRef,
+  children,
+  icon,
+  allCaps,
+  ...elemProps
+}: TextButtonProps) => {
+  // Note: We don't use ButtonLabel because the label styles differ from other button types
+  const allContainerStyles = allCaps
+    ? {
+        ...containerStyles,
+        ...type.variant.caps,
+        ...type.variant.button,
+        fontSize: size === 'medium' ? type.body.fontSize : undefined,
+        letterSpacing: '.5px',
+      }
+    : {
+        ...containerStyles,
+        fontSize: size === 'medium' ? type.body.fontSize : undefined,
+      };
 
-  public render() {
-    const {
-      buttonRef,
-      onClick,
-      children,
-      iconPosition,
-      size,
-      variant,
-      icon,
-      ...elemProps
-    } = this.props;
+  return (
+    <ButtonContainer
+      colors={getTextButtonColors(variant, theme)}
+      ref={buttonRef}
+      size={size}
+      extraStyles={allContainerStyles}
+      {...elemProps}
+    >
+      {icon && iconPosition === ButtonIconPosition.Left && (
+        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+      )}
+      <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
+      {icon && iconPosition === ButtonIconPosition.Right && (
+        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+      )}
+    </ButtonContainer>
+  );
+};
 
-    return (
-      <TextButtonCon onClick={onClick} ref={buttonRef} size={size} variant={variant} {...elemProps}>
-        {icon && iconPosition === IconPosition.Left && (
-          <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
-        )}
-        <ButtonBaseLabel size={size} variant={variant}>
-          {children}
-        </ButtonBaseLabel>
-        {icon && iconPosition === IconPosition.Right && (
-          <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
-        )}
-      </TextButtonCon>
-    );
-  }
-}
+TextButton.IconPosition = ButtonIconPosition;
+TextButton.Variant = TextButtonVariant;
+TextButton.Size = {
+  Small: 'small',
+  Medium: 'medium',
+} as const;
+
+export default TextButton;

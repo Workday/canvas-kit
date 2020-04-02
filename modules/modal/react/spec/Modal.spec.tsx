@@ -19,10 +19,10 @@ describe('Modal', () => {
 
   test('Modal should spread extra props', async () => {
     const cb = jest.fn();
-    const {container} = render(
+    const {getByRole} = render(
       <Modal handleClose={cb} heading="Test" open={true} data-propspread="test" />
     );
 
-    expect(container.firstChild).toHaveAttribute('data-propspread', 'test');
+    expect(getByRole('dialog').parentElement).toHaveAttribute('data-propspread', 'test');
   });
 });

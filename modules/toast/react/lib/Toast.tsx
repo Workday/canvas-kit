@@ -5,7 +5,6 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TransformOrigin} from '@workday/canvas-kit-react-common';
-import {IconButtonSize} from '@workday/canvas-kit-react-button';
 import styled from '@emotion/styled';
 
 export interface ToastProps {
@@ -96,7 +95,7 @@ export default class Toast extends React.Component<ToastProps> {
         transformOrigin={transformOrigin}
         padding={PopupPadding.s}
         handleClose={onClose}
-        closeIconSize={IconButtonSize.Small}
+        closeIconSize="small"
         {...elemProps}
       >
         <ToastContentContainer onClose={onClose}>
