@@ -101,22 +101,29 @@
   color: $wdc-color-peach-500;
 }
 @mixin wdc-type-variant-link() {
-  color: $wdc-color-blueberry-500;
+  color: $wdc-color-blueberry-400;
   text-decoration: none;
   cursor: pointer;
+  border-radius: 2px;
+  display: inline-block;
+  padding: 0 2px;
+  margin: 0 -2px;
+  transition: color 0.15s, background-color 0.15s;
 
   // States
-  &:hover,
-  &:active {
-    text-decoration: underline;
+  &:hover {
     color: $wdc-color-blueberry-500;
+    background: $wdc-color-soap-200;
   }
 
   &.wdc-type-variant-link-focus,
   &:focus {
-    background: $wdc-color-blueberry-100;
-    text-decoration: underline;
-    outline: 2px solid $wdc-color-blueberry-100;
+    box-shadow: 0 0 0 2px $wdc-color-blueberry-400;
+  }
+
+  &:active {
+    color: $wdc-color-blueberry-600;
+    background: $wdc-color-soap-200;
   }
 }
 @mixin wdc-type-variant-mono() {
