@@ -130,9 +130,6 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
     display: grow ? 'block' : 'inline-block',
   }),
   ({disabled}) => ({
-    '& span': {
-      backgroundColor: disabled ? colors.soap100 : colors.frenchVanilla100,
-    },
     '&:hover path': {
       fill: disabled ? undefined : colors.licorice500,
     },
