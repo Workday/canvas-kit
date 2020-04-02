@@ -16,15 +16,11 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * The containing element for Popper elements. The Popper uses
-   * {@link https://reactjs.org/docs/portals.html Portals} to place the DOM elements
-   * of the Popper in a different place in the DOM to prevent issues with overflowed containers.
-   * When the popper is opened, `aria-hidden` will be added to siblings to hide background
-   * content from assistive technology like it is visibly hidden from sighted users. This property
-   * should be set to the element that the application root goes - not containing element of content.
-   * This should be a sibling or higher than the header and navigation elements of the application.
+   * {@link https://reactjs.org/docs/portals.html Portals} to place the DOM elements of the Popper as the
+   * last child of the specified container element.
    * @default document.body
    */
-  containerElement?: HTMLElement;
+  containerElement?: Element;
   /**
    * If true, set the Popper to the open state.
    * @default true
@@ -47,6 +43,7 @@ export class Popper extends React.PureComponent<PopperProps> {
   static defaultProps = {
     open: true,
     placement: 'bottom',
+    containerElement: document.body,
   };
 
   public componentWillUnmount() {
@@ -57,31 +54,21 @@ export class Popper extends React.PureComponent<PopperProps> {
   }
 
   public render() {
+    const {anchorElement, children, open, placement, popperOptions, ...elemProps} = this.props;
+
     if (!this.props.open) {
       return null;
     }
 
-    // do not use defaultProps for containerElement because document may not be statically available
-    // at require time in some testing environments; instead we safely default at runtime
-    return ReactDOM.createPortal(this.renderPopper(), this.props.containerElement || document.body);
-  }
-
-  public renderPopper() {
-    const {
-      anchorElement,
-      children,
-      containerElement,
-      open,
-      placement,
-      popperOptions,
-      ...elemProps
-    } = this.props;
-
-    return (
+    const popperElement = (
       <div {...elemProps} ref={this.openPopper}>
         {this.props.children}
       </div>
     );
+
+    // do not use defaultProps for containerElement because document may not be statically available
+    // at require time in some testing environments; instead we safely default at runtime
+    return ReactDOM.createPortal(popperElement, this.props.containerElement || document.body);
   }
 
   private openPopper = (popperNode: HTMLDivElement) => {

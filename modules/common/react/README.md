@@ -74,13 +74,9 @@ includes custom `data-*` attributes such as `data-test-id` to help facilitate au
 
 #### `containerElement: Element`
 
-> The containing element for Popper elements. The Popper uses {@link
-> https://reactjs.org/docs/portals.html Portals} to place the DOM elements of the Popper in a
-> different place in the DOM to prevent issues with overflowed containers. When the popper is
-> opened, `aria-hidden` will be added to siblings to hide background content from assistive
-> technology like it is visibly hidden from sighted users. This property should be set to the
-> element that the application root goes - not containing element of content. This should be a
-> sibling or higher than the header and navigation elements of the application.
+> The containing element for Popper elements. The Popper uses
+> [Portals](https://reactjs.org/docs/portals.html) to place the DOM elements of the Popper as the
+> last child of the specified container element.
 
 Default: `document.body`
 
