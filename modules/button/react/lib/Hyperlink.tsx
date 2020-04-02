@@ -33,7 +33,7 @@ const Anchor = styled('a')<HyperlinkProps>(
         },
         '&:active': {
           color: colors.blueberry600,
-          background: colors.frenchVanilla100,
+          background: colors.soap200,
         },
       };
     }
