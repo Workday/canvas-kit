@@ -25,10 +25,6 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
    */
   id?: string;
   /**
-   * The label of the SelectOption.
-   */
-  label?: string;
-  /**
    * The ref to the list item that the styled component renders. Use this to imperatively manipulate the SelectOption (e.g., to scroll to it if it's out of view in the Select menu).
    */
   optionRef?: React.Ref<HTMLLIElement>;
@@ -48,7 +44,7 @@ const Option = styled('li')<SelectOptionProps>(
   {
     ...type.body,
     cursor: 'default',
-    // In case label is empty/undefined for some reason
+    // In case the content of the option is empty/undefined for some reason
     minHeight: type.body.lineHeight,
   },
   ({disabled, focused, suppressed}) => {
@@ -97,10 +93,10 @@ export default class SelectOption extends React.Component<SelectOptionProps> {
   };
 
   public render() {
-    const {children, id, label, optionRef, value, ...elemProps} = this.props;
+    const {children, optionRef, value, ...elemProps} = this.props;
 
     return (
-      <Option data-value={value} id={id} ref={optionRef} role="option" {...elemProps}>
+      <Option data-value={value} ref={optionRef} role="option" {...elemProps}>
         {children}
       </Option>
     );

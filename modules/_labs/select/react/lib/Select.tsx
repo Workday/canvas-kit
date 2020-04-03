@@ -19,11 +19,13 @@ import uuid from 'uuid/v4';
 export interface Option {
   // This allows us to accept any keys in the Option
   [key: string]: any;
+
+  // Known, optional keys
   disabled?: boolean;
   id?: string;
+  label?: string;
 
-  // label and value are required keys
-  label: string;
+  // Known, required keys
   value: string;
 }
 
@@ -196,22 +198,22 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     });
   };
 
-  // Store option labels so we can search on them for type-ahead
-  private setOptionLabels = (): void => {
-    this.optionLabels = this.props.options.map(option => {
-      return option.label || '';
+  // Store option values
+  private setOptionValues = (): void => {
+    this.optionValues = this.props.options.map(option => {
+      return option.value || '';
     });
   };
 
-  // Store option values since we may need to populate them based on the
-  // option label if the value is undefined
-  private setOptionValues = (): void => {
-    this.optionValues = this.props.options.map(option => {
+  // Store option labels since we may need to populate them based on the
+  // option value if the label is undefined
+  private setOptionLabels = (): void => {
+    this.optionLabels = this.props.options.map(option => {
       const {label, value} = option;
-      if (value !== undefined) {
-        return value;
+      if (label !== undefined) {
+        return label;
       } else {
-        return label !== undefined ? label : '';
+        return value !== undefined ? value : '';
       }
     });
   };
@@ -628,7 +630,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         value: this.optionValues[index],
       };
 
-      return <SelectOption {...optionProps}>{renderOption(option)}</SelectOption>;
+      // Inject values managed by the Select into the option
+      const optionWithManagedValues = {
+        ...option,
+        label: this.optionLabels[index],
+      };
+
+      return <SelectOption {...optionProps}>{renderOption(optionWithManagedValues)}</SelectOption>;
     });
   };
 
