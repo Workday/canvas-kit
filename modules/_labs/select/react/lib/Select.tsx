@@ -253,11 +253,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private toggleMenu = (show: boolean): void => {
+    // Immediately wipe out removeMenuTimer if we're toggling the menu
+    // (if, for example, we're toggling the menu on while it's hiding)
+    if (this.removeMenuTimer) {
+      clearTimeout(this.removeMenuTimer);
+    }
+
     if (show) {
       this.setState(
         {
           focusedOptionIndex: this.state.selectedOptionIndex,
           isMenuHidden: false,
+          isMenuHiding: false,
         },
         () => {
           // Shift focus to the menu
@@ -272,8 +279,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       this.removeMenuTimer = setTimeout(() => {
         this.setState(
           {
-            isMenuHiding: false,
             isMenuHidden: true,
+            isMenuHiding: false,
           },
           () => {
             // Shift focus back to the button
@@ -380,6 +387,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private handleKeyboardTypeAhead = (key: string, numOptions: number) => {
+    // Abort immediately if the menu is not interactive
+    if (!this.isMenuInteractive()) {
+      return;
+    }
+
     this.keysSoFar += key;
     this.startClearKeysSoFarTimer();
 
@@ -504,7 +516,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     const option = this.props.options[index];
 
     // Abort immediately if:
-    // * The menu is a non-interactive state
+    // * The menu is not interactive
     // * A disabled option was clicked (we ignore these clicks)
     if (!this.isMenuInteractive() || option.disabled) {
       return;
@@ -525,15 +537,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    // Abort immediately if the menu is a non-interactive state
-    if (!this.isMenuInteractive()) {
-      return;
-    }
-
     const {options} = this.props;
     const numOptions = options.length;
 
-    const {focusedOptionIndex, isMenuHidden} = this.state;
+    const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.state;
 
     let isShortcut = false;
     let nextFocusedIndex = 0;
@@ -549,7 +556,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         case 'ArrowDown':
         case 'Down': // IE/Edge specific value
           isShortcut = true;
-          if (isMenuHidden) {
+          if (isMenuHidden || isMenuHiding) {
             this.toggleMenu(true);
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
@@ -577,7 +584,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           // space key as type-ahead rather than option selection
           if (this.keysSoFar !== '') {
             this.handleKeyboardTypeAhead(' ', numOptions);
-          } else if (isMenuHidden) {
+          } else if (isMenuHidden || isMenuHiding) {
             this.toggleMenu(true);
           } else {
             this.handleOptionSelection(focusedOptionIndex);
@@ -586,7 +593,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
         case 'Enter':
           isShortcut = true;
-          if (isMenuHidden) {
+          if (isMenuHidden || isMenuHiding) {
             this.toggleMenu(true);
           } else {
             this.handleOptionSelection(focusedOptionIndex);

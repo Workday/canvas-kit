@@ -123,6 +123,18 @@ describe('Select', () => {
                     h.selectLabs.getListbox().should('not.be.visible');
                   });
                 });
+
+                context('when the menu is expanded again', () => {
+                  beforeEach(() => {
+                    h.selectLabs.getListbox().type('{downarrow}');
+                  });
+
+                  context('the fourth option', () => {
+                    it('should have an aria-selected attribute set to "true"', () => {
+                      h.selectLabs.getOption(3).should('have.attr', 'aria-selected', 'true');
+                    });
+                  });
+                });
               });
             });
 
