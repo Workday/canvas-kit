@@ -1,11 +1,15 @@
 import * as React from 'react';
+import {Themeable, CanvasTheme, useTheme} from '@workday/canvas-kit-labs-react-core';
 import {colors} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonVariant, ButtonColors, DropdownButtonVariant, ButtonSize} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, GrowthBehavior {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    Themeable,
+    GrowthBehavior {
   /**
    * The variant of the Button.
    * @default ButtonVariant.Secondary
@@ -33,6 +37,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const Button = ({
+  theme = useTheme(),
   variant = ButtonVariant.Secondary,
   size = 'medium',
   buttonRef,
@@ -41,7 +46,12 @@ const Button = ({
   children,
   ...elemProps
 }: ButtonProps) => (
-  <ButtonContainer colors={getButtonColors(variant)} size={size} ref={buttonRef} {...elemProps}>
+  <ButtonContainer
+    colors={getButtonColors(variant, theme)}
+    size={size}
+    ref={buttonRef}
+    {...elemProps}
+  >
     {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
     <ButtonLabel>{children}</ButtonLabel>
     {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
@@ -53,27 +63,30 @@ Button.Size = ButtonSize;
 
 export default Button;
 
-export const getButtonColors = (variant: ButtonVariant | DropdownButtonVariant): ButtonColors => {
+export const getButtonColors = (
+  variant: ButtonVariant | DropdownButtonVariant,
+  theme: CanvasTheme
+): ButtonColors => {
   switch (variant) {
     case ButtonVariant.Primary:
     case DropdownButtonVariant.Primary:
       return {
         default: {
-          background: colors.blueberry400,
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
+          background: theme.palette.primary.main,
+          icon: theme.palette.primary.contrast,
+          label: theme.palette.primary.contrast,
         },
         hover: {
-          background: colors.blueberry500,
+          background: theme.palette.primary.dark,
         },
         active: {
-          background: colors.blueberry600,
+          background: theme.palette.primary.darkest,
         },
         focus: {
-          background: colors.blueberry400,
+          background: theme.palette.primary.main,
         },
         disabled: {
-          background: colors.blueberry200,
+          background: theme.palette.primary.light,
         },
       };
     case ButtonVariant.Secondary:

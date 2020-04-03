@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {type} from '@workday/canvas-kit-labs-react-core';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import {Themeable, CanvasTheme, useTheme, type} from '@workday/canvas-kit-labs-react-core';
+import {themedFocusRing} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TextButtonVariant, ButtonIconPosition, ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
-export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Themeable {
   /**
    * The variant of the TextButton.
    * @default TextButtonVariant.Default
@@ -36,45 +36,65 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   allCaps?: boolean;
 }
 
-const getTextButtonColors = (variant: TextButtonVariant): ButtonColors => {
+const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): ButtonColors => {
   switch (variant) {
     case TextButtonVariant.Default:
     default:
       return {
         default: {
-          icon: colors.blueberry400,
-          label: colors.blueberry400,
+          icon: theme.palette.primary.main,
+          label: theme.palette.primary.main,
         },
         hover: {
-          icon: colors.blueberry500,
-          label: colors.blueberry500,
+          background: colors.soap200,
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
         },
         active: {
-          icon: colors.blueberry500,
-          label: colors.blueberry500,
+          background: colors.soap300,
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
         },
         focus: {
-          icon: colors.blueberry500,
-          label: colors.blueberry500,
-          focusRing: focusRing(2, 0),
+          icon: theme.palette.primary.dark,
+          label: theme.palette.primary.dark,
+          focusRing: themedFocusRing(theme),
         },
         disabled: {
-          icon: 'rgba(8, 117, 225, 0.5)',
-          label: 'rgba(8, 117, 225, 0.5)',
+          background: 'transparent',
+          icon: theme.palette.primary.light,
+          label: theme.palette.primary.light,
         },
       };
     case TextButtonVariant.Inverse:
       return {
         default: {
+          background: 'transparent',
           icon: colors.frenchVanilla100,
           label: colors.frenchVanilla100,
         },
-        hover: {},
-        active: {},
+        hover: {
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+        },
+        active: {
+          background: colors.soap200,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+        },
         focus: {
-          focusRing: focusRing(2, 0, true, false, undefined, 'currentColor'),
+          background: colors.frenchVanilla100,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          focusRing: themedFocusRing(theme, {
+            separation: 2,
+            innerColor: 'currentColor',
+            outerColor: colors.frenchVanilla100,
+          }),
         },
         disabled: {
+          background: 'transparent',
           icon: 'rgba(255, 255, 255, 0.5)',
           label: 'rgba(255, 255, 255, 0.5)',
         },
@@ -87,10 +107,18 @@ const containerStyles = {
   border: '0',
   padding: `0 ${spacing.xxs}`,
   minWidth: 'auto',
-  '&:hover:not([disabled])': {textDecoration: 'underline'},
+  '.wdc-text-button-label': {
+    borderBottom: '2px solid transparent',
+    paddingTop: '2px',
+    transition: 'border-color 0.3s',
+  },
+  '&:hover:not([disabled]) .wdc-text-button-label': {
+    borderBottomColor: 'currentColor',
+  },
 };
 
 const TextButton = ({
+  theme = useTheme(),
   variant = TextButtonVariant.Default,
   size = 'medium',
   iconPosition = ButtonIconPosition.Left,
@@ -116,7 +144,7 @@ const TextButton = ({
 
   return (
     <ButtonContainer
-      colors={getTextButtonColors(variant)}
+      colors={getTextButtonColors(variant, theme)}
       ref={buttonRef}
       size={size}
       extraStyles={allContainerStyles}
@@ -125,7 +153,7 @@ const TextButton = ({
       {icon && iconPosition === ButtonIconPosition.Left && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
-      <ButtonLabel>{children}</ButtonLabel>
+      <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
       {icon && iconPosition === ButtonIconPosition.Right && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}

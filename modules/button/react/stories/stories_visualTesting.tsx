@@ -3,8 +3,9 @@
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
+import {colors} from '@workday/canvas-kit-react-core';
+import {StaticStates, type} from '@workday/canvas-kit-labs-react-core';
+import {ComponentStatesTable, permutateProps, customColorTheme} from '../../../../utils/storybook';
 import {playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {
   Button,
@@ -13,6 +14,7 @@ import {
   DeleteButton,
   HighlightButton,
   OutlineButton,
+  Hyperlink,
   IconButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
@@ -25,7 +27,7 @@ const buttonLayout: CSSObject = {
 
 const blueBackground: CSSObject = {
   ...buttonLayout,
-  backgroundColor: '#0875e1',
+  backgroundColor: colors.blueberry400,
   padding: '12px',
   borderRadius: '4px',
 };
@@ -63,15 +65,11 @@ const getButtonStates = (rowProps: any, renderFn: (props: any) => React.ReactNod
   </StaticStates>
 );
 
-storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
-  .addParameters({
+const buttonStories = [
+  {
+    name: 'Button',
     component: Button,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .add('States', () =>
-    getButtonStates(
+    states: getButtonStates(
       {
         variant: [
           {value: Button.Variant.Primary, label: 'Primary'},
@@ -90,18 +88,12 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
           <Button {...props}>Test</Button>
         </Container>
       )
-    )
-  );
-
-storiesOf('Components|Buttons/Button/React/Visual Testing/Delete Button', module)
-  .addParameters({
+    ),
+  },
+  {
+    name: 'Delete Button',
     component: DeleteButton,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .add('States', () =>
-    getButtonStates(
+    states: getButtonStates(
       {
         size: [
           {value: DeleteButton.Size.Small, label: 'Small'},
@@ -114,18 +106,12 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Delete Button', module
           <DeleteButton {...props}>Test</DeleteButton>
         </Container>
       )
-    )
-  );
-
-storiesOf('Components|Buttons/Button/React/Visual Testing/Deprecated Button', module)
-  .addParameters({
+    ),
+  },
+  {
+    name: 'Deprecated Button',
     component: DeprecatedButton,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .add('States', () =>
-    getButtonStates(
+    states: getButtonStates(
       {
         variant: [
           {value: DeprecatedButton.Variant.Primary, label: 'Primary'},
@@ -143,18 +129,12 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Deprecated Button', mo
           <DeprecatedButton {...props}>Test</DeprecatedButton>
         </Container>
       )
-    )
-  );
-
-storiesOf('Components|Buttons/Button/React/Visual Testing/Dropdown Button', module)
-  .addParameters({
+    ),
+  },
+  {
+    name: 'Dropdown Button',
     component: DropdownButton,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .add('States', () =>
-    getButtonStates(
+    states: getButtonStates(
       {
         variant: [
           {value: DropdownButton.Variant.Primary, label: 'Primary'},
@@ -172,18 +152,12 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Dropdown Button', modu
           <DropdownButton {...props}>Test</DropdownButton>
         </Container>
       )
-    )
-  );
-
-storiesOf('Components|Buttons/Button/React/Visual Testing/Highlight Button', module)
-  .addParameters({
+    ),
+  },
+  {
+    name: 'Highlight Button',
     component: HighlightButton,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .add('States', () =>
-    getButtonStates(
+    states: getButtonStates(
       {
         size: [
           {value: Button.Size.Small, label: 'Small'},
@@ -197,18 +171,12 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Highlight Button', mod
           <HighlightButton {...props}>Test</HighlightButton>
         </Container>
       )
-    )
-  );
-
-storiesOf('Components|Buttons/Button/React/Visual Testing/Outline Button', module)
-  .addParameters({
-    component: Button,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .add('States', () =>
-    getButtonStates(
+    ),
+  },
+  {
+    name: 'Outline Button',
+    component: OutlineButton,
+    states: getButtonStates(
       {
         variant: [
           {value: OutlineButton.Variant.Primary, label: 'Outline Primary'},
@@ -228,18 +196,12 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Outline Button', modul
           <OutlineButton {...props}>Test</OutlineButton>
         </Container>
       )
-    )
-  );
-
-storiesOf('Components|Buttons/Button/React/Visual Testing/Text Button', module)
-  .addParameters({
+    ),
+  },
+  {
+    name: 'Text Button',
     component: TextButton,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .add('States', () =>
-    getButtonStates(
+    states: getButtonStates(
       {
         variant: [
           {value: TextButton.Variant.Default, label: 'Default'},
@@ -257,54 +219,119 @@ storiesOf('Components|Buttons/Button/React/Visual Testing/Text Button', module)
           <TextButton {...props}>Test</TextButton>
         </Container>
       )
-    )
-  );
-
-storiesOf('Components|Buttons/Button/React/Visual Testing/Icon Button', module)
-  .addParameters({
-    component: IconButton,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .add('States', () => (
-    <React.Fragment>
-      {[false, true].map(toggled => (
-        <div key={`toggled-${toggled}`}>
-          <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
-          {getButtonStates(
-            {
-              variant: [
-                {value: IconButton.Variant.Inverse, label: 'Inverse'},
-                {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
-                {value: IconButton.Variant.Plain, label: 'Plain'},
-                {value: IconButton.Variant.Circle, label: 'Circle'},
-                {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
-                {value: IconButton.Variant.Square, label: 'Square'},
-                {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
-              ],
-              size: [
-                {value: IconButton.Size.Small, label: 'Small'},
-                {value: IconButton.Size.Medium, label: 'Medium'},
-              ],
-            },
-            (props: any) => (
-              <Container
-                blue={[IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].includes(
-                  props.variant
-                )}
+    ),
+  },
+  {
+    name: 'Hyperlink',
+    component: Hyperlink,
+    states: (
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={permutateProps({
+            variant: [
+              {label: 'Default', value: undefined},
+              {label: 'Inverse', value: Hyperlink.Variant.Inverse},
+            ],
+          })}
+          columnProps={permutateProps({
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+              {label: 'Visited', value: 'visited'},
+            ],
+          })}
+        >
+          {(props: any) => (
+            <Container blue={props.variant === Hyperlink.Variant.Inverse}>
+              <div
+                css={{
+                  ...type.body2,
+                  color:
+                    props.variant === Hyperlink.Variant.Inverse
+                      ? colors.frenchVanilla100
+                      : undefined,
+                }}
               >
-                <IconButton
-                  toggled={toggled}
-                  icon={activityStreamIcon}
-                  aria-label="Play"
-                  {...props}
-                  onChange={() => {}} // eslint-disable-line no-empty-function
-                />
-              </Container>
-            )
+                Here's a <Hyperlink {...props}>Link</Hyperlink> to something
+              </div>
+            </Container>
           )}
-        </div>
-      ))}
-    </React.Fragment>
-  ));
+        </ComponentStatesTable>
+      </StaticStates>
+    ),
+  },
+  {
+    name: 'Icon Button',
+    component: IconButton,
+    states: (
+      <React.Fragment>
+        {[false, true].map(toggled => (
+          <div key={`toggled-${toggled}`}>
+            <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
+            {getButtonStates(
+              {
+                variant: [
+                  {value: IconButton.Variant.Inverse, label: 'Inverse'},
+                  {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
+                  {value: IconButton.Variant.Plain, label: 'Plain'},
+                  {value: IconButton.Variant.Circle, label: 'Circle'},
+                  {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
+                  {value: IconButton.Variant.Square, label: 'Square'},
+                  {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+                ],
+                size: [
+                  {value: IconButton.Size.Small, label: 'Small'},
+                  {value: IconButton.Size.Medium, label: 'Medium'},
+                ],
+              },
+              (props: any) => (
+                <Container
+                  blue={[IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].includes(
+                    props.variant
+                  )}
+                >
+                  <IconButton
+                    toggled={toggled}
+                    icon={activityStreamIcon}
+                    aria-label="Play"
+                    {...props}
+                    onChange={() => {}} // eslint-disable-line no-empty-function
+                  />
+                </Container>
+              )
+            )}
+          </div>
+        ))}
+      </React.Fragment>
+    ),
+  },
+];
+
+buttonStories.forEach(({name, component, states}) => {
+  storiesOf(`Components|Buttons/Button/React/Visual Testing/${name}`, module)
+    .addParameters({
+      component: component,
+      chromatic: {
+        disable: false,
+      },
+    })
+    .add('States', () => states as React.ReactElement);
+
+  if (component !== DeprecatedButton) {
+    storiesOf(`Components|Buttons/Button/React/Visual Testing/${name}`, module)
+      .addParameters({
+        component: component,
+        chromatic: {
+          disable: false,
+        },
+        canvasProviderDecorator: {
+          theme: customColorTheme,
+        },
+      })
+      .add('Theming', () => states as React.ReactElement);
+  }
+});

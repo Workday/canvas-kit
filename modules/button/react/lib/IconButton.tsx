@@ -1,12 +1,13 @@
 import * as React from 'react';
+import {Themeable, CanvasTheme, useTheme} from '@workday/canvas-kit-labs-react-core';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing} from '@workday/canvas-kit-react-common';
+import {themedFocusRing} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {IconButtonVariant, ButtonColors} from './types';
 import {ButtonContainer} from './parts';
 
-export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Themeable {
   /**
    * The accessibility label to indicate the action triggered by clicking the IconButton.
    */
@@ -41,6 +42,7 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 }
 
 const IconButton = ({
+  theme = useTheme(),
   variant = IconButtonVariant.Circle,
   size = 'medium',
   buttonRef,
@@ -83,7 +85,7 @@ const IconButton = ({
 
   return (
     <ButtonContainer
-      colors={getIconButtonColors(variant, toggled)}
+      colors={getIconButtonColors(variant, theme, toggled)}
       size={size}
       ref={buttonRef}
       fillIcon={toggled}
@@ -104,122 +106,134 @@ IconButton.Size = {
 
 export default IconButton;
 
-const getIconButtonColors = (variant: IconButtonVariant, toggled?: boolean): ButtonColors => {
+const getIconButtonColors = (
+  variant: IconButtonVariant,
+  theme: CanvasTheme,
+  toggled?: boolean
+): ButtonColors => {
   switch (variant) {
     case IconButton.Variant.Square:
     case IconButtonVariant.Circle:
     default:
       return {
         default: {
-          background: toggled ? colors.blueberry400 : undefined,
-          icon: toggled ? colors.frenchVanilla100 : colors.licorice200,
+          background: toggled ? theme.palette.primary.main : undefined,
+          icon: toggled ? theme.palette.primary.contrast : colors.licorice200,
         },
         hover: {
-          background: toggled ? colors.blueberry500 : colors.soap300,
-          icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+          background: toggled ? theme.palette.primary.dark : colors.soap300,
+          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         active: {
-          background: toggled ? colors.blueberry500 : colors.soap500,
-          icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+          background: toggled ? theme.palette.primary.dark : colors.soap500,
+          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         focus: {
-          background: toggled ? colors.blueberry500 : colors.soap300,
-          icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+          background: toggled ? theme.palette.primary.dark : colors.soap300,
+          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         disabled: {
-          background: toggled ? colors.blueberry100 : 'transparent',
-          icon: toggled ? colors.blueberry300 : colors.soap600,
+          background: toggled ? theme.palette.primary.lightest : 'transparent',
+          icon: toggled ? theme.palette.primary.light : colors.soap600,
         },
       };
     case IconButtonVariant.SquareFilled:
     case IconButtonVariant.CircleFilled:
       return {
         default: {
-          background: toggled ? colors.blueberry400 : colors.soap200,
-          icon: toggled ? colors.frenchVanilla100 : colors.licorice200,
+          background: toggled ? theme.palette.primary.main : colors.soap200,
+          icon: toggled ? theme.palette.primary.contrast : colors.licorice200,
         },
         hover: {
-          background: toggled ? colors.blueberry500 : colors.soap400,
-          icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+          background: toggled ? theme.palette.primary.dark : colors.soap400,
+          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         active: {
-          background: toggled ? colors.blueberry500 : colors.soap500,
-          icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+          background: toggled ? theme.palette.primary.dark : colors.soap500,
+          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         focus: {
-          background: toggled ? colors.blueberry500 : colors.soap400,
-          icon: toggled ? colors.frenchVanilla100 : colors.licorice500,
+          background: toggled ? theme.palette.primary.dark : colors.soap400,
+          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         disabled: {
-          background: toggled ? colors.blueberry100 : colors.soap100,
-          icon: toggled ? colors.blueberry300 : colors.soap600,
+          background: toggled ? theme.palette.primary.lightest : colors.soap100,
+          icon: toggled ? theme.palette.primary.light : colors.soap600,
         },
       };
     case IconButtonVariant.Plain:
       return {
         default: {
-          icon: toggled ? colors.blueberry400 : colors.licorice200,
+          icon: toggled ? theme.palette.primary.main : colors.licorice200,
         },
         hover: {
-          icon: toggled ? colors.blueberry400 : colors.licorice500,
+          icon: toggled ? theme.palette.primary.main : colors.licorice500,
         },
         active: {
-          icon: toggled ? colors.blueberry400 : colors.licorice500,
+          icon: toggled ? theme.palette.primary.main : colors.licorice500,
         },
         focus: {
-          icon: toggled ? colors.blueberry400 : colors.licorice500,
-          focusRing: focusRing(2, 0),
+          icon: toggled ? theme.palette.primary.main : colors.licorice500,
+          focusRing: themedFocusRing(theme),
         },
         disabled: {
-          icon: toggled ? colors.blueberry200 : colors.soap600,
+          icon: toggled ? theme.palette.primary.light : colors.soap600,
         },
       };
     case IconButtonVariant.Inverse:
       return {
         default: {
-          background: toggled ? colors.frenchVanilla100 : undefined,
-          icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
+          background: toggled ? theme.palette.primary.contrast : undefined,
+          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
         },
         hover: {
-          background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
+          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
+          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
         },
         active: {
-          background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
-          icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
+          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.3)',
+          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
         },
         focus: {
-          background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
-          focusRing: focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
+          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
+          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          focusRing: themedFocusRing(theme, {
+            separation: 2,
+            innerColor: 'currentColor',
+            outerColor: theme.palette.primary.contrast,
+          }),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'transparent',
-          icon: toggled ? colors.blueberry400 : 'rgba(255, 255, 255, 0.75)',
+          icon: toggled ? theme.palette.primary.main : 'rgba(255, 255, 255, 0.75)',
         },
       };
     case IconButtonVariant.InverseFilled:
       return {
         default: {
-          background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
+          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
+          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
         },
         hover: {
-          background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.3)',
-          icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
+          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.3)',
+          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
         },
         active: {
-          background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.4)',
-          icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
+          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.4)',
+          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
         },
         focus: {
-          background: toggled ? colors.frenchVanilla100 : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? colors.blueberry400 : colors.frenchVanilla100,
-          focusRing: focusRing(2, 2, true, false, 'currentColor', colors.frenchVanilla100),
+          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
+          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          focusRing: themedFocusRing(theme, {
+            separation: 2,
+            innerColor: 'currentColor',
+            outerColor: theme.palette.primary.contrast,
+          }),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? colors.blueberry400 : 'rgba(255, 255, 255, 0.75)',
+          icon: toggled ? theme.palette.primary.main : 'rgba(255, 255, 255, 0.75)',
         },
       };
   }

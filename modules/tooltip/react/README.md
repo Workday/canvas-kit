@@ -2,7 +2,8 @@
 
 A Tooltip component that renders information/text when the user hovers over an element.
 
-Note: This Tooltip does not include a positioning engine. In our example we use our Popper
+Note: This Tooltip does not include a positioning engine. In our example we use our popper utility,
+which is a wrapper to Popper.js, to wrap our Tooltip component and position it.
 
 ## Installation
 
@@ -20,10 +21,10 @@ yarn add @workday/canvas-kit-react-tooltip
 
 ```tsx
 import * as React from 'react';
-import {Popper} from '@workday/canvas-kit-react-common';
+
 import Tooltip from '@workday/canvas-kit-react-tooltip';
 
-class TooltipExample extends React.Component<{}, TooltipExampleState> {
+const TooltipExample = class TooltipExample extends React.Component<{}, TooltipExampleState> {
   private tooltipRef: React.RefObject<HTMLDivElement>;
   public constructor(props: {}) {
     super(props);
@@ -69,7 +70,7 @@ class TooltipExample extends React.Component<{}, TooltipExampleState> {
       anchorEl: this.tooltipRef.current,
     });
   };
-}
+};
 ```
 
 ## Static Properties

@@ -6,46 +6,40 @@ import styled from '@emotion/styled';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
-export interface SwatchProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   color: string;
-  isSelected?: boolean;
+  showCheck?: boolean;
 }
 
-const Container = styled('div')<SwatchProps>(
+const Container = styled('div')<ColorSwatchProps>(
   {
     width: 20,
     height: 20,
     borderRadius: borderRadius.s,
-
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '& > *': {
+      // Account for 24px icon
+      margin: -2,
+    },
   },
-  ({color}) => ({
+  ({color, showCheck}) => ({
     backgroundColor: color,
-  }),
-  ({isSelected}) =>
-    isSelected
-      ? {
-          boxShadow: `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`,
-        }
-      : {},
-  ({color}) =>
-    color === colors.frenchVanilla100
-      ? {
-          boxShadow: `inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25)`,
-        }
-      : {}
+    boxShadow:
+      showCheck || color === colors.frenchVanilla100
+        ? 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25)'
+        : undefined,
+  })
 );
 
-export const Swatch = ({color, isSelected = false, ...elemProps}: SwatchProps) => (
-  <Container color={color} {...elemProps}>
-    {isSelected && (
+export const ColorSwatch = ({color, showCheck = false, ...elemProps}: ColorSwatchProps) => (
+  <Container color={color} showCheck={showCheck} {...elemProps}>
+    {showCheck && (
       <SystemIcon
         fill={pickForegroundColor(color)}
         fillHover={pickForegroundColor(color)}
         icon={checkSmallIcon}
-        size={20}
         color={color}
       />
     )}

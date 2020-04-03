@@ -7,4 +7,5 @@ export {default as HighlightButton, HighlightButtonProps} from './lib/HighlightB
 export {default as OutlineButton, OutlineButtonProps} from './lib/OutlineButton';
 export {default as IconButton, IconButtonProps} from './lib/IconButton';
 export {default as TextButton, TextButtonProps} from './lib/TextButton';
+export {default as Hyperlink} from './lib/Hyperlink';
 export * from './lib/types';

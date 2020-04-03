@@ -64,7 +64,7 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label text for the SearchBar clear button.
    * @default Reset Search Form
    */
-  clearButtonLabel?: string;
+  clearButtonAriaLabel?: string;
   /**
    * The screenreader label text for the button to open the collapsed SearchBar.
    * @default Open Search
@@ -344,7 +344,11 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   componentDidUpdate(prevProps: SearchBarProps, prevState: SearchBarState) {
     const showFormToggled = this.state.showForm !== prevState.showForm;
     if (showFormToggled) {
-      this.state.showForm ? this.focusInput() : this.focusOpen();
+      if (this.state.showForm) {
+        this.focusInput();
+      } else {
+        this.focusOpen();
+      }
     }
   }
 
@@ -390,7 +394,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       inputLabel,
       submitLabel,
       showClearButton,
-      clearButtonLabel,
+      clearButtonAriaLabel,
       closeButtonLabel,
       openButtonLabel,
       ...elemProps
@@ -445,7 +449,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               showClearButton={!isCollapsed && showClearButton}
-              clearButtonLabel={clearButtonLabel || 'Reset Search Form'}
+              clearButtonAriaLabel={clearButtonAriaLabel || 'Reset Search Form'}
               labelId={this.labelId}
             >
               <SearchInput

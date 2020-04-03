@@ -32,9 +32,6 @@ export enum InputEventType {
   MouseMove = 'mousemove',
   Wheel = 'wheel',
   MouseWheel = 'mousewheel',
-  DOMMouseScroll = 'DOMMouseScroll',
-  MSPointerDown = 'MSPointerDown',
-  MSPointerMove = 'MSPointerMove',
   PointerDown = 'pointerdown',
   PointerMove = 'pointermove',
   TouchStart = 'touchstart',
@@ -46,18 +43,6 @@ type InputEvent =
   | React.MouseEvent
   | React.TouchEvent
   | React.PointerEvent;
-
-// Extend the existing window and document interfaces to support event checks
-declare global {
-  interface Window {
-    PointerEvent(): void;
-    MSPointerEvent(): void;
-  }
-  interface Document {
-    // @ts-ignore: typescript 2.x users gets a duplicate identifier error since their lib definition files already contain onmousewheel
-    onmousewheel(): void;
-  }
-}
 
 // form input types
 const formInputs = ['input', 'select', 'textarea'];
@@ -80,9 +65,6 @@ export const inputEventMap = {
   [InputEventType.MouseMove]: InputType.Mouse,
   [InputEventType.Wheel]: InputType.Mouse,
   [InputEventType.MouseWheel]: InputType.Mouse,
-  [InputEventType.DOMMouseScroll]: InputType.Mouse,
-  [InputEventType.MSPointerDown]: InputType.Pointer,
-  [InputEventType.MSPointerMove]: InputType.Pointer,
   [InputEventType.PointerDown]: InputType.Pointer,
   [InputEventType.PointerMove]: InputType.Pointer,
   [InputEventType.TouchStart]: InputType.Touch,
@@ -114,11 +96,10 @@ const detectWheel = () => {
   // Modern browsers support "wheel"
   /* istanbul ignore else for coverage */
   if ('onwheel' in document.createElement('div')) {
-    wheelType = 'wheel';
+    wheelType = InputEventType.Wheel;
   } else {
     // Webkit and IE support at least "mousewheel"
-    // or assume that remaining browsers are older Firefox
-    wheelType = document.onmousewheel !== undefined ? 'mousewheel' : 'DOMMouseScroll';
+    wheelType = InputEventType.MouseWheel;
   }
 
   return wheelType;
@@ -248,8 +229,6 @@ export default class InputProvider extends React.Component<InputProviderProps, I
     // pointer events (mouse, pen, touch)
     if (window.PointerEvent) {
       fn('pointerdown', this.setInput);
-    } else if (window.MSPointerEvent) {
-      fn('MSPointerDown', this.setInput);
     } else {
       // mouse events
       fn('mousedown', this.setInput);
@@ -264,8 +243,6 @@ export default class InputProvider extends React.Component<InputProviderProps, I
     if (this.provideIntent) {
       if (window.PointerEvent) {
         fn('pointermove', this.setIntent);
-      } else if (window.MSPointerEvent) {
-        fn('MSPointerMove', this.setIntent);
       } else {
         fn('mousemove', this.setIntent);
       }

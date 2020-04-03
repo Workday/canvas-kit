@@ -1,4 +1,5 @@
-import canvasColors, {typeColors, statusColors} from '@workday/canvas-colors-web';
+import {default as colors, typeColors, statusColors} from '@workday/canvas-colors-web';
+import {borderRadius} from './radius';
 import {CSSProperties} from './types';
 
 export const fontFamily = '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
@@ -127,17 +128,24 @@ const variants: CanvasTypeVariant = {
     fontFamily: monoFontFamily,
   },
   link: {
-    textDecoration: 'none',
-    color: typeColors.link,
+    textDecoration: 'underline',
+    color: colors.blueberry400,
     cursor: 'pointer',
-    '&:hover, &:active': {
-      textDecoration: 'underline',
-      color: typeColors.link,
+    borderRadius: borderRadius.s,
+    display: 'inline-block',
+    padding: '0 2px',
+    margin: '0 -2px',
+    transition: 'color 0.15s,background-color 0.15s',
+    '&:hover': {
+      color: colors.blueberry500,
+      background: colors.soap200,
     },
     '&:focus': {
-      background: canvasColors.blueberry100,
-      textDecoration: 'underline',
-      outline: `2px solid ${canvasColors.blueberry100}`,
+      boxShadow: `0 0 0 2px ${colors.blueberry400}`,
+    },
+    '&:active': {
+      color: colors.blueberry600,
+      background: colors.soap300,
     },
   },
 };
