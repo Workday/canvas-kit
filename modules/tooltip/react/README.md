@@ -1,9 +1,8 @@
 # Canvas Kit Tooltip
 
-A Tooltip component that renders information/text when the user hovers over an element.
-
-Note: This Tooltip does not include a positioning engine. In our example we use our popper utility,
-which is a wrapper to Popper.js, to wrap our Tooltip component and position it.
+A Tooltip component that renders information/text when the user hovers over an element. A tooltip is
+used to label or describe an element. By default, a tooltip will label an element. This is useful
+for IconButtons. A tooltip can also be used to describe additional information about an element
 
 ## Installation
 
@@ -22,54 +21,15 @@ yarn add @workday/canvas-kit-react-tooltip
 ```tsx
 import * as React from 'react';
 
-import Tooltip from '@workday/canvas-kit-react-tooltip';
+import {Tooltip} from '@workday/canvas-kit-react-tooltip';
+import {IconButton} from '@workday/canvas-kit-react-button';
 
-const TooltipExample = class TooltipExample extends React.Component<{}, TooltipExampleState> {
-  private tooltipRef: React.RefObject<HTMLDivElement>;
-  public constructor(props: {}) {
-    super(props);
-    this.tooltipRef = React.createRef();
-    this.state = {
-      open: false,
-      anchorEl: null,
-    };
-  }
-
-  public render() {
-    const {open} = this.state;
-    return (
-      <div>
-        <div
-          style={{display: 'inline-flex'}}
-          ref={this.tooltipRef}
-          onMouseEnter={this.open}
-          onMouseLeave={this.close}
-          onFocus={this.open}
-          onBlur={this.close}
-          aria-labelledby={'tooltip-id'}
-          tabIndex={0}
-        >
-          Hover Over Me
-        </div>
-        <Popper open={open} anchorElement={this.state.anchorEl} placement={'bottom'}>
-          <Tooltip id={'tooltip-id'}>Close</Tooltip>
-        </Popper>
-      </div>
-    );
-  }
-
-  private close = () => {
-    this.setState({
-      open: false,
-    });
-  };
-
-  private open = () => {
-    this.setState({
-      open: true,
-      anchorEl: this.tooltipRef.current,
-    });
-  };
+const TooltipExample = () => {
+  return (
+    <Tooltip title="Close">
+      <IconButton variant={IconButton.Variant.Circle} icon={xIcon} aria-label="Close" />
+    </Tooltip>
+  );
 };
 ```
 
@@ -81,25 +41,37 @@ const TooltipExample = class TooltipExample extends React.Component<{}, TooltipE
 
 ### Required
 
-> None
+#### title: string | React.ReactNode
+
+> If present, this will switch the Tooltip into a simpler to use mode where the Tooltip component
+> can wrap a target and `title` is the contents of the tooltip. This should be a string in most
+> cases. HTML is supported, but only text is understood by assistive technology. This is true for
+> both `label` and `describe` modes.
+
+#### children: React.ReactNode
+
+> The contents of the target for the Tooltip.
+>
+> **Note:** This **must** be an Element, StyledComponent or any other component that forwards extra
+> props to an Element. Tooltip works running `React.cloneElement` on the children and adds extra
+> properties like aria attributes and event handlers. This is currently a limitation of the Tooltip
+> component. Functionality will not work if this condition isn't met
 
 ---
 
 ### Optional
 
-#### `transformOrigin: TransformOrigin`
+#### type: 'label' | 'describe'
 
-> Origin from which the popup will animate from
+> If present, this will switch the Tooltip into a simpler to use mode where the Tooltip component
+> can wrap a target and `title` is the contents of the tooltip. This should be a string in most
+> cases. HTML is supported, but only text is understood by assistive technology. This is true for
+> both `label` and `describe` modes.
 
-Default:
+Default: `'label'`
 
-```js
-{
-  horizontal: 'center',
-  vertical: 'top',
-}
-```
+#### placement: PopperJS.Placement
 
-#### `id: string`
+> Sets the placement preference used by PopperJS.
 
-> Unique id of the tooltip
+Default: `'top'`

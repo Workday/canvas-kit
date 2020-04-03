@@ -25,11 +25,18 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    */
   title: React.ReactNode;
   /**
-   * Adding a placement property will indicate you would like to use the built-in positioning library Popper.
+   * Sets the placement preference used by PopperJS.
+   * @default 'top'
    */
   placement?: Placement;
   /**
-   * Contents of the tooltip. Note this is not the contents of the target of the tooltip
+   * The contents of the target for the Tooltip.
+   *
+   * **Note:** This **must** be an Element, StyledComponent or any
+   * other component that forwards extra props to an Element. Tooltip works running
+   * `React.cloneElement` on the children and adds extra properties like aria attributes and event
+   * handlers. This is currently a limitation of the Tooltip component. Functionality will not work
+   * if this condition isn't met
    */
   children: React.ReactNode;
 }
