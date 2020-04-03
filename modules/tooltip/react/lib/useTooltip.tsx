@@ -53,14 +53,14 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
 
   const {start: onClose, clear} = useIntentTimeout(closeTooltip, 100);
 
-  const onOpenFromTarget = (event: React.SyntheticEvent<HTMLElement>) => {
-    setRef(event.currentTarget as T);
-    onOpen();
-  };
-
   const onOpen = () => {
     setOpen(true);
     clear();
+  };
+
+  const onOpenFromTarget = (event: React.SyntheticEvent<HTMLElement>) => {
+    setRef(event.currentTarget as T);
+    onOpen();
   };
 
   return {
