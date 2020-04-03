@@ -2,7 +2,7 @@ import * as React from 'react';
 import {keyframes} from '@emotion/core';
 import styled from '@emotion/styled';
 
-import {borderRadius, colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {borderRadius, colors, spacing, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
 
 const tooltipAnimation = (transformOrigin: TransformOrigin) => {
@@ -49,15 +49,25 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
   {
     ...type.body,
     display: 'inline-flex',
-    borderRadius: borderRadius.m,
-    padding: spacing.xxs,
-    backgroundColor: 'rgba(0,0,0,.85)',
+    padding: spacingNumbers.xxs + spacingNumbers.xxxs,
     color: colors.frenchVanilla100,
     fontSize: 13,
-    margin: spacing.xxxs,
     a: {
       color: colors.frenchVanilla100,
       textDecoration: 'underline',
+    },
+    // use :before vs margin to increase the tooltip hit-box
+    ':before': {
+      content: '""',
+      borderRadius: borderRadius.m,
+      zIndex: -1,
+      margin: spacingNumbers.xxxs,
+      backgroundColor: 'rgba(0,0,0,.85)',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
   },
   ({transformOrigin}) => {

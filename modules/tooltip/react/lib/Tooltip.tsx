@@ -47,22 +47,7 @@ export const Tooltip = ({
   return (
     <React.Fragment>
       {React.cloneElement(children as React.ReactElement<any>, targetProps)}
-      <Popper
-        placement={placement}
-        {...popperProps}
-        popperOptions={{
-          modifiers: [
-            {
-              name: 'pointerEvents',
-              phase: 'beforeWrite',
-              enabled: true,
-              fn: ({state}) => {
-                state.styles.popper.pointerEvents = 'none';
-              },
-            },
-          ],
-        }}
-      >
+      <Popper placement={placement} {...popperProps}>
         {({placement}) => {
           const transformOrigin = getTransformFromPlacement(placement);
           return (

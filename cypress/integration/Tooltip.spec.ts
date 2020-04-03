@@ -30,6 +30,30 @@ describe('Tooltip', () => {
       it('should not have any axe errors', () => {
         cy.checkA11y();
       });
+
+      context('when the tooltip is hovered', () => {
+        beforeEach(() => {
+          cy.get('button').trigger('mouseout');
+          cy.findByRole('tooltip').trigger('mouseover');
+        });
+
+        it('should not close the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+      });
+
+      context('when ESC key is pressed', () => {
+        beforeEach(() => {
+          cy.get('body').trigger('keydown', {
+            key: 'Escape',
+          });
+        });
+
+        // TODO: implement this functionality
+        it.skip('should close the tooltip', () => {
+          cy.findByRole('tooltip').should('not.be.visible');
+        });
+      });
     });
 
     context('when close icon gains focus', () => {
