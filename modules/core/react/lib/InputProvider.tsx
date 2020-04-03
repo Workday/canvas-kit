@@ -4,7 +4,7 @@ import elementClosestPolyfill from 'element-closest';
 
 export interface InputProviderProps {
   provideIntent?: boolean;
-  container: HTMLElement;
+  container?: HTMLElement | React.RefObject<HTMLElement>;
 }
 
 export enum InputType {
@@ -110,9 +110,9 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   private mousePosY: number | null = null; // Unused if props.provideIntent is not defined
   private nested = false; // True if nested within another input provider
 
-  static defaultProps = {
-    container: document.body,
-  };
+  // static defaultProps = {
+  //   container: document.body,
+  // };
 
   constructor(props: any) {
     super(props);
@@ -162,30 +162,44 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   // Need to remember how it component was mounted so we ensure listener removal
   provideIntent = this.props.provideIntent;
 
-  componentDidMount() {
-    const {container} = this.props;
-    // bail early if input provider is already handling this
+  getContainer(container: HTMLElement | React.RefObject<HTMLElement> | undefined): HTMLElement {
+    console.warn('container', container);
+    if (container === undefined) {
+      console.warn(container);
+      return document.body;
+    } else if ('current' in container) {
+      if (container.current === null) {
+        console.warn('You ref object can not be null, therefore, falling back to document.body');
+        return document.body;
+      } else {
+        return container.current;
+      }
+    }
+    return container;
+  }
 
-    if (container.hasAttribute('data-whatinput')) {
+  private container = this.getContainer(this.props.container);
+
+  componentDidMount() {
+    if (this.container.hasAttribute('data-whatinput')) {
       return;
     }
 
     // For IE11 and under, we'll need to polyfill element.closest
     elementClosestPolyfill(window);
-    if (container.parentElement && container.parentElement.closest('[data-whatinput]')) {
+    if (this.container.parentElement && this.container.parentElement.closest('[data-whatinput]')) {
       this.nested = true;
       return;
     }
-    container.setAttribute('data-whatinput', this.currentInput);
+    this.container.setAttribute('data-whatinput', this.currentInput);
     this.enableListeners(true);
   }
 
   updateAttributes() {
-    const {container} = this.props;
     const intent = this.provideIntent ? this.currentIntent : null;
-    container.setAttribute('data-whatinput', this.currentInput);
+    this.container.setAttribute('data-whatinput', this.currentInput);
     if (intent) {
-      container.setAttribute('data-whatintent', intent);
+      this.container.setAttribute('data-whatintent', intent);
     }
 
     try {
@@ -201,7 +215,8 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     if (this.nested) {
       return;
     }
-    this.props.container.removeAttribute('data-whatinput');
+
+    this.container.removeAttribute('data-whatinput');
     window.clearTimeout(this.eventTimer);
     this.enableListeners(false);
   }
