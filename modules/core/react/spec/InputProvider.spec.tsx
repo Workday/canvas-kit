@@ -41,12 +41,12 @@ const testInput = (
   map[eventType](mockEvent);
 
   if (!provideIntent) {
-    expect(component.getDOMNode().getAttribute('data-whatinput')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatinput')).toBe(expectedInputType);
   } else if (expectedInputType) {
-    expect(component.getDOMNode().getAttribute('data-whatinput')).toBe(expectedInputType);
-    expect(component.getDOMNode().getAttribute('data-whatintent')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatinput')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatintent')).toBe(expectedInputType);
   } else if (expectedIntentType) {
-    expect(component.getDOMNode().getAttribute('data-whatintent')).toBe(expectedIntentType);
+    expect(document.body.getAttribute('data-whatintent')).toBe(expectedIntentType);
   }
   component.unmount();
 };
@@ -208,7 +208,8 @@ describe('InputProvider', () => {
         </InputProvider>
       </InputProvider>
     );
-    expect(component.find('.wdc-input-provider').length).toBe(1);
+
+    expect(document.querySelectorAll('[data-whatinput]').length).toBe(1);
     component.unmount();
   });
 });
