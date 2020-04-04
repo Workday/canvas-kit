@@ -29,6 +29,13 @@ export interface Option {
   value: string;
 }
 
+interface NormalizedOption extends Option {
+  // Optional keys in Option are required in NormalizedOption
+  disabled: boolean;
+  id: string;
+  label: string;
+}
+
 export interface RenderOptionFunction {
   (option: Option): React.ReactNode;
 }
@@ -46,7 +53,7 @@ export interface SelectProps
   /**
    * The options of the Select.
    */
-  options: Array<Option>;
+  options: (Option | string)[];
   // TODO: Improve the renderOption prop description
   /**
    * The function called to render the content of each option.
@@ -178,9 +185,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     disabled: false,
   };
 
-  private optionIds: string[];
-  private optionLabels: string[];
-  private optionValues: string[];
+  private normalizedOptions: NormalizedOption[];
 
   state: Readonly<SelectState> = {
     focusedOptionIndex: 0,
@@ -190,45 +195,32 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     selectedOptionIndex: 0,
   };
 
-  // Store option ids since we may need to generate them if they're
-  // undefined
-  private setOptionIds = (): void => {
-    this.optionIds = this.props.options.map(option => {
-      return option.id || uuid();
-    });
-  };
+  // Store normalized options since the options prop can take on multiple
+  // forms: an array of strings or an array of objects (sometimes with
+  // arbitrary keys)
+  private setNormalizedOptions = (): void => {
+    this.normalizedOptions = this.props.options.map(option => {
+      let disabled, id, label, value;
 
-  // Store option values
-  private setOptionValues = (): void => {
-    this.optionValues = this.props.options.map(option => {
-      return option.value || '';
-    });
-  };
-
-  // Store option labels since we may need to populate them based on the
-  // option value if the label is undefined
-  private setOptionLabels = (): void => {
-    this.optionLabels = this.props.options.map(option => {
-      const {label, value} = option;
-      if (label !== undefined) {
-        return label;
+      if (typeof option === 'string') {
+        disabled = false;
+        id = uuid();
+        value = option;
+        label = option;
       } else {
-        return value !== undefined ? value : '';
+        disabled = !!option.disabled;
+        id = option.id || uuid();
+        value = option.value;
+        label = option.label || option.value;
       }
-    });
-  };
 
-  // Store various option props (ids, labels, values) since the Select
-  // may need to populate them and/or access them
-  private setOptionLookups = (): void => {
-    this.setOptionIds();
-    this.setOptionLabels();
-    this.setOptionValues();
+      return {disabled, id, label, value};
+    });
   };
 
   private getIndexByValue = (value: string): number => {
-    for (let i = 0; i < this.optionValues.length; i++) {
-      if (this.optionValues[i] === value) {
+    for (let i = 0; i < this.normalizedOptions.length; i++) {
+      if (this.normalizedOptions[i].value === value) {
         return i;
       }
     }
@@ -239,13 +231,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private getIndexByStartString = (
     startIndex: number,
     startString: string,
-    endIndex: number = this.optionLabels.length,
+    endIndex: number = this.normalizedOptions.length,
     ignoreDisabled: boolean = true
   ): number => {
     for (let i = startIndex; i < endIndex; i++) {
-      const label = this.optionLabels[i].toLowerCase();
+      const label = this.normalizedOptions[i].label.toLowerCase();
       if (label.indexOf(startString.toLowerCase()) === 0) {
-        if (!ignoreDisabled || (ignoreDisabled && !this.props.options[i].disabled)) {
+        if (!ignoreDisabled || (ignoreDisabled && !this.normalizedOptions[i].disabled)) {
           return i;
         }
       }
@@ -421,10 +413,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       if (this.state.isMenuHidden) {
         this.setState({
           focusedOptionIndex: matchIndex,
-          label: this.optionLabels[matchIndex],
+          label: this.normalizedOptions[matchIndex].label,
           selectedOptionIndex: matchIndex,
         });
-        this.updateInput(this.optionValues[matchIndex]);
+        this.updateInput(this.normalizedOptions[matchIndex].value);
 
         // Otherwise (the menu is visible), simply focus the matched option
       } else {
@@ -444,7 +436,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   constructor(props: SelectProps) {
     super(props);
-    this.setOptionLookups();
+    this.setNormalizedOptions();
   }
 
   componentDidMount() {
@@ -456,7 +448,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
       if (childIndex !== -1) {
         this.setState({
-          label: this.optionLabels[childIndex],
+          label: this.normalizedOptions[childIndex].label,
           selectedOptionIndex: childIndex,
         });
         return;
@@ -465,7 +457,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     // ... otherwise, set state to the first option
     this.setState({
-      label: this.optionLabels[0],
+      label: this.normalizedOptions[0].label,
     });
   }
 
@@ -474,7 +466,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     const {isMenuHidden, focusedOptionIndex} = this.state;
 
     if (children !== prevProps.children) {
-      this.setOptionLookups();
+      this.setNormalizedOptions();
     }
 
     // If the menu was just displayed, scroll the focused option into
@@ -515,23 +507,21 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleOptionSelection = (index: number): void => {
-    const option = this.props.options[index];
-
     // Abort immediately if:
     // * The menu is not interactive
     // * A disabled option was clicked (we ignore these clicks)
-    if (!this.isMenuInteractive() || option.disabled) {
+    if (!this.isMenuInteractive() || this.normalizedOptions[index].disabled) {
       return;
     }
 
     this.setState({
       focusedOptionIndex: index,
-      label: this.optionLabels[index],
+      label: this.normalizedOptions[index].label,
       selectedOptionIndex: index,
     });
 
     this.toggleMenu(false);
-    this.updateInput(this.optionValues[index]);
+    this.updateInput(this.normalizedOptions[index].value);
   };
 
   handleMenuBlur = (event: React.FocusEvent): void => {
@@ -563,7 +553,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
             let nextIndex = focusedOptionIndex + direction;
-            while (nextIndex < numOptions && nextIndex >= 0 && options[nextIndex].disabled) {
+            while (
+              nextIndex < numOptions &&
+              nextIndex >= 0 &&
+              this.normalizedOptions[nextIndex].disabled
+            ) {
               nextIndex += direction;
             }
             nextFocusedIndex =
@@ -612,31 +606,31 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  renderOptions = (options: Array<Option>, renderOption: RenderOptionFunction) => {
+  renderOptions = (options: (Option | string)[], renderOption: RenderOptionFunction) => {
     return options.map((option, index) => {
       const optionProps = {
         'aria-selected': this.state.selectedOptionIndex === index ? true : undefined,
-        disabled: option.disabled,
+        disabled: this.normalizedOptions[index].disabled,
         error: this.props.error,
         focused: this.state.focusedOptionIndex === index,
-        id: this.optionIds[index],
-        key: this.optionIds[index],
+        id: this.normalizedOptions[index].id,
+        key: this.normalizedOptions[index].id,
         onMouseDown: (event: React.MouseEvent) => {
           event.preventDefault();
           this.handleOptionSelection(index);
         },
         optionRef: this.state.focusedOptionIndex === index ? this.focusedOptionRef : undefined,
         suppressed: !this.isMenuInteractive(),
-        value: this.optionValues[index],
+        value: this.normalizedOptions[index].value,
       };
 
-      // Inject values managed by the Select into the option
-      const optionWithManagedValues = {
-        ...option,
-        label: this.optionLabels[index],
+      // Merge user-provided option with normalized option
+      const normalizedOption = {
+        ...(typeof option === 'string' ? {} : option),
+        ...this.normalizedOptions[index],
       };
 
-      return <SelectOption {...optionProps}>{renderOption(optionWithManagedValues)}</SelectOption>;
+      return <SelectOption {...optionProps}>{renderOption(normalizedOption)}</SelectOption>;
     });
   };
 
@@ -686,11 +680,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           onChange={onChange}
           ref={this.inputRef}
           type="text"
-          value={value || this.optionValues[0]}
+          value={value || this.normalizedOptions[0].value}
         />
         {!isMenuHidden && (
           <SelectMenu
-            aria-activedescendant={this.optionIds[focusedOptionIndex]}
+            aria-activedescendant={this.normalizedOptions[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}
             error={error}
             isHiding={isMenuHiding}
