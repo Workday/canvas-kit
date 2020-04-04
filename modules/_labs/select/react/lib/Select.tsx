@@ -624,10 +624,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         value: this.normalizedOptions[index].value,
       };
 
-      // Merge user-provided option with normalized option
+      // Merge user-provided option with normalized option and
+      // pass in additional information about the option state
+      // (focused, selected)
       const normalizedOption = {
         ...(typeof option === 'string' ? {} : option),
         ...this.normalizedOptions[index],
+        focused: optionProps.focused,
+        selected: !!optionProps['aria-selected'],
       };
 
       return <SelectOption {...optionProps}>{renderOption(normalizedOption)}</SelectOption>;

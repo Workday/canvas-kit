@@ -8,9 +8,16 @@ import {
   ComponentStatesTable,
   permutateProps,
 } from '../../../../../utils/storybook';
-
+import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {
+  activityStreamIcon,
+  avatarIcon,
+  uploadCloudIcon,
+  userIcon,
+} from '@workday/canvas-system-icons-web';
+import {colors, typeColors} from '@workday/canvas-kit-react-core';
 import FormField from '../../../../form-field/react/index';
-import {Select} from '../index';
+import {RenderOptionFunction, Select} from '../index';
 import README from '../README.md';
 
 const hintText = 'Helpful text goes here.';
@@ -38,6 +45,23 @@ const manyOptions = [
   {label: 'San Mateo', value: 'san-mateo'},
 ];
 
+const customRenderOptions = [
+  {value: 'Activity Stream', icon: activityStreamIcon},
+  {value: 'Avatar', icon: avatarIcon},
+  {value: 'Upload Cloud', icon: uploadCloudIcon},
+  {value: 'User', icon: userIcon},
+];
+
+const customRenderOption: RenderOptionFunction = option => {
+  const iconColor = option.focused ? typeColors.inverse : colors.blackPepper100;
+  return (
+    <div style={{alignItems: 'center', display: 'flex', padding: '3px 0'}}>
+      <SystemIcon icon={option.icon} color={iconColor} colorHover={iconColor} />
+      <div style={{marginLeft: 5}}>{option.value}</div>
+    </div>
+  );
+};
+
 storiesOf('Labs|Select/React/Top Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
@@ -49,6 +73,17 @@ storiesOf('Labs|Select/React/Top Label', module)
   .add('Scrollable', () => (
     <FormField label="Label" inputId="select-scrollable">
       {controlComponent(<Select name="location" options={manyOptions} />)}
+    </FormField>
+  ))
+  .add('Custom Render', () => (
+    <FormField label="Label" inputId="select-custom-render">
+      {controlComponent(
+        <Select
+          name="custom-render"
+          options={customRenderOptions}
+          renderOption={customRenderOption}
+        />
+      )}
     </FormField>
   ))
   .add('Disabled', () => (
