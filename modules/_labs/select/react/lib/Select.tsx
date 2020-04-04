@@ -160,8 +160,8 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
     display: grow ? 'block' : 'inline-block',
   }),
   ({disabled}) => ({
-    '&:hover path': {
-      fill: disabled ? undefined : colors.licorice500,
+    '&:hover .menu-icon path': {
+      fill: disabled ? undefined : 'colors.licorice500',
     },
   })
 );
@@ -696,6 +696,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           </SelectMenu>
         )}
         <SelectMenuIcon
+          className="menu-icon"
           icon={caretDownSmallIcon}
           color={disabled ? colors.licorice100 : colors.licorice200}
           colorHover={disabled ? colors.licorice100 : colors.licorice500}
