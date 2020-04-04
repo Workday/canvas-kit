@@ -45,6 +45,13 @@ const manyOptions = [
   {label: 'San Mateo', value: 'san-mateo'},
 ];
 
+const defaultComponent = controlComponent(<Select name="contact" options={options} />);
+const manyOptionsComponent = controlComponent(<Select name="location" options={manyOptions} />);
+const disabledComponent = controlComponent(
+  <Select name="contact" options={options} disabled={true} />
+);
+const growComponent = controlComponent(<Select name="contact" options={options} grow={true} />);
+
 const customRenderOptions = [
   {value: 'Activity Stream', icon: activityStreamIcon},
   {value: 'Avatar', icon: avatarIcon},
@@ -62,33 +69,31 @@ const customRenderOption: RenderOptionFunction = option => {
   );
 };
 
+const customRenderComponent = controlComponent(
+  <Select name="custom-render" options={customRenderOptions} renderOption={customRenderOption} />
+);
+
 storiesOf('Labs|Select/React/Top Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField label="Label" inputId="select-default">
-      {controlComponent(<Select name="contact" options={options} />)}
+      {defaultComponent}
     </FormField>
   ))
   .add('Scrollable', () => (
     <FormField label="Label" inputId="select-scrollable">
-      {controlComponent(<Select name="location" options={manyOptions} />)}
+      {manyOptionsComponent}
     </FormField>
   ))
   .add('Custom Render', () => (
     <FormField label="Label" inputId="select-custom-render">
-      {controlComponent(
-        <Select
-          name="custom-render"
-          options={customRenderOptions}
-          renderOption={customRenderOption}
-        />
-      )}
+      {customRenderComponent}
     </FormField>
   ))
   .add('Disabled', () => (
     <FormField label="Label" inputId="select-disabled">
-      {controlComponent(<Select name="contact" options={options} disabled={true} />)}
+      {disabledComponent}
     </FormField>
   ))
   .add('Alert', () => (
@@ -99,7 +104,7 @@ storiesOf('Labs|Select/React/Top Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {controlComponent(<Select name="contact" options={options} />)}
+      {defaultComponent}
     </FormField>
   ))
   .add('Error', () => (
@@ -110,24 +115,12 @@ storiesOf('Labs|Select/React/Top Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {controlComponent(<Select name="contact" options={options} />)}
+      {defaultComponent}
     </FormField>
   ))
   .add('Grow', () => (
     <FormField label="Label" inputId="select-grow" grow={true}>
-      {controlComponent(<Select name="contact" options={options} grow={true} />)}
-    </FormField>
-  ))
-  .add('Grow - Error', () => (
-    <FormField
-      label="Label"
-      inputId="select-grow-error"
-      grow={true}
-      error={FormField.ErrorType.Error}
-      hintText={hintText}
-      hintId={hintId}
-    >
-      {controlComponent(<Select name="contact" options={options} grow={true} />)}
+      {growComponent}
     </FormField>
   ));
 
@@ -135,7 +128,7 @@ storiesOf('Labs|Select/React/Left Label', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-default">
-      {controlComponent(<Select name="contact" options={options} />)}
+      {defaultComponent}
     </FormField>
   ))
   .add('Scrollable', () => (
@@ -144,12 +137,21 @@ storiesOf('Labs|Select/React/Left Label', module)
       label="Label"
       inputId="select-scrollable"
     >
-      {controlComponent(<Select name="location" options={manyOptions} />)}
+      {manyOptionsComponent}
+    </FormField>
+  ))
+  .add('Custom Render', () => (
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="select-custom-render"
+    >
+      {customRenderComponent}
     </FormField>
   ))
   .add('Disabled', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-disabled">
-      {controlComponent(<Select name="contact" options={options} disabled={true} />)}
+      {disabledComponent}
     </FormField>
   ))
   .add('Alert', () => (
@@ -161,7 +163,7 @@ storiesOf('Labs|Select/React/Left Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {controlComponent(<Select name="contact" options={options} />)}
+      {defaultComponent}
     </FormField>
   ))
   .add('Error', () => (
@@ -173,7 +175,7 @@ storiesOf('Labs|Select/React/Left Label', module)
       hintText={hintText}
       hintId={hintId}
     >
-      {controlComponent(<Select name="contact" options={options} />)}
+      {defaultComponent}
     </FormField>
   ))
   .add('Grow', () => (
@@ -183,20 +185,7 @@ storiesOf('Labs|Select/React/Left Label', module)
       inputId="select-grow"
       grow={true}
     >
-      {controlComponent(<Select name="contact" options={options} grow={true} />)}
-    </FormField>
-  ))
-  .add('Grow - Error', () => (
-    <FormField
-      labelPosition={FormField.LabelPosition.Left}
-      label="Label"
-      inputId="select-grow-error"
-      grow={true}
-      error={FormField.ErrorType.Error}
-      hintText={hintText}
-      hintId={hintId}
-    >
-      {controlComponent(<Select name="contact" options={options} grow={true} />)}
+      {growComponent}
     </FormField>
   ));
 
