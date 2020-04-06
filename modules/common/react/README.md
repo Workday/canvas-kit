@@ -26,26 +26,25 @@ import * as React from 'react';
 import {Popper} from '@workday/canvas-kit-react-common';
 import {Popup} from '@workday/canvas-kit-react-popup';
 
-<Popper placement={'bottom'} open={this.state.open} anchorElement={this.buttonRef.current}>
-  <Popup heading={'Popup Title'}>{this.props.children}</Popup>
+<Popper placement="bottom" open={this.state.open} anchorElement={this.buttonRef.current}>
+  <Popup heading="Popup Title">Popup Contents</Popup>
 </Popper>;
 ```
 
-## Testing
+If you need access to the placement that was chosen by PopperJS, pass in a render prop for the
+children:
 
-Popper.js uses DOM calls that aren't available in JSDOM. This can cause problems with some testing
-frameworks that use JSDOM such as jest. When testing you can
-[mock out](https://github.com/FezVrasta/popper.js#how-to-use-popperjs-in-jest) these calls made by
-Popper.js.
+```tsx
+import * as React from 'react';
+import {Popper} from '@workday/canvas-kit-react-common';
+import {Popup} from '@workday/canvas-kit-react-popup';
 
-Alternatively, you can mock out the `Popper` wrapper itself. An example of how to do this in jest is
-shown below:
-
-```
-jest.mock('@workday/canvas-kit-react-common', () => ({
-  ...jest.genMockFromModule('@workday/canvas-kit-react-common'),
-  Popper: props => (props.open ? <div id="POPPER">{props.children}</div> : null),
-}));
+<Popper placement="bottom" open={this.state.open} anchorElement={this.buttonRef.current}>
+  {({ placement }) => {
+    console.log('placement', placement) // logs out the any valid PopperJS placement option except for `auto`
+    <Popup heading="Popup Title">Popup Contents</Popup>
+  }}
+</Popper>;
 ```
 
 ## Static Properties
@@ -64,7 +63,7 @@ includes custom `data-*` attributes such as `data-test-id` to help facilitate au
 
 > The reference element used to position the popper.
 
-#### `children: React.ReactNode`
+#### `children: React.ReactNode | ((props: {placement: Placement}) => React.ReactNode)`
 
 > The element used as the popper.
 
@@ -109,7 +108,7 @@ Default: `bottom`
 
 #### `popperOptions: PopperOptions`
 
-> Addtional options passed to the `popper.js` instance.
+> Additional options passed to the `popper.js` instance.
 
 ---
 
