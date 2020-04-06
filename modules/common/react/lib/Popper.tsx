@@ -39,65 +39,69 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   portal?: boolean;
 }
 
-export const Popper = ({
-  anchorElement,
-  children,
-  containerElement,
-  open = true,
-  placement: popperPlacement = 'bottom',
-  popperOptions = {},
-  portal = true,
-  ...elemProps
-}: PopperProps) => {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const [placement, setPlacement] = React.useState(popperPlacement);
+export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
+  (
+    {
+      anchorElement,
+      children,
+      containerElement,
+      open = true,
+      placement: popperPlacement = 'bottom',
+      popperOptions = {},
+      portal = true,
+      ...elemProps
+    }: PopperProps,
+    forwardRef
+  ) => {
+    const localRef = React.useRef<HTMLDivElement>(null);
+    const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
+    const [placement, setPlacement] = React.useState(popperPlacement);
 
-  // useLayoutEffect prevents flashing of the popup before position is determined
-  React.useLayoutEffect(() => {
-    if (!anchorElement) {
-      console.warn(
-        `Popper: anchorElement was not defined. A valid anchorElement must be provided to render a Popper`
-      );
+    // useLayoutEffect prevents flashing of the popup before position is determined
+    React.useLayoutEffect(() => {
+      if (!anchorElement) {
+        console.warn(
+          `Popper: anchorElement was not defined. A valid anchorElement must be provided to render a Popper`
+        );
+        return undefined;
+      }
+
+      if (open && ref && ref.current) {
+        const popper = PopperJS.createPopper(anchorElement, ref.current, {
+          placement: popperPlacement,
+          ...popperOptions,
+          onFirstUpdate: data => {
+            if (data.placement) {
+              setPlacement(data.placement);
+            }
+            if (popperOptions.onFirstUpdate) {
+              popperOptions.onFirstUpdate(data);
+            }
+          },
+        });
+
+        return () => {
+          popper.destroy();
+        };
+      }
+
       return undefined;
+    }, [open, anchorElement]);
+
+    if (!open) {
+      return null;
     }
 
-    console.log('popperOptions', popperOptions);
+    const contents = (
+      <div {...elemProps} ref={ref}>
+        {typeof children === 'function' ? children({placement}) : children}
+      </div>
+    );
 
-    if (open && ref.current) {
-      const popper = PopperJS.createPopper(anchorElement, ref.current, {
-        placement: popperPlacement,
-        ...popperOptions,
-        onFirstUpdate: data => {
-          if (data.placement) {
-            setPlacement(data.placement);
-          }
-          if (popperOptions.onFirstUpdate) {
-            popperOptions.onFirstUpdate(data);
-          }
-        },
-      });
-
-      return () => {
-        popper.destroy();
-      };
+    if (!portal) {
+      return contents;
     }
 
-    return undefined;
-  }, [open, anchorElement]);
-
-  if (!open) {
-    return null;
+    return ReactDOM.createPortal(contents, containerElement || document.body);
   }
-
-  const contents = (
-    <div {...elemProps} ref={ref}>
-      {typeof children === 'function' ? children({placement}) : children}
-    </div>
-  );
-
-  if (!portal) {
-    return contents;
-  }
-
-  return ReactDOM.createPortal(contents, containerElement || document.body);
-};
+);
