@@ -57,7 +57,8 @@ able to compile your code.
 - [HighlightButton](#highlightbutton)
 - [OutlineButton](#outlinebutton)
 - [TextButton](#textbutton)
-- [Icon Button](#icon-button)
+- [Hyperlink](#hyperlink)
+- [IconButton](#iconbutton)
 
 ---
 
@@ -524,7 +525,50 @@ Default: `ButtonIconPosition.Left`
 
 ---
 
-# Icon Button
+# Hyperlink
+
+```tsx
+import * as React from 'react';
+import {Hyperlink} from '@workday/canvas-kit-react-button';
+
+<Hyperlink href={url}>Link</Hyperlink>;
+```
+
+Hyperlink will apply our link styling, but follow the font styles of it's container (size, weight,
+line-height, etc.).
+
+## Static Properties
+
+#### `Variant: ButtonVariant`
+
+```tsx
+<Hyperlink variant={Hyperlink.Variant.Inverse}>Link</Hyperlink>
+```
+
+> The style of the link for different backgrounds
+
+Default: `TextButtonVariant.Default`
+
+| Theme     | Description |
+| --------- | ----------- |
+| `Default` | Blue text   |
+| `Inverse` | White text  |
+
+## Component Props
+
+### Required
+
+> None
+
+### Optional
+
+#### `href: string`
+
+> The href url of the anchor tag
+
+---
+
+# IconButton
 
 > Button containing an icon. Icon may be a component from
 > [`canvas-kit-react-icon`](../../icon/react) or an svg element.
