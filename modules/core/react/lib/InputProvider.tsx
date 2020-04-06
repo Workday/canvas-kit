@@ -110,10 +110,6 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   private mousePosY: number | null = null; // Unused if props.provideIntent is not defined
   private nested = false; // True if nested within another input provider
 
-  // static defaultProps = {
-  //   container: document.body,
-  // };
-
   constructor(props: any) {
     super(props);
 
@@ -163,13 +159,11 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   provideIntent = this.props.provideIntent;
 
   getContainer(container: HTMLElement | React.RefObject<HTMLElement> | undefined): HTMLElement {
-    console.warn('container', container);
     if (container === undefined) {
-      console.warn(container);
       return document.body;
     } else if ('current' in container) {
       if (container.current === null) {
-        console.warn('You ref object can not be null, therefore, falling back to document.body');
+        console.warn('Your ref object can not be null, therefore, falling back to document.body');
         return document.body;
       } else {
         return container.current;
