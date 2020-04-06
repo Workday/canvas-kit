@@ -11,6 +11,11 @@ import README from '../README.md';
 export default {
   title: 'Components|Popups/Tooltip/React/Visual Testing',
   decorators: [withReadme(README)],
+  parameters: {
+    chromatic: {
+      disabled: false,
+    },
+  },
 };
 
 export const Placements = () => {
