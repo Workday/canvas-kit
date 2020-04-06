@@ -12,12 +12,12 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * The padding of the Modal. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
    */
-  padding?: PopupPadding;
+  padding: PopupPadding;
   /**
    * The width of the Modal. Accepts `s` or `l`.
    * @default ModalWidth.s
    */
-  width?: ModalWidth;
+  width: ModalWidth;
   /**
    * The function called when the Modal is closed.
    * If this callback is provided, the Modal will have
@@ -32,7 +32,7 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * cases. Some applications may use a Popup manager to make sure the correct popup is receiving
    * the close command. If your application uses custom popup stacking, do not set this to true.
    */
-  closeOnEscape?: boolean;
+  closeOnEscape: boolean;
   /**
    * The heading of the Modal.
    */
@@ -57,7 +57,7 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * This should be a sibling or higher than the header and navigation elements of the application.
    * @default document.body
    */
-  container?: HTMLElement;
+  container: HTMLElement;
 }
 
 const fadeIn = keyframes`
