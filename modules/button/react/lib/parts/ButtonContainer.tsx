@@ -84,10 +84,10 @@ export const ButtonContainer = styled('button', {
     '&:hover:active': {transitionDuration: '40ms'}, // Makes the "down" state of the button happens faster than the hover state, so it animates in correctly.
     '&:disabled, &:disabled:active': {cursor: 'default', boxShadow: 'none'},
     '& > *:first-of-type': {
-      paddingLeft: 0,
+      marginLeft: 0,
     },
     '& > *:last-of-type': {
-      paddingRight: 0,
+      marginRight: 0,
     },
   },
   ({size}) => {
@@ -99,7 +99,7 @@ export const ButtonContainer = styled('button', {
           height: '48px',
           padding: `0 ${spacing.l}`,
           '& > * ': {
-            padding: `0 ${spacingNumbers.xs / 2}px`,
+            margin: `0 ${spacingNumbers.xs / 2}px`,
           },
         };
       case 'medium':
@@ -109,7 +109,7 @@ export const ButtonContainer = styled('button', {
           height: spacing.xl,
           padding: `0 ${spacing.m}`,
           '& > * ': {
-            padding: `0 ${spacingNumbers.xxs / 2}px`,
+            margin: `0 ${spacingNumbers.xxs / 2}px`,
           },
         };
       case 'small':
@@ -118,7 +118,7 @@ export const ButtonContainer = styled('button', {
           height: spacing.l,
           padding: `0 ${spacing.s}`,
           '& > * ': {
-            padding: `0 ${spacingNumbers.xxxs / 2}px`,
+            margin: `0 ${spacingNumbers.xxxs / 2}px`,
           },
         };
     }

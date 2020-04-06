@@ -3,7 +3,8 @@
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {colors} from '@workday/canvas-kit-react-core';
+import {StaticStates, type} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, permutateProps, customColorTheme} from '../../../../utils/storybook';
 import {playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {
@@ -13,6 +14,7 @@ import {
   DeleteButton,
   HighlightButton,
   OutlineButton,
+  Hyperlink,
   IconButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
@@ -25,7 +27,7 @@ const buttonLayout: CSSObject = {
 
 const blueBackground: CSSObject = {
   ...buttonLayout,
-  backgroundColor: '#0875e1',
+  backgroundColor: colors.blueberry400,
   padding: '12px',
   borderRadius: '4px',
 };
@@ -217,6 +219,49 @@ const buttonStories = [
           <TextButton {...props}>Test</TextButton>
         </Container>
       )
+    ),
+  },
+  {
+    name: 'Hyperlink',
+    component: Hyperlink,
+    states: (
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={permutateProps({
+            variant: [
+              {label: 'Default', value: undefined},
+              {label: 'Inverse', value: Hyperlink.Variant.Inverse},
+            ],
+          })}
+          columnProps={permutateProps({
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Focus', value: 'focus'},
+              {label: 'Focus Hover', value: 'focus hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+              {label: 'Visited', value: 'visited'},
+            ],
+          })}
+        >
+          {(props: any) => (
+            <Container blue={props.variant === Hyperlink.Variant.Inverse}>
+              <div
+                css={{
+                  ...type.body2,
+                  color:
+                    props.variant === Hyperlink.Variant.Inverse
+                      ? colors.frenchVanilla100
+                      : undefined,
+                }}
+              >
+                Here's a <Hyperlink {...props}>Link</Hyperlink> to something
+              </div>
+            </Container>
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
     ),
   },
   {
