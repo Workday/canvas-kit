@@ -26,13 +26,13 @@ export interface CookieBannerProps {
    * The notice text or element of the CookieBanner.
    * @default CookieBanner.DefaultNotice
    */
-  notice: string | React.ReactNode;
+  notice?: string | React.ReactNode;
 
   /**
    * The text of the CookieBanner settings button.
    * @default 'Cookie Settings'
    */
-  settingsLabel: string;
+  settingsLabel?: string;
 }
 
 const Banner = styled('div')(
@@ -90,13 +90,15 @@ export default class CookieBanner extends React.Component<CookieBannerProps> {
   public static DefaultNotice =
     'We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we’ll assume that you are willing to receive cookies.';
 
-  public static defaultProps = {
-    notice: CookieBanner.DefaultNotice,
-    settingsLabel: 'Cookie Settings',
-  };
-
   public render(): React.ReactNode {
-    const {isClosed, onAccept, onClickSettings, notice, settingsLabel, ...elemProps} = this.props;
+    const {
+      notice = CookieBanner.DefaultNotice,
+      settingsLabel = 'Cookie Settings',
+      isClosed,
+      onAccept,
+      onClickSettings,
+      ...elemProps
+    } = this.props;
 
     return (
       <Banner isClosed={isClosed} {...elemProps}>

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/core';
 import Svg from './Svg';
-import {SpanProps} from './types';
 
 export interface GraphicStyles {
   /**
@@ -59,16 +58,16 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
-export default class Graphic extends React.Component<SpanProps & GraphicProps> {
+export default class Graphic extends React.Component<GraphicProps> {
   render() {
-    const {src, width, height, grow, ...elemProps} = this.props;
+    const {grow = false, src, width, height, ...elemProps} = this.props;
 
     return (
       <Svg
         src={src}
         styles={graphicStyles({width, height, grow})}
         type={CanvasIconTypes.Graphic}
-        elemProps={elemProps}
+        {...elemProps}
       />
     );
   }

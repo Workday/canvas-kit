@@ -12,7 +12,7 @@ export interface SkeletonTextProps extends React.HTMLAttributes<HTMLDivElement> 
    * The number of "lines" that SkeletonText will display. If there is more than one line, the last line will have a width of `60%`.
    * @default 2
    */
-  lineCount: number;
+  lineCount?: number;
 }
 
 const Line = styled('div')<{
@@ -31,22 +31,17 @@ const Line = styled('div')<{
 });
 
 export default class SkeletonText extends React.Component<SkeletonTextProps> {
-  static defaultProps = {
-    lineCount: 2,
-  };
-
   render(): React.ReactNode {
-    const {lineCount, ...elemProps} = this.props;
+    const {lineCount = 2, ...elemProps} = this.props;
 
     if (lineCount <= 0) {
       return null;
     }
 
-    return <TextContainer {...elemProps}>{this.createTextLines()}</TextContainer>;
+    return <TextContainer {...elemProps}>{this.createTextLines(lineCount)}</TextContainer>;
   }
 
-  private readonly createTextLines = () => {
-    const {lineCount} = this.props;
+  private readonly createTextLines = (lineCount: number) => {
     const lines = [];
 
     const lineProps = {

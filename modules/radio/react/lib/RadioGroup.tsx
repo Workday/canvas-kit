@@ -61,12 +61,8 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
 export default class RadioGroup extends React.Component<RadioGroupProps> {
   static ErrorType = ErrorType;
 
-  static defaultProps = {
-    value: 0,
-  };
-
   render(): React.ReactNode {
-    const {children, error, onChange, value, grow, ...elemProps} = this.props;
+    const {value = 0, children, error, onChange, grow, ...elemProps} = this.props;
     return (
       <Container error={error} grow={grow} {...elemProps}>
         {React.Children.map(children, this.renderChild)}

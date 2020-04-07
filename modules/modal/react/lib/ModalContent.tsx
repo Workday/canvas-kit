@@ -57,7 +57,7 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * This should be a sibling or higher than the header and navigation elements of the application.
    * @default document.body
    */
-  container?: HTMLElement;
+  container: HTMLElement;
 }
 
 const fadeIn = keyframes`
@@ -152,14 +152,14 @@ const useInitialFocus = (
 };
 
 const ModalContent = ({
+  closeOnEscape = true,
+  width = ModalWidth.s,
+  padding = PopupPadding.l,
+  container = document.body,
   handleClose,
   children,
-  closeOnEscape,
   firstFocusRef,
-  width,
   heading,
-  padding,
-  container = document.body,
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
