@@ -30,6 +30,8 @@ const options = [
   {label: 'Mail', value: 'mail'},
 ];
 
+const simpleOptions = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
+
 const manyOptions = [
   {label: 'Atlanta', value: 'atlanta'},
   {label: 'Austin', value: 'austin'},
@@ -45,14 +47,7 @@ const manyOptions = [
   {label: 'San Mateo', value: 'san-mateo'},
 ];
 
-const defaultComponent = controlComponent(<Select name="contact" options={options} />);
-const manyOptionsComponent = controlComponent(<Select name="location" options={manyOptions} />);
-const disabledComponent = controlComponent(
-  <Select name="contact" options={options} disabled={true} />
-);
-const growComponent = controlComponent(<Select name="contact" options={options} grow={true} />);
-
-const customRenderOptions = [
+const customOptions = [
   {value: 'Activity Stream', icon: activityStreamIcon},
   {value: 'Avatar', icon: avatarIcon},
   {value: 'Upload Cloud', icon: uploadCloudIcon},
@@ -69,9 +64,23 @@ const customRenderOption: RenderOptionFunction = option => {
   );
 };
 
-const customRenderComponent = controlComponent(
-  <Select name="custom-render" options={customRenderOptions} renderOption={customRenderOption} />
+const defaultComponent = controlComponent(<Select name="contact" options={options} />);
+
+const defaultWithSimpleOptionsComponent = controlComponent(
+  <Select name="state" options={simpleOptions} />
 );
+
+const defaultWithCustomOptionsComponent = controlComponent(
+  <Select name="icon" options={customOptions} renderOption={customRenderOption} />
+);
+
+const manyOptionsComponent = controlComponent(<Select name="city" options={manyOptions} />);
+
+const disabledComponent = controlComponent(
+  <Select name="contact" options={options} disabled={true} />
+);
+
+const growComponent = controlComponent(<Select name="contact" options={options} grow={true} />);
 
 storiesOf('Labs|Select/React/Top Label', module)
   .addParameters({component: Select})
@@ -81,14 +90,19 @@ storiesOf('Labs|Select/React/Top Label', module)
       {defaultComponent}
     </FormField>
   ))
+  .add('Default with Simple Options (Strings)', () => (
+    <FormField label="Label" inputId="select-default-simple">
+      {defaultWithSimpleOptionsComponent}
+    </FormField>
+  ))
+  .add('Default with Custom Options', () => (
+    <FormField label="Label" inputId="select-default-custom">
+      {defaultWithCustomOptionsComponent}
+    </FormField>
+  ))
   .add('Scrollable', () => (
     <FormField label="Label" inputId="select-scrollable">
       {manyOptionsComponent}
-    </FormField>
-  ))
-  .add('Custom Render', () => (
-    <FormField label="Label" inputId="select-custom-render">
-      {customRenderComponent}
     </FormField>
   ))
   .add('Disabled', () => (
@@ -131,6 +145,24 @@ storiesOf('Labs|Select/React/Left Label', module)
       {defaultComponent}
     </FormField>
   ))
+  .add('Default with Simple Options (Strings)', () => (
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="select-default-simple"
+    >
+      {defaultWithSimpleOptionsComponent}
+    </FormField>
+  ))
+  .add('Default with Custom Options', () => (
+    <FormField
+      labelPosition={FormField.LabelPosition.Left}
+      label="Label"
+      inputId="select-default-custom"
+    >
+      {defaultWithCustomOptionsComponent}
+    </FormField>
+  ))
   .add('Scrollable', () => (
     <FormField
       labelPosition={FormField.LabelPosition.Left}
@@ -138,15 +170,6 @@ storiesOf('Labs|Select/React/Left Label', module)
       inputId="select-scrollable"
     >
       {manyOptionsComponent}
-    </FormField>
-  ))
-  .add('Custom Render', () => (
-    <FormField
-      labelPosition={FormField.LabelPosition.Left}
-      label="Label"
-      inputId="select-custom-render"
-    >
-      {customRenderComponent}
     </FormField>
   ))
   .add('Disabled', () => (
