@@ -32,7 +32,7 @@ const toastData = {
 };
 
 class ToastWrapper extends React.Component<{state?: string}> {
-  public render() {
+  render() {
     let toastMeta;
 
     switch (this.props.state) {

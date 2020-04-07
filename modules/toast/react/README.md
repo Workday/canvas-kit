@@ -1,7 +1,7 @@
 # Canvas Kit Toast
 
 Canvas-styled React toast component. Allows for a brief message to be be shown about a process or
-action occuring in the app.
+action occurring in the app.
 
 ## Installation
 
