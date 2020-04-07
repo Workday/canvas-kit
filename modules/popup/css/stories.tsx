@@ -93,7 +93,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
     });
   };
 
-  private onOpenPopupClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+  private onOpenPopupClick = () => {
     this.setState({
       open: !this.state.open,
     });

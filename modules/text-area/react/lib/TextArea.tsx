@@ -23,7 +23,7 @@ export interface TextAreaProps
   /**
    * The function called when the TextArea state changes.
    */
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   /**
    * The placeholder text of the TextArea.
    */

@@ -16,7 +16,7 @@ export interface GlobalHeaderProps {
   /**
    * The function called when the responsive menu icon is clicked.
    */
-  onMenuClick?: (e: React.SyntheticEvent) => void;
+  onMenuClick?: (e: React.MouseEvent) => void;
   /**
    * If true, render the GlobalHeader in collapsed mode.
    * @default false

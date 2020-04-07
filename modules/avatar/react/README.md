@@ -201,6 +201,6 @@ Default: `AvatarButton.Size.m`
 
 ---
 
-#### `onClick: (React.SyntheticEvent) => void`
+#### `onClick: (React.MouseEvent<HTMLButtonElement>) => void`
 
 > A `click` event handler for this component.

@@ -57,7 +57,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
     });
   };
 
-  private handleClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+  private handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const {currentTarget} = e;
     this.setState({
       anchorEl: currentTarget,

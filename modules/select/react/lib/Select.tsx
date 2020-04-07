@@ -33,7 +33,7 @@ export interface SelectProps
   /**
    * The function called when the Select state changes.
    */
-  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   /**
    * The value of the Select.
    */
