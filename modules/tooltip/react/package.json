@@ -51,9 +51,13 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@workday/canvas-kit-react-common": "^4.0.0-beta.0",
-    "@workday/canvas-kit-react-core": "^4.0.0-beta.0"
+    "@workday/canvas-kit-react-core": "^4.0.0-beta.0",
+    "react-innertext": "^1.1.5",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@workday/canvas-kit-react-button": "^4.0.0-beta.0",
+    "@workday/canvas-kit-react-card": "^4.0.0-beta.0",
     "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }
