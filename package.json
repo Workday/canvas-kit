@@ -119,9 +119,6 @@
     "storybook-readme": "^5.0.8",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
-    "tslint": "^6.1.0",
-    "tslint-config-prettier": "^1.14.0",
-    "tslint-react": "^3.6.0",
     "typescript": "^3.8.3"
   },
   "resolutions": {
