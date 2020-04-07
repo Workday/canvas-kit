@@ -14,7 +14,7 @@ export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInp
    * If true, set the Radio button to the checked state.
    * @default false
    */
-  checked: boolean;
+  checked?: boolean;
   /**
    * If true, set the Radio button to the disabled state.
    * @default false
@@ -22,7 +22,7 @@ export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInp
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying radio input element. This is required if `label` is defined as a non-empty string.
-   * @default A uniquely generated id
+   * @default A uniquely generated id by uuid()
    */
   id?: string;
   /**
@@ -206,21 +206,16 @@ const RadioLabel = styled('label')<{disabled?: boolean}>(
 );
 
 export default class Radio extends React.Component<RadioProps> {
-  public static defaultProps = {
-    checked: false,
-    label: '',
-  };
-
   private id = uuid();
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
     const {
-      checked,
-      disabled,
+      checked = false,
       id = this.id,
+      label = '',
+      disabled,
       inputRef,
-      label,
       name,
       onChange,
       value,

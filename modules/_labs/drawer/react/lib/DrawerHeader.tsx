@@ -21,11 +21,11 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
   /**
    * The background color of the DrawerHeader.
    */
-  headerColor: CanvasColor | string;
+  headerColor?: CanvasColor | string;
   /**
    * The border color of the DrawerHeader. This should match something close to `headerColor`.
    */
-  borderColor: CanvasColor | string;
+  borderColor?: CanvasColor | string;
   /**
    * If true, render the icon and header in white. Useful for preserving contrast with a dark `headerColor`.
    * @default false
@@ -72,22 +72,14 @@ const CloseButton = styled(IconButton)({
 });
 
 export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
-  static defaultProps = {
-    closeIconLabel: 'Close',
-    headerColor: colors.soap100,
-    borderColor: colors.soap500,
-    showInverseButton: false,
-    inverse: false,
-  };
-
   public render() {
     const {
+      closeIconLabel = 'Close',
+      headerColor = colors.soap100,
+      borderColor = colors.soap500,
+      inverse = false,
       onClose,
       title,
-      closeIconLabel,
-      headerColor,
-      borderColor,
-      inverse,
       id,
       ...elemProps
     } = this.props;

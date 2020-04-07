@@ -13,12 +13,12 @@ export interface LayoutProps {
   /**
    * The spacing of the Layout children.
    */
-  spacing: number;
+  spacing?: number;
   /**
    * The padding of the Layout's outside container.
    * @default 12
    */
-  gutter: number | string;
+  gutter?: number | string;
   /**
    * If true, set the max width of the Layout container to `1280px`.
    * @default false
@@ -59,11 +59,6 @@ const LayoutContainer = styled('div', {
 );
 
 export default class Layout extends React.Component<LayoutProps> {
-  static defaultProps = {
-    gutter: canvas.spacing.xs,
-    spacing: spacingNumbers.xs,
-  };
-
   public static Column = Column;
 
   private renderChild = (child: React.ReactElement<ColumnProps>): React.ReactNode => {
@@ -87,10 +82,16 @@ export default class Layout extends React.Component<LayoutProps> {
   };
 
   public render() {
-    const {children, gutter, capWidth, ...elemProps} = this.props;
+    const {
+      gutter = canvas.spacing.xs,
+      spacing = spacingNumbers.xs,
+      children,
+      capWidth,
+      ...elemProps
+    } = this.props;
 
     return (
-      <LayoutContainer gutter={gutter} capWidth={capWidth} {...elemProps}>
+      <LayoutContainer spacing={spacing} gutter={gutter} capWidth={capWidth} {...elemProps}>
         {React.Children.map(children, this.renderChild)}
       </LayoutContainer>
     );

@@ -12,12 +12,12 @@ export interface ToastProps {
    * The icon of the Toast.
    * @default checkIcon
    */
-  icon: CanvasSystemIcon;
+  icon?: CanvasSystemIcon;
   /**
    * The color of the Toast icon.
    * @default colors.greenApple400
    */
-  iconColor: CanvasColor | string; // TODO: Fix
+  iconColor?: CanvasColor | string; // TODO: Fix
   /**
    * The text of the Toast message.
    */
@@ -74,19 +74,14 @@ const Message = styled('div')({
 });
 
 export default class Toast extends React.Component<ToastProps> {
-  static defaultProps = {
-    icon: checkIcon as CanvasSystemIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
-    iconColor: colors.greenApple400,
-  };
-
   public render() {
     const {
+      icon = checkIcon as CanvasSystemIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
+      iconColor = colors.greenApple400,
+      transformOrigin,
       onClose,
       onActionClick,
       actionText,
-      icon,
-      iconColor,
-      transformOrigin,
       ...elemProps
     } = this.props;
     return (

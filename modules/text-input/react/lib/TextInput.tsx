@@ -75,13 +75,9 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 
 export default class TextInput extends React.Component<TextInputProps> {
   static ErrorType = ErrorType;
 
-  static defaultProps = {
-    inputRef: React.createRef<HTMLInputElement>(),
-  };
-
   render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {grow, inputRef, error, ...inputProps} = this.props;
+    const {inputRef, grow, error, ...inputProps} = this.props;
 
     return <Input type="text" ref={inputRef} grow={grow} error={error} {...inputProps} />;
   }

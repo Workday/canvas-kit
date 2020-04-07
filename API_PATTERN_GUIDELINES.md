@@ -239,9 +239,31 @@ foo();
 - Use `defaultProps` whenever you find yourself checking for the existence of something before
   executing branching logic. It significantly reduces conditionals, facilitating easier testing and
   less bugs.
-- Any prop included in `defaultProps` should be typed as required in the component interface.
-  However, it can still be documented as optional in the README. You can find more details
-  [here](https://stackoverflow.com/questions/37282159/default-property-value-in-react-component-using-typescript)
+- We prefer to colocate our default props and destructure them which allows consumers to rename our
+  components on import.
+- Note: If you assign a default value to a prop, make sure to make the prop as optional in the
+  interface.
+
+```jsx
+const someInterface {
+  /**
+   * If true, sets the Checkbox checked to true
+   * @default false
+   */
+  checked?: boolean;
+   /**
+   * If true, set the Checkbox to the disabled state.
+   * @default false
+   */
+  disabled?: boolean;
+  /**
+   * The value of the Checkbox.
+   */
+  value?: string;
+}
+//...
+const {checked = false, disabled = false, value} = this.props;
+```
 
 #### Class Function Binding
 

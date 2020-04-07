@@ -41,14 +41,16 @@ export default class AvatarButton extends React.Component<AvatarButtonProps> {
   static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
 
-  static defaultProps = {
-    variant: AvatarVariant.Light,
-    size: SystemIconCircleSize.m,
-    altText: 'Avatar',
-  };
-
   render() {
-    const {buttonRef, variant, altText, size, url, onClick, ...elemProps} = this.props;
+    const {
+      variant = AvatarVariant.Light,
+      altText = 'Avatar',
+      size = SystemIconCircleSize.m,
+      buttonRef,
+      url,
+      onClick,
+      ...elemProps
+    } = this.props;
 
     const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
 

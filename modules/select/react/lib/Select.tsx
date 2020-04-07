@@ -115,13 +115,9 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
 export default class Select extends React.Component<SelectProps> {
   static ErrorType = ErrorType;
 
-  static defaultProps = {
-    disabled: false,
-  };
-
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {error, disabled, grow, children, value, onChange, ...elemProps} = this.props;
+    const {disabled = false, error, grow, children, value, onChange, ...elemProps} = this.props;
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>

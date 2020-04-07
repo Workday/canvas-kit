@@ -47,7 +47,7 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
    * The role of the MenuItem. Use this to override the role of the item (e.g. you can use this element as an option in a Combobox).
    * @default menuItem
    */
-  role: string;
+  role?: string;
   /**
    * If true, allow the onClose Menu callback to be fired after the MenuItem has been clicked.
    * @default true
@@ -176,11 +176,15 @@ const setIconProps = (
 };
 
 export default class MenuItem extends React.Component<MenuItemProps> {
+  /**
+   * If we destructure props, shouldClose will be undefined because the value is only applied for the render method only.
+   * We have to use defaultProps so that the value of shouldClose is applied for every method and therefore references in the Menu component.
+   * For reference: https://github.com/Workday/canvas-kit/blob/f6d4d29e9bb2eb2af0b204e6f4ce2e5ed5a98e57/modules/_labs/menu/react/lib/Menu.tsx#L259,
+   */
   static defaultProps = {
     shouldClose: true,
     role: 'menuitem',
   };
-
   render(): React.ReactNode {
     const {
       onClick,

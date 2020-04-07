@@ -2,8 +2,7 @@ import * as React from 'react';
 import {iconColors} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/core';
-import Icon from './Icon';
-import {SpanProps} from './types';
+import Icon, {IconProps} from './Icon';
 
 export interface SystemIconStyles {
   /**
@@ -44,7 +43,7 @@ export interface SystemIconStyles {
   fillHover?: string;
 }
 
-export interface SystemIconProps extends SystemIconStyles {
+export interface SystemIconProps extends SystemIconStyles, Omit<IconProps, 'src' | 'type'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
@@ -85,16 +84,16 @@ export const systemIconStyles = ({
   },
 });
 
-export default class SystemIcon extends React.Component<SpanProps & SystemIconProps> {
+export default class SystemIcon extends React.Component<SystemIconProps> {
   render() {
     const {
+      background = 'transparent',
+      backgroundHover = 'transparent',
+      color = iconColors.standard,
+      colorHover = iconColors.hover,
       icon,
       accent,
       accentHover,
-      background,
-      backgroundHover,
-      color,
-      colorHover,
       fill,
       fillHover,
       size,
@@ -113,13 +112,7 @@ export default class SystemIcon extends React.Component<SpanProps & SystemIconPr
     });
 
     return (
-      <Icon
-        src={icon}
-        type={CanvasIconTypes.System}
-        size={size}
-        styles={style}
-        elemProps={elemProps}
-      />
+      <Icon src={icon} type={CanvasIconTypes.System} size={size} styles={style} {...elemProps} />
     );
   }
 }
