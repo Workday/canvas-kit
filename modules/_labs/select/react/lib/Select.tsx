@@ -218,7 +218,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     });
   };
 
-  private getIndexByValue = (value: string): number => {
+  private getIndexByValue = (value: string | undefined): number => {
+    if (value === undefined) {
+      return -1;
+    }
+
     for (let i = 0; i < this.normalizedOptions.length; i++) {
       if (this.normalizedOptions[i].value === value) {
         return i;
@@ -244,6 +248,22 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
 
     return -1;
+  };
+
+  private updateStateFromValue = () => {
+    let optionIndex = this.getIndexByValue(this.props.value);
+
+    // If the value cannot be found in options, set the selected
+    // option to the first option
+    if (optionIndex === -1) {
+      optionIndex = 0;
+    }
+
+    this.setState({
+      focusedOptionIndex: optionIndex,
+      label: this.normalizedOptions[optionIndex].label,
+      selectedOptionIndex: optionIndex,
+    });
   };
 
   private toggleMenu = (show: boolean): void => {
@@ -295,8 +315,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   // Code inspired by: https://stackoverflow.com/a/46012210
   // In order for Select to be usable as a controlled component, we
   // need to programatically change the value of the SelectInput
-  // in such a way that triggers its change event
-  private updateInput = (value: string): void => {
+  // in such a way that triggers its input event
+  private fireInputEvent = (value: string): void => {
     if (this.inputRef && this.inputRef.current) {
       const nativeInputValue = Object.getOwnPropertyDescriptor(
         Object.getPrototypeOf(this.inputRef.current),
@@ -411,12 +431,15 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (matchIndex > -1) {
       // If the menu is hidden, immediately select the matched option
       if (this.state.isMenuHidden) {
-        this.setState({
-          focusedOptionIndex: matchIndex,
-          label: this.normalizedOptions[matchIndex].label,
-          selectedOptionIndex: matchIndex,
-        });
-        this.updateInput(this.normalizedOptions[matchIndex].value);
+        // TODO: remove this setState call if we don't need to support uncontrolled
+        // components (or re-enable it if we do need to support uncontrolled components)
+        // this.setState({
+        //   focusedOptionIndex: matchIndex,
+        //   label: this.normalizedOptions[matchIndex].label,
+        //   selectedOptionIndex: matchIndex,
+        // });
+
+        this.fireInputEvent(this.normalizedOptions[matchIndex].value);
 
         // Otherwise (the menu is visible), simply focus the matched option
       } else {
@@ -440,33 +463,19 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentDidMount() {
-    const {value} = this.props;
-
-    // If value exists, set state to that value...
-    if (value) {
-      const childIndex = this.getIndexByValue(value);
-
-      if (childIndex !== -1) {
-        this.setState({
-          label: this.normalizedOptions[childIndex].label,
-          selectedOptionIndex: childIndex,
-        });
-        return;
-      }
-    }
-
-    // ... otherwise, set state to the first option
-    this.setState({
-      label: this.normalizedOptions[0].label,
-    });
+    this.updateStateFromValue();
   }
 
   componentDidUpdate(prevProps: SelectProps, prevState: SelectState) {
-    const {children} = this.props;
+    const {children, value} = this.props;
     const {isMenuHidden, focusedOptionIndex} = this.state;
 
     if (children !== prevProps.children) {
       this.setNormalizedOptions();
+    }
+
+    if (value !== prevProps.value) {
+      this.updateStateFromValue();
     }
 
     // If the menu was just displayed, scroll the focused option into
@@ -514,14 +523,16 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       return;
     }
 
-    this.setState({
-      focusedOptionIndex: index,
-      label: this.normalizedOptions[index].label,
-      selectedOptionIndex: index,
-    });
+    // TODO: remove this setState call if we don't need to support uncontrolled
+    // components (or re-enable it if we do need to support uncontrolled components)
+    // this.setState({
+    //   focusedOptionIndex: index,
+    //   label: this.normalizedOptions[index].label,
+    //   selectedOptionIndex: index,
+    // });
 
     this.toggleMenu(false);
-    this.updateInput(this.normalizedOptions[index].value);
+    this.fireInputEvent(this.normalizedOptions[index].value);
   };
 
   handleMenuBlur = (event: React.FocusEvent): void => {
@@ -675,17 +686,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           onKeyDown={this.handleKeyboardShortcuts}
           onMouseDown={this.handleSelectMouseDown}
           ref={this.buttonRef}
+          value={this.getIndexByValue(value) !== -1 ? value : this.normalizedOptions[0].value}
           {...elemProps}
         >
           {label}
         </SelectButton>
-        <SelectInput
-          name={name}
-          onChange={onChange}
-          ref={this.inputRef}
-          type="text"
-          value={value || this.normalizedOptions[0].value}
-        />
+        <SelectInput name={name} onChange={onChange} ref={this.inputRef} type="text" />
         {!isMenuHidden && (
           <SelectMenu
             aria-activedescendant={this.normalizedOptions[focusedOptionIndex].id}
