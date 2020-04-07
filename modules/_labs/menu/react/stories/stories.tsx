@@ -127,7 +127,7 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
       </ClickAwayListener>
     );
   }
-  private handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
+  private handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {currentTarget} = event;
     this.setState({
       anchorEl: currentTarget,
@@ -196,7 +196,7 @@ class ContextMenu extends React.Component<{}, ControlledMenuState> {
       </ClickAwayListener>
     );
   }
-  private handleContext = (event: React.SyntheticEvent<HTMLElement>) => {
+  private handleContext = (event: React.MouseEvent<HTMLElement>) => {
     const {currentTarget} = event;
     this.setState({
       anchorEl: currentTarget,

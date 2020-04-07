@@ -364,7 +364,7 @@ example:
 /**
   * The function called when the Checkbox state changes.
   */
-onChange?: (e: React.SyntheticEvent) => void;
+onChange?: (e: React.ChangeEvent) => void;
 ```
 
 The pattern for booleans is also different: `If true, <do something>.` For standard 2-state

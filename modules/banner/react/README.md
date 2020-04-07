@@ -49,7 +49,7 @@ import Banner from '@workday/canvas-kit-react-banner';
 
 ### Optional
 
-#### `onClick: (e: React.SyntheticEvent) => void`
+#### `onClick: (e: React.MouseEvent<HTMLButtonElement>) => void`
 
 > Function called when the user click on the banner
 

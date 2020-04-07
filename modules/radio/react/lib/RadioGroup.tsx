@@ -94,9 +94,9 @@ export default class RadioGroup extends React.Component<RadioGroupProps> {
   };
 
   private onRadioChange = (
-    existingOnChange: (e: React.SyntheticEvent) => void | undefined,
+    existingOnChange: (e: React.ChangeEvent) => void | undefined,
     index: number,
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     if (existingOnChange) {
       existingOnChange(event);

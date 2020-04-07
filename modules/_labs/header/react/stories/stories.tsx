@@ -47,15 +47,15 @@ const backgroundStyle = {
 // Simulate a React Router link
 const Link = styled('a')<{to: string}>({});
 
-const handleMenuClickTest = (e: React.SyntheticEvent) => {
+const handleMenuClickTest = (e: React.MouseEvent) => {
   action(`Menu clicked! ${e.target}`)();
 };
 
-const handleAvatarClickTest = (e: React.SyntheticEvent) => {
+const handleAvatarClickTest = (e: React.MouseEvent) => {
   action(`Avatar clicked! ${e.target}`);
 };
 
-const handleSearchSubmitTest = (e: React.SyntheticEvent) => {
+const handleSearchSubmitTest = (e: React.MouseEvent<HTMLFormElement>) => {
   const formInputValue = (e.target as HTMLFormElement).getElementsByTagName('input')[0].value;
   action(`search submitted ${formInputValue}`)();
 };

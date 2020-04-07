@@ -14,7 +14,7 @@ export interface BannerProps extends Themeable, React.ButtonHTMLAttributes<HTMLB
   /**
    * The function called when the Banner is clicked.
    */
-  onClick?: (e: React.SyntheticEvent) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * The label of the Banner.
    */

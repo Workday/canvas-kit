@@ -16,7 +16,7 @@ export default class ControlledComponentWrapper extends React.Component<any, {}>
     checked: false, // Used for boolean components (e.g. checkbox)
   };
 
-  onChange = (e: React.SyntheticEvent | string | number) => {
+  onChange = (e: React.ChangeEvent | string | number) => {
     if (this.props.controlledProp === ControlledProp.Checked) {
       this.setState({checked: !this.state.checked});
     } else {
