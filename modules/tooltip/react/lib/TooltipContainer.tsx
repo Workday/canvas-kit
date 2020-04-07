@@ -70,12 +70,12 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
       bottom: 0,
     },
   },
-  ({transformOrigin}) => {
+  ({transformOrigin = defaultTransformOrigin}) => {
     if (transformOrigin === null) {
       return {};
     }
     return {
-      animation: tooltipAnimation(transformOrigin || defaultTransformOrigin),
+      animation: tooltipAnimation(transformOrigin),
       animationDuration: '150ms',
       animationTimingFunction: 'ease-out',
       transformOrigin: transformOrigin

@@ -42,13 +42,13 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
   (
     {
-      anchorElement,
-      children,
-      containerElement,
-      open = true,
       placement: popperPlacement = 'bottom',
       popperOptions = {},
       portal = true,
+      open = true,
+      anchorElement,
+      children,
+      containerElement,
       ...elemProps
     }: PopperProps,
     forwardRef

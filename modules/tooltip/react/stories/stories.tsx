@@ -37,22 +37,24 @@ export const DescribeType = () => {
 
 export const CustomContent = () => {
   return (
-    <Tooltip
-      type="describe"
-      title={
-        <div>
-          This is a <em>custom</em> tooltip with <strong>custom HTML</strong>.
-          <br />
-          Any HTML is valid here.
-          <br />
-          Keep it short and note that assistive technology will read this content as text-only and
-          maybe have verbosity turned off to the point where this content is completely ignored.
-          Consider a different way to describe important content.
-        </div>
-      }
-    >
-      <Button>Hover Me</Button>
-    </Tooltip>
+    <React.Fragment>
+      <Tooltip
+        type="describe"
+        title={
+          <div>
+            This is a <em>custom</em> tooltip with <strong>custom HTML</strong>
+          </div>
+        }
+      >
+        <Button>Hover Me</Button>
+      </Tooltip>
+
+      <p>
+        <strong>Note</strong>: Assistive technology will read tooltip content as text-only. Screen
+        readers may ignore "describe" tooltips depending on verbosity settings. Consider a different
+        way to describe important content.
+      </p>
+    </React.Fragment>
   );
 };
 

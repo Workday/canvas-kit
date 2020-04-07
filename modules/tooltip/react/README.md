@@ -43,14 +43,12 @@ const TooltipExample = () => {
 
 #### title: string | React.ReactNode
 
-> If present, this will switch the Tooltip into a simpler to use mode where the Tooltip component
-> can wrap a target and `title` is the contents of the tooltip. This should be a string in most
-> cases. HTML is supported, but only text is understood by assistive technology. This is true for
-> both `label` and `describe` modes.
+> This should be a string in most cases. HTML is supported, but only text is understood by assistive
+> technology. This is true for both `label` and `describe` modes.
 
 #### children: React.ReactNode
 
-> The contents of the target for the Tooltip.
+> The target (anchor element) for the Tooltip.
 >
 > **Note:** This **must** be an Element, StyledComponent or any other component that forwards extra
 > props to an Element. Tooltip works running `React.cloneElement` on the children and adds extra
@@ -63,10 +61,15 @@ const TooltipExample = () => {
 
 #### type: 'label' | 'describe'
 
-> If present, this will switch the Tooltip into a simpler to use mode where the Tooltip component
-> can wrap a target and `title` is the contents of the tooltip. This should be a string in most
-> cases. HTML is supported, but only text is understood by assistive technology. This is true for
-> both `label` and `describe` modes.
+> Determines the tooltip type for accessibility.
+>
+> - `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip `title`
+>   prop is the same as the text content of the wrapped element. E.g. IconButtons or Ellipsis
+>   tooltips.
+> - `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional
+>   information about the target. **Note**: Assistive technology may ignore `describe` techniques
+>   based on verbosity settings. Consider an alternate way to inform a user of additional important
+>   information.
 
 Default: `'label'`
 
