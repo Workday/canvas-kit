@@ -1,5 +1,6 @@
 import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '@emotion/styled';
 import {CanvasTheme, ContentDirection, useTheme} from './';
+import {type} from '@workday/canvas-kit-react-core';
 import rtlCSSJS from 'rtl-css-js';
 
 const noop = (styles: any) => styles;
@@ -53,7 +54,13 @@ function styled<Props>(node: any) {
           styles = maybeConvert(interpolation);
         }
 
-        if (styles && styles.fontFamily && fontFamily) {
+        if (
+          fontFamily &&
+          styles &&
+          styles.fontFamily &&
+          (styles.fontFamily === type.body.fontFamily ||
+            styles.fontFamily === type.variant.mono.fontFamily)
+        ) {
           styles.fontFamily = fontFamily;
         }
         return styles;
