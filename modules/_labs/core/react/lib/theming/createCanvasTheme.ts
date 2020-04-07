@@ -78,11 +78,13 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
   };
 }
 
-export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
-  const {palette = {}, breakpoints = {}, direction} = partialTheme;
+type PartialCanvasThemeWithFont = PartialCanvasTheme & {_fontFamily?: string};
+
+export function createCanvasTheme(partialTheme: PartialCanvasThemeWithFont): CanvasTheme {
+  const {palette = {}, breakpoints = {}, direction, _fontFamily} = partialTheme;
   const {primary, alert, error, success, neutral, common = {}} = palette!;
 
-  const mergeable: PartialCanvasTheme = {
+  const mergeable: PartialCanvasThemeWithFont = {
     palette: {
       common,
       primary: fillPalette(primary),
@@ -93,6 +95,7 @@ export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme
     },
     breakpoints,
     direction: direction === ContentDirection.RTL ? direction : ContentDirection.LTR,
+    _fontFamily,
   };
 
   return merge({}, defaultCanvasTheme, mergeable) as CanvasTheme;

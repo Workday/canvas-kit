@@ -25,23 +25,38 @@ export const convertToStaticStates = (obj?: CSSObject): CSSObject | undefined =>
   }, {});
 };
 
+type ExtendedThemeProp = {
+  theme: CanvasTheme & {
+    _staticStates?: boolean;
+    _fontFamily?: string;
+  };
+};
+
 function styled<Props>(node: any) {
   return (...args: Interpolation<Props>[]) => {
     const newArgs: Interpolations = args.map(
-      interpolation => (props: Props & {theme: CanvasTheme & {_staticStates?: boolean}}) => {
+      interpolation => (props: Props & ExtendedThemeProp) => {
         props.theme = useTheme(props.theme);
         const direction = props.theme.direction;
         const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;
         const maybeConvert = props.theme._staticStates ? convertToStaticStates : noop;
+        const fontFamily = props.theme._fontFamily;
 
+        let styles;
         try {
           if (typeof interpolation === 'function') {
-            return maybeFlip(maybeConvert(interpolation(props)) as CSSObject);
+            styles = maybeFlip(maybeConvert(interpolation(props)) as CSSObject);
+          } else {
+            styles = maybeFlip(maybeConvert(interpolation) as CSSObject);
           }
-          return maybeFlip(maybeConvert(interpolation) as CSSObject);
         } catch (e) {
-          return maybeConvert(interpolation);
+          styles = maybeConvert(interpolation);
         }
+
+        if (styles && styles.fontFamily && fontFamily) {
+          styles.fontFamily = fontFamily;
+        }
+        return styles;
       }
     );
 
