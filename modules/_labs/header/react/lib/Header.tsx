@@ -8,6 +8,7 @@ import {HeaderHeight, HeaderTheme, HeaderVariant} from './shared/types';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
 import {justifyIcon} from '@workday/canvas-system-icons-web';
+import {PickRequired} from '@workday/canvas-kit-react-common';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -18,12 +19,12 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
    * The theme of the Header. Accepts `White`, `Blue`, or `Transparent`.
    * @default HeaderTheme.White
    */
-  themeColor: HeaderTheme;
+  themeColor?: HeaderTheme;
   /**
    * The variant of the Header. Accepts `Dub` (small) or `Full` (large).
    * @default HeaderVariant.Dub
    */
-  variant: HeaderVariant;
+  variant?: HeaderVariant;
   /**
    * The text of the Header title. Not used if `brand` is provided.
    */
@@ -44,7 +45,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The function called when the responsive menu icon is clicked.
    */
-  onMenuClick?: (e: React.SyntheticEvent) => void;
+  onMenuClick?: (e: React.MouseEvent) => void;
   /**
    * The React element to render in the left slot of the Header. This is typically a SearchBar component.
    */
@@ -58,7 +59,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const childrenSpacing = spacing.s;
 
-const HeaderShell = styled('div')<Pick<HeaderProps, 'variant' | 'themeColor'>>(
+const HeaderShell = styled('div')<PickRequired<HeaderProps, 'themeColor', 'variant'>>(
   {
     display: 'flex',
     alignItems: 'center',
@@ -98,7 +99,7 @@ const BrandLink = styled('a')({
   },
 });
 
-const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
+const navStyle = ({themeColor}: PickRequired<HeaderProps, 'themeColor', 'css'>) => {
   const theme = themes[themeColor];
 
   return css({
@@ -179,7 +180,9 @@ const navStyle = ({themeColor}: Pick<HeaderProps, 'themeColor'>) => {
   });
 };
 
-const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor' | 'isCollapsed'>>(
+const ChildrenSlot = styled('div')<
+  PickRequired<HeaderProps, 'themeColor', 'isCollapsed' | 'centeredNav'>
+>(
   {
     marginRight: spacing.m,
     // TODO: remove this when we get real icon buttons
@@ -194,7 +197,7 @@ const ChildrenSlot = styled('div')<Pick<HeaderProps, 'centeredNav' | 'themeColor
       marginLeft: childrenSpacing,
     },
   },
-  ({centeredNav = false, isCollapsed}) => ({
+  ({centeredNav, isCollapsed}) => ({
     '> *:not(.canvas-header--menu-icon)': {
       display: isCollapsed ? 'none' : 'flex',
     },
@@ -210,7 +213,7 @@ class Brand extends React.Component<
   Pick<HeaderProps, 'variant' | 'brand' | 'title' | 'themeColor'>
 > {
   render() {
-    const {variant, brand, themeColor, title} = this.props;
+    const {variant = HeaderVariant.Dub, brand, themeColor = HeaderTheme.White, title} = this.props;
 
     switch (variant) {
       case HeaderVariant.Global: {
@@ -239,7 +242,7 @@ class MenuIconButton extends React.Component<
   Pick<HeaderProps, 'themeColor' | 'menuToggle' | 'onMenuClick'>
 > {
   render() {
-    const {themeColor, menuToggle, onMenuClick} = this.props;
+    const {themeColor = HeaderTheme.White, menuToggle, onMenuClick} = this.props;
     if (menuToggle) {
       const menuToggleElement = menuToggle as React.ReactElement<any>;
       const onClick = menuToggleElement.props.onClick
@@ -269,10 +272,6 @@ class MenuIconButton extends React.Component<
 export default class Header extends React.Component<HeaderProps, {}> {
   static Theme = HeaderTheme;
   static Variant = HeaderVariant;
-  static defaultProps = {
-    themeColor: HeaderTheme.White,
-    variant: HeaderVariant.Dub,
-  };
 
   /**
    * Helper that recursively maps ReactNodes to their theme-based equivalent.
@@ -350,8 +349,8 @@ export default class Header extends React.Component<HeaderProps, {}> {
   render() {
     const {
       menuToggle,
-      themeColor,
-      variant,
+      themeColor = HeaderTheme.White,
+      variant = HeaderVariant.Dub,
       centeredNav,
       title,
       brand,

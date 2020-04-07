@@ -15,7 +15,7 @@ export interface FormFieldProps
    * The position of the FormField label.
    * @default FormField.FormFieldLabelPosition.Top
    */
-  labelPosition: FormFieldLabelPosition;
+  labelPosition?: FormFieldLabelPosition;
   /**
    * The text of the FormField label.
    */
@@ -45,7 +45,7 @@ export interface FormFieldProps
    * If true, render the FormField using a `fieldset` and a `legend` instead of a `div` and a `label`. This must be set to `true` if you're using a Radio Group inside of a FormField (for accessibility reasons).
    * @default false
    */
-  useFieldset: boolean;
+  useFieldset?: boolean;
   /**
    * The input component wrapped by the FormField.
    */
@@ -122,13 +122,6 @@ export default class FormField extends React.Component<FormFieldProps> {
   static LabelPosition = FormFieldLabelPosition;
   static ErrorType = ErrorType;
 
-  static defaultProps = {
-    labelPosition: FormField.LabelPosition.Top,
-    useFieldset: false,
-    alertLabel: 'Alert',
-    errorLabel: 'Error',
-  };
-
   private inputId: string = this.props.inputId || uuid();
 
   private renderChildren = (child: React.ReactElement): React.ReactNode => {
@@ -165,16 +158,16 @@ export default class FormField extends React.Component<FormFieldProps> {
 
   render() {
     const {
+      errorLabel = 'Error',
+      alertLabel = 'Alert',
+      useFieldset = false,
+      labelPosition = FormField.LabelPosition.Top,
       label,
       hintText,
       hintId,
       inputId,
-      errorLabel,
-      alertLabel,
       grow,
       children,
-      useFieldset,
-      labelPosition,
       error,
       required,
       ...elemProps
@@ -187,7 +180,7 @@ export default class FormField extends React.Component<FormFieldProps> {
             labelPosition={labelPosition}
             htmlFor={this.inputId}
             isLegend={useFieldset}
-            required={!!required}
+            required={required}
             accessibleHide={labelPosition === FormFieldLabelPosition.Hidden}
           >
             {label}

@@ -9,12 +9,12 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
    * The position of the Label.
    * @default Label.Position.Top
    */
-  labelPosition: FormFieldLabelPosition;
+  labelPosition?: FormFieldLabelPosition;
   /**
    * If true, style the Label as a legend.
    * @default false
    */
-  isLegend: boolean;
+  isLegend?: boolean;
   /**
    * The id of a labelable form-related element. Synonymous with `for`.
    */
@@ -28,7 +28,7 @@ export interface LabelProps extends FormFieldLabelPositionBehavior {
    * The title of the required label.
    * @default required
    */
-  requiredLabel: string;
+  requiredLabel?: string;
   /**
    * If true, apply the `accessibleHide` styles to the Label.
    * @default false
@@ -79,28 +79,27 @@ const LabelComponent = styled('label')<LabelProps>(...labelStyles);
 export default class Label extends React.Component<LabelProps> {
   static Position = FormFieldLabelPosition;
 
-  static defaultProps = {
-    labelPosition: Label.Position.Top,
-    isLegend: false,
-    requiredLabel: 'required',
-  };
-
   public render() {
-    const {...props} = this.props;
-    const children = !props.required
-      ? props.children
+    const {
+      labelPosition = Label.Position.Top,
+      isLegend = false,
+      requiredLabel = 'required',
+      ...elemProps
+    } = this.props;
+    const children = !this.props.required
+      ? this.props.children
       : [
-          props.children,
-          <RequiredAstrisk key={'0'} title={props.requiredLabel}>
+          this.props.children,
+          <RequiredAstrisk key={'0'} title={requiredLabel}>
             *
           </RequiredAstrisk>,
         ];
     return (
       <>
-        {props.isLegend ? (
-          <LegendComponent {...props} children={children} />
+        {isLegend ? (
+          <LegendComponent isLegend={isLegend} {...elemProps} children={children} />
         ) : (
-          <LabelComponent {...props} children={children} />
+          <LabelComponent labelPosition={labelPosition} {...elemProps} children={children} />
         )}
       </>
     );

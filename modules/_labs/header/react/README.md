@@ -169,7 +169,7 @@ Default: `DubLogoTitle` (for "Dub" variants) or `WorkdayLogoTitle` (for "Full" v
 
 ---
 
-#### `onMenuClick: (React.SyntheticEvent) => void`
+#### `onMenuClick: (React.MouseEvent) => void`
 
 > A click handler for when the user clicks the mobile collapsed nav icon.
 
@@ -254,7 +254,7 @@ Default: `<DubLogoTitle />`
 
 Default: `justifyIcon` from `@workday/canvas-system-icons-web`
 
-#### `onMenuClick: (React.SyntheticEvent) => void`
+#### `onMenuClick: (React.MouseEvent) => void`
 
 > A click handler for when the user clicks the `menuToggle` element.
 

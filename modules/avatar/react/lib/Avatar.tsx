@@ -15,17 +15,17 @@ export interface AvatarLocalProps {
    * The variant of the Avatar default state. Accepts `Light` or `Dark`.
    * @default AvatarVariant.Light
    */
-  variant: AvatarVariant;
+  variant?: AvatarVariant;
   /**
    * The size of the Avatar.
    * @default SystemIconCircleSize.m
    */
-  size: SystemIconCircleSize | number;
+  size?: SystemIconCircleSize | number;
   /**
    * The alt text of the Avatar image.
    * @default Avatar
    */
-  altText: string;
+  altText?: string;
   /**
    * The url of the Avatar image.
    */
@@ -66,14 +66,14 @@ export default class Avatar extends React.Component<AvatarProps> {
   static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
 
-  static defaultProps = {
-    variant: AvatarVariant.Light,
-    size: SystemIconCircleSize.m,
-    altText: 'Avatar',
-  };
-
   render() {
-    const {variant, altText, size, url, ...elemProps} = this.props;
+    const {
+      variant = AvatarVariant.Light,
+      altText = 'Avatar',
+      size = SystemIconCircleSize.m,
+      url,
+      ...elemProps
+    } = this.props;
 
     const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
     return (

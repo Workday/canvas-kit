@@ -14,7 +14,7 @@ export interface BannerProps extends Themeable, React.ButtonHTMLAttributes<HTMLB
   /**
    * The function called when the Banner is clicked.
    */
-  onClick?: (e: React.SyntheticEvent) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * The label of the Banner.
    */
@@ -91,14 +91,15 @@ export default class Banner extends React.Component<BannerProps> {
   static Variant = BannerVariant;
   static ErrorType = ErrorType;
 
-  public static defaultProps = {
-    actionText: 'View All',
-    error: ErrorType.Alert,
-    variant: BannerVariant.Full,
-  };
-
   public render() {
-    const {label, onClick, actionText, variant, error, ...props} = this.props;
+    const {
+      actionText = 'View All',
+      variant = BannerVariant.Full,
+      error = ErrorType.Alert,
+      label,
+      onClick,
+      ...props
+    } = this.props;
 
     const bannerIcon = error === ErrorType.Error ? exclamationCircleIcon : exclamationTriangleIcon;
     const iconColor = error === ErrorType.Error ? colors.frenchVanilla100 : colors.blackPepper400;

@@ -23,7 +23,7 @@ export interface TextAreaProps
   /**
    * The function called when the TextArea state changes.
    */
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   /**
    * The placeholder text of the TextArea.
    */
@@ -37,7 +37,7 @@ export interface TextAreaProps
    * The resize constraints of the TextArea.
    * @default TextArea.ResizeDirection.Both
    */
-  resize: TextAreaResizeDirection;
+  resize?: TextAreaResizeDirection;
   /**
    * The value of the TextArea.
    */
@@ -99,12 +99,8 @@ export default class TextArea extends React.Component<TextAreaProps> {
   static ErrorType = ErrorType;
   static ResizeDirection = TextAreaResizeDirection;
 
-  static defaultProps = {
-    resize: TextAreaResizeDirection.Both,
-  };
-
   render() {
-    const {grow, inputRef, resize, ...inputProps} = this.props;
+    const {resize = TextAreaResizeDirection.Both, grow, inputRef, ...inputProps} = this.props;
 
     return <TextAreaContainer ref={inputRef} grow={grow} resize={resize} {...inputProps} />;
   }

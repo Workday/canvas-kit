@@ -8,7 +8,7 @@ export interface GlobalHeaderProps {
    * The custom brand node of the GlobalHeader. This React node replaces the dub logo and title.
    * @default DubLogoTitle
    */
-  brand: React.ReactNode;
+  brand?: React.ReactNode;
   /**
    * The custom menu toggle node of the GlobalHeader. This React node replaces the default menu toggle.
    */
@@ -16,7 +16,7 @@ export interface GlobalHeaderProps {
   /**
    * The function called when the responsive menu icon is clicked.
    */
-  onMenuClick?: (e: React.SyntheticEvent) => void;
+  onMenuClick?: (e: React.MouseEvent) => void;
   /**
    * If true, render the GlobalHeader in collapsed mode.
    * @default false
@@ -29,12 +29,9 @@ export interface GlobalHeaderProps {
 }
 
 export default class GlobalHeader extends React.Component<GlobalHeaderProps> {
-  static defaultProps = {
-    brand: <DubLogoTitle />,
-  };
   public render() {
     const {
-      brand,
+      brand = <DubLogoTitle />,
       menuToggle,
       onMenuClick,
       isCollapsed,

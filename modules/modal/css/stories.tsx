@@ -95,7 +95,7 @@ class ModalWrapper extends React.Component<{}, ModalWrapperState> {
     });
   };
 
-  private onOpenPopupClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+  private onOpenPopupClick = () => {
     this.setState({
       open: !this.state.open,
     });
