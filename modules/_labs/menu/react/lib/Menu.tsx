@@ -243,14 +243,17 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     }
   };
 
-  private handleClick = (event: React.SyntheticEvent, menuItemProps: MenuItemProps): void => {
+  private handleClick = (
+    event: React.MouseEvent | React.KeyboardEvent,
+    menuItemProps: MenuItemProps
+  ): void => {
     /* istanbul ignore next line for coverage */
     if (menuItemProps.isDisabled) {
       // You should only hit this point if you are using a custom MenuItem implementation.
       return;
     }
     if (menuItemProps.onClick) {
-      menuItemProps.onClick(event);
+      menuItemProps.onClick(event as React.MouseEvent);
     }
     if (this.props.onSelect) {
       this.props.onSelect();

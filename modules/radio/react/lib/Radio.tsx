@@ -41,7 +41,7 @@ export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInp
   /**
    * The function called when the Radio button state changes.
    */
-  onChange?: (e: React.SyntheticEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * The value of the Radio button.
    */

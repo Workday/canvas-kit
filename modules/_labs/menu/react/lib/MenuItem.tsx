@@ -15,7 +15,7 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   /**
    * The function called when the MenuItem is clicked. If the item is a child of the Menu component, this callback will be decorated with the onSelect and onClose Menu callbacks. This callback will not fire if the item is disabled (see below).
    */
-  onClick?: (event: React.SyntheticEvent) => void;
+  onClick?: (event: React.MouseEvent) => void;
   /**
    * The unique id for the MenuItem used for ARIA attributes. If the item is a child of the `Menu` component, this property will be generated and overridden.
    */
@@ -221,7 +221,7 @@ export default class MenuItem extends React.Component<MenuItemProps> {
     );
   }
 
-  private handleClick = (event: React.SyntheticEvent): void => {
+  private handleClick = (event: React.MouseEvent): void => {
     if (this.props.isDisabled) {
       return;
     }

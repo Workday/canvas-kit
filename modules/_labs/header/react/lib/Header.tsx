@@ -44,7 +44,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The function called when the responsive menu icon is clicked.
    */
-  onMenuClick?: (e: React.SyntheticEvent) => void;
+  onMenuClick?: (e: React.MouseEvent) => void;
   /**
    * The React element to render in the left slot of the Header. This is typically a SearchBar component.
    */

@@ -27,7 +27,7 @@ export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLIn
   /**
    * The function called when the Switch state changes.
    */
-  onChange?: (e: React.SyntheticEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * The value of the Switch.
    */
