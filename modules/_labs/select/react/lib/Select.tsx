@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
-import {CSSObject} from '@emotion/core';
 import {
   colors,
   borderRadius,
@@ -88,7 +87,7 @@ export interface SelectProps
   value?: string;
 }
 
-export interface SelectState {
+interface SelectState {
   focusedOptionIndex: number;
   isMenuHidden: boolean;
   isMenuHiding: boolean;
@@ -96,11 +95,11 @@ export interface SelectState {
   selectedOptionIndex: number;
 }
 
-const focusButtonCSS = (): CSSObject => ({
+const focusButtonCSS = {
   borderColor: inputColors.focusBorder,
   boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
   outline: 'none',
-});
+};
 
 const SelectButton = styled('button')<
   Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHidden'>
@@ -123,7 +122,7 @@ const SelectButton = styled('button')<
       color: inputColors.placeholder,
     },
     '&:focus:not([disabled])': {
-      ...focusButtonCSS(),
+      ...focusButtonCSS,
     },
     '&:disabled': {
       backgroundColor: inputColors.disabled.background,
@@ -146,7 +145,7 @@ const SelectButton = styled('button')<
             },
           }
         : {
-            ...focusButtonCSS(),
+            ...focusButtonCSS,
           };
     } else {
       return {
@@ -184,7 +183,7 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
   }),
   ({disabled}) => ({
     '&:hover .menu-icon path': {
-      fill: disabled ? undefined : 'colors.licorice500',
+      fill: disabled ? undefined : colors.licorice500,
     },
   })
 );
