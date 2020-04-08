@@ -200,13 +200,15 @@ describe('InputProvider', () => {
     testInput(mockEvent, expectedInputType, expectedInputType, shimmedWindowProps);
   });
 
-  test(`nested input provider should not attach events and remove itself from the DOM`, () => {
+  test(`Multiple input provider should only attach once to the dom`, () => {
+    const ref = React.createRef<HTMLButtonElement>();
     const component = mount(
-      <InputProvider>
-        <InputProvider>
-          <h1>Test</h1>
-        </InputProvider>
-      </InputProvider>
+      <div>
+        <InputProvider></InputProvider>
+        <h1>Test</h1>
+        <button ref={ref}></button>
+        <InputProvider container={ref}></InputProvider>
+      </div>
     );
 
     expect(document.querySelectorAll('[data-whatinput]').length).toBe(1);
