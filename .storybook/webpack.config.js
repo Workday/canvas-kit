@@ -5,7 +5,6 @@ const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 const modulesPath = path.resolve(__dirname, '../modules');
 const welcomeSectionPath = path.resolve(__dirname, './');
 const utilsPath = path.resolve(__dirname, '../utils');
-const postcssConfigPath = path.resolve(__dirname, './postcss.config');
 
 module.exports = ({config, mode}) => {
   // This is so we get consistent results when loading .ts/tsx and .mdx files
@@ -21,22 +20,16 @@ module.exports = ({config, mode}) => {
   ];
 
   config.module.rules.push({
-    test: /\.scss$/,
+    test: /\.(scss|css)$/,
     use: [
       'style-loader',
-      'css-loader',
-      'sass-loader',
       {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          config: {
-            path: postcssConfigPath,
-          },
-        },
+        loader: 'css-loader',
+        options: {importLoaders: 2},
       },
+      'postcss-loader',
+      'sass-loader',
     ],
-
     include: modulesPath,
   });
 
