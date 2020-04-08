@@ -121,8 +121,7 @@
     "typescript": "^3.8.3"
   },
   "resolutions": {
-    "minimist": "1.2.5",
-    "acorn": "7.1.1"
+    "minimist": "1.2.5"
   },
   "scripts": {
     "start": "node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook",
