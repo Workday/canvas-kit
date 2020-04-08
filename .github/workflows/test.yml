@@ -1,0 +1,14 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - prerelease/v4
+
+jobs:
+  unit_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test
+        run: echo "Hello World"
