@@ -3,7 +3,7 @@ import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import uuid from 'uuid/v4';
 import {
   ErrorType,
-  themedFocusRing,
+  focusRing,
   mouseFocusBehavior,
   getErrorColors,
 } from '@workday/canvas-kit-react-common';
@@ -79,7 +79,7 @@ const SwitchInput = styled('input')<SwitchProps>(
       '&:focus': {
         outline: 'none',
         '& ~ div:first-of-type': {
-          ...themedFocusRing(theme, {separation: 2, animate: false}),
+          ...focusRing(theme, {separation: 2, animate: false}),
         },
       },
       '& ~ div:first-of-type': {
@@ -89,7 +89,7 @@ const SwitchInput = styled('input')<SwitchProps>(
           0 0 0 5px ${errorColors.outer}`,
       },
       '&:focus ~ div:first-of-type': {
-        ...themedFocusRing(theme, {separation: 2, animate: false}),
+        ...focusRing(theme, {separation: 2, animate: false}),
       },
     };
     return {

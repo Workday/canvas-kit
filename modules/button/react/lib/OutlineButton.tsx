@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Themeable, CanvasTheme, useTheme} from '@workday/canvas-kit-labs-react-core';
 import {colors} from '@workday/canvas-kit-react-core';
-import {themedFocusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {focusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {OutlineButtonVariant, ButtonColors, ButtonSize} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
@@ -156,7 +156,7 @@ export const getOutlineButtonColors = (
           icon: colors.licorice500,
           label: colors.blackPepper400,
           labelData: colors.licorice300,
-          focusRing: themedFocusRing(theme, {
+          focusRing: focusRing(theme, {
             separation: 2,
             innerColor: 'currentColor',
             outerColor: theme.palette.primary.contrast,
