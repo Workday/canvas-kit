@@ -452,20 +452,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     // A match was found...
     if (matchIndex > -1) {
-      // If the menu is hidden, immediately select the matched option
       if (this.state.isMenuHidden) {
-        // TODO: remove this setState call if we don't need to support uncontrolled
-        // components (or re-enable it if we do need to support uncontrolled components)
-        // this.setState({
-        //   focusedOptionIndex: matchIndex,
-        //   label: this.normalizedOptions[matchIndex].label,
-        //   selectedOptionIndex: matchIndex,
-        // });
-
+        // If the menu is hidden, fire the input event
         this.fireInputEvent(this.normalizedOptions[matchIndex].value);
-
-        // Otherwise (the menu is visible), simply focus the matched option
       } else {
+        // Otherwise (the menu is visible), simply focus the matched option
         this.setState({focusedOptionIndex: matchIndex});
       }
     }
@@ -545,14 +536,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (!this.isMenuInteractive() || this.normalizedOptions[index].disabled) {
       return;
     }
-
-    // TODO: remove this setState call if we don't need to support uncontrolled
-    // components (or re-enable it if we do need to support uncontrolled components)
-    // this.setState({
-    //   focusedOptionIndex: index,
-    //   label: this.normalizedOptions[index].label,
-    //   selectedOptionIndex: index,
-    // });
 
     this.toggleMenu(false);
     this.fireInputEvent(this.normalizedOptions[index].value);
@@ -677,7 +660,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   public render() {
-    // TODO: Standardize on prop spread location (see #150)
     const {
       'aria-labelledby': ariaLabelledBy,
       disabled,
