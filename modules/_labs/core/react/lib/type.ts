@@ -78,9 +78,15 @@ const hierarchy: CanvasTypeHierarchy = {
   },
 };
 
-// Add fontFamily to each level of hierarchy
+// Add fontFamily to each level of hierarchy unless it's been explicitly disabled at a higher level
+const inheritFont =
+  // @ts-ignore
+  window.workday && window.workday.canvas && window.workday.canvas.inheritFontFamily;
 Object.keys(hierarchy).forEach(key => {
-  hierarchy[key] = {...hierarchy[key], fontFamily};
+  hierarchy[key] = {
+    ...hierarchy[key],
+    fontFamily: inheritFont ? 'inherit' : fontFamily,
+  };
 });
 
 const updatedVariants: Pick<CanvasTypeVariant, 'button' | 'caps'> = {
