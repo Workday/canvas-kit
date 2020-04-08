@@ -78,14 +78,11 @@ const hierarchy: CanvasTypeHierarchy = {
   },
 };
 
-// Add fontFamily to each level of hierarchy unless it's been explicitly disabled at a higher level
-const inheritFont =
-  // @ts-ignore
-  window.workday && window.workday.canvas && window.workday.canvas.inheritFontFamily;
+// Add fontFamily to each level of hierarchy
 Object.keys(hierarchy).forEach(key => {
   hierarchy[key] = {
     ...hierarchy[key],
-    fontFamily: inheritFont ? 'inherit' : fontFamily,
+    fontFamily: fontFamily,
   };
 });
 
