@@ -338,8 +338,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   // Code inspired by: https://stackoverflow.com/a/46012210
   // In order for Select to be usable as a controlled component, we
   // need to programatically change the value of the SelectInput
-  // in such a way that triggers its input event
-  private fireInputEvent = (value: string): void => {
+  // in such a way that triggers its change event
+  private fireChangeEvent = (value: string): void => {
     if (this.inputRef && this.inputRef.current) {
       const nativeInputValue = Object.getOwnPropertyDescriptor(
         Object.getPrototypeOf(this.inputRef.current),
@@ -352,11 +352,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       let event: Event;
       if (typeof Event === 'function') {
         // Modern browsers
-        event = new Event('input', {bubbles: true});
+        event = new Event('change', {bubbles: true});
       } else {
         // IE 11
         event = document.createEvent('Event');
-        event.initEvent('input', true);
+        event.initEvent('change', true, true);
       }
 
       this.inputRef.current.dispatchEvent(event);
@@ -453,8 +453,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // A match was found...
     if (matchIndex > -1) {
       if (this.state.isMenuHidden) {
-        // If the menu is hidden, fire the input event
-        this.fireInputEvent(this.normalizedOptions[matchIndex].value);
+        // If the menu is hidden, fire the change event
+        this.fireChangeEvent(this.normalizedOptions[matchIndex].value);
       } else {
         // Otherwise (the menu is visible), simply focus the matched option
         this.setState({focusedOptionIndex: matchIndex});
@@ -538,7 +538,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
 
     this.toggleMenu(false);
-    this.fireInputEvent(this.normalizedOptions[index].value);
+    this.fireChangeEvent(this.normalizedOptions[index].value);
   };
 
   handleMenuBlur = (event: React.FocusEvent): void => {
