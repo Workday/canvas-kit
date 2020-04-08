@@ -665,7 +665,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       disabled,
       error,
       grow,
-      name,
       onChange,
       options,
       value,
@@ -695,7 +694,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         >
           {label}
         </SelectButton>
-        <SelectInput name={name} onChange={onChange} ref={this.inputRef} type="text" />
+        <SelectInput onChange={onChange} ref={this.inputRef} type="text" />
         {!isMenuHidden && (
           <SelectMenu
             aria-activedescendant={this.normalizedOptions[focusedOptionIndex].id}
