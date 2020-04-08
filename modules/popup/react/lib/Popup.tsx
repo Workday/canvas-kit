@@ -58,7 +58,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   depth?: CanvasDepthValue;
   /**
-   * The `aria-label` for the Popup close button.
+   * The `aria-label` for the Popup close button. This props is also used for the title of the icon
    * @default Close
    */
   closeButtonAriaLabel?: string;
