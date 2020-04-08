@@ -175,17 +175,15 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   private container = this.getContainer(this.props.container);
 
   componentDidMount() {
-    if (this.container.hasAttribute('data-whatinput')) {
-      return;
-    }
-
     // For IE11 and under, we'll need to polyfill element.closest
     elementClosestPolyfill(window);
-    if (this.container.parentElement && this.container.parentElement.closest('[data-whatinput]')) {
+
+    if (this.container.closest('[data-whatinput]')) {
       this.nested = true;
       return;
     }
     this.container.setAttribute('data-whatinput', this.currentInput);
+    this.container.setAttribute('data-whatintent', this.currentIntent);
     this.enableListeners(true);
   }
 
@@ -211,6 +209,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     }
 
     this.container.removeAttribute('data-whatinput');
+    this.container.removeAttribute('data-whatintent');
     window.clearTimeout(this.eventTimer);
     this.enableListeners(false);
   }
