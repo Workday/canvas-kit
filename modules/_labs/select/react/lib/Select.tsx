@@ -17,7 +17,9 @@ import {default as SelectOption} from './SelectOption';
 import uuid from 'uuid/v4';
 
 export interface Option {
-  // This allows us to accept any keys in the Option
+  // This allows developers to include arbitrary keys in their
+  // Options and to utilize those keys in their renderOption
+  // function without encountering TypeScript errors
   [key: string]: any;
 
   // Known, optional keys
@@ -49,14 +51,35 @@ export interface SelectProps
    * The type of error associated with the Select (if applicable).
    */
   error?: ErrorType;
-  // TODO: Improve the options prop description
   /**
-   * The options of the Select.
+   * The options of the Select. `options` may be an array of objects or an array of strings.
+   *
+   * If `options` is an array of objects, each object must adhere to the `Option` interface:
+   *
+   * * `value: string` (required, analagous to the `value` attribute of an `<option>`)
+   * * `disabled: boolean` (optional)
+   * * `id: string` (optional, a random `id` will be assigned to the object if one isn't provided)
+   * * `label: string` (optional, analagous to the text content of an `<option>`)
+   *
+   * If `label` is omitted, the `value` will be used to render the option.
+   *
+   * Additionally, each option may contain any number of other key/value pairs. These keys will be passed through to the `option` parameter of the `renderOption` prop and may be used to customize how each option is rendered.
    */
   options: (Option | string)[];
-  // TODO: Improve the renderOption prop description
   /**
    * The function called to render the content of each option.
+   *
+   * Each `option` is an object which contains the following:
+   * * `disabled: boolean`
+   * * `focused: boolean` (set to `true` if the option has keyboard focus)
+   * * `id: string`
+   * * `label: string`
+   * * `selected: boolean` (set to `true` if the option is selected)
+   * * `value: string`
+   *
+   * Additionally, each `option` will contain any other key/value pairs you defined in the `options` prop.
+   *
+   * If you omit the `renderOption` prop, each option will be rendered using a default `renderOption` function provided by the component.
    */
   renderOption?: RenderOptionFunction;
   /**
