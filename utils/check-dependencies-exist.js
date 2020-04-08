@@ -125,7 +125,7 @@ function formatErrorMessage(pkgFile, errors) {
 
             return `  ${colors.dim(`${line}:${char}`)}  ${colors.red('error')}  ${colors.yellow(
               packageName
-            )} is not used in code ${colors.dim('check-dependencies-exist')}`;
+            )} is not used in code  ${colors.dim('check-dependencies-exist')}`;
           })
           .join('\n');
       }
