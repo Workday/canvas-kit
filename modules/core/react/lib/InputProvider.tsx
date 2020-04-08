@@ -4,7 +4,7 @@ import elementClosestPolyfill from 'element-closest';
 
 export interface InputProviderProps {
   provideIntent?: boolean;
-  container?: HTMLElement | React.RefObject<HTMLElement>;
+  container: HTMLElement | React.RefObject<HTMLElement>;
 }
 
 export enum InputType {
@@ -155,13 +155,15 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     this.eventBuffer = this.eventBuffer.bind(this);
   }
 
+  static defaultProps = {
+    container: document.body,
+  };
+
   // Need to remember how it component was mounted so we ensure listener removal
   provideIntent = this.props.provideIntent;
 
-  getContainer(container: HTMLElement | React.RefObject<HTMLElement> | undefined): HTMLElement {
-    if (container === undefined) {
-      return document.body;
-    } else if ('current' in container) {
+  getContainer(container: HTMLElement | React.RefObject<HTMLElement>): HTMLElement {
+    if ('current' in container) {
       if (container.current === null) {
         console.warn('Your ref object can not be null, therefore, falling back to document.body');
         return document.body;
