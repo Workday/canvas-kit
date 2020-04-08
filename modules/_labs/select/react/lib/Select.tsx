@@ -467,10 +467,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   componentDidUpdate(prevProps: SelectProps, prevState: SelectState) {
-    const {children, value} = this.props;
+    const {options, value} = this.props;
     const {isMenuHidden, focusedOptionIndex} = this.state;
 
-    if (children !== prevProps.children) {
+    if (options !== prevProps.options) {
       this.setNormalizedOptions();
     }
 
@@ -657,7 +657,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // TODO: Standardize on prop spread location (see #150)
     const {
       'aria-labelledby': ariaLabelledBy,
-      children,
       disabled,
       error,
       grow,
