@@ -28,6 +28,7 @@ const options = [
   {label: 'Phone', value: 'phone'},
   {label: 'Fax (disabled)', value: 'fax', disabled: true},
   {label: 'Mail', value: 'mail'},
+  {label: 'Mobile', value: 'mobile'},
 ];
 
 const simpleOptions = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];

@@ -6,6 +6,16 @@ const clickedLabel = 'Phone';
 const enteredValue = 'mail';
 const enteredLabel = 'Mail';
 
+const typeAheadSingleString = 'm';
+const typeAheadSingleIndex = 3;
+const typeAheadSingleValue = 'mail';
+const typeAheadSingleLabel = 'Mail';
+
+const typeAheadMultipleString = 'mo';
+const typeAheadMultipleIndex = 4;
+const typeAheadMultipleValue = 'mobile';
+const typeAheadMultipleLabel = 'Mobile';
+
 describe('Select', () => {
   before(() => {
     h.stories.visit();
@@ -39,14 +49,12 @@ describe('Select', () => {
                 h.selectLabs.getButton().should('have.text', clickedLabel);
               });
 
+              it(`should have a value of "${clickedValue}"`, () => {
+                h.selectLabs.getButton().should('have.value', clickedValue);
+              });
+
               it(`should re-acquire focus`, () => {
                 h.selectLabs.getButton().should('be.focused');
-              });
-            });
-
-            context('the hidden text input', () => {
-              it(`should have a value of "${clickedValue}"`, () => {
-                h.selectLabs.getInput().should('have.value', clickedValue);
               });
             });
 
@@ -107,14 +115,12 @@ describe('Select', () => {
                     h.selectLabs.getButton().should('have.text', enteredLabel);
                   });
 
+                  it(`should have a value of "${enteredValue}"`, () => {
+                    h.selectLabs.getButton().should('have.value', enteredValue);
+                  });
+
                   it(`should re-acquire focus`, () => {
                     h.selectLabs.getButton().should('be.focused');
-                  });
-                });
-
-                context('the hidden text input', () => {
-                  it(`should have a value of "${enteredValue}"`, () => {
-                    h.selectLabs.getInput().should('have.value', enteredValue);
                   });
                 });
 
@@ -150,6 +156,66 @@ describe('Select', () => {
                   });
                 });
               });
+            });
+          });
+
+          context(`when "${typeAheadSingleString}" is typed`, () => {
+            beforeEach(() => {
+              h.selectLabs.getListbox().type('m');
+            });
+
+            context('the listbox', () => {
+              it(`should have an aria-activedescendant attribute with the same value as the id of the "${typeAheadSingleLabel}" option`, () => {
+                h.selectLabs.getListbox().should($listbox => {
+                  h.selectLabs.assertADMatchesOption($listbox, typeAheadSingleIndex);
+                });
+              });
+            });
+          });
+
+          context(`when "${typeAheadMultipleString}" is typed`, () => {
+            beforeEach(() => {
+              h.selectLabs.getListbox().type('mo');
+            });
+
+            context('the listbox', () => {
+              it(`should have an aria-activedescendant attribute with the same value as the id of the "${typeAheadMultipleLabel}" option`, () => {
+                h.selectLabs.getListbox().should($listbox => {
+                  h.selectLabs.assertADMatchesOption($listbox, typeAheadMultipleIndex);
+                });
+              });
+            });
+          });
+        });
+
+        context(`when "${typeAheadSingleString}" is typed`, () => {
+          beforeEach(() => {
+            h.selectLabs.getButton().type('m');
+          });
+
+          context('the select button', () => {
+            it(`should read "${typeAheadSingleLabel}"`, () => {
+              h.selectLabs.getButton().should('have.text', typeAheadSingleLabel);
+            });
+
+            it(`should have a value of "${typeAheadSingleValue}"`, () => {
+              h.selectLabs.getButton().should('have.value', typeAheadSingleValue);
+            });
+          });
+        });
+
+        context(`when "${typeAheadMultipleString}" is typed`, () => {
+          beforeEach(() => {
+            h.selectLabs.getButton().type('mo');
+          });
+
+          context('the select button', () => {
+            it(`should read "${typeAheadMultipleLabel}"`, () => {
+              h.selectLabs.getButton().should('have.text', typeAheadMultipleLabel);
+            });
+
+            it(`should have a value of "${typeAheadMultipleValue}"`, () => {
+              h.selectLabs.getButton().should('have.value', typeAheadMultipleValue);
             });
           });
         });
