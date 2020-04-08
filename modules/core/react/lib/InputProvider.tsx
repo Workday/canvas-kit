@@ -108,7 +108,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   private isScrolling = false; // Unused if props.provideIntent is not defined
   private mousePosX: number | null = null; // Unused if props.provideIntent is not defined
   private mousePosY: number | null = null; // Unused if props.provideIntent is not defined
-  private nested = false; // True if nested within another input provider
+  private isAnotherInputProvider = false; // True if there is another input provider
 
   constructor(props: any) {
     super(props);
@@ -179,7 +179,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     elementClosestPolyfill(window);
 
     if (this.container.closest('[data-whatinput]')) {
-      this.nested = true;
+      this.isAnotherInputProvider = true;
       return;
     }
     this.container.setAttribute('data-whatinput', this.currentInput);
@@ -204,7 +204,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   }
 
   componentWillUnmount() {
-    if (this.nested) {
+    if (this.isAnotherInputProvider) {
       return;
     }
 
