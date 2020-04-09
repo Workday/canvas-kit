@@ -31,8 +31,10 @@ jobs:
         # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
       - name: Lint
         run: yarn lint
+
       - name: Dependency Check
         run: yarn depcheck
+
       - name: Unit tests
         run: yarn test
   # integration_test:
