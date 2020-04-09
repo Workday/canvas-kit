@@ -344,7 +344,7 @@ import {InputProvider} from '@workday/canvas-kit-react';
 <div>;
 ```
 
-This will result in these event listeners being added to the body as default
+This will result in these data attributes being added to the body element (by default)
 
 ```html
 <body data-whatinput="mouse" data-whatinput="mouse">
