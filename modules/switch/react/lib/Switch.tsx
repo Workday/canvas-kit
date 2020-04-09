@@ -6,8 +6,9 @@ import {
   focusRing,
   mouseFocusBehavior,
   getErrorColors,
+  styled,
 } from '@workday/canvas-kit-react-common';
-import {borderRadius, colors, depth, spacing, styled} from '@workday/canvas-kit-react-core';
+import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react-core';
 
 export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**

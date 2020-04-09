@@ -1,6 +1,6 @@
 import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '@emotion/styled';
 import {CanvasTheme, ContentDirection} from '@workday/canvas-kit-labs-react-core';
-import {useTheme} from '@workday/canvas-kit-react-core';
+import useTheme from './useTheme';
 import rtlCSSJS from 'rtl-css-js';
 
 const noop = (styles: any) => styles;

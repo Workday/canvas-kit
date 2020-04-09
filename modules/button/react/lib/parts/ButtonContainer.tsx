@@ -2,8 +2,13 @@ import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
 import {CSSObject} from '@emotion/core';
 import {type, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
-import {borderRadius, spacing, spacingNumbers, styled} from '@workday/canvas-kit-react-core';
-import {GrowthBehavior, mouseFocusBehavior, focusRing} from '@workday/canvas-kit-react-common';
+import {borderRadius, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
+import {
+  GrowthBehavior,
+  mouseFocusBehavior,
+  focusRing,
+  styled,
+} from '@workday/canvas-kit-react-common';
 import {ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
 

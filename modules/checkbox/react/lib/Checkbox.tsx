@@ -5,6 +5,7 @@ import {
   focusRing,
   mouseFocusBehavior,
   getErrorColors,
+  styled,
 } from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -12,7 +13,6 @@ import canvas, {
   iconColors,
   inputColors,
   spacingNumbers as spacing,
-  styled,
 } from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';

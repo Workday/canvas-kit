@@ -15,7 +15,7 @@ import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-labs-react-co
  * ThemeProvider or context exists.
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
-export function useTheme(theme?: Object): CanvasTheme {
+export default function useTheme(theme?: Object): CanvasTheme {
   if (theme && Object.keys(theme).length !== 0) {
     return theme as CanvasTheme;
   }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Themeable} from '@workday/canvas-kit-labs-react-core';
-import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
+import {GrowthBehavior, ErrorType, errorRing, styled} from '@workday/canvas-kit-react-common';
 import {
   colors,
   borderRadius,
@@ -8,7 +8,6 @@ import {
   spacingNumbers,
   type,
   spacing,
-  styled,
 } from '@workday/canvas-kit-react-core';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';

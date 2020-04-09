@@ -30,7 +30,9 @@ const AvatarAsButton = styled('button')<AvatarButtonProps>(
     '&:not([disabled])': {
       '&:focus': {
         outline: 'none',
-        ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
+        ...(variant === AvatarVariant.Dark
+          ? focusRing(undefined, {width: 2, separation: 2})
+          : focusRing(undefined, {width: 2})),
       },
     },
     ...hideMouseFocus,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Themeable, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
-import {colors, useTheme} from '@workday/canvas-kit-react-core';
-import {focusRing, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {colors} from '@workday/canvas-kit-react-core';
+import {focusRing, GrowthBehavior, useTheme} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {OutlineButtonVariant, ButtonColors, ButtonSize} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
