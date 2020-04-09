@@ -417,8 +417,8 @@ will remove itself from the DOM (rendering only its children) and not attach any
 
 ##### `container: HTMLElement | React.RefObject<HTMLElement>`
 
-> The containing element in which the InputProvider is rendered into. This property should be set to
-> the element that the application root goes - not containing element of content.
+> The containing element in which the InputProvider attaches its data attributes. This property should
+> be set to an element that is an ancestor of all your Canvas components.
 
 Default: `document.body` 
 
