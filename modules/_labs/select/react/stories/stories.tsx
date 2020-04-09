@@ -17,7 +17,9 @@ import {
 } from '@workday/canvas-system-icons-web';
 import {colors, typeColors} from '@workday/canvas-kit-react-core';
 import FormField from '../../../../form-field/react/index';
-import {RenderOptionFunction, Select} from '../index';
+import {Select} from '../index';
+import {default as SelectBase, RenderOptionFunction} from '../lib/SelectBase';
+import SelectOption from '../lib/SelectOption';
 import README from '../README.md';
 
 const hintText = 'Helpful text goes here.';
@@ -30,6 +32,15 @@ const options = [
   {label: 'Mail', value: 'mail'},
   {label: 'Mobile', value: 'mobile'},
 ];
+
+const normalizedOptions = options.map(option => {
+  return {
+    disabled: option.disabled || false,
+    id: option.value,
+    label: option.label || option.value,
+    value: option.value,
+  };
+});
 
 const simpleOptions = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
 
@@ -255,6 +266,70 @@ storiesOf('Labs|Select/React/Visual Testing', module)
             onChange={() => {}} // eslint-disable-line no-empty-function
             options={options}
           />
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  ))
+  .add('States (Menu On)', () => (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Default', props: {}},
+          {label: 'Alert', props: {error: Select.ErrorType.Alert}},
+          {label: 'Error', props: {error: Select.ErrorType.Error}},
+        ]}
+        columnProps={[{label: 'Default', props: {}}]}
+      >
+        {props => (
+          <div style={{height: 210}}>
+            <SelectBase
+              {...props}
+              onChange={() => {}} // eslint-disable-line no-empty-function
+              options={normalizedOptions}
+              focusedOptionIndex={0}
+              isMenuAnimated={false}
+              isMenuHidden={false}
+              label={normalizedOptions[0].label}
+              selectedOptionIndex={1}
+            />
+          </div>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  ))
+  .add('States (Option)', () => (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Default', props: {}},
+          {label: 'Alert', props: {error: Select.ErrorType.Alert}},
+          {label: 'Error', props: {error: Select.ErrorType.Error}},
+        ]}
+        columnProps={permutateProps(
+          {
+            className: [
+              {label: 'Default', value: ''},
+              {label: 'Hover', value: 'hover'},
+              {label: 'Active', value: 'active'},
+              {label: 'Active Hover', value: 'active hover'},
+            ],
+            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          },
+          props => {
+            if (props.disabled && !['', 'hover'].includes(props.className)) {
+              return false;
+            }
+            return true;
+          }
+        )}
+      >
+        {props => (
+          <SelectOption
+            {...props}
+            onChange={() => {}} // eslint-disable-line no-empty-function
+          >
+            E-mail
+          </SelectOption>
         )}
       </ComponentStatesTable>
     </StaticStates>

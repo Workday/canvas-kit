@@ -1,55 +1,10 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
-import {
-  colors,
-  borderRadius,
-  inputColors,
-  spacingNumbers,
-  type,
-  spacing,
-} from '@workday/canvas-kit-react-core';
-import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
-import {SelectMenu, menuFadeDuration} from './SelectMenu';
-import {default as SelectOption} from './SelectOption';
+import {ErrorType} from '@workday/canvas-kit-react-common';
+import {menuFadeDuration} from './SelectMenu';
+import {default as SelectBase, CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import uuid from 'uuid/v4';
 
-export interface Option {
-  // This allows developers to include arbitrary keys in their
-  // Options and to utilize those keys in their renderOption
-  // function without encountering TypeScript errors
-  [key: string]: any;
-
-  // Known, optional keys
-  disabled?: boolean;
-  id?: string;
-  label?: string;
-
-  // Known, required keys
-  value: string;
-}
-
-interface NormalizedOption extends Option {
-  // Optional keys in Option are required in NormalizedOption
-  disabled: boolean;
-  id: string;
-  label: string;
-}
-
-export interface RenderOptionFunction {
-  (option: Option): React.ReactNode;
-}
-
-export interface SelectProps
-  extends Themeable,
-    GrowthBehavior,
-    Pick<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
-  /**
-   * The type of error associated with the Select (if applicable).
-   */
-  error?: ErrorType;
+export interface SelectProps extends CoreSelectBaseProps {
   /**
    * The options of the Select. `options` may be an array of objects or an array of strings.
    *
@@ -65,26 +20,6 @@ export interface SelectProps
    * Additionally, each option may contain any number of other key/value pairs. These keys will be passed through to the `option` parameter of the `renderOption` prop and may be used to customize how each option is rendered.
    */
   options: (Option | string)[];
-  /**
-   * The function called to render the content of each option.
-   *
-   * Each `option` is an object which contains the following:
-   * * `disabled: boolean`
-   * * `focused: boolean` (set to `true` if the option has keyboard focus)
-   * * `id: string`
-   * * `label: string`
-   * * `selected: boolean` (set to `true` if the option is selected)
-   * * `value: string`
-   *
-   * Additionally, each `option` will contain any other key/value pairs you defined in the `options` prop.
-   *
-   * If you omit the `renderOption` prop, each option will be rendered using a default `renderOption` function provided by the component.
-   */
-  renderOption?: RenderOptionFunction;
-  /**
-   * The value of the Select.
-   */
-  value?: string;
 }
 
 interface SelectState {
@@ -95,119 +30,8 @@ interface SelectState {
   selectedOptionIndex: number;
 }
 
-const focusButtonCSS = {
-  borderColor: inputColors.focusBorder,
-  boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-  outline: 'none',
-};
-
-const SelectButton = styled('button')<
-  Pick<SelectProps, 'error' | 'grow'> & Pick<SelectState, 'isMenuHidden'>
->(
-  {
-    ...type.body,
-    border: `1px solid ${inputColors.border}`,
-    cursor: 'default',
-    display: 'block',
-    backgroundColor: inputColors.background,
-    borderRadius: borderRadius.m,
-    boxSizing: 'border-box',
-    height: spacing.xl,
-    minWidth: 280,
-    textAlign: 'left',
-    transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spacingNumbers.xxs, // IE11 bugfix: add padding so text is displayed properly
-    margin: 0, // Fix Safari
-    '&::placeholder': {
-      color: inputColors.placeholder,
-    },
-    '&:focus:not([disabled])': {
-      ...focusButtonCSS,
-    },
-    '&:disabled': {
-      backgroundColor: inputColors.disabled.background,
-      borderColor: inputColors.disabled.border,
-      color: inputColors.disabled.text,
-      '&::placeholder': {
-        color: inputColors.disabled.text,
-      },
-    },
-  },
-  ({error, isMenuHidden}) => {
-    if (error === undefined) {
-      // If there isn't an error, only show hover styles if the
-      // menu is hidden (otherwise, if the menu is visible, style
-      // the button as if it had focus)
-      return isMenuHidden
-        ? {
-            '&:hover:not([disabled]):not(:focus)': {
-              borderColor: inputColors.hoverBorder,
-            },
-          }
-        : {
-            ...focusButtonCSS,
-          };
-    } else {
-      return {
-        ...errorRing(error),
-      };
-    }
-  },
-  ({grow}) =>
-    grow && {
-      width: '100%',
-    }
-);
-
-const SelectMenuIcon = styled(SystemIcon)({
-  position: 'absolute',
-  top: spacing.xxxs,
-  right: spacing.xxxs,
-  padding: spacing.xxxs,
-  pointerEvents: 'none',
-  '& path': {
-    transition: '100ms fill',
-  },
-});
-
-const SelectInput = styled('input')({
-  display: 'none',
-});
-
-const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
-  {
-    position: 'relative',
-  },
-  ({grow}) => ({
-    display: grow ? 'block' : 'inline-block',
-  }),
-  ({disabled}) => ({
-    '&:hover .menu-icon path': {
-      fill: disabled ? undefined : colors.licorice500,
-    },
-  })
-);
-
 export default class Select extends React.Component<SelectProps, SelectState> {
-  private buttonRef = React.createRef<HTMLButtonElement>();
-  private inputRef = React.createRef<HTMLInputElement>();
-  private menuRef = React.createRef<HTMLUListElement>();
-  private focusedOptionRef = React.createRef<HTMLLIElement>();
-
-  private removeMenuTimer: ReturnType<typeof setTimeout>;
-
-  // For type-ahead functionality
-  private keysSoFar = '';
-  private clearKeysSoFarTimeout = 500;
-  private clearKeysSoFarTimer: ReturnType<typeof setTimeout>;
-
   static ErrorType = ErrorType;
-
-  static defaultProps = {
-    disabled: false,
-  };
-
-  private normalizedOptions: NormalizedOption[];
 
   state: Readonly<SelectState> = {
     focusedOptionIndex: 0,
@@ -217,11 +41,26 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     selectedOptionIndex: 0,
   };
 
+  private buttonRef = React.createRef<HTMLButtonElement>();
+  private inputRef = React.createRef<HTMLInputElement>();
+  private menuRef = React.createRef<HTMLUListElement>();
+
+  private removeMenuTimer: ReturnType<typeof setTimeout>;
+
+  // For type-ahead functionality
+  private keysSoFar = '';
+  private clearKeysSoFarTimeout = 500;
+  private clearKeysSoFarTimer: ReturnType<typeof setTimeout>;
+
+  private normalizedOptions: NormalizedOption[];
+
   // Store normalized options since the options prop can take on multiple
   // forms: an array of strings or an array of objects (sometimes with
   // arbitrary keys)
   private setNormalizedOptions = (): void => {
-    this.normalizedOptions = this.props.options.map(option => {
+    const {options} = this.props;
+
+    this.normalizedOptions = options.map(option => {
       let disabled, id, label, value;
 
       if (typeof option === 'string') {
@@ -236,7 +75,14 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         label = option.label || option.value;
       }
 
-      return {disabled, id, label, value};
+      // Merge user-provided option with normalized option fields
+      return {
+        ...(typeof option === 'string' ? {} : option),
+        disabled,
+        id,
+        label,
+        value,
+      };
     });
   };
 
@@ -329,11 +175,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  // Menu may not be interacted with while it is hiding
-  private isMenuInteractive = (): boolean => {
-    return !this.state.isMenuHiding;
-  };
-
   // Code inspired by: https://stackoverflow.com/a/46012210
   // In order for Select to be usable as a controlled component, we
   // need to programatically change the value of the SelectInput
@@ -362,69 +203,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  // TODO: Move code for scrollIntoViewIfNeeded to a centralized place.
-  // TODO: This code also has minor issues (sometimes it scrolls
-  // unnecessarily, the centerIfNeeded doesn't always center)
-  // Lifted from https://gist.github.com/hsablonniere/2581101
-  // This scrolling behavior is preferable even to the WebKit-proprietary
-  // scrollIntoViewIfNeeded method.
-  private scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
-    const parent: HTMLElement | null = elem.parentElement;
-
-    if (elem && parent) {
-      const parentComputedStyle = window.getComputedStyle(parent, null),
-        parentBorderTopWidth = parseInt(
-          parentComputedStyle.getPropertyValue('border-top-width'),
-          10
-        ),
-        parentBorderLeftWidth = parseInt(
-          parentComputedStyle.getPropertyValue('border-left-width'),
-          10
-        ),
-        overTop = elem.offsetTop - parent.offsetTop < parent.scrollTop,
-        overBottom =
-          elem.offsetTop - parent.offsetTop + elem.clientHeight - parentBorderTopWidth >
-          parent.scrollTop + parent.clientHeight,
-        overLeft = elem.offsetLeft - parent.offsetLeft < parent.scrollLeft,
-        overRight =
-          elem.offsetLeft - parent.offsetLeft + elem.clientWidth - parentBorderLeftWidth >
-          parent.scrollLeft + parent.clientWidth,
-        alignWithTop = overTop && !overBottom;
-
-      if ((overTop || overBottom) && centerIfNeeded) {
-        parent.scrollTop =
-          elem.offsetTop -
-          parent.offsetTop -
-          parent.clientHeight / 2 -
-          parentBorderTopWidth +
-          elem.clientHeight / 2;
-      }
-
-      if ((overLeft || overRight) && centerIfNeeded) {
-        parent.scrollLeft =
-          elem.offsetLeft -
-          parent.offsetLeft -
-          parent.clientWidth / 2 -
-          parentBorderLeftWidth +
-          elem.clientWidth / 2;
-      }
-
-      if ((overTop || overBottom || overLeft || overRight) && !centerIfNeeded) {
-        elem.scrollIntoView(alignWithTop);
-      }
-    }
-  };
-
-  private scrollFocusedOptionIntoView = (center: boolean) => {
-    const focusedOption = this.focusedOptionRef.current;
-    if (focusedOption) {
-      this.scrollIntoViewIfNeeded(focusedOption, center);
-    }
-  };
-
   private handleKeyboardTypeAhead = (key: string, numOptions: number) => {
-    // Abort immediately if the menu is not interactive
-    if (!this.isMenuInteractive()) {
+    // Abort immediately if the menu is the process of hiding
+    if (this.state.isMenuHiding) {
       return;
     }
 
@@ -479,9 +260,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.updateStateFromValue();
   }
 
-  componentDidUpdate(prevProps: SelectProps, prevState: SelectState) {
+  componentDidUpdate(prevProps: SelectProps) {
     const {options, value} = this.props;
-    const {isMenuHidden, focusedOptionIndex} = this.state;
 
     if (options !== prevProps.options) {
       this.setNormalizedOptions();
@@ -489,18 +269,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     if (value !== prevProps.value) {
       this.updateStateFromValue();
-    }
-
-    // If the menu was just displayed, scroll the focused option into
-    // center view
-    if (!isMenuHidden && prevState.isMenuHidden) {
-      this.scrollFocusedOptionIntoView(true);
-
-      // Otherwise, if the menu is displayed AND the focused option changed
-      // since the last render, scroll the focused option into view, but
-      // do NOT center it
-    } else if (!isMenuHidden && focusedOptionIndex !== prevState.focusedOptionIndex) {
-      this.scrollFocusedOptionIntoView(false);
     }
   }
 
@@ -514,7 +282,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   }
 
-  handleSelectClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     // Cancel default handling of the event to ensure we maintain
     // control of focus
     event.preventDefault();
@@ -522,7 +290,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.toggleMenu(this.state.isMenuHidden);
   };
 
-  handleSelectMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
     // Cancel default handling of the event to ensure we maintain
     // control of focus
     event.preventDefault();
@@ -530,9 +298,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   handleOptionSelection = (index: number): void => {
     // Abort immediately if:
-    // * The menu is not interactive
+    // * The menu is in the process of hiding
     // * A disabled option was clicked (we ignore these clicks)
-    if (!this.isMenuInteractive() || this.normalizedOptions[index].disabled) {
+    if (this.state.isMenuHiding || this.normalizedOptions[index].disabled) {
       return;
     }
 
@@ -544,7 +312,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.toggleMenu(false);
   };
 
-  handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
+  handleKeyDown = (event: React.KeyboardEvent): void => {
     const {options} = this.props;
     const numOptions = options.length;
 
@@ -622,98 +390,35 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  renderOptions = (options: (Option | string)[], renderOption: RenderOptionFunction) => {
-    return options.map((option, index) => {
-      const optionProps = {
-        'aria-selected': this.state.selectedOptionIndex === index ? true : undefined,
-        disabled: this.normalizedOptions[index].disabled,
-        error: this.props.error,
-        focused: this.state.focusedOptionIndex === index,
-        id: this.normalizedOptions[index].id,
-        key: this.normalizedOptions[index].id,
-        onMouseDown: (event: React.MouseEvent) => {
-          event.preventDefault();
-          this.handleOptionSelection(index);
-        },
-        optionRef: this.state.focusedOptionIndex === index ? this.focusedOptionRef : undefined,
-        suppressed: !this.isMenuInteractive(),
-        value: this.normalizedOptions[index].value,
-      };
-
-      // Merge user-provided option with normalized option and
-      // pass in additional information about the option state
-      // (focused, selected)
-      const normalizedOption = {
-        ...(typeof option === 'string' ? {} : option),
-        ...this.normalizedOptions[index],
-        focused: optionProps.focused,
-        selected: !!optionProps['aria-selected'],
-      };
-
-      return <SelectOption {...optionProps}>{renderOption(normalizedOption)}</SelectOption>;
-    });
-  };
-
-  renderOption: RenderOptionFunction = option => {
-    return <div>{option.label}</div>;
-  };
-
   public render() {
     const {
-      'aria-labelledby': ariaLabelledBy,
-      disabled,
-      error,
-      grow,
-      onChange,
+      // Strip options from elemProps
       options,
       value,
       ...elemProps
     } = this.props;
 
-    // Use default renderOption if renderOption prop isn't provided
-    const renderOption = this.props.renderOption || this.renderOption;
-
-    const {focusedOptionIndex, isMenuHidden, isMenuHiding, label} = this.state;
+    const {focusedOptionIndex, isMenuHidden, isMenuHiding, label, selectedOptionIndex} = this.state;
 
     return (
-      <SelectWrapper grow={grow} disabled={disabled}>
-        <SelectButton
-          aria-expanded={!isMenuHidden ? 'true' : undefined}
-          aria-haspopup="listbox"
-          disabled={disabled}
-          error={error}
-          grow={grow}
-          isMenuHidden={isMenuHidden}
-          onClick={this.handleSelectClick}
-          onKeyDown={this.handleKeyboardShortcuts}
-          onMouseDown={this.handleSelectMouseDown}
-          ref={this.buttonRef}
-          value={this.getIndexByValue(value) !== -1 ? value : this.normalizedOptions[0].value}
-          {...elemProps}
-        >
-          {label}
-        </SelectButton>
-        <SelectInput onChange={onChange} ref={this.inputRef} type="text" />
-        {!isMenuHidden && (
-          <SelectMenu
-            aria-activedescendant={this.normalizedOptions[focusedOptionIndex].id}
-            aria-labelledby={ariaLabelledBy}
-            error={error}
-            isHiding={isMenuHiding}
-            menuRef={this.menuRef}
-            onBlur={this.handleMenuBlur}
-            onKeyDown={this.handleKeyboardShortcuts}
-          >
-            {this.renderOptions(options, renderOption)}
-          </SelectMenu>
-        )}
-        <SelectMenuIcon
-          className="menu-icon"
-          icon={caretDownSmallIcon}
-          color={disabled ? colors.licorice100 : colors.licorice200}
-          colorHover={disabled ? colors.licorice100 : colors.licorice500}
-        />
-      </SelectWrapper>
+      <SelectBase
+        buttonRef={this.buttonRef}
+        focusedOptionIndex={focusedOptionIndex}
+        inputRef={this.inputRef}
+        isMenuHidden={isMenuHidden}
+        isMenuHiding={isMenuHiding}
+        label={label}
+        menuRef={this.menuRef}
+        onClick={this.handleClick}
+        onKeyDown={this.handleKeyDown}
+        onMenuBlur={this.handleMenuBlur}
+        onMouseDown={this.handleMouseDown}
+        onOptionSelection={this.handleOptionSelection}
+        options={this.normalizedOptions}
+        selectedOptionIndex={selectedOptionIndex}
+        value={this.getIndexByValue(value) !== -1 ? value : this.normalizedOptions[0].value}
+        {...elemProps}
+      />
     );
   }
 }

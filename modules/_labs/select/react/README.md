@@ -150,11 +150,12 @@ const renderOption = option => {
 
 ---
 
-#### `renderOption: (option: Option) => React.ReactNode`
+#### `renderOption: (option: NormalizedOption) => React.ReactNode`
 
 > The function called to render the content of each option.
 >
-> Each `option` is an object which contains the following:
+> The `option` argument passed to the function is an object which contains the following:
+>
 > * `disabled: boolean`
 > * `focused: boolean` (set to `true` if the option has keyboard focus)
 > * `id: string`

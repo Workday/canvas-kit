@@ -8,7 +8,19 @@ import {SelectProps} from './Select';
 interface SelectMenuProps
   extends React.HTMLAttributes<HTMLUListElement>,
     Pick<SelectProps, 'error'> {
+  /**
+   * If true, enable animation on the SelectMenu.
+   * @default true
+   */
+  isAnimated?: boolean;
+  /**
+   * If true, set the SelectMenu to the "is hiding" state.
+   * @default false
+   */
   isHiding?: boolean;
+  /**
+   * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
+   */
   menuRef?: React.Ref<HTMLUListElement>;
 }
 
@@ -75,13 +87,8 @@ const menuListBorderCSS = (error?: ErrorType): CSSObject => {
   };
 };
 
-const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isHiding'>>(
+const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHiding'>>(
   {
-    animationName: fadeInAnimation,
-    animationDuration: `${menuFadeDuration / 1000}s`,
-    // Required to prevent the occasional menu flash when the menu
-    // fades out
-    animationFillMode: 'forwards',
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${inputColors.border}`,
     borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
@@ -97,7 +104,16 @@ const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isHiding'>>(
   ({error}) => ({
     ...menuBorderCSS(error),
   }),
-  ({isHiding}) =>
+  ({isAnimated}) =>
+    isAnimated && {
+      animationName: fadeInAnimation,
+      animationDuration: `${menuFadeDuration / 1000}s`,
+      // Required to prevent the occasional menu flash when the menu
+      // fades out
+      animationFillMode: 'forwards',
+    },
+  ({isAnimated, isHiding}) =>
+    isAnimated &&
     isHiding && {
       animationName: fadeOutAnimation,
     }
@@ -119,14 +135,21 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error'>>(
   })
 );
 
-export const SelectMenu = (props: SelectMenuProps) => {
-  const {children, error, isHiding, menuRef, ...elemProps} = props;
+const SelectMenu = (props: SelectMenuProps) => {
+  const {children, error, isAnimated, isHiding, menuRef, ...elemProps} = props;
 
   return (
-    <Menu error={error} isHiding={isHiding}>
+    <Menu error={error} isAnimated={isAnimated} isHiding={isHiding}>
       <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
         {children}
       </MenuList>
     </Menu>
   );
 };
+
+SelectMenu.defaultProps = {
+  isAnimated: true,
+  isHiding: false,
+};
+
+export default SelectMenu;
