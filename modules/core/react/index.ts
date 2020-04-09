@@ -1,7 +1,6 @@
 import * as canvasColorsWeb from '@workday/canvas-colors-web';
 
 import {borderRadius} from './lib/radius';
-import {useTheme} from './lib/theming/useTheme';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
 import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
 import InputProvider from './lib/InputProvider';
@@ -12,6 +11,7 @@ import spacing, {
   spacingNumbers,
 } from './lib/spacing';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
+import {useTheme} from './lib/theming/useTheme';
 import {CSSProperties} from './lib/types';
 
 const {default: colors, ...semanticColors} = canvasColorsWeb;
@@ -34,9 +34,9 @@ export {
   spacing,
   spacingNumbers,
   type,
+  useTheme,
   fontFamily,
   monoFontFamily,
-  useTheme,
   BrandingColor,
   CanvasDepth,
   CanvasDepthValue,
