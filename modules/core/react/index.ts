@@ -1,6 +1,7 @@
 import * as canvasColorsWeb from '@workday/canvas-colors-web';
 
 import {borderRadius} from './lib/radius';
+import {useTheme} from './lib/theming/useTheme';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
 import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
 import InputProvider from './lib/InputProvider';
@@ -35,6 +36,7 @@ export {
   type,
   fontFamily,
   monoFontFamily,
+  useTheme,
   BrandingColor,
   CanvasDepth,
   CanvasDepthValue,

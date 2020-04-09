@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {ThemeContext} from '@emotion/core';
-import {CanvasTheme} from './types';
-import {defaultCanvasTheme} from './theme';
+import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-labs-react-core';
 
 /**
  * Hook function to get the correct theme object.

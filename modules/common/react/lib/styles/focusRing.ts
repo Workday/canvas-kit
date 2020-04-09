@@ -1,6 +1,6 @@
 import {keyframes, CSSObject} from '@emotion/core';
-import canvas from '@workday/canvas-kit-react-core';
-import {CanvasTheme, useTheme} from '@workday/canvas-kit-labs-react-core';
+import canvas, {useTheme} from '@workday/canvas-kit-react-core';
+import {CanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import memoize from 'lodash/memoize';
 
 function calculateFocusRing({

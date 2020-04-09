@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Themeable, useTheme} from '@workday/canvas-kit-labs-react-core';
+import {Themeable} from '@workday/canvas-kit-labs-react-core';
+import {useTheme} from '@workday/canvas-kit-react-core';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {DropdownButtonVariant, ButtonIconPosition} from './types';
