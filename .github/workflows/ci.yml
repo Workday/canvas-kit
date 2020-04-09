@@ -20,10 +20,8 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-hash-${{ hashFiles('**/yarn.lock') }}
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Packages
         run: yarn install --production=false
