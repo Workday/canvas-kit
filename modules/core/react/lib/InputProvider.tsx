@@ -184,8 +184,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
       this.isAnotherInputProvider = true;
       return;
     }
-    this.container.setAttribute('data-whatinput', this.currentInput);
-    this.container.setAttribute('data-whatintent', this.currentIntent);
+    this.updateAttributes()
     this.enableListeners(true);
   }
 
