@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
+import {Themeable} from '@workday/canvas-kit-labs-react-core';
 import uuid from 'uuid/v4';
 import {
   ErrorType,
@@ -7,7 +7,7 @@ import {
   mouseFocusBehavior,
   getErrorColors,
 } from '@workday/canvas-kit-react-common';
-import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react-core';
+import {borderRadius, colors, depth, spacing, styled} from '@workday/canvas-kit-react-core';
 
 export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**

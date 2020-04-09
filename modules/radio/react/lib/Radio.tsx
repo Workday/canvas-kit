@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
+import {Themeable} from '@workday/canvas-kit-labs-react-core';
 import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
   inputColors,
   spacingNumbers as spacing,
+  styled,
 } from '@workday/canvas-kit-react-core';
 import uuid from 'uuid/v4';
 

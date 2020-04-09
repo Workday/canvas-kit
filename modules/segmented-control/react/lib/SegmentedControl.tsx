@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-labs-react-core';
-import {borderRadius, colors} from '@workday/canvas-kit-react-core';
+import {borderRadius, colors, styled} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 

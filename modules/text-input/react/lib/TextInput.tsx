@@ -1,7 +1,13 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
+import {Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
-import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
+import {
+  borderRadius,
+  inputColors,
+  spacingNumbers,
+  type,
+  styled,
+} from '@workday/canvas-kit-react-core';
 
 export interface TextInputProps
   extends Themeable,

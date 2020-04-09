@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
+import {Themeable} from '@workday/canvas-kit-labs-react-core';
 import {
   ErrorType,
   focusRing,
@@ -12,6 +12,7 @@ import canvas, {
   iconColors,
   inputColors,
   spacingNumbers as spacing,
+  styled,
 } from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
