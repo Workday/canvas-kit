@@ -16,14 +16,14 @@ jobs:
           node-version: 10.x
 
       - name: Cache node modules
+        id: yarn-cache
         uses: actions/cache@v1
-        env:
-          cache-name: cache-node-modules
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --production=false
 
         # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
