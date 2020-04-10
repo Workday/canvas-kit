@@ -18,45 +18,59 @@ jobs:
       - name: Get Cypress Version
         id: cypress-version
         run: echo "::set-output name=version::$(yarn info cypress version --silent)"
-      
-      - name: Version
-        run: echo "${{steps.cypress-version.outputs.version}}"
 
-      # - name: Cache Cypress
-      #   id: cypress-cache
-      #   uses: actions/cache/@v1
-      #   with:
-      #     path: .cache/cypress
-      #     key: ${{ runner.os }}-cypress-hash-${{ steps.cypress-version.outputs.version }}
+      - name: Cache Cypress
+        id: cypress-cache
+        uses: actions/cache/@v1
+        with:
+          path: .cache/cypress
+          key: ${{ runner.os }}-cypress-hash-${{ steps.cypress-version.outputs.version }}
 
-      # - name: Cache node modules
-      #   id: yarn-cache
-      #   uses: actions/cache@v1
-      #   with:
-      #     path: node_modules
-      #     key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
+      - name: Cache node modules
+        id: yarn-cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
-      # - name: Install Packages
-      #   if: steps.yarn-cache.outputs.cache-hit != 'true' # Is this safe to do? Saves about 7 min on the build
-      #   run: yarn install --production=false
+      - name: Install Packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true' && steps.cypress-cache.outputs.cache-hit !=
+          'true' # Is this safe to do? Saves about 7 min on the build
+        run: yarn install --production=false
+        env:
+          CYPRESS_CACHE_FOLDER: .cache/cypress
 
-      #   # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
-      # - name: Lint
-      #   run: yarn lint
+        # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
+      - name: Lint
+        run: yarn lint
 
-      # - name: Dependency Check
-      #   run: yarn depcheck
+      - name: Dependency Check
+        run: yarn depcheck
 
-      # - name: Unit tests
-      #   run: yarn test
+      - name: Unit tests
+        run: yarn test
 
-      # - name: storybook
-      #   run: yarn build-storybook
+      - name: Build Storybook
+        run: yarn build-storybook
 
-      # - name: Integration tests
-      #   run: yarn cypress run --record
-      #   env:
-      #     # Cypress gathers info about a commit and PR to show in the dashboard. Github Actions isn't officially supported as a CI provider, so we'll help it along
-      #     TRAVIS: true # Pretend to be Travis. More info: https://github.com/cypress-io/cypress/blob/develop/packages/server/lib/util/ci_provider.js
-      #     TRAVIS_PULL_REQUEST_BRANCH: ${{ github.head_ref }} # Tell Cypress what the PR branch name is
-      #     CYPRESS_RECORD_KEY: 3a9347b6-36ab-4a36-823d-709f4078b148
+      - name: Start Server
+        run: yarn http-server docs -p 9001 & npx wait-on http://localhost:9001
+
+      - name: chromatic
+        run:
+          yarn chromatic --quiet --exit-zero-on-changes --exit-once-uploaded --storybook-build-dir
+          docs
+        env:
+          # Github Actions doesn't support encryption on forks
+          # If these keys become compromised, we will rotate and disable these features
+          # on forked PRs until a suitable workaround is found
+          CHROMATIC_APP_CODE: dlpro96xybh
+
+      - name: Integration tests
+        run: yarn cypress run --record
+        env:
+          # Github Actions doesn't support encryption on forks
+          # If these keys become compromised, we will rotate and disable these features
+          # on forked PRs until a suitable workaround is found
+          CYPRESS_RECORD_KEY: 3a9347b6-36ab-4a36-823d-709f4078b148
+          CYPRESS_CACHE_FOLDER: .cache/cypress
