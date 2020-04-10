@@ -94,18 +94,18 @@ const Option = styled('li')<SelectOptionProps>(
   })
 );
 
-export default class SelectOption extends React.Component<SelectOptionProps> {
-  static defaultProps = {
-    interactive: true,
-  };
+const SelectOption = (props: SelectOptionProps) => {
+  const {children, optionRef, value, ...elemProps} = props;
 
-  public render() {
-    const {children, optionRef, value, ...elemProps} = this.props;
+  return (
+    <Option data-value={value} ref={optionRef} role="option" {...elemProps}>
+      {children}
+    </Option>
+  );
+};
 
-    return (
-      <Option data-value={value} ref={optionRef} role="option" {...elemProps}>
-        {children}
-      </Option>
-    );
-  }
-}
+SelectOption.defaultProps = {
+  interactive: true,
+};
+
+export default SelectOption;

@@ -17,8 +17,8 @@ import {
 } from '@workday/canvas-system-icons-web';
 import {colors, typeColors} from '@workday/canvas-kit-react-core';
 import FormField from '../../../../form-field/react/index';
-import {Select} from '../index';
-import {default as SelectBase, RenderOptionFunction} from '../lib/SelectBase';
+import Select from '../lib/Select';
+import SelectBase, {RenderOptionFunction} from '../lib/SelectBase';
 import SelectOption from '../lib/SelectOption';
 import README from '../README.md';
 

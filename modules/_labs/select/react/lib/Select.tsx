@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 import {menuFadeDuration} from './SelectMenu';
-import {default as SelectBase, CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
+import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import uuid from 'uuid/v4';
 
 export interface SelectProps extends CoreSelectBaseProps {

@@ -12,7 +12,7 @@ import {
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import SelectMenu from './SelectMenu';
-import {default as SelectOption} from './SelectOption';
+import SelectOption from './SelectOption';
 
 export interface Option {
   // This allows developers to include arbitrary keys in their
