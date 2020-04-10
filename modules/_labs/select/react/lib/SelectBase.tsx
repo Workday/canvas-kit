@@ -13,6 +13,7 @@ import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';
+import {getCorrectedIndexByValue} from './utils';
 
 export interface Option {
   // This allows developers to include arbitrary keys in their
@@ -101,12 +102,6 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * @default false
    */
   isMenuHiding?: boolean;
-  // TODO: not sure we need this (won't it just be set by the value? or even the label of the selectedOptionIndex?)
-  /**
-   * The label of the SelectBase.
-   * @default '''
-   */
-  label: string;
   /**
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */
@@ -132,11 +127,6 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * * `label: string` (required, analagous to the text content of an `<option>`)
    */
   options: NormalizedOption[];
-  /**
-   * The index of the selected option in the SelectBase.
-   * @default 0
-   */
-  selectedOptionIndex: number;
 }
 
 const focusButtonStyles = {
@@ -236,8 +226,6 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     isMenuAnimated: true,
     isMenuHidden: true,
     isMenuHiding: false,
-    label: '',
-    selectedOptionIndex: 0,
   };
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
@@ -319,14 +307,9 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   }
 
   renderOptions = (renderOption: RenderOptionFunction) => {
-    const {
-      error,
-      focusedOptionIndex,
-      onOptionSelection,
-      isMenuHiding,
-      options,
-      selectedOptionIndex,
-    } = this.props;
+    const {error, focusedOptionIndex, onOptionSelection, isMenuHiding, options, value} = this.props;
+
+    const selectedOptionIndex = getCorrectedIndexByValue(options, value);
 
     return options.map((option, index) => {
       const optionProps = {
@@ -376,19 +359,21 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       isMenuAnimated,
       isMenuHidden,
       isMenuHiding,
-      label,
       menuRef,
       onChange,
       onKeyDown,
       onMenuBlur,
-      // Strip onOptionSelection from elemProps
-      onOptionSelection,
       options,
+      // Strip onOptionSelection and value from elemProps
+      onOptionSelection,
+      value,
       ...elemProps
     } = this.props;
 
     // Use default renderOption if renderOption prop isn't provided
     const renderOption = this.props.renderOption || this.renderOption;
+
+    const selectedOption = options[getCorrectedIndexByValue(options, value)];
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
@@ -401,11 +386,12 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           isMenuHidden={isMenuHidden}
           onKeyDown={onKeyDown}
           ref={buttonRef}
+          value={selectedOption.value}
           {...elemProps}
         >
-          {label}
+          {selectedOption.label}
         </SelectButton>
-        <SelectInput onChange={onChange} ref={inputRef} type="text" />
+        <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOption.value} />
         {!isMenuHidden && (
           <SelectMenu
             aria-activedescendant={options[focusedOptionIndex].id}

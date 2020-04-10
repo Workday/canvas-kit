@@ -286,11 +286,9 @@ storiesOf('Labs|Select/React/Visual Testing', module)
               {...props}
               onChange={() => {}} // eslint-disable-line no-empty-function
               options={normalizedOptions}
-              focusedOptionIndex={0}
+              focusedOptionIndex={1}
               isMenuAnimated={false}
               isMenuHidden={false}
-              label={normalizedOptions[0].label}
-              selectedOptionIndex={1}
             />
           </div>
         )}

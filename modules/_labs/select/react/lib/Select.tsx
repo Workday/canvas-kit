@@ -2,6 +2,7 @@ import * as React from 'react';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 import {menuFadeDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
+import {getCorrectedIndexByValue} from './utils';
 import uuid from 'uuid/v4';
 
 export interface SelectProps extends CoreSelectBaseProps {
@@ -26,8 +27,6 @@ interface SelectState {
   focusedOptionIndex: number;
   isMenuHidden: boolean;
   isMenuHiding: boolean;
-  label: string;
-  selectedOptionIndex: number;
 }
 
 export default class Select extends React.Component<SelectProps, SelectState> {
@@ -37,8 +36,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     focusedOptionIndex: 0,
     isMenuHidden: true,
     isMenuHiding: false,
-    label: '',
-    selectedOptionIndex: 0,
   };
 
   private buttonRef = React.createRef<HTMLButtonElement>();
@@ -52,6 +49,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private clearKeysSoFarTimeout = 500;
   private clearKeysSoFarTimer: ReturnType<typeof setTimeout>;
 
+  // Cached values
   private normalizedOptions: NormalizedOption[];
 
   // Store normalized options since the options prop can take on multiple
@@ -86,20 +84,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     });
   };
 
-  private getIndexByValue = (value: string | undefined): number => {
-    if (value === undefined) {
-      return -1;
-    }
-
-    for (let i = 0; i < this.normalizedOptions.length; i++) {
-      if (this.normalizedOptions[i].value === value) {
-        return i;
-      }
-    }
-
-    return -1;
-  };
-
   private getIndexByStartString = (
     startIndex: number,
     startString: string,
@@ -119,18 +103,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private updateStateFromValue = () => {
-    let optionIndex = this.getIndexByValue(this.props.value);
-
-    // If the value cannot be found in options, set the selected
-    // option to the first option
-    if (optionIndex === -1) {
-      optionIndex = 0;
-    }
-
     this.setState({
-      focusedOptionIndex: optionIndex,
-      label: this.normalizedOptions[optionIndex].label,
-      selectedOptionIndex: optionIndex,
+      focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
     });
   };
 
@@ -144,7 +118,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (show) {
       this.setState(
         {
-          focusedOptionIndex: this.state.selectedOptionIndex,
           isMenuHidden: false,
           isMenuHiding: false,
         },
@@ -392,13 +365,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   public render() {
     const {
+      value,
       // Strip options from elemProps
       options,
-      value,
       ...elemProps
     } = this.props;
 
-    const {focusedOptionIndex, isMenuHidden, isMenuHiding, label, selectedOptionIndex} = this.state;
+    const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.state;
 
     return (
       <SelectBase
@@ -407,7 +380,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         inputRef={this.inputRef}
         isMenuHidden={isMenuHidden}
         isMenuHiding={isMenuHiding}
-        label={label}
         menuRef={this.menuRef}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
@@ -415,8 +387,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         onMouseDown={this.handleMouseDown}
         onOptionSelection={this.handleOptionSelection}
         options={this.normalizedOptions}
-        selectedOptionIndex={selectedOptionIndex}
-        value={this.getIndexByValue(value) !== -1 ? value : this.normalizedOptions[0].value}
+        value={value}
         {...elemProps}
       />
     );
