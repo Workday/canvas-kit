@@ -34,10 +34,10 @@ jobs:
       #     key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
       - name: Test1
         id: cypress-cache
-        run: echo "::set-output name=cache-hit::$(echo 'true')"
+        run: echo "::set-output name=cache-hit::$(echo 'false')"
       - name: Test2
         id: yarn-cache
-        run: echo "::set-output name=cache-hit::$(echo 'false')"
+        run: echo "::set-output name=cache-hit::$(echo 'true')"
 
       - name: Install Packages
         if:
