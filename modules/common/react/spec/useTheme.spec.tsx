@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import {useTheme} from '../lib/theming/useTheme';
+import useTheme from '../lib/theming/useTheme';
 import {
   defaultCanvasTheme,
   CanvasProvider,
