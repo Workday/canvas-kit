@@ -108,7 +108,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   private isScrolling = false; // Unused if props.provideIntent is not defined
   private mousePosX: number | null = null; // Unused if props.provideIntent is not defined
   private mousePosY: number | null = null; // Unused if props.provideIntent is not defined
-  private isAnotherInputProvider = false; // True if there is another input provider
+  private deferInputTracking = false; // True if there is another input provider
 
   constructor(props: any) {
     super(props);
@@ -181,10 +181,10 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     elementClosestPolyfill(window);
 
     if (this.container.closest('[data-whatinput]')) {
-      this.isAnotherInputProvider = true;
+      this.deferInputTracking = true;
       return;
     }
-    this.updateAttributes()
+    this.updateAttributes();
     this.enableListeners(true);
   }
 
@@ -205,7 +205,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   }
 
   componentWillUnmount() {
-    if (this.isAnotherInputProvider) {
+    if (this.deferInputTracking) {
       return;
     }
 
