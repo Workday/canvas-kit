@@ -57,15 +57,13 @@ jobs:
       - name: Start Server
         run: yarn http-server docs -p 9001 & npx wait-on http://localhost:9001
 
-      - name: Chromatic
-        run:
-          yarn chromatic --quiet --exit-zero-on-changes --exit-once-uploaded --storybook-build-dir
-          docs
-        env:
-          # Github Actions doesn't support encryption on forks
-          # If these keys become compromised, we will rotate and disable these features
-          # on forked PRs until a suitable workaround is found
-          CHROMATIC_APP_CODE: dlpro96xybh
+      - uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          appCode: dlpro96xybh
+          storybookBuildDir: docs
+          exitOnceUploaded: true
+          exitZeroOnChanges: true
 
       - name: Integration tests
         run: yarn cypress run --record
