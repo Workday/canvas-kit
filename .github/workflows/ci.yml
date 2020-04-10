@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  unit_test:
+  verify:
     runs-on: ubuntu-latest
 
     steps:
@@ -57,7 +57,7 @@ jobs:
       - name: Start Server
         run: yarn http-server docs -p 9001 & npx wait-on http://localhost:9001
 
-      - name: chromatic
+      - name: Chromatic
         run:
           yarn chromatic --quiet --exit-zero-on-changes --exit-once-uploaded --storybook-build-dir
           docs
