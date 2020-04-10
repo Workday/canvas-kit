@@ -41,7 +41,7 @@ jobs:
 
       - name: Install Packages
         if:
-          steps.yarn-cache.outputs.cache-hit != 'true' && steps.cypress-cache.outputs.cache-hit !=
+          steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
           'true'
         run: echo "test" # yarn install --production=false
         env:
