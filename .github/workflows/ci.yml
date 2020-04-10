@@ -19,42 +19,49 @@ jobs:
         id: cypress-version
         run: echo "::set-output name=version::$(yarn info cypress version --silent)"
 
-      - name: Cache Cypress
+      # - name: Cache Cypress
+      #   id: cypress-cache
+      #   uses: actions/cache/@v1
+      #   with:
+      #     path: .cache/cypress
+      #     key: ${{ runner.os }}-cypress-version-${{ steps.cypress-version.outputs.version }}
+      #
+      # - name: Cache node modules
+      #   id: yarn-cache
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: node_modules
+      #     key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
+      - name: Test1
         id: cypress-cache
-        uses: actions/cache/@v1
-        with:
-          path: .cache/cypress
-          key: ${{ runner.os }}-cypress-version-${{ steps.cypress-version.outputs.version }}
-
-      - name: Cache node modules
+        run: echo "::set-output name=cache-hit::$(echo 'false')"
+      - name: Test2
         id: yarn-cache
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
+        run: echo "::set-output name=cache-hit::$(echo 'false')"
 
       - name: Install Packages
-        if: (steps.yarn-cache.outputs.cache-hit != 'true' && steps.cypress-cache.outputs.cache-hit != 'true')
-        run: yarn install --production=false
+        if:
+          steps.yarn-cache.outputs.cache-hit != 'true' && steps.cypress-cache.outputs.cache-hit !=
+          'true'
+        run: echo "test" yarn install --production=false
         env:
           CYPRESS_CACHE_FOLDER: .cache/cypress
-
         # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
       # - name: Lint
       #   run: yarn lint
-
+      #
       # - name: Dependency Check
       #   run: yarn depcheck
-
+      #
       # - name: Unit tests
       #   run: yarn test
-
+      #
       # - name: Build Storybook
       #   run: yarn build-storybook
-
+      #
       # - name: Start Server
       #   run: yarn http-server docs -p 9001 & npx wait-on http://localhost:9001
-
+      #
       # - name: chromatic
       #   run:
       #     yarn chromatic --quiet --exit-zero-on-changes --exit-once-uploaded --storybook-build-dir
@@ -64,7 +71,7 @@ jobs:
       #     # If these keys become compromised, we will rotate and disable these features
       #     # on forked PRs until a suitable workaround is found
       #     CHROMATIC_APP_CODE: dlpro96xybh
-
+      #
       # - name: Integration tests
       #   run: yarn cypress run --record
       #   env:
