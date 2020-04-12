@@ -1,17 +1,16 @@
 import * as React from 'react';
-import {render} from '@testing-library/react';
+import {fireEvent, render} from '@testing-library/react';
 import Select from '../lib/Select';
 
 describe('Select', () => {
   const cb = jest.fn();
 
   const selectButtonRole = 'button';
+  const optionRole = 'option';
 
-  const options = [{label: 'Option 1', value: 'option1'}, {label: 'Option 2', value: 'option2'}];
+  const options = [{label: 'E-mail', value: 'email'}, {label: 'Phone', value: 'phone'}];
 
   // TODO: Delete helpers related to old tests
-
-  // const optionRole = 'option';
 
   // const getFirstMatchingOption = (options: HTMLElement[], value: string) => {
   //   return options.filter((option: HTMLElement) => option.getAttribute('data-value') === value)[0];
@@ -97,22 +96,14 @@ describe('Select', () => {
   });
   */
 
-  // TODO: these tests no longer work now that the menu is removed from
-  // the DOM when it's inactive
-  /*
-  describe('when the mouse button is pressed on an option which has a different value than the current value of the select', () => {
+  describe('when the mouse button is pressed down on an option with a different value than the current value of the select', () => {
     it('should call the onChange callback', () => {
-      const {getAllByRole} = render(
-        <Select onChange={cb}>
-          <SelectOption value="option1" label="Option 1" />
-          <SelectOption value="option2" label="Option 2" />
-        </Select>
-      );
+      const {getAllByRole, getByRole} = render(<Select onChange={cb} options={options} />);
+      fireEvent.click(getByRole(selectButtonRole));
       fireEvent.mouseDown(getAllByRole(optionRole)[1]);
       expect(cb).toHaveBeenCalledTimes(1);
     });
   });
-  */
 
   // TODO: test change event firing with correct value
 });

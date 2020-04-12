@@ -324,6 +324,9 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
         value: option.value,
         ...(onOptionSelection
           ? {
+              // mouseDown provides a slightly better UX than click
+              // since visual feedback of selected option is more
+              // immediate
               onMouseDown: (event: React.MouseEvent) => {
                 event.preventDefault();
                 onOptionSelection(index);
