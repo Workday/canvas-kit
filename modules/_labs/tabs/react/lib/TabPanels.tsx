@@ -7,6 +7,8 @@ export interface TabPanelsProps {
   children: TabPanelsChild | TabPanelsChild[];
 }
 
-export const TabPanels: React.FC<TabPanelsProps> = ({children}: TabPanelsProps) => {
+const TabPanels: React.FC<TabPanelsProps> = ({children}: TabPanelsProps) => {
   return <div>{children}</div>;
 };
+
+export default TabPanels;

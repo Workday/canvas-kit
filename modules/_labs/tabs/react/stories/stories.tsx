@@ -2,12 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-
-import Tabs from '../index';
-import {TabList} from '../lib/TabList';
-import {Tab} from '../lib/Tab';
-import {TabPanels} from '../lib/TabPanels';
-import {TabPanel} from '../lib/TabPanel';
+import {Tabs, TabList, Tab, TabPanel, TabPanels} from '../index';
 import README from '../README.md';
 
 storiesOf('Labs/Tabs', module)

@@ -6,7 +6,7 @@ export interface TabPanelProps {
   index?: number;
 }
 
-export const TabPanel: React.FC<TabPanelProps> = ({children, index = 0}: TabPanelProps) => {
+const TabPanel: React.FC<TabPanelProps> = ({children, index = 0}: TabPanelProps) => {
   const {tabIndex} = useTab();
 
   const isHidden = tabIndex !== index;
@@ -17,3 +17,5 @@ export const TabPanel: React.FC<TabPanelProps> = ({children, index = 0}: TabPane
     </div>
   );
 };
+
+export default TabPanel;

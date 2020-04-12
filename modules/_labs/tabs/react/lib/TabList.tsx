@@ -40,7 +40,7 @@ export interface TabListProps {
   children: TabListChild | TabListChild[];
 }
 
-export const TabList: React.FC<TabListProps> = ({children}: TabListProps) => {
+const TabList: React.FC<TabListProps> = ({children}: TabListProps) => {
   const tabsListRef = React.useRef<HTMLDivElement>(null);
   const {selectedTabRect} = useTab();
 
@@ -64,3 +64,5 @@ export const TabList: React.FC<TabListProps> = ({children}: TabListProps) => {
     </TabsListContainer>
   );
 };
+
+export default TabList;

@@ -38,7 +38,7 @@ export interface TabProps {
   index?: number;
 }
 
-export const Tab: React.FC<TabProps> = ({children, index = 0}: TabProps) => {
+const Tab: React.FC<TabProps> = ({children, index = 0}: TabProps) => {
   const {tabIndex, setTabIndex, setSelectedTabRect} = useTab();
   const tabRef = React.useRef<HTMLDivElement>(null);
 
@@ -60,3 +60,5 @@ export const Tab: React.FC<TabProps> = ({children, index = 0}: TabProps) => {
     </Container>
   );
 };
+
+export default Tab;
