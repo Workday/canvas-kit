@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.4.1 (2020-04-13, retroactive hotfix) 
+
+### Infrastructure
+- fix: Avoid polyfill requirements ([#492](https://github.com/Workday/canvas-kit/pull/492)) [@anicholls](https://github.com/anicholls)
+
 # 3.4.0 (2020-02-19)
 
 ### Infrastructure
