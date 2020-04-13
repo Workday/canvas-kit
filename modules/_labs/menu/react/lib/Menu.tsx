@@ -74,7 +74,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     super(props);
     this.menuRef = React.createRef();
 
-    const selected = this.getInitialSelectedItem(props);
+    const selected = this.getInitialSelectedItem();
 
     // We track the active menu item by index so we can avoid setting a bunch of refs
     // for doing things like selecting an item by first character (or really calling .focus() at all)
@@ -310,7 +310,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     this.firstCharacters = firstCharacters;
   };
 
-  private getInitialSelectedItem = ({children, initialSelectedItem}: MenuProps): number => {
+  private getInitialSelectedItem = (): number => {
     let selected = this.props.initialSelectedItem || 0;
     selected = selected < 0 ? React.Children.count(this.props.children) + selected : selected;
     if (selected < 0) {
@@ -323,7 +323,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   };
 
   private setInitialSelectedItem = () => {
-    const selected = this.getInitialSelectedItem(this.props);
+    const selected = this.getInitialSelectedItem();
     this.setState({selectedItemIndex: selected});
   };
 }
