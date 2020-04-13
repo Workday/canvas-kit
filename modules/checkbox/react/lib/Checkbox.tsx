@@ -137,7 +137,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       boxShadow: 'none',
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing(theme, {width: 2, separation: 2, animate: false}),
+      ...focusRing({width: 2, separation: 2, animate: false}, theme),
       '& span': {
         marginLeft: '-7px',
       },

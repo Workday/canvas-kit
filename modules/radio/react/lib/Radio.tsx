@@ -134,11 +134,11 @@ const RadioInput = styled('input')<RadioProps>(
       },
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing(theme, {width: 2, separation: 2}),
+      ...focusRing({width: 2, separation: 2}, theme),
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        ...focusRing(theme, {width: 0}),
+        ...focusRing({width: 0}, theme),
         borderWidth: '1px',
         borderColor: checked ? theme.palette.primary.main : inputColors.border,
       },
