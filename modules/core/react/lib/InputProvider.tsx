@@ -4,17 +4,7 @@ import elementClosestPolyfill from 'element-closest';
 
 export interface InputProviderProps {
   provideIntent?: boolean;
-}
-
-export interface InputProviderState {
-  currentInput: InputType;
-  currentIntent: InputType;
-  supportsPassive: boolean;
-  isBuffering: boolean;
-  isScrolling: boolean; // Unused if props.provideIntent is not defined
-  mousePosX: number | null; // Unused if props.provideIntent is not defined
-  mousePosY: number | null; // Unused if props.provideIntent is not defined
-  nested: boolean; // True if nested within another input provider
+  container: HTMLElement | React.RefObject<HTMLElement>;
 }
 
 export enum InputType {
@@ -105,14 +95,20 @@ const detectWheel = () => {
   return wheelType;
 };
 
-const containerClass = 'wdc-input-provider';
-
 /**
  * This component takes heavy inspiration from what-input (https://github.com/ten1seven/what-input)
  */
-export default class InputProvider extends React.Component<InputProviderProps, InputProviderState> {
+export default class InputProvider extends React.Component<InputProviderProps> {
   private eventTimer: number | undefined;
-  private ref: React.RefObject<HTMLDivElement> = React.createRef();
+
+  private currentInput: InputType;
+  private currentIntent: InputType;
+  private supportsPassive: boolean;
+  private isBuffering = false;
+  private isScrolling = false; // Unused if props.provideIntent is not defined
+  private mousePosX: number | null = null; // Unused if props.provideIntent is not defined
+  private mousePosY: number | null = null; // Unused if props.provideIntent is not defined
+  private deferInputTracking = false; // True if there is another input provider
 
   constructor(props: any) {
     super(props);
@@ -150,44 +146,58 @@ export default class InputProvider extends React.Component<InputProviderProps, I
       console.warn('Browser does not support passive event listeners');
     }
 
-    this.state = {
-      currentInput: storedInput || InputType.Initial,
-      currentIntent: storedIntent || InputType.Initial,
-      supportsPassive: supportsPassive || false,
-      isBuffering: false,
-      isScrolling: false,
-      mousePosX: null,
-      mousePosY: null,
-      nested: false,
-    };
+    this.currentInput = storedInput || InputType.Initial;
+    this.currentIntent = storedIntent || InputType.Initial;
+    this.supportsPassive = supportsPassive || false;
 
     this.setInput = this.setInput.bind(this);
     this.setIntent = this.setIntent.bind(this);
     this.eventBuffer = this.eventBuffer.bind(this);
   }
 
+  static defaultProps = {
+    container: document.body,
+  };
+
   // Need to remember how it component was mounted so we ensure listener removal
   provideIntent = this.props.provideIntent;
+
+  getContainer(container: HTMLElement | React.RefObject<HTMLElement>): HTMLElement {
+    if ('current' in container) {
+      if (container.current === null) {
+        console.warn('Your ref object can not be null, therefore, falling back to document.body');
+        return document.body;
+      } else {
+        return container.current;
+      }
+    }
+    return container;
+  }
+
+  private container = this.getContainer(this.props.container);
 
   componentDidMount() {
     // For IE11 and under, we'll need to polyfill element.closest
     elementClosestPolyfill(window);
 
-    if (
-      this.ref.current &&
-      this.ref.current.parentElement &&
-      this.ref.current.parentElement.closest(`.${containerClass}`)
-    ) {
-      this.setState({nested: true});
+    if (this.container.closest('[data-whatinput]')) {
+      this.deferInputTracking = true;
       return;
     }
+    this.updateAttributes();
     this.enableListeners(true);
   }
 
-  componentDidUpdate() {
+  updateAttributes() {
+    const intent = this.provideIntent ? this.currentIntent : null;
+    this.container.setAttribute('data-whatinput', this.currentInput);
+    if (intent) {
+      this.container.setAttribute('data-whatintent', intent);
+    }
+
     try {
-      window.sessionStorage.setItem('what-input', this.state.currentInput);
-      window.sessionStorage.setItem('what-intent', this.state.currentIntent);
+      window.sessionStorage.setItem('what-input', this.currentInput);
+      window.sessionStorage.setItem('what-intent', this.currentIntent);
     } catch (e) {
       /* istanbul ignore next line for coverage */
       console.warn('Failed to set input status in session storage' + e);
@@ -195,20 +205,14 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   }
 
   componentWillUnmount() {
+    if (this.deferInputTracking) {
+      return;
+    }
+
+    this.container.removeAttribute('data-whatinput');
+    this.container.removeAttribute('data-whatintent');
     window.clearTimeout(this.eventTimer);
     this.enableListeners(false);
-  }
-
-  shouldComponentUpdate(nextProps: {}, nextState: InputProviderState) {
-    if (
-      nextProps !== this.props ||
-      nextState.nested !== this.state.nested ||
-      nextState.currentInput !== this.state.currentInput ||
-      nextState.currentIntent !== this.state.currentIntent
-    ) {
-      return true;
-    }
-    return false;
   }
 
   enableListeners(enable: boolean) {
@@ -220,7 +224,7 @@ export default class InputProvider extends React.Component<InputProviderProps, I
     // `pointermove`, `MSPointerMove`, `mousemove` and mouse wheel event binding
     // can only demonstrate potential, but not actual, interaction
     // and are treated separately
-    const options = this.state.supportsPassive
+    const options = this.supportsPassive
       ? ({passive: true} as AddEventListenerOptions) // fixes Type '{ passive: boolean; }' has no properties in common with type 'EventListenerOptions'.  TS2345
       : false;
 
@@ -259,7 +263,7 @@ export default class InputProvider extends React.Component<InputProviderProps, I
   setInput(event: InputEvent) {
     // only execute if the event buffer timer isn't running
     /* istanbul ignore if for coverage */
-    if (this.state.isBuffering) {
+    if (this.isBuffering) {
       return;
     }
     const eventKey = 'which' in event ? event.which : undefined;
@@ -277,11 +281,12 @@ export default class InputProvider extends React.Component<InputProviderProps, I
       value === InputType.Mouse ||
       value === InputType.Touch;
 
-    if (this.state.currentInput !== value && shouldUpdate) {
-      this.setState({currentInput: value});
+    if (this.currentInput !== value && shouldUpdate) {
+      this.currentInput = value;
+      this.updateAttributes();
     }
 
-    if (this.state.currentIntent !== value && shouldUpdate && this.provideIntent) {
+    if (this.currentIntent !== value && shouldUpdate && this.provideIntent) {
       // preserve intent for keyboard typing in form fields
       const activeElem = document.activeElement;
       const notFormInput =
@@ -291,7 +296,8 @@ export default class InputProvider extends React.Component<InputProviderProps, I
 
       /* istanbul ignore else for coverage */
       if (notFormInput) {
-        this.setState({currentIntent: value});
+        this.currentIntent = value;
+        this.updateAttributes();
       }
     }
   }
@@ -304,16 +310,15 @@ export default class InputProvider extends React.Component<InputProviderProps, I
     // only execute if the event buffer timer isn't running
     // or scrolling isn't happening
     /* istanbul ignore else for coverage */
-    if (!this.state.isBuffering && !this.state.isScrolling) {
+    if (!this.isBuffering && !this.isScrolling) {
       const eventType = event.type as keyof typeof inputEventMap;
       let value = inputEventMap[eventType];
       if (value === InputType.Pointer) {
         value = getPointerType(event as React.PointerEvent);
       }
 
-      if (this.state.currentIntent !== value) {
-        this.setState({currentIntent: value});
-      }
+      this.currentIntent = value;
+      this.updateAttributes();
     }
   }
 
@@ -324,41 +329,25 @@ export default class InputProvider extends React.Component<InputProviderProps, I
 
     window.clearTimeout(this.eventTimer);
 
-    this.setState({isBuffering: true});
+    this.isBuffering = true;
 
     /* istanbul ignore next function for coverage */
     this.eventTimer = window.setTimeout(() => {
-      this.setState({isBuffering: false});
+      this.isBuffering = false;
     }, 100);
   }
 
   detectScrolling(event: React.MouseEvent) {
-    if (this.state.mousePosX !== event.screenX || this.state.mousePosY !== event.screenY) {
-      this.setState({
-        isScrolling: false,
-        mousePosX: event.screenX,
-        mousePosY: event.screenY,
-      });
+    if (this.mousePosX !== event.screenX || this.mousePosY !== event.screenY) {
+      this.isScrolling = false;
+      this.mousePosX = event.screenX;
+      this.mousePosY = event.screenY;
     } else {
-      this.setState({isScrolling: true});
+      this.isScrolling = true;
     }
   }
 
   render() {
-    if (this.state.nested) {
-      return this.props.children;
-    }
-
-    const intent = this.provideIntent ? this.state.currentIntent : null;
-    return (
-      <div
-        className={containerClass}
-        ref={this.ref}
-        data-whatinput={this.state.currentInput}
-        data-whatintent={intent}
-      >
-        {this.props.children}
-      </div>
-    );
+    return this.props.children || null;
   }
 }
