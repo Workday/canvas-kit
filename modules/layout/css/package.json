@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-layout",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "Layout css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/layout/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^3.5.0"
+    "@workday/canvas-kit-css-core": "^3.6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
