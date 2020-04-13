@@ -52,7 +52,7 @@ const BannerWrapper = styled('button')<BannerProps>(
     transition: 'background-color 120ms',
     '&:focus': {
       outline: 'none',
-      ...focusRing(undefined, {width: 2, separation: 2}),
+      ...focusRing({width: 2, separation: 2}),
     },
     '&:hover': {
       cursor: 'pointer',

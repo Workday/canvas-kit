@@ -1,7 +1,6 @@
 import {keyframes, CSSObject} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
-import {CanvasTheme} from '@workday/canvas-kit-labs-react-core';
-import {useTheme} from '@workday/canvas-kit-react-common';
+import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import memoize from 'lodash/memoize';
 
 function calculateFocusRing({
@@ -67,16 +66,16 @@ interface FocusRingOptions {
  * @returns {CSSObject} the css object for the focus ring style
  */
 export default function focusRing(
-  theme: CanvasTheme = useTheme(),
   options: FocusRingOptions = {
     width: 2,
     separation: 0,
     animate: true,
     inset: false,
     innerColor: canvas.colors.frenchVanilla100,
-    outerColor: theme.palette.common.focusOutline,
+    outerColor: defaultCanvasTheme.palette.common.focusOutline,
     memoize: true,
-  }
+  },
+  theme: CanvasTheme = defaultCanvasTheme
 ): CSSObject {
   const {
     width = 2,

@@ -136,11 +136,11 @@ const Container = styled('button')<DeprecatedButtonProps>(
       '&:not([disabled])': {
         '&:focus': {
           borderColor: buttonColors.focusBorder,
-          ...focusRing(undefined, {width: 2, separation: 0}),
+          ...focusRing({width: 2, separation: 0}),
         },
         '&:active': {
           borderColor: buttonColors.activeBorder,
-          ...focusRing(undefined, {width: 2, separation: 0}),
+          ...focusRing({width: 2, separation: 0}),
         },
       },
       ...mouseFocusBehavior({

@@ -181,7 +181,7 @@ export const ButtonContainer = styled('button', {
         backgroundColor: colors.focus.background,
         borderColor: colors.focus.border,
         color: colors.focus.label,
-        ...(colors.focus.focusRing || focusRing(theme, {separation: 2})),
+        ...(colors.focus.focusRing || focusRing({separation: 2}, theme)),
         ...(colors.focus.labelData && {
           ['.' + buttonLabelDataClassName]: {
             color: colors.focus.labelData,

@@ -156,11 +156,14 @@ export const getOutlineButtonColors = (
           icon: colors.licorice500,
           label: colors.blackPepper400,
           labelData: colors.licorice300,
-          focusRing: focusRing(theme, {
-            separation: 2,
-            innerColor: 'currentColor',
-            outerColor: theme.palette.primary.contrast,
-          }),
+          focusRing: focusRing(
+            {
+              separation: 2,
+              innerColor: 'currentColor',
+              outerColor: theme.palette.primary.contrast,
+            },
+            theme
+          ),
         },
         disabled: {
           background: 'transparent',

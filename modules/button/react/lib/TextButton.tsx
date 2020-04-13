@@ -58,7 +58,7 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
         focus: {
           icon: theme.palette.primary.dark,
           label: theme.palette.primary.dark,
-          focusRing: focusRing(theme),
+          focusRing: focusRing({}, theme),
         },
         disabled: {
           background: 'transparent',
@@ -87,11 +87,14 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           background: colors.frenchVanilla100,
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          focusRing: focusRing(theme, {
-            separation: 2,
-            innerColor: 'currentColor',
-            outerColor: colors.frenchVanilla100,
-          }),
+          focusRing: focusRing(
+            {
+              separation: 2,
+              innerColor: 'currentColor',
+              outerColor: colors.frenchVanilla100,
+            },
+            theme
+          ),
         },
         disabled: {
           background: 'transparent',

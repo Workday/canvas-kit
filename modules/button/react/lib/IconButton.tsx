@@ -174,7 +174,7 @@ const getIconButtonColors = (
         },
         focus: {
           icon: toggled ? theme.palette.primary.main : colors.licorice500,
-          focusRing: focusRing(theme),
+          focusRing: focusRing({}, theme),
         },
         disabled: {
           icon: toggled ? theme.palette.primary.light : colors.soap600,
@@ -197,11 +197,14 @@ const getIconButtonColors = (
         focus: {
           background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
-          focusRing: focusRing(theme, {
-            separation: 2,
-            innerColor: 'currentColor',
-            outerColor: theme.palette.primary.contrast,
-          }),
+          focusRing: focusRing(
+            {
+              separation: 2,
+              innerColor: 'currentColor',
+              outerColor: theme.palette.primary.contrast,
+            },
+            theme
+          ),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'transparent',
@@ -225,11 +228,14 @@ const getIconButtonColors = (
         focus: {
           background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
-          focusRing: focusRing(theme, {
-            separation: 2,
-            innerColor: 'currentColor',
-            outerColor: theme.palette.primary.contrast,
-          }),
+          focusRing: focusRing(
+            {
+              separation: 2,
+              innerColor: 'currentColor',
+              outerColor: theme.palette.primary.contrast,
+            },
+            theme
+          ),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'rgba(0, 0, 0, 0.2)',
