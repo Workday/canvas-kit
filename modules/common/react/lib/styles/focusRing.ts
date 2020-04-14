@@ -3,9 +3,19 @@ import canvas from '@workday/canvas-kit-react-core';
 import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import memoize from 'lodash/memoize';
 
+interface FocusRingOptions {
+  width: number;
+  separation: number;
+  animate?: boolean;
+  inset?: boolean;
+  innerColor?: string;
+  outerColor?: string;
+  memoize?: boolean;
+}
+
 function calculateFocusRing({
-  width = 2,
-  separation = 0,
+  width,
+  separation,
   animate,
   inset,
   innerColor,
@@ -47,16 +57,6 @@ export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.s
  *
  * @returns {CSSObject} the css object for the focus ring style
  */
-
-interface FocusRingOptions {
-  width?: number;
-  separation?: number;
-  animate?: boolean;
-  inset?: boolean;
-  innerColor?: string;
-  outerColor?: string;
-  memoize?: boolean;
-}
 
 /**
  * A utility to create a canvas style focus ring around your widget.
