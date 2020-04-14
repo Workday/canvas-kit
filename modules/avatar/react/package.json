@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-avatar",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "A circular user photo (or a default)",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -42,9 +42,9 @@
     "@emotion/core": "^10.0.28",
     "@emotion/is-prop-valid": "^0.8.2",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-common": "^3.5.0",
-    "@workday/canvas-kit-react-core": "^3.5.0",
-    "@workday/canvas-kit-react-icon": "^3.5.0",
+    "@workday/canvas-kit-react-common": "^3.6.0",
+    "@workday/canvas-kit-react-core": "^3.6.0",
+    "@workday/canvas-kit-react-icon": "^3.6.0",
     "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }
