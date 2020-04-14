@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-common",
-  "version": "4.0.0-beta.0",
+  "version": "4.0.0-beta.1",
   "description": "A module of common utilities shared across canvas components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -49,10 +49,10 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
-    "@workday/canvas-kit-labs-react-core": "^4.0.0-beta.0",
-    "@workday/canvas-kit-react-core": "^4.0.0-beta.0",
+    "@popperjs/core": "^2.1.1",
+    "@workday/canvas-kit-labs-react-core": "^4.0.0-beta.1",
+    "@workday/canvas-kit-react-core": "^4.0.0-beta.1",
     "chroma-js": "^2.1.0",
-    "lodash": "^4.17.14",
-    "@popperjs/core": "^2.1.1"
+    "lodash": "^4.17.14"
   }
 }

@@ -133,12 +133,13 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 
 #### Input Provider
 
-- All Canvas Kit components should support a wrapping `InputProvider` component to provide the
-  cleanest experience for mouse users. Read the docs
+- All Canvas Kit components should support an `InputProvider` component to provide the cleanest
+  experience for mouse users. Read the docs
   [here](https://github.com/Workday/canvas-kit/tree/master/modules/core/react#input-provider).
-- Do not use `InputProvider` within your components. It is meant to be a higher order component
-  wrapping a whole application of Canvas components
+- Do not use `InputProvider` within your components. It is meant to be used only once in your
+  application. It does not require wrapping any children
 - Make sure you provide fully accessible styling by default, and only override for mouse usage.
+-
 
 ```tsx
 [`[data-whatinput='mouse'] &:focus,

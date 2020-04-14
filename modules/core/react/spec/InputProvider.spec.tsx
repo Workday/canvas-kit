@@ -41,12 +41,12 @@ const testInput = (
   map[eventType](mockEvent);
 
   if (!provideIntent) {
-    expect(component.getDOMNode().getAttribute('data-whatinput')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatinput')).toBe(expectedInputType);
   } else if (expectedInputType) {
-    expect(component.getDOMNode().getAttribute('data-whatinput')).toBe(expectedInputType);
-    expect(component.getDOMNode().getAttribute('data-whatintent')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatinput')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatintent')).toBe(expectedInputType);
   } else if (expectedIntentType) {
-    expect(component.getDOMNode().getAttribute('data-whatintent')).toBe(expectedIntentType);
+    expect(document.body.getAttribute('data-whatintent')).toBe(expectedIntentType);
   }
   component.unmount();
 };
@@ -200,15 +200,18 @@ describe('InputProvider', () => {
     testInput(mockEvent, expectedInputType, expectedInputType, shimmedWindowProps);
   });
 
-  test(`nested input provider should not attach events and remove itself from the DOM`, () => {
+  test(`Multiple input provider should only attach once to the dom`, () => {
+    const ref = React.createRef<HTMLButtonElement>();
     const component = mount(
-      <InputProvider>
-        <InputProvider>
-          <h1>Test</h1>
-        </InputProvider>
-      </InputProvider>
+      <div>
+        <InputProvider></InputProvider>
+        <h1>Test</h1>
+        <button ref={ref}></button>
+        <InputProvider container={ref}></InputProvider>
+      </div>
     );
-    expect(component.find('.wdc-input-provider').length).toBe(1);
+
+    expect(document.querySelectorAll('[data-whatinput]').length).toBe(1);
     component.unmount();
   });
 });
