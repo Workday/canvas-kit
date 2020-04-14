@@ -2,7 +2,6 @@ import * as React from 'react';
 import {colors, spacing} from '@workday/canvas-kit-react-core';
 import styled from '@emotion/styled';
 import {useTab} from './Tabs';
-import {TabPanelProps} from './TabPanel';
 import {TabProps} from './Tab';
 
 const TabsListContainer = styled('div')({

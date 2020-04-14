@@ -35,7 +35,7 @@ const Container = styled('div')<{isSelected: boolean}>(
 
 export interface TabProps {
   children: React.ReactNode;
-  index?: number;
+  index: number;
 }
 
 const Tab: React.FC<TabProps> = ({children, index = 0}: TabProps) => {

@@ -20,8 +20,8 @@ import Tabs, {TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-
 
   <Tabs>
     <TabList>
-      <Tab>Tab</Tab>
-      <Tab>Tab Number Two</Tab>
+      <Tab index={0}>Tab</Tab>
+      <Tab index={1}>Tab Number Two</Tab>
     </TabList>
     <TabPanels>
       <TabPanel key="1" index={0}>

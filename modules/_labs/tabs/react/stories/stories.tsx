@@ -11,11 +11,11 @@ storiesOf('Labs/Tabs', module)
     <div className="story">
       <Tabs>
         <TabList>
-          <Tab>Tab</Tab>
-          <Tab>Tab Medium</Tab>
-          <Tab>Tab Really Long</Tab>
-          <Tab>Tab Really Really Long</Tab>
-          <Tab>Tab</Tab>
+          <Tab index={0}>Tab</Tab>
+          <Tab index={1}>Tab Medium</Tab>
+          <Tab index={2}>Tab Really Long</Tab>
+          <Tab index={3}>Tab Really Really Long</Tab>
+          <Tab index={4}>Tab</Tab>
         </TabList>
         <TabPanels>
           <TabPanel key="1" index={0}>

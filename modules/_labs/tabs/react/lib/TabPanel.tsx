@@ -3,7 +3,7 @@ import {useTab} from './Tabs';
 
 export interface TabPanelProps {
   children: React.ReactNode;
-  index?: number;
+  index: number;
 }
 
 const TabPanel: React.FC<TabPanelProps> = ({children, index = 0}: TabPanelProps) => {
