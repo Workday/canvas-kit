@@ -80,7 +80,7 @@ const SwitchInput = styled('input')<SwitchProps>(
       '&:focus': {
         outline: 'none',
         '& ~ div:first-of-type': {
-          ...focusRing(theme, {separation: 2, animate: false}),
+          ...focusRing({separation: 2, animate: false}, theme),
         },
       },
       '& ~ div:first-of-type': {
@@ -90,7 +90,7 @@ const SwitchInput = styled('input')<SwitchProps>(
           0 0 0 5px ${errorColors.outer}`,
       },
       '&:focus ~ div:first-of-type': {
-        ...focusRing(theme, {separation: 2, animate: false}),
+        ...focusRing({separation: 2, animate: false}, theme),
       },
     };
     return {
