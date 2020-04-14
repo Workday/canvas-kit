@@ -7,7 +7,7 @@ const dependency = 'cypress';
 
 const lockContents = fs.readFileSync(path.join(process.cwd(), 'yarn.lock')).toString();
 
-const regex = new RegExp(`\\n${dependency}@[^:]+:\\n\\s+version "([0-9.]+)"`);
+const regex = new RegExp(`\\n"?${dependency}@[^:]+"?:\\n\\s+version:? "?([0-9.]+)"?`);
 
 console.log(
   lockContents
