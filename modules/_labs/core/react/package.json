@@ -54,7 +54,7 @@
     "@workday/canvas-kit-react-core": "^4.0.0-beta.1",
     "chroma-js": "^2.1.0",
     "emotion-theming": "^10.0.10",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.14"
   },
   "devDependencies": {
     "@workday/canvas-system-icons-web": "^1.0.20"
