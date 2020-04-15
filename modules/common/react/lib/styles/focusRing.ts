@@ -14,13 +14,13 @@ interface FocusRingOptions {
 }
 
 function calculateFocusRing({
-  width = 2,
-  separation = 0,
+  width,
+  separation,
   animate,
   inset,
   innerColor,
   outerColor,
-}: FocusRingOptions): CSSObject {
+}: Omit<Required<FocusRingOptions>, 'memoize'>): CSSObject {
   const endingInnerShadow = (inset ? 'inset ' : '') + '0 0 0 ' + separation + 'px ' + innerColor;
   const endingOuterShadow =
     (inset ? 'inset ' : '') + '0 0 0 ' + (width + separation) + 'px ' + outerColor;
@@ -66,15 +66,7 @@ export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.s
  * @returns {CSSObject} the css object for the focus ring style
  */
 export default function focusRing(
-  options: FocusRingOptions = {
-    width: 2,
-    separation: 0,
-    animate: true,
-    inset: false,
-    innerColor: canvas.colors.frenchVanilla100,
-    outerColor: defaultCanvasTheme.palette.common.focusOutline,
-    memoize: true,
-  },
+  options: FocusRingOptions,
   theme: CanvasTheme = defaultCanvasTheme
 ): CSSObject {
   const {
@@ -87,7 +79,7 @@ export default function focusRing(
     memoize = true,
   } = options;
 
-  const args: FocusRingOptions = {
+  const args = {
     width: width,
     separation: separation,
     innerColor: innerColor,
