@@ -13,9 +13,10 @@ export interface GrowthBehavior {
  */
 export interface OverflowBehavior {
   /**
-   * 'wrap' if the text should wrap. 'truncate' if it should ellipsize. undefined if it should behave normally.
+   * 'wrap' if the text should wrap. `undefined` if it should behave normally.
+   * Note: this is not a boolean so that we can add truncation support without a breaking change.
    */
-  overflow?: 'wrap' | 'truncate';
+  overflow?: 'wrap';
 }
 
 /**

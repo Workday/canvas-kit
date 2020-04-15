@@ -185,11 +185,7 @@ storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
   .add('Overflow', () => (
     <ComponentStatesTable
       rowProps={permutateProps({
-        overflow: [
-          {value: 'default', label: 'Default'},
-          {value: 'truncate', label: 'Truncated'},
-          {value: 'wrap', label: 'Wrapped'},
-        ],
+        overflow: [{value: 'default', label: 'Default'}, {value: 'wrap', label: 'Wrapped'}],
       })}
       columnProps={permutateProps({
         labelPosition: [

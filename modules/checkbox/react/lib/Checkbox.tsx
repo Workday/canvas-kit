@@ -282,13 +282,6 @@ const CheckboxLabel = styled('label')<{
       return {
         wordWrap: 'break-word',
       };
-    } else if (overflow === 'truncate') {
-      return {
-        width: '100%',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      };
     }
     return;
   }
