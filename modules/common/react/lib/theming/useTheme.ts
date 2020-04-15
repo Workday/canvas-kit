@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {ThemeContext} from '@emotion/core';
-import {CanvasTheme} from './types';
-import {defaultCanvasTheme} from './theme';
+import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-labs-react-core';
 
 /**
  * Hook function to get the correct theme object.
@@ -16,7 +15,7 @@ import {defaultCanvasTheme} from './theme';
  * ThemeProvider or context exists.
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
-export function useTheme(theme?: Object): CanvasTheme {
+export default function useTheme(theme?: Object): CanvasTheme {
   if (theme && Object.keys(theme).length !== 0) {
     return theme as CanvasTheme;
   }

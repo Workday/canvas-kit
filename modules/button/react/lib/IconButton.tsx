@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Themeable, CanvasTheme, useTheme} from '@workday/canvas-kit-labs-react-core';
+import {Themeable, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import {themedFocusRing} from '@workday/canvas-kit-react-common';
+import {focusRing, useTheme} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {IconButtonVariant, ButtonColors} from './types';
@@ -174,7 +174,7 @@ const getIconButtonColors = (
         },
         focus: {
           icon: toggled ? theme.palette.primary.main : colors.licorice500,
-          focusRing: themedFocusRing(theme),
+          focusRing: focusRing({}, theme),
         },
         disabled: {
           icon: toggled ? theme.palette.primary.light : colors.soap600,
@@ -197,11 +197,14 @@ const getIconButtonColors = (
         focus: {
           background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
-          focusRing: themedFocusRing(theme, {
-            separation: 2,
-            innerColor: 'currentColor',
-            outerColor: theme.palette.primary.contrast,
-          }),
+          focusRing: focusRing(
+            {
+              separation: 2,
+              innerColor: 'currentColor',
+              outerColor: theme.palette.primary.contrast,
+            },
+            theme
+          ),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'transparent',
@@ -225,11 +228,14 @@ const getIconButtonColors = (
         focus: {
           background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
-          focusRing: themedFocusRing(theme, {
-            separation: 2,
-            innerColor: 'currentColor',
-            outerColor: theme.palette.primary.contrast,
-          }),
+          focusRing: focusRing(
+            {
+              separation: 2,
+              innerColor: 'currentColor',
+              outerColor: theme.palette.primary.contrast,
+            },
+            theme
+          ),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'rgba(0, 0, 0, 0.2)',
