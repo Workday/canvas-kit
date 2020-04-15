@@ -35,6 +35,10 @@
     "workday",
     "tabs"
   ],
+  "dependencies": {
+    "@workday/canvas-kit-react-core": "^3.6.0",
+    "@emotion/styled": "^10.0.27"
+  },
   "peerDependencies": {
     "react": ">= 16.8 < 17"
   }
