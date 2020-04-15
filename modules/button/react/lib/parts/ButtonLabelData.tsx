@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-labs-react-core';
+import {styled} from '@workday/canvas-kit-react-common';
 
 export const buttonLabelDataClassName = 'button-label-data';
 

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
-import {styled, type} from '@workday/canvas-kit-labs-react-core';
+import {type} from '@workday/canvas-kit-labs-react-core';
 import {TextButtonVariant} from './types';
+import {styled} from '@workday/canvas-kit-react-common';
 
 export interface HyperlinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**

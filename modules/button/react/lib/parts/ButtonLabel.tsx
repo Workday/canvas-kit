@@ -1,4 +1,4 @@
-import {styled} from '@workday/canvas-kit-labs-react-core';
+import {styled} from '@workday/canvas-kit-react-common';
 
 export const ButtonLabel = styled('span')({
   position: 'relative', // Fixes an IE issue with text within button moving on click

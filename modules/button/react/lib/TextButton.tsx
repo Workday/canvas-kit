@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Themeable, CanvasTheme, useTheme, type} from '@workday/canvas-kit-labs-react-core';
-import {themedFocusRing} from '@workday/canvas-kit-react-common';
+import {Themeable, CanvasTheme, type} from '@workday/canvas-kit-labs-react-core';
+import {focusRing, useTheme} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TextButtonVariant, ButtonIconPosition, ButtonColors} from './types';
@@ -58,7 +58,7 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
         focus: {
           icon: theme.palette.primary.dark,
           label: theme.palette.primary.dark,
-          focusRing: themedFocusRing(theme),
+          focusRing: focusRing({}, theme),
         },
         disabled: {
           background: 'transparent',
@@ -87,11 +87,14 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
           background: colors.frenchVanilla100,
           icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          focusRing: themedFocusRing(theme, {
-            separation: 2,
-            innerColor: 'currentColor',
-            outerColor: colors.frenchVanilla100,
-          }),
+          focusRing: focusRing(
+            {
+              separation: 2,
+              innerColor: 'currentColor',
+              outerColor: colors.frenchVanilla100,
+            },
+            theme
+          ),
         },
         disabled: {
           background: 'transparent',

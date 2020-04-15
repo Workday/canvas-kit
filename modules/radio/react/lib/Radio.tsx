@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {themedFocusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {Themeable} from '@workday/canvas-kit-labs-react-core';
+import {focusRing, mouseFocusBehavior, styled} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
@@ -134,11 +134,11 @@ const RadioInput = styled('input')<RadioProps>(
       },
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...themedFocusRing(theme, {width: 2, separation: 2}),
+      ...focusRing({separation: 2}, theme),
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        ...themedFocusRing(theme, {width: 0}),
+        ...focusRing({width: 0}, theme),
         borderWidth: '1px',
         borderColor: checked ? theme.palette.primary.main : inputColors.border,
       },

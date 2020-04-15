@@ -34,7 +34,7 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
 
     '&:focus': {
       outline: 'none',
-      ...focusRing(2, 2),
+      ...focusRing({separation: 2}),
     },
   },
   ({isSelected}) => ({

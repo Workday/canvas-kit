@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useTheme} from './theming/useTheme';
+import {useTheme} from '@workday/canvas-kit-react-common';
 import CanvasProvider from './CanvasProvider';
 import {CanvasTheme} from './theming';
 
