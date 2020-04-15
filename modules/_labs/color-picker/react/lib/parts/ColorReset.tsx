@@ -41,7 +41,7 @@ const Container = styled('button')({
   },
 
   '&:focus': {
-    ...focusRing({}),
+    ...focusRing(),
   },
   ...hideMouseFocus,
 });
