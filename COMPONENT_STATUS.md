@@ -27,16 +27,17 @@ part of Canvas.
 | [Button - Standard](modules/button)            | :white_check_mark: | :white_check_mark: |       [:blue_book:](https://design.workday.com/components/buttons/buttons)        |
 | [Button - Drop Down](modules/button)           | :white_check_mark: | :white_check_mark: |       [:blue_book:](https://design.workday.com/components/buttons/buttons)        |
 | [Button - Icon](modules/button)                | :white_check_mark: | :white_check_mark: |     [:blue_book:](https://design.workday.com/components/buttons/icon-buttons)     |
-| [Button - Text](modules/button)                | :white_check_mark: |     :clock330:     |     [:blue_book:](https://design.workday.com/components/buttons/text-buttons)     |
+| [Button - Text](modules/button)                | :white_check_mark: | :white_check_mark: |     [:blue_book:](https://design.workday.com/components/buttons/text-buttons)     |
 | [Action Bar](modules/action-bar)               | :white_check_mark: | :white_check_mark: |      [:blue_book:](https://design.workday.com/components/buttons/action-bar)      |
 | **Containers**                                 |                    |                    |                                                                                   |
 | [Card](modules/card)                           | :white_check_mark: | :white_check_mark: |       [:blue_book:](https://design.workday.com/components/containers/cards)       |
-| Tabs                                           |                    |                    |                                                                                   |
+| [Drawer](modules/_labs/drawer/react) | :microscope:  | | |
 | [Table](modules/table)                         | :white_check_mark: | :white_check_mark: |      [:blue_book:](https://design.workday.com/components/containers/tables)       |
 | **Form Elements**                              |                    |                    |                                                                                   |
 | [Form Field](modules/form-field)               | :white_check_mark: | :white_check_mark: |                                                                                   |
 | [Checkbox](modules/checkbox)                   | :white_check_mark: | :white_check_mark: |   [:blue_book:](https://design.workday.com/components/form-elements/checkboxes)   |
 | [Color Input]([modules/color-picker)           | :white_check_mark: |                    |  [:blue_book:](https://design.workday.com/components/form-elements/color-input)   |
+| [Color Picker]([modules/_labs/color-picker/react)           | :microscope: |                    |   |
 | Date Input                                     |                    |                    |                                                                                   |
 | [Drop Down Select](modules/select)             | :white_check_mark: | :white_check_mark: |                                                                                   |
 | Numeric Input                                  |                    |                    |                                                                                   |
@@ -46,15 +47,20 @@ part of Canvas.
 | [Switch](modules/switch)                       | :white_check_mark: |                    |                                                                                   |
 | Slider                                         |                    |                    |                                                                                   |
 | **Indicators**                                 |                    |                    |                                                                                   |
-| [Banners](modules/banner)                      | :white_check_mark: | :white_check_mark: |      [:blue_book:](https://design.workday.com/components/indicators/banners)      |
+| [Avatar](modules/avatar)                      | :white_check_mark: |  |    |
+| Badge           |  |                    |    |
+| [Banner](modules/banner)                      | :white_check_mark: | :white_check_mark: |      [:blue_book:](https://design.workday.com/components/indicators/banners)      |
 | [Loading Animation](modules/loading-animation) | :white_check_mark: | :white_check_mark: | [:blue_book:](https://design.workday.com/components/indicators/loading-animation) |
-| [Skeleton Loader](modules/skeleton)            | :white_check_mark: |                    |  [:blue_book:](https://design.workday.com/components/indicators/skeleton-loader)  |
+| Pill            |  |                    |    |
 | Progress Bar                                   |                    |                    |                                                                                   |
+| [Skeleton Loader](modules/skeleton)            | :white_check_mark: |                    |  [:blue_book:](https://design.workday.com/components/indicators/skeleton-loader)  |
 | [Status Indicator](modules/status-indicator)   | :white_check_mark: |                    | [:blue_book:](https://design.workday.com/components/indicators/status-indicators) |
 | **Navigation**                                 |                    |                    |                                                                                   |
 | [Header](modules/_labs/header)                 |    :microscope:    |                    |      [:blue_book:](https://design.workday.com/components/navigation/headers)      |
 | [Page Header](modules/page-header)             | :white_check_mark: | :white_check_mark: |    [:blue_book:](https://design.workday.com/components/navigation/page-header)    |
+| [Pagination](modules/_labs/pagination/react)               | :microscope:  |                    |                                                                                   |
 | [Side Panel](modules/side-panel)               | :white_check_mark: |                    |                                                                                   |
+| Tabs                                           |                    |                    |                                                                                   |
 | **Popups**                                     |                    |                    |                                                                                   |
 | [Cookie Banner](modules/cookie-banner)         | :white_check_mark: |                    |                                                                                   |
 | [Modal](modules/modal)                         | :white_check_mark: | :white_check_mark: |                                                                                   |
