@@ -52,7 +52,7 @@ jobs:
         run: yarn build-storybook
 
       - name: Start Server
-        run: yarn http-server docs -p 9001 & npx wait-on http://localhost:9001
+        run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
 
       - uses: chromaui/action@v1
         with:
