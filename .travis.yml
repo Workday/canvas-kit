@@ -3,25 +3,13 @@ language: node_js
 node_js:
   - "10"
 
-# if using Ubuntu 16 need this library
-# https://github.com/cypress-io/cypress-documentation/pull/1647
-addons:
-  apt:
-    packages:
-    - libgconf-2-4
-
-# cache both yarn and Cypress binary
 cache:
   npm: false # Caching npm makes yarn install faster but downloading and packaging up the cache makes this slower when enabled
-  directories:
-    - ~/.cache
 
 git:
   depth: false
 
 stages:
-- name: pull_request
-  if: type = pull_request
 
 - name: master
   if: branch = master AND type != pull_request
@@ -38,26 +26,6 @@ install:
 
 jobs:
   include:
-  - stage: pull_request
-    script:
-      - >-
-        yarn run-p -l
-        lint
-        depcheck
-        test
-      - >- # Chromatic and Cypress rely on Storybook being built, this will exit early if build-storybook fails
-        yarn build-storybook &&
-        yarn http-server docs -p 9001 & npx wait-on http://localhost:9001 &&
-        yarn run-p -l
-        "chromatic -- --quiet --exit-zero-on-changes --exit-once-uploaded --storybook-build-dir docs"
-        "cypress:run -- --record" &&
-        kill $(jobs -p) || true
-    env:
-      # Travis doesn't support encryption on forks: https://docs.travis-ci.com/user/pull-requests#pull-requests-and-security-restrictions
-      # If these keys become compromised, we will rotate and disable these features
-      # on forked PRs until a suitable workaround is found
-      - CHROMATIC_APP_CODE="dlpro96xybh"
-      - CYPRESS_RECORD_KEY="3a9347b6-36ab-4a36-823d-709f4078b148"
 
   - stage: tag
     script:
