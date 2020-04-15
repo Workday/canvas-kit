@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const colors = require('colors');
 const depCheck = require('depcheck');
@@ -42,52 +43,94 @@ const labelMap = {
   },
 };
 
-function formatErrorMessage(errors) {
-  return (
-    `${errors.file}\n` +
-    Object.keys(errors)
-      .map(key => {
-        if (key === 'file') return;
+/**
+ *
+ * @param {string} contents
+ * @param {string} str
+ */
+function findLineInFile(contents, str) {
+  const lines = contents.split('\n');
+  return lines.findIndex(l => l.includes(str)) + 1;
+}
 
-        if (errors[key].constructor === Object) {
-          if (key.startsWith('invalid')) {
-            return Object.keys(errors[key])
-              .map(file => {
-                const line = errors[key][file].line;
-                const column = errors[key][file].column;
-                const message = errors[key][file].formatted;
+/**
+ *
+ * @param {string} contents
+ * @param {string} str
+ */
+function findCharacterInFile(contents, str) {
+  const lines = contents.split('\n');
+  const line = lines.find(l => l.includes(str));
+  if (line) {
+    return line.indexOf(str) + 1;
+  } else {
+    return 1;
+  }
+}
 
-                return (
-                  labelMap[key].color(labelMap[key].label.padEnd(20)) +
-                  colors.dim(`  ${line}:${column}  `) +
-                  message
-                );
-              })
-              .join('\n');
-          }
+/**
+ * @typedef {{
+ *   dependencies?: string[],
+ *   devDependencies?: string[],
+ *   missing?: { [key: string]: string[] },
+ * }} DependencyErrors
+ */
+
+/**
+ * @param {string} pkgFile
+ * @param {DependencyErrors} errors
+ */
+function formatErrorMessage(pkgFile, errors) {
+  return Object.keys(errors)
+    .map((/** @type keyof DependencyErrors */ key) => {
+      if (errors[key].constructor === Object) {
+        if (key.startsWith('invalid')) {
           return Object.keys(errors[key])
-            .map(pkg =>
-              errors[key][pkg]
-                .map(
-                  errorFile =>
-                    `${labelMap[key].color(labelMap[key].label.padEnd(20))}  ${colors.cyan(
-                      pkg
-                    )}  ${colors.dim(errorFile)}`
-                )
-                .join('\n')
-            )
-            .join('\n');
-        } else {
-          return errors[key]
-            .map(
-              error =>
-                `${labelMap[key].color(labelMap[key].label.padEnd(20))}  ${colors.cyan(error)}`
-            )
+            .map(file => {
+              const line = errors[key][file].line;
+              const column = errors[key][file].column;
+              const message = errors[key][file].formatted;
+
+              return (
+                labelMap[key].color(labelMap[key].label.padEnd(20)) +
+                colors.dim(`  ${line}:${column}  `) +
+                message
+              );
+            })
             .join('\n');
         }
-      })
-      .join('\n')
-  );
+        return Object.keys(errors[key])
+          .map(packageName => {
+            return errors[key][packageName]
+              .map(errorFile => {
+                const contents = fs.readFileSync(errorFile).toString();
+                const line = findLineInFile(contents, packageName);
+                const char = findCharacterInFile(contents, packageName);
+
+                return `${errorFile}\n  ${colors.dim(`${line}:${char}`)}  ${colors.red(
+                  'error'
+                )}  ${colors.yellow(packageName)} is missing from ${pkgFile}  ${colors.dim(
+                  'check-dependencies-exist'
+                )}`;
+              })
+              .join('\n');
+          })
+          .join('\n');
+      } else if (key === 'dependencies' || key === 'devDependencies') {
+        const contents = fs.readFileSync(pkgFile).toString();
+        return errors[key]
+          .map(packageName => {
+            const line = findLineInFile(contents, packageName);
+            const char = findCharacterInFile(contents, packageName);
+
+            return `  ${colors.dim(`${line}:${char}`)}  ${colors.red('error')}  ${colors.yellow(
+              packageName
+            )} is not used in code  ${colors.dim('check-dependencies-exist')}`;
+          })
+          .join('\n');
+      }
+    })
+    .join('\n\n');
 }
 
 const modulePath = process.cwd();
@@ -123,12 +166,11 @@ depCheck(modulePath, depCheckOptions, unused => {
     return;
   }
 
-  const result = {
-    file: modulePath + '/package.json',
-  };
+  const file = modulePath + '/package.json';
+  const result = {};
   errorKeys.forEach(key => (result[key] = unused[key]));
 
-  console.log(formatErrorMessage(result) + '\n');
+  console.log(formatErrorMessage(file, result) + '\n');
   process.exit(1);
 }).catch(err => {
   console.error(err);
