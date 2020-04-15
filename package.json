@@ -51,7 +51,7 @@
     "babel-plugin-emotion": "^10.0.29",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "colors": "^1.4.0",
-    "commitizen": "^4.0.3",
+    "commitizen": "^4.0.4",
     "core-js": "^3.5.0",
     "css-loader": "^3.2.0",
     "css-mqpacker": "^7.0.0",
@@ -118,9 +118,6 @@
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
     "typescript": "^3.8.3"
-  },
-  "resolutions": {
-    "minimist": "1.2.5"
   },
   "scripts": {
     "start": "node --max-old-space-size=2048 node_modules/.bin/start-storybook -p 9001 -c .storybook",
