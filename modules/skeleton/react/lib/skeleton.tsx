@@ -8,7 +8,7 @@ export interface SkeletonProps {
    * The `aria-label` that describes loading.
    * @default 'Loading'
    */
-  loadingAriaLabel?: string;
+  'aria-label'?: string;
 }
 
 const TRANSPARENCY_POSITION = 45;
@@ -62,7 +62,7 @@ export default class Skeleton extends React.Component<SkeletonProps, SkeletonSta
   };
 
   render(): React.ReactNode {
-    const {loadingAriaLabel = 'Loading', children, ...elemProps} = this.props;
+    const {'aria-label': loadingAriaLabel = 'Loading', children, ...elemProps} = this.props;
     const {width, height} = this.state;
     const diagonal = Math.sqrt(width * width + height * height) + WHITE_SHEEN_WIDTH;
     const topPosition = (-1 * (diagonal - height)) / 2;
