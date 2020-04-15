@@ -4,8 +4,8 @@ import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-labs-react-co
 import memoize from 'lodash/memoize';
 
 interface FocusRingOptions {
-  width: number;
-  separation: number;
+  width?: number;
+  separation?: number;
   animate?: boolean;
   inset?: boolean;
   innerColor?: string;
@@ -14,8 +14,8 @@ interface FocusRingOptions {
 }
 
 function calculateFocusRing({
-  width,
-  separation,
+  width = 2,
+  separation = 0,
   animate,
   inset,
   innerColor,
