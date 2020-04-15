@@ -17,7 +17,7 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
    * The `aria-label` for the DrawHeader close button. Useful for i18n.
    * @default Close
    */
-  closeIconAriaLabel?: string;
+  'aria-label'?: string;
   /**
    * The background color of the DrawerHeader.
    */
@@ -74,7 +74,7 @@ const CloseButton = styled(IconButton)({
 export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
   public render() {
     const {
-      closeIconAriaLabel = 'Close',
+      'aria-label': closeIconAriaLabel = 'Close',
       headerColor = colors.soap100,
       borderColor = colors.soap500,
       inverse = false,

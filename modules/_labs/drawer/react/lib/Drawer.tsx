@@ -30,11 +30,11 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The `aria-labelledby` of the Drawer. Set this when there is a `header` for accessibility. The `role` attribute should also be used when this attribute is present. This value should be the same as the `id` attribute of the `header` element.
    */
-  drawerArialabelledBy?: string;
+  'aria-labelledby'?: string;
   /**
    * The `aria-label` for the Drawer. Set this when there is NO `header` for accessibility.
    */
-  drawerArialabel?: string;
+  'aria-label'?: string;
   /**
    * The role of the Drawer. If `role` is provided, you must also set `aria-labelledby` to link `header` to the `role`.
    */

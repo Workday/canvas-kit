@@ -11,7 +11,7 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   /**
    * The accessibility label to indicate the action triggered by clicking the IconButton.
    */
-  iconArialabel?: string;
+  'aria-label'?: string;
   /**
    * The type of the IconButton.
    * @default IconButtonVariant.Circle
@@ -47,7 +47,7 @@ const IconButton = ({
   size = 'medium',
   buttonRef,
   onToggleChange,
-  iconArialabel,
+  'aria-label': iconArialabel,
   icon,
   toggled,
   children,
