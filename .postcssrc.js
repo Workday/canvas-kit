@@ -1,3 +1,5 @@
+const date = new Date();
+
 module.exports = {
   map: true,
   plugins: {
@@ -5,7 +7,7 @@ module.exports = {
     autoprefixer: {},
     'css-mqpacker': {},
     'postcss-banner': {
-      banner: 'Copyright 2020 Workday, Inc.',
+      banner: `Copyright 2019-${date.getFullYear()} Workday, Inc.`,
     },
     'postcss-inline-svg': {},
   },
