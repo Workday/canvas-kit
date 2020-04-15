@@ -53,6 +53,7 @@
     "@workday/canvas-kit-labs-react-core": "^4.0.0-beta.1",
     "@workday/canvas-kit-react-core": "^4.0.0-beta.1",
     "chroma-js": "^2.1.0",
-    "lodash": "^4.17.14"
+    "lodash": "^4.17.14",
+    "rtl-css-js": "^1.13.1"
   }
 }
