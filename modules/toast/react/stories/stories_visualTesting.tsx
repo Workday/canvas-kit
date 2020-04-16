@@ -3,6 +3,7 @@
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
+import {colors} from '@workday/canvas-kit-react-core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
@@ -13,16 +14,29 @@ const IconButtonStates = () => (
     <div>
       <StaticStates>
         <ComponentStatesTable
-          rowProps={permutateProps({
-            onClose: [{value: null, label: 'On Close'}],
-          })}
+          rowProps={[
+            {label: 'Default', props: {}},
+            {label: 'Custom Icon', props: {icon: exclamationCircleIcon}},
+            {
+              label: 'Custom Icon Color',
+              props: {icon: exclamationCircleIcon, iconColor: colors.cinnamon500},
+            },
+            {label: 'On Close', props: {onClose: () => console.warn('clicked')}},
+            {
+              label: 'With Action Link',
+              props: {
+                onActionClick: () => console.warn('clicked'),
+                actionText: 'View More Details',
+              },
+            },
+          ]}
           columnProps={permutateProps({
-            Default: [{label: 'Default', value: ''}],
+            Default: [{value: undefined, label: 'Default'}],
           })}
         >
           {props => (
-            <Toast icon={exclamationCircleIcon} aria-label="Play" {...props}>
-              The workbook
+            <Toast aria-label="Play" {...props}>
+              Your workbook was successfully processed.
             </Toast>
           )}
         </ComponentStatesTable>
