@@ -61,7 +61,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    * The `aria-label` for the Popup close button. This props is also used for the title of the icon
    * @default Close
    */
-  'aria-label'?: string;
+  closeButtonAriaLabel?: string;
 }
 
 const closeIconSpacing = spacing.xs;
@@ -118,7 +118,7 @@ export default class Popup extends React.Component<PopupProps> {
     const {
       padding = Popup.Padding.l,
       closeIconSize = 'medium',
-      'aria-label': closeButtonAriaLabel = 'Close',
+      closeButtonAriaLabel = 'Close',
       transformOrigin = {
         horizontal: 'center',
         vertical: 'top',
