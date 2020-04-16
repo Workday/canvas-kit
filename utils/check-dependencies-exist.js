@@ -118,16 +118,19 @@ function formatErrorMessage(pkgFile, errors) {
           .join('\n');
       } else if (key === 'dependencies' || key === 'devDependencies') {
         const contents = fs.readFileSync(pkgFile).toString();
-        return errors[key]
-          .map(packageName => {
-            const line = findLineInFile(contents, packageName);
-            const char = findCharacterInFile(contents, packageName);
+        return (
+          `${pkgFile}\n` +
+          errors[key]
+            .map(packageName => {
+              const line = findLineInFile(contents, packageName);
+              const char = findCharacterInFile(contents, packageName);
 
-            return `  ${colors.dim(`${line}:${char}`)}  ${colors.red('error')}  ${colors.yellow(
-              packageName
-            )} is not used in code  ${colors.dim('check-dependencies-exist')}`;
-          })
-          .join('\n');
+              return `  ${colors.dim(`${line}:${char}`)}  ${colors.red('error')}  ${colors.yellow(
+                packageName
+              )} is not used in code  ${colors.dim('check-dependencies-exist')}`;
+            })
+            .join('\n')
+        );
       }
     })
     .join('\n\n');
@@ -170,7 +173,7 @@ depCheck(modulePath, depCheckOptions, unused => {
   const result = {};
   errorKeys.forEach(key => (result[key] = unused[key]));
 
-  console.log(formatErrorMessage(file, result) + '\n');
+  console.log(`\n${formatErrorMessage(file, result)}\n`);
   process.exit(1);
 }).catch(err => {
   console.error(err);
