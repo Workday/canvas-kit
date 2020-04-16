@@ -1,10 +1,9 @@
+import get from 'lodash/get';
 import {default as colors, typeColors, statusColors} from '@workday/canvas-colors-web';
 import {borderRadius} from './radius';
 import {CSSProperties} from './types';
 
-const inheritFont =
-  // @ts-ignore
-  window.workday && window.workday.canvas && window.workday.canvas.inheritFontFamily;
+const inheritFont = get(window, 'window.workday.canvas.inheritFontFamily');
 export const fontFamily = inheritFont
   ? 'inherit'
   : '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
