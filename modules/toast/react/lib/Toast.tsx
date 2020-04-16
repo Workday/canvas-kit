@@ -97,6 +97,9 @@ export default class Toast extends React.Component<ToastProps> {
         padding={PopupPadding.s}
         handleClose={onClose}
         closeIconSize={IconButtonSize.Small}
+        role={!onClose && !onActionClick ? 'status' : undefined}
+        aria-live={!onClose && !onActionClick ? 'polite' : undefined}
+        aria-atomic={!onClose && !onActionClick ? true : undefined}
         {...elemProps}
       >
         <ToastContentContainer onClose={onClose}>

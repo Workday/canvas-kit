@@ -45,7 +45,7 @@ const IconButtonStates = () => (
   </React.Fragment>
 );
 
-storiesOf('Components|Popups/Toast/React/Visual Testing/Toast', module)
+storiesOf('Components|Popups/Toast/React/Visual Testing | States', module)
   .addParameters({
     component: Toast,
     chromatic: {
