@@ -30,3 +30,4 @@ docs
 
 # cypress
 cypress/videos
+cypress/screenshots

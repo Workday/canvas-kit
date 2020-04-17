@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-labs-react-core';
 import {spacing} from '@workday/canvas-kit-react-core';
 import isPropValid from '@emotion/is-prop-valid';
 import {ButtonIconPosition} from '../types';
 import {ButtonProps} from '../Button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {styled} from '@workday/canvas-kit-react-common';
 
 export interface ButtonLabelIconProps extends Pick<ButtonProps, 'size' | 'icon'> {
   dropdown?: boolean;

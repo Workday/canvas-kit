@@ -61,8 +61,8 @@ storiesOf('Labs|Color Picker/React', module)
     const [color, setColor] = React.useState(defaultColor);
     const [colorInputValidColor, setColorInputValidColor] = React.useState(defaultColor);
     const [colorInputValue, setColorInputValue] = React.useState(defaultColor);
-    const inputRef = React.useRef(null);
-    const popupRef = React.useRef(null);
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    const popupRef = React.useRef<HTMLDivElement>(null);
 
     const resetColor = () => {
       setColor(defaultColor);
@@ -92,8 +92,7 @@ storiesOf('Labs|Color Picker/React', module)
     ];
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      // @ts-ignore
-      if (!popupRef.current || !popupRef.current.popper.popper.contains(e.relatedTarget)) {
+      if (!popupRef.current || !popupRef.current.contains(e.relatedTarget as Node)) {
         setOpen(false);
       }
     };

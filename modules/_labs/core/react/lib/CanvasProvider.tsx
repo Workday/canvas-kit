@@ -20,12 +20,10 @@ export default class CanvasProvider extends React.Component<CanvasProviderProps>
 
   render() {
     const {children, theme} = this.props;
-
     return (
       <ThemeProvider theme={theme}>
-        <DirectionContainer dir={theme.direction}>
-          <InputProvider>{children}</InputProvider>
-        </DirectionContainer>
+        <InputProvider />
+        <DirectionContainer dir={theme.direction}>{children}</DirectionContainer>
       </ThemeProvider>
     );
   }

@@ -69,15 +69,17 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   constructor(props: MenuProps) {
     super(props);
     this.menuRef = React.createRef();
-  }
 
-  // We track the active menu item by index so we can avoid setting a bunch of refs
-  // for doing things like selecting an item by first character (or really calling .focus() at all)
-  // It allows us to use the activedescendant design pattern
-  // https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html
-  state = {
-    selectedItemIndex: 0,
-  };
+    const selected = this.getInitialSelectedItem();
+
+    // We track the active menu item by index so we can avoid setting a bunch of refs
+    // for doing things like selecting an item by first character (or really calling .focus() at all)
+    // It allows us to use the activedescendant design pattern
+    // https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-actions-active-descendant.html
+    this.state = {
+      selectedItemIndex: selected,
+    };
+  }
 
   componentDidUpdate(prevProps: MenuProps) {
     if (this.props.children !== prevProps.children) {
@@ -307,7 +309,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     this.firstCharacters = firstCharacters;
   };
 
-  private setInitialSelectedItem = () => {
+  private getInitialSelectedItem = (): number => {
     let selected = this.props.initialSelectedItem || 0;
     selected = selected < 0 ? React.Children.count(this.props.children) + selected : selected;
     if (selected < 0) {
@@ -315,6 +317,12 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     } else if (selected > React.Children.count(this.props.children) - 1) {
       selected = React.Children.count(this.props.children) - 1;
     }
+
+    return selected;
+  };
+
+  private setInitialSelectedItem = () => {
+    const selected = this.getInitialSelectedItem();
     this.setState({selectedItemIndex: selected});
   };
 }

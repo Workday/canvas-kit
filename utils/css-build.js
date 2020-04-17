@@ -19,15 +19,15 @@ const outputDir = path.join(cwd, 'dist');
 const outputFile = path.join(outputDir, moduleName + '.css');
 const outputFileMin = path.join(outputDir, moduleName + '.min.css');
 const outputStats = path.join(outputDir, 'stats.json');
-const postcssConfig = require('../.postcss.json');
+const postcssConfig = require('../.postcssrc.js');
 const nodeModules = path.resolve(__dirname, '../node_modules');
 
 // Make the build directory if it doesn't exist
 mkdirp(outputDir);
 
-const postcssPlugins = Object.keys(postcssConfig.build).map(plugin => {
+const postcssPlugins = Object.keys(postcssConfig.plugins).map(plugin => {
   const name = plugin;
-  const options = postcssConfig.build[plugin];
+  const options = postcssConfig.plugins[plugin];
 
   if (name === 'postcss-banner') {
     const banner = options.banner;
