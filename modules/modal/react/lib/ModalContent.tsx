@@ -215,6 +215,7 @@ const ModalContent = ({
         handleClose={handleClose}
         padding={padding}
         transformOrigin={transformOrigin}
+        aria-modal={true}
       >
         {children}
       </Popup>
