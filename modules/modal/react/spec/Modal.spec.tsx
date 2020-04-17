@@ -22,6 +22,7 @@ describe('Modal', () => {
     const {getByRole} = renderModal({['data-propspread']: 'test'});
     expect(getByRole('dialog').parentElement).toHaveAttribute('data-propspread', 'test');
   });
+
   test('Modal should replace aria-labeldBy with custom aria-label', () => {
     const customAriaLabel = 'custom aria label';
     const {getByRole} = renderModal({ariaLabel: customAriaLabel});
