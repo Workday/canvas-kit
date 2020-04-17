@@ -47,6 +47,7 @@ const IconButton = ({
   size = 'medium',
   buttonRef,
   onToggleChange,
+  'aria-label': iconArialabel,
   icon,
   toggled,
   children,
@@ -91,6 +92,7 @@ const IconButton = ({
       fillIcon={toggled}
       extraStyles={containerStyles}
       aria-pressed={toggled}
+      aria-label={iconArialabel}
       {...elemProps}
     >
       {icon ? <SystemIcon icon={icon} /> : children}
@@ -129,7 +131,7 @@ const getIconButtonColors = (
           icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         focus: {
-          background: toggled ? theme.palette.primary.dark : colors.soap300,
+          background: toggled ? theme.palette.primary.main : undefined,
           icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         disabled: {
@@ -153,7 +155,7 @@ const getIconButtonColors = (
           icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         focus: {
-          background: toggled ? theme.palette.primary.dark : colors.soap400,
+          background: toggled ? theme.palette.primary.main : colors.soap200,
           icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
         },
         disabled: {
@@ -195,7 +197,7 @@ const getIconButtonColors = (
           icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
         },
         focus: {
-          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
+          background: toggled ? theme.palette.primary.contrast : undefined,
           icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
           focusRing: focusRing(
             {

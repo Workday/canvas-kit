@@ -25,14 +25,20 @@
   }
 
   &:hover:not([disabled]) {
-    background-color: transparent;
+    background-color: $wdc-color-soap-200;
     text-decoration: underline;
     color: $wdc-btn-text-hover;
     @include wdc-icon-color($wdc-btn-text-hover);
   }
 
-  &:focus {
+  &:focus:not([disabled]) {
     background-color: transparent;
+    @include wdc-icon-color($wdc-btn-text-hover);
+  }
+
+  &:active:not([disabled]) {
+    color: $wdc-btn-text-hover;
+    background-color: $wdc-color-soap-300;
     @include wdc-icon-color($wdc-btn-text-hover);
   }
 
@@ -69,9 +75,16 @@
       @include wdc-icon-color(rgba(255, 255, 255, 0.5));
     }
 
-    &:hover:not([disabled]) {
-      color: $wdc-btn-text-color-inverse;
-      @include wdc-icon-color($wdc-btn-text-color-inverse);
+    &:not([disabled]) {
+      &:hover {
+        background-color: $wdc-color-french-vanilla-100;
+        color: $wdc-color-black-pepper-400;
+        @include wdc-icon-color($wdc-btn-text-color-inverse);
+      }
+      &:active {
+        color: $wdc-color-black-pepper-400;
+        background-color: $wdc-color-soap-200;
+      }
     }
   }
 }
