@@ -47,6 +47,7 @@ const IconButton = ({
   size = 'medium',
   buttonRef,
   onToggleChange,
+  'aria-label': iconArialabel,
   icon,
   toggled,
   children,
@@ -91,6 +92,7 @@ const IconButton = ({
       fillIcon={toggled}
       extraStyles={containerStyles}
       aria-pressed={toggled}
+      aria-label={iconArialabel}
       {...elemProps}
     >
       {icon ? <SystemIcon icon={icon} /> : children}

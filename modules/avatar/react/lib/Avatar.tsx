@@ -22,7 +22,7 @@ export interface AvatarLocalProps {
    */
   size?: SystemIconCircleSize | number;
   /**
-   * The alt text of the Avatar image.
+   * The alt text of the Avatar image. This prop is also used for the aria-label
    * @default Avatar
    */
   altText?: string;

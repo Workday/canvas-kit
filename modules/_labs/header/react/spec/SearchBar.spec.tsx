@@ -34,7 +34,7 @@ describe('Header Search', () => {
   test('Searching with icon should call callback', async () => {
     const label = `submitLabel`;
     const {findByLabelText} = render(
-      <SearchBar onSubmit={cb} initialValue="world" submitLabel={label} />
+      <SearchBar onSubmit={cb} initialValue="world" submitAriaLabel={label} />
     );
 
     fireEvent.click(await findByLabelText(label));
@@ -83,8 +83,8 @@ describe('Header Search', () => {
       <SearchBar
         onSubmit={cb}
         inputLabel={inputLabel}
-        openButtonLabel={openLabel}
-        closeButtonLabel={closeLabel}
+        openButtonAriaLabel={openLabel}
+        closeButtonAriaLabel={closeLabel}
         isCollapsed={true}
       />
     );
