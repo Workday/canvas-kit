@@ -118,6 +118,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (show) {
       this.setState(
         {
+          focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
           isMenuHidden: false,
           isMenuHiding: false,
         },
@@ -256,10 +257,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    // Cancel default handling of the event to ensure we maintain
-    // control of focus
-    event.preventDefault();
-
     this.toggleMenu(this.state.isMenuHidden);
   };
 
