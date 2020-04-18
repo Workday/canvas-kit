@@ -55,7 +55,7 @@ export const assertADMatchesOption = ($listbox: JQuery, optionIndex: number): vo
  */
 export const testOpenListboxInitialState = (): void => {
   context(
-    'the menu should be visible and focused, and all accessibility attributes should be properly set',
+    'the listbox should be visible and focused, and all accessibility attributes should be properly set',
     () => {
       it('should not have any axe errors', () => {
         cy.checkA11y();

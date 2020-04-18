@@ -30,7 +30,7 @@ const options = [
   {label: 'Phone', value: 'phone'},
   {label: 'Fax (disabled)', value: 'fax', disabled: true},
   {label: 'Mail', value: 'mail'},
-  {label: 'Mobile', value: 'mobile'},
+  {label: 'Mobile Phone', value: 'mobile_phone'},
 ];
 
 const normalizedOptions = options.map(option => {

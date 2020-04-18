@@ -11,10 +11,11 @@ const typeAheadSingleIndex = 3;
 const typeAheadSingleValue = 'mail';
 const typeAheadSingleLabel = 'Mail';
 
-const typeAheadMultipleString = 'mo';
+const typeAheadMultipleShortString = 'mo';
+const typeAheadMultipleLongString = 'mobile p';
 const typeAheadMultipleIndex = 4;
-const typeAheadMultipleValue = 'mobile';
-const typeAheadMultipleLabel = 'Mobile';
+const typeAheadMultipleValue = 'mobile_phone';
+const typeAheadMultipleLabel = 'Mobile Phone';
 
 describe('Select', () => {
   before(() => {
@@ -59,7 +60,7 @@ describe('Select', () => {
             });
 
             context('the listbox', () => {
-              it('should be dismissed', () => {
+              it('should not be visible', () => {
                 h.selectLabs.getListbox().should('not.be.visible');
               });
             });
@@ -125,12 +126,12 @@ describe('Select', () => {
                 });
 
                 context('the listbox', () => {
-                  it('should be dismissed', () => {
+                  it('should not be visible', () => {
                     h.selectLabs.getListbox().should('not.be.visible');
                   });
                 });
 
-                context('when the menu is expanded again', () => {
+                context('when the listbox is expanded again', () => {
                   beforeEach(() => {
                     h.selectLabs.getListbox().type('{downarrow}');
                   });
@@ -161,7 +162,7 @@ describe('Select', () => {
 
           context(`when "${typeAheadSingleString}" is typed`, () => {
             beforeEach(() => {
-              h.selectLabs.getListbox().type('m');
+              h.selectLabs.getListbox().type(typeAheadSingleString);
             });
 
             context('the listbox', () => {
@@ -173,9 +174,9 @@ describe('Select', () => {
             });
           });
 
-          context(`when "${typeAheadMultipleString}" is typed`, () => {
+          context(`when "${typeAheadMultipleShortString}" is typed`, () => {
             beforeEach(() => {
-              h.selectLabs.getListbox().type('mo');
+              h.selectLabs.getListbox().type(typeAheadMultipleShortString);
             });
 
             context('the listbox', () => {
@@ -190,7 +191,7 @@ describe('Select', () => {
 
         context(`when "${typeAheadSingleString}" is typed`, () => {
           beforeEach(() => {
-            h.selectLabs.getButton().type('m');
+            h.selectLabs.getButton().type(typeAheadSingleString);
           });
 
           context('the select button', () => {
@@ -204,9 +205,9 @@ describe('Select', () => {
           });
         });
 
-        context(`when "${typeAheadMultipleString}" is typed`, () => {
+        context(`when "${typeAheadMultipleShortString}" is typed`, () => {
           beforeEach(() => {
-            h.selectLabs.getButton().type('mo');
+            h.selectLabs.getButton().type(typeAheadMultipleShortString);
           });
 
           context('the select button', () => {
@@ -216,6 +217,28 @@ describe('Select', () => {
 
             it(`should have a value of "${typeAheadMultipleValue}"`, () => {
               h.selectLabs.getButton().should('have.value', typeAheadMultipleValue);
+            });
+          });
+        });
+
+        context(`when "${typeAheadMultipleLongString}" is typed`, () => {
+          beforeEach(() => {
+            h.selectLabs.getButton().type(typeAheadMultipleLongString);
+          });
+
+          context('the select button', () => {
+            it(`should read "${typeAheadMultipleLabel}"`, () => {
+              h.selectLabs.getButton().should('have.text', typeAheadMultipleLabel);
+            });
+
+            it(`should have a value of "${typeAheadMultipleValue}"`, () => {
+              h.selectLabs.getButton().should('have.value', typeAheadMultipleValue);
+            });
+          });
+
+          context('the listbox', () => {
+            it('should not be visible', () => {
+              h.selectLabs.getListbox().should('not.be.visible');
             });
           });
         });
@@ -239,20 +262,19 @@ describe('Select', () => {
     });
   });
 
-  // TODO: Re-enable these tests
-  /*
-  context(`given the 'Disabled' story is rendered`, () => {
+  context(`given the "Disabled" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Select/React/Top Label', 'Disabled');
+      h.stories.load('Labs|Select/React/Top Label', 'Disabled');
     });
 
-    it('should pass accessibility checks', () => {
+    it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
-    it('should be disabled', () => {
-      getSelect().should('be.disabled');
+    context('the select button', () => {
+      it('should be disabled', () => {
+        h.selectLabs.getButton().should('be.disabled');
+      });
     });
   });
-  */
 });
