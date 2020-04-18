@@ -388,6 +388,12 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           grow={grow}
           isMenuHidden={isMenuHidden}
           onKeyDown={onKeyDown}
+          // Prevent Firefox from triggering click handler on spacebar during
+          // type-ahead when the menu is closed (and, thus, incorrectly displaying
+          // the menu)
+          onKeyUp={e => {
+            e.preventDefault();
+          }}
           ref={buttonRef}
           value={selectedOption.value}
           {...elemProps}
