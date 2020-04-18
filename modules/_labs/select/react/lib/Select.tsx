@@ -108,6 +108,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     });
   };
 
+  private focusButton = () => {
+    if (this.buttonRef.current) {
+      this.buttonRef.current.focus();
+    }
+  };
+
   private toggleMenu = (show: boolean): void => {
     // Immediately wipe out removeMenuTimer if we're toggling the menu
     // (if, for example, we're toggling the menu on while it's hiding)
@@ -133,18 +139,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       this.setState({isMenuHiding: true});
 
       this.removeMenuTimer = setTimeout(() => {
-        this.setState(
-          {
-            isMenuHidden: true,
-            isMenuHiding: false,
-          },
-          () => {
-            // Shift focus back to the button
-            if (this.buttonRef.current) {
-              this.buttonRef.current.focus();
-            }
-          }
-        );
+        this.setState({
+          isMenuHidden: true,
+          isMenuHiding: false,
+        });
       }, menuFadeDuration);
     }
   };
@@ -274,7 +272,9 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       return;
     }
 
+    // Toggle menu off, shift focus back to the button, and fire change event
     this.toggleMenu(false);
+    this.focusButton();
     this.fireChangeEvent(this.normalizedOptions[index].value);
   };
 
@@ -325,6 +325,17 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           isShortcut = true;
           nextFocusedIndex = event.key === 'Home' ? 0 : numOptions - 1;
           this.setState({focusedOptionIndex: nextFocusedIndex});
+          break;
+
+        case 'Escape':
+        case 'Tab':
+          if (!isMenuHidden) {
+            isShortcut = true;
+
+            // Toggle menu off and shift focus back to the button
+            this.toggleMenu(false);
+            this.focusButton();
+          }
           break;
 
         case 'Spacebar':
