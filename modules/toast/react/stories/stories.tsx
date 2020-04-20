@@ -1,9 +1,9 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
+import {action} from '@storybook/addon-actions';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import withReadme from 'storybook-readme/with-readme';
-
 import {colors} from '../../../core/react';
 import Toast from '../index';
 import README from '../README.md';
@@ -89,13 +89,15 @@ storiesOf('Components|Popups/Toast/React', module)
   ))
   .add('With close button', () => (
     <div className="story">
-      <Toast onClose={() => console.warn('test')}>Your workbook was successfully processed.</Toast>
+      <Toast onClose={action('close button clicked')}>
+        Your workbook was successfully processed.
+      </Toast>
     </div>
   ))
 
   .add('With action link', () => (
     <div className="story">
-      <Toast actionText={'View more details'} onActionClick={() => console.warn('test')}>
+      <Toast actionText={'View more details'} onActionClick={action('action button clicked')}>
         Your workbook was successfully processed.
       </Toast>
     </div>

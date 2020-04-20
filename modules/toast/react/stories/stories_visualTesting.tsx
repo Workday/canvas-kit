@@ -5,6 +5,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {action} from '@storybook/addon-actions';
 import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '../index';
@@ -21,11 +22,11 @@ const IconButtonStates = () => (
               label: 'Custom Icon Color',
               props: {icon: exclamationCircleIcon, iconColor: colors.cinnamon500},
             },
-            {label: 'On Close', props: {onClose: () => console.warn('clicked')}},
+            {label: 'On Close', props: {onClose: action('close button clicked')}},
             {
               label: 'With Action Link',
               props: {
-                onActionClick: () => console.warn('clicked'),
+                onActionClick: action('action button clicked'),
                 actionText: 'View More Details',
               },
             },
