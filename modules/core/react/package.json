@@ -53,6 +53,7 @@
     "@workday/canvas-colors-web": "^0.17.13",
     "@workday/canvas-depth-web": "^0.16.4",
     "@workday/canvas-space-web": "^0.15.5",
-    "element-closest": "^3.0.2"
+    "element-closest": "^3.0.2",
+    "lodash": "^4.17.14"
   }
 }
