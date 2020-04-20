@@ -30,7 +30,7 @@ export interface BannerProps extends Themeable, React.ButtonHTMLAttributes<HTMLB
    */
   error?: ErrorType;
   /**
-   * The text of the Banner action.
+   * The text of the Banner action. This prop is also used as the aria-label for the action in the banner
    * @default 'View All'
    */
   actionText?: string;

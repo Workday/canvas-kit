@@ -39,7 +39,7 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
   /**
    * The HTML `id` of the element that labels the Menu. Often used with menu buttons.
    */
-  labeledBy?: string;
+  'aria-labelledby'?: string;
 }
 
 export interface MenuState {
@@ -105,7 +105,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       id = this.id,
       isOpen = true,
       children,
-      labeledBy,
+      'aria-labelledby': ariaLabelledby,
       grow,
       width,
       onSelect,
@@ -126,7 +126,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           role="menu"
           tabIndex={0}
           id={id}
-          aria-labelledby={labeledBy}
+          aria-labelledby={ariaLabelledby}
           aria-activedescendant={`${id}-${selectedItemIndex}`}
           onKeyDown={this.handleKeyboardShortcuts}
           ref={this.menuRef}

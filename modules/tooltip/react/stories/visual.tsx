@@ -13,7 +13,7 @@ export default {
   decorators: [withReadme(README)],
   parameters: {
     chromatic: {
-      disabled: false,
+      disable: false,
     },
   },
 };

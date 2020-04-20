@@ -117,7 +117,7 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
                 isOpen={isOpen}
                 onClose={this.handleClose}
                 id={this.menuId}
-                labeledBy={this.controlButtonId}
+                aria-labelledby={this.controlButtonId}
               >
                 {createMenuItems().map(buildItem)}
               </Menu>

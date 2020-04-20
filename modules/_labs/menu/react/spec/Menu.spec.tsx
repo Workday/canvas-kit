@@ -220,7 +220,7 @@ describe('Menu Accessibility', () => {
 
   test('labeledBy menu should have aria-labelledby set', () => {
     const label: string = 'myLabel';
-    const component = mount(<Menu labeledBy={label} />);
+    const component = mount(<Menu aria-labelledby={label} />);
     expect(
       component
         .find('ul')
