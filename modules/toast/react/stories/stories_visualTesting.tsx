@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
-import {jsx, CSSObject} from '@emotion/core';
+import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {colors} from '@workday/canvas-kit-react-core';
