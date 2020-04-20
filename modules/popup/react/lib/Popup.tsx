@@ -22,6 +22,10 @@ export enum PopupPadding {
 
 export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * Aria label will override aria-labelledby, it is used if there is no heading or we need custom label for popup
+   */
+  ariaLabel?: string;
+  /**
    * The padding of the Popup. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
    */
@@ -98,6 +102,21 @@ const Container = styled('div', {
   })
 );
 
+const getHeadingId = (heading: React.ReactNode, id: string) => (heading ? id : undefined);
+
+const getAriaLabel = (
+  ariaLabel: string | undefined,
+  headingId: string | undefined
+): object | undefined => {
+  if (ariaLabel) {
+    return {['aria-label']: ariaLabel};
+  }
+  if (headingId) {
+    return {['aria-labelledby']: headingId};
+  }
+  return undefined;
+};
+
 const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
   {
     position: 'absolute',
@@ -128,16 +147,17 @@ export default class Popup extends React.Component<PopupProps> {
       width,
       heading,
       popupRef,
+      ariaLabel,
       ...elemProps
     } = this.props;
-
+    const headingId = getHeadingId(heading, this.id);
     return (
       <Container
         transformOrigin={transformOrigin}
         width={width}
         role="dialog"
-        aria-labelledby={heading ? this.id : undefined}
         ref={popupRef}
+        {...getAriaLabel(ariaLabel, headingId)}
         {...elemProps}
       >
         {handleClose && (
@@ -153,13 +173,7 @@ export default class Popup extends React.Component<PopupProps> {
             />
           </CloseIconContainer>
         )}
-        <Card
-          depth={depth}
-          heading={heading}
-          headingId={heading ? this.id : undefined}
-          width="100%"
-          padding={padding}
-        >
+        <Card depth={depth} heading={heading} headingId={headingId} width="100%" padding={padding}>
           {this.props.children}
         </Card>
       </Container>
