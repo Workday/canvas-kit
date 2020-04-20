@@ -60,17 +60,17 @@ const manyOptions = [
 ];
 
 const customOptions = [
-  {value: 'Activity Stream', icon: activityStreamIcon},
-  {value: 'Avatar', icon: avatarIcon},
-  {value: 'Upload Cloud', icon: uploadCloudIcon},
-  {value: 'User', icon: userIcon},
+  {value: 'Activity Stream', data: {icon: activityStreamIcon}},
+  {value: 'Avatar', data: {icon: avatarIcon}},
+  {value: 'Upload Cloud', data: {icon: uploadCloudIcon}},
+  {value: 'User', data: {icon: userIcon}},
 ];
 
 const customRenderOption: RenderOptionFunction = option => {
   const iconColor = option.focused ? typeColors.inverse : colors.blackPepper100;
   return (
     <div style={{alignItems: 'center', display: 'flex', padding: '3px 0'}}>
-      <SystemIcon icon={option.icon} color={iconColor} colorHover={iconColor} />
+      <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
       <div style={{marginLeft: 5}}>{option.value}</div>
     </div>
   );
@@ -107,7 +107,7 @@ storiesOf('Labs|Select/React/Top Label', module)
       {defaultWithSimpleOptionsComponent}
     </FormField>
   ))
-  .add('Default with Custom Options', () => (
+  .add('Default with Custom Options Data', () => (
     <FormField label="Label" inputId="select-default-custom">
       {defaultWithCustomOptionsComponent}
     </FormField>
@@ -166,7 +166,7 @@ storiesOf('Labs|Select/React/Left Label', module)
       {defaultWithSimpleOptionsComponent}
     </FormField>
   ))
-  .add('Default with Custom Options', () => (
+  .add('Default with Custom Options Data', () => (
     <FormField
       labelPosition={FormField.LabelPosition.Left}
       label="Label"

@@ -15,30 +15,36 @@ import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';
 import {getCorrectedIndexByValue} from './utils';
 
-export interface Option {
+interface OptionData {
   // This allows developers to include arbitrary keys in their
-  // Options and to utilize those keys in their renderOption
+  // Options data and to utilize those keys in their renderOption
   // function without encountering TypeScript errors
   [key: string]: any;
+}
 
-  // Known, optional keys
+export interface Option {
+  data?: OptionData;
   disabled?: boolean;
   id?: string;
   label?: string;
-
-  // Known, required keys
   value: string;
 }
 
 export interface NormalizedOption extends Option {
   // Optional keys in Option are required in NormalizedOption
+  data: OptionData;
   disabled: boolean;
   id: string;
   label: string;
 }
 
+export interface RenderableOption extends NormalizedOption {
+  focused: boolean;
+  selected: boolean;
+}
+
 export interface RenderOptionFunction {
-  (option: NormalizedOption): React.ReactNode;
+  (option: RenderableOption): React.ReactNode;
 }
 
 export interface CoreSelectBaseProps
@@ -55,14 +61,13 @@ export interface CoreSelectBaseProps
    *
    * The `option` argument passed to the function is an object which contains the following:
    *
+   * * `data: object` (data object carried over from the corresponding option originally passed into the component)
    * * `disabled: boolean`
    * * `focused: boolean` (set to `true` if the option has keyboard focus)
    * * `id: string`
    * * `label: string`
    * * `selected: boolean` (set to `true` if the option is selected)
    * * `value: string`
-   *
-   * Additionally, each `option` will contain any other key/value pairs you defined in the `options` prop.
    *
    * If you omit the `renderOption` prop, each option will be rendered using a default `renderOption` function provided by the component.
    */

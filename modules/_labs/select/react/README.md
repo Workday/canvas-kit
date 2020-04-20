@@ -9,7 +9,7 @@ A Canvas-styled Select with a Canvas-styled menu. This is a
 
 Undocumented props (`disabled`, `name`, etc.) should behave similarly to how you would expect from a standard `<select>` element.
 
-**Note:** There is also a non-Labs Select. The non-Labs Select uses the default-styled menu whereas the Labs Select uses a custom Canvas-styled menu.
+**Note:** There is also a non-Labs Select. The non-Labs Select uses the standard browser-provided menu whereas the Labs Select uses a custom Canvas-styled menu.
 
 ## Installation
 
@@ -76,9 +76,9 @@ const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
 </FormField>;
 ```
 
-#### Example with Custom Options
+#### Example with Custom Options Data
 
-Each option in `options` may contain any number of other key/value pairs. You may then define your own `renderOption` function to customize how each option is rendered using that custom data.
+Each option in `options` may contain a `data` object with any number of key/value pairs. This `data` object is carried over to the `option` passed into the `renderOption` function where it may then be used to customize how each option is rendered.
 
 ```tsx
 import * as React from 'react';
@@ -89,17 +89,17 @@ import {activityStreamIcon, avatarIcon, uploadCloudIcon, userIcon} from '@workda
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
 const options = [
-  {value: 'Activity Stream', icon: activityStreamIcon},
-  {value: 'Avatar', icon: avatarIcon},
-  {value: 'Upload Cloud', icon: uploadCloudIcon},
-  {value: 'User', icon: userIcon},
+  {value: 'Activity Stream', data: {icon: activityStreamIcon}},
+  {value: 'Avatar', data: {icon: avatarIcon}},
+  {value: 'Upload Cloud', data: {icon: uploadCloudIcon}},
+  {value: 'User', data: {icon: userIcon}},
 ];
 
 const renderOption = option => {
   const iconColor = option.focused ? typeColors.inverse : colors.blackPepper100;
   return (
     <div style={{alignItems: 'center', display: 'flex', padding: '3px 0'}}>
-      <SystemIcon icon={option.icon} color={iconColor} colorHover={iconColor} />
+      <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
       <div style={{marginLeft: 5}}>{option.value}</div>
     </div>
   );
@@ -128,14 +128,15 @@ const renderOption = option => {
 >
 > If `options` is an array of objects, each object must adhere to the `Option` interface:
 >
-> * `value: string` (required, analagous to the `value` attribute of an `<option>`)
+> * `data: object` (optional)
 > * `disabled: boolean` (optional)
 > * `id: string` (optional, a random `id` will be assigned to the object if one isn't provided)
 > * `label: string` (optional, analagous to the text content of an `<option>`)
+> * `value: string` (required, analagous to the `value` attribute of an `<option>`)
 >
 > If `label` is omitted, the `value` will be used to render the option.
 >
-> Additionally, each option may contain any number of other key/value pairs. These keys will be passed through to the `option` parameter of the `renderOption` prop and may be used to customize how each option is rendered.
+> The `data` object is carried over to the `option` passed into the `renderOption` function where it may then be used to customize how each option is rendered.
 
 ### Optional
 
@@ -150,20 +151,19 @@ const renderOption = option => {
 
 ---
 
-#### `renderOption: (option: NormalizedOption) => React.ReactNode`
+#### `renderOption: (option: RenderableOption) => React.ReactNode`
 
 > The function called to render the content of each option.
 >
 > The `option` argument passed to the function is an object which contains the following:
 >
+> * `data: object` (data object carried over from the corresponding option originally passed into the component)
 > * `disabled: boolean`
 > * `focused: boolean` (set to `true` if the option has keyboard focus)
 > * `id: string`
 > * `label: string`
 > * `selected: boolean` (set to `true` if the option is selected)
 > * `value: string`
->
-> Additionally, each `option` will contain any other key/value pairs you defined in the `options` prop.
 >
 > If you omit the `renderOption` prop, each option will be rendered using a default `renderOption` function provided by the component.
 

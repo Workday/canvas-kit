@@ -11,14 +11,15 @@ export interface SelectProps extends CoreSelectBaseProps {
    *
    * If `options` is an array of objects, each object must adhere to the `Option` interface:
    *
-   * * `value: string` (required, analagous to the `value` attribute of an `<option>`)
+   * * `data: object` (optional)
    * * `disabled: boolean` (optional)
    * * `id: string` (optional, a random `id` will be assigned to the object if one isn't provided)
    * * `label: string` (optional, analagous to the text content of an `<option>`)
+   * * `value: string` (required, analagous to the `value` attribute of an `<option>`)
    *
    * If `label` is omitted, the `value` will be used to render the option.
    *
-   * Additionally, each option may contain any number of other key/value pairs. These keys will be passed through to the `option` parameter of the `renderOption` prop and may be used to customize how each option is rendered.
+   * The `data` object is carried over to the `option` passed into the `renderOption` function where it may then be used to customize how each option is rendered.
    */
   options: (Option | string)[];
 }
@@ -59,6 +60,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     const {options} = this.props;
 
     this.normalizedOptions = options.map(option => {
+      let data = {};
       let disabled, id, label, value;
 
       if (typeof option === 'string') {
@@ -67,15 +69,15 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         value = option;
         label = option;
       } else {
+        data = option.data || data;
         disabled = !!option.disabled;
         id = option.id || uuid();
         value = option.value;
         label = option.label || option.value;
       }
 
-      // Merge user-provided option with normalized option fields
       return {
-        ...(typeof option === 'string' ? {} : option),
+        data,
         disabled,
         id,
         label,
