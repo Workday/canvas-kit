@@ -75,6 +75,10 @@ describe('Modal', () => {
             h.modal.get().should('have.attr', 'aria-labelledby');
           });
 
+          it('should have an aria-modal=true', () => {
+            h.modal.get().should('have.attr', 'aria-modal', 'true');
+          });
+
           it('should contain the title', () => {
             h.modal
               .get()
@@ -235,6 +239,10 @@ describe('Modal', () => {
           h.modal.get().should('have.attr', 'aria-labelledby');
         });
 
+        it('should have an aria-modal=true', () => {
+          h.modal.get().should('have.attr', 'aria-modal', 'true');
+        });
+
         it('should contain the title', () => {
           h.modal
             .get()
@@ -330,6 +338,10 @@ describe('Modal', () => {
 
         it('should have an aria-labelledby attribute', () => {
           h.modal.get().should('have.attr', 'aria-labelledby');
+        });
+
+        it('should have an aria-modal=true', () => {
+          h.modal.get().should('have.attr', 'aria-modal', 'true');
         });
 
         it('should contain the title', () => {

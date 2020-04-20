@@ -9,6 +9,10 @@ import {ModalWidth} from './Modal';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * Aria label will override aria-labelledby, it is used if there is no heading or we need custom label for popup
+   */
+  ariaLabel?: string;
+  /**
    * The padding of the Modal. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
    */
@@ -152,6 +156,7 @@ const useInitialFocus = (
 };
 
 const ModalContent = ({
+  ariaLabel,
   closeOnEscape = true,
   width = ModalWidth.s,
   padding = PopupPadding.l,
@@ -215,6 +220,8 @@ const ModalContent = ({
         handleClose={handleClose}
         padding={padding}
         transformOrigin={transformOrigin}
+        aria-modal={true}
+        ariaLabel={ariaLabel}
       >
         {children}
       </Popup>
