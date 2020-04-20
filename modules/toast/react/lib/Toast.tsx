@@ -107,7 +107,11 @@ export default class Toast extends React.Component<ToastProps> {
           <Message>
             {this.props.children}
             {onActionClick && (
-              <ActionButton aria-label={actionText} onClick={onActionClick}>
+              <ActionButton
+                data-testid={'action-button'}
+                aria-label={actionText}
+                onClick={onActionClick}
+              >
                 {actionText}
               </ActionButton>
             )}

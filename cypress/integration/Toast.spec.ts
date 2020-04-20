@@ -13,7 +13,7 @@ function getToastCloseButton() {
 }
 
 function getToastActionButton() {
-  return cy.get('[aria-label="View more details"');
+  return cy.get('[data-testid="action-button"');
 }
 
 describe('Toast', () => {
