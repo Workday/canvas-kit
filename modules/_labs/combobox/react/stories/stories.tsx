@@ -12,7 +12,10 @@ import {TextInput} from '../../../../text-input/react';
 import README from '../README.md';
 
 class Autocomplete extends React.Component<
-  Omit<ComboboxProps, 'children' | 'clearButtonType' | 'clearButtonLabel' | 'clearButtonVariant'>,
+  Omit<
+    ComboboxProps,
+    'children' | 'clearButtonType' | 'clearButtonAriaLabel' | 'clearButtonVariant'
+  >,
   {currentText: string}
 > {
   state = {
@@ -42,10 +45,11 @@ class Autocomplete extends React.Component<
         onChange={this.autocompleteCallback}
         showClearButton={this.props.showClearButton == null ? true : this.props.showClearButton}
         labelId="autocomplete-123"
-        onFocus={action(`Focus`)}
-        onBlur={action(`Blur`)}
+        onFocus={action('Focus')}
+        onBlur={action('Blur')}
+        initialValue="Test"
       >
-        <TextInput placeholder="Autocomplete" />
+        <TextInput autoFocus placeholder="Autocomplete" />
       </Combobox>
     );
   }

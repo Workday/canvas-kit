@@ -1,152 +1,133 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
-import {GrowthBehavior} from '@workday/canvas-kit-react-common';
-import FormField, {FormFieldErrorBehavior} from '../lib/FormField';
+import {render} from '@testing-library/react';
+import FormField from '../lib/FormField';
+import {ErrorType} from '@workday/canvas-kit-react-common';
 
 describe('FormField', () => {
-  test('Set a string label', () => {
-    const label = 'Label';
-    const component = mount(
-      <FormField label={label}>
-        <input type="text" />
-      </FormField>
-    );
-
-    expect(component.find('label').text()).toBe(label);
-
-    component.unmount();
+  const cb = jest.fn();
+  afterEach(() => {
+    cb.mockReset();
   });
 
-  test('Set a custom component', () => {
-    const label = <label>Custom Label</label>;
-    const component = mount(
-      <FormField label={label}>
-        <input type="text" />
-      </FormField>
-    );
+  describe('when rendered', () => {
+    it('should render a label with text Label', () => {
+      const label = 'Label';
+      const {getByText} = render(
+        <FormField label={label}>
+          <input type="text" />
+        </FormField>
+      );
 
-    expect(component.contains(label)).toBeDefined();
+      expect(getByText('Label')).toContainHTML(label);
+    });
+  });
+  describe('when rendered with hint text', () => {
+    it('should render text below the input component', () => {
+      const label = 'Label';
+      const hintText = 'Helpful text goes here.';
+      const {container} = render(
+        <FormField hintText={hintText} label={label}>
+          <input type="text" />
+        </FormField>
+      );
 
-    component.unmount();
+      expect(container.querySelector('p')).toContainHTML(hintText);
+    });
   });
 
-  test('Set hint text', () => {
-    const hintText = 'Hint Text';
-    const component = mount(
-      <FormField hintText={hintText}>
-        <input type="text" />
-      </FormField>
-    );
+  describe('when rendered as required', () => {
+    it('should add a required element to the label to indicate that it is required', () => {
+      const label = 'Label';
+      const {getByText} = render(
+        <FormField label={label} required={true}>
+          <input type="text" />
+        </FormField>
+      );
 
-    expect(component.render().text()).toEqual(expect.stringContaining(hintText));
-
-    component.unmount();
+      expect(getByText('*')).toHaveAttribute('title', 'required');
+    });
   });
 
-  test('Set aria-describedby', () => {
-    const InputComponent: React.FunctionComponent<GrowthBehavior> = () => <input type="text" />;
-    const hintText = 'Hint Text';
-    const hintId = 'hint-id';
-    const component = mount(
-      <FormField error={FormField.ErrorType.Error} hintText={hintText} hintId={hintId}>
-        <InputComponent />
-      </FormField>
-    );
+  describe('when rendered with useFieldset set to true', () => {
+    it('should render the FormField using a fieldset and a legend instead of a div and a label', () => {
+      const label = 'Label';
+      const {container} = render(
+        <FormField useFieldset={true} label={label} required={true}>
+          <input type="text" />
+        </FormField>
+      );
 
-    expect(
-      component
-        .find('Hint')
-        .at(0)
-        .prop('id')
-    ).toEqual(hintId);
-    expect(component.find(InputComponent).prop('aria-describedby')).toEqual(hintId);
-
-    component.unmount();
+      const fieldset = container.querySelector('fieldset');
+      expect(container).toContainElement(fieldset);
+      expect(container).toContainHTML('legend');
+    });
   });
 
-  test('Sets id on input & htmlFor on label', () => {
-    const InputComponent: React.FunctionComponent = () => <input type="text" />;
-    const inputId = 'input-id';
+  describe('when rendered with extra, arbitrary props', () => {
+    it('should spread extra props onto the form field', () => {
+      const attr = 'test';
+      const label = 'Label';
+      const {container} = render(
+        <FormField label={label} data-propspread={attr}>
+          <input type="text" />
+        </FormField>
+      );
 
-    const component = mount(
-      <FormField inputId={inputId} label="Label">
-        <InputComponent />
-      </FormField>
-    );
+      expect(container.querySelector('div')).toHaveAttribute('data-propspread', 'test');
+    });
+  });
+  describe('when rendered a hint id', () => {
+    it('the input and hint text should have matching ids for accessibility', () => {
+      const label = 'Label';
+      const hintId = 'hintId';
+      const hintText = 'Helpful text goes here.';
+      const {container} = render(
+        <FormField error={ErrorType.Error} hintId={hintId} hintText={hintText} label={label}>
+          <input type="text" />
+        </FormField>
+      );
 
-    expect(component.find(InputComponent).prop('id')).toEqual(inputId);
-    expect(component.find('Label').prop('htmlFor')).toEqual(inputId);
-
-    component.unmount();
+      expect(container.querySelector('p')).toHaveAttribute('id', hintId);
+      expect(container.querySelector('input')).toHaveAttribute('aria-describedby', hintId);
+    });
   });
 
-  test('Sets grow prop', () => {
-    const InputComponent: React.FunctionComponent<GrowthBehavior> = () => <input type="text" />;
+  describe('when rendered a input id', () => {
+    it('the input and label should have matching ids for accessibility', () => {
+      const label = 'Label';
+      const inputId = 'inputId';
+      const hintText = 'Helpful text goes here.';
+      const {container} = render(
+        <FormField inputId={inputId} hintText={hintText} label={label}>
+          <input type="text" />
+        </FormField>
+      );
 
-    const component = mount(
-      <FormField grow={true}>
-        <InputComponent />
-      </FormField>
-    );
-
-    expect(component.find(InputComponent).props().grow).toEqual(true);
-
-    component.unmount();
+      expect(container.querySelector('label')).toHaveAttribute('for', inputId);
+      expect(container.querySelector('input')).toHaveAttribute('id', inputId);
+    });
   });
-
-  test('Sets error prop with aria label', () => {
-    const InputComponent: React.FunctionComponent<FormFieldErrorBehavior> = () => (
-      <input type="text" />
-    );
-
-    const component = mount(
-      <FormField error={FormField.ErrorType.Error}>
-        <InputComponent />
-      </FormField>
-    );
-
-    expect(component.find(InputComponent).props().error).toEqual(FormField.ErrorType.Error);
-    expect(component.find(InputComponent).prop('aria-invalid')).toBeTruthy();
-
-    component.unmount();
+  describe('when rendered with an error', () => {
+    it('the input should have aria-invalid for accessibility', () => {
+      const label = 'Label';
+      const {container} = render(
+        <FormField error={FormField.ErrorType.Error} label={label}>
+          <input type="text" />
+        </FormField>
+      );
+      expect(container.querySelector('input')).toHaveAttribute('aria-invalid', 'true');
+    });
   });
-
-  test('String child', () => {
-    const component = mount(<FormField>Text</FormField>);
-
-    expect(component.children().text()).toBe('Text');
-
-    component.unmount();
-  });
-
-  test('Uses fieldset and legend when useFieldset=true (for RadioGroup)', () => {
-    const InputComponent: React.FunctionComponent<FormFieldErrorBehavior> = () => (
-      <input type="text" />
-    );
-
-    const component = mount(
-      <FormField useFieldset={true} label="Label">
-        <InputComponent />
-      </FormField>
-    );
-
-    expect(component.find('fieldset')).toHaveLength(1);
-    expect(component.find('legend')).toHaveLength(1);
-
-    component.unmount();
-  });
-
-  test('FormField should spread extra props', () => {
-    const InputComponent: React.FunctionComponent<FormFieldErrorBehavior> = () => (
-      <input type="text" />
-    );
-    const component = mount(
-      <FormField data-propspread="test">
-        <InputComponent />
-      </FormField>
-    );
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  describe('when rendered with no inputId', () => {
+    it('the input should have a unique id', () => {
+      const label = 'Label';
+      const {container} = render(
+        <FormField error={FormField.ErrorType.Error} label={label}>
+          <input type="text" />
+        </FormField>
+      );
+      const uniqueId = container.querySelector('input').getAttribute('id');
+      expect(container.querySelector('input')).toHaveAttribute('id', uniqueId);
+    });
   });
 });
