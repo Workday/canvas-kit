@@ -34,6 +34,7 @@ export interface ButtonProps
    * Note: not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
+  href?: string;
 }
 
 const Button = ({
@@ -44,12 +45,15 @@ const Button = ({
   dataLabel,
   icon,
   children,
+  href,
   ...elemProps
 }: ButtonProps) => (
   <ButtonContainer
     colors={getButtonColors(variant, theme)}
     size={size}
     ref={buttonRef}
+    as={href ? 'a' : undefined}
+    href={href}
     {...elemProps}
   >
     {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
