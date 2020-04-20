@@ -3,7 +3,13 @@ import {Themeable, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import {colors} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, useTheme} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonVariant, ButtonColors, DropdownButtonVariant, ButtonSize} from './types';
+import {
+  ButtonVariant,
+  ButtonColors,
+  DropdownButtonVariant,
+  ButtonSize,
+  AnchorButtonProps,
+} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface ButtonProps
@@ -34,10 +40,11 @@ export interface ButtonProps
    * Note: not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
-  href?: string;
 }
 
-const Button = ({
+function Button(props: ButtonProps): React.ReactElement;
+function Button(props: {as: 'a'} & AnchorButtonProps<ButtonProps>): React.ReactElement;
+function Button({
   theme = useTheme(),
   variant = ButtonVariant.Secondary,
   size = 'medium',
@@ -45,22 +52,21 @@ const Button = ({
   dataLabel,
   icon,
   children,
-  href,
   ...elemProps
-}: ButtonProps) => (
-  <ButtonContainer
-    colors={getButtonColors(variant, theme)}
-    size={size}
-    ref={buttonRef}
-    as={href ? 'a' : undefined}
-    href={href}
-    {...elemProps}
-  >
-    {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
-    <ButtonLabel>{children}</ButtonLabel>
-    {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-  </ButtonContainer>
-);
+}: ButtonProps) {
+  return (
+    <ButtonContainer
+      colors={getButtonColors(variant, theme)}
+      size={size}
+      ref={buttonRef}
+      {...elemProps}
+    >
+      {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+      <ButtonLabel>{children}</ButtonLabel>
+      {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+    </ButtonContainer>
+  );
+}
 
 Button.Variant = ButtonVariant;
 Button.Size = ButtonSize;

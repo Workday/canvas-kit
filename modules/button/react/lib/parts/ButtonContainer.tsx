@@ -12,14 +12,8 @@ import {
 import {ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
 
-type AnchorAttributes = Omit<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
-  keyof React.HTMLAttributes<HTMLAnchorElement> | 'type'
->;
-
 export interface ButtonContainerProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    AnchorAttributes,
     GrowthBehavior {
   colors?: ButtonColors;
   /**
@@ -41,7 +35,6 @@ export interface ButtonContainerProps
    * This avoids using the inline `style` attribute when the shape needs to be customized (e.g. for IconButton)
    */
   extraStyles?: CSSObject;
-  as?: React.ElementType | keyof JSX.IntrinsicElements;
 }
 
 function getIconColorSelectors(theme: CanvasTheme, color: string, fill?: boolean): CSSObject {

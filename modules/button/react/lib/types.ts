@@ -92,3 +92,9 @@ export interface ButtonColors {
   };
   disabled: ButtonStateColors;
 }
+
+/**
+ * Used to get the props of the anchor version of a button
+ */
+export type AnchorButtonProps<B> = Omit<B, keyof React.ButtonHTMLAttributes<HTMLButtonElement>> &
+  React.AnchorHTMLAttributes<HTMLAnchorElement>;
