@@ -1,22 +1,24 @@
 # Canvas Kit CSS Badge
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
-  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
-</a>  This component is work in progress and currently in pre-release.
-
-provides a quantity-based summary with dynamic values
+Badge provides a quantity-based summary with dynamic values.
 
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-css-badge
+yarn add @workday/canvas-kit-css
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-css-badge
 ```
 
 Add your `node_modules` directory to your SASS `includePaths`. You will then be able to import
 `index.scss`.
 
 ```scss
-@import '~@workday/canvas-kit-labs-css-badge/index.scss';
+@import '~@workday/canvas-kit-css-badge/index.scss';
 ```
 
 ## Usage
@@ -34,7 +36,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 #### Inverse
 
 ```html
-<span class="wdc-badge-inverse" aria-live="polite" aria-label="999+ unread notifications">
+<span class="wdc-badge-inverse" aria-live="polite" aria-label="2 unread notifications">
   2
 </span>
 ```
@@ -42,7 +44,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 #### Empty Badge
 
 ```html
-<span class="wdc-badge aria-live="polite" aria-label="1 unread notification"></span>
+<span class="wdc-badge aria-live="polite" aria-label="unread notifications"></span>
 ```
 
 ### 📝 Notes
@@ -62,7 +64,7 @@ prevent misinforming screen readers and causing unintentional announcements.
 Badges with more than 999 notifications should display '999+'
 
 ```html
-<span class="wdc-badge aria-live="polite" aria-label="999+ unread notifications">
+<span class="wdc-badge aria-live="polite" aria-label="1000 unread notifications">
   999+
 </span>
 ```

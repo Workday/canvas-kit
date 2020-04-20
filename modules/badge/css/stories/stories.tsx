@@ -4,7 +4,7 @@ import README from '../README.md';
 import '../index.scss';
 
 export default {
-  title: 'Labs|Badge/CSS/',
+  title: 'Components|Badge/CSS/',
   decorators: [withReadme(README)],
 };
 
@@ -34,7 +34,7 @@ export const Default = () => (
       <span className="wdc-badge-inverse" aria-live="polite" aria-label="100 new notifications">
         100
       </span>
-      <span className="wdc-badge-inverse" aria-live="polite" aria-label="999+ new notifications">
+      <span className="wdc-badge-inverse" aria-live="polite" aria-label="1000 new notifications">
         999+
       </span>
     </div>

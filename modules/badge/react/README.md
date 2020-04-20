@@ -1,22 +1,24 @@
 # Canvas Kit React Badge
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
-  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
-</a>  This component is work in progress and currently in pre-release.
-
-provides a quantity-based summary with dynamic values
+Badge provides a quantity-based summary with dynamic values.
 
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-badge
+yarn add @workday/canvas-kit-react
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-react-badge
 ```
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import Badge from '@workday/canvas-kit-labs-react-badge';
+import Badge from '@workday/canvas-kit-react-badge';
 
 // default Badge
 <Badge count={3} aria-label="3 unread notifications" />
@@ -65,7 +67,7 @@ unintentional announcements.
 | Variant   | Description                 |
 | --------- | --------------------------- |
 | `default` | Red background, White text  |
-| `inverse` | White background, Blue icon |
+| `inverse` | White background, Blue text |
 
 Default: `default`
 
@@ -74,8 +76,6 @@ Default: `default`
 #### `count: number`
 
 > Count displayed on the Badge
-
-Default: `undefined`
 
 📝 **Note**
 

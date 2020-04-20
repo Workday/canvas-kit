@@ -3,12 +3,10 @@ import {keyframes} from '@emotion/core';
 import styled from '@emotion/styled';
 import {borderRadius, colors, fontFamily} from '@workday/canvas-kit-react-core';
 
-export type BadgeVariant = 'default' | 'inverse';
-
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   'aria-label': string;
   count?: number;
-  variant?: BadgeVariant;
+  variant?: 'default' | 'inverse';
 }
 
 const variants = {
@@ -66,7 +64,7 @@ const Container = styled('span')<BadgeProps>(
 );
 
 const Badge = (props: BadgeProps) => {
-  const {count, 'aria-label': ariaLabel, variant, ...elemProps} = props;
+  const {variant = 'default', count, 'aria-label': ariaLabel, ...elemProps} = props;
 
   let formattedCount = '';
 
