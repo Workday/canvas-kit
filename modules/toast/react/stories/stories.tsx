@@ -72,6 +72,11 @@ class ToastWrapper extends React.Component<{state?: string}> {
 storiesOf('Components|Popups/Toast/React', module)
   .addParameters({component: Toast})
   .addDecorator(withReadme(README))
+  .add('Default', () => (
+    <div className="story">
+      <Toast>Your workbook was successfully processed.</Toast>
+    </div>
+  ))
   .add('Successful', () => (
     <div className="story">
       <ToastWrapper state={'Success'} />
@@ -80,5 +85,18 @@ storiesOf('Components|Popups/Toast/React', module)
   .add('Error', () => (
     <div className="story">
       <ToastWrapper state={'Error'} />
+    </div>
+  ))
+  .add('With close button', () => (
+    <div className="story">
+      <Toast onClose={() => console.warn('test')}>Your workbook was successfully processed.</Toast>
+    </div>
+  ))
+
+  .add('With action link', () => (
+    <div className="story">
+      <Toast actionText={'View more details'} onActionClick={() => console.warn('test')}>
+        Your workbook was successfully processed.
+      </Toast>
     </div>
   ));
