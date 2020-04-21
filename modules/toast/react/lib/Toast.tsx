@@ -108,7 +108,7 @@ export default class Toast extends React.Component<ToastProps> {
             {this.props.children}
             {onActionClick && (
               <ActionButton
-                data-testid={'action-button'}
+                data-testid={'action-button'} // used to test in cypress
                 aria-label={actionText}
                 onClick={onActionClick}
               >
