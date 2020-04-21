@@ -8,7 +8,7 @@ import {
   ButtonColors,
   DropdownButtonVariant,
   ButtonSize,
-  AnchorButtonProps,
+  ButtonOrAnchorComponent,
 } from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
@@ -42,13 +42,7 @@ export interface ButtonProps
   icon?: CanvasSystemIcon;
 }
 
-type ButtonOverload = {
-  (props: ButtonProps): React.ReactElement;
-  (props: {as: 'a'} & AnchorButtonProps<ButtonProps>): React.ReactElement;
-  Variant: typeof ButtonVariant;
-  Size: typeof ButtonSize;
-};
-const Button: ButtonOverload = ({
+const Button: ButtonOrAnchorComponent<ButtonProps, typeof ButtonVariant> = ({
   theme = useTheme(),
   variant = ButtonVariant.Secondary,
   size = 'medium',

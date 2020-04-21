@@ -1,7 +1,7 @@
 import * as React from 'react';
 import canvas, {borderRadius, type} from '@workday/canvas-kit-react-core';
 import {focusRing, mouseFocusBehavior, GrowthBehavior} from '@workday/canvas-kit-react-common';
-import {DeprecatedButtonVariant, ButtonSize} from './types';
+import {DeprecatedButtonVariant, ButtonSize, ButtonOrAnchorComponent} from './types';
 import styled from '@emotion/styled';
 
 export interface DeprecatedButtonProps
@@ -157,7 +157,10 @@ const Container = styled('button')<DeprecatedButtonProps>(
   }
 );
 
-const DeprecatedButton = ({
+const DeprecatedButton: ButtonOrAnchorComponent<
+  DeprecatedButtonProps,
+  typeof DeprecatedButtonVariant
+> = ({
   variant = DeprecatedButtonVariant.Secondary,
   size = 'large',
   buttonRef,

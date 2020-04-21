@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Themeable, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
-import {ButtonColors, ButtonSize} from './types';
+import {ButtonColors, ButtonSize, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel} from './parts';
 import {GrowthBehavior, useTheme} from '@workday/canvas-kit-react-common';
 
@@ -38,7 +38,7 @@ const getDeleteButtonColors = (theme: CanvasTheme): ButtonColors => ({
   },
 });
 
-const DeleteButton = ({
+const DeleteButton: ButtonOrAnchorComponent<DeleteButtonProps> = ({
   theme = useTheme(),
   size = 'medium',
   buttonRef,

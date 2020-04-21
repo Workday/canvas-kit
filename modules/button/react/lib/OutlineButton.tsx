@@ -3,7 +3,7 @@ import {Themeable, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, GrowthBehavior, useTheme} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {OutlineButtonVariant, ButtonColors, ButtonSize} from './types';
+import {OutlineButtonVariant, ButtonColors, ButtonSize, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
 export interface OutlineButtonProps
@@ -36,7 +36,7 @@ export interface OutlineButtonProps
   icon?: CanvasSystemIcon;
 }
 
-const OutlineButton = ({
+const OutlineButton: ButtonOrAnchorComponent<OutlineButtonProps, typeof OutlineButtonVariant> = ({
   theme = useTheme(),
   variant = OutlineButtonVariant.Secondary,
   size = 'medium',

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Themeable} from '@workday/canvas-kit-labs-react-core';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
 import {GrowthBehavior, useTheme} from '@workday/canvas-kit-react-common';
-import {DropdownButtonVariant, ButtonIconPosition} from './types';
+import {DropdownButtonVariant, ButtonIconPosition, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 import {getButtonColors} from './Button';
 
@@ -26,7 +26,10 @@ export interface DropdownButtonProps
   buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
-const DropdownButton = ({
+const DropdownButton: ButtonOrAnchorComponent<
+  DropdownButtonProps,
+  typeof DropdownButtonVariant
+> = ({
   theme = useTheme(),
   variant = DropdownButtonVariant.Secondary,
   size = 'medium',
