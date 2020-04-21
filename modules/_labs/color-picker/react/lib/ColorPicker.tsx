@@ -1,7 +1,8 @@
-import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react-core';
+import {colors, spacing} from '@workday/canvas-kit-react-core';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
 import {IconButton} from '@workday/canvas-kit-react-button';
+import {Popup} from '@workday/canvas-kit-react-popup';
 import * as React from 'react';
 import FormField from '@workday/canvas-kit-react-form-field';
 import styled from '@emotion/styled';
@@ -82,18 +83,6 @@ const defaultColors = [
   colors.blackPepper400,
 ];
 
-const Container = styled('div')({
-  width: 224,
-  padding: spacing.s,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  background: colors.frenchVanilla100,
-  border: `1px solid ${colors.soap400}`,
-  borderRadius: borderRadius.m,
-  ...depth['3'],
-});
-
 const ColorInputWrapper = styled('div')({
   width: '100%',
   marginTop: spacing.s,
@@ -163,7 +152,7 @@ const ColorPicker = ({
   };
 
   return (
-    <Container data-testid="canvas-color-picker" {...elemProps}>
+    <Popup width={250} padding={Popup.Padding.s} data-testid="canvas-color-picker" {...elemProps}>
       {onColorReset && resetColor && (
         <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}
@@ -187,7 +176,7 @@ const ColorPicker = ({
           />
         </ColorInputWrapper>
       )}
-    </Container>
+    </Popup>
   );
 };
 
