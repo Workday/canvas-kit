@@ -42,9 +42,13 @@ export interface ButtonProps
   icon?: CanvasSystemIcon;
 }
 
-function Button(props: ButtonProps): React.ReactElement;
-function Button(props: {as: 'a'} & AnchorButtonProps<ButtonProps>): React.ReactElement;
-function Button({
+type ButtonOverload = {
+  (props: ButtonProps): React.ReactElement;
+  (props: {as: 'a'} & AnchorButtonProps<ButtonProps>): React.ReactElement;
+  Variant: typeof ButtonVariant;
+  Size: typeof ButtonSize;
+};
+const Button: ButtonOverload = ({
   theme = useTheme(),
   variant = ButtonVariant.Secondary,
   size = 'medium',
@@ -53,20 +57,18 @@ function Button({
   icon,
   children,
   ...elemProps
-}: ButtonProps) {
-  return (
-    <ButtonContainer
-      colors={getButtonColors(variant, theme)}
-      size={size}
-      ref={buttonRef}
-      {...elemProps}
-    >
-      {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
-      <ButtonLabel>{children}</ButtonLabel>
-      {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-    </ButtonContainer>
-  );
-}
+}: ButtonProps) => (
+  <ButtonContainer
+    colors={getButtonColors(variant, theme)}
+    size={size}
+    ref={buttonRef}
+    {...elemProps}
+  >
+    {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+    <ButtonLabel>{children}</ButtonLabel>
+    {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+  </ButtonContainer>
+);
 
 Button.Variant = ButtonVariant;
 Button.Size = ButtonSize;
