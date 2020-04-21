@@ -21,6 +21,11 @@ export interface DeprecatedButtonProps
    * The ref to the button that the styled component renders.
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * The alternative container type for the button. Uses Emotion's special `as` prop.
+   * Will render an `a` tag instead of a `button` when defined.
+   */
+  as?: 'a' | undefined;
 }
 
 const Container = styled('button')<DeprecatedButtonProps>(

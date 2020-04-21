@@ -40,6 +40,11 @@ export interface ButtonProps
    * Note: not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
+  /**
+   * The alternative container type for the button. Uses Emotion's special `as` prop.
+   * Will render an `a` tag instead of a `button` when defined.
+   */
+  as?: 'a' | undefined;
 }
 
 const Button: ButtonOrAnchorComponent<ButtonProps, typeof ButtonVariant> = ({
