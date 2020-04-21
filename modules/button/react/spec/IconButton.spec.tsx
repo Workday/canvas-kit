@@ -58,6 +58,24 @@ describe('Icon Button', () => {
     });
   });
 
+  describe('when rendered as an anchor', () => {
+    it('should render an anchor link', () => {
+      const {getByRole} = render(
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          as="a"
+          href="https://workday.com"
+          target="_blank"
+        />
+      );
+      const link = getByRole('link');
+      expect(link).toBeDefined();
+      expect(link).toHaveAttribute('href', 'https://workday.com');
+      expect(link).toHaveAttribute('target', '_blank');
+    });
+  });
+
   describe('when clicked', () => {
     it('should call a callback function', () => {
       const {getByRole} = render(
