@@ -120,7 +120,7 @@ const optionIdPart = `option`;
 export const getOptionId = (baseId?: string, index?: number) =>
   `${baseId}-${optionIdPart}-${index}`;
 
-const getTextFromElement = (children?: React.ReactNode) => {
+export const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
   React.Children.map(children, child => {
     if (child == null || typeof child === 'boolean' || child === {}) {
@@ -187,6 +187,8 @@ const Combobox = ({
     }
     return (autocompleteItems as React.ReactElement<MenuItemProps>[]) || [];
   };
+
+  const [showGroupText, setShowGroupText] = useState(false);
 
   useEffect(() => {
     const shouldShow = interactiveAutocompleteItems.length > 0 && isFocused;
@@ -290,6 +292,23 @@ const Combobox = ({
     focusInput();
   };
 
+  const getGroupIndex = (itemIndex: number | null) => {
+    if (
+      itemIndex != null &&
+      autocompleteItems &&
+      autocompleteItems.length &&
+      'header' in autocompleteItems[0]
+    ) {
+      let count = 0;
+      return (autocompleteItems as ComboBoxMenuItemGroup[]).findIndex(groups => {
+        count += groups.items.length;
+        return count > itemIndex;
+      });
+    } else {
+      return -1;
+    }
+  };
+
   const handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
     if (event.ctrlKey || event.altKey || event.metaKey || !interactiveAutocompleteItems.length) {
       return;
@@ -338,6 +357,11 @@ const Combobox = ({
 
       default:
     }
+    const lastGroupIndex = getGroupIndex(selectedAutocompleteIndex);
+    const nextGroupIndex = getGroupIndex(nextIndex);
+    console.log(`current`, selectedAutocompleteIndex, `is in group`, lastGroupIndex);
+    console.log(`next`, nextIndex, `is in group`, nextGroupIndex);
+    setShowGroupText(lastGroupIndex !== nextGroupIndex);
     setSelectedAutocompleteIndex(nextIndex);
   };
 
@@ -408,6 +432,7 @@ const Combobox = ({
               selectedIndex={selectedAutocompleteIndex}
               handleAutocompleteClick={handleAutocompleteClick}
               labelId={formLabelId}
+              showGroupText={showGroupText}
             />
           </MenuContainer>
         )}

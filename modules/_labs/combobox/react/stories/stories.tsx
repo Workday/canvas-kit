@@ -26,13 +26,13 @@ const simpleAutoComplete = (count: number, total = 5) =>
     .map((_: React.ReactElement, i: number) => autocompleteResult(i))
     .splice(0, total);
 
-const groupOfResults = (count: number): ComboBoxMenuItemGroup => ({
+const groupOfResults = (count: number, groupHeading = 'Group'): ComboBoxMenuItemGroup => ({
   header: (
     <MenuItem>
-      <strong>Group</strong>
+      <strong>{groupHeading}</strong>
     </MenuItem>
   ),
-  items: simpleAutoComplete(count, 2),
+  items: simpleAutoComplete(count, 3),
 });
 
 const Autocomplete: React.FC<Omit<ComboboxProps, 'children'> & {group?: boolean}> = ({
@@ -53,7 +53,10 @@ const Autocomplete: React.FC<Omit<ComboboxProps, 'children'> & {group?: boolean}
     <Combobox
       autocompleteItems={
         group
-          ? [groupOfResults(groupLength), groupOfResults(Math.min(1, groupLength))]
+          ? [
+              groupOfResults(groupLength, 'Animals'),
+              groupOfResults(Math.min(1, groupLength), 'Cars'),
+            ]
           : simpleAutoComplete(textLength)
       }
       onChange={autocompleteCallback}
