@@ -10,5 +10,6 @@ export * from './lib/parts/_brand-assets';
 export * from './lib/types';
 export * from './lib/genericStyles';
 export * from './lib/Popper';
+export * from './lib/theming';
 export {default as useTheme} from './lib/theming/useTheme';
 export {default as styled} from './lib/theming/styled';

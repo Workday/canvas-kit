@@ -5,4 +5,3 @@ export default type;
 export {type, space, CanvasProvider};
 export * from './lib/type';
 export * from './lib/StaticStates';
-export * from './lib/theming';

@@ -1,4 +1,4 @@
-import {CanvasTheme} from '@workday/canvas-kit-labs-react-core';
+import {CanvasTheme} from '@workday/canvas-kit-react-common';
 import {ErrorType} from '../types';
 import {CSSObject} from '@emotion/core';
 import {colors, inputColors} from '@workday/canvas-kit-react-core';

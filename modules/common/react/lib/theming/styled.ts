@@ -1,5 +1,5 @@
 import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '@emotion/styled';
-import {CanvasTheme, ContentDirection} from '@workday/canvas-kit-labs-react-core';
+import {CanvasTheme, ContentDirection} from '@workday/canvas-kit-react-common';
 import useTheme from './useTheme';
 import rtlCSSJS from 'rtl-css-js';
 

@@ -1,6 +1,6 @@
 import {keyframes, CSSObject} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
-import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-labs-react-core';
+import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-react-common';
 import memoize from 'lodash/memoize';
 
 interface FocusRingOptions {

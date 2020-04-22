@@ -5,7 +5,8 @@ import withReadme from 'storybook-readme/with-readme';
 
 import README from '../lib/theming/README.md';
 
-import {CanvasProvider, createCanvasTheme, ContentDirection} from '../index';
+import {CanvasProvider, ContentDirection} from '../index';
+import {createCanvasTheme} from '@workday/canvas-kit-react-common';
 import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-system-icons-web';
 import {IconButton, IconButtonProps} from '../../../../button/react';
 import {Card} from '../../../../card/react';
