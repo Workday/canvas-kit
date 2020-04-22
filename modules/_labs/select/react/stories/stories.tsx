@@ -31,6 +31,10 @@ const options = [
   {label: 'Fax (disabled)', value: 'fax', disabled: true},
   {label: 'Mail', value: 'mail'},
   {label: 'Mobile Phone', value: 'mobile_phone'},
+  {
+    label: 'The Ontologically Anthropocentric Sensory Immersive Simulation',
+    value: 'oasis',
+  },
 ];
 
 const normalizedOptions = options.map(option => {
@@ -282,7 +286,7 @@ storiesOf('Labs|Select/React/Visual Testing', module)
         columnProps={[{label: 'Default', props: {}}]}
       >
         {props => (
-          <div style={{height: 210}}>
+          <div style={{height: 250}}>
             <SelectBase
               {...props}
               onChange={() => {}} // eslint-disable-line no-empty-function
