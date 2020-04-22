@@ -90,6 +90,9 @@ export default class Toast extends React.Component<ToastProps> {
       transformOrigin,
       ...elemProps
     } = this.props;
+
+    const isInteractive = onClose || onActionClick;
+
     return (
       <Popup
         width={toastWidth}
@@ -97,9 +100,9 @@ export default class Toast extends React.Component<ToastProps> {
         padding={PopupPadding.s}
         handleClose={onClose}
         closeIconSize={IconButtonSize.Small}
-        role={!onClose && !onActionClick ? 'status' : 'dialog'}
-        aria-live={!onClose && !onActionClick ? 'polite' : 'off'}
-        aria-atomic={!onClose && !onActionClick ? true : false}
+        role={isInteractive ? 'dialog' : 'status'}
+        aria-live={isInteractive ? 'off' : 'polite'}
+        aria-atomic={!isInteractive}
         {...elemProps}
       >
         <ToastContentContainer onClose={onClose}>
@@ -109,7 +112,6 @@ export default class Toast extends React.Component<ToastProps> {
             {onActionClick && (
               <ActionButton
                 data-testid={'action-button'} // used to test in cypress
-                aria-label={actionText}
                 onClick={onActionClick}
               >
                 {actionText}

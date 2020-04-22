@@ -10,7 +10,7 @@ import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook'
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '../index';
 
-const IconButtonStates = () => (
+const ToastStates = () => (
   <React.Fragment>
     <div>
       <StaticStates>
@@ -31,9 +31,7 @@ const IconButtonStates = () => (
               },
             },
           ]}
-          columnProps={permutateProps({
-            Default: [{value: undefined, label: 'Default'}],
-          })}
+          columnProps={[{label: 'Default', props: {}}]}
         >
           {props => (
             <Toast aria-label="Play" {...props}>
@@ -53,4 +51,4 @@ storiesOf('Components|Popups/Toast/React/Visual Testing | States', module)
       disable: false,
     },
   })
-  .add('States', () => <IconButtonStates />);
+  .add('States', () => <ToastStates />);
