@@ -93,6 +93,11 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
+   * If true, set the SelectBase to the empty state (i.e., no options were provided).
+   * @default false
+   */
+  isEmpty?: boolean;
+  /**
    * If true, enable animation on the SelectBase menu.
    * @default true
    */
@@ -237,6 +242,7 @@ const SelectWrapper = styled('div')<Pick<SelectBaseProps, 'grow' | 'disabled'>>(
 export default class SelectBase extends React.Component<SelectBaseProps> {
   static defaultProps = {
     focusedOptionIndex: 0,
+    isEmpty: false,
     isMenuAnimated: true,
     isMenuHidden: true,
     isMenuHiding: false,
@@ -373,6 +379,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       focusedOptionIndex,
       grow,
       inputRef,
+      isEmpty,
       isMenuAnimated,
       isMenuHidden,
       isMenuHiding,
@@ -390,7 +397,10 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     // Use default renderOption if renderOption prop isn't provided
     const renderOption = this.props.renderOption || this.renderOption;
 
-    const selectedOption = options[getCorrectedIndexByValue(options, value)];
+    // Do a bit of error-checking in case options weren't provided
+    const selectedOption = !isEmpty ? options[getCorrectedIndexByValue(options, value)] : null;
+    const selectedOptionLabel = selectedOption ? selectedOption.label : '';
+    const selectedOptionValue = selectedOption ? selectedOption.value : '';
 
     return (
       <SelectWrapper grow={grow} disabled={disabled}>
@@ -410,13 +420,13 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           }}
           ref={buttonRef}
           type="button"
-          value={selectedOption.value}
+          value={selectedOptionValue}
           {...elemProps}
         >
-          {selectedOption.label}
+          {selectedOptionLabel}
         </SelectButton>
-        <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOption.value} />
-        {!isMenuHidden && (
+        <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOptionValue} />
+        {!isEmpty && !isMenuHidden && (
           <SelectMenu
             aria-activedescendant={options[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}

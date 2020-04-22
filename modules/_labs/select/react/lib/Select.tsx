@@ -51,13 +51,28 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private clearKeysSoFarTimer: ReturnType<typeof setTimeout>;
 
   // Cached values
-  private normalizedOptions: NormalizedOption[];
+  private normalizedOptions: NormalizedOption[] = [];
+
+  private areOptionsDefined = (): boolean => {
+    const {options} = this.props;
+
+    if (!options || options.length === 0) {
+      return false;
+    }
+
+    return true;
+  };
 
   // Store normalized options since the options prop can take on multiple
   // forms: an array of strings or an array of objects (sometimes with
   // arbitrary keys)
   private setNormalizedOptions = (): void => {
     const {options} = this.props;
+
+    // Abort if options weren't defined
+    if (!this.areOptionsDefined()) {
+      return;
+    }
 
     this.normalizedOptions = options.map(option => {
       let data = {};
@@ -384,21 +399,29 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.state;
 
+    // Don't pass in event handlers if options weren't defined
+    const eventHandlers = this.areOptionsDefined()
+      ? {
+          onClick: this.handleClick,
+          onKeyDown: this.handleKeyDown,
+          onMenuBlur: this.handleMenuBlur,
+          onMouseDown: this.handleMouseDown,
+          onOptionSelection: this.handleOptionSelection,
+        }
+      : {};
+
     return (
       <SelectBase
         buttonRef={this.buttonRef}
         focusedOptionIndex={focusedOptionIndex}
         inputRef={this.inputRef}
+        isEmpty={!this.areOptionsDefined()}
         isMenuHidden={isMenuHidden}
         isMenuHiding={isMenuHiding}
         menuRef={this.menuRef}
-        onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}
-        onMenuBlur={this.handleMenuBlur}
-        onMouseDown={this.handleMouseDown}
-        onOptionSelection={this.handleOptionSelection}
         options={this.normalizedOptions}
         value={value}
+        {...eventHandlers}
         {...elemProps}
       />
     );

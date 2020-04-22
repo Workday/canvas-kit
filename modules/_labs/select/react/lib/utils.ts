@@ -1,7 +1,7 @@
 import {NormalizedOption} from './SelectBase';
 
 export const getIndexByValue = (options: NormalizedOption[], value: string | undefined): number => {
-  if (value === undefined) {
+  if (!options || value === undefined) {
     return -1;
   }
 
