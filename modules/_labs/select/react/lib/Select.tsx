@@ -239,6 +239,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     if (options !== prevProps.options) {
       this.setNormalizedOptions();
+      this.updateStateFromValue();
     }
 
     if (value !== prevProps.value) {
