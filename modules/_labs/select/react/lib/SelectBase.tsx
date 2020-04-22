@@ -96,22 +96,22 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * If true, set the SelectBase to the empty state (i.e., no options were provided).
    * @default false
    */
-  isEmpty?: boolean;
+  isEmpty: boolean;
   /**
    * If true, enable animation on the SelectBase menu.
    * @default true
    */
-  isMenuAnimated?: boolean;
+  isMenuAnimated: boolean;
   /**
    * If true, hide the SelectBase menu.
    * @default true
    */
-  isMenuHidden?: boolean;
+  isMenuHidden: boolean;
   /**
    * If true, set the SelectBase to the "menu is hiding" state.
    * @default false
    */
-  isMenuHiding?: boolean;
+  isMenuHiding: boolean;
   /**
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */

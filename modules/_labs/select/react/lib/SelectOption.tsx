@@ -30,7 +30,7 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
    * If true, set the SelectOption to the interactive state. Non-interactive SelectOptions should not give any visual cues that they are interactive (e.g., remove hover styling).
    * @default true
    */
-  interactive?: boolean;
+  interactive: boolean;
   /**
    * The value of the SelectOption.
    */

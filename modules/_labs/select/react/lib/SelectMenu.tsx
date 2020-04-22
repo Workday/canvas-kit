@@ -12,12 +12,12 @@ interface SelectMenuProps
    * If true, enable animation on the SelectMenu.
    * @default true
    */
-  isAnimated?: boolean;
+  isAnimated: boolean;
   /**
    * If true, set the SelectMenu to the "is hiding" state.
    * @default false
    */
-  isHiding?: boolean;
+  isHiding: boolean;
   /**
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */
