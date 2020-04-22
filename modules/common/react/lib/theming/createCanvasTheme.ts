@@ -79,7 +79,7 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
 }
 
 export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
-  const {palette = {}, breakpoints = {}, direction} = partialTheme;
+  const {palette = {}, breakpoints = {}, direction, ...extraFields} = partialTheme;
   const {primary, alert, error, success, neutral, common = {}} = palette!;
 
   const mergeable: PartialCanvasTheme = {
@@ -95,5 +95,5 @@ export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme
     direction: direction === ContentDirection.RTL ? direction : ContentDirection.LTR,
   };
 
-  return merge({}, defaultCanvasTheme, mergeable) as CanvasTheme;
+  return merge({}, defaultCanvasTheme, mergeable, extraFields) as CanvasTheme;
 }
