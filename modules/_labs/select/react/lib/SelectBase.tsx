@@ -157,8 +157,6 @@ const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | '
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',
     height: spacing.xl,
-    // Fix Safari (TODO: do we need this?)
-    margin: 0,
     overflow: 'hidden',
     padding: spacingNumbers.xxs,
     paddingRight: menuIconSize + 2 * spacingNumbers.xxs,
@@ -250,8 +248,8 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
 
-  // TODO: Move code for scrollIntoViewIfNeeded to a centralized place.
-  // TODO: This code also has minor issues (sometimes it scrolls
+  // TODO: Implement scrolling code as a hook so it can be reused
+  // NOTE: This scrolling code has minor issues (sometimes it scrolls
   // unnecessarily, the centerIfNeeded doesn't always center)
   // Lifted from https://gist.github.com/hsablonniere/2581101
   // This scrolling behavior is preferable even to the WebKit-proprietary

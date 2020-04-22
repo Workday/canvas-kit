@@ -10,12 +10,6 @@ describe('Select', () => {
 
   const options = [{label: 'E-mail', value: 'email'}, {label: 'Phone', value: 'phone'}];
 
-  // TODO: Delete helpers related to old tests
-
-  // const getFirstMatchingOption = (options: HTMLElement[], value: string) => {
-  //   return options.filter((option: HTMLElement) => option.getAttribute('data-value') === value)[0];
-  // };
-
   afterEach(() => {
     cb.mockReset();
   });
@@ -104,6 +98,4 @@ describe('Select', () => {
       expect(cb).toHaveBeenCalledTimes(1);
     });
   });
-
-  // TODO: test change event firing with correct value
 });
