@@ -64,13 +64,13 @@ describe('Toast', () => {
       const toastMessage = 'Your workbook was successfully processed.';
       const actionText = 'View more details';
       const onCloseCB = jest.fn();
-      const {getByTestId} = render(
+      const {getAllByRole} = render(
         <Toast onClose={cb} onActionClick={onCloseCB} actionText={actionText}>
           {toastMessage}
         </Toast>
       );
 
-      fireEvent.click(getByTestId('action-button'));
+      fireEvent.click(getAllByRole('button')[1]);
       expect(onCloseCB).toHaveBeenCalledTimes(1);
     });
   });
