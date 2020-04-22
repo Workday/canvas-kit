@@ -35,6 +35,7 @@ const options = [
 
 const normalizedOptions = options.map(option => {
   return {
+    data: {},
     disabled: option.disabled || false,
     id: option.value,
     label: option.label || option.value,
