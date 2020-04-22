@@ -1,5 +1,6 @@
 import chroma from 'chroma-js';
 import merge from 'lodash/merge';
+import memoize from 'lodash/memoize';
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme} from './theme';
 import {
@@ -78,7 +79,7 @@ function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | 
   };
 }
 
-export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
+function calculateCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
   const {palette = {}, breakpoints = {}, direction, ...extraFields} = partialTheme;
   const {primary, alert, error, success, neutral, common = {}} = palette!;
 
@@ -97,3 +98,5 @@ export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme
 
   return merge({}, defaultCanvasTheme, mergeable, extraFields) as CanvasTheme;
 }
+
+export const createCanvasTheme = memoize(calculateCanvasTheme, (...args) => JSON.stringify(args));
