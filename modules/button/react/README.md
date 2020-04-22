@@ -154,6 +154,18 @@ Default: `false`
 
 ---
 
+### `as: 'a'
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
+
+---
+
 # DeleteButton
 
 ```tsx
@@ -206,6 +218,18 @@ Default: `'medium'`
 > If true, the button will grow to its container's width.
 
 Default: `false`
+
+---
+
+### `as: 'a'
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
 
 ---
 
@@ -284,6 +308,18 @@ Default: `false`
 
 ---
 
+### `as: 'a'
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
+
+---
+
 # HighlightButton
 
 ```tsx
@@ -341,6 +377,18 @@ Default: `false`
 ### `icon: CanvasSystemIcon`
 
 > The icon of the button
+
+---
+
+### `as: 'a'
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
 
 ---
 
@@ -437,6 +485,18 @@ Default: `false`
 
 ---
 
+### `as: 'a'
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
+
+---
+
 # TextButton
 
 ```tsx
@@ -522,6 +582,18 @@ Default: `ButtonIconPosition.Left`
 ### `allCaps: boolean`
 
 > The capitialization of the text in the button.
+
+---
+
+### `as: 'a'
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
 
 ---
 
@@ -676,6 +748,18 @@ Default: `undefined`
 ### `icon: CanvasSystemIcon`
 
 > The icon of the button. Optional because IconButton can also wrap a SystemIcon component.
+
+---
+
+### `as: 'a'
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
 
 ---
 

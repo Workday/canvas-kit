@@ -3,7 +3,12 @@ import {Themeable, CanvasTheme, type} from '@workday/canvas-kit-labs-react-core'
 import {focusRing, useTheme} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {TextButtonVariant, ButtonIconPosition, ButtonColors} from './types';
+import {
+  TextButtonVariant,
+  ButtonIconPosition,
+  ButtonColors,
+  ButtonOrAnchorComponent,
+} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
 export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Themeable {
@@ -34,6 +39,11 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * The capitialization of the text in the button.
    */
   allCaps?: boolean;
+  /**
+   * The alternative container type for the button. Uses Emotion's special `as` prop.
+   * Will render an `a` tag instead of a `button` when defined.
+   */
+  as?: 'a';
 }
 
 const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): ButtonColors => {
@@ -120,7 +130,9 @@ const containerStyles = {
   },
 };
 
-const TextButton = ({
+const TextButton: ButtonOrAnchorComponent<TextButtonProps, typeof TextButtonVariant> & {
+  IconPosition: typeof ButtonIconPosition;
+} = ({
   theme = useTheme(),
   variant = TextButtonVariant.Default,
   size = 'medium',
