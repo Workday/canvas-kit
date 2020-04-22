@@ -134,6 +134,8 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
   options: NormalizedOption[];
 }
 
+const menuIconSize = 24;
+
 const focusButtonStyles = {
   borderColor: inputColors.focusBorder,
   boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
@@ -150,11 +152,18 @@ const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | '
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',
     height: spacing.xl,
-    minWidth: 280,
+    // Fix Safari (TODO: do we need this?)
+    margin: 0,
+    overflow: 'hidden',
+    padding: spacingNumbers.xxs,
+    paddingRight: menuIconSize + 2 * spacingNumbers.xxs,
     textAlign: 'left',
+    textOverflow: 'ellipsis',
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: spacingNumbers.xxs, // IE11 bugfix: add padding so text is displayed properly
-    margin: 0, // Fix Safari
+    whiteSpace: 'nowrap',
+    // width is required (instead of minWidth) in order for the button to
+    // be sized properly for lengthy options
+    width: 280,
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -425,6 +434,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           icon={caretDownSmallIcon}
           color={disabled ? colors.licorice100 : colors.licorice200}
           colorHover={disabled ? colors.licorice100 : colors.licorice500}
+          size={menuIconSize}
         />
       </SelectWrapper>
     );

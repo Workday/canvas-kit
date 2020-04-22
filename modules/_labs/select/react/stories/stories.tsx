@@ -262,7 +262,7 @@ storiesOf('Labs|Select/React/Visual Testing', module)
         {props => (
           <Select
             {...props}
-            style={{minWidth: 60, width: 100}}
+            style={{width: 100}}
             onChange={() => {}} // eslint-disable-line no-empty-function
             options={options}
           />
