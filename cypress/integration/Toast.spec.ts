@@ -1,19 +1,11 @@
 import * as h from '../helpers';
 
-function statusToast() {
+function getStatusToast() {
   return cy.findByRole('status');
 }
 
-function dialogToast() {
+function getDialogToast() {
   return cy.findByRole('dialog');
-}
-
-function getToastCloseButton() {
-  return cy.get('[aria-label="Close"');
-}
-
-function getToastActionButton() {
-  return cy.findByRole('button');
 }
 
 describe('Toast', () => {
@@ -39,55 +31,25 @@ describe('Toast', () => {
     });
 
     it('should have a role of status', () => {
-      statusToast().should('have.attr', 'role', 'status');
+      getStatusToast().should('have.attr', 'role', 'status');
     });
 
     it('should have aria live set to polite', () => {
-      statusToast().should('have.attr', 'aria-live', 'polite');
+      getStatusToast().should('have.attr', 'aria-live', 'polite');
     });
 
     it('should have aria atomic set to true', () => {
-      statusToast().should('have.attr', 'aria-atomic', 'true');
+      getStatusToast().should('have.attr', 'aria-atomic', 'true');
     });
   });
 
-  context(`given the toast with a close button `, () => {
+  context(`given the toast with a close button  and action button`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Toast/React', 'With close button');
+      h.stories.load('Components|Popups/Toast/React', 'With action link and close icon');
     });
 
     it('should have a role of dialog', () => {
-      dialogToast().should('have.attr', 'role', 'dialog');
-    });
-
-    context('when button is focused', () => {
-      beforeEach(() => {
-        getToastCloseButton().focus();
-      });
-
-      it('should be the focused item on the page', () => {
-        getToastCloseButton().should('have.focus');
-      });
-    });
-  });
-
-  context(`given the toast with an action link `, () => {
-    beforeEach(() => {
-      h.stories.load('Components|Popups/Toast/React', 'With action link');
-    });
-
-    it('should have a role of dialog', () => {
-      dialogToast().should('have.attr', 'role', 'dialog');
-    });
-
-    context('when button is focused', () => {
-      beforeEach(() => {
-        getToastActionButton().focus();
-      });
-
-      it('should be the focused item on the page', () => {
-        getToastActionButton().should('have.focus');
-      });
+      getDialogToast().should('have.attr', 'role', 'dialog');
     });
   });
 });

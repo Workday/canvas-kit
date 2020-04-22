@@ -37,4 +37,16 @@ storiesOf('Components|Popups/Toast/React', module)
         Your workbook was successfully processed.
       </Toast>
     </div>
+  ))
+
+  .add('With action link and close icon', () => (
+    <div className="story">
+      <Toast
+        onClose={action('close button clicked')}
+        actionText={'View more details'}
+        onActionClick={action('action button clicked')}
+      >
+        Your workbook was successfully processed.
+      </Toast>
+    </div>
   ));
