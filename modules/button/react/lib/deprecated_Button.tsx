@@ -25,7 +25,7 @@ export interface DeprecatedButtonProps
    * The alternative container type for the button. Uses Emotion's special `as` prop.
    * Will render an `a` tag instead of a `button` when defined.
    */
-  as?: 'a' | undefined;
+  as?: 'a';
 }
 
 const Container = styled('button')<DeprecatedButtonProps>(

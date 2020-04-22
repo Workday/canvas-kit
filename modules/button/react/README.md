@@ -154,7 +154,7 @@ Default: `false`
 
 ---
 
-### `as: 'a' | undefined`
+### `as: 'a'
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -221,7 +221,7 @@ Default: `false`
 
 ---
 
-### `as: 'a' | undefined`
+### `as: 'a'
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -308,7 +308,7 @@ Default: `false`
 
 ---
 
-### `as: 'a' | undefined`
+### `as: 'a'
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -380,7 +380,7 @@ Default: `false`
 
 ---
 
-### `as: 'a' | undefined`
+### `as: 'a'
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -485,7 +485,7 @@ Default: `false`
 
 ---
 
-### `as: 'a' | undefined`
+### `as: 'a'
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -585,7 +585,7 @@ Default: `ButtonIconPosition.Left`
 
 ---
 
-### `as: 'a' | undefined`
+### `as: 'a'
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -751,7 +751,7 @@ Default: `undefined`
 
 ---
 
-### `as: 'a' | undefined`
+### `as: 'a'
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
