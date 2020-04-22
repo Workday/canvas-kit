@@ -409,6 +409,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
             e.preventDefault();
           }}
           ref={buttonRef}
+          type="button"
           value={selectedOption.value}
           {...elemProps}
         >
