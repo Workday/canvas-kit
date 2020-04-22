@@ -9,7 +9,7 @@ import {ComponentStatesTable} from '../../../../utils/storybook';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '../index';
 
-storiesOf('Components|Popups/Toast/React/Visual Testing | States', module)
+storiesOf('Components|Popups/Toast/React/Visual Testing', module)
   .addParameters({
     component: Toast,
     chromatic: {
