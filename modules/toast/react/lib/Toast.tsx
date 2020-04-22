@@ -109,14 +109,7 @@ export default class Toast extends React.Component<ToastProps> {
           {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}
           <Message>
             {this.props.children}
-            {onActionClick && (
-              <ActionButton
-                data-testid={'action-button'} // used to test in cypress
-                onClick={onActionClick}
-              >
-                {actionText}
-              </ActionButton>
-            )}
+            {onActionClick && <ActionButton onClick={onActionClick}>{actionText}</ActionButton>}
           </Message>
         </ToastContentContainer>
       </Popup>

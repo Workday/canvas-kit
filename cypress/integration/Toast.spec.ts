@@ -13,7 +13,7 @@ function getToastCloseButton() {
 }
 
 function getToastActionButton() {
-  return cy.get('[data-testid="action-button"');
+  return cy.findByRole('button');
 }
 
 describe('Toast', () => {
