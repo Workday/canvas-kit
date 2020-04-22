@@ -21,7 +21,7 @@ describe('Toast', () => {
     h.stories.visit();
   });
 
-  ['Default', 'Error', 'Successful'].forEach(story => {
+  ['Error', 'Success'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Components|Popups/Toast/React', story);
@@ -35,7 +35,7 @@ describe('Toast', () => {
 
   context(`given the toast with no close icon or action button`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Toast/React', 'Default');
+      h.stories.load('Components|Popups/Toast/React', 'Success');
     });
 
     it('should have a role of status', () => {

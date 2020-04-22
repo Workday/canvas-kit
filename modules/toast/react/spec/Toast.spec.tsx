@@ -60,25 +60,18 @@ describe('Toast', () => {
       expect(container).toHaveTextContent(actionText);
     });
 
-    // it('should call the onActionClick callback', () => {
-    //   const toastMessage = 'Your workbook was successfully processed.';
-    //   const actionText = 'View more details';
-    //   const onCloseCB = jest.fn();
-    //   const {container} = render(
-    //     <Toast
-    //       onClose={cb}
-    //       onActionClick={onCloseCB}
-    //       actionText={actionText}
-    //       icon={checkIcon}
-    //       data-testid={'myToast'}
-    //     >
-    //       {toastMessage}
-    //     </Toast>
-    //   );
+    it('should call the onActionClick callback', () => {
+      const toastMessage = 'Your workbook was successfully processed.';
+      const actionText = 'View more details';
+      const onCloseCB = jest.fn();
+      const {getByTestId} = render(
+        <Toast onClose={cb} onActionClick={onCloseCB} actionText={actionText}>
+          {toastMessage}
+        </Toast>
+      );
 
-    //   const onActionButton = container.querySelector(`[aria-label="${actionText}"]`);
-    //   fireEvent.click(onActionButton);
-    //   expect(onCloseCB).toHaveBeenCalledTimes(1);
-    // });
+      fireEvent.click(getByTestId('action-button'));
+      expect(onCloseCB).toHaveBeenCalledTimes(1);
+    });
   });
 });
