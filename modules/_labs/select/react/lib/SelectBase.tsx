@@ -140,6 +140,8 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
 }
 
 const menuIconSize = 24;
+const buttonBorderWidth = 1;
+const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
 const focusButtonStyles = {
   borderColor: inputColors.focusBorder,
@@ -150,7 +152,7 @@ const focusButtonStyles = {
 const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden'>>(
   {
     ...type.body,
-    border: `1px solid ${inputColors.border}`,
+    border: `${buttonBorderWidth}px solid ${inputColors.border}`,
     cursor: 'default',
     display: 'block',
     backgroundColor: inputColors.background,
@@ -158,8 +160,8 @@ const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | '
     boxSizing: 'border-box',
     height: spacing.xl,
     overflow: 'hidden',
-    padding: spacingNumbers.xxs,
-    paddingRight: menuIconSize + 2 * spacingNumbers.xxs,
+    padding: buttonPadding,
+    paddingRight: spacingNumbers.xxs + menuIconSize + buttonPadding,
     textAlign: 'left',
     textOverflow: 'ellipsis',
     transition: '0.2s box-shadow, 0.2s border-color',

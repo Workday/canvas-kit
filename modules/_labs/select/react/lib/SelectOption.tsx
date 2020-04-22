@@ -37,6 +37,8 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
   value?: string;
 }
 
+const optionPadding = 6;
+
 const activeStyles = {
   backgroundColor: commonColors.focusBackground,
   color: typeColors.inverse,
@@ -90,7 +92,9 @@ const Option = styled('li')<SelectOptionProps>(
     }
   },
   ({error}) => ({
-    padding: `6px ${error === ErrorType.Alert ? 7 : 8}px`,
+    padding: `${optionPadding}px ${
+      error === ErrorType.Alert ? optionPadding - 1 : optionPadding
+    }px`,
   })
 );
 
