@@ -250,12 +250,11 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
 
-  // TODO: Implement scrolling code as a hook so it can be reused
-  // NOTE: This scrolling code has minor issues (sometimes it scrolls
-  // unnecessarily, the centerIfNeeded doesn't always center)
   // Lifted from https://gist.github.com/hsablonniere/2581101
   // This scrolling behavior is preferable even to the WebKit-proprietary
-  // scrollIntoViewIfNeeded method.
+  // scrollIntoViewIfNeeded method, although it still has some
+  // issues (sometimes it scrolls unnecessarily, the centerIfNeeded
+  // doesn't always center properly).
   private scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
     const parent: HTMLElement | null = elem.parentElement;
 
