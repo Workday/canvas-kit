@@ -1,7 +1,7 @@
 {
   "name": "@workday/canvas-kit-react-badge",
   "version": "0.0.0",
-  "description": "provides a quantity-based summary with dynamic values",
+  "description": "provides a summary indicator with dynamic values",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",

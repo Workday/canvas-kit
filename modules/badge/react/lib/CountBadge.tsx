@@ -3,7 +3,7 @@ import {keyframes} from '@emotion/core';
 import styled from '@emotion/styled';
 import {borderRadius, colors, fontFamily} from '@workday/canvas-kit-react-core';
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface CountBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   'aria-label': string;
   count?: number;
   variant?: 'default' | 'inverse';
@@ -14,21 +14,11 @@ const variants = {
     background: colors.cinnamon500,
     color: colors.frenchVanilla100,
     textShadow: '0 0 1px rgba(0,0,0, 0.35)',
-    '&:empty': {
-      background: colors.frenchVanilla100,
-      border: `solid 6px ${colors.cinnamon500}`,
-      padding: 0,
-    },
   },
   inverse: {
     background: colors.frenchVanilla100,
     boxShadow: '0 1px 2px rgba(0,0,0, 0.25)',
     color: colors.blueberry400,
-    '&:empty': {
-      background: colors.blueberry400,
-      border: `solid 6px ${colors.frenchVanilla100}`,
-      padding: 0,
-    },
   },
 };
 
@@ -42,7 +32,7 @@ const grow = keyframes`
   }
 `;
 
-const Container = styled('span')<BadgeProps>(
+const Container = styled('span')<CountBadgeProps>(
   {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
@@ -63,19 +53,16 @@ const Container = styled('span')<BadgeProps>(
   })
 );
 
-const Badge = (props: BadgeProps) => {
-  const {variant = 'default', count, 'aria-label': ariaLabel, ...elemProps} = props;
+const CountBadge = (props: CountBadgeProps) => {
+  const {variant = 'default', count = 0, 'aria-label': ariaLabel, ...elemProps} = props;
 
-  let formattedCount = '';
+  const formattedCount = count < 1000 ? `${count}` : '999+';
 
-  if (count) {
-    formattedCount = count < 1000 ? `${count}` : '999+';
-  }
   return (
-    <Container aria-label={ariaLabel} aria-live="polite" variant={variant} {...elemProps}>
+    <Container aria-label={ariaLabel} variant={variant} {...elemProps}>
       {formattedCount}
     </Container>
   );
 };
 
-export default Badge;
+export default CountBadge;

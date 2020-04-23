@@ -1,6 +1,6 @@
 # Canvas Kit CSS Badge
 
-Badge provides a quantity-based summary with dynamic values.
+The count badge provides a quantity-based summary with dynamic values.
 
 ## Installation
 
@@ -21,6 +21,16 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 @import '~@workday/canvas-kit-css-badge/index.scss';
 ```
 
+## Accessibility
+
+If the count is live-updated (as in the case of notifications) and not static, please add
+`aria-live="polite"` to inform screen readers to announce updated information. When this attribute
+is set the screen reader will announce changes when the user is idle.
+
+```html
+<span class="wdc-count-badge" aria-live="polite" aria-label="3 direct reports">1</span>
+```
+
 ## Usage
 
 ### Variants
@@ -28,7 +38,7 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 #### Default
 
 ```html
-<span class="wdc-badge aria-live="polite" aria-label="1 unread notification">
+<span class="wdc-count-badge" aria-label="1 unread notification">
   1
 </span>
 ```
@@ -36,35 +46,17 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 #### Inverse
 
 ```html
-<span class="wdc-badge-inverse" aria-live="polite" aria-label="2 unread notifications">
+<span class="wdc-count-badge-inverse" aria-label="2 unread notifications">
   2
 </span>
 ```
 
-#### Empty Badge
-
-```html
-<span class="wdc-badge aria-live="polite" aria-label="unread notifications"></span>
-```
-
-### 📝 Notes
-
-#### Accessibility
-
-`aria-live="polite"` informs the screen reader to announce changes when the user is idle. However,
-if the count in this badge is static and not live-updated, please remove `aria-live="polite"` to
-prevent misinforming screen readers and causing unintentional announcements.
-
-```html
-<span class="wdc-badge aria-label="3 direct reports">1</span>
-```
-
-#### Formatting
+### Formatting
 
 Badges with more than 999 notifications should display '999+'
 
 ```html
-<span class="wdc-badge aria-live="polite" aria-label="1000 unread notifications">
+<span class="wdc-count-badge" aria-label="1000 unread notifications">
   999+
 </span>
 ```

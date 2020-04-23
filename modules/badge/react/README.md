@@ -1,6 +1,6 @@
 # Canvas Kit React Badge
 
-Badge provides a quantity-based summary with dynamic values.
+CountBadge provides a quantity-based summary with dynamic values.
 
 ## Installation
 
@@ -12,6 +12,16 @@ or
 
 ```sh
 yarn add @workday/canvas-kit-react-badge
+```
+
+## Accessibility
+
+If the count is live-updated (as in the case of notifications) and not static, please add
+`aria-live="polite"` to inform screen readers to announce updated information. When this attribute
+is set the screen reader will announce changes when the user is idle.
+
+```jsx
+<Badge count={3} aria-live="polite" aria-label="3 direct reports" />
 ```
 
 ## Usage
@@ -26,8 +36,6 @@ import Badge from '@workday/canvas-kit-react-badge';
 // inverse Badge variant
 <Badge variant="inverse" count={3} aria-label="3 unread notifications" />
 
-// empty Badge
-<Badge variant="inverse" aria-label="new unread notifications" />
 ```
 
 ## Static Properties
@@ -43,22 +51,6 @@ import Badge from '@workday/canvas-kit-react-badge';
 > Description for the badge
 
 ### Optional
-
-#### `aria-live: 'off' | 'polite' | 'assertive'`
-
-> Informs the screen reader to announce changes when the user is idle
-
-Default: `polite`
-
-📝 **Note**
-
-This prop defaults to 'polite' as it assumes the count will be live-updated. However, if the count
-is static, please set this prop to `off` to prevent misinforming screen readers and causing
-unintentional announcements.
-
-```jsx
-<Badge count={3} aria-live="off" aria-label="3 direct reports" />
-```
 
 #### `variant: 'default' | 'inverse'`
 
@@ -76,6 +68,8 @@ Default: `default`
 #### `count: number`
 
 > Count displayed on the Badge
+
+Default: `0`
 
 📝 **Note**
 

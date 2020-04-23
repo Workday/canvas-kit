@@ -4,11 +4,11 @@ import withReadme from 'storybook-readme/with-readme';
 
 import {ComponentStatesTable} from '../../../../utils/storybook';
 
-import Badge from '../index';
+import CountBadge from '../index';
 import README from '../README.md';
 
 export default {
-  title: 'Components|Badge/React/',
+  title: 'Components|Badge/CountBadge/React/',
   decorators: [withReadme(README)],
   parameters: {
     chromatic: {
@@ -24,7 +24,6 @@ export const VisualTesting = () => {
   return (
     <ComponentStatesTable
       columnProps={[
-        {label: 'Empty', props: {}},
         {label: 'Single Digit', props: {count: 1}},
         {label: 'Double Digit', props: {count: 23}},
         {label: 'Triple Digit', props: {count: 456}},
@@ -35,7 +34,7 @@ export const VisualTesting = () => {
       ]}
       rowProps={[{label: 'Default', props: {}}, {label: 'Inverse', props: {variant: 'inverse'}}]}
     >
-      {props => <Badge {...defaults} {...props} />}
+      {props => <CountBadge {...defaults} {...props} />}
     </ComponentStatesTable>
   );
 };

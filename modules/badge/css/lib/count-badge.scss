@@ -1,4 +1,4 @@
-@keyframes wdc-badge-grow {
+@keyframes wdc-count-badge-grow {
   from {
     transform: scale(0.85);
   }
@@ -8,10 +8,10 @@
   }
 }
 
-@mixin wdc-badge {
+@mixin wdc-count-badge {
   // base styles
   align-items: center;
-  animation: wdc-badge-grow 0.2s ease;
+  animation: wdc-count-badge-grow 0.2s ease;
   border-radius: 999px;
   box-sizing: border-box;
   display: inline-flex;
@@ -26,8 +26,8 @@
 }
 
 // default badge styles
-.wdc-badge {
-  @include wdc-badge();
+.wdc-count-badge {
+  @include wdc-count-badge();
   background: $wdc-color-cinnamon-500;
   color: $wdc-color-french-vanilla-100;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.35);
@@ -40,8 +40,8 @@
 }
 
 // inverse badge styles
-.wdc-badge-inverse {
-  @include wdc-badge();
+.wdc-count-badge-inverse {
+  @include wdc-count-badge();
   background: $wdc-color-french-vanilla-100;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   color: $wdc-color-blueberry-400;
