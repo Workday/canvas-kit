@@ -90,6 +90,9 @@ export default class Toast extends React.Component<ToastProps> {
       transformOrigin,
       ...elemProps
     } = this.props;
+
+    const isInteractive = onClose || onActionClick;
+
     return (
       <Popup
         width={toastWidth}
@@ -97,6 +100,9 @@ export default class Toast extends React.Component<ToastProps> {
         padding={PopupPadding.s}
         handleClose={onClose}
         closeIconSize={IconButtonSize.Small}
+        role={isInteractive ? 'dialog' : 'status'}
+        aria-live={isInteractive ? 'off' : 'polite'}
+        aria-atomic={!isInteractive}
         {...elemProps}
       >
         <ToastContentContainer onClose={onClose}>
