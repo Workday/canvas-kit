@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {useTheme} from '@workday/canvas-kit-react-common';
-import CanvasProvider from './CanvasProvider';
-import {CanvasTheme} from './theming';
+import {useTheme, CanvasProvider, CanvasTheme} from '@workday/canvas-kit-react-common';
 
 export const StaticStates: React.FC = ({children}) => {
   const theme: CanvasTheme & {_staticStates?: boolean} = useTheme();

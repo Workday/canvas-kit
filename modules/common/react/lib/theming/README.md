@@ -1,11 +1,11 @@
 # Canvas Kit Theming
 
-Canvas Kit Core contains wrappers and types to enabling theming of Canvas components.
+Canvas Kit Common contains wrappers and types to enabling theming of Canvas components.
 
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-core
+yarn add @workday/canvas-kit-react-common
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ our Canvas Components.
 
 ```tsx
 import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-labs-react-core';
+import {CanvasProvider} from '@workday/canvas-kit-react-common';
 
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```
@@ -123,7 +123,7 @@ import {
   CanvasProvider,
   PartialCanvasTheme,
   createCanvasTheme,
-} from '@workday/canvas-kit-labs-react-core';
+} from '@workday/canvas-kit-react-common';
 
 const theme: PartialCanvasTheme = {
   palette: {
@@ -140,18 +140,23 @@ const theme: PartialCanvasTheme = {
 
 ### Bidirectionality
 
-The `CanvasProvider` also provides support for bidirectionality, useful for RTL languages. The direction, part of the theme, is set using `ContentDirection.LTR` or  `ContentDirection.RTL`.
+The `CanvasProvider` also provides support for bidirectionality, useful for RTL languages. The
+direction, part of the theme, is set using `ContentDirection.LTR` or `ContentDirection.RTL`.
 
-You can nest `CanvasProvider` if you need to set a different direction for some components in your React tree (See below: Nesting CanvasProvider components).
+You can nest `CanvasProvider` if you need to set a different direction for some components in your
+React tree (See below: Nesting CanvasProvider components).
 
-`CanvasProvider` wraps your components with a `bdo` element that has the `dir` attribute set to the value of the theme direction. Styled components using the [Canvas `styled` function](https://github.com/Workday/canvas-kit/blob/master/modules/_labs/core/react/lib/theming/styled.ts) will have their styles automatically flipped if dictated by the closest theme object.
+`CanvasProvider` wraps your components with a `bdo` element that has the `dir` attribute set to the
+value of the theme direction. Styled components using the
+[Canvas `styled` function](https://github.com/Workday/canvas-kit/blob/master/modules/common/react/lib/theming/styled.ts)
+will have their styles automatically flipped if dictated by the closest theme object.
 
 ```tsx
 import {
   CanvasProvider,
   createCanvasTheme,
   ContentDirection,
-} from '@workday/canvas-kit-labs-react-core';
+} from '@workday/canvas-kit-react-common';
 
 <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
   {/* Your app with Canvas components */}
@@ -162,7 +167,8 @@ import {
 
 It is possible to set a theme for a specific component or set of components within your React tree.
 This is generally discouraged for consistency reasons, but may be required in some contexts (a green
-`Switch` component for example, or changing the direction of a set of components). To do this, you can nest CanvasProvider components with a different theme.
+`Switch` component for example, or changing the direction of a set of components). To do this, you
+can nest CanvasProvider components with a different theme.
 
 ```tsx
 import * as React from 'react';
@@ -171,7 +177,7 @@ import {
   createCanvasTheme,
   PartialCanvasTheme,
   ContentDirection,
-} from '@workday/canvas-kit-labs-react-core';
+} from '@workday/canvas-kit-react-common';
 import {Switch} from '@workday/canvas-kit-react-switch';
 
 const theme: PartialCanvasTheme = {
@@ -180,7 +186,7 @@ const theme: PartialCanvasTheme = {
       main: colors.greenApple400,
     },
   },
-  direction: ContentDirection.LTR
+  direction: ContentDirection.LTR,
 };
 
 <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>

@@ -106,7 +106,7 @@ information in the [theming documentation](./lib/theming/README.md).
 
 ```tsx
 import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-react';
+import {CanvasProvider} from '@workday/canvas-kit-react-common';
 
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```

@@ -1,15 +1,18 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
 import README from '../lib/theming/README.md';
 
-import {CanvasProvider, ContentDirection} from '../index';
-import {createCanvasTheme} from '@workday/canvas-kit-react-common';
+import {
+  createCanvasTheme,
+  CanvasProvider,
+  ContentDirection,
+} from '@workday/canvas-kit-react-common';
 import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-system-icons-web';
-import {IconButton, IconButtonProps} from '../../../../button/react';
-import {Card} from '../../../../card/react';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
+import {Card} from '@workday/canvas-kit-react-card';
 
 const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
   'aria-label': 'Activity Stream',
