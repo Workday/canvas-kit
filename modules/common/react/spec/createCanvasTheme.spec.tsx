@@ -83,7 +83,7 @@ describe('createCanvasTheme', () => {
   test('calling with a fully custom theme should preserve all fields', () => {
     const expected = lodash.cloneDeep(defaultCanvasTheme);
 
-    const customizeTheme = obj => {
+    const customizeTheme = (obj: any) => {
       for (const k in obj) {
         if (obj[k] && typeof obj[k] === 'object') {
           customizeTheme(obj[k]);
