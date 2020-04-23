@@ -1,16 +1,16 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
 import {CanvasProvider} from '../index';
-import {defaultCanvasTheme, createCanvasTheme, useTheme} from '../lib/theming/index';
+import {defaultCanvasTheme, createCanvasTheme, useTheme, PartialCanvasTheme} from '../lib/theming';
 
 describe('useTheme', () => {
-  const customTheme = createCanvasTheme({
+  const customTheme: PartialCanvasTheme = {
     palette: {
       primary: {
         main: 'orange',
       },
     },
-  });
+  };
   const Component = () => {
     const theme = useTheme();
     return <h1 data-theme={JSON.stringify(theme)}></h1>;
@@ -25,7 +25,7 @@ describe('useTheme', () => {
   test('with a theme provided, useTheme should return that theme', () => {
     const theme = useTheme(customTheme);
 
-    expect(theme).toBe(customTheme);
+    expect(theme).toBe(createCanvasTheme(customTheme));
   });
 
   test('with no window context available, calling useTheme within a component should return context theme', () => {
@@ -40,7 +40,7 @@ describe('useTheme', () => {
         .find('h1')
         .getDOMNode()
         .getAttribute('data-theme')
-    ).toBe(JSON.stringify(customTheme));
+    ).toBe(JSON.stringify(createCanvasTheme(customTheme)));
   });
 
   test('with no theme or context provided, useTheme should attempt to pull the theme from the window global', () => {
@@ -51,6 +51,6 @@ describe('useTheme', () => {
     };
     const theme = useTheme();
 
-    expect(theme).toBe(customTheme);
+    expect(theme).toBe(createCanvasTheme(customTheme));
   });
 });

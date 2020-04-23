@@ -1,9 +1,5 @@
 import * as React from 'react';
-import {
-  defaultCanvasTheme,
-  createCanvasTheme,
-  CanvasProvider,
-} from '@workday/canvas-kit-react-common';
+import {defaultCanvasTheme, CanvasProvider} from '@workday/canvas-kit-react-common';
 import {object} from '@storybook/addon-knobs';
 
 const label = 'theme';
@@ -15,9 +11,7 @@ export default makeDecorator({
   parameterName: 'canvasProviderDecorator',
   wrapper: (storyFn, context, {parameters = {}}) => {
     return (
-      <CanvasProvider
-        theme={createCanvasTheme(object(label, parameters.theme || defaultCanvasTheme))}
-      >
+      <CanvasProvider theme={object(label, parameters.theme || defaultCanvasTheme)}>
         {storyFn(context)}
       </CanvasProvider>
     );

@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider} from '../index';
-import {CanvasTheme, CanvasThemePalette, Themeable, createCanvasTheme} from '../lib/theming';
+import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
 import README from '../lib/theming/README.md';
 import {H1, colors, type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {useTheme} from '@workday/canvas-kit-react-common';
@@ -55,13 +55,13 @@ const PaletteTitle = styled(Swatch)(
   })
 );
 
-const customTheme = createCanvasTheme({
+const customTheme = {
   palette: {
     primary: {
       main: colors.greenApple400,
     },
   },
-});
+};
 const ThemedComponent = styled('h1')<Themeable>(({theme}) => ({
   ...type.h3,
   background: theme.palette.primary.main,

@@ -110,8 +110,7 @@ own use cases.
 ## Custom Theme
 
 The `CanvasProvider` accepts a full or partial theme object to give a branded look or a different
-direction to the component library. Pass your theme into `createCanvasTheme` and use the return
-value for the `theme` prop.
+direction to the component library.
 
 If you only set a `main` color, the rest of the respective palette will be automatically generated
 (note text `contrast` color will always return white if not specified).
@@ -119,11 +118,7 @@ If you only set a `main` color, the rest of the respective palette will be autom
 Example:
 
 ```tsx
-import {
-  CanvasProvider,
-  PartialCanvasTheme,
-  createCanvasTheme,
-} from '@workday/canvas-kit-react-common';
+import {CanvasProvider, PartialCanvasTheme} from '@workday/canvas-kit-react-common';
 
 const theme: PartialCanvasTheme = {
   palette: {
@@ -133,9 +128,7 @@ const theme: PartialCanvasTheme = {
   },
 };
 
-<CanvasProvider theme={createCanvasTheme(theme)}>
-  {/* Your app with Canvas components */}
-</CanvasProvider>;
+<CanvasProvider theme={theme}>{/* Your app with Canvas components */}</CanvasProvider>;
 ```
 
 ### Bidirectionality
@@ -152,13 +145,9 @@ value of the theme direction. Styled components using the
 will have their styles automatically flipped if dictated by the closest theme object.
 
 ```tsx
-import {
-  CanvasProvider,
-  createCanvasTheme,
-  ContentDirection,
-} from '@workday/canvas-kit-react-common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 
-<CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
+<CanvasProvider theme={{direction: ContentDirection.RTL}}>
   {/* Your app with Canvas components */}
 </CanvasProvider>;
 ```
@@ -174,7 +163,6 @@ can nest CanvasProvider components with a different theme.
 import * as React from 'react';
 import {
   CanvasProvider,
-  createCanvasTheme,
   PartialCanvasTheme,
   ContentDirection,
 } from '@workday/canvas-kit-react-common';
@@ -189,9 +177,9 @@ const theme: PartialCanvasTheme = {
   direction: ContentDirection.LTR,
 };
 
-<CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
+<CanvasProvider theme={{direction: ContentDirection.RTL}}>
   {/* All your components containing any Canvas components */}
-  <CanvasProvider theme={createCanvasTheme(theme)}>
+  <CanvasProvider theme={theme}>
     <Switch checked={true} />
     {/* Content that should be LTR */}
   </CanvasProvider>
@@ -214,7 +202,7 @@ const theme: PartialCanvasTheme = {
   },
 };
 
-window.workday.canvas.theme = createCanvasTheme(theme);
+window.workday.canvas.theme = theme;
 ```
 
 Note if any of the window object hasn't been defined, you will need to change your assignment. For
@@ -223,7 +211,7 @@ example:
 ```tsx
 window.workday = {
   canvas: {
-    theme: createCanvasTheme(theme);
+    theme: theme;
   }
 }
 ```
