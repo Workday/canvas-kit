@@ -31,12 +31,12 @@ export const useControlledCheck = (initialChecked = false) => {
 };
 
 export interface ControlledComponentWrapperProps extends React.Props<any> {
-  controlledProp: ControlledProp;
+  controlledProp?: ControlledProp;
 }
 
 export const ControlledComponentWrapper = ({
   children,
-  controlledProp,
+  controlledProp = ControlledProp.Value,
   ...props
 }: ControlledComponentWrapperProps): React.ReactElement => {
   const valueProps = useControlledValue();
