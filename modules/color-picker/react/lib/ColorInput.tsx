@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {ContentDirection} from '@workday/canvas-kit-labs-react-core';
 import {
   expandHex,
   GrowthBehavior,
   ErrorType,
   styled,
   Themeable,
+  ContentDirection,
 } from '@workday/canvas-kit-react-common';
 import {colors, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
