@@ -1,7 +1,7 @@
 import * as React from 'react';
 import get from 'lodash/get';
 import {ThemeContext} from '@emotion/core';
-import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-react-common';
+import {CanvasTheme, defaultCanvasTheme} from './index';
 
 /**
  * Hook function to get the correct theme object.
