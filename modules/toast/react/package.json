@@ -38,6 +38,9 @@
   "peerDependencies": {
     "react": ">= 16.8 < 17"
   },
+  "devDependencies": {
+    "@workday/canvas-kit-labs-react-core": "^3.6.0"
+  },
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
