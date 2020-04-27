@@ -51,57 +51,17 @@ describe('Popup', () => {
     });
   });
 
-  // describe('when rendered with children', () => {
-  //   it('should render a Toast with a message', () => {
-  //     const toastMessage = 'Your workbook was successfully processed.';
-  //     const {getByTestId} = render(
-  //       <Popup icon={checkIcon} data-testid={'myToast'}>
-  //         {toastMessage}
-  //       </Popup>
-  //     );
-  //     expect(getByTestId('myToast')).toHaveTextContent(toastMessage);
-  //   });
-  // });
+  describe('when rendered with extra props', () => {
+    it('should render popup with extra props', () => {
+      const {getByRole} = render(
+        <Popup data-propspread="test" handleClose={cb}>
+          <div>Are you sure you'd like to delete the item titled 'My Item'?</div>
 
-  // describe('when rendered with a close icon', () => {
-  //   it('should call the on close callback', () => {
-  //     const toastMessage = 'Your workbook was successfully processed.';
-  //     const {container} = render(
-  //       <Popup onClose={cb} icon={checkIcon} data-testid={'myToast'}>
-  //         {toastMessage}
-  //       </Popup>
-  //     );
-  //     const closeIcon = container.querySelector('[data-close="close"]'); /*? */
-  //     fireEvent.click(closeIcon); /*? */
-  //     expect(cb).toHaveBeenCalledTimes(1);
-  //   });
-  // });
+          <button onClick={cb}>Delete</button>
+        </Popup>
+      );
 
-  // describe('when rendered with an action', () => {
-  //   it('should render an action text', () => {
-  //     const toastMessage = 'Your workbook was successfully processed.';
-  //     const actionText = 'View more details';
-  //     const {container} = render(
-  //       <Popup onActionClick={cb} actionText={actionText} onClose={cb} icon={checkIcon}>
-  //         {toastMessage}
-  //       </Popup>
-  //     );
-
-  //     expect(container).toHaveTextContent(actionText);
-  //   });
-
-  //   it('should call the onActionClick callback', () => {
-  //     const toastMessage = 'Your workbook was successfully processed.';
-  //     const actionText = 'View more details';
-  //     const onCloseCB = jest.fn();
-  //     const {getAllByRole} = render(
-  //       <Popup onClose={cb} onActionClick={onCloseCB} actionText={actionText}>
-  //         {toastMessage}
-  //       </Popup>
-  //     );
-
-  //     fireEvent.click(getAllByRole('button')[1]);
-  //     expect(onCloseCB).toHaveBeenCalledTimes(1);
-  //   });
-  // });
+      expect(getByRole('dialog')).toHaveAttribute('data-propspread', 'test');
+    });
+  });
 });
