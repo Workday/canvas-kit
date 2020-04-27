@@ -152,7 +152,6 @@ export default class Popup extends React.Component<PopupProps> {
               size={closeIconSize}
               onClick={handleClose}
               icon={xIcon}
-              title={closeLabel}
               aria-label={closeLabel}
             />
           </CloseIconContainer>
