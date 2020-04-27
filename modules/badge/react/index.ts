@@ -1,1 +1,1 @@
-export {default, default as CountBadge, CountBadgeProps} from './lib/CountBadge';
+export {default as CountBadge, CountBadgeProps} from './lib/CountBadge';
