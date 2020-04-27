@@ -31,7 +31,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    * The size of the Popup close button. Accepts `Small` or `Medium`.
    * @default IconButtonSize.Medium
    */
-  c: IconButtonSize;
+  closeIconSize: IconButtonSize;
   /**
    * The ref to the underlying popup container element. Use this to check click targets against when closing the Popup.
    */
