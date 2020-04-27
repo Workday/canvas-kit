@@ -42,18 +42,22 @@ export const ControlledComponentWrapper = ({
   const valueProps = useControlledValue();
   const checkedProps = useControlledCheck();
 
-  return (React.Children.map(children, child => {
-    if (React.isValidElement<any>(child)) {
-      const childProps = {
-        ...props,
-        ...child.props,
-        ...(controlledProp === ControlledProp.Checked ? checkedProps : valueProps),
-      };
+  return (
+    <>
+      {React.Children.map(children, child => {
+        if (React.isValidElement<any>(child)) {
+          const childProps = {
+            ...props,
+            ...child.props,
+            ...(controlledProp === ControlledProp.Checked ? checkedProps : valueProps),
+          };
 
-      return React.cloneElement(child, childProps);
-    }
-    return child;
-  }) as any) as React.ReactElement; // arg - cast to keep Typescript happy... Trust me Typescript, this is valid
+          return React.cloneElement(child, childProps);
+        }
+        return child;
+      })}
+    </>
+  );
 };
 
 ControlledComponentWrapper.ControlledProp = ControlledProp;
