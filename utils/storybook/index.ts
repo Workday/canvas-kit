@@ -1,6 +1,8 @@
 export {
-  default as ControlledComponentWrapper,
+  ControlledComponentWrapper,
   controlComponent,
+  useControlledValue,
+  useControlledCheck,
 } from './ControlledComponentWrapper';
 export {customColorTheme} from './customThemes';
 export {default as CanvasProviderDecorator} from './CanvasProviderDecorator';
