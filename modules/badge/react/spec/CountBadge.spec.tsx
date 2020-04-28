@@ -8,7 +8,7 @@ describe('CountBadge', () => {
       'aria-label': props.count ? `${props.count} new notifications` : 'new notifications',
       ...props,
     };
-    return render(<CountBadge {...badgeProps} />);
+    return render(<CountBadge aria-live="polite" {...badgeProps} />);
   };
 
   it('should default to 0 if no count is provided', () => {

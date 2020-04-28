@@ -21,20 +21,20 @@ If the count is live-updated (as in the case of notifications) and not static, p
 is set the screen reader will announce changes when the user is idle.
 
 ```jsx
-<Badge count={3} aria-live="polite" aria-label="3 new notifications" />
+<CountBadge count={3} aria-live="polite" aria-label="3 new notifications" />
 ```
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import Badge from '@workday/canvas-kit-react-badge';
+import {CountBadge} from '@workday/canvas-kit-react-badge';
 
 // default Badge
-<Badge count={3} aria-label="3 unread notifications" />
+<CountBadge count={3} aria-label="3 unread notifications" />
 
 // inverse Badge variant
-<Badge variant="inverse" count={3} aria-label="3 unread notifications" />
+<CountBadge variant="inverse" count={3} aria-label="3 unread notifications" />
 
 ```
 
@@ -54,7 +54,7 @@ import Badge from '@workday/canvas-kit-react-badge';
 
 #### `variant: 'default' | 'inverse'`
 
-> Styled variant for the Badge
+> Styled variant for the badge
 
 | Variant   | Description                 |
 | --------- | --------------------------- |
@@ -67,7 +67,7 @@ Default: `default`
 
 #### `count: number`
 
-> Count displayed on the Badge
+> Count displayed on the badge
 
 Default: `0`
 
