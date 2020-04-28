@@ -3,7 +3,7 @@ import React from 'react';
 import {withKnobs, number, select} from '@storybook/addon-knobs';
 import withReadme from 'storybook-readme/with-readme';
 
-import CountBadge from '../index';
+import {CountBadge} from '../index';
 import README from '../README.md';
 
 export default {

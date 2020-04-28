@@ -4,7 +4,7 @@ import withReadme from 'storybook-readme/with-readme';
 
 import {ComponentStatesTable} from '../../../../utils/storybook';
 
-import CountBadge from '../index';
+import {CountBadge} from '../index';
 import README from '../README.md';
 
 export default {
