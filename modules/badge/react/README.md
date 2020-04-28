@@ -21,7 +21,7 @@ If the count is live-updated (as in the case of notifications) and not static, p
 is set the screen reader will announce changes when the user is idle.
 
 ```jsx
-<Badge count={3} aria-live="polite" aria-label="3 direct reports" />
+<Badge count={3} aria-live="polite" aria-label="3 new notifications" />
 ```
 
 ## Usage
