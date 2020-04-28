@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ButtonColors, ButtonSize} from './types';
+import {ButtonColors, ButtonSize, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel} from './parts';
 import {GrowthBehavior, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
 
@@ -16,6 +16,11 @@ export interface DeleteButtonProps
    * The ref to the button that the styled component renders.
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * The alternative container type for the button. Uses Emotion's special `as` prop.
+   * Will render an `a` tag instead of a `button` when defined.
+   */
+  as?: 'a';
 }
 
 const getDeleteButtonColors = (theme: CanvasTheme): ButtonColors => ({
@@ -37,7 +42,7 @@ const getDeleteButtonColors = (theme: CanvasTheme): ButtonColors => ({
   },
 });
 
-const DeleteButton = ({
+const DeleteButton: ButtonOrAnchorComponent<DeleteButtonProps> = ({
   theme = useTheme(),
   size = 'medium',
   buttonRef,

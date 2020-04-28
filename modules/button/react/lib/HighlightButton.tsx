@@ -2,7 +2,7 @@ import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors} from './types';
+import {ButtonColors, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 
 export interface HighlightButtonProps
@@ -22,6 +22,11 @@ export interface HighlightButtonProps
    * The icon of the HighlightButton.
    */
   icon?: CanvasSystemIcon;
+  /**
+   * The alternative container type for the button. Uses Emotion's special `as` prop.
+   * Will render an `a` tag instead of a `button` when defined.
+   */
+  as?: 'a';
 }
 
 const getHighlightButtonColors = (theme: CanvasTheme): ButtonColors => ({
@@ -57,7 +62,7 @@ const getHighlightButtonColors = (theme: CanvasTheme): ButtonColors => ({
   },
 });
 
-const HighlightButton = ({
+const HighlightButton: ButtonOrAnchorComponent<HighlightButtonProps> = ({
   theme = useTheme(),
   size = 'medium',
   buttonRef,

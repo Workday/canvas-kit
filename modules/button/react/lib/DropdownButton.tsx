@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {caretDownIcon} from '@workday/canvas-system-icons-web';
 import {GrowthBehavior, useTheme, Themeable} from '@workday/canvas-kit-react-common';
-import {DropdownButtonVariant, ButtonIconPosition} from './types';
+import {DropdownButtonVariant, ButtonIconPosition, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 import {getButtonColors} from './Button';
 
@@ -23,9 +23,17 @@ export interface DropdownButtonProps
    * The ref to the button that the styled component renders.
    */
   buttonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * The alternative container type for the button. Uses Emotion's special `as` prop.
+   * Will render an `a` tag instead of a `button` when defined.
+   */
+  as?: 'a';
 }
 
-const DropdownButton = ({
+const DropdownButton: ButtonOrAnchorComponent<
+  DropdownButtonProps,
+  typeof DropdownButtonVariant
+> = ({
   theme = useTheme(),
   variant = DropdownButtonVariant.Secondary,
   size = 'medium',
