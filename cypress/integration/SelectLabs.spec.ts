@@ -1,21 +1,18 @@
 import * as h from '../helpers';
 
-const clickedValue = 'phone';
-const clickedLabel = 'Phone';
-
-const enteredValue = 'mail';
-const enteredLabel = 'Mail';
-
 const typeAheadSingleString = 'm';
-const typeAheadSingleIndex = 3;
 const typeAheadSingleValue = 'mail';
 const typeAheadSingleLabel = 'Mail';
 
 const typeAheadMultipleShortString = 'mo';
 const typeAheadMultipleLongString = 'mobile p';
-const typeAheadMultipleIndex = 4;
 const typeAheadMultipleValue = 'mobile_phone';
 const typeAheadMultipleLabel = 'Mobile Phone';
+
+function getAccessibleFocus($menu: JQuery): JQuery {
+  const activeId = $menu.attr('aria-activedescendant');
+  return $menu.find(`[id="${activeId}"]`);
+}
 
 describe('Select', () => {
   before(() => {
@@ -33,112 +30,171 @@ describe('Select', () => {
 
       context('when the select button is clicked', () => {
         beforeEach(() => {
-          h.selectLabs.getButton().click();
+          cy.findByLabelText('Label').click();
         });
 
-        h.selectLabs.testOpenListboxInitialState();
+        it('should not have any axe errors', () => {
+          cy.checkA11y();
+        });
 
-        context(
-          `when the "${clickedLabel}" option (with the value "${clickedValue}") is clicked`,
-          () => {
-            beforeEach(() => {
-              h.selectLabs.getOption(clickedValue).click();
+        context('the select button', () => {
+          it('should have an aria-expanded attribute set to "true"', () => {
+            cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+          });
+        });
+
+        context('the listbox', () => {
+          it('should be visible', () => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .should('be.visible');
+          });
+
+          it('should have focus', () => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .should('be.focused');
+          });
+
+          it('should have an aria-activedescendant attribute with the same value as the id of the first option', () => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .should($menu => {
+                const menuAD = $menu.attr('aria-activedescendant');
+                const optionId = $menu.find(`[role=option]:eq(0)`).attr('id');
+
+                expect(menuAD).to.equal(optionId);
+              });
+          });
+        });
+
+        it('should have an aria-selected attribute set to "true" on the first option', () => {
+          cy.findByLabelText('Label')
+            .pipe(h.selectLabs.getOption(0))
+            .should('have.attr', 'aria-selected', 'true');
+        });
+
+        it('should set accessible focus to the "E-mail" option', () => {
+          cy.findByLabelText('Label')
+            .pipe(h.selectLabs.getMenu)
+            .pipe(getAccessibleFocus)
+            .should('have.text', 'E-mail');
+        });
+
+        context(`when the "Phone" option (with the value "phone") is clicked`, () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getOption('Phone'))
+              .click();
+          });
+
+          context('the select button', () => {
+            it(`should read "Phone"`, () => {
+              cy.findByLabelText('Label').should('have.text', 'Phone');
             });
 
-            context('the select button', () => {
-              it(`should read "${clickedLabel}"`, () => {
-                h.selectLabs.getButton().should('have.text', clickedLabel);
-              });
-
-              it(`should have a value of "${clickedValue}"`, () => {
-                h.selectLabs.getButton().should('have.value', clickedValue);
-              });
-
-              it(`should re-acquire focus`, () => {
-                h.selectLabs.getButton().should('be.focused');
-              });
+            it(`should have a value of "phone"`, () => {
+              cy.findByLabelText('Label').should('have.value', 'phone');
             });
 
-            context('the listbox', () => {
-              it('should not be visible', () => {
-                h.selectLabs.getListbox().should('not.be.visible');
-              });
+            it(`should re-acquire focus`, () => {
+              cy.findByLabelText('Label').should('be.focused');
             });
-          }
-        );
+          });
+
+          context('the listbox', () => {
+            it('should not be visible', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .should('not.be.visible');
+            });
+          });
+        });
       });
 
       context('when the select button is focused', () => {
         beforeEach(() => {
-          h.selectLabs.getButton().focus();
+          cy.findByLabelText('Label').focus();
         });
 
         context('when the down arrow key is pressed', () => {
           beforeEach(() => {
-            h.selectLabs.getButton().type('{downarrow}');
+            cy.focused().type('{downarrow}');
           });
 
-          h.selectLabs.testOpenListboxInitialState();
+          it('should open the menu', () => {
+            cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+          });
 
           context('when the down arrow key is pressed for a second time', () => {
             beforeEach(() => {
-              h.selectLabs.getListbox().type('{downarrow}');
+              cy.focused().type('{downarrow}');
             });
 
             context('the listbox', () => {
-              it('should have an aria-activedescendant attribute with the same value as the id of the second option', () => {
-                h.selectLabs.getListbox().should($listbox => {
-                  h.selectLabs.assertADMatchesOption($listbox, 1);
-                });
+              it('should set accessible focus to the "Phone" option', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'Phone');
               });
             });
 
             context('when the down arrow key is pressed for a third time', () => {
               beforeEach(() => {
-                h.selectLabs.getListbox().type('{downarrow}');
+                cy.focused().type('{downarrow}');
               });
 
               context('the listbox', () => {
-                it('should have an aria-activedescendant attribute with the same value as the id of the fourth option (having skipped the third option since it was disabled)', () => {
-                  h.selectLabs.getListbox().should($listbox => {
-                    h.selectLabs.assertADMatchesOption($listbox, 3);
-                  });
+                it('should set accessible focus to the "Mail" option', () => {
+                  cy.findByLabelText('Label')
+                    .pipe(h.selectLabs.getMenu)
+                    .pipe(getAccessibleFocus)
+                    .should('have.text', 'Mail');
                 });
               });
 
               context('when the enter key is pressed', () => {
                 beforeEach(() => {
-                  h.selectLabs.getListbox().type('{enter}');
+                  cy.findByLabelText('Label')
+                    .pipe(h.selectLabs.getMenu)
+                    .type('{enter}');
                 });
 
                 context('the select button', () => {
-                  it(`should read "${enteredLabel}"`, () => {
-                    h.selectLabs.getButton().should('have.text', enteredLabel);
+                  it(`should read "Phone"`, () => {
+                    cy.findByLabelText('Label').should('have.text', 'Phone');
                   });
 
-                  it(`should have a value of "${enteredValue}"`, () => {
-                    h.selectLabs.getButton().should('have.value', enteredValue);
+                  it(`should have a value of "phone"`, () => {
+                    cy.findByLabelText('Label').should('have.value', 'phone');
                   });
 
                   it(`should re-acquire focus`, () => {
-                    h.selectLabs.getButton().should('be.focused');
+                    cy.findByLabelText('Label').should('be.focused');
                   });
                 });
 
                 context('the listbox', () => {
                   it('should not be visible', () => {
-                    h.selectLabs.getListbox().should('not.be.visible');
+                    cy.findByLabelText('Label')
+                      .pipe(h.selectLabs.getMenu)
+                      .should('not.be.visible');
                   });
                 });
 
                 context('when the listbox is expanded again', () => {
                   beforeEach(() => {
-                    h.selectLabs.getListbox().type('{downarrow}');
+                    cy.findByLabelText('Label')
+                      .pipe(h.selectLabs.getMenu)
+                      .type('{downarrow}');
                   });
 
                   context('the fourth option', () => {
                     it('should have an aria-selected attribute set to "true"', () => {
-                      h.selectLabs.getOption(3).should('have.attr', 'aria-selected', 'true');
+                      cy.findByLabelText('Label')
+                        .pipe(h.selectLabs.getOption(3))
+                        .should('have.attr', 'aria-selected', 'true');
                     });
                   });
                 });
@@ -147,14 +203,17 @@ describe('Select', () => {
 
             context('when the up arrow key is pressed', () => {
               beforeEach(() => {
-                h.selectLabs.getListbox().type('{uparrow}');
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .type('{uparrow}');
               });
 
               context('the listbox', () => {
-                it('should have an aria-activedescendant attribute with the same value as the id of the first option', () => {
-                  h.selectLabs.getListbox().should($listbox => {
-                    h.selectLabs.assertADMatchesOption($listbox, 0);
-                  });
+                it('should set accessible focus to the "E-mail" option', () => {
+                  cy.findByLabelText('Label')
+                    .pipe(h.selectLabs.getMenu)
+                    .pipe(getAccessibleFocus)
+                    .should('have.text', 'E-mail');
                 });
               });
             });
@@ -162,28 +221,34 @@ describe('Select', () => {
 
           context(`when "${typeAheadSingleString}" is typed`, () => {
             beforeEach(() => {
-              h.selectLabs.getListbox().type(typeAheadSingleString);
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type(typeAheadSingleString);
             });
 
             context('the listbox', () => {
-              it(`should have an aria-activedescendant attribute with the same value as the id of the "${typeAheadSingleLabel}" option`, () => {
-                h.selectLabs.getListbox().should($listbox => {
-                  h.selectLabs.assertADMatchesOption($listbox, typeAheadSingleIndex);
-                });
+              it('should set accessible focus to the "Mail" option', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'Mail');
               });
             });
           });
 
           context(`when "${typeAheadMultipleShortString}" is typed`, () => {
             beforeEach(() => {
-              h.selectLabs.getListbox().type(typeAheadMultipleShortString);
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type(typeAheadMultipleShortString);
             });
 
             context('the listbox', () => {
-              it(`should have an aria-activedescendant attribute with the same value as the id of the "${typeAheadMultipleLabel}" option`, () => {
-                h.selectLabs.getListbox().should($listbox => {
-                  h.selectLabs.assertADMatchesOption($listbox, typeAheadMultipleIndex);
-                });
+              it('should set accessible focus to the "Mobile Phone" option', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'Mobile Phone');
               });
             });
           });
@@ -191,72 +256,98 @@ describe('Select', () => {
 
         context(`when "${typeAheadSingleString}" is typed`, () => {
           beforeEach(() => {
-            h.selectLabs.getButton().type(typeAheadSingleString);
+            cy.findByLabelText('Label').type(typeAheadSingleString);
           });
 
           context('the select button', () => {
             it(`should read "${typeAheadSingleLabel}"`, () => {
-              h.selectLabs.getButton().should('have.text', typeAheadSingleLabel);
+              cy.findByLabelText('Label').should('have.text', typeAheadSingleLabel);
             });
 
             it(`should have a value of "${typeAheadSingleValue}"`, () => {
-              h.selectLabs.getButton().should('have.value', typeAheadSingleValue);
+              cy.findByLabelText('Label').should('have.value', typeAheadSingleValue);
             });
           });
         });
 
         context(`when "${typeAheadMultipleShortString}" is typed`, () => {
           beforeEach(() => {
-            h.selectLabs.getButton().type(typeAheadMultipleShortString);
+            cy.findByLabelText('Label').type(typeAheadMultipleShortString);
           });
 
           context('the select button', () => {
             it(`should read "${typeAheadMultipleLabel}"`, () => {
-              h.selectLabs.getButton().should('have.text', typeAheadMultipleLabel);
+              cy.findByLabelText('Label').should('have.text', typeAheadMultipleLabel);
             });
 
             it(`should have a value of "${typeAheadMultipleValue}"`, () => {
-              h.selectLabs.getButton().should('have.value', typeAheadMultipleValue);
+              cy.findByLabelText('Label').should('have.value', typeAheadMultipleValue);
             });
           });
         });
 
         context(`when "${typeAheadMultipleLongString}" is typed`, () => {
           beforeEach(() => {
-            h.selectLabs.getButton().type(typeAheadMultipleLongString);
+            cy.findByLabelText('Label').type(typeAheadMultipleLongString);
           });
 
           context('the select button', () => {
             it(`should read "${typeAheadMultipleLabel}"`, () => {
-              h.selectLabs.getButton().should('have.text', typeAheadMultipleLabel);
+              cy.findByLabelText('Label').should('have.text', typeAheadMultipleLabel);
             });
 
             it(`should have a value of "${typeAheadMultipleValue}"`, () => {
-              h.selectLabs.getButton().should('have.value', typeAheadMultipleValue);
+              cy.findByLabelText('Label').should('have.value', typeAheadMultipleValue);
             });
           });
 
           context('the listbox', () => {
             it('should not be visible', () => {
-              h.selectLabs.getListbox().should('not.be.visible');
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .should('not.be.visible');
             });
           });
         });
 
         context('when the enter key is pressed', () => {
           beforeEach(() => {
-            h.selectLabs.getButton().type('{enter}');
+            cy.findByLabelText('Label').type('{enter}');
           });
 
-          h.selectLabs.testOpenListboxInitialState();
+          it('should open the menu', () => {
+            cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+          });
         });
 
         context('when the space key is pressed', () => {
           beforeEach(() => {
-            h.selectLabs.getButton().type(' ');
+            cy.findByLabelText('Label').type(' ');
           });
 
-          h.selectLabs.testOpenListboxInitialState();
+          it('should open the menu', () => {
+            cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+          });
+        });
+      });
+
+      context('when "select" helper is used to select "Mail"', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Label').pipe(h.selectLabs.select('Mail'));
+        });
+
+        it('should have a value of "mail"', () => {
+          cy.findByLabelText('Label').should('have.value', 'mail');
+        });
+      });
+
+      context('when "select" helper is used to select /^Mail$/', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Label').pipe(h.selectLabs.select(/^Mail$/));
+        });
+
+        it('should have a value of "mail"', () => {
+          cy.findByLabelText('Label').should('have.value', 'mail');
         });
       });
     });
@@ -273,7 +364,7 @@ describe('Select', () => {
 
     context('the select button', () => {
       it('should be disabled', () => {
-        h.selectLabs.getButton().should('be.disabled');
+        cy.findByLabelText('Label').should('be.disabled');
       });
     });
   });

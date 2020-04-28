@@ -1,93 +1,57 @@
-const optionSelector = '[role=option]';
-
 /**
- * Gets the button element with `[aria-haspopup=listbox]` responsible for triggering the listbox.
- */
-export const getButton = (): Cypress.Chainable<JQuery> => {
-  return cy.get('[aria-haspopup=listbox]');
-};
-
-/**
- * Gets the listbox element.
- */
-export const getListbox = (): Cypress.Chainable<JQuery> => {
-  return cy.get('[role=listbox]');
-};
-
-/**
- * Gets the hidden text input element which tracks the value of the Select component and fires change events.
- */
-export const getInput = (): Cypress.Chainable<JQuery> => {
-  return cy.get(`input[type=text]`);
-};
-
-/**
- * Gets an option element based on its index (if the function is provided with a number) or a value (otherwise).
- */
-export const getOption = (lookup: number | string): Cypress.Chainable<JQuery> => {
-  if (typeof lookup === 'number') {
-    return cy.get(`${optionSelector}:eq(${lookup})`);
-  } else {
-    return cy.get(`${optionSelector}[data-value=${lookup.toString()}]`);
-  }
-};
-
-/**
- * Asserts that the `aria-activedescendant` of the provided listbox matches the id of the option at the provided index.
- * Should be called within cypress `.then()`.
- * @param $listbox Listbox whose `aria-activedescendant` we're checking
- * @param optionIndex Numerical index of the option we're comparing against
+ * Gets the menu element. Takes in the original select
  * @example
- * h.selectLabs.getListbox()
- *   .should($listbox => {
- *     h.selectLabs.assertADMatchesOption($listbox, 0);
- *   });
+ * cy.findByLabelText('Label')
+ *   .pipe(h.selectLabs.getMenu)
+ *   .should('be.visible')
  */
-export const assertADMatchesOption = ($listbox: JQuery, optionIndex: number): void => {
-  const listboxAD = $listbox.attr('aria-activedescendant');
-  const optionId = $listbox.find(`${optionSelector}:eq(${optionIndex})`).attr('id');
-
-  expect(listboxAD).to.equal(optionId);
-};
+export function getMenu($select: JQuery): JQuery {
+  const id = $select.attr('aria-owns');
+  return Cypress.$(`#${id}[role=listbox]`);
+}
 
 /**
- * Tests the initial state of an unmodified Select (where no selection has been made) with a freshly opened listbox.
+ * Returns an option based on the index in the array, exact string of the label or RegExp of the label
+ * This shouldn't normally be needed by application tests. Use the `select` helper instead
+ * @example
+ * cy.findByLabelText('Label')
+ *   .pipe(h.selectLabs.getOption('Mail'))
+ *   .click()
  */
-export const testOpenListboxInitialState = (): void => {
-  context(
-    'the listbox should be visible and focused, and all accessibility attributes should be properly set',
-    () => {
-      it('should not have any axe errors', () => {
-        cy.checkA11y();
+export const getOption = (lookup: number | string | RegExp) =>
+  function getOption($select: JQuery): JQuery {
+    const optionSelector = '[role=option]';
+    const $menu = getMenu($select);
+    if (typeof lookup === 'number') {
+      return $menu.find(`${optionSelector}:eq(${lookup})`);
+    } else if (typeof lookup === 'string') {
+      const $options = $menu.find(optionSelector);
+      return $options.filter(i => {
+        return $options.eq(i).text() === lookup;
       });
-
-      context('the select button', () => {
-        it('should have an aria-expanded attribute set to "true"', () => {
-          getButton().should('have.attr', 'aria-expanded', 'true');
-        });
-      });
-
-      context('the listbox', () => {
-        it('should be visible', () => {
-          getListbox().should('be.visible');
-        });
-
-        it('should have focus', () => {
-          getListbox().should('be.focused');
-        });
-
-        it('should have an aria-activedescendant attribute with the same value as the id of the first option', () => {
-          getListbox().should($listbox => {
-            assertADMatchesOption($listbox, 0);
-          });
-        });
-      });
-
-      context('the first option', () => {
-        it('should have an aria-selected attribute set to "true"', () => {
-          getOption(0).should('have.attr', 'aria-selected', 'true');
-        });
+    } else {
+      const $options = $menu.find(optionSelector);
+      return $options.filter(i => {
+        return lookup.test($options.eq(i).text());
       });
     }
-  );
-};
+  };
+
+/**
+ * Selects an option by the label of the option. This is what is visibly rendered on the page. Will return the original select element.
+ * @param label The exact string or RegExp of the contents of the label. Note this is not the value.
+ * @example
+ * cy.findByLabelText('Label')
+ *   .pipe(h.selectLabs.select('Mail'))
+ *   .should('have.text', 'Mail') // label of the option
+ *   .should('have.value', 'mail') // value of the selected option
+ */
+export const select = (label: string | RegExp) =>
+  function select($select: JQuery): Cypress.Chainable<JQuery> {
+    cy.wrap($select)
+      .click()
+      .pipe(getOption(label))
+      .click();
+
+    return cy.wrap($select);
+  };

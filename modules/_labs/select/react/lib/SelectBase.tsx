@@ -1,4 +1,6 @@
 import * as React from 'react';
+import uuid from 'uuid/v4';
+
 import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
 import {
@@ -11,6 +13,7 @@ import {
 } from '@workday/canvas-kit-react-core';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
+
 import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';
 import {getCorrectedIndexByValue} from './utils';
@@ -249,6 +252,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   };
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
+  private id = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
 
   // Lifted from https://gist.github.com/hsablonniere/2581101
   // This scrolling behavior is preferable even to the WebKit-proprietary
@@ -406,6 +410,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
         <SelectButton
           aria-expanded={!isMenuHidden ? 'true' : undefined}
           aria-haspopup="listbox"
+          aria-owns={this.id}
           disabled={disabled}
           error={error}
           grow={grow}
@@ -429,6 +434,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           <SelectMenu
             aria-activedescendant={options[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}
+            id={this.id}
             error={error}
             isAnimated={isMenuAnimated}
             isHiding={isMenuHiding}
