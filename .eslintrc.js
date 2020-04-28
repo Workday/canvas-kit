@@ -23,7 +23,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: ['tsconfig.json', 'cypress/tsconfig.json'],
+    project: ['./tsconfig.json', './cypress/tsconfig.json'],
     sourceType: 'module',
   },
   settings: {
