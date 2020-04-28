@@ -40,7 +40,7 @@ export function getErrorColors(error?: ErrorType, theme?: CanvasTheme) {
   }
 }
 
-export default function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSObject {
+export function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSObject {
   if (error !== ErrorType.Error && error !== ErrorType.Alert) {
     return {};
   }
