@@ -1,6 +1,5 @@
 import {default as emotionStyled, CreateStyled, Interpolation, CSSObject} from '@emotion/styled';
-import {CanvasTheme, ContentDirection} from './index';
-import useTheme from './useTheme';
+import {useTheme, CanvasTheme, ContentDirection} from './index';
 import rtlCSSJS from 'rtl-css-js';
 
 const noop = (styles: any) => styles;

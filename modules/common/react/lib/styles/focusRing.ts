@@ -65,7 +65,7 @@ export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.s
  *
  * @returns {CSSObject} the css object for the focus ring style
  */
-export default function focusRing(
+export function focusRing(
   options: FocusRingOptions = {},
   theme: CanvasTheme = defaultCanvasTheme
 ): CSSObject {
