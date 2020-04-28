@@ -8,7 +8,7 @@ import {CountBadge} from '../index';
 import README from '../README.md';
 
 export default {
-  title: 'Components|Badge/CountBadge/React/',
+  title: 'Components|Indicators/Badge/CountBadge/React/',
   decorators: [withReadme(README)],
   parameters: {
     chromatic: {
