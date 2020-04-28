@@ -162,12 +162,12 @@ describe('Select', () => {
                 });
 
                 context('the select button', () => {
-                  it(`should read "Phone"`, () => {
-                    cy.findByLabelText('Label').should('have.text', 'Phone');
+                  it(`should read "Mail"`, () => {
+                    cy.findByLabelText('Label').should('have.text', 'Mail');
                   });
 
-                  it(`should have a value of "phone"`, () => {
-                    cy.findByLabelText('Label').should('have.value', 'phone');
+                  it(`should have a value of "mail"`, () => {
+                    cy.findByLabelText('Label').should('have.value', 'mail');
                   });
 
                   it(`should re-acquire focus`, () => {
