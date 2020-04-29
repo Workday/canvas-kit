@@ -118,3 +118,27 @@ Default: `bottom`
 > DOM hierarchy of it's parent. When true, the popper is attached to the `containerElement`.
 
 Default: `true`
+
+### Canvas Provider
+
+This provider includes all of the Canvas Providers below. This is the way most consumers should use
+the provider. This provider is required for our theming capabilities, so you can find more
+information in the [theming documentation](./lib/theming/README.md).
+
+**We strongly encourage you to use this in your application to wrap all Canvas components.**
+
+```tsx
+import * as React from 'react';
+import {CanvasProvider} from '@workday/canvas-kit-react-common';
+
+<CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
+```
+
+## Theming
+
+Theming documentation has its own README. You can find it [here](./lib/theming/README.md)
+
+## Bidirectionality
+
+Bidirectionality is provided by Theming. You can find Theming documentation
+[here](./lib/theming/README.md#bidirectionality)
