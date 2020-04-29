@@ -5,48 +5,67 @@ enum ControlledProp {
   Checked = 'checked',
 }
 
-export default class ControlledComponentWrapper extends React.Component<any, {}> {
-  static ControlledProp = ControlledProp;
-  static defaultProps = {
-    controlledProp: ControlledProp.Value,
+export const useControlledValue = <
+  T extends HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement = HTMLInputElement
+>(
+  initialValue = ''
+) => {
+  const [value, setValue] = React.useState(initialValue);
+  const onChange = (eventOrValue: React.ChangeEvent<T> | string) => {
+    setValue(typeof eventOrValue === 'object' ? eventOrValue.target.value : eventOrValue);
   };
 
-  state = {
-    value: '', // Used for string based components (e.g. text input)
-    checked: false, // Used for boolean components (e.g. checkbox)
+  return {
+    value,
+    onChange,
+  };
+};
+
+export const useControlledCheck = (initialChecked = false) => {
+  const [checked, setChecked] = React.useState(initialChecked);
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
   };
 
-  onChange = (e: React.ChangeEvent | string | number) => {
-    if (this.props.controlledProp === ControlledProp.Checked) {
-      this.setState({checked: !this.state.checked});
-    } else {
-      const value =
-        typeof e === 'object' ? (e as React.ChangeEvent<HTMLInputElement>).currentTarget.value : e;
-      this.setState({value});
-    }
-  };
+  return {checked, onChange};
+};
 
-  renderChildren = (child: React.ReactNode) => {
-    if (React.isValidElement<any>(child)) {
-      const {children, controlledProp, ...props} = this.props;
-      const childProps = {
-        ...props,
-        ...child.props,
-        [controlledProp]:
-          controlledProp === ControlledProp.Checked ? this.state.checked : this.state.value,
-        onChange: this.onChange,
-      };
-      return React.cloneElement(child, childProps);
-    }
-    return child;
-  };
-
-  public render() {
-    return React.Children.map(this.props.children, this.renderChildren);
-  }
+export interface ControlledComponentWrapperProps extends React.Props<any> {
+  controlledProp?: ControlledProp;
 }
 
-export const controlComponent = (child: React.ReactNode, controlledProp?: ControlledProp) => {
+export const ControlledComponentWrapper = ({
+  children,
+  controlledProp = ControlledProp.Value,
+  ...props
+}: ControlledComponentWrapperProps): React.ReactElement => {
+  const valueProps = useControlledValue();
+  const checkedProps = useControlledCheck();
+
+  return (
+    <>
+      {React.Children.map(children, child => {
+        if (React.isValidElement<any>(child)) {
+          const childProps = {
+            ...props,
+            ...child.props,
+            ...(controlledProp === ControlledProp.Checked ? checkedProps : valueProps),
+          };
+
+          return React.cloneElement(child, childProps);
+        }
+        return child;
+      })}
+    </>
+  );
+};
+
+ControlledComponentWrapper.ControlledProp = ControlledProp;
+
+export const controlComponent = (
+  child: React.ReactNode,
+  controlledProp: ControlledProp = ControlledProp.Value
+) => {
   return (
     <ControlledComponentWrapper controlledProp={controlledProp}>{child}</ControlledComponentWrapper>
   );
