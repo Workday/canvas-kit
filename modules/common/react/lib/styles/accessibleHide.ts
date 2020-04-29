@@ -17,4 +17,4 @@ const accessibleHide: CSSObject = {
   border: 0,
 };
 
-export default accessibleHide;
+export {accessibleHide};

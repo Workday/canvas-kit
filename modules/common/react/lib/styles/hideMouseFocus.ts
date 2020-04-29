@@ -42,4 +42,4 @@ export const mouseFocusBehavior = (selectors: IndexableObject) => {
   return output;
 };
 
-export default hideMouseFocus;
+export {hideMouseFocus};
