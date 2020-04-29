@@ -90,35 +90,3 @@ const Box = styled('div')(space)
   padding-left: 40px;
 */
 ```
-
-## Providers
-
-Providers are higher order (wrapping) components used to provide global configuration to Canvas
-components.
-
-#### Storybook Decorator
-
-We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
-stories in a `CanvasProvider` (including `InputProvider`) automatically.
-
-Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
-
-```js
-import {CanvasProviderDecorator} from '../utils/storybook';
-
-addDecorator(CanvasProviderDecorator);
-```
-
-Or, add it to stories individually:
-
-```js
-import {CanvasProviderDecorator} from '../../../../utils/storybook';
-
-storiesOf('My Story', module)
-  .addDecorator(CanvasProviderDecorator)
-  .add('All', () => <YourJSX />);
-```
-
-### Input Provider
-
-See the [@workday/canvas-kit-react-core docs](../../../core/react/README.md#input-provider)

@@ -119,6 +119,8 @@ Default: `bottom`
 
 Default: `true`
 
+## Provider
+
 ### Canvas Provider
 
 This provider includes all of the Canvas Providers below. This is the way most consumers should use
@@ -132,6 +134,29 @@ import * as React from 'react';
 import {CanvasProvider} from '@workday/canvas-kit-react-common';
 
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
+```
+
+#### Storybook Decorator
+
+We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
+stories in a `CanvasProvider` (including `InputProvider`) automatically.
+
+Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
+
+```js
+import {CanvasProviderDecorator} from '../utils/storybook';
+
+addDecorator(CanvasProviderDecorator);
+```
+
+Or, add it to stories individually:
+
+```js
+import {CanvasProviderDecorator} from '../../../../utils/storybook';
+
+storiesOf('My Story', module)
+  .addDecorator(CanvasProviderDecorator)
+  .add('All', () => <YourJSX />);
 ```
 
 ## Theming
