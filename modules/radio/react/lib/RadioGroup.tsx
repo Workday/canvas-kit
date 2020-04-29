@@ -1,8 +1,13 @@
 import * as React from 'react';
-import {Themeable} from '@workday/canvas-kit-labs-react-core';
 import Radio, {RadioProps} from './Radio';
 import {borderRadius, spacing} from '@workday/canvas-kit-react-core';
-import {ErrorType, GrowthBehavior, getErrorColors, styled} from '@workday/canvas-kit-react-common';
+import {
+  ErrorType,
+  GrowthBehavior,
+  getErrorColors,
+  styled,
+  Themeable,
+} from '@workday/canvas-kit-react-common';
 
 export interface RadioGroupProps extends Themeable, GrowthBehavior {
   /**

@@ -1,8 +1,7 @@
 import * as React from 'react';
-import {Themeable, CanvasTheme} from '@workday/canvas-kit-labs-react-core';
 import {ButtonColors, ButtonSize, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel} from './parts';
-import {GrowthBehavior, useTheme} from '@workday/canvas-kit-react-common';
+import {GrowthBehavior, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
 
 export interface DeleteButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,

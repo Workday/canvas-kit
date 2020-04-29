@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Themeable} from '@workday/canvas-kit-labs-react-core';
 import uuid from 'uuid/v4';
 import {
   ErrorType,
@@ -7,6 +6,7 @@ import {
   mouseFocusBehavior,
   getErrorColors,
   styled,
+  Themeable,
 } from '@workday/canvas-kit-react-common';
 import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react-core';
 

@@ -1,11 +1,7 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
-import useTheme from '../lib/theming/useTheme';
-import {
-  defaultCanvasTheme,
-  CanvasProvider,
-  createCanvasTheme,
-} from '@workday/canvas-kit-labs-react-core';
+import {CanvasProvider} from '../index';
+import {defaultCanvasTheme, createCanvasTheme, useTheme} from '../lib/theming/index';
 
 describe('useTheme', () => {
   const customTheme = createCanvasTheme({

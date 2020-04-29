@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {Themeable} from '@workday/canvas-kit-labs-react-core';
-import {focusRing, mouseFocusBehavior, styled} from '@workday/canvas-kit-react-common';
+import {focusRing, mouseFocusBehavior, styled, Themeable} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
