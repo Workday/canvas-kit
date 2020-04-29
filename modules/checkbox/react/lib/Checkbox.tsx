@@ -115,16 +115,16 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       },
     },
     '&:checked ~ div:first-of-type': {
-      borderColor: theme.palette.primary.main,
-      backgroundColor: theme.palette.primary.main,
+      borderColor: theme.canvas.palette.primary.main,
+      backgroundColor: theme.canvas.palette.primary.main,
     },
     '&:disabled ~ div:first-of-type': {
       borderColor: inputColors.disabled.border,
       backgroundColor: inputColors.disabled.background,
     },
     '&:disabled:checked ~ div:first-of-type': {
-      borderColor: theme.palette.primary.light,
-      backgroundColor: theme.palette.primary.light,
+      borderColor: theme.canvas.palette.primary.light,
+      backgroundColor: theme.canvas.palette.primary.light,
     },
 
     // Focus
@@ -132,7 +132,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       outline: 'none',
     },
     '&:focus ~ div:first-of-type': {
-      borderColor: theme.palette.primary.main,
+      borderColor: theme.canvas.palette.primary.main,
       borderWidth: '2px',
       boxShadow: 'none',
     },
@@ -151,11 +151,11 @@ const CheckboxInput = styled('input')<CheckboxProps>(
         },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: theme.palette.primary.main,
+        borderColor: theme.canvas.palette.primary.main,
       },
       '&:disabled:checked ~ div:first-of-type': {
-        borderColor: theme.palette.primary.light,
-        backgroundColor: theme.palette.primary.light,
+        borderColor: theme.canvas.palette.primary.light,
+        backgroundColor: theme.canvas.palette.primary.light,
       },
     }),
   }),
@@ -197,7 +197,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
         },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: theme.palette.primary.main,
+        borderColor: theme.canvas.palette.primary.main,
         boxShadow: `
             0 0 0 2px ${colors.frenchVanilla100},
             0 0 0 4px ${errorColors.inner},

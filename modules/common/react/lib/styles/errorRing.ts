@@ -11,7 +11,7 @@ const isAccessible = (foreground: string, background: string = colors.frenchVani
 export function getErrorColors(error?: ErrorType, theme?: CanvasTheme) {
   if (error === ErrorType.Error) {
     if (theme) {
-      const palette = theme.palette.error;
+      const palette = theme.canvas.palette.error;
       return {
         outer: isAccessible(palette.main) ? palette.main : palette.darkest,
         inner: palette.main,
@@ -24,7 +24,7 @@ export function getErrorColors(error?: ErrorType, theme?: CanvasTheme) {
     }
   } else if (error === ErrorType.Alert) {
     if (theme) {
-      const palette = theme.palette.alert;
+      const palette = theme.canvas.palette.alert;
       return {
         outer: isAccessible(palette.main) ? palette.main : palette.darkest,
         inner: palette.main,
@@ -60,7 +60,7 @@ export function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSObject {
       borderColor: errorColors.outer,
       boxShadow: `${errorBoxShadow},
         0 0 0 2px ${colors.frenchVanilla100},
-        0 0 0 4px ${theme ? theme.palette.common.focusOutline : inputColors.focusBorder}`,
+        0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
     },
   };
 }

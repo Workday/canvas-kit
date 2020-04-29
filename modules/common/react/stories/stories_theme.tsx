@@ -56,16 +56,18 @@ const PaletteTitle = styled(Swatch)(
 );
 
 const customTheme = {
-  palette: {
-    primary: {
-      main: colors.greenApple400,
+  canvas: {
+    palette: {
+      primary: {
+        main: colors.greenApple400,
+      },
     },
   },
 };
 const ThemedComponent = styled('h1')<Themeable>(({theme}) => ({
   ...type.h3,
-  background: theme.palette.primary.main,
-  color: theme.palette.primary.contrast,
+  background: theme.canvas.palette.primary.main,
+  color: theme.canvas.palette.primary.contrast,
   borderRadius: borderRadius.m,
   padding: spacing.xs,
   display: 'inline-block',
@@ -89,8 +91,8 @@ const ThemeDemo = (props: any) => {
     <div>
       <H1>Default Canvas Theme</H1>
       <Palettes>
-        {Object.keys(theme.palette).map(name => {
-          const palette = theme.palette[name as Palette] as CanvasThemePalette;
+        {Object.keys(theme.canvas.palette).map(name => {
+          const palette = theme.canvas.palette[name as Palette] as CanvasThemePalette;
           const bg = (palette.main && palette.main) || colors.soap200;
           const contrast = palette.contrast;
 

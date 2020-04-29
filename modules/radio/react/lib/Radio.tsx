@@ -114,12 +114,12 @@ const RadioInput = styled('input')<RadioProps>(
     },
     '&:hover ~ div:first-of-type': {
       backgroundColor: checked
-        ? theme.palette.primary.main
+        ? theme.canvas.palette.primary.main
         : disabled
         ? inputColors.disabled.background
         : 'white',
       borderColor: checked
-        ? theme.palette.primary.main
+        ? theme.canvas.palette.primary.main
         : disabled
         ? inputColors.disabled.border
         : inputColors.hoverBorder,
@@ -127,7 +127,9 @@ const RadioInput = styled('input')<RadioProps>(
     },
     '&:focus, &focus:hover': {
       '& ~ div:first-of-type': {
-        borderColor: checked ? theme.palette.primary.main : theme.palette.common.focusOutline,
+        borderColor: checked
+          ? theme.canvas.palette.primary.main
+          : theme.canvas.palette.common.focusOutline,
         borderWidth: '2px',
         zIndex: 2,
       },
@@ -139,10 +141,10 @@ const RadioInput = styled('input')<RadioProps>(
       '&:focus ~ div:first-of-type': {
         ...focusRing({width: 0}, theme),
         borderWidth: '1px',
-        borderColor: checked ? theme.palette.primary.main : inputColors.border,
+        borderColor: checked ? theme.canvas.palette.primary.main : inputColors.border,
       },
       '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
-        borderColor: checked ? theme.palette.primary.main : inputColors.hoverBorder,
+        borderColor: checked ? theme.canvas.palette.primary.main : inputColors.hoverBorder,
       },
     }),
   })
@@ -167,12 +169,12 @@ const RadioBackground = styled('div')<RadioProps>(
   },
   ({checked, disabled, theme}) => ({
     borderColor: checked
-      ? theme.palette.primary.main
+      ? theme.canvas.palette.primary.main
       : disabled
       ? inputColors.disabled.border
       : inputColors.border,
     backgroundColor: checked
-      ? theme.palette.primary.main
+      ? theme.canvas.palette.primary.main
       : disabled
       ? inputColors.disabled.background
       : 'white',

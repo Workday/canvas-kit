@@ -126,7 +126,9 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
   ({checked, disabled, theme}) => {
     if (checked) {
       return {
-        backgroundColor: disabled ? theme.palette.primary.light : theme.palette.primary.main,
+        backgroundColor: disabled
+          ? theme.canvas.palette.primary.light
+          : theme.canvas.palette.primary.main,
       };
     } else {
       return {

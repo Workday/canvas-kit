@@ -52,28 +52,28 @@ const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): Bu
     default:
       return {
         default: {
-          icon: theme.palette.primary.main,
-          label: theme.palette.primary.main,
+          icon: theme.canvas.palette.primary.main,
+          label: theme.canvas.palette.primary.main,
         },
         hover: {
           background: colors.soap200,
-          icon: theme.palette.primary.dark,
-          label: theme.palette.primary.dark,
+          icon: theme.canvas.palette.primary.dark,
+          label: theme.canvas.palette.primary.dark,
         },
         active: {
           background: colors.soap300,
-          icon: theme.palette.primary.dark,
-          label: theme.palette.primary.dark,
+          icon: theme.canvas.palette.primary.dark,
+          label: theme.canvas.palette.primary.dark,
         },
         focus: {
-          icon: theme.palette.primary.dark,
-          label: theme.palette.primary.dark,
+          icon: theme.canvas.palette.primary.dark,
+          label: theme.canvas.palette.primary.dark,
           focusRing: focusRing({}, theme),
         },
         disabled: {
           background: 'transparent',
-          icon: theme.palette.primary.light,
-          label: theme.palette.primary.light,
+          icon: theme.canvas.palette.primary.light,
+          label: theme.canvas.palette.primary.light,
         },
       };
     case TextButtonVariant.Inverse:

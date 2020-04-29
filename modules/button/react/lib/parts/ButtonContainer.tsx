@@ -49,9 +49,9 @@ function getIconColorSelectors(theme: CanvasTheme, color: string, fill?: boolean
       },
       '.wd-icon-accent, .wd-icon-accent2': {
         fill: fill
-          ? color === theme.palette.primary.contrast
-            ? theme.palette.primary.main
-            : theme.palette.primary.contrast
+          ? color === theme.canvas.palette.primary.contrast
+            ? theme.canvas.palette.primary.main
+            : theme.canvas.palette.primary.contrast
           : color,
       },
     },

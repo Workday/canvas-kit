@@ -82,21 +82,21 @@ export const getButtonColors = (
     case DropdownButtonVariant.Primary:
       return {
         default: {
-          background: theme.palette.primary.main,
-          icon: theme.palette.primary.contrast,
-          label: theme.palette.primary.contrast,
+          background: theme.canvas.palette.primary.main,
+          icon: theme.canvas.palette.primary.contrast,
+          label: theme.canvas.palette.primary.contrast,
         },
         hover: {
-          background: theme.palette.primary.dark,
+          background: theme.canvas.palette.primary.dark,
         },
         active: {
-          background: theme.palette.primary.darkest,
+          background: theme.canvas.palette.primary.darkest,
         },
         focus: {
-          background: theme.palette.primary.main,
+          background: theme.canvas.palette.primary.main,
         },
         disabled: {
-          background: theme.palette.primary.light,
+          background: theme.canvas.palette.primary.light,
         },
       };
     case ButtonVariant.Secondary:

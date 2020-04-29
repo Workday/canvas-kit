@@ -79,8 +79,8 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
       borderColor: inputColors.hoverBorder,
     },
     '&:focus:not([disabled])': {
-      borderColor: theme.palette.common.focusOutline,
-      boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
+      borderColor: theme.canvas.palette.common.focusOutline,
+      boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
       outline: 'none',
     },
     '&:disabled': {
