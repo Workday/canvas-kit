@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import {colors, spacing, type} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 
-import {ColorSwatch} from '@workday/canvas-kit-react-color-picker/lib/parts/ColorSwatch';
+import {ColorSwatch} from '@workday/canvas-kit-react-color-picker';
 
 export interface ResetButtonProps {
   label: string;
