@@ -14,12 +14,19 @@ or
 yarn add @workday/canvas-kit-react-common
 ```
 
-# Canvas Kit Popper
+Includes:
+
+- [Popper](#popper)
+- [Canvas Provider](#canvas-provider)
+- [Theming](#theming)
+- [Bidirectionality](#bidirectionality)
+
+## Popper
 
 A thin wrapper component around the Popper.js positioning engine. For reference:
 https://popper.js.org/
 
-## Usage
+### Usage
 
 ```tsx
 import * as React from 'react';
@@ -47,11 +54,11 @@ import {Popup} from '@workday/canvas-kit-react-popup';
 </Popper>;
 ```
 
-## Static Properties
+### Static Properties
 
 > None
 
-## Component Props
+### Component Props
 
 This component extends the HTML `div` element. All additional props that are passed to this
 component that are valid HTML attributes will be rendered as part of the wrapper `div` element. This
@@ -119,9 +126,9 @@ Default: `bottom`
 
 Default: `true`
 
-## Provider
+---
 
-### Canvas Provider
+## Canvas Provider
 
 This provider includes all of the Canvas Providers below. This is the way most consumers should use
 the provider. This provider is required for our theming capabilities, so you can find more
@@ -159,11 +166,15 @@ storiesOf('My Story', module)
   .add('All', () => <YourJSX />);
 ```
 
+---
+
 ## Theming
 
-Theming documentation has its own README. You can find it [here](./lib/theming/README.md)
+Theming documentation has its own README. You can find it [here](./lib/theming/README.md).
+
+---
 
 ## Bidirectionality
 
 Bidirectionality is provided by Theming. You can find Theming documentation
-[here](./lib/theming/README.md#bidirectionality)
+[here](./lib/theming/README.md#bidirectionality).
