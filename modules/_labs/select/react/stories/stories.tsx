@@ -323,6 +323,7 @@ storiesOf('Labs|Select/React/Visual Testing', module)
           <SelectOption
             {...props}
             onChange={() => {}} // eslint-disable-line no-empty-function
+            style={{width: 100}}
           >
             E-mail
           </SelectOption>
