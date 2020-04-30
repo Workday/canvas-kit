@@ -296,6 +296,7 @@ storiesOf('Labs|Select/React/Visual Testing', module)
         ]}
         columnProps={permutateProps(
           {
+            'aria-selected': [{label: '', value: undefined}, {label: 'Selected', value: 'true'}],
             className: [
               {label: 'Default', value: ''},
               {label: 'Hover', value: 'hover'},
@@ -305,7 +306,10 @@ storiesOf('Labs|Select/React/Visual Testing', module)
             disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
           },
           props => {
-            if (props.disabled && !['', 'hover'].includes(props.className)) {
+            if (
+              props.disabled &&
+              (!['', 'hover'].includes(props.className) || props['aria-selected'] === 'true')
+            ) {
               return false;
             }
             return true;
