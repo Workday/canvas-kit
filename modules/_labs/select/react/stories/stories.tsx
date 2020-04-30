@@ -304,11 +304,14 @@ storiesOf('Labs|Select/React/Visual Testing', module)
               {label: 'Active Hover', value: 'active hover'},
             ],
             disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+            focused: [{label: '', value: false}, {label: 'Assistive-focus', value: true}],
           },
           props => {
             if (
               props.disabled &&
-              (!['', 'hover'].includes(props.className) || props['aria-selected'] === 'true')
+              (props['aria-selected'] === 'true' ||
+                !['', 'hover'].includes(props.className) ||
+                props.focused)
             ) {
               return false;
             }
