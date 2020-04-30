@@ -51,7 +51,7 @@ describe('Popup', () => {
           getPopup().should('have.attr', 'role', 'dialog');
         });
 
-        it('should have an aria-labelledby attribute', () => {
+        it('should have an aria-labelledby attribute when a heading is provided', () => {
           getPopup().should('have.attr', 'aria-labelledby');
         });
       });

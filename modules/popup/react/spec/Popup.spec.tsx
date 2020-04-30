@@ -64,4 +64,21 @@ describe('Popup', () => {
       expect(getByRole('dialog')).toHaveAttribute('data-propspread', 'test');
     });
   });
+
+  describe('when rendered with a popup ref', () => {
+    it('should set the ref to the div element', () => {
+      const ref = React.createRef<HTMLDivElement>();
+
+      const {container} = render(
+        <Popup popupRef={ref} data-propspread="test" handleClose={cb}>
+          <div>Are you sure you'd like to delete the item titled 'My Item'?</div>
+
+          <button onClick={cb}>Delete</button>
+        </Popup>
+      );
+
+      expect(ref.current).not.toBeNull();
+      expect(ref.current).toHaveAttribute('role', 'dialog');
+    });
+  });
 });
