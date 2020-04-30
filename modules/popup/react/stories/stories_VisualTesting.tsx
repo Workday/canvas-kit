@@ -39,14 +39,7 @@ storiesOf('Components|Popups/Popup/React/Visual Testing', module)
               padding: PopupPadding.s,
             },
           },
-          {
-            label: 'With large padding',
-            props: {
-              heading: 'Delete Item',
-              handleClose: action('close button clicked'),
-              padding: PopupPadding.l,
-            },
-          },
+
           {
             label: 'With different depth value 1',
             props: {
