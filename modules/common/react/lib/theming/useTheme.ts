@@ -32,13 +32,13 @@ const getFilledTheme = (theme: PartialEmotionCanvasTheme) => ({
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
 export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme {
-  if (theme?.canvas) {
+  if (theme && theme.canvas) {
     return getFilledTheme(theme);
   }
 
   try {
     const contextTheme = React.useContext(ThemeContext) as EmotionCanvasTheme;
-    if (contextTheme?.canvas) {
+    if (contextTheme && contextTheme.canvas) {
       return getFilledTheme(contextTheme);
     }
   } catch (e) {

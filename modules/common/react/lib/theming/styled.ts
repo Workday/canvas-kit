@@ -30,7 +30,7 @@ function styled<Props>(node: any) {
     const newArgs: Interpolations = args.map(
       interpolation => (props: Props & {theme: EmotionCanvasTheme & {_staticStates?: boolean}}) => {
         props.theme = useTheme(props.theme);
-        const direction = props.theme.canvas?.direction;
+        const direction = props.theme.canvas.direction;
         const maybeFlip = direction === ContentDirection.RTL ? rtlCSSJS : noop;
         const maybeConvert = props.theme._staticStates ? convertToStaticStates : noop;
 

@@ -72,8 +72,9 @@ export function focusRing(options: FocusRingOptions = {}, theme?: EmotionCanvasT
     animate = true,
     inset = false,
     innerColor = canvas.colors.frenchVanilla100,
-    outerColor = theme?.canvas?.palette.common.focusOutline ||
-      defaultCanvasTheme.palette.common.focusOutline,
+    outerColor = theme && theme.canvas
+      ? theme.canvas.palette.common.focusOutline
+      : defaultCanvasTheme.palette.common.focusOutline,
     memoize = true,
   } = options;
 
