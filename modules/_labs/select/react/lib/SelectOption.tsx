@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-labs-react-core';
 import {ErrorType} from '@workday/canvas-kit-react-common';
-import {colors, commonColors, type, typeColors} from '@workday/canvas-kit-react-core';
+import {colors, commonColors, spacing, type, typeColors} from '@workday/canvas-kit-react-core';
+import {checkIcon} from '@workday/canvas-system-icons-web';
+import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
 export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
   /**
@@ -53,6 +55,7 @@ const Option = styled('li')<SelectOptionProps>(
     listStyle: 'none',
     // In case the content of the option is empty/undefined for some reason
     minHeight: type.body.lineHeight,
+    position: 'relative',
   },
   ({disabled, focused, interactive}) => {
     if (disabled) {
@@ -64,31 +67,26 @@ const Option = styled('li')<SelectOptionProps>(
       // ...else if the option is focused, return focused styles...
       return {
         ...activeStyles,
-      };
-    } else {
-      // ...else return hover and selected (via aria-selected) styles
-      const selectedStyles = {
-        '&[aria-selected="true"]': {
-          backgroundColor: colors.blueberry100,
+        '&:hover': {
+          backgroundColor: colors.blueberry500,
         },
       };
-      // Only display interactive (hover/active) styles if the option is interactive
-      const interactiveStyles = interactive
+    } else {
+      // ...else, return interactive (hover/active) styles if the option is interactive
+      return interactive
         ? {
             '&:hover': {
               backgroundColor: commonColors.hoverBackground,
             },
-            '&:active, &:active[aria-selected="true"]': {
+            '&:active': {
               ...activeStyles,
+              // TODO: is there a better way to designate this fill color?
+              '.wd-icon-fill': {
+                fill: colors.frenchVanilla100,
+              },
             },
           }
         : {};
-      return {
-        // Place selected styles after interactive styles to have selected styles
-        // override interactive styles (subject to CSS specificity rules)
-        ...interactiveStyles,
-        ...selectedStyles,
-      };
     }
   },
   ({error}) => ({
@@ -98,12 +96,32 @@ const Option = styled('li')<SelectOptionProps>(
   })
 );
 
+const SelectedIcon = styled(SystemIcon)({
+  position: 'absolute',
+  top: spacing.xxxs,
+  right: spacing.xxxs,
+  pointerEvents: 'none',
+});
+
 const SelectOption = (props: SelectOptionProps) => {
-  const {children, optionRef, value, ...elemProps} = props;
+  const {'aria-selected': ariaSelected, children, focused, optionRef, value, ...elemProps} = props;
 
   return (
-    <Option data-value={value} ref={optionRef} role="option" {...elemProps}>
+    <Option
+      aria-selected={ariaSelected}
+      data-value={value}
+      focused={focused}
+      ref={optionRef}
+      role="option"
+      {...elemProps}
+    >
       {children}
+      {ariaSelected && (
+        <SelectedIcon
+          color={focused ? colors.frenchVanilla100 : colors.blueberry500}
+          icon={checkIcon}
+        />
+      )}
     </Option>
   );
 };
