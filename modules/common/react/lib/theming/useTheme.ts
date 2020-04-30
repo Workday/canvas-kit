@@ -47,7 +47,7 @@ export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
 
   const windowTheme = get(window, 'window.workday.canvas.theme');
   if (windowTheme) {
-    return getFilledTheme(windowTheme);
+    return getFilledTheme({canvas: windowTheme});
   }
 
   return {canvas: defaultCanvasTheme};
