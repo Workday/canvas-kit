@@ -38,7 +38,7 @@ describe('Popup', () => {
         getPopupTargetButton().click();
       });
 
-      it('should open the modal', () => {
+      it('should open the popup', () => {
         getPopup().should('be.visible');
       });
 
@@ -52,7 +52,7 @@ describe('Popup', () => {
         });
 
         it('should have an aria-labelledby attribute', () => {
-          h.modal.get().should('have.attr', 'aria-labelledby');
+          getPopup().should('have.attr', 'aria-labelledby');
         });
       });
 
@@ -67,24 +67,4 @@ describe('Popup', () => {
       });
     });
   });
-
-  //   ['Error', 'Success'].forEach(story => {
-  //     context(`given the '${story}' story is rendered`, () => {
-  //       beforeEach(() => {
-  //         h.stories.load('Components|Popups/Toast/React', story);
-  //       });
-  //       it('should not have any axe errors', () => {
-  //         cy.checkA11y();
-  //       });
-  //     });
-  //   });
-
-  //   context(`given the toast with a close button  and action button`, () => {
-  //     beforeEach(() => {
-  //       h.stories.load('Components|Popups/Toast/React', 'With action link and close icon');
-  //     });
-  //     it('should have a role of dialog', () => {
-  //       getDialogToast().should('have.attr', 'role', 'dialog');
-  //     });
-  //   });
 });
