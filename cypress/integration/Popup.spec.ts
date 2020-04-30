@@ -24,7 +24,7 @@ describe('Popup', () => {
       cy.checkA11y();
     });
 
-    it('should have a role of status', () => {
+    it('should have a role of dialog', () => {
       getPopup().should('have.attr', 'role', 'dialog');
     });
   });
