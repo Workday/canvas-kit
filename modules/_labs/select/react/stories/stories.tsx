@@ -253,7 +253,6 @@ storiesOf('Labs|Select/React/Visual Testing', module)
         {props => (
           <Select
             {...props}
-            style={{width: 100}}
             onChange={() => {}} // eslint-disable-line no-empty-function
             options={options}
           />
@@ -320,13 +319,14 @@ storiesOf('Labs|Select/React/Visual Testing', module)
         )}
       >
         {props => (
-          <SelectOption
-            {...props}
-            onChange={() => {}} // eslint-disable-line no-empty-function
-            style={{width: 100}}
-          >
-            E-mail
-          </SelectOption>
+          <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 120}}>
+            <SelectOption
+              {...props}
+              onChange={() => {}} // eslint-disable-line no-empty-function
+            >
+              E-mail
+            </SelectOption>
+          </ul>
         )}
       </ComponentStatesTable>
     </StaticStates>
