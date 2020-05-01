@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {ThemeProvider} from 'emotion-theming';
 import {InputProvider} from '@workday/canvas-kit-react-core';
-import {CanvasTheme, ContentDirection} from './theming/types';
-import {defaultCanvasTheme} from './theming/theme';
+import {defaultCanvasTheme, CanvasTheme, ContentDirection} from '../lib/theming/index';
 import styled from '@emotion/styled';
 
 export interface CanvasProviderProps {
@@ -13,7 +12,7 @@ const DirectionContainer = styled('bdo')<{dir: ContentDirection}>(({dir}) => ({
   direction: dir,
 }));
 
-export default class CanvasProvider extends React.Component<CanvasProviderProps> {
+export class CanvasProvider extends React.Component<CanvasProviderProps> {
   static defaultProps = {
     theme: defaultCanvasTheme,
   };

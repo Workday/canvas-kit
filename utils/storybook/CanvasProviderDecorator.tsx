@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {
-  CanvasProvider,
   defaultCanvasTheme,
   createCanvasTheme,
-} from '@workday/canvas-kit-labs-react-core';
+  CanvasProvider,
+} from '@workday/canvas-kit-react-common';
 import {object} from '@storybook/addon-knobs';
 
 const label = 'theme';

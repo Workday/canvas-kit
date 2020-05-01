@@ -1,6 +1,6 @@
 import {keyframes, CSSObject} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
-import {CanvasTheme, defaultCanvasTheme} from '@workday/canvas-kit-labs-react-core';
+import {CanvasTheme, defaultCanvasTheme} from '../theming/index';
 import memoize from 'lodash/memoize';
 
 interface FocusRingOptions {
@@ -65,7 +65,7 @@ export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.s
  *
  * @returns {CSSObject} the css object for the focus ring style
  */
-export default function focusRing(
+export function focusRing(
   options: FocusRingOptions = {},
   theme: CanvasTheme = defaultCanvasTheme
 ): CSSObject {

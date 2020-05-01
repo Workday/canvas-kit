@@ -1,10 +1,10 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import CanvasProvider from '../lib/CanvasProvider';
+import {CanvasProvider} from '../index';
 import {CanvasTheme, CanvasThemePalette, Themeable, createCanvasTheme} from '../lib/theming';
 import README from '../lib/theming/README.md';
 import {H1, colors, type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
@@ -116,7 +116,7 @@ const ThemeDemo = (props: any) => {
   );
 };
 
-storiesOf('Labs|Core/React', module)
+storiesOf('Tokens|Common/Theming', module)
   .addDecorator(withReadme(README))
   .add('Theme', () => {
     return <ThemeDemo />;

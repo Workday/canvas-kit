@@ -1,6 +1,11 @@
 import * as React from 'react';
-import {Themeable} from '@workday/canvas-kit-labs-react-core';
-import {GrowthBehavior, ErrorType, errorRing, styled} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  ErrorType,
+  errorRing,
+  styled,
+  Themeable,
+} from '@workday/canvas-kit-react-common';
 import {
   colors,
   borderRadius,

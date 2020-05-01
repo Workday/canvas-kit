@@ -1,4 +1,4 @@
-import {CanvasTheme} from '@workday/canvas-kit-labs-react-core';
+import {CanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
 import {CSSObject} from '@emotion/core';
 import {colors, inputColors} from '@workday/canvas-kit-react-core';
@@ -40,7 +40,7 @@ export function getErrorColors(error?: ErrorType, theme?: CanvasTheme) {
   }
 }
 
-export default function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSObject {
+export function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSObject {
   if (error !== ErrorType.Error && error !== ErrorType.Alert) {
     return {};
   }
