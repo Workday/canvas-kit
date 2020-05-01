@@ -92,7 +92,11 @@ storiesOf('Components|Popups/Popup/React/Visual Testing', module)
         ]}
         columnProps={[{label: 'Default', props: {}}]}
       >
-        {props => <Popup {...props}>Your workbook was successfully processed.</Popup>}
+        {props => (
+          <Popup transformOrigin={null} {...props}>
+            Your workbook was successfully processed.
+          </Popup>
+        )}
       </ComponentStatesTable>
     </StaticStates>
   ));

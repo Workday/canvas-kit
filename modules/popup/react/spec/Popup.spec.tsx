@@ -69,7 +69,7 @@ describe('Popup', () => {
     it('should set the ref to the div element', () => {
       const ref = React.createRef<HTMLDivElement>();
 
-      const {container} = render(
+      render(
         <Popup popupRef={ref} data-propspread="test" handleClose={cb}>
           <div>Are you sure you'd like to delete the item titled 'My Item'?</div>
 
