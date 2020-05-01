@@ -215,7 +215,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     this.enableListeners(false);
   }
 
-  enableListeners(enable: boolean) {
+  enableListeners = (enable: boolean) => {
     /* istanbul ignore if for coverage */
     if (typeof window === 'undefined') {
       return;
@@ -231,7 +231,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     const fn = enable ? window.addEventListener : window.removeEventListener;
 
     // pointer events (mouse, pen, touch)
-    if (window.PointerEvent) {
+    if ('PointerEvent' in window) {
       fn('pointerdown', this.setInput);
     } else {
       // mouse events
@@ -245,7 +245,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     }
 
     if (this.provideIntent) {
-      if (window.PointerEvent) {
+      if ('PointerEvent' in window) {
         fn('pointermove', this.setIntent);
       } else {
         fn('mousemove', this.setIntent);
@@ -258,7 +258,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     // keyboard events
     fn('keydown', this.eventBuffer);
     fn('keyup', this.eventBuffer);
-  }
+  };
 
   setInput(event: InputEvent) {
     // only execute if the event buffer timer isn't running

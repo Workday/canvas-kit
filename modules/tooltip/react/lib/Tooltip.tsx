@@ -43,7 +43,7 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
 }
 
 export const Tooltip = ({
-  type = 'label',
+  type = 'label1',
   placement = 'top',
   title,
   children,

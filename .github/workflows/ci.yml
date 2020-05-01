@@ -45,6 +45,9 @@ jobs:
       - name: Dependency Check
         run: yarn depcheck
 
+      - name: Type Check
+        run: yarn typecheck
+
       - name: Unit tests
         run: yarn test
 
