@@ -24,7 +24,9 @@ export class CanvasProvider extends React.Component<CanvasProviderProps> {
     return (
       <ThemeProvider theme={theme}>
         <InputProvider />
-        <DirectionContainer dir={theme.canvas.direction || defaultCanvasTheme.direction}>
+        <DirectionContainer
+          dir={(theme.canvas && theme.canvas.direction) || defaultCanvasTheme.direction}
+        >
           {children}
         </DirectionContainer>
       </ThemeProvider>

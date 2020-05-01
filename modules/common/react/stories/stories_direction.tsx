@@ -20,9 +20,9 @@ storiesOf('Tokens|Common/Theming', module)
   .add('Direction', () => (
     <div className="story">
       <section>
-        <CanvasProvider theme={{direction: ContentDirection.RTL}}>
+        <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
           <Card heading="مشغل وسائط" style={{width: '186px'}}>
-            <CanvasProvider theme={{direction: ContentDirection.LTR}}>
+            <CanvasProvider theme={{canvas: {direction: ContentDirection.LTR}}}>
               <IconButton
                 {...commonIconButtonProps}
                 variant={IconButton.Variant.Circle}
