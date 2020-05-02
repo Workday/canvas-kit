@@ -231,7 +231,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     const fn = enable ? window.addEventListener : window.removeEventListener;
 
     // pointer events (mouse, pen, touch)
-    if ('PointerEvent' in window) {
+    if (window.PointerEvent) {
       fn('pointerdown', this.setInput);
     } else {
       // mouse events
@@ -245,7 +245,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     }
 
     if (this.provideIntent) {
-      if ('PointerEvent' in window) {
+      if (window.PointerEvent) {
         fn('pointermove', this.setIntent);
       } else {
         fn('mousemove', this.setIntent);
