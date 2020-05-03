@@ -34,6 +34,10 @@ export interface AvatarLocalProps {
 
 export interface AvatarProps extends AvatarLocalProps, React.HTMLAttributes<HTMLDivElement> {}
 
+export interface AvatarState {
+  hasImageError: boolean;
+}
+
 export const avatarStyles: CSSObject = {
   background: colors.soap200,
   display: 'flex',
@@ -62,9 +66,30 @@ const StyledContainer = styled('div', {
   })
 );
 
-export default class Avatar extends React.Component<AvatarProps> {
+export default class Avatar extends React.Component<AvatarProps, AvatarState> {
   static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
+
+  static defaultProps = {
+    variant: AvatarVariant.Light,
+    size: SystemIconCircleSize.m,
+    altText: 'Avatar',
+  };
+
+  constructor(props: AvatarProps) {
+    super(props);
+    this.state = {
+      hasImageError: false,
+    };
+  }
+
+  public setFallbackIcon = () => {
+    if (!this.state.hasImageError) {
+      this.setState({
+        hasImageError: true,
+      });
+    }
+  };
 
   render() {
     const {
@@ -78,8 +103,8 @@ export default class Avatar extends React.Component<AvatarProps> {
     const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
     return (
       <StyledContainer variant={variant} size={size} aria-label={altText} {...elemProps}>
-        {url ? (
-          <img src={url} alt={altText} />
+        {url && !this.state.hasImageError ? (
+          <img src={url} alt={altText} onError={this.setFallbackIcon} />
         ) : (
           <SystemIconCircle icon={userIcon} background={background} size={size} />
         )}

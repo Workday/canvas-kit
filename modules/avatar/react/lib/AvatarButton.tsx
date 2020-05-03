@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {AvatarVariant, AvatarLocalProps, avatarStyles} from './Avatar';
+import {AvatarVariant, AvatarLocalProps, avatarStyles, AvatarState} from './Avatar';
 import {colors} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
@@ -37,9 +37,30 @@ const AvatarAsButton = styled('button')<AvatarButtonProps>(
   })
 );
 
-export default class AvatarButton extends React.Component<AvatarButtonProps> {
+export default class AvatarButton extends React.Component<AvatarButtonProps, AvatarState> {
   static Variant = AvatarVariant;
   static Size = SystemIconCircleSize;
+
+  static defaultProps = {
+    variant: AvatarVariant.Light,
+    size: SystemIconCircleSize.m,
+    altText: 'Avatar',
+  };
+
+  constructor(props: AvatarButtonProps) {
+    super(props);
+    this.state = {
+      hasImageError: false,
+    };
+  }
+
+  public setFallbackIcon = () => {
+    if (!this.state.hasImageError) {
+      this.setState({
+        hasImageError: true,
+      });
+    }
+  };
 
   render() {
     const {
@@ -66,8 +87,8 @@ export default class AvatarButton extends React.Component<AvatarButtonProps> {
         aria-label={altText}
         {...elemProps}
       >
-        {url ? (
-          <img src={url} alt={altText} />
+        {url && !this.state.hasImageError ? (
+          <img src={url} alt={altText} onError={this.setFallbackIcon} />
         ) : (
           <SystemIconCircle icon={userIcon} background={background} size={size} />
         )}
