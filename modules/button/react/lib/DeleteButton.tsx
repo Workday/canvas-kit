@@ -55,5 +55,7 @@ const DeleteButton: ButtonOrAnchorComponent<DeleteButtonProps> = ({
 );
 
 DeleteButton.Size = ButtonSize;
+// @ts-ignore ButtonOrAnchorComponent requires a Variant, but will complain Variable 'Variant' implicitly has an 'any' type. ts(7005)
+DeleteButton.Variant = undefined;
 
 export default DeleteButton;

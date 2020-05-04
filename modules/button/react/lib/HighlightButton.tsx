@@ -86,4 +86,7 @@ HighlightButton.Size = {
   Large: 'large',
 } as const;
 
+// @ts-ignore ButtonOrAnchorComponent requires a Variant, but will complain Variable 'Variant' implicitly has an 'any' type. ts(7005)
+HighlightButton.Variant = undefined;
+
 export default HighlightButton;

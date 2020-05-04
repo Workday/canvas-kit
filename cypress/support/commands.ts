@@ -1,5 +1,4 @@
 import * as axe from 'axe-core';
-import {Promise} from 'cypress/types/bluebird';
 
 declare global {
   interface Window {
@@ -95,13 +94,17 @@ export const haveAriaLabel = (text: string) => ($target: JQuery) => {
   }
 };
 
+function isKeyOf<T>(obj: T, key: any): key is keyof T {
+  return typeof key === 'string' && key in obj;
+}
+
 Cypress.Commands.overwrite('should', (originalFn, subject, expectation, ...args) => {
   const customMatchers = {
     'have.ariaDescription': haveAriaDescription(args[0]),
     'have.ariaLabel': haveAriaLabel(args[0]),
   };
   // See if the expectation is a string and if it is a member of Jest's expect
-  if (typeof expectation === 'string' && customMatchers[expectation]) {
+  if (isKeyOf(customMatchers, expectation)) {
     return originalFn(subject, customMatchers[expectation]);
   }
 

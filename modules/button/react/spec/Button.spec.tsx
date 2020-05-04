@@ -10,7 +10,7 @@ import {
 } from '../index';
 import {render, fireEvent} from '@testing-library/react';
 
-const map: any = {
+const map = {
   Button: Button,
   'Delete Button': DeleteButton,
   'Dropdown Button': DropdownButton,
@@ -20,7 +20,7 @@ const map: any = {
   'Deprecated Button': DeprecatedButton,
 };
 Object.keys(map).forEach(buttonName => {
-  const ButtonComponent = map[buttonName];
+  const ButtonComponent: typeof Button = map[buttonName];
 
   describe(buttonName, () => {
     const cb = jest.fn();

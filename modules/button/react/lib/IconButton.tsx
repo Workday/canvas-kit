@@ -3,7 +3,7 @@ import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {IconButtonVariant, ButtonColors, ButtonSize} from './types';
+import {IconButtonVariant, ButtonColors, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer} from './parts';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Themeable {
@@ -45,24 +45,11 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   as?: 'a';
 }
 
-/**
- * Type for an overloaded functional component to enable button or anchor tags.
- * Note: Cannot use `./types.tsx > ButtonOrAnchorElement` type due to `aria-label` conflict.
- */
-type ButtonOrAnchorComponent = {
-  (props: IconButtonProps): React.ReactElement;
-  (
-    props: {as: 'a'} & Omit<
-      IconButtonProps,
-      keyof Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'aria-label'>
-    > &
-      React.AnchorHTMLAttributes<HTMLAnchorElement>
-  ): React.ReactElement;
-  Variant: typeof IconButtonVariant;
-  Size: Partial<typeof ButtonSize>;
-};
-
-const IconButton: ButtonOrAnchorComponent = ({
+const IconButton: ButtonOrAnchorComponent<
+  IconButtonProps,
+  typeof IconButtonVariant,
+  'aria-label'
+> = ({
   theme = useTheme(),
   variant = IconButtonVariant.Circle,
   size = 'medium',
