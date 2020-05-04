@@ -96,17 +96,22 @@ export interface ButtonColors {
 /**
  * Used to get the props of the anchor version of a button
  */
-export type AnchorButtonProps<P> = Omit<P, keyof React.ButtonHTMLAttributes<HTMLButtonElement>> &
+export type AnchorButtonProps<P, K extends keyof P = never> = Omit<
+  P,
+  keyof Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, K>
+> &
   React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 /**
  * Returns an overloaded functional component that uses props P by default,
- * but uses AnchorButtonProps<P> when `as="a"`.
- * Note: V must be `typeof ButtonVariant` since TS cannot assign enums as a type in a generic properly
+ * but uses `AnchorButtonProps<P, K>` when `as="a"`.
+ * `K` is a key of `P`
+ *
+ * Note: `V` must be `typeof ButtonVariant` since TS cannot assign enums as a type in a generic properly
  */
-export type ButtonOrAnchorComponent<P, V = undefined> = {
+export type ButtonOrAnchorComponent<P, V = undefined, K extends keyof P = never> = {
+  (props: {as: 'a'} & AnchorButtonProps<P, K>): React.ReactElement;
   (props: P): React.ReactElement;
-  (props: {as: 'a'} & AnchorButtonProps<P>): React.ReactElement;
-  Variant?: V;
+  Variant: V;
   Size: Partial<typeof ButtonSize>;
 };
