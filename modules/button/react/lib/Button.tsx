@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
-import {GrowthBehavior, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  useTheme,
+  Themeable,
+  EmotionCanvasTheme,
+} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {
   ButtonVariant,
@@ -75,7 +80,7 @@ export default Button;
 
 export const getButtonColors = (
   variant: ButtonVariant | DropdownButtonVariant,
-  theme: CanvasTheme
+  theme: EmotionCanvasTheme
 ): ButtonColors => {
   switch (variant) {
     case ButtonVariant.Primary:

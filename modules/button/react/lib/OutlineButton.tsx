@@ -5,7 +5,7 @@ import {
   GrowthBehavior,
   useTheme,
   Themeable,
-  CanvasTheme,
+  EmotionCanvasTheme,
 } from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {OutlineButtonVariant, ButtonColors, ButtonSize, ButtonOrAnchorComponent} from './types';
@@ -75,7 +75,7 @@ export default OutlineButton;
 
 export const getOutlineButtonColors = (
   variant: OutlineButtonVariant,
-  theme: CanvasTheme
+  theme: EmotionCanvasTheme
 ): ButtonColors => {
   switch (variant) {
     case OutlineButtonVariant.Primary:

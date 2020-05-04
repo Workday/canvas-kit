@@ -1,7 +1,12 @@
 import * as React from 'react';
 import {ButtonColors, ButtonSize, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel} from './parts';
-import {GrowthBehavior, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  useTheme,
+  Themeable,
+  EmotionCanvasTheme,
+} from '@workday/canvas-kit-react-common';
 
 export interface DeleteButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -23,7 +28,7 @@ export interface DeleteButtonProps
   as?: 'a';
 }
 
-const getDeleteButtonColors = (theme: CanvasTheme): ButtonColors => ({
+const getDeleteButtonColors = (theme: EmotionCanvasTheme): ButtonColors => ({
   default: {
     background: theme.canvas.palette.error.main,
     label: theme.canvas.palette.error.contrast,

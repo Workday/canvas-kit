@@ -8,7 +8,7 @@ import {
   mouseFocusBehavior,
   focusRing,
   styled,
-  CanvasTheme,
+  EmotionCanvasTheme,
 } from '@workday/canvas-kit-react-common';
 import {ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
@@ -38,7 +38,11 @@ export interface ButtonContainerProps
   extraStyles?: CSSObject;
 }
 
-function getIconColorSelectors(theme: CanvasTheme, color: string, fill?: boolean): CSSObject {
+function getIconColorSelectors(
+  theme: EmotionCanvasTheme,
+  color: string,
+  fill?: boolean
+): CSSObject {
   return {
     '&:focus span, &:hover span, & span': {
       '.wd-icon-fill': {

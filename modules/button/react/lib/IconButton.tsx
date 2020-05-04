@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
+import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {IconButtonVariant, ButtonColors, ButtonOrAnchorComponent} from './types';
@@ -118,7 +118,7 @@ export default IconButton;
 
 const getIconButtonColors = (
   variant: IconButtonVariant,
-  theme: CanvasTheme,
+  theme: EmotionCanvasTheme,
   toggled?: boolean
 ): ButtonColors => {
   switch (variant) {

@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
-import {GrowthBehavior, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  useTheme,
+  Themeable,
+  EmotionCanvasTheme,
+} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
@@ -29,7 +34,7 @@ export interface HighlightButtonProps
   as?: 'a';
 }
 
-const getHighlightButtonColors = (theme: CanvasTheme): ButtonColors => ({
+const getHighlightButtonColors = (theme: EmotionCanvasTheme): ButtonColors => ({
   default: {
     background: colors.soap200,
     border: colors.soap200,

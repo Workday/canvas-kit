@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {type} from '@workday/canvas-kit-labs-react-core';
-import {focusRing, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
+import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {
@@ -46,7 +46,10 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   as?: 'a';
 }
 
-const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): ButtonColors => {
+const getTextButtonColors = (
+  variant: TextButtonVariant,
+  theme: EmotionCanvasTheme
+): ButtonColors => {
   switch (variant) {
     case TextButtonVariant.Default:
     default:
