@@ -25,27 +25,31 @@ describe('Popup', () => {
   describe('when rendered with a handleClose', () => {
     it('should render popup with a close button', () => {
       const closeButtonAriaLabel = 'close';
-      const {getAllByRole} = render(
+      const {getByRole} = render(
         <Popup closeLabel={closeButtonAriaLabel} handleClose={cb}>
           <div>Are you sure you'd like to delete the item titled 'My Item'?</div>
 
           <button onClick={cb}>Delete</button>
         </Popup>
       );
-
-      expect(getAllByRole('button')[0]).toHaveAttribute('aria-label', closeButtonAriaLabel);
+      getByRole('dialog').querySelector('[data-close]');
+      expect(getByRole('dialog').querySelector('[data-close]')).toHaveAttribute(
+        'aria-label',
+        closeButtonAriaLabel
+      );
     });
 
     it('should call the handleClose callback when clicked', () => {
       const closeButtonAriaLabel = 'close';
-      const {getAllByRole} = render(
+      const {getByRole} = render(
         <Popup closeLabel={closeButtonAriaLabel} handleClose={cb}>
           <div>Are you sure you'd like to delete the item titled 'My Item'?</div>
 
           <button onClick={cb}>Delete</button>
         </Popup>
       );
-      fireEvent.click(getAllByRole('button')[0]);
+
+      fireEvent.click(getByRole('dialog').querySelector('[data-close]'));
 
       expect(cb).toHaveBeenCalledTimes(1);
     });
