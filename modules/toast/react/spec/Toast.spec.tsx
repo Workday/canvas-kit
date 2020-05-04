@@ -41,8 +41,8 @@ describe('Toast', () => {
           {toastMessage}
         </Toast>
       );
-      const closeIcon = container.querySelector('[data-close="close"]'); /*? */
-      fireEvent.click(closeIcon); /*? */
+      const closeIcon = container.querySelector('[data-close="close"]');
+      fireEvent.click(closeIcon);
       expect(cb).toHaveBeenCalledTimes(1);
     });
   });
