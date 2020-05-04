@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
 import {render, fireEvent} from '@testing-library/react';
 import SegmentedControl from '../lib/SegmentedControl';
 import {IconButton} from '@workday/canvas-kit-react-button';

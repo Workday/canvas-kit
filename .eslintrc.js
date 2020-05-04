@@ -23,7 +23,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: ['./tsconfig.json', './cypress/tsconfig.json'],
+    project: ['./tsconfig.eslint.json', './cypress/tsconfig.json'],
     sourceType: 'module',
   },
   settings: {
@@ -71,13 +71,13 @@ module.exports = {
     'no-undef-init': 'error',
     'no-unused-expressions': 'error',
     'no-unused-labels': 'error',
-    'no-use-before-define': ['warn', {functions: false, classes: true}],
+    'no-use-before-define': 'off', // TS takes care of this one...
     'no-var': 'error',
     'prefer-const': 'error',
     'space-before-function-paren': 'off',
     'react/jsx-no-bind': 'off', // Keep perf implications in mind, but was giving too many warnings and hurting readability
     curly: 'error',
     radix: 'error',
-    'prettier/prettier': ['error', prettierConfig],
+    'prettier/prettier': ['warn', prettierConfig],
   },
 };
