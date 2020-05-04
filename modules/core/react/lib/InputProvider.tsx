@@ -215,7 +215,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     this.enableListeners(false);
   }
 
-  enableListeners = (enable: boolean) => {
+  enableListeners(enable: boolean) {
     /* istanbul ignore if for coverage */
     if (typeof window === 'undefined') {
       return;
@@ -258,7 +258,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     // keyboard events
     fn('keydown', this.eventBuffer);
     fn('keyup', this.eventBuffer);
-  };
+  }
 
   setInput(event: InputEvent) {
     // only execute if the event buffer timer isn't running

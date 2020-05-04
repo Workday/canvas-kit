@@ -94,9 +94,9 @@ export const haveAriaLabel = (text: string) => ($target: JQuery) => {
   }
 };
 
-const isKeyOf = <T>(obj: T, key: any): key is keyof T => {
+function isKeyOf<T>(obj: T, key: any): key is keyof T {
   return typeof key === 'string' && key in obj;
-};
+}
 
 Cypress.Commands.overwrite('should', (originalFn, subject, expectation, ...args) => {
   const customMatchers = {
