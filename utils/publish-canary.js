@@ -27,13 +27,13 @@ const regex = new RegExp('@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-' + preid + '.\\d*\
 
 cmd('git rev-parse --short HEAD')
   .then(sha => {
-    data.sha = sha;
+    data.sha = sha.trim();
 
     const lernaFlags = [
       `--yes`,
       `--force-publish="*"`,
       `--canary`,
-      `--preid ${preid}.${sha}`,
+      `--preid ${preid}.${data.sha}`,
       `--dist-tag ${preid}`,
       preid === 'prerelease' ? 'major' : '',
     ];
