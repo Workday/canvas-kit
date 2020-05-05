@@ -37,7 +37,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
    */
   as?: 'div';
   /**
-   * The function called when the AvatarButton is clicked.
+   * The function called when the Avatar is clicked.
    */
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   /**
