@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-core",
-  "version": "4.0.0-beta.1",
+  "version": "4.0.0-beta.2",
   "description": "A group of core primitives (i.e. colors, text, etc.)",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
