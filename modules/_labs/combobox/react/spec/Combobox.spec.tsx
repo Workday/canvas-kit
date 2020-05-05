@@ -347,7 +347,7 @@ describe('Combobox', () => {
     ];
     const accessibleGroupText = `Entering group ${groupName}, with ${autocompleteItems[0].items.length} options.`;
 
-    const { queryAllByText, findByPlaceholderText} = renderCombobox({
+    const {queryAllByText, findByPlaceholderText} = renderCombobox({
       ...defaultProps,
       autocompleteItems,
     });
