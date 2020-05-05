@@ -63,7 +63,7 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'gro
   }),
   ({theme}) => ({
     paddingLeft:
-      theme.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */',
+      theme.canvas.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */',
     // We're using @noflip because ColorInput should stay LTR, therefore, we need to adjust the padding using ContentDirection, not using rtl-css-js.
   })
 );
@@ -91,7 +91,7 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
     color: disabled ? inputColors.disabled.text : undefined,
   }),
   ({theme}) => ({
-    left: theme.direction === ContentDirection.LTR ? '36px' : '88px',
+    left: theme.canvas.direction === ContentDirection.LTR ? '36px' : '88px',
     //    - LTR -> left: 36px;
     //    - RTL -> right: 88px;
     //
