@@ -77,32 +77,38 @@ export const getOutlineButtonColors = (
   variant: OutlineButtonVariant,
   theme: EmotionCanvasTheme
 ): ButtonColors => {
+  const {
+    canvas: {
+      palette: {primary: themePrimary},
+    },
+  } = theme;
+
   switch (variant) {
     case OutlineButtonVariant.Primary:
       return {
         default: {
-          border: theme.canvas.palette.primary.main,
-          icon: theme.canvas.palette.primary.main,
-          label: theme.canvas.palette.primary.main,
+          border: themePrimary.main,
+          icon: themePrimary.main,
+          label: themePrimary.main,
         },
         hover: {
-          background: theme.canvas.palette.primary.main,
-          icon: theme.canvas.palette.primary.contrast,
-          label: theme.canvas.palette.primary.contrast,
+          background: themePrimary.main,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
         },
         active: {
-          background: theme.canvas.palette.primary.dark,
-          border: theme.canvas.palette.primary.dark,
-          icon: theme.canvas.palette.primary.contrast,
-          label: theme.canvas.palette.primary.contrast,
+          background: themePrimary.dark,
+          border: themePrimary.dark,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
         },
         focus: {
-          background: theme.canvas.palette.primary.main,
-          icon: theme.canvas.palette.primary.contrast,
-          label: theme.canvas.palette.primary.contrast,
+          background: themePrimary.main,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
         },
         disabled: {
-          background: theme.canvas.palette.primary.contrast,
+          background: themePrimary.contrast,
           border: colors.soap500,
           icon: colors.soap600,
           label: colors.licorice100,
@@ -119,23 +125,23 @@ export const getOutlineButtonColors = (
         hover: {
           background: colors.licorice500,
           border: colors.licorice500,
-          icon: theme.canvas.palette.primary.contrast,
-          label: theme.canvas.palette.primary.contrast,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
         },
         active: {
           background: colors.licorice600,
           border: colors.licorice600,
-          icon: theme.canvas.palette.primary.contrast,
-          label: theme.canvas.palette.primary.contrast,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
         },
         focus: {
           background: colors.licorice500,
           border: colors.licorice500,
-          icon: theme.canvas.palette.primary.contrast,
-          label: theme.canvas.palette.primary.contrast,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
         },
         disabled: {
-          background: theme.canvas.palette.primary.contrast,
+          background: themePrimary.contrast,
           border: colors.soap500,
           icon: colors.soap600,
           label: colors.licorice100,
@@ -144,12 +150,12 @@ export const getOutlineButtonColors = (
     case OutlineButtonVariant.Inverse:
       return {
         default: {
-          border: theme.canvas.palette.primary.contrast,
-          icon: theme.canvas.palette.primary.contrast,
-          label: theme.canvas.palette.primary.contrast,
+          border: themePrimary.contrast,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
         },
         hover: {
-          background: theme.canvas.palette.primary.contrast,
+          background: themePrimary.contrast,
           icon: colors.licorice500,
           label: colors.blackPepper400,
           labelData: colors.licorice300,
@@ -162,7 +168,7 @@ export const getOutlineButtonColors = (
           labelData: colors.licorice300,
         },
         focus: {
-          background: theme.canvas.palette.primary.contrast,
+          background: themePrimary.contrast,
           icon: colors.licorice500,
           label: colors.blackPepper400,
           labelData: colors.licorice300,
@@ -170,7 +176,7 @@ export const getOutlineButtonColors = (
             {
               separation: 2,
               innerColor: 'currentColor',
-              outerColor: theme.canvas.palette.primary.contrast,
+              outerColor: themePrimary.contrast,
             },
             theme
           ),

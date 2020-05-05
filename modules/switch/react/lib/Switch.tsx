@@ -123,12 +123,18 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     padding: '0px 2px',
     transition: 'background-color 200ms ease',
   },
-  ({checked, disabled, theme}) => {
+  ({
+    checked,
+    disabled,
+    theme: {
+      canvas: {
+        palette: {primary: themePrimary},
+      },
+    },
+  }) => {
     if (checked) {
       return {
-        backgroundColor: disabled
-          ? theme.canvas.palette.primary.light
-          : theme.canvas.palette.primary.main,
+        backgroundColor: disabled ? themePrimary.light : themePrimary.main,
       };
     } else {
       return {

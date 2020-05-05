@@ -64,14 +64,22 @@ const customTheme = {
     },
   },
 };
-const ThemedComponent = styled('h1')<Themeable>(({theme}) => ({
-  ...type.h3,
-  background: theme.canvas.palette.primary.main,
-  color: theme.canvas.palette.primary.contrast,
-  borderRadius: borderRadius.m,
-  padding: spacing.xs,
-  display: 'inline-block',
-}));
+const ThemedComponent = styled('h1')<Themeable>(
+  ({
+    theme: {
+      canvas: {
+        palette: {primary: themePrimary},
+      },
+    },
+  }) => ({
+    ...type.h3,
+    background: themePrimary.main,
+    color: themePrimary.contrast,
+    borderRadius: borderRadius.m,
+    padding: spacing.xs,
+    display: 'inline-block',
+  })
+);
 
 const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
   return (
@@ -86,7 +94,7 @@ type Palette = keyof CanvasTheme['palette'];
 type Swatch = keyof CanvasThemePalette;
 
 const ThemeDemo = (props: any) => {
-  const theme = useTheme() as CanvasTheme;
+  const theme = useTheme();
   return (
     <div>
       <H1>Default Canvas Theme</H1>

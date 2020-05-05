@@ -39,7 +39,11 @@ export interface ButtonContainerProps
 }
 
 function getIconColorSelectors(
-  theme: EmotionCanvasTheme,
+  {
+    canvas: {
+      palette: {primary: themePrimary},
+    },
+  }: EmotionCanvasTheme,
   color: string,
   fill?: boolean
 ): CSSObject {
@@ -53,9 +57,9 @@ function getIconColorSelectors(
       },
       '.wd-icon-accent, .wd-icon-accent2': {
         fill: fill
-          ? color === theme.canvas.palette.primary.contrast
-            ? theme.canvas.palette.primary.main
-            : theme.canvas.palette.primary.contrast
+          ? color === themePrimary.contrast
+            ? themePrimary.main
+            : themePrimary.contrast
           : color,
       },
     },

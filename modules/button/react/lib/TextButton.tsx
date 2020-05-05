@@ -50,33 +50,39 @@ const getTextButtonColors = (
   variant: TextButtonVariant,
   theme: EmotionCanvasTheme
 ): ButtonColors => {
+  const {
+    canvas: {
+      palette: {primary: themePrimary},
+    },
+  } = theme;
+
   switch (variant) {
     case TextButtonVariant.Default:
     default:
       return {
         default: {
-          icon: theme.canvas.palette.primary.main,
-          label: theme.canvas.palette.primary.main,
+          icon: themePrimary.main,
+          label: themePrimary.main,
         },
         hover: {
           background: colors.soap200,
-          icon: theme.canvas.palette.primary.dark,
-          label: theme.canvas.palette.primary.dark,
+          icon: themePrimary.dark,
+          label: themePrimary.dark,
         },
         active: {
           background: colors.soap300,
-          icon: theme.canvas.palette.primary.dark,
-          label: theme.canvas.palette.primary.dark,
+          icon: themePrimary.dark,
+          label: themePrimary.dark,
         },
         focus: {
-          icon: theme.canvas.palette.primary.dark,
-          label: theme.canvas.palette.primary.dark,
+          icon: themePrimary.dark,
+          label: themePrimary.dark,
           focusRing: focusRing({}, theme),
         },
         disabled: {
           background: 'transparent',
-          icon: theme.canvas.palette.primary.light,
-          label: theme.canvas.palette.primary.light,
+          icon: themePrimary.light,
+          label: themePrimary.light,
         },
       };
     case TextButtonVariant.Inverse:

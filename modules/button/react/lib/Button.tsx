@@ -80,28 +80,32 @@ export default Button;
 
 export const getButtonColors = (
   variant: ButtonVariant | DropdownButtonVariant,
-  theme: EmotionCanvasTheme
+  {
+    canvas: {
+      palette: {primary: themePrimary},
+    },
+  }: EmotionCanvasTheme
 ): ButtonColors => {
   switch (variant) {
     case ButtonVariant.Primary:
     case DropdownButtonVariant.Primary:
       return {
         default: {
-          background: theme.canvas.palette.primary.main,
-          icon: theme.canvas.palette.primary.contrast,
-          label: theme.canvas.palette.primary.contrast,
+          background: themePrimary.main,
+          icon: themePrimary.contrast,
+          label: themePrimary.contrast,
         },
         hover: {
-          background: theme.canvas.palette.primary.dark,
+          background: themePrimary.dark,
         },
         active: {
-          background: theme.canvas.palette.primary.darkest,
+          background: themePrimary.darkest,
         },
         focus: {
-          background: theme.canvas.palette.primary.main,
+          background: themePrimary.main,
         },
         disabled: {
-          background: theme.canvas.palette.primary.light,
+          background: themePrimary.light,
         },
       };
     case ButtonVariant.Secondary:

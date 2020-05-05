@@ -34,30 +34,34 @@ export interface HighlightButtonProps
   as?: 'a';
 }
 
-const getHighlightButtonColors = (theme: EmotionCanvasTheme): ButtonColors => ({
+const getHighlightButtonColors = ({
+  canvas: {
+    palette: {primary: themePrimary},
+  },
+}: EmotionCanvasTheme): ButtonColors => ({
   default: {
     background: colors.soap200,
     border: colors.soap200,
-    icon: theme.canvas.palette.primary.dark,
-    label: theme.canvas.palette.primary.dark,
+    icon: themePrimary.dark,
+    label: themePrimary.dark,
   },
   hover: {
     background: colors.soap400,
     border: 'transparent',
-    icon: theme.canvas.palette.primary.dark,
-    label: theme.canvas.palette.primary.dark,
+    icon: themePrimary.dark,
+    label: themePrimary.dark,
   },
   active: {
     background: colors.soap500,
     border: 'transparent',
-    icon: theme.canvas.palette.primary.dark,
-    label: theme.canvas.palette.primary.dark,
+    icon: themePrimary.dark,
+    label: themePrimary.dark,
   },
   focus: {
     background: colors.soap200,
     border: 'transparent',
-    icon: theme.canvas.palette.primary.dark,
-    label: theme.canvas.palette.primary.dark,
+    icon: themePrimary.dark,
+    label: themePrimary.dark,
   },
   disabled: {
     background: colors.soap100,

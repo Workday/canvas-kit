@@ -28,22 +28,26 @@ export interface DeleteButtonProps
   as?: 'a';
 }
 
-const getDeleteButtonColors = (theme: EmotionCanvasTheme): ButtonColors => ({
+const getDeleteButtonColors = ({
+  canvas: {
+    palette: {error: themeError},
+  },
+}: EmotionCanvasTheme): ButtonColors => ({
   default: {
-    background: theme.canvas.palette.error.main,
-    label: theme.canvas.palette.error.contrast,
+    background: themeError.main,
+    label: themeError.contrast,
   },
   hover: {
-    background: theme.canvas.palette.error.dark,
+    background: themeError.dark,
   },
   active: {
-    background: theme.canvas.palette.error.darkest,
+    background: themeError.darkest,
   },
   focus: {
-    background: theme.canvas.palette.error.main,
+    background: themeError.main,
   },
   disabled: {
-    background: theme.canvas.palette.error.light,
+    background: themeError.light,
   },
 });
 
