@@ -124,7 +124,9 @@ const Pagination = (props: PaginationProps) => {
         </ButtonsContainer>
         {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} label={goToLabel} />}
         {showLabel && (
-          <StyledLabel aria-live="polite">{customLabel(labelFrom, labelTo, total)}</StyledLabel>
+          <StyledLabel aria-atomic={true} aria-live="polite">
+            {customLabel(labelFrom, labelTo, total)}
+          </StyledLabel>
         )}
       </StyledContainer>
     </>
