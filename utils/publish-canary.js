@@ -24,25 +24,28 @@ if (TRAVIS_BRANCH === 'master') {
 }
 
 const regex = new RegExp('@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-' + preid + '.\\d*\\+\\w*)', 'g');
-const lernaFlags = [
-  `--yes`,
-  `--force-publish="*"`,
-  `--canary`,
-  `--preid ${preid}`,
-  `--dist-tag ${preid}`,
-  preid === 'prerelease' ? 'major' : '',
-];
 
-cmd(`yarn lerna publish ${lernaFlags.join(' ')}`)
+cmd('git rev-parse --short HEAD')
+  .then(sha => {
+    data.sha = sha;
+
+    const lernaFlags = [
+      `--yes`,
+      `--force-publish="*"`,
+      `--canary`,
+      `--preid ${preid}.${sha}`,
+      `--dist-tag ${preid}`,
+      preid === 'prerelease' ? 'major' : '',
+    ];
+
+    return cmd(`yarn lerna publish ${lernaFlags.join(' ')}`);
+  })
   .then(output => {
     console.log(output);
 
     data.packages = output.match(regex);
     data.version = regex.exec(data.packages[0])[1];
 
-    return cmd('git rev-parse --short HEAD');
-  })
-  .then(sha => {
     request.post(
       SLACK_WEBHOOK,
       {
@@ -53,8 +56,8 @@ cmd(`yarn lerna publish ${lernaFlags.join(' ')}`)
               color: 'good',
               author_name: `New canary build published (v${data.version})`,
               author_link: TRAVIS_BUILD_URL,
-              title: `Merge commit ${sha}`,
-              title_link: `https://github.com/Workday/canvas-kit/commit/${sha}`,
+              title: `Merge commit ${data.sha}`,
+              title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
               text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@next\`\n`,
               ts: Date.now(),
             },
@@ -62,7 +65,9 @@ cmd(`yarn lerna publish ${lernaFlags.join(' ')}`)
         },
       },
       (error, response, body) => {
-        if (error) throw error;
+        if (error) {
+          throw error;
+        }
       }
     );
   })
