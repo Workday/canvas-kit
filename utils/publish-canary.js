@@ -23,8 +23,6 @@ if (TRAVIS_BRANCH === 'master') {
   process.exit(1);
 }
 
-const regex = new RegExp('@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-' + preid + '.\\d*\\+\\w*)', 'g');
-
 cmd('git rev-parse --short HEAD')
   .then(sha => {
     data.sha = sha.trim();
@@ -43,6 +41,10 @@ cmd('git rev-parse --short HEAD')
   .then(output => {
     console.log(output);
 
+    const regex = new RegExp(
+      `@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.${data.sha}.\\d*\\+\\w*)`,
+      'g'
+    );
     data.packages = output.match(regex);
     data.version = regex.exec(data.packages[0])[1];
 
