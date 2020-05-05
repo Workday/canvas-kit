@@ -75,5 +75,31 @@ cmd('git rev-parse --short HEAD')
   })
   .catch(err => {
     console.error(err);
+
+    request.post(
+      SLACK_WEBHOOK,
+      {
+        json: {
+          attachments: [
+            {
+              fallback: `Canary publish failed (v${data.version})`,
+              color: 'danger',
+              author_name: `Canary publish failed (v${data.version})`,
+              author_link: TRAVIS_BUILD_URL,
+              title: `Merge commit ${data.sha}`,
+              title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
+              text: `\`\`\`${err}\`\`\`\n`,
+              ts: Date.now(),
+            },
+          ],
+        },
+      },
+      (error, response, body) => {
+        if (error) {
+          throw error;
+        }
+      }
+    );
+
     process.exit(1);
   });
