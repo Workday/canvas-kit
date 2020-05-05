@@ -1,4 +1,5 @@
 export {default as canvas} from '@workday/canvas-kit-react-core';
+export * from '@workday/canvas-kit-react-accessible-hide';
 export * from '@workday/canvas-kit-react-action-bar';
 export * from '@workday/canvas-kit-react-avatar';
 export * from '@workday/canvas-kit-react-banner';

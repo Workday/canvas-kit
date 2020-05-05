@@ -37,6 +37,7 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
+    "@workday/canvas-kit-react-accessible-hide": "0.0.0",
     "@workday/canvas-kit-react-action-bar": "^3.6.0",
     "@workday/canvas-kit-react-avatar": "^3.6.0",
     "@workday/canvas-kit-react-banner": "^3.6.0",
