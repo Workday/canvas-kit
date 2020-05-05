@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider} from '../index';
-import {CanvasTheme, CanvasThemePalette, Themeable, createCanvasTheme} from '../lib/theming';
+import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
 import README from '../lib/theming/README.md';
 import {H1, colors, type, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {useTheme} from '@workday/canvas-kit-react-common';
@@ -55,21 +55,31 @@ const PaletteTitle = styled(Swatch)(
   })
 );
 
-const customTheme = createCanvasTheme({
-  palette: {
-    primary: {
-      main: colors.greenApple400,
+const customTheme = {
+  canvas: {
+    palette: {
+      primary: {
+        main: colors.greenApple400,
+      },
     },
   },
-});
-const ThemedComponent = styled('h1')<Themeable>(({theme}) => ({
-  ...type.h3,
-  background: theme.palette.primary.main,
-  color: theme.palette.primary.contrast,
-  borderRadius: borderRadius.m,
-  padding: spacing.xs,
-  display: 'inline-block',
-}));
+};
+const ThemedComponent = styled('h1')<Themeable>(
+  ({
+    theme: {
+      canvas: {
+        palette: {primary: themePrimary},
+      },
+    },
+  }) => ({
+    ...type.h3,
+    background: themePrimary.main,
+    color: themePrimary.contrast,
+    borderRadius: borderRadius.m,
+    padding: spacing.xs,
+    display: 'inline-block',
+  })
+);
 
 const createSwatch = (name: string, color: string, contrast: string, Component = Swatch) => {
   return (
@@ -84,13 +94,13 @@ type Palette = keyof CanvasTheme['palette'];
 type Swatch = keyof CanvasThemePalette;
 
 const ThemeDemo = (props: any) => {
-  const theme = useTheme() as CanvasTheme;
+  const theme = useTheme();
   return (
     <div>
       <H1>Default Canvas Theme</H1>
       <Palettes>
-        {Object.keys(theme.palette).map(name => {
-          const palette = theme.palette[name as Palette] as CanvasThemePalette;
+        {Object.keys(theme.canvas.palette).map(name => {
+          const palette = theme.canvas.palette[name as Palette] as CanvasThemePalette;
           const bg = (palette.main && palette.main) || colors.soap200;
           const contrast = palette.contrast;
 

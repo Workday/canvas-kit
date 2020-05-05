@@ -50,7 +50,7 @@ export interface CanvasTheme {
  * Indicates a component is themeable with a CanvasTheme
  */
 export interface Themeable {
-  theme?: CanvasTheme;
+  theme?: EmotionCanvasTheme;
 }
 
 /**
@@ -62,3 +62,5 @@ type RecursivePartial<T> = {
 
 export type PartialCanvasTheme = RecursivePartial<CanvasTheme>;
 export type PartialCanvasThemePalette = RecursivePartial<CanvasThemePalette>;
+export type PartialEmotionCanvasTheme = {canvas?: PartialCanvasTheme};
+export type EmotionCanvasTheme = {canvas: CanvasTheme};
