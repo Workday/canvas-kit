@@ -22,7 +22,7 @@ describe('Avatar', () => {
 
 describe('Avatar Accessibility', () => {
   test('Avatar should be using <div> tag', () => {
-    const component = mount(<Avatar />);
+    const component = mount(<Avatar as="div" />);
     expect(component.getDOMNode().tagName.toLowerCase()).toEqual('div');
     component.unmount();
   });
