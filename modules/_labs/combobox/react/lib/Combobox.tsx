@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from '@emotion/styled';
-import {CSSObject, jsx} from '@emotion/core';
+import {CSSObject, jsx, keyframes} from '@emotion/core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react-core';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react-menu';
@@ -85,6 +85,15 @@ const InputContainer = styled('div')({
   position: 'relative',
 });
 
+const fadeInKeyframes = keyframes({
+  '0%': {
+    opacity: 0,
+  },
+  '100%': {
+    opacity: 1,
+  },
+});
+
 const MenuContainer = styled(Card)({
   position: 'absolute',
   zIndex: 1,
@@ -96,6 +105,7 @@ const MenuContainer = styled(Card)({
   marginTop: `-${borderRadius.m}`,
   width: '100%',
   minWidth: 0,
+  animation: `${fadeInKeyframes} 200ms ease-out`,
 });
 
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
@@ -359,8 +369,6 @@ const Combobox = ({
     }
     const lastGroupIndex = getGroupIndex(selectedAutocompleteIndex);
     const nextGroupIndex = getGroupIndex(nextIndex);
-    console.log(`current`, selectedAutocompleteIndex, `is in group`, lastGroupIndex);
-    console.log(`next`, nextIndex, `is in group`, nextGroupIndex);
     setShowGroupText(lastGroupIndex !== nextGroupIndex);
     setSelectedAutocompleteIndex(nextIndex);
   };

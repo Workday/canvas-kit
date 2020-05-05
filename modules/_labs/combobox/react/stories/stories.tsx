@@ -1,5 +1,5 @@
 /// <reference path="../../../../../typings.d.ts" />
-import React, {useState} from 'react';
+import React, {useState, ReactNode, ReactElement, FC, ChangeEvent} from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
@@ -11,7 +11,7 @@ import {MenuItem, MenuItemProps} from '../../../menu/react';
 import {TextInput} from '../../../../text-input/react';
 import README from '../README.md';
 
-const autocompleteResult = (textModifier: number): React.ReactElement<MenuItemProps> => (
+const autocompleteResult = (textModifier: number): ReactElement<MenuItemProps> => (
   <MenuItem onClick={action(`Clicked Result ${textModifier}`)}>
     Result{' '}
     <span>
@@ -23,10 +23,13 @@ const autocompleteResult = (textModifier: number): React.ReactElement<MenuItemPr
 
 const simpleAutoComplete = (count: number, total = 5) =>
   Array.apply(null, Array(count))
-    .map((_: React.ReactElement, i: number) => autocompleteResult(i))
+    .map((_: ReactElement, i: number) => autocompleteResult(i))
     .splice(0, total);
 
-const groupOfResults = (count: number, groupHeading = 'Group'): ComboBoxMenuItemGroup => ({
+const groupOfResults = (
+  count: number,
+  groupHeading: ReactNode = 'Group'
+): ComboBoxMenuItemGroup => ({
   header: (
     <MenuItem>
       <strong>{groupHeading}</strong>
@@ -35,14 +38,14 @@ const groupOfResults = (count: number, groupHeading = 'Group'): ComboBoxMenuItem
   items: simpleAutoComplete(count, 3),
 });
 
-const Autocomplete: React.FC<Omit<ComboboxProps, 'children'> & {group?: boolean}> = ({
+const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {group?: boolean}> = ({
   showClearButton,
   group,
   ...props
 }) => {
   const [currentText, setCurrentText] = useState('');
 
-  const autocompleteCallback = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const autocompleteCallback = (event: ChangeEvent<HTMLInputElement>): void => {
     setCurrentText(event.target.value);
   };
 
@@ -54,7 +57,7 @@ const Autocomplete: React.FC<Omit<ComboboxProps, 'children'> & {group?: boolean}
       autocompleteItems={
         group
           ? [
-              groupOfResults(groupLength, 'Animals'),
+              groupOfResults(groupLength, <em>Animals</em>),
               groupOfResults(Math.min(1, groupLength), 'Cars'),
             ]
           : simpleAutoComplete(textLength)

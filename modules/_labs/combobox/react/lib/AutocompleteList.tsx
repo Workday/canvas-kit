@@ -106,7 +106,7 @@ const AutocompleteList = ({
               {items.map((listboxItem: React.ReactElement) => {
                 const headerName = getTextFromElement(header);
                 const groupMessage = showGroupText
-                  ? `Entering group ${headerName}, with ${items.length} options. `
+                  ? `Entering group ${headerName}, with ${items.length} options.`
                   : undefined;
                 const item = createListItem(listboxItem, itemIndex, groupMessage);
                 itemIndex++;
