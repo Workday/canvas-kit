@@ -33,7 +33,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   url?: string;
   /**
    * The alternative container type for the button. Uses Emotion's special `as` prop.
-   * Will render an `button` tag instead of a `div` when defined.
+   * Will render an `div` tag instead of a `button` when defined.
    */
   as?: 'div';
   /**
@@ -41,9 +41,9 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
    */
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   /**
-   * The ref to the button that the styled component renders.
+   * The ref to the button or div that the styled component renders.
    */
-  buttonRef?: React.Ref<HTMLButtonElement>;
+  elementRef?: React.Ref<HTMLButtonElement | HTMLDivElement>;
 }
 
 const StyledContainer = styled('button', {
@@ -92,7 +92,7 @@ const StyledImage = styled('img')<{isLoaded: boolean}>(
     width: '100%',
     height: '100%',
     borderRadius: borderRadius.circle,
-    transition: 'opacity 200ms linear',
+    transition: 'opacity 150ms linear',
   },
   ({isLoaded}) => ({
     opacity: isLoaded ? 1 : 0,
@@ -105,7 +105,7 @@ const Avatar = ({
   altText = 'Avatar',
   url,
   onClick,
-  buttonRef,
+  elementRef,
   ...elemProps
 }: AvatarProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -125,7 +125,7 @@ const Avatar = ({
       aria-label={altText}
       onClick={onClick}
       disabled={onClick ? false : true}
-      ref={buttonRef}
+      ref={elementRef}
       {...elemProps}
     >
       <StyledStack size={size}>
