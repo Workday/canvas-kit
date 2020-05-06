@@ -43,7 +43,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * The ref to the button or div that the styled component renders.
    */
-  elementRef?: React.Ref<HTMLButtonElement | HTMLDivElement>;
+  elementRef?: React.Ref<HTMLButtonElement>;
 }
 
 const StyledContainer = styled('button', {
@@ -70,7 +70,7 @@ const StyledContainer = styled('button', {
     '&:not([disabled])': {
       '&:focus': {
         outline: 'none',
-        ...(variant === AvatarVariant.Dark ? focusRing(2, 2) : focusRing(2)),
+        ...(variant === AvatarVariant.Dark ? focusRing({separation: 2}) : focusRing()),
       },
     },
     ...hideMouseFocus,
