@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-core",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "A group of core primitives (i.e. colors, text, etc.)",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -41,7 +41,7 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@workday/canvas-colors-web": "^0.17.13",
-    "@workday/canvas-kit-react-core": "^3.6.0",
+    "@workday/canvas-kit-react-core": "^3.7.0",
     "chroma-js": "^2.1.0",
     "emotion-theming": "^10.0.10",
     "lodash": "^4.17.14",
