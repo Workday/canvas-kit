@@ -7,15 +7,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Infrastructure
 
-- ci: Enable Github Actions for pull requests ([#557](https://github.com/Workday/canvas-kit/pull/557)) [@NicholasBoll](https://github.com/NicholasBoll)
 - chore: Upgrade packages to fix vulnerabilities ([#531](https://github.com/Workday/canvas-kit/pull/531)) [@anicholls](https://github.com/anicholls)
-- ci: Fix annotation for extra dependencies ([#578](https://github.com/Workday/canvas-kit/pull/578)) [@NicholasBoll](https://github.com/NicholasBoll)
-- chore: Update Lerna ([#583](https://github.com/Workday/canvas-kit/pull/583)) [@lychyi](https://github.com/lychyi)
-- fix: Fix eslint for VSCode ([#589](https://github.com/Workday/canvas-kit/pull/589)) [@NicholasBoll](https://github.com/NicholasBoll)
 - feat(core): Add window configuration option to inherit font family ([#553](https://github.com/Workday/canvas-kit/pull/553)) [@anicholls](https://github.com/anicholls)
-- chore: Update Cypress to 4.4.1 and remove custom TS handling ([#596](https://github.com/Workday/canvas-kit/pull/596)) [@NicholasBoll](https://github.com/NicholasBoll)
-- chore: Decrease output of build-storybook ([#598](https://github.com/Workday/canvas-kit/pull/598)) [@NicholasBoll](https://github.com/NicholasBoll)
-- fix: Fix ESLint VSCode plugin ([#599](https://github.com/Workday/canvas-kit/pull/599)) [@NicholasBoll](https://github.com/NicholasBoll)
 - fix: Add type checking to PRs and fix type errors ([#609](https://github.com/Workday/canvas-kit/pull/609)) [@NicholasBoll](https://github.com/NicholasBoll)
 - ci: Use sha in prerelease version to avoid duplicates ([#616](https://github.com/Workday/canvas-kit/pull/616)) [@anicholls](https://github.com/anicholls)
 - ci: Trim sha before using it for canary preid ([#619](https://github.com/Workday/canvas-kit/pull/619)) [@anicholls](https://github.com/anicholls)
@@ -29,16 +22,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Components
 
-- fix(ColorPicker): Export ColorSwatch from the ColorPicker index ([#580](https://github.com/Workday/canvas-kit/pull/580)) [@BlueVajra](https://github.com/BlueVajra)
 - fix(button): Fix IconButton states and update TextButton CSS ([#577](https://github.com/Workday/canvas-kit/pull/577)) [@anicholls](https://github.com/anicholls)
 - ci(tooltip): Fix chromatic flag ([#585](https://github.com/Workday/canvas-kit/pull/585)) [@NicholasBoll](https://github.com/NicholasBoll)
 - fix: Rename prop labels to match aria labels ([#551](https://github.com/Workday/canvas-kit/pull/551)) [@mannycarrera4](https://github.com/mannycarrera4)
 - fix(modal): Add missing aria-modal=true and add aria-label ([#588](https://github.com/Workday/canvas-kit/pull/588)) [@alexandrzavalii](https://github.com/alexandrzavalii)
 - feat(button): Add href support ([#590](https://github.com/Workday/canvas-kit/pull/590)) [@anicholls](https://github.com/anicholls)
-- fix(table): Remove focus on CSS table rows ([#595](https://github.com/Workday/canvas-kit/pull/595)) [@NicholasBoll](https://github.com/NicholasBoll)
-- test(toast): Write test for Toasts ([#584](https://github.com/Workday/canvas-kit/pull/584)) [@mannycarrera4](https://github.com/mannycarrera4)
-- chore: Refactor control wrapper to hooks for easier examples ([#597](https://github.com/Workday/canvas-kit/pull/597)) [@NicholasBoll](https://github.com/NicholasBoll)
-- feat(select): Implement Canvas menu ([#454](https://github.com/Workday/canvas-kit/pull/454)) [@jamesfan](https://github.com/jamesfan)
 
 # 3.7.0 (2020-05-06)
 
