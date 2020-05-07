@@ -1,5 +1,6 @@
 import chroma from 'chroma-js';
 import merge from 'lodash/merge';
+import memoize from 'lodash/memoize';
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme} from './theme';
 import {
@@ -50,50 +51,60 @@ function shiftColor(hexColor: string, direction: ColorDirection) {
   }
 }
 
-function fillPalette(palette?: PartialCanvasThemePalette): CanvasThemePalette | {} {
+function fillPalette(
+  defaultPalette: CanvasThemePalette,
+  palette?: PartialCanvasThemePalette
+): CanvasThemePalette | {} {
   if (!palette) {
     return {};
   }
-  const shades = {...palette};
 
-  if (!shades.main) {
-    console.warn(
-      'The color provided to fillPalette(palette) is invalid. The palette object needs to have a `main` property'
-    );
-    return {};
-  }
-
-  const dark = shades.dark || shiftColor(shades.main, ColorDirection.Darken);
-  const darkest = shades.darkest || shiftColor(dark, ColorDirection.Darken);
-  const light = shades.light || shiftColor(shades.main, ColorDirection.Brighten);
-  const lightest = shades.lightest || shiftColor(light, ColorDirection.Brighten);
+  const main = palette.main || defaultPalette.main;
+  const dark =
+    palette.dark ||
+    (palette.main && shiftColor(palette.main, ColorDirection.Darken)) ||
+    defaultPalette.dark;
+  const darkest =
+    palette.darkest ||
+    (palette.main && shiftColor(dark, ColorDirection.Darken)) ||
+    defaultPalette.darkest;
+  const light =
+    palette.light ||
+    (palette.main && shiftColor(palette.main, ColorDirection.Brighten)) ||
+    defaultPalette.light;
+  const lightest =
+    palette.lightest ||
+    (palette.main && shiftColor(light, ColorDirection.Brighten)) ||
+    defaultPalette.lightest;
 
   return {
     lightest,
     light,
-    main: shades.main,
+    main,
     dark,
     darkest,
-    contrast: shades.contrast || colors.frenchVanilla100,
+    contrast: palette.contrast || colors.frenchVanilla100,
   };
 }
 
-export function createCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
-  const {palette = {}, breakpoints = {}, direction} = partialTheme;
+function calculateCanvasTheme(partialTheme: PartialCanvasTheme): CanvasTheme {
+  const {palette = {}, breakpoints = {}, direction, ...extraFields} = partialTheme;
   const {primary, alert, error, success, neutral, common = {}} = palette!;
 
   const mergeable: PartialCanvasTheme = {
     palette: {
       common,
-      primary: fillPalette(primary),
-      alert: fillPalette(alert),
-      error: fillPalette(error),
-      success: fillPalette(success),
-      neutral: fillPalette(neutral),
+      primary: fillPalette(defaultCanvasTheme.palette.primary, primary),
+      alert: fillPalette(defaultCanvasTheme.palette.alert, alert),
+      error: fillPalette(defaultCanvasTheme.palette.error, error),
+      success: fillPalette(defaultCanvasTheme.palette.success, success),
+      neutral: fillPalette(defaultCanvasTheme.palette.neutral, neutral),
     },
     breakpoints,
     direction: direction === ContentDirection.RTL ? direction : ContentDirection.LTR,
   };
 
-  return merge({}, defaultCanvasTheme, mergeable) as CanvasTheme;
+  return merge({}, defaultCanvasTheme, mergeable, extraFields) as CanvasTheme;
 }
+
+export const createCanvasTheme = memoize(calculateCanvasTheme, (...args) => JSON.stringify(args));

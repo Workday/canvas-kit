@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {type} from '@workday/canvas-kit-labs-react-core';
-import {focusRing, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
+import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {
@@ -46,34 +46,43 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   as?: 'a';
 }
 
-const getTextButtonColors = (variant: TextButtonVariant, theme: CanvasTheme): ButtonColors => {
+const getTextButtonColors = (
+  variant: TextButtonVariant,
+  theme: EmotionCanvasTheme
+): ButtonColors => {
+  const {
+    canvas: {
+      palette: {primary: themePrimary},
+    },
+  } = theme;
+
   switch (variant) {
     case TextButtonVariant.Default:
     default:
       return {
         default: {
-          icon: theme.palette.primary.main,
-          label: theme.palette.primary.main,
+          icon: themePrimary.main,
+          label: themePrimary.main,
         },
         hover: {
           background: colors.soap200,
-          icon: theme.palette.primary.dark,
-          label: theme.palette.primary.dark,
+          icon: themePrimary.dark,
+          label: themePrimary.dark,
         },
         active: {
           background: colors.soap300,
-          icon: theme.palette.primary.dark,
-          label: theme.palette.primary.dark,
+          icon: themePrimary.dark,
+          label: themePrimary.dark,
         },
         focus: {
-          icon: theme.palette.primary.dark,
-          label: theme.palette.primary.dark,
+          icon: themePrimary.dark,
+          label: themePrimary.dark,
           focusRing: focusRing({}, theme),
         },
         disabled: {
           background: 'transparent',
-          icon: theme.palette.primary.light,
-          label: theme.palette.primary.light,
+          icon: themePrimary.light,
+          label: themePrimary.light,
         },
       };
     case TextButtonVariant.Inverse:

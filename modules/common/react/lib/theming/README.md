@@ -34,7 +34,7 @@ import {CanvasProvider} from '@workday/canvas-kit-react-common';
 
 > The theme to be used throughout the children of the `CanvasProvider` component.
 
-Default: `defaultCanvasTheme`
+Default: `{ canvas: defaultCanvasTheme }`
 
 ## Theme Object
 
@@ -110,8 +110,9 @@ own use cases.
 ## Custom Theme
 
 The `CanvasProvider` accepts a full or partial theme object to give a branded look or a different
-direction to the component library. Pass your theme into `createCanvasTheme` and use the return
-value for the `theme` prop.
+direction to the component library.
+
+> Note: Our theme is namespaced under the `canvas` key within the Emotion `ThemeContext`.
 
 If you only set a `main` color, the rest of the respective palette will be automatically generated
 (note text `contrast` color will always return white if not specified).
@@ -119,23 +120,19 @@ If you only set a `main` color, the rest of the respective palette will be autom
 Example:
 
 ```tsx
-import {
-  CanvasProvider,
-  PartialCanvasTheme,
-  createCanvasTheme,
-} from '@workday/canvas-kit-react-common';
+import {CanvasProvider, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 
-const theme: PartialCanvasTheme = {
-  palette: {
-    primary: {
-      main: colors.cantaloupe400,
+const theme: EmotionCanvasTheme = {
+  canvas: {
+    palette: {
+      primary: {
+        main: colors.cantaloupe400,
+      },
     },
   },
 };
 
-<CanvasProvider theme={createCanvasTheme(theme)}>
-  {/* Your app with Canvas components */}
-</CanvasProvider>;
+<CanvasProvider theme={theme}>{/* Your app with Canvas components */}</CanvasProvider>;
 ```
 
 ### Bidirectionality
@@ -154,13 +151,17 @@ will have their styles automatically flipped if dictated by the closest theme ob
 ```tsx
 import {
   CanvasProvider,
-  createCanvasTheme,
   ContentDirection,
+  EmotionCanvasTheme,
 } from '@workday/canvas-kit-react-common';
 
-<CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
-  {/* Your app with Canvas components */}
-</CanvasProvider>;
+const rtlTheme: EmotionCanvasTheme = {
+  canvas: {
+    direction: ContentDirection.RTL,
+  },
+};
+
+<CanvasProvider theme={rtlTheme}>{/* Your app with Canvas components */}</CanvasProvider>;
 ```
 
 ### Nesting CanvasProvider components
@@ -174,24 +175,30 @@ can nest CanvasProvider components with a different theme.
 import * as React from 'react';
 import {
   CanvasProvider,
-  createCanvasTheme,
-  PartialCanvasTheme,
+  EmotionCanvasTheme,
   ContentDirection,
 } from '@workday/canvas-kit-react-common';
 import {Switch} from '@workday/canvas-kit-react-switch';
 
-const theme: PartialCanvasTheme = {
-  palette: {
-    primary: {
-      main: colors.greenApple400,
-    },
+const rtlTheme: EmotionCanvasTheme = {
+  canvas: {
+    direction: ContentDirection.RTL,
   },
-  direction: ContentDirection.LTR,
 };
 
-<CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
-  {/* All your components containing any Canvas components */}
-  <CanvasProvider theme={createCanvasTheme(theme)}>
+const theme: PartialCanvasTheme = {
+  canvas: {
+    palette: {
+      primary: {
+        main: colors.greenApple400,
+      },
+    },
+    direction: ContentDirection.LTR,
+  },
+};
+
+<CanvasProvider theme={rtlTheme}>
+  <CanvasProvider theme={theme}>
     <Switch checked={true} />
     {/* Content that should be LTR */}
   </CanvasProvider>
@@ -214,7 +221,7 @@ const theme: PartialCanvasTheme = {
   },
 };
 
-window.workday.canvas.theme = createCanvasTheme(theme);
+window.workday.canvas.theme = theme;
 ```
 
 Note if any of the window object hasn't been defined, you will need to change your assignment. For
@@ -223,7 +230,7 @@ example:
 ```tsx
 window.workday = {
   canvas: {
-    theme: createCanvasTheme(theme);
+    theme: theme;
   }
 }
 ```

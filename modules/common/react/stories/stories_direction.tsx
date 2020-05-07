@@ -5,11 +5,7 @@ import withReadme from 'storybook-readme/with-readme';
 
 import README from '../lib/theming/README.md';
 
-import {
-  createCanvasTheme,
-  CanvasProvider,
-  ContentDirection,
-} from '@workday/canvas-kit-react-common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-system-icons-web';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {Card} from '@workday/canvas-kit-react-card';
@@ -24,9 +20,9 @@ storiesOf('Tokens|Common/Theming', module)
   .add('Direction', () => (
     <div className="story">
       <section>
-        <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.RTL})}>
+        <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
           <Card heading="مشغل وسائط" style={{width: '186px'}}>
-            <CanvasProvider theme={createCanvasTheme({direction: ContentDirection.LTR})}>
+            <CanvasProvider theme={{canvas: {direction: ContentDirection.LTR}}}>
               <IconButton
                 {...commonIconButtonProps}
                 variant={IconButton.Variant.Circle}

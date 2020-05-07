@@ -107,19 +107,30 @@ const RadioInput = styled('input')<RadioProps>(
       zIndex: -1,
     },
   },
-  ({checked, disabled, theme}) => ({
+  ({
+    checked,
+    disabled,
+    theme: {
+      canvas: {
+        palette: {
+          primary: themePrimary,
+          common: {focusOutline: themeFocusOutline},
+        },
+      },
+    },
+  }) => ({
     cursor: disabled ? undefined : 'pointer',
     '&:hover ~ div:first-of-type::after': {
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
     '&:hover ~ div:first-of-type': {
       backgroundColor: checked
-        ? theme.palette.primary.main
+        ? themePrimary.main
         : disabled
         ? inputColors.disabled.background
         : 'white',
       borderColor: checked
-        ? theme.palette.primary.main
+        ? themePrimary.main
         : disabled
         ? inputColors.disabled.border
         : inputColors.hoverBorder,
@@ -127,22 +138,22 @@ const RadioInput = styled('input')<RadioProps>(
     },
     '&:focus, &focus:hover': {
       '& ~ div:first-of-type': {
-        borderColor: checked ? theme.palette.primary.main : theme.palette.common.focusOutline,
+        borderColor: checked ? themePrimary.main : themeFocusOutline,
         borderWidth: '2px',
         zIndex: 2,
       },
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...focusRing({separation: 2}, theme),
+      ...focusRing({separation: 2, outerColor: themeFocusOutline}),
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        ...focusRing({width: 0}, theme),
+        ...focusRing({width: 0, outerColor: themeFocusOutline}),
         borderWidth: '1px',
-        borderColor: checked ? theme.palette.primary.main : inputColors.border,
+        borderColor: checked ? themePrimary.main : inputColors.border,
       },
       '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
-        borderColor: checked ? theme.palette.primary.main : inputColors.hoverBorder,
+        borderColor: checked ? themePrimary.main : inputColors.hoverBorder,
       },
     }),
   })
@@ -165,14 +176,22 @@ const RadioBackground = styled('div')<RadioProps>(
     transition: 'border 200ms ease, background 200ms',
     width: radioWidth,
   },
-  ({checked, disabled, theme}) => ({
+  ({
+    checked,
+    disabled,
+    theme: {
+      canvas: {
+        palette: {primary: themePrimary},
+      },
+    },
+  }) => ({
     borderColor: checked
-      ? theme.palette.primary.main
+      ? themePrimary.main
       : disabled
       ? inputColors.disabled.border
       : inputColors.border,
     backgroundColor: checked
-      ? theme.palette.primary.main
+      ? themePrimary.main
       : disabled
       ? inputColors.disabled.background
       : 'white',

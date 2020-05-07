@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
+import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {IconButtonVariant, ButtonColors, ButtonOrAnchorComponent} from './types';
@@ -118,138 +118,144 @@ export default IconButton;
 
 const getIconButtonColors = (
   variant: IconButtonVariant,
-  theme: CanvasTheme,
+  theme: EmotionCanvasTheme,
   toggled?: boolean
 ): ButtonColors => {
+  const {
+    canvas: {
+      palette: {primary: themePrimary},
+    },
+  } = theme;
+
   switch (variant) {
     case IconButton.Variant.Square:
     case IconButtonVariant.Circle:
     default:
       return {
         default: {
-          background: toggled ? theme.palette.primary.main : undefined,
-          icon: toggled ? theme.palette.primary.contrast : colors.licorice200,
+          background: toggled ? themePrimary.main : undefined,
+          icon: toggled ? themePrimary.contrast : colors.licorice200,
         },
         hover: {
-          background: toggled ? theme.palette.primary.dark : colors.soap300,
-          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
+          background: toggled ? themePrimary.dark : colors.soap300,
+          icon: toggled ? themePrimary.contrast : colors.licorice500,
         },
         active: {
-          background: toggled ? theme.palette.primary.dark : colors.soap500,
-          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
+          background: toggled ? themePrimary.dark : colors.soap500,
+          icon: toggled ? themePrimary.contrast : colors.licorice500,
         },
         focus: {
-          background: toggled ? theme.palette.primary.main : undefined,
-          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
+          background: toggled ? themePrimary.main : undefined,
+          icon: toggled ? themePrimary.contrast : colors.licorice500,
         },
         disabled: {
-          background: toggled ? theme.palette.primary.lightest : 'transparent',
-          icon: toggled ? theme.palette.primary.light : colors.soap600,
+          background: toggled ? themePrimary.lightest : 'transparent',
+          icon: toggled ? themePrimary.light : colors.soap600,
         },
       };
     case IconButtonVariant.SquareFilled:
     case IconButtonVariant.CircleFilled:
       return {
         default: {
-          background: toggled ? theme.palette.primary.main : colors.soap200,
-          icon: toggled ? theme.palette.primary.contrast : colors.licorice200,
+          background: toggled ? themePrimary.main : colors.soap200,
+          icon: toggled ? themePrimary.contrast : colors.licorice200,
         },
         hover: {
-          background: toggled ? theme.palette.primary.dark : colors.soap400,
-          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
+          background: toggled ? themePrimary.dark : colors.soap400,
+          icon: toggled ? themePrimary.contrast : colors.licorice500,
         },
         active: {
-          background: toggled ? theme.palette.primary.dark : colors.soap500,
-          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
+          background: toggled ? themePrimary.dark : colors.soap500,
+          icon: toggled ? themePrimary.contrast : colors.licorice500,
         },
         focus: {
-          background: toggled ? theme.palette.primary.main : colors.soap200,
-          icon: toggled ? theme.palette.primary.contrast : colors.licorice500,
+          background: toggled ? themePrimary.main : colors.soap200,
+          icon: toggled ? themePrimary.contrast : colors.licorice500,
         },
         disabled: {
-          background: toggled ? theme.palette.primary.lightest : colors.soap100,
-          icon: toggled ? theme.palette.primary.light : colors.soap600,
+          background: toggled ? themePrimary.lightest : colors.soap100,
+          icon: toggled ? themePrimary.light : colors.soap600,
         },
       };
     case IconButtonVariant.Plain:
       return {
         default: {
-          icon: toggled ? theme.palette.primary.main : colors.licorice200,
+          icon: toggled ? themePrimary.main : colors.licorice200,
         },
         hover: {
-          icon: toggled ? theme.palette.primary.main : colors.licorice500,
+          icon: toggled ? themePrimary.main : colors.licorice500,
         },
         active: {
-          icon: toggled ? theme.palette.primary.main : colors.licorice500,
+          icon: toggled ? themePrimary.main : colors.licorice500,
         },
         focus: {
-          icon: toggled ? theme.palette.primary.main : colors.licorice500,
+          icon: toggled ? themePrimary.main : colors.licorice500,
           focusRing: focusRing({}, theme),
         },
         disabled: {
-          icon: toggled ? theme.palette.primary.light : colors.soap600,
+          icon: toggled ? themePrimary.light : colors.soap600,
         },
       };
     case IconButtonVariant.Inverse:
       return {
         default: {
-          background: toggled ? theme.palette.primary.contrast : undefined,
-          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          background: toggled ? themePrimary.contrast : undefined,
+          icon: toggled ? themePrimary.main : themePrimary.contrast,
         },
         hover: {
-          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          background: toggled ? themePrimary.contrast : 'rgba(0, 0, 0, 0.2)',
+          icon: toggled ? themePrimary.main : themePrimary.contrast,
         },
         active: {
-          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.3)',
-          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          background: toggled ? themePrimary.contrast : 'rgba(0, 0, 0, 0.3)',
+          icon: toggled ? themePrimary.main : themePrimary.contrast,
         },
         focus: {
-          background: toggled ? theme.palette.primary.contrast : undefined,
-          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          background: toggled ? themePrimary.contrast : undefined,
+          icon: toggled ? themePrimary.main : themePrimary.contrast,
           focusRing: focusRing(
             {
               separation: 2,
               innerColor: 'currentColor',
-              outerColor: theme.palette.primary.contrast,
+              outerColor: themePrimary.contrast,
             },
             theme
           ),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'transparent',
-          icon: toggled ? theme.palette.primary.main : 'rgba(255, 255, 255, 0.75)',
+          icon: toggled ? themePrimary.main : 'rgba(255, 255, 255, 0.75)',
         },
       };
     case IconButtonVariant.InverseFilled:
       return {
         default: {
-          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          background: toggled ? themePrimary.contrast : 'rgba(0, 0, 0, 0.2)',
+          icon: toggled ? themePrimary.main : themePrimary.contrast,
         },
         hover: {
-          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.3)',
-          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          background: toggled ? themePrimary.contrast : 'rgba(0, 0, 0, 0.3)',
+          icon: toggled ? themePrimary.main : themePrimary.contrast,
         },
         active: {
-          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.4)',
-          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          background: toggled ? themePrimary.contrast : 'rgba(0, 0, 0, 0.4)',
+          icon: toggled ? themePrimary.main : themePrimary.contrast,
         },
         focus: {
-          background: toggled ? theme.palette.primary.contrast : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? theme.palette.primary.main : theme.palette.primary.contrast,
+          background: toggled ? themePrimary.contrast : 'rgba(0, 0, 0, 0.2)',
+          icon: toggled ? themePrimary.main : themePrimary.contrast,
           focusRing: focusRing(
             {
               separation: 2,
               innerColor: 'currentColor',
-              outerColor: theme.palette.primary.contrast,
+              outerColor: themePrimary.contrast,
             },
             theme
           ),
         },
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'rgba(0, 0, 0, 0.2)',
-          icon: toggled ? theme.palette.primary.main : 'rgba(255, 255, 255, 0.75)',
+          icon: toggled ? themePrimary.main : 'rgba(255, 255, 255, 0.75)',
         },
       };
   }

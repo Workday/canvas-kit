@@ -23,17 +23,15 @@ if (TRAVIS_BRANCH === 'master') {
   process.exit(1);
 }
 
-const regex = new RegExp('@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-' + preid + '.\\d*\\+\\w*)', 'g');
-
 cmd('git rev-parse --short HEAD')
   .then(sha => {
-    data.sha = sha;
+    data.sha = sha.trim();
 
     const lernaFlags = [
       `--yes`,
       `--force-publish="*"`,
       `--canary`,
-      `--preid ${preid}.${sha}`,
+      `--preid ${preid}.${data.sha}`,
       `--dist-tag ${preid}`,
       preid === 'prerelease' ? 'major' : '',
     ];
@@ -43,6 +41,10 @@ cmd('git rev-parse --short HEAD')
   .then(output => {
     console.log(output);
 
+    const regex = new RegExp(
+      `@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.${data.sha}.\\d*\\+\\w*)`,
+      'g'
+    );
     data.packages = output.match(regex);
     data.version = regex.exec(data.packages[0])[1];
 
@@ -73,5 +75,31 @@ cmd('git rev-parse --short HEAD')
   })
   .catch(err => {
     console.error(err);
+
+    request.post(
+      SLACK_WEBHOOK,
+      {
+        json: {
+          attachments: [
+            {
+              fallback: `Canary publish failed (v${data.version})`,
+              color: 'danger',
+              author_name: `Canary publish failed (v${data.version})`,
+              author_link: TRAVIS_BUILD_URL,
+              title: `Merge commit ${data.sha}`,
+              title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
+              text: `\`\`\`${err}\`\`\`\n`,
+              ts: Date.now(),
+            },
+          ],
+        },
+      },
+      (error, response, body) => {
+        if (error) {
+          throw error;
+        }
+      }
+    );
+
     process.exit(1);
   });

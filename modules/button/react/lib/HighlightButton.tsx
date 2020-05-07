@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
-import {GrowthBehavior, useTheme, Themeable, CanvasTheme} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  useTheme,
+  Themeable,
+  EmotionCanvasTheme,
+} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors, ButtonOrAnchorComponent} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
@@ -29,30 +34,34 @@ export interface HighlightButtonProps
   as?: 'a';
 }
 
-const getHighlightButtonColors = (theme: CanvasTheme): ButtonColors => ({
+const getHighlightButtonColors = ({
+  canvas: {
+    palette: {primary: themePrimary},
+  },
+}: EmotionCanvasTheme): ButtonColors => ({
   default: {
     background: colors.soap200,
     border: colors.soap200,
-    icon: theme.palette.primary.dark,
-    label: theme.palette.primary.dark,
+    icon: themePrimary.dark,
+    label: themePrimary.dark,
   },
   hover: {
     background: colors.soap400,
     border: 'transparent',
-    icon: theme.palette.primary.dark,
-    label: theme.palette.primary.dark,
+    icon: themePrimary.dark,
+    label: themePrimary.dark,
   },
   active: {
     background: colors.soap500,
     border: 'transparent',
-    icon: theme.palette.primary.dark,
-    label: theme.palette.primary.dark,
+    icon: themePrimary.dark,
+    label: themePrimary.dark,
   },
   focus: {
     background: colors.soap200,
     border: 'transparent',
-    icon: theme.palette.primary.dark,
-    label: theme.palette.primary.dark,
+    icon: themePrimary.dark,
+    label: themePrimary.dark,
   },
   disabled: {
     background: colors.soap100,
