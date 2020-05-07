@@ -16,12 +16,29 @@ yarn add @workday/canvas-kit-react-badge
 
 ## Accessibility
 
-If the count is live-updated (as in the case of notifications) and not static, please add
-`aria-live="polite"` to inform screen readers to announce updated information. When this attribute
-is set the screen reader will announce changes when the user is idle.
+A common use case for the CountBadge is for displaying notifications, and there are several
+accessibility concerns you'll want to keep in mind:
+
+- The button should have an aria-label that updates with the count
+- The elements inside the button should have `aria-hidden`
+- The live region should be outside the button
+- The live region should be visually hidden and only contain text
+
+### Example
 
 ```jsx
-<CountBadge count={3} aria-live="polite" aria-label="3 new notifications" />
+<IconButton
+  style={{ position: "relative" }}
+  aria-label={`Alerts ${count} new notifications`}
+  size={IconButton.Size.Medium}
+  variant={IconButton.Variant.Circle}
+>
+  <SystemIcon icon={notificationsIcon} aria-hidden="true" />
+  <Badge count={count} aria-hidden="true" />
+</IconButton>
+<div className="wdc-accessible-hide" role="status" aria-live="polite" aria-atomic="true">
+  New notifications
+</div>
 ```
 
 ## Usage
@@ -30,11 +47,11 @@ is set the screen reader will announce changes when the user is idle.
 import * as React from 'react';
 import {CountBadge} from '@workday/canvas-kit-react-badge';
 
-// default Badge
-<CountBadge count={3} aria-label="3 unread notifications" />
+// default CountBadge
+<CountBadge count={3} />
 
-// inverse Badge variant
-<CountBadge variant="inverse" count={3} aria-label="3 unread notifications" />
+// inverse CountBadge variant
+<CountBadge variant="inverse" count={3} />
 
 ```
 
@@ -46,9 +63,7 @@ import {CountBadge} from '@workday/canvas-kit-react-badge';
 
 ### Required
 
-#### `aria-label: string`
-
-> Description for the badge
+> None
 
 ### Optional
 

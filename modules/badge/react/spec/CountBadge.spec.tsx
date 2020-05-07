@@ -4,11 +4,7 @@ import {CountBadge, CountBadgeProps} from '../index';
 
 describe('CountBadge', () => {
   const renderCountBadge = (props = {} as Partial<CountBadgeProps>) => {
-    const badgeProps = {
-      'aria-label': props.count ? `${props.count} new notifications` : 'new notifications',
-      ...props,
-    };
-    return render(<CountBadge aria-live="polite" {...badgeProps} />);
+    return render(<CountBadge {...props} />);
   };
 
   it('should default to 0 if no count is provided', () => {

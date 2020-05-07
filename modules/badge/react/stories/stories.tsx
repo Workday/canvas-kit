@@ -14,7 +14,6 @@ export default {
 export const Default = () => (
   <div className="story">
     <CountBadge
-      aria-label="new unread notifications"
       count={number('Count', 1)}
       variant={select('Variant', ['default', 'inverse'], 'default')}
     />
@@ -24,7 +23,6 @@ export const Default = () => (
 export const Inverse = () => (
   <div className="story">
     <CountBadge
-      aria-label="new unread notifications"
       count={number('Count', 1)}
       variant={select('Variant', ['default', 'inverse'], 'inverse')}
     />

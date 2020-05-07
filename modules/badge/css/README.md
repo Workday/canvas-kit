@@ -23,12 +23,24 @@ Add your `node_modules` directory to your SASS `includePaths`. You will then be 
 
 ## Accessibility
 
-If the count is live-updated (as in the case of notifications) and not static, please add
-`aria-live="polite"` to inform screen readers to announce updated information. When this attribute
-is set the screen reader will announce changes when the user is idle.
+A common use case for the count badge is for displaying notifications, and there are several
+accessibility concerns you'll want to keep in mind:
+
+- The button should have an aria-label that updates with the count
+- The elements inside the button should have `aria-hidden`
+- The live region should be outside the button
+- The live region should be visually hidden and only contain text
+
+### Example
 
 ```html
-<span class="wdc-count-badge" aria-live="polite" aria-label="3 new notifications">1</span>
+<button type="button" aria-label="Alerts 3 new notifications">
+  <svg aria-hidden="true" focusable="false">...</svg>
+  <span class="wdc-count-badge" aria-hidden="true">3</span>
+</button>
+<div class="wdc-accessible-hide" role="status" aria-live="polite" aria-atomic="true">
+  New notifications
+</div>
 ```
 
 ## Usage
@@ -38,7 +50,7 @@ is set the screen reader will announce changes when the user is idle.
 #### Default
 
 ```html
-<span class="wdc-count-badge" aria-label="1 unread notification">
+<span class="wdc-count-badge">
   1
 </span>
 ```
@@ -46,7 +58,7 @@ is set the screen reader will announce changes when the user is idle.
 #### Inverse
 
 ```html
-<span class="wdc-count-badge-inverse" aria-label="2 unread notifications">
+<span class="wdc-count-badge-inverse">
   2
 </span>
 ```
@@ -56,7 +68,7 @@ is set the screen reader will announce changes when the user is idle.
 Badges with more than 999 notifications should display '999+'
 
 ```html
-<span class="wdc-count-badge" aria-label="1000 unread notifications">
+<span class="wdc-count-badge">
   999+
 </span>
 ```

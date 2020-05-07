@@ -18,9 +18,6 @@ export default {
 };
 
 export const VisualTesting = () => {
-  const defaults = {
-    'aria-label': 'new unread notifications',
-  };
   return (
     <ComponentStatesTable
       columnProps={[
@@ -34,7 +31,7 @@ export const VisualTesting = () => {
       ]}
       rowProps={[{label: 'Default', props: {}}, {label: 'Inverse', props: {variant: 'inverse'}}]}
     >
-      {props => <CountBadge {...defaults} {...props} />}
+      {props => <CountBadge {...props} />}
     </ComponentStatesTable>
   );
 };

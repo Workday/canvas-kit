@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import {borderRadius, colors, fontFamily} from '@workday/canvas-kit-react-core';
 
 export interface CountBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  'aria-label': string;
   count?: number;
   variant?: 'default' | 'inverse';
 }
@@ -54,12 +53,12 @@ const Container = styled('span')<CountBadgeProps>(
 );
 
 const CountBadge = (props: CountBadgeProps) => {
-  const {variant = 'default', count = 0, 'aria-label': ariaLabel, ...elemProps} = props;
+  const {variant = 'default', count = 0, ...elemProps} = props;
 
   const formattedCount = count < 1000 ? `${count}` : '999+';
 
   return (
-    <Container aria-label={ariaLabel} variant={variant} {...elemProps}>
+    <Container variant={variant} {...elemProps}>
       {formattedCount}
     </Container>
   );

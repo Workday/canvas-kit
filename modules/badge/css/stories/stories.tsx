@@ -11,26 +11,14 @@ export default {
 export const Default = () => (
   <>
     <div className="story" style={{display: 'flex'}}>
-      <span className="wdc-count-badge" aria-label="1 new notification">
-        1
-      </span>
-      <span className="wdc-count-badge" aria-label="100 new notifications">
-        100
-      </span>
-      <span className="wdc-count-badge" aria-label="999+ new notifications">
-        999+
-      </span>
+      <span className="wdc-count-badge">1</span>
+      <span className="wdc-count-badge">100</span>
+      <span className="wdc-count-badge">999+</span>
     </div>
     <div className="story" style={{display: 'flex'}}>
-      <span className="wdc-count-badge-inverse" aria-label="1 new notification">
-        1
-      </span>
-      <span className="wdc-count-badge-inverse" aria-label="100 new notifications">
-        100
-      </span>
-      <span className="wdc-count-badge-inverse" aria-label="1000 new notifications">
-        999+
-      </span>
+      <span className="wdc-count-badge-inverse">1</span>
+      <span className="wdc-count-badge-inverse">100</span>
+      <span className="wdc-count-badge-inverse">999+</span>
     </div>
   </>
 );
