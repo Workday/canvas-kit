@@ -36,6 +36,15 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   pageButtonAriaLabel?: (page: number, selected: boolean) => string;
   /** Optional width to pass to component. This is the width the container deems is available. You can use a measure component to get this. */
   width?: number;
+  /**
+   * Announces the change to the label below the pagination bar describing on what page
+   * you are on out how many possible pages.
+   * Note: We default this to `true` to provide more information for accessibility.
+   * However, the context of your application might mean that this information is superfluous.
+   * If you choose to now want this, you can opt out by setting this to `false`
+   * @default true
+   */
+  announceAriaLiveOfLabel?: boolean;
 }
 
 const StyledLabel = styled('div')({
@@ -80,6 +89,7 @@ const Pagination = (props: PaginationProps) => {
     nextPageAriaLabel = 'Next Page',
     pageButtonAriaLabel = defaultPageButtonAriaLabel,
     customLabel = defaultCustomLabel,
+    announceAriaLiveOfLabel = true,
     total,
     pageSize,
     currentPage,
@@ -124,7 +134,10 @@ const Pagination = (props: PaginationProps) => {
         </ButtonsContainer>
         {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} label={goToLabel} />}
         {showLabel && (
-          <StyledLabel aria-atomic={true} aria-live="polite">
+          <StyledLabel
+            aria-atomic={announceAriaLiveOfLabel ? true : undefined}
+            aria-live={announceAriaLiveOfLabel ? 'polite' : undefined}
+          >
             {customLabel(labelFrom, labelTo, total)}
           </StyledLabel>
         )}
