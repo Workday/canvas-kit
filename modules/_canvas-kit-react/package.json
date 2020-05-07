@@ -37,10 +37,9 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@workday/canvas-kit-react-action-bar": "^3.7.0",
     "@workday/canvas-kit-react-avatar": "^3.7.0",
-    "@workday/canvas-kit-react-badge": "^3.6.0",
+    "@workday/canvas-kit-react-badge": "^0.0.0",
     "@workday/canvas-kit-react-banner": "^3.7.0",
     "@workday/canvas-kit-react-button": "^3.7.0",
     "@workday/canvas-kit-react-card": "^3.7.0",
@@ -67,36 +66,5 @@
     "@workday/canvas-kit-react-text-input": "^3.7.0",
     "@workday/canvas-kit-react-toast": "^3.7.0",
     "@workday/canvas-kit-react-tooltip": "^3.7.0"
-=======
-    "@workday/canvas-kit-react-action-bar": "^3.6.0",
-    "@workday/canvas-kit-react-avatar": "^3.6.0",
-    "@workday/canvas-kit-react-badge": "^0.0.0",
-    "@workday/canvas-kit-react-banner": "^3.6.0",
-    "@workday/canvas-kit-react-button": "^3.6.0",
-    "@workday/canvas-kit-react-card": "^3.6.0",
-    "@workday/canvas-kit-react-checkbox": "^3.6.0",
-    "@workday/canvas-kit-react-color-picker": "^3.6.0",
-    "@workday/canvas-kit-react-common": "^3.6.0",
-    "@workday/canvas-kit-react-cookie-banner": "^3.6.0",
-    "@workday/canvas-kit-react-core": "^3.6.0",
-    "@workday/canvas-kit-react-form-field": "^3.6.0",
-    "@workday/canvas-kit-react-icon": "^3.6.0",
-    "@workday/canvas-kit-react-layout": "^3.6.0",
-    "@workday/canvas-kit-react-loading-animation": "^3.6.0",
-    "@workday/canvas-kit-react-modal": "^3.6.0",
-    "@workday/canvas-kit-react-page-header": "^3.6.0",
-    "@workday/canvas-kit-react-popup": "^3.6.0",
-    "@workday/canvas-kit-react-radio": "^3.6.0",
-    "@workday/canvas-kit-react-select": "^3.6.0",
-    "@workday/canvas-kit-react-side-panel": "^3.6.0",
-    "@workday/canvas-kit-react-skeleton": "^3.6.0",
-    "@workday/canvas-kit-react-status-indicator": "^3.6.0",
-    "@workday/canvas-kit-react-switch": "^3.6.0",
-    "@workday/canvas-kit-react-table": "^3.6.0",
-    "@workday/canvas-kit-react-text-area": "^3.6.0",
-    "@workday/canvas-kit-react-text-input": "^3.6.0",
-    "@workday/canvas-kit-react-toast": "^3.6.0",
-    "@workday/canvas-kit-react-tooltip": "^3.6.0"
->>>>>>> fix: Update badge dependencies
   }
 }

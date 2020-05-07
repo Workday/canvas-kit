@@ -16,7 +16,6 @@
     "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_canvas-kit-css"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@workday/canvas-kit-css-action-bar": "^3.7.0",
     "@workday/canvas-kit-react-badge": "^0.0.0",
     "@workday/canvas-kit-css-banner": "^3.7.0",
@@ -39,30 +38,6 @@
     "@workday/canvas-kit-css-text-area": "^3.7.0",
     "@workday/canvas-kit-css-text-input": "^3.7.0",
     "@workday/canvas-kit-css-tooltip": "^3.7.0"
-=======
-    "@workday/canvas-kit-css-action-bar": "^3.6.0",
-    "@workday/canvas-kit-css-badge": "^0.0.0",
-    "@workday/canvas-kit-css-banner": "^3.6.0",
-    "@workday/canvas-kit-css-button": "^3.6.0",
-    "@workday/canvas-kit-css-card": "^3.6.0",
-    "@workday/canvas-kit-css-checkbox": "^3.6.0",
-    "@workday/canvas-kit-css-common": "^3.6.0",
-    "@workday/canvas-kit-css-core": "^3.6.0",
-    "@workday/canvas-kit-css-form-field": "^3.6.0",
-    "@workday/canvas-kit-css-icon": "^3.6.0",
-    "@workday/canvas-kit-css-layout": "^3.6.0",
-    "@workday/canvas-kit-css-loading-animation": "^3.6.0",
-    "@workday/canvas-kit-css-menu": "^3.6.0",
-    "@workday/canvas-kit-css-modal": "^3.6.0",
-    "@workday/canvas-kit-css-page-header": "^3.6.0",
-    "@workday/canvas-kit-css-popup": "^3.6.0",
-    "@workday/canvas-kit-css-radio": "^3.6.0",
-    "@workday/canvas-kit-css-select": "^3.6.0",
-    "@workday/canvas-kit-css-table": "^3.6.0",
-    "@workday/canvas-kit-css-text-area": "^3.6.0",
-    "@workday/canvas-kit-css-text-input": "^3.6.0",
-    "@workday/canvas-kit-css-tooltip": "^3.6.0"
->>>>>>> fix: Update badge dependencies
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
