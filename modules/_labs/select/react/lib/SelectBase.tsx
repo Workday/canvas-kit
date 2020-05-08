@@ -112,6 +112,11 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isMenuAnimated: boolean;
   /**
+   * If true, focus the menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
+   * @default true
+   */
+  isMenuAutoFocused: boolean;
+  /**
    * If true, hide the SelectBase menu.
    * @default true
    */
@@ -260,6 +265,7 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
     focusedOptionIndex: 0,
     isEmpty: false,
     isMenuAnimated: true,
+    isMenuAutoFocused: true,
     isMenuHidden: true,
     isMenuHiding: false,
   };
@@ -412,6 +418,7 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
       inputRef,
       isEmpty,
       isMenuAnimated,
+      isMenuAutoFocused,
       isMenuHidden,
       isMenuHiding,
       onChange,
@@ -474,7 +481,7 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
                 },
               ],
               onFirstUpdate: () => {
-                if (this.menuRef.current) {
+                if (isMenuAutoFocused && this.menuRef.current) {
                   this.menuRef.current.focus();
                 }
               },
