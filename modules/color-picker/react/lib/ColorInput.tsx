@@ -133,11 +133,12 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           inputRef={inputRef}
           onChange={this.handleChange}
           type="text"
-          placeholder={placeholder}
+          placeholder={value ? '' : placeholder}
           value={formattedValue}
           error={error}
           spellCheck={false}
           disabled={disabled}
+          // aria-label={!value ? 'Label edit blank hex value' : `edit hex value ${formattedValue}`}
           grow={grow}
           maxLength={7} // 7 to allow pasting with a hash
           {...elemProps}
@@ -146,7 +147,9 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           showCheck={showCheck}
           color={this.isValidHex(formattedValue) ? `#${formattedValue}` : ''}
         />
-        <PoundSignPrefix disabled={disabled}>#</PoundSignPrefix>
+        <PoundSignPrefix aria-hidden={true} disabled={disabled}>
+          #
+        </PoundSignPrefix>
       </ColorInputContainer>
     );
   }
