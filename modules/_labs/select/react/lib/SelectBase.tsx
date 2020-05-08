@@ -1,9 +1,11 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
+import {Rect} from '@popperjs/core';
 
 import {
   GrowthBehavior,
   ErrorType,
+  Placement,
   Popper,
   Themeable,
   errorRing,
@@ -476,7 +478,27 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
                 {
                   name: 'offset',
                   options: {
-                    offset: [0, -parseInt(borderRadius.m, 10)],
+                    offset: ({
+                      placement,
+                      reference,
+                      popper,
+                    }: {
+                      placement: Placement;
+                      reference: Rect;
+                      popper: Rect;
+                    }) => {
+                      // Skid menu along the edge of the button to account
+                      // for fractional x-positioning of the button (e.g.,
+                      // if the button is in a horizontally-centered modal)
+                      // and to ensure proper alignment between the button
+                      // and the menu
+                      const skidding = reference.x % 1 === 0 ? 0 : 1;
+                      // Displace menu towards the button to obscure the bottom
+                      // edge of the button and to create a smooth visual
+                      // connection between the button and the menu
+                      const distance = -parseInt(borderRadius.m, 10);
+                      return [skidding, distance];
+                    },
                   },
                 },
               ],
