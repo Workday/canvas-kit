@@ -325,6 +325,8 @@ storiesOf('Labs|Select/React/Visual Testing', module)
                 options={normalizedOptions}
                 focusedOptionIndex={1}
                 isMenuAnimated={false}
+                isMenuAutoFlipped={false}
+                isMenuAutoFocused={false}
                 isMenuHidden={false}
               />
             </div>

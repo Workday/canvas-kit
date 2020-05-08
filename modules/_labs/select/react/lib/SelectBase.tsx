@@ -114,6 +114,11 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isMenuAnimated: boolean;
   /**
+   * If true, automatically flip the menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
+   * @default true
+   */
+  isMenuAutoFlipped: boolean;
+  /**
    * If true, focus the menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
    * @default true
    */
@@ -267,6 +272,7 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
     focusedOptionIndex: 0,
     isEmpty: false,
     isMenuAnimated: true,
+    isMenuAutoFlipped: true,
     isMenuAutoFocused: true,
     isMenuHidden: true,
     isMenuHiding: false,
@@ -337,6 +343,56 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
     if (focusedOption) {
       this.scrollIntoViewIfNeeded(focusedOption, center);
     }
+  };
+
+  private generatePopperOptions = () => {
+    const {isMenuAutoFlipped, isMenuAutoFocused} = this.props;
+
+    const fallbackPlacements = isMenuAutoFlipped ? ['top-start'] : [];
+
+    const modifiers = [
+      {
+        name: 'flip',
+        options: {
+          fallbackPlacements,
+        },
+      },
+      {
+        name: 'offset',
+        options: {
+          offset: ({
+            placement,
+            reference,
+            popper,
+          }: {
+            placement: Placement;
+            reference: Rect;
+            popper: Rect;
+          }) => {
+            // Skid menu along the edge of the button to account
+            // for fractional x-positioning of the button (e.g.,
+            // if the button is in a horizontally-centered modal)
+            // and to ensure proper alignment between the button
+            // and the menu
+            const skidding = reference.x % 1 === 0 ? 0 : 1;
+            // Displace menu towards the button to obscure the bottom
+            // edge of the button and to create a smooth visual
+            // connection between the button and the menu
+            const distance = -parseInt(borderRadius.m, 10);
+            return [skidding, distance];
+          },
+        },
+      },
+    ];
+
+    return {
+      modifiers,
+      onFirstUpdate: () => {
+        if (isMenuAutoFocused && this.menuRef.current) {
+          this.menuRef.current.focus();
+        }
+      },
+    };
   };
 
   componentDidMount() {
@@ -420,16 +476,19 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
       inputRef,
       isEmpty,
       isMenuAnimated,
-      isMenuAutoFocused,
       isMenuHidden,
       isMenuHiding,
       onChange,
       onKeyDown,
       onMenuBlur,
       options,
-      // Strip onOptionSelection and value from elemProps
-      onOptionSelection,
       value,
+
+      // Strip unneeded props on button from elemProps
+      isMenuAutoFlipped,
+      isMenuAutoFocused,
+      onOptionSelection,
+
       ...elemProps
     } = this.props;
 
@@ -473,41 +532,7 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
             placement="bottom-start"
             open={!isMenuHidden}
             anchorElement={buttonRef.current}
-            popperOptions={{
-              modifiers: [
-                {
-                  name: 'offset',
-                  options: {
-                    offset: ({
-                      placement,
-                      reference,
-                      popper,
-                    }: {
-                      placement: Placement;
-                      reference: Rect;
-                      popper: Rect;
-                    }) => {
-                      // Skid menu along the edge of the button to account
-                      // for fractional x-positioning of the button (e.g.,
-                      // if the button is in a horizontally-centered modal)
-                      // and to ensure proper alignment between the button
-                      // and the menu
-                      const skidding = reference.x % 1 === 0 ? 0 : 1;
-                      // Displace menu towards the button to obscure the bottom
-                      // edge of the button and to create a smooth visual
-                      // connection between the button and the menu
-                      const distance = -parseInt(borderRadius.m, 10);
-                      return [skidding, distance];
-                    },
-                  },
-                },
-              ],
-              onFirstUpdate: () => {
-                if (isMenuAutoFocused && this.menuRef.current) {
-                  this.menuRef.current.focus();
-                }
-              },
-            }}
+            popperOptions={this.generatePopperOptions()}
           >
             <SelectMenu
               aria-activedescendant={options[focusedOptionIndex].id}
