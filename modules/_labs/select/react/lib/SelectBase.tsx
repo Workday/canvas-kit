@@ -439,6 +439,11 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
         value: option.value,
         ...(onOptionSelection
           ? {
+              // Prevent click from propagating (and, say, dismissing
+              // a modal containing the Select)
+              onClick: (event: React.MouseEvent) => {
+                event.stopPropagation();
+              },
               // mouseDown provides a slightly better UX than click
               // since visual feedback of selected option is more
               // immediate
@@ -533,6 +538,10 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
             open={!isMenuHidden}
             anchorElement={buttonRef.current}
             popperOptions={this.generatePopperOptions()}
+            // zIndex is necessary in order for the menu to be displayed
+            // properly if Select is placed within a CK Modal (necessary
+            // to override zIndex of 1 for the Modal)
+            style={{zIndex: 2}}
           >
             <SelectMenu
               aria-activedescendant={options[focusedOptionIndex].id}
