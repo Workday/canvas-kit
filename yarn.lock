@@ -967,7 +967,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.4", "@babel/runtime@^7.7.6", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.4", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -5546,7 +5546,7 @@ browserslist@4.5.4:
     electron-to-chromium "^1.3.122"
     node-releases "^1.1.13"
 
-browserslist@^4.11.1, browserslist@^4.8.2, browserslist@^4.8.3:
+browserslist@^4.11.1, browserslist@^4.8.3:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.12.0.tgz#06c6d5715a1ede6c51fc39ff67fd647f740b656d"
   integrity sha512-UH2GkcEDSI0k/lRkuDSzFl9ZZ87skSy9w2XAn1MsZnL+4c4rqbBd3e82UWHbYDpztABrPBhZsTEeuxVfHppqDg==
@@ -5795,10 +5795,10 @@ can-use-dom@^0.1.0:
   resolved "https://registry.yarnpkg.com/can-use-dom/-/can-use-dom-0.1.0.tgz#22cc4a34a0abc43950f42c6411024a3f6366b45a"
   integrity sha1-IsxKNKCrxDlQ9CxkEQJKP2NmtFo=
 
-caniuse-db@^1.0.30001017:
-  version "1.0.30001031"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001031.tgz#0185ae081003bf59cd249097e2f8e5cb9335d85a"
-  integrity sha512-tIRT8VWRiZ+lSwe5qEOBCAUsXmTqaZk7Tkec1ooSSfgvVkZrtfw0jfOV5r2Of8sA3VtDkpY+dJXQpTGg8n9zEA==
+caniuse-db@^1.0.30001040:
+  version "1.0.30001054"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30001054.tgz#6d155448f66ae59b6dc9d648366863c2378b0033"
+  integrity sha512-U+hWQdiwgJP2+28+dPVeF9Q33kBuRNL50Zwum5u1m0IJXlxhoHXGZWv65yO0KcfHQwbhXwE4cFQTehGnX9z5kg==
 
 caniuse-lite@^1.0.30000955, caniuse-lite@^1.0.30001020, caniuse-lite@^1.0.30001043:
   version "1.0.30001048"
@@ -6529,10 +6529,10 @@ core-js@^2.4.0, core-js@^2.5.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
   integrity sha512-HOpZf6eXmnl7la+cUdMnLvUxKNqLUzJvgIziQ0DiF3JwSImNphIqdGqzj6hIKyX04MmV0poclQ7+wjWvxQyR2A==
 
-core-js@^3.0.1, core-js@^3.0.4, core-js@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.5.0.tgz#66df8e49be4bd775e6f952a9d083b756ad41c1ed"
-  integrity sha512-Ifh3kj78gzQ7NAoJXeTu+XwzDld0QRIwjBLRqAMhuLhP3d2Av5wmgE9ycfnvK6NAEjTkQ1sDPeoEZAWO3Hx1Uw==
+core-js@^3.0.1, core-js@^3.0.4, core-js@^3.5.0, core-js@^3.6.5:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
+  integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -7916,18 +7916,18 @@ eslint-module-utils@^2.4.1:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
-eslint-plugin-compat@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-compat/-/eslint-plugin-compat-3.5.1.tgz#09f9c05dcfa9b5cd69345d7ab333749813ed8b14"
-  integrity sha512-dhfW12vZxxKLEVhrPoblmEopgwpYU2Sd4GdXj5OSfbQ+as9+1aY+S5pqnJYJvXXNWFFJ6aspLkCyk4NMQ/pgtA==
+eslint-plugin-compat@next:
+  version "3.6.0-0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-compat/-/eslint-plugin-compat-3.6.0-0.tgz#c73f887cd92b4c3a8f134be552931d97fda2ca71"
+  integrity sha512-z/4Vn93HHXoPgoUspfpv3vSYD+qbzxFu0mJqhRcgx51sHszeEz8dOOiGFvHkai8GxGU5lMkdpFTBiH+qWpzyaA==
   dependencies:
-    "@babel/runtime" "^7.7.7"
     ast-metadata-inferer "^0.1.1"
-    browserslist "^4.8.2"
-    caniuse-db "^1.0.30001017"
+    browserslist "^4.11.1"
+    caniuse-db "^1.0.30001040"
+    core-js "^3.6.5"
     lodash.memoize "4.1.2"
-    mdn-browser-compat-data "^1.0.3"
-    semver "^6.3.0"
+    mdn-browser-compat-data "^1.0.17"
+    semver "7.2.2"
 
 eslint-plugin-emotion@^10.0.14:
   version "10.0.14"
@@ -12597,10 +12597,10 @@ mdast-util-to-string@^1.0.0:
   resolved "https://registry.yarnpkg.com/mdast-util-to-string/-/mdast-util-to-string-1.0.7.tgz#62d8e9c6b2113070d8b497c7dc35bf12796f06ee"
   integrity sha512-P+gdtssCoHOX+eJUrrC30Sixqao86ZPlVjR5NEAoy0U79Pfxb1Y0Gntei0+GrnQD4T04X9xA8tcugp90cSmNow==
 
-mdn-browser-compat-data@^1.0.3:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-1.0.10.tgz#1f845219f8c19123792e29a2af86992b362d646a"
-  integrity sha512-UusipwyfBuSYQ9+bJXCuLXRg1rPVZic3RSGKtMHPGNFAdIOvXKOrZ9pAN+4udGVW17QOZuR73NpV95BmUfWHxw==
+mdn-browser-compat-data@^1.0.17:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/mdn-browser-compat-data/-/mdn-browser-compat-data-1.0.20.tgz#def4dc45cdacd2b17d4d297e397e00149c06ff8f"
+  integrity sha512-6sS4ydJ6+/ZnSwKUN8Jtu7NzD2pobXRolYRjHupKtRBDmx+8WZG1yUdOfF9QfCNPkWKrf3GcSFEurIrnJC56Qw==
   dependencies:
     extend "3.0.2"
 
@@ -15029,7 +15029,7 @@ react-docgen-typescript-loader@^3.3.0:
     loader-utils "^1.2.3"
     react-docgen-typescript "^1.15.0"
 
-react-docgen-typescript@^1.15.0, react-docgen-typescript@^1.16.4:
+react-docgen-typescript@^1.15.0:
   version "1.16.4"
   resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.16.4.tgz#9a9674d25a02704c5e3dafa76f7ea928aca336a3"
   integrity sha512-9NkfxDnLB+zYPRE4JBWoNc/JB0N1YWkZEq91al4F/e6BGMKHtAOESaEmrqdooxBLlxDhGKUGCXhPGJHHsG6bFQ==
@@ -16249,6 +16249,11 @@ semver@7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.0.0.tgz#5f3ca35761e47e05b206c6daff2cf814f0316b8e"
   integrity sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==
+
+semver@7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.2.2.tgz#d01432d74ed3010a20ffaf909d63a691520521cd"
+  integrity sha512-Zo84u6o2PebMSK3zjJ6Zp5wi8VnQZnEaCP13Ul/lt1ANsLACxnJxq4EEm1PY94/por1Hm9+7xpIswdS5AkieMA==
 
 semver@^7.1.1, semver@^7.2.1, semver@^7.3.2:
   version "7.3.2"
