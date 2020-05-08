@@ -133,7 +133,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           inputRef={inputRef}
           onChange={this.handleChange}
           type="text"
-          placeholder={value ? '' : placeholder}
+          placeholder={value ? undefined : placeholder}
           value={formattedValue}
           error={error}
           spellCheck={false}
