@@ -138,7 +138,6 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           error={error}
           spellCheck={false}
           disabled={disabled}
-          // aria-label={!value ? 'Label edit blank hex value' : `edit hex value ${formattedValue}`}
           grow={grow}
           maxLength={7} // 7 to allow pasting with a hash
           {...elemProps}
