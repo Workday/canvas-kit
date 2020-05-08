@@ -57,11 +57,21 @@ const menuBorderCSS = (error?: ErrorType): CSSObject => {
     // Render the divider using a pseudo-element
     '&:before': {
       backgroundColor: colors.soap400,
+      borderLeft: dividerBorder,
+      borderRight: dividerBorder,
+      boxSizing: 'border-box',
       content: '""',
       display: 'block',
       height: 1,
-      borderLeft: dividerBorder,
-      borderRight: dividerBorder,
+      position: 'absolute',
+      width: '100%',
+
+      '[data-popper-placement^="bottom-start"] &': {
+        top: 0,
+      },
+      '[data-popper-placement^="top-start"] &': {
+        bottom: 0,
+      },
     },
   };
 };
@@ -80,9 +90,15 @@ const menuListBorderCSS = (error?: ErrorType): CSSObject => {
   const border = `${borderWidth}px solid ${borderColor}`;
 
   return {
-    borderBottom: border,
     borderLeft: border,
     borderRight: border,
+
+    '[data-popper-placement^="bottom-start"] &': {
+      borderBottom: border,
+    },
+    '[data-popper-placement^="top-start"] &': {
+      borderTop: border,
+    },
   };
 };
 
@@ -90,10 +106,17 @@ const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHid
   {
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${inputColors.border}`,
-    borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
-    borderTop: 0,
     boxSizing: 'border-box',
-    position: 'absolute',
+    position: 'relative',
+
+    '[data-popper-placement^="bottom-start"] &': {
+      borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
+      borderTop: 0,
+    },
+    '[data-popper-placement^="top-start"] &': {
+      borderRadius: `${borderRadius.m} ${borderRadius.m} 0 0`,
+      borderBottom: 0,
+    },
   },
   ({error}) => ({
     ...menuBorderCSS(error),
