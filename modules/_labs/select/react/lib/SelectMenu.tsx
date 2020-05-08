@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ErrorType, styled} from '@workday/canvas-kit-react-common';
 import {CSSObject, keyframes} from '@emotion/core';
-import {colors, borderRadius, inputColors, spacingNumbers} from '@workday/canvas-kit-react-core';
+import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core';
 import {SelectProps} from './Select';
 
 interface SelectMenuProps
@@ -94,11 +94,6 @@ const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHid
     borderTop: 0,
     boxSizing: 'border-box',
     position: 'absolute',
-    // Offset the menu by the height of the select (spacingNumbers.xl)
-    // minus the borderRadius of the select (borderRadius.m)
-    top: `${spacingNumbers.xl - parseInt(borderRadius.m, 10)}px`,
-    width: '100%',
-    zIndex: 1,
   },
   ({error}) => ({
     ...menuBorderCSS(error),

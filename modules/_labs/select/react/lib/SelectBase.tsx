@@ -4,9 +4,10 @@ import uuid from 'uuid/v4';
 import {
   GrowthBehavior,
   ErrorType,
+  Popper,
+  Themeable,
   errorRing,
   styled,
-  Themeable,
 } from '@workday/canvas-kit-react-common';
 import {
   colors,
@@ -90,7 +91,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
   /**
    * The ref to the underlying button element. Use this to imperatively manipulate the button.
    */
-  buttonRef?: React.Ref<HTMLButtonElement>;
+  buttonRef: React.RefObject<HTMLButtonElement>;
   /**
    * The index of the focused option in the SelectBase.
    * @default 0
@@ -121,10 +122,6 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isMenuHiding: boolean;
   /**
-   * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
-   */
-  menuRef?: React.Ref<HTMLUListElement>;
-  /**
    * The function called when a key is pressed down while the SelectBase button or menu has focus.
    */
   onKeyDown?: (event: React.KeyboardEvent) => void;
@@ -145,6 +142,17 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * * `label: string` (required, analagous to the text content of an `<option>`)
    */
   options: NormalizedOption[];
+}
+
+interface SelectBaseState {
+  // We need the menuWidth state to support the use case where the menu is
+  // displayed without user interaction (e.g., if we want to show the menu
+  // from the start). buttonRef.current is set to null during the first
+  // render, which prevents Popper from rendering due to the lack of a
+  // reference element. By the time componentDidMount runs, buttonRef.current
+  // will have been set -- we can then update the menuWidth state and trigger
+  // a render with the Popper menu.
+  menuWidth: number;
 }
 
 const menuIconSize = 24;
@@ -247,7 +255,7 @@ const SelectWrapper = styled('div')<Pick<SelectBaseProps, 'grow' | 'disabled'>>(
   })
 );
 
-export default class SelectBase extends React.Component<SelectBaseProps> {
+export default class SelectBase extends React.Component<SelectBaseProps, SelectBaseState> {
   static defaultProps = {
     focusedOptionIndex: 0,
     isEmpty: false,
@@ -256,7 +264,12 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     isMenuHiding: false,
   };
 
+  state: Readonly<SelectBaseState> = {
+    menuWidth: 0,
+  };
+
   private focusedOptionRef = React.createRef<HTMLLIElement>();
+  private menuRef = React.createRef<HTMLUListElement>();
   private id = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
 
   // Lifted from https://gist.github.com/hsablonniere/2581101
@@ -317,6 +330,16 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       this.scrollIntoViewIfNeeded(focusedOption, center);
     }
   };
+
+  componentDidMount() {
+    const {buttonRef, error} = this.props;
+    if (buttonRef && buttonRef.current) {
+      // Menu width is dependent on the error (since different ErrorTypes
+      // have different border widths)
+      const boxShadowWidth = error === ErrorType.Alert ? 2 : 1;
+      this.setState({menuWidth: buttonRef.current.clientWidth - 2 * boxShadowWidth});
+    }
+  }
 
   componentDidUpdate(prevProps: SelectBaseProps) {
     const {focusedOptionIndex, isMenuHidden} = this.props;
@@ -391,7 +414,6 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       isMenuAnimated,
       isMenuHidden,
       isMenuHiding,
-      menuRef,
       onChange,
       onKeyDown,
       onMenuBlur,
@@ -401,6 +423,8 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       value,
       ...elemProps
     } = this.props;
+
+    const {menuWidth} = this.state;
 
     // Use default renderOption if renderOption prop isn't provided
     const renderOption = this.props.renderOption || this.renderOption;
@@ -435,20 +459,42 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           {selectedOptionLabel}
         </SelectButton>
         <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOptionValue} />
-        {!isEmpty && !isMenuHidden && (
-          <SelectMenu
-            aria-activedescendant={options[focusedOptionIndex].id}
-            aria-labelledby={ariaLabelledBy}
-            id={this.id}
-            error={error}
-            isAnimated={isMenuAnimated}
-            isHiding={isMenuHiding}
-            menuRef={menuRef}
-            onBlur={onMenuBlur}
-            onKeyDown={onKeyDown}
+        {!isEmpty && !isMenuHidden && buttonRef && buttonRef.current && (
+          <Popper
+            placement="bottom-start"
+            open={!isMenuHidden}
+            anchorElement={buttonRef.current}
+            popperOptions={{
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: [0, -parseInt(borderRadius.m, 10)],
+                  },
+                },
+              ],
+              onFirstUpdate: () => {
+                if (this.menuRef.current) {
+                  this.menuRef.current.focus();
+                }
+              },
+            }}
           >
-            {this.renderOptions(renderOption)}
-          </SelectMenu>
+            <SelectMenu
+              aria-activedescendant={options[focusedOptionIndex].id}
+              aria-labelledby={ariaLabelledBy}
+              id={this.id}
+              error={error}
+              isAnimated={isMenuAnimated}
+              isHiding={isMenuHiding}
+              menuRef={this.menuRef}
+              onBlur={onMenuBlur}
+              onKeyDown={onKeyDown}
+              style={{width: menuWidth}}
+            >
+              {this.renderOptions(renderOption)}
+            </SelectMenu>
+          </Popper>
         )}
         <SelectMenuIcon
           className="menu-icon"

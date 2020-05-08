@@ -41,7 +41,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   private buttonRef = React.createRef<HTMLButtonElement>();
   private inputRef = React.createRef<HTMLInputElement>();
-  private menuRef = React.createRef<HTMLUListElement>();
 
   private removeMenuTimer: ReturnType<typeof setTimeout>;
 
@@ -139,19 +138,11 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
 
     if (show) {
-      this.setState(
-        {
-          focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
-          isMenuHidden: false,
-          isMenuHiding: false,
-        },
-        () => {
-          // Shift focus to the menu
-          if (this.menuRef.current) {
-            this.menuRef.current.focus();
-          }
-        }
-      );
+      this.setState({
+        focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
+        isMenuHidden: false,
+        isMenuHiding: false,
+      });
     } else {
       this.setState({isMenuHiding: true});
 
@@ -418,7 +409,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         isEmpty={!this.areOptionsDefined()}
         isMenuHidden={isMenuHidden}
         isMenuHiding={isMenuHiding}
-        menuRef={this.menuRef}
         options={this.normalizedOptions}
         value={value}
         {...eventHandlers}

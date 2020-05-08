@@ -84,6 +84,49 @@ const customRenderOption: RenderOptionFunction = option => {
 storiesOf('Labs|Select/React/Top Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
+  .add('Portal', () => (
+    <div>
+      <div style={{border: '1px solid black', height: 200, overflow: 'hidden', padding: 20}}>
+        <p>This div has a height of 200 and overflow set to hidden</p>
+        <FormField label="Label" inputId="select-portal">
+          {controlComponent(<Select name="contact" options={options} />)}
+        </FormField>
+        <FormField label="Label" inputId="select-grow" grow={true}>
+          {controlComponent(<Select name="contact" options={options} grow={true} />)}
+        </FormField>
+      </div>
+      <div
+        style={{
+          border: '1px solid black',
+          height: 250,
+          marginTop: 450,
+          overflow: 'hidden',
+          padding: 20,
+        }}
+      >
+        <p>This div has a height of 250 and overflow set to hidden</p>
+        <FormField
+          label="Label"
+          inputId="select-alert"
+          error={FormField.ErrorType.Alert}
+          hintText={hintText}
+          hintId={hintId}
+        >
+          {controlComponent(<Select name="contact" options={options} />)}
+        </FormField>
+        <FormField
+          label="Label"
+          inputId="select-alert"
+          error={FormField.ErrorType.Alert}
+          grow={true}
+          hintText={hintText}
+          hintId={hintId}
+        >
+          {controlComponent(<Select grow={true} name="contact" options={options} />)}
+        </FormField>
+      </div>
+    </div>
+  ))
   .add('Default', () => (
     <FormField label="Label" inputId="select-default">
       {controlComponent(<Select name="contact" options={options} />)}
@@ -271,18 +314,22 @@ storiesOf('Labs|Select/React/Visual Testing', module)
         ]}
         columnProps={[{label: 'Default', props: {}}]}
       >
-        {props => (
-          <div style={{height: 250}}>
-            <SelectBase
-              {...props}
-              onChange={() => {}} // eslint-disable-line no-empty-function
-              options={normalizedOptions}
-              focusedOptionIndex={1}
-              isMenuAnimated={false}
-              isMenuHidden={false}
-            />
-          </div>
-        )}
+        {props => {
+          const buttonRef = React.createRef<HTMLButtonElement>();
+          return (
+            <div style={{height: 250}}>
+              <SelectBase
+                {...props}
+                buttonRef={buttonRef}
+                onChange={() => {}} // eslint-disable-line no-empty-function
+                options={normalizedOptions}
+                focusedOptionIndex={1}
+                isMenuAnimated={false}
+                isMenuHidden={false}
+              />
+            </div>
+          );
+        }}
       </ComponentStatesTable>
     </StaticStates>
   ))
