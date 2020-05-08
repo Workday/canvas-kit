@@ -42,6 +42,8 @@ jobs:
         yarn build-storybook --quiet &&
         yarn chromatic --quiet --auto-accept-changes --exit-once-uploaded --storybook-build-dir docs
       - yarn build
+    after_failure:
+      - node utils/report-failure.js
     env:
       - CHROMATIC_APP_CODE="dlpro96xybh"
     deploy:
