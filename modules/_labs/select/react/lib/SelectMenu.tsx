@@ -254,11 +254,26 @@ export default class SelectMenu extends React.Component<SelectMenuProps, SelectM
     };
   };
 
-  componentDidMount() {
+  private updateWidth = () => {
     const {buttonRef} = this.props;
     if (buttonRef.current) {
-      this.setState({width: buttonRef.current.clientWidth + 2 * buttonBorderWidth});
+      const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
+      // Only update width state if it actually changed
+      if (newMenuWidth !== this.state.width) {
+        this.setState({width: newMenuWidth});
+      }
     }
+  };
+
+  componentDidMount() {
+    this.updateWidth();
+
+    // Update menu width state on resize to ensure menu resizes as window resizes
+    window.addEventListener('resize', this.updateWidth);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWidth);
   }
 
   public render() {
