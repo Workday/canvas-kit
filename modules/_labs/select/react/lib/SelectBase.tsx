@@ -288,10 +288,16 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           parentComputedStyle.getPropertyValue('border-top-width'),
           10
         ),
-        overTop = elem.offsetTop - parent.offsetTop < parent.scrollTop,
+        // For some reason, IE11 thinks parent.clientHeight is 0 when the
+        // menu is first displayed; if this is the case, set overTop and
+        // overBottom to false
+        overTop =
+          parent.clientHeight === 0 ? false : elem.offsetTop - parent.offsetTop < parent.scrollTop,
         overBottom =
-          elem.offsetTop - parent.offsetTop + elem.clientHeight - parentBorderTopWidth >
-          parent.scrollTop + parent.clientHeight;
+          parent.clientHeight === 0
+            ? false
+            : elem.offsetTop - parent.offsetTop + elem.clientHeight - parentBorderTopWidth >
+              parent.scrollTop + parent.clientHeight;
 
       if ((overTop || overBottom) && centerIfNeeded) {
         parent.scrollTop =
