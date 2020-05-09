@@ -153,21 +153,10 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
   options: NormalizedOption[];
 }
 
-interface SelectBaseState {
-  // We need the menuWidth state to support the use case where the menu is
-  // displayed without user interaction (e.g., if we want to show the menu
-  // from the start). buttonRef.current is set to null during the first
-  // render, which prevents Popper from rendering due to the lack of a
-  // reference element. By the time componentDidMount runs, buttonRef.current
-  // will have been set -- we can then update the menuWidth state and trigger
-  // a render with the Popper menu.
-  menuWidth: number;
-}
-
+export const buttonBorderWidth = 1;
 export const buttonDefaultWidth = 280;
 
 const menuIconSize = 24;
-const buttonBorderWidth = 1;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
 const focusButtonStyles = {
@@ -266,7 +255,7 @@ const SelectWrapper = styled('div')<Pick<SelectBaseProps, 'grow' | 'disabled'>>(
   })
 );
 
-export default class SelectBase extends React.Component<SelectBaseProps, SelectBaseState> {
+export default class SelectBase extends React.Component<SelectBaseProps> {
   static defaultProps = {
     focusedOptionIndex: 0,
     isEmpty: false,
@@ -275,10 +264,6 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
     isMenuAutoFocused: true,
     isMenuHidden: true,
     isMenuHiding: false,
-  };
-
-  state: Readonly<SelectBaseState> = {
-    menuWidth: 0,
   };
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
@@ -336,13 +321,6 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
       this.scrollIntoViewIfNeeded(focusedOption, center);
     }
   };
-
-  componentDidMount() {
-    const {buttonRef} = this.props;
-    if (buttonRef.current) {
-      this.setState({menuWidth: buttonRef.current.clientWidth + 2 * buttonBorderWidth});
-    }
-  }
 
   componentDidUpdate(prevProps: SelectBaseProps) {
     const {focusedOptionIndex, isMenuHidden} = this.props;
@@ -436,8 +414,6 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
       ...elemProps
     } = this.props;
 
-    const {menuWidth} = this.state;
-
     // Use default renderOption if renderOption prop isn't provided
     const renderOption = this.props.renderOption || this.renderOption;
 
@@ -486,7 +462,6 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
             menuRef={this.menuRef}
             onBlur={onMenuBlur}
             onKeyDown={onKeyDown}
-            width={menuWidth}
           >
             {this.renderOptions(renderOption)}
           </SelectMenu>
