@@ -1,12 +1,9 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
-import {Rect} from '@popperjs/core';
 
 import {
   GrowthBehavior,
   ErrorType,
-  Placement,
-  Popper,
   Themeable,
   errorRing,
   styled,
@@ -167,6 +164,8 @@ interface SelectBaseState {
   menuWidth: number;
 }
 
+export const buttonDefaultWidth = 280;
+
 const menuIconSize = 24;
 const buttonBorderWidth = 1;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
@@ -196,7 +195,7 @@ const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | '
     whiteSpace: 'nowrap',
     // width is required (instead of minWidth) in order for the button to
     // be sized properly for lengthy options
-    width: 280,
+    width: buttonDefaultWidth,
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -338,63 +337,10 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
     }
   };
 
-  private generatePopperOptions = () => {
-    const {isMenuAutoFlipped, isMenuAutoFocused} = this.props;
-
-    const fallbackPlacements = isMenuAutoFlipped ? ['top-start'] : [];
-
-    const modifiers = [
-      {
-        name: 'flip',
-        options: {
-          fallbackPlacements,
-        },
-      },
-      {
-        name: 'offset',
-        options: {
-          offset: ({
-            placement,
-            reference,
-            popper,
-          }: {
-            placement: Placement;
-            reference: Rect;
-            popper: Rect;
-          }) => {
-            // Skid menu along the edge of the button to account
-            // for fractional x-positioning of the button (e.g.,
-            // if the button is in a horizontally-centered modal)
-            // and to ensure proper alignment between the button
-            // and the menu
-            const skidding = reference.x % 1 === 0 ? 0 : 1;
-            // Displace menu towards the button to obscure the bottom
-            // edge of the button and to create a smooth visual
-            // connection between the button and the menu
-            const distance = -parseInt(borderRadius.m, 10);
-            return [skidding, distance];
-          },
-        },
-      },
-    ];
-
-    return {
-      modifiers,
-      onFirstUpdate: () => {
-        if (isMenuAutoFocused && this.menuRef.current) {
-          this.menuRef.current.focus();
-        }
-      },
-    };
-  };
-
   componentDidMount() {
-    const {buttonRef, error} = this.props;
-    if (buttonRef && buttonRef.current) {
-      // Menu width is dependent on the error (since different ErrorTypes
-      // have different border widths)
-      const boxShadowWidth = error === ErrorType.Alert ? 2 : 1;
-      this.setState({menuWidth: buttonRef.current.clientWidth - 2 * boxShadowWidth});
+    const {buttonRef} = this.props;
+    if (buttonRef.current) {
+      this.setState({menuWidth: buttonRef.current.clientWidth + 2 * buttonBorderWidth});
     }
   }
 
@@ -474,6 +420,8 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
       inputRef,
       isEmpty,
       isMenuAnimated,
+      isMenuAutoFlipped,
+      isMenuAutoFocused,
       isMenuHidden,
       isMenuHiding,
       onChange,
@@ -483,8 +431,6 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
       value,
 
       // Strip unneeded props on button from elemProps
-      isMenuAutoFlipped,
-      isMenuAutoFocused,
       onOptionSelection,
 
       ...elemProps
@@ -525,32 +471,25 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
           {selectedOptionLabel}
         </SelectButton>
         <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOptionValue} />
-        {!isEmpty && !isMenuHidden && buttonRef && buttonRef.current && (
-          <Popper
-            placement="bottom-start"
-            open={!isMenuHidden}
-            anchorElement={buttonRef.current}
-            popperOptions={this.generatePopperOptions()}
-            // zIndex is necessary in order for the menu to be displayed
-            // properly if Select is placed within a CK Modal (necessary
-            // to override zIndex of 1 for the Modal)
-            style={{zIndex: 2}}
+        {!isEmpty && !isMenuHidden && (
+          <SelectMenu
+            aria-activedescendant={options[focusedOptionIndex].id}
+            aria-labelledby={ariaLabelledBy}
+            buttonRef={buttonRef}
+            id={this.id}
+            error={error}
+            isAnimated={isMenuAnimated}
+            isAutoFlipped={isMenuAutoFlipped}
+            isAutoFocused={isMenuAutoFocused}
+            isHidden={isMenuHidden}
+            isHiding={isMenuHiding}
+            menuRef={this.menuRef}
+            onBlur={onMenuBlur}
+            onKeyDown={onKeyDown}
+            width={menuWidth}
           >
-            <SelectMenu
-              aria-activedescendant={options[focusedOptionIndex].id}
-              aria-labelledby={ariaLabelledBy}
-              id={this.id}
-              error={error}
-              isAnimated={isMenuAnimated}
-              isHiding={isMenuHiding}
-              menuRef={this.menuRef}
-              onBlur={onMenuBlur}
-              onKeyDown={onKeyDown}
-              style={{width: menuWidth}}
-            >
-              {this.renderOptions(renderOption)}
-            </SelectMenu>
-          </Popper>
+            {this.renderOptions(renderOption)}
+          </SelectMenu>
         )}
         <SelectMenuIcon
           className="menu-icon"
