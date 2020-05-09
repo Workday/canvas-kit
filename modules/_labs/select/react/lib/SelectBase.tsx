@@ -286,11 +286,9 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
   private menuRef = React.createRef<HTMLUListElement>();
   private id = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
 
-  // Lifted from https://gist.github.com/hsablonniere/2581101
-  // This scrolling behavior is preferable even to the WebKit-proprietary
-  // scrollIntoViewIfNeeded method, although it still has some
-  // issues (sometimes it scrolls unnecessarily, the centerIfNeeded
-  // doesn't always center properly).
+  // Tweaked from https://gist.github.com/hsablonniere/2581101
+  // Removed reliance on scrollIntoView due to undesired scrolling on the
+  // entire page when positioning the menu using Popper
   private scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
     const parent: HTMLElement | null = elem.parentElement;
 
@@ -300,19 +298,10 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
           parentComputedStyle.getPropertyValue('border-top-width'),
           10
         ),
-        parentBorderLeftWidth = parseInt(
-          parentComputedStyle.getPropertyValue('border-left-width'),
-          10
-        ),
         overTop = elem.offsetTop - parent.offsetTop < parent.scrollTop,
         overBottom =
           elem.offsetTop - parent.offsetTop + elem.clientHeight - parentBorderTopWidth >
-          parent.scrollTop + parent.clientHeight,
-        overLeft = elem.offsetLeft - parent.offsetLeft < parent.scrollLeft,
-        overRight =
-          elem.offsetLeft - parent.offsetLeft + elem.clientWidth - parentBorderLeftWidth >
-          parent.scrollLeft + parent.clientWidth,
-        alignWithTop = overTop && !overBottom;
+          parent.scrollTop + parent.clientHeight;
 
       if ((overTop || overBottom) && centerIfNeeded) {
         parent.scrollTop =
@@ -323,17 +312,21 @@ export default class SelectBase extends React.Component<SelectBaseProps, SelectB
           elem.clientHeight / 2;
       }
 
-      if ((overLeft || overRight) && centerIfNeeded) {
-        parent.scrollLeft =
-          elem.offsetLeft -
-          parent.offsetLeft -
-          parent.clientWidth / 2 -
-          parentBorderLeftWidth +
-          elem.clientWidth / 2;
-      }
-
-      if ((overTop || overBottom || overLeft || overRight) && !centerIfNeeded) {
-        elem.scrollIntoView(alignWithTop);
+      if ((overTop || overBottom) && !centerIfNeeded) {
+        if (overBottom) {
+          // Element is out of view at the bottom edge of the parent viewport;
+          // scroll down just far enough for the element to be visible
+          if (parent.scrollTop === 0) {
+            parent.scrollTop =
+              elem.clientHeight - (parent.clientHeight + parentBorderTopWidth - elem.offsetTop);
+          } else {
+            parent.scrollTop += elem.clientHeight;
+          }
+        } else {
+          // Element is out of view at the top edge of the parent viewport;
+          // scroll up just far enough for the element to be visible
+          parent.scrollTop = elem.offsetTop - parentBorderTopWidth;
+        }
       }
     }
   };
