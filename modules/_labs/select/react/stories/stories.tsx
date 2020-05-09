@@ -312,12 +312,22 @@ storiesOf('Labs|Select/React/Visual Testing', module)
           {label: 'Alert', props: {error: Select.ErrorType.Alert}},
           {label: 'Error', props: {error: Select.ErrorType.Error}},
         ]}
-        columnProps={[{label: 'Default', props: {}}]}
+        columnProps={[
+          {label: 'Default', props: {}},
+          {label: 'Flipped', props: {isMenuFlipped: true}},
+        ]}
       >
         {props => {
           const buttonRef = React.createRef<HTMLButtonElement>();
           return (
-            <div style={{height: 250}}>
+            <div
+              style={{
+                height: 500,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}
+            >
               <SelectBase
                 {...props}
                 buttonRef={buttonRef}

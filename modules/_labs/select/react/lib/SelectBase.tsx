@@ -111,15 +111,20 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isMenuAnimated: boolean;
   /**
-   * If true, automatically flip the menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
+   * If true, automatically flip the SelectBase menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
    * @default true
    */
   isMenuAutoFlipped: boolean;
   /**
-   * If true, focus the menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
+   * If true, focus the SelectBase menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
    * @default true
    */
   isMenuAutoFocused: boolean;
+  /**
+   * If true, flip the SelectBase menu so it extends upwards from the button.
+   * @default false
+   */
+  isMenuFlipped: boolean;
   /**
    * If true, hide the SelectBase menu.
    * @default true
@@ -262,6 +267,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     isMenuAnimated: true,
     isMenuAutoFlipped: true,
     isMenuAutoFocused: true,
+    isMenuFlipped: false,
     isMenuHidden: true,
     isMenuHiding: false,
   };
@@ -400,6 +406,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       isMenuAnimated,
       isMenuAutoFlipped,
       isMenuAutoFocused,
+      isMenuFlipped,
       isMenuHidden,
       isMenuHiding,
       onChange,
@@ -457,6 +464,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
             isAnimated={isMenuAnimated}
             isAutoFlipped={isMenuAutoFlipped}
             isAutoFocused={isMenuAutoFocused}
+            isFlipped={isMenuFlipped}
             isHidden={isMenuHidden}
             isHiding={isMenuHiding}
             menuRef={this.menuRef}

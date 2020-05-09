@@ -31,6 +31,11 @@ interface SelectMenuProps
    */
   isAutoFocused: boolean;
   /**
+   * If true, flip the SelectMenu so it extends upwards from the button.
+   * @default false
+   */
+  isFlipped: boolean;
+  /**
    * If true, hide the SelectMenu.
    * @default false
    */
@@ -196,6 +201,7 @@ export default class SelectMenu extends React.Component<SelectMenuProps, SelectM
     isAnimated: true,
     isAutoFlipped: true,
     isAutoFocused: true,
+    isFlipped: false,
     isHidden: false,
     isHiding: false,
     width: buttonDefaultWidth,
@@ -206,8 +212,12 @@ export default class SelectMenu extends React.Component<SelectMenuProps, SelectM
   };
 
   private generatePopperOptions = () => {
-    const {isAutoFlipped, isAutoFocused, menuRef} = this.props;
-    const fallbackPlacements = isAutoFlipped ? ['top-start'] : [];
+    const {isAutoFlipped, isAutoFocused, isFlipped, menuRef} = this.props;
+
+    let fallbackPlacements: Placement[] = [];
+    if (isAutoFlipped) {
+      fallbackPlacements = isFlipped ? ['bottom-start'] : ['top-start'];
+    }
 
     const modifiers = [
       {
@@ -284,6 +294,7 @@ export default class SelectMenu extends React.Component<SelectMenuProps, SelectM
       isAnimated,
       isAutoFlipped,
       isAutoFocused,
+      isFlipped,
       isHidden,
       isHiding,
       menuRef,
@@ -295,7 +306,7 @@ export default class SelectMenu extends React.Component<SelectMenuProps, SelectM
     // Render nothing if buttonRef.current hasn't been set
     return buttonRef.current ? (
       <Popper
-        placement="bottom-start"
+        placement={isFlipped ? 'top-start' : 'bottom-start'}
         open={!isHidden}
         anchorElement={buttonRef.current}
         popperOptions={this.generatePopperOptions()}
