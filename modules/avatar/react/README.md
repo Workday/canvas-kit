@@ -23,6 +23,9 @@ import {Avatar, AvatarVariant} from '@workday/canvas-kit-react-avatar';
 // Basic
 <Avatar />
 
+// Rendering as a div instead of a button
+<Avatar as="div" />
+
 // Using static properties on Avatar
 <Avatar
   size={Avatar.Size.xs}
