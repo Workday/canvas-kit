@@ -11,7 +11,7 @@ export enum AvatarVariant {
   Dark,
 }
 
-export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * The variant of the Avatar default state. Accepts `Light` or `Dark`.
    * @default AvatarVariant.Light
@@ -43,8 +43,24 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * The ref to the button or div that the styled component renders.
    */
-  elementRef?: React.Ref<HTMLButtonElement>;
+  ref?: React.Ref<HTMLButtonElement>;
 }
+
+/**
+ * Used to get the props of the div version of an avatar
+ */
+type AvatarDivProps = Omit<AvatarProps, keyof React.ButtonHTMLAttributes<HTMLButtonElement>> &
+  React.HTMLAttributes<HTMLDivElement>;
+
+/**
+ * Returns an overloaded functional component that uses button props by default.
+ */
+type AvatarOverload = {
+  (props: {as: 'div'} & AvatarDivProps): React.ReactElement;
+  (props: Omit<AvatarProps, 'as'>): React.ReactElement;
+  Variant: typeof AvatarVariant;
+  Size: typeof SystemIconCircleSize;
+};
 
 const StyledContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
@@ -99,13 +115,13 @@ const StyledImage = styled('img')<{isLoaded: boolean}>(
   })
 );
 
-const Avatar = ({
+const Avatar: AvatarOverload = ({
   variant = AvatarVariant.Light,
   size = SystemIconCircleSize.m,
   altText = 'Avatar',
   url,
   onClick,
-  elementRef,
+  ref,
   ...elemProps
 }: AvatarProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -125,7 +141,7 @@ const Avatar = ({
       aria-label={altText}
       onClick={onClick}
       disabled={onClick ? false : true}
-      ref={elementRef}
+      ref={ref}
       {...elemProps}
     >
       <StyledStack size={size}>
