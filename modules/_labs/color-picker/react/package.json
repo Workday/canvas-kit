@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-color-picker",
-  "version": "4.0.0-beta.1",
+  "version": "4.0.0-beta.2",
   "description": "Color Picker is a component for selecting a color.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -45,15 +45,15 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-labs-react-core": "^4.0.0-beta.1",
-    "@workday/canvas-kit-react-button": "^4.0.0-beta.1",
-    "@workday/canvas-kit-react-color-picker": "^4.0.0-beta.1",
-    "@workday/canvas-kit-react-common": "^4.0.0-beta.1",
-    "@workday/canvas-kit-react-core": "^4.0.0-beta.1",
-    "@workday/canvas-kit-react-form-field": "^4.0.0-beta.1",
-    "@workday/canvas-kit-react-icon": "^4.0.0-beta.1",
-    "@workday/canvas-kit-react-popup": "^4.0.0-beta.1",
-    "@workday/canvas-kit-react-text-input": "^4.0.0-beta.1",
+    "@workday/canvas-kit-labs-react-core": "^4.0.0-beta.2",
+    "@workday/canvas-kit-react-button": "^4.0.0-beta.2",
+    "@workday/canvas-kit-react-color-picker": "^4.0.0-beta.2",
+    "@workday/canvas-kit-react-common": "^4.0.0-beta.2",
+    "@workday/canvas-kit-react-core": "^4.0.0-beta.2",
+    "@workday/canvas-kit-react-form-field": "^4.0.0-beta.2",
+    "@workday/canvas-kit-react-icon": "^4.0.0-beta.2",
+    "@workday/canvas-kit-react-popup": "^4.0.0-beta.2",
+    "@workday/canvas-kit-react-text-input": "^4.0.0-beta.2",
     "@workday/canvas-system-icons-web": "^1.0.20"
   },
   "peerDependencies": {
