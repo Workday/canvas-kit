@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css",
-  "version": "4.0.0-beta.1",
+  "version": "4.0.0-beta.2",
   "description": "The parent module that contains all Workday Canvas Kit CSS components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,9 +16,9 @@
     "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_canvas-kit-css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-action-bar": "^4.0.0-beta.1",
+    "@workday/canvas-kit-css-action-bar": "^4.0.0-beta.2",
     "@workday/canvas-kit-css-banner": "^4.0.0-beta.1",
-    "@workday/canvas-kit-css-button": "^4.0.0-beta.1",
+    "@workday/canvas-kit-css-button": "^4.0.0-beta.2",
     "@workday/canvas-kit-css-card": "^4.0.0-beta.1",
     "@workday/canvas-kit-css-checkbox": "^4.0.0-beta.1",
     "@workday/canvas-kit-css-common": "^4.0.0-beta.1",
@@ -33,7 +33,7 @@
     "@workday/canvas-kit-css-popup": "^4.0.0-beta.1",
     "@workday/canvas-kit-css-radio": "^4.0.0-beta.1",
     "@workday/canvas-kit-css-select": "^4.0.0-beta.1",
-    "@workday/canvas-kit-css-table": "^4.0.0-beta.1",
+    "@workday/canvas-kit-css-table": "^4.0.0-beta.2",
     "@workday/canvas-kit-css-text-area": "^4.0.0-beta.1",
     "@workday/canvas-kit-css-text-input": "^4.0.0-beta.1",
     "@workday/canvas-kit-css-tooltip": "^4.0.0-beta.1"
