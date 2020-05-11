@@ -103,7 +103,7 @@ Default: `Avatar.Size.m`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > A ref to the underlying `<button>` element.
 
