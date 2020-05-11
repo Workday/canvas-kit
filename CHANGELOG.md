@@ -13,6 +13,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - ci: Use sha in prerelease version to avoid duplicates ([#616](https://github.com/Workday/canvas-kit/pull/616)) [@anicholls](https://github.com/anicholls)
 - ci: Trim sha before using it for canary preid ([#619](https://github.com/Workday/canvas-kit/pull/619)) [@anicholls](https://github.com/anicholls)
 - ci: Fix version regex for canary publish ([#622](https://github.com/Workday/canvas-kit/pull/622)) [@anicholls](https://github.com/anicholls)
+- fix: Clean up ts3.5 files ([#630](https://github.com/Workday/canvas-kit/pull/630)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Add script to announce trunk build failures in slack ([#628](https://github.com/Workday/canvas-kit/pull/628)) [@anicholls](https://github.com/anicholls)
 
 ### Theming
 
@@ -27,6 +29,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Rename prop labels to match aria labels ([#551](https://github.com/Workday/canvas-kit/pull/551)) [@mannycarrera4](https://github.com/mannycarrera4)
 - fix(modal): Add missing aria-modal=true and add aria-label ([#588](https://github.com/Workday/canvas-kit/pull/588)) [@alexandrzavalii](https://github.com/alexandrzavalii)
 - feat(button): Add href support ([#590](https://github.com/Workday/canvas-kit/pull/590)) [@anicholls](https://github.com/anicholls)
+- fix(color-picker): Fix accessibility announcement for color input ([#639](https://github.com/Workday/canvas-kit/pull/639)) [@mannycarrera4](https://github.com/mannycarrera4)
+- test(toast): Fix chromatic stories for toast ([#625](https://github.com/Workday/canvas-kit/pull/625)) [@mannycarrera4](https://github.com/mannycarrera4)
 
 # 3.7.0 (2020-05-06)
 
