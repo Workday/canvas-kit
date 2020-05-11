@@ -43,7 +43,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
    * redundant announcement to screen reader users.
    * @default true
    */
-  announceAriaLiveOfLabel?: boolean;
+  announceLabelToScreenReaders?: boolean;
 }
 
 const StyledLabel = styled('div')({
@@ -88,7 +88,7 @@ const Pagination = (props: PaginationProps) => {
     nextPageAriaLabel = 'Next Page',
     pageButtonAriaLabel = defaultPageButtonAriaLabel,
     customLabel = defaultCustomLabel,
-    announceAriaLiveOfLabel = true,
+    announceLabelToScreenReaders = true,
     total,
     pageSize,
     currentPage,
@@ -134,8 +134,8 @@ const Pagination = (props: PaginationProps) => {
         {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} label={goToLabel} />}
         {showLabel && (
           <StyledLabel
-            aria-atomic={announceAriaLiveOfLabel ? true : undefined}
-            aria-live={announceAriaLiveOfLabel ? 'polite' : undefined}
+            aria-atomic={announceLabelToScreenReaders ? true : undefined}
+            aria-live={announceLabelToScreenReaders ? 'polite' : undefined}
           >
             {customLabel(labelFrom, labelTo, total)}
           </StyledLabel>
