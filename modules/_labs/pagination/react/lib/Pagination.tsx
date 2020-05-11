@@ -37,11 +37,10 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /** Optional width to pass to component. This is the width the container deems is available. You can use a measure component to get this. */
   width?: number;
   /**
-   * Announces the change to the label below the pagination bar describing on what page
-   * you are on out how many possible pages.
-   * Note: We default this to `true` to provide more information for accessibility.
-   * However, the context of your application might mean that this information is superfluous.
-   * If you choose to now want this, you can opt out by setting this to `false`
+   * Announces page changes to screen readers using aria-live
+   * Note: Your application may already announce page changes to screen readers through
+   * other means like focus changes or other aria-live regions. Set this to `false` to remove
+   * redundant announcement to screen reader users.
    * @default true
    */
   announceAriaLiveOfLabel?: boolean;
