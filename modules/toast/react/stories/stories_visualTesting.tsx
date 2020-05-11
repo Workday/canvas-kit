@@ -38,7 +38,7 @@ storiesOf('Components|Popups/Toast/React/Visual Testing', module)
         columnProps={[{label: 'Default', props: {}}]}
       >
         {props => (
-          <Toast aria-label="Play" {...props}>
+          <Toast transformOrigin={null} aria-label="Play" {...props}>
             Your workbook was successfully processed.
           </Toast>
         )}
