@@ -20,8 +20,8 @@ yarn add @workday/canvas-kit-react-avatar
 import * as React from 'react';
 import {Avatar, AvatarVariant} from '@workday/canvas-kit-react-avatar';
 
-// Basic
-<Avatar />
+// Basic button with click handler
+<Avatar onClick={someFunction} />
 
 // Rendering as a div instead of a button
 <Avatar as="div" />
@@ -109,12 +109,6 @@ Default: `Avatar.Size.m`
 #### `ref: React.Ref<HTMLButtonElement>`
 
 > A ref to the underlying `<button>` or `<div>` element.
-
----
-
-#### `onClick: (React.MouseEvent<HTMLButtonElement>) => void`
-
-> A `click` event handler for this component.
 
 ---
 
