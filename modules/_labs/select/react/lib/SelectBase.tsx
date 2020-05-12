@@ -173,6 +173,11 @@ const SelectButton = styled('button')<
     // width is required (instead of minWidth) in order for the button to
     // be sized properly for lengthy options
     width: 280,
+    // '&:focus:not([disabled])': {
+    //   borderColor: inputColors.focusBorder,
+    //   boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
+    //   outline: 'none',
+    // },
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -185,15 +190,21 @@ const SelectButton = styled('button')<
       },
     },
   },
-  ({error, isMenuHidden, theme}) => {
-    const focusButtonStyles = {
-      borderColor: inputColors.focusBorder,
-      boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-      outline: 'none',
+  ({theme}) => {
+    const themedFocusOutlines = theme.canvas.palette.common.focusOutline;
+    return {
+      '&:focus:not([disabled])': {
+        borderColor: themedFocusOutlines,
+        boxShadow: `inset 0 0 0 1px ${themedFocusOutlines}`,
+        outline: 'none',
+      },
     };
-    const themeFocusButtonStyles = {
-      borderColor: theme.canvas.palette.common.focusOutline,
-      boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+  },
+  ({error, isMenuHidden, theme}) => {
+    const themedFocusOutlines = theme.canvas.palette.common.focusOutline;
+    const focusButtonStyles = {
+      borderColor: themedFocusOutlines,
+      boxShadow: `inset 0 0 0 1px ${themedFocusOutlines}`,
       outline: 'none',
     };
     const hoverStyles = {
@@ -206,21 +217,13 @@ const SelectButton = styled('button')<
       // menu is hidden (otherwise, if the menu is visible, style
       // the button as if it had focus)
       if (isMenuHidden) {
-        if (theme) {
-          return {
-            ...hoverStyles,
-          };
-        }
+        return {
+          ...hoverStyles,
+        };
       } else {
-        if (theme) {
-          return {
-            ...themeFocusButtonStyles,
-          };
-        } else {
-          return {
-            ...focusButtonStyles,
-          };
-        }
+        return {
+          ...focusButtonStyles,
+        };
       }
     }
 

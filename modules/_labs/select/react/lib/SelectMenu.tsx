@@ -81,6 +81,9 @@ const menuListBorderCSS = (error?: ErrorType, theme?: EmotionCanvasTheme): CSSOb
   let borderColor = inputColors.focusBorder;
   let borderWidth = 1;
 
+  if (theme) {
+    borderColor = theme.canvas.palette.common.focusOutline;
+  }
   if (error === ErrorType.Error) {
     if (theme) {
       borderColor = theme.canvas.palette.error.main;
