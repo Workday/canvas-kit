@@ -42,7 +42,7 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
     margin: `-${spacing.xxxs} -${spacing.xs}`,
     '& > div': {
       margin: `${spacing.xxs} ${spacing.zero}`,
-      '&:first-child': {
+      '&:first-of-type': {
         marginTop: spacing.xxxs,
       },
       '&:last-child': {

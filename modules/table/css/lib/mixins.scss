@@ -21,7 +21,7 @@
     bottom: -$wdc-table-border-width;
   }
 
-  &:first-child {
+  &:first-of-type {
     box-shadow: inset $wdc-table-border-width 0 0 $_borderColor;
   }
 
