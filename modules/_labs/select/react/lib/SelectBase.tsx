@@ -151,12 +151,6 @@ const menuIconSize = 24;
 const buttonBorderWidth = 1;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
-const focusButtonStyles = {
-  borderColor: inputColors.focusBorder,
-  boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-  outline: 'none',
-};
-
 const SelectButton = styled('button')<
   Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'theme'>
 >(
@@ -182,9 +176,6 @@ const SelectButton = styled('button')<
     '&::placeholder': {
       color: inputColors.placeholder,
     },
-    // '&:focus:not([disabled])': {
-    //   ...focusButtonStyles,
-    // },
     '&:disabled': {
       backgroundColor: inputColors.disabled.background,
       borderColor: inputColors.disabled.border,
@@ -195,26 +186,42 @@ const SelectButton = styled('button')<
     },
   },
   ({error, isMenuHidden, theme}) => {
+    const focusButtonStyles = {
+      borderColor: inputColors.focusBorder,
+      boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
+      outline: 'none',
+    };
+    const themeFocusButtonStyles = {
+      borderColor: theme.canvas.palette.common.focusOutline,
+      boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+      outline: 'none',
+    };
+    const hoverStyles = {
+      '&:hover:not([disabled]):not(:focus)': {
+        borderColor: inputColors.hoverBorder,
+      },
+    };
     if (error === undefined) {
       // If there isn't an error, only show hover styles if the
       // menu is hidden (otherwise, if the menu is visible, style
       // the button as if it had focus)
-      return isMenuHidden
-        ? {
-            '&:hover:not([disabled]):not(:focus)': {
-              borderColor: inputColors.hoverBorder,
-            },
-            '&:focus:not([disabled])': {
-              borderColor: theme.canvas.palette.common.focusOutline,
-              boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-              outline: 'none',
-            },
-          }
-        : {
-            borderColor: theme.canvas.palette.common.focusOutline,
-            boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
-            outline: 'none',
+      if (isMenuHidden) {
+        if (theme) {
+          return {
+            ...hoverStyles,
           };
+        }
+      } else {
+        if (theme) {
+          return {
+            ...themeFocusButtonStyles,
+          };
+        } else {
+          return {
+            ...focusButtonStyles,
+          };
+        }
+      }
     }
 
     return {
