@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.0.0-beta.3 (2020-05-12)
+
+### Infrastructure
+
+- chore: Upgrade Babel and presets to support optional chaining ([#631](https://github.com/Workday/canvas-kit/pull/631)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Fix version issue in beta build ([#644](https://github.com/Workday/canvas-kit/pull/644)) [@anicholls](https://github.com/anicholls)
+
+### Components
+
+- fix(pagination): Provide aria live attribute for accessbility ([#620](https://github.com/Workday/canvas-kit/pull/620)) [@mannycarrera4](https://github.com/mannycarrera4)
+
 # 4.0.0-beta.2 (2020-05-11)
 
 ### Infrastructure
