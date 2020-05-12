@@ -157,7 +157,9 @@ const focusButtonStyles = {
   outline: 'none',
 };
 
-const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden'>>(
+const SelectButton = styled('button')<
+  Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'theme'>
+>(
   {
     ...type.body,
     border: `${buttonBorderWidth}px solid ${inputColors.border}`,
@@ -180,9 +182,9 @@ const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | '
     '&::placeholder': {
       color: inputColors.placeholder,
     },
-    '&:focus:not([disabled])': {
-      ...focusButtonStyles,
-    },
+    // '&:focus:not([disabled])': {
+    //   ...focusButtonStyles,
+    // },
     '&:disabled': {
       backgroundColor: inputColors.disabled.background,
       borderColor: inputColors.disabled.border,
@@ -192,7 +194,7 @@ const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | '
       },
     },
   },
-  ({error, isMenuHidden}) => {
+  ({error, isMenuHidden, theme}) => {
     if (error === undefined) {
       // If there isn't an error, only show hover styles if the
       // menu is hidden (otherwise, if the menu is visible, style
@@ -202,15 +204,22 @@ const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | '
             '&:hover:not([disabled]):not(:focus)': {
               borderColor: inputColors.hoverBorder,
             },
+            '&:focus:not([disabled])': {
+              borderColor: theme.canvas.palette.common.focusOutline,
+              boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+              outline: 'none',
+            },
           }
         : {
-            ...focusButtonStyles,
+            borderColor: theme.canvas.palette.common.focusOutline,
+            boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
+            outline: 'none',
           };
-    } else {
-      return {
-        ...errorRing(error),
-      };
     }
+
+    return {
+      ...errorRing(error, theme),
+    };
   },
   ({grow}) =>
     grow && {
