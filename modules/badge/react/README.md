@@ -26,7 +26,18 @@ accessibility concerns you'll want to keep in mind:
 
 ### Example
 
-```jsx
+```tsx
+import styled from '@emotion/styled';
+import { accessibleHide } from "@workday/canvas-kit-react";
+
+...
+
+const AccessibleHide = styled('div')({
+  ...accessibleHide,
+});
+
+...
+
 <IconButton
   style={{ position: "relative" }}
   aria-label={`Alerts ${count} new notifications`}
@@ -36,7 +47,7 @@ accessibility concerns you'll want to keep in mind:
   <SystemIcon icon={notificationsIcon} aria-hidden="true" />
   <Badge count={count} aria-hidden="true" />
 </IconButton>
-<div className="wdc-accessible-hide" role="status" aria-live="polite" aria-atomic="true">
+<AccessibleHide role="status" aria-live="polite" aria-atomic="true">
   New notifications
 </div>
 ```

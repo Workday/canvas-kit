@@ -43,6 +43,12 @@ accessibility concerns you'll want to keep in mind:
 </div>
 ```
 
+> Note: To use the `wdc-accessible-hide` class, you'll need to import it from the core module.
+
+```scss
+@import '~@workday/canvas-kit-css-core/lib/accessibility.scss';
+```
+
 ## Usage
 
 ### Variants
