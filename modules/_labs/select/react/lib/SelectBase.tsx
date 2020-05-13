@@ -179,13 +179,11 @@ const SelectButton = styled('button')<
     // width is required (instead of minWidth) in order for the button to
     // be sized properly for lengthy options
     width: 280,
-    '&:focus:not([disabled])': {
-      borderColor: inputColors.focusBorder,
-      boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-      outline: 'none',
-    },
     '&::placeholder': {
       color: inputColors.placeholder,
+    },
+    '&:focus:not([disabled])': {
+      ...focusButtonStyles,
     },
     '&:disabled': {
       backgroundColor: inputColors.disabled.background,
