@@ -151,6 +151,12 @@ const menuIconSize = 24;
 const buttonBorderWidth = 1;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
+const focusButtonStyles = {
+  borderColor: inputColors.focusBorder,
+  boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
+  outline: 'none',
+};
+
 const SelectButton = styled('button')<
   Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'theme'>
 >(
@@ -173,6 +179,11 @@ const SelectButton = styled('button')<
     // width is required (instead of minWidth) in order for the button to
     // be sized properly for lengthy options
     width: 280,
+    '&:focus:not([disabled])': {
+      borderColor: inputColors.focusBorder,
+      boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
+      outline: 'none',
+    },
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -196,30 +207,17 @@ const SelectButton = styled('button')<
     };
   },
   ({error, isMenuHidden, theme}) => {
-    const themedFocusOutlines = theme.canvas.palette.common.focusOutline;
-    const focusButtonStyles = {
-      borderColor: themedFocusOutlines,
-      boxShadow: `inset 0 0 0 1px ${themedFocusOutlines}`,
-      outline: 'none',
-    };
-    const hoverStyles = {
-      '&:hover:not([disabled]):not(:focus)': {
-        borderColor: inputColors.hoverBorder,
-      },
-    };
     if (error === undefined) {
       // If there isn't an error, only show hover styles if the
       // menu is hidden (otherwise, if the menu is visible, style
       // the button as if it had focus)
-      if (isMenuHidden) {
-        return {
-          ...hoverStyles,
-        };
-      } else {
-        return {
-          ...focusButtonStyles,
-        };
-      }
+      return isMenuHidden
+        ? {
+            '&:hover:not([disabled]):not(:focus)': {
+              borderColor: inputColors.hoverBorder,
+            },
+          }
+        : {...focusButtonStyles};
     }
 
     return {
