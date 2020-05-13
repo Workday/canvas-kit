@@ -2,13 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {
-  controlComponent,
-  ComponentStatesTable,
-  permutateProps,
-  customColorTheme,
-} from '../../../../../utils/storybook';
+import {controlComponent} from '../../../../../utils/storybook';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {
   activityStreamIcon,
@@ -19,8 +13,7 @@ import {
 import {colors, typeColors} from '@workday/canvas-kit-react-core';
 import FormField from '../../../../form-field/react/index';
 import Select from '../lib/Select';
-import SelectBase, {RenderOptionFunction} from '../lib/SelectBase';
-import SelectOption from '../lib/SelectOption';
+import {RenderOptionFunction} from '../lib/SelectBase';
 import README from '../README.md';
 
 const hintText = 'Helpful text goes here.';
