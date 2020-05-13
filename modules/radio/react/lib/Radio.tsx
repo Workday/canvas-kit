@@ -105,6 +105,8 @@ const RadioInput = styled('input')<RadioProps>(
       transition: 'box-shadow 150ms ease-out',
       width: radioWidth,
       position: 'absolute',
+      top: -1,
+      left: -1,
       zIndex: -1,
     },
   },
