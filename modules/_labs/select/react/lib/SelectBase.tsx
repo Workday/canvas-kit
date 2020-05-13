@@ -195,11 +195,11 @@ const SelectButton = styled('button')<
     },
   },
   ({theme}) => {
-    const themedFocusButtonStyles = theme.canvas.palette.common.focusOutline;
+    const themedFocusOutlineColor = theme.canvas.palette.common.focusOutline;
     return {
       '&:focus:not([disabled])': {
-        borderColor: themedFocusButtonStyles,
-        boxShadow: `inset 0 0 0 1px ${themedFocusButtonStyles}`,
+        borderColor: themedFocusOutlineColor,
+        boxShadow: `inset 0 0 0 1px ${themedFocusOutlineColor}`,
         outline: 'none',
       },
     };
