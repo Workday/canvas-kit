@@ -169,6 +169,8 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       transition: 'box-shadow 150ms ease-out',
       width: checkboxWidth,
       position: 'absolute',
+      top: -1,
+      left: -1,
       zIndex: -1,
     },
   },
