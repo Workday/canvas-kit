@@ -174,13 +174,11 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     return container;
   }
 
-  private container = this.getContainer(this.props.container);
-
   componentDidMount() {
     // For IE11 and under, we'll need to polyfill element.closest
     elementClosestPolyfill(window);
 
-    if (this.container.closest('[data-whatinput]')) {
+    if (this.getContainer(this.props.container).closest('[data-whatinput]')) {
       this.deferInputTracking = true;
       return;
     }
@@ -190,9 +188,9 @@ export default class InputProvider extends React.Component<InputProviderProps> {
 
   updateAttributes() {
     const intent = this.provideIntent ? this.currentIntent : null;
-    this.container.setAttribute('data-whatinput', this.currentInput);
+    this.getContainer(this.props.container).setAttribute('data-whatinput', this.currentInput);
     if (intent) {
-      this.container.setAttribute('data-whatintent', intent);
+      this.getContainer(this.props.container).setAttribute('data-whatintent', intent);
     }
 
     try {
@@ -209,8 +207,8 @@ export default class InputProvider extends React.Component<InputProviderProps> {
       return;
     }
 
-    this.container.removeAttribute('data-whatinput');
-    this.container.removeAttribute('data-whatintent');
+    this.getContainer(this.props.container).removeAttribute('data-whatinput');
+    this.getContainer(this.props.container).removeAttribute('data-whatintent');
     window.clearTimeout(this.eventTimer);
     this.enableListeners(false);
   }
