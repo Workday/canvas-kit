@@ -151,12 +151,6 @@ const menuIconSize = 24;
 const buttonBorderWidth = 1;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
-const focusButtonStyles = {
-  borderColor: inputColors.focusBorder,
-  boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-  outline: 'none',
-};
-
 const SelectButton = styled('button')<
   Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'theme'>
 >(
@@ -169,6 +163,7 @@ const SelectButton = styled('button')<
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',
     height: spacing.xl,
+    outline: 'none',
     overflow: 'hidden',
     padding: buttonPadding,
     paddingRight: spacingNumbers.xxs + menuIconSize + buttonPadding,
@@ -182,9 +177,6 @@ const SelectButton = styled('button')<
     '&::placeholder': {
       color: inputColors.placeholder,
     },
-    '&:focus:not([disabled])': {
-      ...focusButtonStyles,
-    },
     '&:disabled': {
       backgroundColor: inputColors.disabled.background,
       borderColor: inputColors.disabled.border,
@@ -194,23 +186,22 @@ const SelectButton = styled('button')<
       },
     },
   },
-  ({theme}) => {
-    const themedFocusOutlineColor = theme.canvas.palette.common.focusOutline;
-    return {
-      '&:focus:not([disabled])': {
-        borderColor: themedFocusOutlineColor,
-        boxShadow: `inset 0 0 0 1px ${themedFocusOutlineColor}`,
-        outline: 'none',
-      },
-    };
-  },
   ({error, isMenuHidden, theme}) => {
+    const themedFocusOutlineColor = theme.canvas.palette.common.focusOutline;
+    const focusButtonStyles = {
+      borderColor: themedFocusOutlineColor,
+      boxShadow: `inset 0 0 0 1px ${themedFocusOutlineColor}`,
+    };
+
     if (error === undefined) {
       // If there isn't an error, only show hover styles if the
       // menu is hidden (otherwise, if the menu is visible, style
       // the button as if it had focus)
       return isMenuHidden
         ? {
+            '&:focus:not([disabled])': {
+              ...focusButtonStyles,
+            },
             '&:hover:not([disabled]):not(:focus)': {
               borderColor: inputColors.hoverBorder,
             },

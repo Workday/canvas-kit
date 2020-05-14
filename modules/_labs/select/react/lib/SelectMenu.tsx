@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {ErrorType, styled, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {CSSObject, keyframes} from '@emotion/core';
+import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
 import {colors, borderRadius, inputColors, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {SelectProps} from './Select';
 
@@ -36,28 +36,18 @@ const fadeOutAnimation = keyframes`
 
 export const menuFadeDuration = 200;
 
-const menuBorderCSS = (error?: ErrorType, theme?: EmotionCanvasTheme): CSSObject => {
-  let borderColor = inputColors.focusBorder;
+const menuBorderCSS = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
+  let borderColor = theme.canvas.palette.common.focusOutline;
   let dividerBorderColor = borderColor;
   let dividerBorderWidth = 1;
+
   if (error === ErrorType.Error) {
-    if (theme) {
-      borderColor = theme.canvas.palette.error.main;
-      dividerBorderColor = theme.canvas.palette.error.main;
-    } else {
-      borderColor = inputColors.error.border;
-      dividerBorderColor = inputColors.error.border;
-    }
+    borderColor = theme.canvas.palette.error.main;
+    dividerBorderColor = borderColor;
   } else if (error === ErrorType.Alert) {
-    if (theme) {
-      borderColor = theme.canvas.palette.alert.main;
-      dividerBorderColor = theme.canvas.palette.alert.main;
-      dividerBorderWidth = 2;
-    } else {
-      borderColor = colors.cantaloupe600;
-      dividerBorderColor = inputColors.warning.border;
-      dividerBorderWidth = 2;
-    }
+    borderColor = theme.canvas.palette.alert.darkest;
+    dividerBorderColor = theme.canvas.palette.alert.main;
+    dividerBorderWidth = 2;
   }
 
   const dividerBorder = `${dividerBorderWidth}px solid ${dividerBorderColor}`;
@@ -77,27 +67,15 @@ const menuBorderCSS = (error?: ErrorType, theme?: EmotionCanvasTheme): CSSObject
   };
 };
 
-const menuListBorderCSS = (error?: ErrorType, theme?: EmotionCanvasTheme): CSSObject => {
-  let borderColor = inputColors.focusBorder;
+const menuListBorderCSS = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
+  let borderColor = theme.canvas.palette.common.focusOutline;
   let borderWidth = 1;
 
-  if (theme) {
-    borderColor = theme.canvas.palette.common.focusOutline;
-  }
   if (error === ErrorType.Error) {
-    if (theme) {
-      borderColor = theme.canvas.palette.error.main;
-    } else {
-      borderColor = inputColors.error.border;
-    }
+    borderColor = theme.canvas.palette.error.main;
   } else if (error === ErrorType.Alert) {
-    if (theme) {
-      borderColor = theme.canvas.palette.alert.main;
-      borderWidth = 2;
-    } else {
-      borderColor = inputColors.warning.border;
-      borderWidth = 2;
-    }
+    borderColor = theme.canvas.palette.alert.main;
+    borderWidth = 2;
   }
 
   const border = `${borderWidth}px solid ${borderColor}`;
@@ -124,7 +102,7 @@ const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHid
     zIndex: 1,
   },
   ({error, theme}) => ({
-    ...menuBorderCSS(error, theme),
+    ...menuBorderCSS(theme, error),
   }),
   ({isAnimated}) =>
     isAnimated && {
@@ -146,14 +124,12 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
     listStyle: 'none',
     margin: 0,
     maxHeight: 200,
+    outline: 'none',
     overflowY: 'auto',
     padding: 0,
-    '&:focus': {
-      outline: 'none',
-    },
   },
   ({error, theme}) => ({
-    ...menuListBorderCSS(error, theme),
+    ...menuListBorderCSS(theme, error),
   })
 );
 
