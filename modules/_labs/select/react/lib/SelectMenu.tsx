@@ -36,7 +36,7 @@ const fadeOutAnimation = keyframes`
 
 export const menuFadeDuration = 200;
 
-const menuBorderCSS = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
+const menuBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
   let borderColor = theme.canvas.palette.common.focusOutline;
   let dividerBorderColor = borderColor;
   let dividerBorderWidth = 1;
@@ -67,7 +67,7 @@ const menuBorderCSS = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject 
   };
 };
 
-const menuListBorderCSS = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
+const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
   let borderColor = theme.canvas.palette.common.focusOutline;
   let borderWidth = 1;
 
@@ -102,7 +102,7 @@ const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHid
     zIndex: 1,
   },
   ({error, theme}) => ({
-    ...menuBorderCSS(theme, error),
+    ...menuBorderStyles(theme, error),
   }),
   ({isAnimated}) =>
     isAnimated && {
@@ -129,7 +129,7 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
     padding: 0,
   },
   ({error, theme}) => ({
-    ...menuListBorderCSS(theme, error),
+    ...menuListBorderStyles(theme, error),
   })
 );
 

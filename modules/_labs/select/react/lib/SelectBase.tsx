@@ -188,25 +188,25 @@ const SelectButton = styled('button')<
   },
   ({error, isMenuHidden, theme}) => {
     const themedFocusOutlineColor = theme.canvas.palette.common.focusOutline;
-    const focusButtonStyles = {
+    const buttonFocusStyles = {
       borderColor: themedFocusOutlineColor,
       boxShadow: `inset 0 0 0 1px ${themedFocusOutlineColor}`,
     };
 
     if (error === undefined) {
-      // If there isn't an error, only show hover styles if the
+      // If there isn't an error, apply focus and hover styles if the
       // menu is hidden (otherwise, if the menu is visible, style
       // the button as if it had focus)
       return isMenuHidden
         ? {
             '&:focus:not([disabled])': {
-              ...focusButtonStyles,
+              ...buttonFocusStyles,
             },
             '&:hover:not([disabled]):not(:focus)': {
               borderColor: inputColors.hoverBorder,
             },
           }
-        : {...focusButtonStyles};
+        : {...buttonFocusStyles};
     }
 
     return {
