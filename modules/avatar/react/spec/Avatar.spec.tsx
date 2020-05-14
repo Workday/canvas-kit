@@ -29,7 +29,13 @@ describe('Avatar Accessibility', () => {
 
   test('Avatar should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(<Avatar />);
-    expect(await axe(html)).toHaveNoViolations();
+    expect(
+      await axe(html, {
+        rules: {
+          region: {enabled: false},
+        },
+      })
+    ).toHaveNoViolations();
   });
 
   test('Avatar with image should pass axe DOM accessibility guidelines', async () => {
@@ -38,6 +44,12 @@ describe('Avatar Accessibility', () => {
         url={'https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png'}
       />
     );
-    expect(await axe(html)).toHaveNoViolations();
+    expect(
+      await axe(html, {
+        rules: {
+          region: {enabled: false},
+        },
+      })
+    ).toHaveNoViolations();
   });
 });

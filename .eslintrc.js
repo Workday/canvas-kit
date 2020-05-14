@@ -1,5 +1,3 @@
-const prettierConfig = require('./.prettierrc.js');
-
 module.exports = {
   env: {
     browser: true,
@@ -78,6 +76,5 @@ module.exports = {
     'react/jsx-no-bind': 'off', // Keep perf implications in mind, but was giving too many warnings and hurting readability
     curly: 'error',
     radix: 'error',
-    'prettier/prettier': ['warn', prettierConfig],
   },
 };
