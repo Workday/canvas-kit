@@ -12,3 +12,10 @@ if (/resolved\s".*(artifactory).*\n/.test(contents)) {
   );
   process.exit(1);
 }
+
+if (/@workday\/canvas-kit/.test(contents)) {
+  console.error(
+    `This 'yarn.lock' file contains references to Canvas Kit. If the monorepo versions are set correctly, this should never happen. Find the version listed in yarn.lock within the repo and adjust this dependency to the correct version.`
+  );
+  process.exit(1);
+}
