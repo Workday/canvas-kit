@@ -36,10 +36,6 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * Will render an `div` tag instead of a `button` when defined.
    */
   as?: 'div';
-  /**
-   * The ref to the button or div that the styled component renders.
-   */
-  ref?: React.Ref<HTMLButtonElement>;
 }
 
 /**
@@ -52,8 +48,8 @@ type AvatarDivProps = Omit<AvatarProps, keyof React.ButtonHTMLAttributes<HTMLBut
  * Returns an overloaded functional component that uses button props by default.
  */
 type AvatarOverload = {
-  (props: {as: 'div'} & AvatarDivProps): React.ReactElement;
-  (props: Omit<AvatarProps, 'as'>): React.ReactElement;
+  (props: {as: 'div'} & AvatarDivProps & {ref?: React.Ref<HTMLElement>}): React.ReactElement;
+  (props: Omit<AvatarProps, 'as'> & {ref?: React.Ref<HTMLButtonElement>}): React.ReactElement;
   Variant: typeof AvatarVariant;
   Size: typeof SystemIconCircleSize;
 };
@@ -111,46 +107,50 @@ const StyledImage = styled('img')<{isLoaded: boolean}>(
   })
 );
 
-const Avatar: AvatarOverload = ({
-  variant = AvatarVariant.Light,
-  size = SystemIconCircleSize.m,
-  altText = 'Avatar',
-  url,
-  onClick,
-  ref,
-  ...elemProps
-}: AvatarProps) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
+const Avatar: AvatarOverload = React.forwardRef(
+  (
+    {
+      variant = AvatarVariant.Light,
+      size = SystemIconCircleSize.m,
+      altText = 'Avatar',
+      url,
+      onClick,
+      ...elemProps
+    }: AvatarProps,
+    ref: React.Ref<HTMLButtonElement>
+  ) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
 
-  const loadImage = () => {
-    if (!imageLoaded) {
-      setImageLoaded(true);
-    }
-  };
+    const loadImage = () => {
+      if (!imageLoaded) {
+        setImageLoaded(true);
+      }
+    };
 
-  const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
+    const background = variant === AvatarVariant.Dark ? colors.blueberry400 : colors.soap300;
 
-  return (
-    <StyledContainer
-      variant={variant}
-      size={size}
-      aria-label={altText}
-      onClick={onClick}
-      disabled={onClick ? false : true}
-      ref={ref}
-      {...elemProps}
-    >
-      <StyledStack size={size}>
-        <SystemIconCircle icon={userIcon} background={background} size={size} />
-      </StyledStack>
-      {url && (
+    return (
+      <StyledContainer
+        variant={variant}
+        size={size}
+        aria-label={altText}
+        onClick={onClick}
+        disabled={onClick ? false : true}
+        ref={ref}
+        {...elemProps}
+      >
         <StyledStack size={size}>
-          <StyledImage src={url} alt={altText} onLoad={loadImage} isLoaded={imageLoaded} />
+          <SystemIconCircle icon={userIcon} background={background} size={size} />
         </StyledStack>
-      )}
-    </StyledContainer>
-  );
-};
+        {url && (
+          <StyledStack size={size}>
+            <StyledImage src={url} alt={altText} onLoad={loadImage} isLoaded={imageLoaded} />
+          </StyledStack>
+        )}
+      </StyledContainer>
+    );
+  }
+) as any; // AvatarProps and forwardRef signatures are incompatible, so we must force cast
 
 Avatar.Variant = AvatarVariant;
 Avatar.Size = SystemIconCircleSize;
