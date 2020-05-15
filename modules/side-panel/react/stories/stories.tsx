@@ -13,7 +13,7 @@ import README from '../README.md';
 import {SystemIcon} from '../../../icon/react';
 import {Header} from '../../../_labs/header/react';
 import {Button, IconButton} from '../../../button/react';
-import {AvatarButton} from '../../../avatar/react';
+import {Avatar} from '../../../avatar/react';
 import SidePanel from '../index';
 
 interface SidePanelState {
@@ -173,7 +173,7 @@ storiesOf('Components|Containers/Side Panel/React', module)
     <div className="story">
       <div style={{height: '67vh', position: 'relative'}}>
         <Header brandUrl="#">
-          <AvatarButton
+          <Avatar
             onClick={() => {
               alert('clicked avatar');
             }}
