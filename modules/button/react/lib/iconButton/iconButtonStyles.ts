@@ -12,6 +12,7 @@ export interface IconButtonGenericStyle extends GenericStyle {
   };
 }
 
+// Focus Ring Styles
 export function getButtonFocusRing(variant: IconButtonVariant): CSSObject {
   const buttonColors = IconButtonColors[variant];
 
@@ -54,7 +55,7 @@ function getAccentSelector(fillColor: string): CSSObject {
   };
 }
 
-export function getIconButtonStyle(
+export function getIconButtonVariantStyle(
   baseButton: IconButtonGenericStyle,
   variant?: IconButtonVariant
 ) {
@@ -250,8 +251,7 @@ export function getIconButtonStateStyle(variant: IconButtonVariant): CSSObject {
     },
   };
 
-  return {
-    ...baseStyles,
+  const focusStyles = {
     ':focus': {
       backgroundColor: buttonColors.focusBackground,
       ...(buttonColors.labelIconFocus && {
@@ -260,19 +260,9 @@ export function getIconButtonStateStyle(variant: IconButtonVariant): CSSObject {
         },
       }),
     },
-    ...hoverStyles,
-    ...activeStyles,
-    ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
-      pointerEvents: 'none',
-      backgroundColor: buttonColors.disabledBackground,
-      borderColor: buttonColors.disabledBorder,
-      color: buttonColors.disabledText,
-      ...(buttonColors.labelIconDisabled && {
-        'span .wd-icon-fill, span .wd-icon-accent': {
-          fill: buttonColors.labelIconDisabled,
-        },
-      }),
-    },
+  };
+
+  const notDisabledStyles = {
     '&:not([disabled])': {
       '&:focus': {
         background: buttonColors.focusBackground,
@@ -294,6 +284,25 @@ export function getIconButtonStateStyle(variant: IconButtonVariant): CSSObject {
         backgroundColor: buttonColors.activeBackground,
       },
     },
+  };
+
+  return {
+    ...baseStyles,
+    ...focusStyles,
+    ...hoverStyles,
+    ...activeStyles,
+    ':disabled, :active:disabled, :focus:disabled, :hover:disabled': {
+      pointerEvents: 'none',
+      backgroundColor: buttonColors.disabledBackground,
+      borderColor: buttonColors.disabledBorder,
+      color: buttonColors.disabledText,
+      ...(buttonColors.labelIconDisabled && {
+        'span .wd-icon-fill, span .wd-icon-accent': {
+          fill: buttonColors.labelIconDisabled,
+        },
+      }),
+    },
+    ...notDisabledStyles,
     ...mouseFocusBehavior({
       '&:focus': {
         ...baseStyles,

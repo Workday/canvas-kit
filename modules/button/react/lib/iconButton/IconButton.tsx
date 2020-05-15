@@ -4,13 +4,12 @@ import isPropValid from '@emotion/is-prop-valid';
 import {IconButtonVariant, IconButtonSize} from './iconButtonTypes';
 import {
   iconButtonStyles,
-  getIconButtonStyle,
+  getIconButtonVariantStyle,
   getIconButtonToggledOnStyle,
 } from './iconButtonStyles';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
-import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ClassNames, CSSObject} from '@emotion/core';
+import {ClassNames} from '@emotion/core';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -46,37 +45,13 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   onToggleChange?: (toggled: boolean | undefined) => void;
 }
 
-// function getFillSelector(fillColor: string): CSSObject {
-//   return {
-//     '&:focus span .wd-icon-fill, &:hover span .wd-icon-fill, span .wd-icon-fill': {
-//       fill: fillColor,
-//     },
-//   };
-// }
-
-// function getBackgroundSelector(fillColor: string): CSSObject {
-//   return {
-//     '&:hover span .wd-icon-background, span .wd-icon-background': {
-//       fill: fillColor,
-//     },
-//   };
-// }
-
-// function getAccentSelector(fillColor: string): CSSObject {
-//   return {
-//     '&:focus span .wd-icon-accent, &:hover span .wd-icon-accent, span .wd-icon-accent': {
-//       fill: fillColor,
-//     },
-//   };
-// }
-
 export const iconButtonIdentifier = 'wdc-ckr-icon-button';
 
 export const IconButtonCon = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<IconButtonProps>(
   iconButtonStyles.styles,
-  ({variant}) => getIconButtonStyle(iconButtonStyles, variant),
+  ({variant}) => getIconButtonVariantStyle(iconButtonStyles, variant),
   ({size, variant}) => {
     switch (size) {
       default:
