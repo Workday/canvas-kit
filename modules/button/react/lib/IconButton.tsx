@@ -76,6 +76,11 @@ export const IconButtonCon = styled('button', {
   iconButtonStyles.styles,
   ({variant}) => getButtonStyle(iconButtonStyles, variant),
   ({size, variant}) => {
+    if (variant === IconButtonVariant.Alternate) {
+      return {
+        ...iconButtonStyles.variants!.sizes.small,
+      };
+    }
     switch (size) {
       default:
       case IconButtonSize.Medium:
@@ -162,6 +167,36 @@ export const IconButtonCon = styled('button', {
             ...getAccentSelector(colors.frenchVanilla100),
             ...getBackgroundSelector(colors.blueberry200),
           },
+        };
+
+      case IconButtonVariant.Alternate:
+        return {
+          ...getFillSelector(colors.blueberry500),
+          ...getAccentSelector(colors.frenchVanilla100),
+          ...getBackgroundSelector(colors.blueberry500),
+          '&:focus:hover, &:focus, &:active, &:active:hover': {
+            ...getFillSelector(colors.blueberry500),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry500),
+          },
+          '&:not([disabled]):focus': {
+            ...getFillSelector(colors.blueberry500),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry500),
+            ...(toggled ? focusRing(2, 0) : {}),
+          },
+          '&:disabled, &:active:disabled, &:focus:disabled, &:hover:disabled': {
+            ...getFillSelector(colors.blueberry200),
+            ...getAccentSelector(colors.frenchVanilla100),
+            ...getBackgroundSelector(colors.blueberry200),
+          },
+          ...mouseFocusBehavior({
+            '&:focus:active': {
+              ...getFillSelector(colors.blueberry500),
+              ...getAccentSelector(colors.frenchVanilla100),
+              ...getBackgroundSelector(colors.blueberry500),
+            },
+          }),
         };
 
       case IconButtonVariant.Inverse:

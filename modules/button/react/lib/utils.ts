@@ -69,6 +69,8 @@ export function getButtonStyle(
       return types[IconButtonVariant.Plain];
     case IconButtonVariant.Circle:
       return types[IconButtonVariant.Circle];
+    case IconButtonVariant.Alternate:
+      return types[IconButtonVariant.Alternate];
     case IconButtonVariant.CircleFilled:
       return types[IconButtonVariant.CircleFilled];
     case IconButtonVariant.Inverse:
@@ -113,6 +115,8 @@ export function getButtonFocusRing(variant: AllButtonVariants): CSSObject {
       return focusRing(2, 2, true, false, buttonColors.focusRingInner, buttonColors.focusRingOuter);
     case IconButtonVariant.Plain:
       return focusRing(2);
+    case IconButtonVariant.Alternate:
+      return focusRing(2, 0);
     case IconButtonVariant.Inverse:
     case IconButtonVariant.InverseFilled:
       return focusRing(2, 2, true, false, buttonColors.focusRingInner, buttonColors.focusRingOuter);
@@ -245,7 +249,7 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
 
 export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
   const buttonColors = ButtonColors[variant];
-
+  console.warn(buttonColors);
   if (buttonColors == null) {
     return {};
   }
