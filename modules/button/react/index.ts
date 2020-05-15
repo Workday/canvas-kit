@@ -7,7 +7,8 @@ export {
   deprecated_Button,
   ButtonProps,
 } from './lib/Button';
-export {default as IconButton, IconButtonProps} from './lib/IconButton';
+export {IconButtonVariant} from './lib/iconButton/iconButtonTypes';
+export {default as IconButton, IconButtonProps} from './lib/iconButton/IconButton';
 export {default as DropdownButton} from './lib/DropdownButton';
 export {default as TextButton, TextButtonProps} from './lib/TextButton';
 export {

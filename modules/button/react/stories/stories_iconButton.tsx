@@ -21,7 +21,7 @@ import {
 } from '../index';
 
 import README from '../README.md';
-import {IconButtonProps} from '../lib/IconButton';
+import {IconButtonProps} from '../lib/iconButton/IconButton';
 
 const iconButtonLayout: CSSObject = {
   display: 'flex',

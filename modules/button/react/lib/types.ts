@@ -7,10 +7,10 @@ export enum ButtonSize {
   Large = 'large',
 }
 
-export enum IconButtonSize {
-  Small = 'small',
-  Medium = 'medium',
-}
+// export enum IconButtonSize {
+//   Small = 'small',
+//   Medium = 'medium',
+// }
 
 // TODO (beta button): consolidate all these button types
 /**
@@ -36,15 +36,15 @@ export enum ButtonVariant {
   OutlineInverse = 'outlineInverse',
 }
 
-export enum IconButtonVariant {
-  Square = 'square',
-  SquareFilled = 'squareFilled',
-  Plain = 'plain',
-  Circle = 'circle',
-  CircleFilled = 'circleFilled',
-  Inverse = 'inverse',
-  InverseFilled = 'inverseFilled',
-}
+// export enum IconButtonVariant {
+//   Square = 'square',
+//   SquareFilled = 'squareFilled',
+//   Plain = 'plain',
+//   Circle = 'circle',
+//   CircleFilled = 'circleFilled',
+//   Inverse = 'inverse',
+//   InverseFilled = 'inverseFilled',
+// }
 
 /**
  * The different icon positions.
@@ -61,8 +61,5 @@ export enum TextButtonVariant {
   InverseAllCaps = 'textInverseAllCaps',
 }
 
-export type AllButtonVariants =
-  | DeprecatedButtonVariant
-  | ButtonVariant
-  | TextButtonVariant
-  | IconButtonVariant;
+export type AllButtonVariants = DeprecatedButtonVariant | ButtonVariant | TextButtonVariant;
+// | IconButtonVariant;

@@ -7,11 +7,11 @@ import {
   ButtonSize,
   ButtonVariant,
   DeprecatedButtonVariant,
-  IconButtonVariant,
+  // IconButtonVariant,
   IconPosition,
   TextButtonVariant,
 } from './types';
-import {getButtonStateStyle, getIconButtonStateStyle} from './utils';
+import {getButtonStateStyle} from './utils';
 
 export const CANVAS_BUTTON_HEIGHT_LARGE: number = 40;
 export const CANVAS_BUTTON_HEIGHT_MEDIUM: number = 24;
@@ -293,69 +293,6 @@ export const textButtonStyles: ButtonGenericStyle = {
       [ButtonSize.Small]: {
         height: canvas.spacing.l,
         padding: '0 8px',
-      },
-    },
-  },
-};
-
-export const iconButtonStyles: ButtonGenericStyle = {
-  classname: 'icon-button',
-  styles: {
-    // TODO: Support data-whatinput='input' css
-    ...deprecatedButtonStyles.styles,
-    borderWidth: '0',
-    borderRadius: borderRadius.circle,
-    ['& .wd-icon']: {
-      display: 'inline-block',
-      verticalAlign: 'middle',
-    },
-  },
-  variants: {
-    sizes: {
-      [ButtonSize.Small]: {
-        minWidth: canvas.spacing.l, // min-width is set so buttons don't collapse in IE11
-        width: 'auto',
-        height: canvas.spacing.l,
-        'span svg': {
-          width: '20px',
-          height: '20px',
-        },
-      },
-      [ButtonSize.Medium]: {
-        minWidth: canvas.spacing.xl,
-        width: canvas.spacing.xl,
-        height: canvas.spacing.xl,
-      },
-    },
-    types: {
-      [IconButtonVariant.Square]: {
-        borderRadius: borderRadius.m,
-        minWidth: canvas.spacing.l,
-        width: canvas.spacing.l,
-        height: canvas.spacing.l,
-        ...getIconButtonStateStyle(IconButtonVariant.Square),
-      },
-      [IconButtonVariant.SquareFilled]: {
-        borderRadius: borderRadius.m,
-        minWidth: canvas.spacing.l,
-        width: canvas.spacing.l,
-        height: canvas.spacing.l,
-        ...getIconButtonStateStyle(IconButtonVariant.SquareFilled),
-      },
-      [IconButtonVariant.Plain]: {
-        ...getIconButtonStateStyle(IconButtonVariant.Plain),
-      },
-      [IconButtonVariant.Circle]: {
-        ...getIconButtonStateStyle(IconButtonVariant.Circle),
-      },
-      [IconButtonVariant.CircleFilled]: {
-        ...getIconButtonStateStyle(IconButtonVariant.CircleFilled),
-      },
-      [IconButtonVariant.Inverse]: {
-        ...getIconButtonStateStyle(IconButtonVariant.Inverse),
-      },
-      [IconButtonVariant.InverseFilled]: {
-        ...getIconButtonStateStyle(IconButtonVariant.InverseFilled),
       },
     },
   },

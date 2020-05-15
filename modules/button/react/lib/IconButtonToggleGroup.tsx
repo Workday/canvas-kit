@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import IconButton, {IconButtonProps, iconButtonIdentifier} from './IconButton';
+import IconButton, {IconButtonProps, iconButtonIdentifier} from './iconButton/IconButton';
 
 export interface IconButtonToggleGroupProps {
   /**
