@@ -2,14 +2,11 @@ import * as React from 'react';
 import {keyframes} from '@emotion/core';
 import styled from '@emotion/styled';
 import {borderRadius, colors, fontFamily} from '@workday/canvas-kit-react-core';
-import radius from '@workday/canvas-kit-react-core/lib/radius';
 
 export interface CountBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   count?: number;
   variant?: 'default' | 'inverse';
 }
-
-console.log(radius);
 
 const variants = {
   default: {

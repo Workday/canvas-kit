@@ -1,7 +1,7 @@
-const noInvalidBananaImports = require('./restricted-imports');
+const restrictedImports = require('./restricted-imports');
 
 module.exports = {
   rules: {
-    'restricted-imports': noInvalidBananaImports,
+    'restricted-imports': restrictedImports,
   },
 };
