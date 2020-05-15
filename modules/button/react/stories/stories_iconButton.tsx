@@ -175,7 +175,7 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
   ))
   .add('Alternate', () => (
     <div className="story">
-      <h3>Alternate</h3>
+      <h3>Alternate Default</h3>
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Small}

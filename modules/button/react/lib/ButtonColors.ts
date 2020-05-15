@@ -256,7 +256,7 @@ export const ButtonColors: ButtonColorCollection = {
   },
   [IconButtonVariant.Alternate]: {
     background: 'transparent',
-    activeBackground: canvas.colors.soap500,
+    activeBackground: canvas.colors.soap400,
     disabledBackground: 'transparent',
     focusBackground: 'transparent',
     hoverBackground: canvas.colors.soap400,
@@ -266,6 +266,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocus: canvas.colors.licorice200,
     labelIconFocusHover: canvas.colors.licorice500,
     labelIconDisabled: canvas.colors.soap600,
+    focusHover: canvas.colors.soap400,
   },
   [IconButtonVariant.SquareFilled]: {
     background: canvas.colors.soap200,

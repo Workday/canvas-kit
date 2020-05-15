@@ -336,8 +336,8 @@ export const iconButtonStyles: ButtonGenericStyle = {
         ...getIconButtonStateStyle(IconButtonVariant.Square),
       },
       [IconButtonVariant.Alternate]: {
-        borderRadius: '3px',
-        width: '32px !important',
+        borderRadius: borderRadius.m,
+        width: '32px !important', // override width auto for small buttons
         ...getIconButtonStateStyle(IconButtonVariant.Alternate),
       },
       [IconButtonVariant.SquareFilled]: {
