@@ -285,6 +285,65 @@ storiesOf('Labs|Select/React/Visual Testing', module)
       </ComponentStatesTable>
     </StaticStates>
   ))
+  .add('States (Option, Split)', () => (
+    <div>
+      {[
+        {label: 'Default', error: undefined},
+        {label: 'Alert', error: Select.ErrorType.Alert},
+        {label: 'Error', error: Select.ErrorType.Error},
+      ].map(table => (
+        <div>
+          <h2>{table.label}</h2>
+          <StaticStates>
+            <ComponentStatesTable
+              rowProps={[
+                {label: 'Default', props: {}},
+                {label: 'Assistive-Focus', props: {focused: true}},
+                {label: 'Selected', props: {'aria-selected': true}},
+                {label: 'Assistive-Focus Selected', props: {'aria-selected': true, focused: true}},
+              ]}
+              // rowProps={permutateProps({
+              //   'aria-selected': [
+              //     {label: 'Default', value: undefined},
+              //     {label: 'Selected', value: 'true'},
+              //   ],
+              //   focused: [{label: '', value: false}, {label: 'Assistive-Focus', value: true}],
+              // })}
+              columnProps={permutateProps(
+                {
+                  className: [
+                    {label: 'Default', value: ''},
+                    {label: 'Hover', value: 'hover'},
+                    {label: 'Active', value: 'active'},
+                    {label: 'Active Hover', value: 'active hover'},
+                  ],
+                  disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+                },
+                props => {
+                  if (props.disabled && !['', 'hover'].includes(props.className)) {
+                    return false;
+                  }
+                  return true;
+                }
+              )}
+            >
+              {props => (
+                <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 120}}>
+                  <SelectOption
+                    {...props}
+                    error={table.error}
+                    onChange={() => {}} // eslint-disable-line no-empty-function
+                  >
+                    E-mail
+                  </SelectOption>
+                </ul>
+              )}
+            </ComponentStatesTable>
+          </StaticStates>
+        </div>
+      ))}
+    </div>
+  ))
   .add('States (Option)', () => (
     <StaticStates>
       <ComponentStatesTable
