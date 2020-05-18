@@ -249,7 +249,7 @@ export function getButtonStateStyle(variant: AllButtonVariants): CSSObject {
 
 export function getIconButtonStateStyle(variant: AllButtonVariants): CSSObject {
   const buttonColors = ButtonColors[variant];
-  console.warn(buttonColors);
+
   if (buttonColors == null) {
     return {};
   }
