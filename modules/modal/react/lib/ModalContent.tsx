@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import tabTrappingKey from 'focus-trap-js';
 import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
+import {PopupStack} from '@workday/canvas-kit-react-common';
 
 import {ModalWidth} from './Modal';
 
@@ -155,6 +156,21 @@ const useInitialFocus = (
   }, [modalRef, firstFocusRef]);
 };
 
+const useStackManager = (ref: React.RefObject<HTMLElement>) => {
+  React.useLayoutEffect(() => {
+    PopupStack.add({element: ref.current!});
+
+    return () => {
+      PopupStack.remove(ref.current!);
+    };
+  }, []);
+  return {
+    isTopmost() {
+      return PopupStack.isTopmostElement(ref.current!);
+    },
+  };
+};
+
 const ModalContent = ({
   ariaLabel,
   closeOnEscape = true,
@@ -168,13 +184,19 @@ const ModalContent = ({
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
+  const stack = useStackManager(modalRef);
 
   const handleKeydown = (event: KeyboardEvent) => {
     if (modalRef.current) {
       tabTrappingKey(event, modalRef.current);
     }
 
-    if (closeOnEscape && handleClose && (event.key === 'Esc' || event.key === 'Escape')) {
+    if (
+      closeOnEscape &&
+      handleClose &&
+      (event.key === 'Esc' || event.key === 'Escape') &&
+      stack.isTopmost()
+    ) {
       handleClose();
     }
   };
@@ -183,9 +205,11 @@ const ModalContent = ({
   useInitialFocus(modalRef, firstFocusRef);
 
   const handleOutsideClick = ({target}: React.MouseEvent<HTMLDivElement>) => {
-    const modalEl = modalRef.current;
-
-    if (modalEl && !modalEl.contains(target as Node) && handleClose) {
+    if (
+      !PopupStack.contains(target as HTMLElement, modalRef.current!) &&
+      stack.isTopmost() &&
+      handleClose
+    ) {
       handleClose();
     }
   };

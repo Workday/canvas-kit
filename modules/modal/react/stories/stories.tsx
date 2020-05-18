@@ -214,4 +214,32 @@ storiesOf('Components|Popups/Modal/React', module)
       <h1 className="section-label">Modal</h1>
       <CustomFocusModalExample />
     </div>
-  ));
+  ))
+  .add('Stacked Modals', () => {
+    const modal1 = useModal();
+    const modal2 = useModal();
+
+    return (
+      <>
+        <DeleteButton {...modal1.targetProps}>Delete Item</DeleteButton>
+        <Modal heading={'Delete Item'} {...modal1.modalProps}>
+          <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+          <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
+            Delete
+          </DeleteButton>
+          <Modal heading={'Really Delete Item'} {...modal2.modalProps}>
+            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+            <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
+              Really Delete
+            </DeleteButton>
+            <Button onClick={modal2.closeModal} variant={Button.Variant.Secondary}>
+              Cancel
+            </Button>
+          </Modal>
+          <Button onClick={modal1.closeModal} variant={Button.Variant.Secondary}>
+            Cancel
+          </Button>
+        </Modal>
+      </>
+    );
+  });
