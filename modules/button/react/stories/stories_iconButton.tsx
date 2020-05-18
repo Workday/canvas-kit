@@ -179,17 +179,17 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
       <IconButton
         {...commonIconButtonProps}
         size={IconButton.Size.Small}
-        variant={IconButton.Variant.Toolbar}
+        variant={IconButton.Variant.ToolbarCompact}
       />
       <IconButton
         icon={activityStreamIcon}
         size={IconButton.Size.Small}
         disabled={true}
-        variant={IconButton.Variant.Toolbar}
+        variant={IconButton.Variant.ToolbarCompact}
         aria-label="Activity Stream"
       />
       <h3>Toggleable Alternative</h3>
-      <ToggleIconButtonWrapper variant={IconButton.Variant.Toolbar} />
+      <ToggleIconButtonWrapper variant={IconButton.Variant.ToolbarCompact} />
     </div>
   ))
   .add('Square Filled', () => (

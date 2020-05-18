@@ -335,10 +335,10 @@ export const iconButtonStyles: ButtonGenericStyle = {
         height: canvas.spacing.l,
         ...getIconButtonStateStyle(IconButtonVariant.Square),
       },
-      [IconButtonVariant.Toolbar]: {
+      [IconButtonVariant.ToolbarCompact]: {
         borderRadius: borderRadius.m,
         width: '32px !important', // override width auto for small buttons
-        ...getIconButtonStateStyle(IconButtonVariant.Toolbar),
+        ...getIconButtonStateStyle(IconButtonVariant.ToolbarCompact),
       },
       [IconButtonVariant.SquareFilled]: {
         borderRadius: borderRadius.m,

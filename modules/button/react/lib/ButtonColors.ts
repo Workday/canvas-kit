@@ -254,7 +254,7 @@ export const ButtonColors: ButtonColorCollection = {
     labelIconFocusHover: canvas.colors.licorice500,
     labelIconDisabled: canvas.colors.soap600,
   },
-  [IconButtonVariant.Toolbar]: {
+  [IconButtonVariant.ToolbarCompact]: {
     background: 'transparent',
     activeBackground: canvas.colors.soap400,
     disabledBackground: 'transparent',
