@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from '../../../radio/css/README.md';
 import '../index.scss';
-import '@workday/canvas-kit-css-radio';
+import '@workday/canvas-kit-css-radio/index.scss';
 
 storiesOf('Components|Inputs/Radio/CSS/Top Label/Radio', module)
   .addDecorator(withReadme(README))

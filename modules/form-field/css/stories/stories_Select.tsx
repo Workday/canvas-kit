@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from '../../../select/css/README.md';
 import '../index.scss';
-import '@workday/canvas-kit-css-select';
+import '@workday/canvas-kit-css-select/index.scss';
 
 storiesOf('Components|Inputs/Select/CSS/Top Label', module)
   .addDecorator(withReadme(README))

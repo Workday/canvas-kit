@@ -1,23 +1,22 @@
 module.exports = {
-  // meta: {
-  //   type: 'suggestion',
-  // },
+  meta: {
+    type: 'suggestion',
+  },
   create: function(context) {
     return {
       ImportDeclaration(node) {
-        const nodeSource = context.getSource(node);
         const {value} = node.source;
         const splitPath = value.split('/');
-        const levels = splitPath.length;
-        if (splitPath[0] === '@workday' && splitPath[1].startsWith('canvas-kit-') && levels > 2) {
+        const packageName = splitPath[1];
+        const pathRegex = /^@workday\/canvas-kit[\w-]+\/lib/; // Match on any @workday/canvas-kit package
+
+        if (pathRegex.test(value)) {
           context.report({
             node,
-            message: `Only second level path imports are allowed. Prefer to import from '@workday/${
-              splitPath[1]
-            }'.`,
+            message: `Only top-level imports are allowed. Import from '@workday/${packageName}'.`,
             fix: function(fixer) {
-              const fixedImport = nodeSource.replace(value, `@workday/${splitPath[1]}`);
-              console.log(fixedImport);
+              const nodeSource = context.getSource(node);
+              const fixedImport = nodeSource.replace(value, `@workday/${packageName}`);
               return fixer.replaceText(node, fixedImport);
             },
           });
@@ -26,5 +25,3 @@ module.exports = {
     };
   },
 };
-
-// import radius from '@workday/canvas-kit-react-core/lib/radius';

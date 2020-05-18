@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from '../../../checkbox/css/README.md';
 import '../index.scss';
-import '@workday/canvas-kit-css-checkbox';
+import '@workday/canvas-kit-css-checkbox/index.scss';
 
 storiesOf('Components|Inputs/Checkbox/CSS/Top Label/Checkbox', module)
   .addDecorator(withReadme(README))
