@@ -1,10 +1,10 @@
 const eslint = require('eslint');
-const rule = require('./no-invalid-banana-imports');
+const rule = require('./restricted-imports');
 
 const ruleTester = new eslint.RuleTester({
   parserOptions: {ecmaVersion: 2015, sourceType: 'module'},
 });
-ruleTester.run('no-invalid-banana-imports', rule, {
+ruleTester.run('restricted-imports', rule, {
   valid: ["import { ColorSwatch } from '@workday/canvas-kit-react-color-picker'"],
   invalid: [
     {
