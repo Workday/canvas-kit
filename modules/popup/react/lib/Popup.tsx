@@ -26,7 +26,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    * The origin from which the Popup will animate.
    * @default {horizontal: 'center', vertical: 'top'}
    */
-  transformOrigin: TransformOrigin;
+  transformOrigin: TransformOrigin | null;
   /**
    * The size of the Popup close button. Accepts `Small` or `Medium`.
    * @default IconButtonSize.Medium
@@ -86,12 +86,17 @@ const Container = styled('div', {
     maxWidth: `calc(100vw - ${spacing.l})`,
   },
   ({width}) => width && {width},
-  ({transformOrigin}) => ({
-    animation: popupAnimation(transformOrigin),
-    animationDuration: '150ms',
-    animationTimingFunction: 'ease-out',
-    transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
-  })
+  ({transformOrigin}) => {
+    if (transformOrigin === null) {
+      return {};
+    }
+    return {
+      animation: popupAnimation(transformOrigin),
+      animationDuration: '150ms',
+      animationTimingFunction: 'ease-out',
+      transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
+    };
+  }
 );
 
 const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
@@ -152,7 +157,6 @@ export default class Popup extends React.Component<PopupProps> {
               size={closeIconSize}
               onClick={handleClose}
               icon={xIcon}
-              title={closeLabel}
               aria-label={closeLabel}
             />
           </CloseIconContainer>
