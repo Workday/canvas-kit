@@ -256,6 +256,70 @@ const SelectStates = () => (
   </StaticStates>
 );
 
+const SelectMenuOnStates = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={[
+        {label: 'Default', props: {}},
+        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
+        {label: 'Error', props: {error: Select.ErrorType.Error}},
+      ]}
+      columnProps={[{label: 'Default', props: {}}]}
+    >
+      {props => (
+        <div style={{height: 250}}>
+          <SelectBase
+            {...props}
+            onChange={() => {}} // eslint-disable-line no-empty-function
+            options={normalizedOptions}
+            focusedOptionIndex={1}
+            isMenuAnimated={false}
+            isMenuHidden={false}
+          />
+        </div>
+      )}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+
+const SelectOptionStates = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={[
+        {label: 'Default', props: {}},
+        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
+        {label: 'Error', props: {error: Select.ErrorType.Error}},
+      ]}
+      columnProps={permutateProps(
+        {
+          className: [
+            {label: 'Default', value: ''},
+            {label: 'Hover', value: 'hover'},
+            {label: 'Active', value: 'active'},
+            {label: 'Active Hover', value: 'active hover'},
+          ],
+          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+        },
+        props => {
+          if (props.disabled && !['', 'hover'].includes(props.className)) {
+            return false;
+          }
+          return true;
+        }
+      )}
+    >
+      {props => (
+        <SelectOption
+          {...props}
+          onChange={() => {}} // eslint-disable-line no-empty-function
+        >
+          E-mail
+        </SelectOption>
+      )}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+
 storiesOf('Labs|Select/React/Visual Testing', module)
   .addParameters({
     chromatic: {
@@ -265,71 +329,13 @@ storiesOf('Labs|Select/React/Visual Testing', module)
   })
   .addDecorator(withReadme(README))
   .add('States', () => <SelectStates />)
-  .add('States (Menu On)', () => (
-    <StaticStates>
-      <ComponentStatesTable
-        rowProps={[
-          {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: Select.ErrorType.Alert}},
-          {label: 'Error', props: {error: Select.ErrorType.Error}},
-        ]}
-        columnProps={[{label: 'Default', props: {}}]}
-      >
-        {props => (
-          <div style={{height: 250}}>
-            <SelectBase
-              {...props}
-              onChange={() => {}} // eslint-disable-line no-empty-function
-              options={normalizedOptions}
-              focusedOptionIndex={1}
-              isMenuAnimated={false}
-              isMenuHidden={false}
-            />
-          </div>
-        )}
-      </ComponentStatesTable>
-    </StaticStates>
-  ))
-  .add('States (Option)', () => (
-    <StaticStates>
-      <ComponentStatesTable
-        rowProps={[
-          {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: Select.ErrorType.Alert}},
-          {label: 'Error', props: {error: Select.ErrorType.Error}},
-        ]}
-        columnProps={permutateProps(
-          {
-            className: [
-              {label: 'Default', value: ''},
-              {label: 'Hover', value: 'hover'},
-              {label: 'Active', value: 'active'},
-              {label: 'Active Hover', value: 'active hover'},
-            ],
-            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-          },
-          props => {
-            if (props.disabled && !['', 'hover'].includes(props.className)) {
-              return false;
-            }
-            return true;
-          }
-        )}
-      >
-        {props => (
-          <SelectOption
-            {...props}
-            onChange={() => {}} // eslint-disable-line no-empty-function
-          >
-            E-mail
-          </SelectOption>
-        )}
-      </ComponentStatesTable>
-    </StaticStates>
-  ))
+  .add('States (Menu On)', () => <SelectMenuOnStates />)
+  .add('States (Option)', () => <SelectOptionStates />)
   .addParameters({
     canvasProviderDecorator: {
       theme: customColorTheme,
     },
   })
-  .add('Theming', () => <SelectStates />);
+  .add('Theming', () => <SelectStates />)
+  .add('Theming (Menu On)', () => <SelectMenuOnStates />)
+  .add('Theming (Option)', () => <SelectOptionStates />);
