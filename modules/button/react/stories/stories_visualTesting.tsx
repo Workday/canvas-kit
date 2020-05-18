@@ -201,7 +201,7 @@ const IconButtonStates = () => (
                 {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
                 {value: IconButton.Variant.Square, label: 'Square'},
                 {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
-                {value: IconButton.Variant.Alternate, label: 'Alternate'},
+                {value: IconButton.Variant.Toolbar, label: 'Toolbar Icon'},
               ],
             })}
             columnProps={permutateProps(

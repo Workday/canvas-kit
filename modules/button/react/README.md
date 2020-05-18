@@ -186,7 +186,7 @@ Default: `IconButtonVariant.Circle`
 
 | Theme           | Description                                                |
 | --------------- | ---------------------------------------------------------- |
-| `Alternate`     | Square, white background, dark gray icon used for toolbars |
+| `Toolbar`       | Square, white background, dark gray icon used for toolbars |
 | `Square`        | Square, white background, dark gray icon                   |
 | `SquareFilled`  | Square, gray background, dark gray icon                    |
 | `Plain`         | Dark gray icon                                             |

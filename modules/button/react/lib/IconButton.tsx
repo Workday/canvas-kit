@@ -76,7 +76,7 @@ export const IconButtonCon = styled('button', {
   iconButtonStyles.styles,
   ({variant}) => getButtonStyle(iconButtonStyles, variant),
   ({size, variant}) => {
-    if (variant === IconButtonVariant.Alternate) {
+    if (variant === IconButtonVariant.Toolbar) {
       return {
         ...iconButtonStyles.variants!.sizes.small,
       };
@@ -169,7 +169,7 @@ export const IconButtonCon = styled('button', {
           },
         };
 
-      case IconButtonVariant.Alternate:
+      case IconButtonVariant.Toolbar:
         return {
           ...getFillSelector(colors.blueberry500),
           ...getAccentSelector(colors.frenchVanilla100),

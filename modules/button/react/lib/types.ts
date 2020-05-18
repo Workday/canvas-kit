@@ -44,7 +44,7 @@ export enum IconButtonVariant {
   CircleFilled = 'circleFilled',
   Inverse = 'inverse',
   InverseFilled = 'inverseFilled',
-  Alternate = 'alternate',
+  Toolbar = 'toolbar',
 }
 
 /**
