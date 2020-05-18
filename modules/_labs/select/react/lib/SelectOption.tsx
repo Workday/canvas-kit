@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {ErrorType, styled} from '@workday/canvas-kit-react-common';
+import {CSSObject} from '@emotion/core';
+import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
 import {colors, commonColors, type, typeColors} from '@workday/canvas-kit-react-core';
 
-export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement> {
+export interface SelectOptionProps extends Themeable, React.LiHTMLAttributes<HTMLLIElement> {
   /**
    * If true, set the SelectOption to the disabled state.
    * @default false
@@ -38,10 +39,10 @@ export interface SelectOptionProps extends React.LiHTMLAttributes<HTMLLIElement>
 
 const optionPadding = 6;
 
-const activeStyles = {
-  backgroundColor: commonColors.focusBackground,
+const activeStyles = (theme: EmotionCanvasTheme): CSSObject => ({
+  backgroundColor: theme.canvas.palette.common.focusOutline,
   color: typeColors.inverse,
-};
+});
 
 const Option = styled('li')<SelectOptionProps>(
   {
@@ -53,7 +54,7 @@ const Option = styled('li')<SelectOptionProps>(
     // In case the content of the option is empty/undefined for some reason
     minHeight: type.body.lineHeight,
   },
-  ({disabled, focused, interactive}) => {
+  ({disabled, focused, interactive, theme}) => {
     if (disabled) {
       // If the option is disabled, return disabled styles...
       return {
@@ -62,13 +63,13 @@ const Option = styled('li')<SelectOptionProps>(
     } else if (focused) {
       // ...else if the option is focused, return focused styles...
       return {
-        ...activeStyles,
+        ...activeStyles(theme),
       };
     } else {
       // ...else return hover and selected (via aria-selected) styles
       const selectedStyles = {
         '&[aria-selected="true"]': {
-          backgroundColor: colors.blueberry100,
+          backgroundColor: theme.canvas.palette.primary.lightest,
         },
       };
       // Only display interactive (hover/active) styles if the option is interactive
@@ -78,7 +79,7 @@ const Option = styled('li')<SelectOptionProps>(
               backgroundColor: commonColors.hoverBackground,
             },
             '&:active': {
-              ...activeStyles,
+              ...activeStyles(theme),
             },
           }
         : {};
