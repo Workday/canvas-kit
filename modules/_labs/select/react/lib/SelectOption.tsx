@@ -69,12 +69,7 @@ const Option = styled('li')<SelectOptionProps>(
       // ...else return hover and selected (via aria-selected) styles
       const selectedStyles = {
         '&[aria-selected="true"]': {
-          // Currently, there doesn't seem to be an appropriate color for
-          // the background of a selected option in the canvas theme object.
-          // `primary.lightest` happens to match from the default theme, but
-          // I'm not sure the selected color should be based off of the primary
-          // color.
-          backgroundColor: colors.blueberry100,
+          backgroundColor: theme.canvas.palette.primary.lightest,
         },
       };
       // Only display interactive (hover/active) styles if the option is interactive
