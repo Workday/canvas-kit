@@ -18,7 +18,7 @@ module.exports = (modulePath, name, description, unstable) => {
 
   console.log('\nCreating '.underline + `${moduleName}\n`.blue.underline);
 
-  mkdirp(modulePath);
+  mkdirp.sync(modulePath);
 
   const titleCaseName = getTitleCaseName(name);
   const storyPath = unstable ? `Labs/CSS/${titleCaseName}` : `CSS/${titleCaseName}`;
