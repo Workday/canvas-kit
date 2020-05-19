@@ -59,8 +59,10 @@ inquirer
     const react = targets.includes('React');
     const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
+    console.log(name, unstable, targets, componentPath);
+
     if (!fs.existsSync(componentPath)) {
-      mkdirp(componentPath);
+      mkdirp.sync(componentPath);
     }
 
     css && createModule(componentPath, 'css', createCssModule, answers);

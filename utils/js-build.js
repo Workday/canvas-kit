@@ -23,7 +23,7 @@ const outputDir = path.join(cwd, 'dist');
 const outputFile = path.join(outputDir, path.basename(sourceFile));
 
 // Make the build directory if it doesn't exist
-mkdirp(outputDir);
+mkdirp.sync(outputDir);
 
 // Standard bundle
 const inputOptions = {

@@ -55,7 +55,7 @@ inquirer.prompt(questions).then(answers => {
   const destPath = path.join(cwd, `modules/${component}`);
 
   if (!fs.existsSync(destPath)) {
-    mkdirp(destPath);
+    mkdirp.sync(destPath);
   }
 
   if (fs.existsSync(`${destPath}/${target}`)) {
