@@ -224,6 +224,39 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
       </div>
     );
   })
+  .add('Toolbar Square', () => {
+    const [toggled, setToggled] = React.useState<boolean | undefined>();
+    const handleToggle = () => {
+      setToggled(!toggled);
+    };
+
+    return (
+      <div className="story">
+        <h3>Small Toolbar Square</h3>
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          // size={IconButton.Size.Small}
+          variant={IconButton.Variant.ToolbarSquare}
+        />
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          // size={IconButton.Size.Small}
+          disabled={true}
+          variant={IconButton.Variant.ToolbarSquare}
+        />
+        <h3>Toggleable Toolbar Square</h3>
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          toggled={toggled}
+          variant={IconButton.Variant.ToolbarSquare}
+          onClick={handleToggle}
+        />
+      </div>
+    );
+  })
   .add('Circle Filled', () => {
     const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {

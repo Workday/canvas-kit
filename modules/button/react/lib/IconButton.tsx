@@ -52,7 +52,7 @@ const IconButton: ButtonOrAnchorComponent<
 > = ({
   theme = useTheme(),
   variant = IconButtonVariant.Circle,
-  size = 'medium',
+  size = IconButtonVariant.ToolbarSquare ? 'small' : 'medium',
   buttonRef,
   onToggleChange,
   'aria-label': iconArialabel,
@@ -81,7 +81,9 @@ const IconButton: ButtonOrAnchorComponent<
     width: size === 'small' ? spacing.l : spacing.xl,
     height: size === 'small' ? spacing.l : spacing.xl,
     borderRadius:
-      variant === IconButtonVariant.Square || variant === IconButtonVariant.SquareFilled
+      variant === IconButtonVariant.Square ||
+      variant === IconButtonVariant.SquareFilled ||
+      variant === IconButtonVariant.ToolbarSquare
         ? borderRadius.m
         : borderRadius.circle,
     ['& .wd-icon']: {
@@ -95,7 +97,7 @@ const IconButton: ButtonOrAnchorComponent<
   return (
     <ButtonContainer
       colors={getIconButtonColors(variant, theme, toggled)}
-      size={size}
+      size={variant === IconButton.Variant.ToolbarSquare ? IconButton.Size.Small : size}
       ref={buttonRef}
       fillIcon={toggled}
       extraStyles={containerStyles}
@@ -256,6 +258,31 @@ const getIconButtonColors = (
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? themePrimary.main : 'rgba(255, 255, 255, 0.75)',
+        },
+      };
+
+    case IconButtonVariant.ToolbarSquare:
+      return {
+        default: {
+          icon: toggled ? themePrimary.dark : colors.licorice200,
+          background: toggled ? themePrimary.lightest : 'transparent',
+        },
+        hover: {
+          icon: toggled ? themePrimary.dark : colors.licorice500,
+          background: toggled ? colors.soap400 : colors.soap400,
+        },
+        active: {
+          icon: toggled ? themePrimary.dark : colors.licorice500,
+          background: colors.soap400,
+        },
+        focus: {
+          icon: toggled ? themePrimary.dark : colors.licorice200,
+          focusRing: focusRing({width: 2, separation: 0}, theme),
+          background: toggled ? themePrimary.lightest : 'transparent',
+        },
+        disabled: {
+          icon: toggled ? colors.blueberry300 : colors.soap600,
+          background: toggled ? themePrimary.lightest : 'transparent',
         },
       };
   }

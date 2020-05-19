@@ -694,15 +694,16 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 Default: `IconButtonVariant.Circle`
 
-| Theme           | Description                                      |
-| --------------- | ------------------------------------------------ |
-| `Square`        | Square, white background, dark gray icon         |
-| `SquareFilled`  | Square, gray background, dark gray icon          |
-| `Plain`         | Dark gray icon                                   |
-| `Circle`        | Circular, dark gray icon                         |
-| `CircleFilled`  | Circular, gray background, dark gray icon        |
-| `Inverse`       | Circular, transparent background, white icon     |
-| `InverseFilled` | Circular, semitransparent background, white icon |
+| Theme           | Description                                                    |
+| --------------- | -------------------------------------------------------------- |
+| `Square`        | Square, white background, dark gray icon                       |
+| `SquareFilled`  | Square, gray background, dark gray icon                        |
+| `Plain`         | Dark gray icon                                                 |
+| `Circle`        | Circular, dark gray icon                                       |
+| `CircleFilled`  | Circular, gray background, dark gray icon                      |
+| `Inverse`       | Circular, transparent background, white icon                   |
+| `InverseFilled` | Circular, semitransparent background, white icon               |
+| `ToolbarSquare` | Square, white background, dark gray icon intended for toolbars |
 
 ---
 
@@ -711,6 +712,9 @@ Default: `IconButtonVariant.Circle`
 > The size of the icon button
 
 Default: `'medium'`
+
+Note: If the Icon Button is of variant `ToolbarSquare` it will default to `'small'` to fit it's
+intended area of a toolbar.
 
 | Theme    | Description                   | Is Default |
 | -------- | ----------------------------- | ---------- |
