@@ -1,6 +1,12 @@
 module.exports = {
   meta: {
-    type: 'suggestion',
+    type: 'problem',
+    docs: {
+      description: 'prevent internal imports across packages',
+      category: 'Possible Errors',
+      recommended: true,
+    },
+    fixable: 'code',
   },
   create: function(context) {
     return {
@@ -13,12 +19,7 @@ module.exports = {
         if (pathRegex.test(value)) {
           context.report({
             node,
-            message: `Only top-level imports are allowed. Import from '@workday/${packageName}'.`,
-            fix: function(fixer) {
-              const nodeSource = context.getSource(node);
-              const fixedImport = nodeSource.replace(value, `@workday/${packageName}`);
-              return fixer.replaceText(node, fixedImport);
-            },
+            message: `The /lib directory isn't available in production. Import from '@workday/${packageName}'.`,
           });
         }
       },
