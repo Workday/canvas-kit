@@ -97,7 +97,7 @@ const IconButton: ButtonOrAnchorComponent<
   return (
     <ButtonContainer
       colors={getIconButtonColors(variant, theme, toggled)}
-      size={variant === IconButton.Variant.ToolbarSquare ? IconButton.Size.Small : size}
+      size={size}
       ref={buttonRef}
       fillIcon={toggled}
       extraStyles={containerStyles}

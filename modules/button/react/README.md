@@ -713,7 +713,7 @@ Default: `IconButtonVariant.Circle`
 
 Default: `'medium'`
 
-Note: If the Icon Button is of variant `ToolbarSquare` it will default to `'small'` to fit it's
+Note: If the Icon Button is of variant `ToolbarSquare` it will default to `'small'` to fit its
 intended area of a toolbar.
 
 | Theme    | Description                   | Is Default |
