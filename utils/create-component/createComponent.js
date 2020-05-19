@@ -59,7 +59,6 @@ inquirer
     const react = targets.includes('React');
     const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
-
     if (!fs.existsSync(componentPath)) {
       mkdirp.sync(componentPath);
     }
