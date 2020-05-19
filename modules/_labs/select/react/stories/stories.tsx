@@ -285,66 +285,67 @@ storiesOf('Labs|Select/React/Visual Testing', module)
       </ComponentStatesTable>
     </StaticStates>
   ))
-  .add('States (Option, Split)', () => (
+  .add('States (Option)', () => (
     <div>
       {[
         {label: 'Default', error: undefined},
         {label: 'Alert', error: Select.ErrorType.Alert},
         {label: 'Error', error: Select.ErrorType.Error},
-      ].map(table => (
-        <div>
-          <h2>{table.label}</h2>
-          <StaticStates>
-            <ComponentStatesTable
-              rowProps={[
+      ].map(errorTable => (
+        <div style={{border: `1px solid ${colors.soap600}`, marginTop: 30, padding: '0 20px'}}>
+          <h2>{errorTable.label}</h2>
+          {[
+            {
+              label: 'Disabled States',
+              columnProps: [
+                {label: 'Default', props: {}},
+                {label: 'Hover', props: {className: 'hover'}},
+              ],
+              rowProps: [{label: 'Disabled', props: {disabled: true}}],
+            },
+            {
+              label: 'Interaction States',
+              columnProps: [
+                {label: 'Default', props: {}},
+                {label: 'Hover', props: {className: 'hover'}},
+                {label: 'Active', props: {className: 'active'}},
+                {label: 'Active Hover', props: {className: 'active hover'}},
+              ],
+              rowProps: [
                 {label: 'Default', props: {}},
                 {label: 'Assistive-Focus', props: {focused: true}},
                 {label: 'Selected', props: {'aria-selected': true}},
                 {label: 'Assistive-Focus Selected', props: {'aria-selected': true, focused: true}},
-              ]}
-              // rowProps={permutateProps({
-              //   'aria-selected': [
-              //     {label: 'Default', value: undefined},
-              //     {label: 'Selected', value: 'true'},
-              //   ],
-              //   focused: [{label: '', value: false}, {label: 'Assistive-Focus', value: true}],
-              // })}
-              columnProps={permutateProps(
-                {
-                  className: [
-                    {label: 'Default', value: ''},
-                    {label: 'Hover', value: 'hover'},
-                    {label: 'Active', value: 'active'},
-                    {label: 'Active Hover', value: 'active hover'},
-                  ],
-                  disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-                },
-                props => {
-                  if (props.disabled && !['', 'hover'].includes(props.className)) {
-                    return false;
-                  }
-                  return true;
-                }
-              )}
-            >
-              {props => (
-                <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 120}}>
-                  <SelectOption
-                    {...props}
-                    error={table.error}
-                    onChange={() => {}} // eslint-disable-line no-empty-function
-                  >
-                    E-mail
-                  </SelectOption>
-                </ul>
-              )}
-            </ComponentStatesTable>
-          </StaticStates>
+              ],
+            },
+          ].map(stateTable => (
+            <div>
+              <h3>{stateTable.label}</h3>
+              <StaticStates>
+                <ComponentStatesTable
+                  rowProps={stateTable.rowProps}
+                  columnProps={stateTable.columnProps}
+                >
+                  {props => (
+                    <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 120}}>
+                      <SelectOption
+                        {...props}
+                        error={errorTable.error}
+                        onChange={() => {}} // eslint-disable-line no-empty-function
+                      >
+                        E-mail
+                      </SelectOption>
+                    </ul>
+                  )}
+                </ComponentStatesTable>
+              </StaticStates>
+            </div>
+          ))}
         </div>
       ))}
     </div>
   ))
-  .add('States (Option)', () => (
+  .add('States (Option, Old)', () => (
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
