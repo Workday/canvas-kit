@@ -312,6 +312,7 @@ const buttonStories = [
                   {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
                   {value: IconButton.Variant.Square, label: 'Square'},
                   {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+                  {value: IconButton.Variant.ToolbarSquare, label: 'Toolbar Square'},
                 ],
                 size: [
                   {value: IconButton.Size.Small, label: 'Small'},
