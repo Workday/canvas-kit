@@ -8,6 +8,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 - chore: Fix create-module and promote-module ([#660](https://github.com/Workday/canvas-kit/pull/660)) [@NicholasBoll](https://github.com/NicholasBoll)
 - fix: Fix check-lockfile call during precommit linting ([#663](https://github.com/Workday/canvas-kit/pull/663)) [@jamesfan](https://github.com/jamesfan)
+- ci: Improve canary builds & publish behavior ([#665](https://github.com/Workday/canvas-kit/pull/665)) [@anicholls](https://github.com/anicholls)
 
 ### Components
 
