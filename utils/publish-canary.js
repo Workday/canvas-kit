@@ -24,6 +24,28 @@ if (TRAVIS_BRANCH === 'master') {
   process.exit(1);
 }
 
+const slackAnnouncement = attachment => {
+  request.post(
+    SLACK_WEBHOOK,
+    {
+      json: {
+        attachments: [
+          {
+            ...attachment,
+            author_link: TRAVIS_BUILD_URL,
+            ts: Date.now(),
+          },
+        ],
+      },
+    },
+    (error, response, body) => {
+      if (error) {
+        throw error;
+      }
+    }
+  );
+};
+
 cmd('git diff --name-only HEAD HEAD^')
   .then(filesChangedInMerge => {
     if (filesChangedInMerge.includes('CHANGELOG.md')) {
@@ -68,58 +90,26 @@ cmd('git diff --name-only HEAD HEAD^')
     data.packages = output.match(regex);
     data.version = regex.exec(data.packages[0])[1];
 
-    request.post(
-      SLACK_WEBHOOK,
-      {
-        json: {
-          attachments: [
-            {
-              fallback: `New canary build published (v${data.version})`,
-              color: 'good',
-              author_name: `New canary build published (v${data.version})`,
-              author_link: TRAVIS_BUILD_URL,
-              title: `Merge commit ${data.sha}`,
-              title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
-              text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@next\`\n`,
-              ts: Date.now(),
-            },
-          ],
-        },
-      },
-      (error, response, body) => {
-        if (error) {
-          throw error;
-        }
-      }
-    );
+    slackAnnouncement({
+      fallback: `New canary build published (v${data.version})`,
+      color: 'good',
+      author_name: `New canary build published (v${data.version})`,
+      title: `Merge commit ${data.sha}`,
+      title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
+      text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@next\`\n`,
+    });
   })
   .catch(err => {
     console.error(err);
 
-    request.post(
-      SLACK_WEBHOOK,
-      {
-        json: {
-          attachments: [
-            {
-              fallback: `Canary publish failed (v${data.version})`,
-              color: 'danger',
-              author_name: `Canary publish failed (v${data.version})`,
-              author_link: TRAVIS_BUILD_URL,
-              title: `Merge commit ${data.sha}`,
-              title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
-              text: `\`\`\`${err}\`\`\`\n`,
-              ts: Date.now(),
-            },
-          ],
-        },
-      },
-      (error, response, body) => {
-        if (error) {
-          throw error;
-        }
-      }
-    );
+    slackAnnouncement({
+      fallback: `Canary publish failed (v${data.version})`,
+      color: 'danger',
+      author_name: `Canary publish failed (v${data.version})`,
+      title: `Merge commit ${data.sha}`,
+      title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
+      text: `\`\`\`${err}\`\`\`\n`,
+    });
 
     process.exit(1);
   });
