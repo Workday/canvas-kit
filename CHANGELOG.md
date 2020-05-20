@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.0.0-beta.4 (2020-05-20)
+
+### Infrastructure
+- chore: Fix create-module and promote-module ([#660](https://github.com/Workday/canvas-kit/pull/660)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix: Fix check-lockfile call during precommit linting ([#663](https://github.com/Workday/canvas-kit/pull/663)) [@jamesfan](https://github.com/jamesfan)
+
+### Components
+
+- fix(avatar): Combine Avatar & AvatarButton and provide fallback image ([#614](https://github.com/Workday/canvas-kit/pull/614)) [@vibdev](https://github.com/vibdev)
+- feat(select): Add theming to select in labs ([#648](https://github.com/Workday/canvas-kit/pull/648)) [@mannycarrera4](https://github.com/mannycarrera4)
+
 # 4.0.0-beta.3 (2020-05-12)
 
 ### Infrastructure
