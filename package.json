@@ -159,7 +159,7 @@
         "git add"
       ],
       "yarn.lock": [
-        "node utils/check-lockfile-links.js",
+        "node utils/check-lockfile.js",
         "git add"
       ]
     }
