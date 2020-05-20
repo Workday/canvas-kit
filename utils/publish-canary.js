@@ -18,7 +18,9 @@ let distTag;
 if (TRAVIS_BRANCH === 'master') {
   distTag = 'next';
 } else if (isPrerelease) {
-  distTag = 'prerelease-next';
+  // distTag = 'prerelease-next';
+  console.error('Prerelease canary builds disabled.');
+  process.exit(0);
 } else {
   console.error('No travis branch provided');
   process.exit(1);
