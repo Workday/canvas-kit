@@ -27,8 +27,8 @@ This component renders a responsive, Canvas-style header.
 ```tsx
 import * as React from 'react';
 import {Header} from '@workday/canvas-kit-labs-react-header';
-import {AvatarButton} from '@workday/canvas-kit-react-avatar';
 import {IconButton} from '@workday/canvas-kit-react-button';
+import {Avatar} from '@workday/canvas-kit-react-avatar';
 import {notificationsIcon} from '@workday/canvas-system-icons-web';
 import {Button} from '@workday/canvas-kit-react-button';
 
@@ -55,7 +55,7 @@ import {Button} from '@workday/canvas-kit-react-button';
     title="Notifications"
     aria-label="Notifications"
   />
-  <AvatarButton
+  <Avatar
     onClick={() => {
       alert('clicked avatar');
     }}
@@ -190,14 +190,14 @@ The Global Header (or App Header) is used for Workday applications.
 ## Usage
 
 ```tsx
-import {AvatarButton} from '@workday/canvas-kit-react-avatar';
+import {Avatar} from '@workday/canvas-kit-react-avatar';
 import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-labs-react-header';
 import {Avatar} from '@workday/canvas-kit-react-avatar';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 const HeaderBrand = () => <DubLogoTitle themeColor={Header.Theme.White} />
-const HeaderAvatar = () => <AvatarButton onClick={handleMenuClick} url="https://my.cdn.amazonaws.com/assets/avatar_pic.png" />
+const HeaderAvatar = () => <Avatar onClick={handleMenuClick} url="https://my.cdn.amazonaws.com/assets/avatar_pic.png" />
 const handleSearchSubmit = event => {
   const query = (event.target as HTMLFormElement).getElementsByTagName('input')[0].value;
   console.log("Submitted query: ", query)
@@ -205,9 +205,9 @@ const handleSearchSubmit = event => {
 const openMenu = e => console.log("Menu opened")
 
 /**
- * In this instance, the right-most child will be an AvatarButton component, when the GlobalHeader
+ * In this instance, the right-most child will be an Avatar component, when the GlobalHeader
  * shrinks below the specified breakpoint (720 in this case), the children get replaced by a menuToggle.
- * For most GlobalHeader implementations, the menuToggle is also the AvatarButton component.
+ * For most GlobalHeader implementations, the menuToggle is also the Avatar component.
  */
 <GlobalHeader
   brand={<HeaderBrand />}

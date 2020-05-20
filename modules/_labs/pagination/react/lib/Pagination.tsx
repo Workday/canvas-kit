@@ -36,6 +36,14 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   pageButtonAriaLabel?: (page: number, selected: boolean) => string;
   /** Optional width to pass to component. This is the width the container deems is available. You can use a measure component to get this. */
   width?: number;
+  /**
+   * Announces page changes to screen readers using aria-live
+   * Note: Your application may already announce page changes to screen readers through
+   * other means like focus changes or other aria-live regions. Set this to `false` to remove
+   * redundant announcement to screen reader users.
+   * @default true
+   */
+  announceLabelToScreenReaders?: boolean;
 }
 
 const StyledLabel = styled('div')({
@@ -80,6 +88,7 @@ const Pagination = (props: PaginationProps) => {
     nextPageAriaLabel = 'Next Page',
     pageButtonAriaLabel = defaultPageButtonAriaLabel,
     customLabel = defaultCustomLabel,
+    announceLabelToScreenReaders = true,
     total,
     pageSize,
     currentPage,
@@ -123,7 +132,14 @@ const Pagination = (props: PaginationProps) => {
           />
         </ButtonsContainer>
         {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} label={goToLabel} />}
-        {showLabel && <StyledLabel>{customLabel(labelFrom, labelTo, total)}</StyledLabel>}
+        {showLabel && (
+          <StyledLabel
+            aria-atomic={announceLabelToScreenReaders ? true : undefined}
+            aria-live={announceLabelToScreenReaders ? 'polite' : undefined}
+          >
+            {customLabel(labelFrom, labelTo, total)}
+          </StyledLabel>
+        )}
       </StyledContainer>
     </>
   );
