@@ -17,7 +17,7 @@ let preid;
 if (TRAVIS_BRANCH === 'master') {
   preid = 'next';
 } else if (TRAVIS_BRANCH.match(/^prerelease\/v\d*$/g)) {
-  preid = 'prerelease';
+  preid = 'prerelease-next';
 } else {
   console.error('No travis branch provided');
   process.exit(1);
