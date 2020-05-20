@@ -236,14 +236,26 @@ storiesOf('Components|Buttons/Button/React/Icon Button', module)
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          // size={IconButton.Size.Small}
           variant={IconButton.Variant.ToolbarSquare}
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          // size={IconButton.Size.Small}
           disabled={true}
+          variant={IconButton.Variant.ToolbarSquare}
+        />
+        <h3>Medium Toolbar Square</h3>
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          size={IconButton.Size.Medium}
+          variant={IconButton.Variant.ToolbarSquare}
+        />
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          disabled={true}
+          size={IconButton.Size.Medium}
           variant={IconButton.Variant.ToolbarSquare}
         />
         <h3>Toggleable Toolbar Square</h3>

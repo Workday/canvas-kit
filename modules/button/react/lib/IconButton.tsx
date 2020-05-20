@@ -52,7 +52,7 @@ const IconButton: ButtonOrAnchorComponent<
 > = ({
   theme = useTheme(),
   variant = IconButtonVariant.Circle,
-  size = IconButtonVariant.ToolbarSquare ? 'small' : 'medium',
+  size = variant === IconButtonVariant.ToolbarSquare ? 'small' : 'medium',
   buttonRef,
   onToggleChange,
   'aria-label': iconArialabel,
@@ -80,12 +80,7 @@ const IconButton: ButtonOrAnchorComponent<
     minWidth: size === 'small' ? spacing.l : spacing.xl, // min-width is set so buttons don't collapse in IE11
     width: size === 'small' ? spacing.l : spacing.xl,
     height: size === 'small' ? spacing.l : spacing.xl,
-    borderRadius:
-      variant === IconButtonVariant.Square ||
-      variant === IconButtonVariant.SquareFilled ||
-      variant === IconButtonVariant.ToolbarSquare
-        ? borderRadius.m
-        : borderRadius.circle,
+    ...getIconButtonBorderRadius(variant),
     ['& .wd-icon']: {
       display: 'inline-block',
       verticalAlign: 'middle',
@@ -97,7 +92,7 @@ const IconButton: ButtonOrAnchorComponent<
   return (
     <ButtonContainer
       colors={getIconButtonColors(variant, theme, toggled)}
-      size={size}
+      size={getIconButtonSize(variant, size)}
       ref={buttonRef}
       fillIcon={toggled}
       extraStyles={containerStyles}
@@ -117,6 +112,25 @@ IconButton.Size = {
 } as const;
 
 export default IconButton;
+
+const getIconButtonBorderRadius = (variant: IconButtonVariant) => {
+  switch (variant) {
+    case IconButtonVariant.Square:
+    case IconButtonVariant.SquareFilled:
+    case IconButtonVariant.ToolbarSquare:
+      return {borderRadius: borderRadius.m};
+    default:
+      return {borderRadius: borderRadius.circle};
+  }
+};
+
+const getIconButtonSize = (variant: IconButtonVariant, size: 'small' | 'medium') => {
+  if (variant === IconButtonVariant.ToolbarSquare) {
+    return 'small';
+  } else {
+    return size;
+  }
+};
 
 const getIconButtonColors = (
   variant: IconButtonVariant,
