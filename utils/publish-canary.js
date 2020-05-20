@@ -11,13 +11,14 @@ const {
   TRAVIS_BUILD_URL = 'https://travis-ci.org/Workday/canvas-kit/branches',
 } = process.env;
 
+const isPrerelease = TRAVIS_BRANCH.match(/^prerelease\/v\d*$/g);
 const data = {};
-let preid;
+let distTag;
 
 if (TRAVIS_BRANCH === 'master') {
-  preid = 'next';
-} else if (TRAVIS_BRANCH.match(/^prerelease\/v\d*$/g)) {
-  preid = 'prerelease-next';
+  distTag = 'next';
+} else if (isPrerelease) {
+  distTag = 'prerelease-next';
 } else {
   console.error('No travis branch provided');
   process.exit(1);
@@ -27,12 +28,23 @@ cmd('git rev-parse --short HEAD')
   .then(sha => {
     data.sha = sha.trim();
 
+    return cmd(`git describe --abbrev=0`);
+  })
+  .then(releaseTag => {
+    const lastReleasePreId = releaseTag.trim().split('-')[1];
+
+    const lastReleaseNum = parseInt(lastReleasePreId.match(/\d+$/), 10);
+    const pos = lastReleasePreId.indexOf(lastReleaseNum);
+    const nextReleasePreId = lastReleasePreId.slice(0, pos) + (lastReleaseNum + 1);
+
+    const preid = isPrerelease ? `${nextReleasePreId}-next` : 'next';
+
     const lernaFlags = [
       `--yes`,
       `--force-publish="*"`,
       `--canary`,
-      `--preid ${preid}.${data.sha}`,
-      `--dist-tag ${preid}`,
+      `--preid ${preid}`,
+      `--dist-tag ${distTag}`,
       preid === 'prerelease' ? 'major' : '',
     ];
 
