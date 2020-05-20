@@ -52,7 +52,7 @@ const IconButton: ButtonOrAnchorComponent<
 > = ({
   theme = useTheme(),
   variant = IconButtonVariant.Circle,
-  size = variant === IconButtonVariant.ToolbarSquare ? 'small' : 'medium',
+  size = 'medium',
   buttonRef,
   onToggleChange,
   'aria-label': iconArialabel,
@@ -92,7 +92,7 @@ const IconButton: ButtonOrAnchorComponent<
   return (
     <ButtonContainer
       colors={getIconButtonColors(variant, theme, toggled)}
-      size={getIconButtonSize(variant, size)}
+      size={size}
       ref={buttonRef}
       fillIcon={toggled}
       extraStyles={containerStyles}
@@ -117,18 +117,9 @@ const getIconButtonBorderRadius = (variant: IconButtonVariant) => {
   switch (variant) {
     case IconButtonVariant.Square:
     case IconButtonVariant.SquareFilled:
-    case IconButtonVariant.ToolbarSquare:
       return {borderRadius: borderRadius.m};
     default:
       return {borderRadius: borderRadius.circle};
-  }
-};
-
-const getIconButtonSize = (variant: IconButtonVariant, size: 'small' | 'medium') => {
-  if (variant === IconButtonVariant.ToolbarSquare) {
-    return 'small';
-  } else {
-    return size;
   }
 };
 
@@ -272,31 +263,6 @@ const getIconButtonColors = (
         disabled: {
           background: toggled ? 'rgba(255,255,255,0.75)' : 'rgba(0, 0, 0, 0.2)',
           icon: toggled ? themePrimary.main : 'rgba(255, 255, 255, 0.75)',
-        },
-      };
-
-    case IconButtonVariant.ToolbarSquare:
-      return {
-        default: {
-          icon: toggled ? themePrimary.dark : colors.licorice200,
-          background: toggled ? themePrimary.lightest : 'transparent',
-        },
-        hover: {
-          icon: toggled ? themePrimary.dark : colors.licorice500,
-          background: toggled ? colors.soap400 : colors.soap400,
-        },
-        active: {
-          icon: toggled ? themePrimary.dark : colors.licorice500,
-          background: colors.soap400,
-        },
-        focus: {
-          icon: toggled ? themePrimary.dark : colors.licorice200,
-          focusRing: focusRing({width: 2, separation: 0}, theme),
-          background: toggled ? themePrimary.lightest : 'transparent',
-        },
-        disabled: {
-          icon: toggled ? colors.blueberry300 : colors.soap600,
-          background: toggled ? themePrimary.lightest : 'transparent',
         },
       };
   }

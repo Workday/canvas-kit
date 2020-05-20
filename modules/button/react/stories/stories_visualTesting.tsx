@@ -16,6 +16,7 @@ import {
   OutlineButton,
   Hyperlink,
   IconButton,
+  ToolbarIconButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
 
@@ -312,7 +313,6 @@ const buttonStories = [
                   {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
                   {value: IconButton.Variant.Square, label: 'Square'},
                   {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
-                  {value: IconButton.Variant.ToolbarSquare, label: 'Toolbar Square'},
                 ],
                 size: [
                   {value: IconButton.Size.Small, label: 'Small'},
@@ -335,6 +335,30 @@ const buttonStories = [
                 </Container>
               )
             )}
+          </div>
+        ))}
+      </React.Fragment>
+    ),
+  },
+  {
+    name: 'Toolbar Icon Button',
+    component: ToolbarIconButton,
+    states: (
+      <React.Fragment>
+        {[false, true].map(toggled => (
+          <div key={`toggled-${toggled}`}>
+            <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
+            {getButtonStates({}, (props: any) => (
+              <Container>
+                <ToolbarIconButton
+                  toggled={toggled}
+                  icon={activityStreamIcon}
+                  aria-label="Play"
+                  {...props}
+                  onChange={() => {}} // eslint-disable-line no-empty-function
+                />
+              </Container>
+            ))}
           </div>
         ))}
       </React.Fragment>
