@@ -8,7 +8,11 @@
   "command": {
     "version": {
       "gitTagVersion": false,
-      "push": false
+      "push": false,
+      "forcePublish": "*"
+    },
+    "publish": {
+      "forcePublish": "*"
     }
   }
 }
