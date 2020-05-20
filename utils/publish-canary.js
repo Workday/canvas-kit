@@ -2,6 +2,7 @@
 'use strict';
 
 const request = require('request');
+const semver = require('semver');
 const {promisify} = require('util');
 const cmd = promisify(require('node-cmd').get);
 
@@ -18,7 +19,7 @@ let distTag;
 if (TRAVIS_BRANCH === 'master') {
   distTag = 'next';
 } else if (isPrerelease) {
-  // distTag = 'prerelease-next';
+  distTag = 'prerelease-next';
   console.error('Prerelease canary builds disabled.');
   process.exit(0);
 } else {
@@ -63,13 +64,15 @@ cmd('git diff --name-only HEAD HEAD^')
     return cmd(`git describe --abbrev=0`);
   })
   .then(releaseTag => {
-    const lastReleasePreId = releaseTag.trim().split('-')[1];
+    const nextReleaseVersion = semver.inc(releaseTag, 'prerelease', 'beta'); // eg. 4.0.0-beta.3 > 4.0.0-beta.4
+    const nextReleasePreid = nextReleaseVersion.split('-')[1];
 
-    const lastReleaseNum = parseInt(lastReleasePreId.match(/\d+$/), 10);
-    const pos = lastReleasePreId.indexOf(lastReleaseNum);
-    const nextReleasePreId = lastReleasePreId.slice(0, pos) + (lastReleaseNum + 1);
+    if (isPrerelease & !nextReleasePreid) {
+      console.error('Failed to calculate prerelease canary version. Exiting');
+      process.exit(1);
+    }
 
-    const preid = isPrerelease ? `${nextReleasePreId}-next` : 'next';
+    const preid = isPrerelease ? `${nextReleasePreid}-next` : 'next';
 
     const lernaFlags = [
       `--yes`,
