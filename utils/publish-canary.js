@@ -24,7 +24,15 @@ if (TRAVIS_BRANCH === 'master') {
   process.exit(1);
 }
 
-cmd('git rev-parse --short HEAD')
+cmd('git diff --name-only HEAD HEAD^')
+  .then(filesChangedInMerge => {
+    if (filesChangedInMerge.includes('CHANGELOG.md')) {
+      console.log('Last merge commit was a release. Skipping canary build.');
+      process.exit(0);
+    }
+
+    return cmd('git rev-parse --short HEAD');
+  })
   .then(sha => {
     data.sha = sha.trim();
 
