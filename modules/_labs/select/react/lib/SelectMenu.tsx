@@ -159,11 +159,11 @@ const Menu = styled('div')<
     boxSizing: 'border-box',
     position: 'relative',
 
-    '[data-popper-placement^="bottom-start"] &': {
+    '[data-popper-placement="bottom-start"] &': {
       borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
       borderTop: 0,
     },
-    '[data-popper-placement^="top-start"] &': {
+    '[data-popper-placement="top-start"] &': {
       borderRadius: `${borderRadius.m} ${borderRadius.m} 0 0`,
       borderBottom: 0,
     },
