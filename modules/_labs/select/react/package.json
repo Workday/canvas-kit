@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-select",
-  "version": "4.0.0-beta.3",
+  "version": "4.0.0-beta.4",
   "description": "A Canvas-styled select",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -39,10 +39,10 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
-    "@workday/canvas-kit-labs-react-core": "^4.0.0-beta.3",
-    "@workday/canvas-kit-react-common": "^4.0.0-beta.3",
-    "@workday/canvas-kit-react-core": "^4.0.0-beta.3",
-    "@workday/canvas-kit-react-icon": "^4.0.0-beta.3",
+    "@workday/canvas-kit-labs-react-core": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-common": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-core": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-icon": "4.0.0-beta.4",
     "@workday/canvas-system-icons-web": "^1.0.20",
     "uuid": "^3.3.3"
   }
