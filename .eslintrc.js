@@ -35,6 +35,7 @@ module.exports = {
     browser: true,
   },
   plugins: [
+    'workday-custom-rules',
     '@typescript-eslint',
     '@typescript-eslint/tslint',
     'jest',
@@ -44,6 +45,7 @@ module.exports = {
     'emotion',
   ],
   rules: {
+    'workday-custom-rules/restricted-imports': 'error',
     '@typescript-eslint/class-name-casing': 'error',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/interface-name-prefix': 'error',
