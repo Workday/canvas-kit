@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-text-input",
-  "version": "4.0.0-beta.3",
+  "version": "4.0.0-beta.4",
   "description": "The text-input css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -30,7 +30,7 @@
     "workday"
   ],
   "dependencies": {
-    "@workday/canvas-kit-css-common": "^4.0.0-beta.3",
-    "@workday/canvas-kit-css-core": "^4.0.0-beta.3"
+    "@workday/canvas-kit-css-common": "4.0.0-beta.4",
+    "@workday/canvas-kit-css-core": "4.0.0-beta.4"
   }
 }
