@@ -128,8 +128,6 @@ fix: Add missing static class variable to IconButton and Avatar
   experience.
 - Project maintainers are able to push commits to fork PRs, but other contributors will need to open
   PRs to the personal fork to collaborate with others on a feature.
-- It is up to the contributor to make sure their PR is rebased onto upstream/master before
-  submitting.
 - When a pull request passes all checks and reviews, a core maintainer merges via Squash and Merge
   with a link back to the PR.
 - The branch will automatically be deleted on merge, but its commits and the branch reference are

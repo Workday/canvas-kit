@@ -29,5 +29,8 @@
     "components",
     "workday",
     "badge"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
