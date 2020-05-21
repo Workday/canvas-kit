@@ -90,7 +90,6 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
 const CheckboxRipple = styled('span')<Pick<CheckboxProps, 'disabled'>>({
   borderRadius: borderRadius.circle,
   boxShadow: `0 0 0 0 ${colors.soap200}`,
-  content: '""',
   height: checkboxHeight,
   transition: 'box-shadow 150ms ease-out',
   width: checkboxWidth,

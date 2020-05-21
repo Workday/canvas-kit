@@ -78,7 +78,6 @@ const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>({
 const RadioRipple = styled('span')<Pick<RadioProps, 'disabled'>>({
   borderRadius: borderRadius.circle,
   boxShadow: `0 0 0 0 ${colors.soap200}`,
-  content: '""',
   height: radioHeight,
   transition: 'box-shadow 150ms ease-out',
   width: radioWidth,
