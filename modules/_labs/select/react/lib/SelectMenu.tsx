@@ -113,10 +113,10 @@ const menuBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObje
       position: 'absolute',
       width: '100%',
 
-      '[data-popper-placement^="bottom-start"] &': {
+      '[data-popper-placement="bottom-start"] &': {
         top: 0,
       },
-      '[data-popper-placement^="top-start"] &': {
+      '[data-popper-placement="top-start"] &': {
         bottom: 0,
       },
     },
@@ -140,10 +140,10 @@ const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSS
     borderLeft: border,
     borderRight: border,
 
-    '[data-popper-placement^="bottom-start"] &': {
+    '[data-popper-placement="bottom-start"] &': {
       borderBottom: border,
     },
-    '[data-popper-placement^="top-start"] &': {
+    '[data-popper-placement="top-start"] &': {
       borderTop: border,
     },
   };
