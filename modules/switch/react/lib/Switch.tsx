@@ -63,6 +63,7 @@ const SwitchInput = styled('input')<SwitchProps>(
     marginLeft: spacing.xxxs,
     borderRadius: borderRadius.circle,
     opacity: 0,
+    display: 'block', // make click target width of input
   },
   ({disabled}) => ({
     cursor: disabled ? 'not-allowed' : 'pointer',
