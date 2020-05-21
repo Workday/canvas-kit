@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import tabTrappingKey from 'focus-trap-js';
 import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
-import {PopupStack} from '@workday/canvas-kit-react-common';
+import {usePopupStack, useOnEscape, useOutsideClick} from '@workday/canvas-kit-react-common';
 
 import {ModalWidth} from './Modal';
 
@@ -156,21 +156,6 @@ const useInitialFocus = (
   }, [modalRef, firstFocusRef]);
 };
 
-const useStackManager = (ref: React.RefObject<HTMLElement>) => {
-  React.useLayoutEffect(() => {
-    PopupStack.add({element: ref.current!});
-
-    return () => {
-      PopupStack.remove(ref.current!);
-    };
-  }, []);
-  return {
-    isTopmost() {
-      return PopupStack.isTopmostElement(ref.current!);
-    },
-  };
-};
-
 const ModalContent = ({
   ariaLabel,
   closeOnEscape = true,
@@ -184,35 +169,28 @@ const ModalContent = ({
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const stack = useStackManager(modalRef);
+
+  const onEscapeClose = () => {
+    if (closeOnEscape) {
+      handleClose?.();
+    }
+  };
+  const onClickOutside = () => {
+    handleClose?.();
+  };
 
   const handleKeydown = (event: KeyboardEvent) => {
     if (modalRef.current) {
       tabTrappingKey(event, modalRef.current);
     }
-
-    if (
-      closeOnEscape &&
-      handleClose &&
-      (event.key === 'Esc' || event.key === 'Escape') &&
-      stack.isTopmost()
-    ) {
-      handleClose();
-    }
   };
+
+  usePopupStack(modalRef);
+  useOnEscape(modalRef, onEscapeClose);
+  useOutsideClick(modalRef, onClickOutside);
 
   useKeyDownListener(handleKeydown);
   useInitialFocus(modalRef, firstFocusRef);
-
-  const handleOutsideClick = ({target}: React.MouseEvent<HTMLDivElement>) => {
-    if (
-      !PopupStack.contains(target as HTMLElement, modalRef.current!) &&
-      stack.isTopmost() &&
-      handleClose
-    ) {
-      handleClose();
-    }
-  };
 
   React.useEffect(() => {
     const siblings = [...((container.children as any) as HTMLElement[])].filter(
@@ -236,7 +214,7 @@ const ModalContent = ({
   }, []);
 
   const content = (
-    <Container onClick={handleOutsideClick} {...elemProps}>
+    <Container {...elemProps}>
       <Popup
         popupRef={modalRef}
         width={width}
