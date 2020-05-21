@@ -6,7 +6,6 @@ const path = require('path');
 const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
 const cmd = require('node-cmd');
-const colors = require('colors');
 
 const createReactModule = require('./createReactModule');
 const createCssModule = require('./createCssModule');
@@ -44,6 +43,12 @@ const questions = [
     message: 'Is this an unstable component (i.e. should it go in Canvas Kit Labs)?:',
     default: false,
   },
+  {
+    type: 'confirm',
+    name: 'publicModule',
+    message: 'Should this module be public?:',
+    default: true,
+  },
   /**
    * Add question to add deps
    * React: CK core, emotion
@@ -74,7 +79,7 @@ inquirer
   });
 
 const createModule = (componentPath, target, moduleGenerator, answers) => {
-  const {name, description, unstable} = answers;
+  const {name, description, unstable, publicModule} = answers;
 
   const modulePath = path.join(componentPath, target);
 
@@ -82,7 +87,7 @@ const createModule = (componentPath, target, moduleGenerator, answers) => {
     const moduleName = `Module @workday/canvas-kit-${unstable ? 'labs-' : ''}${target}-${name}`;
     console.log(`\nModule ${moduleName} already exists. Skipping.`.yellow);
   } else {
-    moduleGenerator(modulePath, name, description, unstable);
+    moduleGenerator(modulePath, name, description, unstable, publicModule);
 
     console.log('\nBootstrapping dependencies.');
     cmd.run('yarn');
