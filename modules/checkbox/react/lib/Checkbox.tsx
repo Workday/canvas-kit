@@ -87,6 +87,17 @@ const CheckboxInputWrapper = styled('div')<Pick<CheckboxProps, 'disabled'>>({
   alignSelf: 'flex-start',
 });
 
+const CheckboxRipple = styled('span')<Pick<CheckboxProps, 'disabled'>>({
+  borderRadius: borderRadius.circle,
+  boxShadow: `0 0 0 0 ${colors.soap200}`,
+  height: checkboxHeight,
+  transition: 'box-shadow 150ms ease-out',
+  width: checkboxWidth,
+  position: 'absolute',
+  pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
+  zIndex: -1,
+});
+
 /**
  * Note: `~ div:first-of-type` refers to `CheckboxBackground`
  * and was easier to use than a component selector in this case.
@@ -157,23 +168,8 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       },
     }),
   }),
-
-  // Ripple
-  {
-    '& ~ div:first-of-type::after': {
-      borderRadius: borderRadius.circle,
-      boxShadow: `0 0 0 0 ${colors.soap200}`,
-      content: '""',
-      display: 'inline-block',
-      height: checkboxHeight,
-      transition: 'box-shadow 150ms ease-out',
-      width: checkboxWidth,
-      position: 'absolute',
-      zIndex: -1,
-    },
-  },
   ({disabled}) => ({
-    '&:hover ~ div:first-of-type::after': {
+    '&:hover ~ span:first-of-type': {
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
   }),
@@ -309,6 +305,7 @@ export default class Checkbox extends React.Component<CheckboxProps> {
             error={error}
             {...elemProps}
           />
+          <CheckboxRipple />
           <CheckboxBackground checked={checked} disabled={disabled}>
             <CheckboxCheck checked={checked}>
               {indeterminate ? (
