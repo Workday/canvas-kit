@@ -82,7 +82,7 @@ const RadioRipple = styled('span')<Pick<RadioProps, 'disabled'>>({
   transition: 'box-shadow 150ms ease-out',
   width: radioWidth,
   position: 'absolute',
-  pointerEvents: 'none',
+  pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
   zIndex: -1,
 });
 
