@@ -84,7 +84,7 @@ const RadioRipple = styled('span')<Pick<RadioProps, 'disabled'>>({
   width: radioWidth,
   position: 'absolute',
   pointerEvents: 'none',
-  zIndex: 1,
+  zIndex: -1,
 });
 
 const RadioInput = styled('input')<RadioProps>(
