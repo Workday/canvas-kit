@@ -1,4 +1,4 @@
-import {TransformOrigin} from '../types';
+import {TransformOrigin} from '@workday/canvas-kit-react-common/lib/types';
 import {Placement} from '@popperjs/core';
 
 export const getTransformFromPlacement = (placement: Placement): TransformOrigin => {

@@ -6,8 +6,7 @@ export * from '@workday/canvas-kit-react-button';
 export * from '@workday/canvas-kit-react-card';
 export * from '@workday/canvas-kit-react-checkbox';
 export * from '@workday/canvas-kit-react-color-picker';
-import * as commonModule from '@workday/canvas-kit-react-common';
-export {commonModule}; // allow clobbering of `Popper` variable for now as we move Popper to the popup module
+export * from '@workday/canvas-kit-react-common';
 export * from '@workday/canvas-kit-react-cookie-banner';
 export * from '@workday/canvas-kit-react-form-field';
 export * from '@workday/canvas-kit-react-icon';

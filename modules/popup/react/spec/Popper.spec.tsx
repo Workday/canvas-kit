@@ -3,7 +3,7 @@
 import React from 'react';
 import {render, getByTestId} from '@testing-library/react';
 
-import {Popper} from '@workday/canvas-kit-react-common';
+import {Popper} from '../';
 
 describe('Popper', () => {
   it('should portal the popper content', () => {

@@ -8,3 +8,4 @@ export * from './lib/useEscapeKey';
 export * from './lib/useFocusTrap';
 export * from './lib/useOutsideClick';
 export * from './lib/usePopupStack';
+export * from './lib/getTransformFromPlacement';
