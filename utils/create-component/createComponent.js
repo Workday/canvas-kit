@@ -46,7 +46,7 @@ const questions = [
   {
     type: 'confirm',
     name: 'publicModule',
-    message: 'Should this module be public?:',
+    message: 'Make access public when publishing?:',
     default: true,
   },
   /**
