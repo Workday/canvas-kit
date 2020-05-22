@@ -60,7 +60,7 @@ inquirer
     const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
     if (!fs.existsSync(componentPath)) {
-      mkdirp(componentPath);
+      mkdirp.sync(componentPath);
     }
 
     css && createModule(componentPath, 'css', createCssModule, answers);

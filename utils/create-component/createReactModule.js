@@ -21,7 +21,7 @@ module.exports = (modulePath, name, description, unstable) => {
 
   console.log('\nCreating ' + `${moduleName}\n`.blue.underline);
 
-  mkdirp(modulePath);
+  mkdirp.sync(modulePath);
 
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
