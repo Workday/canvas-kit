@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# 3.7.0 (2020-05-22)
+# 3.8.0 (2020-05-22)
 
 ### Infrastructure
 - docs: Remove rebase section for pull requests ([#647](https://github.com/Workday/canvas-kit/pull/647)) [@NicholasBoll](https://github.com/NicholasBoll)
