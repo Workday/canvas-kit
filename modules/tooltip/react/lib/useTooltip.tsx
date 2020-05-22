@@ -1,5 +1,6 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
+import {useEscapeKey} from '@workday/canvas-kit-react-popup';
 
 const useIntentTimeout = (fn: Function, ms: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
@@ -44,8 +45,9 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
   titleText?: string;
 } = {}) {
   const [isOpen, setOpen] = React.useState(false);
-  const [ref, setRef] = React.useState<T | null>(null);
+  const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
   const [id] = React.useState(() => uuid());
+  const ref = React.useRef<HTMLDivElement>(null);
 
   const closeTooltip = () => {
     setOpen(false);
@@ -59,9 +61,11 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
   };
 
   const onOpenFromTarget = (event: React.SyntheticEvent<HTMLElement>) => {
-    setRef(event.currentTarget as T);
+    setAnchorElement(event.currentTarget as T);
     onOpen();
   };
+
+  useEscapeKey(ref, closeTooltip);
 
   return {
     /** Mix these properties into the target element. **Must be an Element** */
@@ -78,7 +82,8 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     /** Mix these properties into the `Popper` component */
     popperProps: {
       open: isOpen,
-      anchorElement: ref,
+      anchorElement,
+      ref,
     },
     /** Mix these properties into the `TooltipContainer` component */
     tooltipProps: {
