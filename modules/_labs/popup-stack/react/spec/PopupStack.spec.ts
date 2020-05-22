@@ -1,6 +1,6 @@
 import {PopupStack, PopupStackItem, resetStack, defaultGetValue} from '../lib/PopupStack';
 
-describe.only('PopupStack', () => {
+describe('PopupStack', () => {
   afterEach(() => {
     resetStack();
   });
