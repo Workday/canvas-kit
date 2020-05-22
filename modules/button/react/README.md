@@ -773,7 +773,6 @@ Default: `undefined`
 ```tsx
 import * as React from 'react';
 import {ToolbarIconButton} from '@workday/canvas-kit-react-button';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 <ToolbarIconButton
   icon={activityStreamIcon}
@@ -790,10 +789,11 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 ---
 ### Required
 #### `aria-label: string`
-> The accessibility label to indicate the action triggered by clicking the icon button.
+> The accessibility label to indicate the action triggered by clicking the toolbar icon button.
 ---
 ### Optional
 Note: The size of the button is always 32px by 32px.
+
 #### `toggled: boolean | undefined`
 > If defined as a boolean, then it manages the button state: on (`true`) or off (`false`). This is a
 > [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) `button` component. If
