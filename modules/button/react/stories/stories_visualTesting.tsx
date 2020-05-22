@@ -16,6 +16,7 @@ import {
   OutlineButton,
   Hyperlink,
   IconButton,
+  ToolbarIconButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
 
@@ -50,7 +51,10 @@ const getButtonStates = (rowProps: any, renderFn: (props: any) => React.ReactNod
             {label: 'Active', value: 'active'},
             {label: 'Active Hover', value: 'active hover'},
           ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          disabled: [
+            {label: '', value: false},
+            {label: 'Disabled', value: true},
+          ],
         },
         (props: any) => {
           if (props.disabled && !['', 'hover'].includes(props.className)) {
@@ -80,8 +84,14 @@ const buttonStories = [
           {value: Button.Size.Medium, label: 'Medium'},
           {value: Button.Size.Large, label: 'Large'},
         ],
-        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+        icon: [
+          {value: undefined, label: ''},
+          {value: playCircleIcon, label: 'w/ Icon'},
+        ],
+        dataLabel: [
+          {value: undefined, label: ''},
+          {value: '1:23', label: 'w/ Data Label'},
+        ],
       },
       (props: any) => (
         <Container>
@@ -144,8 +154,14 @@ const buttonStories = [
           {value: DropdownButton.Size.Medium, label: 'Medium'},
           {value: DropdownButton.Size.Large, label: 'Large'},
         ],
-        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+        icon: [
+          {value: undefined, label: ''},
+          {value: playCircleIcon, label: 'w/ Icon'},
+        ],
+        dataLabel: [
+          {value: undefined, label: ''},
+          {value: '1:23', label: 'w/ Data Label'},
+        ],
       },
       (props: any) => (
         <Container>
@@ -164,7 +180,10 @@ const buttonStories = [
           {value: Button.Size.Medium, label: 'Medium'},
           {value: Button.Size.Large, label: 'Large'},
         ],
-        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
+        icon: [
+          {value: undefined, label: ''},
+          {value: playCircleIcon, label: 'w/ Icon'},
+        ],
       },
       (props: any) => (
         <Container>
@@ -188,8 +207,14 @@ const buttonStories = [
           {value: Button.Size.Medium, label: 'Medium'},
           {value: Button.Size.Large, label: 'Large'},
         ],
-        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        dataLabel: [{value: undefined, label: ''}, {value: '1:23', label: 'w/ Data Label'}],
+        icon: [
+          {value: undefined, label: ''},
+          {value: playCircleIcon, label: 'w/ Icon'},
+        ],
+        dataLabel: [
+          {value: undefined, label: ''},
+          {value: '1:23', label: 'w/ Data Label'},
+        ],
       },
       (props: any) => (
         <Container blue={props.variant === OutlineButton.Variant.Inverse}>
@@ -211,8 +236,14 @@ const buttonStories = [
           {value: TextButton.Size.Small, label: 'Small'},
           {value: TextButton.Size.Medium, label: 'Medium'},
         ],
-        icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        allCaps: [{value: undefined, label: ''}, {value: true, label: 'All Caps'}],
+        icon: [
+          {value: undefined, label: ''},
+          {value: playCircleIcon, label: 'w/ Icon'},
+        ],
+        allCaps: [
+          {value: undefined, label: ''},
+          {value: true, label: 'All Caps'},
+        ],
       },
       (props: any) => (
         <Container blue={props.variant === TextButton.Variant.Inverse}>
@@ -304,6 +335,30 @@ const buttonStories = [
                 </Container>
               )
             )}
+          </div>
+        ))}
+      </React.Fragment>
+    ),
+  },
+  {
+    name: 'Toolbar Icon Button',
+    component: ToolbarIconButton,
+    states: (
+      <React.Fragment>
+        {[false, true].map(toggled => (
+          <div key={`toggled-${toggled}`}>
+            <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
+            {getButtonStates({}, (props: any) => (
+              <Container>
+                <ToolbarIconButton
+                  toggled={toggled}
+                  icon={activityStreamIcon}
+                  aria-label="Play"
+                  {...props}
+                  onChange={() => {}} // eslint-disable-line no-empty-function
+                />
+              </Container>
+            ))}
           </div>
         ))}
       </React.Fragment>
