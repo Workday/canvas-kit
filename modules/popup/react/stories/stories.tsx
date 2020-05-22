@@ -4,8 +4,8 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
-import {Popper} from '@workday/canvas-kit-react-common';
-import {Popup} from '../index';
+import {Popper, Popup} from '@workday/canvas-kit-react-popup';
+
 import README from '../README.md';
 
 interface PopupWrapperState {

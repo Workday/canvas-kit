@@ -15,7 +15,11 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode | ((props: {placement: Placement}) => React.ReactNode);
   /**
-   * The element that contains the portal children when `portal` is true.
+   * The element that contains the portal children when `portal` is true. It is best to not define
+   * this unless you know what you're doing. Popper works with a PopupStack and in order for
+   * z-indexes to work correctly, all Popups on your page should live on the same root element
+   * otherwise you risk running into rendering issues:
+   * https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
    */
   containerElement?: Element | null;
   /**
@@ -24,7 +28,9 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   open?: boolean;
   /**
-   * The placement of the popper relative to the `anchorElement`. Accepts `auto`, `top`, `right`, `bottom`, or `left`. Each placement can also be modified using any of the following variations: `-start` or `-end`.
+   * The placement of the popper relative to the `anchorElement`. Accepts `auto`, `top`, `right`,
+   * `bottom`, or `left`. Each placement can also be modified using any of the following
+   * variations: `-start` or `-end`.
    * @default bottom
    */
   placement?: Placement;
@@ -33,7 +39,8 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   popperOptions?: Partial<PopperOptions>;
   /**
-   * If true, attach the Popper to the `containerElement`. If false, render the Popper within the DOM hierarchy of its parent.
+   * If true, attach the Popper to the `containerElement`. If false, render the Popper within the
+   * DOM hierarchy of its parent.
    * @default true
    */
   portal?: boolean;

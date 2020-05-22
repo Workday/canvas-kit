@@ -16,43 +16,9 @@ yarn add @workday/canvas-kit-react-common
 
 Includes:
 
-- [Popper](#popper)
 - [Canvas Provider](#canvas-provider)
 - [Theming](#theming)
 - [Bidirectionality](#bidirectionality)
-
-## Popper
-
-A thin wrapper component around the Popper.js positioning engine. For reference:
-https://popper.js.org/
-
-### Usage
-
-```tsx
-import * as React from 'react';
-import {Popper} from '@workday/canvas-kit-react-common';
-import {Popup} from '@workday/canvas-kit-react-popup';
-
-<Popper placement="bottom" open={this.state.open} anchorElement={this.buttonRef.current}>
-  <Popup heading="Popup Title">Popup Contents</Popup>
-</Popper>;
-```
-
-If you need access to the placement that was chosen by PopperJS, pass in a render prop for the
-children:
-
-```tsx
-import * as React from 'react';
-import {Popper} from '@workday/canvas-kit-react-common';
-import {Popup} from '@workday/canvas-kit-react-popup';
-
-<Popper placement="bottom" open={this.state.open} anchorElement={this.buttonRef.current}>
-  {({ placement }) => {
-    console.log('placement', placement) // logs out the any valid PopperJS placement option except for `auto`
-    <Popup heading="Popup Title">Popup Contents</Popup>
-  }}
-</Popper>;
-```
 
 ### Static Properties
 

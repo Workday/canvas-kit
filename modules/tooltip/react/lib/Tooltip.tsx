@@ -1,7 +1,7 @@
 import * as React from 'react';
 import innerText from 'react-innertext';
 
-import {getTransformFromPlacement, Popper, Placement} from '@workday/canvas-kit-react-common';
+import {getTransformFromPlacement, Placement, Popper} from '@workday/canvas-kit-react-popup';
 
 import {TooltipContainer} from './TooltipContainer';
 import {useTooltip} from './useTooltip';

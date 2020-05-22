@@ -1,4 +1,4 @@
-import {PopupStack, PopupStackItem, resetStack} from '../lib/PopupStack';
+import {PopupStack, PopupStackItem, resetStack, defaultGetValue} from '../lib/PopupStack';
 
 describe.only('PopupStack', () => {
   afterEach(() => {
@@ -77,10 +77,14 @@ describe.only('PopupStack', () => {
       PopupStack.add(item5 as PopupStackItem);
       expect(PopupStack.isTopmost(item4.element, 'persistent')).toEqual(true);
     });
+
+    it('should return false if there are no items in the stack', () => {
+      expect(PopupStack.isTopmost(document.createElement('div'))).toEqual(false);
+    });
   });
 
   it('getElement() should return a list of element', () => {
-    const elements = [1, 2, 3, 4].map(item => document.createElement('div'));
+    const elements = [1, 2, 3, 4].map(_ => document.createElement('div'));
     elements.forEach(element => PopupStack.add({element, type: 'ephemeral'}));
 
     expect(PopupStack.getElements()).toEqual(elements);
@@ -93,5 +97,49 @@ describe.only('PopupStack', () => {
     PopupStack.bringToTop(elements[0]);
 
     expect(PopupStack.isTopmost(elements[0])).toEqual(true);
+  });
+
+  describe('defaultGetValue()', () => {
+    [
+      {index: 3, length: 4, output: 50},
+      {index: 2, length: 4, output: 49},
+      {index: 0, length: 50, output: 30},
+    ].forEach(({index, length, output}) => {
+      it(`should assign index of ${index} and a length of ${length} a z-index of ${output}`, () => {
+        expect(defaultGetValue(index, length)).toEqual(output);
+      });
+    });
+  });
+
+  describe('z-index', () => {
+    const elements = [1, 2].map(_ => document.createElement('div'));
+
+    it('should set an element to a z-index of 50 when added', () => {
+      PopupStack.add({element: elements[0], type: 'ephemeral'});
+
+      expect(elements[0].style.zIndex).toEqual('50');
+    });
+
+    it('should reset z-indexes when 2 elements are added', () => {
+      elements.forEach(element => PopupStack.add({element, type: 'ephemeral'}));
+
+      expect(elements[0].style.zIndex).toEqual('49');
+      expect(elements[1].style.zIndex).toEqual('50');
+    });
+
+    it('should reset z-indexes when an element is removed', () => {
+      elements.forEach(element => PopupStack.add({element, type: 'ephemeral'}));
+      PopupStack.remove(elements[0]);
+
+      expect(elements[1].style.zIndex).toEqual('50');
+    });
+
+    it('should reset z-indexes when an element is brought to the top of the stack', () => {
+      elements.forEach(element => PopupStack.add({element, type: 'ephemeral'}));
+      PopupStack.bringToTop(elements[0]);
+
+      expect(elements[0].style.zIndex).toEqual('50');
+      expect(elements[1].style.zIndex).toEqual('49');
+    });
   });
 });

@@ -20,8 +20,31 @@ function getLast<T>(items: T[]): T | null {
   return null;
 }
 
+/**
+ * Set the z-index of each item in the stack by changing setting
+ * `element.style.zIndex`. This should work for a web target across all
+ * frameworks. The strategy
+ */
+export function defaultGetValue(index: number, length: number): number {
+  const {min, max} = stack.zIndex;
+
+  return Math.max(min, max + index - length + 1);
+}
+
+function setZIndexOfElements(elements: HTMLElement[], getValue: typeof defaultGetValue): void {
+  const length = elements.length;
+  elements.forEach((element, index) => {
+    element.style.zIndex = String(getValue(index, length));
+  });
+}
+
 interface Stack {
   items: PopupStackItem[];
+  zIndex: {
+    min: number;
+    max: number;
+    getValue: typeof defaultGetValue;
+  };
 }
 
 // We need to make sure only one stack is ever in use on the page - ever.
@@ -29,6 +52,7 @@ interface Stack {
 // Never, ever, ever change this variable name on window
 const stack: Stack = (window as any).__popupStack || {
   items: [] as PopupStackItem[],
+  zIndex: {min: 30, max: 50, getValue: defaultGetValue},
 };
 (window as any).__popupStack = stack;
 
@@ -39,6 +63,8 @@ export const PopupStack = {
    */
   add(item: PopupStackItem): void {
     stack.items.push(item);
+
+    setZIndexOfElements(PopupStack.getElements(), stack.zIndex.getValue);
   },
 
   /**
@@ -47,6 +73,8 @@ export const PopupStack = {
    */
   remove(element: HTMLElement): void {
     stack.items = stack.items.filter(item => item.element !== element);
+
+    setZIndexOfElements(PopupStack.getElements(), stack.zIndex.getValue);
   },
 
   /**
@@ -99,6 +127,41 @@ export const PopupStack = {
       const e = new Error();
       console.warn('Could not find item', e.stack);
     }
+
+    setZIndexOfElements(PopupStack.getElements(), stack.zIndex.getValue);
+  },
+
+  /**
+   * **Do not change unless you know what you're doing**. This sets the
+   * minimum z-index value of all popup elements on the whole page,
+   * not just your application. The stack is global. This should only be
+   * changed by the owners of the entire application stack.
+   * @param min minimum z-index value of any element in the stack
+   */
+  setZIndexMin(min: number) {
+    stack.zIndex.min = min;
+  },
+
+  /**
+   * **Do not change unless you know what you're doing**. This sets the
+   * minimum z-index value of all popup elements on the whole page,
+   * not just your application. The stack is global. This should only be
+   * changed by the owners of the entire application stack.
+   * @param max maximum z-index value of any element in the stack
+   */
+  setZIndexMax(max: number) {
+    stack.zIndex.max = max;
+  },
+
+  /**
+   * **Do not change unless you know what you're doing**. This function
+   * handles the z-index value of all popup elements on the whole page,
+   * not just your application. The stack is global. This should only be
+   * changed by the owners of the entire application stack.
+   * @param fn Determines the z-index value of every element in the stack
+   */
+  setZIndexGetValue(fn: typeof defaultGetValue) {
+    stack.zIndex.getValue = fn;
   },
 };
 

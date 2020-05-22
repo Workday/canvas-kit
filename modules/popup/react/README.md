@@ -17,7 +17,40 @@ or
 yarn add @workday/canvas-kit-react-popup
 ```
 
-## Usage
+## Popper
+
+A thin wrapper component around the Popper.js positioning engine. For reference:
+https://popper.js.org/
+
+### Usage
+
+```tsx
+import * as React from 'react';
+import {Popup, Popper} from '@workday/canvas-kit-react-popup';
+
+<Popper placement="bottom" open={this.state.open} anchorElement={this.buttonRef.current}>
+  <Popup heading="Popup Title">Popup Contents</Popup>
+</Popper>;
+```
+
+If you need access to the placement that was chosen by PopperJS, pass in a render prop for the
+children:
+
+```tsx
+import * as React from 'react';
+import {Popup, Popper} from '@workday/canvas-kit-react-popup';
+
+<Popper placement="bottom" open={this.state.open} anchorElement={this.buttonRef.current}>
+  {({ placement }) => {
+    console.log('placement', placement) // logs out the any valid PopperJS placement option except for `auto`
+    <Popup heading="Popup Title">Popup Contents</Popup>
+  }}
+</Popper>;
+```
+
+## Popup
+
+### Usage
 
 ```tsx
 import * as React from 'react';
@@ -37,7 +70,7 @@ import {Popup} from '@workday/canvas-kit-react-popup';
 </Popper>;
 ```
 
-## Static Properties
+### Static Properties
 
 #### `Padding: PopupPadding`
 
@@ -45,7 +78,7 @@ import {Popup} from '@workday/canvas-kit-react-popup';
 <Popup padding={Popup.Padding.l}>{this.props.children}</Popup>
 ```
 
-## Component Props
+### Component Props
 
 ### Required
 
@@ -53,9 +86,9 @@ import {Popup} from '@workday/canvas-kit-react-popup';
 
 ---
 
-### Optional
+#### Optional
 
-### `padding: PopupPadding`
+#### `padding: PopupPadding`
 
 > You can choose between zero, s, l for your padding
 

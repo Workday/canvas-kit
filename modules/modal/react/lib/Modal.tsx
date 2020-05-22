@@ -7,11 +7,9 @@ export enum ModalWidth {
   m = '800px',
 }
 
-export interface ModalProps
-  extends Omit<ModalContentProps, 'padding' | 'width' | 'closeOnEscape' | 'container'> {
+export interface ModalProps extends Omit<ModalContentProps, 'padding' | 'width' | 'container'> {
   padding?: PopupPadding;
   width?: ModalWidth;
-  closeOnEscape?: boolean;
   container?: HTMLElement;
   /**
    * If true, set the Modal to the open state.
