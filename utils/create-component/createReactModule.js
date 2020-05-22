@@ -16,7 +16,7 @@ const tsconfig = require('./templates/react/tsconfig');
 
 const cwd = process.cwd();
 
-module.exports = (modulePath, name, description, unstable) => {
+module.exports = (modulePath, name, description, unstable, public) => {
   const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}react-${name}`;
 
   console.log('\nCreating ' + `${moduleName}\n`.blue.underline);
@@ -31,7 +31,7 @@ module.exports = (modulePath, name, description, unstable) => {
   const files = {
     package: {
       path: 'package.json',
-      contents: packageJson(name, moduleName, description, unstable),
+      contents: packageJson(name, moduleName, description, unstable, public),
     },
     component: {
       path: `lib/${pascalCaseName}.tsx`,
