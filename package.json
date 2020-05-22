@@ -138,7 +138,7 @@
     "typecheck:src": "tsc -p . --noEmit --incremental false",
     "typecheck:cypress": "tsc -p cypress --noEmit",
     "format:prettier": "prettier --config=./.prettierrc.js --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
-    "format": "yarn lint --fix -c .eslintrc-prettier.js",
+    "format": "yarn eslint --ext=jsx,ts,tsx --fix -c .eslintrc-prettier.js",
     "test": "TZ=UTC jest",
     "bump": "lerna version",
     "cypress:open": "cypress open",
