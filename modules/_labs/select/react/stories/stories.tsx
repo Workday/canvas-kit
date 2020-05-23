@@ -296,6 +296,7 @@ storiesOf('Labs|Select/React/Visual Testing', module)
         ]}
         columnProps={permutateProps(
           {
+            'aria-selected': [{label: '', value: undefined}, {label: 'Selected', value: 'true'}],
             className: [
               {label: 'Default', value: ''},
               {label: 'Hover', value: 'hover'},
@@ -303,9 +304,15 @@ storiesOf('Labs|Select/React/Visual Testing', module)
               {label: 'Active Hover', value: 'active hover'},
             ],
             disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+            focused: [{label: '', value: false}, {label: 'Assistive-focus', value: true}],
           },
           props => {
-            if (props.disabled && !['', 'hover'].includes(props.className)) {
+            if (
+              props.disabled &&
+              (props['aria-selected'] === 'true' ||
+                !['', 'hover'].includes(props.className) ||
+                props.focused)
+            ) {
               return false;
             }
             return true;
@@ -316,6 +323,7 @@ storiesOf('Labs|Select/React/Visual Testing', module)
           <SelectOption
             {...props}
             onChange={() => {}} // eslint-disable-line no-empty-function
+            style={{width: 100}}
           >
             E-mail
           </SelectOption>
