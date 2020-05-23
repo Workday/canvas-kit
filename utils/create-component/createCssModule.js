@@ -13,7 +13,7 @@ const readme = require('./templates/css/readme');
 
 const cwd = process.cwd();
 
-module.exports = (modulePath, name, description, unstable) => {
+module.exports = (modulePath, name, description, unstable, public) => {
   const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}css-${name}`;
 
   console.log('\nCreating '.underline + `${moduleName}\n`.blue.underline);
@@ -26,7 +26,7 @@ module.exports = (modulePath, name, description, unstable) => {
   const files = {
     package: {
       path: 'package.json',
-      contents: packageJson(name, moduleName, description, unstable),
+      contents: packageJson(name, moduleName, description, unstable, public),
     },
     component: {
       path: `lib/${name}.scss`,

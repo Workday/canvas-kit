@@ -1,4 +1,4 @@
-module.exports = (name, moduleName, description, unstable) => `
+module.exports = (name, moduleName, description, unstable, public) => `
 {
   "name": "${moduleName}",
   "version": "0.0.0",
@@ -21,7 +21,14 @@ module.exports = (name, moduleName, description, unstable) => `
   "scripts": {
     "test": "echo \\"Error: no test specified\\" && exit 1",
     "build": "node ../../../${unstable ? '../' : ''}utils/css-build.js index.scss"
-  },
+  }, ${
+    public
+      ? `
+  "publishConfig": {
+    "access": "public"
+  },`
+      : ``
+  }
   "keywords": [
     "canvas",
     "canvas-kit",

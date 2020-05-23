@@ -1,4 +1,4 @@
-module.exports = (name, moduleName, description, unstable) => `
+module.exports = (name, moduleName, description, unstable, public) => `
 {
   "name": "${moduleName}",
   "version": "0.0.0",
@@ -28,7 +28,14 @@ module.exports = (name, moduleName, description, unstable) => `
     "build:rebuild": "npm-run-all clean build",
     "build": "npm-run-all --parallel build:cjs build:es6",
     "depcheck": "node ../../../${unstable ? '../' : ''}utils/check-dependencies-exist.js"
-  },
+  }, ${
+    public
+      ? `
+  "publishConfig": {
+    "access": "public"
+  },`
+      : ``
+  }
   "keywords": [
     "canvas",
     "canvas-kit",
