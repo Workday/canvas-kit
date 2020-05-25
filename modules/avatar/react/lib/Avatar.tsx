@@ -132,7 +132,6 @@ const Avatar: AvatarOverload = React.forwardRef(
 
     return (
       <StyledContainer
-        variant={variant}
         size={size}
         aria-label={altText}
         onClick={onClick}
