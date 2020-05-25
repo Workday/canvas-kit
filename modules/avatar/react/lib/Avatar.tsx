@@ -88,6 +88,8 @@ const StyledContainer = styled('button', {
 const StyledStack = styled('span')<Pick<AvatarProps, 'size'>>(
   {
     position: 'absolute',
+    top: 0,
+    left: 0,
   },
   ({size}) => ({
     height: size,
