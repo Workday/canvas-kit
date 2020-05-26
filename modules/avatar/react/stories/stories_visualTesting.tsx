@@ -6,7 +6,8 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
 import {Avatar} from '../index';
 
-const IMAGE_URL = 'https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png';
+// @ts-ignore: Cannot find module error
+import testAvatar from './test-avatar.png';
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
@@ -50,7 +51,7 @@ storiesOf('Components|Indicators/Avatar/React/Visual Testing', module)
           ],
           url: [
             {value: undefined, label: 'Placeholder'},
-            {value: IMAGE_URL, label: 'Image'},
+            {value: testAvatar, label: 'Image'},
           ],
         })}
       >
