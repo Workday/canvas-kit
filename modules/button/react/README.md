@@ -837,7 +837,3 @@ Note: The size of the button is always 32px by 32px.
 > The content of an IconButton or ToolbarIconButton is not always clear to the user. In order to
 > better convey what the icon represents, the IconButton or ToolbarIconButton should be initialized
 > with `title` and `aria-label` attributes.
-
-```
-
-```
