@@ -30,7 +30,7 @@ import {CanvasProvider} from '@workday/canvas-kit-react-common';
 
 ### Optional
 
-#### `theme: CanvasTheme`
+#### `theme: PartialEmotionCanvasTheme`
 
 > The theme to be used throughout the children of the `CanvasProvider` component.
 
