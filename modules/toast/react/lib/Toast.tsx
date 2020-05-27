@@ -64,7 +64,6 @@ const ActionButton = styled('button')({
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',
-  padding: 0,
   marginTop: spacing.xxxs,
 });
 
