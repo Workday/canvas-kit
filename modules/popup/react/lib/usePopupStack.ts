@@ -13,10 +13,7 @@ export const usePopupStack = <E extends HTMLElement>(ref: React.RefObject<E>) =>
   // when mixed with other frameworks. Other frameworks should also register as soon
   // as the element is available
   React.useLayoutEffect(() => {
-    // Use requestAnimationFrame to ensure DOM writes happen _after_ DOM reads (PopupStack.add) changes styles
-    window.requestAnimationFrame(() => {
-      PopupStack.add({element: ref.current!});
-    });
+    PopupStack.add({element: ref.current!});
 
     return () => {
       PopupStack.remove(ref.current!);
