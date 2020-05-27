@@ -53,6 +53,7 @@ const Option = styled('li')<SelectOptionProps>(
     listStyle: 'none',
     // In case the content of the option is empty/undefined for some reason
     minHeight: type.body.lineHeight,
+    textAlign: 'left',
   },
   ({disabled, focused, interactive}) => {
     if (disabled) {
