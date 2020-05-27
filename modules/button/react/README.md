@@ -803,6 +803,8 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 Default: `undefined`
 
+---
+
 #### `onToggleChange: (toggled: boolean | undefined) => void`
 
 > The callback that is fired when a button toggle prop changes This is true when the toggle changes
