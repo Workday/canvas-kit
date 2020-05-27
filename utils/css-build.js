@@ -23,7 +23,7 @@ const postcssConfig = require('../.postcssrc.js');
 const nodeModules = path.resolve(__dirname, '../node_modules');
 
 // Make the build directory if it doesn't exist
-mkdirp(outputDir);
+mkdirp.sync(outputDir);
 
 const postcssPlugins = Object.keys(postcssConfig.plugins).map(plugin => {
   const name = plugin;

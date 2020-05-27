@@ -5,9 +5,9 @@ import {CSSObject} from '@emotion/core';
  * Requires wrapping your components in an InputProvider component.
  */
 export const hideMouseFocus: CSSObject = {
-  [`[data-whatinput='mouse'] &:focus,
-    [data-whatinput='touch'] &:focus,
-    [data-whatinput='pointer'] &:focus`]: {
+  [`[data-whatinput="mouse"] &:focus,
+    [data-whatinput="touch"] &:focus,
+    [data-whatinput="pointer"] &:focus`]: {
     outline: 'none',
     boxShadow: 'none',
     animation: 'none',

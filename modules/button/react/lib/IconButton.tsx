@@ -80,10 +80,7 @@ const IconButton: ButtonOrAnchorComponent<
     minWidth: size === 'small' ? spacing.l : spacing.xl, // min-width is set so buttons don't collapse in IE11
     width: size === 'small' ? spacing.l : spacing.xl,
     height: size === 'small' ? spacing.l : spacing.xl,
-    borderRadius:
-      variant === IconButtonVariant.Square || variant === IconButtonVariant.SquareFilled
-        ? borderRadius.m
-        : borderRadius.circle,
+    ...getIconButtonBorderRadius(variant),
     ['& .wd-icon']: {
       display: 'inline-block',
       verticalAlign: 'middle',
@@ -115,6 +112,16 @@ IconButton.Size = {
 } as const;
 
 export default IconButton;
+
+const getIconButtonBorderRadius = (variant: IconButtonVariant) => {
+  switch (variant) {
+    case IconButtonVariant.Square:
+    case IconButtonVariant.SquareFilled:
+      return {borderRadius: borderRadius.m};
+    default:
+      return {borderRadius: borderRadius.circle};
+  }
+};
 
 const getIconButtonColors = (
   variant: IconButtonVariant,
