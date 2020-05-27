@@ -1,6 +1,6 @@
 
 {
-  "name": "@workday/canvas-kit-labs-react-popup-stack",
+  "name": "@workday/canvas-kit-popup-stack",
   "version": "0.0.0",
   "description": "Stack for managing popup UIs to coordinate global concerns like escape key handling and rendering order",
   "author": "Workday, Inc. (https://www.workday.com)",
@@ -34,7 +34,7 @@
     "build:rebuild": "npm-run-all clean build",
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
-    "depcheck": "node ../../../../utils/check-dependencies-exist.js"
+    "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
   "keywords": [
     "canvas",

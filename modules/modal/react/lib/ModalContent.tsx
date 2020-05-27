@@ -97,9 +97,10 @@ const transformOrigin = {
   vertical: 'bottom',
 } as const;
 
-function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
-  const firstFocusable = modalEl.querySelector<HTMLElement>(
-    `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
+function getFirstElementToFocus(overlayEl: HTMLElement): HTMLElement {
+  const modalEl = overlayEl.querySelector('[role=dialog]');
+  const firstFocusable = modalEl?.querySelector<HTMLElement>(
+    `[data-close=close],[id="${modalEl?.getAttribute('aria-labelledby')}"]`
   );
   if (firstFocusable) {
     if (firstFocusable.tagName === 'H3') {

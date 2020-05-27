@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {PopupStack} from '@workday/canvas-kit-labs-react-popup-stack';
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
 /**
  * Use this on ephemeral popups. It will add escape key handling and will call the `onClose`

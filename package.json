@@ -155,11 +155,15 @@
         "yarn format",
         "git add"
       ],
+      "*.json": [
+        "node utils/check-mismatched-dependencies.js",
+        "git add"
+      ],
       "*.{js,jsx,json,md}": [
         "git add"
       ],
       "yarn.lock": [
-        "node utils/check-lockfile-links.js",
+        "node utils/check-lockfile.js",
         "git add"
       ]
     }

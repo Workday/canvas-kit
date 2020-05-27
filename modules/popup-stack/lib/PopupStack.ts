@@ -3,13 +3,6 @@
  * specific use-case
  */
 export interface PopupStackItem {
-  /**
-   * Ephemeral type popups usually have global listeners like click outside
-   * or escape key handling. Ephemeral type popups include Tooltips, Modals,
-   * DropDowns, etc. Persistent type popups include Windows. Persistent can
-   * only be dismissed explicitly by a close button.
-   */
-  type: 'persistent' | 'ephemeral';
   element: HTMLElement;
 }
 
@@ -22,13 +15,13 @@ function getLast<T>(items: T[]): T | null {
 
 /**
  * Set the z-index of each item in the stack by changing setting
- * `element.style.zIndex`. This should work for a web target across all
- * frameworks. The strategy
+ * `element.style.zIndex`. This is a framework-agnostic approach to changing
+ * zIndex. This strategy will start the popup stack at 30 and each popup will
  */
 export function defaultGetValue(index: number, length: number): number {
   const {min, max} = stack.zIndex;
 
-  return Math.max(min, max + index - length + 1);
+  return Math.min(max, min + index);
 }
 
 function setZIndexOfElements(elements: HTMLElement[], getValue: typeof defaultGetValue): void {
@@ -50,11 +43,13 @@ interface Stack {
 // We need to make sure only one stack is ever in use on the page - ever.
 // If a stack is already defined on the page, we need to use that one.
 // Never, ever, ever change this variable name on window
-const stack: Stack = (window as any).__popupStack || {
+(window as any).workday = (window as any).workday || {};
+const stack: Stack = (window as any).workday.__popupStack || {
+  description: 'Global popup stack from @workday/cavans-kit-popup-stack',
   items: [] as PopupStackItem[],
   zIndex: {min: 30, max: 50, getValue: defaultGetValue},
 };
-(window as any).__popupStack = stack;
+(window as any).workday.__popupStack = stack;
 
 export const PopupStack = {
   /**
@@ -78,22 +73,12 @@ export const PopupStack = {
   },
 
   /**
-   * This method is most useful if you need to access extra metadata associated
-   * with a PopupStackItem. For example, if your popup manager adds controller
-   * references to call methods when an escape key is hit.
-   */
-  getTopItem(): PopupStackItem | null {
-    return getLast(stack.items);
-  },
-
-  /**
    * Is the current element the top in the stack? Use `isTopmostEphemeral`
    * to handle detection of escape key or click outside.
    * @param element The element reference used to identify the popup
    */
-  isTopmost(element: HTMLElement, type?: 'ephemeral' | 'persistent'): boolean {
-    const items = type ? stack.items.filter(item => item.type === type) : stack.items;
-    const last = getLast(items);
+  isTopmost(element: HTMLElement): boolean {
+    const last = getLast(stack.items);
 
     if (last) {
       return last.element === element;
@@ -129,39 +114,6 @@ export const PopupStack = {
     }
 
     setZIndexOfElements(PopupStack.getElements(), stack.zIndex.getValue);
-  },
-
-  /**
-   * **Do not change unless you know what you're doing**. This sets the
-   * minimum z-index value of all popup elements on the whole page,
-   * not just your application. The stack is global. This should only be
-   * changed by the owners of the entire application stack.
-   * @param min minimum z-index value of any element in the stack
-   */
-  setZIndexMin(min: number) {
-    stack.zIndex.min = min;
-  },
-
-  /**
-   * **Do not change unless you know what you're doing**. This sets the
-   * minimum z-index value of all popup elements on the whole page,
-   * not just your application. The stack is global. This should only be
-   * changed by the owners of the entire application stack.
-   * @param max maximum z-index value of any element in the stack
-   */
-  setZIndexMax(max: number) {
-    stack.zIndex.max = max;
-  },
-
-  /**
-   * **Do not change unless you know what you're doing**. This function
-   * handles the z-index value of all popup elements on the whole page,
-   * not just your application. The stack is global. This should only be
-   * changed by the owners of the entire application stack.
-   * @param fn Determines the z-index value of every element in the stack
-   */
-  setZIndexGetValue(fn: typeof defaultGetValue) {
-    stack.zIndex.getValue = fn;
   },
 };
 
