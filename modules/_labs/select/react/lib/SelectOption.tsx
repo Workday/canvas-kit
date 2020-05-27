@@ -79,14 +79,14 @@ const Option = styled('li')<SelectOptionProps>(
             '&:hover': {
               backgroundColor: commonColors.hoverBackground,
             },
-            '&:active': {
+            '&:active, &:active[aria-selected="true"]': {
               ...activeStyles,
             },
           }
         : {};
       return {
         // Place selected styles after interactive styles to have selected styles
-        // override interactive styles
+        // override interactive styles (subject to CSS specificity rules)
         ...interactiveStyles,
         ...selectedStyles,
       };
