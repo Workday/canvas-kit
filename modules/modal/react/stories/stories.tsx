@@ -225,12 +225,12 @@ storiesOf('Components|Popups/Modal/React', module)
         <Modal heading={'Delete Item'} {...modal1.modalProps}>
           <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
           <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
-            Delete
+            Yes, Delete
           </DeleteButton>
           <Modal heading={'Really Delete Item'} {...modal2.modalProps}>
             <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
             <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
-              Really Delete
+              Yes, Really Delete
             </DeleteButton>
             <Button onClick={modal2.closeModal} variant={Button.Variant.Secondary}>
               Cancel

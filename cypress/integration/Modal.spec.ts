@@ -405,4 +405,53 @@ describe('Modal', () => {
       });
     });
   });
+
+  context(`given the 'Stacked Modals' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components|Popups/Modal/React', 'Stacked Modals');
+    });
+
+    context('when both modals are opened', () => {
+      beforeEach(() => {
+        cy.contains('button', 'Delete Item').click();
+        cy.contains('button', 'Yes, Delete').click();
+      });
+
+      it('should open the second modal', () => {
+        cy.findByLabelText('Really Delete Item').should('exist');
+      });
+
+      context('when the Escape key is pressed', () => {
+        beforeEach(() => {
+          cy.get('body').trigger('keydown', {
+            key: 'Escape',
+          });
+        });
+
+        it('should close the second modal', () => {
+          cy.findByLabelText('Really Delete Item').should('not.exist');
+        });
+
+        it('should not close the first modal', () => {
+          cy.findByLabelText('Delete Item').should('exist');
+        });
+      });
+
+      context('when the overlay is clicked', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Really Delete Item')
+            .parent() // overlay
+            .click('top');
+        });
+
+        it('should close the second modal', () => {
+          cy.findByLabelText('Really Delete Item').should('not.exist');
+        });
+
+        it('should not close the first modal', () => {
+          cy.findByLabelText('Delete Item').should('exist');
+        });
+      });
+    });
+  });
 });
