@@ -288,59 +288,44 @@ storiesOf('Labs|Select/React/Visual Testing', module)
   .add('States (Option)', () => (
     <div>
       {[
-        {label: 'Default', error: undefined},
-        {label: 'Alert', error: Select.ErrorType.Alert},
-        {label: 'Error', error: Select.ErrorType.Error},
-      ].map(errorTable => (
-        <div style={{border: `1px solid ${colors.soap600}`, marginTop: 30, padding: '0 20px'}}>
-          <h2>{errorTable.label}</h2>
-          {[
-            {
-              label: 'Disabled States',
-              columnProps: [
-                {label: 'Default', props: {}},
-                {label: 'Hover', props: {className: 'hover'}},
-              ],
-              rowProps: [{label: 'Disabled', props: {disabled: true}}],
-            },
-            {
-              label: 'Interaction States',
-              columnProps: [
-                {label: 'Default', props: {}},
-                {label: 'Hover', props: {className: 'hover'}},
-                {label: 'Active', props: {className: 'active'}},
-                {label: 'Active Hover', props: {className: 'active hover'}},
-              ],
-              rowProps: [
-                {label: 'Default', props: {}},
-                {label: 'Assistive-Focus', props: {focused: true}},
-                {label: 'Selected', props: {'aria-selected': true}},
-                {label: 'Assistive-Focus Selected', props: {'aria-selected': true, focused: true}},
-              ],
-            },
-          ].map(stateTable => (
-            <div>
-              <h3>{stateTable.label}</h3>
-              <StaticStates>
-                <ComponentStatesTable
-                  rowProps={stateTable.rowProps}
-                  columnProps={stateTable.columnProps}
-                >
-                  {props => (
-                    <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 120}}>
-                      <SelectOption
-                        {...props}
-                        error={errorTable.error}
-                        onChange={() => {}} // eslint-disable-line no-empty-function
-                      >
-                        E-mail
-                      </SelectOption>
-                    </ul>
-                  )}
-                </ComponentStatesTable>
-              </StaticStates>
-            </div>
-          ))}
+        {
+          label: 'Disabled States',
+          columnProps: [
+            {label: 'Default', props: {}},
+            {label: 'Hover', props: {className: 'hover'}},
+          ],
+          rowProps: [{label: 'Disabled', props: {disabled: true}}],
+        },
+        {
+          label: 'Interaction States',
+          columnProps: [
+            {label: 'Default', props: {}},
+            {label: 'Hover', props: {className: 'hover'}},
+            {label: 'Active', props: {className: 'active'}},
+            {label: 'Active Hover', props: {className: 'active hover'}},
+          ],
+          rowProps: [
+            {label: 'Default', props: {}},
+            {label: 'Assistive-Focus', props: {focused: true}},
+            {label: 'Selected', props: {'aria-selected': true}},
+            {label: 'Assistive-Focus Selected', props: {'aria-selected': true, focused: true}},
+          ],
+        },
+      ].map(statesTable => (
+        <div>
+          <h2>{statesTable.label}</h2>
+          <StaticStates>
+            <ComponentStatesTable
+              rowProps={statesTable.rowProps}
+              columnProps={statesTable.columnProps}
+            >
+              {props => (
+                <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 120}}>
+                  <SelectOption {...props}>E-mail</SelectOption>
+                </ul>
+              )}
+            </ComponentStatesTable>
+          </StaticStates>
         </div>
       ))}
     </div>
