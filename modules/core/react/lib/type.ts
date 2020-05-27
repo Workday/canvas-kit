@@ -149,6 +149,7 @@ const variants: CanvasTypeVariant = {
     },
     '&:focus': {
       boxShadow: `0 0 0 2px ${colors.blueberry400}`,
+      outline: 'none',
     },
     '&:active': {
       color: colors.blueberry600,
