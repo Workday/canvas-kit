@@ -59,7 +59,7 @@ able to compile your code.
 - [TextButton](#textbutton)
 - [Hyperlink](#hyperlink)
 - [IconButton](#iconbutton)
-- [ToolbarIconButton](#toolbarIconButton)
+- [ToolbarIconButton](#toolbariconbutton)
 
 ---
 
@@ -794,8 +794,6 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ### Optional
 
-Note: The size of the button is always 32px by 32px.
-
 #### `toggled: boolean | undefined`
 
 > If defined as a boolean, then it manages the button state: on (`true`) or off (`false`). This is a
@@ -803,7 +801,7 @@ Note: The size of the button is always 32px by 32px.
 > left `undefined` then the button is not considered toggle-able (`aria-pressed` is `undefined`) and
 > will act as a normal button.
 
-## Default: `undefined`
+Default: `undefined`
 
 #### `onToggleChange: (toggled: boolean | undefined) => void`
 
