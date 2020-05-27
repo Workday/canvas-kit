@@ -59,6 +59,7 @@ able to compile your code.
 - [TextButton](#textbutton)
 - [Hyperlink](#hyperlink)
 - [IconButton](#iconbutton)
+- [ToolbarIconButton](#toolbariconbutton)
 
 ---
 
@@ -154,7 +155,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -221,7 +222,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -308,7 +309,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -380,7 +381,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -485,7 +486,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -585,7 +586,7 @@ Default: `ButtonIconPosition.Left`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -674,10 +675,6 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ## Component Props
 
-> Same as [`Button`](#canvas-kit-button) Undocumented props are spread to the `button` element.
-
----
-
 ### Required
 
 #### `aria-label: string`
@@ -751,7 +748,7 @@ Default: `undefined`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -783,39 +780,48 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ## Static Properties
 
-```
+> None
+
 ## Component Props
-> Same as [`Button`](#canvas-kit-button) Undocumented props are spread to the `button` element.
----
+
 ### Required
+
 #### `aria-label: string`
+
 > The accessibility label to indicate the action triggered by clicking the toolbar icon button.
+
 ---
+
 ### Optional
-Note: The size of the button is always 32px by 32px.
 
 #### `toggled: boolean | undefined`
+
 > If defined as a boolean, then it manages the button state: on (`true`) or off (`false`). This is a
 > [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) `button` component. If
 > left `undefined` then the button is not considered toggle-able (`aria-pressed` is `undefined`) and
 > will act as a normal button.
+
 Default: `undefined`
+
 ---
+
 #### `onToggleChange: (toggled: boolean | undefined) => void`
+
 > The callback that is fired when a button toggle prop changes This is true when the toggle changes
 > from `true` to `false` but also if you disable the toggle-ability of a button (in other words, if
 > `toggle` changes from a `boolean` to `undefined`). This is important because the `aria-pressed`
 > attribute for accessibility is goverened by whether or not the `toggle` prop is defined.
+
 ---
+
 #### `buttonRef: React.Ref<HTMLButtonElement>`
+
 > Returns the ref to the rendered HTMLButtonElement.
+
 ---
+
 ### `icon: CanvasSystemIcon`
+
 > The icon of the button. Optional because ToolbarIconButton can also wrap a SystemIcon component.
+
 ---
-
-## Accessibility Notes
-
-> The content of an IconButton or ToolbarIconButton is not always clear to the user. In order to better convey what the
-> icon represents, the IconButton or ToolbarIconButton should be initialized with `title` and `aria-label` attributes.
-```
