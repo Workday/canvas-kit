@@ -155,7 +155,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -222,7 +222,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -309,7 +309,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -381,7 +381,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -486,7 +486,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -586,7 +586,7 @@ Default: `ButtonIconPosition.Left`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -675,10 +675,6 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ## Component Props
 
-> Same as [`Button`](#canvas-kit-button) Undocumented props are spread to the `button` element.
-
----
-
 ### Required
 
 #### `aria-label: string`
@@ -752,7 +748,7 @@ Default: `undefined`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -784,11 +780,9 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ## Static Properties
 
+> None
+
 ## Component Props
-
-> Same as [`Button`](#canvas-kit-button) Undocumented props are spread to the `button` element.
-
----
 
 ### Required
 
@@ -831,9 +825,3 @@ Note: The size of the button is always 32px by 32px.
 > The icon of the button. Optional because ToolbarIconButton can also wrap a SystemIcon component.
 
 ---
-
-## Accessibility Notes
-
-> The content of an IconButton or ToolbarIconButton is not always clear to the user. In order to
-> better convey what the icon represents, the IconButton or ToolbarIconButton should be initialized
-> with `title` and `aria-label` attributes.
