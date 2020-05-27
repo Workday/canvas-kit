@@ -30,7 +30,7 @@ import {CanvasProvider} from '@workday/canvas-kit-react-common';
 
 ### Optional
 
-#### `theme: CanvasTheme`
+#### `theme: PartialEmotionCanvasTheme`
 
 > The theme to be used throughout the children of the `CanvasProvider` component.
 
@@ -176,6 +176,7 @@ import * as React from 'react';
 import {
   CanvasProvider,
   EmotionCanvasTheme,
+  PartialEmotionCanvasTheme,
   ContentDirection,
 } from '@workday/canvas-kit-react-common';
 import {Switch} from '@workday/canvas-kit-react-switch';
@@ -186,7 +187,7 @@ const rtlTheme: EmotionCanvasTheme = {
   },
 };
 
-const theme: PartialCanvasTheme = {
+const theme: PartialEmotionCanvasTheme = {
   canvas: {
     palette: {
       primary: {
@@ -213,10 +214,12 @@ example of this is an app with many small React trees.
 Simply set your theme on the window object like so:
 
 ```tsx
-const theme: PartialCanvasTheme = {
-  palette: {
-    primary: {
-      main: colors.greenApple400,
+const theme: PartialEmotionCanvasTheme = {
+  canvas: {
+    palette: {
+      primary: {
+        main: colors.greenApple400,
+      },
     },
   },
 };
