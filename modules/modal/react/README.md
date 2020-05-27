@@ -107,16 +107,6 @@ Default: `PopupPadding.l`
 
 > Callback to handle close of your Modal and any other event when the Modal is closed.
 
-#### `closeOnEscape: boolean`
-
-> Accessibility specifications state modals should be closed when the escape key is pressed.
-> However, we cannot guarantee that it is safe to simply bind an event listener and close in all
-> cases. Some applications may use a Popup manager to make sure the correct popup is receiving the
-> close command. If your application uses custom popup stacking, do not set this to true. Set this
-> to true for simple applications and the modal will close when the escape key is pressed.
-
-Default: `true`
-
 ---
 
 #### `firstFocusRef: React.RefObject<HTMLElement>`
