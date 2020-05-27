@@ -320,7 +320,7 @@ storiesOf('Labs|Select/React/Visual Testing', module)
               columnProps={statesTable.columnProps}
             >
               {props => (
-                <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 120}}>
+                <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 280}}>
                   <SelectOption {...props}>E-mail</SelectOption>
                 </ul>
               )}
