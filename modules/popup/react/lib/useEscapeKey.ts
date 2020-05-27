@@ -13,10 +13,7 @@ export const useEscapeKey = <E extends HTMLElement>(
   onClose: () => void
 ) => {
   const onKeyDown = (event: KeyboardEvent) => {
-    if (
-      (event.key === 'Esc' || event.key === 'Escape') &&
-      PopupStack.isTopmost(ref.current!, 'ephemeral')
-    ) {
+    if ((event.key === 'Esc' || event.key === 'Escape') && PopupStack.isTopmost(ref.current!)) {
       onClose();
     }
   };

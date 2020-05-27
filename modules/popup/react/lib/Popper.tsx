@@ -15,7 +15,7 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The children of the Popper (to be used as its content).
    */
-  children: React.ReactNode | ((props: {placement: Placement}) => React.ReactNode);
+  children: ((props: {placement: Placement}) => React.ReactNode) | React.ReactNode;
   /**
    * The element that contains the portal children when `portal` is true. It is best to not define
    * this unless you know what you're doing. Popper works with a PopupStack and in order for
@@ -97,7 +97,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const localRef = React.useRef<HTMLDivElement>(null);
     const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
     const [placement, setPlacement] = React.useState(popperPlacement);
-    usePopupStack(ref, type);
+    usePopupStack(ref);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
@@ -132,8 +132,20 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
 
     return (
       <div {...elemProps} ref={ref}>
-        {typeof children === 'function' ? children({placement}) : children}
+        {isRenderProp(children) ? children({placement}) : children}
       </div>
     );
   }
 );
+
+// Typescript threw an error about non-callable signatures. Using typeof as a 'function' returns
+// a type of `Function` which isn't descriptive enough for Typescript. We don't do any detection
+// against the _type_ of function that gets passed, but we'll assume it is a render prop for now...
+function isRenderProp(
+  children: any
+): children is (props: {placement: Placement}) => React.ReactNode {
+  if (typeof children === 'function') {
+    return true;
+  }
+  return false;
+}
