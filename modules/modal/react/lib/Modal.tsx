@@ -22,18 +22,11 @@ const Modal = ({
   open = false,
   padding = PopupPadding.l,
   width = ModalWidth.s,
-  closeOnEscape = true,
   container = document.body,
   ...modalContentProps
 }: ModalProps): JSX.Element | null =>
   open ? (
-    <ModalContent
-      container={container}
-      padding={padding}
-      width={width}
-      closeOnEscape={closeOnEscape}
-      {...modalContentProps}
-    />
+    <ModalContent container={container} padding={padding} width={width} {...modalContentProps} />
   ) : null;
 
 Modal.Padding = PopupPadding;

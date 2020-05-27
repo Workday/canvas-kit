@@ -34,15 +34,6 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    */
   handleClose?: () => void;
   /**
-   * If true, set the Modal to close when the escape key is pressed (only recommended for simple applications).
-   * Accessibility specifications state modals should be closed when the escape key is pressed.
-   * However, we cannot guarantee that it is safe to simply bind an event listener and close in all
-   * cases. Some applications may use a Popup manager to make sure the correct popup is receiving
-   * the close command. If your application uses custom popup stacking, do not set this to true.
-   * @deprecated
-   */
-  closeOnEscape?: boolean;
-  /**
    * The heading of the Modal.
    */
   heading: React.ReactNode;
@@ -152,7 +143,6 @@ const useInitialFocus = (
 
 const ModalContent = ({
   ariaLabel,
-  closeOnEscape = true,
   width = ModalWidth.s,
   padding = PopupPadding.l,
   container = document.body,
