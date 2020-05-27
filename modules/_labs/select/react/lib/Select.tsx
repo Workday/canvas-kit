@@ -273,12 +273,22 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   }
 
   handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    this.toggleMenu(this.state.isMenuHidden);
+    const {isMenuHidden} = this.state;
+
+    // Return focus to the button if the menu is visible (i.e., we're
+    // clicking the button again to dismiss the menu)
+    if (!isMenuHidden) {
+      this.focusButton();
+    }
+
+    this.toggleMenu(isMenuHidden);
   };
 
   handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    // Cancel default handling of the event to ensure we maintain
-    // control of focus
+    // Cancel default handling of the event to ensure we maintain control
+    // of focus (i.e., so focus is immediately transferred to the menu when
+    // opening the menu, rather than briefly being applied to the button
+    // and creating a momentary flash of a focus ring around the button)
     event.preventDefault();
   };
 

@@ -185,9 +185,7 @@ describe('Select', () => {
 
                 context('when the listbox is expanded again', () => {
                   beforeEach(() => {
-                    cy.findByLabelText('Label')
-                      .pipe(h.selectLabs.getMenu)
-                      .type('{downarrow}');
+                    cy.focused().type('{downarrow}');
                   });
 
                   context('the fourth option', () => {

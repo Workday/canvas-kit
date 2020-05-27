@@ -152,7 +152,9 @@ const focusButtonStyles = {
   outline: 'none',
 };
 
-const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden'>>(
+const SelectButton = styled('button')<
+  Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'isMenuHiding'>
+>(
   {
     ...type.body,
     border: `${buttonBorderWidth}px solid ${inputColors.border}`,
@@ -187,12 +189,12 @@ const SelectButton = styled('button')<Pick<SelectBaseProps, 'error' | 'grow' | '
       },
     },
   },
-  ({error, isMenuHidden}) => {
+  ({error, isMenuHidden, isMenuHiding}) => {
     if (error === undefined) {
-      // If there isn't an error, only show hover styles if the
-      // menu is hidden (otherwise, if the menu is visible, style
+      // If there isn't an error, apply focus and hover styles if the menu is
+      // hidden or hiding (otherwise, the menu is completely visible: style
       // the button as if it had focus)
-      return isMenuHidden
+      return isMenuHidden || isMenuHiding
         ? {
             '&:hover:not([disabled]):not(:focus)': {
               borderColor: inputColors.hoverBorder,
@@ -347,10 +349,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
         value: option.value,
         ...(onOptionSelection
           ? {
-              // mouseDown provides a slightly better UX than click
-              // since visual feedback of selected option is more
-              // immediate
-              onMouseDown: (event: React.MouseEvent) => {
+              onClick: (event: React.MouseEvent) => {
                 event.preventDefault();
                 onOptionSelection(index);
               },
@@ -415,6 +414,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           error={error}
           grow={grow}
           isMenuHidden={isMenuHidden}
+          isMenuHiding={isMenuHiding}
           onKeyDown={onKeyDown}
           // Prevent Firefox from triggering click handler on spacebar during
           // type-ahead when the menu is closed (and, thus, incorrectly displaying
