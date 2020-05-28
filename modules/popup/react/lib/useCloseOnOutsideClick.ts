@@ -2,7 +2,7 @@ import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
-export const useOutsideClick = <E extends HTMLElement>(
+export const useCloseOnOutsideClick = <E extends HTMLElement>(
   ref: React.RefObject<E>,
   onClose: () => void
 ) => {

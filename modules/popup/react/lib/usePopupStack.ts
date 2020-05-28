@@ -18,7 +18,7 @@ export const usePopupStack = <E extends HTMLElement>(ref: React.RefObject<E>) =>
     return () => {
       PopupStack.remove(ref.current!);
     };
-  }, []);
+  }, [ref]);
   return {
     /**
      * Most useful for ephemeral-style popups to know if we're the topmost popup and therefore

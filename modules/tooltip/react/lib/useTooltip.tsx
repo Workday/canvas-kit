@@ -1,12 +1,12 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
-import {useEscapeKey} from '@workday/canvas-kit-react-popup';
+import {useCloseOnEscape} from '@workday/canvas-kit-react-popup';
 
-const useIntentTimeout = (fn: Function, ms: number = 0): {start(): void; clear(): void} => {
+const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
 
   const start = () => {
-    timer.current = window.setTimeout(fn, ms);
+    timer.current = window.setTimeout(fn, waitMs);
   };
 
   const clear = () => {
@@ -53,11 +53,11 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     setOpen(false);
   };
 
-  const {start: onClose, clear} = useIntentTimeout(closeTooltip, 100);
+  const intentTimer = useIntentTimer(closeTooltip, 100);
 
   const onOpen = () => {
     setOpen(true);
-    clear();
+    intentTimer.clear();
   };
 
   const onOpenFromTarget = (event: React.SyntheticEvent<HTMLElement>) => {
@@ -65,7 +65,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     onOpen();
   };
 
-  useEscapeKey(ref, closeTooltip);
+  useCloseOnEscape(ref, closeTooltip);
 
   return {
     /** Mix these properties into the target element. **Must be an Element** */
@@ -75,9 +75,9 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
       // This will replace the accessible name of the target element
       'aria-label': type === 'label' ? titleText : undefined,
       onMouseEnter: onOpenFromTarget,
-      onMouseLeave: onClose,
+      onMouseLeave: intentTimer.start,
       onFocus: onOpenFromTarget,
-      onBlur: onClose,
+      onBlur: intentTimer.start,
     },
     /** Mix these properties into the `Popper` component */
     popperProps: {
@@ -90,7 +90,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
       id: type === 'describe' && isOpen ? id : undefined,
       role: 'tooltip',
       onMouseEnter: onOpen,
-      onMouseLeave: onClose,
+      onMouseLeave: intentTimer.start,
     },
   };
 }

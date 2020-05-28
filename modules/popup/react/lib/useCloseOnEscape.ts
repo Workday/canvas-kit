@@ -8,7 +8,7 @@ import {PopupStack} from '@workday/canvas-kit-popup-stack';
  * @param ref
  * @param onClose
  */
-export const useEscapeKey = <E extends HTMLElement>(
+export const useCloseOnEscape = <E extends HTMLElement>(
   ref: React.RefObject<E>,
   onClose: () => void
 ) => {

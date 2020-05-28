@@ -5,7 +5,7 @@ import {keyframes} from '@emotion/core';
 import Popup, {
   PopupPadding,
   usePopupStack,
-  useEscapeKey,
+  useCloseOnEscape,
   useFocusTrap,
 } from '@workday/canvas-kit-react-popup';
 
@@ -141,6 +141,35 @@ const useInitialFocus = (
   }, [modalRef, firstFocusRef]);
 };
 
+/**
+ * Hides all siblings from assistive technology. Very useful for modal dialogs.
+ * This will set `aria-hidden` for siblings of the provided ref and restore
+ * the previous `aria-hidden` to each component when the component is unmounted.
+ * @param ref React.Ref of the element
+ */
+const useAssistiveHideSiblings = <E extends HTMLElement>(ref: React.RefObject<E>) => {
+  React.useEffect(() => {
+    const siblings = [...((ref.current?.parentElement?.children as any) as HTMLElement[])].filter(
+      el => el !== ref.current
+    );
+    const prevAriaHidden = siblings.map(el => el.getAttribute('aria-hidden'));
+    siblings.forEach(el => {
+      el.setAttribute('aria-hidden', 'true');
+    });
+
+    return () => {
+      siblings.forEach((el, index) => {
+        const prev = prevAriaHidden[index];
+        if (prev) {
+          el.setAttribute('aria-hidden', prev);
+        } else {
+          el.removeAttribute('aria-hidden');
+        }
+      });
+    };
+  }, [ref]);
+};
+
 const ModalContent = ({
   ariaLabel,
   width = ModalWidth.s,
@@ -164,30 +193,10 @@ const ModalContent = ({
   };
 
   usePopupStack(modalRef);
-  useEscapeKey(modalRef, onClose);
+  useCloseOnEscape(modalRef, onClose);
   useFocusTrap(modalRef);
   useInitialFocus(modalRef, firstFocusRef);
-
-  React.useEffect(() => {
-    const siblings = [...((container.children as any) as HTMLElement[])].filter(
-      el => el !== modalRef.current
-    );
-    const prevAriaHidden = siblings.map(el => el.getAttribute('aria-hidden'));
-    siblings.forEach(el => {
-      el.setAttribute('aria-hidden', 'true');
-    });
-
-    return () => {
-      siblings.forEach((el, index) => {
-        const prev = prevAriaHidden[index];
-        if (prev) {
-          el.setAttribute('aria-hidden', prev);
-        } else {
-          el.removeAttribute('aria-hidden');
-        }
-      });
-    };
-  }, []);
+  useAssistiveHideSiblings(modalRef);
 
   const content = (
     <Container {...elemProps} ref={modalRef} onClick={onOverlayClick}>
