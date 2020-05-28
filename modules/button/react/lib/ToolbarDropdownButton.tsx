@@ -1,68 +1,35 @@
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
 import {IconButtonProps} from './IconButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 
 export interface ToolbarDropdownButtonProps
-  extends Omit<IconButtonProps, 'size' | 'variant'>,
-    Themeable {
-  /**
-   * The accessibility label to indicate the action triggered by clicking the IconButton.
-   */
-  'aria-label': string;
-  /**
-   * The toggled state of the button. If defined as a boolean, then it manages the toggled state: on (`true`) or off (`false`).
-   * @default undefined
-   */
-  toggled?: boolean;
-  /**
-   * The ref to the button that the styled component renders.
-   */
-  buttonRef?: React.Ref<HTMLButtonElement>;
-  /**
-   * The icon of the IconButton.
-   */
-  icon?: CanvasSystemIcon;
-  /**
-   * The function called when the IconButton toggled state changes.
-   */
-  onToggleChange?: (toggled: boolean | undefined) => void;
-}
+  extends Omit<IconButtonProps, 'size' | 'variant' | 'toggled' | 'onToggleChange'>,
+    Themeable {}
 
 const ToolbarDropdownButton = ({
   theme = useTheme(),
   buttonRef,
-  onToggleChange,
   'aria-label': iconArialabel,
   icon,
-  toggled,
   children,
   ...elemProps
 }: ToolbarDropdownButtonProps) => {
-  const isInitialMount = React.useRef(true);
-
-  // Only call onToggleChange on update - not on first mount
-  React.useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      if (toggled && typeof onToggleChange === 'function') {
-        onToggleChange(toggled);
-      }
-    }
-  }, [toggled, onToggleChange]);
-
   const containerStyles = {
     padding: 0,
     minWidth: spacing.l,
     width: 'auto',
     height: spacing.l,
     borderRadius: borderRadius.m,
+    'span > *': {
+      margin: 0,
+    },
     ['& .wd-icon']: {
       display: 'inline-block',
       verticalAlign: 'middle',
@@ -75,17 +42,21 @@ const ToolbarDropdownButton = ({
     margin: '0 2px 0 0',
   };
 
+  const customIconStyles = {
+    marginLeft: '2px',
+    marginRight: 0,
+  };
+
   return (
     <ButtonContainer
       colors={getToolbarIconButtonColors(theme)}
       ref={buttonRef}
-      fillIcon={toggled}
       extraStyles={containerStyles}
-      //   aria-label={iconArialabel}
+      aria-label={iconArialabel}
       {...elemProps}
     >
-      {icon ? <SystemIcon style={{marginLeft: '2px'}} icon={icon} /> : children}
-      <SystemIcon style={chevronStyles} icon={chevronDownSmallIcon} />
+      {icon ? <SystemIcon css={customIconStyles} icon={icon} /> : children}
+      <SystemIcon css={chevronStyles} icon={chevronDownSmallIcon} />
     </ButtonContainer>
   );
 };

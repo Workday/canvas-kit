@@ -763,7 +763,9 @@ Default: `undefined`
 
 ---
 
-# ToolbarIconButton
+# Toolbar Buttons
+
+## ToolbarIconButton
 
 > Button containing an icon. Icon may be a component from
 > [`canvas-kit-react-icon`](../../icon/react) or an svg element that is used in toolbars.

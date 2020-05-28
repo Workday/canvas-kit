@@ -1,17 +1,22 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
-import {jsx, CSSObject} from '@emotion/core';
+import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {activityStreamIcon, paragraphIcon} from '@workday/canvas-system-icons-web';
 
-import {ToolbarIconButton} from '../index';
+import {ToolbarIconButton, ToolbarDropdownButton} from '../index';
 
 import README from '../README.md';
 
-storiesOf('Components|Buttons/Button/React/Toolbar Button', module)
+const customElementStyles = {
+  margin: '0 16px 0 2px',
+  fontSize: 14,
+};
+
+storiesOf('Components|Buttons/Button/React/Toolbar Buttons', module)
   .addParameters({component: ToolbarIconButton})
   .addDecorator(withReadme(README))
   .add('Toolbar Square', () => {
@@ -34,4 +39,15 @@ storiesOf('Components|Buttons/Button/React/Toolbar Button', module)
         />
       </div>
     );
-  });
+  })
+  .add('Toolbar Dropdown Button', () => (
+    <div className="story">
+      <h3>Toolbar Dropdown Icon Button</h3>
+      <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} />
+      <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} disabled={true} />
+      <h3>Custom Element Toolbar Dropdown Button</h3>
+      <ToolbarDropdownButton aria-label="Activity Stream">
+        <h1 style={customElementStyles}>Normal</h1>
+      </ToolbarDropdownButton>
+    </div>
+  ));

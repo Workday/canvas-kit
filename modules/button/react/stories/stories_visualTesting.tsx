@@ -17,6 +17,7 @@ import {
   Hyperlink,
   IconButton,
   ToolbarIconButton,
+  ToolbarDropdownButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
 
@@ -361,6 +362,27 @@ const buttonStories = [
             ))}
           </div>
         ))}
+      </React.Fragment>
+    ),
+  },
+  {
+    name: 'Toolbar Dropdown Button',
+    component: ToolbarIconButton,
+    states: (
+      <React.Fragment>
+        <div>
+          <h3>Default</h3>
+          {getButtonStates({}, (props: any) => (
+            <Container>
+              <ToolbarDropdownButton
+                icon={activityStreamIcon}
+                aria-label="Play"
+                {...props}
+                onChange={() => {}} // eslint-disable-line no-empty-function
+              />
+            </Container>
+          ))}
+        </div>
       </React.Fragment>
     ),
   },
