@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import * as React from 'react';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
