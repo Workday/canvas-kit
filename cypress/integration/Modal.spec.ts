@@ -345,20 +345,17 @@ describe('Modal', () => {
         });
 
         it('should transfer focus to the Cancel button element', () => {
-          cy.findByLabelText('Delete Item')
-            .find('button:contains(Cancel)')
-            .should('have.focus');
+          cy.findByLabelText('Item name').should('have.focus');
         });
 
         it('should trap focus inside the modal element', () => {
-          cy.focused().should('have.text', 'Cancel');
           cy.focused()
             .tab()
             .should('contain', 'Delete')
             .tab()
             .should('contain', 'Cancel')
             .tab();
-          cy.focused().should('have.text', 'Delete');
+          cy.findByLabelText('Item name').should('have.focus');
         });
       });
 

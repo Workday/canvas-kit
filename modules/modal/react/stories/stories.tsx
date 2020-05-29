@@ -1,13 +1,42 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
+
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button, DeleteButton} from '../../../button/react';
-import Modal, {useModal} from '..';
-import README from '../README.md';
+import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
+import {Modal, useModal} from '@workday/canvas-kit-react-modal';
+import {FormField} from '@workday/canvas-kit-react-form-field';
+import {TextInput} from '@workday/canvas-kit-react-text-input';
 
-const DefaultModalExample = () => {
+import README from '../README.md';
+import {controlComponent} from '../../../../utils/storybook';
+
+export default {
+  title: 'Components|Popups/Modal/React',
+  component: Modal,
+  decorators: [withReadme(README)],
+};
+
+export const Default = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+
+  return (
+    <>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
+          Delete
+        </DeleteButton>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+      </Modal>
+    </>
+  );
+};
+
+export const WithoutHook = () => {
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
   const openModal = () => {
@@ -39,7 +68,7 @@ const DefaultModalExample = () => {
   );
 };
 
-const AccessibleModalExample = () => {
+export const AccessibilityTest = () => {
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
   const openModal = () => {
@@ -113,26 +142,7 @@ const AccessibleModalExample = () => {
   );
 };
 
-const UseModalExample = () => {
-  const {targetProps, modalProps, closeModal} = useModal();
-
-  return (
-    <>
-      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
-      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
-        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-          Delete
-        </DeleteButton>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
-          Cancel
-        </Button>
-      </Modal>
-    </>
-  );
-};
-
-const NoCloseModalExample = () => {
+export const WithoutCloseIcon = () => {
   const {targetProps, modalProps, closeModal} = useModal();
 
   return (
@@ -156,9 +166,9 @@ const NoCloseModalExample = () => {
   );
 };
 
-const CustomFocusModalExample = () => {
+export const CustomFocus = () => {
   const {targetProps, modalProps, closeModal} = useModal();
-  const buttonRef = React.useRef() as React.RefObject<HTMLButtonElement>;
+  const ref = React.useRef() as React.RefObject<HTMLInputElement>;
 
   return (
     <>
@@ -167,14 +177,15 @@ const CustomFocusModalExample = () => {
         data-testid="TestModal"
         heading={'Delete Item'}
         {...modalProps}
-        firstFocusRef={buttonRef}
+        firstFocusRef={ref}
         handleClose={undefined}
       >
-        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <p>Enter name to confirm deletion</p>
+        <FormField label="Item name">{controlComponent(<TextInput inputRef={ref} />)}</FormField>
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary} buttonRef={buttonRef}>
+        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
           Cancel
         </Button>
       </Modal>
@@ -182,70 +193,37 @@ const CustomFocusModalExample = () => {
   );
 };
 
-storiesOf('Components|Popups/Modal/React', module)
-  .addParameters({component: Modal})
-  .addDecorator(withReadme(README))
-  .add('Default', () => (
-    <div className="story">
-      <h1 className="section-label">Modal</h1>
-      <DefaultModalExample />
-    </div>
-  ))
-  .add('Accessible', () => (
-    <div className="story">
-      <h1 className="section-label">Modal</h1>
-      <AccessibleModalExample />
-    </div>
-  ))
-  .add('With useModal hook', () => (
-    <div className="story">
-      <h1 className="section-label">Modal</h1>
-      <UseModalExample />
-    </div>
-  ))
-  .add('Without close icon', () => (
-    <div className="story">
-      <h1 className="section-label">Modal</h1>
-      <NoCloseModalExample />
-    </div>
-  ))
-  .add('Custom focus', () => (
-    <div className="story">
-      <h1 className="section-label">Modal</h1>
-      <CustomFocusModalExample />
-    </div>
-  ))
-  .add('Stacked Modals', () => {
-    const modal1 = useModal();
-    const modal2 = useModal();
+export const StackModals = () => {
+  const modal1 = useModal();
+  const modal2 = useModal();
 
-    return (
-      <>
-        <DeleteButton {...modal1.targetProps}>Delete Item</DeleteButton>
-        <Modal heading={'Delete Item'} {...modal1.modalProps}>
+  return (
+    <>
+      <DeleteButton {...modal1.targetProps}>Delete Item</DeleteButton>
+      <Modal heading={'Delete Item'} {...modal1.modalProps}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
+          Yes, Delete
+        </DeleteButton>
+        <Button onClick={modal1.closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+        <Modal heading={'Really Delete Item'} {...modal2.modalProps}>
           <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-          <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
-            Yes, Delete
+          <DeleteButton
+            style={{marginRight: '16px'}}
+            onClick={() => {
+              modal1.closeModal();
+              modal2.closeModal();
+            }}
+          >
+            Yes, Really Delete
           </DeleteButton>
-          <Button onClick={modal1.closeModal} variant={Button.Variant.Secondary}>
+          <Button onClick={modal2.closeModal} variant={Button.Variant.Secondary}>
             Cancel
           </Button>
-          <Modal heading={'Really Delete Item'} {...modal2.modalProps}>
-            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-            <DeleteButton
-              style={{marginRight: '16px'}}
-              onClick={() => {
-                modal1.closeModal();
-                modal2.closeModal();
-              }}
-            >
-              Yes, Really Delete
-            </DeleteButton>
-            <Button onClick={modal2.closeModal} variant={Button.Variant.Secondary}>
-              Cancel
-            </Button>
-          </Modal>
         </Modal>
-      </>
-    );
-  });
+      </Modal>
+    </>
+  );
+};
