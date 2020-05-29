@@ -21,19 +21,16 @@ const ToolbarDropdownButton = ({
   ...elemProps
 }: ToolbarDropdownButtonProps) => {
   const containerStyles = {
-    padding: 0,
+    padding: spacing.zero,
     minWidth: spacing.l,
     width: 'auto',
     height: spacing.l,
     borderRadius: borderRadius.m,
-    'span > *': {
-      margin: 0,
-    },
     ['& .wd-icon']: {
       display: 'inline-block',
       verticalAlign: 'middle',
-      width: '20px',
-      height: '20px',
+      width: 20,
+      height: 20,
     },
   };
 
@@ -42,8 +39,9 @@ const ToolbarDropdownButton = ({
   };
 
   const customIconStyles = {
-    marginLeft: '2px',
+    marginLeft: `${spacing.xxxs} !important`,
     marginRight: 0,
+    width: 18,
   };
 
   return (
