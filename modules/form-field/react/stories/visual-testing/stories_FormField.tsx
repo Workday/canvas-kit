@@ -1,0 +1,48 @@
+/// <reference path="../../../../../typings.d.ts" />
+import * as React from 'react';
+import withReadme from 'storybook-readme/with-readme';
+import FormField from '../../lib/FormField';
+import {
+  ComponentStatesTable,
+  permutateProps,
+  enableSnapshots,
+} from '../../../../../utils/storybook';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {TextInput} from '../../../../text-input/react';
+import README from '../README.md';
+import {FormFieldLabelPosition} from '../../lib/types';
+
+export default {
+  title: 'Components|Inputs/Form Field/React/Visual Testing',
+  component: FormField,
+  decorators: [withReadme(README)],
+  parameters: {
+    ...enableSnapshots(),
+  },
+};
+
+export const States = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={[
+        {label: 'Required', props: {required: true}},
+        {label: 'Hidden Label', props: {labelPosition: FormFieldLabelPosition.Hidden}},
+        {label: 'Grow', props: {grow: true}},
+        {label: 'Left Label', props: {labelPosition: FormFieldLabelPosition.Left}},
+      ]}
+      columnProps={permutateProps({
+        error: [
+          {value: undefined, label: 'Default'},
+          {value: FormField.ErrorType.Alert, label: 'Alert'},
+          {value: FormField.ErrorType.Error, label: 'Error'},
+        ],
+      })}
+    >
+      {props => (
+        <FormField {...props} hintText="Helpful text goes here." label="Label">
+          <TextInput />
+        </FormField>
+      )}
+    </ComponentStatesTable>
+  </StaticStates>
+);
