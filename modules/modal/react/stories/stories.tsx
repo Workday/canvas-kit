@@ -9,7 +9,7 @@ import {FormField} from '@workday/canvas-kit-react-form-field';
 import {TextInput} from '@workday/canvas-kit-react-text-input';
 
 import README from '../README.md';
-import {controlComponent} from '../../../../utils/storybook';
+import {controlComponent, testingOnly} from '../../../../utils/storybook';
 
 export default {
   title: 'Components|Popups/Modal/React',
@@ -227,3 +227,5 @@ export const StackModals = () => {
     </>
   );
 };
+
+testingOnly(StackModals);
