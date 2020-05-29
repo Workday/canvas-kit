@@ -39,12 +39,7 @@
   "keywords": [
     "canvas",
     "canvas-kit",
-    "react",
-    "components",
     "workday",
     "popup-stack"
-  ],
-  "peerDependencies": {
-    "react": ">= 16.8 < 17"
-  }
+  ]
 }

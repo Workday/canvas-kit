@@ -3,8 +3,9 @@ import React from 'react';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
 /**
- * Use this on ephemeral popups. It will add escape key handling and will call the `onClose`
- * function if the popup is the topmost in the popup stack
+ * Registers global detection of the Escape key. It will only call the `onClose` callback if the
+ * provided `ref` element is the topmost in the stack. The `ref` should be the same as the one passed
+ * to `usePopupStack` or the `Popper` component since `Popper` uses `usePopupStack` internally.
  * @param ref
  * @param onClose
  */

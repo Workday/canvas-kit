@@ -157,3 +157,65 @@ Default:
 
 > A ref to the underlying popup container element. Use this to check click targets against when
 > closing a popup.
+
+## Hooks
+
+### usePopupStack
+
+```ts
+usePopupStack(ref: React.RefObject<HTMLElement>): void
+```
+
+This hook will add a `ref` element to the Popup stack on mount and remove on unmount. If you use
+`Popper`, the popper `ref` is automatically added/removed from the Popup stack. The Popup stack is
+required for proper z-index values to ensure Popups are rendered correct. It is also required for
+global listeners like click outside or escape key closing a popup. Without the Popup stack, all
+popups will close rather than only the topmost one.
+
+## useAssistiveHideSiblings
+
+```ts
+useAssistiveHideSiblings(ref: React.RefObject<HTMLElement>): void
+```
+
+This hook will hide all sibling elements from assistive technology. Very useful for modal dialogs.
+This will set `aria-hidden` for sibling elements of the provided `ref` element and restore the
+previous `aria-hidden` to each component when the component is unmounted. For example, if added to a
+Modal component, all children of `document.body` will have an `aria-hidden=true` applied _except_
+for the provided `ref` element (the Modal). This will effectively hide all content outside the Modal
+from assistive technology including Web Rotor for VoiceOver for example.
+
+**Note**: The provided `ref` element should be root element of your component so that other elements
+_outside_ your component will be hidden rather than elements _inside_ your component
+
+## useCloseOnEscape
+
+```ts
+useCloseOnEscape(ref: React.RefObject<HTMLElement>, onClose: () => void): void
+```
+
+Registers global detection of the Escape key. It will only call the `onClose` callback if the
+provided `ref` element is the topmost in the stack. The `ref` should be the same as the one passed
+to `usePopupStack` or the `Popper` component since `Popper` uses `usePopupStack` internally.
+
+## useCloseOnOutsideClick
+
+```ts
+useCloseOnOutsideClick(ref: React.RefObject<HTMLElement>, onClose: () => void): void
+```
+
+Registers global lister for all clicks. It will only call the `onClose` callback if the click
+happened outside the `ref` element and its children _and_ the provided `ref` element is the topmost
+in the stack. The `ref` should be the same as the one passed to `usePopupStack` or the `Popper`
+component since `Popper` uses `usePopupStack` internally.
+
+## onFocusTrap
+
+```ts
+onFocusTrap(ref: React.RefObject<HTMLElement>): void
+```
+
+"Trap" or "loop" focus within a provided `ref` element. This is required for accessibility on
+modals. If a keyboard users hits the Tab or Shift + Tab, this will force "looping" of focus. It
+effectively "hides" outside content from keyboard users. Use an overlay to hide content from mouse
+users and `useAssistiveHideSiblings` to hide content from assistive technology users.

@@ -6,7 +6,7 @@ import {PopupStack} from '@workday/canvas-kit-popup-stack';
 import README from '../README.md';
 
 export default {
-  title: 'Labs|Popups/Stack Manager',
+  title: 'Components|Popups/Stack Manager',
   decorators: [withReadme(README)],
 };
 
