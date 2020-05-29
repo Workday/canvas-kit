@@ -26,7 +26,7 @@ const ToolbarDropdownButton = ({
     width: 'auto',
     height: spacing.l,
     borderRadius: borderRadius.m,
-    ['& .wd-icon']: {
+    '& .wd-icon': {
       display: 'inline-block',
       verticalAlign: 'middle',
       width: 20,
@@ -46,7 +46,7 @@ const ToolbarDropdownButton = ({
 
   return (
     <ButtonContainer
-      colors={getToolbarIconButtonColors(theme)}
+      colors={getToolbarDropdownButtonColors(theme)}
       ref={buttonRef}
       extraStyles={containerStyles}
       aria-label={iconArialabel}
@@ -60,7 +60,7 @@ const ToolbarDropdownButton = ({
 
 export default ToolbarDropdownButton;
 
-const getToolbarIconButtonColors = (theme: EmotionCanvasTheme): ButtonColors => {
+const getToolbarDropdownButtonColors = (theme: EmotionCanvasTheme): ButtonColors => {
   return {
     default: {
       icon: colors.licorice200,
