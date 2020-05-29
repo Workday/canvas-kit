@@ -8,14 +8,14 @@ import {CountBadge} from '../index';
 import README from '../README.md';
 
 export default {
-  title: 'Components|Indicators/Badge/CountBadge/React/',
+  title: 'Testing|React/Indicators/Badge/CountBadge',
   decorators: [withReadme(README)],
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const VisualTesting = () => {
+export const CountBadgeStates = () => {
   return (
     <ComponentStatesTable
       columnProps={[

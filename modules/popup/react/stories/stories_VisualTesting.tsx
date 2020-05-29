@@ -9,14 +9,14 @@ import {PopupPadding} from '../lib/Popup';
 import {depth} from '@workday/canvas-kit-react-core';
 
 export default {
-  title: 'Components|Popups/Popup/React/Visual Testing',
+  title: 'Testing|React/Popups/Popup',
   component: Popup,
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const PopupStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[

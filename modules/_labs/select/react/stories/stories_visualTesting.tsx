@@ -33,14 +33,14 @@ const normalizedOptions = options.map(option => {
 });
 
 export default {
-  title: 'Labs|Select/React/Visual Testing',
+  title: 'Testing|React/Labs/Select',
   parameters: {
     component: Select,
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const SelectStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -79,7 +79,7 @@ export const States = () => (
   </StaticStates>
 );
 
-export const StatesMenuOn = () => (
+export const SelectStatesMenuOn = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -104,7 +104,8 @@ export const StatesMenuOn = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
-export const StatesOption = () => (
+
+export const SelectStatesOption = () => (
   <div>
     {[
       {

@@ -4,14 +4,14 @@ import {ComponentStatesTable, enableSnapshots} from '../../../../../utils/storyb
 import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 
 export default {
-  title: 'Labs|Pagination/React/Visual Testing',
+  title: 'Testing|React/Labs/Pagination',
   parameters: {
     component: Pagination,
     ...enableSnapshots(),
   },
 };
 
-export const States = () => {
+export const PaginationStates = () => {
   const defaults = {
     total: 1000,
     pageSize: 10,

@@ -9,14 +9,14 @@ import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '../index';
 
 export default {
-  title: 'Components|Popups/Toast/React/Visual Testing',
+  title: 'Testing|React/Popups/Toast',
   parameters: {
     component: Toast,
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const ToastStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
