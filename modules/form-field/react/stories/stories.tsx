@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import FormField from '../lib/FormField';
-import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps, enableSnapshots} from '../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {TextInput} from '../../../text-input/react';
 import README from '../README.md';
@@ -87,9 +87,7 @@ storiesOf('Components|Inputs/Form Field/React', module)
 storiesOf('Components|Inputs/Form Field/React/Visual Testing', module)
   .addParameters({
     component: FormField,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .addDecorator(withReadme(README))
   .add('States', () => <FormFieldStates />);

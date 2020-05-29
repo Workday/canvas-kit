@@ -8,6 +8,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   customColorTheme,
+  enableSnapshots,
 } from '../../../../utils/storybook';
 
 import {Checkbox} from '../../../checkbox/react';
@@ -173,9 +174,7 @@ const CheckboxStates = () => (
 storiesOf('Components|Inputs/Checkbox/React/Visual Testing', module)
   .addParameters({
     component: Checkbox,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .addDecorator(withReadme(README))
   .add('States', () => <CheckboxStates />)

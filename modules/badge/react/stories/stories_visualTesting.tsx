@@ -2,7 +2,7 @@
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {ComponentStatesTable} from '../../../../utils/storybook';
+import {ComponentStatesTable, enableSnapshots} from '../../../../utils/storybook';
 
 import {CountBadge} from '../index';
 import README from '../README.md';
@@ -11,9 +11,7 @@ export default {
   title: 'Components|Indicators/Badge/CountBadge/React/',
   decorators: [withReadme(README)],
   parameters: {
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   },
 };
 

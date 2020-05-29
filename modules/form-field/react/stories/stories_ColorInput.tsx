@@ -8,6 +8,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   customColorTheme,
+  enableSnapshots,
 } from '../../../../utils/storybook';
 
 import {ColorInput} from '../../../color-picker/react';
@@ -193,9 +194,7 @@ const ColorInputStates = () => (
 storiesOf('Components|Inputs/Color Picker/Color Input/React/Visual Testing', module)
   .addParameters({
     component: ColorInput,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .addDecorator(withReadme(README))
   .add('States', () => <ColorInputStates />)

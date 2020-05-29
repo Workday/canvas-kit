@@ -4,7 +4,7 @@ import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {ComponentStatesTable, permutateProps} from '../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps, enableSnapshots} from '../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {Button, DropdownButton, TextButton, IconButton} from '../index';
 
@@ -248,35 +248,27 @@ const IconButtonStates = () => (
 storiesOf('Components|Buttons/Button/React/Visual Testing/Button', module)
   .addParameters({
     component: Button,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .add('States', () => <ButtonStates />);
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Dropdown', module)
   .addParameters({
     component: DropdownButton,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .add('States', () => <DropdownButtonStates />);
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Text', module)
   .addParameters({
     component: TextButton,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .add('States', () => <TextButtonStates />);
 
 storiesOf('Components|Buttons/Button/React/Visual Testing/Icon Button', module)
   .addParameters({
     component: IconButton,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .add('States', () => <IconButtonStates />);

@@ -4,7 +4,7 @@ import {jsx} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {action} from '@storybook/addon-actions';
-import {ComponentStatesTable} from '../../../../utils/storybook';
+import {ComponentStatesTable, enableSnapshots} from '../../../../utils/storybook';
 import {Popup} from '../index';
 import {PopupPadding} from '../lib/Popup';
 import {depth} from '@workday/canvas-kit-react-core';
@@ -12,9 +12,7 @@ import {depth} from '@workday/canvas-kit-react-core';
 storiesOf('Components|Popups/Popup/React/Visual Testing', module)
   .addParameters({
     component: Popup,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .add('States', () => (
     <StaticStates>

@@ -8,6 +8,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   customColorTheme,
+  enableSnapshots,
 } from '../../../../utils/storybook';
 
 import {TextArea} from '../../../text-area/react';
@@ -217,9 +218,7 @@ const TextAreaStates = () => (
 storiesOf('Components|Inputs/TextArea/React/Visual Testing', module)
   .addParameters({
     component: TextArea,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .addDecorator(withReadme(README))
   .add('States', () => <TextAreaStates />)

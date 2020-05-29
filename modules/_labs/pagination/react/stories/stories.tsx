@@ -4,7 +4,7 @@ import {boolean, number, text} from '@storybook/addon-knobs';
 import {storiesOf} from '@storybook/react';
 import React, {useEffect, useState} from 'react';
 import withReadme from 'storybook-readme/with-readme';
-import {ComponentStatesTable} from '../../../../../utils/storybook';
+import {ComponentStatesTable, enableSnapshots} from '../../../../../utils/storybook';
 
 import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 import README from '../README.md';
@@ -113,9 +113,7 @@ storiesOf('Labs|Pagination/React', module)
 
 storiesOf('Labs|Pagination/React/Visual Testing', module)
   .addParameters({
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .add('States', () => {
     const defaults = {

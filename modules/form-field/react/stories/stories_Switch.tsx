@@ -7,6 +7,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   customColorTheme,
+  enableSnapshots,
 } from '../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '../../../switch/react';
@@ -148,9 +149,7 @@ const SwitchStates = () => (
 storiesOf('Components|Inputs/Switch/React/Visual Testing', module)
   .addParameters({
     component: Switch,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .addDecorator(withReadme(README))
   .add('States', () => <SwitchStates />)

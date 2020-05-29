@@ -8,6 +8,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   customColorTheme,
+  enableSnapshots,
 } from '../../../../utils/storybook';
 
 import {TextInput} from '../../../text-input/react';
@@ -213,9 +214,7 @@ const TextInputStates = () => (
 storiesOf('Components|Inputs/Text Input/React/Visual Testing', module)
   .addParameters({
     component: TextInput,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .addDecorator(withReadme(README))
   .add('States', () => <TextInputStates />)

@@ -8,6 +8,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   customColorTheme,
+  enableSnapshots,
 } from '../../../../utils/storybook';
 
 import {Radio, RadioGroup} from '../../../radio/react';
@@ -233,9 +234,7 @@ const RadioStates = () => (
 storiesOf('Components|Inputs/Radio/React/Visual Testing', module)
   .addParameters({
     component: Radio,
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .addDecorator(withReadme(README))
   .add('States', () => <RadioStates />)

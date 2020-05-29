@@ -7,6 +7,7 @@ import {
   controlComponent,
   ComponentStatesTable,
   permutateProps,
+  enableSnapshots,
 } from '../../../../../utils/storybook';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {
@@ -217,9 +218,7 @@ storiesOf('Labs|Select/React/Left Label', module)
 
 storiesOf('Labs|Select/React/Visual Testing', module)
   .addParameters({
-    chromatic: {
-      disable: false,
-    },
+    ...enableSnapshots(),
   })
   .addDecorator(withReadme(README))
   .add('States', () => (
