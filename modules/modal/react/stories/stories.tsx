@@ -227,18 +227,24 @@ storiesOf('Components|Popups/Modal/React', module)
           <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
             Yes, Delete
           </DeleteButton>
+          <Button onClick={modal1.closeModal} variant={Button.Variant.Secondary}>
+            Cancel
+          </Button>
           <Modal heading={'Really Delete Item'} {...modal2.modalProps}>
             <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-            <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
+            <DeleteButton
+              style={{marginRight: '16px'}}
+              onClick={() => {
+                modal1.closeModal();
+                modal2.closeModal();
+              }}
+            >
               Yes, Really Delete
             </DeleteButton>
             <Button onClick={modal2.closeModal} variant={Button.Variant.Secondary}>
               Cancel
             </Button>
           </Modal>
-          <Button onClick={modal1.closeModal} variant={Button.Variant.Secondary}>
-            Cancel
-          </Button>
         </Modal>
       </>
     );
