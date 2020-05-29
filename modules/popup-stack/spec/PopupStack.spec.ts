@@ -61,12 +61,26 @@ describe('PopupStack', () => {
     expect(PopupStack.isTopmost(elements[0])).toEqual(true);
   });
 
-  describe('defaultGetValue()', () => {
+  describe.only('defaultGetValue()', () => {
     [
-      {index: 0, length: 4, output: 30},
-      {index: 2, length: 4, output: 32},
-      {index: 3, length: 4, output: 33},
+      {index: 0, length: 20, output: 30},
+      {index: 1, length: 20, output: 31},
+      {index: 2, length: 20, output: 32},
+      // If we have too many popups to fit in the range, stack at 30 rather than at 50
+      {index: 0, length: 50, output: 30},
+      {index: 1, length: 50, output: 30},
+      {index: 2, length: 50, output: 30},
+      {index: 19, length: 50, output: 30},
+      {index: 20, length: 50, output: 30},
+      {index: 21, length: 50, output: 30},
+      {index: 29, length: 50, output: 30},
+      {index: 30, length: 50, output: 31},
+      {index: 48, length: 50, output: 49},
       {index: 49, length: 50, output: 50},
+      {index: 0, length: 20, output: 30},
+      {index: 19, length: 20, output: 49},
+      {index: 0, length: 21, output: 30},
+      {index: 20, length: 21, output: 50},
     ].forEach(({index, length, output}) => {
       it(`should assign index of ${index} and a length of ${length} a z-index of ${output}`, () => {
         expect(defaultGetValue(index, length)).toEqual(output);

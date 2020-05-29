@@ -14,14 +14,19 @@ function getLast<T>(items: T[]): T | null {
 }
 
 /**
- * Set the z-index of each item in the stack by changing setting
- * `element.style.zIndex`. This is a framework-agnostic approach to changing
- * zIndex. This strategy will start the popup stack at 30 and each popup will
+ * Calculate the zIndex value of a given index in the stack. The range is 20
+ * where 30 is the minimum and 50 is the maximum. If there are more than 20
+ * items in the stack, we'll have multiple zIndexes of 30 at the bottom of the
+ * stack since the user probably can't tell the difference with that many
+ * popups.
  */
 export function defaultGetValue(index: number, length: number): number {
   const {min, max} = stack.zIndex;
 
-  return Math.min(max, min + index);
+  if (length <= max - min) {
+    return index + min;
+  }
+  return Math.max(min, max - (length - index) + 1);
 }
 
 function setZIndexOfElements(elements: HTMLElement[], getValue: typeof defaultGetValue): void {
@@ -73,8 +78,7 @@ export const PopupStack = {
   },
 
   /**
-   * Is the current element the top in the stack? Use `isTopmostEphemeral`
-   * to handle detection of escape key or click outside.
+   * Is the current element the top in the stack?
    * @param element The element reference used to identify the popup
    */
   isTopmost(element: HTMLElement): boolean {
