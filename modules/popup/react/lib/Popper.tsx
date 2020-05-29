@@ -46,7 +46,6 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default true
    */
   portal?: boolean;
-  type?: 'ephemeral' | 'persistent';
 }
 
 export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
@@ -59,7 +58,6 @@ export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
       anchorElement,
       children,
       containerElement,
-      type,
       ...elemProps
     }: PopperProps,
     ref
@@ -69,9 +67,7 @@ export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
     }
 
     const contents = (
-      <OpenPopper
-        {...{ref, type, anchorElement, popperOptions, placement, children, ...elemProps}}
-      />
+      <OpenPopper {...{ref, anchorElement, popperOptions, placement, children, ...elemProps}} />
     );
 
     if (!portal) {
@@ -82,10 +78,11 @@ export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
   }
 );
 
+// Popper bails early if `open` is false and React hooks cannot be called conditionally,
+// so we're breaking out the open version into another component.
 const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
   (
     {
-      type = 'ephemeral',
       anchorElement,
       popperOptions = {},
       placement: popperPlacement = 'bottom',
@@ -108,7 +105,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         return undefined;
       }
 
-      if (ref && ref.current) {
+      if (ref.current) {
         const popper = PopperJS.createPopper(anchorElement, ref.current, {
           placement: popperPlacement,
           ...popperOptions,
