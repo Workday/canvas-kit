@@ -1,14 +1,16 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
-import {Popper, Popup} from '@workday/canvas-kit-react-popup';
+import {
+  Popper,
+  Popup,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+} from '@workday/canvas-kit-react-popup';
 
 import README from '../README.md';
-import {useOutsideClick} from '../lib/useOutsideClick';
-import {useEscapeKey} from '../lib/useEscapeKey';
 
 export default {
   title: 'Components|Popups/Popup/React',
@@ -27,8 +29,8 @@ export const Default = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  useOutsideClick(popupRef, onClose);
-  useEscapeKey(popupRef, onClose);
+  useCloseOnOutsideClick(popupRef, onClose);
+  useCloseOnEscape(popupRef, onClose);
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
