@@ -2,8 +2,9 @@
 
 Stack for managing popup UIs to coordinate global concerns like escape key handling and rendering
 order. The popup stack is framework agnostic. The popup stack uses a shared array as the stack. This
-sharing is enforced. If the stack variable has already been declared, the first-instantiated will be
-used. There is no need to worry about bootstrapping at a specific time.
+sharing is enforced. If the window stack variable (`window.workday.__popupStack`) has already been
+declared, the first-instantiated instance will be used. There is no need to worry about
+bootstrapping at a specific time.
 
 All Popup-style UIs within a page should register with this stack in order to properly function
 together.
