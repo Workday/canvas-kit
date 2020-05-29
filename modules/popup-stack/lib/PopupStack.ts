@@ -50,7 +50,7 @@ interface Stack {
 // Never, ever, ever change this variable name on window
 (window as any).workday = (window as any).workday || {};
 const stack: Stack = (window as any).workday.__popupStack || {
-  description: 'Global popup stack from @workday/cavans-kit-popup-stack',
+  description: 'Global popup stack from @workday/canvas-kit-popup-stack',
   items: [] as PopupStackItem[],
   zIndex: {min: 30, max: 50, getValue: defaultGetValue},
 };
