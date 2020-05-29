@@ -8,4 +8,5 @@ export * from './lib/useCloseOnEscape';
 export * from './lib/useFocusTrap';
 export * from './lib/useCloseOnOutsideClick';
 export * from './lib/usePopupStack';
+export * from './lib/useAssistiveHideSiblings';
 export * from './lib/getTransformFromPlacement';
