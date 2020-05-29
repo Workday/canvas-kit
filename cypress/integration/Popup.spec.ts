@@ -65,6 +65,28 @@ describe('Popup', () => {
           getPopup().should('not.visible');
         });
       });
+
+      context('when the escape key is pressed', () => {
+        beforeEach(() => {
+          cy.get('body').trigger('keydown', {
+            key: 'Escape',
+          });
+        });
+
+        it('should close the popup', () => {
+          getPopup().should('not.visible');
+        });
+      });
+
+      context('when the user clicks outside the popup', () => {
+        beforeEach(() => {
+          cy.get('body').click('topLeft');
+        });
+
+        it('should close the popup', () => {
+          getPopup().should('not.visible');
+        });
+      });
     });
   });
 });
