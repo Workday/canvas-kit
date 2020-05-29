@@ -1,6 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
-import {jsx, CSSObject} from '@emotion/core';
+import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
@@ -12,14 +12,14 @@ import {Button} from '../../index';
 import {Container} from './utils';
 
 export default {
-  title: 'Components|Buttons/Button/React/Visual Testing/Button',
+  title: 'Testing|React/Buttons/Button/Button',
   parameters: {
     component: Button,
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const ButtonStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(

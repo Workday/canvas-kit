@@ -1,6 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
-import {jsx, CSSObject} from '@emotion/core';
+import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
@@ -11,14 +11,14 @@ import {DropdownButton} from '../../index';
 import {Container} from './utils';
 
 export default {
-  title: 'Components|Buttons/Button/React/Visual Testing/Dropdown',
+  title: 'Testing|React/Buttons/Button/Dropdown',
   parameters: {
     component: DropdownButton,
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const DropdownStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps({

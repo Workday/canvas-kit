@@ -1,8 +1,7 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
-import {jsx, CSSObject} from '@emotion/core';
+import {jsx} from '@emotion/core';
 import * as React from 'react';
-import {storiesOf} from '@storybook/react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
@@ -14,14 +13,14 @@ import {IconButton} from '../../index';
 import {Container} from './utils';
 
 export default {
-  title: 'Components|Buttons/Button/React/Visual Testing/Icon Button',
+  title: 'Testing|React/Buttons/Button/Icon Button',
   parameters: {
     component: IconButton,
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const IconButtonStates = () => (
   <React.Fragment>
     {[false, true].map(toggled => (
       <div>

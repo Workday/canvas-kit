@@ -12,14 +12,14 @@ import {TextButton} from '../../index';
 import {Container} from './utils';
 
 export default {
-  title: 'Components|Buttons/Button/React/Visual Testing/Text',
+  title: 'Testing|React/Buttons/Button/Text Button',
   parameters: {
     component: TextButton,
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const TextButtonStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(
