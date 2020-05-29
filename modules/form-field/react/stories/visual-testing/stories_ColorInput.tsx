@@ -11,14 +11,14 @@ import {ColorInput} from '../../../../color-picker/react';
 import FormField from '../../index';
 
 export default {
-  title: 'Components|Inputs/Color Picker/Color Input/React/Visual Testing',
+  title: 'Testing|React/Inputs/Color Picker/Color Input',
   component: ColorInput,
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const ColorInputStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(

@@ -10,14 +10,14 @@ import {
 import {TextArea} from '../../../../text-area/react';
 
 export default {
-  title: 'Components|Inputs/TextArea/React/Visual Testing',
+  title: 'Testing|React/Inputs/TextArea',
   component: TextArea,
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const TextAreaStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(

@@ -11,13 +11,14 @@ import {
 import {Checkbox} from '../../../../checkbox/react';
 
 export default {
-  title: 'Components|Inputs/Checkbox/React/Visual Testing',
+  title: 'Testing|React/Inputs/Checkbox',
   component: Checkbox,
   parameters: {
     ...enableSnapshots(),
   },
 };
-export const States = () => (
+
+export const CheckboxStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(

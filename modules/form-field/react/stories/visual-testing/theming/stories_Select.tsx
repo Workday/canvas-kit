@@ -1,10 +1,10 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, enableSnapshots} from '../../../../../../utils/storybook';
 import {Select} from '../../../../../select/react';
-import {States} from '../stories_Select';
+import {SelectStates} from '../stories_Select';
 
 export default {
-  title: 'Components|Inputs/Select/React/Visual Testing',
+  title: 'Testing|React/Inputs/Select',
   component: Select,
   parameters: {
     ...enableSnapshots(),
@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const Theming = () => States;
+export const SelectThemedStates = () => SelectStates;

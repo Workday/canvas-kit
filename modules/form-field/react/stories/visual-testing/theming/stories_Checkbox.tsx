@@ -1,10 +1,10 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, enableSnapshots} from '../../../../../../utils/storybook';
 import {Checkbox} from '../../../../../checkbox/react';
-import {States} from '../stories_Checkbox';
+import {CheckboxStates} from '../stories_Checkbox';
 
 export default {
-  title: 'Components|Inputs/Checkbox/React/Visual Testing',
+  title: 'Testing|React/Inputs/Checkbox',
   component: Checkbox,
   parameters: {
     ...enableSnapshots(),
@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const Theming = () => States;
+export const CheckboxThemedStates = () => CheckboxStates;

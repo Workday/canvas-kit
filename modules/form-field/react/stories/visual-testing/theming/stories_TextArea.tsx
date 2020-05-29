@@ -1,10 +1,10 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, enableSnapshots} from '../../../../../../utils/storybook';
 import {TextArea} from '../../../../../text-area/react';
-import {States} from '../stories_TextArea';
+import {TextAreaStates} from '../stories_TextArea';
 
 export default {
-  title: 'Components|Inputs/TextArea/React/Visual Testing',
+  title: 'Testing|React/Inputs/TextArea',
   component: TextArea,
   parameters: {
     ...enableSnapshots(),
@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const Theming = () => States;
+export const TextAreaThemedStates = () => TextAreaStates;

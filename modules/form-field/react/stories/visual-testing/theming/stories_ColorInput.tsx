@@ -1,10 +1,10 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, enableSnapshots} from '../../../../../../utils/storybook';
 import {ColorInput} from '../../../../../color-picker/react';
-import {States} from '../stories_ColorInput';
+import {ColorInputStates} from '../stories_ColorInput';
 
 export default {
-  title: 'Components|Inputs/Color Picker/Color Input/React/Visual Testing',
+  title: 'Testing|React/Inputs/Color Picker/Color Input',
   component: ColorInput,
   parameters: {
     ...enableSnapshots(),
@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const Theming = () => States;
+export const ColorInputThemedStates = () => ColorInputStates;

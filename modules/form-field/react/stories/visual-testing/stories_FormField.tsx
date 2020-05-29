@@ -1,6 +1,5 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
-import withReadme from 'storybook-readme/with-readme';
 import FormField from '../../lib/FormField';
 import {
   ComponentStatesTable,
@@ -9,19 +8,17 @@ import {
 } from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {TextInput} from '../../../../text-input/react';
-import README from '../README.md';
 import {FormFieldLabelPosition} from '../../lib/types';
 
 export default {
-  title: 'Components|Inputs/Form Field/React/Visual Testing',
+  title: 'Testing|React/Inputs/Form Field',
   component: FormField,
-  decorators: [withReadme(README)],
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const FormFieldStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[

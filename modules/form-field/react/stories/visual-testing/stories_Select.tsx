@@ -10,14 +10,14 @@ import {
 import {Select, SelectOption} from '../../../../select/react';
 
 export default {
-  title: 'Components|Inputs/Select/React/Visual Testing',
+  title: 'Testing|React/Inputs/Select',
   component: Select,
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const SelectStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[

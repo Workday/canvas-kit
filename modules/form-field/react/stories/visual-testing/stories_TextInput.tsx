@@ -10,14 +10,14 @@ import {
 import {TextInput} from '../../../../text-input/react';
 
 export default {
-  title: 'Components|Inputs/Text Input/React/Visual Testing',
+  title: 'Testing|React/Inputs/Text Input',
   component: TextInput,
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const TextInputStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(

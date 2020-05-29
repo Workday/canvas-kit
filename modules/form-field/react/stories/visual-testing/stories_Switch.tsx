@@ -9,14 +9,14 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '../../../../switch/react';
 
 export default {
-  title: 'Components|Inputs/Switch/React/Visual Testing',
+  title: 'Testing|React/Inputs/Switch',
   component: Switch,
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const SwitchStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(

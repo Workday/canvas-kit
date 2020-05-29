@@ -15,14 +15,14 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 export default {
-  title: 'Components|Inputs/Radio/React/Visual Testing',
+  title: 'Testing|React/Inputs/Radio',
   component: FormField,
   parameters: {
     ...enableSnapshots(),
   },
 };
 
-export const States = () => (
+export const RadioStates = () => (
   <div>
     <h3>Radio</h3>
     <StaticStates>

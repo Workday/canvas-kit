@@ -1,10 +1,10 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, enableSnapshots} from '../../../../../../utils/storybook';
 import {TextInput} from '@workday/canvas-kit-react-text-input';
-import {States} from '../stories_TextInput';
+import {TextInputStates} from '../stories_TextInput';
 
 export default {
-  title: 'Components|Inputs/TextInput/React/Visual Testing',
+  title: 'Testing|React/Inputs/TextInput',
   component: TextInput,
   parameters: {
     ...enableSnapshots(),
@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const Theming = () => States;
+export const TextInputThemedStates = () => TextInputStates;

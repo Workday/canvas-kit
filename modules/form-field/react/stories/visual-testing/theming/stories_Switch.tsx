@@ -1,10 +1,10 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, enableSnapshots} from '../../../../../../utils/storybook';
 import {Switch} from '../../../../../switch/react';
-import {States} from '../stories_Switch';
+import {SwitchStates} from '../stories_Switch';
 
 export default {
-  title: 'Components|Inputs/Switch/React/Visual Testing',
+  title: 'Testing|React/Inputs/Switch',
   component: Switch,
   parameters: {
     ...enableSnapshots(),
@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const Theming = () => States;
+export const SwitchThemedStates = () => SwitchStates;

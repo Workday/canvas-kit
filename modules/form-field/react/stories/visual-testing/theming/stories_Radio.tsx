@@ -1,10 +1,10 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, enableSnapshots} from '../../../../../../utils/storybook';
 import {Radio} from '../../../../../radio/react';
-import {States} from '../stories_Radio';
+import {RadioStates} from '../stories_Radio';
 
 export default {
-  title: 'Components|Inputs/Radio/React/Visual Testing',
+  title: 'Testing|React/Inputs/Radio',
   component: Radio,
   parameters: {
     ...enableSnapshots(),
@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const Theming = () => States;
+export const RadioThemedStates = () => RadioStates;
