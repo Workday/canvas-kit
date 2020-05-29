@@ -1,4 +1,4 @@
-import {PopupStack, PopupStackItem, resetStack, defaultGetValue} from '../lib/PopupStack';
+import {PopupStack, PopupStackItem, resetStack, getValue} from '../lib/PopupStack';
 
 describe('PopupStack', () => {
   afterEach(() => {
@@ -61,7 +61,7 @@ describe('PopupStack', () => {
     expect(PopupStack.isTopmost(elements[0])).toEqual(true);
   });
 
-  describe.only('defaultGetValue()', () => {
+  describe('defaultGetValue()', () => {
     [
       {index: 0, length: 20, output: 30},
       {index: 1, length: 20, output: 31},
@@ -83,7 +83,7 @@ describe('PopupStack', () => {
       {index: 20, length: 21, output: 50},
     ].forEach(({index, length, output}) => {
       it(`should assign index of ${index} and a length of ${length} a z-index of ${output}`, () => {
-        expect(defaultGetValue(index, length)).toEqual(output);
+        expect(getValue(index, length)).toEqual(output);
       });
     });
   });

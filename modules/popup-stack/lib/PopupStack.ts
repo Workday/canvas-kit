@@ -20,7 +20,7 @@ function getLast<T>(items: T[]): T | null {
  * stack since the user probably can't tell the difference with that many
  * popups.
  */
-export function defaultGetValue(index: number, length: number): number {
+export function getValue(index: number, length: number): number {
   const {min, max} = stack.zIndex;
 
   if (length <= max - min) {
@@ -29,7 +29,7 @@ export function defaultGetValue(index: number, length: number): number {
   return Math.max(min, max - (length - index) + 1);
 }
 
-function setZIndexOfElements(elements: HTMLElement[], getValue: typeof defaultGetValue): void {
+function setZIndexOfElements(elements: HTMLElement[]): void {
   const length = elements.length;
   elements.forEach((element, index) => {
     element.style.zIndex = String(getValue(index, length));
@@ -41,7 +41,7 @@ interface Stack {
   zIndex: {
     min: number;
     max: number;
-    getValue: typeof defaultGetValue;
+    getValue: typeof getValue;
   };
 }
 
@@ -52,7 +52,7 @@ interface Stack {
 const stack: Stack = (window as any).workday.__popupStack || {
   description: 'Global popup stack from @workday/canvas-kit-popup-stack',
   items: [] as PopupStackItem[],
-  zIndex: {min: 30, max: 50, getValue: defaultGetValue},
+  zIndex: {min: 30, max: 50, getValue: getValue},
 };
 (window as any).workday.__popupStack = stack;
 
@@ -64,7 +64,7 @@ export const PopupStack = {
   add(item: PopupStackItem): void {
     stack.items.push(item);
 
-    setZIndexOfElements(PopupStack.getElements(), stack.zIndex.getValue);
+    setZIndexOfElements(PopupStack.getElements());
   },
 
   /**
@@ -74,7 +74,7 @@ export const PopupStack = {
   remove(element: HTMLElement): void {
     stack.items = stack.items.filter(item => item.element !== element);
 
-    setZIndexOfElements(PopupStack.getElements(), stack.zIndex.getValue);
+    setZIndexOfElements(PopupStack.getElements());
   },
 
   /**
@@ -117,7 +117,7 @@ export const PopupStack = {
       console.warn('Could not find item', e.stack);
     }
 
-    setZIndexOfElements(PopupStack.getElements(), stack.zIndex.getValue);
+    setZIndexOfElements(PopupStack.getElements());
   },
 };
 
