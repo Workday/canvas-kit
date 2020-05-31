@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
+import styled from '@emotion/styled';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
@@ -34,15 +35,15 @@ const ToolbarDropdownButton = ({
     },
   };
 
-  const chevronStyles = {
-    margin: '0 2px 0 0',
-  };
+  const StyledChevronIcon = styled(SystemIcon)({
+    margin: '0 2px 0 0 !important',
+  });
 
-  const customIconStyles = {
+  const StyledCustomIcon = styled(SystemIcon)({
     marginLeft: `${spacing.xxxs} !important`,
     marginRight: 0,
     width: 18,
-  };
+  });
 
   return (
     <ButtonContainer
@@ -52,8 +53,8 @@ const ToolbarDropdownButton = ({
       aria-label={iconArialabel}
       {...elemProps}
     >
-      {icon ? <SystemIcon css={customIconStyles} icon={icon} /> : children}
-      <SystemIcon css={chevronStyles} icon={chevronDownSmallIcon} />
+      {icon ? <StyledCustomIcon icon={icon} /> : children}
+      <StyledChevronIcon icon={chevronDownSmallIcon} />
     </ButtonContainer>
   );
 };
