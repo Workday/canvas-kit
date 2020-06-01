@@ -1,15 +1,15 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, withSnapshotsEnabled} from '../../../../../../utils/storybook';
-import {TextInput} from '../../../../../text-input/react';
-import {TextInputStates} from '../stories_TextInput';
+import {DeleteButton} from '../../../';
+import {DeleteButtonStates} from '../stories_DeleteButton';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Text Input',
-  component: TextInput,
+  title: 'Testing|React/Buttons/Button/Delete Button',
+  component: DeleteButton,
   parameters: {
     canvasProviderDecorator: {
       theme: customColorTheme,
     },
   },
 });
-export const TextInputThemedStates = TextInputStates;
+export const DeleteButtonThemedStates = DeleteButtonStates;

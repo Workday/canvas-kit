@@ -9,7 +9,7 @@ import {
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {TextButton} from '../../index';
-import {Container} from './utils';
+import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
   title: 'Testing|React/Buttons/Button/Text Button',
@@ -23,46 +23,29 @@ export const TextButtonStates = () => (
         {
           variant: [
             {value: TextButton.Variant.Default, label: 'Default'},
-            {value: TextButton.Variant.AllCaps, label: 'All Caps'},
             {value: TextButton.Variant.Inverse, label: 'Inverse'},
-            {value: TextButton.Variant.InverseAllCaps, label: 'Inverse All Caps'},
+          ],
+          allCaps: [
+            {value: false, label: ''},
+            {value: true, label: 'All Caps'},
           ],
           size: [
             {value: TextButton.Size.Small, label: 'Small'},
             {value: TextButton.Size.Large, label: 'Large'},
           ],
-          icon: [{value: undefined, label: ''}, {value: playCircleIcon, label: 'w/ Icon'}],
-        },
-        props => {
-          return true;
-        }
-      )}
-      columnProps={permutateProps(
-        {
-          className: [
-            {label: 'Default', value: ''},
-            {label: 'Hover', value: 'hover'},
-            {label: 'Focus', value: 'focus'},
-            {label: 'Focus Hover', value: 'focus hover'},
-            {label: 'Active', value: 'active'},
-            {label: 'Active Hover', value: 'active hover'},
+          icon: [
+            {value: undefined, label: ''},
+            {value: playCircleIcon, label: 'w/ Icon'},
           ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
         },
         props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
           return true;
         }
       )}
+      columnProps={stateTableColumnProps}
     >
       {props => (
-        <Container
-          blue={[TextButton.Variant.Inverse, TextButton.Variant.InverseAllCaps].includes(
-            props.variant
-          )}
-        >
+        <Container blue={props.variant === TextButton.Variant.Inverse}>
           <TextButton {...props}>Test</TextButton>
         </Container>
       )}

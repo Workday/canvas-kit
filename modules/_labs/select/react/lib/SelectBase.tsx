@@ -194,8 +194,8 @@ const SelectButton = styled('button')<
     };
 
     if (error === undefined) {
-      // If there isn't an error, apply focus and hover styles if the
-      // menu is hidden (otherwise, if the menu is visible, style
+      // If there isn't an error, apply focus and hover styles if the menu is
+      // hidden or hiding (otherwise, the menu is completely visible: style
       // the button as if it had focus)
       return isMenuHidden || isMenuHiding
         ? {

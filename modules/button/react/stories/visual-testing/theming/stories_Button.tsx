@@ -1,15 +1,15 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, withSnapshotsEnabled} from '../../../../../../utils/storybook';
-import {TextInput} from '../../../../../text-input/react';
-import {TextInputStates} from '../stories_TextInput';
+import {Button} from '../../../';
+import {ButtonStates} from '../stories_Button';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Text Input',
-  component: TextInput,
+  title: 'Testing|React/Buttons/Button/Button',
+  component: Button,
   parameters: {
     canvasProviderDecorator: {
       theme: customColorTheme,
     },
   },
 });
-export const TextInputThemedStates = TextInputStates;
+export const ButtonThemedStates = ButtonStates;

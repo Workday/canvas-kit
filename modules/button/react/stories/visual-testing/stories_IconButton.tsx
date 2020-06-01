@@ -10,7 +10,7 @@ import {
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {IconButton} from '../../index';
-import {Container} from './utils';
+import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
   title: 'Testing|React/Buttons/Button/Icon Button',
@@ -35,25 +35,7 @@ export const IconButtonStates = () => (
                 {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
               ],
             })}
-            columnProps={permutateProps(
-              {
-                className: [
-                  {label: 'Default', value: ''},
-                  {label: 'Hover', value: 'hover'},
-                  {label: 'Focus', value: 'focus'},
-                  {label: 'Focus Hover', value: 'focus hover'},
-                  {label: 'Active', value: 'active'},
-                  {label: 'Active Hover', value: 'active hover'},
-                ],
-                disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-              },
-              props => {
-                if (props.disabled && !['', 'hover'].includes(props.className)) {
-                  return false;
-                }
-                return true;
-              }
-            )}
+            columnProps={stateTableColumnProps}
           >
             {props => (
               <Container
