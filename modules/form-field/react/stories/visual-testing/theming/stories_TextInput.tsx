@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const TextInputThemedStates = () => TextInputStates;
+export const TextInputThemedStates = TextInputStates;

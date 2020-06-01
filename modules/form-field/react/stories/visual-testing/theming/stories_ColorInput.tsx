@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const ColorInputThemedStates = () => ColorInputStates;
+export const ColorInputThemedStates = ColorInputStates;

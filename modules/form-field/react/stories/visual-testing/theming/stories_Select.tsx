@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const SelectThemedStates = () => SelectStates;
+export const SelectThemedStates = SelectStates;

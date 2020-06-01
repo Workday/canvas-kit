@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const TextAreaThemedStates = () => TextAreaStates;
+export const TextAreaThemedStates = TextAreaStates;

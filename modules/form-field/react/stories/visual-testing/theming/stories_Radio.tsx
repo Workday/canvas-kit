@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const RadioThemedStates = () => RadioStates;
+export const RadioThemedStates = RadioStates;

@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const CheckboxThemedStates = () => CheckboxStates;
+export const CheckboxThemedStates = CheckboxStates;

@@ -13,4 +13,4 @@ export default {
     },
   },
 };
-export const SwitchThemedStates = () => SwitchStates;
+export const SwitchThemedStates = SwitchStates;
