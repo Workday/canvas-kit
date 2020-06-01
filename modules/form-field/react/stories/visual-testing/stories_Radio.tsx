@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
-  ControlledComponentWrapper,
   ComponentStatesTable,
   permutateProps,
   enableSnapshots,
@@ -79,12 +78,10 @@ export const RadioStates = () => (
             labelPosition={FormField.LabelPosition.Left}
             {...props}
           >
-            <ControlledComponentWrapper>
-              <RadioGroup name="contact">
-                <Radio id="1" value="email" label="E-mail" />
-                <Radio id="2" value="fax" label="Fax (disabled)" disabled={true} />
-              </RadioGroup>
-            </ControlledComponentWrapper>
+            <RadioGroup name="contact">
+              <Radio id="1" value="email" label="E-mail" />
+              <Radio id="2" value="fax" label="Fax (disabled)" disabled={true} />
+            </RadioGroup>
           </FormField>
         )}
       </ComponentStatesTable>

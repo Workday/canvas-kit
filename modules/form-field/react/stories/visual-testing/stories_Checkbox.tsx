@@ -4,7 +4,6 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  customColorTheme,
   enableSnapshots,
 } from '../../../../../utils/storybook';
 
