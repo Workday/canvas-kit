@@ -6,7 +6,6 @@ import {
   permutateProps,
   enableSnapshots,
 } from '../../../../../utils/storybook';
-
 import {TextInput} from '../../../../text-input/react';
 
 export default {

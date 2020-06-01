@@ -1,6 +1,6 @@
 /// <reference path="../../../../../../typings.d.ts" />
 import {customColorTheme, enableSnapshots} from '../../../../../../utils/storybook';
-import {TextInput} from '@workday/canvas-kit-react-text-input';
+import {TextInput} from '../../../../../text-input/react';
 import {TextInputStates} from '../stories_TextInput';
 
 export default {
