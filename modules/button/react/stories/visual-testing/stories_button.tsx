@@ -5,19 +5,16 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {Button} from '../../index';
 import {Container} from './utils';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Buttons/Button/Button',
-  parameters: {
-    component: Button,
-    ...enableSnapshots(),
-  },
-};
+  component: Button,
+});
 
 export const ButtonStates = () => (
   <StaticStates>

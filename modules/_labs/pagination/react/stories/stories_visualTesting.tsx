@@ -1,15 +1,12 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
-import {ComponentStatesTable, enableSnapshots} from '../../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Labs/Pagination',
-  parameters: {
-    component: Pagination,
-    ...enableSnapshots(),
-  },
-};
+  component: Pagination,
+});
 
 export const PaginationStates = () => {
   const defaults = {

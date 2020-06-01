@@ -4,17 +4,14 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 import {TextInput} from '../../../../text-input/react';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Inputs/Text Input',
   component: TextInput,
-  parameters: {
-    ...enableSnapshots(),
-  },
-};
+});
 
 export const TextInputStates = () => (
   <StaticStates>

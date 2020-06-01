@@ -4,17 +4,14 @@ import {jsx} from '@emotion/core';
 import {colors} from '@workday/canvas-kit-react-core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {action} from '@storybook/addon-actions';
-import {ComponentStatesTable, enableSnapshots} from '../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '../index';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Popups/Toast',
-  parameters: {
-    component: Toast,
-    ...enableSnapshots(),
-  },
-};
+  component: Toast,
+});
 
 export const ToastStates = () => (
   <StaticStates>

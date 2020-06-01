@@ -3,18 +3,15 @@
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {action} from '@storybook/addon-actions';
-import {ComponentStatesTable, enableSnapshots} from '../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Popup} from '../index';
 import {PopupPadding} from '../lib/Popup';
 import {depth} from '@workday/canvas-kit-react-core';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Popups/Popup',
   component: Popup,
-  parameters: {
-    ...enableSnapshots(),
-  },
-};
+});
 
 export const PopupStates = () => (
   <StaticStates>

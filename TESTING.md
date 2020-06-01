@@ -282,17 +282,29 @@ storiesOf('Some Category', module)
     /** story contents */
   })
   .addParameter({
-    ...enableSnapshots(),
+    chromatic: {
+      disable: false,
+    },
   });
+```
 
+```tsx
 // CSF
+export default withSnapshotsEnabled({
+  // ...
+});
+
+// OR
+
 export const MyVisualStory = () => {
   // story contents
 };
 
 MyVisualStory.story = {
   parameters: {
-    ...enableSnapshots(),
+    chromatic: {
+      disable: false,
+    },
   },
 };
 ```

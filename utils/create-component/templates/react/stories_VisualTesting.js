@@ -5,16 +5,13 @@ module.exports = (storyPath, pascalCaseName, rootPath) => `
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {ComponentStatesTable, permutateProps, enableSnapshots} from '../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps, withSnapshotsEnabled} from '../../../../utils/storybook';
 import ${pascalCaseName} from '../index';
 
-export default {
+export default withSnapshotsEnabled({
   title: '${storyPath}',
-  parameters: {
-    component: ${pascalCaseName},
-    ...enableSnapshots(),
-  },
-};
+  component: ${pascalCaseName},
+});
 
 export const ${pascalCaseName}States = () => (
   <StaticStates>

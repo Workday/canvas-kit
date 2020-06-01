@@ -4,7 +4,7 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 import Select from '../lib/Select';
 import SelectBase from '../lib/SelectBase';
@@ -32,13 +32,10 @@ const normalizedOptions = options.map(option => {
   };
 });
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Labs/Select',
-  parameters: {
-    component: Select,
-    ...enableSnapshots(),
-  },
-};
+  component: Select,
+});
 
 export const SelectStates = () => (
   <StaticStates>

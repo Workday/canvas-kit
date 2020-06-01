@@ -11,9 +11,7 @@ import README from '../README.md';
 export default {
   title: '${storyPath}',
   decorators: [withReadme(README)],
-  parameters: {
-    component: ${pascalCaseName},
-  },
+  component: ${pascalCaseName},
 };
 
 export const Default = () => <${pascalCaseName} />

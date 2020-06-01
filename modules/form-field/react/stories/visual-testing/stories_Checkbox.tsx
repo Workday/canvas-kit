@@ -4,18 +4,15 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 
 import {Checkbox} from '../../../../checkbox/react';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Inputs/Checkbox',
   component: Checkbox,
-  parameters: {
-    ...enableSnapshots(),
-  },
-};
+});
 
 export const CheckboxStates = () => (
   <StaticStates>
@@ -67,9 +64,3 @@ export const CheckboxStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
-// .addParameters({
-//   canvasProviderDecorator: {
-//     theme: customColorTheme,
-//   },
-// })
-// .add('Theming', () => <CheckboxStates />);

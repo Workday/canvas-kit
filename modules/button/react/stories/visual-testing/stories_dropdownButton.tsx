@@ -5,18 +5,15 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 import {DropdownButton} from '../../index';
 import {Container} from './utils';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Buttons/Button/Dropdown',
-  parameters: {
-    component: DropdownButton,
-    ...enableSnapshots(),
-  },
-};
+  component: DropdownButton,
+});
 
 export const DropdownStates = () => (
   <StaticStates>

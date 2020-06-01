@@ -4,19 +4,16 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 
 import {ColorInput} from '../../../../color-picker/react';
 import FormField from '../../index';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Inputs/Color Picker/Color Input',
   component: ColorInput,
-  parameters: {
-    ...enableSnapshots(),
-  },
-};
+});
 
 export const ColorInputStates = () => (
   <StaticStates>

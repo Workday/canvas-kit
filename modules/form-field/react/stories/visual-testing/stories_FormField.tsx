@@ -4,19 +4,16 @@ import FormField from '../../lib/FormField';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {TextInput} from '../../../../text-input/react';
 import {FormFieldLabelPosition} from '../../lib/types';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Inputs/Form Field',
   component: FormField,
-  parameters: {
-    ...enableSnapshots(),
-  },
-};
+});
 
 export const FormFieldStates = () => (
   <StaticStates>

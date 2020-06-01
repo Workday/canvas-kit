@@ -4,18 +4,15 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 
 import {Select, SelectOption} from '../../../../select/react';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Inputs/Select',
   component: Select,
-  parameters: {
-    ...enableSnapshots(),
-  },
-};
+});
 
 export const SelectStates = () => (
   <StaticStates>

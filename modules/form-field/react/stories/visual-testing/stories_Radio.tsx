@@ -4,7 +4,7 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 
 import {Radio, RadioGroup} from '../../../../radio/react';
@@ -13,13 +13,10 @@ import FormField from '../../index';
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Inputs/Radio',
   component: FormField,
-  parameters: {
-    ...enableSnapshots(),
-  },
-};
+});
 
 export const RadioStates = () => (
   <div>

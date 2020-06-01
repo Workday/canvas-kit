@@ -3,18 +3,15 @@ import * as React from 'react';
 import {
   ComponentStatesTable,
   permutateProps,
-  enableSnapshots,
+  withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '../../../../switch/react';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing|React/Inputs/Switch',
   component: Switch,
-  parameters: {
-    ...enableSnapshots(),
-  },
-};
+});
 
 export const SwitchStates = () => (
   <StaticStates>
