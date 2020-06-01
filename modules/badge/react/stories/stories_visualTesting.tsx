@@ -2,22 +2,18 @@
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {ComponentStatesTable} from '../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {CountBadge} from '../index';
 import README from '../README.md';
 
-export default {
-  title: 'Components|Indicators/Badge/CountBadge/React/',
+export default withSnapshotsEnabled({
+  title: 'Testing|React/Indicators/Badge/CountBadge',
+  component: CountBadge,
   decorators: [withReadme(README)],
-  parameters: {
-    chromatic: {
-      disable: false,
-    },
-  },
-};
+});
 
-export const VisualTesting = () => {
+export const CountBadgeStates = () => {
   return (
     <ComponentStatesTable
       columnProps={[
