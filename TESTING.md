@@ -289,24 +289,17 @@ storiesOf('Some Category', module)
 ```
 
 ```tsx
-// CSF
+// CSF - All stories in file
 export default withSnapshotsEnabled({
-  // ...
+  // CSF details (title, component, etc.)
 });
 
-// OR
-
+// or CSF - Specific story
 export const MyVisualStory = () => {
   // story contents
 };
 
-MyVisualStory.story = {
-  parameters: {
-    chromatic: {
-      disable: false,
-    },
-  },
-};
+withSnapshotsEnabled(MyVisualStory);
 ```
 
 Not all visual states are application states (E.g. `focus`, `hover`, and `active` on a button
