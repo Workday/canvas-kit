@@ -42,7 +42,7 @@ const ToolbarDropdownButton = ({
   const StyledCustomIcon = styled(SystemIcon)({
     marginLeft: `${spacing.xxxs} !important`,
     marginRight: 0,
-    width: 18,
+    width: 18, // decrease the space between a custom icon and the chevron per design
   });
 
   return (

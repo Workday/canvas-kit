@@ -47,7 +47,7 @@ storiesOf('Components|Buttons/Button/React/Toolbar Buttons', module)
       <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} disabled={true} />
       <h3>Custom Element Toolbar Dropdown Button</h3>
       <ToolbarDropdownButton aria-label="Activity Stream">
-        <h1 style={customElementStyles}>Normal</h1>
+        <div style={customElementStyles}>Normal</div>
       </ToolbarDropdownButton>
     </div>
   ));
