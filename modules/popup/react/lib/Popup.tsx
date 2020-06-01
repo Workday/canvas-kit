@@ -5,9 +5,13 @@ import isPropValid from '@emotion/is-prop-valid';
 import uuid from 'uuid/v4';
 
 import Card from '@workday/canvas-kit-react-card';
-import {IconButton, IconButtonSize} from '@workday/canvas-kit-react-button';
-import {CanvasDepthValue, spacing} from '@workday/canvas-kit-react-core';
-import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react-common';
+import {IconButton} from '@workday/canvas-kit-react-button';
+import {CanvasDepthValue, depth as depthValues, spacing} from '@workday/canvas-kit-react-core';
+import {
+  TransformOrigin,
+  getTranslateFromOrigin,
+  PickRequired,
+} from '@workday/canvas-kit-react-common';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export enum PopupPadding {
@@ -18,20 +22,24 @@ export enum PopupPadding {
 
 export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * Aria label will override aria-labelledby, it is used if there is no heading or we need custom label for popup
+   */
+  ariaLabel?: string;
+  /**
    * The padding of the Popup. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
    */
-  padding: PopupPadding;
+  padding?: PopupPadding;
   /**
    * The origin from which the Popup will animate.
    * @default {horizontal: 'center', vertical: 'top'}
    */
-  transformOrigin: TransformOrigin | null;
+  transformOrigin?: TransformOrigin | null;
   /**
-   * The size of the Popup close button. Accepts `Small` or `Medium`.
-   * @default IconButtonSize.Medium
+   * The size of the Popup close button. Accepts `small` or `medium`.
+   * @default 'medium'
    */
-  closeIconSize: IconButtonSize;
+  closeIconSize?: 'small' | 'medium';
   /**
    * The ref to the underlying popup container element. Use this to check click targets against when closing the Popup.
    */
@@ -57,7 +65,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    * The `aria-label` for the Popup close button.
    * @default Close
    */
-  closeLabel: string;
+  closeButtonAriaLabel?: string;
 }
 
 const closeIconSpacing = spacing.xs;
@@ -80,7 +88,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 
 const Container = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'width',
-})<Pick<PopupProps, 'transformOrigin' | 'width'>>(
+})<PickRequired<PopupProps, 'transformOrigin', 'width'>>(
   {
     position: 'relative',
     maxWidth: `calc(100vw - ${spacing.l})`,
@@ -99,6 +107,21 @@ const Container = styled('div', {
   }
 );
 
+const getHeadingId = (heading: React.ReactNode, id: string) => (heading ? id : undefined);
+
+const getAriaLabel = (
+  ariaLabel: string | undefined,
+  headingId: string | undefined
+): object | undefined => {
+  if (ariaLabel) {
+    return {['aria-label']: ariaLabel};
+  }
+  if (headingId) {
+    return {['aria-labelledby']: headingId};
+  }
+  return undefined;
+};
+
 const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
   {
     position: 'absolute',
@@ -112,62 +135,50 @@ const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
 export default class Popup extends React.Component<PopupProps> {
   static Padding = PopupPadding;
 
-  static defaultProps = {
-    padding: Popup.Padding.l,
-    closeIconSize: IconButton.Size.Medium,
-    closeLabel: 'Close',
-    transformOrigin: {
-      horizontal: 'center',
-      vertical: 'top',
-    },
-  };
-
   private id = uuid();
   private closeButtonRef = React.createRef<any>();
 
   public render() {
     const {
+      padding = Popup.Padding.l,
+      closeIconSize = 'medium',
+      closeButtonAriaLabel = 'Close',
+      transformOrigin = {
+        horizontal: 'center',
+        vertical: 'top',
+      } as const,
+      depth = depthValues[2],
       handleClose,
-      padding,
       width,
       heading,
-      depth,
-      closeIconSize,
-      transformOrigin,
       popupRef,
-      closeLabel,
+      ariaLabel,
       ...elemProps
     } = this.props;
-
+    const headingId = getHeadingId(heading, this.id);
     return (
       <Container
         transformOrigin={transformOrigin}
         width={width}
         role="dialog"
-        aria-labelledby={heading ? this.id : undefined}
         ref={popupRef}
+        {...getAriaLabel(ariaLabel, headingId)}
         {...elemProps}
       >
         {handleClose && (
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton
               data-close="close" // Allows for grabbing focus to the close button rather than relying on the aria label "Close" which will change based on different languages
-              ref={this.closeButtonRef}
+              buttonRef={this.closeButtonRef}
               variant={IconButton.Variant.Plain}
               size={closeIconSize}
               onClick={handleClose}
               icon={xIcon}
-              aria-label={closeLabel}
+              aria-label={closeButtonAriaLabel}
             />
           </CloseIconContainer>
         )}
-        <Card
-          depth={depth}
-          heading={heading}
-          headingId={heading ? this.id : undefined}
-          width="100%"
-          padding={padding}
-        >
+        <Card depth={depth} heading={heading} headingId={headingId} width="100%" padding={padding}>
           {this.props.children}
         </Card>
       </Container>

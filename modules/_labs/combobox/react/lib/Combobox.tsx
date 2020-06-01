@@ -41,7 +41,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * The function called when the Combobox text input changes.
    */
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * The function called when the Combobox text input focuses.
    */
@@ -121,7 +121,7 @@ const getOptionId = (baseId?: string, index?: number) => `${baseId}-${optionIdPa
 const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
   React.Children.map(children, child => {
-    if (child == null || typeof child === 'boolean' || child === {}) {
+    if (!child || typeof child === 'boolean' || child === {}) {
       text += '';
     } else if (typeof child === 'string' || typeof child === 'number') {
       text += child.toString();
@@ -215,7 +215,7 @@ const Combobox = ({
   }, [autocompleteItems, isFocused, value]);
 
   const handleAutocompleteClick = (
-    event: React.SyntheticEvent,
+    event: React.KeyboardEvent | React.MouseEvent,
     menuItemProps: MenuItemProps
   ): void => {
     if (menuItemProps.isDisabled) {
@@ -225,7 +225,7 @@ const Combobox = ({
     setIsFocused(false);
     setInputValue(getTextFromElement(menuItemProps.children));
     if (menuItemProps.onClick) {
-      menuItemProps.onClick(event);
+      menuItemProps.onClick(event as React.MouseEvent);
     }
   };
 
@@ -280,7 +280,7 @@ const Combobox = ({
       case 'ArrowUp':
       case 'Up': // IE/Edge specific value
         const upIndex =
-          selectedAutocompleteIndex != null ? selectedAutocompleteIndex - 1 : lastItem;
+          selectedAutocompleteIndex !== null ? selectedAutocompleteIndex - 1 : lastItem;
         nextIndex = upIndex < 0 ? lastItem : upIndex;
         event.stopPropagation();
         event.preventDefault();
@@ -289,7 +289,7 @@ const Combobox = ({
       case 'ArrowDown':
       case 'Down': // IE/Edge specific value
         const downIndex =
-          selectedAutocompleteIndex != null ? selectedAutocompleteIndex + 1 : firstItem;
+          selectedAutocompleteIndex !== null ? selectedAutocompleteIndex + 1 : firstItem;
         nextIndex = downIndex >= autoCompleteItemCount ? firstItem : downIndex;
         event.stopPropagation();
         event.preventDefault();
@@ -301,7 +301,7 @@ const Combobox = ({
         break;
 
       case 'Enter':
-        if (selectedAutocompleteIndex != null) {
+        if (selectedAutocompleteIndex !== null) {
           const item = autocompleteItems[selectedAutocompleteIndex];
           handleAutocompleteClick(event, item.props);
           if (item.props.isDisabled) {
@@ -341,7 +341,7 @@ const Combobox = ({
       inputRef: inputRef,
       'aria-autocomplete': 'list',
       'aria-activedescendant':
-        selectedAutocompleteIndex != null
+        selectedAutocompleteIndex !== null
           ? getOptionId(componentId, selectedAutocompleteIndex)
           : '',
       onChange: handleSearchInputChange,

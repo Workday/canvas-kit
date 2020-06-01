@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-fonts",
-  "version": "3.8.0",
+  "version": "4.0.0-beta.4",
   "description": "Fonts for canvas-kit-react",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -15,16 +15,25 @@
   "files": [
     "dist/",
     "lib/",
-    "index.ts"
+    "index.ts",
+    "ts3.5/**/*"
   ],
+  "typesVersions": {
+    "<=3.5": {
+      "*": [
+        "ts3.5/*"
+      ]
+    }
+  },
   "scripts": {
     "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
+    "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6",
+    "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
+    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "depcheck": "node ../../../utils/check-dependencies-exist.js"
   },
   "keywords": [

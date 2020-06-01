@@ -1,6 +1,11 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  ErrorType,
+  errorRing,
+  styled,
+  Themeable,
+} from '@workday/canvas-kit-react-common';
 import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 
 export interface TextAreaProps
@@ -23,7 +28,7 @@ export interface TextAreaProps
   /**
    * The function called when the TextArea state changes.
    */
-  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   /**
    * The placeholder text of the TextArea.
    */
@@ -37,7 +42,7 @@ export interface TextAreaProps
    * The resize constraints of the TextArea.
    * @default TextArea.ResizeDirection.Both
    */
-  resize: TextAreaResizeDirection;
+  resize?: TextAreaResizeDirection;
   /**
    * The value of the TextArea.
    */
@@ -74,8 +79,8 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
       borderColor: inputColors.hoverBorder,
     },
     '&:focus:not([disabled])': {
-      borderColor: theme.palette.common.focusOutline,
-      boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
+      borderColor: theme.canvas.palette.common.focusOutline,
+      boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
       outline: 'none',
     },
     '&:disabled': {
@@ -99,12 +104,8 @@ export default class TextArea extends React.Component<TextAreaProps> {
   static ErrorType = ErrorType;
   static ResizeDirection = TextAreaResizeDirection;
 
-  static defaultProps = {
-    resize: TextAreaResizeDirection.Both,
-  };
-
   render() {
-    const {grow, inputRef, resize, ...inputProps} = this.props;
+    const {resize = TextAreaResizeDirection.Both, grow, inputRef, ...inputProps} = this.props;
 
     return <TextAreaContainer ref={inputRef} grow={grow} resize={resize} {...inputProps} />;
   }

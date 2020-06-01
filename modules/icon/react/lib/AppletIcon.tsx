@@ -3,7 +3,6 @@ import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react-core
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/core';
 import Icon from './Icon';
-import {SpanProps} from './types';
 
 export interface AppletIconStyles {
   /**
@@ -67,11 +66,11 @@ export interface AppletIconProps extends AppletIconStyles {
   size?: number;
 }
 
-export default class AppletIcon extends React.Component<SpanProps & AppletIconProps> {
+export default class AppletIcon extends React.Component<AppletIconProps> {
   public static Colors = BrandingColor;
 
   public render() {
-    const {icon, color, size, ...elemProps} = this.props;
+    const {size = 92, icon, color, ...elemProps} = this.props;
 
     return (
       <Icon
@@ -79,7 +78,7 @@ export default class AppletIcon extends React.Component<SpanProps & AppletIconPr
         type={CanvasIconTypes.Applet}
         styles={appletIconStyles({color})}
         size={size}
-        elemProps={elemProps}
+        {...elemProps}
       />
     );
   }

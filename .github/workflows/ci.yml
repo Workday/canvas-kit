@@ -7,7 +7,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required to retrieve git history
       - uses: actions/setup-node@v1
         with:
           node-version: 10.x
@@ -38,12 +40,18 @@ jobs:
         env:
           CYPRESS_CACHE_FOLDER: .cache/cypress
 
+      - name: Setup TSC matcher
+        run: node ./utils/add-matchers.js
+
         # Keep steps separate for Github Actions annotation matching: https://github.com/actions/setup-node/blob/83c9f7a7df54d6b57455f7c57ac414f2ae5fb8de/src/setup-node.ts#L26-L33
       - name: Lint
         run: yarn lint
 
       - name: Dependency Check
         run: yarn depcheck
+
+      - name: Type Check
+        run: yarn typecheck
 
       - name: Unit tests
         run: yarn test
@@ -52,7 +60,7 @@ jobs:
         run: yarn build-storybook --quiet
 
       - name: Start Server
-        run: yarn http-server docs -p 9001 & npx wait-on http://localhost:9001
+        run: npx http-server docs -p 9001 & npx wait-on http://localhost:9001
 
       - uses: chromaui/action@v1
         with:

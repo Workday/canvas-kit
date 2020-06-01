@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button} from '@workday/canvas-kit-react-button';
+import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
 import {Popper} from '@workday/canvas-kit-react-common';
 import {Popup} from '../index';
 import README from '../README.md';
@@ -23,9 +23,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
     const {anchorEl, open} = this.state;
     return (
       <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Button variant={Button.Variant.Delete} onClick={this.handleClick}>
-          Delete Item
-        </Button>
+        <DeleteButton onClick={this.handleClick}>Delete Item</DeleteButton>
         <Popper placement={'bottom'} open={open} anchorElement={anchorEl}>
           <Popup
             width={400}
@@ -37,16 +35,10 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
               Are you sure you'd like to delete the item titled 'My Item'?
             </div>
 
-            <Button
-              style={{marginRight: '16px'}}
-              onClick={this.handleSubmit}
-              variant={Button.Variant.Delete}
-            >
+            <DeleteButton style={{marginRight: '16px'}} onClick={this.handleSubmit}>
               Delete
-            </Button>
-            <Button onClick={this.handleSubmit} variant={Button.Variant.Secondary}>
-              Cancel
-            </Button>
+            </DeleteButton>
+            <Button onClick={this.handleSubmit}>Cancel</Button>
           </Popup>
         </Popper>
       </div>
@@ -65,7 +57,7 @@ class PopupWrapper extends React.Component<{}, PopupWrapperState> {
     });
   };
 
-  private handleClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+  private handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const {currentTarget} = e;
     this.setState({
       anchorEl: currentTarget,
@@ -90,12 +82,10 @@ storiesOf('Components|Popups/Popup/React', module)
           Are you sure you'd like to delete the item titled 'My Item'?
         </div>
 
-        <Button style={{marginRight: '16px'}} onClick={() => null} variant={Button.Variant.Delete}>
+        <DeleteButton style={{marginRight: '16px'}} onClick={() => null}>
           Delete
-        </Button>
-        <Button onClick={() => null} variant={Button.Variant.Secondary}>
-          Cancel
-        </Button>
+        </DeleteButton>
+        <Button onClick={() => null}>Cancel</Button>
       </Popup>
     ),
     {

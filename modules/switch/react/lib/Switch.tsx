@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import uuid from 'uuid/v4';
 import {
   ErrorType,
-  themedFocusRing,
+  focusRing,
   mouseFocusBehavior,
   getErrorColors,
+  styled,
+  Themeable,
 } from '@workday/canvas-kit-react-common';
 import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react-core';
 
@@ -14,7 +15,7 @@ export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLIn
    * If true, set the Switch to the on state.
    * @default false
    */
-  checked: boolean;
+  checked?: boolean;
   /**
    * If true, set the Switch to the disabled state.
    * @default false
@@ -22,12 +23,13 @@ export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLIn
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying checkbox input element.
+   * @default A uniquely generated id by uuid()
    */
   id?: string;
   /**
    * The function called when the Switch state changes.
    */
-  onChange?: (e: React.SyntheticEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * The value of the Switch.
    */
@@ -79,7 +81,7 @@ const SwitchInput = styled('input')<SwitchProps>(
       '&:focus': {
         outline: 'none',
         '& ~ div:first-of-type': {
-          ...themedFocusRing(theme, {separation: 2, animate: false}),
+          ...focusRing({separation: 2, animate: false}, theme),
         },
       },
       '& ~ div:first-of-type': {
@@ -89,7 +91,7 @@ const SwitchInput = styled('input')<SwitchProps>(
           0 0 0 5px ${errorColors.outer}`,
       },
       '&:focus ~ div:first-of-type': {
-        ...themedFocusRing(theme, {separation: 2, animate: false}),
+        ...focusRing({separation: 2, animate: false}, theme),
       },
     };
     return {
@@ -122,10 +124,18 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     padding: '0px 2px',
     transition: 'background-color 200ms ease',
   },
-  ({checked, disabled, theme}) => {
+  ({
+    checked,
+    disabled,
+    theme: {
+      canvas: {
+        palette: {primary: themePrimary},
+      },
+    },
+  }) => {
     if (checked) {
       return {
-        backgroundColor: disabled ? theme.palette.primary.light : theme.palette.primary.main,
+        backgroundColor: disabled ? themePrimary.light : themePrimary.main,
       };
     } else {
       return {
@@ -149,15 +159,19 @@ const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({checked}) => 
 export default class Switch extends React.Component<SwitchProps> {
   static ErrorType = ErrorType;
 
-  public static defaultProps = {
-    checked: false,
-  };
-
   private id = uuid();
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {checked, disabled, id = this.id, inputRef, onChange, value, ...elemProps} = this.props;
+    const {
+      checked = false,
+      id = this.id,
+      disabled = false,
+      inputRef,
+      onChange,
+      value,
+      ...elemProps
+    } = this.props;
 
     return (
       <SwitchContainer>

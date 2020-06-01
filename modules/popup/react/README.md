@@ -2,9 +2,8 @@
 
 A Popup component that allows you to render content above another.
 
-Note: This popup does not include a positioning engined. In our example we use Material UIs popper
-component to wrap our Popup component and position it, which is a wrapper to Popper.js. For
-reference: https://material-ui.com/api/popper/
+Note: This popup does not include a positioning engine. In our example we use our popper utility,
+which is a wrapper to Popper.js, to wrap our Popup component and position it.
 
 ## Installation
 
@@ -22,11 +21,11 @@ yarn add @workday/canvas-kit-react-popup
 
 ```tsx
 import * as React from 'react';
-import Popper from '@material-ui/core/Popper';
+import {Popper} from '@workday/canvas-kit-react-common';
 import {Popup} from '@workday/canvas-kit-react-popup';
 
 // We use Popper from Material UI for our positioning
-<Popper placement={'bottom'} open={this.state.open} anchorEl={anchorEl}>
+<Popper placement={'bottom'} open={this.state.open} anchorElement={anchorEl}>
   <Popup
     width={300}
     heading={'Popup Title'}

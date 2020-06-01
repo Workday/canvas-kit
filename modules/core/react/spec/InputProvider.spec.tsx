@@ -41,12 +41,12 @@ const testInput = (
   map[eventType](mockEvent);
 
   if (!provideIntent) {
-    expect(component.getDOMNode().getAttribute('data-whatinput')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatinput')).toBe(expectedInputType);
   } else if (expectedInputType) {
-    expect(component.getDOMNode().getAttribute('data-whatinput')).toBe(expectedInputType);
-    expect(component.getDOMNode().getAttribute('data-whatintent')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatinput')).toBe(expectedInputType);
+    expect(document.body.getAttribute('data-whatintent')).toBe(expectedInputType);
   } else if (expectedIntentType) {
-    expect(component.getDOMNode().getAttribute('data-whatintent')).toBe(expectedIntentType);
+    expect(document.body.getAttribute('data-whatintent')).toBe(expectedIntentType);
   }
   component.unmount();
 };
@@ -130,84 +130,6 @@ describe('InputProvider', () => {
     testInput(mockEvent, expectedInputType);
   });
 
-  test(`MSPointerDown (w/ pointerType == 2) event should result in touch input/intent`, () => {
-    const eventType = InputEventType.MSPointerDown;
-    const expectedInputType = InputType.Touch;
-    const pointerType = 2;
-    const mockEvent = getMockInputEvent(eventType, expectedInputType, pointerType);
-    const shimmedWindowProps = {
-      PointerEvent: false,
-      MSPointerEvent: true,
-    };
-
-    testInput(mockEvent, expectedInputType, expectedInputType, shimmedWindowProps);
-  });
-
-  test(`MSPointerDown (w/ pointerType == 3) event should result in touch input/intent`, () => {
-    const eventType = InputEventType.MSPointerDown;
-    const expectedInputType = InputType.Touch;
-    const pointerType = 3;
-    const mockEvent = getMockInputEvent(eventType, expectedInputType, pointerType);
-    const shimmedWindowProps = {
-      PointerEvent: false,
-      MSPointerEvent: true,
-    };
-
-    testInput(mockEvent, expectedInputType, expectedInputType, shimmedWindowProps);
-  });
-
-  test(`MSPointerDown (w/ pointerType == 4) event should result in mouse input/intent`, () => {
-    const eventType = InputEventType.MSPointerDown;
-    const expectedInputType = InputType.Mouse;
-    const pointerType = 4;
-    const mockEvent = getMockInputEvent(eventType, expectedInputType, pointerType);
-    const shimmedWindowProps = {
-      PointerEvent: false,
-      MSPointerEvent: true,
-    };
-
-    testInput(mockEvent, expectedInputType, expectedInputType, shimmedWindowProps);
-  });
-
-  test(`MSPointerMove (w/ pointerType == 2) event should result in touch intent`, () => {
-    const eventType = InputEventType.MSPointerMove;
-    const expectedIntentType = InputType.Touch;
-    const pointerType = 2;
-    const mockEvent = getMockInputEvent(eventType, expectedIntentType, pointerType);
-    const shimmedWindowProps = {
-      PointerEvent: false,
-      MSPointerEvent: true,
-    };
-
-    testInput(mockEvent, undefined, expectedIntentType, shimmedWindowProps);
-  });
-
-  test(`MSPointerMove (w/ pointerType == 3) event should result in touch intent`, () => {
-    const eventType = InputEventType.MSPointerMove;
-    const expectedIntentType = InputType.Touch;
-    const pointerType = 3;
-    const mockEvent = getMockInputEvent(eventType, expectedIntentType, pointerType);
-    const shimmedWindowProps = {
-      PointerEvent: false,
-      MSPointerEvent: true,
-    };
-
-    testInput(mockEvent, undefined, expectedIntentType, shimmedWindowProps);
-  });
-
-  test(`MSPointerMove (w/ pointerType == 4) event should result in mouse intent`, () => {
-    const eventType = InputEventType.MSPointerMove;
-    const expectedIntentType = InputType.Mouse;
-    const pointerType = 4;
-    const mockEvent = getMockInputEvent(eventType, expectedIntentType, pointerType);
-    const shimmedWindowProps = {
-      PointerEvent: false,
-      MSPointerEvent: true,
-    };
-
-    testInput(mockEvent, undefined, expectedIntentType, shimmedWindowProps);
-  });
-
   test(`pointerdown (w/ pointerType == mouse) event should result in mouse input/intent`, () => {
     const eventType = InputEventType.PointerDown;
     const expectedInputType = InputType.Mouse;
@@ -278,15 +200,18 @@ describe('InputProvider', () => {
     testInput(mockEvent, expectedInputType, expectedInputType, shimmedWindowProps);
   });
 
-  test(`nested input provider should not attach events and remove itself from the DOM`, () => {
+  test(`Multiple input provider should only attach once to the dom`, () => {
+    const ref = React.createRef<HTMLButtonElement>();
     const component = mount(
-      <InputProvider>
-        <InputProvider>
-          <h1>Test</h1>
-        </InputProvider>
-      </InputProvider>
+      <div>
+        <InputProvider></InputProvider>
+        <h1>Test</h1>
+        <button ref={ref}></button>
+        <InputProvider container={ref}></InputProvider>
+      </div>
     );
-    expect(component.find('.wdc-input-provider').length).toBe(1);
+
+    expect(document.querySelectorAll('[data-whatinput]').length).toBe(1);
     component.unmount();
   });
 });

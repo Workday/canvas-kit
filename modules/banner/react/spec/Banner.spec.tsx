@@ -16,6 +16,12 @@ describe('Banner', () => {
 describe('Banner Accessibility', () => {
   test('Banner should pass axe DOM accessibility guidelines', async () => {
     const html = ReactDOMServer.renderToString(<Banner />);
-    expect(await axe(html)).toHaveNoViolations();
+    expect(
+      await axe(html, {
+        rules: {
+          region: {enabled: false},
+        },
+      })
+    ).toHaveNoViolations();
   });
 });

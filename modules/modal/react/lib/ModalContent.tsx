@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import tabTrappingKey from 'focus-trap-js';
@@ -7,6 +8,10 @@ import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
 import {ModalWidth} from './Modal';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Aria label will override aria-labelledby, it is used if there is no heading or we need custom label for popup
+   */
+  ariaLabel?: string;
   /**
    * The padding of the Modal. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
@@ -46,6 +51,17 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * it will make the modal heading focusable and focus on that instead.
    */
   firstFocusRef?: React.RefObject<HTMLElement>;
+  /**
+   * The containing element for the Modal elements. The Modal uses
+   * {@link https://reactjs.org/docs/portals.html Portals} to place the DOM elements
+   * of the Modal in a different place in the DOM to prevent issues with overflowed containers.
+   * When the modal is opened, `aria-hidden` will be added to siblings to hide background
+   * content from assistive technology like it is visibly hidden from sighted users. This property
+   * should be set to the element that the application root goes - not containing element of content.
+   * This should be a sibling or higher than the header and navigation elements of the application.
+   * @default document.body
+   */
+  container: HTMLElement;
 }
 
 const fadeIn = keyframes`
@@ -140,13 +156,15 @@ const useInitialFocus = (
 };
 
 const ModalContent = ({
+  ariaLabel,
+  closeOnEscape = true,
+  width = ModalWidth.s,
+  padding = PopupPadding.l,
+  container = document.body,
   handleClose,
   children,
-  closeOnEscape,
   firstFocusRef,
-  width,
   heading,
-  padding,
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -172,7 +190,28 @@ const ModalContent = ({
     }
   };
 
-  return (
+  React.useEffect(() => {
+    const siblings = [...((container.children as any) as HTMLElement[])].filter(
+      el => el !== modalRef.current!.parentElement
+    );
+    const prevAriaHidden = siblings.map(el => el.getAttribute('aria-hidden'));
+    siblings.forEach(el => {
+      el.setAttribute('aria-hidden', 'true');
+    });
+
+    return () => {
+      siblings.forEach((el, index) => {
+        const prev = prevAriaHidden[index];
+        if (prev) {
+          el.setAttribute('aria-hidden', prev);
+        } else {
+          el.removeAttribute('aria-hidden');
+        }
+      });
+    };
+  }, []);
+
+  const content = (
     <Container onClick={handleOutsideClick} {...elemProps}>
       <Popup
         popupRef={modalRef}
@@ -181,11 +220,15 @@ const ModalContent = ({
         handleClose={handleClose}
         padding={padding}
         transformOrigin={transformOrigin}
+        aria-modal={true}
+        ariaLabel={ariaLabel}
       >
         {children}
       </Popup>
     </Container>
   );
+
+  return ReactDOM.createPortal(content, container);
 };
 
 export default ModalContent;

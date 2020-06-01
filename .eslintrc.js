@@ -1,5 +1,3 @@
-const prettierConfig = require('./.prettierrc.js');
-
 module.exports = {
   env: {
     browser: true,
@@ -23,7 +21,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: ['./tsconfig.json', './cypress/tsconfig.json'],
+    project: ['./tsconfig.eslint.json', './cypress/tsconfig.json'],
     sourceType: 'module',
   },
   settings: {
@@ -37,12 +35,12 @@ module.exports = {
   plugins: [
     'workday-custom-rules',
     '@typescript-eslint',
-    '@typescript-eslint/tslint',
     'jest',
     'react',
     'prettier',
     'react-hooks',
     'emotion',
+    'jsdoc',
   ],
   rules: {
     'workday-custom-rules/restricted-imports': 'error',
@@ -60,11 +58,13 @@ module.exports = {
     'default-case': 'error',
     'dot-notation': 'error',
     'eol-last': 'off',
+    eqeqeq: 'error',
     'guard-for-in': 'error',
     'linebreak-style': 'off',
     'new-parens': 'off',
     'newline-per-chained-call': 'off',
     'no-caller': 'error',
+    'no-duplicate-imports': 'error',
     'no-debugger': 'error',
     'no-empty': 'error',
     'no-empty-function': 'error',
@@ -75,44 +75,16 @@ module.exports = {
     'no-multiple-empty-lines': 'off',
     'no-new-wrappers': 'error',
     'no-param-reassign': 'error',
+    'no-redeclare': 'error',
     'no-undef-init': 'error',
+    'no-unused-expressions': 'error',
     'no-unused-labels': 'error',
-    'no-use-before-define': 'warn', // Decide on this
+    'no-use-before-define': 'off', // TS takes care of this one...
     'no-var': 'error',
     'prefer-const': 'error',
-    'quote-props': 'off',
     'space-before-function-paren': 'off',
     'react/jsx-no-bind': 'off', // Keep perf implications in mind, but was giving too many warnings and hurting readability
     curly: 'error',
     radix: 'error',
-    'prettier/prettier': ['error', prettierConfig],
-    // NOTE: Commented out everything below that caused problems. A lot of this is likely included in the stuff above.
-    '@typescript-eslint/tslint/config': [
-      'error',
-      {
-        rules: {
-          // align: [true, 'parameters', 'arguments', 'statements'],
-          'comment-format': [true, 'check-space'],
-          // deprecation: true, // turned off for button deprecation
-          'jsdoc-format': true, // eslint-plugin-jsdoc
-          // 'jsx-no-string-ref': true,
-          // 'jsx-self-close': true,
-          'no-duplicate-imports': true,
-          'no-duplicate-variable': true,
-          // 'no-shadowed-variable': true,
-          'no-unused-expression': true,
-          'one-line': [true, 'check-catch', 'check-open-brace', 'check-whitespace'],
-          'triple-equals': [true, 'allow-null-check'],
-          typedef: [true, 'parameter', 'property-declaration'],
-          'variable-name': [
-            true,
-            'ban-keywords',
-            'check-format',
-            'allow-leading-underscore',
-            'allow-pascal-case',
-          ],
-        },
-      },
-    ],
   },
 };

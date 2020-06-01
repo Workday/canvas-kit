@@ -1,4 +1,4 @@
-import {CanvasTheme} from '@workday/canvas-kit-labs-react-core';
+import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
 import {CSSObject} from '@emotion/core';
 import {colors, inputColors} from '@workday/canvas-kit-react-core';
@@ -8,10 +8,10 @@ const isAccessible = (foreground: string, background: string = colors.frenchVani
   return chroma.contrast(foreground, background) >= 3;
 };
 
-export function getErrorColors(error?: ErrorType, theme?: CanvasTheme) {
+export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   if (error === ErrorType.Error) {
     if (theme) {
-      const palette = theme.palette.error;
+      const palette = theme.canvas.palette.error;
       return {
         outer: isAccessible(palette.main) ? palette.main : palette.darkest,
         inner: palette.main,
@@ -24,7 +24,7 @@ export function getErrorColors(error?: ErrorType, theme?: CanvasTheme) {
     }
   } else if (error === ErrorType.Alert) {
     if (theme) {
-      const palette = theme.palette.alert;
+      const palette = theme.canvas.palette.alert;
       return {
         outer: isAccessible(palette.main) ? palette.main : palette.darkest,
         inner: palette.main,
@@ -40,7 +40,7 @@ export function getErrorColors(error?: ErrorType, theme?: CanvasTheme) {
   }
 }
 
-export default function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSObject {
+export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme): CSSObject {
   if (error !== ErrorType.Error && error !== ErrorType.Alert) {
     return {};
   }
@@ -60,7 +60,7 @@ export default function errorRing(error?: ErrorType, theme?: CanvasTheme): CSSOb
       borderColor: errorColors.outer,
       boxShadow: `${errorBoxShadow},
         0 0 0 2px ${colors.frenchVanilla100},
-        0 0 0 4px ${theme ? theme.palette.common.focusOutline : inputColors.focusBorder}`,
+        0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : inputColors.focusBorder}`,
     },
   };
 }

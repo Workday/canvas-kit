@@ -17,16 +17,12 @@ export interface SelectOptionProps extends React.OptionHTMLAttributes<HTMLOption
    * If true, set the SelectOption to the disabled state.
    * @default false
    */
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export default class SelectOption extends React.Component<SelectOptionProps> {
-  static defaultProps = {
-    disabled: false,
-  };
-
   public render() {
-    const {value, label, disabled, ...elemProps} = this.props;
+    const {disabled = false, value, label, ...elemProps} = this.props;
 
     return (
       <option value={value} label={label} disabled={disabled} {...elemProps}>

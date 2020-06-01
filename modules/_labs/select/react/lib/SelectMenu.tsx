@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-labs-react-core';
-import {ErrorType} from '@workday/canvas-kit-react-common';
 import {CSSObject, keyframes} from '@emotion/core';
+import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
 import {colors, borderRadius, inputColors, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {SelectProps} from './Select';
 
 interface SelectMenuProps
-  extends React.HTMLAttributes<HTMLUListElement>,
+  extends Themeable,
+    React.HTMLAttributes<HTMLUListElement>,
     Pick<SelectProps, 'error'> {
   /**
    * If true, enable animation on the SelectMenu.
@@ -36,17 +36,17 @@ const fadeOutAnimation = keyframes`
 
 export const menuFadeDuration = 200;
 
-const menuBorderCSS = (error?: ErrorType): CSSObject => {
-  let borderColor = inputColors.focusBorder;
+const menuBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
+  let borderColor = theme.canvas.palette.common.focusOutline;
   let dividerBorderColor = borderColor;
   let dividerBorderWidth = 1;
 
   if (error === ErrorType.Error) {
-    borderColor = inputColors.error.border;
-    dividerBorderColor = inputColors.error.border;
+    borderColor = theme.canvas.palette.error.main;
+    dividerBorderColor = borderColor;
   } else if (error === ErrorType.Alert) {
-    borderColor = colors.cantaloupe600;
-    dividerBorderColor = inputColors.warning.border;
+    borderColor = theme.canvas.palette.alert.darkest;
+    dividerBorderColor = theme.canvas.palette.alert.main;
     dividerBorderWidth = 2;
   }
 
@@ -67,14 +67,14 @@ const menuBorderCSS = (error?: ErrorType): CSSObject => {
   };
 };
 
-const menuListBorderCSS = (error?: ErrorType): CSSObject => {
-  let borderColor = inputColors.focusBorder;
+const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
+  let borderColor = theme.canvas.palette.common.focusOutline;
   let borderWidth = 1;
 
   if (error === ErrorType.Error) {
-    borderColor = inputColors.error.border;
+    borderColor = theme.canvas.palette.error.main;
   } else if (error === ErrorType.Alert) {
-    borderColor = inputColors.warning.border;
+    borderColor = theme.canvas.palette.alert.main;
     borderWidth = 2;
   }
 
@@ -87,7 +87,7 @@ const menuListBorderCSS = (error?: ErrorType): CSSObject => {
   };
 };
 
-const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHiding'>>(
+const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHiding' | 'theme'>>(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${inputColors.border}`,
@@ -101,8 +101,8 @@ const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHid
     width: '100%',
     zIndex: 1,
   },
-  ({error}) => ({
-    ...menuBorderCSS(error),
+  ({error, theme}) => ({
+    ...menuBorderStyles(theme, error),
   }),
   ({isAnimated}) =>
     isAnimated && {
@@ -119,19 +119,17 @@ const Menu = styled('div')<Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHid
     }
 );
 
-const MenuList = styled('ul')<Pick<SelectProps, 'error'>>(
+const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
   {
     listStyle: 'none',
     margin: 0,
     maxHeight: 200,
+    outline: 'none',
     overflowY: 'auto',
     padding: 0,
-    '&:focus': {
-      outline: 'none',
-    },
   },
-  ({error}) => ({
-    ...menuListBorderCSS(error),
+  ({error, theme}) => ({
+    ...menuListBorderStyles(theme, error),
   })
 );
 
