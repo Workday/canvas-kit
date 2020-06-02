@@ -1,16 +1,15 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import styled from '@emotion/styled';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
-import {IconButtonProps} from './IconButton';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {ToolbarIconButtonProps} from './ToolbarIconButton';
 
 export interface ToolbarDropdownButtonProps
-  extends Omit<IconButtonProps, 'size' | 'variant' | 'toggled' | 'onToggleChange'>,
+  extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
     Themeable {}
 
 const ToolbarDropdownButton = ({
