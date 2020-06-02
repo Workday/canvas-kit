@@ -761,12 +761,11 @@ Default: `undefined`
 
 ---
 
-# Toolbar Buttons
-
 # ToolbarIconButton
 
 > Button containing an icon. Icon may be a component from
-> [`canvas-kit-react-icon`](../../icon/react) or an svg element that is used in toolbars.
+> [`canvas-kit-react-icon`](../../icon/react) or an svg element. Note: This button is intended to be
+> used within a toolbar.
 
 ## Usage
 
@@ -832,8 +831,9 @@ Default: `undefined`
 # ToolbarDropdownButton
 
 > Button containing an icon or custom element. Icon may be a component from
-> [`canvas-kit-react-icon`](../../icon/react) or an svg element that is used in toolbars. By
-> default, the button has a down chevron to the right indicating that it's a dropdown button.
+> [`canvas-kit-react-icon`](../../icon/react) or an svg element. By default, the button has a down
+> chevron to the right indicating that it's a dropdown button. Note: This button is intended to be
+> used within a toolbar.
 
 ## Usage
 

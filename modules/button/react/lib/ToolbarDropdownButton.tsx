@@ -33,17 +33,15 @@ const ToolbarDropdownButton = ({
       width: 20,
       height: 20,
     },
+    '& .wdc-toolbar-dropdown-btn-arrow': {
+      margin: '0 2px 0 0',
+    },
+    '& .wdc-toolbar-dropdown-btn-custom-icon': {
+      marginLeft: `${spacing.xxxs}`,
+      marginRight: 0,
+      width: 18, // decrease the space between a custom icon and the chevron per design
+    },
   };
-
-  const StyledChevronIcon = styled(SystemIcon)({
-    margin: '0 2px 0 0 !important',
-  });
-
-  const StyledCustomIcon = styled(SystemIcon)({
-    marginLeft: `${spacing.xxxs} !important`,
-    marginRight: 0,
-    width: 18, // decrease the space between a custom icon and the chevron per design
-  });
 
   return (
     <ButtonContainer
@@ -53,8 +51,12 @@ const ToolbarDropdownButton = ({
       aria-label={iconArialabel}
       {...elemProps}
     >
-      {icon ? <StyledCustomIcon icon={icon} /> : children}
-      <StyledChevronIcon icon={chevronDownSmallIcon} />
+      {icon ? (
+        <SystemIcon className={'wdc-toolbar-dropdown-btn-custom-icon'} icon={icon} />
+      ) : (
+        children
+      )}
+      <SystemIcon className={'wdc-toolbar-dropdown-btn-arrow'} icon={chevronDownSmallIcon} />
     </ButtonContainer>
   );
 };
