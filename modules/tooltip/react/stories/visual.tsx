@@ -63,11 +63,11 @@ export const Placements = () => {
             containerElement={containerElement}
             placement={placement}
             popperOptions={{
-              modifiers: [
+              modifiers: {
                 // keep the tooltips from moving - no matter what!
-                {name: 'flip', enabled: false},
-                {name: 'preventOverflow', enabled: false},
-              ],
+                flip: {enabled: false},
+                preventOverflow: {enabled: false},
+              },
             }}
             open={open}
             anchorElement={ref}
