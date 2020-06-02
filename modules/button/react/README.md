@@ -655,7 +655,7 @@ import {IconButton} from '@workday/canvas-kit-react-button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-<IconButton icon={activityStreamIcon} title="Activity Stream" aria-label="Activity Stream" />;
+<IconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
 
 ## Static Properties
@@ -773,11 +773,7 @@ Default: `undefined`
 import * as React from 'react';
 import {ToolbarIconButton} from '@workday/canvas-kit-react-button';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-<ToolbarIconButton
-  icon={activityStreamIcon}
-  title="Activity Stream"
-  aria-label="Activity Stream"
-/>;
+<ToolbarIconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
 
 ## Static Properties
@@ -841,11 +837,7 @@ Default: `undefined`
 import * as React from 'react';
 import {ToolbarDropdownButton} from '@workday/canvas-kit-react-button';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-<ToolbarDropdownButton
-  icon={activityStreamIcon}
-  title="Activity Stream"
-  aria-label="Activity Stream"
-/>;
+<ToolbarDropdownButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
 
 ## Static Properties
