@@ -150,9 +150,9 @@ export const Spacing = () => (
       <div css={{display: 'flex'}}>
         <SizeLabel>
           {size}
-          <span>({spacing[size]})</span>
+          <span>({(spacing as any)[size]})</span>
         </SizeLabel>
-        <Shape size={spacing[size]} />
+        <Shape size={(spacing as any)[size]} />
       </div>
     ))}
   </React.Fragment>
@@ -206,28 +206,25 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
     }
 );
 
-const colorNames = [
-  ...new Set( // Remove duplicates using Set
-    Object.keys(colors)
-      .map(color => color.replace(/\d+$/, '')) // Remove shade numbers
-      .filter(key => key !== 'primary' && key !== 'gradients')
-  ),
-];
+const colorNames = Object.keys(colors).map(color => color.replace(/\d+$/, '')); // Remove shade numbers
+colorNames
+  .filter((item, pos) => colorNames.indexOf(item) === pos)
+  .filter(key => key !== 'primary' && key !== 'gradients');
 
 export const Colors = () => (
   <Palettes>
     {colorNames.map(colorName => (
       <Palette key={colorName}>
-        <Swatch bg={colors[`${colorName}500`]} primary={true}>
+        <Swatch bg={(colors as any)[`${colorName}500`]} primary={true}>
           <div>{colorName}</div>
           <div>500</div>
         </Swatch>
         {[1, 2, 3, 4, 5, 6].map(level => {
           const color = `${colorName}${level}00`;
           return (
-            <Swatch bg={colors[color]} key={color}>
+            <Swatch bg={(colors as any)[color]} key={color}>
               <span>{level}00</span>
-              <span css={type.variant.mono}>{colors[color]}</span>
+              <span css={type.variant.mono}>{(colors as any)[color]}</span>
             </Swatch>
           );
         })}
