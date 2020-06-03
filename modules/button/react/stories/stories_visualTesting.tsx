@@ -341,51 +341,6 @@ const buttonStories = [
       </React.Fragment>
     ),
   },
-  {
-    name: 'Toolbar Icon Button',
-    component: ToolbarIconButton,
-    states: (
-      <React.Fragment>
-        {[false, true].map(toggled => (
-          <div key={`toggled-${toggled}`}>
-            <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
-            {getButtonStates({}, (props: any) => (
-              <Container>
-                <ToolbarIconButton
-                  toggled={toggled}
-                  icon={activityStreamIcon}
-                  aria-label="Play"
-                  {...props}
-                  onChange={() => {}} // eslint-disable-line no-empty-function
-                />
-              </Container>
-            ))}
-          </div>
-        ))}
-      </React.Fragment>
-    ),
-  },
-  {
-    name: 'Toolbar Dropdown Button',
-    component: ToolbarIconButton,
-    states: (
-      <React.Fragment>
-        <div>
-          <h3>Default</h3>
-          {getButtonStates({}, (props: any) => (
-            <Container>
-              <ToolbarDropdownButton
-                icon={activityStreamIcon}
-                aria-label="Play"
-                {...props}
-                onChange={() => {}} // eslint-disable-line no-empty-function
-              />
-            </Container>
-          ))}
-        </div>
-      </React.Fragment>
-    ),
-  },
 ];
 
 buttonStories.forEach(({name, component, states}) => {
