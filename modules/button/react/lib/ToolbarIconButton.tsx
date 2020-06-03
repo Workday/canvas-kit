@@ -10,6 +10,20 @@ export interface ToolbarIconButtonProps
   extends Omit<IconButtonProps, 'size' | 'variant'>,
     Themeable {}
 
+const containerStyles = {
+  padding: 0,
+  minWidth: spacing.l,
+  width: spacing.l,
+  height: spacing.l,
+  borderRadius: borderRadius.m,
+  ['& .wd-icon']: {
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    width: 20,
+    height: 20,
+  },
+};
+
 const ToolbarIconButton = ({
   theme = useTheme(),
   buttonRef,
@@ -32,20 +46,6 @@ const ToolbarIconButton = ({
       }
     }
   }, [toggled, onToggleChange]);
-
-  const containerStyles = {
-    padding: 0,
-    minWidth: spacing.l,
-    width: spacing.l,
-    height: spacing.l,
-    borderRadius: borderRadius.m,
-    ['& .wd-icon']: {
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      width: '20px',
-      height: '20px',
-    },
-  };
 
   return (
     <ButtonContainer
