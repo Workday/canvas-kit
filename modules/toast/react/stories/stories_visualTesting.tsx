@@ -34,12 +34,20 @@ storiesOf('Components|Popups/Toast/React/Visual Testing', module)
               actionText: 'View More Details',
             },
           },
+          {
+            label: 'With Action Link and Multiple Lines',
+            props: {
+              children: 'Your workbook was successfully processed. Congratulation!',
+              onActionClick: action('action button clicked'),
+              actionText: 'View More Details',
+            },
+          },
         ]}
         columnProps={[{label: 'Default', props: {}}]}
       >
-        {props => (
+        {({children, ...props}) => (
           <Toast transformOrigin={null} aria-label="Play" {...props}>
-            Your workbook was successfully processed.
+            {children || 'Successfully processed.'}
           </Toast>
         )}
       </ComponentStatesTable>

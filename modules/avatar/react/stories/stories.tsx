@@ -7,8 +7,8 @@ import Avatar from '../index';
 import README from '../README.md';
 import {withKnobs} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
-
-const IMAGE_URL = 'https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png';
+// @ts-ignore: Cannot find module error
+import testAvatar from './test-avatar.png';
 
 const handleAvatarButtonClick = action('AvatarButton clicked');
 
@@ -51,17 +51,17 @@ storiesOf('Components|Indicators/Avatar/React/Default', module)
   .add('Image', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar as="div" size={Avatar.Size.xxl} url={IMAGE_URL} />
+      <Avatar as="div" size={Avatar.Size.xxl} url={testAvatar} />
       <h3>Extra Large</h3>
-      <Avatar as="div" size={Avatar.Size.xl} url={IMAGE_URL} />
+      <Avatar as="div" size={Avatar.Size.xl} url={testAvatar} />
       <h3>Large</h3>
-      <Avatar as="div" size={Avatar.Size.l} url={IMAGE_URL} />
+      <Avatar as="div" size={Avatar.Size.l} url={testAvatar} />
       <h3>Medium</h3>
-      <Avatar as="div" size={Avatar.Size.m} url={IMAGE_URL} />
+      <Avatar as="div" size={Avatar.Size.m} url={testAvatar} />
       <h3>Small</h3>
-      <Avatar as="div" size={Avatar.Size.s} url={IMAGE_URL} />
+      <Avatar as="div" size={Avatar.Size.s} url={testAvatar} />
       <h3>Extra Small</h3>
-      <Avatar as="div" size={Avatar.Size.xs} url={IMAGE_URL} />
+      <Avatar as="div" size={Avatar.Size.xs} url={testAvatar} />
     </div>
   ));
 
@@ -128,17 +128,17 @@ storiesOf('Components|Indicators/Avatar/React/Avatar Button', module)
   .add('Image', () => (
     <div className="story">
       <h3>Extra-Extra Large</h3>
-      <Avatar size={Avatar.Size.xxl} url={IMAGE_URL} onClick={handleAvatarButtonClick} />
+      <Avatar size={Avatar.Size.xxl} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Extra Large</h3>
-      <Avatar size={Avatar.Size.xl} url={IMAGE_URL} onClick={handleAvatarButtonClick} />
+      <Avatar size={Avatar.Size.xl} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Large</h3>
-      <Avatar size={Avatar.Size.l} url={IMAGE_URL} onClick={handleAvatarButtonClick} />
+      <Avatar size={Avatar.Size.l} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Medium</h3>
-      <Avatar size={Avatar.Size.m} url={IMAGE_URL} onClick={handleAvatarButtonClick} />
+      <Avatar size={Avatar.Size.m} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Small</h3>
-      <Avatar size={Avatar.Size.s} url={IMAGE_URL} onClick={handleAvatarButtonClick} />
+      <Avatar size={Avatar.Size.s} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Extra Small</h3>
-      <Avatar size={Avatar.Size.xs} url={IMAGE_URL} onClick={handleAvatarButtonClick} />
+      <Avatar size={Avatar.Size.xs} url={testAvatar} onClick={handleAvatarButtonClick} />
       <h3>Broken Link</h3>
       <Avatar url="/fake/path/to/image.png" onClick={handleAvatarButtonClick} />
     </div>

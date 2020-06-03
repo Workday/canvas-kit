@@ -59,13 +59,12 @@ const ToastSystemIcon = styled(SystemIcon)({
 });
 
 const ActionButton = styled('button')({
+  ...type.body2,
+  ...type.variant.link,
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',
-  padding: 0,
   marginTop: spacing.xxxs,
-  ...type.body2,
-  ...type.variant.link,
 });
 
 const Message = styled('div')({
