@@ -91,7 +91,9 @@ const AutocompleteList = ({
     );
   };
 
-  if (autocompleteItems.length && 'header' in autocompleteItems[0]) {
+  if (!autocompleteItems.length) {
+    return null
+  } else if (autocompleteItems[0].hasOwnProperty('header')) {
     let itemIndex = 0;
     return (
       <Autocomplete {...listBoxProps} tabIndex={0}>
@@ -117,7 +119,7 @@ const AutocompleteList = ({
         })}
       </Autocomplete>
     );
-  } else if (autocompleteItems.length) {
+  } else {
     return (
       <Autocomplete {...listBoxProps}>
         {(autocompleteItems as React.ReactElement<MenuItemProps>[]).map(
@@ -125,8 +127,6 @@ const AutocompleteList = ({
         )}
       </Autocomplete>
     );
-  } else {
-    return null;
   }
 };
 

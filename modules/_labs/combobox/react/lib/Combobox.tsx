@@ -192,7 +192,7 @@ const Combobox = ({
   const formLabelId = labelId || randomLabelId;
 
   const getInteractiveAutocompleteItems = (): React.ReactElement<MenuItemProps>[] => {
-    if (autocompleteItems && autocompleteItems.length && 'header' in autocompleteItems[0]) {
+    if (autocompleteItems && autocompleteItems.length && autocompleteItems[0].hasOwnProperty('header')) {
       return flatten((autocompleteItems as ComboBoxMenuItemGroup[]).map(group => group.items));
     }
     return (autocompleteItems as React.ReactElement<MenuItemProps>[]) || [];
