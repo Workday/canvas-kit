@@ -92,7 +92,7 @@ const AutocompleteList = ({
   };
 
   if (!autocompleteItems.length) {
-    return null
+    return null;
   } else if (autocompleteItems[0].hasOwnProperty('header')) {
     let itemIndex = 0;
     return (
