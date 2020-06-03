@@ -19,25 +19,29 @@ export default withSnapshotsEnabled({
 
 export const ToolbarIconButtonStates = () => (
   <React.Fragment>
-    {[false, true].map(toggled => (
-      <div>
-        <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
-        <StaticStates>
-          <ComponentStatesTable rowProps={permutateProps({})} columnProps={stateTableColumnProps}>
-            {props => (
-              <Container>
-                <ToolbarIconButton
-                  toggled={toggled}
-                  icon={playCircleIcon}
-                  aria-label="Play"
-                  {...props}
-                  onChange={() => {}} // eslint-disable-line no-empty-function
-                />
-              </Container>
-            )}
-          </ComponentStatesTable>
-        </StaticStates>
-      </div>
-    ))}
+    <div>
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={permutateProps({
+            toggled: [
+              {value: true, label: 'Toggled on'},
+              {value: false, label: 'Toggled off'},
+            ],
+          })}
+          columnProps={stateTableColumnProps}
+        >
+          {props => (
+            <Container>
+              <ToolbarIconButton
+                icon={playCircleIcon}
+                aria-label="Play"
+                {...props}
+                onChange={() => {}} // eslint-disable-line no-empty-function
+              />
+            </Container>
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
+    </div>
   </React.Fragment>
 );

@@ -19,24 +19,25 @@ export default withSnapshotsEnabled({
 
 export const ToolbarDropdownButtonStates = () => (
   <React.Fragment>
-    {[false, true].map(toggled => (
-      <div>
-        <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
-        <StaticStates>
-          <ComponentStatesTable rowProps={permutateProps({})} columnProps={stateTableColumnProps}>
-            {props => (
-              <Container>
-                <ToolbarDropdownButton
-                  icon={playCircleIcon}
-                  aria-label="Play"
-                  {...props}
-                  onChange={() => {}} // eslint-disable-line no-empty-function
-                />
-              </Container>
-            )}
-          </ComponentStatesTable>
-        </StaticStates>
-      </div>
-    ))}
+    <div>
+      <h3>Default</h3>
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={[{label: 'Default', props: {}}]}
+          columnProps={stateTableColumnProps}
+        >
+          {props => (
+            <Container>
+              <ToolbarDropdownButton
+                icon={playCircleIcon}
+                aria-label="Play"
+                {...props}
+                onChange={() => {}} // eslint-disable-line no-empty-function
+              />
+            </Container>
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
+    </div>
   </React.Fragment>
 );

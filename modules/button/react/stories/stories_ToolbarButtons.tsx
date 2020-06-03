@@ -27,10 +27,10 @@ storiesOf('Components|Buttons/Button/React/Toolbar Buttons', module)
 
     return (
       <div className="story">
-        <h3>Toolbar Square</h3>
+        <h3>Toolbar Icon Button</h3>
         <ToolbarIconButton aria-label="Activity Stream" icon={activityStreamIcon} />
         <ToolbarIconButton aria-label="Activity Stream" icon={activityStreamIcon} disabled={true} />
-        <h3>Toggleable Toolbar Square</h3>
+        <h3>Toggleable Toolbar Icon Button</h3>
         <ToolbarIconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
@@ -42,7 +42,7 @@ storiesOf('Components|Buttons/Button/React/Toolbar Buttons', module)
   })
   .add('Toolbar Dropdown Button', () => (
     <div className="story">
-      <h3>Toolbar Dropdown Icon Button</h3>
+      <h3>Toolbar Dropdown Button</h3>
       <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} />
       <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} disabled={true} />
       <h3>Custom Element Toolbar Dropdown Button</h3>
