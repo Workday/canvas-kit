@@ -9,7 +9,7 @@ export interface TooltipProps {
    * The origin from which the Tooltip will animate.
    * @default {horizontal: 'center', vertical: 'top'}
    */
-  transformOrigin: TransformOrigin;
+  transformOrigin: TransformOrigin | null;
   /**
    * The unique id of the Tooltip.
    */
@@ -46,14 +46,19 @@ const TooltipContainer = styled('div')<TooltipProps>(
       textDecoration: 'underline',
     },
   },
-  ({transformOrigin}) => ({
-    animation: tooltipAnimation(transformOrigin),
-    animationDuration: '150ms',
-    animationTimingFunction: 'ease-out',
-    transformOrigin: transformOrigin
-      ? `${transformOrigin.vertical} ${transformOrigin.horizontal}`
-      : 'top center',
-  })
+  ({transformOrigin}) => {
+    if (transformOrigin === null) {
+      return {};
+    }
+    return {
+      animation: tooltipAnimation(transformOrigin),
+      animationDuration: '150ms',
+      animationTimingFunction: 'ease-out',
+      transformOrigin: transformOrigin
+        ? `${transformOrigin.vertical} ${transformOrigin.horizontal}`
+        : 'top center',
+    };
+  }
 );
 
 export default class Tooltip extends React.Component<TooltipProps, {}> {
