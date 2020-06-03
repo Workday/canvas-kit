@@ -45,5 +45,8 @@
     "@workday/canvas-depth-web": "^0.16.4",
     "@workday/canvas-space-web": "^0.15.5",
     "element-closest": "^3.0.2"
+  },
+  "devDependencies": {
+    "@workday/canvas-kit-react-common": "^3.8.0"
   }
 }
