@@ -92,6 +92,72 @@ export const Type = () => (
   </React.Fragment>
 );
 
+const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
+  {
+    ...type.h4,
+    margin: spacing.m,
+    background: colors.blueberry400,
+    color: colors.frenchVanilla100,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    '& span': {
+      ...type.body2,
+      ...type.variant.mono,
+      display: 'block',
+      color: colors.blueberry100,
+    },
+  },
+  ({radius}) => ({
+    borderRadius: radius || borderRadius.m,
+  }),
+  ({size}) => ({
+    width: size || spacing.xxl,
+    height: size || spacing.xxl,
+  })
+);
+
+const SizeLabel = styled('div')({
+  ...type.h4,
+  margin: spacing.s,
+  width: 80,
+  '& span': {
+    ...type.body2,
+    ...type.variant.mono,
+    ...type.variant.hint,
+    display: 'block',
+  },
+});
+
+export const BorderRadius = () => (
+  <React.Fragment>
+    {Object.keys(borderRadius).map(size => (
+      <div css={{display: 'flex'}}>
+        <SizeLabel>
+          {size}
+          <span>({borderRadius[size]})</span>
+        </SizeLabel>
+        <Shape radius={borderRadius[size]} />
+      </div>
+    ))}
+  </React.Fragment>
+);
+
+export const Spacing = () => (
+  <React.Fragment>
+    {Object.keys(spacing).map(size => (
+      <div css={{display: 'flex'}}>
+        <SizeLabel>
+          {size}
+          <span>({spacing[size]})</span>
+        </SizeLabel>
+        <Shape size={spacing[size]} />
+      </div>
+    ))}
+  </React.Fragment>
+);
+
 const Palettes = styled('div')({
   display: 'flex',
   margin: -20,
