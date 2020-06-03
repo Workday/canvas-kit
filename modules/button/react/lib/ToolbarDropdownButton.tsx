@@ -12,6 +12,28 @@ export interface ToolbarDropdownButtonProps
   extends Omit<ToolbarIconButtonProps, 'toggled' | 'onToggleChange'>,
     Themeable {}
 
+const containerStyles = {
+  padding: spacing.zero,
+  minWidth: spacing.l,
+  width: 'auto',
+  height: spacing.l,
+  borderRadius: borderRadius.m,
+  '& .wd-icon': {
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    width: 20,
+    height: 20,
+  },
+  '& .wdc-toolbar-dropdown-btn-arrow': {
+    margin: '0 2px 0 0',
+  },
+  '& .wdc-toolbar-dropdown-btn-custom-icon': {
+    marginLeft: `${spacing.xxxs}`,
+    marginRight: 0,
+    width: 18, // decrease the space between a custom icon and the chevron per design
+  },
+};
+
 const ToolbarDropdownButton = ({
   theme = useTheme(),
   buttonRef,
@@ -20,28 +42,6 @@ const ToolbarDropdownButton = ({
   children,
   ...elemProps
 }: ToolbarDropdownButtonProps) => {
-  const containerStyles = {
-    padding: spacing.zero,
-    minWidth: spacing.l,
-    width: 'auto',
-    height: spacing.l,
-    borderRadius: borderRadius.m,
-    '& .wd-icon': {
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      width: 20,
-      height: 20,
-    },
-    '& .wdc-toolbar-dropdown-btn-arrow': {
-      margin: '0 2px 0 0',
-    },
-    '& .wdc-toolbar-dropdown-btn-custom-icon': {
-      marginLeft: `${spacing.xxxs}`,
-      marginRight: 0,
-      width: 18, // decrease the space between a custom icon and the chevron per design
-    },
-  };
-
   return (
     <ButtonContainer
       colors={getToolbarDropdownButtonColors(theme)}
