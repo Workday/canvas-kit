@@ -139,7 +139,7 @@ const useInitialFocus = (
   modalRef: React.RefObject<HTMLElement>,
   firstFocusRef: React.RefObject<HTMLElement> | undefined
 ) => {
-  const handlerRef = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const handlerElem = document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
   React.useLayoutEffect(() => {
     if (modalRef.current) {
@@ -148,8 +148,10 @@ const useInitialFocus = (
       elem.focus();
     }
     return () => {
-      if (handlerRef) {
-        handlerRef.focus();
+      if (handlerElem) {
+        setTimeout(() => {
+          handlerElem.focus();
+        }, 300);
       }
     };
   }, [modalRef, firstFocusRef]);
@@ -192,8 +194,9 @@ const ModalContent = ({
 
   React.useEffect(() => {
     const siblings = [...((container.children as any) as HTMLElement[])].filter(
-      el => el !== modalRef.current!.parentElement
+      el => el.tagName.toLowerCase() !== 'script' && el !== modalRef.current!.parentElement
     );
+
     const prevAriaHidden = siblings.map(el => el.getAttribute('aria-hidden'));
     siblings.forEach(el => {
       el.setAttribute('aria-hidden', 'true');
