@@ -77,7 +77,7 @@ function fillPalette(
     palette.lightest ||
     (palette.main && shiftColor(light, ColorDirection.Brighten)) ||
     defaultPalette.lightest;
-  const contrast = palette.contrast || pickForegroundColor(main);
+  const contrast = palette.contrast || pickForegroundColor(main) || defaultPalette.contrast;
 
   return {
     lightest,

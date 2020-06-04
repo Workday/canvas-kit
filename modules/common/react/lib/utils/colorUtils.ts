@@ -19,7 +19,7 @@ export const pickForegroundColor = (
   darkColor: string = colors.blackPepper600,
   lightColor: string = colors.frenchVanilla100
 ) => {
-  if (background) {
+  if (chroma.valid(background)) {
     return chroma.contrast(background, darkColor) >= chroma.contrast(background, lightColor)
       ? darkColor
       : lightColor;
