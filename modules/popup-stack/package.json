@@ -36,6 +36,12 @@
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
+  "devDependencies": {
+    "@emotion/core": "^10.0.28",
+    "@workday/canvas-kit-react-button": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-popup": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-tooltip": "4.0.0-beta.4"
+  },
   "keywords": [
     "canvas",
     "canvas-kit",
