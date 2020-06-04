@@ -311,7 +311,7 @@ const Combobox = ({
       itemIndex != null &&
       autocompleteItems &&
       autocompleteItems.length &&
-      'header' in autocompleteItems[0]
+      autocompleteItems[0].hasOwnProperty('header')
     ) {
       let count = 0;
       return (autocompleteItems as ComboBoxMenuItemGroup[]).findIndex(groups => {
