@@ -11,9 +11,7 @@ const Autocomplete = styled('ul')({
   margin: `${spacing.xxs} 0`,
 });
 
-const AccessibleHide = styled('span')({
-  ...accessibleHide,
-});
+const AccessibleHide = styled('span')(accessibleHide);
 
 interface AutocompleteListProps {
   /**
@@ -70,7 +68,7 @@ const AutocompleteList = ({
     groupMessage?: string
   ) => {
     const children = [
-      <AccessibleHide>{groupMessage}</AccessibleHide>,
+      <AccessibleHide key={`group-message-${itemIndex}`}>{groupMessage}</AccessibleHide>,
       ...React.Children.toArray(listboxItem.props.children),
     ];
 

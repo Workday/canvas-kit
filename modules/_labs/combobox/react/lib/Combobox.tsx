@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useCallback} from 'react';
 import styled from '@emotion/styled';
 import {CSSObject, jsx, keyframes} from '@emotion/core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
@@ -191,17 +191,6 @@ const Combobox = ({
   const componentId = id || randomComponentId;
   const formLabelId = labelId || randomLabelId;
 
-  const getInteractiveAutocompleteItems = (): React.ReactElement<MenuItemProps>[] => {
-    if (
-      autocompleteItems &&
-      autocompleteItems.length &&
-      autocompleteItems[0].hasOwnProperty('header')
-    ) {
-      return flatten((autocompleteItems as ComboBoxMenuItemGroup[]).map(group => group.items));
-    }
-    return (autocompleteItems as React.ReactElement<MenuItemProps>[]) || [];
-  };
-
   const [showGroupText, setShowGroupText] = useState(false);
 
   useEffect(() => {
@@ -212,45 +201,57 @@ const Combobox = ({
     }
   }, [interactiveAutocompleteItems, isFocused, value]);
 
-  const setInputValue = (newValue: string) => {
-    _setValue(newValue);
-    const inputDomElement = inputRef.current;
-    // Changing value prop programmatically doesn't fire an Synthetic event or trigger native onChange.
-    // We can not just update .value= in setState because React library overrides input value setter
-    // but we can call the function directly on the input as context.
-    // This will cause onChange events to fire no matter how value is updated.
-    if (inputDomElement) {
-      const nativeInputValue = Object.getOwnPropertyDescriptor(
-        Object.getPrototypeOf(inputDomElement),
-        'value'
-      );
-      if (nativeInputValue && nativeInputValue.set) {
-        nativeInputValue.set.call(inputDomElement, newValue);
-      }
+  const setInputValue = useCallback(
+    (newValue: string) => {
+      _setValue(newValue);
+      const inputDomElement = inputRef.current;
+      // Changing value prop programmatically doesn't fire an Synthetic event or trigger native onChange.
+      // We can not just update .value= in setState because React library overrides input value setter
+      // but we can call the function directly on the input as context.
+      // This will cause onChange events to fire no matter how value is updated.
+      if (inputDomElement) {
+        const nativeInputValue = Object.getOwnPropertyDescriptor(
+          Object.getPrototypeOf(inputDomElement),
+          'value'
+        );
+        if (nativeInputValue && nativeInputValue.set) {
+          nativeInputValue.set.call(inputDomElement, newValue);
+        }
 
-      let event: Event;
-      if (typeof Event === 'function') {
-        // modern browsers
-        event = new Event('input', {bubbles: true});
-      } else {
-        // IE 11
-        event = document.createEvent('Event');
-        event.initEvent('input', true);
-      }
+        let event: Event;
+        if (typeof Event === 'function') {
+          // modern browsers
+          event = new Event('input', {bubbles: true});
+        } else {
+          // IE 11
+          event = document.createEvent('Event');
+          event.initEvent('input', true);
+        }
 
-      inputDomElement.dispatchEvent(event);
-    }
-  };
+        inputDomElement.dispatchEvent(event);
+      }
+    },
+    [inputRef]
+  );
 
   useEffect(() => {
     if (initialValue) {
       setInputValue(initialValue);
     }
-  }, []);
+  }, [initialValue, setInputValue]);
 
   useEffect(() => {
-    const items = getInteractiveAutocompleteItems();
-    setInteractiveAutocompleteItems(items);
+    const getInteractiveAutocompleteItems = (): React.ReactElement<MenuItemProps>[] => {
+      if (
+        autocompleteItems &&
+        autocompleteItems.length &&
+        autocompleteItems[0].hasOwnProperty('header')
+      ) {
+        return flatten((autocompleteItems as ComboBoxMenuItemGroup[]).map(group => group.items));
+      }
+      return (autocompleteItems as React.ReactElement<MenuItemProps>[]) || [];
+    };
+    setInteractiveAutocompleteItems(getInteractiveAutocompleteItems());
   }, [autocompleteItems]);
 
   const handleAutocompleteClick = (

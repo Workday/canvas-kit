@@ -11,9 +11,7 @@ export interface StatusProps {
   announcementText?: string;
 }
 
-const Container = styled('div')({
-  ...accessibleHide,
-});
+const Container = styled('div')(accessibleHide);
 
 const Status = ({
   ariaLive = 'polite',
@@ -34,7 +32,7 @@ const Status = ({
     return () => {
       clearTimeout(clearText);
     };
-  }, [announcementText]);
+  }, [announcementText, expireMilliseconds]);
   return (
     <Container
       aria-live={ariaLive}
