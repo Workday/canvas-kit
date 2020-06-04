@@ -19,7 +19,7 @@ const customElementStyles = {
 storiesOf('Components|Buttons/Button/React/Toolbar Buttons', module)
   .addParameters({component: ToolbarIconButton})
   .addDecorator(withReadme(README))
-  .add('Toolbar Square', () => {
+  .add('Toolbar Icon Button', () => {
     const [toggled, setToggled] = React.useState<boolean | undefined>();
     const handleToggle = () => {
       setToggled(!toggled);
