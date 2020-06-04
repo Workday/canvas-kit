@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Rect} from '@popperjs/core';
 
 import {CSSObject, keyframes} from '@emotion/core';
@@ -13,7 +13,7 @@ import {
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core';
 
 import {SelectProps} from './Select';
-import {buttonBorderWidth, buttonDefaultWidth} from './SelectBase';
+import {buttonBorderWidth} from './SelectBase';
 
 interface SelectMenuProps
   extends Themeable,
@@ -57,17 +57,6 @@ interface SelectMenuProps
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */
   menuRef?: React.RefObject<HTMLUListElement>;
-}
-
-interface SelectMenuState {
-  // We need the width state to support the use case where the menu is
-  // displayed without user interaction (e.g., if we want to show the menu
-  // from the start). buttonRef.current is set to null during the first
-  // render, which prevents Popper from rendering due to the lack of a
-  // reference element. By the time componentDidMount runs, buttonRef.current
-  // will have been set -- we can then update the width state and trigger
-  // a render with the Popper menu.
-  width: number;
 }
 
 const fadeInAnimation = keyframes`
@@ -150,8 +139,7 @@ const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSS
 };
 
 const Menu = styled('div')<
-  Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHiding' | 'theme'> &
-    Pick<SelectMenuState, 'width'>
+  Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHiding' | 'theme'> & {width: number}
 >(
   {
     backgroundColor: colors.frenchVanilla100,
@@ -203,131 +191,141 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
   })
 );
 
-export default class SelectMenu extends React.Component<SelectMenuProps, SelectMenuState> {
-  static defaultProps = {
-    isAnimated: true,
-    isAutoFlipped: true,
-    isAutoFocused: true,
-    isFlipped: false,
-    isHidden: false,
-    isHiding: false,
-    width: buttonDefaultWidth,
-  };
+const generatePopperOptions = (
+  props: Pick<SelectMenuProps, 'isAutoFlipped' | 'isAutoFocused' | 'isFlipped' | 'menuRef'>
+) => {
+  const {isAutoFlipped, isAutoFocused, isFlipped, menuRef} = props;
 
-  state: Readonly<SelectMenuState> = {
-    width: 0,
-  };
+  let fallbackPlacements: Placement[] = [];
+  if (isAutoFlipped) {
+    fallbackPlacements = isFlipped ? ['bottom-start'] : ['top-start'];
+  }
 
-  private generatePopperOptions = () => {
-    const {isAutoFlipped, isAutoFocused, isFlipped, menuRef} = this.props;
-
-    let fallbackPlacements: Placement[] = [];
-    if (isAutoFlipped) {
-      fallbackPlacements = isFlipped ? ['bottom-start'] : ['top-start'];
-    }
-
-    const modifiers = [
-      {
-        name: 'flip',
-        options: {
-          fallbackPlacements,
+  const modifiers = [
+    {
+      name: 'flip',
+      options: {
+        fallbackPlacements,
+      },
+    },
+    {
+      name: 'offset',
+      options: {
+        offset: ({
+          placement,
+          reference,
+          popper,
+        }: {
+          placement: Placement;
+          reference: Rect;
+          popper: Rect;
+        }) => {
+          // Skid menu along the edge of the button to account
+          // for fractional x-positioning of the button (e.g.,
+          // if the button is in a horizontally-centered modal)
+          // and to ensure proper alignment between the button
+          // and the menu
+          const skidding = reference.x % 1 === 0 ? 0 : 1;
+          // Displace menu towards the button to obscure the bottom
+          // edge of the button and to create a smooth visual
+          // connection between the button and the menu
+          const distance = -parseInt(borderRadius.m, 10);
+          return [skidding, distance];
         },
       },
-      {
-        name: 'offset',
-        options: {
-          offset: ({
-            placement,
-            reference,
-            popper,
-          }: {
-            placement: Placement;
-            reference: Rect;
-            popper: Rect;
-          }) => {
-            // Skid menu along the edge of the button to account
-            // for fractional x-positioning of the button (e.g.,
-            // if the button is in a horizontally-centered modal)
-            // and to ensure proper alignment between the button
-            // and the menu
-            const skidding = reference.x % 1 === 0 ? 0 : 1;
-            // Displace menu towards the button to obscure the bottom
-            // edge of the button and to create a smooth visual
-            // connection between the button and the menu
-            const distance = -parseInt(borderRadius.m, 10);
-            return [skidding, distance];
-          },
-        },
-      },
-    ];
+    },
+  ];
 
-    return {
-      modifiers,
-      onFirstUpdate: () => {
-        if (isAutoFocused && menuRef && menuRef.current) {
-          menuRef.current.focus();
-        }
-      },
-    };
+  return {
+    modifiers,
+    onFirstUpdate: () => {
+      if (isAutoFocused && menuRef && menuRef.current) {
+        menuRef.current.focus();
+      }
+    },
   };
+};
 
-  private updateWidth = () => {
-    const {buttonRef} = this.props;
+const SelectMenu = (props: SelectMenuProps) => {
+  const {
+    buttonRef,
+    children,
+    error,
+    isAnimated,
+    isAutoFlipped,
+    isAutoFocused,
+    isFlipped,
+    isHidden,
+    isHiding,
+    menuRef,
+    ...elemProps
+  } = props;
+
+  const [width, setWidth] = useState(0);
+
+  const handleWidthChange = () => {
     if (buttonRef.current) {
       const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
-      // Only update width state if it actually changed
-      if (newMenuWidth !== this.state.width) {
-        this.setState({width: newMenuWidth});
-      }
+      setWidth(newMenuWidth);
     }
   };
 
-  componentDidMount() {
-    this.updateWidth();
+  useEffect(() => {
+    console.log('Running width change effect, width:', width);
+    handleWidthChange();
+  }, [width]);
 
+  // TODO: Figure out a better way to handle width changes in the reference button.
+  // Seems like we should resize the menu when the reference button width changes, not
+  // necessarily when the window resizes. Resizing the menu on window resize addresses
+  // the case when `grow = true` and the user resizes the browser window while the
+  // menu is open, but doesn't address cases where the reference button size changes
+  // through other means.
+  useEffect(() => {
     // Update menu width state on resize to ensure menu resizes as window resizes
-    window.addEventListener('resize', this.updateWidth);
-  }
+    console.log('Adding window resize listener');
+    window.addEventListener('resize', handleWidthChange);
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWidth);
-  }
+    return () => {
+      console.log('Removing window resize listener');
+      window.removeEventListener('resize', handleWidthChange);
+    };
+  }, []);
 
-  public render() {
-    const {
-      buttonRef,
-      children,
-      error,
-      isAnimated,
-      isAutoFlipped,
-      isAutoFocused,
-      isFlipped,
-      isHidden,
-      isHiding,
-      menuRef,
-      ...elemProps
-    } = this.props;
+  // Render nothing if buttonRef.current hasn't been set
+  // console.log('(render) buttonRef.current:', buttonRef.current);
+  return buttonRef.current ? (
+    <Popper
+      placement={isFlipped ? 'top-start' : 'bottom-start'}
+      open={!isHidden}
+      anchorElement={buttonRef.current}
+      popperOptions={generatePopperOptions({
+        isAutoFlipped,
+        isAutoFocused,
+        isFlipped,
+        menuRef,
+      })}
+      // zIndex is necessary in order for the menu to be displayed
+      // properly if Select is placed within a CK Modal (necessary
+      // to override zIndex of 1 for the Modal)
+      style={{zIndex: 2}}
+    >
+      <Menu error={error} isAnimated={isAnimated} isHiding={isHiding} width={width}>
+        <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
+          {children}
+        </MenuList>
+      </Menu>
+    </Popper>
+  ) : null;
+};
 
-    const {width} = this.state;
+SelectMenu.defaultProps = {
+  isAnimated: true,
+  isAutoFlipped: true,
+  isAutoFocused: true,
+  isFlipped: false,
+  isHidden: false,
+  isHiding: false,
+};
 
-    // Render nothing if buttonRef.current hasn't been set
-    return buttonRef.current ? (
-      <Popper
-        placement={isFlipped ? 'top-start' : 'bottom-start'}
-        open={!isHidden}
-        anchorElement={buttonRef.current}
-        popperOptions={this.generatePopperOptions()}
-        // zIndex is necessary in order for the menu to be displayed
-        // properly if Select is placed within a CK Modal (necessary
-        // to override zIndex of 1 for the Modal)
-        style={{zIndex: 2}}
-      >
-        <Menu error={error} isAnimated={isAnimated} isHiding={isHiding} width={width}>
-          <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
-            {children}
-          </MenuList>
-        </Menu>
-      </Popper>
-    ) : null;
-  }
-}
+export default SelectMenu;
