@@ -57,7 +57,9 @@ describe('Modal', () => {
             .siblings()
             .should($siblings => {
               $siblings.each((_, $sibling) => {
-                expect($sibling).to.have.attr('aria-hidden', 'true');
+                if ($sibling.tagName.toLowerCase() !== 'script') {
+                  expect($sibling).to.have.attr('aria-hidden', 'true');
+                }
               });
             });
         });
@@ -103,6 +105,10 @@ describe('Modal', () => {
           });
 
           it('should trap focus inside the modal element', () => {
+            h.modal
+              .get()
+              .pipe(h.modal.getCloseButton)
+              .should('have.focus');
             cy.tab()
               .should('contain', 'Delete')
               .tab()
@@ -207,7 +213,9 @@ describe('Modal', () => {
           .siblings()
           .should($siblings => {
             $siblings.each((_, $sibling) => {
-              expect($sibling).to.have.attr('aria-hidden', 'true');
+              if ($sibling.tagName.toLowerCase() !== 'script') {
+                expect($sibling).to.have.attr('aria-hidden', 'true');
+              }
             });
           });
       });

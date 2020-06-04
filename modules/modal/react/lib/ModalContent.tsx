@@ -135,6 +135,14 @@ const useKeyDownListener = (handleKeydown: EventListenerOrEventListenerObject) =
   }, [handleKeydown]);
 };
 
+const focusWithTimeout = (el: HTMLElement | null) => {
+  setTimeout(() => {
+    if (el) {
+      el.focus();
+    }
+  }, 300);
+};
+
 const useInitialFocus = (
   modalRef: React.RefObject<HTMLElement>,
   firstFocusRef: React.RefObject<HTMLElement> | undefined
@@ -145,15 +153,9 @@ const useInitialFocus = (
     if (modalRef.current) {
       const elem =
         (firstFocusRef && firstFocusRef.current) || getFirstElementToFocus(modalRef.current);
-      elem.focus();
+      focusWithTimeout(elem);
     }
-    return () => {
-      if (handlerElem) {
-        setTimeout(() => {
-          handlerElem.focus();
-        }, 300);
-      }
-    };
+    return () => focusWithTimeout(handlerElem);
   }, [modalRef, firstFocusRef]);
 };
 
