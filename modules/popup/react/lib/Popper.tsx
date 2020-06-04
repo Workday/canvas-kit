@@ -94,7 +94,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const localRef = React.useRef<HTMLDivElement>(null);
     const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
     const [placement, setPlacement] = React.useState(popperPlacement);
-    usePopupStack(ref);
+    usePopupStack(ref, anchorElement as HTMLElement | undefined);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {

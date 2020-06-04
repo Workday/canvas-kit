@@ -24,24 +24,38 @@ describe('PopupStack', () => {
   });
 
   describe('isTopmost()', () => {
-    const elements = [1, 2, 3, 4].map(_ => document.createElement('div'));
+    describe('with elements', () => {
+      const elements = [1, 2, 3, 4].map(_ => document.createElement('div'));
 
-    beforeEach(() => {
-      elements.forEach(element => PopupStack.add({element}));
+      beforeEach(() => {
+        elements.forEach(element => PopupStack.add({element}));
+      });
+
+      it('should return false for non-top elements', () => {
+        expect(PopupStack.isTopmost(elements[0])).toEqual(false);
+        expect(PopupStack.isTopmost(elements[1])).toEqual(false);
+        expect(PopupStack.isTopmost(elements[2])).toEqual(false);
+      });
+
+      it('should return true for top element', () => {
+        expect(PopupStack.isTopmost(elements[3])).toEqual(true);
+      });
+
+      it('should return false if there are no items in the stack', () => {
+        expect(PopupStack.isTopmost(document.createElement('div'))).toEqual(false);
+      });
+
+      it('should return false if the element is not in the stack', () => {
+        const element = document.createElement('div');
+
+        expect(PopupStack.isTopmost(element)).toEqual(false);
+      });
     });
 
-    it('should return false for non-top elements', () => {
-      expect(PopupStack.isTopmost(elements[0])).toEqual(false);
-      expect(PopupStack.isTopmost(elements[1])).toEqual(false);
-      expect(PopupStack.isTopmost(elements[2])).toEqual(false);
-    });
+    describe('without elements', () => {
+      const element = document.createElement('div');
 
-    it('should return true for top element', () => {
-      expect(PopupStack.isTopmost(elements[3])).toEqual(true);
-    });
-
-    it('should return false if there are no items in the stack', () => {
-      expect(PopupStack.isTopmost(document.createElement('div'))).toEqual(false);
+      expect(PopupStack.isTopmost(element)).toEqual(false);
     });
   });
 
@@ -52,13 +66,84 @@ describe('PopupStack', () => {
     expect(PopupStack.getElements()).toEqual(elements);
   });
 
-  it('bringToTop() should bring request element to the top to the stack', () => {
-    const elements = [1, 2, 3, 4].map(_ => document.createElement('div'));
-    elements.forEach(element => PopupStack.add({element}));
+  describe('bringToTop()', () => {
+    it('should bring element to the top to the stack', () => {
+      const elements = [1, 2, 3, 4].map(_ => document.createElement('div'));
+      elements.forEach(element => document.body.appendChild(element));
+      elements.forEach(element => PopupStack.add({element}));
 
-    PopupStack.bringToTop(elements[0]);
+      PopupStack.bringToTop(elements[0]);
 
-    expect(PopupStack.isTopmost(elements[0])).toEqual(true);
+      expect(PopupStack.isTopmost(elements[0])).toEqual(true);
+    });
+
+    it('should bring child popup elements to the top of the stack by owner reference', () => {
+      const elements = [1, 2, 3, 4].map(_ => document.createElement('div'));
+      elements.forEach(element => PopupStack.add({element}));
+
+      const element = document.createElement('div');
+      const owner = document.createElement('div');
+      elements[0].appendChild(owner); // ensure we look up the DOM tree
+      PopupStack.add({element, owner});
+
+      PopupStack.bringToTop(elements[0]);
+      expect(PopupStack.isTopmost(element)).toEqual(true);
+      expect(PopupStack.getElements()).toEqual([
+        elements[1],
+        elements[2],
+        elements[3],
+        elements[0],
+        element,
+      ]);
+    });
+  });
+
+  describe('contains()', () => {
+    it('should return true when the eventTarget is a child of the stack element', () => {
+      const element = document.createElement('div');
+      const eventTarget = document.createElement('div');
+      element.appendChild(eventTarget);
+
+      PopupStack.add({element});
+
+      expect(PopupStack.contains(element, eventTarget)).toEqual(true);
+    });
+
+    it('should return false when an eventTarget is outside the stack element', () => {
+      const element = document.createElement('div');
+      const eventTarget = document.createElement('div');
+
+      PopupStack.add({element});
+
+      expect(PopupStack.contains(element, eventTarget)).toEqual(false);
+    });
+
+    it('should return true when the owning element is the eventTarget', () => {
+      const owner = document.createElement('div');
+      const element = document.createElement('div');
+
+      PopupStack.add({element, owner});
+
+      expect(PopupStack.contains(element, owner)).toEqual(true);
+    });
+
+    it('should return true when the owning element contains the eventTarget', () => {
+      const owner = document.createElement('div');
+      const element = document.createElement('div');
+      const eventTarget = document.createElement('div');
+      owner.appendChild(eventTarget);
+
+      PopupStack.add({element, owner});
+
+      expect(PopupStack.contains(element, eventTarget)).toEqual(true);
+    });
+
+    it('should return false if the element is not in the stack', () => {
+      const element = document.createElement('div');
+      const eventTarget = document.createElement('div');
+
+      expect(PopupStack.contains(element, eventTarget)).toEqual(false);
+    });
   });
 
   describe('defaultGetValue()', () => {

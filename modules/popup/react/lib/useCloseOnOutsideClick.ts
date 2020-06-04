@@ -15,7 +15,10 @@ export const useCloseOnOutsideClick = <E extends HTMLElement>(
   onClose: () => void
 ) => {
   const onClick = (event: MouseEvent) => {
-    if (PopupStack.isTopmost(ref.current!) && !ref.current!.contains(event.target as HTMLElement)) {
+    if (
+      PopupStack.isTopmost(ref.current!) &&
+      !PopupStack.contains(ref.current!, event.target as HTMLElement)
+    ) {
       onClose();
     }
   };

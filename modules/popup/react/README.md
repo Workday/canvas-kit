@@ -188,6 +188,17 @@ from assistive technology including Web Rotor for VoiceOver for example.
 **Note**: The provided `ref` element should be root element of your component so that other elements
 _outside_ your component will be hidden rather than elements _inside_ your component
 
+## useBringToTopOnClick
+
+```ts
+useBringToTopOnClick(ref: React.RefObject<HTMLElement>): void
+```
+
+This hook will bring an element to the top of the stack when any element inside the provided `ref`
+element is clicked. If `Popper` was used or `PopupStack.add` provided an `owner`, all "child" popups
+will also be brought to the top. A "child" popup is a Popup is a Popup that was opened from another
+Popup. Usually this is a Tooltip or Select component inside something like a Modal.
+
 ## useCloseOnEscape
 
 ```ts
