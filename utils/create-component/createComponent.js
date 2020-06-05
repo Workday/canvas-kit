@@ -39,10 +39,24 @@ const questions = [
     default: ['React'],
   },
   {
+    type: 'list',
+    name: 'category',
+    message: 'What category should this component live in?:',
+    choices: [
+      'Labs (unstable)',
+      'Buttons',
+      'Containers',
+      'Indicators',
+      'Inputs',
+      'Navigation',
+      'Popups',
+    ],
+  },
+  {
     type: 'confirm',
-    name: 'unstable',
-    message: 'Is this an unstable component (i.e. should it go in Canvas Kit Labs)?:',
-    default: false,
+    name: 'publicModule',
+    message: 'Make access public when publishing?:',
+    default: true,
   },
   /**
    * Add question to add deps
@@ -54,17 +68,18 @@ const questions = [
 inquirer
   .prompt(questions)
   .then(answers => {
-    const {name, unstable, targets} = answers;
+    const {name, category, targets} = answers;
     const css = targets.includes('CSS');
     const react = targets.includes('React');
+    const unstable = category == 'Labs (unstable)';
     const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
     if (!fs.existsSync(componentPath)) {
       mkdirp.sync(componentPath);
     }
 
-    css && createModule(componentPath, 'css', createCssModule, answers);
-    react && createModule(componentPath, 'react', createReactModule, answers);
+    css && createModule(componentPath, 'css', createCssModule, answers, unstable);
+    react && createModule(componentPath, 'react', createReactModule, answers, unstable);
 
     console.log('\n');
   })
@@ -73,8 +88,8 @@ inquirer
     console.log(e.stack);
   });
 
-const createModule = (componentPath, target, moduleGenerator, answers) => {
-  const {name, description, unstable} = answers;
+const createModule = (componentPath, target, moduleGenerator, answers, unstable) => {
+  const {name, description, category, publicModule} = answers;
 
   const modulePath = path.join(componentPath, target);
 
@@ -82,7 +97,7 @@ const createModule = (componentPath, target, moduleGenerator, answers) => {
     const moduleName = `Module @workday/canvas-kit-${unstable ? 'labs-' : ''}${target}-${name}`;
     console.log(`\nModule ${moduleName} already exists. Skipping.`.yellow);
   } else {
-    moduleGenerator(modulePath, name, description, unstable);
+    moduleGenerator(modulePath, name, description, unstable, publicModule, category);
 
     console.log('\nBootstrapping dependencies.');
     cmd.run('yarn');
