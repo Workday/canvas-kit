@@ -9,7 +9,7 @@ describe('Modal', () => {
     h.stories.visit();
   });
 
-  ['Default', 'With useModal hook'].forEach(story => {
+  ['Default', 'WithoutHook'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Components|Popups/Modal/React', story);
@@ -385,9 +385,9 @@ describe('Modal', () => {
     });
   });
 
-  context(`given the 'Stacked Modals' story is rendered`, () => {
+  context(`given the 'StackedModals' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Modal/React', 'Stacked Modals');
+      h.stories.load('Components|Popups/Modal/React', 'StackedModals');
     });
 
     context('when both modals are opened', () => {

@@ -194,7 +194,7 @@ export const CustomFocus = () => {
   );
 };
 
-export const StackModals = () => {
+export const StackedModals = () => {
   const modal1 = useModal();
   const modal2 = useModal();
 
@@ -229,4 +229,4 @@ export const StackModals = () => {
   );
 };
 
-testingOnly(StackModals);
+testingOnly(StackedModals);
