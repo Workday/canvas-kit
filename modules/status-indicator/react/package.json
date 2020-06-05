@@ -47,6 +47,7 @@
     "@workday/design-assets-types": "^0.2.4"
   },
   "devDependencies": {
-    "@workday/canvas-system-icons-web": "^1.0.20"
+    "@workday/canvas-system-icons-web": "^1.0.20",
+    "@workday/canvas-kit-labs-react-core": "^3.8.0"
   }
 }
