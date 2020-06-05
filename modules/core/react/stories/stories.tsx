@@ -187,14 +187,9 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  ({bg}) => ({
-    background: bg,
-    color: pickForegroundColor(bg),
-  }),
   ({primary, bg}) =>
     primary && {
       ...type.h3,
-      color: pickForegroundColor(bg),
       height: spacing.xxxl,
       paddingTop: spacing.s,
       paddingBottom: spacing.s,
@@ -203,13 +198,23 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
       justifyContent: 'space-around',
       alignItems: 'flex-start',
       textTransform: 'capitalize',
-    }
+    },
+  ({bg}) => ({
+    background: bg,
+    color: pickForegroundColor(bg),
+  })
 );
 
-const colorNames = Object.keys(colors).map(color => color.replace(/\d+$/, '')); // Remove shade numbers
-colorNames
-  .filter((item, pos) => colorNames.indexOf(item) === pos)
-  .filter(key => key !== 'primary' && key !== 'gradients');
+const colorNames = Object.keys(colors)
+  .map(color => color.replace(/\d+$/, '')) // Remove shade numbers
+  .filter(key => key !== 'primary' && key !== 'gradients')
+  .reduce((collection, color) => {
+    // Remove duplicates
+    if (collection.indexOf(color) < 0) {
+      collection.push(color);
+    }
+    return collection;
+  }, []);
 
 export const Colors = () => (
   <Palettes>
