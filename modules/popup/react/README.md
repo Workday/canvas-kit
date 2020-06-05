@@ -328,10 +328,10 @@ component since `Popper` uses `usePopupStack` internally.
 This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
 dialogs, dropdown menus, etc.
 
-## onFocusTrap
+## useFocusTrap
 
 ```ts
-onFocusTrap(ref: React.RefObject<HTMLElement>): void
+useFocusTrap(ref: React.RefObject<HTMLElement>): void
 ```
 
 "Trap" or "loop" focus within a provided `ref` element. This is required for accessibility on
