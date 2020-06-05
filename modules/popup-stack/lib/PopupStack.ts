@@ -174,9 +174,9 @@ export const PopupStack = {
       stack.items = [...stack.items.filter(i => i !== item), item];
 
       // Also bring children to top. There are a few cases where stacking might break otherwise:
-      // - Clicking a Popup calls `bringToFront`, but mouse is over a Tooltip so that Tooltip is now
+      // - Clicking a Popup calls `bringToTop`, but mouse is over a Tooltip so that Tooltip is now
       //   under the Popup
-      // - Clicking a button opens a new Popup, but that click bubbles up to a `bringToFront` call
+      // - Clicking a button opens a new Popup, but that click bubbles up to a `bringToTop` call
       //   putting the new popup under an existing one
       getChildPopups(item, stack.items).forEach(popup => {
         PopupStack.bringToTop(popup.element);
