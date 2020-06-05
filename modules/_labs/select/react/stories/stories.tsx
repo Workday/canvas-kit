@@ -2,13 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {
-  ComponentStatesTable,
-  controlComponent,
-  customColorTheme,
-  permutateProps,
-} from '../../../../../utils/storybook';
+import {controlComponent} from '../../../../../utils/storybook';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {
   activityStreamIcon,
@@ -19,8 +13,7 @@ import {
 import {colors, typeColors} from '@workday/canvas-kit-react-core';
 import FormField from '../../../../form-field/react/index';
 import Select from '../lib/Select';
-import SelectBase, {RenderOptionFunction} from '../lib/SelectBase';
-import SelectOption from '../lib/SelectOption';
+import {RenderOptionFunction} from '../lib/SelectBase';
 import README from '../README.md';
 
 const hintText = 'Helpful text goes here.';
@@ -37,16 +30,6 @@ const options = [
     value: 'oasis',
   },
 ];
-
-const normalizedOptions = options.map(option => {
-  return {
-    data: {},
-    disabled: option.disabled || false,
-    id: option.value,
-    label: option.label || option.value,
-    value: option.value,
-  };
-});
 
 const simpleOptions = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
 
@@ -215,127 +198,3 @@ storiesOf('Labs|Select/React/Left Label', module)
       {controlComponent(<Select name="contact" options={options} grow={true} />)}
     </FormField>
   ));
-
-const SelectStates = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={[
-        {label: 'Default', props: {}},
-        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
-        {label: 'Error', props: {error: Select.ErrorType.Error}},
-      ]}
-      columnProps={permutateProps(
-        {
-          className: [
-            {label: 'Default', value: ''},
-            {label: 'Hover', value: 'hover'},
-            {label: 'Focus', value: 'focus'},
-            {label: 'Focus Hover', value: 'focus hover'},
-            {label: 'Active', value: 'active'},
-            {label: 'Active Hover', value: 'active hover'},
-          ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-        },
-        props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
-        }
-      )}
-    >
-      {props => (
-        <Select
-          {...props}
-          style={{width: 100}}
-          onChange={() => {}} // eslint-disable-line no-empty-function
-          options={options}
-        />
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
-
-const SelectMenuOnStates = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={[
-        {label: 'Default', props: {}},
-        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
-        {label: 'Error', props: {error: Select.ErrorType.Error}},
-      ]}
-      columnProps={[{label: 'Default', props: {}}]}
-    >
-      {props => (
-        <div style={{height: 250}}>
-          <SelectBase
-            {...props}
-            onChange={() => {}} // eslint-disable-line no-empty-function
-            options={normalizedOptions}
-            focusedOptionIndex={1}
-            isMenuAnimated={false}
-            isMenuHidden={false}
-          />
-        </div>
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
-
-const SelectOptionStates = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={[
-        {label: 'Default', props: {}},
-        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
-        {label: 'Error', props: {error: Select.ErrorType.Error}},
-      ]}
-      columnProps={permutateProps(
-        {
-          className: [
-            {label: 'Default', value: ''},
-            {label: 'Hover', value: 'hover'},
-            {label: 'Active', value: 'active'},
-            {label: 'Active Hover', value: 'active hover'},
-          ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-        },
-        props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
-        }
-      )}
-    >
-      {props => (
-        <SelectOption
-          {...props}
-          onChange={() => {}} // eslint-disable-line no-empty-function
-        >
-          E-mail
-        </SelectOption>
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
-
-storiesOf('Labs|Select/React/Visual Testing', module)
-  .addParameters({
-    chromatic: {
-      disable: false,
-    },
-    component: Select,
-  })
-  .addDecorator(withReadme(README))
-  .add('States', () => <SelectStates />)
-  .add('States (Menu On)', () => <SelectMenuOnStates />)
-  .add('States (Option)', () => <SelectOptionStates />)
-  .addParameters({
-    canvasProviderDecorator: {
-      theme: customColorTheme,
-    },
-  })
-  .add('Theming', () => <SelectStates />)
-  .add('Theming (Menu On)', () => <SelectMenuOnStates />)
-  .add('Theming (Option)', () => <SelectOptionStates />);

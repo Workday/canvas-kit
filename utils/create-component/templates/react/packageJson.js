@@ -1,4 +1,4 @@
-module.exports = (name, moduleName, description, unstable) => `
+module.exports = (name, moduleName, description, unstable, public) => `
 {
   "name": "${moduleName}",
   "version": "0.0.0",
@@ -37,7 +37,14 @@ module.exports = (name, moduleName, description, unstable) => `
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "depcheck": "node ../../../${unstable ? '../' : ''}utils/check-dependencies-exist.js"
-  },
+  }, ${
+    public
+      ? `
+  "publishConfig": {
+    "access": "public"
+  },`
+      : ``
+  }
   "keywords": [
     "canvas",
     "canvas-kit",

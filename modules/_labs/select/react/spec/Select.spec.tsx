@@ -8,7 +8,10 @@ describe('Select', () => {
   const selectButtonRole = 'button';
   const optionRole = 'option';
 
-  const options = [{label: 'E-mail', value: 'email'}, {label: 'Phone', value: 'phone'}];
+  const options = [
+    {label: 'E-mail', value: 'email'},
+    {label: 'Phone', value: 'phone'},
+  ];
 
   afterEach(() => {
     cb.mockReset();
@@ -29,11 +32,11 @@ describe('Select', () => {
     });
   });
 
-  describe('when the mouse button is pressed down on an option with a different value than the current value of the select', () => {
+  describe('when an option with a different value than the current value of the select is clicked', () => {
     it('should call the onChange callback', () => {
       const {getAllByRole, getByRole} = render(<Select onChange={cb} options={options} />);
       fireEvent.click(getByRole(selectButtonRole));
-      fireEvent.mouseDown(getAllByRole(optionRole)[1]);
+      fireEvent.click(getAllByRole(optionRole)[1]);
       expect(cb).toHaveBeenCalledTimes(1);
     });
   });
