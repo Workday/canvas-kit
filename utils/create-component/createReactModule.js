@@ -11,12 +11,13 @@ const packageJson = require('./templates/react/packageJson');
 const component = require('./templates/react/component');
 const index = require('./templates/react/index');
 const stories = require('./templates/react/stories');
+const testingStories = require('./templates/react/stories_VisualTesting');
 const readme = require('./templates/react/readme');
 const tsconfig = require('./templates/react/tsconfig');
 
 const cwd = process.cwd();
 
-module.exports = (modulePath, name, description, unstable) => {
+module.exports = (modulePath, name, description, unstable, public, category) => {
   const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}react-${name}`;
 
   console.log('\nCreating ' + `${moduleName}\n`.blue.underline);
@@ -26,12 +27,13 @@ module.exports = (modulePath, name, description, unstable) => {
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
   const rootPath = unstable ? '../../../..' : '../../..';
-  const storyPath = unstable ? `Labs/${titleCaseName}` : titleCaseName;
+  const storyPath = `${unstable ? 'Labs|' : `Components|${category}/`}${titleCaseName}/React`;
+  const testingStoryPath = `Testing|React/${unstable ? 'Labs' : category}/${titleCaseName}`;
 
   const files = {
     package: {
       path: 'package.json',
-      contents: packageJson(name, moduleName, description, unstable),
+      contents: packageJson(name, moduleName, description, unstable, public),
     },
     component: {
       path: `lib/${pascalCaseName}.tsx`,
@@ -44,6 +46,10 @@ module.exports = (modulePath, name, description, unstable) => {
     stories: {
       path: 'stories/stories.tsx',
       contents: stories(storyPath, pascalCaseName, rootPath),
+    },
+    testingStories: {
+      path: 'stories/stories_VisualTesting.tsx',
+      contents: testingStories(testingStoryPath, pascalCaseName, rootPath),
     },
     readme: {
       path: 'README.md',

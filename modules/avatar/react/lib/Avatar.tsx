@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import styled from '@emotion/styled';
-import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
+import {styled, focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
 import isPropValid from '@emotion/is-prop-valid';
 import {borderRadius, colors} from '@workday/canvas-kit-react-core';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react-icon';
@@ -56,7 +55,7 @@ type AvatarOverload = {
 
 const StyledContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Pick<AvatarProps, 'variant' | 'size' | 'onClick'>>(
+})<Pick<AvatarProps, 'size' | 'onClick'>>(
   {
     background: colors.soap200,
     position: 'relative',
@@ -68,26 +67,28 @@ const StyledContainer = styled('button', {
     boxSizing: 'border-box',
     overflow: 'hidden',
     borderRadius: borderRadius.circle,
+    '&:not([disabled])': {
+      '&:focus': {
+        outline: 'none',
+        ...focusRing({separation: 2}),
+      },
+    },
+    ...hideMouseFocus,
   },
   ({size}) => ({
     height: size,
     width: size,
   }),
-  ({variant, onClick}) => ({
+  ({onClick}) => ({
     cursor: onClick ? 'pointer' : 'default',
-    '&:not([disabled])': {
-      '&:focus': {
-        outline: 'none',
-        ...(variant === AvatarVariant.Dark ? focusRing({separation: 2}) : focusRing()),
-      },
-    },
-    ...hideMouseFocus,
   })
 );
 
 const StyledStack = styled('span')<Pick<AvatarProps, 'size'>>(
   {
     position: 'absolute',
+    top: 0,
+    left: 0,
   },
   ({size}) => ({
     height: size,
@@ -131,7 +132,6 @@ const Avatar: AvatarOverload = React.forwardRef(
 
     return (
       <StyledContainer
-        variant={variant}
         size={size}
         aria-label={altText}
         onClick={onClick}

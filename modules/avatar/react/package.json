@@ -50,10 +50,12 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/is-prop-valid": "^0.8.2",
-    "@emotion/styled": "^10.0.27",
     "@workday/canvas-kit-react-common": "4.0.0-beta.4",
     "@workday/canvas-kit-react-core": "4.0.0-beta.4",
     "@workday/canvas-kit-react-icon": "4.0.0-beta.4",
     "@workday/canvas-system-icons-web": "^1.0.20"
+  },
+  "devDependencies": {
+    "@workday/canvas-kit-labs-react-core": "4.0.0-beta.4"
   }
 }

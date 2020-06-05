@@ -17,7 +17,10 @@ export const convertToStaticStates = (obj?: CSSObject): CSSObject | undefined =>
       .replace(/^:/, '&:') // handle shorthand like ":focus"
       .replace(/,(\s+):/g, ',$1&:') // handle selectors like ":focus, :hover"
       .replace(/:(focus|hover|active)/g, '.$1')
-      .replace(/\[data\-whatinput="?(mouse|touch|keyboard|pointer)"?]/g, '[data-whatinput="noop"]');
+      .replace(
+        /\[data\-whatinput=("|')?(mouse|touch|keyboard|pointer)("|')?]/g,
+        '[data-whatinput="noop"]'
+      );
     const value =
       typeof obj[key] === 'object' ? convertToStaticStates(obj[key] as CSSObject) : obj[key];
     const newObj = {...result, [newKey]: value};

@@ -59,6 +59,8 @@ able to compile your code.
 - [TextButton](#textbutton)
 - [Hyperlink](#hyperlink)
 - [IconButton](#iconbutton)
+- [ToolbarIconButton](#toolbariconbutton)
+- [ToolbarDropdownButton](#toolbardropdownbutton)
 
 ---
 
@@ -154,7 +156,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -221,7 +223,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -308,7 +310,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -380,7 +382,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -485,7 +487,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -585,7 +587,7 @@ Default: `ButtonIconPosition.Left`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -653,7 +655,7 @@ import {IconButton} from '@workday/canvas-kit-react-button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-<IconButton icon={activityStreamIcon} title="Activity Stream" aria-label="Activity Stream" />;
+<IconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
 
 ## Static Properties
@@ -673,10 +675,6 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 ```
 
 ## Component Props
-
-> Same as [`Button`](#canvas-kit-button) Undocumented props are spread to the `button` element.
-
----
 
 ### Required
 
@@ -751,7 +749,7 @@ Default: `undefined`
 
 ---
 
-### `as: 'a'
+### `as: 'a'`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -763,7 +761,110 @@ Default: `undefined`
 
 ---
 
-## Accessibility Notes
+# ToolbarIconButton
 
-> The content of an IconButton is not always clear to the user. In order to better convey what the
-> icon represents, the IconButton should be initialized with `title` and `aria-label` attributes.
+> Button containing an icon. Icon may be a component from
+> [`canvas-kit-react-icon`](../../icon/react) or an svg element. Note: This button is intended to be
+> used within a toolbar.
+
+## Usage
+
+```tsx
+import * as React from 'react';
+import {ToolbarIconButton} from '@workday/canvas-kit-react-button';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+<ToolbarIconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
+```
+
+## Static Properties
+
+> None
+
+## Component Props
+
+### Required
+
+#### `aria-label: string`
+
+> The accessibility label to indicate the action triggered by clicking the toolbar icon button.
+
+---
+
+### Optional
+
+#### `toggled: boolean | undefined`
+
+> If defined as a boolean, then it manages the button state: on (`true`) or off (`false`). This is a
+> [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) `button` component. If
+> left `undefined` then the button is not considered toggle-able (`aria-pressed` is `undefined`) and
+> will act as a normal button.
+
+Default: `undefined`
+
+---
+
+#### `onToggleChange: (toggled: boolean | undefined) => void`
+
+> The callback that is fired when a button toggle prop changes This is true when the toggle changes
+> from `true` to `false` but also if you disable the toggle-ability of a button (in other words, if
+> `toggle` changes from a `boolean` to `undefined`). This is important because the `aria-pressed`
+> attribute for accessibility is goverened by whether or not the `toggle` prop is defined.
+
+---
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button. Optional because ToolbarIconButton can also wrap a SystemIcon component.
+
+---
+
+# ToolbarDropdownButton
+
+> Button containing an icon or custom element. Icon may be a component from
+> [`canvas-kit-react-icon`](../../icon/react) or an svg element. By default, the button has a down
+> chevron to the right indicating that it's a dropdown button. Note: This button is intended to be
+> used within a toolbar.
+
+## Usage
+
+```tsx
+import * as React from 'react';
+import {ToolbarDropdownButton} from '@workday/canvas-kit-react-button';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+<ToolbarDropdownButton icon={activityStreamIcon} aria-label="Activity Stream" />;
+```
+
+## Static Properties
+
+> None
+
+## Component Props
+
+### Required
+
+#### `aria-label: string`
+
+> The accessibility label to indicate the action triggered by clicking the toolbar icon button.
+
+---
+
+### Optional
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button. Optional because ToolbarDropdownButton can also wrap a SystemIcon
+> component.
+
+---

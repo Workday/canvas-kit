@@ -165,7 +165,7 @@ const menuIconSize = 24;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
 const SelectButton = styled('button')<
-  Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'theme'>
+  Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'isMenuHiding' | 'theme'>
 >(
   {
     ...type.body,
@@ -199,7 +199,7 @@ const SelectButton = styled('button')<
       },
     },
   },
-  ({error, isMenuHidden, theme}) => {
+  ({error, isMenuHidden, isMenuHiding, theme}) => {
     const themedFocusOutlineColor = theme.canvas.palette.common.focusOutline;
     const buttonFocusStyles = {
       borderColor: themedFocusOutlineColor,
@@ -207,10 +207,10 @@ const SelectButton = styled('button')<
     };
 
     if (error === undefined) {
-      // If there isn't an error, apply focus and hover styles if the
-      // menu is hidden (otherwise, if the menu is visible, style
+      // If there isn't an error, apply focus and hover styles if the menu is
+      // hidden or hiding (otherwise, the menu is completely visible: style
       // the button as if it had focus)
-      return isMenuHidden
+      return isMenuHidden || isMenuHiding
         ? {
             '&:focus:not([disabled])': {
               ...buttonFocusStyles,
@@ -369,16 +369,13 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
         value: option.value,
         ...(onOptionSelection
           ? {
-              // Prevent click from propagating (and, say, dismissing
-              // a modal containing the Select)
               onClick: (event: React.MouseEvent) => {
-                event.stopPropagation();
-              },
-              // mouseDown provides a slightly better UX than click
-              // since visual feedback of selected option is more
-              // immediate
-              onMouseDown: (event: React.MouseEvent) => {
                 event.preventDefault();
+
+                // Prevent click from propagating (and, say, dismissing
+                // a modal containing the Select)
+                event.stopPropagation();
+
                 onOptionSelection(index);
               },
             }
@@ -446,6 +443,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           error={error}
           grow={grow}
           isMenuHidden={isMenuHidden}
+          isMenuHiding={isMenuHiding}
           onKeyDown={onKeyDown}
           // Prevent Firefox from triggering click handler on spacebar during
           // type-ahead when the menu is closed (and, thus, incorrectly displaying
