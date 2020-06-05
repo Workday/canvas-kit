@@ -301,6 +301,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     this.toggleMenu(false);
   };
 
+  handleMenuCloseOnKeyPress = (): void => {
+    // Toggle menu off and shift focus back to the button
+    this.toggleMenu(false);
+    this.focusButton();
+  };
+
   handleKeyDown = (event: React.KeyboardEvent): void => {
     const {options} = this.props;
     const numOptions = options.length;
@@ -346,14 +352,10 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           this.setState({focusedOptionIndex: nextFocusedIndex});
           break;
 
-        case 'Escape':
         case 'Tab':
           if (!isMenuHidden) {
             isShortcut = true;
-
-            // Toggle menu off and shift focus back to the button
-            this.toggleMenu(false);
-            this.focusButton();
+            this.handleMenuCloseOnKeyPress();
           }
           break;
 
@@ -406,6 +408,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           onClick: this.handleClick,
           onKeyDown: this.handleKeyDown,
           onMenuBlur: this.handleMenuBlur,
+          onMenuCloseOnEscape: this.handleMenuCloseOnKeyPress,
           onMouseDown: this.handleMouseDown,
           onOptionSelection: this.handleOptionSelection,
         }

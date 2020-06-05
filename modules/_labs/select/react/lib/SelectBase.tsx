@@ -144,6 +144,10 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   onMenuBlur?: (event: React.FocusEvent) => void;
   /**
+   * The function called when the Escape key is pressed while the SelectBase menu is the topmost element in the stack.
+   */
+  onMenuCloseOnEscape?: () => void;
+  /**
    * The function called when an option in the SelectBase is selected via a click or a keyboard shortcut. The `index` passed to the callback function represents the index of the option which was selected.
    */
   onOptionSelection?: (index: number) => void;
@@ -371,11 +375,6 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           ? {
               onClick: (event: React.MouseEvent) => {
                 event.preventDefault();
-
-                // Prevent click from propagating (and, say, dismissing
-                // a modal containing the Select)
-                event.stopPropagation();
-
                 onOptionSelection(index);
               },
             }
@@ -416,6 +415,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       onChange,
       onKeyDown,
       onMenuBlur,
+      onMenuCloseOnEscape,
       options,
       value,
 
@@ -475,6 +475,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
             menuRef={this.menuRef}
             onBlur={onMenuBlur}
             onKeyDown={onKeyDown}
+            onCloseOnEscape={onMenuCloseOnEscape}
           >
             {this.renderOptions(renderOption)}
           </SelectMenu>

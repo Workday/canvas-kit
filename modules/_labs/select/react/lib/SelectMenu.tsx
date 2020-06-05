@@ -2,14 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {Rect} from '@popperjs/core';
 
 import {CSSObject, keyframes} from '@emotion/core';
-import {
-  EmotionCanvasTheme,
-  ErrorType,
-  Placement,
-  Popper,
-  Themeable,
-  styled,
-} from '@workday/canvas-kit-react-common';
+import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
+import {Placement, Popper, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core';
 
 import {SelectProps} from './Select';
@@ -57,6 +51,10 @@ interface SelectMenuProps
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */
   menuRef?: React.RefObject<HTMLUListElement>;
+  /**
+   * The function called when the Escape key is pressed while the SelectMenu is the topmost element in the stack.
+   */
+  onCloseOnEscape?: () => void;
 }
 
 const fadeInAnimation = keyframes`
@@ -258,8 +256,11 @@ const SelectMenu = (props: SelectMenuProps) => {
     isHidden,
     isHiding,
     menuRef,
+    onCloseOnEscape,
     ...elemProps
   } = props;
+
+  const popupRef = React.useRef<HTMLDivElement>(null);
 
   const [width, setWidth] = useState(0);
 
@@ -289,6 +290,20 @@ const SelectMenu = (props: SelectMenuProps) => {
     };
   }, []);
 
+  useCloseOnEscape(popupRef, () => {
+    if (onCloseOnEscape) {
+      onCloseOnEscape();
+    }
+  });
+
+  // TODO: use the useCloseOnOutsideClick hook after it's been modified to handle
+  // multiple things happening on the same click. Currently, the hook doesn't
+  // support the use case where one Select Menu is activated by clicking on its
+  // Select Button while another Select Menu is already active (both Menus are
+  // visible instead of the original Menu dismissing). In order to support the
+  // correct behavior for now, we're dismissing the Menu on blur instead of
+  // using the hook.
+
   // Render nothing if buttonRef.current hasn't been set
   return buttonRef.current ? (
     <Popper
@@ -301,10 +316,7 @@ const SelectMenu = (props: SelectMenuProps) => {
         isFlipped,
         menuRef,
       })}
-      // zIndex is necessary in order for the menu to be displayed
-      // properly if Select is placed within a CK Modal (necessary
-      // to override zIndex of 1 for the Modal)
-      style={{zIndex: 2}}
+      ref={popupRef}
     >
       <Menu error={error} isAnimated={isAnimated} isHiding={isHiding} width={width}>
         <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
