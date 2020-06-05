@@ -11,7 +11,7 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The reference element used to position the Popper.
    */
-  anchorElement: Element | null;
+  anchorElement: React.RefObject<Element> | Element | null;
   /**
    * The children of the Popper (to be used as its content).
    */
@@ -78,6 +78,18 @@ export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
   }
 );
 
+const getElementFromRefOrElement = (
+  input: React.RefObject<Element> | Element | null
+): Element | undefined => {
+  if (input === null) {
+    return undefined;
+  } else if ('current' in input) {
+    return input.current || undefined;
+  } else {
+    return input;
+  }
+};
+
 // Popper bails early if `open` is false and React hooks cannot be called conditionally,
 // so we're breaking out the open version into another component.
 const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
@@ -94,11 +106,12 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const localRef = React.useRef<HTMLDivElement>(null);
     const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
     const [placement, setPlacement] = React.useState(popperPlacement);
-    usePopupStack(ref, anchorElement as HTMLElement | undefined);
+    usePopupStack(ref, getElementFromRefOrElement(anchorElement) as HTMLElement | undefined);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
-      if (!anchorElement) {
+      const anchorEl = getElementFromRefOrElement(anchorElement);
+      if (!anchorEl) {
         console.warn(
           `Popper: anchorElement was not defined. A valid anchorElement must be provided to render a Popper`
         );
@@ -106,7 +119,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       }
 
       if (ref.current) {
-        const popper = PopperJS.createPopper(anchorElement, ref.current, {
+        const popper = PopperJS.createPopper(anchorEl, ref.current, {
           placement: popperPlacement,
           ...popperOptions,
           onFirstUpdate: data => {

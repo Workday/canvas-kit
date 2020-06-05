@@ -6,6 +6,7 @@ import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
 import {
   Popper,
   Popup,
+  usePopup,
   useCloseOnEscape,
   useCloseOnOutsideClick,
 } from '@workday/canvas-kit-react-popup';
@@ -19,32 +20,29 @@ export default {
 };
 
 export const Default = () => {
-  const [open, setOpen] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
-  const popupRef = React.useRef<HTMLDivElement>(null);
+  const {targetProps, closePopup, popperProps} = usePopup();
 
-  const onClose = () => setOpen(false);
-  const onButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpen(true);
-    setAnchorEl(event.currentTarget);
-  };
-
-  useCloseOnOutsideClick(popupRef, onClose);
-  useCloseOnEscape(popupRef, onClose);
+  useCloseOnOutsideClick(popperProps.ref, closePopup);
+  useCloseOnEscape(popperProps.ref, closePopup);
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
-      <DeleteButton onClick={onButtonClick}>Delete Item</DeleteButton>
-      <Popper placement={'bottom'} open={open} anchorElement={anchorEl} ref={popupRef}>
-        <Popup width={400} heading={'Delete Item'} padding={Popup.Padding.s} handleClose={onClose}>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Popper placement={'bottom'} {...popperProps}>
+        <Popup
+          width={400}
+          heading={'Delete Item'}
+          padding={Popup.Padding.s}
+          handleClose={closePopup}
+        >
           <div style={{marginBottom: '24px'}}>
             Are you sure you'd like to delete the item titled 'My Item'?
           </div>
 
-          <DeleteButton style={{marginRight: '16px'}} onClick={onClose}>
+          <DeleteButton style={{marginRight: '16px'}} onClick={closePopup}>
             Delete
           </DeleteButton>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={closePopup}>Cancel</Button>
         </Popup>
       </Popper>
     </div>

@@ -1,9 +1,21 @@
-# Canvas Kit Popup
+# Canvas Kit Popups
 
-A Popup component that allows you to render content above another.
+A "popup" is a classification for a type of stacked UI element that appears "on top" of statically
+positioned content. Tooltips, Modals, Dropdown menus, etc are all examples of "popups". Canvas Kit
+has a "stack manager" system for managing these stacked UIs. Different types of popups have
+different requirements of behavior for UX and accessibility - we can call them capabilities,
+behaviors, or traits. Canvas Kit comes with a number of [behaviors](#hooks) in the form of React
+Hooks.
 
-Note: This popup does not include a positioning engine. In our example we use our popper utility,
-which is a wrapper to Popper.js, to wrap our Popup component and position it.
+If you are building your own custom stacked UI components, use the [Popper](#popper) component along
+with our [hooks](#hooks). The `Popper` component and hooks work with the stack management system for
+correct rendering and accessibility behavior. If you cannot use `Popper`, use the
+[usePopupStack](#usepoupstack) hook. to properly register and deregister the popup at the correct
+time. If you cannot use our hooks, consider upgrading your component to use Hooks. If you cannot do
+that, you'll have to look up the `PopupStack` package for the direct API and have a look at the
+source code for our hooks into the `PopupStack` API.
+
+This package comes with everything you need to build Popup UIs.
 
 ## Installation
 
@@ -20,32 +32,64 @@ yarn add @workday/canvas-kit-react-popup
 ## Popper
 
 A thin wrapper component around the Popper.js positioning engine. For reference:
-https://popper.js.org/
+https://popper.js.org/. `Popper` also automatically works with the `PopupStack` system. `Popper` has
+no UI and will render any children to the `body` element and position around a provided
+`anchorElement`.
 
 ### Usage
 
 ```tsx
 import * as React from 'react';
-import {Popup, Popper} from '@workday/canvas-kit-react-popup';
+import {Button} from '@workday/canvas-kit-react-button';
+import {Popper} from '@workday/canvas-kit-react-popup';
 
-<Popper placement="bottom" open={this.state.open} anchorElement={this.buttonRef.current}>
-  <Popup heading="Popup Title">Popup Contents</Popup>
-</Popper>;
+const MyPopper = () => {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef(null)
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)} buttonRef={buttonRef}>
+      <Popper anchorElement={buttonRef} open={true}>
+        <div>
+          <p>Popper content</p>
+          <Button onClick={() => setOpen(false)}>
+        </div>
+      </Popper>
+    </div>
+  );
+};
 ```
 
-If you need access to the placement that was chosen by PopperJS, pass in a render prop for the
-children:
+If you need access to the `placement` that was chosen by PopperJS, `children` can also be a
+[render prop](https://reactjs.org/docs/render-props.html).
 
 ```tsx
 import * as React from 'react';
-import {Popup, Popper} from '@workday/canvas-kit-react-popup';
+import {Button} from '@workday/canvas-kit-react-button';
+import {Popper} from '@workday/canvas-kit-react-popup';
 
-<Popper placement="bottom" open={this.state.open} anchorElement={this.buttonRef.current}>
-  {({ placement }) => {
-    console.log('placement', placement) // logs out the any valid PopperJS placement option except for `auto`
-    <Popup heading="Popup Title">Popup Contents</Popup>
-  }}
-</Popper>;
+const MyPopper = () => {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef(null)
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)} buttonRef={buttonRef}>
+      <Popper anchorElement={buttonRef} open={true}>
+      {({placement}) => {
+        return (
+          <div>
+            <p>Popper content</p>
+            <p>Placement chosen: {placement}</p>
+            <Button onClick={() => setOpen(false)}>
+          </div>
+        )
+      }}
+      </Popper>
+    </div>
+  );
+};
 ```
 
 ## Popup
@@ -54,20 +98,20 @@ import {Popup, Popper} from '@workday/canvas-kit-react-popup';
 
 ```tsx
 import * as React from 'react';
-import {Popper} from '@workday/canvas-kit-react-common';
-import {Popup} from '@workday/canvas-kit-react-popup';
+import {Button} from '@workday/canvas-kit-react-button';
+import {Popup, Popper, usePopup} from '@workday/canvas-kit-react-popup';
 
-// We use Popper from Material UI for our positioning
-<Popper placement={'bottom'} open={this.state.open} anchorElement={anchorEl}>
-  <Popup
-    width={300}
-    heading={'Popup Title'}
-    padding={Popup.Padding.l}
-    handleClose={this.handleClose}
-  >
-    {this.props.children}
-  </Popup>
-</Popper>;
+const MyPopup = () => {
+  const { targetProps, closePopup, popperProps } = usePopup()
+
+  return (
+    <Button {...targetProps}>Toggle Popup</Button>
+    <Popper placement="bottom" {...popperProps}>
+      <Popup heading="Popup Title">Popup Contents</Popup>
+      <Button onClick={closePopup}>Close</Button>
+    </Popper>
+  );
+};
 ```
 
 ### Static Properties
