@@ -9,11 +9,16 @@ import {usePopupStack} from '../';
 
 export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The reference element used to position the Popper.
+   * The reference element used to position the Popper. Popper content will try to follow the
+   * `anchorElement` if it moves and will reposition itself if there is no longer room in the
+   * window.
    */
   anchorElement: React.RefObject<Element> | Element | null;
   /**
-   * The children of the Popper (to be used as its content).
+   * The content of the Popper. If a function is provided, it will be treated as a Render Prop and
+   * pass the `placement` chosen by PopperJS. This `placement` value is useful if your popup needs
+   * to animate and that animation depends on the direction of the content in relation to the
+   * `anchorElement`.∑
    */
   children: ((props: {placement: Placement}) => React.ReactNode) | React.ReactNode;
   /**
@@ -25,13 +30,14 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   containerElement?: Element | null;
   /**
-   * If true, set the Popper to the open state.
+   * Determines if `Popper` content should be rendered. The content only exists in the DOM when
+   * `open` is `true`
    * @default true
    */
   open?: boolean;
   /**
-   * The placement of the popper relative to the `anchorElement`. Accepts `auto`, `top`, `right`,
-   * `bottom`, or `left`. Each placement can also be modified using any of the following
+   * The placement of the `Popper` contents relative to the `anchorElement`. Accepts `auto`, `top`,
+   * `right`, `bottom`, or `left`. Each placement can also be modified using any of the following
    * variations: `-start` or `-end`.
    * @default bottom
    */
@@ -42,7 +48,9 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   popperOptions?: Partial<PopperOptions>;
   /**
    * If true, attach the Popper to the `containerElement`. If false, render the Popper within the
-   * DOM hierarchy of its parent.
+   * DOM hierarchy of its parent. A non-portal Popper will constrained by the parent container
+   * overflows. If you set this to `false`, you may experience issues where you content gets cut off
+   * by scrollbars or `overflow: hidden`
    * @default true
    */
   portal?: boolean;

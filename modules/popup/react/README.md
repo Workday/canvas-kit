@@ -50,7 +50,7 @@ const MyPopper = () => {
   return (
     <div>
       <Button onClick={() => setOpen(true)} buttonRef={buttonRef}>
-      <Popper anchorElement={buttonRef} open={true}>
+      <Popper anchorElement={buttonRef} open={open}>
         <div>
           <p>Popper content</p>
           <Button onClick={() => setOpen(false)}>
@@ -76,25 +76,79 @@ const MyPopper = () => {
   return (
     <div>
       <Button onClick={() => setOpen(true)} buttonRef={buttonRef}>
-      <Popper anchorElement={buttonRef} open={true}>
-      {({placement}) => {
-        return (
-          <div>
-            <p>Popper content</p>
-            <p>Placement chosen: {placement}</p>
-            <Button onClick={() => setOpen(false)}>
-          </div>
-        )
-      }}
+      <Popper anchorElement={buttonRef} open={open}>
+        {({placement}) => {
+          return (
+            <div>
+              <p>Popper content</p>
+              <p>Placement chosen: {placement}</p>
+              <Button onClick={() => setOpen(false)}>
+            </div>
+          )
+        }}
       </Popper>
     </div>
   );
 };
 ```
 
+### Popper Required Props
+
+#### `anchorElement: RefObject<Element> | Element | null`
+
+> The reference element used to position the Popper. Popper content will try to follow the
+> `anchorElement` if it moves and will reposition itself if there is no longer room in the window.
+
+#### `children: ((props: {placement: Placement}) => React.ReactNode) | React.ReactNode`
+
+> The content of the Popper. If a function is provided, it will be treated as a Render Prop and pass
+> the `placement` chosen by PopperJS. This `placement` value is useful if your popup needs to
+> animate and that animation depends on the direction of the content in relation to the
+> `anchorElement`.
+
+### Popper Optional Props
+
+#### `containerElement: Element | null`
+
+> The element that contains the portal children when `portal` is true. It is best to not define this
+> unless you know what you're doing. Popper works with a PopupStack and in order for z-indexes to
+> work correctly, all Popups on your page should live on the same root element otherwise you risk
+> running into rendering issues:
+> https://philipwalton.com/articles/what-no-one-told-you-about-z-index/.
+
+Default: `document.body`
+
+#### `open: boolean`
+
+> Determines if `Popper` content should be rendered. The content only exists in the DOM when `open`
+> is `true`
+
+Default: `true`
+
+#### `placement: PopperJS.Placement`
+
+> The placement of the `Popper` contents relative to the `anchorElement`. Accepts `auto`, `top`,
+> `right`, `bottom`, or `left`. Each placement can also be modified using any of the following
+> variations: `-start` or `-end`.
+
+Default: `'bottom'`
+
+#### `popperOptions: Partial<PopperJS.PopperOptions>`
+
+> The additional options passed to the Popper's `popper.js` instance.
+
+#### `portal: boolean`
+
+> If true, attach the Popper to the `containerElement`. If false, render the Popper within the DOM
+> hierarchy of its parent. A non-portal Popper will constrained by the parent container overflows.
+> If you set this to `false`, you may experience issues where you content gets cut off by scrollbars
+> or `overflow: hidden`
+
+Default: `true`
+
 ## Popup
 
-### Usage
+### Popup Usage
 
 ```tsx
 import * as React from 'react';
@@ -114,7 +168,7 @@ const MyPopup = () => {
 };
 ```
 
-### Static Properties
+### Popup Static Properties
 
 #### `Padding: PopupPadding`
 
@@ -122,15 +176,13 @@ const MyPopup = () => {
 <Popup padding={Popup.Padding.l}>{this.props.children}</Popup>
 ```
 
-### Component Props
-
-### Required
+### Popup Required Props
 
 > None
 
 ---
 
-#### Optional
+### Popup Optional Props
 
 #### `padding: PopupPadding`
 
@@ -216,6 +268,8 @@ required for proper z-index values to ensure Popups are rendered correct. It is 
 global listeners like click outside or escape key closing a popup. Without the Popup stack, all
 popups will close rather than only the topmost one.
 
+This should be used by all stacked UIs unless using the `Popper` component.
+
 ## useAssistiveHideSiblings
 
 ```ts
@@ -230,7 +284,9 @@ for the provided `ref` element (the Modal). This will effectively hide all conte
 from assistive technology including Web Rotor for VoiceOver for example.
 
 **Note**: The provided `ref` element should be root element of your component so that other elements
-_outside_ your component will be hidden rather than elements _inside_ your component
+_outside_ your component will be hidden rather than elements _inside_ your component.
+
+This should be used on stacked UI elements that need to hide content. Like Modals.
 
 ## useBringToTopOnClick
 
@@ -243,6 +299,8 @@ element is clicked. If `Popper` was used or `PopupStack.add` provided an `owner`
 will also be brought to the top. A "child" popup is a Popup is a Popup that was opened from another
 Popup. Usually this is a Tooltip or Select component inside something like a Modal.
 
+This should be used on stacked UI elements that are meant to persist, like Windows.
+
 ## useCloseOnEscape
 
 ```ts
@@ -252,6 +310,9 @@ useCloseOnEscape(ref: React.RefObject<HTMLElement>, onClose: () => void): void
 Registers global detection of the Escape key. It will only call the `onClose` callback if the
 provided `ref` element is the topmost in the stack. The `ref` should be the same as the one passed
 to `usePopupStack` or the `Popper` component since `Popper` uses `usePopupStack` internally.
+
+This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
+dialogs, dropdown menus, etc.
 
 ## useCloseOnOutsideClick
 
@@ -264,6 +325,9 @@ happened outside the `ref` element and its children _and_ the provided `ref` ele
 in the stack. The `ref` should be the same as the one passed to `usePopupStack` or the `Popper`
 component since `Popper` uses `usePopupStack` internally.
 
+This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
+dialogs, dropdown menus, etc.
+
 ## onFocusTrap
 
 ```ts
@@ -274,3 +338,5 @@ onFocusTrap(ref: React.RefObject<HTMLElement>): void
 modals. If a keyboard users hits the Tab or Shift + Tab, this will force "looping" of focus. It
 effectively "hides" outside content from keyboard users. Use an overlay to hide content from mouse
 users and `useAssistiveHideSiblings` to hide content from assistive technology users.
+
+This should be used on stacked UI elements that need to hide content. Like Modals.
