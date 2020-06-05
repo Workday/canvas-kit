@@ -73,8 +73,10 @@ export default class Layout extends React.Component<LayoutProps> {
         return child;
       }
 
+      const {spacing = spacingNumbers.xs} = this.props;
+
       return React.cloneElement(child as React.ReactElement<ColumnProps>, {
-        spacing: this.props.spacing,
+        spacing,
       });
     }
 
