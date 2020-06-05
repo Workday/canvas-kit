@@ -208,7 +208,7 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
 const colorNames = Object.keys(colors)
   .map(color => color.replace(/\d+$/, '')) // Remove shade numbers
   .filter(key => key !== 'primary' && key !== 'gradients')
-  .reduce((collection, color) => {
+  .reduce((collection: string[], color: string) => {
     // Remove duplicates
     if (collection.indexOf(color) < 0) {
       collection.push(color);
