@@ -271,7 +271,6 @@ const SelectMenu = (props: SelectMenuProps) => {
   };
 
   useEffect(() => {
-    console.log('Running width change effect, width:', width);
     handleWidthChange();
   }, [width]);
 
@@ -283,17 +282,14 @@ const SelectMenu = (props: SelectMenuProps) => {
   // through other means.
   useEffect(() => {
     // Update menu width state on resize to ensure menu resizes as window resizes
-    console.log('Adding window resize listener');
     window.addEventListener('resize', handleWidthChange);
 
     return () => {
-      console.log('Removing window resize listener');
       window.removeEventListener('resize', handleWidthChange);
     };
   }, []);
 
   // Render nothing if buttonRef.current hasn't been set
-  // console.log('(render) buttonRef.current:', buttonRef.current);
   return buttonRef.current ? (
     <Popper
       placement={isFlipped ? 'top-start' : 'bottom-start'}
