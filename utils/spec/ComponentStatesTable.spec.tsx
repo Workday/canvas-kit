@@ -16,7 +16,10 @@ describe('Component States Table', () => {
           {label: 'Focus', value: 'focus'},
           {label: 'Active', value: 'active'},
         ],
-        disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+        disabled: [
+          {label: '', value: false},
+          {label: 'Disabled', value: true},
+        ],
       };
 
       const results = [
@@ -37,8 +40,14 @@ describe('Component States Table', () => {
   describe('when permutateProps function is called with a filter', () => {
     it('should return the expected filtered permutations', () => {
       const propDeclaration = {
-        checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
-        indeterminate: [{value: true, label: 'Indeterminate'}, {value: false, label: ''}],
+        checked: [
+          {value: true, label: 'Checked'},
+          {value: false, label: 'Unchecked'},
+        ],
+        indeterminate: [
+          {value: true, label: 'Indeterminate'},
+          {value: false, label: ''},
+        ],
         error: [
           {value: undefined, label: ''},
           {value: ErrorType.Alert, label: 'Alert'},

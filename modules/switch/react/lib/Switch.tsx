@@ -65,6 +65,7 @@ const SwitchInput = styled('input')<SwitchProps>(
     marginLeft: spacing.xxxs,
     borderRadius: borderRadius.circle,
     opacity: 0,
+    display: 'block',
   },
   ({disabled}) => ({
     cursor: disabled ? 'not-allowed' : 'pointer',

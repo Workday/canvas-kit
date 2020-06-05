@@ -289,7 +289,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     // of focus (i.e., so focus is immediately transferred to the menu when
     // opening the menu, rather than briefly being applied to the button
     // and creating a momentary flash of a focus ring around the button)
-
     event.preventDefault();
   };
 

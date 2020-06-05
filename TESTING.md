@@ -265,12 +265,12 @@ Component helpers come in 3 flavors:
 
 ## Visual Tests
 
-Canvas Kit uses [ChromaticQA](https://www.chromaticqa.com/) for visual tests which are run on stories
-that are opted-in through a special parameter. All the visual states should be represented at least
-one story. This way all of the visual states of a component can be visually regression tested without
-requiring the test to interact with the UI. These states should include loading states, error states,
-etc. Stories created for visual regression tests should avoid dynamic solutions like
-[knobs](https://github.com/storybookjs/storybook/tree/next/addons/knobs).
+Canvas Kit uses [ChromaticQA](https://www.chromaticqa.com/) for visual tests which are run on
+stories that are opted-in through a special parameter. All the visual states should be represented
+at least one story. This way all of the visual states of a component can be visually regression
+tested without requiring the test to interact with the UI. These states should include loading
+states, error states, etc. Stories created for visual regression tests should avoid dynamic
+solutions like [knobs](https://github.com/storybookjs/storybook/tree/next/addons/knobs).
 
 To make a story runnable in Chromatic for visual testing, add the following to the story's parameter
 list:
@@ -278,25 +278,28 @@ list:
 ```tsx
 // default Storybook API
 storiesOf('Some Category', module)
-  .add('My Visual Story', () => { /** story contents */ })
+  .add('My Visual Story', () => {
+    /** story contents */
+  })
   .addParameter({
     chromatic: {
       disable: false,
     },
   });
+```
 
-// CSF
+```tsx
+// CSF - All stories in file
+export default withSnapshotsEnabled({
+  // CSF details (title, component, etc.)
+});
+
+// or CSF - Specific story
 export const MyVisualStory = () => {
   // story contents
 };
 
-MyVisualStory.story = {
-  parameters: {
-    chromatic: {
-      disabled: false,
-    },
-  }
-};
+withSnapshotsEnabled(MyVisualStory);
 ```
 
 Not all visual states are application states (E.g. `focus`, `hover`, and `active` on a button
