@@ -60,6 +60,7 @@ able to compile your code.
 - [Hyperlink](#hyperlink)
 - [IconButton](#iconbutton)
 - [ToolbarIconButton](#toolbariconbutton)
+- [ToolbarDropdownButton](#toolbardropdownbutton)
 
 ---
 
@@ -654,7 +655,7 @@ import {IconButton} from '@workday/canvas-kit-react-button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-<IconButton icon={activityStreamIcon} title="Activity Stream" aria-label="Activity Stream" />;
+<IconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
 
 ## Static Properties
@@ -763,7 +764,8 @@ Default: `undefined`
 # ToolbarIconButton
 
 > Button containing an icon. Icon may be a component from
-> [`canvas-kit-react-icon`](../../icon/react) or an svg element that is used in toolbars.
+> [`canvas-kit-react-icon`](../../icon/react) or an svg element. Note: This button is intended to be
+> used within a toolbar.
 
 ## Usage
 
@@ -771,11 +773,7 @@ Default: `undefined`
 import * as React from 'react';
 import {ToolbarIconButton} from '@workday/canvas-kit-react-button';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-<ToolbarIconButton
-  icon={activityStreamIcon}
-  title="Activity Stream"
-  aria-label="Activity Stream"
-/>;
+<ToolbarIconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
 
 ## Static Properties
@@ -823,5 +821,50 @@ Default: `undefined`
 ### `icon: CanvasSystemIcon`
 
 > The icon of the button. Optional because ToolbarIconButton can also wrap a SystemIcon component.
+
+---
+
+# ToolbarDropdownButton
+
+> Button containing an icon or custom element. Icon may be a component from
+> [`canvas-kit-react-icon`](../../icon/react) or an svg element. By default, the button has a down
+> chevron to the right indicating that it's a dropdown button. Note: This button is intended to be
+> used within a toolbar.
+
+## Usage
+
+```tsx
+import * as React from 'react';
+import {ToolbarDropdownButton} from '@workday/canvas-kit-react-button';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+<ToolbarDropdownButton icon={activityStreamIcon} aria-label="Activity Stream" />;
+```
+
+## Static Properties
+
+> None
+
+## Component Props
+
+### Required
+
+#### `aria-label: string`
+
+> The accessibility label to indicate the action triggered by clicking the toolbar icon button.
+
+---
+
+### Optional
+
+#### `buttonRef: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button. Optional because ToolbarDropdownButton can also wrap a SystemIcon
+> component.
 
 ---
