@@ -110,7 +110,7 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
     },
   },
   ({radius}) => ({
-    borderRadius: radius || borderRadius.m,
+    borderRadius: radius,
   }),
   ({size}) => ({
     width: size || spacing.xxl,
@@ -152,7 +152,7 @@ export const Spacing = () => (
           {size}
           <span>({(spacing as any)[size]})</span>
         </SizeLabel>
-        <Shape size={(spacing as any)[size]} />
+        <Shape size={(spacing as any)[size]} radius={borderRadius.m} />
       </div>
     ))}
   </React.Fragment>
