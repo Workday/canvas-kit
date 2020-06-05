@@ -18,7 +18,7 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    * The content of the Popper. If a function is provided, it will be treated as a Render Prop and
    * pass the `placement` chosen by PopperJS. This `placement` value is useful if your popup needs
    * to animate and that animation depends on the direction of the content in relation to the
-   * `anchorElement`.∑
+   * `anchorElement`.
    */
   children: ((props: {placement: Placement}) => React.ReactNode) | React.ReactNode;
   /**
