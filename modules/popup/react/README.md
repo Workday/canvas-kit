@@ -153,10 +153,14 @@ Default: `true`
 ```tsx
 import * as React from 'react';
 import {Button} from '@workday/canvas-kit-react-button';
-import {Popup, Popper, usePopup} from '@workday/canvas-kit-react-popup';
+import {Popup, Popper, usePopup, use} from '@workday/canvas-kit-react-popup';
 
 const MyPopup = () => {
   const { targetProps, closePopup, popperProps } = usePopup()
+
+  // Add some behaviors
+  useCloseOnOutsideClick(popperProps.ref, closePopup);
+  useCloseOnEscape(popperProps.ref, closePopup);
 
   return (
     <Button {...targetProps}>Toggle Popup</Button>
