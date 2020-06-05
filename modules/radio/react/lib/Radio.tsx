@@ -74,10 +74,17 @@ const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>({
   width: radioWidth,
 });
 
-/**
- * Note: `~ div:first-of-type` refers to `RadioBackground`
- * and was easier to use than a component selector in this case.
- */
+const RadioRipple = styled('span')<Pick<RadioProps, 'disabled'>>({
+  borderRadius: borderRadius.circle,
+  boxShadow: `0 0 0 0 ${colors.soap200}`,
+  height: radioHeight,
+  transition: 'box-shadow 150ms ease-out',
+  width: radioWidth,
+  position: 'absolute',
+  pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
+  zIndex: -1,
+});
+
 const RadioInput = styled('input')<RadioProps>(
   {
     borderRadius: radioBorderRadius,
@@ -90,21 +97,6 @@ const RadioInput = styled('input')<RadioProps>(
     opacity: 0,
     '&:focus, &:active': {
       outline: 'none',
-    },
-  },
-
-  // Ripple
-  {
-    '& ~ div:first-of-type::after': {
-      borderRadius: borderRadius.circle,
-      boxShadow: `0 0 0 0 ${colors.soap200}`,
-      content: '""',
-      display: 'inline-block',
-      height: radioHeight,
-      transition: 'box-shadow 150ms ease-out',
-      width: radioWidth,
-      position: 'absolute',
-      zIndex: -1,
     },
   },
   ({
@@ -120,9 +112,23 @@ const RadioInput = styled('input')<RadioProps>(
     },
   }) => ({
     cursor: disabled ? undefined : 'pointer',
-    '&:hover ~ div:first-of-type::after': {
+    /**
+     * These selectors are targetting various sibling elements (~) here because
+     * their styles need to be connected to changes around the input's state
+     * (e.g. hover, focus, etc.).
+     *
+     * We are choosing not to use component selectors from Emotion in this case.
+     * The Babel transforms have been problematic in the past.
+     */
+
+    // `span:first-of-type` refers to `RadioRipple`, the light grey
+    // element that animates around the component on hover
+    '&:hover ~ span:first-of-type': {
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
+
+    // `div:first-of-type` refers to the `RadioBackground`, the visual facade of the
+    // input (which is visually hidden)
     '&:hover ~ div:first-of-type': {
       backgroundColor: checked
         ? themePrimary.main
@@ -140,7 +146,6 @@ const RadioInput = styled('input')<RadioProps>(
       '& ~ div:first-of-type': {
         borderColor: checked ? themePrimary.main : themeFocusOutline,
         borderWidth: '2px',
-        zIndex: 2,
       },
     },
     '&:checked:focus ~ div:first-of-type': {
@@ -255,6 +260,7 @@ export default class Radio extends React.Component<RadioProps> {
             aria-checked={checked}
             {...elemProps}
           />
+          <RadioRipple />
           <RadioBackground checked={checked} disabled={disabled}>
             <RadioCheck checked={checked} />
           </RadioBackground>

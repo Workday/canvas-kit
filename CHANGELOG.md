@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.8.0 (2020-05-22)
+
+### Infrastructure
+- docs: Remove rebase section for pull requests ([#647](https://github.com/Workday/canvas-kit/pull/647)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Add invalid import rule ([#652](https://github.com/Workday/canvas-kit/pull/652)) [@alanbsmith](https://github.com/alanbsmith)
+- fix: Fix incorrect dep listing ([#668](https://github.com/Workday/canvas-kit/pull/668)) [@lychyi](https://github.com/lychyi)
+- chore: Add public config to create-component script ([#667](https://github.com/Workday/canvas-kit/pull/667)) [@alanbsmith](https://github.com/alanbsmith)
+
+### Components
+- feat(badge): Add CountBadge component ([#566](https://github.com/Workday/canvas-kit/pull/566)) [@alanbsmith](https://github.com/alanbsmith)
+- fix: Add public access to Badge publish config ([#653](https://github.com/Workday/canvas-kit/pull/653)) [@alanbsmith](https://github.com/alanbsmith)
+- fix: Align hover ripple for checkbox and radio components in IE11 ([#651](https://github.com/Workday/canvas-kit/pull/651)) [@lychyi](https://github.com/lychyi)
+- fix(switch): Fix click target for switch ([#671](https://github.com/Workday/canvas-kit/pull/671)) [@mannycarrera4](https://github.com/mannycarrera4)
+
 # 4.0.0-beta.4 (2020-05-20)
 
 ### Infrastructure

@@ -32,8 +32,18 @@ module.exports = {
   env: {
     browser: true,
   },
-  plugins: ['@typescript-eslint', 'jest', 'react', 'prettier', 'react-hooks', 'emotion', 'jsdoc'],
+  plugins: [
+    'workday-custom-rules',
+    '@typescript-eslint',
+    'jest',
+    'react',
+    'prettier',
+    'react-hooks',
+    'emotion',
+    'jsdoc',
+  ],
   rules: {
+    'workday-custom-rules/restricted-imports': 'error',
     '@typescript-eslint/class-name-casing': 'error',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/interface-name-prefix': 'error',
