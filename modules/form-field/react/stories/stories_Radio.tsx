@@ -13,161 +13,233 @@ const hintId = 'error-desc-id';
 storiesOf('Components|Inputs/Radio/React/Top Label/Radio Group', module)
   .addParameters({component: RadioGroup})
   .addDecorator(withReadme(README))
-  .add('Default', () => {
-    const [value, setValue] = React.useState(undefined);
-    return (
-      <FormField label="Label" useFieldset={true}>
-        <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
-          <Radio id="1" value="email" label="E-mail" />
-          <Radio id="2" value="phone" label="Phone" />
-          <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-          <Radio id="4" value="mail" label="Mail" />
-        </RadioGroup>
-      </FormField>
-    );
-  })
-  .add('Alert', () => {
-    const [value, setValue] = React.useState(undefined);
-    return (
-      <FormField
-        label="Label"
-        useFieldset={true}
-        error={FormField.ErrorType.Alert}
-        hintText={hintText}
-        hintId={hintId}
-      >
-        <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
-          <Radio id="1" value="email" label="E-mail" />
-          <Radio id="2" value="phone" label="Phone" />
-          <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-          <Radio id="4" value="mail" label="Mail" />
-        </RadioGroup>
-      </FormField>
-    );
-  })
-  .add('Error with Grow', () => {
-    const [value, setValue] = React.useState(undefined);
-    return (
-      <FormField
-        label="Label"
-        useFieldset={true}
-        error={FormField.ErrorType.Error}
-        grow={true}
-        hintText={hintText}
-        hintId={hintId}
-      >
-        <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
-          <Radio id="1" value="email" label="E-mail" />
-          <Radio id="2" value="phone" label="Phone" />
-          <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-          <Radio id="4" value="mail" label="Mail" />
-        </RadioGroup>
-      </FormField>
-    );
-  });
+  .add(
+    'Default',
+    () => {
+      const [value, setValue] = React.useState(undefined);
+      return (
+        <FormField label="Label" useFieldset={true}>
+          <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
+            <Radio id="1" value="email" label="E-mail" />
+            <Radio id="2" value="phone" label="Phone" />
+            <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
+            <Radio id="4" value="mail" label="Mail" />
+          </RadioGroup>
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  )
+  .add(
+    'Alert',
+    () => {
+      const [value, setValue] = React.useState(undefined);
+      return (
+        <FormField
+          label="Label"
+          useFieldset={true}
+          error={FormField.ErrorType.Alert}
+          hintText={hintText}
+          hintId={hintId}
+        >
+          <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
+            <Radio id="1" value="email" label="E-mail" />
+            <Radio id="2" value="phone" label="Phone" />
+            <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
+            <Radio id="4" value="mail" label="Mail" />
+          </RadioGroup>
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  )
+  .add(
+    'Error with Grow',
+    () => {
+      const [value, setValue] = React.useState(undefined);
+      return (
+        <FormField
+          label="Label"
+          useFieldset={true}
+          error={FormField.ErrorType.Error}
+          grow={true}
+          hintText={hintText}
+          hintId={hintId}
+        >
+          <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
+            <Radio id="1" value="email" label="E-mail" />
+            <Radio id="2" value="phone" label="Phone" />
+            <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
+            <Radio id="4" value="mail" label="Mail" />
+          </RadioGroup>
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  );
 
 storiesOf('Components|Inputs/Radio/React/Top Label/Radio', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
-  .add('Default', () => {
-    const [checked, setChecked] = React.useState(false);
-    return (
-      <FormField label="Label">
-        <Radio
-          value="email"
-          label="E-mail"
-          checked={checked}
-          onChange={() => setChecked(!checked)}
-        />
-      </FormField>
-    );
-  });
+  .add(
+    'Default',
+    () => {
+      const [checked, setChecked] = React.useState(false);
+      return (
+        <FormField label="Label">
+          <Radio
+            value="email"
+            label="E-mail"
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+          />
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  );
 
 storiesOf('Components|Inputs/Radio/React/Left Label/Radio Group', module)
   .addParameters({component: RadioGroup})
   .addDecorator(withReadme(README))
-  .add('Default', () => {
-    const [value, setValue] = React.useState(undefined);
-    return (
-      <FormField label="Label" useFieldset={true} labelPosition={FormField.LabelPosition.Left}>
-        <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
-          <Radio id="1" value="email" label="E-mail" />
-          <Radio id="2" value="phone" label="Phone" />
-          <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-          <Radio id="4" value="mail" label="Mail" />
-        </RadioGroup>
-      </FormField>
-    );
-  })
-  .add('Alert', () => {
-    const [value, setValue] = React.useState(undefined);
-    return (
-      <FormField
-        label="Label"
-        useFieldset={true}
-        error={FormField.ErrorType.Alert}
-        hintText={hintText}
-        hintId={hintId}
-        labelPosition={FormField.LabelPosition.Left}
-      >
-        <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
-          <Radio id="1" value="email" label="E-mail" />
-          <Radio id="2" value="phone" label="Phone" />
-          <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-          <Radio id="4" value="mail" label="Mail" />
-        </RadioGroup>
-      </FormField>
-    );
-  })
-  .add('Error with Grow', () => {
-    const [value, setValue] = React.useState(undefined);
-    return (
-      <FormField
-        label="Label"
-        useFieldset={true}
-        error={FormField.ErrorType.Error}
-        grow={true}
-        hintText={hintText}
-        hintId={hintId}
-        labelPosition={FormField.LabelPosition.Left}
-      >
-        <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
-          <Radio id="1" value="email" label="E-mail" />
-          <Radio id="2" value="phone" label="Phone" />
-          <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
-          <Radio id="4" value="mail" label="Mail" />
-        </RadioGroup>
-      </FormField>
-    );
-  });
+  .add(
+    'Default',
+    () => {
+      const [value, setValue] = React.useState(undefined);
+      return (
+        <FormField label="Label" useFieldset={true} labelPosition={FormField.LabelPosition.Left}>
+          <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
+            <Radio id="1" value="email" label="E-mail" />
+            <Radio id="2" value="phone" label="Phone" />
+            <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
+            <Radio id="4" value="mail" label="Mail" />
+          </RadioGroup>
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  )
+  .add(
+    'Alert',
+    () => {
+      const [value, setValue] = React.useState(undefined);
+      return (
+        <FormField
+          label="Label"
+          useFieldset={true}
+          error={FormField.ErrorType.Alert}
+          hintText={hintText}
+          hintId={hintId}
+          labelPosition={FormField.LabelPosition.Left}
+        >
+          <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
+            <Radio id="1" value="email" label="E-mail" />
+            <Radio id="2" value="phone" label="Phone" />
+            <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
+            <Radio id="4" value="mail" label="Mail" />
+          </RadioGroup>
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  )
+  .add(
+    'Error with Grow',
+    () => {
+      const [value, setValue] = React.useState(undefined);
+      return (
+        <FormField
+          label="Label"
+          useFieldset={true}
+          error={FormField.ErrorType.Error}
+          grow={true}
+          hintText={hintText}
+          hintId={hintId}
+          labelPosition={FormField.LabelPosition.Left}
+        >
+          <RadioGroup name="contact" value={value} onChange={value => setValue(value)}>
+            <Radio id="1" value="email" label="E-mail" />
+            <Radio id="2" value="phone" label="Phone" />
+            <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
+            <Radio id="4" value="mail" label="Mail" />
+          </RadioGroup>
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  );
 
 storiesOf('Components|Inputs/Radio/React/Left Label/Radio', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
-  .add('Default', () => {
-    const [checked, setChecked] = React.useState(false);
-    return (
-      <FormField label="Label" labelPosition={FormField.LabelPosition.Left}>
-        <Radio
-          value="email"
-          label="E-mail"
-          checked={checked}
-          onChange={() => setChecked(!checked)}
-        />
-      </FormField>
-    );
-  })
-  .add('Disabled', () => {
-    const [checked, setChecked] = React.useState(false);
-    return (
-      <FormField label="Label" labelPosition={FormField.LabelPosition.Left}>
-        <Radio
-          disabled
-          value="email"
-          label="E-mail"
-          checked={checked}
-          onChange={() => setChecked(!checked)}
-        />
-      </FormField>
-    );
-  });
+  .add(
+    'Default',
+    () => {
+      const [checked, setChecked] = React.useState(false);
+      return (
+        <FormField label="Label" labelPosition={FormField.LabelPosition.Left}>
+          <Radio
+            value="email"
+            label="E-mail"
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+          />
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  )
+  .add(
+    'Disabled',
+    () => {
+      const [checked, setChecked] = React.useState(false);
+      return (
+        <FormField label="Label" labelPosition={FormField.LabelPosition.Left}>
+          <Radio
+            disabled
+            value="email"
+            label="E-mail"
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+          />
+        </FormField>
+      );
+    },
+    {
+      chromatic: {
+        disable: false,
+      },
+    }
+  );
