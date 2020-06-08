@@ -48,6 +48,21 @@ export function getValue(index: number, length: number): number {
   return Math.max(min, max - (length - index) + 1);
 }
 
+// IE11 doesn't support Array.prototype.find, so we'll polyfill here
+function find<T>(
+  items: T[],
+  predicate: (value: T, index: number, obj: T[]) => boolean,
+  thisArg?: any
+): T | undefined {
+  const length = items.length;
+  for (let i = 0; i < length; i++) {
+    if (predicate(items[i], i, items)) {
+      return items[i];
+    }
+  }
+  return;
+}
+
 /**
  * Sets the z-index value of all elements in the stack according to the `getValue` function. This
  * will be run any time the stack changes.
@@ -66,7 +81,7 @@ function setZIndexOfElements(elements: HTMLElement[]): void {
 function getOwnerPopup(element: HTMLElement, items: PopupStackItem[]): HTMLElement | undefined {
   let parentEl: HTMLElement | null = element;
   do {
-    const owner = items.find(el => el.element === parentEl);
+    const owner = find(items, el => el.element === parentEl);
     if (owner) {
       return owner.element;
     }
@@ -168,7 +183,7 @@ export const PopupStack = {
    * the top of the stack.
    */
   bringToTop(element: HTMLElement): void {
-    const item = stack.items.find(i => i.element === element);
+    const item = find(stack.items, i => i.element === element);
 
     if (item) {
       stack.items = [...stack.items.filter(i => i !== item), item];
@@ -198,7 +213,7 @@ export const PopupStack = {
    * - The `eventTarget` is a DOM child of the `owner` element
    */
   contains(element: HTMLElement, eventTarget: HTMLElement): boolean {
-    const item = stack.items.find(i => i.element === element);
+    const item = find(stack.items, i => i.element === element);
 
     if (item) {
       return (
