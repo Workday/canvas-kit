@@ -4,6 +4,13 @@ import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {Modal, useModal} from '@workday/canvas-kit-react-modal';
+import {
+  Popup,
+  Popper,
+  usePopup,
+  useCloseOnOutsideClick,
+  useCloseOnEscape,
+} from '@workday/canvas-kit-react-popup';
 
 import {Button, DeleteButton} from '../../../button/react';
 import {FormField} from '../../../form-field/react';
@@ -230,3 +237,45 @@ export const StackedModals = () => {
 };
 
 testingOnly(StackedModals);
+
+export const ModalWithPopup = () => {
+  const modal = useModal();
+  const popup = usePopup();
+
+  useCloseOnOutsideClick(popup.popperProps.ref, popup.closePopup);
+  useCloseOnEscape(popup.popperProps.ref, popup.closePopup);
+
+  return (
+    <>
+      <DeleteButton {...modal.targetProps}>Delete Item</DeleteButton>
+      <Modal heading={'Delete Item'} {...modal.modalProps}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <DeleteButton style={{marginRight: '16px'}} {...popup.targetProps}>
+          Yes, Delete
+        </DeleteButton>
+        <Button onClick={modal.closeModal} variant={Button.Variant.Secondary}>
+          Cancel
+        </Button>
+        <Popper {...popup.popperProps}>
+          <Popup heading={'Really Delete Item'} handleClose={popup.closePopup}>
+            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+            <DeleteButton
+              style={{marginRight: '16px'}}
+              onClick={() => {
+                modal.closeModal();
+                popup.closePopup();
+              }}
+            >
+              Yes, Really Delete
+            </DeleteButton>
+            <Button onClick={popup.closePopup} variant={Button.Variant.Secondary}>
+              Cancel
+            </Button>
+          </Popup>
+        </Popper>
+      </Modal>
+    </>
+  );
+};
+
+testingOnly(ModalWithPopup);

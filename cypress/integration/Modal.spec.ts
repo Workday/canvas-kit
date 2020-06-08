@@ -433,4 +433,37 @@ describe('Modal', () => {
       });
     });
   });
+
+  context(`given the 'ModalWithPopup' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components|Popups/Modal/React', 'ModalWithPopup');
+    });
+
+    context('when both modal and popup are opened', () => {
+      beforeEach(() => {
+        cy.contains('button', 'Delete Item').click();
+        cy.contains('button', 'Yes, Delete').click();
+      });
+
+      it('should open the second modal', () => {
+        cy.findByLabelText('Really Delete Item').should('exist');
+      });
+
+      context('when the modal overlay is clicked', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Delete Item')
+            .parent() // overlay
+            .click('top');
+        });
+
+        it('should close the popup', () => {
+          cy.findByLabelText('Really Delete Item').should('not.exist');
+        });
+
+        it('should not close the modal', () => {
+          cy.findByLabelText('Delete Item').should('exist');
+        });
+      });
+    });
+  });
 });

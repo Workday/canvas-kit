@@ -9,6 +9,7 @@ import Popup, {
   useAssistiveHideSiblings,
   useFocusTrap,
 } from '@workday/canvas-kit-react-popup';
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
 import {ModalWidth} from './Modal';
 
@@ -159,7 +160,7 @@ const ModalContent = ({
 
   // special handling for clicking on the overlay
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (event.target === modalRef.current) {
+    if (event.target === modalRef.current && PopupStack.isTopmost(modalRef.current)) {
       onClose();
     }
   };

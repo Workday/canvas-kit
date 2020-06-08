@@ -47,6 +47,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@workday/canvas-kit-popup-stack": "0.0.0",
     "@workday/canvas-kit-react-popup": "4.0.0-beta.4"
   },
   "peerDependencies": {
