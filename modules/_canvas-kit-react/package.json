@@ -48,6 +48,7 @@
   "dependencies": {
     "@workday/canvas-kit-react-action-bar": "4.0.0-beta.4",
     "@workday/canvas-kit-react-avatar": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-badge": "4.0.0-beta.4",
     "@workday/canvas-kit-react-banner": "4.0.0-beta.4",
     "@workday/canvas-kit-react-button": "4.0.0-beta.4",
     "@workday/canvas-kit-react-card": "4.0.0-beta.4",

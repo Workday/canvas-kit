@@ -2,13 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {
-  controlComponent,
-  ComponentStatesTable,
-  permutateProps,
-  customColorTheme,
-} from '../../../../utils/storybook';
+import {controlComponent} from '../../../../utils/storybook';
 
 import {TextArea} from '../../../text-area/react';
 import FormField from '../index';
@@ -162,70 +156,3 @@ storiesOf('Components|Inputs/TextArea/React/Left Label', module)
       {controlComponent(<TextArea placeholder="Placeholder" />)}
     </FormField>
   ));
-
-const TextAreaStates = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={permutateProps(
-        {
-          value: [{value: 'Input value', label: 'With Value'}, {value: '', label: 'No Value'}],
-          placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
-          error: [
-            {value: undefined, label: ''},
-            {value: TextArea.ErrorType.Alert, label: 'Alert'},
-            {value: TextArea.ErrorType.Error, label: 'Error'},
-          ],
-        },
-        props => {
-          if (props.value === '' && !props.placeholder) {
-            return false;
-          }
-          return true;
-        }
-      )}
-      columnProps={permutateProps(
-        {
-          className: [
-            {label: 'Default', value: ''},
-            {label: 'Hover', value: 'hover'},
-            {label: 'Focus', value: 'focus'},
-            {label: 'Focus Hover', value: 'focus hover'},
-            {label: 'Active', value: 'active'},
-            {label: 'Active Hover', value: 'active hover'},
-          ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-        },
-        props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
-        }
-      )}
-    >
-      {props => (
-        <TextArea
-          {...props}
-          style={{minWidth: 60, width: 100}}
-          onChange={() => {}} // eslint-disable-line no-empty-function
-        />
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
-
-storiesOf('Components|Inputs/TextArea/React/Visual Testing', module)
-  .addParameters({
-    component: TextArea,
-    chromatic: {
-      disable: false,
-    },
-  })
-  .addDecorator(withReadme(README))
-  .add('States', () => <TextAreaStates />)
-  .addParameters({
-    canvasProviderDecorator: {
-      theme: customColorTheme,
-    },
-  })
-  .add('Theming', () => <TextAreaStates />);
