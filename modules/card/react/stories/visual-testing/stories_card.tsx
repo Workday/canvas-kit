@@ -15,7 +15,7 @@ export default withSnapshotsEnabled({
   component: Card,
 });
 
-export const DeleteButtonStates = () => (
+export const CardStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
