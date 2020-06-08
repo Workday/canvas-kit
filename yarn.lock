@@ -5601,6 +5601,20 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-depth-web/-/canvas-depth-web-0.16.4.tgz#3714a1a955055386a2b70cc05852162b1e056bf2"
   integrity sha512-l4LpCUk2G1FVRfo0Z+MkCWa9bzNIfWdUqGtdXaFSBySYgYvLhG6vNNuTK1VXls8jQdFCUROhKRWcy3Ht1n7NDg==
 
+"@workday/canvas-kit-labs-react-core@^3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-labs-react-core/-/canvas-kit-labs-react-core-3.8.0.tgz#8b9f141a91f1d6d962755ad31d481d70a38b2136"
+  integrity sha512-BNWkPZjIlKel3WBRlazre0b5As3Y3nNwJjdBL6kU+YQ1Jot0QGrSCz9WQ0vrRp482ut4QsDZ4Y7eZC3DSS1PCw==
+  dependencies:
+    "@emotion/core" "^10.0.28"
+    "@emotion/styled" "^10.0.27"
+    "@workday/canvas-colors-web" "^0.17.13"
+    "@workday/canvas-kit-react-core" "^3.8.0"
+    chroma-js "^2.1.0"
+    emotion-theming "^10.0.10"
+    lodash "^4.17.14"
+    rtl-css-js "^1.13.1"
+
 "@workday/canvas-space-web@^0.15.5":
   version "0.15.6"
   resolved "https://registry.yarnpkg.com/@workday/canvas-space-web/-/canvas-space-web-0.15.6.tgz#8a7ddca7734507860360d6e67abdf519c9c7a4f1"
@@ -23563,9 +23577,9 @@ websocket-driver@>=0.5.1:
     websocket-extensions ">=0.1.1"
 
 websocket-extensions@>=0.1.1:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
-  integrity sha512-nqHUnMXmBzT0w570r2JpJxfiSD1IzoI+HGVdd3aZ0yNi3ngvQ4jv1dtHt5VGxfI2yj5yqImPhOK4vmIh2xMbGg==
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.4.tgz#7f8473bc839dfd87608adb95d7eb075211578a42"
+  integrity sha512-OqedPIGOfsDlo31UNwYbCFMSaO9m9G/0faIHj5/dZFDMFqPTcx6UwqyOy3COEaEOg/9VsGIpdqn62W5KhoKSpg==
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3, whatwg-encoding@^1.0.5:
   version "1.0.5"
