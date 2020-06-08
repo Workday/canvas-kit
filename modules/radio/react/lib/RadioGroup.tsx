@@ -70,17 +70,20 @@ export default class RadioGroup extends React.Component<RadioGroupProps> {
     const {value = 0, children, error, onChange, grow, ...elemProps} = this.props;
     return (
       <Container error={error} grow={grow} {...elemProps}>
-        {React.Children.map(children, this.renderChild)}
+        {React.Children.map(children, (child, index) => this.renderChild(child, index, value))}
       </Container>
     );
   }
 
-  private renderChild = (child: React.ReactElement<RadioProps>, index: number): React.ReactNode => {
-    const {value = 0, name: parentName} = this.props;
+  private renderChild = (
+    child: React.ReactElement<RadioProps>,
+    index: number,
+    value: string | number
+  ): React.ReactNode => {
     if (typeof child.type === typeof Radio) {
       const childProps = child.props;
       const checked = typeof value === 'number' ? index === value : childProps.value === value;
-      const name = parentName ? parentName : childProps.name;
+      const name = this.props.name ? this.props.name : childProps.name;
 
       return React.cloneElement(child, {
         checked,
