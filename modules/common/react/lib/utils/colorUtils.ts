@@ -11,7 +11,9 @@ export const expandHex = (hex: string) => {
 
 /**
  *
- * Chooses foreground color with highest contrast against background
+ * Chooses foreground color with accesible contrast against background. If contrast ratio
+ * is greater than 4.5:1, chooses light color. Otherwise, chooses light or dark based on
+ * which highest contrast against background.
  * (https://www.w3.org/TR/WCAG20-TECHS/G18.html)
  */
 export const pickForegroundColor = (
@@ -20,7 +22,9 @@ export const pickForegroundColor = (
   lightColor: string = colors.frenchVanilla100
 ) => {
   if (chroma.valid(background)) {
-    return chroma.contrast(background, darkColor) >= chroma.contrast(background, lightColor)
+    return chroma.contrast(background, lightColor) >= 4.5
+      ? lightColor
+      : chroma.contrast(background, darkColor) >= chroma.contrast(background, lightColor)
       ? darkColor
       : lightColor;
   } else {

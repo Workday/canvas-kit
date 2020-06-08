@@ -23,5 +23,15 @@ describe('Color Utils methods', () => {
         colors.blueberry600
       );
     });
+    it('should always favor lightColor if above 4.5', () => {
+      // #767676 has contrast of 4.54 against white and 4.62 against black
+      // should favor light even though black is higher
+      expect(pickForegroundColor('#555')).toEqual(colors.frenchVanilla100);
+    });
+    it('should favor higher contrast if both below 4.5', () => {
+      // both colors have low contrast. should favor the higher one
+      expect(pickForegroundColor('white', '#eee', '#ddd')).toEqual('#ddd');
+      expect(pickForegroundColor('white', '#ddd', '#eee')).toEqual('#ddd');
+    });
   });
 });
