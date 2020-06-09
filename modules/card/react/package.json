@@ -52,5 +52,9 @@
     "@emotion/is-prop-valid": "^0.8.2",
     "@emotion/styled": "^10.0.27",
     "@workday/canvas-kit-react-core": "4.0.0-beta.4"
+  },
+  "devDependencies": {
+    "@workday/canvas-kit-react-core": "4.0.0-beta.4",
+    "@workday/canvas-kit-labs-react-core": "4.0.0-beta.4"
   }
 }
