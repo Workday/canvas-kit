@@ -193,6 +193,7 @@ export const PopupStack = {
       //   under the Popup
       // - Clicking a button opens a new Popup, but that click bubbles up to a `bringToTop` call
       //   putting the new popup under an existing one
+      // Example: https://user-images.githubusercontent.com/338257/83924476-031af580-a742-11ea-8f68-0edabdf0fd6a.gif
       getChildPopups(item, stack.items).forEach(popup => {
         PopupStack.bringToTop(popup.element);
       });
@@ -206,11 +207,15 @@ export const PopupStack = {
   },
 
   /**
-   * Compares a Popup by its element reference against the event target and the stack. An event target
-   * is considered to be "contained" by an element under the following conditions:
+   * Compares a Popup by its element reference against the event target and the stack. An event
+   * target is considered to be "contained" by an element under the following conditions:
    * - The `eventTarget` is a DOM child of the popup element
    * - The `eventTarget` is the `owner` element passed when it was added to the stack
    * - The `eventTarget` is a DOM child of the `owner` element
+   *
+   * This method should be used instead of `element.contains` so that clicking a popup target can
+   * opt-in to toggling. Otherwise there is no way to opt-out of toggle behavior (because the target
+   * is not inside `element`).
    */
   contains(element: HTMLElement, eventTarget: HTMLElement): boolean {
     const item = find(stack.items, i => i.element === element);

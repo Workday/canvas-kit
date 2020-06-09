@@ -17,6 +17,9 @@ export const useCloseOnOutsideClick = <E extends HTMLElement>(
   const onClick = (event: MouseEvent) => {
     if (
       PopupStack.isTopmost(ref.current!) &&
+      // Use `PopupStack.contains` instead of `ref.current.contains` so that the application can
+      // decide if clicking the target should toggle the popup rather than it toggling implicitly
+      // because the target is outside `ref.current`
       !PopupStack.contains(ref.current!, event.target as HTMLElement)
     ) {
       onClose();
