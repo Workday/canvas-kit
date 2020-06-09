@@ -4,7 +4,7 @@ import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
@@ -25,7 +25,7 @@ export const ToolbarIconButtonStates = () => (
       {(props: any) => (
         <Container>
           <ToolbarIconButton
-            icon={activityStreamIcon}
+            icon={playCircleIcon}
             aria-label="Play"
             {...props}
             onChange={() => {}} // eslint-disable-line no-empty-function
