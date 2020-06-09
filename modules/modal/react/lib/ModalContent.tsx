@@ -10,6 +10,7 @@ import Popup, {
   useFocusTrap,
 } from '@workday/canvas-kit-react-popup';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {mergeCallback} from '@workday/canvas-kit-react-common';
 
 import {ModalWidth} from './Modal';
 
@@ -172,7 +173,11 @@ const ModalContent = ({
   useAssistiveHideSiblings(modalRef);
 
   const content = (
-    <Container {...elemProps} ref={modalRef} onClick={onOverlayClick}>
+    <Container
+      {...elemProps}
+      ref={modalRef}
+      onClick={mergeCallback(onOverlayClick, elemProps.onClick)}
+    >
       <Popup
         width={width}
         heading={heading}

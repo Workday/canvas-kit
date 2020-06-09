@@ -10,7 +10,7 @@ Hooks.
 If you are building your own custom stacked UI components, use the [Popper](#popper) component along
 with our [hooks](#hooks). The `Popper` component and hooks work with the stack management system for
 correct rendering and accessibility behavior. If you cannot use `Popper`, use the
-[usePopupStack](#usepoupstack) hook. to properly register and deregister the popup at the correct
+[usePopupStack](#usepoupstack) hook to properly register and deregister the popup at the correct
 time. If you cannot use our hooks, consider upgrading your component to use Hooks. If you cannot do
 that, you'll have to look up the `PopupStack` package for the direct API and have a look at the
 source code for our hooks into the `PopupStack` API.
@@ -300,8 +300,8 @@ useBringToTopOnClick(ref: React.RefObject<HTMLElement>): void
 
 This hook will bring an element to the top of the stack when any element inside the provided `ref`
 element is clicked. If `Popper` was used or `PopupStack.add` provided an `owner`, all "child" popups
-will also be brought to the top. A "child" popup is a Popup is a Popup that was opened from another
-Popup. Usually this is a Tooltip or Select component inside something like a Modal.
+will also be brought to the top. A "child" popup is a Popup that was opened from another Popup.
+Usually this is a Tooltip or Select component inside something like a Modal.
 
 This should be used on stacked UI elements that are meant to persist, like Windows.
 
