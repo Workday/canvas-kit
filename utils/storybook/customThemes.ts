@@ -4,6 +4,7 @@ export const customColorTheme: PartialCanvasTheme = {
   palette: {
     primary: {
       main: 'purple',
+      contrast: 'turquoise',
     },
     alert: {
       main: 'coral',
