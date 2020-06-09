@@ -49,8 +49,7 @@ describe('Tooltip', () => {
           });
         });
 
-        // TODO: implement this functionality
-        it.skip('should close the tooltip', () => {
+        it('should close the tooltip', () => {
           cy.findByRole('tooltip').should('not.be.visible');
         });
       });

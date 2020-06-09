@@ -77,7 +77,8 @@ module.exports = {
     'no-param-reassign': 'error',
     'no-redeclare': 'error',
     'no-undef-init': 'error',
-    'no-unused-expressions': 'error',
+    'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': 'error',
     'no-unused-labels': 'error',
     'no-use-before-define': 'off', // TS takes care of this one...
     'no-var': 'error',
