@@ -1,22 +1,22 @@
 import * as React from 'react';
 import {
   ErrorType,
+  uniqueId,
   focusRing,
   mouseFocusBehavior,
   getErrorColors,
   styled,
+  useTheme,
   Themeable,
 } from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
-  iconColors,
   inputColors,
   spacingNumbers as spacing,
 } from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
-import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -263,11 +263,15 @@ const CheckboxCheck = styled('div')<Pick<CheckboxProps, 'checked'>>(
   })
 );
 
-const IndeterminateBox = styled('div')({
-  width: '10px',
-  height: '2px',
-  backgroundColor: canvas.colors.frenchVanilla100,
-});
+const IndeterminateBox = styled('div')(
+  {
+    width: '10px',
+    height: '2px',
+  },
+  ({theme}) => ({
+    backgroundColor: theme.canvas.palette.primary.contrast,
+  })
+);
 
 const CheckboxLabel = styled('label')<{disabled?: boolean}>(
   {
@@ -277,57 +281,52 @@ const CheckboxLabel = styled('label')<{disabled?: boolean}>(
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
 );
 
-export default class Checkbox extends React.Component<CheckboxProps> {
-  static ErrorType = ErrorType;
+export const Checkbox = ({
+  checked = false,
+  label = '',
+  theme = useTheme(),
+  id = uniqueId(),
+  disabled,
+  inputRef,
+  onChange,
+  value,
+  error,
+  indeterminate,
+  // TODO: Standardize on prop spread location (see #150)
+  ...elemProps
+}: CheckboxProps) => (
+  <CheckboxContainer>
+    <CheckboxInputWrapper disabled={disabled}>
+      <CheckboxInput
+        checked={checked}
+        disabled={disabled}
+        id={id}
+        ref={inputRef}
+        onChange={onChange}
+        type="checkbox"
+        value={value}
+        error={error}
+        {...elemProps}
+      />
+      <CheckboxRipple />
+      <CheckboxBackground checked={checked} disabled={disabled}>
+        <CheckboxCheck checked={checked}>
+          {indeterminate ? (
+            <IndeterminateBox />
+          ) : (
+            <SystemIcon icon={checkSmallIcon} color={theme.canvas.palette.primary.contrast} />
+          )}
+        </CheckboxCheck>
+      </CheckboxBackground>
+    </CheckboxInputWrapper>
+    {label && (
+      <CheckboxLabel htmlFor={id} disabled={disabled}>
+        {label}
+      </CheckboxLabel>
+    )}
+  </CheckboxContainer>
+);
 
-  private id = uuid();
+Checkbox.ErrorType = ErrorType;
 
-  public render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {
-      checked = false,
-      id = this.id,
-      label = '',
-      disabled,
-      inputRef,
-      onChange,
-      value,
-      error,
-      indeterminate,
-      ...elemProps
-    } = this.props;
-
-    return (
-      <CheckboxContainer>
-        <CheckboxInputWrapper disabled={disabled}>
-          <CheckboxInput
-            checked={checked}
-            disabled={disabled}
-            id={id}
-            ref={inputRef}
-            onChange={onChange}
-            type="checkbox"
-            value={value}
-            error={error}
-            {...elemProps}
-          />
-          <CheckboxRipple />
-          <CheckboxBackground checked={checked} disabled={disabled}>
-            <CheckboxCheck checked={checked}>
-              {indeterminate ? (
-                <IndeterminateBox />
-              ) : (
-                <SystemIcon icon={checkSmallIcon} color={iconColors.inverse} />
-              )}
-            </CheckboxCheck>
-          </CheckboxBackground>
-        </CheckboxInputWrapper>
-        {label && (
-          <CheckboxLabel htmlFor={id} disabled={disabled}>
-            {label}
-          </CheckboxLabel>
-        )}
-      </CheckboxContainer>
-    );
-  }
-}
+export default Checkbox;
