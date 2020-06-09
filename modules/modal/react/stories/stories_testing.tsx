@@ -12,7 +12,7 @@ import {
 } from '@workday/canvas-kit-react-popup';
 
 export default {
-  title: 'Testing|Popups/Modal/React',
+  title: 'Testing|React/Popups/Modal',
   component: Modal,
 };
 

@@ -92,7 +92,7 @@ describe('Popup', () => {
 
   context('given the MultiplePopups story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing|Popups/Popup/React', 'MultiplePopups');
+      h.stories.load('Testing|React/Popups/Popup', 'MultiplePopups');
     });
 
     context('when Open Popup 1 button is clicked', () => {

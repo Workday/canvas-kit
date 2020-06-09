@@ -387,7 +387,7 @@ describe('Modal', () => {
 
   context(`given the 'StackedModals' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing|Popups/Modal/React', 'StackedModals');
+      h.stories.load('Testing|React/Popups/Modal', 'StackedModals');
     });
 
     context('when both modals are opened', () => {
@@ -436,7 +436,7 @@ describe('Modal', () => {
 
   context(`given the 'ModalWithPopup' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing|Popups/Modal/React', 'ModalWithPopup');
+      h.stories.load('Testing|React/Popups/Modal', 'ModalWithPopup');
     });
 
     context('when both modal and popup are opened', () => {

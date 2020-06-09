@@ -56,6 +56,10 @@ yarn add @workday/canvas-kit-popup-stack
 
 ## Usage
 
+> **Note**: This is a low-level module meant to be used as a foundation. The
+> `@workday/canvas-kit-react-popup` module has provided React hooks that wrap this API for easier
+> use with React.
+
 ```tsx
 import PopupStack from '@workday/canvas-kit-popup-stack';
 
