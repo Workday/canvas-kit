@@ -24,7 +24,7 @@ describe('createCanvasTheme', () => {
       },
     };
     const theme = createCanvasTheme(input);
-    const expected = defaultCanvasTheme;
+    const expected = {...defaultCanvasTheme};
     expected.palette.primary = palette;
 
     expect(theme).toEqual(expected);
@@ -39,14 +39,14 @@ describe('createCanvasTheme', () => {
       },
     };
     const theme = createCanvasTheme(input);
-    const expected = defaultCanvasTheme;
+    const expected = {...defaultCanvasTheme};
     expected.palette.primary = {
       lightest: '#ffff7d',
       light: '#ffd64a',
       main: 'orange',
       dark: '#c67600',
       darkest: '#904a00',
-      contrast: '#ffffff',
+      contrast: '#000000',
     };
 
     expect(theme).toEqual(expected);
@@ -56,13 +56,13 @@ describe('createCanvasTheme', () => {
     const input = {
       palette: {
         primary: {
-          dark: 'orange',
+          dark: 'black',
         },
       },
     };
     const theme = createCanvasTheme(input);
-    const expected = defaultCanvasTheme;
-    expected.palette.primary.dark = 'orange';
+    const expected = {...defaultCanvasTheme};
+    expected.palette.primary.dark = 'black';
 
     expect(theme).toEqual(expected);
   });
@@ -116,5 +116,19 @@ describe('createCanvasTheme', () => {
     createCanvasTheme(input);
 
     expect(original).toEqual(defaultCanvasTheme);
+  });
+
+  test('custom theme should have dark contrast when main does not have high enough contrast ratio', () => {
+    const input = {
+      palette: {
+        primary: {
+          main: 'white',
+        },
+      },
+    };
+
+    const theme = createCanvasTheme(input);
+
+    expect(theme.palette.primary.contrast).toEqual('#000000');
   });
 });
