@@ -17,13 +17,18 @@ import {defaultCanvasTheme} from './theme';
  * Tracked on https://github.com/emotion-js/emotion/issues/1193.
  */
 export function useTheme(theme?: Object): CanvasTheme {
-  const context = React.useContext(ThemeContext);
-
   if (theme && Object.keys(theme).length !== 0) {
     return theme as CanvasTheme;
   }
 
   try {
+    // TODO: useContext should not be called conditionally,
+    // but to keep this function working we need to ignore till a refactor can happen.
+    // Ideally there is a getTheme and a useTheme separately where getTheme is used outside of functional components
+    // and useTheme is used inside functional components. Then this try won’t be necessary.
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const context = React.useContext(ThemeContext);
+
     if (context && Object.keys(context).length !== 0) {
       return context as CanvasTheme;
     }
