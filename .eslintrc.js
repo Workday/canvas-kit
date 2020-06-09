@@ -81,7 +81,8 @@ module.exports = {
     'quote-props': 'off',
     'space-before-function-paren': 'off',
     'react/jsx-no-bind': 'off', // Keep perf implications in mind, but was giving too many warnings and hurting readability
-    "react-hooks/exhaustive-deps": 'warn',
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": 'error',
     curly: 'error',
     radix: 'error',
     'prettier/prettier': ['error', prettierConfig],

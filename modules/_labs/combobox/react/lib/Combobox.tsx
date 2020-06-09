@@ -181,8 +181,12 @@ const Combobox = ({
   >([]);
   const [announcementText, setAnnouncementText] = useState('');
 
+  // The text input that is wrapped may have a ref already set, if it doesn't we will use our own default.
+  // This default shouldn't be used on it's own, ut we need to declare separately so hooks are always called in the same order.
+  const _defaultInputRef: React.RefObject<HTMLInputElement> = useRef(null);
   const inputRef: React.RefObject<HTMLInputElement> =
-    (typeof children.props.inputRef !== 'function' && children.props.inputRef) || useRef(null);
+    (typeof children.props.inputRef !== 'function' && children.props.inputRef) || _defaultInputRef;
+
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
 
   const [randomComponentId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
