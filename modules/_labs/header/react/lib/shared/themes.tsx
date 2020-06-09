@@ -1,5 +1,5 @@
 import {focusRing} from '@workday/canvas-kit-react-common';
-import {colors, iconColors, depth, CSSProperties} from '@workday/canvas-kit-react-core';
+import {colors, gradients, iconColors, depth, CSSProperties} from '@workday/canvas-kit-react-core';
 import chroma from 'chroma-js';
 import {HeaderTheme, SearchTheme} from './types';
 
@@ -37,7 +37,7 @@ export const themes: Themes = {
   },
   [HeaderTheme.Blue]: {
     color: colors.frenchVanilla100,
-    background: colors.gradients.blueberry,
+    background: gradients.blueberry,
     depth: depth['3'],
     systemIcon: {
       color: colors.frenchVanilla100,
