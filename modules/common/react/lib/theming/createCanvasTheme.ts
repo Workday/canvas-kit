@@ -11,6 +11,7 @@ import {
   ContentDirection,
 } from './types';
 import {CanvasColor} from '@workday/canvas-kit-react-core';
+import {pickForegroundColor} from '../utils';
 
 const {gradients, primary, ...allColors} = colors;
 
@@ -76,6 +77,7 @@ function fillPalette(
     palette.lightest ||
     (palette.main && shiftColor(light, ColorDirection.Brighten)) ||
     defaultPalette.lightest;
+  const contrast = palette.contrast || pickForegroundColor(main) || defaultPalette.contrast;
 
   return {
     lightest,
@@ -83,7 +85,7 @@ function fillPalette(
     main,
     dark,
     darkest,
-    contrast: palette.contrast || colors.frenchVanilla100,
+    contrast,
   };
 }
 
