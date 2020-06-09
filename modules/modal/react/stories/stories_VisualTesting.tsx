@@ -10,7 +10,7 @@ export default withSnapshotsEnabled({
   component: Modal,
   parameters: {
     chromatic: {
-      delay: 5000,
+      pauseAnimationAtEnd: true,
     },
   },
 });
