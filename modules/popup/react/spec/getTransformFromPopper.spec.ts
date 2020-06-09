@@ -1,4 +1,4 @@
-import {getTransformFromPlacement} from '../lib/utils/getTransformFromPlacement';
+import {getTransformFromPlacement} from '../lib/getTransformFromPlacement';
 import each from 'lodash/each';
 import {Placement} from '@popperjs/core';
 

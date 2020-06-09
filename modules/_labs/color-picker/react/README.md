@@ -29,7 +29,7 @@ import * as React from 'react';
 import ColorPicker from '@workday/canvas-kit-labs-react-color-picker';
 import {colors} from '@workday/canvas-kit-react-core';
 import {Button} from '@workday/canvas-kit-react-button';
-import {Popper} from '@workday/canvas-kit-react-common';
+import {Popper} from '@workday/canvas-kit-react-popup';
 
 const MyComponent: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = React.useState(false);

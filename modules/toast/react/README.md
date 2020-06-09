@@ -23,7 +23,7 @@ Extends from the Popup component.
 
 ```tsx
 import * as React from 'react';
-import {Popper} from '@workday/canvas-kit-react-common';
+import {Popper} from '@workday/canvas-kit-react-popup';
 import {Toast} from '@workday/canvas-kit-react-toast';
 
 // We use Popper from Material UI for our positioning

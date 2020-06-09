@@ -5,7 +5,7 @@ import React from 'react';
 import {CSSObject} from '@emotion/styled';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Popper, Placement} from '@workday/canvas-kit-react-common';
+import {Popper, Placement} from '@workday/canvas-kit-react-popup';
 import {xIcon} from '@workday/canvas-system-icons-web';
 import {Card} from '@workday/canvas-kit-react-card';
 import {IconButton, Button, DeleteButton} from '@workday/canvas-kit-react-button';
