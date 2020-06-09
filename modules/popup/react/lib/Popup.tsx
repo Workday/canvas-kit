@@ -185,3 +185,33 @@ export default class Popup extends React.Component<PopupProps> {
     );
   }
 }
+
+/**
+ * Convenience hook around popups. Most popups are non-modal dialogs with a single target and toggle
+ * when the target button is clicked. Additional popup features like `useCloseOnOutsideClick` need
+ * to be added manually.
+ */
+export const usePopup = <T extends HTMLElement = HTMLElement>() => {
+  const [open, setOpen] = React.useState(false);
+  const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const togglePopup = (event: React.MouseEvent<T>) => {
+    setAnchorElement(event.currentTarget as T);
+    setOpen(!open);
+  };
+
+  return {
+    targetProps: {
+      onClick: togglePopup,
+    },
+    closePopup() {
+      setOpen(false);
+    },
+    popperProps: {
+      open,
+      anchorElement,
+      ref,
+    },
+  };
+};
