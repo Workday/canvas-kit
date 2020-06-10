@@ -49,7 +49,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-colors-web": "^0.17.13",
+    "@workday/canvas-colors-web": "^2.0.0",
     "@workday/canvas-kit-react-common": "4.0.0-beta.4",
     "@workday/canvas-kit-react-core": "4.0.0-beta.4"
   }

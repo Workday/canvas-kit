@@ -1,22 +1,13 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-
-import withReadme from 'storybook-readme/with-readme';
 import {Popper, Placement} from '@workday/canvas-kit-react-popup';
 import {TooltipContainer} from '@workday/canvas-kit-react-tooltip';
 import {Card} from '@workday/canvas-kit-react-card';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import README from '../README.md';
-
-export default {
-  title: 'Components|Popups/Tooltip/React/Visual Testing',
-  decorators: [withReadme(README)],
-  parameters: {
-    chromatic: {
-      disable: false,
-    },
-  },
-};
+export default withSnapshotsEnabled({
+  title: 'Testing|React/Popups/Tooltip',
+});
 
 export const Placements = () => {
   const [open, setOpen] = React.useState(false);

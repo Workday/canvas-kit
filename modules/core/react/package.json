@@ -50,7 +50,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-colors-web": "^0.17.13",
+    "@workday/canvas-colors-web": "^2.0.0",
     "@workday/canvas-depth-web": "^0.16.4",
     "@workday/canvas-space-web": "^0.15.5",
     "element-closest": "^3.0.2",
