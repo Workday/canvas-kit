@@ -35,13 +35,13 @@
     "workday",
     "modal"
   ],
+  "peerDependencies": {
+    "react": ">= 16.8 < 17"
+  },
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@workday/canvas-kit-react-popup": "^3.8.0",
     "focus-trap-js": "1.0.8"
-  },
-  "peerDependencies": {
-    "react": ">= 16.8 < 17"
   }
 }
