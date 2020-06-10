@@ -44,6 +44,9 @@
     "workday",
     "modal"
   ],
+  "peerDependencies": {
+    "react": ">= 16.8 < 17"
+  },
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
@@ -55,8 +58,5 @@
     "@workday/canvas-kit-react-button": "4.0.0-beta.4",
     "@workday/canvas-kit-react-form-field": "4.0.0-beta.4",
     "@workday/canvas-kit-react-text-input": "4.0.0-beta.4"
-  },
-  "peerDependencies": {
-    "react": ">= 16.8 < 17"
   }
 }
