@@ -21,6 +21,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
 import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';
+import {scrollIntoViewIfNeeded} from './scrolling';
 import {getCorrectedIndexByValue} from './utils';
 
 interface OptionData {
@@ -281,61 +282,13 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   private menuRef = React.createRef<HTMLUListElement>();
   private id = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
 
-  // Tweaked from https://gist.github.com/hsablonniere/2581101
-  // Removed reliance on scrollIntoView due to undesired scrolling on the
-  // entire page when positioning the menu using Popper
-  private scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
-    const parent: HTMLElement | null = elem.parentElement;
-
-    if (elem && parent) {
-      const parentComputedStyle = window.getComputedStyle(parent, null),
-        parentBorderTopWidth = parseInt(
-          parentComputedStyle.getPropertyValue('border-top-width'),
-          10
-        ),
-        // For some reason, IE11 thinks parent.clientHeight is 0 when the
-        // menu is first displayed; if this is the case, set overTop and
-        // overBottom to false
-        overTop =
-          parent.clientHeight === 0 ? false : elem.offsetTop - parent.offsetTop < parent.scrollTop,
-        overBottom =
-          parent.clientHeight === 0
-            ? false
-            : elem.offsetTop - parent.offsetTop + elem.clientHeight - parentBorderTopWidth >
-              parent.scrollTop + parent.clientHeight;
-
-      if ((overTop || overBottom) && centerIfNeeded) {
-        parent.scrollTop =
-          elem.offsetTop -
-          parent.offsetTop -
-          parent.clientHeight / 2 -
-          parentBorderTopWidth +
-          elem.clientHeight / 2;
-      }
-
-      if ((overTop || overBottom) && !centerIfNeeded) {
-        if (overBottom) {
-          // Element is out of view at the bottom edge of the parent viewport;
-          // scroll down just far enough for the element to be visible
-          if (parent.scrollTop === 0) {
-            parent.scrollTop =
-              elem.clientHeight - (parent.clientHeight + parentBorderTopWidth - elem.offsetTop);
-          } else {
-            parent.scrollTop += elem.clientHeight;
-          }
-        } else {
-          // Element is out of view at the top edge of the parent viewport;
-          // scroll up just far enough for the element to be visible
-          parent.scrollTop = elem.offsetTop - parentBorderTopWidth;
-        }
-      }
-    }
-  };
-
   private scrollFocusedOptionIntoView = (center: boolean) => {
     const focusedOption = this.focusedOptionRef.current;
     if (focusedOption) {
-      this.scrollIntoViewIfNeeded(focusedOption, center);
+      // We cannot use the native Element.scrollIntoView() here because it doesn't
+      // work properly with the portalled menu: scrolling within the menu also scrolls
+      // the ENTIRE page. Instead, we call our own scrollIntoViewIfNeeded function.
+      scrollIntoViewIfNeeded(focusedOption, center);
     }
   };
 
