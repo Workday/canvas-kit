@@ -39,9 +39,7 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
 
 const headerHeight = 56;
 
-const HeaderContainer = styled('div')<
-  Pick<DrawerHeaderProps, 'headerColor' | 'borderColor' | 'inverse'>
->(
+const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'borderColor'>>(
   {
     height: headerHeight,
     display: 'flex',
@@ -69,7 +67,7 @@ const HeaderTitle = styled(H4)<Pick<DrawerHeaderProps, 'inverse'>>(
   })
 );
 
-const CloseButton = styled(IconButton)<Pick<DrawerHeaderProps, 'inverse'>>({
+const CloseButton = styled(IconButton)({
   margin: '-8px', // for inverse and plain button, we always want this margin
 });
 
