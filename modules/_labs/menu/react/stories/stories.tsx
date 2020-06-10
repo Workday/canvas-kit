@@ -5,7 +5,7 @@ import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import uuid from 'uuid/v4';
 import {setupIcon, uploadCloudIcon, userIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
-import {Popper} from '@workday/canvas-kit-react-common';
+import {Popper} from '@workday/canvas-kit-react-popup';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {Button, ButtonProps} from '../../../../button/react';
 

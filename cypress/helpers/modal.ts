@@ -1,17 +1,4 @@
 /**
- * Gets the modal element with the `[role=dialog]`
- * @param testId Optional test id to target the desired modal
- * @example
- * h.modal.get()
- *   .should('have.attr', 'role', 'dialog')
- */
-export function get(testId?: string): Cypress.Chainable<JQuery> {
-  const selector = testId ? `[data-testid='${testId}'] [role=dialog]` : `[role=dialog]`;
-
-  return cy.get(selector);
-}
-
-/**
  * Gets the title component of the Modal. This is a required element for accessibility
  * @param $modal Modal component
  * @example

@@ -7,11 +7,9 @@ export enum ModalWidth {
   m = '800px',
 }
 
-export interface ModalProps
-  extends Omit<ModalContentProps, 'padding' | 'width' | 'closeOnEscape' | 'container'> {
+export interface ModalProps extends Omit<ModalContentProps, 'padding' | 'width' | 'container'> {
   padding?: PopupPadding;
   width?: ModalWidth;
-  closeOnEscape?: boolean;
   container?: HTMLElement;
   /**
    * If true, set the Modal to the open state.
@@ -24,18 +22,11 @@ const Modal = ({
   open = false,
   padding = PopupPadding.l,
   width = ModalWidth.s,
-  closeOnEscape = true,
   container = document.body,
   ...modalContentProps
 }: ModalProps): JSX.Element | null =>
   open ? (
-    <ModalContent
-      container={container}
-      padding={padding}
-      width={width}
-      closeOnEscape={closeOnEscape}
-      {...modalContentProps}
-    />
+    <ModalContent container={container} padding={padding} width={width} {...modalContentProps} />
   ) : null;
 
 Modal.Padding = PopupPadding;

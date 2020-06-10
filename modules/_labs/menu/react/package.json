@@ -46,6 +46,7 @@
   ],
   "devDependencies": {
     "@material-ui/core": "^4.9.7",
+    "@workday/canvas-kit-react-popup": "4.0.0-beta.4",
     "@workday/canvas-system-icons-web": "^1.0.20"
   },
   "dependencies": {

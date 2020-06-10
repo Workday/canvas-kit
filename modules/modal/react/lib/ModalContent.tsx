@@ -2,8 +2,15 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
-import tabTrappingKey from 'focus-trap-js';
-import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
+import Popup, {
+  PopupPadding,
+  usePopupStack,
+  useCloseOnEscape,
+  useAssistiveHideSiblings,
+  useFocusTrap,
+} from '@workday/canvas-kit-react-popup';
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {mergeCallback} from '@workday/canvas-kit-react-common';
 
 import {ModalWidth} from './Modal';
 
@@ -29,14 +36,6 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * key handling and clicking on the overlay will not do anything.
    */
   handleClose?: () => void;
-  /**
-   * If true, set the Modal to close when the escape key is pressed (only recommended for simple applications).
-   * Accessibility specifications state modals should be closed when the escape key is pressed.
-   * However, we cannot guarantee that it is safe to simply bind an event listener and close in all
-   * cases. Some applications may use a Popup manager to make sure the correct popup is receiving
-   * the close command. If your application uses custom popup stacking, do not set this to true.
-   */
-  closeOnEscape: boolean;
   /**
    * The heading of the Modal.
    */
@@ -85,7 +84,6 @@ const Container = styled('div')({
   background: 'rgba(0,0,0,0.65)',
   animationName: `${fadeIn}`,
   animationDuration: '0.3s',
-  zIndex: 1,
 });
 
 const transformOrigin = {
@@ -93,9 +91,10 @@ const transformOrigin = {
   vertical: 'bottom',
 } as const;
 
-function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
-  const firstFocusable = modalEl.querySelector<HTMLElement>(
-    `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
+function getFirstElementToFocus(overlayEl: HTMLElement): HTMLElement {
+  const modalEl = overlayEl.querySelector('[role=dialog]');
+  const firstFocusable = modalEl?.querySelector<HTMLElement>(
+    `[data-close=close],[id="${modalEl?.getAttribute('aria-labelledby')}"]`
   );
   if (firstFocusable) {
     if (firstFocusable.tagName === 'H3') {
@@ -125,16 +124,6 @@ function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
   }
 }
 
-const useKeyDownListener = (handleKeydown: EventListenerOrEventListenerObject) => {
-  // `useLayoutEffect` for automation
-  React.useLayoutEffect(() => {
-    document.addEventListener('keydown', handleKeydown);
-    return () => {
-      document.removeEventListener('keydown', handleKeydown);
-    };
-  }, [handleKeydown]);
-};
-
 const useInitialFocus = (
   modalRef: React.RefObject<HTMLElement>,
   firstFocusRef: React.RefObject<HTMLElement> | undefined
@@ -157,7 +146,6 @@ const useInitialFocus = (
 
 const ModalContent = ({
   ariaLabel,
-  closeOnEscape = true,
   width = ModalWidth.s,
   padding = PopupPadding.l,
   container = document.body,
@@ -169,52 +157,28 @@ const ModalContent = ({
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
 
-  const handleKeydown = (event: KeyboardEvent) => {
-    if (modalRef.current) {
-      tabTrappingKey(event, modalRef.current);
-    }
+  const onClose = () => handleClose?.();
 
-    if (closeOnEscape && handleClose && (event.key === 'Esc' || event.key === 'Escape')) {
-      handleClose();
+  // special handling for clicking on the overlay
+  const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (event.target === modalRef.current && PopupStack.isTopmost(modalRef.current)) {
+      onClose();
     }
   };
 
-  useKeyDownListener(handleKeydown);
+  usePopupStack(modalRef);
+  useCloseOnEscape(modalRef, onClose);
+  useFocusTrap(modalRef);
   useInitialFocus(modalRef, firstFocusRef);
-
-  const handleOutsideClick = ({target}: React.MouseEvent<HTMLDivElement>) => {
-    const modalEl = modalRef.current;
-
-    if (modalEl && !modalEl.contains(target as Node) && handleClose) {
-      handleClose();
-    }
-  };
-
-  React.useEffect(() => {
-    const siblings = [...((container.children as any) as HTMLElement[])].filter(
-      el => el !== modalRef.current!.parentElement
-    );
-    const prevAriaHidden = siblings.map(el => el.getAttribute('aria-hidden'));
-    siblings.forEach(el => {
-      el.setAttribute('aria-hidden', 'true');
-    });
-
-    return () => {
-      siblings.forEach((el, index) => {
-        const prev = prevAriaHidden[index];
-        if (prev) {
-          el.setAttribute('aria-hidden', prev);
-        } else {
-          el.removeAttribute('aria-hidden');
-        }
-      });
-    };
-  }, []);
+  useAssistiveHideSiblings(modalRef);
 
   const content = (
-    <Container onClick={handleOutsideClick} {...elemProps}>
+    <Container
+      {...elemProps}
+      ref={modalRef}
+      onClick={mergeCallback(onOverlayClick, elemProps.onClick)}
+    >
       <Popup
-        popupRef={modalRef}
         width={width}
         heading={heading}
         handleClose={handleClose}

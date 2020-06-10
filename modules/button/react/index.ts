@@ -8,5 +8,9 @@ export {default as OutlineButton, OutlineButtonProps} from './lib/OutlineButton'
 export {default as IconButton, IconButtonProps} from './lib/IconButton';
 export {default as TextButton, TextButtonProps} from './lib/TextButton';
 export {default as ToolbarIconButton, ToolbarIconButtonProps} from './lib/ToolbarIconButton';
+export {
+  default as ToolbarDropdownButton,
+  ToolbarDropdownButtonProps,
+} from './lib/ToolbarDropdownButton';
 export {default as Hyperlink} from './lib/Hyperlink';
 export * from './lib/types';

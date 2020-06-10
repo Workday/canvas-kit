@@ -1,7 +1,8 @@
 import * as React from 'react';
 import innerText from 'react-innertext';
 
-import {getTransformFromPlacement, Popper, Placement} from '@workday/canvas-kit-react-common';
+import {getTransformFromPlacement, Placement, Popper} from '@workday/canvas-kit-react-popup';
+import {mergeCallback} from '@workday/canvas-kit-react-common';
 
 import {TooltipContainer} from './TooltipContainer';
 import {useTooltip} from './useTooltip';
@@ -21,7 +22,7 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * handlers. This is currently a limitation of the Tooltip component. Functionality will not work
    * if this condition isn't met
    */
-  children: React.ReactNode;
+  children: React.ReactElement<any>;
   /**
    * Sets the placement preference used by PopperJS.
    * @default 'top'
@@ -42,6 +43,21 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   type?: 'label' | 'describe';
 }
 
+function mergeCallbacks<T extends {[key: string]: any}>(
+  elemProps: {[key: string]: any},
+  componentProps: T,
+  keys: (keyof T)[] = Object.keys(componentProps)
+) {
+  return (keys as string[]).reduce((mergedProps, key) => {
+    if (typeof elemProps[key] === 'function') {
+      mergedProps[key] = mergeCallback(componentProps[key], elemProps[key]);
+    } else {
+      mergedProps[key] = componentProps[key];
+    }
+    return mergedProps;
+  }, {} as {[key: string]: any});
+}
+
 export const Tooltip = ({
   type = 'label',
   placement = 'top',
@@ -54,7 +70,10 @@ export const Tooltip = ({
 
   return (
     <React.Fragment>
-      {React.cloneElement(children as React.ReactElement<any>, targetProps)}
+      {React.cloneElement(children, {
+        ...targetProps,
+        ...mergeCallbacks(children.props, targetProps),
+      })}
       <Popper placement={placement} {...popperProps}>
         {({placement}) => {
           const transformOrigin = getTransformFromPlacement(placement);
