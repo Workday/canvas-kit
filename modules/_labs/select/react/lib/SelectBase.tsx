@@ -286,7 +286,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     const focusedOption = this.focusedOptionRef.current;
     if (focusedOption) {
       // We cannot use the native Element.scrollIntoView() here because it doesn't
-      // work properly with the portalled menu: scrolling within the menu also scrolls
+      // work properly with the portalled menu; scrolling within the menu also scrolls
       // the ENTIRE page. Instead, we call our own scrollIntoViewIfNeeded function.
       scrollIntoViewIfNeeded(focusedOption, center);
     }

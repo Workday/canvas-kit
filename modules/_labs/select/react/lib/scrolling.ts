@@ -12,7 +12,7 @@ export const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true)
   if (elem && parent) {
     // Calculate clientHeight manually since the native Element.clientHeight
     // property doesn't return the correct value in IE11 when the menu first
-    // loads
+    // loads (we may be able to resolve this using hooks later)
     const elemClientHeight = clientHeight(elem);
     const parentClientHeight = clientHeight(parent);
 
