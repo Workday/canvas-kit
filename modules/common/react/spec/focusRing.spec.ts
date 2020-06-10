@@ -6,7 +6,7 @@ describe('memoizedFocusRing', () => {
       ringWidth: 3,
       separationWidth: 1,
       animate: true,
-      inset: true,
+      inset: 'outer' as const,
       innerShadowColor: '#333333',
       outerShadowColor: '#666666',
     };
