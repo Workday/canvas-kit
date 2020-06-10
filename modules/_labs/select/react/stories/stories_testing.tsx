@@ -1,10 +1,10 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 
-import {Button} from '@workday/canvas-kit-react-button';
 import {colors} from '@workday/canvas-kit-react-core';
-import FormField from '@workday/canvas-kit-react-form-field';
-import Modal from '@workday/canvas-kit-react-modal';
+import {Button} from '../../../../button/react';
+import FormField from '../../../../form-field/react';
+import Modal from '../../../../modal/react';
 import Select from '../lib/Select';
 
 import {manyOptions, options} from './stories';
