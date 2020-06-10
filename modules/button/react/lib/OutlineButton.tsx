@@ -108,7 +108,7 @@ export const getOutlineButtonColors = (
           label: themePrimary.contrast,
         },
         disabled: {
-          background: themePrimary.contrast,
+          background: 'transparent',
           border: colors.soap500,
           icon: colors.soap600,
           label: colors.licorice100,
@@ -141,7 +141,7 @@ export const getOutlineButtonColors = (
           label: themePrimary.contrast,
         },
         disabled: {
-          background: themePrimary.contrast,
+          background: 'transparent',
           border: colors.soap500,
           icon: colors.soap600,
           label: colors.licorice100,
@@ -150,12 +150,12 @@ export const getOutlineButtonColors = (
     case OutlineButtonVariant.Inverse:
       return {
         default: {
-          border: themePrimary.contrast,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
+          border: colors.frenchVanilla100,
+          icon: colors.frenchVanilla100,
+          label: colors.frenchVanilla100,
         },
         hover: {
-          background: themePrimary.contrast,
+          background: colors.frenchVanilla100,
           icon: colors.licorice500,
           label: colors.blackPepper400,
           labelData: colors.licorice300,
@@ -168,7 +168,7 @@ export const getOutlineButtonColors = (
           labelData: colors.licorice300,
         },
         focus: {
-          background: themePrimary.contrast,
+          background: colors.frenchVanilla100,
           icon: colors.licorice500,
           label: colors.blackPepper400,
           labelData: colors.licorice300,
@@ -176,7 +176,7 @@ export const getOutlineButtonColors = (
             {
               separation: 2,
               innerColor: 'currentColor',
-              outerColor: themePrimary.contrast,
+              outerColor: colors.frenchVanilla100,
             },
             theme
           ),
