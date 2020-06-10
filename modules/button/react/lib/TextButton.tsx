@@ -109,6 +109,7 @@ const getTextButtonColors = (
           focusRing: focusRing(
             {
               separation: 2,
+              inset: 'inner',
               innerColor: 'currentColor',
               outerColor: colors.frenchVanilla100,
             },
