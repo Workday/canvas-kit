@@ -1,11 +1,7 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {spacing} from '@workday/canvas-kit-react-core';
 
 import {Drawer, DrawerHeader, DrawerDirection} from '../index';
