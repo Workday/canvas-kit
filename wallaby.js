@@ -35,6 +35,7 @@ module.exports = wallaby => {
       (jestConfig.moduleNameMapper = {
         '@workday/canvas-kit-react-([^/]+)(/?.*)': '<rootDir>/modules/$1/react$2',
         '@workday/canvas-kit-labs-react-([^/]+)(/?.*)': '<rootDir>/modules/_labs/$1/react$2',
+        '@workday/canvas-kit-(?:(?!react|css|labs))([^/]+)(/?.*)': '<rootDir>/modules/$1', // Non react, labs, and css modules
       }),
         w.testFramework.configure(jestConfig);
     },

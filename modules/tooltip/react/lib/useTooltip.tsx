@@ -1,11 +1,12 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
+import {useCloseOnEscape} from '@workday/canvas-kit-react-popup';
 
-const useIntentTimeout = (fn: Function, ms: number = 0): {start(): void; clear(): void} => {
+const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
 
   const start = () => {
-    timer.current = window.setTimeout(fn, ms);
+    timer.current = window.setTimeout(fn, waitMs);
   };
 
   const clear = () => {
@@ -44,24 +45,27 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
   titleText?: string;
 } = {}) {
   const [isOpen, setOpen] = React.useState(false);
-  const [ref, setRef] = React.useState<T | null>(null);
+  const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
   const [id] = React.useState(() => uuid());
+  const ref = React.useRef<HTMLDivElement>(null);
 
   const closeTooltip = () => {
     setOpen(false);
   };
 
-  const {start: onClose, clear} = useIntentTimeout(closeTooltip, 100);
+  const intentTimer = useIntentTimer(closeTooltip, 100);
 
   const onOpen = () => {
     setOpen(true);
-    clear();
+    intentTimer.clear();
   };
 
   const onOpenFromTarget = (event: React.SyntheticEvent<HTMLElement>) => {
-    setRef(event.currentTarget as T);
+    setAnchorElement(event.currentTarget as T);
     onOpen();
   };
+
+  useCloseOnEscape(ref, closeTooltip);
 
   return {
     /** Mix these properties into the target element. **Must be an Element** */
@@ -71,21 +75,23 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
       // This will replace the accessible name of the target element
       'aria-label': type === 'label' ? titleText : undefined,
       onMouseEnter: onOpenFromTarget,
-      onMouseLeave: onClose,
+      onMouseLeave: intentTimer.start,
+      onClick: closeTooltip,
       onFocus: onOpenFromTarget,
-      onBlur: onClose,
+      onBlur: intentTimer.start,
     },
     /** Mix these properties into the `Popper` component */
     popperProps: {
       open: isOpen,
-      anchorElement: ref,
+      anchorElement,
+      ref,
     },
     /** Mix these properties into the `TooltipContainer` component */
     tooltipProps: {
       id: type === 'describe' && isOpen ? id : undefined,
       role: 'tooltip',
       onMouseEnter: onOpen,
-      onMouseLeave: onClose,
+      onMouseLeave: intentTimer.start,
     },
   };
 }

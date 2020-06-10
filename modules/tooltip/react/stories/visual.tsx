@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import withReadme from 'storybook-readme/with-readme';
-import {Popper, Placement} from '@workday/canvas-kit-react-common';
+import {Popper, Placement} from '@workday/canvas-kit-react-popup';
 import {TooltipContainer} from '@workday/canvas-kit-react-tooltip';
 import {Card} from '@workday/canvas-kit-react-card';
 

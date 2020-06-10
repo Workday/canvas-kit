@@ -32,7 +32,7 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
     } else {
       return {
         outer: colors.cantaloupe600,
-        inner: inputColors.warning.border,
+        inner: inputColors.alert.border,
       };
     }
   } else {

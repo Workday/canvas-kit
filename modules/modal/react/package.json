@@ -47,8 +47,14 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-popup": "4.0.0-beta.4",
-    "focus-trap-js": "1.0.8"
+    "@workday/canvas-kit-popup-stack": "0.0.0",
+    "@workday/canvas-kit-react-common": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-popup": "4.0.0-beta.4"
+  },
+  "devDependencies": {
+    "@workday/canvas-kit-react-button": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-form-field": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-text-input": "4.0.0-beta.4"
   },
   "peerDependencies": {
     "react": ">= 16.8 < 17"
