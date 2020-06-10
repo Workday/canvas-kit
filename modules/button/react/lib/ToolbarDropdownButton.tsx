@@ -66,15 +66,14 @@ const getToolbarDropdownButtonColors = (theme: EmotionCanvasTheme): ButtonColors
   return {
     default: {
       icon: colors.licorice200,
-      background: 'transparent',
     },
     hover: {
       icon: colors.licorice500,
-      background: colors.soap400,
+      background: colors.soap300,
     },
     active: {
       icon: colors.licorice500,
-      background: colors.soap400,
+      background: colors.soap500,
     },
     focus: {
       icon: colors.licorice200,
