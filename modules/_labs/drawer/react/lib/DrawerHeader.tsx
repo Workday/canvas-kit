@@ -8,7 +8,7 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
   /**
    * The text of the DrawerHeader. This text will also be applied as the `title` attribute of the header element.
    */
-  headerText?: string;
+  title?: string;
   /**
    * The function called when the DrawerHeader close button is clicked.
    */
@@ -39,7 +39,9 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
 
 const headerHeight = 56;
 
-const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'borderColor'>>(
+const HeaderContainer = styled('div')<
+  Pick<DrawerHeaderProps, 'headerColor' | 'borderColor' | 'inverse'>
+>(
   {
     height: headerHeight,
     display: 'flex',
@@ -67,7 +69,7 @@ const HeaderTitle = styled(H4)<Pick<DrawerHeaderProps, 'inverse'>>(
   })
 );
 
-const CloseButton = styled(IconButton)({
+const CloseButton = styled(IconButton)<Pick<DrawerHeaderProps, 'inverse'>>({
   margin: '-8px', // for inverse and plain button, we always want this margin
 });
 
@@ -76,7 +78,6 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
     closeIconLabel: 'Close',
     headerColor: colors.soap100,
     borderColor: colors.soap500,
-    showInverseButton: false,
     inverse: false,
   };
 
