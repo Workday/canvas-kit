@@ -7,7 +7,13 @@ interface FocusRingOptions {
   width?: number;
   separation?: number;
   animate?: boolean;
-  inset?: boolean;
+  /**
+   * Specifies where the ring(s) should be attached.
+   * - undefined: Both "inner" and "outer" shadows outside the container.
+   * - 'inner': "Inner" shadow inset. "Outer" shadow outside the container.
+   * - 'outer': Both "inner" and "outer" shadows inside the container.
+   */
+  inset?: 'inner' | 'outer';
   innerColor?: string;
   outerColor?: string;
   memoize?: boolean;
@@ -20,24 +26,40 @@ function calculateFocusRing({
   inset,
   innerColor,
   outerColor,
-}: Omit<Required<FocusRingOptions>, 'memoize'>): CSSObject {
-  const endingInnerShadow = (inset ? 'inset ' : '') + '0 0 0 ' + separation + 'px ' + innerColor;
-  const endingOuterShadow =
-    (inset ? 'inset ' : '') + '0 0 0 ' + (width + separation) + 'px ' + outerColor;
-  const endingBoxShadow = inset
-    ? `${endingOuterShadow}`
-    : `${endingInnerShadow}, ${endingOuterShadow}`;
+}: Required<Omit<FocusRingOptions, 'memoize' | 'inset'>> &
+  Pick<FocusRingOptions, 'inset'>): CSSObject {
+  let boxShadow, innerWidth, outerWidth;
+
+  switch (inset) {
+    case 'outer':
+      innerWidth = width + separation;
+      outerWidth = separation;
+      boxShadow = `inset 0 0 0 ${outerWidth}px ${outerColor}, inset 0 0 0 ${innerWidth}px ${innerColor}`;
+      break;
+
+    case 'inner':
+      innerWidth = separation;
+      outerWidth = width;
+      boxShadow = `inset 0 0 0 ${innerWidth}px ${innerColor}, 0 0 0 ${outerWidth}px ${outerColor}`;
+      break;
+
+    default:
+      innerWidth = separation;
+      outerWidth = width + separation;
+      boxShadow = `0 0 0 ${innerWidth}px ${innerColor}, 0 0 0 ${outerWidth}px ${outerColor}`;
+      break;
+  }
 
   if (animate) {
     const fadeIn = keyframes({
-      '0%': {boxShadow: endingBoxShadow},
-      '100%': {boxShadow: endingBoxShadow},
+      '0%': {boxShadow},
+      '100%': {boxShadow},
     });
 
-    return {animation: `${fadeIn} 100ms`, boxShadow: endingBoxShadow};
+    return {animation: `${fadeIn} 100ms`, boxShadow};
   }
 
-  return {boxShadow: endingBoxShadow};
+  return {boxShadow};
 }
 
 export const memoizedFocusRing = memoize(calculateFocusRing, (...args) => JSON.stringify(args));
@@ -70,12 +92,12 @@ export function focusRing(options: FocusRingOptions = {}, theme?: EmotionCanvasT
     width = 2,
     separation = 0,
     animate = true,
-    inset = false,
     innerColor = canvas.colors.frenchVanilla100,
     outerColor = theme && theme.canvas
       ? theme.canvas.palette.common.focusOutline
       : defaultCanvasTheme.palette.common.focusOutline,
     memoize = true,
+    inset,
   } = options;
 
   const args = {

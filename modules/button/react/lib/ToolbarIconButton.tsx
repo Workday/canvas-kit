@@ -78,11 +78,11 @@ const getToolbarIconButtonColors = (theme: EmotionCanvasTheme, toggled?: boolean
     },
     hover: {
       icon: toggled ? themePrimary.dark : colors.licorice500,
-      background: toggled ? colors.soap400 : colors.soap400,
+      background: colors.soap300,
     },
     active: {
       icon: toggled ? themePrimary.dark : colors.licorice500,
-      background: colors.soap400,
+      background: colors.soap500,
     },
     focus: {
       icon: toggled ? themePrimary.main : colors.licorice200,
