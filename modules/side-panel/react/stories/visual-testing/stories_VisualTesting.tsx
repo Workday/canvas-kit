@@ -2,13 +2,9 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {SidePanel} from '../../index';
-import {depth, spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react-core';
 import {SidePanelBackgroundColor, SidePanelOpenDirection} from '../../lib/SidePanel';
 import {action} from '@storybook/addon-actions';
 
