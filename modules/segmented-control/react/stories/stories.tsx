@@ -3,7 +3,6 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
   listViewIcon,
@@ -17,11 +16,11 @@ import {SegmentedControl} from '../index';
 
 import README from '../README.md';
 
-export default withSnapshotsEnabled({
+export default {
   title: 'Components|Buttons/Segmented Control/React',
   component: SegmentedControl,
   decorators: [withReadme(README)],
-});
+};
 
 export const Default = () => {
   const [value, setValue] = React.useState<string | number>();
