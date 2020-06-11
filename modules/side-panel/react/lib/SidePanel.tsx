@@ -223,7 +223,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
               toggled={false}
               size={IconButton.Size.Small}
               onClick={this.onToggleClick}
-              icon={this.toggleButtonDirection()}
+              icon={this.toggleButtonDirection(open, openDirection)}
               variant={IconButton.Variant.CircleFilled}
             />
           )}
@@ -251,11 +251,14 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
     }
   };
 
-  private toggleButtonDirection = (): CanvasSystemIcon => {
-    if (this.props.openDirection !== SidePanelOpenDirection.Right) {
-      return this.props.open ? chevronLeftIcon : chevronRightIcon;
+  private toggleButtonDirection = (
+    open: boolean,
+    openDirection: SidePanelOpenDirection
+  ): CanvasSystemIcon => {
+    if (openDirection !== SidePanelOpenDirection.Right) {
+      return open ? chevronLeftIcon : chevronRightIcon;
     } else {
-      return this.props.open ? chevronRightIcon : chevronLeftIcon;
+      return open ? chevronRightIcon : chevronLeftIcon;
     }
   };
 }
