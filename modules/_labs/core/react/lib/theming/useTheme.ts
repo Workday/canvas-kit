@@ -1,4 +1,5 @@
 import * as React from 'react';
+import get from 'lodash/get';
 import {ThemeContext} from '@emotion/core';
 import {CanvasTheme} from './types';
 import {defaultCanvasTheme} from './theme';
@@ -30,10 +31,9 @@ export function useTheme(theme?: Object): CanvasTheme {
     // Context not supported or invalid (probably called from within a class component)
   }
 
-  // @ts-ignore
-  if (window.workday && window.workday.canvas && window.workday.canvas.theme) {
-    // @ts-ignore
-    return window.workday.canvas.theme;
+  const windowTheme = get(window, 'window.workday.canvas.theme');
+  if (windowTheme) {
+    return windowTheme;
   }
 
   return defaultCanvasTheme;
