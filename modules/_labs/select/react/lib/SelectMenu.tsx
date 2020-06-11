@@ -234,6 +234,14 @@ const generatePopperOptions = (
         },
       },
     },
+    {
+      name: 'preventOverflow',
+      options: {
+        // Ensure the menu stays aligned with its reference (button),
+        // even if that means the menu is pushed out of view
+        mainAxis: false,
+      },
+    },
   ];
 
   return {
