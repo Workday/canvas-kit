@@ -5601,20 +5601,6 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-depth-web/-/canvas-depth-web-0.16.4.tgz#3714a1a955055386a2b70cc05852162b1e056bf2"
   integrity sha512-l4LpCUk2G1FVRfo0Z+MkCWa9bzNIfWdUqGtdXaFSBySYgYvLhG6vNNuTK1VXls8jQdFCUROhKRWcy3Ht1n7NDg==
 
-"@workday/canvas-kit-labs-react-core@^3.8.0":
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-labs-react-core/-/canvas-kit-labs-react-core-3.8.0.tgz#8b9f141a91f1d6d962755ad31d481d70a38b2136"
-  integrity sha512-BNWkPZjIlKel3WBRlazre0b5As3Y3nNwJjdBL6kU+YQ1Jot0QGrSCz9WQ0vrRp482ut4QsDZ4Y7eZC3DSS1PCw==
-  dependencies:
-    "@emotion/core" "^10.0.28"
-    "@emotion/styled" "^10.0.27"
-    "@workday/canvas-colors-web" "^0.17.13"
-    "@workday/canvas-kit-react-core" "^3.8.0"
-    chroma-js "^2.1.0"
-    emotion-theming "^10.0.10"
-    lodash "^4.17.14"
-    rtl-css-js "^1.13.1"
-
 "@workday/canvas-space-web@^0.15.5":
   version "0.15.6"
   resolved "https://registry.yarnpkg.com/@workday/canvas-space-web/-/canvas-space-web-0.15.6.tgz#8a7ddca7734507860360d6e67abdf519c9c7a4f1"
