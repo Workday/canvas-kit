@@ -283,7 +283,7 @@ const SelectMenu = (props: SelectMenuProps) => {
 
   useEffect(() => {
     handleWidthChange();
-  }, [width]);
+  }, [buttonRef]);
 
   // TODO: Figure out a better way to handle width changes in the reference button.
   // Seems like we should resize the menu when the reference button width changes, not
@@ -300,11 +300,7 @@ const SelectMenu = (props: SelectMenuProps) => {
     };
   }, []);
 
-  useCloseOnEscape(popupRef, () => {
-    if (onCloseOnEscape) {
-      onCloseOnEscape();
-    }
-  });
+  useCloseOnEscape(popupRef, () => onCloseOnEscape?.());
 
   // TODO: use the useCloseOnOutsideClick hook after it's been modified to handle
   // multiple things happening on the same click. Currently, the hook doesn't

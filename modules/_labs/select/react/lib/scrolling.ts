@@ -7,7 +7,7 @@ const clientHeight = (elem: HTMLElement): number => {
 
 // Modified from https://gist.github.com/hsablonniere/2581101
 export const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
-  const parent: HTMLElement | null = elem.parentElement;
+  const parent = elem.parentElement;
 
   if (elem && parent) {
     // Calculate clientHeight manually since the native Element.clientHeight
