@@ -16,32 +16,36 @@ import {SegmentedControl} from '../index';
 
 import README from '../README.md';
 
-storiesOf('Labs|Segmented Control/React', module)
-  .addParameters({component: SegmentedControl})
-  .addDecorator(withReadme(README))
-  .add('Default', () => {
-    const [value, setValue] = React.useState<string | number>();
-    const handleToggle = (selectedValue: string | number) => {
-      setValue(selectedValue);
-      action('Segmented Control selection change')(selectedValue);
-    };
+export default {
+  title: 'Components|Buttons/Segmented Control/React',
+  component: SegmentedControl,
+  decorators: [withReadme(README)],
+};
 
-    return (
-      <SegmentedControl value={value} onChange={handleToggle}>
-        <IconButton
-          icon={listViewIcon}
-          value="list-view"
-          aria-label="List View"
-          onClick={e => action('Existing IconButton onClick callback')(e)}
-        />
-        <IconButton
-          icon={worksheetsIcon}
-          value="table-view"
-          aria-label="Table View"
-          disabled={true}
-        />
-        <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
-        <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
-      </SegmentedControl>
-    );
-  });
+export const Default = () => {
+  const [value, setValue] = React.useState<string | number>();
+  const handleToggle = (selectedValue: string | number) => {
+    setValue(selectedValue);
+    action('Segmented Control selection change')(selectedValue);
+  };
+
+  return (
+    <SegmentedControl value={value} onChange={handleToggle}>
+      <IconButton
+        icon={listViewIcon}
+        value="list-view"
+        aria-label="List View"
+        // Note: For some reason this action call causes a delay in storybook
+        onClick={e => action('Existing IconButton onClick callback')(e)}
+      />
+      <IconButton
+        icon={worksheetsIcon}
+        value="table-view"
+        aria-label="Table View"
+        disabled={true}
+      />
+      <IconButton icon={deviceTabletIcon} value="device-view" aria-label="Device View" />
+      <IconButton icon={percentageIcon} value="percent-view" aria-label="Percent View" />
+    </SegmentedControl>
+  );
+};

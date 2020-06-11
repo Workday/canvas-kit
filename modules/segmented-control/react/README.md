@@ -1,9 +1,5 @@
 # Canvas Kit React Segmented Control
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
-  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
-</a>  This component is work in progress and currently in pre-release.
-
 A linear set of two or more segments, each of which functions as a mutually exclusive button. This
 is a
 
