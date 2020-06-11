@@ -16,7 +16,7 @@ import {SegmentedControl} from '../index';
 
 import README from '../README.md';
 
-storiesOf('Labs|Segmented Control/React', module)
+storiesOf('Components|Buttons/Segmented Control/React', module)
   .addParameters({component: SegmentedControl})
   .addDecorator(withReadme(README))
   .add('Default', () => {
@@ -32,6 +32,7 @@ storiesOf('Labs|Segmented Control/React', module)
           icon={listViewIcon}
           value="list-view"
           aria-label="List View"
+          // Note: For some reason this action call causes a delay in storybook
           onClick={e => action('Existing IconButton onClick callback')(e)}
         />
         <IconButton
