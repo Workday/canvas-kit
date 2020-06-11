@@ -7,7 +7,7 @@ import {
   withSnapshotsEnabled,
 } from '../../../../utils/storybook';
 
-import {StatusIndicator} from '../';
+import {StatusIndicator, StatusIndicatorProps} from '../';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
 export default withSnapshotsEnabled({
@@ -36,9 +36,7 @@ export const StatusIndicatorStates = () => (
         ],
       })}
     >
-      {({type, emphasis, props}) => (
-        <StatusIndicator type={type} emphasis={emphasis} {...props} label="Status" />
-      )}
+      {(props: StatusIndicatorProps) => <StatusIndicator {...props} label="Status" />}
     </ComponentStatesTable>
   </StaticStates>
 );
