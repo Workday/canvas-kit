@@ -1,7 +1,11 @@
+import get from 'lodash/get';
 import canvasColors, {typeColors, statusColors} from '@workday/canvas-colors-web';
 import {CSSProperties} from './types';
 
-export const fontFamily = '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
+const inheritFont = get(window, 'window.workday.canvas.inheritFontFamily');
+export const fontFamily = inheritFont
+  ? 'inherit'
+  : '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
 export const monoFontFamily = '"Roboto Mono", "Courier New", Courier, monospace';
 
 export interface CanvasTypeHierarchy {
@@ -100,7 +104,10 @@ const hierarchy: CanvasTypeHierarchy = {
 
 // Add fontFamily to each level of hierarchy
 Object.keys(hierarchy).forEach(key => {
-  hierarchy[key] = {...hierarchy[key], fontFamily};
+  hierarchy[key] = {
+    ...hierarchy[key],
+    fontFamily,
+  };
 });
 
 const variants: CanvasTypeVariant = {
