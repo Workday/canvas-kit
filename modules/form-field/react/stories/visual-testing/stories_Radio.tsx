@@ -72,14 +72,22 @@ export const RadioStates = () => (
             {value: FormField.ErrorType.Error, label: 'Error'},
           ],
         })}
-        columnProps={[{label: 'Default', props: {}}]}
+        columnProps={[
+          {
+            label: 'Left Label',
+            props: {label: 'Contact', labelPosition: FormField.LabelPosition.Left},
+          },
+          {
+            label: 'Top Label',
+            props: {label: 'Contact'},
+          },
+        ]}
       >
         {props => (
           <FormField
             useFieldset={true}
             hintText={props.error ? hintText : undefined}
             hintId={hintId}
-            labelPosition={FormField.LabelPosition.Left}
             {...props}
           >
             <RadioGroup name="contact" value={'email'}>
