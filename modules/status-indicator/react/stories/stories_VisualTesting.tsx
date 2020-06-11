@@ -36,8 +36,8 @@ export const StatusIndicatorStates = () => (
         ],
       })}
     >
-      {({type, emphasis, ...props}) => (
-        <StatusIndicator type={type} emphasis={emphasis} {...props} label="Status" />
+      {props => (
+        <StatusIndicator {...props} label="Status" />
       )}
     </ComponentStatesTable>
   </StaticStates>
