@@ -223,11 +223,13 @@ const generatePopperOptions = (
           // if the button is in a horizontally-centered modal)
           // and to ensure proper alignment between the button
           // and the menu
-          const skidding = reference.x % 1 === 0 ? 0 : 1;
+          const skidding = reference.x % 1 >= 0.5 ? 1 : 0;
+
           // Displace menu towards the button to obscure the bottom
           // edge of the button and to create a smooth visual
           // connection between the button and the menu
           const distance = -parseInt(borderRadius.m, 10);
+
           return [skidding, distance];
         },
       },
