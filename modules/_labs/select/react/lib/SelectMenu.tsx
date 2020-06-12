@@ -261,7 +261,7 @@ const SelectMenu = (props: SelectMenuProps) => {
   const [width, setWidth] = useState(0);
 
   const handleWidthChange = () => {
-    if (buttonRef.current) {
+    if (buttonRef.current && !isHidden) { // Oops, a double-negative - "not is hidden" means "is open", right?
       const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
       setWidth(newMenuWidth);
     }
@@ -269,7 +269,7 @@ const SelectMenu = (props: SelectMenuProps) => {
 
   useLayoutEffect(() => {
     handleWidthChange();
-  }, [buttonRef]);
+  }, [buttonRef, isHidden]);
 
   // TODO: Figure out a better way to handle width changes in the reference button.
   // Seems like we should resize the menu when the reference button width changes, not
