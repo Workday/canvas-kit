@@ -107,7 +107,7 @@ const hierarchy: CanvasTypeHierarchy = {
 Object.keys(hierarchy).forEach(key => {
   hierarchy[key] = {
     ...hierarchy[key],
-    fontFamily: fontFamily,
+    fontFamily,
   };
 });
 
