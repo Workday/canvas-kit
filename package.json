@@ -143,6 +143,7 @@
     "format": "yarn eslint --ext=jsx,ts,tsx --fix -c .eslintrc-prettier.js",
     "test": "TZ=UTC jest",
     "bump": "lerna version",
+    "bump:prerelease": "lerna version prerelease --exact --preid",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
