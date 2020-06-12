@@ -261,7 +261,7 @@ const SelectMenu = (props: SelectMenuProps) => {
   const [width, setWidth] = useState(0);
 
   const handleWidthChange = () => {
-    if (buttonRef.current && !isHidden) { // Oops, a double-negative - "not is hidden" means "is open", right?
+    if (buttonRef.current && !isHidden) {
       const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
       setWidth(newMenuWidth);
     }
@@ -296,19 +296,18 @@ const SelectMenu = (props: SelectMenuProps) => {
   // correct behavior for now, we're dismissing the Menu on blur instead of
   // using the hook.
 
-  // Make sure we only open the Popper when we know the width of the button element. We need to use
-  // `top` and `bottom` instead of `top-start` and `bottom-start` placements because PopperJS
-  // incorrectly rounds `start` and `end` modifiers:
+  // We need to use `top` and `bottom` instead of `top-start` and `bottom-start`
+  // placements because PopperJS incorrectly rounds `start` and `end` modifiers:
   // https://github.com/popperjs/popper-core/blob/38914aae7a2e91715c6eb2b563517082a40cfa64/src/utils/computeOffsets.js#L68-L81
   // This rounding causes problems with browsers that allow subpixel values for elements like
   // Firefox and Edge.
-  const open = !isHidden && width !== 0;
+  const placement = isFlipped ? 'top' : 'bottom';
 
   // Render nothing if buttonRef.current hasn't been set
   return buttonRef.current ? (
     <Popper
-      placement={isFlipped ? 'top' : 'bottom'}
-      open={open}
+      placement={placement}
+      open={!isHidden}
       anchorElement={buttonRef.current}
       popperOptions={generatePopperOptions({
         isFlipped,
