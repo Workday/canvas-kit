@@ -4,7 +4,7 @@ import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {Button} from '../../../../button/react';
 import FormField from '../../../../form-field/react';
-import Modal from '../../../../modal/react';
+import {Modal, useModal} from '../../../../modal/react';
 import Select from '../lib/Select';
 
 import {manyOptions, options} from './stories';
@@ -33,25 +33,14 @@ const Container = ({children, style = {}, ...elemProps}) => {
 };
 
 const SelectModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
-  const openModal = () => {
-    setOpen(true);
-  };
-  const closeModal = () => {
-    setOpen(false);
-    if (buttonRef.current) {
-      buttonRef.current.focus();
-    }
-  };
+  const {targetProps, modalProps, closeModal} = useModal();
 
   return (
     <div>
-      <Button buttonRef={buttonRef} onClick={openModal} variant={Button.Variant.Primary}>
+      <Button variant={Button.Variant.Primary} {...targetProps}>
         Show Modal
       </Button>
-
-      <Modal heading="Modal with Select" open={open} handleClose={closeModal}>
+      <Modal heading="Modal with Select" {...modalProps}>
         <p>The menu for this Select should break out of the Modal.</p>
         <FormField label="Label" inputId="select-modal">
           {controlComponent(<Select name="city" options={manyOptions} />)}
