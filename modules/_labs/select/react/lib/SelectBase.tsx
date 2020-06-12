@@ -4,9 +4,9 @@ import uuid from 'uuid/v4';
 import {
   GrowthBehavior,
   ErrorType,
+  Themeable,
   errorRing,
   styled,
-  Themeable,
 } from '@workday/canvas-kit-react-common';
 import {
   colors,
@@ -21,6 +21,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
 import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';
+import {scrollIntoViewIfNeeded} from './scrolling';
 import {getCorrectedIndexByValue} from './utils';
 
 interface OptionData {
@@ -90,7 +91,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
   /**
    * The ref to the underlying button element. Use this to imperatively manipulate the button.
    */
-  buttonRef?: React.Ref<HTMLButtonElement>;
+  buttonRef: React.RefObject<HTMLButtonElement>;
   /**
    * The index of the focused option in the SelectBase.
    * @default 0
@@ -106,10 +107,10 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isEmpty: boolean;
   /**
-   * If true, enable animation on the SelectBase menu.
-   * @default true
+   * If true, flip the SelectBase menu so it extends upwards from the button.
+   * @default false
    */
-  isMenuAnimated: boolean;
+  isMenuFlipped: boolean;
   /**
    * If true, hide the SelectBase menu.
    * @default true
@@ -121,10 +122,6 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isMenuHiding: boolean;
   /**
-   * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
-   */
-  menuRef?: React.Ref<HTMLUListElement>;
-  /**
    * The function called when a key is pressed down while the SelectBase button or menu has focus.
    */
   onKeyDown?: (event: React.KeyboardEvent) => void;
@@ -132,6 +129,10 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * The function called when the SelectBase menu loses focus.
    */
   onMenuBlur?: (event: React.FocusEvent) => void;
+  /**
+   * The function called when the Escape key is pressed while the SelectBase menu is the topmost element in the stack.
+   */
+  onMenuCloseOnEscape?: () => void;
   /**
    * The function called when an option in the SelectBase is selected via a click or a keyboard shortcut. The `index` passed to the callback function represents the index of the option which was selected.
    */
@@ -145,10 +146,27 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * * `label: string` (required, analagous to the text content of an `<option>`)
    */
   options: NormalizedOption[];
+  /**
+   * If true, enable animation on the SelectBase menu.
+   * @default true
+   */
+  shouldMenuAnimate: boolean;
+  /**
+   * If true, automatically flip the SelectBase menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
+   * @default true
+   */
+  shouldMenuAutoFlip: boolean;
+  /**
+   * If true, focus the SelectBase menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
+   * @default true
+   */
+  shouldMenuAutoFocus: boolean;
 }
 
+export const buttonBorderWidth = 1;
+export const buttonDefaultWidth = 280;
+
 const menuIconSize = 24;
-const buttonBorderWidth = 1;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
 const SelectButton = styled('button')<
@@ -173,7 +191,7 @@ const SelectButton = styled('button')<
     whiteSpace: 'nowrap',
     // width is required (instead of minWidth) in order for the button to
     // be sized properly for lengthy options
-    width: 280,
+    width: buttonDefaultWidth,
     '&::placeholder': {
       color: inputColors.placeholder,
     },
@@ -252,70 +270,25 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   static defaultProps = {
     focusedOptionIndex: 0,
     isEmpty: false,
-    isMenuAnimated: true,
+    isMenuFlipped: false,
     isMenuHidden: true,
     isMenuHiding: false,
+    shouldMenuAnimate: true,
+    shouldMenuAutoFlip: true,
+    shouldMenuAutoFocus: true,
   };
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
+  private menuRef = React.createRef<HTMLUListElement>();
   private id = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
-
-  // Lifted from https://gist.github.com/hsablonniere/2581101
-  // This scrolling behavior is preferable even to the WebKit-proprietary
-  // scrollIntoViewIfNeeded method, although it still has some
-  // issues (sometimes it scrolls unnecessarily, the centerIfNeeded
-  // doesn't always center properly).
-  private scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void => {
-    const parent: HTMLElement | null = elem.parentElement;
-
-    if (elem && parent) {
-      const parentComputedStyle = window.getComputedStyle(parent, null),
-        parentBorderTopWidth = parseInt(
-          parentComputedStyle.getPropertyValue('border-top-width'),
-          10
-        ),
-        parentBorderLeftWidth = parseInt(
-          parentComputedStyle.getPropertyValue('border-left-width'),
-          10
-        ),
-        overTop = elem.offsetTop - parent.offsetTop < parent.scrollTop,
-        overBottom =
-          elem.offsetTop - parent.offsetTop + elem.clientHeight - parentBorderTopWidth >
-          parent.scrollTop + parent.clientHeight,
-        overLeft = elem.offsetLeft - parent.offsetLeft < parent.scrollLeft,
-        overRight =
-          elem.offsetLeft - parent.offsetLeft + elem.clientWidth - parentBorderLeftWidth >
-          parent.scrollLeft + parent.clientWidth,
-        alignWithTop = overTop && !overBottom;
-
-      if ((overTop || overBottom) && centerIfNeeded) {
-        parent.scrollTop =
-          elem.offsetTop -
-          parent.offsetTop -
-          parent.clientHeight / 2 -
-          parentBorderTopWidth +
-          elem.clientHeight / 2;
-      }
-
-      if ((overLeft || overRight) && centerIfNeeded) {
-        parent.scrollLeft =
-          elem.offsetLeft -
-          parent.offsetLeft -
-          parent.clientWidth / 2 -
-          parentBorderLeftWidth +
-          elem.clientWidth / 2;
-      }
-
-      if ((overTop || overBottom || overLeft || overRight) && !centerIfNeeded) {
-        elem.scrollIntoView(alignWithTop);
-      }
-    }
-  };
 
   private scrollFocusedOptionIntoView = (center: boolean) => {
     const focusedOption = this.focusedOptionRef.current;
     if (focusedOption) {
-      this.scrollIntoViewIfNeeded(focusedOption, center);
+      // We cannot use the native Element.scrollIntoView() here because it doesn't
+      // work properly with the portalled menu; scrolling within the menu also scrolls
+      // the ENTIRE page. Instead, we call our own scrollIntoViewIfNeeded function.
+      scrollIntoViewIfNeeded(focusedOption, center);
     }
   };
 
@@ -386,17 +359,22 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       grow,
       inputRef,
       isEmpty,
-      isMenuAnimated,
+      isMenuFlipped,
       isMenuHidden,
       isMenuHiding,
-      menuRef,
       onChange,
       onKeyDown,
       onMenuBlur,
+      onMenuCloseOnEscape,
       options,
-      // Strip onOptionSelection and value from elemProps
-      onOptionSelection,
+      shouldMenuAnimate,
+      shouldMenuAutoFlip,
+      shouldMenuAutoFocus,
       value,
+
+      // Strip unneeded props on button from elemProps
+      onOptionSelection,
+
       ...elemProps
     } = this.props;
 
@@ -438,13 +416,19 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           <SelectMenu
             aria-activedescendant={options[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}
+            buttonRef={buttonRef}
             id={this.id}
             error={error}
-            isAnimated={isMenuAnimated}
+            isFlipped={isMenuFlipped}
+            isHidden={isMenuHidden}
             isHiding={isMenuHiding}
-            menuRef={menuRef}
+            menuRef={this.menuRef}
             onBlur={onMenuBlur}
             onKeyDown={onKeyDown}
+            onCloseOnEscape={onMenuCloseOnEscape}
+            shouldAnimate={shouldMenuAnimate}
+            shouldAutoFlip={shouldMenuAutoFlip}
+            shouldAutoFocus={shouldMenuAutoFocus}
           >
             {this.renderOptions(renderOption)}
           </SelectMenu>

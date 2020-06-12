@@ -43,6 +43,7 @@
     "@workday/canvas-kit-react-common": "4.0.0-beta.4",
     "@workday/canvas-kit-react-core": "4.0.0-beta.4",
     "@workday/canvas-kit-react-icon": "4.0.0-beta.4",
+    "@workday/canvas-kit-react-popup": "4.0.0-beta.4",
     "@workday/canvas-system-icons-web": "^1.0.20",
     "uuid": "^3.3.3"
   }
