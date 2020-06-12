@@ -1,12 +1,17 @@
 import * as React from 'react';
-import {focusRing, mouseFocusBehavior, styled, Themeable} from '@workday/canvas-kit-react-common';
+import {
+  focusRing,
+  mouseFocusBehavior,
+  styled,
+  Themeable,
+  uniqueId,
+} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
   inputColors,
   spacingNumbers as spacing,
 } from '@workday/canvas-kit-react-core';
-import uuid from 'uuid/v4';
 
 export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -205,7 +210,6 @@ const RadioBackground = styled('div')<RadioProps>(
 
 const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
   {
-    backgroundColor: colors.frenchVanilla100,
     borderRadius: radioBorderRadius,
     display: 'flex',
     flexDirection: 'column',
@@ -214,6 +218,9 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
     transition: 'transform 200ms ease, opacity 200ms ease',
     width: radioDot,
   },
+  ({theme}) => ({
+    backgroundColor: theme.canvas.palette.primary.contrast,
+  }),
   ({checked}) => ({
     opacity: checked ? 1 : 0,
     transform: checked ? 'scale(1)' : 'scale(0.5)',
@@ -228,49 +235,42 @@ const RadioLabel = styled('label')<{disabled?: boolean}>(
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
 );
 
-export default class Radio extends React.Component<RadioProps> {
-  private id = uuid();
+export const Radio = ({
+  checked = false,
+  id = uniqueId(),
+  label = '',
+  disabled,
+  inputRef,
+  name,
+  onChange,
+  value,
+  ...elemProps
+}: RadioProps) => (
+  <RadioContainer>
+    <RadioInputWrapper disabled={disabled}>
+      <RadioInput
+        checked={checked}
+        disabled={disabled}
+        id={id}
+        ref={inputRef}
+        name={name}
+        onChange={onChange}
+        type="radio"
+        value={value}
+        aria-checked={checked}
+        {...elemProps}
+      />
+      <RadioRipple />
+      <RadioBackground checked={checked} disabled={disabled}>
+        <RadioCheck checked={checked} />
+      </RadioBackground>
+    </RadioInputWrapper>
+    {label && (
+      <RadioLabel htmlFor={id} disabled={disabled}>
+        {label}
+      </RadioLabel>
+    )}
+  </RadioContainer>
+);
 
-  public render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {
-      checked = false,
-      id = this.id,
-      label = '',
-      disabled,
-      inputRef,
-      name,
-      onChange,
-      value,
-      ...elemProps
-    } = this.props;
-
-    return (
-      <RadioContainer>
-        <RadioInputWrapper disabled={disabled}>
-          <RadioInput
-            checked={checked}
-            disabled={disabled}
-            id={id}
-            ref={inputRef}
-            name={name}
-            onChange={onChange}
-            type="radio"
-            value={value}
-            aria-checked={checked}
-            {...elemProps}
-          />
-          <RadioRipple />
-          <RadioBackground checked={checked} disabled={disabled}>
-            <RadioCheck checked={checked} />
-          </RadioBackground>
-        </RadioInputWrapper>
-        {label && (
-          <RadioLabel htmlFor={id} disabled={disabled}>
-            {label}
-          </RadioLabel>
-        )}
-      </RadioContainer>
-    );
-  }
-}
+export default Radio;

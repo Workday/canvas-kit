@@ -1,8 +1,8 @@
 import * as React from 'react';
-import uuid from 'uuid/v4';
 import {
   ErrorType,
   focusRing,
+  uniqueId,
   mouseFocusBehavior,
   getErrorColors,
   styled,
@@ -145,52 +145,51 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
   }
 );
 
-const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked'>>(({checked}) => ({
-  width: circleSize,
-  height: circleSize,
-  borderRadius: borderRadius.circle,
-  ...depth[1],
-  backgroundColor: colors.frenchVanilla100,
-  transform: checked ? `translateX(${translateLength})` : 'translateX(0)',
-  transition: 'transform 150ms ease',
-  pointerEvents: 'none',
-}));
+const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>(
+  {
+    width: circleSize,
+    height: circleSize,
+    borderRadius: borderRadius.circle,
+    ...depth[1],
+    transition: 'transform 150ms ease',
+    pointerEvents: 'none',
+  },
+  ({theme}) => ({
+    backgroundColor: theme.canvas.palette.primary.contrast,
+  }),
+  ({checked}) => ({
+    transform: checked ? `translateX(${translateLength})` : 'translateX(0)',
+  })
+);
 
-export default class Switch extends React.Component<SwitchProps> {
-  static ErrorType = ErrorType;
+export const Switch = ({
+  checked = false,
+  id = uniqueId(),
+  disabled = false,
+  inputRef,
+  onChange,
+  value,
+  ...elemProps
+}: SwitchProps) => (
+  <SwitchContainer>
+    <SwitchInput
+      checked={checked}
+      disabled={disabled}
+      id={id}
+      ref={inputRef}
+      onChange={onChange}
+      role="checkbox"
+      tabIndex={0}
+      type="checkbox"
+      value={value}
+      {...elemProps}
+    />
+    <SwitchBackground checked={checked} disabled={disabled}>
+      <SwitchCircle checked={checked} />
+    </SwitchBackground>
+  </SwitchContainer>
+);
 
-  private id = uuid();
+Switch.ErrorType = ErrorType;
 
-  public render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {
-      checked = false,
-      id = this.id,
-      disabled = false,
-      inputRef,
-      onChange,
-      value,
-      ...elemProps
-    } = this.props;
-
-    return (
-      <SwitchContainer>
-        <SwitchInput
-          checked={checked}
-          disabled={disabled}
-          id={id}
-          ref={inputRef}
-          onChange={onChange}
-          role="checkbox"
-          tabIndex={0}
-          type="checkbox"
-          value={value}
-          {...elemProps}
-        />
-        <SwitchBackground checked={checked} disabled={disabled}>
-          <SwitchCircle checked={checked} />
-        </SwitchBackground>
-      </SwitchContainer>
-    );
-  }
-}
+export default Switch;

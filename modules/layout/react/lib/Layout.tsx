@@ -61,7 +61,10 @@ const LayoutContainer = styled('div', {
 export default class Layout extends React.Component<LayoutProps> {
   public static Column = Column;
 
-  private renderChild = (child: React.ReactElement<ColumnProps>): React.ReactNode => {
+  private renderChild = (
+    child: React.ReactElement<ColumnProps>,
+    spacing: number
+  ): React.ReactNode => {
     if (!child) {
       return;
     }
@@ -73,9 +76,7 @@ export default class Layout extends React.Component<LayoutProps> {
         return child;
       }
 
-      return React.cloneElement(child as React.ReactElement<ColumnProps>, {
-        spacing: this.props.spacing,
-      });
+      return React.cloneElement(child, {spacing});
     }
 
     return child;
@@ -92,7 +93,9 @@ export default class Layout extends React.Component<LayoutProps> {
 
     return (
       <LayoutContainer spacing={spacing} gutter={gutter} capWidth={capWidth} {...elemProps}>
-        {React.Children.map(children, this.renderChild)}
+        {React.Children.map(children, (child: React.ReactElement<ColumnProps>) =>
+          this.renderChild(child, spacing)
+        )}
       </LayoutContainer>
     );
   }

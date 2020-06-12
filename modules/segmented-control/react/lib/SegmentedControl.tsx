@@ -26,43 +26,53 @@ export interface SegmentedControlProps {
   onChange?: (value: string | number) => void;
 }
 
-const SegmentedControlContainer = styled('div')({
-  '& button': {
-    borderRadius: borderRadius.zero,
-    border: `1px solid ${colors.soap500}`,
-    borderLeft: 'none',
-    '&[aria-pressed="true"]': {
-      borderColor: colors.blueberry400,
-      '&:hover, &:focus:hover': {
-        background: colors.blueberry400,
+const SegmentedControlContainer = styled('div')(
+  {
+    '& button': {
+      borderRadius: borderRadius.zero,
+      border: `1px solid ${colors.soap500}`,
+      borderLeft: 'none',
+      '&[aria-pressed="true"]': {
+        borderColor: colors.blueberry400,
+        '&:hover, &:focus:hover': {
+          background: colors.blueberry400,
+        },
+      },
+      '&:first-of-type': {
+        borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
+        borderLeft: `1px solid ${colors.soap500}`,
+      },
+      '&:last-of-type': {
+        borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
+      },
+      '&:focus': {
+        borderRadius: borderRadius.m,
+        zIndex: 1,
+        animation: 'none', // reset focusRing animation
+        transition: 'all 120ms, border-radius 1ms',
+        ...mouseFocusBehavior({
+          '&': {
+            borderRadius: borderRadius.zero,
+            '&:first-of-type': {
+              borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
+            },
+            '&:last-of-type': {
+              borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
+            },
+          },
+        }),
       },
     },
-    '&:first-of-type': {
-      borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-      borderLeft: `1px solid ${colors.soap500}`,
-    },
-    '&:last-of-type': {
-      borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
-    },
-    '&:focus': {
-      borderRadius: borderRadius.m,
-      zIndex: 1,
-      animation: 'none', // reset focusRing animation
-      transition: 'all 120ms, border-radius 1ms',
-      ...mouseFocusBehavior({
-        '&': {
-          borderRadius: borderRadius.zero,
-          '&:first-of-type': {
-            borderRadius: `${borderRadius.m} 0 0 ${borderRadius.m}`,
-          },
-          '&:last-of-type': {
-            borderRadius: `0 ${borderRadius.m} ${borderRadius.m} 0`,
-          },
-        },
-      }),
-    },
   },
-});
+  ({theme}) => ({
+    '& button[aria-pressed="true"]': {
+      borderColor: theme.canvas.palette.primary.main,
+      '&:hover, &:focus:hover': {
+        background: theme.canvas.palette.primary.main,
+      },
+    },
+  })
+);
 
 const onButtonClick = (
   existingOnClick: (e: React.SyntheticEvent) => void | undefined,
@@ -84,24 +94,20 @@ const onButtonClick = (
   }
 };
 
-const SegmentedControl = (props: SegmentedControlProps) => {
-  const {value = 0, children, onChange, ...elemProps} = props;
+const SegmentedControl = ({value = 0, children, onChange, ...elemProps}: SegmentedControlProps) => (
+  <SegmentedControlContainer {...elemProps}>
+    {React.Children.map(children, (child: React.ReactElement<IconButtonProps>, index: number) => {
+      if (typeof child.type === typeof IconButton) {
+        return React.cloneElement(child, {
+          toggled: typeof value === 'number' ? index === value : child.props.value === value,
+          variant: IconButton.Variant.SquareFilled,
+          onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
+        });
+      }
 
-  return (
-    <SegmentedControlContainer {...elemProps}>
-      {React.Children.map(children, (child: React.ReactElement<IconButtonProps>, index: number) => {
-        if (typeof child.type === typeof IconButton) {
-          return React.cloneElement(child, {
-            toggled: typeof value === 'number' ? index === value : child.props.value === value,
-            variant: IconButton.Variant.SquareFilled,
-            onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
-          });
-        }
-
-        return child;
-      })}
-    </SegmentedControlContainer>
-  );
-};
+      return child;
+    })}
+  </SegmentedControlContainer>
+);
 
 export default SegmentedControl;

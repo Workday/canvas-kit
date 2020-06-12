@@ -6,10 +6,10 @@ describe('memoizedFocusRing', () => {
       ringWidth: 3,
       separationWidth: 1,
       animate: true,
-      inset: true,
+      inset: 'outer',
       innerShadowColor: '#333333',
       outerShadowColor: '#666666',
-    };
+    } as const;
     const received0 = memoizedFocusRing(args);
     const received1 = memoizedFocusRing(args);
     (memoizedFocusRing.cache as Map<
