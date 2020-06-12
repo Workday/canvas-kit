@@ -19,7 +19,8 @@ enum ColorDirection {
 }
 
 function shiftColor(hexColor: string, direction: ColorDirection) {
-  const canvasColor = colors[Object.keys(colors).filter(color => colors[color] === hexColor)];
+  const canvasColor =
+    colors[Object.keys(colors).filter(color => colors[color] === hexColor) as CanvasColor];
 
   const darken = direction === ColorDirection.Darken;
 
