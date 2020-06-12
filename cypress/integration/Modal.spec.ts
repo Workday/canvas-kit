@@ -41,7 +41,7 @@ describe('Modal', () => {
         it('should place the portal as a child of the body element', () => {
           cy.get('body').then($body => {
             cy.findByLabelText('Delete Item')
-              .parent() // wrapper
+              .pipe(h.modal.getOverlay)
               .parent()
               .should($el => {
                 expect($el[0]).to.equal($body[0]);
@@ -51,7 +51,7 @@ describe('Modal', () => {
 
         it('should hide non-modal content from assistive technology', () => {
           cy.findByLabelText('Delete Item')
-            .parent()
+            .pipe(h.modal.getOverlay)
             .siblings()
             .should($siblings => {
               $siblings.each((_, $sibling) => {
@@ -141,7 +141,7 @@ describe('Modal', () => {
         context('when the overlay is clicked', () => {
           beforeEach(() => {
             cy.findByLabelText('Delete Item')
-              .parent() // overlay
+              .pipe(h.modal.getOverlay)
               .click('top');
           });
 
@@ -184,7 +184,7 @@ describe('Modal', () => {
       it('should place the portal as a child of the body element', () => {
         cy.get('body').then($body => {
           cy.findByLabelText('Delete Item')
-            .parent() // wrapper
+            .pipe(h.modal.getOverlay)
             .parent()
             .should($el => {
               expect($el[0]).to.equal($body[0]);
@@ -194,7 +194,7 @@ describe('Modal', () => {
 
       it('should hide non-modal content from assistive technology', () => {
         cy.findByLabelText('Delete Item')
-          .parent()
+          .pipe(h.modal.getOverlay)
           .siblings()
           .should($siblings => {
             $siblings.each((_, $sibling) => {
@@ -281,7 +281,7 @@ describe('Modal', () => {
       context('when the overlay is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Delete Item')
-            .parent() // overlay
+            .pipe(h.modal.getOverlay)
             .click('top');
         });
 
@@ -374,7 +374,7 @@ describe('Modal', () => {
       context('when the overlay is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Delete Item')
-            .parent() // overlay
+            .pipe(h.modal.getOverlay)
             .click('top');
         });
 
@@ -419,7 +419,7 @@ describe('Modal', () => {
       context('when the overlay is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Really Delete Item')
-            .parent() // overlay
+            .pipe(h.modal.getOverlay)
             .click('top');
         });
 
@@ -452,7 +452,7 @@ describe('Modal', () => {
       context('when the modal overlay is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Delete Item')
-            .parent() // overlay
+            .pipe(h.modal.getOverlay)
             .click('top');
         });
 

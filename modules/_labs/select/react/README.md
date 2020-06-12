@@ -9,6 +9,8 @@ A Canvas-styled Select with a Canvas-styled menu. This is a
 
 Undocumented props (`disabled`, `name`, etc.) should behave similarly to how you would expect from a standard `<select>` element.
 
+The menu is rendered using a portal by way of the Canvas Kit Popper.
+
 **Note:** There is also a non-Labs Select. The non-Labs Select uses the standard browser-provided menu whereas the Labs Select uses a custom Canvas-styled menu.
 
 ## Installation
