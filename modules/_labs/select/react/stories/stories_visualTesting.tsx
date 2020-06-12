@@ -148,7 +148,7 @@ export const SelectStatesOption = () => (
         ],
       },
     ].map(statesTable => (
-      <div>
+      <div key={statesTable.label}>
         <h2>{statesTable.label}</h2>
         <StaticStates>
           <ComponentStatesTable
