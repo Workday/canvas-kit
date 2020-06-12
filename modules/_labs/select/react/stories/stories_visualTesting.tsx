@@ -109,10 +109,10 @@ export const SelectStatesMenuOn = () => (
               onChange={() => {}} // eslint-disable-line no-empty-function
               options={normalizedOptions}
               focusedOptionIndex={1}
-              isMenuAnimated={false}
-              isMenuAutoFlipped={false}
-              isMenuAutoFocused={false}
               isMenuHidden={false}
+              shouldMenuAnimate={false}
+              shouldMenuAutoFlip={false}
+              shouldMenuAutoFocus={false}
             />
           </div>
         );

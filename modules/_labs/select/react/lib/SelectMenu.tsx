@@ -18,21 +18,6 @@ interface SelectMenuProps
    */
   buttonRef: React.RefObject<HTMLButtonElement>;
   /**
-   * If true, enable animation on the SelectMenu.
-   * @default true
-   */
-  isAnimated: boolean;
-  /**
-   * If true, automatically flip the SelectMenu to keep it visible if necessary (e.g., if the the SelectMenu would otherwise display below the visible area of the viewport).
-   * @default true
-   */
-  isAutoFlipped: boolean;
-  /**
-   * If true, focus the SelectMenu when it's shown. Set to false if you don't want to focus the SelectMenu automatically (for visual testing purposes, for example).
-   * @default true
-   */
-  isAutoFocused: boolean;
-  /**
    * If true, flip the SelectMenu so it extends upwards from the button.
    * @default false
    */
@@ -55,6 +40,21 @@ interface SelectMenuProps
    * The function called when the Escape key is pressed while the SelectMenu is the topmost element in the stack.
    */
   onCloseOnEscape?: () => void;
+  /**
+   * If true, enable animation on the SelectMenu.
+   * @default true
+   */
+  shouldAnimate: boolean;
+  /**
+   * If true, automatically flip the SelectMenu to keep it visible if necessary (e.g., if the the SelectMenu would otherwise display below the visible area of the viewport).
+   * @default true
+   */
+  shouldAutoFlip: boolean;
+  /**
+   * If true, focus the SelectMenu when it's shown. Set to false if you don't want to focus the SelectMenu automatically (for visual testing purposes, for example).
+   * @default true
+   */
+  shouldAutoFocus: boolean;
 }
 
 const fadeInAnimation = keyframes`
@@ -137,7 +137,7 @@ const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSS
 };
 
 const Menu = styled('div')<
-  Pick<SelectMenuProps, 'error' | 'isAnimated' | 'isHiding' | 'theme'> & {width: number}
+  Pick<SelectMenuProps, 'error' | 'isHiding' | 'shouldAnimate' | 'theme'> & {width: number}
 >(
   {
     backgroundColor: colors.frenchVanilla100,
@@ -157,16 +157,16 @@ const Menu = styled('div')<
   ({error, theme}) => ({
     ...menuBorderStyles(theme, error),
   }),
-  ({isAnimated}) =>
-    isAnimated && {
+  ({shouldAnimate}) =>
+    shouldAnimate && {
       animationName: fadeInAnimation,
       animationDuration: `${menuFadeDuration / 1000}s`,
       // Required to prevent the occasional menu flash when the menu
       // fades out
       animationFillMode: 'forwards',
     },
-  ({isAnimated, isHiding}) =>
-    isAnimated &&
+  ({isHiding, shouldAnimate}) =>
+    shouldAnimate &&
     isHiding && {
       animationName: fadeOutAnimation,
     },
@@ -190,12 +190,12 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
 );
 
 const generatePopperOptions = (
-  props: Pick<SelectMenuProps, 'isAutoFlipped' | 'isAutoFocused' | 'isFlipped' | 'menuRef'>
+  props: Pick<SelectMenuProps, 'isFlipped' | 'menuRef' | 'shouldAutoFlip' | 'shouldAutoFocus'>
 ) => {
-  const {isAutoFlipped, isAutoFocused, isFlipped, menuRef} = props;
+  const {isFlipped, menuRef, shouldAutoFlip, shouldAutoFocus} = props;
 
   let fallbackPlacements: Placement[] = [];
-  if (isAutoFlipped) {
+  if (shouldAutoFlip) {
     fallbackPlacements = isFlipped ? ['bottom-start'] : ['top-start'];
   }
 
@@ -247,7 +247,7 @@ const generatePopperOptions = (
   return {
     modifiers,
     onFirstUpdate: () => {
-      if (isAutoFocused && menuRef && menuRef.current) {
+      if (shouldAutoFocus && menuRef && menuRef.current) {
         menuRef.current.focus();
       }
     },
@@ -259,14 +259,14 @@ const SelectMenu = (props: SelectMenuProps) => {
     buttonRef,
     children,
     error,
-    isAnimated,
-    isAutoFlipped,
-    isAutoFocused,
     isFlipped,
     isHidden,
     isHiding,
     menuRef,
     onCloseOnEscape,
+    shouldAnimate,
+    shouldAutoFlip,
+    shouldAutoFocus,
     ...elemProps
   } = props;
 
@@ -317,14 +317,14 @@ const SelectMenu = (props: SelectMenuProps) => {
       open={!isHidden}
       anchorElement={buttonRef.current}
       popperOptions={generatePopperOptions({
-        isAutoFlipped,
-        isAutoFocused,
         isFlipped,
         menuRef,
+        shouldAutoFlip,
+        shouldAutoFocus,
       })}
       ref={popupRef}
     >
-      <Menu error={error} isAnimated={isAnimated} isHiding={isHiding} width={width}>
+      <Menu error={error} isHiding={isHiding} shouldAnimate={shouldAnimate} width={width}>
         <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
           {children}
         </MenuList>
@@ -334,12 +334,12 @@ const SelectMenu = (props: SelectMenuProps) => {
 };
 
 SelectMenu.defaultProps = {
-  isAnimated: true,
-  isAutoFlipped: true,
-  isAutoFocused: true,
   isFlipped: false,
   isHidden: false,
   isHiding: false,
+  shouldAnimate: true,
+  shouldAutoFlip: true,
+  shouldAutoFocus: true,
 };
 
 export default SelectMenu;

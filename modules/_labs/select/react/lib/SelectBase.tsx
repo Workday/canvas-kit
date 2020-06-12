@@ -107,21 +107,6 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isEmpty: boolean;
   /**
-   * If true, enable animation on the SelectBase menu.
-   * @default true
-   */
-  isMenuAnimated: boolean;
-  /**
-   * If true, automatically flip the SelectBase menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
-   * @default true
-   */
-  isMenuAutoFlipped: boolean;
-  /**
-   * If true, focus the SelectBase menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
-   * @default true
-   */
-  isMenuAutoFocused: boolean;
-  /**
    * If true, flip the SelectBase menu so it extends upwards from the button.
    * @default false
    */
@@ -161,6 +146,21 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * * `label: string` (required, analagous to the text content of an `<option>`)
    */
   options: NormalizedOption[];
+  /**
+   * If true, enable animation on the SelectBase menu.
+   * @default true
+   */
+  shouldMenuAnimate: boolean;
+  /**
+   * If true, automatically flip the SelectBase menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
+   * @default true
+   */
+  shouldMenuAutoFlip: boolean;
+  /**
+   * If true, focus the SelectBase menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
+   * @default true
+   */
+  shouldMenuAutoFocus: boolean;
 }
 
 export const buttonBorderWidth = 1;
@@ -270,12 +270,12 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   static defaultProps = {
     focusedOptionIndex: 0,
     isEmpty: false,
-    isMenuAnimated: true,
-    isMenuAutoFlipped: true,
-    isMenuAutoFocused: true,
     isMenuFlipped: false,
     isMenuHidden: true,
     isMenuHiding: false,
+    shouldMenuAnimate: true,
+    shouldMenuAutoFlip: true,
+    shouldMenuAutoFocus: true,
   };
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
@@ -359,9 +359,6 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       grow,
       inputRef,
       isEmpty,
-      isMenuAnimated,
-      isMenuAutoFlipped,
-      isMenuAutoFocused,
       isMenuFlipped,
       isMenuHidden,
       isMenuHiding,
@@ -370,6 +367,9 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       onMenuBlur,
       onMenuCloseOnEscape,
       options,
+      shouldMenuAnimate,
+      shouldMenuAutoFlip,
+      shouldMenuAutoFocus,
       value,
 
       // Strip unneeded props on button from elemProps
@@ -419,9 +419,6 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
             buttonRef={buttonRef}
             id={this.id}
             error={error}
-            isAnimated={isMenuAnimated}
-            isAutoFlipped={isMenuAutoFlipped}
-            isAutoFocused={isMenuAutoFocused}
             isFlipped={isMenuFlipped}
             isHidden={isMenuHidden}
             isHiding={isMenuHiding}
@@ -429,6 +426,9 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
             onBlur={onMenuBlur}
             onKeyDown={onKeyDown}
             onCloseOnEscape={onMenuCloseOnEscape}
+            shouldAnimate={shouldMenuAnimate}
+            shouldAutoFlip={shouldMenuAutoFlip}
+            shouldAutoFocus={shouldMenuAutoFocus}
           >
             {this.renderOptions(renderOption)}
           </SelectMenu>
