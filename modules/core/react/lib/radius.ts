@@ -4,6 +4,7 @@ export interface CanvasBorderRadius {
   m: string;
   l: string;
   circle: string;
+  [key: string]: string | number;
 }
 
 export const borderRadius: CanvasBorderRadius = {

@@ -8,7 +8,7 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
   /**
    * The text of the DrawerHeader. This text will also be applied as the `title` attribute of the header element.
    */
-  headerText?: string;
+  title?: string;
   /**
    * The function called when the DrawerHeader close button is clicked.
    */
