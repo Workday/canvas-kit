@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 
 import {CSSObject, keyframes} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
@@ -272,7 +272,7 @@ const SelectMenu = (props: SelectMenuProps) => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     handleWidthChange();
   }, [buttonRef]);
 
