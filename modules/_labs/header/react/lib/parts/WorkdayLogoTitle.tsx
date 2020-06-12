@@ -76,14 +76,14 @@ export class WorkdayLogoTitle extends React.Component<WorkdayLogoTitleProps> {
             {...this.props}
             dangerouslySetInnerHTML={{
               __html:
-                this.props.themeColor === HeaderTheme.White
-                  ? this.props.variant === HeaderVariant.Global
+                themeColor === HeaderTheme.White
+                  ? variant === HeaderVariant.Global
                     ? miniWdayLogoBlue
                     : wdayLogoBlue
                   : wdayLogoWhite,
             }}
           />
-          {this.props.title && <Title {...this.props}>{this.props.title}</Title>}
+          {title && <Title {...this.props}>{title}</Title>}
         </Lockup>
       </LockupContainer>
     );
