@@ -1,6 +1,6 @@
 /**
  * Gets the title component of the Modal. This is a required element for accessibility
- * @param $modal Modal component
+ * @param $modal Modal element with [role=dialog]
  * @example
  * h.modal.get()
  *   .pipe(h.modal.getTitle)
@@ -13,7 +13,7 @@ export function getTitle($modal: JQuery): JQuery {
 
 /**
  * Gets the top-right 'X' button if available. Will fail if it is not present
- * @param $modal Modal component
+ * @param $modal Modal element with [role=dialog]
  * @example
  * h.modal.get()
  *   .pipe(h.modal.getCloseButton)
@@ -21,4 +21,12 @@ export function getTitle($modal: JQuery): JQuery {
  */
 export function getCloseButton($modal: JQuery): JQuery {
   return $modal.find('[data-close]');
+}
+
+/**
+ * Gets the Overlay element given the modal element
+ * @param $modal Modal element with [role=dialog]
+ */
+export function getOverlay($modal: JQuery): JQuery {
+  return $modal.parent().parent();
 }

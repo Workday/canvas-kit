@@ -20,7 +20,10 @@ describe('Modal', () => {
 
   test('Modal should spread extra props', () => {
     const {getByRole} = renderModal({['data-propspread']: 'test'});
-    expect(getByRole('dialog').parentElement).toHaveAttribute('data-propspread', 'test');
+    expect(getByRole('dialog').parentElement.parentElement).toHaveAttribute(
+      'data-propspread',
+      'test'
+    );
   });
 
   test('Modal should replace aria-labeldBy with custom aria-label', () => {

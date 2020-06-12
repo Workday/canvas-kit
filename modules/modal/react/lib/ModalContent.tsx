@@ -191,7 +191,8 @@ const ModalContent = ({
 
   // special handling for clicking on the overlay
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (event.target === modalRef.current && PopupStack.isTopmost(modalRef.current)) {
+    // Detect clicks only on the centering wrapper element
+    if (event.target === modalRef.current?.children[0] && PopupStack.isTopmost(modalRef.current)) {
       onClose();
     }
   };
@@ -204,13 +205,10 @@ const ModalContent = ({
   useAssistiveHideSiblings(modalRef);
 
   const content = (
-    <Container
-      {...elemProps}
-      ref={modalRef}
-      onClick={mergeCallback(onOverlayClick, elemProps.onClick)}
-    >
+    <Container {...elemProps} ref={modalRef}>
       <CenteringContainer
         style={{width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw'}}
+        onClick={mergeCallback(onOverlayClick, elemProps.onClick)}
       >
         <Popup
           width={width}
