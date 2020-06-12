@@ -2,6 +2,8 @@
 
 A component that renders a loading animation.
 
+[> Workday Design Reference](https://design.workday.com/components/indicators/loading-animation)
+
 ## Installation
 
 ```sh

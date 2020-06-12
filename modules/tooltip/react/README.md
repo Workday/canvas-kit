@@ -6,6 +6,8 @@ Note: This Tooltip does not include a positioning engine. In our example we use 
 component to wrap our Tooltip component and position it, which is a wrapper to Popper.js. For
 reference: https://material-ui.com/api/popper/
 
+[> Workday Design Reference](https://design.workday.com/components/popups/tooltips)
+
 ## Installation
 
 ```sh

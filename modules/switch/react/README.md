@@ -4,6 +4,8 @@ A pill shaped switch. This is an
 [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) `input` component.
 Undocumented props are spread to the `input` element.
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/switch)
+
 ## Installation
 
 ```sh

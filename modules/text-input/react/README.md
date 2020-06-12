@@ -2,6 +2,8 @@
 
 Canvas-styled React text input components.
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
+
 ## Installation
 
 ```sh
