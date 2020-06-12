@@ -87,6 +87,7 @@ export const getOutlineButtonColors = (
     case OutlineButtonVariant.Primary:
       return {
         default: {
+          background: 'transparent',
           border: themePrimary.main,
           icon: themePrimary.main,
           label: themePrimary.main,
@@ -118,6 +119,7 @@ export const getOutlineButtonColors = (
     default:
       return {
         default: {
+          background: 'transparent',
           border: colors.soap500,
           icon: colors.licorice200,
           label: colors.blackPepper400,
@@ -150,6 +152,7 @@ export const getOutlineButtonColors = (
     case OutlineButtonVariant.Inverse:
       return {
         default: {
+          background: 'transparent',
           border: colors.frenchVanilla100,
           icon: colors.frenchVanilla100,
           label: colors.frenchVanilla100,
