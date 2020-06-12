@@ -24,7 +24,7 @@ const blueBackground: CSSObject = {
   },
 };
 
-storiesOf('Components|OutlineButtons/OutlineButton/React/Outline', module)
+storiesOf('Components|Buttons/Button/React/Outline', module)
   .addParameters({component: OutlineButton})
   .addDecorator(withReadme(README))
   .add('Primary', () => (

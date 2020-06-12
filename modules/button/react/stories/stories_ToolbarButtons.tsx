@@ -16,7 +16,7 @@ const customElementStyles = {
   fontSize: 14,
 };
 
-storiesOf('Components|Buttons/Button/React/Toolbar Buttons', module)
+storiesOf('Components|Buttons/Button/React/Toolbar', module)
   .addParameters({component: ToolbarIconButton})
   .addDecorator(withReadme(README))
   .add('Toolbar Icon Button', () => {
