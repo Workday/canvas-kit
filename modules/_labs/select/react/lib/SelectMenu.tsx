@@ -2,7 +2,7 @@ import React, {useState, useEffect, useLayoutEffect} from 'react';
 
 import {CSSObject, keyframes} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
-import {Placement, Popper, Rect, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
+import {Placement, Popper, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core';
 
 import {SelectProps} from './Select';
@@ -99,10 +99,10 @@ const menuBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObje
       position: 'absolute',
       width: '100%',
 
-      '[data-popper-placement="bottom-start"] &': {
+      '[data-popper-placement="bottom"] &': {
         top: 0,
       },
-      '[data-popper-placement="top-start"] &': {
+      '[data-popper-placement="top"] &': {
         bottom: 0,
       },
     },
@@ -126,10 +126,10 @@ const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSS
     borderLeft: border,
     borderRight: border,
 
-    '[data-popper-placement="bottom-start"] &': {
+    '[data-popper-placement="bottom"] &': {
       borderBottom: border,
     },
-    '[data-popper-placement="top-start"] &': {
+    '[data-popper-placement="top"] &': {
       borderTop: border,
     },
   };
@@ -144,11 +144,11 @@ const Menu = styled('div')<
     boxSizing: 'border-box',
     position: 'relative',
 
-    '[data-popper-placement="bottom-start"] &': {
+    '[data-popper-placement="bottom"] &': {
       borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
       borderTop: 0,
     },
-    '[data-popper-placement="top-start"] &': {
+    '[data-popper-placement="top"] &': {
       borderRadius: `${borderRadius.m} ${borderRadius.m} 0 0`,
       borderBottom: 0,
     },
@@ -195,7 +195,7 @@ const generatePopperOptions = (
 
   let fallbackPlacements: Placement[] = [];
   if (shouldAutoFlip) {
-    fallbackPlacements = isFlipped ? ['bottom-start'] : ['top-start'];
+    fallbackPlacements = isFlipped ? ['bottom'] : ['top'];
   }
 
   const modifiers = [
@@ -208,13 +208,8 @@ const generatePopperOptions = (
     {
       name: 'offset',
       options: {
-        offset: ({reference}: {reference: Rect}) => {
-          // Skid menu along the edge of the button to account
-          // for fractional x-positioning of the button (e.g.,
-          // if the button is in a horizontally-centered modal)
-          // and to ensure proper alignment between the button
-          // and the menu
-          const skidding = reference.x % 1 >= 0.5 ? 1 : 0;
+        offset: () => {
+          const skidding = 0;
 
           // Displace menu towards the button to obscure the bottom
           // edge of the button and to create a smooth visual
@@ -304,8 +299,8 @@ const SelectMenu = (props: SelectMenuProps) => {
   // Render nothing if buttonRef.current hasn't been set
   return buttonRef.current ? (
     <Popper
-      placement={isFlipped ? 'top-start' : 'bottom-start'}
-      open={!isHidden}
+      placement={isFlipped ? 'top' : 'bottom'}
+      open={!isHidden && width !== 0}
       anchorElement={buttonRef.current}
       popperOptions={generatePopperOptions({
         isFlipped,
