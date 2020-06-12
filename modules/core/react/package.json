@@ -55,5 +55,8 @@
     "@workday/canvas-space-web": "^0.15.5",
     "element-closest": "^3.0.2",
     "lodash": "^4.17.14"
+  },
+  "devDependencies": {
+    "@workday/canvas-kit-react-common": "4.0.0-beta.4"
   }
 }

@@ -19,7 +19,7 @@ export default withSnapshotsEnabled({
   component: Avatar,
   parameters: {
     chromatic: {
-      threshold: 0.3, // Chrome downsizes images non-deterministically. From testing, 0.28 is the minimum.
+      diffThreshold: 0.3, // Chrome downsizes images non-deterministically. From testing, 0.28 is the minimum.
       delay: 300, // Ensure we capture the image after loading and transition
     },
   },
