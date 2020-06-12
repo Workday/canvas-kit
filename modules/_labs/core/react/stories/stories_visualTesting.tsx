@@ -10,19 +10,7 @@ export default withSnapshotsEnabled({
   title: 'Testing|React/Labs/Core',
 });
 
-export const Header = () => (
-  <section>
-    <h1 style={type.brand1}>Brand 1 Header</h1>
-    <h2 style={type.brand2}>Brand 2 header</h2>
-    <h1 style={type.h1}>H1 Header</h1>
-    <h2 style={type.h2}>H2 Header</h2>
-    <h3 style={type.h3}>H3 Header</h3>
-    <h4 style={type.h4}>H4 Header</h4>
-    <h5 style={type.h5}>H5 Header</h5>
-  </section>
-);
-
-export const Type = () => {
+export const TypeAndSpace = () => {
   const inverseStyle = {
     display: 'inline-block',
     background: '#667380',
@@ -30,8 +18,24 @@ export const Type = () => {
     borderRadius: '3px',
   };
 
+  const Box = styled('div')(
+    {
+      border: '1px solid #eee',
+    },
+    space
+  );
+
   return (
     <div>
+      <section>
+        <h1 style={type.brand1}>Brand 1 Header</h1>
+        <h2 style={type.brand2}>Brand 2 header</h2>
+        <h1 style={type.h1}>H1 Header</h1>
+        <h2 style={type.h2}>H2 Header</h2>
+        <h3 style={type.h3}>H3 Header</h3>
+        <h4 style={type.h4}>H4 Header</h4>
+        <h5 style={type.h5}>H5 Header</h5>
+      </section>
       <section>
         <h2 style={type.h2}>Body Text</h2>
         <p style={type.body}>
@@ -60,7 +64,7 @@ export const Type = () => {
         </p>
       </section>
       <section>
-        <h2>Text Variants</h2>
+        <h2 style={type.h2}>Text Variants</h2>
         <span css={[type.body, type.variant.button]}>Button Text</span>
         <br />
         <span css={[type.body, type.variant.caps]}>Caps Text</span>
@@ -79,37 +83,27 @@ export const Type = () => {
         <br />
         <span css={[type.body, type.variant.mono]}>Mono Text</span>
       </section>
-    </div>
-  );
-};
-
-export const Space = () => {
-  const Box = styled('div')(
-    {
-      border: '1px solid #eee',
-    },
-    space
-  );
-  return (
-    <div>
-      <Box m={spacing.m} p={spacing.m}>
-        medium margin and padding
-      </Box>
-      <Box mx={spacing.m} my={spacing.m} px={spacing.m} py={spacing.m}>
-        medium margin (x, y) and padding (x, y)
-      </Box>
-      <Box
-        mt={spacing.m}
-        mr={spacing.m}
-        mb={spacing.m}
-        ml={spacing.m}
-        pt={spacing.m}
-        pr={spacing.m}
-        pb={spacing.m}
-        pl={spacing.m}
-      >
-        medium margin (top, right,left, bottom) and padding (top, right,left, bottom)
-      </Box>
+      <section>
+        <h2 style={type.h2}>Spacing</h2>
+        <Box m={spacing.m} p={spacing.m}>
+          medium margin and padding
+        </Box>
+        <Box mx={spacing.m} my={spacing.m} px={spacing.m} py={spacing.m}>
+          medium margin (x, y) and padding (x, y)
+        </Box>
+        <Box
+          mt={spacing.m}
+          mr={spacing.m}
+          mb={spacing.m}
+          ml={spacing.m}
+          pt={spacing.m}
+          pr={spacing.m}
+          pb={spacing.m}
+          pl={spacing.m}
+        >
+          medium margin (top, right,left, bottom) and padding (top, right,left, bottom)
+        </Box>
+      </section>
     </div>
   );
 };
