@@ -25,12 +25,12 @@ export interface SystemIconStyles {
   backgroundHover?: string;
   /**
    * The color of the SystemIcon. This defines `accent` and `fill`. `color` may be overriden by `accent` and `fill`.
-   * @default colors.primary.iconStandard
+   * @default iconColors.standard
    */
   color?: string;
   /**
    * The hover color of the SystemIcon. This defines `accentHover` and `fillHover`. `colorHover` may be overriden by `accentHover` and `fillHover`.
-   * @default colors.primary.iconHover
+   * @default iconColors.hover
    */
   colorHover?: string;
   /**

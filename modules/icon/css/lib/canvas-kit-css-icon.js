@@ -196,11 +196,7 @@ function styleSystemIconHovers(selector, iconRoot = document) {
 
   // Style default hovers
   colorIconHoverClasses(hoverableSelector, ['.wd-icon-background'], 'transparent');
-  colorIconHoverClasses(
-    hoverableSelector,
-    ['.wd-icon-accent', '.wd-icon-fill'],
-    canvasColors.primary.iconHover
-  );
+  colorIconHoverClasses(hoverableSelector, ['.wd-icon-accent', '.wd-icon-fill'], iconColors.hover);
 
   // Style individual hovers
   const hoverableSystemIcons = iconRoot.querySelectorAll(hoverableSelector);
