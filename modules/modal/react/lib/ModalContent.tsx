@@ -78,12 +78,23 @@ const Container = styled('div')({
   left: 0,
   width: '100vw',
   height: '100vh',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   background: 'rgba(0,0,0,0.65)',
   animationName: `${fadeIn}`,
   animationDuration: '0.3s',
+});
+
+// This centering container helps fix an issue with Chrome. Chrome doesn't normally do subpixel
+// positioning, but seems to when using flexbox centering. This messes up Popper calculations inside
+// the Modal. The centering container forces a "center" pixel calculation by making sure the width
+// is always an even number
+const CenteringContainer = styled('div')({
+  height: '100vh',
+  display: 'flex',
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 const transformOrigin = {
@@ -124,6 +135,25 @@ function getFirstElementToFocus(overlayEl: HTMLElement): HTMLElement {
   }
 }
 
+const useWindowSize = (): {width: number; height: number} => {
+  const [width, setWidth] = React.useState(window?.innerWidth ?? 0);
+  const [height, setHeight] = React.useState(window?.innerHeight ?? 0);
+
+  const onResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  };
+  React.useEffect(() => {
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
+  return {width, height};
+};
+
 const useInitialFocus = (
   modalRef: React.RefObject<HTMLElement>,
   firstFocusRef: React.RefObject<HTMLElement> | undefined
@@ -161,10 +191,12 @@ const ModalContent = ({
 
   // special handling for clicking on the overlay
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (event.target === modalRef.current && PopupStack.isTopmost(modalRef.current)) {
+    // Detect clicks only on the centering wrapper element
+    if (event.target === modalRef.current?.children[0] && PopupStack.isTopmost(modalRef.current)) {
       onClose();
     }
   };
+  const windowSize = useWindowSize();
 
   usePopupStack(modalRef);
   useCloseOnEscape(modalRef, onClose);
@@ -173,22 +205,23 @@ const ModalContent = ({
   useAssistiveHideSiblings(modalRef);
 
   const content = (
-    <Container
-      {...elemProps}
-      ref={modalRef}
-      onClick={mergeCallback(onOverlayClick, elemProps.onClick)}
-    >
-      <Popup
-        width={width}
-        heading={heading}
-        handleClose={handleClose}
-        padding={padding}
-        transformOrigin={transformOrigin}
-        aria-modal={true}
-        ariaLabel={ariaLabel}
+    <Container {...elemProps} ref={modalRef}>
+      <CenteringContainer
+        style={{width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw'}}
+        onClick={mergeCallback(onOverlayClick, elemProps.onClick)}
       >
-        {children}
-      </Popup>
+        <Popup
+          width={width}
+          heading={heading}
+          handleClose={handleClose}
+          padding={padding}
+          transformOrigin={transformOrigin}
+          aria-modal={true}
+          ariaLabel={ariaLabel}
+        >
+          {children}
+        </Popup>
+      </CenteringContainer>
     </Container>
   );
 

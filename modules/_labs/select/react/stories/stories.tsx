@@ -19,7 +19,7 @@ import README from '../README.md';
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-const options = [
+export const options = [
   {label: 'E-mail', value: 'email'},
   {label: 'Phone', value: 'phone'},
   {label: 'Fax (disabled)', value: 'fax', disabled: true},
@@ -31,9 +31,9 @@ const options = [
   },
 ];
 
-const simpleOptions = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
+export const simpleOptions = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
 
-const manyOptions = [
+export const manyOptions = [
   {label: 'Atlanta', value: 'atlanta'},
   {label: 'Austin', value: 'austin'},
   {label: 'Beaverton', value: 'beaverton'},
@@ -48,14 +48,14 @@ const manyOptions = [
   {label: 'San Mateo', value: 'san-mateo'},
 ];
 
-const customOptions = [
+export const customOptions = [
   {value: 'Activity Stream', data: {icon: activityStreamIcon}},
   {value: 'Avatar', data: {icon: avatarIcon}},
   {value: 'Upload Cloud', data: {icon: uploadCloudIcon}},
   {value: 'User', data: {icon: userIcon}},
 ];
 
-const customRenderOption: RenderOptionFunction = option => {
+export const customRenderOption: RenderOptionFunction = option => {
   const iconColor = option.focused ? typeColors.inverse : colors.blackPepper100;
   return (
     <div style={{alignItems: 'center', display: 'flex', padding: '3px 0'}}>
@@ -124,6 +124,7 @@ storiesOf('Labs|Select/React/Top Label', module)
   ));
 
 storiesOf('Labs|Select/React/Left Label', module)
+  .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <FormField labelPosition={FormField.LabelPosition.Left} label="Label" inputId="select-default">
