@@ -4,7 +4,6 @@ import * as PopperJS from '@popperjs/core';
 
 export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.Options;
-export type Rect = PopperJS.Rect;
 
 import {usePopupStack} from '../';
 
