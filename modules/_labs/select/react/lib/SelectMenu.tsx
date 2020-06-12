@@ -209,15 +209,7 @@ const generatePopperOptions = (
     {
       name: 'offset',
       options: {
-        offset: ({
-          placement,
-          reference,
-          popper,
-        }: {
-          placement: Placement;
-          reference: Rect;
-          popper: Rect;
-        }) => {
+        offset: ({reference}: {reference: Rect}) => {
           // Skid menu along the edge of the button to account
           // for fractional x-positioning of the button (e.g.,
           // if the button is in a horizontally-centered modal)
