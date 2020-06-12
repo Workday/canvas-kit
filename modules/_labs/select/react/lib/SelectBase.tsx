@@ -1,8 +1,13 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
 
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  ErrorType,
+  errorRing,
+  styled,
+  Themeable,
+} from '@workday/canvas-kit-react-common';
 import {
   colors,
   borderRadius,
@@ -146,14 +151,8 @@ const menuIconSize = 24;
 const buttonBorderWidth = 1;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
-const focusButtonStyles = {
-  borderColor: inputColors.focusBorder,
-  boxShadow: `inset 0 0 0 1px ${inputColors.focusBorder}`,
-  outline: 'none',
-};
-
 const SelectButton = styled('button')<
-  Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'isMenuHiding'>
+  Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'isMenuHiding' | 'theme'>
 >(
   {
     ...type.body,
@@ -164,6 +163,7 @@ const SelectButton = styled('button')<
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',
     height: spacing.xl,
+    outline: 'none',
     overflow: 'hidden',
     padding: buttonPadding,
     paddingRight: spacingNumbers.xxs + menuIconSize + buttonPadding,
@@ -177,9 +177,6 @@ const SelectButton = styled('button')<
     '&::placeholder': {
       color: inputColors.placeholder,
     },
-    '&:focus:not([disabled])': {
-      ...focusButtonStyles,
-    },
     '&:disabled': {
       backgroundColor: inputColors.disabled.background,
       borderColor: inputColors.disabled.border,
@@ -189,25 +186,32 @@ const SelectButton = styled('button')<
       },
     },
   },
-  ({error, isMenuHidden, isMenuHiding}) => {
+  ({error, isMenuHidden, isMenuHiding, theme}) => {
+    const themedFocusOutlineColor = theme.canvas.palette.common.focusOutline;
+    const buttonFocusStyles = {
+      borderColor: themedFocusOutlineColor,
+      boxShadow: `inset 0 0 0 1px ${themedFocusOutlineColor}`,
+    };
+
     if (error === undefined) {
       // If there isn't an error, apply focus and hover styles if the menu is
       // hidden or hiding (otherwise, the menu is completely visible: style
       // the button as if it had focus)
       return isMenuHidden || isMenuHiding
         ? {
+            '&:focus:not([disabled])': {
+              ...buttonFocusStyles,
+            },
             '&:hover:not([disabled]):not(:focus)': {
               borderColor: inputColors.hoverBorder,
             },
           }
-        : {
-            ...focusButtonStyles,
-          };
-    } else {
-      return {
-        ...errorRing(error),
-      };
+        : {...buttonFocusStyles};
     }
+
+    return {
+      ...errorRing(error, theme),
+    };
   },
   ({grow}) =>
     grow && {

@@ -5,7 +5,6 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {TransformOrigin} from '@workday/canvas-kit-react-common';
-import {IconButtonSize} from '@workday/canvas-kit-react-button';
 import styled from '@emotion/styled';
 
 export interface ToastProps {
@@ -13,12 +12,12 @@ export interface ToastProps {
    * The icon of the Toast.
    * @default checkIcon
    */
-  icon: CanvasSystemIcon;
+  icon?: CanvasSystemIcon;
   /**
    * The color of the Toast icon.
    * @default colors.greenApple400
    */
-  iconColor: CanvasColor | string; // TODO: Fix
+  iconColor?: CanvasColor | string; // TODO: Fix
   /**
    * The text of the Toast message.
    */
@@ -60,13 +59,12 @@ const ToastSystemIcon = styled(SystemIcon)({
 });
 
 const ActionButton = styled('button')({
+  ...type.body2,
+  ...type.variant.link,
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',
-  padding: 0,
   marginTop: spacing.xxxs,
-  ...type.body2,
-  ...type.variant.link,
 });
 
 const Message = styled('div')({
@@ -75,19 +73,14 @@ const Message = styled('div')({
 });
 
 export default class Toast extends React.Component<ToastProps> {
-  static defaultProps = {
-    icon: checkIcon as CanvasSystemIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
-    iconColor: colors.greenApple400,
-  };
-
   public render() {
     const {
+      icon = checkIcon as CanvasSystemIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
+      iconColor = colors.greenApple400,
+      transformOrigin,
       onClose,
       onActionClick,
       actionText,
-      icon,
-      iconColor,
-      transformOrigin,
       ...elemProps
     } = this.props;
 
@@ -99,7 +92,7 @@ export default class Toast extends React.Component<ToastProps> {
         transformOrigin={transformOrigin}
         padding={PopupPadding.s}
         handleClose={onClose}
-        closeIconSize={IconButtonSize.Small}
+        closeIconSize="small"
         role={isInteractive ? 'dialog' : 'status'}
         aria-live={isInteractive ? 'off' : 'polite'}
         aria-atomic={!isInteractive}

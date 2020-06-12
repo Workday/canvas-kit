@@ -1,6 +1,11 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {GrowthBehavior, ErrorType, errorRing} from '@workday/canvas-kit-react-common';
+import {
+  GrowthBehavior,
+  ErrorType,
+  errorRing,
+  styled,
+  Themeable,
+} from '@workday/canvas-kit-react-common';
 import {borderRadius, inputColors, spacingNumbers, type} from '@workday/canvas-kit-react-core';
 
 export interface TextInputProps
@@ -63,8 +68,8 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 
   ({theme, error}) => {
     return {
       '&:focus:not([disabled])': {
-        borderColor: theme.palette.common.focusOutline,
-        boxShadow: `inset 0 0 0 1px ${theme.palette.common.focusOutline}`,
+        borderColor: theme.canvas.palette.common.focusOutline,
+        boxShadow: `inset 0 0 0 1px ${theme.canvas.palette.common.focusOutline}`,
         outline: 'none',
       },
       ...errorRing(error, theme),
@@ -75,13 +80,9 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 
 export default class TextInput extends React.Component<TextInputProps> {
   static ErrorType = ErrorType;
 
-  static defaultProps = {
-    inputRef: React.createRef<HTMLInputElement>(),
-  };
-
   render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {grow, inputRef, error, ...inputProps} = this.props;
+    const {inputRef, grow, error, ...inputProps} = this.props;
 
     return <Input type="text" ref={inputRef} grow={grow} error={error} {...inputProps} />;
   }

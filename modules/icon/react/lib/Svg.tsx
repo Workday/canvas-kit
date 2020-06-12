@@ -2,23 +2,17 @@
 import {CSSObject, jsx, ClassNames} from '@emotion/core';
 import * as React from 'react';
 import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
-import {SpanProps} from './types';
 import {validateIconType} from './utils';
 
-export interface SvgProps {
+export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   src: CanvasIcon;
   styles?: CSSObject;
-  elemProps: SpanProps;
   type: CanvasIconTypes;
 }
 
 export default class Svg extends React.Component<SvgProps> {
-  static defaultProps = {
-    elemProps: {},
-  };
-
   public render() {
-    const {src, styles, type, elemProps} = this.props;
+    const {src, styles, type, ...elemProps} = this.props;
 
     // Validation for JS
     try {

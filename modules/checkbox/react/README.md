@@ -96,7 +96,7 @@ Default: A uniquely generated id
 
 ---
 
-#### `onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void`
+#### `onChange: (e: React.ChangeEvent<HTMLInputElement>) => void`
 
 > A callback that gets called everytime the checkbox state changes.
 

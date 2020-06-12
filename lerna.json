@@ -1,14 +1,16 @@
 {
-  "packages": [
-    "modules/**"
-  ],
-  "version": "3.8.0",
+  "packages": ["modules/**"],
+  "version": "4.0.0-beta.4",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
     "version": {
       "gitTagVersion": false,
-      "push": false
+      "push": false,
+      "forcePublish": "*"
+    },
+    "publish": {
+      "forcePublish": "*"
     }
   }
 }

@@ -17,6 +17,58 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Align hover ripple for checkbox and radio components in IE11 ([#651](https://github.com/Workday/canvas-kit/pull/651)) [@lychyi](https://github.com/lychyi)
 - fix(switch): Fix click target for switch ([#671](https://github.com/Workday/canvas-kit/pull/671)) [@mannycarrera4](https://github.com/mannycarrera4)
 
+# 4.0.0-beta.4 (2020-05-20)
+
+### Infrastructure
+- chore: Fix create-module and promote-module ([#660](https://github.com/Workday/canvas-kit/pull/660)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix: Fix check-lockfile call during precommit linting ([#663](https://github.com/Workday/canvas-kit/pull/663)) [@jamesfan](https://github.com/jamesfan)
+- ci: Improve canary builds & publish behavior ([#665](https://github.com/Workday/canvas-kit/pull/665)) [@anicholls](https://github.com/anicholls)
+
+### Components
+
+- fix(avatar): Combine Avatar & AvatarButton and provide fallback image ([#614](https://github.com/Workday/canvas-kit/pull/614)) [@vibdev](https://github.com/vibdev)
+- feat(select): Add theming to select in labs ([#648](https://github.com/Workday/canvas-kit/pull/648)) [@mannycarrera4](https://github.com/mannycarrera4)
+
+# 4.0.0-beta.3 (2020-05-12)
+
+### Infrastructure
+
+- chore: Upgrade Babel and presets to support optional chaining ([#631](https://github.com/Workday/canvas-kit/pull/631)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Fix version issue in beta build ([#644](https://github.com/Workday/canvas-kit/pull/644)) [@anicholls](https://github.com/anicholls)
+
+### Components
+
+- fix(pagination): Provide aria live attribute for accessbility ([#620](https://github.com/Workday/canvas-kit/pull/620)) [@mannycarrera4](https://github.com/mannycarrera4)
+
+# 4.0.0-beta.2 (2020-05-11)
+
+### Infrastructure
+
+- chore: Upgrade packages to fix vulnerabilities ([#531](https://github.com/Workday/canvas-kit/pull/531)) [@anicholls](https://github.com/anicholls)
+- feat(core): Add window configuration option to inherit font family ([#553](https://github.com/Workday/canvas-kit/pull/553)) [@anicholls](https://github.com/anicholls)
+- fix: Add type checking to PRs and fix type errors ([#609](https://github.com/Workday/canvas-kit/pull/609)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Use sha in prerelease version to avoid duplicates ([#616](https://github.com/Workday/canvas-kit/pull/616)) [@anicholls](https://github.com/anicholls)
+- ci: Trim sha before using it for canary preid ([#619](https://github.com/Workday/canvas-kit/pull/619)) [@anicholls](https://github.com/anicholls)
+- ci: Fix version regex for canary publish ([#622](https://github.com/Workday/canvas-kit/pull/622)) [@anicholls](https://github.com/anicholls)
+- fix: Clean up ts3.5 files ([#630](https://github.com/Workday/canvas-kit/pull/630)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Add script to announce trunk build failures in slack ([#628](https://github.com/Workday/canvas-kit/pull/628)) [@anicholls](https://github.com/anicholls)
+
+### Theming
+
+- chore: Promote theming functions out of labs ([#558](https://github.com/Workday/canvas-kit/pull/558)) [@mannycarrera4](https://github.com/mannycarrera4)
+- chore: Move theme functionality from labs to common ([#594](https://github.com/Workday/canvas-kit/pull/594)) [@mannycarrera4](https://github.com/mannycarrera4)
+- fix(common): Improve theming API stability ([#593](https://github.com/Workday/canvas-kit/pull/593)) [@anicholls](https://github.com/anicholls)
+
+### Components
+
+- fix(button): Fix IconButton states and update TextButton CSS ([#577](https://github.com/Workday/canvas-kit/pull/577)) [@anicholls](https://github.com/anicholls)
+- ci(tooltip): Fix chromatic flag ([#585](https://github.com/Workday/canvas-kit/pull/585)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix: Rename prop labels to match aria labels ([#551](https://github.com/Workday/canvas-kit/pull/551)) [@mannycarrera4](https://github.com/mannycarrera4)
+- fix(modal): Add missing aria-modal=true and add aria-label ([#588](https://github.com/Workday/canvas-kit/pull/588)) [@alexandrzavalii](https://github.com/alexandrzavalii)
+- feat(button): Add href support ([#590](https://github.com/Workday/canvas-kit/pull/590)) [@anicholls](https://github.com/anicholls)
+- fix(color-picker): Fix accessibility announcement for color input ([#639](https://github.com/Workday/canvas-kit/pull/639)) [@mannycarrera4](https://github.com/mannycarrera4)
+- test(toast): Fix chromatic stories for toast ([#625](https://github.com/Workday/canvas-kit/pull/625)) [@mannycarrera4](https://github.com/mannycarrera4)
+
 # 3.7.0 (2020-05-06)
 
 ### Infrastructure
@@ -37,6 +89,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - feat(select): Implement Canvas menu ([#454](https://github.com/Workday/canvas-kit/pull/454)) [@jamesfan](https://github.com/jamesfan)
 - test(popup): Add tests for Popup ([#600](https://github.com/Workday/canvas-kit/pull/600)) [@mannycarrera4](https://github.com/mannycarrera4)
 
+# 4.0.0-beta.1 (2020-04-13)
+
+### Infrastructure
+
+- fix: Remove SyntheticEvent type usage ([#499](https://github.com/Workday/canvas-kit/pull/499)) [@donovangini](https://github.com/donovangini)
+- refactor: Destructure default props ([#525](https://github.com/Workday/canvas-kit/pull/525)) [@mannycarrera4](https://github.com/mannycarrera4)
+
+### Components
+- refactor(button): TextButton design updates ([#540](https://github.com/Workday/canvas-kit/pull/540)) [@anicholls](https://github.com/anicholls)
+- feat(button): Add Hyperlink component ([#541](https://github.com/Workday/canvas-kit/pull/541)) [@anicholls](https://github.com/anicholls)
+- feat(tooltip): Refactor to a simpler API ([#528](https://github.com/Workday/canvas-kit/pull/528)) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat(core): Allow InputProvider to use a configurable container ([#546](https://github.com/Workday/canvas-kit/pull/546)) [@mannycarrera4](https://github.com/mannycarrera4)
+
 # 3.6.0 (2020-04-13)
 
 ### Infrastructure
@@ -52,6 +117,24 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - feat(combobox): Convert to functional component and add translation function for status text ([#532](https://github.com/Workday/canvas-kit/pull/532)) [@vibdev](https://github.com/vibdev)
 - fix(color-picker): Design & use case improvements ([#519](https://github.com/Workday/canvas-kit/pull/519)) [@anicholls](https://github.com/anicholls)
 - fix(menu): Fix flashing on initial selected index ([#561](https://github.com/Workday/canvas-kit/pull/561)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+# 4.0.0-beta.0 (2020-03-30)
+
+### Infrastructure
+
+- ci: Release canary builds for prerelease branches ([#481](https://github.com/Workday/canvas-kit/pull/481)) [@anicholls](https://github.com/anicholls)
+- ci: Fix prerelease canary builds ([#501](https://github.com/Workday/canvas-kit/pull/501)) [@anicholls](https://github.com/anicholls)
+- feat: Add script for easy promotion of labs components ([#522](https://github.com/Workday/canvas-kit/pull/522)) [@anicholls](https://github.com/anicholls)
+- chore: Manage dependencies ([#533](https://github.com/Workday/canvas-kit/pull/533)) [@anicholls](https://github.com/anicholls)
+
+### Components
+
+- **[BREAKING]** refactor(button): Simplify Button components and prep for theming ([#471](https://github.com/Workday/canvas-kit/pull/471)) [@anicholls](https://github.com/anicholls)
+- **[BREAKING]** refactor: Rename and move IconButtonToggleGroup to SegmentedControl ([#505](https://github.com/Workday/canvas-kit/pull/505)) [@anicholls](https://github.com/anicholls)
+- **[BREAKING]** fix(modal): Use React portals for accessibility fixes ([#419](https://github.com/Workday/canvas-kit/pull/419)) [@NicholasBoll](https://github.com/NicholasBoll)
+- **[BREAKING]** chore: Promote SegmentedControl out of labs ([#524](https://github.com/Workday/canvas-kit/pull/524)) [@anicholls](https://github.com/anicholls)
+- fix(button): Misc. fixes after refactor ([#509](https://github.com/Workday/canvas-kit/pull/509)) [@anicholls](https://github.com/anicholls)
+- feat(button): Add theming support to buttons ([#527](https://github.com/Workday/canvas-kit/pull/527)) [@anicholls](https://github.com/anicholls)
 
 # 3.5.0 (2020-03-12)
 

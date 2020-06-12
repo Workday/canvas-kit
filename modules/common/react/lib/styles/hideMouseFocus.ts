@@ -4,10 +4,10 @@ import {CSSObject} from '@emotion/core';
  * A utility to hide the default canvas style focus ring when using mouse input.
  * Requires wrapping your components in an InputProvider component.
  */
-const hideMouseFocus: CSSObject = {
-  [`[data-whatinput='mouse'] &:focus,
-    [data-whatinput='touch'] &:focus,
-    [data-whatinput='pointer'] &:focus`]: {
+export const hideMouseFocus: CSSObject = {
+  [`[data-whatinput="mouse"] &:focus,
+    [data-whatinput="touch"] &:focus,
+    [data-whatinput="pointer"] &:focus`]: {
     outline: 'none',
     boxShadow: 'none',
     animation: 'none',
@@ -41,5 +41,3 @@ export const mouseFocusBehavior = (selectors: IndexableObject) => {
 
   return output;
 };
-
-export default hideMouseFocus;

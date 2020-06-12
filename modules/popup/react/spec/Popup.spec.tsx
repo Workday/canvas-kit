@@ -26,7 +26,7 @@ describe('Popup', () => {
     it('should render popup with a close button', () => {
       const closeButtonAriaLabel = 'close';
       const {getByRole} = render(
-        <Popup closeLabel={closeButtonAriaLabel} handleClose={cb}>
+        <Popup closeButtonAriaLabel={closeButtonAriaLabel} handleClose={cb}>
           <div>Are you sure you'd like to delete the item titled 'My Item'?</div>
 
           <button onClick={cb}>Delete</button>
@@ -42,7 +42,7 @@ describe('Popup', () => {
     it('should call the handleClose callback when clicked', () => {
       const closeButtonAriaLabel = 'close';
       const {getByRole} = render(
-        <Popup closeLabel={closeButtonAriaLabel} handleClose={cb}>
+        <Popup closeButtonAriaLabel={closeButtonAriaLabel} handleClose={cb}>
           <div>Are you sure you'd like to delete the item titled 'My Item'?</div>
 
           <button onClick={cb}>Delete</button>

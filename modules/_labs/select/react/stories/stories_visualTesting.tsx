@@ -55,7 +55,10 @@ export const SelectStates = () => (
             {label: 'Active', value: 'active'},
             {label: 'Active Hover', value: 'active hover'},
           ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          disabled: [
+            {label: '', value: false},
+            {label: 'Disabled', value: true},
+          ],
         },
         props => {
           if (props.disabled && !['', 'hover'].includes(props.className)) {
@@ -107,7 +110,10 @@ export const SelectStatesOption = () => (
     {[
       {
         label: 'Disabled States',
-        columnProps: [{label: 'Default', props: {}}, {label: 'Hover', props: {className: 'hover'}}],
+        columnProps: [
+          {label: 'Default', props: {}},
+          {label: 'Hover', props: {className: 'hover'}},
+        ],
         rowProps: [{label: 'Disabled', props: {disabled: true}}],
       },
       {

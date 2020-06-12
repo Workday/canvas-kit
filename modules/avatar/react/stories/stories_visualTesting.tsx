@@ -7,7 +7,7 @@ import {
   permutateProps,
   withSnapshotsEnabled,
 } from '../../../../utils/storybook';
-import {Avatar, AvatarButton} from '../index';
+import {Avatar} from '../index';
 
 // @ts-ignore: Cannot find module error
 import testAvatar from './test-avatar.png';
@@ -51,10 +51,13 @@ export const AvatarStates = () => (
           {label: 'XL', value: Avatar.Size.xl},
           {label: 'XXL', value: Avatar.Size.xxl},
         ],
-        url: [{value: undefined, label: 'Placeholder'}, {value: testAvatar, label: 'Image'}],
+        url: [
+          {value: undefined, label: 'Placeholder'},
+          {value: testAvatar, label: 'Image'},
+        ],
       })}
     >
-      {props => <Avatar {...props} />}
+      {props => <Avatar as="div" {...props} />}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -85,10 +88,13 @@ export const AvatarButtonStates = () => (
           {label: 'XL', value: Avatar.Size.xl},
           {label: 'XXL', value: Avatar.Size.xxl},
         ],
-        url: [{value: undefined, label: 'Placeholder'}, {value: testAvatar, label: 'Image'}],
+        url: [
+          {value: undefined, label: 'Placeholder'},
+          {value: testAvatar, label: 'Image'},
+        ],
       })}
     >
-      {props => <AvatarButton {...props} onClick={noop} />}
+      {props => <Avatar {...props} onClick={noop} />}
     </ComponentStatesTable>
   </StaticStates>
 );
