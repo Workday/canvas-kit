@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Rect} from '@popperjs/core';
 
 import {CSSObject, keyframes} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
-import {Placement, Popper, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
+import {Placement, Popper, Rect, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core';
 
 import {SelectProps} from './Select';
