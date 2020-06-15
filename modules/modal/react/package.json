@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-modal",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "description": "Modal to display a popup with a translucent background",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -41,7 +41,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-popup": "^3.8.0",
+    "@workday/canvas-kit-react-popup": "^3.9.0",
     "focus-trap-js": "1.0.8"
   }
 }

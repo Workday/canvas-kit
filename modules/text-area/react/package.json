@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-text-area",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "description": "Canvas-styled text area",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -39,8 +39,8 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@workday/canvas-kit-labs-react-core": "^3.8.0",
-    "@workday/canvas-kit-react-common": "^3.8.0",
-    "@workday/canvas-kit-react-core": "^3.8.0"
+    "@workday/canvas-kit-labs-react-core": "^3.9.0",
+    "@workday/canvas-kit-react-common": "^3.9.0",
+    "@workday/canvas-kit-react-core": "^3.9.0"
   }
 }
