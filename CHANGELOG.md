@@ -7,40 +7,46 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Infrastructure
 - docs: Clean up 4.0 migration guide ([#677](https://github.com/Workday/canvas-kit/pull/677)) [@anicholls](https://github.com/anicholls)
-- test: Improve snapshot infrastructure and organization ([#687](https://github.com/Workday/canvas-kit/pull/687)) [@anicholls](https://github.com/anicholls)
 - fix: Cleanup after merging master into prerelease/v4 [@anicholls](https://github.com/anicholls)
-- chore: Bump websocket-extensions from 0.1.3 to 0.1.4 ([#703](https://github.com/Workday/canvas-kit/pull/703)) [@dependabot](https://github.com/dependabot)
 - chore: Update canvas-colors-web dependencies ([#706](https://github.com/Workday/canvas-kit/pull/706)) [@anicholls](https://github.com/anicholls)
-- chore: Remove unneeded dependency ([#721](https://github.com/Workday/canvas-kit/pull/721)) [@NicholasBoll](https://github.com/NicholasBoll)
 
 ### Components
 - fix(avatar): Fix misalignment on ie11 ([#676](https://github.com/Workday/canvas-kit/pull/676)) [@alexandrzavalii](https://github.com/alexandrzavalii)
-- fix(select): Fix miscellaneous UI issues ([#672](https://github.com/Workday/canvas-kit/pull/672)) [@jamesfan](https://github.com/jamesfan)
 - fix(toast): Action link align on new line ([#682](https://github.com/Workday/canvas-kit/pull/682)) [@alexandrzavalii](https://github.com/alexandrzavalii)
 - fix(button):  Update button readme with toolbar section ([#680](https://github.com/Workday/canvas-kit/pull/680)) [@mannycarrera4](https://github.com/mannycarrera4)
-- test(select): Fix visual testing states for options ([#606](https://github.com/Workday/canvas-kit/pull/606)) [@jamesfan](https://github.com/jamesfan)
-- test(avatar): Add snapshot tests for Avatar and AvatarButton ([#690](https://github.com/Workday/canvas-kit/pull/690)) [@anicholls](https://github.com/anicholls)
-- test(tooltip): Add snapshot test for various placements ([#691](https://github.com/Workday/canvas-kit/pull/691)) [@anicholls](https://github.com/anicholls)
 - feat(button): Add toolbar dropdown button ([#684](https://github.com/Workday/canvas-kit/pull/684)) [@mannycarrera4](https://github.com/mannycarrera4)
-- test(status-indicator): Add snapshots ([#692](https://github.com/Workday/canvas-kit/pull/692)) [@anicholls](https://github.com/anicholls)
 - test(card): Add stories and enable snapshots ([#708](https://github.com/Workday/canvas-kit/pull/708)) [@mannycarrera4](https://github.com/mannycarrera4)
 - fix(common): Auto-generate contrast color for partial theme ([#700](https://github.com/Workday/canvas-kit/pull/700)) [@donovangini](https://github.com/donovangini)
 - feat: Add a Popup Stack manager to Canvas Kit ([#670](https://github.com/Workday/canvas-kit/pull/670)) [@NicholasBoll](https://github.com/NicholasBoll)
-- test(modal): Add modal snapshots ([#693](https://github.com/Workday/canvas-kit/pull/693)) [@anicholls](https://github.com/anicholls)
-- test(avatar): Fix visual regression threshold ([#723](https://github.com/Workday/canvas-kit/pull/723)) [@NicholasBoll](https://github.com/NicholasBoll)
-- test(core): Add new stories and enable snapshots ([#696](https://github.com/Workday/canvas-kit/pull/696)) [@anicholls](https://github.com/anicholls)
 - fix: Use theme contrast color for input "checks" ([#719](https://github.com/Workday/canvas-kit/pull/719)) [@anicholls](https://github.com/anicholls)
 - fix(button): Misc. styling fixes and update to focusRing API ([#726](https://github.com/Workday/canvas-kit/pull/726)) [@anicholls](https://github.com/anicholls)
-- test(drawer): Add stories and snapshots for drawer ([#727](https://github.com/Workday/canvas-kit/pull/727)) [@mannycarrera4](https://github.com/mannycarrera4)
 - fix(form-field): Fix default prop bug ([#702](https://github.com/Workday/canvas-kit/pull/702)) [@alanbsmith](https://github.com/alanbsmith)
-- feat(core): Add window configuration option to inherit font family ([#722](https://github.com/Workday/canvas-kit/pull/722)) [@anicholls](https://github.com/anicholls)
-- test(side-panel): Add stories and enable snapshots ([#715](https://github.com/Workday/canvas-kit/pull/715)) [@mannycarrera4](https://github.com/mannycarrera4)
 - fix(segmented-control): Misc. fixes and story improvements ([#730](https://github.com/Workday/canvas-kit/pull/730)) [@anicholls](https://github.com/anicholls)
-- ci(avatar): Fixed threshold setting ([#731](https://github.com/Workday/canvas-kit/pull/731)) [@NicholasBoll](https://github.com/NicholasBoll)
-- test(status-indicator): Fix visual testing story icons ([#732](https://github.com/Workday/canvas-kit/pull/732)) [@anicholls](https://github.com/anicholls)
 - fix(icon): Fix icon color references ([#733](https://github.com/Workday/canvas-kit/pull/733)) [@anicholls](https://github.com/anicholls)
 - feat(select): Render menu using a portal ([#641](https://github.com/Workday/canvas-kit/pull/641)) [@jamesfan](https://github.com/jamesfan)
 
+# 3.9.0 (2020-06-15)
+
+### Infrastructure
+- test: Improve snapshot infrastructure and organization ([#687](https://github.com/Workday/canvas-kit/pull/687)) [@anicholls](https://github.com/anicholls)
+- chore: Bump websocket-extensions from 0.1.3 to 0.1.4 ([#703](https://github.com/Workday/canvas-kit/pull/703)) [@dependabot](https://github.com/dependabot)
+- chore: Remove unneeded dependency ([#721](https://github.com/Workday/canvas-kit/pull/721)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Components
+- fix(select): Fix miscellaneous UI issues ([#672](https://github.com/Workday/canvas-kit/pull/672)) [@jamesfan](https://github.com/jamesfan)
+- test(select): Fix visual testing states for options ([#606](https://github.com/Workday/canvas-kit/pull/606)) [@jamesfan](https://github.com/jamesfan)
+- test(avatar): Add snapshot tests for Avatar and AvatarButton ([#690](https://github.com/Workday/canvas-kit/pull/690)) [@anicholls](https://github.com/anicholls)
+- test(tooltip): Add snapshot test for various placements ([#691](https://github.com/Workday/canvas-kit/pull/691)) [@anicholls](https://github.com/anicholls)
+- test(status-indicator): Add snapshots ([#692](https://github.com/Workday/canvas-kit/pull/692)) [@anicholls](https://github.com/anicholls)
+- test(modal): Add modal snapshots ([#693](https://github.com/Workday/canvas-kit/pull/693)) [@anicholls](https://github.com/anicholls)
+- test(avatar): Fix visual regression threshold ([#723](https://github.com/Workday/canvas-kit/pull/723)) [@NicholasBoll](https://github.com/NicholasBoll)
+- test(core): Add new stories and enable snapshots ([#696](https://github.com/Workday/canvas-kit/pull/696)) [@anicholls](https://github.com/anicholls)
+- test(drawer): Add stories and snapshots for drawer ([#727](https://github.com/Workday/canvas-kit/pull/727)) [@mannycarrera4](https://github.com/mannycarrera4)
+- feat(core): Add window configuration option to inherit font family ([#722](https://github.com/Workday/canvas-kit/pull/722)) [@anicholls](https://github.com/anicholls)
+- test(side-panel): Add stories and enable snapshots ([#715](https://github.com/Workday/canvas-kit/pull/715)) [@mannycarrera4](https://github.com/mannycarrera4)
+- ci(avatar): Fixed threshold setting ([#731](https://github.com/Workday/canvas-kit/pull/731)) [@NicholasBoll](https://github.com/NicholasBoll)
+- test(status-indicator): Fix visual testing story icons ([#732](https://github.com/Workday/canvas-kit/pull/732)) [@anicholls](https://github.com/anicholls)
+- chore(core): Update Labs Core stories and add snapshots ([#735](https://github.com/Workday/canvas-kit/pull/735)) [@alanbsmith](https://github.com/alanbsmith)
 
 # 3.8.0 (2020-05-22)
 
