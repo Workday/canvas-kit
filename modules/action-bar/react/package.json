@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-action-bar",
-  "version": "4.0.0-beta.5",
+  "version": "4.0.0",
   "description": "Canvas action bar component",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -50,6 +50,6 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-core": "4.0.0-beta.5"
+    "@workday/canvas-kit-react-core": "^4.0.0"
   }
 }

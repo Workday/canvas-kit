@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-common",
-  "version": "4.0.0-beta.5",
+  "version": "4.0.0",
   "description": "A module of common utilities shared across canvas components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -48,15 +48,15 @@
     "react": ">= 16.8 < 17"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react-button": "4.0.0-beta.5",
-    "@workday/canvas-kit-react-card": "4.0.0-beta.5",
+    "@workday/canvas-kit-react-button": "^4.0.0",
+    "@workday/canvas-kit-react-card": "^4.0.0",
     "@workday/canvas-system-icons-web": "^1.0.20"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@workday/canvas-colors-web": "^2.0.0",
-    "@workday/canvas-kit-react-core": "4.0.0-beta.5",
+    "@workday/canvas-kit-react-core": "^4.0.0",
     "chroma-js": "^2.1.0",
     "emotion-theming": "^10.0.10",
     "lodash": "^4.17.14",
