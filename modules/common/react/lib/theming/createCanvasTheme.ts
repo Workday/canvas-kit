@@ -1,6 +1,7 @@
 import chroma from 'chroma-js';
 import merge from 'lodash/merge';
 import memoize from 'lodash/memoize';
+import findKey from 'lodash/findKey';
 import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme} from './theme';
 import {
@@ -13,17 +14,13 @@ import {
 import {CanvasColor} from '@workday/canvas-kit-react-core';
 import {pickForegroundColor} from '../utils';
 
-const {gradients, primary, ...allColors} = colors;
-
-enum ColorDirection {
+export enum ColorDirection {
   Darken,
   Brighten,
 }
 
-function shiftColor(hexColor: string, direction: ColorDirection) {
-  const canvasColor = Object.keys(allColors).find(
-    key => allColors[key as CanvasColor] === hexColor
-  );
+export function shiftColor(hexColor: string, direction: ColorDirection) {
+  const canvasColor = findKey(colors, color => color === hexColor);
 
   const darken = direction === ColorDirection.Darken;
 

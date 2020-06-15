@@ -11,7 +11,7 @@ import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {Avatar} from '../../../../avatar/react';
-import {colors, spacing} from '../../../../core/react';
+import {colors, spacing, gradients} from '../../../../core/react';
 import {Button, IconButton} from '../../../../button/react';
 import {MenuItem} from '../../../menu/react';
 import {
@@ -300,7 +300,7 @@ storiesOf('Labs|Header/React', module)
             <DubLogoTitle
               title="Contained Lockup"
               themeColor={Header.Theme.Blue}
-              bgColor={colors.gradients.blueberry}
+              bgColor={gradients.blueberry}
             />
           }
           brandUrl="#"

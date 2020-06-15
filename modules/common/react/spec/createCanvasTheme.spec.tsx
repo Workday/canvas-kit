@@ -1,4 +1,6 @@
+import colors from '@workday/canvas-colors-web';
 import {defaultCanvasTheme, createCanvasTheme, PartialCanvasTheme} from '../lib/theming';
+import {shiftColor, ColorDirection} from '../lib/theming/createCanvasTheme';
 import lodash from 'lodash';
 
 describe('createCanvasTheme', () => {
@@ -130,5 +132,11 @@ describe('createCanvasTheme', () => {
     const theme = createCanvasTheme(input);
 
     expect(theme.palette.primary.contrast).toEqual('#000000');
+  });
+
+  test('shift color should darken canvas color to subsequent canvas color', () => {
+    const newColor = shiftColor(colors.soap300, ColorDirection.Darken);
+
+    expect(newColor).toEqual(colors.soap400);
   });
 });
