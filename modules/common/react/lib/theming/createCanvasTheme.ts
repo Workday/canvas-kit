@@ -14,13 +14,13 @@ import {
 import {CanvasColor} from '@workday/canvas-kit-react-core';
 import {pickForegroundColor} from '../utils';
 
-enum ColorDirection {
+export enum ColorDirection {
   Darken,
   Brighten,
 }
 
-function shiftColor(hexColor: string, direction: ColorDirection) {
-  const canvasColor = findKey(colors, hexColor);
+export function shiftColor(hexColor: string, direction: ColorDirection) {
+  const canvasColor = findKey(colors, color => color === hexColor);
 
   const darken = direction === ColorDirection.Darken;
 
