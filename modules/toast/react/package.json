@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-toast",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "description": "A canvas styled toast component",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -39,16 +39,16 @@
     "react": ">= 16.8 < 17"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-core": "^3.8.0"
+    "@workday/canvas-kit-labs-react-core": "^3.9.0"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-button": "^3.8.0",
-    "@workday/canvas-kit-react-common": "^3.8.0",
-    "@workday/canvas-kit-react-core": "^3.8.0",
-    "@workday/canvas-kit-react-icon": "^3.8.0",
-    "@workday/canvas-kit-react-popup": "^3.8.0",
+    "@workday/canvas-kit-react-button": "^3.9.0",
+    "@workday/canvas-kit-react-common": "^3.9.0",
+    "@workday/canvas-kit-react-core": "^3.9.0",
+    "@workday/canvas-kit-react-icon": "^3.9.0",
+    "@workday/canvas-kit-react-popup": "^3.9.0",
     "@workday/canvas-system-icons-web": "^1.0.20",
     "@workday/design-assets-types": "^0.2.4"
   }
