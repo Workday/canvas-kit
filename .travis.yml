@@ -11,8 +11,8 @@ git:
 
 stages:
 
-- name: master
-  if: branch = master AND type != pull_request
+- name: trunk
+  if: (branch = master OR branch =~ /^prerelease\//) AND type != pull_request
 
 - name: tag
   if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/ AND tag IS present
@@ -26,7 +26,6 @@ install:
 
 jobs:
   include:
-
   - stage: tag
     script:
       - yarn build
@@ -37,20 +36,22 @@ jobs:
       on:
         tags: true
 
-  - stage: master
+  - stage: trunk
     script:
       - >- # Chromatic relies on a built Storybook, so exit early if build-storybook fails
         yarn build-storybook --quiet &&
         yarn chromatic --quiet --auto-accept-changes --exit-once-uploaded --storybook-build-dir docs
       - yarn build
+    after_failure:
+      - node utils/report-failure.js
     env:
       - CHROMATIC_APP_CODE="dlpro96xybh"
     deploy:
       - provider: script
-        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js $SLACK_WEBHOOK $TRAVIS_BUILD_WEB_URL
+        script: npm config set //registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN && node utils/publish-canary.js
         skip_cleanup: true
         on:
-          branch: master
+          all_branches: true
       - provider: pages
         skip_cleanup: true
         local_dir: docs

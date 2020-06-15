@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {Button} from '../../../button/react';
+import {Button, DeleteButton} from '../../../button/react';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Modal, ModalWidth} from '../';
@@ -20,9 +20,7 @@ const noop = () => {}; // eslint-disable-line no-empty-function
 const TestModal = ({width}: {width: ModalWidth}) => (
   <Modal heading="Delete Item" open={true} handleClose={noop} width={width}>
     <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-    <Button style={{marginRight: '16px'}} variant={Button.Variant.Delete}>
-      Delete
-    </Button>
+    <DeleteButton style={{marginRight: '16px'}}>Delete</DeleteButton>
     <Button variant={Button.Variant.Secondary}>Cancel</Button>
   </Modal>
 );

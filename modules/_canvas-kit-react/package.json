@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react",
-  "version": "3.9.0",
+  "version": "4.0.0",
   "description": "The parent module that contains all Workday Canvas Kit React components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -14,16 +14,25 @@
   },
   "files": [
     "dist/",
-    "index.ts"
+    "index.ts",
+    "ts3.5/**/*"
   ],
+  "typesVersions": {
+    "<=3.5": {
+      "*": [
+        "ts3.5/*"
+      ]
+    }
+  },
   "scripts": {
     "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
+    "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6",
+    "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
+    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
   "keywords": [
@@ -37,34 +46,35 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-action-bar": "^3.9.0",
-    "@workday/canvas-kit-react-avatar": "^3.9.0",
-    "@workday/canvas-kit-react-badge": "^3.9.0",
-    "@workday/canvas-kit-react-banner": "^3.9.0",
-    "@workday/canvas-kit-react-button": "^3.9.0",
-    "@workday/canvas-kit-react-card": "^3.9.0",
-    "@workday/canvas-kit-react-checkbox": "^3.9.0",
-    "@workday/canvas-kit-react-color-picker": "^3.9.0",
-    "@workday/canvas-kit-react-common": "^3.9.0",
-    "@workday/canvas-kit-react-cookie-banner": "^3.9.0",
-    "@workday/canvas-kit-react-core": "^3.9.0",
-    "@workday/canvas-kit-react-form-field": "^3.9.0",
-    "@workday/canvas-kit-react-icon": "^3.9.0",
-    "@workday/canvas-kit-react-layout": "^3.9.0",
-    "@workday/canvas-kit-react-loading-animation": "^3.9.0",
-    "@workday/canvas-kit-react-modal": "^3.9.0",
-    "@workday/canvas-kit-react-page-header": "^3.9.0",
-    "@workday/canvas-kit-react-popup": "^3.9.0",
-    "@workday/canvas-kit-react-radio": "^3.9.0",
-    "@workday/canvas-kit-react-select": "^3.9.0",
-    "@workday/canvas-kit-react-side-panel": "^3.9.0",
-    "@workday/canvas-kit-react-skeleton": "^3.9.0",
-    "@workday/canvas-kit-react-status-indicator": "^3.9.0",
-    "@workday/canvas-kit-react-switch": "^3.9.0",
-    "@workday/canvas-kit-react-table": "^3.9.0",
-    "@workday/canvas-kit-react-text-area": "^3.9.0",
-    "@workday/canvas-kit-react-text-input": "^3.9.0",
-    "@workday/canvas-kit-react-toast": "^3.9.0",
-    "@workday/canvas-kit-react-tooltip": "^3.9.0"
+    "@workday/canvas-kit-react-action-bar": "^4.0.0",
+    "@workday/canvas-kit-react-avatar": "^4.0.0",
+    "@workday/canvas-kit-react-badge": "^4.0.0",
+    "@workday/canvas-kit-react-banner": "^4.0.0",
+    "@workday/canvas-kit-react-button": "^4.0.0",
+    "@workday/canvas-kit-react-card": "^4.0.0",
+    "@workday/canvas-kit-react-checkbox": "^4.0.0",
+    "@workday/canvas-kit-react-color-picker": "^4.0.0",
+    "@workday/canvas-kit-react-common": "^4.0.0",
+    "@workday/canvas-kit-react-cookie-banner": "^4.0.0",
+    "@workday/canvas-kit-react-core": "^4.0.0",
+    "@workday/canvas-kit-react-form-field": "^4.0.0",
+    "@workday/canvas-kit-react-icon": "^4.0.0",
+    "@workday/canvas-kit-react-layout": "^4.0.0",
+    "@workday/canvas-kit-react-loading-animation": "^4.0.0",
+    "@workday/canvas-kit-react-modal": "^4.0.0",
+    "@workday/canvas-kit-react-page-header": "^4.0.0",
+    "@workday/canvas-kit-react-popup": "^4.0.0",
+    "@workday/canvas-kit-react-radio": "^4.0.0",
+    "@workday/canvas-kit-react-segmented-control": "^4.0.0",
+    "@workday/canvas-kit-react-select": "^4.0.0",
+    "@workday/canvas-kit-react-side-panel": "^4.0.0",
+    "@workday/canvas-kit-react-skeleton": "^4.0.0",
+    "@workday/canvas-kit-react-status-indicator": "^4.0.0",
+    "@workday/canvas-kit-react-switch": "^4.0.0",
+    "@workday/canvas-kit-react-table": "^4.0.0",
+    "@workday/canvas-kit-react-text-area": "^4.0.0",
+    "@workday/canvas-kit-react-text-input": "^4.0.0",
+    "@workday/canvas-kit-react-toast": "^4.0.0",
+    "@workday/canvas-kit-react-tooltip": "^4.0.0"
   }
 }

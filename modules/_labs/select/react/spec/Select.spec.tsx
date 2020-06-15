@@ -8,7 +8,10 @@ describe('Select', () => {
   const selectButtonRole = 'button';
   const optionRole = 'option';
 
-  const options = [{label: 'E-mail', value: 'email'}, {label: 'Phone', value: 'phone'}];
+  const options = [
+    {label: 'E-mail', value: 'email'},
+    {label: 'Phone', value: 'phone'},
+  ];
 
   afterEach(() => {
     cb.mockReset();

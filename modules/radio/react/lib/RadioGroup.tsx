@@ -1,8 +1,13 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import Radio, {RadioProps} from './Radio';
 import {borderRadius, spacing} from '@workday/canvas-kit-react-core';
-import {ErrorType, GrowthBehavior, getErrorColors} from '@workday/canvas-kit-react-common';
+import {
+  ErrorType,
+  GrowthBehavior,
+  getErrorColors,
+  styled,
+  Themeable,
+} from '@workday/canvas-kit-react-common';
 
 export interface RadioGroupProps extends Themeable, GrowthBehavior {
   /**
@@ -61,26 +66,23 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
 export default class RadioGroup extends React.Component<RadioGroupProps> {
   static ErrorType = ErrorType;
 
-  static defaultProps = {
-    value: 0,
-  };
-
   render(): React.ReactNode {
-    const {children, error, onChange, value, grow, ...elemProps} = this.props;
+    const {value = 0, children, error, onChange, grow, ...elemProps} = this.props;
     return (
       <Container error={error} grow={grow} {...elemProps}>
-        {React.Children.map(children, this.renderChild)}
+        {React.Children.map(children, (child, index) => this.renderChild(child, index, value))}
       </Container>
     );
   }
 
-  private renderChild = (child: React.ReactElement<RadioProps>, index: number): React.ReactNode => {
+  private renderChild = (
+    child: React.ReactElement<RadioProps>,
+    index: number,
+    value: string | number
+  ): React.ReactNode => {
     if (typeof child.type === typeof Radio) {
       const childProps = child.props;
-      const checked =
-        typeof this.props.value === 'number'
-          ? index === this.props.value
-          : childProps.value === this.props.value;
+      const checked = typeof value === 'number' ? index === value : childProps.value === value;
       const name = this.props.name ? this.props.name : childProps.name;
 
       return React.cloneElement(child, {
@@ -94,9 +96,9 @@ export default class RadioGroup extends React.Component<RadioGroupProps> {
   };
 
   private onRadioChange = (
-    existingOnChange: (e: React.SyntheticEvent) => void | undefined,
+    existingOnChange: (e: React.ChangeEvent) => void | undefined,
     index: number,
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     if (existingOnChange) {
       existingOnChange(event);

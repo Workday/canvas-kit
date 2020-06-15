@@ -31,12 +31,20 @@ export const ToastStates = () => (
             actionText: 'View More Details',
           },
         },
+        {
+          label: 'With Action Link and Multiple Lines',
+          props: {
+            children: 'Your workbook was successfully processed. Congratulation!',
+            onActionClick: action('action button clicked'),
+            actionText: 'View More Details',
+          },
+        },
       ]}
       columnProps={[{label: 'Default', props: {}}]}
     >
-      {props => (
-        <Toast aria-label="Play" {...props}>
-          Your workbook was successfully processed.
+      {({children, ...props}) => (
+        <Toast transformOrigin={null} aria-label="Play" {...props}>
+          {children || 'Successfully processed.'}
         </Toast>
       )}
     </ComponentStatesTable>

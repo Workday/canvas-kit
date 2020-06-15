@@ -1,7 +1,7 @@
 {
   "name": "@workday/canvas-kit-react-button",
-  "version": "3.9.0",
-  "description": "A canvas-styled react button",
+  "version": "4.0.0",
+  "description": "A collection of various Canvas Buttons",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
@@ -10,22 +10,29 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/button/react"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/button/react"
   },
   "files": [
     "dist/",
     "lib/",
-    "index.ts"
+    "index.ts",
+    "ts3.5/**/*"
   ],
+  "typesVersions": {
+    "<=3.5": {
+      "*": [
+        "ts3.5/*"
+      ]
+    }
+  },
   "scripts": {
     "watch": "yarn build:es6 -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
-    "build:cjs": "babel --no-babelrc --plugins babel-plugin-transform-es2015-modules-commonjs dist/es6 --out-dir dist/commonjs  --copy-files",
+    "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
-    "build:babel": "babel --no-babelrc --plugins babel-plugin-emotion dist --out-dir dist",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --sequential build:es6 build:babel build:cjs",
+    "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
+    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "depcheck": "node ../../../utils/check-dependencies-exist.js"
   },
   "keywords": [
@@ -43,10 +50,10 @@
     "@emotion/core": "^10.0.28",
     "@emotion/is-prop-valid": "^0.8.2",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-labs-react-core": "^3.9.0",
-    "@workday/canvas-kit-react-common": "^3.9.0",
-    "@workday/canvas-kit-react-core": "^3.9.0",
-    "@workday/canvas-kit-react-icon": "^3.9.0",
+    "@workday/canvas-kit-labs-react-core": "^4.0.0",
+    "@workday/canvas-kit-react-common": "^4.0.0",
+    "@workday/canvas-kit-react-core": "^4.0.0",
+    "@workday/canvas-kit-react-icon": "^4.0.0",
     "@workday/canvas-system-icons-web": "^1.0.20",
     "@workday/design-assets-types": "^0.2.4"
   }

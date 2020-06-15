@@ -193,14 +193,14 @@ All system icon colors will accept colors from the
 > Icon color. This will define `data-accent-color` and `data-fill-color`. `data-accent-color` and
 > `data-fill-color` will override this property if defined.
 
-Default: `colors.primary.iconStandard`
+Default: `iconColors.standard`
 
 #### `data-hover-color`
 
 > Icon color on hover. This will define `data-hover-accent-color` and `data-hover-fill-color`.
 > `data-hover-accent-color` and `data-hover-fill-color` will override this property if defined.
 
-Default: `colors.primary.iconHover`
+Default: `iconColors.hover`
 
 #### `data-accent-color`
 
@@ -253,7 +253,7 @@ Default: `24`
 ## Default Options
 
 ```js
-initializeIcons((iconPath = null), (selector = '.wdc-icon'), iconRoot = document);
+initializeIcons((iconPath = null), (selector = '.wdc-icon'), (iconRoot = document));
 ```
 
 ## Icon Path
@@ -288,8 +288,8 @@ initializeIcons(null, '.wdc-custom-icon');
 
 ## Scope Icon Injection
 
-Pass a DOM Element to scope where to look for icons. You can use this to narrow the search instead of looking
-at the whole document or to target a shadowDOM
+Pass a DOM Element to scope where to look for icons. You can use this to narrow the search instead
+of looking at the whole document or to target a shadowDOM
 
 ```js
 initializeIcons(null, '.wdc-icon', myElement);

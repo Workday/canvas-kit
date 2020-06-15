@@ -25,7 +25,10 @@ export const CountBadgeStates = () => {
           props: {count: 1000},
         },
       ]}
-      rowProps={[{label: 'Default', props: {}}, {label: 'Inverse', props: {variant: 'inverse'}}]}
+      rowProps={[
+        {label: 'Default', props: {}},
+        {label: 'Inverse', props: {variant: 'inverse'}},
+      ]}
     >
       {props => <CountBadge {...props} />}
     </ComponentStatesTable>

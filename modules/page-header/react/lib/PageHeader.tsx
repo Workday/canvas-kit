@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, spacing, type} from '@workday/canvas-kit-react-core';
+import {colors, gradients, spacing, type} from '@workday/canvas-kit-react-core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 
 export interface PageHeaderProps {
@@ -12,7 +12,7 @@ export interface PageHeaderProps {
    * If true, center the PageHeader content and make the PageHeader responsive in all three breakpoints. Enable this for PageHeaders in non-product pages.
    * @default false
    */
-  capWidth: boolean;
+  capWidth?: boolean;
   /**
    * The breakpoint (in `px`) at which the PageHeader's container spacing increases from size `s` to size `xl`.
    * @default 768
@@ -22,7 +22,7 @@ export interface PageHeaderProps {
 
 const Header = styled('header')({
   height: 84,
-  backgroundImage: colors.gradients.blueberry,
+  backgroundImage: gradients.blueberry,
   color: colors.frenchVanilla100,
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
@@ -69,12 +69,6 @@ const IconList = styled('div')({
 });
 
 export default class PageHeader extends React.Component<PageHeaderProps> {
-  static defaultProps = {
-    title: '',
-    capWidth: false,
-    breakpoint: 768,
-  };
-
   private renderChildren(children: React.ReactNode): React.ReactNode {
     return React.Children.map(children, child => {
       if (!React.isValidElement(child)) {
@@ -93,7 +87,7 @@ export default class PageHeader extends React.Component<PageHeaderProps> {
 
   public render() {
     // TODO: Standardize on prop spread location (see #150)
-    const {title, children, breakpoint, capWidth, ...elemProps} = this.props;
+    const {title = '', breakpoint = 768, capWidth = false, children, ...elemProps} = this.props;
 
     return (
       <Header>

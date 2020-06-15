@@ -23,3 +23,9 @@ export enum ErrorType {
   Error,
   Alert,
 }
+
+/**
+ * Type to Pick props from an interface, making some required and leaving others as is
+ */
+export type PickRequired<T, Req extends keyof T, AsIs extends keyof T> = Required<Pick<T, Req>> &
+  Pick<T, AsIs>;

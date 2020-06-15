@@ -1,14 +1,17 @@
-import canvasColors from '@workday/canvas-colors-web';
+import canvasColors, {gradients} from '@workday/canvas-colors-web';
 
 function getBrandingColors() {
-  const brandingColors = Object.keys(canvasColors.gradients).map(c => `${c}500`);
+  const brandingColors = Object.keys(gradients).map(c => `${c}500`);
 
   Object.keys(canvasColors)
     .filter(colorName => brandingColors.includes(colorName))
     .reduce((result, name) => {
       const obj = {};
       obj[name.replace('500', '')] = canvasColors[name];
-      return Object.assign({}, result, obj);
+      return {
+        ...result,
+        ...obj,
+      };
     }, {});
 }
 
@@ -23,7 +26,10 @@ export function getHue(color) {
     return hue.reduce((result, name) => {
       const obj = {};
       obj[name.replace(/^[a-zA-Z]*/g, '')] = canvasColors[name];
-      return Object.assign({}, result, obj);
+      return {
+        ...result,
+        ...obj,
+      };
     });
   }
 
@@ -31,7 +37,9 @@ export function getHue(color) {
 }
 
 export function getColor(color) {
-  if (color === 'transparent' || color === null) return color;
+  if (color === 'transparent' || color === null) {
+    return color;
+  }
 
   let findColor = color;
 

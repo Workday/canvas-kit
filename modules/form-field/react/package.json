@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-form-field",
-  "version": "3.9.0",
+  "version": "4.0.0",
   "description": "Form field component to wrap inputs",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -15,16 +15,25 @@
   "files": [
     "dist/",
     "lib/",
-    "index.ts"
+    "index.ts",
+    "ts3.5/**/*"
   ],
+  "typesVersions": {
+    "<=3.5": {
+      "*": [
+        "ts3.5/*"
+      ]
+    }
+  },
   "scripts": {
     "watch": "yarn build:es6 -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
+    "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6",
+    "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
+    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "depcheck": "node ../../../utils/check-dependencies-exist.js"
   },
   "keywords": [
@@ -41,9 +50,9 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-labs-react-core": "^3.9.0",
-    "@workday/canvas-kit-react-common": "^3.9.0",
-    "@workday/canvas-kit-react-core": "^3.9.0",
+    "@workday/canvas-kit-labs-react-core": "^4.0.0",
+    "@workday/canvas-kit-react-common": "^4.0.0",
+    "@workday/canvas-kit-react-core": "^4.0.0",
     "uuid": "^3.3.3"
   }
 }

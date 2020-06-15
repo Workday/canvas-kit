@@ -5,7 +5,7 @@ import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
 import {colors} from '@workday/canvas-kit-react-core';
-import {Popper} from '@workday/canvas-kit-react-common';
+import {Popper} from '@workday/canvas-kit-react-popup';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker} from '../index';
@@ -61,8 +61,8 @@ storiesOf('Labs|Color Picker/React', module)
     const [color, setColor] = React.useState(defaultColor);
     const [colorInputValidColor, setColorInputValidColor] = React.useState(defaultColor);
     const [colorInputValue, setColorInputValue] = React.useState(defaultColor);
-    const inputRef = React.useRef(null);
-    const popupRef = React.useRef(null);
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    const popupRef = React.useRef<HTMLDivElement>(null);
 
     const resetColor = () => {
       setColor(defaultColor);
@@ -92,8 +92,7 @@ storiesOf('Labs|Color Picker/React', module)
     ];
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      // @ts-ignore
-      if (!popupRef.current || !popupRef.current.popper.popper.contains(e.relatedTarget)) {
+      if (!popupRef.current || !popupRef.current.contains(e.relatedTarget as Node)) {
         setOpen(false);
       }
     };
