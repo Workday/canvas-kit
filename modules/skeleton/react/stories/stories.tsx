@@ -26,7 +26,7 @@ storiesOf('Components|Indicators/Skeleton/React', module)
   .add('Complete', () => {
     return (
       <div className="story">
-        <h1>Custom Elements Loader</h1>
+        <h1>Custom Elements Skeleton</h1>
         <div style={{width: 200}}>
           <div style={{display: 'inline-flex', alignItems: 'center'}}>
             <Avatar size={Avatar.Size.l}></Avatar>
