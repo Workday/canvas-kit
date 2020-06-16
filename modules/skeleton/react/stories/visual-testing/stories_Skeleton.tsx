@@ -1,7 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Skeleton, SkeletonHeader, SkeletonShape, SkeletonText} from '../../index';
 import styled from '@emotion/styled';
 
