@@ -1,13 +1,12 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {Popper, Placement} from '@workday/canvas-kit-react-common';
-import {Tooltip} from '@workday/canvas-kit-react-tooltip';
+import {Popper, Placement} from '@workday/canvas-kit-react-popup';
+import {TooltipContainer} from '@workday/canvas-kit-react-tooltip';
 import {Card} from '@workday/canvas-kit-react-card';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing|React/Popups/Tooltip',
-  component: Tooltip,
 });
 
 export const Placements = () => {
@@ -63,16 +62,16 @@ export const Placements = () => {
             containerElement={containerElement}
             placement={placement}
             popperOptions={{
-              modifiers: {
+              modifiers: [
                 // keep the tooltips from moving - no matter what!
-                flip: {enabled: false},
-                preventOverflow: {enabled: false},
-              },
+                {name: 'flip', enabled: false},
+                {name: 'preventOverflow', enabled: false},
+              ],
             }}
             open={open}
             anchorElement={ref}
           >
-            <Tooltip transformOrigin={null}>{placement}</Tooltip>
+            <TooltipContainer transformOrigin={null}>{placement}</TooltipContainer>
           </Popper>
         )
       )}

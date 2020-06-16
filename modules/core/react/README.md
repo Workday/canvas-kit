@@ -338,13 +338,18 @@ directly within any Canvas Kit components.
 import * as React from 'react';
 import {InputProvider} from '@workday/canvas-kit-react';
 
-<InputProvider>{/* All your components containing any Canvas components */}</InputProvider>;
+<div>
+  <InputProvider />
+  {/* All your components containing any Canvas components */}
+<div>;
 ```
 
-This will result in a wrapping div with two data attributes:
+This will result in these data attributes being added to the body element (by default)
 
 ```html
-<div data-whatinput="mouse" data-whatinput="mouse"><!-- All your components' HTML --></div>
+<body data-whatinput="mouse" data-whatinput="mouse">
+  <!-- All your components' HTML -->
+</body>
 ```
 
 Now in any component within this wrapper, you can use these data attributes to customize the focus
@@ -409,6 +414,13 @@ will remove itself from the DOM (rendering only its children) and not attach any
 > Whether you would like the attribute `data-whatintent` rendered (see definition of intent above).
 > Note: detecting intent will add scroll and mouse positioning listeners which could affect
 > performance.
+
+##### `container: HTMLElement | React.RefObject<HTMLElement>`
+
+> The containing element in which the InputProvider attaches its data attributes. This property should
+> be set to an element that is an ancestor of all your Canvas components.
+
+Default: `document.body` 
 
 ### Storybook Decorator
 

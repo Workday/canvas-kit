@@ -19,8 +19,14 @@ export const CheckboxStates = () => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
-          checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
-          indeterminate: [{value: true, label: 'Indeterminate'}, {value: false, label: ''}],
+          checked: [
+            {value: true, label: 'Checked'},
+            {value: false, label: 'Unchecked'},
+          ],
+          indeterminate: [
+            {value: true, label: 'Indeterminate'},
+            {value: false, label: ''},
+          ],
           error: [
             {value: undefined, label: ''},
             {value: Checkbox.ErrorType.Alert, label: 'Alert'},
@@ -44,7 +50,10 @@ export const CheckboxStates = () => (
             {label: 'Active', value: 'active'},
             {label: 'Active Hover', value: 'active hover'},
           ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          disabled: [
+            {label: '', value: false},
+            {label: 'Disabled', value: true},
+          ],
         },
         props => {
           if (props.disabled && !['', 'hover'].includes(props.className)) {

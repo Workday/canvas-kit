@@ -16,9 +16,7 @@ module.exports = (files, modulePath) => {
 
     console.log('Creating ' + `.${filePath.replace(cwd, '')}`.cyan);
 
-    mkdirp(getDirName(filePath), function(err) {
-      if (err) return cb(err);
-
+    mkdirp(getDirName(filePath)).then(() => {
       fs.writeFileSync(filePath, file.contents);
     });
   });

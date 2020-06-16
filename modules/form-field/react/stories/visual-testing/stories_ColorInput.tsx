@@ -20,9 +20,18 @@ export const ColorInputStates = () => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
-          value: [{value: '#005cb9', label: 'Hex Value'}, {value: '', label: 'No Value'}],
-          placeholder: [{value: undefined, label: ''}, {value: '000', label: 'Placeholder'}],
-          showCheck: [{value: undefined, label: ''}, {value: true, label: 'Checked'}],
+          value: [
+            {value: '#005cb9', label: 'Hex Value'},
+            {value: '', label: 'No Value'},
+          ],
+          placeholder: [
+            {value: undefined, label: ''},
+            {value: '000', label: 'Placeholder'},
+          ],
+          showCheck: [
+            {value: undefined, label: ''},
+            {value: true, label: 'Checked'},
+          ],
           error: [
             {value: undefined, label: ''},
             {value: FormField.ErrorType.Alert, label: 'Alert'},
@@ -49,7 +58,10 @@ export const ColorInputStates = () => (
             {label: 'Active', value: 'active'},
             {label: 'Active Hover', value: 'active hover'},
           ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          disabled: [
+            {label: '', value: false},
+            {label: 'Disabled', value: true},
+          ],
         },
         props => {
           if (props.disabled && !['', 'hover'].includes(props.className)) {

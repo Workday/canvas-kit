@@ -18,7 +18,10 @@ export const SwitchStates = () => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
-          checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
+          checked: [
+            {value: true, label: 'Checked'},
+            {value: false, label: 'Unchecked'},
+          ],
           error: [
             {value: undefined, label: ''},
             {value: Switch.ErrorType.Alert, label: 'Alert'},
@@ -42,7 +45,10 @@ export const SwitchStates = () => (
             {label: 'Active', value: 'active'},
             {label: 'Active Hover', value: 'active hover'},
           ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          disabled: [
+            {label: '', value: false},
+            {label: 'Disabled', value: true},
+          ],
         },
         props => {
           if (props.disabled && !['', 'hover'].includes(props.className)) {

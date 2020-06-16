@@ -7,7 +7,7 @@ import {
   withSnapshotsEnabled,
 } from '../../../../utils/storybook';
 
-import {StatusIndicator} from '../';
+import {StatusIndicator, StatusIndicatorProps} from '../';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
 export default withSnapshotsEnabled({
@@ -23,7 +23,10 @@ export const StatusIndicatorStates = () => (
           {value: StatusIndicator.Emphasis.Low, label: 'Low Emphasis'},
           {value: StatusIndicator.Emphasis.High, label: 'High Emphasis'},
         ],
-        icon: [{value: undefined, label: ''}, {value: uploadCloudIcon, label: 'With Icon'}],
+        icon: [
+          {value: undefined, label: ''},
+          {value: uploadCloudIcon, label: 'With Icon'},
+        ],
       })}
       columnProps={permutateProps({
         type: [
@@ -36,9 +39,7 @@ export const StatusIndicatorStates = () => (
         ],
       })}
     >
-      {({type, emphasis, props}) => (
-        <StatusIndicator type={type} emphasis={emphasis} {...props} label="Status" />
-      )}
+      {(props: StatusIndicatorProps) => <StatusIndicator {...props} label="Status" />}
     </ComponentStatesTable>
   </StaticStates>
 );

@@ -105,7 +105,7 @@ Default: `false`
 
 ---
 
-#### `onChange: React.ChangeEventHandler<HTMLTextAreaElement>`
+#### `onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void`
 
 > The callback fired when the value is changed.
 

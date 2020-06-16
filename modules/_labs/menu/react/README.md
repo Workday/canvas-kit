@@ -172,7 +172,7 @@ Default: `false`
 
 ### Optional
 
-#### `onClick: (event: React.SyntheticEvent) => void`
+#### `onClick: (event: React.MouseEvent<HTMLLIElement>) => void`
 
 > This is the primary action to take when a menu item is clicked. If the item is a child of the Menu
 > component, this callback will be decorated with the onSelect and onClose Menu callbacks. This

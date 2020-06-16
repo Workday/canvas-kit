@@ -19,23 +19,31 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /** Dispatch which is invoked when the page is changed. */
   onPageChange: (page: number) => void;
   /** Shows a box adjacent to the pagination bar where a page can be entered and is submitted when 'Enter' key is pressed. */
-  showGoTo: boolean;
+  showGoTo?: boolean;
   /** Shows a label below the pagination bar describing the items currently being viewed. */
-  showLabel: boolean;
+  showLabel?: boolean;
   /** A function to build a custom label below the pagination bar. */
-  customLabel: (from: number, to: number, total: number) => string;
+  customLabel?: (from: number, to: number, total: number) => string;
   /** Determines the label next to the Go To box. Only usable while showGoTo is set to true. */
-  goToLabel: string;
+  goToLabel?: string;
   /** Customizes the aria label for the Pagination container div. */
-  paginationContainerAriaLabel: string;
+  paginationContainerAriaLabel?: string;
   /** Customizes the aria label for the Previous Page Arrow. */
-  previousPageAriaLabel: string;
+  previousPageAriaLabel?: string;
   /** Customizes the aria label for the Next Page Arrow. */
-  nextPageAriaLabel: string;
+  nextPageAriaLabel?: string;
   /** Customizes the aria-label on each page button. */
-  pageButtonAriaLabel: (page: number, selected: boolean) => string;
+  pageButtonAriaLabel?: (page: number, selected: boolean) => string;
   /** Optional width to pass to component. This is the width the container deems is available. You can use a measure component to get this. */
   width?: number;
+  /**
+   * Announces page changes to screen readers using aria-live
+   * Note: Your application may already announce page changes to screen readers through
+   * other means like focus changes or other aria-live regions. Set this to `false` to remove
+   * redundant announcement to screen reader users.
+   * @default true
+   */
+  announceLabelToScreenReaders?: boolean;
 }
 
 const StyledLabel = styled('div')({
@@ -72,18 +80,19 @@ const defaultPageButtonAriaLabel: PaginationProps['pageButtonAriaLabel'] = (page
 
 const Pagination = (props: PaginationProps) => {
   const {
+    showGoTo = false,
+    showLabel = false,
+    goToLabel = 'Go To',
+    paginationContainerAriaLabel = 'Pagination',
+    previousPageAriaLabel = 'Previous Page',
+    nextPageAriaLabel = 'Next Page',
+    pageButtonAriaLabel = defaultPageButtonAriaLabel,
+    customLabel = defaultCustomLabel,
+    announceLabelToScreenReaders = true,
     total,
     pageSize,
     currentPage,
     onPageChange,
-    customLabel,
-    showLabel,
-    showGoTo,
-    goToLabel,
-    paginationContainerAriaLabel,
-    previousPageAriaLabel,
-    nextPageAriaLabel,
-    pageButtonAriaLabel,
     width,
     ...elemProps
   } = props;
@@ -123,21 +132,17 @@ const Pagination = (props: PaginationProps) => {
           />
         </ButtonsContainer>
         {showGoTo && <GoTo onSubmit={onPageChange} max={numPages} label={goToLabel} />}
-        {showLabel && <StyledLabel>{customLabel(labelFrom, labelTo, total)}</StyledLabel>}
+        {showLabel && (
+          <StyledLabel
+            aria-atomic={announceLabelToScreenReaders ? true : undefined}
+            aria-live={announceLabelToScreenReaders ? 'polite' : undefined}
+          >
+            {customLabel(labelFrom, labelTo, total)}
+          </StyledLabel>
+        )}
       </StyledContainer>
     </>
   );
-};
-
-Pagination.defaultProps = {
-  showGoTo: false,
-  showLabel: false,
-  goToLabel: 'Go To',
-  paginationContainerAriaLabel: 'Pagination',
-  previousPageAriaLabel: 'Previous Page',
-  nextPageAriaLabel: 'Next Page',
-  pageButtonAriaLabel: defaultPageButtonAriaLabel,
-  customLabel: defaultCustomLabel,
 };
 
 export default Pagination;

@@ -17,8 +17,8 @@ function loadStories() {
   const allExports = [];
 
   allReqs.forEach(req => {
-    req.keys().forEach(fname => {
-      const story = req(fname);
+    req.keys().forEach(filename => {
+      const story = req(filename);
 
       if (story.default) allExports.push(story);
     });
