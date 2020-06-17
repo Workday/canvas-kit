@@ -86,7 +86,7 @@ export const RadioStates = () => (
         {props => (
           <FormField
             useFieldset={true}
-            hintText={props.error ? hintText : undefined}
+            hintText={typeof props.error !== 'undefined' ? hintText : undefined}
             hintId={hintId}
             {...props}
           >
