@@ -43,12 +43,8 @@ export const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true)
       if (overBottom) {
         // elem is out of view at the bottom edge of the parent's viewport;
         // scroll down just far enough for elem to be visible
-        if (parent.scrollTop === 0) {
-          parent.scrollTop =
-            elemClientHeight - (parentClientHeight + parentBorderTopWidth - elem.offsetTop);
-        } else {
-          parent.scrollTop += elemClientHeight;
-        }
+        parent.scrollTop =
+          elemClientHeight - (parentClientHeight + parentBorderTopWidth - elem.offsetTop);
       } else {
         // elem is out of view at the top edge of the parent's viewport;
         // scroll up just far enough for elem to be visible
