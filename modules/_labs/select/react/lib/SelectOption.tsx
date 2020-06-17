@@ -1,7 +1,13 @@
 import * as React from 'react';
 import {CSSObject} from '@emotion/core';
-import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
-import {colors, commonColors, type, typeColors} from '@workday/canvas-kit-react-core';
+import {
+  EmotionCanvasTheme,
+  ErrorType,
+  Themeable,
+  pickForegroundColor,
+  styled,
+} from '@workday/canvas-kit-react-common';
+import {colors, commonColors, type} from '@workday/canvas-kit-react-core';
 
 export interface SelectOptionProps extends Themeable, React.LiHTMLAttributes<HTMLLIElement> {
   /**
@@ -39,10 +45,13 @@ export interface SelectOptionProps extends Themeable, React.LiHTMLAttributes<HTM
 
 const optionPadding = 6;
 
-const activeStyles = (theme: EmotionCanvasTheme): CSSObject => ({
-  backgroundColor: theme.canvas.palette.common.focusOutline,
-  color: typeColors.inverse,
-});
+const activeStyles = (theme: EmotionCanvasTheme): CSSObject => {
+  const activeBgColor = theme.canvas.palette.primary.main;
+  return {
+    backgroundColor: activeBgColor,
+    color: pickForegroundColor(activeBgColor),
+  };
+};
 
 const Option = styled('li')<SelectOptionProps>(
   {
@@ -68,9 +77,11 @@ const Option = styled('li')<SelectOptionProps>(
       };
     } else {
       // ...else return hover and selected (via aria-selected) styles
+      const selectedBgColor = theme.canvas.palette.primary.lightest;
       const selectedStyles = {
         '&[aria-selected="true"]': {
-          backgroundColor: theme.canvas.palette.primary.lightest,
+          backgroundColor: selectedBgColor,
+          color: pickForegroundColor(selectedBgColor, colors.blackPepper300),
         },
       };
       // Only display interactive (hover/active) styles if the option is interactive
