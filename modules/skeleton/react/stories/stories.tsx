@@ -1,9 +1,8 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
-import {jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {keyframes, CSSObject} from '@emotion/core';
+import {keyframes, jsx} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {number} from '@storybook/addon-knobs';
