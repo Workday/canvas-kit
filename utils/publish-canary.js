@@ -70,7 +70,7 @@ cmd('git diff --name-only HEAD HEAD^')
     const nextReleaseVersion = semver.inc(releaseTag, 'prerelease', 'beta'); // eg. 4.0.0-beta.3 > 4.0.0-beta.4
     const nextReleasePreid = nextReleaseVersion.split('-')[1];
 
-    if (isPrerelease & !nextReleasePreid) {
+    if (isPrerelease && !nextReleasePreid) {
       console.error('Failed to calculate prerelease canary version. Exiting');
       process.exit(1);
     }
