@@ -1,10 +1,15 @@
 /// <reference path="../../../../typings.d.ts" />
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
+import {keyframes, CSSObject} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {number} from '@storybook/addon-knobs';
 import {Avatar} from '@workday/canvas-kit-react-avatar';
+import {Card} from '@workday/canvas-kit-react-card';
+import {Button, ButtonVariant} from '@workday/canvas-kit-react-button';
 
 import Skeleton, {SkeletonShape, SkeletonText, SkeletonHeader} from '../index';
 
@@ -20,36 +25,82 @@ const FlexContainer = styled('div')({
   display: 'flex',
 });
 
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+`;
+
 storiesOf('Components|Indicators/Skeleton/React', module)
   .addParameters({component: Skeleton})
   .addDecorator(withReadme(README))
   .add('Complete', () => {
+    const [isLoading, setLoading] = React.useState(true);
+    const timer = React.useRef(0);
+
+    const resetTimeout = () => {
+      setLoading(true);
+      window.clearTimeout(timer.current);
+      timer.current = window.setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+      return () => {
+        window.clearTimeout(timer.current);
+      };
+    };
+
+    React.useEffect(resetTimeout, []);
+
     return (
       <div className="story">
         <h1>Custom Elements Skeleton</h1>
-        <div style={{width: 200}}>
-          <div style={{display: 'inline-flex', alignItems: 'center'}}>
-            <Avatar size={Avatar.Size.l}></Avatar>
-            <h2 style={{marginLeft: 15}}>Header</h2>
-          </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt
-          </div>
-        </div>
-        <div style={{width: 200}}>
-          <Skeleton>
-            <FlexContainer>
-              <SkeletonShape width={50} height={50} borderRadius={99} />
-              <Container>
-                <SkeletonHeader />
-              </Container>
-            </FlexContainer>
-            <div>
-              <SkeletonText lineCount={3} />
+        <Button onClick={resetTimeout} variant={ButtonVariant.Primary}>
+          Reset Skeleton
+        </Button>
+        <Card width={600}>
+          <div style={{position: 'relative', height: 146}}>
+            {!isLoading && (
+              <div>
+                <div style={{display: 'inline-flex', alignItems: 'center', marginBottom: 8}}>
+                  <Avatar size={Avatar.Size.l}></Avatar>
+                  <h2 style={{marginLeft: 8}}>Header Text Information</h2>
+                </div>
+                <div style={{lineHeight: 2}}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea
+                </div>
+              </div>
+            )}
+
+            <div
+              css={{
+                position: 'absolute',
+                top: 6,
+                right: 0,
+                left: 0,
+                animation: !isLoading ? `${fadeOut} 250ms ease-out` : null,
+                animationFillMode: !isLoading ? 'forwards' : null,
+              }}
+            >
+              <Skeleton>
+                <FlexContainer>
+                  <SkeletonShape width={40} height={40} borderRadius={99} />
+                  <Container>
+                    <SkeletonHeader />
+                  </Container>
+                </FlexContainer>
+                <div>
+                  <SkeletonText lineCount={3} />
+                </div>
+              </Skeleton>
             </div>
-          </Skeleton>
-        </div>
+          </div>
+        </Card>
       </div>
     );
   })
