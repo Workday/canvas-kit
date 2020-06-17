@@ -46,7 +46,7 @@ storiesOf('Components|Indicators/Skeleton/React', module)
       window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => {
         setLoading(false);
-      }, 3000);
+      }, 7000);
       return () => {
         window.clearTimeout(timer.current);
       };
@@ -82,7 +82,7 @@ storiesOf('Components|Indicators/Skeleton/React', module)
                 top: 6,
                 right: 0,
                 left: 0,
-                animation: !isLoading ? `${fadeOut} 250ms ease-out` : null,
+                animation: !isLoading ? `${fadeOut} 150ms ease-out` : null,
                 animationFillMode: !isLoading ? 'forwards' : null,
               }}
             >
