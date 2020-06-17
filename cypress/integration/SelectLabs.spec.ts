@@ -356,6 +356,23 @@ describe('Select', () => {
         });
       });
 
+      context('when "d {500ms delay} d" is typed', () => {
+        beforeEach(() => {
+          // The delay for resetting the typeahead string is 500ms
+          cy.findByLabelText('Label').type('dd', {delay: 500});
+        });
+
+        context('the select button', () => {
+          it('should read "Denver"', () => {
+            cy.findByLabelText('Label').should('have.text', 'Denver');
+          });
+
+          it(`should have a value of "denver"`, () => {
+            cy.findByLabelText('Label').should('have.value', 'denver');
+          });
+        });
+      });
+
       context('when the space key is pressed (to open the menu)', () => {
         beforeEach(() => {
           cy.findByLabelText('Label').type(' ');
