@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-check
 'use strict';
 
 const request = require('request');
@@ -14,7 +15,9 @@ const {
 
 const isPrerelease = TRAVIS_BRANCH.match(/^prerelease\/v\d*$/g);
 const data = {};
+
 let distTag;
+let preid;
 
 if (TRAVIS_BRANCH === 'master') {
   distTag = 'next';
@@ -72,7 +75,7 @@ cmd('git diff --name-only HEAD HEAD^')
       process.exit(1);
     }
 
-    const preid = isPrerelease ? `${nextReleasePreid}-next` : 'next';
+    preid = isPrerelease ? `${nextReleasePreid}-next` : 'next';
 
     const lernaFlags = [
       `--yes`,
