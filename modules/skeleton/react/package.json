@@ -53,6 +53,8 @@
     "@workday/canvas-kit-react-core": "^4.0.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react-avatar": "^4.0.0"
+    "@workday/canvas-kit-react-avatar": "^4.0.0",
+    "@workday/canvas-kit-react-card": "^4.0.0",
+    "@workday/canvas-kit-react-button": "^4.0.0"
   }
 }
