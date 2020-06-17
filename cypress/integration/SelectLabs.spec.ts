@@ -366,4 +366,155 @@ describe('Select', () => {
       });
     });
   });
+
+  context(`given the "Scrollable" story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Labs|Select/React/Top Label', 'Scrollable');
+    });
+
+    context('when the select button is focused', () => {
+      beforeEach(() => {
+        cy.findByLabelText('Label').focus();
+      });
+
+      context('when "s" is typed', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Label').type('s');
+        });
+
+        context('the select button', () => {
+          it('should read "San Francisco"', () => {
+            cy.findByLabelText('Label').should('have.text', 'San Francisco');
+          });
+
+          it(`should have a value of "san-francisco"`, () => {
+            cy.findByLabelText('Label').should('have.value', 'san-francisco');
+          });
+        });
+      });
+
+      context('when "sa" is typed', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Label').type('sa');
+        });
+
+        context('the select button', () => {
+          it('should read "San Francisco"', () => {
+            cy.findByLabelText('Label').should('have.text', 'San Francisco');
+          });
+
+          it(`should have a value of "san-francisco"`, () => {
+            cy.findByLabelText('Label').should('have.value', 'san-francisco');
+          });
+        });
+      });
+
+      context('when "san " is typed', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Label').type('san ');
+        });
+
+        context('the select button', () => {
+          it('should read "San Francisco"', () => {
+            cy.findByLabelText('Label').should('have.text', 'San Francisco');
+          });
+
+          it(`should have a value of "san-francisco"`, () => {
+            cy.findByLabelText('Label').should('have.value', 'san-francisco');
+          });
+        });
+      });
+
+      context('when "san m" is typed', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Label').type('san m');
+        });
+
+        context('the select button', () => {
+          it('should read "San Mateo"', () => {
+            cy.findByLabelText('Label').should('have.text', 'San Mateo');
+          });
+
+          it(`should have a value of "san-mateo"`, () => {
+            cy.findByLabelText('Label').should('have.value', 'san-mateo');
+          });
+        });
+      });
+
+      context('when the space key is pressed (to open the menu)', () => {
+        beforeEach(() => {
+          cy.findByLabelText('Label').type(' ');
+        });
+
+        context('when "s" is typed', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .type('s');
+          });
+
+          context('the listbox', () => {
+            it('it should set accessible focus to the "San Francisco" option', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should('have.text', 'San Francisco');
+            });
+          });
+        });
+
+        context('when "sa" is typed', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .type('sa');
+          });
+
+          context('the listbox', () => {
+            it('it should set accessible focus to the "San Francisco" option', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should('have.text', 'San Francisco');
+            });
+          });
+        });
+
+        context('when "san " is typed', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .type('san ');
+          });
+
+          context('the listbox', () => {
+            it('it should set accessible focus to the "San Francisco" option', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should('have.text', 'San Francisco');
+            });
+          });
+        });
+
+        // when "san m" is typed
+        context('when "san m" is typed', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .type('san m');
+          });
+
+          context('the listbox', () => {
+            it('it should set accessible focus to the "San Mateo" option', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should('have.text', 'San Mateo');
+            });
+          });
+        });
+      });
+    });
+  });
 });
