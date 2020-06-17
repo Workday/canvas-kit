@@ -55,7 +55,10 @@ export const SelectStates = () => (
             {label: 'Active', value: 'active'},
             {label: 'Active Hover', value: 'active hover'},
           ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          disabled: [
+            {label: '', value: false},
+            {label: 'Disabled', value: true},
+          ],
         },
         props => {
           if (props.disabled && !['', 'hover'].includes(props.className)) {
@@ -84,20 +87,36 @@ export const SelectStatesMenuOn = () => (
         {label: 'Alert', props: {error: Select.ErrorType.Alert}},
         {label: 'Error', props: {error: Select.ErrorType.Error}},
       ]}
-      columnProps={[{label: 'Default', props: {}}]}
+      columnProps={[
+        {label: 'Default', props: {}},
+        {label: 'Flipped', props: {isMenuFlipped: true}},
+      ]}
     >
-      {props => (
-        <div style={{height: 250}}>
-          <SelectBase
-            {...props}
-            onChange={() => {}} // eslint-disable-line no-empty-function
-            options={normalizedOptions}
-            focusedOptionIndex={1}
-            isMenuAnimated={false}
-            isMenuHidden={false}
-          />
-        </div>
-      )}
+      {props => {
+        const buttonRef = React.createRef<HTMLButtonElement>();
+        return (
+          <div
+            style={{
+              height: 500,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+            }}
+          >
+            <SelectBase
+              {...props}
+              buttonRef={buttonRef}
+              onChange={() => {}} // eslint-disable-line no-empty-function
+              options={normalizedOptions}
+              focusedOptionIndex={1}
+              isMenuHidden={false}
+              shouldMenuAnimate={false}
+              shouldMenuAutoFlip={false}
+              shouldMenuAutoFocus={false}
+            />
+          </div>
+        );
+      }}
     </ComponentStatesTable>
   </StaticStates>
 );
@@ -107,7 +126,10 @@ export const SelectStatesOption = () => (
     {[
       {
         label: 'Disabled States',
-        columnProps: [{label: 'Default', props: {}}, {label: 'Hover', props: {className: 'hover'}}],
+        columnProps: [
+          {label: 'Default', props: {}},
+          {label: 'Hover', props: {className: 'hover'}},
+        ],
         rowProps: [{label: 'Disabled', props: {disabled: true}}],
       },
       {
@@ -126,7 +148,7 @@ export const SelectStatesOption = () => (
         ],
       },
     ].map(statesTable => (
-      <div>
+      <div key={statesTable.label}>
         <h2>{statesTable.label}</h2>
         <StaticStates>
           <ComponentStatesTable

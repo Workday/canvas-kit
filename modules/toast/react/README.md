@@ -1,6 +1,6 @@
 # Canvas Kit Toast
 
-Canvas-styled React toast component. Allows for a brief message to be shown about a process or
+Canvas-styled React toast component. Allows for a brief message to be be shown about a process or
 action occurring in the app.
 
 [> Workday Design Reference](https://design.workday.com/components/popups/toasts)
@@ -25,11 +25,11 @@ Extends from the Popup component.
 
 ```tsx
 import * as React from 'react';
-import Popper from '@material-ui/core/Popper';
+import {Popper} from '@workday/canvas-kit-react-popup';
 import {Toast} from '@workday/canvas-kit-react-toast';
 
 // We use Popper from Material UI for our positioning
-<Popper placement={'top'} open={this.state.open} anchorEl={anchorEl}>
+<Popper placement={'top'} open={this.state.open} anchorElement={anchorEl}>
   <Toast onClose={this.handleClose}>{this.props.children}</Toast>
 </Popper>;
 ```

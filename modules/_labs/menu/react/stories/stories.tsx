@@ -5,7 +5,7 @@ import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import uuid from 'uuid/v4';
 import {setupIcon, uploadCloudIcon, userIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
-import Popper from '@material-ui/core/Popper';
+import {Popper} from '@workday/canvas-kit-react-popup';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import {Button, ButtonProps} from '../../../../button/react';
 
@@ -110,20 +110,14 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
           >
             Open Menu
           </FocusableButton>
-          <Popper
-            transition={true}
-            keepMounted={true}
-            placement={'bottom-start'}
-            open={isOpen}
-            anchorEl={anchorEl}
-          >
+          <Popper placement={'bottom-start'} open={isOpen} anchorElement={anchorEl}>
             <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
               <Menu
                 initialSelectedItem={selectedItemIndex}
                 isOpen={isOpen}
                 onClose={this.handleClose}
                 id={this.menuId}
-                labeledBy={this.controlButtonId}
+                aria-labelledby={this.controlButtonId}
               >
                 {createMenuItems().map(buildItem)}
               </Menu>
@@ -133,7 +127,7 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
       </ClickAwayListener>
     );
   }
-  private handleClick = (event: React.SyntheticEvent<HTMLButtonElement>) => {
+  private handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {currentTarget} = event;
     this.setState({
       anchorEl: currentTarget,
@@ -186,13 +180,7 @@ class ContextMenu extends React.Component<{}, ControlledMenuState> {
       <ClickAwayListener onClickAway={this.handleClose}>
         <div>
           <div onContextMenu={this.handleContext}>Right click on this text.</div>
-          <Popper
-            transition={true}
-            keepMounted={true}
-            placement={'bottom-start'}
-            open={isOpen}
-            anchorEl={anchorEl}
-          >
+          <Popper placement={'bottom-start'} open={isOpen} anchorElement={anchorEl}>
             <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
               <Menu
                 initialSelectedItem={selectedItemIndex}
@@ -208,7 +196,7 @@ class ContextMenu extends React.Component<{}, ControlledMenuState> {
       </ClickAwayListener>
     );
   }
-  private handleContext = (event: React.SyntheticEvent<HTMLElement>) => {
+  private handleContext = (event: React.MouseEvent<HTMLElement>) => {
     const {currentTarget} = event;
     this.setState({
       anchorEl: currentTarget,

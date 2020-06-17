@@ -10,12 +10,8 @@ export interface IconProps extends SvgProps {
 }
 
 export default class Icon extends React.Component<IconProps> {
-  static defaultProps = {
-    elemProps: {},
-  };
-
   public render() {
-    const {src, size, styles, type, elemProps} = this.props;
+    const {src, size, styles, type, ...elemProps} = this.props;
 
     const iconStyles: CSSObject = {...styles};
 
@@ -26,6 +22,6 @@ export default class Icon extends React.Component<IconProps> {
       };
     }
 
-    return <Svg src={src} type={type} elemProps={elemProps} styles={iconStyles} />;
+    return <Svg src={src} type={type} {...elemProps} styles={iconStyles} />;
   }
 }

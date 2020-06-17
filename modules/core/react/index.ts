@@ -13,7 +13,7 @@ import spacing, {
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
 import {CSSProperties} from './lib/types';
 
-const {default: colors, ...semanticColors} = canvasColorsWeb;
+const {default: colors, gradients, ...semanticColors} = canvasColorsWeb;
 const canvas = {
   colors,
   depth,
@@ -29,6 +29,7 @@ export * from '@workday/canvas-colors-web';
 export {
   borderRadius,
   colors,
+  gradients,
   depth,
   spacing,
   spacingNumbers,

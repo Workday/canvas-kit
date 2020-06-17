@@ -26,13 +26,13 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
    * The padding of the Card. Imported from `@workday/canvas-kit-react-core`.
    * @default spacing.l
    */
-  padding: CanvasSpacingValue;
+  padding?: CanvasSpacingValue;
 
   /**
    * The depth of the Card. Imported from `@workday/canvas-kit-react-core`.
    * @default depthValues[2]
    */
-  depth: CanvasDepthValue;
+  depth?: CanvasDepthValue;
 
   /**
    * The width of the Card.
@@ -68,16 +68,17 @@ const Header = styled('h3')(type.h3, {
 const Body = styled('div')(type.body);
 
 export default class Card extends React.Component<CardProps> {
-  public static defaultProps = {
-    depth: depthValues[2],
-    padding: spacing.l,
-  };
-
   public render() {
-    const {heading, headingId, ...elemProps} = this.props;
+    const {
+      depth = depthValues[2],
+      padding = spacing.l,
+      heading,
+      headingId,
+      ...elemProps
+    } = this.props;
 
     return (
-      <Box {...elemProps}>
+      <Box {...elemProps} depth={depth} padding={padding}>
         {heading && <Header id={headingId}>{heading}</Header>}
         <Body>{this.props.children}</Body>
       </Box>

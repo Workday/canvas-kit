@@ -29,7 +29,7 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   showCustomHexInput?: boolean;
   /**
-   * The label text of the custom hex input.
+   * The label text of the custom hex input. This is also used as the aria-label
    * @default 'Custom Hex Color'
    */
   customHexInputLabel?: string;

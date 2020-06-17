@@ -14,6 +14,7 @@ const depCheckOptions = {
     '@storybook/addon-actions',
     '@storybook/addon-knobs',
     'enzyme',
+    'react',
     'react-dom',
     'jest-axe',
     'jest-emotion',

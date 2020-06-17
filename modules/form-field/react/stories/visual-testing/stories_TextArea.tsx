@@ -19,7 +19,10 @@ export const TextAreaStates = () => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
-          value: [{value: 'Input value', label: 'With Value'}, {value: '', label: 'No Value'}],
+          value: [
+            {value: 'Input value', label: 'With Value'},
+            {value: '', label: 'No Value'},
+          ],
           placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
           error: [
             {value: undefined, label: ''},
@@ -44,7 +47,10 @@ export const TextAreaStates = () => (
             {label: 'Active', value: 'active'},
             {label: 'Active Hover', value: 'active hover'},
           ],
-          disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+          disabled: [
+            {label: '', value: false},
+            {label: 'Disabled', value: true},
+          ],
         },
         props => {
           if (props.disabled && !['', 'hover'].includes(props.className)) {

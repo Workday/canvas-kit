@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import {css, jsx} from '@emotion/core';
+import styled from '@emotion/styled';
 import range from 'lodash/range';
 import React from 'react';
 
@@ -15,23 +16,24 @@ interface PagesProps {
   pageButtonAriaLabel: (page: number, selected: boolean) => string;
 }
 
-const noPointerEvents = css({
+const ellipsisStyle = css({
   pointerEvents: 'none',
-});
-
-const ellipsisStyle = css(noPointerEvents, {
   width: canvas.spacing.l,
   textAlign: 'center',
   display: 'inline-block',
 });
 
-const noTransitions = css({
-  '&:not(:hover)': {transition: 'none !important'},
-});
-
-const activeStyling = css(noPointerEvents, noTransitions, {
-  color: canvas.colors.frenchVanilla100,
-});
+const PageButton = styled(IconButton)<{current: boolean}>(
+  {
+    width: 'auto',
+    ...type.small,
+  },
+  ({current}) => ({
+    color: current ? canvas.colors.frenchVanilla100 : undefined,
+    pointerEvents: current ? 'none' : undefined,
+    '&:not(:hover)': {transition: current ? 'none !important' : undefined},
+  })
+);
 
 /**
  * Given some information about the page, return a tuple of left and right number
@@ -70,7 +72,7 @@ export function getPages(total: number, current: number, isMobile: boolean): [nu
 
 const Pages = ({total, current, onPageClick, isMobile, pageButtonAriaLabel}: PagesProps) => {
   const pageToButton = (page: number) => (
-    <IconButton
+    <PageButton
       key={page}
       aria-label={pageButtonAriaLabel(page, page === current)}
       aria-pressed={undefined}
@@ -78,10 +80,10 @@ const Pages = ({total, current, onPageClick, isMobile, pageButtonAriaLabel}: Pag
       size={IconButton.Size.Small}
       onClick={_ => onPageClick(page)}
       toggled={page === current}
-      css={page === current ? activeStyling : noTransitions}
+      current={page === current}
     >
       {page}
-    </IconButton>
+    </PageButton>
   );
 
   const [left, right] = getPages(total, current, isMobile);
