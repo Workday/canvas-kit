@@ -2,6 +2,8 @@
 
 A component for applying Canvas styling to table elements.
 
+[> Workday Design Reference](https://design.workday.com/components/containers/tables)
+
 ## Installation
 
 ```sh

@@ -3,6 +3,8 @@
 A component that renders a skeleton (a placeholder for future content). The skeleton component takes
 in children skeleton components and displays them with an animated sheen to indicate loading.
 
+[> Workday Design Reference](https://design.workday.com/components/indicators/skeleton-loader)
+
 ## Installation
 
 ```sh

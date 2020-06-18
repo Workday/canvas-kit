@@ -4,6 +4,8 @@ A Canvas component that displays the header of a specific page within a website 
 is generally used as a sub-header to the main application header
 (`@workday/canvas-kit-labs-react-header`).
 
+[> Workday Design Reference](https://design.workday.com/components/navigation/headers)
+
 ## Installation
 
 ```sh

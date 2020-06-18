@@ -3,6 +3,8 @@
 Canvas-styled React toast component. Allows for a brief message to be be shown about a process or
 action occurring in the app.
 
+[> Workday Design Reference](https://design.workday.com/components/popups/toasts)
+
 ## Installation
 
 ```sh

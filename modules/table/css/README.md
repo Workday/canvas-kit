@@ -2,6 +2,8 @@
 
 Data table styling for Canvas Kit.
 
+[> Workday Design Reference](https://design.workday.com/components/containers/tables)
+
 ## Installation
 
 ```sh

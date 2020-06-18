@@ -2,6 +2,8 @@
 
 Canvas-styled React textarea component.
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-area)
+
 ## Installation
 
 ```sh
