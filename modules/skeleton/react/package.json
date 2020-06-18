@@ -55,6 +55,9 @@
   "devDependencies": {
     "@workday/canvas-kit-react-avatar": "^4.0.0",
     "@workday/canvas-kit-react-card": "^4.0.0",
-    "@workday/canvas-kit-react-button": "^4.0.0"
+    "@workday/canvas-kit-react-button": "^4.0.0",
+    "@workday/canvas-kit-react-checkbox": "^4.0.0",
+    "@workday/canvas-kit-react-form-field": "^4.0.0",
+    "@workday/canvas-kit-react-text-input": "^4.0.0"
   }
 }
