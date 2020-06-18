@@ -1,12 +1,24 @@
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
-import tabTrappingKey from 'focus-trap-js';
-import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
+import Popup, {
+  PopupPadding,
+  usePopupStack,
+  useCloseOnEscape,
+  useAssistiveHideSiblings,
+  useFocusTrap,
+} from '@workday/canvas-kit-react-popup';
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {mergeCallback} from '@workday/canvas-kit-react-common';
 
 import {ModalWidth} from './Modal';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Aria label will override aria-labelledby, it is used if there is no heading or we need custom label for popup
+   */
+  ariaLabel?: string;
   /**
    * The padding of the Modal. Accepts `zero`, `s`, or `l`.
    * @default PopupPadding.l
@@ -25,14 +37,6 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    */
   handleClose?: () => void;
   /**
-   * If true, set the Modal to close when the escape key is pressed (only recommended for simple applications).
-   * Accessibility specifications state modals should be closed when the escape key is pressed.
-   * However, we cannot guarantee that it is safe to simply bind an event listener and close in all
-   * cases. Some applications may use a Popup manager to make sure the correct popup is receiving
-   * the close command. If your application uses custom popup stacking, do not set this to true.
-   */
-  closeOnEscape: boolean;
-  /**
    * The heading of the Modal.
    */
   heading: React.ReactNode;
@@ -46,6 +50,17 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * it will make the modal heading focusable and focus on that instead.
    */
   firstFocusRef?: React.RefObject<HTMLElement>;
+  /**
+   * The containing element for the Modal elements. The Modal uses
+   * {@link https://reactjs.org/docs/portals.html Portals} to place the DOM elements
+   * of the Modal in a different place in the DOM to prevent issues with overflowed containers.
+   * When the modal is opened, `aria-hidden` will be added to siblings to hide background
+   * content from assistive technology like it is visibly hidden from sighted users. This property
+   * should be set to the element that the application root goes - not containing element of content.
+   * This should be a sibling or higher than the header and navigation elements of the application.
+   * @default document.body
+   */
+  container: HTMLElement;
 }
 
 const fadeIn = keyframes`
@@ -63,13 +78,23 @@ const Container = styled('div')({
   left: 0,
   width: '100vw',
   height: '100vh',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   background: 'rgba(0,0,0,0.65)',
   animationName: `${fadeIn}`,
   animationDuration: '0.3s',
-  zIndex: 1,
+});
+
+// This centering container helps fix an issue with Chrome. Chrome doesn't normally do subpixel
+// positioning, but seems to when using flexbox centering. This messes up Popper calculations inside
+// the Modal. The centering container forces a "center" pixel calculation by making sure the width
+// is always an even number
+const CenteringContainer = styled('div')({
+  height: '100vh',
+  display: 'flex',
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 const transformOrigin = {
@@ -77,9 +102,10 @@ const transformOrigin = {
   vertical: 'bottom',
 } as const;
 
-function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
-  const firstFocusable = modalEl.querySelector<HTMLElement>(
-    `[data-close=close],[id="${modalEl.getAttribute('aria-labelledby')}"]`
+function getFirstElementToFocus(overlayEl: HTMLElement): HTMLElement {
+  const modalEl = overlayEl.querySelector('[role=dialog]');
+  const firstFocusable = modalEl?.querySelector<HTMLElement>(
+    `[data-close=close],[id="${modalEl?.getAttribute('aria-labelledby')}"]`
   );
   if (firstFocusable) {
     if (firstFocusable.tagName === 'H3') {
@@ -109,14 +135,23 @@ function getFirstElementToFocus(modalEl: HTMLElement): HTMLElement {
   }
 }
 
-const useKeyDownListener = (handleKeydown: EventListenerOrEventListenerObject) => {
-  // `useLayoutEffect` for automation
-  React.useLayoutEffect(() => {
-    document.addEventListener('keydown', handleKeydown);
+const useWindowSize = (): {width: number; height: number} => {
+  const [width, setWidth] = React.useState(window?.innerWidth ?? 0);
+  const [height, setHeight] = React.useState(window?.innerHeight ?? 0);
+
+  const onResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  };
+  React.useEffect(() => {
+    window.addEventListener('resize', onResize);
+
     return () => {
-      document.removeEventListener('keydown', handleKeydown);
+      window.removeEventListener('resize', onResize);
     };
-  }, [handleKeydown]);
+  }, []);
+
+  return {width, height};
 };
 
 const useInitialFocus = (
@@ -140,52 +175,57 @@ const useInitialFocus = (
 };
 
 const ModalContent = ({
+  ariaLabel,
+  width = ModalWidth.s,
+  padding = PopupPadding.l,
+  container = document.body,
   handleClose,
   children,
-  closeOnEscape,
   firstFocusRef,
-  width,
   heading,
-  padding,
   ...elemProps
 }: ModalContentProps): JSX.Element => {
   const modalRef = React.useRef<HTMLDivElement>(null);
 
-  const handleKeydown = (event: KeyboardEvent) => {
-    if (modalRef.current) {
-      tabTrappingKey(event, modalRef.current);
-    }
+  const onClose = () => handleClose?.();
 
-    if (closeOnEscape && handleClose && (event.key === 'Esc' || event.key === 'Escape')) {
-      handleClose();
+  // special handling for clicking on the overlay
+  const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
+    // Detect clicks only on the centering wrapper element
+    if (event.target === modalRef.current?.children[0] && PopupStack.isTopmost(modalRef.current)) {
+      onClose();
     }
   };
+  const windowSize = useWindowSize();
 
-  useKeyDownListener(handleKeydown);
+  usePopupStack(modalRef);
+  useCloseOnEscape(modalRef, onClose);
+  useFocusTrap(modalRef);
   useInitialFocus(modalRef, firstFocusRef);
+  useAssistiveHideSiblings(modalRef);
 
-  const handleOutsideClick = ({target}: React.MouseEvent<HTMLDivElement>) => {
-    const modalEl = modalRef.current;
-
-    if (modalEl && !modalEl.contains(target as Node) && handleClose) {
-      handleClose();
-    }
-  };
-
-  return (
-    <Container onClick={handleOutsideClick} {...elemProps}>
-      <Popup
-        popupRef={modalRef}
-        width={width}
-        heading={heading}
-        handleClose={handleClose}
-        padding={padding}
-        transformOrigin={transformOrigin}
+  const content = (
+    <Container {...elemProps} ref={modalRef}>
+      <CenteringContainer
+        style={{width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw'}}
+        onClick={mergeCallback(onOverlayClick, elemProps.onClick)}
       >
-        {children}
-      </Popup>
+        <Popup
+          width={width}
+          heading={heading}
+          handleClose={handleClose}
+          padding={padding}
+          transformOrigin={transformOrigin}
+          aria-modal={true}
+          ariaLabel={ariaLabel}
+        >
+          {children}
+        </Popup>
+      </CenteringContainer>
     </Container>
   );
+
+  return ReactDOM.createPortal(content, container);
 };
 
 export default ModalContent;

@@ -3,6 +3,8 @@
 Errors and Alerts notify users of missteps that happen within a workflow and describe how the user
 can take appropriate action to resolve them.
 
+[> Workday Design Reference](https://design.workday.com/components/indicators/banners)
+
 ## Installation
 
 ```sh
@@ -49,7 +51,7 @@ import Banner from '@workday/canvas-kit-react-banner';
 
 ### Optional
 
-#### `onClick: (e: React.SyntheticEvent) => void`
+#### `onClick: (e: React.MouseEvent<HTMLButtonElement>) => void`
 
 > Function called when the user click on the banner
 

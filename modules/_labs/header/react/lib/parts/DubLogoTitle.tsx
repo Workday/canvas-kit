@@ -10,7 +10,7 @@ export type DubTitleProps = {
    * The theme of the DubLogoTitle. Accepts `White`, `Blue`, or `Transparent`.
    * @default HeaderTheme.White
    */
-  themeColor: HeaderTheme;
+  themeColor?: HeaderTheme;
   /**
    * The text of the DubLogoTitle. Not used if `brand` is provided.
    */
@@ -63,21 +63,18 @@ const DubLogo = styled('div')<DubTitleProps>({
 });
 
 export class DubLogoTitle extends React.Component<DubTitleProps> {
-  static defaultProps = {
-    themeColor: HeaderTheme.White,
-  };
-
   render() {
+    const {themeColor = HeaderTheme.White, title} = this.props;
     return (
       <LockupContainer>
         <Lockup {...this.props}>
           <DubLogo
             {...this.props}
             dangerouslySetInnerHTML={{
-              __html: this.props.themeColor === HeaderTheme.White ? dubLogoBlue : dubLogoWhite,
+              __html: themeColor === HeaderTheme.White ? dubLogoBlue : dubLogoWhite,
             }}
           />
-          {this.props.title && <Title {...this.props}>{this.props.title}</Title>}
+          {title && <Title {...this.props}>{title}</Title>}
         </Lockup>
       </LockupContainer>
     );

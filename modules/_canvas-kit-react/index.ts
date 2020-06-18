@@ -1,6 +1,7 @@
 export {default as canvas} from '@workday/canvas-kit-react-core';
 export * from '@workday/canvas-kit-react-action-bar';
 export * from '@workday/canvas-kit-react-avatar';
+export * from '@workday/canvas-kit-react-badge';
 export * from '@workday/canvas-kit-react-banner';
 export * from '@workday/canvas-kit-react-button';
 export * from '@workday/canvas-kit-react-card';
@@ -16,6 +17,7 @@ export * from '@workday/canvas-kit-react-modal';
 export * from '@workday/canvas-kit-react-page-header';
 export * from '@workday/canvas-kit-react-popup';
 export * from '@workday/canvas-kit-react-radio';
+export * from '@workday/canvas-kit-react-segmented-control';
 export * from '@workday/canvas-kit-react-select';
 export * from '@workday/canvas-kit-react-side-panel';
 export * from '@workday/canvas-kit-react-skeleton';

@@ -1,10 +1,21 @@
-# Canvas Kit Popup
+# Canvas Kit Popups
 
-A Popup component that allows you to render content above another.
+A "popup" is a classification for a type of stacked UI element that appears "on top" of statically
+positioned content. Tooltips, Modals, Dropdown menus, etc are all examples of "popups". Canvas Kit
+has a "stack manager" system for managing these stacked UIs. Different types of popups have
+different requirements of behavior for UX and accessibility - we can call them capabilities,
+behaviors, or traits. Canvas Kit comes with a number of [behaviors](#hooks) in the form of React
+Hooks.
 
-Note: This popup does not include a positioning engined. In our example we use Material UIs popper
-component to wrap our Popup component and position it, which is a wrapper to Popper.js. For
-reference: https://material-ui.com/api/popper/
+If you are building your own custom stacked UI components, use the [Popper](#popper) component along
+with our [hooks](#hooks). The `Popper` component and hooks work with the stack management system for
+correct rendering and accessibility behavior. If you cannot use `Popper`, use the
+[usePopupStack](#usepoupstack) hook to properly register and deregister the popup at the correct
+time. If you cannot use our hooks, consider upgrading your component to use Hooks. If you cannot do
+that, you'll have to look up the `PopupStack` package for the direct API and have a look at the
+source code for our hooks into the `PopupStack` API.
+
+This package comes with everything you need to build Popup UIs.
 
 ## Installation
 
@@ -18,27 +29,150 @@ or
 yarn add @workday/canvas-kit-react-popup
 ```
 
-## Usage
+## Popper
+
+A thin wrapper component around the Popper.js positioning engine. For reference:
+https://popper.js.org/. `Popper` also automatically works with the `PopupStack` system. `Popper` has
+no UI and will render any children to the `body` element and position around a provided
+`anchorElement`.
+
+### Usage
 
 ```tsx
 import * as React from 'react';
-import Popper from '@material-ui/core/Popper';
-import {Popup} from '@workday/canvas-kit-react-popup';
+import {Button} from '@workday/canvas-kit-react-button';
+import {Popper} from '@workday/canvas-kit-react-popup';
 
-// We use Popper from Material UI for our positioning
-<Popper placement={'bottom'} open={this.state.open} anchorEl={anchorEl}>
-  <Popup
-    width={300}
-    heading={'Popup Title'}
-    padding={Popup.Padding.l}
-    handleClose={this.handleClose}
-  >
-    {this.props.children}
-  </Popup>
-</Popper>;
+const MyPopper = () => {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef(null)
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)} buttonRef={buttonRef}>
+      <Popper anchorElement={buttonRef} open={open}>
+        <div>
+          <p>Popper content</p>
+          <Button onClick={() => setOpen(false)}>
+        </div>
+      </Popper>
+    </div>
+  );
+};
 ```
 
-## Static Properties
+If you need access to the `placement` that was chosen by PopperJS, `children` can also be a
+[render prop](https://reactjs.org/docs/render-props.html).
+
+```tsx
+import * as React from 'react';
+import {Button} from '@workday/canvas-kit-react-button';
+import {Popper} from '@workday/canvas-kit-react-popup';
+
+const MyPopper = () => {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef(null)
+
+  return (
+    <div>
+      <Button onClick={() => setOpen(true)} buttonRef={buttonRef}>
+      <Popper anchorElement={buttonRef} open={open}>
+        {({placement}) => {
+          return (
+            <div>
+              <p>Popper content</p>
+              <p>Placement chosen: {placement}</p>
+              <Button onClick={() => setOpen(false)}>
+            </div>
+          )
+        }}
+      </Popper>
+    </div>
+  );
+};
+```
+
+### Popper Required Props
+
+#### `anchorElement: RefObject<Element> | Element | null`
+
+> The reference element used to position the Popper. Popper content will try to follow the
+> `anchorElement` if it moves and will reposition itself if there is no longer room in the window.
+
+#### `children: ((props: {placement: Placement}) => React.ReactNode) | React.ReactNode`
+
+> The content of the Popper. If a function is provided, it will be treated as a Render Prop and pass
+> the `placement` chosen by PopperJS. This `placement` value is useful if your popup needs to
+> animate and that animation depends on the direction of the content in relation to the
+> `anchorElement`.
+
+### Popper Optional Props
+
+#### `containerElement: Element | null`
+
+> The element that contains the portal children when `portal` is true. It is best to not define this
+> unless you know what you're doing. Popper works with a PopupStack and in order for z-indexes to
+> work correctly, all Popups on your page should live on the same root element otherwise you risk
+> running into rendering issues:
+> https://philipwalton.com/articles/what-no-one-told-you-about-z-index/.
+
+Default: `document.body`
+
+#### `open: boolean`
+
+> Determines if `Popper` content should be rendered. The content only exists in the DOM when `open`
+> is `true`
+
+Default: `true`
+
+#### `placement: PopperJS.Placement`
+
+> The placement of the `Popper` contents relative to the `anchorElement`. Accepts `auto`, `top`,
+> `right`, `bottom`, or `left`. Each placement can also be modified using any of the following
+> variations: `-start` or `-end`.
+
+Default: `'bottom'`
+
+#### `popperOptions: Partial<PopperJS.PopperOptions>`
+
+> The additional options passed to the Popper's `popper.js` instance.
+
+#### `portal: boolean`
+
+> If true, attach the Popper to the `containerElement`. If false, render the Popper within the DOM
+> hierarchy of its parent. A non-portal Popper will constrained by the parent container overflows.
+> If you set this to `false`, you may experience issues where you content gets cut off by scrollbars
+> or `overflow: hidden`
+
+Default: `true`
+
+## Popup
+
+### Popup Usage
+
+```tsx
+import * as React from 'react';
+import {Button} from '@workday/canvas-kit-react-button';
+import {Popup, Popper, usePopup, use} from '@workday/canvas-kit-react-popup';
+
+const MyPopup = () => {
+  const { targetProps, closePopup, popperProps } = usePopup()
+
+  // Add some behaviors
+  useCloseOnOutsideClick(popperProps.ref, closePopup);
+  useCloseOnEscape(popperProps.ref, closePopup);
+
+  return (
+    <Button {...targetProps}>Toggle Popup</Button>
+    <Popper placement="bottom" {...popperProps}>
+      <Popup heading="Popup Title">Popup Contents</Popup>
+      <Button onClick={closePopup}>Close</Button>
+    </Popper>
+  );
+};
+```
+
+### Popup Static Properties
 
 #### `Padding: PopupPadding`
 
@@ -46,17 +180,15 @@ import {Popup} from '@workday/canvas-kit-react-popup';
 <Popup padding={Popup.Padding.l}>{this.props.children}</Popup>
 ```
 
-## Component Props
-
-### Required
+### Popup Required Props
 
 > None
 
 ---
 
-### Optional
+### Popup Optional Props
 
-### `padding: PopupPadding`
+#### `padding: PopupPadding`
 
 > You can choose between zero, s, l for your padding
 
@@ -125,3 +257,90 @@ Default:
 
 > A ref to the underlying popup container element. Use this to check click targets against when
 > closing a popup.
+
+## Hooks
+
+### usePopupStack
+
+```ts
+usePopupStack(ref: React.RefObject<HTMLElement>): void
+```
+
+This hook will add a `ref` element to the Popup stack on mount and remove on unmount. If you use
+`Popper`, the popper `ref` is automatically added/removed from the Popup stack. The Popup stack is
+required for proper z-index values to ensure Popups are rendered correct. It is also required for
+global listeners like click outside or escape key closing a popup. Without the Popup stack, all
+popups will close rather than only the topmost one.
+
+This should be used by all stacked UIs unless using the `Popper` component.
+
+## useAssistiveHideSiblings
+
+```ts
+useAssistiveHideSiblings(ref: React.RefObject<HTMLElement>): void
+```
+
+This hook will hide all sibling elements from assistive technology. Very useful for modal dialogs.
+This will set `aria-hidden` for sibling elements of the provided `ref` element and restore the
+previous `aria-hidden` to each component when the component is unmounted. For example, if added to a
+Modal component, all children of `document.body` will have an `aria-hidden=true` applied _except_
+for the provided `ref` element (the Modal). This will effectively hide all content outside the Modal
+from assistive technology including Web Rotor for VoiceOver for example.
+
+**Note**: The provided `ref` element should be root element of your component so that other elements
+_outside_ your component will be hidden rather than elements _inside_ your component.
+
+This should be used on stacked UI elements that need to hide content. Like Modals.
+
+## useBringToTopOnClick
+
+```ts
+useBringToTopOnClick(ref: React.RefObject<HTMLElement>): void
+```
+
+This hook will bring an element to the top of the stack when any element inside the provided `ref`
+element is clicked. If `Popper` was used or `PopupStack.add` provided an `owner`, all "child" popups
+will also be brought to the top. A "child" popup is a Popup that was opened from another Popup.
+Usually this is a Tooltip or Select component inside something like a Modal.
+
+This should be used on stacked UI elements that are meant to persist, like Windows.
+
+## useCloseOnEscape
+
+```ts
+useCloseOnEscape(ref: React.RefObject<HTMLElement>, onClose: () => void): void
+```
+
+Registers global detection of the Escape key. It will only call the `onClose` callback if the
+provided `ref` element is the topmost in the stack. The `ref` should be the same as the one passed
+to `usePopupStack` or the `Popper` component since `Popper` uses `usePopupStack` internally.
+
+This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
+dialogs, dropdown menus, etc.
+
+## useCloseOnOutsideClick
+
+```ts
+useCloseOnOutsideClick(ref: React.RefObject<HTMLElement>, onClose: () => void): void
+```
+
+Registers global listener for all clicks. It will only call the `onClose` callback if the click
+happened outside the `ref` element and its children _and_ the provided `ref` element is the topmost
+in the stack. The `ref` should be the same as the one passed to `usePopupStack` or the `Popper`
+component since `Popper` uses `usePopupStack` internally.
+
+This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
+dialogs, dropdown menus, etc.
+
+## useFocusTrap
+
+```ts
+useFocusTrap(ref: React.RefObject<HTMLElement>): void
+```
+
+"Trap" or "loop" focus within a provided `ref` element. This is required for accessibility on
+modals. If a keyboard users hits the Tab or Shift + Tab, this will force "looping" of focus. It
+effectively "hides" outside content from keyboard users. Use an overlay to hide content from mouse
+users and `useAssistiveHideSiblings` to hide content from assistive technology users.
+
+This should be used on stacked UI elements that need to hide content. Like Modals.

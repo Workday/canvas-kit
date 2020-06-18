@@ -208,7 +208,7 @@ Default: `24`
 > Icon color. This will define `accent` and `fill`. `accent` and `fill` will override this property
 > if defined.
 
-Default: `colors.primary.iconStandard`
+Default: `iconColors.standard`
 
 ---
 
@@ -216,7 +216,7 @@ Default: `colors.primary.iconStandard`
 
 > Hover color of the icon. This will define `accentHover` and `fillHover`.
 
-Default: `colors.primary.iconHover`
+Default: `iconColors.hover`
 
 ---
 

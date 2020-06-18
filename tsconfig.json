@@ -4,6 +4,7 @@
     "target": "es5",
     "allowJs": false,
     "declaration": true,
+    "declarationMap": true,
     "esModuleInterop": true,
     "jsx": "react",
     "lib": ["es2015", "es2017", "dom"],
@@ -21,5 +22,5 @@
     "types": ["jest"],
     "incremental": true
   },
-  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs"]
+  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs", "modules/**/spec/*", "modules/**/stories/*"]
 }

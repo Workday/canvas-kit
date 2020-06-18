@@ -22,11 +22,9 @@ describe('Icon component', () => {
 
   test('Custom className overrides base iconStyle class', () => {
     const customClassName = 'custom-class-name';
-    const testProps = {
-      className: customClassName,
-    };
+
     const {container} = rtlRender(
-      <Svg src={shieldIcon} elemProps={testProps} type={CanvasIconTypes.Accent} styles={{}} />
+      <Svg src={shieldIcon} className={customClassName} type={CanvasIconTypes.Accent} styles={{}} />
     );
 
     expect(container.firstChild).toHaveClass(customClassName);

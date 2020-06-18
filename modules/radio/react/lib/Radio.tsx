@@ -1,20 +1,24 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {themedFocusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {
+  focusRing,
+  mouseFocusBehavior,
+  styled,
+  Themeable,
+  uniqueId,
+} from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
   inputColors,
   spacingNumbers as spacing,
 } from '@workday/canvas-kit-react-core';
-import uuid from 'uuid/v4';
 
 export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * If true, set the Radio button to the checked state.
    * @default false
    */
-  checked: boolean;
+  checked?: boolean;
   /**
    * If true, set the Radio button to the disabled state.
    * @default false
@@ -22,7 +26,7 @@ export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInp
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying radio input element. This is required if `label` is defined as a non-empty string.
-   * @default A uniquely generated id
+   * @default A uniquely generated id by uuid()
    */
   id?: string;
   /**
@@ -41,7 +45,7 @@ export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInp
   /**
    * The function called when the Radio button state changes.
    */
-  onChange?: (e: React.SyntheticEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * The value of the Radio button.
    */
@@ -75,10 +79,17 @@ const RadioInputWrapper = styled('div')<Pick<RadioProps, 'disabled'>>({
   width: radioWidth,
 });
 
-/**
- * Note: `~ div:first-of-type` refers to `RadioBackground`
- * and was easier to use than a component selector in this case.
- */
+const RadioRipple = styled('span')<Pick<RadioProps, 'disabled'>>({
+  borderRadius: borderRadius.circle,
+  boxShadow: `0 0 0 0 ${colors.soap200}`,
+  height: radioHeight,
+  transition: 'box-shadow 150ms ease-out',
+  width: radioWidth,
+  position: 'absolute',
+  pointerEvents: 'none', // This is a decorative element we don't want it to block clicks to input
+  zIndex: -1,
+});
+
 const RadioInput = styled('input')<RadioProps>(
   {
     borderRadius: radioBorderRadius,
@@ -93,34 +104,44 @@ const RadioInput = styled('input')<RadioProps>(
       outline: 'none',
     },
   },
-
-  // Ripple
-  {
-    '& ~ div:first-of-type::after': {
-      borderRadius: borderRadius.circle,
-      boxShadow: `0 0 0 0 ${colors.soap200}`,
-      content: '""',
-      display: 'inline-block',
-      height: radioHeight,
-      transition: 'box-shadow 150ms ease-out',
-      width: radioWidth,
-      position: 'absolute',
-      zIndex: -1,
+  ({
+    checked,
+    disabled,
+    theme: {
+      canvas: {
+        palette: {
+          primary: themePrimary,
+          common: {focusOutline: themeFocusOutline},
+        },
+      },
     },
-  },
-  ({checked, disabled, theme}) => ({
+  }) => ({
     cursor: disabled ? undefined : 'pointer',
-    '&:hover ~ div:first-of-type::after': {
+    /**
+     * These selectors are targetting various sibling elements (~) here because
+     * their styles need to be connected to changes around the input's state
+     * (e.g. hover, focus, etc.).
+     *
+     * We are choosing not to use component selectors from Emotion in this case.
+     * The Babel transforms have been problematic in the past.
+     */
+
+    // `span:first-of-type` refers to `RadioRipple`, the light grey
+    // element that animates around the component on hover
+    '&:hover ~ span:first-of-type': {
       boxShadow: disabled ? undefined : `0 0 0 ${rippleRadius}px ${colors.soap200}`,
     },
+
+    // `div:first-of-type` refers to the `RadioBackground`, the visual facade of the
+    // input (which is visually hidden)
     '&:hover ~ div:first-of-type': {
       backgroundColor: checked
-        ? theme.palette.primary.main
+        ? themePrimary.main
         : disabled
         ? inputColors.disabled.background
         : 'white',
       borderColor: checked
-        ? theme.palette.primary.main
+        ? themePrimary.main
         : disabled
         ? inputColors.disabled.border
         : inputColors.hoverBorder,
@@ -128,22 +149,21 @@ const RadioInput = styled('input')<RadioProps>(
     },
     '&:focus, &focus:hover': {
       '& ~ div:first-of-type': {
-        borderColor: checked ? theme.palette.primary.main : theme.palette.common.focusOutline,
+        borderColor: checked ? themePrimary.main : themeFocusOutline,
         borderWidth: '2px',
-        zIndex: 2,
       },
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...themedFocusRing(theme, {width: 2, separation: 2}),
+      ...focusRing({separation: 2, outerColor: themeFocusOutline}),
     },
     ...mouseFocusBehavior({
       '&:focus ~ div:first-of-type': {
-        ...themedFocusRing(theme, {width: 0}),
+        ...focusRing({width: 0, outerColor: themeFocusOutline}),
         borderWidth: '1px',
-        borderColor: checked ? theme.palette.primary.main : inputColors.border,
+        borderColor: checked ? themePrimary.main : inputColors.border,
       },
       '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
-        borderColor: checked ? theme.palette.primary.main : inputColors.hoverBorder,
+        borderColor: checked ? themePrimary.main : inputColors.hoverBorder,
       },
     }),
   })
@@ -166,14 +186,22 @@ const RadioBackground = styled('div')<RadioProps>(
     transition: 'border 200ms ease, background 200ms',
     width: radioWidth,
   },
-  ({checked, disabled, theme}) => ({
+  ({
+    checked,
+    disabled,
+    theme: {
+      canvas: {
+        palette: {primary: themePrimary},
+      },
+    },
+  }) => ({
     borderColor: checked
-      ? theme.palette.primary.main
+      ? themePrimary.main
       : disabled
       ? inputColors.disabled.border
       : inputColors.border,
     backgroundColor: checked
-      ? theme.palette.primary.main
+      ? themePrimary.main
       : disabled
       ? inputColors.disabled.background
       : 'white',
@@ -182,7 +210,6 @@ const RadioBackground = styled('div')<RadioProps>(
 
 const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
   {
-    backgroundColor: colors.frenchVanilla100,
     borderRadius: radioBorderRadius,
     display: 'flex',
     flexDirection: 'column',
@@ -191,6 +218,9 @@ const RadioCheck = styled('div')<Pick<RadioProps, 'checked'>>(
     transition: 'transform 200ms ease, opacity 200ms ease',
     width: radioDot,
   },
+  ({theme}) => ({
+    backgroundColor: theme.canvas.palette.primary.contrast,
+  }),
   ({checked}) => ({
     opacity: checked ? 1 : 0,
     transform: checked ? 'scale(1)' : 'scale(0.5)',
@@ -205,53 +235,42 @@ const RadioLabel = styled('label')<{disabled?: boolean}>(
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
 );
 
-export default class Radio extends React.Component<RadioProps> {
-  public static defaultProps = {
-    checked: false,
-    label: '',
-  };
+export const Radio = ({
+  checked = false,
+  id = uniqueId(),
+  label = '',
+  disabled,
+  inputRef,
+  name,
+  onChange,
+  value,
+  ...elemProps
+}: RadioProps) => (
+  <RadioContainer>
+    <RadioInputWrapper disabled={disabled}>
+      <RadioInput
+        checked={checked}
+        disabled={disabled}
+        id={id}
+        ref={inputRef}
+        name={name}
+        onChange={onChange}
+        type="radio"
+        value={value}
+        aria-checked={checked}
+        {...elemProps}
+      />
+      <RadioRipple />
+      <RadioBackground checked={checked} disabled={disabled}>
+        <RadioCheck checked={checked} />
+      </RadioBackground>
+    </RadioInputWrapper>
+    {label && (
+      <RadioLabel htmlFor={id} disabled={disabled}>
+        {label}
+      </RadioLabel>
+    )}
+  </RadioContainer>
+);
 
-  private id = uuid();
-
-  public render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {
-      checked,
-      disabled,
-      id = this.id,
-      inputRef,
-      label,
-      name,
-      onChange,
-      value,
-      ...elemProps
-    } = this.props;
-
-    return (
-      <RadioContainer>
-        <RadioInputWrapper disabled={disabled}>
-          <RadioInput
-            checked={checked}
-            disabled={disabled}
-            id={id}
-            ref={inputRef}
-            name={name}
-            onChange={onChange}
-            type="radio"
-            value={value}
-            aria-checked={checked}
-            {...elemProps}
-          />
-          <RadioBackground checked={checked} disabled={disabled}>
-            <RadioCheck checked={checked} />
-          </RadioBackground>
-        </RadioInputWrapper>
-        {label && (
-          <RadioLabel htmlFor={id} disabled={disabled}>
-            {label}
-          </RadioLabel>
-        )}
-      </RadioContainer>
-    );
-  }
-}
+export default Radio;

@@ -14,45 +14,17 @@ or
 yarn add @workday/canvas-kit-react-common
 ```
 
-# Canvas Kit Popper
+Includes:
 
-A thin wrapper component around the Popper.js positioning engine. For reference:
-https://popper.js.org/
+- [Canvas Provider](#canvas-provider)
+- [Theming](#theming)
+- [Bidirectionality](#bidirectionality)
 
-## Usage
-
-```tsx
-import * as React from 'react';
-import {Popper} from '@workday/canvas-kit-react-common';
-import {Popup} from '@workday/canvas-kit-react-popup';
-
-<Popper placement={'bottom'} open={this.state.open} anchorElement={this.buttonRef.current}>
-  <Popup heading={'Popup Title'}>{this.props.children}</Popup>
-</Popper>;
-```
-
-## Testing
-
-Popper.js uses DOM calls that aren't available in JSDOM. This can cause problems with some testing
-frameworks that use JSDOM such as jest. When testing you can
-[mock out](https://github.com/FezVrasta/popper.js#how-to-use-popperjs-in-jest) these calls made by
-Popper.js.
-
-Alternatively, you can mock out the `Popper` wrapper itself. An example of how to do this in jest is
-shown below:
-
-```
-jest.mock('@workday/canvas-kit-react-common', () => ({
-  ...jest.genMockFromModule('@workday/canvas-kit-react-common'),
-  Popper: props => (props.open ? <div id="POPPER">{props.children}</div> : null),
-}));
-```
-
-## Static Properties
+### Static Properties
 
 > None
 
-## Component Props
+### Component Props
 
 This component extends the HTML `div` element. All additional props that are passed to this
 component that are valid HTML attributes will be rendered as part of the wrapper `div` element. This
@@ -64,7 +36,7 @@ includes custom `data-*` attributes such as `data-test-id` to help facilitate au
 
 > The reference element used to position the popper.
 
-#### `children: React.ReactNode`
+#### `children: React.ReactNode | ((props: {placement: Placement}) => React.ReactNode)`
 
 > The element used as the popper.
 
@@ -109,7 +81,7 @@ Default: `bottom`
 
 #### `popperOptions: PopperOptions`
 
-> Addtional options passed to the `popper.js` instance.
+> Additional options passed to the `popper.js` instance.
 
 ---
 
@@ -119,3 +91,56 @@ Default: `bottom`
 > DOM hierarchy of it's parent. When true, the popper is attached to the `containerElement`.
 
 Default: `true`
+
+---
+
+## Canvas Provider
+
+This provider includes all of the Canvas Providers below. This is the way most consumers should use
+the provider. This provider is required for our theming capabilities, so you can find more
+information in the [theming documentation](./lib/theming/README.md).
+
+**We strongly encourage you to use this in your application to wrap all Canvas components.**
+
+```tsx
+import * as React from 'react';
+import {CanvasProvider} from '@workday/canvas-kit-react-common';
+
+<CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
+```
+
+#### Storybook Decorator
+
+We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
+stories in a `CanvasProvider` (including `InputProvider`) automatically.
+
+Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
+
+```js
+import {CanvasProviderDecorator} from '../utils/storybook';
+
+addDecorator(CanvasProviderDecorator);
+```
+
+Or, add it to stories individually:
+
+```js
+import {CanvasProviderDecorator} from '../../../../utils/storybook';
+
+storiesOf('My Story', module)
+  .addDecorator(CanvasProviderDecorator)
+  .add('All', () => <YourJSX />);
+```
+
+---
+
+## Theming
+
+Theming documentation has its own README. You can find it [here](./lib/theming/README.md).
+
+---
+
+## Bidirectionality
+
+Bidirectionality is provided by Theming. You can find Theming documentation
+[here](./lib/theming/README.md#bidirectionality).

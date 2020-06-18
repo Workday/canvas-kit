@@ -2,6 +2,8 @@
 
 Canvas-styled React textarea component.
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-area)
+
 ## Installation
 
 ```sh
@@ -105,7 +107,7 @@ Default: `false`
 
 ---
 
-#### `onChange: React.ChangeEventHandler<HTMLTextAreaElement>`
+#### `onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void`
 
 > The callback fired when the value is changed.
 
