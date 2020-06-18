@@ -9,6 +9,15 @@ export const expandHex = (hex: string) => {
   });
 };
 
+// Used to as a fallback to determine foreground color
+const colorPriority = [
+  colors.frenchVanilla100,
+  colors.blackPepper300,
+  colors.blackPepper400,
+  colors.blackPepper500,
+  colors.blackPepper600,
+];
+
 /**
  *
  * Chooses foreground color with accesible contrast against background. If contrast ratio
@@ -28,14 +37,6 @@ export const pickForegroundColor = (
     } else if (darkColor && chroma.contrast(background, darkColor) >= 4.5) {
       return darkColor;
     } else {
-      const colorPriority = [
-        colors.frenchVanilla100,
-        colors.blackPepper300,
-        colors.blackPepper400,
-        colors.blackPepper500,
-        colors.blackPepper600,
-      ];
-
       for (let i = 0; i < colorPriority.length; i++) {
         const color = colorPriority[i];
 
