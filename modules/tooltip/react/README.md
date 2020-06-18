@@ -4,6 +4,8 @@ A Tooltip component that renders information/text when the user hovers over an e
 used to label or describe an element. By default, a tooltip will label an element. This is useful
 for IconButtons. A tooltip can also be used to describe additional information about an element
 
+[> Workday Design Reference](https://design.workday.com/components/popups/tooltips)
+
 ## Installation
 
 ```sh

@@ -2,6 +2,8 @@
 
 Components that display animations while a page or component loads.
 
+[> Workday Design Reference](https://design.workday.com/components/indicators/loading-animation)
+
 ## Installation
 
 ```sh

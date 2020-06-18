@@ -2,6 +2,8 @@
 
 Tooltips with modifiers and containers implementing display on hover.
 
+[> Workday Design Reference](https://design.workday.com/components/popups/tooltips)
+
 ## Installation
 
 ```sh
