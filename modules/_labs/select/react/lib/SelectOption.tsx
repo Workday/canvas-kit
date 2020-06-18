@@ -81,7 +81,7 @@ const Option = styled('li')<SelectOptionProps>(
       const selectedStyles = {
         '&[aria-selected="true"]': {
           backgroundColor: selectedBgColor,
-          color: pickForegroundColor(selectedBgColor, colors.blackPepper300),
+          color: pickForegroundColor(selectedBgColor),
         },
       };
       // Only display interactive (hover/active) styles if the option is interactive

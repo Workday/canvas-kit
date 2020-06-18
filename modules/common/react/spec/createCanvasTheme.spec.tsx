@@ -48,7 +48,7 @@ describe('createCanvasTheme', () => {
       main: 'orange',
       dark: '#c67600',
       darkest: '#904a00',
-      contrast: '#000000',
+      contrast: '#494949',
     };
 
     expect(theme).toEqual(expected);
@@ -131,7 +131,7 @@ describe('createCanvasTheme', () => {
 
     const theme = createCanvasTheme(input);
 
-    expect(theme.palette.primary.contrast).toEqual('#000000');
+    expect(theme.palette.primary.contrast).toEqual('#494949');
   });
 
   test('shift color should darken canvas color to subsequent canvas color', () => {
