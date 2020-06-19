@@ -17,7 +17,7 @@ function assertOptionInView($option: JQuery) {
   const optionTop = option.offsetTop;
   const optionBottom = optionTop + option.offsetHeight;
 
-  const optionInView = optionBottom <= menuViewBottom && optionTop >= menuViewTop;
+  const optionInView = optionTop >= menuViewTop && optionBottom <= menuViewBottom;
 
   expect(optionInView).to.equal(true);
 }
@@ -450,6 +450,30 @@ describe('Select', () => {
             });
 
             it('should scroll so that the "San Francisco" option is fully visible', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should(assertOptionInView);
+            });
+          });
+        });
+
+        context('when "s{500ms delay}b" is typed', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .type('sb', {delay: 500});
+          });
+
+          context('the listbox', () => {
+            it('it should set accessible focus to the "Beaverton" option', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should('have.text', 'Beaverton');
+            });
+
+            it('should scroll so that the "Beaverton" option is fully visible', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
