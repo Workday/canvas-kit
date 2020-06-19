@@ -23,20 +23,16 @@ export const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true)
     );
 
     // Check if elem is out of view at the top edge of the parent's viewport
-    const overTop = elem.offsetTop - parent.offsetTop < parent.scrollTop;
+    const overTop = elem.offsetTop < parent.scrollTop + parentBorderTopWidth;
 
     // Check if elem is out of view at the bottom edge of the parent's viewport
     const overBottom =
-      elem.offsetTop - parent.offsetTop + elemClientHeight - parentBorderTopWidth >
-      parent.scrollTop + parentClientHeight;
+      elem.offsetTop + elem.offsetHeight >
+      parent.scrollTop + parentBorderTopWidth + parent.clientHeight;
 
     if ((overTop || overBottom) && centerIfNeeded) {
       parent.scrollTop =
-        elem.offsetTop -
-        parent.offsetTop -
-        parentClientHeight / 2 -
-        parentBorderTopWidth +
-        elemClientHeight / 2;
+        elem.offsetTop - parentClientHeight / 2 - parentBorderTopWidth + elemClientHeight / 2;
     }
 
     if ((overTop || overBottom) && !centerIfNeeded) {
