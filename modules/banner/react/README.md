@@ -3,6 +3,8 @@
 Errors and Alerts notify users of missteps that happen within a workflow and describe how the user
 can take appropriate action to resolve them.
 
+[> Workday Design Reference](https://design.workday.com/components/indicators/banners)
+
 ## Installation
 
 ```sh

@@ -2,6 +2,8 @@
 
 Generic Canvas card component
 
+[> Workday Design Reference](https://design.workday.com/components/containers/cards)
+
 ## Installation
 
 ```sh

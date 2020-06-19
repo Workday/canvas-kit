@@ -2,6 +2,8 @@
 
 Select input
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/select-drop-down)
+
 ## Installation
 
 ```sh

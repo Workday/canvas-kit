@@ -2,6 +2,8 @@
 
 Text Input styles
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
+
 ## Installation
 
 ```sh

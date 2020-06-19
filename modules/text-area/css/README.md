@@ -2,6 +2,8 @@
 
 Text Area styles
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-area)
+
 ## Installation
 
 ```sh

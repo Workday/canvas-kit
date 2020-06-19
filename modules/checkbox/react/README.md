@@ -2,6 +2,8 @@
 
 A checkbox input.
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/checkboxes)
+
 ## Installation
 
 ```sh

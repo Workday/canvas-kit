@@ -2,6 +2,8 @@
 
 A component showing a status indicator of a given type, emphasis and label.
 
+[> Workday Design Reference](https://design.workday.com/components/indicators/status-indicators)
+
 ## Installation
 
 ```sh

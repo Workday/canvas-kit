@@ -3,6 +3,8 @@
 Color Picker is a two part component. It has a color input that handles custom hex colors and then
 selecting specific swatches.
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/color-input)
+
 ## Installation
 
 ```sh

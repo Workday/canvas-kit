@@ -4,6 +4,8 @@ Creates an actions menu of clickable items.
 
 Can be used to implement a menu button, context menu, etc.
 
+[> Workday Design Reference](https://design.workday.com/components/popups/menus)
+
 ## Installation
 
 ```sh
