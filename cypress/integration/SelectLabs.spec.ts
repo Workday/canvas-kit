@@ -5,6 +5,23 @@ function getAccessibleFocus($menu: JQuery): JQuery {
   return $menu.find(`[id="${activeId}"]`);
 }
 
+function assertOptionInView($option: JQuery) {
+  const option = $option[0];
+  const menu = $option.parent()[0];
+
+  const menuComputedStyle = window.getComputedStyle(menu, null);
+  const menuBorderTopWidth = parseInt(menuComputedStyle.getPropertyValue('border-top-width'), 10);
+
+  const menuViewTop = menu.scrollTop + menuBorderTopWidth;
+  const menuViewBottom = menuViewTop + menu.clientHeight;
+  const optionTop = option.offsetTop;
+  const optionBottom = optionTop + option.offsetHeight;
+
+  const optionInView = optionBottom <= menuViewBottom && optionTop >= menuViewTop;
+
+  expect(optionInView).to.equal(true);
+}
+
 describe('Select', () => {
   before(() => {
     h.stories.visit();
@@ -292,6 +309,21 @@ describe('Select', () => {
             cy.findByLabelText('Label').should('have.value', 'san-francisco');
           });
         });
+
+        context('when the down arrow key is pressed (to open the menu)', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label').type('{downarrow}');
+          });
+
+          context('the listbox', () => {
+            it('should scroll so that the "San Francisco" option is fully visible', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should(assertOptionInView);
+            });
+          });
+        });
       });
 
       context('when "sa" is typed', () => {
@@ -356,7 +388,7 @@ describe('Select', () => {
         });
       });
 
-      context('when "d {500ms delay} d" is typed', () => {
+      context('when "d{500ms delay}d" is typed', () => {
         beforeEach(() => {
           // The delay for resetting the typeahead string is 500ms
           cy.findByLabelText('Label').type('dd', {delay: 500});
@@ -373,9 +405,57 @@ describe('Select', () => {
         });
       });
 
-      context('when the space key is pressed (to open the menu)', () => {
+      context('when the down arrow key is pressed (to open the menu)', () => {
         beforeEach(() => {
-          cy.findByLabelText('Label').type(' ');
+          cy.findByLabelText('Label').type('{downarrow}');
+        });
+
+        context('when "d" is typed', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .type('d');
+          });
+
+          context('the listbox', () => {
+            it('it should set accessible focus to the "Dallas" option', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should('have.text', 'Dallas');
+            });
+
+            it('should scroll so that the "Dallas" option is fully visible', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should(assertOptionInView);
+            });
+          });
+        });
+
+        context('when "d{500ms delay}s" is typed', () => {
+          beforeEach(() => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .type('ds', {delay: 500});
+          });
+
+          context('the listbox', () => {
+            it('it should set accessible focus to the "San Francisco" option', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should('have.text', 'San Francisco');
+            });
+
+            it('should scroll so that the "San Francisco" option is fully visible', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAccessibleFocus)
+                .should(assertOptionInView);
+            });
+          });
         });
 
         context('when "s" is typed', () => {
