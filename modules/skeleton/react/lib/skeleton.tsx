@@ -13,7 +13,7 @@ export interface SkeletonProps {
 
 const TRANSPARENCY_POSITION = 45;
 const WHITE_SHEEN_WIDTH = 10;
-const DURATION = 2;
+const DURATION = 5;
 
 const SkeletonAnimator = styled('div')<{diagonal: number; topPosition: number; width: number}>(
   ({diagonal, topPosition, width}) => {
