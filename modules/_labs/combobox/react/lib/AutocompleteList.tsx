@@ -79,7 +79,11 @@ const AutocompleteList = ({
           id: getOptionId(componentId, itemIndex),
           role: 'option',
           isFocused: selectedIndex === itemIndex,
-          'aria-selected': selectedIndex === itemIndex,
+          'aria-selected': selectedIndex === itemIndex ? true : undefined,
+          onMouseDown: (event: React.MouseEvent) => {
+            // prevent focus from shifting away from the the combobox
+            event.preventDefault();
+          },
           onClick: (event: React.MouseEvent) => {
             event.preventDefault();
             handleAutocompleteClick(event, listboxItem.props);
@@ -120,8 +124,10 @@ const AutocompleteList = ({
   } else {
     return (
       <Autocomplete {...listBoxProps}>
-        {(autocompleteItems as React.ReactElement<MenuItemProps>[]).map(
-          (listboxItem: React.ReactElement, index: number) => createListItem(listboxItem, index)
+        {(autocompleteItems as React.ReactElement<
+          MenuItemProps
+        >[]).map((listboxItem: React.ReactElement, index: number) =>
+          createListItem(listboxItem, index)
         )}
       </Autocomplete>
     );

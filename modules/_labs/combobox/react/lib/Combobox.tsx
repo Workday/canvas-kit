@@ -1,4 +1,4 @@
- qimport React, {useEffect, useRef, useState, useCallback} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
 import styled from '@emotion/styled';
 import {CSSObject, jsx, keyframes} from '@emotion/core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
@@ -133,7 +133,7 @@ export const getOptionId = (baseId?: string, index?: number) =>
 export const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
   React.Children.map(children, child => {
-    if (!child || typeof child === 'boolean' || child === {}) {
+    if (child == null || typeof child === 'boolean' || child === {}) {
       text += '';
     } else if (typeof child === 'string' || typeof child === 'number') {
       text += child.toString();
@@ -172,9 +172,9 @@ const Combobox = ({
   id,
   ...elemProps
 }: ComboboxProps) => {
-  const [isFocused, setIsFocused] = useState<boolean>();
+  const [isOpened, setIsOpened] = useState(false);
   const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
-  const [showingAutocomplete, setShowingAutocomplete] = useState<boolean>();
+  const [showingAutocomplete, setShowingAutocomplete] = useState(false);
   const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState<number | null>(null);
   const [interactiveAutocompleteItems, setInteractiveAutocompleteItems] = useState<
     React.ReactElement<MenuItemProps>[]
@@ -197,13 +197,15 @@ const Combobox = ({
 
   const [showGroupText, setShowGroupText] = useState(false);
 
-  useEffect(() => {
-    const shouldShow = interactiveAutocompleteItems.length > 0 && isFocused;
+  // We're using LayoutEffect here because of an issue with the Synthetic event system and typing a key
+  // after the listbox has been closed. Somehow the key is ignored unless we use `useLayoutEffect`
+  useLayoutEffect(() => {
+    const shouldShow = interactiveAutocompleteItems.length > 0 && isOpened;
     setShowingAutocomplete(shouldShow);
     if (shouldShow) {
-      setAnnouncementText(buildStatusString(interactiveAutocompleteItems.length));
+      setAnnouncementText(getStatusText(interactiveAutocompleteItems.length));
     }
-  }, [interactiveAutocompleteItems, isFocused, value]);
+  }, [getStatusText, interactiveAutocompleteItems, isOpened]);
 
   const setInputValue = useCallback(
     (newValue: string) => {
@@ -229,7 +231,7 @@ const Combobox = ({
         } else {
           // IE 11
           event = document.createEvent('Event');
-          event.initEvent('input', true);
+          event.initEvent('input', true, false);
         }
 
         inputDomElement.dispatchEvent(event);
@@ -266,7 +268,7 @@ const Combobox = ({
       return;
     }
     setShowingAutocomplete(false);
-    setIsFocused(false);
+    setIsOpened(false);
     setInputValue(getTextFromElement(menuItemProps.children));
     if (menuItemProps.onClick) {
       menuItemProps.onClick(event as React.MouseEvent);
@@ -279,8 +281,14 @@ const Combobox = ({
     }
   };
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!showingAutocomplete) {
+      setShowingAutocomplete(true);
+    }
+  };
+
   const handleFocus = (event: React.FocusEvent) => {
-    setIsFocused(true);
+    setIsOpened(true);
 
     if (onFocus) {
       onFocus(event);
@@ -299,7 +307,7 @@ const Combobox = ({
       }
     }
 
-    setIsFocused(false);
+    setIsOpened(false);
 
     if (onBlur) {
       onBlur(event);
@@ -337,6 +345,8 @@ const Combobox = ({
     const lastItem = autoCompleteItemCount - 1;
     let nextIndex = null;
 
+    setIsOpened(true);
+
     switch (event.key) {
       case 'ArrowUp':
       case 'Up': // IE/Edge specific value
@@ -368,7 +378,6 @@ const Combobox = ({
           if (item.props.isDisabled) {
             nextIndex = selectedAutocompleteIndex;
           }
-          setIsFocused(true);
           event.stopPropagation();
           event.preventDefault();
         }
@@ -407,14 +416,15 @@ const Combobox = ({
       'aria-activedescendant':
         selectedAutocompleteIndex !== null
           ? getOptionId(componentId, selectedAutocompleteIndex)
-          : '',
+          : undefined,
+      onClick: handleClick,
       onChange: handleSearchInputChange,
       onKeyDown: handleKeyboardShortcuts,
       onFocus: handleFocus,
       onBlur: handleBlur,
       css: cssOverride,
       role: 'combobox',
-      'aria-owns': `${componentId}-${listBoxIdPart}`,
+      'aria-owns': showingAutocomplete ? `${componentId}-${listBoxIdPart}` : undefined,
       'aria-haspopup': true,
       'aria-expanded': showingAutocomplete,
     };

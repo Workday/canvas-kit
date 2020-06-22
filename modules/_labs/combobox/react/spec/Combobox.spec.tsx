@@ -1,3 +1,5 @@
+/// <reference types="@testing-library/jest-dom/extend-expect" />
+
 import * as React from 'react';
 import Combobox, {ComboboxProps} from '../lib/Combobox';
 import {MenuItem} from '../../../menu/react';
@@ -22,116 +24,89 @@ describe('Combobox', () => {
     cb.mockReset();
   });
 
-  test('Autocomplete items should show when focused', async () => {
-    const menuText = 'test 1';
-    const autocompleteItems = [<MenuItem>{menuText}</MenuItem>, <MenuItem>{menuText}</MenuItem>];
-    const {queryByRole, findAllByText, findByPlaceholderText} = renderCombobox({
-      ...defaultProps,
-      autocompleteItems,
+  describe('props', () => {
+    it('should render children inputs', () => {
+      const screen = renderCombobox({
+        children: <TextInput data-testid="test" />,
+      });
+
+      expect(screen.getByTestId('test')).toBeInTheDocument();
     });
 
-    expect(await queryByRole('listbox')).toBeNull();
+    it('should pass initialValue to input', () => {
+      const screen = renderCombobox({
+        ...defaultProps,
+        initialValue: 'test',
+      });
 
-    fireEvent.focus(await findByPlaceholderText(placeholderText));
-    const menuItems = await findAllByText(menuText);
-
-    expect(await queryByRole('listbox')).toBeVisible();
-    expect(menuItems.length).toBe(2);
-  });
-
-  test('Selected autocomplete items should loop around using down arrow', async () => {
-    const id = 'my-id';
-    const {findByPlaceholderText} = renderCombobox({...defaultProps, id});
-
-    const input = await findByPlaceholderText(placeholderText);
-    const down = {keyCode: 40, key: 'ArrowDown'};
-
-    fireEvent.keyDown(input, down);
-    expect(input.getAttribute('aria-activedescendant')).toEqual(`${id}-option-0`);
-    fireEvent.keyDown(input, down);
-    expect(input.getAttribute('aria-activedescendant')).toEqual(`${id}-option-1`);
-    fireEvent.keyDown(input, down);
-    expect(input.getAttribute('aria-activedescendant')).toEqual(`${id}-option-0`);
-  });
-
-  test('Selected autocomplete items should loop around using up arrow', async () => {
-    const id = 'my-id';
-    const {findByPlaceholderText} = renderCombobox({...defaultProps, id});
-
-    const input = await findByPlaceholderText(placeholderText);
-    const up = {keyCode: 38, key: 'ArrowUp'};
-
-    fireEvent.keyDown(input, up);
-    expect(input.getAttribute('aria-activedescendant')).toEqual(`${id}-option-1`);
-    fireEvent.keyDown(input, up);
-    expect(input.getAttribute('aria-activedescendant')).toEqual(`${id}-option-0`);
-  });
-
-  test('Combobox selected item should reset after typing more', async () => {
-    const id = 'my-id';
-    const {findByPlaceholderText} = renderCombobox({...defaultProps, id});
-
-    const input = await findByPlaceholderText(placeholderText);
-    const down = {keyCode: 40, key: 'ArrowDown'};
-    const bKey = {keyCode: 66, key: 'b'};
-
-    expect(input.getAttribute('aria-activedescendant')).toEqual('');
-    fireEvent.keyDown(input, down);
-    expect(input.getAttribute('aria-activedescendant')).toEqual(`${id}-option-0`);
-    fireEvent.keyDown(input, bKey);
-    expect(input.getAttribute('aria-activedescendant')).toEqual('');
-  });
-
-  test('Escape key should clear value', async () => {
-    const newText = 'new text';
-    const {findByPlaceholderText} = renderCombobox(defaultProps);
-
-    const input = await findByPlaceholderText(placeholderText);
-    const escape = {keyCode: 27, key: 'Escape'};
-
-    fireEvent.change(input, {target: {value: newText}});
-    expect(input).toHaveValue(newText);
-    fireEvent.keyDown(input, escape);
-    expect(input).toHaveValue('');
-    expect(input).toHaveFocus();
-  });
-
-  test('Clear button should clear value', async () => {
-    const clearLabel = 'clearLabel';
-    const text = 'initial text';
-    const {findByPlaceholderText, findByLabelText} = renderCombobox({
-      ...defaultProps,
-      showClearButton: true,
-      clearButtonAriaLabel: clearLabel,
-      initialValue: text,
+      expect(screen.getByRole('combobox')).toHaveValue('test');
     });
 
-    const input = await findByPlaceholderText(placeholderText);
+    it('should render a clear icon when `showClearButton` is `true`', () => {
+      const screen = renderCombobox({
+        ...defaultProps,
+        showClearButton: true,
+      });
 
-    expect(input).toHaveValue(text);
-    fireEvent.click(await findByLabelText(clearLabel));
-    expect(input).toHaveValue('');
-    expect(input).toHaveFocus();
+      expect(screen.getByLabelText('Reset Search Input')).toBeInTheDocument();
+    });
+
+    it('should not render a clear icon when `showClearButton` is `false`', () => {
+      const screen = renderCombobox({
+        ...defaultProps,
+        showClearButton: false,
+      });
+
+      expect(screen.queryByLabelText('Reset Search Input')).toBeNull();
+    });
+
+    it('should not render a clear icon when `showClearButton` is not provided', () => {
+      const screen = renderCombobox({
+        ...defaultProps,
+      });
+
+      expect(screen.queryByLabelText('Reset Search Input')).toBeNull();
+    });
+
+    it('should change the clear button label when `clearButtonAriaLabel` is provided', () => {
+      const screen = renderCombobox({
+        ...defaultProps,
+        showClearButton: true,
+        clearButtonAriaLabel: 'My Label',
+      });
+
+      expect(screen.getByLabelText('My Label')).toBeInTheDocument();
+    });
+
+    it('should render correct status text', () => {
+      const screen = renderCombobox({
+        ...defaultProps,
+        autocompleteItems: [<MenuItem />, <MenuItem />],
+        getStatusText(listCount: number) {
+          return `Item count: ${listCount}`;
+        },
+      });
+      fireEvent.focus(screen.getByRole('combobox'));
+
+      expect(screen.getByRole('log')).toHaveTextContent('Item count: 2');
+    });
   });
 
   test('Call callback function when enter is pressed', async () => {
     const menuText = 'menuText';
     const autocompleteItems = [<MenuItem onClick={cb}>{menuText}</MenuItem>];
-    const {findByPlaceholderText, queryByRole} = renderCombobox({
+    const {findByRole} = renderCombobox({
       ...defaultProps,
       autocompleteItems,
     });
 
-    const input = await findByPlaceholderText(placeholderText);
+    const input = await findByRole('combobox');
     const down = {keyCode: 40, key: 'ArrowDown'};
     const enter = {keyCode: 13, key: 'Enter'};
 
     fireEvent.keyDown(input, down);
     fireEvent.keyDown(input, enter);
 
-    expect(input).toHaveValue(menuText);
-    expect(await queryByRole('listbox')).not.toBeNull();
-    expect(input.getAttribute('aria-activedescendant')).toEqual('');
     expect(cb.mock.calls.length).toBe(1);
   });
 
@@ -142,18 +117,15 @@ describe('Combobox', () => {
         <span>{menuText}</span>
       </MenuItem>,
     ];
-    const {findByPlaceholderText, queryByRole, findByText} = renderCombobox({
+    const {findByRole, findByText} = renderCombobox({
       ...defaultProps,
       autocompleteItems,
     });
-    const input = await findByPlaceholderText(placeholderText);
+    const input = await findByRole('combobox');
 
     fireEvent.focus(input);
     fireEvent.click(await findByText(menuText));
 
-    expect(input).toHaveValue(menuText);
-    expect(await queryByRole('listbox')).toBeNull();
-    expect(input.getAttribute('aria-activedescendant')).toEqual('');
     expect(cb.mock.calls.length).toBe(1);
   });
 
@@ -165,13 +137,13 @@ describe('Combobox', () => {
         {menuText}
       </MenuItem>,
     ];
-    const {findByPlaceholderText, findByRole} = renderCombobox({
+    const {findByRole} = renderCombobox({
       ...defaultProps,
       autocompleteItems,
       id,
     });
 
-    const input = await findByPlaceholderText(placeholderText);
+    const input = await findByRole('combobox');
     const down = {keyCode: 40, key: 'ArrowDown'};
     const enter = {keyCode: 13, key: 'Enter'};
 
@@ -179,9 +151,6 @@ describe('Combobox', () => {
     fireEvent.keyDown(input, down);
     fireEvent.keyDown(input, enter);
 
-    expect(input).toHaveValue('');
-    expect(await findByRole('listbox')).toBeVisible();
-    expect(input.getAttribute('aria-activedescendant')).toEqual(`${id}-option-0`);
     expect(cb.mock.calls.length).toBe(0);
   });
 
@@ -189,13 +158,13 @@ describe('Combobox', () => {
     const menuText = 'menuText';
     const id = 'my-id';
     const autocompleteItems = [<MenuItem onClick={cb}>{menuText}</MenuItem>];
-    const {findByPlaceholderText, findByRole} = renderCombobox({
+    const {findByRole} = renderCombobox({
       ...defaultProps,
       autocompleteItems,
       id,
     });
 
-    const input = await findByPlaceholderText(placeholderText);
+    const input = await findByRole('combobox');
     const down = {keyCode: 40, key: 'ArrowDown'};
     const metaEnter = {keyCode: 13, key: 'Enter', metaKey: true};
 
@@ -203,43 +172,40 @@ describe('Combobox', () => {
     fireEvent.keyDown(input, down);
     fireEvent.keyDown(input, metaEnter);
 
-    expect(input).toHaveValue('');
-    expect(await findByRole('listbox')).toBeVisible();
-    expect(input.getAttribute('aria-activedescendant')).toEqual(`${id}-option-0`);
     expect(cb.mock.calls.length).toBe(0);
   });
 
   test('Call change function when input value changes', async () => {
     const newText = 'text';
-    const {findByPlaceholderText} = renderCombobox({
+    const {findByRole} = renderCombobox({
       ...defaultProps,
       onChange: cb,
     });
 
-    const input = await findByPlaceholderText(placeholderText);
+    const input = await findByRole('combobox');
 
     fireEvent.change(input, {target: {value: newText}});
     expect(cb.mock.calls.length).toBe(1);
   });
 
   test('Call focus function when input is focused', async () => {
-    const {findByPlaceholderText} = renderCombobox({
+    const {findByRole} = renderCombobox({
       ...defaultProps,
       onFocus: cb,
     });
 
-    const input = await findByPlaceholderText(placeholderText);
+    const input = await findByRole('combobox');
 
     fireEvent.focus(input);
     expect(cb.mock.calls.length).toBe(1);
   });
 
   test('Call blur function when input is blurred', async () => {
-    const {findByPlaceholderText} = renderCombobox({
+    const {findByRole} = renderCombobox({
       ...defaultProps,
       onBlur: cb,
     });
-    const input = await findByPlaceholderText(placeholderText);
+    const input = await findByRole('combobox');
 
     fireEvent.blur(input);
     expect(cb.mock.calls.length).toBe(1);
@@ -252,13 +218,13 @@ describe('Combobox', () => {
         {menuText}
       </MenuItem>,
     ];
-    const {findByPlaceholderText, findByText} = renderCombobox({
+    const {findByRole, findByText} = renderCombobox({
       ...defaultProps,
       onBlur: cb,
       autocompleteItems,
     });
 
-    const input = await findByPlaceholderText(placeholderText);
+    const input = await findByRole('combobox');
 
     fireEvent.focus(input);
     fireEvent.click(await findByText(menuText));
@@ -266,103 +232,14 @@ describe('Combobox', () => {
     expect(cb.mock.calls.length).toBe(0);
   });
 
-  test('Status should change when autocomplete items do', async () => {
-    const autocompleteItems = [<MenuItem />];
-    const {findByPlaceholderText, findByRole} = renderCombobox({
-      ...defaultProps,
-      onChange: cb,
-      autocompleteItems,
-    });
-
-    const input = await findByPlaceholderText(placeholderText);
-    const status = await findByRole('log');
-
-    fireEvent.focus(input);
-    expect(status).toHaveTextContent('There is 1 suggestion.');
-  });
-
   test('Combobox should spread extra props', async () => {
     const data = 'test';
     const {container} = render(
-      <Combobox data-propSpread={data}>
+      <Combobox data-prop-spread={data}>
         <TextInput />
       </Combobox>
     );
 
-    expect(container.firstChild).toHaveAttribute('data-propSpread', data);
-  });
-
-  test('Groups headers should be non intractable ', async () => {
-    const groupName = 'My Group';
-    const autocompleteItems = [{header: <MenuItem>{groupName}</MenuItem>, items: [<MenuItem />]}];
-    const {findByRole, findByPlaceholderText} = renderCombobox({
-      ...defaultProps,
-      autocompleteItems,
-    });
-
-    const input = await findByPlaceholderText(placeholderText);
-
-    fireEvent.focus(input);
-
-    const header = await findByRole('presentation');
-    expect(header).toHaveTextContent(groupName);
-  });
-
-  test('Entering a group from above should add group announcement text', async () => {
-    const groupName = 'My Group';
-    const autocompleteItems = [
-      {
-        header: <MenuItem>{groupName}</MenuItem>,
-        items: [<MenuItem />, <MenuItem />],
-      },
-    ];
-    const accessibleGroupText = `Entering group ${groupName}, with ${autocompleteItems[0].items.length} options.`;
-
-    const {queryAllByText, findByPlaceholderText} = renderCombobox({
-      ...defaultProps,
-      autocompleteItems,
-    });
-
-    const input = await findByPlaceholderText(placeholderText);
-    const down = {keyCode: 40, key: 'ArrowDown'};
-
-    fireEvent.focus(input);
-
-    fireEvent.keyDown(input, down);
-    let accessibleText = await queryAllByText(accessibleGroupText);
-    expect(accessibleText[0]).toBeVisible();
-
-    fireEvent.keyDown(input, down);
-    accessibleText = await queryAllByText(accessibleGroupText);
-    expect(accessibleText[0]).toBeUndefined();
-  });
-
-  test('Entering a group from below should add group announcement text', async () => {
-    const groupName = 'My Group';
-    const autocompleteItems = [
-      {
-        header: <MenuItem>{groupName}</MenuItem>,
-        items: [<MenuItem />, <MenuItem />],
-      },
-    ];
-    const accessibleGroupText = `Entering group ${groupName}, with ${autocompleteItems[0].items.length} options.`;
-
-    const {queryAllByText, findByPlaceholderText} = renderCombobox({
-      ...defaultProps,
-      autocompleteItems,
-    });
-
-    const input = await findByPlaceholderText(placeholderText);
-    const up = {keyCode: 38, key: 'ArrowUp'};
-
-    fireEvent.focus(input);
-
-    fireEvent.keyDown(input, up);
-    let accessibleText = await queryAllByText(accessibleGroupText);
-    expect(accessibleText[0]).toBeVisible();
-
-    fireEvent.keyDown(input, up);
-    accessibleText = await queryAllByText(accessibleGroupText);
-    expect(accessibleText[0]).toBeUndefined();
+    expect(container.firstChild).toHaveAttribute('data-prop-spread', data);
   });
 });

@@ -11,8 +11,11 @@ import {MenuItem, MenuItemProps} from '../../../menu/react';
 import {TextInput} from '../../../../text-input/react';
 import README from '../README.md';
 
-const autocompleteResult = (textModifier: number): ReactElement<MenuItemProps> => (
-  <MenuItem onClick={action(`Clicked Result ${textModifier}`)}>
+const autocompleteResult = (
+  textModifier: number,
+  isDisabled: boolean
+): ReactElement<MenuItemProps> => (
+  <MenuItem isDisabled={isDisabled}>
     Result{' '}
     <span>
       num<span>ber</span>
@@ -21,13 +24,14 @@ const autocompleteResult = (textModifier: number): ReactElement<MenuItemProps> =
   </MenuItem>
 );
 
-const simpleAutoComplete = (count: number, total = 5) =>
+const simpleAutoComplete = (count: number, showDisabledItems, total = 5) =>
   Array.apply(null, Array(count))
-    .map((_: ReactElement, i: number) => autocompleteResult(i))
+    .map((_: ReactElement, i: number) => autocompleteResult(i, showDisabledItems && i === 0))
     .splice(0, total);
 
 const groupOfResults = (
   count: number,
+  showDisabledItems: boolean,
   groupHeading: ReactNode = 'Group'
 ): ComboBoxMenuItemGroup => ({
   header: (
@@ -35,14 +39,13 @@ const groupOfResults = (
       <strong>{groupHeading}</strong>
     </MenuItem>
   ),
-  items: simpleAutoComplete(count, 3),
+  items: simpleAutoComplete(count, showDisabledItems, 3),
 });
 
-const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {group?: boolean}> = ({
-  showClearButton,
-  group,
-  ...props
-}) => {
+export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
+  group?: boolean;
+  showDisabledItems?: boolean;
+}> = ({showClearButton, group, showDisabledItems = false, ...props}) => {
   const [currentText, setCurrentText] = useState('');
 
   const autocompleteCallback = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -57,10 +60,10 @@ const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {group?: boolean}> = ({
       autocompleteItems={
         group
           ? [
-              groupOfResults(groupLength, <em>Animals</em>),
-              groupOfResults(Math.min(1, groupLength), 'Cars'),
+              groupOfResults(groupLength, showDisabledItems, <em>Animals</em>),
+              groupOfResults(Math.min(1, groupLength), showDisabledItems, 'Cars'),
             ]
-          : simpleAutoComplete(textLength)
+          : simpleAutoComplete(textLength, showDisabledItems)
       }
       onChange={autocompleteCallback}
       showClearButton={showClearButton == null ? true : showClearButton}
@@ -70,7 +73,7 @@ const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {group?: boolean}> = ({
       initialValue="Test"
       {...props}
     >
-      <TextInput autoFocus placeholder="Autocomplete" />
+      <TextInput placeholder="Autocomplete" />
     </Combobox>
   );
 };
@@ -97,5 +100,10 @@ storiesOf('Labs|Combobox/React', module)
   .add('Group of results', () => (
     <FormField id="autocomplete-123" label="Group of results">
       <Autocomplete group={true} />
+    </FormField>
+  ))
+  .add('Disabled item', () => (
+    <FormField id="autocomplete-123" label="Group of results">
+      <Autocomplete showDisabledItems={true} />
     </FormField>
   ));
