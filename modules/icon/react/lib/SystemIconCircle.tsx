@@ -69,7 +69,7 @@ export default class SystemIconCircle extends React.Component<SystemIconCirclePr
       ...elemProps
     } = this.props;
 
-    const iconColor = pickForegroundColor(background, 'rgba(0,0,0,0.65)');
+    const iconColor = pickForegroundColor(background, 'rgba(0,0,0,0.65)', colors.frenchVanilla100);
     const iconSize = size * 0.625;
 
     return (
