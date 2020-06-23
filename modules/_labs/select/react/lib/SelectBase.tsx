@@ -293,17 +293,25 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   };
 
   componentDidUpdate(prevProps: SelectBaseProps) {
-    const {focusedOptionIndex, isMenuHidden} = this.props;
+    const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.props;
 
     // If the menu was just displayed, scroll the focused option into
     // center view
     if (!isMenuHidden && prevProps.isMenuHidden) {
-      this.scrollFocusedOptionIntoView(true);
+      // Delay by a frame to ensure proper measurements of DOM elements for
+      // scrolling purposes
+      requestAnimationFrame(() => {
+        this.scrollFocusedOptionIntoView(true);
+      });
 
       // Otherwise, if the menu is displayed AND the focused option changed
       // since the last render, scroll the focused option into view, but
       // do NOT center it
-    } else if (!isMenuHidden && focusedOptionIndex !== prevProps.focusedOptionIndex) {
+    } else if (
+      !isMenuHidden &&
+      !isMenuHiding &&
+      focusedOptionIndex !== prevProps.focusedOptionIndex
+    ) {
       this.scrollFocusedOptionIntoView(false);
     }
   }
