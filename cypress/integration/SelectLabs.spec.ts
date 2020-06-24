@@ -301,8 +301,8 @@ describe('Select', () => {
         });
 
         context('the select button', () => {
-          it('should read "San Francisco"', () => {
-            cy.findByLabelText('Label').should('have.text', 'San Francisco');
+          it('should read "San Francisco (United States)"', () => {
+            cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
           });
 
           it(`should have a value of "san-francisco"`, () => {
@@ -316,7 +316,7 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('should scroll so that the "San Francisco" option is fully visible', () => {
+            it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
@@ -332,8 +332,8 @@ describe('Select', () => {
         });
 
         context('the select button', () => {
-          it('should read "San Francisco"', () => {
-            cy.findByLabelText('Label').should('have.text', 'San Francisco');
+          it('should read "San Francisco (United States)"', () => {
+            cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
           });
 
           it(`should have a value of "san-francisco"`, () => {
@@ -348,8 +348,8 @@ describe('Select', () => {
         });
 
         context('the select button', () => {
-          it('should read "San Francisco"', () => {
-            cy.findByLabelText('Label').should('have.text', 'San Francisco');
+          it('should read "San Francisco (United States)"', () => {
+            cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
           });
 
           it(`should have a value of "san-francisco"`, () => {
@@ -378,8 +378,8 @@ describe('Select', () => {
         });
 
         context('the select button', () => {
-          it('should read "San Mateo"', () => {
-            cy.findByLabelText('Label').should('have.text', 'San Mateo');
+          it('should read "San Mateo (United States)"', () => {
+            cy.findByLabelText('Label').should('have.text', 'San Mateo (United States)');
           });
 
           it(`should have a value of "san-mateo"`, () => {
@@ -395,8 +395,8 @@ describe('Select', () => {
         });
 
         context('the select button', () => {
-          it('should read "Denver"', () => {
-            cy.findByLabelText('Label').should('have.text', 'Denver');
+          it('should read "Denver (United States)"', () => {
+            cy.findByLabelText('Label').should('have.text', 'Denver (United States)');
           });
 
           it(`should have a value of "denver"`, () => {
@@ -418,14 +418,14 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('it should set accessible focus to the "Dallas" option', () => {
+            it('it should set accessible focus to the "Dallas (United States)" option', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
-                .should('have.text', 'Dallas');
+                .should('have.text', 'Dallas (United States)');
             });
 
-            it('should scroll so that the "Dallas" option is fully visible', () => {
+            it('should scroll so that the "Dallas (United States)" option is fully visible', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
@@ -442,14 +442,14 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('it should set accessible focus to the "San Francisco" option', () => {
+            it('it should set accessible focus to the "San Francisco (United States)" option', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
-                .should('have.text', 'San Francisco');
+                .should('have.text', 'San Francisco (United States)');
             });
 
-            it('should scroll so that the "San Francisco" option is fully visible', () => {
+            it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
@@ -466,14 +466,14 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('it should set accessible focus to the "Beaverton" option', () => {
+            it('it should set accessible focus to the "Beaverton (United States)" option', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
-                .should('have.text', 'Beaverton');
+                .should('have.text', 'Beaverton (United States)');
             });
 
-            it('should scroll so that the "Beaverton" option is fully visible', () => {
+            it('should scroll so that the "Beaverton (United States)" option is fully visible', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
@@ -490,11 +490,11 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('it should set accessible focus to the "San Francisco" option', () => {
+            it('it should set accessible focus to the "San Francisco (United States)" option', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
-                .should('have.text', 'San Francisco');
+                .should('have.text', 'San Francisco (United States)');
             });
           });
         });
@@ -507,11 +507,11 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('it should set accessible focus to the "San Francisco" option', () => {
+            it('it should set accessible focus to the "San Francisco (United States)" option', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
-                .should('have.text', 'San Francisco');
+                .should('have.text', 'San Francisco (United States)');
             });
           });
         });
@@ -524,11 +524,11 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('it should set accessible focus to the "San Francisco" option', () => {
+            it('it should set accessible focus to the "San Francisco (United States)" option', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
-                .should('have.text', 'San Francisco');
+                .should('have.text', 'San Francisco (United States)');
             });
           });
         });
@@ -541,11 +541,11 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('it should set accessible focus to the "San Mateo" option', () => {
+            it('it should set accessible focus to the "San Mateo (United States)" option', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
-                .should('have.text', 'San Mateo');
+                .should('have.text', 'San Mateo (United States)');
             });
           });
         });
