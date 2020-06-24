@@ -298,8 +298,10 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     // If the menu was just displayed, scroll the focused option into
     // center view
     if (!isMenuHidden && prevProps.isMenuHidden) {
-      // Delay by a frame to ensure proper measurements of DOM elements for
-      // scrolling purposes
+      // Delay scrolling by a frame to ensure proper measurements of DOM elements
+      // so we know how far to scroll. Without this delay, sometimes measurements
+      // are correct and sometimes they aren't (may be related to the number of
+      // options and/or the length of their labels) -- add the delay to be safe.
       requestAnimationFrame(() => {
         this.scrollFocusedOptionIntoView(true);
       });
