@@ -9,25 +9,42 @@ export const expandHex = (hex: string) => {
   });
 };
 
+// Used to as a fallback to determine foreground color
+const colorPriority = [
+  colors.frenchVanilla100,
+  colors.blackPepper300,
+  colors.blackPepper400,
+  colors.blackPepper500,
+  colors.blackPepper600,
+];
+
 /**
  *
  * Chooses foreground color with accesible contrast against background. If contrast ratio
- * is greater than 4.5:1, chooses light color. Otherwise, chooses light or dark based on
- * which highest contrast against background.
+ * is greater than 4.5:1, chooses provided light or dark color (favoring light color). If neither
+ * have a high enough contrast ratio, picks the first color of the following that meets 4.5:1 or higher:
+ * [frenchVanilla100, blackPepper300, blackPepper400, blackPepper500, blackPepper600]
  * (https://www.w3.org/TR/WCAG20-TECHS/G18.html)
  */
 export const pickForegroundColor = (
   background: string,
-  darkColor: string = colors.blackPepper600,
-  lightColor: string = colors.frenchVanilla100
+  darkColor?: string,
+  lightColor?: string
 ) => {
   if (chroma.valid(background)) {
-    return chroma.contrast(background, lightColor) >= 4.5
-      ? lightColor
-      : chroma.contrast(background, darkColor) >= chroma.contrast(background, lightColor)
-      ? darkColor
-      : lightColor;
-  } else {
-    return;
+    if (lightColor && chroma.contrast(background, lightColor) >= 4.5) {
+      return lightColor;
+    } else if (darkColor && chroma.contrast(background, darkColor) >= 4.5) {
+      return darkColor;
+    } else {
+      for (let i = 0; i < colorPriority.length; i++) {
+        const color = colorPriority[i];
+
+        if (chroma.contrast(background, color) >= 4.5) {
+          return color;
+        }
+      }
+    }
   }
+  return;
 };
