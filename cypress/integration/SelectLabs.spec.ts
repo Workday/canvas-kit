@@ -7,10 +7,10 @@ function getAccessibleFocus($menu: JQuery): JQuery {
 
 function assertOptionInView($option: JQuery) {
   const option = $option[0];
-  const menu = $option.parent()[0];
+  const $menu = $option.parent();
+  const menu = $menu[0];
 
-  const menuComputedStyle = window.getComputedStyle(menu, null);
-  const menuBorderTopWidth = parseInt(menuComputedStyle.getPropertyValue('border-top-width'), 10);
+  const menuBorderTopWidth = parseInt($menu.css('borderTopWidth'), 10);
 
   const menuViewTop = menu.scrollTop + menuBorderTopWidth;
   const menuViewBottom = menuViewTop + menu.clientHeight;
@@ -20,6 +20,20 @@ function assertOptionInView($option: JQuery) {
   const optionInView = optionTop >= menuViewTop && optionBottom <= menuViewBottom;
 
   expect(optionInView).to.equal(true);
+}
+
+function assertOptionCenteredInView($option: JQuery) {
+  const option = $option[0];
+  const $menu = $option.parent();
+  const menu = $menu[0];
+
+  const menuBorderTopWidth = parseInt($menu.css('borderTopWidth'), 10);
+
+  const expectedMenuScrollTop = Math.floor(
+    option.offsetTop - menu.clientHeight / 2 - menuBorderTopWidth + option.clientHeight / 2
+  );
+
+  expect(menu.scrollTop).to.equal(expectedMenuScrollTop);
 }
 
 describe('Select', () => {
@@ -316,11 +330,11 @@ describe('Select', () => {
           });
 
           context('the listbox', () => {
-            it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
+            it('should scroll so that the "San Francisco (United States)" option is centered in view', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
-                .should(assertOptionInView);
+                .should(assertOptionCenteredInView);
             });
           });
         });

@@ -18,8 +18,9 @@ export const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true)
       parent.scrollTop + parentBorderTopWidth + parent.clientHeight;
 
     if ((overTop || overBottom) && centerIfNeeded) {
-      parent.scrollTop =
-        elem.offsetTop - parent.clientHeight / 2 - parentBorderTopWidth + elem.clientHeight / 2;
+      parent.scrollTop = Math.floor(
+        elem.offsetTop - parent.clientHeight / 2 - parentBorderTopWidth + elem.clientHeight / 2
+      );
     }
 
     if ((overTop || overBottom) && !centerIfNeeded) {
