@@ -309,28 +309,265 @@ describe('Select', () => {
         cy.findByLabelText('Label').focus();
       });
 
-      context('when "s" is typed', () => {
-        beforeEach(() => {
-          cy.findByLabelText('Label').type('s');
-        });
+      context(
+        'when a character is typed (provided no other characters have been typed in the last 500ms), the select should select the first matching option beyond the currently selected option (cycling back to the beginning of the options if necessary)',
+        () => {
+          context('when "s" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label').type('s');
+            });
 
-        context('the select button', () => {
-          it('should read "San Francisco (United States)"', () => {
-            cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
+            context('the select button', () => {
+              it('should read the first option beginning with "s" ("San Francisco (United States)")', () => {
+                cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
+              });
+
+              it(`should have a value of "san-francisco"`, () => {
+                cy.findByLabelText('Label').should('have.value', 'san-francisco');
+              });
+            });
           });
 
-          it(`should have a value of "san-francisco"`, () => {
-            cy.findByLabelText('Label').should('have.value', 'san-francisco');
-          });
-        });
+          context('when "s{500ms delay}s" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label').type('ss', {delay: 500});
+            });
 
-        context('when the down arrow key is pressed (to open the menu)', () => {
+            context('the select button', () => {
+              it('should read the second option beginning with "s" ("San Mateo (United States)")', () => {
+                cy.findByLabelText('Label').should('have.text', 'San Mateo (United States)');
+              });
+            });
+          });
+
+          context('when "s{500ms delay}d" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label').type('sd', {delay: 500});
+            });
+
+            context('the select button', () => {
+              it('should read the first option beginning with "d" ("Dallas (United States)")', () => {
+                cy.findByLabelText('Label').should('have.text', 'Dallas (United States)');
+              });
+            });
+          });
+        }
+      );
+
+      context(
+        'when multiple characters are typed in rapid succession (<500ms between keystrokes), thus forming a string, and multiple options begin with that string, the select should retain the currently selected option for as long as possible (instead of cycling selection between matching options with each keystroke)',
+        () => {
+          context('when "sa" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label').type('sa');
+            });
+
+            context('the select button', () => {
+              it('should read "San Francisco (United States)"', () => {
+                cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
+              });
+            });
+          });
+
+          context('when "san " is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label').type('san ');
+            });
+
+            context('the select button', () => {
+              it('should read "San Francisco (United States)"', () => {
+                cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
+              });
+            });
+          });
+
+          context('when "san m" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label').type('san m');
+            });
+
+            context('the select button', () => {
+              it('should read "San Mateo (United States)"', () => {
+                cy.findByLabelText('Label').should('have.text', 'San Mateo (United States)');
+              });
+            });
+          });
+        }
+      );
+
+      // TODO: Figure out why this test doesn't trigger the menu on the
+      // space key when using Firefox with Cypress (pressing the space key
+      // in the middle of a typeahead string in normal usage of Firefox
+      // triggers the menu, see SelectBase)
+      // Ensure Firefox doesn't display the menu if there's a space in the
+      // typeahead string
+      // context('when "san " is typed', () => {
+      //   beforeEach(() => {
+      //     cy.findByLabelText('Label').type('san ');
+      //   });
+
+      //   context('the listbox', () => {
+      //     it('should not be visible', () => {
+      //       cy.findByLabelText('Label')
+      //         .pipe(h.selectLabs.getMenu)
+      //         .should('not.be.visible');
+      //     });
+      //   });
+      // });
+    });
+
+    context('when the listbox is opened', () => {
+      beforeEach(() => {
+        cy.findByLabelText('Label').click();
+      });
+
+      context(
+        'when a character is typed (provided no other characters have been typed in the last 500ms), the select should advance assistive focus to the first matching option beyond the currently selected option (cycling back to the beginning of the options if necessary) and scroll that option into view',
+        () => {
+          context('when "s" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type('s');
+            });
+
+            context('the listbox', () => {
+              it('should set accessible focus to the first option beginning with "s" ("San Francisco (United States)")', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'San Francisco (United States)');
+              });
+
+              it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should(assertOptionInView);
+              });
+            });
+          });
+
+          context('when "s{500ms delay}s" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type('ss', {delay: 500});
+            });
+
+            context('the listbox', () => {
+              it('should set accessible focus to the second option beginning with "s" ("San Mateo (United States)")', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'San Mateo (United States)');
+              });
+
+              it('should scroll so that the "San Mateo (United States)" option is fully visible', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should(assertOptionInView);
+              });
+            });
+          });
+
+          context('when "s{500ms delay}d" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type('sd', {delay: 500});
+            });
+
+            context('the listbox', () => {
+              it('should set accessible focus to the first option beginning with "d" ("Dallas (United States)")', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'Dallas (United States)');
+              });
+
+              it('should scroll so that the "Dallas (United States)" option is fully visible', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should(assertOptionInView);
+              });
+            });
+          });
+        }
+      );
+
+      context(
+        'when multiple characters are typed in rapid succession (<500ms between keystrokes), thus forming a string, and multiple options begin with that string, the select should retain assistive focus on the currently focused option for as long as possible (instead of cycling focus between matching options with each keystroke)',
+        () => {
+          context('when "sa" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type('sa');
+            });
+
+            context('the listbox', () => {
+              it('should set accessible focus to the "San Francisco (United States)" option', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'San Francisco (United States)');
+              });
+            });
+          });
+
+          context('when "san " is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type('san ');
+            });
+
+            context('the listbox', () => {
+              it('should set accessible focus to the "San Francisco (United States)" option', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'San Francisco (United States)');
+              });
+            });
+          });
+
+          context('when "san m" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type('san m');
+            });
+
+            context('the listbox', () => {
+              it('should set accessible focus to the "San Mateo (United States)" option', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'San Mateo (United States)');
+              });
+            });
+          });
+        }
+      );
+    });
+
+    context(
+      'when the listbox is opened and the selected option is initially out of view, the listbox should scroll the selected option into view and center it if possible',
+      () => {
+        context('when "Dallas (United States)" is selected and the listbox is opened', () => {
           beforeEach(() => {
-            cy.findByLabelText('Label').type('{downarrow}');
+            cy.findByLabelText('Label')
+              .focus()
+              .type('d')
+              .click();
           });
 
           context('the listbox', () => {
-            it('should scroll so that the "San Francisco (United States)" option is centered in view', () => {
+            it('should scroll so that the "Dallas (United States)" option is centered in view', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
                 .pipe(getAccessibleFocus)
@@ -338,232 +575,7 @@ describe('Select', () => {
             });
           });
         });
-      });
-
-      context('when "sa" is typed', () => {
-        beforeEach(() => {
-          cy.findByLabelText('Label').type('sa');
-        });
-
-        context('the select button', () => {
-          it('should read "San Francisco (United States)"', () => {
-            cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
-          });
-
-          it(`should have a value of "san-francisco"`, () => {
-            cy.findByLabelText('Label').should('have.value', 'san-francisco');
-          });
-        });
-      });
-
-      context('when "san " is typed', () => {
-        beforeEach(() => {
-          cy.findByLabelText('Label').type('san ');
-        });
-
-        context('the select button', () => {
-          it('should read "San Francisco (United States)"', () => {
-            cy.findByLabelText('Label').should('have.text', 'San Francisco (United States)');
-          });
-
-          it(`should have a value of "san-francisco"`, () => {
-            cy.findByLabelText('Label').should('have.value', 'san-francisco');
-          });
-        });
-
-        // TODO: Figure out why this test doesn't trigger the menu on the
-        // space key when using Firefox with Cypress (pressing the space key
-        // in the middle of a typeahead string in normal usage of Firefox
-        // triggers the menu, see SelectBase)
-        // Ensure Firefox doesn't display the menu if there's a space in the
-        // typeahead string
-        // context('the listbox', () => {
-        //   it('should not be visible', () => {
-        //     cy.findByLabelText('Label')
-        //       .pipe(h.selectLabs.getMenu)
-        //       .should('not.be.visible');
-        //   });
-        // });
-      });
-
-      context('when "san m" is typed', () => {
-        beforeEach(() => {
-          cy.findByLabelText('Label').type('san m');
-        });
-
-        context('the select button', () => {
-          it('should read "San Mateo (United States)"', () => {
-            cy.findByLabelText('Label').should('have.text', 'San Mateo (United States)');
-          });
-
-          it(`should have a value of "san-mateo"`, () => {
-            cy.findByLabelText('Label').should('have.value', 'san-mateo');
-          });
-        });
-      });
-
-      context('when "d{500ms delay}d" is typed', () => {
-        beforeEach(() => {
-          // The delay for resetting the typeahead string is 500ms
-          cy.findByLabelText('Label').type('dd', {delay: 500});
-        });
-
-        context('the select button', () => {
-          it('should read "Denver (United States)"', () => {
-            cy.findByLabelText('Label').should('have.text', 'Denver (United States)');
-          });
-
-          it(`should have a value of "denver"`, () => {
-            cy.findByLabelText('Label').should('have.value', 'denver');
-          });
-        });
-      });
-
-      context('when the down arrow key is pressed (to open the menu)', () => {
-        beforeEach(() => {
-          cy.findByLabelText('Label').type('{downarrow}');
-        });
-
-        context('when "d" is typed', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
-              .type('d');
-          });
-
-          context('the listbox', () => {
-            it('it should set accessible focus to the "Dallas (United States)" option', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should('have.text', 'Dallas (United States)');
-            });
-
-            it('should scroll so that the "Dallas (United States)" option is fully visible', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should(assertOptionInView);
-            });
-          });
-        });
-
-        context('when "d{500ms delay}s" is typed', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
-              .type('ds', {delay: 500});
-          });
-
-          context('the listbox', () => {
-            it('it should set accessible focus to the "San Francisco (United States)" option', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should('have.text', 'San Francisco (United States)');
-            });
-
-            it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should(assertOptionInView);
-            });
-          });
-        });
-
-        context('when "s{500ms delay}b" is typed', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
-              .type('sb', {delay: 500});
-          });
-
-          context('the listbox', () => {
-            it('it should set accessible focus to the "Beaverton (United States)" option', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should('have.text', 'Beaverton (United States)');
-            });
-
-            it('should scroll so that the "Beaverton (United States)" option is fully visible', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should(assertOptionInView);
-            });
-          });
-        });
-
-        context('when "s" is typed', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
-              .type('s');
-          });
-
-          context('the listbox', () => {
-            it('it should set accessible focus to the "San Francisco (United States)" option', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should('have.text', 'San Francisco (United States)');
-            });
-          });
-        });
-
-        context('when "sa" is typed', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
-              .type('sa');
-          });
-
-          context('the listbox', () => {
-            it('it should set accessible focus to the "San Francisco (United States)" option', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should('have.text', 'San Francisco (United States)');
-            });
-          });
-        });
-
-        context('when "san " is typed', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
-              .type('san ');
-          });
-
-          context('the listbox', () => {
-            it('it should set accessible focus to the "San Francisco (United States)" option', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should('have.text', 'San Francisco (United States)');
-            });
-          });
-        });
-
-        context('when "san m" is typed', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
-              .type('san m');
-          });
-
-          context('the listbox', () => {
-            it('it should set accessible focus to the "San Mateo (United States)" option', () => {
-              cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
-                .should('have.text', 'San Mateo (United States)');
-            });
-          });
-        });
-      });
-    });
+      }
+    );
   });
 });
