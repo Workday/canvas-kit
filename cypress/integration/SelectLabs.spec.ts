@@ -78,7 +78,7 @@ describe('Select', () => {
               .should('be.focused');
           });
 
-          it('should have an aria-activedescendant attribute with the same value as the id of the first option', () => {
+          it('should have an aria-activedescendant attribute with the same value as the id of the first option ("E-mail")', () => {
             cy.findByLabelText('Label')
               .pipe(h.selectLabs.getMenu)
               .should($menu => {
@@ -88,19 +88,21 @@ describe('Select', () => {
                 expect(menuAD).to.equal(optionId);
               });
           });
+
+          it('should set accessible focus to the first option ("E-mail")', () => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAccessibleFocus)
+              .should('have.text', 'E-mail');
+          });
         });
 
-        it('should have an aria-selected attribute set to "true" on the first option', () => {
-          cy.findByLabelText('Label')
-            .pipe(h.selectLabs.getOption(0))
-            .should('have.attr', 'aria-selected', 'true');
-        });
-
-        it('should set accessible focus to the "E-mail" option', () => {
-          cy.findByLabelText('Label')
-            .pipe(h.selectLabs.getMenu)
-            .pipe(getAccessibleFocus)
-            .should('have.text', 'E-mail');
+        context('the first option ("Mail")', () => {
+          it('should have an aria-selected attribute set to "true"', () => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getOption(0))
+              .should('have.attr', 'aria-selected', 'true');
+          });
         });
 
         context(`when the "Phone" option (with the value "phone") is clicked`, () => {
@@ -131,6 +133,29 @@ describe('Select', () => {
                 .should('not.be.visible');
             });
           });
+
+          context('when the listbox is opened again', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label').click();
+            });
+
+            context('the listbox', () => {
+              it('should set accessible focus to "Phone" option', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAccessibleFocus)
+                  .should('have.text', 'Phone');
+              });
+            });
+
+            context('the "Phone" option', () => {
+              it('should have an aria-selected attribute set to "true"', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getOption('Phone'))
+                  .should('have.attr', 'aria-selected', 'true');
+              });
+            });
+          });
         });
       });
 
@@ -144,8 +169,24 @@ describe('Select', () => {
             cy.focused().type('{downarrow}');
           });
 
-          it('should open the listbox', () => {
-            cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+          context('the select button', () => {
+            it('should have an aria-expanded attribute set to "true"', () => {
+              cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+            });
+          });
+
+          context('the listbox', () => {
+            it('should be visible', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .should('be.visible');
+            });
+
+            it('should have focus', () => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .should('be.focused');
+            });
           });
 
           context('when the down arrow key is pressed for a second time', () => {
@@ -210,10 +251,19 @@ describe('Select', () => {
                     cy.focused().type('{downarrow}');
                   });
 
-                  context('the fourth option', () => {
+                  context('the listbox', () => {
+                    it('should set accessible focus to "Mail" option', () => {
+                      cy.findByLabelText('Label')
+                        .pipe(h.selectLabs.getMenu)
+                        .pipe(getAccessibleFocus)
+                        .should('have.text', 'Mail');
+                    });
+                  });
+
+                  context('the "Mail" option', () => {
                     it('should have an aria-selected attribute set to "true"', () => {
                       cy.findByLabelText('Label')
-                        .pipe(h.selectLabs.getOption(3))
+                        .pipe(h.selectLabs.getOption('Mail'))
                         .should('have.attr', 'aria-selected', 'true');
                     });
                   });
@@ -245,8 +295,10 @@ describe('Select', () => {
             cy.findByLabelText('Label').type('{enter}');
           });
 
-          it('should open the listbox', () => {
-            cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+          context('the select button', () => {
+            it('should have an aria-expanded attribute set to "true"', () => {
+              cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+            });
           });
         });
 
@@ -255,13 +307,15 @@ describe('Select', () => {
             cy.findByLabelText('Label').type(' ');
           });
 
-          it('should open the listbox', () => {
-            cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+          context('the select button', () => {
+            it('should have an aria-expanded attribute set to "true"', () => {
+              cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
+            });
           });
         });
       });
 
-      context('when "select" helper is used to select "Mail"', () => {
+      context('when the "select" helper is used to select "Mail"', () => {
         beforeEach(() => {
           cy.findByLabelText('Label').pipe(h.selectLabs.select('Mail'));
         });
@@ -271,7 +325,7 @@ describe('Select', () => {
         });
       });
 
-      context('when "select" helper is used to select /^Mail$/', () => {
+      context('when the "select" helper is used to select /^Mail$/', () => {
         beforeEach(() => {
           cy.findByLabelText('Label').pipe(h.selectLabs.select(/^Mail$/));
         });
@@ -422,7 +476,7 @@ describe('Select', () => {
       });
 
       context(
-        'when a character is typed (provided no other characters have been typed in the last 500ms), the select should advance assistive focus to the first matching option beyond the currently selected option (cycling back to the beginning of the options if necessary) and scroll that option into view',
+        'when a character is typed (provided no other characters have been typed in the last 500ms), the select should advance accessible focus to the first matching option beyond the currently selected option (cycling back to the beginning of the options if necessary) and scroll that option into view',
         () => {
           context('when "s" is typed', () => {
             beforeEach(() => {
@@ -499,7 +553,7 @@ describe('Select', () => {
       );
 
       context(
-        'when multiple characters are typed in rapid succession (<500ms between keystrokes), thus forming a string, and multiple options begin with that string, the select should retain assistive focus on the currently focused option for as long as possible (instead of cycling focus between matching options with each keystroke)',
+        'when multiple characters are typed in rapid succession (<500ms between keystrokes), thus forming a string, and multiple options begin with that string, the select should retain accessible focus on the currently focused option for as long as possible (instead of cycling focus between matching options with each keystroke)',
         () => {
           context('when "sa" is typed', () => {
             beforeEach(() => {
