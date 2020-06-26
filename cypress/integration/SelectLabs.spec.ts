@@ -1,6 +1,6 @@
 import * as h from '../helpers';
 
-function getAccessibleFocus($menu: JQuery): JQuery {
+function getAssistiveFocus($menu: JQuery): JQuery {
   const activeId = $menu.attr('aria-activedescendant');
   return $menu.find(`[id="${activeId}"]`);
 }
@@ -65,7 +65,7 @@ describe('Select', () => {
           });
         });
 
-        context('the listbox', () => {
+        context('the menu', () => {
           it('should be visible', () => {
             cy.findByLabelText('Label')
               .pipe(h.selectLabs.getMenu)
@@ -89,10 +89,10 @@ describe('Select', () => {
               });
           });
 
-          it('should set accessible focus to the first option ("E-mail")', () => {
+          it('should set assistive focus to the first option ("E-mail")', () => {
             cy.findByLabelText('Label')
               .pipe(h.selectLabs.getMenu)
-              .pipe(getAccessibleFocus)
+              .pipe(getAssistiveFocus)
               .should('have.text', 'E-mail');
           });
         });
@@ -126,7 +126,7 @@ describe('Select', () => {
             });
           });
 
-          context('the listbox', () => {
+          context('the menu', () => {
             it('should not be visible', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
@@ -134,16 +134,16 @@ describe('Select', () => {
             });
           });
 
-          context('when the listbox is opened again', () => {
+          context('when the menu is opened again', () => {
             beforeEach(() => {
               cy.findByLabelText('Label').click();
             });
 
-            context('the listbox', () => {
-              it('should set accessible focus to "Phone" option', () => {
+            context('the menu', () => {
+              it('should set assistive focus to "Phone" option', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should('have.text', 'Phone');
               });
             });
@@ -175,7 +175,7 @@ describe('Select', () => {
             });
           });
 
-          context('the listbox', () => {
+          context('the menu', () => {
             it('should be visible', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
@@ -194,11 +194,11 @@ describe('Select', () => {
               cy.focused().type('{downarrow}');
             });
 
-            context('the listbox', () => {
-              it('should set accessible focus to the "Phone" option', () => {
+            context('the menu', () => {
+              it('should set assistive focus to the "Phone" option', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should('have.text', 'Phone');
               });
             });
@@ -208,11 +208,11 @@ describe('Select', () => {
                 cy.focused().type('{downarrow}');
               });
 
-              context('the listbox', () => {
-                it('should set accessible focus to the "Mail" option', () => {
+              context('the menu', () => {
+                it('should set assistive focus to the "Mail" option', () => {
                   cy.findByLabelText('Label')
                     .pipe(h.selectLabs.getMenu)
-                    .pipe(getAccessibleFocus)
+                    .pipe(getAssistiveFocus)
                     .should('have.text', 'Mail');
                 });
               });
@@ -238,7 +238,7 @@ describe('Select', () => {
                   });
                 });
 
-                context('the listbox', () => {
+                context('the menu', () => {
                   it('should not be visible', () => {
                     cy.findByLabelText('Label')
                       .pipe(h.selectLabs.getMenu)
@@ -246,16 +246,16 @@ describe('Select', () => {
                   });
                 });
 
-                context('when the listbox is expanded again', () => {
+                context('when the menu is expanded again', () => {
                   beforeEach(() => {
                     cy.focused().type('{downarrow}');
                   });
 
-                  context('the listbox', () => {
-                    it('should set accessible focus to "Mail" option', () => {
+                  context('the menu', () => {
+                    it('should set assistive focus to "Mail" option', () => {
                       cy.findByLabelText('Label')
                         .pipe(h.selectLabs.getMenu)
-                        .pipe(getAccessibleFocus)
+                        .pipe(getAssistiveFocus)
                         .should('have.text', 'Mail');
                     });
                   });
@@ -278,11 +278,11 @@ describe('Select', () => {
                   .type('{uparrow}');
               });
 
-              context('the listbox', () => {
-                it('should set accessible focus to the "E-mail" option', () => {
+              context('the menu', () => {
+                it('should set assistive focus to the "E-mail" option', () => {
                   cy.findByLabelText('Label')
                     .pipe(h.selectLabs.getMenu)
-                    .pipe(getAccessibleFocus)
+                    .pipe(getAssistiveFocus)
                     .should('have.text', 'E-mail');
                 });
               });
@@ -449,18 +449,18 @@ describe('Select', () => {
         }
       );
 
-      // TODO: Figure out why this test doesn't open the listbox on the
-      // space key when using Firefox with Cypress (pressing the space key
-      // in the middle of a typeahead string in normal usage of Firefox
-      // opens the listbox, see SelectBase)
-      // Ensure Firefox doesn't display the listbox if there's a space in the
+      // TODO: Figure out why this test doesn't open the menu when the
+      // space key is pressed when using Firefox with Cypress (pressing
+      // the space key in the middle of a typeahead string in normal
+      // usage of Firefox opens the menu, see SelectBase)
+      // Ensure Firefox doesn't display the menu if there's a space in the
       // typeahead string
       // context('when "san " is typed', () => {
       //   beforeEach(() => {
       //     cy.findByLabelText('Label').type('san ');
       //   });
 
-      //   context('the listbox', () => {
+      //   context('the menu', () => {
       //     it('should not be visible', () => {
       //       cy.findByLabelText('Label')
       //         .pipe(h.selectLabs.getMenu)
@@ -470,13 +470,13 @@ describe('Select', () => {
       // });
     });
 
-    context('when the listbox is opened', () => {
+    context('when the menu is opened', () => {
       beforeEach(() => {
         cy.findByLabelText('Label').click();
       });
 
       context(
-        'when a character is typed (provided no other characters have been typed in the last 500ms), the select should advance accessible focus to the first matching option beyond the currently selected option (cycling back to the beginning of the options if necessary) and scroll that option into view',
+        'when a character is typed (provided no other characters have been typed in the last 500ms), the select should advance assistive focus to the first matching option beyond the currently selected option (cycling back to the beginning of the options if necessary) and scroll that option into view',
         () => {
           context('when "s" is typed', () => {
             beforeEach(() => {
@@ -485,18 +485,18 @@ describe('Select', () => {
                 .type('s');
             });
 
-            context('the listbox', () => {
-              it('should set accessible focus to the first option beginning with "s" ("San Francisco (United States)")', () => {
+            context('the menu', () => {
+              it('should set assistive focus to the first option beginning with "s" ("San Francisco (United States)")', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should('have.text', 'San Francisco (United States)');
               });
 
               it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should(assertOptionInView);
               });
             });
@@ -509,18 +509,18 @@ describe('Select', () => {
                 .type('ss', {delay: 500});
             });
 
-            context('the listbox', () => {
-              it('should set accessible focus to the second option beginning with "s" ("San Mateo (United States)")', () => {
+            context('the menu', () => {
+              it('should set assistive focus to the second option beginning with "s" ("San Mateo (United States)")', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should('have.text', 'San Mateo (United States)');
               });
 
               it('should scroll so that the "San Mateo (United States)" option is fully visible', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should(assertOptionInView);
               });
             });
@@ -533,18 +533,18 @@ describe('Select', () => {
                 .type('sd', {delay: 500});
             });
 
-            context('the listbox', () => {
-              it('should set accessible focus to the first option beginning with "d" ("Dallas (United States)")', () => {
+            context('the menu', () => {
+              it('should set assistive focus to the first option beginning with "d" ("Dallas (United States)")', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should('have.text', 'Dallas (United States)');
               });
 
               it('should scroll so that the "Dallas (United States)" option is fully visible', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should(assertOptionInView);
               });
             });
@@ -553,7 +553,7 @@ describe('Select', () => {
       );
 
       context(
-        'when multiple characters are typed in rapid succession (<500ms between keystrokes), thus forming a string, and multiple options begin with that string, the select should retain accessible focus on the currently focused option for as long as possible (instead of cycling focus between matching options with each keystroke)',
+        'when multiple characters are typed in rapid succession (<500ms between keystrokes), thus forming a string, and multiple options begin with that string, the select should retain assistive focus on the currently focused option for as long as possible (instead of cycling focus between matching options with each keystroke)',
         () => {
           context('when "sa" is typed', () => {
             beforeEach(() => {
@@ -562,11 +562,11 @@ describe('Select', () => {
                 .type('sa');
             });
 
-            context('the listbox', () => {
-              it('should set accessible focus to the "San Francisco (United States)" option', () => {
+            context('the menu', () => {
+              it('should set assistive focus to the "San Francisco (United States)" option', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should('have.text', 'San Francisco (United States)');
               });
             });
@@ -579,11 +579,11 @@ describe('Select', () => {
                 .type('san ');
             });
 
-            context('the listbox', () => {
-              it('should set accessible focus to the "San Francisco (United States)" option', () => {
+            context('the menu', () => {
+              it('should set assistive focus to the "San Francisco (United States)" option', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should('have.text', 'San Francisco (United States)');
               });
             });
@@ -596,11 +596,11 @@ describe('Select', () => {
                 .type('san m');
             });
 
-            context('the listbox', () => {
-              it('should set accessible focus to the "San Mateo (United States)" option', () => {
+            context('the menu', () => {
+              it('should set assistive focus to the "San Mateo (United States)" option', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
-                  .pipe(getAccessibleFocus)
+                  .pipe(getAssistiveFocus)
                   .should('have.text', 'San Mateo (United States)');
               });
             });
@@ -610,9 +610,9 @@ describe('Select', () => {
     });
 
     context(
-      'when the listbox is opened and the selected option is initially out of view, the listbox should scroll the selected option into view and center it if possible',
+      'when the menu is opened and the selected option is initially out of view, the menu should scroll the selected option into view and center it if possible',
       () => {
-        context('when "Dallas (United States)" is selected and the listbox is opened', () => {
+        context('when "Dallas (United States)" is selected and the menu is opened', () => {
           beforeEach(() => {
             cy.findByLabelText('Label')
               .focus()
@@ -620,11 +620,11 @@ describe('Select', () => {
               .click();
           });
 
-          context('the listbox', () => {
+          context('the menu', () => {
             it('should scroll so that the "Dallas (United States)" option is centered in view', () => {
               cy.findByLabelText('Label')
                 .pipe(h.selectLabs.getMenu)
-                .pipe(getAccessibleFocus)
+                .pipe(getAssistiveFocus)
                 .should(assertOptionCenteredInView);
             });
           });
