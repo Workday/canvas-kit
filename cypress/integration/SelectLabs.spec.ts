@@ -144,7 +144,7 @@ describe('Select', () => {
             cy.focused().type('{downarrow}');
           });
 
-          it('should open the menu', () => {
+          it('should open the listbox', () => {
             cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
           });
 
@@ -245,7 +245,7 @@ describe('Select', () => {
             cy.findByLabelText('Label').type('{enter}');
           });
 
-          it('should open the menu', () => {
+          it('should open the listbox', () => {
             cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
           });
         });
@@ -255,7 +255,7 @@ describe('Select', () => {
             cy.findByLabelText('Label').type(' ');
           });
 
-          it('should open the menu', () => {
+          it('should open the listbox', () => {
             cy.findByLabelText('Label').should('have.attr', 'aria-expanded', 'true');
           });
         });
@@ -395,11 +395,11 @@ describe('Select', () => {
         }
       );
 
-      // TODO: Figure out why this test doesn't trigger the menu on the
+      // TODO: Figure out why this test doesn't open the listbox on the
       // space key when using Firefox with Cypress (pressing the space key
       // in the middle of a typeahead string in normal usage of Firefox
-      // triggers the menu, see SelectBase)
-      // Ensure Firefox doesn't display the menu if there's a space in the
+      // opens the listbox, see SelectBase)
+      // Ensure Firefox doesn't display the listbox if there's a space in the
       // typeahead string
       // context('when "san " is typed', () => {
       //   beforeEach(() => {
