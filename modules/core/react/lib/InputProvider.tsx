@@ -95,6 +95,31 @@ const detectWheel = () => {
   return wheelType;
 };
 
+const supportsPassive = () => {
+  let supportsPassive;
+  try {
+    /* istanbul ignore next function for coverage */
+    const opts = Object.defineProperty({}, 'passive', {
+      get: () => {
+        supportsPassive = true;
+      },
+    });
+
+    /* istanbul ignore next function for coverage */
+    const stub = () => {
+      return;
+    };
+
+    window.addEventListener('test', stub, opts);
+    window.removeEventListener('test', stub, opts);
+  } catch (e) {
+    /* istanbul ignore next line for coverage */
+    console.warn('Browser does not support passive event listeners');
+  }
+
+  return supportsPassive || false;
+};
+
 /**
  * This component takes heavy inspiration from what-input (https://github.com/ten1seven/what-input)
  */
@@ -124,31 +149,8 @@ export default class InputProvider extends React.Component<InputProviderProps> {
       console.warn('Failed to retrieve input status from session storage' + e);
     }
 
-    // Check for passive event listener support
-    let supportsPassive;
-    try {
-      /* istanbul ignore next function for coverage */
-      const opts = Object.defineProperty({}, 'passive', {
-        get: () => {
-          supportsPassive = true;
-        },
-      });
-
-      /* istanbul ignore next function for coverage */
-      const stub = () => {
-        return;
-      };
-
-      window.addEventListener('test', stub, opts);
-      window.removeEventListener('test', stub, opts);
-    } catch (e) {
-      /* istanbul ignore next line for coverage */
-      console.warn('Browser does not support passive event listeners');
-    }
-
     this.currentInput = storedInput || InputType.Initial;
     this.currentIntent = storedIntent || InputType.Initial;
-    this.supportsPassive = supportsPassive || false;
 
     this.setInput = this.setInput.bind(this);
     this.setIntent = this.setIntent.bind(this);
@@ -177,6 +179,9 @@ export default class InputProvider extends React.Component<InputProviderProps> {
   componentDidMount() {
     // For IE11 and under, we'll need to polyfill element.closest
     elementClosestPolyfill(window);
+
+    // Check for passive event listener support
+    this.supportsPassive = supportsPassive();
 
     if (this.getContainer(this.props.container).closest('[data-whatinput]')) {
       this.deferInputTracking = true;
