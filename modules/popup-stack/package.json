@@ -10,7 +10,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_labs/popup-stack/react"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/popup-stack"
   },
   "files": [
     "dist/",
