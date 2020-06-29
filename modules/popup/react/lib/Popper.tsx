@@ -13,7 +13,7 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    * `anchorElement` if it moves and will reposition itself if there is no longer room in the
    * window.
    */
-  anchorElement: React.RefObject<Element> | Element | null;
+  anchorElement?: React.RefObject<Element> | Element | null;
   /**
    * The content of the Popper. If a function is provided, it will be treated as a Render Prop and
    * pass the `placement` chosen by PopperJS. This `placement` value is useful if your popup needs
@@ -29,6 +29,14 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    * https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
    */
   containerElement?: Element | null;
+  /**
+   * When provided, this optional callback will be used to determine positioning for the Popper element
+   * instead of calling `getBoundingClientRect` on the `anchorElement` prop. Use this when you need
+   * complete control over positioning. When this prop is specified, it is safe to pass `null` into the
+   * `anchorElement` prop. If `null` is passed into the `anchorElement` prop, an `owner` will not be
+   * provided for the `PopupStack`.
+   */
+  getAnchorClientRect?: () => DOMRect;
   /**
    * Determines if `Popper` content should be rendered. The content only exists in the DOM when
    * `open` is `true`
@@ -104,6 +112,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
   (
     {
       anchorElement,
+      getAnchorClientRect,
       popperOptions = {},
       placement: popperPlacement = 'bottom',
       children,
@@ -114,14 +123,19 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const localRef = React.useRef<HTMLDivElement>(null);
     const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
     const [placement, setPlacement] = React.useState(popperPlacement);
-    usePopupStack(ref, getElementFromRefOrElement(anchorElement) as HTMLElement | undefined);
+    usePopupStack(
+      ref,
+      getElementFromRefOrElement(anchorElement ?? null) as HTMLElement | undefined
+    );
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
-      const anchorEl = getElementFromRefOrElement(anchorElement);
+      const anchorEl = getAnchorClientRect
+        ? {getBoundingClientRect: getAnchorClientRect}
+        : getElementFromRefOrElement(anchorElement ?? null);
       if (!anchorEl) {
         console.warn(
-          `Popper: anchorElement was not defined. A valid anchorElement must be provided to render a Popper`
+          `Popper: neither anchorElement or getAnchorClientRect was defined. A valid anchorElement or getAnchorClientRect callback must be provided to render a Popper`
         );
         return undefined;
       }
@@ -146,7 +160,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       }
 
       return undefined;
-    }, [anchorElement]);
+    }, [anchorElement, getAnchorClientRect]);
 
     return (
       <div {...elemProps} ref={ref}>
