@@ -57,6 +57,10 @@ export const manyOptions = [
   {label: 'San Francisco (United States)', value: 'san-francisco'},
   {label: 'San Mateo (United States)', value: 'san-mateo'},
   {label: 'Stockholm (Europe)', value: 'stockholm'},
+  {
+    label: 'The Ontologically Anthropocentric Sensory Immersive Simulation (Virtual Reality)',
+    value: 'oasis',
+  },
   {label: 'Toronto (Canada)', value: 'toronto'},
   {label: 'Victoria (Canada)', value: 'victoria'},
   {label: 'Vienna (Europe)', value: 'vienna'},

@@ -549,6 +549,33 @@ describe('Select', () => {
               });
             });
           });
+
+          context('when "the onto" is typed', () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label')
+                .pipe(h.selectLabs.getMenu)
+                .type('the onto');
+            });
+
+            context('the menu', () => {
+              it('should set assistive focus to "The Ontologically..."', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAssistiveFocus)
+                  .should(
+                    'have.text',
+                    'The Ontologically Anthropocentric Sensory Immersive Simulation (Virtual Reality)'
+                  );
+              });
+
+              it('should scroll so that the "The Ontologically..." (text wrapped) option is fully visible', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAssistiveFocus)
+                  .should(assertOptionInView);
+              });
+            });
+          });
         }
       );
 
@@ -629,6 +656,27 @@ describe('Select', () => {
             });
           });
         });
+
+        context(
+          'when "The Ontologically..." (text wrapped) is selected and the menu is opened',
+          () => {
+            beforeEach(() => {
+              cy.findByLabelText('Label')
+                .focus()
+                .type('the onto')
+                .click();
+            });
+
+            context('the menu', () => {
+              it('should scroll so that the "The Ontologically..." option is centered in view', () => {
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAssistiveFocus)
+                  .should(assertOptionCenteredInView);
+              });
+            });
+          }
+        );
       }
     );
   });
