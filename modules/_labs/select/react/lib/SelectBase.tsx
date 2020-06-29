@@ -391,7 +391,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
         <SelectButton
           aria-expanded={!isMenuHidden ? 'true' : undefined}
           aria-haspopup="listbox"
-          aria-owns={!isMenuHidden ? this.id : undefined}
+          aria-controls={!isMenuHidden ? this.id : undefined}
           disabled={disabled}
           error={error}
           grow={grow}
