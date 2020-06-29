@@ -92,7 +92,7 @@ cmd('git diff --name-only HEAD HEAD^')
     console.log(output);
 
     const regex = new RegExp(
-      `@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.${data.sha}.\\d*\\+\\w*)`,
+      `@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*\\+\\w*)`,
       'g'
     );
     data.packages = output.match(regex);
