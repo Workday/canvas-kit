@@ -279,8 +279,9 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   };
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
+
   private menuRef = React.createRef<HTMLUListElement>();
-  private id = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
+  private menuId = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
 
   private scrollFocusedOptionIntoView = (center: boolean) => {
     const focusedOption = this.focusedOptionRef.current;
@@ -391,7 +392,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
         <SelectButton
           aria-expanded={!isMenuHidden ? 'true' : undefined}
           aria-haspopup="listbox"
-          aria-owns={this.id}
+          aria-controls={!isMenuHidden ? this.menuId : undefined}
           disabled={disabled}
           error={error}
           grow={grow}
@@ -417,7 +418,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
             aria-activedescendant={options[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}
             buttonRef={buttonRef}
-            id={this.id}
+            id={this.menuId}
             error={error}
             isFlipped={isMenuFlipped}
             isHidden={isMenuHidden}
