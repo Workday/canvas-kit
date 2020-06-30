@@ -43,7 +43,7 @@ export const accentIconStyles = ({
 
 export default class AccentIcon extends React.Component<AccentIconProps> {
   render() {
-    const {transparent = false, size = 56, icon, color, ...elemProps} = this.props;
+    const {transparent = false, size = 56, icon, color, iconRef, ...elemProps} = this.props;
 
     return (
       <Icon
@@ -51,6 +51,7 @@ export default class AccentIcon extends React.Component<AccentIconProps> {
         type={CanvasIconTypes.Accent}
         styles={accentIconStyles({color, transparent})}
         size={size}
+        iconRef={iconRef}
         {...elemProps}
       />
     );
