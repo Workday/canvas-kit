@@ -46,6 +46,7 @@ module.exports = {
   ],
   rules: {
     'workday-custom-rules/restricted-imports': 'error',
+    'workday-custom-rules/ssr': 'error',
     '@typescript-eslint/class-name-casing': 'error',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/interface-name-prefix': 'error',
