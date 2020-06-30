@@ -161,10 +161,12 @@ const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isH
   ({isCollapsed, isHidden}) => {
     const collapseStyles: CSSObject = isCollapsed
       ? {
+          minWidth: spacing.xl,
           width: spacing.xl,
           height: spacing.xl,
         }
       : {
+          minWidth: spacing.l,
           width: spacing.l,
           height: spacing.l,
         };

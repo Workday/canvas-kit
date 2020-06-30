@@ -100,9 +100,11 @@ const AutocompleteList = styled('ul')({
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   {
     width: spacing.l,
+    minWidth: spacing.l,
     height: spacing.l,
     position: 'absolute',
-    margin: 0,
+    margin: spacing.xxxs,
+    top: 0,
     right: 0,
     padding: 0,
     zIndex: 2,
