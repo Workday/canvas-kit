@@ -195,7 +195,7 @@ const Combobox = ({
       } else {
         // IE 11
         event = document.createEvent('Event');
-        event.initEvent('input', true);
+        event.initEvent('input', true, true);
       }
 
       inputDomElement.dispatchEvent(event);
