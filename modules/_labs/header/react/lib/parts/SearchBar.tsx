@@ -179,7 +179,7 @@ const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isH
 
     return {
       position: `absolute`,
-      margin: isCollapsed ? `auto ${spacing.xxxs}` : `${spacing.xxxs}`,
+      margin: isCollapsed ? `auto ${spacing.xxs}` : `${spacing.xxxs}`,
       top: 0,
       left: 0,
       padding: 0,
