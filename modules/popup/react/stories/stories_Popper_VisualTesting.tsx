@@ -9,51 +9,63 @@ export default withSnapshotsEnabled({
   title: 'Testing|React/Popups/Popper',
 });
 
-const styles: React.CSSProperties = {
+const containerStyles: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  width: 300,
+  height: 300,
+};
+
+const innerContainerStyles: React.CSSProperties = {
   overflow: 'hidden',
 
   width: 180,
   height: 180,
   padding: 12,
-  margin: 50,
 
   border: `1px solid ${colors.blueberry500}`,
   borderRadius: 12,
 };
 
 const squareStyles: React.CSSProperties = {
-  width: 10,
-  height: 10,
+  display: 'inline-block',
+  width: 12,
+  height: 12,
   background: colors.chiliMango500,
   borderRadius: 2,
 };
 
 export const CustomPlacement = () => {
   return (
-    <div style={styles}>
-      {
-        'This element owns the Popper and has overflow set to hidden. The popup is rendered from here:'
-      }
-      <div style={squareStyles} />
-      <Popper
-        anchorElement={null}
-        getAnchorClientRect={() => ({
-          top: 200,
-          left: 200,
-          width: 1,
-          height: 1,
-          bottom: window.innerHeight - 200 - 1,
-          right: window.innerWidth - 200 - 1,
-          x: 200,
-          y: 200,
-          toJSON: () => '',
-        })}
-      >
-        <Menu>
-          <MenuItem>{'Custom'}</MenuItem>
-          <MenuItem>{'Placement'}</MenuItem>
-        </Menu>
-      </Popper>
+    <div style={containerStyles}>
+      <div style={innerContainerStyles}>
+        {
+          'This element owns the Popper and has overflow set to hidden. The popup is rendered from the red square:'
+        }
+        <div style={squareStyles}>
+          <Popper
+            anchorElement={null}
+            getAnchorClientRect={() => ({
+              top: 220,
+              left: 220,
+              width: 1,
+              height: 1,
+              bottom: window.innerHeight - 200 - 1,
+              right: window.innerWidth - 200 - 1,
+              x: 200,
+              y: 200,
+              toJSON: () => '',
+            })}
+          >
+            <Menu>
+              <MenuItem>{'Custom'}</MenuItem>
+              <MenuItem>{'Placement'}</MenuItem>
+            </Menu>
+          </Popper>
+        </div>
+      </div>
     </div>
   );
 };
