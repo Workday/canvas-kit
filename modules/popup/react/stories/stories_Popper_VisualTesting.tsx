@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Menu, MenuItem} from '@workday/canvas-kit-labs-react-menu';
 import {Popper} from '@workday/canvas-kit-react-popup';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {colors} from '@workday/canvas-kit-react-core';
+import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 
 export default withSnapshotsEnabled({
   title: 'Testing|React/Popups/Popper',
@@ -14,57 +14,68 @@ const containerStyles: React.CSSProperties = {
   alignItems: 'center',
   justifyContent: 'center',
 
-  width: 300,
-  height: 300,
+  width: 400,
+  height: 400,
 };
 
 const innerContainerStyles: React.CSSProperties = {
   overflow: 'hidden',
 
-  width: 180,
-  height: 180,
-  padding: 12,
+  width: 200,
+  height: 200,
+  padding: spacing.m,
 
   border: `1px solid ${colors.blueberry500}`,
-  borderRadius: 12,
+  borderRadius: borderRadius.l,
 };
 
 const squareStyles: React.CSSProperties = {
-  display: 'inline-block',
-  width: 12,
-  height: 12,
-  background: colors.chiliMango500,
-  borderRadius: 2,
+  position: 'absolute',
+  left: 190,
+  top: 250,
 };
 
 export const CustomPlacement = () => {
+  const ownerRef = React.useRef<HTMLDivElement>(null);
+  const virtualLeft = 190 + 30; // square offset + red box offset
+  const virtualTop = 250 + 30; // square offset + red box offset
   return (
     <div style={containerStyles}>
       <div style={innerContainerStyles}>
         {
-          'This element owns the Popper and has overflow set to hidden. The popup is rendered from the red square:'
+          'The element with the black square owns the Popper while it is virtually positioned to the red square:'
         }
-        <div style={squareStyles}>
-          <Popper
-            anchorElement={null}
-            getAnchorClientRect={() => ({
-              top: 220,
-              left: 220,
-              width: 1,
-              height: 1,
-              bottom: window.innerHeight - 200 - 1,
-              right: window.innerWidth - 200 - 1,
-              x: 200,
-              y: 200,
-              toJSON: () => '',
-            })}
+        <div style={squareStyles} ref={ownerRef}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100"
+            height="100"
+            fill="none"
+            viewBox="0 0 100 100"
           >
-            <Menu>
-              <MenuItem>{'Custom'}</MenuItem>
-              <MenuItem>{'Placement'}</MenuItem>
-            </Menu>
-          </Popper>
+            <path stroke={colors.blackPepper400} d="M0.5 0.5H99.5V99.5H0.5z"></path>
+            <path fill={colors.cinnamon400} d="M30 30H70V70H30z"></path>
+          </svg>
         </div>
+        <Popper
+          anchorElement={ownerRef}
+          getAnchorClientRect={() => ({
+            top: virtualTop,
+            left: virtualLeft,
+            width: 40,
+            height: 40,
+            bottom: virtualTop + 40,
+            right: virtualLeft + 40,
+            x: virtualLeft,
+            y: virtualTop,
+            toJSON: () => '',
+          })}
+        >
+          <Menu>
+            <MenuItem>{'Custom'}</MenuItem>
+            <MenuItem>{'Placement'}</MenuItem>
+          </Menu>
+        </Popper>
       </div>
     </div>
   );
