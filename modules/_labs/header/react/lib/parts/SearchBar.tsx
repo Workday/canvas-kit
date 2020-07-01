@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {CSSObject} from '@emotion/core';
-import {type, colors, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
+import {colors, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
@@ -105,7 +105,7 @@ const formCollapsedBackground = colors.frenchVanilla100;
 
 const maxWidth = 480;
 const minWidth = 120;
-const height = 44;
+const height = 40;
 
 const SearchForm = styled('form')<
   Pick<SearchBarProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchBarState, 'showForm'>
@@ -147,6 +147,8 @@ const SearchForm = styled('form')<
 
 const SearchContainer = styled('div')({
   position: `relative`,
+  display: 'flex',
+  alignItems: 'center',
   width: `100%`,
   textAlign: 'left',
   minHeight: height,
@@ -159,23 +161,28 @@ const SearchCombobox = styled(Combobox)({
 
 const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isHidden: boolean}>(
   ({isCollapsed, isHidden}) => {
+    const collapsedSize = 40;
+    const size = 32;
     const collapseStyles: CSSObject = isCollapsed
       ? {
-          minWidth: spacing.xl,
-          width: spacing.xl,
-          height: spacing.xl,
+          minWidth: collapsedSize,
+          width: collapsedSize,
+          minHeight: collapsedSize,
+          height: collapsedSize,
         }
       : {
-          minWidth: spacing.l,
-          width: spacing.l,
-          height: spacing.l,
+          minWidth: size,
+          width: size,
+          minHeight: size,
+          height: size,
         };
 
     return {
       position: `absolute`,
-      margin: `auto ${spacing.xxs}`,
-      top: spacing.zero,
-      bottom: spacing.zero,
+      margin: isCollapsed ? `auto ${spacing.xxxs}` : `${spacing.xxxs}`,
+      top: 0,
+      left: 0,
+      padding: 0,
       zIndex: 3,
       display: isHidden ? 'none' : 'flex',
       ...collapseStyles,
@@ -200,7 +207,7 @@ const CloseButton = styled(IconButton)<
     top: spacing.zero,
     right: spacing.zero,
     bottom: spacing.zero,
-    margin: `auto ${spacing.xxs}`,
+    margin: isCollapsed ? `auto ${spacing.xxs}` : `${spacing.xxs}`,
     zIndex: 3,
     ...collapseStyles,
   };
@@ -214,7 +221,7 @@ const SearchField = styled(FormField)<
     width: '100%',
     height: height,
     maxWidth: isCollapsed || grow ? '100%' : maxWidth,
-    marginBottom: spacingNumbers.zero,
+    marginBottom: spacing.zero,
     '> div': {
       display: 'block',
     },
@@ -226,8 +233,8 @@ const SearchInput = styled(TextInput)<
 >(({isCollapsed, inputColors, grow}) => {
   const collapseStyles: CSSObject = isCollapsed
     ? {
-        ...type.h3,
-        fontWeight: 400,
+        fontSize: '20px',
+        lineHeight: '20px', // For ie11, line-height needs to match font-size
         paddingLeft: spacingNumbers.xl + spacingNumbers.s,
         paddingRight: spacingNumbers.xl + spacingNumbers.s,
         maxWidth: 'none',
@@ -242,7 +249,8 @@ const SearchInput = styled(TextInput)<
         backgroundColor: inputColors.background,
       };
   return {
-    ...type.body,
+    fontSize: '14px',
+    lineHeight: '14px', // For ie11, line-height needs to match font-size
     boxShadow: inputColors.boxShadow,
     color: inputColors.color,
     border: 'none',
@@ -250,8 +258,6 @@ const SearchInput = styled(TextInput)<
     transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
     zIndex: 2,
     height: height,
-    paddingTop: spacing.xs,
-    paddingBottom: spacing.xs,
     width: '100%',
     '&::-webkit-search-cancel-button': {
       display: 'none',
