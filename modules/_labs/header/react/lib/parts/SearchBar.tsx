@@ -105,7 +105,7 @@ const formCollapsedBackground = colors.frenchVanilla100;
 
 const maxWidth = 480;
 const minWidth = 120;
-const height = 40;
+const height = 40; // TODO: Make configurable
 
 const SearchForm = styled('form')<
   Pick<SearchBarProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchBarState, 'showForm'>
@@ -179,8 +179,9 @@ const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isH
 
     return {
       position: `absolute`,
-      margin: isCollapsed ? `auto ${spacing.xxs}` : `${spacing.xxxs}`,
+      margin: isCollapsed ? `auto ${spacing.xxs}` : `auto ${spacing.xxxs}`,
       top: 0,
+      bottom: 0,
       left: 0,
       padding: 0,
       zIndex: 3,
@@ -204,10 +205,10 @@ const CloseButton = styled(IconButton)<
 
   return {
     position: `absolute`,
-    top: spacing.zero,
-    right: spacing.zero,
-    bottom: spacing.zero,
-    margin: isCollapsed ? `auto ${spacing.xxs}` : `${spacing.xxs}`,
+    top: 0,
+    bottom: 0,
+    right: 0,
+    margin: `auto ${spacing.xxs}`,
     zIndex: 3,
     ...collapseStyles,
   };
