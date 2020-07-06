@@ -531,12 +531,14 @@ storiesOf('Labs|Header/React', module)
         <SearchWithAutoComplete
           css={{marginLeft: spacing.zero}}
           searchTheme={SearchBar.Theme.Light}
+          height={48}
         />
       </div>
       <div css={{flex: 1, background: colors.blueberry400, marginLeft: spacing.m, padding: '12px'}}>
         <SearchWithAutoComplete
           css={{marginLeft: spacing.zero}}
           searchTheme={SearchBar.Theme.Dark}
+          height={48}
         />
       </div>
     </div>
