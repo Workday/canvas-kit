@@ -4,7 +4,7 @@ import {borderRadius} from './radius';
 import {CSSProperties} from './types';
 
 const inheritFont =
-  typeof window !== undefined && get(window, 'window.workday.canvas.inheritFontFamily');
+  typeof window !== 'undefined' && get(window, 'window.workday.canvas.inheritFontFamily');
 export const fontFamily = inheritFont
   ? 'inherit'
   : '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';

@@ -242,7 +242,7 @@ foo();
 - This means that any reference to `window` or `document` should be avoided wherever possible within
   the global scope, constructors, and render methods.
 - If you need to reference these variables in these avoided places, you must check whether it's
-  undefined first (e.g. `typeof window !== undefined`)
+  undefined first (e.g. `typeof window !== 'undefined'`)
 - Be particularly careful when initializing default props or state with something stored on the
   `window`/`document` objects. These initializations will have to be skipped for SSR contexts
   (assign `undefined` or `null`) and updated upon mounting.

@@ -175,7 +175,7 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
   }
 
   state = {
-    screenSize: typeof window !== undefined ? window.innerWidth : 0,
+    screenSize: typeof window !== 'undefined' ? window.innerWidth : 0,
   };
 
   public componentDidMount() {
