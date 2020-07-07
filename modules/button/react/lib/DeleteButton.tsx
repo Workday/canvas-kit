@@ -52,6 +52,8 @@ const getDeleteButtonColors = ({
 });
 
 const DeleteButton: ButtonOrAnchorComponent<DeleteButtonProps> = ({
+  // TODO: Fix useTheme and make it a real hook
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
   size = 'medium',
   buttonRef,

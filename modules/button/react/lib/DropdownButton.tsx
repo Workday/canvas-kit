@@ -34,6 +34,8 @@ const DropdownButton: ButtonOrAnchorComponent<
   DropdownButtonProps,
   typeof DropdownButtonVariant
 > = ({
+  // TODO: Fix useTheme and make it a real hook
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
   variant = DropdownButtonVariant.Secondary,
   size = 'medium',

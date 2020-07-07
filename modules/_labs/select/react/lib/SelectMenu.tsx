@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect, useCallback} from 'react';
 
 import {CSSObject, keyframes} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
@@ -260,16 +260,16 @@ const SelectMenu = (props: SelectMenuProps) => {
 
   const [width, setWidth] = useState(0);
 
-  const handleWidthChange = () => {
+  const handleWidthChange = useCallback(() => {
     if (buttonRef.current && !isHidden) {
       const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
       setWidth(newMenuWidth);
     }
-  };
+  }, [buttonRef, isHidden]);
 
   useLayoutEffect(() => {
     handleWidthChange();
-  }, [buttonRef, isHidden]);
+  }, [handleWidthChange]);
 
   // TODO: Figure out a better way to handle width changes in the reference button.
   // Seems like we should resize the menu when the reference button width changes, not
@@ -284,7 +284,7 @@ const SelectMenu = (props: SelectMenuProps) => {
     return () => {
       window.removeEventListener('resize', handleWidthChange);
     };
-  }, []);
+  }, [handleWidthChange]);
 
   useCloseOnEscape(popupRef, () => onCloseOnEscape?.());
 

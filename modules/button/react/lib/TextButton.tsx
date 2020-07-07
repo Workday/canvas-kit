@@ -143,6 +143,8 @@ const containerStyles = {
 const TextButton: ButtonOrAnchorComponent<TextButtonProps, typeof TextButtonVariant> & {
   IconPosition: typeof ButtonIconPosition;
 } = ({
+  // TODO: Fix useTheme and make it a real hook
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
   variant = TextButtonVariant.Default,
   size = 'medium',

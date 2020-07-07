@@ -284,6 +284,8 @@ const CheckboxLabel = styled('label')<{disabled?: boolean}>(
 export const Checkbox = ({
   checked = false,
   label = '',
+  // TODO: Fix useTheme and make it a real hook
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
   id = uniqueId(),
   disabled,

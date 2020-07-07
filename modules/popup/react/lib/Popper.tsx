@@ -160,7 +160,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       }
 
       return undefined;
-    }, [anchorElement, getAnchorClientRect]);
+    }, [anchorElement, getAnchorClientRect, popperOptions, popperPlacement, ref]);
 
     return (
       <div {...elemProps} ref={ref}>
