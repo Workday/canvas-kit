@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ErrorType, styled, Themeable} from '@workday/canvas-kit-react-common';
-import {spacing, type} from '@workday/canvas-kit-react-core';
+import {spacing, statusColors, type} from '@workday/canvas-kit-react-core';
 
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
   /**
@@ -19,9 +19,20 @@ export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraph
   alertLabel?: string;
 }
 
-const Label = styled('span')(type.body2, type.variant.label);
+const Label = styled('span')<Pick<HintProps, 'error'>>(
+  type.body2,
+  type.variant.label,
+  ({error}) => error === ErrorType.Error && {color: statusColors.error}
+);
 
-const Message = styled('p')(type.body2, {width: '100%', margin: `${spacing.xxs} 0 0`});
+const Message = styled('p')<Pick<HintProps, 'error'>>(
+  type.body2,
+  {
+    margin: `${spacing.xxs} 0 0`,
+    width: '100%',
+  },
+  ({error}) => error === ErrorType.Error && {color: statusColors.error}
+);
 
 export default class Hint extends React.Component<HintProps> {
   static ErrorType = ErrorType;
@@ -42,7 +53,7 @@ export default class Hint extends React.Component<HintProps> {
 
     return (
       <Message {...this.props}>
-        {typeof error !== 'undefined' && hintLabel && <Label>{hintLabel}: </Label>}
+        {typeof error !== 'undefined' && hintLabel && <Label error={error}>{hintLabel}: </Label>}
         {children}
       </Message>
     );
