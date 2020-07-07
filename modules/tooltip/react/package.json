@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-tooltip",
-  "version": "3.9.0",
+  "version": "3.9.1",
   "description": "",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -41,12 +41,12 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-common": "^3.9.0",
-    "@workday/canvas-kit-react-core": "^3.9.0"
+    "@workday/canvas-kit-react-common": "^3.9.1",
+    "@workday/canvas-kit-react-core": "^3.9.1"
   },
   "devDependencies": {
     "@material-ui/core": "^3.9.2",
-    "@workday/canvas-kit-react-card": "^3.9.0",
+    "@workday/canvas-kit-react-card": "^3.9.1",
     "@workday/canvas-system-icons-web": "^1.0.20"
   }
 }
