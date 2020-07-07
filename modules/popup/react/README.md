@@ -118,6 +118,16 @@ const MyPopper = () => {
 
 Default: `document.body`
 
+#### `getAnchorClientRect?: () => DOMRect`
+
+> When provided, this optional callback will be used to determine positioning for the Popper element
+> instead of calling `getBoundingClientRect` on the `anchorElement` prop. Use this when you need
+> complete control over positioning. When this prop is specified, it is safe to pass `null` into the
+> `anchorElement` prop. If `null` is passed into the `anchorElement` prop, an `owner` will not be
+> provided for the `PopupStack`.
+
+Default: `undefined`
+
 #### `open: boolean`
 
 > Determines if `Popper` content should be rendered. The content only exists in the DOM when `open`

@@ -279,8 +279,9 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   };
 
   private focusedOptionRef = React.createRef<HTMLLIElement>();
+
   private menuRef = React.createRef<HTMLUListElement>();
-  private id = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
+  private menuId = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
 
   private scrollFocusedOptionIntoView = (center: boolean) => {
     const focusedOption = this.focusedOptionRef.current;
@@ -293,17 +294,27 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   };
 
   componentDidUpdate(prevProps: SelectBaseProps) {
-    const {focusedOptionIndex, isMenuHidden} = this.props;
+    const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.props;
 
     // If the menu was just displayed, scroll the focused option into
     // center view
     if (!isMenuHidden && prevProps.isMenuHidden) {
-      this.scrollFocusedOptionIntoView(true);
+      // Delay scrolling by a frame to ensure proper measurements of DOM elements
+      // so we know how far to scroll. Without this delay, sometimes measurements
+      // are correct and sometimes they aren't (may be related to the number of
+      // options and/or the length of their labels) -- add the delay to be safe.
+      requestAnimationFrame(() => {
+        this.scrollFocusedOptionIntoView(true);
+      });
 
       // Otherwise, if the menu is displayed AND the focused option changed
       // since the last render, scroll the focused option into view, but
       // do NOT center it
-    } else if (!isMenuHidden && focusedOptionIndex !== prevProps.focusedOptionIndex) {
+    } else if (
+      !isMenuHidden &&
+      !isMenuHiding &&
+      focusedOptionIndex !== prevProps.focusedOptionIndex
+    ) {
       this.scrollFocusedOptionIntoView(false);
     }
   }
@@ -391,7 +402,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
         <SelectButton
           aria-expanded={!isMenuHidden ? 'true' : undefined}
           aria-haspopup="listbox"
-          aria-owns={this.id}
+          aria-controls={!isMenuHidden ? this.menuId : undefined}
           disabled={disabled}
           error={error}
           grow={grow}
@@ -417,7 +428,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
             aria-activedescendant={options[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}
             buttonRef={buttonRef}
-            id={this.id}
+            id={this.menuId}
             error={error}
             isFlipped={isMenuFlipped}
             isHidden={isMenuHidden}
