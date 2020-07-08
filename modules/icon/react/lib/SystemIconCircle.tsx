@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import {colors, borderRadius} from '@workday/canvas-kit-react-core';
-import SystemIcon from './SystemIcon';
+import SystemIcon, {SystemIconProps} from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {pickForegroundColor} from '@workday/canvas-kit-react-common';
 
@@ -15,7 +15,7 @@ export enum SystemIconCircleSize {
   xxl = 120,
 }
 
-export interface SystemIconCircleProps {
+export interface SystemIconCircleProps extends Pick<SystemIconProps, 'iconRef'> {
   /**
    * The background color of the SystemIconCircle from `@workday/canvas-colors-web`.
    * @default colors.soap300
@@ -66,6 +66,7 @@ export default class SystemIconCircle extends React.Component<SystemIconCirclePr
       background = colors.soap200,
       size = SystemIconCircleSize.l,
       icon,
+      iconRef,
       ...elemProps
     } = this.props;
 
@@ -74,7 +75,13 @@ export default class SystemIconCircle extends React.Component<SystemIconCirclePr
 
     return (
       <Container background={background} size={size} {...elemProps}>
-        <SystemIcon icon={icon} color={iconColor} colorHover={iconColor} size={iconSize} />
+        <SystemIcon
+          icon={icon}
+          color={iconColor}
+          colorHover={iconColor}
+          size={iconSize}
+          iconRef={iconRef}
+        />
       </Container>
     );
   }

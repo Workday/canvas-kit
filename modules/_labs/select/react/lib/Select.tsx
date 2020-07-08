@@ -189,19 +189,34 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       return;
     }
 
-    this.keysSoFar += key;
-    this.startClearKeysSoFarTimer();
-
-    // Set the starting point of the search to the next option after
-    // the currently focused option
-    let start = this.state.focusedOptionIndex + 1;
-    let matchIndex;
+    // Set the starting point of the search to one of two locations
+    // based on the search string so far (keysSoFar):
+    //
+    // 1. If the search string is empty, start the search from the
+    // next option AFTER the currently focused option. For example,
+    // if the Select is currently focused on "San Francisco", typing
+    // "s" again advances focus to the next option that begins with "s".
+    //
+    // 2. If the search string is populated, start the search from the
+    // CURRENTLY focused option. For example, if the Select is currently
+    // focused on "San Francisco", typing "san j" retains focus on
+    // "San Francisco" as you type "san " (because "san " still matches
+    // "San Francisco") and then advances focus to "San Jose" after you
+    // type the "j" at the end.
+    let start =
+      this.keysSoFar.length === 0
+        ? this.state.focusedOptionIndex + 1
+        : this.state.focusedOptionIndex;
 
     // If the starting point is beyond the list of options, reset it
     // to the beginning of the list
     start = start === numOptions ? 0 : start;
 
+    this.keysSoFar += key;
+    this.startClearKeysSoFarTimer();
+
     // First, look for a match from start to end
+    let matchIndex;
     matchIndex = this.getIndexByStartString(start, this.keysSoFar);
 
     // If a match isn't found between start and end, wrap the search

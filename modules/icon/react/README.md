@@ -83,6 +83,12 @@ Default: `false`
 
 ---
 
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
+
+---
+
 # Applet Icons
 
 ## Usage
@@ -156,6 +162,12 @@ Default: `AppletIcon.Colors.Blueberry`
 > Size of the icon in `px`.
 
 Default: `92`
+
+---
+
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
 
 ---
 
@@ -260,6 +272,12 @@ Default: `'transparent'`
 
 ---
 
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
+
+---
+
 # System Icon Circle
 
 A system icon with a colored circular background. Icon color will be determined based on contrast
@@ -305,6 +323,12 @@ Default: `colors.soap300`
 > Size of the icon.
 
 Default: `SystemIconCircleSize.l` (`40`)
+
+---
+
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
 
 ---
 
@@ -372,3 +396,9 @@ Default: `height of graphic`
 > Expand graphic to fit container. `grow` takes precedence over both `width` and `height`.
 
 Default: `false`
+
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
+
+---

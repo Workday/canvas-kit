@@ -6,7 +6,7 @@
  *   .should('be.visible')
  */
 export function getMenu($select: JQuery): JQuery {
-  const id = $select.attr('aria-owns');
+  const id = $select.attr('aria-controls');
   return Cypress.$(`#${id}[role=listbox]`);
 }
 

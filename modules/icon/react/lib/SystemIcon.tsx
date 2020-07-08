@@ -92,6 +92,7 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
       color = iconColors.standard,
       colorHover = iconColors.hover,
       icon,
+      iconRef,
       accent,
       accentHover,
       fill,
@@ -112,7 +113,14 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
     });
 
     return (
-      <Icon src={icon} type={CanvasIconTypes.System} size={size} styles={style} {...elemProps} />
+      <Icon
+        src={icon}
+        type={CanvasIconTypes.System}
+        size={size}
+        styles={style}
+        iconRef={iconRef}
+        {...elemProps}
+      />
     );
   }
 }

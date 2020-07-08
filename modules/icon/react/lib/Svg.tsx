@@ -8,11 +8,12 @@ export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   src: CanvasIcon;
   styles?: CSSObject;
   type: CanvasIconTypes;
+  iconRef?: React.Ref<HTMLSpanElement>;
 }
 
 export default class Svg extends React.Component<SvgProps> {
   public render() {
-    const {src, styles, type, ...elemProps} = this.props;
+    const {src, styles, type, iconRef, ...elemProps} = this.props;
 
     // Validation for JS
     try {
@@ -37,6 +38,7 @@ export default class Svg extends React.Component<SvgProps> {
               }),
               elemProps.className
             )}
+            ref={iconRef}
           />
         )}
       </ClassNames>
