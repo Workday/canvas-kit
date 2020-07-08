@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   ErrorType,
-  uniqueId,
+  useUniqueId,
   focusRing,
   mouseFocusBehavior,
   getErrorColors,
@@ -287,7 +287,7 @@ export const Checkbox = ({
   // TODO: Fix useTheme and make it a real hook
   // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
-  id = uniqueId(),
+  id,
   disabled,
   inputRef,
   onChange,
@@ -296,38 +296,41 @@ export const Checkbox = ({
   indeterminate,
   // TODO: Standardize on prop spread location (see #150)
   ...elemProps
-}: CheckboxProps) => (
-  <CheckboxContainer>
-    <CheckboxInputWrapper disabled={disabled}>
-      <CheckboxInput
-        checked={checked}
-        disabled={disabled}
-        id={id}
-        ref={inputRef}
-        onChange={onChange}
-        type="checkbox"
-        value={value}
-        error={error}
-        {...elemProps}
-      />
-      <CheckboxRipple />
-      <CheckboxBackground checked={checked} disabled={disabled}>
-        <CheckboxCheck checked={checked}>
-          {indeterminate ? (
-            <IndeterminateBox />
-          ) : (
-            <SystemIcon icon={checkSmallIcon} color={theme.canvas.palette.primary.contrast} />
-          )}
-        </CheckboxCheck>
-      </CheckboxBackground>
-    </CheckboxInputWrapper>
-    {label && (
-      <CheckboxLabel htmlFor={id} disabled={disabled}>
-        {label}
-      </CheckboxLabel>
-    )}
-  </CheckboxContainer>
-);
+}: CheckboxProps) => {
+  const inputId = useUniqueId(id);
+  return (
+    <CheckboxContainer>
+      <CheckboxInputWrapper disabled={disabled}>
+        <CheckboxInput
+          checked={checked}
+          disabled={disabled}
+          id={inputId}
+          ref={inputRef}
+          onChange={onChange}
+          type="checkbox"
+          value={value}
+          error={error}
+          {...elemProps}
+        />
+        <CheckboxRipple />
+        <CheckboxBackground checked={checked} disabled={disabled}>
+          <CheckboxCheck checked={checked}>
+            {indeterminate ? (
+              <IndeterminateBox />
+            ) : (
+              <SystemIcon icon={checkSmallIcon} color={theme.canvas.palette.primary.contrast} />
+            )}
+          </CheckboxCheck>
+        </CheckboxBackground>
+      </CheckboxInputWrapper>
+      {label && (
+        <CheckboxLabel htmlFor={id} disabled={disabled}>
+          {label}
+        </CheckboxLabel>
+      )}
+    </CheckboxContainer>
+  );
+};
 
 Checkbox.ErrorType = ErrorType;
 
