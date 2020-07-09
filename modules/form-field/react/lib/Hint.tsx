@@ -22,7 +22,7 @@ export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraph
 const Label = styled('span')<Pick<HintProps, 'error'>>(
   type.body2,
   type.variant.label,
-  ({error}) => error === ErrorType.Error && {color: statusColors.error}
+  ({error, theme}) => error === ErrorType.Error && {color: theme.canvas.palette.error.main}
 );
 
 const Message = styled('p')<Pick<HintProps, 'error'>>(
@@ -31,7 +31,7 @@ const Message = styled('p')<Pick<HintProps, 'error'>>(
     margin: `${spacing.xxs} 0 0`,
     width: '100%',
   },
-  ({error}) => error === ErrorType.Error && {color: statusColors.error}
+  ({error, theme}) => error === ErrorType.Error && {color: theme.canvas.palette.error.main}
 );
 
 export default class Hint extends React.Component<HintProps> {
