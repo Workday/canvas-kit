@@ -2,7 +2,6 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {action} from '@storybook/addon-actions';
 import {withKnobs} from '@storybook/addon-knobs';
 
 import Combobox, {ComboboxProps} from '../index';
@@ -28,7 +27,7 @@ class Autocomplete extends React.Component<
 
   render() {
     const autocompleteResult = (textModifier: string) => (
-      <MenuItem onClick={action(`Clicked Result ${textModifier}`)}>
+      <MenuItem onClick={() => console.log(`Clicked Result ${textModifier}`)}>
         Result{' '}
         <span>
           num<span>ber</span>
@@ -45,8 +44,6 @@ class Autocomplete extends React.Component<
         onChange={this.autocompleteCallback}
         showClearButton={this.props.showClearButton === null ? true : this.props.showClearButton}
         labelId="autocomplete-123"
-        onFocus={action('Focus')}
-        onBlur={action('Blur')}
         initialValue="Test"
       >
         <TextInput autoFocus placeholder="Autocomplete" />
