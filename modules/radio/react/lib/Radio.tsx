@@ -268,7 +268,7 @@ export const Radio = ({
         </RadioBackground>
       </RadioInputWrapper>
       {label && (
-        <RadioLabel htmlFor={id} disabled={disabled}>
+        <RadioLabel htmlFor={inputId} disabled={disabled}>
           {label}
         </RadioLabel>
       )}

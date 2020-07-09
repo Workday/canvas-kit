@@ -324,7 +324,7 @@ export const Checkbox = ({
         </CheckboxBackground>
       </CheckboxInputWrapper>
       {label && (
-        <CheckboxLabel htmlFor={id} disabled={disabled}>
+        <CheckboxLabel htmlFor={inputId} disabled={disabled}>
           {label}
         </CheckboxLabel>
       )}
