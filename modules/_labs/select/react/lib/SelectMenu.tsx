@@ -303,12 +303,11 @@ const SelectMenu = (props: SelectMenuProps) => {
   // Firefox and Edge.
   const placement = isFlipped ? 'top' : 'bottom';
 
-  // Render nothing if buttonRef.current hasn't been set
-  return buttonRef.current ? (
+  return (
     <Popper
       placement={placement}
       open={!isHidden}
-      anchorElement={buttonRef.current}
+      anchorElement={buttonRef}
       popperOptions={generatePopperOptions({
         isFlipped,
         menuRef,
@@ -323,7 +322,7 @@ const SelectMenu = (props: SelectMenuProps) => {
         </MenuList>
       </Menu>
     </Popper>
-  ) : null;
+  );
 };
 
 SelectMenu.defaultProps = {
