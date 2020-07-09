@@ -2,7 +2,6 @@
 import React, {useState, ReactNode, ReactElement, FC, ChangeEvent} from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {action} from '@storybook/addon-actions';
 import {withKnobs} from '@storybook/addon-knobs';
 
 import Combobox, {ComboboxProps, ComboBoxMenuItemGroup} from '../index';
@@ -68,8 +67,6 @@ export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
       onChange={autocompleteCallback}
       showClearButton={showClearButton == null ? true : showClearButton}
       labelId="autocomplete-123"
-      onFocus={action('Focus')}
-      onBlur={action('Blur')}
       initialValue="Test"
       {...props}
     >

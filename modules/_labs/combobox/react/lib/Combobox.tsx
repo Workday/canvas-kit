@@ -111,9 +111,12 @@ const MenuContainer = styled(Card)({
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   {
     width: spacing.l,
+    minWidth: spacing.l,
     height: spacing.l,
     position: 'absolute',
-    margin: 0,
+    margin: `auto ${spacing.xxxs}`,
+    top: 0,
+    bottom: 0,
     right: 0,
     padding: 0,
     zIndex: 2,
@@ -231,7 +234,7 @@ const Combobox = ({
         } else {
           // IE 11
           event = document.createEvent('Event');
-          event.initEvent('input', true, false);
+          event.initEvent('input', true, true);
         }
 
         inputDomElement.dispatchEvent(event);
