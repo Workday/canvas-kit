@@ -120,7 +120,7 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
 );
 
 const LabelContainer = styled('span')({
-  flex: '1 1 auto',
+  flex: '1 1 auto', // add for IE 11 truncating
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
