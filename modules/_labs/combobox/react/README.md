@@ -84,9 +84,9 @@ Default: `'Reset Search Input'`
 
 ---
 
-#### `autocompleteItems: React.ReactElement<MenuItemProps>[]`
+#### `autocompleteItems: React.ReactElement<MenuItemProps>[] | ComboBoxMenuItemGroup[]`
 
-> An array of MenuItems to show under the input.
+> An array of MenuItems to show under the input. You can also optional group the results.
 
 ---
 

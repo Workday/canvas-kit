@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect, useCallback} from 'react';
 
 import {CSSObject, keyframes} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
@@ -188,10 +188,8 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
   })
 );
 
-const generatePopperOptions = (
-  props: Pick<SelectMenuProps, 'isFlipped' | 'menuRef' | 'shouldAutoFlip' | 'shouldAutoFocus'>
-) => {
-  const {isFlipped, menuRef, shouldAutoFlip, shouldAutoFocus} = props;
+const generatePopperOptions = (props: Pick<SelectMenuProps, 'isFlipped' | 'shouldAutoFlip'>) => {
+  const {isFlipped, shouldAutoFlip} = props;
 
   let fallbackPlacements: Placement[] = [];
   if (shouldAutoFlip) {
@@ -232,11 +230,6 @@ const generatePopperOptions = (
 
   return {
     modifiers,
-    onFirstUpdate: () => {
-      if (shouldAutoFocus && menuRef && menuRef.current) {
-        menuRef.current.focus();
-      }
-    },
   };
 };
 
@@ -260,16 +253,24 @@ const SelectMenu = (props: SelectMenuProps) => {
 
   const [width, setWidth] = useState(0);
 
-  const handleWidthChange = () => {
+  const handleWidthChange = useCallback(() => {
     if (buttonRef.current && !isHidden) {
       const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
       setWidth(newMenuWidth);
     }
-  };
+  }, [buttonRef, isHidden]);
+
+  useLayoutEffect(() => {
+    if (shouldAutoFocus) {
+      menuRef?.current?.focus();
+    }
+    // Only focus on mount, so omit dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useLayoutEffect(() => {
     handleWidthChange();
-  }, [buttonRef, isHidden]);
+  }, [handleWidthChange]);
 
   // TODO: Figure out a better way to handle width changes in the reference button.
   // Seems like we should resize the menu when the reference button width changes, not
@@ -284,7 +285,7 @@ const SelectMenu = (props: SelectMenuProps) => {
     return () => {
       window.removeEventListener('resize', handleWidthChange);
     };
-  }, []);
+  }, [handleWidthChange]);
 
   useCloseOnEscape(popupRef, () => onCloseOnEscape?.());
 
@@ -303,17 +304,14 @@ const SelectMenu = (props: SelectMenuProps) => {
   // Firefox and Edge.
   const placement = isFlipped ? 'top' : 'bottom';
 
-  // Render nothing if buttonRef.current hasn't been set
-  return buttonRef.current ? (
+  return (
     <Popper
       placement={placement}
       open={!isHidden}
-      anchorElement={buttonRef.current}
+      anchorElement={buttonRef}
       popperOptions={generatePopperOptions({
         isFlipped,
-        menuRef,
         shouldAutoFlip,
-        shouldAutoFocus,
       })}
       ref={popupRef}
     >
@@ -323,7 +321,7 @@ const SelectMenu = (props: SelectMenuProps) => {
         </MenuList>
       </Menu>
     </Popper>
-  ) : null;
+  );
 };
 
 SelectMenu.defaultProps = {

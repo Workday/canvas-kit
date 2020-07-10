@@ -60,7 +60,7 @@ module.exports = {
     'default-case': 'error',
     'dot-notation': 'error',
     'eol-last': 'off',
-    eqeqeq: 'error',
+    eqeqeq: ['error', 'smart'],
     'guard-for-in': 'error',
     'linebreak-style': 'off',
     'new-parens': 'off',
@@ -87,6 +87,8 @@ module.exports = {
     'prefer-const': 'error',
     'space-before-function-paren': 'off',
     'react/jsx-no-bind': 'off', // Keep perf implications in mind, but was giving too many warnings and hurting readability
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
     curly: 'error',
     radix: 'error',
   },

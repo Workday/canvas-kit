@@ -19,7 +19,7 @@ const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear
     return () => {
       window.clearTimeout(timer.current);
     };
-  }, []);
+  }, [timer]);
 
   return {
     start,

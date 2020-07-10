@@ -37,6 +37,7 @@ export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
   }
 
   try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const contextTheme = React.useContext(ThemeContext) as EmotionCanvasTheme;
     if (contextTheme && contextTheme.canvas) {
       return getFilledTheme(contextTheme);

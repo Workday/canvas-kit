@@ -22,9 +22,9 @@ export const usePopupStack = <E extends HTMLElement>(
   // as the element is available
   React.useLayoutEffect(() => {
     PopupStack.add({element: ref.current!, owner: target});
-
+    const element = ref.current!;
     return () => {
-      PopupStack.remove(ref.current!);
+      PopupStack.remove(element);
     };
-  }, [ref]);
+  }, [ref, target]);
 };
