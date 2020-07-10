@@ -120,9 +120,10 @@ interface Stack {
  * @param path dot-notation path of a deep property
  */
 function get(obj: any, path: string): any {
-  const [first, ...rest] = path.split('.');
-  if (rest.length && obj[first]) {
-    return get(obj[first], rest.join('.'));
+  const parts = path.split('.');
+  const first = parts.splice(0, 1)[0];
+  if (parts.length && obj[first]) {
+    return get(obj[first], parts.join('.'));
   } else {
     return obj[first];
   }
@@ -135,12 +136,13 @@ function get(obj: any, path: string): any {
  * @param value Any value
  */
 function set(obj: any, path: string, value: any): any {
-  const [first, ...rest] = path.split('.');
-  if (rest.length) {
+  const parts = path.split('.');
+  const first = parts.splice(0, 1)[0];
+  if (parts.length) {
     if (obj[first] === undefined) {
       obj[first] = {};
     }
-    set(obj[first], rest.join('.'), value);
+    set(obj[first], parts.join('.'), value);
   } else {
     obj[first] = value;
   }
