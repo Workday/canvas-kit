@@ -5,7 +5,7 @@ import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Tooltip from '../';
 
-describe('Modal', () => {
+describe('Tooltip', () => {
   it('should render on a server without crashing', () => {
     const ssrRender = () =>
       renderToString(
