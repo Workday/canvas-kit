@@ -178,7 +178,7 @@ const useInitialFocus = (
         handlerRef.focus();
       }
     };
-  }, [modalRef, firstFocusRef, handlerRef]);
+  }, [modalRef, firstFocusRef]);
 };
 
 const ModalContent = ({
