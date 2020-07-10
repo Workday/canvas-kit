@@ -106,6 +106,22 @@ const getElementFromRefOrElement = (
   }
 };
 
+const createSetPlacementModifier = (
+  setPlacement: (placement: Placement) => void
+): PopperJS.Modifier<any> => {
+  return {
+    name: 'setPlacement',
+    enabled: true,
+    phase: 'main',
+    fn({state}) {
+      setPlacement(state.placement);
+    },
+  };
+};
+
+// prevent unnecessary renders if popperOptions are not passed
+const defaultPopperOptions: PopperProps['popperOptions'] = {};
+
 // Popper bails early if `open` is false and React hooks cannot be called conditionally,
 // so we're breaking out the open version into another component.
 const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
@@ -113,7 +129,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     {
       anchorElement,
       getAnchorClientRect,
-      popperOptions = {},
+      popperOptions = defaultPopperOptions,
       placement: popperPlacement = 'bottom',
       children,
       ...elemProps
@@ -122,6 +138,8 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
   ) => {
     const localRef = React.useRef<HTMLDivElement>(null);
     const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
+    const firstRender = React.useRef(true);
+    const popperInstance = React.useRef<PopperJS.Instance>();
     const [placement, setPlacement] = React.useState(popperPlacement);
     usePopupStack(
       ref,
@@ -141,26 +159,35 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       }
 
       if (ref.current) {
-        const popper = PopperJS.createPopper(anchorEl, ref.current, {
+        popperInstance.current = PopperJS.createPopper(anchorEl, ref.current, {
           placement: popperPlacement,
           ...popperOptions,
-          onFirstUpdate: data => {
-            if (data.placement) {
-              setPlacement(data.placement);
-            }
-            if (popperOptions.onFirstUpdate) {
-              popperOptions.onFirstUpdate(data);
-            }
-          },
+          modifiers: [...(popperOptions.modifiers || []), createSetPlacementModifier(setPlacement)],
         });
 
         return () => {
-          popper.destroy();
+          popperInstance.current?.destroy();
         };
       }
 
       return undefined;
-    }, [anchorElement, getAnchorClientRect]);
+      // We will maintain our own list of dependencies. We need to separate "create" and "update"
+      // prop dependencies. We do _not_ want to destroy the Popper instance if options or placement
+      // change, only if anchor or target refs change
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [anchorElement, getAnchorClientRect, ref]);
+
+    React.useLayoutEffect(() => {
+      // Only update options if this is _not_ the first render
+      if (!firstRender.current) {
+        popperInstance.current?.setOptions({
+          placement: popperPlacement,
+          ...popperOptions,
+          modifiers: [...(popperOptions.modifiers || []), createSetPlacementModifier(setPlacement)],
+        });
+      }
+      firstRender.current = false;
+    }, [popperOptions, popperPlacement]);
 
     return (
       <div {...elemProps} ref={ref}>

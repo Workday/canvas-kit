@@ -35,6 +35,8 @@ const containerStyles = {
 };
 
 const ToolbarDropdownButton = ({
+  // TODO: Fix useTheme and make it a real hook
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
   buttonRef,
   'aria-label': iconArialabel,

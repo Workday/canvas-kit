@@ -1,7 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
 import styled from '@emotion/styled';
-import {CSSObject, jsx} from '@emotion/core';
-import {accessibleHide, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {CSSObject, jsx, keyframes} from '@emotion/core';
+import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react-core';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react-menu';
 import {Card} from '@workday/canvas-kit-react-card';
@@ -9,6 +9,16 @@ import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react-text-input';
 import uuid from 'uuid/v4';
+import flatten from 'lodash.flatten';
+import AutocompleteList from './AutocompleteList';
+import Status from './Status';
+
+export interface ComboBoxMenuItemGroup {
+  // A non intractable header that logically separates autocomplete items
+  header: React.ReactElement<MenuItemProps>;
+  // A group of logically distinct autocomplete items
+  items: React.ReactElement<MenuItemProps>[];
+}
 
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
@@ -37,7 +47,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
   /**
    * The autocomplete items of the Combobox. This array of menu items is shown under the text input.
    */
-  autocompleteItems?: React.ReactElement<MenuItemProps>[];
+  autocompleteItems?: React.ReactElement<MenuItemProps>[] | ComboBoxMenuItemGroup[];
   /**
    * The function called when the Combobox text input changes.
    */
@@ -69,14 +79,19 @@ const Container = styled('div')<Pick<ComboboxProps, 'grow'>>(
   })
 );
 
-const Status = styled('div')({
-  ...accessibleHide,
-});
-
 const InputContainer = styled('div')({
   display: `flex`,
   alignItems: `center`,
   position: 'relative',
+});
+
+const fadeInKeyframes = keyframes({
+  '0%': {
+    opacity: 0,
+  },
+  '100%': {
+    opacity: 1,
+  },
 });
 
 const MenuContainer = styled(Card)({
@@ -90,11 +105,7 @@ const MenuContainer = styled(Card)({
   marginTop: `-${borderRadius.m}`,
   width: '100%',
   minWidth: 0,
-});
-
-const AutocompleteList = styled('ul')({
-  padding: 0,
-  margin: `${spacing.xxs} 0`,
+  animation: `${fadeInKeyframes} 200ms ease-out`,
 });
 
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
@@ -117,14 +128,15 @@ const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   })
 );
 
-const listBoxIdPart = `listbox`;
+export const listBoxIdPart = `listbox`;
 const optionIdPart = `option`;
-const getOptionId = (baseId?: string, index?: number) => `${baseId}-${optionIdPart}-${index}`;
+export const getOptionId = (baseId?: string, index?: number) =>
+  `${baseId}-${optionIdPart}-${index}`;
 
-const getTextFromElement = (children?: React.ReactNode) => {
+export const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
   React.Children.map(children, child => {
-    if (!child || typeof child === 'boolean' || child === {}) {
+    if (child == null || typeof child === 'boolean' || child === {}) {
       text += '';
     } else if (typeof child === 'string' || typeof child === 'number') {
       text += child.toString();
@@ -163,59 +175,93 @@ const Combobox = ({
   id,
   ...elemProps
 }: ComboboxProps) => {
-  const [isFocused, setIsFocused] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
+  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
   const [showingAutocomplete, setShowingAutocomplete] = useState(false);
   const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState<number | null>(null);
+  const [interactiveAutocompleteItems, setInteractiveAutocompleteItems] = useState<
+    React.ReactElement<MenuItemProps>[]
+  >([]);
+  const [announcementText, setAnnouncementText] = useState('');
 
+  // The text input that is wrapped may have a ref already set, if it doesn't we will use our own default.
+  // This default shouldn't be used on it's own, ut we need to declare separately so hooks are always called in the same order.
+  const _defaultInputRef: React.RefObject<HTMLInputElement> = useRef(null);
   const inputRef: React.RefObject<HTMLInputElement> =
-    (typeof children.props.inputRef !== 'function' && children.props.inputRef) || useRef(null);
+    (typeof children.props.inputRef !== 'function' && children.props.inputRef) || _defaultInputRef;
+
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
+
   const [randomComponentId] = React.useState(() => uuid()); // https://codesandbox.io/s/p2ndq
+  const [randomLabelId] = React.useState(() => uuid());
 
   const componentId = id || randomComponentId;
+  const formLabelId = labelId || randomLabelId;
 
-  const [value, _setValue] = useState(''); // Don't call _setValue directly instead call setInputValue to make sure onChange fires correctly
-  const setInputValue = (newValue: string) => {
-    _setValue(newValue);
-    const inputDomElement = inputRef.current;
-    // Changing value prop programmatically doesn't fire an Synthetic event or trigger native onChange.
-    // We can not just update .value= in setState because React library overrides input value setter
-    // but we can call the function directly on the input as context.
-    // This will cause onChange events to fire no matter how value is updated.
-    if (inputDomElement) {
-      const nativeInputValue = Object.getOwnPropertyDescriptor(
-        Object.getPrototypeOf(inputDomElement),
-        'value'
-      );
-      if (nativeInputValue && nativeInputValue.set) {
-        nativeInputValue.set.call(inputDomElement, newValue);
-      }
+  const [showGroupText, setShowGroupText] = useState(false);
 
-      let event: Event;
-      if (typeof Event === 'function') {
-        // modern browsers
-        event = new Event('input', {bubbles: true});
-      } else {
-        // IE 11
-        event = document.createEvent('Event');
-        event.initEvent('input', true, true);
-      }
-
-      inputDomElement.dispatchEvent(event);
+  // We're using LayoutEffect here because of an issue with the Synthetic event system and typing a key
+  // after the listbox has been closed. Somehow the key is ignored unless we use `useLayoutEffect`
+  useLayoutEffect(() => {
+    const shouldShow = interactiveAutocompleteItems.length > 0 && isOpened;
+    setShowingAutocomplete(shouldShow);
+    if (shouldShow) {
+      setAnnouncementText(getStatusText(interactiveAutocompleteItems.length));
     }
-  };
+  }, [getStatusText, interactiveAutocompleteItems, isOpened]);
+
+  const setInputValue = useCallback(
+    (newValue: string) => {
+      _setValue(newValue);
+      const inputDomElement = inputRef.current;
+      // Changing value prop programmatically doesn't fire an Synthetic event or trigger native onChange.
+      // We can not just update .value= in setState because React library overrides input value setter
+      // but we can call the function directly on the input as context.
+      // This will cause onChange events to fire no matter how value is updated.
+      if (inputDomElement) {
+        const nativeInputValue = Object.getOwnPropertyDescriptor(
+          Object.getPrototypeOf(inputDomElement),
+          'value'
+        );
+        if (nativeInputValue && nativeInputValue.set) {
+          nativeInputValue.set.call(inputDomElement, newValue);
+        }
+
+        let event: Event;
+        if (typeof Event === 'function') {
+          // modern browsers
+          event = new Event('input', {bubbles: true});
+        } else {
+          // IE 11
+          event = document.createEvent('Event');
+          event.initEvent('input', true, true);
+        }
+
+        inputDomElement.dispatchEvent(event);
+      }
+    },
+    [inputRef]
+  );
 
   useEffect(() => {
     if (initialValue) {
       setInputValue(initialValue);
     }
-  }, []);
+  }, [initialValue, setInputValue]);
 
   useEffect(() => {
-    if (autocompleteItems) {
-      setShowingAutocomplete(autocompleteItems.length > 0 && isFocused);
-    }
-  }, [autocompleteItems, isFocused, value]);
+    const getInteractiveAutocompleteItems = (): React.ReactElement<MenuItemProps>[] => {
+      if (
+        autocompleteItems &&
+        autocompleteItems.length &&
+        autocompleteItems[0].hasOwnProperty('header')
+      ) {
+        return flatten((autocompleteItems as ComboBoxMenuItemGroup[]).map(group => group.items));
+      }
+      return (autocompleteItems as React.ReactElement<MenuItemProps>[]) || [];
+    };
+    setInteractiveAutocompleteItems(getInteractiveAutocompleteItems());
+  }, [autocompleteItems]);
 
   const handleAutocompleteClick = (
     event: React.KeyboardEvent | React.MouseEvent,
@@ -225,7 +271,7 @@ const Combobox = ({
       return;
     }
     setShowingAutocomplete(false);
-    setIsFocused(false);
+    setIsOpened(false);
     setInputValue(getTextFromElement(menuItemProps.children));
     if (menuItemProps.onClick) {
       menuItemProps.onClick(event as React.MouseEvent);
@@ -238,8 +284,14 @@ const Combobox = ({
     }
   };
 
+  const handleClick = (event: React.MouseEvent) => {
+    if (!showingAutocomplete) {
+      setShowingAutocomplete(true);
+    }
+  };
+
   const handleFocus = (event: React.FocusEvent) => {
-    setIsFocused(true);
+    setIsOpened(true);
 
     if (onFocus) {
       onFocus(event);
@@ -258,7 +310,7 @@ const Combobox = ({
       }
     }
 
-    setIsFocused(false);
+    setIsOpened(false);
 
     if (onBlur) {
       onBlur(event);
@@ -270,14 +322,33 @@ const Combobox = ({
     focusInput();
   };
 
+  const getGroupIndex = (itemIndex: number | null) => {
+    if (
+      itemIndex != null &&
+      autocompleteItems &&
+      autocompleteItems.length &&
+      autocompleteItems[0].hasOwnProperty('header')
+    ) {
+      let count = 0;
+      return (autocompleteItems as ComboBoxMenuItemGroup[]).findIndex(groups => {
+        count += groups.items.length;
+        return count > itemIndex;
+      });
+    } else {
+      return -1;
+    }
+  };
+
   const handleKeyboardShortcuts = (event: React.KeyboardEvent): void => {
-    if (event.ctrlKey || event.altKey || event.metaKey || !autocompleteItems) {
+    if (event.ctrlKey || event.altKey || event.metaKey || !interactiveAutocompleteItems.length) {
       return;
     }
-    const autoCompleteItemCount = autocompleteItems.length;
+    const autoCompleteItemCount = interactiveAutocompleteItems.length;
     const firstItem = 0;
     const lastItem = autoCompleteItemCount - 1;
     let nextIndex = null;
+
+    setIsOpened(true);
 
     switch (event.key) {
       case 'ArrowUp':
@@ -304,13 +375,12 @@ const Combobox = ({
         break;
 
       case 'Enter':
-        if (selectedAutocompleteIndex !== null) {
-          const item = autocompleteItems[selectedAutocompleteIndex];
+        if (selectedAutocompleteIndex != null) {
+          const item = interactiveAutocompleteItems[selectedAutocompleteIndex];
           handleAutocompleteClick(event, item.props);
           if (item.props.isDisabled) {
             nextIndex = selectedAutocompleteIndex;
           }
-          setIsFocused(true);
           event.stopPropagation();
           event.preventDefault();
         }
@@ -318,6 +388,9 @@ const Combobox = ({
 
       default:
     }
+    const lastGroupIndex = getGroupIndex(selectedAutocompleteIndex);
+    const nextGroupIndex = getGroupIndex(nextIndex);
+    setShowGroupText(lastGroupIndex !== nextGroupIndex);
     setSelectedAutocompleteIndex(nextIndex);
   };
 
@@ -346,14 +419,15 @@ const Combobox = ({
       'aria-activedescendant':
         selectedAutocompleteIndex !== null
           ? getOptionId(componentId, selectedAutocompleteIndex)
-          : '',
+          : undefined,
+      onClick: handleClick,
       onChange: handleSearchInputChange,
       onKeyDown: handleKeyboardShortcuts,
       onFocus: handleFocus,
       onBlur: handleBlur,
       css: cssOverride,
       role: 'combobox',
-      'aria-owns': `${componentId}-${listBoxIdPart}`,
+      'aria-owns': showingAutocomplete ? `${componentId}-${listBoxIdPart}` : undefined,
       'aria-haspopup': true,
       'aria-expanded': showingAutocomplete,
     };
@@ -380,36 +454,20 @@ const Combobox = ({
             onBlur={handleBlur}
           />
         )}
-        {showingAutocomplete && (
+        {showingAutocomplete && autocompleteItems && (
           <MenuContainer padding={spacing.zero} depth={depth[1]}>
             <AutocompleteList
-              role="listbox"
-              id={`${componentId}-${listBoxIdPart}`}
-              aria-labelledby={labelId}
-            >
-              {(autocompleteItems || []).map((listboxItem: React.ReactElement, index) => (
-                <React.Fragment key={index}>
-                  {React.cloneElement(listboxItem, {
-                    id: getOptionId(componentId, index),
-                    role: 'option',
-                    isFocused: selectedAutocompleteIndex === index,
-                    'aria-selected': selectedAutocompleteIndex === index,
-                    onClick: (event: React.MouseEvent) => {
-                      event.preventDefault();
-                      handleAutocompleteClick(event, listboxItem.props);
-                    },
-                  })}
-                </React.Fragment>
-              ))}
-            </AutocompleteList>
+              comboboxId={componentId}
+              autocompleteItems={autocompleteItems}
+              selectedIndex={selectedAutocompleteIndex}
+              handleAutocompleteClick={handleAutocompleteClick}
+              labelId={formLabelId}
+              showGroupText={showGroupText}
+            />
           </MenuContainer>
         )}
       </InputContainer>
-      <Status role="status" aria-live="polite">
-        {autocompleteItems
-          ? showingAutocomplete && buildStatusString(autocompleteItems.length)
-          : ''}
-      </Status>
+      <Status announcementText={announcementText} />
     </Container>
   );
 };

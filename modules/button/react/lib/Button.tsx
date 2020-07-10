@@ -52,6 +52,8 @@ export interface ButtonProps
 }
 
 const Button: ButtonOrAnchorComponent<ButtonProps, typeof ButtonVariant> = ({
+  // TODO: Fix useTheme and make it a real hook
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
   variant = ButtonVariant.Secondary,
   size = 'medium',
