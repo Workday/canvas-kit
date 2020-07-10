@@ -15,6 +15,7 @@ module.exports = {
     'prettier/react',
     'prettier/@typescript-eslint',
     'plugin:compat/recommended',
+    'plugin:react-ssr/all',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -41,6 +42,7 @@ module.exports = {
     'react-hooks',
     'emotion',
     'jsdoc',
+    'react-ssr',
   ],
   rules: {
     'workday-custom-rules/restricted-imports': 'error',

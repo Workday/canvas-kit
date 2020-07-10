@@ -1,6 +1,6 @@
 .wdc-icon-list {
   display: flex;
-  > *:first-child {
+  > *:first-of-type {
     margin-left: -$wdc-spacing-xxxs;
   }
 

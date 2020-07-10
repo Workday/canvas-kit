@@ -16,7 +16,7 @@
   display: inline-block;
   padding: $wdc-action-bar-container-padding;
 
-  *:not(:first-child) {
+  *:not(:first-of-type) {
     margin-left: $wdc-action-bar-item-spacing;
   }
 }
@@ -35,7 +35,7 @@
     * {
       flex: 1;
 
-      &:not(:first-child) {
+      &:not(:first-of-type) {
         margin-right: $wdc-action-bar-item-spacing;
         margin-left: 0;
       }

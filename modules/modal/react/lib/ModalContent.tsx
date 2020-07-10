@@ -135,9 +135,16 @@ function getFirstElementToFocus(overlayEl: HTMLElement): HTMLElement {
   }
 }
 
+const getFromWindow = <T extends any>(property: string, defaultValue: T): T => {
+  if (typeof window !== undefined) {
+    return (window as any)[property] ?? defaultValue;
+  }
+  return defaultValue;
+};
+
 const useWindowSize = (): {width: number; height: number} => {
-  const [width, setWidth] = React.useState(window?.innerWidth ?? 0);
-  const [height, setHeight] = React.useState(window?.innerHeight ?? 0);
+  const [width, setWidth] = React.useState(getFromWindow('innerWidth', 0));
+  const [height, setHeight] = React.useState(getFromWindow('innerHeight', 0));
 
   const onResize = () => {
     setWidth(window.innerWidth);
@@ -158,9 +165,9 @@ const useInitialFocus = (
   modalRef: React.RefObject<HTMLElement>,
   firstFocusRef: React.RefObject<HTMLElement> | undefined
 ) => {
-  const handlerRef = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
   React.useLayoutEffect(() => {
+    const handlerRef =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     if (modalRef.current) {
       const elem =
         (firstFocusRef && firstFocusRef.current) || getFirstElementToFocus(modalRef.current);
@@ -171,20 +178,20 @@ const useInitialFocus = (
         handlerRef.focus();
       }
     };
-  }, [modalRef, firstFocusRef, handlerRef]);
+  }, [modalRef, firstFocusRef]);
 };
 
 const ModalContent = ({
   ariaLabel,
   width = ModalWidth.s,
   padding = PopupPadding.l,
-  container = document.body,
+  container,
   handleClose,
   children,
   firstFocusRef,
   heading,
   ...elemProps
-}: ModalContentProps): JSX.Element => {
+}: ModalContentProps) => {
   const modalRef = React.useRef<HTMLDivElement>(null);
 
   const onClose = () => handleClose?.();
@@ -225,7 +232,12 @@ const ModalContent = ({
     </Container>
   );
 
-  return ReactDOM.createPortal(content, container);
+  // only render something on the client
+  if (typeof window !== 'undefined') {
+    return ReactDOM.createPortal(content, container || document.body);
+  } else {
+    return null;
+  }
 };
 
 export default ModalContent;

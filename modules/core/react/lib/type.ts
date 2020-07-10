@@ -3,7 +3,8 @@ import {default as colors, typeColors, statusColors} from '@workday/canvas-color
 import {borderRadius} from './radius';
 import {CSSProperties} from './types';
 
-const inheritFont = get(window, 'window.workday.canvas.inheritFontFamily');
+const inheritFont =
+  typeof window !== 'undefined' && get(window, 'window.workday.canvas.inheritFontFamily');
 export const fontFamily = inheritFont
   ? 'inherit'
   : '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';

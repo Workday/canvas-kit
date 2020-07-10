@@ -46,7 +46,7 @@ export function useTheme(theme?: PartialEmotionCanvasTheme): EmotionCanvasTheme 
     // Context not supported or invalid (probably called from within a class component)
   }
 
-  const windowTheme = get(window, 'window.workday.canvas.theme');
+  const windowTheme = typeof window !== 'undefined' && get(window, 'window.workday.canvas.theme');
   if (windowTheme) {
     return getFilledTheme({canvas: windowTheme});
   }

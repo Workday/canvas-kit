@@ -134,7 +134,7 @@ const navStyle = ({themeColor}: PickRequired<HeaderProps, 'themeColor', 'css'>) 
           height: 'inherit',
           transition: `color 150ms ease-out 0s`,
           cursor: 'pointer',
-          '&:first-child > *': {
+          '&:first-of-type > *': {
             marginLeft: 0,
           },
           '&:last-child > *': {
