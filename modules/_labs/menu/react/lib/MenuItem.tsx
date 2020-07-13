@@ -120,7 +120,7 @@ const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
 );
 
 const LabelContainer = styled('span')({
-  flex: '1',
+  flex: '1 1 auto',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
