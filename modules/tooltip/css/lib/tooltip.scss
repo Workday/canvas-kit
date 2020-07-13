@@ -95,7 +95,7 @@
     margin-top: 0;
     margin-bottom: 0;
 
-    &:not(:first-child) {
+    &:not(:first-of-type) {
       margin-top: $wdc-spacing-xxxs;
     }
   }

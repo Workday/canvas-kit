@@ -13,11 +13,14 @@ export const useCloseOnEscape = <E extends HTMLElement>(
   ref: React.RefObject<E>,
   onClose: () => void
 ) => {
-  const onKeyDown = (event: KeyboardEvent) => {
-    if ((event.key === 'Esc' || event.key === 'Escape') && PopupStack.isTopmost(ref.current!)) {
-      onClose();
-    }
-  };
+  const onKeyDown = React.useCallback(
+    (event: KeyboardEvent) => {
+      if ((event.key === 'Esc' || event.key === 'Escape') && PopupStack.isTopmost(ref.current!)) {
+        onClose();
+      }
+    },
+    [onClose, ref]
+  );
 
   // `useLayoutEffect` for automation
   React.useLayoutEffect(() => {
@@ -25,5 +28,5 @@ export const useCloseOnEscape = <E extends HTMLElement>(
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [onClose]);
+  }, [onClose, onKeyDown]);
 };

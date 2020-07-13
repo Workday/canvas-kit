@@ -21,6 +21,7 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
   - [Accessibility](#accessibility)
   - [Child Mapping](#child-mapping)
   - [Logic Flow](#logic-flow)
+  - [Server Side Rendering](#server-side-rendering)
 - [Code Style](#code-style)
   - [Default Props](#default-props)
   - [Class Function Binding](#class-function-binding)
@@ -231,6 +232,20 @@ foo() => {
 
 foo();
 ```
+
+#### Server Side Rendering
+
+- In order to support SSR, we cannot reference global objects (`window`, `document`, etc.) before a
+  component is hydrated/mounted.
+- Generally, it is only safe to use these freely within `componentDidMount`, `useEffect` and
+  `useLayoutEffect`.
+- This means that any reference to `window` or `document` should be avoided wherever possible within
+  the global scope, constructors, and render methods.
+- If you need to reference these variables in these avoided places, you must check whether it's
+  undefined first (e.g. `typeof window !== 'undefined'`)
+- Be particularly careful when initializing default props or state with something stored on the
+  `window`/`document` objects. These initializations will have to be skipped for SSR contexts
+  (assign `undefined` or `null`) and updated upon mounting.
 
 ## Code Style
 

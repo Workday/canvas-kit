@@ -53,7 +53,7 @@ function makeColoredRow(_bgColor: string, _borderColor: string): CSSObject {
       bottom: -borderWidth,
     },
 
-    '&:first-child': {
+    '&:first-of-type': {
       boxShadow: `inset ${borderWidth}px 0 0 ${_borderColor}`,
     },
 

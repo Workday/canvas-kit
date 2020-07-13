@@ -12,6 +12,7 @@ const component = require('./templates/react/component');
 const index = require('./templates/react/index');
 const stories = require('./templates/react/stories');
 const testingStories = require('./templates/react/stories_VisualTesting');
+const ssr = require('./templates/react/SSR');
 const readme = require('./templates/react/readme');
 const tsconfig = require('./templates/react/tsconfig');
 
@@ -50,6 +51,10 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
     testingStories: {
       path: 'stories/stories_VisualTesting.tsx',
       contents: testingStories(testingStoryPath, pascalCaseName, rootPath),
+    },
+    ssr: {
+      path: 'spec/SSR.spec.tsx',
+      contents: ssr(pascalCaseName),
     },
     readme: {
       path: 'README.md',

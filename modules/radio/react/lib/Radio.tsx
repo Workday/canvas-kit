@@ -4,7 +4,7 @@ import {
   mouseFocusBehavior,
   styled,
   Themeable,
-  uniqueId,
+  useUniqueId,
 } from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
@@ -237,7 +237,7 @@ const RadioLabel = styled('label')<{disabled?: boolean}>(
 
 export const Radio = ({
   checked = false,
-  id = uniqueId(),
+  id,
   label = '',
   disabled,
   inputRef,
@@ -245,32 +245,35 @@ export const Radio = ({
   onChange,
   value,
   ...elemProps
-}: RadioProps) => (
-  <RadioContainer>
-    <RadioInputWrapper disabled={disabled}>
-      <RadioInput
-        checked={checked}
-        disabled={disabled}
-        id={id}
-        ref={inputRef}
-        name={name}
-        onChange={onChange}
-        type="radio"
-        value={value}
-        aria-checked={checked}
-        {...elemProps}
-      />
-      <RadioRipple />
-      <RadioBackground checked={checked} disabled={disabled}>
-        <RadioCheck checked={checked} />
-      </RadioBackground>
-    </RadioInputWrapper>
-    {label && (
-      <RadioLabel htmlFor={id} disabled={disabled}>
-        {label}
-      </RadioLabel>
-    )}
-  </RadioContainer>
-);
+}: RadioProps) => {
+  const inputId = useUniqueId(id);
+  return (
+    <RadioContainer>
+      <RadioInputWrapper disabled={disabled}>
+        <RadioInput
+          checked={checked}
+          disabled={disabled}
+          id={inputId}
+          ref={inputRef}
+          name={name}
+          onChange={onChange}
+          type="radio"
+          value={value}
+          aria-checked={checked}
+          {...elemProps}
+        />
+        <RadioRipple />
+        <RadioBackground checked={checked} disabled={disabled}>
+          <RadioCheck checked={checked} />
+        </RadioBackground>
+      </RadioInputWrapper>
+      {label && (
+        <RadioLabel htmlFor={inputId} disabled={disabled}>
+          {label}
+        </RadioLabel>
+      )}
+    </RadioContainer>
+  );
+};
 
 export default Radio;

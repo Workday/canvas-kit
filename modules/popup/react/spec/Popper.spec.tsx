@@ -1,7 +1,7 @@
 /// <reference types="@testing-library/jest-dom/extend-expect" />
 
 import React from 'react';
-import {render, getByTestId} from '@testing-library/react';
+import {render, getByTestId, act} from '@testing-library/react';
 
 import {Popper} from '../';
 
@@ -67,6 +67,38 @@ describe('Popper', () => {
     expect(renderProp).toBeCalledWith({placement: 'bottom'});
   });
 
+  it('should call the children render prop with the placement on rerender', async () => {
+    const renderProp = jest.fn();
+    const PopperComponent = ({placement}) => {
+      const anchor = React.useRef(null);
+      return (
+        <>
+          <div style={{position: 'absolute', top: 100, left: 100}} ref={anchor}>
+            Anchor
+          </div>
+          <Popper anchorElement={anchor} placement={placement}>
+            {renderProp}
+          </Popper>
+        </>
+      );
+    };
+    const screen = render(<PopperComponent placement="bottom" />);
+
+    // force PopperJS to run
+    // eslint-disable-next-line compat/compat
+    await act(() => new Promise(requestAnimationFrame));
+
+    expect(renderProp).toBeCalledWith({placement: 'bottom'});
+
+    screen.rerender(<PopperComponent placement="top" />);
+
+    // force PopperJS to run
+    // eslint-disable-next-line compat/compat
+    await act(() => new Promise(requestAnimationFrame));
+
+    expect(renderProp).toBeCalledWith({placement: 'top'});
+  });
+
   it('should forward extra properties to the containing element', () => {
     const {getByTestId} = render(
       <Popper anchorElement={document.body} data-testid="popper" data-extra="test">
@@ -75,5 +107,32 @@ describe('Popper', () => {
     );
 
     expect(getByTestId('popper')).toHaveAttribute('data-extra', 'test');
+  });
+
+  it('should only create a Popper instance once and only call onFirstUpdate once on rerenders', async () => {
+    const onFirstUpdate = jest.fn();
+    const screen = render(
+      <Popper anchorElement={document.body} popperOptions={{onFirstUpdate}} placement="top">
+        Contents
+      </Popper>
+    );
+
+    // force PopperJS to run
+    // eslint-disable-next-line compat/compat
+    await act(() => new Promise(requestAnimationFrame));
+
+    expect(onFirstUpdate).toHaveBeenCalledTimes(1);
+
+    screen.rerender(
+      <Popper anchorElement={document.body} popperOptions={{onFirstUpdate}} placement="bottom">
+        Contents
+      </Popper>
+    );
+
+    // force PopperJS to run
+    // eslint-disable-next-line compat/compat
+    await act(() => new Promise(requestAnimationFrame));
+
+    expect(onFirstUpdate).toHaveBeenCalledTimes(1);
   });
 });

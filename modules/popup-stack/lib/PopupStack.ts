@@ -113,16 +113,80 @@ interface Stack {
   };
 }
 
+/**
+ * Get a deeply nested dot-notation path from an arbitrary object safely. Will return `undefined` if
+ * path does not exist. This function is not meant to be type-safe. Use with caution.
+ * @param obj Any object
+ * @param path dot-notation path of a deep property
+ */
+function get(obj: any, path: string): any {
+  const parts = path.split('.');
+  const first = parts.splice(0, 1)[0];
+  if (parts.length && obj[first]) {
+    return get(obj[first], parts.join('.'));
+  } else {
+    return obj[first];
+  }
+}
+
+/**
+ * Set a deeply nested dot-notation path for an arbitrary object safely.
+ * @param obj Any object
+ * @param path dot-notation path of a deep property
+ * @param value Any value
+ */
+function set(obj: any, path: string, value: any): any {
+  const parts = path.split('.');
+  const first = parts.splice(0, 1)[0];
+  if (parts.length) {
+    if (obj[first] === undefined) {
+      obj[first] = {};
+    }
+    set(obj[first], parts.join('.'), value);
+  } else {
+    obj[first] = value;
+  }
+  return value;
+}
+
+if (typeof window !== 'undefined') {
+  (window as any).workday = (window as any).workday || {};
+}
+
+/**
+ * Safely get a value from window. Return the value or `undefined` if the path does not exist. This
+ * function is not meant to be type-safe. Use with caution. Will silently return `undefined` in
+ * environments without a `window` object, so it is safe to use in server-side rendering.
+ * @param path Any dot-notation path
+ */
+const getFromWindow = (path: string) => {
+  if (typeof window !== 'undefined') {
+    return get(window, path);
+  }
+  return undefined;
+};
+
+/**
+ * Set a deeply nested dot-notation path for an arbitrary path on `window` safely. Will silently do
+ * nothing in environments without a `window` object, so it is safe to run in server-side rendering.
+ * @param path dot-notation path of a deep property
+ * @param value Any value
+ */
+const setToWindow = (path: string, value: any) => {
+  if (typeof window !== 'undefined') {
+    set(window, path, value);
+  }
+};
+
 // We need to make sure only one stack is ever in use on the page - ever. If a stack is already
 // defined on the page, we need to use that one. Never, ever, ever change this variable name on
 // window
-(window as any).workday = (window as any).workday || {};
-const stack: Stack = (window as any).workday.__popupStack || {
+const stack: Stack = getFromWindow('workday.__popupStack') || {
   description: 'Global popup stack from @workday/canvas-kit-popup-stack',
   items: [] as PopupStackItem[],
   zIndex: {min: 30, max: 50, getValue: getValue},
 };
-(window as any).workday.__popupStack = stack;
+setToWindow('workday.__popupStack', stack);
 
 export const PopupStack = {
   /**

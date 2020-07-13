@@ -2,11 +2,11 @@ import * as React from 'react';
 import {
   ErrorType,
   focusRing,
-  uniqueId,
   mouseFocusBehavior,
   getErrorColors,
   styled,
   Themeable,
+  useUniqueId,
 } from '@workday/canvas-kit-react-common';
 import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react-core';
 
@@ -164,31 +164,34 @@ const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>(
 
 export const Switch = ({
   checked = false,
-  id = uniqueId(),
+  id,
   disabled = false,
   inputRef,
   onChange,
   value,
   ...elemProps
-}: SwitchProps) => (
-  <SwitchContainer>
-    <SwitchInput
-      checked={checked}
-      disabled={disabled}
-      id={id}
-      ref={inputRef}
-      onChange={onChange}
-      role="checkbox"
-      tabIndex={0}
-      type="checkbox"
-      value={value}
-      {...elemProps}
-    />
-    <SwitchBackground checked={checked} disabled={disabled}>
-      <SwitchCircle checked={checked} />
-    </SwitchBackground>
-  </SwitchContainer>
-);
+}: SwitchProps) => {
+  const inputId = useUniqueId(id);
+  return (
+    <SwitchContainer>
+      <SwitchInput
+        checked={checked}
+        disabled={disabled}
+        id={inputId}
+        ref={inputRef}
+        onChange={onChange}
+        role="checkbox"
+        tabIndex={0}
+        type="checkbox"
+        value={value}
+        {...elemProps}
+      />
+      <SwitchBackground checked={checked} disabled={disabled}>
+        <SwitchCircle checked={checked} />
+      </SwitchBackground>
+    </SwitchContainer>
+  );
+};
 
 Switch.ErrorType = ErrorType;
 

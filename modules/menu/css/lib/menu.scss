@@ -91,12 +91,12 @@
 
       .wdc-icon,
       .wdc-menu-item-icon {
-        &:first-child {
+        &:first-of-type {
           margin-right: 16px;
           order: 1;
         }
 
-        &:not(:first-child) {
+        &:not(:first-of-type) {
           margin-left: 16px;
           order: 3;
         }
@@ -124,7 +124,7 @@
     margin-top: 0;
     margin-bottom: 0;
 
-    &:not(:first-child) {
+    &:not(:first-of-type) {
       margin-top: $wdc-spacing-xxxs;
     }
   }

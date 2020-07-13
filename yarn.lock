@@ -4121,10 +4121,10 @@
   dependencies:
     "@workday/design-assets-types" "0.2.4"
 
-"@workday/canvas-colors-web@^0.17.13":
-  version "0.17.13"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-colors-web/-/canvas-colors-web-0.17.13.tgz#fea14ff2429bc0ce104aaf174edbf5eee137e4e9"
-  integrity sha512-rWruYs3Q38YiCKsEUOncQ0A3+ZA4ZxeCvaM16zMHerfFb/sS4CGojNlr5BJ12PTA3oaGgGRYNgMxVzTOrFnlWw==
+"@workday/canvas-colors-web@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-colors-web/-/canvas-colors-web-2.0.0.tgz#1e50e4ab70a00d8ba6037536a328ac227ce2274f"
+  integrity sha512-1gqf/oLeJSqrma0xQxOhWNWky+0JxJ/vbBy3A7VG8m51CJzraTLwKN7HViqJiZM4xHjy61kK9e42IJKVEeLO2Q==
 
 "@workday/canvas-depth-web@^0.16.4":
   version "0.16.4"
@@ -7328,7 +7328,7 @@ doctrine@1.5.0:
     esutils "^2.0.2"
     isarray "^1.0.0"
 
-doctrine@^2.1.0:
+doctrine@^2.0.0, doctrine@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-2.1.0.tgz#5cd01fc101621b42c4cd7f5d1a66243716d3f39d"
   integrity sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==
@@ -7958,6 +7958,15 @@ eslint-plugin-react-hooks@^2.1.2:
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-2.1.2.tgz#1358d2acb2c5e02b7e90c37e611ac258a488e3a7"
   integrity sha512-ZR+AyesAUGxJAyTFlF3MbzeVHAcQTFQt1fFVe5o0dzY/HFoj1dgQDMoIkiM+ltN/HhlHBYX4JpJwYonjxsyQMA==
 
+eslint-plugin-react-ssr@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-ssr/-/eslint-plugin-react-ssr-1.0.3.tgz#ba57acafec81fa2053b92f0018eb7434c6976ad0"
+  integrity sha512-6PnDRik8cn5nnRy6V/AL71rxIEV4E9NiVUyO6e2cgWfUdnimi9kE25bTzxME8uyK0r8UXlApPftiMEIC9iZX6Q==
+  dependencies:
+    doctrine "^2.0.0"
+    has "^1.0.1"
+    jsx-ast-utils "^2.0.0"
+
 eslint-plugin-react@^7.16.0:
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.19.0.tgz#6d08f9673628aa69c5559d33489e855d83551666"
@@ -7976,7 +7985,7 @@ eslint-plugin-react@^7.16.0:
     string.prototype.matchall "^4.0.2"
     xregexp "^4.3.0"
 
-eslint-plugin-workday-custom-rules@./utils/custom-lint-rules/:
+"eslint-plugin-workday-custom-rules@file:./utils/custom-lint-rules":
   version "0.0.1"
 
 eslint-scope@^4.0.0, eslint-scope@^4.0.3:
@@ -9425,7 +9434,7 @@ has-values@^1.0.0:
     is-number "^3.0.0"
     kind-of "^4.0.0"
 
-has@^1.0.3:
+has@^1.0.1, has@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/has/-/has-1.0.3.tgz#722d7cbfc1f6aa8241f16dd814e011e1f41e8796"
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
@@ -11864,6 +11873,14 @@ jstransformer@1.0.0:
   dependencies:
     is-promise "^2.0.0"
     promise "^7.0.1"
+
+jsx-ast-utils@^2.0.0:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-2.4.1.tgz#1114a4c1209481db06c690c2b4f488cc665f657e"
+  integrity sha512-z1xSldJ6imESSzOjd3NNkieVJKRlKYSOtMG8SFyCj2FIrvSaSuli/WjpBkEzCBoR9bYYYFgqJw61Xhu7Lcgk+w==
+  dependencies:
+    array-includes "^3.1.1"
+    object.assign "^4.1.0"
 
 jsx-ast-utils@^2.2.3:
   version "2.2.3"

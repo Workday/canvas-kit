@@ -22,11 +22,17 @@ const Modal = ({
   open = false,
   padding = PopupPadding.l,
   width = ModalWidth.s,
-  container = document.body,
+  container,
   ...modalContentProps
 }: ModalProps): JSX.Element | null =>
-  open ? (
-    <ModalContent container={container} padding={padding} width={width} {...modalContentProps} />
+  // Only render if on the client and `open` is `true`
+  open && typeof window !== 'undefined' ? (
+    <ModalContent
+      container={container || document.body}
+      padding={padding}
+      width={width}
+      {...modalContentProps}
+    />
   ) : null;
 
 Modal.Padding = PopupPadding;

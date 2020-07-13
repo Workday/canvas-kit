@@ -4,7 +4,7 @@ import elementClosestPolyfill from 'element-closest';
 
 export interface InputProviderProps {
   provideIntent?: boolean;
-  container: HTMLElement | React.RefObject<HTMLElement>;
+  container?: HTMLElement | React.RefObject<HTMLElement>;
 }
 
 export enum InputType {
@@ -95,6 +95,31 @@ const detectWheel = () => {
   return wheelType;
 };
 
+const supportsPassive = () => {
+  let supportsPassive;
+  try {
+    /* istanbul ignore next function for coverage */
+    const opts = Object.defineProperty({}, 'passive', {
+      get: () => {
+        supportsPassive = true;
+      },
+    });
+
+    /* istanbul ignore next function for coverage */
+    const stub = () => {
+      return;
+    };
+
+    window.addEventListener('test', stub, opts);
+    window.removeEventListener('test', stub, opts);
+  } catch (e) {
+    /* istanbul ignore next line for coverage */
+    console.warn('Browser does not support passive event listeners');
+  }
+
+  return supportsPassive || false;
+};
+
 /**
  * This component takes heavy inspiration from what-input (https://github.com/ten1seven/what-input)
  */
@@ -124,45 +149,22 @@ export default class InputProvider extends React.Component<InputProviderProps> {
       console.warn('Failed to retrieve input status from session storage' + e);
     }
 
-    // Check for passive event listener support
-    let supportsPassive;
-    try {
-      /* istanbul ignore next function for coverage */
-      const opts = Object.defineProperty({}, 'passive', {
-        get: () => {
-          supportsPassive = true;
-        },
-      });
-
-      /* istanbul ignore next function for coverage */
-      const stub = () => {
-        return;
-      };
-
-      window.addEventListener('test', stub, opts);
-      window.removeEventListener('test', stub, opts);
-    } catch (e) {
-      /* istanbul ignore next line for coverage */
-      console.warn('Browser does not support passive event listeners');
-    }
-
     this.currentInput = storedInput || InputType.Initial;
     this.currentIntent = storedIntent || InputType.Initial;
-    this.supportsPassive = supportsPassive || false;
 
     this.setInput = this.setInput.bind(this);
     this.setIntent = this.setIntent.bind(this);
     this.eventBuffer = this.eventBuffer.bind(this);
   }
 
-  static defaultProps = {
-    container: document.body,
-  };
-
   // Need to remember how it component was mounted so we ensure listener removal
   provideIntent = this.props.provideIntent;
 
-  getContainer(container: HTMLElement | React.RefObject<HTMLElement>): HTMLElement {
+  getContainer(container?: HTMLElement | React.RefObject<HTMLElement>): HTMLElement {
+    // Note: Not a default prop because using document when defining default props causes errors during SSR
+    if (!container) {
+      return document.body;
+    }
     if ('current' in container) {
       if (container.current === null) {
         console.warn('Your ref object can not be null, therefore, falling back to document.body');
@@ -174,13 +176,14 @@ export default class InputProvider extends React.Component<InputProviderProps> {
     return container;
   }
 
-  private container = this.getContainer(this.props.container);
-
   componentDidMount() {
     // For IE11 and under, we'll need to polyfill element.closest
     elementClosestPolyfill(window);
 
-    if (this.container.closest('[data-whatinput]')) {
+    // Check for passive event listener support
+    this.supportsPassive = supportsPassive();
+
+    if (this.getContainer(this.props.container).closest('[data-whatinput]')) {
       this.deferInputTracking = true;
       return;
     }
@@ -190,9 +193,9 @@ export default class InputProvider extends React.Component<InputProviderProps> {
 
   updateAttributes() {
     const intent = this.provideIntent ? this.currentIntent : null;
-    this.container.setAttribute('data-whatinput', this.currentInput);
+    this.getContainer(this.props.container).setAttribute('data-whatinput', this.currentInput);
     if (intent) {
-      this.container.setAttribute('data-whatintent', intent);
+      this.getContainer(this.props.container).setAttribute('data-whatintent', intent);
     }
 
     try {
@@ -209,8 +212,8 @@ export default class InputProvider extends React.Component<InputProviderProps> {
       return;
     }
 
-    this.container.removeAttribute('data-whatinput');
-    this.container.removeAttribute('data-whatintent');
+    this.getContainer(this.props.container).removeAttribute('data-whatinput');
+    this.getContainer(this.props.container).removeAttribute('data-whatintent');
     window.clearTimeout(this.eventTimer);
     this.enableListeners(false);
   }
