@@ -51,7 +51,6 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@workday/canvas-kit-popup-stack": "^4.0.0",
-    "@workday/canvas-kit-react-common": "^4.0.0",
     "@workday/canvas-kit-react-popup": "^4.0.0"
   },
   "devDependencies": {

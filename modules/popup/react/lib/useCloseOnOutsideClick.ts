@@ -25,11 +25,12 @@ export const useCloseOnOutsideClick = <E extends HTMLElement>(
       onClose();
     }
   };
+
   React.useLayoutEffect(() => {
-    document.addEventListener('click', onClick);
+    document.addEventListener('mousedown', onClick);
 
     return () => {
-      document.removeEventListener('click', onClick);
+      document.removeEventListener('mousedown', onClick);
     };
   });
 };

@@ -65,32 +65,15 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
-  (
-    {
-      placement,
-      popperOptions,
-      portal = true,
-      open = true,
-      anchorElement,
-      children,
-      containerElement,
-      ...elemProps
-    }: PopperProps,
-    ref
-  ) => {
+  ({portal = true, open = true, ...elemProps}: PopperProps, forwardRef) => {
+    const localRef = React.useRef<HTMLDivElement>(null);
+    const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
+
     if (!open) {
       return null;
     }
 
-    const contents = (
-      <OpenPopper {...{ref, anchorElement, popperOptions, placement, children, ...elemProps}} />
-    );
-
-    if (!portal) {
-      return contents;
-    }
-
-    return ReactDOM.createPortal(contents, containerElement || document.body);
+    return <OpenPopper ref={ref} portal={portal} {...elemProps} />;
   }
 );
 
@@ -132,6 +115,8 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       popperOptions = defaultPopperOptions,
       placement: popperPlacement = 'bottom',
       children,
+      portal,
+      containerElement,
       ...elemProps
     },
     forwardRef: React.RefObject<HTMLDivElement>
@@ -189,11 +174,15 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       firstRender.current = false;
     }, [popperOptions, popperPlacement]);
 
-    return (
-      <div {...elemProps} ref={ref}>
-        {isRenderProp(children) ? children({placement}) : children}
-      </div>
+    const contents = (
+      <div {...elemProps}>{isRenderProp(children) ? children({placement}) : children}</div>
     );
+
+    if (!portal) {
+      return contents;
+    }
+
+    return ReactDOM.createPortal(contents, containerElement || ref.current!);
   }
 );
 

@@ -63,7 +63,8 @@ yarn add @workday/canvas-kit-popup-stack
 ```tsx
 import PopupStack from '@workday/canvas-kit-popup-stack';
 
-const div = document.createElement('div');
+// Create a container to portal popup content into
+const div = PopupStack.createContainer();
 
 // Add to the stack. This will force-set z-index on the element for proper rendering
 PopupStack.add({element: div});
@@ -114,6 +115,12 @@ export interface PopupStackItem {
   owner?: HTMLElement;
 }
 ```
+
+### createContainer
+
+Create a HTMLElement as the container for the popup stack item. The returned element reference will
+be the reference to be passed to all other methods. This method allows for the integration into
+other popup systems
 
 ### add
 

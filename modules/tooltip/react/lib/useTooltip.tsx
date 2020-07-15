@@ -76,7 +76,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
       'aria-label': type === 'label' ? titleText : undefined,
       onMouseEnter: onOpenFromTarget,
       onMouseLeave: intentTimer.start,
-      onClick: closeTooltip,
+      onMouseDown: closeTooltip,
       onFocus: onOpenFromTarget,
       onBlur: intentTimer.start,
     },

@@ -103,6 +103,10 @@ const Container = styled('div', {
       animationDuration: '150ms',
       animationTimingFunction: 'ease-out',
       transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
+      // Allow overriding of animation in special cases
+      '.no-animation &': {
+        animation: 'none',
+      },
     };
   }
 );

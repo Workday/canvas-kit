@@ -110,6 +110,17 @@ describe('Modal', () => {
           });
         });
 
+        context('when clicking inside the modal', () => {
+          beforeEach(() => {
+            // click somewhere on the modal where there shouldn't be a close target
+            cy.findByLabelText('Delete Item').click('top');
+          });
+
+          it('should not close the modal', () => {
+            cy.findByLabelText('Delete Item').should('be.visible');
+          });
+        });
+
         context('when the close button is clicked', () => {
           beforeEach(() => {
             cy.findByLabelText('Delete Item')
@@ -141,7 +152,7 @@ describe('Modal', () => {
         context('when the overlay is clicked', () => {
           beforeEach(() => {
             cy.findByLabelText('Delete Item')
-              .pipe(h.modal.getOverlay)
+              .parent()
               .click('top');
           });
 
@@ -281,7 +292,7 @@ describe('Modal', () => {
       context('when the overlay is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Delete Item')
-            .pipe(h.modal.getOverlay)
+            .parent()
             .click('top');
         });
 
@@ -374,7 +385,7 @@ describe('Modal', () => {
       context('when the overlay is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Delete Item')
-            .pipe(h.modal.getOverlay)
+            .parent()
             .click('top');
         });
 
@@ -419,7 +430,7 @@ describe('Modal', () => {
       context('when the overlay is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Really Delete Item')
-            .pipe(h.modal.getOverlay)
+            .parent()
             .click('top');
         });
 
@@ -452,7 +463,7 @@ describe('Modal', () => {
       context('when the modal overlay is clicked', () => {
         beforeEach(() => {
           cy.findByLabelText('Delete Item')
-            .pipe(h.modal.getOverlay)
+            .parent()
             .click('top');
         });
 
