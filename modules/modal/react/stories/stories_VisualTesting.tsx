@@ -27,9 +27,9 @@ const TestContent = () => {
         position: 'relative',
       }}
     >
-      This should be invisible if the Modal is rendering correctly, because the Modal should use the
-      PopupStack which will set a zIndex and place the modal and its overlay _on top_ of the this
-      text. If the text renders on top of the overlay, the text will show up
+      This text should be invisible if the Modal is rendering correctly. It is white text on a white
+      background. The Popup Stack should set up the zIndex of the Modal's overlay. If rendered
+      incorrectly, the text will be visible on top of the overlay.
     </div>
   );
 

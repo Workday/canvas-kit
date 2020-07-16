@@ -149,7 +149,7 @@ describe('Modal', () => {
           });
         });
 
-        context('when the overlay is clicked', () => {
+        context('when clicking outside the modal', () => {
           beforeEach(() => {
             cy.get('body').click('top');
           });
@@ -287,7 +287,7 @@ describe('Modal', () => {
         });
       });
 
-      context('when the overlay is clicked', () => {
+      context('when clicking outside the modal', () => {
         beforeEach(() => {
           cy.get('body').click('top');
         });
@@ -378,7 +378,7 @@ describe('Modal', () => {
         });
       });
 
-      context('when the overlay is clicked', () => {
+      context('when clicking outside the modal', () => {
         beforeEach(() => {
           cy.get('body').click('top');
         });
@@ -421,7 +421,7 @@ describe('Modal', () => {
         });
       });
 
-      context('when the overlay is clicked', () => {
+      context('when clicking outside the modal', () => {
         beforeEach(() => {
           cy.get('body').click('top');
         });
