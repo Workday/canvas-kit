@@ -119,8 +119,9 @@ export interface PopupStackItem {
 ### createContainer
 
 Create a HTMLElement as the container for the popup stack item. The returned element reference will
-be the reference to be passed to all other methods. This method allows for the integration into
-other popup systems
+be the reference to be passed to all other methods. The Popup Stack will control when this element
+is added and removed from the DOM as well as the `z-index` style property. Your content should be
+added to this element.
 
 ### add
 

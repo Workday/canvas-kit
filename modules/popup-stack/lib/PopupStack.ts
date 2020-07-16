@@ -191,7 +191,10 @@ let _adapter: Partial<typeof PopupStack> = {};
 
 export const PopupStack = {
   /**
-   *
+   * Create a HTMLElement as the container for the popup stack item. The returned element reference
+   * will be the reference to be passed to all other methods. The Popup Stack will control when this
+   * element is added and removed from the DOM as well as the `z-index` style property. Your content
+   * should be added to this element.
    */
   createContainer(): HTMLElement {
     if (_adapter.createContainer) {

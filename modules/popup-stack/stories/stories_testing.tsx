@@ -3,7 +3,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {css, jsx, CSSObject} from '@emotion/core';
+import {css, jsx} from '@emotion/core';
 
 import {Tooltip} from '@workday/canvas-kit-react-tooltip';
 

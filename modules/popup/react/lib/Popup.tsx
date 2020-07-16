@@ -104,7 +104,7 @@ const Container = styled('div', {
       animationTimingFunction: 'ease-out',
       transformOrigin: `${transformOrigin.vertical} ${transformOrigin.horizontal}`,
       // Allow overriding of animation in special cases
-      '.no-animation &': {
+      '.wd-no-animation &': {
         animation: 'none',
       },
     };
