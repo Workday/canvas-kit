@@ -35,6 +35,11 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * Will render an `div` tag instead of a `button` when defined.
    */
   as?: 'div';
+  /**
+   * If true, render the image and hide the Avatar background.
+   * @default false
+   */
+  imageLoaded?: boolean;
 }
 
 /**
@@ -55,9 +60,8 @@ type AvatarOverload = {
 
 const StyledContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Pick<AvatarProps, 'size' | 'onClick'>>(
+})<Pick<AvatarProps, 'size' | 'onClick' | 'imageLoaded' | 'url'>>(
   {
-    background: 'none',
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -81,6 +85,9 @@ const StyledContainer = styled('button', {
   }),
   ({onClick}) => ({
     cursor: onClick ? 'pointer' : 'default',
+  }),
+  ({imageLoaded, url}) => ({
+    backgroundColor: !url || imageLoaded ? 'transparent' : colors.soap200,
   })
 );
 
@@ -101,7 +108,7 @@ const StyledImage = styled('img')<{isLoaded: boolean}>(
     width: '100%',
     height: '100%',
     borderRadius: borderRadius.circle,
-    transition: 'opacity 150ms linear',
+    transition: 'opacity 1500ms linear',
   },
   ({isLoaded}) => ({
     opacity: isLoaded ? 1 : 0,
@@ -137,6 +144,8 @@ const Avatar: AvatarOverload = React.forwardRef(
         onClick={onClick}
         disabled={onClick ? false : true}
         ref={ref}
+        url={url}
+        imageLoaded={imageLoaded}
         {...elemProps}
       >
         <StyledStack size={size}>
