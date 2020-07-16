@@ -235,7 +235,6 @@ const ModalContent = ({
 
   // only render something on the client
   if (typeof window !== 'undefined') {
-    console.log(container, modalRef.current);
     return ReactDOM.createPortal(content, container || modalRef.current!);
   } else {
     return null;

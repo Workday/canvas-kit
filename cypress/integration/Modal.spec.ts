@@ -151,9 +151,7 @@ describe('Modal', () => {
 
         context('when the overlay is clicked', () => {
           beforeEach(() => {
-            cy.findByLabelText('Delete Item')
-              .parent()
-              .click('top');
+            cy.get('body').click('top');
           });
 
           it('should close the modal', () => {
@@ -291,9 +289,7 @@ describe('Modal', () => {
 
       context('when the overlay is clicked', () => {
         beforeEach(() => {
-          cy.findByLabelText('Delete Item')
-            .parent()
-            .click('top');
+          cy.get('body').click('top');
         });
 
         it('should not close the modal', () => {
@@ -384,9 +380,7 @@ describe('Modal', () => {
 
       context('when the overlay is clicked', () => {
         beforeEach(() => {
-          cy.findByLabelText('Delete Item')
-            .parent()
-            .click('top');
+          cy.get('body').click('top');
         });
 
         it('should not close the modal', () => {
@@ -429,9 +423,7 @@ describe('Modal', () => {
 
       context('when the overlay is clicked', () => {
         beforeEach(() => {
-          cy.findByLabelText('Really Delete Item')
-            .parent()
-            .click('top');
+          cy.get('body').click('top');
         });
 
         it('should close the second modal', () => {
@@ -462,9 +454,7 @@ describe('Modal', () => {
 
       context('when the modal overlay is clicked', () => {
         beforeEach(() => {
-          cy.findByLabelText('Delete Item')
-            .parent()
-            .click('top');
+          cy.get('body').click('top');
         });
 
         it('should close the popup', () => {
