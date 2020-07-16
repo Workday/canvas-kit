@@ -57,7 +57,7 @@ const StyledContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
 })<Pick<AvatarProps, 'size' | 'onClick'>>(
   {
-    background: colors.soap200,
+    background: 'none',
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
