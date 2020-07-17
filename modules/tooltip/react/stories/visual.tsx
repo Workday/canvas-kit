@@ -59,7 +59,6 @@ export const Placements = () => {
         !open ? null : (
           <Popper
             key={placement}
-            containerElement={containerElement}
             placement={placement}
             popperOptions={{
               modifiers: [

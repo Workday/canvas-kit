@@ -28,5 +28,16 @@ export function getCloseButton($modal: JQuery): JQuery {
  * @param $modal Modal element with [role=dialog]
  */
 export function getOverlay($modal: JQuery): JQuery {
-  return $modal.parent().parent();
+  const bodyEl = Cypress.$('body')[0];
+  return getElement($modal, $el => $el.parent()[0] === bodyEl);
+}
+
+function getElement(element: JQuery, predicate: (element: JQuery) => boolean): JQuery {
+  if (predicate(element)) {
+    return element;
+  } else if (element.parent().length) {
+    return getElement(element.parent(), predicate);
+  } else {
+    return Cypress.$();
+  }
 }

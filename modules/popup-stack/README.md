@@ -63,7 +63,8 @@ yarn add @workday/canvas-kit-popup-stack
 ```tsx
 import PopupStack from '@workday/canvas-kit-popup-stack';
 
-const div = document.createElement('div');
+// Create a container to portal popup content into
+const div = PopupStack.createContainer();
 
 // Add to the stack. This will force-set z-index on the element for proper rendering
 PopupStack.add({element: div});
@@ -113,6 +114,17 @@ export interface PopupStackItem {
    */
   owner?: HTMLElement;
 }
+```
+
+### createContainer
+
+Create a HTMLElement as the container for the popup stack item. The returned element reference will
+be the reference to be passed to all other methods. The Popup Stack will control when this element
+is added and removed from the DOM as well as the `z-index` style property. Your stack UI content
+should be added to this element.
+
+```tsx
+PopupStack.createContainer(): HTMLElement
 ```
 
 ### add
@@ -182,4 +194,14 @@ considered to be "contained" by an element under the following conditions:
 
 ```tsx
 PopupStack.contains(element: HTMLElement, eventTarget: HTMLElement): boolean
+```
+
+### createAdapter
+
+Create an adapter for the PopupStack. Any method provided will override the default method of
+`PopupStack`. This is useful if you already have a popup stack and need Canvas Kit to properly
+interact with it.
+
+```tsx
+createAdapter({}: Partial<typeof PopupStack>): void
 ```

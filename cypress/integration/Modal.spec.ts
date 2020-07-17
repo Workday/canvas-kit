@@ -110,6 +110,17 @@ describe('Modal', () => {
           });
         });
 
+        context('when clicking inside the modal', () => {
+          beforeEach(() => {
+            // click somewhere on the modal where there shouldn't be a close target
+            cy.findByLabelText('Delete Item').click('top');
+          });
+
+          it('should not close the modal', () => {
+            cy.findByLabelText('Delete Item').should('be.visible');
+          });
+        });
+
         context('when the close button is clicked', () => {
           beforeEach(() => {
             cy.findByLabelText('Delete Item')
@@ -138,11 +149,9 @@ describe('Modal', () => {
           });
         });
 
-        context('when the overlay is clicked', () => {
+        context('when clicking outside the modal', () => {
           beforeEach(() => {
-            cy.findByLabelText('Delete Item')
-              .pipe(h.modal.getOverlay)
-              .click('top');
+            cy.get('body').click('top');
           });
 
           it('should close the modal', () => {
@@ -278,11 +287,9 @@ describe('Modal', () => {
         });
       });
 
-      context('when the overlay is clicked', () => {
+      context('when clicking outside the modal', () => {
         beforeEach(() => {
-          cy.findByLabelText('Delete Item')
-            .pipe(h.modal.getOverlay)
-            .click('top');
+          cy.get('body').click('top');
         });
 
         it('should not close the modal', () => {
@@ -371,11 +378,9 @@ describe('Modal', () => {
         });
       });
 
-      context('when the overlay is clicked', () => {
+      context('when clicking outside the modal', () => {
         beforeEach(() => {
-          cy.findByLabelText('Delete Item')
-            .pipe(h.modal.getOverlay)
-            .click('top');
+          cy.get('body').click('top');
         });
 
         it('should not close the modal', () => {
@@ -416,11 +421,9 @@ describe('Modal', () => {
         });
       });
 
-      context('when the overlay is clicked', () => {
+      context('when clicking outside the modal', () => {
         beforeEach(() => {
-          cy.findByLabelText('Really Delete Item')
-            .pipe(h.modal.getOverlay)
-            .click('top');
+          cy.get('body').click('top');
         });
 
         it('should close the second modal', () => {
@@ -449,11 +452,9 @@ describe('Modal', () => {
         cy.findByLabelText('Really Delete Item').should('exist');
       });
 
-      context('when the modal overlay is clicked', () => {
+      context('when clicking outside the modal', () => {
         beforeEach(() => {
-          cy.findByLabelText('Delete Item')
-            .pipe(h.modal.getOverlay)
-            .click('top');
+          cy.get('body').click('top');
         });
 
         it('should close the popup', () => {

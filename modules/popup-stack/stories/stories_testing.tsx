@@ -27,7 +27,6 @@ interface WindowProps {
   heading: string;
   children: React.ReactNode;
 }
-
 const styles = css({
   position: 'absolute',
   width: 500,
@@ -40,10 +39,10 @@ const Window = ({children, heading, top, left}: WindowProps) => {
   useBringToTopOnClick(ref);
 
   return ReactDOM.createPortal(
-    <Popup popupRef={ref} css={styles} heading={heading} style={{top, left}}>
+    <Popup css={styles} heading={heading} style={{top, left}}>
       {children}
     </Popup>,
-    document.body
+    ref.current
   );
 };
 

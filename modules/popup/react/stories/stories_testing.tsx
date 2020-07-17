@@ -13,8 +13,8 @@ export const MultiplePopups = () => {
   const popup1 = usePopup();
   const popup2 = usePopup();
 
-  useCloseOnOutsideClick(popup1.popperProps.ref, popup1.closePopup);
-  useCloseOnOutsideClick(popup2.popperProps.ref, popup2.closePopup);
+  useCloseOnOutsideClick(popup1.stackRef, popup1.closePopup);
+  useCloseOnOutsideClick(popup2.stackRef, popup2.closePopup);
 
   return (
     <>

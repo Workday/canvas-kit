@@ -10,7 +10,6 @@ import Popup, {
   useFocusTrap,
 } from '@workday/canvas-kit-react-popup';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {mergeCallback} from '@workday/canvas-kit-react-common';
 
 import {ModalWidth} from './Modal';
 
@@ -60,7 +59,7 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * This should be a sibling or higher than the header and navigation elements of the application.
    * @default document.body
    */
-  container: HTMLElement;
+  container?: HTMLElement;
 }
 
 const fadeIn = keyframes`
@@ -192,30 +191,30 @@ const ModalContent = ({
   heading,
   ...elemProps
 }: ModalContentProps) => {
-  const modalRef = React.useRef<HTMLDivElement>(null);
-
+  const centeringRef = React.useRef<HTMLDivElement>(null);
   const onClose = () => handleClose?.();
+
+  const stackRef = usePopupStack();
+  useCloseOnEscape(stackRef, onClose);
+  useFocusTrap(stackRef);
+  useInitialFocus(stackRef, firstFocusRef);
+  useAssistiveHideSiblings(stackRef);
 
   // special handling for clicking on the overlay
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
     // Detect clicks only on the centering wrapper element
-    if (event.target === modalRef.current?.children[0] && PopupStack.isTopmost(modalRef.current)) {
+    if (event.target === centeringRef.current && PopupStack.isTopmost(stackRef.current!)) {
       onClose();
     }
   };
   const windowSize = useWindowSize();
 
-  usePopupStack(modalRef);
-  useCloseOnEscape(modalRef, onClose);
-  useFocusTrap(modalRef);
-  useInitialFocus(modalRef, firstFocusRef);
-  useAssistiveHideSiblings(modalRef);
-
   const content = (
-    <Container {...elemProps} ref={modalRef}>
+    <Container {...elemProps}>
       <CenteringContainer
+        ref={centeringRef}
         style={{width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw'}}
-        onClick={mergeCallback(onOverlayClick, elemProps.onClick)}
+        onMouseDown={onOverlayClick}
       >
         <Popup
           width={width}
@@ -234,7 +233,7 @@ const ModalContent = ({
 
   // only render something on the client
   if (typeof window !== 'undefined') {
-    return ReactDOM.createPortal(content, container || document.body);
+    return ReactDOM.createPortal(content, container || stackRef.current!);
   } else {
     return null;
   }

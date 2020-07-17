@@ -187,8 +187,23 @@ const stack: Stack = getFromWindow('workday.__popupStack') || {
   zIndex: {min: 30, max: 50, getValue: getValue},
 };
 setToWindow('workday.__popupStack', stack);
+let _adapter: Partial<typeof PopupStack> = {};
 
 export const PopupStack = {
+  /**
+   * Create a HTMLElement as the container for the popup stack item. The returned element reference
+   * will be the reference to be passed to all other methods. The Popup Stack will control when this
+   * element is added and removed from the DOM as well as the `z-index` style property. Your content
+   * should be added to this element.
+   */
+  createContainer(): HTMLElement {
+    if (_adapter.createContainer) {
+      return _adapter.createContainer();
+    }
+    const div = document.createElement('div');
+    div.style.position = 'relative'; // z-index only works on _positioned_ elements
+    return div;
+  },
   /**
    * Adds a PopupStackItem to the stack. This should only be called when the item is rendered to the
    * page. Z-indexes are set when the item is added to the stack. If your application requires
@@ -196,7 +211,12 @@ export const PopupStack = {
    * method when the event triggers.
    */
   add(item: PopupStackItem): void {
+    if (_adapter.add) {
+      _adapter.add(item);
+      return;
+    }
     stack.items.push(item);
+    document.body.appendChild(item.element);
 
     setZIndexOfElements(PopupStack.getElements());
   },
@@ -208,7 +228,12 @@ export const PopupStack = {
    * reset z-index values of the stack
    */
   remove(element: HTMLElement): void {
+    if (_adapter.remove) {
+      _adapter.remove(element);
+      return;
+    }
     stack.items = stack.items.filter(item => item.element !== element);
+    document.body.removeChild(element);
 
     setZIndexOfElements(PopupStack.getElements());
   },
@@ -219,6 +244,9 @@ export const PopupStack = {
    * reference that was passed to `add`
    */
   isTopmost(element: HTMLElement): boolean {
+    if (_adapter.isTopmost) {
+      return _adapter.isTopmost(element);
+    }
     const last = getLast(stack.items);
 
     if (last) {
@@ -231,6 +259,9 @@ export const PopupStack = {
    * Returns an array of elements defined by the `element` passed to `add`.
    */
   getElements(): HTMLElement[] {
+    if (_adapter.getElements) {
+      return _adapter.getElements();
+    }
     return stack.items.map(i => i.element);
   },
 
@@ -247,6 +278,10 @@ export const PopupStack = {
    * the top of the stack.
    */
   bringToTop(element: HTMLElement): void {
+    if (_adapter.bringToTop) {
+      _adapter.bringToTop(element);
+      return;
+    }
     const item = find(stack.items, i => i.element === element);
 
     if (item) {
@@ -282,6 +317,9 @@ export const PopupStack = {
    * is not inside `element`).
    */
   contains(element: HTMLElement, eventTarget: HTMLElement): boolean {
+    if (_adapter.contains) {
+      return _adapter.contains(element, eventTarget);
+    }
     const item = find(stack.items, i => i.element === element);
 
     if (item) {
@@ -302,3 +340,11 @@ export const PopupStack = {
 export function resetStack() {
   stack.items = [];
 }
+
+/**
+ *
+ * @param adapter The parts of the PopupStack that we want to override
+ */
+export const createAdapter = (adapter: Partial<typeof PopupStack>) => {
+  _adapter = adapter;
+};

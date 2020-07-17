@@ -166,11 +166,11 @@ import {Button} from '@workday/canvas-kit-react-button';
 import {Popup, Popper, usePopup, use} from '@workday/canvas-kit-react-popup';
 
 const MyPopup = () => {
-  const { targetProps, closePopup, popperProps } = usePopup()
+  const { targetProps, closePopup, popperProps, stackRef } = usePopup()
 
   // Add some behaviors
-  useCloseOnOutsideClick(popperProps.ref, closePopup);
-  useCloseOnEscape(popperProps.ref, closePopup);
+  useCloseOnOutsideClick(stackRef, closePopup);
+  useCloseOnEscape(stackRef, closePopup);
 
   return (
     <Button {...targetProps}>Toggle Popup</Button>
@@ -273,16 +273,75 @@ Default:
 ### usePopupStack
 
 ```ts
-usePopupStack(ref: React.RefObject<HTMLElement>): void
+const stackRef = usePopupStack(forwardRef?: React.RefObject<HTMLElement>): React.RefObject<HTMLDivElement>
 ```
 
-This hook will add a `ref` element to the Popup stack on mount and remove on unmount. If you use
-`Popper`, the popper `ref` is automatically added/removed from the Popup stack. The Popup stack is
-required for proper z-index values to ensure Popups are rendered correct. It is also required for
-global listeners like click outside or escape key closing a popup. Without the Popup stack, all
-popups will close rather than only the topmost one.
+This hook should not be used directly. Use the `Popper` component instead. There is also a
+convenience [usePopup](#usePopup)
 
-This should be used by all stacked UIs unless using the `Popper` component.
+This hook will add the `stackRef` element to the Popup stack on mount and remove on unmount. If you
+use `Popper`, the popper `stackRef` is automatically added/removed from the Popup stack. The Popup
+stack is required for proper z-index values to ensure Popups are rendered correct. It is also
+required for global listeners like click outside or escape key closing a popup. Without the Popup
+stack, all popups will close rather than only the topmost one.
+
+If `forwardRef` is provided, it will be the same as `stackRef`. If `forwardRef` is not provided`,
+this hook will create one and return it.
+
+This hook should be used by all stacked UIs unless using the `Popper` component.
+
+Example:
+
+```tsx
+const [open, setOpen] = React.useState(false);
+const stackRef = usePopupStack();
+
+const closePopup = () => {
+  setOpen(false);
+};
+
+// add some popup functionality
+useCloseOnOutsideClick(stackRef, closePopup);
+useCloseOnEscape(stackRef, closePopup);
+```
+
+### usePopup
+
+Convenience hook for common Popups used as non-modal dialogs. It provides props to mix into
+composite parts of the Popup pattern.
+
+```tsx
+import {
+  Button,
+  DeleteButton,
+  Popper,
+  Popup,
+  usePopup,
+  useCloseOnOutsideClick,
+  useCloseOnEscape,
+} from '@workday/canvas-kit-react';
+
+const MyDeleteButton = ({onConfirm}) => {
+  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
+
+  // popup traits
+  useCloseOnOutsideClick(stackRef);
+  useCloseOnEscape(stackRef);
+
+  return (
+    <>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Popper placement="bottom" {...popperProps}>
+        <Popup heading="Delete Item" handleClose={closePopup}>
+          <p>Are you sure you'd like to delete?</p>
+          <DeleteButton onClick={onConfirm}>Yes</DeleteButton>
+          <Button onClick={closePopup}>No</Button>
+        </Popup>
+      </Popper>
+    </>
+  );
+};
+```
 
 ## useAssistiveHideSiblings
 
@@ -291,39 +350,40 @@ useAssistiveHideSiblings(ref: React.RefObject<HTMLElement>): void
 ```
 
 This hook will hide all sibling elements from assistive technology. Very useful for modal dialogs.
-This will set `aria-hidden` for sibling elements of the provided `ref` element and restore the
+This will set `aria-hidden` for sibling elements of the provided `stackRef` element and restore the
 previous `aria-hidden` to each component when the component is unmounted. For example, if added to a
 Modal component, all children of `document.body` will have an `aria-hidden=true` applied _except_
-for the provided `ref` element (the Modal). This will effectively hide all content outside the Modal
-from assistive technology including Web Rotor for VoiceOver for example.
+for the provided `stackRef` element (the Modal). This will effectively hide all content outside the
+Modal from assistive technology including Web Rotor for VoiceOver for example.
 
-**Note**: The provided `ref` element should be root element of your component so that other elements
-_outside_ your component will be hidden rather than elements _inside_ your component.
+**Note**: The provided `stackRef` element should be root element of your component so that other
+elements _outside_ your component will be hidden rather than elements _inside_ your component.
 
 This should be used on stacked UI elements that need to hide content. Like Modals.
 
 ## useBringToTopOnClick
 
 ```ts
-useBringToTopOnClick(ref: React.RefObject<HTMLElement>): void
+useBringToTopOnClick(stackRef: React.RefObject<HTMLElement>): void
 ```
 
-This hook will bring an element to the top of the stack when any element inside the provided `ref`
-element is clicked. If `Popper` was used or `PopupStack.add` provided an `owner`, all "child" popups
-will also be brought to the top. A "child" popup is a Popup that was opened from another Popup.
-Usually this is a Tooltip or Select component inside something like a Modal.
+This hook will bring an element to the top of the stack when any element inside the provided
+`stackRef` element is clicked. If `Popper` was used or `PopupStack.add` provided an `owner`, all
+"child" popups will also be brought to the top. A "child" popup is a Popup that was opened from
+another Popup. Usually this is a Tooltip or Select component inside something like a Modal.
 
 This should be used on stacked UI elements that are meant to persist, like Windows.
 
 ## useCloseOnEscape
 
 ```ts
-useCloseOnEscape(ref: React.RefObject<HTMLElement>, onClose: () => void): void
+useCloseOnEscape(stackRef: React.RefObject<HTMLElement>, onClose: () => void): void
 ```
 
 Registers global detection of the Escape key. It will only call the `onClose` callback if the
-provided `ref` element is the topmost in the stack. The `ref` should be the same as the one passed
-to `usePopupStack` or the `Popper` component since `Popper` uses `usePopupStack` internally.
+provided `stackRef` element is the topmost in the stack. The `stackRef` should be the same as the
+one passed to `usePopupStack` or the `Popper` component since `Popper` uses `usePopupStack`
+internally.
 
 This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
 dialogs, dropdown menus, etc.
@@ -331,13 +391,13 @@ dialogs, dropdown menus, etc.
 ## useCloseOnOutsideClick
 
 ```ts
-useCloseOnOutsideClick(ref: React.RefObject<HTMLElement>, onClose: () => void): void
+useCloseOnOutsideClick(stackRef: React.RefObject<HTMLElement>, onClose: () => void): void
 ```
 
 Registers global listener for all clicks. It will only call the `onClose` callback if the click
-happened outside the `ref` element and its children _and_ the provided `ref` element is the topmost
-in the stack. The `ref` should be the same as the one passed to `usePopupStack` or the `Popper`
-component since `Popper` uses `usePopupStack` internally.
+happened outside the `stackRef` element and its children _and_ the provided `stackRef` element is
+the topmost in the stack. The `stackRef` should be the same as the one passed to `usePopupStack` or
+the `Popper` component since `Popper` uses `usePopupStack` internally.
 
 This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
 dialogs, dropdown menus, etc.
@@ -345,10 +405,10 @@ dialogs, dropdown menus, etc.
 ## useFocusTrap
 
 ```ts
-useFocusTrap(ref: React.RefObject<HTMLElement>): void
+useFocusTrap(stackRef: React.RefObject<HTMLElement>): void
 ```
 
-"Trap" or "loop" focus within a provided `ref` element. This is required for accessibility on
+"Trap" or "loop" focus within a provided `stackRef` element. This is required for accessibility on
 modals. If a keyboard users hits the Tab or Shift + Tab, this will force "looping" of focus. It
 effectively "hides" outside content from keyboard users. Use an overlay to hide content from mouse
 users and `useAssistiveHideSiblings` to hide content from assistive technology users.
