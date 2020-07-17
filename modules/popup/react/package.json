@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-popup",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Popup to display some content on top of another",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -49,18 +49,18 @@
     "@emotion/is-prop-valid": "^0.8.2",
     "@emotion/styled": "^10.0.27",
     "@popperjs/core": "^2.1.1",
-    "@workday/canvas-kit-popup-stack": "^4.0.0",
-    "@workday/canvas-kit-react-button": "^4.0.0",
-    "@workday/canvas-kit-react-card": "^4.0.0",
-    "@workday/canvas-kit-react-common": "^4.0.0",
-    "@workday/canvas-kit-react-core": "^4.0.0",
+    "@workday/canvas-kit-popup-stack": "^4.1.0",
+    "@workday/canvas-kit-react-button": "^4.1.0",
+    "@workday/canvas-kit-react-card": "^4.1.0",
+    "@workday/canvas-kit-react-common": "^4.1.0",
+    "@workday/canvas-kit-react-core": "^4.1.0",
     "@workday/canvas-system-icons-web": "^1.0.20",
     "focus-trap-js": "1.0.8",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-menu": "^4.0.0",
-    "@workday/canvas-kit-labs-react-core": "^4.0.0",
+    "@workday/canvas-kit-labs-react-core": "^4.1.0",
+    "@workday/canvas-kit-labs-react-menu": "^4.1.0",
     "lodash": "^4.17.14"
   },
   "peerDependencies": {
