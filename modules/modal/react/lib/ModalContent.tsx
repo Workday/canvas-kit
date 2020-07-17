@@ -194,16 +194,16 @@ const ModalContent = ({
   const centeringRef = React.useRef<HTMLDivElement>(null);
   const onClose = () => handleClose?.();
 
-  const modalRef = usePopupStack();
-  useCloseOnEscape(modalRef, onClose);
-  useFocusTrap(modalRef);
-  useInitialFocus(modalRef, firstFocusRef);
-  useAssistiveHideSiblings(modalRef);
+  const stackRef = usePopupStack();
+  useCloseOnEscape(stackRef, onClose);
+  useFocusTrap(stackRef);
+  useInitialFocus(stackRef, firstFocusRef);
+  useAssistiveHideSiblings(stackRef);
 
   // special handling for clicking on the overlay
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
     // Detect clicks only on the centering wrapper element
-    if (event.target === centeringRef.current && PopupStack.isTopmost(modalRef.current!)) {
+    if (event.target === centeringRef.current && PopupStack.isTopmost(stackRef.current!)) {
       onClose();
     }
   };
@@ -233,7 +233,7 @@ const ModalContent = ({
 
   // only render something on the client
   if (typeof window !== 'undefined') {
-    return ReactDOM.createPortal(content, container || modalRef.current!);
+    return ReactDOM.createPortal(content, container || stackRef.current!);
   } else {
     return null;
   }
