@@ -121,7 +121,6 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     },
     forwardRef: React.RefObject<HTMLDivElement>
   ) => {
-    // const ref = React.useRef<HTMLDivElement>(null);
     const firstRender = React.useRef(true);
     const popperInstance = React.useRef<PopperJS.Instance>();
     const [placement, setPlacement] = React.useState(popperPlacement);
