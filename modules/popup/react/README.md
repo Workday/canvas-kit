@@ -330,7 +330,7 @@ const MyDeleteButton = ({onConfirm}) => {
 
   return (
     <>
-      <DeleteButton {...targetPropsa}>Delete Item</DeleteButton>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <Popper placement="bottom" {...popperProps}>
         <Popup heading="Delete Item" handleClose={closePopup}>
           <p>Are you sure you'd like to delete?</p>
@@ -342,8 +342,6 @@ const MyDeleteButton = ({onConfirm}) => {
   );
 };
 ```
-
-> targetProps: Apply to your
 
 ## useAssistiveHideSiblings
 
