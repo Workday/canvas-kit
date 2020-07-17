@@ -198,7 +198,7 @@ export default class Popup extends React.Component<PopupProps> {
 export const usePopup = <T extends HTMLElement = HTMLElement>() => {
   const [open, setOpen] = React.useState(false);
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
-  const ref = React.useRef<HTMLDivElement>(null);
+  const stackRef = React.useRef<HTMLDivElement>(null);
 
   const togglePopup = (event: React.MouseEvent<T>) => {
     setAnchorElement(event.currentTarget as T);
@@ -215,7 +215,8 @@ export const usePopup = <T extends HTMLElement = HTMLElement>() => {
     popperProps: {
       open,
       anchorElement,
-      ref,
+      ref: stackRef,
     },
+    stackRef,
   };
 };

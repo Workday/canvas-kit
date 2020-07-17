@@ -452,7 +452,7 @@ describe('Modal', () => {
         cy.findByLabelText('Really Delete Item').should('exist');
       });
 
-      context('when the modal overlay is clicked', () => {
+      context('when clicking outside the modal', () => {
         beforeEach(() => {
           cy.get('body').click('top');
         });

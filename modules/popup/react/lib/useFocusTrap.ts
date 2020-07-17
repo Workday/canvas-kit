@@ -12,16 +12,16 @@ const useKeyDownListener = (onKeyDown: EventListenerOrEventListenerObject) => {
 };
 
 /**
- * "Trap" or "loop" focus within a provided `ref` element. This is required for accessibility on
+ * "Trap" or "loop" focus within a provided `stackRef` element. This is required for accessibility on
  * modals. If a keyboard users hits the Tab or Shift + Tab, this will force "looping" of focus. It
  * effectively "hides" outside content from keyboard users. Use an overlay to hide content from mouse
  * users and `useAssistiveHideSiblings` to hide content from assistive technology users.
- * @param ref The element ref you wish to trap focus into
+ * @param stackRef The element ref you wish to trap focus into
  */
-export const useFocusTrap = <E extends HTMLElement>(ref: React.RefObject<E>) => {
+export const useFocusTrap = <E extends HTMLElement>(stackRef: React.RefObject<E>) => {
   const handleKeydown = (event: KeyboardEvent) => {
-    if (ref.current) {
-      tabTrappingKey(event, ref.current);
+    if (stackRef.current) {
+      tabTrappingKey(event, stackRef.current);
     }
   };
 

@@ -20,10 +20,10 @@ export default {
 };
 
 export const Default = () => {
-  const {targetProps, closePopup, popperProps} = usePopup();
+  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
 
-  useCloseOnOutsideClick(popperProps.ref, closePopup);
-  useCloseOnEscape(popperProps.ref, closePopup);
+  useCloseOnOutsideClick(stackRef, closePopup);
+  useCloseOnEscape(stackRef, closePopup);
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>

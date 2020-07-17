@@ -121,15 +121,11 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     },
     forwardRef: React.RefObject<HTMLDivElement>
   ) => {
-    const localRef = React.useRef<HTMLDivElement>(null);
-    const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
+    // const ref = React.useRef<HTMLDivElement>(null);
     const firstRender = React.useRef(true);
     const popperInstance = React.useRef<PopperJS.Instance>();
     const [placement, setPlacement] = React.useState(popperPlacement);
-    usePopupStack(
-      ref,
-      getElementFromRefOrElement(anchorElement ?? null) as HTMLElement | undefined
-    );
+    const stackRef = usePopupStack(forwardRef, anchorElement as HTMLElement);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
@@ -143,8 +139,8 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         return undefined;
       }
 
-      if (ref.current) {
-        popperInstance.current = PopperJS.createPopper(anchorEl, ref.current, {
+      if (stackRef.current) {
+        popperInstance.current = PopperJS.createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
           modifiers: [...(popperOptions.modifiers || []), createSetPlacementModifier(setPlacement)],
@@ -160,7 +156,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       // prop dependencies. We do _not_ want to destroy the Popper instance if options or placement
       // change, only if anchor or target refs change
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [anchorElement, getAnchorClientRect, ref]);
+    }, [anchorElement, getAnchorClientRect, stackRef]);
 
     React.useLayoutEffect(() => {
       // Only update options if this is _not_ the first render
@@ -182,7 +178,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       return contents;
     }
 
-    return ReactDOM.createPortal(contents, containerElement || ref.current!);
+    return ReactDOM.createPortal(contents, containerElement || stackRef.current!);
   }
 );
 

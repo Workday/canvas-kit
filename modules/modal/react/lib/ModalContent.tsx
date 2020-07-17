@@ -191,10 +191,14 @@ const ModalContent = ({
   heading,
   ...elemProps
 }: ModalContentProps) => {
-  const modalRef = React.useRef<HTMLDivElement>(null);
   const centeringRef = React.useRef<HTMLDivElement>(null);
-
   const onClose = () => handleClose?.();
+
+  const modalRef = usePopupStack();
+  useCloseOnEscape(modalRef, onClose);
+  useFocusTrap(modalRef);
+  useInitialFocus(modalRef, firstFocusRef);
+  useAssistiveHideSiblings(modalRef);
 
   // special handling for clicking on the overlay
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -204,12 +208,6 @@ const ModalContent = ({
     }
   };
   const windowSize = useWindowSize();
-
-  usePopupStack(modalRef);
-  useCloseOnEscape(modalRef, onClose);
-  useFocusTrap(modalRef);
-  useInitialFocus(modalRef, firstFocusRef);
-  useAssistiveHideSiblings(modalRef);
 
   const content = (
     <Container {...elemProps}>
