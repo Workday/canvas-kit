@@ -108,7 +108,7 @@ const StyledImage = styled('img')<{isLoaded: boolean}>(
     width: '100%',
     height: '100%',
     borderRadius: borderRadius.circle,
-    transition: 'opacity 1500ms linear',
+    transition: 'opacity 150ms linear',
   },
   ({isLoaded}) => ({
     opacity: isLoaded ? 1 : 0,
