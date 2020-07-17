@@ -35,11 +35,6 @@ export interface AvatarProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
    * Will render an `div` tag instead of a `button` when defined.
    */
   as?: 'div';
-  /**
-   * If true, render the image and hide the Avatar background.
-   * @default false
-   */
-  imageLoaded?: boolean;
 }
 
 /**
@@ -58,9 +53,11 @@ type AvatarOverload = {
   Size: typeof SystemIconCircleSize;
 };
 
+const fadeTransition = 'opacity 150ms linear';
+
 const StyledContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<Pick<AvatarProps, 'size' | 'onClick' | 'imageLoaded' | 'url'>>(
+})<Pick<AvatarProps, 'size' | 'onClick'>>(
   {
     position: 'relative',
     display: 'flex',
@@ -85,9 +82,6 @@ const StyledContainer = styled('button', {
   }),
   ({onClick}) => ({
     cursor: onClick ? 'pointer' : 'default',
-  }),
-  ({imageLoaded, url}) => ({
-    backgroundColor: !url || imageLoaded ? 'transparent' : colors.soap200,
   })
 );
 
@@ -103,12 +97,21 @@ const StyledStack = styled('span')<Pick<AvatarProps, 'size'>>(
   })
 );
 
+const StyledIcon = styled(SystemIconCircle)<{isImageLoaded: boolean}>(
+  {
+    transition: fadeTransition,
+  },
+  ({isImageLoaded}) => ({
+    opacity: isImageLoaded ? 0 : 1,
+  })
+);
+
 const StyledImage = styled('img')<{isLoaded: boolean}>(
   {
     width: '100%',
     height: '100%',
     borderRadius: borderRadius.circle,
-    transition: 'opacity 150ms linear',
+    transition: fadeTransition,
   },
   ({isLoaded}) => ({
     opacity: isLoaded ? 1 : 0,
@@ -144,12 +147,15 @@ const Avatar: AvatarOverload = React.forwardRef(
         onClick={onClick}
         disabled={onClick ? false : true}
         ref={ref}
-        url={url}
-        imageLoaded={imageLoaded}
         {...elemProps}
       >
         <StyledStack size={size}>
-          <SystemIconCircle icon={userIcon} background={background} size={size} />
+          <StyledIcon
+            icon={userIcon}
+            background={background}
+            size={size}
+            isImageLoaded={imageLoaded}
+          />
         </StyledStack>
         {url && (
           <StyledStack size={size}>
