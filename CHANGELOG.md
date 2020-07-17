@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.1.0 (2020-07-17)
+
+### Components
+- test(radio): Fix prop table logic ([#748](https://github.com/Workday/canvas-kit/pull/748)) [@lychyi](https://github.com/lychyi)
+- fix(select): Fix theming colors for proper contrast ([#747](https://github.com/Workday/canvas-kit/pull/747)) [@jamesfan](https://github.com/jamesfan)
+- test(skeleton): Add stories and enabled snapshots ([#720](https://github.com/Workday/canvas-kit/pull/720)) [@mannycarrera4](https://github.com/mannycarrera4)
+- chore: Add iconRef to Icon components ([#707](https://github.com/Workday/canvas-kit/pull/707)) [@alanbsmith](https://github.com/alanbsmith)
+- chore(popup-stack): Fix repo url in package.json ([#753](https://github.com/Workday/canvas-kit/pull/753)) [@lychyi](https://github.com/lychyi)
+- fix(select): Fix a11y issues ([#764](https://github.com/Workday/canvas-kit/pull/764)) [@jamesfan](https://github.com/jamesfan)
+- fix(select): Fix typeahead behavior and scrolling ([#754](https://github.com/Workday/canvas-kit/pull/754)) [@jamesfan](https://github.com/jamesfan)
+- feat(popup): Add getAnchorClientRect prop for custom positioning ([#765](https://github.com/Workday/canvas-kit/pull/765)) [@luislikescoffee](https://github.com/luislikescoffee)
+- fix: Add explicit arg to initEvent in ComboBox and header SearchBar ([#767](https://github.com/Workday/canvas-kit/pull/767)) [@lychyi](https://github.com/lychyi)
+- test(text-area): Added placeholder with value unit test ([#772](https://github.com/Workday/canvas-kit/pull/772)) [@amritbhullar](https://github.com/amritbhullar)
+- refactor(form-field): Update error message color ([#774](https://github.com/Workday/canvas-kit/pull/774)) [@jamesfan](https://github.com/jamesfan)
+- feat(combobox): Allow grouping of listbox items ([#535](https://github.com/Workday/canvas-kit/pull/535)) [@vibdev](https://github.com/vibdev)
+- fix(menu): Fix style so item is not truncated in IE11 ([#777](https://github.com/Workday/canvas-kit/pull/777)) [@mannycarrera4](https://github.com/mannycarrera4)
+- fix(avatar): Fix undesired halo around Dark variant ([#783](https://github.com/Workday/canvas-kit/pull/783)) [@6r3al](https://github.com/6r3al)
+
+### Infrastructure
+- fix: Address various publish-canary.js bugs ([#749](https://github.com/Workday/canvas-kit/pull/749)) [@lychyi](https://github.com/lychyi)
+- docs: Added Workday Design page to README file ([#737](https://github.com/Workday/canvas-kit/pull/737)) [@tiarebalbi](https://github.com/tiarebalbi)
+- ci: Fix canary regex to grab version ([#758](https://github.com/Workday/canvas-kit/pull/758)) [@anicholls](https://github.com/anicholls)
+- feat: Support SSR ([#649](https://github.com/Workday/canvas-kit/pull/649)) [@anicholls](https://github.com/anicholls)
+
+### Theming
+- refactor(common): Update pickForegroundColor to use fallback color logic ([#752](https://github.com/Workday/canvas-kit/pull/752)) [@donovangini](https://github.com/donovangini)
+
+### Breaking Changes:
+- feat(popup-stack): Add adapter API to integrate with other popup systems ([#782](https://github.com/Workday/canvas-kit/pull/782)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+This is a potentially breaking  change if you use `usePopupStack` and `ReactDOM.createPortal(contents, document.body)`:
+We added `createContainer` to `PopupStack`. React no longer controls the element that is given to the the `PopupStack`. The `PopupStack` will now create a containing element that your content should render into. If you recognize this pattern, you'll need to render into `stackRef.current` instead of `document.body`.
+
+Before:
+```tsx
+const ref = React.createRef<HTMLDivElement>(null);
+
+usePopupStack(ref)
+
+React.createPortal(contents, document.body)
+```
+
+Now
+```tsx
+const stackRef = usePopupStack()
+
+React.createPortal(contents, stackRef.current)
+```
+
+# 4.0.1 (2020-07-08)
+
+### Components
+- fix(combobox): Add explicit arg to initEvent in ComboBox and header SearchBar ([#767](https://github.com/Workday/canvas-kit/pull/767)) [@lychyi](https://github.com/lychyi)
+
 # 3.9.1 (2020-07-07)
 
 ### Components
