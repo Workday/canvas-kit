@@ -1,6 +1,6 @@
 import {CSSObject} from '@emotion/core';
 import {GenericStyle} from '@workday/canvas-kit-react-common';
-import canvas, {borderRadius} from '@workday/canvas-kit-react-core';
+import canvas, {borderRadius, fontFamily} from '@workday/canvas-kit-react-core';
 
 import {
   AllButtonVariants,
@@ -35,7 +35,7 @@ export const labelBaseStyles: ButtonGenericStyle = {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     fontWeight: 700,
-    fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif',
+    fontFamily,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
   },
