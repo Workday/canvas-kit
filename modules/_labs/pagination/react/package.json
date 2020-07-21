@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-pagination",
-  "version": "3.9.1",
+  "version": "3.9.2",
   "description": "contains a component for a pagination bar and dispatches for page changes",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -41,7 +41,7 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@workday/canvas-kit-labs-react-core": "^3.9.1",
-    "@workday/canvas-kit-react-button": "^3.9.1",
+    "@workday/canvas-kit-react-button": "^3.9.2",
     "@workday/canvas-kit-react-core": "^3.9.1",
     "@workday/canvas-kit-react-text-input": "^3.9.1",
     "@workday/canvas-system-icons-web": "^1.0.20",
