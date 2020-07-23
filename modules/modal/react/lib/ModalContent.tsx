@@ -139,17 +139,18 @@ const getElement = (ref: React.RefObject<HTMLElement> | HTMLElement): HTMLElemen
   return 'current' in ref ? ref.current : ref;
 };
 
+const focus = (ref: React.RefObject<HTMLElement> | HTMLElement) => {
+  const element = getElement(ref);
+  // make sure the element is attached to the DOM. focusing on a detached element results in focus
+  // being transferred to the document.body element
+  if (document.body.contains(element)) {
+    element?.focus();
+  }
+};
+
 const changeFocus = (ref: React.RefObject<HTMLElement> | HTMLElement) => {
-  const focus = () => {
-    const element = getElement(ref);
-    // make sure the element is attached to the DOM. focusing on a detached element results in focus
-    // being transferred to the document.body element
-    if (document.body.contains(element)) {
-      element?.focus();
-    }
-  };
   requestAnimationFrame(() => {
-    focus();
+    focus(ref);
   });
 
   const cleanupListeners = () => {
@@ -167,10 +168,7 @@ const changeFocus = (ref: React.RefObject<HTMLElement> | HTMLElement) => {
   const timeoutId = setTimeout(() => {
     // Test if the `document.activeElement` the expected element. In the case of VoiceOver on iOS,
     // this is not the case. We need to set it again as long as the user hasn't interacted with the page
-    const element = getElement(ref);
-    if (document.activeElement !== element) {
-      focus();
-    }
+    focus(ref);
 
     cleanupListeners();
   }, 350);
