@@ -173,7 +173,7 @@ const changeFocus = (ref: React.RefObject<HTMLElement> | HTMLElement) => {
     }
 
     cleanupListeners();
-  }, 300);
+  }, 350);
 
   document.addEventListener('keydown', detectFocusChange);
   document.addEventListener('mousedown', detectFocusChange);
