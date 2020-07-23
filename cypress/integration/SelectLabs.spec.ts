@@ -707,4 +707,38 @@ describe('Select', () => {
       }
     );
   });
+
+  context(`given the "Accessibility Test" story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Testing|React/Labs/Select', 'Accessibility Test');
+    });
+
+    context('when the select button with aria-required set to true is clicked', () => {
+      beforeEach(() => {
+        cy.findByLabelText(/Label \(aria-required\)/).click();
+      });
+
+      context('the menu', () => {
+        it('should have an aria-required attribute set to "true"', () => {
+          cy.findByLabelText(/Label \(aria-required\)/)
+            .pipe(h.selectLabs.getMenu)
+            .should('have.attr', 'aria-required', 'true');
+        });
+      });
+    });
+
+    context('when the select button with required set to true is clicked', () => {
+      beforeEach(() => {
+        cy.findByLabelText(/Label \(required\)/).click();
+      });
+
+      context('the menu', () => {
+        it('should have an aria-required attribute set to "true"', () => {
+          cy.findByLabelText(/Label \(required\)/)
+            .pipe(h.selectLabs.getMenu)
+            .should('have.attr', 'aria-required', 'true');
+        });
+      });
+    });
+  });
 });
