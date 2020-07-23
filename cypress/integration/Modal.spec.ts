@@ -32,6 +32,11 @@ describe('Modal', () => {
       context('when the target button is clicked', () => {
         beforeEach(() => {
           getModalTargetButton().click();
+
+          // wait for the focus transfer
+          cy.findByLabelText('Delete Item')
+            .pipe(h.modal.getCloseButton)
+            .should('have.focus');
         });
 
         it('should open the modal', () => {

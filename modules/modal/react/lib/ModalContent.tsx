@@ -135,6 +135,51 @@ function getFirstElementToFocus(overlayEl: HTMLElement): HTMLElement {
   }
 }
 
+const getElement = (ref: React.RefObject<HTMLElement> | HTMLElement): HTMLElement | null => {
+  return 'current' in ref ? ref.current : ref;
+};
+
+const changeFocus = (ref: React.RefObject<HTMLElement> | HTMLElement) => {
+  const focus = () => {
+    const element = getElement(ref);
+    // make sure the element is attached to the DOM. focusing on a detached element results in focus
+    // being transferred to the document.body element
+    if (document.body.contains(element)) {
+      element?.focus();
+    }
+  };
+  requestAnimationFrame(() => {
+    focus();
+  });
+
+  const cleanupListeners = () => {
+    document.removeEventListener('keydown', detectFocusChange);
+    document.removeEventListener('mousedown', detectFocusChange);
+    document.removeEventListener('touchstart', detectFocusChange);
+  };
+
+  const detectFocusChange = () => {
+    // We've detected the user interacting before the timeout, clean up and cancel retry attempts
+    clearTimeout(timeoutId);
+    cleanupListeners();
+  };
+
+  const timeoutId = setTimeout(() => {
+    // Test if the `document.activeElement` the expected element. In the case of VoiceOver on iOS,
+    // this is not the case. We need to set it again as long as the user hasn't interacted with the page
+    const element = getElement(ref);
+    if (document.activeElement !== element) {
+      focus();
+    }
+
+    cleanupListeners();
+  }, 300);
+
+  document.addEventListener('keydown', detectFocusChange);
+  document.addEventListener('mousedown', detectFocusChange);
+  document.addEventListener('touchstart', detectFocusChange);
+};
+
 const useWindowSize = (): {width: number; height: number} => {
   const [width, setWidth] = React.useState(window?.innerWidth ?? 0);
   const [height, setHeight] = React.useState(window?.innerHeight ?? 0);
@@ -164,11 +209,11 @@ const useInitialFocus = (
     if (modalRef.current) {
       const elem =
         (firstFocusRef && firstFocusRef.current) || getFirstElementToFocus(modalRef.current);
-      elem.focus();
+      changeFocus(elem);
     }
     return () => {
       if (handlerRef) {
-        handlerRef.focus();
+        changeFocus(handlerRef);
       }
     };
   }, [modalRef, firstFocusRef]);
