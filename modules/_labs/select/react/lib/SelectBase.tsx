@@ -60,6 +60,7 @@ export interface CoreSelectBaseProps
   extends Themeable,
     GrowthBehavior,
     Pick<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
+    Pick<React.SelectHTMLAttributes<HTMLSelectElement>, 'required'>,
     Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /**
    * The type of error associated with the Select (if applicable).
@@ -363,6 +364,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   public render() {
     const {
       'aria-labelledby': ariaLabelledBy,
+      'aria-required': ariaRequired,
       buttonRef,
       disabled,
       error,
@@ -378,6 +380,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       onMenuBlur,
       onMenuCloseOnEscape,
       options,
+      required,
       shouldMenuAnimate,
       shouldMenuAutoFlip,
       shouldMenuAutoFocus,
@@ -427,6 +430,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           <SelectMenu
             aria-activedescendant={options[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}
+            aria-required={ariaRequired || required}
             buttonRef={buttonRef}
             id={this.menuId}
             error={error}

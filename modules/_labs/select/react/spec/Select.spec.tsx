@@ -6,6 +6,7 @@ describe('Select', () => {
   const cb = jest.fn();
 
   const selectButtonRole = 'button';
+  const listboxRole = 'listbox';
   const optionRole = 'option';
 
   const options = [
@@ -29,6 +30,22 @@ describe('Select', () => {
     it('should render a disabled button', () => {
       const {getByRole} = render(<Select disabled={true} onChange={cb} options={options} />);
       expect(getByRole(selectButtonRole)).toHaveProperty('disabled', true);
+    });
+  });
+
+  describe('when rendered with the aria-required prop', () => {
+    it('should apply aria-required to its menu listbox when the menu is activated', () => {
+      const {getByRole} = render(<Select onChange={cb} options={options} aria-required={true} />);
+      fireEvent.click(getByRole(selectButtonRole));
+      expect(getByRole(listboxRole)).toHaveAttribute('aria-required', 'true');
+    });
+  });
+
+  describe('when rendered with the required prop', () => {
+    it('should apply aria-required to its menu listbox when the menu is activated', () => {
+      const {getByRole} = render(<Select onChange={cb} options={options} required={true} />);
+      fireEvent.click(getByRole(selectButtonRole));
+      expect(getByRole(listboxRole)).toHaveAttribute('aria-required', 'true');
     });
   });
 
