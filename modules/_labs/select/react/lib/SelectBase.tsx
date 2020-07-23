@@ -363,6 +363,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   public render() {
     const {
       'aria-labelledby': ariaLabelledBy,
+      'aria-required': ariaRequired,
       buttonRef,
       disabled,
       error,
@@ -427,6 +428,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           <SelectMenu
             aria-activedescendant={options[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}
+            aria-required={ariaRequired}
             buttonRef={buttonRef}
             id={this.menuId}
             error={error}
