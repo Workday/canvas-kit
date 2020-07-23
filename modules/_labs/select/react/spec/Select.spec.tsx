@@ -41,6 +41,14 @@ describe('Select', () => {
     });
   });
 
+  describe('when rendered with the required prop', () => {
+    it('should apply aria-required to its menu listbox when the menu is activated', () => {
+      const {getByRole} = render(<Select onChange={cb} options={options} required={true} />);
+      fireEvent.click(getByRole(selectButtonRole));
+      expect(getByRole(listboxRole)).toHaveAttribute('aria-required', 'true');
+    });
+  });
+
   describe('when an option with a different value than the current value of the select is clicked', () => {
     it('should call the onChange callback', () => {
       const {getAllByRole, getByRole} = render(<Select onChange={cb} options={options} />);
