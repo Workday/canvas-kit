@@ -680,4 +680,31 @@ describe('Select', () => {
       }
     );
   });
+
+  context(`given the "Portal Test" story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Testing|React/Labs/Select', 'Portal Test');
+    });
+
+    context(
+      'when the page is scrolled to the bottom and the bottommost select button is clicked',
+      () => {
+        beforeEach(() => {
+          cy.scrollTo('bottom');
+          cy.window()
+            .its('scrollY')
+            .as('originalWindowScrollY');
+          cy.findByLabelText('Label (Bottom)').click();
+        });
+
+        context('the page', () => {
+          it('should not scroll', () => {
+            cy.window().then($window => {
+              cy.get('@originalWindowScrollY').should('equal', $window.scrollY);
+            });
+          });
+        });
+      }
+    );
+  });
 });

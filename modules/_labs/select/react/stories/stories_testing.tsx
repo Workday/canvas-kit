@@ -117,7 +117,7 @@ export const PortalTest = () => (
     </Container>
     <Container>
       <p>This Select is forced to display its menu upwards since it's at the bottom the page.</p>
-      <FormField label="Label" inputId="select-last" error={FormField.ErrorType.Error}>
+      <FormField label="Label (Bottom)" inputId="select-bottom" error={FormField.ErrorType.Error}>
         {controlComponent(<Select name="contact" options={options} />)}
       </FormField>
     </Container>
