@@ -29,14 +29,19 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   showCustomHexInput?: boolean;
   /**
-   * The label text of the custom hex input. This is also used as the aria-label
+   * The label text of the custom hex input.
    * @default 'Custom Hex Color'
    */
   customHexInputLabel?: string;
   /**
+   * The label of the custom hex color submit icon button.
+   * @default 'Submit'
+   */
+  submitLabel?: string;
+  /**
    * The function called when the submit icon is clicked.
    */
-  onSubmitClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onSubmitClick?: (event: React.FormEvent) => void;
   /**
    * The function called when the color rest button is selected.
    * It is required to be set for the reset button to render.
@@ -83,7 +88,7 @@ const defaultColors = [
   colors.blackPepper400,
 ];
 
-const ColorInputWrapper = styled('div')({
+const ColorInputWrapper = styled('form')({
   width: '100%',
   marginTop: spacing.s,
   display: 'flex',
@@ -117,6 +122,7 @@ const isCustomColor = (colors: string[], hexCode?: string) => {
 const ColorPicker = ({
   colorSet = defaultColors,
   customHexInputLabel = 'Custom Hex Color',
+  submitLabel = 'Submit',
   onColorChange,
   onColorReset,
   onSubmitClick,
@@ -138,17 +144,12 @@ const ColorPicker = ({
 
   const onValidCustomHexChange = (validHexValue: string) => setValidHexValue(validHexValue);
 
-  const onCustomInputKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && validHexValue) {
-      onColorChange(validHexValue);
-    }
-  };
-
-  const onCheckClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onSubmit = (event: React.FormEvent) => {
     if (onSubmitClick) {
       onSubmitClick(event);
     }
     onColorChange(validHexValue);
+    event.preventDefault(); // don't submit the form - default action is to reload the page
   };
 
   return (
@@ -158,21 +159,19 @@ const ColorPicker = ({
       )}
       <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
       {showCustomHexInput && (
-        <ColorInputWrapper>
+        <ColorInputWrapper onSubmit={onSubmit}>
           <ColorInputAndLabel label={customHexInputLabel}>
             <HexColorInput
               onChange={onCustomHexChange}
-              onKeyDown={onCustomInputKeyDown}
               onValidColorChange={onValidCustomHexChange}
               value={customHexValue}
               showCheck={value === validHexValue || value === customHexValue}
             />
           </ColorInputAndLabel>
           <CheckButton
-            aria-label={customHexInputLabel}
+            aria-label={submitLabel}
             variant={IconButton.Variant.CircleFilled}
             icon={checkIcon}
-            onClick={onCheckClick}
           />
         </ColorInputWrapper>
       )}
