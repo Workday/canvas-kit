@@ -224,4 +224,20 @@ describe('ColorPicker', () => {
       });
     });
   });
+
+  context('when the InputInteraction story is loaded', () => {
+    beforeEach(() => {
+      h.stories.load('Testing|React/Labs/Color Picker', 'InputInteraction');
+    });
+
+    context('when input is entered into the color input and user hits enter', () => {
+      beforeEach(() => {
+        cy.findByLabelText('Custom Hex Color').type('111{enter}');
+      });
+
+      it('should not enter a newline in the textarea', () => {
+        cy.findByLabelText('Text Area').should('have.value', '');
+      });
+    });
+  });
 });
