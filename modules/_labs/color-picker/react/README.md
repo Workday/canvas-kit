@@ -146,7 +146,7 @@ Default: `Custom Hex Color`
 
 ---
 
-#### `onSubmitClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void`
+#### `onSubmitClick: (event: React.FormEvent) => void`
 
 > When this handler is provided, an action can be tied to clicking the check button provided. This
 > handler is called when the check button is selected through a keyboard event only.
