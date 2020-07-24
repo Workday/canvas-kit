@@ -56,6 +56,29 @@ const SelectModal = () => {
   );
 };
 
+export const AccessibilityTest = () => (
+  <div>
+    <Container>
+      <p>
+        This Select has its <strong>aria-required</strong> prop set to true. When its listbox menu
+        is opened, we expect aria-required to be set to "true" for the listbox.
+      </p>
+      <FormField label="Label (aria-required)" inputId="select-aria-required" required={true}>
+        {controlComponent(
+          <Select name="select-aria-required" options={options} aria-required={true} />
+        )}
+      </FormField>
+      <p>
+        This Select has its <strong>required</strong> prop set to true. Again, when its listbox menu
+        is opened, we expect aria-required to be set to "true" for the listbox.
+      </p>
+      <FormField label="Label (required)" inputId="select-required" required={true}>
+        {controlComponent(<Select name="select-required" options={options} required={true} />)}
+      </FormField>
+    </Container>
+  </div>
+);
+
 export const PortalTest = () => (
   <div>
     <Container>
