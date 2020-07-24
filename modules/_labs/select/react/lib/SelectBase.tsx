@@ -284,6 +284,8 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   private menuRef = React.createRef<HTMLUListElement>();
   private menuId = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
 
+  private animateId: number;
+
   private scrollFocusedOptionIntoView = (center: boolean) => {
     const focusedOption = this.focusedOptionRef.current;
     if (focusedOption) {
@@ -304,7 +306,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       // so we know how far to scroll. Without this delay, sometimes measurements
       // are correct and sometimes they aren't (may be related to the number of
       // options and/or the length of their labels) -- add the delay to be safe.
-      requestAnimationFrame(() => {
+      this.animateId = requestAnimationFrame(() => {
         this.scrollFocusedOptionIntoView(true);
       });
 
@@ -318,6 +320,10 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     ) {
       this.scrollFocusedOptionIntoView(false);
     }
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.animateId);
   }
 
   renderOptions = (renderOption: RenderOptionFunction) => {
