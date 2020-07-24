@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
+import {accessibleHide} from '@workday/canvas-kit-react-common';
 
 export interface SkeletonProps {
   /**
@@ -14,6 +15,8 @@ export interface SkeletonProps {
 const TRANSPARENCY_POSITION = 45;
 const WHITE_SHEEN_WIDTH = 10;
 const DURATION = 5;
+
+const AccessibleHide = styled('div')(accessibleHide);
 
 const SkeletonAnimator = styled('div')<{diagonal: number; topPosition: number; width: number}>(
   ({diagonal, topPosition, width}) => {
@@ -72,13 +75,8 @@ export default class Skeleton extends React.Component<SkeletonProps, SkeletonSta
     const {loadingLabel} = this.props;
 
     return (
-      <SkeletonContainer
-        aria-label={loadingLabel}
-        aria-live={'polite'}
-        role={'status'}
-        ref={this.ref}
-        {...elemProps}
-      >
+      <SkeletonContainer ref={this.ref} {...elemProps}>
+        <AccessibleHide>{loadingLabel}</AccessibleHide>
         <SkeletonAnimator diagonal={diagonal} topPosition={topPosition} width={width} />
         <div aria-hidden={true}>{children}</div>
       </SkeletonContainer>
