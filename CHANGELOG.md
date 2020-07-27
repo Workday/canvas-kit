@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.0.2 (2020-07-24)
+
+### Components
+- fix(menu): Delay focus to prevent scrolling ([#802](https://github.com/Workday/canvas-kit/pull/802)) [@NicholasBoll](https://github.com/NicholasBoll)
+
 # 3.9.2 (2020-07-21)
 
 ### Components

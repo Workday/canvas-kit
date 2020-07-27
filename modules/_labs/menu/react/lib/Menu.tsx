@@ -62,6 +62,7 @@ const List = styled('ul')({
 
 export default class Menu extends React.Component<MenuProps, MenuState> {
   private id = uuid();
+  private animateId: number;
 
   private menuRef: React.RefObject<HTMLUListElement>;
   private firstCharacters: string[];
@@ -89,14 +90,20 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     if (this.props.isOpen && !prevProps.isOpen) {
       this.setInitialSelectedItem();
     }
-    if (this.props.isOpen && this.menuRef.current) {
-      this.menuRef.current.focus();
-    }
+    this.animateId = requestAnimationFrame(() => {
+      if (this.props.isOpen && this.menuRef.current) {
+        this.menuRef.current.focus();
+      }
+    });
   }
 
   componentDidMount() {
     this.setFirstCharacters();
     this.setInitialSelectedItem();
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.animateId);
   }
 
   public render() {
