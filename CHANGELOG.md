@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.1.1 (2020-07-27)
+
+### Components
+
+- fix(select): Fix undesired scrolling when activating menu ([#795](https://github.com/Workday/canvas-kit/pull/795)) [@jamesfan](https://github.com/jamesfan)
+- fix: Update Popup readme example ([#798](https://github.com/Workday/canvas-kit/pull/798)) [@alanbsmith](https://github.com/alanbsmith)
+- fix(select): Support required and aria-required ([#797](https://github.com/Workday/canvas-kit/pull/797)) [@jamesfan](https://github.com/jamesfan)
+- fix(color-picker): Prevent enter key forwarding to next focus target ([#799](https://github.com/Workday/canvas-kit/pull/799)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(select): Add cancelAnimationFrame to unmount ([#803](https://github.com/Workday/canvas-kit/pull/803)) [@jamesfan](https://github.com/jamesfan)
+- fix(menu): Delay focus to prevent scrolling ([#802](https://github.com/Workday/canvas-kit/pull/802)) [@NicholasBoll](https://github.com/NicholasBoll)
+
 # 4.0.2 (2020-07-24)
 
 ### Components
