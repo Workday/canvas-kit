@@ -228,7 +228,6 @@ export default class MenuItem extends React.Component<MenuItemProps> {
 
   componentDidUpdate = (prevProps: MenuItemProps) => {
     if (!prevProps.isFocused && this.props.isFocused) {
-      console.log('ref', this.ref);
       if (this.ref.current) {
         scrollIntoViewIfNeeded(this.ref.current);
       }
