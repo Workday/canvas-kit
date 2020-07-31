@@ -79,7 +79,7 @@ interface ControlledMenuState {
   anchorEl: HTMLElement | null;
   selectedItemIndex: number;
 }
-class ControlledMenu extends React.Component<{}, ControlledMenuState> {
+class ControlledMenu extends React.Component<{items?: React.ReactElement[]}, ControlledMenuState> {
   private menuId: string;
   private controlButtonId: string;
   private buttonRef: React.RefObject<HTMLButtonElement>;
@@ -119,13 +119,14 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
           >
             <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
               <Menu
+                style={{maxHeight: 400, overflowY: 'auto'}}
                 initialSelectedItem={selectedItemIndex}
                 isOpen={isOpen}
                 onClose={this.handleClose}
                 id={this.menuId}
                 labeledBy={this.controlButtonId}
               >
-                {createMenuItems().map(buildItem)}
+                {this.props.items || createMenuItems().map(buildItem)}
               </Menu>
             </div>
           </Popper>
@@ -138,7 +139,6 @@ class ControlledMenu extends React.Component<{}, ControlledMenuState> {
     this.setState({
       anchorEl: currentTarget,
       isOpen: !this.state.isOpen,
-      selectedItemIndex: 0,
     });
   };
   private handleClose = () => {
@@ -289,6 +289,18 @@ storiesOf('Labs|Menu/React', module)
             Second
           </CustomMenuItem>
         </Menu>
+      </div>
+    );
+  })
+  .add('With Many Items', () => {
+    return (
+      <div className="story">
+        <ControlledMenu
+          items={'One Two Three Four Five Six Seven Eight Nine Ten Eleven Twelve Thirteen Fourteen Fifteen Sixteen Seventeen'
+            .split(' ')
+            .map(text => ({text: `Item ${text}`}))
+            .map(buildItem)}
+        />
       </div>
     );
   });
