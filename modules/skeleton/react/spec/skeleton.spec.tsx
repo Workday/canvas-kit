@@ -1,87 +1,52 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
+import {render} from '@testing-library/react';
 import Skeleton from '../lib/skeleton';
 
 describe('Skeleton', () => {
   it('should render', () => {
-    const subject = mount(
+    const screen = render(
       <Skeleton>
-        <span> Hello </span>
+        <span>Hello</span>
       </Skeleton>
     );
 
-    expect(subject).toHaveLength(1);
-    subject.unmount();
+    expect(screen.container).toHaveTextContent('Hello');
   });
 
-  test('Skeleton should spread extra props', () => {
-    const component = mount(<Skeleton data-propspread="test" />);
-    const container = component.at(0).getDOMNode();
-    expect(container.getAttribute('data-propspread')).toBe('test');
-    component.unmount();
+  it('Skeleton should spread extra props', () => {
+    const screen = render(<Skeleton data-propspread="test" />);
+    expect(screen.container.firstChild).toHaveAttribute('data-propspread', 'test');
   });
 
   describe('Accessibility', () => {
     it('should add aria-hidden to all of the children', () => {
-      const subject = mount(
+      const screen = render(
         <Skeleton>
-          <span> Hello </span>
+          <span data-testid="span">Hello</span>
         </Skeleton>
       );
 
-      expect(
-        subject
-          .find('div')
-          .at(2)
-          .getDOMNode()
-          .getAttribute('aria-hidden')
-      ).toEqual('true');
-      subject.unmount();
+      expect(screen.getByTestId('span').parentElement).toHaveAttribute('aria-hidden', 'true');
     });
-    it('should have role status', () => {
-      const subject = mount(
+
+    it('should have a text element with the loading label', () => {
+      const screen = render(
         <Skeleton>
-          <span> Hello </span>
+          <span data-testid="span">Hello</span>
         </Skeleton>
       );
 
-      expect(
-        subject
-          .first()
-          .getDOMNode()
-          .getAttribute('role')
-      ).toEqual('status');
-      subject.unmount();
+      expect(screen.container).toHaveTextContent('Loading');
     });
-    it('should have aria-live polite', () => {
-      const subject = mount(
-        <Skeleton>
-          <span> Hello </span>
+
+    it('should have a text element with a custom loading label', () => {
+      const screen = render(
+        <Skeleton loadingLabel="Loading items">
+          <span data-testid="span">Hello</span>
         </Skeleton>
       );
 
-      expect(
-        subject
-          .first()
-          .getDOMNode()
-          .getAttribute('aria-live')
-      ).toEqual('polite');
-      subject.unmount();
-    });
-    it('should have aria-label loading', () => {
-      const subject = mount(
-        <Skeleton>
-          <span> Hello </span>
-        </Skeleton>
-      );
-
-      expect(
-        subject
-          .first()
-          .getDOMNode()
-          .getAttribute('aria-label')
-      ).toEqual('Loading');
-      subject.unmount();
+      expect(screen.container).toHaveTextContent('Loading items');
     });
   });
 });
