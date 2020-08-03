@@ -44,7 +44,7 @@ describe('Menu', () => {
           cy.focused().type('{uparrow}');
         });
 
-        it('should do something', () => {
+        it('should scroll the menu to show the active menu item', () => {
           cy.findByRole('menu')
             .pipe(getAssistiveFocus)
             .should(assertOptionInView);
