@@ -1,10 +1,10 @@
 ---
-name: 🚀 Suggestion
+name: 💡 Suggestion
 labels: 'suggestion'
 about: Submit a suggestion to help improve an area of Canvas-Kit
 ---
 
-## 🚀 Suggestion
+## 💡 Suggestion
 
 A clear and concise description of what the suggestion is.
 
