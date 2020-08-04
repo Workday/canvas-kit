@@ -2,10 +2,16 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
+import {accessibleHide} from '@workday/canvas-kit-react-common';
 
 export interface SkeletonProps {
   /**
-   * The `aria-label` that describes loading.
+   * For accessibility reasons, `aria-label` is transformed into a text representation
+   * (visually hidden, but announced by screen readers) of the loader.
+   *
+   * IMPORTANT: Since we take over the use of `aria-label` here, the attribute
+   * does not get applied to the container element. We anticipate that this will change
+   * in a future major version.
    * @default 'Loading'
    */
   'aria-label'?: string;
@@ -14,6 +20,8 @@ export interface SkeletonProps {
 const TRANSPARENCY_POSITION = 45;
 const WHITE_SHEEN_WIDTH = 10;
 const DURATION = 5;
+
+const AccessibleHide = styled('div')(accessibleHide);
 
 const SkeletonAnimator = styled('div')<{diagonal: number; topPosition: number; width: number}>(
   ({diagonal, topPosition, width}) => {
@@ -68,13 +76,8 @@ export default class Skeleton extends React.Component<SkeletonProps, SkeletonSta
     const topPosition = (-1 * (diagonal - height)) / 2;
 
     return (
-      <SkeletonContainer
-        aria-label={loadingAriaLabel}
-        aria-live={'polite'}
-        role={'status'}
-        ref={this.ref}
-        {...elemProps}
-      >
+      <SkeletonContainer ref={this.ref} {...elemProps}>
+        <AccessibleHide>{loadingAriaLabel}</AccessibleHide>
         <SkeletonAnimator diagonal={diagonal} topPosition={topPosition} width={width} />
         <div aria-hidden={true}>{children}</div>
       </SkeletonContainer>
