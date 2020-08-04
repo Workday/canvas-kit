@@ -17,8 +17,8 @@ yarn add @workday/canvas-kit-react-skeleton
 
 # Skeleton
 
-This component places its children in a `div` marked with the `aria-hidden` attribute and displays
-an `aria-live` status to specify that the content is loading.
+This component places its children in a `div` marked with the `aria-hidden` attribute. It announces 
+itself by utilizing a visually hidden div.
 
 ## Usage
 
@@ -48,7 +48,14 @@ import {
 
 ## Component Props
 
-> None
+### Optional
+
+#### `loadingLabel: string`
+
+> The text representation (visually hidden, but announced by screen readers) of the loader.
+> Do not use the `aria-label` attribute as this will cause the `Skeleton` to announce twice.
+
+Default: `"Loading"`
 
 # SkeletonHeader
 

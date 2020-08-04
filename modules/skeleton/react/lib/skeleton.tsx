@@ -6,7 +6,8 @@ import {accessibleHide} from '@workday/canvas-kit-react-common';
 
 export interface SkeletonProps {
   /**
-   * The `aria-label` that describes loading.
+   * The text representation (visually hidden, but announced by screen readers) of the loader.
+   * Do not use the `aria-label` attribute as this will cause the `Skeleton` to announce twice.
    * @default 'Loading'
    */
   loadingLabel: string;
