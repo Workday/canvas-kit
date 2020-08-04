@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react",
-  "version": "3.9.2",
+  "version": "3.9.3",
   "description": "The parent module that contains all Workday Canvas Kit React components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -58,7 +58,7 @@
     "@workday/canvas-kit-react-radio": "^3.9.1",
     "@workday/canvas-kit-react-select": "^3.9.1",
     "@workday/canvas-kit-react-side-panel": "^3.9.2",
-    "@workday/canvas-kit-react-skeleton": "^3.9.1",
+    "@workday/canvas-kit-react-skeleton": "^3.9.3",
     "@workday/canvas-kit-react-status-indicator": "^3.9.1",
     "@workday/canvas-kit-react-switch": "^3.9.1",
     "@workday/canvas-kit-react-table": "^3.9.1",
