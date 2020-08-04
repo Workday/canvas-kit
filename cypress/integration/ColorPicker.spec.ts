@@ -2,8 +2,6 @@ import * as h from '../helpers';
 
 const getColorInput = () => cy.get('[type="text"]');
 
-const getIconButton = () => cy.get('button.wdc-ckr-icon-button');
-
 const getColorPickerPopup = () => cy.get('[role=dialog]');
 
 const expandHex = (hex: string) => {
@@ -11,13 +9,6 @@ const expandHex = (hex: string) => {
   return hex.replace(shorthandRegex, function(m: string, r: string, g: string, b: string) {
     return r + r + g + g + b + b;
   });
-};
-
-const hexToRgb = (hex: string) => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(expandHex(hex));
-  return result
-    ? `rgb(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)})`
-    : null;
 };
 
 const colorInputStory = 'Components|Inputs/Color Picker/Color Input/React/Top Label';
@@ -126,7 +117,7 @@ describe('ColorPicker', () => {
     context('when the IconButton is clicked', () => {
       beforeEach(() => {
         h.stories.load(colorPickerStory, 'Icon Button Popup');
-        getIconButton().click();
+        cy.get('button').click();
       });
 
       it('should pass accessibility checks', () => {
@@ -141,7 +132,7 @@ describe('ColorPicker', () => {
         const color = '8660d1';
         beforeEach(() => {
           cy.get(`.wdc-color-picker--color-${color}`).click();
-          getIconButton().click();
+          cy.get('button').click();
         });
 
         it('should have check icon', () => {
@@ -154,12 +145,12 @@ describe('ColorPicker', () => {
       context('when color reset is clicked', () => {
         beforeEach(() => {
           cy.get(`.wdc-color-picker--color-8660d1`).click();
-          getIconButton().click();
+          cy.get('button').click();
           cy.get('[data-testid="color-picker-reset"]').click();
         });
 
         it('should set the color picker value to the reset color', () => {
-          getIconButton().click();
+          cy.get('button').click();
           cy.get(`.wdc-color-picker--color-0875e1`)
             .find('.wd-icon')
             .should('exist');
@@ -174,9 +165,10 @@ describe('ColorPicker', () => {
         it('should set the selected color to input value', () => {
           getColorInput().type('#123123');
           getColorPickerPopup()
-            .find('button.wdc-ckr-icon-button')
+            .find('button')
+            .last()
             .click();
-          getIconButton().click();
+          cy.get('button').click();
           getColorInput()
             .parent()
             .find('.wd-icon')

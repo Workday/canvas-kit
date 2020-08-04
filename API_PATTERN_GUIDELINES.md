@@ -133,12 +133,13 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 
 #### Input Provider
 
-- All Canvas Kit components should support a wrapping `InputProvider` component to provide the
-  cleanest experience for mouse users. Read the docs
+- All Canvas Kit components should support an `InputProvider` component to provide the cleanest
+  experience for mouse users. Read the docs
   [here](https://github.com/Workday/canvas-kit/tree/master/modules/core/react#input-provider).
-- Do not use `InputProvider` within your components. It is meant to be a higher order component
-  wrapping a whole application of Canvas components
+- Do not use `InputProvider` within your components. It is meant to be used only once in your
+  application. It does not require wrapping any children
 - Make sure you provide fully accessible styling by default, and only override for mouse usage.
+-
 
 ```tsx
 [`[data-whatinput='mouse'] &:focus,
@@ -238,9 +239,31 @@ foo();
 - Use `defaultProps` whenever you find yourself checking for the existence of something before
   executing branching logic. It significantly reduces conditionals, facilitating easier testing and
   less bugs.
-- Any prop included in `defaultProps` should be typed as required in the component interface.
-  However, it can still be documented as optional in the README. You can find more details
-  [here](https://stackoverflow.com/questions/37282159/default-property-value-in-react-component-using-typescript)
+- We prefer to colocate our default props and destructure them which allows consumers to rename our
+  components on import.
+- Note: If you assign a default value to a prop, make sure to make the prop as optional in the
+  interface.
+
+```jsx
+const someInterface {
+  /**
+   * If true, sets the Checkbox checked to true
+   * @default false
+   */
+  checked?: boolean;
+   /**
+   * If true, set the Checkbox to the disabled state.
+   * @default false
+   */
+  disabled?: boolean;
+  /**
+   * The value of the Checkbox.
+   */
+  value?: string;
+}
+//...
+const {checked = false, disabled = false, value} = this.props;
+```
 
 #### Class Function Binding
 
@@ -325,7 +348,9 @@ The base pattern for prop descriptions is: `The <property> of the <component>.` 
 value?: string;
 ```
 
-Be as specific as possible. For example, suppose there is a `label` prop for `Checkbox` which specifies the text of the label. Rather than describe `label` as `The label of the Checkbox`, the following is preferable:
+Be as specific as possible. For example, suppose there is a `label` prop for `Checkbox` which
+specifies the text of the label. Rather than describe `label` as `The label of the Checkbox`, the
+following is preferable:
 
 ```
 /**
@@ -343,7 +368,8 @@ Feel free to provide additional detail in the description:
 value: number;
 ```
 
-Be sure to specify a proper `@default` for enum props. Listing the named values which are accepted by the enum prop is encouraged:
+Be sure to specify a proper `@default` for enum props. Listing the named values which are accepted
+by the enum prop is encouraged:
 
 ```
 /**
@@ -353,16 +379,18 @@ Be sure to specify a proper `@default` for enum props. Listing the named values 
 openDirection?: SidePanelOpenDirection;
 ```
 
-Use a modified pattern for function props: `The function called when <something happens>.` For example:
+Use a modified pattern for function props: `The function called when <something happens>.` For
+example:
 
 ```
 /**
   * The function called when the Checkbox state changes.
   */
-onChange?: (e: React.SyntheticEvent) => void;
+onChange?: (e: React.ChangeEvent) => void;
 ```
 
-The pattern for booleans is also different: `If true, <do something>.` For standard 2-state booleans, set `@default false` in the description. For example:
+The pattern for booleans is also different: `If true, <do something>.` For standard 2-state
+booleans, set `@default false` in the description. For example:
 
 ```
 /**
@@ -382,7 +410,8 @@ Provide additional detail for 2-state booleans where the `false` outcome cannot 
 centeredNav?: boolean;
 ```
 
-For 3-state booleans, you will need to describe all 3 cases: `If true <do something>. If false <do something else>. If undefined <do yet another thing>.`
+For 3-state booleans, you will need to describe all 3 cases:
+`If true <do something>. If false <do something else>. If undefined <do yet another thing>.`
 
 We also recommend the following pattern for errors:
 
@@ -393,7 +422,10 @@ We also recommend the following pattern for errors:
 error?: ErrorType;
 ```
 
-Occasionally, you may encounter props which don't play nicely with the suggested guidelines. Rather than following the patterns to the letter, adjust them to provide a better description if necessary. For example, rather than ambiguously describing `id` as `The id of the Checkbox`, provide a more explicit description:
+Occasionally, you may encounter props which don't play nicely with the suggested guidelines. Rather
+than following the patterns to the letter, adjust them to provide a better description if necessary.
+For example, rather than ambiguously describing `id` as `The id of the Checkbox`, provide a more
+explicit description:
 
 ```
 /**

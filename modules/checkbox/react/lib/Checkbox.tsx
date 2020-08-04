@@ -1,28 +1,29 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
 import {
   ErrorType,
-  themedFocusRing,
+  uniqueId,
+  focusRing,
   mouseFocusBehavior,
   getErrorColors,
+  styled,
+  useTheme,
+  Themeable,
 } from '@workday/canvas-kit-react-common';
 import canvas, {
   borderRadius,
   colors,
-  iconColors,
   inputColors,
   spacingNumbers as spacing,
 } from '@workday/canvas-kit-react-core';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
-import uuid from 'uuid/v4';
 
 export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * If true, set the Checkbox to the checked state.
    * @default false
    */
-  checked: boolean;
+  checked?: boolean;
   /**
    * If true, set the Checkbox to the disabled state.
    * @default false
@@ -30,6 +31,7 @@ export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTML
   disabled?: boolean;
   /**
    * The HTML `id` of the underlying checkbox input element. This is required if `label` is defined as a non-empty string.
+   * @default A uniquely generated id by uuid()
    */
   id?: string;
   /**
@@ -44,7 +46,7 @@ export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTML
   /**
    * The function called when the Checkbox state changes.
    */
-  onChange?: (e: React.SyntheticEvent) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * The value of the Checkbox.
    */
@@ -103,7 +105,16 @@ const CheckboxRipple = styled('span')<Pick<CheckboxProps, 'disabled'>>({
  * and was easier to use than a component selector in this case.
  */
 const CheckboxInput = styled('input')<CheckboxProps>(
-  ({theme}) => ({
+  ({
+    theme: {
+      canvas: {
+        palette: {
+          primary: themePrimary,
+          common: {focusOutline: themeFocusOutline},
+        },
+      },
+    },
+  }) => ({
     borderRadius: borderRadius.s,
     width: checkboxTapArea,
     height: checkboxTapArea,
@@ -124,16 +135,16 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       },
     },
     '&:checked ~ div:first-of-type': {
-      borderColor: theme.palette.primary.main,
-      backgroundColor: theme.palette.primary.main,
+      borderColor: themePrimary.main,
+      backgroundColor: themePrimary.main,
     },
     '&:disabled ~ div:first-of-type': {
       borderColor: inputColors.disabled.border,
       backgroundColor: inputColors.disabled.background,
     },
     '&:disabled:checked ~ div:first-of-type': {
-      borderColor: theme.palette.primary.light,
-      backgroundColor: theme.palette.primary.light,
+      borderColor: themePrimary.light,
+      backgroundColor: themePrimary.light,
     },
 
     // Focus
@@ -141,12 +152,12 @@ const CheckboxInput = styled('input')<CheckboxProps>(
       outline: 'none',
     },
     '&:focus ~ div:first-of-type': {
-      borderColor: theme.palette.primary.main,
+      borderColor: themePrimary.main,
       borderWidth: '2px',
       boxShadow: 'none',
     },
     '&:checked:focus ~ div:first-of-type': {
-      ...themedFocusRing(theme, {width: 2, separation: 2, animate: false}),
+      ...focusRing({width: 2, separation: 2, animate: false, outerColor: themeFocusOutline}),
       '& span': {
         marginLeft: '-7px',
       },
@@ -160,11 +171,11 @@ const CheckboxInput = styled('input')<CheckboxProps>(
         },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: theme.palette.primary.main,
+        borderColor: themePrimary.main,
       },
       '&:disabled:checked ~ div:first-of-type': {
-        borderColor: theme.palette.primary.light,
-        backgroundColor: theme.palette.primary.light,
+        borderColor: themePrimary.light,
+        backgroundColor: themePrimary.light,
       },
     }),
   }),
@@ -191,7 +202,7 @@ const CheckboxInput = styled('input')<CheckboxProps>(
         },
       },
       '&:checked ~ div:first-of-type': {
-        borderColor: theme.palette.primary.main,
+        borderColor: theme.canvas.palette.primary.main,
         boxShadow: `
             0 0 0 2px ${colors.frenchVanilla100},
             0 0 0 4px ${errorColors.inner},
@@ -252,11 +263,15 @@ const CheckboxCheck = styled('div')<Pick<CheckboxProps, 'checked'>>(
   })
 );
 
-const IndeterminateBox = styled('div')({
-  width: '10px',
-  height: '2px',
-  backgroundColor: canvas.colors.frenchVanilla100,
-});
+const IndeterminateBox = styled('div')(
+  {
+    width: '10px',
+    height: '2px',
+  },
+  ({theme}) => ({
+    backgroundColor: theme.canvas.palette.primary.contrast,
+  })
+);
 
 const CheckboxLabel = styled('label')<{disabled?: boolean}>(
   {
@@ -266,62 +281,52 @@ const CheckboxLabel = styled('label')<{disabled?: boolean}>(
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
 );
 
-export default class Checkbox extends React.Component<CheckboxProps> {
-  static ErrorType = ErrorType;
+export const Checkbox = ({
+  checked = false,
+  label = '',
+  theme = useTheme(),
+  id = uniqueId(),
+  disabled,
+  inputRef,
+  onChange,
+  value,
+  error,
+  indeterminate,
+  // TODO: Standardize on prop spread location (see #150)
+  ...elemProps
+}: CheckboxProps) => (
+  <CheckboxContainer>
+    <CheckboxInputWrapper disabled={disabled}>
+      <CheckboxInput
+        checked={checked}
+        disabled={disabled}
+        id={id}
+        ref={inputRef}
+        onChange={onChange}
+        type="checkbox"
+        value={value}
+        error={error}
+        {...elemProps}
+      />
+      <CheckboxRipple />
+      <CheckboxBackground checked={checked} disabled={disabled}>
+        <CheckboxCheck checked={checked}>
+          {indeterminate ? (
+            <IndeterminateBox />
+          ) : (
+            <SystemIcon icon={checkSmallIcon} color={theme.canvas.palette.primary.contrast} />
+          )}
+        </CheckboxCheck>
+      </CheckboxBackground>
+    </CheckboxInputWrapper>
+    {label && (
+      <CheckboxLabel htmlFor={id} disabled={disabled}>
+        {label}
+      </CheckboxLabel>
+    )}
+  </CheckboxContainer>
+);
 
-  public static defaultProps = {
-    checked: false,
-    label: '',
-  };
+Checkbox.ErrorType = ErrorType;
 
-  private id = uuid();
-
-  public render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {
-      checked,
-      disabled,
-      id = this.id,
-      inputRef,
-      label,
-      onChange,
-      value,
-      error,
-      indeterminate,
-      ...elemProps
-    } = this.props;
-
-    return (
-      <CheckboxContainer>
-        <CheckboxInputWrapper disabled={disabled}>
-          <CheckboxInput
-            checked={checked}
-            disabled={disabled}
-            id={id}
-            ref={inputRef}
-            onChange={onChange}
-            type="checkbox"
-            value={value}
-            error={error}
-            {...elemProps}
-          />
-          <CheckboxRipple />
-          <CheckboxBackground checked={checked} disabled={disabled}>
-            <CheckboxCheck checked={checked}>
-              {indeterminate ? (
-                <IndeterminateBox />
-              ) : (
-                <SystemIcon icon={checkSmallIcon} color={iconColors.inverse} />
-              )}
-            </CheckboxCheck>
-          </CheckboxBackground>
-        </CheckboxInputWrapper>
-        {label && (
-          <CheckboxLabel htmlFor={id} disabled={disabled}>
-            {label}
-          </CheckboxLabel>
-        )}
-      </CheckboxContainer>
-    );
-  }
-}
+export default Checkbox;

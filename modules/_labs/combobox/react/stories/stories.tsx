@@ -42,7 +42,7 @@ class Autocomplete extends React.Component<
           .map((x: any, i: string) => autocompleteResult(i))
           .splice(0, 5)}
         onChange={this.autocompleteCallback}
-        showClearButton={this.props.showClearButton == null ? true : this.props.showClearButton}
+        showClearButton={this.props.showClearButton === null ? true : this.props.showClearButton}
         labelId="autocomplete-123"
         initialValue="Test"
       >

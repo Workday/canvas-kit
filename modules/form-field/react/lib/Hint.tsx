@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {styled, Themeable} from '@workday/canvas-kit-labs-react-core';
-import {ErrorType} from '@workday/canvas-kit-react-common';
+import {ErrorType, styled, Themeable} from '@workday/canvas-kit-react-common';
 import {spacing, type} from '@workday/canvas-kit-react-core';
 
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
@@ -26,12 +25,9 @@ const Message = styled('p')(type.body2, {width: '100%', margin: `${spacing.xxs} 
 
 export default class Hint extends React.Component<HintProps> {
   static ErrorType = ErrorType;
-  static defaultProps = {
-    errorLabel: 'Error',
-    alertLabel: 'Alert',
-  };
+
   public render() {
-    const {children, error, errorLabel, alertLabel} = this.props;
+    const {errorLabel = 'Error', alertLabel = 'Alert', children, error} = this.props;
 
     let hintLabel: string | undefined;
     switch (error) {

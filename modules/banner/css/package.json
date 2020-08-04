@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-banner",
-  "version": "3.8.0",
+  "version": "4.0.2",
   "description": "Errors and alerts for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/banner/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^3.8.0",
+    "@workday/canvas-kit-css-core": "^4.0.2",
     "@workday/canvas-system-icons-web": "^1.0.20"
   },
   "scripts": {

@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-core",
-  "version": "3.8.0",
+  "version": "4.0.2",
   "description": "The core css for canvas-kit-css",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -28,7 +28,7 @@
     "workday"
   ],
   "dependencies": {
-    "@workday/canvas-colors-web": "^0.17.13",
+    "@workday/canvas-colors-web": "^2.0.0",
     "@workday/canvas-depth-web": "^0.16.4"
   }
 }

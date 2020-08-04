@@ -24,7 +24,10 @@ export const RadioStates = () => (
     <StaticStates>
       <ComponentStatesTable
         rowProps={permutateProps({
-          checked: [{value: true, label: 'Checked'}, {value: false, label: 'Unchecked'}],
+          checked: [
+            {value: true, label: 'Checked'},
+            {value: false, label: 'Unchecked'},
+          ],
         })}
         columnProps={permutateProps(
           {
@@ -36,7 +39,10 @@ export const RadioStates = () => (
               {label: 'Active', value: 'active'},
               {label: 'Active Hover', value: 'active hover'},
             ],
-            disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
+            disabled: [
+              {label: '', value: false},
+              {label: 'Disabled', value: true},
+            ],
           },
           props => {
             if (props.disabled && !['', 'hover'].includes(props.className)) {
@@ -55,6 +61,7 @@ export const RadioStates = () => (
         )}
       </ComponentStatesTable>
     </StaticStates>
+
     <h3>Radio Group</h3>
     <StaticStates>
       <ComponentStatesTable
@@ -65,17 +72,25 @@ export const RadioStates = () => (
             {value: FormField.ErrorType.Error, label: 'Error'},
           ],
         })}
-        columnProps={[{label: 'Default', props: {}}]}
+        columnProps={[
+          {
+            label: 'Left Label',
+            props: {label: 'Contact', labelPosition: FormField.LabelPosition.Left},
+          },
+          {
+            label: 'Top Label',
+            props: {label: 'Contact'},
+          },
+        ]}
       >
         {props => (
           <FormField
             useFieldset={true}
             hintText={props.error ? hintText : undefined}
             hintId={hintId}
-            labelPosition={FormField.LabelPosition.Left}
             {...props}
           >
-            <RadioGroup name="contact">
+            <RadioGroup name="contact" value={'email'}>
               <Radio id="1" value="email" label="E-mail" />
               <Radio id="2" value="fax" label="Fax (disabled)" disabled={true} />
             </RadioGroup>

@@ -64,7 +64,7 @@ storiesOf('Labs|Drawer/React', module)
         <Drawer
           header={
             <DrawerHeader
-              closeIconLabel={'Close'}
+              closeIconAriaLabel={'Close'}
               onClose={action('onClose callback')}
               title={'Drawer Header'}
             />
@@ -94,7 +94,7 @@ storiesOf('Labs|Drawer/React', module)
         <Drawer
           header={
             <DrawerHeader
-              closeIconLabel={'Close'}
+              closeIconAriaLabel={'Close'}
               headerColor={text(headerColor, headerColorDefaultValue)}
               inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
               onClose={action('onClose callback')}
@@ -120,7 +120,7 @@ storiesOf('Labs|Drawer/React', module)
           header={
             <DrawerHeader
               id={'accessibleDrawer'}
-              closeIconLabel={'Close'}
+              closeIconAriaLabel={'Close'}
               headerColor={text(headerColor, headerColorDefaultValue)}
               inverse={boolean(showInverselabel, showInverseIconDefaultValue)}
               onClose={action('onClose callback')}

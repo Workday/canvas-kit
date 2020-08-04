@@ -18,15 +18,24 @@ module.exports = (name, moduleName, description, unstable, public) => `
   "files": [
     "dist/",
     "lib/",
-    "index.ts"
+    "index.ts",
+    "ts3.5/**/*"
   ],
+  "typesVersions": {
+    "<=3.5": {
+      "*": [
+        "ts3.5/*"
+      ]
+    }
+  },
   "scripts": {
     "watch": "yarn build:es6 -w",
-    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
+    "clean": "rimraf dist && rimraf ts3.5 && rimraf .build-info && mkdirp dist && mkdirp ts3.5/dist",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6",
+    "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
+    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
     "depcheck": "node ../../../${unstable ? '../' : ''}utils/check-dependencies-exist.js"
   }, ${
     public

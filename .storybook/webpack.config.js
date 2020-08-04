@@ -5,7 +5,6 @@ const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 const modulesPath = path.resolve(__dirname, '../modules');
 const welcomeSectionPath = path.resolve(__dirname, './');
 const utilsPath = path.resolve(__dirname, '../utils');
-const postcssConfigPath = path.resolve(__dirname, './postcss.config');
 
 module.exports = ({config, mode}) => {
   // This is so we get consistent results when loading .ts/tsx and .mdx files
@@ -20,26 +19,18 @@ module.exports = ({config, mode}) => {
     },
   ];
 
-  // Exclude all node_modules from babel-loader
-  config.module.rules
-    .find(rule => /mjs\|jsx/.test(rule.test.toString()))
-    .exclude.push(/node_modules/);
-
-  // Filter out extraneous rules added by CRA (react-scripts)
-  // react-scripts automatically adds js/ts matchers for a `src` folder which we don't use so these rules are moot
-  config.module.rules = config.module.rules.filter(
-    rule => !/js\|mjs\|jsx\|ts\|tsx/.test(rule.test.toString())
-  );
-
-  // Override CRA postcss presets
-  config.module.rules.forEach(rule => {
-    if (rule.test.toString().includes('scss|sass')) {
-      delete rule.use[2].options.plugins;
-
-      rule.use[2].options.config = {
-        path: postcssConfigPath,
-      };
-    }
+  config.module.rules.push({
+    test: /\.(scss|css)$/,
+    use: [
+      'style-loader',
+      {
+        loader: 'css-loader',
+        options: {importLoaders: 2},
+      },
+      'postcss-loader',
+      'sass-loader',
+    ],
+    include: modulesPath,
   });
 
   // Add `.ts` and `.tsx` as a resolvable extension.

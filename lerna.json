@@ -2,13 +2,17 @@
   "packages": [
     "modules/**"
   ],
-  "version": "3.9.3",
+  "version": "4.0.2",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
     "version": {
       "gitTagVersion": false,
-      "push": false
+      "push": false,
+      "forcePublish": "*"
+    },
+    "publish": {
+      "forcePublish": "*"
     }
   }
 }

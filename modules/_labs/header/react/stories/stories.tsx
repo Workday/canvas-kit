@@ -10,8 +10,8 @@ import chroma from 'chroma-js';
 
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
-import {AvatarButton} from '../../../../avatar/react';
-import {colors, spacing} from '../../../../core/react';
+import {Avatar} from '../../../../avatar/react';
+import {colors, spacing, gradients} from '../../../../core/react';
 import {Button, IconButton} from '../../../../button/react';
 import {MenuItem} from '../../../menu/react';
 import {
@@ -47,15 +47,15 @@ const backgroundStyle = {
 // Simulate a React Router link
 const Link = styled('a')<{to: string}>({});
 
-const handleMenuClickTest = (e: React.SyntheticEvent) => {
+const handleMenuClickTest = (e: React.MouseEvent) => {
   action(`Menu clicked! ${e.target}`)();
 };
 
-const handleAvatarClickTest = (e: React.SyntheticEvent) => {
+const handleAvatarClickTest = (e: React.MouseEvent) => {
   action(`Avatar clicked! ${e.target}`);
 };
 
-const handleSearchSubmitTest = (e: React.SyntheticEvent) => {
+const handleSearchSubmitTest = (e: React.MouseEvent<HTMLFormElement>) => {
   const formInputValue = (e.target as HTMLFormElement).getElementsByTagName('input')[0].value;
   action(`search submitted ${formInputValue}`)();
 };
@@ -136,7 +136,7 @@ storiesOf('Labs|Header/React', module)
             </a>
           }
           menuToggle={
-            <AvatarButton
+            <Avatar
               onClick={handleMenuClickTest}
               url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
             />
@@ -162,7 +162,7 @@ storiesOf('Labs|Header/React', module)
             title="Inbox"
             aria-label="Inbox"
           />
-          <AvatarButton
+          <Avatar
             onClick={handleAvatarClickTest}
             url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
             altText="Profile"
@@ -172,7 +172,7 @@ storiesOf('Labs|Header/React', module)
       <div css={containerStyle}>
         <GlobalHeader
           brand={<WorkdayLogoTitle variant={HeaderVariant.Global} />}
-          menuToggle={<AvatarButton onClick={handleMenuClickTest} />}
+          menuToggle={<Avatar onClick={handleMenuClickTest} />}
           leftSlot={
             <SearchBar
               isCollapsed={boolean('isCollapsed', false)}
@@ -193,7 +193,7 @@ storiesOf('Labs|Header/React', module)
             title="Inbox"
             aria-label="Inbox"
           />
-          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
       <div css={containerStyle}>
@@ -219,7 +219,7 @@ storiesOf('Labs|Header/React', module)
             title="Inbox"
             aria-label="Inbox"
           />
-          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
     </div>
@@ -264,7 +264,7 @@ storiesOf('Labs|Header/React', module)
             title="Inbox"
             aria-label="Inbox"
           />
-          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </Header>
       </div>
       <br />
@@ -285,7 +285,7 @@ storiesOf('Labs|Header/React', module)
             title="Notifications"
             aria-label="Notifications"
           />
-          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
           <Button variant={Button.Variant.Primary}>Download</Button>
         </Header>
       </div>
@@ -299,7 +299,7 @@ storiesOf('Labs|Header/React', module)
             <DubLogoTitle
               title="Contained Lockup"
               themeColor={Header.Theme.Blue}
-              bgColor={colors.gradients.blueberry}
+              bgColor={gradients.blueberry}
             />
           }
           brandUrl="#"
@@ -455,7 +455,7 @@ storiesOf('Labs|Header/React', module)
             title="Notifications"
             aria-label="Notifications"
           />
-          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
           <Button variant={Button.Variant.Primary}>Download</Button>
         </Header>
       </div>
@@ -475,7 +475,7 @@ storiesOf('Labs|Header/React', module)
             title="Notifications"
             aria-label="Notifications"
           />
-          <AvatarButton onClick={handleAvatarClickTest} />
+          <Avatar onClick={handleAvatarClickTest} />
         </Header>
       </div>
       <br />
@@ -494,7 +494,7 @@ storiesOf('Labs|Header/React', module)
             title="Notifications"
             aria-label="Notifications"
           />
-          <AvatarButton onClick={handleAvatarClickTest} altText="Profile" />
+          <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </Header>
       </div>
       <br />

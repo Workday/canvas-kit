@@ -41,7 +41,7 @@ describe('Skeleton', () => {
 
     it('should have a text element with a custom loading label', () => {
       const screen = render(
-        <Skeleton loadingLabel="Loading items">
+        <Skeleton aria-label="Loading items">
           <span data-testid="span">Hello</span>
         </Skeleton>
       );

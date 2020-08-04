@@ -7,7 +7,7 @@ function getAssistiveFocus($menu: JQuery): JQuery {
 
 function assertOptionInView($option: JQuery) {
   const option = $option[0];
-  const menu = option.parentElement;
+  const menu = option.parentElement!;
 
   const optionBox = option.getBoundingClientRect();
   const menuBox = menu.getBoundingClientRect();

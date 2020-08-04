@@ -17,7 +17,7 @@ yarn add @workday/canvas-kit-react-skeleton
 
 # Skeleton
 
-This component places its children in a `div` marked with the `aria-hidden` attribute. It announces 
+This component places its children in a `div` marked with the `aria-hidden` attribute. It announces
 itself by utilizing a visually hidden div.
 
 ## Usage
@@ -50,10 +50,13 @@ import {
 
 ### Optional
 
-#### `loadingLabel: string`
+#### `aria-label: string`
 
-> The text representation (visually hidden, but announced by screen readers) of the loader.
-> Do not use the `aria-label` attribute as this will cause the `Skeleton` to announce twice.
+> For accessibility reasons, `aria-label` is transformed into a text representation (visually
+> hidden, but announced by screen readers) of the loader.
+>
+> IMPORTANT: Since we take over the use of `aria-label` here, the attribute does not get applied to
+> the container element. We anticipate that this will change in a future major version.
 
 Default: `"Loading"`
 

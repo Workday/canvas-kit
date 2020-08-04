@@ -23,7 +23,10 @@ export const StatusIndicatorStates = () => (
           {value: StatusIndicator.Emphasis.Low, label: 'Low Emphasis'},
           {value: StatusIndicator.Emphasis.High, label: 'High Emphasis'},
         ],
-        icon: [{value: undefined, label: ''}, {value: uploadCloudIcon, label: 'With Icon'}],
+        icon: [
+          {value: undefined, label: ''},
+          {value: uploadCloudIcon, label: 'With Icon'},
+        ],
       })}
       columnProps={permutateProps({
         type: [

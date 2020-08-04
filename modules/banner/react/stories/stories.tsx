@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import Banner from '../index';
 import README from '../README.md';
 
-const handleBannerClick = (e: React.SyntheticEvent) => {
+const handleBannerClick = () => {
   alert(`onClick triggered`);
 };
 

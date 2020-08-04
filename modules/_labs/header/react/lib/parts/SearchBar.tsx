@@ -59,7 +59,7 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label text for the SearchBar submit button.
    * @default Search
    */
-  submitLabel: string;
+  submitAriaLabel?: string;
   /**
    * The screenreader label text for the SearchBar clear button.
    * @default Reset Search Form
@@ -69,12 +69,12 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label text for the button to open the collapsed SearchBar.
    * @default Open Search
    */
-  openButtonLabel: string;
+  openButtonAriaLabel?: string;
   /**
    * The screenreader label text for the button to close the open SearchBar.
    * @default Cancel
    */
-  closeButtonLabel: string;
+  closeButtonAriaLabel?: string;
   /**
    * If true, render the SearchBar with a button to clear the text input.
    * @default true
@@ -292,15 +292,6 @@ const SearchInput = styled(TextInput)<
 
 export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   static Theme = SearchTheme;
-  static defaultProps = {
-    placeholder: 'Search',
-    inputLabel: 'Search',
-    submitLabel: 'Search',
-    openButtonLabel: 'Open Search',
-    closeButtonLabel: 'Cancel',
-    showClearButton: true,
-    height: 40,
-  };
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
@@ -365,7 +356,11 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   componentDidUpdate(prevProps: SearchBarProps, prevState: SearchBarState) {
     const showFormToggled = this.state.showForm !== prevState.showForm;
     if (showFormToggled) {
-      this.state.showForm ? this.focusInput() : this.focusOpen();
+      if (this.state.showForm) {
+        this.focusInput();
+      } else {
+        this.focusOpen();
+      }
     }
   }
 
@@ -399,6 +394,14 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   render() {
     const {
+      clearButtonAriaLabel = 'Reset Search Form',
+      placeholder = 'Search',
+      inputLabel = 'Search',
+      submitAriaLabel = 'Search',
+      openButtonAriaLabel = 'Open Search',
+      closeButtonAriaLabel = 'Cancel',
+      showClearButton = true,
+      height = 40,
       grow,
       onSubmit,
       isCollapsed,
@@ -406,15 +409,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       autocompleteItems,
       initialValue,
       searchTheme,
-      placeholder,
       rightAlign,
-      inputLabel,
-      submitLabel,
-      showClearButton,
-      clearButtonAriaLabel,
-      closeButtonLabel,
-      openButtonLabel,
-      height,
       ...elemProps
     } = this.props;
 
@@ -432,7 +427,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       >
         <SearchContainer height={height}>
           <SearchIcon
-            aria-label={submitLabel}
+            aria-label={submitAriaLabel}
             icon={searchIcon}
             isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
@@ -440,7 +435,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             isHidden={!!isCollapsed && !this.state.showForm}
           />
           <SearchIcon
-            aria-label={openButtonLabel}
+            aria-label={openButtonAriaLabel}
             icon={searchIcon}
             isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
@@ -468,7 +463,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               showClearButton={!isCollapsed && showClearButton}
-              clearButtonAriaLabel={clearButtonAriaLabel || 'Reset Search Form'}
+              clearButtonAriaLabel={clearButtonAriaLabel}
               labelId={this.labelId}
             >
               <SearchInput
@@ -483,7 +478,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             </SearchCombobox>
           </SearchField>
           <CloseButton
-            aria-label={closeButtonLabel}
+            aria-label={closeButtonAriaLabel}
             icon={xIcon}
             isCollapsed={isCollapsed}
             variant={IconButton.Variant.Plain}

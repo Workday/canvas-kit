@@ -10,7 +10,7 @@ export type WorkdayLogoTitleProps = {
    * The theme of the WorkdayLogoTitle. Accepts `White`, `Blue`, or `Transparent`.
    * @default HeaderTheme.White
    */
-  themeColor: HeaderTheme;
+  themeColor?: HeaderTheme;
   /**
    * The text of the WorkdayLogoTitle. Not used if `brand` is provided.
    * @default ''
@@ -66,13 +66,8 @@ const WorkdayLogo = styled('span')<WorkdayLogoTitleProps>({
 });
 
 export class WorkdayLogoTitle extends React.Component<WorkdayLogoTitleProps> {
-  static defaultProps = {
-    themeColor: HeaderTheme.White,
-    title: '',
-  };
-
   public render() {
-    const {themeColor, title, variant, ...elemProps} = this.props;
+    const {themeColor = HeaderTheme.White, title = '', variant, ...elemProps} = this.props;
 
     return (
       <LockupContainer>
@@ -81,14 +76,14 @@ export class WorkdayLogoTitle extends React.Component<WorkdayLogoTitleProps> {
             {...this.props}
             dangerouslySetInnerHTML={{
               __html:
-                this.props.themeColor === HeaderTheme.White
-                  ? this.props.variant === HeaderVariant.Global
+                themeColor === HeaderTheme.White
+                  ? variant === HeaderVariant.Global
                     ? miniWdayLogoBlue
                     : wdayLogoBlue
                   : wdayLogoWhite,
             }}
           />
-          {this.props.title && <Title {...this.props}>{this.props.title}</Title>}
+          {title && <Title {...this.props}>{title}</Title>}
         </Lockup>
       </LockupContainer>
     );

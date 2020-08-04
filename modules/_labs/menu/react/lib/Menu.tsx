@@ -39,7 +39,7 @@ export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLULis
   /**
    * The HTML `id` of the element that labels the Menu. Often used with menu buttons.
    */
-  labeledBy?: string;
+  'aria-labelledby'?: string;
 }
 
 export interface MenuState {
@@ -61,11 +61,8 @@ const List = styled('ul')({
 });
 
 export default class Menu extends React.Component<MenuProps, MenuState> {
-  static defaultProps = {
-    isOpen: true,
-  };
-
   private id = uuid();
+  private animateId: number;
 
   private menuRef: React.RefObject<HTMLUListElement>;
   private firstCharacters: string[];
@@ -93,9 +90,11 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     if (this.props.isOpen && !prevProps.isOpen) {
       this.setInitialSelectedItem();
     }
-    if (this.props.isOpen && this.menuRef.current) {
-      this.menuRef.current.focus();
-    }
+    this.animateId = requestAnimationFrame(() => {
+      if (this.props.isOpen && this.menuRef.current) {
+        this.menuRef.current.focus();
+      }
+    });
   }
 
   componentDidMount() {
@@ -103,13 +102,17 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     this.setInitialSelectedItem();
   }
 
+  componentWillUnmount() {
+    cancelAnimationFrame(this.animateId);
+  }
+
   public render() {
     // TODO: Standardize on prop spread location (see #150)
     const {
-      children,
       id = this.id,
-      isOpen,
-      labeledBy,
+      isOpen = true,
+      children,
+      'aria-labelledby': ariaLabelledby,
       grow,
       width,
       onSelect,
@@ -130,7 +133,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           role="menu"
           tabIndex={0}
           id={id}
-          aria-labelledby={labeledBy}
+          aria-labelledby={ariaLabelledby}
           aria-activedescendant={`${id}-${selectedItemIndex}`}
           onKeyDown={this.handleKeyboardShortcuts}
           ref={this.menuRef}
@@ -245,14 +248,17 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     }
   };
 
-  private handleClick = (event: React.SyntheticEvent, menuItemProps: MenuItemProps): void => {
+  private handleClick = (
+    event: React.MouseEvent | React.KeyboardEvent,
+    menuItemProps: MenuItemProps
+  ): void => {
     /* istanbul ignore next line for coverage */
     if (menuItemProps.isDisabled) {
       // You should only hit this point if you are using a custom MenuItem implementation.
       return;
     }
     if (menuItemProps.onClick) {
-      menuItemProps.onClick(event);
+      menuItemProps.onClick(event as React.MouseEvent);
     }
     if (this.props.onSelect) {
       this.props.onSelect();
@@ -280,7 +286,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
   private setFirstCharacters = (): void => {
     const getFirstCharacter = (child: React.ReactNode): string => {
       let character = '';
-      if (child == null || typeof child === 'boolean' || child === {}) {
+      if (!child || typeof child === 'boolean' || child === {}) {
         character = '';
       } else if (typeof child === 'string' || typeof child === 'number') {
         character = child

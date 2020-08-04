@@ -87,12 +87,12 @@ describe('GlobalHeader', () => {
       const propsHeader2 = {
         menuToggle: 'abcde',
         isCollapsed: false,
+        themeColor: HeaderTheme.White,
       };
       const defaultProps = {
         brand: <DubLogoTitle />,
         variant: HeaderVariant.Global,
         children: undefined,
-        themeColor: HeaderTheme.White,
       };
 
       const childPropsHeader1 = shallow(<GlobalHeader {...propsHeader1} />)

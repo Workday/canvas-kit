@@ -6,11 +6,15 @@ import {accessibleHide} from '@workday/canvas-kit-react-common';
 
 export interface SkeletonProps {
   /**
-   * The text representation (visually hidden, but announced by screen readers) of the loader.
-   * Do not use the `aria-label` attribute as this will cause the `Skeleton` to announce twice.
+   * For accessibility reasons, `aria-label` is transformed into a text representation
+   * (visually hidden, but announced by screen readers) of the loader.
+   *
+   * IMPORTANT: Since we take over the use of `aria-label` here, the attribute
+   * does not get applied to the container element. We anticipate that this will change
+   * in a future major version.
    * @default 'Loading'
    */
-  loadingLabel: string;
+  'aria-label'?: string;
 }
 
 const TRANSPARENCY_POSITION = 45;
@@ -59,9 +63,6 @@ export interface SkeletonState {
 
 export default class Skeleton extends React.Component<SkeletonProps, SkeletonState> {
   private ref: React.RefObject<HTMLDivElement> = React.createRef();
-  static defaultProps = {
-    loadingLabel: 'Loading',
-  };
 
   state = {
     width: 0,
@@ -69,15 +70,14 @@ export default class Skeleton extends React.Component<SkeletonProps, SkeletonSta
   };
 
   render(): React.ReactNode {
-    const {children, ...elemProps} = this.props;
+    const {'aria-label': loadingAriaLabel = 'Loading', children, ...elemProps} = this.props;
     const {width, height} = this.state;
     const diagonal = Math.sqrt(width * width + height * height) + WHITE_SHEEN_WIDTH;
     const topPosition = (-1 * (diagonal - height)) / 2;
-    const {loadingLabel} = this.props;
 
     return (
       <SkeletonContainer ref={this.ref} {...elemProps}>
-        <AccessibleHide>{loadingLabel}</AccessibleHide>
+        <AccessibleHide>{loadingAriaLabel}</AccessibleHide>
         <SkeletonAnimator diagonal={diagonal} topPosition={topPosition} width={width} />
         <div aria-hidden={true}>{children}</div>
       </SkeletonContainer>
