@@ -1,4 +1,4 @@
-import Breadcrumbs from './lib/Breadcrumbs';
+import {Breadcrumbs} from './lib/Breadcrumbs';
 
 export default Breadcrumbs;
 export {Breadcrumbs};
