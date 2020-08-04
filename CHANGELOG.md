@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.0.3 (2020-08-03)
+
+### Components
+- fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(menu): Auto scroll to selected menu item if necessary ([#812](https://github.com/Workday/canvas-kit/pull/812)) [@NicholasBoll](https://github.com/NicholasBoll)
+- test(menu): Fix assertion name to be more clear [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(skeleton): Update to remove mention of aria-live ([#814](https://github.com/Workday/canvas-kit/pull/814)) [@lychyi](https://github.com/lychyi)
+
+# 3.9.3 (2020-08-03)
+
+### Components
+- fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(menu): Auto scroll to selected menu item if necessary ([#812](https://github.com/Workday/canvas-kit/pull/812)) [@NicholasBoll](https://github.com/NicholasBoll)
+- test(menu): Fix assertion name to be more clear [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(skeleton): Update to remove mention of aria-live ([#814](https://github.com/Workday/canvas-kit/pull/814)) [@lychyi](https://github.com/lychyi)
+
 # 4.1.1 (2020-07-27)
 
 ### Components
