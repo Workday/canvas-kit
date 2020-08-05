@@ -1,4 +1,4 @@
-import {colors, spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react-core';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
 import {IconButton} from '@workday/canvas-kit-react-button';
@@ -9,6 +9,7 @@ import styled from '@emotion/styled';
 
 import {ResetButton} from './parts/ColorReset';
 import {SwatchBook} from './parts/SwatchBook';
+import {defaultColorSet} from './parts/ColorSets';
 
 export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -59,35 +60,6 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   resetLabel?: string;
 }
 
-const defaultColors = [
-  colors.cinnamon400,
-  colors.peach400,
-  colors.chiliMango400,
-  colors.cantaloupe400,
-  colors.sourLemon400,
-  colors.juicyPear400,
-  colors.kiwi400,
-  colors.greenApple400,
-
-  colors.watermelon400,
-  colors.jewel400,
-  colors.toothpaste400,
-  colors.blueberry400,
-  colors.plum400,
-  colors.berrySmoothie400,
-  colors.blackberry400,
-  colors.islandPunch400,
-
-  colors.grapeSoda400,
-  colors.pomegranate400,
-  colors.fruitPunch400,
-  colors.rootBeer400,
-  colors.toastedMarshmallow400,
-  colors.licorice400,
-  colors.cappuccino400,
-  colors.blackPepper400,
-];
-
 const ColorInputWrapper = styled('form')({
   width: '100%',
   marginTop: spacing.s,
@@ -120,7 +92,7 @@ const isCustomColor = (colors: string[], hexCode?: string) => {
 };
 
 const ColorPicker = ({
-  colorSet = defaultColors,
+  colorSet = defaultColorSet,
   customHexInputLabel = 'Custom Hex Color',
   submitLabel = 'Submit',
   onColorChange,
