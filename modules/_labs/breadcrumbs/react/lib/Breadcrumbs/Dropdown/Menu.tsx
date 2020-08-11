@@ -17,7 +17,7 @@ import {Breadcrumb} from '../types';
 import {DropdownMenuItem} from './MenuItem';
 import {DropdownMenuItemLink} from './MenuItemLink';
 
-interface DropdownMenuProps
+export interface DropdownMenuProps
   extends React.HTMLAttributes<HTMLUListElement>,
     Pick<DropdownContext, 'activeDropdownItem' | 'dropdownItems' | 'setActiveDropdownItem'> {
   activeDropdownItemRef: React.RefObject<HTMLLIElement>;
@@ -100,7 +100,6 @@ export const DropdownMenu = ({
         break;
       case 'Enter':
         e.preventDefault();
-        console.log('enter');
         if (item.onAction) {
           item.onAction(item);
           return resetFocus();

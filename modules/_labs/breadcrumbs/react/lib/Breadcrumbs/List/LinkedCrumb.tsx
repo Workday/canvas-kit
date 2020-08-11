@@ -55,6 +55,7 @@ export const LinkedCrumb = ({
         onFocus={openTooltip}
         onBlur={closeTooltip}
         href={href}
+        role="link"
         onClick={handleClick}
         {...props}
       >

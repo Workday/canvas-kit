@@ -15,7 +15,7 @@ const parseListItems = (children: React.ReactNode) => {
   return {rootItem, collapsibleItems, currentItem};
 };
 
-interface CollapsibleListProps extends React.HTMLAttributes<HTMLUListElement> {
+export interface CollapsibleListProps extends React.HTMLAttributes<HTMLUListElement> {
   expanderAriaLabel: string;
 }
 
@@ -37,7 +37,7 @@ export const CollapsibleList = ({children, expanderAriaLabel, ...props}: Collaps
 
   const {rootItem, collapsibleItems, currentItem} = parseListItems(children);
   return (
-    <BreadcrumbsList aria-label={expanderAriaLabel} ref={listRef} {...props}>
+    <BreadcrumbsList ref={listRef} {...props}>
       {rootItem}
       {shouldShowDropdown && (
         <BreadcrumbsListItem>
