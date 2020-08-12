@@ -22,6 +22,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';
 import {scrollIntoViewIfNeeded} from './scrolling';
+import {MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
 
 interface OptionData {
@@ -113,15 +114,10 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isMenuFlipped: boolean;
   /**
-   * If true, hide the SelectBase menu.
-   * @default true
+   * TODO: Describe menuVisibility prop (or pull it from SelectMenu or a shared type).
+   * @default 'closed'
    */
-  isMenuHidden: boolean;
-  /**
-   * If true, set the SelectBase to the "menu is hiding" state.
-   * @default false
-   */
-  isMenuHiding: boolean;
+  menuVisibility: MenuVisibility;
   /**
    * The function called when a key is pressed down while the SelectBase button or menu has focus.
    */
@@ -171,7 +167,7 @@ const menuIconSize = 24;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
 const SelectButton = styled('button')<
-  Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'isMenuHiding' | 'theme'>
+  Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'>
 >(
   {
     ...type.body,
@@ -205,7 +201,7 @@ const SelectButton = styled('button')<
       },
     },
   },
-  ({error, isMenuHidden, isMenuHiding, theme}) => {
+  ({error, menuVisibility, theme}) => {
     const themedFocusOutlineColor = theme.canvas.palette.common.focusOutline;
     const buttonFocusStyles = {
       borderColor: themedFocusOutlineColor,
@@ -214,9 +210,9 @@ const SelectButton = styled('button')<
 
     if (error === undefined) {
       // If there isn't an error, apply focus and hover styles if the menu is
-      // hidden or hiding (otherwise, the menu is completely visible: style
-      // the button as if it had focus)
-      return isMenuHidden || isMenuHiding
+      // closed or closing (otherwise, the menu is opening or open: style the
+      // button as if it had focus)
+      return menuVisibility === 'closed' || menuVisibility === 'closing'
         ? {
             '&:focus:not([disabled])': {
               ...buttonFocusStyles,
@@ -279,8 +275,7 @@ const SelectBase = (props: SelectBaseProps) => {
     inputRef,
     isEmpty,
     isMenuFlipped,
-    isMenuHidden,
-    isMenuHiding,
+    menuVisibility,
     onChange,
     onKeyDown,
     onMenuBlur,
@@ -314,7 +309,7 @@ const SelectBase = (props: SelectBaseProps) => {
         error,
         focused: focusedOptionIndex === index,
         id: option.id,
-        interactive: !isMenuHiding,
+        interactive: menuVisibility === 'opening' || menuVisibility === 'open',
         key: option.id,
         optionRef: focusedOptionIndex === index ? focusedOptionRef : undefined,
         value: option.value,
@@ -354,6 +349,7 @@ const SelectBase = (props: SelectBaseProps) => {
       // focus through the options, using scrollIntoView to keep the newly focused
       // option in view also scrolls the ENTIRE page. Instead, we call our own
       // scrollIntoViewIfNeeded function.
+      // console.log('scrolling in useLayoutEffect[focusedOptionIndex]');
       scrollIntoViewIfNeeded(focusedOption, false);
     }
   }, [focusedOptionIndex]);
@@ -361,9 +357,11 @@ const SelectBase = (props: SelectBaseProps) => {
   // If the menu was just displayed, scroll the focused option into view (if
   // necessary) and center it
   useLayoutEffect(() => {
+    // console.log('useLayoutEffect[menuVisibility], menuVisbility:', menuVisibility);
     const focusedOption = focusedOptionRef.current;
 
-    if (focusedOption) {
+    if (focusedOption && (menuVisibility === 'opening' || menuVisibility === 'open')) {
+      // console.log('scroll focused option into view');
       // TODO: Figure out why is rAF is still necessary here even though we're
       // using useLayoutEffect. Without rAF, the DOM measurements performed in
       // scrollIntoViewIfNeeded are incorrect and we fail to scroll the currently
@@ -378,7 +376,7 @@ const SelectBase = (props: SelectBaseProps) => {
     }
 
     return undefined;
-  }, [isMenuHidden]);
+  }, [menuVisibility]);
 
   // Use default renderOption if renderOption prop isn't provided
   const renderOptionFunction = renderOption || defaultRenderOption;
@@ -391,14 +389,13 @@ const SelectBase = (props: SelectBaseProps) => {
   return (
     <SelectWrapper grow={grow} disabled={disabled}>
       <SelectButton
-        aria-expanded={!isMenuHidden ? 'true' : undefined}
+        aria-expanded={menuVisibility !== 'closed' ? 'true' : undefined}
         aria-haspopup="listbox"
-        aria-controls={!isMenuHidden ? menuId : undefined}
+        aria-controls={menuVisibility !== 'closed' ? menuId : undefined}
         disabled={disabled}
         error={error}
         grow={grow}
-        isMenuHidden={isMenuHidden}
-        isMenuHiding={isMenuHiding}
+        menuVisibility={menuVisibility}
         onKeyDown={onKeyDown}
         // Prevent Firefox from triggering click handler on spacebar during
         // type-ahead when the menu is closed (and, thus, incorrectly displaying
@@ -414,7 +411,7 @@ const SelectBase = (props: SelectBaseProps) => {
         {selectedOptionLabel}
       </SelectButton>
       <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOptionValue} />
-      {!isEmpty && !isMenuHidden && (
+      {!isEmpty && menuVisibility !== 'closed' && (
         <SelectMenu
           aria-activedescendant={options[focusedOptionIndex].id}
           aria-labelledby={ariaLabelledBy}
@@ -423,8 +420,6 @@ const SelectBase = (props: SelectBaseProps) => {
           id={menuId}
           error={error}
           isFlipped={isMenuFlipped}
-          isHidden={isMenuHidden}
-          isHiding={isMenuHiding}
           menuRef={menuRef}
           onBlur={onMenuBlur}
           onKeyDown={onKeyDown}
@@ -432,6 +427,7 @@ const SelectBase = (props: SelectBaseProps) => {
           shouldAnimate={shouldMenuAnimate}
           shouldAutoFlip={shouldMenuAutoFlip}
           shouldAutoFocus={shouldMenuAutoFocus}
+          visibility={menuVisibility}
         >
           {renderOptions(renderOptionFunction)}
         </SelectMenu>
@@ -451,8 +447,7 @@ SelectBase.defaultProps = {
   focusedOptionIndex: 0,
   isEmpty: false,
   isMenuFlipped: false,
-  isMenuHidden: true,
-  isMenuHiding: false,
+  menuVisibility: 'closed',
   shouldMenuAnimate: true,
   shouldMenuAutoFlip: true,
   shouldMenuAutoFocus: true,

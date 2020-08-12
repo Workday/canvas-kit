@@ -140,7 +140,7 @@ describe('Select', () => {
             });
 
             context('the menu', () => {
-              it('should set assistive focus to "Phone" option', () => {
+              it('should set assistive focus to the "Phone" option', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
                   .pipe(getAssistiveFocus)
@@ -252,7 +252,7 @@ describe('Select', () => {
                   });
 
                   context('the menu', () => {
-                    it('should set assistive focus to "Mail" option', () => {
+                    it('should set assistive focus to the "Mail" option', () => {
                       cy.findByLabelText('Label')
                         .pipe(h.selectLabs.getMenu)
                         .pipe(getAssistiveFocus)

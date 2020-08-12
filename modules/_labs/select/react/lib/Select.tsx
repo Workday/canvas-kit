@@ -2,6 +2,7 @@ import * as React from 'react';
 import {ErrorType} from '@workday/canvas-kit-react-common';
 import {menuFadeDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
+import {MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
 import uuid from 'uuid/v4';
 
@@ -26,8 +27,7 @@ export interface SelectProps extends CoreSelectBaseProps {
 
 interface SelectState {
   focusedOptionIndex: number;
-  isMenuHidden: boolean;
-  isMenuHiding: boolean;
+  menuVisibility: MenuVisibility;
 }
 
 export default class Select extends React.Component<SelectProps, SelectState> {
@@ -35,14 +35,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   state: Readonly<SelectState> = {
     focusedOptionIndex: 0,
-    isMenuHidden: true,
-    isMenuHiding: false,
+    menuVisibility: 'closed',
   };
 
   private buttonRef = React.createRef<HTMLButtonElement>();
   private inputRef = React.createRef<HTMLInputElement>();
 
-  private removeMenuTimer: ReturnType<typeof setTimeout>;
+  private menuAnimationTimer: ReturnType<typeof setTimeout>;
 
   // For type-ahead functionality
   private keysSoFar = '';
@@ -131,26 +130,24 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private toggleMenu = (show: boolean): void => {
-    // Immediately wipe out removeMenuTimer if we're toggling the menu
-    // (if, for example, we're toggling the menu on while it's hiding)
-    if (this.removeMenuTimer) {
-      clearTimeout(this.removeMenuTimer);
+    // Clear existing menuAnimationTimer if it exists (e.g., if we're toggling the
+    // menu on while it's closing or vice-versa).
+    if (this.menuAnimationTimer) {
+      clearTimeout(this.menuAnimationTimer);
     }
 
     if (show) {
       this.setState({
         focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
-        isMenuHidden: false,
-        isMenuHiding: false,
+        menuVisibility: 'opening',
       });
+      this.menuAnimationTimer = setTimeout(() => {
+        this.setState({menuVisibility: 'open'});
+      }, menuFadeDuration);
     } else {
-      this.setState({isMenuHiding: true});
-
-      this.removeMenuTimer = setTimeout(() => {
-        this.setState({
-          isMenuHidden: true,
-          isMenuHiding: false,
-        });
+      this.setState({menuVisibility: 'closing'});
+      this.menuAnimationTimer = setTimeout(() => {
+        this.setState({menuVisibility: 'closed'});
       }, menuFadeDuration);
     }
   };
@@ -184,8 +181,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private handleKeyboardTypeAhead = (key: string, numOptions: number) => {
-    // Abort immediately if the menu is the process of hiding
-    if (this.state.isMenuHiding) {
+    // Abort immediately if the menu is the process of closing
+    if (this.state.menuVisibility === 'closing') {
       return;
     }
 
@@ -227,11 +224,12 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
     // A match was found...
     if (matchIndex > -1) {
-      if (this.state.isMenuHidden) {
-        // If the menu is hidden, fire the change event
+      if (this.state.menuVisibility === 'closed') {
+        // If the menu is closed, fire the change event
         this.fireChangeEvent(this.normalizedOptions[matchIndex].value);
       } else {
-        // Otherwise (the menu is visible), simply focus the matched option
+        // Otherwise the menu is visible (or at least partially visible);
+        // focus the matched option
         this.setState({focusedOptionIndex: matchIndex});
       }
     }
@@ -270,39 +268,46 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   componentWillUnmount() {
     // Clear timers
-    if (this.removeMenuTimer) {
-      clearTimeout(this.removeMenuTimer);
+    if (this.menuAnimationTimer) {
+      clearTimeout(this.menuAnimationTimer);
     }
     if (this.clearKeysSoFarTimer) {
       clearTimeout(this.clearKeysSoFarTimer);
     }
   }
 
-  handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    const {isMenuHidden} = this.state;
-
-    // Return focus to the button if the menu is visible (i.e., we're
-    // clicking the button again to dismiss the menu)
-    if (!isMenuHidden) {
-      this.focusButton();
-    }
-
-    this.toggleMenu(isMenuHidden);
-  };
-
   handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
     // Cancel default handling of the event to ensure we maintain control
     // of focus (i.e., so focus is immediately transferred to the menu when
     // opening the menu, rather than briefly being applied to the button
-    // and creating a momentary flash of a focus ring around the button)
+    // and creating a momentary flash of a focus ring around the button).
+    // This has implications for our click handler (see handleClick below).
     event.preventDefault();
   };
 
+  handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    const {menuVisibility} = this.state;
+
+    if (menuVisibility === 'closed' || menuVisibility === 'closing') {
+      this.toggleMenu(true);
+    } else {
+      // Since we're calling event.preventDefault in our mouseDown handler
+      // for the button, we must manage focus on the button ourselves (the
+      // browser will no longer automatically apply focus to the button
+      // when clicking on it). If the button is clicked while the menu is
+      // closed, we do NOT need to apply focus to the button since focus will
+      // immediately be applied to the menu. However, if the button is
+      // clicked while the menu is open or opening, we need to close the
+      // menu and assign focus to the button.
+      this.focusButton();
+      this.toggleMenu(false);
+    }
+  };
+
   handleOptionSelection = (index: number): void => {
-    // Abort immediately if:
-    // * The menu is in the process of hiding
-    // * A disabled option was clicked (we ignore these clicks)
-    if (this.state.isMenuHiding || this.normalizedOptions[index].disabled) {
+    // Abort immediately if the menu is in the process of closing or a disabled
+    // option was clicked (we ignore these clicks)
+    if (this.state.menuVisibility === 'closing' || this.normalizedOptions[index].disabled) {
       return;
     }
 
@@ -326,7 +331,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     const {options} = this.props;
     const numOptions = options.length;
 
-    const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.state;
+    const {focusedOptionIndex, menuVisibility} = this.state;
 
     let isShortcut = false;
     let nextFocusedIndex = 0;
@@ -342,7 +347,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         case 'ArrowDown':
         case 'Down': // IE/Edge specific value
           isShortcut = true;
-          if (isMenuHidden || isMenuHiding) {
+          if (menuVisibility === 'closed' || menuVisibility === 'closing') {
             this.toggleMenu(true);
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
@@ -368,7 +373,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           break;
 
         case 'Tab':
-          if (!isMenuHidden) {
+          if (menuVisibility !== 'closed') {
             isShortcut = true;
             this.handleMenuCloseOnKeyPress();
           }
@@ -381,7 +386,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           // space key as type-ahead rather than option selection
           if (this.keysSoFar !== '') {
             this.handleKeyboardTypeAhead(' ', numOptions);
-          } else if (isMenuHidden || isMenuHiding) {
+          } else if (menuVisibility === 'closed' || menuVisibility === 'closing') {
             this.toggleMenu(true);
           } else {
             this.handleOptionSelection(focusedOptionIndex);
@@ -390,7 +395,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
         case 'Enter':
           isShortcut = true;
-          if (isMenuHidden || isMenuHiding) {
+          if (menuVisibility === 'closed' || menuVisibility === 'closing') {
             this.toggleMenu(true);
           } else {
             this.handleOptionSelection(focusedOptionIndex);
@@ -415,7 +420,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       ...elemProps
     } = this.props;
 
-    const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.state;
+    const {focusedOptionIndex, menuVisibility} = this.state;
 
     // Don't pass in event handlers if options weren't defined
     const eventHandlers = this.areOptionsDefined()
@@ -435,8 +440,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         focusedOptionIndex={focusedOptionIndex}
         inputRef={this.inputRef}
         isEmpty={!this.areOptionsDefined()}
-        isMenuHidden={isMenuHidden}
-        isMenuHiding={isMenuHiding}
+        menuVisibility={menuVisibility}
         options={this.normalizedOptions}
         value={value}
         {...eventHandlers}

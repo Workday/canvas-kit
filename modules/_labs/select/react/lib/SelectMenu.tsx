@@ -7,6 +7,7 @@ import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core'
 
 import {SelectProps} from './Select';
 import {buttonBorderWidth} from './SelectBase';
+import {MenuVisibility} from './types';
 
 interface SelectMenuProps
   extends Themeable,
@@ -21,16 +22,6 @@ interface SelectMenuProps
    * @default false
    */
   isFlipped: boolean;
-  /**
-   * If true, hide the SelectMenu.
-   * @default false
-   */
-  isHidden: boolean;
-  /**
-   * If true, set the SelectMenu to the "is hiding" state.
-   * @default false
-   */
-  isHiding: boolean;
   /**
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */
@@ -54,6 +45,11 @@ interface SelectMenuProps
    * @default true
    */
   shouldAutoFocus: boolean;
+  /**
+   * TODO: Describe visibility prop.
+   * @default 'closed'
+   */
+  visibility: MenuVisibility;
 }
 
 const fadeInAnimation = keyframes`
@@ -136,7 +132,7 @@ const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSS
 };
 
 const Menu = styled('div')<
-  Pick<SelectMenuProps, 'error' | 'isHiding' | 'shouldAnimate' | 'theme'> & {width: number}
+  Pick<SelectMenuProps, 'error' | 'shouldAnimate' | 'theme' | 'visibility'> & {width: number}
 >(
   {
     backgroundColor: colors.frenchVanilla100,
@@ -164,9 +160,9 @@ const Menu = styled('div')<
       // fades out
       animationFillMode: 'forwards',
     },
-  ({isHiding, shouldAnimate}) =>
+  ({shouldAnimate, visibility}) =>
     shouldAnimate &&
-    isHiding && {
+    visibility === 'closing' && {
       animationName: fadeOutAnimation,
     },
   ({width}) => ({
@@ -249,13 +245,12 @@ const SelectMenu = (props: SelectMenuProps) => {
     children,
     error,
     isFlipped,
-    isHidden,
-    isHiding,
     menuRef,
     onCloseOnEscape,
     shouldAnimate,
     shouldAutoFlip,
     shouldAutoFocus,
+    visibility,
     ...elemProps
   } = props;
 
@@ -264,11 +259,11 @@ const SelectMenu = (props: SelectMenuProps) => {
   const [width, setWidth] = useState(0);
 
   const handleWidthChange = useCallback(() => {
-    if (buttonRef.current && !isHidden) {
+    if (buttonRef.current && visibility !== 'closed') {
       const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
       setWidth(newMenuWidth);
     }
-  }, [buttonRef, isHidden]);
+  }, [buttonRef, visibility]);
 
   useLayoutEffect(() => {
     handleWidthChange();
@@ -309,7 +304,7 @@ const SelectMenu = (props: SelectMenuProps) => {
   return (
     <Popper
       placement={placement}
-      open={!isHidden}
+      open={visibility !== 'closed'}
       anchorElement={buttonRef}
       popperOptions={generatePopperOptions({
         isFlipped,
@@ -319,7 +314,7 @@ const SelectMenu = (props: SelectMenuProps) => {
       })}
       ref={popupRef}
     >
-      <Menu error={error} isHiding={isHiding} shouldAnimate={shouldAnimate} width={width}>
+      <Menu error={error} shouldAnimate={shouldAnimate} visibility={visibility} width={width}>
         <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
           {children}
         </MenuList>
@@ -330,11 +325,10 @@ const SelectMenu = (props: SelectMenuProps) => {
 
 SelectMenu.defaultProps = {
   isFlipped: false,
-  isHidden: false,
-  isHiding: false,
   shouldAnimate: true,
   shouldAutoFlip: true,
   shouldAutoFocus: true,
+  visibility: 'closed',
 };
 
 export default SelectMenu;
