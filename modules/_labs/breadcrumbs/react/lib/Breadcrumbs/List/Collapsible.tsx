@@ -41,7 +41,7 @@ export const CollapsibleList = ({children, expanderAriaLabel, ...props}: Collaps
       {rootItem}
       {shouldShowDropdown && (
         <BreadcrumbsListItem>
-          <Dropdown aria-label={expanderAriaLabel} />
+          <Dropdown buttonAriaLabel={expanderAriaLabel} />
         </BreadcrumbsListItem>
       )}
       {collapsibleItems.map((item, i) => {

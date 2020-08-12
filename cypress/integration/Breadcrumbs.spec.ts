@@ -1,4 +1,5 @@
 import * as h from '../helpers';
+import {drop} from 'lodash';
 
 function getBreadcrumbsNav() {
   return cy.findByRole('navigation');
@@ -10,6 +11,12 @@ function getBreadcrumbsList() {
 
 function getBreadcrumbsDropdownButton() {
   return cy.findByLabelText('more links');
+}
+
+function openDropdownMenu() {
+  const dropdownButton = getBreadcrumbsDropdownButton();
+  dropdownButton.focus();
+  dropdownButton.type('{enter}');
 }
 
 describe('Breadcrumbs', () => {
@@ -61,10 +68,45 @@ describe('Breadcrumbs', () => {
     });
 
     it('should toggle aria-expanded on the dropdown button', () => {
-      getBreadcrumbsDropdownButton().click();
-      getBreadcrumbsDropdownButton().should('have.attr', 'aria-expanded', 'true');
-      getBreadcrumbsDropdownButton().click();
-      getBreadcrumbsDropdownButton().should('have.attr', 'aria-expanded', 'false');
+      const dropdownButton = getBreadcrumbsDropdownButton();
+      dropdownButton.click();
+      dropdownButton.should('have.attr', 'aria-expanded', 'true');
+      dropdownButton.click();
+      dropdownButton.should('have.attr', 'aria-expanded', 'false');
+    });
+  });
+
+  context('given the collapsible breadcrumb list menu', () => {
+    beforeEach(() => {
+      h.stories.load('Labs|Breadcrumbs/React', 'Collapsible');
+      openDropdownMenu();
+    });
+
+    it('should set focus to the first list item when the dropdown menu is toggled with a keypress', () => {
+      const firstItem = cy.findAllByRole('none').first();
+      firstItem.should('have.focus');
+    });
+
+    it('should toggle focus to the next list item on down keypress', () => {
+      const menu = cy.findByRole('menu');
+      cy.findAllByRole('none').each($link => {
+        cy.wrap($link).should('have.focus');
+        menu.type('{downArrow}');
+      });
+    });
+
+    it('should toggle focus to the next list item on right keypress', () => {
+      const menu = cy.findByRole('menu');
+      cy.findAllByRole('none').each($link => {
+        cy.wrap($link).should('have.focus');
+        menu.type('{downArrow}');
+      });
+    });
+
+    it('should return focus to the button from the first list item', () => {
+      const menu = cy.findByRole('menu');
+      menu.type('{upArrow}');
+      getBreadcrumbsDropdownButton().should('have.focus');
     });
   });
 });

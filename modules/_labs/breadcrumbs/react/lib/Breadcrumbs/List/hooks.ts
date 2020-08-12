@@ -74,7 +74,8 @@ export const useBuildDropdown = <E extends HTMLElement>(
     const collapsibleListItems = listItems.slice(1);
     const dropdownList = buildDropdownList(collapsibleListItems, containerWidth, maxWidth);
     setDropdownItems(dropdownList);
-  }, [maxWidth, listEl, children]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [maxWidth]);
 
   const dropdownItemIndices = dropdownItems.map(child => child.index);
   return {dropdownItems, dropdownItemIndices};

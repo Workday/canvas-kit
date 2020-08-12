@@ -6,7 +6,11 @@ import {useDropdown} from './hooks';
 import {DropdownButton} from './Button';
 import {DropdownMenu} from './Menu';
 
-export const Dropdown = () => {
+interface DropdownProps {
+  buttonAriaLabel: string;
+}
+
+export const Dropdown = ({buttonAriaLabel}: DropdownProps) => {
   // refs
   const buttonRef = React.useRef<HTMLButtonElement>(null);
   const activeDropdownItemRef = React.useRef<HTMLLIElement>(null);
@@ -18,7 +22,7 @@ export const Dropdown = () => {
 
   return (
     <>
-      <DropdownButton {...dropdownButtonProps} />
+      <DropdownButton aria-label={buttonAriaLabel} {...dropdownButtonProps} />
       <Popper placement="bottom-start" {...popperProps}>
         <DropdownMenu {...dropdownMenuProps} />
       </Popper>

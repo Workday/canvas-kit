@@ -6,23 +6,20 @@ import {folderCloseIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react-core';
 
 export interface DropdownButtonProps extends IconButtonProps {
+  'aria-label': string;
   buttonRef: React.Ref<HTMLButtonElement>;
-  setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>;
   toggled: boolean;
 }
 
 export const DropdownButton = ({
   buttonRef,
-  setIsDropdownOpen,
   toggled,
   variant = IconButton.Variant.Plain,
-  'aria-label': ariaLabel = 'More links',
   ...props
 }: DropdownButtonProps) => {
   const hasPlainVariant = variant === IconButton.Variant.Plain;
   // gives the plain icon variant a little extra space between the chevron separators
   const customStyles = css(hasPlainVariant ? {margin: '0 1px'} : {});
-  console.log(toggled);
   return (
     <IconButton
       css={customStyles}
@@ -31,11 +28,9 @@ export const DropdownButton = ({
       color={colors.licorice200}
       buttonRef={buttonRef}
       toggled={toggled}
-      // onClick={() => setIsDropdownOpen(true)}
-      aria-label={ariaLabel}
       aria-pressed={undefined}
       aria-expanded={toggled}
-      aria-haspopup={true}
+      aria-haspopup
       aria-controls="menu"
       {...props}
     />

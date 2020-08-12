@@ -1,4 +1,4 @@
-import {useContext, useLayoutEffect, useState} from 'react';
+import {useContext, useLayoutEffect} from 'react';
 import {useUniqueId} from '@workday/canvas-kit-react-common';
 import {usePopup, useCloseOnOutsideClick, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
 
@@ -23,16 +23,15 @@ export const useDropdown = (
 ) => {
   // state
   const {activeDropdownItem, dropdownItems, setActiveDropdownItem} = useContext(DropdownContext);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   // behaviors
   const {targetProps, closePopup, popperProps} = usePopup();
   useCloseOnOutsideClick(popperProps.ref, closePopup);
   useCloseOnEscape(popperProps.ref, closePopup);
   useFocusActiveItemElement(activeDropdownItemRef);
 
-  const handleButtonKeyUp = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+  const handleButtonKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter') {
-      setIsDropdownOpen(true);
+      targetProps.onClick(e as any); // needed to get Cypress to open the menu (but not IRL?)
       setActiveDropdownItem(dropdownItems[0]);
     }
   };
@@ -46,13 +45,11 @@ export const useDropdown = (
 
   const dropdownButtonProps = {
     id: uniqueButtonId,
-    'aria-label': 'more links',
     buttonRef,
-    setIsDropdownOpen,
     toggled: popperProps.open,
-    onKeyUp: handleButtonKeyUp,
+    onKeyDown: handleButtonKeyUp,
     ...targetProps,
-  } as DropdownButtonProps;
+  } as Omit<DropdownButtonProps, 'aria-label'>;
 
   const dropdownMenuProps = {
     'aria-labelledby': uniqueButtonId,
@@ -63,7 +60,5 @@ export const useDropdown = (
     resetFocus: resetMenuFocus,
   } as DropdownMenuProps;
 
-  console.log('popperprops', popperProps);
-  console.log('targetprops', targetProps);
   return {dropdownButtonProps, dropdownMenuProps, popperProps};
 };
