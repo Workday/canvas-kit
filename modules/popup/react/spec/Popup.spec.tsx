@@ -83,6 +83,7 @@ describe('Popup', () => {
 
       expect(ref.current).not.toBeNull();
       expect(ref.current).toHaveAttribute('role', 'dialog');
+      expect(ref.current).toHaveAttribute('data-uxi-widget-type', 'popup');
     });
   });
 });

@@ -166,6 +166,7 @@ export default class Popup extends React.Component<PopupProps> {
         width={width}
         role="dialog"
         ref={popupRef}
+        data-uxi-widget-type="popup"
         {...getAriaLabel(ariaLabel, headingId)}
         {...elemProps}
       >
