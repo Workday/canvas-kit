@@ -114,6 +114,10 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   isMenuFlipped: boolean;
   /**
+   * The ref to the underlying menu element. Use this to imperatively manipulate the menu.
+   */
+  menuRef: React.RefObject<HTMLUListElement>;
+  /**
    * TODO: Describe menuVisibility prop (or pull it from SelectMenu or a shared type).
    * @default 'closed'
    */
@@ -275,6 +279,7 @@ const SelectBase = (props: SelectBaseProps) => {
     inputRef,
     isEmpty,
     isMenuFlipped,
+    menuRef,
     menuVisibility,
     onChange,
     onKeyDown,
@@ -292,7 +297,6 @@ const SelectBase = (props: SelectBaseProps) => {
   } = props;
 
   const focusedOptionRef = React.useRef<HTMLLIElement>(null);
-  const menuRef = React.useRef<HTMLUListElement>(null);
 
   // Generate a stable ID for the menu (https://codesandbox.io/s/p2ndq).
   // We prefix the ID with an "a" to ensure it's a valid IDREF

@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useLayoutEffect, useCallback} from 'react';
 
-import {CSSObject, keyframes} from '@emotion/core';
+import {CSSObject} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
 import {Placement, Popper, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core';
@@ -51,16 +51,6 @@ interface SelectMenuProps
    */
   visibility: MenuVisibility;
 }
-
-const fadeInAnimation = keyframes`
-  from {opacity: 0;}
-  to {opacity: 1;}
-`;
-
-const fadeOutAnimation = keyframes`
-  from {opacity: 1;}
-  to {opacity: 0;}
-`;
 
 export const menuFadeDuration = 200;
 
@@ -152,19 +142,22 @@ const Menu = styled('div')<
   ({error, theme}) => ({
     ...menuBorderStyles(theme, error),
   }),
-  ({shouldAnimate}) =>
-    shouldAnimate && {
-      animationName: fadeInAnimation,
-      animationDuration: `${menuFadeDuration / 1000}s`,
-      // Required to prevent the occasional menu flash when the menu
-      // fades out
-      animationFillMode: 'forwards',
-    },
-  ({shouldAnimate, visibility}) =>
-    shouldAnimate &&
-    visibility === 'closing' && {
-      animationName: fadeOutAnimation,
-    },
+  ({shouldAnimate, visibility}) => {
+    const transitionStyles = shouldAnimate ? {transition: `opacity ${menuFadeDuration}ms`} : {};
+
+    let opacityStyles = {};
+    if (shouldAnimate) {
+      opacityStyles = {
+        opacity:
+          visibility === 'opening' || visibility === 'open' || visibility === 'preclose' ? 1 : 0,
+      };
+    }
+
+    return {
+      ...transitionStyles,
+      ...opacityStyles,
+    };
+  },
   ({width}) => ({
     width: width,
   })

@@ -40,6 +40,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
 
   private buttonRef = React.createRef<HTMLButtonElement>();
   private inputRef = React.createRef<HTMLInputElement>();
+  private menuRef = React.createRef<HTMLUListElement>();
 
   private menuAnimationTimer: ReturnType<typeof setTimeout>;
 
@@ -129,26 +130,70 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     }
   };
 
-  private toggleMenu = (show: boolean): void => {
-    // Clear existing menuAnimationTimer if it exists (e.g., if we're toggling the
-    // menu on while it's closing or vice-versa).
+  private setMenuAnimationTimeout = (callback: () => void) => {
     if (this.menuAnimationTimer) {
       clearTimeout(this.menuAnimationTimer);
     }
+    this.menuAnimationTimer = setTimeout(callback, menuFadeDuration);
+  };
 
-    if (show) {
-      this.setState({
-        focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
-        menuVisibility: 'opening',
-      });
-      this.menuAnimationTimer = setTimeout(() => {
-        this.setState({menuVisibility: 'open'});
-      }, menuFadeDuration);
+  private openMenu = () => {
+    this.setState({menuVisibility: 'opening'});
+    this.setMenuAnimationTimeout(() => {
+      this.setState({menuVisibility: 'open'});
+    });
+  };
+
+  private closeMenu = () => {
+    this.setState({menuVisibility: 'closing'});
+    this.setMenuAnimationTimeout(() => {
+      this.setState({menuVisibility: 'closed'});
+    });
+  };
+
+  private toggleMenu = (open: boolean): void => {
+    const {menuVisibility} = this.state;
+
+    if (open) {
+      switch (menuVisibility) {
+        // We're opening a menu which is currently closed: set the menu state
+        // to preopen (this allows us to transition from 0 opacity in the
+        // preopen state to the targeted 1.0 opacity in the opening state)
+        // before kicking off openMenu.
+        case 'closed':
+          this.setState({menuVisibility: 'preopen'}, this.openMenu);
+          break;
+        // We're opening a menu which is in the process of closing. Since the
+        // menu isn't completely closed, there's no need to set the preopen state;
+        // kick off openMenu immediately.
+        case 'preclose':
+        case 'closing':
+          this.openMenu();
+          break;
+        // Otherwise, we're opening a menu is already open or in the process of
+        // opening; no need to do anything further.
+        default:
+          break;
+      }
     } else {
-      this.setState({menuVisibility: 'closing'});
-      this.menuAnimationTimer = setTimeout(() => {
-        this.setState({menuVisibility: 'closed'});
-      }, menuFadeDuration);
+      switch (menuVisibility) {
+        // We're closing a menu which is currently open: set the menu state to
+        // preclose before kicking off closeMenu.
+        case 'open':
+          this.setState({menuVisibility: 'preclose'}, this.closeMenu);
+          break;
+        // We're closing a menu which is in the process of opening. Since the
+        // menu isn't completely open, there's no need to set the preclose state;
+        // kick off closeMenu immediately.
+        case 'preopen':
+        case 'opening':
+          this.closeMenu();
+          break;
+        // Otherwise, we're closing a menu which is already closed or in the process
+        // of closing; no need to do anything further.
+        default:
+          break;
+      }
     }
   };
 
@@ -288,19 +333,32 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const {menuVisibility} = this.state;
 
-    if (menuVisibility === 'closed' || menuVisibility === 'closing') {
-      this.toggleMenu(true);
-    } else {
-      // Since we're calling event.preventDefault in our mouseDown handler
-      // for the button, we must manage focus on the button ourselves (the
-      // browser will no longer automatically apply focus to the button
-      // when clicking on it). If the button is clicked while the menu is
-      // closed, we do NOT need to apply focus to the button since focus will
-      // immediately be applied to the menu. However, if the button is
-      // clicked while the menu is open or opening, we need to close the
-      // menu and assign focus to the button.
-      this.focusButton();
-      this.toggleMenu(false);
+    switch (menuVisibility) {
+      // If we click the button while the menu is in the process of closing,
+      // we want to toggle the menu back on. However, we also need to focus
+      // the menu since it won't be focused using Popper's onFirstUpdate
+      // callback (because the menu already exists). If we don't focus the
+      // menu, clicking outside the menu to dismiss it on blur won't work.
+      case 'preclose':
+      case 'closing':
+        if (this.menuRef.current) {
+          this.menuRef.current.focus();
+        }
+      // We want fall-through here. The preclose and closing states should
+      // both toggle the menu on.
+      // eslint-disable-next-line no-fallthrough
+      case 'closed':
+        this.toggleMenu(true);
+        break;
+      // Otherwise, the menu is open or in the process of opening. Focus
+      // the button and toggle the menu off. Note that since we're calling
+      // event.preventDefault in our mouseDown handler for the button, we
+      // must manage focus on the button ourselves (the browser will no
+      // longer automatically apply focus to the button when clicking on it).
+      default:
+        this.focusButton();
+        this.toggleMenu(false);
+        break;
     }
   };
 
@@ -440,6 +498,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         focusedOptionIndex={focusedOptionIndex}
         inputRef={this.inputRef}
         isEmpty={!this.areOptionsDefined()}
+        menuRef={this.menuRef}
         menuVisibility={menuVisibility}
         options={this.normalizedOptions}
         value={value}
