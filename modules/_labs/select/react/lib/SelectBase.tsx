@@ -116,7 +116,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
   /**
    * The ref to the underlying menu element. Use this to imperatively manipulate the menu.
    */
-  menuRef: React.RefObject<HTMLUListElement>;
+  menuRef?: React.RefObject<HTMLUListElement>;
   /**
    * TODO: Describe menuVisibility prop (or pull it from SelectMenu or a shared type).
    * @default 'closed'
@@ -348,28 +348,39 @@ const SelectBase = (props: SelectBaseProps) => {
     const focusedOption = focusedOptionRef.current;
 
     if (focusedOption) {
-      // We cannot use the native Element.scrollIntoView() here because it doesn't
-      // work properly with the portalled menu: when using the keyboard to advance
-      // focus through the options, using scrollIntoView to keep the newly focused
-      // option in view also scrolls the ENTIRE page. Instead, we call our own
-      // scrollIntoViewIfNeeded function.
-      // console.log('scrolling in useLayoutEffect[focusedOptionIndex]');
-      scrollIntoViewIfNeeded(focusedOption, false);
+      // TODO: Figure out why rAF is necessary here (and below) in order for the
+      // Select States Menu On story to render correctly in IE. Without rAF,
+      // the DOM measurements performed in scrollIntoViewIfNeeded are incorrect
+      // and we perform unnecessary scrolling BUT ONLY IN THIS STORY and ONLY IN
+      // IE. Everywhere else (in IE and in other browsers), everything works
+      // fine without rAF.
+      const animateIdRef = requestAnimationFrame(() => {
+        // We cannot use the native Element.scrollIntoView() here because it
+        // doesn't work properly with the portalled menu: when using the keyboard
+        // to advance focus through the options, using scrollIntoView to keep the
+        // newly focused option in view also scrolls the ENTIRE page. Instead, we
+        // call our own scrollIntoViewIfNeeded function.
+        scrollIntoViewIfNeeded(focusedOption, false);
+      });
+
+      return () => {
+        cancelAnimationFrame(animateIdRef);
+      };
     }
+
+    return undefined;
   }, [focusedOptionIndex]);
 
-  // If the menu was just displayed, scroll the focused option into view (if
+  // If the menu was just opened, scroll the focused option into view (if
   // necessary) and center it
   useLayoutEffect(() => {
-    // console.log('useLayoutEffect[menuVisibility], menuVisbility:', menuVisibility);
     const focusedOption = focusedOptionRef.current;
 
+    // We need to scroll if the menu is either opening or open in case we decide to
+    // bypass the opening state and jump straight to open (like in visual testing,
+    // for instance)
     if (focusedOption && (menuVisibility === 'opening' || menuVisibility === 'open')) {
-      // console.log('scroll focused option into view');
-      // TODO: Figure out why is rAF is still necessary here even though we're
-      // using useLayoutEffect. Without rAF, the DOM measurements performed in
-      // scrollIntoViewIfNeeded are incorrect and we fail to scroll the currently
-      // focused option into view when activating the menu.
+      // TODO: Again, why is rAF necessary here in IE? (see above)
       const animateIdRef = requestAnimationFrame(() => {
         scrollIntoViewIfNeeded(focusedOption, true);
       });
