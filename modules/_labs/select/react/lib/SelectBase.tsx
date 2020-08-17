@@ -354,7 +354,7 @@ const SelectBase = (props: SelectBaseProps) => {
       // and we perform unnecessary scrolling BUT ONLY IN THIS STORY and ONLY IN
       // IE. Everywhere else (in IE and in other browsers), everything works
       // fine without rAF.
-      const animateIdRef = requestAnimationFrame(() => {
+      const animateId = requestAnimationFrame(() => {
         // We cannot use the native Element.scrollIntoView() here because it
         // doesn't work properly with the portalled menu: when using the keyboard
         // to advance focus through the options, using scrollIntoView to keep the
@@ -364,7 +364,7 @@ const SelectBase = (props: SelectBaseProps) => {
       });
 
       return () => {
-        cancelAnimationFrame(animateIdRef);
+        cancelAnimationFrame(animateId);
       };
     }
 
@@ -381,12 +381,12 @@ const SelectBase = (props: SelectBaseProps) => {
     // for instance)
     if (focusedOption && (menuVisibility === 'opening' || menuVisibility === 'open')) {
       // TODO: Again, why is rAF necessary here in IE? (see above)
-      const animateIdRef = requestAnimationFrame(() => {
+      const animateId = requestAnimationFrame(() => {
         scrollIntoViewIfNeeded(focusedOption, true);
       });
 
       return () => {
-        cancelAnimationFrame(animateIdRef);
+        cancelAnimationFrame(animateId);
       };
     }
 
