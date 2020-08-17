@@ -8,7 +8,7 @@ import {colors} from '@workday/canvas-kit-react-core';
 import {Popper} from '@workday/canvas-kit-react-popup';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
-import {ColorPicker} from '../index';
+import {ColorPicker} from '@workday/canvas-kit-labs-react-color-picker';
 import README from '../README.md';
 
 storiesOf('Labs|Color Picker/React', module)

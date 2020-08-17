@@ -188,8 +188,10 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
   })
 );
 
-const generatePopperOptions = (props: Pick<SelectMenuProps, 'isFlipped' | 'shouldAutoFlip'>) => {
-  const {isFlipped, shouldAutoFlip} = props;
+const generatePopperOptions = (
+  props: Pick<SelectMenuProps, 'isFlipped' | 'menuRef' | 'shouldAutoFlip' | 'shouldAutoFocus'>
+) => {
+  const {isFlipped, menuRef, shouldAutoFlip, shouldAutoFocus} = props;
 
   let fallbackPlacements: Placement[] = [];
   if (shouldAutoFlip) {
@@ -230,6 +232,14 @@ const generatePopperOptions = (props: Pick<SelectMenuProps, 'isFlipped' | 'shoul
 
   return {
     modifiers,
+    // TODO: Consider using a more general-purpose focus function here rather
+    // than relying on Popper's onFirstUpdate for better control over how
+    // focus is managed
+    onFirstUpdate: () => {
+      if (shouldAutoFocus && menuRef && menuRef.current) {
+        menuRef.current.focus();
+      }
+    },
   };
 };
 
@@ -259,14 +269,6 @@ const SelectMenu = (props: SelectMenuProps) => {
       setWidth(newMenuWidth);
     }
   }, [buttonRef, isHidden]);
-
-  useLayoutEffect(() => {
-    if (shouldAutoFocus) {
-      menuRef?.current?.focus();
-    }
-    // Only focus on mount, so omit dependencies
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useLayoutEffect(() => {
     handleWidthChange();
@@ -311,7 +313,9 @@ const SelectMenu = (props: SelectMenuProps) => {
       anchorElement={buttonRef}
       popperOptions={generatePopperOptions({
         isFlipped,
+        menuRef,
         shouldAutoFlip,
+        shouldAutoFocus,
       })}
       ref={popupRef}
     >

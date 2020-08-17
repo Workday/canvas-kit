@@ -60,6 +60,7 @@ export interface CoreSelectBaseProps
   extends Themeable,
     GrowthBehavior,
     Pick<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>,
+    Pick<React.SelectHTMLAttributes<HTMLSelectElement>, 'required'>,
     Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
   /**
    * The type of error associated with the Select (if applicable).
@@ -283,6 +284,8 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   private menuRef = React.createRef<HTMLUListElement>();
   private menuId = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
 
+  private animateId: number;
+
   private scrollFocusedOptionIntoView = (center: boolean) => {
     const focusedOption = this.focusedOptionRef.current;
     if (focusedOption) {
@@ -303,7 +306,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       // so we know how far to scroll. Without this delay, sometimes measurements
       // are correct and sometimes they aren't (may be related to the number of
       // options and/or the length of their labels) -- add the delay to be safe.
-      requestAnimationFrame(() => {
+      this.animateId = requestAnimationFrame(() => {
         this.scrollFocusedOptionIntoView(true);
       });
 
@@ -317,6 +320,10 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     ) {
       this.scrollFocusedOptionIntoView(false);
     }
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.animateId);
   }
 
   renderOptions = (renderOption: RenderOptionFunction) => {
@@ -363,6 +370,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
   public render() {
     const {
       'aria-labelledby': ariaLabelledBy,
+      'aria-required': ariaRequired,
       buttonRef,
       disabled,
       error,
@@ -378,6 +386,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
       onMenuBlur,
       onMenuCloseOnEscape,
       options,
+      required,
       shouldMenuAnimate,
       shouldMenuAutoFlip,
       shouldMenuAutoFocus,
@@ -427,6 +436,7 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
           <SelectMenu
             aria-activedescendant={options[focusedOptionIndex].id}
             aria-labelledby={ariaLabelledBy}
+            aria-required={ariaRequired || required}
             buttonRef={buttonRef}
             id={this.menuId}
             error={error}

@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.1.2 (2020-08-03)
+
+### Components
+- fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(menu): Auto scroll to selected menu item if necessary ([#812](https://github.com/Workday/canvas-kit/pull/812)) [@NicholasBoll](https://github.com/NicholasBoll)
+- test(menu): Fix assertion name to be more clear [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(skeleton): Update to remove mention of aria-live ([#814](https://github.com/Workday/canvas-kit/pull/814)) [@lychyi](https://github.com/lychyi)
+
+### Infrastructure
+- chore: Upgrade dependencies ([#811](https://github.com/Workday/canvas-kit/pull/811)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+# 4.0.3 (2020-08-03)
+
+### Components
+- fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(menu): Auto scroll to selected menu item if necessary ([#812](https://github.com/Workday/canvas-kit/pull/812)) [@NicholasBoll](https://github.com/NicholasBoll)
+- test(menu): Fix assertion name to be more clear [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(skeleton): Update to remove mention of aria-live ([#814](https://github.com/Workday/canvas-kit/pull/814)) [@lychyi](https://github.com/lychyi)
+
+# 3.9.3 (2020-08-03)
+
+### Components
+- fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(menu): Auto scroll to selected menu item if necessary ([#812](https://github.com/Workday/canvas-kit/pull/812)) [@NicholasBoll](https://github.com/NicholasBoll)
+- test(menu): Fix assertion name to be more clear [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(skeleton): Update to remove mention of aria-live ([#814](https://github.com/Workday/canvas-kit/pull/814)) [@lychyi](https://github.com/lychyi)
+
+# 4.1.1 (2020-07-27)
+
+### Components
+
+- fix(select): Fix undesired scrolling when activating menu ([#795](https://github.com/Workday/canvas-kit/pull/795)) [@jamesfan](https://github.com/jamesfan)
+- fix: Update Popup readme example ([#798](https://github.com/Workday/canvas-kit/pull/798)) [@alanbsmith](https://github.com/alanbsmith)
+- fix(select): Support required and aria-required ([#797](https://github.com/Workday/canvas-kit/pull/797)) [@jamesfan](https://github.com/jamesfan)
+- fix(color-picker): Prevent enter key forwarding to next focus target ([#799](https://github.com/Workday/canvas-kit/pull/799)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(select): Add cancelAnimationFrame to unmount ([#803](https://github.com/Workday/canvas-kit/pull/803)) [@jamesfan](https://github.com/jamesfan)
+- fix(menu): Delay focus to prevent scrolling ([#802](https://github.com/Workday/canvas-kit/pull/802)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+# 4.0.2 (2020-07-24)
+
+### Components
+- fix(menu): Delay focus to prevent scrolling ([#802](https://github.com/Workday/canvas-kit/pull/802)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+# 3.9.2 (2020-07-21)
+
+### Components
+- fix(button): Remove literal fontFamily ([#787](https://github.com/Workday/canvas-kit/pull/787)) [@lychyi](https://github.com/lychyi)
+
 # 4.1.0 (2020-07-17)
 
 ### Components
@@ -61,7 +109,6 @@ React.createPortal(contents, stackRef.current)
 
 ### Components
 - fix(combobox): Add explicit arg to initEvent in ComboBox and header SearchBar ([#767](https://github.com/Workday/canvas-kit/pull/767)) [@lychyi](https://github.com/lychyi)
-
 
 # 4.0.0 (2020-06-15)
 
