@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import {typeColors} from '@workday/canvas-colors-web';
 import {CSSProperties, fontFamily} from '@workday/canvas-kit-react-core';
 import {default as beta_Type} from './type';
@@ -108,6 +109,29 @@ const hierarchy: CanvasTypeHierarchy = {
     color: typeColors.body,
   },
 };
+
+type Variant = keyof typeof beta_Type.variant;
+type TextProps = {
+  level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+  variant?: Variant | Variant[];
+  as?: React.ElementType | keyof JSX.IntrinsicElements; // Baked into emotion v11 (https://github.com/emotion-js/emotion/pull/1874)
+};
+export const Text = styled('span')<TextProps>(
+  ({level}) => hierarchy[`level${level}`],
+  ({variant}) => {
+    if (!variant) {
+      return;
+    }
+    if (typeof variant === 'string') {
+      return beta_Type.variant[variant as Variant];
+    }
+    let css = {};
+    (variant as Variant[]).forEach((singleVariant: Variant) => {
+      css = {...css, ...beta_Type.variant[singleVariant]};
+    });
+    return css;
+  }
+);
 
 export default {
   ...hierarchy,

@@ -5,4 +5,4 @@ export {type, space};
 export * from './lib/type';
 export * from './lib/StaticStates';
 
-export {default as _typeTest} from './lib/typeTest';
+export {default as _typeTest, Text as _typeTestText} from './lib/typeTest';

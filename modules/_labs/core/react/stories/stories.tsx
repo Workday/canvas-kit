@@ -4,7 +4,7 @@ import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
 import withReadme from 'storybook-readme/with-readme';
 import {spacing} from '@workday/canvas-kit-react-core';
-import type, {space, _typeTest} from '..';
+import type, {space, _typeTest, _typeTestText} from '..';
 
 import README from '../README.md';
 
@@ -85,34 +85,34 @@ export const Space = () => {
 
 export const TypeTest = () => (
   <section>
-    <h1 style={_typeTest.brand}>Brand 1 Header</h1>
-    <h1 style={_typeTest.h1}>H1 Header</h1>
-    <h2 style={_typeTest.h2}>H2 Header</h2>
-    <h3 style={_typeTest.h3}>H3 Header</h3>
-    <h4 style={_typeTest.h4}>H4 Header</h4>
-    <h5 style={_typeTest.h5}>H5 Header</h5>
-    <p style={_typeTest.body}>
+    <h1 style={_typeTest.level10}>Brand 1 Header</h1>
+    <h1 style={_typeTest.level9}>H1 Header</h1>
+    <h2 style={_typeTest.level8}>H2 Header</h2>
+    <h3 style={_typeTest.level7}>H3 Header</h3>
+    <h4 style={_typeTest.level6}>H4 Header</h4>
+    <h5 style={_typeTest.level5}>H5 Header</h5>
+    <p style={_typeTest.level4}>
       <strong>Body: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
       Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
       level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
       Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
       salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
     </p>
-    <p style={_typeTest.body2}>
+    <p style={_typeTest.level3}>
       <strong>Body 2: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
       Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
       level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
       Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
       salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
     </p>
-    <p style={_typeTest.small}>
+    <p style={_typeTest.level2}>
       <strong>Small 1: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
       Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
       level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
       Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
       salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
     </p>
-    <p style={_typeTest.small2}>
+    <p style={_typeTest.level1}>
       <strong>Small 2: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
       Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
       level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
@@ -121,24 +121,30 @@ export const TypeTest = () => (
     </p>
     <hr />
 
-    <h3 style={_typeTest.h3}>Variants</h3>
+    <h3 style={_typeTest.level7}>Variants</h3>
 
-    <span css={[_typeTest.body, _typeTest.variant.button]}>Button Text</span>
+    <span css={[_typeTest.level4, _typeTest.variant.button]}>Button Text</span>
     <br />
-    <span css={[_typeTest.body, _typeTest.variant.caps]}>Caps Text</span>
+    <span css={[_typeTest.level4, _typeTest.variant.caps]}>Caps Text</span>
     <br />
-    <label css={[_typeTest.body, _typeTest.variant.label]}>Label Text</label>
+    <label css={[_typeTest.level4, _typeTest.variant.label]}>Label Text</label>
     <br />
-    <span css={[_typeTest.body, _typeTest.variant.hint]}>Hint Text</span>
+    <span css={[_typeTest.level4, _typeTest.variant.hint]}>Hint Text</span>
     <br />
-    <span css={[_typeTest.body, _typeTest.variant.error]}>Error Text</span>
+    <span css={[_typeTest.level4, _typeTest.variant.error]}>Error Text</span>
     <br />
-    <a href="#" css={[_typeTest.body, _typeTest.variant.link]}>
+    <a href="#" css={[_typeTest.level4, _typeTest.variant.link]}>
       Link Text
     </a>
     <br />
-    <span css={[_typeTest.body, _typeTest.variant.inverse, inverseStyle]}>Inverse Text</span>
+    <span css={[_typeTest.level4, _typeTest.variant.inverse, inverseStyle]}>Inverse Text</span>
     <br />
-    <span css={[_typeTest.body, _typeTest.variant.mono]}>Mono Text</span>
+    <span css={[_typeTest.level4, _typeTest.variant.mono]}>Mono Text</span>
+
+    <hr />
+
+    <_typeTestText level={8} as="h3" variant={['caps', 'error']}>
+      Hello
+    </_typeTestText>
   </section>
 );
