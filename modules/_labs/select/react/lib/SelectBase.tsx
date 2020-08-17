@@ -148,11 +148,6 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   options: NormalizedOption[];
   /**
-   * If true, enable animation on the SelectBase menu.
-   * @default true
-   */
-  shouldMenuAnimate: boolean;
-  /**
    * If true, automatically flip the SelectBase menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
    * @default true
    */
@@ -289,7 +284,6 @@ const SelectBase = (props: SelectBaseProps) => {
     options,
     renderOption,
     required,
-    shouldMenuAnimate,
     shouldMenuAutoFlip,
     shouldMenuAutoFocus,
     value,
@@ -439,7 +433,6 @@ const SelectBase = (props: SelectBaseProps) => {
           onBlur={onMenuBlur}
           onKeyDown={onKeyDown}
           onCloseOnEscape={onMenuCloseOnEscape}
-          shouldAnimate={shouldMenuAnimate}
           shouldAutoFlip={shouldMenuAutoFlip}
           shouldAutoFocus={shouldMenuAutoFocus}
           visibility={menuVisibility}
@@ -463,7 +456,6 @@ SelectBase.defaultProps = {
   isEmpty: false,
   isMenuFlipped: false,
   menuVisibility: 'closed',
-  shouldMenuAnimate: true,
   shouldMenuAutoFlip: true,
   shouldMenuAutoFocus: true,
 };

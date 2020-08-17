@@ -110,7 +110,6 @@ export const SelectStatesMenuOn = () => (
               options={normalizedOptions}
               focusedOptionIndex={1}
               menuVisibility="open"
-              shouldMenuAnimate={false}
               shouldMenuAutoFlip={false}
               shouldMenuAutoFocus={false}
             />

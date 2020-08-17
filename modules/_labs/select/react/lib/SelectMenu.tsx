@@ -31,11 +31,6 @@ interface SelectMenuProps
    */
   onCloseOnEscape?: () => void;
   /**
-   * If true, enable animation on the SelectMenu.
-   * @default true
-   */
-  shouldAnimate: boolean;
-  /**
    * If true, automatically flip the SelectMenu to keep it visible if necessary (e.g., if the the SelectMenu would otherwise display below the visible area of the viewport).
    * @default true
    */
@@ -122,13 +117,14 @@ const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSS
 };
 
 const Menu = styled('div')<
-  Pick<SelectMenuProps, 'error' | 'shouldAnimate' | 'theme' | 'visibility'> & {width: number}
+  Pick<SelectMenuProps, 'error' | 'theme' | 'visibility'> & {width: number}
 >(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${inputColors.border}`,
     boxSizing: 'border-box',
     position: 'relative',
+    transition: `opacity ${menuFadeDuration}ms`,
 
     '[data-popper-placement="bottom"] &': {
       borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
@@ -142,22 +138,9 @@ const Menu = styled('div')<
   ({error, theme}) => ({
     ...menuBorderStyles(theme, error),
   }),
-  ({shouldAnimate, visibility}) => {
-    const transitionStyles = shouldAnimate ? {transition: `opacity ${menuFadeDuration}ms`} : {};
-
-    let opacityStyles = {};
-    if (shouldAnimate) {
-      opacityStyles = {
-        opacity:
-          visibility === 'opening' || visibility === 'open' || visibility === 'preclose' ? 1 : 0,
-      };
-    }
-
-    return {
-      ...transitionStyles,
-      ...opacityStyles,
-    };
-  },
+  ({visibility}) => ({
+    opacity: visibility === 'opening' || visibility === 'open' || visibility === 'preclose' ? 1 : 0,
+  }),
   ({width}) => ({
     width: width,
   })
@@ -240,7 +223,6 @@ const SelectMenu = (props: SelectMenuProps) => {
     isFlipped,
     menuRef,
     onCloseOnEscape,
-    shouldAnimate,
     shouldAutoFlip,
     shouldAutoFocus,
     visibility,
@@ -307,7 +289,7 @@ const SelectMenu = (props: SelectMenuProps) => {
       })}
       ref={popupRef}
     >
-      <Menu error={error} shouldAnimate={shouldAnimate} visibility={visibility} width={width}>
+      <Menu error={error} visibility={visibility} width={width}>
         <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
           {children}
         </MenuList>
@@ -318,7 +300,6 @@ const SelectMenu = (props: SelectMenuProps) => {
 
 SelectMenu.defaultProps = {
   isFlipped: false,
-  shouldAnimate: true,
   shouldAutoFlip: true,
   shouldAutoFocus: true,
   visibility: 'closed',
