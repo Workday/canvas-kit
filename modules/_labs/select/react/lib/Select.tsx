@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ErrorType} from '@workday/canvas-kit-react-common';
-import {menuFadeDuration} from './SelectMenu';
+import {menuAnimationDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
@@ -134,7 +134,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (this.menuAnimationTimer) {
       clearTimeout(this.menuAnimationTimer);
     }
-    this.menuAnimationTimer = setTimeout(callback, menuFadeDuration);
+    this.menuAnimationTimer = setTimeout(callback, menuAnimationDuration);
   };
 
   private openMenu = () => {

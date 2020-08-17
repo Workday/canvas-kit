@@ -47,7 +47,7 @@ interface SelectMenuProps
   visibility: MenuVisibility;
 }
 
-export const menuFadeDuration = 200;
+export const menuAnimationDuration = 200;
 
 const menuBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
   let borderColor = theme.canvas.palette.common.focusOutline;
@@ -124,7 +124,7 @@ const Menu = styled('div')<
     border: `1px solid ${inputColors.border}`,
     boxSizing: 'border-box',
     position: 'relative',
-    transition: `opacity ${menuFadeDuration}ms`,
+    transition: `opacity ${menuAnimationDuration}ms`,
 
     '[data-popper-placement="bottom"] &': {
       borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
