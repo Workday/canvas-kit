@@ -4,7 +4,7 @@ import {borderRadius, colors, spacing} from '@workday/canvas-kit-react-core';
 import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {ColorSwatch} from '@workday/canvas-kit-react-color-picker';
 
-const numberOfSwatchColumns: number = 8;
+const numberOfSwatchColumns = 8;
 
 export interface SwatchBookProps {
   colors: string[];
