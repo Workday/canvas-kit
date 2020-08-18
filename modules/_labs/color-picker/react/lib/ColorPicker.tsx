@@ -3,6 +3,7 @@ import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {Popup} from '@workday/canvas-kit-react-popup';
+import {TransformOrigin} from '@workday/canvas-kit-react-common';
 import * as React from 'react';
 import FormField from '@workday/canvas-kit-react-form-field';
 import styled from '@emotion/styled';
@@ -57,6 +58,11 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default 'Reset'
    */
   resetLabel?: string;
+  /**
+   * The origin from which the Toast will animate.
+   * @default {horizontal: 'center', vertical: 'top'}
+   */
+  transformOrigin?: TransformOrigin;
 }
 
 const defaultColors = [

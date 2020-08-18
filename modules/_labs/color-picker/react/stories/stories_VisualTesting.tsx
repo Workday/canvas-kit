@@ -38,7 +38,9 @@ export const ColorPickerStates = () => (
       ]}
       columnProps={[{label: 'Default', props: {}}]}
     >
-      {props => <ColorPicker {...props} onColorChange={action('Color Changed')} />}
+      {props => (
+        <ColorPicker {...props} transformOrigin={null} onColorChange={action('Color Changed')} />
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
