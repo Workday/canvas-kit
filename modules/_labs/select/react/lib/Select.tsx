@@ -497,7 +497,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         buttonRef={this.buttonRef}
         focusedOptionIndex={focusedOptionIndex}
         inputRef={this.inputRef}
-        isEmpty={!this.areOptionsDefined()}
         menuRef={this.menuRef}
         menuVisibility={menuVisibility}
         options={this.normalizedOptions}

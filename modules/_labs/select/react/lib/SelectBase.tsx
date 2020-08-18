@@ -104,11 +104,6 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
-   * If true, set the SelectBase to the empty state (i.e., no options were provided).
-   * @default false
-   */
-  isEmpty: boolean;
-  /**
    * If true, flip the SelectBase menu so it extends upwards from the button.
    * @default false
    */
@@ -272,7 +267,6 @@ const SelectBase = (props: SelectBaseProps) => {
     focusedOptionIndex,
     grow,
     inputRef,
-    isEmpty,
     isMenuFlipped,
     menuRef,
     menuVisibility,
@@ -391,7 +385,8 @@ const SelectBase = (props: SelectBaseProps) => {
   const renderOptionFunction = renderOption || defaultRenderOption;
 
   // Do a bit of error-checking in case options weren't provided
-  const selectedOption = !isEmpty ? options[getCorrectedIndexByValue(options, value)] : null;
+  const hasOptions = options.length > 0;
+  const selectedOption = hasOptions ? options[getCorrectedIndexByValue(options, value)] : null;
   const selectedOptionLabel = selectedOption ? selectedOption.label : '';
   const selectedOptionValue = selectedOption ? selectedOption.value : '';
 
@@ -420,7 +415,7 @@ const SelectBase = (props: SelectBaseProps) => {
         {selectedOptionLabel}
       </SelectButton>
       <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOptionValue} />
-      {!isEmpty && menuVisibility !== 'closed' && (
+      {hasOptions && menuVisibility !== 'closed' && (
         <SelectMenu
           aria-activedescendant={options[focusedOptionIndex].id}
           aria-labelledby={ariaLabelledBy}
@@ -453,7 +448,6 @@ const SelectBase = (props: SelectBaseProps) => {
 
 SelectBase.defaultProps = {
   focusedOptionIndex: 0,
-  isEmpty: false,
   isMenuFlipped: false,
   menuVisibility: 'closed',
   shouldMenuAutoFlip: true,
