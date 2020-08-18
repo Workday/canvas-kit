@@ -63,7 +63,7 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
 );
 
 const Container = styled('div')({
-  display: ['grid', '-ms-grid'],
+  display: ['-ms-grid', 'grid'],
   gridTemplateColumns: `repeat(${numberOfSwatchColumns}, auto)`,
   margin: `0px -${spacing.xxs} -${spacing.xxs} 0px`,
 });
