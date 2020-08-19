@@ -279,7 +279,6 @@ const SelectMenu = (props: SelectMenuProps) => {
   return (
     <Popper
       placement={placement}
-      open={visibility !== 'closed'}
       anchorElement={buttonRef}
       popperOptions={generatePopperOptions({
         isFlipped,
