@@ -4,8 +4,6 @@ import {borderRadius, colors, spacing} from '@workday/canvas-kit-react-core';
 import {focusRing, mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import {ColorSwatch} from '@workday/canvas-kit-react-color-picker';
 
-const numberOfSwatchColumns = 8;
-
 export interface SwatchBookProps {
   colors: string[];
   value?: string;
@@ -14,7 +12,6 @@ export interface SwatchBookProps {
 
 interface SwatchContainerProps {
   isSelected: boolean;
-  index: number;
 }
 
 const accessibilityBorder = `${colors.frenchVanilla100} 0px 0px 0px 2px, ${colors.licorice200} 0px 0px 0px 3px`;
@@ -22,9 +19,6 @@ const accessibilityBorder = `${colors.frenchVanilla100} 0px 0px 0px 2px, ${color
 const SwatchContainer = styled('div')<SwatchContainerProps>(
   {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
     width: 20,
     height: 20,
     cursor: 'pointer',
@@ -41,10 +35,6 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
       ...focusRing({separation: 2}),
     },
   },
-  ({index}) => ({
-    '-ms-grid-column': (index % numberOfSwatchColumns) + 1 + '',
-    '-ms-grid-row': Math.ceil((index + 1) / numberOfSwatchColumns) + '',
-  }),
   ({isSelected}) => ({
     boxShadow: isSelected ? accessibilityBorder : undefined,
     ...mouseFocusBehavior({
@@ -63,8 +53,8 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
 );
 
 const Container = styled('div')({
-  display: ['-ms-grid', 'grid'],
-  gridTemplateColumns: `repeat(${numberOfSwatchColumns}, auto)`,
+  display: 'flex',
+  flexWrap: 'wrap',
   margin: `0px -${spacing.xxs} -${spacing.xxs} 0px`,
 });
 
@@ -90,7 +80,6 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
           onKeyDown={handleKeyDown}
           tabIndex={0}
           isSelected={isSelected}
-          index={index}
         >
           <ColorSwatch color={color} showCheck={isSelected} />
         </SwatchContainer>

@@ -59,7 +59,7 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   resetLabel?: string;
   /**
-   * The origin from which the Toast will animate.
+   * The origin from which the Color Picker will animate.
    * @default {horizontal: 'center', vertical: 'top'}
    */
   transformOrigin?: TransformOrigin;
