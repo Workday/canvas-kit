@@ -104,7 +104,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
-   * TODO: Describe menuPlacement prop
+   * The placement of the SelectBase menu relative to its corresponding SelectButton.
    * @default 'bottom'
    */
   menuPlacement: MenuPlacement;
@@ -113,7 +113,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   menuRef?: React.RefObject<HTMLUListElement>;
   /**
-   * TODO: Describe menuVisibility prop (or pull it from SelectMenu or a shared type).
+   * The visibility state of the SelectBase menu.
    * @default 'closed'
    */
   menuVisibility: MenuVisibility;

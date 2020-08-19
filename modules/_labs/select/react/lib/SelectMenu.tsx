@@ -26,7 +26,7 @@ interface SelectMenuProps
    */
   onCloseOnEscape?: () => void;
   /**
-   * TODO: Describe placement prop
+   * The placement of the SelectMenu relative to its corresponding button.
    * @default 'bottom'
    */
   placement: MenuPlacement;
@@ -41,7 +41,7 @@ interface SelectMenuProps
    */
   shouldAutoFocus: boolean;
   /**
-   * TODO: Describe visibility prop.
+   * The visibility state of the SelectMenu.
    * @default 'closed'
    */
   visibility: MenuVisibility;
