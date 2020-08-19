@@ -140,7 +140,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private openMenu = () => {
     this.setState({menuVisibility: 'opening'});
     this.setMenuAnimationTimeout(() => {
-      this.setState({menuVisibility: 'open'});
+      this.setState({menuVisibility: 'opened'});
     });
   };
 
@@ -157,35 +157,35 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     if (open) {
       switch (menuVisibility) {
         // We're opening a menu which is currently closed: set the menu state
-        // to preopen (this allows us to transition from 0 opacity in the
-        // preopen state to the targeted 1.0 opacity in the opening state)
-        // before kicking off openMenu.
+        // to open before kicking off openMenu. This allows us to transition
+        // from 0 opacity in the open state to the targeted 1.0 opacity in
+        // the opening state.
         case 'closed':
-          this.setState({menuVisibility: 'preopen'}, this.openMenu);
+          this.setState({menuVisibility: 'open'}, this.openMenu);
           break;
         // We're opening a menu which is in the process of closing. Since the
-        // menu isn't completely closed, there's no need to set the preopen state;
-        // kick off openMenu immediately.
-        case 'preclose':
+        // menu isn't closed, there's no need to set the open state: kick off
+        // openMenu immediately.
+        case 'close':
         case 'closing':
           this.openMenu();
           break;
-        // Otherwise, we're opening a menu is already open or in the process of
+        // Otherwise, we're opening a menu is already opened or in the process of
         // opening; no need to do anything further.
         default:
           break;
       }
     } else {
       switch (menuVisibility) {
-        // We're closing a menu which is currently open: set the menu state to
-        // preclose before kicking off closeMenu.
-        case 'open':
-          this.setState({menuVisibility: 'preclose'}, this.closeMenu);
+        // We're closing a menu which is currently opened: set the menu state to
+        // close before kicking off closeMenu.
+        case 'opened':
+          this.setState({menuVisibility: 'close'}, this.closeMenu);
           break;
         // We're closing a menu which is in the process of opening. Since the
-        // menu isn't completely open, there's no need to set the preclose state;
-        // kick off closeMenu immediately.
-        case 'preopen':
+        // menu isn't opened, there's no need to set the close state: kick off
+        // closeMenu immediately.
+        case 'open':
         case 'opening':
           this.closeMenu();
           break;
@@ -339,18 +339,18 @@ export default class Select extends React.Component<SelectProps, SelectState> {
       // the menu since it won't be focused using Popper's onFirstUpdate
       // callback (because the menu already exists). If we don't focus the
       // menu, clicking outside the menu to dismiss it on blur won't work.
-      case 'preclose':
+      case 'close':
       case 'closing':
         if (this.menuRef.current) {
           this.menuRef.current.focus();
         }
-      // We want fall-through here. The preclose and closing states should
-      // both toggle the menu on.
+      // We want fall-through here. Clicking the button while the menu is in
+      // the close or closing states should toggle the menu back on.
       // eslint-disable-next-line no-fallthrough
       case 'closed':
         this.toggleMenu(true);
         break;
-      // Otherwise, the menu is open or in the process of opening. Focus
+      // Otherwise, the menu is opened or in the process of opening. Focus
       // the button and toggle the menu off. Note that since we're calling
       // event.preventDefault in our mouseDown handler for the button, we
       // must manage focus on the button ourselves (the browser will no

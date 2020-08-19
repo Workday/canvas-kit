@@ -139,7 +139,7 @@ const Menu = styled('div')<
     ...menuBorderStyles(theme, error),
   }),
   ({visibility}) => ({
-    opacity: visibility === 'opening' || visibility === 'open' || visibility === 'preclose' ? 1 : 0,
+    opacity: visibility === 'opening' || visibility === 'opened' || visibility === 'close' ? 1 : 0,
   }),
   ({width}) => ({
     width: width,
@@ -248,7 +248,7 @@ const SelectMenu = (props: SelectMenuProps) => {
   // Seems like we should resize the menu when the reference button width changes, not
   // necessarily when the window resizes. Resizing the menu on window resize addresses
   // the case when `grow = true` and the user resizes the browser window while the
-  // menu is open, but doesn't address cases where the reference button size changes
+  // menu is opened, but doesn't address cases where the reference button size changes
   // through other means.
   useEffect(() => {
     // Update menu width state on resize to ensure menu resizes as window resizes

@@ -204,8 +204,8 @@ const SelectButton = styled('button')<
 
     if (error === undefined) {
       // If there isn't an error, apply focus and hover styles if the menu is
-      // closed or closing (otherwise, the menu is opening or open: style the
-      // button as if it had focus)
+      // closed or in the process of closing (otherwise, the menu is opened
+      // or in the process of opening: style the button as if it had focus)
       return menuVisibility === 'closed' || menuVisibility === 'closing'
         ? {
             '&:focus:not([disabled])': {
@@ -301,7 +301,7 @@ const SelectBase = (props: SelectBaseProps) => {
         error,
         focused: focusedOptionIndex === index,
         id: option.id,
-        interactive: menuVisibility === 'opening' || menuVisibility === 'open',
+        interactive: menuVisibility === 'opening' || menuVisibility === 'opened',
         key: option.id,
         optionRef: focusedOptionIndex === index ? focusedOptionRef : undefined,
         value: option.value,
@@ -364,10 +364,10 @@ const SelectBase = (props: SelectBaseProps) => {
   useLayoutEffect(() => {
     const focusedOption = focusedOptionRef.current;
 
-    // We need to scroll if the menu is either opening or open in case we decide to
-    // bypass the opening state and jump straight to open (like in visual testing,
+    // We need to scroll if the menu is either opening or opened in case we decide to
+    // bypass the opening state and jump straight to opened (like in visual testing,
     // for instance)
-    if (focusedOption && (menuVisibility === 'opening' || menuVisibility === 'open')) {
+    if (focusedOption && (menuVisibility === 'opening' || menuVisibility === 'opened')) {
       // TODO: Again, why is rAF necessary here in IE? (see above)
       const animateId = requestAnimationFrame(() => {
         scrollIntoViewIfNeeded(focusedOption, true);

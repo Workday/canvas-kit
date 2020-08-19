@@ -10,26 +10,24 @@
  */
 export type MenuPlacement = 'bottom' | 'top';
 
-// TODO: rename preopen to open and open to opened? or preopen to startopen and preclose
-//       to startclose?
 /**
  * The visibility state of the menu.
  *
  * `closed`: The menu is completely closed (not present in the DOM).
- * `preopen`: The menu was previously `closed` and has just been instructed to open.
+ * `open`: The menu was previously `closed` and has just been instructed to open.
  *   The menu has been added to the DOM, but it's not yet visible. This state is
  *   necessary in order to apply an opacity of 0 to the menu before transitioning it
  *   to an opacity of 1.0 in the opening state.
  * `opening`: The menu is in the process of opening.
- * `open`: The menu is completely open.
- * `preclose`: The menu was previously `open` and has just been instructed to close.
+ * `opened`: The menu is completely open.
+ * `close`: The menu was previously `open` and has just been instructed to close.
  * `closing`: The menu is in the process of closing.
  *
  * Typically, a menu will transition through states in the following order:
- * `closed` > `preopen` > `opening` > `open` > `preclose` > `closing` > `closed`
+ * `closed` > `open` > `opening` > `opened` > `close` > `closing` > `closed`
  *
  * However, it's possible for a user to open a menu while it's in the process of
  * closing in which case the menu can transition from `closing` > `opening` (and
  * vice-versa).
  */
-export type MenuVisibility = 'closed' | 'preopen' | 'opening' | 'open' | 'preclose' | 'closing';
+export type MenuVisibility = 'closed' | 'open' | 'opening' | 'opened' | 'close' | 'closing';
