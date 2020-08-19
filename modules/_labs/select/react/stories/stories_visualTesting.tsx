@@ -89,7 +89,7 @@ export const SelectStatesMenuOn = () => (
       ]}
       columnProps={[
         {label: 'Default', props: {}},
-        {label: 'Flipped', props: {isMenuFlipped: true}},
+        {label: 'Top', props: {menuPlacement: 'top'}},
       ]}
     >
       {props => {

@@ -22,7 +22,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';
 import {scrollIntoViewIfNeeded} from './scrolling';
-import {MenuVisibility} from './types';
+import {MenuPlacement, MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
 
 interface OptionData {
@@ -104,10 +104,10 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
-   * If true, flip the SelectBase menu so it extends upwards from the button.
-   * @default false
+   * TODO: Describe menuPlacement prop
+   * @default 'bottom'
    */
-  isMenuFlipped: boolean;
+  menuPlacement: MenuPlacement;
   /**
    * The ref to the underlying menu element. Use this to imperatively manipulate the menu.
    */
@@ -267,7 +267,7 @@ const SelectBase = (props: SelectBaseProps) => {
     focusedOptionIndex,
     grow,
     inputRef,
-    isMenuFlipped,
+    menuPlacement,
     menuRef,
     menuVisibility,
     onChange,
@@ -423,11 +423,11 @@ const SelectBase = (props: SelectBaseProps) => {
           buttonRef={buttonRef}
           id={menuId}
           error={error}
-          isFlipped={isMenuFlipped}
           menuRef={menuRef}
           onBlur={onMenuBlur}
           onKeyDown={onKeyDown}
           onCloseOnEscape={onMenuCloseOnEscape}
+          placement={menuPlacement}
           shouldAutoFlip={shouldMenuAutoFlip}
           shouldAutoFocus={shouldMenuAutoFocus}
           visibility={menuVisibility}
@@ -449,6 +449,7 @@ const SelectBase = (props: SelectBaseProps) => {
 SelectBase.defaultProps = {
   focusedOptionIndex: 0,
   isMenuFlipped: false,
+  menuPlacement: 'bottom',
   menuVisibility: 'closed',
   shouldMenuAutoFlip: true,
   shouldMenuAutoFocus: true,

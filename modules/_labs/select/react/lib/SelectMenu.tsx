@@ -7,7 +7,7 @@ import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core'
 
 import {SelectProps} from './Select';
 import {buttonBorderWidth} from './SelectBase';
-import {MenuVisibility} from './types';
+import {MenuPlacement, MenuVisibility} from './types';
 
 interface SelectMenuProps
   extends Themeable,
@@ -18,11 +18,6 @@ interface SelectMenuProps
    */
   buttonRef: React.RefObject<HTMLButtonElement>;
   /**
-   * If true, flip the SelectMenu so it extends upwards from the button.
-   * @default false
-   */
-  isFlipped: boolean;
-  /**
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */
   menuRef?: React.RefObject<HTMLUListElement>;
@@ -30,6 +25,11 @@ interface SelectMenuProps
    * The function called when the Escape key is pressed while the SelectMenu is the topmost element in the stack.
    */
   onCloseOnEscape?: () => void;
+  /**
+   * TODO: Describe placement prop
+   * @default 'bottom'
+   */
+  placement: MenuPlacement;
   /**
    * If true, automatically flip the SelectMenu to keep it visible if necessary (e.g., if the the SelectMenu would otherwise display below the visible area of the viewport).
    * @default true
@@ -161,13 +161,13 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
 );
 
 const generatePopperOptions = (
-  props: Pick<SelectMenuProps, 'isFlipped' | 'menuRef' | 'shouldAutoFlip' | 'shouldAutoFocus'>
+  props: Pick<SelectMenuProps, 'menuRef' | 'placement' | 'shouldAutoFlip' | 'shouldAutoFocus'>
 ) => {
-  const {isFlipped, menuRef, shouldAutoFlip, shouldAutoFocus} = props;
+  const {menuRef, placement, shouldAutoFlip, shouldAutoFocus} = props;
 
   let fallbackPlacements: Placement[] = [];
   if (shouldAutoFlip) {
-    fallbackPlacements = isFlipped ? ['bottom'] : ['top'];
+    fallbackPlacements = placement === 'top' ? ['bottom'] : ['top'];
   }
 
   const modifiers = [
@@ -220,9 +220,9 @@ const SelectMenu = (props: SelectMenuProps) => {
     buttonRef,
     children,
     error,
-    isFlipped,
     menuRef,
     onCloseOnEscape,
+    placement,
     shouldAutoFlip,
     shouldAutoFocus,
     visibility,
@@ -269,20 +269,13 @@ const SelectMenu = (props: SelectMenuProps) => {
   // correct behavior for now, we're dismissing the Menu on blur instead of
   // using the hook.
 
-  // We need to use `top` and `bottom` instead of `top-start` and `bottom-start`
-  // placements because PopperJS incorrectly rounds `start` and `end` modifiers:
-  // https://github.com/popperjs/popper-core/blob/38914aae7a2e91715c6eb2b563517082a40cfa64/src/utils/computeOffsets.js#L68-L81
-  // This rounding causes problems with browsers that allow subpixel values for elements like
-  // Firefox and Edge.
-  const placement = isFlipped ? 'top' : 'bottom';
-
   return (
     <Popper
       placement={placement}
       anchorElement={buttonRef}
       popperOptions={generatePopperOptions({
-        isFlipped,
         menuRef,
+        placement,
         shouldAutoFlip,
         shouldAutoFocus,
       })}
@@ -298,7 +291,7 @@ const SelectMenu = (props: SelectMenuProps) => {
 };
 
 SelectMenu.defaultProps = {
-  isFlipped: false,
+  placement: 'bottom',
   shouldAutoFlip: true,
   shouldAutoFocus: true,
   visibility: 'closed',
