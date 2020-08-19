@@ -9,6 +9,11 @@ import ColorPicker from '../lib/ColorPicker';
 export default withSnapshotsEnabled({
   title: 'Testing|React/Labs/Color Picker',
   component: ColorPicker,
+  parameters: {
+    chromatic: {
+      pauseAnimationAtEnd: true,
+    },
+  },
 });
 
 // eslint-disable-next-line no-empty-function
