@@ -136,6 +136,7 @@ const ColorPicker = ({
   resetColor,
   value = '',
   showCustomHexInput = false,
+  transformOrigin,
   ...elemProps
 }: ColorPickerProps) => {
   const [validHexValue, setValidHexValue] = React.useState('');
@@ -159,7 +160,13 @@ const ColorPicker = ({
   };
 
   return (
-    <Popup width={250} padding={Popup.Padding.s} data-testid="canvas-color-picker" {...elemProps}>
+    <Popup
+      width={250}
+      padding={Popup.Padding.s}
+      transformOrigin={transformOrigin}
+      data-testid="canvas-color-picker"
+      {...elemProps}
+    >
       {onColorReset && resetColor && (
         <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}
