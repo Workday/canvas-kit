@@ -33,14 +33,24 @@ to be made fully accessible (see below).
 import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react-select';
 
-const options = [
-  {label: 'E-mail', value: 'email'},
-  {label: 'Phone', value: 'phone'},
-  {label: 'Fax (disabled)', value: 'fax', disabled: true},
-  {label: 'Mail', value: 'mail'},
-];
+function Example() {
+  const options = [
+    {label: 'E-mail', value: 'email'},
+    {label: 'Phone', value: 'phone'},
+    {label: 'Fax (disabled)', value: 'fax', disabled: true},
+    {label: 'Mail', value: 'mail'},
+  ];
 
-<Select name="contact" onChange={this.handleChange} options={options} value={value} />;
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
+
+  return (
+    <Select onChange={handleChange} options={options} value={value} />
+  );
+}
 ```
 
 #### Accessible Example
@@ -50,16 +60,26 @@ import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react-select';
 import FormField from '@workday/canvas-kit-react-form-field';
 
-const options = [
-  {label: 'E-mail', value: 'email'},
-  {label: 'Phone', value: 'phone'},
-  {label: 'Fax (disabled)', value: 'fax', disabled: true},
-  {label: 'Mail', value: 'mail'},
-];
+function Example() {
+  const options = [
+    {label: 'E-mail', value: 'email'},
+    {label: 'Phone', value: 'phone'},
+    {label: 'Fax (disabled)', value: 'fax', disabled: true},
+    {label: 'Mail', value: 'mail'},
+  ];
 
-<FormField label="My Field" inputId="my-select-field">
-  <Select name="contact" onChange={this.handleChange} options={options} value={value} />
-</FormField>;
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
+
+  return (
+    <FormField label="My Select Field" inputId="my-select-field">
+      <Select onChange={handleChange} options={options} value={value} />
+    </FormField>
+  );
+}
 ```
 
 #### Example with Array of Strings
@@ -71,11 +91,21 @@ import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react-select';
 import FormField from '@workday/canvas-kit-react-form-field';
 
-const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
+function Example() {
+  const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
 
-<FormField label="My Field" inputId="my-select-field">
-  <Select name="state" onChange={this.handleChange} options={options} value={value} />
-</FormField>;
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
+
+  return (
+    <FormField label="My Select Field" inputId="my-select-field">
+      <Select onChange={handleChange} options={options} value={value} />
+    </FormField>
+  );
+}
 ```
 
 #### Example with Custom Options Data
@@ -90,26 +120,36 @@ import {colors, typeColors} from '@workday/canvas-kit-react-core';
 import {activityStreamIcon, avatarIcon, uploadCloudIcon, userIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
-const options = [
-  {value: 'Activity Stream', data: {icon: activityStreamIcon}},
-  {value: 'Avatar', data: {icon: avatarIcon}},
-  {value: 'Upload Cloud', data: {icon: uploadCloudIcon}},
-  {value: 'User', data: {icon: userIcon}},
-];
+function Example() {
+  const options = [
+    {value: 'Activity Stream', data: {icon: activityStreamIcon}},
+    {value: 'Avatar', data: {icon: avatarIcon}},
+    {value: 'Upload Cloud', data: {icon: uploadCloudIcon}},
+    {value: 'User', data: {icon: userIcon}},
+  ];
 
-const renderOption = option => {
-  const iconColor = option.focused ? typeColors.inverse : colors.blackPepper100;
+  const renderOption = option => {
+    const iconColor = option.focused ? typeColors.inverse : colors.blackPepper100;
+    return (
+      <div style={{alignItems: 'center', display: 'flex', padding: '3px 0'}}>
+        <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
+        <div style={{marginLeft: 5}}>{option.value}</div>
+      </div>
+    );
+  };
+
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
+
   return (
-    <div style={{alignItems: 'center', display: 'flex', padding: '3px 0'}}>
-      <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
-      <div style={{marginLeft: 5}}>{option.value}</div>
-    </div>
+    <FormField label="My Select Field" inputId="my-select-field">
+      <Select onChange={handleChange} options={options} renderOption={renderOption} value={value} />
+    </FormField>
   );
-};
-
-<FormField label="My Field" inputId="my-select-field">
-  <Select name="icon" onChange={this.handleChange} options={options} renderOption={renderOption} value={value} />
-</FormField>;
+}
 ```
 
 ## Static Properties
