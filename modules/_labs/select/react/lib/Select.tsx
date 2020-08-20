@@ -118,6 +118,25 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return -1;
   };
 
+  // Helper adds safeguards to prevent us from applying focus in invalid ways
+  // when navigating the menu using the keyboard
+  private updateFocusedOptionIndex = (index: number) => {
+    const numOptions = this.normalizedOptions.length;
+
+    // Ensure we're not focusing an index out of bounds. If index < 0,
+    // focus the first option; if index exceeds the length of the options
+    // array, focus the last option.
+    const focusedIndex = index < 0 ? 0 : index >= numOptions ? numOptions - 1 : index;
+
+    // As a final check, only update the focused index if it refers to an
+    // enabled option. This prevents us from applying focus to the first or
+    // last options (after accounting for out of bounds indices above) if
+    // either is disabled.
+    if (!this.normalizedOptions[focusedIndex].disabled) {
+      this.setState({focusedOptionIndex: focusedIndex});
+    }
+  };
+
   private updateStateFromValue = () => {
     this.setState({
       focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
@@ -354,14 +373,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             ) {
               nextIndex += direction;
             }
-            // Ensure we're not out of bounds
-            nextIndex = nextIndex < 0 ? 0 : nextIndex >= numOptions ? numOptions - 1 : nextIndex;
-            // Update the focused index only if it refers to an enabled
-            // option (it's possible for us to still end up at a disabled
-            // option if that option is at the beginning or end of the array)
-            if (!this.normalizedOptions[nextIndex].disabled) {
-              this.setState({focusedOptionIndex: nextIndex});
-            }
+            this.updateFocusedOptionIndex(nextIndex);
           }
           break;
 
@@ -379,14 +391,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
               nextIndex--;
             }
           }
-          // Ensure we're not out of bounds
-          nextIndex = nextIndex < 0 ? 0 : nextIndex >= numOptions ? numOptions - 1 : nextIndex;
-          // Update the focused index only if it refers to an enabled
-          // option (it's possible for us to still end up at a disabled
-          // option if every option in the array is disabled)
-          if (!this.normalizedOptions[nextIndex].disabled) {
-            this.setState({focusedOptionIndex: nextIndex});
-          }
+          this.updateFocusedOptionIndex(nextIndex);
           break;
 
         case 'Tab':
