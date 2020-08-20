@@ -329,7 +329,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.state;
 
     let isShortcut = false;
-    let nextFocusedIndex = 0;
 
     // Check for type-ahead first
     if (event.key.length === 1 && event.key.match(/\S/)) {
@@ -347,6 +346,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
             let nextIndex = focusedOptionIndex + direction;
+            // Skip over disabled options
             while (
               nextIndex < numOptions &&
               nextIndex >= 0 &&
@@ -354,17 +354,39 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             ) {
               nextIndex += direction;
             }
-            nextFocusedIndex =
-              nextIndex < 0 ? 0 : nextIndex >= numOptions ? numOptions - 1 : nextIndex;
-            this.setState({focusedOptionIndex: nextFocusedIndex});
+            // Ensure we're not out of bounds
+            nextIndex = nextIndex < 0 ? 0 : nextIndex >= numOptions ? numOptions - 1 : nextIndex;
+            // Update the focused index only if it refers to an enabled
+            // option (it's possible for us to still end up at a disabled
+            // option if that option is at the beginning or end of the array)
+            if (!this.normalizedOptions[nextIndex].disabled) {
+              this.setState({focusedOptionIndex: nextIndex});
+            }
           }
           break;
 
         case 'Home':
         case 'End':
           isShortcut = true;
-          nextFocusedIndex = event.key === 'Home' ? 0 : numOptions - 1;
-          this.setState({focusedOptionIndex: nextFocusedIndex});
+          let nextIndex = event.key === 'Home' ? 0 : numOptions - 1;
+          // Find the first (or last) enabled option
+          if (event.key === 'Home') {
+            while (nextIndex < numOptions && this.normalizedOptions[nextIndex].disabled) {
+              nextIndex++;
+            }
+          } else {
+            while (nextIndex >= 0 && this.normalizedOptions[nextIndex].disabled) {
+              nextIndex--;
+            }
+          }
+          // Ensure we're not out of bounds
+          nextIndex = nextIndex < 0 ? 0 : nextIndex >= numOptions ? numOptions - 1 : nextIndex;
+          // Update the focused index only if it refers to an enabled
+          // option (it's possible for us to still end up at a disabled
+          // option if every option in the array is disabled)
+          if (!this.normalizedOptions[nextIndex].disabled) {
+            this.setState({focusedOptionIndex: nextIndex});
+          }
           break;
 
         case 'Tab':
