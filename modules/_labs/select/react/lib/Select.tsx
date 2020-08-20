@@ -147,7 +147,13 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   private closeMenu = () => {
     this.setState({menuVisibility: 'closing'});
     this.setMenuAnimationTimeout(() => {
-      this.setState({menuVisibility: 'closed'});
+      this.setState({
+        // Reset the focused option to the currently selected option in case
+        // the user focused a different option but chose not to select it. The
+        // next time the menu opens, focus should begin on the selected option.
+        focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
+        menuVisibility: 'closed',
+      });
     });
   };
 
