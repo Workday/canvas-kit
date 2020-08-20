@@ -146,7 +146,9 @@ describe('ColorPicker', () => {
         beforeEach(() => {
           cy.get(`.wdc-color-picker--color-8660d1`).click();
           cy.get('button').click();
-          cy.get('[data-testid="color-picker-reset"]').click();
+          cy.get('button')
+            .contains('Reset')
+            .click();
         });
 
         it('should set the color picker value to the reset color', () => {
@@ -215,7 +217,9 @@ describe('ColorPicker', () => {
         beforeEach(() => {
           cy.get(`.wdc-color-picker--color-8660d1`).click();
           getColorInput().click();
-          cy.get('[data-testid="color-picker-reset"]').click();
+          cy.get('button')
+            .contains('Reset')
+            .click();
         });
 
         it('should set the color picker value to the reset color', () => {
