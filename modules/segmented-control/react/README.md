@@ -1,9 +1,7 @@
 # Canvas Kit React Segmented Control
 
 A linear set of two or more segments, each of which functions as a mutually exclusive button. This
-is a
-
-> [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.
+is a [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.
 
 ## Installation
 
