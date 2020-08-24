@@ -15,7 +15,7 @@ yarn add @workday/canvas-kit-react-segmented-control
 
 ```tsx
 import * as React from 'react';
-import {SegmentedControl} from '@workday/canvas-kit-labs-react-segmented-control';
+import {SegmentedControl} from '@workday/canvas-kit-react-segmented-control';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
