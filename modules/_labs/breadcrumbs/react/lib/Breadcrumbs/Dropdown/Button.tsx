@@ -3,15 +3,18 @@ import React from 'react';
 import {css, jsx} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {folderCloseIcon} from '@workday/canvas-system-icons-web';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors} from '@workday/canvas-kit-react-core';
 
 export interface DropdownButtonProps extends IconButtonProps {
   'aria-label': string;
+  buttonIcon?: CanvasSystemIcon;
   buttonRef: React.Ref<HTMLButtonElement>;
   toggled: boolean;
 }
 
 export const DropdownButton = ({
+  buttonIcon = folderCloseIcon,
   buttonRef,
   toggled,
   variant = IconButton.Variant.Plain,
@@ -22,9 +25,10 @@ export const DropdownButton = ({
   const customStyles = css(hasPlainVariant ? {margin: '0 1px'} : {});
   return (
     <IconButton
+      type="button"
       css={customStyles}
       variant={variant}
-      icon={folderCloseIcon}
+      icon={buttonIcon}
       color={colors.licorice200}
       buttonRef={buttonRef}
       toggled={toggled}

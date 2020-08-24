@@ -45,5 +45,8 @@
     "@workday/canvas-kit-react-popup": "^4.1.1",
     "@workday/canvas-kit-react-tooltip": "^4.1.1",
     "@workday/canvas-system-icons-web": "^1.0.20"
+  },
+  "devDependencies": {
+    "cypress-enter-plugin": "^1.0.0"
   }
 }

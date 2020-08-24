@@ -3,14 +3,14 @@ import {Popper} from '@workday/canvas-kit-react-popup';
 
 // local components
 import {useDropdown} from './hooks';
-import {DropdownButton} from './Button';
+import {DropdownButton, DropdownButtonProps} from './Button';
 import {DropdownMenu} from './Menu';
 
-interface DropdownProps {
+interface DropdownProps extends Pick<DropdownButtonProps, 'buttonIcon'> {
   buttonAriaLabel: string;
 }
 
-export const Dropdown = ({buttonAriaLabel}: DropdownProps) => {
+export const Dropdown = ({buttonAriaLabel, buttonIcon}: DropdownProps) => {
   // refs
   const buttonRef = React.useRef<HTMLButtonElement>(null);
   const activeDropdownItemRef = React.useRef<HTMLLIElement>(null);
@@ -22,7 +22,11 @@ export const Dropdown = ({buttonAriaLabel}: DropdownProps) => {
 
   return (
     <>
-      <DropdownButton aria-label={buttonAriaLabel} {...dropdownButtonProps} />
+      <DropdownButton
+        aria-label={buttonAriaLabel}
+        buttonIcon={buttonIcon}
+        {...dropdownButtonProps}
+      />
       <Popper placement="bottom-start" {...popperProps}>
         <DropdownMenu {...dropdownMenuProps} />
       </Popper>

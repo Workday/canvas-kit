@@ -1,7 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
-import {number, withKnobs} from '@storybook/addon-knobs/react';
 
 import README from '../README.md';
 
@@ -9,67 +8,8 @@ import {Breadcrumbs} from '../lib/Breadcrumbs';
 
 export default {
   title: 'Labs|Breadcrumbs/React',
-  decorators: [withReadme(README), withKnobs],
+  decorators: [withReadme(README)],
 };
-
-// const breadcrumbItems = [
-//   {
-//     name: 'Root',
-//     ['aria-label']: 'menuitem',
-//     icon: 'folder',
-//     ...
-//     onAction: () => {
-//       window.alert(`Root`);
-//     },
-//   },
-//   {
-//     name: 'Folder1',
-//     ['aria-label']: 'menuitem',
-//     icon: 'folder',
-//     ...
-//     onAction: () => {
-//       window.alert(`Folder1`);
-//     },
-//   },
-//   {
-//     name: 'Folder2',
-//     ['aria-label']: 'menuitem',
-//     icon: 'folder',
-//     ...
-//     onAction: () => {
-//       window.alert(`Folder2`);
-//     },
-//   },
-//   {
-//     name: 'Folder3',
-//     ['aria-label']: 'menuitem',
-//     icon: 'folder',
-//     ...
-//     onAction: () => {
-//       window.alert(`Folder3`);
-//     },
-//   },
-//   {
-//     name: 'Folder4',
-//     ['aria-label']: 'menuitem',
-//     icon: 'folder',
-//     ...
-//     onAction: () => {
-//       window.alert(`Folder4`);
-//     },
-//   },
-//   {
-//     name: 'Folder5',
-//     ['aria-label']: 'menuitem',
-//     icon: 'folder',
-//     ...
-//     onAction: () => {
-//       window.alert(`Folder5`);
-//     },
-//   },
-// ];
-
-// <Breadcrumbs items={breadcrumbItems} />;
 
 export const Default = () => {
   return (
@@ -112,7 +52,7 @@ export const Default = () => {
 
 export const Collapsible = () => {
   return (
-    <Breadcrumbs.Nav maxWidth={number('maxWidth', 800)}>
+    <Breadcrumbs.Nav maxWidth={800}>
       <Breadcrumbs.CollapsibleList aria-label="breadcrumbs" expanderAriaLabel="more links">
         <Breadcrumbs.ListItem>
           <Breadcrumbs.LinkedCrumb

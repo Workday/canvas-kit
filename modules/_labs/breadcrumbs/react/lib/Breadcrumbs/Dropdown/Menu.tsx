@@ -22,6 +22,8 @@ export interface DropdownMenuProps
     Pick<DropdownContext, 'activeDropdownItem' | 'dropdownItems' | 'setActiveDropdownItem'> {
   activeDropdownItemRef: React.RefObject<HTMLLIElement>;
   resetFocus: () => void;
+  toggleActiveItemUp: () => void;
+  toggleActiveItemDown: () => void;
 }
 
 const menuWrapperStyles = css({
@@ -60,34 +62,20 @@ export const DropdownMenu = ({
   dropdownItems,
   resetFocus,
   setActiveDropdownItem,
+  toggleActiveItemDown,
+  toggleActiveItemUp,
   ...props
 }: DropdownMenuProps) => {
-  const findActiveDropdownItemByIndex = (index: number) => {
-    return dropdownItems.filter(item => item.index === index)[0];
-  };
-
   const handleItemKeyUp = (e: React.KeyboardEvent<HTMLLIElement>) => {
-    e.stopPropagation();
-    e.preventDefault();
     switch (e.key) {
       case 'ArrowUp':
       case 'ArrowLeft':
       case 'Up': // IE/Edge specific value
-        const itemAbove = findActiveDropdownItemByIndex(activeDropdownItem.index - 1);
-        // if the item is at the top of the list, transfer focus back to the button
-        if (itemAbove) {
-          return setActiveDropdownItem(itemAbove);
-        }
-        // otherwise, toggle up
-        return resetFocus();
+        return toggleActiveItemUp();
       case 'ArrowDown':
       case 'Down': // IE/Edge specific value
       case 'ArrowRight':
-        const itemBelow = findActiveDropdownItemByIndex(activeDropdownItem.index + 1);
-        if (itemBelow) {
-          return setActiveDropdownItem(itemBelow);
-        }
-        return setActiveDropdownItem(dropdownItems[0]);
+        return toggleActiveItemDown();
       default:
         break;
     }

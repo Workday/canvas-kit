@@ -1,5 +1,4 @@
 import * as h from '../helpers';
-import {drop} from 'lodash';
 
 function getBreadcrumbsNav() {
   return cy.findByRole('navigation');
@@ -9,12 +8,16 @@ function getBreadcrumbsList() {
   return cy.findByRole('list');
 }
 
-function getBreadcrumbsDropdownButton() {
+function getDropdownButton() {
   return cy.findByLabelText('more links');
 }
 
+function getDropdownMenu() {
+  return cy.findByRole('menu');
+}
+
 function openDropdownMenu() {
-  const dropdownButton = getBreadcrumbsDropdownButton();
+  const dropdownButton = getDropdownButton();
   dropdownButton.focus();
   dropdownButton.type('{enter}');
 }
@@ -43,12 +46,40 @@ describe('Breadcrumbs', () => {
       getBreadcrumbsList().should('have.attr', 'role', 'list');
     });
 
-    it('should have truncated items with tooltips', () => {
-      cy.findAllByRole('link').last($link => {
-        const linkText = $link.text();
-        $link.focus();
-        cy.findByRole('tooltip').should('contain', linkText);
-      });
+    it('should show tooltips on focus for truncated link items', () => {
+      // should see tooltip for the first item
+      cy.findAllByRole('link')
+        .eq(0)
+        .focus()
+        .then($link => {
+          const text = $link.text();
+          cy.findByRole('tooltip').should('contain', text);
+        });
+      // should not see tooltip for the second item
+      cy.findAllByRole('link')
+        .eq(1)
+        .focus();
+      cy.findByRole('tooltip').should('not.exist');
+      // should not see tooltip for the third item
+      cy.findAllByRole('link')
+        .eq(2)
+        .focus();
+      cy.findByRole('tooltip').should('not.exist');
+      // should see tooltip for the fourth item
+      cy.findAllByRole('link')
+        .eq(3)
+        .focus()
+        .then($link => {
+          const text = $link.text();
+          cy.findByRole('tooltip').should('contain', text);
+        });
+      // should see tooltip for the last item (current crumb)
+      cy.get('li span:last')
+        .focus()
+        .then($currentCrumb => {
+          const text = $currentCrumb.text();
+          cy.findByRole('tooltip').should('contain', text);
+        });
     });
   });
 
@@ -61,14 +92,14 @@ describe('Breadcrumbs', () => {
     });
 
     it('should have a dropdown button with the correct aria attributes', () => {
-      const dropdownButton = getBreadcrumbsDropdownButton();
-      dropdownButton.should('have.attr', 'aria-expanded', 'false');
-      dropdownButton.should('have.attr', 'aria-haspopup', 'true');
-      dropdownButton.should('have.attr', 'aria-controls', 'menu');
+      getDropdownButton()
+        .should('have.attr', 'aria-expanded', 'false')
+        .and('have.attr', 'aria-haspopup', 'true')
+        .and('have.attr', 'aria-controls', 'menu');
     });
 
     it('should toggle aria-expanded on the dropdown button', () => {
-      const dropdownButton = getBreadcrumbsDropdownButton();
+      const dropdownButton = getDropdownButton();
       dropdownButton.click();
       dropdownButton.should('have.attr', 'aria-expanded', 'true');
       dropdownButton.click();
@@ -83,30 +114,84 @@ describe('Breadcrumbs', () => {
     });
 
     it('should set focus to the first list item when the dropdown menu is toggled with a keypress', () => {
-      const firstItem = cy.findAllByRole('none').first();
-      firstItem.should('have.focus');
+      cy.findAllByRole('none')
+        .first()
+        .should('have.focus');
     });
 
     it('should toggle focus to the next list item on down keypress', () => {
-      const menu = cy.findByRole('menu');
-      cy.findAllByRole('none').each($link => {
-        cy.wrap($link).should('have.focus');
-        menu.type('{downArrow}');
-      });
+      // toggle to the second item
+      getDropdownMenu().type('{downArrow}');
+      cy.findAllByRole('none')
+        .eq(1)
+        .should('have.focus');
+      // toggle to the third item
+      getDropdownMenu().type('{downArrow}');
+      cy.findAllByRole('none')
+        .eq(2)
+        .should('have.focus');
+      // roll toggle back to the first item
+      getDropdownMenu().type('{downArrow}');
+      cy.findAllByRole('none')
+        .eq(0)
+        .should('have.focus');
     });
 
     it('should toggle focus to the next list item on right keypress', () => {
-      const menu = cy.findByRole('menu');
-      cy.findAllByRole('none').each($link => {
-        cy.wrap($link).should('have.focus');
-        menu.type('{downArrow}');
-      });
+      // toggle to the second item
+      getDropdownMenu().type('{rightArrow}');
+      cy.findAllByRole('none')
+        .eq(1)
+        .should('have.focus');
+      // toggle to the third item
+      getDropdownMenu().type('{rightArrow}');
+      cy.findAllByRole('none')
+        .eq(2)
+        .should('have.focus');
+      // roll toggle back to the first item
+      getDropdownMenu().type('{rightArrow}');
+      cy.findAllByRole('none')
+        .eq(0)
+        .should('have.focus');
     });
 
     it('should return focus to the button from the first list item', () => {
-      const menu = cy.findByRole('menu');
-      menu.type('{upArrow}');
-      getBreadcrumbsDropdownButton().should('have.focus');
+      getDropdownMenu().type('{upArrow}');
+      getDropdownButton().should('have.focus');
+    });
+
+    it('should toggle focus to the previous list item on up or left keypress', () => {
+      // toggle to third item
+      getDropdownMenu()
+        .type('{downArrow}')
+        .type('{downArrow}')
+        // toggle up to the second item
+        .type('{upArrow}');
+      cy.findAllByRole('none')
+        .eq(1)
+        .should('have.focus');
+
+      // toggle to the first item
+      getDropdownMenu().type('{upArrow}');
+      cy.findAllByRole('none')
+        .eq(0)
+        .should('have.focus');
+    });
+
+    it('should toggle focus to the previous list item on left keypress', () => {
+      // toggle to third item
+      getDropdownMenu().type('{downArrow}');
+      getDropdownMenu().type('{downArrow}');
+      // toggle to the second item
+      getDropdownMenu().type('{leftArrow}');
+      cy.findAllByRole('none')
+        .eq(1)
+        .should('have.focus');
+      // toggle to the first item
+      getDropdownMenu().type('{leftArrow}');
+      cy.findAllByRole('none')
+        .eq(0)
+        .should('have.focus');
     });
   });
 });

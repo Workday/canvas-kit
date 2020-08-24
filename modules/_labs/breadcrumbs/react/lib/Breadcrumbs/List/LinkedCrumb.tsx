@@ -23,7 +23,13 @@ export const LinkedCrumb = ({
   children,
   ...props
 }: LinkedCrumbProps) => {
-  const {isTooltipOpen, openTooltip, closeTooltip, truncateStyles} = useTruncateTooltip(maxWidth);
+  const {
+    isTooltipOpen,
+    openTooltip,
+    closeTooltip,
+    truncateStyles,
+    tooltipProps,
+  } = useTruncateTooltip(maxWidth);
   const ref = React.useRef<HTMLAnchorElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -62,7 +68,7 @@ export const LinkedCrumb = ({
         {children}
       </a>
       <Popper open={isTooltipOpen} anchorElement={ref} placement="top">
-        <TooltipContainer>{children}</TooltipContainer>
+        <TooltipContainer {...tooltipProps}>{children}</TooltipContainer>
       </Popper>
     </React.Fragment>
   );

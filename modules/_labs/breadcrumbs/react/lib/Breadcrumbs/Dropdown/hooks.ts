@@ -31,7 +31,6 @@ export const useDropdown = (
 
   const handleButtonKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter') {
-      targetProps.onClick(e as any); // needed to get Cypress to open the menu (but not IRL?)
       setActiveDropdownItem(dropdownItems[0]);
     }
   };
@@ -41,13 +40,33 @@ export const useDropdown = (
     closePopup();
   };
 
+  const findActiveDropdownItemByIndex = (index: number) => {
+    return dropdownItems.filter(item => item.index === index)[0];
+  };
+
+  const toggleActiveItemUp = () => {
+    const previousItem = findActiveDropdownItemByIndex(activeDropdownItem.index - 1);
+    if (!previousItem) {
+      return resetMenuFocus();
+    }
+    return setActiveDropdownItem(previousItem);
+  };
+
+  const toggleActiveItemDown = () => {
+    const nextItem = findActiveDropdownItemByIndex(activeDropdownItem.index + 1);
+    if (!nextItem) {
+      return setActiveDropdownItem(dropdownItems[0]);
+    }
+    return setActiveDropdownItem(nextItem);
+  };
+
   const uniqueButtonId = useUniqueId(buttonId);
 
   const dropdownButtonProps = {
     id: uniqueButtonId,
     buttonRef,
     toggled: popperProps.open,
-    onKeyDown: handleButtonKeyUp,
+    onKeyUp: handleButtonKeyUp,
     ...targetProps,
   } as Omit<DropdownButtonProps, 'aria-label'>;
 
@@ -58,6 +77,8 @@ export const useDropdown = (
     activeDropdownItemRef: activeDropdownItemRef,
     setActiveDropdownItem: setActiveDropdownItem,
     resetFocus: resetMenuFocus,
+    toggleActiveItemUp,
+    toggleActiveItemDown,
   } as DropdownMenuProps;
 
   return {dropdownButtonProps, dropdownMenuProps, popperProps};

@@ -7,6 +7,7 @@ import {BreadcrumbsListItem} from './ListItem';
 import {BreadcrumbsList} from './index';
 // hooks
 import {useBuildDropdown, useDropdown} from './hooks';
+import {DropdownButtonProps} from '../Dropdown/Button';
 
 const parseListItems = (children: React.ReactNode) => {
   const childArray = Children.toArray(children);
@@ -15,11 +16,18 @@ const parseListItems = (children: React.ReactNode) => {
   return {rootItem, collapsibleItems, currentItem};
 };
 
-export interface CollapsibleListProps extends React.HTMLAttributes<HTMLUListElement> {
+export interface CollapsibleListProps
+  extends React.HTMLAttributes<HTMLUListElement>,
+    Pick<DropdownButtonProps, 'buttonIcon'> {
   expanderAriaLabel: string;
 }
 
-export const CollapsibleList = ({children, expanderAriaLabel, ...props}: CollapsibleListProps) => {
+export const CollapsibleList = ({
+  children,
+  buttonIcon,
+  expanderAriaLabel,
+  ...props
+}: CollapsibleListProps) => {
   // context
   const dropdownContext = React.useContext(DropdownContext);
   const listContext = React.useContext(BreadcrumbsContext);
@@ -41,7 +49,7 @@ export const CollapsibleList = ({children, expanderAriaLabel, ...props}: Collaps
       {rootItem}
       {shouldShowDropdown && (
         <BreadcrumbsListItem>
-          <Dropdown buttonAriaLabel={expanderAriaLabel} />
+          <Dropdown buttonAriaLabel={expanderAriaLabel} buttonIcon={buttonIcon} />
         </BreadcrumbsListItem>
       )}
       {collapsibleItems.map((item, i) => {

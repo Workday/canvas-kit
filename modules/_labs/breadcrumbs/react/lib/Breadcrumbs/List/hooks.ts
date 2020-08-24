@@ -53,10 +53,6 @@ export const useBuildDropdown = <E extends HTMLElement>(
     const containerWidth = listEl.current ? listEl.current.clientWidth : 0;
     const listItems: Breadcrumb[] = [];
     Children.forEach(children, (child: React.ReactElement, index) => {
-      if (child.type !== BreadcrumbsListItem) {
-        return;
-      }
-
       const breadcrumbLink = getBreadcrumbLink(child);
       // We should make this match work better
       const listItemNode = listItemNodes[index];
@@ -104,5 +100,9 @@ export const useTruncateTooltip = (maxWidth: number | string = 350) => {
     setIsTooltipOpen(false);
   };
 
-  return {truncateStyles, isTooltipOpen, openTooltip, closeTooltip};
+  const tooltipProps = {
+    role: 'tooltip',
+  };
+
+  return {truncateStyles, isTooltipOpen, openTooltip, closeTooltip, tooltipProps};
 };

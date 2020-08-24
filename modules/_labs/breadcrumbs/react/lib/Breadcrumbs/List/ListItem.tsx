@@ -5,7 +5,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-kit-react-core';
 
-export interface BCListItemProps extends React.HTMLAttributes<HTMLLIElement> {}
+export type BCListItemProps = React.HTMLAttributes<HTMLLIElement>;
 
 const breadcrumbItemStyles = css({
   display: `flex`,

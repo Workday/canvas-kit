@@ -14,7 +14,13 @@ export interface CurrentCrumbProps extends React.HTMLAttributes<HTMLLIElement> {
 export const CurrentCrumb = ({children, maxWidth, ...elemProps}: CurrentCrumbProps) => {
   const ref = React.useRef<HTMLSpanElement>(null);
 
-  const {isTooltipOpen, openTooltip, closeTooltip, truncateStyles} = useTruncateTooltip(maxWidth);
+  const {
+    isTooltipOpen,
+    openTooltip,
+    closeTooltip,
+    truncateStyles,
+    tooltipProps,
+  } = useTruncateTooltip(maxWidth);
 
   const listStyles = css({
     display: 'flex',
@@ -40,7 +46,7 @@ export const CurrentCrumb = ({children, maxWidth, ...elemProps}: CurrentCrumbPro
         {children}
       </span>
       <Popper open={isTooltipOpen} anchorElement={ref} placement="top">
-        <TooltipContainer>{children}</TooltipContainer>
+        <TooltipContainer {...tooltipProps}>{children}</TooltipContainer>
       </Popper>
     </li>
   );
