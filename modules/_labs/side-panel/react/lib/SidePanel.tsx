@@ -48,6 +48,8 @@ const Container = styled('div')<SidePanelProps>(
 const SidePanel: React.FC<SidePanelProps> = props => {
   const {width = 320, collapsedWidth = 64, height = 400, collapsed = false, ...elemProps} = props;
 
+  // TODO: if we don't ship an IconButton with the side panel we should
+  // ship a hook that spreads aria-controls and aria-expanded (how?)
   return (
     <Container
       role="region"
