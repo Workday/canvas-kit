@@ -65,7 +65,7 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   transformOrigin?: TransformOrigin;
 }
 
-export const defaultColorSet = [
+const defaultColorSet = [
   colors.blueberry600,
   colors.grapeSoda600,
   colors.pomegranate600,
@@ -228,4 +228,5 @@ const ColorPicker = ({
   );
 };
 
+ColorPicker.defaultColorSet = defaultColorSet;
 export default ColorPicker;
