@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# 4.1.2 (2020-08-03)
+# 4.1.2 (2020-08-04)
 
 ### Components
 - fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -14,7 +14,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Infrastructure
 - chore: Upgrade dependencies ([#811](https://github.com/Workday/canvas-kit/pull/811)) [@NicholasBoll](https://github.com/NicholasBoll)
 
-# 4.0.3 (2020-08-03)
+# 4.0.3 (2020-08-04)
 
 ### Components
 - fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -22,7 +22,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - test(menu): Fix assertion name to be more clear [@NicholasBoll](https://github.com/NicholasBoll)
 - docs(skeleton): Update to remove mention of aria-live ([#814](https://github.com/Workday/canvas-kit/pull/814)) [@lychyi](https://github.com/lychyi)
 
-# 3.9.3 (2020-08-03)
+# 3.9.3 (2020-08-04)
 
 ### Components
 - fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
