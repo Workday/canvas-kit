@@ -216,8 +216,7 @@ describe('ColorPicker', () => {
         beforeEach(() => {
           cy.get(`.wdc-color-picker--color-8660d1`).click();
           getColorInput().click();
-          cy.get('button')
-            .contains('Reset')
+          cy.contains('button', 'Reset')
             .click();
         });
 
