@@ -92,7 +92,7 @@ export const AccessibilityTest = () => (
 export const DisabledOptionsTest = () => (
   <div>
     <Container>
-      <p>Disabled options may not be assistively (keyboard) focused.</p>
+      <p>Disabled options may not be assistively focused using the keyboard.</p>
       <FormField label="Label (Disabled Options)" inputId="select-disabled-options">
         {controlComponent(<Select name="select-disabled-options" options={disabledOptions} />)}
       </FormField>

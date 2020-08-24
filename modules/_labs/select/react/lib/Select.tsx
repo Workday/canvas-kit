@@ -118,22 +118,42 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return -1;
   };
 
-  // Helper adds safeguards to prevent us from applying focus in invalid ways
-  // when navigating the menu using the keyboard
-  private updateFocusedOptionIndex = (index: number) => {
+  // This helper focuses the next enabled option given a startIndex and a
+  // direction. If startIndex refers to an enabled option, we focus that option
+  // immediately. Otherwise, we advance `direction` number of spaces in the options
+  // array and check again if that index refers to an enabled option.
+  //
+  // This is useful for manipulating focus using the keyboard where pressing the
+  // Up/Down key means "focus the first enabled option above/below the currently
+  // focused option", or pressing the Home/End key means "focus the first/last
+  // enabled option on the menu."
+  private focusNextEnabledOption = (startIndex: number, direction: number) => {
+    // Ensure direction is non-zero
+    if (direction === 0) {
+      return;
+    }
+
     const numOptions = this.normalizedOptions.length;
 
-    // Ensure we're not focusing an index out of bounds. If index < 0,
-    // focus the first option; if index exceeds the length of the options
-    // array, focus the last option.
-    const focusedIndex = index < 0 ? 0 : index >= numOptions ? numOptions - 1 : index;
+    let currentIndex = startIndex;
 
-    // As a final check, only update the focused index if it refers to an
-    // enabled option. This prevents us from applying focus to the first or
-    // last options (after accounting for out of bounds indices above) if
-    // either is disabled.
-    if (!this.normalizedOptions[focusedIndex].disabled) {
-      this.setState({focusedOptionIndex: focusedIndex});
+    // Check if currentIndex refers to an enabled option. If not, keep moving
+    // the index in the prescribed direction until we find an enabled option.
+    while (
+      currentIndex >= 0 &&
+      currentIndex < numOptions &&
+      this.normalizedOptions[currentIndex].disabled
+    ) {
+      currentIndex += direction;
+    }
+    // Update the focused index only if currentIndex is inbounds and
+    // refers to an enabled option
+    if (
+      currentIndex >= 0 &&
+      currentIndex < numOptions &&
+      !this.normalizedOptions[currentIndex].disabled
+    ) {
+      this.setState({focusedOptionIndex: currentIndex});
     }
   };
 
@@ -364,34 +384,17 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             this.toggleMenu(true);
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
-            let nextIndex = focusedOptionIndex + direction;
-            // Skip over disabled options
-            while (
-              nextIndex < numOptions &&
-              nextIndex >= 0 &&
-              this.normalizedOptions[nextIndex].disabled
-            ) {
-              nextIndex += direction;
-            }
-            this.updateFocusedOptionIndex(nextIndex);
+            const startIndex = focusedOptionIndex + direction;
+            this.focusNextEnabledOption(startIndex, direction);
           }
           break;
 
         case 'Home':
         case 'End':
           isShortcut = true;
-          let nextIndex = event.key === 'Home' ? 0 : numOptions - 1;
-          // Find the first (or last) enabled option
-          if (event.key === 'Home') {
-            while (nextIndex < numOptions && this.normalizedOptions[nextIndex].disabled) {
-              nextIndex++;
-            }
-          } else {
-            while (nextIndex >= 0 && this.normalizedOptions[nextIndex].disabled) {
-              nextIndex--;
-            }
-          }
-          this.updateFocusedOptionIndex(nextIndex);
+          const direction = event.key === 'Home' ? 1 : -1;
+          const startIndex = event.key === 'Home' ? 0 : numOptions - 1;
+          this.focusNextEnabledOption(startIndex, direction);
           break;
 
         case 'Tab':
