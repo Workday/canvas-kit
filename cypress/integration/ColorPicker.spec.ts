@@ -127,27 +127,31 @@ describe('ColorPicker', () => {
       context('when a swatch is clicked', () => {
         const color = '#ff5347';
 
-        it('should have check icon', () => {
+        beforeEach(() => {
           getSwatch(color).click();
           getOpenButton().click();
+        });
+
+        it('should have check icon', () => {
           getSwatch(color)
             .find('.wd-icon')
             .should('exist');
         });
-      });
 
-      context('when color reset is clicked', () => {
-        it('should set the color picker value to the reset color', () => {
+        context('when color reset is clicked', () => {
           const color = '#ff5347';
-          let resetColor;
+          let resetColor: string | undefined;
 
-          getResetButton().then($el => {
-            resetColor = $el.find('div[color]').attr('color');
+          beforeEach(() => {
+            getResetButton()
+              .then($button => {
+                resetColor = $button.find('[color]').attr('color');
+              })
+              .click();
+            getOpenButton().click();
+          });
 
-            getSwatch(color).click();
-            getOpenButton().click();
-            getResetButton().click();
-            getOpenButton().click();
+          it('should set the color picker value to the reset color', () => {
             getSwatch(resetColor!)
               .find('.wd-icon')
               .should('exist');
@@ -155,13 +159,16 @@ describe('ColorPicker', () => {
         });
       });
 
-      context('when custom color is entered', () => {
-        it('should set the selected color to input value', () => {
-          const customColor = '#123123';
+      context('when a custom color is submitted', () => {
+        const customColor = '#123123';
 
+        beforeEach(() => {
           getColorInput().focus();
           getColorInput().type(customColor);
           getSubmitButton().click();
+        });
+
+        it('should set the selected color to input value', () => {
           getOpenButton().click();
           getSwatch(customColor)
             .find('.wd-icon')
@@ -198,27 +205,25 @@ describe('ColorPicker', () => {
         });
 
         it('should have check icon', () => {
-          getColorInput().click();
+          getColorInput().focus();
           getSwatch(color)
             .find('.wd-icon')
             .should('exist');
         });
-      });
 
-      context('when color reset is clicked', () => {
-        const color = '#ff5347';
+        context('when color reset is clicked', () => {
+          let resetColor: string | undefined;
 
-        beforeEach(() => {
-          getResetButton().click();
-        });
+          beforeEach(() => {
+            getColorInput().focus();
+            getResetButton()
+              .then($button => {
+                resetColor = $button.find('[color]').attr('color');
+              })
+              .click();
+          });
 
-        it('should set the color picker value to the reset color', () => {
-          let resetColor;
-
-          getColorInput().focus();
-          getResetButton().then($el => {
-            resetColor = $el.find('[color]').attr('color');
-            getResetButton().click();
+          it('should set the color picker value to the reset color', () => {
             getColorInput().should('have.value', resetColor!.slice(1));
           });
         });
