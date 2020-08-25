@@ -1,15 +1,10 @@
 import * as h from '../helpers';
 
 const getColorInput = () => cy.get('[type="text"]');
-
 const getColorPickerPopup = () => cy.get('[role=dialog]');
-
 const getOpenButton = () => cy.get('[data-testid=open]');
-
 const getResetButton = () => cy.contains('button', 'Reset');
-
 const getSubmitButton = () => cy.get('[aria-label=Submit]');
-
 const getSwatch = (color: string) => cy.get(`div[color="${color}"]`);
 
 const colorInputStory = 'Components|Inputs/Color Picker/Color Input/React/Top Label';
@@ -134,9 +129,7 @@ describe('ColorPicker', () => {
 
         it('should have check icon', () => {
           getSwatch(color).click();
-
           getOpenButton().click();
-
           getSwatch(color)
             .find('.wd-icon')
             .should('exist');
@@ -152,10 +145,8 @@ describe('ColorPicker', () => {
             resetColor = $el.find('div[color]').attr('color');
 
             getSwatch(color).click();
-
             getOpenButton().click();
             getResetButton().click();
-
             getOpenButton().click();
             getSwatch(resetColor!)
               .find('.wd-icon')
@@ -171,7 +162,6 @@ describe('ColorPicker', () => {
           getColorInput().focus();
           getColorInput().type(customColor);
           getSubmitButton().click();
-
           getOpenButton().click();
           getSwatch(customColor)
             .find('.wd-icon')
