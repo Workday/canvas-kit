@@ -1,7 +1,6 @@
 import React, {Children, useLayoutEffect} from 'react';
 import {CSSObject} from '@emotion/core';
 
-import {BreadcrumbsListItem} from './ListItem';
 import {LinkedCrumb} from './LinkedCrumb';
 import {Breadcrumb} from '../types';
 
