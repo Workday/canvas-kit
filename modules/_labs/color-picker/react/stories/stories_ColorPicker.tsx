@@ -36,6 +36,7 @@ storiesOf('Labs|Color Picker/React', module)
         <IconButton
           icon={bgColorIcon}
           aria-label="Select Background Color"
+          data-testid="open"
           buttonRef={buttonRef}
           variant={IconButton.Variant.SquareFilled}
           onClick={toggleOpen}
