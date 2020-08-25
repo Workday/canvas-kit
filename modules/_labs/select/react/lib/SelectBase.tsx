@@ -336,12 +336,17 @@ const SelectBase = (props: SelectBaseProps) => {
     const focusedOption = focusedOptionRef.current;
 
     if (focusedOption) {
-      // TODO: Figure out why rAF is necessary here (and below) in order for the
-      // Select States Menu On story to render correctly in IE. Without rAF,
-      // the DOM measurements performed in scrollIntoViewIfNeeded are incorrect
-      // and we perform unnecessary scrolling BUT ONLY IN THIS STORY and ONLY IN
-      // IE. Everywhere else (in IE and in other browsers), everything works
-      // fine without rAF.
+      // TODO: Figure out if rAF is the best approach here. I initially added
+      // rAF to get the Select States Menu On story to render correctly in IE.
+      // Without rAF, the menu is scrolled slightly further down than it should
+      // be (only in IE, and only in the Menu On visual testing stories), which
+      // triggers a visual regression. We're inside useLayoutEffect here so I
+      // didn't expect to need rAF in order to make proper measurements, but it
+      // seems to be necessary in IE.
+      //
+      // This rAF call also has the additional benefit of fixing a jarring menu
+      // placement issue in IE (https://github.com/Workday/canvas-kit/issues/791),
+      // so I'm leaving it in for now.
       const animateId = requestAnimationFrame(() => {
         // We cannot use the native Element.scrollIntoView() here because it
         // doesn't work properly with the portalled menu: when using the keyboard
@@ -368,7 +373,9 @@ const SelectBase = (props: SelectBaseProps) => {
     // bypass the opening state and jump straight to opened (like in visual testing,
     // for instance)
     if (focusedOption && (menuVisibility === 'opening' || menuVisibility === 'opened')) {
-      // TODO: Again, why is rAF necessary here in IE? (see above)
+      // TODO: This rAF call is also necessary for the Menu On visual testing
+      // stories to render properly in IE (see above, both rAF calls need to be
+      // present). It has no bearing on the menu placement issue.
       const animateId = requestAnimationFrame(() => {
         scrollIntoViewIfNeeded(focusedOption, true);
       });
