@@ -1,10 +1,10 @@
 import * as h from '../helpers';
 
 const getColorInput = () => cy.get('[type="text"]');
-const getColorPickerPopup = () => cy.get('[role=dialog]');
-const getOpenButton = () => cy.get('[data-testid=open]');
+const getColorPickerPopup = () => cy.findByRole('dialog');
+const getOpenButton = () => cy.findByLabelText('Select Background Color');
 const getResetButton = () => cy.contains('button', 'Reset');
-const getSubmitButton = () => cy.get('[aria-label=Submit]');
+const getSubmitButton = () => cy.findByLabelText('Submit');
 const getSwatch = (color: string) => cy.get(`div[color="${color}"]`);
 
 const colorInputStory = 'Components|Inputs/Color Picker/Color Input/React/Top Label';
