@@ -11,7 +11,7 @@ describe('Color Picker', () => {
     it('should call onColorChange handler when clicking a color swatch', () => {
       const onColorChange = jest.fn();
       const {container} = renderColorPicker({onColorChange: onColorChange});
-      const colorSwatch = container.querySelector('.wdc-color-picker--color-333333')!;
+      const colorSwatch = container.querySelector(`[color="${colors.blackPepper400}"]`)!;
 
       fireEvent.click(colorSwatch);
       expect(onColorChange).toHaveBeenCalledWith(colors.blackPepper400);
