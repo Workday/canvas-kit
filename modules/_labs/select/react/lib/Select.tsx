@@ -350,9 +350,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
         if (this.menuRef.current) {
           this.menuRef.current.focus();
         }
-      // We want fall-through here. Clicking the button while the menu is in
-      // the close or closing states should toggle the menu back on.
-      // eslint-disable-next-line no-fallthrough
+        this.toggleMenu(true);
+        break;
       case 'closed':
         this.toggleMenu(true);
         break;
