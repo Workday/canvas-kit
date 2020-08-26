@@ -53,4 +53,18 @@ describe('Text Area', () => {
       getTextArea().should('be.disabled');
     });
   });
+
+  context(`given the 'Placeholder' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components|Inputs/TextArea/React/Top Label', 'With Placeholder');
+    });
+
+    it('should pass accessibility checks', () => {
+      cy.checkA11y();
+    });
+
+    it('should render a placeholder text', () => {
+      getTextArea().should('have.attr', 'placeholder', 'Placeholder');
+    });
+  });
 });
