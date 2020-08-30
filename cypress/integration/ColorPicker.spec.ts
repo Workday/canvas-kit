@@ -139,15 +139,10 @@ describe('ColorPicker', () => {
         });
 
         context('when color reset is clicked', () => {
-          const color = '#ff5347';
-          let resetColor: string | undefined;
+          const resetColor = '#0875e1';
 
           beforeEach(() => {
-            getResetButton()
-              .then($button => {
-                resetColor = $button.find('[color]').attr('color');
-              })
-              .click();
+            getResetButton().click();
             getOpenButton().click();
           });
 
@@ -212,19 +207,15 @@ describe('ColorPicker', () => {
         });
 
         context('when color reset is clicked', () => {
-          let resetColor: string | undefined;
+          const resetColorValue = '0875e1';
 
           beforeEach(() => {
             getColorInput().focus();
-            getResetButton()
-              .then($button => {
-                resetColor = $button.find('[color]').attr('color');
-              })
-              .click();
+            getResetButton().click();
           });
 
           it('should set the color picker value to the reset color', () => {
-            getColorInput().should('have.value', resetColor!.slice(1));
+            getColorInput().should('have.value', resetColorValue);
           });
         });
       });
