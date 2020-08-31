@@ -67,15 +67,9 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
       const handleKeyDown = (event: React.KeyboardEvent) =>
         (event.key === 'Enter' || event.key === ' ') && onSelect(color);
 
-      const formatHex = (value: string) => {
-        return value.replace(/#/g, '').substring(0, 6);
-      };
-      const formattedColor = formatHex(color);
-
       return (
         <SwatchContainer
           key={index + '-' + color}
-          className={`wdc-color-picker--color-${formattedColor}`}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           tabIndex={0}

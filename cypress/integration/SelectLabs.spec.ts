@@ -353,6 +353,110 @@ describe('Select', () => {
     });
   });
 
+  context('given the "Disabled Options Test" story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Testing|React/Labs/Select', 'Disabled Options Test');
+    });
+
+    context('when the menu is opened', () => {
+      beforeEach(() => {
+        cy.findByLabelText('Label (Disabled Options)')
+          .focus()
+          .type('{downarrow}');
+      });
+
+      context('when the down arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{downarrow}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to first enabled option ("E-mail")', () => {
+            cy.findByLabelText('Label (Disabled Options)')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'E-mail');
+          });
+        });
+
+        context('when the up arrow key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().type('{uparrow}');
+          });
+
+          context('the menu', () => {
+            it('should retain assistive focus on the "E-mail" option since the previous option ("Carrier Pigeon", which also happens to be the first option) is disabled', () => {
+              cy.findByLabelText('Label (Disabled Options)')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAssistiveFocus)
+                .should('have.text', 'E-mail');
+            });
+          });
+        });
+
+        context('when the down arrow key is pressed 2 more times', () => {
+          beforeEach(() => {
+            cy.focused().type('{downarrow}{downarrow}');
+          });
+
+          context('the menu', () => {
+            it('should set assistive focus to the third option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
+              cy.findByLabelText('Label (Disabled Options)')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAssistiveFocus)
+                .should('have.text', 'Mail');
+            });
+          });
+
+          context('when the down arrow key is pressed 2 more times', () => {
+            beforeEach(() => {
+              cy.focused().type('{downarrow}{downarrow}');
+            });
+
+            context('the menu', () => {
+              it('should set assistive focus to the first option down ("Mobile Phone") since the second option down ("Telegram", which also happens to be the last option) is disabled', () => {
+                cy.findByLabelText('Label (Disabled Options)')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAssistiveFocus)
+                  .should('have.text', 'Mobile Phone');
+              });
+            });
+          });
+        });
+      });
+
+      context('when the Home key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{home}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to the first enabled option ("E-mail")', () => {
+            cy.findByLabelText('Label (Disabled Options)')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'E-mail');
+          });
+        });
+      });
+
+      context('when the End key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{end}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to the last enabled option ("Mobile Phone")', () => {
+            cy.findByLabelText('Label (Disabled Options)')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'Mobile Phone');
+          });
+        });
+      });
+    });
+  });
+
   context(`given the "Scrollable" story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Labs|Select/React/Top Label', 'Scrollable');
