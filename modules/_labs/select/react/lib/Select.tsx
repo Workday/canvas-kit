@@ -118,6 +118,45 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     return -1;
   };
 
+  // This helper focuses the next enabled option given a startIndex and a
+  // direction. If startIndex refers to an enabled option, we focus that option
+  // immediately. Otherwise, we advance `direction` number of spaces in the options
+  // array and check again if that index refers to an enabled option.
+  //
+  // This is useful for manipulating focus using the keyboard where pressing the
+  // Up/Down key means "focus the first enabled option above/below the currently
+  // focused option", or pressing the Home/End key means "focus the first/last
+  // enabled option on the menu."
+  private focusNextEnabledOption = (startIndex: number, direction: number) => {
+    // Ensure direction is non-zero
+    if (direction === 0) {
+      return;
+    }
+
+    const numOptions = this.normalizedOptions.length;
+
+    let currentIndex = startIndex;
+
+    // Check if currentIndex refers to an enabled option. If not, keep moving
+    // the index in the prescribed direction until we find an enabled option.
+    while (
+      currentIndex >= 0 &&
+      currentIndex < numOptions &&
+      this.normalizedOptions[currentIndex].disabled
+    ) {
+      currentIndex += direction;
+    }
+    // Update the focused index only if currentIndex is inbounds and
+    // refers to an enabled option
+    if (
+      currentIndex >= 0 &&
+      currentIndex < numOptions &&
+      !this.normalizedOptions[currentIndex].disabled
+    ) {
+      this.setState({focusedOptionIndex: currentIndex});
+    }
+  };
+
   private updateStateFromValue = () => {
     this.setState({
       focusedOptionIndex: getCorrectedIndexByValue(this.normalizedOptions, this.props.value),
@@ -329,7 +368,6 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.state;
 
     let isShortcut = false;
-    let nextFocusedIndex = 0;
 
     // Check for type-ahead first
     if (event.key.length === 1 && event.key.match(/\S/)) {
@@ -346,25 +384,17 @@ export default class Select extends React.Component<SelectProps, SelectState> {
             this.toggleMenu(true);
           } else {
             const direction = event.key === 'ArrowUp' || event.key === 'Up' ? -1 : 1;
-            let nextIndex = focusedOptionIndex + direction;
-            while (
-              nextIndex < numOptions &&
-              nextIndex >= 0 &&
-              this.normalizedOptions[nextIndex].disabled
-            ) {
-              nextIndex += direction;
-            }
-            nextFocusedIndex =
-              nextIndex < 0 ? 0 : nextIndex >= numOptions ? numOptions - 1 : nextIndex;
-            this.setState({focusedOptionIndex: nextFocusedIndex});
+            const startIndex = focusedOptionIndex + direction;
+            this.focusNextEnabledOption(startIndex, direction);
           }
           break;
 
         case 'Home':
         case 'End':
           isShortcut = true;
-          nextFocusedIndex = event.key === 'Home' ? 0 : numOptions - 1;
-          this.setState({focusedOptionIndex: nextFocusedIndex});
+          const direction = event.key === 'Home' ? 1 : -1;
+          const startIndex = event.key === 'Home' ? 0 : numOptions - 1;
+          this.focusNextEnabledOption(startIndex, direction);
           break;
 
         case 'Tab':

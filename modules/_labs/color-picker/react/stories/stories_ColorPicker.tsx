@@ -1,7 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
 import {colors} from '@workday/canvas-kit-react-core';
@@ -11,10 +10,13 @@ import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker} from '@workday/canvas-kit-labs-react-color-picker';
 import README from '../README.md';
 
+// eslint-disable-next-line no-empty-function
+const noop = () => {};
+
 storiesOf('Labs|Color Picker/React', module)
   .addParameters({component: ColorPicker})
   .addDecorator(withReadme(README))
-  .add('Default', () => <ColorPicker onColorChange={color => action('color-change')(color)} />)
+  .add('Default', () => <ColorPicker onColorChange={noop} />)
   .add('Icon Button Popup', () => {
     const [isOpen, setOpen] = React.useState(false);
     const [color, setColor] = React.useState('');
@@ -24,7 +26,6 @@ storiesOf('Labs|Color Picker/React', module)
 
     const handleSubmit = React.useCallback(
       (submitColor: string) => {
-        action('color-change')(submitColor);
         setColor(submitColor.toUpperCase());
         setOpen(false);
       },
