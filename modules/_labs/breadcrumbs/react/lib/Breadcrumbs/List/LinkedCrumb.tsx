@@ -23,14 +23,14 @@ export const LinkedCrumb = ({
   children,
   ...props
 }: LinkedCrumbProps) => {
+  const ref = React.useRef<HTMLAnchorElement>(null);
   const {
     isTooltipOpen,
     openTooltip,
     closeTooltip,
     truncateStyles,
     tooltipProps,
-  } = useTruncateTooltip(maxWidth);
-  const ref = React.useRef<HTMLAnchorElement>(null);
+  } = useTruncateTooltip(maxWidth, ref);
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();

@@ -13,7 +13,7 @@ interface DropdownProps extends Pick<DropdownButtonProps, 'buttonIcon'> {
 export const Dropdown = ({buttonAriaLabel, buttonIcon}: DropdownProps) => {
   // refs
   const buttonRef = React.useRef<HTMLButtonElement>(null);
-  const activeDropdownItemRef = React.useRef<HTMLLIElement>(null);
+  const activeDropdownItemRef = React.useRef<HTMLAnchorElement>(null);
   // behaviors
   const {dropdownButtonProps, dropdownMenuProps, popperProps} = useDropdown(
     activeDropdownItemRef,

@@ -52,8 +52,12 @@ export const Default = () => {
 
 export const Collapsible = () => {
   return (
-    <Breadcrumbs.Nav maxWidth={800}>
-      <Breadcrumbs.CollapsibleList aria-label="breadcrumbs" expanderAriaLabel="more links">
+    <Breadcrumbs.Nav>
+      <Breadcrumbs.CollapsibleList
+        maxWidth={800}
+        aria-label="breadcrumbs"
+        expanderAriaLabel="more links"
+      >
         <Breadcrumbs.ListItem>
           <Breadcrumbs.LinkedCrumb
             onAction={href => alert(href)}

@@ -17,7 +17,7 @@ export const useFocusActiveItemElement = <E extends HTMLElement>(
 };
 
 export const useDropdown = (
-  activeDropdownItemRef: React.RefObject<HTMLLIElement>,
+  activeDropdownItemRef: React.RefObject<HTMLAnchorElement>,
   buttonRef: React.RefObject<HTMLButtonElement>,
   buttonId: string = ''
 ) => {

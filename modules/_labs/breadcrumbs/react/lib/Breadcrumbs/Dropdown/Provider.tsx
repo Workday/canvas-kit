@@ -13,24 +13,22 @@ export interface DropdownContext {
   activeDropdownItem: Breadcrumb;
   dropdownItems: Breadcrumb[];
   setActiveDropdownItem: React.Dispatch<React.SetStateAction<Breadcrumb>>;
-  setDropdownItems: React.Dispatch<React.SetStateAction<Breadcrumb[]>>;
 }
 
 export interface DropdownProviderProps {
   children: React.ReactNode;
+  items?: Breadcrumb[];
 }
 
 export const DropdownContext = React.createContext({} as DropdownContext);
 
-export const DropdownProvider = ({children}: DropdownProviderProps) => {
-  const [dropdownItems, setDropdownItems] = React.useState<Breadcrumb[]>([]);
+export const DropdownProvider = ({items = [] as Breadcrumb[], children}: DropdownProviderProps) => {
   const [activeDropdownItem, setActiveDropdownItem] = React.useState(initialActiveItem);
 
   const context = {
     activeDropdownItem,
-    dropdownItems,
+    dropdownItems: items,
     setActiveDropdownItem,
-    setDropdownItems,
   };
 
   return <DropdownContext.Provider value={context}>{children}</DropdownContext.Provider>;

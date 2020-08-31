@@ -1,18 +1,18 @@
-import React, {Children, useLayoutEffect} from 'react';
+import React, {Children, useLayoutEffect, useState, useEffect} from 'react';
 import {CSSObject} from '@emotion/core';
 
 import {LinkedCrumb} from './LinkedCrumb';
 import {Breadcrumb} from '../types';
 
-export const useDropdown = <E extends HTMLElement>(listEl: React.RefObject<E>, maxWidth = 0) => {
-  const [shouldShowDropdown, setShouldShowDropdown] = React.useState<boolean>(false);
+export const useCollapse = <E extends HTMLElement>(listEl: React.RefObject<E>, maxWidth = 0) => {
+  const [shouldCollapseList, setShouldCollapseList] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     const listWidth = listEl.current?.clientWidth || 0;
-    setShouldShowDropdown(listWidth > maxWidth);
+    setShouldCollapseList(listWidth > maxWidth);
   }, [listEl, maxWidth]);
 
-  return {shouldShowDropdown};
+  return {shouldCollapseList};
 };
 
 const getBreadcrumbLink = (breadcrumb: React.ReactElement) => {
@@ -21,31 +21,31 @@ const getBreadcrumbLink = (breadcrumb: React.ReactElement) => {
   })[0];
 };
 
-const buildDropdownList = (
+const buildCollapsedList = (
   list: Breadcrumb[],
   containerWidth: number,
   maxWidth: number,
-  dropdownList: Breadcrumb[] = []
+  collapsedList: Breadcrumb[] = []
 ): Breadcrumb[] => {
   // TODO: Calculate expander width dynamically
   const EXPANDER_WIDTH = 66;
   // recurse over the breadcrumb items until the containerWidth is less than or equal to the maxWidth
   if (!list.length || containerWidth + EXPANDER_WIDTH <= maxWidth) {
-    return dropdownList;
+    return collapsedList;
   }
 
   const [firstCrumb, ...restList] = list;
-  const updatedDropdownList = dropdownList.concat(firstCrumb);
+  const updatedCollapsedList = collapsedList.concat(firstCrumb);
   const adjustedWidth = containerWidth - firstCrumb.width;
-  return buildDropdownList(restList, adjustedWidth, maxWidth, updatedDropdownList);
+  return buildCollapsedList(restList, adjustedWidth, maxWidth, updatedCollapsedList);
 };
 
-export const useBuildDropdown = <E extends HTMLElement>(
+export const useBuildCollapsedList = <E extends HTMLElement>(
   listEl: React.RefObject<E>,
   children: React.ReactNode,
-  maxWidth = 0
+  maxWidth: number
 ) => {
-  const [dropdownItems, setDropdownItems] = React.useState<Breadcrumb[]>([]);
+  const [collapsedItems, setCollapsedItems] = useState<Breadcrumb[]>([]);
 
   useLayoutEffect(() => {
     const listItemNodes = listEl.current ? listEl.current.querySelectorAll('li') : [];
@@ -57,7 +57,7 @@ export const useBuildDropdown = <E extends HTMLElement>(
       const listItemNode = listItemNodes[index];
 
       listItems.push({
-        index: index,
+        index: index, // TODO: use unique identifiers instead of indices
         link: breadcrumbLink ? breadcrumbLink.props.href : '',
         text: listItemNode ? listItemNode.innerText : '',
         width: listItemNode ? listItemNode.clientWidth : 0,
@@ -67,17 +67,26 @@ export const useBuildDropdown = <E extends HTMLElement>(
 
     // don't collapse the root breadcrumb
     const collapsibleListItems = listItems.slice(1);
-    const dropdownList = buildDropdownList(collapsibleListItems, containerWidth, maxWidth);
-    setDropdownItems(dropdownList);
+    const collaspedList = buildCollapsedList(collapsibleListItems, containerWidth, maxWidth);
+    setCollapsedItems(collaspedList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [maxWidth]);
 
-  const dropdownItemIndices = dropdownItems.map(child => child.index);
-  return {dropdownItems, dropdownItemIndices};
+  const collapsedItemIndices = collapsedItems.map(child => child.index);
+  return {collapsedItems, collapsedItemIndices};
 };
 
-export const useTruncateTooltip = (maxWidth: number | string = 350) => {
-  const [isTooltipOpen, setIsTooltipOpen] = React.useState<boolean>(false);
+export const useTruncateTooltip = (
+  maxWidth: number | string = 350,
+  ref?: React.RefObject<HTMLSpanElement>
+) => {
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const [shouldShowTooltip, setShouldShowTooltip] = useState(false);
+  useEffect(() => {
+    if (ref?.current) {
+      setShouldShowTooltip(ref.current.scrollWidth > ref.current.clientWidth);
+    }
+  }, [ref]);
 
   const truncateStyles: CSSObject = {
     display: 'inline-block',
@@ -103,5 +112,12 @@ export const useTruncateTooltip = (maxWidth: number | string = 350) => {
     role: 'tooltip',
   };
 
-  return {truncateStyles, isTooltipOpen, openTooltip, closeTooltip, tooltipProps};
+  return {
+    truncateStyles,
+    isTooltipOpen,
+    openTooltip,
+    closeTooltip,
+    shouldShowTooltip,
+    tooltipProps,
+  };
 };

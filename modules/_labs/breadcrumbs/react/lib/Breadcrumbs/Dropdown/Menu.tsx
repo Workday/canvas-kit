@@ -20,7 +20,7 @@ import {DropdownMenuItemLink} from './MenuItemLink';
 export interface DropdownMenuProps
   extends React.HTMLAttributes<HTMLUListElement>,
     Pick<DropdownContext, 'activeDropdownItem' | 'dropdownItems' | 'setActiveDropdownItem'> {
-  activeDropdownItemRef: React.RefObject<HTMLLIElement>;
+  activeDropdownItemRef: React.RefObject<HTMLAnchorElement>;
   resetFocus: () => void;
   toggleActiveItemUp: () => void;
   toggleActiveItemDown: () => void;
@@ -59,7 +59,7 @@ const Menu = (props: React.HTMLAttributes<HTMLUListElement>) => {
 export const DropdownMenu = ({
   activeDropdownItemRef,
   activeDropdownItem,
-  dropdownItems,
+  dropdownItems = [],
   resetFocus,
   setActiveDropdownItem,
   toggleActiveItemDown,
@@ -107,10 +107,11 @@ export const DropdownMenu = ({
             <DropdownMenuItem
               onKeyUp={handleItemKeyUp}
               onKeyDown={e => handleItemKeyDown(e, item)}
-              ref={isFocused ? activeDropdownItemRef : null}
               key={i}
             >
-              <DropdownMenuItemLink href={item.link}>{item.text}</DropdownMenuItemLink>
+              <DropdownMenuItemLink ref={isFocused ? activeDropdownItemRef : null} href={item.link}>
+                {item.text}
+              </DropdownMenuItemLink>
             </DropdownMenuItem>
           );
         })}

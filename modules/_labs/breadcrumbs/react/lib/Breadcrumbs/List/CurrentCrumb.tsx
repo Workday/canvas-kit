@@ -18,9 +18,10 @@ export const CurrentCrumb = ({children, maxWidth, ...elemProps}: CurrentCrumbPro
     isTooltipOpen,
     openTooltip,
     closeTooltip,
+    shouldShowTooltip,
     truncateStyles,
     tooltipProps,
-  } = useTruncateTooltip(maxWidth);
+  } = useTruncateTooltip(maxWidth, ref);
 
   const listStyles = css({
     display: 'flex',
@@ -37,11 +38,11 @@ export const CurrentCrumb = ({children, maxWidth, ...elemProps}: CurrentCrumbPro
       <span
         ref={ref}
         css={crumbTextStyles}
-        tabIndex={0}
         onMouseEnter={openTooltip}
         onMouseLeave={closeTooltip}
         onFocus={openTooltip}
         onBlur={closeTooltip}
+        {...(shouldShowTooltip && {tabIndex: 0})}
       >
         {children}
       </span>

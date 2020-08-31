@@ -1,12 +1,11 @@
 import React, {Children, useRef} from 'react';
 // local components
-import {BreadcrumbsContext} from '../Provider';
-import {DropdownContext} from '../Dropdown/Provider';
+import {DropdownProvider} from '../Dropdown/Provider';
 import {Dropdown} from '../Dropdown';
 import {BreadcrumbsListItem} from './ListItem';
 import {BreadcrumbsList} from './index';
 // hooks
-import {useBuildDropdown, useDropdown} from './hooks';
+import {useBuildCollapsedList, useCollapse} from './hooks';
 import {DropdownButtonProps} from '../Dropdown/Button';
 
 const parseListItems = (children: React.ReactNode) => {
@@ -20,40 +19,35 @@ export interface CollapsibleListProps
   extends React.HTMLAttributes<HTMLUListElement>,
     Pick<DropdownButtonProps, 'buttonIcon'> {
   expanderAriaLabel: string;
+  maxWidth: number;
 }
 
 export const CollapsibleList = ({
   children,
   buttonIcon,
   expanderAriaLabel,
+  maxWidth,
   ...props
 }: CollapsibleListProps) => {
-  // context
-  const dropdownContext = React.useContext(DropdownContext);
-  const listContext = React.useContext(BreadcrumbsContext);
   // refs
   const listRef = useRef<HTMLUListElement>(null);
   // behaviors
-  const {shouldShowDropdown} = useDropdown(listRef, listContext.maxWidth);
-  const {dropdownItems, dropdownItemIndices} = useBuildDropdown(
-    listRef,
-    children,
-    listContext.maxWidth
-  );
-
-  dropdownContext.setDropdownItems(dropdownItems);
+  const {shouldCollapseList} = useCollapse(listRef, maxWidth);
+  const {collapsedItems, collapsedItemIndices} = useBuildCollapsedList(listRef, children, maxWidth);
 
   const {rootItem, collapsibleItems, currentItem} = parseListItems(children);
   return (
     <BreadcrumbsList ref={listRef} {...props}>
       {rootItem}
-      {shouldShowDropdown && (
+      {shouldCollapseList && (
         <BreadcrumbsListItem>
-          <Dropdown buttonAriaLabel={expanderAriaLabel} buttonIcon={buttonIcon} />
+          <DropdownProvider items={collapsedItems}>
+            <Dropdown buttonAriaLabel={expanderAriaLabel} buttonIcon={buttonIcon} />
+          </DropdownProvider>
         </BreadcrumbsListItem>
       )}
       {collapsibleItems.map((item, i) => {
-        if (dropdownItemIndices.indexOf(i + 1) !== -1) {
+        if (collapsedItemIndices.indexOf(i + 1) !== -1) {
           return;
         }
         return item;
