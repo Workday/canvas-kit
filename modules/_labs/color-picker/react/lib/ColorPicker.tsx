@@ -164,7 +164,6 @@ const ColorPicker = ({
       width={250}
       padding={Popup.Padding.s}
       transformOrigin={transformOrigin}
-      data-testid="canvas-color-picker"
       {...elemProps}
     >
       {onColorReset && resetColor && (
