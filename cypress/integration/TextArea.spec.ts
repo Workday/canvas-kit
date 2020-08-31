@@ -66,5 +66,10 @@ describe('Text Area', () => {
     it('should render a placeholder text', () => {
       getTextArea().should('have.attr', 'placeholder', 'Placeholder');
     });
+
+    it('should reflect the text typed', () => {
+      getTextArea().type('Test');
+      getTextArea().should('have.value', 'Test');
+    });
   });
 });

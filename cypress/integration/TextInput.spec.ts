@@ -66,5 +66,10 @@ describe('TextInput', () => {
     it('should render a placeholder text', () => {
       getTextInput().should('have.attr', 'placeholder', 'Placeholder');
     });
+
+    it('should reflect the text typed', () => {
+      getTextInput().type('Test');
+      getTextInput().should('have.value', 'Test');
+    });
   });
 });
