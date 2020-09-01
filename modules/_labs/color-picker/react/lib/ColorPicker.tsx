@@ -3,6 +3,7 @@ import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {Popup} from '@workday/canvas-kit-react-popup';
+import {TransformOrigin} from '@workday/canvas-kit-react-common';
 import * as React from 'react';
 import FormField from '@workday/canvas-kit-react-form-field';
 import styled from '@emotion/styled';
@@ -57,35 +58,76 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default 'Reset'
    */
   resetLabel?: string;
+  /**
+   * The origin from which the Color Picker will animate.
+   * @default {horizontal: 'center', vertical: 'top'}
+   */
+  transformOrigin?: TransformOrigin;
 }
 
-const defaultColors = [
-  colors.cinnamon400,
-  colors.peach400,
-  colors.chiliMango400,
-  colors.cantaloupe400,
-  colors.sourLemon400,
-  colors.juicyPear400,
-  colors.kiwi400,
-  colors.greenApple400,
+const defaultColorSet = [
+  colors.blueberry600,
+  colors.grapeSoda600,
+  colors.pomegranate600,
+  colors.cinnamon600,
+  colors.cantaloupe600,
+  colors.sourLemon600,
+  colors.greenApple600,
+  colors.jewel600,
 
-  colors.watermelon400,
-  colors.jewel400,
-  colors.toothpaste400,
+  colors.blueberry500,
+  colors.grapeSoda500,
+  colors.pomegranate500,
+  colors.cinnamon500,
+  colors.cantaloupe500,
+  colors.sourLemon500,
+  colors.greenApple500,
+  colors.jewel500,
+
   colors.blueberry400,
-  colors.plum400,
-  colors.berrySmoothie400,
-  colors.blackberry400,
-  colors.islandPunch400,
-
   colors.grapeSoda400,
   colors.pomegranate400,
-  colors.fruitPunch400,
-  colors.rootBeer400,
-  colors.toastedMarshmallow400,
-  colors.licorice400,
-  colors.cappuccino400,
+  colors.cinnamon400,
+  colors.cantaloupe400,
+  colors.sourLemon400,
+  colors.greenApple400,
+  colors.jewel400,
+
+  colors.blueberry300,
+  colors.grapeSoda300,
+  colors.pomegranate300,
+  colors.cinnamon300,
+  colors.cantaloupe300,
+  colors.sourLemon300,
+  colors.greenApple300,
+  colors.jewel300,
+
+  colors.blueberry200,
+  colors.grapeSoda200,
+  colors.pomegranate200,
+  colors.cinnamon200,
+  colors.cantaloupe200,
+  colors.sourLemon200,
+  colors.greenApple200,
+  colors.jewel200,
+
+  colors.blueberry100,
+  colors.grapeSoda100,
+  colors.pomegranate100,
+  colors.cinnamon100,
+  colors.cantaloupe100,
+  colors.sourLemon100,
+  colors.greenApple100,
+  colors.jewel100,
+
+  colors.blackPepper600,
   colors.blackPepper400,
+  colors.blackPepper300,
+  colors.blackPepper100,
+  colors.frenchVanilla500,
+  colors.frenchVanilla400,
+  colors.frenchVanilla200,
+  colors.frenchVanilla100,
 ];
 
 const ColorInputWrapper = styled('form')({
@@ -120,7 +162,7 @@ const isCustomColor = (colors: string[], hexCode?: string) => {
 };
 
 const ColorPicker = ({
-  colorSet = defaultColors,
+  colorSet = defaultColorSet,
   customHexInputLabel = 'Custom Hex Color',
   submitLabel = 'Submit',
   onColorChange,
@@ -130,6 +172,7 @@ const ColorPicker = ({
   resetColor,
   value = '',
   showCustomHexInput = false,
+  transformOrigin,
   ...elemProps
 }: ColorPickerProps) => {
   const [validHexValue, setValidHexValue] = React.useState('');
@@ -153,7 +196,12 @@ const ColorPicker = ({
   };
 
   return (
-    <Popup width={250} padding={Popup.Padding.s} data-testid="canvas-color-picker" {...elemProps}>
+    <Popup
+      width={250}
+      padding={Popup.Padding.s}
+      transformOrigin={transformOrigin}
+      {...elemProps}
+    >
       {onColorReset && resetColor && (
         <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}
@@ -179,4 +227,5 @@ const ColorPicker = ({
   );
 };
 
+ColorPicker.defaultColorSet = defaultColorSet;
 export default ColorPicker;

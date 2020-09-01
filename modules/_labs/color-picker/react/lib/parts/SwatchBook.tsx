@@ -19,14 +19,12 @@ const accessibilityBorder = `${colors.frenchVanilla100} 0px 0px 0px 2px, ${color
 const SwatchContainer = styled('div')<SwatchContainerProps>(
   {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
     width: 20,
     height: 20,
     cursor: 'pointer',
     borderRadius: borderRadius.s,
     transition: 'box-shadow 120ms ease',
+    margin: `0px ${spacing.xxs} ${spacing.xxs} 0px`,
 
     '&:hover': {
       boxShadow: accessibilityBorder,
@@ -55,9 +53,9 @@ const SwatchContainer = styled('div')<SwatchContainerProps>(
 );
 
 const Container = styled('div')({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(8, auto)',
-  gridGap: spacing.xxs,
+  display: 'flex',
+  flexWrap: 'wrap',
+  margin: `0px -${spacing.xxs} -${spacing.xxs} 0px`,
 });
 
 export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
@@ -69,15 +67,9 @@ export const SwatchBook = ({colors, value, onSelect}: SwatchBookProps) => (
       const handleKeyDown = (event: React.KeyboardEvent) =>
         (event.key === 'Enter' || event.key === ' ') && onSelect(color);
 
-      const formatHex = (value: string) => {
-        return value.replace(/#/g, '').substring(0, 6);
-      };
-      const formattedColor = formatHex(color);
-
       return (
         <SwatchContainer
           key={index + '-' + color}
-          className={`wdc-color-picker--color-${formattedColor}`}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           tabIndex={0}
