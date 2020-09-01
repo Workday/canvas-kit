@@ -381,10 +381,12 @@ describe('Select', () => {
 
             context('when the menu is re-opened AFTER it has fully closed', () => {
               beforeEach(() => {
-                // Wait a short period of time to give the menu time to fully close
-                // (so we don't interrupt the menu's closing animation and cause it
-                // to re-open while it's in the middle of closing)
-                cy.wait(1000);
+                // Wait for menu to fully close before we open it again (so we
+                // don't interrupt the menu's closing animation and cause it to
+                // re-open while it's in the middle of closing)
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .should('not.exist');
                 cy.findByLabelText('Label')
                   .focus()
                   .type('{downarrow}');
