@@ -1,15 +1,11 @@
 import * as h from '../helpers';
 
 const getColorInput = () => cy.get('[type="text"]');
-
-const getColorPickerPopup = () => cy.get('[role=dialog]');
-
-const expandHex = (hex: string) => {
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  return hex.replace(shorthandRegex, function(m: string, r: string, g: string, b: string) {
-    return r + r + g + g + b + b;
-  });
-};
+const getColorPickerPopup = () => cy.findByRole('dialog');
+const getOpenButton = () => cy.findByLabelText('Select Background Color');
+const getResetButton = () => cy.contains('button', 'Reset');
+const getSubmitButton = () => cy.findByLabelText('Submit');
+const getSwatch = (color: string) => cy.get(`div[color="${color}"]`);
 
 const colorInputStory = 'Components|Inputs/Color Picker/Color Input/React/Top Label';
 const colorPreviewStory = 'Components|Inputs/Color Picker/Color Preview/React/Top Label';
@@ -117,7 +113,7 @@ describe('ColorPicker', () => {
     context('when the IconButton is clicked', () => {
       beforeEach(() => {
         h.stories.load(colorPickerStory, 'Icon Button Popup');
-        cy.get('button').click();
+        getOpenButton().click();
       });
 
       it('should pass accessibility checks', () => {
@@ -129,48 +125,47 @@ describe('ColorPicker', () => {
       });
 
       context('when a swatch is clicked', () => {
-        const color = '8660d1';
+        const color = '#ff5347';
+
         beforeEach(() => {
-          cy.get(`.wdc-color-picker--color-${color}`).click();
-          cy.get('button').click();
+          getSwatch(color).click();
+          getOpenButton().click();
         });
 
         it('should have check icon', () => {
-          cy.get(`.wdc-color-picker--color-${color}`)
+          getSwatch(color)
             .find('.wd-icon')
             .should('exist');
         });
+
+        context('when color reset is clicked', () => {
+          const resetColor = '#0875e1';
+
+          beforeEach(() => {
+            getResetButton().click();
+            getOpenButton().click();
+          });
+
+          it('should set the color picker value to the reset color', () => {
+            getSwatch(resetColor!)
+              .find('.wd-icon')
+              .should('exist');
+          });
+        });
       });
 
-      context('when color reset is clicked', () => {
-        beforeEach(() => {
-          cy.get(`.wdc-color-picker--color-8660d1`).click();
-          cy.get('button').click();
-          cy.get('[data-testid="color-picker-reset"]').click();
-        });
+      context('when a custom color is submitted', () => {
+        const customColor = '#123123';
 
-        it('should set the color picker value to the reset color', () => {
-          cy.get('button').click();
-          cy.get(`.wdc-color-picker--color-0875e1`)
-            .find('.wd-icon')
-            .should('exist');
-        });
-      });
-
-      context('when custom color is entered', () => {
         beforeEach(() => {
           getColorInput().focus();
+          getColorInput().type(customColor);
+          getSubmitButton().click();
         });
 
         it('should set the selected color to input value', () => {
-          getColorInput().type('#123123');
-          getColorPickerPopup()
-            .find('button')
-            .last()
-            .click();
-          cy.get('button').click();
-          getColorInput()
-            .parent()
+          getOpenButton().click();
+          getSwatch(customColor)
             .find('.wd-icon')
             .should('exist');
         });
@@ -194,32 +189,34 @@ describe('ColorPicker', () => {
       });
 
       context('when a swatch is clicked', () => {
-        const color = '8660d1';
+        const color = '#ff5347';
+
         beforeEach(() => {
-          cy.get(`.wdc-color-picker--color-${color}`).click();
+          getSwatch(color).click();
         });
 
         it('should update the color input to the swatch color', () => {
-          getColorInput().should('have.value', color.toUpperCase());
+          getColorInput().should('have.value', color.slice(1).toUpperCase());
         });
 
         it('should have check icon', () => {
-          getColorInput().click();
-          cy.get(`.wdc-color-picker--color-${color}`)
+          getColorInput().focus();
+          getSwatch(color)
             .find('.wd-icon')
             .should('exist');
         });
-      });
 
-      context('when color reset is clicked', () => {
-        beforeEach(() => {
-          cy.get(`.wdc-color-picker--color-8660d1`).click();
-          getColorInput().click();
-          cy.get('[data-testid="color-picker-reset"]').click();
-        });
+        context('when color reset is clicked', () => {
+          const resetColorValue = '0875e1';
 
-        it('should set the color picker value to the reset color', () => {
-          getColorInput().should('have.value', '0875e1');
+          beforeEach(() => {
+            getColorInput().focus();
+            getResetButton().click();
+          });
+
+          it('should set the color picker value to the reset color', () => {
+            getColorInput().should('have.value', resetColorValue);
+          });
         });
       });
     });
