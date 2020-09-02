@@ -3,14 +3,15 @@
 import {jsx} from '@emotion/core';
 import withReadme from 'storybook-readme/with-readme';
 import {spacing} from '@workday/canvas-kit-react-core';
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {Tabs, TabList, Tab, TabPanel, TabPanels} from '../index';
 import README from '../README.md';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Labs|Tabs/React',
   component: Tabs,
   decorators: [withReadme(README)],
-};
+});
 
 export const Default = () => (
   <Tabs>
