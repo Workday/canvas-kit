@@ -1,6 +1,6 @@
 import SVGInjector from 'svg-injector';
 import toSlug from 'to-slug-case';
-import canvasColors from '@workday/canvas-colors-web';
+import canvasColors, {iconColors} from '@workday/canvas-colors-web';
 import {appendStyle, getHue, getColor, pickForegroundColor} from './utils';
 
 const cdnUrl = 'https://design.workdaycdn.com/beta/assets/web-icons';
@@ -38,7 +38,7 @@ const categories = {
     colorables: {
       [colorableKeys.color]: getColorableFn(
         ['.wd-icon-fill', '.wd-icon-accent'],
-        canvasColors.primary.iconStandard
+        iconColors.standard
       ),
       [colorableKeys.fill]: getColorableFn(['.wd-icon-fill']),
       [colorableKeys.accent]: getColorableFn(['.wd-icon-accent']),
@@ -196,11 +196,7 @@ function styleSystemIconHovers(selector, iconRoot = document) {
 
   // Style default hovers
   colorIconHoverClasses(hoverableSelector, ['.wd-icon-background'], 'transparent');
-  colorIconHoverClasses(
-    hoverableSelector,
-    ['.wd-icon-accent', '.wd-icon-fill'],
-    canvasColors.primary.iconHover
-  );
+  colorIconHoverClasses(hoverableSelector, ['.wd-icon-accent', '.wd-icon-fill'], iconColors.hover);
 
   // Style individual hovers
   const hoverableSystemIcons = iconRoot.querySelectorAll(hoverableSelector);

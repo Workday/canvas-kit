@@ -1,6 +1,12 @@
 import * as React from 'react';
-import {styled, Themeable, ContentDirection} from '@workday/canvas-kit-labs-react-core';
-import {expandHex, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react-common';
+import {
+  expandHex,
+  GrowthBehavior,
+  ErrorType,
+  styled,
+  Themeable,
+  ContentDirection,
+} from '@workday/canvas-kit-react-common';
 import {colors, spacing, type, inputColors} from '@workday/canvas-kit-react-core';
 import TextInput, {TextInputProps} from '@workday/canvas-kit-react-text-input';
 import {ColorSwatch} from './parts/ColorSwatch';
@@ -10,7 +16,7 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
    * The value of the ColorInput.
    * @default ''
    */
-  value: string;
+  value?: string;
   /**
    * If true, show a checkmark in the swatch tile when a custom hex color is entered in the ColorInput.
    * @default false
@@ -20,7 +26,7 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
    * The placeholder text of the ColorInput.
    * @default FFFFFF
    */
-  placeholder: string;
+  placeholder?: string;
   /**
    * The type of error associated with the ColorInput (if applicable).
    */
@@ -57,7 +63,7 @@ const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'gro
   }),
   ({theme}) => ({
     paddingLeft:
-      theme.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */',
+      theme.canvas.direction === ContentDirection.LTR ? '46px' : 'calc(100% - 86px) /* @noflip */',
     // We're using @noflip because ColorInput should stay LTR, therefore, we need to adjust the padding using ContentDirection, not using rtl-css-js.
   })
 );
@@ -85,7 +91,7 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
     color: disabled ? inputColors.disabled.text : undefined,
   }),
   ({theme}) => ({
-    left: theme.direction === ContentDirection.LTR ? '36px' : '88px',
+    left: theme.canvas.direction === ContentDirection.LTR ? '36px' : '88px',
     //    - LTR -> left: 36px;
     //    - RTL -> right: 88px;
     //
@@ -104,21 +110,16 @@ const SwatchTile = styled(ColorSwatch)({
 });
 
 export default class ColorInput extends React.Component<ColorInputProps> {
-  static defaultProps = {
-    value: '',
-    placeholder: 'FFFFFF',
-  };
-
   public render() {
     // TODO: Standardize on prop spread location (see #150)
     const {
+      placeholder = 'FFFFFF',
+      value = '',
       showCheck,
-      value,
       onChange,
       onValidColorChange,
       inputRef,
       disabled,
-      placeholder,
       error,
       grow,
       ...elemProps
@@ -132,7 +133,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           inputRef={inputRef}
           onChange={this.handleChange}
           type="text"
-          placeholder={placeholder}
+          placeholder={value ? undefined : placeholder}
           value={formattedValue}
           error={error}
           spellCheck={false}
@@ -145,7 +146,9 @@ export default class ColorInput extends React.Component<ColorInputProps> {
           showCheck={showCheck}
           color={this.isValidHex(formattedValue) ? `#${formattedValue}` : ''}
         />
-        <PoundSignPrefix disabled={disabled}>#</PoundSignPrefix>
+        <PoundSignPrefix aria-hidden={true} disabled={disabled}>
+          #
+        </PoundSignPrefix>
       </ColorInputContainer>
     );
   }

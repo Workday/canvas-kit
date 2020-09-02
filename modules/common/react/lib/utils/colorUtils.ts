@@ -1,4 +1,5 @@
 import {colors} from '@workday/canvas-kit-react-core';
+import chroma from 'chroma-js';
 
 // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
 export const expandHex = (hex: string) => {
@@ -8,35 +9,42 @@ export const expandHex = (hex: string) => {
   });
 };
 
-const hexToRgb = (hex: string) => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(expandHex(hex));
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-};
+// Used to as a fallback to determine foreground color
+const colorPriority = [
+  colors.frenchVanilla100,
+  colors.blackPepper300,
+  colors.blackPepper400,
+  colors.blackPepper500,
+  colors.blackPepper600,
+];
 
 /**
  *
- * Chooses luminance color depending on the rgb value of the background color.
- * Eventually should be replaced by by Chroma 2.0
+ * Chooses foreground color with accesible contrast against background. If contrast ratio
+ * is greater than 4.5:1, chooses provided light or dark color (favoring light color). If neither
+ * have a high enough contrast ratio, picks the first color of the following that meets 4.5:1 or higher:
+ * [frenchVanilla100, blackPepper300, blackPepper400, blackPepper500, blackPepper600]
+ * (https://www.w3.org/TR/WCAG20-TECHS/G18.html)
  */
 export const pickForegroundColor = (
   background: string,
-  darkColor: string = colors.blackPepper600,
-  lightColor: string = colors.frenchVanilla100
+  darkColor?: string,
+  lightColor?: string
 ) => {
-  const rgbColor = hexToRgb(background);
-  if (rgbColor) {
-    const r: number = rgbColor.r;
-    const g: number = rgbColor.g;
-    const b: number = rgbColor.b;
-    /** Based on : https://www.w3.org/TR/WCAG20-TECHS/G18.html */
-    return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? darkColor : lightColor;
-  } else {
-    return;
+  if (chroma.valid(background)) {
+    if (lightColor && chroma.contrast(background, lightColor) >= 4.5) {
+      return lightColor;
+    } else if (darkColor && chroma.contrast(background, darkColor) >= 4.5) {
+      return darkColor;
+    } else {
+      for (let i = 0; i < colorPriority.length; i++) {
+        const color = colorPriority[i];
+
+        if (chroma.contrast(background, color) >= 4.5) {
+          return color;
+        }
+      }
+    }
   }
+  return;
 };

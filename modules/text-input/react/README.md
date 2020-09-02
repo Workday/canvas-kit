@@ -2,6 +2,8 @@
 
 Canvas-styled React text input components.
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/text-input)
+
 ## Installation
 
 ```sh
@@ -113,7 +115,7 @@ Default: `undefined`
 
 ---
 
-#### `onChange: React.ChangeEventHandler<HTMLInputElement>`
+#### `onChange: (e: React.ChangeEvent<HTMLInputElement>) => void`
 
 > The callback fired when the value is changed.
 

@@ -4,6 +4,8 @@ A pill shaped switch. This is an
 [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) `input` component.
 Undocumented props are spread to the `input` element.
 
+[> Workday Design Reference](https://design.workday.com/components/inputs/switch)
+
 ## Installation
 
 ```sh
@@ -88,7 +90,7 @@ Default: `false`
 
 ---
 
-#### `onChange: (e: React.SyntheticEvent<HTMLInputElement>) => void`
+#### `onChange: (e: React.ChangeEvent<HTMLInputElement>) => void`
 
 > A callback that gets called everytime the switch checked state changes.
 

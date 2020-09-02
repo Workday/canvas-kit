@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/core';
-import Svg from './Svg';
-import {SpanProps} from './types';
+import Svg, {SvgProps} from './Svg';
 
 export interface GraphicStyles {
   /**
@@ -22,7 +21,7 @@ export interface GraphicStyles {
   grow?: boolean;
 }
 
-export interface GraphicProps extends GraphicStyles {
+export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'iconRef'> {
   /**
    * The graphic to display from `@workday/canvas-graphics-web`.
    */
@@ -59,16 +58,17 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
   return {};
 };
 
-export default class Graphic extends React.Component<SpanProps & GraphicProps> {
+export default class Graphic extends React.Component<GraphicProps> {
   render() {
-    const {src, width, height, grow, ...elemProps} = this.props;
+    const {grow = false, src, width, height, iconRef, ...elemProps} = this.props;
 
     return (
       <Svg
         src={src}
         styles={graphicStyles({width, height, grow})}
         type={CanvasIconTypes.Graphic}
-        elemProps={elemProps}
+        iconRef={iconRef}
+        {...elemProps}
       />
     );
   }

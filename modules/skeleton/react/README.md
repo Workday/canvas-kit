@@ -3,6 +3,8 @@
 A component that renders a skeleton (a placeholder for future content). The skeleton component takes
 in children skeleton components and displays them with an animated sheen to indicate loading.
 
+[> Workday Design Reference](https://design.workday.com/components/indicators/skeleton-loader)
+
 ## Installation
 
 ```sh
@@ -17,8 +19,8 @@ yarn add @workday/canvas-kit-react-skeleton
 
 # Skeleton
 
-This component places its children in a `div` marked with the `aria-hidden` attribute and displays
-an `aria-live` status to specify that the content is loading.
+This component places its children in a `div` marked with the `aria-hidden` attribute. It announces
+itself by utilizing a visually hidden div.
 
 ## Usage
 
@@ -48,7 +50,17 @@ import {
 
 ## Component Props
 
-> None
+### Optional
+
+#### `aria-label: string`
+
+> For accessibility reasons, `aria-label` is transformed into a text representation (visually
+> hidden, but announced by screen readers) of the loader.
+>
+> IMPORTANT: Since we take over the use of `aria-label` here, the attribute does not get applied to
+> the container element. We anticipate that this will change in a future major version.
+
+Default: `"Loading"`
 
 # SkeletonHeader
 

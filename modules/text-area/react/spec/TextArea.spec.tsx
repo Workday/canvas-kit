@@ -63,4 +63,15 @@ describe('Text Area', () => {
       expect(cb).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('when typed into with placeholder', () => {
+    it('should call a callback function and persist the value', () => {
+      const {getByDisplayValue, getByRole} = render(
+        <TextArea onChange={cb} placeholder={placeholder} />
+      );
+      fireEvent.change(getByRole('textbox'), {target: {value: 'Test'}});
+      expect(cb).toHaveBeenCalledTimes(1);
+      expect(getByDisplayValue('Test')).toBeDefined();
+    });
+  });
 });

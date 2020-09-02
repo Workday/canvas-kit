@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {CSSObject} from '@emotion/core';
-import {type, colors, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
+import {colors, spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
 import {GrowthBehavior} from '@workday/canvas-kit-react-common';
 import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react-button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
@@ -59,7 +59,7 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label text for the SearchBar submit button.
    * @default Search
    */
-  submitLabel: string;
+  submitAriaLabel?: string;
   /**
    * The screenreader label text for the SearchBar clear button.
    * @default Reset Search Form
@@ -69,17 +69,22 @@ export interface SearchBarProps extends GrowthBehavior, React.FormHTMLAttributes
    * The screenreader label text for the button to open the collapsed SearchBar.
    * @default Open Search
    */
-  openButtonLabel: string;
+  openButtonAriaLabel?: string;
   /**
    * The screenreader label text for the button to close the open SearchBar.
    * @default Cancel
    */
-  closeButtonLabel: string;
+  closeButtonAriaLabel?: string;
   /**
    * If true, render the SearchBar with a button to clear the text input.
    * @default true
    */
   showClearButton?: boolean;
+  /**
+   * Height of the Search Bar in pixels
+   * @default: 40
+   */
+  height?: number;
 }
 
 export interface SearchBarState {
@@ -105,7 +110,6 @@ const formCollapsedBackground = colors.frenchVanilla100;
 
 const maxWidth = 480;
 const minWidth = 120;
-const height = 44;
 
 const SearchForm = styled('form')<
   Pick<SearchBarProps, 'isCollapsed' | 'rightAlign' | 'grow'> & Pick<SearchBarState, 'showForm'>
@@ -145,13 +149,19 @@ const SearchForm = styled('form')<
   }
 );
 
-const SearchContainer = styled('div')({
-  position: `relative`,
-  width: `100%`,
-  textAlign: 'left',
-  minHeight: height,
-  height: height, // Needed to keep IE11 vertically centered
-});
+const SearchContainer = styled('div')<Pick<SearchBarProps, 'height'>>(
+  {
+    position: `relative`,
+    display: 'flex',
+    alignItems: 'center',
+    width: `100%`,
+    textAlign: 'left',
+  },
+  ({height}) => ({
+    minHeight: height,
+    height: height, // Needed to keep IE11 vertically centered
+  })
+);
 
 const SearchCombobox = styled(Combobox)({
   width: `100%`,
@@ -159,21 +169,29 @@ const SearchCombobox = styled(Combobox)({
 
 const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isHidden: boolean}>(
   ({isCollapsed, isHidden}) => {
+    const collapsedSize = 40;
+    const size = 32;
     const collapseStyles: CSSObject = isCollapsed
       ? {
-          width: spacing.xl,
-          height: spacing.xl,
+          minWidth: collapsedSize,
+          width: collapsedSize,
+          minHeight: collapsedSize,
+          height: collapsedSize,
         }
       : {
-          width: spacing.l,
-          height: spacing.l,
+          minWidth: size,
+          width: size,
+          minHeight: size,
+          height: size,
         };
 
     return {
       position: `absolute`,
-      margin: `auto ${spacing.xxs}`,
-      top: spacing.zero,
-      bottom: spacing.zero,
+      margin: isCollapsed ? `auto ${spacing.xxs}` : `auto ${spacing.xxxs}`,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      padding: 0,
       zIndex: 3,
       display: isHidden ? 'none' : 'flex',
       ...collapseStyles,
@@ -195,9 +213,9 @@ const CloseButton = styled(IconButton)<
 
   return {
     position: `absolute`,
-    top: spacing.zero,
-    right: spacing.zero,
-    bottom: spacing.zero,
+    top: 0,
+    bottom: 0,
+    right: 0,
     margin: `auto ${spacing.xxs}`,
     zIndex: 3,
     ...collapseStyles,
@@ -205,14 +223,14 @@ const CloseButton = styled(IconButton)<
 });
 
 const SearchField = styled(FormField)<
-  Pick<SearchBarProps, 'isCollapsed' | 'grow'> & Pick<SearchBarState, 'showForm'>
->(({isCollapsed, showForm, grow}) => {
+  Pick<SearchBarProps, 'isCollapsed' | 'grow' | 'height'> & Pick<SearchBarState, 'showForm'>
+>(({isCollapsed, showForm, grow, height}) => {
   return {
     display: (isCollapsed && showForm) || !isCollapsed ? 'inline-block' : 'none',
     width: '100%',
     height: height,
     maxWidth: isCollapsed || grow ? '100%' : maxWidth,
-    marginBottom: spacingNumbers.zero,
+    marginBottom: spacing.zero,
     '> div': {
       display: 'block',
     },
@@ -220,17 +238,20 @@ const SearchField = styled(FormField)<
 });
 
 const SearchInput = styled(TextInput)<
-  Pick<SearchBarProps, 'isCollapsed' | 'grow'> & {inputColors: ReturnType<typeof getInputColors>}
->(({isCollapsed, inputColors, grow}) => {
+  Pick<SearchBarProps, 'isCollapsed' | 'grow' | 'height'> & {
+    inputColors: ReturnType<typeof getInputColors>;
+  }
+>(({isCollapsed, inputColors, grow, height}) => {
   const collapseStyles: CSSObject = isCollapsed
     ? {
-        ...type.h3,
-        fontWeight: 400,
+        fontSize: '20px',
+        lineHeight: '20px', // For ie11, line-height needs to match font-size
         paddingLeft: spacingNumbers.xl + spacingNumbers.s,
         paddingRight: spacingNumbers.xl + spacingNumbers.s,
         maxWidth: 'none',
         minWidth: 0,
         backgroundColor: `rgba(0, 0, 0, 0)`,
+        height: height,
       }
     : {
         maxWidth: grow ? '100%' : maxWidth,
@@ -238,18 +259,17 @@ const SearchInput = styled(TextInput)<
         paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
         paddingRight: spacing.xl,
         backgroundColor: inputColors.background,
+        height: height,
       };
   return {
-    ...type.body,
+    fontSize: '14px',
+    lineHeight: '14px', // For ie11, line-height needs to match font-size
     boxShadow: inputColors.boxShadow,
     color: inputColors.color,
     border: 'none',
     WebkitAppearance: 'none',
     transition: 'background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms',
     zIndex: 2,
-    height: height,
-    paddingTop: spacing.xs,
-    paddingBottom: spacing.xs,
     width: '100%',
     '&::-webkit-search-cancel-button': {
       display: 'none',
@@ -272,14 +292,6 @@ const SearchInput = styled(TextInput)<
 
 export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   static Theme = SearchTheme;
-  static defaultProps = {
-    placeholder: 'Search',
-    inputLabel: 'Search',
-    submitLabel: 'Search',
-    openButtonLabel: 'Open Search',
-    closeButtonLabel: 'Cancel',
-    showClearButton: true,
-  };
 
   private inputRef = React.createRef<HTMLInputElement>();
   private openRef = React.createRef<HTMLButtonElement>();
@@ -344,7 +356,11 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
   componentDidUpdate(prevProps: SearchBarProps, prevState: SearchBarState) {
     const showFormToggled = this.state.showForm !== prevState.showForm;
     if (showFormToggled) {
-      this.state.showForm ? this.focusInput() : this.focusOpen();
+      if (this.state.showForm) {
+        this.focusInput();
+      } else {
+        this.focusOpen();
+      }
     }
   }
 
@@ -378,6 +394,14 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
 
   render() {
     const {
+      clearButtonAriaLabel = 'Reset Search Form',
+      placeholder = 'Search',
+      inputLabel = 'Search',
+      submitAriaLabel = 'Search',
+      openButtonAriaLabel = 'Open Search',
+      closeButtonAriaLabel = 'Cancel',
+      showClearButton = true,
+      height = 40,
       grow,
       onSubmit,
       isCollapsed,
@@ -385,14 +409,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
       autocompleteItems,
       initialValue,
       searchTheme,
-      placeholder,
       rightAlign,
-      inputLabel,
-      submitLabel,
-      showClearButton,
-      clearButtonAriaLabel,
-      closeButtonLabel,
-      openButtonLabel,
       ...elemProps
     } = this.props;
 
@@ -408,9 +425,9 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
         showForm={this.state.showForm}
         {...elemProps}
       >
-        <SearchContainer>
+        <SearchContainer height={height}>
           <SearchIcon
-            aria-label={submitLabel}
+            aria-label={submitAriaLabel}
             icon={searchIcon}
             isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
@@ -418,7 +435,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             isHidden={!!isCollapsed && !this.state.showForm}
           />
           <SearchIcon
-            aria-label={openButtonLabel}
+            aria-label={openButtonAriaLabel}
             icon={searchIcon}
             isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
@@ -436,6 +453,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             useFieldset={false}
             isCollapsed={isCollapsed}
             showForm={this.state.showForm}
+            height={height}
           >
             <SearchCombobox
               initialValue={initialValue}
@@ -445,7 +463,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               showClearButton={!isCollapsed && showClearButton}
-              clearButtonAriaLabel={clearButtonAriaLabel || 'Reset Search Form'}
+              clearButtonAriaLabel={clearButtonAriaLabel}
               labelId={this.labelId}
             >
               <SearchInput
@@ -454,12 +472,13 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}
                 inputColors={this.getThemeColors()}
+                height={height}
                 name="search"
               />
             </SearchCombobox>
           </SearchField>
           <CloseButton
-            aria-label={closeButtonLabel}
+            aria-label={closeButtonAriaLabel}
             icon={xIcon}
             isCollapsed={isCollapsed}
             variant={IconButton.Variant.Plain}

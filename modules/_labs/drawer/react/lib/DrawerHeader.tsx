@@ -8,7 +8,7 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
   /**
    * The text of the DrawerHeader. This text will also be applied as the `title` attribute of the header element.
    */
-  headerText?: string;
+  title?: string;
   /**
    * The function called when the DrawerHeader close button is clicked.
    */
@@ -17,15 +17,15 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
    * The `aria-label` for the DrawHeader close button. Useful for i18n.
    * @default Close
    */
-  closeIconLabel?: string;
+  closeIconAriaLabel?: string;
   /**
    * The background color of the DrawerHeader.
    */
-  headerColor: CanvasColor | string;
+  headerColor?: CanvasColor | string;
   /**
    * The border color of the DrawerHeader. This should match something close to `headerColor`.
    */
-  borderColor: CanvasColor | string;
+  borderColor?: CanvasColor | string;
   /**
    * If true, render the icon and header in white. Useful for preserving contrast with a dark `headerColor`.
    * @default false
@@ -72,22 +72,14 @@ const CloseButton = styled(IconButton)({
 });
 
 export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}> {
-  static defaultProps = {
-    closeIconLabel: 'Close',
-    headerColor: colors.soap100,
-    borderColor: colors.soap500,
-    showInverseButton: false,
-    inverse: false,
-  };
-
   public render() {
     const {
+      closeIconAriaLabel = 'Close',
+      headerColor = colors.soap100,
+      borderColor = colors.soap500,
+      inverse = false,
       onClose,
       title,
-      closeIconLabel,
-      headerColor,
-      borderColor,
-      inverse,
       id,
       ...elemProps
     } = this.props;
@@ -97,11 +89,11 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
         <HeaderTitle id={id} inverse={inverse} title={title}>
           {title}
         </HeaderTitle>
-        {onClose && closeIconLabel && (
+        {onClose && closeIconAriaLabel && (
           <CloseButton
             variant={inverse ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
             onClick={onClose}
-            aria-label={closeIconLabel}
+            aria-label={closeIconAriaLabel}
             icon={xIcon}
           />
         )}

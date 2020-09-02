@@ -80,7 +80,10 @@ const hierarchy: CanvasTypeHierarchy = {
 
 // Add fontFamily to each level of hierarchy
 Object.keys(hierarchy).forEach(key => {
-  hierarchy[key] = {...hierarchy[key], fontFamily};
+  hierarchy[key] = {
+    ...hierarchy[key],
+    fontFamily,
+  };
 });
 
 const updatedVariants: Pick<CanvasTypeVariant, 'button' | 'caps'> = {

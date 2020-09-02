@@ -78,7 +78,7 @@ storiesOf('Components|Containers/Table/CSS', module)
             </tr>
           </thead>
           <tbody>
-            <tr tabIndex={0}>
+            <tr>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -98,7 +98,7 @@ storiesOf('Components|Containers/Table/CSS', module)
               </td>
               <td>San Francisco, CA</td>
             </tr>
-            <tr tabIndex={0}>
+            <tr>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -115,7 +115,7 @@ storiesOf('Components|Containers/Table/CSS', module)
               <td>Product Designer</td>
               <td>San Francisco, CA</td>
             </tr>
-            <tr tabIndex={0}>
+            <tr>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -132,7 +132,7 @@ storiesOf('Components|Containers/Table/CSS', module)
               <td>Application Developer</td>
               <td>Portland, OR</td>
             </tr>
-            <tr tabIndex={0}>
+            <tr>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -170,7 +170,7 @@ storiesOf('Components|Containers/Table/CSS', module)
             </tr>
           </thead>
           <tbody>
-            <tr tabIndex={0} className="wdc-table-row-alert">
+            <tr className="wdc-table-row-alert">
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -192,7 +192,7 @@ storiesOf('Components|Containers/Table/CSS', module)
                 />
               </td>
             </tr>
-            <tr tabIndex={0}>
+            <tr>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -214,7 +214,7 @@ storiesOf('Components|Containers/Table/CSS', module)
                 />
               </td>
             </tr>
-            <tr tabIndex={0} className="wdc-table-row-error">
+            <tr className="wdc-table-row-error">
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -236,7 +236,7 @@ storiesOf('Components|Containers/Table/CSS', module)
                 />
               </td>
             </tr>
-            <tr tabIndex={0}>
+            <tr>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -258,7 +258,7 @@ storiesOf('Components|Containers/Table/CSS', module)
                 />
               </td>
             </tr>
-            <tr tabIndex={0} className="wdc-table-row-alert-borderless">
+            <tr className="wdc-table-row-alert-borderless">
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -280,7 +280,7 @@ storiesOf('Components|Containers/Table/CSS', module)
                 />
               </td>
             </tr>
-            <tr tabIndex={0}>
+            <tr>
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input
@@ -302,7 +302,7 @@ storiesOf('Components|Containers/Table/CSS', module)
                 />
               </td>
             </tr>
-            <tr tabIndex={0} className="wdc-table-row-error-borderless">
+            <tr className="wdc-table-row-error-borderless">
               <td className="wdc-table-cell-center">
                 <div className="wdc-form-checkbox-nolabel">
                   <input

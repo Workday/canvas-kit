@@ -7,15 +7,12 @@ export interface IconProps extends SvgProps {
   src: CanvasIcon;
   size?: number;
   type: CanvasIconTypes.Accent | CanvasIconTypes.Applet | CanvasIconTypes.System;
+  iconRef?: React.Ref<HTMLSpanElement>;
 }
 
 export default class Icon extends React.Component<IconProps> {
-  static defaultProps = {
-    elemProps: {},
-  };
-
   public render() {
-    const {src, size, styles, type, elemProps} = this.props;
+    const {src, size, styles, type, iconRef, ...elemProps} = this.props;
 
     const iconStyles: CSSObject = {...styles};
 
@@ -26,6 +23,6 @@ export default class Icon extends React.Component<IconProps> {
       };
     }
 
-    return <Svg src={src} type={type} elemProps={elemProps} styles={iconStyles} />;
+    return <Svg src={src} type={type} {...elemProps} styles={iconStyles} iconRef={iconRef} />;
   }
 }

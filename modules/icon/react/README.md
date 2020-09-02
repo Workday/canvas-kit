@@ -83,6 +83,12 @@ Default: `false`
 
 ---
 
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
+
+---
+
 # Applet Icons
 
 ## Usage
@@ -159,6 +165,12 @@ Default: `92`
 
 ---
 
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
+
+---
+
 # System Icons
 
 ## Usage
@@ -208,7 +220,7 @@ Default: `24`
 > Icon color. This will define `accent` and `fill`. `accent` and `fill` will override this property
 > if defined.
 
-Default: `colors.primary.iconStandard`
+Default: `iconColors.standard`
 
 ---
 
@@ -216,7 +228,7 @@ Default: `colors.primary.iconStandard`
 
 > Hover color of the icon. This will define `accentHover` and `fillHover`.
 
-Default: `colors.primary.iconHover`
+Default: `iconColors.hover`
 
 ---
 
@@ -257,6 +269,12 @@ Default: `'transparent'`
 #### `fillHover: string`
 
 > `.wd-icon-fill` color on hover. This will override `colorHover`.
+
+---
+
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
 
 ---
 
@@ -305,6 +323,12 @@ Default: `colors.soap300`
 > Size of the icon.
 
 Default: `SystemIconCircleSize.l` (`40`)
+
+---
+
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
 
 ---
 
@@ -372,3 +396,9 @@ Default: `height of graphic`
 > Expand graphic to fit container. `grow` takes precedence over both `width` and `height`.
 
 Default: `false`
+
+#### `iconRef: React.Ref<HTMLSpanElement>`
+
+> Returns the ref to the rendered icon.
+
+---

@@ -2,18 +2,26 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import canvas from '@workday/canvas-kit-react-core';
+import {accessibleHide} from '@workday/canvas-kit-react-common';
 
 export interface SkeletonProps {
   /**
-   * The `aria-label` that describes loading.
+   * For accessibility reasons, `aria-label` is transformed into a text representation
+   * (visually hidden, but announced by screen readers) of the loader.
+   *
+   * IMPORTANT: Since we take over the use of `aria-label` here, the attribute
+   * does not get applied to the container element. We anticipate that this will change
+   * in a future major version.
    * @default 'Loading'
    */
-  loadingLabel: string;
+  'aria-label'?: string;
 }
 
 const TRANSPARENCY_POSITION = 45;
 const WHITE_SHEEN_WIDTH = 10;
 const DURATION = 5;
+
+const AccessibleHide = styled('div')(accessibleHide);
 
 const SkeletonAnimator = styled('div')<{diagonal: number; topPosition: number; width: number}>(
   ({diagonal, topPosition, width}) => {
@@ -55,9 +63,6 @@ export interface SkeletonState {
 
 export default class Skeleton extends React.Component<SkeletonProps, SkeletonState> {
   private ref: React.RefObject<HTMLDivElement> = React.createRef();
-  static defaultProps = {
-    loadingLabel: 'Loading',
-  };
 
   state = {
     width: 0,
@@ -65,20 +70,14 @@ export default class Skeleton extends React.Component<SkeletonProps, SkeletonSta
   };
 
   render(): React.ReactNode {
-    const {children, ...elemProps} = this.props;
+    const {'aria-label': loadingAriaLabel = 'Loading', children, ...elemProps} = this.props;
     const {width, height} = this.state;
     const diagonal = Math.sqrt(width * width + height * height) + WHITE_SHEEN_WIDTH;
     const topPosition = (-1 * (diagonal - height)) / 2;
-    const {loadingLabel} = this.props;
 
     return (
-      <SkeletonContainer
-        aria-label={loadingLabel}
-        aria-live={'polite'}
-        role={'status'}
-        ref={this.ref}
-        {...elemProps}
-      >
+      <SkeletonContainer ref={this.ref} {...elemProps}>
+        <AccessibleHide>{loadingAriaLabel}</AccessibleHide>
         <SkeletonAnimator diagonal={diagonal} topPosition={topPosition} width={width} />
         <div aria-hidden={true}>{children}</div>
       </SkeletonContainer>

@@ -29,7 +29,7 @@ import * as React from 'react';
 import ColorPicker from '@workday/canvas-kit-labs-react-color-picker';
 import {colors} from '@workday/canvas-kit-react-core';
 import {Button} from '@workday/canvas-kit-react-button';
-import {Popper} from '@workday/canvas-kit-react-common';
+import {Popper} from '@workday/canvas-kit-react-popup';
 
 const MyComponent: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -146,7 +146,7 @@ Default: `Custom Hex Color`
 
 ---
 
-#### `onSubmitClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void`
+#### `onSubmitClick: (event: React.FormEvent) => void`
 
 > When this handler is provided, an action can be tied to clicking the check button provided. This
 > handler is called when the check button is selected through a keyboard event only.
