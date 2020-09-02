@@ -1,6 +1,8 @@
 /// <reference path="../../../../../typings.d.ts" />
-import * as React from 'react';
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import withReadme from 'storybook-readme/with-readme';
+import {spacing} from '@workday/canvas-kit-react-core';
 import {Tabs, TabList, Tab, TabPanel, TabPanels} from '../index';
 import README from '../README.md';
 
@@ -20,11 +22,11 @@ export const Default = () => (
       <Tab>Tab</Tab>
     </TabList>
     <TabPanels>
-      <TabPanel>Hi this is tab content</TabPanel>
-      <TabPanel>Hi this is medium tab content</TabPanel>
-      <TabPanel>Hi this is really long tab content</TabPanel>
-      <TabPanel>Hi this is really really long tab content</TabPanel>
-      <TabPanel>Hi this is tab content</TabPanel>
+      <TabPanel css={{padding: spacing.l}}>Hi this is tab content</TabPanel>
+      <TabPanel css={{padding: spacing.l}}>Hi this is medium tab content</TabPanel>
+      <TabPanel css={{padding: spacing.l}}>Hi this is really long tab content</TabPanel>
+      <TabPanel css={{padding: spacing.l}}>Hi this is really really long tab content</TabPanel>
+      <TabPanel css={{padding: spacing.l}}>Hi this is tab content</TabPanel>
     </TabPanels>
   </Tabs>
 );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useTab} from './Tabs';
 
-export interface TabPanelProps {
+export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The contents of the TabPanel.
    */
@@ -12,13 +12,13 @@ export interface TabPanelProps {
   index?: number;
 }
 
-const TabPanel = ({children, index = 0}: TabPanelProps) => {
+const TabPanel = ({children, index = 0, ...elemProps}: TabPanelProps) => {
   const {tabIndex} = useTab();
 
   const isHidden = tabIndex !== index;
 
   return (
-    <div role="tabpanel" hidden={isHidden}>
+    <div role="tabpanel" hidden={isHidden} {...elemProps}>
       {children}
     </div>
   );
