@@ -30,6 +30,20 @@ import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-
 </Tabs>;
 ```
 
+---
+
+## Table of Contents
+
+- [Tabs](#tabs)
+- [TabList](#tablist)
+- [TabPanels](#tabpanels)
+- [Tab](#tab)
+- [TabPanel](#tabpanel)
+
+---
+
+# Tabs
+
 ## Static Properties
 
 > None
@@ -38,7 +52,89 @@ import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-
 
 ### Required
 
+#### `children: React.ReactElement<TabListProps> | React.ReactElement<TabPanelsProps>`
+
+> Tabs cannot be empty
+
+### Optional
+
 > None
+
+---
+
+# TabList
+
+## Static Properties
+
+> None
+
+## Component Props
+
+### Required
+
+#### `children: React.ReactElement<TabProps> | React.ReactElement<TabProps>[]`
+
+> TabList cannot be empty
+
+### Optional
+
+> None
+
+---
+
+# TabPanels
+
+## Static Properties
+
+> None
+
+## Component Props
+
+### Required
+
+#### `children: React.ReactElement<TabPanelProps> | React.ReactElement<TabPanelProps>[]`
+
+> TabPanels cannot be empty
+
+### Optional
+
+> None
+
+---
+
+# Tab
+
+## Static Properties
+
+> None
+
+## Component Props
+
+### Required
+
+#### `children: React.ReactNode`
+
+> The label text of the Tab
+
+### Optional
+
+> None
+
+---
+
+# TabPanel
+
+## Static Properties
+
+> None
+
+## Component Props
+
+### Required
+
+#### `children: React.ReactNode`
+
+> The contents of the TabPanel
 
 ### Optional
 
