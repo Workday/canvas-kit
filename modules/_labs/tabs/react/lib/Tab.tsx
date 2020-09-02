@@ -29,6 +29,7 @@ const Container = styled('button')<{isSelected: boolean}>(
     margin: `${spacing.xxxs}`,
     marginBottom: 0,
     borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
+    transition: 'background 150ms ease, color 150ms ease',
   },
   ({isSelected}) => ({
     color: isSelected ? colors.blueberry400 : colors.licorice300,
