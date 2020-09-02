@@ -1,12 +1,23 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import {TabListProps} from './TabList';
 import {TabPanelsProps} from './TabPanels';
 
 interface TabsStateContextTypes {
+  /**
+   * The index of the active tab.
+   */
   tabIndex: number;
+  /**
+   * A useState function to set the index of the active tab.
+   */
   setTabIndex: React.Dispatch<React.SetStateAction<number>>;
+  /**
+   * The ClientRect of the currently selected tab.
+   */
   selectedTabRect: ClientRect | null;
+  /**
+   * A useState function to set the ClientRect of the currently selected tab.
+   */
   setSelectedTabRect: React.Dispatch<React.SetStateAction<ClientRect>>;
 }
 
@@ -31,17 +42,16 @@ export const useTab = () => React.useContext(TabsStateContext);
 export type TabsChild = React.ReactElement<TabListProps> | React.ReactElement<TabPanelsProps>;
 
 export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * The tabs contents (tabs & tab panels).
+   */
   children: TabsChild[];
 }
 
-const Container = styled('div')({});
-
-const Tabs: React.FC<TabsProps> = (props: TabsProps) => {
-  const {children, ...elemProps} = props;
-
+const Tabs = ({children, ...elemProps}: TabsProps) => {
   return (
     <TabStateProvider>
-      <Container {...elemProps}>{children}</Container>
+      <div {...elemProps}>{children}</div>
     </TabStateProvider>
   );
 };

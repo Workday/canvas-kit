@@ -1,16 +1,23 @@
 import * as React from 'react';
-import {colors, spacing} from '@workday/canvas-kit-react-core';
+import {colors, spacing, borderRadius, commonColors} from '@workday/canvas-kit-react-core';
 import styled from '@emotion/styled';
 import {useTab} from './Tabs';
 import {TabProps} from './Tab';
+
+type Tab = React.ReactElement<TabProps>;
+
+export interface TabListProps {
+  /**
+   * A list of Tab components.
+   */
+  children: Tab | Tab[];
+}
 
 const TabsListContainer = styled('div')({
   display: 'inline-block',
   position: 'relative',
   width: `100%`,
-  borderBottom: '1px solid',
-  borderColor: colors.soap400,
-  margin: `${spacing.l} 0`,
+  borderBottom: `1px solid ${commonColors.divider}`,
 });
 
 const TabsListInnerContainer = styled('div')({
@@ -20,26 +27,20 @@ const TabsListInnerContainer = styled('div')({
 const TabIndicator = styled('div')<{left?: number; width?: number}>(
   {
     position: 'absolute',
-    height: '3px',
-    borderRadius: '3px 3px 0px 0px',
+    height: spacing.xxxs,
+    borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
     backgroundColor: colors.blueberry400,
-    transition: 'all 200ms ease 0s',
+    transition: 'width 200ms ease, transform 200ms ease-out',
     marginTop: '-2px',
     bottom: 0,
   },
   ({left, width}) => ({
-    left: left ? left : 0,
+    transform: `translateX(${left ? left : 0}px)`,
     width: width ? width : 0,
   })
 );
 
-export type TabListChild = React.ReactElement<TabProps>;
-
-export interface TabListProps {
-  children: TabListChild | TabListChild[];
-}
-
-const TabList: React.FC<TabListProps> = ({children}: TabListProps) => {
+const TabList = ({children}: TabListProps) => {
   const tabsListRef = React.useRef<HTMLDivElement>(null);
   const {selectedTabRect} = useTab();
 

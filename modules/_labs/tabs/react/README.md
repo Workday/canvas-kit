@@ -16,22 +16,18 @@ yarn add @workday/canvas-kit-labs-react-tabs
 
 ```tsx
 import * as React from 'react';
-import Tabs, {TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-react-tabs';
+import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-react-tabs';
 
-  <Tabs>
-    <TabList>
-      <Tab index={0}>Tab</Tab>
-      <Tab index={1}>Tab Number Two</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel key="1" index={0}>
-        Hi this is tab content
-      </TabPanel>
-      <TabPanel key="2" index={1}>
-        Hi this is another tab's content
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
+<Tabs>
+  <TabList>
+    <Tab>Tab</Tab>
+    <Tab>Tab Number Two</Tab>
+  </TabList>
+  <TabPanels>
+    <TabPanel>Hi this is tab content</TabPanel>
+    <TabPanel>Hi this is another tab's content</TabPanel>
+  </TabPanels>
+</Tabs>;
 ```
 
 ## Static Properties
