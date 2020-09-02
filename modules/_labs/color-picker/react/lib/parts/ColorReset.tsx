@@ -50,7 +50,7 @@ export const ResetButton = ({onClick, resetColor, label}: ResetButtonProps) => {
   const handleResetColor = () => onClick(resetColor);
 
   return (
-    <Container data-testid="color-picker-reset" onClick={handleResetColor}>
+    <Container onClick={handleResetColor}>
       <ColorSwatch color={resetColor} />
       <Label>{label}</Label>
     </Container>
