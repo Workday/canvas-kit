@@ -94,6 +94,10 @@ const defaultColors = [
   colors.blackPepper400,
 ];
 
+const ColorPickerContainer = styled('div')({
+  width: 216,
+});
+
 const ColorInputWrapper = styled('form')({
   width: '100%',
   marginTop: spacing.s,
@@ -160,13 +164,7 @@ const ColorPicker = ({
   };
 
   return (
-    <Popup
-      width={250}
-      padding={Popup.Padding.s}
-      transformOrigin={transformOrigin}
-      data-testid="canvas-color-picker"
-      {...elemProps}
-    >
+    <ColorPickerContainer data-testid="canvas-color-picker" {...elemProps}>
       {onColorReset && resetColor && (
         <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}
@@ -188,7 +186,7 @@ const ColorPicker = ({
           />
         </ColorInputWrapper>
       )}
-    </Popup>
+    </ColorPickerContainer>
   );
 };
 
