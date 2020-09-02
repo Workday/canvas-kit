@@ -169,7 +169,6 @@ const ColorPicker = ({
   resetColor,
   value = '',
   showCustomHexInput = false,
-  transformOrigin,
   ...elemProps
 }: ColorPickerProps) => {
   const [validHexValue, setValidHexValue] = React.useState('');
