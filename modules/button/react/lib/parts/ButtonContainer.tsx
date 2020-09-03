@@ -59,7 +59,14 @@ function getIconColorSelectors(
         fill: fill
           ? color === themePrimary.contrast
             ? themePrimary.main
-            : themePrimary.contrast
+            : themePrimary.contract
+          : color,
+      },
+      '.wd-icon-accent:nth-of-type(2), .wd-icon-accent2:nth-of-type(2)': {
+        fill: fill
+          ? color === themePrimary.contrast
+            ? themePrimary.contrast
+            : themePrimary.main
           : color,
       },
     },
