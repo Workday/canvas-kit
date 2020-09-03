@@ -55,14 +55,14 @@ function getIconColorSelectors(
       '.wd-icon-background': {
         fill: fill ? color : undefined,
       },
-      '.wd-icon-accent, .wd-icon-accent2': {
+      '.wd-icon-accent': {
         fill: fill
           ? color === themePrimary.contrast
             ? themePrimary.main
-            : themePrimary.contract
+            : themePrimary.contrast
           : color,
       },
-      '.wd-icon-accent:nth-of-type(2), .wd-icon-accent2:nth-of-type(2)': {
+      '.wd-icon-accent:nth-of-type(2), .wd-icon-accent2, .wd-icon-accent2:nth-of-type(2)': {
         fill: fill
           ? color === themePrimary.contrast
             ? themePrimary.contrast
