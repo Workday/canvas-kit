@@ -14,7 +14,6 @@ import {
 import {DropdownContext} from './Provider';
 import {Breadcrumb} from '../types';
 // local components
-import {DropdownMenuItem} from './MenuItem';
 import {DropdownMenuItemLink} from './MenuItemLink';
 
 export interface DropdownMenuProps
@@ -104,15 +103,11 @@ export const DropdownMenu = ({
         {dropdownItems.map((item, i) => {
           const isFocused = item.index === activeDropdownItem.index;
           return (
-            <DropdownMenuItem
-              onKeyUp={handleItemKeyUp}
-              onKeyDown={e => handleItemKeyDown(e, item)}
-              key={i}
-            >
+            <li onKeyUp={handleItemKeyUp} onKeyDown={e => handleItemKeyDown(e, item)} key={i}>
               <DropdownMenuItemLink ref={isFocused ? activeDropdownItemRef : null} href={item.link}>
                 {item.text}
               </DropdownMenuItemLink>
-            </DropdownMenuItem>
+            </li>
           );
         })}
       </Menu>

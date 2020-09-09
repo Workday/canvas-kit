@@ -87,15 +87,21 @@ describe('Breadcrumbs', () => {
     beforeEach(() => {
       h.stories.load('Labs|Breadcrumbs/React', 'Collapsible');
     });
+
     it('should not have any axe errors', () => {
       cy.checkA11y();
     });
 
-    it('should have a dropdown button with the correct aria attributes', () => {
-      getDropdownButton()
-        .should('have.attr', 'aria-expanded', 'false')
-        .and('have.attr', 'aria-haspopup', 'true')
-        .and('have.attr', 'aria-controls', 'menu');
+    it('should have aria-expanded set to false on the dropdown button', () => {
+      getDropdownButton().should('have.attr', 'aria-expanded', 'false');
+    });
+
+    it('should have aria-haspopup set to true on the dropdown button', () => {
+      getDropdownButton().should('have.attr', 'aria-haspopup', 'true');
+    });
+
+    it('should have aria-controls set to menu on the dropdown button', () => {
+      getDropdownButton().should('have.attr', 'aria-controls', 'menu');
     });
 
     it('should toggle aria-expanded on the dropdown button', () => {
@@ -113,84 +119,105 @@ describe('Breadcrumbs', () => {
       openDropdownMenu();
     });
 
-    it('should set focus to the first list item link when the dropdown menu is toggled with a keypress', () => {
-      cy.findAllByRole('menuitem')
-        .first()
-        .should('have.focus');
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
     });
 
-    it('should toggle focus to the next list item on down keypress', () => {
-      // toggle to the second item
-      cy.focused().type('{downArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(1)
-        .should('have.focus');
-      // toggle to the third item
-      cy.focused().type('{downArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(2)
-        .should('have.focus');
-      // roll toggle back to the first item
-      cy.focused().type('{downArrow}');
-      cy.findAllByRole('menuitem')
+    it('should have role set to menu on the dropdown menu', () => {
+      getDropdownMenu().should('have.attr', 'role', 'menu');
+    });
+
+    it('should have role set to menuitem for dropdown item link', () => {
+      getDropdownMenu()
+        .find('a')
+        .each($link => {
+          expect($link).to.have.attr('role', 'menuitem');
+        });
+    });
+
+    it('should set focus to the first menuitem when the dropdown menu is toggled with a keypress', () => {
+      getDropdownMenu()
+        .find('a')
         .eq(0)
         .should('have.focus');
     });
 
-    it('should toggle focus to the next list item on right keypress', () => {
-      // toggle to the second item
-      cy.focused().type('{rightArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(1)
-        .should('have.focus');
-      // toggle to the third item
-      cy.focused().type('{rightArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(2)
-        .should('have.focus');
-      // roll toggle back to the first item
-      cy.focused().type('{rightArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(0)
-        .should('have.focus');
+    context('when the down arrow key is pressed on the dropdown menu', () => {
+      beforeEach(() => {
+        cy.focused().type('{downArrow}');
+      });
+
+      it('should toggle focus to the second menuitem on down keypress', () => {
+        cy.findAllByRole('menuitem')
+          .eq(1)
+          .should('have.focus');
+      });
+
+      it('should roll the focus back from the last menuitem to the first menuitem on down keypress', () => {
+        cy.focused().type('{downArrow}');
+        cy.focused().type('{downArrow}');
+        cy.findAllByRole('menuitem')
+          .eq(0)
+          .should('have.focus');
+      });
     });
 
-    it('should return focus to the button from the first list item', () => {
-      cy.focused().type('{upArrow}');
-      getDropdownButton().should('have.focus');
+    context('when the right arrow key is pressed on the dropdown menu', () => {
+      beforeEach(() => {
+        cy.focused().type('{rightArrow}');
+      });
+
+      it('should toggle focus to the second menuitem on right keypress', () => {
+        cy.findAllByRole('menuitem')
+          .eq(1)
+          .should('have.focus');
+      });
+
+      it('should roll the focus back from the last menuitem to the first menuitem on right keypress', () => {
+        cy.focused().type('{rightArrow}');
+        cy.focused().type('{rightArrow}');
+        cy.findAllByRole('menuitem')
+          .eq(0)
+          .should('have.focus');
+      });
     });
 
-    it('should toggle focus to the previous list item on up or left keypress', () => {
-      // toggle to third item
-      cy.focused().type('{downArrow}');
-      cy.focused().type('{downArrow}');
-      // toggle up to the second item
-      cy.focused().type('{upArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(1)
-        .should('have.focus');
+    context('when the up arrow key is pressed on the dropdown menu', () => {
+      beforeEach(() => {
+        // set focus to the second menuitem
+        cy.focused().type('{downArrow}');
+      });
+      it('should toggle focus to the previous list item on up keypress', () => {
+        cy.focused().type('{upArrow}');
+        cy.findAllByRole('menuitem')
+          .eq(0)
+          .should('have.focus');
+      });
 
-      // toggle to the first item
-      cy.focused().type('{upArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(0)
-        .should('have.focus');
+      it('should return focus to the button from the first list item', () => {
+        cy.focused().type('{upArrow}');
+        cy.focused().type('{upArrow}');
+        getDropdownButton().should('have.focus');
+      });
     });
 
-    it('should toggle focus to the previous list item on left keypress', () => {
-      // toggle to third item
-      cy.focused().type('{downArrow}');
-      cy.focused().type('{downArrow}');
-      // toggle to the second item
-      cy.focused().type('{leftArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(1)
-        .should('have.focus');
-      // toggle to the first item
-      cy.focused().type('{leftArrow}');
-      cy.findAllByRole('menuitem')
-        .eq(0)
-        .should('have.focus');
+    context('when the left arrow key is pressed on the dropdown menu', () => {
+      beforeEach(() => {
+        // set focus to the second menuitem
+        cy.focused().type('{downArrow}');
+      });
+      it('should toggle focus to the previous list item on left keypress', () => {
+        cy.focused().type('{leftArrow}');
+        cy.findAllByRole('menuitem')
+          .eq(0)
+          .should('have.focus');
+      });
+
+      it('should return focus to the button from the first list item', () => {
+        cy.focused().type('{leftArrow}');
+        cy.focused().type('{leftArrow}');
+        getDropdownButton().should('have.focus');
+      });
     });
   });
 });
