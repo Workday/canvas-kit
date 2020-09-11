@@ -1,7 +1,7 @@
 import React, {Children, useLayoutEffect, useState, useEffect} from 'react';
 import {CSSObject} from '@emotion/core';
 
-import {LinkedCrumb} from './LinkedCrumb';
+import {BreadcrumbLink} from './Link';
 import {Breadcrumb} from '../types';
 
 export const useCollapse = <E extends HTMLElement>(listEl: React.RefObject<E>, maxWidth = 0) => {
@@ -17,7 +17,7 @@ export const useCollapse = <E extends HTMLElement>(listEl: React.RefObject<E>, m
 
 const getBreadcrumbLink = (breadcrumb: React.ReactElement) => {
   return Children.toArray(breadcrumb.props.children).filter(child => {
-    return child.type === LinkedCrumb;
+    return child.type === BreadcrumbLink;
   })[0];
 };
 

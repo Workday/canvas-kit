@@ -1,5 +1,5 @@
-import {CurrentCrumb} from './List/CurrentCrumb';
-import {LinkedCrumb} from './List/LinkedCrumb';
+import {CurrentItem} from './List/CurrentItem';
+import {BreadcrumbLink} from './List/Link';
 import {BreadcrumbsNav} from './Nav';
 import {CollapsibleList} from './List/Collapsible';
 import {BreadcrumbsListItem} from './List/ListItem';
@@ -10,6 +10,6 @@ export const Breadcrumbs = {
   CollapsibleList,
   List: BreadcrumbsList,
   ListItem: BreadcrumbsListItem,
-  LinkedCrumb,
-  CurrentCrumb,
+  Link: BreadcrumbLink,
+  CurrentItem,
 };

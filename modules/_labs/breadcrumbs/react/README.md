@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 
-Breadcrumbs component for navigation through different levels of some structure. Adjustable to container width.
+Breadcrumbs component for navigation through different levels of some structure.
 
 ## Installation
 
@@ -14,35 +14,258 @@ yarn add @workday/canvas-kit-labs-react-breadcrumbs
 
 ## Usage
 
+Breadcrumbs is a composable component that, while more verbose, offers more flexibility to build for
+your use case. There are two main variations: `List` and `CollapsibleList`. First we'll discuss
+`List`. There will also be information about the shared sub-components below.
+
+### `List`
+
+The `List` component is a styled, unordered list (`ul`) with no additional behaviors. Use this when
+you're not concerned about collapsing the list of breadcrumb items into a dropdown menu at a
+specified width.
+
+#### Component Props
+
+This component supports all native `li` props.
+
+#### Usage
+
 ```tsx
-import * as React from 'react';
+import React from 'react';
 import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
 
-<Breadcrumbs />;
+const AccountInvoiceBreadcrumbNav = () => {
+  return (
+    <Breadcrumbs.Nav aria-label="Breadcrumb">
+      <Breadcrumbs.List>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/account">Account</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/billing">Billing</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/invoices">Invoices</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.CurrentItem>
+          2020_08_01_invoice.pdf
+        </Breadcrumbs.CurrentItem>
+      </BreadCrumbs.List>
+    </Breadcrumbs.Nav>
+  );
+}
+
 ```
 
-## Static Properties
+### CollapsibleList
 
-> None
+The `CollapsibleList` component is built on top of `List`. It has additional functionality to
+collapse items in the list into a dropdown menu at a specified width.
 
-## Component Props
+#### Component Props
 
-### Required
+| name              | type               | required | default           |
+| ----------------- | ------------------ | -------- | ----------------- |
+| maxWidth          | `number`           | `true`   | n/a               |
+| expanderAriaLabel | `string`           | `true`   | n/a               |
+| buttonIcon        | `CanvasSystemIcon` | `false`  | `folderCloseIcon` |
 
-#### `breadcrumbs: Breadcrumb[]`
+This component supports all native `li` props. The `expanderAriaLabel` prop is required for
+accessibility. We recommend using `"more links"` as seen in the example. This label is applied to
+the dropdown menu button.
 
-> This is an array of objects that contain a `name` and an `onAction` function for
-that respective name. They will be listed from index 0 - n as breadcrumbs, starting
-at root and ending at the current location.
+##### Handling Collapse
 
-#### `containerWidth: number`
+The `maxWidth` prop provides a point to collapse. If the length of the list exceeds that value,
+items will be collapsed into a dropdown menu. Note that the first (root) item and last (current)
+item in the list will not be collapsed.
 
-> This is a number that represents the maximum width you want the breadcrumbs to
-take up. If there are too many breadcrumbs passed in for this width, the component
-will hide exactly enough breadcrumbs under the expander until the component's total width is less than this prop.
+##### Handling Custom Dropdown Button Icons
 
-### Optional
+By default the icon for the dropdown button is `folderCloseIcon`. However, you can set this to any
+Canvas System Icon with the `buttonIcon` prop. Please consult the Canvas team if you decide to do
+this, as we'd like to keep the Breadcrumb component as consistent as possible.
 
-#### `variation: BreadcrumbVariation`
+#### Usage
 
-> Possible options are `medium` and `large` and change the styling of the breadcrumbs as such.
+```tsx
+const AccountInvoiceCollapsibleBreadcrumbNav = () => {
+  return (
+    <Breadcrumbs.Nav aria-label="Breadcrumb">
+      <Breadcrumbs.CollapsibleList maxWidth={800} expanderAriaLabel="more links">
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/account">Account</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/billing">Billing</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.ListItem>
+          <Breadcrumbs.Link href="/invoices">Invoices</Breadcrumbs.Link>
+        </Breadcrumbs.ListItem>
+        <Breadcrumbs.CurrentItem>
+          2020_08_01_invoice.pdf
+        </Breadcrumbs.CurrentItem>
+      </BreadCrumbs.CollapsibleList>
+    </Breadcrumbs.Nav>
+  );
+}
+```
+
+### Nav
+
+`Breadcrumb.Nav` a styled `nav` element.
+
+#### Component Props
+
+| name       | type     | required | default |
+| ---------- | -------- | -------- | ------- |
+| aria-label | `string` | `true`   | n/a     |
+
+This component supports all native HTMLElement props. The `aria-label` prop is required for
+accessibility. We recommend using `"Breadcrumb"` as seen in the example.
+
+#### Usage
+
+```tsx
+import React from 'react';
+import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
+
+...
+
+return (
+  <Breadcrumbs.Nav aria-label="Breadcrumb">
+    {/* breadcrumb list goes here */}
+  </Breadcrumbs.Nav>
+);
+```
+
+### ListItem
+
+`ListItem` is a styled `li` element that contains a `SystemIcon` (chevron).
+
+#### Component Props
+
+This component supports all native `li` element props.
+
+#### Usage
+
+```tsx
+import React from 'react';
+import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
+
+return <Breadcrumbs.ListItem>{/* breadcrumb link goes here */}</Breadcrumbs.ListItem>;
+```
+
+### Link
+
+`Link` is a styled `a` element that also conditionally displays a tooltip, if the text is truncated.
+
+#### Component Props
+
+| name     | type                     | required | default |
+| -------- | ------------------------ | -------- | ------- |
+| href     | `string`                 | `true`   | n/a     |
+| maxWidth | `number`                 | `false`  | `350`   |
+| onAction | `(href: string) => void` | `false`  | n/a     |
+
+This component also supports all native `a` element props.
+
+#### Usage
+
+##### Handling Redirects
+
+`Link` defaults to redirecting with an `href`, meaning the page will hard redirect. However, if
+you're in a single page application (SPA) environment, you might want to use the internal SPA
+router. You can override this hard redirect with the `onAction` prop. Note that `onAction` will
+still allow `onClick` if provided. Let's look at an example below:
+
+```tsx
+import React from 'react';
+// using the history package
+import { createBrowserHistory } from 'history';
+import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
+
+// this is likely being done at the root of your application and not inside this component.
+const history = createBrowserHistory();
+
+const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  // handle any click side-effects here
+}
+
+const handleRedirect = (href: string) => {
+  // redirect using the internal SPA router
+  history.push(href);
+}
+
+return (
+  <Breadcrumbs.Link
+    href="/account"
+    onAction={handleRedirect}
+    onClick={handleClick}
+  >
+    Account
+  </Breadcrumbs.Link>;
+)
+```
+
+##### Handling Truncation
+
+`Link` has built-in truncation + tooltip functionality to provide an easy-to-use, accessible feature
+for managing the length of link names. By default, the `maxWidth` is set to `350`, however you can
+adjust this as needed. Note that tooltips will only be available when text is truncated. Here's an
+example:
+
+```tsx
+import React from 'react';
+import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
+
+return (
+  <Breadcrumbs.Link maxWidth={150} href="/account">
+    2019_Q2_financial_documents
+  </Breadcrumbs.Link>
+);
+```
+
+### CurrentItem
+
+`CurrentItem` is a styled `li` element that also conditionally displays a tooltip, if the text is
+truncated.
+
+#### Component Props
+
+| name     | type     | required | default |
+| -------- | -------- | -------- | ------- |
+| maxWidth | `number` | `false`  | `350`   |
+
+This component also supports all native `li` element props.
+
+#### Usage
+
+```tsx
+import React from 'react';
+import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
+
+return (
+  <Breadcrumbs.CurrentItem>
+    2020_06_28_Summary_of_Annual_Recurring_Revenue.pdf
+  </Breadcrumbs.CurrentItem>
+);
+```
+
+##### Handling Truncation
+
+`CurrentItem` has built-in truncation + tooltip functionality to provide an easy-to-use, accessible
+feature for managing the length of the item. By default, the `maxWidth` is set to `350`, however you
+can adjust this as needed. Note that tooltips will only be available when text is truncated. Here's
+an example:
+
+```tsx
+import React from 'react';
+import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
+
+return (
+  <Breadcrumbs.CurrentItem maxWidth={150}>
+    2020_06_28_Summary_of_Annual_Recurring_Revenue.pdf
+  </Breadcrumbs.CurrentItem>
+);
+```

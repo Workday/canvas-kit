@@ -9,20 +9,20 @@ import {useTruncateTooltip} from './hooks';
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
-export interface LinkedCrumbProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface BreadcrumbLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
-  maxWidth?: number | string;
+  maxWidth?: number;
   onAction?: (href: string) => void;
 }
 
-export const LinkedCrumb = ({
+export const BreadcrumbLink = ({
   maxWidth,
   onAction,
   onClick = noop,
   href,
   children,
   ...props
-}: LinkedCrumbProps) => {
+}: BreadcrumbLinkProps) => {
   const ref = React.useRef<HTMLAnchorElement>(null);
   const {
     isTooltipOpen,

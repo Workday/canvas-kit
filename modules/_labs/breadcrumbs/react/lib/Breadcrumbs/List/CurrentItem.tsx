@@ -7,11 +7,11 @@ import {Popper} from '@workday/canvas-kit-react-popup';
 
 import {useTruncateTooltip} from './hooks';
 
-export interface CurrentCrumbProps extends React.HTMLAttributes<HTMLLIElement> {
-  maxWidth?: number | string;
+export interface CurrentItemProps extends React.HTMLAttributes<HTMLLIElement> {
+  maxWidth?: number;
 }
 
-export const CurrentCrumb = ({children, maxWidth, ...elemProps}: CurrentCrumbProps) => {
+export const CurrentItem = ({children, maxWidth, ...elemProps}: CurrentItemProps) => {
   const ref = React.useRef<HTMLSpanElement>(null);
 
   const {
