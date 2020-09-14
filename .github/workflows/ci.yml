@@ -1,6 +1,6 @@
 name: CI
 
-on: pull_request
+on: pull_request_target
 
 jobs:
   verify:
@@ -65,7 +65,7 @@ jobs:
       - uses: chromaui/action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          appCode: dlpro96xybh
+          projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
           storybookBuildDir: docs
           exitOnceUploaded: true
           exitZeroOnChanges: true
@@ -73,8 +73,5 @@ jobs:
       - name: Integration tests
         run: yarn cypress run --record
         env:
-          # Github Actions doesn't support encryption on forks
-          # If these keys become compromised, we will rotate and disable these features
-          # on forked PRs until a suitable workaround is found
-          CYPRESS_RECORD_KEY: 3a9347b6-36ab-4a36-823d-709f4078b148
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_KEY }}
           CYPRESS_CACHE_FOLDER: .cache/cypress

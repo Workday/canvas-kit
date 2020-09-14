@@ -53,4 +53,23 @@ describe('TextInput', () => {
       getTextInput().should('be.disabled');
     });
   });
+
+  context(`given the 'Placeholder' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components|Inputs/Text Input/React/Top Label', 'With Placeholder');
+    });
+
+    it('should pass accessibility checks', () => {
+      cy.checkA11y();
+    });
+
+    it('should render a placeholder text', () => {
+      getTextInput().should('have.attr', 'placeholder', 'Placeholder');
+    });
+
+    it('should reflect the text typed', () => {
+      getTextInput().type('Test');
+      getTextInput().should('have.value', 'Test');
+    });
+  });
 });
