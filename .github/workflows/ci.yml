@@ -64,7 +64,7 @@ jobs:
 
       - uses: chromaui/action@v1
         with:
-          token: ${{ secrets.GH_RW_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
           storybookBuildDir: docs
           exitOnceUploaded: true
