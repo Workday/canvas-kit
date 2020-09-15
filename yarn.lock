@@ -4051,33 +4051,6 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-depth-web/-/canvas-depth-web-0.16.4.tgz#3714a1a955055386a2b70cc05852162b1e056bf2"
   integrity sha512-l4LpCUk2G1FVRfo0Z+MkCWa9bzNIfWdUqGtdXaFSBySYgYvLhG6vNNuTK1VXls8jQdFCUROhKRWcy3Ht1n7NDg==
 
-"@workday/canvas-kit-labs-react-core@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-labs-react-core/-/canvas-kit-labs-react-core-4.1.2.tgz#763d50a50a53a7b29b104c15813898fb7d1ffb15"
-  integrity sha512-bpJBHLoRKcQMHEq+kFbyY1BeRai1wxV0tfQf4HcRs7ro0mZezDFW9/huBmpatGi+onjixV7EEjtf6lKaEVN+tQ==
-  dependencies:
-    "@emotion/core" "^10.0.28"
-    "@emotion/styled" "^10.0.27"
-    "@workday/canvas-colors-web" "^2.0.0"
-    "@workday/canvas-kit-react-common" "^4.1.2"
-    "@workday/canvas-kit-react-core" "^4.1.2"
-
-"@workday/canvas-kit-labs-react-menu@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-kit-labs-react-menu/-/canvas-kit-labs-react-menu-4.1.2.tgz#ecdc7f54490fdecff59cf821e669716d055a0bf0"
-  integrity sha512-9V5g441SeluS/WXAALlEcBdnmMxUfwLApEfxCDR/Jw+/GgwEl6XtgoesT/OhI8m/8hculqztQXnGxO/WxBeVXw==
-  dependencies:
-    "@emotion/core" "^10.0.28"
-    "@emotion/styled" "^10.0.27"
-    "@types/uuid" "^3.4.4"
-    "@workday/canvas-kit-labs-react-core" "^4.1.2"
-    "@workday/canvas-kit-react-card" "^4.1.2"
-    "@workday/canvas-kit-react-common" "^4.1.2"
-    "@workday/canvas-kit-react-core" "^4.1.2"
-    "@workday/canvas-kit-react-icon" "^4.1.2"
-    "@workday/design-assets-types" "^0.2.4"
-    uuid "^3.3.3"
-
 "@workday/canvas-space-web@^0.15.5":
   version "0.15.6"
   resolved "https://registry.yarnpkg.com/@workday/canvas-space-web/-/canvas-space-web-0.15.6.tgz#8a7ddca7734507860360d6e67abdf519c9c7a4f1"
