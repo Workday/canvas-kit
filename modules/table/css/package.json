@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css-table",
-  "version": "4.1.2",
+  "version": "4.2.0",
   "description": "Table CSS for Canvas kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -16,8 +16,8 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/table/css"
   },
   "dependencies": {
-    "@workday/canvas-kit-css-core": "^4.1.2",
-    "@workday/canvas-kit-css-icon": "^4.1.2"
+    "@workday/canvas-kit-css-core": "^4.2.0",
+    "@workday/canvas-kit-css-icon": "^4.2.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
