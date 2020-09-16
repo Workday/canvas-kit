@@ -1,5 +1,4 @@
 import React, {Children, useLayoutEffect, useState, useEffect} from 'react';
-import {CSSObject} from '@emotion/core';
 
 import {BreadcrumbLink} from './Link';
 import {Breadcrumb} from '../types';
@@ -76,10 +75,7 @@ export const useBuildCollapsedList = <E extends HTMLElement>(
   return {collapsedItems, collapsedItemIndices};
 };
 
-export const useTruncateTooltip = (
-  maxWidth: number | string = 350,
-  ref?: React.RefObject<HTMLSpanElement>
-) => {
+export const useTruncateTooltip = (ref?: React.RefObject<HTMLSpanElement>) => {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [shouldShowTooltip, setShouldShowTooltip] = useState(false);
   useEffect(() => {
@@ -87,14 +83,6 @@ export const useTruncateTooltip = (
       setShouldShowTooltip(ref.current.scrollWidth > ref.current.clientWidth);
     }
   }, [ref]);
-
-  const truncateStyles: CSSObject = {
-    display: 'inline-block',
-    maxWidth,
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-  };
 
   const openTooltip = (event: React.MouseEvent | React.FocusEvent) => {
     const {currentTarget} = event;
@@ -113,7 +101,6 @@ export const useTruncateTooltip = (
   };
 
   return {
-    truncateStyles,
     isTooltipOpen,
     openTooltip,
     closeTooltip,

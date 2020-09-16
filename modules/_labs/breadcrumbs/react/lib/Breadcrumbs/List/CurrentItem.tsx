@@ -1,54 +1,58 @@
-/** @jsx jsx */
 import React from 'react';
-import {css, jsx} from '@emotion/core';
+import {styled} from '@workday/canvas-kit-react-common';
 import {type} from '@workday/canvas-kit-react-core';
 import {TooltipContainer} from '@workday/canvas-kit-react-tooltip';
 import {Popper} from '@workday/canvas-kit-react-popup';
 
 import {useTruncateTooltip} from './hooks';
+import {truncateStyles} from './styles';
 
 export interface CurrentItemProps extends React.HTMLAttributes<HTMLLIElement> {
   maxWidth?: number;
 }
 
+const ListItem = styled('li')(
+  {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    textAlign: 'left',
+    ...type.body,
+  },
+
+  ({maxWidth}: CurrentItemProps) => ({
+    ...truncateStyles(maxWidth),
+  })
+);
+
 export const CurrentItem = ({children, maxWidth, ...elemProps}: CurrentItemProps) => {
-  const ref = React.useRef<HTMLSpanElement>(null);
+  const ref = React.useRef<HTMLLIElement>(null);
 
   const {
     isTooltipOpen,
     openTooltip,
     closeTooltip,
     shouldShowTooltip,
-    truncateStyles,
     tooltipProps,
-  } = useTruncateTooltip(maxWidth, ref);
-
-  const listStyles = css({
-    display: 'flex',
-    alignItems: 'center',
-  });
-
-  const crumbTextStyles = css({
-    ...truncateStyles,
-    ...type.body,
-  });
+  } = useTruncateTooltip(ref);
 
   return (
-    <li css={listStyles} {...elemProps}>
-      <span
+    <>
+      <ListItem
         ref={ref}
-        css={crumbTextStyles}
+        maxWidth={maxWidth}
         onMouseEnter={openTooltip}
         onMouseLeave={closeTooltip}
         onFocus={openTooltip}
         onBlur={closeTooltip}
         {...(shouldShowTooltip && {tabIndex: 0})}
+        {...elemProps}
       >
         {children}
-      </span>
+      </ListItem>
       <Popper open={isTooltipOpen} anchorElement={ref} placement="top">
         <TooltipContainer {...tooltipProps}>{children}</TooltipContainer>
       </Popper>
-    </li>
+    </>
   );
 };

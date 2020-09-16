@@ -1,36 +1,41 @@
-/** @jsx jsx */
 import React from 'react';
-import {css, jsx} from '@emotion/core';
+import {styled} from '@workday/canvas-kit-react-common';
 import {type} from '@workday/canvas-kit-react-core';
 import {TooltipContainer} from '@workday/canvas-kit-react-tooltip';
 import {Popper} from '@workday/canvas-kit-react-popup';
 
 import {useTruncateTooltip} from './hooks';
+import {truncateStyles} from './styles';
 
-// eslint-disable-next-line no-empty-function
-const noop = () => {};
 export interface BreadcrumbLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   maxWidth?: number;
   onAction?: (href: string) => void;
 }
 
+type StyledLinkProps = Pick<BreadcrumbLinkProps, 'maxWidth' | 'href'>;
+
+const StyledLink = styled('a')(
+  {
+    textAlign: 'left',
+    ...type.body,
+    ...type.variant.link,
+  },
+  ({maxWidth}: StyledLinkProps) => ({
+    ...truncateStyles(maxWidth),
+  })
+);
+
 export const BreadcrumbLink = ({
   maxWidth,
   onAction,
-  onClick = noop,
+  onClick,
   href,
   children,
   ...props
 }: BreadcrumbLinkProps) => {
   const ref = React.useRef<HTMLAnchorElement>(null);
-  const {
-    isTooltipOpen,
-    openTooltip,
-    closeTooltip,
-    truncateStyles,
-    tooltipProps,
-  } = useTruncateTooltip(maxWidth, ref);
+  const {isTooltipOpen, openTooltip, closeTooltip, tooltipProps} = useTruncateTooltip(ref);
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();
@@ -42,20 +47,16 @@ export const BreadcrumbLink = ({
       window.location.href = href;
     }
     // don't block the onClick event if it's provided
-    onClick(event);
+    if (onClick) {
+      onClick(event);
+    }
   };
-
-  const linkStyles = css({
-    ...truncateStyles,
-    ...type.body,
-    ...type.variant.link,
-  });
 
   return (
     <React.Fragment>
-      <a
-        css={linkStyles}
+      <StyledLink
         ref={ref}
+        maxWidth={maxWidth}
         onMouseEnter={openTooltip}
         onMouseLeave={closeTooltip}
         onFocus={openTooltip}
@@ -66,7 +67,7 @@ export const BreadcrumbLink = ({
         {...props}
       >
         {children}
-      </a>
+      </StyledLink>
       <Popper open={isTooltipOpen} anchorElement={ref} placement="top">
         <TooltipContainer {...tooltipProps}>{children}</TooltipContainer>
       </Popper>

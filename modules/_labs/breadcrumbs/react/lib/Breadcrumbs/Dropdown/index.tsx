@@ -1,24 +1,29 @@
 import React from 'react';
+import {Breadcrumb} from '../types';
 import {Popper} from '@workday/canvas-kit-react-popup';
 
-// local components
+import {useRTL} from '../hooks';
 import {useDropdown} from './hooks';
 import {DropdownButton, DropdownButtonProps} from './Button';
 import {DropdownMenu} from './Menu';
 
-interface DropdownProps extends Pick<DropdownButtonProps, 'buttonIcon'> {
+export interface DropdownProps extends Pick<DropdownButtonProps, 'buttonIcon'> {
   buttonAriaLabel: string;
+  items?: Breadcrumb[];
 }
 
-export const Dropdown = ({buttonAriaLabel, buttonIcon}: DropdownProps) => {
+export const Dropdown = ({buttonAriaLabel, buttonIcon, items = []}: DropdownProps) => {
   // refs
   const buttonRef = React.useRef<HTMLButtonElement>(null);
   const activeDropdownItemRef = React.useRef<HTMLAnchorElement>(null);
   // behaviors
   const {dropdownButtonProps, dropdownMenuProps, popperProps} = useDropdown(
     activeDropdownItemRef,
-    buttonRef
+    buttonRef,
+    items
   );
+  const {shouldUseRTL} = useRTL();
+  const placement = shouldUseRTL ? 'bottom-end' : 'bottom-start';
 
   return (
     <>
@@ -27,7 +32,7 @@ export const Dropdown = ({buttonAriaLabel, buttonIcon}: DropdownProps) => {
         buttonIcon={buttonIcon}
         {...dropdownButtonProps}
       />
-      <Popper placement="bottom-start" {...popperProps}>
+      <Popper placement={placement} {...popperProps}>
         <DropdownMenu {...dropdownMenuProps} />
       </Popper>
     </>

@@ -64,11 +64,11 @@ collapse items in the list into a dropdown menu at a specified width.
 
 #### Component Props
 
-| name              | type               | required | default           |
-| ----------------- | ------------------ | -------- | ----------------- |
-| maxWidth          | `number`           | `true`   | n/a               |
-| expanderAriaLabel | `string`           | `true`   | n/a               |
-| buttonIcon        | `CanvasSystemIcon` | `false`  | `folderCloseIcon` |
+| name              | type               | required | default           | recommended                              |
+| ----------------- | ------------------ | -------- | ----------------- | ---------------------------------------- |
+| maxWidth          | `number`           | `true`   | n/a               | n/a                                      |
+| expanderAriaLabel | `string`           | `true`   | n/a               | "more links" (and translated equivalent) |
+| buttonIcon        | `CanvasSystemIcon` | `false`  | `folderCloseIcon` | n/a                                      |
 
 This component supports all native `li` props. The `expanderAriaLabel` prop is required for
 accessibility. We recommend using `"more links"` as seen in the example. This label is applied to
@@ -117,9 +117,9 @@ const AccountInvoiceCollapsibleBreadcrumbNav = () => {
 
 #### Component Props
 
-| name       | type     | required | default |
-| ---------- | -------- | -------- | ------- |
-| aria-label | `string` | `true`   | n/a     |
+| name       | type     | required | default | recommended                              |
+| ---------- | -------- | -------- | ------- | ---------------------------------------- |
+| aria-label | `string` | `true`   | n/a     | "Breadcrumb" (and translated equivalent) |
 
 This component supports all native HTMLElement props. The `aria-label` prop is required for
 accessibility. We recommend using `"Breadcrumb"` as seen in the example.
@@ -269,3 +269,15 @@ return (
   </Breadcrumbs.CurrentItem>
 );
 ```
+
+### RTL (Right-To-Left) Support
+
+`Breadcrumbs` components handle RTL internally without additional configuration needed. All you need
+to supply is the translated text for items and ARIA labels.
+
+### Accessibility
+
+Accessibility is built into `Breadcrumbs` in a way that allows you to create an inclusive experience
+little additional configuration. The only ARIA labels you'll need to add are the `aria-label` for
+the `Nav` and the `expanderAriaLabel` for the `CollapsibleList`. And all links require `href`s to be
+properly identified. All other accessible attributes are baked into components.

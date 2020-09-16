@@ -2,7 +2,7 @@
 import React from 'react';
 import {css, jsx} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
-import {folderCloseIcon} from '@workday/canvas-system-icons-web';
+import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors} from '@workday/canvas-kit-react-core';
 
@@ -14,11 +14,11 @@ export interface DropdownButtonProps extends IconButtonProps {
 }
 
 export const DropdownButton = ({
-  buttonIcon = folderCloseIcon,
+  buttonIcon = relatedActionsIcon,
   buttonRef,
   toggled,
   variant = IconButton.Variant.Plain,
-  ...props
+  ...elemProps
 }: DropdownButtonProps) => {
   const hasPlainVariant = variant === IconButton.Variant.Plain;
   // gives the plain icon variant a little extra space between the chevron separators
@@ -32,11 +32,11 @@ export const DropdownButton = ({
       color={colors.licorice200}
       buttonRef={buttonRef}
       toggled={toggled}
-      aria-pressed={undefined}
+      aria-pressed={undefined} // removing aria-pressed from IconButton and opting for aria-expanded
       aria-expanded={toggled}
       aria-haspopup
       aria-controls="menu"
-      {...props}
+      {...elemProps}
     />
   );
 };

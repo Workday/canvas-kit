@@ -1,23 +1,21 @@
-/** @jsx jsx */
 import React, {forwardRef} from 'react';
-import {css, jsx} from '@emotion/core';
+import {styled} from '@workday/canvas-kit-react-common';
 import {colors, commonColors, type, typeColors, spacing} from '@workday/canvas-kit-react-core';
 
 interface DropdownMenuItemLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   href: string;
 }
 
-const menuItemLinkStyles = css({
+const MenuItemLink = styled('a')({
   ...type.body,
-  textDecoration: 'none',
-  outline: 'none',
-  padding: `${spacing.xxs} ${spacing.s}`,
-  flex: 1,
-  alignItems: 'center',
   boxSizing: 'border-box',
+  textAlign: 'left',
   color: colors.blackPepper300,
   cursor: 'pointer',
-  display: 'flex',
+  display: 'block',
+  outline: 'none',
+  padding: `${spacing.xxs} ${spacing.s}`,
+  textDecoration: 'none',
   transition: 'background-color color 80ms',
   '&:hover': {
     backgroundColor: commonColors.hoverBackground,
@@ -31,13 +29,13 @@ const menuItemLinkStyles = css({
 
 export const DropdownMenuItemLink = forwardRef(
   (
-    {children, href, ...props}: DropdownMenuItemLinkProps,
+    {children, href, ...elemProps}: DropdownMenuItemLinkProps,
     ref: React.RefObject<HTMLAnchorElement>
   ) => {
     return (
-      <a css={menuItemLinkStyles} ref={ref} href={href} role="menuitem" {...props}>
+      <MenuItemLink ref={ref} href={href} role="menuitem" {...elemProps}>
         {children}
-      </a>
+      </MenuItemLink>
     );
   }
 );

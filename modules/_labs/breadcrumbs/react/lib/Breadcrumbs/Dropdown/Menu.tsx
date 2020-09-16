@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
 import {css, jsx} from '@emotion/core';
+import {styled} from '@workday/canvas-kit-react-common';
 import {
   borderRadius,
   colors,
@@ -11,21 +12,22 @@ import {
 } from '@workday/canvas-kit-react-core';
 
 // types
-import {DropdownContext} from './Provider';
 import {Breadcrumb} from '../types';
 // local components
 import {DropdownMenuItemLink} from './MenuItemLink';
 
-export interface DropdownMenuProps
-  extends React.HTMLAttributes<HTMLUListElement>,
-    Pick<DropdownContext, 'activeDropdownItem' | 'dropdownItems' | 'setActiveDropdownItem'> {
+export interface DropdownMenuProps {
+  activeDropdownItem: Breadcrumb;
+  'aria-labelledby': string;
+  dropdownItems: Breadcrumb[];
+  setActiveDropdownItem: React.Dispatch<React.SetStateAction<Breadcrumb>>;
   activeDropdownItemRef: React.RefObject<HTMLAnchorElement>;
   resetFocus: () => void;
   toggleActiveItemUp: () => void;
   toggleActiveItemDown: () => void;
 }
 
-const menuWrapperStyles = css({
+const menuStyles = css({
   ...type.body,
   ...depth[2],
   backgroundColor: commonColors.background,
@@ -34,25 +36,25 @@ const menuWrapperStyles = css({
   boxSizing: 'border-box',
   display: 'inline-block',
   marginTop: spacing.xxxs,
+  maxHeight: 200,
+  outline: 'none',
+  overflowY: 'auto',
   position: 'relative',
   width: 'max-content',
 });
 
-const MenuWrapper = (props: React.HTMLAttributes<HTMLDivElement>) => {
-  return <div css={menuWrapperStyles} {...props} />;
-};
-
-const menuStyles = css({
+const StyledMenuList = styled('ul')({
   boxSizing: 'border-box',
   listStyle: 'none',
   margin: `${spacing.xxs} 0`,
   padding: 0,
   width: 280,
   wordBreak: 'break-word',
+  overflowWrap: 'break-word', // needed for IE11
 });
 
-const Menu = (props: React.HTMLAttributes<HTMLUListElement>) => {
-  return <ul role="menu" css={menuStyles} {...props} />;
+const MenuList = (elemProps: React.HTMLAttributes<HTMLUListElement>) => {
+  return <StyledMenuList role="menu" {...elemProps} />;
 };
 
 export const DropdownMenu = ({
@@ -63,43 +65,54 @@ export const DropdownMenu = ({
   setActiveDropdownItem,
   toggleActiveItemDown,
   toggleActiveItemUp,
-  ...props
+  ...elemProps
 }: DropdownMenuProps) => {
-  const handleItemKeyUp = (e: React.KeyboardEvent<HTMLLIElement>) => {
-    switch (e.key) {
+  const handleItemKeyUp = (event: React.KeyboardEvent<HTMLLIElement>) => {
+    switch (event.key) {
       case 'ArrowUp':
-      case 'ArrowLeft':
       case 'Up': // IE/Edge specific value
-        return toggleActiveItemUp();
+      case 'ArrowLeft':
+      case 'Left': // IE/Edge specific value
+        toggleActiveItemUp();
+        break;
       case 'ArrowDown':
       case 'Down': // IE/Edge specific value
       case 'ArrowRight':
-        return toggleActiveItemDown();
+      case 'Right': // IE/Edge specific value
+        toggleActiveItemDown();
+        break;
       default:
         break;
     }
   };
 
-  const handleItemKeyDown = (e: React.KeyboardEvent<HTMLLIElement>, item: Breadcrumb) => {
-    switch (e.key) {
+  const handleItemKeyDown = (event: React.KeyboardEvent<HTMLLIElement>, item: Breadcrumb) => {
+    switch (event.key) {
       case 'Tab':
-        e.preventDefault();
+        event.preventDefault();
         break;
       case 'Enter':
-        e.preventDefault();
+        event.preventDefault();
         if (item.onAction) {
           item.onAction(item);
-          return resetFocus();
+          resetFocus();
+          break;
         }
-        return (window.location.href = item.link);
+        window.location.href = item.link;
+        break;
+      case 'Escape':
+      case 'Esc':
+        // TODO: remove this once it's available in the `useCloseOnEscape` hook
+        resetFocus();
+        break;
       default:
         break;
     }
   };
 
   return (
-    <MenuWrapper>
-      <Menu {...props}>
+    <div css={menuStyles}>
+      <MenuList {...elemProps}>
         {dropdownItems.map((item, i) => {
           const isFocused = item.index === activeDropdownItem.index;
           return (
@@ -110,7 +123,7 @@ export const DropdownMenu = ({
             </li>
           );
         })}
-      </Menu>
-    </MenuWrapper>
+      </MenuList>
+    </div>
   );
 };

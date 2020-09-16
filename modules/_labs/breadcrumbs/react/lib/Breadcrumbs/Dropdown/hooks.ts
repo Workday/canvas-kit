@@ -1,10 +1,15 @@
-import {useContext, useLayoutEffect} from 'react';
+import {useState, useLayoutEffect} from 'react';
 import {useUniqueId} from '@workday/canvas-kit-react-common';
-import {usePopup, useCloseOnOutsideClick, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
+import {
+  usePopup,
+  useCloseOnOutsideClick,
+  useCloseOnEscape,
+  PopperProps,
+} from '@workday/canvas-kit-react-popup';
 
-import {DropdownContext} from './Provider';
-import {DropdownMenuProps} from './Menu';
 import {DropdownButtonProps} from './Button';
+import {DropdownMenuProps} from './Menu';
+import {Breadcrumb} from '../types';
 
 export const useFocusActiveItemElement = <E extends HTMLElement>(
   activeDropdownItemRef: React.RefObject<E>
@@ -16,13 +21,31 @@ export const useFocusActiveItemElement = <E extends HTMLElement>(
   });
 };
 
+const initialActiveItem = {
+  index: 0,
+  link: '',
+  text: '',
+  width: 0,
+} as Breadcrumb;
+
+interface DropdownPopperProps extends Pick<PopperProps, 'open' | 'anchorElement'> {
+  ref: React.RefObject<HTMLDivElement>;
+}
+
+interface UseDropdown {
+  dropdownButtonProps: Omit<DropdownButtonProps, 'aria-label'>;
+  dropdownMenuProps: DropdownMenuProps;
+  popperProps: DropdownPopperProps;
+}
+
 export const useDropdown = (
   activeDropdownItemRef: React.RefObject<HTMLAnchorElement>,
   buttonRef: React.RefObject<HTMLButtonElement>,
-  buttonId: string = ''
-) => {
+  items: Breadcrumb[],
+  buttonId?: string
+): UseDropdown => {
   // state
-  const {activeDropdownItem, dropdownItems, setActiveDropdownItem} = useContext(DropdownContext);
+  const [activeDropdownItem, setActiveDropdownItem] = useState(initialActiveItem);
   // behaviors
   const {targetProps, closePopup, popperProps} = usePopup();
   useCloseOnOutsideClick(popperProps.ref, closePopup);
@@ -31,7 +54,7 @@ export const useDropdown = (
 
   const handleButtonKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter') {
-      setActiveDropdownItem(dropdownItems[0]);
+      setActiveDropdownItem(items[0]);
     }
   };
 
@@ -41,7 +64,7 @@ export const useDropdown = (
   };
 
   const findActiveDropdownItemByIndex = (index: number) => {
-    return dropdownItems.filter(item => item.index === index)[0];
+    return items.filter(item => item.index === index)[0];
   };
 
   const toggleActiveItemUp = () => {
@@ -55,7 +78,7 @@ export const useDropdown = (
   const toggleActiveItemDown = () => {
     const nextItem = findActiveDropdownItemByIndex(activeDropdownItem.index + 1);
     if (!nextItem) {
-      return setActiveDropdownItem(dropdownItems[0]);
+      return setActiveDropdownItem(items[0]);
     }
     return setActiveDropdownItem(nextItem);
   };
@@ -68,18 +91,18 @@ export const useDropdown = (
     toggled: popperProps.open,
     onKeyUp: handleButtonKeyUp,
     ...targetProps,
-  } as Omit<DropdownButtonProps, 'aria-label'>;
+  };
 
   const dropdownMenuProps = {
     'aria-labelledby': uniqueButtonId,
-    dropdownItems: dropdownItems,
+    dropdownItems: items,
     activeDropdownItem: activeDropdownItem,
     activeDropdownItemRef: activeDropdownItemRef,
     setActiveDropdownItem: setActiveDropdownItem,
     resetFocus: resetMenuFocus,
     toggleActiveItemUp,
     toggleActiveItemDown,
-  } as DropdownMenuProps;
+  };
 
   return {dropdownButtonProps, dropdownMenuProps, popperProps};
 };

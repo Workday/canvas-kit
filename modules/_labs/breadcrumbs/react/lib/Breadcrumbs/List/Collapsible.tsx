@@ -1,6 +1,5 @@
 import React, {Children, useRef} from 'react';
 // local components
-import {DropdownProvider} from '../Dropdown/Provider';
 import {Dropdown} from '../Dropdown';
 import {BreadcrumbsListItem} from './ListItem';
 import {BreadcrumbsList} from './index';
@@ -41,9 +40,11 @@ export const CollapsibleList = ({
       {rootItem}
       {shouldCollapseList && (
         <BreadcrumbsListItem>
-          <DropdownProvider items={collapsedItems}>
-            <Dropdown buttonAriaLabel={expanderAriaLabel} buttonIcon={buttonIcon} />
-          </DropdownProvider>
+          <Dropdown
+            buttonAriaLabel={expanderAriaLabel}
+            buttonIcon={buttonIcon}
+            items={collapsedItems}
+          />
         </BreadcrumbsListItem>
       )}
       {collapsibleItems.map((item, i) => {
