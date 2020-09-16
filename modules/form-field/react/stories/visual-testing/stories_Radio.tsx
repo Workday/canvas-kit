@@ -18,6 +18,19 @@ export default withSnapshotsEnabled({
   component: FormField,
 });
 
+const testGroup = (
+  <RadioGroup name="contact" value={'email'}>
+    <Radio id="1" value="email" label="E-mail" />
+    <Radio id="2" value="phone" label="Phone" />
+    <Radio id="3" value="fax" label="Fax (disabled)" disabled={true} />
+    <Radio
+      id="4"
+      value="mail"
+      label="Mail (US Postal Service aka USPS), a longer than normal label"
+    />
+  </RadioGroup>
+);
+
 export const RadioStates = () => (
   <div>
     <h3>Radio</h3>
@@ -90,13 +103,56 @@ export const RadioStates = () => (
             hintId={hintId}
             {...props}
           >
-            <RadioGroup name="contact" value={'email'}>
-              <Radio id="1" value="email" label="E-mail" />
-              <Radio id="2" value="fax" label="Fax (disabled)" disabled={true} />
-            </RadioGroup>
+            {testGroup}
           </FormField>
         )}
       </ComponentStatesTable>
     </StaticStates>
+    <h3>Radio Group (grow)</h3>
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={permutateProps({
+          error: [
+            {value: undefined, label: 'No Error'},
+            {value: FormField.ErrorType.Alert, label: 'Alert'},
+            {value: FormField.ErrorType.Error, label: 'Error'},
+          ],
+        })}
+        columnProps={[
+          {
+            label: 'Grow',
+            props: {label: 'Contact', grow: true},
+          },
+        ]}
+      >
+        {props => (
+          <FormField
+            useFieldset={true}
+            hintText={typeof props.error !== 'undefined' ? hintText : undefined}
+            hintId={hintId}
+            {...props}
+          >
+            {testGroup}
+          </FormField>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+
+    <h3>RadioGroup (wrapping)</h3>
+    <div style={{maxWidth: 480}}>
+      <FormField
+        label="Really long label. Really long label. Really long label. Really long label. Really long label. Really long label."
+        labelPosition={FormField.LabelPosition.Left}
+        useFieldset={true}
+      >
+        {testGroup}
+      </FormField>
+      <FormField
+        label="Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label. Really long label."
+        useFieldset={true}
+      >
+        {testGroup}
+      </FormField>
+    </div>
   </div>
 );

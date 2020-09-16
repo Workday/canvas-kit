@@ -130,7 +130,7 @@ export const SelectStatesOption = () => (
           {label: 'Default', props: {}},
           {label: 'Hover', props: {className: 'hover'}},
         ],
-        rowProps: [{label: 'Disabled', props: {disabled: true}}],
+        rowProps: [{label: 'Disabled', props: {'aria-disabled': true}}],
       },
       {
         label: 'Interaction States',

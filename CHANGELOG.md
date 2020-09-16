@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.2.0 (2020-09-15)
+
+### Components
+- fix(color-picker): Fix IE rendering for color picker swatchbook ([#832](https://github.com/Workday/canvas-kit/pull/832)) [@jtschult](https://github.com/jtschult)
+- feat(menu): exported MenuProps ([#829](https://github.com/Workday/canvas-kit/pull/829)) [@rileymiller](https://github.com/rileymiller)
+- docs(segmented-control): Remove reference to labs ([#839](https://github.com/Workday/canvas-kit/pull/839)) [@lychyi](https://github.com/lychyi)
+- fix(select): Prevent disabled options from being keyboard-focused ([#837](https://github.com/Workday/canvas-kit/pull/837)) [@jamesfan](https://github.com/jamesfan)
+- fix(color-picker): Remove data attributes ([#838](https://github.com/Workday/canvas-kit/pull/838)) [@lychyi](https://github.com/lychyi)
+- feat(color-picker): Update and export default color set ([#831](https://github.com/Workday/canvas-kit/pull/831)) [@jtschult](https://github.com/jtschult)
+- test: Add cypress test for placeholder in input and text area component ([#841](https://github.com/Workday/canvas-kit/pull/841)) [@mannycarrera4](https://github.com/mannycarrera4)
+- fix(select): Replace disabled attribute on options with aria-disabled ([#844](https://github.com/Workday/canvas-kit/pull/844)) [@jamesfan](https://github.com/jamesfan)
+- fix(modal): Bump focus-trap-js to 1.1.0 and add test ([#857](https://github.com/Workday/canvas-kit/pull/857)) [@alexandrzavalii](https://github.com/alexandrzavalii)
+- fix(form-field): Fix legend overflow bug (IE11) ([#853](https://github.com/Workday/canvas-kit/pull/853)) [@lychyi](https://github.com/lychyi)
+
+### Infrastructure
+- docs: Create suggestion template ([#819](https://github.com/Workday/canvas-kit/pull/819)) [@jpante](https://github.com/jpante)
+- docs: Create spike issue template ([#818](https://github.com/Workday/canvas-kit/pull/818)) [@jpante](https://github.com/jpante)
+- ci: Add new issues into Backlog project ([#823](https://github.com/Workday/canvas-kit/pull/823)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Update CHANGELOG w/ correct release dates ([#821](https://github.com/Workday/canvas-kit/pull/821)) [@lychyi](https://github.com/lychyi)
+- chore: Bump prismjs from 1.17.1 to 1.21.0 ([#826](https://github.com/Workday/canvas-kit/pull/826)) [@dependabot](https://github.com/dependabot)
+- chore: Bump node-fetch from 2.6.0 to 2.6.1 ([#854](https://github.com/Workday/canvas-kit/pull/854)) [@dependabot](https://github.com/dependabot)
+
 # 4.1.2 (2020-08-04)
 
 ### Components

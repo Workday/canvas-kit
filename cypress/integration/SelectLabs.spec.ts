@@ -365,6 +365,14 @@ describe('Select', () => {
           .type('{downarrow}');
       });
 
+      context('the "Carrier Pigeon" option', () => {
+        it('should have an aria-disabled attribute set to "true"', () => {
+          cy.findByLabelText('Label (Disabled Options)')
+            .pipe(h.selectLabs.getOption('Carrier Pigeon'))
+            .should('have.attr', 'aria-disabled', 'true');
+        });
+      });
+
       context('when the down arrow key is pressed', () => {
         beforeEach(() => {
           cy.focused().type('{downarrow}');
