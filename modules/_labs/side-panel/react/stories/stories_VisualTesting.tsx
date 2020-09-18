@@ -15,42 +15,50 @@ export default withSnapshotsEnabled({
 });
 
 export const SidePanelStates = () => (
-  // <StaticStates>
-  //   <ComponentStatesTable
-  //     rowProps={permutateProps(
-  //       {
-  //         prop1: [{value: true, label: 'Prop one on'}, {value: false, label: 'Prop one off'}],
-  //         prop2: [
-  //           {value: undefined, label: ''},
-  //           {value: 'alert', label: 'Alert'},
-  //           {value: 'error', label: 'Error'},
-  //         ],
-  //       }
-  //     )}
-  //     columnProps={permutateProps(
-  //       {
-  //         className: [
-  //           {label: 'Default', value: ''},
-  //           {label: 'Hover', value: 'hover'},
-  //           {label: 'Focus', value: 'focus'},
-  //           {label: 'Focus Hover', value: 'focus hover'},
-  //           {label: 'Active', value: 'active'},
-  //           {label: 'Active Hover', value: 'active hover'},
-  //         ],
-  //         disabled: [{label: '', value: false}, {label: 'Disabled', value: true}],
-  //       },
-  //       props => {
-  //         if (props.disabled && !['', 'hover'].includes(props.className)) {
-  //           return false;
-  //         }
-  //         return true;
-  //       }
-  //     )}
-  //   >
-  //     {props => (
-  //       <SidePanel {...props} />
-  //     )}
-  //   </ComponentStatesTable>
-  // </StaticStates>
-  <SidePanel />
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={[
+        {label: 'Standard Variant', props: {variant: 'standard'}},
+        {label: 'Alternate Variant', props: {variant: 'alternate'}},
+      ]}
+      columnProps={permutateProps(
+        {
+          collapsed: [
+            {label: 'Controlled Collapsed', value: true},
+            {label: 'Controlled Expanded', value: false},
+            {label: '', value: undefined},
+          ],
+          defaultCollapsed: [
+            {label: 'Uncontrolled Collapsed', value: true},
+            {label: 'Uncontrolled Expanded', value: false},
+            {label: '', value: undefined},
+          ],
+          origin: [
+            {label: '(left)', value: 'left'},
+            {label: '(right)', value: 'right'},
+          ],
+        },
+        ({collapsed, defaultCollapsed}) => {
+          // Don't show permutations of both values being defined (collapsed prop always wins over defaultCollapsed)
+          if (collapsed !== undefined && defaultCollapsed !== undefined) {
+            return false;
+          }
+          // Don't show if both are undefined
+          if (collapsed === undefined && defaultCollapsed === undefined) {
+            return false;
+          }
+          return true;
+        }
+      )}
+      // columnProps={[
+      //   { label: 'Controlled Collapsed', props: { collapsed: true } },
+      //   { label: 'Controlled Expanded', props: { collapsed: false } },
+      //   { label: 'Uncontrolled Collapsed', props: { defaultCollapsed: true } },
+      //   { label: 'Uncontrolled Expanded', props: { defaultCollapsed: false } },
+
+      // ]}
+    >
+      {props => <SidePanel {...props} />}
+    </ComponentStatesTable>
+  </StaticStates>
 );

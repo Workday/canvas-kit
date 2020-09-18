@@ -2,15 +2,10 @@
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
-import styled from '@emotion/styled';
-import {spacing} from '@workday/canvas-kit-react-core';
-import {type} from '@workday/canvas-kit-labs-react-core';
-import {IconButton} from '@workday/canvas-kit-react-button';
-import {AccentIcon} from '@workday/canvas-kit-react-icon';
-import {rocketIcon} from '@workday/canvas-accent-icons-web';
-import {transformationImportIcon} from '@workday/canvas-system-icons-web';
+import SidePanel from '../index';
+import {Button} from '@workday/canvas-kit-react-button';
+import {colors, depth} from '@workday/canvas-kit-react-core';
 
-import SidePanel, {SidePanelProps} from '../index';
 import README from '../README.md';
 
 export default {
@@ -19,105 +14,92 @@ export default {
   component: SidePanel,
 };
 
-export const LeftSidePanel = () => {
-  const [collapsed, setCollapsed] = React.useState(false);
-
-  const SidePanelHeader = styled('div')<Pick<SidePanelProps, 'collapsed'>>(
-    {
-      display: 'flex',
-    },
-    ({collapsed}) => ({
-      alignItems: collapsed ? undefined : 'center',
-      justifyContent: collapsed ? 'center' : 'space-between',
-      padding: collapsed
-        ? `${spacing.s} 0 0 0`
-        : `${spacing.m} ${spacing.xxs} ${spacing.m} ${spacing.s}`,
-      left: collapsed ? 0 : undefined,
-      right: collapsed ? 0 : undefined,
-      margin: collapsed ? 'auto' : undefined,
-    })
-  );
-
+export const Default = () => {
   const heightOffset = 40;
 
-  const buttonStyle = {
-    transform: `rotate(${collapsed ? 0 : 180}deg)`,
-  };
-
-  const headingStyle = {
-    ...type.h4,
-    flex: 1,
-    margin: `0 ${spacing.s}`,
-  };
-
   return (
-    <SidePanel height={`calc(100vh - ${heightOffset * 2}px)`} collapsed={collapsed}>
-      <SidePanelHeader collapsed={collapsed}>
-        {collapsed ? null : <AccentIcon icon={rocketIcon} />}
-        {collapsed ? null : <h4 style={headingStyle}>Left Side Panel</h4>}
-        <IconButton
-          style={buttonStyle}
-          icon={transformationImportIcon}
-          aria-label={collapsed ? 'expand navigation pane' : 'collapse navigation pane'}
-          onClick={e => {
-            setCollapsed(!collapsed);
-          }}
-        />
-      </SidePanelHeader>
-      <nav aria-label="navigation pane"></nav>
-    </SidePanel>
+    <SidePanel
+      defaultCollapsed
+      height={`calc(100vh - ${heightOffset * 2}px)`}
+      onCollapsedChange={(collapsed, animation) => {
+        console.log(
+          `${
+            collapsed ? 'Collapsed state: ' : 'Expanded state: '
+          } Side Panel is (internally) ${animation}`
+        );
+      }}
+    ></SidePanel>
   );
 };
 
 export const RightSidePanel = () => {
-  const [collapsed, setCollapsed] = React.useState(false);
-
-  const SidePanelHeader = styled('div')<Pick<SidePanelProps, 'collapsed'>>(
-    {
-      display: 'flex',
-    },
-    ({collapsed}) => ({
-      alignItems: collapsed ? undefined : 'center',
-      justifyContent: collapsed ? 'center' : 'space-between',
-      padding: collapsed
-        ? `${spacing.s} 0 0 0`
-        : `${spacing.m} ${spacing.s} ${spacing.m} ${spacing.xxs}`,
-      left: collapsed ? 0 : undefined,
-      right: collapsed ? 0 : undefined,
-      margin: collapsed ? 'auto' : undefined,
-    })
-  );
-
   const heightOffset = 40;
 
-  const buttonStyle = {
-    transform: `rotate(${collapsed ? 180 : 0}deg)`,
-  };
-
-  const headingStyle = {
-    ...type.h4,
-    flex: 1,
-    margin: `0 ${spacing.s}`,
-  };
-
   return (
-    <SidePanel
-      style={{position: 'absolute', right: 40}}
-      height={`calc(100vh - ${heightOffset * 2}px)`}
-      collapsed={collapsed}
+    <div
+      style={{
+        position: 'relative',
+      }}
     >
-      <SidePanelHeader collapsed={collapsed}>
-        <IconButton
-          style={buttonStyle}
-          icon={transformationImportIcon}
-          aria-label={collapsed ? 'expand navigation pane' : 'collapse navigation pane'}
-          onClick={e => {
-            setCollapsed(!collapsed);
+      <SidePanel
+        style={{position: 'absolute', right: 0}}
+        defaultCollapsed
+        origin="right"
+        height={`calc(100vh - ${heightOffset * 2}px)`}
+        onCollapsedChange={(collapsed, animation) => {
+          console.log(
+            `${
+              collapsed ? 'Collapsed state: ' : 'Expanded state: '
+            } Side Panel is (internally) ${animation}`
+          );
+        }}
+      ></SidePanel>
+    </div>
+  );
+};
+
+export const ControlledSidePanel = () => {
+  const [collapsed, setCollapsed] = React.useState(false);
+  const heightOffset = 40;
+  return (
+    <div style={{display: 'flex', backgroundColor: colors.soap200}}>
+      <div style={{width: 400}}>
+        <SidePanel
+          variant={'alternate'}
+          collapsed={collapsed}
+          height={`calc(100vh - ${heightOffset * 2}px)`}
+          onCollapsedChange={(collapsed, animation) => {
+            console.log(
+              `${
+                collapsed ? 'Collapsed state: ' : 'Expanded state: '
+              } Side Panel is (internally) ${animation}`
+            );
           }}
-        />
-        {collapsed ? null : <h4 style={headingStyle}>Right Side Panel</h4>}
-      </SidePanelHeader>
-      <nav aria-label="navigation pane"></nav>
-    </SidePanel>
+        ></SidePanel>
+      </div>
+      <div>
+        <div
+          style={{
+            ...depth[3],
+            borderRadius: 4,
+            marginTop: 24,
+            padding: 24,
+            width: 320,
+            textAlign: 'center',
+            backgroundColor: colors.frenchVanilla100,
+          }}
+        >
+          <p>Controlled Side Panel</p>
+          <Button
+            variant={Button.Variant.Primary}
+            onClick={() => {
+              setCollapsed(!collapsed);
+            }}
+          >
+            {`${collapsed ? 'Expand' : 'Collapse'} Side Panel`}
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 };
