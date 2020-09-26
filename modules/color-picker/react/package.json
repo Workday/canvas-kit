@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-color-picker",
-  "version": "4.1.2",
+  "version": "4.2.0",
   "description": "A Canvas-styled color picker",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -47,10 +47,10 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-common": "^4.1.2",
-    "@workday/canvas-kit-react-core": "^4.1.2",
-    "@workday/canvas-kit-react-icon": "^4.1.2",
-    "@workday/canvas-kit-react-text-input": "^4.1.2",
+    "@workday/canvas-kit-react-common": "^4.2.0",
+    "@workday/canvas-kit-react-core": "^4.2.0",
+    "@workday/canvas-kit-react-icon": "^4.2.0",
+    "@workday/canvas-kit-react-text-input": "^4.2.0",
     "@workday/canvas-system-icons-web": "^1.0.20"
   },
   "peerDependencies": {

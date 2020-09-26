@@ -7,6 +7,7 @@ import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
 import {FormField} from '@workday/canvas-kit-react-form-field';
 import {TextInput} from '@workday/canvas-kit-react-text-input';
 import {Modal, useModal} from '@workday/canvas-kit-react-modal';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react-radio';
 
 import README from '../README.md';
 import {controlComponent} from '../../../../utils/storybook';
@@ -63,6 +64,23 @@ export const WithoutHook = () => {
         <Button onClick={closeModal} variant={Button.Variant.Secondary}>
           Cancel
         </Button>
+      </Modal>
+    </>
+  );
+};
+
+export const WithRadioButtons = () => {
+  const {targetProps, modalProps} = useModal();
+  const [value, setValue] = React.useState('');
+
+  return (
+    <>
+      <Button {...targetProps}>With Radio Buttons</Button>
+      <Modal data-testid="TestModal" heading="Select Item" {...modalProps}>
+        <RadioGroup name="contact" data-testid="radiogroup" value={value} onChange={setValue}>
+          <Radio id="1" value="email" label="E-mail" />
+          <Radio id="2" value="phone" label="Phone" />
+        </RadioGroup>
       </Modal>
     </>
   );
