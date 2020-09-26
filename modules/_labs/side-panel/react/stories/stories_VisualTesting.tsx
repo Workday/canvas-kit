@@ -50,15 +50,12 @@ export const SidePanelStates = () => (
           return true;
         }
       )}
-      // columnProps={[
-      //   { label: 'Controlled Collapsed', props: { collapsed: true } },
-      //   { label: 'Controlled Expanded', props: { collapsed: false } },
-      //   { label: 'Uncontrolled Collapsed', props: { defaultCollapsed: true } },
-      //   { label: 'Uncontrolled Expanded', props: { defaultCollapsed: false } },
-
-      // ]}
     >
-      {props => <SidePanel {...props} />}
+      {props => (
+        <div style={{height: 480}}>
+          <SidePanel {...props} />
+        </div>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
