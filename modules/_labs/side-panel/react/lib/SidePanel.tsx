@@ -106,7 +106,6 @@ const SidePanel = ({
   width = 320,
   ...elemProps
 }: SidePanelProps) => {
-  const sidePanelId = useUniqueId(id);
   const mounted = React.useRef(false);
   const [collapsed, setCollapsed, isControlled] = useControllableState<typeof collapsedProp>(
     collapsedProp,
@@ -115,6 +114,9 @@ const SidePanel = ({
   const [internalState, setInternalState] = React.useState<SidePanelInternalStates>(
     collapsed ? 'collapsed' : 'expanded'
   );
+  // Optimization would be to only call uuid in a hook if this is an uncontrolled component
+  const sidePanelId = useUniqueId(id);
+
   // This is meant to prevent animations when the component renders for the first time.
   // mounted.current will only be false on the first pass
   React.useEffect(() => {
