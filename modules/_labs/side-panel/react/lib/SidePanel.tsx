@@ -27,7 +27,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The height of the component (in `px` if it's a `number`).
    *
-   * @default 400
+   * @default '100%'
    */
   height?: number | string;
   /**
@@ -57,7 +57,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Style variants of the side panel
    *
-   * @default 'grey'
+   * @default 'standard'
    */
   variant?: SidePanelVariant;
 }
