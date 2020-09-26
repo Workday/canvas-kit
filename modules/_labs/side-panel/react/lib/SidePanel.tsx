@@ -143,7 +143,12 @@ const SidePanel = ({
 
   const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
     if (event.currentTarget === event.target) {
-      setInternalState(collapsed ? 'collapsed' : 'expanded');
+      if (
+        event.animationName === motion.collapse.name ||
+        event.animationName === motion.expand.name
+      ) {
+        setInternalState(collapsed ? 'collapsed' : 'expanded');
+      }
     }
 
     if (typeof onAnimationEnd !== 'undefined') {
@@ -153,7 +158,12 @@ const SidePanel = ({
 
   const handleAnimationStart = (event: React.AnimationEvent<HTMLDivElement>) => {
     if (event.currentTarget === event.target) {
-      setInternalState(collapsed ? 'collapsing' : 'expanding');
+      if (
+        event.animationName === motion.collapse.name ||
+        event.animationName === motion.expand.name
+      ) {
+        setInternalState(collapsed ? 'collapsing' : 'expanding');
+      }
     }
 
     if (typeof onAnimationStart !== 'undefined') {
