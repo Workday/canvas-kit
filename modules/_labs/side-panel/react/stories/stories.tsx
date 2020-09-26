@@ -21,12 +21,11 @@ export const Default = () => {
     <SidePanel
       defaultCollapsed
       height={`calc(100vh - ${heightOffset * 2}px)`}
-      onCollapsedChange={(collapsed, animation) => {
-        console.log(
-          `${
-            collapsed ? 'Collapsed state: ' : 'Expanded state: '
-          } Side Panel is (internally) ${animation}`
-        );
+      onCollapsedChange={collapsed => {
+        console.log(`collapsed state is: ${collapsed ? 'true' : 'false'}`);
+      }}
+      onStateChange={internalState => {
+        console.log(`Side Panel is ${internalState}`);
       }}
     ></SidePanel>
   );
@@ -46,12 +45,11 @@ export const RightSidePanel = () => {
         defaultCollapsed
         origin="right"
         height={`calc(100vh - ${heightOffset * 2}px)`}
-        onCollapsedChange={(collapsed, animation) => {
-          console.log(
-            `${
-              collapsed ? 'Collapsed state: ' : 'Expanded state: '
-            } Side Panel is (internally) ${animation}`
-          );
+        onCollapsedChange={collapsed => {
+          console.log(`collapsed state is: ${collapsed ? 'true' : 'false'}`);
+        }}
+        onStateChange={internalState => {
+          console.log(`Side Panel is ${internalState}`);
         }}
       ></SidePanel>
     </div>
@@ -68,12 +66,11 @@ export const ControlledSidePanel = () => {
           variant={'alternate'}
           collapsed={collapsed}
           height={`calc(100vh - ${heightOffset * 2}px)`}
-          onCollapsedChange={(collapsed, animation) => {
-            console.log(
-              `${
-                collapsed ? 'Collapsed state: ' : 'Expanded state: '
-              } Side Panel is (internally) ${animation}`
-            );
+          onCollapsedChange={collapsed => {
+            console.log(`collapsed state is: ${collapsed ? 'true' : 'false'}`);
+          }}
+          onStateChange={internalState => {
+            console.log(`Side Panel is ${internalState}`);
           }}
         ></SidePanel>
       </div>

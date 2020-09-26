@@ -14,6 +14,8 @@ export type SidePanelInternalStates = 'collapsed' | 'collapsing' | 'expanded' | 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Specifies the _controlled_ state the side panel is in. Leave undefined if you want to keep this an _uncontrolled_ component.
+   * Changing this prop will fire an animation that resolves to this state. For example, if collapsed is changed from `true` to `false`,
+   * an expand animation will fire and the side panel will eventually be expanded when the animation is finished.
    *
    * @default false
    */
@@ -49,11 +51,18 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   origin?: 'left' | 'right';
   /**
-   * Fired when the side panel state changes
+   * Fired when the side panel's `collapsed` state changes. States like 'collapsing' and 'expanding' are tracked in another callback: `onStateChange`
    *
    * @param boolean
    */
-  onCollapsedChange?: (collapsed?: boolean, animationState?: SidePanelInternalStates) => void;
+  onCollapsedChange?: (collapsed?: boolean) => void;
+  /**
+   * Fired when the side panel is transitioning between internal states. Use this to track when the side panel is animating between 'collapsed', 'collapsing', 'expanded', and 'expanding' states.
+   * This can be particularly helpful if child components need to react specifically to these states.
+   *
+   * @param SidePanelInternalStates
+   */
+  onStateChange?: (state?: SidePanelInternalStates) => void;
   /**
    * Style variants of the side panel
    *
@@ -101,6 +110,7 @@ const SidePanel = ({
   onAnimationEnd,
   onAnimationStart,
   onCollapsedChange,
+  onStateChange,
   origin = 'left',
   variant = 'standard',
   width = 320,
@@ -123,14 +133,17 @@ const SidePanel = ({
     mounted.current = true;
   }, []);
 
-  // TOTHINK: Do we change up the state depending on the whether it's controlled or not?
-  // TOTHINK: Do we separate this into two callbacks?
-  // Call our onCollapsedChange cb when either collapsed prop or internalState changes
   React.useEffect(() => {
     if (typeof onCollapsedChange !== 'undefined') {
-      onCollapsedChange(collapsed, internalState);
+      onCollapsedChange(collapsed);
     }
-  }, [collapsed, internalState, onCollapsedChange]);
+  }, [collapsed, onCollapsedChange]);
+
+  React.useEffect(() => {
+    if (typeof onStateChange !== 'undefined') {
+      onStateChange(internalState);
+    }
+  }, [internalState, onStateChange]);
 
   const motion = {
     collapse: createKeyframes(collapsedWidth, width),
