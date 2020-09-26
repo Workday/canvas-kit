@@ -100,7 +100,6 @@ const SidePanel = ({
   height = 400,
   onAnimationEnd,
   onAnimationStart,
-  // eslint-disable-next-line no-empty-function
   onCollapsedChange,
   origin = 'left',
   variant = 'standard',
@@ -122,6 +121,8 @@ const SidePanel = ({
     mounted.current = true;
   }, []);
 
+  // TOTHINK: Do we change up the state depending on the whether it's controlled or not?
+  // TOTHINK: Do we separate this into two callbacks?
   // Call our onCollapsedChange cb when either collapsed prop or internalState changes
   React.useEffect(() => {
     if (typeof onCollapsedChange !== 'undefined') {
@@ -186,6 +187,7 @@ const SidePanel = ({
           height: height,
           minHeight: height,
           maxHeight: height,
+          // mounted.current will be false on the first render, thus you won't get an unwanted animation here
           animation: mounted.current
             ? `${collapsed ? motion.expand : motion.collapse} 200ms ease-out`
             : undefined,
