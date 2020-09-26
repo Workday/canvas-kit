@@ -4,7 +4,7 @@ import * as React from 'react';
 export const useControllableState = <T>(
   value: T,
   defaultValue: T | (() => T)
-): [T, (value: T) => void] => {
+): [T, (value: T) => void, boolean] => {
   const [valueState, setValueState] = React.useState(defaultValue);
   const isControlled = value !== undefined;
 
@@ -19,5 +19,5 @@ export const useControllableState = <T>(
     }
   };
 
-  return [effectiveValue, updateValue];
+  return [effectiveValue, updateValue, isControlled];
 };

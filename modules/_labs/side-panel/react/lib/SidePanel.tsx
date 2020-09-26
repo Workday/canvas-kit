@@ -108,7 +108,7 @@ const SidePanel = ({
 }: SidePanelProps) => {
   const sidePanelId = useUniqueId(id);
   const mounted = React.useRef(false);
-  const [collapsed, setCollapsed] = useControllableState<typeof collapsedProp>(
+  const [collapsed, setCollapsed, isControlled] = useControllableState<typeof collapsedProp>(
     collapsedProp,
     defaultCollapsed
   );
@@ -174,7 +174,7 @@ const SidePanel = ({
   // TODO: if we're in controlled mode should we ship a hook that spreads aria-controls and aria-expanded
   return (
     <div
-      id={sidePanelId}
+      id={isControlled ? id : sidePanelId}
       role="region"
       css={[
         {
