@@ -97,7 +97,7 @@ const SidePanel = ({
   collapsed: collapsedProp,
   collapsedWidth = 64,
   defaultCollapsed = false,
-  height = 400,
+  height = '100%',
   onAnimationEnd,
   onAnimationStart,
   onCollapsedChange,
