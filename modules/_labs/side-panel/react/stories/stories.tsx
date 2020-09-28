@@ -19,7 +19,6 @@ export const Default = () => {
 
   return (
     <SidePanel
-      defaultCollapsed
       height={`calc(100vh - ${heightOffset * 2}px)`}
       onCollapsedChange={collapsed => {
         console.log(`collapsed state is: ${collapsed ? 'true' : 'false'}`);
