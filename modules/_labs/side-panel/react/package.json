@@ -46,6 +46,16 @@
     "workday",
     "side-panel"
   ],
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@workday/canvas-kit-react-button": "^4.2.0", 
+    "@workday/canvas-kit-react-common": "^4.2.0", 
+    "@workday/canvas-kit-react-core": "^4.2.0", 
+    "@workday/canvas-system-icons-web": "^1.0.20"
+  },
+  "devDependencies": {
+    "@workday/canvas-kit-labs-react-core": "^4.2.0" 
+  },
   "peerDependencies": {
     "react": ">= 16.8 < 17"
   }
