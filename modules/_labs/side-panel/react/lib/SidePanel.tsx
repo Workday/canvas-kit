@@ -213,6 +213,7 @@ const SidePanel = ({
           minHeight: height,
           maxHeight: height,
           // mounted.current will be false on the first render, thus you won't get an unwanted animation here
+          // Will animate again if you force a re-render (like in Storybook)
           animation: mounted.current
             ? `${collapsed ? motion.expand : motion.collapse} 200ms ease-out`
             : undefined,
