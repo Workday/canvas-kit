@@ -7,14 +7,8 @@ import uuid from 'uuid/v4';
  */
 export const useUniqueId = (id?: string) => {
   // https://codesandbox.io/s/react-functional-component-ids-p2ndq
-  const [effectiveId] = React.useState(() => {
-    if (typeof id !== 'undefined') {
-      return id;
-    }
-    return uuid().replace(/^[0-9]*/gi, '');
-  });
-
-  return effectiveId;
+  const [generatedId] = React.useState(() => uuid().replace(/^[0-9]*/gi, ''));
+  return id || generatedId;
 };
 
 /**
