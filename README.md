@@ -4,7 +4,7 @@ This project provides a set of components for the Workday Canvas Design System t
 implement user experiences consistent with
 [Workday's design principles](https://design.workday.com/).
 
-<a href="./LICENSE">
+<a href="https://github.com/Workday/canvas-kit/blob/master/LICENSE">
   <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
 </a>
 <a href="https://travis-ci.org/Workday/canvas-kit">
@@ -13,14 +13,14 @@ implement user experiences consistent with
 <a href="https://lerna.js.org">
   <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="Maintained with Lerna" />
 </a>
-<a href="./CONTRIBUTING.md">
+<a href="https://github.com/Workday/canvas-kit/blob/master/CONTRIBUTING.md">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
 </a>
 
 ---
 
 **:white_check_mark: For a list of available react modules see
-[Canvas Kit Component Status](COMPONENT_STATUS.md)**
+[Canvas Kit Component Status](https://github.com/Workday/canvas-kit/blob/master/COMPONENT_STATUS.md)**
 
 ## Getting started
 
@@ -109,7 +109,7 @@ process. Any and all issues are public and available for discussion.
 
 Canvas Kit follows [semantic versioning](http://semver.org/) and is enforced automatically by
 [conventional commits](https://www.conventionalcommits.org/) (see
-["Commit Message Format"](./CONTRIBUTING.md#commit-message-format)).
+["Commit Message Format"](https://github.com/Workday/canvas-kit/blob/master/CONTRIBUTING.md#commit-message-format)).
 
 Each module is independently versioned using [Lerna](https://github.com/lerna/lerna).
 
