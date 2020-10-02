@@ -13,6 +13,11 @@ export type SidePanelInternalStates = 'collapsed' | 'collapsing' | 'expanded' | 
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * The `aria-label` attribute for the side panel and button. This is required for accessibility.
+   *
+   */
+  'aria-label': string;
+  /**
    * Specifies the _controlled_ state the side panel is in. Leave undefined if you want to keep this an _uncontrolled_ component.
    * Changing this prop will fire an animation that resolves to this state. For example, if collapsed is changed from `true` to `false`,
    * an expand animation will fire and the side panel will eventually be expanded when the animation is finished.
@@ -101,12 +106,13 @@ const containerVariantStyle: {[K in SidePanelVariant]: CSSObject} = {
 };
 
 const SidePanel = ({
-  id,
+  'aria-label': ariaLabel = 'navigation pane',
   children,
   collapsed: collapsedProp,
   collapsedWidth = 64,
   defaultCollapsed = false,
   height = '100%',
+  id,
   onAnimationEnd,
   onAnimationStart,
   onCollapsedChange,
@@ -196,9 +202,9 @@ const SidePanel = ({
       : `scaleX(${origin === 'left' ? '-1' : '1'})`,
   });
 
-  // TODO: if we're in controlled mode should we ship a hook that spreads aria-controls and aria-expanded
   return (
     <div
+      aria-label={ariaLabel}
       id={isControlled ? id : sidePanelId}
       role="region"
       css={[
@@ -228,7 +234,7 @@ const SidePanel = ({
         <IconButton
           variant={IconButton.Variant.CircleFilled}
           icon={transformationImportIcon}
-          aria-label={`expand or collapse side panel`}
+          aria-label={ariaLabel}
           aria-expanded={!collapsed}
           aria-controls={sidePanelId}
           onClick={handleClick}
