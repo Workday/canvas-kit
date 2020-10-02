@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
 import {colors} from '@workday/canvas-kit-react-core';
-import {Popper} from '@workday/canvas-kit-react-popup';
+import {Popper, Popup, PopupPadding} from '@workday/canvas-kit-react-popup';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker} from '@workday/canvas-kit-labs-react-color-picker';
@@ -42,16 +42,17 @@ storiesOf('Labs|Color Picker/React', module)
           onClick={toggleOpen}
         />
         <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current!}>
-          <ColorPicker
-            resetColor={colors.blueberry400}
-            resetLabel={'Reset'}
-            showCustomHexInput={true}
-            onColorChange={handleSubmit}
-            onColorReset={() => handleSubmit(colors.blueberry400)}
-            onSubmitClick={toggleOpen}
-            value={color}
-            style={{marginTop: 8}}
-          />
+          <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
+            <ColorPicker
+              resetColor={colors.blueberry400}
+              resetLabel={'Reset'}
+              showCustomHexInput={true}
+              onColorChange={handleSubmit}
+              onColorReset={() => handleSubmit(colors.blueberry400)}
+              onSubmitClick={toggleOpen}
+              value={color}
+            />
+          </Popup>
         </Popper>
       </>
     );
@@ -119,19 +120,20 @@ storiesOf('Labs|Color Picker/React', module)
           anchorElement={inputRef.current!}
           ref={popupRef}
         >
-          <ColorPicker
-            resetColor={colors.blueberry400}
-            resetLabel={'Reset'}
-            onColorChange={color => {
-              setColorInputValue(color.toUpperCase());
-              setColor(color.toUpperCase());
-              setOpen(false);
-            }}
-            onColorReset={resetColor}
-            value={color}
-            colorSet={colorSet}
-            style={{marginTop: 8}}
-          />
+          <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
+            <ColorPicker
+              resetColor={colors.blueberry400}
+              resetLabel={'Reset'}
+              onColorChange={color => {
+                setColorInputValue(color.toUpperCase());
+                setColor(color.toUpperCase());
+                setOpen(false);
+              }}
+              onColorReset={resetColor}
+              value={color}
+              colorSet={colorSet}
+            />
+          </Popup>
         </Popper>
       </>
     );

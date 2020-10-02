@@ -300,8 +300,8 @@ const SelectBase = ({
 
     return options.map((option, index) => {
       const optionProps = {
+        'aria-disabled': option.disabled ? true : undefined,
         'aria-selected': selectedOptionIndex === index ? true : undefined,
-        disabled: option.disabled,
         error,
         focused: focusedOptionIndex === index,
         id: option.id,
@@ -423,7 +423,7 @@ const SelectBase = ({
         <SelectMenu
           aria-activedescendant={options[focusedOptionIndex].id}
           aria-labelledby={ariaLabelledBy}
-          aria-required={ariaRequired || required}
+          aria-required={ariaRequired || required ? true : undefined}
           buttonRef={buttonRef}
           id={menuId}
           error={error}

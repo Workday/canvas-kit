@@ -11,11 +11,6 @@ import {colors, commonColors, type} from '@workday/canvas-kit-react-core';
 
 export interface SelectOptionProps extends Themeable, React.LiHTMLAttributes<HTMLLIElement> {
   /**
-   * If true, set the SelectOption to the disabled state.
-   * @default false
-   */
-  disabled?: boolean;
-  /**
    * The type of error associated with the SelectOption (if applicable).
    */
   error?: ErrorType;
@@ -64,7 +59,7 @@ const Option = styled('li')<SelectOptionProps>(
     minHeight: type.body.lineHeight,
     textAlign: 'left',
   },
-  ({disabled, focused, interactive, theme}) => {
+  ({'aria-disabled': disabled, focused, interactive, theme}) => {
     if (disabled) {
       // If the option is disabled, return disabled styles...
       return {
@@ -112,7 +107,6 @@ const Option = styled('li')<SelectOptionProps>(
 
 const SelectOption = ({
   children,
-  disabled = false,
   focused = false,
   interactive = true,
   optionRef,
@@ -122,7 +116,6 @@ const SelectOption = ({
   return (
     <Option
       data-value={value}
-      disabled={disabled}
       focused={focused}
       interactive={interactive}
       ref={optionRef}
