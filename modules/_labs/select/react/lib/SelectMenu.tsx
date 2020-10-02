@@ -29,22 +29,22 @@ interface SelectMenuProps
    * The placement of the SelectMenu relative to its corresponding button.
    * @default 'bottom'
    */
-  placement: MenuPlacement;
+  placement?: MenuPlacement;
   /**
    * If true, automatically flip the SelectMenu to keep it visible if necessary (e.g., if the the SelectMenu would otherwise display below the visible area of the viewport).
    * @default true
    */
-  shouldAutoFlip: boolean;
+  shouldAutoFlip?: boolean;
   /**
    * If true, focus the SelectMenu when it's shown. Set to false if you don't want to focus the SelectMenu automatically (for visual testing purposes, for example).
    * @default true
    */
-  shouldAutoFocus: boolean;
+  shouldAutoFocus?: boolean;
   /**
    * The visibility state of the SelectMenu.
    * @default 'closed'
    */
-  visibility: MenuVisibility;
+  visibility?: MenuVisibility;
 }
 
 export const menuAnimationDuration = 200;
@@ -215,20 +215,18 @@ const generatePopperOptions = (
   };
 };
 
-const SelectMenu = (props: SelectMenuProps) => {
-  const {
-    buttonRef,
-    children,
-    error,
-    menuRef,
-    onCloseOnEscape,
-    placement,
-    shouldAutoFlip,
-    shouldAutoFocus,
-    visibility,
-    ...elemProps
-  } = props;
-
+const SelectMenu = ({
+  buttonRef,
+  children,
+  error,
+  menuRef,
+  onCloseOnEscape,
+  placement = 'bottom',
+  shouldAutoFlip = true,
+  shouldAutoFocus = true,
+  visibility = 'closed',
+  ...elemProps
+}: SelectMenuProps) => {
   const popupRef = React.useRef<HTMLDivElement>(null);
 
   const [width, setWidth] = useState(0);
@@ -288,13 +286,6 @@ const SelectMenu = (props: SelectMenuProps) => {
       </Menu>
     </Popper>
   );
-};
-
-SelectMenu.defaultProps = {
-  placement: 'bottom',
-  shouldAutoFlip: true,
-  shouldAutoFocus: true,
-  visibility: 'closed',
 };
 
 export default SelectMenu;

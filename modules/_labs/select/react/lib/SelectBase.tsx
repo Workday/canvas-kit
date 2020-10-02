@@ -80,7 +80,9 @@ export interface CoreSelectBaseProps
    * * `selected: boolean` (set to `true` if the option is selected)
    * * `value: string`
    *
-   * If you omit the `renderOption` prop, each option will be rendered using a default `renderOption` function provided by the component.
+   * If you omit the `renderOption` prop, each option will be rendered using a `defaultRenderOption` function provided by the component.
+   *
+   * @default defaultRenderOption
    */
   renderOption?: RenderOptionFunction;
   /**
@@ -98,7 +100,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * The index of the focused option in the SelectBase.
    * @default 0
    */
-  focusedOptionIndex: number;
+  focusedOptionIndex?: number;
   /**
    * The ref to the underlying (hidden) text input element. Use this to imperatively manipulate the input.
    */
@@ -107,7 +109,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * The placement of the SelectBase menu relative to its corresponding SelectButton.
    * @default 'bottom'
    */
-  menuPlacement: MenuPlacement;
+  menuPlacement?: MenuPlacement;
   /**
    * The ref to the underlying menu element. Use this to imperatively manipulate the menu.
    */
@@ -116,7 +118,7 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * The visibility state of the SelectBase menu.
    * @default 'closed'
    */
-  menuVisibility: MenuVisibility;
+  menuVisibility?: MenuVisibility;
   /**
    * The function called when a key is pressed down while the SelectBase button or menu has focus.
    */
@@ -146,12 +148,12 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * If true, automatically flip the SelectBase menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
    * @default true
    */
-  shouldMenuAutoFlip: boolean;
+  shouldMenuAutoFlip?: boolean;
   /**
    * If true, focus the SelectBase menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
    * @default true
    */
-  shouldMenuAutoFocus: boolean;
+  shouldMenuAutoFocus?: boolean;
 }
 
 export const buttonBorderWidth = 1;
@@ -257,33 +259,35 @@ const SelectWrapper = styled('div')<Pick<SelectBaseProps, 'grow' | 'disabled'>>(
   })
 );
 
-const SelectBase = (props: SelectBaseProps) => {
-  const {
-    'aria-labelledby': ariaLabelledBy,
-    'aria-required': ariaRequired,
-    buttonRef,
-    disabled,
-    error,
-    focusedOptionIndex,
-    grow,
-    inputRef,
-    menuPlacement,
-    menuRef,
-    menuVisibility,
-    onChange,
-    onKeyDown,
-    onMenuBlur,
-    onMenuCloseOnEscape,
-    onOptionSelection,
-    options,
-    renderOption,
-    required,
-    shouldMenuAutoFlip,
-    shouldMenuAutoFocus,
-    value,
-    ...elemProps
-  } = props;
+const defaultRenderOption: RenderOptionFunction = option => {
+  return <div>{option.label}</div>;
+};
 
+const SelectBase = ({
+  'aria-labelledby': ariaLabelledBy,
+  'aria-required': ariaRequired,
+  buttonRef,
+  disabled,
+  error,
+  focusedOptionIndex = 0,
+  grow,
+  inputRef,
+  menuPlacement = 'bottom',
+  menuRef,
+  menuVisibility = 'closed',
+  onChange,
+  onKeyDown,
+  onMenuBlur,
+  onMenuCloseOnEscape,
+  onOptionSelection,
+  options,
+  renderOption = defaultRenderOption,
+  required,
+  shouldMenuAutoFlip = true,
+  shouldMenuAutoFocus = true,
+  value,
+  ...elemProps
+}: SelectBaseProps) => {
   const focusedOptionRef = React.useRef<HTMLLIElement>(null);
 
   // Generate a stable ID for the menu (https://codesandbox.io/s/p2ndq).
@@ -324,10 +328,6 @@ const SelectBase = (props: SelectBaseProps) => {
 
       return <SelectOption {...optionProps}>{renderOption(normalizedOption)}</SelectOption>;
     });
-  };
-
-  const defaultRenderOption: RenderOptionFunction = option => {
-    return <div>{option.label}</div>;
   };
 
   // If the focused option changed, scroll the newly focused option into view (if
@@ -388,9 +388,6 @@ const SelectBase = (props: SelectBaseProps) => {
     return undefined;
   }, [menuVisibility]);
 
-  // Use default renderOption if renderOption prop isn't provided
-  const renderOptionFunction = renderOption || defaultRenderOption;
-
   // Do a bit of error-checking in case options weren't provided
   const hasOptions = options.length > 0;
   const selectedOption = hasOptions ? options[getCorrectedIndexByValue(options, value)] : null;
@@ -439,7 +436,7 @@ const SelectBase = (props: SelectBaseProps) => {
           shouldAutoFocus={shouldMenuAutoFocus}
           visibility={menuVisibility}
         >
-          {renderOptions(renderOptionFunction)}
+          {renderOptions(renderOption)}
         </SelectMenu>
       )}
       <SelectMenuIcon
@@ -451,15 +448,6 @@ const SelectBase = (props: SelectBaseProps) => {
       />
     </SelectWrapper>
   );
-};
-
-SelectBase.defaultProps = {
-  focusedOptionIndex: 0,
-  isMenuFlipped: false,
-  menuPlacement: 'bottom',
-  menuVisibility: 'closed',
-  shouldMenuAutoFlip: true,
-  shouldMenuAutoFocus: true,
 };
 
 export default SelectBase;
