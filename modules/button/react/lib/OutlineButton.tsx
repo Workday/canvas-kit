@@ -84,7 +84,7 @@ export const getOutlineButtonColors = (
       palette: {primary: themePrimary},
     },
     // TODO: Remove this support after AB test is complete
-    ABTest: {secondaryOutlineButton: ABTestColors},
+    ABTest: {secondaryOutlineButton: ABTestColors = {}} = {},
   } = theme;
 
   switch (variant) {
