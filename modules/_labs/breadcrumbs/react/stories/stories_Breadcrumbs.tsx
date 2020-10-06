@@ -1,11 +1,11 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 
 import README from '../README.md';
 
 import {Breadcrumbs} from '../lib/Breadcrumbs';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 
 export default {
   title: 'Labs|Breadcrumbs/React',

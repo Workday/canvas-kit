@@ -1,13 +1,13 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 import {Breadcrumbs} from '../index';
 import README from '../README.md';
 import {BreadcrumbLinkProps} from '../lib/Breadcrumbs/List/Link';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 import {useDropdown} from '../lib/Breadcrumbs/Dropdown/hooks';
 import {DropdownMenu} from '../lib/Breadcrumbs/Dropdown/Menu';
 
