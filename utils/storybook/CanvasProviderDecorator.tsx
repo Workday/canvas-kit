@@ -16,14 +16,6 @@ export default makeDecorator({
   wrapper: (storyFn, context, {parameters = {}}) => {
     const theme: PartialEmotionCanvasTheme = {
       canvas: object(label, parameters.theme || defaultCanvasTheme),
-      // TODO: Remove this support after AB test is complete
-      ABTest: {
-        secondaryOutlineButton: {
-          main: 'orange', //colors.licorice300,
-          dark: 'blue', //colors.licorice500,
-          darkest: 'red', //colors.licorice600,
-        },
-      },
     };
     return <CanvasProvider theme={theme}>{storyFn(context)}</CanvasProvider>;
   },
