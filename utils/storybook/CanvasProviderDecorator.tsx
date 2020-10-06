@@ -4,7 +4,6 @@ import {
   CanvasProvider,
   PartialEmotionCanvasTheme,
 } from '@workday/canvas-kit-react-common';
-import {colors} from '@workday/canvas-kit-react-core';
 import {object} from '@storybook/addon-knobs';
 
 const label = 'theme';
@@ -17,6 +16,7 @@ export default makeDecorator({
   wrapper: (storyFn, context, {parameters = {}}) => {
     const theme: PartialEmotionCanvasTheme = {
       canvas: object(label, parameters.theme || defaultCanvasTheme),
+      // TODO: Remove this support after AB test is complete
       ABTest: {
         secondaryOutlineButton: {
           main: 'orange', //colors.licorice300,
