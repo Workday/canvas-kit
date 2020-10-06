@@ -124,25 +124,25 @@ export const getOutlineButtonColors = (
       return {
         default: {
           background: 'transparent',
-          border: ABTestColors.main || colors.soap500,
+          border: ABTestColors?.main || colors.soap500,
           icon: colors.licorice200,
           label: colors.blackPepper400,
         },
         hover: {
-          background: ABTestColors.dark || colors.licorice500,
-          border: ABTestColors.dark || colors.licorice500,
+          background: ABTestColors?.dark || colors.licorice500,
+          border: ABTestColors?.dark || colors.licorice500,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
         },
         active: {
-          background: ABTestColors.darkest || colors.licorice600,
-          border: ABTestColors.darkest || colors.licorice600,
+          background: ABTestColors?.darkest || colors.licorice600,
+          border: ABTestColors?.darkest || colors.licorice600,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
         },
         focus: {
-          background: ABTestColors.dark || colors.licorice500,
-          border: ABTestColors.dark || colors.licorice500,
+          background: ABTestColors?.dark || colors.licorice500,
+          border: ABTestColors?.dark || colors.licorice500,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
         },
