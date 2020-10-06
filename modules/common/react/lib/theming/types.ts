@@ -62,5 +62,11 @@ type RecursivePartial<T> = {
 
 export type PartialCanvasTheme = RecursivePartial<CanvasTheme>;
 export type PartialCanvasThemePalette = RecursivePartial<CanvasThemePalette>;
-export type PartialEmotionCanvasTheme = {canvas?: PartialCanvasTheme};
-export type EmotionCanvasTheme = {canvas: CanvasTheme};
+export type PartialEmotionCanvasTheme = {
+  canvas?: PartialCanvasTheme;
+  [key: string]: any;
+};
+export type EmotionCanvasTheme = {
+  canvas: CanvasTheme;
+  [key: string]: any;
+};
