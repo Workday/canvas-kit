@@ -83,6 +83,8 @@ export const getOutlineButtonColors = (
     canvas: {
       palette: {primary: themePrimary},
     },
+    // TODO: Remove this support after AB test is complete
+    ABTest: {secondaryOutlineButton: ABTestColors},
   } = theme;
 
   switch (variant) {
@@ -122,25 +124,25 @@ export const getOutlineButtonColors = (
       return {
         default: {
           background: 'transparent',
-          border: colors.soap500,
+          border: ABTestColors.main || colors.soap500,
           icon: colors.licorice200,
           label: colors.blackPepper400,
         },
         hover: {
-          background: colors.licorice500,
-          border: colors.licorice500,
+          background: ABTestColors.dark || colors.licorice500,
+          border: ABTestColors.dark || colors.licorice500,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
         },
         active: {
-          background: colors.licorice600,
-          border: colors.licorice600,
+          background: ABTestColors.darkest || colors.licorice600,
+          border: ABTestColors.darkest || colors.licorice600,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
         },
         focus: {
-          background: colors.licorice500,
-          border: colors.licorice500,
+          background: ABTestColors.dark || colors.licorice500,
+          border: ABTestColors.dark || colors.licorice500,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
         },
