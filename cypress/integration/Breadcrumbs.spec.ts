@@ -74,7 +74,7 @@ describe('Breadcrumbs', () => {
           cy.findByRole('tooltip').should('contain', text);
         });
       // should see tooltip for the last item (current crumb)
-      cy.get('li span:last')
+      cy.get('li:last')
         .focus()
         .then($currentCrumb => {
           const text = $currentCrumb.text();
