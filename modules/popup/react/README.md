@@ -276,8 +276,7 @@ Default:
 const stackRef = usePopupStack(forwardRef?: React.RefObject<HTMLElement>): React.RefObject<HTMLDivElement>
 ```
 
-This hook should not be used directly. Use the `Popper` component instead. There is also a
-convenience [usePopup](#usePopup)
+**Note:** If you're using `Popper`, you do not need to use this hook directly.
 
 This hook will add the `stackRef` element to the Popup stack on mount and remove on unmount. If you
 use `Popper`, the popper `stackRef` is automatically added/removed from the Popup stack. The Popup
