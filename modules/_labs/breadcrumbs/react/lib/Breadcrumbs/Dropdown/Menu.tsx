@@ -50,7 +50,7 @@ const StyledMenuList = styled('ul')({
   padding: 0,
   width: 280,
   wordBreak: 'break-word',
-  overflowWrap: 'break-word', // needed for IE11
+  wordWrap: 'break-word', // Needed for IE11
 });
 
 const MenuList = (elemProps: React.HTMLAttributes<HTMLUListElement>) => {
