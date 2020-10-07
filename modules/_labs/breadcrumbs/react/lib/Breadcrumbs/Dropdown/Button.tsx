@@ -7,9 +7,21 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {colors} from '@workday/canvas-kit-react-core';
 
 export interface DropdownButtonProps extends IconButtonProps {
+  /**
+   * The accessibility label for the button
+   */
   'aria-label': string;
+  /**
+   * The Canvas System Icon for the button
+   */
   buttonIcon?: CanvasSystemIcon;
+  /**
+   * The ref to the rendered HTMLButtonElement
+   */
   buttonRef: React.Ref<HTMLButtonElement>;
+  /**
+   * The boolean to determine whether the button should be in a 'toggled' state
+   */
   toggled: boolean;
 }
 

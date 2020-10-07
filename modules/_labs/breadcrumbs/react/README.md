@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in pre-release.
 
-Breadcrumbs component for navigation through different levels of some structure.
+Breadcrumbs provides navigation to previous levels of pages.
 
 ## Installation
 
@@ -14,9 +14,9 @@ yarn add @workday/canvas-kit-labs-react-breadcrumbs
 
 ## Usage
 
-Breadcrumbs is a composable component that, while more verbose, offers more flexibility to build for
-your use case. There are two main variations: `List` and `CollapsibleList`. First we'll discuss
-`List`. There will also be information about the shared sub-components below.
+Breadcrumbs is a composable component that provides more flexibility in its structure. There are two
+main variations: `List` and `CollapsibleList`. First, we'll discuss `List`. There will also be
+information about the shared sub-components below.
 
 ### `List`
 
@@ -26,7 +26,8 @@ specified width.
 
 #### Component Props
 
-This component supports all native `li` props.
+This component supports
+[all native `ul` props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#Attributes).
 
 #### Usage
 
@@ -54,7 +55,6 @@ const AccountInvoiceBreadcrumbNav = () => {
     </Breadcrumbs.Nav>
   );
 }
-
 ```
 
 ### CollapsibleList
@@ -64,27 +64,29 @@ collapse items in the list into a dropdown menu at a specified width.
 
 #### Component Props
 
-| name              | type               | required | default           | recommended                              |
-| ----------------- | ------------------ | -------- | ----------------- | ---------------------------------------- |
-| maxWidth          | `number`           | `true`   | n/a               | n/a                                      |
-| expanderAriaLabel | `string`           | `true`   | n/a               | "more links" (and translated equivalent) |
-| buttonIcon        | `CanvasSystemIcon` | `false`  | `folderCloseIcon` | n/a                                      |
+| name            | type               | required | default              | recommended                              |
+| --------------- | ------------------ | -------- | -------------------- | ---------------------------------------- |
+| maxWidth        | `number`           | `true`   | n/a                  | n/a                                      |
+| buttonAriaLabel | `string`           | `true`   | n/a                  | "more links" (and translated equivalent) |
+| buttonIcon      | `CanvasSystemIcon` | `false`  | `relatedActionsIcon` | n/a                                      |
 
-This component supports all native `li` props. The `expanderAriaLabel` prop is required for
-accessibility. We recommend using `"more links"` as seen in the example. This label is applied to
-the dropdown menu button.
+This component also supports
+[all native `ul` props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul#Attributes).
+The `buttonAriaLabel` prop is required for accessibility. We recommend using `"more links"` as seen
+in the example. This label is applied to the dropdown menu button.
 
 ##### Handling Collapse
 
-The `maxWidth` prop provides a point to collapse. If the length of the list exceeds that value,
-items will be collapsed into a dropdown menu. Note that the first (root) item and last (current)
-item in the list will not be collapsed.
+The `maxWidth` prop sets the point to collapse. If the length of the list exceeds that value, items
+will be collapsed into a dropdown menu. Note that the first (root) item and last (current) items in
+the list will never be collapsed.
 
 ##### Handling Custom Dropdown Button Icons
 
-By default the icon for the dropdown button is `folderCloseIcon`. However, you can set this to any
-Canvas System Icon with the `buttonIcon` prop. Please consult the Canvas team if you decide to do
-this, as we'd like to keep the Breadcrumb component as consistent as possible.
+By default the icon for the dropdown button is `relatedActionsIcon`. However, you can set this to
+any [Canvas System Icon](https://design.workday.com/tokens/assets/icons/system-icons) with the
+`buttonIcon` prop. Please consult the Canvas team if you decide to do this, as we'd like to keep
+breadcrumb navigation as consistent as possible.
 
 #### Usage
 
@@ -92,7 +94,7 @@ this, as we'd like to keep the Breadcrumb component as consistent as possible.
 const AccountInvoiceCollapsibleBreadcrumbNav = () => {
   return (
     <Breadcrumbs.Nav aria-label="Breadcrumb">
-      <Breadcrumbs.CollapsibleList maxWidth={800} expanderAriaLabel="more links">
+      <Breadcrumbs.CollapsibleList maxWidth={800} buttonAriaLabel="more links">
         <Breadcrumbs.ListItem>
           <Breadcrumbs.Link href="/account">Account</Breadcrumbs.Link>
         </Breadcrumbs.ListItem>
@@ -121,8 +123,10 @@ const AccountInvoiceCollapsibleBreadcrumbNav = () => {
 | ---------- | -------- | -------- | ------- | ---------------------------------------- |
 | aria-label | `string` | `true`   | n/a     | "Breadcrumb" (and translated equivalent) |
 
-This component supports all native HTMLElement props. The `aria-label` prop is required for
-accessibility. We recommend using `"Breadcrumb"` as seen in the example.
+This component supports
+[all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
+The `aria-label` prop is required for accessibility. We recommend using `"Breadcrumb"` as seen in
+the example.
 
 #### Usage
 
@@ -141,11 +145,12 @@ return (
 
 ### ListItem
 
-`ListItem` is a styled `li` element that contains a `SystemIcon` (chevron).
+`ListItem` is a styled `li` element that contains a `SystemIcon` separator.
 
 #### Component Props
 
-This component supports all native `li` element props.
+This component supports
+[all native `li` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).
 
 #### Usage
 
@@ -156,9 +161,14 @@ import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
 return <Breadcrumbs.ListItem>{/* breadcrumb link goes here */}</Breadcrumbs.ListItem>;
 ```
 
+#### RTL (Right-To-Left) Support
+
+This component will automatically toggle the separator icon from `chevronRightSmallIcon` to
+`chevronLeftSmallIcon` when RTL is in use.
+
 ### Link
 
-`Link` is a styled `a` element that also conditionally displays a tooltip, if the text is truncated.
+`Link` is a styled `a` element that also renders a tooltip if the text is truncated.
 
 #### Component Props
 
@@ -168,16 +178,17 @@ return <Breadcrumbs.ListItem>{/* breadcrumb link goes here */}</Breadcrumbs.List
 | maxWidth | `number`                 | `false`  | `350`   |
 | onAction | `(href: string) => void` | `false`  | n/a     |
 
-This component also supports all native `a` element props.
+This component also supports
+[all native `a` element props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#Attributes).
 
 #### Usage
 
 ##### Handling Redirects
 
-`Link` defaults to redirecting with an `href`, meaning the page will hard redirect. However, if
-you're in a single page application (SPA) environment, you might want to use the internal SPA
-router. You can override this hard redirect with the `onAction` prop. Note that `onAction` will
-still allow `onClick` if provided. Let's look at an example below:
+`Link` defaults to redirecting with an `href`, meaning the page will hard-redirect when the link is
+clicked. However, if you're in a single page application (SPA) environment, you might want to use
+the internal SPA router instead. You can override this hard-redirect with the `onAction` prop. Note
+that `onAction` will not block any `onClick` if provided. Let's look at an example below:
 
 ```tsx
 import React from 'react';
@@ -188,8 +199,9 @@ import Breadcrumbs from '@workday/canvas-kit-labs-react-breadcrumbs';
 // this is likely being done at the root of your application and not inside this component.
 const history = createBrowserHistory();
 
-const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
   // handle any click side-effects here
+  console.log('click event', event);
 }
 
 const handleRedirect = (href: string) => {
@@ -211,8 +223,8 @@ return (
 ##### Handling Truncation
 
 `Link` has built-in truncation + tooltip functionality to provide an easy-to-use, accessible feature
-for managing the length of link names. By default, the `maxWidth` is set to `350`, however you can
-adjust this as needed. Note that tooltips will only be available when text is truncated. Here's an
+for managing the length of link text. By default, the `maxWidth` is set to `350`, however you can
+adjust this as needed. Note that tooltips will only render when text is truncated. Here's an
 example:
 
 ```tsx
@@ -228,8 +240,7 @@ return (
 
 ### CurrentItem
 
-`CurrentItem` is a styled `li` element that also conditionally displays a tooltip, if the text is
-truncated.
+`CurrentItem` is a styled `li` element also renders a tooltip if the text is truncated.
 
 #### Component Props
 
@@ -237,7 +248,8 @@ truncated.
 | -------- | -------- | -------- | ------- |
 | maxWidth | `number` | `false`  | `350`   |
 
-This component also supports all native `li` element props.
+This component also supports
+[all native `li` element props](<(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li#Attributes).>).
 
 #### Usage
 
@@ -255,9 +267,9 @@ return (
 ##### Handling Truncation
 
 `CurrentItem` has built-in truncation + tooltip functionality to provide an easy-to-use, accessible
-feature for managing the length of the item. By default, the `maxWidth` is set to `350`, however you
-can adjust this as needed. Note that tooltips will only be available when text is truncated. Here's
-an example:
+feature for managing the length of link text. By default, the `maxWidth` is set to `350`, however
+you can adjust this as needed. Note that tooltips will only render when text is truncated. Here's an
+example:
 
 ```tsx
 import React from 'react';
@@ -272,12 +284,12 @@ return (
 
 ### RTL (Right-To-Left) Support
 
-`Breadcrumbs` components handle RTL internally without additional configuration needed. All you need
-to supply is the translated text for items and ARIA labels.
+`Breadcrumbs` handles RTL internally without additional configuration needed. All you need to supply
+is the translated text for items and ARIA labels.
 
 ### Accessibility
 
 Accessibility is built into `Breadcrumbs` in a way that allows you to create an inclusive experience
 little additional configuration. The only ARIA labels you'll need to add are the `aria-label` for
-the `Nav` and the `expanderAriaLabel` for the `CollapsibleList`. And all links require `href`s to be
-properly identified. All other accessible attributes are baked into components.
+the `Nav` and the `buttonAriaLabel` for the `CollapsibleList`. And all links require `href`s to be
+properly identified. All other accessible attributes are baked into the components.

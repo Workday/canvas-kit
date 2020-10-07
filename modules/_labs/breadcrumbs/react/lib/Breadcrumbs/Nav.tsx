@@ -1,18 +1,12 @@
 import React from 'react';
 
 export interface BreadcrumbsNavProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * The accessibility label to indicate the type of navigation
+   */
   'aria-label': string;
-  children: React.ReactNode;
 }
 
-export const BreadcrumbsNav = ({
-  'aria-label': ariaLabel,
-  children,
-  ...props
-}: BreadcrumbsNavProps) => {
-  return (
-    <nav role="navigation" aria-label={ariaLabel} {...props}>
-      {children}
-    </nav>
-  );
+export const BreadcrumbsNav = ({'aria-label': ariaLabel, ...elemProps}: BreadcrumbsNavProps) => {
+  return <nav role="navigation" aria-label={ariaLabel} {...elemProps} />;
 };

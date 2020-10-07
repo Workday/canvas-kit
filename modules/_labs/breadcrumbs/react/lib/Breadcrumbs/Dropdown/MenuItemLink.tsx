@@ -3,6 +3,9 @@ import {styled} from '@workday/canvas-kit-react-common';
 import {colors, commonColors, type, typeColors, spacing} from '@workday/canvas-kit-react-core';
 
 interface DropdownMenuItemLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
+  /**
+   * The href url of the anchor tag
+   */
   href: string;
 }
 

@@ -53,7 +53,7 @@ export const Default = () => {
 export const Collapsible = () => {
   return (
     <Breadcrumbs.Nav aria-label="Breadcrumb">
-      <Breadcrumbs.CollapsibleList maxWidth={800} expanderAriaLabel="more links">
+      <Breadcrumbs.CollapsibleList maxWidth={800} buttonAriaLabel="more links">
         <Breadcrumbs.ListItem>
           <Breadcrumbs.Link
             onAction={href => alert(href)}
@@ -175,7 +175,7 @@ export const RTLCollapsible = () => {
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
       <Breadcrumbs.Nav aria-label="Breadcrumb">
-        <Breadcrumbs.CollapsibleList maxWidth={500} expanderAriaLabel="more links">
+        <Breadcrumbs.CollapsibleList maxWidth={500} buttonAriaLabel="more links">
           <Breadcrumbs.ListItem>
             <Breadcrumbs.Link onAction={href => alert(href)} href="/tanakh">
               תנ״ך

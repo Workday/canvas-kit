@@ -7,14 +7,14 @@ import {colors} from '@workday/canvas-kit-react-core';
 
 import {useRTL} from '../hooks';
 
-export type BCListItemProps = React.HTMLAttributes<HTMLLIElement>;
+export type ListItemProps = React.HTMLAttributes<HTMLLIElement>;
 
 const breadcrumbItemStyles = css({
   display: `flex`,
   alignItems: `center`,
 });
 
-export const BreadcrumbsListItem = ({children, ...props}: BCListItemProps) => {
+export const BreadcrumbsListItem = ({children, ...props}: ListItemProps) => {
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
 

@@ -17,13 +17,37 @@ import {Breadcrumb} from '../types';
 import {DropdownMenuItemLink} from './MenuItemLink';
 
 export interface DropdownMenuProps {
+  /**
+   * The active dropdown item in the menu
+   */
   activeDropdownItem: Breadcrumb;
+  /**
+   * The HTML `id` of the element that labels the Menu. It should match the id of the menu button.
+   */
   'aria-labelledby': string;
+  /**
+   * An array of Breadcrumb items to render in the dropdown menu
+   */
   dropdownItems: Breadcrumb[];
+  /**
+   * A function to set the active dropdown item
+   */
   setActiveDropdownItem: React.Dispatch<React.SetStateAction<Breadcrumb>>;
+  /**
+   * The ref of the rendered HTMLAnchorElement
+   */
   activeDropdownItemRef: React.RefObject<HTMLAnchorElement>;
+  /**
+   * A function to return the focus to the dropdown button
+   */
   resetFocus: () => void;
+  /**
+   * A function to toggle the focus to the previous list item
+   */
   toggleActiveItemUp: () => void;
+  /**
+   * A function to toggle the focus to the next list item
+   */
   toggleActiveItemDown: () => void;
 }
 

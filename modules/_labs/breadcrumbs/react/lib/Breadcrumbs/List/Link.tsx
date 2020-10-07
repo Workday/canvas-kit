@@ -8,8 +8,17 @@ import {useTruncateTooltip} from './hooks';
 import {truncateStyles} from './styles';
 
 export interface BreadcrumbLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /**
+   * The href url of the anchor tag
+   */
   href: string;
+  /**
+   * The max-width of the link text
+   */
   maxWidth?: number;
+  /**
+   * A handler function for overriding hard-redirects with links
+   */
   onAction?: (href: string) => void;
 }
 

@@ -95,7 +95,7 @@ const TableRenderer = ({listItems, currentItem, direction = ContentDirection.LTR
           if (isCollapsible) {
             return (
               <Breadcrumbs.Nav aria-label="Breadcrumb">
-                <Breadcrumbs.CollapsibleList maxWidth={600} expanderAriaLabel="More links">
+                <Breadcrumbs.CollapsibleList maxWidth={600} buttonAriaLabel="More links">
                   {listItems.map((item: BreadcrumbLinkProps, i) => (
                     <Breadcrumbs.ListItem key={i}>
                       <Breadcrumbs.Link {...item} />

@@ -8,6 +8,9 @@ import {useTruncateTooltip} from './hooks';
 import {truncateStyles} from './styles';
 
 export interface CurrentItemProps extends React.HTMLAttributes<HTMLLIElement> {
+  /**
+   * The max-width of the text
+   */
   maxWidth?: number;
 }
 

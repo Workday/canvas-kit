@@ -17,14 +17,20 @@ const parseListItems = (children: React.ReactNode) => {
 export interface CollapsibleListProps
   extends React.HTMLAttributes<HTMLUListElement>,
     Pick<DropdownButtonProps, 'buttonIcon'> {
-  expanderAriaLabel: string;
+  /**
+   * The accessibility label for the dropdown menu button
+   */
+  buttonAriaLabel: string;
+  /**
+   * The max-width before the list should collapse and render a dropdown menu
+   */
   maxWidth: number;
 }
 
 export const CollapsibleList = ({
   children,
   buttonIcon,
-  expanderAriaLabel,
+  buttonAriaLabel,
   maxWidth,
   ...props
 }: CollapsibleListProps) => {
@@ -41,7 +47,7 @@ export const CollapsibleList = ({
       {shouldCollapseList && (
         <BreadcrumbsListItem>
           <Dropdown
-            buttonAriaLabel={expanderAriaLabel}
+            buttonAriaLabel={buttonAriaLabel}
             buttonIcon={buttonIcon}
             items={collapsedItems}
           />
