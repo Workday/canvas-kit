@@ -407,9 +407,8 @@ export default class Select extends React.Component<SelectProps, SelectState> {
   };
 
   handleOptionSelection = (index: number): void => {
-    // Abort immediately if the menu is in the process of closing or a disabled
-    // option was clicked (we ignore these clicks)
-    if (this.state.menuVisibility === 'closing' || this.normalizedOptions[index].disabled) {
+    // Abort if a disabled option was clicked (we ignore these clicks)
+    if (this.normalizedOptions[index].disabled) {
       return;
     }
 
