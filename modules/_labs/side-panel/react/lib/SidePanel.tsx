@@ -239,7 +239,7 @@ const ToggleButton = ({
         : `scaleX(${context.origin === 'left' ? '-1' : '1'})`,
   });
 
-  return <IconButton css={buttonStyle} icon={icon} variant={variant} {...rest} />;
+  return <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />;
 };
 
 const HiddenLabel = ({children, ...elemProps}: React.HTMLAttributes<HTMLSpanElement>) => (
