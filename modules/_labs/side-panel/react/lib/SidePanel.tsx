@@ -1,48 +1,20 @@
 /** @jsx jsx */
 import * as React from 'react';
 import {css, jsx, keyframes, CSSObject} from '@emotion/core';
-import {useUniqueId} from '@workday/canvas-kit-react-common';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {spacing, colors, depth} from '@workday/canvas-kit-react-core';
+import {accessibleHide} from '@workday/canvas-kit-react-common';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 
-import {useControllableState} from './hooks';
-
 export type SidePanelVariant = 'standard' | 'alternate';
-export type SidePanelInternalStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
+export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' | 'expanding';
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The `aria-label` attribute for the side panel and button. This is required for accessibility.
    *
    */
-  'aria-label': string;
-  /**
-   * Specifies the _controlled_ state the side panel is in. Leave undefined if you want to keep this an _uncontrolled_ component.
-   * Changing this prop will fire an animation that resolves to this state. For example, if collapsed is changed from `true` to `false`,
-   * an expand animation will fire and the side panel will eventually be expanded when the animation is finished.
-   *
-   * @default false
-   */
-  collapsed?: boolean;
-  /**
-   * Specifies default state (collapsed or expanded) if the component is uncontrolled.
-   *
-   * @default false
-   */
-  defaultCollapsed?: boolean;
-  /**
-   * The height of the component (in `px` if it's a `number`).
-   *
-   * @default '100%'
-   */
-  height?: number | string;
-  /**
-   * The width of the component (in `px` if it's a `number`) when it is expanded.
-   *
-   * @default 320
-   */
-  width?: number | string;
+  'aria-label'?: string;
   /**
    * The width of the component (in `px` if it's a `number`) when it is collapsed.
    *
@@ -50,26 +22,48 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   collapsedWidth?: number | string;
   /**
-   * Specifies which side the side panel is meant to originate from.
+   * If true, sets the expanded state of the side panel
+   * @default true
+   */
+  expanded?: boolean;
+  /**
+   * The width of the component (in `px` if it's a `number`) when it is expanded.
+   *
+   * @default 320
+   */
+  expandedWidth?: number | string;
+  /**
+   * The height of the component (in `px` if it's a `number`).
+   *
+   * @default '100%'
+   */
+  height?: number | string;
+  /**
+   * Which side the side panel is meant to originate from.
    *
    * @default 'left'
    */
   origin?: 'left' | 'right';
   /**
-   * Fired when the side panel's `collapsed` state changes. States like 'collapsing' and 'expanding' are tracked in another callback: `onStateChange`
+   * InternalState
+   */
+  state?: SidePanelTransitionStates;
+  /**
+   * The function called when the side panel's `expanded` state changes. States like 'collapsing' and 'expanding' are tracked in another callback: `onStateChange`
    *
    * @param boolean
    */
-  onCollapsedChange?: (collapsed?: boolean) => void;
+  onExpandedChange?: (expanded?: boolean) => void;
   /**
-   * Fired when the side panel is transitioning between internal states. Use this to track when the side panel is animating between 'collapsed', 'collapsing', 'expanded', and 'expanding' states.
+   * The function called when the side panel is transitioning between states.
+   * Use this to track when the side panel is animating between 'collapsed', 'collapsing', 'expanded', and 'expanding' states.
    * This can be particularly helpful if child components need to react specifically to these states.
    *
-   * @param SidePanelInternalStates
+   * @param SidePanelTransitionStates
    */
-  onStateChange?: (state?: SidePanelInternalStates) => void;
+  onStateTransition?: (state?: SidePanelTransitionStates) => void;
   /**
-   * Style variants of the side panel
+   * The style variant of the side panel
    *
    * @default 'standard'
    */
@@ -105,33 +99,30 @@ const containerVariantStyle: {[K in SidePanelVariant]: CSSObject} = {
   },
 };
 
+export const SidePanelContext = React.createContext({
+  state: 'expanded',
+  origin: 'left',
+});
+
 const SidePanel = ({
   'aria-label': ariaLabel = 'navigation pane',
   children,
-  collapsed: collapsedProp,
   collapsedWidth = 64,
-  defaultCollapsed = false,
+  expanded = true,
+  expandedWidth = 320,
   height = '100%',
-  id,
   onAnimationEnd,
   onAnimationStart,
-  onCollapsedChange,
-  onStateChange,
+  onExpandedChange,
+  onStateTransition,
   origin = 'left',
   variant = 'standard',
-  width = 320,
   ...elemProps
 }: SidePanelProps) => {
   const mounted = React.useRef(false);
-  const [collapsed, setCollapsed, isControlled] = useControllableState<typeof collapsedProp>(
-    collapsedProp,
-    defaultCollapsed
+  const [state, setState] = React.useState<SidePanelTransitionStates>(
+    expanded ? 'expanded' : 'collapsed'
   );
-  const [internalState, setInternalState] = React.useState<SidePanelInternalStates>(
-    collapsed ? 'collapsed' : 'expanded'
-  );
-  // Optimization would be to only call uuid in a hook if this is an uncontrolled component
-  const sidePanelId = useUniqueId(id);
 
   // This is meant to prevent animations when the component renders for the first time.
   // mounted.current will only be false on the first pass
@@ -140,24 +131,20 @@ const SidePanel = ({
   }, []);
 
   React.useEffect(() => {
-    if (typeof onCollapsedChange !== 'undefined') {
-      onCollapsedChange(collapsed);
+    if (typeof onExpandedChange !== 'undefined') {
+      onExpandedChange(expanded);
     }
-  }, [collapsed, onCollapsedChange]);
+  }, [expanded, onExpandedChange]);
 
   React.useEffect(() => {
-    if (typeof onStateChange !== 'undefined') {
-      onStateChange(internalState);
+    if (typeof onStateTransition !== 'undefined') {
+      onStateTransition(state);
     }
-  }, [internalState, onStateChange]);
+  }, [state, onStateTransition]);
 
   const motion = {
-    collapse: createKeyframes(collapsedWidth, width),
-    expand: createKeyframes(width, collapsedWidth),
-  };
-
-  const handleClick = () => {
-    setCollapsed(!collapsed);
+    collapse: createKeyframes(expandedWidth, collapsedWidth),
+    expand: createKeyframes(collapsedWidth, expandedWidth),
   };
 
   const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
@@ -166,7 +153,7 @@ const SidePanel = ({
         event.animationName === motion.collapse.name ||
         event.animationName === motion.expand.name
       ) {
-        setInternalState(collapsed ? 'collapsed' : 'expanded');
+        setState(expanded ? 'expanded' : 'collapsed');
       }
     }
 
@@ -181,7 +168,7 @@ const SidePanel = ({
         event.animationName === motion.collapse.name ||
         event.animationName === motion.expand.name
       ) {
-        setInternalState(collapsed ? 'collapsing' : 'expanding');
+        setState(expanded ? 'expanding' : 'collapsing');
       }
     }
 
@@ -190,38 +177,25 @@ const SidePanel = ({
     }
   };
 
-  // Note: Depending on the collapsed width, the button could "jump" to it's final position.
-  const buttonStyle = css({
-    position: 'absolute',
-    top: spacing.l,
-    right: internalState === 'collapsed' ? 0 : origin === 'left' ? spacing.s : undefined,
-    left: internalState === 'collapsed' ? 0 : origin === 'right' ? spacing.s : undefined,
-    margin: internalState === 'collapsed' ? 'auto' : undefined,
-    transform: collapsed
-      ? `scaleX(${origin === 'left' ? '1' : '-1'})`
-      : `scaleX(${origin === 'left' ? '-1' : '1'})`,
-  });
-
   return (
     <div
       aria-label={ariaLabel}
-      id={isControlled ? id : sidePanelId}
       role="region"
       css={[
         {
           overflow: 'hidden',
           position: 'relative',
           boxSizing: 'border-box',
-          width: collapsed ? collapsedWidth : width,
-          maxWidth: collapsed ? collapsedWidth : width,
-          minWidth: collapsed ? collapsedWidth : width,
+          width: expanded ? expandedWidth : collapsedWidth,
+          maxWidth: expanded ? expandedWidth : collapsedWidth,
+          minWidth: expanded ? expandedWidth : collapsedWidth,
           height: height,
           minHeight: height,
           maxHeight: height,
           // mounted.current will be false on the first render, thus you won't get an unwanted animation here
           // Will animate again if you force a re-render (like in Storybook)
           animation: mounted.current
-            ? `${collapsed ? motion.expand : motion.collapse} 200ms ease-out`
+            ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out`
             : undefined,
         },
         containerVariantStyle[variant],
@@ -230,20 +204,50 @@ const SidePanel = ({
       onAnimationStart={handleAnimationStart}
       {...elemProps}
     >
-      {typeof collapsedProp === 'undefined' ? (
-        <IconButton
-          variant={IconButton.Variant.CircleFilled}
-          icon={transformationImportIcon}
-          aria-label={ariaLabel}
-          aria-expanded={!collapsed}
-          aria-controls={sidePanelId}
-          onClick={handleClick}
-          css={buttonStyle}
-        />
-      ) : null}
-      {children}
+      <SidePanelContext.Provider
+        value={{
+          state,
+          origin,
+        }}
+      >
+        {children}
+      </SidePanelContext.Provider>
     </div>
   );
 };
 
+/**
+ * A toggle button styled specifically for the side panel container.
+ */
+const ToggleButton = ({
+  variant = IconButton.Variant.CircleFilled,
+  icon = transformationImportIcon,
+  ...rest
+}: IconButtonProps) => {
+  const context = React.useContext(SidePanelContext);
+
+  // Note: Depending on the collapsed width, the button could "jump" to it's final position.
+  const buttonStyle = css({
+    position: 'absolute',
+    top: spacing.l,
+    right: context.state === 'collapsed' ? 0 : context.origin === 'left' ? spacing.s : undefined,
+    left: context.state === 'collapsed' ? 0 : context.origin === 'right' ? spacing.s : undefined,
+    margin: context.state === 'collapsed' ? 'auto' : undefined,
+    transform:
+      context.state === 'collapsed' || context.state === 'collapsing'
+        ? `scaleX(${context.origin === 'left' ? '1' : '-1'})`
+        : `scaleX(${context.origin === 'left' ? '-1' : '1'})`,
+  });
+
+  return <IconButton css={buttonStyle} icon={icon} variant={variant} {...rest} />;
+};
+
+const HiddenLabel = ({children, ...elemProps}: React.HTMLAttributes<HTMLSpanElement>) => (
+  <span css={accessibleHide} {...elemProps}>
+    {children}
+  </span>
+);
+
+SidePanel.HiddenLabel = HiddenLabel;
+SidePanel.ToggleButton = ToggleButton;
 export default SidePanel;

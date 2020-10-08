@@ -1,23 +1,48 @@
 import * as React from 'react';
 
-// TODO: From our friend NicholasBoll with slight modifications: https://codesandbox.io/s/controllable-tooltip-sfnus?file=/src/useControllableState.ts
-export const useControllableState = <T>(
-  value: T,
-  defaultValue: T | (() => T)
-): [T, (value: T) => void, boolean] => {
-  const [valueState, setValueState] = React.useState(defaultValue);
-  const isControlled = value !== undefined;
+import {useUniqueId} from '@workday/canvas-kit-react-common';
+import {SidePanelProps} from './SidePanel';
 
-  // TODO: warn about switching between controlled and uncontrolled
-  // TODO: warn about changing the default value
+export interface UseSidePanelProps extends Pick<React.HTMLAttributes<HTMLDivElement>, 'id'> {
+  initialExpanded?: boolean;
+  sidePanelId?: string;
+  labelId?: string;
+}
 
-  const effectiveValue = isControlled ? value : valueState;
+export const useSidePanel = ({
+  initialExpanded = true,
+  sidePanelId: sidePanelIdParam,
+  labelId: labelIdParam,
+}: UseSidePanelProps) => {
+  const [expanded, setExpanded] = React.useState(initialExpanded);
+  const sidePanelId = useUniqueId(sidePanelIdParam);
+  const labelId = useUniqueId(labelIdParam);
 
-  const updateValue = (newValue: T) => {
-    if (!isControlled) {
-      setValueState(newValue);
-    }
+  const handleClick = () => {
+    setExpanded(!expanded);
   };
 
-  return [effectiveValue, updateValue, isControlled];
+  const panelProps: Partial<SidePanelProps> = {
+    expanded: expanded,
+    id: sidePanelId,
+    'aria-labelledby': typeof labelId === 'undefined' ? undefined : labelId,
+  };
+
+  const labelProps = {
+    id: labelId,
+  };
+
+  const buttonProps = {
+    'aria-controls': sidePanelId,
+    'aria-expanded': expanded,
+    onClick: handleClick,
+  };
+
+  return {
+    expanded,
+    setExpanded,
+    panelProps,
+    labelProps,
+    buttonProps,
+  };
 };
