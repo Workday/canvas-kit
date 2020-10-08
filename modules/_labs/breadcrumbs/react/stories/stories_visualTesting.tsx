@@ -23,16 +23,19 @@ const leftToRightItems = [
     href: '/2019-q2-financial-documents',
     children: '2019_Q2_financial_documents',
     maxWidth: 150,
+    className: 'hover',
   },
   {
     href: '/ledger-account"',
     children: 'Ledger Account is “4200: Property”',
     maxWidth: 150,
+    className: 'focus',
   },
   {
     href: '/documents"',
     children: 'Documents',
     maxWidth: 150,
+    className: 'hover focus',
   },
   {
     href: '/2018-08-28-annual-recurring-revenue',
@@ -47,11 +50,11 @@ const leftToRightCurrentItem = {
 };
 
 const rightToLeftItems = [
-  {href: '/tanakh', children: 'תנ״ך', maxWidth: 150},
+  {href: '/tanakh', children: 'תנ״ך', maxWidth: 150, className: 'hover'},
 
-  {href: '/ketuvim', children: 'כתובים', maxWidth: 150},
+  {href: '/ketuvim', children: 'כתובים', maxWidth: 150, className: 'focus'},
 
-  {href: '/proverbs-of-solomon', children: 'משלי שלמה', maxWidth: 150},
+  {href: '/proverbs-of-solomon', children: 'משלי שלמה', maxWidth: 150, className: 'hover focus'},
 
   {
     href: '/do-not-forget-my-teaching',
@@ -80,47 +83,49 @@ const rightToLeftCurrentItem = {
 const TableRenderer = ({listItems, currentItem, direction = ContentDirection.LTR}) => {
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
-      <ComponentStatesTable
-        rowProps={[
-          {label: 'Default', props: {}},
-          {label: 'Collapsible', props: {isCollapsible: true}},
-        ]}
-        columnProps={[
-          {
-            label: 'Default',
-            props: {listItems, currentItem},
-          },
-        ]}
-      >
-        {({listItems, currentItem, isCollapsible}) => {
-          if (isCollapsible) {
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={[
+            {label: 'Default', props: {}},
+            {label: 'Collapsible', props: {isCollapsible: true}},
+          ]}
+          columnProps={[
+            {
+              label: 'Default',
+              props: {listItems, currentItem},
+            },
+          ]}
+        >
+          {({listItems, currentItem, isCollapsible}) => {
+            if (isCollapsible) {
+              return (
+                <Breadcrumbs.Nav aria-label="Breadcrumb">
+                  <Breadcrumbs.CollapsibleList maxWidth={600} buttonAriaLabel="More links">
+                    {listItems.map((item: BreadcrumbLinkProps, i) => (
+                      <Breadcrumbs.ListItem key={i}>
+                        <Breadcrumbs.Link {...item} />
+                      </Breadcrumbs.ListItem>
+                    ))}
+                    <Breadcrumbs.CurrentItem {...currentItem} />
+                  </Breadcrumbs.CollapsibleList>
+                </Breadcrumbs.Nav>
+              );
+            }
             return (
               <Breadcrumbs.Nav aria-label="Breadcrumb">
-                <Breadcrumbs.CollapsibleList maxWidth={600} buttonAriaLabel="More links">
+                <Breadcrumbs.List>
                   {listItems.map((item: BreadcrumbLinkProps, i) => (
                     <Breadcrumbs.ListItem key={i}>
                       <Breadcrumbs.Link {...item} />
                     </Breadcrumbs.ListItem>
                   ))}
                   <Breadcrumbs.CurrentItem {...currentItem} />
-                </Breadcrumbs.CollapsibleList>
+                </Breadcrumbs.List>
               </Breadcrumbs.Nav>
             );
-          }
-          return (
-            <Breadcrumbs.Nav aria-label="Breadcrumb">
-              <Breadcrumbs.List>
-                {listItems.map((item: BreadcrumbLinkProps, i) => (
-                  <Breadcrumbs.ListItem key={i}>
-                    <Breadcrumbs.Link {...item} />
-                  </Breadcrumbs.ListItem>
-                ))}
-                <Breadcrumbs.CurrentItem {...currentItem} />
-              </Breadcrumbs.List>
-            </Breadcrumbs.Nav>
-          );
-        }}
-      </ComponentStatesTable>
+          }}
+        </ComponentStatesTable>
+      </StaticStates>
     </CanvasProvider>
   );
 };
