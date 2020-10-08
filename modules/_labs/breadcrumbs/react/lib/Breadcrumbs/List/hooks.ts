@@ -55,12 +55,13 @@ export const useBuildCollapsedList = <E extends HTMLElement>(
       // We should make this match work better
       const listItemNode = listItemNodes[index];
 
+      // We might need to allow folks to spead more props from the link
       listItems.push({
         index: index, // TODO: use unique identifiers instead of indices
-        link: breadcrumbLink ? breadcrumbLink.props.href : '',
+        link: breadcrumbLink?.props?.href || '',
         text: listItemNode ? listItemNode.innerText : '',
         width: listItemNode ? listItemNode.clientWidth : 0,
-        onAction: breadcrumbLink ? breadcrumbLink.props.onAction : undefined,
+        onAction: breadcrumbLink?.props?.onAction,
       } as Breadcrumb);
     });
 

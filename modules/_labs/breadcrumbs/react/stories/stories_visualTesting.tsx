@@ -2,6 +2,7 @@
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
+import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 
@@ -126,11 +127,17 @@ const TableRenderer = ({listItems, currentItem, direction = ContentDirection.LTR
 
 const buildDropdownItems = (items = []) => {
   // Doing a little transformation since we're not using the collapsible hook.
+  const pseudoStates = {
+    0: 'focus',
+    1: 'hover',
+  };
+
   return items.map((item, index) => ({
     index,
     link: item.href,
     text: item.children,
     width: item.maxWidth,
+    className: pseudoStates[index],
   }));
 };
 
@@ -139,10 +146,17 @@ const DropdownMenuRenderer = ({listItems, direction = ContentDirection.LTR}) => 
   const buttonRef = React.useRef();
   const dropdownItems = buildDropdownItems(listItems);
   const {dropdownMenuProps} = useDropdown(activeItemRef, buttonRef, dropdownItems);
-
+  console.log(dropdownMenuProps);
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
-      <DropdownMenu {...dropdownMenuProps} />
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={[{label: 'Default', props: {}}]}
+          columnProps={[{label: 'Default', props: {}}]}
+        >
+          {() => <DropdownMenu {...dropdownMenuProps} />}
+        </ComponentStatesTable>
+      </StaticStates>
     </CanvasProvider>
   );
 };

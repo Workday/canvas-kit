@@ -138,11 +138,16 @@ export const DropdownMenu = ({
     <div css={menuStyles}>
       <MenuList {...elemProps}>
         {dropdownItems.map((item, i) => {
-          const isFocused = item.index === activeDropdownItem.index;
+          const {index, link, text, ...elemProps} = item;
+          const isFocused = index === activeDropdownItem.index;
           return (
             <li onKeyUp={handleItemKeyUp} onKeyDown={e => handleItemKeyDown(e, item)} key={i}>
-              <DropdownMenuItemLink ref={isFocused ? activeDropdownItemRef : null} href={item.link}>
-                {item.text}
+              <DropdownMenuItemLink
+                ref={isFocused ? activeDropdownItemRef : null}
+                href={link}
+                {...elemProps}
+              >
+                {text}
               </DropdownMenuItemLink>
             </li>
           );

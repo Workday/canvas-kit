@@ -1,4 +1,4 @@
-export interface Breadcrumb {
+export interface Breadcrumb extends React.HTMLAttributes<HTMLAnchorElement> {
   index: number;
   link: string;
   text: string;
