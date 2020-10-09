@@ -170,7 +170,6 @@ const DropdownMenuRenderer = ({items, direction = ContentDirection.LTR}) => {
   const activeItemRef = React.useRef();
   const buttonRef = React.useRef();
   const {dropdownMenuProps} = useDropdown(activeItemRef, buttonRef, items);
-  console.log(dropdownMenuProps);
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
       <StaticStates>
