@@ -6834,6 +6834,11 @@ cypress-axe@^0.5.1:
   resolved "https://registry.yarnpkg.com/cypress-axe/-/cypress-axe-0.5.1.tgz#bc45e042ed9ba8f556bceb2157e5015d082829d4"
   integrity sha512-oj+diADUnnjmiT7635kQuaDx7MG4nMk64oWCuDEIbWpe7Q3v+FzBE3ou8pg346LagGyqDFv8r7GYt6JWve6+Vg==
 
+cypress-enter-plugin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/cypress-enter-plugin/-/cypress-enter-plugin-1.0.0.tgz#bfddef9b22b42267553b09f702346009f1e751d4"
+  integrity sha512-a9GgjvaNTBYhjrozLJT7HgiUXjg9wl8xx5PuqC+5VuZMrr8srqEpr1sI7w1dzAcJFXuyz9Z7YCZVHktZhqH3qw==
+
 cypress-pipe@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/cypress-pipe/-/cypress-pipe-1.7.0.tgz#61f96568e673914bd2acbaaf06ce62ed89a6c63f"
