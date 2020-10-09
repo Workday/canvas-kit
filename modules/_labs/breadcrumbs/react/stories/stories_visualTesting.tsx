@@ -20,52 +20,77 @@ export default withSnapshotsEnabled({
 
 const leftToRightItems = [
   {
-    href: '/2019-q2-financial-documents',
-    children: '2019_Q2_financial_documents',
-    maxWidth: 150,
+    href: '/hover',
+    children: 'Hover Link Truncated Text',
+    maxWidth: 120,
     className: 'hover',
   },
   {
-    href: '/ledger-account"',
-    children: 'Ledger Account is “4200: Property”',
-    maxWidth: 150,
+    href: '/focus"',
+    children: 'Focus Link Truncated Text',
+    maxWidth: 120,
     className: 'focus',
   },
   {
-    href: '/documents"',
-    children: 'Documents',
+    href: '/hover focus"',
+    children: 'Hover Focus',
     maxWidth: 150,
     className: 'hover focus',
   },
   {
-    href: '/2018-08-28-annual-recurring-revenue',
-    children: '2018_08_28_Summary_of_Annual_Recurring_Revenue',
-    maxWidth: 150,
+    href: '/default_link_truncated_text',
+    children: 'Default Link Truncated Text',
+    maxWidth: 120,
   },
 ];
 
 const leftToRightCurrentItem = {
-  children: 'Policy_Type_is_Homeowners_Year_is_FY2020_Version_is_Actuals',
-  maxWidth: 150,
+  children: 'Current Item Truncated Text',
+  maxWidth: 120,
 };
 
+const leftToRightDropdownItems = [
+  {
+    link: '/active',
+    text: 'active',
+    maxWidth: 120,
+    className: 'focus',
+  },
+  {
+    link: '/hover"',
+    text: 'Hover',
+    maxWidth: 120,
+    className: 'hover',
+  },
+  {
+    link: '/documents"',
+    text: 'Documents',
+    maxWidth: 120,
+  },
+  {
+    link: '/long-text-that-wraps-inside-the-menu',
+    text: 'long_snake_case_text_that_wraps_inside_the_menu',
+    maxWidth: 120,
+  },
+];
+
 const rightToLeftItems = [
-  {href: '/tanakh', children: 'תנ״ך', maxWidth: 150, className: 'hover'},
+  {href: '/tanakh', children: 'תנ״ך', maxWidth: 120, className: 'hover'},
 
-  {href: '/ketuvim', children: 'כתובים', maxWidth: 150, className: 'focus'},
+  {href: '/ketuvim', children: 'כתובים', maxWidth: 120, className: 'focus'},
 
-  {href: '/proverbs-of-solomon', children: 'משלי שלמה', maxWidth: 150, className: 'hover focus'},
+  {href: '/proverbs-of-solomon', children: 'משלי שלמה', maxWidth: 120, className: 'hover focus'},
 
   {
     href: '/do-not-forget-my-teaching',
     children: 'בני תורתי אל תשכח ומצותי יצר לבך׃',
-    maxWidth: 150,
+    maxWidth: 120,
   },
 
   {
     href: '/long-life-and-peace-they-shall-add',
     children: 'כי ארך ימים ושנות חיים ושלום יוסיפו לך׃',
-    maxWidth: 150,
+    maxWidth: 120,
   },
 
   {href: '/let-mercy-and-truth-not-forsake-you', children: 'חסד ואמת אל יעזבך', maxWidth: 150},
@@ -77,8 +102,19 @@ const rightToLeftItems = [
 
 const rightToLeftCurrentItem = {
   children: 'ולבם שמו שמיר משמוע את התורה ואת',
-  maxWidth: 150,
+  maxWidth: 120,
 };
+
+const rightToLeftDropdownItems = [
+  {link: '/tanakh', text: 'תנ״ך', maxWidth: 120, className: 'focus'},
+  {link: '/ketuvim', text: 'כתובים', maxWidth: 120, className: 'hover'},
+  {link: '/proverbs-of-solomon', text: 'משלי שלמה', maxWidth: 150},
+  {
+    link: '/long-life-and-peace-they-shall-add',
+    text: 'כי ארך ימים ושנות חיים ושלום יוסיפו לך׃',
+    maxWidth: 120,
+  },
+];
 
 const TableRenderer = ({listItems, currentItem, direction = ContentDirection.LTR}) => {
   return (
@@ -130,27 +166,10 @@ const TableRenderer = ({listItems, currentItem, direction = ContentDirection.LTR
   );
 };
 
-const buildDropdownItems = (items = []) => {
-  // Doing a little transformation since we're not using the collapsible hook.
-  const pseudoStates = {
-    0: 'focus',
-    1: 'hover',
-  };
-
-  return items.map((item, index) => ({
-    index,
-    link: item.href,
-    text: item.children,
-    width: item.maxWidth,
-    className: pseudoStates[index],
-  }));
-};
-
-const DropdownMenuRenderer = ({listItems, direction = ContentDirection.LTR}) => {
+const DropdownMenuRenderer = ({items, direction = ContentDirection.LTR}) => {
   const activeItemRef = React.useRef();
   const buttonRef = React.useRef();
-  const dropdownItems = buildDropdownItems(listItems);
-  const {dropdownMenuProps} = useDropdown(activeItemRef, buttonRef, dropdownItems);
+  const {dropdownMenuProps} = useDropdown(activeItemRef, buttonRef, items);
   console.log(dropdownMenuProps);
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
@@ -172,7 +191,7 @@ export const VisualStatesLeftToRight = () => {
       <h2>Left-To-Right Breadcrumbs</h2>
       <TableRenderer listItems={leftToRightItems} currentItem={leftToRightCurrentItem} />
       <h2>Left-To-Right Dropdown Menu</h2>
-      <DropdownMenuRenderer listItems={leftToRightItems} />
+      <DropdownMenuRenderer items={leftToRightDropdownItems} />
     </>
   );
 };
@@ -187,7 +206,7 @@ export const VisualStatesRightToLeft = () => {
         direction={ContentDirection.RTL}
       />
       <h2>Right-To-Left Dropdown Menu</h2>
-      <DropdownMenuRenderer listItems={rightToLeftItems} direction={ContentDirection.RTL} />
+      <DropdownMenuRenderer items={rightToLeftDropdownItems} direction={ContentDirection.RTL} />
     </>
   );
 };

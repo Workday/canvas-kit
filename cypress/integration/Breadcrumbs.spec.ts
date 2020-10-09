@@ -46,40 +46,34 @@ describe('Breadcrumbs', () => {
       getBreadcrumbsList().should('have.attr', 'role', 'list');
     });
 
-    it('should show tooltips on focus for truncated link items', () => {
-      // should see tooltip for the first item
-      cy.findAllByRole('link')
-        .eq(0)
-        .focus()
-        .then($link => {
-          const text = $link.text();
-          cy.findByRole('tooltip').should('contain', text);
-        });
-      // should not see tooltip for the second item
-      cy.findAllByRole('link')
-        .eq(1)
-        .focus();
-      cy.findByRole('tooltip').should('not.exist');
-      // should not see tooltip for the third item
-      cy.findAllByRole('link')
-        .eq(2)
-        .focus();
-      cy.findByRole('tooltip').should('not.exist');
-      // should see tooltip for the fourth item
-      cy.findAllByRole('link')
-        .eq(3)
-        .focus()
-        .then($link => {
-          const text = $link.text();
-          cy.findByRole('tooltip').should('contain', text);
-        });
-      // should see tooltip for the last item (current crumb)
-      cy.get('li:last')
-        .focus()
-        .then($currentCrumb => {
-          const text = $currentCrumb.text();
-          cy.findByRole('tooltip').should('contain', text);
-        });
+    context('given the breadcrumb links', () => {
+      it('should show tooltips on focus for truncated link items', () => {
+        cy.findAllByRole('link')
+          .eq(0)
+          .focus()
+          .then($link => {
+            const text = $link.text();
+            cy.findByRole('tooltip').should('contain', text);
+          });
+      });
+
+      it('should not show tooltips on focus for truncated link items', () => {
+        cy.findAllByRole('link')
+          .eq(1)
+          .focus();
+        cy.findByRole('tooltip').should('not.exist');
+      });
+    });
+
+    context('given the last breadcrumb (current item)', () => {
+      it('should show a tooltip on focus when the text is truncated', () => {
+        cy.get('li:last')
+          .focus()
+          .then($currentCrumb => {
+            const text = $currentCrumb.text();
+            cy.findByRole('tooltip').should('contain', text);
+          });
+      });
     });
   });
 
