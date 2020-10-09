@@ -16,7 +16,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - feat(breadcrumbs): Add Breadcrumbs component ([#776](https://github.com/Workday/canvas-kit/pull/776)) [@alanbsmith](https://github.com/alanbsmith)
 
 ### Infrastructure
-- Revert "chore: Bump prismjs from 1.17.1 to 1.21.0 ([#826](https://github.com/Workday/canvas-kit/pull/826))" (#870) [@jamesfan](https://github.com/jamesfan)
+- fix: Revert prismjs from 1.21.0 back to 1.17.1 ([#870](https://github.com/Workday/canvas-kit/pull/870)) [@jamesfan](https://github.com/jamesfan)
 
 # 4.2.0 (2020-09-15)
 
