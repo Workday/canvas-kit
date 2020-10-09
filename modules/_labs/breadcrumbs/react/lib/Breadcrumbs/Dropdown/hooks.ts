@@ -49,7 +49,7 @@ export const useDropdown = (
   // behaviors
   const {targetProps, closePopup, popperProps} = usePopup();
   useCloseOnOutsideClick(popperProps.ref, closePopup);
-  useCloseOnEscape(popperProps.ref, closePopup);
+  useCloseOnEscape(popperProps.ref, closePopup, buttonRef);
   useFocusActiveItemElement(activeDropdownItemRef);
 
   const handleButtonKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {

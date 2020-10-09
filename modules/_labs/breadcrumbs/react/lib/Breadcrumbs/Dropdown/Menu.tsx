@@ -124,11 +124,6 @@ export const DropdownMenu = ({
         }
         window.location.href = item.link;
         break;
-      case 'Escape':
-      case 'Esc':
-        // TODO: remove this once it's available in the `useCloseOnEscape` hook
-        resetFocus();
-        break;
       default:
         break;
     }

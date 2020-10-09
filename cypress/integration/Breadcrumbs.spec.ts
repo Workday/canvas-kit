@@ -213,5 +213,12 @@ describe('Breadcrumbs', () => {
         getDropdownButton().should('have.focus');
       });
     });
+
+    context('when the escape key is pressed on the dropdown menu', () => {
+      it('should return focus to the menu button', () => {
+        cy.focused().type('{esc}');
+        getDropdownButton().should('have.focus');
+      });
+    });
   });
 });
