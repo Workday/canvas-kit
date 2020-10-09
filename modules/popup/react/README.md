@@ -376,7 +376,7 @@ This should be used on stacked UI elements that are meant to persist, like Windo
 ## useCloseOnEscape
 
 ```ts
-useCloseOnEscape(stackRef: React.RefObject<HTMLElement>, onClose: () => void): void
+useCloseOnEscape(stackRef: React.RefObject<HTMLElement>, onClose: () => void, returnFocusRef?: React.RefObject<HTMLElement>): void
 ```
 
 Registers global detection of the Escape key. It will only call the `onClose` callback if the
@@ -386,6 +386,9 @@ internally.
 
 This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
 dialogs, dropdown menus, etc.
+
+`returnFocusRef` is an optional prop that returns focus to a specific element on escape. This is
+useful for instances such as returning focus to a dropdown button when closing a menu.
 
 ## useCloseOnOutsideClick
 
