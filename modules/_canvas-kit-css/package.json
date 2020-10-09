@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@workday/canvas-kit-css-action-bar": "^4.2.0",
+    "@workday/canvas-kit-css-badge": "^4.2.0",
     "@workday/canvas-kit-css-banner": "^4.2.0",
     "@workday/canvas-kit-css-button": "^4.2.0",
     "@workday/canvas-kit-css-card": "^4.2.0",
