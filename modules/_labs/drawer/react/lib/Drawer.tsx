@@ -80,6 +80,7 @@ const ChildrenContainer = styled('div')<Pick<DrawerProps, 'padding'>>(
     height: '100%',
     overflowY: 'auto',
     wordBreak: 'break-word',
+    wordWrap: 'break-word', // Needed for IE11
     position: 'relative',
   },
   ({padding}) => ({
