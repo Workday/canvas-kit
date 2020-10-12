@@ -29,7 +29,7 @@ In this example, `options` is an array of objects. Each option contains a `label
 text content of an `<option>`) and a `value` (analagous to the `value` attribute of an `<option>`).
 
 **Note:** While a base Select component is provided in this package, it is **not accessible** when
-used as is. It should be used in tandem with [`FormField`](../../../form-field/react/README.md) to
+used as is. It should be used in tandem with [`FormField`](../../../form-field/react) to
 be made fully accessible (see below).
 
 ```tsx
