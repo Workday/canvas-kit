@@ -72,7 +72,7 @@ Canvas Kit uses [Jest](https://jestjs.io/) and
 our React components. For more information about our testing strategy and how we write unit tests,
 visit our [Testing Readme](./TESTING.md)
 
-Canvas Kit uses [Cypress](cypress.io) for UI tests. For info on why we chose Cypress, visit
+Canvas Kit uses [Cypress](https://cypress.io) for UI tests. For info on why we chose Cypress, visit
 [Why Cypress?](./cypress/WHY_CYPRESS.md) For more information about how to write Cypress tests,
 visit [Writing Cypress Tests](./cypress/README.md)
 
@@ -90,7 +90,7 @@ visit [Writing Cypress Tests](./cypress/README.md)
 Canvas Kit relies on the
 [conventional-commit format specification](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#specification).
 By formalizing our commit message format, this allows us to easily generate changelogs and scan
-through the commit history. It also automates [semantic versioning](http://semver.org/).
+through the commit history. It also automates [semantic versioning](https://semver.org/).
 
 #### Commit Descriptions
 
@@ -193,7 +193,7 @@ This will start the unit tests and run code coverage.
 
 ### Code Style Guide
 
-Refer to the [API & Pattern Guidelines](API_PATTERN_GUIDELINES.md).
+Refer to the [API & Pattern Guidelines](./API_PATTERN_GUIDELINES.md).
 
 Rules are enforced using [ESLint](https://eslint.org) and code formatting is provided through
 [Prettier](https://prettier.io).

@@ -7,11 +7,13 @@
 A Canvas-styled Select with a Canvas-styled menu. This is a
 [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.
 
-Undocumented props (`disabled`, `name`, etc.) should behave similarly to how you would expect from a standard `<select>` element.
+Undocumented props (`disabled`, `name`, etc.) should behave similarly to how you would expect from a
+standard `<select>` element.
 
 The menu is rendered using a portal by way of the Canvas Kit Popper.
 
-**Note:** There is also a non-Labs Select. The non-Labs Select uses the standard browser-provided menu whereas the Labs Select uses a custom Canvas-styled menu.
+**Note:** There is also a non-Labs Select. The non-Labs Select uses the standard browser-provided
+menu whereas the Labs Select uses a custom Canvas-styled menu.
 
 ## Installation
 
@@ -23,11 +25,12 @@ yarn add @workday/canvas-kit-labs-react-select
 
 #### Example
 
-In this example, `options` is an array of objects. Each option contains a `label` (analagous to the text content of an `<option>`) and a `value` (analagous to the `value` attribute of an `<option>`).
+In this example, `options` is an array of objects. Each option contains a `label` (analagous to the
+text content of an `<option>`) and a `value` (analagous to the `value` attribute of an `<option>`).
 
 **Note:** While a base Select component is provided in this package, it is **not accessible** when
-used as is. It should be used in tandem with [`FormField`](../canvas-kit-react-form-field/README.md)
-to be made fully accessible (see below).
+used as is. It should be used in tandem with [`FormField`](../../../form-field/react) to
+be made fully accessible (see below).
 
 ```tsx
 import * as React from 'react';
@@ -80,14 +83,21 @@ const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
 
 #### Example with Custom Options Data
 
-Each option in `options` may contain a `data` object with any number of key/value pairs. This `data` object is carried over to the `option` passed into the `renderOption` function where it may then be used to customize how each option is rendered.
+Each option in `options` may contain a `data` object with any number of key/value pairs. This `data`
+object is carried over to the `option` passed into the `renderOption` function where it may then be
+used to customize how each option is rendered.
 
 ```tsx
 import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react-select';
 import FormField from '@workday/canvas-kit-react-form-field';
 import {colors, typeColors} from '@workday/canvas-kit-react-core';
-import {activityStreamIcon, avatarIcon, uploadCloudIcon, userIcon} from '@workday/canvas-system-icons-web';
+import {
+  activityStreamIcon,
+  avatarIcon,
+  uploadCloudIcon,
+  userIcon,
+} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
 const options = [
@@ -108,7 +118,13 @@ const renderOption = option => {
 };
 
 <FormField label="My Field" inputId="my-select-field">
-  <Select name="icon" onChange={this.handleChange} options={options} renderOption={renderOption} value={value} />
+  <Select
+    name="icon"
+    onChange={this.handleChange}
+    options={options}
+    renderOption={renderOption}
+    value={value}
+  />
 </FormField>;
 ```
 
@@ -130,15 +146,16 @@ const renderOption = option => {
 >
 > If `options` is an array of objects, each object must adhere to the `Option` interface:
 >
-> * `data: object` (optional)
-> * `disabled: boolean` (optional)
-> * `id: string` (optional, a random `id` will be assigned to the object if one isn't provided)
-> * `label: string` (optional, analagous to the text content of an `<option>`)
-> * `value: string` (required, analagous to the `value` attribute of an `<option>`)
+> - `data: object` (optional)
+> - `disabled: boolean` (optional)
+> - `id: string` (optional, a random `id` will be assigned to the object if one isn't provided)
+> - `label: string` (optional, analagous to the text content of an `<option>`)
+> - `value: string` (required, analagous to the `value` attribute of an `<option>`)
 >
 > If `label` is omitted, the `value` will be used to render the option.
 >
-> The `data` object is carried over to the `option` passed into the `renderOption` function where it may then be used to customize how each option is rendered.
+> The `data` object is carried over to the `option` passed into the `renderOption` function where it
+> may then be used to customize how each option is rendered.
 
 ### Optional
 
@@ -159,15 +176,17 @@ const renderOption = option => {
 >
 > The `option` argument passed to the function is an object which contains the following:
 >
-> * `data: object` (data object carried over from the corresponding option originally passed into the component)
-> * `disabled: boolean`
-> * `focused: boolean` (set to `true` if the option has keyboard focus)
-> * `id: string`
-> * `label: string`
-> * `selected: boolean` (set to `true` if the option is selected)
-> * `value: string`
+> - `data: object` (data object carried over from the corresponding option originally passed into
+>   the component)
+> - `disabled: boolean`
+> - `focused: boolean` (set to `true` if the option has keyboard focus)
+> - `id: string`
+> - `label: string`
+> - `selected: boolean` (set to `true` if the option is selected)
+> - `value: string`
 >
-> If you omit the `renderOption` prop, each option will be rendered using a default `renderOption` function provided by the component.
+> If you omit the `renderOption` prop, each option will be rendered using a default `renderOption`
+> function provided by the component.
 
 ---
 
