@@ -21,7 +21,7 @@ yarn add @workday/canvas-kit-react-select
 #### Simple Example
 
 **Note:** While a base select component is provided in this package, it is **not accessible** when
-used as is. It should be used in tandem with [`FormField`](../../form-field/react/README.md) to be
+used as is. It should be used in tandem with [`FormField`](../../form-field/react) to be
 made fully accessible (see below).
 
 ```tsx
