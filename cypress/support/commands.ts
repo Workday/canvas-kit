@@ -1,4 +1,5 @@
 import * as axe from 'axe-core';
+import 'cypress-enter-plugin';
 
 declare global {
   interface Window {

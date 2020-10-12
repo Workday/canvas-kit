@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.3.0 (2020-10-09)
+
+### Components
+- fix(popup-stack): Move adapter var to popup-stack global namespace ([#865](https://github.com/Workday/canvas-kit/pull/865)) [@csongnguyen](https://github.com/csongnguyen)
+- feat(badge): Add canvas-kit-css-badge to canvas-kit-css ([#860](https://github.com/Workday/canvas-kit/pull/860)) [@alanbsmith](https://github.com/alanbsmith)
+- fix(color-picker): Separate popup from color picker ([#846](https://github.com/Workday/canvas-kit/pull/846)) [@mannycarrera4](https://github.com/mannycarrera4)
+- docs(core): Update core CSS border-radius docs ([#871](https://github.com/Workday/canvas-kit/pull/871)) [@alanbsmith](https://github.com/alanbsmith)
+- docs(popup): Change language around use of usePopupStack ([#874](https://github.com/Workday/canvas-kit/pull/874)) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat(popup): Add previousFocusRef to useCloseOnEscape hook ([#873](https://github.com/Workday/canvas-kit/pull/873)) [@alanbsmith](https://github.com/alanbsmith)
+- fix(drawer): Add support for word wrapping in IE11 ([#879](https://github.com/Workday/canvas-kit/pull/879)) [@alanbsmith](https://github.com/alanbsmith)
+- feat(breadcrumbs): Add Breadcrumbs component ([#776](https://github.com/Workday/canvas-kit/pull/776)) [@alanbsmith](https://github.com/alanbsmith)
+
+### Infrastructure
+- fix: Revert prismjs from 1.21.0 back to 1.17.1 ([#870](https://github.com/Workday/canvas-kit/pull/870)) [@jamesfan](https://github.com/jamesfan)
+
 # 4.2.0 (2020-09-15)
 
 ### Components
