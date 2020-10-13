@@ -1,6 +1,5 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
-import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {jsx} from '@emotion/core';
 import SidePanel, {useSidePanel} from '../index';
@@ -11,7 +10,6 @@ import {AccentIcon} from '@workday/canvas-kit-react-icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import README from '../README.md';
-import {SidePanelTransitionStates} from '../lib/SidePanel';
 
 export default {
   title: 'Labs|Side Panel/React',
@@ -21,7 +19,7 @@ export default {
 
 export const Default = () => {
   const height = `calc(100vh - 80px)`;
-  const {expanded, panelProps, labelProps, controlProps} = useSidePanel({});
+  const {panelProps, labelProps, controlProps} = useSidePanel({});
 
   return (
     <SidePanel {...panelProps} height={height}>
