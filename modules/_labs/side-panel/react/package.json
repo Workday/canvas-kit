@@ -50,6 +50,7 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@workday/canvas-kit-react-button": "^4.3.0", 
+    "@workday/canvas-kit-react-common": "^4.3.0", 
     "@workday/canvas-kit-react-core": "^4.3.0", 
     "@workday/canvas-kit-react-icon": "^4.3.0", 
     "@workday/canvas-accent-icons-web": "^1.0.21",
