@@ -47,21 +47,21 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   origin?: 'left' | 'right';
   /**
-   * The function called when the side panel's `expanded` state changes. States like 'collapsing' and 'expanding' are tracked in another callback: `onStateChange`
+   * The function called when the side panel's `expanded` state changes. States like `'collapsing'` and `'expanding'` are tracked in another callback: `onStateChange`
    *
    * @param boolean
    */
   onExpandedChange?: (expanded?: boolean) => void;
   /**
    * The function called when the side panel is transitioning between states.
-   * Use this to track when the side panel is animating between 'collapsed', 'collapsing', 'expanded', and 'expanding' states.
+   * Use this to track when the side panel is animating between `'collapsed'`, `'collapsing'`, `'expanded'`, and `'expanding'` states.
    * This can be particularly helpful if child components need to react specifically to these states.
    *
    * @param SidePanelTransitionStates
    */
   onStateTransition?: (state?: SidePanelTransitionStates) => void;
   /**
-   * The style variant of the side panel
+   * The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 3 depth.
    *
    * @default 'standard'
    */
@@ -250,7 +250,7 @@ const ToggleButton = ({
 };
 
 const HiddenLabel = ({children, ...elemProps}: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span css={accessibleHide} {...elemProps}>
+  <span aria-hidden="true" css={accessibleHide} {...elemProps}>
     {children}
   </span>
 );
