@@ -140,7 +140,7 @@ describe('Select', () => {
             });
 
             context('the menu', () => {
-              it('should set assistive focus to "Phone" option', () => {
+              it('should set assistive focus to the "Phone" option', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
                   .pipe(getAssistiveFocus)
@@ -252,7 +252,7 @@ describe('Select', () => {
                   });
 
                   context('the menu', () => {
-                    it('should set assistive focus to "Mail" option', () => {
+                    it('should set assistive focus to the "Mail" option', () => {
                       cy.findByLabelText('Label')
                         .pipe(h.selectLabs.getMenu)
                         .pipe(getAssistiveFocus)
@@ -333,6 +333,94 @@ describe('Select', () => {
         it('should have a value of "mail"', () => {
           cy.findByLabelText('Label').should('have.value', 'mail');
         });
+      });
+    });
+  });
+
+  context(`given the "Default" story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Labs|Select/React/Top Label', 'Default');
+    });
+
+    context('when the menu is opened', () => {
+      beforeEach(() => {
+        cy.findByLabelText('Label')
+          .focus()
+          .type('{downarrow}');
+      });
+
+      context('the menu', () => {
+        it('should set assistive focus to the first option ("E-mail")', () => {
+          cy.findByLabelText('Label')
+            .pipe(h.selectLabs.getMenu)
+            .pipe(getAssistiveFocus)
+            .should('have.text', 'E-mail');
+        });
+      });
+
+      context('when focus is advanced to the second option ("Phone")', () => {
+        beforeEach(() => {
+          cy.focused().type('{downarrow}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to the second option ("Phone")', () => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'Phone');
+          });
+        });
+
+        context(
+          'when the menu is closed WITHOUT selecting the newly focused option ("Phone")',
+          () => {
+            beforeEach(() => {
+              cy.focused().type('{esc}');
+            });
+
+            context('when the menu is re-opened AFTER it has fully closed', () => {
+              beforeEach(() => {
+                // Wait for menu to fully close before we open it again (so we
+                // don't interrupt the menu's closing animation and cause it to
+                // re-open while it's in the middle of closing)
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .should('not.exist');
+                cy.findByLabelText('Label')
+                  .focus()
+                  .type('{downarrow}');
+              });
+
+              context('the menu', () => {
+                it('should have reset assistive focus to the first option ("E-mail")', () => {
+                  cy.findByLabelText('Label')
+                    .pipe(h.selectLabs.getMenu)
+                    .pipe(getAssistiveFocus)
+                    .should('have.text', 'E-mail');
+                });
+              });
+            });
+
+            context('when the menu is re-opened BEFORE it has fully closed', () => {
+              beforeEach(() => {
+                cy.focused().type('{downarrow}');
+              });
+
+              context('the menu', () => {
+                it('should still have assistive focus set to the second option ("Phone")', () => {
+                  // Focus is shifting between the button and menu as we close
+                  // and open the menu. It's important that we use getMenu rather
+                  // than cy.focused() to ensure we obtain a reference to the menu.
+                  cy.findByLabelText('Label')
+                    .pipe(h.selectLabs.getMenu)
+                    .pipe(getAssistiveFocus)
+                    .should('have.text', 'Phone');
+                });
+              });
+            });
+          }
+        );
       });
     });
   });

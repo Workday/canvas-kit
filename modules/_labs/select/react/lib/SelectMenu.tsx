@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useLayoutEffect, useCallback} from 'react';
 
-import {CSSObject, keyframes} from '@emotion/core';
+import {CSSObject} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
 import {Placement, Popper, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core';
 
 import {SelectProps} from './Select';
 import {buttonBorderWidth} from './SelectBase';
+import {MenuPlacement, MenuVisibility} from './types';
 
 interface SelectMenuProps
   extends Themeable,
@@ -17,21 +18,6 @@ interface SelectMenuProps
    */
   buttonRef: React.RefObject<HTMLButtonElement>;
   /**
-   * If true, flip the SelectMenu so it extends upwards from the button.
-   * @default false
-   */
-  isFlipped: boolean;
-  /**
-   * If true, hide the SelectMenu.
-   * @default false
-   */
-  isHidden: boolean;
-  /**
-   * If true, set the SelectMenu to the "is hiding" state.
-   * @default false
-   */
-  isHiding: boolean;
-  /**
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */
   menuRef?: React.RefObject<HTMLUListElement>;
@@ -40,33 +26,28 @@ interface SelectMenuProps
    */
   onCloseOnEscape?: () => void;
   /**
-   * If true, enable animation on the SelectMenu.
-   * @default true
+   * The placement of the SelectMenu relative to its corresponding button.
+   * @default 'bottom'
    */
-  shouldAnimate: boolean;
+  placement?: MenuPlacement;
   /**
    * If true, automatically flip the SelectMenu to keep it visible if necessary (e.g., if the the SelectMenu would otherwise display below the visible area of the viewport).
    * @default true
    */
-  shouldAutoFlip: boolean;
+  shouldAutoFlip?: boolean;
   /**
    * If true, focus the SelectMenu when it's shown. Set to false if you don't want to focus the SelectMenu automatically (for visual testing purposes, for example).
    * @default true
    */
-  shouldAutoFocus: boolean;
+  shouldAutoFocus?: boolean;
+  /**
+   * The visibility state of the SelectMenu.
+   * @default 'closed'
+   */
+  visibility?: MenuVisibility;
 }
 
-const fadeInAnimation = keyframes`
-  from {opacity: 0;}
-  to {opacity: 1;}
-`;
-
-const fadeOutAnimation = keyframes`
-  from {opacity: 1;}
-  to {opacity: 0;}
-`;
-
-export const menuFadeDuration = 200;
+export const menuAnimationDuration = 200;
 
 const menuBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSSObject => {
   let borderColor = theme.canvas.palette.common.focusOutline;
@@ -136,13 +117,14 @@ const menuListBorderStyles = (theme: EmotionCanvasTheme, error?: ErrorType): CSS
 };
 
 const Menu = styled('div')<
-  Pick<SelectMenuProps, 'error' | 'isHiding' | 'shouldAnimate' | 'theme'> & {width: number}
+  Pick<SelectMenuProps, 'error' | 'theme' | 'visibility'> & {width: number}
 >(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${inputColors.border}`,
     boxSizing: 'border-box',
     position: 'relative',
+    transition: `opacity ${menuAnimationDuration}ms`,
 
     '[data-popper-placement="bottom"] &': {
       borderRadius: `0 0 ${borderRadius.m} ${borderRadius.m}`,
@@ -156,19 +138,9 @@ const Menu = styled('div')<
   ({error, theme}) => ({
     ...menuBorderStyles(theme, error),
   }),
-  ({shouldAnimate}) =>
-    shouldAnimate && {
-      animationName: fadeInAnimation,
-      animationDuration: `${menuFadeDuration / 1000}s`,
-      // Required to prevent the occasional menu flash when the menu
-      // fades out
-      animationFillMode: 'forwards',
-    },
-  ({isHiding, shouldAnimate}) =>
-    shouldAnimate &&
-    isHiding && {
-      animationName: fadeOutAnimation,
-    },
+  ({visibility}) => ({
+    opacity: visibility === 'opening' || visibility === 'opened' || visibility === 'close' ? 1 : 0,
+  }),
   ({width}) => ({
     width: width,
   })
@@ -189,13 +161,13 @@ const MenuList = styled('ul')<Pick<SelectProps, 'error' | 'theme'>>(
 );
 
 const generatePopperOptions = (
-  props: Pick<SelectMenuProps, 'isFlipped' | 'menuRef' | 'shouldAutoFlip' | 'shouldAutoFocus'>
+  props: Pick<SelectMenuProps, 'menuRef' | 'placement' | 'shouldAutoFlip' | 'shouldAutoFocus'>
 ) => {
-  const {isFlipped, menuRef, shouldAutoFlip, shouldAutoFocus} = props;
+  const {menuRef, placement, shouldAutoFlip, shouldAutoFocus} = props;
 
   let fallbackPlacements: Placement[] = [];
   if (shouldAutoFlip) {
-    fallbackPlacements = isFlipped ? ['bottom'] : ['top'];
+    fallbackPlacements = placement === 'top' ? ['bottom'] : ['top'];
   }
 
   const modifiers = [
@@ -243,32 +215,28 @@ const generatePopperOptions = (
   };
 };
 
-const SelectMenu = (props: SelectMenuProps) => {
-  const {
-    buttonRef,
-    children,
-    error,
-    isFlipped,
-    isHidden,
-    isHiding,
-    menuRef,
-    onCloseOnEscape,
-    shouldAnimate,
-    shouldAutoFlip,
-    shouldAutoFocus,
-    ...elemProps
-  } = props;
-
+const SelectMenu = ({
+  buttonRef,
+  children,
+  error,
+  menuRef,
+  onCloseOnEscape,
+  placement = 'bottom',
+  shouldAutoFlip = true,
+  shouldAutoFocus = true,
+  visibility = 'closed',
+  ...elemProps
+}: SelectMenuProps) => {
   const popupRef = React.useRef<HTMLDivElement>(null);
 
   const [width, setWidth] = useState(0);
 
   const handleWidthChange = useCallback(() => {
-    if (buttonRef.current && !isHidden) {
+    if (buttonRef.current && visibility !== 'closed') {
       const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
       setWidth(newMenuWidth);
     }
-  }, [buttonRef, isHidden]);
+  }, [buttonRef, visibility]);
 
   useLayoutEffect(() => {
     handleWidthChange();
@@ -278,7 +246,7 @@ const SelectMenu = (props: SelectMenuProps) => {
   // Seems like we should resize the menu when the reference button width changes, not
   // necessarily when the window resizes. Resizing the menu on window resize addresses
   // the case when `grow = true` and the user resizes the browser window while the
-  // menu is open, but doesn't address cases where the reference button size changes
+  // menu is opened, but doesn't address cases where the reference button size changes
   // through other means.
   useEffect(() => {
     // Update menu width state on resize to ensure menu resizes as window resizes
@@ -299,42 +267,25 @@ const SelectMenu = (props: SelectMenuProps) => {
   // correct behavior for now, we're dismissing the Menu on blur instead of
   // using the hook.
 
-  // We need to use `top` and `bottom` instead of `top-start` and `bottom-start`
-  // placements because PopperJS incorrectly rounds `start` and `end` modifiers:
-  // https://github.com/popperjs/popper-core/blob/38914aae7a2e91715c6eb2b563517082a40cfa64/src/utils/computeOffsets.js#L68-L81
-  // This rounding causes problems with browsers that allow subpixel values for elements like
-  // Firefox and Edge.
-  const placement = isFlipped ? 'top' : 'bottom';
-
   return (
     <Popper
       placement={placement}
-      open={!isHidden}
       anchorElement={buttonRef}
       popperOptions={generatePopperOptions({
-        isFlipped,
         menuRef,
+        placement,
         shouldAutoFlip,
         shouldAutoFocus,
       })}
       ref={popupRef}
     >
-      <Menu error={error} isHiding={isHiding} shouldAnimate={shouldAnimate} width={width}>
+      <Menu error={error} visibility={visibility} width={width}>
         <MenuList error={error} ref={menuRef} role="listbox" tabIndex={-1} {...elemProps}>
           {children}
         </MenuList>
       </Menu>
     </Popper>
   );
-};
-
-SelectMenu.defaultProps = {
-  isFlipped: false,
-  isHidden: false,
-  isHiding: false,
-  shouldAnimate: true,
-  shouldAutoFlip: true,
-  shouldAutoFocus: true,
 };
 
 export default SelectMenu;

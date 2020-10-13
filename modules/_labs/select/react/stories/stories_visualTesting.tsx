@@ -89,7 +89,7 @@ export const SelectStatesMenuOn = () => (
       ]}
       columnProps={[
         {label: 'Default', props: {}},
-        {label: 'Flipped', props: {isMenuFlipped: true}},
+        {label: 'Top', props: {menuPlacement: 'top'}},
       ]}
     >
       {props => {
@@ -109,8 +109,7 @@ export const SelectStatesMenuOn = () => (
               onChange={() => {}} // eslint-disable-line no-empty-function
               options={normalizedOptions}
               focusedOptionIndex={1}
-              isMenuHidden={false}
-              shouldMenuAnimate={false}
+              menuVisibility="opened"
               shouldMenuAutoFlip={false}
               shouldMenuAutoFocus={false}
             />
