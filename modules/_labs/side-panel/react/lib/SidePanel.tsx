@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import * as React from 'react';
+import styled from '@emotion/styled';
 import {css, jsx, keyframes, CSSObject} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {spacing, colors, depth} from '@workday/canvas-kit-react-core';
@@ -11,10 +12,11 @@ export type SidePanelTransitionStates = 'collapsed' | 'collapsing' | 'expanded' 
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * The `aria-label` attribute for the side panel and button. This is required for accessibility.
+   * The element the side panel will render as (e.g. 'div').
    *
+   * @default 'section'
    */
-  'aria-label'?: string;
+  as?: React.ElementType;
   /**
    * The width of the component (in `px` if it's a `number`) when it is collapsed.
    *
@@ -44,10 +46,6 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default 'left'
    */
   origin?: 'left' | 'right';
-  /**
-   * InternalState
-   */
-  state?: SidePanelTransitionStates;
   /**
    * The function called when the side panel's `expanded` state changes. States like 'collapsing' and 'expanding' are tracked in another callback: `onStateChange`
    *
@@ -99,13 +97,19 @@ const containerVariantStyle: {[K in SidePanelVariant]: CSSObject} = {
   },
 };
 
+const Panel = styled('section')<Pick<SidePanelProps, 'as'>>({
+  overflow: 'hidden',
+  position: 'relative',
+  boxSizing: 'border-box',
+});
+
 export const SidePanelContext = React.createContext({
   state: 'expanded',
   origin: 'left',
 });
 
 const SidePanel = ({
-  'aria-label': ariaLabel = 'navigation pane',
+  as = 'section',
   children,
   collapsedWidth = 64,
   expanded = true,
@@ -178,14 +182,11 @@ const SidePanel = ({
   };
 
   return (
-    <div
-      aria-label={ariaLabel}
+    <Panel
+      as={as}
       role="region"
       css={[
         {
-          overflow: 'hidden',
-          position: 'relative',
-          boxSizing: 'border-box',
           width: expanded ? expandedWidth : collapsedWidth,
           maxWidth: expanded ? expandedWidth : collapsedWidth,
           minWidth: expanded ? expandedWidth : collapsedWidth,
@@ -212,9 +213,14 @@ const SidePanel = ({
       >
         {children}
       </SidePanelContext.Provider>
-    </div>
+    </Panel>
   );
 };
+
+// For SidePanel, we're leveraging a hidden span to label this toggle button via `aria-labelledby`.
+// This type removes the requirement for `aria-label` in this component
+export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'> &
+  Partial<Pick<IconButtonProps, 'aria-label'>>;
 
 /**
  * A toggle button styled specifically for the side panel container.
@@ -223,7 +229,7 @@ const ToggleButton = ({
   variant = IconButton.Variant.CircleFilled,
   icon = transformationImportIcon,
   ...rest
-}: IconButtonProps) => {
+}: ToggleButtonProps) => {
   const context = React.useContext(SidePanelContext);
 
   // Note: Depending on the collapsed width, the button could "jump" to it's final position.
@@ -239,6 +245,7 @@ const ToggleButton = ({
         : `scaleX(${context.origin === 'left' ? '-1' : '1'})`,
   });
 
+  // @ts-ignore We don't need this to have aria-label, let the user decide to use that or aria-labelledby on the ToggleButton component
   return <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />;
 };
 

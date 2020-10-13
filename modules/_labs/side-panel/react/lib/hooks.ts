@@ -5,17 +5,17 @@ import {SidePanelProps} from './SidePanel';
 
 export interface UseSidePanelProps extends Pick<React.HTMLAttributes<HTMLDivElement>, 'id'> {
   initialExpanded?: boolean;
-  sidePanelId?: string;
+  panelId?: string;
   labelId?: string;
 }
 
 export const useSidePanel = ({
   initialExpanded = true,
-  sidePanelId: sidePanelIdParam,
+  panelId: panelIdParam,
   labelId: labelIdParam,
 }: UseSidePanelProps) => {
   const [expanded, setExpanded] = React.useState(initialExpanded);
-  const sidePanelId = useUniqueId(sidePanelIdParam);
+  const panelId = useUniqueId(panelIdParam);
   const labelId = useUniqueId(labelIdParam);
 
   const handleClick = () => {
@@ -24,17 +24,18 @@ export const useSidePanel = ({
 
   const panelProps: Partial<SidePanelProps> = {
     expanded: expanded,
-    id: sidePanelId,
-    'aria-labelledby': typeof labelId === 'undefined' ? undefined : labelId,
+    id: panelId,
+    'aria-labelledby': labelId,
   };
 
   const labelProps = {
     id: labelId,
   };
 
-  const buttonProps = {
-    'aria-controls': sidePanelId,
+  const controlProps = {
+    'aria-controls': panelId,
     'aria-expanded': expanded,
+    'aria-labelledby': labelId,
     onClick: handleClick,
   };
 
@@ -43,6 +44,6 @@ export const useSidePanel = ({
     setExpanded,
     panelProps,
     labelProps,
-    buttonProps,
+    controlProps,
   };
 };
