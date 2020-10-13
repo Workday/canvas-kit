@@ -20,7 +20,7 @@ import SidePanel, {useSidePanel} from '@workday/canvas-kit-labs-react-side-panel
 /**
  * A SidePanel is made up of three components
  * - The panel itself <SidePanel>
- * - An accessible name (either an existing element or you can use <SidePanel.HiddenLabel>)
+ * - An accessible name (either an existing element or you can use <span hidden>)
  * - A control that expands/collapses the SidePanel, usually <SidePanel.ToggleButton> as a child of <SidePanel>
  * A convenience hook is available for setting the state of the SidePanel along with the proper aria- attributes
  *
@@ -59,7 +59,7 @@ const [expanded, setExpanded, panelProps, labelProps, controlProps] = useSidePan
 <SidePanel {...panelProps}>
   {/* Make sure the control is first focusable */}
   <SidePanel.ToggleButton {...controlProps} />
-  <SidePanel.HiddenLabel {...labelProps}>Example Panel</SidePanel>
+  <span hidden {...labelProps}>Example Panel</span>
   {/* Rest of the children here */}
 </SidePanel>
 
@@ -74,11 +74,6 @@ or
 ```
 
 ## Static Properties
-
-#### `HiddenLabel`
-> Because a side panel is `role='region'` it must have an accessible name. You can use `<SidePanel.HiddenLabel>` in conjunction with the `useSidePanel` hook or manually using `aria-labelledby`. This specifies the panel's accessible name if you don't have one as an element already (if you do, use that instead).
-
-> `HiddenLabel` hides the element visually and from screen readers. It is solely used to provide an accessible name.
 
 #### `ToggleButton`
 > `<SidePanel.ToggleButton>` is a control that is meant to toggle between `expanded = true` and `expanded = false` states. It must be used within the `SidePanel` component as a child. Use in conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit `onClick` handlers.

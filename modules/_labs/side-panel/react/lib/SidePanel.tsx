@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import {css, jsx, keyframes, CSSObject} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {spacing, colors, depth} from '@workday/canvas-kit-react-core';
-import {accessibleHide} from '@workday/canvas-kit-react-common';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 
 export type SidePanelVariant = 'standard' | 'alternate';
@@ -184,7 +183,6 @@ const SidePanel = ({
   return (
     <Panel
       as={as}
-      role="region"
       css={[
         {
           width: expanded ? expandedWidth : collapsedWidth,
@@ -249,12 +247,5 @@ const ToggleButton = ({
   return <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />;
 };
 
-const HiddenLabel = ({children, ...elemProps}: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span aria-hidden="true" css={accessibleHide} {...elemProps}>
-    {children}
-  </span>
-);
-
-SidePanel.HiddenLabel = HiddenLabel;
 SidePanel.ToggleButton = ToggleButton;
 export default SidePanel;

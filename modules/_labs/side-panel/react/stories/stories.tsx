@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
-import {css, jsx} from '@emotion/core';
+import {jsx} from '@emotion/core';
 import SidePanel, {useSidePanel} from '../index';
 import {Button} from '@workday/canvas-kit-react-button';
 import {colors, depth} from '@workday/canvas-kit-react-core';
@@ -10,9 +10,7 @@ import {type} from '@workday/canvas-kit-labs-react-core';
 import {AccentIcon} from '@workday/canvas-kit-react-icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {plusIcon} from '@workday/canvas-system-icons-web';
-
 import README from '../README.md';
-import {accessibleHide} from '@workday/canvas-kit-react-common';
 import {SidePanelTransitionStates} from '../lib/SidePanel';
 
 export default {
@@ -24,21 +22,17 @@ export default {
 export const Default = () => {
   const height = `calc(100vh - 80px)`;
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel({});
-  const [panelState, setPanelState] = React.useState<SidePanelTransitionStates>(
-    expanded ? 'expanded' : 'collapsed'
-  );
-
-  const headerStyles = state =>
-    css(state === 'expanded' ? {} : accessibleHide, {
-      display: 'flex',
-      alignItems: 'center',
-      padding: `16px 12px`,
-    });
 
   return (
-    <SidePanel {...panelProps} height={height} onStateTransition={setPanelState}>
+    <SidePanel {...panelProps} height={height}>
       <SidePanel.ToggleButton {...controlProps} />
-      <div css={headerStyles(panelState)}>
+      <div
+        css={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: `16px 12px`,
+        }}
+      >
         <AccentIcon style={{marginRight: 16}} icon={rocketIcon} />
         <h3 {...labelProps} style={{...type.h4, color: colors.licorice500}}>
           Tasks Panel
@@ -54,7 +48,9 @@ export const NoHeaderPermanentlyOpen = () => {
 
   return (
     <SidePanel height={height} {...panelProps}>
-      <SidePanel.HiddenLabel {...labelProps}>Tasks Panel</SidePanel.HiddenLabel>
+      <span hidden {...labelProps}>
+        Tasks Panel
+      </span>
       <div style={{padding: '16px 24px'}}>
         <Button variant={Button.Variant.Primary} size={Button.Size.Large} icon={plusIcon}>
           Add New
@@ -84,7 +80,9 @@ export const RightSidePanel = () => {
         height={`calc(100vh - ${heightOffset * 2}px)`}
       >
         <SidePanel.ToggleButton {...controlProps} />
-        <SidePanel.HiddenLabel {...labelProps}>Right Panel</SidePanel.HiddenLabel>
+        <span hidden {...labelProps}>
+          Right Panel
+        </span>
       </SidePanel>
     </div>
   );
@@ -110,7 +108,9 @@ export const ExternalControl = () => {
           console.log(`Side Panel is ${state}`);
         }}
       >
-        <SidePanel.HiddenLabel {...labelProps}>Controlled Panel</SidePanel.HiddenLabel>
+        <span hidden {...labelProps}>
+          Controlled Panel
+        </span>
       </SidePanel>
       <main>
         <div
