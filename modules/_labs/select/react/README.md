@@ -44,7 +44,7 @@ function Example() {
     {label: 'Mail', value: 'mail'},
   ];
 
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('email');
 
   const handleChange = (event) => {
     setValue(event.currentTarget.value);
@@ -71,7 +71,7 @@ function Example() {
     {label: 'Mail', value: 'mail'},
   ];
 
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('email');
 
   const handleChange = (event) => {
     setValue(event.currentTarget.value);
@@ -97,7 +97,7 @@ import FormField from '@workday/canvas-kit-react-form-field';
 function Example() {
   const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
 
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('California');
 
   const handleChange = (event) => {
     setValue(event.currentTarget.value);
@@ -148,7 +148,7 @@ function Example() {
     );
   };
 
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('Activity Stream');
 
   const handleChange = (event) => {
     setValue(event.currentTarget.value);
