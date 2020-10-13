@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-page-header",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "description": "Canvas page header component",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -50,8 +50,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-button": "^4.2.0",
-    "@workday/canvas-kit-react-core": "^4.2.0"
+    "@workday/canvas-kit-react-button": "^4.3.0",
+    "@workday/canvas-kit-react-core": "^4.3.0"
   },
   "devDependencies": {
     "@workday/canvas-system-icons-web": "^1.0.20"
