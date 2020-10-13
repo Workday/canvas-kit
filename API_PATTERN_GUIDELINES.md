@@ -112,7 +112,7 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 
 - If your component needs to grow to fill to it's container, extend `GrowthInterface` (e.g.
   `export interface MyComponentProps extends GrowthBehavior`)
-- Then use the `grow` boolean prop in your styles to acheive the desired effect (e.g.
+- Then use the `grow` boolean prop in your styles to achieve the desired effect (e.g.
   `width: grow ? '100%' : undefined`)
 
 #### Static Class Variables

@@ -69,7 +69,7 @@ const ActionButton = styled('button')({
 
 const Message = styled('div')({
   wordBreak: 'break-word',
-  wordWrap: 'break-word',
+  wordWrap: 'break-word', // Needed for IE11
 });
 
 export default class Toast extends React.Component<ToastProps> {
