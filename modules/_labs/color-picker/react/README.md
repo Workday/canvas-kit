@@ -29,7 +29,7 @@ import * as React from 'react';
 import ColorPicker from '@workday/canvas-kit-labs-react-color-picker';
 import {colors} from '@workday/canvas-kit-react-core';
 import {Button} from '@workday/canvas-kit-react-button';
-import {Popper} from '@workday/canvas-kit-react-popup';
+import {Popper, Popup} from '@workday/canvas-kit-react-popup';
 
 const MyComponent: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -52,16 +52,17 @@ const MyComponent: React.FunctionComponent = () => {
         Toggle Color Picker
       </Button>
       <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current!}>
-        <ColorPicker
-          resetColor={colors.blueberry400}
-          resetLabel={'Reset'}
-          showCustomHexInput={true}
-          onColorChange={handleSubmit}
-          onColorReset={() => handleSubmit(colors.blueberry400)}
-          onSubmitClick={toggleOpen}
-          value={color}
-          style={{marginTop: 8}}
-        />
+        <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
+          <ColorPicker
+            resetColor={colors.blueberry400}
+            resetLabel={'Reset'}
+            showCustomHexInput={true}
+            onColorChange={handleSubmit}
+            onColorReset={() => handleSubmit(colors.blueberry400)}
+            onSubmitClick={toggleOpen}
+            value={color}
+          />
+        </Popup>
       </Popper>
     </>
   );

@@ -81,13 +81,13 @@ Black Pepper
 
 Border Radius variables in t-shirt size format. Spacing values are in `px` format.
 
-| Variable              | Size  |
-| --------------------- | ----- |
-| `$wdc-spacing-zero`   | 0     |
-| `$wdc-spacing-s`      | 2px   |
-| `$wdc-spacing-m`      | 4px   |
-| `$wdc-spacing-l`      | 8px   |
-| `$wdc-spacing-circle` | 999px |
+| Variable                    | Size  |
+| --------------------------- | ----- |
+| `$wdc-border-radius-zero`   | 0     |
+| `$wdc-border-radius-s`      | 2px   |
+| `$wdc-border-radius-m`      | 4px   |
+| `$wdc-border-radius-l`      | 8px   |
+| `$wdc-border-radius-circle` | 999px |
 
 ## Spacing
 

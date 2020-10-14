@@ -162,6 +162,34 @@ describe('Modal', () => {
     });
   });
 
+  context(`given the 'With Radio buttons' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components|Popups/Modal/React', 'With Radio buttons');
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    context('test trap focus', () => {
+      beforeEach(() => {
+        cy.contains('With Radio Buttons').focus();
+        cy.contains('With Radio Buttons').click();
+      });
+
+      it('should trap focus inside the modal element', () => {
+        cy.findByLabelText('Select Item').should('be.visible');
+
+        cy.focused()
+          .tab()
+          .should('have.attr', 'value', 'email')
+          .tab()
+          .should('have.attr', 'data-close', 'close')
+          .tab();
+      });
+    });
+  });
+
   context(`given the 'Without close icon' story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components|Popups/Modal/React', 'Without close icon');
