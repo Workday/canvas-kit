@@ -137,11 +137,14 @@ const Divider = styled('hr')({
 const iconSize = 24;
 const iconPadding = 16;
 const StyledSystemIcon = styled(SystemIcon)({
-  flex: `${iconSize + iconPadding}px 0`, // gives padding between LabelContainer, no matter the direction
+  flexShrink: 0,
+  flexBasis: iconSize + iconPadding, // gives padding between LabelContainer, no matter the direction
 });
 
-const SecondaryStyledSystemIcon = styled(StyledSystemIcon)({
+const SecondaryStyledSystemIcon = styled(SystemIcon)({
   display: `flex`,
+  flexShrink: 0,
+  flexBasis: iconSize + iconPadding, // gives padding between LabelContainer, no matter the direction
   justifyContent: `flex-end`,
 });
 
