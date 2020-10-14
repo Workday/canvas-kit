@@ -3,7 +3,7 @@
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {uploadCloudIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
+import {uploadCloudIcon, extLinkIcon, userIcon} from '@workday/canvas-system-icons-web';
 import {Menu, MenuItem, MenuItemProps} from '../index';
 
 // @ts-ignore: Cannot find module error
@@ -59,7 +59,7 @@ const createMenuItems = (hasIcons?: boolean, isFocused?: boolean): StoryMenuItem
           Sixth Item (<b>with markup</b>)
         </em>
       ),
-      icon: undefined,
+      icon: hasIcons ? userIcon : undefined,
       'aria-label': hasIcons ? `I am a label for screen readers` : undefined,
     },
     {
