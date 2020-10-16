@@ -1,5 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
+import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {jsx} from '@emotion/core';
 import SidePanel, {useSidePanel} from '../index';
@@ -10,6 +11,7 @@ import {AccentIcon} from '@workday/canvas-kit-react-icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import README from '../README.md';
+import {SidePanelTransitionStates} from '../lib/SidePanel';
 
 export default {
   title: 'Labs|Side Panel/React',
@@ -19,23 +21,28 @@ export default {
 
 export const Default = () => {
   const height = `calc(100vh - 80px)`;
-  const {panelProps, labelProps, controlProps} = useSidePanel({});
+  const {expanded, panelProps, labelProps, controlProps} = useSidePanel({});
+  const [panelState, setPanelState] = React.useState<SidePanelTransitionStates>(
+    expanded ? 'expanded' : 'collapsed'
+  );
 
   return (
-    <SidePanel {...panelProps} height={height}>
+    <SidePanel {...panelProps} height={height} onStateTransition={setPanelState}>
       <SidePanel.ToggleButton {...controlProps} />
-      <div
-        css={{
-          display: 'flex',
-          alignItems: 'center',
-          padding: `16px 12px`,
-        }}
-      >
-        <AccentIcon style={{marginRight: 16}} icon={rocketIcon} />
-        <h3 {...labelProps} style={{...type.h4, color: colors.licorice500}}>
-          Tasks Panel
-        </h3>
-      </div>
+      {panelState === 'expanded' && (
+        <div
+          css={{
+            display: 'flex',
+            alignItems: 'center',
+            padding: `16px 12px`,
+          }}
+        >
+          <AccentIcon style={{marginRight: 16}} icon={rocketIcon} />
+          <h3 {...labelProps} style={{...type.h4, color: colors.licorice500}}>
+            Tasks Panel
+          </h3>
+        </div>
+      )}
     </SidePanel>
   );
 };
