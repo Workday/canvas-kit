@@ -24,14 +24,14 @@ export interface SelectOptionProps extends Themeable, React.LiHTMLAttributes<HTM
    */
   id?: string;
   /**
-   * The ref to the list item that the styled component renders. Use this to imperatively manipulate the SelectOption (e.g., to scroll to it if it's out of view in the Select menu).
-   */
-  optionRef?: React.Ref<HTMLLIElement>;
-  /**
    * If true, set the SelectOption to the interactive state. Non-interactive SelectOptions should not give any visual cues that they are interactive (e.g., remove hover styling).
    * @default true
    */
-  interactive: boolean;
+  interactive?: boolean;
+  /**
+   * The ref to the list item that the styled component renders. Use this to imperatively manipulate the SelectOption (e.g., to scroll to it if it's out of view in the Select menu).
+   */
+  optionRef?: React.Ref<HTMLLIElement>;
   /**
    * The value of the SelectOption.
    */
@@ -105,18 +105,26 @@ const Option = styled('li')<SelectOptionProps>(
   })
 );
 
-const SelectOption = (props: SelectOptionProps) => {
-  const {children, optionRef, value, ...elemProps} = props;
-
+const SelectOption = ({
+  children,
+  focused = false,
+  interactive = true,
+  optionRef,
+  value,
+  ...elemProps
+}: SelectOptionProps) => {
   return (
-    <Option data-value={value} ref={optionRef} role="option" {...elemProps}>
+    <Option
+      data-value={value}
+      focused={focused}
+      interactive={interactive}
+      ref={optionRef}
+      role="option"
+      {...elemProps}
+    >
       {children}
     </Option>
   );
-};
-
-SelectOption.defaultProps = {
-  interactive: true,
 };
 
 export default SelectOption;
