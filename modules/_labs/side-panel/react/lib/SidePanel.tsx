@@ -215,10 +215,15 @@ const SidePanel = ({
   );
 };
 
-// For SidePanel, we're leveraging a hidden span to label this toggle button via `aria-labelledby`.
-// This type removes the requirement for `aria-label` in this component
-export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'> &
+type IconButtonPropsWithoutAriaLabel = Omit<IconButtonProps, 'aria-label'> &
   Partial<Pick<IconButtonProps, 'aria-label'>>;
+
+interface IconButtonPropsWithLabelledBy extends IconButtonPropsWithoutAriaLabel {
+  'aria-labelledby': string;
+}
+
+// ToggleButtonProps are IconButtonProps but 'aria-labelledby' will also satisify the constraint
+export type ToggleButtonProps = IconButtonProps | IconButtonPropsWithLabelledBy;
 
 /**
  * A toggle button styled specifically for the side panel container.
@@ -243,7 +248,7 @@ const ToggleButton = ({
         : `scaleX(${context.origin === 'left' ? '-1' : '1'})`,
   });
 
-  // @ts-ignore We don't need this to have aria-label, let the user decide to use that or aria-labelledby on the ToggleButton component
+  // @ts-ignore aria-label type error here. The will decide to use aria-label or aria-labelledby
   return <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />;
 };
 
