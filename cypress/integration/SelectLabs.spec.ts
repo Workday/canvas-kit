@@ -140,7 +140,7 @@ describe('Select', () => {
             });
 
             context('the menu', () => {
-              it('should set assistive focus to "Phone" option', () => {
+              it('should set assistive focus to the "Phone" option', () => {
                 cy.findByLabelText('Label')
                   .pipe(h.selectLabs.getMenu)
                   .pipe(getAssistiveFocus)
@@ -252,7 +252,7 @@ describe('Select', () => {
                   });
 
                   context('the menu', () => {
-                    it('should set assistive focus to "Mail" option', () => {
+                    it('should set assistive focus to the "Mail" option', () => {
                       cy.findByLabelText('Label')
                         .pipe(h.selectLabs.getMenu)
                         .pipe(getAssistiveFocus)
@@ -337,6 +337,94 @@ describe('Select', () => {
     });
   });
 
+  context(`given the "Default" story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Labs|Select/React/Top Label', 'Default');
+    });
+
+    context('when the menu is opened', () => {
+      beforeEach(() => {
+        cy.findByLabelText('Label')
+          .focus()
+          .type('{downarrow}');
+      });
+
+      context('the menu', () => {
+        it('should set assistive focus to the first option ("E-mail")', () => {
+          cy.findByLabelText('Label')
+            .pipe(h.selectLabs.getMenu)
+            .pipe(getAssistiveFocus)
+            .should('have.text', 'E-mail');
+        });
+      });
+
+      context('when focus is advanced to the second option ("Phone")', () => {
+        beforeEach(() => {
+          cy.focused().type('{downarrow}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to the second option ("Phone")', () => {
+            cy.findByLabelText('Label')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'Phone');
+          });
+        });
+
+        context(
+          'when the menu is closed WITHOUT selecting the newly focused option ("Phone")',
+          () => {
+            beforeEach(() => {
+              cy.focused().type('{esc}');
+            });
+
+            context('when the menu is re-opened AFTER it has fully closed', () => {
+              beforeEach(() => {
+                // Wait for menu to fully close before we open it again (so we
+                // don't interrupt the menu's closing animation and cause it to
+                // re-open while it's in the middle of closing)
+                cy.findByLabelText('Label')
+                  .pipe(h.selectLabs.getMenu)
+                  .should('not.exist');
+                cy.findByLabelText('Label')
+                  .focus()
+                  .type('{downarrow}');
+              });
+
+              context('the menu', () => {
+                it('should have reset assistive focus to the first option ("E-mail")', () => {
+                  cy.findByLabelText('Label')
+                    .pipe(h.selectLabs.getMenu)
+                    .pipe(getAssistiveFocus)
+                    .should('have.text', 'E-mail');
+                });
+              });
+            });
+
+            context('when the menu is re-opened BEFORE it has fully closed', () => {
+              beforeEach(() => {
+                cy.focused().type('{downarrow}');
+              });
+
+              context('the menu', () => {
+                it('should still have assistive focus set to the second option ("Phone")', () => {
+                  // Focus is shifting between the button and menu as we close
+                  // and open the menu. It's important that we use getMenu rather
+                  // than cy.focused() to ensure we obtain a reference to the menu.
+                  cy.findByLabelText('Label')
+                    .pipe(h.selectLabs.getMenu)
+                    .pipe(getAssistiveFocus)
+                    .should('have.text', 'Phone');
+                });
+              });
+            });
+          }
+        );
+      });
+    });
+  });
+
   context(`given the "Disabled" story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Labs|Select/React/Top Label', 'Disabled');
@@ -349,6 +437,118 @@ describe('Select', () => {
     context('the select button', () => {
       it('should be disabled', () => {
         cy.findByLabelText('Label').should('be.disabled');
+      });
+    });
+  });
+
+  context('given the "Disabled Options Test" story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Testing|React/Labs/Select', 'Disabled Options Test');
+    });
+
+    context('when the menu is opened', () => {
+      beforeEach(() => {
+        cy.findByLabelText('Label (Disabled Options)')
+          .focus()
+          .type('{downarrow}');
+      });
+
+      context('the "Carrier Pigeon" option', () => {
+        it('should have an aria-disabled attribute set to "true"', () => {
+          cy.findByLabelText('Label (Disabled Options)')
+            .pipe(h.selectLabs.getOption('Carrier Pigeon'))
+            .should('have.attr', 'aria-disabled', 'true');
+        });
+      });
+
+      context('when the down arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{downarrow}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to first enabled option ("E-mail")', () => {
+            cy.findByLabelText('Label (Disabled Options)')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'E-mail');
+          });
+        });
+
+        context('when the up arrow key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().type('{uparrow}');
+          });
+
+          context('the menu', () => {
+            it('should retain assistive focus on the "E-mail" option since the previous option ("Carrier Pigeon", which also happens to be the first option) is disabled', () => {
+              cy.findByLabelText('Label (Disabled Options)')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAssistiveFocus)
+                .should('have.text', 'E-mail');
+            });
+          });
+        });
+
+        context('when the down arrow key is pressed 2 more times', () => {
+          beforeEach(() => {
+            cy.focused().type('{downarrow}{downarrow}');
+          });
+
+          context('the menu', () => {
+            it('should set assistive focus to the third option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
+              cy.findByLabelText('Label (Disabled Options)')
+                .pipe(h.selectLabs.getMenu)
+                .pipe(getAssistiveFocus)
+                .should('have.text', 'Mail');
+            });
+          });
+
+          context('when the down arrow key is pressed 2 more times', () => {
+            beforeEach(() => {
+              cy.focused().type('{downarrow}{downarrow}');
+            });
+
+            context('the menu', () => {
+              it('should set assistive focus to the first option down ("Mobile Phone") since the second option down ("Telegram", which also happens to be the last option) is disabled', () => {
+                cy.findByLabelText('Label (Disabled Options)')
+                  .pipe(h.selectLabs.getMenu)
+                  .pipe(getAssistiveFocus)
+                  .should('have.text', 'Mobile Phone');
+              });
+            });
+          });
+        });
+      });
+
+      context('when the Home key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{home}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to the first enabled option ("E-mail")', () => {
+            cy.findByLabelText('Label (Disabled Options)')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'E-mail');
+          });
+        });
+      });
+
+      context('when the End key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{end}');
+        });
+
+        context('the menu', () => {
+          it('should set assistive focus to the last enabled option ("Mobile Phone")', () => {
+            cy.findByLabelText('Label (Disabled Options)')
+              .pipe(h.selectLabs.getMenu)
+              .pipe(getAssistiveFocus)
+              .should('have.text', 'Mobile Phone');
+          });
+        });
       });
     });
   });

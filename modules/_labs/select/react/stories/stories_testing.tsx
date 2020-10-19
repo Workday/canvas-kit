@@ -15,6 +15,16 @@ export default {
   component: Select,
 };
 
+const disabledOptions = [
+  {label: 'Carrier Pigeon', value: 'pigeon', disabled: true},
+  {label: 'E-mail', value: 'email'},
+  {label: 'Phone', value: 'phone'},
+  {label: 'Fax', value: 'fax', disabled: true},
+  {label: 'Mail', value: 'mail'},
+  {label: 'Mobile Phone', value: 'mobile_phone'},
+  {label: 'Telegram', value: 'telegram', disabled: true},
+];
+
 const Container = ({children, style = {}, ...elemProps}) => {
   return (
     <div
@@ -74,6 +84,17 @@ export const AccessibilityTest = () => (
       </p>
       <FormField label="Label (required)" inputId="select-required" required={true}>
         {controlComponent(<Select name="select-required" options={options} required={true} />)}
+      </FormField>
+    </Container>
+  </div>
+);
+
+export const DisabledOptionsTest = () => (
+  <div>
+    <Container>
+      <p>Disabled options may not be assistively focused using the keyboard.</p>
+      <FormField label="Label (Disabled Options)" inputId="select-disabled-options">
+        {controlComponent(<Select name="select-disabled-options" options={disabledOptions} />)}
       </FormField>
     </Container>
   </div>

@@ -1,20 +1,22 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
 import {storiesOf} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
 import {ColorInput} from '@workday/canvas-kit-react-color-picker';
 import {colors} from '@workday/canvas-kit-react-core';
-import {Popper} from '@workday/canvas-kit-react-popup';
+import {Popper, Popup, PopupPadding} from '@workday/canvas-kit-react-popup';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
 import {ColorPicker} from '@workday/canvas-kit-labs-react-color-picker';
 import README from '../README.md';
 
+// eslint-disable-next-line no-empty-function
+const noop = () => {};
+
 storiesOf('Labs|Color Picker/React', module)
   .addParameters({component: ColorPicker})
   .addDecorator(withReadme(README))
-  .add('Default', () => <ColorPicker onColorChange={color => action('color-change')(color)} />)
+  .add('Default', () => <ColorPicker onColorChange={noop} />)
   .add('Icon Button Popup', () => {
     const [isOpen, setOpen] = React.useState(false);
     const [color, setColor] = React.useState('');
@@ -24,7 +26,6 @@ storiesOf('Labs|Color Picker/React', module)
 
     const handleSubmit = React.useCallback(
       (submitColor: string) => {
-        action('color-change')(submitColor);
         setColor(submitColor.toUpperCase());
         setOpen(false);
       },
@@ -41,16 +42,17 @@ storiesOf('Labs|Color Picker/React', module)
           onClick={toggleOpen}
         />
         <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current!}>
-          <ColorPicker
-            resetColor={colors.blueberry400}
-            resetLabel={'Reset'}
-            showCustomHexInput={true}
-            onColorChange={handleSubmit}
-            onColorReset={() => handleSubmit(colors.blueberry400)}
-            onSubmitClick={toggleOpen}
-            value={color}
-            style={{marginTop: 8}}
-          />
+          <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
+            <ColorPicker
+              resetColor={colors.blueberry400}
+              resetLabel={'Reset'}
+              showCustomHexInput={true}
+              onColorChange={handleSubmit}
+              onColorReset={() => handleSubmit(colors.blueberry400)}
+              onSubmitClick={toggleOpen}
+              value={color}
+            />
+          </Popup>
         </Popper>
       </>
     );
@@ -118,19 +120,20 @@ storiesOf('Labs|Color Picker/React', module)
           anchorElement={inputRef.current!}
           ref={popupRef}
         >
-          <ColorPicker
-            resetColor={colors.blueberry400}
-            resetLabel={'Reset'}
-            onColorChange={color => {
-              setColorInputValue(color.toUpperCase());
-              setColor(color.toUpperCase());
-              setOpen(false);
-            }}
-            onColorReset={resetColor}
-            value={color}
-            colorSet={colorSet}
-            style={{marginTop: 8}}
-          />
+          <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
+            <ColorPicker
+              resetColor={colors.blueberry400}
+              resetLabel={'Reset'}
+              onColorChange={color => {
+                setColorInputValue(color.toUpperCase());
+                setColor(color.toUpperCase());
+                setOpen(false);
+              }}
+              onColorReset={resetColor}
+              value={color}
+              colorSet={colorSet}
+            />
+          </Popup>
         </Popper>
       </>
     );

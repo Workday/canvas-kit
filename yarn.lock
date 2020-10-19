@@ -6834,6 +6834,11 @@ cypress-axe@^0.5.1:
   resolved "https://registry.yarnpkg.com/cypress-axe/-/cypress-axe-0.5.1.tgz#bc45e042ed9ba8f556bceb2157e5015d082829d4"
   integrity sha512-oj+diADUnnjmiT7635kQuaDx7MG4nMk64oWCuDEIbWpe7Q3v+FzBE3ou8pg346LagGyqDFv8r7GYt6JWve6+Vg==
 
+cypress-enter-plugin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/cypress-enter-plugin/-/cypress-enter-plugin-1.0.0.tgz#bfddef9b22b42267553b09f702346009f1e751d4"
+  integrity sha512-a9GgjvaNTBYhjrozLJT7HgiUXjg9wl8xx5PuqC+5VuZMrr8srqEpr1sI7w1dzAcJFXuyz9Z7YCZVHktZhqH3qw==
+
 cypress-pipe@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/cypress-pipe/-/cypress-pipe-1.7.0.tgz#61f96568e673914bd2acbaaf06ce62ed89a6c63f"
@@ -8664,10 +8669,10 @@ focus-lock@^0.6.6:
   resolved "https://registry.yarnpkg.com/focus-lock/-/focus-lock-0.6.6.tgz#98119a755a38cfdbeda0280eaa77e307eee850c7"
   integrity sha512-Dx69IXGCq1qsUExWuG+5wkiMqVM/zGx/reXSJSLogECwp3x6KeNQZ+NAetgxEFpnC41rD8U3+jRCW68+LNzdtw==
 
-focus-trap-js@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/focus-trap-js/-/focus-trap-js-1.0.8.tgz#eb736b191edaeb420a0573a0de59621f0a711217"
-  integrity sha512-M6pgnwtVlmkH9dmjfd4J892MPejrretm2CTr/yA6GZtW5ABlyZJMo3+lIDOOWiQlHI5BM0FTUXMPWbVdUf0ACw==
+focus-trap-js@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/focus-trap-js/-/focus-trap-js-1.1.0.tgz#110f8fc56f694b257605afc19a1c7928ff7e57c3"
+  integrity sha512-mQVwIquw1tCcdUPMstH111adY9ErLSTbpm7vn522SUIDLfhedZQQKHXLIc4F44r1g+9NkbS73FP5gvVxL9xd6w==
 
 follow-redirects@1.5.10:
   version "1.5.10"
@@ -12215,7 +12220,12 @@ lodash.uniq@4.5.0, lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.17.15, lodash@^4.0.0, lodash@^4.0.1, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@~4.17.10:
+lodash@4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+
+lodash@^4.0.0, lodash@^4.0.1, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@~4.17.10:
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
@@ -13086,9 +13096,9 @@ node-fetch@^1.0.1:
     is-stream "^1.0.1"
 
 node-fetch@^2.1.2, node-fetch@^2.3.0, node-fetch@^2.5.0, node-fetch@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
-  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
+  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 node-gyp@^3.8.0:
   version "3.8.0"

@@ -93,6 +93,17 @@ module.exports = ({config, mode}) => {
     ],
   });
 
+  config.module.rules.push({
+    test: /\.md$/,
+    include: [path.resolve(__dirname, '..')],
+    exclude: [/node_modules/],
+    use: [
+      {
+        loader: path.resolve(__dirname, 'webpack-loader-redirect-mdx-to-github'),
+      },
+    ],
+  });
+
   // Load the source code of story files to display in docs.
   config.module.rules.push({
     test: /stories.*\.tsx?$/,
