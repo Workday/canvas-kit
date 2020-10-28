@@ -6,7 +6,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Popups/Popper',
+  title: 'Testing/React/Popups/Popper',
 });
 
 const containerStyles: React.CSSProperties = {

@@ -13,7 +13,7 @@ describe('Combobox', () => {
 
   context(`given the 'Group of results' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs|Combobox/React', 'Group of results');
+      h.stories.load('Labs/Combobox/React', 'Group of results');
     });
 
     it('should have aria-haspopup set to true', () => {
@@ -329,7 +329,7 @@ describe('Combobox', () => {
 
   context(`given the 'Disabled item' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs|Combobox/React', 'Disabled item');
+      h.stories.load('Labs/Combobox/React', 'Disabled item');
     });
 
     context('when the combobox is focused', () => {

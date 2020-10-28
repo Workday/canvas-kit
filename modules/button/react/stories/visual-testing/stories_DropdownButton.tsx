@@ -11,7 +11,7 @@ import {DropdownButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Dropdown Button',
+  title: 'Testing/React/Buttons/Button/Dropdown Button',
   component: DropdownButton,
 });
 

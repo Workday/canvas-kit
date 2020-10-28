@@ -10,7 +10,7 @@ import {
 import {Checkbox} from '../../../../checkbox/react';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Checkbox',
+  title: 'Testing/React/Inputs/Checkbox',
   component: Checkbox,
 });
 

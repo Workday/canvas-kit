@@ -7,7 +7,7 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Modal, ModalWidth} from '../';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Popups/Modal',
+  title: 'Testing/React/Popups/Modal',
   component: Modal,
   parameters: {
     chromatic: {

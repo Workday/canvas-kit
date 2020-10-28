@@ -4,7 +4,7 @@ import {HighlightButton} from '../../../';
 import {HighlightButtonStates} from '../stories_HighlightButton';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Highlight Button',
+  title: 'Testing/React/Buttons/Button/Highlight Button',
   component: HighlightButton,
   parameters: {
     canvasProviderDecorator: {

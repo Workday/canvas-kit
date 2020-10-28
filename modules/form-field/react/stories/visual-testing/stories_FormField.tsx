@@ -11,7 +11,7 @@ import {TextInput} from '../../../../text-input/react';
 import {FormFieldLabelPosition} from '../../lib/types';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Form Field',
+  title: 'Testing/React/Inputs/Form Field',
   component: FormField,
 });
 

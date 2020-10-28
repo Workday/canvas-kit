@@ -10,7 +10,7 @@ import {
 import {Select, SelectOption} from '../../../../select/react';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Select',
+  title: 'Testing/React/Inputs/Select',
   component: Select,
 });
 

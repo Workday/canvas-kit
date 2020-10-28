@@ -7,7 +7,7 @@ describe('Radio Group', () => {
   ['Default', 'Alert', 'Error with Grow'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components|Inputs/Radio/React/Top Label/Radio Group', story);
+        h.stories.load('Components/Inputs/Radio/React/Top Label/Radio Group', story);
       });
 
       it('should pass accessibility checks', () => {

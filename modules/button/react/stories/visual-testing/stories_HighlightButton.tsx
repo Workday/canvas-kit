@@ -12,7 +12,7 @@ import {HighlightButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Highlight Button',
+  title: 'Testing/React/Buttons/Button/Highlight Button',
   component: HighlightButton,
 });
 

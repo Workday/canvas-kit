@@ -2,7 +2,7 @@ import React from 'react';
 import {ColorPicker} from '@workday/canvas-kit-labs-react-color-picker';
 
 export default {
-  title: 'Testing|React/Labs/Color Picker',
+  title: 'Testing/React/Labs/Color Picker',
   component: ColorPicker,
 };
 

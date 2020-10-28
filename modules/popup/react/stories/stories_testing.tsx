@@ -5,7 +5,7 @@ import {Button} from '@workday/canvas-kit-react-button';
 import {Popper, Popup, usePopup, useCloseOnOutsideClick} from '@workday/canvas-kit-react-popup';
 
 export default {
-  title: 'Testing|React/Popups/Popup',
+  title: 'Testing/React/Popups/Popup',
   component: Popup,
 };
 

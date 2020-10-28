@@ -12,7 +12,7 @@ import {TextButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Text Button',
+  title: 'Testing/React/Buttons/Button/Text Button',
   component: TextButton,
 });
 

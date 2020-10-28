@@ -9,7 +9,7 @@ import {
 import {TextInput} from '../../../../text-input/react';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Text Input',
+  title: 'Testing/React/Inputs/Text Input',
   component: TextInput,
 });
 

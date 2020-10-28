@@ -10,7 +10,7 @@ import {
 import {TextArea} from '../../../../text-area/react';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/TextArea',
+  title: 'Testing/React/Inputs/TextArea',
   component: TextArea,
 });
 

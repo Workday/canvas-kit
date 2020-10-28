@@ -33,7 +33,7 @@ const normalizedOptions = options.map(option => {
 });
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Select',
+  title: 'Testing/React/Labs/Select',
   component: Select,
 });
 

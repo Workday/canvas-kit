@@ -9,7 +9,7 @@ import {ToolbarIconButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Toolbar Icon Button',
+  title: 'Testing/React/Buttons/Button/Toolbar Icon Button',
   component: ToolbarIconButton,
 });
 

@@ -43,7 +43,7 @@ describe('Select', () => {
   ['Default', 'Alert', 'Error'].forEach(story => {
     context(`given the "${story}" story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Labs|Select/React/Top Label', story);
+        h.stories.load('Labs/Select/React/Top Label', story);
       });
 
       it('should not have any axe errors', () => {
@@ -339,7 +339,7 @@ describe('Select', () => {
 
   context(`given the "Default" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs|Select/React/Top Label', 'Default');
+      h.stories.load('Labs/Select/React/Top Label', 'Default');
     });
 
     context('when the menu is opened', () => {
@@ -427,7 +427,7 @@ describe('Select', () => {
 
   context(`given the "Disabled" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs|Select/React/Top Label', 'Disabled');
+      h.stories.load('Labs/Select/React/Top Label', 'Disabled');
     });
 
     it('should not have any axe errors', () => {
@@ -443,7 +443,7 @@ describe('Select', () => {
 
   context('given the "Disabled Options Test" story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing|React/Labs/Select', 'Disabled Options Test');
+      h.stories.load('Testing/React/Labs/Select', 'Disabled Options Test');
     });
 
     context('when the menu is opened', () => {
@@ -555,7 +555,7 @@ describe('Select', () => {
 
   context(`given the "Scrollable" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs|Select/React/Top Label', 'Scrollable');
+      h.stories.load('Labs/Select/React/Top Label', 'Scrollable');
     });
 
     context('when the select button is focused', () => {
@@ -883,7 +883,7 @@ describe('Select', () => {
 
   context(`given the "Portal Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing|React/Labs/Select', 'Portal Test');
+      h.stories.load('Testing/React/Labs/Select', 'Portal Test');
     });
 
     context(
@@ -910,7 +910,7 @@ describe('Select', () => {
 
   context(`given the "Accessibility Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing|React/Labs/Select', 'Accessibility Test');
+      h.stories.load('Testing/React/Labs/Select', 'Accessibility Test');
     });
 
     context('when the select button with aria-required set to true is clicked', () => {

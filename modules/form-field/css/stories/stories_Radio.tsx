@@ -5,7 +5,7 @@ import README from '../../../radio/css/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-radio/index.scss';
 
-storiesOf('Components|Inputs/Radio/CSS/Top Label/Radio', module)
+storiesOf('Components/Inputs/Radio/CSS/Top Label/Radio', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form">
@@ -21,7 +21,7 @@ storiesOf('Components|Inputs/Radio/CSS/Top Label/Radio', module)
     </div>
   ));
 
-storiesOf('Components|Inputs/Radio/CSS/Left Label/Radio', module)
+storiesOf('Components/Inputs/Radio/CSS/Left Label/Radio', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">
@@ -37,7 +37,7 @@ storiesOf('Components|Inputs/Radio/CSS/Left Label/Radio', module)
     </div>
   ));
 
-storiesOf('Components|Inputs/Radio/CSS/Top Label/Radio Group', module)
+storiesOf('Components/Inputs/Radio/CSS/Top Label/Radio Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form">
@@ -204,7 +204,7 @@ storiesOf('Components|Inputs/Radio/CSS/Top Label/Radio Group', module)
     </div>
   ));
 
-storiesOf('Components|Inputs/Radio/CSS/Left Label/Radio Group', module)
+storiesOf('Components/Inputs/Radio/CSS/Left Label/Radio Group', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="wdc-form wdc-form-label-position-left">

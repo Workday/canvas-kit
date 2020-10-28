@@ -4,7 +4,7 @@ import {Radio} from '../../../../../radio/react';
 import {RadioStates} from '../stories_Radio';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Radio',
+  title: 'Testing/React/Inputs/Radio',
   component: Radio,
   parameters: {
     canvasProviderDecorator: {

@@ -75,7 +75,7 @@ export const Autocomplete: FC<Omit<ComboboxProps, 'children'> & {
   );
 };
 
-storiesOf('Labs|Combobox/React', module)
+storiesOf('Labs/Combobox/React', module)
   .addParameters({component: Combobox})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)

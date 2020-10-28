@@ -7,7 +7,7 @@ import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/s
 import ColorPicker from '../lib/ColorPicker';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Color Picker',
+  title: 'Testing/React/Labs/Color Picker',
   component: ColorPicker,
   parameters: {
     chromatic: {

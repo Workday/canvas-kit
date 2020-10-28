@@ -14,7 +14,7 @@ import README from '../README.md';
 import {SidePanelTransitionStates} from '../lib/SidePanel';
 
 export default {
-  title: 'Labs|Side Panel/React',
+  title: 'Labs/Side Panel/React',
   decorators: [withReadme(README)],
   component: SidePanel,
 };

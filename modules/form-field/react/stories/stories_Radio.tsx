@@ -10,7 +10,7 @@ import README from '../../../radio/react/README.md';
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-storiesOf('Components|Inputs/Radio/React/Top Label/Radio Group', module)
+storiesOf('Components/Inputs/Radio/React/Top Label/Radio Group', module)
   .addParameters({component: RadioGroup})
   .addDecorator(withReadme(README))
   .add('Default', () => {
@@ -66,7 +66,7 @@ storiesOf('Components|Inputs/Radio/React/Top Label/Radio Group', module)
     );
   });
 
-storiesOf('Components|Inputs/Radio/React/Top Label/Radio', module)
+storiesOf('Components/Inputs/Radio/React/Top Label/Radio', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => {
@@ -83,7 +83,7 @@ storiesOf('Components|Inputs/Radio/React/Top Label/Radio', module)
     );
   });
 
-storiesOf('Components|Inputs/Radio/React/Left Label/Radio Group', module)
+storiesOf('Components/Inputs/Radio/React/Left Label/Radio Group', module)
   .addParameters({component: RadioGroup})
   .addDecorator(withReadme(README))
   .add('Default', () => {
@@ -141,7 +141,7 @@ storiesOf('Components|Inputs/Radio/React/Left Label/Radio Group', module)
     );
   });
 
-storiesOf('Components|Inputs/Radio/React/Left Label/Radio', module)
+storiesOf('Components/Inputs/Radio/React/Left Label/Radio', module)
   .addParameters({component: Radio})
   .addDecorator(withReadme(README))
   .add('Default', () => {

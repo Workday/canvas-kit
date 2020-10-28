@@ -11,7 +11,7 @@ import {manyOptions, options} from './stories';
 import {controlComponent} from '../../../../../utils/storybook';
 
 export default {
-  title: 'Testing|React/Labs/Select',
+  title: 'Testing/React/Labs/Select',
   component: Select,
 };
 

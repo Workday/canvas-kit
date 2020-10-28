@@ -13,7 +13,7 @@ import README from '../README.md';
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
-storiesOf('Labs|Color Picker/React', module)
+storiesOf('Labs/Color Picker/React', module)
   .addParameters({component: ColorPicker})
   .addDecorator(withReadme(README))
   .add('Default', () => <ColorPicker onColorChange={noop} />)

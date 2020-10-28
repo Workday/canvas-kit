@@ -9,7 +9,7 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '../../../../switch/react';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Switch',
+  title: 'Testing/React/Inputs/Switch',
   component: Switch,
 });
 

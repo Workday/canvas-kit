@@ -11,7 +11,7 @@ import {DeleteButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Delete Button',
+  title: 'Testing/React/Buttons/Button/Delete Button',
   component: DeleteButton,
 });
 

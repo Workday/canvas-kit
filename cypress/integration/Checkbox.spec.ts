@@ -11,7 +11,7 @@ describe('Checkbox', () => {
   ['Default', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components|Inputs/Checkbox/React/Top Label', story);
+        h.stories.load('Components/Inputs/Checkbox/React/Top Label', story);
       });
 
       it('should pass accessibility checks', () => {
@@ -32,7 +32,7 @@ describe('Checkbox', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Checkbox/React/Top Label', 'Disabled');
+      h.stories.load('Components/Inputs/Checkbox/React/Top Label', 'Disabled');
     });
 
     it('should pass accessibility checks', () => {

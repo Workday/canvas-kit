@@ -13,7 +13,7 @@ import {
 import README from '../README.md';
 
 export default {
-  title: 'Components|Popups/Popper/React',
+  title: 'Components/Popups/Popper/React',
   component: Popper,
   decorators: [withReadme(README)],
 };

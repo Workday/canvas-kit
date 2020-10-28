@@ -6,7 +6,7 @@ import {spacing} from '@workday/canvas-kit-react-core';
 import {Tabs} from '@workday/canvas-kit-labs-react-tabs';
 
 export default {
-  title: 'Testing|React/Labs/Tabs',
+  title: 'Testing/React/Labs/Tabs',
   component: Tabs,
 };
 

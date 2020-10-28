@@ -13,7 +13,7 @@ import {IconButton} from '../../index';
 import {Container, IconButtonGrid, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Icon Button',
+  title: 'Testing/React/Buttons/Button/Icon Button',
   component: IconButton,
 });
 

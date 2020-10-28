@@ -13,7 +13,7 @@ import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Tabs',
+  title: 'Testing/React/Labs/Tabs',
   component: Tabs,
   parameters: {
     chromatic: {

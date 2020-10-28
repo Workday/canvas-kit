@@ -9,7 +9,7 @@ import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
 import PageHeader from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Navigation/Page Header/React', module)
+storiesOf('Components/Navigation/Page Header/React', module)
   .addParameters({component: PageHeader})
   .addDecorator(withReadme(README))
   .add('Product Page Header', () => (

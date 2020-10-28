@@ -4,7 +4,7 @@ import {Button} from '../../../';
 import {ButtonStates} from '../stories_Button';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Button',
+  title: 'Testing/React/Buttons/Button/Button',
   component: Button,
   parameters: {
     canvasProviderDecorator: {

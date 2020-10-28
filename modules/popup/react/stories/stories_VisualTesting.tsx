@@ -9,7 +9,7 @@ import {PopupPadding} from '../lib/Popup';
 import {depth} from '@workday/canvas-kit-react-core';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Popups/Popup',
+  title: 'Testing/React/Popups/Popup',
   component: Popup,
 });
 

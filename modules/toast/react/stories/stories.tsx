@@ -8,7 +8,7 @@ import {colors} from '../../../core/react';
 import Toast from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Popups/Toast/React', module)
+storiesOf('Components/Popups/Toast/React', module)
   .addParameters({component: Toast})
   .addDecorator(withReadme(README))
   .add('Success', () => (
