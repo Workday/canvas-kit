@@ -1,4 +1,4 @@
-import {Meta, Story, Preview, Props} from '@storybook/addon-docs/blocks';
+import {Meta, Story, Canvas, ArgsTable} from '@storybook/addon-docs/blocks';
 
 import {spacing} from '../../../core/react';
 import README from '../README.md';
@@ -8,13 +8,21 @@ import Card from '../index';
 
 # Card
 
-This is my card documentation
-
-<Preview>
+<Canvas>
   <Story name="Default">
     <div className="story">
       <Card heading="Title">Card contents</Card>
     </div>
   </Story>
-</Preview>
-<Props of={Card} />
+</Canvas>
+<ArgsTable of={Card} />
+
+## No Padding
+
+<Canvas>
+  <Story name="With No Padding">
+    <Card heading="Title" padding={spacing.zero}>
+      No Padding
+    </Card>
+  </Story>
+</Canvas>
