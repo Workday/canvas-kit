@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react-common';
-import {css, jsx, keyframes, CSSObject} from '@emotion/core';
+import {css, CSSObject, jsx, keyframes} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {spacing, colors, depth} from '@workday/canvas-kit-react-core';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
@@ -86,7 +86,7 @@ const createKeyframes = (from: number | string, to: number | string) => {
   `;
 };
 
-const containerVariantStyle: {[K in SidePanelVariant]: CSSObject} = {
+const containerVariantStyle: Record<SidePanelVariant, CSSObject> = {
   alternate: {
     backgroundColor: colors.frenchVanilla100,
     ...depth[3],
