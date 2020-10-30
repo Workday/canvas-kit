@@ -33,7 +33,7 @@ const createMenuItems = (hasIcons?: boolean): StoryMenuItemProps[] => {
       icon: hasIcons ? uploadCloudIcon : undefined,
     },
     {
-      text: `Second Item with really really really long label`,
+      text: `Second Item (with a really really really long label)`,
       icon: hasIcons ? setupIcon : undefined,
     },
     {
