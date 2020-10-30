@@ -1,12 +1,28 @@
 import * as React from 'react';
 
 import {useUniqueId} from '@workday/canvas-kit-react-common';
-import {SidePanelProps} from './SidePanel';
 
-export interface UseSidePanelProps extends Pick<React.HTMLAttributes<HTMLDivElement>, 'id'> {
+export interface UseSidePanelProps {
   initialExpanded?: boolean;
   panelId?: string;
   labelId?: string;
+}
+
+export interface PanelProps {
+  expanded: boolean;
+  id: string;
+  'aria-labelledby': string;
+}
+
+export interface LabelProps {
+  id: string;
+}
+
+export interface ControlProps {
+  'aria-controls': string;
+  'aria-expanded': boolean;
+  'aria-labelledby': string;
+  onClick: () => void;
 }
 
 export const useSidePanel = (config?: UseSidePanelProps) => {
@@ -28,17 +44,17 @@ export const useSidePanel = (config?: UseSidePanelProps) => {
     setExpanded(!expanded);
   };
 
-  const panelProps: Partial<SidePanelProps> = {
+  const panelProps: PanelProps = {
     expanded: expanded,
     id: panelId,
     'aria-labelledby': labelId,
   };
 
-  const labelProps = {
+  const labelProps: LabelProps = {
     id: labelId,
   };
 
-  const controlProps = {
+  const controlProps: ControlProps = {
     'aria-controls': panelId,
     'aria-expanded': expanded,
     'aria-labelledby': labelId,
