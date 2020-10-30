@@ -152,11 +152,12 @@ const SidePanel = ({
 
   const handleAnimationEnd = (event: React.AnimationEvent<HTMLDivElement>) => {
     if (event.currentTarget === event.target) {
-      if (
-        event.animationName === motion.collapse.name ||
-        event.animationName === motion.expand.name
-      ) {
-        setState(expanded ? 'expanded' : 'collapsed');
+      if (event.animationName === motion.collapse.name) {
+        setState('collapsed');
+      }
+
+      if (event.animationName === motion.expand.name) {
+        setState('expanded');
       }
     }
 
