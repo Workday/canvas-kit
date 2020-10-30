@@ -19,71 +19,70 @@ export default {
   component: SidePanel,
 };
 
+const height = `calc(100vh - 80px)`;
+
 export const Default = () => {
-  const height = `calc(100vh - 80px)`;
   const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
   const [panelState, setPanelState] = React.useState<SidePanelTransitionStates>(
     expanded ? 'expanded' : 'collapsed'
   );
 
   return (
-    <SidePanel {...panelProps} height={height} onStateTransition={setPanelState}>
-      <SidePanel.ToggleButton {...controlProps} />
-      {panelState === 'expanded' && (
-        <div
-          css={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: `16px 12px`,
-          }}
-        >
-          <AccentIcon style={{marginRight: 16}} icon={rocketIcon} />
-          <h3 {...labelProps} style={{...type.h4, color: colors.licorice500}}>
-            Tasks Panel
-          </h3>
-        </div>
-      )}
-    </SidePanel>
+    <div style={{height}}>
+      <SidePanel {...panelProps} onStateTransition={setPanelState}>
+        <SidePanel.ToggleButton {...controlProps} />
+        {panelState === 'expanded' && (
+          <div
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: `16px 12px`,
+            }}
+          >
+            <AccentIcon style={{marginRight: 16}} icon={rocketIcon} />
+            <h3 {...labelProps} style={{...type.h4, color: colors.licorice500}}>
+              Tasks Panel
+            </h3>
+          </div>
+        )}
+      </SidePanel>
+    </div>
   );
 };
 
 export const NoHeaderPermanentlyOpen = () => {
-  const height = `calc(100vh - 80px)`;
   const {panelProps, labelProps} = useSidePanel();
 
   return (
-    <SidePanel height={height} {...panelProps}>
-      <span hidden {...labelProps}>
-        Tasks Panel
-      </span>
-      <div style={{padding: '16px 24px'}}>
-        <Button variant={Button.Variant.Primary} size={Button.Size.Large} icon={plusIcon}>
-          Add New
-        </Button>
-      </div>
-    </SidePanel>
+    <div style={{height}}>
+      <SidePanel {...panelProps}>
+        <span hidden {...labelProps}>
+          Tasks Panel
+        </span>
+        <div style={{padding: '16px 24px'}}>
+          <Button variant={Button.Variant.Primary} size={Button.Size.Large} icon={plusIcon}>
+            Add New
+          </Button>
+        </div>
+      </SidePanel>
+    </div>
   );
 };
 
 export const RightSidePanel = () => {
-  const heightOffset = 40;
   const {panelProps, labelProps, controlProps} = useSidePanel({
     initialExpanded: false,
-    id: 'sidepanelid1',
+    panelId: 'sidepanelid1',
   });
 
   return (
     <div
       style={{
         position: 'relative',
+        height,
       }}
     >
-      <SidePanel
-        {...panelProps}
-        style={{position: 'absolute', right: 0}}
-        origin="right"
-        height={`calc(100vh - ${heightOffset * 2}px)`}
-      >
+      <SidePanel {...panelProps} style={{position: 'absolute', right: 0}} origin="right">
         <SidePanel.ToggleButton {...controlProps} />
         <span hidden {...labelProps}>
           Right Panel
@@ -95,17 +94,15 @@ export const RightSidePanel = () => {
 
 export const ExternalControl = () => {
   const {panelProps, labelProps, controlProps} = useSidePanel({
-    id: 'sidepanelid1',
+    panelId: 'sidepanelid1',
     initialExpanded: false,
   });
-  const heightOffset = 40;
   return (
-    <div style={{display: 'flex', backgroundColor: colors.soap200}}>
+    <div style={{display: 'flex', backgroundColor: colors.soap200, height}}>
       <SidePanel
         as="aside"
         {...panelProps}
         variant={'alternate'}
-        height={`calc(100vh - ${heightOffset * 2}px)`}
         onExpandedChange={expanded => {
           console.log(`expanded prop is: ${expanded ? 'true' : 'false'}`);
         }}

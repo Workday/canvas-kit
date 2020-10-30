@@ -34,12 +34,6 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   expandedWidth?: number | string;
   /**
-   * The height of the component (in `px` if it's a `number`).
-   *
-   * @default '100%'
-   */
-  height?: number | string;
-  /**
    * Which side the side panel is meant to originate from.
    *
    * @default 'left'
@@ -100,6 +94,7 @@ const Panel = styled('section')<Pick<SidePanelProps, 'as'>>({
   overflow: 'hidden',
   position: 'relative',
   boxSizing: 'border-box',
+  height: '100%',
 });
 
 export const SidePanelContext = React.createContext({
@@ -113,7 +108,6 @@ const SidePanel = ({
   collapsedWidth = 64,
   expanded = true,
   expandedWidth = 320,
-  height = '100%',
   onAnimationEnd,
   onAnimationStart,
   onExpandedChange,
@@ -188,10 +182,6 @@ const SidePanel = ({
         {
           width: expanded ? expandedWidth : collapsedWidth,
           maxWidth: expanded ? expandedWidth : collapsedWidth,
-          minWidth: expanded ? expandedWidth : collapsedWidth,
-          height: height,
-          minHeight: height,
-          maxHeight: height,
           // mounted.current will be false on the first render, thus you won't get an unwanted animation here
           // Will animate again if you force a re-render (like in Storybook)
           animation: mounted.current

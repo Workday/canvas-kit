@@ -110,11 +110,6 @@ Default: `false`
 
 Default: `320`
 
-#### `height: number | string`
-> The height of the component (in `px` if it's a `number`).
-
-Default: `'100%'`
-
 #### `origin: 'left' | 'right'`
 > Which side the side panel is meant to originate from.
 
