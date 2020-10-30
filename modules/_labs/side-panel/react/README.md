@@ -25,7 +25,7 @@ import SidePanel, {useSidePanel} from '@workday/canvas-kit-labs-react-side-panel
  * A convenience hook is available for setting the state of the SidePanel along with the proper aria- attributes
  *
  */
-const [panelProps, labelProps, controlProps] = useSidePanel({});
+const [panelProps, labelProps, controlProps] = useSidePanel();
 
 <SidePanel {...panelProps}>
   <SidePanel.ToggleButton {...controlProps} />
