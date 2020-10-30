@@ -23,7 +23,7 @@ class WithIconsDemo extends Component {
             <li role="menuitem">
               <i className="wdc-icon" data-icon="setup" data-category="system" />
               <span className="wdc-menu-item-label">
-                Second Item with really really really long label
+                Second Item (with a really really really long label)
               </span>
             </li>
             <li role="menuitem" className="wdc-menu-item-disabled" aria-disabled="true">
@@ -56,7 +56,7 @@ storiesOf('Components|Popups/Menu/CSS', module)
             <li role="menuitem" className="wdc-menu-item-focused">
               <a href="#">First Item</a>
             </li>
-            <li role="menuitem">Second Item with really really really long label</li>
+            <li role="menuitem">Second Item (with a really really really long label)</li>
             <li role="menuitem" className="wdc-menu-item-disabled" aria-disabled="true">
               Third Item (disabled)
             </li>
