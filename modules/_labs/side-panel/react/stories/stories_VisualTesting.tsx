@@ -23,14 +23,9 @@ export const SidePanelStates = () => (
       ]}
       columnProps={permutateProps(
         {
-          collapsed: [
-            {label: 'Controlled Collapsed', value: true},
-            {label: 'Controlled Expanded', value: false},
-            {label: '', value: undefined},
-          ],
-          defaultCollapsed: [
-            {label: 'Uncontrolled Collapsed', value: true},
-            {label: 'Uncontrolled Expanded', value: false},
+          expanded: [
+            {label: 'Collapsed', value: false},
+            {label: 'Expanded', value: true},
             {label: '', value: undefined},
           ],
           origin: [
@@ -38,13 +33,13 @@ export const SidePanelStates = () => (
             {label: '(right)', value: 'right'},
           ],
         },
-        ({collapsed, defaultCollapsed}) => {
-          // Don't show permutations of both values being defined (collapsed prop always wins over defaultCollapsed)
-          if (collapsed !== undefined && defaultCollapsed !== undefined) {
+        ({expanded, defaultExpanded}) => {
+          // Don't show permutations of both values being defined (expanded prop always wins over defaultExpanded)
+          if (expanded !== undefined && defaultExpanded !== undefined) {
             return false;
           }
           // Don't show if both are undefined
-          if (collapsed === undefined && defaultCollapsed === undefined) {
+          if (expanded === undefined && defaultExpanded === undefined) {
             return false;
           }
           return true;
