@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import * as React from 'react';
-import styled from '@emotion/styled';
+import {styled} from '@workday/canvas-kit-react-common';
 import {css, jsx, keyframes, CSSObject} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
 import {spacing, colors, depth} from '@workday/canvas-kit-react-core';
