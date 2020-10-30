@@ -21,7 +21,7 @@ export default {
 
 export const Default = () => {
   const height = `calc(100vh - 80px)`;
-  const {expanded, panelProps, labelProps, controlProps} = useSidePanel({});
+  const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
   const [panelState, setPanelState] = React.useState<SidePanelTransitionStates>(
     expanded ? 'expanded' : 'collapsed'
   );
@@ -49,7 +49,7 @@ export const Default = () => {
 
 export const NoHeaderPermanentlyOpen = () => {
   const height = `calc(100vh - 80px)`;
-  const {panelProps, labelProps} = useSidePanel({});
+  const {panelProps, labelProps} = useSidePanel();
 
   return (
     <SidePanel height={height} {...panelProps}>

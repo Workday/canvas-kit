@@ -14,7 +14,7 @@ const Container = props => {
 const label = `Accessible Label Name`;
 
 export const Default = () => {
-  const {labelProps, panelProps, controlProps} = useSidePanel({});
+  const {labelProps, panelProps, controlProps} = useSidePanel();
 
   return (
     <Container>
@@ -28,7 +28,7 @@ export const Default = () => {
   );
 };
 export const AsDiv = () => {
-  const {labelProps, panelProps, controlProps} = useSidePanel({});
+  const {labelProps, panelProps, controlProps} = useSidePanel();
 
   return (
     <Container>
@@ -42,7 +42,7 @@ export const AsDiv = () => {
   );
 };
 export const AsAside = () => {
-  const {labelProps, panelProps, controlProps} = useSidePanel({});
+  const {labelProps, panelProps, controlProps} = useSidePanel();
 
   return (
     <Container>

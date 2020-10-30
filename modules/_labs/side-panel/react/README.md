@@ -78,6 +78,8 @@ or
 #### `ToggleButton`
 > `<SidePanel.ToggleButton>` is a control that is meant to toggle between `expanded = true` and `expanded = false` states. It must be used within the `SidePanel` component as a child. Use in conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit `onClick` handlers.
 
+> This is a standard Canvas Kit [`IconButton`](https://github.com/Workday/canvas-kit/tree/master/modules/button/react#iconbutton) and will accept those props.
+
 > **Important**: For accessibility purposes, it must be the first focusable element. We recommend that you keep it as the first child of `SidePanel`.
 
 ## Component Props

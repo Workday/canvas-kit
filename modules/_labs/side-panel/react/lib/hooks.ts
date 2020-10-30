@@ -9,11 +9,17 @@ export interface UseSidePanelProps extends Pick<React.HTMLAttributes<HTMLDivElem
   labelId?: string;
 }
 
-export const useSidePanel = ({
-  initialExpanded = true,
-  panelId: panelIdParam,
-  labelId: labelIdParam,
-}: UseSidePanelProps) => {
+export const useSidePanel = (config?: UseSidePanelProps) => {
+  const configParams = config
+    ? config
+    : {
+        initialExpanded: true,
+        panelId: undefined,
+        labelId: undefined,
+      };
+
+  const {initialExpanded = true, panelId: panelIdParam, labelId: labelIdParam} = configParams;
+
   const [expanded, setExpanded] = React.useState(initialExpanded);
   const panelId = useUniqueId(panelIdParam);
   const labelId = useUniqueId(labelIdParam);

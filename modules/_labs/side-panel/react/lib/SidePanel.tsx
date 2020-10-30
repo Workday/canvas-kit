@@ -46,7 +46,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   origin?: 'left' | 'right';
   /**
-   * The function called when the side panel's `expanded` state changes. States like `'collapsing'` and `'expanding'` are tracked in another callback: `onStateChange`
+   * The function called when the side panel's `expanded` state changes. States like `'collapsing'` and `'expanding'` are tracked in another callback: `onStateTransition`
    *
    * @param boolean
    */
@@ -248,7 +248,7 @@ const ToggleButton = ({
         : `scaleX(${context.origin === 'left' ? '-1' : '1'})`,
   });
 
-  // @ts-ignore aria-label type error here. The will decide to use aria-label or aria-labelledby
+  // @ts-ignore aria-label type error here. The user will decide to use aria-label or aria-labelledby
   return <IconButton type="button" css={buttonStyle} icon={icon} variant={variant} {...rest} />;
 };
 
