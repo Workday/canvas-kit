@@ -220,7 +220,7 @@ export type ToggleButtonProps = IconButtonProps | IconButtonPropsWithLabelledBy;
  * A toggle button styled specifically for the side panel container.
  */
 const ToggleButton = ({
-  variant = IconButton.Variant.CircleFilled,
+  variant = IconButton.Variant.Plain,
   icon = transformationImportIcon,
   ...rest
 }: ToggleButtonProps) => {
