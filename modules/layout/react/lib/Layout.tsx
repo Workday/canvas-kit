@@ -58,7 +58,7 @@ const LayoutContainer = styled('div', {
   }
 );
 
-export default class Layout extends React.Component<LayoutProps> {
+class Layout extends React.Component<LayoutProps> {
   public static Column = Column;
 
   private renderChild = (
@@ -100,3 +100,7 @@ export default class Layout extends React.Component<LayoutProps> {
     );
   }
 }
+
+Layout.Column = Column;
+
+export default Layout;

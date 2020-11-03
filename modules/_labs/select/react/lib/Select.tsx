@@ -30,7 +30,7 @@ interface SelectState {
   menuVisibility: MenuVisibility;
 }
 
-export default class Select extends React.Component<SelectProps, SelectState> {
+class Select extends React.Component<SelectProps, SelectState> {
   static ErrorType = ErrorType;
 
   state: Readonly<SelectState> = {
@@ -541,3 +541,7 @@ export default class Select extends React.Component<SelectProps, SelectState> {
     );
   }
 }
+
+Select.ErrorType = ErrorType;
+
+export default Select;
