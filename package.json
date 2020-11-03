@@ -50,6 +50,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-emotion": "^10.0.29",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "caniuse-lite": "^1.0.30001154",
     "colors": "^1.4.0",
     "commitizen": "^4.0.4",
     "core-js": "^3.5.0",
