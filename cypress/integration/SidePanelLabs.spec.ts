@@ -17,8 +17,31 @@ describe('Side Panel', () => {
         cy.checkA11y();
       });
 
-      it(`should have a button with an accessible name`, () => {
-        cy.findByRole('button', {name}).should('exist');
+      context('the button', () => {
+        it(`should have an accessible name`, () => {
+          cy.findByRole('button', {name}).should('exist');
+        });
+
+        it(`should have an aria-expanded attribute of 'true'`, () => {
+          cy.findByRole('button', {name}).should('have.attr', 'aria-expanded', 'true');
+        });
+
+        it(`should have an aria-controls attribute equal to the id of the panel`, () => {
+          cy.findByRole('button', {name}).then(button => {
+            const buttonAriaControlsValue = button.attr('aria-controls');
+            switch (story) {
+              case 'AsAside':
+                cy.findByRole('complementary', {name}).should(
+                  'have.attr',
+                  'id',
+                  buttonAriaControlsValue
+                );
+                break;
+              default:
+                cy.findByRole('region', {name}).should('have.attr', 'id', buttonAriaControlsValue);
+            }
+          });
+        });
       });
 
       it(`should have a panel with a landmark role`, () => {
@@ -30,8 +53,6 @@ describe('Side Panel', () => {
             cy.findByRole('region', {name}).should('exist');
         }
       });
-
-      // TODO: How to test for aria-controls on the button
 
       context('when tabbing', () => {
         beforeEach(() => {
@@ -51,7 +72,7 @@ describe('Side Panel', () => {
         });
 
         context('the button', () => {
-          it(`should have an aria-expanded attribute of false`, () => {
+          it(`should have an aria-expanded attribute of 'false'`, () => {
             cy.findByRole('button', {name}).should('have.attr', 'aria-expanded', 'false');
           });
         });
