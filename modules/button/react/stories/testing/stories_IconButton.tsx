@@ -11,21 +11,26 @@ export default {
   component: IconButton,
 };
 
+const iconGridStyles: CSSObject = {
+  display: 'flex',
+  flexWrap: 'wrap',
+};
+
 const iconCellStyles: CSSObject = {
-  display: 'inline-block',
   margin: '0 10px 10px 0',
   textAlign: 'center',
   width: '75px',
 
   p: {
     fontSize: '12px',
+    margin: '12px 0',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
 };
 
-export const IconButtonCircleGrid = () => {
-  const [toggled, setToggled] = React.useState(false);
+export const IconButtonCircleToggleableGrid = () => {
+  const [toggled, setToggled] = React.useState(true);
 
   const handleToggle = () => {
     setToggled(!toggled);
@@ -40,8 +45,7 @@ export const IconButtonCircleGrid = () => {
   }
 
   return (
-    <div>
-      <p>All buttons will toggle on/off together.</p>
+    <div css={iconGridStyles}>
       {iconArray.map(icon => (
         <div css={iconCellStyles} key={icon.name}>
           <IconButton
