@@ -51,4 +51,19 @@ module.exports = {
 
     return config;
   },
+  babel: async options => ({
+    ...options,
+    plugins: [
+      '@babel/proposal-class-properties',
+      '@babel/proposal-object-rest-spread',
+      '@babel/plugin-transform-modules-commonjs',
+      [
+        'emotion',
+        {
+          autoLabel: true,
+          labelFormat: '[filename]__[local]',
+        },
+      ],
+    ],
+  }),
 };
