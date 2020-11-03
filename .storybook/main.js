@@ -49,6 +49,14 @@ module.exports = {
 
     config.plugins.push(new DocgenPlugin());
 
+    // Remove progress updates to reduce log lines in Travis
+    // See: https://github.com/storybookjs/storybook/issues/2029
+    if (process.env.TRAVIS) {
+      config.plugins = config.plugins.filter(
+        plugin => plugin.constructor.name !== 'ProgressPlugin'
+      );
+    }
+
     return config;
   },
   babel: async options => ({
