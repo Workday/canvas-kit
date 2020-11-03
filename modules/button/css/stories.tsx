@@ -45,7 +45,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
-      <section>
+      <section className="story">
         <h3>Large Primary</h3>
         <IconDemo>
           <button className="wdc-btn wdc-btn-primary wdc-btn-size-l">Primary</button>
@@ -62,7 +62,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
         </button>
       </section>
 
-      <section>
+      <section className="story">
         <h3>Medium Primary</h3>
         <IconDemo>
           <button className="wdc-btn wdc-btn-primary">Primary</button>
@@ -76,7 +76,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
         </button>
       </section>
 
-      <section>
+      <section className="story">
         <h3>Small Primary</h3>
         <button className="wdc-btn wdc-btn-primary wdc-btn-size-s">Primary</button>
         <button disabled={true} className="wdc-btn wdc-btn-primary wdc-btn-size-s">
@@ -87,7 +87,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
   ))
   .add('Secondary', () => (
     <div>
-      <section>
+      <section className="story">
         <h3>Large Secondary</h3>
         <IconDemo>
           <button className="wdc-btn wdc-btn-size-l">Secondary</button>
@@ -101,7 +101,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
         </button>
       </section>
 
-      <section>
+      <section className="story">
         <h3>Medium Secondary</h3>
         <IconDemo>
           <button className="wdc-btn">Secondary</button>
@@ -115,7 +115,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
         </button>
       </section>
 
-      <section>
+      <section className="story">
         <h3>Small Secondary</h3>
         <button className="wdc-btn wdc-btn-size-s">Secondary</button>
         <button disabled={true} className="wdc-btn wdc-btn-size-s">
@@ -126,7 +126,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
   ))
   .add('Delete', () => (
     <div>
-      <section>
+      <section className="story">
         <h3>Large Delete</h3>
         <button className="wdc-btn wdc-btn-delete wdc-btn-size-l">Delete</button>
         <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-size-l">
@@ -134,7 +134,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
         </button>
       </section>
 
-      <section>
+      <section className="story">
         <h3>Medium Delete</h3>
         <button className="wdc-btn wdc-btn-delete">Delete</button>
         <button disabled={true} className="wdc-btn wdc-btn-delete">
@@ -142,7 +142,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
         </button>
       </section>
 
-      <section>
+      <section className="story">
         <h3>Small Delete</h3>
         <button className="wdc-btn wdc-btn-delete wdc-btn-size-s">Delete</button>
         <button disabled={true} className="wdc-btn wdc-btn-delete wdc-btn-size-s">
@@ -156,7 +156,7 @@ storiesOf('Components|Buttons/Button/CSS/Dropdown', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
-      <section>
+      <section className="story">
         <h3>Primary Large</h3>
         <button
           className="wdc-btn wdc-btn-primary wdc-btn-size-l wdc-btn-dropdown"
@@ -361,14 +361,14 @@ storiesOf('Components|Buttons/Button/CSS/Deprecated', module)
   ))
   .add('Dropdown', () => (
     <div className="story">
-      <section>
+      <section className="story">
         <button className="wdc-btn-deprecated wdc-btn-dropdown">Dropdown</button>
       </section>
     </div>
   ))
   .add('Split', () => (
     <div className="story">
-      <section>
+      <section className="story">
         <div className="wdc-btn-split">
           <button className="wdc-btn-deprecated wdc-btn-primary wdc-btn-split-text">
             Split Button
