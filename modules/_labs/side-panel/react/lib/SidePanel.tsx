@@ -232,7 +232,7 @@ const ToggleButton = ({
     top: spacing.l,
     right: context.state === 'collapsed' ? 0 : context.origin === 'left' ? spacing.s : undefined,
     left: context.state === 'collapsed' ? 0 : context.origin === 'right' ? spacing.s : undefined,
-    margin: context.state === 'collapsed' ? 'auto' : undefined,
+    margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for IconButton.Plain
     transform:
       context.state === 'collapsed' || context.state === 'collapsing'
         ? `scaleX(${context.origin === 'left' ? '1' : '-1'})`
