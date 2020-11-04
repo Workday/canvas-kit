@@ -37,8 +37,8 @@
   ],
   "dependencies": {
     "@emotion/core": "^10.0.28",
-    "@workday/canvas-kit-react-common": "^4.1.2",
-    "@workday/canvas-kit-react-core": "^4.1.2",
+    "@workday/canvas-kit-react-common": "^4.3.0",
+    "@workday/canvas-kit-react-core": "^4.3.0",
     "@emotion/styled": "^10.0.27"
   },
   "peerDependencies": {
