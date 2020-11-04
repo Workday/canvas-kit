@@ -5,10 +5,14 @@ describe('Side Panel', () => {
     h.stories.visit();
   });
 
-  ['Default', 'AsAside', 'AsDiv'].forEach(story => {
-    context(`given the "${story}" story is rendered`, () => {
+  [
+    {name: 'Default', role: 'region'},
+    {name: 'AsAside', role: 'complementary'},
+    {name: 'AsDiv', role: 'region'},
+  ].forEach(story => {
+    context(`given the "${story.name}" story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Testing|React/Labs/Side Panel/Cypress', story);
+        h.stories.load('Testing|React/Labs/Side Panel/Cypress', story.name);
       });
 
       const name = /Accessible Label Name/i;
@@ -29,29 +33,13 @@ describe('Side Panel', () => {
         it(`should have an aria-controls attribute equal to the id of the panel`, () => {
           cy.findByRole('button', {name}).then(button => {
             const buttonAriaControlsValue = button.attr('aria-controls');
-            switch (story) {
-              case 'AsAside':
-                cy.findByRole('complementary', {name}).should(
-                  'have.attr',
-                  'id',
-                  buttonAriaControlsValue
-                );
-                break;
-              default:
-                cy.findByRole('region', {name}).should('have.attr', 'id', buttonAriaControlsValue);
-            }
+            cy.findByRole(story.role, {name}).should('have.attr', 'id', buttonAriaControlsValue);
           });
         });
       });
 
       it(`should have a panel with a landmark role`, () => {
-        switch (story) {
-          case 'AsAside':
-            cy.findByRole('complementary', {name}).should('exist');
-            break;
-          default:
-            cy.findByRole('region', {name}).should('exist');
-        }
+        cy.findByRole(story.role, {name}).should('exist');
       });
 
       context('when tabbing', () => {
