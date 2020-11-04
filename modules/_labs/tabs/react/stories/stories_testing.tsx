@@ -14,7 +14,7 @@ export const Simple = () => (
   <Tabs>
     <Tabs.List>
       <Tabs.Item>First Tab</Tabs.Item>
-      <Tabs.Item name="second">Second Tab</Tabs.Item>
+      <Tabs.Item>Second Tab</Tabs.Item>
       <Tabs.Item>Third Tab</Tabs.Item>
       <Tabs.Item>Fourth Tab</Tabs.Item>
       <Tabs.Item>Fifth Tab</Tabs.Item>
