@@ -19,7 +19,7 @@ storiesOf('Tokens|Core/CSS', module)
       <div className="story">
         <h3>Type Hierarchy</h3>
 
-        <section className="wdc-type">
+        <section className="story wdc-type">
           <h1 className="wdc-type-data-viz-1">Data Viz 1</h1>
           <h1 className="wdc-type-data-viz-2">Data Viz 2</h1>
           <h1 className="wdc-type-h1">H1 Header</h1>
@@ -55,7 +55,7 @@ storiesOf('Tokens|Core/CSS', module)
 
         <h3>Type Variations</h3>
 
-        <section className="wdc-type">
+        <section className="story wdc-type">
           <div>
             <p className="wdc-type-variant-label">Label</p>
             <p className="wdc-type-variant-button">Button</p>
