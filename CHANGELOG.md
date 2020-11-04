@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.3.1 (2020-10-22)
+
+### Components
+- refactor(select): Convert more of Select to FC and improve code style ([#827](https://github.com/Workday/canvas-kit/pull/827)) [@jamesfan](https://github.com/jamesfan)
+- fix(popup): Cannot read property 'createContainer' of undefined ([#889](https://github.com/Workday/canvas-kit/pull/889)) [@mannycarrera4](https://github.com/mannycarrera4)
+- fix(modal): Add exception to modal enter animation ([#867](https://github.com/Workday/canvas-kit/pull/867)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(menu): Update MenuItem icon styles ([#885](https://github.com/Workday/canvas-kit/pull/885)) [@alanbsmith](https://github.com/alanbsmith)
+
+### Infrastructure
+- docs: Fix broken links in Storybook ([#876](https://github.com/Workday/canvas-kit/pull/876)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+
 # 4.3.0 (2020-10-09)
 
 ### Components
