@@ -1,33 +1,53 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import withReadme from 'storybook-readme/with-readme';
 import {spacing} from '@workday/canvas-kit-react-core';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {Tabs, TabList, Tab, TabPanel, TabPanels} from '../index';
+
+import {Tabs} from '@workday/canvas-kit-labs-react-tabs';
+
+import withReadme from 'storybook-readme/with-readme';
 import README from '../README.md';
 
-export default withSnapshotsEnabled({
-  title: 'Labs|Tabs/React',
+export default {
+  title: 'Labs/Tabs/React',
   component: Tabs,
   decorators: [withReadme(README)],
-});
+};
 
-export const Default = () => (
+export const Simple = () => (
   <Tabs>
-    <TabList>
-      <Tab>Tab</Tab>
-      <Tab>Tab Medium</Tab>
-      <Tab>Tab Really Long</Tab>
-      <Tab>Tab Really Really Long</Tab>
-      <Tab>Tab</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel css={{padding: spacing.l}}>Hi this is tab content</TabPanel>
-      <TabPanel css={{padding: spacing.l}}>Hi this is medium tab content</TabPanel>
-      <TabPanel css={{padding: spacing.l}}>Hi this is really long tab content</TabPanel>
-      <TabPanel css={{padding: spacing.l}}>Hi this is really really long tab content</TabPanel>
-      <TabPanel css={{padding: spacing.l}}>Hi this is tab content</TabPanel>
-    </TabPanels>
+    <Tabs.List>
+      <Tabs.Item>First Tab</Tabs.Item>
+      <Tabs.Item>Second Tab</Tabs.Item>
+      <Tabs.Item>Third Tab</Tabs.Item>
+      <Tabs.Item>Fourth Tab</Tabs.Item>
+      <Tabs.Item>Fifth Tab</Tabs.Item>
+    </Tabs.List>
+    <div css={{marginTop: spacing.m}}>
+      <Tabs.Panel>Contents of First Tab</Tabs.Panel>
+      <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
+      <Tabs.Panel>Contents of Third Tab</Tabs.Panel>
+      <Tabs.Panel>Contents of Fourth Tab</Tabs.Panel>
+      <Tabs.Panel>Contents of Fifth Tab</Tabs.Panel>
+    </div>
+  </Tabs>
+);
+
+export const NamedKeys = () => (
+  <Tabs>
+    <Tabs.List>
+      <Tabs.Item name="first">First Tab</Tabs.Item>
+      <Tabs.Item name="second">Second Tab</Tabs.Item>
+      <Tabs.Item name="third">Third Tab</Tabs.Item>
+      <Tabs.Item name="fourth">Fourth Tab</Tabs.Item>
+      <Tabs.Item name="fifth">Fifth Tab</Tabs.Item>
+    </Tabs.List>
+    <div css={{marginTop: spacing.m}}>
+      <Tabs.Panel name="first">Contents of First Tab</Tabs.Panel>
+      <Tabs.Panel name="second">Contents of Second Tab</Tabs.Panel>
+      <Tabs.Panel name="third">Contents of Third Tab</Tabs.Panel>
+      <Tabs.Panel name="fourth">Contents of Fourth Tab</Tabs.Panel>
+      <Tabs.Panel name="fifth">Contents of Fifth Tab</Tabs.Panel>
+    </div>
   </Tabs>
 );

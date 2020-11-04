@@ -16,18 +16,20 @@ yarn add @workday/canvas-kit-labs-react-tabs
 
 ```tsx
 import * as React from 'react';
-import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-react-tabs';
+import {Tabs} from '@workday/canvas-kit-labs-react-tabs';
 
-<Tabs>
-  <TabList>
-    <Tab>Tab</Tab>
-    <Tab>Tab Number Two</Tab>
-  </TabList>
-  <TabPanels>
-    <TabPanel>Hi this is tab content</TabPanel>
-    <TabPanel>Hi this is another tab's content</TabPanel>
-  </TabPanels>
-</Tabs>;
+export default () => (
+  <Tabs>
+    <Tabs.List>
+      <Tabs.Item>First Tab</Tabs.Item>
+      <Tabs.Item>Second Tab</Tabs.Item>
+    </Tabs.List>
+    <div css={{marginTop: spacing.m}}>
+      <Tabs.Panel>Contents of First Tab</Tabs.Panel>
+      <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
+    </div>
+  </Tabs>
+);
 ```
 
 ---
@@ -35,16 +37,15 @@ import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-
 ## Table of Contents
 
 - [Tabs](#tabs)
-- [TabList](#tablist)
-- [TabPanels](#tabpanels)
-- [Tab](#tab)
-- [TabPanel](#tabpanel)
+- [Tabs.List](#tabslist)
+- [Tabs.Item](#tabsitem)
+- [Tabs.Panel](#tabspanel)
 
 ---
 
-# Tabs
+## Tabs
 
-## Static Properties
+### Static Properties
 
 > None
 
@@ -58,11 +59,13 @@ import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-
 
 ### Optional
 
-> None
+#### `initialTab: string`
+
+> The `name` of the tab that should be active first. If not provided, the first tab will be active.
 
 ---
 
-# TabList
+## Tabs.List
 
 ## Static Properties
 
@@ -82,27 +85,7 @@ import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-
 
 ---
 
-# TabPanels
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-#### `children: React.ReactElement<TabPanelProps> | React.ReactElement<TabPanelProps>[]`
-
-> TabPanels cannot be empty
-
-### Optional
-
-> None
-
----
-
-# Tab
+# Tabs.Item
 
 ## Static Properties
 
@@ -118,11 +101,15 @@ import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-
 
 ### Optional
 
-> None
+#### `name: string`
+
+> The name of the tab. This name will be used in change events and for `initialTab`. Must match the
+> `name` of the associated tab panel. If this property is not provided, it will default to a string
+> representation of the the zero-based index of the Tab when it was initialized.
 
 ---
 
-# TabPanel
+# Tabs.Panel
 
 ## Static Properties
 
@@ -138,4 +125,8 @@ import {Tabs, TabList, Tab, TabPanels, TabPanel} from '@workday/canvas-kit-labs-
 
 ### Optional
 
-> None
+#### `name: string`
+
+> The name of the tab. This name will be used in change events and for `initialTab`. Must match the
+> `name` of the associated tab panel. If this property is not provided, it will default to a string
+> representation of the the zero-based index of the Tab when it was initialized.

@@ -1,21 +1,22 @@
 import * as React from 'react';
 import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react-common';
-import styled from '@emotion/styled';
+import {focusRing, hideMouseFocus, styled} from '@workday/canvas-kit-react-common';
 import {useTab} from './Tabs';
 
-export interface TabProps {
+export interface TabProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * The label text of the Tab.
    */
   children: React.ReactNode;
   /**
-   * The index of the Tab in the list of tabs. This is passed in from TabList.
+   * The name of the tab. This name will be used in change events and for `initialTab`. Must match
+   * the `name` of the associated tab panel. If this property is not provided, it will default to a
+   * string representation of the the zero-based index of the Tab when it was initialized.
    */
-  index?: number;
+  name?: string;
 }
 
-const Container = styled('button')<{isSelected: boolean}>(
+const StyledButton = styled('button')<{isSelected: boolean}>(
   {
     ...type.body,
     ...type.variant.button,
@@ -47,26 +48,61 @@ const Container = styled('button')<{isSelected: boolean}>(
   })
 );
 
-const Tab = ({index = 0, children}: TabProps) => {
-  const {tabIndex, setTabIndex, setSelectedTabRect} = useTab();
+const Tab = ({name = '', children, ...elemProps}: TabProps) => {
+  const {
+    id,
+    intentTab,
+    resetIntentTab,
+    activeTab,
+    setActiveTab,
+    setSelectedTabRect,
+    registerTab,
+    unregisterTab,
+  } = useTab();
   const tabRef = React.useRef<HTMLButtonElement>(null);
+  const [tabName, setTabName] = React.useState(name);
+
+  // useLayoutEffect because we don't want to render with incorrect ID
+  React.useLayoutEffect(() => {
+    const tabElement = tabRef.current as HTMLElement;
+    const tabName = registerTab(tabElement, name);
+    setTabName(tabName);
+
+    return () => {
+      unregisterTab(tabElement);
+    };
+  }, [name, registerTab, unregisterTab]);
 
   const onSelect = () => {
-    setTabIndex(index);
+    setActiveTab(tabName);
   };
 
-  const isSelected = tabIndex === index;
+  const isSelected = !!tabName && activeTab === tabName;
+  console.log('tabName', tabName, 'intentTab', intentTab, isSelected);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
+    console.log('useLayoutEffect', 'tabName', tabName, 'intentTab', intentTab, isSelected);
+
     if (isSelected && tabRef.current) {
       setSelectedTabRect(tabRef.current.getBoundingClientRect());
     }
-  }, [isSelected, tabRef, setSelectedTabRect]);
+  }, [isSelected, tabRef, setSelectedTabRect, tabName, intentTab]);
 
   return (
-    <Container ref={tabRef} isSelected={isSelected} disabled={isSelected} onClick={onSelect}>
+    <StyledButton
+      ref={tabRef}
+      role="tab"
+      id={`tab-${id}-${tabName}`}
+      tabIndex={!!tabName && intentTab === tabName ? 0 : -1}
+      aria-selected={isSelected ? true : undefined}
+      aria-controls={`tabpanel-${id}-${tabName}`}
+      onClick={onSelect}
+      onBlur={resetIntentTab}
+      isSelected={isSelected}
+      {...elemProps}
+    >
       {children}
-    </Container>
+    </StyledButton>
   );
 };
 

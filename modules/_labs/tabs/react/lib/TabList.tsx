@@ -6,7 +6,7 @@ import {TabProps} from './Tab';
 
 type Tab = React.ReactElement<TabProps>;
 
-export interface TabListProps {
+export interface TabListProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * A list of Tab components.
    */
@@ -24,43 +24,82 @@ const TabsListInnerContainer = styled('div')({
   display: `flex`,
 });
 
-const TabIndicator = styled('div')<{left?: number; width?: number}>(
-  {
-    position: 'absolute',
-    height: spacing.xxxs,
-    borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
-    backgroundColor: colors.blueberry400,
-    transition: 'width 200ms ease, transform 200ms ease-out',
-    marginTop: '-2px',
-    bottom: 0,
-  },
-  ({left, width}) => ({
-    transform: `translateX(${left ? left : 0}px)`,
-    width: width ? width : 0,
-  })
-);
+const TabIndicator = styled('div')({
+  position: 'absolute',
+  height: spacing.xxxs,
+  borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
+  backgroundColor: colors.blueberry400,
+  transition: 'width 200ms ease, transform 200ms ease-out',
+  marginTop: '-2px',
+  bottom: 0,
+});
 
-const TabList = ({children}: TabListProps) => {
+const useIndicator = (containerRef?: React.RefObject<HTMLElement>) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+  const setDimensions = (left: number, width: number) => {
+    const containerLeft = containerRef?.current?.getBoundingClientRect().left || 0;
+    ref.current!.style.transform = `translateX(${left - containerLeft}px)`;
+    ref.current!.style.width = `${width}px`;
+  };
+
+  return [ref, setDimensions] as const;
+};
+
+const TabList = ({children, ...elemProps}: TabListProps) => {
   const tabsListRef = React.useRef<HTMLDivElement>(null);
-  const {selectedTabRect} = useTab();
+  const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
+  const {selectedTabRect, setIntentTab, setActiveTab, intentTab, programmaticFocusRef} = useTab();
 
-  const clonedChildren = React.Children.map(children, (child, index) => {
-    if (!React.isValidElement(child)) {
-      return child;
+  React.useLayoutEffect(() => {
+    const selectedTabLeft = selectedTabRect?.left || 0;
+    const selectedTabWidth = selectedTabRect?.width || 0;
+
+    setDimensions(selectedTabLeft, selectedTabWidth);
+  }, [tabsListRef, selectedTabRect, setDimensions]);
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    console.log(event.key);
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'Left':
+        setIntentTab('previous');
+        break;
+      case 'ArrowRight':
+      case 'Right':
+        setIntentTab('next');
+        break;
+      case 'Home':
+        setIntentTab('first');
+        break;
+      case 'End':
+        setIntentTab('last');
+        break;
+      case 'Enter':
+      case ' ':
+        console.log('intentTab', intentTab);
+        setActiveTab(intentTab);
+        event.preventDefault(); // prevent clicking this button
+        break;
+      default:
+        break;
     }
-    return React.cloneElement(child, {index});
-  });
+  };
 
-  const selectedTabLeft = selectedTabRect ? selectedTabRect.left : 0;
-  const selectedTabWidth = selectedTabRect ? selectedTabRect.width : 0;
-  const tabsListLeft = tabsListRef.current ? tabsListRef.current.getBoundingClientRect().left : 0;
-
-  const tabIndicatorLeft = selectedTabLeft - tabsListLeft;
+  const resetProgrammaticFocus = () => {
+    programmaticFocusRef.current = false;
+  };
 
   return (
     <TabsListContainer ref={tabsListRef}>
-      <TabsListInnerContainer role="tablist">{clonedChildren}</TabsListInnerContainer>
-      <TabIndicator left={tabIndicatorLeft} width={selectedTabWidth} />
+      <TabsListInnerContainer
+        role="tablist"
+        onKeyDown={onKeyDown}
+        onFocus={resetProgrammaticFocus}
+        {...elemProps}
+      >
+        {children}
+      </TabsListInnerContainer>
+      <TabIndicator ref={tabIndicatorRef} />
     </TabsListContainer>
   );
 };
