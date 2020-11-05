@@ -90,7 +90,7 @@ const Tab = ({name = '', children, ...elemProps}: TabProps) => {
       ref={tabRef}
       role="tab"
       id={`tab-${id}-${tabName}`}
-      tabIndex={!!tabName && intentTab === tabName ? 0 : -1}
+      tabIndex={!!tabName && intentTab === tabName ? undefined : -1}
       aria-selected={isSelected ? true : undefined}
       aria-controls={`tabpanel-${id}-${tabName}`}
       onClick={onSelect}

@@ -32,8 +32,8 @@ describe('Tabs', () => {
         cy.findByRole('tab', {name: 'Second Tab'}).should('not.have.attr', 'aria-selected');
       });
 
-      it('should have "tabindex=0" on the first tab', () => {
-        cy.findByRole('tab', {name: 'First Tab'}).should('have.attr', 'tabindex', '0');
+      it('should not have tabindex on the first tab', () => {
+        cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex');
       });
 
       it('should have "tabindex=-1" on the second tab', () => {
@@ -87,8 +87,8 @@ describe('Tabs', () => {
             cy.findByRole('tab', {name: 'First Tab'}).should('have.attr', 'tabindex', '-1');
           });
 
-          it('should have tabindex=0 on the second tab', () => {
-            cy.findByRole('tab', {name: 'Second Tab'}).should('have.attr', 'tabindex', '0');
+          it('should not have tabindex on the second tab', () => {
+            cy.findByRole('tab', {name: 'Second Tab'}).should('not.have.attr', 'tabindex');
           });
 
           it('should focus on the second tab', () => {
@@ -146,8 +146,8 @@ describe('Tabs', () => {
                 cy.tab({shift: true});
               });
 
-              it('should set "tabindex=0" on the first tab', () => {
-                cy.findByRole('tab', {name: 'First Tab'}).should('have.attr', 'tabindex', '0');
+              it('should not have tabindex on the first tab', () => {
+                cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex');
               });
 
               it('should set "tabindex=-1" on the second tab', () => {
@@ -170,8 +170,8 @@ describe('Tabs', () => {
             cy.findByRole('tab', {name: 'First Tab'}).should('have.attr', 'tabindex', '-1');
           });
 
-          it('should have tabindex=0 on the last tab', () => {
-            cy.findByRole('tab', {name: 'Fifth Tab'}).should('have.attr', 'tabindex', '0');
+          it('should not have tabindex on the last tab', () => {
+            cy.findByRole('tab', {name: 'Fifth Tab'}).should('not.have.attr', 'tabindex');
           });
 
           it('should focus on the last tab', () => {
@@ -196,8 +196,8 @@ describe('Tabs', () => {
             cy.focused().type('{rightarrow}');
           });
 
-          it('should set "tabindex=0" on the first tab', () => {
-            cy.findByRole('tab', {name: 'First Tab'}).should('have.attr', 'tabindex', '0');
+          it('should not have tabindex on the first tab', () => {
+            cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr');
           });
 
           it('should set "tabindex=-1" on the last tab', () => {
