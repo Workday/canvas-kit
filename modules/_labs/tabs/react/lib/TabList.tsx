@@ -58,7 +58,6 @@ const TabList = ({children, ...elemProps}: TabListProps) => {
   }, [tabsListRef, selectedTabRect, setDimensions]);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
-    console.log(event.key);
     switch (event.key) {
       case 'ArrowLeft':
       case 'Left':
@@ -76,7 +75,6 @@ const TabList = ({children, ...elemProps}: TabListProps) => {
         break;
       case 'Enter':
       case ' ':
-        console.log('intentTab', intentTab);
         setActiveTab(intentTab);
         event.preventDefault(); // prevent clicking this button
         break;

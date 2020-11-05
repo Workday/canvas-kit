@@ -78,11 +78,8 @@ const Tab = ({name = '', children, ...elemProps}: TabProps) => {
   };
 
   const isSelected = !!tabName && activeTab === tabName;
-  console.log('tabName', tabName, 'intentTab', intentTab, isSelected);
 
   React.useLayoutEffect(() => {
-    console.log('useLayoutEffect', 'tabName', tabName, 'intentTab', intentTab, isSelected);
-
     if (isSelected && tabRef.current) {
       setSelectedTabRect(tabRef.current.getBoundingClientRect());
     }

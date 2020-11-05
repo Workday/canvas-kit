@@ -63,6 +63,12 @@ export default () => (
 
 > The `name` of the tab that should be active first. If not provided, the first tab will be active.
 
+#### `onTabChange: (name: string) => void`
+
+> Callback when a tab changes. The `name` will be the `name` prop passed into the `Tabs.Item` and
+> `Tabs.Panel` component. If a `name` isn't provided, the value will be a string of the index of the
+> tab.
+
 ---
 
 ## Tabs.List

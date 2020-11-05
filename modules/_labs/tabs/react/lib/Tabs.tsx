@@ -68,9 +68,15 @@ export interface TabsProps extends React.HTMLAttributes<HTMLElement> {
    * The `name` of the tab that should be active first. If not provided, the first tab will be active.
    */
   initialTab?: string;
+  /**
+   * Callback when a tab changes. The `name` will be the `name` prop passed into the `Tabs.Item` and
+   * `Tabs.Panel` component. If a `name` isn't provided, the value will be a string of the index of
+   * the tab.
+   */
+  onTabChange?: (name: string) => void;
 }
 
-const Tabs = ({children, initialTab = '', ...elemProps}: TabsProps) => {
+const Tabs = ({children, initialTab = '', onTabChange, ...elemProps}: TabsProps) => {
   const id = useUniqueId();
   const [activeTab, setActiveTabState] = React.useState(initialTab);
   const [intentTab, setIntentTabState] = React.useState(initialTab);
@@ -78,6 +84,7 @@ const Tabs = ({children, initialTab = '', ...elemProps}: TabsProps) => {
   const tabsRef = React.useRef<{name: string; element: HTMLElement}[]>([]);
   const panelsRef = React.useRef<string[]>([]);
   const programmaticFocusRef = React.useRef(false);
+  const onTabChangeRef = React.useRef(onTabChange);
 
   const registerTab = React.useCallback(
     (element: HTMLElement, name?: string) => {
@@ -123,8 +130,9 @@ const Tabs = ({children, initialTab = '', ...elemProps}: TabsProps) => {
     (name: string) => {
       setIntentTabState(name);
       setActiveTabState(name);
+      onTabChangeRef.current?.(name);
     },
-    [setActiveTabState, setIntentTabState]
+    [setActiveTabState, setIntentTabState, onTabChangeRef]
   );
 
   const setIntentTab = React.useCallback(
