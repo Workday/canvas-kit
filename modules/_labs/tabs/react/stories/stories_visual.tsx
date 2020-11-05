@@ -23,8 +23,9 @@ export const TabStates = () => (
   >
     <Tabs initialTab="second">
       <Tabs.List>
-        <Tabs.Item className="focus">Focus</Tabs.Item>
+        <Tabs.Item>Default</Tabs.Item>
         <Tabs.Item name="second">Active</Tabs.Item>
+        <Tabs.Item className="focus">Focus</Tabs.Item>
         <Tabs.Item className="hover">Hover</Tabs.Item>
       </Tabs.List>
       <div css={{marginTop: spacing.m}}>
