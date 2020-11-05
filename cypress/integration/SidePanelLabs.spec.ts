@@ -5,6 +5,8 @@ describe('Side Panel', () => {
     h.stories.visit();
   });
 
+  const name = /Accessible Label Name/i;
+
   [
     {name: 'Default', role: 'region'},
     {name: 'AsAside', role: 'complementary'},
@@ -14,8 +16,6 @@ describe('Side Panel', () => {
       beforeEach(() => {
         h.stories.load('Testing|React/Labs/Side Panel/Cypress', story.name);
       });
-
-      const name = /Accessible Label Name/i;
 
       it('should not have any axe errors', () => {
         cy.checkA11y();
@@ -42,18 +42,6 @@ describe('Side Panel', () => {
         cy.findByRole(story.role, {name}).should('exist');
       });
 
-      context('when tabbing', () => {
-        beforeEach(() => {
-          cy.tab();
-        });
-
-        context('the button', () => {
-          it('should be focused', () => {
-            cy.findByRole('button', {name}).should('have.focus');
-          });
-        });
-      });
-
       context(`when collapsing the panel`, () => {
         beforeEach(() => {
           cy.findByRole('button', {name}).click();
@@ -62,6 +50,27 @@ describe('Side Panel', () => {
         context('the button', () => {
           it(`should have an aria-expanded attribute of 'false'`, () => {
             cy.findByRole('button', {name}).should('have.attr', 'aria-expanded', 'false');
+          });
+        });
+      });
+    });
+  });
+
+  describe(`given the 'first focusable' story is rendered`, () => {
+    context(`when focused on a focusable element preceding the Side Panel`, () => {
+      beforeEach(() => {
+        h.stories.load('Testing|React/Labs/Side Panel/Cypress', 'First Focusable');
+        cy.findByLabelText('Avatar').focus();
+      });
+
+      context('when the tab key is pressed once', () => {
+        beforeEach(() => {
+          cy.tab();
+        });
+
+        context('the expand/collapse control button', () => {
+          it(`should be focused first`, () => {
+            cy.findByRole('button', {name}).should('have.focus');
           });
         });
       });
