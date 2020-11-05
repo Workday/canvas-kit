@@ -197,7 +197,7 @@ describe('Tabs', () => {
           });
 
           it('should not have tabindex on the first tab', () => {
-            cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr');
+            cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'tabindex');
           });
 
           it('should set "tabindex=-1" on the last tab', () => {
