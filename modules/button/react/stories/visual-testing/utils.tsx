@@ -73,23 +73,36 @@ for (const icon in systemIcons) {
   }
 }
 
-export const IconButtonToggleableGrid = ({buttonVariant}) => {
-  const [toggled, setToggled] = React.useState(true);
+interface IconButtonGridProps {
+  /**
+   * If defined, makes the buttons toggleable and sets their initial
+   * toggled state to the provided boolean value. If undefined, the
+   * button is not considered toggleable.
+   */
+  initialToggled?: boolean;
+  /**
+   * The button variant to display in the grid.
+   */
+  variant: IconButtonVariant;
+}
+
+export const IconButtonGrid = ({initialToggled, variant}: IconButtonGridProps) => {
+  const [toggled, setToggled] = React.useState(initialToggled);
 
   const handleToggle = () => {
     setToggled(!toggled);
   };
 
   return (
-    <div css={iconGridStyles(buttonVariant)}>
+    <div css={iconGridStyles(variant)}>
       {systemIconArray.map(icon => (
-        <div css={iconCellStyles(buttonVariant)} key={icon.name}>
+        <div css={iconCellStyles(variant)} key={icon.name}>
           <IconButton
             aria-label={icon.name}
             icon={icon}
-            toggled={toggled}
-            variant={buttonVariant}
-            onClick={handleToggle}
+            toggled={initialToggled !== undefined ? toggled : undefined}
+            variant={variant}
+            onClick={initialToggled !== undefined ? handleToggle : undefined}
           />
           <p title={icon.name}>{icon.name}</p>
         </div>
