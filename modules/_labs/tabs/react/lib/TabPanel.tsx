@@ -1,4 +1,7 @@
-import * as React from 'react';
+/** @jsx jsx */
+import {jsx, css} from '@emotion/core';
+import {mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import React from 'react';
 import {useTab} from './Tabs';
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLElement> {
@@ -13,6 +16,14 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLElement> {
    */
   name?: string;
 }
+
+const styles = css(
+  mouseFocusBehavior({
+    '&:focus': {
+      outline: 'none',
+    },
+  })
+);
 
 const TabPanel = ({children, name = '', ...elemProps}: TabPanelProps) => {
   const {id, activeTab, registerPanel, unregisterPanel} = useTab();
@@ -31,6 +42,7 @@ const TabPanel = ({children, name = '', ...elemProps}: TabPanelProps) => {
   return (
     <div
       role="tabpanel"
+      css={styles}
       aria-labelledby={`tab-${id}-${tabName}`}
       hidden={!!tabName && tabName !== activeTab}
       id={`tabpanel-${id}-${tabName}`}

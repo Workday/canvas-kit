@@ -26,7 +26,7 @@ type IndexableObject = {[key: string]: object};
        }
    },
  */
-export const mouseFocusBehavior = (selectors: IndexableObject) => {
+export const mouseFocusBehavior = <T extends IndexableObject = IndexableObject>(selectors: T) => {
   const output: IndexableObject = {};
 
   Object.keys(selectors).map((selector, index) => {
@@ -39,5 +39,5 @@ export const mouseFocusBehavior = (selectors: IndexableObject) => {
     });
   });
 
-  return output;
+  return output as T;
 };
