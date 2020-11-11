@@ -24,13 +24,15 @@ const StyledButton = styled('button')<{isSelected: boolean}>(
     background: 'transparent',
     flex: '0 0 auto',
     maxWidth: '280px',
-    padding: '20px',
+    padding: spacing.s,
     boxSizing: 'border-box',
     cursor: 'pointer',
-    margin: `${spacing.xxxs}`,
-    marginBottom: 0,
+    marginLeft: `${spacing.xxxs}`,
     borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
     transition: 'background 150ms ease, color 150ms ease',
+    '&:first-of-type': {
+      marginLeft: 0,
+    },
   },
   ({isSelected}) => ({
     color: isSelected ? colors.blueberry400 : colors.licorice300,

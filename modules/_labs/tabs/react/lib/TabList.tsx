@@ -22,6 +22,7 @@ const TabsListContainer = styled('div')({
 
 const TabsListInnerContainer = styled('div')({
   display: `flex`,
+  margin: `0 ${spacing.m}`,
 });
 
 const TabIndicator = styled('div')({
