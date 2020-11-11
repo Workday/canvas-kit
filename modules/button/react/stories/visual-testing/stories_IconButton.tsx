@@ -10,7 +10,7 @@ import {
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {IconButton} from '../../index';
-import {Container, stateTableColumnProps} from './utils';
+import {Container, IconButtonGrid, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
   title: 'Testing|React/Buttons/Button/Icon Button',
@@ -57,4 +57,12 @@ export const IconButtonStates = () => (
       </div>
     ))}
   </React.Fragment>
+);
+
+export const IconButtonCircleToggleableGrid = () => (
+  <IconButtonGrid initialToggled={true} variant={IconButton.Variant.Circle} />
+);
+
+export const IconButtonInverseToggleableGrid = () => (
+  <IconButtonGrid initialToggled={true} variant={IconButton.Variant.Inverse} />
 );
