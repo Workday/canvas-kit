@@ -1,0 +1,50 @@
+
+{
+  "name": "@workday/canvas-kit-labs-react-tabs",
+  "version": "0.0.0",
+  "description": "Composable tab components",
+  "author": "Workday, Inc. (https://www.workday.com)",
+  "license": "Apache-2.0",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/es6/index.js",
+  "sideEffects": false,
+  "types": "dist/es6/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_labs/tabs/react"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "index.ts"
+  ],
+  "scripts": {
+    "watch": "yarn build:es6 -w",
+    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:es6": "tsc -p tsconfig.es6.json",
+    "build:rebuild": "npm-run-all clean build",
+    "build": "npm-run-all --parallel build:cjs build:es6",
+    "depcheck": "node ../../../../utils/check-dependencies-exist.js"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "react",
+    "components",
+    "workday",
+    "tabs"
+  ],
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@workday/canvas-kit-react-common": "^4.3.1",
+    "@workday/canvas-kit-react-core": "^4.3.1",
+    "@emotion/styled": "^10.0.27"
+  },
+  "devDependencies": {
+    "@workday/canvas-kit-labs-react-core": "^4.3.1"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8 < 17"
+  }
+}
