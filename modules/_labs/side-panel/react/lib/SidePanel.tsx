@@ -229,7 +229,7 @@ const ToggleButton = ({
   // Note: Depending on the collapsed width, the button could "jump" to it's final position.
   const buttonStyle = css({
     position: 'absolute',
-    top: spacing.l,
+    top: spacing.m,
     right: context.state === 'collapsed' ? 0 : context.origin === 'left' ? spacing.s : undefined,
     left: context.state === 'collapsed' ? 0 : context.origin === 'right' ? spacing.s : undefined,
     margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for IconButton.Plain
