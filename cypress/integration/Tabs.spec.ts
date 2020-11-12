@@ -59,6 +59,14 @@ describe('Tabs', () => {
         });
       });
 
+      it('should have a default cursor for the (active) first tab', () => {
+        cy.findByRole('tab', {name: 'First Tab'}).should('have.css', 'cursor', 'default');
+      });
+
+      it('should have a pointer cursor for the second tab', () => {
+        cy.findByRole('tab', {name: 'Second Tab'}).should('have.css', 'cursor', 'pointer');
+      });
+
       context('when the first tab is active and focused', () => {
         beforeEach(() => {
           cy.findByRole('tab', {name: 'First Tab'})

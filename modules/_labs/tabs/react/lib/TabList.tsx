@@ -48,15 +48,15 @@ const useIndicator = (containerRef?: React.RefObject<HTMLElement>) => {
 
 const TabList = ({children, ...elemProps}: TabListProps) => {
   const tabsListRef = React.useRef<HTMLDivElement>(null);
-  const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
+  // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
   const {selectedTabRect, setIntentTab, setActiveTab, intentTab, programmaticFocusRef} = useTab();
 
-  React.useLayoutEffect(() => {
-    const selectedTabLeft = selectedTabRect?.left || 0;
-    const selectedTabWidth = selectedTabRect?.width || 0;
+  // React.useLayoutEffect(() => {
+  //   const selectedTabLeft = selectedTabRect?.left || 0;
+  //   const selectedTabWidth = selectedTabRect?.width || 0;
 
-    setDimensions(selectedTabLeft, selectedTabWidth);
-  }, [tabsListRef, selectedTabRect, setDimensions]);
+  //   setDimensions(selectedTabLeft, selectedTabWidth);
+  // }, [tabsListRef, selectedTabRect, setDimensions]);
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     switch (event.key) {
@@ -98,7 +98,7 @@ const TabList = ({children, ...elemProps}: TabListProps) => {
       >
         {children}
       </TabsListInnerContainer>
-      <TabIndicator ref={tabIndicatorRef} />
+      {/* <TabIndicator ref={tabIndicatorRef} /> */}
     </TabsListContainer>
   );
 };

@@ -21,33 +21,54 @@ const StyledButton = styled('button')<{isSelected: boolean}>(
     ...type.body,
     ...type.variant.button,
     border: 'none',
-    background: 'transparent',
+    backgroundColor: 'transparent',
     flex: '0 0 auto',
     maxWidth: '280px',
     padding: spacing.s,
     boxSizing: 'border-box',
     cursor: 'pointer',
+    color: colors.licorice300,
+    position: 'relative',
     marginLeft: `${spacing.xxxs}`,
     borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
     transition: 'background 150ms ease, color 150ms ease',
     '&:first-of-type': {
       marginLeft: 0,
     },
-  },
-  ({isSelected}) => ({
-    color: isSelected ? colors.blueberry400 : colors.licorice300,
-    '&:hover': {
-      backgroundColor: isSelected ? `` : colors.soap200,
-      color: isSelected ? `` : colors.blackPepper400,
+    ...hideMouseFocus,
+    '&:hover, &:focus': {
+      backgroundColor: colors.soap200,
+      color: colors.blackPepper400,
     },
     '&:focus': {
       outline: `none`,
-      backgroundColor: isSelected ? `` : colors.soap200,
-      color: isSelected ? `` : colors.blackPepper400,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
     },
-    ...hideMouseFocus,
-  })
+  },
+  ({isSelected}) => {
+    if (isSelected) {
+      return {
+        color: colors.blueberry400,
+        cursor: 'default',
+        '&:after': {
+          position: 'absolute',
+          height: spacing.xxxs,
+          borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
+          backgroundColor: colors.blueberry400,
+          bottom: 0,
+          content: `''`,
+          left: 0,
+          marginTop: '-2px',
+          width: '100%',
+        },
+        '&:hover, &:focus': {
+          backgroundColor: `transparent`,
+          color: colors.blueberry400,
+        },
+      };
+    }
+    return {};
+  }
 );
 
 const Tab = ({name = '', children, ...elemProps}: TabProps) => {
