@@ -83,6 +83,7 @@ cmd('git diff --name-only HEAD HEAD^')
       `--canary`,
       `--preid ${preid}`,
       `--dist-tag ${distTag}`,
+      `--max-buffer=999999999`,
       preid === 'prerelease' ? 'major' : '',
     ];
 
