@@ -61,31 +61,6 @@ module.exports = {
   },
   babel: async options => ({
     ...options,
-    presets: [
-      '@babel/preset-typescript',
-      '@babel/preset-react',
-      [
-        '@babel/preset-env',
-        {
-          useBuiltIns: 'entry',
-          corejs: {
-            version: 3,
-            proposals: true,
-          },
-        },
-      ],
-    ],
-    plugins: [
-      '@babel/proposal-class-properties',
-      '@babel/proposal-object-rest-spread',
-      '@babel/plugin-transform-modules-commonjs',
-      [
-        'emotion',
-        {
-          autoLabel: true,
-          labelFormat: '[filename]__[local]',
-        },
-      ],
-    ],
+    plugins: [...options.plugins, '@babel/plugin-transform-modules-commonjs'],
   }),
 };
