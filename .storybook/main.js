@@ -24,7 +24,7 @@ module.exports = {
   webpackFinal: async config => {
     // Convert mdx links to point to github
     config.module.rules.push({
-      test: /\.md$/,
+      test: /\.mdx?$/,
       include: [path.resolve(__dirname, '..')],
       exclude: [/node_modules/],
       use: [
