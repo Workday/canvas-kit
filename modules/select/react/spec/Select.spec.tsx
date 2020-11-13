@@ -6,7 +6,7 @@ import Select from '../lib/Select';
 describe('Select', () => {
   const cb = jest.fn();
 
-  const role = 'listbox';
+  const role = 'combobox';
 
   afterEach(() => {
     cb.mockReset();
