@@ -7,6 +7,8 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
+  Story,
 } from '../../../../../utils/storybook';
 import {Hyperlink} from '../../index';
 import {Container} from './utils';
@@ -53,3 +55,10 @@ export const HyperlinkStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const HyperlinkThemedStates: Story = HyperlinkStates;
+HyperlinkThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

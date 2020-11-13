@@ -3,7 +3,12 @@
 import {jsx} from '@emotion/core';
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
+import {
+  ComponentStatesTable,
+  withSnapshotsEnabled,
+  customColorTheme,
+  Story,
+} from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarIconButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
@@ -35,3 +40,10 @@ export const ToolbarIconButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const ToolbarIconButtonThemedStates: Story = ToolbarIconButtonStates;
+ToolbarIconButtonThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

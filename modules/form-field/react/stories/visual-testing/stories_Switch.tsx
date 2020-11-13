@@ -4,6 +4,8 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
+  Story,
 } from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {Switch} from '../../../../switch/react';
@@ -67,3 +69,10 @@ export const SwitchStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const SwitchThemedStates: Story = SwitchStates;
+SwitchThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

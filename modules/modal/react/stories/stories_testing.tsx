@@ -14,7 +14,14 @@ import {
 export default {
   title: 'Testing/React/Popups/Modal',
   component: Modal,
+  parameters: {
+    chromatic: {
+      pauseAnimationAtEnd: true,
+    },
+  },
 };
+
+export * from './stories_VisualTesting';
 
 export const AccessibilityTest = () => {
   const [open, setOpen] = React.useState(false);

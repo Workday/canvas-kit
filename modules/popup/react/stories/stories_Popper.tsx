@@ -18,6 +18,8 @@ export default {
   decorators: [withReadme(README)],
 };
 
+export * from './stories_Popper_VisualTesting';
+
 export const PopperStory = () => {
   const [open, setOpen] = React.useState(false);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
@@ -43,6 +45,4 @@ export const PopperStory = () => {
   );
 };
 
-PopperStory.story = {
-  name: 'Popper',
-};
+PopperStory.storyName = 'Popper';

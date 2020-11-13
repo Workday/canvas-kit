@@ -5,6 +5,8 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
+  Story,
 } from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {TextInput} from '../../../../text-input/react';
@@ -40,3 +42,10 @@ export const FormFieldStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const FormFieldThemedStates: Story = FormFieldStates;
+FormFieldThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};
