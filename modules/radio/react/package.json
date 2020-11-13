@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-radio",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "description": "A Canvas-styled radio",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -48,7 +48,7 @@
     "react": ">= 16.8 < 17"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-common": "^4.3.1",
-    "@workday/canvas-kit-react-core": "^4.3.1"
+    "@workday/canvas-kit-react-common": "^4.4.0",
+    "@workday/canvas-kit-react-core": "^4.4.0"
   }
 }

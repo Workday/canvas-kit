@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-button",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "description": "A collection of various Canvas Buttons",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -50,10 +50,10 @@
     "@emotion/core": "^10.0.28",
     "@emotion/is-prop-valid": "^0.8.2",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-labs-react-core": "^4.3.1",
-    "@workday/canvas-kit-react-common": "^4.3.1",
-    "@workday/canvas-kit-react-core": "^4.3.1",
-    "@workday/canvas-kit-react-icon": "^4.3.1",
+    "@workday/canvas-kit-labs-react-core": "^4.4.0",
+    "@workday/canvas-kit-react-common": "^4.4.0",
+    "@workday/canvas-kit-react-core": "^4.4.0",
+    "@workday/canvas-kit-react-icon": "^4.4.0",
     "@workday/canvas-system-icons-web": "^1.0.20",
     "@workday/design-assets-types": "^0.2.4"
   }

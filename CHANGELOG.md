@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.4.0 (2020-11-13)
+
+### Components
+- feat: Add SidePanel to labs ([#866](https://github.com/Workday/canvas-kit/pull/866)) [@lychyi](https://github.com/lychyi)
+- fix(button): Fix accent colors on IconButton when toggled on ([#895](https://github.com/Workday/canvas-kit/pull/895)) [@jamesfan](https://github.com/jamesfan)
+- fix(side-panel): Update Toggle spacing ([#902](https://github.com/Workday/canvas-kit/pull/902)) [@lychyi](https://github.com/lychyi)
+- feat(labs): Add Tabs component ([#569](https://github.com/Workday/canvas-kit/pull/569)) [@darcar31](https://github.com/darcar31)
+
+### Infrastructure
+- docs: Remove universal selector for section elements ([#896](https://github.com/Workday/canvas-kit/pull/896)) [@lychyi](https://github.com/lychyi)
+- chore: Update publish-canary.js [@lychyi](https://github.com/lychyi)
+- ci: Increase buffer size for publish cmd ([#903](https://github.com/Workday/canvas-kit/pull/903)) [@lychyi](https://github.com/lychyi)
+
+### Notes
+With the #895, if you're using a toggleable `IconButton` component, you will experience visual diffs for the following icons (they were not rendering properly prior, they should now look correct when "toggled" on):
+
+```
+adHocDelivery
+alarmClockPlus
+alarmClock
+boxPlus
+boxTextCheck
+boxTextPlus
+boxTextSearch
+boxTextUser
+cArea100
+cAreaLayered
+cAreaStacked
+cBar100
+cBarClustered
+cBarStacked
+cBubble
+cColumn100
+cColumnClustered
+cColumnLine
+cColumnStacked
+cDualLine
+cPie
+cScatter
+calendarUser
+cameraPlus
+cardView
+clipboardBlankCheck
+clipboardCheck
+commentActive
+dashboardExpenses
+documentCandidateSearch
+documentsCheck
+flashAuto
+fontSize
+highlight
+jobInfo
+lockPlus
+manageDelivery
+orderedList
+pill
+qrCode
+receipts
+region
+reportParameter
+rowsCheck
+rowsPlus
+select
+timeOffBalance
+time
+timelinePerson
+unlink
+userForward
+userPlus
+workbook
+```
+#### Before Fix
+
+![image](https://user-images.githubusercontent.com/146020/97763546-27001e80-1ac9-11eb-854d-58e2fd94637e.png)
+
+#### After Fix
+
+![image](https://user-images.githubusercontent.com/146020/97763552-2a93a580-1ac9-11eb-9988-6eb468fdfeef.png)
+
+
 # 4.3.1 (2020-10-22)
 
 ### Components
