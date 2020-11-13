@@ -20,41 +20,31 @@ export type Story = {
   parameters?: StorybookParameters;
 };
 
-interface SnapshotFn {
-  (x: Story): Story;
-  (x: StoriesDefaultExport): StoriesDefaultExport;
-}
-
 /**
  * A function to enable chromatic snapshots for a single story or a set of stories.
  * To apply to all stories in a file, wrap the default export of a CSF story file.
  * To apply to a single story, wrap the story function.
  */
-export const withSnapshotsEnabled: SnapshotFn = (x: Story | StoriesDefaultExport) => {
+export const withSnapshotsEnabled = <T extends Story | StoriesDefaultExport>(x: T): T => {
   if (typeof x === 'function') {
-    const Story = x as Story;
-    // Story.parameters?.chromatic?.disable = false;
-    Story.parameters = {
+    x.parameters = {
       parameters: {
-        ...Story.parameters,
+        ...x.parameters,
         chromatic: {
-          ...Story.parameters?.chromatic,
+          ...x.parameters?.chromatic,
           disable: false,
         },
       },
     };
-    return Story;
+    return x;
   }
 
-  const defaultExport = x as StoriesDefaultExport;
-  return {
-    ...defaultExport,
-    parameters: {
-      ...defaultExport.parameters,
-      chromatic: {
-        ...defaultExport.parameters?.chromatic,
-        disable: false,
-      },
+  x.parameters = {
+    ...x.parameters,
+    chromatic: {
+      ...x.parameters?.chromatic,
+      disable: false,
     },
   };
+  return x;
 };
