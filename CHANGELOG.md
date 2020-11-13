@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.4.0 (2020-11-13)
+
+### Components
+- feat: Add SidePanel to labs ([#866](https://github.com/Workday/canvas-kit/pull/866)) [@lychyi](https://github.com/lychyi)
+- fix(button): Fix accent colors on IconButton when toggled on ([#895](https://github.com/Workday/canvas-kit/pull/895)) [@jamesfan](https://github.com/jamesfan)
+- fix(side-panel): Update Toggle spacing ([#902](https://github.com/Workday/canvas-kit/pull/902)) [@lychyi](https://github.com/lychyi)
+- feat(labs): Add Tabs component ([#569](https://github.com/Workday/canvas-kit/pull/569)) [@darcar31](https://github.com/darcar31)
+
+### Infrastructure
+- docs: Remove universal selector for section elements ([#896](https://github.com/Workday/canvas-kit/pull/896)) [@lychyi](https://github.com/lychyi)
+- chore: Update publish-canary.js [@lychyi](https://github.com/lychyi)
+- ci: Increase buffer size for publish cmd ([#903](https://github.com/Workday/canvas-kit/pull/903)) [@lychyi](https://github.com/lychyi)
+
 # 4.3.1 (2020-10-22)
 
 ### Components
