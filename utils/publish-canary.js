@@ -6,6 +6,7 @@ const request = require('request');
 const semver = require('semver');
 const {promisify} = require('util');
 const cmd = promisify(require('node-cmd').get);
+const exec = promisify(require('child_process').exec);
 
 const {
   SLACK_WEBHOOK,
@@ -83,13 +84,18 @@ cmd('git diff --name-only HEAD HEAD^')
       `--canary`,
       `--preid ${preid}`,
       `--dist-tag ${distTag}`,
-      `--max-buffer=999999999`,
       preid === 'prerelease' ? 'major' : '',
     ];
 
-    return cmd(`yarn lerna publish ${lernaFlags.join(' ')}`);
+    // The default buffer size is 1024*200 (200kb) in node v10.x which causes this command to overflow the buffer.
+    // In node v12.x and above maxBuffer is 1024*1024. We can probably remove this and go back to using cmd if we update node.
+    
+    // TODO: Consider swapping out cmd in favor of exec, it's what node-cmd uses under the hood and it 
+    // natively allows you to access the options arg like we're doing here.
+    return exec(`yarn lerna publish ${lernaFlags.join(' ')}`, {maxBuffer: 1024*1024});
   })
-  .then(output => {
+  // exec returns { stdout, stderr } so we're destructuring and renaming to be consistent with cmd usage across this script
+  .then(({stdout: output}) => {
     console.log(output);
 
     const regex = new RegExp(
