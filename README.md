@@ -20,7 +20,7 @@ implement user experiences consistent with
 ---
 
 **:white_check_mark: For a list of available react modules see
-[Canvas Kit Component Status](COMPONENT_STATUS.md)**
+[Canvas Kit Component Status](./COMPONENT_STATUS.md)**
 
 ## Getting started
 
@@ -96,7 +96,7 @@ The Canvas Kit core team will take a look and discuss it with you.
 
 ## Contributing
 
-Want to contribute to Canvas Kit React? Please read our [contributing guidelines](CONTRIBUTING.md)
+Want to contribute to Canvas Kit React? Please read our [contributing guidelines](./CONTRIBUTING.md)
 to find out more and how to get started.
 
 ## Open Development
@@ -107,7 +107,7 @@ process. Any and all issues are public and available for discussion.
 
 ## Versioning
 
-Canvas Kit follows [semantic versioning](http://semver.org/) and is enforced automatically by
+Canvas Kit follows [semantic versioning](https://semver.org/) and is enforced automatically by
 [conventional commits](https://www.conventionalcommits.org/) (see
 ["Commit Message Format"](./CONTRIBUTING.md#commit-message-format)).
 
@@ -131,4 +131,3 @@ The Workday Canvas Kits are licensed under the Apache 2.0 License.
 Visual Testing by [ChromaticQA](https://www.chromaticqa.com/)
 
 Builds by [TravisCI](https://www.chromaticqa.com/)
-
