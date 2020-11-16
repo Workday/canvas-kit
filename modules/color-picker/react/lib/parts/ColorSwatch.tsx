@@ -13,6 +13,11 @@ export interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function compareColors(color1: string, color2: string): boolean {
+  // Check for validity or else you'll get an unknown format error when passing blank strings
+  if (!chroma.valid(color1) || !chroma.valid(color2)) {
+    return false;
+  }
+
   return chroma(color1).hex() === chroma(color2).hex();
 }
 
