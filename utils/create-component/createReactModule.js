@@ -1,7 +1,5 @@
-const path = require('path');
 const mkdirp = require('mkdirp');
 const cmd = require('node-cmd');
-const colors = require('colors');
 
 const writeModuleFiles = require('./writeModuleFiles');
 const getPascalCaseName = require('./nameUtils').getPascalCaseName;
