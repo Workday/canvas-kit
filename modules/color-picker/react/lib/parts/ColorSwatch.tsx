@@ -13,7 +13,7 @@ export interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function compareColors(color1: string, color2: string): boolean {
-  return chroma(color1) === chroma(color2);
+  return chroma(color1).hex() === chroma(color2).hex();
 }
 
 const Container = styled('div')<ColorSwatchProps>(
