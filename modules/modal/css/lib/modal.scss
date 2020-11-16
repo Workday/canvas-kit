@@ -3,7 +3,7 @@
     background: none;
   }
   to {
-    background: rgba(0,0,0,0.65);
+    background: rgba(0, 0, 0, 0.65);
   }
 }
 
@@ -19,17 +19,32 @@
 }
 
 .wdc-modal-bg {
-  align-items: center;
   animation-duration: 0.3s;
   animation-name: wdc-modal-bg-animation;
-  background: rgba(0,0,0,0.65);
-  display: flex;
-  height: 100vh;
-  justify-content: center;
+  background: rgba(0, 0, 0, 0.65);
+  display: inline-block;
   left: 0;
   position: fixed;
   top: 0;
-  width: 100vw;
+  bottom: 0;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wdc-modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.75rem auto;
+  min-height: calc(100% - (1.75rem * 2));
+
+  // IE11 fix for setting min-height in a flex container
+  &::before {
+    display: block;
+    height: calc(100vh - (1.75rem * 2));
+    content: '';
+  }
 }
 
 .wdc-modal {
