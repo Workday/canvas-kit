@@ -6,7 +6,6 @@ const path = require('path');
 const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
 const cmd = require('node-cmd');
-const colors = require('colors');
 
 const createReactModule = require('./createReactModule');
 const createCssModule = require('./createCssModule');
