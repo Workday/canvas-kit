@@ -51,7 +51,8 @@
     "@workday/canvas-kit-react-core": "^4.4.0",
     "@workday/canvas-kit-react-icon": "^4.4.0",
     "@workday/canvas-kit-react-text-input": "^4.4.0",
-    "@workday/canvas-system-icons-web": "^1.0.20"
+    "@workday/canvas-system-icons-web": "^1.0.20",
+    "chroma-js": "^2.1.0"
   },
   "peerDependencies": {
     "react": ">= 16.8 < 17"
