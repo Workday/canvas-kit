@@ -4,7 +4,7 @@ import {Checkbox} from '../../../../../checkbox/react';
 import {CheckboxStates} from '../stories_Checkbox';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Checkbox',
+  title: 'Testing/React/Inputs/Checkbox/Theming',
   component: Checkbox,
   parameters: {
     canvasProviderDecorator: {

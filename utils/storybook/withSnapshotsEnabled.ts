@@ -1,5 +1,6 @@
 type StorybookParameters = {
   chromatic?: {
+    delay?: number;
     disable?: boolean;
     pauseAnimationAtEnd?: boolean;
   };

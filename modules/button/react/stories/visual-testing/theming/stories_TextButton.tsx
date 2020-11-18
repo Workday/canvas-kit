@@ -4,7 +4,7 @@ import {TextButton} from '../../../';
 import {TextButtonStates} from '../stories_TextButton';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Text Button',
+  title: 'Testing/React/Buttons/Button/Text Button/Theming',
   component: TextButton,
   parameters: {
     canvasProviderDecorator: {

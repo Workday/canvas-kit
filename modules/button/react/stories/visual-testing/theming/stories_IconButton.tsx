@@ -4,7 +4,7 @@ import {IconButton} from '../../../';
 import {IconButtonStates} from '../stories_IconButton';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Icon Button',
+  title: 'Testing/React/Buttons/Button/Icon Button/Theming',
   component: IconButton,
   parameters: {
     canvasProviderDecorator: {

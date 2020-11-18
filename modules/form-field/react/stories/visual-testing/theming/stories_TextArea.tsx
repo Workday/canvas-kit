@@ -4,7 +4,7 @@ import {TextArea} from '../../../../../text-area/react';
 import {TextAreaStates} from '../stories_TextArea';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/TextArea',
+  title: 'Testing/React/Inputs/TextArea/Theming',
   component: TextArea,
   parameters: {
     canvasProviderDecorator: {

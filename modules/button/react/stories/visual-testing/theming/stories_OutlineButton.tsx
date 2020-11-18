@@ -4,7 +4,7 @@ import {OutlineButton} from '../../../';
 import {OutlineButtonStates} from '../stories_OutlineButton';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Outline Button',
+  title: 'Testing/React/Buttons/Button/Outline Button/Theming',
   component: OutlineButton,
   parameters: {
     canvasProviderDecorator: {

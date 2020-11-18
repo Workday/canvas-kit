@@ -4,7 +4,7 @@ import Select from '../lib/Select';
 import {SelectStates, SelectStatesMenuOn, SelectStatesOption} from './stories_visualTesting';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Select',
+  title: 'Testing/React/Labs/Select/Theming',
   component: Select,
   parameters: {
     canvasProviderDecorator: {

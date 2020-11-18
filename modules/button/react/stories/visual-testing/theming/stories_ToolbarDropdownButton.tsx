@@ -4,7 +4,7 @@ import {ToolbarDropdownButton} from '../../../';
 import {ToolbarDropdownButtonStates} from '../stories_ToolbarDropdownButton';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Toolbar Dropdown Button',
+  title: 'Testing/React/Buttons/Button/Toolbar Dropdown Button/Theming',
   component: ToolbarDropdownButton,
   parameters: {
     canvasProviderDecorator: {

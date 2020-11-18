@@ -4,7 +4,7 @@ import FormField from '../../../lib/FormField';
 import {FormFieldStates} from '../stories_FormField';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Form Field',
+  title: 'Testing/React/Inputs/Form Field/Theming',
   component: FormField,
   parameters: {
     canvasProviderDecorator: {

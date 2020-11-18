@@ -4,7 +4,7 @@ import {Switch} from '../../../../../switch/react';
 import {SwitchStates} from '../stories_Switch';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Inputs/Switch',
+  title: 'Testing/React/Inputs/Switch/Theming',
   component: Switch,
   parameters: {
     canvasProviderDecorator: {

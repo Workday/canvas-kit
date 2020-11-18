@@ -4,7 +4,7 @@ import {DropdownButton} from '../../../';
 import {DropdownButtonStates} from '../stories_DropdownButton';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Dropdown Button',
+  title: 'Testing/React/Buttons/Button/Dropdown Button/Theming',
   component: DropdownButton,
   parameters: {
     canvasProviderDecorator: {
