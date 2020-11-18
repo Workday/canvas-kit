@@ -5,8 +5,6 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
-  customColorTheme,
-  Story,
 } from '../../../../../utils/storybook';
 
 import {ColorInput} from '../../../../color-picker/react';
@@ -77,10 +75,3 @@ export const ColorInputStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
-
-export const ColorInputThemedStates: Story = ColorInputStates;
-ColorInputThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};

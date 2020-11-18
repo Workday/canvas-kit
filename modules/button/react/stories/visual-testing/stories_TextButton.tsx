@@ -6,8 +6,6 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
-  customColorTheme,
-  Story,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {TextButton} from '../../index';
@@ -54,10 +52,3 @@ export const TextButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
-
-export const TextButtonThemedStates: Story = TextButtonStates;
-TextButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};

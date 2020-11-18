@@ -5,6 +5,10 @@ import {Popper} from '@workday/canvas-kit-react-popup';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
 
+export default withSnapshotsEnabled({
+  title: 'Testing/React/Popups/Popper',
+});
+
 const containerStyles: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
@@ -31,7 +35,7 @@ const squareStyles: React.CSSProperties = {
   top: 250,
 };
 
-export const CustomPlacement = withSnapshotsEnabled(() => {
+export const CustomPlacement = () => {
   const ownerRef = React.useRef<HTMLDivElement>(null);
   const virtualLeft = 190 + 30; // square offset + red box offset
   const virtualTop = 250 + 30; // square offset + red box offset
@@ -75,4 +79,4 @@ export const CustomPlacement = withSnapshotsEnabled(() => {
       </div>
     </div>
   );
-});
+};

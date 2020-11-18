@@ -6,8 +6,6 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
-  customColorTheme,
-  Story,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {OutlineButton} from '../../index';
@@ -51,10 +49,3 @@ export const OutlineButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
-
-export const OutlineButtonThemedStates: Story = OutlineButtonStates;
-OutlineButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};

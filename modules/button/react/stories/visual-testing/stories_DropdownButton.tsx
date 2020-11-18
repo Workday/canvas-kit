@@ -6,8 +6,6 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
-  customColorTheme,
-  Story,
 } from '../../../../../utils/storybook';
 import {DropdownButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
@@ -40,10 +38,3 @@ export const DropdownButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
-
-export const DropdownButtonThemedStates: Story = DropdownButtonStates;
-DropdownButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};

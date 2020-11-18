@@ -5,8 +5,6 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
-  customColorTheme,
-  Story,
 } from '../../../../../utils/storybook';
 
 import {Radio, RadioGroup} from '../../../../radio/react';
@@ -158,10 +156,3 @@ export const RadioStates = () => (
     </div>
   </div>
 );
-
-export const RadioThemedStates: Story = RadioStates;
-RadioThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};

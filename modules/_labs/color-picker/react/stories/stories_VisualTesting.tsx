@@ -1,37 +1,25 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import React from 'react';
 import {colors} from '@workday/canvas-kit-react-core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {ComponentStatesTable, withSnapshotsEnabled, Story} from '../../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 import ColorPicker from '../lib/ColorPicker';
 
-export default {
+export default withSnapshotsEnabled({
   title: 'Testing/React/Labs/Color Picker',
   component: ColorPicker,
-};
-
-export const InputInteraction = () => {
-  const textAreaRef = React.useRef(null);
-  const [color, setColor] = React.useState('');
-  const handleColorChange = (c: string) => {
-    setColor(c);
-    textAreaRef.current?.focus();
-  };
-  return (
-    <div className="App">
-      <ColorPicker showCustomHexInput onColorChange={handleColorChange} />
-      <label htmlFor="test">Text Area</label>
-      <textarea id="test" style={{color: color}} ref={textAreaRef} />
-    </div>
-  );
-};
+  parameters: {
+    chromatic: {
+      pauseAnimationAtEnd: true,
+    },
+  },
+});
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
-export const ColorPickerStates = withSnapshotsEnabled(() => (
+export const ColorPickerStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -60,10 +48,4 @@ export const ColorPickerStates = withSnapshotsEnabled(() => (
       {props => <ColorPicker {...props} onColorChange={noop} />}
     </ComponentStatesTable>
   </StaticStates>
-));
-
-ColorPickerStates.parameters = {
-  chromatic: {
-    pauseAnimationAtEnd: true,
-  },
-};
+);

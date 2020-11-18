@@ -1,50 +1,55 @@
-type StorybookParameters = {
-  chromatic?: {
-    disable?: boolean;
-    pauseAnimationAtEnd?: boolean;
-  };
-  [key: string]: any;
-};
-
-type StoriesDefaultExport = {
+type StoryDetails = {
   title: string;
   component?: React.ReactNode;
   decorators?: any[];
-  parameters?: StorybookParameters;
+  parameters?: {
+    [key: string]: any;
+  };
 };
 
-export type Story = {
-  (): React.ReactNode;
-  storyName?: string;
-  decorators?: any[];
-  parameters?: StorybookParameters;
+type StoryFn = {
+  (): JSX.Element;
+  story?: {
+    parameters?: {
+      chromatic?: {};
+    };
+  };
 };
 
 /**
  * A function to enable chromatic snapshots for a single story or a set of stories.
  * To apply to all stories in a file, wrap the default export of a CSF story file.
- * To apply to a single story, wrap the story function.
+ * To apply to a single story, wrap the story fn.
+ *
+ * TODO: Clean up after optional chaining is enabled
  */
-export const withSnapshotsEnabled = <T extends Story | StoriesDefaultExport>(x: T): T => {
+export const withSnapshotsEnabled: {
+  (story: StoryFn): void;
+  (story: StoryDetails): StoryDetails;
+} = (x: StoryFn | StoryDetails) => {
   if (typeof x === 'function') {
-    x.parameters = {
+    const storyFn = x as StoryFn;
+    (x as StoryFn).story = {
+      ...storyFn.story,
       parameters: {
-        ...x.parameters,
+        ...(storyFn.story && storyFn.story.parameters),
         chromatic: {
-          ...x.parameters?.chromatic,
+          ...(storyFn.story && storyFn.story.parameters && storyFn.story.parameters.chromatic),
           disable: false,
         },
       },
     };
-    return x;
   }
 
-  x.parameters = {
-    ...x.parameters,
-    chromatic: {
-      ...x.parameters?.chromatic,
-      disable: false,
+  const details = x as StoryDetails;
+  return {
+    ...details,
+    parameters: {
+      ...details.parameters,
+      chromatic: {
+        ...(details.parameters && details.parameters.chromatic),
+        disable: false,
+      },
     },
   };
-  return x;
 };

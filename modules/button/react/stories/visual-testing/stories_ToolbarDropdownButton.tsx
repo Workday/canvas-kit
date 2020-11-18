@@ -6,8 +6,7 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {
   ComponentStatesTable,
   withSnapshotsEnabled,
-  customColorTheme,
-  Story,
+  permutateProps,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarDropdownButton} from '../../index';
@@ -42,10 +41,3 @@ export const ToolbarDropdownButtonStates = () => (
     </div>
   </React.Fragment>
 );
-
-export const ToolbarDropdownButtonThemedStates: Story = ToolbarDropdownButtonStates;
-ToolbarDropdownButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};

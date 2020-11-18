@@ -6,8 +6,6 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
-  customColorTheme,
-  Story,
 } from '../../../../../utils/storybook';
 import {DeleteButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
@@ -37,10 +35,3 @@ export const DeleteButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
-
-export const DeleteButtonThemedStates: Story = DeleteButtonStates;
-DeleteButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};

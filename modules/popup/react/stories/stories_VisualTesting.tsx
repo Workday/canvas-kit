@@ -8,7 +8,12 @@ import {Popup} from '../index';
 import {PopupPadding} from '../lib/Popup';
 import {depth} from '@workday/canvas-kit-react-core';
 
-export const PopupStates = withSnapshotsEnabled(() => (
+export default withSnapshotsEnabled({
+  title: 'Testing/React/Popups/Popup',
+  component: Popup,
+});
+
+export const PopupStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
@@ -91,4 +96,4 @@ export const PopupStates = withSnapshotsEnabled(() => (
       )}
     </ComponentStatesTable>
   </StaticStates>
-));
+);

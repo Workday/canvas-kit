@@ -5,8 +5,6 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
-  customColorTheme,
-  Story,
 } from '../../../../../utils/storybook';
 
 import {Checkbox} from '../../../../checkbox/react';
@@ -75,10 +73,3 @@ export const CheckboxStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
-
-export const CheckboxThemedStates: Story = CheckboxStates;
-CheckboxThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};

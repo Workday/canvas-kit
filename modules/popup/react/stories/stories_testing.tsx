@@ -9,8 +9,6 @@ export default {
   component: Popup,
 };
 
-export * from './stories_VisualTesting';
-
 export const MultiplePopups = () => {
   const popup1 = usePopup();
   const popup2 = usePopup();
