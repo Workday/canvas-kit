@@ -32,6 +32,7 @@ part of Canvas.
 | **Containers**                                    |                    |                    |                                                                                   |
 | [Card](./modules/card)                            | :white_check_mark: | :white_check_mark: |       [:blue_book:](https://design.workday.com/components/containers/cards)       |
 | [Drawer](./modules/_labs/drawer/react)            |    :microscope:    |                    |                                                                                   |
+| [Expandable](./modules/expandable)                | :white_check_mark: |                    |                                                                                   |
 | [Table](./modules/table)                          | :white_check_mark: | :white_check_mark: |      [:blue_book:](https://design.workday.com/components/containers/tables)       |
 | **Form Elements**                                 |                    |                    |                                                                                   |
 | [Form Field](./modules/form-field)                | :white_check_mark: | :white_check_mark: |                                                                                   |
