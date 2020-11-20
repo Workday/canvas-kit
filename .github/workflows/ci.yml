@@ -23,8 +23,7 @@ jobs:
         uses: actions/cache/@v1
         with:
           path: .cache/cypress
-          key:
-            ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs[0].version }}
+          key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
 
       - name: Cache node modules
         id: yarn-cache
