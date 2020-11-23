@@ -5,7 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
-const cmd = require('node-cmd');
+const exec = require('child_process');
+
+require('colors');
 
 const createReactModule = require('./createReactModule');
 const createCssModule = require('./createCssModule');
@@ -99,7 +101,7 @@ const createModule = (componentPath, target, moduleGenerator, answers, unstable)
     moduleGenerator(modulePath, name, description, unstable, publicModule, category);
 
     console.log('\nBootstrapping dependencies.');
-    cmd.run('yarn');
+    exec('yarn');
 
     if (!unstable) {
       console.log('\nAdding dependency to ' + `@workday/canvas-kit-${target}.`.cyan);
