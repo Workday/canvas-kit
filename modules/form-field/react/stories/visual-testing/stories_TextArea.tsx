@@ -5,6 +5,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 
 import {TextArea} from '../../../../text-area/react';
@@ -70,3 +71,10 @@ export const TextAreaStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const TextAreaThemedStates = () => <TextAreaStates />;
+TextAreaThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

@@ -27,19 +27,6 @@ type Story = {
  * To apply to a single story, wrap the story function.
  */
 export const withSnapshotsEnabled = <T extends Story | StoriesDefaultExport>(x: T): T => {
-  if (typeof x === 'function') {
-    x.parameters = {
-      parameters: {
-        ...x.parameters,
-        chromatic: {
-          ...x.parameters?.chromatic,
-          disable: false,
-        },
-      },
-    };
-    return x;
-  }
-
   x.parameters = {
     ...x.parameters,
     chromatic: {

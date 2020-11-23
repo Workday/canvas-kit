@@ -6,6 +6,7 @@ import {
   permutateProps,
   withSnapshotsEnabled,
   controlComponent,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import Select from '../lib/Select';
 import SelectBase from '../lib/SelectBase';
@@ -314,3 +315,17 @@ export const PortalTest = () => (
     </Container>
   </div>
 );
+
+const themedParameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};
+
+export const SelectThemedStates = () => <SelectStates />;
+export const SelectThemedStatesMenuOn = () => <SelectStatesMenuOn />;
+export const SelectThemedStatesOption = () => <SelectStatesOption />;
+
+SelectThemedStates.parameters = themedParameters;
+SelectThemedStatesMenuOn.parameters = themedParameters;
+SelectThemedStatesOption.parameters = themedParameters;

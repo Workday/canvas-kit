@@ -5,6 +5,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {TextInput} from '../../../../text-input/react';
 
@@ -69,3 +70,10 @@ export const TextInputStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const TextInputThemedStates = () => <TextInputStates />;
+TextInputThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};
