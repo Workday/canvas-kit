@@ -80,7 +80,7 @@ const LegendComponent = styled('legend')<LabelProps>(...labelStyles, ({labelPosi
 }));
 const LabelComponent = styled('label')<LabelProps>(...labelStyles);
 
-export default class Label extends React.Component<LabelProps> {
+class Label extends React.Component<LabelProps> {
   static Position = FormFieldLabelPosition;
 
   public render() {
@@ -114,3 +114,7 @@ export default class Label extends React.Component<LabelProps> {
     );
   }
 }
+
+Label.Position = FormFieldLabelPosition;
+
+export default Label;

@@ -29,7 +29,7 @@ describe('PopupStack', () => {
   });
 
   beforeEach(() => {
-    h.stories.load('Testing|React/Popups/Popup Stack', 'MixedPopupTypes');
+    h.stories.load('Testing/React/Popups/Popup Stack', 'MixedPopupTypes');
   });
 
   it('should start with Window 3 stacked on top of 3 Windows', () => {

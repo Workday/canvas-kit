@@ -18,7 +18,7 @@ describe('Popup', () => {
   });
   context(`given the open popup`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Popup/React', 'Open');
+      h.stories.load('Components/Popups/Popup/React', 'Open');
     });
     it('should not have any axe errors', () => {
       cy.checkA11y();
@@ -31,7 +31,7 @@ describe('Popup', () => {
 
   context(`given the default popup`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Popup/React', 'Default');
+      h.stories.load('Components/Popups/Popup/React', 'Default');
     });
     context('when the target buttton is clicked', () => {
       beforeEach(() => {
@@ -92,7 +92,7 @@ describe('Popup', () => {
 
   context('given the MultiplePopups story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing|React/Popups/Popup', 'MultiplePopups');
+      h.stories.load('Testing/React/Popups/Popup', 'MultiplePopups');
     });
 
     context('when Open Popup 1 button is clicked', () => {

@@ -5,12 +5,13 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 
 import {Select, SelectOption} from '../../../../select/react';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Select',
+  title: 'Testing/React/Inputs/Select',
   component: Select,
 });
 
@@ -58,3 +59,10 @@ export const SelectStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const SelectThemedStates = () => <SelectStates />;
+SelectThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

@@ -34,7 +34,7 @@ const Message = styled('p')<Pick<HintProps, 'error'>>(
   ({error, theme}) => error === ErrorType.Error && {color: theme.canvas.palette.error.main}
 );
 
-export default class Hint extends React.Component<HintProps> {
+class Hint extends React.Component<HintProps> {
   static ErrorType = ErrorType;
 
   public render() {
@@ -59,3 +59,7 @@ export default class Hint extends React.Component<HintProps> {
     );
   }
 }
+
+Hint.ErrorType = ErrorType;
+
+export default Hint;

@@ -8,7 +8,7 @@ import {Drawer, DrawerHeader, DrawerDirection} from '../index';
 import {action} from '@storybook/addon-actions';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Drawer',
+  title: 'Testing/React/Labs/Drawer',
   component: Drawer,
 });
 

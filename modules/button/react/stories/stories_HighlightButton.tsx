@@ -17,7 +17,7 @@ const buttonContainer = {
   },
 };
 
-storiesOf('Components|Buttons/Button/React', module)
+storiesOf('Components/Buttons/Button/React', module)
   .addParameters({component: HighlightButton})
   .addDecorator(withReadme(README))
   .add('Highlight', () => (

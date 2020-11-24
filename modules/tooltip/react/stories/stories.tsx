@@ -14,7 +14,7 @@ import {Tooltip, TooltipContainer, useTooltip} from '@workday/canvas-kit-react-t
 import README from '../README.md';
 
 export default {
-  title: 'Components|Popups/Tooltip/React',
+  title: 'Components/Popups/Tooltip/React',
   component: Tooltip,
   decorators: [withReadme(README)],
 };

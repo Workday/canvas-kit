@@ -6,7 +6,7 @@ import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
 import README from './README.md';
 import './index.scss';
 
-storiesOf('Components|Navigation/Page Header/CSS', module)
+storiesOf('Components/Navigation/Page Header/CSS', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

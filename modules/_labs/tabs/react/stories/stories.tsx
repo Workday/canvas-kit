@@ -10,7 +10,7 @@ import withReadme from 'storybook-readme/with-readme';
 import README from '../README.md';
 
 export default {
-  title: 'Labs|Tabs/React',
+  title: 'Labs/Tabs/React',
   component: Tabs,
   decorators: [withReadme(README)],
 };

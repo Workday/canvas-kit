@@ -6,16 +6,6 @@ import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Modal, ModalWidth} from '../';
 
-export default withSnapshotsEnabled({
-  title: 'Testing|React/Popups/Modal',
-  component: Modal,
-  parameters: {
-    chromatic: {
-      pauseAnimationAtEnd: true,
-    },
-  },
-});
-
 const noop = () => {}; // eslint-disable-line no-empty-function
 
 const TestContent = () => {
@@ -47,6 +37,6 @@ const TestModal = ({width}: {width: ModalWidth}) => (
   </>
 );
 
-export const ModalSmallWidth = () => <TestModal width={Modal.Width.s} />;
+export const ModalSmallWidth = withSnapshotsEnabled(() => <TestModal width={Modal.Width.s} />);
 
-export const ModalMediumWidth = () => <TestModal width={Modal.Width.m} />;
+export const ModalMediumWidth = withSnapshotsEnabled(() => <TestModal width={Modal.Width.m} />);

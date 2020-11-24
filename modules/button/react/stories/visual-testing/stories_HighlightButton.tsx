@@ -6,13 +6,14 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {HighlightButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Highlight Button',
+  title: 'Testing/React/Buttons/Button/Highlight Button',
   component: HighlightButton,
 });
 
@@ -40,3 +41,10 @@ export const HighlightButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const HighlightButtonThemedStates = () => <HighlightButtonStates />;
+HighlightButtonThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

@@ -100,7 +100,7 @@ inquirer.prompt(questions).then(answers => {
               })
               .pipe({
                 from: `storiesOf('Labs/`,
-                to: `storiesOf('Components|${answers.category}/`,
+                to: `storiesOf('Components/${answers.category}/`,
               });
           } catch (error) {
             console.log('Error occurred:', error);

@@ -86,7 +86,7 @@ const BannerViewAll = styled('span')<BannerProps>(
   })
 );
 
-export default class Banner extends React.Component<BannerProps> {
+class Banner extends React.Component<BannerProps> {
   static Variant = BannerVariant;
   static ErrorType = ErrorType;
 
@@ -121,3 +121,8 @@ export default class Banner extends React.Component<BannerProps> {
     );
   }
 }
+
+Banner.Variant = BannerVariant;
+Banner.ErrorType = ErrorType;
+
+export default Banner;
