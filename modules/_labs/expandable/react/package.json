@@ -1,6 +1,6 @@
 
 {
-  "name": "@workday/canvas-kit-react-expandable",
+  "name": "@workday/canvas-kit-labs-react-expandable",
   "version": "0.0.0",
   "description": "Canvas-styled React container that can be expanded and collapsed",
   "author": "Workday, Inc. (https://www.workday.com)",
@@ -11,7 +11,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/expandable/react"
+    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/_labs/expandable/react"
   },
   "files": [
     "dist/",

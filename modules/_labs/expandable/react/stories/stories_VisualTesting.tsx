@@ -1,12 +1,12 @@
-/// <reference path="../../../../typings.d.ts" />
+/// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 import Expandable from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Containers/Expandable',
+  title: 'Testing|React/Labs/Expandable',
   component: Expandable,
 });
 

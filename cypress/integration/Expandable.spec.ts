@@ -14,7 +14,7 @@ describe('Expandable', () => {
   });
   context(`given the 'Default' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Containers/Expandable/React', 'Default');
+      h.stories.load('Labs|Expandable/React', 'Default');
     });
 
     it('should pass accessibility checks', () => {

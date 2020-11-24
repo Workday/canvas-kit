@@ -1,4 +1,4 @@
-/// <reference path="../../../../typings.d.ts" />
+/// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
@@ -8,7 +8,7 @@ import README from '../README.md';
 
 import {Checkbox} from '@workday/canvas-kit-react-checkbox';
 
-storiesOf('Components|Containers/Expandable/React', module)
+storiesOf('Labs|Expandable/React', module)
   .addParameters({component: Expandable})
   .addDecorator(withReadme(README))
   .add('Default', () => (
