@@ -5,7 +5,7 @@ import {Avatar} from '@workday/canvas-kit-react-avatar';
 import {Button} from '@workday/canvas-kit-react-button';
 
 export default {
-  title: 'Testing|React/Labs/Side Panel/Cypress',
+  title: 'Testing/React/Labs/Side Panel/Cypress',
   component: SidePanel,
 };
 

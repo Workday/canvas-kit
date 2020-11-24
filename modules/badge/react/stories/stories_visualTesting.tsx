@@ -8,7 +8,7 @@ import {CountBadge} from '../index';
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Indicators/Badge/CountBadge',
+  title: 'Testing/React/Indicators/Badge/CountBadge',
   component: CountBadge,
   decorators: [withReadme(README)],
 });

@@ -11,7 +11,7 @@ import {deprecated_Button as DeprecatedButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Deprecated Button',
+  title: 'Testing/React/Buttons/Button/Deprecated Button',
   component: DeprecatedButton,
 });
 

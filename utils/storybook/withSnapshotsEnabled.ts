@@ -1,55 +1,38 @@
-type StoryDetails = {
+type StorybookParameters = {
+  chromatic?: {
+    delay?: number;
+    disable?: boolean;
+    pauseAnimationAtEnd?: boolean;
+  };
+  [key: string]: any;
+};
+
+type StoriesDefaultExport = {
   title: string;
   component?: React.ReactNode;
   decorators?: any[];
-  parameters?: {
-    [key: string]: any;
-  };
+  parameters?: StorybookParameters;
 };
 
-type StoryFn = {
-  (): JSX.Element;
-  story?: {
-    parameters?: {
-      chromatic?: {};
-    };
-  };
+type Story = {
+  (): React.ReactNode;
+  storyName?: string;
+  decorators?: any[];
+  parameters?: StorybookParameters;
 };
 
 /**
  * A function to enable chromatic snapshots for a single story or a set of stories.
  * To apply to all stories in a file, wrap the default export of a CSF story file.
- * To apply to a single story, wrap the story fn.
- *
- * TODO: Clean up after optional chaining is enabled
+ * To apply to a single story, wrap the story function.
  */
-export const withSnapshotsEnabled: {
-  (story: StoryFn): void;
-  (story: StoryDetails): StoryDetails;
-} = (x: StoryFn | StoryDetails) => {
-  if (typeof x === 'function') {
-    const storyFn = x as StoryFn;
-    (x as StoryFn).story = {
-      ...storyFn.story,
-      parameters: {
-        ...(storyFn.story && storyFn.story.parameters),
-        chromatic: {
-          ...(storyFn.story && storyFn.story.parameters && storyFn.story.parameters.chromatic),
-          disable: false,
-        },
-      },
-    };
-  }
-
-  const details = x as StoryDetails;
-  return {
-    ...details,
-    parameters: {
-      ...details.parameters,
-      chromatic: {
-        ...(details.parameters && details.parameters.chromatic),
-        disable: false,
-      },
+export const withSnapshotsEnabled = <T extends Story | StoriesDefaultExport>(x: T): T => {
+  x.parameters = {
+    ...x.parameters,
+    chromatic: {
+      ...x.parameters?.chromatic,
+      disable: false,
     },
   };
+  return x;
 };

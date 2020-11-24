@@ -9,7 +9,7 @@ import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Popups/Toast',
+  title: 'Testing/React/Popups/Toast',
   component: Toast,
 });
 

@@ -4,7 +4,7 @@ import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
 import './index.scss';
 
-storiesOf('Tokens|Core/CSS', module)
+storiesOf('Tokens/Core/CSS', module)
   .addDecorator(withReadme(README))
   .add('Typography', () => {
     const inverseStyle = {
@@ -75,7 +75,7 @@ storiesOf('Tokens|Core/CSS', module)
     );
   });
 
-storiesOf('Tokens|Core/CSS', module)
+storiesOf('Tokens/Core/CSS', module)
   .addDecorator(withReadme(README))
   .add('Depth', () => {
     const cardStyle = {
@@ -111,7 +111,7 @@ storiesOf('Tokens|Core/CSS', module)
     );
   });
 
-storiesOf('Tokens|Core/CSS', module)
+storiesOf('Tokens/Core/CSS', module)
   .addDecorator(withReadme(README))
   .add('Accessibility', () => (
     <div className="story">

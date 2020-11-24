@@ -114,12 +114,12 @@ import {CanvasProvider} from '@workday/canvas-kit-react-common';
 We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
 stories in a `CanvasProvider` (including `InputProvider`) automatically.
 
-Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
+Add this decorator to your `/.storybook/preview.js` configuration file to apply to all stories:
 
 ```js
 import {CanvasProviderDecorator} from '../utils/storybook';
 
-addDecorator(CanvasProviderDecorator);
+export const decorators = [CanvasProviderDecorator];
 ```
 
 Or, add it to stories individually:
@@ -127,9 +127,15 @@ Or, add it to stories individually:
 ```js
 import {CanvasProviderDecorator} from '../../../../utils/storybook';
 
-storiesOf('My Story', module)
-  .addDecorator(CanvasProviderDecorator)
-  .add('All', () => <YourJSX />);
+export default {
+  title: 'MyComponent',
+  component: MyComponent,
+  decorators: [CanvasProviderDecorator],
+};
+
+// OR
+
+MyStory.decorators = [CanvasProviderDecorator];
 ```
 
 ---

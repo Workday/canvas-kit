@@ -34,7 +34,7 @@ const buttonContainer = {
   },
 };
 
-storiesOf('Components|Buttons/Button/React/Text', module)
+storiesOf('Components/Buttons/Button/React/Text', module)
   .addParameters({component: TextButton})
   .addDecorator(withReadme(README))
   .add('Default', () => (

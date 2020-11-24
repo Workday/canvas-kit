@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {DropdownButton} from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Buttons/Button/React/Dropdown', module)
+storiesOf('Components/Buttons/Button/React/Dropdown', module)
   .addParameters({component: DropdownButton})
   .addDecorator(withReadme(README))
   .add('Primary', () => (

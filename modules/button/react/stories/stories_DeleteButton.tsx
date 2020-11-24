@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {DeleteButton} from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Buttons/Button/React', module)
+storiesOf('Components/Buttons/Button/React', module)
   .addParameters({component: DeleteButton})
   .addDecorator(withReadme(README))
   .add('Delete', () => (

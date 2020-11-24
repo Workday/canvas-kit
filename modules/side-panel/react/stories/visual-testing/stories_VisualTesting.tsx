@@ -9,7 +9,7 @@ import {SidePanelBackgroundColor, SidePanelOpenDirection} from '../../lib/SidePa
 import {action} from '@storybook/addon-actions';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Containers/Side Panel',
+  title: 'Testing/React/Containers/Side Panel',
   component: SidePanel,
 });
 
