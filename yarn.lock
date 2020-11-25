@@ -4301,11 +4301,6 @@
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/preset-scss@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@storybook/preset-scss/-/preset-scss-1.0.3.tgz#8ac834545c642dada0f64f510ef08dfb882e9737"
-  integrity sha512-o9Iz6wxPeNENrQa2mKlsDKynBfqU2uWaRP80HeWp4TkGgf7/x3DVF2O7yi9N0x/PI1qzzTTpxlQ90D62XmpiTw==
-
 "@storybook/react@^6.1.3":
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.1.3.tgz#558311ea377719d30b118c51c6ad2b8a0efc8971"
