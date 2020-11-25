@@ -19,7 +19,6 @@ module.exports = {
     'storybook-readme',
     '@storybook/addon-knobs',
     '@storybook/addon-storysource',
-    '@storybook/preset-scss',
   ],
   webpackFinal: async config => {
     // Convert mdx links to point to github
@@ -45,6 +44,22 @@ module.exports = {
         },
       ],
       enforce: 'pre',
+    });
+
+    // Load our scss files with postscss.
+    // Note: This is the same as @storybook/preset-scss, but with postcss added.
+    config.module.rules.push({
+      test: /\.(scss|css)$/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {importLoaders: 2},
+        },
+        'postcss-loader',
+        'sass-loader',
+      ],
+      include: modulesPath,
     });
 
     config.plugins.push(new DocgenPlugin());
