@@ -2272,7 +2272,7 @@
   dependencies:
     "@emotion/memoize" "0.7.4"
 
-"@emotion/is-prop-valid@0.8.8", "@emotion/is-prop-valid@^0.8.6":
+"@emotion/is-prop-valid@^0.8.6":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
   integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
@@ -2307,16 +2307,6 @@
   dependencies:
     "@babel/runtime" "^7.5.5"
     "@emotion/is-prop-valid" "0.8.7"
-    "@emotion/serialize" "^0.11.15"
-    "@emotion/utils" "0.11.3"
-
-"@emotion/styled-base@^10.0.28":
-  version "10.0.31"
-  resolved "https://registry.yarnpkg.com/@emotion/styled-base/-/styled-base-10.0.31.tgz#940957ee0aa15c6974adc7d494ff19765a2f742a"
-  integrity sha512-wTOE1NcXmqMWlyrtwdkqg87Mu6Rj1MaukEoEmEkHirO5IoHDJ8LgCQL4MjJODgxWxXibGR3opGp1p7YvkNEdXQ==
-  dependencies:
-    "@babel/runtime" "^7.5.5"
-    "@emotion/is-prop-valid" "0.8.8"
     "@emotion/serialize" "^0.11.15"
     "@emotion/utils" "0.11.3"
 
