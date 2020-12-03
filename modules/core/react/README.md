@@ -417,22 +417,22 @@ will remove itself from the DOM (rendering only its children) and not attach any
 
 ##### `container: HTMLElement | React.RefObject<HTMLElement>`
 
-> The containing element in which the InputProvider attaches its data attributes. This property should
-> be set to an element that is an ancestor of all your Canvas components.
+> The containing element in which the InputProvider attaches its data attributes. This property
+> should be set to an element that is an ancestor of all your Canvas components.
 
-Default: `document.body` 
+Default: `document.body`
 
 ### Storybook Decorator
 
 We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
 stories in an `InputProvider` automatically.
 
-Add this decorator to your `/.storybook/config.js` configuration file to apply to all stories:
+Add this decorator to your `/.storybook/preview.js` configuration file to apply to all stories:
 
 ```js
 import {InputProviderDecorator} from '../utils/storybook';
 
-addDecorator(InputProviderDecorator);
+export const decorators = [InputProviderDecorator];
 ```
 
 Or, add it to stories individually:
@@ -440,7 +440,13 @@ Or, add it to stories individually:
 ```js
 import {InputProviderDecorator} from '../../../../utils/storybook';
 
-storiesOf('My Story', module)
-  .addDecorator(InputProviderDecorator)
-  .add('All', () => <YourJSX />);
+export default {
+  title: 'MyComponent',
+  component: MyComponent,
+  decorators: [InputProviderDecorator],
+};
+
+// OR
+
+MyStory.decorators = [InputProviderDecorator];
 ```

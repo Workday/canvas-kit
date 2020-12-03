@@ -11,7 +11,7 @@ describe('Form Field', () => {
 
   context(`given the Default story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Form Field/React', 'Default');
+      h.stories.load('Components/Inputs/Form Field/React', 'Default');
     });
 
     it('should pass accessibility checks', () => {
@@ -32,7 +32,7 @@ describe('Form Field', () => {
   ['Hint Alert', 'Hint Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components|Inputs/Form Field/React', story);
+        h.stories.load('Components/Inputs/Form Field/React', story);
       });
 
       it('should pass accessibility and connect the input with the hint text', () => {
@@ -44,7 +44,7 @@ describe('Form Field', () => {
 
   context(`given the Label Required story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Form Field/React', 'Label Required');
+      h.stories.load('Components/Inputs/Form Field/React', 'Label Required');
     });
 
     it('should pass accessibility and connect the input with the hint text', () => {

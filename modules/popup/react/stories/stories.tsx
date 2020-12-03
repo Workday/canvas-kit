@@ -14,7 +14,7 @@ import {
 import README from '../README.md';
 
 export default {
-  title: 'Components|Popups/Popup/React',
+  title: 'Components/Popups/Popup/React',
   component: Popup,
   decorators: [withReadme(README)],
 };

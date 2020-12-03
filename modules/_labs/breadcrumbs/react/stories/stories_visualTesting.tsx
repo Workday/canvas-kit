@@ -13,7 +13,7 @@ import {useDropdown} from '../lib/Breadcrumbs/Dropdown/hooks';
 import {DropdownMenu} from '../lib/Breadcrumbs/Dropdown/Menu';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Breadcrumbs',
+  title: 'Testing/React/Labs/Breadcrumbs',
   component: Breadcrumbs,
   decorators: [withReadme(README)],
 });

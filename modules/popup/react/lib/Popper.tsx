@@ -91,7 +91,7 @@ const getElementFromRefOrElement = (
 
 const createSetPlacementModifier = (
   setPlacement: (placement: Placement) => void
-): PopperJS.Modifier<any> => {
+): PopperJS.Modifier<any, any> => {
   return {
     name: 'setPlacement',
     enabled: true,

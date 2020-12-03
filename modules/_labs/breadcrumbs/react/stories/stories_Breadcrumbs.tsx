@@ -8,7 +8,7 @@ import README from '../README.md';
 import {Breadcrumbs} from '../lib/Breadcrumbs';
 
 export default {
-  title: 'Labs|Breadcrumbs/React',
+  title: 'Labs/Breadcrumbs/React',
   decorators: [withReadme(README)],
 };
 

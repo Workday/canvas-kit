@@ -220,16 +220,7 @@ const scrollIntoViewIfNeeded = (elem: HTMLElement, centerIfNeeded = true): void 
   }
 };
 
-export default class MenuItem extends React.Component<MenuItemProps> {
-  /**
-   * If we destructure props, shouldClose will be undefined because the value is only applied for the render method only.
-   * We have to use defaultProps so that the value of shouldClose is applied for every method and therefore references in the Menu component.
-   * For reference: https://github.com/Workday/canvas-kit/blob/f6d4d29e9bb2eb2af0b204e6f4ce2e5ed5a98e57/modules/_labs/menu/react/lib/Menu.tsx#L259,
-   */
-  static defaultProps = {
-    shouldClose: true,
-    role: 'menuitem',
-  };
+class MenuItem extends React.Component<MenuItemProps> {
   ref = React.createRef<HTMLLIElement>();
 
   componentDidUpdate = (prevProps: MenuItemProps) => {
@@ -290,3 +281,17 @@ export default class MenuItem extends React.Component<MenuItemProps> {
     }
   };
 }
+
+/**
+ * If we destructure props, shouldClose will be undefined because the value is only applied for the render method only.
+ * We have to use defaultProps so that the value of shouldClose is applied for every method and therefore references in the Menu component.
+ * For reference: https://github.com/Workday/canvas-kit/blob/f6d4d29e9bb2eb2af0b204e6f4ce2e5ed5a98e57/modules/_labs/menu/react/lib/Menu.tsx#L259,
+ */
+// TODO: Remove this ts-ignore when we convert to a functional component
+// @ts-ignore
+MenuItem.defaultProps = {
+  shouldClose: true,
+  role: 'menuitem',
+};
+
+export default MenuItem;

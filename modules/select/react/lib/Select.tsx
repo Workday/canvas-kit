@@ -117,7 +117,7 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
   })
 );
 
-export default class Select extends React.Component<SelectProps> {
+class Select extends React.Component<SelectProps> {
   static ErrorType = ErrorType;
 
   public render() {
@@ -145,3 +145,7 @@ export default class Select extends React.Component<SelectProps> {
     );
   }
 }
+
+Select.ErrorType = ErrorType;
+
+export default Select;

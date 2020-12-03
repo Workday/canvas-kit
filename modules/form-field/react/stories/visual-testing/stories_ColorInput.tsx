@@ -5,13 +5,14 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 
 import {ColorInput} from '../../../../color-picker/react';
 import FormField from '../../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Color Picker/Color Input',
+  title: 'Testing/React/Inputs/Color Picker/Color Input',
   component: ColorInput,
 });
 
@@ -75,3 +76,10 @@ export const ColorInputStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const ColorInputThemedStates = () => <ColorInputStates />;
+ColorInputThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

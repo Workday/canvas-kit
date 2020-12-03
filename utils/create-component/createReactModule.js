@@ -27,8 +27,8 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
   const rootPath = unstable ? '../../../..' : '../../..';
-  const storyPath = `${unstable ? 'Labs|' : `Components|${category}/`}${titleCaseName}/React`;
-  const testingStoryPath = `Testing|React/${unstable ? 'Labs' : category}/${titleCaseName}`;
+  const storyPath = `${unstable ? 'Labs/' : `Components/${category}/`}${titleCaseName}/React`;
+  const testingStoryPath = `Testing/React/${unstable ? 'Labs' : category}/${titleCaseName}`;
 
   const files = {
     package: {

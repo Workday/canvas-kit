@@ -22,7 +22,7 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
   mkdirp.sync(modulePath);
 
   const titleCaseName = getTitleCaseName(name);
-  const storyPath = `${unstable ? 'Labs|' : `Components|${category}/`}${titleCaseName}/CSS`;
+  const storyPath = `${unstable ? 'Labs/' : `Components/${category}/`}${titleCaseName}/CSS`;
 
   const files = {
     package: {

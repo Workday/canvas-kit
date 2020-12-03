@@ -12,7 +12,7 @@ import testAvatar from './test-avatar.png';
 
 const handleAvatarButtonClick = action('AvatarButton clicked');
 
-storiesOf('Components|Indicators/Avatar/React/Default', module)
+storiesOf('Components/Indicators/Avatar/React/Default', module)
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .addParameters({component: Avatar})
@@ -65,7 +65,7 @@ storiesOf('Components|Indicators/Avatar/React/Default', module)
     </div>
   ));
 
-storiesOf('Components|Indicators/Avatar/React/Avatar Button', module)
+storiesOf('Components/Indicators/Avatar/React/Avatar Button', module)
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
   .addParameters({component: Avatar})

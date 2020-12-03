@@ -27,7 +27,7 @@ class IconDemo extends Component {
   }
 }
 
-storiesOf('Tokens|Icon/CSS', module)
+storiesOf('Tokens/Icon/CSS', module)
   .addDecorator(withReadme(README))
   .add('Accent Icon', () => (
     <div className="story">

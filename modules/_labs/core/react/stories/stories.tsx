@@ -16,7 +16,7 @@ const inverseStyle = {
 };
 
 export default {
-  title: 'Labs|Core/React',
+  title: 'Labs/Core/React',
   decorators: [withReadme(README)],
 };
 

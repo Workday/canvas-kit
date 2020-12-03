@@ -41,7 +41,7 @@ class IconDemo extends Component {
   }
 }
 
-storiesOf('Components|Buttons/Button/CSS', module)
+storiesOf('Components/Buttons/Button/CSS', module)
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
@@ -152,7 +152,7 @@ storiesOf('Components|Buttons/Button/CSS', module)
     </div>
   ));
 
-storiesOf('Components|Buttons/Button/CSS/Dropdown', module)
+storiesOf('Components/Buttons/Button/CSS/Dropdown', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -172,7 +172,7 @@ storiesOf('Components|Buttons/Button/CSS/Dropdown', module)
     </div>
   ));
 
-storiesOf('Components|Buttons/Button/CSS/Text', module)
+storiesOf('Components/Buttons/Button/CSS/Text', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
@@ -256,7 +256,7 @@ storiesOf('Components|Buttons/Button/CSS/Text', module)
     </div>
   ));
 
-storiesOf('Components|Buttons/Button/CSS/Deprecated', module)
+storiesOf('Components/Buttons/Button/CSS/Deprecated', module)
   .addDecorator(withReadme(README))
   .add('Primary', () => (
     <div className="story">
@@ -384,7 +384,7 @@ storiesOf('Components|Buttons/Button/CSS/Deprecated', module)
     </div>
   ));
 
-storiesOf('Components|Buttons/Button/CSS/Icon Button', module)
+storiesOf('Components/Buttons/Button/CSS/Icon Button', module)
   .addDecorator(withReadme(README))
   .add('Square', () => (
     <div className="story">

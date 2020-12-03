@@ -37,7 +37,7 @@ const fadeOut = keyframes`
   }
 `;
 
-storiesOf('Components|Indicators/Skeleton/React', module)
+storiesOf('Components/Indicators/Skeleton/React', module)
   .addParameters({component: Skeleton})
   .addDecorator(withReadme(README))
   .add('Complete', () => {

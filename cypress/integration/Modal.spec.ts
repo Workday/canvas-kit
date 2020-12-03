@@ -12,7 +12,7 @@ describe('Modal', () => {
   ['Default', 'WithoutHook'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components|Popups/Modal/React', story);
+        h.stories.load('Components/Popups/Modal/React', story);
       });
 
       it('should not have any axe errors', () => {
@@ -164,7 +164,7 @@ describe('Modal', () => {
 
   context(`given the 'With Radio buttons' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Modal/React', 'With Radio buttons');
+      h.stories.load('Components/Popups/Modal/React', 'With Radio buttons');
     });
 
     it('should not have any axe errors', () => {
@@ -192,7 +192,7 @@ describe('Modal', () => {
 
   context(`given the 'Without close icon' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Modal/React', 'Without close icon');
+      h.stories.load('Components/Popups/Modal/React', 'Without close icon');
     });
 
     it('should not have any axe errors', () => {
@@ -329,7 +329,7 @@ describe('Modal', () => {
 
   context(`given the 'Custom focus' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Modal/React', 'Custom focus');
+      h.stories.load('Components/Popups/Modal/React', 'Custom focus');
     });
 
     context('when button is focused', () => {
@@ -420,7 +420,7 @@ describe('Modal', () => {
 
   context(`given the 'StackedModals' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing|React/Popups/Modal', 'StackedModals');
+      h.stories.load('Testing/React/Popups/Modal', 'StackedModals');
     });
 
     context('when both modals are opened', () => {
@@ -467,7 +467,7 @@ describe('Modal', () => {
 
   context(`given the 'ModalWithPopup' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing|React/Popups/Modal', 'ModalWithPopup');
+      h.stories.load('Testing/React/Popups/Modal', 'ModalWithPopup');
     });
 
     context('when both modal and popup are opened', () => {

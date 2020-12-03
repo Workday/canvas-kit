@@ -17,7 +17,7 @@ const control = (child: React.ReactNode) => (
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
+storiesOf('Components/Inputs/Checkbox/React/Top Label', module)
   .addParameters({component: Checkbox})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -58,7 +58,7 @@ storiesOf('Components|Inputs/Checkbox/React/Top Label', module)
     </FormField>
   ));
 
-storiesOf('Components|Inputs/Checkbox/React/Left Label', module)
+storiesOf('Components/Inputs/Checkbox/React/Left Label', module)
   .addParameters({component: Checkbox})
   .addDecorator(withReadme(README))
   .add('Default', () => (
