@@ -3,3 +3,4 @@ export * from './getTranslateFromOrigin';
 export * from './makeMq';
 export * from './mergeCallback';
 export * from './useUniqueId';
+export * from './assert';

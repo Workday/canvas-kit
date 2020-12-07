@@ -2,8 +2,9 @@ import * as React from 'react';
 import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react-core';
 import {focusRing, hideMouseFocus, styled} from '@workday/canvas-kit-react-common';
 import {useTab} from './Tabs';
+import {getLast} from './list';
 
-export interface TabProps extends React.HTMLAttributes<HTMLElement> {
+export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * The label text of the Tab.
    */
@@ -72,52 +73,47 @@ const StyledButton = styled('button')<{isSelected: boolean}>(
 );
 
 const Tab = ({name = '', children, ...elemProps}: TabProps) => {
-  const {
-    id,
-    intentTab,
-    resetIntentTab,
-    activeTab,
-    setActiveTab,
-    setSelectedTabRect,
-    registerTab,
-    unregisterTab,
-  } = useTab();
+  const {state, events} = useTab();
   const tabRef = React.useRef<HTMLButtonElement>(null);
   const [tabName, setTabName] = React.useState(name);
 
   // useLayoutEffect because we don't want to render with incorrect ID
   React.useLayoutEffect(() => {
     const tabElement = tabRef.current as HTMLElement;
-    const tabName = registerTab(tabElement, name);
+    // const tabName = registerTab(tabElement, name);
+    const nextState = events.registerTab({element: tabElement});
+    const tabName = getLast(nextState.context.items).id;
     setTabName(tabName);
 
     return () => {
-      unregisterTab(tabElement);
+      events.unregisterTab(tabName);
     };
-  }, [name, registerTab, unregisterTab]);
+  }, [name, events]);
 
   const onSelect = () => {
-    setActiveTab(tabName);
+    events.activateTab(tabName);
   };
 
-  const isSelected = !!tabName && activeTab === tabName;
+  const isSelected = !!tabName && state.context.activeTab === tabName;
 
-  React.useLayoutEffect(() => {
-    if (isSelected && tabRef.current) {
-      setSelectedTabRect(tabRef.current.getBoundingClientRect());
-    }
-  }, [isSelected, tabRef, setSelectedTabRect, tabName, intentTab]);
+  // React.useLayoutEffect(() => {
+  //   if (isSelected && tabRef.current) {
+  //     setSelectedTabRect(tabRef.current.getBoundingClientRect());
+  //   }
+  // }, [isSelected, tabRef, setSelectedTabRect]);
 
   return (
     <StyledButton
       ref={tabRef}
       role="tab"
-      id={`tab-${id}-${tabName}`}
-      tabIndex={!!tabName && intentTab === tabName ? undefined : -1}
+      id={`tab-${state.context.id}-${tabName}`}
+      tabIndex={!!tabName && state.context.intentTab === tabName ? undefined : -1}
       aria-selected={isSelected ? true : undefined}
-      aria-controls={`tabpanel-${id}-${tabName}`}
+      aria-controls={`tabpanel-${state.context.id}-${tabName}`}
       onClick={onSelect}
-      onBlur={resetIntentTab}
+      onBlur={() => {
+        events.resetIntentTab();
+      }}
       isSelected={isSelected}
       {...elemProps}
     >

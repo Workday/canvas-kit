@@ -4226,6 +4226,11 @@
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.8.tgz#54026b4e6ea79861b12837a7deb83db9a16caad4"
   integrity sha512-5rYCg67W43ueng4KgRC69ZKbzl7EfO8Y3uSbs+pYJO3Qbb65yRF841Fz9SZTyuHrDpEiFMAI9s1laqLG56Bb1w==
 
+"@xstate/fsm@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@xstate/fsm/-/fsm-1.5.1.tgz#b1ebedc77b11e4956fda0a6429cef986cd17979e"
+  integrity sha512-t8blLI0e90jCE71yUQHLH5uEljD1v0aC8PKkHUtNWEnXt81EOj7xBjnlwmaHn/8cmE2aSygiBElUpkRZUV9hXA==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"

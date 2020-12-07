@@ -4,6 +4,7 @@ describe('Tabs', () => {
   before(() => {
     h.stories.visit();
   });
+
   ['Simple', 'NamedKeys'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
@@ -211,6 +212,30 @@ describe('Tabs', () => {
           it('should set "tabindex=-1" on the last tab', () => {
             cy.findByRole('tab', {name: 'Fifth Tab'}).should('have.attr', 'tabindex', '-1');
           });
+        });
+      });
+    });
+  });
+
+  context('given the DisabledTab story is rendered', () => {
+    beforeEach(() => {
+      cy.loadStory('Testing/React/Labs/Tabs', 'DisabledTab');
+    });
+
+    context('when the first tab is active and focused', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'First Tab'})
+          .click()
+          .focus();
+      });
+
+      context('when the right arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{rightarrow}');
+        });
+
+        it('should skip over the second tab and focus on the third tab', () => {
+          cy.findByRole('tab', {name: 'Third Tab'}).should('have.focus');
         });
       });
     });

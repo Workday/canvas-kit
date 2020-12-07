@@ -3,6 +3,7 @@ import {spacing, commonColors} from '@workday/canvas-kit-react-core';
 import styled from '@emotion/styled';
 import {useTab} from './Tabs';
 import {TabProps} from './Tab';
+import {getItem} from './list';
 
 type Tab = React.ReactElement<TabProps>;
 
@@ -28,27 +29,36 @@ const TabsListInnerContainer = styled('div')({
 const TabList = ({children, ...elemProps}: TabListProps) => {
   const tabsListRef = React.useRef<HTMLDivElement>(null);
   // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
-  const {setIntentTab, setActiveTab, intentTab, programmaticFocusRef} = useTab();
+  const {state, events} = useTab();
+
+  const focusTab = (nextState: typeof state) => {
+    getItem(nextState.context.intentTab, nextState.context.items).element.focus();
+  };
 
   const onKeyDown = (event: React.KeyboardEvent) => {
+    let nextState;
     switch (event.key) {
       case 'ArrowLeft':
       case 'Left':
-        setIntentTab('previous');
+        nextState = events.setIntentTab('previous');
+        focusTab(nextState);
         break;
       case 'ArrowRight':
       case 'Right':
-        setIntentTab('next');
+        nextState = events.setIntentTab('next');
+        focusTab(nextState);
         break;
       case 'Home':
-        setIntentTab('first');
+        nextState = events.setIntentTab('first');
+        focusTab(nextState);
         break;
       case 'End':
-        setIntentTab('last');
+        nextState = events.setIntentTab('last');
+        focusTab(nextState);
         break;
       case 'Enter':
       case ' ':
-        setActiveTab(intentTab);
+        events.activateTab(state.context.intentTab);
         event.preventDefault(); // prevent clicking this button
         break;
       default:
@@ -56,16 +66,16 @@ const TabList = ({children, ...elemProps}: TabListProps) => {
     }
   };
 
-  const resetProgrammaticFocus = () => {
-    programmaticFocusRef.current = false;
-  };
+  React.useLayoutEffect(() => {
+    events.initializeTab(state.context.initialTab);
+  }, []);
 
   return (
     <TabsListContainer ref={tabsListRef}>
       <TabsListInnerContainer
         role="tablist"
         onKeyDown={onKeyDown}
-        onFocus={resetProgrammaticFocus}
+        onFocus={events.resetProgrammaticFocus}
         {...elemProps}
       >
         {children}
