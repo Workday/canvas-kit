@@ -1,6 +1,6 @@
 # Canvas Kit Labs
 
-This is a group of unstable/work-in-progress components. Canvas Kit Labs is an incubator for new and
+This is a group of work-in-progress components. Canvas Kit Labs is an incubator for new and
 experimental components. Since we have a rather rigorous process for getting components in at a
 production level, it can be valuable to make them available earlier while we continuously iterate on
 the API/functionality. The Labs modules allow us to do that as needed.
@@ -36,7 +36,7 @@ ultimately performing a migration when components are promoted to a stable versi
 ## Creating a Canvas Kit Labs Module
 
 1. Run `yarn create-module`
-2. When asked `Is this an unstable component? [Y/n]`, enter `y` or `Y`.
+2. When asked `What category should this component live in?`, select `Labs (beta)`.
 3. Your new module will be generated in accordance with the file structure above. It will get a
    package name of `@workday/canvas-kit-labs-<TARGET>-<COMPONENT>`.
 4. If you had the storybook server running, you may need to restart it.
