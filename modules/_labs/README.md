@@ -47,7 +47,7 @@ ultimately performing a migration when components are promoted to a stable versi
 2. Change the package name in `package.json` to `@workday/canvas-kit-labs-<TARGET>-<COMPONENT>`
 3. Add a warning to the README:
    > <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
-   >   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
+   >   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
    > </a>  This component is work in progress and currently in pre-release.
 4. Update any necessary paths (links to storybook utils, tsconfig, etc.)
 5. Change the storybook path to add a `Labs` prefix (e.g. `Labs/Menu/Default`)
