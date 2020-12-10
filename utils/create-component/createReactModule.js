@@ -50,7 +50,7 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
     },
     testingStories: {
       path: 'stories/stories_VisualTesting.tsx',
-      contents: testingStories(testingStoryPath, pascalCaseName, rootPath),
+      contents: testingStories(testingStoryPath, pascalCaseName, rootPath, unstable),
     },
     ssr: {
       path: 'spec/SSR.spec.tsx',
