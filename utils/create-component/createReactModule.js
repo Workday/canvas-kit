@@ -1,5 +1,6 @@
 const mkdirp = require('mkdirp');
-const exec = require('child_process');
+const {exec} = require('child_process');
+
 require('colors');
 
 const writeModuleFiles = require('./writeModuleFiles');

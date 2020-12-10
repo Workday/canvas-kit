@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
-const exec = require('child_process');
+const {exec} = require('child_process');
 
 require('colors');
 
@@ -95,7 +95,7 @@ const createModule = (componentPath, target, moduleGenerator, answers, unstable)
   const modulePath = path.join(componentPath, target);
 
   if (fs.existsSync(modulePath)) {
-    const moduleName = `Module @workday/canvas-kit-${unstable ? 'labs-' : ''}${target}-${name}`;
+    const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}${target}-${name}`;
     console.log(`\nModule ${moduleName} already exists. Skipping.`.yellow);
   } else {
     moduleGenerator(modulePath, name, description, unstable, publicModule, category);
