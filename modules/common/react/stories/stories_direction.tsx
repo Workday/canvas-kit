@@ -15,11 +15,11 @@ const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'ico
   title: 'Activity Stream',
 };
 
-storiesOf('Tokens|Common/Theming', module)
+storiesOf('Tokens/Common/Theming', module)
   .addDecorator(withReadme(README))
   .add('Direction', () => (
     <div className="story">
-      <section>
+      <section className="story">
         <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
           <Card heading="مشغل وسائط" style={{width: '186px'}}>
             <CanvasProvider theme={{canvas: {direction: ContentDirection.LTR}}}>

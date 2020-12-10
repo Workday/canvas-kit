@@ -8,7 +8,7 @@ import README from '../README.md';
 import {PopupStack} from '../lib/PopupStack';
 
 export default {
-  title: 'Components|Popups/Popup Stack',
+  title: 'Components/Popups/Popup Stack',
   decorators: [withReadme(README)],
 };
 

@@ -80,6 +80,10 @@ const Container = styled('div')({
   background: 'rgba(0,0,0,0.65)',
   animationName: `${fadeIn}`,
   animationDuration: '0.3s',
+  // Allow overriding of animation in special cases
+  '.wd-no-animation &': {
+    animation: 'none',
+  },
 });
 
 // This centering container helps fix an issue with Chrome. Chrome doesn't normally do subpixel

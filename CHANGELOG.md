@@ -3,6 +3,120 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.4.2 (2020-12-09)
+
+### Components
+- fix(menu): Remove minimum width and collapse around the content ([#922](https://github.com/Workday/canvas-kit/pull/922)) [@willklein](https://github.com/willklein)
+- fix(common): Fix mouseFocusBehavior type issue ([#926](https://github.com/Workday/canvas-kit/pull/926)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+- feat: Upgrade Storybook to v6.1.3 ([#897](https://github.com/Workday/canvas-kit/pull/897)) [@anicholls](https://github.com/anicholls)
+- fix: Add Emotion dependency to fix transient dep issue ([#917](https://github.com/Workday/canvas-kit/pull/917)) [@anicholls](https://github.com/anicholls)
+- fix: Re-enable postcss for storybook builds to transpile svg-load ([#919](https://github.com/Workday/canvas-kit/pull/919)) [@anicholls](https://github.com/anicholls)
+
+# 4.4.1 (2020-11-20)
+
+### Components
+- fix(color-picker): Detect different formats of #ffffff ([#884](https://github.com/Workday/canvas-kit/pull/884)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(popup): Fix usePopup hook example docs ([#911](https://github.com/Workday/canvas-kit/pull/911)) [@Parker-Ledoux](https://github.com/Parker-Ledoux)
+- fix(select): Allow a single option ([#914](https://github.com/Workday/canvas-kit/pull/914)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+- ci: Use exec instead of node-cmd ([#908](https://github.com/Workday/canvas-kit/pull/908)) [@lychyi](https://github.com/lychyi)
+- chore: Fix create component scripts ([#912](https://github.com/Workday/canvas-kit/pull/912)) [@Parker-Ledoux](https://github.com/Parker-Ledoux)
+
+# 4.4.0 (2020-11-13)
+
+### Components
+- feat: Add SidePanel to labs ([#866](https://github.com/Workday/canvas-kit/pull/866)) [@lychyi](https://github.com/lychyi)
+- fix(button): Fix accent colors on IconButton when toggled on ([#895](https://github.com/Workday/canvas-kit/pull/895)) [@jamesfan](https://github.com/jamesfan)
+- fix(side-panel): Update Toggle spacing ([#902](https://github.com/Workday/canvas-kit/pull/902)) [@lychyi](https://github.com/lychyi)
+- feat(labs): Add Tabs component ([#569](https://github.com/Workday/canvas-kit/pull/569)) [@darcar31](https://github.com/darcar31)
+
+### Infrastructure
+- docs: Remove universal selector for section elements ([#896](https://github.com/Workday/canvas-kit/pull/896)) [@lychyi](https://github.com/lychyi)
+- chore: Update publish-canary.js [@lychyi](https://github.com/lychyi)
+- ci: Increase buffer size for publish cmd ([#903](https://github.com/Workday/canvas-kit/pull/903)) [@lychyi](https://github.com/lychyi)
+
+### Notes
+With the #895, if you're using a toggleable `IconButton` component, you will experience visual diffs for the following icons (they were not rendering properly prior, they should now look correct when "toggled" on):
+
+```
+adHocDelivery
+alarmClockPlus
+alarmClock
+boxPlus
+boxTextCheck
+boxTextPlus
+boxTextSearch
+boxTextUser
+cArea100
+cAreaLayered
+cAreaStacked
+cBar100
+cBarClustered
+cBarStacked
+cBubble
+cColumn100
+cColumnClustered
+cColumnLine
+cColumnStacked
+cDualLine
+cPie
+cScatter
+calendarUser
+cameraPlus
+cardView
+clipboardBlankCheck
+clipboardCheck
+commentActive
+dashboardExpenses
+documentCandidateSearch
+documentsCheck
+flashAuto
+fontSize
+highlight
+jobInfo
+lockPlus
+manageDelivery
+orderedList
+pill
+qrCode
+receipts
+region
+reportParameter
+rowsCheck
+rowsPlus
+select
+timeOffBalance
+time
+timelinePerson
+unlink
+userForward
+userPlus
+workbook
+```
+#### Before Fix
+
+![image](https://user-images.githubusercontent.com/146020/97763546-27001e80-1ac9-11eb-854d-58e2fd94637e.png)
+
+#### After Fix
+
+![image](https://user-images.githubusercontent.com/146020/97763552-2a93a580-1ac9-11eb-9988-6eb468fdfeef.png)
+
+
+# 4.3.1 (2020-10-22)
+
+### Components
+- refactor(select): Convert more of Select to FC and improve code style ([#827](https://github.com/Workday/canvas-kit/pull/827)) [@jamesfan](https://github.com/jamesfan)
+- fix(popup): Cannot read property 'createContainer' of undefined ([#889](https://github.com/Workday/canvas-kit/pull/889)) [@mannycarrera4](https://github.com/mannycarrera4)
+- fix(modal): Add exception to modal enter animation ([#867](https://github.com/Workday/canvas-kit/pull/867)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(menu): Update MenuItem icon styles ([#885](https://github.com/Workday/canvas-kit/pull/885)) [@alanbsmith](https://github.com/alanbsmith)
+
+### Infrastructure
+- docs: Fix broken links in Storybook ([#876](https://github.com/Workday/canvas-kit/pull/876)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+
 # 4.3.0 (2020-10-09)
 
 ### Components

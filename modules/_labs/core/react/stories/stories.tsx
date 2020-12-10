@@ -16,12 +16,12 @@ const inverseStyle = {
 };
 
 export default {
-  title: 'Labs|Core/React',
+  title: 'Labs/Core/React',
   decorators: [withReadme(README)],
 };
 
 export const Type = () => (
-  <section>
+  <section className="story">
     <h1 style={type.brand1}>Brand 1 Header</h1>
     <h2 style={type.brand2}>Brand 2 header</h2>
     <h1 style={type.h1}>H1 Header</h1>

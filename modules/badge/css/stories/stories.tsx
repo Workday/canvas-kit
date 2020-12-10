@@ -4,7 +4,7 @@ import README from '../README.md';
 import '../index.scss';
 
 export default {
-  title: 'Components|Indicators/Badge/CountBadge/CSS/',
+  title: 'Components/Indicators/Badge/CountBadge/CSS',
   decorators: [withReadme(README)],
 };
 

@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "10"
+  - "12"
 
 cache:
   npm: false # Caching npm makes yarn install faster but downloading and packaging up the cache makes this slower when enabled
@@ -40,7 +40,8 @@ jobs:
     script:
       - >- # Chromatic relies on a built Storybook, so exit early if build-storybook fails
         yarn build-storybook --quiet &&
-        yarn chromatic --quiet --auto-accept-changes --exit-once-uploaded --storybook-build-dir docs
+        yarn chromatic --quiet --auto-accept-changes --exit-once-uploaded --storybook-build-dir docs &&
+        npx sb extract docs docs/stories.json
       - yarn build
     after_failure:
       - node utils/report-failure.js

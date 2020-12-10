@@ -7,7 +7,7 @@ describe('Avatar', () => {
 
   context('given default avatar light is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components|Indicators/Avatar/React/Default', 'Light');
+      h.stories.load('Components/Indicators/Avatar/React/Default', 'Light');
     });
 
     it('should not have any axe errors', () => {
@@ -17,7 +17,7 @@ describe('Avatar', () => {
 
   context('given avatar button light is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components|Indicators/Avatar Button/React/Default', 'Light');
+      h.stories.load('Components/Indicators/Avatar Button/React/Default', 'Light');
     });
 
     it('should not have any axe errors', () => {
@@ -27,7 +27,7 @@ describe('Avatar', () => {
 
   context('given avatar button image is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components|Indicators/Avatar/React/Avatar Button', 'Image');
+      h.stories.load('Components/Indicators/Avatar/React/Avatar Button', 'Image');
     });
 
     it('should not have any axe errors', () => {

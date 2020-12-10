@@ -3,10 +3,9 @@
 
 const fs = require('fs');
 const {promisify} = require('util');
-const cmd = promisify(require('node-cmd').get);
+const exec = promisify(require('child_process').exec);
 const mkdirp = require('mkdirp');
 const path = require('path');
-const colors = require('colors');
 const inquirer = require('inquirer');
 const glob = require('glob');
 const replaceInFiles = require('replace-in-files');
@@ -68,8 +67,8 @@ inquirer.prompt(questions).then(answers => {
         `modules/${component}`.cyan
     );
 
-    cmd(`git mv ${srcPath}/${target} ${destPath}`)
-      .then(output => {
+    exec(`git mv ${srcPath}/${target} ${destPath}`)
+      .then(() => {
         glob(`${destPath}/${target}/**/*`, async (err, files) => {
           if (err) {
             console.log('Error', err);
@@ -101,7 +100,7 @@ inquirer.prompt(questions).then(answers => {
               })
               .pipe({
                 from: `storiesOf('Labs/`,
-                to: `storiesOf('Components|${answers.category}/`,
+                to: `storiesOf('Components/${answers.category}/`,
               });
           } catch (error) {
             console.log('Error occurred:', error);

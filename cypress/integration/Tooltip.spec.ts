@@ -7,7 +7,7 @@ describe('Tooltip', () => {
 
   context('given Default is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Tooltip/React', 'Default');
+      h.stories.load('Components/Popups/Tooltip/React', 'Default');
     });
 
     it('should not have any axe errors', () => {
@@ -90,7 +90,7 @@ describe('Tooltip', () => {
 
   context('given Describe Type is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Tooltip/React', 'Describe Type');
+      h.stories.load('Components/Popups/Tooltip/React', 'Describe Type');
     });
 
     it('should not have any axe errors', () => {

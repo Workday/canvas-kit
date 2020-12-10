@@ -6,7 +6,7 @@ import {chartConfigIcon, filterIcon} from '@workday/canvas-system-icons-web';
 import README from './README.md';
 import './index.scss';
 
-storiesOf('Components|Containers/Table/CSS', module)
+storiesOf('Components/Containers/Table/CSS', module)
   .addDecorator(withReadme(README))
   .add('All', () => (
     <div className="story">

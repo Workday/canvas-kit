@@ -34,7 +34,7 @@ const getAriaLabels = () => ({
   nextPageAriaLabel: text('nextPageAriaLabel', 'Next Page'),
 });
 
-storiesOf('Labs|Pagination/React', module)
+storiesOf('Labs/Pagination/React', module)
   .addParameters({
     component: Pagination,
   })

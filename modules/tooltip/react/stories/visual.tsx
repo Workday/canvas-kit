@@ -6,7 +6,7 @@ import {Card} from '@workday/canvas-kit-react-card';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Popups/Tooltip',
+  title: 'Testing/React/Popups/Tooltip',
 });
 
 export const Placements = () => {

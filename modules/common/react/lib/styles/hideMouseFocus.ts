@@ -1,4 +1,4 @@
-import {CSSObject} from '@emotion/core';
+import {CSSObject, Interpolation} from '@emotion/core';
 
 /**
  * A utility to hide the default canvas style focus ring when using mouse input.
@@ -14,8 +14,6 @@ export const hideMouseFocus: CSSObject = {
   },
 };
 
-type IndexableObject = {[key: string]: object};
-
 /*
  * A utility that simplifies focus selectors since you can't use nested syntax for some reason. Example:
  * [`[data-whatinput="mouse"],
@@ -26,8 +24,10 @@ type IndexableObject = {[key: string]: object};
        }
    },
  */
-export const mouseFocusBehavior = (selectors: IndexableObject) => {
-  const output: IndexableObject = {};
+export const mouseFocusBehavior = (
+  selectors: Record<string, Interpolation>
+): Record<string, Interpolation> => {
+  const output: Record<string, Interpolation> = {};
 
   Object.keys(selectors).map((selector, index) => {
     selector.split(',').forEach(selectorPart => {

@@ -7,7 +7,7 @@ import {ColorPreview} from '../../../color-picker/react';
 import FormField from '../index';
 import README from '../../../color-picker/react/README.md';
 
-storiesOf('Components|Inputs/Color Picker/Color Preview/React/Top Label', module)
+storiesOf('Components/Inputs/Color Picker/Color Preview/React/Top Label', module)
   .addParameters({component: ColorPreview})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -16,7 +16,7 @@ storiesOf('Components|Inputs/Color Picker/Color Preview/React/Top Label', module
     </FormField>
   ));
 
-storiesOf('Components|Inputs/Color Picker/Color Preview/React/Left Label', module)
+storiesOf('Components/Inputs/Color Picker/Color Preview/React/Left Label', module)
   .addParameters({component: ColorPreview})
   .addDecorator(withReadme(README))
   .add('Default', () => (

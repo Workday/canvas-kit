@@ -1,6 +1,8 @@
 const path = require('path');
 const mkdirp = require('mkdirp');
-const cmd = require('node-cmd');
+const {exec} = require('child_process');
+
+require('colors');
 
 const writeModuleFiles = require('./writeModuleFiles');
 const getTitleCaseName = require('./nameUtils').getTitleCaseName;
@@ -21,7 +23,7 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
   mkdirp.sync(modulePath);
 
   const titleCaseName = getTitleCaseName(name);
-  const storyPath = `${unstable ? 'Labs|' : `Components|${category}/`}${titleCaseName}/CSS`;
+  const storyPath = `${unstable ? 'Labs/' : `Components/${category}/`}${titleCaseName}/CSS`;
 
   const files = {
     package: {
@@ -49,5 +51,5 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
   writeModuleFiles(files, modulePath);
 
   console.log('Copying License file to ' + `.${modulePath.replace(cwd, '')}/LICENSE`.cyan);
-  cmd.run(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
+  exec(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };
