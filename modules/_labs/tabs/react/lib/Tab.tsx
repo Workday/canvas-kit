@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, hideMouseFocus, styled} from '@workday/canvas-kit-react-common';
-import {useTab} from './Tabs';
-import {getLast} from './list';
+import {focusRing, hideMouseFocus, styled, useMountLayout} from '@workday/canvas-kit-react-common';
+import {useTab2} from './Tabs';
 
 export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -73,28 +72,29 @@ const StyledButton = styled('button')<{isSelected: boolean}>(
 );
 
 const Tab = ({name = '', children, ...elemProps}: TabProps) => {
-  const {state, events} = useTab();
+  const {state, events} = useTab2();
   const tabRef = React.useRef<HTMLButtonElement>(null);
   const [tabName, setTabName] = React.useState(name);
+  // console.log('state', state);
 
   // useLayoutEffect because we don't want to render with incorrect ID
-  React.useLayoutEffect(() => {
-    const tabElement = tabRef.current as HTMLElement;
-    // const tabName = registerTab(tabElement, name);
-    const nextState = events.registerTab({element: tabElement});
-    const tabName = getLast(nextState.context.items).id;
+  useMountLayout(() => {
+    console.log('state', state);
+    const index = state.indexRef.current;
+    const tabName = name || String(index);
+    events.registerItem({item: {id: tabName, ref: tabRef}});
     setTabName(tabName);
 
     return () => {
-      events.unregisterTab(tabName);
+      events.unregisterItem({id: tabName});
     };
-  }, [name, events]);
+  });
 
   const onSelect = () => {
-    events.activateTab(tabName);
+    events.activateTab({tab: tabName});
   };
 
-  const isSelected = !!tabName && state.context.activeTab === tabName;
+  const isSelected = !!tabName && state.activeTab === tabName;
 
   // React.useLayoutEffect(() => {
   //   if (isSelected && tabRef.current) {
@@ -106,13 +106,17 @@ const Tab = ({name = '', children, ...elemProps}: TabProps) => {
     <StyledButton
       ref={tabRef}
       role="tab"
-      id={`tab-${state.context.id}-${tabName}`}
-      tabIndex={!!tabName && state.context.intentTab === tabName ? undefined : -1}
+      type="button"
+      id={`tab-${state.id}-${tabName}`}
+      tabIndex={!!tabName && state.currentId === tabName ? undefined : -1}
       aria-selected={isSelected ? true : undefined}
-      aria-controls={`tabpanel-${state.context.id}-${tabName}`}
+      aria-controls={`tabpanel-${state.id}-${tabName}`}
       onClick={onSelect}
       onBlur={() => {
-        events.resetIntentTab();
+        if (!state.programmaticFocusRef.current) {
+          events.setCurrentId({id: state.activeTab});
+        }
+        // model.events.resetIntentTab();
       }}
       isSelected={isSelected}
       {...elemProps}

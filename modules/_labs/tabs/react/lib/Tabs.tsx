@@ -1,24 +1,22 @@
 import * as React from 'react';
-import {useUniqueId} from '@workday/canvas-kit-react-common';
 
 import Tab from './Tab';
 import TabList, {TabListProps} from './TabList';
 import TabPanel, {TabPanelProps} from './TabPanel';
 import {useTabModel} from './useTabModel';
+import {useTabModel2, TabModel} from './useTabModel2';
 
 type TabsStateContextTypes = ReturnType<typeof useTabModel>;
 
 const TabsStateContext = React.createContext<TabsStateContextTypes>({} as any);
+const TabsStateContext2 = React.createContext<TabModel>({} as any);
 
 export const useTab = () => React.useContext(TabsStateContext);
+export const useTab2 = () => React.useContext(TabsStateContext2);
 
 export type TabsChild = React.ReactElement<TabListProps> | React.ReactElement<TabPanelProps>;
 
 export interface TabsProps extends React.HTMLAttributes<HTMLElement> {
-  /**
-   * The tabs contents (tabs & tab panels).
-   */
-  children: TabsChild[];
   /**
    * The `name` of the tab that should be active first. If not provided, the first tab will be active.
    */
@@ -44,12 +42,29 @@ const Tabs = ({children, initialTab = '', onTabChange, ...elemProps}: TabsProps)
       console.log('onActivateTab', {context, event});
     },
   });
+  const model2 = useTabModel2({
+    onRegisterItem({data, state}) {
+      console.log('onRegisterItem', data, state);
+    },
+    onUnregisterItem({data, state}) {
+      console.log('onUnregisterItem', data, state);
+    },
+    shouldActivateTab({data, state}) {
+      console.log('shouldActivateTab');
+      return true;
+    },
+    onActivateTab({data, state}) {
+      console.log('onActivateTab 2', data.tab, model.state.context.activeTab);
+    },
+  });
 
   const value: TabsStateContextTypes = model;
 
   return (
     <TabsStateContext.Provider value={value}>
-      <div {...elemProps}>{children}</div>
+      <TabsStateContext2.Provider value={model2}>
+        <div {...elemProps}>{children}</div>
+      </TabsStateContext2.Provider>
     </TabsStateContext.Provider>
   );
 };

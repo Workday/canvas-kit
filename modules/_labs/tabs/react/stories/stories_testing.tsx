@@ -1,5 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
+import React from 'react';
 import {jsx} from '@emotion/core';
 import {spacing} from '@workday/canvas-kit-react-core';
 
@@ -10,24 +11,62 @@ export default {
   component: Tabs,
 };
 
-export const Simple = () => (
-  <Tabs>
-    <Tabs.List>
-      <Tabs.Item>First Tab</Tabs.Item>
-      <Tabs.Item>Second Tab</Tabs.Item>
-      <Tabs.Item>Third Tab</Tabs.Item>
-      <Tabs.Item>Fourth Tab</Tabs.Item>
-      <Tabs.Item>Fifth Tab</Tabs.Item>
-    </Tabs.List>
-    <div css={{marginTop: spacing.m}}>
-      <Tabs.Panel>Contents of First Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Third Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Fourth Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Fifth Tab</Tabs.Panel>
+export const TestKeydown = () => {
+  const onKeydown = event => {
+    event.preventDefault();
+  };
+
+  return (
+    <div onKeyDown={onKeydown}>
+      <input type="checkbox" />
     </div>
-  </Tabs>
-);
+  );
+};
+
+export const TestClick = () => {
+  const onClick = event => {
+    event.preventDefault();
+  };
+
+  return (
+    <div onClick={onClick}>
+      <input type="checkbox" />
+    </div>
+  );
+};
+
+export const Simple = () => {
+  const [checked, setChecked] = React.useState(false);
+  const onChange = event => {
+    console.log('event', event.defaultPrevented, event.nativeEvent.defaultPrevented);
+    setChecked(event.currentTarget.checked);
+  };
+
+  return (
+    <Tabs onKeyDown={onChange}>
+      <Tabs.List>
+        <form>
+          <label>
+            checked
+            <input type="checkbox" id="checkbox" />
+          </label>
+        </form>
+        <Tabs.Item>First Tab</Tabs.Item>
+        <Tabs.Item>Second Tab</Tabs.Item>
+        <Tabs.Item>Third Tab</Tabs.Item>
+        <Tabs.Item>Fourth Tab</Tabs.Item>
+        <Tabs.Item>Fifth Tab</Tabs.Item>
+      </Tabs.List>
+      <div css={{marginTop: spacing.m}}>
+        <Tabs.Panel>Contents of First Tab</Tabs.Panel>
+        <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
+        <Tabs.Panel>Contents of Third Tab</Tabs.Panel>
+        <Tabs.Panel>Contents of Fourth Tab</Tabs.Panel>
+        <Tabs.Panel>Contents of Fifth Tab</Tabs.Panel>
+      </div>
+    </Tabs>
+  );
+};
 
 export const NamedKeys = () => (
   <Tabs>
@@ -62,3 +101,62 @@ export const DisabledTab = () => (
     </div>
   </Tabs>
 );
+
+// const ColorPicker = () => <div />
+
+// const MyConfigurableColorPicker = () => {
+//   const colors = ['red', 'blue'];
+//   return (
+//     <ColorPicker>
+//       <ResetColor></ResetColor>
+//       <ColorPicker.SwatchBook rowCount={4} columnCount={4}>
+//         {colors.map(color => {
+//           <ColorPicker.ColorSwatch data-testid={`color-swatch-${color}`}></ColorPicker.ColorSwatch>;
+//         })}
+//       </ColorPicker.SwatchBook>
+//       <ColorPicker.CustomColorForm>
+//         <ColorPicker.CustomColorInput />
+//         <ColorPicker.CustomColorButton />
+//       </ColorPicker.CustomColorForm>
+//     </ColorPicker>
+//   );
+// };
+
+// type Model = {
+//   state: Record<string, any>
+//   events: Record<string, (...args: any[]) => void
+// }
+
+// const colorPickerModel = {
+//   state: {
+//     currentColor: 'red',
+//     currentCursor: '' as any
+//   }
+// }
+
+// /**
+//  * 3 things:
+//  * 1. Model
+//  * 2. Sub-component hooks
+//  * 3. Sub-components
+//  */
+
+// const MyConfigurableColorPicker = () => {
+//   const colors = ['red', 'blue'];
+//   const colorPicker = useColorPickerModel();
+
+//   return (
+//     <>
+//       <ResetColor {...colorPicker} aria-label="My Label"></ResetColor>
+//       <ColorPicker.SwatchBook {...colorPicker} rowCount={4} columnCount={4}>
+//         {colors.map(color => {
+//           <ColorPicker.ColorSwatch {...colorPicker} value={color}></ColorPicker.ColorSwatch>;
+//         })}
+//       </ColorPicker.SwatchBook>
+//       <ColorPicker.CustomColorForm {...colorPicker}>
+//         <ColorPicker.CustomColorInput {...colorPicker} />
+//         <ColorPicker.CustomColorButton {...colorPicker} />
+//       </ColorPicker.CustomColorForm>
+//     </>
+//   );
+// };

@@ -2,5 +2,8 @@ export * from './colorUtils';
 export * from './getTranslateFromOrigin';
 export * from './makeMq';
 export * from './mergeCallback';
+export * from './mergeCallbacks';
 export * from './useUniqueId';
 export * from './assert';
+export * from './model';
+export * from './useMount';

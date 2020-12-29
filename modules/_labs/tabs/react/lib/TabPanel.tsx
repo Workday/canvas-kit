@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import {jsx, css} from '@emotion/core';
-import {mouseFocusBehavior} from '@workday/canvas-kit-react-common';
+import {mouseFocusBehavior, useMountLayout} from '@workday/canvas-kit-react-common';
 import React from 'react';
-import {useTab} from './Tabs';
-import {getLast} from './list';
+import {useTab2} from './Tabs';
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -27,30 +26,30 @@ const styles = css(
 );
 
 const TabPanel = ({children, name = '', ...elemProps}: TabPanelProps) => {
-  const {state, events} = useTab();
+  const {state, events} = useTab2();
   const panelRef = React.useRef<HTMLDivElement>(null);
   const [tabName, setTabName] = React.useState(name);
 
   // useLayoutEffect so we don't an incorrect frame if a name isn't provided
-  React.useLayoutEffect(() => {
-    const panelElement = panelRef.current as HTMLElement;
-    const nextState = events.registerPanel({element: panelElement});
-    const tabName = getLast(nextState.context.panels).id;
+  useMountLayout(() => {
+    const index = state.panelIndexRef.current;
+    const tabName = name || String(index);
+    events.registerPanel({item: {id: tabName, ref: panelRef}});
     setTabName(tabName);
 
     return () => {
-      events.unregisterPanel(tabName);
+      events.unregisterItem({id: tabName});
     };
-  }, [name, events]);
+  });
 
   return (
     <div
       ref={panelRef}
       role="tabpanel"
       css={styles}
-      aria-labelledby={`tab-${state.context.id}-${tabName}`}
-      hidden={!!tabName && tabName !== state.context.activeTab}
-      id={`tabpanel-${state.context.id}-${tabName}`}
+      aria-labelledby={`tab-${state.id}-${tabName}`}
+      hidden={!!tabName && tabName !== state.activeTab}
+      id={`tabpanel-${state.id}-${tabName}`}
       tabIndex={0}
       {...elemProps}
     >

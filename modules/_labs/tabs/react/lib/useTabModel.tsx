@@ -1,3 +1,4 @@
+import React from 'react';
 import {assign} from '@workday/canvas-kit-labs-xstate-fsm';
 import {generateUniqueId} from '@workday/canvas-kit-react-common';
 

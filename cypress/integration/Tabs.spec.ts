@@ -1,11 +1,46 @@
 import * as h from '../helpers';
 
+const notPreventDefaultKey = (key: string) => ($element: JQuery) => {
+  let event: KeyboardEvent;
+  const handler = (_event: KeyboardEvent) => {
+    console.log('event', _event, _event.defaultPrevented);
+    event = _event;
+  };
+  $element[0].addEventListener('keydown', handler);
+  $element[0].dispatchEvent(
+    new KeyboardEvent('keydown', {
+      key: ' ',
+      bubbles: true,
+      cancelable: true,
+    })
+  );
+  expect(event.defaultPrevented).to.equal(
+    false,
+    `Checking if default action for "${key}" is being prevented`
+  );
+  $element[0].removeEventListener('keydown', handler);
+};
+
 describe('Tabs', () => {
   before(() => {
     h.stories.visit();
   });
 
-  ['Simple', 'NamedKeys'].forEach(story => {
+  // describe.only('checkbox', () => {
+  //   it('should detect click', () => {
+  //     h.stories.load('Testing/React/Labs/Tabs', 'TestClick');
+  //     cy.findByRole('checkbox')
+  //       .check()
+  //       .should('be.checked');
+  //   });
+
+  //   it('should detect keydown', () => {
+  //     h.stories.load('Testing/React/Labs/Tabs', 'TestKeydown');
+  //     cy.findByRole('checkbox').should(notPreventDefaultKey(' '));
+  //   });
+  // });
+
+  ['Simple', 'Named Keys'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Testing/React/Labs/Tabs', story);
