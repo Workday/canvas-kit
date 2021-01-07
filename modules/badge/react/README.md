@@ -24,7 +24,7 @@ accessibility concerns you'll want to keep in mind:
 - The live region should be outside the button
 - The live region should be visually hidden and only contain text
 
-### Example
+### Notification Example
 
 ```tsx
 import styled from '@emotion/styled';
@@ -49,21 +49,47 @@ const AccessibleHide = styled('div')({
 </IconButton>
 <AccessibleHide role="status" aria-live="polite" aria-atomic="true">
   New notifications
-</div>
+</AccessibleHide>
 ```
 
 ## Usage
+
+📝 **Note** With all usage examples, please also refer to the accessibility guidelines above.
+
+### Basic Usage
+
+#### Setting the Count
 
 ```tsx
 import * as React from 'react';
 import {CountBadge} from '@workday/canvas-kit-react-badge';
 
-// default CountBadge
-<CountBadge count={3} />
+const CustomCountBadge = () => {
+  return <CountBadge count={3} />;
+};
+```
 
-// inverse CountBadge variant
-<CountBadge variant="inverse" count={3} />
+#### Setting a Variant
 
+```tsx
+import * as React from 'react';
+import {CountBadge} from '@workday/canvas-kit-react-badge';
+
+const InverseCountBadge = () => {
+  return <CountBadge variant="inverse" count={3} />;
+};
+```
+
+#### Setting a Limit
+
+```tsx
+import * as React from 'react';
+import {CountBadge} from '@workday/canvas-kit-react-badge';
+
+const InverseCountBadge = () => {
+  // this will display the count as '99+'
+  return <CountBadge variant="inverse" count={100} limit={100} />;
+};
 ```
 
 ## Static Properties
@@ -99,4 +125,10 @@ Default: `0`
 
 📝 **Note**
 
-Values greater than 999 are formatted to "999+"
+By default, values greater than 999 are formatted to "999+"
+
+#### `limit: number`
+
+> Limit sets when to format the displayed count
+
+Default: `1000`
