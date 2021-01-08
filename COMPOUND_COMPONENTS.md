@@ -6,8 +6,8 @@ It is a way of describing a complex component by simultaneously describing sub-c
 
 * Container component
 * Sub-components
-* Shared model
-* Behavior hooks
+* Shared model (optional)
+* Behavior hooks (optional)
 
 A compound component contrasts with a configuration component.
 
@@ -33,11 +33,20 @@ Compound component:
 
 In this example, `Tabs` is the container component and `Tabs.List` is a sub-component.
 
+Compound components always have a container component and sub-components. Components that do not contain sub-components are not considered compound components. Some compound components might not contain state or behavior. An example might be an `IconButton` which is a button that contains an icon. It might be a compound component only for styling purposes, but doesn't contain any special state or behaviors:
+
+```tsx
+<IconButton onClick={onClick}>
+  <IconButton.Icon icon={icon} />
+  <IconButton.Text>Button Text</IconButton.Text>
+</IconButton>
+```
+
 ## Container Components
 
-A container component provides a shared model to sub-components via [React context](https://reactjs.org/docs/context.html). A container component could represent a real DOM element, or just be a context container. For example, the `Pagination` component has a container component that represents a `role=nav` element. The `Tabs` container component, however, does not contain a semantic element.
+A container component is the entry point to a compound component. A container component could represent a real DOM element, or just be a non-element container. For example, the `Pagination` component has a container component that represents a `role=nav` element. The `Tabs` container component, however, does not contain a semantic element.
 
-The container component provides it's own context hook for sub-components. A container component takes props for either the model or configuration for the model. In the `Tabs` compound component example, it might look like this:
+If a compound component contains any state or behavior, it will also provide a shared model to sub-components via [React context](https://reactjs.org/docs/context.html). A container component takes props for either the model or configuration for the model. In the `Tabs` compound component example, it might look like this:
 
 ```tsx
 const TabsModelContext = React.createContext({})
@@ -58,7 +67,7 @@ const Tabs = ({children, model, ...config}) => {
 
 ## Sub-components
 
-A sub-component typically follows ARIA roles. For the `Tabs` example, these are the `tablist`, `tab`, and `tabpanel` roles. A sub-component provides direct access to semantic or key elements of a compound component.
+A sub-component typically follows ARIA roles. For the `Tabs` example, these are the `tablist`, `tab`, and `tabpanel` roles. A sub-component provides direct access to semantic or key elements of a compound component. In the `IconButton` example, the icon is not semantic and might be hidden from screen readers while the `IconButton.Text` content is instead used for a tooltip and as the accessible name while being visibly hidden.
 
 ## Why Compound Components?
 
