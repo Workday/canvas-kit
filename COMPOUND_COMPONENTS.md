@@ -2,14 +2,14 @@
 
 ## What is a compound component?
 
-It is a way of describing a complex component by simultaneously describing sub-components. A compound component is made up of a few different parts.
+Compound components is a pattern in which components are used together in such a way that describes a higher level of abstraction. A desktop computer is composed of many components that can be serviced and configured individually. Similarly, a compound component allows simultaneous configuration through access to each sub-component. Here are the parts of a compound component:
 
 * Container component
 * Sub-components
 * Shared model (optional)
 * Behavior hooks (optional)
 
-A compound component contrasts with a configuration component.
+A compound component contrasts with a configuration component which instead configures from a single interface. A configuration component might be like choosing a desktop computer based on stats - how much RAM or how fast the CPU should be or based on what you want to use it for. A compound component is more like buying the parts individually and assembling yourself.
 
 Configuration component:
 ```tsx
@@ -33,7 +33,7 @@ Compound component:
 
 In this example, `Tabs` is the container component and `Tabs.List` is a sub-component.
 
-Compound components always have a container component and sub-components. Components that do not contain sub-components are not considered compound components. Some compound components might not contain state or behavior. An example might be an `IconButton` which is a button that contains an icon. It might be a compound component only for styling purposes, but doesn't contain any special state or behaviors:
+Some compound components might not contain state or behavior. An example might be an `IconButton` which is a button that contains an icon. It might be a compound component only for styling purposes, but doesn't contain any special state or behaviors:
 
 ```tsx
 <IconButton onClick={onClick}>
@@ -159,7 +159,7 @@ const useDisclosureModel = (config = {}) => {
 }
 ```
 
-Guards allow configuration of state changes. A concrete example might be an `EllipsisTooltip` where `mouseover` or `focus` DOM events call the `open` model event. The `shoulOpen` guard would allow a conditional check of overflow to open the tooltip only if an overflow is detected. For example:
+Guards allow configuration of state changes. A concrete example might be an `EllipsisTooltip` where `mouseover` or `focus` DOM events call the `open` model event. The `shouldOpen` guard would allow a conditional check of overflow to open the tooltip only if an overflow is detected. For example:
 
 ```tsx
 const useEllipsisTooltipModel = (config = {}) => {
@@ -249,8 +249,8 @@ A behavior hook allows us to more easily reuse functionality between components 
 For example, the `MenuModel` contains model's internal state and events, but doesn't handle external DOM events directly. The behavior hook is the glue between the model and DOM elements. A `useMenu` behavior hook might look like this:
 
 ```ts
-const useMenu const useMenu = (
-  model,
+const useMenu = (
+  { state, events },
   elemProps = {}
 ) => {
 
