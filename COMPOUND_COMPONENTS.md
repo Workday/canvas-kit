@@ -44,7 +44,7 @@ Some compound components might not contain state or behavior. An example might b
 
 ## Container Components
 
-A container component is the entry point to a compound component. A container component could represent a real DOM element, or just be a non-element container. For example, the `Pagination` component has a container component that represents a `role=nav` element. The `Tabs` container component, however, does not contain a semantic element.
+A container component is the entry point to a compound component. A container component could represent a real DOM element, or be a non-element container. For example, the `Pagination` component has a container component that represents a `role=nav` element. The `Tabs` container component, however, does not contain a semantic element.
 
 If a compound component contains any state or behavior, it will also provide a shared model to sub-components via [React context](https://reactjs.org/docs/context.html). A container component takes props for either the model or configuration for the model. In the `Tabs` compound component example, it might look like this:
 
