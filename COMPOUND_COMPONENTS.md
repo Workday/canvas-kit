@@ -193,7 +193,7 @@ const useTabsModel = (config = {}) => {
     ...menu.state,
     id,
     activeTab,
-    panels: panels.items,
+    panels: panels.state.items,
   }
   
   const events = {
@@ -315,7 +315,7 @@ We expect most use-cases will be covered by the above example, but If you need d
 
 ```tsx
 const MyTabs = () => {
-  const model = useTabModel({
+  const model = useTabsModel({
     onActivateTab: ({data}) => fetch('/api/activatetab' + data.id),
   })
 
