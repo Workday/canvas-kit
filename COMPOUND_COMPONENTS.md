@@ -51,6 +51,7 @@ If a compound component contains any state or behavior, it will also provide a s
 ```tsx
 const TabsModelContext = React.createContext({})
 
+// This will be used in sub-components
 const useTabsModelContext = () => React.useContext(TabsModelContext)
 
 const Tabs = ({children, model, ...config}) => {
