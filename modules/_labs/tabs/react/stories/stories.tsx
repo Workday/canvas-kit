@@ -8,6 +8,7 @@ import {Tabs} from '@workday/canvas-kit-labs-react-tabs';
 
 import withReadme from 'storybook-readme/with-readme';
 import README from '../README.md';
+import {useTabModel} from '../lib/useTabModel';
 
 export default {
   title: 'Labs|Tabs/React',
@@ -19,7 +20,7 @@ const items = [
   {
     title: 'First Tab',
     contents: 'Contents of First Tab',
-    // disabled: true,
+    disabled: true,
   },
   {
     title: 'Second Tab',
@@ -48,10 +49,30 @@ const ComposedTabs = (props: {items: any[]}) => (
 
 export const Simple = () => <ComposedTabs items={items} />;
 
+// const MyComponent = ({
+//   children,
+//   onClick,
+//   ...elemProps
+// }: {
+//   children: React.ReactNode;
+//   onClick?: React.MouseEventHandler<HTMLElement>;
+// }) => (
+//   <article onClick={onClick} {...elemProps}>
+//     {children}
+//   </article>
+// );
+
+// console.log(Tabs);
+
 // export const Simple = () => (
-//   <Tabs>
+//   <Tabs
+//     as={'article'}
+//     onClick={event => {
+//       console.log(event);
+//     }}
+//   >
 //     <Tabs.List>
-//       <Tabs.Item disabled>First Tab</Tabs.Item>
+//       <Tabs.Item as={MyComponent}>First Tab</Tabs.Item>
 //       <Tabs.Item>Second Tab</Tabs.Item>
 //       <Tabs.Item>Third Tab</Tabs.Item>
 //       <Tabs.Item>Fourth Tab</Tabs.Item>
@@ -67,24 +88,34 @@ export const Simple = () => <ComposedTabs items={items} />;
 //   </Tabs>
 // );
 
-export const NamedKeys = () => (
-  <Tabs>
-    <Tabs.List>
-      <Tabs.Item name="first">First Tab</Tabs.Item>
-      <Tabs.Item name="second">Second Tab</Tabs.Item>
-      <Tabs.Item name="third">Third Tab</Tabs.Item>
-      <Tabs.Item name="fourth">Fourth Tab</Tabs.Item>
-      <Tabs.Item name="fifth">Fifth Tab</Tabs.Item>
-    </Tabs.List>
-    <div css={{marginTop: spacing.m}}>
-      <Tabs.Panel name="first">Contents of First Tab</Tabs.Panel>
-      <Tabs.Panel name="second">Contents of Second Tab</Tabs.Panel>
-      <Tabs.Panel name="third">Contents of Third Tab</Tabs.Panel>
-      <Tabs.Panel name="fourth">Contents of Fourth Tab</Tabs.Panel>
-      <Tabs.Panel name="fifth">Contents of Fifth Tab</Tabs.Panel>
-    </div>
-  </Tabs>
-);
+export const NamedKeys = () => {
+  const ref = React.useRef<HTMLButtonElement>(null);
+
+  React.useEffect(() => {
+    console.log('ref', ref.current);
+  });
+
+  return (
+    <Tabs>
+      <Tabs.List>
+        <Tabs.Item name="first" ref={ref}>
+          First Tab
+        </Tabs.Item>
+        <Tabs.Item name="second">Second Tab</Tabs.Item>
+        <Tabs.Item name="third">Third Tab</Tabs.Item>
+        <Tabs.Item name="fourth">Fourth Tab</Tabs.Item>
+        <Tabs.Item name="fifth">Fifth Tab</Tabs.Item>
+      </Tabs.List>
+      <div css={{marginTop: spacing.m}}>
+        <Tabs.Panel name="first">Contents of First Tab</Tabs.Panel>
+        <Tabs.Panel name="second">Contents of Second Tab</Tabs.Panel>
+        <Tabs.Panel name="third">Contents of Third Tab</Tabs.Panel>
+        <Tabs.Panel name="fourth">Contents of Fourth Tab</Tabs.Panel>
+        <Tabs.Panel name="fifth">Contents of Fifth Tab</Tabs.Panel>
+      </div>
+    </Tabs>
+  );
+};
 
 export const DisabledTab = () => (
   <Tabs>
@@ -119,7 +150,52 @@ export const SinglePanel = () => {
   } as const;
 
   return (
-    <Tabs initialTab={currentTab} onTabChange={setCurrentTab}>
+    <Tabs
+      initialTab={currentTab}
+      shouldActivateTab={({data, state}) => true}
+      onActivateTab={({data}) => setCurrentTab(data.tab)}
+    >
+      <Tabs.List>
+        <Tabs.Item name="first" aria-controls="mytab-panel">
+          First Tab
+        </Tabs.Item>
+        <Tabs.Item name="second" aria-controls="mytab-panel">
+          Second Tab
+        </Tabs.Item>
+        <Tabs.Item name="third" aria-controls="mytab-panel">
+          Third Tab
+        </Tabs.Item>
+      </Tabs.List>
+      <Tabs.Panel css={{marginTop: spacing.m}} hidden={undefined} id="mytab-panel">
+        {contents[currentTab]}
+      </Tabs.Panel>
+    </Tabs>
+  );
+};
+
+export const SinglePanelModel = () => {
+  const [currentTab, setCurrentTab] = React.useState('second');
+  const model = useTabModel({
+    initialTab: currentTab,
+    onActivateTab: ({data}) => setCurrentTab(data.tab),
+  });
+
+  const message = (
+    <p>
+      This example shows how to use a single tab panel. You must manually set the{' '}
+      <code>hidden</code>, <code>aria-controls</code>, and <code>id</code> attributes of Tab item
+      and Tab panel components
+    </p>
+  );
+
+  const contents = {
+    first: <div>Contents of First Tab {message}</div>,
+    second: <div>Contents of Second Tab {message}</div>,
+    third: <div>Contents of Third Tab {message}</div>,
+  } as const;
+
+  return (
+    <Tabs model={model}>
       <Tabs.List>
         <Tabs.Item name="first" aria-controls="mytab-panel">
           First Tab

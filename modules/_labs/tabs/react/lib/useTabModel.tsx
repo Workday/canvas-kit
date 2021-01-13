@@ -1,186 +1,88 @@
 import React from 'react';
-import {assign} from '@workday/canvas-kit-labs-xstate-fsm';
-import {generateUniqueId} from '@workday/canvas-kit-react-common';
+import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas-kit-react-common';
+import {MenuState, MenuEvents, menuEventMap, useMenuModel} from './useMenuModel';
+import {Item, ListEvents, ListState, useListModel} from './useListModel';
 
-import {createUseModel} from './machine';
-import {getFirst, getLast, getNext, getPrevious, Item, registerItem, unregisterItem} from './list';
-
-const createEvent = <K extends string, T extends {type: K}>(input: T): T => {
-  return input;
+type TabState = MenuState & {
+  /**
+   * The name of the active tab provided to the `Tabs.Item` component. If no name is provided, it
+   * will be a string of the index position */
+  activeTab: string;
+  panels: Item[];
+  panelIndexRef: ListState['indexRef'];
+  /** Used for tracking programmatic focus changes vs user focus changes */
+  programmaticFocusRef: React.MutableRefObject<boolean>;
 };
 
-export const useTabModel = createUseModel({
-  context: {
-    /** Identifier for the tab group. All internal ids are derived from this id */
-    id: generateUniqueId(),
-    initialTab: '',
-    activeTab: '',
-    intentTab: '',
-    items: [] as Item[],
-    panels: [] as Item[],
-    /** Used for tracking programmatic focus changes vs user focus changes */
-    programmaticFocus: false,
-  },
-  schema: {
-    /** foobar */
-    active: {},
-  },
-  events: {
-    activateTab(tab: string) {
-      return createEvent({
-        type: 'activateTab',
-        tab,
-      });
-    },
-    registerTab(item: {id?: Item['id']; element: Item['element']}) {
-      return createEvent({
-        type: 'registerTab',
-        item,
-      });
-    },
-    unregisterTab(tab: string) {
-      return createEvent({
-        type: 'unregisterTab',
-        tab,
-      });
-    },
-    registerPanel(item: {id?: Item['id']; element: Item['element']}) {
-      return createEvent({
-        type: 'registerPanel',
-        item,
-      });
-    },
-    unregisterPanel(tab: string) {
-      return createEvent({
-        type: 'unregisterPanel',
-        tab,
-      });
-    },
-    setIntentTab(value: 'previous' | 'next' | 'first' | 'last') {
-      return createEvent({
-        type: 'setIntentTab',
-        value,
-      });
-    },
-    initializeTab(tab?: string) {
-      return createEvent({
-        type: 'initializeTab',
-        tab,
-      });
-    },
-    resetIntentTab() {
-      return createEvent({type: 'resetIntentTab'});
-    },
-    resetProgrammaticFocus() {
-      return createEvent({type: 'resetProgrammaticFocus'});
-    },
-    initialize(items: Item[], activeTab: string) {
-      return createEvent({
-        type: 'initialize',
-        items,
-        activeTab,
-      });
-    },
-  },
+type TabEvents = MenuEvents & {
+  /**
+   * This event will set the `activeTab` in the state. Called when a user activates a tab
+   */
+  activateTab(data: {
+    /** The name of the tab provided to the `Tabs.Item` component. If no name is provided, it will
+     * be a string of the index position */
+    tab: string;
+  }): void;
+  registerPanel: ListEvents['registerItem'];
+  unregisterPanel: ListEvents['unregisterItem'];
+};
+
+export type TabModel = Model<TabState, TabEvents>;
+
+const tabEventMap = createEventMap<TabEvents>()({
   guards: {
-    /**
-     * Fires before a tab gets activated
-     */
+    ...menuEventMap.guards,
     shouldActivateTab: 'activateTab',
-    shouldSetIntentTab: 'setIntentTab',
   },
   actions: {
+    ...menuEventMap.actions,
     onActivateTab: 'activateTab',
-    onSetIntentTab: 'setIntentTab',
-  },
-})({
-  initial: 'active',
-  states: {
-    active: {
-      on: {
-        activateTab: {
-          target: 'active',
-          actions: [
-            assign({activeTab: (ctx, event) => event.tab, intentTab: (ctx, event) => event.tab}),
-            'onActivateTab',
-          ],
-          cond: 'shouldActivateTab',
-        },
-        registerTab: {
-          target: 'active',
-          actions: [
-            assign({
-              items: (ctx, event) => registerItem(event.item, ctx.items),
-            }),
-          ],
-        },
-        unregisterTab: {
-          target: 'active',
-          actions: [assign({items: (ctx, event) => unregisterItem(event.tab, ctx.items)})],
-        },
-        registerPanel: {
-          target: 'active',
-          actions: [
-            assign({
-              panels: (ctx, event) => registerItem(event.item, ctx.panels),
-            }),
-          ],
-        },
-        unregisterPanel: {
-          target: 'active',
-          actions: [assign({panels: (ctx, event) => unregisterItem(event.tab, ctx.panels)})],
-        },
-        setIntentTab: {
-          target: 'active',
-          actions: [
-            assign({
-              programmaticFocus: ctx => true,
-              intentTab: (ctx, event) => {
-                switch (event.value) {
-                  case 'previous':
-                    return getPrevious(ctx.intentTab, ctx.items).id;
-                  case 'next':
-                    return getNext(ctx.intentTab, ctx.items).id;
-                  case 'first':
-                    return getFirst(ctx.items).id;
-                  case 'last':
-                    return getLast(ctx.items).id;
-                  default:
-                    return '';
-                }
-              },
-            }),
-            'onSetIntentTab',
-          ],
-          cond: 'shouldSetIntentTab',
-        },
-        initializeTab: {
-          target: 'active',
-          actions: [
-            assign({
-              intentTab: (ctx, event) => {
-                return event.tab || ctx.items[0]?.id || '';
-              },
-              activeTab: (ctx, event) => {
-                return event.tab || ctx.items[0]?.id || '';
-              },
-            }),
-          ],
-        },
-        resetIntentTab: {
-          target: 'active',
-          actions: [
-            assign({
-              intentTab: ctx => (ctx.programmaticFocus ? ctx.intentTab : ctx.activeTab),
-            }),
-          ],
-        },
-        resetProgrammaticFocus: {
-          target: 'active',
-
-          actions: [assign({programmaticFocus: ctx => false})],
-        },
-      },
-    },
   },
 });
+
+export type TabModelConfig = {
+  id?: string;
+  initialTab?: string;
+  direction?: 'vertical' | 'horizontal';
+} & Partial<ToModelConfig<TabState, TabEvents, typeof tabEventMap>>;
+
+export const useTabModel = (config: TabModelConfig = {}): TabModel => {
+  const initialTabRef = React.useRef(config.initialTab);
+  const programmaticFocusRef = React.useRef(false);
+  const [activeTab, setActiveTab] = React.useState(initialTabRef.current || '');
+  const menu = useMenuModel({
+    orientation: 'horizontal',
+    ...config,
+    onRegisterItem({data, state}) {
+      if (!initialTabRef.current) {
+        initialTabRef.current = data.item.id;
+        setActiveTab(initialTabRef.current);
+      }
+      config.onRegisterItem?.({data, state: state as TabState});
+    },
+  });
+  const panels = useListModel();
+
+  const state = {
+    ...menu.state,
+    activeTab,
+    programmaticFocusRef,
+    panels: panels.state.items,
+    panelIndexRef: panels.state.indexRef,
+  };
+
+  const events = useEventMap(tabEventMap, state, config, {
+    ...menu.events,
+    activateTab(data) {
+      setActiveTab(data.tab);
+      events.setCurrentId({id: data.tab});
+    },
+    registerPanel: panels.events.registerItem,
+    unregisterPanel: panels.events.unregisterItem,
+  });
+
+  return {
+    state,
+    events,
+  };
+};

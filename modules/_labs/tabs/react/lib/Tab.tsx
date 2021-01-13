@@ -1,7 +1,14 @@
 import * as React from 'react';
 import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, hideMouseFocus, styled, useMountLayout} from '@workday/canvas-kit-react-common';
-import {useTab2} from './Tabs';
+import {
+  createComponent,
+  focusRing,
+  hideMouseFocus,
+  styled,
+  useForkRef,
+  useMountLayout,
+} from '@workday/canvas-kit-react-common';
+import {useTabsModelContext} from './Tabs';
 
 export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
@@ -71,59 +78,64 @@ const StyledButton = styled('button')<{isSelected: boolean}>(
   }
 );
 
-const Tab = ({name = '', children, ...elemProps}: TabProps) => {
-  const {state, events} = useTab2();
-  const tabRef = React.useRef<HTMLButtonElement>(null);
-  const [tabName, setTabName] = React.useState(name);
-  // console.log('state', state);
+export const Tab = createComponent({
+  as: 'button',
+  displayName: 'Tabs.Item',
+  Component: ({name = '', children, ...elemProps}: TabProps, ref, as) => {
+    const tabRef = React.useRef<HTMLButtonElement>(null);
+    const elementRef = useForkRef(ref, tabRef);
 
-  // useLayoutEffect because we don't want to render with incorrect ID
-  useMountLayout(() => {
-    console.log('state', state);
-    const index = state.indexRef.current;
-    const tabName = name || String(index);
-    events.registerItem({item: {id: tabName, ref: tabRef}});
-    setTabName(tabName);
+    const {state, events} = useTabsModelContext();
+    const [tabName, setTabName] = React.useState(name);
 
-    return () => {
-      events.unregisterItem({id: tabName});
+    // useLayoutEffect because we don't want to render with incorrect ID
+    useMountLayout(() => {
+      const index = state.indexRef.current;
+      const tabName = name || String(index);
+      events.registerItem({item: {id: tabName, ref: tabRef}});
+      setTabName(tabName);
+
+      return () => {
+        events.unregisterItem({id: tabName});
+      };
+    });
+
+    const onSelect = () => {
+      events.activateTab({tab: tabName});
     };
-  });
 
-  const onSelect = () => {
-    events.activateTab({tab: tabName});
-  };
+    const onBlur = () => {
+      if (!state.programmaticFocusRef.current) {
+        events.setCurrentId({id: state.activeTab});
+      }
+    };
 
-  const isSelected = !!tabName && state.activeTab === tabName;
+    const isSelected = !!tabName && state.activeTab === tabName;
 
-  // React.useLayoutEffect(() => {
-  //   if (isSelected && tabRef.current) {
-  //     setSelectedTabRect(tabRef.current.getBoundingClientRect());
-  //   }
-  // }, [isSelected, tabRef, setSelectedTabRect]);
+    // React.useLayoutEffect(() => {
+    //   if (isSelected && tabRef.current) {
+    //     setSelectedTabRect(tabRef.current.getBoundingClientRect());
+    //   }
+    // }, [isSelected, tabRef, setSelectedTabRect]);
 
-  return (
-    <StyledButton
-      ref={tabRef}
-      role="tab"
-      type="button"
-      id={`tab-${state.id}-${tabName}`}
-      tabIndex={!!tabName && state.currentId === tabName ? undefined : -1}
-      aria-selected={isSelected ? true : undefined}
-      aria-controls={`tabpanel-${state.id}-${tabName}`}
-      onClick={onSelect}
-      onBlur={() => {
-        if (!state.programmaticFocusRef.current) {
-          events.setCurrentId({id: state.activeTab});
-        }
-        // model.events.resetIntentTab();
-      }}
-      isSelected={isSelected}
-      {...elemProps}
-    >
-      {children}
-    </StyledButton>
-  );
-};
-
-export default Tab;
+    return (
+      <StyledButton
+        ref={elementRef}
+        // @ts-ignore Styled Component types don't include the as prop, but it works
+        as={as}
+        role="tab"
+        type="button"
+        id={`tab-${state.id}-${tabName}`}
+        tabIndex={!!tabName && state.currentId === tabName ? undefined : -1}
+        aria-selected={isSelected ? true : undefined}
+        aria-controls={`tabpanel-${state.id}-${tabName}`}
+        onClick={onSelect}
+        onBlur={onBlur}
+        isSelected={isSelected}
+        {...elemProps}
+      >
+        {children}
+      </StyledButton>
+    );
+  },
+});

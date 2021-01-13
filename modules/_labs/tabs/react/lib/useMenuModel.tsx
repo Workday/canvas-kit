@@ -78,9 +78,19 @@ const getNext = getOffsetItem(1);
 const getPrevious = getOffsetItem(-1);
 
 export const useMenuModel = (config: MenuModelConfig = {}): MenuModel => {
-  const [orientation] = React.useState(config.orientation || 'horizontal');
+  const [orientation] = React.useState(config.orientation || 'vertical');
   const [currentId, setCurrentId] = React.useState('');
-  const list = useListModel(config);
+  const initialCurrentRef = React.useRef('');
+  const list = useListModel({
+    ...config,
+    onRegisterItem({data, state}) {
+      if (!initialCurrentRef.current) {
+        initialCurrentRef.current = data.item.id;
+        setCurrentId(initialCurrentRef.current);
+      }
+      config.onRegisterItem?.({data, state: state as MenuState});
+    },
+  });
 
   const state = {...list.state, orientation, currentId};
 

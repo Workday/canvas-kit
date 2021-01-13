@@ -1,10 +1,15 @@
 /** @jsx jsx */
 import {jsx, css} from '@emotion/core';
-import {mouseFocusBehavior, useMountLayout} from '@workday/canvas-kit-react-common';
+import {
+  createComponent,
+  Element,
+  mouseFocusBehavior,
+  useMountLayout,
+} from '@workday/canvas-kit-react-common';
 import React from 'react';
-import {useTab2} from './Tabs';
+import {useTabsModelContext} from './Tabs';
 
-export interface TabPanelProps extends React.HTMLAttributes<HTMLElement> {
+export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The contents of the TabPanel.
    */
@@ -25,37 +30,40 @@ const styles = css(
   })
 );
 
-const TabPanel = ({children, name = '', ...elemProps}: TabPanelProps) => {
-  const {state, events} = useTab2();
-  const panelRef = React.useRef<HTMLDivElement>(null);
-  const [tabName, setTabName] = React.useState(name);
+export const TabPanel = createComponent({
+  as: 'div',
+  displayName: 'Tabs.Panel',
+  Component: ({children, name = '', ...elemProps}: TabPanelProps, ref, as) => {
+    const {state, events} = useTabsModelContext();
+    const panelRef = React.useRef<HTMLDivElement>(null);
+    const [tabName, setTabName] = React.useState(name);
 
-  // useLayoutEffect so we don't an incorrect frame if a name isn't provided
-  useMountLayout(() => {
-    const index = state.panelIndexRef.current;
-    const tabName = name || String(index);
-    events.registerPanel({item: {id: tabName, ref: panelRef}});
-    setTabName(tabName);
+    // useLayoutEffect so we don't an incorrect frame if a name isn't provided
+    useMountLayout(() => {
+      const index = state.panelIndexRef.current;
+      const tabName = name || String(index);
+      events.registerPanel({item: {id: tabName, ref: panelRef}});
+      setTabName(tabName);
 
-    return () => {
-      events.unregisterItem({id: tabName});
-    };
-  });
+      return () => {
+        events.unregisterItem({id: tabName});
+      };
+    });
 
-  return (
-    <div
-      ref={panelRef}
-      role="tabpanel"
-      css={styles}
-      aria-labelledby={`tab-${state.id}-${tabName}`}
-      hidden={!!tabName && tabName !== state.activeTab}
-      id={`tabpanel-${state.id}-${tabName}`}
-      tabIndex={0}
-      {...elemProps}
-    >
-      {children}
-    </div>
-  );
-};
-
-export default TabPanel;
+    return (
+      <Element
+        as={as}
+        ref={panelRef}
+        role="tabpanel"
+        css={styles}
+        aria-labelledby={`tab-${state.id}-${tabName}`}
+        hidden={!!tabName && tabName !== state.activeTab}
+        id={`tabpanel-${state.id}-${tabName}`}
+        tabIndex={0}
+        {...elemProps}
+      >
+        {children}
+      </Element>
+    );
+  },
+});

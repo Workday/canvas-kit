@@ -46,7 +46,7 @@ describe('Tabs', () => {
         h.stories.load('Testing/React/Labs/Tabs', story);
       });
 
-      it('should pass accessibility checks', () => {
+      it('should pass axe checks', () => {
         cy.checkA11y();
       });
 

@@ -36,21 +36,9 @@ export const TestClick = () => {
 };
 
 export const Simple = () => {
-  const [checked, setChecked] = React.useState(false);
-  const onChange = event => {
-    console.log('event', event.defaultPrevented, event.nativeEvent.defaultPrevented);
-    setChecked(event.currentTarget.checked);
-  };
-
   return (
-    <Tabs onKeyDown={onChange}>
+    <Tabs>
       <Tabs.List>
-        <form>
-          <label>
-            checked
-            <input type="checkbox" id="checkbox" />
-          </label>
-        </form>
         <Tabs.Item>First Tab</Tabs.Item>
         <Tabs.Item>Second Tab</Tabs.Item>
         <Tabs.Item>Third Tab</Tabs.Item>

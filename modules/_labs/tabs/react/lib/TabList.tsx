@@ -2,15 +2,15 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 
 import {spacing, commonColors} from '@workday/canvas-kit-react-core';
-import {mergeCallbacks} from '@workday/canvas-kit-react-common';
 
-import {useTab, useTab2} from './Tabs';
+import {useTabsModelContext} from './Tabs';
 import {TabProps} from './Tab';
-import {getItem, MenuModel} from './useMenuModel';
+import {useMenu, orientationKeyMap} from './useMenu';
+import {createComponent, useForkRef} from '@workday/canvas-kit-react-common';
 
 type Tab = React.ReactElement<TabProps>;
 
-export interface TabListProps extends React.HTMLAttributes<HTMLElement> {
+export interface TabListProps {
   /**
    * A list of Tab components.
    */
@@ -29,85 +29,44 @@ const TabsListInnerContainer = styled('div')({
   margin: `0 ${spacing.m}`,
 });
 
-const useMenu = (
-  {state, events}: MenuModel,
-  elemProps: Partial<React.HTMLAttributes<HTMLElement>> = {}
-) => {
-  // keep track of intentional focus changes
-  const focusRef = React.useRef(false);
-
-  React.useEffect(() => {
-    if (focusRef.current) {
-      const item = getItem(state.currentId, state.items);
-      item.ref.current?.focus();
-
-      focusRef.current = false;
-    }
-  }, [state.currentId, state.items]);
-
-  return mergeCallbacks(elemProps, {
-    onKeyDown(event: React.KeyboardEvent) {
-      switch (event.key) {
-        case 'ArrowLeft':
-        case 'Left':
-          focusRef.current = true;
-          events.previous();
-          break;
-        case 'ArrowRight':
-        case 'Right':
-          focusRef.current = true;
-          events.next();
-          break;
-        case 'Home':
-          focusRef.current = true;
-          events.first();
-          break;
-        case 'End':
-          focusRef.current = true;
-          events.last();
-          break;
-        case 'Enter':
-        case ' ':
-          // hmm, activate
-          break;
-        default:
-          break;
+export const TabList = createComponent({
+  as: 'div',
+  displayName: 'Tabs.List',
+  Component: ({children, ...elemProps}: TabListProps, ref, as) => {
+    const tabsListRef = React.useRef<HTMLDivElement>(null);
+    const elementRef = useForkRef(ref, tabsListRef);
+    // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
+    const {state, events} = useTabsModelContext();
+    const menu = useMenu(
+      {state, events},
+      {
+        onKeyDown(event) {
+          // Programmatic focus only on any focus change via keyboard
+          if (Object.keys(orientationKeyMap[state.orientation]).indexOf(event.key) !== -1) {
+            state.programmaticFocusRef.current = true;
+          }
+        },
       }
-    },
-  });
-};
+    );
 
-const TabList = ({children, ...elemProps}: TabListProps) => {
-  const tabsListRef = React.useRef<HTMLDivElement>(null);
-  // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
-  const model = useTab();
-  const {state, events} = useTab2();
-  const menu = useMenu(
-    {state, events},
-    {
-      onKeyDown() {
-        state.programmaticFocusRef.current = true;
-      },
-    }
-  );
+    const onFocus = () => {
+      state.programmaticFocusRef.current = false;
+    };
 
-  const onFocus = () => {
-    state.programmaticFocusRef.current = false;
-  };
-
-  return (
-    <TabsListContainer ref={tabsListRef}>
-      <TabsListInnerContainer
-        role="tablist"
-        {...menu}
-        // onClick={e => e.preventDefault()}
-        onFocus={onFocus}
-        {...elemProps}
-      >
-        {children}
-      </TabsListInnerContainer>
-    </TabsListContainer>
-  );
-};
-
-export default TabList;
+    return (
+      <TabsListContainer>
+        <TabsListInnerContainer
+          as={as}
+          ref={elementRef}
+          role="tablist"
+          {...menu}
+          // onClick={e => e.preventDefault()}
+          onFocus={onFocus}
+          {...elemProps}
+        >
+          {children}
+        </TabsListInnerContainer>
+      </TabsListContainer>
+    );
+  },
+});
