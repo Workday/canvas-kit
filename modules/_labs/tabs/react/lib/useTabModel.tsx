@@ -50,6 +50,7 @@ export const useTabModel = (config: TabModelConfig = {}): TabModel => {
   const initialTabRef = React.useRef(config.initialTab);
   const programmaticFocusRef = React.useRef(false);
   const [activeTab, setActiveTab] = React.useState(initialTabRef.current || '');
+
   const menu = useMenuModel({
     orientation: 'horizontal',
     ...config,

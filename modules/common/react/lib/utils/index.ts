@@ -7,4 +7,4 @@ export * from './useUniqueId';
 export * from './assert';
 export * from './model';
 export * from './useMount';
-export * from './createComponent';
+export * from './components';

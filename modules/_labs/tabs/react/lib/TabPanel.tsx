@@ -2,14 +2,13 @@
 import {jsx, css} from '@emotion/core';
 import {
   createComponent,
-  Element,
   mouseFocusBehavior,
   useMountLayout,
 } from '@workday/canvas-kit-react-common';
 import React from 'react';
 import {useTabsModelContext} from './Tabs';
 
-export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TabPanelProps {
   /**
    * The contents of the TabPanel.
    */
@@ -30,10 +29,9 @@ const styles = css(
   })
 );
 
-export const TabPanel = createComponent({
-  as: 'div',
+export const TabPanel = createComponent('div')({
   displayName: 'Tabs.Panel',
-  Component: ({children, name = '', ...elemProps}: TabPanelProps, ref, as) => {
+  Component: ({children, name = '', ...elemProps}: TabPanelProps, ref, Element) => {
     const {state, events} = useTabsModelContext();
     const panelRef = React.useRef<HTMLDivElement>(null);
     const [tabName, setTabName] = React.useState(name);
@@ -52,7 +50,6 @@ export const TabPanel = createComponent({
 
     return (
       <Element
-        as={as}
         ref={panelRef}
         role="tabpanel"
         css={styles}

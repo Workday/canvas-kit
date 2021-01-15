@@ -1,12 +1,17 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 
 import {spacing, commonColors} from '@workday/canvas-kit-react-core';
 
 import {useTabsModelContext} from './Tabs';
 import {TabProps} from './Tab';
 import {useMenu, orientationKeyMap} from './useMenu';
-import {createComponent, useForkRef} from '@workday/canvas-kit-react-common';
+import {
+  createComponent,
+  useForkRef,
+  styled,
+  StyledType,
+  useComponentRef,
+} from '@workday/canvas-kit-react-common';
 
 type Tab = React.ReactElement<TabProps>;
 
@@ -24,16 +29,15 @@ const TabsListContainer = styled('div')({
   borderBottom: `1px solid ${commonColors.divider}`,
 });
 
-const TabsListInnerContainer = styled('div')({
+const TabsListInnerContainer = styled('div')<StyledType>({
   display: `flex`,
   margin: `0 ${spacing.m}`,
 });
 
-export const TabList = createComponent({
-  as: 'div',
+export const TabList = createComponent('div')({
   displayName: 'Tabs.List',
-  Component: ({children, ...elemProps}: TabListProps, ref, as) => {
-    const tabsListRef = React.useRef<HTMLDivElement>(null);
+  Component: ({children, ...elemProps}: TabListProps, ref, Element) => {
+    const tabsListRef = useComponentRef(ref);
     const elementRef = useForkRef(ref, tabsListRef);
     // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
     const {state, events} = useTabsModelContext();
@@ -56,7 +60,7 @@ export const TabList = createComponent({
     return (
       <TabsListContainer>
         <TabsListInnerContainer
-          as={as}
+          as={Element}
           ref={elementRef}
           role="tablist"
           {...menu}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {createComponent, Element} from '@workday/canvas-kit-react-common';
+import {createComponent} from '@workday/canvas-kit-react-common';
 
 import {Tab} from './Tab';
 import {TabList} from './TabList';
@@ -16,35 +16,14 @@ export interface TabsProps extends TabModelConfig {
   children: React.ReactNode;
 }
 
-export const Tabs = createComponent({
-  as: 'div',
+export const Tabs = createComponent()({
   displayName: 'Tabs',
-  Component: ({children, initialTab = '', ...elemProps}: TabsProps, ref, as) => {
-    const model = useTabModel(
-      elemProps
-      // {
-
-      // onRegisterItem({data, state}) {
-      //   console.log('onRegisterItem', data, state);
-      // },
-      // onUnregisterItem({data, state}) {
-      //   console.log('onUnregisterItem', data, state);
-      // },
-      // shouldActivateTab({data, state}) {
-      //   console.log('shouldActivateTab');
-      //   return true;
-      // },
-      // onActivateTab({data, state}) {
-      //   console.log('onActivateTab 2', data.tab, model.state.activeTab);
-      // },
-      // }
-    );
+  Component: ({children, initialTab = '', ...elemProps}: TabsProps, ref, Element) => {
+    const model = useTabModel();
 
     return (
       <TabsStateContext.Provider value={model}>
-        <Element as={as} {...elemProps} ref={ref}>
-          {children}
-        </Element>
+        {children}
       </TabsStateContext.Provider>
     );
   },

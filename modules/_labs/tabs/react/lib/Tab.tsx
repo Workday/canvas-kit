@@ -5,12 +5,14 @@ import {
   focusRing,
   hideMouseFocus,
   styled,
+  StyledType,
+  useComponentRef,
   useForkRef,
   useMountLayout,
 } from '@workday/canvas-kit-react-common';
 import {useTabsModelContext} from './Tabs';
 
-export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface TabProps {
   /**
    * The label text of the Tab.
    */
@@ -23,7 +25,7 @@ export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   name?: string;
 }
 
-const StyledButton = styled('button')<{isSelected: boolean}>(
+const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
   {
     ...type.body,
     ...type.variant.button,
@@ -78,11 +80,10 @@ const StyledButton = styled('button')<{isSelected: boolean}>(
   }
 );
 
-export const Tab = createComponent({
-  as: 'button',
+export const Tab = createComponent('button')({
   displayName: 'Tabs.Item',
-  Component: ({name = '', children, ...elemProps}: TabProps, ref, as) => {
-    const tabRef = React.useRef<HTMLButtonElement>(null);
+  Component: ({name = '', children, ...elemProps}: TabProps, ref, Element) => {
+    const tabRef = useComponentRef(ref);
     const elementRef = useForkRef(ref, tabRef);
 
     const {state, events} = useTabsModelContext();
@@ -121,8 +122,7 @@ export const Tab = createComponent({
     return (
       <StyledButton
         ref={elementRef}
-        // @ts-ignore Styled Component types don't include the as prop, but it works
-        as={as}
+        as={Element}
         role="tab"
         type="button"
         id={`tab-${state.id}-${tabName}`}
