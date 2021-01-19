@@ -54,7 +54,7 @@
     "@workday/canvas-kit-react-common": "^4.4.2",
     "@workday/canvas-kit-react-core": "^4.4.2",
     "@workday/canvas-kit-react-icon": "^4.4.2",
-    "@workday/canvas-system-icons-web": "^1.0.20",
+    "@workday/canvas-system-icons-web": "1.0.41",
     "@workday/design-assets-types": "^0.2.4"
   }
 }
