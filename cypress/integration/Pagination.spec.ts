@@ -1,293 +1,363 @@
 import * as h from '../helpers';
 
-describe('Button', () => {
+function getPaginationNav() {
+  return cy.findByLabelText('Pagination');
+}
+
+function getJumpToFirstButton() {
+  return cy.findByLabelText('First');
+}
+
+function getStepToPreviousButton() {
+  return cy.findByLabelText('Previous');
+}
+
+function getStepToNextButton() {
+  return cy.findByLabelText('Next');
+}
+
+function getJumpToLastButton() {
+  return cy.findByLabelText('Last');
+}
+
+function getPageList() {
+  return cy.get('ol');
+}
+
+function getPageListItems() {
+  return getPageList().find('li');
+}
+
+function getPageButtons() {
+  return getPageList().find('button');
+}
+
+function getCurrentPageButton() {
+  return getPageButtons().get('[aria-current="page"]');
+}
+
+function getAdditionalDetails() {
+  return cy.findByRole('status');
+}
+
+function getGoToForm() {
+  return cy.get('form');
+}
+
+function getGoToFormInput() {
+  return getGoToForm().find('input');
+}
+
+function getGoToFormLabel() {
+  return getGoToForm().find('label');
+}
+
+describe('Pagination', () => {
   before(() => {
     h.stories.visit();
   });
 
-  context('given Default pagination story is rendered', () => {
+  context('given the Jump Controls story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Labs/Pagination/React', 'Default');
+      h.stories.load('Labs/Pagination/React', 'Jump Controls');
     });
 
-    context('when screen width is larger than 500', () => {
-      it('should not have any axe errors', () => {
-        cy.checkA11y();
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    context('given the nav', () => {
+      it('should have an aria-label', () => {
+        getPaginationNav().should('have.ariaLabel', 'Pagination');
+      });
+    });
+
+    context('given the page list', () => {
+      it('should be an ol element with a role of list', () => {
+        getPageList().should('have.attr', 'role', 'list');
       });
 
-      context('when the first page is selected', () => {
-        it('should have first page button with an aria label of "Selected, Page 1"', () => {
-          cy.contains('button', '1').should('have.attr', 'aria-label', 'Selected, Page 1');
-        });
-
-        it('should disable previous page button', () => {
-          cy.findByLabelText('Previous Page').should('be.disabled');
-        });
-
-        it('should not disable next page button', () => {
-          cy.findByLabelText('Next Page').should('not.be.disabled');
-        });
-
-        it('should show 5 page buttons', () => {
-          cy.findAllByLabelText(/Page \d$/).should('have.length', 5);
-        });
-
-        it('should label all page buttons', () => {
-          cy.contains('button', '2').should('have.attr', 'aria-label', 'Page 2');
-          cy.contains('button', '3').should('have.attr', 'aria-label', 'Page 3');
-          cy.contains('button', '4').should('have.attr', 'aria-label', 'Page 4');
-          cy.contains('button', '5').should('have.attr', 'aria-label', 'Page 5');
-        });
-
-        it('should reflect the current page number', () => {
-          cy.findByTestId('pageNumber').should('have.text', '1');
-        });
+      it('should have five list items', () => {
+        getPageListItems().should('have.length', 5);
       });
 
-      context('when the second page is clicked', () => {
+      it('should have page buttons with correct text and aria-labels', () => {
+        getPageButtons()
+          .eq(0)
+          .should('have.ariaLabel', 'Page 1')
+          .and('contain.text', '1');
+        getPageButtons()
+          .eq(1)
+          .should('have.ariaLabel', 'Page 2')
+          .and('contain.text', '2');
+        getPageButtons()
+          .eq(2)
+          .should('have.ariaLabel', 'Page 3')
+          .and('contain.text', '3');
+        getPageButtons()
+          .eq(3)
+          .should('have.ariaLabel', 'Page 4')
+          .and('contain.text', '4');
+        getPageButtons()
+          .eq(4)
+          .should('have.ariaLabel', 'Page 5')
+          .and('contain.text', '5');
+      });
+
+      it('should add correctly apply aria-current to the current page', () => {
+        getPageButtons()
+          .first()
+          .should('have.attr', 'aria-current', 'page');
+      });
+
+      context('when a page button is clicked', () => {
         beforeEach(() => {
-          cy.findByLabelText('Page 2').click();
+          // click the 'page 4' button
+          getPageButtons()
+            .eq(3)
+            .click();
         });
 
-        it('should active page 2', () => {
-          cy.contains('button', '2').should('have.attr', 'aria-label', 'Selected, Page 2');
+        it('should properly re-render the page range', () => {
+          getPageButtons()
+            .first()
+            .should('contain.text', '2');
+          getCurrentPageButton().should('contain.text', '4');
+          getPageButtons()
+            .last()
+            .should('contain.text', '6');
+        });
+      });
+    });
+
+    context('given the step control buttons', () => {
+      it('should have a jump-to-first button with an aria-label', () => {
+        getJumpToFirstButton().should('have.attr', 'aria-label');
+      });
+
+      it('should have a step-to-previous button with an aria-label', () => {
+        getStepToPreviousButton().should('have.attr', 'aria-label');
+      });
+
+      it('should have a step-to-next button with an aria-label', () => {
+        getStepToNextButton().should('have.attr', 'aria-label');
+      });
+
+      it('should have a jump-to-last button with an aria-label', () => {
+        getJumpToLastButton().should('have.attr', 'aria-label');
+      });
+
+      context('when the first page is the current page', () => {
+        it('should disable the jump-to-first button', () => {
+          getJumpToFirstButton().should('have.attr', 'aria-disabled', 'true');
         });
 
-        it('should keep focus on page 2', () => {
-          cy.contains('button', '2').should('have.focus');
+        it('should disable the step-to-previous button', () => {
+          getStepToPreviousButton().should('have.attr', 'aria-disabled', 'true');
         });
 
-        it('should not disable previous page button', () => {
-          cy.findByLabelText('Previous Page').should('not.be.disabled');
-        });
-
-        it('should not disable next page button', () => {
-          cy.findByLabelText('Next Page').should('not.be.disabled');
-        });
-
-        it('should reflect the current page number', () => {
-          cy.findByTestId('pageNumber').should('have.text', '2');
+        it('should not update the current page when the step-to-previous button is clicked', () => {
+          getStepToPreviousButton().click();
+          getCurrentPageButton().should('contain.text', 1);
         });
       });
 
-      context('when there are 10 pages (for page number distribution)', () => {
+      context('when the last page is the current page', () => {
         beforeEach(() => {
-          cy.changeKnob('total', 100);
+          getJumpToLastButton().click();
         });
 
-        it('should show 6 numbers', () => {
-          cy.findAllByLabelText(/Page \d+$/).should('have.length', 6);
+        it('should disable the jump-to-last button', () => {
+          getStepToNextButton().should('have.attr', 'aria-disabled', 'true');
         });
 
-        context('when page 1 is selected', () => {
-          it('should show pages 1 through 5 and page 10', () => {
-            cy.findByLabelText(/Page 1$/).should('exist');
-            cy.findByLabelText(/Page 2$/).should('exist');
-            cy.findByLabelText(/Page 3$/).should('exist');
-            cy.findByLabelText(/Page 4$/).should('exist');
-            cy.findByLabelText(/Page 5$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
+        it('should disable the step-to-next button', () => {
+          getJumpToLastButton().should('have.attr', 'aria-disabled', 'true');
         });
 
-        context('when page 2 is selected', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Page 2').click();
-          });
+        it('should not update the current page when the step-to-previous button is clicked', () => {
+          getStepToNextButton().click();
+          getCurrentPageButton().should('contain.text', 100);
+        });
+      });
 
-          it('should show pages 1 through 5 and page 10', () => {
-            cy.findByLabelText(/Page 1$/).should('exist');
-            cy.findByLabelText(/Page 2$/).should('exist');
-            cy.findByLabelText(/Page 3$/).should('exist');
-            cy.findByLabelText(/Page 4$/).should('exist');
-            cy.findByLabelText(/Page 5$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
+      context('when the jump-to-first button is clicked', () => {
+        beforeEach(() => {
+          // click the 'page 4' button to enable the jump-to-first button
+          getPageButtons()
+            .eq(3)
+            .click();
         });
 
-        context('when page 3 is selected', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Page 3').click();
-          });
+        it('should properly re-render the page range (1,2,3,4,5)', () => {
+          getJumpToFirstButton().click();
+          getPageButtons()
+            .first()
+            .should('contain.text', '1');
+          getCurrentPageButton().should('contain.text', '1');
+          getPageButtons()
+            .last()
+            .should('contain.text', '5');
+        });
+      });
 
-          it('should show pages 1 through 5 and page 10', () => {
-            cy.findByLabelText(/Page 1$/).should('exist');
-            cy.findByLabelText(/Page 2$/).should('exist');
-            cy.findByLabelText(/Page 3$/).should('exist');
-            cy.findByLabelText(/Page 4$/).should('exist');
-            cy.findByLabelText(/Page 5$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
+      context('when the step-to-previous button is clicked', () => {
+        beforeEach(() => {
+          // click the 'page 5' button to enable the step-to-previous button
+          getPageButtons()
+            .last()
+            .click();
         });
 
-        context('when page 4 is selected', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Page 4').click();
-          });
+        it('should properly re-render the page range', () => {
+          getStepToPreviousButton().click();
+          getCurrentPageButton().should('contain.text', '4');
 
-          it('should show pages 2 through 6 and page 10', () => {
-            cy.findByLabelText(/Page 2$/).should('exist');
-            cy.findByLabelText(/Page 3$/).should('exist');
-            cy.findByLabelText(/Page 4$/).should('exist');
-            cy.findByLabelText(/Page 5$/).should('exist');
-            cy.findByLabelText(/Page 6$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
+          getStepToPreviousButton().click();
+          getCurrentPageButton().should('contain.text', '3');
+        });
+      });
+
+      context('when the step-to-next button is clicked', () => {
+        beforeEach(() => {
+          // click the 'page 5' button
+          getPageButtons()
+            .last()
+            .click();
         });
 
-        context('when page 6 is selected', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Page 10').click();
-            cy.findByLabelText('Page 6').click();
-          });
+        it('should properly re-render the page range', () => {
+          getStepToNextButton().click();
+          getCurrentPageButton().should('contain.text', '6');
 
-          it('should show pages 4 through 8 and page 10', () => {
-            cy.findByLabelText(/Page 4$/).should('exist');
-            cy.findByLabelText(/Page 5$/).should('exist');
-            cy.findByLabelText(/Page 6$/).should('exist');
-            cy.findByLabelText(/Page 7$/).should('exist');
-            cy.findByLabelText(/Page 8$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
+          getStepToNextButton().click();
+          getCurrentPageButton().should('contain.text', '7');
         });
+      });
 
-        context('when page 7 is selected', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Page 10').click();
-            cy.findByLabelText('Page 7').click();
-          });
-
-          it('should show page 1 and pages 6 through 10', () => {
-            cy.findByLabelText(/Page 1$/).should('exist');
-            cy.findByLabelText(/Page 6$/).should('exist');
-            cy.findByLabelText(/Page 7$/).should('exist');
-            cy.findByLabelText(/Page 8$/).should('exist');
-            cy.findByLabelText(/Page 9$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
+      context('when the jump-to-last button is clicked', () => {
+        it('should properly re-render the page range (96,97,98,99,100)', () => {
+          getJumpToLastButton().click();
+          getPageButtons()
+            .first()
+            .should('contain.text', '96');
+          getCurrentPageButton().should('contain.text', '100');
+          getPageButtons()
+            .last()
+            .should('contain.text', '100');
         });
+      });
+    });
 
-        context('when page 8 is selected', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Page 10').click();
-            cy.findByLabelText('Page 8').click();
-          });
+    context('given the additional details region', () => {
+      it('should have a role of status', () => {
+        getAdditionalDetails().should('have.attr', 'role', 'status');
+      });
 
-          it('should show page 1 and pages 6 through 10', () => {
-            cy.findByLabelText(/Page 1$/).should('exist');
-            cy.findByLabelText(/Page 6$/).should('exist');
-            cy.findByLabelText(/Page 7$/).should('exist');
-            cy.findByLabelText(/Page 8$/).should('exist');
-            cy.findByLabelText(/Page 9$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
-        });
+      it('should set aria-live to polite', () => {
+        getAdditionalDetails().should('have.attr', 'aria-live', 'polite');
+      });
 
-        context('when page 9 is selected', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Page 10').click();
-            cy.findByLabelText('Page 9').click();
-          });
+      it('should set aria-atomic to true', () => {
+        getAdditionalDetails().should('have.attr', 'aria-atomic', 'true');
+      });
 
-          it('should show page 1 and pages 6 through 10', () => {
-            cy.findByLabelText(/Page 1$/).should('exist');
-            cy.findByLabelText(/Page 6$/).should('exist');
-            cy.findByLabelText(/Page 7$/).should('exist');
-            cy.findByLabelText(/Page 8$/).should('exist');
-            cy.findByLabelText(/Page 9$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
-        });
+      it('should set aria-relevant to true', () => {
+        getAdditionalDetails().should('have.attr', 'aria-relevant', 'true');
+      });
 
-        context('when page 10 is selected', () => {
-          beforeEach(() => {
-            cy.findByLabelText('Page 10').click();
-          });
-
-          it('should show page 1 and pages 6 through 10', () => {
-            cy.findByLabelText(/Page 1$/).should('exist');
-            cy.findByLabelText(/Page 6$/).should('exist');
-            cy.findByLabelText(/Page 7$/).should('exist');
-            cy.findByLabelText(/Page 8$/).should('exist');
-            cy.findByLabelText(/Page 9$/).should('exist');
-            cy.findByLabelText(/Page 10$/).should('exist');
-          });
-
-          it('should disable the next page button', () => {
-            cy.findByLabelText('Next Page').should('be.disabled');
-          });
-        });
+      it('should describe the current page range and the total page count', () => {
+        getAdditionalDetails().should('contain.text', '1-5 of 100 results');
       });
     });
   });
 
-  context('given Default pagination story is rendered', () => {
+  context('given the Custom Range story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Labs/Pagination/React', 'With Go To');
+      h.stories.load('Labs/Pagination/React', 'Custom Range');
     });
 
-    context('when screen width is larger than 500', () => {
-      it('should not have any axe errors', () => {
-        cy.checkA11y();
-      });
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
 
-      context('when 50 is entered into the Go To input', () => {
-        beforeEach(() => {
-          cy.findByLabelText('Go To')
-            .type('50')
-            .type('{enter}');
-        });
-
-        it('should set page 50 as the selected page', () => {
-          cy.findByText('50').should('have.attr', 'aria-label', 'Selected, Page 50');
-        });
-      });
-
-      context('when -1 is entered into the Go To input', () => {
-        beforeEach(() => {
-          cy.findByLabelText('Go To')
-            .type('-1')
-            .type('{enter}');
-        });
-
-        it('should not change the selected page', () => {
-          cy.findByText('1').should('have.attr', 'aria-label', 'Selected, Page 1');
-        });
+    context('given the page list', () => {
+      it('should have three list items', () => {
+        getPageListItems().should('have.length', 3);
       });
     });
   });
 
-  context('when screen width is smaller than 500', () => {
+  context('given the GoTo Form story is rendered', () => {
     beforeEach(() => {
-      cy.viewport(414, 736); // iPhone 6/7/8 Plus
-      h.stories.load('Labs/Pagination/React', 'Default');
+      h.stories.load('Labs/Pagination/React', 'Go To Form');
     });
 
-    it('should show 2 page buttons', () => {
-      cy.findAllByLabelText(/Page \d+$/).should('have.length', 2);
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
     });
 
-    context('when the last page is clicked', () => {
-      beforeEach(() => {
-        cy.findByLabelText('Page 5').click();
+    context('given the Go To Form', () => {
+      it('should be a form element', () => {
+        getGoToForm().should('exist');
       });
 
-      it('should show 3 numbers', () => {
-        cy.findAllByLabelText(/Page \d+$/).should('have.length', 3);
+      // QUESTION: Does the input need an aria-label if the <label> is present?
+      context('given the input field', () => {
+        it('should be a text field', () => {
+          getGoToFormInput().should('have.attr', 'type', 'text');
+        });
+
+        it('should have an id', () => {
+          getGoToFormInput().should('have.attr', 'id');
+        });
+
+        it('should set size to 1', () => {
+          getGoToFormInput().should('have.attr', 'size', '1');
+        });
+
+        it('should got to the specified page if the value is within the range', () => {
+          getGoToFormInput().type('42');
+          getGoToFormInput().type('{enter}');
+
+          getCurrentPageButton().should('contain.text', '42');
+        });
+
+        it('should go to the last page if a value is above the range size is submitted', () => {
+          getGoToFormInput().type('101');
+          getGoToFormInput().type('{enter}');
+
+          getCurrentPageButton().should('contain.text', '100');
+          getPageButtons()
+            .first()
+            .should('contain.text', '96');
+          getPageButtons()
+            .last()
+            .should('contain.text', '100');
+        });
+
+        it('should go to the first page if a number below the range size is submitted', () => {
+          getGoToFormInput().type('0');
+          getGoToFormInput().type('{enter}');
+
+          getCurrentPageButton().should('contain.text', '1');
+          getPageButtons()
+            .first()
+            .should('contain.text', '1');
+          getPageButtons()
+            .last()
+            .should('contain.text', '5');
+        });
       });
 
-      it('should disable the next page button', () => {
-        cy.findByLabelText('Next Page').should('be.disabled');
-      });
-    });
+      context('given the label element', () => {
+        it("should set the 'for' attribute to the input id", () => {
+          getGoToFormInput().then($input => {
+            const inputId = $input.attr('id');
 
-    context('when there are 3 pages', () => {
-      beforeEach(() => {
-        cy.changeKnob('total', 30);
-      });
-
-      it('should show 3 page buttons', () => {
-        cy.findAllByLabelText(/Page \d+$/).should('have.length', 3);
+            getGoToFormLabel().should('have.attr', 'for', inputId);
+          });
+        });
       });
     });
   });
