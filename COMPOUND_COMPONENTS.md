@@ -108,7 +108,7 @@ For these reasons, we much prefer the compound component pattern. It allows our 
 
 ### What is a Model?
 
- If a compound component was stripped of all its markup, attributes, and styling, what would remain is the model. The model is how we describe the state and behavior of the component. You could completely swap out the underlying elements, attributes, and styles, and the model would remain the same. The model is an object that is composed of two parts: `state` and `events`. The model's `state` describes the current snapshot in time of the component, and `events` are functions that act on that state (behaviors).
+ If a compound component was stripped of all its markup, attributes, and styling, what would remain is the model. The model is how we describe the state and supported state transitions. You could completely swap out the underlying elements, attributes, and styles, and the model would remain the same. The model is an object that is composed of two parts: `state` and a `events`. The model's `state` describes the current snapshot in time of the component, and the `events` describes events that can be sent to the model. 
  
  ### Why Models?
  
@@ -128,15 +128,22 @@ For these reasons, we much prefer the compound component pattern. It allows our 
  }
  ```
 
-A model has configuration for functionality including configuration of events. An event has two parts:
-* Guard
-* Action
+A model hooks takes in a configuration object. This object can contain anything like initial values, configuration of behavior, etc. This is also where event behavior can be configured. Many model events will have 2 optional configurable functions:
 
-A guard controls if an event produces a state change as well is if the action is called. A guard is a function that receives data of the event and returns `true` to allow normal operation or `false` to prevent normal operation. The guard function is invoked before anything else in the event.
+* Callbacks
+* Guards
 
-An action is similar to any callback with information of an event. An action is used to perform side effects or additional state changes.
+#### Callbacks
 
-The convention is an event called `open` has a guard function called `shouldOpen` and an action function called `onOpen`. Here's an example of a disclosure model that has a state of `{ opened: boolean }` and an event of `{ open: () => void }`:
+A callback of an event is similar to native event callbacks like `onClick`. Callbacks are a place to handle events and by convention start with `on`. If the event is called `click`, the callback would be called `onClick`. Callbacks can be used to handle side effects or used to produce additional state changes. Callbacks are called synchronously which batches state changes, so any additional state changes will not produce additional renders.
+
+#### Guards
+
+Guards are special functions that determine if an event should trigger a state change and a callback. The function should return `true` or `false`. A `false` return value will effectively cancel the event and state changes will not occur and callbacks will not be invoked. A guard allows for a model's behavior to be modified without needing to produce a new model. Guard functions should be pure functions. Side effects should be performed in callbacks. The convention of a guard function is to start with a `should`. If an event is called `open`, the guard of the event would be called `shouldOpen`.
+
+Both guards and callbacks receive an object of event data (i.e. mouse position of a "click" event) and the current `state` of the model.
+
+Here's an example of a `DisclosureModel` that has an "open" event with a guard called "shouldOpen" and a callback called "onOpen":
 
 ```ts
 const useDisclosureModel = (config = {}) => {
@@ -157,7 +164,9 @@ const useDisclosureModel = (config = {}) => {
 }
 ```
 
-Guards allow configuration of state changes. A concrete example might be an `EllipsisTooltip` where `mouseover` or `focus` DOM events call the `open` model event. The `shouldOpen` guard would allow a conditional check of overflow to open the tooltip only if an overflow is detected. For example:
+You can see the guard is called first, if defined, and the output is checked. If `false` is returned, the event is canceled. If the guard is not defined or returns `true`, the `setOpened` setter is called. Finally, if a callback is defined, it is called.
+
+Guards allow configuration of state changes. A concrete example might be an `EllipsisTooltip` where `mouseover` or `focus` DOM events call the model's `open` event. The `shouldOpen` guard would allow conditional opening of the tooltip based on overflow (ellipsis) detection. For example:
 
 ```tsx
 const useEllipsisTooltipModel = (config = {}) => {
@@ -177,7 +186,7 @@ const useEllipsisTooltipModel = (config = {}) => {
 }
 ```
 
-Models are meant to be composable. For example, a `TabModel` uses a `MenuModel` (which itself uses `ListModel`) and a `ListModel` for a list of panels. `TabsModel` also keeps track of which tab is currently active. This might look like the following:
+Models are meant to be composable. For example, a `TabsModel` uses a `MenuModel` (which itself uses `ListModel`) and a `ListModel` for a list of panels. `TabsModel` also keeps track of which tab is currently active. This might look like the following:
 
 ```ts
 const useTabsModel = (config = {}) => {
@@ -188,18 +197,18 @@ const useTabsModel = (config = {}) => {
   const panels = useListModel(config)
   
   const state = {
-    ...menu.state,
+    ...menu.state, // extend the MenuModel state
     id,
     activeTab,
     panels: panels.state.items,
   }
   
   const events = {
-    ...menu.events,
+    ...menu.events, // extend the MenuModel events
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,
     
-    activateTab({ data }) {
+    activateTab(data) {
       if (config.shouldActivateTab?.({ data, state }) === false) {
         return
       }
@@ -227,10 +236,10 @@ interface Model<
 }
 ```
     
-The Typescript interface of Actions and Guards looks like this:
+The Typescript interface of Callbacks and Guards looks like this:
 ```ts
+type Callback<EventData, State> = ({ data: EventData, state: State}) => void
 type Guard<EventData, State> = ({ data: EventData, state: State}) => boolean
-type Action<EventData, State> = ({ data: EventData, state: State}) => void
 ```
 
 
@@ -238,11 +247,11 @@ type Action<EventData, State> = ({ data: EventData, state: State}) => void
 
 ### What is a Behavior Hook?
 
-A behavior hook usually applies to a sub-component and describes the events and attributes that are applied to a sub-component's element. A behavior hook takes in the model and developer-defined HTML attributes and return a merged object of events and HTML attributes.
+A behavior hook usually applies to a sub-component and describes attributes that are applied to a sub-component's element (i.e. `aria-labelledby`, or `onClick`). A behavior hook takes in the model and developer-defined DOM attributes and return a merged object of attributes. `(Model, HTMLAttributs) => HTMLAttributes`.
 
 ### Why Behavior Hooks?
 
-A behavior hook allows us to more easily reuse functionality between components with similar sub-components. They also provide another layer of composition to compound components. They are usually the accessibility layer of a sub-component and not the HTML element directly.
+A behavior hook allows us to more easily reuse functionality between components with similar sub-components. They also provide another layer of composition to compound components.
 
 For example, the `MenuModel` contains model's internal state and events, but doesn't handle external DOM events directly. The behavior hook is the glue between the model and DOM elements. A `useMenu` behavior hook might look like this:
 
@@ -276,7 +285,7 @@ const useMenu = (
 
 ## Putting it all together
 
-In the `Tabs` component example, the Menu doesn't actually exist as component, but a model and a behavior hook. The `Tab.List` sub-component uses the `TabModel` and the `useMenu` behavior hook to produce the desired sub-component. It looks something like this:
+In the `Tabs` component example, the Menu doesn't exist as component. The `Tab.List` sub-component uses the `MenuModel` and the `useMenu` behavior hook to produce the desired sub-component. It looks something like this:
 
 ```tsx
 const TabList = ({children, ...elemProps}) => {
@@ -297,9 +306,9 @@ const TabList = ({children, ...elemProps}) => {
 };
 ```
 
-There are 2 ways to configure a model.
+### Configuring a model
 
-The easiest way is to pass model configuration directly to the container component. In the `Tabs` example, it might look like this:
+A container component can either accept model configuration _or_ a model. Passing model configuration allows for simpler model configuration of guards, callbacks, or any other model configuration. The following example provides an `onActivateTab` callback that fetches some data from the server:
 
 ```tsx
 <Tabs
@@ -309,11 +318,12 @@ The easiest way is to pass model configuration directly to the container compone
 </Tabs>
 ```
 
-We expect most use-cases will be covered by the above example, but If you need direct access to the model in your component, you'll have to create the configured model yourself and pass it on to the container component. The allows direct access to state and events of the model. In the `Tabs` example, it might look like this:
+If you need direct access to a model's state or events, you can hoist the model into your component and pass the whole model to the container component. This allows you to use the model's state in your render method or provide the model's events to other callbacks. In the `Tabs` example, it might look like this:
 
 ```tsx
 const MyTabs = () => {
   const model = useTabsModel({
+    // we can still load data from the server
     onActivateTab: ({data}) => fetch('/api/activatetab' + data.id),
   })
 
@@ -322,13 +332,66 @@ const MyTabs = () => {
       <Tabs model={model}>
         ...
       </Tabs>
-      Current selected tab: {model.state.activeTab}
+      // direct access to the model's state
+      Currently selected tab: {model.state.activeTab}
 
-      // Now we can activate a tab externally
+      // Now we can send events directly to the model
       <button onClick={() => model.events.activateTab({ tab: 'third' })}>
         Activate third tab
       </button>
     </>
+  )
+}
+```
+
+### Composing a model
+
+Models allow for very powerful composition without changing the UI at all. For example, if we have a Disclosure component, but want to change the operating paradigm to be fully controlled by a parent component, we can compose a `DisclosureModel` to do so. Normally a disclosure model has it's own state, but we can override that behavior and make a controlled Disclosure component instead:
+
+```tsx
+const useControlledDisclosureModel = ({ opened, onChange, ...config }) => {
+  const model = useDisclosureModel(config)
+  
+  const state = {
+    ...model.state,
+    opened,
+  }
+  
+  const events = {
+    ...model.events,
+    open(data) {
+      onChange(true)
+    },
+    close(data) {
+      onChange(false)
+    }
+  }
+  
+  return { state, events }
+}
+
+const ControlledDisclosure = ({ buttonText, children, opened, onChange }) => {
+  const model = useControlledDisclosureModel({ opened, onChange })
+  
+  return (
+    <Disclosure model={model}>
+      <Disclosure.Target>{buttonText}</Disclosure.Target>
+      <Disclosure.Content>{children}</Disclosure.Content>
+    </Disclosure>
+  )
+}
+
+const App = () => {
+  const [opened, setOpened] = React.useState(false)
+  
+  return (
+    <ControlledDisclosure
+      buttonText="Toggle"
+      opened={opened}
+      onChange={setOpened}
+    >
+      Disclosed Content
+    </ControlledDisclosure>
   )
 }
 ```
