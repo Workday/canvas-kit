@@ -49,10 +49,7 @@ A container component is the entry point to a compound component. A container co
 If a compound component contains any state or behavior, it will also provide a shared model to sub-components via [React context](https://reactjs.org/docs/context.html). A container component takes props for either the model or configuration for the model. In the `Tabs` compound component example, it might look like this:
 
 ```tsx
-const TabsModelContext = React.createContext({})
-
-// This will be used in sub-components
-const useTabsModelContext = () => React.useContext(TabsModelContext)
+export const TabsModelContext = React.createContext({})
 
 const Tabs = ({children, model, ...config}) => {
   // either a model is passed in, or we create one
@@ -283,7 +280,7 @@ In the `Tabs` component example, the Menu doesn't actually exist as component, b
 
 ```tsx
 const TabList = ({children, ...elemProps}) => {
-  const model = useTabsModelContext()
+  const model = React.useContext(TabsModelContext)
   const menu = useMenu(
     model,
     elemProps,
