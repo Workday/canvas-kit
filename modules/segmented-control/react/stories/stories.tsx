@@ -17,7 +17,7 @@ import {SegmentedControl} from '../index';
 import README from '../README.md';
 
 export default {
-  title: 'Components|Buttons/Segmented Control/React',
+  title: 'Components/Buttons/Segmented Control/React',
   component: SegmentedControl,
   decorators: [withReadme(README)],
 };

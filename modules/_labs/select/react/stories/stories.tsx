@@ -86,7 +86,7 @@ export const customRenderOption: RenderOptionFunction = option => {
   );
 };
 
-storiesOf('Labs|Select/React/Top Label', module)
+storiesOf('Labs/Select/React/Top Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -144,7 +144,7 @@ storiesOf('Labs|Select/React/Top Label', module)
     </FormField>
   ));
 
-storiesOf('Labs|Select/React/Left Label', module)
+storiesOf('Labs/Select/React/Left Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Default', () => (

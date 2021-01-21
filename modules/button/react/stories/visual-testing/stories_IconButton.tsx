@@ -7,13 +7,14 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {IconButton} from '../../index';
 import {Container, IconButtonGrid, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Icon Button',
+  title: 'Testing/React/Buttons/Button/Icon Button',
   component: IconButton,
 });
 
@@ -66,3 +67,10 @@ export const IconButtonCircleToggleableGrid = () => (
 export const IconButtonInverseToggleableGrid = () => (
   <IconButtonGrid initialToggled={true} variant={IconButton.Variant.Inverse} />
 );
+
+export const IconButtonThemedStates = () => <IconButtonStates />;
+IconButtonThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

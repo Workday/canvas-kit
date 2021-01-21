@@ -5,7 +5,6 @@
 const request = require('request');
 const semver = require('semver');
 const {promisify} = require('util');
-const cmd = promisify(require('node-cmd').get);
 const exec = promisify(require('child_process').exec);
 
 const {
@@ -45,7 +44,7 @@ const slackAnnouncement = attachment => {
         ],
       },
     },
-    (error, response, body) => {
+    (error) => {
       if (error) {
         throw error;
       }
@@ -53,22 +52,22 @@ const slackAnnouncement = attachment => {
   );
 };
 
-cmd('git diff --name-only HEAD HEAD^')
-  .then(filesChangedInMerge => {
-    if (filesChangedInMerge.includes('CHANGELOG.md')) {
+exec('git diff --name-only HEAD HEAD^')
+  .then(({stdout}) => {
+    if (stdout.includes('CHANGELOG.md')) {
       console.log('Last merge commit was a release. Skipping canary build.');
       process.exit(0);
     }
 
-    return cmd('git rev-parse --short HEAD');
+    return exec('git rev-parse --short HEAD');
   })
-  .then(sha => {
-    data.sha = sha.trim();
+  .then(({stdout}) => {
+    data.sha = stdout.trim();
 
-    return cmd(`git describe --abbrev=0`);
+    return exec(`git describe --abbrev=0`);
   })
-  .then(releaseTag => {
-    const nextReleaseVersion = semver.inc(releaseTag, 'prerelease', 'beta'); // eg. 4.0.0-beta.3 > 4.0.0-beta.4
+  .then(({stdout}) => {
+    const nextReleaseVersion = semver.inc(stdout, 'prerelease', 'beta'); // eg. 4.0.0-beta.3 > 4.0.0-beta.4
     const nextReleasePreid = nextReleaseVersion.split('-')[1];
 
     if (isPrerelease && !nextReleasePreid) {
@@ -87,22 +86,16 @@ cmd('git diff --name-only HEAD HEAD^')
       preid === 'prerelease' ? 'major' : '',
     ];
 
-    // The default buffer size is 1024*200 (200kb) in node v10.x which causes this command to overflow the buffer.
-    // In node v12.x and above maxBuffer is 1024*1024. We can probably remove this and go back to using cmd if we update node.
-    
-    // TODO: Consider swapping out cmd in favor of exec, it's what node-cmd uses under the hood and it 
-    // natively allows you to access the options arg like we're doing here.
-    return exec(`yarn lerna publish ${lernaFlags.join(' ')}`, {maxBuffer: 1024*1024});
+    return exec(`yarn lerna publish ${lernaFlags.join(' ')}`);
   })
-  // exec returns { stdout, stderr } so we're destructuring and renaming to be consistent with cmd usage across this script
-  .then(({stdout: output}) => {
-    console.log(output);
+  .then(({stdout}) => {
+    console.log(stdout);
 
     const regex = new RegExp(
       `@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*\\+\\w*)`,
       'g'
     );
-    data.packages = output.match(regex);
+    data.packages = stdout.match(regex);
     data.version = regex.exec(data.packages[0])[1];
 
     slackAnnouncement({

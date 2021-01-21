@@ -15,7 +15,7 @@ const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'ico
   title: 'Activity Stream',
 };
 
-storiesOf('Tokens|Common/Theming', module)
+storiesOf('Tokens/Common/Theming', module)
   .addDecorator(withReadme(README))
   .add('Direction', () => (
     <div className="story">

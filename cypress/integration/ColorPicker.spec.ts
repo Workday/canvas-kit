@@ -7,8 +7,8 @@ const getResetButton = () => cy.contains('button', 'Reset');
 const getSubmitButton = () => cy.findByLabelText('Submit');
 const getSwatch = (color: string) => cy.get(`div[color="${color}"]`);
 
-const colorInputStory = 'Components|Inputs/Color Picker/Color Input/React/Top Label';
-const colorPreviewStory = 'Components|Inputs/Color Picker/Color Preview/React/Top Label';
+const colorInputStory = 'Components/Inputs/Color Picker/Color Input/React/Top Label';
+const colorPreviewStory = 'Components/Inputs/Color Picker/Color Preview/React/Top Label';
 const colorPickerStory = 'Labs/Color Picker/React';
 const value = '000000';
 
@@ -224,7 +224,7 @@ describe('ColorPicker', () => {
 
   context('when the InputInteraction story is loaded', () => {
     beforeEach(() => {
-      h.stories.load('Testing|React/Labs/Color Picker', 'InputInteraction');
+      h.stories.load('Testing/React/Labs/Color Picker', 'InputInteraction');
     });
 
     context('when input is entered into the color input and user hits enter', () => {

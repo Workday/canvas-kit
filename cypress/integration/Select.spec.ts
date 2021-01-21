@@ -13,7 +13,7 @@ describe('Select', () => {
   ['Plain', 'Alert', 'Error'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components|Inputs/Select/React/Top Label', story);
+        h.stories.load('Components/Inputs/Select/React/Top Label', story);
       });
 
       it('should pass accessibility checks', () => {
@@ -38,7 +38,7 @@ describe('Select', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Select/React/Top Label', 'Disabled');
+      h.stories.load('Components/Inputs/Select/React/Top Label', 'Disabled');
     });
 
     it('should pass accessibility checks', () => {

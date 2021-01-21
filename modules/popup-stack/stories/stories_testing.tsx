@@ -18,7 +18,7 @@ import {
 import {DeleteButton, Button} from '@workday/canvas-kit-react-button';
 
 export default {
-  title: 'Testing|React/Popups/Popup Stack',
+  title: 'Testing/React/Popups/Popup Stack',
 };
 
 interface WindowProps {

@@ -10,7 +10,7 @@ import {
 import SidePanel from '../index';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Side Panel',
+  title: 'Testing/React/Labs/Side Panel',
   component: SidePanel,
 });
 

@@ -1,7 +1,7 @@
-const path = require('path');
 const mkdirp = require('mkdirp');
-const cmd = require('node-cmd');
-const colors = require('colors');
+const {exec} = require('child_process');
+
+require('colors');
 
 const writeModuleFiles = require('./writeModuleFiles');
 
@@ -32,8 +32,8 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
   const rootPath = unstable ? '../../../..' : '../../..';
-  const storyPath = `${unstable ? 'Labs|' : `Components|${category}/`}${titleCaseName}/React`;
-  const testingStoryPath = `Testing|React/${unstable ? 'Labs' : category}/${titleCaseName}`;
+  const storyPath = `${unstable ? 'Labs/' : `Components/${category}/`}${titleCaseName}/React`;
+  const testingStoryPath = `Testing/React/${unstable ? 'Labs' : category}/${titleCaseName}`;
 
   const files = {
     package: {
@@ -93,5 +93,5 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
   writeModuleFiles(files, modulePath);
 
   console.log('Copying License file to ' + `.${modulePath.replace(cwd, '')}/LICENSE`.cyan);
-  cmd.run(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
+  exec(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };

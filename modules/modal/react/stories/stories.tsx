@@ -13,7 +13,7 @@ import README from '../README.md';
 import {controlComponent} from '../../../../utils/storybook';
 
 export default {
-  title: 'Components|Popups/Modal/React',
+  title: 'Components/Popups/Modal/React',
   component: Modal,
   decorators: [withReadme(README)],
 };

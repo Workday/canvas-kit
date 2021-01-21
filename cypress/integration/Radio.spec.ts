@@ -11,7 +11,7 @@ describe('Radio', () => {
 
   context(`given the Default story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Radio/React/Left Label/Radio', 'Default');
+      h.stories.load('Components/Inputs/Radio/React/Left Label/Radio', 'Default');
     });
 
     it('should pass accessibility checks', () => {
@@ -31,7 +31,7 @@ describe('Radio', () => {
 
   context(`given the 'Disabled' story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Inputs/Radio/React/Left Label/Radio', 'Disabled');
+      h.stories.load('Components/Inputs/Radio/React/Left Label/Radio', 'Disabled');
     });
 
     it('should pass accessibility checks', () => {

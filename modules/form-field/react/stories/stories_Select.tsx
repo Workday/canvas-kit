@@ -11,7 +11,7 @@ import {Select, SelectOption} from '../../../select/react';
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
-storiesOf('Components|Inputs/Select/React/Top Label', module)
+storiesOf('Components/Inputs/Select/React/Top Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Plain', () => (
@@ -106,7 +106,7 @@ storiesOf('Components|Inputs/Select/React/Top Label', module)
     </FormField>
   ));
 
-storiesOf('Components|Inputs/Select/React/Left Label', module)
+storiesOf('Components/Inputs/Select/React/Left Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Plain', () => (

@@ -11,7 +11,7 @@ import README from '../README.md';
 import {useTabsModel} from '../lib/useTabsModel';
 
 export default {
-  title: 'Labs|Tabs/React',
+  title: 'Labs/Tabs/React',
   component: Tabs,
   decorators: [withReadme(README)],
 };

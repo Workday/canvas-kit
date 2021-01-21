@@ -7,7 +7,7 @@ import {CountBadge} from '../index';
 import README from '../README.md';
 
 export default {
-  title: 'Components|Indicators/Badge/CountBadge/React',
+  title: 'Components/Indicators/Badge/CountBadge/React',
   decorators: [withKnobs, withReadme(README)],
 };
 
@@ -25,6 +25,16 @@ export const Inverse = () => (
     <CountBadge
       count={number('Count', 1)}
       variant={select('Variant', ['default', 'inverse'], 'inverse')}
+    />
+  </div>
+);
+
+export const CustomLimit = () => (
+  <div className="story">
+    <CountBadge
+      count={number('Count', 100)}
+      limit={number('Number', 100)}
+      variant={select('Variant', ['default', 'inverse'], 'default')}
     />
   </div>
 );

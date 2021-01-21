@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.4.2 (2020-12-09)
+
+### Components
+- fix(menu): Remove minimum width and collapse around the content ([#922](https://github.com/Workday/canvas-kit/pull/922)) [@willklein](https://github.com/willklein)
+- fix(common): Fix mouseFocusBehavior type issue ([#926](https://github.com/Workday/canvas-kit/pull/926)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+- feat: Upgrade Storybook to v6.1.3 ([#897](https://github.com/Workday/canvas-kit/pull/897)) [@anicholls](https://github.com/anicholls)
+- fix: Add Emotion dependency to fix transient dep issue ([#917](https://github.com/Workday/canvas-kit/pull/917)) [@anicholls](https://github.com/anicholls)
+- fix: Re-enable postcss for storybook builds to transpile svg-load ([#919](https://github.com/Workday/canvas-kit/pull/919)) [@anicholls](https://github.com/anicholls)
+
+# 4.4.1 (2020-11-20)
+
+### Components
+- fix(color-picker): Detect different formats of #ffffff ([#884](https://github.com/Workday/canvas-kit/pull/884)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(popup): Fix usePopup hook example docs ([#911](https://github.com/Workday/canvas-kit/pull/911)) [@Parker-Ledoux](https://github.com/Parker-Ledoux)
+- fix(select): Allow a single option ([#914](https://github.com/Workday/canvas-kit/pull/914)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+- ci: Use exec instead of node-cmd ([#908](https://github.com/Workday/canvas-kit/pull/908)) [@lychyi](https://github.com/lychyi)
+- chore: Fix create component scripts ([#912](https://github.com/Workday/canvas-kit/pull/912)) [@Parker-Ledoux](https://github.com/Parker-Ledoux)
+
 # 4.4.0 (2020-11-13)
 
 ### Components

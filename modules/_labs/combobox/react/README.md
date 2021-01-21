@@ -1,7 +1,7 @@
 # Canvas Kit Combobox
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
-  <img src="https://img.shields.io/badge/UNSTABLE-alpha-orange" alt="UNSTABLE: Alpha" />
+  <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
 For a full suite of examples, have a look at the [Combobox Stories](./stories/stories.tsx).

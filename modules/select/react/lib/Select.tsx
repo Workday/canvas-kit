@@ -25,7 +25,7 @@ export interface SelectProps
   /**
    * The SelectOption children of the Select (must be at least two).
    */
-  children: React.ReactElement<SelectOption>[];
+  children: React.ReactElement<SelectOption> | React.ReactElement<SelectOption>[];
   /**
    * If true, set the Select to the disabled state.
    * @default false
@@ -117,7 +117,7 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
   })
 );
 
-export default class Select extends React.Component<SelectProps> {
+class Select extends React.Component<SelectProps> {
   static ErrorType = ErrorType;
 
   public render() {
@@ -145,3 +145,7 @@ export default class Select extends React.Component<SelectProps> {
     );
   }
 }
+
+Select.ErrorType = ErrorType;
+
+export default Select;

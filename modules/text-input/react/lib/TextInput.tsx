@@ -77,7 +77,7 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 
   }
 );
 
-export default class TextInput extends React.Component<TextInputProps> {
+class TextInput extends React.Component<TextInputProps> {
   static ErrorType = ErrorType;
 
   render() {
@@ -87,3 +87,7 @@ export default class TextInput extends React.Component<TextInputProps> {
     return <Input type="text" ref={inputRef} grow={grow} error={error} {...inputProps} />;
   }
 }
+
+TextInput.ErrorType = ErrorType;
+
+export default TextInput;

@@ -8,7 +8,7 @@ import {CountBadge} from '../index';
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Indicators/Badge/CountBadge',
+  title: 'Testing/React/Indicators/Badge/CountBadge',
   component: CountBadge,
   decorators: [withReadme(README)],
 });
@@ -24,6 +24,7 @@ export const CountBadgeStates = () => {
           label: 'Greater than 999',
           props: {count: 1000},
         },
+        {label: 'Custom Limit', props: {count: 100, limit: 100}},
       ]}
       rowProps={[
         {label: 'Default', props: {}},

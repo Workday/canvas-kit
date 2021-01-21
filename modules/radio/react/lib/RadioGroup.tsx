@@ -63,7 +63,7 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
   }
 );
 
-export default class RadioGroup extends React.Component<RadioGroupProps> {
+class RadioGroup extends React.Component<RadioGroupProps> {
   static ErrorType = ErrorType;
 
   render(): React.ReactNode {
@@ -114,3 +114,7 @@ export default class RadioGroup extends React.Component<RadioGroupProps> {
     }
   };
 }
+
+RadioGroup.ErrorType = ErrorType;
+
+export default RadioGroup;

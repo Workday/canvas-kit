@@ -117,7 +117,7 @@ const FormFieldInputContainer = styled('div')<GrowthBehavior & FormFieldLabelPos
   }
 );
 
-export default class FormField extends React.Component<FormFieldProps> {
+class FormField extends React.Component<FormFieldProps> {
   static LabelPosition = FormFieldLabelPosition;
   static ErrorType = ErrorType;
 
@@ -202,3 +202,8 @@ export default class FormField extends React.Component<FormFieldProps> {
     return useFieldset ? <FormFieldFieldsetContainer>{field}</FormFieldFieldsetContainer> : field;
   }
 }
+
+FormField.LabelPosition = FormFieldLabelPosition;
+FormField.ErrorType = ErrorType;
+
+export default FormField;
