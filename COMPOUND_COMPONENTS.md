@@ -98,7 +98,20 @@ Conversely, compound components have a more verbose implementation and loose con
 </Tabs>
 ```
 
-Extra HTML attributes can be added directly to the `Tabs.List`, `Tabs.Item`, or `Tabs.Panel` sub-components.
+Components that directly wrap an element (most of them) will have the following properties:
+
+* `ref`: This allows direct access to the underlying element.
+  ```tsx
+  <Tabs.Item ref={myRef}>
+  ```
+* `as`: This allows overriding of the default element. This can be a component as well.
+  ```tsx
+  <Tabs.List as="section">
+  ```
+* Any extra props will be passed as HTML attributes to the underlying element.
+  ```tsx
+  <Tabs.Item aria-label="Foobar" data-testid="tab1">
+  ```
 
 The pattern provides an additional benefit as well: maintainability. An active client-side application is constantly changing over the course of its lifecycle. However, not all parts change at the same rate. The application-level business logic (authentication, authorization, data fetching, et al) likely remains fairly intact over time. The UI logic layer (checkout flow steps, modal logic, etc) will change more frequently as features evolves or are deprecated. The most frequent changes happen at the markup structure and styling level. Configurable components are great at meeting the needs of your application today, but are more difficult to update. Changing the markup will often require changes to the component's code which will require library updates. These library updates mean more UI logic and complexity or complete rewrite to support more use-cases.
 
@@ -395,3 +408,4 @@ const App = () => {
   )
 }
 ```
+
