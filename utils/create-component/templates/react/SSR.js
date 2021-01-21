@@ -6,7 +6,7 @@ module.exports = pascalCaseName => `
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import ${pascalCaseName} from '../';
+import {${pascalCaseName}} from '../';
 
 describe('${pascalCaseName}', () => {
   it('should render on a server without crashing', () => {
