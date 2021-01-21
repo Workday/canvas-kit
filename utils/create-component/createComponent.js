@@ -71,7 +71,7 @@ inquirer
     const {name, category, targets} = answers;
     const css = targets.includes('CSS');
     const react = targets.includes('React');
-    const unstable = category == 'Labs (unstable)';
+    const unstable = category === 'Labs (unstable)';
     const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
     if (!fs.existsSync(componentPath)) {

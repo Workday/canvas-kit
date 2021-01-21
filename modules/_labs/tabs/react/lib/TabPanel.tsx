@@ -1,12 +1,16 @@
 /** @jsx jsx */
+import React from 'react';
 import {jsx, css} from '@emotion/core';
+
 import {
   createComponent,
   mouseFocusBehavior,
+  useModelContext,
   useMountLayout,
 } from '@workday/canvas-kit-react-common';
-import React from 'react';
-import {useTabsModelContext} from './Tabs';
+
+import {TabsModelContext} from './Tabs';
+import {TabsModel} from './useTabsModel';
 
 export interface TabPanelProps {
   /**
@@ -19,6 +23,10 @@ export interface TabPanelProps {
    * string representation of the the zero-based index of the Tab when it was initialized.
    */
   name?: string;
+  /** Optionally pass a model directly to this component. Default is to implicitly use the same
+   * model as the container component which uses React context. Only use this for advanced use-cases
+   */
+  model?: TabsModel;
 }
 
 const styles = css(
@@ -31,8 +39,8 @@ const styles = css(
 
 export const TabPanel = createComponent('div')({
   displayName: 'Tabs.Panel',
-  Component: ({children, name = '', ...elemProps}: TabPanelProps, ref, Element) => {
-    const {state, events} = useTabsModelContext();
+  Component: ({children, name = '', model, ...elemProps}: TabPanelProps, ref, Element) => {
+    const {state, events} = useModelContext(TabsModelContext, model);
     const panelRef = React.useRef<HTMLDivElement>(null);
     const [tabName, setTabName] = React.useState(name);
 

@@ -1,25 +1,25 @@
 import * as React from 'react';
 
 import {spacing, commonColors} from '@workday/canvas-kit-react-core';
-
-import {useTabsModelContext} from './Tabs';
-import {TabProps} from './Tab';
-import {useMenu, orientationKeyMap} from './useMenu';
 import {
   createComponent,
   useForkRef,
   styled,
   StyledType,
   useComponentRef,
+  useModelContext,
 } from '@workday/canvas-kit-react-common';
 
-type Tab = React.ReactElement<TabProps>;
+import {TabsModelContext} from './Tabs';
+import {useMenu, orientationKeyMap} from './useMenu';
+import {TabsModel} from './useTabsModel';
 
 export interface TabListProps {
-  /**
-   * A list of Tab components.
+  children: React.ReactNode;
+  /** Optionally pass a model directly to this component. Default is to implicitly use the same
+   * model as the container component which uses React context. Only use this for advanced use-cases
    */
-  children: Tab | Tab[];
+  model?: TabsModel;
 }
 
 const TabsListContainer = styled('div')({
@@ -36,11 +36,11 @@ const TabsListInnerContainer = styled('div')<StyledType>({
 
 export const TabList = createComponent('div')({
   displayName: 'Tabs.List',
-  Component: ({children, ...elemProps}: TabListProps, ref, Element) => {
+  Component: ({children, model, ...elemProps}: TabListProps, ref, Element) => {
     const tabsListRef = useComponentRef(ref);
     const elementRef = useForkRef(ref, tabsListRef);
     // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
-    const {state, events} = useTabsModelContext();
+    const {state, events} = useModelContext(TabsModelContext, model);
     const menu = useMenu(
       {state, events},
       {

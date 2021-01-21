@@ -5,6 +5,6 @@ export * from './mergeCallback';
 export * from './mergeCallbacks';
 export * from './useUniqueId';
 export * from './assert';
-export * from './model';
 export * from './useMount';
 export * from './components';
+export * from './models';

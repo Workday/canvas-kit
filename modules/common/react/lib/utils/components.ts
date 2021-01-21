@@ -69,7 +69,7 @@ export const createComponent = <T extends React.ElementType>(as?: T) => <P, SubC
       props,
       //@ts-ignore Problems with type constraints of T and T extends ElementTagName ? ... This doesn't cause a problem, not sure it is worth fixing
       ref,
-      as
+      (props as any).as || as
     );
     // Component({as, ...props}, ref)
   }) as any) as Component<T, P> & SubComponents;
@@ -118,7 +118,7 @@ function setRef<T>(ref: React.Ref<T>, value: T): void {
  *   return <div ref={elementRef}/>
  * })
  */
-export function useForkRef<T>(ref1: React.Ref<T>, ref2: React.Ref<T>): React.Ref<T> {
+export function useForkRef<T>(ref1: React.Ref<T>, ref2: React.Ref<T>): (instance: T) => void {
   return (value: T) => {
     setRef(ref1, value);
     setRef(ref2, value);
@@ -133,4 +133,42 @@ export function useForkRef<T>(ref1: React.Ref<T>, ref2: React.Ref<T>): React.Ref
  */
 export function useComponentRef<T>(ref: React.Ref<T>) {
   return React.useRef<T>(null);
+}
+
+/**
+ * Returns a model, or calls the model hook with config. Clever way around the conditional React
+ * hook ESLint rule.
+ * @param model A model, if provided
+ * @param config Config for a model
+ * @param modelHook A model hook that takes valid config
+ * @example
+ * const ContainerComponent = ({children, model, ...config}: ContainerProps) => {
+ *   const value = useDefaultModel(model, config, useContainerModel);
+ *
+ *   // ...
+ * }
+ */
+export function useDefaultModel<T, C>(
+  model: T | undefined,
+  config: C,
+  modelHook: (config: C) => T
+) {
+  return model || modelHook(config);
+}
+
+/**
+ * Returns a model, or returns a model context. Clever way around the conditional React hood ESLint
+ * rule
+ * @param model A model, if provided
+ * @param context The context of a model
+ * @example
+ * const SubComponent = ({children, model, ...elemProps}: SubComponentProps, ref, Element) => {
+ *   const {state, events} = useModelContext(model, SubComponentModelContext);
+ *
+ *   // ...
+ * }
+ */
+export function useModelContext<T>(context: React.Context<T>, model?: T) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  return model || React.useContext(context);
 }

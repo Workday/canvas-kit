@@ -32,7 +32,7 @@ export const listEventMap = createEventMap<ListEvents>()({
     shouldRegisterItem: 'registerItem',
     shouldUnregisterItem: 'unregisterItem',
   },
-  actions: {
+  callbacks: {
     onRegisterItem: 'registerItem',
     onUnregisterItem: 'unregisterItem',
   },

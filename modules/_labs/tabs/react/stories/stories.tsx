@@ -8,7 +8,7 @@ import {Tabs} from '@workday/canvas-kit-labs-react-tabs';
 
 import withReadme from 'storybook-readme/with-readme';
 import README from '../README.md';
-import {useTabModel} from '../lib/useTabModel';
+import {useTabsModel} from '../lib/useTabsModel';
 
 export default {
   title: 'Labs|Tabs/React',
@@ -16,38 +16,38 @@ export default {
   decorators: [withReadme(README)],
 };
 
-// const items = [
-//   {
-//     title: 'First Tab',
-//     contents: 'Contents of First Tab',
-//     disabled: true,
-//   },
-//   {
-//     title: 'Second Tab',
-//     contents: 'Contents of Second Tab',
-//   },
-//   {
-//     title: 'Third Tab',
-//     contents: 'Contents of Third Tab',
-//   },
-// ];
+const items = [
+  {
+    title: 'First Tab',
+    contents: 'Contents of First Tab',
+    disabled: true,
+  },
+  {
+    title: 'Second Tab',
+    contents: 'Contents of Second Tab',
+  },
+  {
+    title: 'Third Tab',
+    contents: 'Contents of Third Tab',
+  },
+];
 
-// const ComposedTabs = (props: {items: any[]}) => (
-//   <Tabs>
-//     <Tabs.List>
-//       {items.map(tab => {
-//         return <Tabs.Item disabled={tab.disabled}>{tab.title}</Tabs.Item>;
-//       })}
-//     </Tabs.List>
-//     <div css={{marginTop: spacing.m}}>
-//       {items.map(tab => {
-//         return <Tabs.Panel>{tab.contents}</Tabs.Panel>;
-//       })}
-//     </div>
-//   </Tabs>
-// );
+const ComposedTabs = (props: {items: any[]}) => (
+  <Tabs>
+    <Tabs.List>
+      {items.map(tab => {
+        return <Tabs.Item disabled={tab.disabled}>{tab.title}</Tabs.Item>;
+      })}
+    </Tabs.List>
+    <div css={{marginTop: spacing.m}}>
+      {items.map(tab => {
+        return <Tabs.Panel>{tab.contents}</Tabs.Panel>;
+      })}
+    </div>
+  </Tabs>
+);
 
-// export const Simple = () => <ComposedTabs items={items} />;
+export const Simple = () => <ComposedTabs items={items} />;
 
 const MyComponent = ({
   children,
@@ -62,31 +62,31 @@ const MyComponent = ({
   </article>
 );
 
-export const Simple = () => {
-  return(
-  <Tabs
-    onClick={event => {
-      console.log(event);
-    }}
-  >
-    <Tabs.List>
-      <Tabs.Item as={'article'} aria-label="foobar" onClick={event => event}>
-        First Tab
-      </Tabs.Item>
-      <Tabs.Item>Second Tab</Tabs.Item>
-      <Tabs.Item>Third Tab</Tabs.Item>
-      <Tabs.Item>Fourth Tab</Tabs.Item>
-      <Tabs.Item>Fifth Tab</Tabs.Item>
-    </Tabs.List>
-    <div css={{marginTop: spacing.m}}>
-      <Tabs.Panel>Contents of First Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Third Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Fourth Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Fifth Tab</Tabs.Panel>
-    </div>
-  </Tabs>
-)};
+// export const Simple = () => {
+//   return(
+//   <Tabs
+//     onClick={event => {
+//       console.log(event);
+//     }}
+//   >
+//     <Tabs.List>
+//       <Tabs.Item as={'article'} aria-label="foobar" onClick={event => event}>
+//         First Tab
+//       </Tabs.Item>
+//       <Tabs.Item>Second Tab</Tabs.Item>
+//       <Tabs.Item>Third Tab</Tabs.Item>
+//       <Tabs.Item>Fourth Tab</Tabs.Item>
+//       <Tabs.Item>Fifth Tab</Tabs.Item>
+//     </Tabs.List>
+//     <div css={{marginTop: spacing.m}}>
+//       <Tabs.Panel>Contents of First Tab</Tabs.Panel>
+//       <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
+//       <Tabs.Panel>Contents of Third Tab</Tabs.Panel>
+//       <Tabs.Panel>Contents of Fourth Tab</Tabs.Panel>
+//       <Tabs.Panel>Contents of Fifth Tab</Tabs.Panel>
+//     </div>
+//   </Tabs>
+// )};
 
 export const NamedKeys = () => {
   const ref = React.useRef<HTMLButtonElement>(null);
@@ -175,7 +175,7 @@ export const SinglePanel = () => {
 
 export const SinglePanelModel = () => {
   const [currentTab, setCurrentTab] = React.useState('second');
-  const model = useTabModel({
+  const model = useTabsModel({
     initialTab: currentTab,
     onActivateTab: ({data}) => setCurrentTab(data.tab),
   });

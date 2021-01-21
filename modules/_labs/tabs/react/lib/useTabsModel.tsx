@@ -3,7 +3,7 @@ import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas
 import {MenuState, MenuEvents, menuEventMap, useMenuModel} from './useMenuModel';
 import {Item, ListEvents, ListState, useListModel} from './useListModel';
 
-type TabState = MenuState & {
+type TabsState = MenuState & {
   /**
    * The name of the active tab provided to the `Tabs.Item` component. If no name is provided, it
    * will be a string of the index position */
@@ -14,7 +14,7 @@ type TabState = MenuState & {
   programmaticFocusRef: React.MutableRefObject<boolean>;
 };
 
-type TabEvents = MenuEvents & {
+type TabsEvents = MenuEvents & {
   /**
    * This event will set the `activeTab` in the state. Called when a user activates a tab
    */
@@ -27,26 +27,26 @@ type TabEvents = MenuEvents & {
   unregisterPanel: ListEvents['unregisterItem'];
 };
 
-export type TabModel = Model<TabState, TabEvents>;
+export type TabsModel = Model<TabsState, TabsEvents>;
 
-const tabEventMap = createEventMap<TabEvents>()({
+const tabEventMap = createEventMap<TabsEvents>()({
   guards: {
     ...menuEventMap.guards,
     shouldActivateTab: 'activateTab',
   },
-  actions: {
-    ...menuEventMap.actions,
+  callbacks: {
+    ...menuEventMap.callbacks,
     onActivateTab: 'activateTab',
   },
 });
 
-export type TabModelConfig = {
+export type TabsModelConfig = {
   id?: string;
   initialTab?: string;
   direction?: 'vertical' | 'horizontal';
-} & Partial<ToModelConfig<TabState, TabEvents, typeof tabEventMap>>;
+} & Partial<ToModelConfig<TabsState, TabsEvents, typeof tabEventMap>>;
 
-export const useTabModel = (config: TabModelConfig = {}): TabModel => {
+export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
   const initialTabRef = React.useRef(config.initialTab);
   const programmaticFocusRef = React.useRef(false);
   const [activeTab, setActiveTab] = React.useState(initialTabRef.current || '');
@@ -59,7 +59,7 @@ export const useTabModel = (config: TabModelConfig = {}): TabModel => {
         initialTabRef.current = data.item.id;
         setActiveTab(initialTabRef.current);
       }
-      config.onRegisterItem?.({data, state: state as TabState});
+      config.onRegisterItem?.({data, state: state as TabsState});
     },
   });
   const panels = useListModel();

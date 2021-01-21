@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react-core';
 import {
   createComponent,
@@ -8,9 +9,12 @@ import {
   StyledType,
   useComponentRef,
   useForkRef,
+  useModelContext,
   useMountLayout,
 } from '@workday/canvas-kit-react-common';
-import {useTabsModelContext} from './Tabs';
+
+import {TabsModelContext} from './Tabs';
+import {TabsModel} from './useTabsModel';
 
 export interface TabProps {
   /**
@@ -23,6 +27,10 @@ export interface TabProps {
    * string representation of the the zero-based index of the Tab when it was initialized.
    */
   name?: string;
+  /** Optionally pass a model directly to this component. Default is to implicitly use the same
+   * model as the container component which uses React context. Only use this for advanced use-cases
+   */
+  model?: TabsModel;
 }
 
 const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
@@ -82,11 +90,11 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
 
 export const Tab = createComponent('button')({
   displayName: 'Tabs.Item',
-  Component: ({name = '', children, ...elemProps}: TabProps, ref, Element) => {
+  Component: ({name = '', model, children, ...elemProps}: TabProps, ref, Element) => {
     const tabRef = useComponentRef(ref);
     const elementRef = useForkRef(ref, tabRef);
 
-    const {state, events} = useTabsModelContext();
+    const {state, events} = useModelContext(TabsModelContext, model);
     const [tabName, setTabName] = React.useState(name);
 
     // useLayoutEffect because we don't want to render with incorrect ID

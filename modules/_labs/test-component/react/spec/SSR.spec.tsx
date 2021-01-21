@@ -1,18 +1,15 @@
-// React ssr test template
 
-module.exports = pascalCaseName => `
 /**
  * @jest-environment node
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {${pascalCaseName}} from '../';
+import {TestComponent} from '../';
 
-describe('${pascalCaseName}', () => {
+describe('TestComponent', () => {
   it('should render on a server without crashing', () => {
-    const ssrRender = () => renderToString(<${pascalCaseName} />);
+    const ssrRender = () => renderToString(<TestComponent />);
     expect(ssrRender).not.toThrow();
   });
 });
 
-`;

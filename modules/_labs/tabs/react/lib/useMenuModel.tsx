@@ -31,8 +31,8 @@ export const menuEventMap = createEventMap<MenuEvents>()({
     ...listEventMap.guards,
     shouldSetCurrentId: 'setCurrentId',
   },
-  actions: {
-    ...listEventMap.actions,
+  callbacks: {
+    ...listEventMap.callbacks,
     onSetCurrentId: 'setCurrentId',
   },
 });
