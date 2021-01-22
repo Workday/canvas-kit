@@ -9,11 +9,16 @@ export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   styles?: CSSObject;
   type: CanvasIconTypes;
   iconRef?: React.Ref<HTMLSpanElement>;
+  /**
+   * Choose whether to mirror the SVG in the vertical axis.
+   * @default false
+   */
+  mirror?: boolean;
 }
 
 export default class Svg extends React.Component<SvgProps> {
   public render() {
-    const {src, styles, type, iconRef, ...elemProps} = this.props;
+    const {src, styles, type, iconRef, mirror = false, ...elemProps} = this.props;
 
     // Validation for JS
     try {
@@ -32,10 +37,18 @@ export default class Svg extends React.Component<SvgProps> {
             // Need to combine iconStyle with the className prop, otherwise we'll clobber it
             // (we'll need to do something like this for each HTML <span> prop we explicitly set in this component)
             className={cx(
-              css(styles, {
-                display: 'inline-block',
-                '& svg': {display: 'block'},
-              }),
+              css(
+                styles,
+                {
+                  display: 'inline-block',
+                  '& svg': {display: 'block'},
+                },
+                mirror
+                  ? {
+                      transform: 'scaleX(-1)',
+                    }
+                  : {}
+              ),
               elemProps.className
             )}
             ref={iconRef}
