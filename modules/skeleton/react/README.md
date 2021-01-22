@@ -90,7 +90,11 @@ import {Skeleton, SkeletonHeader} from '@workday/canvas-kit-react-skeleton';
 
 ### Optional
 
-> None
+#### `backgroundColor: string`
+
+> Can be used to define the color of the skeleton. Accepts hex colors in string format.
+
+Default: `soap200`
 
 # SkeletonShape
 
@@ -138,6 +142,12 @@ Default: `"100%"`
 
 Default: `0`
 
+#### `backgroundColor: string`
+
+> Can be used to define the color of the skeleton. Accepts hex colors in string format.
+
+Default: `soap200`
+
 # SkeletonText
 
 A component that renders a text placeholder for a skeleton. Each line has a width of `100%` and a
@@ -173,3 +183,9 @@ import {Skeleton, SkeletonText} from '@workday/canvas-kit-react-skeleton';
 > have a width of `60%`
 
 Default: `2`
+
+#### `backgroundColor: string`
+
+> Can be used to define the color of the skeleton. Accepts hex colors in string format.
+
+Default: `soap200`

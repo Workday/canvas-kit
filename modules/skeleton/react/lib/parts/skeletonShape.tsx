@@ -8,12 +8,13 @@ const Shape = styled('div')<{
   width?: number | string;
   height?: number | string;
   borderRadius?: number | string;
-}>(({width, height, borderRadius}) => {
+  backgroundColor?: string;
+}>(({width, height, borderRadius, backgroundColor}) => {
   return {
     width: width ? width : '100%',
     height: height ? height : '100%',
     borderRadius: borderRadius ? borderRadius : 0,
-    backgroundColor: canvas.colors.soap200,
+    backgroundColor,
     marginBottom: BOTTOM_MARGIN,
   };
 });
@@ -34,12 +35,31 @@ export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement>
    * @default 0
    */
   borderRadius?: number | string;
+  /**
+   * The background color of the skeleton
+   * @default soap200
+   */
+  backgroundColor?: string;
 }
 
 export default class SkeletonShape extends React.Component<SkeletonShapeProps> {
   render(): React.ReactNode {
-    const {width, height, borderRadius, ...elemProps} = this.props;
+    const {
+      width,
+      height,
+      borderRadius,
+      backgroundColor = canvas.colors.soap200,
+      ...elemProps
+    } = this.props;
 
-    return <Shape width={width} height={height} borderRadius={borderRadius} {...elemProps} />;
+    return (
+      <Shape
+        width={width}
+        height={height}
+        borderRadius={borderRadius}
+        backgroundColor={backgroundColor}
+        {...elemProps}
+      />
+    );
   }
 }
