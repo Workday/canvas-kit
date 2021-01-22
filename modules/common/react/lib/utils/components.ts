@@ -28,7 +28,7 @@ export type Component<T extends React.ElementType, P> = {
 interface RefForwardingComponent<T, P = {}> {
   (
     props: React.PropsWithChildren<P> & {as?: React.ReactElement<any>},
-    ref: T extends undefined
+    ref: T extends null
       ? never
       : React.Ref<T extends keyof ElementTagNameMap ? ElementTagNameMap[T] : T>,
     as: T extends undefined ? never : T
@@ -36,12 +36,21 @@ interface RefForwardingComponent<T, P = {}> {
 }
 
 /**
+ * If no element is passed to `createComponent`, a `NulLElement` will be returned indicating there
+ * is no element type.
+ */
+type NullElement = () => null;
+
+/**
  * Factory function that creates components to be exported. It enforces React ref forwarding, `as`
  * prop, display name, and sub-components, and handles proper typing without much boiler plate. The
  * return type is `Component<element, Props>` which looks like `Component<'div', Props>` which is a
  * clean interface that tells you the default element that is used.
  */
-export const createComponent = <T extends React.ElementType>(as?: T) => <P, SubComponents = {}>({
+export const createComponent = <T extends React.ElementType = NullElement>(as?: T) => <
+  P,
+  SubComponents = {}
+>({
   displayName,
   Component,
   subComponents,
@@ -64,15 +73,16 @@ export const createComponent = <T extends React.ElementType>(as?: T) => <P, SubC
    */
   subComponents?: SubComponents;
 }) => {
-  const ReturnedComponent = (React.forwardRef<T, P>((props, ref) => {
-    return Component(
-      props,
-      //@ts-ignore Problems with type constraints of T and T extends ElementTagName ? ... This doesn't cause a problem, not sure it is worth fixing
-      ref,
-      (props as any).as || as
-    );
-    // Component({as, ...props}, ref)
-  }) as any) as Component<T, P> & SubComponents;
+  const ReturnedComponent = (React.forwardRef<T, P & {as?: React.ElementType}>(
+    ({as: asOverride, ...props}, ref) => {
+      return Component(
+        props as P,
+        //@ts-ignore Problems with type constraints of T and T extends ElementTagName ? ... This doesn't cause a problem, not sure it is worth fixing
+        ref,
+        asOverride || as
+      );
+    }
+  ) as any) as Component<T, P> & SubComponents;
 
   Object.keys(subComponents || {}).forEach((key: any) => {
     // @ts-ignore Not worth typing correctly
@@ -157,7 +167,7 @@ export function useDefaultModel<T, C>(
 }
 
 /**
- * Returns a model, or returns a model context. Clever way around the conditional React hood ESLint
+ * Returns a model, or returns a model context. Clever way around the conditional React hook ESLint
  * rule
  * @param model A model, if provided
  * @param context The context of a model
@@ -168,7 +178,7 @@ export function useDefaultModel<T, C>(
  *   // ...
  * }
  */
-export function useModelContext<T>(context: React.Context<T>, model?: T) {
+export function useModelContext<T>(context: React.Context<T>, model?: T): T {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return model || React.useContext(context);
 }

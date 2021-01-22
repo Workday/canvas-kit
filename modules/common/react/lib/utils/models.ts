@@ -12,17 +12,17 @@ export type Model<State, Events> = {
  * @template TCallbackMap A mapping of callbacks to events they're associated with
  */
 type EventMap<
-  TEvents extends Record<string, (data: object) => void>,
+  TEvents extends Record<string, (data?: object) => void>,
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>
 > = {
-  guards: TGuardMap;
-  callbacks: TCallbackMap;
+  guards?: TGuardMap;
+  callbacks?: TCallbackMap;
 };
 
 type ToGuardConfig<
   TState extends Record<string, any>,
-  TEvents extends Record<string, (data: object) => void>,
+  TEvents extends Record<string, (data?: object) => void>,
   TGuardMap extends Record<string, keyof TEvents>
 > = {
   [K in keyof TGuardMap]: (event: {
@@ -33,7 +33,7 @@ type ToGuardConfig<
 
 type ToCallbackConfig<
   TState extends Record<string, any>,
-  TEvents extends Record<string, (data: object) => void>,
+  TEvents extends Record<string, (data?: object) => void>,
   TGuardMap extends Record<string, keyof TEvents>
 > = {
   [K in keyof TGuardMap]: (event: {
@@ -54,7 +54,7 @@ type ToCallbackConfig<
  */
 export type ToModelConfig<
   TState extends Record<string, any>,
-  TEvents extends Record<string, (data: object) => void>,
+  TEvents extends Record<string, (data?: object) => void>,
   TEventMap extends EventMap<TEvents, any, any>
 > = ToGuardConfig<TState, TEvents, TEventMap['guards']> &
   ToCallbackConfig<TState, TEvents, TEventMap['callbacks']>;
@@ -83,7 +83,8 @@ export type ToModelConfig<
  *   }
  * })
  */
-export const createEventMap = <TEvents extends Record<string, (data: object) => void>>() => <
+
+export const createEventMap = <TEvents extends Record<string, (data?: object) => void>>() => <
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>
 >(
@@ -116,7 +117,7 @@ const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
  * })
  */
 export const useEventMap = <
-  TEvents extends Record<string, (data: object) => void>,
+  TEvents extends Record<string, (data?: object) => void>,
   TState extends Record<string, any>,
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>,
@@ -151,7 +152,7 @@ export const useEventMap = <
 
         if (
           guardFn &&
-          configRef.current[guardFn] &&
+          configRef.current?.[guardFn] &&
           //@ts-ignore Typescript doesn't like that the call signatures are different
           !configRef.current[guardFn]({data, state: stateRef.current})
         ) {
@@ -166,7 +167,7 @@ export const useEventMap = <
           return (eventMapRef.current.callbacks || {})[k] === key;
         });
 
-        if (callbackFn && configRef.current[callbackFn]) {
+        if (callbackFn && configRef.current?.[callbackFn]) {
           //@ts-ignore Typescript doesn't like that the call signatures are different
           configRef.current[callbackFn]({data, state: stateRef.current});
         }
