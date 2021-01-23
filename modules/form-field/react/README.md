@@ -24,16 +24,21 @@ import * as React from 'react;
 import FormField from '@workday/canvas-kit-react-form-field';
 import TextInput from '@workday/canvas-kit-react-text-input';
 
-<FormField
-  label="Label"
-  inputId="my-input-field"
-  error={FormField.ErrorType.Error}
-  hintText="This field is required."
-  hintId="my-input-field-error"
-  required={true}
->
-  <TextInput value={this.state.value} onChange={() => {}}/>
-</FormField>
+const ExampleForm = () => {
+  const [value, setValue] = React.useState('');
+  return (
+    <FormField
+      label="Label"
+      inputId="my-input-field"
+      error={FormField.ErrorType.Error}
+      hintText="This field is required."
+      hintId="my-input-field-error"
+      required={true}
+    >
+      <TextInput value={value} onChange={(e) => setValue(e.target.value)}/>
+    </FormField>
+  );
+}
 ```
 
 ## Static Properties
@@ -95,7 +100,7 @@ Default: `undefined`
 
 #### `hintId: string`
 
-> The ID of message displayed below the input field. Required for accessibile aria-definedby
+> The ID of message displayed below the input field. Required for accessible aria-definedby
 > attribute. Required if `error` and `hintText` are defined.
 
 ---
@@ -115,7 +120,8 @@ Default: `undefined`
 #### `inputId: string`
 
 > The ID of the input child. If an ID is not specified on the input child, this will be used as it's
-> ID. Used for label's `htmlFor` attribute. This is required for accessiblity if `label` is defined.
+> ID. Used for label's `htmlFor` attribute. This is required for accessibility if `label` is
+> defined.
 
 ---
 
@@ -134,7 +140,7 @@ Default: `LabelPosition.Top`
 
 #### `required: boolean`
 
-> It set, the label of the field will be suffixed by a red astrisk.
+> It set, the label of the field will be suffixed by a red asterisk.
 
 Default: `false`
 
@@ -230,4 +236,4 @@ Default: `LabelPosition.Top`
 
 #### `htmlFor: string`
 
-> The ID of the input being labelled. This is required for accessiblity.
+> The ID of the input being labelled. This is required for accessibility.

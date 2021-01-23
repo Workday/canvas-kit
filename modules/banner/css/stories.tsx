@@ -5,10 +5,10 @@ import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('Components|Indicators/Banner/CSS/Alert ', module)
+storiesOf('Components/Indicators/Banner/CSS/Alert ', module)
   .addDecorator(withReadme(README))
   .add('Full', () => (
-    <div className="story">
+    <div className="banner-story">
       <a className="wdc-banner" href="#">
         <span className="wdc-banner-text">3 Alerts</span>
         <span className="wdc-banner-link">View All</span>
@@ -16,17 +16,17 @@ storiesOf('Components|Indicators/Banner/CSS/Alert ', module)
     </div>
   ))
   .add('Sticky  ', () => (
-    <div className="story">
+    <div className="banner-story">
       <a className="wdc-banner wdc-banner-sticky" href="#">
         <span className="wdc-banner-text">3 Alerts</span>
       </a>
     </div>
   ));
 
-storiesOf('Components|Indicators/Banner/CSS/Error ', module)
+storiesOf('Components/Indicators/Banner/CSS/Error ', module)
   .addDecorator(withReadme(README))
   .add('Full', () => (
-    <div className="story">
+    <div className="banner-story">
       <a className="wdc-banner wdc-banner-error" href="#">
         <span className="wdc-banner-text">3 Errors</span>
         <span className="wdc-banner-link">View All</span>
@@ -34,7 +34,7 @@ storiesOf('Components|Indicators/Banner/CSS/Error ', module)
     </div>
   ))
   .add('Sticky', () => (
-    <div className="story">
+    <div className="banner-story">
       <a className="wdc-banner wdc-banner-error wdc-banner-sticky" href="#">
         <span className="wdc-banner-text">3 Errors</span>
       </a>

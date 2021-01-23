@@ -4,12 +4,12 @@ import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
 import './index.scss';
 
-storiesOf('Components|Containers/Card/CSS', module)
+storiesOf('Components/Containers/Card/CSS', module)
   .addDecorator(withReadme(README))
   .add('All', () => (
     <div className="story">
       <h2>Default</h2>
-      <section>
+      <section className="story">
         <div className="wdc-card">
           <h3 className="wdc-card-heading">Card Header</h3>
           <div className="wdc-card-body">.wdc-card</div>
@@ -68,7 +68,7 @@ storiesOf('Components|Containers/Card/CSS', module)
 
       <h2>Positioning</h2>
 
-      <section>
+      <section className="story">
         <div className="wdc-card-container wdc-card-container-around">
           <div className="wdc-card-3">
             <h3 className="wdc-card-heading">Card Header</h3>
@@ -143,7 +143,7 @@ storiesOf('Components|Containers/Card/CSS', module)
 
       <h2>No Padding</h2>
 
-      <section>
+      <section className="story">
         <div className="wdc-card-container">
           <div className="wdc-card-6 wdc-card-no-padding">
             <h3 className="wdc-card-heading">Card Header</h3>
@@ -158,7 +158,7 @@ storiesOf('Components|Containers/Card/CSS', module)
 
       <h2>Different Depths</h2>
 
-      <section>
+      <section className="story">
         <div className="wdc-card-container">
           <div className="wdc-card-3 wdc-depth-1">
             <h3 className="wdc-card-heading">Card Header</h3>

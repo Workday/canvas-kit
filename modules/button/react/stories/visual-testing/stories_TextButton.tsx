@@ -6,13 +6,14 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {TextButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Text Button',
+  title: 'Testing/React/Buttons/Button/Text Button',
   component: TextButton,
 });
 
@@ -52,3 +53,10 @@ export const TextButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const TextButtonThemedStates = () => <TextButtonStates />;
+TextButtonThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

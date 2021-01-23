@@ -5,6 +5,7 @@ import {borderRadius, colors, fontFamily} from '@workday/canvas-kit-react-core';
 
 export interface CountBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   count?: number;
+  limit?: number;
   variant?: 'default' | 'inverse';
 }
 
@@ -53,9 +54,9 @@ const Container = styled('span')<CountBadgeProps>(
 );
 
 const CountBadge = (props: CountBadgeProps) => {
-  const {variant = 'default', count = 0, ...elemProps} = props;
+  const {variant = 'default', count = 0, limit = 1000, ...elemProps} = props;
 
-  const formattedCount = count < 1000 ? `${count}` : '999+';
+  const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
 
   return (
     <Container variant={variant} {...elemProps}>

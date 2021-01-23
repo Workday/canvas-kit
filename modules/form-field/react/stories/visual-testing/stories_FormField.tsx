@@ -5,13 +5,14 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {TextInput} from '../../../../text-input/react';
 import {FormFieldLabelPosition} from '../../lib/types';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Form Field',
+  title: 'Testing/React/Inputs/Form Field',
   component: FormField,
 });
 
@@ -40,3 +41,10 @@ export const FormFieldStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const FormFieldThemedStates = () => <FormFieldStates />;
+FormFieldThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

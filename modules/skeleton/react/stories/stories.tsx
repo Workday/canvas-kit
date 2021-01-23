@@ -16,6 +16,7 @@ import {Button, ButtonVariant} from '@workday/canvas-kit-react-button';
 import Skeleton, {SkeletonShape, SkeletonText, SkeletonHeader} from '../index';
 
 import README from '../README.md';
+import canvas from '@workday/canvas-kit-react-core';
 
 const Container = styled('span')({
   width: '60%',
@@ -37,7 +38,7 @@ const fadeOut = keyframes`
   }
 `;
 
-storiesOf('Components|Indicators/Skeleton/React', module)
+storiesOf('Components/Indicators/Skeleton/React', module)
   .addParameters({component: Skeleton})
   .addDecorator(withReadme(README))
   .add('Complete', () => {
@@ -176,6 +177,29 @@ storiesOf('Components|Indicators/Skeleton/React', module)
         </div>
         <Skeleton>
           <SkeletonText lineCount={number('lineCount', 2)} />
+        </Skeleton>
+      </div>
+    );
+  })
+  .add('Color', () => {
+    return (
+      <div className="story">
+        <h1>Skeleton Color</h1>
+        <Skeleton>
+          <FlexContainer>
+            <SkeletonShape
+              width={40}
+              height={40}
+              borderRadius={99}
+              backgroundColor={canvas.colors.berrySmoothie100}
+            />
+            <Container>
+              <SkeletonHeader backgroundColor={canvas.colors.cantaloupe100} />
+            </Container>
+          </FlexContainer>
+          <div>
+            <SkeletonText lineCount={3} backgroundColor={canvas.colors.fruitPunch100} />
+          </div>
         </Skeleton>
       </div>
     );

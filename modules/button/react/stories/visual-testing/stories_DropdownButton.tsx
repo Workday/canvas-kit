@@ -6,12 +6,13 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {DropdownButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Dropdown Button',
+  title: 'Testing/React/Buttons/Button/Dropdown Button',
   component: DropdownButton,
 });
 
@@ -38,3 +39,10 @@ export const DropdownButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const DropdownButtonThemedStates = () => <DropdownButtonStates />;
+DropdownButtonThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

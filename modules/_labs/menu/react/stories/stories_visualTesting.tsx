@@ -3,7 +3,7 @@
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
-import {uploadCloudIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
+import {uploadCloudIcon, extLinkIcon, userIcon} from '@workday/canvas-system-icons-web';
 import {Menu, MenuItem, MenuItemProps} from '../index';
 
 // @ts-ignore: Cannot find module error
@@ -12,7 +12,7 @@ import testAvatar from './test-avatar.png';
 const noop = () => {};
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Menu',
+  title: 'Testing/React/Labs/Menu',
   component: Menu,
   parameters: {
     chromatic: {
@@ -33,11 +33,20 @@ const createMenuItems = (hasIcons?: boolean, isFocused?: boolean): StoryMenuItem
       isFocused: isFocused,
     },
     {
-      text: `Second Item with really really really long label`,
+      text: `Second Item (with a really really really long label)`,
       icon: undefined,
     },
     {
-      text: `Third Item (disabled)`,
+      text: `Third Item (with a really really really long label)`,
+      icon: hasIcons ? uploadCloudIcon : undefined,
+    },
+    {
+      text: `Fourth Item (with a really really really long label)`,
+      icon: hasIcons ? uploadCloudIcon : undefined,
+      secondaryIcon: hasIcons ? extLinkIcon : undefined,
+    },
+    {
+      text: `Fifth Item (disabled)`,
       icon: undefined,
       secondaryIcon: hasIcons ? extLinkIcon : undefined,
       isDisabled: true,
@@ -47,14 +56,14 @@ const createMenuItems = (hasIcons?: boolean, isFocused?: boolean): StoryMenuItem
         ''
       ) : (
         <em>
-          Fourth Item (<b>with markup</b>)
+          Sixth Item (<b>with markup</b>)
         </em>
       ),
-      icon: undefined,
+      icon: hasIcons ? userIcon : undefined,
       'aria-label': hasIcons ? `I am a label for screen readers` : undefined,
     },
     {
-      text: `Fifth Item (with divider)`,
+      text: `Seventh Item (with divider)`,
       icon: undefined,
       hasDivider: true,
     },
@@ -81,10 +90,11 @@ export const MenuItemStates = () => (
       rowProps={[
         {label: 'Default', props: {}},
         {label: 'With Icons', props: {hasIcons: true}},
+        {label: 'With Icons and Custom Width', props: {hasIcons: true, width: 200}},
       ]}
       columnProps={[{label: 'Default', props: {}}]}
     >
-      {props => <Menu>{createMenuItems(props.hasIcons).map(buildItem)}</Menu>}
+      {props => <Menu width={props.width}>{createMenuItems(props.hasIcons).map(buildItem)}</Menu>}
     </ComponentStatesTable>
   </StaticStates>
 );

@@ -28,7 +28,7 @@ describe('Breadcrumbs', () => {
   });
   context('given the default breadcrumb list', () => {
     beforeEach(() => {
-      h.stories.load('Labs|Breadcrumbs/React', 'Default');
+      h.stories.load('Labs/Breadcrumbs/React', 'Default');
     });
     it('should not have any axe errors', () => {
       cy.checkA11y();
@@ -79,7 +79,7 @@ describe('Breadcrumbs', () => {
 
   context('given the collapsible breadcrumb list', () => {
     beforeEach(() => {
-      h.stories.load('Labs|Breadcrumbs/React', 'Collapsible');
+      h.stories.load('Labs/Breadcrumbs/React', 'Collapsible');
     });
 
     it('should not have any axe errors', () => {
@@ -109,7 +109,7 @@ describe('Breadcrumbs', () => {
 
   context('given the collapsible breadcrumb list menu', () => {
     beforeEach(() => {
-      h.stories.load('Labs|Breadcrumbs/React', 'Collapsible');
+      h.stories.load('Labs/Breadcrumbs/React', 'Collapsible');
       openDropdownMenu();
     });
 

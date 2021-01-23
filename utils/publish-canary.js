@@ -5,7 +5,7 @@
 const request = require('request');
 const semver = require('semver');
 const {promisify} = require('util');
-const cmd = promisify(require('node-cmd').get);
+const exec = promisify(require('child_process').exec);
 
 const {
   SLACK_WEBHOOK,
@@ -44,7 +44,7 @@ const slackAnnouncement = attachment => {
         ],
       },
     },
-    (error, response, body) => {
+    (error) => {
       if (error) {
         throw error;
       }
@@ -52,22 +52,22 @@ const slackAnnouncement = attachment => {
   );
 };
 
-cmd('git diff --name-only HEAD HEAD^')
-  .then(filesChangedInMerge => {
-    if (filesChangedInMerge.includes('CHANGELOG.md')) {
+exec('git diff --name-only HEAD HEAD^')
+  .then(({stdout}) => {
+    if (stdout.includes('CHANGELOG.md')) {
       console.log('Last merge commit was a release. Skipping canary build.');
       process.exit(0);
     }
 
-    return cmd('git rev-parse --short HEAD');
+    return exec('git rev-parse --short HEAD');
   })
-  .then(sha => {
-    data.sha = sha.trim();
+  .then(({stdout}) => {
+    data.sha = stdout.trim();
 
-    return cmd(`git describe --abbrev=0`);
+    return exec(`git describe --abbrev=0`);
   })
-  .then(releaseTag => {
-    const nextReleaseVersion = semver.inc(releaseTag, 'prerelease', 'beta'); // eg. 4.0.0-beta.3 > 4.0.0-beta.4
+  .then(({stdout}) => {
+    const nextReleaseVersion = semver.inc(stdout, 'prerelease', 'beta'); // eg. 4.0.0-beta.3 > 4.0.0-beta.4
     const nextReleasePreid = nextReleaseVersion.split('-')[1];
 
     if (isPrerelease && !nextReleasePreid) {
@@ -86,16 +86,16 @@ cmd('git diff --name-only HEAD HEAD^')
       preid === 'prerelease' ? 'major' : '',
     ];
 
-    return cmd(`yarn lerna publish ${lernaFlags.join(' ')}`);
+    return exec(`yarn lerna publish ${lernaFlags.join(' ')}`);
   })
-  .then(output => {
-    console.log(output);
+  .then(({stdout}) => {
+    console.log(stdout);
 
     const regex = new RegExp(
       `@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*\\+\\w*)`,
       'g'
     );
-    data.packages = output.match(regex);
+    data.packages = stdout.match(regex);
     data.version = regex.exec(data.packages[0])[1];
 
     slackAnnouncement({

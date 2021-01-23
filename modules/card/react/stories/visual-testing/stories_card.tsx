@@ -11,7 +11,7 @@ import {Card} from '../../index';
 import {depth, spacing} from '@workday/canvas-kit-react-core';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Containers/Card',
+  title: 'Testing/React/Containers/Card',
   component: Card,
 });
 

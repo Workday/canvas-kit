@@ -6,10 +6,21 @@ import Select from '../lib/Select';
 describe('Select', () => {
   const cb = jest.fn();
 
-  const role = 'listbox';
+  const role = 'combobox';
 
   afterEach(() => {
     cb.mockReset();
+  });
+
+  describe('when rendered with a single child', () => {
+    it('should not throw an error', () => {
+      const {getAllByRole} = render(
+        <Select onChange={cb}>
+          <SelectOption value="email" label="E-mail" />
+        </Select>
+      );
+      expect(getAllByRole('option')).toHaveLength(1);
+    });
   });
 
   describe('when rendered with an id', () => {

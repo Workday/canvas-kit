@@ -6,13 +6,14 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {OutlineButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Outline Button',
+  title: 'Testing/React/Buttons/Button/Outline Button',
   component: OutlineButton,
 });
 
@@ -49,3 +50,10 @@ export const OutlineButtonStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const OutlineButtonThemedStates = () => <OutlineButtonStates />;
+OutlineButtonThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};
