@@ -45,5 +45,13 @@ storiesOf('Components/Buttons/Button/React', module)
           Highlight
         </HighlightButton>
       </div>
+
+      <h3>Mirrored Highlight</h3>
+      <HighlightButton icon={activityStreamIcon} mirrorIcon={true}>
+        Highlight
+      </HighlightButton>
+      <HighlightButton disabled={true} icon={playCircleIcon} mirrorIcon={true}>
+        Highlight
+      </HighlightButton>
     </div>
   ));

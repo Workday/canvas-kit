@@ -32,6 +32,11 @@ export interface HighlightButtonProps
    * Will render an `a` tag instead of a `button` when defined.
    */
   as?: 'a';
+  /**
+   * Choose whether to mirror the icon in the vertical axis
+   * @default false
+   */
+  mirrorIcon?: boolean;
 }
 
 const getHighlightButtonColors = ({
@@ -76,6 +81,7 @@ const HighlightButton: ButtonOrAnchorComponent<HighlightButtonProps> = ({
   // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
   size = 'medium',
+  mirrorIcon = false,
   buttonRef,
   icon,
   children,
@@ -87,7 +93,7 @@ const HighlightButton: ButtonOrAnchorComponent<HighlightButtonProps> = ({
     ref={buttonRef}
     {...elemProps}
   >
-    {icon && <ButtonLabelIcon size={size} icon={icon} />}
+    {icon && <ButtonLabelIcon size={size} icon={icon} mirrorIcon={mirrorIcon} />}
     <ButtonLabel>{children}</ButtonLabel>
   </ButtonContainer>
 );

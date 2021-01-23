@@ -44,6 +44,11 @@ export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * Will render an `a` tag instead of a `button` when defined.
    */
   as?: 'a';
+  /**
+   * Choose whether to mirror the icon in the vertical axis
+   * @default false
+   */
+  mirrorIcon?: boolean;
 }
 
 const getTextButtonColors = (
@@ -149,6 +154,7 @@ const TextButton: ButtonOrAnchorComponent<TextButtonProps, typeof TextButtonVari
   variant = TextButtonVariant.Default,
   size = 'medium',
   iconPosition = ButtonIconPosition.Left,
+  mirrorIcon = false,
   buttonRef,
   children,
   icon,
@@ -178,11 +184,21 @@ const TextButton: ButtonOrAnchorComponent<TextButtonProps, typeof TextButtonVari
       {...elemProps}
     >
       {icon && iconPosition === ButtonIconPosition.Left && (
-        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+        <ButtonLabelIcon
+          size={size}
+          iconPosition={iconPosition}
+          icon={icon}
+          mirrorIcon={mirrorIcon}
+        />
       )}
       <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
       {icon && iconPosition === ButtonIconPosition.Right && (
-        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+        <ButtonLabelIcon
+          size={size}
+          iconPosition={iconPosition}
+          icon={icon}
+          mirrorIcon={mirrorIcon}
+        />
       )}
     </ButtonContainer>
   );

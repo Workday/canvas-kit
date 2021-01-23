@@ -150,6 +150,14 @@ Default: `false`
 
 ---
 
+#### `mirrorIcon: boolean`
+
+> Whether to flip the icon along the vertical axis.
+
+Default: `false`
+
+---
+
 ### `icon: CanvasSystemIcon`
 
 > The icon of the button.
@@ -396,6 +404,14 @@ Default: `undefined`
 
 ---
 
+#### `mirrorIcon: boolean`
+
+> Whether to flip the icon along the vertical axis.
+
+Default: `false`
+
+---
+
 # OutlineButton
 
 ```tsx
@@ -501,6 +517,14 @@ Default: `undefined`
 
 ---
 
+#### `mirrorIcon: boolean`
+
+> Whether to flip the icon along the vertical axis.
+
+Default: `false`
+
+---
+
 # TextButton
 
 ```tsx
@@ -598,6 +622,14 @@ Default: `ButtonIconPosition.Left`
 > `href`, `target`, etc.) become available.
 
 Default: `undefined`
+
+---
+
+#### `mirrorIcon: boolean`
+
+> Whether to flip the icon along the vertical axis.
+
+Default: `false`
 
 ---
 
@@ -763,6 +795,14 @@ Default: `undefined`
 
 ---
 
+#### `mirrorIcon: boolean`
+
+> Whether to flip the icon along the vertical axis.
+
+Default: `false`
+
+---
+
 # ToolbarIconButton
 
 > Button containing an icon. Icon may be a component from
@@ -826,6 +866,14 @@ Default: `undefined`
 
 ---
 
+#### `mirrorIcon: boolean`
+
+> Whether to flip the icon along the vertical axis.
+
+Default: `false`
+
+---
+
 # ToolbarDropdownButton
 
 > Button containing an icon or custom element. Icon may be a component from
@@ -868,5 +916,13 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 > The icon of the button. Optional because ToolbarDropdownButton can also wrap a SystemIcon
 > component.
+
+---
+
+#### `mirrorIcon: boolean`
+
+> Whether to flip the icon along the vertical axis.
+
+Default: `false`
 
 ---

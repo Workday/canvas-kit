@@ -78,6 +78,15 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           variant={IconButton.Variant.Circle}
           onClick={handleToggle}
         />
+
+        <h3>Mirrored Default</h3>
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          variant={IconButton.Variant.Circle}
+          size={IconButton.Size.Medium}
+          mirrorIcon={true}
+        />
       </div>
     );
   })
@@ -127,6 +136,14 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           variant={IconButton.Variant.Square}
           onClick={handleToggle}
         />
+        <h3>Mirrored Square</h3>
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          size={IconButton.Size.Medium}
+          variant={IconButton.Variant.Square}
+          mirrorIcon={true}
+        />
       </div>
     );
   })
@@ -173,6 +190,14 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           toggled={toggled}
           variant={IconButton.Variant.SquareFilled}
           onClick={handleToggle}
+        />
+        <h3>Mirrored Square</h3>
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          size={IconButton.Size.Medium}
+          variant={IconButton.Variant.SquareFilled}
+          mirrorIcon={true}
         />
       </div>
     );
@@ -221,6 +246,14 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           variant={IconButton.Variant.Plain}
           onClick={handleToggle}
         />
+        <h3>Mirrored Plain</h3>
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          size={IconButton.Size.Medium}
+          variant={IconButton.Variant.Plain}
+          mirrorIcon={true}
+        />
       </div>
     );
   })
@@ -267,6 +300,14 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           toggled={toggled}
           variant={IconButton.Variant.CircleFilled}
           onClick={handleToggle}
+        />
+        <h3>Medium Filled</h3>
+        <IconButton
+          aria-label="Activity Stream"
+          icon={activityStreamIcon}
+          size={IconButton.Size.Medium}
+          variant={IconButton.Variant.CircleFilled}
+          mirrorIcon={true}
         />
       </div>
     );
@@ -321,6 +362,16 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
             onClick={handleToggle}
           />
         </div>
+        <h3>Mirrored Inverse</h3>
+        <div css={blueBackground}>
+          <IconButton
+            aria-label="Activity Stream"
+            icon={activityStreamIcon}
+            size={IconButton.Size.Medium}
+            variant={IconButton.Variant.Inverse}
+            mirrorIcon={true}
+          />
+        </div>
       </div>
     );
   })
@@ -372,6 +423,16 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
             toggled={toggled}
             variant={IconButton.Variant.InverseFilled}
             onClick={handleToggle}
+          />
+        </div>
+        <h3>Mirrored Inverse Filled</h3>
+        <div css={blueBackground}>
+          <IconButton
+            aria-label="Activity Stream"
+            icon={activityStreamIcon}
+            size={IconButton.Size.Medium}
+            variant={IconButton.Variant.InverseFilled}
+            mirrorIcon={true}
           />
         </div>
       </div>

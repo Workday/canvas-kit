@@ -28,6 +28,7 @@ const ToolbarIconButton = ({
   // TODO: Fix useTheme and make it a real hook
   // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
+  mirrorIcon = false,
   buttonRef,
   onToggleChange,
   'aria-label': iconArialabel,
@@ -60,7 +61,7 @@ const ToolbarIconButton = ({
       aria-label={iconArialabel}
       {...elemProps}
     >
-      {icon ? <SystemIcon icon={icon} /> : children}
+      {icon ? <SystemIcon icon={icon} mirror={mirrorIcon} /> : children}
     </ButtonContainer>
   );
 };
