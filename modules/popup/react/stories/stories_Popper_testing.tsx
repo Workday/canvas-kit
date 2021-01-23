@@ -5,7 +5,7 @@ import {Button} from '@workday/canvas-kit-react-button';
 import {Popup, Popper, Placement} from '@workday/canvas-kit-react-popup';
 
 export default {
-  title: 'Testing|React/Popups/Popper',
+  title: 'Testing/React/Popups/Popper',
 };
 
 export const UpdateOptions = () => {

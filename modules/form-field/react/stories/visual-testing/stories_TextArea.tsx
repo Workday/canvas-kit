@@ -5,12 +5,13 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 
 import {TextArea} from '../../../../text-area/react';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/TextArea',
+  title: 'Testing/React/Inputs/TextArea',
   component: TextArea,
 });
 
@@ -70,3 +71,10 @@ export const TextAreaStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const TextAreaThemedStates = () => <TextAreaStates />;
+TextAreaThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

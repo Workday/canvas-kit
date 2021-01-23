@@ -40,12 +40,15 @@ export {
   CanvasDepth,
   CanvasDepthValue,
   CanvasSpacing,
-  CanvasSpacingNumber,
   CanvasSpacingValue,
-  CanvasType,
-  CanvasTypeVariant,
-  CanvasColor,
   CSSProperties,
   InputProvider,
 };
 export default canvas;
+
+export type {
+  CanvasColor,
+  CanvasSpacingNumber,
+  CanvasType,
+  CanvasTypeVariant,
+}

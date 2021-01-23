@@ -5,11 +5,12 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {TextInput} from '../../../../text-input/react';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Text Input',
+  title: 'Testing/React/Inputs/Text Input',
   component: TextInput,
 });
 
@@ -69,3 +70,10 @@ export const TextInputStates = () => (
     </ComponentStatesTable>
   </StaticStates>
 );
+
+export const TextInputThemedStates = () => <TextInputStates />;
+TextInputThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

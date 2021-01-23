@@ -1,17 +1,19 @@
 # Canvas Kit Select (with Canvas-styled Menu)
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
-  <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
+  <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
 A Canvas-styled Select with a Canvas-styled menu. This is a
 [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.
 
-Undocumented props (`disabled`, `name`, etc.) should behave similarly to how you would expect from a standard `<select>` element.
+Undocumented props (`disabled`, `name`, etc.) should behave similarly to how you would expect from a
+standard `<select>` element.
 
 The menu is rendered using a portal by way of the Canvas Kit Popper.
 
-**Note:** There is also a non-Labs Select. The non-Labs Select uses the standard browser-provided menu whereas the Labs Select uses a custom Canvas-styled menu.
+**Note:** There is also a non-Labs Select. The non-Labs Select uses the standard browser-provided
+menu whereas the Labs Select uses a custom Canvas-styled menu.
 
 ## Installation
 
@@ -23,24 +25,35 @@ yarn add @workday/canvas-kit-labs-react-select
 
 #### Example
 
-In this example, `options` is an array of objects. Each option contains a `label` (analagous to the text content of an `<option>`) and a `value` (analagous to the `value` attribute of an `<option>`).
+In this example, `options` is an array of objects. Each option contains a `label` (analagous to the
+text content of an `<option>`) and a `value` (analagous to the `value` attribute of an `<option>`).
 
 **Note:** While a base Select component is provided in this package, it is **not accessible** when
-used as is. It should be used in tandem with [`FormField`](../canvas-kit-react-form-field/README.md)
-to be made fully accessible (see below).
+used as is. It should be used in tandem with [`FormField`](../../../form-field/react) to
+be made fully accessible (see below).
 
 ```tsx
 import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react-select';
 
-const options = [
-  {label: 'E-mail', value: 'email'},
-  {label: 'Phone', value: 'phone'},
-  {label: 'Fax (disabled)', value: 'fax', disabled: true},
-  {label: 'Mail', value: 'mail'},
-];
+function Example() {
+  const options = [
+    {label: 'E-mail', value: 'email'},
+    {label: 'Phone', value: 'phone'},
+    {label: 'Fax (disabled)', value: 'fax', disabled: true},
+    {label: 'Mail', value: 'mail'},
+  ];
 
-<Select name="contact" onChange={this.handleChange} options={options} value={value} />;
+  const [value, setValue] = React.useState('email');
+
+  const handleChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
+
+  return (
+    <Select onChange={handleChange} options={options} value={value} />
+  );
+}
 ```
 
 #### Accessible Example
@@ -50,16 +63,26 @@ import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react-select';
 import FormField from '@workday/canvas-kit-react-form-field';
 
-const options = [
-  {label: 'E-mail', value: 'email'},
-  {label: 'Phone', value: 'phone'},
-  {label: 'Fax (disabled)', value: 'fax', disabled: true},
-  {label: 'Mail', value: 'mail'},
-];
+function Example() {
+  const options = [
+    {label: 'E-mail', value: 'email'},
+    {label: 'Phone', value: 'phone'},
+    {label: 'Fax (disabled)', value: 'fax', disabled: true},
+    {label: 'Mail', value: 'mail'},
+  ];
 
-<FormField label="My Field" inputId="my-select-field">
-  <Select name="contact" onChange={this.handleChange} options={options} value={value} />
-</FormField>;
+  const [value, setValue] = React.useState('email');
+
+  const handleChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
+
+  return (
+    <FormField label="My Select Field" inputId="my-select-field">
+      <Select onChange={handleChange} options={options} value={value} />
+    </FormField>
+  );
+}
 ```
 
 #### Example with Array of Strings
@@ -71,45 +94,72 @@ import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react-select';
 import FormField from '@workday/canvas-kit-react-form-field';
 
-const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
+function Example() {
+  const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
 
-<FormField label="My Field" inputId="my-select-field">
-  <Select name="state" onChange={this.handleChange} options={options} value={value} />
-</FormField>;
+  const [value, setValue] = React.useState('California');
+
+  const handleChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
+
+  return (
+    <FormField label="My Select Field" inputId="my-select-field">
+      <Select onChange={handleChange} options={options} value={value} />
+    </FormField>
+  );
+}
 ```
 
 #### Example with Custom Options Data
 
-Each option in `options` may contain a `data` object with any number of key/value pairs. This `data` object is carried over to the `option` passed into the `renderOption` function where it may then be used to customize how each option is rendered.
+Each option in `options` may contain a `data` object with any number of key/value pairs. This `data`
+object is carried over to the `option` passed into the `renderOption` function where it may then be
+used to customize how each option is rendered.
 
 ```tsx
 import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react-select';
 import FormField from '@workday/canvas-kit-react-form-field';
 import {colors, typeColors} from '@workday/canvas-kit-react-core';
-import {activityStreamIcon, avatarIcon, uploadCloudIcon, userIcon} from '@workday/canvas-system-icons-web';
+import {
+  activityStreamIcon,
+  avatarIcon,
+  uploadCloudIcon,
+  userIcon,
+} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 
-const options = [
-  {value: 'Activity Stream', data: {icon: activityStreamIcon}},
-  {value: 'Avatar', data: {icon: avatarIcon}},
-  {value: 'Upload Cloud', data: {icon: uploadCloudIcon}},
-  {value: 'User', data: {icon: userIcon}},
-];
+function Example() {
+  const options = [
+    {value: 'Activity Stream', data: {icon: activityStreamIcon}},
+    {value: 'Avatar', data: {icon: avatarIcon}},
+    {value: 'Upload Cloud', data: {icon: uploadCloudIcon}},
+    {value: 'User', data: {icon: userIcon}},
+  ];
 
-const renderOption = option => {
-  const iconColor = option.focused ? typeColors.inverse : colors.blackPepper100;
+  const renderOption = option => {
+    const iconColor = option.focused ? typeColors.inverse : colors.blackPepper100;
+    return (
+      <div style={{alignItems: 'center', display: 'flex', padding: '3px 0'}}>
+        <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
+        <div style={{marginLeft: 5}}>{option.value}</div>
+      </div>
+    );
+  };
+
+  const [value, setValue] = React.useState('Activity Stream');
+
+  const handleChange = (event) => {
+    setValue(event.currentTarget.value);
+  };
+
   return (
-    <div style={{alignItems: 'center', display: 'flex', padding: '3px 0'}}>
-      <SystemIcon icon={option.data.icon} color={iconColor} colorHover={iconColor} />
-      <div style={{marginLeft: 5}}>{option.value}</div>
-    </div>
+    <FormField label="My Select Field" inputId="my-select-field">
+      <Select onChange={handleChange} options={options} renderOption={renderOption} value={value} />
+    </FormField>
   );
-};
-
-<FormField label="My Field" inputId="my-select-field">
-  <Select name="icon" onChange={this.handleChange} options={options} renderOption={renderOption} value={value} />
-</FormField>;
+}
 ```
 
 ## Static Properties
@@ -130,15 +180,16 @@ const renderOption = option => {
 >
 > If `options` is an array of objects, each object must adhere to the `Option` interface:
 >
-> * `data: object` (optional)
-> * `disabled: boolean` (optional)
-> * `id: string` (optional, a random `id` will be assigned to the object if one isn't provided)
-> * `label: string` (optional, analagous to the text content of an `<option>`)
-> * `value: string` (required, analagous to the `value` attribute of an `<option>`)
+> - `data: object` (optional)
+> - `disabled: boolean` (optional)
+> - `id: string` (optional, a random `id` will be assigned to the object if one isn't provided)
+> - `label: string` (optional, analagous to the text content of an `<option>`)
+> - `value: string` (required, analagous to the `value` attribute of an `<option>`)
 >
 > If `label` is omitted, the `value` will be used to render the option.
 >
-> The `data` object is carried over to the `option` passed into the `renderOption` function where it may then be used to customize how each option is rendered.
+> The `data` object is carried over to the `option` passed into the `renderOption` function where it
+> may then be used to customize how each option is rendered.
 
 ### Optional
 
@@ -159,15 +210,17 @@ const renderOption = option => {
 >
 > The `option` argument passed to the function is an object which contains the following:
 >
-> * `data: object` (data object carried over from the corresponding option originally passed into the component)
-> * `disabled: boolean`
-> * `focused: boolean` (set to `true` if the option has keyboard focus)
-> * `id: string`
-> * `label: string`
-> * `selected: boolean` (set to `true` if the option is selected)
-> * `value: string`
+> - `data: object` (data object carried over from the corresponding option originally passed into
+>   the component)
+> - `disabled: boolean`
+> - `focused: boolean` (set to `true` if the option has keyboard focus)
+> - `id: string`
+> - `label: string`
+> - `selected: boolean` (set to `true` if the option is selected)
+> - `value: string`
 >
-> If you omit the `renderOption` prop, each option will be rendered using a default `renderOption` function provided by the component.
+> If you omit the `renderOption` prop, each option will be rendered using a default `renderOption`
+> function provided by the component.
 
 ---
 

@@ -100,7 +100,7 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
   })
 );
 
-export default class TextArea extends React.Component<TextAreaProps> {
+class TextArea extends React.Component<TextAreaProps> {
   static ErrorType = ErrorType;
   static ResizeDirection = TextAreaResizeDirection;
 
@@ -110,3 +110,8 @@ export default class TextArea extends React.Component<TextAreaProps> {
     return <TextAreaContainer ref={inputRef} grow={grow} resize={resize} {...inputProps} />;
   }
 }
+
+TextArea.ErrorType = ErrorType;
+TextArea.ResizeDirection = TextAreaResizeDirection;
+
+export default TextArea;

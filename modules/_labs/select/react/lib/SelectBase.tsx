@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useLayoutEffect} from 'react';
 import uuid from 'uuid/v4';
 
 import {
@@ -22,6 +22,7 @@ import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';
 import {scrollIntoViewIfNeeded} from './scrolling';
+import {MenuPlacement, MenuVisibility} from './types';
 import {getCorrectedIndexByValue} from './utils';
 
 interface OptionData {
@@ -79,7 +80,9 @@ export interface CoreSelectBaseProps
    * * `selected: boolean` (set to `true` if the option is selected)
    * * `value: string`
    *
-   * If you omit the `renderOption` prop, each option will be rendered using a default `renderOption` function provided by the component.
+   * If you omit the `renderOption` prop, each option will be rendered using a `defaultRenderOption` function provided by the component.
+   *
+   * @default defaultRenderOption
    */
   renderOption?: RenderOptionFunction;
   /**
@@ -97,31 +100,25 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    * The index of the focused option in the SelectBase.
    * @default 0
    */
-  focusedOptionIndex: number;
+  focusedOptionIndex?: number;
   /**
    * The ref to the underlying (hidden) text input element. Use this to imperatively manipulate the input.
    */
   inputRef?: React.Ref<HTMLInputElement>;
   /**
-   * If true, set the SelectBase to the empty state (i.e., no options were provided).
-   * @default false
+   * The placement of the SelectBase menu relative to its corresponding SelectButton.
+   * @default 'bottom'
    */
-  isEmpty: boolean;
+  menuPlacement?: MenuPlacement;
   /**
-   * If true, flip the SelectBase menu so it extends upwards from the button.
-   * @default false
+   * The ref to the underlying menu element. Use this to imperatively manipulate the menu.
    */
-  isMenuFlipped: boolean;
+  menuRef?: React.RefObject<HTMLUListElement>;
   /**
-   * If true, hide the SelectBase menu.
-   * @default true
+   * The visibility state of the SelectBase menu.
+   * @default 'closed'
    */
-  isMenuHidden: boolean;
-  /**
-   * If true, set the SelectBase to the "menu is hiding" state.
-   * @default false
-   */
-  isMenuHiding: boolean;
+  menuVisibility?: MenuVisibility;
   /**
    * The function called when a key is pressed down while the SelectBase button or menu has focus.
    */
@@ -148,20 +145,15 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   options: NormalizedOption[];
   /**
-   * If true, enable animation on the SelectBase menu.
-   * @default true
-   */
-  shouldMenuAnimate: boolean;
-  /**
    * If true, automatically flip the SelectBase menu to keep it visible if necessary (e.g., if the the menu would otherwise display below the visible area of the viewport).
    * @default true
    */
-  shouldMenuAutoFlip: boolean;
+  shouldMenuAutoFlip?: boolean;
   /**
    * If true, focus the SelectBase menu when it's shown. Set to false if you don't want to focus the menu automatically (for visual testing purposes, for example).
    * @default true
    */
-  shouldMenuAutoFocus: boolean;
+  shouldMenuAutoFocus?: boolean;
 }
 
 export const buttonBorderWidth = 1;
@@ -171,7 +163,7 @@ const menuIconSize = 24;
 const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
 
 const SelectButton = styled('button')<
-  Pick<SelectBaseProps, 'error' | 'grow' | 'isMenuHidden' | 'isMenuHiding' | 'theme'>
+  Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'>
 >(
   {
     ...type.body,
@@ -205,7 +197,7 @@ const SelectButton = styled('button')<
       },
     },
   },
-  ({error, isMenuHidden, isMenuHiding, theme}) => {
+  ({error, menuVisibility, theme}) => {
     const themedFocusOutlineColor = theme.canvas.palette.common.focusOutline;
     const buttonFocusStyles = {
       borderColor: themedFocusOutlineColor,
@@ -214,9 +206,9 @@ const SelectButton = styled('button')<
 
     if (error === undefined) {
       // If there isn't an error, apply focus and hover styles if the menu is
-      // hidden or hiding (otherwise, the menu is completely visible: style
-      // the button as if it had focus)
-      return isMenuHidden || isMenuHiding
+      // closed or in the process of closing (otherwise, the menu is opened
+      // or in the process of opening: style the button as if it had focus)
+      return menuVisibility === 'closed' || menuVisibility === 'closing'
         ? {
             '&:focus:not([disabled])': {
               ...buttonFocusStyles,
@@ -267,68 +259,43 @@ const SelectWrapper = styled('div')<Pick<SelectBaseProps, 'grow' | 'disabled'>>(
   })
 );
 
-export default class SelectBase extends React.Component<SelectBaseProps> {
-  static defaultProps = {
-    focusedOptionIndex: 0,
-    isEmpty: false,
-    isMenuFlipped: false,
-    isMenuHidden: true,
-    isMenuHiding: false,
-    shouldMenuAnimate: true,
-    shouldMenuAutoFlip: true,
-    shouldMenuAutoFocus: true,
-  };
+const defaultRenderOption: RenderOptionFunction = option => {
+  return <div>{option.label}</div>;
+};
 
-  private focusedOptionRef = React.createRef<HTMLLIElement>();
+const SelectBase = ({
+  'aria-labelledby': ariaLabelledBy,
+  'aria-required': ariaRequired,
+  buttonRef,
+  disabled,
+  error,
+  focusedOptionIndex = 0,
+  grow,
+  inputRef,
+  menuPlacement = 'bottom',
+  menuRef,
+  menuVisibility = 'closed',
+  onChange,
+  onKeyDown,
+  onMenuBlur,
+  onMenuCloseOnEscape,
+  onOptionSelection,
+  options,
+  renderOption = defaultRenderOption,
+  required,
+  shouldMenuAutoFlip = true,
+  shouldMenuAutoFocus = true,
+  value,
+  ...elemProps
+}: SelectBaseProps) => {
+  const focusedOptionRef = React.useRef<HTMLLIElement>(null);
 
-  private menuRef = React.createRef<HTMLUListElement>();
-  private menuId = `a${uuid()}`; // make sure it is a valid [IDREF](https://www.w3.org/TR/xmlschema11-2/#IDREF)
+  // Generate a stable ID for the menu (https://codesandbox.io/s/p2ndq).
+  // We prefix the ID with an "a" to ensure it's a valid IDREF
+  // (https://www.w3.org/TR/xmlschema11-2/#IDREF).
+  const [menuId] = React.useState(() => `a${uuid()}`);
 
-  private animateId: number;
-
-  private scrollFocusedOptionIntoView = (center: boolean) => {
-    const focusedOption = this.focusedOptionRef.current;
-    if (focusedOption) {
-      // We cannot use the native Element.scrollIntoView() here because it doesn't
-      // work properly with the portalled menu; scrolling within the menu also scrolls
-      // the ENTIRE page. Instead, we call our own scrollIntoViewIfNeeded function.
-      scrollIntoViewIfNeeded(focusedOption, center);
-    }
-  };
-
-  componentDidUpdate(prevProps: SelectBaseProps) {
-    const {focusedOptionIndex, isMenuHidden, isMenuHiding} = this.props;
-
-    // If the menu was just displayed, scroll the focused option into
-    // center view
-    if (!isMenuHidden && prevProps.isMenuHidden) {
-      // Delay scrolling by a frame to ensure proper measurements of DOM elements
-      // so we know how far to scroll. Without this delay, sometimes measurements
-      // are correct and sometimes they aren't (may be related to the number of
-      // options and/or the length of their labels) -- add the delay to be safe.
-      this.animateId = requestAnimationFrame(() => {
-        this.scrollFocusedOptionIntoView(true);
-      });
-
-      // Otherwise, if the menu is displayed AND the focused option changed
-      // since the last render, scroll the focused option into view, but
-      // do NOT center it
-    } else if (
-      !isMenuHidden &&
-      !isMenuHiding &&
-      focusedOptionIndex !== prevProps.focusedOptionIndex
-    ) {
-      this.scrollFocusedOptionIntoView(false);
-    }
-  }
-
-  componentWillUnmount() {
-    cancelAnimationFrame(this.animateId);
-  }
-
-  renderOptions = (renderOption: RenderOptionFunction) => {
-    const {error, focusedOptionIndex, onOptionSelection, isMenuHiding, options, value} = this.props;
-
+  const renderOptions = (renderOption: RenderOptionFunction) => {
     const selectedOptionIndex = getCorrectedIndexByValue(options, value);
 
     return options.map((option, index) => {
@@ -338,9 +305,9 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
         error,
         focused: focusedOptionIndex === index,
         id: option.id,
-        interactive: !isMenuHiding,
+        interactive: menuVisibility === 'opening' || menuVisibility === 'opened',
         key: option.id,
-        optionRef: focusedOptionIndex === index ? this.focusedOptionRef : undefined,
+        optionRef: focusedOptionIndex === index ? focusedOptionRef : undefined,
         value: option.value,
         ...(onOptionSelection
           ? {
@@ -363,105 +330,124 @@ export default class SelectBase extends React.Component<SelectBaseProps> {
     });
   };
 
-  renderOption: RenderOptionFunction = option => {
-    return <div>{option.label}</div>;
-  };
+  // If the focused option changed, scroll the newly focused option into view (if
+  // necessary) but do NOT center it
+  useLayoutEffect(() => {
+    const focusedOption = focusedOptionRef.current;
 
-  public render() {
-    const {
-      'aria-labelledby': ariaLabelledBy,
-      'aria-required': ariaRequired,
-      buttonRef,
-      disabled,
-      error,
-      focusedOptionIndex,
-      grow,
-      inputRef,
-      isEmpty,
-      isMenuFlipped,
-      isMenuHidden,
-      isMenuHiding,
-      onChange,
-      onKeyDown,
-      onMenuBlur,
-      onMenuCloseOnEscape,
-      options,
-      required,
-      shouldMenuAnimate,
-      shouldMenuAutoFlip,
-      shouldMenuAutoFocus,
-      value,
+    if (focusedOption) {
+      // TODO: Figure out if rAF is the best approach here. I initially added
+      // rAF to get the Select States Menu On story to render correctly in IE.
+      // Without rAF, the menu is scrolled slightly further down than it should
+      // be (only in IE, and only in the Menu On visual testing stories), which
+      // triggers a visual regression. We're inside useLayoutEffect here so I
+      // didn't expect to need rAF in order to make proper measurements, but it
+      // seems to be necessary in IE.
+      //
+      // This rAF call also has the additional benefit of fixing a jarring menu
+      // placement issue in IE (https://github.com/Workday/canvas-kit/issues/791),
+      // so I'm leaving it in for now.
+      const animateId = requestAnimationFrame(() => {
+        // We cannot use the native Element.scrollIntoView() here because it
+        // doesn't work properly with the portalled menu: when using the keyboard
+        // to advance focus through the options, using scrollIntoView to keep the
+        // newly focused option in view also scrolls the ENTIRE page. Instead, we
+        // call our own scrollIntoViewIfNeeded function.
+        scrollIntoViewIfNeeded(focusedOption, false);
+      });
 
-      // Strip unneeded props on button from elemProps
-      onOptionSelection,
+      return () => {
+        cancelAnimationFrame(animateId);
+      };
+    }
 
-      ...elemProps
-    } = this.props;
+    return undefined;
+  }, [focusedOptionIndex]);
 
-    // Use default renderOption if renderOption prop isn't provided
-    const renderOption = this.props.renderOption || this.renderOption;
+  // If the menu was just opened, scroll the focused option into view (if
+  // necessary) and center it
+  useLayoutEffect(() => {
+    const focusedOption = focusedOptionRef.current;
 
-    // Do a bit of error-checking in case options weren't provided
-    const selectedOption = !isEmpty ? options[getCorrectedIndexByValue(options, value)] : null;
-    const selectedOptionLabel = selectedOption ? selectedOption.label : '';
-    const selectedOptionValue = selectedOption ? selectedOption.value : '';
+    // We need to scroll if the menu is either opening or opened in case we decide to
+    // bypass the opening state and jump straight to opened (like in visual testing,
+    // for instance)
+    if (focusedOption && (menuVisibility === 'opening' || menuVisibility === 'opened')) {
+      // TODO: This rAF call is also necessary for the Menu On visual testing
+      // stories to render properly in IE (see above, both rAF calls need to be
+      // present). It has no bearing on the menu placement issue.
+      const animateId = requestAnimationFrame(() => {
+        scrollIntoViewIfNeeded(focusedOption, true);
+      });
 
-    return (
-      <SelectWrapper grow={grow} disabled={disabled}>
-        <SelectButton
-          aria-expanded={!isMenuHidden ? 'true' : undefined}
-          aria-haspopup="listbox"
-          aria-controls={!isMenuHidden ? this.menuId : undefined}
-          disabled={disabled}
+      return () => {
+        cancelAnimationFrame(animateId);
+      };
+    }
+
+    return undefined;
+  }, [menuVisibility]);
+
+  // Do a bit of error-checking in case options weren't provided
+  const hasOptions = options.length > 0;
+  const selectedOption = hasOptions ? options[getCorrectedIndexByValue(options, value)] : null;
+  const selectedOptionLabel = selectedOption ? selectedOption.label : '';
+  const selectedOptionValue = selectedOption ? selectedOption.value : '';
+
+  return (
+    <SelectWrapper grow={grow} disabled={disabled}>
+      <SelectButton
+        aria-expanded={menuVisibility !== 'closed' ? 'true' : undefined}
+        aria-haspopup="listbox"
+        aria-controls={menuVisibility !== 'closed' ? menuId : undefined}
+        disabled={disabled}
+        error={error}
+        grow={grow}
+        menuVisibility={menuVisibility}
+        onKeyDown={onKeyDown}
+        // Prevent Firefox from triggering click handler on spacebar during
+        // type-ahead when the menu is closed (and, thus, incorrectly displaying
+        // the menu)
+        onKeyUp={e => {
+          e.preventDefault();
+        }}
+        ref={buttonRef}
+        type="button"
+        value={selectedOptionValue}
+        {...elemProps}
+      >
+        {selectedOptionLabel}
+      </SelectButton>
+      <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOptionValue} />
+      {hasOptions && menuVisibility !== 'closed' && (
+        <SelectMenu
+          aria-activedescendant={options[focusedOptionIndex].id}
+          aria-labelledby={ariaLabelledBy}
+          aria-required={ariaRequired || required ? true : undefined}
+          buttonRef={buttonRef}
+          id={menuId}
           error={error}
-          grow={grow}
-          isMenuHidden={isMenuHidden}
-          isMenuHiding={isMenuHiding}
+          menuRef={menuRef}
+          onBlur={onMenuBlur}
           onKeyDown={onKeyDown}
-          // Prevent Firefox from triggering click handler on spacebar during
-          // type-ahead when the menu is closed (and, thus, incorrectly displaying
-          // the menu)
-          onKeyUp={e => {
-            e.preventDefault();
-          }}
-          ref={buttonRef}
-          type="button"
-          value={selectedOptionValue}
-          {...elemProps}
+          onCloseOnEscape={onMenuCloseOnEscape}
+          placement={menuPlacement}
+          shouldAutoFlip={shouldMenuAutoFlip}
+          shouldAutoFocus={shouldMenuAutoFocus}
+          visibility={menuVisibility}
         >
-          {selectedOptionLabel}
-        </SelectButton>
-        <SelectInput onChange={onChange} ref={inputRef} type="text" value={selectedOptionValue} />
-        {!isEmpty && !isMenuHidden && (
-          <SelectMenu
-            aria-activedescendant={options[focusedOptionIndex].id}
-            aria-labelledby={ariaLabelledBy}
-            aria-required={ariaRequired || required ? true : undefined}
-            buttonRef={buttonRef}
-            id={this.menuId}
-            error={error}
-            isFlipped={isMenuFlipped}
-            isHidden={isMenuHidden}
-            isHiding={isMenuHiding}
-            menuRef={this.menuRef}
-            onBlur={onMenuBlur}
-            onKeyDown={onKeyDown}
-            onCloseOnEscape={onMenuCloseOnEscape}
-            shouldAnimate={shouldMenuAnimate}
-            shouldAutoFlip={shouldMenuAutoFlip}
-            shouldAutoFocus={shouldMenuAutoFocus}
-          >
-            {this.renderOptions(renderOption)}
-          </SelectMenu>
-        )}
-        <SelectMenuIcon
-          className="menu-icon"
-          icon={caretDownSmallIcon}
-          color={disabled ? colors.licorice100 : colors.licorice200}
-          colorHover={disabled ? colors.licorice100 : colors.licorice500}
-          size={menuIconSize}
-        />
-      </SelectWrapper>
-    );
-  }
-}
+          {renderOptions(renderOption)}
+        </SelectMenu>
+      )}
+      <SelectMenuIcon
+        className="menu-icon"
+        icon={caretDownSmallIcon}
+        color={disabled ? colors.licorice100 : colors.licorice200}
+        colorHover={disabled ? colors.licorice100 : colors.licorice500}
+        size={menuIconSize}
+      />
+    </SelectWrapper>
+  );
+};
+
+export default SelectBase;

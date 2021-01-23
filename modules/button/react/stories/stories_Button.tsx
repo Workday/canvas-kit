@@ -17,7 +17,7 @@ const buttonContainer = {
   },
 };
 
-storiesOf('Components|Buttons/Button/React/Standard', module)
+storiesOf('Components/Buttons/Button/React/Standard', module)
   .addParameters({component: Button})
   .addDecorator(withReadme(README))
   .add('Primary', () => (

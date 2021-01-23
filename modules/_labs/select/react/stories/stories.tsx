@@ -86,7 +86,7 @@ export const customRenderOption: RenderOptionFunction = option => {
   );
 };
 
-storiesOf('Labs|Select/React/Top Label', module)
+storiesOf('Labs/Select/React/Top Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -140,11 +140,11 @@ storiesOf('Labs|Select/React/Top Label', module)
   ))
   .add('Grow', () => (
     <FormField label="Label" inputId="select-grow" grow={true}>
-      {controlComponent(<Select name="contact" options={options} grow={true} />)}
+      {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
   ));
 
-storiesOf('Labs|Select/React/Left Label', module)
+storiesOf('Labs/Select/React/Left Label', module)
   .addParameters({component: Select})
   .addDecorator(withReadme(README))
   .add('Default', () => (
@@ -217,6 +217,6 @@ storiesOf('Labs|Select/React/Left Label', module)
       inputId="select-grow"
       grow={true}
     >
-      {controlComponent(<Select name="contact" options={options} grow={true} />)}
+      {controlComponent(<Select name="contact" options={options} />)}
     </FormField>
   ));

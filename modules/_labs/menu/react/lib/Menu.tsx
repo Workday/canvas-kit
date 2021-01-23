@@ -46,11 +46,8 @@ export interface MenuState {
   selectedItemIndex: number;
 }
 
-const minWidth = 100;
-
 const List = styled('ul')({
   background: commonColors.background,
-  minWidth: `${minWidth}px`,
   borderRadius: borderRadius.m,
   padding: 0,
   margin: `${spacing.xxs} 0`,
@@ -124,11 +121,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
     const cardWidth = grow ? '100%' : width;
 
     return (
-      <Card
-        style={{display: 'inline-block', minWidth: minWidth + 2}}
-        padding={spacing.zero}
-        width={cardWidth}
-      >
+      <Card style={{display: 'inline-block'}} padding={spacing.zero} width={cardWidth}>
         <List
           role="menu"
           tabIndex={0}

@@ -1,11 +1,11 @@
 // React stories template
 
-module.exports = (storyPath, pascalCaseName, rootPath) => `
+module.exports = (storyPath, pascalCaseName, rootPath, unstable) => `
 /// <reference path="${rootPath}/../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {ComponentStatesTable, permutateProps, withSnapshotsEnabled} from '../../../../utils/storybook';
+import {ComponentStatesTable, permutateProps, withSnapshotsEnabled} from '../../../../${unstable ? '../' : ''}utils/storybook';
 import ${pascalCaseName} from '../index';
 
 export default withSnapshotsEnabled({

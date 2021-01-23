@@ -29,7 +29,7 @@ const blueBackground: CSSObject = {
   backgroundColor: '#0875e1',
 };
 
-storiesOf('Components|Buttons/Button/React/Icon Button', module)
+storiesOf('Components/Buttons/Button/React/Icon Button', module)
   .addParameters({component: IconButton})
   .addDecorator(withReadme(README))
   .add('Circle', () => {

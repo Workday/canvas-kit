@@ -198,7 +198,7 @@ export const PopupStack = {
    * should be added to this element.
    */
   createContainer(): HTMLElement {
-    if (stack._adapter.createContainer) {
+    if (stack._adapter?.createContainer) {
       return stack._adapter.createContainer();
     }
     const div = document.createElement('div');
@@ -212,7 +212,7 @@ export const PopupStack = {
    * method when the event triggers.
    */
   add(item: PopupStackItem): void {
-    if (stack._adapter.add) {
+    if (stack._adapter?.add) {
       stack._adapter.add(item);
       return;
     }
@@ -229,7 +229,7 @@ export const PopupStack = {
    * reset z-index values of the stack
    */
   remove(element: HTMLElement): void {
-    if (stack._adapter.remove) {
+    if (stack._adapter?.remove) {
       stack._adapter.remove(element);
       return;
     }
@@ -245,7 +245,7 @@ export const PopupStack = {
    * reference that was passed to `add`
    */
   isTopmost(element: HTMLElement): boolean {
-    if (stack._adapter.isTopmost) {
+    if (stack._adapter?.isTopmost) {
       return stack._adapter.isTopmost(element);
     }
     const last = getLast(stack.items);
@@ -260,7 +260,7 @@ export const PopupStack = {
    * Returns an array of elements defined by the `element` passed to `add`.
    */
   getElements(): HTMLElement[] {
-    if (stack._adapter.getElements) {
+    if (stack._adapter?.getElements) {
       return stack._adapter.getElements();
     }
     return stack.items.map(i => i.element);
@@ -279,7 +279,7 @@ export const PopupStack = {
    * the top of the stack.
    */
   bringToTop(element: HTMLElement): void {
-    if (stack._adapter.bringToTop) {
+    if (stack._adapter?.bringToTop) {
       stack._adapter.bringToTop(element);
       return;
     }
@@ -318,7 +318,7 @@ export const PopupStack = {
    * is not inside `element`).
    */
   contains(element: HTMLElement, eventTarget: HTMLElement): boolean {
-    if (stack._adapter.contains) {
+    if (stack._adapter?.contains) {
       return stack._adapter.contains(element, eventTarget);
     }
     const item = find(stack.items, i => i.element === element);

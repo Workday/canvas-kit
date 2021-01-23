@@ -7,7 +7,7 @@ import type, {space} from '..';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Core',
+  title: 'Testing/React/Labs/Core',
 });
 
 export const TypeAndSpace = () => {
@@ -27,7 +27,7 @@ export const TypeAndSpace = () => {
 
   return (
     <div>
-      <section>
+      <section className="story">
         <h1 style={type.brand1}>Brand 1 Header</h1>
         <h2 style={type.brand2}>Brand 2 header</h2>
         <h1 style={type.h1}>H1 Header</h1>
@@ -36,7 +36,7 @@ export const TypeAndSpace = () => {
         <h4 style={type.h4}>H4 Header</h4>
         <h5 style={type.h5}>H5 Header</h5>
       </section>
-      <section>
+      <section className="story">
         <h2 style={type.h2}>Body Text</h2>
         <p style={type.body}>
           <strong>Body: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde
@@ -63,7 +63,7 @@ export const TypeAndSpace = () => {
           bird on it occaecat
         </p>
       </section>
-      <section>
+      <section className="story">
         <h2 style={type.h2}>Text Variants</h2>
         <span css={[type.body, type.variant.button]}>Button Text</span>
         <br />
@@ -83,7 +83,7 @@ export const TypeAndSpace = () => {
         <br />
         <span css={[type.body, type.variant.mono]}>Mono Text</span>
       </section>
-      <section>
+      <section className="story">
         <h2 style={type.h2}>Spacing</h2>
         <Box m={spacing.m} p={spacing.m}>
           medium margin and padding

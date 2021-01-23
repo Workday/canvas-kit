@@ -6,7 +6,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {deprecated_Button as Button} from '../index';
 import README from '../README.md';
 
-storiesOf('Components|Buttons/Button/React/Deprecated', module)
+storiesOf('Components/Buttons/Button/React/Deprecated', module)
   .addParameters({component: Button})
   .addDecorator(withReadme(README))
   .add('Primary', () => (

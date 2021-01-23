@@ -14,6 +14,7 @@ export const getIndexByValue = (options: NormalizedOption[], value: string | und
   return -1;
 };
 
+// If the value doesn't exist in the options, return index 0
 export const getCorrectedIndexByValue = (
   options: NormalizedOption[],
   value: string | undefined

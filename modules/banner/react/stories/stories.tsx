@@ -11,7 +11,7 @@ const handleBannerClick = () => {
   alert(`onClick triggered`);
 };
 
-storiesOf('Components|Indicators/Banner/React/Alert', module)
+storiesOf('Components/Indicators/Banner/React/Alert', module)
   .addParameters({component: Banner})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)
@@ -52,7 +52,7 @@ storiesOf('Components|Indicators/Banner/React/Alert', module)
     </div>
   ));
 
-storiesOf('Components|Indicators/Banner/React/Error', module)
+storiesOf('Components/Indicators/Banner/React/Error', module)
   .addParameters({component: Banner})
   .addDecorator(withReadme(README))
   .addDecorator(withKnobs)

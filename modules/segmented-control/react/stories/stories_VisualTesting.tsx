@@ -23,7 +23,7 @@ import {SegmentedControl} from '../index';
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Segmented Control',
+  title: 'Testing/React/Buttons/Segmented Control',
   component: SegmentedControl,
   decorators: [withReadme(README)],
 });

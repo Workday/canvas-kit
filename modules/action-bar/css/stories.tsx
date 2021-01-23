@@ -5,7 +5,7 @@ import README from './README.md';
 import './index.scss';
 import './stories.scss';
 
-storiesOf('Components|Buttons/Action Bar/CSS', module)
+storiesOf('Components/Buttons/Action Bar/CSS', module)
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

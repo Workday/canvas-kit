@@ -7,13 +7,14 @@ import {
   ComponentStatesTable,
   withSnapshotsEnabled,
   permutateProps,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
 import {ToolbarDropdownButton} from '../../index';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Toolbar Dropdown Button',
+  title: 'Testing/React/Buttons/Button/Toolbar Dropdown Button',
   component: ToolbarDropdownButton,
 });
 
@@ -41,3 +42,10 @@ export const ToolbarDropdownButtonStates = () => (
     </div>
   </React.Fragment>
 );
+
+export const ToolbarDropdownButtonThemedStates = () => <ToolbarDropdownButtonStates />;
+ToolbarDropdownButtonThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

@@ -11,7 +11,7 @@ import {StatusIndicator, StatusIndicatorProps} from '../';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Indicators/Status Indicator',
+  title: 'Testing/React/Indicators/Status Indicator',
   component: StatusIndicator,
 });
 

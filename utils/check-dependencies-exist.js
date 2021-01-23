@@ -9,6 +9,7 @@ const depCheck = require('depcheck');
 const depCheckOptions = {
   ignoreMatches: [
     '@testing-library/react',
+    '@testing-library/react-hooks',
     '@storybook/react',
     'storybook-readme',
     '@storybook/addon-actions',

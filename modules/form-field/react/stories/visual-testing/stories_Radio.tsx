@@ -5,6 +5,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
+  customColorTheme,
 } from '../../../../../utils/storybook';
 
 import {Radio, RadioGroup} from '../../../../radio/react';
@@ -14,7 +15,7 @@ const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Inputs/Radio',
+  title: 'Testing/React/Inputs/Radio',
   component: FormField,
 });
 
@@ -156,3 +157,10 @@ export const RadioStates = () => (
     </div>
   </div>
 );
+
+export const RadioThemedStates = () => <RadioStates />;
+RadioThemedStates.parameters = {
+  canvasProviderDecorator: {
+    theme: customColorTheme,
+  },
+};

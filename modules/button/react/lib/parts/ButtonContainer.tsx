@@ -49,13 +49,13 @@ function getIconColorSelectors(
 ): CSSObject {
   return {
     '&:focus span, &:hover span, & span': {
-      '.wd-icon-fill': {
+      '.wd-icon-fill, .wd-icon-accent, .wd-icon-accent2': {
         fill: color,
       },
       '.wd-icon-background': {
         fill: fill ? color : undefined,
       },
-      '.wd-icon-accent, .wd-icon-accent2': {
+      '.wd-icon-background ~ .wd-icon-accent, .wd-icon-background ~ .wd-icon-accent2': {
         fill: fill
           ? color === themePrimary.contrast
             ? themePrimary.main

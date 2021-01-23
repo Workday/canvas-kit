@@ -11,7 +11,7 @@ import {colors, type, depth, spacing, borderRadius, H1, H2, H3, H4, H5} from '..
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
-  title: 'Tokens|Core/React',
+  title: 'Tokens/Core/React',
   decorators: [withReadme(README)],
 });
 

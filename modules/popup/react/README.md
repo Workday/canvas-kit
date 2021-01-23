@@ -324,8 +324,8 @@ const MyDeleteButton = ({onConfirm}) => {
   const {targetProps, closePopup, popperProps, stackRef} = usePopup();
 
   // popup traits
-  useCloseOnOutsideClick(stackRef);
-  useCloseOnEscape(stackRef);
+  useCloseOnOutsideClick(stackRef, closePopup);
+  useCloseOnEscape(stackRef, closePopup);
 
   return (
     <>

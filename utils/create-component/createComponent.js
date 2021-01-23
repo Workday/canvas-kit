@@ -5,8 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
-const cmd = require('node-cmd');
-const colors = require('colors');
+const {exec} = require('child_process');
+
+require('colors');
 
 const createReactModule = require('./createReactModule');
 const createCssModule = require('./createCssModule');
@@ -43,7 +44,7 @@ const questions = [
     name: 'category',
     message: 'What category should this component live in?:',
     choices: [
-      'Labs (unstable)',
+      'Labs (beta)',
       'Buttons',
       'Containers',
       'Indicators',
@@ -71,7 +72,7 @@ inquirer
     const {name, category, targets} = answers;
     const css = targets.includes('CSS');
     const react = targets.includes('React');
-    const unstable = category == 'Labs (unstable)';
+    const unstable = category == 'Labs (beta)';
     const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
     if (!fs.existsSync(componentPath)) {
@@ -94,13 +95,13 @@ const createModule = (componentPath, target, moduleGenerator, answers, unstable)
   const modulePath = path.join(componentPath, target);
 
   if (fs.existsSync(modulePath)) {
-    const moduleName = `Module @workday/canvas-kit-${unstable ? 'labs-' : ''}${target}-${name}`;
+    const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}${target}-${name}`;
     console.log(`\nModule ${moduleName} already exists. Skipping.`.yellow);
   } else {
     moduleGenerator(modulePath, name, description, unstable, publicModule, category);
 
     console.log('\nBootstrapping dependencies.');
-    cmd.run('yarn');
+    exec('yarn');
 
     if (!unstable) {
       console.log('\nAdding dependency to ' + `@workday/canvas-kit-${target}.`.cyan);

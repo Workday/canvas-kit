@@ -12,7 +12,7 @@ import {Hyperlink} from '../../index';
 import {Container} from './utils';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Buttons/Button/Hyperlink',
+  title: 'Testing/React/Buttons/Button/Hyperlink',
   component: Hyperlink,
 });
 

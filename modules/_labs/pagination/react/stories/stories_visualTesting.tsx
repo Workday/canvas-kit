@@ -4,7 +4,7 @@ import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/s
 import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 
 export default withSnapshotsEnabled({
-  title: 'Testing|React/Labs/Pagination',
+  title: 'Testing/React/Labs/Pagination',
   component: Pagination,
 });
 

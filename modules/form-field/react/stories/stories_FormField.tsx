@@ -6,7 +6,7 @@ import FormField from '../lib/FormField';
 import {TextInput} from '../../../text-input/react';
 import README from '../README.md';
 
-storiesOf('Components|Inputs/Form Field/React', module)
+storiesOf('Components/Inputs/Form Field/React', module)
   .addParameters({component: FormField})
   .addDecorator(withReadme(README))
   .add('Default', () => (

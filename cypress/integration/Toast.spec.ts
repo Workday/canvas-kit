@@ -16,7 +16,7 @@ describe('Toast', () => {
   ['Error', 'Success'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Components|Popups/Toast/React', story);
+        h.stories.load('Components/Popups/Toast/React', story);
       });
 
       it('should not have any axe errors', () => {
@@ -27,7 +27,7 @@ describe('Toast', () => {
 
   context(`given the toast with no close icon or action button`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Toast/React', 'Success');
+      h.stories.load('Components/Popups/Toast/React', 'Success');
     });
 
     it('should have a role of status', () => {
@@ -45,7 +45,7 @@ describe('Toast', () => {
 
   context(`given the toast with a close button  and action button`, () => {
     beforeEach(() => {
-      h.stories.load('Components|Popups/Toast/React', 'With action link and close icon');
+      h.stories.load('Components/Popups/Toast/React', 'With action link and close icon');
     });
 
     it('should have a role of dialog', () => {

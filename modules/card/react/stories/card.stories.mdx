@@ -1,0 +1,29 @@
+import {Meta, Story, Canvas, ArgsTable} from '@storybook/addon-docs/blocks';
+
+import {spacing} from '../../../core/react';
+import README from '../README.md';
+import Card from '../index';
+
+<Meta title="Components/Containers/Card/React" component={Card} />
+
+# Card
+
+<Canvas>
+  <Story name="Default">
+    <div className="story">
+      <Card heading="Title">Card contents</Card>
+    </div>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Card} />
+
+## No Padding
+
+<Canvas>
+  <Story name="With No Padding">
+    <Card heading="Title" padding={spacing.zero}>
+      No Padding
+    </Card>
+  </Story>
+</Canvas>
