@@ -89,6 +89,14 @@ Default: `false`
 
 ---
 
+#### `mirror: boolean`
+
+> Flips the icon in the vertical axis
+
+Default: `false`
+
+---
+
 # Applet Icons
 
 ## Usage
@@ -168,6 +176,14 @@ Default: `92`
 #### `iconRef: React.Ref<HTMLSpanElement>`
 
 > Returns the ref to the rendered icon.
+
+---
+
+#### `mirror: boolean`
+
+> Flips the icon in the vertical axis
+
+Default: `false`
 
 ---
 
@@ -278,6 +294,14 @@ Default: `'transparent'`
 
 ---
 
+#### `mirror: boolean`
+
+> Flips the icon in the vertical axis
+
+Default: `false`
+
+---
+
 # System Icon Circle
 
 A system icon with a colored circular background. Icon color will be determined based on contrast
@@ -329,6 +353,14 @@ Default: `SystemIconCircleSize.l` (`40`)
 #### `iconRef: React.Ref<HTMLSpanElement>`
 
 > Returns the ref to the rendered icon.
+
+---
+
+#### `mirror: boolean`
+
+> Flips the icon in the vertical axis
+
+Default: `false`
 
 ---
 
@@ -400,5 +432,13 @@ Default: `false`
 #### `iconRef: React.Ref<HTMLSpanElement>`
 
 > Returns the ref to the rendered icon.
+
+---
+
+#### `mirror: boolean`
+
+> Flips the icon in the vertical axis
+
+Default: `false`
 
 ---
