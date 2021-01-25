@@ -4,10 +4,10 @@
 
 Compound components is a pattern in which components are used together in such a way that describes a higher level of abstraction. A desktop computer is composed of many components that can be serviced and configured individually. Similarly, a compound component allows simultaneous configuration through access to each sub-component. Here are the parts of a compound component:
 
-* Container component
-* Sub-components
-* Shared model (optional)
-* Behavior hooks (optional)
+* [Container component](#container-components)
+* [Sub-components](#sub-components)
+* [Shared model (optional, advanced)](#models)
+* [Behavior hooks (optional, advanced)](#behavior-hooks)
 
 A compound component contrasts with a configuration component which instead configures from a single interface. A configuration component might be like choosing a desktop computer based on stats - how much RAM or how fast the CPU should be or based on what you want to use it for. A compound component is more like buying the parts individually and assembling yourself.
 
@@ -98,24 +98,74 @@ Conversely, compound components have a more verbose implementation and loose con
 </Tabs>
 ```
 
+The pattern provides an additional benefit as well: maintainability. An active client-side application is constantly changing over the course of its lifecycle. However, not all parts change at the same rate. The application-level business logic (authentication, authorization, data fetching, et al) likely remains fairly intact over time. The UI logic layer (checkout flow steps, modal logic, etc) will change more frequently as features evolves or are deprecated. The most frequent changes happen at the markup structure and styling level. Configurable components are great at meeting the needs of your application today, but are more difficult to update. Changing the markup will often require changes to the component's code which will require library updates. These library updates mean more UI logic and complexity or complete rewrite to support more use-cases.
+
+For these reasons, we much prefer the compound component pattern. It allows our components to adapt to your application's needs and evolve with it over time, often without changes to our code.
+
+
+## Configuring Components
+
 Components that directly wrap an element (most of them) will have the following properties:
 
 * `ref`: This allows direct access to the underlying element.
   ```tsx
   <Tabs.Item ref={myRef}>
   ```
-* `as`: This allows overriding of the default element. This can be a component as well.
+* `as`: This allows overriding of the default element. The override can be a string representation of a tag (i.e. `section`, `div`, `nav`, etc), or a Component that forwards attributes to an element.
   ```tsx
-  <Tabs.List as="section">
+  // tag
+  <Tabs.List as="section" />
+  
+  // Component
+  const Section = ({children, ...elemProps}) => (
+    <section {...elemProps}>{children}</section>
+  )
+  
+  <Tabs.List as={Section}/>
+  ```
+  Both will look like the following in the DOM:
+  ```html
+  <section role="tablist">
   ```
 * Any extra props will be passed as HTML attributes to the underlying element.
   ```tsx
   <Tabs.Item aria-label="Foobar" data-testid="tab1">
   ```
+  
+Compound components are also made up of [models](#models) that accept [guards](#guards) to conditionally prevent state changes and [callbacks](#callbacks) to attach listeners. For example, in our Tabs component clicking a Tab will activate that tab. The `Tabs` container component will accept a `shouldActivateTab` and a `onActivateTab` for the event called `activateTab`.
 
-The pattern provides an additional benefit as well: maintainability. An active client-side application is constantly changing over the course of its lifecycle. However, not all parts change at the same rate. The application-level business logic (authentication, authorization, data fetching, et al) likely remains fairly intact over time. The UI logic layer (checkout flow steps, modal logic, etc) will change more frequently as features evolves or are deprecated. The most frequent changes happen at the markup structure and styling level. Configurable components are great at meeting the needs of your application today, but are more difficult to update. Changing the markup will often require changes to the component's code which will require library updates. These library updates mean more UI logic and complexity or complete rewrite to support more use-cases.
+```tsx
+const MyComponent = () => {
+  // `data` is all event data from the `activateTab` event
+  // `state` is the current state of the `Tabs` component
 
-For these reasons, we much prefer the compound component pattern. It allows our components to adapt to your application's needs and evolve with it over time, often without changes to our code.
+  const shouldActivateTab = ({ data, state }) => {
+    // for some reason, we only want to allow activation the 'first' tab
+    // Clicking on the first tab will activate it, but clicking on the
+    // second tab will do nothing
+    return data.tab === 'first' ? true : false
+    
+    // returning true allows the event to trigger a state change and will
+    // also call the `onActivateTab` callback
+  }
+  
+  const onActivateTab = ({ data, state }) => {
+    // called any time the `activateTab` event is triggered
+    console.log('onActivteTab', data, state)
+  }
+  
+  return (
+    <Tabs shouldActivateTab={shouldActivateTab} onActivateTab={onActivateTab}>
+      <Tabs.List>
+        <Tabs.Item name="first">First</Tabs.Item>
+        <Tabs.Item name="second">Second</Tabs.Item>
+      </Tabs.List>
+    </Tabs>
+  )
+}
+```
+
+This concludes basic compound components. If you'd like to know more about models, behavior hooks, and more advanced composition techniques, read on.
 
 ## Models
 
@@ -408,4 +458,3 @@ const App = () => {
   )
 }
 ```
-
