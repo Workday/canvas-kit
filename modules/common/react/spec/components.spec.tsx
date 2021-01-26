@@ -1,7 +1,7 @@
 import React from 'react';
 import {screen, render, fireEvent, act} from '@testing-library/react';
 
-import {createComponent, useForkRef} from '../lib/utils/components';
+import {createComponent, useForkRef, useLocalRef} from '../lib/utils/components';
 
 describe('createEventMap', () => {
   it('create assign a displayName', () => {
@@ -117,5 +117,24 @@ describe('useForkRef', () => {
 
     expect(ref1).toHaveBeenCalledWith('bar');
     expect(ref2).toHaveBeenCalledWith('bar');
+  });
+});
+
+describe.only('useLocalRef', () => {
+  it('should return a localRef and an elementRef', () => {
+    let localRefTest, elementRefTest;
+    const CustomComponent = React.forwardRef<HTMLDivElement>((_, ref) => {
+      const {localRef, elementRef} = useLocalRef(ref);
+
+      localRefTest = localRef;
+      elementRefTest = elementRef;
+
+      return <div ref={ref} />;
+    });
+
+    render(<CustomComponent />);
+
+    expect(localRefTest).toHaveProperty('current');
+    expect(elementRefTest).toEqual(expect.any(Function));
   });
 });

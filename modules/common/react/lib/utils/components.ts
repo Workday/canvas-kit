@@ -136,13 +136,24 @@ export function useForkRef<T>(ref1: React.Ref<T>, ref2: React.Ref<T>): (instance
 }
 
 /**
- * This function is the same as calling `React.useRef(null)` with the added benefit of extracting
- * the type from the ref passed to it. This means you don't have to provide a generic to the
- * `useRef` function
+ * This functions handles the common use case where a component needs a local ref and needs to
+ * forward a ref to an element.
  * @param ref The React ref passed from the `createComponent` factory function
+ *
+ * @example
+ * const MyComponent = ({children, ...elemProps}: MyProps, ref, Element) => {
+ *   const { localRef, elementRef } = useLocalRef(ref);
+ *
+ *   // do something with `localRef` which is a `RefObject` with a `current` property
+ *
+ *   return <Element ref={elementRef} {...elemProps} />
+ * }
  */
-export function useComponentRef<T>(ref: React.Ref<T>) {
-  return React.useRef<T>(null);
+export function useLocalRef<T>(ref: React.Ref<T>) {
+  const localRef = React.useRef<T>(null);
+  const elementRef = useForkRef(ref, localRef);
+
+  return {localRef, elementRef};
 }
 
 /**
