@@ -19,7 +19,7 @@ module.exports = {
         if (pathRegex.test(value)) {
           context.report({
             node,
-            message: `The /lib directory isn't available in production. Import from '@workday/${packageName}'.`,
+            message: `The /lib directory isn't available in production. Import from '@workday/${packageName}' instead.`,
           });
         }
       },

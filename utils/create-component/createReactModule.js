@@ -4,11 +4,14 @@ const {exec} = require('child_process');
 require('colors');
 
 const writeModuleFiles = require('./writeModuleFiles');
-const getPascalCaseName = require('./nameUtils').getPascalCaseName;
-const getTitleCaseName = require('./nameUtils').getTitleCaseName;
+
+const {getCamelCaseName, getPascalCaseName, getTitleCaseName} = require('./nameUtils');
 
 const packageJson = require('./templates/react/packageJson');
+const model = require('./templates/react/model');
 const component = require('./templates/react/component');
+const componentTarget = require('./templates/react/component.target');
+const componentContent = require('./templates/react/component.content');
 const index = require('./templates/react/index');
 const stories = require('./templates/react/stories');
 const testingStories = require('./templates/react/stories_VisualTesting');
@@ -25,6 +28,7 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
 
   mkdirp.sync(modulePath);
 
+  const camelCaseName = getCamelCaseName(name);
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
   const rootPath = unstable ? '../../../..' : '../../..';
@@ -36,9 +40,21 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
       path: 'package.json',
       contents: packageJson(name, moduleName, description, unstable, public),
     },
+    model: {
+      path: `lib/use${pascalCaseName}Model.tsx`,
+      contents: model(camelCaseName, pascalCaseName),
+    },
     component: {
       path: `lib/${pascalCaseName}.tsx`,
       contents: component(pascalCaseName),
+    },
+    componentTarget: {
+      path: `lib/${pascalCaseName}.Target.tsx`,
+      contents: componentTarget(camelCaseName, pascalCaseName),
+    },
+    componentContent: {
+      path: `lib/${pascalCaseName}.Content.tsx`,
+      contents: componentContent(pascalCaseName),
     },
     index: {
       path: 'index.ts',
@@ -46,11 +62,11 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
     },
     stories: {
       path: 'stories/stories.tsx',
-      contents: stories(storyPath, pascalCaseName, rootPath),
+      contents: stories(moduleName, storyPath, pascalCaseName, rootPath),
     },
     testingStories: {
       path: 'stories/stories_VisualTesting.tsx',
-      contents: testingStories(testingStoryPath, pascalCaseName, rootPath, unstable),
+      contents: testingStories(moduleName, testingStoryPath, pascalCaseName, rootPath),
     },
     ssr: {
       path: 'spec/SSR.spec.tsx',

@@ -16,7 +16,7 @@ ruleTester.run('restricted-imports', rule, {
       errors: [
         {
           message:
-            "The /lib directory isn't available in production. Import from '@workday/canvas-kit-react-color-picker'.",
+            "The /lib directory isn't available in production. Import from '@workday/canvas-kit-react-color-picker' instead.",
         },
       ],
     },
@@ -25,7 +25,7 @@ ruleTester.run('restricted-imports', rule, {
       errors: [
         {
           message:
-            "The /lib directory isn't available in production. Import from '@workday/canvas-kit-react-core'.",
+            "The /lib directory isn't available in production. Import from '@workday/canvas-kit-react-core' instead.",
         },
       ],
     },
