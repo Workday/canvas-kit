@@ -91,8 +91,8 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
 export const Tab = createComponent('button')({
   displayName: 'Tabs.Item',
   Component: ({name = '', model, children, ...elemProps}: TabProps, ref, Element) => {
-    const tabRef = useComponentRef(ref);
-    const elementRef = useForkRef(ref, tabRef);
+    const localRef = useComponentRef(ref);
+    const elementRef = useForkRef(ref, localRef);
 
     const {state, events} = useModelContext(TabsModelContext, model);
     const [tabName, setTabName] = React.useState(name);
@@ -101,7 +101,7 @@ export const Tab = createComponent('button')({
     useMountLayout(() => {
       const index = state.indexRef.current;
       const tabName = name || String(index);
-      events.registerItem({item: {id: tabName, ref: tabRef}});
+      events.registerItem({item: {id: tabName, ref: localRef}});
       setTabName(tabName);
 
       return () => {
