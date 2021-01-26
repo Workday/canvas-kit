@@ -3,13 +3,13 @@
 Refer to the [Compound Component documentation](./COMPOUND\_COMPONENTS.md) document to learn about what a compound component is.
 
 This document will go through building a simplified Disclosure component to help solidify the concepts. We will cover:
-- [Models](Creating%20Compound%20Components.md#models)
-- [Container Components](Creating%20Compound%20Components.md#disclosure-component)
-- [Sub-components](Creating%20Compound%20Components.md#disclosure-content-component)
-- [Model Composition](Creating%20Compound%20Components.md#model-composition)
-- [Behavior hooks](Creating%20Compound%20Components.md#behavior-hooks)
+- [Models](#models)
+- [Container Components](#disclosure-component)
+- [Sub-components](#disclosuretarget-component)
+- [Model Composition](#model-composition)
+- [Behavior hooks](#behavior-hooks)
 
-## Model
+## Models
 
 A model is composed of state and events. State and Event shapes are as follows:
 
