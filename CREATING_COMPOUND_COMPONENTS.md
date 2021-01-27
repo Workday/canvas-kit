@@ -642,7 +642,7 @@ Behavior hooks allow us to reuse pieces of functionality in difference component
 We'll build a behavior hook for the  `DisclosureTarget` component:
 
 ```tsx
-// useExpandablControls.tsx
+// useExpandableControls.tsx
 import { DisclosureModel } from "./useDisclosureModel"
 
 export const useExpandablControls = (
