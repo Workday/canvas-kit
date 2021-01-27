@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-tabs",
-  "version": "4.4.2",
+  "version": "5.0.0-beta.0",
   "description": "Composable tab components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -37,11 +37,11 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-common": "^4.4.2",
-    "@workday/canvas-kit-react-core": "^4.4.2"
+    "@workday/canvas-kit-react-common": "^5.0.0-beta.0",
+    "@workday/canvas-kit-react-core": "^5.0.0-beta.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-core": "^4.4.2"
+    "@workday/canvas-kit-labs-react-core": "^5.0.0-beta.0"
   },
   "peerDependencies": {
     "react": ">= 16.8 < 17"

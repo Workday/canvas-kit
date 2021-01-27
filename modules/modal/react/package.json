@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-modal",
-  "version": "4.4.2",
+  "version": "5.0.0-beta.0",
   "description": "Modal to display a popup with a translucent background",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -50,13 +50,13 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-popup-stack": "^4.4.2",
-    "@workday/canvas-kit-react-popup": "^4.4.2",
-    "@workday/canvas-kit-react-radio": "^4.4.2"
+    "@workday/canvas-kit-popup-stack": "^5.0.0-beta.0",
+    "@workday/canvas-kit-react-popup": "^5.0.0-beta.0",
+    "@workday/canvas-kit-react-radio": "^5.0.0-beta.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react-button": "^4.4.2",
-    "@workday/canvas-kit-react-form-field": "^4.4.2",
-    "@workday/canvas-kit-react-text-input": "^4.4.2"
+    "@workday/canvas-kit-react-button": "^5.0.0-beta.0",
+    "@workday/canvas-kit-react-form-field": "^5.0.0-beta.0",
+    "@workday/canvas-kit-react-text-input": "^5.0.0-beta.0"
   }
 }
