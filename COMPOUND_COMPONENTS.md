@@ -2,7 +2,7 @@
 
 ## What is a compound component?
 
-Compound components is a pattern in which components are used together in such a way that describes a higher level of abstraction. A desktop computer is composed of many components that can be serviced and configured individually. Similarly, a compound component allows simultaneous configuration through access to each sub-component. Here are the parts of a compound component:
+> Compound components is a pattern where higher level components are composed using smaller components, and you retain access to all the semantic elements of the higher level component.
 
 * [Container component](#container-components)
 * [Sub-components](#sub-components)
