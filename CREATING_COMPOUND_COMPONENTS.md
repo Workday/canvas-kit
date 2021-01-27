@@ -83,7 +83,7 @@ export const useDisclosureModel = (config: DisclosureConfig = {}) => {
 }
 ```
 
-Models aren't very complicated so far. We have a single `open` state property and an `open`, `close`, and `toggle` events we can fire on a model. So far using the model might look like this:
+Models aren't very complicated so far. We have a single `open` state property and an `open`, `close`, and `toggle` events we can send to the model. So far using the model might look like this:
 
 ```tsx
 const Test = () => {
@@ -226,6 +226,8 @@ That's a lot of extra boilerplate code for actions and callbacks. Our events don
 First we need to create an event map - a map of guard and callback functions to the events they need to be paired with. We'll use `createEventMap` to do this:
 
 ```tsx
+import { createEventMap } from "@workday/canvas-kit-react-common"
+
 const disclosureEventMap = createEventMap<DisclosureEvents>()({
   guards: {
     shouldOpen: "open",
@@ -247,6 +249,8 @@ We see that `createEventMap` takes two optional keys: `guards` and `callbacks`. 
 Now that we have an event map, we'll need to use it for our `DisclosureConfig`:
 
 ```tsx
+import { ToModelConfig } from "@workday/canvas-kit-react-common"
+
 export type DisclosureConfig = {
   initialOpen?: boolean
 } & Partial<
@@ -254,7 +258,7 @@ export type DisclosureConfig = {
 >
 ```
 
-The `ToModelConfig` type takes in our `State` type,  `Events` type, and our `EventMap` type. This will give us the proper shape of our config object.
+The `ToModelConfig` type takes in our `State` type,  `Events` type, and our `EventMap` type (the event map type is extracted from the event map: `typeof disclosureEventMap`). This will give us the proper shape of our config object.
 
 The `disclosureEventMap` will also be used to create the `events` object using the `useEventMap` utility hook:
 
@@ -328,11 +332,11 @@ Disclosure.Target = DisclosureTarget
 Disclosure.Content = DisclosureContent
 ```
 
-We can see that the `DisclosureProps` interface extends the `DisclosureConfig` interface. This allows us to pass model config directly to the `<Disclosure>` component. A user of this `<Disclosure>` component might want to register a callback when the `open` or `close` event is called, for instance.
+We can see that the `DisclosureProps` interface extends the `DisclosureConfig` interface. This allows us to pass model config directly to the `<Disclosure>` component. A user of this `<Disclosure>` component might want to register a callback when the `toggle` event is called, for instance.
 
 Next, a React Context object is created to represent the model of the compound component. This context will be used to pass the model to sub-components implicitly. This allows our compound component API to remain clean for consumers of compound components.
 
-In this particular compound component, the container component doesn't have a real element. Accessibility specifications have no `role` for this component, so an element is not needed.
+In this particular compound component, the container component doesn't have a real element. Accessibility specifications have no `role` for this component, so an element is not required.
 
 Let's go ahead and finish out our sub-components.
 
@@ -517,7 +521,7 @@ The full code can be found here: https://codesandbox.io/s/configurable-disclosur
 
 ## Model Composition
 
-Our example isn't fully accessible yet. The Disclosure target needs a `aria-controls` attribute to tie the target and content in the accessibility tree. This is done by the use of IDREFs (string IDs that start with a letter). We could add an  `id` to our model, but it is extremely common so let's make a new model and compose from it instead. We'll later use this model in a reusable behavioral hook.
+Our example isn't fully accessible yet. The Disclosure target needs a `aria-controls` attribute to tie the target and content in the accessibility tree. This is done by the use of IDREFs (string IDs that starts with a letter). We could add an  `id` to our model, but it is extremely common so let's make a new model and compose from it instead. We'll later use this model in a reusable behavioral hook.
 
 ```tsx
 // useIDModel.tsx
@@ -548,7 +552,7 @@ export const useIDModel = (config: IDConfig = {}) => {
 }
 ```
 
-This model only provides an `id` since that's all that is needed for functionality of any model composing this model. Also later we'll add behavioral hook that will require this model.
+This model only provides an `id` since that's all that is needed for IDREF functionality. Also later we'll add behavioral hook that will require this model.
 
 Let's update the `DisclosureModel` to compose the `IDModel`:
 
@@ -629,7 +633,7 @@ We can now add `aria-controls` to `DisclosureTarget` and `id` to `DisclosureCont
 
 Here's the working example now: https://codesandbox.io/s/disclosure-composable-model-9shjn
 
-At this point, we have an accessible disclosure compound component that composes 2 models. But the disclosure pattern is more than just the component level. For example, an autocomplete uses the disclosure pattern as well. Let's extract out this behavior with a behavior hook.
+At this point, we have an accessible disclosure compound component that composes 2 models. But the disclosure pattern is more than just the component level. For example, a tooltip uses the disclosure pattern as well. Let's extract out some behaviors into hooks.
 
 ## Behavior Hooks
 
@@ -638,10 +642,10 @@ Behavior hooks allow us to reuse pieces of functionality in difference component
 We'll build a behavior hook for the  `DisclosureTarget` component:
 
 ```tsx
-// useDisclosureTarget.tsx
+// useExpandablControls.tsx
 import { DisclosureModel } from "./useDisclosureModel"
 
-export const useDisclosureTarget = (
+export const useExpandablControls = (
   { state }: DisclosureModel,
   elemProps: {}
 ) => {
@@ -660,7 +664,7 @@ Now we can use the behavior hook in the `DiscloseTarget` component:
 
 // ...
 const model = React.useContext(DisclosureModelContext)
-const targetProps = useDisclosureTarget(model, elemProps)
+const props = useExpandablControls(model, elemProps)
 
 return (
   <Element
@@ -668,12 +672,40 @@ return (
     onClick={() => {
       model.events.toggle();
     }}
-    {...targetProps}
+    {...props}
   >
     {children}
   </Element>
 )
 // ...
+```
+
+We'll also make a `useHidden` behavior hook for the `hidden` attribute on the `Disclosure.Content` element:
+
+```tsx
+// useHidden.tsx
+import { DisclosureModel } from "./useDisclosureModel"
+
+export const useHidden = ({ state }: DisclosureModel, elemProps: {}) => {
+  return {
+    hidden: state.open ? undefined : true,
+    ...elemProps
+  };
+}
+```
+
+The `Disclosure.Content` sub-component can now be updated to use this hook:
+
+```tsx
+// DisclosureContent.tsx
+const model = React.useContext(DisclosureModelContext)
+const props = useHidden(model, elemProps)
+
+return (
+  <Element ref={ref} id={model.state.id} {...props}>
+    {children}
+  </Element>
+)
 ```
 
 The full code can be found here: https://codesandbox.io/s/disclosure-composable-model-behavior-hooks-iwzl8
@@ -813,7 +845,7 @@ export const TooltipTarget = createComponent("button")({
 
 The `Tooltip.Target` component also uses the `aria-described` for accessibility. The  `state.id` comes from the `IDModel`.
 
-The `Tooltip.Content` component is similar to the `Disclosure.Content` component, except that it uses a ReactDOM portal to ensure the content appears on top of other content. This example doesn't include a positional library and instead hard-codes positional values.
+The `Tooltip.Content` component is similar to the `Disclosure.Content` component, except that it uses a ReactDOM portal to ensure the content appears on top of other content. This example doesn't include a positional library and instead hard-codes positional values. Notice we can reuse our `useHidden` behavior hook in this component!
 
 ```tsx
 import React from "react"
@@ -821,6 +853,7 @@ import ReactDOM from "react-dom"
 import { createComponent } from "@workday/canvas-kit-react-common"
 
 import { TooltipModelContext } from "./Tooltip"
+import { useHidden } from "./useHidden"
 
 export interface TooltipContentProps {
   children: React.ReactNode
@@ -834,15 +867,15 @@ export const TooltipContent = createComponent("div")({
     Element
   ) => {
     const model = React.useContext(TooltipModelContext)
+    const props = useHidden(model, elemProps)
 
     return ReactDOM.createPortal(
       model.state.id ? (
         <Element
           ref={ref}
           id={model.state.id}
-          hidden={model.state.open ? undefined : true}
           style={{ position: "absolute", left: 80, top: 10 }}
-          {...elemProps}
+          {...props}
         >
           {children}
         </Element>
