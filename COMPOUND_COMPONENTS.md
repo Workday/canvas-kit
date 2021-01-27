@@ -9,7 +9,7 @@ Compound components is a pattern in which components are used together in such a
 * [Shared model (optional, advanced)](#models)
 * [Behavior hooks (optional, advanced)](#behavior-hooks)
 
-A compound component contrasts with a configuration component which instead configures from a single interface. A configuration component might be like choosing a desktop computer based on stats - how much RAM or how fast the CPU should be or based on what you want to use it for. A compound component is more like buying the parts individually and assembling yourself.
+A compound component contrasts with a configuration component which instead configures from a single interface, like a configuration object or multiple props in React. A configuration component might be like choosing a desktop computer based on stats - how much RAM or how fast the CPU should be or based on what you want to use it for. A compound component is more like buying the parts individually and assembling yourself.
 
 Configuration component:
 ```tsx
