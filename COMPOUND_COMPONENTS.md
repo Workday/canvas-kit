@@ -249,25 +249,25 @@ const useEllipsisTooltipModel = (config = {}) => {
 }
 ```
 
-Models are meant to be composable. For example, a `TabsModel` uses a `MenuModel` (which itself uses `ListModel`) and a `ListModel` for a list of panels. `TabsModel` also keeps track of which tab is currently active. This might look like the following:
+Models are meant to be composable. For example, a `TabsModel` uses a `CursorModel` (which itself uses `ListModel`) and a `ListModel` for a list of panels. `TabsModel` also keeps track of which tab is currently active. This might look like the following:
 
 ```ts
 const useTabsModel = (config = {}) => {
   // id is used for ARIA attributes
   const id = useUniqueId(config.id)
   const [activeTab, setActiveTab] = React.useState('')
-  const menu = useMenuModel(config)
+  const cursor = useCursorModel(config)
   const panels = useListModel(config)
   
   const state = {
-    ...menu.state, // extend the MenuModel state
+    ...cursor.state, // extend the CursorModel state
     id,
     activeTab,
-    panels: panels.state.items,
+    panels: panels.state.items, // we only care about
   }
   
   const events = {
-    ...menu.events, // extend the MenuModel events
+    ...cursor.events, // extend the CursorModel events
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,
     
@@ -284,9 +284,9 @@ const useTabsModel = (config = {}) => {
 }
 ```
 
-Model composition allows for components to share functionality with other components. In the Tabs example, `ListModel` is in charge of registering and deregistering items. The `MenuModel` is in charge of maintaining a current cursor position of the list for use in keyboard navigation. The `TabModel` uses the menu cursor to allow keyboard activation of the tabs. The `TabModel` also maintains the currently active tab to ensure the correct `TabPanel` is visible. The `TabModel` is also using a `ListModel` to track tab panels.
+Model composition allows for components to share functionality with other components. In the Tabs example, `ListModel` is in charge of maintaining a list of tab elements. The `CursorModel` is in charge of maintaining a current cursor position of the tab list. The `Tabs.List` component uses the cursor to allow keyboard navigation of the tabs. The `TabsModel` also maintains the currently active tab to ensure the correct `TabPanel` is visible. The `TabsModel` is also using a `ListModel` to maintain a list of tab panels. The `TabsModel` is in charge of composing all this and providing data and events to the `Tabs` compound component - coordination state between sub-components.
 
-Many other components like `Select`, `Breadcrumbs`, or dropdown menus can also use the `ListModel` and/or the `MenuModel`.
+Many other components like `Select`, `Breadcrumbs`, or dropdown menus can also use the `ListModel` and/or the `CursorModel`. These models could be thought of as abstract models where they do not directly map to a compound component, but are instead used to create concrete models that do map to compound components.
 
 The Typescript interface of a model looks like this:
 ```ts
@@ -316,10 +316,10 @@ A behavior hook usually applies to a sub-component and describes attributes that
 
 A behavior hook allows us to more easily reuse functionality between components with similar sub-components. They also provide another layer of composition to compound components.
 
-For example, the `MenuModel` contains model's internal state and events, but doesn't handle external DOM events directly. The behavior hook is the glue between the model and DOM elements. A `useMenu` behavior hook might look like this:
+For example, the `CursorModel` contains the model's internal state and events, but doesn't handle external DOM events directly. The behavior hook is the glue between the model and DOM elements. A `useKeyboardCursor` behavior hook might look like this:
 
 ```ts
-const useMenu = (
+const useKeyboardCursor = (
   { state, events },
   elemProps = {}
 ) => {
@@ -348,20 +348,22 @@ const useMenu = (
 
 ## Putting it all together
 
-In the `Tabs` component example, the Menu doesn't exist as component. The `Tab.List` sub-component uses the `MenuModel` and the `useMenu` behavior hook to produce the desired sub-component. It looks something like this:
+In the `Tabs` component example, there isn't a `Cursor` component. The `Tab.List` sub-component uses the `CursorModel` and the `useKeyboardCursor` behavior hook to produce the desired sub-component. It looks something like this:
 
 ```tsx
 const TabList = ({children, ...elemProps}) => {
   const model = React.useContext(TabsModelContext)
-  const menu = useMenu(
+  const props = useKeyboardCursor(
     model,
     elemProps,
   )
+  
+  // we could use other behavior hooks to further build `props`
 
   return (
     <div
       role="tablist"
-      {...menu}
+      {...props}
     >
       {children}
     </div>
@@ -409,7 +411,7 @@ const MyTabs = () => {
 
 ### Composing a model
 
-Models allow for very powerful composition without changing the UI at all. For example, if we have a Disclosure component, but want to change the operating paradigm to be fully controlled by a parent component, we can compose a `DisclosureModel` to do so. Normally a disclosure model has it's own state, but we can override that behavior and make a controlled Disclosure component instead:
+Models allow for very powerful composition without changing the UI at all. For example, if we have a `Disclosure` component, but want to change the operating paradigm to be fully controlled by a parent component, we can compose a `DisclosureModel` to do so. Normally a disclosure model has it's own state, but we can override that behavior and make a controlled Disclosure component instead:
 
 ```tsx
 const useControlledDisclosureModel = ({ opened, onChange, ...config }) => {
@@ -458,3 +460,7 @@ const App = () => {
   )
 }
 ```
+
+###  Conclusion
+
+The compound component API is a powerful, incrementally composable way to create UI. The component API is the highest level and offers a lot of functionality out of the box. But using models and behavior hooks allow for creation of new components that share some functionality with other components. An example of this is tabs and a dropdown menu both use a `CursorModel` and the `useKeyboardCursor` to enable keyboard navigation even though the UI looks very different.
