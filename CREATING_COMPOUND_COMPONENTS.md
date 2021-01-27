@@ -221,7 +221,7 @@ const Test = () => {
 
 You can see it in action here: https://codesandbox.io/s/basic-configurable-disclosure-model-nuteg
 
-That's a lot of extra boilerplate code for actions and callbacks. Our events don't have any data, but if they did, we'd have to keep the event + guard and callback data types in sync. Also are also creating the `events` object every render. We could use React refs and `React.useMemo` to decrease extra object creation. Luckily the common module has `createEventMap` and `useEventMap` functions to help us reduce boilerplate and reduce possibility of making mistakes.
+That's a lot of extra boilerplate code for actions and callbacks. Our events don't have any data, but if they did, we'd have to keep the event + guard and callback data types in sync. We are also creating the `events` object every render. We could use React refs and `React.useMemo` to decrease extra object creation. Luckily the common module has `createEventMap` and `useEventMap` functions to help us reduce boilerplate and reduce possibility of making mistakes.
 
 First we need to create an event map - a map of guard and callback functions to the events they need to be paired with. We'll use `createEventMap` to do this:
 
@@ -240,7 +240,7 @@ const disclosureEventMap = createEventMap<DisclosureEvents>()({
 })
 ```
 
-This part is a little weird: `createEventMap<DisclosureEvents>()({`. The reason for this is a Typescript issue: https://github.com/microsoft/TypeScript/issues/26242. The gist is a function with generics requires the caller to specify none of the generics or all of them. In this case, the only generic that cannot be inferred is the `DisclosureEvents`. Everything else can be inferred. The only way to separate defined generics vs inferred generics is to have separate functions.
+This part is a little weird: `createEventMap<DisclosureEvents>()({`. The reason for this is a Typescript issue: https://github.com/microsoft/TypeScript/issues/26242. The gist is a function with generics requires the caller to specify none of the generics or all of them. In this case, the only generic that cannot be inferred is the `DisclosureEvents`. Everything else can be inferred. The only way to separate defined generics vs inferred generics is to have separate, chained functions.
 
 We see that `createEventMap` takes two optional keys: `guards` and `callbacks`. The names of these functions are arbitrary, but should follow the convention of `should*` for guards and `on*` for callbacks. The event name that is passed in is type checked against the `DisclosureEvents` interface.
 
