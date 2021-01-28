@@ -5,6 +5,7 @@ import {jsx, css} from '@emotion/core';
 import {
   createComponent,
   mouseFocusBehavior,
+  useLocalRef,
   useModelContext,
   useMountLayout,
 } from '@workday/canvas-kit-react-common';
@@ -41,14 +42,14 @@ export const TabPanel = createComponent('div')({
   displayName: 'Tabs.Panel',
   Component: ({children, name = '', model, ...elemProps}: TabPanelProps, ref, Element) => {
     const {state, events} = useModelContext(TabsModelContext, model);
-    const panelRef = React.useRef<HTMLDivElement>(null);
     const [tabName, setTabName] = React.useState(name);
+    const {localRef, elementRef} = useLocalRef(ref);
 
     // useLayoutEffect so we don't an incorrect frame if a name isn't provided
     useMountLayout(() => {
       const index = state.panelIndexRef.current;
       const tabName = name || String(index);
-      events.registerPanel({item: {id: tabName, ref: panelRef}});
+      events.registerPanel({item: {id: tabName, ref: localRef}});
       setTabName(tabName);
 
       return () => {
@@ -58,7 +59,7 @@ export const TabPanel = createComponent('div')({
 
     return (
       <Element
-        ref={panelRef}
+        ref={elementRef}
         role="tabpanel"
         css={styles}
         aria-labelledby={`tab-${state.id}-${tabName}`}

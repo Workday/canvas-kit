@@ -7,8 +7,7 @@ import {
   hideMouseFocus,
   styled,
   StyledType,
-  useComponentRef,
-  useForkRef,
+  useLocalRef,
   useModelContext,
   useMountLayout,
 } from '@workday/canvas-kit-react-common';
@@ -91,8 +90,7 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
 export const Tab = createComponent('button')({
   displayName: 'Tabs.Item',
   Component: ({name = '', model, children, ...elemProps}: TabProps, ref, Element) => {
-    const localRef = useComponentRef(ref);
-    const elementRef = useForkRef(ref, localRef);
+    const {localRef, elementRef} = useLocalRef(ref);
 
     const {state, events} = useModelContext(TabsModelContext, model);
     const [tabName, setTabName] = React.useState(name);

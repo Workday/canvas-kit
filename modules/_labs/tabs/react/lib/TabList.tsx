@@ -3,10 +3,8 @@ import * as React from 'react';
 import {spacing, commonColors} from '@workday/canvas-kit-react-core';
 import {
   createComponent,
-  useForkRef,
   styled,
   StyledType,
-  useComponentRef,
   useModelContext,
 } from '@workday/canvas-kit-react-common';
 
@@ -37,8 +35,6 @@ const TabsListInnerContainer = styled('div')<StyledType>({
 export const TabList = createComponent('div')({
   displayName: 'Tabs.List',
   Component: ({children, model, ...elemProps}: TabListProps, ref, Element) => {
-    const tabsListRef = useComponentRef(ref);
-    const elementRef = useForkRef(ref, tabsListRef);
     // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
     const {state, events} = useModelContext(TabsModelContext, model);
     const menu = useMenu(
@@ -61,7 +57,7 @@ export const TabList = createComponent('div')({
       <TabsListContainer>
         <TabsListInnerContainer
           as={Element}
-          ref={elementRef}
+          ref={ref}
           role="tablist"
           {...menu}
           // onClick={e => e.preventDefault()}
