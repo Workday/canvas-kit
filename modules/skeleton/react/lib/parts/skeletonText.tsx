@@ -13,6 +13,11 @@ export interface SkeletonTextProps extends React.HTMLAttributes<HTMLDivElement> 
    * @default 2
    */
   lineCount?: number;
+  /**
+   * The background color of the skeleton
+   * @default soap200
+   */
+  backgroundColor?: string;
 }
 
 const Line = styled('div')<{
@@ -32,20 +37,24 @@ const Line = styled('div')<{
 
 export default class SkeletonText extends React.Component<SkeletonTextProps> {
   render(): React.ReactNode {
-    const {lineCount = 2, ...elemProps} = this.props;
+    const {lineCount = 2, backgroundColor = canvas.colors.soap200, ...elemProps} = this.props;
 
     if (lineCount <= 0) {
       return null;
     }
 
-    return <TextContainer {...elemProps}>{this.createTextLines(lineCount)}</TextContainer>;
+    return (
+      <TextContainer {...elemProps}>
+        {this.createTextLines(lineCount, backgroundColor)}
+      </TextContainer>
+    );
   }
 
-  private readonly createTextLines = (lineCount: number) => {
+  private readonly createTextLines = (lineCount: number, backgroundColor: string) => {
     const lines = [];
 
     const lineProps = {
-      backgroundColor: canvas.colors.soap200,
+      backgroundColor,
       borderRadius: TEXT_BORDER_RADIUS,
       height: '21px',
       width: '100%',

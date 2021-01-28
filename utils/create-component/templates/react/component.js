@@ -18,7 +18,7 @@ export interface ${pascalCaseName}Props extends ${pascalCaseName}ModelConfig {
   children: React.ReactNode;
 }
 
-export const ${pascalCaseName} = createComponent('div')({
+export const ${pascalCaseName} = createComponent()({
   displayName: '${pascalCaseName}',
   Component: ({children, model, ...config}: ${pascalCaseName}Props) => {
     const value = useDefaultModel(model, config, use${pascalCaseName}Model);

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.0.0-beta.0 (2021-01-27)
+
+### Infrastructure
+- feat: Add compound component utility functions ([#946](https://github.com/Workday/canvas-kit/pull/946)) [@NicholasBoll](https://github.com/NicholasBoll)
+- build: Re-enable canary builds for prerelease/v5 [@anicholls](https://github.com/anicholls)
+
+### Components
+
+- fix(common): Remove unintended whitespace around bdo tag in IE11 ([#868](https://github.com/Workday/canvas-kit/pull/868)) [@vibdev](https://github.com/vibdev)
+
 # 4.4.2 (2020-12-09)
 
 ### Components
