@@ -24,6 +24,7 @@ export const CountBadgeStates = () => {
           label: 'Greater than 999',
           props: {count: 1000},
         },
+        {label: 'Custom Limit', props: {count: 100, limit: 100}},
       ]}
       rowProps={[
         {label: 'Default', props: {}},
