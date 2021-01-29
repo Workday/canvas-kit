@@ -488,7 +488,8 @@ class Select extends React.Component<SelectProps, SelectState> {
         case 'Enter':
           isShortcut = true;
           if (menuVisibility === 'closed' || menuVisibility === 'closing') {
-            this.toggleMenu(true);
+            // allow the click
+            isShortcut = false;
           } else {
             this.handleOptionSelection(focusedOptionIndex);
           }
