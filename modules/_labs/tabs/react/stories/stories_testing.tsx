@@ -22,30 +22,6 @@ export default {
   },
 };
 
-export const TestKeydown = () => {
-  const onKeydown = event => {
-    event.preventDefault();
-  };
-
-  return (
-    <div onKeyDown={onKeydown}>
-      <input type="checkbox" />
-    </div>
-  );
-};
-
-export const TestClick = () => {
-  const onClick = event => {
-    event.preventDefault();
-  };
-
-  return (
-    <div onClick={onClick}>
-      <input type="checkbox" />
-    </div>
-  );
-};
-
 export const Simple = () => {
   return (
     <Tabs>
@@ -101,64 +77,6 @@ export const DisabledTab = () => (
   </Tabs>
 );
 
-// const ColorPicker = () => <div />
-
-// const MyConfigurableColorPicker = () => {
-//   const colors = ['red', 'blue'];
-//   return (
-//     <ColorPicker>
-//       <ResetColor></ResetColor>
-//       <ColorPicker.SwatchBook rowCount={4} columnCount={4}>
-//         {colors.map(color => {
-//           <ColorPicker.ColorSwatch data-testid={`color-swatch-${color}`}></ColorPicker.ColorSwatch>;
-//         })}
-//       </ColorPicker.SwatchBook>
-//       <ColorPicker.CustomColorForm>
-//         <ColorPicker.CustomColorInput />
-//         <ColorPicker.CustomColorButton />
-//       </ColorPicker.CustomColorForm>
-//     </ColorPicker>
-//   );
-// };
-
-// type Model = {
-//   state: Record<string, any>
-//   events: Record<string, (...args: any[]) => void
-// }
-
-// const colorPickerModel = {
-//   state: {
-//     currentColor: 'red',
-//     currentCursor: '' as any
-//   }
-// }
-
-// /**
-//  * 3 things:
-//  * 1. Model
-//  * 2. Sub-component hooks
-//  * 3. Sub-components
-//  */
-
-// const MyConfigurableColorPicker = () => {
-//   const colors = ['red', 'blue'];
-//   const colorPicker = useColorPickerModel();
-
-//   return (
-//     <>
-//       <ResetColor {...colorPicker} aria-label="My Label"></ResetColor>
-//       <ColorPicker.SwatchBook {...colorPicker} rowCount={4} columnCount={4}>
-//         {colors.map(color => {
-//           <ColorPicker.ColorSwatch {...colorPicker} value={color}></ColorPicker.ColorSwatch>;
-//         })}
-//       </ColorPicker.SwatchBook>
-//       <ColorPicker.CustomColorForm {...colorPicker}>
-//         <ColorPicker.CustomColorInput {...colorPicker} />
-//         <ColorPicker.CustomColorButton {...colorPicker} />
-//       </ColorPicker.CustomColorForm>
-//     </>
-//   );
-// };
 export const TabStates = withSnapshotsEnabled(() => {
   const [shouldRender, setShouldRender] = React.useState(false);
   React.useEffect(() => {

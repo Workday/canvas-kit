@@ -140,7 +140,7 @@ describe('useLocalRef', () => {
   });
 });
 
-describe.only('composeHooks', () => {
+describe('composeHooks', () => {
   let spy1, spy2, hook1, hook2;
   const model = {state: {first: 'first', second: 'second'}, events: {}};
   beforeEach(() => {

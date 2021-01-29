@@ -67,8 +67,6 @@ export const TabList = createComponent('div')({
     const {state, events} = useModelContext(TabsModelContext, model);
     const props = composeHooks(useRovingFocus, useResetCursorOnBlur)({state, events}, elemProps);
 
-    console.log('currentId', state.currentId);
-
     return (
       <TabsListContainer>
         <TabsListInnerContainer as={Element} ref={ref} role="tablist" {...props}>
