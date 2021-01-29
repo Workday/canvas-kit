@@ -5,15 +5,16 @@ import {
   createComponent,
   focusRing,
   hideMouseFocus,
+  mergeProps,
   styled,
   StyledType,
   useLocalRef,
   useModelContext,
-  useMountLayout,
 } from '@workday/canvas-kit-react-common';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
+import {useRegisterItem} from './list';
 
 export interface TabProps {
   /**
@@ -91,55 +92,30 @@ export const Tab = createComponent('button')({
   displayName: 'Tabs.Item',
   Component: ({name = '', model, children, ...elemProps}: TabProps, ref, Element) => {
     const {localRef, elementRef} = useLocalRef(ref);
-
     const {state, events} = useModelContext(TabsModelContext, model);
-    const [tabName, setTabName] = React.useState(name);
 
-    // useLayoutEffect because we don't want to render with incorrect ID
-    useMountLayout(() => {
-      const index = state.indexRef.current;
-      const tabName = name || String(index);
-      events.registerItem({item: {id: tabName, ref: localRef}});
-      setTabName(tabName);
-
-      return () => {
-        events.unregisterItem({id: tabName});
-      };
-    });
+    const tabName = useRegisterItem({state, events}, localRef, name);
 
     const onSelect = () => {
       events.activateTab({tab: tabName});
     };
 
-    const onBlur = () => {
-      if (!state.programmaticFocusRef.current) {
-        events.setCurrentId({id: state.activeTab});
-      }
-    };
-
     const isSelected = !!tabName && state.activeTab === tabName;
 
-    // React.useLayoutEffect(() => {
-    //   if (isSelected && tabRef.current) {
-    //     setSelectedTabRect(tabRef.current.getBoundingClientRect());
-    //   }
-    // }, [isSelected, tabRef, setSelectedTabRect]);
+    const props = mergeProps(
+      {
+        id: `tab-${state.id}-${tabName}`,
+        tabIndex: !!tabName && state.currentId === tabName ? undefined : -1,
+        'aria-selected': isSelected ? true : undefined,
+        'aria-controls': `tabpanel-${state.id}-${tabName}`,
+        onClick: onSelect,
+        isSelected: isSelected,
+      },
+      elemProps
+    );
 
     return (
-      <StyledButton
-        ref={elementRef}
-        as={Element}
-        role="tab"
-        type="button"
-        id={`tab-${state.id}-${tabName}`}
-        tabIndex={!!tabName && state.currentId === tabName ? undefined : -1}
-        aria-selected={isSelected ? true : undefined}
-        aria-controls={`tabpanel-${state.id}-${tabName}`}
-        onClick={onSelect}
-        onBlur={onBlur}
-        isSelected={isSelected}
-        {...elemProps}
-      >
+      <StyledButton type="button" role="tab" ref={elementRef} as={Element} {...props}>
         {children}
       </StyledButton>
     );

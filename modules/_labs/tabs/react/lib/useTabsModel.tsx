@@ -1,20 +1,18 @@
 import React from 'react';
 import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas-kit-react-common';
-import {MenuState, MenuEvents, menuEventMap, useMenuModel} from './useMenuModel';
-import {Item, ListEvents, ListState, useListModel} from './useListModel';
+import {CursorState, CursorEvents, cursorEventMap, useCursorModel} from './cursor/useCursorModel';
+import {Item, ListEvents, ListState, useListModel} from './list/useListModel';
 
-type TabsState = MenuState & {
+type TabsState = CursorState & {
   /**
    * The name of the active tab provided to the `Tabs.Item` component. If no name is provided, it
    * will be a string of the index position */
   activeTab: string;
   panels: Item[];
   panelIndexRef: ListState['indexRef'];
-  /** Used for tracking programmatic focus changes vs user focus changes */
-  programmaticFocusRef: React.MutableRefObject<boolean>;
 };
 
-type TabsEvents = MenuEvents & {
+type TabsEvents = CursorEvents & {
   /**
    * This event will set the `activeTab` in the state. Called when a user activates a tab
    */
@@ -31,11 +29,11 @@ export type TabsModel = Model<TabsState, TabsEvents>;
 
 const tabEventMap = createEventMap<TabsEvents>()({
   guards: {
-    ...menuEventMap.guards,
+    ...cursorEventMap.guards,
     shouldActivateTab: 'activateTab',
   },
   callbacks: {
-    ...menuEventMap.callbacks,
+    ...cursorEventMap.callbacks,
     onActivateTab: 'activateTab',
   },
 });
@@ -48,10 +46,9 @@ export type TabsModelConfig = {
 
 export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
   const initialTabRef = React.useRef(config.initialTab);
-  const programmaticFocusRef = React.useRef(false);
   const [activeTab, setActiveTab] = React.useState(initialTabRef.current || '');
 
-  const menu = useMenuModel({
+  const menu = useCursorModel({
     orientation: 'horizontal',
     ...config,
     onRegisterItem({data, state}) {
@@ -67,7 +64,6 @@ export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
   const state = {
     ...menu.state,
     activeTab,
-    programmaticFocusRef,
     panels: panels.state.items,
     panelIndexRef: panels.state.indexRef,
   };

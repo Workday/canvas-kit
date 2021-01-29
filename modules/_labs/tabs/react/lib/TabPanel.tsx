@@ -45,7 +45,6 @@ export const TabPanel = createComponent('div')({
     const [tabName, setTabName] = React.useState(name);
     const {localRef, elementRef} = useLocalRef(ref);
 
-    // useLayoutEffect so we don't an incorrect frame if a name isn't provided
     useMountLayout(() => {
       const index = state.panelIndexRef.current;
       const tabName = name || String(index);

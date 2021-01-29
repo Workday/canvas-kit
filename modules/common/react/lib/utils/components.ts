@@ -193,3 +193,62 @@ export function useModelContext<T>(context: React.Context<T>, model?: T): T {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return model || React.useContext(context);
 }
+
+/**
+ * Compose many hooks together. Assumes hooks are using `mergeProps`. Returns a function that will
+ * receive a model and return props to be applied to a component. These props should always be
+ * applied last on the Component. The props will override as follows: rightmost hook props override
+ * leftmost hook props which are overridden by props passed to the composeHooks function.
+ * @example
+ * const MyComponent = ({ children, model, ...elemProps }) => {
+ *   const props = composeHooks(useHook1, useHook2)(model, elemProps)
+ *
+ *   return <div id="foo" {...props}>{children}</div>
+ * }
+ */
+export function composeHooks<M, P extends {}, O1 extends {}, O2 extends {}>(
+  hook1: (model: M, props: P) => O1,
+  hook2: (model: M, props: P) => O2
+): (model: M, props: P) => P & O1 & O2;
+export function composeHooks<M, P extends {}, O1 extends {}, O2 extends {}, O3 extends {}>(
+  hook1: (model: M, props: P) => O1,
+  hook2: (model: M, props: P) => O2,
+  hook3: (model: M, props: P) => O3
+): (model: M, props: P) => P & O1 & O2 & O3;
+export function composeHooks<
+  M,
+  P extends {},
+  O1 extends {},
+  O2 extends {},
+  O3 extends {},
+  O4 extends {}
+>(
+  hook1: (model: M, props: P) => O1,
+  hook2: (model: M, props: P) => O2,
+  hook3: (model: M, props: P) => O3,
+  hook4: (model: M, props: P) => O4
+): (model: M, props: P) => P & O1 & O2 & O3 & O4;
+export function composeHooks<
+  M,
+  P extends {},
+  O1 extends {},
+  O2 extends {},
+  O3 extends {},
+  O4 extends {},
+  O5 extends {}
+>(
+  hook1: (model: M, props: P) => O1,
+  hook2: (model: M, props: P) => O2,
+  hook3: (model: M, props: P) => O3,
+  hook4: (model: M, props: P) => O4,
+  hook5: (model: M, props: P) => O5
+): (model: M, props: P) => P & O1 & O2 & O3 & O4 & O5;
+export function composeHooks<M, P extends {}, O extends {}>(
+  ...hooks: ((model: M, props: P) => O)[]
+): (model: M, props: P) => O {
+  return (model: M, props: P) => {
+    return hooks.reverse().reduce((props: any, hook) => {
+      return hook(model, props);
+    }, props);
+  };
+}

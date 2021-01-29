@@ -7,16 +7,16 @@ import {
   assert,
 } from '@workday/canvas-kit-react-common';
 
-import {ListState, ListEvents, listEventMap, useListModel, Item} from './useListModel';
+import {ListState, ListEvents, listEventMap, useListModel, Item} from '../list/useListModel';
 
 export type Orientation = 'horizontal' | 'vertical';
 
-export type MenuState = ListState & {
+export type CursorState = ListState & {
   orientation: Orientation;
   currentId: string;
 };
 
-export type MenuEvents = ListEvents & {
+export type CursorEvents = ListEvents & {
   setCurrentId(data: {id: string}): void;
   next(): void;
   previous(): void;
@@ -24,9 +24,9 @@ export type MenuEvents = ListEvents & {
   last(): void;
 };
 
-export type MenuModel = Model<MenuState, MenuEvents>;
+export type CursorModel = Model<CursorState, CursorEvents>;
 
-export const menuEventMap = createEventMap<MenuEvents>()({
+export const cursorEventMap = createEventMap<CursorEvents>()({
   guards: {
     ...listEventMap.guards,
     shouldSetCurrentId: 'setCurrentId',
@@ -37,9 +37,9 @@ export const menuEventMap = createEventMap<MenuEvents>()({
   },
 });
 
-export type MenuModelConfig = {
+export type CursorModelConfig = {
   orientation?: Orientation;
-} & Partial<ToModelConfig<MenuState, MenuEvents, typeof menuEventMap>>;
+} & Partial<ToModelConfig<CursorState, CursorEvents, typeof cursorEventMap>>;
 
 const getFirst = (items: Item[]): Item => {
   return items[0];
@@ -77,7 +77,7 @@ const getOffsetItem = (offset: number) => (id: string, items: Item[]): Item => {
 const getNext = getOffsetItem(1);
 const getPrevious = getOffsetItem(-1);
 
-export const useMenuModel = (config: MenuModelConfig = {}): MenuModel => {
+export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [currentId, setCurrentId] = React.useState('');
   const initialCurrentRef = React.useRef('');
@@ -88,13 +88,13 @@ export const useMenuModel = (config: MenuModelConfig = {}): MenuModel => {
         initialCurrentRef.current = data.item.id;
         setCurrentId(initialCurrentRef.current);
       }
-      config.onRegisterItem?.({data, state: state as MenuState});
+      config.onRegisterItem?.({data, state: state as CursorState});
     },
   });
 
   const state = {...list.state, orientation, currentId};
 
-  const events = useEventMap(menuEventMap, state, config, {
+  const events = useEventMap(cursorEventMap, state, config, {
     ...list.events,
     setCurrentId({id}) {
       setCurrentId(id);
