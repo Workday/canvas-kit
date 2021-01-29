@@ -16,8 +16,8 @@ type EventMap<
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>
 > = {
-  guards?: TGuardMap;
-  callbacks?: TCallbackMap;
+  guards: TGuardMap;
+  callbacks: TCallbackMap;
 };
 
 type ToGuardConfig<
@@ -88,9 +88,10 @@ export const createEventMap = <TEvents extends Record<string, (data?: object) =>
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>
 >(
-  config: EventMap<TEvents, TGuardMap, TCallbackMap>
-) => {
-  return config;
+  config: Partial<EventMap<TEvents, TGuardMap, TCallbackMap>>
+): EventMap<TEvents, TGuardMap, TCallbackMap> => {
+  // Instruct Typescript that all valid guards and callbacks exist
+  return config as EventMap<TEvents, TGuardMap, TCallbackMap>;
 };
 
 // small wrapper to get `keyof T` instead of `string | number | symbol`

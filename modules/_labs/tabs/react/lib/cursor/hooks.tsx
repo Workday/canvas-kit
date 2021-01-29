@@ -1,5 +1,5 @@
 import React from 'react';
-import {mergeProps, useMountLayout} from '@workday/canvas-kit-react-common';
+import {mergeProps} from '@workday/canvas-kit-react-common';
 
 import {CursorModel, getItem} from './useCursorModel';
 
