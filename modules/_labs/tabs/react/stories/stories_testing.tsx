@@ -7,7 +7,7 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 import {spacing} from '@workday/canvas-kit-react-core';
-import {Tabs} from '@workday/canvas-kit-labs-react-tabs';
+import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react-tabs';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
@@ -85,14 +85,11 @@ export const TabStates = withSnapshotsEnabled(() => {
     }, fontDelay);
   }, []);
 
+  const model = useTabsModel();
+
   return shouldRender ? (
     <StaticStates>
-      <Tabs
-        initialTab="second"
-        css={{
-          div: {transition: 'none' /* don't animate the indicator */},
-        }}
-      >
+      <Tabs initialTab="second">
         <Tabs.List>
           <Tabs.Item>Default</Tabs.Item>
           <Tabs.Item name="second">Active</Tabs.Item>
@@ -105,7 +102,7 @@ export const TabStates = withSnapshotsEnabled(() => {
       </Tabs>
     </StaticStates>
   ) : (
-    <Tabs.Item>Default</Tabs.Item> // Render default tab right away to force font loading so that by the time the story loads, the font will be known
+    <Tabs.Item model={model}>Default</Tabs.Item> // Render default tab right away to force font loading so that by the time the story loads, the font will be known
   );
 });
 

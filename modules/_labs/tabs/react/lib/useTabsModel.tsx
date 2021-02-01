@@ -3,7 +3,7 @@ import {createEventMap, Model, ToModelConfig, useEventMap} from '@workday/canvas
 import {CursorState, CursorEvents, cursorEventMap, useCursorModel} from './cursor/useCursorModel';
 import {Item, ListEvents, ListState, useListModel} from './list/useListModel';
 
-type TabsState = CursorState & {
+export type TabsState = CursorState & {
   /**
    * The name of the active tab provided to the `Tabs.Item` component. If no name is provided, it
    * will be a string of the index position */
@@ -12,7 +12,7 @@ type TabsState = CursorState & {
   panelIndexRef: ListState['indexRef'];
 };
 
-type TabsEvents = CursorEvents & {
+export type TabsEvents = CursorEvents & {
   /**
    * This event will set the `activeTab` in the state. Called when a user activates a tab
    */
@@ -27,7 +27,7 @@ type TabsEvents = CursorEvents & {
 
 export type TabsModel = Model<TabsState, TabsEvents>;
 
-const tabEventMap = createEventMap<TabsEvents>()({
+export const tabEventMap = createEventMap<TabsEvents>()({
   guards: {
     ...cursorEventMap.guards,
     shouldActivateTab: 'activateTab',
