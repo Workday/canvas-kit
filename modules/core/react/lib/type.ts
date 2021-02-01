@@ -3,12 +3,18 @@ import {default as colors, typeColors, statusColors} from '@workday/canvas-color
 import {borderRadius} from './radius';
 import {CSSProperties} from './types';
 
-const inheritFont =
+const inheritFont: boolean =
   typeof window !== 'undefined' && get(window, 'window.workday.canvas.inheritFontFamily');
+const inheritMonoFont: boolean | string =
+  typeof window !== 'undefined' && get(window, 'window.workday.canvas.inheritMonoFontFamily');
+
 export const fontFamily = inheritFont
   ? 'inherit'
   : '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
-export const monoFontFamily = '"Roboto Mono", "Courier New", Courier, monospace';
+export const monoFontFamily =
+  inheritMonoFont === true
+    ? 'inherit'
+    : inheritMonoFont || '"Roboto Mono", "Courier New", Courier, monospace';
 
 export interface CanvasTypeHierarchy {
   dataViz1: CSSProperties;
