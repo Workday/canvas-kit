@@ -1,5 +1,3 @@
-import CSS from 'csstype';
-
 // TODO: Consider using CSSType instead
 type Globals = '-moz-initial' | 'inherit' | 'initial' | 'revert' | 'unset';
 type GlobalsNumber = number | '-moz-initial' | 'inherit' | 'initial' | 'revert' | 'unset';

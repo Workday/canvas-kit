@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {jsx, css} from '@emotion/core';
 import {type, typeColors} from '@workday/canvas-kit-react-core';
-import {accessibleHide} from '@workday/canvas-kit-react';
+import {accessibleHide} from '@workday/canvas-kit-react-common';
 
 import {PaginationModel} from './types';
 import {Flex, FlexProps} from './common/Flex';
