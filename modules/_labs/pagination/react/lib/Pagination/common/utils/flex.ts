@@ -45,9 +45,10 @@ type FlexDirectionProperty =
   | 'initial'
   | 'revert'
   | 'unset'
-  | 'nowrap'
-  | 'wrap'
-  | 'wrap-reverse';
+  | 'column'
+  | 'column-reverse'
+  | 'row'
+  | 'row-reverse';
 type JustifySelfProperty =
   | Globals
   | SelfPosition
