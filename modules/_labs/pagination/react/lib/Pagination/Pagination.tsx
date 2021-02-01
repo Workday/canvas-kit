@@ -2,7 +2,7 @@ import * as React from 'react';
 import {IconButtonProps} from '@workday/canvas-kit-react-button';
 
 import {PaginationModel} from './types';
-import {usePaginationModel} from './usePaginationModel';
+import {usePaginationModel, UsePaginationModelConfig} from './usePaginationModel';
 
 import {PaginationNav, PaginationNavProps} from './Nav';
 import {
@@ -43,16 +43,14 @@ type PaginationModelProps = PaginationNavProps & {
   onPageChange?: never;
 };
 
+function useDefaultModel<T, C>(model: T | undefined, config: C, fn: (config: C) => T) {
+  return model || fn(config);
+}
+
 export type PaginationProps = PaginationConfigurationProps | PaginationModelProps;
 
 export const Pagination = (props: PaginationProps) => {
-  let model = {} as PaginationModel;
-  if (props.model) {
-    model = props.model;
-  } else {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    model = usePaginationModel(props);
-  }
+  const model = useDefaultModel(props.model, props as UsePaginationModelConfig, usePaginationModel);
 
   const {
     'aria-label': ariaLabel,
@@ -79,30 +77,35 @@ Pagination.Controls = (props: ControlsProps) => {
 };
 
 Pagination.JumpToFirstButton = (props: IconButtonProps) => {
+  // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <JumpToFirstButton {...model} {...props} />;
 };
 
 Pagination.StepToPreviousButton = (props: IconButtonProps) => {
+  // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <StepToPreviousButton {...model} {...props} />;
 };
 
 Pagination.StepToNextButton = (props: IconButtonProps) => {
+  // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <StepToNextButton {...model} {...props} />;
 };
 
 Pagination.JumpToLastButton = (props: IconButtonProps) => {
+  // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <JumpToLastButton {...model} {...props} />;
 };
 
 Pagination.PageList = (props: Omit<PageListProps, 'state' | 'events'>) => {
+  // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <PageList {...model} {...props} />;
@@ -116,12 +119,14 @@ Pagination.PageButton = ({
   'aria-label': ariaLabel,
   ...elemProps
 }: Omit<PageButtonProps, 'state' | 'events'>) => {
+  // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <PageButton aria-label={ariaLabel} {...model} {...elemProps} />;
 };
 
 Pagination.AdditionalDetails = (props: Omit<AdditionalDetailsProps, 'state' | 'events'>) => {
+  // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <AdditionalDetails {...model} {...props} />;

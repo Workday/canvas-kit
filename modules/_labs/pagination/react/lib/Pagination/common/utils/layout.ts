@@ -1,17 +1,28 @@
-import CSS from 'csstype';
-
+type Globals = '-moz-initial' | 'inherit' | 'initial' | 'revert' | 'unset';
+type OverflowProperty = Globals | 'auto' | 'hidden' | 'scroll' | 'visible' | string;
+type OverflowXProperty =
+  | '-moz-initial'
+  | 'inherit'
+  | 'initial'
+  | 'revert'
+  | 'unset'
+  | 'auto'
+  | 'hidden'
+  | 'scroll'
+  | 'visible';
+type OverflowYProperty = OverflowXProperty;
 export interface LayoutProps {
-  display?: CSS.DisplayProperty;
+  display?: string;
   height?: number | string;
   maxHeight?: number | string;
   maxWidth?: number | string;
   minHeight?: number | string;
   minWidth?: number | string;
-  overflow?: CSS.OverflowYProperty;
-  overflowX?: CSS.OverflowYProperty;
-  overflowY?: CSS.OverflowYProperty;
+  overflow?: OverflowProperty;
+  overflowX?: OverflowXProperty;
+  overflowY?: OverflowYProperty;
   size?: number | string;
-  verticalAlign?: CSS.VerticalAlignProperty<string>;
+  verticalAlign?: string;
   width?: number | string;
 }
 
