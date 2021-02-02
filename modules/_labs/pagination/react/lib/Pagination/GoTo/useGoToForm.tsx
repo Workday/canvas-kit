@@ -15,7 +15,7 @@ export const useGoToForm = (
   const [value, setValue] = React.useState(initialValue);
 
   React.useEffect(() => {
-    if (typeof value === 'number' && state.currentPage !== value) {
+    if (typeof value !== undefined && state.currentPage !== value) {
       setValue(state.currentPage);
     }
   }, [state.currentPage, value]);

@@ -18,6 +18,7 @@ import {PageList, PageListProps, PageListItem, PageListItemProps} from './PageLi
 import {PageButton, PageButtonProps} from './PageButton';
 
 import {GoTo} from './GoTo';
+import {GoToFormProps} from './GoTo/Form';
 import {GoToLabelProps} from './GoTo/Label';
 import {GoToTextInputProps} from './GoTo/TextInput';
 
@@ -132,7 +133,7 @@ Pagination.AdditionalDetails = (props: Omit<AdditionalDetailsProps, 'state' | 'e
   return <AdditionalDetails {...model} {...props} />;
 };
 
-Pagination.GoToForm = ({children}: {children: React.ReactNode}) => {
+Pagination.GoToForm = ({children}: GoToFormProps) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return (
