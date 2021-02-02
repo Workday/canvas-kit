@@ -68,6 +68,7 @@ type AlignSelfProperty = Globals | SelfPosition | 'auto' | 'baseline' | 'normal'
 export interface FlexProps {
   alignItems?: AlignItemsProperty;
   alignContent?: AlignContentProperty;
+  display?: 'flex' | 'inline-flex';
   justifyItems?: JustifyItemsProperty;
   justifyContent?: JustifyContentProperty;
   flexWrap?: FlexWrapProperty;
@@ -89,6 +90,7 @@ export interface FlexProps {
 export const flex = {
   alignItems: 'alignItems',
   alignContent: 'alignContent',
+  display: 'display',
   justifyItems: 'justifyItems',
   justifyContent: 'justifyContent',
   flexWrap: 'flexWrap',

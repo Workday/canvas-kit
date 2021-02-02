@@ -1,14 +1,10 @@
-/** @jsx jsx */
-import * as React from 'react';
-import {jsx, css} from '@emotion/core';
+import styled from '@emotion/styled';
 
 import {flex, FlexProps as BaseFlexProps} from './utils/flex';
 
 import {Box, BoxProps} from './Box';
 
-export interface FlexProps extends BaseFlexProps, BoxProps {
-  display?: 'flex' | 'inline-flex';
-}
+export type FlexProps = BaseFlexProps & BoxProps;
 
 const getFlexStyles = (props: FlexProps) => {
   let flexProps = {};
@@ -22,14 +18,6 @@ const getFlexStyles = (props: FlexProps) => {
   return flexProps;
 };
 
-export const Flex = (props: FlexProps) => {
-  // TODO: Memoize style props with React.useMemo
-  const styleProps = getFlexStyles(props);
-  return <Box css={css(styleProps)} {...props} />;
-};
-
-Flex.defaultProps = {
-  display: 'flex',
-};
+export const Flex = styled(Box)({display: 'flex'}, getFlexStyles);
 
 Flex.displayName = 'Flex';
