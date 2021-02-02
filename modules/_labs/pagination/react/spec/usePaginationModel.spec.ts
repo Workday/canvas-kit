@@ -1,4 +1,4 @@
-import {renderHook, act, RenderHookResult} from '@testing-library/react-hooks';
+import {renderHook, act} from '@testing-library/react-hooks';
 import {usePaginationModel, UsePaginationModelConfig} from '../lib/Pagination/usePaginationModel';
 const context = describe;
 
@@ -46,25 +46,22 @@ describe('usePaginationModel hook', () => {
   });
 
   context('given the model events', () => {
-    let renderHookResult = {} as RenderHookResult<
-      UsePaginationModelConfig,
-      ReturnType<typeof usePaginationModel>
-    >;
-
-    beforeEach(() => {
-      renderHookResult = renderHook<
-        UsePaginationModelConfig,
-        ReturnType<typeof usePaginationModel>
-      >(() =>
-        usePaginationModel({
-          initialCurrentPage: 5,
-          lastPage: 10,
-        })
-      );
-    });
+    const buildModel = (
+      config = {} as Partial<UsePaginationModelConfig>
+    ): ReturnType<typeof usePaginationModel> => {
+      const defaultConfig = {
+        initialCurrentPage: 5,
+        lastPage: 10,
+      };
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      return usePaginationModel({
+        ...defaultConfig,
+        ...config,
+      });
+    };
 
     it('should set currentPage to the first page on jumpToFirst', () => {
-      const {result} = renderHookResult;
+      const {result} = renderHook(() => buildModel());
       act(() => {
         result.current.events.jumpToFirst();
       });
@@ -73,7 +70,7 @@ describe('usePaginationModel hook', () => {
     });
 
     it('should set currentPage to the last page on jumpToLast', () => {
-      const {result} = renderHookResult;
+      const {result} = renderHook(() => buildModel());
       act(() => {
         result.current.events.jumpToLast();
       });
@@ -81,7 +78,7 @@ describe('usePaginationModel hook', () => {
     });
 
     it('should set currentPage to the next page on stepToNext', () => {
-      const {result} = renderHookResult;
+      const {result} = renderHook(() => buildModel());
       act(() => {
         result.current.events.stepToNext();
       });
@@ -89,16 +86,25 @@ describe('usePaginationModel hook', () => {
     });
 
     it('should set currentPage to the previous page on stepToPrevious', () => {
-      const {result} = renderHookResult;
+      const {result} = renderHook(() => buildModel());
       act(() => {
         result.current.events.stepToPrevious();
       });
       expect(result.current.state.currentPage).toBe(4);
     });
 
+    it('should call onPageChange with the currentPage when on updates', () => {
+      const onPageChange = jest.fn();
+      const {result} = renderHook(() => buildModel({onPageChange}));
+      act(() => {
+        result.current.events.stepToPrevious();
+      });
+      expect(onPageChange).toHaveBeenCalledWith(4);
+    });
+
     context('given the goToPage event', () => {
       it('should set currentPage to the given page if it is within the page count', () => {
-        const {result} = renderHookResult;
+        const {result} = renderHook(() => buildModel());
         act(() => {
           result.current.events.goToPage(8);
         });
@@ -106,7 +112,7 @@ describe('usePaginationModel hook', () => {
       });
 
       it('should set currentPage to the first page if the given page is below the page count', () => {
-        const {result} = renderHookResult;
+        const {result} = renderHook(() => buildModel());
         act(() => {
           result.current.events.goToPage(0);
         });
@@ -114,7 +120,7 @@ describe('usePaginationModel hook', () => {
       });
 
       it('should set currentPage to the last page if the given page is above the page count', () => {
-        const {result} = renderHookResult;
+        const {result} = renderHook(() => buildModel());
         act(() => {
           result.current.events.goToPage(12);
         });
