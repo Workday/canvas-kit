@@ -316,7 +316,7 @@ describe('Pagination', () => {
           getGoToFormInput().should('have.attr', 'size', '1');
         });
 
-        it('should got to the specified page if the value is within the range', () => {
+        it('should go to the specified page if the value is within the range', () => {
           getGoToFormInput().type('42');
           getGoToFormInput().type('{enter}');
 

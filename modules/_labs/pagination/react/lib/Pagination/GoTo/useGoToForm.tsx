@@ -5,20 +5,20 @@ import {PaginationModel} from '../types';
 
 export interface UseGoToFormConfig extends PaginationModel {
   inputId?: string;
-  initialValue?: number;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const useGoToForm = (
-  {inputId, initialValue, onSubmit, state, events}: UseGoToFormConfig = {} as UseGoToFormConfig
+  {inputId, onSubmit, state, events}: UseGoToFormConfig = {} as UseGoToFormConfig
 ) => {
-  const [value, setValue] = React.useState(initialValue);
+  const [value, setValue] = React.useState<number>();
 
   React.useEffect(() => {
-    if (typeof value !== undefined && state.currentPage !== value) {
+    if (value !== undefined && state.currentPage !== value) {
       setValue(state.currentPage);
     }
-  }, [state.currentPage, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.currentPage]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
