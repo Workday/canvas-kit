@@ -23,13 +23,7 @@ export const Controls = ({children, ...elemProps}: ControlsProps) => {
   );
 };
 
-export const JumpToFirstButton = ({
-  'aria-label': ariaLabel,
-  state,
-  events,
-  onClick,
-  ...restProps
-}: ControlButtonProps) => {
+export const JumpToFirstButton = ({state, events, onClick, ...restProps}: ControlButtonProps) => {
   const isDisabled = state.currentPage <= state.firstPage;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isDisabled) {
@@ -43,7 +37,6 @@ export const JumpToFirstButton = ({
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      aria-label={ariaLabel}
       variant={IconButton.Variant.Square}
       size={IconButton.Size.Small}
       icon={icon}
@@ -54,7 +47,6 @@ export const JumpToFirstButton = ({
 };
 
 export const StepToPreviousButton = ({
-  'aria-label': ariaLabel,
   onClick,
   state,
   events,
@@ -73,7 +65,6 @@ export const StepToPreviousButton = ({
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      aria-label={ariaLabel}
       variant={IconButton.Variant.Square}
       size={IconButton.Size.Small}
       icon={icon}
@@ -83,13 +74,7 @@ export const StepToPreviousButton = ({
   );
 };
 
-export const StepToNextButton = ({
-  'aria-label': ariaLabel,
-  onClick,
-  state,
-  events,
-  ...restProps
-}: ControlButtonProps) => {
+export const StepToNextButton = ({onClick, state, events, ...restProps}: ControlButtonProps) => {
   const isDisabled = state.currentPage >= state.lastPage;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isDisabled) {
@@ -103,7 +88,6 @@ export const StepToNextButton = ({
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      aria-label={ariaLabel}
       variant={IconButton.Variant.Square}
       size={IconButton.Size.Small}
       icon={icon}
@@ -113,13 +97,7 @@ export const StepToNextButton = ({
   );
 };
 
-export const JumpToLastButton = ({
-  'aria-label': ariaLabel,
-  onClick,
-  state,
-  events,
-  ...restProps
-}: ControlButtonProps) => {
+export const JumpToLastButton = ({onClick, state, events, ...restProps}: ControlButtonProps) => {
   const isDisabled = state.currentPage >= state.lastPage;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isDisabled) {
@@ -133,7 +111,6 @@ export const JumpToLastButton = ({
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      aria-label={ariaLabel}
       variant={IconButton.Variant.Square}
       size={IconButton.Size.Small}
       icon={icon}
