@@ -26,7 +26,7 @@ describe('Modal', () => {
     );
   });
 
-  test('Modal should forward closeButtonAriaLabel prop tp Popup', () => {
+  test('Modal should forward closeButtonAriaLabel prop to Popup', () => {
     const closeButtonAriaLabel = 'close button aria label';
     const {getByRole} = renderModal({closeButtonAriaLabel});
     expect(getByRole('button')).toHaveAttribute('aria-label', closeButtonAriaLabel);
