@@ -58,9 +58,10 @@ export function verifyComponent(
         'data-testid': 'MyTestID',
       } as const;
       render(<Test ref={ref} {...attrs} {...callbacks} />);
-      Object.keys(attrs).forEach((key: keyof typeof attrs) => {
+
+      for (const key in attrs) {
         expect(ref.current).toHaveAttribute(key, attrs[key]);
-      });
+      }
     });
 
     const callbacks = {
@@ -71,7 +72,7 @@ export function verifyComponent(
       onMouseUp: 'mouseUp',
     } as const;
 
-    Object.keys(callbacks).forEach((key: keyof typeof callbacks) => {
+    for (const key in callbacks) {
       it(`should call the '${key}' callback when the '${callbacks[key]}' event is fired`, () => {
         const ref: React.RefObject<Element> = {current: null};
         const fn = jest.fn();
@@ -80,6 +81,6 @@ export function verifyComponent(
         fireEvent[callbacks[key]](ref.current!);
         expect(fn).toBeCalledTimes(1);
       });
-    });
+    }
   });
 }
