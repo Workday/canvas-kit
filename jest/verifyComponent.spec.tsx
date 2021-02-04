@@ -4,6 +4,8 @@ const Test = React.forwardRef<HTMLDivElement>(({as: Element = 'div', ...props}: 
   return <Element ref={ref} {...props} />;
 });
 
+const useTestModel = function() {};
+
 describe('Test', () => {
-  verifyComponent(Test, {modelHook: function() {}});
+  verifyComponent(Test, {modelFn: useTestModel});
 });

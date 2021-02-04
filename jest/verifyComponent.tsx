@@ -9,20 +9,20 @@ import {render, fireEvent} from '@testing-library/react';
  * import { MyComponent, useMyComponentModel } from '...'
  *
  * describe('MyComponent', () => {
- *   verifyComponent(MyComponent, { modelHook: useMyComponentModel })
+ *   verifyComponent(MyComponent, { modelFn: useMyComponentModel })
  *
  *   // other tests
  * })
  */
 export function verifyComponent(
   Component: React.ComponentType<any>,
-  {modelHook}: {modelHook?: Function}
+  {modelFn, props}: {modelFn?: Function; props: object}
 ) {
   describe('verifyComponent', () => {
-    const Test = React.forwardRef(({...props}: {as?: React.ReactType}, ref) => {
-      const model = modelHook?.() || null;
+    const Test = React.forwardRef(({...elemProps}: {as?: React.ReactType}, ref) => {
+      const model = modelFn?.() || null;
 
-      return <Component model={model} ref={ref} {...props} />;
+      return <Component model={model} ref={ref} {...props} {...elemProps} />;
     });
 
     it('should forward the ref correctly', () => {
