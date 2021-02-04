@@ -15,9 +15,9 @@ export const useCollapse = <E extends HTMLElement>(listEl: React.RefObject<E>, m
 };
 
 const getBreadcrumbLink = (breadcrumb: React.ReactElement) => {
-  return Children.toArray(breadcrumb.props.children).filter(child => {
+  return Children.toArray(breadcrumb.props.children).filter((child: React.ReactElement) => {
     return child.type === BreadcrumbLink;
-  })[0];
+  })[0] as React.ReactElement;
 };
 
 const buildCollapsedList = (

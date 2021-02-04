@@ -21,5 +21,5 @@
     "allowSyntheticDefaultImports": true,
     "incremental": true
   },
-  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs", "modules/**/stories/*"]
+  "exclude": ["cypress", "node_modules", "modules/**/dist/*", "modules/**/ts-tmp/*", "docs", "modules/**/spec/*", "modules/**/stories/*", "jest/**/*"]
 }
