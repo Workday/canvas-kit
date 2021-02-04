@@ -120,7 +120,7 @@ describe('useForkRef', () => {
   });
 });
 
-describe.only('useLocalRef', () => {
+describe('useLocalRef', () => {
   it('should return a localRef and an elementRef', () => {
     let localRefTest, elementRefTest;
     const CustomComponent = React.forwardRef<HTMLDivElement>((_, ref) => {
