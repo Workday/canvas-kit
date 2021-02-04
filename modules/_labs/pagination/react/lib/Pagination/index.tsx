@@ -1,2 +1,2 @@
-import {Pagination} from './Pagination';
-export {Pagination};
+export * from './Pagination';
+export * from './usePaginationModel';
