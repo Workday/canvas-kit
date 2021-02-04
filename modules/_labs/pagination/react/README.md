@@ -545,7 +545,7 @@ need static child elements, this component will support it.
 | name              | type                                                            | required?  | default | recommended |
 | ----------------- | --------------------------------------------------------------- | ---------- | ------- | ----------- |
 | shouldHideDetails | `boolean`                                                       | 🚫 `false` | n/a     | n/a         |
-| children          | `(model: PaginationModel) => React.ReactNode | React.ReactNode` | ✅ `true`  | n/a     | n/a         |
+| children          | `(model: PaginationModel) => React.ReactNode \| React.ReactNode` | ✅ `true`  | n/a     | n/a         |
 
 ## Models, Hooks, & Utils
 
