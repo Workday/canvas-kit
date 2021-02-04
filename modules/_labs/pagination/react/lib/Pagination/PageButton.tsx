@@ -26,20 +26,25 @@ export interface PageButtonProps extends PaginationModel, IconButtonProps {
 }
 
 export const PageButton = ({
-  'aria-label': ariaLabel,
   state,
   events,
+  onClick,
   pageNumber,
   children,
   ...elemProps
 }: PageButtonProps) => {
   const isCurrentPage = pageNumber === state.currentPage;
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    onClick?.(e);
+    events.goToPage(pageNumber);
+  };
+
   return (
     <StyledPageButton
       aria-current={isCurrentPage ? 'page' : undefined}
-      aria-label={ariaLabel}
       aria-pressed={undefined}
-      onClick={_ => events.goToPage(pageNumber)}
+      onClick={handleClick}
       size={IconButton.Size.Small}
       toggled={isCurrentPage}
       variant={IconButton.Variant.Square}
