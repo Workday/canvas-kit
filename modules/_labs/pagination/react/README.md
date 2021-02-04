@@ -418,7 +418,7 @@ The functional children snippet below will likely be the most common use case.
 
 | name     | type                                                              | required?  | default | recommended |
 | -------- | ----------------------------------------------------------------- | ---------- | ------- | ----------- |
-| children | `(model: PaginationModel) => React.ReactNode[] | React.ReactNode` | 🚫 `false` | n/a     | n/a         |
+| children | `(model: PaginationModel) => React.ReactNode[] \| React.ReactNode` | 🚫 `false` | n/a     | n/a         |
 
 This component also supports
 [all native HTMLOLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol#Attributes).
