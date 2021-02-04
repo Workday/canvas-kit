@@ -29,8 +29,15 @@ const es6 = () => `
 }
 `;
 
+const spec = rootPath => `
+{
+  "extends": "${rootPath}/tsconfig.spec.json",
+}
+`;
+
 module.exports = {
   default: tsconfig,
   cjs,
   es6,
+  spec,
 };

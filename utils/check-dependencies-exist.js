@@ -93,6 +93,10 @@ function formatErrorMessage(pkgFile, errors) {
               const column = errors[key][file].column;
               const message = errors[key][file].formatted;
 
+              if (!line && !column && !message) {
+                return `${file}\n${errors[key][file]}`;
+              }
+
               return (
                 labelMap[key].color(labelMap[key].label.padEnd(20)) +
                 colors.dim(`  ${line}:${column}  `) +

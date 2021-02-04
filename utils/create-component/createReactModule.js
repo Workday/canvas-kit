@@ -88,6 +88,10 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
       path: 'tsconfig.es6.json',
       contents: tsconfig.es6(),
     },
+    tsconfigSpec: {
+      path: 'spec/tsconfig.json',
+      contents: tsconfig.spec(),
+    },
   };
 
   writeModuleFiles(files, modulePath);
