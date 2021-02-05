@@ -105,7 +105,7 @@ export const Tab = createComponent('button')({
     const props = mergeProps(
       {
         id: `tab-${state.id}-${tabName}`,
-        tabIndex: !!tabName && state.currentId === tabName ? undefined : -1,
+        tabIndex: !!tabName && state.cursorId === tabName ? undefined : -1,
         'aria-selected': isSelected ? true : undefined,
         'aria-controls': `tabpanel-${state.id}-${tabName}`,
         onClick: onSelect,

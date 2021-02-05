@@ -62,12 +62,12 @@ export const DisabledTab = () => (
   <Tabs>
     <Tabs.List>
       <Tabs.Item>First Tab</Tabs.Item>
-      <Tabs.Item disabled>Second Tab</Tabs.Item>
+      <Tabs.Item disabled>Disabled Tab</Tabs.Item>
       <Tabs.Item>Third Tab</Tabs.Item>
     </Tabs.List>
     <div css={{marginTop: spacing.m}}>
       <Tabs.Panel>Contents of First Tab</Tabs.Panel>
-      <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
+      <Tabs.Panel>Contents of Disabled Tab</Tabs.Panel>
       <Tabs.Panel>Contents of Third Tab</Tabs.Panel>
     </div>
   </Tabs>

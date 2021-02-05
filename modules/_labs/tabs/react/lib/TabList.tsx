@@ -52,7 +52,7 @@ const useResetCursorOnBlur = ({state, events}: TabsModel, elemProps = {}) => {
       },
       onBlur() {
         if (!programmaticFocusRef.current) {
-          events.setCurrentId({id: state.activeTab});
+          events.setCursorId({id: state.activeTab});
         }
       },
     },
@@ -63,7 +63,6 @@ const useResetCursorOnBlur = ({state, events}: TabsModel, elemProps = {}) => {
 export const TabList = createComponent('div')({
   displayName: 'Tabs.List',
   Component: ({children, model, ...elemProps}: TabListProps, ref, Element) => {
-    // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
     const {state, events} = useModelContext(TabsModelContext, model);
     const props = composeHooks(useRovingFocus, useResetCursorOnBlur)({state, events}, elemProps);
 

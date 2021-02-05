@@ -72,7 +72,7 @@ export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
     ...menu.events,
     activateTab(data) {
       setActiveTab(data.tab);
-      events.setCurrentId({id: data.tab});
+      events.setCursorId({id: data.tab});
     },
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,

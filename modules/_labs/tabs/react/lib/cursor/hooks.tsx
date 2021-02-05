@@ -29,18 +29,18 @@ export const orientationKeyMap = {
  */
 export const useRovingFocus = ({state, events}: CursorModel, elemProps = {}) => {
   // keep track of intentional focus changes. Without this state tracking, all changes to
-  // `state.currentId` or `state.items` would result in focus changes. That is definitely not what
+  // `state.cursorId` or `state.items` would result in focus changes. That is definitely not what
   // we want.
   const focusRef = React.useRef(false);
 
   React.useEffect(() => {
     if (focusRef.current) {
-      const item = getItem(state.currentId, state.items);
+      const item = getItem(state.cursorId, state.items);
       item.ref.current?.focus();
 
       focusRef.current = false;
     }
-  }, [state.currentId, state.items]);
+  }, [state.cursorId, state.items]);
 
   return mergeProps(
     {

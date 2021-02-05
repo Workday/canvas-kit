@@ -10,8 +10,14 @@ import {useTabsModel, TabsModel, TabsModelConfig} from './useTabsModel';
 export const TabsModelContext = React.createContext<TabsModel>({} as any);
 
 export interface TabsProps extends TabsModelConfig {
-  model?: TabsModel;
+  /**
+   * The contents of the Tabs. Can be `Tabs` children or any valid elements.
+   */
   children: React.ReactNode;
+  /** Optionally pass a model directly to this component. Default is to create a model out of model
+   * config passed to this component
+   */
+  model?: TabsModel;
 }
 
 export const Tabs = createComponent()({

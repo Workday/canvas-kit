@@ -21,7 +21,10 @@ export type ListState = {
 };
 
 export type ListEvents = {
+  /** Register an item to the list. Takes in an identifier and a React.Ref. This should be called on
+   * component mount */
   registerItem(data: {item: Item}): void;
+  /** Unregister an item by its identifier. This should be called when the component is unmounted */
   unregisterItem(data: {id: string}): void;
 };
 

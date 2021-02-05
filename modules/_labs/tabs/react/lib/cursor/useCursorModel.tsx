@@ -12,15 +12,25 @@ import {ListState, ListEvents, listEventMap, useListModel, Item} from '../list/u
 export type Orientation = 'horizontal' | 'vertical';
 
 export type CursorState = ListState & {
+  /** Orientation of the list. This property determines what "next" and "previous" mean. This should
+   * be set to match the layout of UI components */
   orientation: Orientation;
-  currentId: string;
+  /** The id of the list item the cursor is pointing to */
+  cursorId: string;
 };
 
 export type CursorEvents = ListEvents & {
-  setCurrentId(data: {id: string}): void;
+  /** Directly sets the cursor to the list item by its identifier. Bypasses any checks  */
+  setCursorId(data: {id: string}): void;
+  /** Set the cursor to the "next" item in the list. If the end of the list is detected, it will
+   * wrap to the first item */
   next(): void;
+  /** Set the cursor to the "previous" item in the list. If the beginning of the list is detected,
+   * it will wrap to the last item */
   previous(): void;
+  /** Set the cursor to the first item in the list */
   first(): void;
+  /** Set the cursor to the last item in the list */
   last(): void;
 };
 
@@ -29,11 +39,11 @@ export type CursorModel = Model<CursorState, CursorEvents>;
 export const cursorEventMap = createEventMap<CursorEvents>()({
   guards: {
     ...listEventMap.guards,
-    shouldSetCurrentId: 'setCurrentId',
+    shouldSetCursorId: 'setCursorId',
   },
   callbacks: {
     ...listEventMap.callbacks,
-    onSetCurrentId: 'setCurrentId',
+    onSetCursorId: 'setCursorId',
   },
 });
 
@@ -79,37 +89,37 @@ const getPrevious = getOffsetItem(-1);
 
 export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
   const [orientation] = React.useState(config.orientation || 'vertical');
-  const [currentId, setCurrentId] = React.useState('');
+  const [cursorId, setCursorId] = React.useState('');
   const initialCurrentRef = React.useRef('');
   const list = useListModel({
     ...config,
     onRegisterItem({data, state}) {
       if (!initialCurrentRef.current) {
         initialCurrentRef.current = data.item.id;
-        setCurrentId(initialCurrentRef.current);
+        setCursorId(initialCurrentRef.current);
       }
       config.onRegisterItem?.({data, state: state as CursorState});
     },
   });
 
-  const state = {...list.state, orientation, currentId};
+  const state = {...list.state, orientation, cursorId};
 
   const events = useEventMap(cursorEventMap, state, config, {
     ...list.events,
-    setCurrentId({id}) {
-      setCurrentId(id);
+    setCursorId({id}) {
+      setCursorId(id);
     },
     next() {
-      setCurrentId(getNext(state.currentId, state.items).id);
+      setCursorId(getNext(state.cursorId, state.items).id);
     },
     previous() {
-      setCurrentId(getPrevious(state.currentId, state.items).id);
+      setCursorId(getPrevious(state.cursorId, state.items).id);
     },
     first() {
-      setCurrentId(getFirst(state.items).id);
+      setCursorId(getFirst(state.items).id);
     },
     last() {
-      setCurrentId(getLast(state.items).id);
+      setCursorId(getLast(state.items).id);
     },
   });
 
