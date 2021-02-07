@@ -7,17 +7,18 @@ import {List, ListItem, ListItemProps, ListProps} from './common/List';
 import {useStack} from './common/Stack';
 import {useRTL} from './common/utils/useRTL';
 
-export interface PageListProps extends PaginationModel, Omit<ListProps, 'as'> {
+export interface PageListProps extends Omit<ListProps, 'as'> {
+  model: PaginationModel;
   children?: (model: PaginationModel) => React.ReactNode[] | React.ReactNode;
 }
 
-export const PageList = ({state, events, children, ...elemProps}: PageListProps) => {
+export const PageList = ({model, children, ...elemProps}: PageListProps) => {
   const {shouldUseRTL} = useRTL();
   const stackStyles = useStack({direction: 'row', spacing: 'xxxs', shouldUseRTL});
 
   return (
     <List as="ol" role="list" css={css(stackStyles)} {...elemProps}>
-      {typeof children === 'function' ? children({state, events}) : children}
+      {typeof children === 'function' ? children(model) : children}
     </List>
   );
 };

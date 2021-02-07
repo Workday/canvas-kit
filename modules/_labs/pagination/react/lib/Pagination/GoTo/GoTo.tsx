@@ -5,16 +5,17 @@ import {GoToTextInput, GoToTextInputProps} from './TextInput';
 import {useGoToForm, UseGoToFormConfig} from './useGoToForm';
 import {PaginationModel} from '../types';
 
-export interface GoToProps extends PaginationModel, UseGoToFormConfig {
+export interface GoToProps extends UseGoToFormConfig {
+  model: PaginationModel;
   children?: React.ReactNode;
 }
 
 const GoToContext = React.createContext({} as ReturnType<typeof useGoToForm>);
 
 export const GoTo = (props: GoToProps) => {
-  const {children, inputId, state, events} = props;
+  const {children, inputId, model} = props;
 
-  const goToContext = useGoToForm({state, events, inputId});
+  const goToContext = useGoToForm({model, inputId});
   return <GoToContext.Provider value={goToContext}>{children}</GoToContext.Provider>;
 };
 

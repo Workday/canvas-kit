@@ -5,11 +5,10 @@ import {type, typeColors} from '@workday/canvas-kit-react-core';
 
 import {PaginationModel} from '../types';
 
-export interface GoToLabelProps
-  extends PaginationModel,
-    React.LabelHTMLAttributes<HTMLLabelElement> {
-  htmlFor?: string;
+export interface GoToLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   children?: (model: PaginationModel) => React.ReactNode | React.ReactNode;
+  htmlFor?: string;
+  model: PaginationModel;
 }
 
 const labelStyles = css({
@@ -17,10 +16,10 @@ const labelStyles = css({
   color: typeColors.hint,
 });
 
-export const GoToLabel = ({state, events, children, htmlFor, ...elemProps}: GoToLabelProps) => {
+export const GoToLabel = ({model, children, htmlFor, ...elemProps}: GoToLabelProps) => {
   return (
     <label css={labelStyles} htmlFor={htmlFor} {...elemProps}>
-      {typeof children === 'function' ? children({state, events}) : children}
+      {typeof children === 'function' ? children(model) : children}
     </label>
   );
 };

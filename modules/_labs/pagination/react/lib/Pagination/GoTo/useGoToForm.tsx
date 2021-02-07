@@ -3,27 +3,28 @@ import {useUniqueId} from '@workday/canvas-kit-react-common';
 
 import {PaginationModel} from '../types';
 
-export interface UseGoToFormConfig extends PaginationModel {
+export interface UseGoToFormConfig {
   inputId?: string;
+  model: PaginationModel;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const useGoToForm = (
-  {inputId, onSubmit, state, events}: UseGoToFormConfig = {} as UseGoToFormConfig
+  {inputId, onSubmit, model}: UseGoToFormConfig = {} as UseGoToFormConfig
 ) => {
   const [value, setValue] = React.useState<number>();
 
   React.useEffect(() => {
-    if (value !== undefined && state.currentPage !== value) {
-      setValue(state.currentPage);
+    if (value !== undefined && model.state.currentPage !== value) {
+      setValue(model.state.currentPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.currentPage]);
+  }, [model.state.currentPage]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit?.(event);
-    events.goToPage(value || 0);
+    model.events.goToPage(value || 0);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

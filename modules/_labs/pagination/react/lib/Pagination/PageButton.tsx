@@ -21,23 +21,23 @@ const StyledPageButton = styled(IconButton)<{toggled?: boolean}>(
   }
 );
 
-export interface PageButtonProps extends PaginationModel, IconButtonProps {
+export interface PageButtonProps extends IconButtonProps {
+  model: PaginationModel;
   pageNumber: number;
 }
 
 export const PageButton = ({
-  state,
-  events,
+  model,
   onClick,
   pageNumber,
   children,
   ...elemProps
 }: PageButtonProps) => {
-  const isCurrentPage = pageNumber === state.currentPage;
+  const isCurrentPage = pageNumber === model.state.currentPage;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     onClick?.(e);
-    events.goToPage(pageNumber);
+    model.events.goToPage(pageNumber);
   };
 
   return (

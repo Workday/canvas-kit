@@ -12,7 +12,7 @@ export type UsePaginationModelConfig = {
 };
 
 export const usePaginationModel = ({
-  firstPage = 1, // Q: Should this be a prop, or leave it out?
+  firstPage = 1,
   initialCurrentPage = 1,
   lastPage,
   rangeSize = 5,

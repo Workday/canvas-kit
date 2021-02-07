@@ -8,8 +8,9 @@ import {PaginationModel} from './types';
 import {Flex, FlexProps} from './common/Flex';
 import {useLiveRegion} from './common/useLiveRegion';
 
-export interface AdditionalDetailsProps extends PaginationModel, FlexProps {
+export interface AdditionalDetailsProps extends FlexProps {
   children: (model: PaginationModel) => React.ReactNode | React.ReactNode;
+  model: PaginationModel;
   shouldHideDetails?: boolean;
 }
 
@@ -20,8 +21,7 @@ const textStyles = css({
 });
 
 export const AdditionalDetails = ({
-  state,
-  events,
+  model,
   children,
   shouldHideDetails = false,
   ...elemProps
@@ -37,7 +37,7 @@ export const AdditionalDetails = ({
       {...liveRegionProps}
       {...elemProps}
     >
-      {typeof children === 'function' ? children({state, events}) : children}
+      {typeof children === 'function' ? children(model) : children}
     </Flex>
   );
 };

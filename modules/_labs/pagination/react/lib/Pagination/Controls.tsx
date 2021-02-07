@@ -11,7 +11,9 @@ import {PaginationModel} from './types';
 import {HStack} from './common/Stack';
 import {useRTL} from './common/utils/useRTL';
 
-export type ControlButtonProps = PaginationModel & IconButtonProps;
+export type ControlButtonProps = IconButtonProps & {
+  model: PaginationModel;
+};
 
 export type ControlsProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -23,14 +25,14 @@ export const Controls = ({children, ...elemProps}: ControlsProps) => {
   );
 };
 
-export const JumpToFirstButton = ({state, events, onClick, ...restProps}: ControlButtonProps) => {
-  const isDisabled = state.currentPage <= state.firstPage;
+export const JumpToFirstButton = ({model, onClick, ...restProps}: ControlButtonProps) => {
+  const isDisabled = model.state.currentPage <= model.state.firstPage;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isDisabled) {
       return;
     }
     onClick?.(e);
-    events.setCurrentPage(state.firstPage);
+    model.events.setCurrentPage(model.state.firstPage);
   };
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevron2xRightSmallIcon : chevron2xLeftSmallIcon;
@@ -46,19 +48,14 @@ export const JumpToFirstButton = ({state, events, onClick, ...restProps}: Contro
   );
 };
 
-export const StepToPreviousButton = ({
-  onClick,
-  state,
-  events,
-  ...restProps
-}: ControlButtonProps) => {
-  const isDisabled = state.currentPage <= state.firstPage;
+export const StepToPreviousButton = ({onClick, model, ...restProps}: ControlButtonProps) => {
+  const isDisabled = model.state.currentPage <= model.state.firstPage;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isDisabled) {
       return;
     }
     onClick?.(e);
-    events.setCurrentPage(state.currentPage - 1);
+    model.events.setCurrentPage(model.state.currentPage - 1);
   };
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevronRightSmallIcon : chevronLeftSmallIcon;
@@ -74,14 +71,14 @@ export const StepToPreviousButton = ({
   );
 };
 
-export const StepToNextButton = ({onClick, state, events, ...restProps}: ControlButtonProps) => {
-  const isDisabled = state.currentPage >= state.lastPage;
+export const StepToNextButton = ({model, onClick, ...restProps}: ControlButtonProps) => {
+  const isDisabled = model.state.currentPage >= model.state.lastPage;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isDisabled) {
       return;
     }
     onClick?.(e);
-    events.setCurrentPage(state.currentPage + 1);
+    model.events.setCurrentPage(model.state.currentPage + 1);
   };
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
@@ -97,14 +94,14 @@ export const StepToNextButton = ({onClick, state, events, ...restProps}: Control
   );
 };
 
-export const JumpToLastButton = ({onClick, state, events, ...restProps}: ControlButtonProps) => {
-  const isDisabled = state.currentPage >= state.lastPage;
+export const JumpToLastButton = ({model, onClick, ...restProps}: ControlButtonProps) => {
+  const isDisabled = model.state.currentPage >= model.state.lastPage;
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isDisabled) {
       return;
     }
     onClick?.(e);
-    events.setCurrentPage(state.lastPage);
+    model.events.setCurrentPage(model.state.lastPage);
   };
   const {shouldUseRTL} = useRTL();
   const icon = shouldUseRTL ? chevron2xLeftSmallIcon : chevron2xRightSmallIcon;
