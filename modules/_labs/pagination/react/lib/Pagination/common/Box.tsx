@@ -27,20 +27,18 @@ const getBoxStyles = (props: BoxProps) => {
 };
 
 type As = keyof JSX.IntrinsicElements;
-type BoxRef = React.Ref<any> | null; // 'any' is appropriate here as Box can be composed into any element
 
 export interface BoxProps extends SpaceProps, LayoutProps, React.HTMLAttributes<HTMLElement> {
   as?: As;
-  ref?: BoxRef;
 }
 
 export const StyledBox = styled('div')<BoxProps>({
   boxSizing: 'border-box',
 });
 
-export const Box = ({as = 'div', ...props}: BoxProps) => {
+export const Box = React.forwardRef<any, BoxProps>(({as = 'div', ...props}, ref) => {
   // TODO: Memoize style props with React.useMemo
   const boxStyles = getBoxStyles(props);
   const safeProps = safelySpreadProps(props);
-  return <StyledBox as={as} css={css(boxStyles)} {...safeProps} />;
-};
+  return <StyledBox ref={ref} as={as} css={css(boxStyles)} {...safeProps} />;
+});
