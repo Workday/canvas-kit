@@ -21,7 +21,6 @@ export interface LayoutProps {
   overflow?: OverflowProperty;
   overflowX?: OverflowXProperty;
   overflowY?: OverflowYProperty;
-  size?: number | string;
   verticalAlign?: string;
   width?: number | string;
 }
@@ -36,7 +35,6 @@ export const layout = {
   overflow: 'overflow',
   overflowX: 'overflowX',
   overflowY: 'overflowY',
-  size: 'size',
   verticalAlign: 'verticalAlign',
   width: 'width',
 };
