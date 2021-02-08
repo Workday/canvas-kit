@@ -86,10 +86,6 @@ storiesOf('Components/Buttons/Button/React/Standard', module)
           Primary
         </Button>
       </div>
-      <h3>Mirrored Primary</h3>
-      <Button size="medium" variant={Button.Variant.Primary} icon={editIcon} mirrorIcon={true}>
-        Primary
-      </Button>
     </div>
   ))
   .add('Secondary', () => (
@@ -155,11 +151,6 @@ storiesOf('Components/Buttons/Button/React/Standard', module)
       <h3>Growing Secondary</h3>
       <Button size="large" variant={Button.Variant.Secondary} grow={true}>
         Growing Secondary
-      </Button>
-
-      <h3>Mirrored Secondary</h3>
-      <Button size="medium" variant={Button.Variant.Secondary} icon={editIcon} mirrorIcon={true}>
-        Secondary
       </Button>
     </div>
   ));

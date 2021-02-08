@@ -30,18 +30,6 @@ storiesOf('Components/Buttons/Button/React/Toolbar', module)
         <h3>Toolbar Icon Button</h3>
         <ToolbarIconButton aria-label="Activity Stream" icon={activityStreamIcon} />
         <ToolbarIconButton aria-label="Activity Stream" icon={activityStreamIcon} disabled={true} />
-        <h3>Mirrored Toolbar Icon Button</h3>
-        <ToolbarIconButton
-          aria-label="Activity Stream"
-          icon={activityStreamIcon}
-          mirrorIcon={true}
-        />
-        <ToolbarIconButton
-          aria-label="Activity Stream"
-          icon={activityStreamIcon}
-          disabled={true}
-          mirrorIcon={true}
-        />
         <h3>Toggleable Toolbar Icon Button</h3>
         <ToolbarIconButton
           aria-label="Activity Stream"
@@ -57,14 +45,6 @@ storiesOf('Components/Buttons/Button/React/Toolbar', module)
       <h3>Toolbar Dropdown Button</h3>
       <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} />
       <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} disabled={true} />
-      <h3>Mirrored Toolbar Dropdown Button</h3>
-      <ToolbarDropdownButton aria-label="Activity Stream" icon={paragraphIcon} mirrorIcon={true} />
-      <ToolbarDropdownButton
-        aria-label="Activity Stream"
-        icon={paragraphIcon}
-        disabled={true}
-        mirrorIcon={true}
-      />
       <h3>Custom Element Toolbar Dropdown Button</h3>
       <ToolbarDropdownButton aria-label="Activity Stream">
         <div style={customElementStyles}>Normal</div>

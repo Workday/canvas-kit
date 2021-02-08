@@ -37,18 +37,11 @@ export default class Svg extends React.Component<SvgProps> {
             // Need to combine iconStyle with the className prop, otherwise we'll clobber it
             // (we'll need to do something like this for each HTML <span> prop we explicitly set in this component)
             className={cx(
-              css(
-                styles,
-                {
-                  display: 'inline-block',
-                  '& svg': {display: 'block'},
-                },
-                mirror
-                  ? {
-                      transform: 'scaleX(-1)',
-                    }
-                  : {}
-              ),
+              css(styles, {
+                display: 'inline-block',
+                '& svg': {display: 'block'},
+                transform: mirror ? 'scaleX(-1)' : undefined,
+              }),
               elemProps.className
             )}
             ref={iconRef}

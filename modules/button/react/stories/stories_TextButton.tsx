@@ -75,26 +75,6 @@ storiesOf('Components/Buttons/Button/React/Text', module)
           Right Icon
         </TextButton>
       </div>
-
-      <h3>Mirrored Icons</h3>
-      <div css={buttonContainer}>
-        <TextButton
-          icon={editIcon}
-          iconPosition={TextButton.IconPosition.Left}
-          variant={TextButton.Variant.Default}
-          mirrorIcon={true}
-        >
-          Left Icon
-        </TextButton>
-        <TextButton
-          icon={arrowRightIcon}
-          iconPosition={TextButton.IconPosition.Right}
-          variant={TextButton.Variant.Default}
-          mirrorIcon={true}
-        >
-          Right Icon
-        </TextButton>
-      </div>
     </div>
   ))
   .add('Inverse', () => (
@@ -139,26 +119,6 @@ storiesOf('Components/Buttons/Button/React/Text', module)
           icon={arrowRightIcon}
           iconPosition={TextButton.IconPosition.Right}
           variant={TextButton.Variant.Inverse}
-        >
-          Right Icon
-        </TextButton>
-      </div>
-
-      <h3>Mirrored Icons Inverse</h3>
-      <div css={{...buttonContainer, ...blueBackground}}>
-        <TextButton
-          icon={editIcon}
-          iconPosition={TextButton.IconPosition.Left}
-          variant={TextButton.Variant.Inverse}
-          mirrorIcon={true}
-        >
-          Left Icon
-        </TextButton>
-        <TextButton
-          icon={arrowRightIcon}
-          iconPosition={TextButton.IconPosition.Right}
-          variant={TextButton.Variant.Inverse}
-          mirrorIcon={true}
         >
           Right Icon
         </TextButton>

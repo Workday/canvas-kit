@@ -91,16 +91,6 @@ storiesOf('Components/Buttons/Button/React/Outline', module)
       <OutlineButton size="large" variant={OutlineButton.Variant.Primary} grow={true}>
         Growing Primary Outline
       </OutlineButton>
-
-      <h3>Mirrored Primary</h3>
-      <OutlineButton
-        size="large"
-        variant={OutlineButton.Variant.Primary}
-        icon={activityStreamIcon}
-        mirrorIcon={true}
-      >
-        Outline Primary
-      </OutlineButton>
     </div>
   ))
   .add('Secondary', () => (
@@ -138,11 +128,6 @@ storiesOf('Components/Buttons/Button/React/Outline', module)
       <h3>Growing Secondary</h3>
       <OutlineButton size="large" grow={true}>
         Growing Secondary Outline
-      </OutlineButton>
-
-      <h3>Mirrored Secondary</h3>
-      <OutlineButton size="large" dataLabel={'1:00'} icon={playCircleIcon} mirrorIcon={true}>
-        Outline Secondary
       </OutlineButton>
     </div>
   ))
@@ -220,19 +205,6 @@ storiesOf('Components/Buttons/Button/React/Outline', module)
       <div css={blueBackground} style={{maxWidth: 'initial'}}>
         <OutlineButton size="large" variant={OutlineButton.Variant.Inverse} grow={true}>
           Growing Inverse Outline
-        </OutlineButton>
-      </div>
-
-      <h3>Mirrored Inverse</h3>
-      <div css={blueBackground}>
-        <OutlineButton
-          size="large"
-          dataLabel={'1:00'}
-          variant={OutlineButton.Variant.Inverse}
-          icon={playCircleIcon}
-          mirrorIcon={true}
-        >
-          Outline Inverse
         </OutlineButton>
       </div>
     </div>
