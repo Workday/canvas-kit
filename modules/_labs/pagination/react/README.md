@@ -236,11 +236,11 @@ the `Pagination` component.
 const ControllablePagination = () => {
   // create the model
   const model = usePaginationModel({
-  lastPage={100}
-  initialCurrentPage={6}
-  rangeSize={3}
-  onPageChange={pageNumber => console.log(pageNumber)}
-});
+    lastPage={100}
+    initialCurrentPage={6}
+    rangeSize={3}
+    onPageChange={pageNumber => console.log(pageNumber)}
+  });
 
   return (
     <Pagination aria-label="Pagination" model={model}>
