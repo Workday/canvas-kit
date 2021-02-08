@@ -516,7 +516,7 @@ Use this pattern when you need access to the state in the `Pagination` context f
 | name     | type                                                            | required?  | default | recommended |
 | -------- | --------------------------------------------------------------- | ---------- | ------- | ----------- |
 | htmlFor  | `string`                                                        | 🚫 `false` | n/a     | n/a         |
-| children | `(model: PaginationModel) => React.ReactNode | React.ReactNode` | 🚫 `false` | n/a     | n/a         |
+| children | `(model: PaginationModel) => React.ReactNode \| React.ReactNode` | 🚫 `false` | n/a     | n/a         |
 
 This component also supports
 [all native HTMLLabelElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label#Attributes).
