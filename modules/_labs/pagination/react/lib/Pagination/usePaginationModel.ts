@@ -20,37 +20,37 @@ export const usePaginationModel = ({
 }: UsePaginationModelConfig): PaginationModel => {
   const [currentPage, setCurrentPage] = React.useState(initialCurrentPage);
 
-  React.useEffect(() => {
-    if (onPageChange) {
-      onPageChange(currentPage);
-    }
-  }, [onPageChange, currentPage]);
+  const changePage = (page: number) => {
+    onPageChange?.(page);
+
+    setCurrentPage(page);
+  };
 
   const jumpToFirst = () => {
-    setCurrentPage(firstPage);
+    changePage(firstPage);
   };
 
   const jumpToLast = () => {
-    setCurrentPage(lastPage);
+    changePage(lastPage);
   };
 
   const stepToNext = () => {
-    setCurrentPage(currentPage + 1);
+    changePage(currentPage + 1);
   };
 
   const stepToPrevious = () => {
-    setCurrentPage(currentPage - 1);
+    changePage(currentPage - 1);
   };
 
   const goToPage = (pageNumber: number) => {
     if (pageNumber < firstPage) {
       // a safeguard to prevent for going to a page below the range
-      setCurrentPage(firstPage);
+      changePage(firstPage);
     } else if (pageNumber > lastPage) {
       // a safeguard to prevent going to a page above the range
-      setCurrentPage(lastPage);
+      changePage(lastPage);
     } else {
-      setCurrentPage(pageNumber);
+      changePage(pageNumber);
     }
   };
 
@@ -69,7 +69,7 @@ export const usePaginationModel = ({
   };
 
   const events = {
-    setCurrentPage,
+    setCurrentPage: changePage,
     jumpToFirst,
     jumpToLast,
     stepToNext,
