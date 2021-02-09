@@ -120,3 +120,9 @@ default behavior.
 
 If this ref is not provided the modal will try to use the close icon. If that icon is not available,
 it will make the modal heading focusable and focus on that instead.
+
+#### `closeButtonAriaLabel: string`
+
+> Aria label string for the close icon button
+
+---
