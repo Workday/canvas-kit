@@ -37,7 +37,7 @@ export const PageButton = ({
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     onClick?.(e);
-    model.events.goToPage(pageNumber);
+    model.events.goTo(pageNumber);
   };
 
   return (

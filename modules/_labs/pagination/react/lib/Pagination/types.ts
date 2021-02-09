@@ -12,11 +12,11 @@ export interface PaginationState {
 
 export interface PaginationEvents {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  jumpToFirst: () => void;
-  jumpToLast: () => void;
-  stepToNext: () => void;
-  stepToPrevious: () => void;
-  goToPage: (page: number) => void;
+  first: () => void;
+  last: () => void;
+  next: () => void;
+  previous: () => void;
+  goTo: (page: number) => void;
 }
 
 export interface PaginationModel {

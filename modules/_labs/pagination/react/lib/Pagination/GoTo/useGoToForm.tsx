@@ -24,7 +24,7 @@ export const useGoToForm = (
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit?.(event);
-    model.events.goToPage(value || 0);
+    model.events.goTo(value || 0);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

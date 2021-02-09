@@ -26,23 +26,23 @@ export const usePaginationModel = ({
     setCurrentPage(page);
   };
 
-  const jumpToFirst = () => {
+  const first = () => {
     changePage(firstPage);
   };
 
-  const jumpToLast = () => {
+  const last = () => {
     changePage(lastPage);
   };
 
-  const stepToNext = () => {
+  const next = () => {
     changePage(currentPage + 1);
   };
 
-  const stepToPrevious = () => {
+  const previous = () => {
     changePage(currentPage - 1);
   };
 
-  const goToPage = (pageNumber: number) => {
+  const goTo = (pageNumber: number) => {
     if (pageNumber < firstPage) {
       // a safeguard to prevent for going to a page below the range
       changePage(firstPage);
@@ -70,11 +70,11 @@ export const usePaginationModel = ({
 
   const events = {
     setCurrentPage: changePage,
-    jumpToFirst,
-    jumpToLast,
-    stepToNext,
-    stepToPrevious,
-    goToPage,
+    first,
+    last,
+    next,
+    previous,
+    goTo,
   };
 
   return {

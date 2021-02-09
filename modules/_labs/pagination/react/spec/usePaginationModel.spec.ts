@@ -60,35 +60,35 @@ describe('usePaginationModel hook', () => {
       });
     };
 
-    it('should set currentPage to the first page on jumpToFirst', () => {
+    it('should set currentPage to the first page on first', () => {
       const {result} = renderHook(() => buildModel());
       act(() => {
-        result.current.events.jumpToFirst();
+        result.current.events.first();
       });
 
       expect(result.current.state.currentPage).toBe(1);
     });
 
-    it('should set currentPage to the last page on jumpToLast', () => {
+    it('should set currentPage to the last page on last', () => {
       const {result} = renderHook(() => buildModel());
       act(() => {
-        result.current.events.jumpToLast();
+        result.current.events.last();
       });
       expect(result.current.state.currentPage).toBe(10);
     });
 
-    it('should set currentPage to the next page on stepToNext', () => {
+    it('should set currentPage to the next page on next', () => {
       const {result} = renderHook(() => buildModel());
       act(() => {
-        result.current.events.stepToNext();
+        result.current.events.next();
       });
       expect(result.current.state.currentPage).toBe(6);
     });
 
-    it('should set currentPage to the previous page on stepToPrevious', () => {
+    it('should set currentPage to the previous page on previous', () => {
       const {result} = renderHook(() => buildModel());
       act(() => {
-        result.current.events.stepToPrevious();
+        result.current.events.previous();
       });
       expect(result.current.state.currentPage).toBe(4);
     });
@@ -97,16 +97,16 @@ describe('usePaginationModel hook', () => {
       const onPageChange = jest.fn();
       const {result} = renderHook(() => buildModel({onPageChange}));
       act(() => {
-        result.current.events.stepToPrevious();
+        result.current.events.previous();
       });
       expect(onPageChange).toHaveBeenCalledWith(4);
     });
 
-    context('given the goToPage event', () => {
+    context('given the goTo event', () => {
       it('should set currentPage to the given page if it is within the page count', () => {
         const {result} = renderHook(() => buildModel());
         act(() => {
-          result.current.events.goToPage(8);
+          result.current.events.goTo(8);
         });
         expect(result.current.state.currentPage).toBe(8);
       });
@@ -114,7 +114,7 @@ describe('usePaginationModel hook', () => {
       it('should set currentPage to the first page if the given page is below the page count', () => {
         const {result} = renderHook(() => buildModel());
         act(() => {
-          result.current.events.goToPage(0);
+          result.current.events.goTo(0);
         });
         expect(result.current.state.currentPage).toBe(1);
       });
@@ -122,7 +122,7 @@ describe('usePaginationModel hook', () => {
       it('should set currentPage to the last page if the given page is above the page count', () => {
         const {result} = renderHook(() => buildModel());
         act(() => {
-          result.current.events.goToPage(12);
+          result.current.events.goTo(12);
         });
         expect(result.current.state.currentPage).toBe(10);
       });

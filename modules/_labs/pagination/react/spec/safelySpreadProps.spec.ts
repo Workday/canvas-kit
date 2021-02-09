@@ -31,6 +31,7 @@ describe('safelySpreadProps', () => {
         ...styleProps,
         ...elementProps,
       });
+
       expect(safeProps).toEqual(elementProps);
     });
   });

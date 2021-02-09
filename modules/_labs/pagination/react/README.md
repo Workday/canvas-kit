@@ -94,7 +94,7 @@ the page list buttons.
 
 ```tsx
 import * as React from 'react';
-import Pagination from '@workday/canvas-kit-labs-react-pagination';
+import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 
 const PaginationWithStepControls = () => {
   return (
@@ -129,7 +129,7 @@ const PaginationWithStepControls = () => {
 
 ```tsx
 import * as React from 'react';
-import Pagination from '@workday/canvas-kit-labs-react-pagination';
+import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 
 const PaginationWithJumpControls = () => {
   return (
@@ -166,7 +166,7 @@ const PaginationWithJumpControls = () => {
 
 ```tsx
 import * as React from 'react';
-import Pagination from '@workday/canvas-kit-labs-react-pagination';
+import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
 
 const PaginationWithGoToControls = () => {
   return (
@@ -416,8 +416,8 @@ The functional children snippet below will likely be the most common use case.
 
 #### Component Props
 
-| name     | type                                                              | required?  | default | recommended |
-| -------- | ----------------------------------------------------------------- | ---------- | ------- | ----------- |
+| name     | type                                                               | required?  | default | recommended |
+| -------- | ------------------------------------------------------------------ | ---------- | ------- | ----------- |
 | children | `(model: PaginationModel) => React.ReactNode[] \| React.ReactNode` | 🚫 `false` | n/a     | n/a         |
 
 This component also supports
@@ -513,9 +513,9 @@ Use this pattern when you need access to the state in the `Pagination` context f
 
 #### Component Props
 
-| name     | type                                                            | required?  | default | recommended |
-| -------- | --------------------------------------------------------------- | ---------- | ------- | ----------- |
-| htmlFor  | `string`                                                        | 🚫 `false` | n/a     | n/a         |
+| name     | type                                                             | required?  | default | recommended |
+| -------- | ---------------------------------------------------------------- | ---------- | ------- | ----------- |
+| htmlFor  | `string`                                                         | 🚫 `false` | n/a     | n/a         |
 | children | `(model: PaginationModel) => React.ReactNode \| React.ReactNode` | 🚫 `false` | n/a     | n/a         |
 
 This component also supports
@@ -542,9 +542,9 @@ need static child elements, this component will support it.
 
 #### Component Props
 
-| name              | type                                                            | required?  | default | recommended |
-| ----------------- | --------------------------------------------------------------- | ---------- | ------- | ----------- |
-| shouldHideDetails | `boolean`                                                       | 🚫 `false` | n/a     | n/a         |
+| name              | type                                                             | required?  | default | recommended |
+| ----------------- | ---------------------------------------------------------------- | ---------- | ------- | ----------- |
+| shouldHideDetails | `boolean`                                                        | 🚫 `false` | n/a     | n/a         |
 | children          | `(model: PaginationModel) => React.ReactNode \| React.ReactNode` | ✅ `true`  | n/a     | n/a         |
 
 ## Models, Hooks, & Utils
@@ -575,12 +575,12 @@ const paginationModel = {
     rangeMax
   },
   events: {
-    jumpToFirst,
-    jumpToLast,
-    stepToNext,
-    stepToPrevious,
+    first,
+    last,
+    next,
+    previous,
     setCurrentPage,
-    goToPage,
+    goTo,
   };
 };
 
@@ -605,14 +605,14 @@ their values:
 The Model's `events` describe behaviors that act on `state`. Below are the `events` keys and
 descriptions of their values:
 
-- `jumpToFirst` - sets the current page to the first page
-- `jumpToLast` - sets the current page to the last page
-- `stepToNext` - increments the current page by 1
-- `stepToPrevious` - decrements the current page by 1
+- `first` - sets the current page to the first page
+- `last` - sets the current page to the last page
+- `next` - increments the current page by 1
+- `previous` - decrements the current page by 1
 - `setCurrentPage` - sets the current page to a given page number (no safeguards)
-- `goToPage` - sets the current page to a given page number\* (with safeguards)
+- `goTo` - sets the current page to a given page number\* (with safeguards)
 
-\* _`goToPage` is very similar to `setCurrentPage`, but it has some built-in safeguards. If the page
+\* _`goTo` is very similar to `setCurrentPage`, but it has some built-in safeguards. If the page
 number provided is below the first page (e.g: `0`), `currentPage` will be set to the `firstPage`.
 Similarly, if the number provided is larger than the `lastPage`, it will set `currentPage` to the
 `lastPage`._
