@@ -83,7 +83,7 @@ exec('git diff --name-only HEAD HEAD^')
       `--canary`,
       `--preid ${preid}`,
       `--dist-tag ${distTag}`,
-      preid === 'prerelease' ? 'major' : '',
+      isPrerelease ? 'major' : '',
     ];
 
     return exec(`yarn lerna publish ${lernaFlags.join(' ')}`);

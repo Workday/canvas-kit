@@ -222,7 +222,7 @@ Default: `PopupPadding.l`
 
 ---
 
-#### `closeLabel: string`
+#### `closeButtonAriaLabel: string`
 
 > Aria label string for the close icon button
 
