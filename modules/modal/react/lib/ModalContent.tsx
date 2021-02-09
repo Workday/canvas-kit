@@ -60,6 +60,10 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * @default document.body
    */
   container?: HTMLElement;
+  /**
+   * The `aria-label` for the Popup close button.
+   */
+  closeButtonAriaLabel?: string;
 }
 
 const fadeIn = keyframes`
@@ -193,6 +197,7 @@ const ModalContent = ({
   children,
   firstFocusRef,
   heading,
+  closeButtonAriaLabel,
   ...elemProps
 }: ModalContentProps) => {
   const centeringRef = React.useRef<HTMLDivElement>(null);
@@ -228,6 +233,7 @@ const ModalContent = ({
           transformOrigin={transformOrigin}
           aria-modal={true}
           ariaLabel={ariaLabel}
+          closeButtonAriaLabel={closeButtonAriaLabel}
         >
           {children}
         </Popup>
