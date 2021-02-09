@@ -30,6 +30,9 @@ module.exports = {
         {
           loader: path.resolve(__dirname, 'webpack-loader-redirect-mdx-to-github'),
         },
+        {
+          loader: path.resolve(__dirname, 'mdx-code-block-rewrite'),
+        },
       ],
     });
 
@@ -41,6 +44,18 @@ module.exports = {
         {
           loader: require.resolve('@storybook/source-loader'),
           options: {parser: 'typescript'},
+        },
+      ],
+      enforce: 'pre',
+    });
+
+    // Load the whole example code of story files to display in docs.
+    config.module.rules.push({
+      test: /examples\/.*\.tsx?$/,
+      include: [modulesPath],
+      loaders: [
+        {
+          loader: path.resolve(__dirname, 'whole-source-loader'),
         },
       ],
       enforce: 'pre',
