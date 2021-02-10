@@ -142,6 +142,7 @@ export const GoToForm = () => {
       onPageChange={pageNumber => console.log(pageNumber)}
       aria-label="Pagination"
       lastPage={lastPage}
+      rangeSize={3}
     >
       <Pagination.Controls>
         <Pagination.JumpToFirstButton aria-label="First" />
@@ -204,7 +205,7 @@ export const ShowAdditionalDetails = () => {
         <Pagination.JumpToLastButton aria-label="Last" />
         <Pagination.GoToForm>
           <Pagination.GoToTextInput />
-          <Pagination.GoToLabel>{({state}) => `of ${totalCount} results`}</Pagination.GoToLabel>
+          <Pagination.GoToLabel>{() => `of ${totalCount} results`}</Pagination.GoToLabel>
         </Pagination.GoToForm>
       </Pagination.Controls>
       <Pagination.AdditionalDetails>
