@@ -18,10 +18,14 @@ module.exports = function rewriteExampleCodeBlock(source) {
   if (!hasStory) imports.push('Story');
   if (!hasArgsTable) imports.push('ArgsTable');
   return (
-    (imports.length ? `import {${imports.join(',')}} from '@storybook/addon-docs/blocks';\n` : '') +
+    (imports.length
+      ? `import {${imports.join(',')}} from '@storybook/addon-docs/blocks';\n\n`
+      : '') +
     source
       .replace(/\<ExampleCodeBlock code={([A-Za-z0-9]+)} \/\>/g, function replacer(match, p1, p2) {
-        return `<Canvas><Story name="${storyNameFromExport(p1)}" parameters={{storySource: {source: ${p1}.__RAW__}}}><${p1} /></Story></Canvas>`;
+        return `<Canvas><Story name="${storyNameFromExport(
+          p1
+        )}" parameters={{storySource: {source: ${p1}.__RAW__}}}><${p1} /></Story></Canvas>`;
       })
       .replace(/\<PropsTable of=/g, '<ArgsTable of=')
   );
