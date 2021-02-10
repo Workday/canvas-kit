@@ -34,14 +34,6 @@ describe('usePaginationModel hook', () => {
       it('should set currentPage correctly', () => {
         expect(result.current.state.currentPage).toBe(4);
       });
-
-      it('should set rangeMin correctly', () => {
-        expect(result.current.state.rangeMin).toBe(3);
-      });
-
-      it('should set rangeMax correctly', () => {
-        expect(result.current.state.rangeMax).toBe(5);
-      });
     });
   });
 

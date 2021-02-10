@@ -6,7 +6,12 @@ import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 
-import {Pagination} from '../lib/Pagination';
+import {
+  Pagination,
+  getLastPage,
+  getVisibleResultsMax,
+  getVisibleResultsMin,
+} from '../lib/Pagination';
 
 import README from '../README.md';
 
@@ -17,6 +22,10 @@ export default withSnapshotsEnabled({
 });
 
 const TableRenderer = ({direction = ContentDirection.LTR}) => {
+  const resultCount = 10;
+  const totalCount = 100;
+  const lastPage = getLastPage(resultCount, totalCount);
+
   return (
     <CanvasProvider theme={{canvas: {direction}}}>
       <StaticStates>
@@ -56,7 +65,7 @@ const TableRenderer = ({direction = ContentDirection.LTR}) => {
           {props => (
             <Pagination
               aria-label="Pagination"
-              lastPage={10}
+              lastPage={lastPage}
               rangeSize={3}
               initialCurrentPage={props.initialCurrentPage}
             >
@@ -83,10 +92,10 @@ const TableRenderer = ({direction = ContentDirection.LTR}) => {
                   <Pagination.GoToForm>
                     <Pagination.GoToTextInput />
                     <Pagination.GoToLabel>
-                      {({state}) =>
+                      {() =>
                         direction === ContentDirection.RTL
-                          ? `من 10 صفحات`
-                          : `of ${state.lastPage} pages`
+                          ? `من 100 صفحات`
+                          : `of ${totalCount} pages`
                       }
                     </Pagination.GoToLabel>
                   </Pagination.GoToForm>
@@ -95,8 +104,19 @@ const TableRenderer = ({direction = ContentDirection.LTR}) => {
               <Pagination.AdditionalDetails shouldHideDetails={!props.shouldShowAddtionalDetails}>
                 {({state}) =>
                   direction === ContentDirection.RTL
-                    ? `${state.rangeMax}-${state.rangeMin} من 10 صفحات`
-                    : `${state.rangeMin}-${state.rangeMax} of ${state.lastPage} pages`
+                    ? `${getVisibleResultsMax(
+                        state.currentPage,
+                        resultCount,
+                        totalCount
+                      )}-${getVisibleResultsMin(state.currentPage, resultCount)} من 100 صفحات`
+                    : `${getVisibleResultsMin(
+                        state.currentPage,
+                        resultCount
+                      )}-${getVisibleResultsMax(
+                        state.currentPage,
+                        resultCount,
+                        totalCount
+                      )} of ${totalCount} pages`
                 }
               </Pagination.AdditionalDetails>
             </Pagination>

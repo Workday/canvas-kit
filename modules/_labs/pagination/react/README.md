@@ -94,13 +94,22 @@ the page list buttons.
 
 ```tsx
 import * as React from 'react';
-import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
+import {
+  Pagination,
+  getLastPage,
+  getVisibleResultsMax,
+  getVisibleResultsMin,
+} from '../lib/Pagination';
 
 const PaginationWithStepControls = () => {
+  const resultCount = 10;
+  const totalCount = 100;
+  const lastPage = getLastPage(resultCount, totalCount);
+
   return (
     <Pagination
       aria-label="Pagination"
-      lastPage={100}
+      lastPage={lastPage}
       rangeSize={3}
       onPageChange={pageNumber => console.log(pageNumber)}
     >
@@ -118,7 +127,13 @@ const PaginationWithStepControls = () => {
         <Pagination.StepToNextButton aria-label="Next" />
       </Pagination.Controls>
       <Pagination.AdditionalDetails shouldHideDetails>
-        {({state}) => `${state.rangeMin}-${state.rangeMax} of ${state.lastPage} results`}
+        {({state}) =>
+          `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
+            state.currentPage,
+            resultCount,
+            totalCount
+          )} of ${totalCount} results`
+        }
       </Pagination.AdditionalDetails>
     </Pagination>
   );
@@ -129,13 +144,22 @@ const PaginationWithStepControls = () => {
 
 ```tsx
 import * as React from 'react';
-import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
+import {
+  Pagination,
+  getLastPage,
+  getVisibleResultsMax,
+  getVisibleResultsMin,
+} from '../lib/Pagination';
 
 const PaginationWithJumpControls = () => {
+  const resultCount = 10;
+  const totalCount = 100;
+  const lastPage = getLastPage(resultCount, totalCount);
+
   return (
     <Pagination
       aria-label="Pagination"
-      lastPage={100}
+      lastPage={lastPage}
       rangeSize={3}
       onPageChange={pageNumber => console.log(pageNumber)}
     >
@@ -155,7 +179,13 @@ const PaginationWithJumpControls = () => {
         <Pagination.JumpToLastButton aria-label="Last" />
       </Pagination.Controls>
       <Pagination.AdditionalDetails shouldHideDetails>
-        {({state}) => `${state.rangeMin}-${state.rangeMax} of ${state.lastPage} results`}
+        {({state}) =>
+          `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
+            state.currentPage,
+            resultCount,
+            totalCount
+          )} of ${totalCount} results`
+        }
       </Pagination.AdditionalDetails>
     </Pagination>
   );
@@ -166,13 +196,22 @@ const PaginationWithJumpControls = () => {
 
 ```tsx
 import * as React from 'react';
-import {Pagination} from '@workday/canvas-kit-labs-react-pagination';
+import {
+  Pagination,
+  getLastPage,
+  getVisibleResultsMax,
+  getVisibleResultsMin,
+} from '../lib/Pagination';
 
 const PaginationWithGoToControls = () => {
+  const resultCount = 10;
+  const totalCount = 100;
+  const lastPage = getLastPage(resultCount, totalCount);
+
   return (
     <Pagination
       aria-label="Pagination"
-      lastPage={100}
+      lastPage={lastPage}
       rangeSize={3}
       onPageChange={pageNumber => console.log(pageNumber)}
     >
@@ -192,11 +231,17 @@ const PaginationWithGoToControls = () => {
         <Pagination.JumpToLastButton aria-label="Last" />
         <Pagination.GoToForm>
           <Pagination.GoToTextInput />
-          <Pagination.GoToLabel>{({state}) => `of ${state.lastPage} results`}</Pagination.GoToLabel>
+          <Pagination.GoToLabel>{() => `of ${totalCount} results`}</Pagination.GoToLabel>
         </Pagination.GoToForm>
       </Pagination.Controls>
       <Pagination.AdditionalDetails shouldHideDetails>
-        {({state}) => `${state.rangeMin}-${state.rangeMax} of ${state.lastPage} results`}
+        {({state}) =>
+          `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
+            state.currentPage,
+            resultCount,
+            totalCount
+          )} of ${totalCount} results`
+        }
       </Pagination.AdditionalDetails>
     </Pagination>
   );
@@ -536,7 +581,13 @@ need static child elements, this component will support it.
 
 ```tsx
 <Pagination.AdditionalDetails>
-  {({state}) => `${state.rangeMin}-${state.rangeMax} of ${state.lastPage} results`}
+  {({state}) =>
+    `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
+      state.currentPage,
+      resultCount,
+      totalCount
+    )} of ${totalCount} results`
+  }
 </Pagination.AdditionalDetails>
 ```
 

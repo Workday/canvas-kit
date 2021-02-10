@@ -6,8 +6,8 @@ export interface PaginationState {
   lastPage: number; // last page
   range: number[]; // array of page numbers
   rangeSize: number; // size of the range
-  rangeMin: number; // maximum value in the range
-  rangeMax: number; // minimum value in the range
+  // rangeMin: number; // maximum value in the range
+  // rangeMax: number; // minimum value in the range
 }
 
 export interface PaginationEvents {
