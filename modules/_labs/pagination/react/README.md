@@ -622,8 +622,6 @@ const paginationModel = {
     lastPage,
     range,
     rangeSize,
-    rangeMin,
-    rangeMax
   },
   events: {
     first,
@@ -648,8 +646,6 @@ their values:
 - `lastPage` - the page number for the last page (it can also be used as a total page count)
 - `range` - an array of page numbers included in the visible range
 - `rangeSize` - the size of the visible range
-- `rangeMin` - the first page number in the visible range
-- `rangeMax` - the last page number in the visible range
 
 #### Events
 

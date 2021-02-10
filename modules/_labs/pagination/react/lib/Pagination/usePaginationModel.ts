@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {buildPageRange} from './buildPageRange';
+import {getRangeMax, getRangeMin} from './common/utils/helpers';
 import {PaginationModel} from './types';
 
 export type UsePaginationModelConfig = {
@@ -55,8 +56,8 @@ export const usePaginationModel = ({
   };
 
   const range = buildPageRange({currentPage, lastPage, rangeSize});
-  const rangeMin = range[0];
-  const rangeMax = range[range.length - 1];
+  const rangeMin = getRangeMin(range);
+  const rangeMax = getRangeMax(range);
 
   const state = {
     firstPage,
