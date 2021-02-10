@@ -1,4 +1,5 @@
 const path = require('path');
+const {storyNameFromExport} = require('@storybook/csf');
 
 // This loader replaces example code blocks with Storybook specific tags
 // before:
@@ -20,7 +21,7 @@ module.exports = function rewriteExampleCodeBlock(source) {
     (imports.length ? `import {${imports.join(',')}} from '@storybook/addon-docs/blocks';\n` : '') +
     source
       .replace(/\<ExampleCodeBlock code={([A-Za-z0-9]+)} \/\>/g, function replacer(match, p1, p2) {
-        return `<Canvas><Story name="${p1}" parameters={{storySource: {source: ${p1}.__RAW__}}}><${p1} /></Story></Canvas>`;
+        return `<Canvas><Story name="${storyNameFromExport(p1)}" parameters={{storySource: {source: ${p1}.__RAW__}}}><${p1} /></Story></Canvas>`;
       })
       .replace(/\<PropsTable of=/g, '<ArgsTable of=')
   );
