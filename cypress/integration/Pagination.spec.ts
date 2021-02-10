@@ -154,7 +154,7 @@ describe('Pagination', () => {
           cy.get('ol')
             .find('button')
             .get('[aria-current="page"]')
-            .should('contain.text', 100);
+            .should('contain.text', 10);
         });
       });
 
@@ -248,17 +248,17 @@ describe('Pagination', () => {
           cy.get('ol')
             .find('button')
             .first()
-            .should('contain.text', '96');
+            .should('contain.text', '6');
           // get the current page button
           cy.get('ol')
             .find('button')
             .get('[aria-current="page"]')
-            .should('contain.text', '100');
+            .should('contain.text', '10');
           // get the last page button in the range
           cy.get('ol')
             .find('button')
             .last()
-            .should('contain.text', '100');
+            .should('contain.text', '10');
         });
       });
     });
@@ -281,7 +281,7 @@ describe('Pagination', () => {
       });
 
       it('should describe the current page range and the total page count', () => {
-        cy.findByRole('status').should('contain.text', '1-5 of 100 results');
+        cy.findByRole('status').should('contain.text', '1-10 of 100 results');
       });
     });
   });
@@ -341,7 +341,7 @@ describe('Pagination', () => {
         it('should go to the specified page if the value is within the range', () => {
           cy.get('form')
             .find('input')
-            .type('42');
+            .type('8');
           cy.get('form')
             .find('input')
             .type('{enter}');
@@ -350,13 +350,13 @@ describe('Pagination', () => {
           cy.get('ol')
             .find('button')
             .get('[aria-current="page"]')
-            .should('contain.text', '42');
+            .should('contain.text', '8');
         });
 
         it('should go to the last page if a value is above the range size is submitted', () => {
           cy.get('form')
             .find('input')
-            .type('101');
+            .type('11');
           cy.get('form')
             .find('input')
             .type('{enter}');
@@ -365,17 +365,17 @@ describe('Pagination', () => {
           cy.get('ol')
             .find('button')
             .get('[aria-current="page"]')
-            .should('contain.text', '100');
+            .should('contain.text', '10');
           // get the first page button in the range
           cy.get('ol')
             .find('button')
             .first()
-            .should('contain.text', '96');
+            .should('contain.text', '6');
           // get the last page button in the range
           cy.get('ol')
             .find('button')
             .last()
-            .should('contain.text', '100');
+            .should('contain.text', '10');
         });
 
         it('should go to the first page if a number below the range size is submitted', () => {
