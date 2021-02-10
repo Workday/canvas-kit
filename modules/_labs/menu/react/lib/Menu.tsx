@@ -306,7 +306,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       return getFirstCharacter(child);
     });
 
-    this.firstCharacters = firstCharacters;
+    this.firstCharacters = firstCharacters as string[];
   };
 
   private getInitialSelectedItem = (): number => {

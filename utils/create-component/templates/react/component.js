@@ -1,24 +1,37 @@
 module.exports = pascalCaseName => `
-import * as React from 'react'
-import styled from '@emotion/styled';
+import React from 'react';
 
-export interface ${pascalCaseName}Props extends React.HTMLAttributes<HTMLDivElement> {
+import {createComponent, useDefaultModel} from '@workday/canvas-kit-react-common';
 
+import {
+  use${pascalCaseName}Model,
+  ${pascalCaseName}Model,
+  ${pascalCaseName}ModelConfig,
+} from './use${pascalCaseName}Model';
+import {${pascalCaseName}Target} from './${pascalCaseName}.Target';
+import {${pascalCaseName}Content} from './${pascalCaseName}.Content';
+
+export const ${pascalCaseName}ModelContext = React.createContext<${pascalCaseName}Model>({} as any);
+
+export interface ${pascalCaseName}Props extends ${pascalCaseName}ModelConfig {
+  model?: ${pascalCaseName}Model;
+  children: React.ReactNode;
 }
 
-const Container = styled('div')<${pascalCaseName}Props>({
-
-});
-
-export default class ${pascalCaseName} extends React.Component<${pascalCaseName}Props, {}> {
-  public render() {
-    const {...elemProps} = this.props;
+export const ${pascalCaseName} = createComponent()({
+  displayName: '${pascalCaseName}',
+  Component: ({children, model, ...config}: ${pascalCaseName}Props) => {
+    const value = useDefaultModel(model, config, use${pascalCaseName}Model);
 
     return (
-      <Container {...elemProps}>
-        ${pascalCaseName}
-      </Container>
-    )
-  }
-}
+      <${pascalCaseName}ModelContext.Provider value={value}>
+        {children}
+      </${pascalCaseName}ModelContext.Provider>
+    );
+  },
+  subComponents: {
+    Target: ${pascalCaseName}Target,
+    Content: ${pascalCaseName}Content,
+  },
+});
 `;

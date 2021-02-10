@@ -10,6 +10,7 @@ export interface CanvasProviderProps {
 
 const DirectionContainer = styled('bdo')<{dir: ContentDirection}>(({dir}) => ({
   direction: dir,
+  display: 'block'
 }));
 
 export class CanvasProvider extends React.Component<CanvasProviderProps> {

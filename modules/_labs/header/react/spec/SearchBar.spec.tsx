@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {SearchBar} from '../lib/parts/SearchBar';
-import {render, fireEvent} from '@testing-library/react';
+import {render, screen, fireEvent} from '@testing-library/react';
 import {searchThemes} from '../lib/shared/themes';
 import {SearchTheme} from '../lib/shared/types';
 import chroma from 'chroma-js';
@@ -12,41 +12,39 @@ describe('Header Search', () => {
     cb.mockReset();
   });
 
-  test('Searching empty string should focus input', async () => {
+  test('Searching empty string should focus input', () => {
     const inputLabelText = `label`;
-    const {getByLabelText} = render(<SearchBar onSubmit={cb} inputLabel={inputLabelText} />);
+    render(<SearchBar onSubmit={cb} inputLabel={inputLabelText} />);
 
-    fireEvent.submit(await getByLabelText(inputLabelText));
+    fireEvent.submit(screen.getByRole('search', {name: inputLabelText}));
 
     expect(cb).toHaveBeenCalledTimes(0);
-    expect(await getByLabelText(inputLabelText)).toHaveFocus();
+    expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveFocus();
   });
 
-  test('Searching something should call callback', async () => {
+  test('Searching something should call callback', () => {
     const role = `search`;
-    const {findByRole} = render(<SearchBar onSubmit={cb} initialValue="hello" />);
+    render(<SearchBar onSubmit={cb} initialValue="hello" />);
 
-    fireEvent.submit(await findByRole(role));
+    fireEvent.submit(screen.getByRole(role));
 
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
-  test('Searching with icon should call callback', async () => {
+  test('Searching with icon should call callback', () => {
     const label = `submitLabel`;
-    const {findByLabelText} = render(
-      <SearchBar onSubmit={cb} initialValue="world" submitAriaLabel={label} />
-    );
+    render(<SearchBar onSubmit={cb} initialValue="world" submitAriaLabel={label} />);
 
-    fireEvent.click(await findByLabelText(label));
+    fireEvent.click(screen.getByLabelText(label));
 
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
-  test('Clear button should clear input', async () => {
+  test('Clear button should clear input', () => {
     const label = `clearLabel`;
     const text = `initial text`;
     const inputLabelText = `label`;
-    const {findByLabelText, getByLabelText} = render(
+    render(
       <SearchBar
         onSubmit={cb}
         initialValue={text}
@@ -55,31 +53,29 @@ describe('Header Search', () => {
       />
     );
 
-    expect(getByLabelText(inputLabelText)).toHaveValue(text);
-    fireEvent.click(await findByLabelText(label));
-    expect(getByLabelText(inputLabelText)).toHaveValue('');
+    expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveValue(text);
+    fireEvent.click(screen.getByLabelText(label));
+    expect(screen.getByRole('combobox', {name: inputLabelText})).toHaveValue('');
   });
 
-  test('Input change should fire callback', async () => {
+  test('Input change should fire callback', () => {
     const inputLabelText = `label`;
     const newValue = `label`;
-    const {findByLabelText} = render(
-      <SearchBar onSubmit={jest.fn()} onInputChange={cb} inputLabel={inputLabelText} />
-    );
+    render(<SearchBar onSubmit={jest.fn()} onInputChange={cb} inputLabel={inputLabelText} />);
 
-    const input = await findByLabelText(inputLabelText);
+    const input = screen.getByRole('combobox', {name: inputLabelText});
     fireEvent.change(input, {target: {value: newValue}});
 
     expect(input).toHaveValue(newValue);
     expect(cb).toHaveBeenCalledTimes(1);
   });
 
-  test('Collapsed prop should render search icon (without form) until clicked', async () => {
+  test('Collapsed prop should render search icon (without form) until clicked', () => {
     const inputLabel = `inputLabel`;
     const closeLabel = `closeLabel`;
     const openLabel = `openLabel`;
 
-    const {findByLabelText} = render(
+    render(
       <SearchBar
         onSubmit={cb}
         inputLabel={inputLabel}
@@ -89,32 +85,31 @@ describe('Header Search', () => {
       />
     );
 
-    const input = await findByLabelText(inputLabel);
-    const openButton = await findByLabelText(openLabel);
-    const closeButton = await findByLabelText(closeLabel);
+    const openButton = screen.getByLabelText(openLabel);
+    const closeButton = screen.getByLabelText(closeLabel);
 
-    expect(input).not.toBeVisible();
+    expect(screen.queryByRole('combobox', {name: inputLabel})).toEqual(null);
     expect(closeButton).not.toBeVisible();
     expect(openButton).toBeVisible();
 
     fireEvent.click(openButton);
 
-    expect(input).toBeVisible();
+    expect(screen.getByRole('combobox', {name: inputLabel})).toBeVisible();
     expect(closeButton).toBeVisible();
     expect(openButton).not.toBeVisible();
-    expect(input).toHaveFocus();
+    expect(screen.getByRole('combobox', {name: inputLabel})).toHaveFocus();
 
     fireEvent.click(closeButton);
 
-    expect(input).not.toBeVisible();
+    expect(screen.queryByRole('combobox', {name: inputLabel})).toEqual(null);
     expect(closeButton).not.toBeVisible();
     expect(openButton).toBeVisible();
     expect(openButton).toHaveFocus();
   });
 
-  test('Search Bar can accept custom themes', async () => {
+  test('Search Bar can accept custom themes', () => {
     const inputLabelText = `label`;
-    const {findByLabelText} = render(
+    render(
       <SearchBar
         onSubmit={jest.fn()}
         inputLabel={inputLabelText}
@@ -129,7 +124,7 @@ describe('Header Search', () => {
       />
     );
 
-    const input = await findByLabelText(inputLabelText);
+    const input = screen.getByRole('combobox', {name: inputLabelText});
     const style = window.getComputedStyle(input);
 
     expect(style.background).toBe('black');
@@ -145,14 +140,12 @@ describe('Header Search', () => {
     expect(styleFocused.boxShadow).toBe('0 0 0 1px white');
   });
 
-  test('Search Bar can accept default themes', async () => {
+  test('Search Bar can accept default themes', () => {
     const inputLabelText = `label`;
     const theme = SearchTheme.Dark;
-    const {findByLabelText} = render(
-      <SearchBar onSubmit={jest.fn()} inputLabel={inputLabelText} searchTheme={theme} />
-    );
+    render(<SearchBar onSubmit={jest.fn()} inputLabel={inputLabelText} searchTheme={theme} />);
 
-    const input = await findByLabelText(inputLabelText);
+    const input = screen.getByRole('combobox', {name: inputLabelText});
     const style = window.getComputedStyle(input);
 
     expect(style.background).toBe(searchThemes[theme].background);
@@ -163,8 +156,8 @@ describe('Header Search', () => {
   test('Search Bar should spread extra props', async () => {
     const cb = jest.fn();
     const data = 'test';
-    const {container} = render(<SearchBar onSubmit={cb} data-propspread={data} />);
+    render(<SearchBar onSubmit={cb} data-propspread={data} />);
 
-    expect(container.firstChild).toHaveAttribute('data-propspread', data);
+    expect(screen.getByRole('search')).toHaveAttribute('data-propspread', data);
   });
 });
