@@ -8,6 +8,7 @@ const {storyNameFromExport} = require('@storybook/csf');
 // <Canvas><Story name="MyComponent" story={MyComponent} parameters={{storySource: { source: MyComponent.__RAW__ }}}
 // __RAW__ comes from the `whole-source-loader
 module.exports = function rewriteExampleCodeBlock(source) {
+  const hasSpecialBlocks = /<(Meta|ExampleCodeBlock|PropsTable)/.test(source);
   const hasMeta = /import {.*Meta[,\s}]/.test(source);
   const hasCanvas = /import {.*Canvas[,\s}]/.test(source);
   const hasStory = /import {.*Story[,\s}]/.test(source);
@@ -18,7 +19,7 @@ module.exports = function rewriteExampleCodeBlock(source) {
   if (!hasStory) imports.push('Story');
   if (!hasArgsTable) imports.push('ArgsTable');
   return (
-    (imports.length
+    (imports.length && hasSpecialBlocks
       ? `import {${imports.join(',')}} from '@storybook/addon-docs/blocks';\n\n`
       : '') +
     source
