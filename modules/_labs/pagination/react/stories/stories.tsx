@@ -14,7 +14,7 @@ import {
 } from '../lib/Pagination';
 
 export default {
-  title: 'Labs/Pagination/React',
+  title: 'Labs/PaginationStation/React',
   decorators: [withReadme(README)],
 };
 
