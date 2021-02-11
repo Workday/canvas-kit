@@ -39,7 +39,13 @@ export type TabsEvents = CursorEvents & {
      */
     tab: string;
   }): void;
+  /**
+   * This event registers panels with state.panels. Called when a panel is mounted.
+   */
   registerPanel: ListEvents['registerItem'];
+  /**
+   * This event unregisters panels with state.panels. Called when a panel is unmounted.
+   */
   unregisterPanel: ListEvents['unregisterItem'];
 };
 
