@@ -28,7 +28,7 @@ const TabsListInnerContainer = styled('div')({
 const TabList = ({children, ...elemProps}: TabListProps) => {
   const tabsListRef = React.useRef<HTMLDivElement>(null);
   // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
-  const {setIntentTab, intentTab, programmaticFocusRef} = useTab();
+  const {setIntentTab, programmaticFocusRef} = useTab();
 
   const onKeyDown = (event: React.KeyboardEvent) => {
     switch (event.key) {
