@@ -99,7 +99,7 @@ section for details on supporting custom implementations.
 
 #### Pagination with Step Controls
 
-In this example, the component uses "step" controls (`Pagination.StepToPreviousButton` and
+In this example, the component uses step controls (`Pagination.StepToPreviousButton` and
 `Pagination.StepToNextButton`) that allow you to move to the next page and previous pages.
 
 ```tsx
@@ -279,7 +279,7 @@ insight into what's possible.
 
 #### Hoisted Model Pattern
 
-If you want the `Pagination` component to handle its state and actions internally and hook into page
+If you want the `Pagination` component to handle its state and events internally and hook into page
 change events, the basic usage examples above should be sufficient. However, if you need external
 access to the model, you can use the hoisted model pattern. You can create a model outside of the
 component with the `usePaginationModel` hook.
@@ -299,7 +299,7 @@ const totalCount = 128;
 const resultCount = 10;
 const lastPage = getLastPage(resultCount, totalCount);
 
-const ExternalModelPagination = () => {
+const HoistedModelPagination = () => {
   // create the model
   const model = usePaginationModel({
     lastPage: lastPage,
@@ -720,6 +720,11 @@ need static child elements, this component will support it.
 ---
 
 ### PaginationModel
+
+> **Note:** The model and compound component pattern presented here are updated and solidified in v5
+> of canvas-kit. While the general concepts are the same, there will be some breaking changes in v5.
+> If you'd like to learn move about models and compound components, please refer to our
+> [this doc](https://github.com/Workday/canvas-kit/blob/master/COMPOUND_COMPONENTS.md).
 
 The `PaginationModel` is the core of the `Pagination` component. That said, if you're using the
 higher-level context API components and following the basic usage guidelines, you shouldn't need to
