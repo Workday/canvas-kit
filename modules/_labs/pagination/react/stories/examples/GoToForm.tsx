@@ -16,7 +16,6 @@ export const GoToForm = () => {
       onPageChange={pageNumber => console.log(pageNumber)}
       aria-label="Pagination"
       lastPage={lastPage}
-      rangeSize={3}
     >
       <Pagination.Controls>
         <Pagination.JumpToFirstButton aria-label="First" />
