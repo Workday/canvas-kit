@@ -11,6 +11,7 @@ describe('TabPanel', () => {
   it('should have a role of "tabpanel"', () => {
     render(
       <Tabs>
+        <Tabs.Item>First</Tabs.Item>
         <TabPanel>
           <div />
           <div />
@@ -23,6 +24,7 @@ describe('TabPanel', () => {
   it('should render child elements', () => {
     render(
       <Tabs>
+        <Tabs.Item>First</Tabs.Item>
         <TabPanel>
           <div>First Item</div>
           <div />

@@ -32,19 +32,42 @@ export type ListModel = Model<ListState, ListEvents>;
 
 export const listEventMap = createEventMap<ListEvents>()({
   guards: {
+    /**
+     * Should a list item be registered? This will prevent a DOM-based list item from being
+     * registered as an item in the list. Use this only for advanced cases.
+     * */
     shouldRegisterItem: 'registerItem',
+    /**
+     * Should a list item be unregistered? Use this only for advanced cases. Lists can get into an
+     * unspecified state if not managed properly.
+     */
     shouldUnregisterItem: 'unregisterItem',
   },
   callbacks: {
+    /**
+     * Called once an item has been registered to the list. This is useful to do any `setState` or
+     * side effects. This method is called synchronously during a `setState` batch. Calling state
+     * setters will not cause extra renders. Item registration should be called during the
+     * mount/unmount cycles of rendering.
+     */
     onRegisterItem: 'registerItem',
+    /**
+     * Called once an item has been unregistered from the list. This is useful to do any `setState`
+     * or side effects. This method is called synchronously during a `setState` batch. Calling state
+     * setters will not cause extra renders. Item registration should be called during the
+     * mount/unmount cycles of rendering.
+     */
     onUnregisterItem: 'unregisterItem',
   },
 });
 
-export type ListModelConfig = {
+export type BaseListModelConfig = {
   /** IDREF of the list. Children ids can be derived from this id */
   id?: string;
-} & Partial<ToModelConfig<ListState, ListEvents, typeof listEventMap>>;
+};
+
+export type ListModelConfig = BaseListModelConfig &
+  Partial<ToModelConfig<ListState, ListEvents, typeof listEventMap>>;
 
 export const useListModel = (config: ListModelConfig = {}): ListModel => {
   const id = useUniqueId(config.id);

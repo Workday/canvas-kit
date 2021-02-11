@@ -8,7 +8,7 @@ describe('Tabs', () => {
   ['Simple', 'Named Keys'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Testing/React/Labs/Tabs', story);
+        h.stories.load('Labs/Tabs/React', story);
       });
 
       it('should pass axe checks', () => {
@@ -219,7 +219,7 @@ describe('Tabs', () => {
 
   context('given the DisabledTab story is rendered', () => {
     beforeEach(() => {
-      cy.loadStory('Testing/React/Labs/Tabs', 'DisabledTab');
+      cy.loadStory('Labs/Tabs/React', 'DisabledTab');
     });
 
     context('when the first tab is active and focused', () => {

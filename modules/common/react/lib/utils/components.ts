@@ -11,17 +11,34 @@ export type StyledType = {
 /**
  * Generic component props with "as" prop
  * @template P Additional props
- * @template T React component or string element
+ * @template ElementType React component or string element
  */
-export type PropsWithAs<P, T extends React.ElementType> = P &
-  Omit<React.ComponentProps<T>, 'as' | 'state' | keyof P>;
+export type PropsWithAs<P, ElementType extends React.ElementType> = P &
+  Omit<React.ComponentProps<ElementType>, 'as' | 'state' | keyof P> & {
+    /**
+     * Optional ref. If the component represents and element, this will ref will be a reference to
+     * the real DOM element of the component. If `as` is set to an element, it will be that element.
+     * If `as` is a component, the reference will be to that component (or element if the component
+     * uses `React.forwardRef`).
+     */
+    ref?: React.Ref<ElementType>;
+  };
 
 /**
  * Component type that allows for `as` to change the element or component type.
  * Passing `as` will correctly change the allowed interface of the JSX element
  */
 export type Component<T extends React.ElementType, P> = {
-  <TT extends React.ElementType>(props: PropsWithAs<P, TT> & {as: TT}): JSX.Element;
+  <ElementType extends React.ElementType>(
+    props: PropsWithAs<P, ElementType> & {
+      /**
+       * Optional override of the default element used by the component. Any valid tag or Component.
+       * If you provided a Component, this component should forward the ref using `React.forwardRef`
+       * and spread extra props to a root element.
+       */
+      as: ElementType;
+    }
+  ): JSX.Element;
   (props: PropsWithAs<P, T>): JSX.Element;
   displayName?: string;
 };

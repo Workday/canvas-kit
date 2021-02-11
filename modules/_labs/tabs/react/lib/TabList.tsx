@@ -4,20 +4,24 @@ import {spacing, commonColors} from '@workday/canvas-kit-react-core';
 import {
   composeHooks,
   createComponent,
-  mergeProps,
   styled,
   StyledType,
   useModelContext,
 } from '@workday/canvas-kit-react-common';
 
+import {useRovingFocus} from './cursor/hooks';
 import {TabsModelContext} from './Tabs';
-import {useRovingFocus, orientationKeyMap} from './cursor/hooks';
+import {useResetCursorOnBlur} from './hooks';
 import {TabsModel} from './useTabsModel';
 
 export interface TabListProps {
+  /**
+   *
+   */
   children: React.ReactNode;
-  /** Optionally pass a model directly to this component. Default is to implicitly use the same
-   * model as the container component which uses React context. Only use this for advanced use-cases
+  /**
+   * Optionally pass a model directly to this component. Default is to implicitly use the same
+   * model as the container component which uses React context. Only use this for advanced use-cases.
    */
   model?: TabsModel;
 }
@@ -33,32 +37,6 @@ const TabsListInnerContainer = styled('div')<StyledType>({
   display: `flex`,
   margin: `0 ${spacing.m}`,
 });
-
-/**
- * Reset the cursor to the active tab when the tab list looses focus
- */
-const useResetCursorOnBlur = ({state, events}: TabsModel, elemProps = {}) => {
-  const programmaticFocusRef = React.useRef(false);
-  return mergeProps(
-    {
-      onKeyDown(event: React.KeyboardEvent) {
-        // Programmatic focus only on any focus change via keyboard
-        if (Object.keys(orientationKeyMap[state.orientation]).indexOf(event.key) !== -1) {
-          programmaticFocusRef.current = true;
-        }
-      },
-      onFocus() {
-        programmaticFocusRef.current = false;
-      },
-      onBlur() {
-        if (!programmaticFocusRef.current) {
-          events.setCursorId({id: state.activeTab});
-        }
-      },
-    },
-    elemProps
-  );
-};
 
 export const TabList = createComponent('div')({
   displayName: 'Tabs.List',

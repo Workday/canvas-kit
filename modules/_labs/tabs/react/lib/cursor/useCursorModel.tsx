@@ -7,7 +7,14 @@ import {
   assert,
 } from '@workday/canvas-kit-react-common';
 
-import {ListState, ListEvents, listEventMap, useListModel, Item} from '../list/useListModel';
+import {
+  ListState,
+  ListEvents,
+  BaseListModelConfig,
+  listEventMap,
+  useListModel,
+  Item,
+} from '../list/useListModel';
 
 export type Orientation = 'horizontal' | 'vertical';
 
@@ -39,17 +46,32 @@ export type CursorModel = Model<CursorState, CursorEvents>;
 export const cursorEventMap = createEventMap<CursorEvents>()({
   guards: {
     ...listEventMap.guards,
+    /** Should a cursor position be set? Use only in advance use-cases */
     shouldSetCursorId: 'setCursorId',
   },
   callbacks: {
     ...listEventMap.callbacks,
+    /**
+     * Called when a cursor position has been changed. Useful to set state or perform side effects.
+     * This is called during state change batching, so calling state setters will not invoke extra
+     * renders.
+     */
     onSetCursorId: 'setCursorId',
   },
 });
 
-export type CursorModelConfig = {
+export type BaseCursorModelConfig = BaseListModelConfig & {
+  /**
+   * The orientation of a list of items. Values are either `vertical` or `horizontal`. This value will
+   * effect which keys activate progression through a list. For example, `horizontal` will activate with
+   * left and right arrows while `vertical` will activate with up and down arrows.
+   * @default 'vertical'
+   */
   orientation?: Orientation;
-} & Partial<ToModelConfig<CursorState, CursorEvents, typeof cursorEventMap>>;
+};
+
+export type CursorModelConfig = BaseCursorModelConfig &
+  Partial<ToModelConfig<CursorState, CursorEvents, typeof cursorEventMap>>;
 
 const getFirst = (items: Item[]): Item => {
   return items[0];

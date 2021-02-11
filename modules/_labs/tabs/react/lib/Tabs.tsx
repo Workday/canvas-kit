@@ -14,15 +14,17 @@ export interface TabsProps extends TabsModelConfig {
    * The contents of the Tabs. Can be `Tabs` children or any valid elements.
    */
   children: React.ReactNode;
-  /** Optionally pass a model directly to this component. Default is to create a model out of model
-   * config passed to this component
+  /**
+   * Optionally pass a model directly to this component. Default is to create a model out of model
+   * config passed to this component.
+   * @default useTabsModel(config)
    */
   model?: TabsModel;
 }
 
 export const Tabs = createComponent()({
   displayName: 'Tabs',
-  Component: ({children, model, ...config}: TabsProps, ref, Element) => {
+  Component: ({children, model, ...config}: TabsProps) => {
     const value = useDefaultModel(model, config, useTabsModel);
 
     return <TabsModelContext.Provider value={value}>{children}</TabsModelContext.Provider>;

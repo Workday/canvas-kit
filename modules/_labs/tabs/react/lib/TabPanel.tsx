@@ -24,7 +24,15 @@ export interface TabPanelProps {
    * string representation of the the zero-based index of the Tab when it was initialized.
    */
   name?: string;
-  /** Optionally pass a model directly to this component. Default is to implicitly use the same
+  /**
+   * Part of the ARIA specification for tabs. By default, all `tabpanel` elements have a `tabIndex`
+   * of `0` which makes the whole content area receive focus. If you have a focusable item near the
+   * top of the tab panel content area, you may set `tabIndex` to `undefined` to prevent the tab
+   * panel element from receiving focus. Only do this is a child of the tab panel can receive focus.
+   */
+  tabIndex?: number;
+  /**
+   * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
    */
   model?: TabsModel;
