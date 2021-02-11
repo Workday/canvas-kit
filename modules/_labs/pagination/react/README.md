@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
-`Pagination` is a composable component for handling navigation between pages in a range.
+`Pagination` is a compound component for handling navigation between pages in a range.
 
 ## Table of Contents
 
@@ -65,6 +65,12 @@
     - [usePaginationModel Hook](#usepaginationmodel-hook)
       - [Configuration](#configuration)
       - [Usage](#usage-14)
+    - [getLastPage](#getlastpage)
+    - [getRangeMin](#getrangemin)
+    - [getRangeMax](#getrangemax)
+    - [getVisibleResultsMin](#getvisibleresultsmin)
+    - [getVisibleResultsMax](#getvisibleresultsmax)
+    - [PaginationContext](#paginationcontext)
 
 ## Installation
 
@@ -103,7 +109,7 @@ import {
   getLastPage,
   getVisibleResultsMax,
   getVisibleResultsMin,
-} from '../lib/Pagination';
+} from '@workday/canvas-kit-labs-react-pagination';
 
 const PaginationWithStepControls = () => {
   const resultCount = 10;
@@ -158,7 +164,7 @@ import {
   getLastPage,
   getVisibleResultsMax,
   getVisibleResultsMin,
-} from '../lib/Pagination';
+} from '@workday/canvas-kit-labs-react-pagination';
 
 const PaginationWithJumpControls = () => {
   const resultCount = 10;
@@ -215,7 +221,7 @@ import {
   getLastPage,
   getVisibleResultsMax,
   getVisibleResultsMin,
-} from '../lib/Pagination';
+} from '@workday/canvas-kit-labs-react-pagination';
 
 const PaginationWithGoToControls = () => {
   const resultCount = 10;
@@ -279,15 +285,15 @@ access to the model, you can use the hoisted model pattern. You can create a mod
 component with the `usePaginationModel` hook.
 
 For this example, we'll create a `Pagination` component that handles 128 total items with 10 items
-per page. Normally this would involve some math on your part, but don't worry about that, we've got
-you covered with some handy utilities
+per page.
 
 ```tsx
+import * as React from 'react';
 import {
   getLastPage,
   getVisibleResultsMax,
   getVisibleResultsMin,
-} from '../lib/Pagination';
+} from '@workday/canvas-kit-labs-react-pagination';
 
 const totalCount = 128;
 const resultCount = 10;
@@ -296,45 +302,54 @@ const lastPage = getLastPage(resultCount, totalCount);
 const ExternalModelPagination = () => {
   // create the model
   const model = usePaginationModel({
-    lastPage={lastPage}
-    rangeSize={3}
-    onPageChange={pageNumber => console.log(pageNumber)}
+    lastPage: lastPage,
+    rangeSize: 3,
+    onPageChange: pageNumber => console.log(pageNumber),
   });
 
-  // Notice that you only need to pass in `model` and `aria-label` instead of the rest of the props.
   return (
-    <Pagination aria-label="Pagination" model={model}>
-      <Pagination.Controls>
-        <Pagination.JumpToFirstButton aria-label="First" />
-        <Pagination.StepToPreviousButton aria-label="Previous" />
-        <Pagination.PageList>
+    <>
+      {/* Because the model is hoisted, this external component can access it.*/}
+      <button onClick={() => model.events.goTo(10)}>
+        Go from page {model.state.currentPage} to page 10
+      </button>
+      {/* Notice that you only need to pass in `model` and `aria-label` here. */}
+      <Pagination aria-label="Pagination" model={model}>
+        <Pagination.Controls>
+          <Pagination.JumpToFirstButton aria-label="First" />
+          <Pagination.StepToPreviousButton aria-label="Previous" />
+          <Pagination.PageList>
+            {({state}) =>
+              state.range.map(pageNumber => (
+                <Pagination.PageListItem key={pageNumber}>
+                  <Pagination.PageButton
+                    aria-label={`Page ${pageNumber}`}
+                    pageNumber={pageNumber}
+                  />
+                </Pagination.PageListItem>
+              ))
+            }
+          </Pagination.PageList>
+          <Pagination.StepToNextButton aria-label="Next" />
+          <Pagination.JumpToLastButton aria-label="Last" />
+          <Pagination.GoToForm>
+            <Pagination.GoToTextInput />
+            <Pagination.GoToLabel>{() => `of ${totalCount} results`}</Pagination.GoToLabel>
+          </Pagination.GoToForm>
+        </Pagination.Controls>
+        <Pagination.AdditionalDetails shouldHideDetails>
           {({state}) =>
-            state.range.map(pageNumber => (
-              <Pagination.PageListItem key={pageNumber}>
-                <Pagination.PageButton aria-label={`Page ${pageNumber}`} pageNumber={pageNumber} />
-              </Pagination.PageListItem>
-            ))
+            `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
+              state.currentPage,
+              resultCount,
+              totalCount
+            )} of ${totalCount} results`
           }
-        </Pagination.PageList>
-        <Pagination.StepToNextButton aria-label="Next" />
-        <Pagination.JumpToLastButton aria-label="Last" />
-        <Pagination.GoToForm>
-          <Pagination.GoToTextInput />
-          <Pagination.GoToLabel>{() => `of ${totalCount} results`}</Pagination.GoToLabel>
-        </Pagination.GoToForm>
-      </Pagination.Controls>
-      <Pagination.AdditionalDetails shouldHideDetails>
-        {({state}) =>
-          `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
-            state.currentPage,
-            resultCount,
-            totalCount
-          )} of ${totalCount} results`
-        }
-      </Pagination.AdditionalDetails>
-    </Pagination>
+        </Pagination.AdditionalDetails>
+      </Pagination>
+    </>
   );
-}
+};
 ```
 
 ## Components
@@ -349,6 +364,9 @@ context.
 
 #### Usage
 
+`Pagination` can be used with or without providing a model. For basic usage, you only need to
+provide a configuration as in the example below.
+
 ```tsx
 <Pagination
   aria-label="Pagination"
@@ -361,7 +379,30 @@ context.
 </Pagination>
 ```
 
+However, if you'd like to provide a model, you can follow the example below. This is called the
+hoisted model pattern. Note that in this pattern, the only props needed are `model` and
+`aria-label`.
+
+```tsx
+const modelConfig = {
+  lastPage: 100,
+  initialCurrentPage: 6,
+  rangeSize: 3,
+  onPageChange: pageNumber => console.log(pageNumber),
+};
+const model = usePaginationModel(modelConfig);
+
+return (
+  <Pagination aria-label="Pagination" model={model}>
+    {/* child components go here */}
+  </Pagination>
+);
+```
+
 #### Component Props
+
+Given that there are two ways to configure `Pagination`, there are also two props tables. For the
+configuration pattern, follow this table:
 
 | name               | type                           | required?  | default | recommended                              |
 | ------------------ | ------------------------------ | ---------- | ------- | ---------------------------------------- |
@@ -371,6 +412,13 @@ context.
 | rangeSize          | `number`                       | 🚫 `false` | 5       | n/a                                      |
 | firstPage          | `number`                       | 🚫 `false` | 1       | n/a                                      |
 | onPageChange       | `(pageNumber: number) => void` | 🚫 `false` | n/a     | n/a                                      |
+
+And for the hoisted model pattern, follow this table:
+
+| name       | type              | required? | default | recommended                              |
+| ---------- | ----------------- | --------- | ------- | ---------------------------------------- |
+| aria-label | `string`          | ✅ `true` | n/a     | "Pagination" (and translated equivalent) |
+| model      | `PaginationModel` | ✅ `true` | n/a     | n/a                                      |
 
 This component also supports
 [all native HTMLElement props](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes).
@@ -630,7 +678,16 @@ This component also supports
 `Pagination.AdditionalDetails` is a styled `div` container that subscribes to the `Pagination`
 context. This allows it to pass the `Pagination` context to child elements. It is also an
 `aria-live` region that announces the current page update to screen readers. Because of that, it's
-important to always include it in your `Pagination` component.
+important to always\* include it in your `Pagination` component.
+
+_\* The only exception to this rule is when you have multiple `Pagination` components that are
+sharing the same state and rendered on the page. You can then safely remove all but one of the
+`AdditionalDetails` sections. This will prevent a screenreader from announcing updates multiple
+times to a user._
+
+In the case where you would also have multiple `Pagination` components sharing the same state and
+you'd like to keep the `AdditionalDetails` component on multiple, you will need to set
+`shouldAnnounceToScreenReader` to `false` on all but one component to prevent announcement.
 
 #### Usage
 
@@ -652,12 +709,15 @@ need static child elements, this component will support it.
 
 #### Component Props
 
-| name              | type                                                             | required?  | default | recommended |
-| ----------------- | ---------------------------------------------------------------- | ---------- | ------- | ----------- |
-| shouldHideDetails | `boolean`                                                        | 🚫 `false` | n/a     | n/a         |
-| children          | `(model: PaginationModel) => React.ReactNode \| React.ReactNode` | ✅ `true`  | n/a     | n/a         |
+| name                         | type                                                             | required?  | default | recommended |
+| ---------------------------- | ---------------------------------------------------------------- | ---------- | ------- | ----------- |
+| shouldHideDetails            | `boolean`                                                        | 🚫 `false` | false   | n/a         |
+| shouldAnnounceToScreenReader | `boolean`                                                        | 🚫 `false` | true    | n/a         |
+| children                     | `(model: PaginationModel) => React.ReactNode \| React.ReactNode` | ✅ `true`  | n/a     | n/a         |
 
 ## Models, Hooks, & Utils
+
+---
 
 ### PaginationModel
 
@@ -703,32 +763,190 @@ their values:
 - `firstPage` - the page number for the first page
 - `currentPage` - the page number for the current page
 - `lastPage` - the page number for the last page (it can also be used as a total page count)
-- `range` - an array of page numbers included in the visible range
-- `rangeSize` - the size of the visible range
+- `range` - an array of page numbers included in the pagination range
+- `rangeSize` - the size of the pagination range
 
 #### Events
 
-The Model's `events` describe behaviors that act on `state`. Below are the `events` keys and
+The model's `events` describe behaviors that act on `state`. Below are the `events` keys and
 descriptions of their values:
 
 - `first` - sets the current page to the first page
 - `last` - sets the current page to the last page
 - `next` - increments the current page by 1
 - `previous` - decrements the current page by 1
-- `setCurrentPage` - sets the current page to a given page number (no safeguards)
 - `goTo` - sets the current page to a given page number\* (with safeguards)
+- `setCurrentPage` - sets the current page to a given page number (no safeguards)
 
 \* _`goTo` is very similar to `setCurrentPage`, but it has some built-in safeguards. If the page
 number provided is below the first page (e.g: `0`), `currentPage` will be set to the `firstPage`.
 Similarly, if the number provided is larger than the `lastPage`, it will set `currentPage` to the
 `lastPage`._
 
+---
+
 ### usePaginationModel Hook
 
-The `Pagination` model is created by the `usePaginationModel` hook. Normally `Pagination` will
-create it for you under the hood with the props you provide the component. But you can also create
-it
+The `Pagination` model can be created with the `usePaginationModel` hook. Normally `Pagination` will
+create it for you under the hood with the configuration props you provide the component, but you can
+also hoist the model outside of the component depending on your use case.
 
 #### Configuration
 
+The hook configuration is identical to the `Pagination` component configuration. The only value you
+need to provide is `lastPage`, but you can also provide others. The full list is below:
+
+| name                | type                           | required   | default |
+| ------------------- | ------------------------------ | ---------- | ------- |
+| lastPage            | `number`                       | ✅ `true`  | n/a     |
+| firstPage?          | `number`                       | 🚫 `false` | 1       |
+| initialCurrentPage? | `number`                       | 🚫 `false` | n/a     |
+| onPageChange?       | `(pageNumber: number) => void` | 🚫 `false` | n/a     |
+| rangeSize?          | `number`                       | 🚫 `false` | 5       |
+
 #### Usage
+
+Using this hook is fairly straightforward. Create a configuration, pass it to the hook, and it
+returns a model.
+
+```ts
+const paginationConfig = {
+  lastPage: 100,
+  rangeSize: 3,
+  onPageChange: pageNumber => console.log(pageNumber),
+};
+
+const model = usePaginationModel(paginationConfig);
+```
+
+Voilà! Now you can pass the model to `Pagination` like so:
+
+```tsx
+const paginationConfig = {
+  lastPage: 100,
+  rangeSize: 3,
+  onPageChange: pageNumber => console.log(pageNumber),
+};
+
+const model = usePaginationModel(paginationConfig);
+
+return (
+  <Pagination aria-label="Pagination" model={model}>
+    {/* child components go here */}
+  </Pagination>
+);
+```
+
+If you're hoisting the model, it's presumably because you need more access to the model's `state`
+and `events` outside of the component. You could have an external button trigger events to update
+the state, or have another component use the model's state. See the
+[Advanced Usage](#advanced-usage) section for more detailed information.
+
+---
+
+### getLastPage
+
+This function takes the number of results per page and the total count of results and returns the
+last page number. Here's an example:
+
+Given there are 10 results per page, and there are 128 total results, the function will return 13.
+
+```ts
+const resultCount = 10;
+const totalCount = 128;
+const lastPage = getLastPage(resultCount, totalCount); //=> 13
+```
+
+---
+
+### getRangeMin
+
+This function takes the pagination range and returns its minimum value. Here's an example:
+
+Given the pagination range is 1-5, the function will return 1.
+
+```ts
+const range = [1, 2, 3, 4, 5];
+const rangeMin = getRangeMin(range); //=> 1
+```
+
+---
+
+### getRangeMax
+
+This function takes the pagination range and returns its maximum value. Here's an example:
+
+Given the pagination range is 1-5, the function will return 5.
+
+```ts
+const range = [1, 2, 3, 4, 5];
+const rangeMin = getRangeMax(range); //=> 5
+```
+
+---
+
+### getVisibleResultsMin
+
+This function takes the current page, and number of results per page, and returns the minimum value
+for that page. Here's an example:
+
+Given there are 10 results per page, and the current page is 5, the function will return 41.
+
+```ts
+const currentPage = 5;
+const resultCount = 10;
+const pageMin = getVisibleResultsMin(currentPage, resultCount); //=> 41
+```
+
+---
+
+### getVisibleResultsMax
+
+This function takes the current page, number of results per page, and the total number of results,
+and returns the maximum value for that page. Here's an example:
+
+Given there are 10 results per page, the current page is 5, and there are 42 results total, the
+function will return 42.
+
+```ts
+const currentPage = 5;
+const resultCount = 10;
+const totalCount = 42;
+const pageMax = getVisibleResultsMax(currentPage, resultCount, totalCount); //=> 42
+```
+
+---
+
+### PaginationContext
+
+You can also subscribe directly to `PaginationContext`. This is useful if you want to create a new,
+custom subcomponent for your implementation and want it to subscribe to `Pagination`'s context.
+Here's a simple example:
+
+```tsx
+import * as React from 'react';
+import {Pagination, PaginationContext} from '@workday/canvas-kit-labs-react-pagination';
+
+const CustomButton = (props: React.HTMLAttributes<HTMLButtonElement>) => {
+  const model = React.useContext(PaginationContext);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // if onClick is provided, pass the event along
+    props.onClick?.(e);
+    model.events.goTo(10);
+  };
+
+  return (
+    <button onClick={handleClick} {...props}>
+      Go To Page 10
+    </button>
+  );
+};
+
+return (
+  <Pagination aria-label="Pagination" lastPage={20}>
+    <CustomButton aria-label="Page 10" />
+    {/* other child components go here */}
+  </Pagination>
+);
+```

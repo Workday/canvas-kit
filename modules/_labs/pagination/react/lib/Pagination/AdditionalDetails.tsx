@@ -6,11 +6,12 @@ import {accessibleHide} from '@workday/canvas-kit-react-common';
 
 import {PaginationModel} from './types';
 import {Flex, FlexProps} from './common/Flex';
-import {useLiveRegion} from './common/useLiveRegion';
+import {setLiveRegion} from './common/setLiveRegion';
 
 export interface AdditionalDetailsProps extends FlexProps {
   children: (model: PaginationModel) => React.ReactNode | React.ReactNode;
   model: PaginationModel;
+  shouldAnnounceToScreenReader?: boolean;
   shouldHideDetails?: boolean;
 }
 
@@ -23,11 +24,11 @@ const textStyles = css({
 export const AdditionalDetails = ({
   model,
   children,
+  shouldAnnounceToScreenReader = true,
   shouldHideDetails = false,
   ...elemProps
 }: AdditionalDetailsProps) => {
-  const liveRegionProps = useLiveRegion();
-
+  const liveRegionProps = shouldAnnounceToScreenReader ? setLiveRegion() : {};
   const detailStyles = css([textStyles, shouldHideDetails ? accessibleHide : null]);
 
   return (
