@@ -390,7 +390,10 @@ The `DisclosureContent` component is in charge of the content. It uses the `open
 
 The working example can be found here: https://codesandbox.io/s/configurable-disclosure-model-components-nvhtv
 
-These components are not fully compliant yet. They do not support `ref`, `as`, or extra props as HTML attributes. The boilerplate to supporting all this gets very complicated. For this reason, a `createComponent` utility function was created to support all this out of the box. `createComponent` takes a default `React.ElementType` which can be an element string like `div` or `button` or a component like `Button`. It also takes a config object containing the `displayName`, `Component`, and any `subComponents`.
+These components are not fully compliant yet. They do not support `ref`, `as`, or extra props as HTML attributes. The boilerplate to supporting all this gets very complicated. For this reason, a `createComponent` utility function was created to support all this out of the box. `createComponent` takes a default `React.ElementType` which can be an element string like `div` or `button` or a component like `Button`. It also takes a config object containing the following:
+- `displayName`: This will be the name of the component when shown by the React Dev tools. By convention, we make that name be the same as typed in a render function. For example `Disclosure.Target` vs `DisclosureTarget`.
+- `Component`: A [forward ref component function](https://reactjs.org/docs/forwarding-refs.html) with an added `Element` property. `Element` is the value passed to the Component's `as` prop. It will default to the provided element.
+- `subComponents`: For container components. A list of sub components to add to the returned component. For example, a sub component called `DisclosureTarget` will be added to the export of `Disclosure` so that the user can import only `Disclosure` and use `Disclosure.Target`. `subComponents` is needed for Typescript because static properties cannot be added to predefined interfaces. `Disclosure.Target = DisclosureTarget` will caused a type error. This property allows the `createComponent` factory function to infer the final interface of the returned component.
 
 Let's convert the Disclosure example to use the `createComponent` utility function to get this extra functionality:
 
@@ -645,7 +648,7 @@ We'll build a behavior hook for the  `DisclosureTarget` component:
 // useExpandableControls.tsx
 import { DisclosureModel } from "./useDisclosureModel"
 
-export const useExpandablControls = (
+export const useExpandableControls = (
   { state }: DisclosureModel,
   elemProps: {}
 ) => {
@@ -664,7 +667,7 @@ Now we can use the behavior hook in the `DiscloseTarget` component:
 
 // ...
 const model = React.useContext(DisclosureModelContext)
-const props = useExpandablControls(model, elemProps)
+const props = useExpandableControls(model, elemProps)
 
 return (
   <Element
@@ -832,10 +835,10 @@ export const TooltipTarget = createComponent("button")({
   displayName: "Tooltip.Target",
   Component: ({ children, ...elemProps }: TooltipTargetProps, ref, Element) => {
     const model = React.useContext(TooltipModelContext)
-    const targetProps = useTooltipTarget(model, elemProps)
+    const props = useTooltipTarget(model, elemProps)
 
     return (
-      <Element ref={ref} {...targetProps}>
+      <Element ref={ref} {...props}>
         {children}
       </Element>
     )
