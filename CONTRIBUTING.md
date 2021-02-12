@@ -162,6 +162,11 @@ fix: Add missing static class variable to IconButton and Avatar
 7.  Begin editing your new React component in `modules/<MODULE_NAME>/react/index.ts` and CSS module
     in `modules/<MODULE_NAME>/css/index.scss`!
 
+If creating a React module, a new compound component will be created. To find out more about
+Compound Components, refer to [Compound Components](./COMPOUND_COMPONENTS.md). To find out more
+about creating Compound Components, refer to
+[Creating Compound Components](./CREATING_COMPOUND_COMPONENTS.md).
+
 ### Exporting a Module
 
 #### React
