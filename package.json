@@ -59,7 +59,7 @@
     "cssstats": "^3.3.0",
     "cypress": "^4.4.1",
     "cypress-axe": "^0.5.1",
-    "cypress-enter-plugin": "^1.0.0",
+    "cypress-keyboard-plugin": "^1.0.3",
     "cypress-pipe": "^1.7.0",
     "cypress-plugin-tab": "^1.0.5",
     "cypress-storybook": "^0.2.3",
