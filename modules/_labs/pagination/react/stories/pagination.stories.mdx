@@ -21,6 +21,8 @@ _This component is a work-in-progress and currently in pre-release._
 
 `Pagination` is a compound component for handling navigation between pages in a range.
 
+> 📝 If you're upgrading from < v4.5, please refer to the [migration guide](../MIGRATION_GUIDE.md)
+
 ## Table of Contents
 
 - [Canvas Kit React Pagination](#canvas-kit-react-pagination)
@@ -473,12 +475,16 @@ This component supports
 #### Usage
 
 ```tsx
-<Pagination.GoToTextInput />
+<Pagination.GoToTextInput aria-label="Go to page number" />
 ```
 
 #### Component Props
 
-This component supports all `TextInput` props.
+| name       | type     | required? | default | recommended                                     |
+| ---------- | -------- | --------- | ------- | ----------------------------------------------- |
+| aria-label | `string` | ✅ `true` | n/a     | `Go to page number` (and translated equivalent) |
+
+This component also supports all `TextInput` props.
 
 ---
 

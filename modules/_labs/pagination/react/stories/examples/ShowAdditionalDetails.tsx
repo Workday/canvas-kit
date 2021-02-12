@@ -34,7 +34,7 @@ export const ShowAdditionalDetails = () => {
         <Pagination.StepToNextButton aria-label="Next" />
         <Pagination.JumpToLastButton aria-label="Last" />
         <Pagination.GoToForm>
-          <Pagination.GoToTextInput />
+          <Pagination.GoToTextInput aria-label="Go to page number" />
           <Pagination.GoToLabel>{() => `of ${totalCount} results`}</Pagination.GoToLabel>
         </Pagination.GoToForm>
       </Pagination.Controls>

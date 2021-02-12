@@ -90,7 +90,7 @@ const TableRenderer = ({direction = ContentDirection.LTR}) => {
                 {props.shouldShowJumpControls && <Pagination.JumpToLastButton aria-label="Last" />}
                 {props.shouldShowGoToForm && (
                   <Pagination.GoToForm>
-                    <Pagination.GoToTextInput />
+                    <Pagination.GoToTextInput aria-label="Go to page number" />
                     <Pagination.GoToLabel>
                       {() =>
                         direction === ContentDirection.RTL

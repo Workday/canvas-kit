@@ -1,16 +1,14 @@
 import * as React from 'react';
-import {useUniqueId} from '@workday/canvas-kit-react-common';
 
 import {PaginationModel} from '../types';
 
 export interface UseGoToFormConfig {
-  inputId?: string;
   model: PaginationModel;
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const useGoToForm = (
-  {inputId, onSubmit, model}: UseGoToFormConfig = {} as UseGoToFormConfig
+  {onSubmit, model}: UseGoToFormConfig = {} as UseGoToFormConfig
 ) => {
   const [value, setValue] = React.useState<number>();
 
@@ -32,25 +30,17 @@ export const useGoToForm = (
     setValue(formattedValue);
   };
 
-  const uniqueId = useUniqueId(inputId);
-
   const formProps = {
     onSubmit: handleSubmit,
   };
 
   const inputProps = {
-    id: uniqueId,
     value,
     onChange: handleChange,
-  };
-
-  const labelProps = {
-    htmlFor: uniqueId,
   };
 
   return {
     formProps,
     inputProps,
-    labelProps,
   };
 };

@@ -35,7 +35,7 @@ export const RTL = () => {
           <Pagination.StepToNextButton aria-label="Next" />
           <Pagination.JumpToLastButton aria-label="Last" />
           <Pagination.GoToForm>
-            <Pagination.GoToTextInput />
+            <Pagination.GoToTextInput aria-label="Go to page number" />
             <Pagination.GoToLabel>{() => `من 100 صفحات`}</Pagination.GoToLabel>
           </Pagination.GoToForm>
         </Pagination.Controls>

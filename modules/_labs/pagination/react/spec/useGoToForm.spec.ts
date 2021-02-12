@@ -15,25 +15,13 @@ describe('useGoToForm', () => {
     });
 
     it('should provide the correct input props', () => {
-      const inputId = 'input-id';
       const {result} = renderHook<UseGoToFormConfig, ReturnType<typeof useGoToForm>>(() => {
         const paginationModel = usePaginationModel({lastPage: 10});
-        return useGoToForm({model: paginationModel, inputId});
+        return useGoToForm({model: paginationModel});
       });
 
-      expect(result.current.inputProps.id).toBe(inputId);
       expect(result.current.inputProps).toHaveProperty('value');
       expect(result.current.inputProps).toHaveProperty('onChange');
-    });
-
-    it('should provide the correct label props', () => {
-      const inputId = 'input-id';
-      const {result} = renderHook<UseGoToFormConfig, ReturnType<typeof useGoToForm>>(() => {
-        const paginationModel = usePaginationModel({lastPage: 10});
-        return useGoToForm({model: paginationModel, inputId});
-      });
-
-      expect(result.current.labelProps.htmlFor).toBe(inputId);
     });
   });
 });

@@ -318,7 +318,6 @@ describe('Pagination', () => {
         cy.get('form').should('exist');
       });
 
-      // QUESTION: Does the input need an aria-label if the <label> is present?
       context('given the input field', () => {
         it('should be a text field', () => {
           cy.get('form')
@@ -326,10 +325,10 @@ describe('Pagination', () => {
             .should('have.attr', 'type', 'text');
         });
 
-        it('should have an id', () => {
+        it('should have an aria-label', () => {
           cy.get('form')
             .find('input')
-            .should('have.attr', 'id');
+            .should('have.ariaLabel', 'Go to page number');
         });
 
         it('should set size to 1', () => {
@@ -401,20 +400,6 @@ describe('Pagination', () => {
             .find('button')
             .last()
             .should('contain.text', '5');
-        });
-      });
-
-      context('given the label element', () => {
-        it("should set the 'for' attribute to the input id", () => {
-          cy.get('form')
-            .find('input')
-            .then($input => {
-              const inputId = $input.attr('id');
-
-              cy.get('form')
-                .find('label')
-                .should('have.attr', 'for', inputId);
-            });
         });
       });
     });
