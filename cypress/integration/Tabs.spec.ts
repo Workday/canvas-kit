@@ -240,4 +240,80 @@ describe('Tabs', () => {
       });
     });
   });
+
+  context('given the LeftToRight story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Labs/Tabs/React', 'RightToLeft');
+    });
+
+    context('when the first tab is active and focused', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'ראשון'})
+          .click()
+          .focus();
+      });
+
+      context('when the tab key is pressed', () => {
+        beforeEach(() => {
+          cy.tab();
+        });
+
+        it('should move focus to the tabpanel', () => {
+          cy.findByRole('tabpanel', {name: 'ראשון'})
+            .should('have.focus')
+            .and('contain', 'תוכן הראשון');
+        });
+      });
+
+      context('when the left arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{leftarrow}');
+        });
+
+        it('should have tabindex=-1 on the first tab', () => {
+          cy.findByRole('tab', {name: 'ראשון'}).should('have.attr', 'tabindex', '-1');
+        });
+
+        it('should not have tabindex on the second tab', () => {
+          cy.findByRole('tab', {name: 'שְׁנִיָה'}).should('not.have.attr', 'tabindex');
+        });
+
+        it('should focus on the second tab', () => {
+          cy.findByRole('tab', {name: 'שְׁנִיָה'}).should('have.focus');
+        });
+
+        context('when the space key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().type(' ');
+          });
+
+          it('should not have "aria-selected" on the first tab', () => {
+            cy.findByRole('tab', {name: 'ראשון'}).should('not.have.attr', 'aria-selected');
+          });
+
+          it('should have "aria-selected=true" on the second tab', () => {
+            cy.findByRole('tab', {name: 'שְׁנִיָה'}).should('have.attr', 'aria-selected', 'true');
+          });
+        });
+      });
+
+      context('when the right arrow is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{rightarrow}');
+        });
+
+        it('should have tabindex=-1 on the first tab', () => {
+          cy.findByRole('tab', {name: 'ראשון'}).should('have.attr', 'tabindex', '-1');
+        });
+
+        it('should not have tabindex on the last tab', () => {
+          cy.findByRole('tab', {name: 'חמישי'}).should('not.have.attr', 'tabindex');
+        });
+
+        it('should focus on the last tab', () => {
+          cy.findByRole('tab', {name: 'חמישי'}).should('have.focus');
+        });
+      });
+    });
+  });
 });

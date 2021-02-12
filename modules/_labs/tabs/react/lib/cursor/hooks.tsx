@@ -1,5 +1,6 @@
 import React from 'react';
-import {mergeProps} from '@workday/canvas-kit-react-common';
+import {mergeProps, EmotionCanvasTheme, ContentDirection} from '@workday/canvas-kit-react-common';
+import {ThemeContext} from '@emotion/core';
 
 import {CursorModel, getItem} from './useCursorModel';
 
@@ -22,6 +23,22 @@ export const orientationKeyMap = {
   },
 } as const;
 
+const rightToLeftMap = {
+  ArrowLeft: 'ArrowRight',
+  Left: 'Right',
+  ArrowRight: 'ArrowLeft',
+  Right: 'Left',
+  Home: 'End',
+  End: 'Home',
+} as const;
+
+// TODO move to common or update to use a hook from common
+const useIsRTL = () => {
+  const theme = React.useContext(ThemeContext) as EmotionCanvasTheme;
+
+  return (theme && theme.canvas && theme.canvas.direction) === ContentDirection.RTL;
+};
+
 /**
  * Handles the roving focus behavior of a Cursor model. It does not handle the tabIndex. Use
  * `useRovingTabIndex` for that functionality.
@@ -32,6 +49,7 @@ export const useRovingFocus = ({state, events}: CursorModel, elemProps = {}) => 
   // `state.cursorId` or `state.items` would result in focus changes. That is definitely not what
   // we want.
   const focusRef = React.useRef(false);
+  const isRTL = useIsRTL();
 
   React.useEffect(() => {
     if (focusRef.current) {
@@ -47,7 +65,7 @@ export const useRovingFocus = ({state, events}: CursorModel, elemProps = {}) => 
       onKeyDown(event: React.KeyboardEvent) {
         Object.keys(orientationKeyMap[state.orientation]).forEach(
           (key: keyof typeof orientationKeyMap[typeof state.orientation]) => {
-            if (event.key === key) {
+            if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
               const event = orientationKeyMap[state.orientation][key];
               focusRef.current = true;
               events[event]?.();

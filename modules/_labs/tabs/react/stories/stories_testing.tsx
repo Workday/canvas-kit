@@ -8,7 +8,9 @@ import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 import {spacing} from '@workday/canvas-kit-react-core';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react-tabs';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
+
+import {Simple} from './examples/Simple';
+import {RightToLeft} from './examples/RightToLeft';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -53,24 +55,17 @@ export const TabStates = withSnapshotsEnabled(() => {
 });
 
 export const Bidirectionality = withSnapshotsEnabled(() => {
-  const tabs = (
-    <Tabs>
-      <Tabs.List>
-        <Tabs.Item>First Tab</Tabs.Item>
-        <Tabs.Item>Second Tab</Tabs.Item>
-        <Tabs.Item>Third Tab</Tabs.Item>
-      </Tabs.List>
-      <Tabs.Panel css={{marginTop: spacing.m}}>First Tab Content</Tabs.Panel>
-    </Tabs>
-  );
-
   return (
     <>
       <h3>Left-to-right</h3>
-      <div>{tabs}</div>
+      <div>
+        <Simple />
+      </div>
       <br />
       <h3>Right-to-left</h3>
-      <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>{tabs}</CanvasProvider>
+      <div>
+        <RightToLeft />
+      </div>
     </>
   );
 });
