@@ -40,6 +40,7 @@ export const TabStates = withSnapshotsEnabled(() => {
           <Tabs.Item name="second">Active</Tabs.Item>
           <Tabs.Item className="focus">Focus</Tabs.Item>
           <Tabs.Item className="hover">Hover</Tabs.Item>
+          <Tabs.Item disabled>Disabled</Tabs.Item>
         </Tabs.List>
         <div css={{marginTop: spacing.m}}>
           <Tabs.Panel name="second">Visual states of the Tab items</Tabs.Panel>

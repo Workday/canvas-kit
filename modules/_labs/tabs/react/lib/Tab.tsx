@@ -84,6 +84,13 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
       outline: `none`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
     },
+    '&:disabled': {
+      color: colors.licorice100,
+      '&:hover': {
+        cursor: 'auto',
+        backgroundColor: `transparent`,
+      },
+    },
   },
   ({isSelected}) => {
     if (isSelected) {
