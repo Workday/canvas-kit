@@ -13,9 +13,9 @@ export interface GoToProps extends UseGoToFormConfig {
 const GoToContext = React.createContext({} as ReturnType<typeof useGoToForm>);
 
 export const GoTo = (props: GoToProps) => {
-  const {children, inputId, model} = props;
+  const {children, model} = props;
 
-  const goToContext = useGoToForm({model, inputId});
+  const goToContext = useGoToForm({model});
   return <GoToContext.Provider value={goToContext}>{children}</GoToContext.Provider>;
 };
 
@@ -32,7 +32,5 @@ GoTo.TextInput = (props: GoToTextInputProps) => {
 };
 
 GoTo.Label = (props: GoToLabelProps) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {labelProps} = React.useContext(GoToContext);
-  return <GoToLabel {...labelProps} {...props} />;
+  return <GoToLabel {...props} {...props} />;
 };
