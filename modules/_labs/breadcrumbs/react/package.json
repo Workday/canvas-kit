@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-react-breadcrumbs",
-  "version": "4.4.2",
+  "version": "4.5.0",
   "description": "Breadcrumbs component for navigation through different levels of some structure. Adjustable to container width.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -39,16 +39,16 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
-    "@workday/canvas-kit-react-button": "^4.4.2",
-    "@workday/canvas-kit-react-common": "^4.4.2",
-    "@workday/canvas-kit-react-core": "^4.4.2",
-    "@workday/canvas-kit-react-icon": "^4.4.2",
-    "@workday/canvas-kit-react-popup": "^4.4.2",
-    "@workday/canvas-kit-react-tooltip": "^4.4.2",
+    "@workday/canvas-kit-react-button": "^4.5.0",
+    "@workday/canvas-kit-react-common": "^4.5.0",
+    "@workday/canvas-kit-react-core": "^4.5.0",
+    "@workday/canvas-kit-react-icon": "^4.5.0",
+    "@workday/canvas-kit-react-popup": "^4.5.0",
+    "@workday/canvas-kit-react-tooltip": "^4.5.0",
     "@workday/canvas-system-icons-web": "1.0.41",
     "@workday/design-assets-types": "^0.2.4"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-core": "^4.4.2"
+    "@workday/canvas-kit-labs-react-core": "^4.5.0"
   }
 }
