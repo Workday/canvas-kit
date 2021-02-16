@@ -7,7 +7,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Components
 - fix(tabs): Remove event.preventDefault from TabList [#969](https://github.com/Workday/canvas-kit/pull/969) [@NicholasBoll](https://github.com/NicholasBoll)
-- feat(Pagination): Update Pagination component [#954](https://github.com/Workday/canvas-kit/pull/954) [@alanbsmith](https://github.com/alanbsmith)
+- feat(Pagination): Update Pagination component (see notes) [#954](https://github.com/Workday/canvas-kit/pull/954)  [@alanbsmith](https://github.com/alanbsmith)
 - feat: Add closeButtonAriaLabel to Modal Component [#959](https://github.com/Workday/canvas-kit/pull/959) [@UltraTempest](https://github.com/UltraTempest)
 - feat(skeleton): Add option for different skeleton colors [#939](https://github.com/Workday/canvas-kit/pull/939) [@stefanuros](https://github.com/stefanuros)
 - feat(badge): Add custom limit to CountBadge [#935](https://github.com/Workday/canvas-kit/pull/935) [@alanbsmith](https://github.com/alanbsmith)
@@ -30,6 +30,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Standardize README badges for Labs components [#928](https://github.com/Workday/canvas-kit/pull/928) [@jamesfan](https://github.com/jamesfan)
 
 ### Notes
+
+- Update Pagination component  [#954](https://github.com/Workday/canvas-kit/pull/954)
+  - This is a breaking change in this Labs component. Please refer to the [migration guide](https://github.com/Workday/canvas-kit/blob/master/modules/_labs/pagination/react/MIGRATION_GUIDE.md) for more information on how to upgrade.
 
 ## 4.4.2 (2020-12-09)
 
