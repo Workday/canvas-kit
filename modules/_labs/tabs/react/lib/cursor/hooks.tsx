@@ -1,5 +1,10 @@
 import React from 'react';
-import {mergeProps, EmotionCanvasTheme, ContentDirection} from '@workday/canvas-kit-react-common';
+import {
+  mergeProps,
+  EmotionCanvasTheme,
+  ContentDirection,
+  useIsRTL,
+} from '@workday/canvas-kit-react-common';
 import {ThemeContext} from '@emotion/core';
 
 import {CursorModel, getItem} from './useCursorModel';
@@ -31,13 +36,6 @@ const rightToLeftMap = {
   Home: 'End',
   End: 'Home',
 } as const;
-
-// TODO move to common or update to use a hook from common
-const useIsRTL = () => {
-  const theme = React.useContext(ThemeContext) as EmotionCanvasTheme;
-
-  return (theme && theme.canvas && theme.canvas.direction) === ContentDirection.RTL;
-};
 
 /**
  * Handles the roving focus behavior of a Cursor model. It does not handle the tabIndex. Use
