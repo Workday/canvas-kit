@@ -22,10 +22,10 @@ describe('Tabs', () => {
 
   // intent tab is covered by visual and Cypress tests
 
-  it('should call "onActivateTab" when tab is activated', () => {
+  it('should call "onActivate" when tab is activated', () => {
     const cb = jest.fn();
     render(
-      <Tabs onActivateTab={cb}>
+      <Tabs onActivate={cb}>
         <Tabs.List>
           <Tabs.Item name="first">First Tab</Tabs.Item>
           <Tabs.Item name="second">Second Tab</Tabs.Item>

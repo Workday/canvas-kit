@@ -6,7 +6,7 @@ import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react-tabs';
 
 export const HoistedModel = () => {
   const model = useTabsModel({
-    onActivateTab({data, state}) {
+    onActivate({data, state}) {
       console.log('Activated Tab', data, state);
     },
   });

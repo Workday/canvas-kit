@@ -46,7 +46,7 @@ In this example, a few tab items and tab panels are set up without any named key
 #### Named Keys
 
 `Tabs.Item` and `Tabs.Panel` both take an optional `name` attribute that are used for the
-`onActivateTab` callback. This example is the same, but with named keys for the tabs and panels.
+`onActivate` callback. This example is the same, but with named keys for the tabs and panels.
 
 <ExampleCodeBlock code={NamedKeys} />
 
@@ -109,7 +109,7 @@ is shared using React context. It does not represent a real element.
 
 ```tsx
 // configuration
-<Tabs onActivateTab={({ data }) => console.log('Activate tab', data.tab)}>
+<Tabs onActivate={({ data }) => console.log('Activate tab', data.tab)}>
   {/* sub components go here */ }
 </Tabs>
 

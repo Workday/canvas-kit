@@ -24,7 +24,7 @@ export const SinglePanel = () => {
     <Tabs
       initialTab={currentTab}
       shouldActivateTab={({data, state}) => true}
-      onActivateTab={({data}) => setCurrentTab(data.tab)}
+      onActivate={({data}) => setCurrentTab(data.tab)}
     >
       <Tabs.List>
         <Tabs.Item name="first" aria-controls="mytab-panel">
