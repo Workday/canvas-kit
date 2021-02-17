@@ -13,19 +13,15 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 - [Patterns](#patterns)
   - [Event Handlers](#event-handlers-1)
   - [Grow Interface](#grow-interface)
-  - [Static Class Variables](#static-class-variables)
   - [Input Provider](#input-provider)
   - [Prop Spread Behavior](#prop-spread-behavior)
   - [Controlled Components](#controlled-components)
-  - [Ref Usage](#ref-usage)
   - [Accessibility](#accessibility)
   - [Child Mapping](#child-mapping)
   - [Logic Flow](#logic-flow)
   - [Server Side Rendering](#server-side-rendering)
 - [Code Style](#code-style)
   - [Default Props](#default-props)
-  - [Class Function Binding](#class-function-binding)
-  - [Arrow and Bound Functions in Render](#arrow-and-bound-functions-in-render)
   - [Element Choice](#element-choice)
   - [Styled Components](#styled-components)
   - [Exports](#exports)
@@ -83,21 +79,46 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 
 #### Enums
 
+Use disjoint string unions instead of enums. Enums have issues with overloading or extending. They
+are also more difficult to use and create a different experience from JavaScript. These union types
+also have a better autocomplete experience.
+
+```tsx
+interface ButtonProps {
+  type: 'primary' | 'secondary';
+  size: 'small' | 'medium' | 'large';
+}
+
+// use
+<Button type="primary" size="medium" />;
+```
+
+JavaScript objects can be used as enums without the downsides:
+
+```tsx
+const ButtonType = {
+  Primary: 'primary',
+  Secondary: 'secondary'
+} as const // as const locks object values as literal
+
+interface ButtonProps {
+  type: typeof ButtonType[keyof typeof ButtonType] // returns 'primary' | 'secondary'
+}
+
+Button.Type = ButtonType
+
+// use
+<Button type={Button.Type.Primary} />
+<Button type="primary" />
+```
+
+If objects are desired, the keys follow these rules:
+
 - Singular
 - PascalCase
 - Include component name unless it's a generic enum shared across components. Since we export our
   enums, this prevents naming clashes
-- Exclude component name in static class variables (`Button.Type` vs. `Button.ButtonType`):
-
-  ```tsx
-  class Button extends React.Component<ButtonProps> {
-    public static Type = ButtonType;
-    public static Size = ButtonSize;
-    ...
-  }
-  // Results in
-  Button.Type.Primary
-  ```
+- Exclude component name in static variables (`Button.Type` vs. `Button.ButtonType`):
 
 ## Patterns
 
@@ -114,23 +135,6 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
   `export interface MyComponentProps extends GrowthBehavior`)
 - Then use the `grow` boolean prop in your styles to achieve the desired effect (e.g.
   `width: grow ? '100%' : undefined`)
-
-#### Static Class Variables
-
-- Expose enums you expect to be commonly used on the class to reduce imports.
-
-  ```tsx
-  class Button extends React.Component<ButtonProps> {
-    public static Type = ButtonType;
-    public static Size = ButtonSize;
-    ...
-  }
-  // Results in
-  <Button type={Button.Type.Primary} />
-  ```
-
-- Ensure you leave out the component name for the static variable so it's not repeated (e.g.
-  `Button.Type.Primary`, not `Button.ButtonType.Primary`)
 
 #### Input Provider
 
@@ -158,20 +162,19 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 - Intentionally destructure your props so that every prop is assigned. This allows you to use spread
   the way it was intended.
 
-```tsx
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  type: ButtonType,
-  size: ButtonSize,
-  icon: CanvasIcon
-}
+  ```tsx
+  interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    type: ButtonType,
+    size: ButtonSize,
+    icon: CanvasIcon
+  }
 
-// ...somewhere in your button render()
-const { type, size, icon, ...elemProps } = this.props
-<ButtonContainer type={type} size={size} icon={icon} {...elemProps} />
-```
+  // ...somewhere in your button render()
+  const { type, size, icon, ...elemProps } = this.props
+  <ButtonContainer type={type} size={size} icon={icon} {...elemProps} />
+  ```
 
-- Only spread props on one element/component (or create a specific prop to spread (e.g.
-  `inputProps`))
+- Only spread props on one element/component
 
 #### Controlled Components
 
@@ -182,14 +185,6 @@ const { type, size, icon, ...elemProps } = this.props
   - Always stick with the default `value` and `onChange` if you can
   - Deviate where it makes sense and/or is required (e.g. `checked` and `onChange` for checkboxes).
 
-#### Ref Usage
-
-- When a consumer
-  [needs a reference to an underlying element](https://reactjs.org/docs/refs-and-the-dom.html#when-to-use-refs)
-  (to manage focus, check DOM ancestors, etc.), use emotion components' `ref` prop.
-- When providing a ref prop, indicate what element it's tied to (generally by using the type of
-  element if it's descriptive enough for your component). E.g. `inputRef`
-
 #### Accessibility
 
 - Use aria labels where required
@@ -198,7 +193,7 @@ const { type, size, icon, ...elemProps } = this.props
   keys)
 - When in doubt, ask an expert!
 
-#### Child Mapping
+#### Children
 
 - We often add or augment props to React children within our components. Use `React.Children.map`
   along with `React.cloneElement()`
@@ -280,23 +275,6 @@ const someInterface {
 const {checked = false, disabled = false, value} = this.props;
 ```
 
-#### Class Function Binding
-
-- It used to be common to bind class functions in the constructor (i.e.
-  `this.onChange = this.onChange.bind(this)`).
-- We recommend using an arrow function for your class function to avoid this
-- Since we avoid state where possible, doing so often enables you to remove the constructor
-
-#### Arrow and Bound Functions in Render
-
-- A `.bind()` call or arrow function in a JSX prop will create a brand new function on every single
-  render.
-- This is bad for performance, as it may cause unnecessary re-renders, so avoid it where possible.
-- This is available as an
-  [ESLint rule (react/jsx-no-bind)](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md).
-  However, we are still using these in several places (particularly stories) for better code
-  readability so we decided to disable it for now.
-
 #### Element Choice
 
 - Use the correct native element wherever possible. This enables us to get as much behavior for free
@@ -317,18 +295,12 @@ const {checked = false, disabled = false, value} = this.props;
 
 #### Exports
 
-- Export the component most closely tied with the name of the package as the default
-- Also export the above component as a named export
+- [Avoid default exports](https://basarat.gitbook.io/typescript/main-1/defaultisbad)
 - Export everything else as a named export (`export * from ...`). Consider the naming of the things
   you're exporting (interfaces, enums, etc.) so you don't encounter any clashes.
 
 ```ts
 // inside MyComponent/index.ts
-import MyComponent from './lib/MyComponent';
-import AnotherComponent from './lib/AnotherComponent';
-
-export default MyComponent;
-export {MyComponent, AnotherComponent};
 export * from './lib/MyComponent';
 export * from './lib/AnotherComponent';
 ```
@@ -356,7 +328,7 @@ We use [JSDoc](https://devdocs.io/jsdoc/) standards for our prop type definition
 
 The base pattern for prop descriptions is: `The <property> of the <component>.` For example:
 
-```
+```js
 /**
   * The value of the Checkbox.
   */
@@ -367,7 +339,7 @@ Be as specific as possible. For example, suppose there is a `label` prop for `Ch
 specifies the text of the label. Rather than describe `label` as `The label of the Checkbox`, the
 following is preferable:
 
-```
+```js
 /**
   * The text of the Checkbox label.
   */
@@ -376,17 +348,17 @@ label?: string;
 
 Feel free to provide additional detail in the description:
 
-```
+```js
 /**
-  * The value of the Slider. Goes to 11.
-  */
+ * The value of the Slider. Goes to 11.
+ */
 value: number;
 ```
 
 Be sure to specify a proper `@default` for enum props. Listing the named values which are accepted
 by the enum prop is encouraged:
 
-```
+```js
 /**
   * The side from which the SidePanel opens. Accepts `Left` or `Right`.
   * @default SidePanelOpenDirection.Left
@@ -397,7 +369,7 @@ openDirection?: SidePanelOpenDirection;
 Use a modified pattern for function props: `The function called when <something happens>.` For
 example:
 
-```
+```js
 /**
   * The function called when the Checkbox state changes.
   */
@@ -407,7 +379,7 @@ onChange?: (e: React.ChangeEvent) => void;
 The pattern for booleans is also different: `If true, <do something>.` For standard 2-state
 booleans, set `@default false` in the description. For example:
 
-```
+```js
 /**
   * If true, set the Checkbox to the disabled state.
   * @default false
@@ -417,7 +389,7 @@ disabled?: boolean;
 
 Provide additional detail for 2-state booleans where the `false` outcome cannot be inferred:
 
-```
+```js
 /**
   * If true, center the Header navigation. If false, right-align the Header navigation.
   * @default false
@@ -430,7 +402,7 @@ For 3-state booleans, you will need to describe all 3 cases:
 
 We also recommend the following pattern for errors:
 
-```
+```js
 /**
   * The type of error associated with the Checkbox (if applicable).
   */
@@ -442,7 +414,7 @@ than following the patterns to the letter, adjust them to provide a better descr
 For example, rather than ambiguously describing `id` as `The id of the Checkbox`, provide a more
 explicit description:
 
-```
+```js
 /**
   * The HTML `id` of the underlying checkbox input element.
   */

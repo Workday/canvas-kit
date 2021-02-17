@@ -275,6 +275,28 @@ There are also several functions to help with generating media queries:
 
 #### `only: (key: BreakpointFnParam) => string`
 
-> Returns a media query reflecting the size swithin your specified breakpoint. Works with the enum
-> or the string (e.g. 'm'). Example: theme.breakpointsonly(BreakpointKey.m) => '@media
+> Returns a media query reflecting the size within your specified breakpoint. Works with the enum or
+> the string (e.g. 'm'). Example: theme.breakpointsonly(BreakpointKey.m) => '@media
 > (min-width:960px) and (max-width:1279.5px)'
+
+## useIsRTL Hook
+
+`useIsRTL` is a small hook to support right-to-left logic. If a theme exists in React context, the
+component will use it automatically, or you can explicitly provide a theme object.
+
+### Usage
+
+```ts
+// this will automatically pull the theme from context if it exists.
+const isRTL = useIsRTL();
+```
+
+```ts
+// or you can explicitly provide a (partial) theme object.
+const RTLTheme = {
+  canvas: {
+    direction: ContentDirection.RTL,
+  },
+};
+const isRTL = useIsRTL(RTLTheme);
+```
