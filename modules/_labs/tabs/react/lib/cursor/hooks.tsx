@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  mergeProps,
-  EmotionCanvasTheme,
-  ContentDirection,
-  useIsRTL,
-} from '@workday/canvas-kit-react-common';
-import {ThemeContext} from '@emotion/core';
+import {mergeProps, useIsRTL} from '@workday/canvas-kit-react-common';
 
 import {CursorModel, getItem} from './useCursorModel';
 
