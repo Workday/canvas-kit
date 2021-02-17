@@ -23,7 +23,7 @@ export const SinglePanel = () => {
   return (
     <Tabs
       initialTab={currentTab}
-      shouldActivateTab={({data, state}) => true}
+      shouldActivate={({data, state}) => true}
       onActivate={({data}) => setCurrentTab(data.tab)}
     >
       <Tabs.List>
