@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-skeleton",
-  "version": "4.4.2",
+  "version": "4.5.0",
   "description": "A component that renders a skeleton.",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -50,15 +50,15 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
-    "@workday/canvas-kit-react-common": "^4.4.2",
-    "@workday/canvas-kit-react-core": "^4.4.2"
+    "@workday/canvas-kit-react-common": "^4.5.0",
+    "@workday/canvas-kit-react-core": "^4.5.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react-avatar": "^4.4.2",
-    "@workday/canvas-kit-react-button": "^4.4.2",
-    "@workday/canvas-kit-react-card": "^4.4.2",
-    "@workday/canvas-kit-react-checkbox": "^4.4.2",
-    "@workday/canvas-kit-react-form-field": "^4.4.2",
-    "@workday/canvas-kit-react-text-input": "^4.4.2"
+    "@workday/canvas-kit-react-avatar": "^4.5.0",
+    "@workday/canvas-kit-react-button": "^4.5.0",
+    "@workday/canvas-kit-react-card": "^4.5.0",
+    "@workday/canvas-kit-react-checkbox": "^4.5.0",
+    "@workday/canvas-kit-react-form-field": "^4.5.0",
+    "@workday/canvas-kit-react-text-input": "^4.5.0"
   }
 }
