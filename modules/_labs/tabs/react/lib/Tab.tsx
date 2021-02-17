@@ -127,7 +127,7 @@ export const Tab = createComponent('button')({
     const tabName = useRegisterItem({state, events}, localRef, name);
 
     const onSelect = () => {
-      events.activateTab({tab: tabName});
+      events.activate({tab: tabName});
     };
 
     const isSelected = !!tabName && state.activeTab === tabName;

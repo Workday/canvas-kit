@@ -32,7 +32,7 @@ export type TabsEvents = CursorEvents & {
   /**
    * This event will set the `activeTab` in the state. Called when a user activates a tab
    */
-  activateTab(data: {
+  activate(data: {
     /**
      * The name of the tab provided to the `Tabs.Item` component. If no name is provided, it will
      * be a string of the index position
@@ -58,7 +58,7 @@ export const tabEventMap = createEventMap<TabsEvents>()({
      * Should the tab activate? Can prevent the tab from activating. Use this only for advanced
      * use-cases.
      */
-    shouldActivateTab: 'activateTab',
+    shouldActivate: 'activate',
   },
   callbacks: {
     ...cursorEventMap.callbacks,
@@ -67,7 +67,7 @@ export const tabEventMap = createEventMap<TabsEvents>()({
      * passed to the `Tabs.Item` component. If no name was passed, it will be the index of the tab
      * as a string.
      */
-    onActivateTab: 'activateTab',
+    onActivate: 'activate',
   },
 });
 
@@ -121,7 +121,7 @@ export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
 
   const events = useEventMap(tabEventMap, state, config, {
     ...menu.events,
-    activateTab(data) {
+    activate(data) {
       setActiveTab(data.tab);
       events.goTo({id: data.tab});
     },
