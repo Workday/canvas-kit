@@ -1,7 +1,7 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
+import {ContentDirection} from '@workday/canvas-kit-react-common';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
 
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
@@ -27,103 +27,94 @@ const TableRenderer = ({direction = ContentDirection.LTR}) => {
   const lastPage = getLastPage(resultCount, totalCount);
 
   return (
-    <CanvasProvider theme={{canvas: {direction}}}>
-      <StaticStates>
-        <ComponentStatesTable
-          rowProps={[
-            {label: 'Step Controls', props: {}},
-            {label: 'Jump Controls', props: {shouldShowJumpControls: true}},
-            {label: 'GoTo Form', props: {shouldShowJumpControls: true, shouldShowGoToForm: true}},
-            {
-              label: 'Additional Details',
-              props: {
-                shouldShowJumpControls: true,
-                shouldShowGoToForm: true,
-                shouldShowAddtionalDetails: true,
-              },
+    <StaticStates theme={{canvas: {direction}}} style={{display: 'inline-block'}}>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Step Controls', props: {}},
+          {label: 'Jump Controls', props: {shouldShowJumpControls: true}},
+          {label: 'GoTo Form', props: {shouldShowJumpControls: true, shouldShowGoToForm: true}},
+          {
+            label: 'Additional Details',
+            props: {
+              shouldShowJumpControls: true,
+              shouldShowGoToForm: true,
+              shouldShowAddtionalDetails: true,
             },
-          ]}
-          columnProps={[
-            {
-              label: 'First Page is Active',
-              props: {},
+          },
+        ]}
+        columnProps={[
+          {
+            label: 'First Page is Active',
+            props: {},
+          },
+          {
+            label: 'Middle Page is Active',
+            props: {
+              initialCurrentPage: 5,
             },
-            {
-              label: 'Middle Page is Active',
-              props: {
-                initialCurrentPage: 5,
-              },
+          },
+          {
+            label: 'Last Page is Active',
+            props: {
+              initialCurrentPage: 10,
             },
-            {
-              label: 'Last Page is Active',
-              props: {
-                initialCurrentPage: 10,
-              },
-            },
-          ]}
-        >
-          {props => (
-            <Pagination
-              aria-label="Pagination"
-              lastPage={lastPage}
-              rangeSize={3}
-              initialCurrentPage={props.initialCurrentPage}
-            >
-              <Pagination.Controls>
-                {props.shouldShowJumpControls && (
-                  <Pagination.JumpToFirstButton aria-label="First" />
-                )}
-                <Pagination.StepToPreviousButton aria-label="Previous" />
-                <Pagination.PageList>
-                  {({state}) =>
-                    state.range.map(pageNumber => (
-                      <Pagination.PageListItem key={pageNumber}>
-                        <Pagination.PageButton
-                          aria-label={`Page ${pageNumber}`}
-                          pageNumber={pageNumber}
-                        />
-                      </Pagination.PageListItem>
-                    ))
-                  }
-                </Pagination.PageList>
-                <Pagination.StepToNextButton aria-label="Next" />
-                {props.shouldShowJumpControls && <Pagination.JumpToLastButton aria-label="Last" />}
-                {props.shouldShowGoToForm && (
-                  <Pagination.GoToForm>
-                    <Pagination.GoToTextInput aria-label="Go to page number" />
-                    <Pagination.GoToLabel>
-                      {() =>
-                        direction === ContentDirection.RTL
-                          ? `من 100 صفحات`
-                          : `of ${totalCount} pages`
-                      }
-                    </Pagination.GoToLabel>
-                  </Pagination.GoToForm>
-                )}
-              </Pagination.Controls>
-              <Pagination.AdditionalDetails shouldHideDetails={!props.shouldShowAddtionalDetails}>
+          },
+        ]}
+      >
+        {props => (
+          <Pagination
+            aria-label="Pagination"
+            lastPage={lastPage}
+            rangeSize={3}
+            initialCurrentPage={props.initialCurrentPage}
+          >
+            <Pagination.Controls>
+              {props.shouldShowJumpControls && <Pagination.JumpToFirstButton aria-label="First" />}
+              <Pagination.StepToPreviousButton aria-label="Previous" />
+              <Pagination.PageList>
                 {({state}) =>
-                  direction === ContentDirection.RTL
-                    ? `${getVisibleResultsMax(
-                        state.currentPage,
-                        resultCount,
-                        totalCount
-                      )}-${getVisibleResultsMin(state.currentPage, resultCount)} من 100 صفحات`
-                    : `${getVisibleResultsMin(
-                        state.currentPage,
-                        resultCount
-                      )}-${getVisibleResultsMax(
-                        state.currentPage,
-                        resultCount,
-                        totalCount
-                      )} of ${totalCount} pages`
+                  state.range.map(pageNumber => (
+                    <Pagination.PageListItem key={pageNumber}>
+                      <Pagination.PageButton
+                        aria-label={`Page ${pageNumber}`}
+                        pageNumber={pageNumber}
+                      />
+                    </Pagination.PageListItem>
+                  ))
                 }
-              </Pagination.AdditionalDetails>
-            </Pagination>
-          )}
-        </ComponentStatesTable>
-      </StaticStates>
-    </CanvasProvider>
+              </Pagination.PageList>
+              <Pagination.StepToNextButton aria-label="Next" />
+              {props.shouldShowJumpControls && <Pagination.JumpToLastButton aria-label="Last" />}
+              {props.shouldShowGoToForm && (
+                <Pagination.GoToForm>
+                  <Pagination.GoToTextInput aria-label="Go to page number" />
+                  <Pagination.GoToLabel>
+                    {() =>
+                      direction === ContentDirection.RTL ? `من 100 صفحات` : `of ${totalCount} pages`
+                    }
+                  </Pagination.GoToLabel>
+                </Pagination.GoToForm>
+              )}
+            </Pagination.Controls>
+            <Pagination.AdditionalDetails shouldHideDetails={!props.shouldShowAddtionalDetails}>
+              {({state}) =>
+                direction === ContentDirection.RTL
+                  ? `${getVisibleResultsMax(
+                      state.currentPage,
+                      resultCount,
+                      totalCount
+                    )}-${getVisibleResultsMin(state.currentPage, resultCount)} من 100 صفحات`
+                  : `${getVisibleResultsMin(state.currentPage, resultCount)}-${getVisibleResultsMax(
+                      state.currentPage,
+                      resultCount,
+                      totalCount
+                    )} of ${totalCount} pages`
+              }
+            </Pagination.AdditionalDetails>
+          </Pagination>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
   );
 };
 
