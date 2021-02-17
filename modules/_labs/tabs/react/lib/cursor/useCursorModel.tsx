@@ -27,8 +27,8 @@ export type CursorState = ListState & {
 };
 
 export type CursorEvents = ListEvents & {
-  /** Directly sets the cursor to the list item by its identifier. Bypasses any checks  */
-  setCursorId(data: {id: string}): void;
+  /** Directly sets the cursor to the list item by its identifier.  */
+  goTo(data: {id: string}): void;
   /** Set the cursor to the "next" item in the list. If the end of the list is detected, it will
    * wrap to the first item */
   next(): void;
@@ -47,7 +47,7 @@ export const cursorEventMap = createEventMap<CursorEvents>()({
   guards: {
     ...listEventMap.guards,
     /** Should a cursor position be set? Use only in advance use-cases */
-    shouldSetCursorId: 'setCursorId',
+    shouldGoTo: 'goTo',
   },
   callbacks: {
     ...listEventMap.callbacks,
@@ -56,7 +56,7 @@ export const cursorEventMap = createEventMap<CursorEvents>()({
      * This is called during state change batching, so calling state setters will not invoke extra
      * renders.
      */
-    onSetCursorId: 'setCursorId',
+    onGoTo: 'goTo',
   },
 });
 
@@ -128,7 +128,7 @@ export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
 
   const events = useEventMap(cursorEventMap, state, config, {
     ...list.events,
-    setCursorId({id}) {
+    goTo({id}) {
       setCursorId(id);
     },
     next() {

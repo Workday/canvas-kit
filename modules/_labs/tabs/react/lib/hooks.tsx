@@ -22,7 +22,7 @@ export const useResetCursorOnBlur = ({state, events}: TabsModel, elemProps = {})
       },
       onBlur() {
         if (!programmaticFocusRef.current) {
-          events.setCursorId({id: state.activeTab});
+          events.goTo({id: state.activeTab});
         }
       },
     },
