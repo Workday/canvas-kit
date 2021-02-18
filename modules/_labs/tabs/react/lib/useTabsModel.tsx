@@ -7,6 +7,7 @@ import {
   useCursorModel,
   BaseCursorModelConfig,
   Orientation,
+  CursorModelConfig,
 } from './cursor/useCursorModel';
 import {Item, ListEvents, ListState, useListModel} from './list/useListModel';
 
@@ -101,7 +102,7 @@ export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
 
   const menu = useCursorModel({
     orientation: config.orientation || 'horizontal',
-    ...config,
+    ...(config as CursorModelConfig),
     onRegisterItem({data, state}) {
       if (!initialTabRef.current) {
         initialTabRef.current = data.item.id;

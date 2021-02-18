@@ -128,7 +128,7 @@ export default class InputProvider extends React.Component<InputProviderProps> {
 
   private currentInput: InputType;
   private currentIntent: InputType;
-  private supportsPassive: boolean;
+  private supportsPassive!: boolean;
   private isBuffering = false;
   private isScrolling = false; // Unused if props.provideIntent is not defined
   private mousePosX: number | null = null; // Unused if props.provideIntent is not defined

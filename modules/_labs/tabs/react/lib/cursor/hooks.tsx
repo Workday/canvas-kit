@@ -55,15 +55,15 @@ export const useRovingFocus = ({state, events}: CursorModel, elemProps = {}) => 
   return mergeProps(
     {
       onKeyDown(event: React.KeyboardEvent) {
-        Object.keys(orientationKeyMap[state.orientation]).forEach(
-          (key: keyof typeof orientationKeyMap[typeof state.orientation]) => {
-            if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
-              const event = orientationKeyMap[state.orientation][key];
-              focusRef.current = true;
-              events[event]?.();
-            }
+        (Object.keys(
+          orientationKeyMap[state.orientation]
+        ) as (keyof typeof orientationKeyMap[typeof state.orientation])[]).forEach(key => {
+          if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
+            const event = orientationKeyMap[state.orientation][key];
+            focusRef.current = true;
+            events[event]?.();
           }
-        );
+        });
       },
     },
     elemProps

@@ -14,6 +14,7 @@ import {
   listEventMap,
   useListModel,
   Item,
+  ListModelConfig,
 } from '../list/useListModel';
 
 export type Orientation = 'horizontal' | 'vertical';
@@ -114,7 +115,7 @@ export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
   const [cursorId, setCursorId] = React.useState('');
   const initialCurrentRef = React.useRef('');
   const list = useListModel({
-    ...config,
+    ...(config as ListModelConfig),
     onRegisterItem({data, state}) {
       if (!initialCurrentRef.current) {
         initialCurrentRef.current = data.item.id;

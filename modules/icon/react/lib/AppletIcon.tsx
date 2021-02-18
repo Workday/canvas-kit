@@ -17,8 +17,8 @@ export const appletIconStyles = ({
 }: AppletIconStyles): CSSObject => {
   // Check if valid color
   if (
-    !Object.keys(BrandingColor)
-      .map((color: keyof typeof BrandingColor) => BrandingColor[color])
+    !(Object.keys(BrandingColor) as (keyof typeof BrandingColor)[])
+      .map(color => BrandingColor[color])
       .includes(color)
   ) {
     throw Error(`Color "${color}" not found`);

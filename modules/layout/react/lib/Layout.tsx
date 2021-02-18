@@ -61,11 +61,8 @@ const LayoutContainer = styled('div', {
 class Layout extends React.Component<LayoutProps> {
   public static Column = Column;
 
-  private renderChild = (
-    child: React.ReactElement<ColumnProps>,
-    spacing: number
-  ): React.ReactNode => {
-    if (!child) {
+  private renderChild = (child: React.ReactNode, spacing: number): React.ReactNode => {
+    if (!React.isValidElement(child)) {
       return;
     }
 
@@ -93,9 +90,7 @@ class Layout extends React.Component<LayoutProps> {
 
     return (
       <LayoutContainer spacing={spacing} gutter={gutter} capWidth={capWidth} {...elemProps}>
-        {React.Children.map(children, (child: React.ReactElement<ColumnProps>) =>
-          this.renderChild(child, spacing)
-        )}
+        {React.Children.map(children, child => this.renderChild(child, spacing))}
       </LayoutContainer>
     );
   }

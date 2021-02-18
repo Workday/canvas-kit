@@ -50,7 +50,10 @@ export const useBuildCollapsedList = <E extends HTMLElement>(
     const listItemNodes = listEl.current ? listEl.current.querySelectorAll('li') : [];
     const containerWidth = listEl.current ? listEl.current.clientWidth : 0;
     const listItems: Breadcrumb[] = [];
-    Children.forEach(children, (child: React.ReactElement, index) => {
+    Children.forEach(children, (child, index) => {
+      if (!React.isValidElement(child)) {
+        return;
+      }
       const breadcrumbLink = getBreadcrumbLink(child);
       // We should make this match work better
       const listItemNode = listItemNodes[index];

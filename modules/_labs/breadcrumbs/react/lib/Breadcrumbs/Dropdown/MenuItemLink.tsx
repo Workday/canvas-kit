@@ -33,7 +33,7 @@ const MenuItemLink = styled('a')({
 export const DropdownMenuItemLink = forwardRef(
   (
     {children, href, ...elemProps}: DropdownMenuItemLinkProps,
-    ref: React.RefObject<HTMLAnchorElement>
+    ref: React.Ref<HTMLAnchorElement>
   ) => {
     return (
       <MenuItemLink ref={ref} href={href} role="menuitem" {...elemProps}>

@@ -110,7 +110,7 @@ export const createComponent = <T extends React.ElementType = NullElement>(as?: 
   return ReturnedComponent;
 };
 
-function setRef<T>(ref: React.Ref<T>, value: T): void {
+function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
   if (ref) {
     if (typeof ref === 'function') {
       ref(value);
@@ -145,7 +145,7 @@ function setRef<T>(ref: React.Ref<T>, value: T): void {
  *   return <div ref={elementRef}/>
  * })
  */
-export function useForkRef<T>(ref1: React.Ref<T>, ref2: React.Ref<T>): (instance: T) => void {
+export function useForkRef<T>(ref1?: React.Ref<T>, ref2?: React.Ref<T>): (instance: T) => void {
   return (value: T) => {
     setRef(ref1, value);
     setRef(ref2, value);
@@ -166,7 +166,7 @@ export function useForkRef<T>(ref1: React.Ref<T>, ref2: React.Ref<T>): (instance
  *   return <Element ref={elementRef} {...elemProps} />
  * }
  */
-export function useLocalRef<T>(ref: React.Ref<T>) {
+export function useLocalRef<T>(ref?: React.Ref<T>) {
   const localRef = React.useRef<T>(null);
   const elementRef = useForkRef(ref, localRef);
 

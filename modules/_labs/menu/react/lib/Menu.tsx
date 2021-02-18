@@ -59,10 +59,10 @@ const List = styled('ul')({
 
 export default class Menu extends React.Component<MenuProps, MenuState> {
   private id = uuid();
-  private animateId: number;
+  private animateId!: number;
 
   private menuRef: React.RefObject<HTMLUListElement>;
-  private firstCharacters: string[];
+  private firstCharacters!: string[];
 
   constructor(props: MenuProps) {
     super(props);
@@ -132,7 +132,10 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
           ref={this.menuRef}
           {...elemProps}
         >
-          {React.Children.map(children, (menuItem: React.ReactElement<MenuItemProps>, index) => {
+          {React.Children.map(children, (menuItem, index) => {
+            if (!React.isValidElement(menuItem)) {
+              return;
+            }
             const itemId = `${id}-${index}`;
             return (
               <React.Fragment key={itemId}>
