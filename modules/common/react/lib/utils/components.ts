@@ -13,22 +13,30 @@ export type StyledType = {
  * @template P Additional props
  * @template ElementType React component or string element
  */
-export type PropsWithAs<P, ElementType extends React.ElementType> = P &
-  Omit<React.ComponentProps<ElementType>, 'as' | 'state' | keyof P> & {
-    /**
-     * Optional ref. If the component represents and element, this will ref will be a reference to
-     * the real DOM element of the component. If `as` is set to an element, it will be that element.
-     * If `as` is a component, the reference will be to that component (or element if the component
-     * uses `React.forwardRef`).
-     */
-    ref?: React.Ref<ElementType>;
-  };
+export type PropsWithAs<
+  P,
+  ElementType extends React.ElementType | undefined
+> = ElementType extends undefined
+  ? P
+  : P &
+      Omit<
+        React.ComponentProps<ElementType extends undefined ? 'section' : ElementType>,
+        'as' | 'state' | keyof P
+      > & {
+        /**
+         * Optional ref. If the component represents and element, this will ref will be a reference to
+         * the real DOM element of the component. If `as` is set to an element, it will be that element.
+         * If `as` is a component, the reference will be to that component (or element if the component
+         * uses `React.forwardRef`).
+         */
+        ref?: React.Ref<ElementType>;
+      };
 
 /**
  * Component type that allows for `as` to change the element or component type.
  * Passing `as` will correctly change the allowed interface of the JSX element
  */
-export type Component<T extends React.ElementType, P> = {
+export type ElementComponent<T extends React.ElementType | undefined, P> = {
   <ElementType extends React.ElementType>(
     props: PropsWithAs<P, ElementType> & {
       /**
@@ -42,21 +50,29 @@ export type Component<T extends React.ElementType, P> = {
   (props: PropsWithAs<P, T>): JSX.Element;
   displayName?: string;
 };
+
+export type Component<P> = {
+  (props: P): JSX.Element;
+  displayName?: string;
+};
+
 interface RefForwardingComponent<T, P = {}> {
   (
     props: React.PropsWithChildren<P> & {as?: React.ReactElement<any>},
-    ref: T extends null
-      ? never
-      : React.Ref<T extends keyof ElementTagNameMap ? ElementTagNameMap[T] : T>,
+    ref: T extends undefined // test if T was even passed in
+      ? never // T not passed in, we'll set the ref to `never`
+      : React.Ref<
+          T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
+            ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
+            : T extends ElementComponent<infer U, any> // if no, check if we can infer the the element type from a `Component` interface
+            ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
+              ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
+              : U // if no, fall back to inferred U
+            : T // if no, fall back to T
+        >,
     as: T extends undefined ? never : T
   ): React.ReactElement | null;
 }
-
-/**
- * If no element is passed to `createComponent`, a `NulLElement` will be returned indicating there
- * is no element type.
- */
-type NullElement = () => null;
 
 /**
  * Factory function that creates components to be exported. It enforces React ref forwarding, `as`
@@ -64,7 +80,7 @@ type NullElement = () => null;
  * return type is `Component<element, Props>` which looks like `Component<'div', Props>` which is a
  * clean interface that tells you the default element that is used.
  */
-export const createComponent = <T extends React.ElementType = NullElement>(as?: T) => <
+export const createComponent = <T extends React.ElementType | undefined = undefined>(as?: T) => <
   P,
   SubComponents = {}
 >({
@@ -89,8 +105,8 @@ export const createComponent = <T extends React.ElementType = NullElement>(as?: 
    * Used in container components
    */
   subComponents?: SubComponents;
-}) => {
-  const ReturnedComponent = (React.forwardRef<T, P & {as?: React.ElementType}>(
+}): (T extends undefined ? Component<P> : ElementComponent<T, P>) & SubComponents => {
+  const ReturnedComponent = React.forwardRef<T, P & {as?: React.ElementType}>(
     ({as: asOverride, ...props}, ref) => {
       return Component(
         props as P,
@@ -99,7 +115,7 @@ export const createComponent = <T extends React.ElementType = NullElement>(as?: 
         asOverride || as
       );
     }
-  ) as any) as Component<T, P> & SubComponents;
+  ) as any;
 
   Object.keys(subComponents || {}).forEach((key: any) => {
     // @ts-ignore Not worth typing correctly
