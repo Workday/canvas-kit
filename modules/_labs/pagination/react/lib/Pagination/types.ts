@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export interface PaginationState {
   currentPage: number; // current page
   firstPage: number; // first page
@@ -9,7 +7,7 @@ export interface PaginationState {
 }
 
 export interface PaginationEvents {
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPage: (page: number) => void;
   first: () => void;
   last: () => void;
   next: () => void;

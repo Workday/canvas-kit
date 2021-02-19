@@ -15,8 +15,8 @@ export interface SelectProps extends CoreSelectBaseProps {
    * * `data: object` (optional)
    * * `disabled: boolean` (optional)
    * * `id: string` (optional, a random `id` will be assigned to the object if one isn't provided)
-   * * `label: string` (optional, analagous to the text content of an `<option>`)
-   * * `value: string` (required, analagous to the `value` attribute of an `<option>`)
+   * * `label: string` (optional, analogous to the text content of an `<option>`)
+   * * `value: string` (required, analogous to the `value` attribute of an `<option>`)
    *
    * If `label` is omitted, the `value` will be used to render the option.
    *
@@ -42,12 +42,12 @@ class Select extends React.Component<SelectProps, SelectState> {
   private inputRef = React.createRef<HTMLInputElement>();
   private menuRef = React.createRef<HTMLUListElement>();
 
-  private menuAnimationTimer: ReturnType<typeof setTimeout>;
+  private menuAnimationTimer!: ReturnType<typeof setTimeout>;
 
   // For type-ahead functionality
   private keysSoFar = '';
   private clearKeysSoFarTimeout = 500;
-  private clearKeysSoFarTimer: ReturnType<typeof setTimeout>;
+  private clearKeysSoFarTimer!: ReturnType<typeof setTimeout>;
 
   // Cached values
   private normalizedOptions: NormalizedOption[] = [];
@@ -244,7 +244,7 @@ class Select extends React.Component<SelectProps, SelectState> {
 
   // Code inspired by: https://stackoverflow.com/a/46012210
   // In order for Select to be usable as a controlled component, we
-  // need to programatically change the value of the SelectInput
+  // need to programmatically change the value of the SelectInput
   // in such a way that triggers its change event
   private fireChangeEvent = (value: string): void => {
     if (this.inputRef && this.inputRef.current) {
@@ -418,7 +418,7 @@ class Select extends React.Component<SelectProps, SelectState> {
     this.fireChangeEvent(this.normalizedOptions[index].value);
   };
 
-  handleMenuBlur = (event: React.FocusEvent): void => {
+  handleMenuBlur = (event: React.FocusEvent<HTMLUListElement>): void => {
     this.toggleMenu(false);
   };
 
@@ -428,7 +428,7 @@ class Select extends React.Component<SelectProps, SelectState> {
     this.focusButton();
   };
 
-  handleKeyDown = (event: React.KeyboardEvent): void => {
+  handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
     const {options} = this.props;
     const numOptions = options.length;
 
@@ -510,6 +510,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       value,
       // Strip options from elemProps
       options,
+      onKeyDown,
       ...elemProps
     } = this.props;
 

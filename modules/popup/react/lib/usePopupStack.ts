@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {useLocalRef} from '@workday/canvas-kit-react-common';
 
 /**
  * This hook should not be used directly. Use the `Popper` component instead.
@@ -40,23 +41,22 @@ import {PopupStack} from '@workday/canvas-kit-popup-stack';
  * useCloseOnEscape(stackRef, closePopup)
  */
 export const usePopupStack = <E extends HTMLElement>(
-  forwardRef?: React.RefObject<E>,
+  ref?: React.Ref<E>,
   target?: HTMLElement | React.RefObject<HTMLElement>
-): React.RefObject<HTMLDivElement> => {
-  const internalRef = React.useRef<HTMLDivElement>(null);
-  const ref = (forwardRef || internalRef) as React.RefObject<HTMLDivElement>;
+): React.RefObject<HTMLElement> => {
+  const {elementRef, localRef} = useLocalRef(ref);
 
   // useState function input ensures we only create a container once.
   const [popupRef] = React.useState(() => {
     const container = PopupStack.createContainer();
-    (ref as any).current = container;
+    elementRef(container as E);
     return container;
   });
   // We useLayoutEffect to ensure proper timing of registration of the element to the popup stack.
   // Without this, the timing is unpredictable when mixed with other frameworks. Other frameworks
   // should also register as soon as the element is available
   React.useLayoutEffect(() => {
-    if (popupRef !== ref.current) {
+    if (popupRef !== localRef.current) {
       throw Error(
         `The 'ref' passed to usePopupStack should not be applied to a React element. This will cause a runtime error where the PopupStack and React compete for the element. Instead use ReactDOM.createPortal(<YourComponent />, ref.current)`
       );
@@ -66,12 +66,12 @@ export const usePopupStack = <E extends HTMLElement>(
         ? target.current || undefined
         : target
       : undefined;
-    PopupStack.add({element: ref.current!, owner: targetEl});
-    const element = ref.current!;
+    PopupStack.add({element: localRef.current!, owner: targetEl});
+    const element = localRef.current!;
     return () => {
       PopupStack.remove(element);
     };
-  }, [ref, target, popupRef]);
+  }, [localRef, target, popupRef]);
 
-  return ref;
+  return localRef;
 };

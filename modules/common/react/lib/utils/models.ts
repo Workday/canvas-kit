@@ -5,6 +5,9 @@ export type Model<State, Events> = {
   events: Events;
 };
 
+// bivarianceHack is used for force bivariance of the function constraint. Without this, it will fail with `strictFunctionTypes`
+type IEvent = {[key: string]: {bivarianceHack(data?: object): void}['bivarianceHack']};
+
 /**
  * A mapping of guards and callbacks and what events they relate to.
  * @template TEvents The model events
@@ -12,17 +15,17 @@ export type Model<State, Events> = {
  * @template TCallbackMap A mapping of callbacks to events they're associated with
  */
 type EventMap<
-  TEvents extends Record<string, (data?: object) => void>,
+  TEvents extends IEvent,
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>
 > = {
-  guards?: TGuardMap;
-  callbacks?: TCallbackMap;
+  guards: TGuardMap;
+  callbacks: TCallbackMap;
 };
 
 type ToGuardConfig<
   TState extends Record<string, any>,
-  TEvents extends Record<string, (data?: object) => void>,
+  TEvents extends IEvent,
   TGuardMap extends Record<string, keyof TEvents>
 > = {
   [K in keyof TGuardMap]: (event: {
@@ -33,7 +36,7 @@ type ToGuardConfig<
 
 type ToCallbackConfig<
   TState extends Record<string, any>,
-  TEvents extends Record<string, (data?: object) => void>,
+  TEvents extends IEvent,
   TGuardMap extends Record<string, keyof TEvents>
 > = {
   [K in keyof TGuardMap]: (event: {
@@ -54,7 +57,7 @@ type ToCallbackConfig<
  */
 export type ToModelConfig<
   TState extends Record<string, any>,
-  TEvents extends Record<string, (data?: object) => void>,
+  TEvents extends IEvent,
   TEventMap extends EventMap<TEvents, any, any>
 > = ToGuardConfig<TState, TEvents, TEventMap['guards']> &
   ToCallbackConfig<TState, TEvents, TEventMap['callbacks']>;
@@ -84,13 +87,14 @@ export type ToModelConfig<
  * })
  */
 
-export const createEventMap = <TEvents extends Record<string, (data?: object) => void>>() => <
+export const createEventMap = <TEvents extends IEvent>() => <
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>
 >(
-  config: EventMap<TEvents, TGuardMap, TCallbackMap>
-) => {
-  return config;
+  config: Partial<EventMap<TEvents, TGuardMap, TCallbackMap>>
+): EventMap<TEvents, TGuardMap, TCallbackMap> => {
+  // Instruct Typescript that all valid guards and callbacks exist
+  return config as EventMap<TEvents, TGuardMap, TCallbackMap>;
 };
 
 // small wrapper to get `keyof T` instead of `string | number | symbol`
@@ -117,7 +121,7 @@ const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
  * })
  */
 export const useEventMap = <
-  TEvents extends Record<string, (data?: object) => void>,
+  TEvents extends IEvent,
   TState extends Record<string, any>,
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>,

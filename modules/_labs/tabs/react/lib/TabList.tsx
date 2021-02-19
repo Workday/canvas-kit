@@ -1,16 +1,29 @@
 import * as React from 'react';
+
 import {spacing, commonColors} from '@workday/canvas-kit-react-core';
-import styled from '@emotion/styled';
-import {useTab} from './Tabs';
-import {TabProps} from './Tab';
+import {
+  composeHooks,
+  createComponent,
+  styled,
+  StyledType,
+  useModelContext,
+} from '@workday/canvas-kit-react-common';
 
-type Tab = React.ReactElement<TabProps>;
+import {useRovingFocus} from './cursor/hooks';
+import {TabsModelContext} from './Tabs';
+import {useResetCursorOnBlur} from './hooks';
+import {TabsModel} from './useTabsModel';
 
-export interface TabListProps extends React.HTMLAttributes<HTMLElement> {
+export interface TabListProps {
   /**
-   * A list of Tab components.
+   *
    */
-  children: Tab | Tab[];
+  children: React.ReactNode;
+  /**
+   * Optionally pass a model directly to this component. Default is to implicitly use the same
+   * model as the container component which uses React context. Only use this for advanced use-cases.
+   */
+  model?: TabsModel;
 }
 
 const TabsListContainer = styled('div')({
@@ -20,53 +33,23 @@ const TabsListContainer = styled('div')({
   borderBottom: `1px solid ${commonColors.divider}`,
 });
 
-const TabsListInnerContainer = styled('div')({
+const TabsListInnerContainer = styled('div')<StyledType>({
   display: `flex`,
   margin: `0 ${spacing.m}`,
 });
 
-const TabList = ({children, ...elemProps}: TabListProps) => {
-  const tabsListRef = React.useRef<HTMLDivElement>(null);
-  // const [tabIndicatorRef, setDimensions] = useIndicator(tabsListRef);
-  const {setIntentTab, programmaticFocusRef} = useTab();
+export const TabList = createComponent('div')({
+  displayName: 'Tabs.List',
+  Component: ({children, model, ...elemProps}: TabListProps, ref, Element) => {
+    const {state, events} = useModelContext(TabsModelContext, model);
+    const props = composeHooks(useRovingFocus, useResetCursorOnBlur)({state, events}, elemProps);
 
-  const onKeyDown = (event: React.KeyboardEvent) => {
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'Left':
-        setIntentTab('previous');
-        break;
-      case 'ArrowRight':
-      case 'Right':
-        setIntentTab('next');
-        break;
-      case 'Home':
-        setIntentTab('first');
-        break;
-      case 'End':
-        setIntentTab('last');
-        break;
-      default:
-        break;
-    }
-  };
-
-  const resetProgrammaticFocus = () => {
-    programmaticFocusRef.current = false;
-  };
-
-  return (
-    <TabsListContainer ref={tabsListRef}>
-      <TabsListInnerContainer
-        role="tablist"
-        onKeyDown={onKeyDown}
-        onFocus={resetProgrammaticFocus}
-        {...elemProps}
-      >
-        {children}
-      </TabsListInnerContainer>
-    </TabsListContainer>
-  );
-};
-
-export default TabList;
+    return (
+      <TabsListContainer>
+        <TabsListInnerContainer as={Element} ref={ref} role="tablist" {...props}>
+          {children}
+        </TabsListInnerContainer>
+      </TabsListContainer>
+    );
+  },
+});

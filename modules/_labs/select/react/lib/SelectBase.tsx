@@ -122,11 +122,11 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
   /**
    * The function called when a key is pressed down while the SelectBase button or menu has focus.
    */
-  onKeyDown?: (event: React.KeyboardEvent) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void;
   /**
    * The function called when the SelectBase menu loses focus.
    */
-  onMenuBlur?: (event: React.FocusEvent) => void;
+  onMenuBlur?: (event: React.FocusEvent<HTMLUListElement>) => void;
   /**
    * The function called when the Escape key is pressed while the SelectBase menu is the topmost element in the stack.
    */

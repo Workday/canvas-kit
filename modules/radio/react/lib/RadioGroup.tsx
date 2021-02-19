@@ -96,7 +96,7 @@ class RadioGroup extends React.Component<RadioGroupProps> {
   };
 
   private onRadioChange = (
-    existingOnChange: (e: React.ChangeEvent) => void | undefined,
+    existingOnChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | undefined,
     index: number,
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {

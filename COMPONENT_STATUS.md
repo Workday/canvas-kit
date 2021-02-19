@@ -36,8 +36,8 @@ part of Canvas.
 | **Form Elements**                                 |                    |                    |                                                                                   |
 | [Form Field](./modules/form-field)                | :white_check_mark: | :white_check_mark: |                                                                                   |
 | [Checkbox](./modules/checkbox)                    | :white_check_mark: | :white_check_mark: |   [:blue_book:](https://design.workday.com/components/form-elements/checkboxes)   |
-| [Color Input]([modules/color-picker)              | :white_check_mark: |                    |  [:blue_book:](https://design.workday.com/components/form-elements/color-input)   |
-| [Color Picker]([modules/_labs/color-picker/react) |    :microscope:    |                    |                                                                                   |
+| [Color Input](modules/color-picker)              | :white_check_mark: |                    |  [:blue_book:](https://design.workday.com/components/form-elements/color-input)   |
+| [Color Picker](modules/_labs/color-picker/react)  |    :microscope:    |                    |                                                                                   |
 | Date Input                                        |                    |                    |                                                                                   |
 | [Drop Down Select](./modules/select)              | :white_check_mark: | :white_check_mark: |                                                                                   |
 | Numeric Input                                     |                    |                    |                                                                                   |

@@ -1,35 +1,32 @@
 import * as React from 'react';
-import {render} from '@testing-library/react';
+import {screen, render} from '@testing-library/react';
 
-import TabList from '../lib/TabList';
+import {TabList} from '../lib/TabList';
+import {Tabs} from '../lib/Tabs';
+import {useTabsModel} from '../lib/useTabsModel';
 
 describe('TabList', () => {
+  verifyComponent(TabList, {modelFn: useTabsModel});
+
   it('should have a role of "tablist"', () => {
-    const screen = render(
-      <TabList>
-        <div />
-        <div />
-      </TabList>
+    render(
+      <Tabs>
+        <TabList>
+          <div />
+        </TabList>
+      </Tabs>
     );
     expect(screen.getByRole('tablist')).toBeInTheDocument();
   });
 
-  it('should render extra props passed down to the container', () => {
-    const screen = render(
-      <TabList id="bar">
-        <div />
-        <div />
-      </TabList>
-    );
-    expect(screen.getByRole('tablist')).toHaveAttribute('id', 'bar');
-  });
-
   it('should render child elements', () => {
-    const screen = render(
-      <TabList>
-        <div>First Item</div>
-        <div />
-      </TabList>
+    render(
+      <Tabs>
+        <TabList>
+          <div>First Item</div>
+          <div />
+        </TabList>
+      </Tabs>
     );
     expect(screen.getByRole('tablist')).toHaveTextContent('First Item');
   });

@@ -1,7 +1,7 @@
 import React from 'react';
 import tabTrappingKey from 'focus-trap-js';
 
-const useKeyDownListener = (onKeyDown: EventListenerOrEventListenerObject) => {
+const useKeyDownListener = (onKeyDown: (event: KeyboardEvent) => void) => {
   // `useLayoutEffect` for automation
   React.useLayoutEffect(() => {
     document.addEventListener('keydown', onKeyDown);
