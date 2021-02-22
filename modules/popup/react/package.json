@@ -64,6 +64,6 @@
     "lodash": "^4.17.14"
   },
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   }
 }

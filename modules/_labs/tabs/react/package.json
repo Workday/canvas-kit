@@ -44,6 +44,6 @@
     "@workday/canvas-kit-labs-react-core": "^4.5.0"
   },
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   }
 }

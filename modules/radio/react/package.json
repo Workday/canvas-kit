@@ -45,7 +45,7 @@
     "radio"
   ],
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   },
   "dependencies": {
     "@workday/canvas-kit-react-common": "^4.5.0",

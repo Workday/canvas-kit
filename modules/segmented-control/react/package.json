@@ -44,7 +44,7 @@
     "segmented-control"
   ],
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   },
   "dependencies": {
     "@workday/canvas-kit-react-button": "^4.5.0",
