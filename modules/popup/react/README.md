@@ -398,11 +398,28 @@ useCloseOnOutsideClick(stackRef: React.RefObject<HTMLElement>, onClose: () => vo
 
 Registers global listener for all clicks. It will only call the `onClose` callback if the click
 happened outside the `stackRef` element and its children _and_ the provided `stackRef` element is
-the topmost in the stack. The `stackRef` should be the same as the one passed to `usePopupStack` or
-the `Popper` component since `Popper` uses `usePopupStack` internally.
+the topmost element with this behavior applied in the stack. Adds a `data-behavior-click-outside`
+attribute to track usage of this behavior hook.
 
-This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
-dialogs, dropdown menus, etc.
+The `stackRef` should be the same as the one passed to `usePopupStack` or the `Popper` component
+since `Popper` uses `usePopupStack` internally.
+
+This should be used stacked UI elements that are dismissible like Modals, non-modal dialogs,
+dropdown menus, etc. Tooltips and hierarchical menus should use `useAlwaysCloseOnClickOutside`
+instead.
+
+## useAlwaysCloseOnOutsideClick
+
+```ts
+useAlwaysCloseOnOutsideClick(stackRef: React.RefObject<HTMLElement>, onClose: () => void): void
+```
+
+Registers global listener for all clicks. It will only call the `onClose` callback if the click
+happened outside the `stackRef` element and its children regardless of the position in the stack.
+This is useful for Tooltips or hierarchical menus.
+
+The `stackRef` should be the same as the one passed to `usePopupStack` or the `Popper` component
+since `Popper` uses `usePopupStack` internally.
 
 ## useFocusTrap
 

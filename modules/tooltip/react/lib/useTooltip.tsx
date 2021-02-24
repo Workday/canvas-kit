@@ -1,6 +1,6 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
-import {useCloseOnEscape} from '@workday/canvas-kit-react-popup';
+import {useCloseOnEscape, useAlwaysCloseOnOutsideClick} from '@workday/canvas-kit-react-popup';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
@@ -53,7 +53,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     setOpen(false);
   };
 
-  const intentTimer = useIntentTimer(closeTooltip, 100);
+  const intentTimer = useIntentTimer(closeTooltip, 10000);
 
   const onOpen = () => {
     setOpen(true);
@@ -66,6 +66,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
   };
 
   useCloseOnEscape(ref, closeTooltip);
+  useAlwaysCloseOnOutsideClick(ref, closeTooltip);
 
   return {
     /** Mix these properties into the target element. **Must be an Element** */

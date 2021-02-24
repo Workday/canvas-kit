@@ -46,10 +46,15 @@ const Window = ({children, heading, top, left}: WindowProps) => {
   );
 };
 
-const TempPopup = () => {
+const TempPopup = ({
+  deleteText,
+  children,
+}: {
+  deleteText: string;
+  children: ({onClose}: {onClose: () => void}) => React.ReactNode;
+}) => {
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
-  const popupRef = React.useRef<HTMLDivElement>(null);
 
   const onClose = () => setOpen(false);
   const onButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,25 +62,21 @@ const TempPopup = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  useCloseOnOutsideClick(popupRef, onClose);
-  useCloseOnEscape(popupRef, onClose);
+  const stackRef = React.useRef<HTMLDivElement>(null);
+  useCloseOnOutsideClick(stackRef, onClose);
+  useCloseOnEscape(stackRef, onClose);
 
   return (
-    <div>
-      <DeleteButton onClick={onButtonClick}>Delete Item</DeleteButton>
-      <Popper placement={'bottom'} open={open} anchorElement={anchorEl} ref={popupRef}>
+    <>
+      <DeleteButton style={{marginRight: '16px'}} onClick={onButtonClick}>
+        {deleteText}
+      </DeleteButton>
+      <Popper placement={'bottom'} open={open} anchorElement={anchorEl} ref={stackRef}>
         <Popup width={400} heading={'Delete Item'} padding={Popup.Padding.s} handleClose={onClose}>
-          <div style={{marginBottom: '24px'}}>
-            Are you sure you'd like to delete the item titled 'My Item'?
-          </div>
-
-          <DeleteButton style={{marginRight: '16px'}} onClick={onClose}>
-            Delete
-          </DeleteButton>
-          <Button onClick={onClose}>Cancel</Button>
+          {children({onClose})}
         </Popup>
       </Popper>
-    </div>
+    </>
   );
 };
 
@@ -104,7 +105,32 @@ export const MixedPopupTypes = () => {
           <Tooltip title="Really long tooltip showing how popup stacks overlap">
             <span onClick={() => console.log('clicked')}>Contents of Window 3</span>
           </Tooltip>
-          <TempPopup />
+          <div>
+            <TempPopup deleteText="Delete Item">
+              {({onClose}) => (
+                <>
+                  <div style={{marginBottom: '24px'}}>
+                    Are you sure you'd like to delete the item titled 'My Item'?
+                  </div>
+                  <TempPopup deleteText="Delete">
+                    {({onClose}) => (
+                      <>
+                        <div style={{marginBottom: '24px'}}>
+                          Are you REALLY sure you'd like to delete the item titled 'My Item'?
+                        </div>
+
+                        <DeleteButton style={{marginRight: '16px'}} onClick={onClose}>
+                          Really Delete
+                        </DeleteButton>
+                        <Button onClick={onClose}>Cancel</Button>
+                      </>
+                    )}
+                  </TempPopup>
+                  <Button onClick={onClose}>Cancel</Button>
+                </>
+              )}
+            </TempPopup>
+          </div>
         </div>
       </Window>
     </div>

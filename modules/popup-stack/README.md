@@ -205,3 +205,26 @@ interact with it.
 ```tsx
 createAdapter({}: Partial<typeof PopupStack>): void
 ```
+
+## Behaviors
+
+The PopupStack does not directly own any behaviors. Behaviors are left up to the implementation, but
+behavior suggestions are listed here as a specification for implementations. Some behaviors are
+aided by a specification of `data-*` attributes to help those behaviors apply globally across
+frameworks.
+
+### Close on outside click
+
+Close only the topmost popup with a click outside the popup when this behavior applied. To determine
+if this behavior is applied to the global stack, a `data-behavior-click-outside="true"` should be
+applied. This data attribute should be used by all instances of this behavior to determine the
+"topmost" click-outside behavior to close only the topmost popup with this behavior.
+
+### Always close on outside click
+
+Close all popups with this behavior regardless of the position in the stack. This doesn't require
+any special `data-*` attributes.
+
+### Close on escape
+
+Closes the topmost popup when the escape key is pressed. No special `data-*` is required.

@@ -1,4 +1,3 @@
-/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {Popper, Placement} from '@workday/canvas-kit-react-popup';
 import {TooltipContainer} from '@workday/canvas-kit-react-tooltip';
