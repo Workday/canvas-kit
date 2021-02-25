@@ -24,8 +24,12 @@ function getPackages(context) {
   const cwd = ctx.cwd || process.cwd();
 
   return Promise.all([
-    readdir(path.resolve(cwd, 'modules'), {withFileTypes: true}),
-    readdir(path.resolve(cwd, 'modules/_labs'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/canvas-kit-css'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/canvas-kit-css-fonts'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/canvas-kit-popup-stack'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/canvas-kit-react'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/canvas-kit-react-fonts'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/canvas-kit-labs-react'), {withFileTypes: true}),
   ])
     .then(([core, labs]) => [...core, ...labs])
     .then(files => files.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))

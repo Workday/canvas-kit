@@ -7,9 +7,7 @@ export interface UseGoToFormConfig {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export const useGoToForm = (
-  {onSubmit, model}: UseGoToFormConfig = {} as UseGoToFormConfig
-) => {
+export const useGoToForm = ({onSubmit, model}: UseGoToFormConfig = {} as UseGoToFormConfig) => {
   const [value, setValue] = React.useState<number>();
 
   React.useEffect(() => {

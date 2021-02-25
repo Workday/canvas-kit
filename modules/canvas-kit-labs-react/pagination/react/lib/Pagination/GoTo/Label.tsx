@@ -16,17 +16,9 @@ const labelStyles = css({
   whiteSpace: 'nowrap',
 });
 
-export const GoToLabel = ({
-  css: cssProp,
-  model,
-  children,
-  ...elemProps
-}: GoToLabelProps) => {
+export const GoToLabel = ({css: cssProp, model, children, ...elemProps}: GoToLabelProps) => {
   return (
-    <label
-      css={[labelStyles, cssProp as Interpolation<undefined>]}
-      {...elemProps}
-    >
+    <label css={[labelStyles, cssProp as Interpolation<undefined>]} {...elemProps}>
       {typeof children === 'function' ? children(model) : children}
     </label>
   );
