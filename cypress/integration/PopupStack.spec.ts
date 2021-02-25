@@ -160,5 +160,43 @@ describe('PopupStack', () => {
         cy.findByLabelText('Delete Item').should('not.exist');
       });
     });
+
+    context('when the Delete button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Delete'}).click();
+      });
+
+      it('should open the Really Delete Item popup', () => {
+        cy.findByRole('dialog', {name: 'Really Delete Item'}).should('be.visible');
+      });
+
+      context('when a tooltip is focused', () => {
+        beforeEach(() => {
+          cy.findByText('Contents of Window 2').focus();
+        });
+
+        it('should open the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+
+        context('when user clicks outside', () => {
+          beforeEach(() => {
+            cy.get('html').click();
+          });
+
+          it('should close the tooltip', () => {
+            cy.findByRole('tooltip').should('not.be.visible');
+          });
+
+          it('should close the Really Delete Item popup', () => {
+            cy.findByRole('dialog', {name: 'Really Delete Item'}).should('be.not.visible');
+          });
+
+          it('should NOT close the Delete Item popup', () => {
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+          });
+        });
+      });
+    });
   });
 });

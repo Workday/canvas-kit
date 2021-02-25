@@ -53,7 +53,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     setOpen(false);
   };
 
-  const intentTimer = useIntentTimer(closeTooltip, 10000);
+  const intentTimer = useIntentTimer(closeTooltip, 100);
 
   const onOpen = () => {
     setOpen(true);

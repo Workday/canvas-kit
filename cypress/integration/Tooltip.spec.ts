@@ -7,7 +7,7 @@ describe('Tooltip', () => {
 
   context('given Default is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Popups/Tooltip/React', 'Default');
+      h.stories.load('Components/Popups/Tooltip/React', 'DefaultStory'); // Default gets converted to Default Story in MDX
     });
 
     it('should not have any axe errors', () => {
@@ -83,6 +83,16 @@ describe('Tooltip', () => {
 
         it('should not remove focus from the close icon button', () => {
           cy.get('button').should('have.focus');
+        });
+      });
+
+      context('then a click happens outside', () => {
+        beforeEach(() => {
+          cy.get('body').click();
+        });
+
+        it('should close immediately, not waiting for blur or intent', () => {
+          cy.findByRole('tooltip', {timeout: 0}).should('not.be.visible');
         });
       });
     });

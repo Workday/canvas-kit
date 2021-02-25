@@ -7,7 +7,7 @@ import {Tooltip} from '@workday/canvas-kit-react-tooltip';
 export const Default = () => {
   return (
     <Tooltip title="Close">
-      <IconButton variant={IconButton.Variant.Circle} icon={xIcon} aria-label="Close2" />
+      <IconButton variant={IconButton.Variant.Circle} icon={xIcon} aria-label="Close" />
     </Tooltip>
   );
 };

@@ -47,9 +47,11 @@ const Window = ({children, heading, top, left}: WindowProps) => {
 };
 
 const TempPopup = ({
+  heading,
   deleteText,
   children,
 }: {
+  heading: string;
   deleteText: string;
   children: ({onClose}: {onClose: () => void}) => React.ReactNode;
 }) => {
@@ -72,7 +74,7 @@ const TempPopup = ({
         {deleteText}
       </DeleteButton>
       <Popper placement={'bottom'} open={open} anchorElement={anchorEl} ref={stackRef}>
-        <Popup width={400} heading={'Delete Item'} padding={Popup.Padding.s} handleClose={onClose}>
+        <Popup width={400} heading={heading} padding={Popup.Padding.s} handleClose={onClose}>
           {children({onClose})}
         </Popup>
       </Popper>
@@ -85,34 +87,36 @@ export const MixedPopupTypes = () => {
     <div>
       <Window heading="Window 1" top={50} left={50}>
         <Tooltip title="Really long tooltip showing how popup stacks overlap">
-          <span>Contents of Window 1</span>
+          <span tabIndex={0}>Contents of Window 1</span>
         </Tooltip>
       </Window>
       <Window heading="Window 2" top={100} left={250}>
         <Tooltip title="Really long tooltip showing how popup stacks overlap">
-          <span>Contents of Window 2</span>
+          <span tabIndex={0}>Contents of Window 2</span>
         </Tooltip>
       </Window>
       <Window heading="Window 4" top={300} left={250}>
         <div>
           <Tooltip title="Really long tooltip showing how popup stacks overlap">
-            <span>Contents of Window 4</span>
+            <span tabIndex={0}>Contents of Window 4</span>
           </Tooltip>
         </div>
       </Window>
       <Window heading="Window 3" top={200} left={75}>
         <div>
           <Tooltip title="Really long tooltip showing how popup stacks overlap">
-            <span onClick={() => console.log('clicked')}>Contents of Window 3</span>
+            <span tabIndex={0} onClick={() => console.log('clicked')}>
+              Contents of Window 3
+            </span>
           </Tooltip>
           <div>
-            <TempPopup deleteText="Delete Item">
+            <TempPopup heading="Delete Item" deleteText="Delete Item">
               {({onClose}) => (
                 <>
                   <div style={{marginBottom: '24px'}}>
                     Are you sure you'd like to delete the item titled 'My Item'?
                   </div>
-                  <TempPopup deleteText="Delete">
+                  <TempPopup heading="Really Delete Item" deleteText="Delete">
                     {({onClose}) => (
                       <>
                         <div style={{marginBottom: '24px'}}>
