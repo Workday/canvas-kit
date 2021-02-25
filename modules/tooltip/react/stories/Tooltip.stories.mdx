@@ -53,10 +53,10 @@ provide ancilary, but not critical information, the `type` can be set to `descri
 
 <ExampleCodeBlock code={DescribeType} />
 
-### Custom CustomContent
+### Custom Content
 
 A tooltip can contain HTML, but should not contain any focusable elements or semantically meaningful
-formatting. The content will loose all semantic meaning when read by a screen reader. If complex
+formatting. The content will lose all semantic meaning when read by a screen reader. If complex
 content or a focusable element is needed by your UI, a tooltip is not a good choice. Consider using
 a dialog instead.
 
@@ -75,7 +75,7 @@ for tooltips.
 The `Tooltip` component is a combination of the `TooltipContainer` (a styled element), `Popper`
 (which uses PopperJS and the popup stack), the `useTooltip` hook and some behavior. If custom
 behavior is required, these sub-components can be composed in a custom container element. This
-example uses those parts directly while being functionally equivelent to the original basic example.
+example uses those parts directly while being functionally equivalent to the original basic example.
 
 <ExampleCodeBlock code={UseTooltip} />
 

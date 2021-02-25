@@ -384,7 +384,7 @@ provided `stackRef` element is the topmost in the stack. The `stackRef` should b
 one passed to `usePopupStack` or the `Popper` component since `Popper` uses `usePopupStack`
 internally.
 
-This should be used stacked UI elements that are dismissible like Tooltips, Modals, non-modal
+This should be used with stacked UI elements that are dismissible like Tooltips, Modals, non-modal
 dialogs, dropdown menus, etc.
 
 `returnFocusRef` is an optional prop that returns focus to a specific element on escape. This is
@@ -404,7 +404,7 @@ attribute to track usage of this behavior hook.
 The `stackRef` should be the same as the one passed to `usePopupStack` or the `Popper` component
 since `Popper` uses `usePopupStack` internally.
 
-This should be used stacked UI elements that are dismissible like Modals, non-modal dialogs,
+This should be used with stacked UI elements that are dismissible like Modals, non-modal dialogs,
 dropdown menus, etc. Tooltips and hierarchical menus should use `useAlwaysCloseOnClickOutside`
 instead.
 

@@ -215,10 +215,10 @@ frameworks.
 
 ### Close on outside click
 
-Close only the topmost popup with a click outside the popup when this behavior applied. To determine
-if this behavior is applied to the global stack, a `data-behavior-click-outside="true"` should be
-applied. This data attribute should be used by all instances of this behavior to determine the
-"topmost" click-outside behavior to close only the topmost popup with this behavior.
+Close only the topmost popup with a click outside the popup when this behavior is applied. To
+determine if this behavior is applied to the global stack, a `data-behavior-click-outside="true"`
+should be applied. This data attribute should be used by all instances of this behavior to determine
+the "topmost" click-outside behavior to close only the topmost popup with this behavior.
 
 ### Always close on outside click
 
