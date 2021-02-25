@@ -13,7 +13,7 @@ module.exports = {
 };
 
 // Extra scopes supported outside the `modules` folder
-const scopes = ['labs'];
+const scopes = ['labs', 'fonts', 'popup-stack'];
 
 /**
  * @param {{ cwd: string}} context
@@ -25,10 +25,7 @@ function getPackages(context) {
 
   return Promise.all([
     readdir(path.resolve(cwd, 'modules/canvas-kit-css'), {withFileTypes: true}),
-    readdir(path.resolve(cwd, 'modules/canvas-kit-css-fonts'), {withFileTypes: true}),
-    readdir(path.resolve(cwd, 'modules/canvas-kit-popup-stack'), {withFileTypes: true}),
     readdir(path.resolve(cwd, 'modules/canvas-kit-react'), {withFileTypes: true}),
-    readdir(path.resolve(cwd, 'modules/canvas-kit-react-fonts'), {withFileTypes: true}),
     readdir(path.resolve(cwd, 'modules/canvas-kit-labs-react'), {withFileTypes: true}),
   ])
     .then(([core, labs]) => [...core, ...labs])

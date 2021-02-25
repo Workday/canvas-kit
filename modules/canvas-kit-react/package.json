@@ -44,37 +44,5 @@
   ],
   "peerDependencies": {
     "react": ">= 16.8 < 17"
-  },
-  "dependencies": {
-    "@workday/canvas-kit-react-action-bar": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-avatar": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-badge": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-banner": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-button": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-card": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-checkbox": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-color-picker": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-common": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-cookie-banner": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-core": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-form-field": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-icon": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-layout": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-loading-animation": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-modal": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-page-header": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-popup": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-radio": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-segmented-control": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-select": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-side-panel": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-skeleton": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-status-indicator": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-switch": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-table": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-text-area": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-text-input": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-toast": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-tooltip": "^5.0.0-beta.0"
   }
 }
