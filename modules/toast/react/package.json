@@ -48,7 +48,8 @@
     "react": "^16.8 || ^17.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-core": "^4.5.0"
+    "@workday/canvas-kit-labs-react-core": "^4.5.0",
+    "@workday/canvas-kit-react-button": "^4.5.0"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",
