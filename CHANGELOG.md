@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+
+
+## v4.5.1 (2021-02-26)
+
+### Components
+
+- fix(popup): Fix Popup icon RTL bug ([#983](https://github.com/Workday/canvas-kit/pull/983)) [@alanbsmith](https://github.com/alanbsmith)
+- fix(side-panel): Fix keyframes animation ([#984](https://github.com/Workday/canvas-kit/pull/984)) [@alanbsmith](https://github.com/alanbsmith)
+
+### Infrastructure
+
+- chore: Update peerDependencies to support React 17 ([#974](https://github.com/Workday/canvas-kit/pull/974)) [@alanbsmith](https://github.com/alanbsmith)
+- docs: Update Component Status doc guideline links ([#979](https://github.com/Workday/canvas-kit/pull/979)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(toast): Update Toast docs ([#982](https://github.com/Workday/canvas-kit/pull/982)) [@alanbsmith](https://github.com/alanbsmith)
+
+
 ## 4.5.0 (2021-02-16)
 
 ### Components
