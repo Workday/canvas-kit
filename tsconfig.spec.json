@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["./jest/testing-library__jest-dom.d.ts", "./jest/verifyComponent.d.ts", "**/*.spec.tsx"],
+  "include": ["./jest/testing-library__jest-dom.d.ts", "./jest/verifyComponent.d.ts", "**/*.spec.ts?(x)"],
   "exclude": [],
   "compilerOptions": {
     "declaration": false,
