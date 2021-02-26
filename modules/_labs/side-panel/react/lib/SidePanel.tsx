@@ -59,7 +59,12 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default 'standard'
    */
   variant?: SidePanelVariant;
-  touched?: boolean;
+  /**
+   * This is set by the useSidePanel hook and prevents unintended keyframe animations
+   *
+   * @param boolean
+   */
+  touched: boolean;
 }
 
 const createKeyframes = (from: number | string, to: number | string) => {
