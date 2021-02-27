@@ -13,11 +13,11 @@ part of Canvas.
 
 | Component                |       Status       |                            Guidelines                             |
 | ------------------------ | :----------------: | :---------------------------------------------------------------: |
-| [Colors](./modules/core) | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/color) |
-| [Depth](./modules/core)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/depth) |
-| [Icons](./modules/icon)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/icons) |
-| [Space](./modules/core)  | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/space) |
-| [Type](./modules/core)   | :white_check_mark: | [:blue_book:](https://design.workday.com/guidelines/visual/type)  |
+| [Colors](./modules/core) | :white_check_mark: | [:blue_book:](https://design.workday.com/tokens/basic/colors/color-guidelines) |
+| [Depth](./modules/core)  | :white_check_mark: | [:blue_book:](https://design.workday.com/tokens/basic/depth) |
+| [Icons](./modules/icon)  | :white_check_mark: | [:blue_book:](https://design.workday.com/tokens/assets/icons/icon-guidelines) |
+| [Space](./modules/core)  | :white_check_mark: | [:blue_book:](https://design.workday.com/tokens/basic/space) |
+| [Type](./modules/core)   | :white_check_mark: | [:blue_book:](https://design.workday.com/tokens/basic/type)  |
 
 ## Components
 

@@ -12,6 +12,7 @@ export interface PanelProps {
   expanded: boolean;
   id: string;
   'aria-labelledby': string;
+  touched: boolean;
 }
 
 export interface LabelProps {
@@ -26,6 +27,7 @@ export interface ControlProps {
 }
 
 export const useSidePanel = (config?: UseSidePanelProps) => {
+  const [touched, setTouched] = React.useState(false);
   const configParams = config
     ? config
     : {
@@ -40,14 +42,27 @@ export const useSidePanel = (config?: UseSidePanelProps) => {
   const panelId = useUniqueId(panelIdParam);
   const labelId = useUniqueId(labelIdParam);
 
+  // This prevents keyframes animations from rendering prematurely
+  const handleSetTouched = () => {
+    if (touched === false) {
+      setTouched(true);
+    }
+  };
+
   const handleClick = () => {
-    setExpanded(!expanded);
+    handleSetExpanded(!expanded);
+  };
+
+  const handleSetExpanded = (newExpandedState: boolean) => {
+    handleSetTouched();
+    setExpanded(newExpandedState);
   };
 
   const panelProps: PanelProps = {
     expanded: expanded,
     id: panelId,
     'aria-labelledby': labelId,
+    touched,
   };
 
   const labelProps: LabelProps = {
@@ -63,7 +78,7 @@ export const useSidePanel = (config?: UseSidePanelProps) => {
 
   return {
     expanded,
-    setExpanded,
+    setExpanded: handleSetExpanded,
     panelProps,
     labelProps,
     controlProps,
