@@ -142,4 +142,68 @@ describe('Tooltip', () => {
       });
     });
   });
+
+  context('given Ellipsis is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Components/Popups/Tooltip/React', 'Ellipsis');
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it('should not have an aria-label', () => {
+      cy.get('button').should('not.have.attr', 'aria-label');
+    });
+
+    context('when the "Short Content" button is hovered', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Short Content'}).trigger('mouseover');
+      });
+
+      it('should not show the tooltip', () => {
+        cy.findByRole('tooltip').should('not.be.visible');
+      });
+    });
+
+    context(
+      'when the "Super Mega Ultra Long Content With Max Width On The Button" button is hovered',
+      () => {
+        beforeEach(() => {
+          cy.findByRole('button', {
+            name: 'Super Mega Ultra Long Content With Max Width On The Button',
+          }).trigger('mouseover');
+        });
+
+        it('should show the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+      }
+    );
+
+    context('when the "Short Content" button is focused', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Short Content'}).focus();
+      });
+
+      it('should not show the tooltip', () => {
+        cy.findByRole('tooltip').should('not.be.visible');
+      });
+    });
+
+    context(
+      'when the "Super Mega Ultra Long Content With Max Width On The Button" button is focused',
+      () => {
+        beforeEach(() => {
+          cy.findByRole('button', {
+            name: 'Super Mega Ultra Long Content With Max Width On The Button',
+          }).focus();
+        });
+
+        it('should show the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+      }
+    );
+  });
 });
