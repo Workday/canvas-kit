@@ -6,6 +6,7 @@ import {Default} from './examples/Default';
 import {CustomContent} from './examples/CustomContent';
 import {DescribeType} from './examples/DescribeType';
 import {Placements} from './examples/Placements';
+import {Ellipsis} from './examples/Ellipsis';
 import {UseTooltip} from './examples/UseTooltip';
 
 <Meta title="Components/Popups/Tooltip/React" component={Tooltip} />
@@ -69,6 +70,22 @@ The tooltip allows for a `placement` configuration. The tooltip uses
 for tooltips.
 
 <ExampleCodeBlock code={Placements} />
+
+### Ellipsis
+
+Tooltips can be applied to text that truncates with an ellipsis. To achieve ellipsis text, you must
+have the following CSS applied to an element:
+
+```css
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+```
+
+Canvas Kit Buttons have this style applied to the text inside them. `OverflowTooltip` in combination
+with a max-width can show a tooltip only when overflow is detected:
+
+<ExampleCodeBlock code={Ellipsis} />
 
 ### The UseTooltip Hook
 

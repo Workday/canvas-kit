@@ -53,6 +53,16 @@ describe('Tooltip', () => {
           cy.findByRole('tooltip').should('not.be.visible');
         });
       });
+
+      context('when the target is clicked', () => {
+        beforeEach(() => {
+          cy.get('button').click();
+        });
+
+        it('should not close the tooltip', () => {
+          cy.findByRole('tooltip').should('not.be.visible');
+        });
+      });
     });
 
     context('when close icon gains focus', () => {

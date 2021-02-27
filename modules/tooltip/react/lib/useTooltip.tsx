@@ -27,6 +27,22 @@ const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear
   };
 };
 
+const isInteractiveElement = (element: HTMLElement) => {
+  const tagName = element.tagName.toLowerCase();
+  const tabIndex = element.getAttribute('tabindex');
+
+  switch (tagName) {
+    case 'button':
+    case 'input':
+    case 'select':
+    case 'textarea':
+    case 'details':
+      return true;
+    default:
+      return tabIndex ? Number(tabIndex) >= 0 : false;
+  }
+};
+
 /**
  * Convenience hook for creating components with tooltips. It will return an object of properties to mix
  * into a target, popper and tooltip
@@ -44,6 +60,7 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
   type?: 'label' | 'describe';
   titleText?: string;
 } = {}) {
+  const mouseDownRef = React.useRef(false); // use to prevent newly focused from making tooltip flash
   const [isOpen, setOpen] = React.useState(false);
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
   const [id] = React.useState(() => uuid());
@@ -65,6 +82,21 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     onOpen();
   };
 
+  const onFocus = (event: React.FocusEvent<HTMLElement>) => {
+    if (!mouseDownRef.current) {
+      onOpenFromTarget(event);
+    }
+
+    mouseDownRef.current = false;
+  };
+
+  const onMouseDown = (event: React.MouseEvent<HTMLElement>) => {
+    mouseDownRef.current = true;
+    if (isInteractiveElement(event.currentTarget)) {
+      closeTooltip();
+    }
+  };
+
   useCloseOnEscape(ref, closeTooltip);
   useAlwaysCloseOnOutsideClick(ref, closeTooltip);
 
@@ -77,8 +109,8 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
       'aria-label': type === 'label' ? titleText : undefined,
       onMouseEnter: onOpenFromTarget,
       onMouseLeave: intentTimer.start,
-      onMouseDown: closeTooltip,
-      onFocus: onOpenFromTarget,
+      onMouseDown,
+      onFocus,
       onBlur: intentTimer.start,
     },
     /** Mix these properties into the `Popper` component */
