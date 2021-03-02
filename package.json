@@ -119,6 +119,7 @@
     "semver": "^7.3.2",
     "storybook-chromatic": "^3.5.5",
     "storybook-readme": "^5.0.9",
+    "string-replace-loader": "2.3.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
     "typescript": "^3.8.3"

@@ -9,9 +9,9 @@ export const Placements = () => {
     justifyContent: 'space-around',
   };
 
-  const createPlacement = (placement: string) => {
+  const createPlacement = (placement: string, index) => {
     return (
-      <Tooltip title="Add" placement={placement as Placement}>
+      <Tooltip title="Add" placement={placement as Placement} key={index}>
         <Card
           style={{
             display: 'flex',

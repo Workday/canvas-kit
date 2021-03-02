@@ -5,20 +5,20 @@ describe('Tooltip', () => {
     h.stories.visit();
   });
 
-  context('given Default is rendered', () => {
+  context('given the [Components/Popups/Tooltip/React, DefaultStory] example is rendered', () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Tooltip/React', 'DefaultStory'); // Default gets converted to Default Story in MDX
     });
 
-    it('should not have any axe errors', () => {
+    it('should not have any axe-core errors', () => {
       cy.checkA11y();
     });
 
-    it('should have an aria-label of "Close"', () => {
+    it('the button should have an aria-label of "Close"', () => {
       cy.get('button').should('have.ariaLabel', 'Close');
     });
 
-    context('when close icon is hovered', () => {
+    context('when the close icon is hovered', () => {
       beforeEach(() => {
         cy.get('button').trigger('mouseover');
       });
@@ -27,7 +27,7 @@ describe('Tooltip', () => {
         cy.findByRole('tooltip').should('be.visible');
       });
 
-      it('should not have any axe errors', () => {
+      it('should not have any axe-core errors', () => {
         cy.checkA11y();
       });
 
@@ -42,7 +42,7 @@ describe('Tooltip', () => {
         });
       });
 
-      context('when ESC key is pressed', () => {
+      context('when the Escape key is pressed', () => {
         beforeEach(() => {
           cy.get('body').trigger('keydown', {
             key: 'Escape',
@@ -65,7 +65,7 @@ describe('Tooltip', () => {
       });
     });
 
-    context('when close icon gains focus', () => {
+    context('when the close icon gains focus', () => {
       beforeEach(() => {
         cy.get('button').focus();
       });
@@ -84,7 +84,7 @@ describe('Tooltip', () => {
         });
       });
 
-      context('then Escape key is pressed', () => {
+      context('then the Escape key is pressed', () => {
         beforeEach(() => {
           cy.get('button').trigger('keydown', {
             key: 'Escape',
@@ -96,7 +96,7 @@ describe('Tooltip', () => {
         });
       });
 
-      context('then a click happens outside', () => {
+      context('then a click happens outside both tooltip and icon button', () => {
         beforeEach(() => {
           cy.get('body').click();
         });
@@ -108,12 +108,12 @@ describe('Tooltip', () => {
     });
   });
 
-  context('given Describe Type is rendered', () => {
+  context('given the [Components/Popups/Tooltip/React, Describe Type] example is rendered', () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Tooltip/React', 'Describe Type');
     });
 
-    it('should not have any axe errors', () => {
+    it('should not have any axe-core errors', () => {
       cy.checkA11y();
     });
 
@@ -121,7 +121,7 @@ describe('Tooltip', () => {
       cy.get('button').should('not.have.attr', 'aria-describedby');
     });
 
-    context('when Delete button is hovered', () => {
+    context('when the "Delete" button is hovered', () => {
       beforeEach(() => {
         cy.get('button').trigger('mouseover');
       });
@@ -130,7 +130,7 @@ describe('Tooltip', () => {
         cy.findByRole('tooltip').should('be.visible');
       });
 
-      it('should not have any axe errors', () => {
+      it('should not have any axe-core errors', () => {
         cy.checkA11y();
       });
 
@@ -143,12 +143,12 @@ describe('Tooltip', () => {
     });
   });
 
-  context('given Ellipsis is rendered', () => {
+  context('given the [Components/Popups/Tooltip/React, Ellipsis] example is rendered', () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Tooltip/React', 'Ellipsis');
     });
 
-    it('should not have any axe errors', () => {
+    it('should not have any axe-core errors', () => {
       cy.checkA11y();
     });
 
