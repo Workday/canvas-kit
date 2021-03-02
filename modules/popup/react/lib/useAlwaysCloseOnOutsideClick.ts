@@ -38,6 +38,7 @@ export const useAlwaysCloseOnOutsideClick = <E extends HTMLElement>(
 
   React.useLayoutEffect(() => {
     document.addEventListener('mousedown', onClick);
+    stackRef.current?.setAttribute('data-behavior-click-outside-close', 'always');
 
     return () => {
       document.removeEventListener('mousedown', onClick);

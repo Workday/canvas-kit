@@ -54,9 +54,9 @@ describe('getTransformFromPlacement', () => {
     },
   } as const;
 
-  each(io, (expected, placement: Placement) => {
+  each(io, (expected, placement) => {
     it(`given a placement of '${placement}' should return vertical of '${expected.vertical}' and horizontal of '${expected.horizontal}'`, () => {
-      expect(getTransformFromPlacement(placement)).toEqual(expected);
+      expect(getTransformFromPlacement(placement as Placement)).toEqual(expected);
     });
   });
 });

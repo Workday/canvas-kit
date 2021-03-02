@@ -161,7 +161,9 @@ PopupStack.isTopmost(element: HTMLElement): boolean
 
 ### getElements
 
-Returns an array of elements defined by the `element` passed to `add`.
+Returns an array of elements defined by the `element` passed to `add`. This method should return
+elements in the order of lowest z-index to highest z-index. Some popup behaviors will need to make
+decisions based on z-index order.
 
 ```tsx
 PopupStack.getElements(): HTMLElement[]
@@ -216,14 +218,15 @@ frameworks.
 ### Close on outside click
 
 Close only the topmost popup with a click outside the popup when this behavior is applied. To
-determine if this behavior is applied to the global stack, a `data-behavior-click-outside="true"`
-should be applied. This data attribute should be used by all instances of this behavior to determine
-the "topmost" click-outside behavior to close only the topmost popup with this behavior.
+determine if this behavior is applied to the global stack, a
+`data-behavior-click-outside-close="topmost"` should be applied. This data attribute should be used
+by all instances of this behavior to determine the "topmost" click-outside behavior to close only
+the topmost popup with this behavior.
 
 ### Always close on outside click
 
-Close all popups with this behavior regardless of the position in the stack. This doesn't require
-any special `data-*` attributes.
+Close all popups with this behavior regardless of the position in the stack. A
+`data-behavior-click-outside-close="always"` should be applied to the stack element.
 
 ### Close on escape
 
