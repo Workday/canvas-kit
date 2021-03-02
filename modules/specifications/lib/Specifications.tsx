@@ -52,7 +52,6 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
   const baseUrl = React.useContext(BaseURLContext);
 
   const specFile = specifications.find(f => f.name === file);
-  console.log('specFile', specFile);
 
   if (!specFile) {
     return null;

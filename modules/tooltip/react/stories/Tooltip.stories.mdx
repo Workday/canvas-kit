@@ -8,6 +8,7 @@ import {CustomContent} from './examples/CustomContent';
 import {DescribeType} from './examples/DescribeType';
 import {Placements} from './examples/Placements';
 import {Ellipsis} from './examples/Ellipsis';
+import {LineClamp} from './examples/LineClamp';
 import {UseTooltip} from './examples/UseTooltip';
 
 <Meta title="Components/Popups/Tooltip/React" component={Tooltip} />
@@ -90,6 +91,26 @@ Canvas Kit Buttons have this style applied to the text inside them. `OverflowToo
 with a max-width can show a tooltip only when overflow is detected:
 
 <ExampleCodeBlock code={Ellipsis} />
+
+### Line Clamp
+
+The `OverflowTooltip` can support various types of overflow. The component will first look for
+`text-overflow: ellipsis` and `-webkit-line-clamp`, but will fall back to
+`overflow: auto | scroll | clip | hidden`. These properties will be used to determine which
+`element` is experiencing an overflow. Overflow detection is as follows where `element` is
+determined by the above style properties:
+
+```js
+element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight;
+```
+
+Here's an example using the `-webkit-line-clamp` property (multi-line ellipsis which works in all
+browsers except IE11):
+
+<ExampleCodeBlock code={LineClamp} />
+
+Other truncation techniques should be supported as well, even JavaScript ones as long as overflow is
+triggered somehow and detectable differences in scroll size and client size.
 
 ### The UseTooltip Hook
 
