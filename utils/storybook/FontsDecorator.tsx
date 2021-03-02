@@ -1,5 +1,5 @@
 import {Global, css} from '@emotion/core';
-import fonts from '../../modules/fonts/react';
+import fonts from '../../modules/canvas-kit-react-fonts';
 import * as React from 'react';
 
 export default (storyFn: () => React.ReactNode) => (
