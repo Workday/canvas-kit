@@ -206,4 +206,30 @@ describe('Tooltip', () => {
       }
     );
   });
+
+  context('given the [Testing/React/Popups/Tooltip, NonInteractive] example is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Testing/React/Popups/Tooltip', 'NonInteractive');
+    });
+
+    context('when the "Non-interactive Tooltip" text is hovered', () => {
+      beforeEach(() => {
+        cy.findByTestId('non-interactive').trigger('mouseover');
+      });
+
+      it('should open the tooltip', () => {
+        cy.findByRole('tooltip').should('be.visible');
+      });
+
+      context('then the "Non-interactive Tooltip" text is clicked', () => {
+        beforeEach(() => {
+          cy.findByTestId('non-interactive').click();
+        });
+
+        it('should not close the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+      });
+    });
+  });
 });
