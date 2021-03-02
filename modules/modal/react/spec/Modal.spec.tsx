@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import {render, fireEvent, screen} from '@testing-library/react';
 
 import Modal from '../lib/Modal';
 
@@ -11,16 +11,16 @@ const renderModal = (props?: any) =>
   );
 
 describe('Modal', () => {
-  test('should call a callback function', async () => {
+  test('should call a callback function', () => {
     const handleClose = jest.fn();
-    const {findByLabelText} = renderModal({handleClose});
-    fireEvent.click(await findByLabelText('Close'));
+    renderModal({handleClose});
+    fireEvent.click(screen.getByLabelText('Close'));
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
   test('Modal should spread extra props', () => {
-    const {getByRole} = renderModal({['data-propspread']: 'test'});
-    expect(getByRole('dialog').parentElement.parentElement).toHaveAttribute(
+    renderModal({['data-propspread']: 'test'});
+    expect(screen.getByRole('dialog').parentElement.parentElement).toHaveAttribute(
       'data-propspread',
       'test'
     );
@@ -28,7 +28,14 @@ describe('Modal', () => {
 
   test('Modal should forward closeButtonAriaLabel prop to Popup', () => {
     const closeButtonAriaLabel = 'close button aria label';
-    const {getByRole} = renderModal({closeButtonAriaLabel});
-    expect(getByRole('button')).toHaveAttribute('aria-label', closeButtonAriaLabel);
+    renderModal({closeButtonAriaLabel});
+    expect(screen.getByRole('button')).toHaveAttribute('aria-label', closeButtonAriaLabel);
+  });
+
+  test('Modal should add `data-behavior-click-outside-close=topmost` to stack element', () => {
+    renderModal();
+    expect(
+      screen.getByRole('dialog').closest('[data-behavior-click-outside-close]')
+    ).toHaveAttribute('data-behavior-click-outside-close', 'topmost');
   });
 });
