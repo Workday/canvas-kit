@@ -1,9 +1,5 @@
-/// <reference path="../../../typings.d.ts" />
-/** @jsx jsx */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {css, jsx} from '@emotion/core';
 
 import {Tooltip} from '@workday/canvas-kit-react-tooltip';
 
@@ -26,20 +22,27 @@ interface WindowProps {
   left: number;
   heading: string;
   children: React.ReactNode;
+  relativeNode: React.RefObject<HTMLDivElement>;
 }
-const styles = css({
-  position: 'absolute',
-  width: 500,
-});
 
-const Window = ({children, heading, top, left}: WindowProps) => {
+const Window = ({children, heading, relativeNode, top, left}: WindowProps) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   usePopupStack(ref);
   useBringToTopOnClick(ref);
 
+  // position Window relative to a container
+  React.useEffect(() => {
+    console.log(relativeNode);
+    const rect = relativeNode.current.getBoundingClientRect();
+    ref.current.style.position = 'absolute';
+    ref.current.style.top = `${top + rect.top}px`;
+    ref.current.style.left = `${left + rect.left}px`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return ReactDOM.createPortal(
-    <Popup css={styles} heading={heading} style={{top, left}}>
+    <Popup heading={heading} width={500}>
       {children}
     </Popup>,
     ref.current
@@ -83,26 +86,28 @@ const TempPopup = ({
 };
 
 export const MixedPopupTypes = () => {
+  const ref = React.useRef<HTMLDivElement>(null);
+
   return (
-    <div>
-      <Window heading="Window 1" top={50} left={50}>
+    <div ref={ref} style={{height: 420}}>
+      <Window heading="Window 1" top={50} left={50} relativeNode={ref}>
         <Tooltip title="Really long tooltip showing how popup stacks overlap">
           <span tabIndex={0}>Contents of Window 1</span>
         </Tooltip>
       </Window>
-      <Window heading="Window 2" top={100} left={250}>
+      <Window heading="Window 2" top={100} left={250} relativeNode={ref}>
         <Tooltip title="Really long tooltip showing how popup stacks overlap">
           <span tabIndex={0}>Contents of Window 2</span>
         </Tooltip>
       </Window>
-      <Window heading="Window 4" top={300} left={250}>
+      <Window heading="Window 4" top={300} left={250} relativeNode={ref}>
         <div>
           <Tooltip title="Really long tooltip showing how popup stacks overlap">
             <span tabIndex={0}>Contents of Window 4</span>
           </Tooltip>
         </div>
       </Window>
-      <Window heading="Window 3" top={200} left={75}>
+      <Window heading="Window 3" top={200} left={75} relativeNode={ref}>
         <div>
           <Tooltip title="Really long tooltip showing how popup stacks overlap">
             <span tabIndex={0} onClick={() => console.log('clicked')}>
