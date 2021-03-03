@@ -29,20 +29,29 @@ function createTableRows(
 ) {
   if (item.type === 'describe') {
     if (/^given/i.test(item.name)) {
-      context = {...context, given: context.given.concat(`${context.prefix} ${item.name}`)};
+      context = {
+        ...context,
+        given: context.given.concat(context.prefix ? `${context.prefix} ${item.name}` : item.name),
+      };
       context.prefix = '';
     } else if (/^[wt]hen/i.test(item.name)) {
-      context = {...context, when: context.when.concat(`${context.prefix} ${item.name}`)};
+      context = {
+        ...context,
+        when: context.when.concat(context.prefix ? `${context.prefix} ${item.name}` : item.name),
+      };
       context.prefix = '';
     } else {
-      context = {...context, prefix: `${context.prefix} ${item.name}`};
+      context = {...context, prefix: context.prefix ? `${context.prefix} ${item.name}` : item.name};
     }
     item.children.reduce(
       (rows, item, index, children) => createTableRows(rows, item, index, children, context),
       rows
     );
   } else {
-    context = {...context, then: context.then.concat(`${context.prefix} ${item.name}`)};
+    context = {
+      ...context,
+      then: context.then.concat(context.prefix ? `${context.prefix} ${item.name}` : item.name),
+    };
     rows.push(context);
   }
   return rows;
@@ -104,17 +113,16 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
               <td>
                 <ul>
                   {row.when.map((item, index) => (
-                    <li key={index}>{`${index !== 0 ? 'AND THEN ' : ''}${item.replace(
-                      /[tw]hen /i,
-                      ''
-                    )}`}</li>
+                    <li key={index}>
+                      {(index !== 0 ? 'AND THEN ' : '') + item.replace(/[tw]hen /i, '')}
+                    </li>
                   ))}
                 </ul>
               </td>
               <td>
                 <ul>
                   {row.then.map((item, index) => (
-                    <li key={index}>{`it ${item}`}</li>
+                    <li key={index}>{(item.indexOf('should') === 0 ? 'it ' : '') + item}</li>
                   ))}
                 </ul>
               </td>
