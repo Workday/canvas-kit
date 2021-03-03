@@ -152,7 +152,7 @@ describe('Tooltip', () => {
       cy.checkA11y();
     });
 
-    it('should not have an aria-label', () => {
+    it('the button should not have an aria-label', () => {
       cy.get('button').should('not.have.attr', 'aria-label');
     });
 
