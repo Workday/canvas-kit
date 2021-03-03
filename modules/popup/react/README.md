@@ -398,8 +398,8 @@ useCloseOnOutsideClick(stackRef: React.RefObject<HTMLElement>, onClose: () => vo
 
 Registers global listener for all clicks. It will only call the `onClose` callback if the click
 happened outside the `stackRef` element and its children _and_ the provided `stackRef` element is
-the topmost element with this behavior applied in the stack. Adds a `data-behavior-click-outside`
-attribute to track usage of this behavior hook.
+the topmost element with this behavior applied in the stack. Adds a
+`data-behavior-click-outside-close="topmost"` attribute to ensure proper functionality.
 
 The `stackRef` should be the same as the one passed to `usePopupStack` or the `Popper` component
 since `Popper` uses `usePopupStack` internally.
@@ -416,7 +416,8 @@ useAlwaysCloseOnOutsideClick(stackRef: React.RefObject<HTMLElement>, onClose: ()
 
 Registers global listener for all clicks. It will only call the `onClose` callback if the click
 happened outside the `stackRef` element and its children regardless of the position in the stack.
-This is useful for Tooltips or hierarchical menus.
+This is useful for Tooltips or hierarchical menus. Adds a
+`data-behavior-click-outside-close="always"` attribute to ensure proper functionality.
 
 The `stackRef` should be the same as the one passed to `usePopupStack` or the `Popper` component
 since `Popper` uses `usePopupStack` internally.

@@ -6,8 +6,6 @@ A package of all the automated Cypress specifications for use in documentation.
 
 ## Installation
 
-or
-
 ```sh
 yarn add @workday/canvas-kit-specifications
 ```
