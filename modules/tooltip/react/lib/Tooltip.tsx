@@ -16,11 +16,10 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   /**
    * The target (anchor element) for the Tooltip.
    *
-   * **Note:** This **must** be an Element, StyledComponent or any
-   * other component that forwards extra props to an Element. Tooltip works running
-   * `React.cloneElement` on the children and adds extra properties like aria attributes and event
-   * handlers. This is currently a limitation of the Tooltip component. Functionality will not work
-   * if this condition isn't met
+   * **Note:** This **must** be a single Element, StyledComponent, or any other component that
+   * forwards extra props to an Element. Tooltip works running `React.cloneElement` on the children
+   * and adds extra properties like aria attributes and event handlers. This is currently a
+   * limitation of the Tooltip component. Functionality will not work if this condition isn't met.
    */
   children: React.ReactElement<any>;
   /**
@@ -30,17 +29,21 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   placement?: Placement;
   /**
    * Determines the tooltip type for accessibility.
-   * * `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip
-   * `title` prop is the same as the text content of the wrapped element. E.g. IconButtons or
-   * Ellipsis tooltips.
-   * * `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has
-   * additional information about the target.
+   *
+   * - `label`: Sets the accessible name for the wrapped element. Use for icons or if tooltip
+   *   `title` prop is the same as the text content of the wrapped element. E.g. IconButtons or
+   *   Ellipsis tooltips.
+   * - `describe`: Sets `aria-describedby` of the wrapped element. Use if the tooltip has additional
+   *   information about the target.
+   * - `muted`: No effort is made to make the tooltip accessible to screen readers. Use if the
+   *   tooltip contents are not useful to a screen reader or if you have handled accessibility of
+   *   the tooltip yourself.
    *
    * **Note**: Assistive technology may ignore `describe` techniques based on verbosity settings.
    * Consider an alternate way to inform a user of additional important information.
    * @default 'label'
    */
-  type?: 'label' | 'describe';
+  type?: 'label' | 'describe' | 'muted';
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(

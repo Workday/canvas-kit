@@ -62,11 +62,10 @@ export interface OverflowTooltipProps extends Omit<React.HTMLAttributes<HTMLDivE
   /**
    * The target (anchor element) for the Tooltip.
    *
-   * **Note:** This **must** be an Element, StyledComponent or any
-   * other component that forwards extra props to an Element. Tooltip works running
-   * `React.cloneElement` on the children and adds extra properties like aria attributes and event
-   * handlers. This is currently a limitation of the Tooltip component. Functionality will not work
-   * if this condition isn't met
+   * **Note:** This **must** be a single Element, StyledComponent, or any other component that
+   * forwards extra props to an Element. Tooltip works running `React.cloneElement` on the children
+   * and adds extra properties like aria attributes and event handlers. This is currently a
+   * limitation of the Tooltip component. Functionality will not work if this condition isn't met.
    */
   children: React.ReactElement<any>;
   /**

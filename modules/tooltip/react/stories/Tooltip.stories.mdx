@@ -6,6 +6,7 @@ import {Specifications} from '@workday/canvas-kit-specifications';
 import {Default} from './examples/Default';
 import {CustomContent} from './examples/CustomContent';
 import {DescribeType} from './examples/DescribeType';
+import {Muted} from './examples/Muted';
 import {Placements} from './examples/Placements';
 import {Ellipsis} from './examples/Ellipsis';
 import {LineClamp} from './examples/LineClamp';
@@ -39,6 +40,27 @@ This component follows the
 [W3 Tooltip specification](https://www.w3.org/TR/wai-aria-practices/#tooltip). Tooltips are used to
 label icon buttons and provide additional context to elements.
 
+### When to use tooltips
+
+If you’re trying to display additional information for users to better understand the purpose,
+context, or interaction.
+
+### When not to use tooltips
+
+When the visual text will be the exact same as what is visually displayed to the user without the
+tooltip being visible
+
+- Does this element need additional context or information?
+  - No: Don't use a tooltip
+  - Yes:
+    - Is the tooltip text useful to screen reader users?
+      - No: Use `type="muted"` which will not make the tooltip visible to screen reader users
+      - Yes:
+        - Is the tooltip text different from the visual text displayed to users?
+          - No text: Use `type="label"` which will add `aria-label` like the icon example
+          - Yes: Use `type="describe"` which will add `aria-describedby`
+          - No: Don't use a tooltip
+
 ### Basic Example
 
 Here is a basic example of an `IconButton` using a tooltip to label the icon. This is labeling the
@@ -51,10 +73,19 @@ Mouse over or focus on the x icon below. Click "Show code" to see the source cod
 ### Describing an Element
 
 The default mode for a tooltip is to label content via `aria-label`. If a tooltip is meant to
-provide ancilary, but not critical information, the `type` can be set to `describe`. This will add
-`aria-describedby` to the target element.
+provide ancillary information, the `type` can be set to `describe`. This will add `aria-describedby`
+to the target element. This will allow screen reader users to hear the name of the control that is
+being focused and the ancillary tooltip information.
 
 <ExampleCodeBlock code={DescribeType} />
+
+### Muted Tooltips
+
+If a tooltip does not need to be visible to screen reader users, or you handle accessibility of the
+tooltip yourself, you can set the `type` to `muted`. This will not add any special ARIA attributes
+to the target element.
+
+<ExampleCodeBlock code={Muted} />
 
 ### Custom Content
 

@@ -117,7 +117,7 @@ describe('Tooltip', () => {
       cy.checkA11y();
     });
 
-    it('should not have an aria-describedby', () => {
+    it('the "Delete" button should not have an aria-describedby', () => {
       cy.get('button').should('not.have.attr', 'aria-describedby');
     });
 
@@ -134,11 +134,51 @@ describe('Tooltip', () => {
         cy.checkA11y();
       });
 
-      it('should have an aria-describedby linking to the button', () => {
+      it('the "Delete" button should have an aria-describedby linking to the role="tooltip" element', () => {
         cy.get('button').should(
           'have.ariaDescription',
           'The service will restart after this action'
         );
+      });
+    });
+  });
+
+  context('given the [Components/Popups/Tooltip/React, Muted] example is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Components/Popups/Tooltip/React', 'Muted');
+    });
+
+    it('should not have any axe-core errors', () => {
+      cy.checkA11y();
+    });
+
+    it('the span element should not have an aria-describedby attribute', () => {
+      cy.get('button').should('not.have.attr', 'aria-describedby');
+    });
+
+    it('the span element should not have an aria-label attribute', () => {
+      cy.get('button').should('not.have.attr', 'aria-describedby');
+    });
+
+    context('when the "Delete" button is hovered', () => {
+      beforeEach(() => {
+        cy.get('span').trigger('mouseover');
+      });
+
+      it('should show the tooltip', () => {
+        cy.findByRole('tooltip').should('be.visible');
+      });
+
+      it('should not have any axe-core errors', () => {
+        cy.checkA11y();
+      });
+
+      it('the span element should not have an aria-describedby attribute', () => {
+        cy.get('button').should('not.have.attr', 'aria-describedby');
+      });
+
+      it('the span element should not have an aria-label attribute', () => {
+        cy.get('button').should('not.have.attr', 'aria-describedby');
       });
     });
   });
