@@ -1,19 +1,15 @@
 import * as React from 'react';
 import {ThemeProvider} from 'emotion-theming';
 import {InputProvider} from '@workday/canvas-kit-react-core';
-import {defaultCanvasTheme, PartialEmotionCanvasTheme, ContentDirection} from '../lib/theming';
-import styled from '@emotion/styled';
+import {defaultCanvasTheme, PartialEmotionCanvasTheme} from '../lib/theming';
 
 export interface CanvasProviderProps {
   theme: PartialEmotionCanvasTheme;
 }
 
-const DirectionContainer = styled('bdo')<{dir: ContentDirection}>(({dir}) => ({
-  direction: dir,
-  display: 'block'
-}));
-
-export class CanvasProvider extends React.Component<CanvasProviderProps> {
+export class CanvasProvider extends React.Component<
+  CanvasProviderProps & React.HTMLAttributes<HTMLElement>
+> {
   static defaultProps = {
     theme: {
       canvas: defaultCanvasTheme,
@@ -21,15 +17,16 @@ export class CanvasProvider extends React.Component<CanvasProviderProps> {
   };
 
   render() {
-    const {children, theme} = this.props;
+    const {children, theme, ...elemProps} = this.props;
     return (
       <ThemeProvider theme={theme}>
         <InputProvider />
-        <DirectionContainer
+        <div
           dir={(theme.canvas && theme.canvas.direction) || defaultCanvasTheme.direction}
+          {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
         >
           {children}
-        </DirectionContainer>
+        </div>
       </ThemeProvider>
     );
   }

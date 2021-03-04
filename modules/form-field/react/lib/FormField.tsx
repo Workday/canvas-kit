@@ -123,8 +123,8 @@ class FormField extends React.Component<FormFieldProps> {
 
   private inputId: string = this.props.inputId || uuid();
 
-  private renderChildren = (child: React.ReactElement): React.ReactNode => {
-    if (React.isValidElement<any>(child)) {
+  private renderChildren = (child: React.ReactNode): React.ReactNode => {
+    if (React.isValidElement(child)) {
       const props: GrowthBehavior &
         FormFieldErrorBehavior &
         React.InputHTMLAttributes<HTMLInputElement> = {

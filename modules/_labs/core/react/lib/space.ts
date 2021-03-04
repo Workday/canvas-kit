@@ -104,7 +104,7 @@ export const space = (props: SpaceProps) => {
   const spacingReg = /^[mp][trblxy]?$/;
   const keys = Object.keys(props)
     .filter(key => spacingReg.test(key))
-    .sort();
+    .sort() as SpaceProp[];
 
   const styles: CSSObject = {};
 

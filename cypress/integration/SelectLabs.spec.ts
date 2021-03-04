@@ -304,7 +304,7 @@ describe('Select', () => {
 
         context('when the space key is pressed', () => {
           beforeEach(() => {
-            cy.findByLabelText('Label').type(' ');
+            cy.findByLabelText('Label').type(' ', {force: true}); // disable event.preventDefault checks
           });
 
           context('the select button', () => {

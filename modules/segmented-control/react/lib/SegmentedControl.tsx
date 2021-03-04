@@ -75,8 +75,8 @@ const SegmentedControlContainer = styled('div')(
 );
 
 const onButtonClick = (
-  existingOnClick: (e: React.SyntheticEvent) => void | undefined,
-  onChange: (value: string | number) => void,
+  existingOnClick: ((e: React.MouseEvent<HTMLButtonElement>) => void) | undefined,
+  onChange: ((value: string | number) => void) | undefined,
   index: number,
   event: React.MouseEvent<HTMLButtonElement>
 ): void => {

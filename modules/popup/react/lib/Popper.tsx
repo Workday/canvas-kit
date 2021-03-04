@@ -65,10 +65,7 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
-  ({portal = true, open = true, ...elemProps}: PopperProps, forwardRef) => {
-    const localRef = React.useRef<HTMLDivElement>(null);
-    const ref = (forwardRef || localRef) as React.RefObject<HTMLDivElement>;
-
+  ({portal = true, open = true, ...elemProps}: PopperProps, ref) => {
     if (!open) {
       return null;
     }
@@ -119,12 +116,12 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       containerElement,
       ...elemProps
     },
-    forwardRef: React.RefObject<HTMLDivElement>
+    ref
   ) => {
     const firstRender = React.useRef(true);
     const popperInstance = React.useRef<PopperJS.Instance>();
     const [placement, setPlacement] = React.useState(popperPlacement);
-    const stackRef = usePopupStack(forwardRef, anchorElement as HTMLElement);
+    const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {

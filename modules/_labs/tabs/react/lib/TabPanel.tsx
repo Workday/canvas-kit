@@ -1,10 +1,19 @@
 /** @jsx jsx */
-import {jsx, css} from '@emotion/core';
-import {mouseFocusBehavior} from '@workday/canvas-kit-react-common';
 import React from 'react';
-import {useTab} from './Tabs';
+import {jsx, css} from '@emotion/core';
 
-export interface TabPanelProps extends React.HTMLAttributes<HTMLElement> {
+import {
+  createComponent,
+  mouseFocusBehavior,
+  useLocalRef,
+  useModelContext,
+  useMountLayout,
+} from '@workday/canvas-kit-react-common';
+
+import {TabsModelContext} from './Tabs';
+import {TabsModel} from './useTabsModel';
+
+export interface TabPanelProps {
   /**
    * The contents of the TabPanel.
    */
@@ -15,6 +24,18 @@ export interface TabPanelProps extends React.HTMLAttributes<HTMLElement> {
    * string representation of the the zero-based index of the Tab when it was initialized.
    */
   name?: string;
+  /**
+   * Part of the ARIA specification for tabs. By default, all `tabpanel` elements have a `tabIndex`
+   * of `0` which makes the whole content area receive focus. If you have a focusable item near the
+   * top of the tab panel content area, you may set `tabIndex` to `undefined` to prevent the tab
+   * panel element from receiving focus. Only do this is a child of the tab panel can receive focus.
+   */
+  tabIndex?: number;
+  /**
+   * Optionally pass a model directly to this component. Default is to implicitly use the same
+   * model as the container component which uses React context. Only use this for advanced use-cases
+   */
+  model?: TabsModel;
 }
 
 const styles = css(
@@ -25,33 +46,37 @@ const styles = css(
   })
 );
 
-const TabPanel = ({children, name = '', ...elemProps}: TabPanelProps) => {
-  const {id, activeTab, registerPanel, unregisterPanel} = useTab();
-  const [tabName, setTabName] = React.useState(name);
+export const TabPanel = createComponent('div')({
+  displayName: 'Tabs.Panel',
+  Component: ({children, name = '', model, ...elemProps}: TabPanelProps, ref, Element) => {
+    const {state, events} = useModelContext(TabsModelContext, model);
+    const [tabName, setTabName] = React.useState(name);
+    const {localRef, elementRef} = useLocalRef(ref);
 
-  // useLayoutEffect so we don't an incorrect frame if a name isn't provided
-  React.useLayoutEffect(() => {
-    const tabName = registerPanel(name);
-    setTabName(tabName);
+    useMountLayout(() => {
+      const index = state.panelIndexRef.current;
+      const tabName = name || String(index);
+      events.registerPanel({item: {id: tabName, ref: localRef}});
+      setTabName(tabName);
 
-    return () => {
-      unregisterPanel(tabName);
-    };
-  }, [name, registerPanel, unregisterPanel]);
+      return () => {
+        events.unregisterItem({id: tabName});
+      };
+    });
 
-  return (
-    <div
-      role="tabpanel"
-      css={styles}
-      aria-labelledby={`tab-${id}-${tabName}`}
-      hidden={!!tabName && tabName !== activeTab}
-      id={`tabpanel-${id}-${tabName}`}
-      tabIndex={0}
-      {...elemProps}
-    >
-      {children}
-    </div>
-  );
-};
-
-export default TabPanel;
+    return (
+      <Element
+        ref={elementRef}
+        role="tabpanel"
+        css={styles}
+        aria-labelledby={`tab-${state.id}-${tabName}`}
+        hidden={!!tabName && tabName !== state.activeTab}
+        id={`tabpanel-${state.id}-${tabName}`}
+        tabIndex={0}
+        {...elemProps}
+      >
+        {children}
+      </Element>
+    );
+  },
+});

@@ -4,13 +4,14 @@ describe('Tabs', () => {
   before(() => {
     h.stories.visit();
   });
-  ['Simple', 'NamedKeys'].forEach(story => {
+
+  ['Simple', 'Named Keys'].forEach(story => {
     context(`given the '${story}' story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Testing/React/Labs/Tabs', story);
+        h.stories.load('Labs/Tabs/React', story);
       });
 
-      it('should pass accessibility checks', () => {
+      it('should pass axe checks', () => {
         cy.checkA11y();
       });
 
@@ -211,6 +212,106 @@ describe('Tabs', () => {
           it('should set "tabindex=-1" on the last tab', () => {
             cy.findByRole('tab', {name: 'Fifth Tab'}).should('have.attr', 'tabindex', '-1');
           });
+        });
+      });
+    });
+  });
+
+  context('given the DisabledTab story is rendered', () => {
+    beforeEach(() => {
+      cy.loadStory('Labs/Tabs/React', 'DisabledTab');
+    });
+
+    context('when the first tab is active and focused', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'First Tab'})
+          .click()
+          .focus();
+      });
+
+      context('when the right arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{rightarrow}');
+        });
+
+        it('should skip over the second tab and focus on the third tab', () => {
+          cy.findByRole('tab', {name: 'Third Tab'}).should('have.focus');
+        });
+      });
+    });
+  });
+
+  context('given the LeftToRight story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Labs/Tabs/React', 'RightToLeft');
+    });
+
+    context('when the first tab is active and focused', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'ראשון'})
+          .click()
+          .focus();
+      });
+
+      context('when the tab key is pressed', () => {
+        beforeEach(() => {
+          cy.tab();
+        });
+
+        it('should move focus to the tabpanel', () => {
+          cy.findByRole('tabpanel', {name: 'ראשון'})
+            .should('have.focus')
+            .and('contain', 'תוכן הראשון');
+        });
+      });
+
+      context('when the left arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{leftarrow}');
+        });
+
+        it('should have tabindex=-1 on the first tab', () => {
+          cy.findByRole('tab', {name: 'ראשון'}).should('have.attr', 'tabindex', '-1');
+        });
+
+        it('should not have tabindex on the second tab', () => {
+          cy.findByRole('tab', {name: 'שְׁנִיָה'}).should('not.have.attr', 'tabindex');
+        });
+
+        it('should focus on the second tab', () => {
+          cy.findByRole('tab', {name: 'שְׁנִיָה'}).should('have.focus');
+        });
+
+        context('when the space key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().type(' ');
+          });
+
+          it('should not have "aria-selected" on the first tab', () => {
+            cy.findByRole('tab', {name: 'ראשון'}).should('not.have.attr', 'aria-selected');
+          });
+
+          it('should have "aria-selected=true" on the second tab', () => {
+            cy.findByRole('tab', {name: 'שְׁנִיָה'}).should('have.attr', 'aria-selected', 'true');
+          });
+        });
+      });
+
+      context('when the right arrow is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{rightarrow}');
+        });
+
+        it('should have tabindex=-1 on the first tab', () => {
+          cy.findByRole('tab', {name: 'ראשון'}).should('have.attr', 'tabindex', '-1');
+        });
+
+        it('should not have tabindex on the last tab', () => {
+          cy.findByRole('tab', {name: 'חמישי'}).should('not.have.attr', 'tabindex');
+        });
+
+        it('should focus on the last tab', () => {
+          cy.findByRole('tab', {name: 'חמישי'}).should('have.focus');
         });
       });
     });

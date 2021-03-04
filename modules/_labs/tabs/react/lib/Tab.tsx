@@ -1,9 +1,22 @@
 import * as React from 'react';
-import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, hideMouseFocus, styled} from '@workday/canvas-kit-react-common';
-import {useTab} from './Tabs';
 
-export interface TabProps extends React.HTMLAttributes<HTMLElement> {
+import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react-core';
+import {
+  createComponent,
+  focusRing,
+  hideMouseFocus,
+  mergeProps,
+  styled,
+  StyledType,
+  useLocalRef,
+  useModelContext,
+} from '@workday/canvas-kit-react-common';
+
+import {TabsModelContext} from './Tabs';
+import {TabsModel} from './useTabsModel';
+import {useRegisterItem} from './list';
+
+export interface TabProps {
   /**
    * The label text of the Tab.
    */
@@ -14,9 +27,36 @@ export interface TabProps extends React.HTMLAttributes<HTMLElement> {
    * string representation of the the zero-based index of the Tab when it was initialized.
    */
   name?: string;
+  /**
+   * Optionally pass a model directly to this component. Default is to implicitly use the same
+   * model as the container component which uses React context. Only use this for advanced use-cases
+   */
+  model?: TabsModel;
+  /**
+   * Optional id. If not set, it will inherit the ID passed to the `Tabs` component and append the
+   * index at the end. Only set this for advanced cases.
+   */
+  id?: string;
+  /**
+   * Part of the ARIA specification for tabs. This attributes links a `role=tab` to a
+   * `role=tabpanel`. This value must be the same as the associated `id` attribute of the tab panel.
+   * This is automatically set by the component and should only be used in advanced cases.
+   */
+  'aria-controls'?: string;
+  /**
+   * Part of the ARIA specification for tabs. Lets screen readers know which tab is active. This
+   * should either be `true` or `undefined` and never `false`. This is automatically set by the
+   * component and should only be used in advanced cases.
+   */
+  'aria-selected'?: boolean;
+  /**
+   * Part of the ARIA specification for tabs. The currently active tab should not have a `tabIndex` set while
+   * all inactive tabs should have a `tabIndex={-1}`
+   */
+  tabIndex?: number;
 }
 
-const StyledButton = styled('button')<{isSelected: boolean}>(
+const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
   {
     ...type.body,
     ...type.variant.button,
@@ -43,6 +83,13 @@ const StyledButton = styled('button')<{isSelected: boolean}>(
     '&:focus': {
       outline: `none`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
+    },
+    '&:disabled': {
+      color: colors.licorice100,
+      '&:hover': {
+        cursor: 'auto',
+        backgroundColor: `transparent`,
+      },
     },
   },
   ({isSelected}) => {
@@ -71,59 +118,36 @@ const StyledButton = styled('button')<{isSelected: boolean}>(
   }
 );
 
-const Tab = ({name = '', children, ...elemProps}: TabProps) => {
-  const {
-    id,
-    intentTab,
-    resetIntentTab,
-    activeTab,
-    setActiveTab,
-    setSelectedTabRect,
-    registerTab,
-    unregisterTab,
-  } = useTab();
-  const tabRef = React.useRef<HTMLButtonElement>(null);
-  const [tabName, setTabName] = React.useState(name);
+export const Tab = createComponent('button')({
+  displayName: 'Tabs.Item',
+  Component: ({name = '', model, children, ...elemProps}: TabProps, ref, Element) => {
+    const {localRef, elementRef} = useLocalRef(ref);
+    const {state, events} = useModelContext(TabsModelContext, model);
 
-  // useLayoutEffect because we don't want to render with incorrect ID
-  React.useLayoutEffect(() => {
-    const tabElement = tabRef.current as HTMLElement;
-    const tabName = registerTab(tabElement, name);
-    setTabName(tabName);
+    const tabName = useRegisterItem({state, events}, localRef, name);
 
-    return () => {
-      unregisterTab(tabElement);
+    const onSelect = () => {
+      events.activate({tab: tabName});
     };
-  }, [name, registerTab, unregisterTab]);
 
-  const onSelect = () => {
-    setActiveTab(tabName);
-  };
+    const isSelected = !!tabName && state.activeTab === tabName;
 
-  const isSelected = !!tabName && activeTab === tabName;
+    const props = mergeProps(
+      {
+        id: `tab-${state.id}-${tabName}`,
+        tabIndex: !!tabName && state.cursorId === tabName ? undefined : -1,
+        'aria-selected': isSelected ? true : undefined,
+        'aria-controls': `tabpanel-${state.id}-${tabName}`,
+        onClick: onSelect,
+        isSelected: isSelected,
+      },
+      elemProps
+    );
 
-  React.useLayoutEffect(() => {
-    if (isSelected && tabRef.current) {
-      setSelectedTabRect(tabRef.current.getBoundingClientRect());
-    }
-  }, [isSelected, tabRef, setSelectedTabRect, tabName, intentTab]);
-
-  return (
-    <StyledButton
-      ref={tabRef}
-      role="tab"
-      id={`tab-${id}-${tabName}`}
-      tabIndex={!!tabName && intentTab === tabName ? undefined : -1}
-      aria-selected={isSelected ? true : undefined}
-      aria-controls={`tabpanel-${id}-${tabName}`}
-      onClick={onSelect}
-      onBlur={resetIntentTab}
-      isSelected={isSelected}
-      {...elemProps}
-    >
-      {children}
-    </StyledButton>
-  );
-};
-
-export default Tab;
+    return (
+      <StyledButton type="button" role="tab" ref={elementRef} as={Element} {...props}>
+        {children}
+      </StyledButton>
+    );
+  },
+});

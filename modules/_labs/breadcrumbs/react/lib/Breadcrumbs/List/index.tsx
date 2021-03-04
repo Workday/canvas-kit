@@ -16,7 +16,7 @@ const breadcrumbListStyles = css({
 export type BreadcrumbsListProps = React.HTMLAttributes<HTMLUListElement>;
 
 export const BreadcrumbsList = forwardRef(
-  ({children, ...props}: BreadcrumbsListProps, ref: React.RefObject<HTMLUListElement>) => {
+  ({children, ...props}: BreadcrumbsListProps, ref: React.Ref<HTMLUListElement>) => {
     return (
       <ul css={breadcrumbListStyles} role="list" ref={ref} {...props}>
         {children}
