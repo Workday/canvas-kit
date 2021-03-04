@@ -104,10 +104,11 @@ for tooltips.
 
 <ExampleCodeBlock code={Placements} />
 
-### Ellipsis
+### Tooltips on overflowing content
 
-Tooltips can be applied to text that truncates with an ellipsis. To achieve ellipsis text, you must
-have the following CSS applied to an element:
+The `OverflowTooltip` component can be applied to any element that has some type of overflow
+applied, or has a child element that has overflow applied. The most common and widely supported type
+of truncation is the ellipsis.
 
 ```css
 overflow: hidden;
@@ -115,8 +116,32 @@ text-overflow: ellipsis;
 white-space: nowrap;
 ```
 
-An `OverflowTooltip` can be applied to any element that has this overflow applied, or has a child
-element that has this overflow applied.
+**Note**: Text truncation should be avoided if possible. A user should not have to activate a
+tooltip to access important content. If user-generated content is being truncated, the following
+situation might occur which is a bad user experence. Consider the following list:
+
+- Home Site A
+- Home Site B
+- Home Site C
+
+If the list items get truncated via an ellipsis, this is what the user could see:
+
+- Home Sit...
+- Home Sit...
+- Home Sit...
+
+Here are suggestions to try to avoid truncation:
+
+- Allow content to wrap instead
+- Limit character count in admin interfaces if possible to avoid need for truncation
+- Avoid fixed container sizes if possible to allow content to flow naturally
+
+If truncation is required, here are a few guidelines to insure minimal impact on users:
+
+- Only truncate text of elements that natually receive focus.
+  - Keyboard users can only activate tooltips with focus. Adding `tabindex=0` can give focus to
+    non-focusable elements, but increase the amount of tab stops for keyboard users.
+- Provide the full content elsewhere in the UI
 
 Canvas Kit Buttons have this style applied to the text inside them. `OverflowTooltip` in combination
 with a max-width can show a tooltip only when overflow is detected:
