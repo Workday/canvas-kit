@@ -16,8 +16,7 @@ export const Ellipsis = () => {
         </Button>
       </OverflowTooltip>
       <OverflowTooltip>
-        <div
-          tabIndex={0}
+        <button
           style={{
             marginTop: spacing.xs,
             maxWidth: 200,
@@ -27,7 +26,7 @@ export const Ellipsis = () => {
           }}
         >
           Super Mega Ultra Long Content With Max Width
-        </div>
+        </button>
       </OverflowTooltip>
     </React.Fragment>
   );
