@@ -75,7 +75,7 @@ export const Tooltip = ({
     <React.Fragment>
       {React.cloneElement(children, {
         ...targetProps,
-        ...mergeCallbacks(targetProps, children.props),
+        ...mergeCallbacks(children.props, targetProps),
       })}
       <Popper placement={placement} {...popperProps}>
         {({placement}) => {

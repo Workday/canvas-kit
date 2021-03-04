@@ -210,10 +210,8 @@ createAdapter({}: Partial<typeof PopupStack>): void
 
 ## Behaviors
 
-The PopupStack does not directly own any behaviors. Behaviors are left up to the implementation, but
-behavior suggestions are listed here as a specification for implementations. Some behaviors are
-aided by a specification of `data-*` attributes to help those behaviors apply globally across
-frameworks.
+PopupStack doesn’t have any native behaviors, but you can apply these behaviors in your
+implementation. Canvas Kit provides these behaviors through React Hooks.
 
 ### Close on outside click
 
