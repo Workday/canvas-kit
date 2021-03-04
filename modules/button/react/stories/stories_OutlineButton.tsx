@@ -80,8 +80,8 @@ storiesOf('Components/Buttons/Button/React/Outline', module)
       </OutlineButton>
 
       <h3>Small Primary</h3>
-      <OutlineButton size="small" variant={OutlineButton.Variant.Primary} icon={playCircleIcon}>
-        Outline Primary Test
+      <OutlineButton size="small" variant={OutlineButton.Variant.Primary}>
+        Outline Primary
       </OutlineButton>
       <OutlineButton size="small" disabled={true} variant={OutlineButton.Variant.Primary}>
         Outline Primary
