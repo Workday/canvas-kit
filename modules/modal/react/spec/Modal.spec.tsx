@@ -26,9 +26,9 @@ describe('Modal', () => {
     );
   });
 
-  test('Modal should replace aria-labeldBy with custom aria-label', () => {
-    const customAriaLabel = 'custom aria label';
-    const {getByRole} = renderModal({ariaLabel: customAriaLabel});
-    expect(getByRole('dialog')).toHaveAttribute('aria-label', customAriaLabel);
+  test('Modal should forward closeButtonAriaLabel prop to Popup', () => {
+    const closeButtonAriaLabel = 'close button aria label';
+    const {getByRole} = renderModal({closeButtonAriaLabel});
+    expect(getByRole('button')).toHaveAttribute('aria-label', closeButtonAriaLabel);
   });
 });

@@ -137,3 +137,63 @@ export const ExternalControl = () => {
     </div>
   );
 };
+
+const steps = [
+  {id: 1, name: 'step 1'},
+  {id: 2, name: 'step 2'},
+  {id: 3, name: 'step 3'},
+  {id: 4, name: 'step 4'},
+];
+
+export const WithListItems = () => {
+  const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
+  const [currentStep, setCurrentStep] = React.useState(1);
+  const [panelState, setPanelState] = React.useState<SidePanelTransitionStates>(
+    expanded ? 'expanded' : 'collapsed'
+  );
+
+  const handleItemKeyDown = (event: React.KeyboardEvent<HTMLLIElement>) => {
+    if (event.key === 'Enter') {
+      setCurrentStep(parseInt(event.currentTarget.id, 10));
+    }
+  };
+
+  return (
+    <div style={{height: '100vh'}}>
+      <SidePanel {...panelProps} onStateTransition={setPanelState}>
+        <SidePanel.ToggleButton {...controlProps} />
+        {panelState === 'expanded' && (
+          <div
+            style={{
+              display: 'flex',
+              padding: `16px 12px`,
+              flexDirection: 'column',
+            }}
+          >
+            <h3 {...labelProps}>Tasks Panel</h3>
+            <ol role="list" style={{listStyle: 'none', margin: 0, padding: 0}}>
+              {steps.map(item => {
+                return (
+                  <li
+                    id={`${item.id}`}
+                    onKeyDown={handleItemKeyDown}
+                    tabIndex={0}
+                    style={{
+                      fontWeight: currentStep === item.id ? 'bold' : 'normal',
+                      padding: '4px',
+                      cursor: 'pointer',
+                    }}
+                    key={item.id}
+                    onClick={() => setCurrentStep(item.id)}
+                  >
+                    {item.name}
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        )}
+      </SidePanel>
+    </div>
+  );
+};

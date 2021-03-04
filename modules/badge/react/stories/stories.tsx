@@ -28,3 +28,13 @@ export const Inverse = () => (
     />
   </div>
 );
+
+export const CustomLimit = () => (
+  <div className="story">
+    <CountBadge
+      count={number('Count', 100)}
+      limit={number('Number', 100)}
+      variant={select('Variant', ['default', 'inverse'], 'default')}
+    />
+  </div>
+);

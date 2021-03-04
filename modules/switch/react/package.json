@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-switch",
-  "version": "4.4.2",
+  "version": "4.5.1",
   "description": "A Canvas-styled switch",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
@@ -44,10 +44,10 @@
     "switch"
   ],
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@workday/canvas-kit-react-common": "^4.4.2",
-    "@workday/canvas-kit-react-core": "^4.4.2"
+    "@workday/canvas-kit-react-common": "^4.5.1",
+    "@workday/canvas-kit-react-core": "^4.5.1"
   }
 }

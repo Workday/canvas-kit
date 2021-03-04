@@ -59,6 +59,12 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default 'standard'
    */
   variant?: SidePanelVariant;
+  /**
+   * This is set by the useSidePanel hook and prevents unintended keyframe animations
+   *
+   * @param boolean
+   */
+  touched: boolean;
 }
 
 const createKeyframes = (from: number | string, to: number | string) => {
@@ -114,18 +120,12 @@ const SidePanel = ({
   onStateTransition,
   origin = 'left',
   variant = 'standard',
+  touched,
   ...elemProps
 }: SidePanelProps) => {
-  const mounted = React.useRef(false);
   const [state, setState] = React.useState<SidePanelTransitionStates>(
     expanded ? 'expanded' : 'collapsed'
   );
-
-  // This is meant to prevent animations when the component renders for the first time.
-  // mounted.current will only be false on the first pass
-  React.useEffect(() => {
-    mounted.current = true;
-  }, []);
 
   React.useEffect(() => {
     if (typeof onExpandedChange !== 'undefined') {
@@ -184,7 +184,7 @@ const SidePanel = ({
           maxWidth: expanded ? expandedWidth : collapsedWidth,
           // mounted.current will be false on the first render, thus you won't get an unwanted animation here
           // Will animate again if you force a re-render (like in Storybook)
-          animation: mounted.current
+          animation: touched
             ? `${expanded ? motion.expand : motion.collapse} 200ms ease-out`
             : undefined,
         },
