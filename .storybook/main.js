@@ -2,7 +2,7 @@ const path = require('path');
 const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
-const getSpecifications = require('@workday/canvas-kit-specifications/utils/get-specifications');
+const getSpecifications = require('@workday/canvas-kit-docs/utils/get-specifications');
 
 module.exports = {
   stories: [
@@ -27,7 +27,7 @@ module.exports = {
     // modules/specifications/lib/specs.ts
     config.module.rules.push({
       test: /specs\.ts$/,
-      include: [path.resolve(__dirname, '../modules/specifications')],
+      include: [path.resolve(__dirname, '../modules/docs')],
       use: [
         {
           loader: require.resolve('string-replace-loader'),

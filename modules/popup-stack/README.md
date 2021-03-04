@@ -217,14 +217,14 @@ implementation. Canvas Kit provides these behaviors through React Hooks.
 
 Close only the topmost popup with a click outside the popup when this behavior is applied. To
 determine if this behavior is applied to the global stack, a
-`data-behavior-click-outside-close="topmost"` should be applied. This data attribute should be used
-by all instances of this behavior to determine the "topmost" click-outside behavior to close only
-the topmost popup with this behavior.
+`data-behavior-click-outside-close="topmost"` attribute should be applied. This data attribute
+should be used by all instances of this behavior to determine the "topmost" click-outside behavior
+to close only the topmost popup with this behavior.
 
 ### Always close on outside click
 
-Close all popups with this behavior regardless of the position in the stack. A
-`data-behavior-click-outside-close="always"` should be applied to the stack element.
+Always close the popup when the user clicks outside regardless of the position in the stack. A
+`data-behavior-click-outside-close="always"` attribute should be applied to the stack element.
 
 ### Close on escape
 
