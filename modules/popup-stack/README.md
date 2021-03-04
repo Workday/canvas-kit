@@ -161,9 +161,9 @@ PopupStack.isTopmost(element: HTMLElement): boolean
 
 ### getElements
 
-Returns an array of elements defined by the `element` passed to `add`. This method should return
-elements in the order of lowest z-index to highest z-index. Some popup behaviors will need to make
-decisions based on z-index order.
+Returns an array of elements defined by the `element` passed to `add`. This method returns elements
+in the order of lowest z-index to highest z-index. Some popup behaviors will need to make decisions
+based on z-index order.
 
 ```tsx
 PopupStack.getElements(): HTMLElement[]
