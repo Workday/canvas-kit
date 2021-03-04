@@ -18,7 +18,7 @@ yarn add @workday/canvas-kit-react-modal
 
 ```tsx
 import * as React from 'react';
-import {beta_Button as Button} from '@workday/canvas-kit-react-button';
+import {Button} from '@workday/canvas-kit-react-button';
 import {Modal, useModal} from '@workday/canvas-kit-react-modal';
 
 const DeleteItem = ({item, onDelete}) => {
