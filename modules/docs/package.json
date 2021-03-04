@@ -1,7 +1,7 @@
 {
-  "name": "@workday/canvas-kit-specifications",
+  "name": "@workday/canvas-kit-docs",
   "version": "4.5.1",
-  "description": "Specifications of Canvas Kit components",
+  "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
@@ -44,8 +44,7 @@
     "canvas-kit",
     "react",
     "components",
-    "workday",
-    "specifications"
+    "workday"
   ],
   "dependencies": {
     "@storybook/csf": "0.0.1",

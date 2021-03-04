@@ -5,8 +5,7 @@ import {Table, TableRow} from '@workday/canvas-kit-react-table';
 import {Hyperlink} from '@workday/canvas-kit-react-button';
 
 import {specifications, SpecDescribe, SpecIt} from './specs';
-
-const BaseURLContext = React.createContext('/');
+import { GithubBranch, GithubUrl, StorybookUrl } from './docs'
 
 export interface SpecificationsProps {
   file: string;
@@ -58,7 +57,9 @@ function createTableRows(
 }
 
 export const Specifications = ({file, name}: SpecificationsProps) => {
-  const baseUrl = React.useContext(BaseURLContext);
+  const storybookBaseUrl = React.useContext(StorybookUrl);
+  const githubUrl = React.useContext(GithubUrl);
+  const githubBranch = React.useContext(GithubBranch);
 
   const specFile = specifications.find(f => f.name === file);
 
@@ -84,7 +85,7 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
       <>
         {first.replace(/given /i, '')}
         <Hyperlink
-          href={`${baseUrl}?path=/story/${toId(
+          href={`${storybookBaseUrl}?path=/story/${toId(
             kind,
             name.replace('DefaultStory', 'Default Story')
           )}`}
@@ -132,7 +133,7 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
       </Table>
       Source:{' '}
       <Hyperlink
-        href={`https://github.com/Workday/canvas-kit/blob/master/cypress/integration/${file}`}
+        href={`${githubUrl}blob/${githubBranch}/cypress/integration/${file}`}
       >
         {file}
       </Hyperlink>
