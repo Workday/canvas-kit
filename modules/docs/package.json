@@ -1,7 +1,7 @@
 {
-  "name": "@workday/canvas-kit-popup-stack",
+  "name": "@workday/canvas-kit-docs",
   "version": "4.5.1",
-  "description": "Stack for managing popup UIs to coordinate global concerns like escape key handling and rendering order",
+  "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "main": "dist/commonjs/index.js",
@@ -10,7 +10,7 @@
   "types": "dist/es6/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Workday/canvas-kit/tree/master/modules/popup-stack"
+    "url": "http://github.com/Workday/canvas-kit/tree/master/modules/specifications"
   },
   "files": [
     "dist/",
@@ -31,19 +31,28 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:es6": "tsc -p tsconfig.es6.json",
     "build:rebuild": "npm-run-all clean build",
+    "build:specs": "node ./utils/build-specifications.js",
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
-    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
+    "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:specs build:downlevel-dts",
     "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
-  "devDependencies": {
-    "@workday/canvas-kit-react-button": "^4.5.1",
-    "@workday/canvas-kit-react-popup": "^4.5.1",
-    "@workday/canvas-kit-react-tooltip": "^4.5.1"
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "canvas",
     "canvas-kit",
-    "workday",
-    "popup-stack"
-  ]
+    "react",
+    "components",
+    "workday"
+  ],
+  "dependencies": {
+    "@storybook/csf": "0.0.1",
+    "@workday/canvas-kit-react-button": "^4.5.1",
+    "@workday/canvas-kit-react-table": "^4.5.1"
+  },
+  "devDependencies": {
+    "glob": "^7.1.6",
+    "typescript": "^3.8.3"
+  }
 }
