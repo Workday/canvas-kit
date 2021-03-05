@@ -2,7 +2,7 @@ const path = require('path');
 const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
-const getSpecifications = require('@workday/canvas-kit-docs/utils/get-specifications');
+const getSpecifications = require('../modules/docs/utils/get-specifications');
 
 module.exports = {
   stories: [
