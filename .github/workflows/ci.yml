@@ -25,8 +25,17 @@ jobs:
           path: .cache/cypress
           key: ${{ runner.os }}-cypress-cache-version-${{ steps.cypress-version.outputs.version }}
 
+      - name: Cache node modules
+        id: yarn-cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-hash-${{ hashFiles('yarn.lock') }}
 
       - name: Install Packages
+        if:
+          steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-cache.outputs.cache-hit !=
+          'true'
         run: yarn install --production=false
         env:
           CYPRESS_CACHE_FOLDER: .cache/cypress
