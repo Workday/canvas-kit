@@ -4,6 +4,7 @@ export default Popup;
 export {Popup};
 export * from './lib/Popup';
 export * from './lib/Popper';
+export * from './lib/useAlwaysCloseOnOutsideClick';
 export * from './lib/useCloseOnEscape';
 export * from './lib/useFocusTrap';
 export * from './lib/useCloseOnOutsideClick';

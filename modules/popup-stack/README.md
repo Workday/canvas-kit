@@ -161,7 +161,9 @@ PopupStack.isTopmost(element: HTMLElement): boolean
 
 ### getElements
 
-Returns an array of elements defined by the `element` passed to `add`.
+Returns an array of elements defined by the `element` passed to `add`. This method returns elements
+in the order of lowest z-index to highest z-index. Some popup behaviors will need to make decisions
+based on z-index order.
 
 ```tsx
 PopupStack.getElements(): HTMLElement[]
@@ -205,3 +207,25 @@ interact with it.
 ```tsx
 createAdapter({}: Partial<typeof PopupStack>): void
 ```
+
+## Behaviors
+
+PopupStack doesn’t have any native behaviors, but you can apply these behaviors in your
+implementation. Canvas Kit provides these behaviors through React Hooks.
+
+### Close on outside click
+
+Close only the topmost popup with a click outside the popup when this behavior is applied. To
+determine if this behavior is applied to the global stack, a
+`data-behavior-click-outside-close="topmost"` attribute should be applied. This data attribute
+should be used by all instances of this behavior to determine the "topmost" click-outside behavior
+to close only the topmost popup with this behavior.
+
+### Always close on outside click
+
+Always close the popup when the user clicks outside regardless of the position in the stack. A
+`data-behavior-click-outside-close="always"` attribute should be applied to the stack element.
+
+### Close on escape
+
+Closes the topmost popup when the escape key is pressed. No special `data-*` is required.

@@ -54,7 +54,7 @@
     "lodash": "^4.17.14"
   },
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   },
   "devDependencies": {
     "@workday/canvas-kit-labs-react-core": "^5.0.0-beta.0",

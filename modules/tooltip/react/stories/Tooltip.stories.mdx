@@ -1,0 +1,186 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Tooltip} from '@workday/canvas-kit-react-tooltip';
+import {Specifications} from '@workday/canvas-kit-docs';
+
+import {Default} from './examples/Default';
+import {CustomContent} from './examples/CustomContent';
+import {DescribeType} from './examples/DescribeType';
+import {Muted} from './examples/Muted';
+import {Placements} from './examples/Placements';
+import {Ellipsis} from './examples/Ellipsis';
+import {LineClamp} from './examples/LineClamp';
+import {UseTooltip} from './examples/UseTooltip';
+
+<Meta title="Components/Popups/Tooltip/React" component={Tooltip} />
+
+# Canvas Kit React Tooltips
+
+A Tooltip component that renders information/text when the user hovers over an element. A tooltip is
+used to label or describe an element. By default, a tooltip will label an element. This is useful
+for IconButtons. A tooltip can also be used to describe additional information about an element
+
+[> Workday Design Reference](https://design.workday.com/components/popups/tooltips)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+or
+
+```sh
+yarn add @workday/canvas-kit-react-tooltip
+```
+
+## Usage
+
+This component follows the
+[W3 Tooltip specification](https://www.w3.org/TR/wai-aria-practices/#tooltip). Tooltips are used to
+label icon buttons and provide additional context to elements.
+
+### When to use tooltips
+
+Use a tooltip when you want to display additional information for users to better understand the
+purpose, context, or interaction.
+
+### When not to use tooltips
+
+When the visual text will be the exact same as what is visually displayed to the user without the
+tooltip being visible
+
+- Does this element need additional context or information?
+  - No: Don't use a tooltip
+  - Yes:
+    - Is the tooltip text useful to screen reader users?
+      - No: Use `type="muted"` which will not make the tooltip visible to screen reader users
+      - Yes:
+        - Is the tooltip text different from the visual text displayed to users?
+          - No text: Use `type="label"` which will add `aria-label` like the icon example
+          - Yes: Use `type="describe"` which will add `aria-describedby`
+          - No: Don't use a tooltip
+
+### Basic Example
+
+Here is a basic example of an `IconButton` using a tooltip to label the icon. This is labeling the
+button for both sighted users and for screen readers. A tooltip will provide an `aria-label` to
+child elements for the accessibility tree and a visual tooltip during mouse hover and focus events.
+Mouse over or focus on the x icon below. Click "Show code" to see the source code.
+
+<ExampleCodeBlock code={Default} />
+
+### Describing an Element
+
+The default mode for a tooltip is to label content via `aria-label`. If a tooltip is meant to
+provide ancillary information, the `type` can be set to `describe`. This will add `aria-describedby`
+to the target element. This will allow screen reader users to hear the name of the control that is
+being focused and the ancillary tooltip information.
+
+<ExampleCodeBlock code={DescribeType} />
+
+### Muted Tooltips
+
+If a tooltip does not need to be visible to screen reader users, or you handle accessibility of the
+tooltip yourself, you can set the `type` to `muted`. This will not add any special ARIA attributes
+to the target element.
+
+<ExampleCodeBlock code={Muted} />
+
+### Custom Content
+
+A tooltip can contain HTML, but should not contain any focusable elements or semantically meaningful
+formatting. The content will lose all semantic meaning when read by a screen reader. If complex
+content or a focusable element is needed by your UI, a tooltip is not a good choice. Consider using
+a dialog instead.
+
+<ExampleCodeBlock code={CustomContent} />
+
+### Placements
+
+The tooltip allows for a `placement` configuration. The tooltip uses
+[PopperJS](https://popper.js.org/) to position tooltips, so any valid PopperJS placement is valid
+for tooltips.
+
+<ExampleCodeBlock code={Placements} />
+
+### Tooltips on overflowing content
+
+The `OverflowTooltip` component can be applied to any element that has some type of overflow
+applied, or has a child element that has overflow applied. The most common and widely supported type
+of truncation is the ellipsis.
+
+```css
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+```
+
+**Note**: Text truncation should be avoided if possible. A user should not have to activate a
+tooltip to access important content. If user-generated content is being truncated, the following
+situation might occur which is a bad user experence. Consider the following list:
+
+- Home Site A
+- Home Site B
+- Home Site C
+
+If the list items get truncated via an ellipsis, this is what the user could see:
+
+- Home Sit...
+- Home Sit...
+- Home Sit...
+
+Here are suggestions to try to avoid truncation:
+
+- Allow content to wrap instead
+- Limit character count in admin interfaces if possible to avoid need for truncation
+- Avoid fixed container sizes if possible to allow content to flow naturally
+
+If truncation is required, here are a few guidelines to insure minimal impact on users:
+
+- Only truncate text of elements that natually receive focus.
+  - Keyboard users can only activate tooltips with focus. Adding `tabindex=0` can give focus to
+    non-focusable elements, but increase the amount of tab stops for keyboard users.
+- Provide the full content elsewhere in the UI
+
+Canvas Kit Buttons have this style applied to the text inside them. `OverflowTooltip` in combination
+with a max-width can show a tooltip only when overflow is detected:
+
+<ExampleCodeBlock code={Ellipsis} />
+
+### Line Clamp
+
+The `OverflowTooltip` can support various types of overflow. The component will first look for
+`text-overflow: ellipsis` and `-webkit-line-clamp`, but will fall back to
+`overflow: auto | scroll | clip | hidden`. These properties will be used to determine which
+`element` is experiencing an overflow. Overflow detection is as follows where `element` is
+determined by the above style properties:
+
+```js
+element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight;
+```
+
+Here's an example using the `-webkit-line-clamp` property (multi-line ellipsis which works in all
+browsers except IE11):
+
+<ExampleCodeBlock code={LineClamp} />
+
+Other truncation techniques should be supported as well, even JavaScript ones as long as overflow is
+triggered somehow and detectable differences in scroll size and client size.
+
+### The UseTooltip Hook
+
+The `Tooltip` component is a combination of the `TooltipContainer` (a styled element), `Popper`
+(which uses PopperJS and the popup stack), the `useTooltip` hook and some behavior. If custom
+behavior is required, these sub-components can be composed in a custom container element. This
+example uses those parts directly while being functionally equivalent to the original basic example.
+
+<ExampleCodeBlock code={UseTooltip} />
+
+## Properties
+
+<ArgsTable of={Tooltip} />
+
+## Specifications
+
+<Specifications file="Tooltip.spec.ts" name="Tooltip" />

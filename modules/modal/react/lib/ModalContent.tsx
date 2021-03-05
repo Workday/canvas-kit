@@ -209,6 +209,11 @@ const ModalContent = ({
   useInitialFocus(stackRef, firstFocusRef);
   useAssistiveHideSiblings(stackRef);
 
+  React.useEffect(() => {
+    // We don't use `useCloseOnOutsideClick` directly, so we add this data attribute manually
+    stackRef.current?.setAttribute('data-behavior-click-outside-close', 'topmost');
+  });
+
   // special handling for clicking on the overlay
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
     // Detect clicks only on the centering wrapper element
