@@ -18,6 +18,10 @@ import {useRegisterItem} from './list';
 
 export interface TabProps {
   /**
+   * Optionally pass index to tab item
+   */
+  index?: number;
+  /**
    * The label text of the Tab.
    */
   children: React.ReactNode;
@@ -120,11 +124,19 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
 
 export const Tab = createComponent('button')({
   displayName: 'Tabs.Item',
-  Component: ({name = '', model, children, ...elemProps}: TabProps, ref, Element) => {
+  Component: ({name = '', index, model, children, ...elemProps}: TabProps, ref, Element) => {
     const {localRef, elementRef} = useLocalRef(ref);
     const {state, events} = useModelContext(TabsModelContext, model);
 
-    const tabName = useRegisterItem({state, events}, localRef, name);
+    const tabName = useRegisterItem({state, events}, localRef, name, index);
+
+    if (
+      index &&
+      state.items.length &&
+      !state.items.find((item, i) => item.index === i && item.index === index && item.id === name)
+    ) {
+      events.updateItemPosition({id: name, index});
+    }
 
     const onSelect = () => {
       events.activate({tab: tabName});

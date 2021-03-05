@@ -35,7 +35,44 @@ describe('Tabs', () => {
     );
 
     fireEvent.click(screen.getByRole('tab', {name: 'Second Tab'}));
-
     expect(cb).toHaveBeenCalledWith(expect.objectContaining({data: {tab: 'second'}}));
+  });
+
+  it('should call "onUpdateItemPosition" when tabs are re-rendered with a changed index', () => {
+    const cb = jest.fn();
+
+    const {rerender} = render(
+      <Tabs onUpdateItemPosition={cb}>
+        <Tabs.List>
+          <Tabs.Item key={'first'} name={'first'} index={0}>
+            first tab
+          </Tabs.Item>
+          <Tabs.Item key={'last'} name={'last'} index={1}>
+            last tab
+          </Tabs.Item>
+        </Tabs.List>
+      </Tabs>
+    );
+
+    expect(cb).not.toBeCalled();
+
+    rerender(
+      <Tabs onUpdateItemPosition={cb}>
+        <Tabs.List>
+          <Tabs.Item key={'first'} name={'first'} index={0}>
+            first tab
+          </Tabs.Item>
+          <Tabs.Item key={'second'} name={'second'} index={1}>
+            second tab
+          </Tabs.Item>
+          <Tabs.Item key={'last'} name={'last'} index={2}>
+            last tab
+          </Tabs.Item>
+        </Tabs.List>
+      </Tabs>
+    );
+
+    expect(cb).toBeCalledTimes(1);
+    expect(cb).toHaveBeenCalledWith(expect.objectContaining({data: {id: 'last'}}));
   });
 });

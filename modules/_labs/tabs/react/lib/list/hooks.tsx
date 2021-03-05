@@ -9,19 +9,20 @@ import {ListModel} from './useListModel';
  * @param model A ListModel
  * @param localRef A RefObject that will be used to register an item
  * @param id Desired identifier for the List Model. If not provided, it will fall back to the index
- * in the list
+ * @param index (Optional) Specify the position of the item if the order is expected to change
  */
 export const useRegisterItem = (
   {state, events}: ListModel,
   localRef: React.RefObject<any>,
-  id = ''
+  id = '',
+  index?: number
 ): string => {
   const [localId, setLocalId] = React.useState(id);
 
   useMountLayout(() => {
-    const index = state.indexRef.current;
-    const itemId = id || String(index);
-    events.registerItem({item: {id: itemId, ref: localRef}});
+    const defaultId = state.indexRef.current;
+    const itemId = id || String(defaultId);
+    events.registerItem({item: {id: itemId, ref: localRef, index}});
     setLocalId(itemId);
 
     return () => {

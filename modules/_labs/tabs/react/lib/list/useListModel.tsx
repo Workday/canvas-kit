@@ -8,6 +8,7 @@ import {
 } from '@workday/canvas-kit-react-common';
 
 export type Item = {
+  index?: number;
   id: string;
   ref: React.RefObject<HTMLElement>;
 };
@@ -26,6 +27,8 @@ export type ListEvents = {
   registerItem(data: {item: Item}): void;
   /** Unregister an item by its identifier. This should be called when the component is unmounted */
   unregisterItem(data: {id: string}): void;
+  /** Updates the position of a tab within the list. This should be called when a tab's index is updated */
+  updateItemPosition(data: {id: string; index: number}): void;
 };
 
 export type ListModel = Model<ListState, ListEvents>;
@@ -42,6 +45,11 @@ export const listEventMap = createEventMap<ListEvents>()({
      * unspecified state if not managed properly.
      */
     shouldUnregisterItem: 'unregisterItem',
+    /**
+     * Should a list item be unregistered? Use this only for advanced cases. Lists can get into an
+     * unspecified state if not managed properly.
+     */
+    shouldUpdateItemPosition: 'updateItemPosition',
   },
   callbacks: {
     /**
@@ -58,6 +66,13 @@ export const listEventMap = createEventMap<ListEvents>()({
      * mount/unmount cycles of rendering.
      */
     onUnregisterItem: 'unregisterItem',
+    /**
+     * Called once an item has been unregistered from the list. This is useful to do any `setState`
+     * or side effects. This method is called synchronously during a `setState` batch. Calling state
+     * setters will not cause extra renders. Item registration should be called during the
+     * mount/unmount cycles of rendering.
+     */
+    onUpdateItemPosition: 'updateItemPosition',
   },
 });
 
@@ -83,6 +98,11 @@ export const useListModel = (config: ListModelConfig = {}): ListModel => {
     },
     unregisterItem({id}) {
       setItems(items => items.filter(item => item.id !== id));
+    },
+    updateItemPosition({id, index}) {
+      setItems(items =>
+        items.filter(item => item.id !== id).splice(index, 0, items.find(item => item.id === id)!)
+      );
     },
   });
 
