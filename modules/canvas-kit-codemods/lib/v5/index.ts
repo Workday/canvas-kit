@@ -223,7 +223,6 @@ export default function transformer(file: FileInfo, api: API) {
         } = {};
 
         _import.value.specifiers?.forEach(specifier => {
-          // @ts-ignore
           const specifierName = specifier.imported.name;
 
           // Create new array of import specifiers for new import if not defined, otherwise push new import
@@ -244,7 +243,6 @@ export default function transformer(file: FileInfo, api: API) {
         );
       }
 
-      // @ts-ignore
       if (!Object.keys(sourceMap).includes(_import.value.source.value)) {
         return;
       }
@@ -252,7 +250,6 @@ export default function transformer(file: FileInfo, api: API) {
       j(_import).replaceWith(
         j.importDeclaration(
           _import.value.specifiers,
-          // @ts-ignore
           j.stringLiteral(sourceMap[_import.value.source.value])
         )
       );

@@ -29,7 +29,9 @@
   },
   "homepage": "https://github.com/Workday/canvas-kit#readme",
   "dependencies": {
-    "jscodeshift": "^0.11.0"
+    "colors": "^1.4.0",
+    "jscodeshift": "^0.11.0",
+    "yargs": "^16.2.0"
   },
   "scripts": {
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
