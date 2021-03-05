@@ -1,5 +1,5 @@
 {
-  "name": "@workday/canvas-kit-codemods",
+  "name": "@workday/canvas-kit-codemod",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
   "version": "0.0.0",

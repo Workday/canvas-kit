@@ -5,7 +5,7 @@ const {exec} = require('child_process');
 require('colors');
 
 const {_: commands, path} = require('yargs')
-  .scriptName('canvas-kit-codemods')
+  .scriptName('canvas-kit-codemod')
   .usage('$0 <transform> [path]'.brightBlue.bold)
   .command('v5 [path]', 'Canvas Kit v4 > v5 migration transform'.gray, yargs => {
     yargs.positional('path', {
