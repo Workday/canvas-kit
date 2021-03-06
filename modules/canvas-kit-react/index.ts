@@ -1,5 +1,3 @@
-// TODO: Address removal of canvas export
-// export {default as canvas} from '@workday/canvas-kit-react-core';
 export * from './action-bar';
 export * from './avatar';
 export * from './badge';

@@ -1,4 +1,4 @@
-import {API, FileInfo} from 'jscodeshift';
+import {API, ASTPath, FileInfo, ImportDeclaration} from 'jscodeshift';
 
 const sourceMap: {
   [source: string]: string;
@@ -210,49 +210,117 @@ const bundleExportMap: {
   useTooltip: '@workday/canvas-kit-react/tooltip',
 };
 
+type ImportReplacements = {
+  [source: string]: {
+    default?: string;
+    namedImports?: string[];
+    namespace?: string; // * as x
+  };
+};
+
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
+
+  const getMappedBundleNamedImports = (
+    _import: ASTPath<ImportDeclaration>,
+    newImports: ImportReplacements
+  ) => {
+    _import.value.specifiers?.forEach(specifier => {
+      if (specifier.type === 'ImportSpecifier') {
+        const specifierName = specifier.imported.name;
+
+        // Create new array of import specifiers for new import if not defined, otherwise push new import
+        if (!newImports[bundleExportMap[specifierName]]) {
+          newImports[bundleExportMap[specifierName]] = {
+            namedImports: [],
+          };
+        }
+        newImports[bundleExportMap[specifierName]].namedImports!.push(specifierName);
+      }
+    });
+  };
+
+  const getMappedDefaultImports = (
+    _import: ASTPath<ImportDeclaration>,
+    newImports: ImportReplacements
+  ) => {
+    _import.value.specifiers?.forEach(specifier => {
+      if (specifier.type === 'ImportSpecifier') {
+        return;
+      }
+
+      const specifierName = specifier.local?.name;
+
+      if (!specifierName) {
+        return;
+      }
+
+      // Handle default imports
+      if (specifier.type === 'ImportDefaultSpecifier') {
+        const mappedSource = bundleExportMap[specifierName];
+
+        newImports[mappedSource] = {
+          ...newImports[mappedSource],
+          default: specifierName,
+        };
+      }
+      // Handle import * as X
+      else if (specifier.type === 'ImportNamespaceSpecifier') {
+        // TODO: ADD HANDLING FOR @workday/canvas-kit-react source. Need to split imports
+        const mappedSource = sourceMap[_import.value.source.value as string];
+        newImports[mappedSource] = {
+          ...newImports[mappedSource],
+          namespace: specifierName,
+        };
+      }
+    });
+  };
 
   return j(file.source)
     .find(j.ImportDeclaration)
     .forEach(_import => {
-      if (_import.value.source.value === '@workday/canvas-kit-react') {
-        // Create new imports as necessary based on bundleExportMap
-        const newImports: {
-          [source: string]: string[];
-        } = {};
-
-        _import.value.specifiers?.forEach(specifier => {
-          const specifierName = specifier.imported.name;
-
-          // Create new array of import specifiers for new import if not defined, otherwise push new import
-          (newImports[bundleExportMap[specifierName]] =
-            newImports[bundleExportMap[specifierName]] || []).push(specifierName);
-        });
-
-        j(_import).replaceWith(
-          Object.keys(newImports).map(src => {
-            return j.importDeclaration(
-              newImports[src].map((identifier: string) =>
-                j.importSpecifier(j.identifier(identifier))
-              ),
-              j.stringLiteral(src),
-              'value'
-            );
-          })
-        );
+      // Move on if source isn't a canvas kit package
+      if (
+        typeof _import.value.source.value !== 'string' ||
+        (_import.value.source.value !== '@workday/canvas-kit-react' &&
+          !Object.keys(sourceMap).includes(_import.value.source.value))
+      ) {
+        return;
       }
 
-      if (!Object.keys(sourceMap).includes(_import.value.source.value)) {
+      const newImports: ImportReplacements = {};
+
+      getMappedDefaultImports(_import, newImports);
+
+      if (_import.value.source.value === '@workday/canvas-kit-react') {
+        getMappedBundleNamedImports(_import, newImports);
+      }
+
+      if (!Object.keys(newImports).length) {
         return;
       }
 
       j(_import).replaceWith(
-        j.importDeclaration(
-          _import.value.specifiers,
-          j.stringLiteral(sourceMap[_import.value.source.value])
-        )
+        Object.keys(newImports).map(source => {
+          const newImportSet = [];
+          if (newImports[source].default) {
+            newImportSet.push(j.importDefaultSpecifier(j.identifier(newImports[source].default!)));
+          }
+          if (newImports[source].namespace) {
+            newImportSet.push(
+              j.importNamespaceSpecifier(j.identifier(newImports[source].namespace!))
+            );
+          }
+          if (newImports[source].namedImports?.length) {
+            newImports[source].namedImports?.forEach(identifier => {
+              newImportSet.push(j.importSpecifier(j.identifier(identifier)));
+            });
+          }
+          return j.importDeclaration(newImportSet, j.stringLiteral(source), 'value');
+        })
       );
+
+      console.log(newImports);
     })
     .toSource();
 }
