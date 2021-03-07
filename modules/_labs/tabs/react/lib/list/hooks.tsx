@@ -21,7 +21,6 @@ export const useRegisterItem = (
   const firstRender = React.useRef(true);
 
   React.useLayoutEffect(() => {
-    console.log('Layout Effect');
     // eslint-disable-next-line
     if (index != undefined && !firstRender.current) {
       events.updateItemPosition({id: localId, index});
@@ -29,7 +28,6 @@ export const useRegisterItem = (
   }, [events, index, localId]);
 
   useMountLayout(() => {
-    console.log('Mount Effect');
     const defaultId = state.indexRef.current;
     const itemId = id || String(defaultId);
     events.registerItem({item: {id: itemId, ref: localRef}, index});
