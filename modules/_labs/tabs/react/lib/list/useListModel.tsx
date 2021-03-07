@@ -45,7 +45,7 @@ export const listEventMap = createEventMap<ListEvents>()({
      */
     shouldUnregisterItem: 'unregisterItem',
     /**
-     * Should a list item be unregistered? Use this only for advanced cases. Lists can get into an
+     * Should a list item position be updated? Use this only for advanced cases. Lists can get into an
      * unspecified state if not managed properly.
      */
     shouldUpdateItemPosition: 'updateItemPosition',
@@ -66,7 +66,7 @@ export const listEventMap = createEventMap<ListEvents>()({
      */
     onUnregisterItem: 'unregisterItem',
     /**
-     * Called once an item has been unregistered from the list. This is useful to do any `setState`
+     * Called once an item's position has been updated in the list. This is useful to do any `setState`
      * or side effects. This method is called synchronously during a `setState` batch. Calling state
      * setters will not cause extra renders. Item registration should be called during the
      * mount/unmount cycles of rendering.
