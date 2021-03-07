@@ -241,6 +241,28 @@ describe('Tabs', () => {
     });
   });
 
+  context.only('given the DynamicTabs story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Labs/Tabs/React', 'DynamicTabs');
+    });
+
+    context('when Add Tab is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'Add Tab'}).click();
+      });
+
+      context('when the left arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{leftarrow}');
+        });
+
+        it('should focus on Tab 3', () => {
+          cy.findByRole('tab', {name: 'Tab 3'}).should('be.focused');
+        });
+      });
+    });
+  });
+
   context('given the LeftToRight story is rendered', () => {
     beforeEach(() => {
       h.stories.load('Labs/Tabs/React', 'RightToLeft');

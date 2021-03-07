@@ -18,12 +18,23 @@ export const useRegisterItem = (
   index?: number
 ): string => {
   const [localId, setLocalId] = React.useState(id);
+  const firstRender = React.useRef(true);
+
+  React.useLayoutEffect(() => {
+    console.log('Layout Effect');
+    // eslint-disable-next-line
+    if (index != undefined && !firstRender.current) {
+      events.updateItemPosition({id: localId, index});
+    }
+  }, [events, index, localId]);
 
   useMountLayout(() => {
+    console.log('Mount Effect');
     const defaultId = state.indexRef.current;
     const itemId = id || String(defaultId);
-    events.registerItem({item: {id: itemId, ref: localRef, index}});
+    events.registerItem({item: {id: itemId, ref: localRef}, index});
     setLocalId(itemId);
+    firstRender.current = false;
 
     return () => {
       events.unregisterItem({id: itemId});

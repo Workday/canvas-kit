@@ -8,7 +8,6 @@ import {
 } from '@workday/canvas-kit-react-common';
 
 export type Item = {
-  index?: number;
   id: string;
   ref: React.RefObject<HTMLElement>;
 };
@@ -22,9 +21,9 @@ export type ListState = {
 };
 
 export type ListEvents = {
-  /** Register an item to the list. Takes in an identifier and a React.Ref. This should be called on
+  /** Register an item to the list. Takes in an identifier, a React.Ref and an optional index. This should be called on
    * component mount */
-  registerItem(data: {item: Item}): void;
+  registerItem(data: {item: Item; index?: number}): void;
   /** Unregister an item by its identifier. This should be called when the component is unmounted */
   unregisterItem(data: {id: string}): void;
   /** Updates the position of a tab within the list. This should be called when a tab's index is updated */
@@ -92,17 +91,27 @@ export const useListModel = (config: ListModelConfig = {}): ListModel => {
   const state = {id, items, indexRef};
 
   const events = useEventMap(listEventMap, state, config, {
-    registerItem({item}) {
+    registerItem({item, index}) {
       indexRef.current++;
-      setItems(items => items.concat(item));
+      setItems(items => {
+        if (index !== undefined) {
+          const copy = [...items];
+          copy.splice(index, 0, item);
+          return copy;
+        }
+        return items.concat(item);
+      });
     },
     unregisterItem({id}) {
       setItems(items => items.filter(item => item.id !== id));
     },
     updateItemPosition({id, index}) {
-      setItems(items =>
-        items.filter(item => item.id !== id).splice(index, 0, items.find(item => item.id === id)!)
-      );
+      setItems(items => {
+        const copy = items.filter(item => item.id !== id);
+        copy.splice(index, 0, items.find(item => item.id === id)!);
+        console.log(copy);
+        return copy;
+      });
     },
   });
 
