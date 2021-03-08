@@ -2,6 +2,7 @@ const path = require('path');
 const DocgenPlugin = require('./docgen-plugin');
 
 const modulesPath = path.resolve(__dirname, '../modules');
+const getSpecifications = require('../modules/docs/utils/get-specifications');
 
 module.exports = {
   stories: [
@@ -21,6 +22,23 @@ module.exports = {
     '@storybook/addon-storysource',
   ],
   webpackFinal: async config => {
+    // Get the specifications object and replace with a real object in the spec.ts file
+    const specs = await getSpecifications();
+    // modules/specifications/lib/specs.ts
+    config.module.rules.push({
+      test: /specs\.ts$/,
+      include: [path.resolve(__dirname, '../modules/docs')],
+      use: [
+        {
+          loader: require.resolve('string-replace-loader'),
+          options: {
+            search: '[/* SPEC_FILES_REPLACE_BY_WEBPACK */]',
+            replace: JSON.stringify(specs, null, '  '),
+          },
+        },
+      ],
+    });
+
     // Convert mdx links to point to github
     config.module.rules.push({
       test: /\.mdx?$/,

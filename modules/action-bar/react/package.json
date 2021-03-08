@@ -45,7 +45,7 @@
     "action-bar"
   ],
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",

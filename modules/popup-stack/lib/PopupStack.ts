@@ -257,7 +257,9 @@ export const PopupStack = {
   },
 
   /**
-   * Returns an array of elements defined by the `element` passed to `add`.
+   * Returns an array of elements defined by the `element` passed to `add`. This method return
+   * elements in the order of lowest z-index to highest z-index. Some popup behaviors will need to
+   * make decisions based on z-index order.
    */
   getElements(): HTMLElement[] {
     if (stack._adapter?.getElements) {

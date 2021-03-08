@@ -51,12 +51,12 @@ describe('PopupStack', () => {
     });
   });
 
-  context('when Window 1 Tooltip is hovered', () => {
+  context('when "Contents of Window 1" text is hovered', () => {
     beforeEach(() => {
       cy.findByText('Contents of Window 1').trigger('mouseover');
     });
 
-    it('should place Window 1 Tooltip all stacked items', () => {
+    it('should place Window 1 Tooltip above all other stacked UI elements', () => {
       cy.findByRole('tooltip')
         .should(beOnTopOfLabelledByText('Window 1'))
         .should(beOnTopOfLabelledByText('Window 2'))
@@ -64,12 +64,12 @@ describe('PopupStack', () => {
     });
   });
 
-  context('when Delete Item button is clicked', () => {
+  context('when "Delete Item" button is clicked', () => {
     beforeEach(() => {
       cy.contains('button', 'Delete Item').click();
     });
 
-    it('should open Delete Item popup', () => {
+    it('should open "Delete Item" popup', () => {
       cy.findByLabelText('Delete Item').should('be.visible');
     });
 
@@ -78,7 +78,7 @@ describe('PopupStack', () => {
         cy.findByLabelText('Window 2').click();
       });
 
-      it('should close Delete Item popup', () => {
+      it('should close "Delete Item" popup', () => {
         cy.findByLabelText('Delete Item').should('not.exist');
       });
 
@@ -94,12 +94,12 @@ describe('PopupStack', () => {
         cy.findByText('Contents of Window 2').trigger('mouseover');
       });
 
-      context('when Window 2 Tooltip is clicked', () => {
+      context('when "Contents of Window 2" text is clicked', () => {
         beforeEach(() => {
           cy.findByText('Contents of Window 2').click();
         });
 
-        it('should close Delete Item popup', () => {
+        it('should close "Delete Item" popup', () => {
           cy.findByLabelText('Delete Item').should('not.exist');
         });
 
@@ -121,7 +121,7 @@ describe('PopupStack', () => {
           cy.findByRole('tooltip').should('not.exist');
         });
 
-        it('should not close the Delete Item popup', () => {
+        it('should not close the "Delete Item" popup', () => {
           cy.findByLabelText('Delete Item').should('be.visible');
         });
 
@@ -132,19 +132,19 @@ describe('PopupStack', () => {
             });
           });
 
-          it('should close the Delete Item popup', () => {
+          it('should close the "Delete Item" popup', () => {
             cy.findByLabelText('Delete Item').should('not.exist');
           });
         });
       });
     });
 
-    context('when user clicks outside', () => {
+    context('when an area outside popups is clicked', () => {
       beforeEach(() => {
         cy.get('html').click('bottomRight');
       });
 
-      it('should close Delete Item popup', () => {
+      it('should close "Delete Item" popup', () => {
         cy.findByLabelText('Delete Item').should('not.exist');
       });
     });
@@ -156,8 +156,46 @@ describe('PopupStack', () => {
         });
       });
 
-      it('should close Delete Item popup', () => {
+      it('should close "Delete Item" popup', () => {
         cy.findByLabelText('Delete Item').should('not.exist');
+      });
+    });
+
+    context('when the "Delete" button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Delete'}).click();
+      });
+
+      it('should open the "Really Delete Item" popup', () => {
+        cy.findByRole('dialog', {name: 'Really Delete Item'}).should('be.visible');
+      });
+
+      context('when "Contents of Window 2" text is focused', () => {
+        beforeEach(() => {
+          cy.findByText('Contents of Window 2').focus();
+        });
+
+        it('should open the tooltip', () => {
+          cy.findByRole('tooltip').should('be.visible');
+        });
+
+        context('when an area outside popups is clicked', () => {
+          beforeEach(() => {
+            cy.get('html').click();
+          });
+
+          it('should close the tooltip', () => {
+            cy.findByRole('tooltip').should('not.be.visible');
+          });
+
+          it('should close the "Really Delete Item" popup', () => {
+            cy.findByRole('dialog', {name: 'Really Delete Item'}).should('be.not.visible');
+          });
+
+          it('should NOT close the "Delete Item" popup', () => {
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+          });
+        });
       });
     });
   });

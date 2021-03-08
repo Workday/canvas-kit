@@ -103,7 +103,7 @@
     "postcss-inline-svg": "^3.1.1",
     "postcss-loader": "^2.1.4",
     "prettier": "^1.19.0",
-    "prismjs": "^1.15.0",
+    "prismjs": "^1.23.0",
     "react": "16.12.0",
     "react-docgen-typescript": "^1.15.0",
     "react-docgen-typescript-loader": "^3.3.0",
@@ -119,6 +119,7 @@
     "semver": "^7.3.2",
     "storybook-chromatic": "^3.5.5",
     "storybook-readme": "^5.0.9",
+    "string-replace-loader": "2.3.0",
     "style-loader": "^1.0.0",
     "ts-loader": "^6.2.0",
     "typescript": "^3.8.3"

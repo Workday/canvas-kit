@@ -54,7 +54,7 @@ module.exports = (name, moduleName, description, unstable, public) => `
     "${name}"
   ],
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   }
 }
 `;
