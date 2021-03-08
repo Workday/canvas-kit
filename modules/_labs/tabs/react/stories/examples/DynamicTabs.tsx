@@ -1,13 +1,16 @@
 import React from 'react';
 import {spacing} from '@workday/canvas-kit-react-core';
 
-import {Tabs} from '@workday/canvas-kit-labs-react-tabs';
+import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react-tabs';
 
 export const DynamicTabs = () => {
   const [tabs, setTabs] = React.useState([{tab: 'Tab 1'}, {tab: 'Tab 2'}]);
+  const model = useTabsModel({
+    shouldActivate: ({data}) => data.tab !== 'last',
+  });
 
   return (
-    <Tabs shouldActivate={({data}) => data.tab !== 'last'}>
+    <Tabs model={model}>
       <Tabs.List>
         {tabs.map((item, index) => (
           <Tabs.Item key={item.tab} name={item.tab} index={index}>
@@ -20,6 +23,7 @@ export const DynamicTabs = () => {
           name={'last'}
           onClick={() => {
             setTabs(tabs => tabs.concat({tab: `Tab ${tabs.length + 1}`}));
+            model.events.goTo({id: 'last'});
           }}
         >
           Add Tab

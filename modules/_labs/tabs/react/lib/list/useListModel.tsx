@@ -109,7 +109,6 @@ export const useListModel = (config: ListModelConfig = {}): ListModel => {
       setItems(items => {
         const copy = items.filter(item => item.id !== id);
         copy.splice(index, 0, items.find(item => item.id === id)!);
-        console.log(copy);
         return copy;
       });
     },

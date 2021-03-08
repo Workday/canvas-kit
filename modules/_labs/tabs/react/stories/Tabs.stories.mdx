@@ -78,14 +78,6 @@ read this section, but if you're needing to go beyond basic examples or are curi
 explore this section. While these examples are not exhaustive, they provide additional insight into
 what's possible.
 
-#### Dynamic Tabs
-
-The `Tabs.Item` component takes in an optional `index` property if you want to specify the position of a tab. 
-If not defined, by default it will append tabs to the end. For example, if your tabs are stored as an array 
-in the state that can be added to along with a fixed tab that should remain at the end. 
-
-<ExampleCodeBlock code={DynamicTabs} />
-
 #### Single Tab Panel
 
 The compound component patterns allows advanced composition. For example, the tabs can be composed
@@ -106,6 +98,14 @@ In this example, we'll set up external observation of the `TabsModel` state and 
 button to trigger an event to change the currently active tab.
 
 <ExampleCodeBlock code={HoistedModel} />
+
+#### Dynamic Tabs 
+
+The `Tabs.Item` component takes in an optional `index` property if you want to specify the position of a tab. 
+If not defined, by default it will append tabs to the end. For example, if your tabs are stored as an array 
+in the state that can be added to along with a fixed tab that should remain at the end. 
+
+<ExampleCodeBlock code={DynamicTabs} />
 
 ## Components
 
