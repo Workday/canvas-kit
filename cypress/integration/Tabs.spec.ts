@@ -241,7 +241,7 @@ describe('Tabs', () => {
     });
   });
 
-  context.only('given the DynamicTabs story is rendered', () => {
+  context('given the DynamicTabs story is rendered', () => {
     beforeEach(() => {
       h.stories.load('Labs/Tabs/React', 'DynamicTabs');
     });
