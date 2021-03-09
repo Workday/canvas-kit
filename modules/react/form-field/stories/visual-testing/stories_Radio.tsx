@@ -8,7 +8,7 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 
-import {Radio, RadioGroup} from '../../../../radio/react';
+import {Radio, RadioGroup} from '../../../radio';
 import FormField from '../../index';
 
 const hintText = 'Helpful text goes here.';

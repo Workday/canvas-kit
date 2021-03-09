@@ -5,9 +5,9 @@ import withReadme from 'storybook-readme/with-readme';
 import {withKnobs} from '@storybook/addon-knobs';
 
 import Combobox, {ComboboxProps, ComboBoxMenuItemGroup} from '../index';
-import FormField from '../../../../form-field/react';
-import {MenuItem, MenuItemProps} from '../../../menu/react';
-import {TextInput} from '../../../../text-input/react';
+import FormField from '../../../react/form-field';
+import {MenuItem, MenuItemProps} from '../../menu';
+import {TextInput} from '../../../react/text-input';
 import README from '../README.md';
 
 const autocompleteResult = (

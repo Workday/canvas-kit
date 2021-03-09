@@ -3,9 +3,9 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Radio, RadioGroup} from '../../../radio/react';
+import {Radio, RadioGroup} from '../../radio';
 import FormField from '../index';
-import README from '../../../radio/react/README.md';
+import README from '../../radio/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';

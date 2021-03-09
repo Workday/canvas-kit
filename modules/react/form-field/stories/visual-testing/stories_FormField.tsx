@@ -8,7 +8,7 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {StaticStates} from '@workday/canvas-kit-labs-react/core';
-import {TextInput} from '../../../../text-input/react';
+import {TextInput} from '../../../text-input';
 import {FormFieldLabelPosition} from '../../lib/types';
 
 export default withSnapshotsEnabled({

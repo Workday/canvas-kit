@@ -8,7 +8,7 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 
-import {Select, SelectOption} from '../../../../select/react';
+import {Select, SelectOption} from '../../../select';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Select',

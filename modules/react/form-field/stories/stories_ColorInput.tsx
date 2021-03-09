@@ -4,9 +4,9 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {controlComponent} from '../../../../utils/storybook';
 
-import {ColorInput} from '../../../color-picker/react';
+import {ColorInput} from '../../color-picker';
 import FormField from '../index';
-import README from '../../../color-picker/react/README.md';
+import README from '../../color-picker/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';

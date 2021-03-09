@@ -8,7 +8,7 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 
-import {Checkbox} from '../../../../checkbox/react';
+import {Checkbox} from '../../../checkbox';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Checkbox',

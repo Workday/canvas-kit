@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button, DeleteButton} from '../../../button/react';
+import {Button, DeleteButton} from '../../button';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {Modal, ModalWidth} from '../';

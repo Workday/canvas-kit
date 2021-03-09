@@ -7,7 +7,7 @@ import {
   withSnapshotsEnabled,
   customColorTheme,
 } from '../../../../../utils/storybook';
-import {TextInput} from '../../../../text-input/react';
+import {TextInput} from '../../../text-input';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/Text Input',

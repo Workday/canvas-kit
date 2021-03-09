@@ -4,7 +4,7 @@ import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
 import './index.scss';
 // @ts-ignore
-import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
+import initializeIcons from '../icon/lib/canvas-kit-css-icon';
 
 class WithIconsDemo extends Component {
   componentDidMount() {

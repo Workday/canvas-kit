@@ -4,9 +4,9 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {ControlledComponentWrapper} from '../../../../utils/storybook';
 
-import {Checkbox} from '../../../checkbox/react';
+import {Checkbox} from '../../checkbox';
 import FormField from '../index';
-import README from '../../../checkbox/react/README.md';
+import README from '../../checkbox/README.md';
 
 const control = (child: React.ReactNode) => (
   <ControlledComponentWrapper controlledProp={ControlledComponentWrapper.ControlledProp.Checked}>

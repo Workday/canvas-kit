@@ -5,7 +5,7 @@ import README from './README.md';
 import '@workday/canvas-kit-css-button/index.scss';
 import './index.scss';
 // @ts-ignore
-import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
+import initializeIcons from '../icon/lib/canvas-kit-css-icon';
 
 interface PopupWrapperState {
   open: boolean;

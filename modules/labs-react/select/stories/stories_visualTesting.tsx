@@ -1,4 +1,4 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-labs-react/core';
 import {
@@ -7,15 +7,15 @@ import {
   withSnapshotsEnabled,
   controlComponent,
   customColorTheme,
-} from '../../../../../utils/storybook';
+} from '../../../../utils/storybook';
 import Select from '../lib/Select';
 import SelectBase from '../lib/SelectBase';
 import SelectOption from '../lib/SelectOption';
 
 import {colors} from '@workday/canvas-kit-react/core';
-import {Button} from '../../../../button/react';
-import FormField from '../../../../form-field/react';
-import {Modal, useModal} from '../../../../modal/react';
+import {Button} from '../../../react/button';
+import FormField from '../../../react/form-field';
+import {Modal, useModal} from '../../../react/modal';
 
 import {manyOptions, options} from './stories';
 

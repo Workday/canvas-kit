@@ -4,7 +4,7 @@ import {Component} from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import README from './README.md';
-import {colors} from '../../core/react';
+import {colors} from '../../react/core';
 // @ts-ignore
 import initializeIcons from './lib/canvas-kit-css-icon';
 import './index.scss';

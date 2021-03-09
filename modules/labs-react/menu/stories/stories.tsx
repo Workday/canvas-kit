@@ -1,4 +1,4 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
@@ -7,7 +7,7 @@ import uuid from 'uuid/v4';
 import {setupIcon, uploadCloudIcon, userIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import {Button, ButtonProps} from '../../../../button/react';
+import {Button, ButtonProps} from '../../../react/button';
 
 import Menu from '../lib/Menu';
 import MenuItem, {MenuItemProps} from '../lib/MenuItem';

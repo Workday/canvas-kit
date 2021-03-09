@@ -10,10 +10,10 @@ import chroma from 'chroma-js';
 
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
-import {Avatar} from '../../../../avatar/react';
-import {colors, spacing, gradients} from '../../../../core/react';
-import {Button, IconButton} from '../../../../button/react';
-import {MenuItem} from '../../../menu/react';
+import {Avatar} from '../../../react/avatar';
+import {colors, spacing, gradients} from '../../../react/core';
+import {Button, IconButton} from '../../../react/button';
+import {MenuItem} from '../../menu';
 import {
   GlobalHeader,
   Header,

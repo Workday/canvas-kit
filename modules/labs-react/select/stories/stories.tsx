@@ -1,8 +1,8 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {controlComponent} from '../../../../../utils/storybook';
+import {controlComponent} from '../../../../utils/storybook';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   activityStreamIcon,
@@ -11,7 +11,7 @@ import {
   userIcon,
 } from '@workday/canvas-system-icons-web';
 import {colors, typeColors} from '@workday/canvas-kit-react/core';
-import FormField from '../../../../form-field/react/index';
+import FormField from '../../../react/form-field';
 import Select from '../lib/Select';
 import {RenderOptionFunction} from '../lib/SelectBase';
 import README from '../README.md';

@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import FormField from '../lib/FormField';
-import {TextInput} from '../../../text-input/react';
+import {TextInput} from '../../text-input';
 import README from '../README.md';
 
 storiesOf('Components/Inputs/Form Field/React', module)

@@ -8,7 +8,7 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 
-import {TextArea} from '../../../../text-area/react';
+import {TextArea} from '../../../text-area';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Inputs/TextArea',

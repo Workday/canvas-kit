@@ -4,9 +4,9 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {controlComponent} from '../../../../utils/storybook';
 
-import {TextArea} from '../../../text-area/react';
+import {TextArea} from '../../text-area';
 import FormField from '../index';
-import README from '../../../text-area/react/README.md';
+import README from '../../text-area/README.md';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';

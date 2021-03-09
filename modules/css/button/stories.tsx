@@ -9,7 +9,7 @@ import README from './README.md';
 import './index.scss';
 
 // @ts-ignore
-import initializeIcons from '../../icon/css/lib/canvas-kit-css-icon';
+import initializeIcons from '../icon/lib/canvas-kit-css-icon';
 
 const blueBackground = css({
   display: 'flex',

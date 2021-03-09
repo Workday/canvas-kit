@@ -1,4 +1,4 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react/core';
@@ -6,7 +6,7 @@ import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
-} from '../../../../../utils/storybook';
+} from '../../../../utils/storybook';
 import SidePanel from '../index';
 
 export default withSnapshotsEnabled({

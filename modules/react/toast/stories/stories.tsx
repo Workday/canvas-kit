@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import withReadme from 'storybook-readme/with-readme';
-import {colors} from '../../../core/react';
+import {colors} from '../../core';
 import Toast from '../index';
 import README from '../README.md';
 

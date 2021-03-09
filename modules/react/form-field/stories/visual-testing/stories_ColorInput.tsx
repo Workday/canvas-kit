@@ -8,7 +8,7 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 
-import {ColorInput} from '../../../../color-picker/react';
+import {ColorInput} from '../../../color-picker';
 import FormField from '../../index';
 
 export default withSnapshotsEnabled({

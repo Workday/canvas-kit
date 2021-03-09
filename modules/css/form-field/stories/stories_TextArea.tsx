@@ -1,7 +1,7 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import README from '../../../text-area/css/README.md';
+import README from '../../text-area/README.md';
 import '../index.scss';
 import '@workday/canvas-kit-css-text-area/index.scss';
 

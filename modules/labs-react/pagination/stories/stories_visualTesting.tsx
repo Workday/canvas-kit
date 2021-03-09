@@ -1,10 +1,10 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {ContentDirection} from '@workday/canvas-kit-react/common';
 import {StaticStates} from '@workday/canvas-kit-labs-react/core';
 
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {
   Pagination,

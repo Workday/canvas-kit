@@ -3,9 +3,9 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {ColorPreview} from '../../../color-picker/react';
+import {ColorPreview} from '../../color-picker';
 import FormField from '../index';
-import README from '../../../color-picker/react/README.md';
+import README from '../../color-picker/README.md';
 
 storiesOf('Components/Inputs/Color Picker/Color Preview/React/Top Label', module)
   .addParameters({component: ColorPreview})

@@ -1,10 +1,10 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import React from 'react';
 
 import {StaticStates} from '@workday/canvas-kit-labs-react/core';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {spacing} from '@workday/canvas-kit-react/core';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react/tabs';
