@@ -62,7 +62,7 @@ function mergeCallbacks<T extends {[key: string]: any}>(
 }
 
 export const Tooltip = ({
-  type = 'label',
+  type = 'label1',
   placement = 'top',
   title,
   children,
