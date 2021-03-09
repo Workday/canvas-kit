@@ -7,7 +7,7 @@ import {
   typeColors,
   spacing,
 } from '@workday/canvas-kit-react/core';
-import type from 'undefined';
+import {type} from '@workday/canvas-kit-labs-react/core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 

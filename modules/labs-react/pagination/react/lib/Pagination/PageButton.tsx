@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
-import type from 'undefined';
+import {type} from '@workday/canvas-kit-labs-react/core';
 import canvas from '@workday/canvas-kit-react/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 

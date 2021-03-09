@@ -81,6 +81,19 @@ describe('Canvas Kit v5 Codemod', () => {
     transform,
     {},
     `
+  import type from '@workday/canvas-kit-labs-react-core';
+
+      `,
+    `
+  import { type } from "@workday/canvas-kit-labs-react/core";
+      `,
+    'Updates labs default import to named import'
+  );
+
+  defineInlineTest(
+    transform,
+    {},
+    `
   import {ActionBar, Banner, BannerVariant} from '@workday/canvas-kit-react';
       `,
     `

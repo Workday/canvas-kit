@@ -4,6 +4,7 @@ import {
   ImportDefaultSpecifier,
   ImportNamespaceSpecifier,
   ImportSpecifier,
+  JSCodeshift,
 } from 'jscodeshift';
 import {bundleExportMap, sourceMap} from './maps';
 
@@ -22,17 +23,27 @@ type ImportReplacements = {
  * e.g. `import canvas from '@workday/canvas-kit-react'` > `import canvas from '@workday/canvas-kit-react/core'`
  *
  * @param specifier The specifier object for the default import
+ * @param source The source string to reference so we can get the new source package
  * @param newImports
  */
 const addMappedDefaultSpecifier = (
   specifier: ImportDefaultSpecifier,
-  newImports: ImportReplacements
+  source: string,
+  newImports: ImportReplacements,
+  j: JSCodeshift
 ) => {
   const specifierName = specifier.local?.name;
 
   if (!specifierName) {
     return;
   }
+
+  // We oddly made type the default export from the labs core module. This converts it to a named import.
+  if (specifierName === 'type' && source === '@workday/canvas-kit-labs-react-core') {
+    addMappedSpecifier(j.importSpecifier(j.identifier(specifierName)), source, newImports);
+    return;
+  }
+
   const mappedSource = bundleExportMap[specifierName];
 
   newImports[mappedSource] = {
@@ -129,7 +140,7 @@ export default function transformer(file: FileInfo, api: API) {
       _import.value.specifiers?.forEach(specifier => {
         switch (specifier.type) {
           case 'ImportDefaultSpecifier':
-            addMappedDefaultSpecifier(specifier, newImports);
+            addMappedDefaultSpecifier(specifier, source, newImports, j);
             break;
           case 'ImportNamespaceSpecifier':
             addMappedNamespaceSpecifier(specifier, source, newImports);
