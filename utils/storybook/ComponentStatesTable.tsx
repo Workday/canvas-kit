@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-react-common';
+import {styled} from '@workday/canvas-kit-react/common';
 
 type PropDeclaration = {
   value: any;
