@@ -113,4 +113,15 @@ describe('Canvas Kit v5 Codemod', () => {
     `,
     'Updates renamed module import'
   );
+
+  defineInlineTest(
+    transform,
+    {},
+    `
+  import canvas, { colors, spacingNumbers as spacing } from '@workday/canvas-kit-react-core';`,
+    `
+  import canvas, { colors, spacingNumbers as spacing } from "@workday/canvas-kit-react/core";
+    `,
+    'Remaps combined default, namespace and named imports'
+  );
 });

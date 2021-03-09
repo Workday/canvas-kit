@@ -1,5 +1,5 @@
 import * as React from 'react';
-import canvas from '@workday/canvas-kit-react/core';
+import canvas, {borderRadius, type} from '@workday/canvas-kit-react/core';
 import {focusRing, mouseFocusBehavior, GrowthBehavior} from '@workday/canvas-kit-react/common';
 import {DeprecatedButtonVariant, ButtonSize, ButtonOrAnchorComponent} from './types';
 import styled from '@emotion/styled';

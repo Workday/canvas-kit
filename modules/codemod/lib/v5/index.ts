@@ -111,8 +111,9 @@ const addMappedSpecifier = (
     source === '@workday/canvas-kit-react' ? bundleExportMap[specifierName] : sourceMap[source];
 
   // Create new array of import specifiers for new import if not defined, otherwise push new import
-  if (!newImports[newSource]) {
+  if (!newImports[newSource] || !newImports[newSource].namedImports) {
     newImports[newSource] = {
+      ...newImports[newSource],
       namedImports: [],
     };
   }
