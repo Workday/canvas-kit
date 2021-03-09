@@ -9,9 +9,9 @@ import {bundleExportMap, sourceMap} from './maps';
 
 type ImportReplacements = {
   [source: string]: {
-    default?: ImportDefaultSpecifier;
-    namedImports?: ImportSpecifier[];
-    namespace?: ImportNamespaceSpecifier; // * as x
+    default?: ImportDefaultSpecifier; // import x
+    namedImports?: ImportSpecifier[]; // import { x }
+    namespace?: ImportNamespaceSpecifier; // import * as x
   };
 };
 
@@ -152,17 +152,20 @@ export default function transformer(file: FileInfo, api: API) {
             | ImportNamespaceSpecifier
             | ImportSpecifier
           )[] = [];
+
+          const {default: defaultImport, namespace, namedImports} = newImports[source];
+
           // add `import X` default specifier
-          if (newImports[source].default) {
-            newImportSet.push(newImports[source].default);
+          if (defaultImport) {
+            newImportSet.push(defaultImport);
           }
           // add `import * as X` namespace specifier
-          if (newImports[source].namespace) {
-            newImportSet.push(newImports[source].namespace);
+          if (namespace) {
+            newImportSet.push(namespace);
           }
           // Add `import { X }` named specifier
-          if (newImports[source].namedImports?.length) {
-            newImports[source].namedImports?.forEach(specifier => {
+          if (namedImports?.length) {
+            namedImports?.forEach(specifier => {
               newImportSet.push(specifier);
             });
           }
