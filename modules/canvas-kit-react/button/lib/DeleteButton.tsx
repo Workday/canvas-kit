@@ -6,7 +6,7 @@ import {
   useTheme,
   Themeable,
   EmotionCanvasTheme,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 
 export interface DeleteButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,

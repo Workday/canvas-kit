@@ -1,7 +1,7 @@
 /// <reference path="../../../../../typings.d.ts" />
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 import README from '../README.md';
 

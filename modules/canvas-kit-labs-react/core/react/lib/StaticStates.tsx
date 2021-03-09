@@ -4,7 +4,7 @@ import {
   CanvasProvider,
   EmotionCanvasTheme,
   PartialEmotionCanvasTheme,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 
 export const StaticStates: React.FC<{theme?: PartialEmotionCanvasTheme} & React.HTMLAttributes<
   HTMLElement

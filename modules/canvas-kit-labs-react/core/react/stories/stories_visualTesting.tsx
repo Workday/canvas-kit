@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react/core';
 import type, {space} from '..';
 import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
-import {accessibleHide} from '@workday/canvas-kit-react-common';
+import {accessibleHide} from '@workday/canvas-kit-react/common';
 
 export interface StatusProps {
   ariaLive?: 'polite' | 'assertive' | 'off';

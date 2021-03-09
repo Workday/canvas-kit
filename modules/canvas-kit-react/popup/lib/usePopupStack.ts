@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {useLocalRef} from '@workday/canvas-kit-react-common';
+import {useLocalRef} from '@workday/canvas-kit-react/common';
 
 /**
  * This hook should not be used directly. Use the `Popper` component instead.

@@ -5,7 +5,7 @@ import {
   ToModelConfig,
   useEventMap,
   useUniqueId,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 
 export type Item = {
   id: string;

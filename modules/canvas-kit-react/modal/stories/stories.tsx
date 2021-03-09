@@ -3,11 +3,11 @@ import * as React from 'react';
 
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
-import {FormField} from '@workday/canvas-kit-react-form-field';
-import {TextInput} from '@workday/canvas-kit-react-text-input';
-import {Modal, useModal} from '@workday/canvas-kit-react-modal';
-import {Radio, RadioGroup} from '@workday/canvas-kit-react-radio';
+import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Modal, useModal} from '@workday/canvas-kit-react/modal';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
 import README from '../README.md';
 import {controlComponent} from '../../../../utils/storybook';

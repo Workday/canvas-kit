@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
 import {css, jsx} from '@emotion/core';
-import {styled} from '@workday/canvas-kit-react-common';
+import {styled} from '@workday/canvas-kit-react/common';
 import {
   borderRadius,
   colors,
@@ -9,7 +9,7 @@ import {
   depth,
   spacing,
   type,
-} from '@workday/canvas-kit-react-core';
+} from '@workday/canvas-kit-react/core';
 
 // types
 import {Breadcrumb} from '../types';

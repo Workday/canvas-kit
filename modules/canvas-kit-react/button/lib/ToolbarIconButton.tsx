@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
 import {IconButtonProps} from './IconButton';

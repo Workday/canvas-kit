@@ -1,11 +1,11 @@
-import {borderRadius, colors} from '@workday/canvas-kit-react-core';
-import {pickForegroundColor} from '@workday/canvas-kit-react-common';
+import {borderRadius, colors} from '@workday/canvas-kit-react/core';
+import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 import chroma from 'chroma-js';
 import * as React from 'react';
 import styled from '@emotion/styled';
 
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 export interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
   color: string;

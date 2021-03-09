@@ -1,8 +1,8 @@
 import React from 'react';
-import {styled} from '@workday/canvas-kit-react-common';
-import {type} from '@workday/canvas-kit-react-core';
-import {TooltipContainer} from '@workday/canvas-kit-react-tooltip';
-import {Popper} from '@workday/canvas-kit-react-popup';
+import {styled} from '@workday/canvas-kit-react/common';
+import {type} from '@workday/canvas-kit-react/core';
+import {TooltipContainer} from '@workday/canvas-kit-react/tooltip';
+import {Popper} from '@workday/canvas-kit-react/popup';
 
 import {useTruncateTooltip} from './hooks';
 import {truncateStyles} from './styles';

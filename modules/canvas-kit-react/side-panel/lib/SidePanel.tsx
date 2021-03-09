@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 import throttle from 'lodash/throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, spacing, type, CanvasSpacingValue} from '@workday/canvas-kit-react-core';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
+import {colors, spacing, type, CanvasSpacingValue} from '@workday/canvas-kit-react/core';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
 
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {

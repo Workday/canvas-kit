@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {spacing} from '@workday/canvas-kit-react-core';
-import {GrowthBehavior, ErrorType, styled, Themeable} from '@workday/canvas-kit-react-common';
+import {spacing} from '@workday/canvas-kit-react/core';
+import {GrowthBehavior, ErrorType, styled, Themeable} from '@workday/canvas-kit-react/common';
 import Hint from './Hint';
 import Label from './Label';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';

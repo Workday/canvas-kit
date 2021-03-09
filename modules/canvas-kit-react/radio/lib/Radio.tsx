@@ -5,13 +5,8 @@ import {
   styled,
   Themeable,
   useUniqueId,
-} from '@workday/canvas-kit-react-common';
-import canvas, {
-  borderRadius,
-  colors,
-  inputColors,
-  spacingNumbers as spacing,
-} from '@workday/canvas-kit-react-core';
+} from '@workday/canvas-kit-react/common';
+import canvas from '@workday/canvas-kit-react/core';
 
 export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**

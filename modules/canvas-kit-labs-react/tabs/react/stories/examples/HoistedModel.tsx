@@ -1,8 +1,8 @@
 import React from 'react';
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react/core';
 
-import {Button} from '@workday/canvas-kit-react-button';
-import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react-tabs';
+import {Button} from '@workday/canvas-kit-react/button';
+import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react/tabs';
 
 export const HoistedModel = () => {
   const model = useTabsModel({

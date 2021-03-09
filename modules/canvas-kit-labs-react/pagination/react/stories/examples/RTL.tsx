@@ -7,7 +7,7 @@ import {
   usePaginationModel,
 } from '../../lib/Pagination';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export const RTL = () => {
   const resultCount = 10;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {PopupPadding} from '@workday/canvas-kit-react-popup';
+import {PopupPadding} from '@workday/canvas-kit-react/popup';
 import ModalContent, {ModalContentProps} from './ModalContent';
 
 export enum ModalWidth {

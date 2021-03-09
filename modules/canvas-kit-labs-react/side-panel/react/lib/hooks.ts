@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {useUniqueId} from '@workday/canvas-kit-react-common';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 export interface UseSidePanelProps {
   initialExpanded?: boolean;

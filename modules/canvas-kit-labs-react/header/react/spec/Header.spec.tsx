@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Header from '../lib/Header';
 import {shallow, mount} from 'enzyme';
-import {IconButton} from '@workday/canvas-kit-react-button';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {IconButton} from '@workday/canvas-kit-react/button';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {activityStreamIcon, justifyIcon} from '@workday/canvas-system-icons-web';
 
 declare global {

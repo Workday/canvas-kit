@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/core';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -17,7 +17,7 @@ import {
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '../index';
 
 import README from '../README.md';

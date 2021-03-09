@@ -6,17 +6,17 @@ import {keyframes, jsx} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {number} from '@storybook/addon-knobs';
-import {Avatar} from '@workday/canvas-kit-react-avatar';
-import {Card} from '@workday/canvas-kit-react-card';
-import {Checkbox} from '@workday/canvas-kit-react-checkbox';
-import {FormField} from '@workday/canvas-kit-react-form-field';
-import {TextInput} from '@workday/canvas-kit-react-text-input';
-import {Button, ButtonVariant} from '@workday/canvas-kit-react-button';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {Card} from '@workday/canvas-kit-react/card';
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Button, ButtonVariant} from '@workday/canvas-kit-react/button';
 
 import Skeleton, {SkeletonShape, SkeletonText, SkeletonHeader} from '../index';
 
 import README from '../README.md';
-import canvas from '@workday/canvas-kit-react-core';
+import canvas from '@workday/canvas-kit-react/core';
 
 const Container = styled('span')({
   width: '60%',

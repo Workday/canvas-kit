@@ -1,9 +1,9 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {Menu, MenuItem} from '@workday/canvas-kit-labs-react-menu';
-import {Popper} from '@workday/canvas-kit-react-popup';
+import {Menu, MenuItem} from '@workday/canvas-kit-labs-react/menu';
+import {Popper} from '@workday/canvas-kit-react/popup';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
+import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
 
 const containerStyles: React.CSSProperties = {
   display: 'flex',

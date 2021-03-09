@@ -2,8 +2,8 @@
 import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, commonColors, type, spacing} from '@workday/canvas-kit-react-core';
-import Button from '@workday/canvas-kit-react-button';
+import {colors, commonColors, type, spacing} from '@workday/canvas-kit-react/core';
+import Button from '@workday/canvas-kit-react/button';
 
 export interface CookieBannerProps {
   /**

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import SegmentedControl from '../lib/SegmentedControl';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 describe('Segmented Control', () => {

@@ -6,7 +6,7 @@ import {select, boolean, text} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import {Drawer, DrawerDirection, DrawerHeader} from '../index';
 import README from '../README.md';
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react/core';
 
 // Drawer Open Direction Knob
 const label = 'Open Direction';

@@ -1,11 +1,11 @@
 import {useState, useLayoutEffect} from 'react';
-import {useUniqueId} from '@workday/canvas-kit-react-common';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {
   usePopup,
   useCloseOnOutsideClick,
   useCloseOnEscape,
   PopperProps,
-} from '@workday/canvas-kit-react-popup';
+} from '@workday/canvas-kit-react/popup';
 
 import {DropdownButtonProps} from './Button';
 import {DropdownMenuProps} from './Menu';

@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import React from 'react';
 import {css, jsx} from '@emotion/core';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {relatedActionsIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors} from '@workday/canvas-kit-react-core';
+import {colors} from '@workday/canvas-kit-react/core';
 
 export interface DropdownButtonProps extends IconButtonProps {
   /**

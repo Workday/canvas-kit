@@ -7,7 +7,7 @@ import {
   Themeable,
   errorRing,
   styled,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 import {
   colors,
   borderRadius,
@@ -15,9 +15,9 @@ import {
   spacingNumbers,
   type,
   spacing,
-} from '@workday/canvas-kit-react-core';
+} from '@workday/canvas-kit-react/core';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 import SelectMenu from './SelectMenu';
 import SelectOption from './SelectOption';

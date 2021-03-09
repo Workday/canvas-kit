@@ -1,9 +1,9 @@
-import {colors, spacing} from '@workday/canvas-kit-react-core';
+import {colors, spacing} from '@workday/canvas-kit-react/core';
 import {checkIcon} from '@workday/canvas-system-icons-web';
-import {ColorInput} from '@workday/canvas-kit-react-color-picker';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
-import FormField from '@workday/canvas-kit-react-form-field';
+import FormField from '@workday/canvas-kit-react/form-field';
 import styled from '@emotion/styled';
 
 import {ResetButton} from './parts/ColorReset';

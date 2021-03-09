@@ -1,8 +1,8 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import SidePanel, {useSidePanel} from '../index';
-import {Avatar} from '@workday/canvas-kit-react-avatar';
-import {Button} from '@workday/canvas-kit-react-button';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {Button} from '@workday/canvas-kit-react/button';
 
 export default {
   title: 'Testing/React/Labs/Side Panel/Cypress',

@@ -1,15 +1,15 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 
-import {Modal, useModal} from '@workday/canvas-kit-react-modal';
-import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
+import {Modal, useModal} from '@workday/canvas-kit-react/modal';
+import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
   Popper,
   usePopup,
   useCloseOnOutsideClick,
   useCloseOnEscape,
-} from '@workday/canvas-kit-react-popup';
+} from '@workday/canvas-kit-react/popup';
 
 export default {
   title: 'Testing/React/Popups/Modal',

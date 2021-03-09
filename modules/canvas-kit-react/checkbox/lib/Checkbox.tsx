@@ -8,14 +8,9 @@ import {
   styled,
   useTheme,
   Themeable,
-} from '@workday/canvas-kit-react-common';
-import canvas, {
-  borderRadius,
-  colors,
-  inputColors,
-  spacingNumbers as spacing,
-} from '@workday/canvas-kit-react-core';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+} from '@workday/canvas-kit-react/common';
+import canvas from '@workday/canvas-kit-react/core';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 
 export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {

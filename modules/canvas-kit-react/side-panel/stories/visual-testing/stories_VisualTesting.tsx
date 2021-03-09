@@ -1,10 +1,10 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/core';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {SidePanel} from '../../index';
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react/core';
 import {SidePanelBackgroundColor, SidePanelOpenDirection} from '../../lib/SidePanel';
 import {action} from '@storybook/addon-actions';
 

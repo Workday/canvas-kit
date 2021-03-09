@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
 
 import PageHeader from '../index';

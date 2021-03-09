@@ -11,7 +11,7 @@ import {
   percentageIcon,
 } from '@workday/canvas-system-icons-web';
 
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {SegmentedControl} from '../index';
 
 import README from '../README.md';

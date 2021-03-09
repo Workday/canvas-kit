@@ -1,5 +1,5 @@
-import {focusRing} from '@workday/canvas-kit-react-common';
-import {colors, gradients, iconColors, depth, CSSProperties} from '@workday/canvas-kit-react-core';
+import {focusRing} from '@workday/canvas-kit-react/common';
+import {colors, gradients, iconColors, depth, CSSProperties} from '@workday/canvas-kit-react/core';
 import chroma from 'chroma-js';
 import {HeaderTheme, SearchTheme} from './types';
 

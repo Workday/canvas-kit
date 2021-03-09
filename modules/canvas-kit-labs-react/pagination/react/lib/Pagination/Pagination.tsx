@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconButtonProps} from '@workday/canvas-kit-react-button';
+import {IconButtonProps} from '@workday/canvas-kit-react/button';
 
 import {PaginationModel} from './types';
 import {usePaginationModel, UsePaginationModelConfig} from './usePaginationModel';

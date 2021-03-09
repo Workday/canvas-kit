@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import * as React from 'react';
-import {styled} from '@workday/canvas-kit-react-common';
+import {styled} from '@workday/canvas-kit-react/common';
 import {css, CSSObject, jsx, keyframes} from '@emotion/core';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
-import {spacing, colors, depth} from '@workday/canvas-kit-react-core';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {spacing, colors, depth} from '@workday/canvas-kit-react/core';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 
 export type SidePanelVariant = 'standard' | 'alternate';

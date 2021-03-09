@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {colors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {shallow} from 'enzyme';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import InputIconContainer from '../lib/InputIconContainer';
 

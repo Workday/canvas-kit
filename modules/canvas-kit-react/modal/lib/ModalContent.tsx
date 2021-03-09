@@ -2,13 +2,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
-import Popup, {
-  PopupPadding,
-  usePopupStack,
-  useCloseOnEscape,
-  useAssistiveHideSiblings,
-  useFocusTrap,
-} from '@workday/canvas-kit-react-popup';
+import Popup from '@workday/canvas-kit-react/popup';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
 import {ModalWidth} from './Modal';

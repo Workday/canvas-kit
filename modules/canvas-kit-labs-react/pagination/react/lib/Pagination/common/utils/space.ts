@@ -1,4 +1,4 @@
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react/core';
 
 export type Spacing = keyof typeof spacing;
 

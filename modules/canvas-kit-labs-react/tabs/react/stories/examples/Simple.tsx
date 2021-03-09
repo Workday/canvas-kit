@@ -1,7 +1,7 @@
 import React from 'react';
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react/core';
 
-import {Tabs} from '@workday/canvas-kit-labs-react-tabs';
+import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
 
 export const Simple = () => {
   return (

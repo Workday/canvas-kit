@@ -1,5 +1,5 @@
 import {typeColors} from '@workday/canvas-colors-web';
-import {CSSProperties, type, CanvasTypeVariant, fontFamily} from '@workday/canvas-kit-react-core';
+import {CSSProperties, type, CanvasTypeVariant, fontFamily} from '@workday/canvas-kit-react/core';
 
 export interface CanvasTypeHierarchy {
   brand1: CSSProperties;

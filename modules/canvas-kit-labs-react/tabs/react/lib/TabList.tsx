@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import {spacing, commonColors} from '@workday/canvas-kit-react-core';
+import {spacing, commonColors} from '@workday/canvas-kit-react/core';
 import {
   composeHooks,
   createComponent,
   styled,
   StyledType,
   useModelContext,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 
 import {useRovingFocus} from './cursor/hooks';
 import {TabsModelContext} from './Tabs';

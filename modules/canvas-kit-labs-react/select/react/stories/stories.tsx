@@ -3,14 +3,14 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {controlComponent} from '../../../../../utils/storybook';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   activityStreamIcon,
   avatarIcon,
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
-import {colors, typeColors} from '@workday/canvas-kit-react-core';
+import {colors, typeColors} from '@workday/canvas-kit-react/core';
 import FormField from '../../../../form-field/react/index';
 import Select from '../lib/Select';
 import {RenderOptionFunction} from '../lib/SelectBase';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react-core';
+import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react/core';
 import {
   createComponent,
   focusRing,
@@ -10,7 +10,7 @@ import {
   StyledType,
   useLocalRef,
   useModelContext,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';

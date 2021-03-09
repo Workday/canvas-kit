@@ -5,7 +5,7 @@ import {
   ToModelConfig,
   useEventMap,
   assert,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 
 import {
   ListState,

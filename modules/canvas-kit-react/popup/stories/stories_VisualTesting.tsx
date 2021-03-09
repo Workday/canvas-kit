@@ -1,12 +1,12 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/core';
 import {action} from '@storybook/addon-actions';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Popup} from '../index';
 import {PopupPadding} from '../lib/Popup';
-import {depth} from '@workday/canvas-kit-react-core';
+import {depth} from '@workday/canvas-kit-react/core';
 
 export const PopupStates = withSnapshotsEnabled(() => (
   <StaticStates>

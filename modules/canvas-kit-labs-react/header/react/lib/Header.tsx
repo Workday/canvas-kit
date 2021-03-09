@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import {borderRadius, spacing, type} from '@workday/canvas-kit-react-core';
+import {borderRadius, spacing, type} from '@workday/canvas-kit-react/core';
 import {DubLogoTitle, WorkdayLogoTitle} from './parts';
 import {themes} from './shared/themes';
 import {HeaderHeight, HeaderTheme, HeaderVariant} from './shared/types';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react-icon';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {justifyIcon} from '@workday/canvas-system-icons-web';
-import {PickRequired} from '@workday/canvas-kit-react-common';
+import {PickRequired} from '@workday/canvas-kit-react/common';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

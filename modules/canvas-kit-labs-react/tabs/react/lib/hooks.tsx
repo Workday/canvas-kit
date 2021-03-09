@@ -1,5 +1,5 @@
 import React from 'react';
-import {mergeProps} from '@workday/canvas-kit-react-common';
+import {mergeProps} from '@workday/canvas-kit-react/common';
 
 import {orientationKeyMap} from './cursor/hooks';
 import {TabsModel} from './useTabsModel';

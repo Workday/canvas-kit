@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, gradients, spacing, type} from '@workday/canvas-kit-react-core';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
+import {colors, gradients, spacing, type} from '@workday/canvas-kit-react/core';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 
 export interface PageHeaderProps {
   /**

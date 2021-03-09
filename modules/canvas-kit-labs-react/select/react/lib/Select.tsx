@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ErrorType} from '@workday/canvas-kit-react-common';
+import {ErrorType} from '@workday/canvas-kit-react/common';
 import {menuAnimationDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';

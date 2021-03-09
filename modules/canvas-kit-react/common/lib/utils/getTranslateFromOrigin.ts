@@ -1,4 +1,4 @@
-import {CanvasSpacingValue} from '@workday/canvas-kit-react-core';
+import {CanvasSpacingValue} from '@workday/canvas-kit-react/core';
 import {TransformOrigin} from '../types';
 
 type translateMapType = {

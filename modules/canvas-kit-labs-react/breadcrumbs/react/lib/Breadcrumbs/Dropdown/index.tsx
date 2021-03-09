@@ -1,6 +1,6 @@
 import React from 'react';
 import {Breadcrumb} from '../types';
-import {Popper} from '@workday/canvas-kit-react-popup';
+import {Popper} from '@workday/canvas-kit-react/popup';
 
 import {useRTL} from '../hooks';
 import {useDropdown} from './hooks';

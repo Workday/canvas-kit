@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {colors, spacing, borderRadius, type} from '@workday/canvas-kit-react-core';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {colors, spacing, borderRadius, type} from '@workday/canvas-kit-react/core';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
-import {ErrorType, focusRing, styled, Themeable} from '@workday/canvas-kit-react-common';
+import {ErrorType, focusRing, styled, Themeable} from '@workday/canvas-kit-react/common';
 
 export enum BannerVariant {
   Full,

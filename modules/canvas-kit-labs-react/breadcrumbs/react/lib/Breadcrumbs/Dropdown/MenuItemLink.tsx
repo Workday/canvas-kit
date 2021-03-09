@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react';
-import {styled} from '@workday/canvas-kit-react-common';
-import {colors, commonColors, type, typeColors, spacing} from '@workday/canvas-kit-react-core';
+import {styled} from '@workday/canvas-kit-react/common';
+import {colors, commonColors, type, typeColors, spacing} from '@workday/canvas-kit-react/core';
 
 interface DropdownMenuItemLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
   /**

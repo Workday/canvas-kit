@@ -2,9 +2,9 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import uuid from 'uuid/v4';
 import {MenuItemProps} from './MenuItem';
-import {Card} from '@workday/canvas-kit-react-card';
-import {commonColors, spacing, borderRadius} from '@workday/canvas-kit-react-core';
-import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {Card} from '@workday/canvas-kit-react/card';
+import {commonColors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {hideMouseFocus, GrowthBehavior} from '@workday/canvas-kit-react/common';
 
 export interface MenuProps extends GrowthBehavior, React.HTMLAttributes<HTMLUListElement> {
   /**

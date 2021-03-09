@@ -1,6 +1,6 @@
 import * as React from 'react';
 import uuid from 'uuid/v4';
-import {useCloseOnEscape} from '@workday/canvas-kit-react-popup';
+import {useCloseOnEscape} from '@workday/canvas-kit-react/popup';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;

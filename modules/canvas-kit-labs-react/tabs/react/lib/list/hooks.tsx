@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useMountLayout} from '@workday/canvas-kit-react-common';
+import {useMountLayout} from '@workday/canvas-kit-react/common';
 
 import {ListModel} from './useListModel';
 

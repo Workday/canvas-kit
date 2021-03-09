@@ -1,7 +1,7 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {chartConfigIcon, filterIcon} from '@workday/canvas-system-icons-web';
 import README from './README.md';
 import './index.scss';

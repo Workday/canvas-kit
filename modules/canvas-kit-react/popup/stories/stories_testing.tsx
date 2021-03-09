@@ -1,8 +1,8 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 
-import {Button} from '@workday/canvas-kit-react-button';
-import {Popper, Popup, usePopup, useCloseOnOutsideClick} from '@workday/canvas-kit-react-popup';
+import {Button} from '@workday/canvas-kit-react/button';
+import {Popper, Popup, usePopup, useCloseOnOutsideClick} from '@workday/canvas-kit-react/popup';
 
 export default {
   title: 'Testing/React/Popups/Popup',

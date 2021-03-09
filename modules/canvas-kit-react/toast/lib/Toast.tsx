@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Popup, {PopupPadding} from '@workday/canvas-kit-react-popup';
-import {spacing, colors, type, CanvasColor} from '@workday/canvas-kit-react-core';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import Popup from '@workday/canvas-kit-react/popup';
+import {spacing, colors, type, CanvasColor} from '@workday/canvas-kit-react/core';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {TransformOrigin} from '@workday/canvas-kit-react-common';
+import {TransformOrigin} from '@workday/canvas-kit-react/common';
 import styled from '@emotion/styled';
 
 export interface ToastProps {

@@ -9,7 +9,7 @@ import {
   borderRadius,
   CanvasDepthValue,
   CanvasSpacingValue,
-} from '@workday/canvas-kit-react-core';
+} from '@workday/canvas-kit-react/core';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

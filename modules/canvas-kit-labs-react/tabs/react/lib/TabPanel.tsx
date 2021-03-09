@@ -8,7 +8,7 @@ import {
   useLocalRef,
   useModelContext,
   useMountLayout,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {HeaderHeight, HeaderTheme, HeaderVariant} from '../shared/types';
-import {miniWdayLogoBlue, wdayLogoWhite, wdayLogoBlue} from '@workday/canvas-kit-react-common'; // TODO: Replace with real SVGs from @workday/brand-assets
-import {colors, spacing} from '@workday/canvas-kit-react-core';
+import {miniWdayLogoBlue, wdayLogoWhite, wdayLogoBlue} from '@workday/canvas-kit-react/common';
+import {colors, spacing} from '@workday/canvas-kit-react/core';
 import chroma from 'chroma-js';
 
 export type WorkdayLogoTitleProps = {

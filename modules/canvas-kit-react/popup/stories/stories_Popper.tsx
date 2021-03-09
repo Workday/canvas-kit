@@ -2,13 +2,13 @@
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button} from '@workday/canvas-kit-react-button';
+import {Button} from '@workday/canvas-kit-react/button';
 import {
   Popup,
   Popper,
   useCloseOnEscape,
   useCloseOnOutsideClick,
-} from '@workday/canvas-kit-react-popup';
+} from '@workday/canvas-kit-react/popup';
 
 import README from '../README.md';
 

@@ -5,10 +5,10 @@ import withReadme from 'storybook-readme/with-readme';
 
 import README from '../lib/theming/README.md';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-system-icons-web';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
-import {Card} from '@workday/canvas-kit-react-card';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
 
 const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
   'aria-label': 'Activity Stream',

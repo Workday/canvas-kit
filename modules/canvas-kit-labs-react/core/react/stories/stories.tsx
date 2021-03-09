@@ -3,7 +3,7 @@
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
 import withReadme from 'storybook-readme/with-readme';
-import {spacing} from '@workday/canvas-kit-react-core';
+import {spacing} from '@workday/canvas-kit-react/core';
 import type, {space} from '..';
 
 import README from '../README.md';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createComponent, useDefaultModel} from '@workday/canvas-kit-react-common';
+import {createComponent, useDefaultModel} from '@workday/canvas-kit-react/common';
 
 import {Tab} from './Tab';
 import {TabList} from './TabList';

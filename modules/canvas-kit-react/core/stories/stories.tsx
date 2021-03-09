@@ -5,7 +5,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import withReadme from 'storybook-readme/with-readme';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {pickForegroundColor} from '@workday/canvas-kit-react-common';
+import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 
 import {colors, type, depth, spacing, borderRadius, H1, H2, H3, H4, H5} from '..';
 import README from '../README.md';

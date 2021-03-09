@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IconButton, IconButtonProps} from '@workday/canvas-kit-react-button';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {
   chevronLeftSmallIcon,
   chevron2xLeftSmallIcon,
