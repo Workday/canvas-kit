@@ -4,8 +4,8 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Combobox from '../lib/Combobox';
-import {MenuItem} from '../../../menu/react';
-import {TextInput} from '../../../../text-input/react';
+import {MenuItem} from '../../menu';
+import {TextInput} from '../../../react/text-input';
 
 describe('InputProvider', () => {
   it('should render on a server without crashing', () => {
