@@ -1,4 +1,4 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 import SidePanel, {useSidePanel} from '../index';
 import {Avatar} from '@workday/canvas-kit-react/avatar';

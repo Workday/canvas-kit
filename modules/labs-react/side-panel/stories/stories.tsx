@@ -1,4 +1,4 @@
-/// <reference path="../../../../../typings.d.ts" />
+/// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
