@@ -36,7 +36,6 @@
     "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
   "devDependencies": {
-    "@emotion/core": "^10.0.28",
     "@workday/canvas-kit-react": "^5.0.0-beta.0"
   },
   "keywords": [

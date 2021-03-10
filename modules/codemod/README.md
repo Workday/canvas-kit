@@ -17,7 +17,7 @@ Options:
   -h, --help     Show help                                             [boolean]
 ```
 
-> Note: These codemods only work on .js, .jsx, .ts, and .tsx extensions. You may need to make some manual changes in .json or .mdx files.
+> Note: These codemods only work on .js, .jsx, .ts, and .tsx extensions. You may need to make some manual changes in other file types (.json, .mdx, .md, etc.).
 
 > Note: You may need to run your linter after executing the codemod, as it's resulting formatting (spacing, quotes, etc.) may not match your project's styling.
 
