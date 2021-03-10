@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import TextInput from '@workday/canvas-kit-react/text-input';
+import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
 
 export type GoToTextInputProps = TextInputProps & {
   'aria-label': string;

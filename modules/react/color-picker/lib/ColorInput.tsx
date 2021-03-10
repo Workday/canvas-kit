@@ -8,7 +8,7 @@ import {
   ContentDirection,
 } from '@workday/canvas-kit-react/common';
 import {colors, spacing, type, inputColors} from '@workday/canvas-kit-react/core';
-import TextInput from '@workday/canvas-kit-react/text-input';
+import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
 import {ColorSwatch} from './parts/ColorSwatch';
 
 export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavior {
