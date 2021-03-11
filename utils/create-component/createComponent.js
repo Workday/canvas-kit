@@ -3,14 +3,13 @@
 
 const fs = require('fs');
 const path = require('path');
-const mkdirp = require('mkdirp');
 const inquirer = require('inquirer');
 const {exec} = require('child_process');
 
 require('colors');
 
 const createReactModule = require('./createReactModule');
-const addDependency = require('./addDependency');
+const addExport = require('./addExport');
 
 const cwd = process.cwd();
 
@@ -69,11 +68,10 @@ inquirer
   .then(answers => {
     const {name, category} = answers;
     const unstable = category === 'Labs (beta)';
-    const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
-
-    if (!fs.existsSync(componentPath)) {
-      mkdirp.sync(componentPath);
-    }
+    const componentPath = path.join(
+      cwd,
+      unstable ? `modules/labs-react/${name}` : `modules/react/${name}`
+    );
 
     createModule(componentPath, 'react', createReactModule, answers, unstable);
 
@@ -87,21 +85,16 @@ inquirer
 const createModule = (componentPath, target, moduleGenerator, answers, unstable) => {
   const {name, description, category, publicModule} = answers;
 
-  const modulePath = path.join(componentPath, target);
-
-  if (fs.existsSync(modulePath)) {
-    const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}${target}-${name}`;
+  if (fs.existsSync(componentPath)) {
+    const moduleName = `@workday/canvas-kit-${unstable ? 'labs' : ''}${target}/${name}`;
     console.log(`\nModule ${moduleName} already exists. Skipping.`.yellow);
   } else {
-    moduleGenerator(modulePath, name, description, unstable, publicModule, category);
+    moduleGenerator(componentPath, name, description, unstable, publicModule, category);
+
+    console.log('\nAdding export to ' + `./modules/${unstable ? 'labs-' : ''}react/index.ts`.cyan);
+    addExport(name, unstable);
 
     console.log('\nBootstrapping dependencies.');
     exec('yarn');
-
-    if (!unstable) {
-      console.log('\nAdding dependency to ' + `@workday/canvas-kit-${target}.`.cyan);
-
-      addDependency(name, target);
-    }
   }
 };

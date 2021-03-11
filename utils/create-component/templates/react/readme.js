@@ -9,7 +9,7 @@ module.exports = (name, description, unstable) => {
 ${
   unstable
     ? `
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 `
@@ -18,26 +18,16 @@ ${
 ${description}
 
 ## Installation
-${
-  !unstable
-    ? `
-\`\`\`sh
-yarn add @workday/canvas-kit-react
-\`\`\`
 
-or
-`
-    : ''
-}
 \`\`\`sh
-yarn add @workday/canvas-kit${unstable ? '-labs' : ''}-react-${name}
+yarn add @workday/canvas-kit-${unstable ? 'labs-react' : 'react'}
 \`\`\`
 
 ## Usage
 
 \`\`\`tsx
 import * as React from 'react';
-import ${pascalCaseName} from '@workday/canvas-kit${unstable ? '-labs' : ''}-react-${name}';
+import {${pascalCaseName}} from '@workday/canvas-kit${unstable ? '-labs' : ''}-react/${name}';
 
 <${pascalCaseName} />;
 \`\`\`

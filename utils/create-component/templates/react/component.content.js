@@ -1,7 +1,7 @@
 module.exports = pascalCaseName => `import React from 'react';
 
-import {colors, spacing} from '@workday/canvas-kit-react-core';
-import {createComponent, styled, StyledType, useModelContext} from '@workday/canvas-kit-react-common';
+import {colors, spacing} from '@workday/canvas-kit-react/core';
+import {createComponent, styled, StyledType, useModelContext} from '@workday/canvas-kit-react/common';
 
 import {${pascalCaseName}ModelContext} from './${pascalCaseName}';
 import { ${pascalCaseName}Model } from './use${pascalCaseName}Model';

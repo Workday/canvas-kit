@@ -7,7 +7,6 @@ const writeModuleFiles = require('./writeModuleFiles');
 
 const {getCamelCaseName, getPascalCaseName, getTitleCaseName} = require('./nameUtils');
 
-const packageJson = require('./templates/react/packageJson');
 const model = require('./templates/react/model');
 const component = require('./templates/react/component');
 const componentTarget = require('./templates/react/component.target');
@@ -17,12 +16,11 @@ const stories = require('./templates/react/stories');
 const testingStories = require('./templates/react/stories_VisualTesting');
 const ssr = require('./templates/react/SSR');
 const readme = require('./templates/react/readme');
-const tsconfig = require('./templates/react/tsconfig');
 
 const cwd = process.cwd();
 
 module.exports = (modulePath, name, description, unstable, public, category) => {
-  const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}react-${name}`;
+  const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}react/${name}`;
 
   console.log('\nCreating ' + `${moduleName}\n`.blue.underline);
 
@@ -31,15 +29,11 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
   const camelCaseName = getCamelCaseName(name);
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
-  const rootPath = unstable ? '../../../..' : '../../..';
+  const rootPath = '../../..';
   const storyPath = `${unstable ? 'Labs/' : `Components/${category}/`}${titleCaseName}/React`;
   const testingStoryPath = `Testing/React/${unstable ? 'Labs' : category}/${titleCaseName}`;
 
   const files = {
-    package: {
-      path: 'package.json',
-      contents: packageJson(name, moduleName, description, unstable, public),
-    },
     model: {
       path: `lib/use${pascalCaseName}Model.tsx`,
       contents: model(camelCaseName, pascalCaseName),
@@ -75,22 +69,6 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
     readme: {
       path: 'README.md',
       contents: readme(name, description, unstable),
-    },
-    tsconfig: {
-      path: 'tsconfig.json',
-      contents: tsconfig.default(rootPath),
-    },
-    tsconfigCjs: {
-      path: 'tsconfig.cjs.json',
-      contents: tsconfig.cjs(),
-    },
-    tsconfigEs6: {
-      path: 'tsconfig.es6.json',
-      contents: tsconfig.es6(),
-    },
-    tsconfigSpec: {
-      path: 'spec/tsconfig.json',
-      contents: tsconfig.spec(),
     },
   };
 
