@@ -10,7 +10,6 @@ const {exec} = require('child_process');
 require('colors');
 
 const createReactModule = require('./createReactModule');
-const createCssModule = require('./createCssModule');
 const addDependency = require('./addDependency');
 
 const cwd = process.cwd();
@@ -32,13 +31,13 @@ const questions = [
     name: 'description',
     message: 'Module description:',
   },
-  {
-    type: 'checkbox',
-    name: 'targets',
-    message: 'What target modules would you like to create?:',
-    choices: ['React', 'CSS'],
-    default: ['React'],
-  },
+  // {
+  //   type: 'checkbox',
+  //   name: 'targets',
+  //   message: 'What target modules would you like to create?:',
+  //   choices: ['React', 'CSS'],
+  //   default: ['React'],
+  // },
   {
     type: 'list',
     name: 'category',
@@ -62,25 +61,21 @@ const questions = [
   /**
    * Add question to add deps
    * React: CK core, emotion
-   * CSS: CK Core
    */
 ];
 
 inquirer
   .prompt(questions)
   .then(answers => {
-    const {name, category, targets} = answers;
-    const css = targets.includes('CSS');
-    const react = targets.includes('React');
-    const unstable = category == 'Labs (beta)';
+    const {name, category} = answers;
+    const unstable = category === 'Labs (beta)';
     const componentPath = path.join(cwd, unstable ? `modules/_labs/${name}` : `modules/${name}`);
 
     if (!fs.existsSync(componentPath)) {
       mkdirp.sync(componentPath);
     }
 
-    css && createModule(componentPath, 'css', createCssModule, answers, unstable);
-    react && createModule(componentPath, 'react', createReactModule, answers, unstable);
+    createModule(componentPath, 'react', createReactModule, answers, unstable);
 
     console.log('\n');
   })
