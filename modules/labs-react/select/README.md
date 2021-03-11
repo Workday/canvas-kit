@@ -1,6 +1,6 @@
 # Canvas Kit Select (with Canvas-styled Menu)
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
@@ -18,7 +18,7 @@ menu whereas the Labs Select uses a custom Canvas-styled menu.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-select
+yarn add @workday/canvas-kit-labs-react
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ be made fully accessible (see below).
 
 ```tsx
 import * as React from 'react';
-import Select from '@workday/canvas-kit-labs-react-select';
+import Select from '@workday/canvas-kit-labs-react/select';
 
 function Example() {
   const options = [
@@ -60,8 +60,8 @@ function Example() {
 
 ```tsx
 import * as React from 'react';
-import Select from '@workday/canvas-kit-labs-react-select';
-import FormField from '@workday/canvas-kit-react-form-field';
+import Select from '@workday/canvas-kit-labs-react/select';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 function Example() {
   const options = [
@@ -91,8 +91,8 @@ function Example() {
 
 ```tsx
 import * as React from 'react';
-import Select from '@workday/canvas-kit-labs-react-select';
-import FormField from '@workday/canvas-kit-react-form-field';
+import Select from '@workday/canvas-kit-labs-react/select';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 function Example() {
   const options = ['California', 'Florida', 'New York', 'Pennsylvania', 'Texas'];
@@ -119,16 +119,16 @@ used to customize how each option is rendered.
 
 ```tsx
 import * as React from 'react';
-import Select from '@workday/canvas-kit-labs-react-select';
-import FormField from '@workday/canvas-kit-react-form-field';
-import {colors, typeColors} from '@workday/canvas-kit-react-core';
+import Select from '@workday/canvas-kit-labs-react/select';
+import FormField from '@workday/canvas-kit-react/form-field';
+import {colors, typeColors} from '@workday/canvas-kit-react/core';
 import {
   activityStreamIcon,
   avatarIcon,
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 function Example() {
   const options = [

@@ -14,12 +14,6 @@ Coming soon:
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-radio
-```
-
 ## Usage
 
 #### Simple Example
@@ -30,7 +24,7 @@ accessible (see below).
 
 ```tsx
 import * as React from 'react';
-import Radio from '@workday/canvas-kit-react-radio';
+import Radio from '@workday/canvas-kit-react/radio';
 
 <Radio disabled={false} checked={checked} onChange={this.handleCheck} />;
 ```
@@ -39,8 +33,8 @@ import Radio from '@workday/canvas-kit-react-radio';
 
 ```tsx
 import * as React from 'react';
-import Radio from '@workday/canvas-kit-react-radio';
-import FormField from '@workday/canvas-kit-react-form-field';
+import Radio from '@workday/canvas-kit-react/radio';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 <FormField label="My Field" inputId="my-radio-field">
   <Radio disabled={false} checked={checked} onChange={this.handleCheck} />;
@@ -52,7 +46,7 @@ attribute.
 
 ```tsx
 import * as React from 'react';
-import Radio from '@workday/canvas-kit-react-radio';
+import Radio from '@workday/canvas-kit-react/radio';
 <label id="123">Label</label>
 ...
 <Radio checked={checked} onChange={this.handleCheck} aria-labelledby="123" />;
@@ -131,7 +125,7 @@ fully accessible (see below).
 
 ```tsx
 import * as React from 'react';
-import {Radio, RadioGroup} from '@workday/canvas-kit-react-radio';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
 <RadioGroup name="contact">
   <Radio id="1" value="email" label="E-mail" />
@@ -145,8 +139,8 @@ import {Radio, RadioGroup} from '@workday/canvas-kit-react-radio';
 
 ```tsx
 import * as React from 'react';
-import {Radio, RadioGroup} from '@workday/canvas-kit-react-radio';
-import FormField from '@workday/canvas-kit-react-form-field';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 <FormField label="My Field" useFieldset={true}>
   <RadioGroup name="contact">

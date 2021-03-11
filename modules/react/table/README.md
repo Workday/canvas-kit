@@ -10,12 +10,6 @@ A component for applying Canvas styling to table elements.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-table
-```
-
 ## Usage
 
 Extends `<table>` with Canvas data table styling. Use with native `<thead>` and `<tbody>` elements
@@ -24,7 +18,7 @@ for respective styling.
 Use [`<TableRow>`](#TableRow) component instead of `<tr>` to define rows.
 
 ```tsx
-import {Table, TableRow} from '@workday/canvas-kit-react-table';
+import {Table, TableRow} from '@workday/canvas-kit-react/table';
 
 <Table>
   <thead>
@@ -67,7 +61,7 @@ import {Table, TableRow} from '@workday/canvas-kit-react-table';
 Extends `<tr>` with row states and styling. Use with `<th>` and `<td>` elements.
 
 ```tsx
-import {Table, TableRow} from '@workday/canvas-kit-react-table';
+import {Table, TableRow} from '@workday/canvas-kit-react/table';
 
 <Table>
   <thead>

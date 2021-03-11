@@ -8,18 +8,12 @@ A Modal component that allows you to render a Popup with translucent overlays.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-modal
-```
-
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react-button';
-import {Modal, useModal} from '@workday/canvas-kit-react-modal';
+import {Button} from '@workday/canvas-kit-react/button';
+import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 
 const DeleteItem = ({item, onDelete}) => {
   const modal = useModal();

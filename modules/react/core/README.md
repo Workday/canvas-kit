@@ -17,12 +17,6 @@ Includes:
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-core
-```
-
 # Colors
 
 Workday Canvas Colors are directly exported from `@workday/canvas-colors-web`. Colors come in shades
@@ -62,7 +56,7 @@ Colors (100-600):
 ## Usage
 
 ```tsx
-import {colors} from '@workday/canvas-kit-react-core';
+import {colors} from '@workday/canvas-kit-react/core';
 
 colors.blueberry400;
 ```
@@ -70,7 +64,7 @@ colors.blueberry400;
 > Each of the colors have a gradient version as well
 
 ```tsx
-import {colors} from '@workday/canvas-kit-react-core';
+import {colors} from '@workday/canvas-kit-react/core';
 
 colors.gradients.blueberry;
 ```
@@ -93,7 +87,7 @@ We have several semantic groupings:
 - `typeColors`
 
 ```tsx
-import {iconColors} from '@workday/canvas-kit-react-core';
+import {iconColors} from '@workday/canvas-kit-react/core';
 
 iconColors.hover;
 ```
@@ -157,7 +151,7 @@ The `space` function utilizes the following props:
 ## Usage
 
 ```tsx
-import {spacing, spacingNumbers, space} from '@workday/canvas-kit-react-core';
+import {spacing, spacingNumbers, space} from '@workday/canvas-kit-react/core';
 
 spacing.s; // 16px
 spacingNumbers.s; // 16
@@ -197,7 +191,7 @@ Five levels of depth are available. They are directly exported from `@workday/ca
 ## Usage
 
 ```tsx
-import {depth} from '@workday/canvas-kit-react-core';
+import {depth} from '@workday/canvas-kit-react/core';
 
 depth.inset;
 depth['2'];
@@ -257,7 +251,7 @@ Variants only come their augmenting styles and a base type object is required.
 If you're working in emotion, you can simply spread the type objects to use their styles.
 
 ```tsx
-import {type} from '@workday/canvas-kit-react-core';
+import {type} from '@workday/canvas-kit-react/core';
 
 const MyLabel = styled('label')({
   ...type.body,
@@ -269,7 +263,7 @@ If you are only using one object, you can do this inline with the `style` attrib
 styled components are also available.
 
 ```tsx
-import {H2, type} from '@workday/canvas-kit-react-core';
+import {H2, type} from '@workday/canvas-kit-react/core';
 
 <h1 style={type.h1}>H1 Header</h1>;
 <H2>H2 Header</H2>;
@@ -278,7 +272,7 @@ import {H2, type} from '@workday/canvas-kit-react-core';
 To combine objects inline, you can also use emotion's `css` function.
 
 ```tsx
-import {type} from '@workday/canvas-kit-react-core';
+import {type} from '@workday/canvas-kit-react/core';
 
 <label css={[canvas.type.body, canvas.type.variant.label]}>Label Text</label>;
 ```

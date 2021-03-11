@@ -9,20 +9,14 @@ for form inputs (labels, errors, etc.).
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-form-field
-```
-
 # FormField
 
 ## Usage
 
 ```tsx
 import * as React from 'react;
-import FormField from '@workday/canvas-kit-react-form-field';
-import TextInput from '@workday/canvas-kit-react-text-input';
+import FormField from '@workday/canvas-kit-react/form-field';
+import TextInput from '@workday/canvas-kit-react/text-input';
 
 const ExampleForm = () => {
   const [value, setValue] = React.useState('');
@@ -164,7 +158,7 @@ Default: `false`
 
 ```tsx
 import * as React from 'react;
-import {Hint} from '@workday/canvas-kit-react-form-field';
+import {Hint} from '@workday/canvas-kit-react/form-field';
 
 <Hint error={Hint.ErrorType.Error}>
   This field is required.
@@ -202,7 +196,7 @@ import {Hint} from '@workday/canvas-kit-react-form-field';
 
 ```tsx
 import * as React from 'react;
-import {Label} from '@workday/canvas-kit-react-form-field';
+import {Label} from '@workday/canvas-kit-react/form-field';
 
 <Label error={Label.LabelPosition.Left}>
   Label

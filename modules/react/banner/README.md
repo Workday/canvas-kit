@@ -11,16 +11,10 @@ can take appropriate action to resolve them.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-banner
-```
-
 ## Usage
 
 ```tsx
-import Banner from '@workday/canvas-kit-react-banner';
+import Banner from '@workday/canvas-kit-react/banner';
 
 <Banner label="3 errors" />;
 ```

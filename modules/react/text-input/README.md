@@ -10,12 +10,6 @@ Canvas-styled React text input components.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-text-input
-```
-
 # TextInput
 
 ## Usage
@@ -28,7 +22,7 @@ accessible (see below).
 
 ```tsx
 import * as React from 'react';
-import TextInput from '@workday/canvas-kit-react-text-input';
+import TextInput from '@workday/canvas-kit-react/text-input';
 
 <TextInput placeholder="Placeholder" value={this.state.value} onChange={() => {}} />;
 ```
@@ -37,8 +31,8 @@ import TextInput from '@workday/canvas-kit-react-text-input';
 
 ```tsx
 import * as React from 'react';
-import TextInput from '@workday/canvas-kit-react-text-input';
-import FormField from '@workday/canvas-kit-react-form-field';
+import TextInput from '@workday/canvas-kit-react/text-input';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 // Accessible default state
 <FormField label="My Field" inputId="my-input-field">
@@ -62,7 +56,7 @@ attribute.
 
 ```tsx
 import * as React from 'react';
-import TextInput from '@workday/canvas-kit-react-text-input';
+import TextInput from '@workday/canvas-kit-react/text-input';
 <label id="123">Label</label>
 ...
 <TextInput placeholder="Placeholder" value={this.state.value} onChange={() => {}} aria-labelledby="123" />;

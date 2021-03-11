@@ -10,12 +10,6 @@ Canvas-styled React textarea component.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-text-area
-```
-
 # TextArea
 
 #### Simple Example
@@ -26,7 +20,7 @@ accessible (see below).
 
 ```tsx
 import * as React from 'react';
-import TextArea from '@workday/canvas-kit-react-text-area';
+import TextArea from '@workday/canvas-kit-react/text-area';
 
 <TextArea placeholder="Placeholder" value={this.state.value} onChange={() => {}} />;
 ```
@@ -35,8 +29,8 @@ import TextArea from '@workday/canvas-kit-react-text-area';
 
 ```tsx
 import * as React from 'react';
-import TextArea from '@workday/canvas-kit-react-text-area';
-import FormField from '@workday/canvas-kit-react-form-field';
+import TextArea from '@workday/canvas-kit-react/text-area';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 // Accessible default state
 <FormField label="My Field" inputId="my-textarea-field">
@@ -60,7 +54,7 @@ attribute.
 
 ```tsx
 import * as React from 'react';
-import TextArea from '@workday/canvas-kit-react-text-area';
+import TextArea from '@workday/canvas-kit-react/text-area';
 <label id="123">Label</label>
 ...
 <TextArea placeholder="Placeholder" value={this.state.value} onChange={() => {}} aria-labelledby="123" />;

@@ -10,12 +10,6 @@ Clickable button elements that extend the native `<button>` element with Canvas 
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-button
-```
-
 ---
 
 ## Deprecation Warning
@@ -40,7 +34,7 @@ entirely in a future release.
 
 ```tsx
 import * as React from 'react';
-import {deprecated_Button as Button} from '@workday/canvas-kit-react-button';
+import {deprecated_Button as Button} from '@workday/canvas-kit-react/button';
 
 <Button>Button Label</Button>;
 ```
@@ -70,7 +64,7 @@ able to compile your code.
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react-button';
+import {Button} from '@workday/canvas-kit-react/button';
 
 <Button>Button Label</Button>;
 ```
@@ -174,7 +168,7 @@ Default: `undefined`
 
 ```tsx
 import * as React from 'react';
-import {DeleteButton} from '@workday/canvas-kit-react-button';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 <DeleteButton>Button Label</DeleteButton>;
 ```
@@ -241,7 +235,7 @@ Default: `undefined`
 
 ```tsx
 import * as React from 'react';
-import {DropdownButton} from '@workday/canvas-kit-react-button';
+import {DropdownButton} from '@workday/canvas-kit-react/button';
 
 <DropdownButton>Button Label</DropdownButton>;
 ```
@@ -328,7 +322,7 @@ Default: `undefined`
 
 ```tsx
 import * as React from 'react';
-import {HighlightButton} from '@workday/canvas-kit-react-button';
+import {HighlightButton} from '@workday/canvas-kit-react/button';
 
 <HighlightButton>Button Label</HighlightButton>;
 ```
@@ -400,7 +394,7 @@ Default: `undefined`
 
 ```tsx
 import * as React from 'react';
-import {OutlineButton} from '@workday/canvas-kit-react-button';
+import {OutlineButton} from '@workday/canvas-kit-react/button';
 
 <OutlineButton>Button Label</OutlineButton>;
 ```
@@ -505,7 +499,7 @@ Default: `undefined`
 
 ```tsx
 import * as React from 'react';
-import {TextButton} from '@workday/canvas-kit-react-button';
+import {TextButton} from '@workday/canvas-kit-react/button';
 
 <TextButton>Button Label</TextButton>;
 ```
@@ -605,7 +599,7 @@ Default: `undefined`
 
 ```tsx
 import * as React from 'react';
-import {Hyperlink} from '@workday/canvas-kit-react-button';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 
 <Hyperlink href={url}>Link</Hyperlink>;
 ```
@@ -653,8 +647,8 @@ Default: `TextButtonVariant.Default`
 
 ```tsx
 import * as React from 'react';
-import {IconButton} from '@workday/canvas-kit-react-button';
-import {SystemIcon} from '@workday/canvas-kit-react-icon';
+import {IconButton} from '@workday/canvas-kit-react/button';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 <IconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
@@ -773,7 +767,7 @@ Default: `undefined`
 
 ```tsx
 import * as React from 'react';
-import {ToolbarIconButton} from '@workday/canvas-kit-react-button';
+import {ToolbarIconButton} from '@workday/canvas-kit-react/button';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 <ToolbarIconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
@@ -837,7 +831,7 @@ Default: `undefined`
 
 ```tsx
 import * as React from 'react';
-import {ToolbarDropdownButton} from '@workday/canvas-kit-react-button';
+import {ToolbarDropdownButton} from '@workday/canvas-kit-react/button';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 <ToolbarDropdownButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```

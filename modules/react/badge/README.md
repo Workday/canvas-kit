@@ -8,12 +8,6 @@ CountBadge provides a quantity-based summary with dynamic values.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-badge
-```
-
 ## Accessibility
 
 A common use case for the CountBadge is for displaying notifications, and there are several
@@ -62,7 +56,7 @@ const AccessibleHide = styled('div')({
 
 ```tsx
 import * as React from 'react';
-import {CountBadge} from '@workday/canvas-kit-react-badge';
+import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 const CustomCountBadge = () => {
   return <CountBadge count={3} />;
@@ -73,7 +67,7 @@ const CustomCountBadge = () => {
 
 ```tsx
 import * as React from 'react';
-import {CountBadge} from '@workday/canvas-kit-react-badge';
+import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 const InverseCountBadge = () => {
   return <CountBadge variant="inverse" count={3} />;
@@ -84,7 +78,7 @@ const InverseCountBadge = () => {
 
 ```tsx
 import * as React from 'react';
-import {CountBadge} from '@workday/canvas-kit-react-badge';
+import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 const InverseCountBadge = () => {
   // this will display the count as '99+'

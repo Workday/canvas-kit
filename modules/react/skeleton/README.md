@@ -11,12 +11,6 @@ in children skeleton components and displays them with an animated sheen to indi
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-skeleton
-```
-
 # Skeleton
 
 This component places its children in a `div` marked with the `aria-hidden` attribute. It announces
@@ -31,7 +25,7 @@ import {
   SkeletonHeader,
   SkeletonShape,
   SkeletonText,
-} from '@workday/canvas-kit-react-skeleton';
+} from '@workday/canvas-kit-react/skeleton';
 
 <Skeleton>
   <SkeletonShape width={50} height={50} borderRadius={99} />
@@ -71,7 +65,7 @@ and fixed height of `28px`.
 
 ```tsx
 import * as React from 'react';
-import {Skeleton, SkeletonHeader} from '@workday/canvas-kit-react-skeleton';
+import {Skeleton, SkeletonHeader} from '@workday/canvas-kit-react/skeleton';
 
 <Skeleton>
   <SkeletonHeader />
@@ -105,7 +99,7 @@ the borderRadius, width, and height to make various rectangular and circular sha
 
 ```tsx
 import * as React from 'react';
-import {Skeleton, SkeletonShape} from '@workday/canvas-kit-react-skeleton';
+import {Skeleton, SkeletonShape} from '@workday/canvas-kit-react/skeleton';
 
 <Skeleton>
   <SkeletonShape width={50} height={50} borderRadius={99} />
@@ -158,7 +152,7 @@ will have a width of `60%`.
 
 ```tsx
 import * as React from 'react';
-import {Skeleton, SkeletonText} from '@workday/canvas-kit-react-skeleton';
+import {Skeleton, SkeletonText} from '@workday/canvas-kit-react/skeleton';
 
 <Skeleton>
   <SkeletonText lineCount={3} />

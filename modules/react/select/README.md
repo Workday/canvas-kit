@@ -10,12 +10,6 @@ Select input
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-select
-```
-
 ## Usage
 
 #### Simple Example
@@ -26,7 +20,7 @@ made fully accessible (see below).
 
 ```tsx
 import * as React from 'react';
-import Select, {SelectOption} from '@workday/canvas-kit-react-select';
+import Select, {SelectOption} from '@workday/canvas-kit-react/select';
 
 <Select name="contact">
   <SelectOption value="email" label="E-mail" />
@@ -40,8 +34,8 @@ import Select, {SelectOption} from '@workday/canvas-kit-react-select';
 
 ```tsx
 import * as React from 'react';
-import Select, {SelectOption} from '@workday/canvas-kit-react-select';
-import FormField from '@workday/canvas-kit-react-form-field';
+import Select, {SelectOption} from '@workday/canvas-kit-react/select';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 <FormField label="My Field" inputId="my-select-field">
   <Select name="contact">

@@ -8,7 +8,7 @@ selecting specific swatches.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react-color-picker
+yarn add @workday/canvas-kit-react/color-picker
 ```
 
 or

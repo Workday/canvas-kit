@@ -2,7 +2,7 @@
 
 A Canvas component that displays the header of a specific page within a website or application. It
 is generally used as a sub-header to the main application header
-(`@workday/canvas-kit-labs-react-header`).
+(`@workday/canvas-kit-labs-react/header`).
 
 [> Workday Design Reference](https://design.workday.com/components/navigation/headers)
 
@@ -12,18 +12,12 @@ is generally used as a sub-header to the main application header
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-page-header
-```
-
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {PageHeader} from '@workday/canvas-kit-react-page-header';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {PageHeader} from '@workday/canvas-kit-react/page-header';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {exportIcon, fullscreenIcon} from '@workday/canvas-system-icons-web';
 
 <PageHeader title="Product">

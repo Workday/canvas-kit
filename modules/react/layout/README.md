@@ -11,7 +11,7 @@ different workday specific layouts. Layouts should be used to create the main la
 ## Usage
 
 ```tsx
-import {Layout} from '@workday/canvas-kit-react-layout';
+import {Layout} from '@workday/canvas-kit-react/layout';
 
 // Basic
 <Layout>...</Layout>
@@ -65,7 +65,7 @@ Default: `12`
 > `columns` prop.
 
 ```tsx
-import {Layout} from '@workday/canvas-kit-react-layout';
+import {Layout} from '@workday/canvas-kit-react/layout';
 
 // Fluid layouts
 <Layout>

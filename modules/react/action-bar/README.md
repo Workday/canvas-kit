@@ -12,18 +12,12 @@ right only in task orchestration and on mobile devices.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-action-bar
-```
-
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react-button';
-import {ActionBar} from '@workday/canvas-kit-react-action-bar';
+import {Button} from '@workday/canvas-kit-react/button';
+import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 
 <ActionBar>
   <Button variant={ButtonVariant.Primary}>Button</Button>

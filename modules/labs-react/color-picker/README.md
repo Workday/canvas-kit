@@ -1,6 +1,6 @@
 # Canvas Kit React Color Picker
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
@@ -13,23 +13,17 @@ the component.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-color-picker
-```
-
-or
-
-```sh
-yarn add @workday/canvas-kit-labs-react-color-picker
+yarn add @workday/canvas-kit-labs-react
 ```
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import ColorPicker from '@workday/canvas-kit-labs-react-color-picker';
-import {colors} from '@workday/canvas-kit-react-core';
-import {Button} from '@workday/canvas-kit-react-button';
-import {Popper, Popup} from '@workday/canvas-kit-react-popup';
+import ColorPicker from '@workday/canvas-kit-labs-react/color-picker';
+import {colors} from '@workday/canvas-kit-react/core';
+import {Button} from '@workday/canvas-kit-react/button';
+import {Popper, Popup} from '@workday/canvas-kit-react/popup';
 
 const MyComponent: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = React.useState(false);

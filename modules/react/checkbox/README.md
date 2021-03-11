@@ -10,12 +10,6 @@ A checkbox input.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-checkbox
-```
-
 ## Usage
 
 #### Simple Example
@@ -26,7 +20,7 @@ accessible (see below).
 
 ```tsx
 import * as React from 'react';
-import Checkbox from '@workday/canvas-kit-react-checkbox';
+import Checkbox from '@workday/canvas-kit-react/checkbox';
 
 <Checkbox disabled={false} checked={checked} onChange={this.handleCheck} />;
 ```
@@ -35,8 +29,8 @@ import Checkbox from '@workday/canvas-kit-react-checkbox';
 
 ```tsx
 import * as React from 'react';
-import Checkbox from '@workday/canvas-kit-react-checkbox';
-import FormField from '@workday/canvas-kit-react-form-field';
+import Checkbox from '@workday/canvas-kit-react/checkbox';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 <FormField label="My Field" inputId="my-checkbox-field">
   <Checkbox disabled={false} checked={checked} onChange={this.handleCheck} id="my-checkbox-field" />
@@ -49,7 +43,7 @@ attribute.
 
 ```tsx
 import * as React from 'react';
-import Checkbox from '@workday/canvas-kit-react-checkbox';
+import Checkbox from '@workday/canvas-kit-react/checkbox';
 <label id="123">Label</label>
 ...
 <Checkbox checked={true} onChange={this.handleCheck} aria-labelledby="123" />;

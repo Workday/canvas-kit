@@ -6,15 +6,15 @@ is a [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) c
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react-segmented-control
+yarn add @workday/canvas-kit-react/segmented-control
 ```
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {SegmentedControl} from '@workday/canvas-kit-react-segmented-control';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {listViewIcon, worksheetsIcon} from '@workday/canvas-system-icons-web';
 
 <SegmentedControl>

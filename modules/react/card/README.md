@@ -10,17 +10,11 @@ Generic Canvas card component
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-card
-```
-
 ## Usage
 
 ```tsx
-import Card from '@workday/canvas-kit-react-card';
-import {depth, spacing} from '@workday/canvas-kit-react-core';
+import Card from '@workday/canvas-kit-react/card';
+import {depth, spacing} from '@workday/canvas-kit-react/core';
 
 <Card heading="Title">
   Card contents
@@ -63,7 +57,7 @@ Default: `null`
 
 #### `padding: 0 | CanvasSpacingValue`
 
-> Padding of the card. Style imported from `@workday/canvas-kit-react-core`.
+> Padding of the card. Style imported from `@workday/canvas-kit-react/core`.
 
 Default: `spacing.l`
 
@@ -71,7 +65,7 @@ Default: `spacing.l`
 
 #### `depth: CanvasDepthValue`
 
-> Depth of the card. Style imported from `@workday/canvas-kit-react-core`.
+> Depth of the card. Style imported from `@workday/canvas-kit-react/core`.
 
 Default: `depth[2]`
 

@@ -25,7 +25,7 @@ If you were previously writing your `Pagination component like this:
 
 ```tsx
 import * as React from 'react';
-import Pagination from '@workday/canvas-kit-labs-react-pagination';
+import Pagination from '@workday/canvas-kit-labs-react/pagination';
 
 const [currentPage, setCurrentPage] = React.useState(1);
 
@@ -53,7 +53,7 @@ import {
   getLastPage,
   getVisibleResultsMin,
   getVisibleResultsMax,
-} from '@workday/canvas-kit-labs-react-pagination';
+} from '@workday/canvas-kit-labs-react/pagination';
 
 const MyPaginationComponent = () => {
   //  In this example, Pagination state is handled internally,

@@ -1,6 +1,6 @@
 # Canvas Kit React Side Panel
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
@@ -9,13 +9,13 @@ A collapsable side panel
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-side-panel
+yarn add @workday/canvas-kit-labs-react
 ```
 
 ## Usage
 
 ```tsx
-import SidePanel, {useSidePanel} from '@workday/canvas-kit-labs-react-side-panel';
+import SidePanel, {useSidePanel} from '@workday/canvas-kit-labs-react/side-panel';
 
 /**
  * A SidePanel is made up of three components

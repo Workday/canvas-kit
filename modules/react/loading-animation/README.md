@@ -10,19 +10,13 @@ A component that renders a loading animation.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-loading-animation
-```
-
 # LoadingDots
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {LoadingDots} from '@workday/canvas-kit-react-loading-animation';
+import {LoadingDots} from '@workday/canvas-kit-react/loading-animation';
 
 <LoadingDots />;
 ```

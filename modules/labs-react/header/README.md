@@ -1,6 +1,6 @@
 # Canvas Kit Labs React Header
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
@@ -15,7 +15,7 @@ For a full suite of examples, have a look at the [Header Stories](./stories.tsx)
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-header
+yarn add @workday/canvas-kit-labs-react
 ```
 
 # Header
@@ -26,11 +26,11 @@ This component renders a responsive, Canvas-style header.
 
 ```tsx
 import * as React from 'react';
-import {Header} from '@workday/canvas-kit-labs-react-header';
-import {IconButton} from '@workday/canvas-kit-react-button';
-import {Avatar} from '@workday/canvas-kit-react-avatar';
+import {Header} from '@workday/canvas-kit-labs-react/header';
+import {IconButton} from '@workday/canvas-kit-react/button';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {notificationsIcon} from '@workday/canvas-system-icons-web';
-import {Button} from '@workday/canvas-kit-react-button';
+import {Button} from '@workday/canvas-kit-react/button';
 
 <Header title="Header" brandUrl="#">
   <nav>
@@ -190,10 +190,10 @@ The Global Header (or App Header) is used for Workday applications.
 ## Usage
 
 ```tsx
-import {Avatar} from '@workday/canvas-kit-react-avatar';
-import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-labs-react-header';
-import {Avatar} from '@workday/canvas-kit-react-avatar';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {GlobalHeader, DubLogoTitle} from '@workday/canvas-kit-labs-react/header';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 const HeaderBrand = () => <DubLogoTitle themeColor={Header.Theme.White} />
@@ -280,8 +280,8 @@ background color of the contained lockup
 ## Usage
 
 ```tsx
-import {Header, DubLogoTitle} from '@workday/canvas-kit-labs-react-header';
-import {colors} from '@workday/canvas-kit-react-core';
+import {Header, DubLogoTitle} from '@workday/canvas-kit-labs-react/header';
+import {colors} from '@workday/canvas-kit-react/core';
 
 <Header
   brand={<DubLogoTitle title="This title will show up instead" bgColor={colors.blueberry600} />}
@@ -329,7 +329,7 @@ next to the title with custom components or markup.
 ## Usage
 
 ```tsx
-import {Header, WorkdayLogoTitle} from '@workday/canvas-kit-labs-react-header';
+import {Header, WorkdayLogoTitle} from '@workday/canvas-kit-labs-react/header';
 
 <Header brand={<WorkdayLogoTitle title="Display Title" />} />;
 ```
@@ -370,8 +370,8 @@ A component that contains a search bar with autocomplete functionality.
 ## Usage
 
 ```tsx
-import {SearchBar} from '@workday/canvas-kit-labs-react-header';
-import {MenuItem} from '@workday/canvas-kit-labs-react-menu';
+import {SearchBar} from '@workday/canvas-kit-labs-react/header';
+import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
 
 const handleInputChange = event => console.log('Adjust menu items here');
 const handleSearchSubmit = event => {

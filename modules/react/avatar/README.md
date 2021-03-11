@@ -8,17 +8,11 @@ A component showing a user's photo with a circular crop.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-avatar
-```
-
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {Avatar, AvatarVariant} from '@workday/canvas-kit-react-avatar';
+import {Avatar, AvatarVariant} from '@workday/canvas-kit-react/avatar';
 
 // Basic button with click handler
 <Avatar onClick={someFunction} />

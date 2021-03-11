@@ -9,20 +9,14 @@ either the left or right side of the screen.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-side-panel
-```
-
 # Side Panel
 
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {Button, IconButton} from '@workday/canvas-kit-react-button';
-import SidePanel from '@workday/canvas-kit-react-side-panel';
+import {Button, IconButton} from '@workday/canvas-kit-react/button';
+import SidePanel from '@workday/canvas-kit-react/side-panel';
 
 interface SidePanelState {
   open: boolean;

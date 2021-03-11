@@ -12,12 +12,6 @@ Undocumented props are spread to the `input` element.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-switch
-```
-
 ## Usage
 
 #### Simple Example
@@ -28,7 +22,7 @@ accessible (see below).
 
 ```tsx
 import * as React from 'react';
-import {Switch} from '@workday/canvas-kit-react-switch';
+import {Switch} from '@workday/canvas-kit-react/switch';
 
 <Switch disabled={false} checked={checked} onChange={this.handleCheck} />;
 ```
@@ -37,8 +31,8 @@ import {Switch} from '@workday/canvas-kit-react-switch';
 
 ```tsx
 import * as React from 'react';
-import {Switch} from '@workday/canvas-kit-react-switch';
-import FormField from '@workday/canvas-kit-react-form-field';
+import {Switch} from '@workday/canvas-kit-react/switch';
+import FormField from '@workday/canvas-kit-react/form-field';
 
 <FormField label="My Field" inputId="my-switch-field">
   <Switch disabled={false} checked={checked} onChange={this.handleCheck} id="my-switch-field" />;
@@ -50,7 +44,7 @@ attribute.
 
 ```tsx
 import * as React from 'react';
-import {Switch} from '@workday/canvas-kit-react-switch';
+import {Switch} from '@workday/canvas-kit-react/switch';
 <label id="123">Label</label>
 ...
 <Switch disabled={false} checked={checked} onChange={this.handleCheck} aria-labelledby="123" />;

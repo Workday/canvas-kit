@@ -8,12 +8,6 @@ A module of common utilities shared across canvas components.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-common
-```
-
 Includes:
 
 - [Canvas Provider](#canvas-provider)
@@ -104,7 +98,7 @@ information in the [theming documentation](./lib/theming/README.md).
 
 ```tsx
 import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-react-common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```

@@ -5,7 +5,7 @@ Canvas Kit Common contains wrappers and types to enabling theming of Canvas comp
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react-common
+yarn add @workday/canvas-kit-react/common
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ our Canvas Components.
 
 ```tsx
 import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-react-common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```
@@ -120,7 +120,7 @@ If you only set a `main` color, the rest of the respective palette will be autom
 Example:
 
 ```tsx
-import {CanvasProvider, EmotionCanvasTheme} from '@workday/canvas-kit-react-common';
+import {CanvasProvider, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 const theme: EmotionCanvasTheme = {
   canvas: {
@@ -153,7 +153,7 @@ import {
   CanvasProvider,
   ContentDirection,
   EmotionCanvasTheme,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 
 const rtlTheme: EmotionCanvasTheme = {
   canvas: {
@@ -178,8 +178,8 @@ import {
   EmotionCanvasTheme,
   PartialEmotionCanvasTheme,
   ContentDirection,
-} from '@workday/canvas-kit-react-common';
-import {Switch} from '@workday/canvas-kit-react-switch';
+} from '@workday/canvas-kit-react/common';
+import {Switch} from '@workday/canvas-kit-react/switch';
 
 const rtlTheme: EmotionCanvasTheme = {
   canvas: {

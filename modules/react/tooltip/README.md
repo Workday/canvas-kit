@@ -12,19 +12,13 @@ for IconButtons. A tooltip can also be used to describe additional information a
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-tooltip
-```
-
 ## Usage
 
 ```tsx
 import * as React from 'react';
 
-import {Tooltip} from '@workday/canvas-kit-react-tooltip';
-import {IconButton} from '@workday/canvas-kit-react-button';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {IconButton} from '@workday/canvas-kit-react/button';
 
 const TooltipExample = () => {
   return (

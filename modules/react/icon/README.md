@@ -13,12 +13,6 @@ To browse a full list of icons, take a look at the
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-icon
-```
-
 ### Design Assets
 
 Install one of the following icon packages:
@@ -36,8 +30,8 @@ Install one of the following icon packages:
 Use with `@workday/canvas-accent-icons-web`.
 
 ```tsx
-import { colors } from '@workday/canvas-kit-react-core'
-import { AccentIcon } from '@workday/canvas-kit-react-icon'
+import { colors } from '@workday/canvas-kit-react/core'
+import { AccentIcon } from '@workday/canvas-kit-react/icon'
 import { shieldIcon } from '@workday/canvas-accent-icons-web'
 
 <AccentIcon icon={shieldIcon} />
@@ -96,7 +90,7 @@ Default: `false`
 Use with `@workday/canvas-applet-icons-web`.
 
 ```tsx
-import { AppletIcon } from '@workday/canvas-kit-react-icon'
+import { AppletIcon } from '@workday/canvas-kit-react/icon'
 import { benefitsIcon } from '@workday/canvas-applet-icons-web'
 
 <AppletIcon icon={benefitsIcon} />
@@ -178,8 +172,8 @@ Default: `92`
 Use with `@workday/canvas-system-icons-web`.
 
 ```tsx
-import { colors } from '@workday/canvas-kit-react-core'
-import { SystemIcon } from '@workday/canvas-kit-react-icon'
+import { colors } from '@workday/canvas-kit-react/core'
+import { SystemIcon } from '@workday/canvas-kit-react/icon'
 import { activityStreamIcon } from '@workday/canvas-system-icons-web'
 
 <SystemIcon icon={activityStreamIcon} />
@@ -288,8 +282,8 @@ against the background color provided.
 Use with `@workday/canvas-accent-icons-web`.
 
 ```tsx
-import { colors } from '@workday/canvas-kit-react-core'
-import { SystemIconCircle } from '@workday/canvas-kit-react-icon'
+import { colors } from '@workday/canvas-kit-react/core'
+import { SystemIconCircle } from '@workday/canvas-kit-react/icon'
 import { shieldIcon } from '@workday/canvas-accent-icons-web'
 
 <SystemIconCircle icon={shieldIcon} />
@@ -339,8 +333,8 @@ Default: `SystemIconCircleSize.l` (`40`)
 Use with `@workday/canvas-graphics-web`.
 
 ```tsx
-import { colors } from '@workday/canvas-kit-react-core'
-import { Graphic } from '@workday/canvas-kit-react-icon'
+import { colors } from '@workday/canvas-kit-react/core'
+import { Graphic } from '@workday/canvas-kit-react/icon'
 import { badgeAchievementGraphic } from '@workday/canvas-graphics-web'
 
 <Graphic src={badgeAchievementGraphic} />

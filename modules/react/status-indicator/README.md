@@ -10,17 +10,11 @@ A component showing a status indicator of a given type, emphasis and label.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-status-indicator
-```
-
 ## Usage
 
 ```tsx
 import * as React from 'react';
-import {StatusIndicator} from '@workday/canvas-kit-react-status-indicator';
+import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
 
 <StatusIndicator type={StatusIndicator.Type.Orange} label={'Status'} />;
 ```

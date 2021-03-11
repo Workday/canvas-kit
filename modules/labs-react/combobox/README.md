@@ -1,6 +1,6 @@
 # Canvas Kit Combobox
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
@@ -9,7 +9,7 @@ For a full suite of examples, have a look at the [Combobox Stories](./stories/st
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react-combobox
+yarn add @workday/canvas-kit-labs-react
 ```
 
 ## Accessibility
@@ -23,10 +23,10 @@ See here for
 ## Usage
 
 ```tsx
-import {Combobox} from '@workday/canvas-kit-labs-react-combobox';
-import {MenuItem} from '@workday/canvas-kit-labs-react-menu';
-import {TextInput} from '@workday/canvas-kit-react-text-input';
-import {FormField} from '@workday/canvas-kit-react-form-field';
+import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
+import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const autocompleteCallback = event => console.log('Adjust menu items here')
 

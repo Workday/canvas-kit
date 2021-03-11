@@ -23,12 +23,6 @@ This package comes with everything you need to build Popup UIs.
 yarn add @workday/canvas-kit-react
 ```
 
-or
-
-```sh
-yarn add @workday/canvas-kit-react-popup
-```
-
 ## Popper
 
 A thin wrapper component around the Popper.js positioning engine. For reference:
@@ -40,8 +34,8 @@ no UI and will render any children to the `body` element and position around a p
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react-button';
-import {Popper} from '@workday/canvas-kit-react-popup';
+import {Button} from '@workday/canvas-kit-react/button';
+import {Popper} from '@workday/canvas-kit-react/popup';
 
 const MyPopper = () => {
   const [open, setOpen] = React.useState(false);
@@ -66,8 +60,8 @@ If you need access to the `placement` that was chosen by PopperJS, `children` ca
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react-button';
-import {Popper} from '@workday/canvas-kit-react-popup';
+import {Button} from '@workday/canvas-kit-react/button';
+import {Popper} from '@workday/canvas-kit-react/popup';
 
 const MyPopper = () => {
   const [open, setOpen] = React.useState(false);
@@ -162,8 +156,8 @@ Default: `true`
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react-button';
-import {Popup, Popper, usePopup, useCloseOnOutsideClick, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
+import {Button} from '@workday/canvas-kit-react/button';
+import {Popup, Popper, usePopup, useCloseOnOutsideClick, useCloseOnEscape} from '@workday/canvas-kit-react/popup';
 
 const MyPopup = () => {
   const { targetProps, closePopup, popperProps, stackRef } = usePopup()
@@ -230,7 +224,7 @@ Default: `PopupPadding.l`
 
 #### `depth: CanvasDepthValue`
 
-> Depth of the card. Style imported from `@workday/canvas-kit-react-core`.
+> Depth of the card. Style imported from `@workday/canvas-kit-react/core`.
 
 Default: `depth[2]`
 

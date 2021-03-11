@@ -1,15 +1,17 @@
 # Canvas Kit Labs React Core
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/_labs/README.md">
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
 Includes:
 
-- [Type](#type)
-- [Margin & Padding Spacing](#margin-padding-spacing)
-- [Providers](#providers)
-- [Theming](#theming)
+- [Canvas Kit Labs React Core](#canvas-kit-labs-react-core)
+  - [Type](#type)
+    - [Usage](#usage)
+    - [Breaking Change](#breaking-change)
+  - [Margin & Padding Spacing](#margin--padding-spacing)
+  - [Usage](#usage-1)
 
 ## Type
 
@@ -24,7 +26,7 @@ respectively.
 The usage is the same as the current hierarchy, you just need a different import.
 
 ```tsx
-import {type} from '@workday/canvas-kit-labs-react-core';
+import {type} from '@workday/canvas-kit-labs-react/core';
 
 const MyLabel = styled('label')({
   ...type.body,
@@ -65,8 +67,8 @@ The `space` function utilizes the following props:
 ## Usage
 
 ```tsx
-import {spacing, spacingNumbers} from '@workday/canvas-kit-react-core';
-import {space} from '@workday/canvas-kit-labs-react-core';
+import {spacing, spacingNumbers} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-labs-react/core';
 
 spacing.s; // 16px
 spacingNumbers.s; // 16
