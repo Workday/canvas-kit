@@ -16,6 +16,7 @@ const stories = require('./templates/react/stories');
 const testingStories = require('./templates/react/stories_VisualTesting');
 const ssr = require('./templates/react/SSR');
 const readme = require('./templates/react/readme');
+const tsconfig = require('./templates/react/tsconfig');
 
 const cwd = process.cwd();
 
@@ -69,6 +70,10 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
     readme: {
       path: 'README.md',
       contents: readme(name, description, unstable),
+    },
+    tsconfigSpec: {
+      path: 'spec/tsconfig.json',
+      contents: tsconfig.spec(),
     },
   };
 
