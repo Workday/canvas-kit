@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import isPropValid from '@emotion/is-prop-valid';
 import uuid from 'uuid/v4';
@@ -8,6 +7,7 @@ import Card from '@workday/canvas-kit-react-card';
 import {IconButton} from '@workday/canvas-kit-react-button';
 import {CanvasDepthValue, depth as depthValues, spacing} from '@workday/canvas-kit-react-core';
 import {
+  styled,
   TransformOrigin,
   getTranslateFromOrigin,
   PickRequired,

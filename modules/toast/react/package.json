@@ -45,10 +45,11 @@
     "toast"
   ],
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   },
   "devDependencies": {
-    "@workday/canvas-kit-labs-react-core": "^5.0.0-beta.0"
+    "@workday/canvas-kit-labs-react-core": "^5.0.0-beta.0",
+    "@workday/canvas-kit-react-button": "^5.0.0-beta.0"
   },
   "dependencies": {
     "@emotion/core": "^10.0.28",

@@ -57,6 +57,6 @@
     "@workday/canvas-system-icons-web": "1.0.41"
   },
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   }
 }

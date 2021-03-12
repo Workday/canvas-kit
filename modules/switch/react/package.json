@@ -44,7 +44,7 @@
     "switch"
   ],
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   },
   "dependencies": {
     "@workday/canvas-kit-react-common": "^5.0.0-beta.0",

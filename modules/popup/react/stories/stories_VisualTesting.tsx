@@ -2,19 +2,34 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react-core';
+import {depth} from '@workday/canvas-kit-react-core';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 import {action} from '@storybook/addon-actions';
+
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {Popup} from '../index';
 import {PopupPadding} from '../lib/Popup';
-import {depth} from '@workday/canvas-kit-react-core';
 
 export const PopupStates = withSnapshotsEnabled(() => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={[
-        {label: 'Default', props: {}},
-        {label: 'On Close', props: {handleClose: action('close button clicked')}},
-        {label: 'With Heading', props: {heading: 'Delete Item'}},
+        {
+          label: 'Default',
+          props: {},
+        },
+        {
+          label: 'On Close',
+          props: {
+            handleClose: action('close button clicked'),
+          },
+        },
+        {
+          label: 'With Heading',
+          props: {
+            heading: 'Delete Item',
+          },
+        },
         {
           label: 'With zero padding',
           props: {
@@ -90,5 +105,31 @@ export const PopupStates = withSnapshotsEnabled(() => (
         </Popup>
       )}
     </ComponentStatesTable>
+  </StaticStates>
+));
+
+export const PopupStatesRTL = withSnapshotsEnabled(() => (
+  <StaticStates>
+    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <ComponentStatesTable
+        rowProps={[
+          {
+            label: 'With RTL',
+            props: {
+              heading: 'למחוק פריט',
+              handleClose: action('לחצן סגור לחץ'),
+              width: 300,
+            },
+          },
+        ]}
+        columnProps={[{label: 'Default', props: {}}]}
+      >
+        {({body, ...props}) => (
+          <Popup transformOrigin={null} {...props}>
+            האם ברצונך למחוק פריט זה
+          </Popup>
+        )}
+      </ComponentStatesTable>
+    </CanvasProvider>
   </StaticStates>
 ));

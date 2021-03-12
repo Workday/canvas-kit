@@ -13,7 +13,53 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix(common): Remove unintended whitespace around bdo tag in IE11 ([#868](https://github.com/Workday/canvas-kit/pull/868)) [@vibdev](https://github.com/vibdev)
 
-# 4.4.2 (2020-12-09)
+
+## v4.5.1 (2021-02-26)
+
+### Components
+
+- fix(popup): Fix Popup icon RTL bug ([#983](https://github.com/Workday/canvas-kit/pull/983)) [@alanbsmith](https://github.com/alanbsmith)
+- fix(side-panel): Fix keyframes animation ([#984](https://github.com/Workday/canvas-kit/pull/984)) [@alanbsmith](https://github.com/alanbsmith)
+
+### Infrastructure
+
+- chore: Update peerDependencies to support React 17 ([#974](https://github.com/Workday/canvas-kit/pull/974)) [@alanbsmith](https://github.com/alanbsmith)
+- docs: Update Component Status doc guideline links ([#979](https://github.com/Workday/canvas-kit/pull/979)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs(toast): Update Toast docs ([#982](https://github.com/Workday/canvas-kit/pull/982)) [@alanbsmith](https://github.com/alanbsmith)
+
+
+## 4.5.0 (2021-02-16)
+
+### Components
+- fix(tabs): Remove event.preventDefault from TabList [#969](https://github.com/Workday/canvas-kit/pull/969) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat(Pagination): Update Pagination component (see notes) [#954](https://github.com/Workday/canvas-kit/pull/954)  [@alanbsmith](https://github.com/alanbsmith)
+- feat: Add closeButtonAriaLabel to Modal Component [#959](https://github.com/Workday/canvas-kit/pull/959) [@UltraTempest](https://github.com/UltraTempest)
+- feat(skeleton): Add option for different skeleton colors [#939](https://github.com/Workday/canvas-kit/pull/939) [@stefanuros](https://github.com/stefanuros)
+- feat(badge): Add custom limit to CountBadge [#935](https://github.com/Workday/canvas-kit/pull/935) [@alanbsmith](https://github.com/alanbsmith)
+
+### Hooks
+- feat(common): Add useIsRTL hook to common module [#971](https://github.com/Workday/canvas-kit/pull/971) [@alanbsmith](https://github.com/alanbsmith)
+
+### Infrastructure
+- fix: Add crossorigin to font preloads [#967](https://github.com/Workday/canvas-kit/pull/967) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Use pull_request_target in GH Actions [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Fix Story names and extra imports [#966](https://github.com/Workday/canvas-kit/pull/966) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Improve documentation [#964](https://github.com/Workday/canvas-kit/pull/964) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Remove jest code-coverage threshold [#957](https://github.com/Workday/canvas-kit/pull/957) [@alanbsmith](https://github.com/alanbsmith)
+- docs: Add compound component doc [#937](https://github.com/Workday/canvas-kit/pull/937) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat: Add window config option to inherit or override mono font family [#916](https://github.com/Workday/canvas-kit/pull/916) [@anicholls](https://github.com/anicholls)
+- chore: Bump ini from 1.3.5 to 1.3.7 [#931](https://github.com/Workday/canvas-kit/pull/931) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Update @workday/canvas-system-icons-web dependency [#940](https://github.com/Workday/canvas-kit/pull/940) [@alanbsmith](https://github.com/alanbsmith)
+- chore(form-field): Update FormField Readme [#930](https://github.com/Workday/canvas-kit/pull/930) [@alanbsmith](https://github.com/alanbsmith)
+- fix: Fix create component scripts [#929](https://github.com/Workday/canvas-kit/pull/929) [@jamesfan](https://github.com/jamesfan)
+- docs: Standardize README badges for Labs components [#928](https://github.com/Workday/canvas-kit/pull/928) [@jamesfan](https://github.com/jamesfan)
+
+### Notes
+
+- Update Pagination component  [#954](https://github.com/Workday/canvas-kit/pull/954)
+  - This is a breaking change in this Labs component. Please refer to the [migration guide](https://github.com/Workday/canvas-kit/blob/master/modules/_labs/pagination/react/MIGRATION_GUIDE.md) for more information on how to upgrade.
+
+## 4.4.2 (2020-12-09)
 
 ### Components
 - fix(menu): Remove minimum width and collapse around the content ([#922](https://github.com/Workday/canvas-kit/pull/922)) [@willklein](https://github.com/willklein)
@@ -24,10 +70,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Add Emotion dependency to fix transient dep issue ([#917](https://github.com/Workday/canvas-kit/pull/917)) [@anicholls](https://github.com/anicholls)
 - fix: Re-enable postcss for storybook builds to transpile svg-load ([#919](https://github.com/Workday/canvas-kit/pull/919)) [@anicholls](https://github.com/anicholls)
 
-# 4.4.1 (2020-11-20)
+## 4.4.1 (2020-11-20)
 
 ### Components
-- fix(color-picker): Detect different formats of #ffffff ([#884](https://github.com/Workday/canvas-kit/pull/884)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix(color-picker): Detect different formats of `#ffffff` ([#884](https://github.com/Workday/canvas-kit/pull/884)) [@NicholasBoll](https://github.com/NicholasBoll)
 - docs(popup): Fix usePopup hook example docs ([#911](https://github.com/Workday/canvas-kit/pull/911)) [@Parker-Ledoux](https://github.com/Parker-Ledoux)
 - fix(select): Allow a single option ([#914](https://github.com/Workday/canvas-kit/pull/914)) [@NicholasBoll](https://github.com/NicholasBoll)
 
@@ -35,7 +81,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - ci: Use exec instead of node-cmd ([#908](https://github.com/Workday/canvas-kit/pull/908)) [@lychyi](https://github.com/lychyi)
 - chore: Fix create component scripts ([#912](https://github.com/Workday/canvas-kit/pull/912)) [@Parker-Ledoux](https://github.com/Parker-Ledoux)
 
-# 4.4.0 (2020-11-13)
+## 4.4.0 (2020-11-13)
 
 ### Components
 - feat: Add SidePanel to labs ([#866](https://github.com/Workday/canvas-kit/pull/866)) [@lychyi](https://github.com/lychyi)
@@ -115,7 +161,7 @@ workbook
 ![image](https://user-images.githubusercontent.com/146020/97763552-2a93a580-1ac9-11eb-9988-6eb468fdfeef.png)
 
 
-# 4.3.1 (2020-10-22)
+## 4.3.1 (2020-10-22)
 
 ### Components
 - refactor(select): Convert more of Select to FC and improve code style ([#827](https://github.com/Workday/canvas-kit/pull/827)) [@jamesfan](https://github.com/jamesfan)
@@ -127,7 +173,7 @@ workbook
 - docs: Fix broken links in Storybook ([#876](https://github.com/Workday/canvas-kit/pull/876)) [@NicholasBoll](https://github.com/NicholasBoll)
 
 
-# 4.3.0 (2020-10-09)
+## 4.3.0 (2020-10-09)
 
 ### Components
 - fix(popup-stack): Move adapter var to popup-stack global namespace ([#865](https://github.com/Workday/canvas-kit/pull/865)) [@csongnguyen](https://github.com/csongnguyen)
@@ -142,7 +188,7 @@ workbook
 ### Infrastructure
 - fix: Revert prismjs from 1.21.0 back to 1.17.1 ([#870](https://github.com/Workday/canvas-kit/pull/870)) [@jamesfan](https://github.com/jamesfan)
 
-# 4.2.0 (2020-09-15)
+## 4.2.0 (2020-09-15)
 
 ### Components
 - fix(color-picker): Fix IE rendering for color picker swatchbook ([#832](https://github.com/Workday/canvas-kit/pull/832)) [@jtschult](https://github.com/jtschult)
@@ -164,7 +210,7 @@ workbook
 - chore: Bump prismjs from 1.17.1 to 1.21.0 ([#826](https://github.com/Workday/canvas-kit/pull/826)) [@dependabot](https://github.com/dependabot)
 - chore: Bump node-fetch from 2.6.0 to 2.6.1 ([#854](https://github.com/Workday/canvas-kit/pull/854)) [@dependabot](https://github.com/dependabot)
 
-# 4.1.2 (2020-08-04)
+## 4.1.2 (2020-08-04)
 
 ### Components
 - fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -175,7 +221,7 @@ workbook
 ### Infrastructure
 - chore: Upgrade dependencies ([#811](https://github.com/Workday/canvas-kit/pull/811)) [@NicholasBoll](https://github.com/NicholasBoll)
 
-# 4.0.3 (2020-08-04)
+## 4.0.3 (2020-08-04)
 
 ### Components
 - fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -183,7 +229,7 @@ workbook
 - test(menu): Fix assertion name to be more clear [@NicholasBoll](https://github.com/NicholasBoll)
 - docs(skeleton): Update to remove mention of aria-live ([#814](https://github.com/Workday/canvas-kit/pull/814)) [@lychyi](https://github.com/lychyi)
 
-# 3.9.3 (2020-08-04)
+## 3.9.3 (2020-08-04)
 
 ### Components
 - fix(skeleton): Remove aria-live and add loading text content ([#804](https://github.com/Workday/canvas-kit/pull/804)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -191,7 +237,7 @@ workbook
 - test(menu): Fix assertion name to be more clear [@NicholasBoll](https://github.com/NicholasBoll)
 - docs(skeleton): Update to remove mention of aria-live ([#814](https://github.com/Workday/canvas-kit/pull/814)) [@lychyi](https://github.com/lychyi)
 
-# 4.1.1 (2020-07-27)
+## 4.1.1 (2020-07-27)
 
 ### Components
 
@@ -202,17 +248,17 @@ workbook
 - fix(select): Add cancelAnimationFrame to unmount ([#803](https://github.com/Workday/canvas-kit/pull/803)) [@jamesfan](https://github.com/jamesfan)
 - fix(menu): Delay focus to prevent scrolling ([#802](https://github.com/Workday/canvas-kit/pull/802)) [@NicholasBoll](https://github.com/NicholasBoll)
 
-# 4.0.2 (2020-07-24)
+## 4.0.2 (2020-07-24)
 
 ### Components
 - fix(menu): Delay focus to prevent scrolling ([#802](https://github.com/Workday/canvas-kit/pull/802)) [@NicholasBoll](https://github.com/NicholasBoll)
 
-# 3.9.2 (2020-07-21)
+## 3.9.2 (2020-07-21)
 
 ### Components
 - fix(button): Remove literal fontFamily ([#787](https://github.com/Workday/canvas-kit/pull/787)) [@lychyi](https://github.com/lychyi)
 
-# 4.1.0 (2020-07-17)
+## 4.1.0 (2020-07-17)
 
 ### Components
 - test(radio): Fix prop table logic ([#748](https://github.com/Workday/canvas-kit/pull/748)) [@lychyi](https://github.com/lychyi)
@@ -261,17 +307,17 @@ const stackRef = usePopupStack()
 React.createPortal(contents, stackRef.current)
 ```
 
-# 4.0.1 (2020-07-08)
+## 4.0.1 (2020-07-08)
 
 ### Components
 - fix(combobox): Add explicit arg to initEvent in ComboBox and header SearchBar ([#767](https://github.com/Workday/canvas-kit/pull/767)) [@lychyi](https://github.com/lychyi)
 
-# 3.9.1 (2020-07-07)
+## 3.9.1 (2020-07-07)
 
 ### Components
 - fix(combobox): Add explicit arg to initEvent in ComboBox and header SearchBar ([#767](https://github.com/Workday/canvas-kit/pull/767)) [@lychyi](https://github.com/lychyi)
 
-# 4.0.0 (2020-06-15)
+## 4.0.0 (2020-06-15)
 
 The changes below are the consolidation of changes made across all 4.0.0 beta versions (`v4.0.0-beta.0-5`).
 
@@ -342,7 +388,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(icon): Fix icon color references ([#733](https://github.com/Workday/canvas-kit/pull/733)) [@anicholls](https://github.com/anicholls)
 - feat(select): Render menu using a portal ([#641](https://github.com/Workday/canvas-kit/pull/641)) [@jamesfan](https://github.com/jamesfan)
 
-# 4.0.0-beta.5 (2020-06-12)
+## 4.0.0-beta.5 (2020-06-12)
 
 ### Infrastructure
 - docs: Clean up 4.0 migration guide ([#677](https://github.com/Workday/canvas-kit/pull/677)) [@anicholls](https://github.com/anicholls)
@@ -364,7 +410,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(icon): Fix icon color references ([#733](https://github.com/Workday/canvas-kit/pull/733)) [@anicholls](https://github.com/anicholls)
 - feat(select): Render menu using a portal ([#641](https://github.com/Workday/canvas-kit/pull/641)) [@jamesfan](https://github.com/jamesfan)
 
-# 3.9.0 (2020-06-15)
+## 3.9.0 (2020-06-15)
 
 ### Infrastructure
 - test: Improve snapshot infrastructure and organization ([#687](https://github.com/Workday/canvas-kit/pull/687)) [@anicholls](https://github.com/anicholls)
@@ -387,7 +433,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - test(status-indicator): Fix visual testing story icons ([#732](https://github.com/Workday/canvas-kit/pull/732)) [@anicholls](https://github.com/anicholls)
 - chore(core): Update Labs Core stories and add snapshots ([#735](https://github.com/Workday/canvas-kit/pull/735)) [@alanbsmith](https://github.com/alanbsmith)
 
-# 3.8.0 (2020-05-22)
+## 3.8.0 (2020-05-22)
 
 ### Infrastructure
 - docs: Remove rebase section for pull requests ([#647](https://github.com/Workday/canvas-kit/pull/647)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -401,7 +447,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix: Align hover ripple for checkbox and radio components in IE11 ([#651](https://github.com/Workday/canvas-kit/pull/651)) [@lychyi](https://github.com/lychyi)
 - fix(switch): Fix click target for switch ([#671](https://github.com/Workday/canvas-kit/pull/671)) [@mannycarrera4](https://github.com/mannycarrera4)
 
-# 4.0.0-beta.4 (2020-05-20)
+## 4.0.0-beta.4 (2020-05-20)
 
 ### Infrastructure
 - chore: Fix create-module and promote-module ([#660](https://github.com/Workday/canvas-kit/pull/660)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -413,7 +459,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(avatar): Combine Avatar & AvatarButton and provide fallback image ([#614](https://github.com/Workday/canvas-kit/pull/614)) [@vibdev](https://github.com/vibdev)
 - feat(select): Add theming to select in labs ([#648](https://github.com/Workday/canvas-kit/pull/648)) [@mannycarrera4](https://github.com/mannycarrera4)
 
-# 4.0.0-beta.3 (2020-05-12)
+## 4.0.0-beta.3 (2020-05-12)
 
 ### Infrastructure
 
@@ -424,7 +470,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 
 - fix(pagination): Provide aria live attribute for accessbility ([#620](https://github.com/Workday/canvas-kit/pull/620)) [@mannycarrera4](https://github.com/mannycarrera4)
 
-# 4.0.0-beta.2 (2020-05-11)
+## 4.0.0-beta.2 (2020-05-11)
 
 ### Infrastructure
 
@@ -453,7 +499,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(color-picker): Fix accessibility announcement for color input ([#639](https://github.com/Workday/canvas-kit/pull/639)) [@mannycarrera4](https://github.com/mannycarrera4)
 - test(toast): Fix chromatic stories for toast ([#625](https://github.com/Workday/canvas-kit/pull/625)) [@mannycarrera4](https://github.com/mannycarrera4)
 
-# 3.7.0 (2020-05-06)
+## 3.7.0 (2020-05-06)
 
 ### Infrastructure
 - ci: Enable Github Actions for pull requests ([#557](https://github.com/Workday/canvas-kit/pull/557)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -473,7 +519,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - feat(select): Implement Canvas menu ([#454](https://github.com/Workday/canvas-kit/pull/454)) [@jamesfan](https://github.com/jamesfan)
 - test(popup): Add tests for Popup ([#600](https://github.com/Workday/canvas-kit/pull/600)) [@mannycarrera4](https://github.com/mannycarrera4)
 
-# 4.0.0-beta.1 (2020-04-13)
+## 4.0.0-beta.1 (2020-04-13)
 
 ### Infrastructure
 
@@ -486,7 +532,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - feat(tooltip): Refactor to a simpler API ([#528](https://github.com/Workday/canvas-kit/pull/528)) [@NicholasBoll](https://github.com/NicholasBoll)
 - feat(core): Allow InputProvider to use a configurable container ([#546](https://github.com/Workday/canvas-kit/pull/546)) [@mannycarrera4](https://github.com/mannycarrera4)
 
-# 3.6.0 (2020-04-13)
+## 3.6.0 (2020-04-13)
 
 ### Infrastructure
 - chore: Update thank you on README ([#511](https://github.com/Workday/canvas-kit/pull/511)) [@lychyi](https://github.com/lychyi)
@@ -502,7 +548,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(color-picker): Design & use case improvements ([#519](https://github.com/Workday/canvas-kit/pull/519)) [@anicholls](https://github.com/anicholls)
 - fix(menu): Fix flashing on initial selected index ([#561](https://github.com/Workday/canvas-kit/pull/561)) [@NicholasBoll](https://github.com/NicholasBoll)
 
-# 4.0.0-beta.0 (2020-03-30)
+## 4.0.0-beta.0 (2020-03-30)
 
 ### Infrastructure
 
@@ -520,7 +566,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(button): Misc. fixes after refactor ([#509](https://github.com/Workday/canvas-kit/pull/509)) [@anicholls](https://github.com/anicholls)
 - feat(button): Add theming support to buttons ([#527](https://github.com/Workday/canvas-kit/pull/527)) [@anicholls](https://github.com/anicholls)
 
-# 3.5.0 (2020-03-12)
+## 3.5.0 (2020-03-12)
 
 ### Infrastructure
 - test: Explicitly enable snapshots ([#478](https://github.com/Workday/canvas-kit/pull/478)) [@lychyi](https://github.com/lychyi)
@@ -543,7 +589,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - feat(pagination): Add pagination component to labs ([#301](https://github.com/Workday/canvas-kit/pull/301)) [@nikolasjchaconas](https://github.com/nikolasjchaconas)
 - feat(drawer): Make the close icon in DrawerHeader optional ([#507](https://github.com/Workday/canvas-kit/pull/507)) [@devonsoto77](https://github.com/devonsoto77)
 
-# 3.4.0 (2020-02-19)
+## 3.4.0 (2020-02-19)
 
 ### Infrastructure
 - ci: Add check for missing or unused dependencies ([#437](https://github.com/Workday/canvas-kit/pull/437)) [@anicholls](https://github.com/anicholls)
@@ -580,7 +626,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(button): Fix Component Selector Issue ([#474](https://github.com/Workday/canvas-kit/pull/474)) [@lychyi](https://github.com/lychyi)
 - fix(icon): Support second accent layer ([#475](https://github.com/Workday/canvas-kit/pull/475)) [@mannycarrera4](https://github.com/mannycarrera4)
 
-# 3.3.2 (2020-01-29)
+## 3.3.2 (2020-01-29)
 
 ### Infrastructure:
 - docs: Add test documentation ([#382](https://github.com/Workday/canvas-kit/pull/382)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -590,13 +636,13 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix: Add missing labs-core imports ([#435](https://github.com/Workday/canvas-kit/pull/435)) [@anicholls](https://github.com/anicholls)
 
 
-# 3.3.1 (2020-01-28)
+## 3.3.1 (2020-01-28)
 
 ### Components:
 - test(switch): Redo switch tests in react-testing-library ([#386](https://github.com/Workday/canvas-kit/pull/386)) [@lychyi](https://github.com/lychyi)
 - fix(labs): Remove global type from useTheme hook ([#430](https://github.com/Workday/canvas-kit/pull/430)) [@lychyi](https://github.com/lychyi)
 
-# 3.3.0 (2020-01-03)
+## 3.3.0 (2020-01-03)
 
 ### Infrastructure:
 - chore: Update Storybook Chromatic ([#397](https://github.com/Workday/canvas-kit/pull/397)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -624,7 +670,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(button): Address issues with various IconButton states ([#271](https://github.com/Workday/canvas-kit/pull/271)) [@mannycarrera4](https://github.com/mannycarrera4)
 - fix(header): Allow elements to flex correctly in IE11 ([#427](https://github.com/Workday/canvas-kit/pull/427)) [@lychyi](https://github.com/lychyi)
 
-# 3.2.0 (2020-01-03)
+## 3.2.0 (2020-01-03)
 
 ### Infrastructure:
 - chore: Use proper prettier file in configs ([#348](https://github.com/Workday/canvas-kit/pull/348)) [@Parker-Ledoux](https://github.com/Parker-Ledoux)
@@ -648,7 +694,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - feat: Add bidirectionality support ([#288](https://github.com/Workday/canvas-kit/pull/288)) [@stephanerangaya](https://github.com/stephanerangaya)
 - test: Fix modal specs ([#374](https://github.com/Workday/canvas-kit/pull/374)) [@NicholasBoll](https://github.com/NicholasBoll)
 
-# 3.1.1 (2019-12-02)
+## 3.1.1 (2019-12-02)
 
 ### Infrastructure:
 - ci: Temporarily convert to TravisCI while billing is being figured out ([#318](https://github.com/Workday/canvas-kit/pull/318)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -663,7 +709,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - docs: Fix Component Status table ([#332](https://github.com/Workday/canvas-kit/pull/332)) [@jpante](https://github.com/jpante)
 - fix(common): bad quote marks on accessible hide CSS ([#344](https://github.com/Workday/canvas-kit/pull/344)) [@vibdev](https://github.com/vibdev)
 
-# 3.1.0 (2019-11-11)
+## 3.1.0 (2019-11-11)
 
 ### Infrastructure:
 - build: Upgrade Storybook to 5.2 ([#267](https://github.com/Workday/canvas-kit/pull/267)) [@sahlhoff](https://github.com/sahlhoff)
@@ -680,13 +726,13 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix: Rename -webkit-font-smoothing- to WebkitFontSmoothing ([#298](https://github.com/Workday/canvas-kit/pull/298)) [@alexandrzavalii](https://github.com/alexandrzavalii)
 - fix(common): Port accessible hide styles from JS to CSS ([#310](https://github.com/Workday/canvas-kit/pull/310)) [@vibdev](https://github.com/vibdev)
 
-# 3.0.1 (2019-11-01)
+## 3.0.1 (2019-11-01)
 
 ### Infrastructure
 - fix(labs): Update incorrect emotion version in labs core ([#290](https://github.com/Workday/canvas-kit/pull/290)) [@anicholls](https://github.com/anicholls)
 - fix: Add @emotion/is-prop-valid to components that need it ([#289](https://github.com/Workday/canvas-kit/pull/289)) [@anicholls](https://github.com/anicholls)
 
-# 3.0.0 (2019-10-30)
+## 3.0.0 (2019-10-30)
 
 ### Infrastructure:
 - ci: Update ChromaticQA for better baselines ([#269](https://github.com/Workday/canvas-kit/pull/269)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -707,7 +753,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 ### Breaking Changes:
 - chore: Upgrade to Emotion 10 ([#246](https://github.com/Workday/canvas-kit/pull/246)) [@anicholls](https://github.com/anicholls)
 
-# 3.0.0-beta.1 (2019-10-14)
+## 3.0.0-beta.1 (2019-10-14)
 
 ### Infrastructure:
 - ci: Fix fork failures ([#241](https://github.com/Workday/canvas-kit/pull/241)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -725,7 +771,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 ### Breaking Changes:
 - fix(skeleton): Remove z-index ([#257](https://github.com/Workday/canvas-kit/pull/257)) [@lychyi](https://github.com/lychyi)
 
-# 3.0.0-beta.0 (2019-10-07)
+## 3.0.0-beta.0 (2019-10-07)
 
 ### Infrastructure:
 - docs: Update component_status.md
@@ -770,7 +816,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix: Card, Popup and Modal cleanup ([#233](https://github.com/Workday/canvas-kit/pull/233)) [@anicholls](https://github.com/anicholls)
 - fix(form): Form field spacing ([#234](https://github.com/Workday/canvas-kit/pull/234)) [@stephanerangaya](https://github.com/stephanerangaya)
 
-# 3.0.0-alpha.9 (2019-09-26)
+## 3.0.0-alpha.9 (2019-09-26)
 
 ### Infrastructure:
 - feat: Refactor and improve our create-module script ([#211](https://github.com/Workday/canvas-kit/pull/211)) [@anicholls](https://github.com/anicholls)
@@ -782,12 +828,12 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 ### Breaking Changes:
 - refactor(text-input): Remove error icon in React ([#218](https://github.com/Workday/canvas-kit/pull/218)) [@MackenzieBerliner-Glasser](https://github.com/MackenzieBerliner-Glasser)
 
-# 3.0.0-alpha.8 (2019-09-24)
+## 3.0.0-alpha.8 (2019-09-24)
 
 ### Components:
 - fix(avatar): Add AvatarButton component and convert Avatar into ordinary div ([#206](https://github.com/Workday/canvas-kit/pull/206)) [@6r3al](https://github.com/6r3al)
 
-# 3.0.0-alpha.7 (2019-09-19)
+## 3.0.0-alpha.7 (2019-09-19)
 
 ### Infrastructure:
 - feat: Add Cypress tests to canvas-kit ([#174](https://github.com/Workday/canvas-kit/pull/174)) [@NicholasBoll](https://github.com/NicholasBoll)
@@ -814,7 +860,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - refactor(banner): Change BannerTheme to ErrorType ([#195](https://github.com/Workday/canvas-kit/pull/195)) [@stephanerangaya](https://github.com/stephanerangaya)
 - refactor(core): Rename enums to singular ([#199](https://github.com/Workday/canvas-kit/pull/199)) [@mannycarrera4](https://github.com/mannycarrera4)
 
-# 3.0.0-alpha.6 (2019-09-02)
+## 3.0.0-alpha.6 (2019-09-02)
 
 ### Infrastructure:
 - chore: Fix console warnings in Storybook (#116) @anicholls
@@ -843,7 +889,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(form-field): Add component prefix to exported enums and interfaces #146 @sahlhoff
 - refactor(page-header): Update marketing and breakpoint props (#143) @sahlhoff
 
-# 3.0.0-alpha.5 (2019-08-13)
+## 3.0.0-alpha.5 (2019-08-13)
 
 ### Infrastructure:
 
@@ -859,7 +905,7 @@ To review the breaking changes made in this release, check out the [v4.0.0 Migra
 - fix(ActionBar): Match css styles to react action bar (#111) (@mannycarrera4)
 
 
-# 3.0.0-alpha.4 (2019-08-05)
+## 3.0.0-alpha.4 (2019-08-05)
 
 ### Infrastructure:
 

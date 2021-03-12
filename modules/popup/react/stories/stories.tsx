@@ -3,6 +3,7 @@ import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 import {
   Popper,
   Popup,
@@ -61,5 +62,20 @@ export const Open = () => {
       </DeleteButton>
       <Button onClick={() => null}>Cancel</Button>
     </Popup>
+  );
+};
+
+export const RTL = () => {
+  return (
+    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <Popup width={400} heading="למחוק פריט" padding={Popup.Padding.s} handleClose={() => null}>
+        <div style={{marginBottom: '24px'}}>האם ברצונך למחוק פריט זה</div>
+
+        <DeleteButton style={{marginLeft: '16px'}} onClick={() => null}>
+          לִמְחוֹק
+        </DeleteButton>
+        <Button onClick={() => null}>לְבַטֵל</Button>
+      </Popup>
+    </CanvasProvider>
   );
 };

@@ -43,7 +43,7 @@
     "workday"
   ],
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "^16.8 || ^17.0"
   },
   "dependencies": {
     "@workday/canvas-kit-react-action-bar": "^5.0.0-beta.0",
