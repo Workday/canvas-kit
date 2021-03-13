@@ -13,7 +13,7 @@ module.exports = {
 };
 
 // Extra scopes supported outside the `modules` folder
-const scopes = ['labs'];
+const scopes = ['labs', 'fonts', 'popup-stack'];
 
 /**
  * @param {{ cwd: string}} context
@@ -24,8 +24,9 @@ function getPackages(context) {
   const cwd = ctx.cwd || process.cwd();
 
   return Promise.all([
-    readdir(path.resolve(cwd, 'modules'), {withFileTypes: true}),
-    readdir(path.resolve(cwd, 'modules/_labs'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/css'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/react'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/labs-react'), {withFileTypes: true}),
   ])
     .then(([core, labs]) => [...core, ...labs])
     .then(files => files.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))

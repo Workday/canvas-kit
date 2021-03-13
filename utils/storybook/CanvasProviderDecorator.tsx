@@ -3,7 +3,7 @@ import {
   defaultCanvasTheme,
   CanvasProvider,
   PartialEmotionCanvasTheme,
-} from '@workday/canvas-kit-react-common';
+} from '@workday/canvas-kit-react/common';
 import {object} from '@storybook/addon-knobs';
 
 const label = 'theme';

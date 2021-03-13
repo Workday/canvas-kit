@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {Tooltip} from '@workday/canvas-kit-react-tooltip';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {
   Popup,
@@ -10,8 +10,8 @@ import {
   useCloseOnOutsideClick,
   useBringToTopOnClick,
   useCloseOnEscape,
-} from '@workday/canvas-kit-react-popup';
-import {DeleteButton, Button} from '@workday/canvas-kit-react-button';
+} from '@workday/canvas-kit-react/popup';
+import {DeleteButton, Button} from '@workday/canvas-kit-react/button';
 
 export default {
   title: 'Testing/React/Popups/Popup Stack',
