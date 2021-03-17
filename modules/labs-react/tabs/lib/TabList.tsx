@@ -9,7 +9,7 @@ import {
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 
-import {useRovingFocus} from './cursor/hooks';
+import {useRovingFocus, getNext} from './cursor';
 import {TabsModelContext} from './Tabs';
 import {useResetCursorOnBlur} from './hooks';
 import {TabsModel} from './useTabsModel';
@@ -43,6 +43,19 @@ export const TabList = createComponent('div')({
   Component: ({children, model, ...elemProps}: TabListProps, ref, Element) => {
     const {state, events} = useModelContext(TabsModelContext, model);
     const props = composeHooks(useRovingFocus, useResetCursorOnBlur)({state, events}, elemProps);
+
+    events.useSubscription('unregisterItem', ({data, prevState}) => {
+      if (prevState.cursorId === data.id && document.activeElement === document.body) {
+        // refs are null right now, wait for before painting to update focus
+        requestAnimationFrame(() => {
+          // only if at least one ref is not null
+          if (prevState.items.some(i => i.ref.current !== null)) {
+            const item = getNext(prevState.cursorId, prevState.items);
+            events.activate({tab: item.id});
+          }
+        });
+      }
+    });
 
     return (
       <TabsListContainer>

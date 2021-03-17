@@ -9,6 +9,7 @@ import {ListModel} from './useListModel';
  * @param model A ListModel
  * @param localRef A RefObject that will be used to register an item
  * @param id Desired identifier for the List Model. If not provided, it will fall back to the index
+ * in the list
  * @param index (Optional) Specify the position of the item if the order is expected to change
  */
 export const useRegisterItem = (
@@ -21,8 +22,7 @@ export const useRegisterItem = (
   const firstRender = React.useRef(true);
 
   React.useLayoutEffect(() => {
-    // eslint-disable-next-line
-    if (index != undefined && !firstRender.current) {
+    if (index !== undefined && !firstRender.current) {
       events.updateItemPosition({id: localId, index});
     }
   }, [events, index, localId]);

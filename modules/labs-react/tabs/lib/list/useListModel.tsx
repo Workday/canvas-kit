@@ -8,6 +8,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 export type Item = {
+  /** IDREF of the list. Children ids can be derived from this id */
   id: string;
   ref: React.RefObject<HTMLElement>;
 };
@@ -103,7 +104,13 @@ export const useListModel = (config: ListModelConfig = {}): ListModel => {
       });
     },
     unregisterItem({id}) {
-      setItems(items => items.filter(item => item.id !== id));
+      setItems(items => {
+        if (items.find(item => item.id === id)) {
+          return items.filter(item => item.id !== id);
+        } else {
+          return items;
+        }
+      });
     },
     updateItemPosition({id, index}) {
       setItems(items => {

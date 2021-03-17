@@ -100,34 +100,34 @@ export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
   const initialTabRef = React.useRef(config.initialTab);
   const [activeTab, setActiveTab] = React.useState(initialTabRef.current || '');
 
-  const menu = useCursorModel({
+  const cursor = useCursorModel({
     orientation: config.orientation || 'horizontal',
     ...(config as CursorModelConfig),
-    onRegisterItem({data, state}) {
-      if (!initialTabRef.current) {
-        initialTabRef.current = data.item.id;
-        setActiveTab(initialTabRef.current);
-      }
-      config.onRegisterItem?.({data, state: state as TabsState});
-    },
   });
   const panels = useListModel();
 
   const state = {
-    ...menu.state,
+    ...cursor.state,
     activeTab,
     panels: panels.state.items,
     panelIndexRef: panels.state.indexRef,
   };
 
   const events = useEventMap(tabEventMap, state, config, {
-    ...menu.events,
+    ...cursor.events,
     activate(data) {
       setActiveTab(data.tab);
       events.goTo({id: data.tab});
     },
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,
+  });
+
+  events.useSubscription('registerItem', ({data}) => {
+    if (!initialTabRef.current) {
+      initialTabRef.current = data.item.id;
+      setActiveTab(initialTabRef.current);
+    }
   });
 
   return {

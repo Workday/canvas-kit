@@ -6,7 +6,7 @@ describe('Tabs', () => {
   });
 
   ['Simple', 'Named Keys'].forEach(story => {
-    context(`given the '${story}' story is rendered`, () => {
+    context(`given the [Labs/Tabs/React, ${story}] story is rendered`, () => {
       beforeEach(() => {
         h.stories.load('Labs/Tabs/React', story);
       });
@@ -217,7 +217,7 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the DisabledTab story is rendered', () => {
+  context('given the [Labs/Tabs/React, DisabledTab] story is rendered', () => {
     beforeEach(() => {
       cy.loadStory('Labs/Tabs/React', 'DisabledTab');
     });
@@ -241,14 +241,18 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the DynamicTabs story is rendered', () => {
+  context('given the [Labs/Tabs/React, DynamicTabs] story is rendered', () => {
     beforeEach(() => {
       h.stories.load('Labs/Tabs/React', 'DynamicTabs');
     });
 
-    context('when Add Tab is clicked', () => {
+    context('when "Add Tab" is clicked', () => {
       beforeEach(() => {
         cy.findByRole('tab', {name: 'Add Tab'}).click();
+      });
+
+      it('should focus on "Add Tab"', () => {
+        cy.findByRole('tab', {name: 'Add Tab'}).should('have.focus');
       });
 
       context('when the left arrow key is pressed', () => {
@@ -261,9 +265,37 @@ describe('Tabs', () => {
         });
       });
     });
+
+    context('when "Tab 1" is activated', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'Tab 1'}).click();
+      });
+
+      context('then the Backspace/Delete key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{backspace}');
+        });
+
+        it('should remove "Tab 1"', () => {
+          cy.findByRole('tab', {name: 'Tab 1'}).should('not.exist');
+        });
+
+        it('should move focus to "Tab 2"', () => {
+          cy.findByRole('tab', {name: 'Tab 2'}).should('have.focus');
+        });
+
+        it('should have "aria-selected=true" for "Tab 2"', () => {
+          cy.findByRole('tab', {name: 'Tab 2'}).should('have.attr', 'aria-selected', 'true');
+        });
+
+        it('should show "Tab 2" contents', () => {
+          cy.findByRole('tabpanel', {name: 'Tab 2'}).should('contain', 'Contents of Tab 2');
+        });
+      });
+    });
   });
 
-  context('given the LeftToRight story is rendered', () => {
+  context('given the [Labs/Tabs/React, LeftToRight] story is rendered', () => {
     beforeEach(() => {
       h.stories.load('Labs/Tabs/React', 'RightToLeft');
     });

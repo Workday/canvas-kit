@@ -18,7 +18,9 @@ import {useRegisterItem} from './list';
 
 export interface TabProps {
   /**
-   * Optionally pass index to tab item
+   * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
+   * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
+   * inserted out of order.
    */
   index?: number;
   /**

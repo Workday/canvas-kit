@@ -1,12 +1,45 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 
-export type Model<State, Events> = {
+type ToEventEmitter<State, Events extends IEvent> = {
+  useSubscription: <K extends keyof Events>(
+    key: K,
+    cb: (arg: {
+      data: Parameters<Events[K]>[0];
+      /**
+       * Callbacks are called during the `setState` phase in React. This means the state has not
+       * resolved yet. This is a good time to add more `setState` calls which will be added to React's
+       * state batch updates, but it also means the state provided here hasn't been updated yet.
+       */
+      prevState: State;
+    }) => void
+  ) => void;
+};
+
+export type Model<State, Events extends IEvent> = {
   state: State;
-  events: Events;
+  events: Events & ToEventEmitter<State, Events>;
 };
 
 // bivarianceHack is used for force bivariance of the function constraint. Without this, it will fail with `strictFunctionTypes`
 type IEvent = {[key: string]: {bivarianceHack(data?: object): void}['bivarianceHack']};
+
+type Listeners = Record<string, Function[]>;
+class EventEmitter {
+  public listeners: Listeners = {};
+
+  public subscribe = (name: string, cb: Function) => {
+    (this.listeners[name] || (this.listeners[name] = [])).push(cb);
+
+    return () => {
+      this.listeners[name]?.splice(this.listeners[name].indexOf(cb) >>> 0, 1);
+    };
+  };
+
+  public emit = (name: string, ...args: any[]): void => {
+    (this.listeners[name] || []).forEach(fn => fn(...args));
+  };
+}
 
 /**
  * A mapping of guards and callbacks and what events they relate to.
@@ -41,7 +74,12 @@ type ToCallbackConfig<
 > = {
   [K in keyof TGuardMap]: (event: {
     data: Parameters<TEvents[TGuardMap[K]]>[0];
-    state: TState;
+    /**
+     * Callbacks are called during the `setState` phase in React. This means the state has not
+     * resolved yet. This is a good time to add more `setState` calls which will be added to React's
+     * state batch updates, but it also means the state provided here hasn't been updated yet.
+     */
+    prevState: TState;
   }) => void;
 };
 
@@ -133,12 +171,13 @@ export const useEventMap = <
   state: TState,
   config: TConfig,
   events: TEvents
-): TEvents => {
+): TEvents & ToEventEmitter<TState, TEvents> => {
   // use refs so we can memoize the returned `events` object
   const eventMapRef = React.useRef(eventMap);
   const stateRef = React.useRef(state);
   const configRef = React.useRef(config);
   const eventsRef = React.useRef(events);
+  const [eventEmitter] = React.useState(() => new EventEmitter());
 
   // update all the refs with current values
   eventMapRef.current = eventMap;
@@ -146,37 +185,56 @@ export const useEventMap = <
   configRef.current = config;
   eventsRef.current = events;
 
-  return React.useMemo(() => {
-    return keys(eventsRef.current).reduce((result, key) => {
-      result[key] = (data => {
-        // Invoke the configured guard if there is one
-        const guardFn = keys(eventMapRef.current.guards || {}).find(k => {
-          return (eventMapRef.current.guards || {})[k] === key;
-        });
+  const processedEvents = React.useMemo(() => {
+    return {
+      useSubscription: ((eventName: string, cb: Function) => {
+        // Subscribe right away. The alternative is to subscribe as part of a `useEffect` or
+        // `useLayoutEffect` phase which could miss events
+        const [unsubscribe] = React.useState(() => eventEmitter.subscribe(eventName, cb));
+        React.useEffect(() => unsubscribe, [unsubscribe]);
+      }) as ToEventEmitter<TState, TEvents>['useSubscription'],
 
-        if (
-          guardFn &&
-          configRef.current?.[guardFn] &&
-          //@ts-ignore Typescript doesn't like that the call signatures are different
-          !configRef.current[guardFn]({data, state: stateRef.current})
-        ) {
-          return;
+      ...keys(eventsRef.current).reduce((result, key) => {
+        if (key === 'useSubscription') {
+          return result;
         }
 
-        // call the event (setter)
-        eventsRef.current[key](data);
+        result[key] = (data => {
+          // Invoke the configured guard if there is one
+          const guardFn = keys(eventMapRef.current.guards || {}).find(k => {
+            return (eventMapRef.current.guards || {})[k] === key;
+          });
 
-        // Invoke the configured callback if there is one
-        const callbackFn = keys(eventMapRef.current.callbacks || {}).find(k => {
-          return (eventMapRef.current.callbacks || {})[k] === key;
-        });
+          if (
+            guardFn &&
+            configRef.current?.[guardFn] &&
+            //@ts-ignore Typescript doesn't like that the call signatures are different
+            !configRef.current[guardFn]({data, state: stateRef.current})
+          ) {
+            return;
+          }
 
-        if (callbackFn && configRef.current?.[callbackFn]) {
+          // call the event (setter)
+          eventsRef.current[key](data);
+
+          // Invoke the configured callback if there is one
+          const callbackFn = keys(eventMapRef.current.callbacks || {}).find(k => {
+            return (eventMapRef.current.callbacks || {})[k] === key;
+          });
+
           //@ts-ignore Typescript doesn't like that the call signatures are different
-          configRef.current[callbackFn]({data, state: stateRef.current});
-        }
-      }) as TEvents[keyof TEvents]; // this cast keeps Typescript happy
-      return result;
-    }, {} as TEvents);
+          eventEmitter.emit(key, {data, prevState: stateRef.current});
+
+          if (callbackFn && configRef.current?.[callbackFn]) {
+            //@ts-ignore Typescript doesn't like that the call signatures are different
+            configRef.current[callbackFn]({data, prevState: stateRef.current});
+          }
+        }) as TEvents[keyof TEvents]; // this cast keeps Typescript happy
+        return result;
+      }, {} as TEvents),
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  return processedEvents;
 };
