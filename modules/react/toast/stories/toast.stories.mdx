@@ -1,0 +1,76 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import Toast from '../index';
+import {Success} from './examples/Success';
+import {Error} from './examples/Error';
+import {WithCloseButton} from './examples/WithCloseButton';
+import {WithActionLink} from './examples/WithActionLink';
+import {WithActionLinkAndCloseIcon} from './examples/WithActionLinkAndCloseIcon';
+import {WithPopper} from './examples/WithPopper';
+
+<Meta title="Components/Popups/Toast/React" component={Toast} />
+
+# Canvas Kit Toast
+
+`Toast` is a Canvas-styled React toast component. It allows for a brief message to be be shown about
+a process or action occurring in the app.
+
+[> Workday Design Reference](https://design.workday.com/components/popups/toasts)
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+### Basic Usage
+
+Below are examples we expect will work for most use cases. Note that all examples include icons as
+they are an important signifier to communicate meaning. For this reason, Toast notifications should
+always include an icon.
+
+---
+
+#### Complete Example with Popper
+
+We use Popper to position Toast. Here's an example of how to use them together.
+
+<ExampleCodeBlock code={WithPopper} />
+
+---
+
+#### Success
+
+<ExampleCodeBlock code={Success} />
+
+---
+
+#### Error
+
+<ExampleCodeBlock code={Error} />
+
+---
+
+#### WithCloseButton
+
+<ExampleCodeBlock code={WithCloseButton} />
+
+---
+
+#### With an Action Link
+
+<ExampleCodeBlock code={WithActionLink} />
+
+---
+
+#### With an Action Link and CloseIcon
+
+<ExampleCodeBlock code={WithActionLinkAndCloseIcon} />
+
+---
+
+## Component Props
+
+<ArgsTable of={Toast} />

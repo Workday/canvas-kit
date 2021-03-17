@@ -27,7 +27,7 @@ interface Model<S extends State, E extends Events> {
 }
 ```
 
-The `@workday/canvas-kit-react-common` module exports a `Model` type for us.
+The `@workday/canvas-kit-react/common` module exports a `Model` type for us.
 
 Let's start by defining our state and events:
 
@@ -35,7 +35,7 @@ Let's start by defining our state and events:
 // useDisclosureModel.tsx
 import React from 'react'
 
-import { Model } from '@workday/canvas-kit-react-common'
+import { Model } from '@workday/canvas-kit-react/common'
 
 export type DisclosureState = {
   open: boolean
@@ -226,7 +226,7 @@ That's a lot of extra boilerplate code for actions and callbacks. Our events don
 First we need to create an event map - a map of guard and callback functions to the events they need to be paired with. We'll use `createEventMap` to do this:
 
 ```tsx
-import { createEventMap } from "@workday/canvas-kit-react-common"
+import { createEventMap } from "@workday/canvas-kit-react/common"
 
 const disclosureEventMap = createEventMap<DisclosureEvents>()({
   guards: {
@@ -249,7 +249,7 @@ We see that `createEventMap` takes two optional keys: `guards` and `callbacks`. 
 Now that we have an event map, we'll need to use it for our `DisclosureConfig`:
 
 ```tsx
-import { ToModelConfig } from "@workday/canvas-kit-react-common"
+import { ToModelConfig } from "@workday/canvas-kit-react/common"
 
 export type DisclosureConfig = {
   initialOpen?: boolean
@@ -400,7 +400,7 @@ Let's convert the Disclosure example to use the `createComponent` utility functi
 ```tsx
 // Disclosure.tsx
 import React from "react"
-import { createComponent } from "@workday/canvas-kit-react-common"
+import { createComponent } from "@workday/canvas-kit-react/common"
 import { DisclosureTarget } from "./DisclosureTarget"
 import { DisclosureContent } from "./DisclosureContent"
 
@@ -439,7 +439,7 @@ export const Disclosure = createComponent()({
 ```tsx
 // DisclosureTarget.tsx
 import React from "react"
-import { createComponent } from "@workday/canvas-kit-react-common"
+import { createComponent } from "@workday/canvas-kit-react/common"
 import { DisclosureModelContext } from "./Disclosure"
 
 export interface DisclosureTargetProps {
@@ -473,7 +473,7 @@ export const DisclosureTarget = createComponent("button")({
 ```tsx
 // DisclosureContent.tsx
 import React from "react"
-import { createComponent } from "@workday/canvas-kit-react-common"
+import { createComponent } from "@workday/canvas-kit-react/common"
 import { DisclosureModelContext } from "./Disclosure"
 
 export interface DisclosureContentProps {
@@ -528,7 +528,7 @@ Our example isn't fully accessible yet. The Disclosure target needs a `aria-cont
 
 ```tsx
 // useIDModel.tsx
-import { Model, useUniqueId } from "@workday/canvas-kit-react-common"
+import { Model, useUniqueId } from "@workday/canvas-kit-react/common"
 
 export type IDState = {
   id: string
@@ -761,7 +761,7 @@ The `Tooltip` container component looks almost exactly like the Disclosure compo
 ```tsx
 // Tooltip.tsx
 import React from "react"
-import { createComponent } from "@workday/canvas-kit-react-common"
+import { createComponent } from "@workday/canvas-kit-react/common"
 
 import {
   useTooltipModel,
@@ -799,7 +799,7 @@ The `Tooltip.Target` component is similar to the `DisclosureTarget` component, b
 
 ```tsx
 import React from "react"
-import { createComponent } from "@workday/canvas-kit-react-common"
+import { createComponent } from "@workday/canvas-kit-react/common"
 
 import { TooltipModelContext } from "./Tooltip"
 import { TooltipModel } from "./useTooltipModel"
@@ -853,7 +853,7 @@ The `Tooltip.Content` component is similar to the `Disclosure.Content` component
 ```tsx
 import React from "react"
 import ReactDOM from "react-dom"
-import { createComponent } from "@workday/canvas-kit-react-common"
+import { createComponent } from "@workday/canvas-kit-react/common"
 
 import { TooltipModelContext } from "./Tooltip"
 import { useHidden } from "./useHidden"

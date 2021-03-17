@@ -9,7 +9,9 @@ const path = require('path');
 const inquirer = require('inquirer');
 const glob = require('glob');
 const replaceInFiles = require('replace-in-files');
-const addDependency = require('./create-component/addDependency');
+const addExport = require('./create-component/addExport');
+
+require('colors');
 
 const cwd = process.cwd();
 
@@ -33,12 +35,6 @@ const questions = [
     message: 'What IA category does this component belong in within storybook?:',
     choices: ['Buttons', 'Containers', 'Indicators', 'Inputs', 'Navigation', 'Popups'],
   },
-  {
-    type: 'confirm',
-    name: 'bundle',
-    message: 'Should this be bundled in @workday/canvas-kit-react?:',
-    default: true,
-  },
 ];
 
 inquirer.prompt(questions).then(answers => {
@@ -50,8 +46,8 @@ inquirer.prompt(questions).then(answers => {
   }
 
   const target = 'react';
-  const srcPath = path.join(cwd, `modules/_labs/${component}`);
-  const destPath = path.join(cwd, `modules/${component}`);
+  const srcPath = path.join(cwd, `modules/labs-${target}/${component}`);
+  const destPath = path.join(cwd, `modules/${target}/${component}`);
 
   if (!fs.existsSync(destPath)) {
     mkdirp.sync(destPath);
@@ -61,15 +57,15 @@ inquirer.prompt(questions).then(answers => {
     console.log(`\n${destPath} already exists. Skipping.`.yellow);
   } else {
     console.log(
-      `\nMoving`.gray +
-        `modules/_labs/${component}/${target}`.cyan +
+      `\nMoving `.gray +
+        `modules/labs-${target}/${component}`.cyan +
         ` > `.gray +
-        `modules/${component}`.cyan
+        `modules/${target}/${component}`.cyan
     );
 
-    exec(`git mv ${srcPath}/${target} ${destPath}`)
+    exec(`git mv ${srcPath} ${destPath}`)
       .then(() => {
-        glob(`${destPath}/${target}/**/*`, async (err, files) => {
+        glob(`${destPath}/**/*`, async (err, files) => {
           if (err) {
             console.log('Error', err);
             process.exit(1);
@@ -83,19 +79,15 @@ inquirer.prompt(questions).then(answers => {
               replaceInFilesOptions,
             } = await replaceInFiles({
               files,
-              from: '../../../',
-              to: '../../',
+              from: `@workday/canvas-kit-labs-${target}/${component}`,
+              to: `@workday/canvas-kit-${target}/${component}`,
             })
               .pipe({
-                from: `@workday/canvas-kit-labs-${target}-${component}`,
-                to: `@workday/canvas-kit-${target}-${component}`,
+                from: `modules/labs-${target}/${component}`,
+                to: `modules/${target}/${component}`,
               })
               .pipe({
-                from: `modules/_labs/${component}`,
-                to: `modules/${component}`,
-              })
-              .pipe({
-                from: /\n<a href="https:\/\/github.com\/Workday\/canvas-kit\/tree\/master\/modules\/_labs.*\n.*\n.*currently in pre-release.\n\n\n/g,
+                from: /\n<a href="https:\/\/github.com\/Workday\/canvas-kit\/tree\/master\/modules\/labs-react.*\n.*\n.*currently in pre-release.\n\n\n/g,
                 to: '',
               })
               .pipe({
@@ -106,16 +98,8 @@ inquirer.prompt(questions).then(answers => {
             console.log('Error occurred:', error);
           }
 
-          if (answers.bundle) {
-            console.log(`Adding depenency to @workday/canvas-kit-${target}\n`);
-            addDependency(component, target);
-          }
-
-          fs.readdir(srcPath, function(err, files) {
-            if (!files.length) {
-              fs.rmdirSync(srcPath);
-            }
-          });
+          console.log(`Adding depenency to ` + `modules/${target}/index.ts\n`.brightBlue);
+          addExport(component, false);
         });
       })
       .catch(err => {

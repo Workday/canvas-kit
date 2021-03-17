@@ -36,9 +36,7 @@
     "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react-button": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-popup": "^5.0.0-beta.0",
-    "@workday/canvas-kit-react-tooltip": "^5.0.0-beta.0"
+    "@workday/canvas-kit-react": "^5.0.0-beta.0"
   },
   "keywords": [
     "canvas",

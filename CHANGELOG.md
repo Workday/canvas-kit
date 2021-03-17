@@ -57,7 +57,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Notes
 
 - Update Pagination component  [#954](https://github.com/Workday/canvas-kit/pull/954)
-  - This is a breaking change in this Labs component. Please refer to the [migration guide](https://github.com/Workday/canvas-kit/blob/master/modules/_labs/pagination/react/MIGRATION_GUIDE.md) for more information on how to upgrade.
+  - This is a breaking change in this Labs component. Please refer to the [migration guide](https://github.com/Workday/canvas-kit/blob/master/modules/labs-react/pagination/react/MIGRATION_GUIDE.md) for more information on how to upgrade.
 
 ## 4.4.2 (2020-12-09)
 

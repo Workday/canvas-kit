@@ -10,7 +10,7 @@ import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {${pascalCaseName}} from '${modulePath}';
-import {Button} from '@workday/canvas-kit-react-button';
+import {Button} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 export default {

@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import {toId} from '@storybook/csf';
-import {Table, TableRow} from '@workday/canvas-kit-react-table';
-import {Hyperlink} from '@workday/canvas-kit-react-button';
+import { Table, TableRow } from "@workday/canvas-kit-react/table";
+import { Hyperlink } from "@workday/canvas-kit-react/button";
 
 import {specifications, SpecDescribe, SpecIt} from './specs';
 import { GithubBranch, GithubUrl, StorybookUrl } from './docs'
@@ -81,20 +81,18 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
 
     const [, first, kind, name, last] = matches;
 
-    return (
-      <>
-        {first.replace(/given /i, '')}
-        <Hyperlink
-          href={`${storybookBaseUrl}?path=/story/${toId(
-            kind,
-            name.replace('DefaultStory', 'Default Story')
-          )}`}
-        >
-          {name.replace('DefaultStory', 'Default')}
-        </Hyperlink>
-        {last}
-      </>
-    );
+    return <>
+      {first.replace(/given /i, '')}
+      <Hyperlink
+        href={`${storybookBaseUrl}?path=/story/${toId(
+          kind,
+          name.replace('DefaultStory', 'Default Story')
+        )}`}
+      >
+        {name.replace('DefaultStory', 'Default')}
+      </Hyperlink>
+      {last}
+    </>;
   };
 
   return block.type === 'describe' ? (

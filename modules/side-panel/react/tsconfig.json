@@ -1,7 +1,0 @@
-{
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "esModuleInterop": true
-  },
-  "exclude": ["node_modules", "ts-tmp", "dist", "spec", "stories"]
-}
