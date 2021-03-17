@@ -182,5 +182,43 @@ describe('useEventMap', () => {
         expect(listener).not.toBeCalled();
       });
     });
+
+    it('should call listeners at each level with the correct state', () => {
+      const innerListener = jest.fn();
+      const outerListener = jest.fn();
+
+      const useOuterModel = (config = {}) => {
+        const [outer, setOuter] = React.useState('previousOuter');
+        const innerModel = useModel();
+
+        const state = {
+          ...innerModel.state,
+          outer,
+        };
+
+        const events = useEventMap(eventMap, state, config, {
+          ...innerModel.events,
+        });
+
+        innerModel.events.useSubscription('foo', innerListener);
+        events.useSubscription('foo', outerListener);
+
+        return {state, events};
+      };
+
+      const {result} = renderHook(() => useOuterModel());
+
+      act(() => {
+        result.current.events.foo({value: 'next'});
+        expect(innerListener).toBeCalledWith({
+          data: {value: 'next'},
+          prevState: {foo: 'previous'},
+        });
+        expect(outerListener).toBeCalledWith({
+          data: {value: 'next'},
+          prevState: {foo: 'previous', outer: 'previousOuter'},
+        });
+      });
+    });
   });
 });
