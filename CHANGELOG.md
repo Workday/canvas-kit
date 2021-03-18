@@ -321,7 +321,7 @@ React.createPortal(contents, stackRef.current)
 
 The changes below are the consolidation of changes made across all 4.0.0 beta versions (`v4.0.0-beta.0-5`).
 
-To review the breaking changes made in this release, check out the [v4.0.0 Migration Guide](./4.0-MIGRATION-GUIDE.md).
+To review the breaking changes made in this release, check out the [v4.0.0 Migration Guide](./modules/docs/mdx/4.0-MIGRATION-GUIDE.md).
 
 ### Infrastructure
 - ci: Release canary builds for prerelease branches ([#481](https://github.com/Workday/canvas-kit/pull/481)) [@anicholls](https://github.com/anicholls)

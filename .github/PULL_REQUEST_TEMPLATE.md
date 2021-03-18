@@ -19,7 +19,7 @@
       applicable
 - [ ] design approved final implementation
 - [ ] a11y approved final implementation
-- [ ] code adheres to the [API & Pattern guidelines](../API_PATTERN_GUIDELINES.md)
+- [ ] code adheres to the [API & Pattern guidelines](../modules/docs/mdx/API_PATTERN_GUIDELINES.md)
 
 ## Additional References
 
