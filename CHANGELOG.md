@@ -8,7 +8,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Components
 
-- feat(popup): Update Popup behaviors to match a11y specs ([#980](https://github.com/Workday/canvas-kit/pull/980)) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat(popup): Add OverflowTooltip and update Popup behaviors to match a11y specs ([#980](https://github.com/Workday/canvas-kit/pull/980)) [@NicholasBoll](https://github.com/NicholasBoll)
 
 ### Infrastructure
 
