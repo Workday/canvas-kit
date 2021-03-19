@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 
+## v4.6.0 (2021-03-19)
+
+### Components
+
+- feat(popup): Add OverflowTooltip and update Popup behaviors to match a11y specs ([#980](https://github.com/Workday/canvas-kit/pull/980)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+
+- fix(modal): Update readme with correct import ([#988](https://github.com/Workday/canvas-kit/pull/988)) [@mannycarrera4](https://github.com/mannycarrera4)
+- chore: Bump prismjs from 1.17.1 to 1.23.0 ([#986](https://github.com/Workday/canvas-kit/pull/986)) [@dependabot](https://github.com/dependabot)
+- ci: Update setup-node action and remove custom matcher ([#994](https://github.com/Workday/canvas-kit/pull/994)) [@NicholasBoll](https://github.com/NicholasBoll)
 
 ## v4.5.1 (2021-02-26)
 
