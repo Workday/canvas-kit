@@ -2,6 +2,10 @@
 
 A Popup component that allows you to render content in a container on top of a page.
 
+<a href="../README.md">
+  <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+</a>
+
 ## Installation
 
 ```sh

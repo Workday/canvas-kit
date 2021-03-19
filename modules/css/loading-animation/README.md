@@ -2,6 +2,10 @@
 
 Components that display animations while a page or component loads.
 
+<a href="../README.md">
+  <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+</a>
+
 [> Workday Design Reference](https://design.workday.com/components/indicators/loading-animation)
 
 ## Installation

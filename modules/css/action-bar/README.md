@@ -2,6 +2,10 @@
 
 Full width action bar that can be fixed to the bottom of the screen.
 
+<a href="../README.md">
+  <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+</a>
+
 ## Installation
 
 ```sh
