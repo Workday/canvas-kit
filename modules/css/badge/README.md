@@ -2,6 +2,10 @@
 
 The count badge provides a quantity-based summary with dynamic values.
 
+<a href="../README.md">
+  <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+</a>
+
 ## Installation
 
 ```sh

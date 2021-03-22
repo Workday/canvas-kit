@@ -3,6 +3,10 @@
 A card is a flexible and extensible content container that includes options for positioning. The
 card content includes classes for heading and body.
 
+<a href="../README.md">
+  <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+</a>
+
 [> Workday Design Reference](https://design.workday.com/components/containers/cards)
 
 ## Installation
