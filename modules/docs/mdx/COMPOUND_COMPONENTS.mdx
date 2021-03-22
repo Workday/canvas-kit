@@ -1,3 +1,7 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Dev Docs/Compound Components" />
+
 # Compound Components
 
 ## What is a compound component?
@@ -54,7 +58,7 @@ export const TabsModelContext = React.createContext({})
 const Tabs = ({children, model, ...config}) => {
   // either a model is passed in, or we create one
   const value = model || useTabsModel(config)
-  
+
   return (
     <TabsModelContext.Provider value={value}>
       {children}
@@ -115,12 +119,12 @@ Components that directly wrap an element (most of them) will have the following 
   ```tsx
   // tag
   <Tabs.List as="section" />
-  
+
   // Component
   const Section = ({children, ...elemProps}) => (
     <section {...elemProps}>{children}</section>
   )
-  
+
   <Tabs.List as={Section}/>
   ```
   Both will look like the following in the DOM:
@@ -131,7 +135,7 @@ Components that directly wrap an element (most of them) will have the following 
   ```tsx
   <Tabs.Item aria-label="Foobar" data-testid="tab1">
   ```
-  
+
 Compound components are also made up of [models](#models) that accept [guards](#guards) to conditionally prevent state changes and [callbacks](#callbacks) to attach listeners. For example, in our Tabs component clicking a Tab will activate that tab. The `Tabs` container component will accept a `shouldActivateTab` and a `onActivateTab` for the event called `activateTab`.
 
 ```tsx
@@ -144,16 +148,16 @@ const MyComponent = () => {
     // Clicking on the first tab will activate it, but clicking on the
     // second tab will do nothing
     return data.tab === 'first' ? true : false
-    
+
     // returning true allows the event to trigger a state change and will
     // also call the `onActivateTab` callback
   }
-  
+
   const onActivateTab = ({ data, state }) => {
     // called any time the `activateTab` event is triggered
     console.log('onActivteTab', data, state)
   }
-  
+
   return (
     <Tabs shouldActivateTab={shouldActivateTab} onActivateTab={onActivateTab}>
       <Tabs.List>
@@ -171,22 +175,22 @@ This concludes basic compound components. If you'd like to know more about model
 
 ### What is a Model?
 
- If a compound component was stripped of all its markup, attributes, and styling, what would remain is the model. The model is how we describe the state and supported state transitions. You could completely swap out the underlying elements, attributes, and styles, and the model would remain the same. The model is an object that is composed of two parts: `state` and a `events`. The model's `state` describes the current snapshot in time of the component, and the `events` describes events that can be sent to the model. 
- 
+ If a compound component was stripped of all its markup, attributes, and styling, what would remain is the model. The model is how we describe the state and supported state transitions. You could completely swap out the underlying elements, attributes, and styles, and the model would remain the same. The model is an object that is composed of two parts: `state` and a `events`. The model's `state` describes the current snapshot in time of the component, and the `events` describes events that can be sent to the model.
+
  ### Why Models?
- 
+
  Advantages of models:
  * A common API structure to group state and behavior of components
  * Atomic responsibilities
  * Composable and shareable functionality
- 
+
  We use React Hooks to return models. An empty model would look like this:
- 
+
  ```ts
  const useEmptyModel = (config = {}) => {
    const state = {}
    const events = {}
-   
+
    return { state, events }
  }
  ```
@@ -222,7 +226,7 @@ const useDisclosureModel = (config = {}) => {
       config.onOpen?.({ data, state })
     }
   }
-  
+
   return { state, events }
 }
 ```
@@ -240,7 +244,7 @@ const useEllipsisTooltipModel = (config = {}) => {
       // data has an `element` property
       // `findOverflowElement` returns the element with an overflow style applied
       const element = findOverflowElement(data.element)
-      
+
       // if the scrollWidth is greater than the clientWidth,
       // then the content must be overflowed
       return element.scrollWidth > element.clientWidth
@@ -258,19 +262,19 @@ const useTabsModel = (config = {}) => {
   const [activeTab, setActiveTab] = React.useState('')
   const cursor = useCursorModel(config)
   const panels = useListModel(config)
-  
+
   const state = {
     ...cursor.state, // extend the CursorModel state
     id,
     activeTab,
     panels: panels.state.items, // we only care about
   }
-  
+
   const events = {
     ...cursor.events, // extend the CursorModel events
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,
-    
+
     activateTab(data) {
       if (config.shouldActivateTab?.({ data, state }) === false) {
         return
@@ -279,7 +283,7 @@ const useTabsModel = (config = {}) => {
       config.onActivateTab?.({ data, state })
     }
   }
-  
+
   return { state, events }
 }
 ```
@@ -298,7 +302,7 @@ interface Model<
   events: E
 }
 ```
-    
+
 The Typescript interface of Callbacks and Guards looks like this:
 ```ts
 type Callback<EventData, State> = ({ data: EventData, state: State}) => void
@@ -357,7 +361,7 @@ const TabList = ({children, ...elemProps}) => {
     model,
     elemProps,
   )
-  
+
   // we could use other behavior hooks to further build `props`
 
   return (
@@ -416,12 +420,12 @@ Models allow for very powerful composition without changing the UI at all. For e
 ```tsx
 const useControlledDisclosureModel = ({ opened, onChange, ...config }) => {
   const model = useDisclosureModel(config)
-  
+
   const state = {
     ...model.state,
     opened,
   }
-  
+
   const events = {
     ...model.events,
     open(data) {
@@ -431,13 +435,13 @@ const useControlledDisclosureModel = ({ opened, onChange, ...config }) => {
       onChange(false)
     }
   }
-  
+
   return { state, events }
 }
 
 const ControlledDisclosure = ({ buttonText, children, opened, onChange }) => {
   const model = useControlledDisclosureModel({ opened, onChange })
-  
+
   return (
     <Disclosure model={model}>
       <Disclosure.Target>{buttonText}</Disclosure.Target>
@@ -448,7 +452,7 @@ const ControlledDisclosure = ({ buttonText, children, opened, onChange }) => {
 
 const App = () => {
   const [opened, setOpened] = React.useState(false)
-  
+
   return (
     <ControlledDisclosure
       buttonText="Toggle"
