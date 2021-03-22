@@ -1,7 +1,7 @@
 import React from 'react';
-import {mergeProps, useIsRTL} from '@workday/canvas-kit-react/common';
+import {mergeProps, useIsRTL, useMount} from '@workday/canvas-kit-react/common';
 
-import {CursorModel, getItem} from './useCursorModel';
+import {CursorModel, getItem, getNext} from './useCursorModel';
 
 export const orientationKeyMap = {
   horizontal: {
@@ -32,23 +32,27 @@ const rightToLeftMap = {
 } as const;
 
 /**
- * Handles the roving focus behavior of a Cursor model. It does not handle the tabIndex. Use
- * `useRovingTabIndex` for that functionality.
+ * Handles the roving focus behavior of a Cursor model. It should be added to the element
+ * representing the list. It does not handle the tabIndex.
+ *
  * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
  */
-export const useRovingFocus = ({state, events}: CursorModel, elemProps = {}) => {
+export const useRovingFocusList = (model: CursorModel, elemProps = {}) => {
+  const {state, events} = model;
+  const stateRef = React.useRef(state);
+  stateRef.current = state;
   // keep track of intentional focus changes. Without this state tracking, all changes to
   // `state.cursorId` or `state.items` would result in focus changes. That is definitely not what
   // we want.
-  const focusRef = React.useRef(false);
+  const keyDownRef = React.useRef(false);
   const isRTL = useIsRTL();
 
   React.useEffect(() => {
-    if (focusRef.current) {
+    if (keyDownRef.current) {
       const item = getItem(state.cursorId, state.items);
       item.ref.current?.focus();
 
-      focusRef.current = false;
+      keyDownRef.current = false;
     }
   }, [state.cursorId, state.items]);
 
@@ -60,10 +64,57 @@ export const useRovingFocus = ({state, events}: CursorModel, elemProps = {}) => 
         ) as (keyof typeof orientationKeyMap[typeof state.orientation])[]).forEach(key => {
           if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {
             const event = orientationKeyMap[state.orientation][key];
-            focusRef.current = true;
+            keyDownRef.current = true;
             events[event]?.();
           }
         });
+      },
+    },
+    elemProps
+  );
+};
+
+/**
+ * Handles the roving focus behavior of a Cursor model. It should be added to the element
+ * representing a list item. It does not handle the tabIndex.
+ *
+ * @see https://www.w3.org/TR/wai-aria-practices/#kbd_roving_tabindex
+ */
+export const useRovingFocusItem = ({state}: CursorModel, elemProps = {}) => {
+  // Tracks when this element has focus. If this item is removed while still focused, we have to
+  // inform the model to move the cursor to the next item.
+  const focusRef = React.useRef(false);
+
+  // Create a ref out of state. We don't want to watch state on unmount, so we use a ref to get the
+  // current value at the time of unmounting. Otherwise, `state.items` would be a cached value of an
+  // empty array
+  const stateRef = React.useRef(state);
+  stateRef.current = state;
+
+  useMount(() => {
+    return () => {
+      if (focusRef.current && stateRef.current.items.length) {
+        // Unmount is called before state updates are flushed and we'll never get the last state
+        // update, so use `getNext` instead of `getItem`
+        const item = getNext(stateRef.current.cursorId, stateRef.current.items);
+
+        // If we call `focus` right away, there seems to be a timing issue where the focus handler
+        // never gets called. Waiting until just before a frame is rendered seems to ensure the
+        // focus handler is called correctly. Removing will make deleting multiple items fail.
+        requestAnimationFrame(() => {
+          item.ref.current?.focus();
+        });
+      }
+    };
+  });
+
+  return mergeProps(
+    {
+      onFocus(event: React.FocusEvent) {
+        focusRef.current = true;
+      },
+      onBlur(event: React.FocusEvent) {
+        focusRef.current = false;
       },
     },
     elemProps

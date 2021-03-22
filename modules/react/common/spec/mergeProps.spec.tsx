@@ -1,3 +1,7 @@
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
+import {render, screen} from '@testing-library/react';
+
 import {mergeProps} from '../lib/utils';
 
 describe('mergeProps', () => {
@@ -54,5 +58,41 @@ describe('mergeProps', () => {
     mergedProps.onClick({event: 'foo'});
     expect(targetSpy).toBeCalled();
     expect(targetSpy).toHaveBeenCalledWith({event: 'foo'});
+  });
+
+  it('should merge style props, overriding properties of the style object', () => {
+    const target = {
+      style: {padding: 8, margin: 12},
+    };
+    const source = {
+      style: {padding: 4, fontSize: 16},
+    };
+
+    const mergedProps = mergeProps(target, source);
+    expect(mergedProps).toEqual({
+      style: {
+        padding: 4,
+        margin: 12,
+        fontSize: 16,
+      },
+    });
+  });
+
+  it('should merge css props, overriding properties of the target', () => {
+    const target = {
+      css: {padding: 8, margin: 12},
+    };
+    const source = {
+      css: {padding: 4, fontSize: 16},
+    };
+
+    const mergedProps = mergeProps(target, source);
+    render(<div data-testid="test" {...mergedProps} />);
+
+    expect(screen.getByTestId('test')).toHaveStyle({
+      padding: '4px',
+      margin: '12px',
+      fontSize: '16px',
+    });
   });
 });

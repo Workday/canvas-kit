@@ -10,13 +10,21 @@ import {
   StyledType,
   useLocalRef,
   useModelContext,
+  composeHooks,
 } from '@workday/canvas-kit-react/common';
 
 import {TabsModelContext} from './Tabs';
 import {TabsModel} from './useTabsModel';
 import {useRegisterItem} from './list';
+import {useRovingFocusItem} from './cursor';
 
 export interface TabProps {
+  /**
+   * Optionally pass index to tab item. This should be done if `Tabs.Item` components were created
+   * via a `Array::map` function. This index will ensure keyboard navigation works even if items are
+   * inserted out of order.
+   */
+  index?: number;
   /**
    * The label text of the Tab.
    */
@@ -118,34 +126,45 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
   }
 );
 
+const useTab = (
+  model: TabsModel,
+  elemProps: {index?: number; name?: string} = {},
+  ref: React.Ref<unknown> = null
+) => {
+  const {localRef, elementRef} = useLocalRef(ref);
+
+  const name = useRegisterItem(model, localRef, elemProps.name, elemProps.index);
+  const {state, events} = model;
+
+  const onSelect = () => {
+    events.activate({tab: name});
+  };
+
+  const isSelected = !!name && state.activeTab === name;
+
+  return mergeProps(
+    {
+      id: `tab-${state.id}-${name}`,
+      tabIndex: !!name && state.cursorId === name ? undefined : -1,
+      'aria-selected': isSelected ? true : undefined,
+      'aria-controls': `tabpanel-${state.id}-${name}`,
+      onClick: onSelect,
+      isSelected: isSelected,
+      ref: elementRef,
+    },
+    elemProps
+  );
+};
+
 export const Tab = createComponent('button')({
   displayName: 'Tabs.Item',
-  Component: ({name = '', model, children, ...elemProps}: TabProps, ref, Element) => {
-    const {localRef, elementRef} = useLocalRef(ref);
-    const {state, events} = useModelContext(TabsModelContext, model);
+  Component: ({model, children, ...elemProps}: TabProps, ref, Element) => {
+    const localModel = useModelContext(TabsModelContext, model);
 
-    const tabName = useRegisterItem({state, events}, localRef, name);
-
-    const onSelect = () => {
-      events.activate({tab: tabName});
-    };
-
-    const isSelected = !!tabName && state.activeTab === tabName;
-
-    const props = mergeProps(
-      {
-        id: `tab-${state.id}-${tabName}`,
-        tabIndex: !!tabName && state.cursorId === tabName ? undefined : -1,
-        'aria-selected': isSelected ? true : undefined,
-        'aria-controls': `tabpanel-${state.id}-${tabName}`,
-        onClick: onSelect,
-        isSelected: isSelected,
-      },
-      elemProps
-    );
+    const props = composeHooks(useRovingFocusItem, useTab)(localModel, elemProps, ref);
 
     return (
-      <StyledButton type="button" role="tab" ref={elementRef} as={Element} {...props}>
+      <StyledButton type="button" role="tab" as={Element} {...props}>
         {children}
       </StyledButton>
     );

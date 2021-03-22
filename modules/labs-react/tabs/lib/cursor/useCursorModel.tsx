@@ -107,28 +107,36 @@ const getOffsetItem = (offset: number) => (id: string, items: Item[]): Item => {
   return items[nextIndex];
 };
 
-const getNext = getOffsetItem(1);
-const getPrevious = getOffsetItem(-1);
+export const hasItems = (items: Item[]) => items.some(item => item.ref.current);
+
+export const getNext = getOffsetItem(1);
+export const getPrevious = getOffsetItem(-1);
 
 export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
   const [orientation] = React.useState(config.orientation || 'vertical');
   const [cursorId, setCursorId] = React.useState('');
   const initialCurrentRef = React.useRef('');
-  const list = useListModel({
-    ...(config as ListModelConfig),
-    onRegisterItem({data, state}) {
-      if (!initialCurrentRef.current) {
-        initialCurrentRef.current = data.item.id;
-        setCursorId(initialCurrentRef.current);
-      }
-      config.onRegisterItem?.({data, state: state as CursorState});
-    },
-  });
+  const list = useListModel(config as ListModelConfig);
 
   const state = {...list.state, orientation, cursorId};
 
   const events = useEventMap(cursorEventMap, state, config, {
     ...list.events,
+    registerItem(data) {
+      // point the cursor at the first item
+      if (!initialCurrentRef.current) {
+        initialCurrentRef.current = data.item.id;
+        setCursorId(initialCurrentRef.current);
+      }
+      list.events.registerItem(data);
+    },
+    unregisterItem(data) {
+      // move the cursor forward if the the cursor is pointing to an item that is being removed
+      if (state.cursorId === data.id && state.items.some(i => i.ref.current !== null)) {
+        events.next();
+      }
+      list.events.unregisterItem(data);
+    },
     goTo({id}) {
       setCursorId(id);
     },

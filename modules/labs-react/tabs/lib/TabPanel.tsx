@@ -60,7 +60,7 @@ export const TabPanel = createComponent('div')({
       setTabName(tabName);
 
       return () => {
-        events.unregisterItem({id: tabName});
+        events.unregisterPanel({id: tabName});
       };
     });
 

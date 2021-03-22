@@ -54,7 +54,7 @@ export const TabsModelContext = React.createContext({})
 const Tabs = ({children, model, ...config}) => {
   // either a model is passed in, or we create one
   const value = model || useTabsModel(config)
-  
+
   return (
     <TabsModelContext.Provider value={value}>
       {children}
@@ -115,12 +115,12 @@ Components that directly wrap an element (most of them) will have the following 
   ```tsx
   // tag
   <Tabs.List as="section" />
-  
+
   // Component
   const Section = ({children, ...elemProps}) => (
     <section {...elemProps}>{children}</section>
   )
-  
+
   <Tabs.List as={Section}/>
   ```
   Both will look like the following in the DOM:
@@ -131,31 +131,35 @@ Components that directly wrap an element (most of them) will have the following 
   ```tsx
   <Tabs.Item aria-label="Foobar" data-testid="tab1">
   ```
-  
-Compound components are also made up of [models](#models) that accept [guards](#guards) to conditionally prevent state changes and [callbacks](#callbacks) to attach listeners. For example, in our Tabs component clicking a Tab will activate that tab. The `Tabs` container component will accept a `shouldActivateTab` and a `onActivateTab` for the event called `activateTab`.
+
+Compound components are also made up of [models](#models) that accept [guards](#guards) to conditionally prevent state changes and [callbacks](#callbacks) to attach listeners. For example, in our Tabs component clicking a Tab will activate that tab. The `Tabs` container component will accept a `shouldActivate` and a `onActivate` for the event called `activate`.
 
 ```tsx
 const MyComponent = () => {
-  // `data` is all event data from the `activateTab` event
-  // `state` is the current state of the `Tabs` component
+  // `data` is all event data from the `activate` event
 
-  const shouldActivateTab = ({ data, state }) => {
+  // `state` is the current state of the `Tabs` component
+  const shouldActivate = ({ data, state }) => {
     // for some reason, we only want to allow activation the 'first' tab
     // Clicking on the first tab will activate it, but clicking on the
     // second tab will do nothing
     return data.tab === 'first' ? true : false
     
     // returning true allows the event to trigger a state change and will
-    // also call the `onActivateTab` callback
+    // also call the `onActivate` callback
   }
-  
-  const onActivateTab = ({ data, state }) => {
-    // called any time the `activateTab` event is triggered
-    console.log('onActivteTab', data, state)
+
+  // `prevState` is the previous state of the model. Callbacks are called _before_ state has resolved.
+  // This means the passed state hasn't updated yet. It also means it is safe to call `setState` without
+  // triggering extra renders. `setState` calls will add to React's batching system before a state changes
+  // are flushed and render functions are called.
+  const onActivate = ({ data, prevState }) => {
+    // called any time the `activate` event is triggered
+    console.log('onActivate', data, prevState)
   }
   
   return (
-    <Tabs shouldActivateTab={shouldActivateTab} onActivateTab={onActivateTab}>
+    <Tabs shouldActivate={shouldActivate} onActivate={onActivate}>
       <Tabs.List>
         <Tabs.Item name="first">First</Tabs.Item>
         <Tabs.Item name="second">Second</Tabs.Item>
@@ -171,22 +175,22 @@ This concludes basic compound components. If you'd like to know more about model
 
 ### What is a Model?
 
- If a compound component was stripped of all its markup, attributes, and styling, what would remain is the model. The model is how we describe the state and supported state transitions. You could completely swap out the underlying elements, attributes, and styles, and the model would remain the same. The model is an object that is composed of two parts: `state` and a `events`. The model's `state` describes the current snapshot in time of the component, and the `events` describes events that can be sent to the model. 
- 
+ If a compound component was stripped of all its markup, attributes, and styling, what would remain is the model. The model is how we describe the state and supported state transitions. You could completely swap out the underlying elements, attributes, and styles, and the model would remain the same. The model is an object that is composed of two parts: `state` and a `events`. The model's `state` describes the current snapshot in time of the component, and the `events` describes events that can be sent to the model.
+
  ### Why Models?
- 
+
  Advantages of models:
  * A common API structure to group state and behavior of components
  * Atomic responsibilities
  * Composable and shareable functionality
- 
+
  We use React Hooks to return models. An empty model would look like this:
- 
+
  ```ts
  const useEmptyModel = (config = {}) => {
    const state = {}
    const events = {}
-   
+
    return { state, events }
  }
  ```
@@ -198,7 +202,7 @@ A model hooks takes in a configuration object. This object can contain anything 
 
 #### Callbacks
 
-A callback of an event is similar to native event callbacks like `onClick`. Callbacks are a place to handle events and by convention start with `on`. If the event is called `click`, the callback would be called `onClick`. Callbacks can be used to handle side effects or used to produce additional state changes. Callbacks are called synchronously which batches state changes, so any additional state changes will not produce additional renders.
+A callback of an event is similar to native event callbacks like `onClick`. Callbacks are a place to handle events and by convention start with `on`. If the event is called `click`, the callback would be called `onClick`. Callbacks can be used to handle side effects or used to produce additional state changes. Callbacks are called synchronously which batches state changes, so any additional state changes will not produce additional renders. This means callbacks are called with the previous state since state has not resolved yet.
 
 #### Guards
 
@@ -219,10 +223,10 @@ const useDisclosureModel = (config = {}) => {
         return
       }
       setOpened(true)
-      config.onOpen?.({ data, state })
+      config.onOpen?.({ data, prevState: state })
     }
   }
-  
+
   return { state, events }
 }
 ```
@@ -240,7 +244,7 @@ const useEllipsisTooltipModel = (config = {}) => {
       // data has an `element` property
       // `findOverflowElement` returns the element with an overflow style applied
       const element = findOverflowElement(data.element)
-      
+
       // if the scrollWidth is greater than the clientWidth,
       // then the content must be overflowed
       return element.scrollWidth > element.clientWidth
@@ -258,28 +262,28 @@ const useTabsModel = (config = {}) => {
   const [activeTab, setActiveTab] = React.useState('')
   const cursor = useCursorModel(config)
   const panels = useListModel(config)
-  
+
   const state = {
     ...cursor.state, // extend the CursorModel state
     id,
     activeTab,
     panels: panels.state.items, // we only care about
   }
-  
+
   const events = {
     ...cursor.events, // extend the CursorModel events
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,
-    
-    activateTab(data) {
-      if (config.shouldActivateTab?.({ data, state }) === false) {
+
+    activate(data) {
+      if (config.shouldActivate?.({ data, prevState: state }) === false) {
         return
       }
       setActiveTab(data.tab)
-      config.onActivateTab?.({ data, state })
+      config.onActivate?.({ data, prevState: state })
     }
   }
-  
+
   return { state, events }
 }
 ```
@@ -324,6 +328,11 @@ const useKeyboardCursor = (
   elemProps = {}
 ) => {
 
+  const focus = () => {
+    const items = state.items.find
+  }
+
+  // effects on state changes
   React.useEffect(() => {
     const item = state.items.find(({ id }) => state.currentId === id)
     item.ref.current?.focus()
@@ -334,11 +343,11 @@ const useKeyboardCursor = (
       // if onKeyDown was provided, call it first
       elemProps.onKeyDown?.(event)
 
-      if (event.key === 'ArrowLeft') {
-         events.previous()
+      if (event.key === 'ArrowLeft' || event.key === 'Left') {
+         events.goToPrevious()
       }
-      if (event.key === 'ArrowRight') {
-         events.next()
+      if (event.key === 'ArrowRight' || event.key === 'Right') {
+         events.goToNext()
       }
     },
     ...elemProps,
@@ -348,16 +357,16 @@ const useKeyboardCursor = (
 
 ## Putting it all together
 
-In the `Tabs` component example, there isn't a `Cursor` component. The `Tab.List` sub-component uses the `CursorModel` and the `useKeyboardCursor` behavior hook to produce the desired sub-component. It looks something like this:
+In the `Tabs` component example, there isn't a `Cursor` component. The `Tab.List` sub-component uses the `CursorModel` and the `useRovingFocus` behavior hook to produce the desired sub-component. It looks something like this:
 
 ```tsx
 const TabList = ({children, ...elemProps}) => {
   const model = React.useContext(TabsModelContext)
-  const props = useKeyboardCursor(
+  const props = useRovingFocus(
     model,
     elemProps,
   )
-  
+
   // we could use other behavior hooks to further build `props`
 
   return (
@@ -373,11 +382,11 @@ const TabList = ({children, ...elemProps}) => {
 
 ### Configuring a model
 
-A container component can either accept model configuration _or_ a model. Passing model configuration allows for simpler model configuration of guards, callbacks, or any other model configuration. The following example provides an `onActivateTab` callback that fetches some data from the server:
+A container component can either accept model configuration _or_ a model. Passing model configuration allows for simpler model configuration of guards, callbacks, or any other model configuration. The following example provides an `onActivate` callback that fetches some data from the server:
 
 ```tsx
 <Tabs
-  onActivateTab={({data}) => fetch('/api/activatetab' + data.id) }
+  onActivate={({data}) => fetch('/api/activate' + data.id) }
 >
   ...
 </Tabs>
@@ -389,7 +398,7 @@ If you need direct access to a model's state or events, you can hoist the model 
 const MyTabs = () => {
   const model = useTabsModel({
     // we can still load data from the server
-    onActivateTab: ({data}) => fetch('/api/activatetab' + data.id),
+    onActivate: ({data}) => fetch('/api/activate' + data.id),
   })
 
   return (
@@ -401,7 +410,7 @@ const MyTabs = () => {
       Currently selected tab: {model.state.activeTab}
 
       // Now we can send events directly to the model
-      <button onClick={() => model.events.activateTab({ tab: 'third' })}>
+      <button onClick={() => model.events.activate({ tab: 'third' })}>
         Activate third tab
       </button>
     </>
@@ -416,12 +425,12 @@ Models allow for very powerful composition without changing the UI at all. For e
 ```tsx
 const useControlledDisclosureModel = ({ opened, onChange, ...config }) => {
   const model = useDisclosureModel(config)
-  
+
   const state = {
     ...model.state,
     opened,
   }
-  
+
   const events = {
     ...model.events,
     open(data) {
@@ -431,13 +440,13 @@ const useControlledDisclosureModel = ({ opened, onChange, ...config }) => {
       onChange(false)
     }
   }
-  
+
   return { state, events }
 }
 
 const ControlledDisclosure = ({ buttonText, children, opened, onChange }) => {
   const model = useControlledDisclosureModel({ opened, onChange })
-  
+
   return (
     <Disclosure model={model}>
       <Disclosure.Target>{buttonText}</Disclosure.Target>
@@ -448,7 +457,7 @@ const ControlledDisclosure = ({ buttonText, children, opened, onChange }) => {
 
 const App = () => {
   const [opened, setOpened] = React.useState(false)
-  
+
   return (
     <ControlledDisclosure
       buttonText="Toggle"

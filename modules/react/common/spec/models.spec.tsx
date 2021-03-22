@@ -1,5 +1,5 @@
 import React from 'react';
-import {screen, render, fireEvent, act} from '@testing-library/react';
+import {renderHook, act} from '@testing-library/react-hooks';
 
 import {createEventMap, useEventMap} from '../lib/utils/models';
 
@@ -31,81 +31,103 @@ describe('useEventMap', () => {
   });
 
   const useModel = (config = {}) => {
-    const [foo, setFoo] = React.useState('bar');
+    const [foo, setFoo] = React.useState('previous');
     const state = {
       foo,
     };
 
     const events = useEventMap(eventMap, state, config, {
-      foo(data) {
-        setFoo('baz');
+      foo(data: {value: string}) {
+        setFoo(data.value);
       },
     });
 
     return {state, events};
   };
 
-  const TestComponent = config => {
-    const model = useModel(config);
-
-    return (
-      <div data-testid="test" onClick={() => model.events.foo({value: 'baz'})}>
-        {model.state.foo}
-      </div>
-    );
-  };
-
   it('should call a guard if defined', () => {
     const guard = jest.fn();
+    const {result} = renderHook(() =>
+      useModel({
+        shouldFoo: guard,
+      })
+    );
 
-    render(<TestComponent shouldFoo={guard} />);
-    fireEvent.click(screen.getByTestId('test'));
-
+    result.current.events.foo({value: 'next'});
     expect(guard).toBeCalledTimes(1);
   });
 
   it('should call a guard with data and state', () => {
     const guard = jest.fn();
 
-    render(<TestComponent shouldFoo={guard} />);
-    fireEvent.click(screen.getByTestId('test'));
+    const {result} = renderHook(() =>
+      useModel({
+        shouldFoo: guard,
+      })
+    );
 
-    expect(guard).toBeCalledWith({data: {value: 'baz'}, state: {foo: 'bar'}});
+    result.current.events.foo({value: 'next'});
+    expect(guard).toBeCalledWith({data: {value: 'next'}, state: {foo: 'previous'}});
   });
 
   it('should call a callback if defined', () => {
     const callback = jest.fn();
 
-    render(<TestComponent onFoo={callback} />);
-    fireEvent.click(screen.getByTestId('test'));
+    const {result} = renderHook(() =>
+      useModel({
+        onFoo: callback,
+      })
+    );
 
-    expect(callback).toBeCalledTimes(1);
+    act(() => {
+      result.current.events.foo({value: 'next'});
+      expect(callback).toBeCalledTimes(1);
+    });
   });
 
-  it('should call a callback with data and state', () => {
+  it('should call a callback with data and the previous state', () => {
     const callback = jest.fn();
+    const {result} = renderHook(() =>
+      useModel({
+        onFoo: callback,
+      })
+    );
 
-    render(<TestComponent onFoo={callback} />);
-    fireEvent.click(screen.getByTestId('test'));
-
-    expect(callback).toBeCalledWith({data: {value: 'baz'}, state: {foo: 'bar'}});
+    // wrap in an `act` since the callback gets called _during_ state setting phase. Otherwise,
+    // `prevState` will have next state
+    act(() => {
+      result.current.events.foo({value: 'next'});
+      expect(callback).toBeCalledWith({data: {value: 'next'}, prevState: {foo: 'previous'}});
+    });
   });
 
   it('should call a callback if a guard returns true', () => {
     const callback = jest.fn();
+    const {result} = renderHook(() =>
+      useModel({
+        shouldFoo: () => true,
+        onFoo: callback,
+      })
+    );
 
-    render(<TestComponent onFoo={callback} shouldFoo={() => true} />);
-    fireEvent.click(screen.getByTestId('test'));
-
-    expect(callback).toBeCalledTimes(1);
+    act(() => {
+      result.current.events.foo({value: 'next'});
+      expect(callback).toBeCalledTimes(1);
+    });
   });
 
   it('should not call a callback if a guard returns false', () => {
     const callback = jest.fn();
+    const {result} = renderHook(() =>
+      useModel({
+        shouldFoo: () => false,
+        onFoo: callback,
+      })
+    );
 
-    render(<TestComponent onFoo={callback} shouldFoo={() => false} />);
-    fireEvent.click(screen.getByTestId('test'));
-
-    expect(callback).not.toBeCalled();
+    act(() => {
+      result.current.events.foo({value: 'next'});
+      expect(callback).not.toBeCalled();
+    });
   });
 });

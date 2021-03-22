@@ -9,7 +9,7 @@ import {
   useModelContext,
 } from '@workday/canvas-kit-react/common';
 
-import {useRovingFocus} from './cursor/hooks';
+import {useRovingFocusList} from './cursor';
 import {TabsModelContext} from './Tabs';
 import {useResetCursorOnBlur} from './hooks';
 import {TabsModel} from './useTabsModel';
@@ -41,8 +41,12 @@ const TabsListInnerContainer = styled('div')<StyledType>({
 export const TabList = createComponent('div')({
   displayName: 'Tabs.List',
   Component: ({children, model, ...elemProps}: TabListProps, ref, Element) => {
-    const {state, events} = useModelContext(TabsModelContext, model);
-    const props = composeHooks(useRovingFocus, useResetCursorOnBlur)({state, events}, elemProps);
+    const localModel = useModelContext(TabsModelContext, model);
+    const props = composeHooks(useRovingFocusList, useResetCursorOnBlur)(
+      localModel,
+      elemProps,
+      ref
+    );
 
     return (
       <TabsListContainer>

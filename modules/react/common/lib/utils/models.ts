@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 
-export type Model<State, Events> = {
+export type Model<State, Events extends IEvent> = {
   state: State;
   events: Events;
 };
@@ -41,7 +42,12 @@ type ToCallbackConfig<
 > = {
   [K in keyof TGuardMap]: (event: {
     data: Parameters<TEvents[TGuardMap[K]]>[0];
-    state: TState;
+    /**
+     * Callbacks are called during the `setState` phase in React. This means the state has not
+     * resolved yet. This is a good time to add more `setState` calls which will be added to React's
+     * state batch updates, but it also means the state provided here hasn't been updated yet.
+     */
+    prevState: TState;
   }) => void;
 };
 
@@ -173,10 +179,11 @@ export const useEventMap = <
 
         if (callbackFn && configRef.current?.[callbackFn]) {
           //@ts-ignore Typescript doesn't like that the call signatures are different
-          configRef.current[callbackFn]({data, state: stateRef.current});
+          configRef.current[callbackFn]({data, prevState: stateRef.current});
         }
       }) as TEvents[keyof TEvents]; // this cast keeps Typescript happy
       return result;
     }, {} as TEvents);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
