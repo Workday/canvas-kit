@@ -152,7 +152,7 @@ export const useEventMap = <
   configRef.current = config;
   eventsRef.current = events;
 
-  const processedEvents = React.useMemo(() => {
+  return React.useMemo(() => {
     return keys(eventsRef.current).reduce((result, key) => {
       result[key] = (data => {
         // Invoke the configured guard if there is one
@@ -186,6 +186,4 @@ export const useEventMap = <
     }, {} as TEvents);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  return processedEvents;
 };
