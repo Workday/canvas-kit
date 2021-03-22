@@ -25,7 +25,9 @@ export const useRegisterItem = (
     if (index !== undefined && !firstRender.current) {
       events.updateItemPosition({id: localId, index});
     }
-  }, [events, index, localId]);
+    // we only care about the index changing
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index]);
 
   useMountLayout(() => {
     const defaultId = state.indexRef.current;

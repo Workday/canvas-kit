@@ -116,9 +116,9 @@ export type DisclosureConfig = {
   shouldClose?(event: { data?: {}; state: DisclosureState }): boolean
   shouldToggle?(event: { data?: {}; state: DisclosureState }): boolean
   // callbacks
-  onOpen?(event: { data?: {}; state: DisclosureState }): void
-  onClose?(event: { data?: {}; state: DisclosureState }): void
-  onToggle?(event: { data?: {}; state: DisclosureState }): void
+  onOpen?(event: { data?: {}; prevState: DisclosureState }): void
+  onClose?(event: { data?: {}; prevState: DisclosureState }): void
+  onToggle?(event: { data?: {}; prevState: DisclosureState }): void
 }
 ```
 
@@ -131,21 +131,21 @@ const events: DisclosureEvents = {
       return
     }
     setOpen(true)
-    config.onOpen?.({ data, state })
+    config.onOpen?.({ data, prevState: state })
   },
   close(data) {
     if (config.shouldClose?.({ data, state }) === false) {
       return
     }
     setOpen(false)
-    config.onClose?.({ data, state })
+    config.onClose?.({ data, prevState: state })
   },
   toggle(data) {
     if (config.shouldToggle?.({ data, state }) === false) {
       return
     }
     setOpen(!open)
-    config.onToggle?.({ data, state })
+    config.onToggle?.({ data, prevState: state })
   }
 }
 ```
@@ -168,14 +168,14 @@ const Test = () => {
       console.log("shouldToggle", data, state, should)
       return should
     },
-    onOpen({ data, state }) {
-      console.log("onOpen", data, state)
+    onOpen({ data, prevState }) {
+      console.log("onOpen", data, prevState)
     },
-    onClose({ data, state }) {
-      console.log("onClose", data, state)
+    onClose({ data, prevState }) {
+      console.log("onClose", data, prevState)
     },
-    onToggle({ data, state }) {
-      console.log("onToggle", data, state)
+    onToggle({ data, prevState }) {
+      console.log("onToggle", data, prevState)
     }
   })
   
@@ -276,7 +276,7 @@ const events = useEventMap(disclosureEventMap, state, config, {
 })
 ```
 
-You can see `useEventMap` takes in our `diclosureEventMap`, `state`, `config` objects as well as a list of event implementations. This is all type checked, decreasing the chances we make a mistake. Also notice we don't need to implement guards and callbacks directly inside our event implementations. `useEventMap` will return an object that has that functionality built right in! Neat!
+You can see `useEventMap` takes in our `disclosureEventMap`, `state`, `config` objects as well as a list of event implementations. This is all type checked, decreasing the chances we make a mistake. Also notice we don't need to implement guards and callbacks directly inside our event implementations. `useEventMap` will return an object that has that functionality built right in! Neat!
 
 The full working implementation is here: https://codesandbox.io/s/configurable-disclosure-model-3y5qh
 

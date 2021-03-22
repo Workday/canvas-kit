@@ -107,6 +107,8 @@ const getOffsetItem = (offset: number) => (id: string, items: Item[]): Item => {
   return items[nextIndex];
 };
 
+export const hasItems = (items: Item[]) => items.some(item => item.ref.current);
+
 export const getNext = getOffsetItem(1);
 export const getPrevious = getOffsetItem(-1);
 
@@ -120,28 +122,44 @@ export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
 
   const events = useEventMap(cursorEventMap, state, config, {
     ...list.events,
+    registerItem(data) {
+      // point the cursor at the first item
+      if (!initialCurrentRef.current) {
+        initialCurrentRef.current = data.item.id;
+        setCursorId(initialCurrentRef.current);
+      }
+      list.events.registerItem(data);
+    },
+    unregisterItem(data) {
+      // move the cursor forward if the the cursor is pointing to an item that is being removed
+      if (state.cursorId === data.id && state.items.some(i => i.ref.current !== null)) {
+        events.next();
+      }
+      list.events.unregisterItem(data);
+    },
     goTo({id}) {
       setCursorId(id);
     },
     next() {
+      // if (hasItems(state.items)) {
       setCursorId(getNext(state.cursorId, state.items).id);
+      // }
     },
     previous() {
+      // if (hasItems(state.items)) {
       setCursorId(getPrevious(state.cursorId, state.items).id);
+      // }
     },
     first() {
+      // if (hasItems(state.items)) {
       setCursorId(getFirst(state.items).id);
+      // }
     },
     last() {
+      // if (hasItems(state.items)) {
       setCursorId(getLast(state.items).id);
+      // }
     },
-  });
-
-  events.useSubscription('registerItem', ({data, prevState}) => {
-    if (!initialCurrentRef.current) {
-      initialCurrentRef.current = data.item.id;
-      setCursorId(initialCurrentRef.current);
-    }
   });
 
   return {state, events};

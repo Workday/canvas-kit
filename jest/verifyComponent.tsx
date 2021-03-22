@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import {jsx} from '@emotion/core';
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 
@@ -62,6 +64,40 @@ export function verifyComponent(
       for (const key in attrs) {
         expect(ref.current).toHaveAttribute(key, attrs[key]);
       }
+    });
+
+    it('should merge style props correctly', () => {
+      const ref = {current: null};
+      const attrs = {
+        style: {
+          top: 4,
+          left: 8,
+        },
+      };
+
+      render(<Test ref={ref} {...attrs} />);
+
+      expect(ref.current).toHaveStyle({
+        top: '4px',
+        left: '8px',
+      });
+    });
+
+    it('should merge css props correctly', () => {
+      const ref = {current: null};
+      const attrs = {
+        css: {
+          top: 4,
+          left: 8,
+        },
+      };
+
+      render(<Test ref={ref} {...attrs} />);
+
+      expect(ref.current).toHaveStyle({
+        top: '4px',
+        left: '8px',
+      });
     });
 
     const callbacks = {

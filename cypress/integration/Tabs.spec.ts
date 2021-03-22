@@ -260,8 +260,8 @@ describe('Tabs', () => {
           cy.focused().type('{leftarrow}');
         });
 
-        it('should focus on Tab 3', () => {
-          cy.findByRole('tab', {name: 'Tab 3'}).should('be.focused');
+        it('should focus on Tab 4', () => {
+          cy.findByRole('tab', {name: 'Tab 4'}).should('be.focused');
         });
       });
     });
@@ -276,20 +276,89 @@ describe('Tabs', () => {
           cy.focused().type('{backspace}');
         });
 
-        it('should remove "Tab 1"', () => {
-          cy.findByRole('tab', {name: 'Tab 1'}).should('not.exist');
-        });
-
-        it('should move focus to "Tab 2"', () => {
-          cy.findByRole('tab', {name: 'Tab 2'}).should('have.focus');
-        });
-
+        // Tab activation should move to the right if activated tab is removed
         it('should have "aria-selected=true" for "Tab 2"', () => {
           cy.findByRole('tab', {name: 'Tab 2'}).should('have.attr', 'aria-selected', 'true');
         });
 
         it('should show "Tab 2" contents', () => {
           cy.findByRole('tabpanel', {name: 'Tab 2'}).should('contain', 'Contents of Tab 2');
+        });
+      });
+    });
+
+    context('when "Tab 3" is activated', () => {
+      beforeEach(() => {
+        cy.findByRole('tab', {name: 'Tab 3'}).click();
+      });
+
+      context('then the left arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.focused().type('{leftarrow}');
+        });
+
+        context('then the Backspace/Delete key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().type('{backspace}');
+          });
+
+          it('should remove "Tab 2"', () => {
+            cy.findByRole('tab', {name: 'Tab 2'}).should('not.exist');
+          });
+
+          // Focus moves to the right if focused tab is deleted
+          it('should move focus to "Tab 3"', () => {
+            cy.findByRole('tab', {name: 'Tab 3'}).should('have.focus');
+          });
+
+          // Tab activation should not change if a non-activated tab is deleted
+          it('should have "aria-selected=true" for "Tab 3"', () => {
+            cy.findByRole('tab', {name: 'Tab 3'}).should('have.attr', 'aria-selected', 'true');
+          });
+
+          it('should show "Tab 3" contents', () => {
+            cy.findByRole('tabpanel', {name: 'Tab 3'}).should('contain', 'Contents of Tab 3');
+          });
+
+          context('then the Backspace/Delete key is pressed again', () => {
+            beforeEach(() => {
+              cy.focused().type('{backspace}');
+            });
+
+            // Focus moves to the right if focused tab is deleted again
+            it('should move focus to "Add Tab"', () => {
+              cy.findByRole('tab', {name: 'Add Tab'}).should('have.focus');
+            });
+          });
+        });
+      });
+
+      context('then the left arrow key is pressed twice', () => {
+        beforeEach(() => {
+          cy.focused().type('{leftarrow}{leftarrow}');
+        });
+
+        context('then the Backspace/Delete key is pressed', () => {
+          beforeEach(() => {
+            cy.focused().type('{backspace}');
+          });
+
+          it('should remove "Tab 1"', () => {
+            cy.findByRole('tab', {name: 'Tab 1'}).should('not.exist');
+          });
+
+          it('should move focus to "Tab 2"', () => {
+            cy.findByRole('tab', {name: 'Tab 2'}).should('have.focus');
+          });
+
+          // Tab activation should not change if a non-activated tab is deleted
+          it('should have "aria-selected=true" for "Tab 3"', () => {
+            cy.findByRole('tab', {name: 'Tab 3'}).should('have.attr', 'aria-selected', 'true');
+          });
+
+          it('should show "Tab 3" contents', () => {
+            cy.findByRole('tabpanel', {name: 'Tab 3'}).should('contain', 'Contents of Tab 3');
+          });
         });
       });
     });

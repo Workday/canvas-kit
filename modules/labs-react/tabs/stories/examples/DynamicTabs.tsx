@@ -7,6 +7,7 @@ export const DynamicTabs = () => {
   const [tabs, setTabs] = React.useState([
     {tab: 'Tab 1', name: 'tab-1'},
     {tab: 'Tab 2', name: 'tab-2'},
+    {tab: 'Tab 3', name: 'tab-3'},
   ]);
   const addedRef = React.useRef(tabs.length);
   const model = useTabsModel({

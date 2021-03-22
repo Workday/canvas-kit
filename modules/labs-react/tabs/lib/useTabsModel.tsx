@@ -8,6 +8,7 @@ import {
   BaseCursorModelConfig,
   Orientation,
   CursorModelConfig,
+  getNext,
 } from './cursor/useCursorModel';
 import {Item, ListEvents, ListState, useListModel} from './list/useListModel';
 
@@ -119,15 +120,23 @@ export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
       setActiveTab(data.tab);
       events.goTo({id: data.tab});
     },
+    registerItem(data) {
+      if (!initialTabRef.current) {
+        initialTabRef.current = data.item.id;
+        setActiveTab(initialTabRef.current);
+      }
+      cursor.events.registerItem(data);
+    },
+    unregisterItem(data) {
+      // Activate the next tab if the current one is removed
+      if (state.activeTab === data.id && state.items.some(i => i.ref.current !== null)) {
+        const item = getNext(state.activeTab, state.items);
+        events.activate({tab: item.id});
+      }
+      cursor.events.unregisterItem(data);
+    },
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,
-  });
-
-  events.useSubscription('registerItem', ({data}) => {
-    if (!initialTabRef.current) {
-      initialTabRef.current = data.item.id;
-      setActiveTab(initialTabRef.current);
-    }
   });
 
   return {
