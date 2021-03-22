@@ -2,6 +2,10 @@
 
 A Modal component that allows you to render a Popup with a translucent overlay.
 
+<a href="../README.md">
+  <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+</a>
+
 ## Installation
 
 ```sh

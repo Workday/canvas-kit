@@ -2,6 +2,10 @@
 
 The bundle package containing all modules of the Canvas CSS Kit.
 
+<img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+
+**In Canvas Kit v5, this package and it's components will be going into maintenance mode due to the infrequent use of our CSS modules. We will still support `@workday/canvas-kit-css` with bug fixes and significant visual updates, but it generally won't be receiving new components, additional features, etc. This will allow us to provide more focused support, and dedicate our efforts to making bigger and better improvements to our most used components: Canvas Kit React. If you have questions or concerns, please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=&template=question.md).**
+
 ## Usage
 
 Canvas Kit CSS uses tilde `~` imports to resolve imports to your project's node_modules directory.

@@ -3,6 +3,10 @@
 Canvas Kit Layout is based on a 12 column grid. It uses the flexbox layout for positioning of
 columns.
 
+<a href="../README.md">
+  <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+</a>
+
 ## Installation
 
 ```sh

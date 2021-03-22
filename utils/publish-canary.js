@@ -101,7 +101,7 @@ exec('git diff --name-only HEAD HEAD^')
       author_name: `New canary build published (v${data.version})`,
       title: `Merge commit ${data.sha}`,
       title_link: `https://github.com/Workday/canvas-kit/commit/${data.sha}`,
-      text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@next\`\n`,
+      text: `\`yarn add @workday/canvas-kit-{module}@${data.version}\`\nor\n\`yarn add @workday/canvas-kit-{module}@${distTag}\`\n`,
     });
   })
   .catch(err => {
