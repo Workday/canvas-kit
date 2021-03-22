@@ -2,6 +2,10 @@
 
 Tooltips with modifiers and containers implementing display on hover.
 
+<a href="../README.md">
+  <img src="https://img.shields.io/badge/-maintenance mode-important" alt="Mainenance Mode" />
+</a>
+
 [> Workday Design Reference](https://design.workday.com/components/popups/tooltips)
 
 ## Installation
