@@ -64,10 +64,10 @@
       }
 
       &.wdc-menu-item-focused {
-        background-color: $wdc-color-main;
+        background-color: $wdc-color-primary-main;
 
         &.wdc-menu-item-disabled {
-          background-color: $wdc-color-light;
+          background-color: $wdc-color-primary-light;
         }
       }
 
