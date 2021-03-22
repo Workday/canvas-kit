@@ -153,39 +153,37 @@ export const useEventMap = <
   eventsRef.current = events;
 
   const processedEvents = React.useMemo(() => {
-    return {
-      ...keys(eventsRef.current).reduce((result, key) => {
-        result[key] = (data => {
-          // Invoke the configured guard if there is one
-          const guardFn = keys(eventMapRef.current.guards || {}).find(k => {
-            return (eventMapRef.current.guards || {})[k] === key;
-          });
+    return keys(eventsRef.current).reduce((result, key) => {
+      result[key] = (data => {
+        // Invoke the configured guard if there is one
+        const guardFn = keys(eventMapRef.current.guards || {}).find(k => {
+          return (eventMapRef.current.guards || {})[k] === key;
+        });
 
-          if (
-            guardFn &&
-            configRef.current?.[guardFn] &&
-            //@ts-ignore Typescript doesn't like that the call signatures are different
-            !configRef.current[guardFn]({data, state: stateRef.current})
-          ) {
-            return;
-          }
+        if (
+          guardFn &&
+          configRef.current?.[guardFn] &&
+          //@ts-ignore Typescript doesn't like that the call signatures are different
+          !configRef.current[guardFn]({data, state: stateRef.current})
+        ) {
+          return;
+        }
 
-          // call the event (setter)
-          eventsRef.current[key](data);
+        // call the event (setter)
+        eventsRef.current[key](data);
 
-          // Invoke the configured callback if there is one
-          const callbackFn = keys(eventMapRef.current.callbacks || {}).find(k => {
-            return (eventMapRef.current.callbacks || {})[k] === key;
-          });
+        // Invoke the configured callback if there is one
+        const callbackFn = keys(eventMapRef.current.callbacks || {}).find(k => {
+          return (eventMapRef.current.callbacks || {})[k] === key;
+        });
 
-          if (callbackFn && configRef.current?.[callbackFn]) {
-            //@ts-ignore Typescript doesn't like that the call signatures are different
-            configRef.current[callbackFn]({data, prevState: stateRef.current});
-          }
-        }) as TEvents[keyof TEvents]; // this cast keeps Typescript happy
-        return result;
-      }, {} as TEvents),
-    };
+        if (callbackFn && configRef.current?.[callbackFn]) {
+          //@ts-ignore Typescript doesn't like that the call signatures are different
+          configRef.current[callbackFn]({data, prevState: stateRef.current});
+        }
+      }) as TEvents[keyof TEvents]; // this cast keeps Typescript happy
+      return result;
+    }, {} as TEvents);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
