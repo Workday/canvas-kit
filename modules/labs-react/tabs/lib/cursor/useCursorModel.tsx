@@ -141,24 +141,16 @@ export const useCursorModel = (config: CursorModelConfig = {}): CursorModel => {
       setCursorId(id);
     },
     next() {
-      // if (hasItems(state.items)) {
       setCursorId(getNext(state.cursorId, state.items).id);
-      // }
     },
     previous() {
-      // if (hasItems(state.items)) {
       setCursorId(getPrevious(state.cursorId, state.items).id);
-      // }
     },
     first() {
-      // if (hasItems(state.items)) {
       setCursorId(getFirst(state.items).id);
-      // }
     },
     last() {
-      // if (hasItems(state.items)) {
       setCursorId(getLast(state.items).id);
-      // }
     },
   });
 
