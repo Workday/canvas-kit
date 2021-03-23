@@ -16,7 +16,7 @@
 @mixin wdc-show-outlines() {
   @include wdc-focusable-elements() {
     text-decoration: none;
-    outline: 2px solid $wdc-color-blueberry-500;
+    outline: 2px solid $wdc-color-primary-dark;
   }
 }
 
