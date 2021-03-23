@@ -1,4 +1,5 @@
 import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
+import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Simple} from './examples/Simple';
 import {NamedKeys} from './examples/NamedKeys';
@@ -7,6 +8,7 @@ import {DisabledTab} from './examples/DisabledTab';
 import {SinglePanel} from './examples/SinglePanel';
 import {AlternativeTabStop} from './examples/AlternativeTabStop';
 import {HoistedModel} from './examples/HoistedModel';
+import {DynamicTabs} from './examples/DynamicTabs';
 
 <Meta title="Labs/Tabs/React" component={Tabs} />
 
@@ -98,6 +100,15 @@ button to trigger an event to change the currently active tab.
 
 <ExampleCodeBlock code={HoistedModel} />
 
+#### Dynamic Tabs
+
+The `Tabs.Item` component takes in an optional `index` property if you want to specify the position
+of a tab. If not defined, by default it will append tabs to the end. For example, if your tabs are
+stored as an array in the state that can be added to along with a fixed tab that should remain at
+the end.
+
+<ExampleCodeBlock code={DynamicTabs} />
+
 ## Components
 
 ### Tabs
@@ -179,3 +190,7 @@ list. If a `name` is provided, it must match the name passed to the `Tabs.Item` 
 #### Component Props
 
 <PropsTable of={Tabs.Panel} />
+
+## Specifications
+
+<Specifications file="Tabs.spec.ts" name="Tabs" />

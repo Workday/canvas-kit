@@ -8,6 +8,7 @@ import {
   BaseCursorModelConfig,
   Orientation,
   CursorModelConfig,
+  getNext,
 } from './cursor/useCursorModel';
 import {Item, ListEvents, ListState, useListModel} from './list/useListModel';
 
@@ -100,31 +101,39 @@ export const useTabsModel = (config: TabsModelConfig = {}): TabsModel => {
   const initialTabRef = React.useRef(config.initialTab);
   const [activeTab, setActiveTab] = React.useState(initialTabRef.current || '');
 
-  const menu = useCursorModel({
+  const cursor = useCursorModel({
     orientation: config.orientation || 'horizontal',
     ...(config as CursorModelConfig),
-    onRegisterItem({data, state}) {
-      if (!initialTabRef.current) {
-        initialTabRef.current = data.item.id;
-        setActiveTab(initialTabRef.current);
-      }
-      config.onRegisterItem?.({data, state: state as TabsState});
-    },
   });
   const panels = useListModel();
 
   const state = {
-    ...menu.state,
+    ...cursor.state,
     activeTab,
     panels: panels.state.items,
     panelIndexRef: panels.state.indexRef,
   };
 
   const events = useEventMap(tabEventMap, state, config, {
-    ...menu.events,
+    ...cursor.events,
     activate(data) {
       setActiveTab(data.tab);
       events.goTo({id: data.tab});
+    },
+    registerItem(data) {
+      if (!initialTabRef.current) {
+        initialTabRef.current = data.item.id;
+        setActiveTab(initialTabRef.current);
+      }
+      cursor.events.registerItem(data);
+    },
+    unregisterItem(data) {
+      // Activate the next tab if the current one is removed
+      if (state.activeTab === data.id && state.items.some(i => i.ref.current !== null)) {
+        const item = getNext(state.activeTab, state.items);
+        events.activate({tab: item.id});
+      }
+      cursor.events.unregisterItem(data);
     },
     registerPanel: panels.events.registerItem,
     unregisterPanel: panels.events.unregisterItem,

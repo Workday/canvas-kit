@@ -35,7 +35,6 @@ describe('Tabs', () => {
     );
 
     fireEvent.click(screen.getByRole('tab', {name: 'Second Tab'}));
-
     expect(cb).toHaveBeenCalledWith(expect.objectContaining({data: {tab: 'second'}}));
   });
 });
