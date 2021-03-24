@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
 </a>  This component is work in progress and currently in pre-release.
 
-`Tabs` is a [Compound Component](../../../../COMPOUND_COMPONENTS.md).
+`Tabs` is a [Compound Component](../../../../modules/docs/mdx/COMPOUND_COMPONENTS.md).
 
 ## Installation
 

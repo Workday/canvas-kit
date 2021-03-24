@@ -1,3 +1,7 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Dev Docs/Compound Components" />
+
 # Compound Components
 
 ## What is a compound component?
@@ -144,7 +148,7 @@ const MyComponent = () => {
     // Clicking on the first tab will activate it, but clicking on the
     // second tab will do nothing
     return data.tab === 'first' ? true : false
-    
+
     // returning true allows the event to trigger a state change and will
     // also call the `onActivate` callback
   }
@@ -157,7 +161,7 @@ const MyComponent = () => {
     // called any time the `activate` event is triggered
     console.log('onActivate', data, prevState)
   }
-  
+
   return (
     <Tabs shouldActivate={shouldActivate} onActivate={onActivate}>
       <Tabs.List>
@@ -302,7 +306,7 @@ interface Model<
   events: E
 }
 ```
-    
+
 The Typescript interface of Callbacks and Guards looks like this:
 ```ts
 type Callback<EventData, State> = ({ data: EventData, state: State}) => void

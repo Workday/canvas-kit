@@ -1,3 +1,7 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome/Dev Docs/Creating Compound Components" />
+
 # Building a Compound Component
 
 Refer to the [Compound Component documentation](./COMPOUND\_COMPONENTS.md) document to learn about what a compound component is.
@@ -62,11 +66,11 @@ export type DisclosureConfig = {
 
 export const useDisclosureModel = (config: DisclosureConfig = {}) => {
   const [open, setOpen] = React.useState(config.initialOpen || false)
-  
+
   const state = {
     open,
   }
-  
+
   const events = {
     open() {
       setOpen(true)
@@ -78,7 +82,7 @@ export const useDisclosureModel = (config: DisclosureConfig = {}) => {
       setOpen(!open)
     }
   }
-  
+
   return { state, events }
 }
 ```
@@ -88,7 +92,7 @@ Models aren't very complicated so far. We have a single `open` state property an
 ```tsx
 const Test = () => {
   const model = useDisclosureModel()
-  
+
   return (
     <>
       <button
@@ -178,7 +182,7 @@ const Test = () => {
       console.log("onToggle", data, prevState)
     }
   })
-  
+
   return (
    <>
       <button
@@ -611,7 +615,7 @@ We can now add `aria-controls` to `DisclosureTarget` and `id` to `DisclosureCont
         {children}
       </Element>
     )
-    
+
 // ...
 ```
 
