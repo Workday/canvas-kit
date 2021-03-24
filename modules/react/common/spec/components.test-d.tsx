@@ -15,7 +15,7 @@ it('should add sub-components to the signature', () => {
       Foo: 'bar',
     },
   });
-  expectTypeOf(component).toEqualTypeOf<ElementComponent<'div', {foo: 'bar'}> & {Foo: number}>();
+  expectTypeOf(component).toEqualTypeOf<ElementComponent<'div', {foo: 'bar'}> & {Foo: string}>();
 });
 
 it('should assign ref and Element correctly for element components', () => {
