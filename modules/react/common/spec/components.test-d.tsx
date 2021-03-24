@@ -42,10 +42,8 @@ it('should assign ref and Element correctly for createComponent components', () 
 
 it('should allow a valid ref when wrapping components', () => {
   const Component = createComponent('button')({Component: (props: {}) => null});
+  const ref: React.RefObject<HTMLButtonElement> = {current: null};
 
-  createComponent('button')({
-    Component: (props: {}, ref, Element) => {
-      return <Component ref={ref} />;
-    },
-  });
+  // No expectation, but the next line will fail if the ref signature isn't valid and it should be
+  return <Component ref={ref} />;
 });
