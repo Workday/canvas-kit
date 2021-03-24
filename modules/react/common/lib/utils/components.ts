@@ -9,6 +9,26 @@ export type StyledType = {
 };
 
 /**
+ * Extract a Ref from T if it exists
+ * This will return the following:
+ *
+ * - `undefined` => `never`
+ * - `'button'` => `React.Ref<HTMLButtonElement>`
+ * - `ElementComponent<'button', ButtonProps>` => `React.Ref<HTMLButtonElement>`
+ */
+type ExtractRef<T> = T extends undefined // test if T was even passed in
+  ? never // T not passed in, we'll set the ref to `never`
+  : React.Ref<
+      T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
+        ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
+        : T extends ElementComponent<infer U, any> // if no, check if we can infer the the element type from a `Component` interface
+        ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
+          ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
+          : U // if no, fall back to inferred U
+        : T // if no, fall back to T
+    >;
+
+/**
  * Generic component props with "as" prop
  * @template P Additional props
  * @template ElementType React component or string element
@@ -29,7 +49,7 @@ export type PropsWithAs<
          * If `as` is a component, the reference will be to that component (or element if the component
          * uses `React.forwardRef`).
          */
-        ref?: React.Ref<ElementType>;
+        ref?: ExtractRef<ElementType>;
       };
 
 /**
@@ -59,17 +79,7 @@ export type Component<P> = {
 interface RefForwardingComponent<T, P = {}> {
   (
     props: React.PropsWithChildren<P> & {as?: React.ReactElement<any>},
-    ref: T extends undefined // test if T was even passed in
-      ? never // T not passed in, we'll set the ref to `never`
-      : React.Ref<
-          T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
-            ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
-            : T extends ElementComponent<infer U, any> // if no, check if we can infer the the element type from a `Component` interface
-            ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
-              ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
-              : U // if no, fall back to inferred U
-            : T // if no, fall back to T
-        >,
+    ref: ExtractRef<T>,
     as: T extends undefined ? never : T
   ): React.ReactElement | null;
 }
