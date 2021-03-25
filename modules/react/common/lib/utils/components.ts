@@ -9,34 +9,46 @@ export type StyledType = {
 };
 
 /**
+ * Extract a Ref from T if it exists
+ * This will return the following:
+ *
+ * - `undefined` => `never`
+ * - `'button'` => `React.Ref<HTMLButtonElement>`
+ * - `ElementComponent<'button', ButtonProps>` => `React.Ref<HTMLButtonElement>`
+ */
+type ExtractRef<T> = T extends undefined // test if T was even passed in
+  ? never // T not passed in, we'll set the ref to `never`
+  : React.Ref<
+      T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
+        ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
+        : T extends ElementComponent<infer U, any> // if no, check if we can infer the the element type from an `ElementComponent` interface
+        ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
+          ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
+          : U // if no, fall back to inferred U. Hopefully it is already an element interface
+        : T // if no, fall back to T. Hopefully it is already an element interface
+    >;
+
+/**
  * Generic component props with "as" prop
  * @template P Additional props
  * @template ElementType React component or string element
  */
-export type PropsWithAs<
-  P,
-  ElementType extends React.ElementType | undefined
-> = ElementType extends undefined
-  ? P
-  : P &
-      Omit<
-        React.ComponentProps<ElementType extends undefined ? 'section' : ElementType>,
-        'as' | 'state' | keyof P
-      > & {
-        /**
-         * Optional ref. If the component represents and element, this will ref will be a reference to
-         * the real DOM element of the component. If `as` is set to an element, it will be that element.
-         * If `as` is a component, the reference will be to that component (or element if the component
-         * uses `React.forwardRef`).
-         */
-        ref?: React.Ref<ElementType>;
-      };
+export type PropsWithAs<P, ElementType extends React.ElementType> = P &
+  Omit<React.ComponentProps<ElementType>, 'as' | 'state' | keyof P> & {
+    /**
+     * Optional ref. If the component represents and element, this will ref will be a reference to
+     * the real DOM element of the component. If `as` is set to an element, it will be that element.
+     * If `as` is a component, the reference will be to that component (or element if the component
+     * uses `React.forwardRef`).
+     */
+    ref?: ExtractRef<ElementType>;
+  };
 
 /**
  * Component type that allows for `as` to change the element or component type.
  * Passing `as` will correctly change the allowed interface of the JSX element
  */
-export type ElementComponent<T extends React.ElementType | undefined, P> = {
+export type ElementComponent<T extends React.ElementType, P> = {
   <ElementType extends React.ElementType>(
     props: PropsWithAs<P, ElementType> & {
       /**
@@ -59,18 +71,17 @@ export type Component<P> = {
 interface RefForwardingComponent<T, P = {}> {
   (
     props: React.PropsWithChildren<P> & {as?: React.ReactElement<any>},
-    ref: T extends undefined // test if T was even passed in
-      ? never // T not passed in, we'll set the ref to `never`
-      : React.Ref<
-          T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
-            ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
-            : T extends ElementComponent<infer U, any> // if no, check if we can infer the the element type from a `Component` interface
-            ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
-              ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
-              : U // if no, fall back to inferred U
-            : T // if no, fall back to T
-        >,
-    as: T extends undefined ? never : T
+    /**
+     * A ref to be forwarded. Pass it along to the root element. If not element was passed, this
+     * will result in a `never`
+     */
+    ref: ExtractRef<T>,
+    /**
+     * An element - either a JSX element or a `ElementComponent`. This should be passed as an `as`
+     * to a root element or be the root element. If no element was passed, this will result in a
+     * `never`
+     */
+    Element: T extends undefined ? never : T
   ): React.ReactElement | null;
 }
 
@@ -94,9 +105,18 @@ export const createComponent = <T extends React.ElementType | undefined = undefi
   /** The component function. The function looks like:
    * @example
    * Component: ({children}, ref, Element) {
-   *   // `Element` is what's passed to the `as` of your component. It will be 'div' or even a another Component!
+   *   // `Element` is what's passed to the `as` of your component. If no `as` was defined, it
+   *   // will be the default element. It will be 'div' or even a another Component!
    *   return (
    *     <Element ref={ref}>{children}</Element>
+   *   )
+   * }
+   *
+   * @example
+   * Component: ({children}, ref, Element) {
+   *   // `Element` can be passed via `as` to the next component
+   *   return (
+   *     <AnotherElement as={Element} ref={ref}>{children}</AnotherElement>
    *   )
    * }
    */
@@ -105,12 +125,22 @@ export const createComponent = <T extends React.ElementType | undefined = undefi
    * Used in container components
    */
   subComponents?: SubComponents;
-}): (T extends undefined ? Component<P> : ElementComponent<T, P>) & SubComponents => {
+}): (T extends undefined
+  ? Component<P>
+  : ElementComponent<
+      // T is not `undefined` here, but Typescript thinks it could be, so we add another `undefined`
+      // check and cast to a `React.FC` to match a valid signature for `ElementComponent`.
+      // `React.FC` was chosen as the simplest valid interface.
+      T extends undefined ? React.FC : T,
+      P
+    >) &
+  SubComponents => {
   const ReturnedComponent = React.forwardRef<T, P & {as?: React.ElementType}>(
     ({as: asOverride, ...props}, ref) => {
       return Component(
         props as P,
-        //@ts-ignore Problems with type constraints of T and T extends ElementTagName ? ... This doesn't cause a problem, not sure it is worth fixing
+        // @ts-ignore React considers no passed ref as `null`, Typescript considers this
+        // `undefined`. It works at runtime, so I don't think this is fixable or worth fixing.
         ref,
         asOverride || as
       );
@@ -131,8 +161,8 @@ function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
     if (typeof ref === 'function') {
       ref(value);
     } else {
-      // @ts-ignore Refs are readonly, but we can technically write to it without issue
-      ref.current = value;
+      // Refs are readonly, but we can technically write to it without issue
+      (ref as React.MutableRefObject<T>).current = value;
     }
   }
 }
@@ -232,12 +262,17 @@ export function useModelContext<T>(context: React.Context<T>, model?: T): T {
  * receive a model and return props to be applied to a component. These props should always be
  * applied last on the Component. The props will override as follows: rightmost hook props override
  * leftmost hook props which are overridden by props passed to the composeHooks function.
+ *
+ * A `ref` should be passed for hooks that require a ref. Each hook should fork the ref using
+ * `useLocalRef`, passing the `elementRef` in the returned props object. This ref will be passed to
+ * the next hook.
+ *
  * @example
- * const MyComponent = ({ children, model, ...elemProps }) => {
- *   const props = composeHooks(useHook1, useHook2)(model, elemProps)
+ * const MyComponent = React.forwardRef(({ children, model, ...elemProps }, ref) => {
+ *   const props = composeHooks(useHook1, useHook2)(model, elemProps, ref)
  *
  *   return <div id="foo" {...props}>{children}</div>
- * }
+ * })
  */
 export function composeHooks<M, R, P extends {}, O1 extends {}, O2 extends {}>(
   hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
