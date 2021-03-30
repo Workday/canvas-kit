@@ -14,6 +14,13 @@ const {_: commands, path} = require('yargs')
       describe: 'The path to execute the transform in (recursively).'.gray,
     });
   })
+  .command('space [path]', 'Canvas Kit space transform'.gray, yargs => {
+    yargs.positional('path', {
+      type: 'string',
+      default: '.',
+      describe: 'The path to execute the transform in (recursively).'.gray,
+    });
+  })
   .demandCommand(1, 'You must provide a transform to apply.'.red.bold)
   .strictCommands()
   .fail((msg, err, yargs) => {
