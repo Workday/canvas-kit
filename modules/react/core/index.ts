@@ -4,7 +4,8 @@ import {borderRadius} from './lib/radius';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
 import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
 import InputProvider from './lib/InputProvider';
-import spacing, {
+import {
+  space,
   CanvasSpacing,
   CanvasSpacingNumber,
   CanvasSpacingValue,
@@ -17,7 +18,7 @@ const {default: colors, gradients, ...semanticColors} = canvasColorsWeb;
 const canvas = {
   colors,
   depth,
-  spacing,
+  space,
   type,
   fontFamily,
   monoFontFamily,
@@ -31,7 +32,7 @@ export {
   colors,
   gradients,
   depth,
-  spacing,
+  space,
   spacingNumbers,
   type,
   fontFamily,
