@@ -6,11 +6,11 @@ import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
 import InputProvider from './lib/InputProvider';
 import {
   space,
-  CanvasSpacing,
-  CanvasSpacingNumber,
-  CanvasSpacingValue,
-  spacingNumbers,
-} from './lib/spacing';
+  CanvasSpace,
+  CanvasSpaceNumbers,
+  CanvasSpaceValue,
+  spaceNumbers,
+} from './lib/space';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
 import {CSSProperties} from './lib/types';
 
@@ -33,15 +33,15 @@ export {
   gradients,
   depth,
   space,
-  spacingNumbers,
+  spaceNumbers,
   type,
   fontFamily,
   monoFontFamily,
   BrandingColor,
   CanvasDepth,
   CanvasDepthValue,
-  CanvasSpacing,
-  CanvasSpacingValue,
+  CanvasSpace,
+  CanvasSpaceValue,
   CSSProperties,
   InputProvider,
 };
@@ -49,7 +49,7 @@ export default canvas;
 
 export type {
   CanvasColor,
-  CanvasSpacingNumber,
+  CanvasSpaceNumbers,
   CanvasType,
   CanvasTypeVariant,
 }
