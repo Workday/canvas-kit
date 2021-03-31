@@ -886,14 +886,16 @@ describe('Select', () => {
       h.stories.load('Testing/React/Labs/Select', 'Portal Test');
     });
 
-    context(
-      'when the page is scrolled to the bottom and the bottommost select button is clicked',
-      () => {
+    context('when the page is scrolled to the bottom', () => {
+      beforeEach(() => {
+        cy.scrollTo('bottom');
+        cy.window()
+          .its('scrollY')
+          .as('originalWindowScrollY');
+      });
+
+      context('when the bottommost select button is clicked', () => {
         beforeEach(() => {
-          cy.scrollTo('bottom');
-          cy.window()
-            .its('scrollY')
-            .as('originalWindowScrollY');
           cy.findByLabelText('Label (Bottom)').click();
         });
 
@@ -904,8 +906,26 @@ describe('Select', () => {
             });
           });
         });
-      }
-    );
+      });
+
+      context(
+        `when the blur test button is clicked and then the bottommost select button (which is re-rendered by the test button's blur handler) is clicked`,
+        () => {
+          beforeEach(() => {
+            cy.findByTestId('blur-test-button').click();
+            cy.findByLabelText('Label (Bottom)').click();
+          });
+
+          context('the page', () => {
+            it('should not scroll', () => {
+              cy.window().then($window => {
+                cy.get('@originalWindowScrollY').should('equal', $window.scrollY);
+              });
+            });
+          });
+        }
+      );
+    });
   });
 
   context(`given the "Accessibility Test" story is rendered`, () => {

@@ -248,6 +248,64 @@ export const DisabledOptionsTest = () => (
   </div>
 );
 
+const BlurTest = () => {
+  const [counter, setCounter] = React.useState(0);
+  const handleBlur = () => {
+    // Force an update on blur by incrementing counter
+    setCounter(counter + 1);
+    setClicked(false);
+  };
+
+  const [clicked, setClicked] = React.useState(false);
+  const handleClick = () => {
+    setClicked(true);
+  };
+
+  return (
+    <>
+      <div style={{height: '100vh'}}>Empty filler (scroll down)</div>
+      <p>The following test checks against a very specific issue encountered in the past:</p>
+      <ol>
+        <li>
+          There's a long (scrollable) form. After some amount of scrolling, you encounter a text
+          input and a Select. The text input has a blur handler which re-renders the Select.
+        </li>
+        <li>You click on the text input to give it focus.</li>
+        <li>
+          You click on the Select. This triggers both the blur handler for the text input (which
+          re-renders the Select) and the activation of the Select Menu.
+        </li>
+        <li>
+          The page scrolls to the very top. You then need to scroll back down to access the Menu you
+          just activated.
+        </li>
+      </ol>
+      <p>
+        The underlying issue was likely a timing issue given the portalled nature of the Select Menu
+        and the fact that the Menu is given DOM focus when it's visible -- if we assign focus to the
+        Menu at the wrong moment (before the Menu has been properly positioned and visually attached
+        to the Select button), we can cause the browser to scroll to the top (where the Menu is
+        technically located before it's been positioned).
+      </p>
+      <p>
+        To run the test, click on the "Click me first!" button, and then click directly on the
+        Select below it (directly on the Select itself, <strong>not</strong> the label). Clicking on
+        the button and then directly on the Select triggers a blur on the button; the blur handler
+        for the button will then force an immediate re-render of the Select.{' '}
+        <strong>No scrolling should occur when the Select is clicked.</strong>
+      </p>
+      <button onBlur={handleBlur} onClick={handleClick} data-testid="blur-test-button">
+        {clicked
+          ? 'Clicked! Now click directly on the Select below (not the label)'
+          : 'Click me first!'}
+      </button>
+      <FormField label="Label (Bottom)" inputId="select-bottom" style={{marginTop: '10px'}}>
+        {controlComponent(<Select name="contact" options={options} />)}
+      </FormField>
+    </>
+  );
+};
+
 export const PortalTest = () => (
   <div>
     <Container>
@@ -308,10 +366,7 @@ export const PortalTest = () => (
       <SelectModal />
     </Container>
     <Container>
-      <p>This Select is forced to display its menu upwards since it's at the bottom the page.</p>
-      <FormField label="Label (Bottom)" inputId="select-bottom" error={FormField.ErrorType.Error}>
-        {controlComponent(<Select name="contact" options={options} />)}
-      </FormField>
+      <BlurTest />
     </Container>
   </div>
 );
