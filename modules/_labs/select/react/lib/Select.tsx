@@ -486,7 +486,18 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
 
     if (isShortcut) {
+      // Call stopPropagation here to limit shortcut key handling to the Select
+      // component. Otherwise, for example, using the typeahead feature of the
+      // Select would end up triggering a number of undesired if actions if the
+      // containing application supports its own keyboard shortcuts.
       event.stopPropagation();
+
+      // Call preventDefault here to maintain control of what happens when
+      // handling shortcut keys. For example, without this call, pressing the
+      // down arrow key would scroll the menu down (since the menu has DOM
+      // focus while its visible and scrolling is the default behavior of the
+      // down arrow key). Instead, we want to provide our own custom behavior
+      // of assistively focusing the next option.
       event.preventDefault();
     }
   };

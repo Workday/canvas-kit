@@ -312,6 +312,9 @@ const SelectBase = ({
         ...(onOptionSelection
           ? {
               onClick: (event: React.MouseEvent) => {
+                // TODO: Figure out why this preventDefault call exists.
+                // Removing it doesn't have any obvious consequences,
+                // but need to do more careful testing.
                 event.preventDefault();
                 onOptionSelection(index);
               },
