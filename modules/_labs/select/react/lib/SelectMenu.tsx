@@ -2,7 +2,12 @@ import React, {useState, useEffect, useLayoutEffect, useCallback} from 'react';
 
 import {CSSObject} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react-common';
-import {Placement, Popper, useCloseOnEscape} from '@workday/canvas-kit-react-popup';
+import {
+  Placement,
+  Popper,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+} from '@workday/canvas-kit-react-popup';
 import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react-core';
 
 import {SelectProps} from './Select';
@@ -25,6 +30,10 @@ interface SelectMenuProps
    * The function called when the Escape key is pressed while the SelectMenu is the topmost element in the stack.
    */
   onCloseOnEscape?: () => void;
+  /**
+   * The function called when a click occurs outside the SelectMenu while it's the topmost element in the stack.
+   */
+  onCloseOnOutsideClick?: () => void;
   /**
    * The placement of the SelectMenu relative to its corresponding button.
    * @default 'bottom'
@@ -221,6 +230,7 @@ const SelectMenu = ({
   error,
   menuRef,
   onCloseOnEscape,
+  onCloseOnOutsideClick,
   placement = 'bottom',
   shouldAutoFlip = true,
   shouldAutoFocus = true,
@@ -258,14 +268,7 @@ const SelectMenu = ({
   }, [handleWidthChange]);
 
   useCloseOnEscape(popupRef, () => onCloseOnEscape?.());
-
-  // TODO: use the useCloseOnOutsideClick hook after it's been modified to handle
-  // multiple things happening on the same click. Currently, the hook doesn't
-  // support the use case where one Select Menu is activated by clicking on its
-  // Select Button while another Select Menu is already active (both Menus are
-  // visible instead of the original Menu dismissing). In order to support the
-  // correct behavior for now, we're dismissing the Menu on blur instead of
-  // using the hook.
+  useCloseOnOutsideClick(popupRef, () => onCloseOnOutsideClick?.());
 
   return (
     <Popper
