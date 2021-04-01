@@ -67,22 +67,22 @@ const SelectModal = () => {
 };
 
 const BlurTest = () => {
-  const [counter, setCounter] = React.useState(0);
-  const handleBlur = () => {
-    // Force an update on blur by incrementing counter
-    setCounter(counter + 1);
+  const [clicked, setClicked] = React.useState(false);
+
+  const handleButtonBlur = () => {
+    // Setting clicked updates the state of BlurTest which in turn causes
+    // the contained Select to re-render
     setClicked(false);
   };
 
-  const [clicked, setClicked] = React.useState(false);
-  const handleClick = () => {
+  const handleButtonClick = () => {
     setClicked(true);
   };
 
   return (
     <>
       <div style={{height: '100vh'}}>Empty filler (scroll down)</div>
-      <p>The following test checks against a very specific issue encountered in the past:</p>
+      <p>The following test checks against a timing issue encountered in the past:</p>
       <ol>
         <li>
           There's a long (scrollable) form. After some amount of scrolling, you encounter a text
@@ -112,7 +112,7 @@ const BlurTest = () => {
         for the button will then force an immediate re-render of the Select.{' '}
         <strong>No scrolling should occur when the Select is clicked.</strong>
       </p>
-      <button onBlur={handleBlur} onClick={handleClick} data-testid="blur-test-button">
+      <button onBlur={handleButtonBlur} onClick={handleButtonClick} data-testid="blur-test-button">
         {clicked
           ? 'Clicked! Now click directly on the Select below (not the label)'
           : 'Click me first!'}
