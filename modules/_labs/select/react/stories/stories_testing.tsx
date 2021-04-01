@@ -82,34 +82,57 @@ const BlurTest = () => {
   return (
     <>
       <div style={{height: '100vh'}}>Empty filler (scroll down)</div>
-      <p>The following test checks against a timing issue encountered in the past:</p>
+      <h2>Blur Test</h2>
+      <p>
+        The following test checks against a timing issue where focus could be applied to the Select
+        Menu before it's been properly positioned, causing the browser to scroll to the top of the
+        page when clicking the Select Button to activate its Menu.
+      </p>
+      <h3>Context</h3>
+      <p>
+        The Select component consists of a Button (the collapsed form of the Select) and a Menu (the
+        dropdown menu displayed when you click on the Button or activate it using assistive
+        technology). The Menu has two important characteristics:
+      </p>
       <ol>
+        <li>DOM focus is applied to the Menu when it's visible.</li>
         <li>
-          There's a long (scrollable) form. After some amount of scrolling, you encounter a text
-          input and a Select. The text input has a blur handler which re-renders the Select.
-        </li>
-        <li>You click on the text input to give it focus.</li>
-        <li>
-          You click on the Select. This triggers both the blur handler for the text input (which
-          re-renders the Select) and the activation of the Select Menu.
-        </li>
-        <li>
-          The page scrolls to the very top. You then need to scroll back down to access the Menu you
-          just activated.
+          The Menu is portalled to another location in the DOM outside the DOM hierarchy of the
+          Select component (to enable it to break outside of Modals, for example). Because the Menu
+          is located some distance (DOM-wise) away from it's corresponding Button, it needs to be
+          positioned so that it's visually attached to its Button.
         </li>
       </ol>
       <p>
-        The underlying issue was likely a timing issue given the portalled nature of the Select Menu
-        and the fact that the Menu is given DOM focus when it's visible -- if we assign focus to the
-        Menu at the wrong moment (before the Menu has been properly positioned and visually attached
-        to the Select button), we can cause the browser to scroll to the top (where the Menu is
-        technically located before it's been positioned).
+        Focusing the Menu before it's been properly positioned next to the Button will cause the
+        browser to scroll to the wrong location (where the Menu was <strong>before</strong> it was
+        positioned next to the button -- this is generally the top of the page).
+      </p>
+      <h3>Test</h3>
+      <p>
+        The following test creates a scenario where such a timing issue could potentially occur:
+      </p>
+      <ol>
+        <li>The page is long (requires scrolling).</li>
+        <li>
+          There's a button and a Select near the bottom of the page. The button has a blur handler
+          which triggers a re-render of the Select.
+        </li>
+        <li>You click on the button to give it focus.</li>
+        <li>
+          You then click on the Select. This activates the Menu and immediately triggers the blur
+          handler for the button (which re-renders the Select).
+        </li>
+      </ol>
+      <p>
+        This creates a tricky situation where we could potentially assign focus to the Menu before
+        it's been positioned since we're re-rendering the Menu immediately after it's been
+        activated. If we assign focus too soon, the page will scroll to the top and you'll need to
+        scroll back down to access the Menu you just activated.
       </p>
       <p>
         To run the test, click on the "Click me first!" button, and then click directly on the
-        Select below it (directly on the Select itself, <strong>not</strong> the label). Clicking on
-        the button and then directly on the Select triggers a blur on the button; the blur handler
-        for the button will then force an immediate re-render of the Select.{' '}
+        Select below it (directly on the Select itself, <strong>not</strong> the label).{' '}
         <strong>No scrolling should occur when the Select is clicked.</strong>
       </p>
       <button onBlur={handleButtonBlur} onClick={handleButtonClick} data-testid="blur-test-button">
