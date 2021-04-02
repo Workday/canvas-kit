@@ -441,7 +441,6 @@ describe('Select', () => {
     });
   });
 
-  /*
   context('given the "Disabled Options Test" story is rendered', () => {
     beforeEach(() => {
       h.stories.load('Testing/React/Labs/Select', 'Disabled Options Test');
@@ -553,7 +552,6 @@ describe('Select', () => {
       });
     });
   });
-  */
 
   context(`given the "Scrollable" story is rendered`, () => {
     beforeEach(() => {
@@ -883,7 +881,6 @@ describe('Select', () => {
     );
   });
 
-  /*
   context(`given the "Portal Test" story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Testing/React/Labs/Select', 'Portal Test');
@@ -964,5 +961,4 @@ describe('Select', () => {
       });
     });
   });
-  */
 });
