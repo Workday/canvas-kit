@@ -10,7 +10,7 @@ Hooks.
 If you are building your own custom stacked UI components, use the [Popper](#popper) component along
 with our [hooks](#hooks). The `Popper` component and hooks work with the stack management system for
 correct rendering and accessibility behavior. If you cannot use `Popper`, use the
-[usePopupStack](#usepoupstack) hook to properly register and deregister the popup at the correct
+[usePopupStack](#usepopupstack) hook to properly register and deregister the popup at the correct
 time. If you cannot use our hooks, consider upgrading your component to use Hooks. If you cannot do
 that, you'll have to look up the `PopupStack` package for the direct API and have a look at the
 source code for our hooks into the `PopupStack` API.
