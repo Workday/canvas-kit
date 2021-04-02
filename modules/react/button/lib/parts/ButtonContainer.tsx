@@ -9,6 +9,7 @@ import {
   focusRing,
   styled,
   EmotionCanvasTheme,
+  StyledType,
 } from '@workday/canvas-kit-react/common';
 import {ButtonColors} from '../types';
 import {buttonLabelDataClassName} from './ButtonLabelData';
@@ -19,7 +20,6 @@ export interface ButtonContainerProps
   colors?: ButtonColors;
   /**
    * The size of the Button.
-   * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
   /**
@@ -68,7 +68,7 @@ function getIconColorSelectors(
 
 export const ButtonContainer = styled('button', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'size',
-})<ButtonContainerProps>(
+})<ButtonContainerProps & StyledType>(
   {
     ...type.body2,
     ...type.variant.button,

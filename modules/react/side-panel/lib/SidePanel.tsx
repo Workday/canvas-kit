@@ -221,10 +221,10 @@ export default class SidePanel extends React.Component<SidePanelProps, SidePanel
               openDirection={openDirection}
               aria-label={open ? closeNavigationAriaLabel : openNavigationAriaLabel}
               toggled={false}
-              size={IconButton.Size.Small}
+              size="small"
               onClick={this.onToggleClick}
               icon={this.toggleButtonDirection(open, openDirection)}
-              variant={IconButton.Variant.CircleFilled}
+              variant="circleFilled"
             />
           )}
         </SidePanelFooter>

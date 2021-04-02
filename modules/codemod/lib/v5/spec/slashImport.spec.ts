@@ -3,7 +3,7 @@
 import {defineInlineTest} from 'jscodeshift/dist/testUtils';
 import transform from '..';
 
-describe('Canvas Kit v5 Codemod', () => {
+describe('slashImport', () => {
   defineInlineTest(
     transform,
     {},
@@ -45,12 +45,12 @@ describe('Canvas Kit v5 Codemod', () => {
     transform,
     {},
     `
-    import Button from '@workday/canvas-kit-react-button';
+    import Card from '@workday/canvas-kit-react-card';
         `,
     `
-    import Button from "@workday/canvas-kit-react/button";
+    import Card from "@workday/canvas-kit-react/card";
         `,
-    'Updates default button import'
+    'Updates default card import'
   );
 
   defineInlineTest(

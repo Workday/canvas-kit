@@ -7,11 +7,7 @@ describe('Drawer', () => {
   test('should call a callback function', async () => {
     const cb = jest.fn();
     const {findByLabelText} = render(
-      <DrawerHeader
-        closeIconLabel={'Close'}
-        headerText={'Header Title'}
-        onClose={cb}
-      ></DrawerHeader>
+      <DrawerHeader closeIconAriaLabel={'Close'} title={'Header Title'} onClose={cb}></DrawerHeader>
     );
 
     fireEvent.click(await findByLabelText('Close'));
@@ -20,7 +16,7 @@ describe('Drawer', () => {
   });
 
   test('should not render a close icon button', async () => {
-    const {container} = render(<DrawerHeader headerText={'Header Title'} />);
+    const {container} = render(<DrawerHeader title={'Header Title'} />);
 
     expect(container.querySelector('svg')).not.toBeInTheDocument();
   });

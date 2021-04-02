@@ -8,25 +8,26 @@ import {
   withSnapshotsEnabled,
   customColorTheme,
 } from '../../../../../utils/storybook';
-import {DropdownButton} from '../../index';
+import {DropdownButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Dropdown Button',
   component: DropdownButton,
 });
 
-export const DropdownButtonStates = () => (
-  <StaticStates>
+export const DropdownButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
         variant: [
-          {value: DropdownButton.Variant.Primary, label: 'Primary'},
-          {value: DropdownButton.Variant.Secondary, label: 'Secondary'},
+          {value: 'primary', label: 'Primary'},
+          {value: 'secondary', label: 'Secondary'},
         ],
         size: [
-          {value: DropdownButton.Size.Medium, label: 'Medium'},
-          {value: DropdownButton.Size.Large, label: 'Large'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
         ],
       })}
       columnProps={stateTableColumnProps}
@@ -40,7 +41,9 @@ export const DropdownButtonStates = () => (
   </StaticStates>
 );
 
-export const DropdownButtonThemedStates = () => <DropdownButtonStates />;
+export const DropdownButtonThemedStates = () => (
+  <DropdownButtonStates theme={{canvas: customColorTheme}} />
+);
 DropdownButtonThemedStates.parameters = {
   canvasProviderDecorator: {
     theme: customColorTheme,

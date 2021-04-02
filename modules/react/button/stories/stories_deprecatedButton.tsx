@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {deprecated_Button as Button} from '../index';
+import {deprecated_Button as Button} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 storiesOf('Components/Buttons/Button/React/Deprecated', module)
@@ -12,29 +12,29 @@ storiesOf('Components/Buttons/Button/React/Deprecated', module)
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
-      <Button variant={Button.Variant.Primary}>Primary Button</Button>
-      <Button variant={Button.Variant.Primary} disabled={true}>
+      <Button variant="primary">Primary Button</Button>
+      <Button variant="primary" disabled={true}>
         Primary Button
       </Button>
 
       <h3>Medium Primary</h3>
-      <Button variant={Button.Variant.Primary} size={Button.Size.Medium}>
+      <Button variant="primary" size="medium">
         Primary Button
       </Button>
-      <Button variant={Button.Variant.Primary} size={Button.Size.Medium} disabled={true}>
+      <Button variant="primary" size="medium" disabled={true}>
         Primary Button
       </Button>
 
       <h3>Small Primary</h3>
-      <Button variant={Button.Variant.Primary} size={Button.Size.Small}>
+      <Button variant="primary" size="small">
         Primary Button
       </Button>
-      <Button variant={Button.Variant.Primary} size={Button.Size.Small} disabled={true}>
+      <Button variant="primary" size="small" disabled={true}>
         Primary Button
       </Button>
 
       <h3>Growing Primary</h3>
-      <Button variant={Button.Variant.Primary} grow={true}>
+      <Button variant="primary" grow={true}>
         Growing Primary Button
       </Button>
     </div>
@@ -42,29 +42,29 @@ storiesOf('Components/Buttons/Button/React/Deprecated', module)
   .add('Secondary', () => (
     <div className="story">
       <h3>Large Secondary</h3>
-      <Button variant={Button.Variant.Secondary}>Secondary Button</Button>
-      <Button variant={Button.Variant.Secondary} disabled={true}>
+      <Button variant="secondary">Secondary Button</Button>
+      <Button variant="secondary" disabled={true}>
         Secondary Button
       </Button>
 
       <h3>Medium Secondary</h3>
-      <Button variant={Button.Variant.Secondary} size={Button.Size.Medium}>
+      <Button variant="secondary" size="medium">
         Secondary Button
       </Button>
-      <Button variant={Button.Variant.Secondary} size={Button.Size.Medium} disabled={true}>
+      <Button variant="secondary" size="medium" disabled={true}>
         Secondary Button
       </Button>
 
       <h3>Small Secondary</h3>
-      <Button variant={Button.Variant.Secondary} size={Button.Size.Small}>
+      <Button variant="secondary" size="small">
         Secondary Button
       </Button>
-      <Button variant={Button.Variant.Secondary} size={Button.Size.Small} disabled={true}>
+      <Button variant="secondary" size="small" disabled={true}>
         Secondary Button
       </Button>
 
       <h3>Growing Secondary</h3>
-      <Button variant={Button.Variant.Secondary} grow={true}>
+      <Button variant="secondary" grow={true}>
         Growing Secondary Button
       </Button>
     </div>
@@ -72,29 +72,29 @@ storiesOf('Components/Buttons/Button/React/Deprecated', module)
   .add('Delete', () => (
     <div className="story">
       <h3>Large Delete</h3>
-      <Button variant={Button.Variant.Delete}>Delete Button</Button>
-      <Button variant={Button.Variant.Delete} disabled={true}>
+      <Button variant="delete">Delete Button</Button>
+      <Button variant="delete" disabled={true}>
         Delete Button
       </Button>
 
       <h3>Medium Delete</h3>
-      <Button variant={Button.Variant.Delete} size={Button.Size.Medium}>
+      <Button variant="delete" size="medium">
         Delete Button
       </Button>
-      <Button variant={Button.Variant.Delete} size={Button.Size.Medium} disabled={true}>
+      <Button variant="delete" size="medium" disabled={true}>
         Delete Button
       </Button>
 
       <h3>Small Delete</h3>
-      <Button variant={Button.Variant.Delete} size={Button.Size.Small}>
+      <Button variant="delete" size="small">
         Delete Button
       </Button>
-      <Button variant={Button.Variant.Delete} size={Button.Size.Small} disabled={true}>
+      <Button variant="delete" size="small" disabled={true}>
         Delete Button
       </Button>
 
       <h3>Growing Delete</h3>
-      <Button variant={Button.Variant.Delete} grow={true}>
+      <Button variant="delete" grow={true}>
         Growing Delete Button
       </Button>
     </div>

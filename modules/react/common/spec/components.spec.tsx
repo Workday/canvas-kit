@@ -173,29 +173,29 @@ describe('composeHooks', () => {
   });
 
   it('should merge properties from both hooks', () => {
-    const props = composeHooks(hook1, hook2)(model, {});
+    const props = composeHooks(hook1, hook2)(model, {}, null);
     expect(props).toHaveProperty('hook1', 'hook1');
     expect(props).toHaveProperty('hook2', 'hook2');
   });
 
   it('should overwrite props of the first hook with props from the second hook', () => {
-    const props = composeHooks(hook1, hook2)(model, {});
+    const props = composeHooks(hook1, hook2)(model, {}, null);
     expect(props).toHaveProperty('id', 'hook2');
   });
 
   it('should overwrite hook props with props passed in', () => {
-    const props = composeHooks(hook1, hook2)(model, {id: 'foo'});
+    const props = composeHooks(hook1, hook2)(model, {id: 'foo'}, null);
     expect(props).toHaveProperty('id', 'foo');
   });
 
   it('should set props that are derived from the model on both hooks', () => {
-    const props = composeHooks(hook1, hook2)(model, {});
+    const props = composeHooks(hook1, hook2)(model, {}, null);
     expect(props).toHaveProperty('first', 'first');
     expect(props).toHaveProperty('second', 'second');
   });
 
   it('should call hook both callbacks', () => {
-    const props = composeHooks(hook1, hook2)(model, {}) as {onClick: Function};
+    const props = composeHooks(hook1, hook2)(model, {}, null) as {onClick: Function};
     props.onClick({event: 'foo'});
     expect(spy1).toHaveBeenCalled();
     expect(spy1).toHaveBeenCalledWith({event: 'foo'});
@@ -205,7 +205,7 @@ describe('composeHooks', () => {
 
   it('should call hook both callbacks and passed in callback', () => {
     const spy3 = jest.fn();
-    const props = composeHooks(hook1, hook2)(model, {onClick: spy3}) as {onClick: Function};
+    const props = composeHooks(hook1, hook2)(model, {onClick: spy3}, null) as {onClick: Function};
     props.onClick({event: 'foo'});
     expect(spy1).toHaveBeenCalled();
     expect(spy1).toHaveBeenCalledWith({event: 'foo'});
@@ -223,7 +223,7 @@ describe('composeHooks', () => {
       mergeProps({id: number, foo: number, [`hook${number}`]: model.state.foo}, props)
     );
 
-    const props = composeHooks.apply(null, hooks)(model, {foo: 'baz'});
+    const props = composeHooks.apply(null, hooks as any)(model, {foo: 'baz'}, null);
     expect(props).toHaveProperty('id', 9);
     expect(props).toHaveProperty('hook1', 'bar');
     expect(props).toHaveProperty('foo', 'baz');

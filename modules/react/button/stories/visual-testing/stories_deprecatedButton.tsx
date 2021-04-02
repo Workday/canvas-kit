@@ -7,7 +7,7 @@ import {
   permutateProps,
   withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
-import {deprecated_Button as DeprecatedButton} from '../../index';
+import {deprecated_Button as DeprecatedButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 
 export default withSnapshotsEnabled({
@@ -20,14 +20,14 @@ export const DeprecatedButtonStates = () => (
     <ComponentStatesTable
       rowProps={permutateProps({
         variant: [
-          {value: DeprecatedButton.Variant.Primary, label: 'Primary'},
-          {value: DeprecatedButton.Variant.Secondary, label: 'Secondary'},
-          {value: DeprecatedButton.Variant.Delete, label: 'Deprecated'},
+          {value: 'primary', label: 'Primary'},
+          {value: 'secondary', label: 'Secondary'},
+          {value: 'delete', label: 'Deprecated'},
         ],
         size: [
-          {value: DeprecatedButton.Size.Small, label: 'Small'},
-          {value: DeprecatedButton.Size.Medium, label: 'Medium'},
-          {value: DeprecatedButton.Size.Large, label: 'Large'},
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
         ],
       })}
       columnProps={stateTableColumnProps}

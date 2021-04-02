@@ -4,7 +4,7 @@ import {jsx} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {DeleteButton} from '../index';
+import {DeleteButton} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 storiesOf('Components/Buttons/Button/React', module)
