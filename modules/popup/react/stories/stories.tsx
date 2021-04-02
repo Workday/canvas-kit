@@ -139,10 +139,12 @@ export const Accessible = () => {
   };
 
   /**
-   * An accessible popup comes with these expectations by default:
+   * Most accessible popups come with these expectations by default:
    * 1. Close on ESCAPE key
    * 2. Focus trap within the popup
    * 3. When the popup first opens, initial focus lands on the first focusable element in the popup.
+   *
+   * (with the exception of dropdowns and tooltips, which have their own set of expectations)
    * @param popupRef the popup ref
    * @param popupOpen whether the popup is open or not
    * @param onClose the handler to execute when the popup closes
