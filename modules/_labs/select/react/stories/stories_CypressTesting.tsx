@@ -1,17 +1,18 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
 import {controlComponent} from '../../../../../utils/storybook';
-import Select from '../lib/Select';
 
 import {colors} from '@workday/canvas-kit-react-core';
 import {Button} from '../../../../button/react';
 import FormField from '../../../../form-field/react';
 import {Modal, useModal} from '../../../../modal/react';
 
+import Select from '../lib/Select';
+
 import {manyOptions, options} from './stories';
 
 export default {
-  title: 'Testing/React/Labs/Select',
+  title: 'Testing/React/Labs/Select/Cypress',
   component: Select,
 };
 

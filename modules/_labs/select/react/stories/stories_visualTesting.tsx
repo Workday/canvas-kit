@@ -7,6 +7,7 @@ import {
   withSnapshotsEnabled,
   customColorTheme,
 } from '../../../../../utils/storybook';
+
 import Select from '../lib/Select';
 import SelectBase from '../lib/SelectBase';
 import SelectOption from '../lib/SelectOption';
