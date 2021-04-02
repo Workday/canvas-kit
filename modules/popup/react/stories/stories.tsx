@@ -10,6 +10,7 @@ import {
   usePopup,
   useCloseOnEscape,
   useCloseOnOutsideClick,
+  useFocusTrap,
 } from '@workday/canvas-kit-react-popup';
 
 import README from '../README.md';
@@ -77,5 +78,101 @@ export const RTL = () => {
         <Button onClick={() => null}>לְבַטֵל</Button>
       </Popup>
     </CanvasProvider>
+  );
+};
+
+export const Accessible = () => {
+  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
+
+  const isElementNativelyFocusable = (element: HTMLElement) => {
+    const nodeName = element.nodeName.toLowerCase();
+    const validInput = nodeName === 'input' && (element as HTMLInputElement).type !== 'hidden';
+    const validAnchor = nodeName === 'a' && element.hasAttribute('href');
+    const validAudioVideo =
+      ['audio', 'video'].includes(nodeName) && element.hasAttribute('controls');
+    const validImgObject = ['img', 'object'].includes(nodeName) && element.hasAttribute('usemap');
+    const validNativelyFocusable = [
+      'button',
+      'details',
+      'embed',
+      'iframe',
+      'select',
+      'textarea',
+    ].includes(nodeName);
+
+    return validInput || validAnchor || validAudioVideo || validImgObject || validNativelyFocusable;
+  };
+
+  const getFirstFocusableElement = (content: HTMLElement): HTMLElement | null => {
+    const elements = content.getElementsByTagName('*');
+
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements.item(i);
+      if (element && isElementNativelyFocusable(element as HTMLElement)) {
+        return element as HTMLElement;
+      }
+    }
+
+    console.log(
+      'No focusable element was found. Please ensure popup has at least one focusable element'
+    );
+    return null;
+  };
+
+  const useInitialFocus = (popupRef: React.RefObject<HTMLElement>, popupOpen: boolean = false) => {
+    React.useLayoutEffect(() => {
+      const handlerRef =
+        document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+      if (popupRef.current && popupOpen) {
+        const elem = getFirstFocusableElement(popupRef.current);
+        if (elem) {
+          elem.focus();
+        }
+      }
+      return () => {
+        if (handlerRef) {
+          handlerRef.focus();
+        }
+      };
+    }, [popupRef, popupOpen]);
+  };
+
+  const useAccessiblePopupBehaviors = (
+    popupRef: React.RefObject<HTMLElement>,
+    popupOpen: boolean,
+    onClose: () => void
+  ) => {
+    useCloseOnEscape(popupRef, onClose);
+
+    useFocusTrap(popupRef);
+
+    useInitialFocus(popupRef, popupOpen);
+  };
+
+  useCloseOnOutsideClick(stackRef, closePopup);
+  useAccessiblePopupBehaviors(stackRef, popperProps.open, closePopup);
+
+  return (
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Popper placement={'bottom'} {...popperProps}>
+        <Popup
+          width={400}
+          heading={'Delete Item'}
+          padding={Popup.Padding.s}
+          handleClose={closePopup}
+        >
+          <div style={{marginBottom: '24px'}}>
+            Are you sure you'd like to delete the item titled 'My Item'?
+          </div>
+
+          <DeleteButton style={{marginRight: '16px'}} onClick={closePopup}>
+            Delete
+          </DeleteButton>
+          <Button onClick={closePopup}>Cancel</Button>
+        </Popup>
+      </Popper>
+    </div>
   );
 };
