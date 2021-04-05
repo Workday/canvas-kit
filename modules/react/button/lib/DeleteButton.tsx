@@ -12,6 +12,7 @@ import {
 export interface DeleteButtonProps extends Themeable, GrowthBehavior {
   /**
    * The size of the Button.
+   * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
   children?: React.ReactNode;

@@ -6,6 +6,7 @@ import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/com
 export interface HyperlinkProps {
   /**
    * The variant of the Hyperlink.
+   * @default 'text'
    */
   variant?: 'text' | 'inverse';
   /**

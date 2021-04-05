@@ -12,10 +12,12 @@ import styled from '@emotion/styled';
 export interface DeprecatedButtonProps extends GrowthBehavior {
   /**
    * The variant of the Button.
+   * @default 'secondary'
    */
   variant?: 'primary' | 'secondary' | 'delete';
   /**
    * The size of the Button.
+   * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
   children?: React.ReactNode;

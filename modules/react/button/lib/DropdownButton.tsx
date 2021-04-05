@@ -12,10 +12,12 @@ import {getButtonColors} from './Button';
 export interface DropdownButtonProps extends Themeable, GrowthBehavior {
   /**
    * The variant of the Button.
+   * @default 'secondary'
    */
   variant?: 'primary' | 'secondary';
   /**
    * The size of the Button.
+   * @default 'medium'
    */
   size?: 'medium' | 'large';
   children?: React.ReactNode;

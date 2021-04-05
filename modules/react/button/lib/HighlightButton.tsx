@@ -14,6 +14,7 @@ import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 export interface HighlightButtonProps extends Themeable, GrowthBehavior {
   /**
    * The size of the HighlightButton.
+   * @default 'medium'
    */
   size?: 'medium' | 'large';
   /**

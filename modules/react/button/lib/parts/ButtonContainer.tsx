@@ -20,6 +20,7 @@ export interface ButtonContainerProps
   colors?: ButtonColors;
   /**
    * The size of the Button.
+   * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
   /**

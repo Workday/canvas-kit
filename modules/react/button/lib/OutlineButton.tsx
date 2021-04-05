@@ -15,10 +15,12 @@ import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './
 export interface OutlineButtonProps extends Themeable, GrowthBehavior {
   /**
    * The variant of the Button.
+   * @default 'secondary'
    */
   variant?: 'primary' | 'secondary' | 'inverse';
   /**
    * The size of the Button.
+   * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
   /**

@@ -19,6 +19,7 @@ export interface IconButtonProps extends Themeable {
   'aria-label': string;
   /**
    * The type of the IconButton.
+   * @default 'circle'
    */
   variant?:
     | 'square'
@@ -30,6 +31,7 @@ export interface IconButtonProps extends Themeable {
     | 'inverseFilled';
   /**
    * The size of the IconButton.
+   * @default 'medium'
    */
   size?: 'small' | 'medium';
   /**

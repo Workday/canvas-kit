@@ -15,14 +15,17 @@ import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 export interface TextButtonProps extends Themeable {
   /**
    * The variant of the TextButton.
+   * @default 'text'
    */
   variant?: 'text' | 'inverse';
   /**
    * The size of the TextButton.
+   * @default 'medium'
    */
   size?: 'small' | 'medium';
   /**
    * The position of the TextButton icon.
+   * @default 'left'
    */
   iconPosition?: 'left' | 'right';
   /**
