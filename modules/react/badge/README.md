@@ -35,8 +35,8 @@ const AccessibleHide = styled('div')({
 <IconButton
   style={{ position: "relative" }}
   aria-label={`Alerts ${count} new notifications`}
-  size={IconButton.Size.Medium}
-  variant={IconButton.Variant.Circle}
+  size="medium"
+  variant="circle"
 >
   <SystemIcon icon={notificationsIcon} aria-hidden="true" />
   <Badge count={count} aria-hidden="true" />

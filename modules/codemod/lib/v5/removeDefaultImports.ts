@@ -1,5 +1,8 @@
 import {API, FileInfo, Options, ImportDeclaration, ASTPath} from 'jscodeshift';
 
+// List of import paths and the named export
+// before: import Button from '@workday/canvas-kit-react/button
+// after:  import { Button } from '@workday/canvas-kit-react/button
 const renameDefaultMap = {
   '@workday/canvas-kit-react/button': 'Button',
 };

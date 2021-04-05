@@ -1,5 +1,5 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transform from '..';
+import transform from '../renameButtonRefs';
 
 const expectTransform = expectTransformFactory(transform);
 

@@ -10,13 +10,5 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   // transforms
   const fixes = [slashImports, removeDefaultImports, removeButtonEnums, renameButtonRefs];
 
-  let src = file.source;
-  fixes.forEach(fix => {
-    if (typeof src === 'undefined') {
-      return;
-    }
-    src = fix({...file, source: src}, api, options);
-  });
-
-  return src;
+  return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);
 }

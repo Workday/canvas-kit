@@ -25,20 +25,20 @@ export * from './stories_VisualTesting';
 
 export const AccessibilityTest = () => {
   const [open, setOpen] = React.useState(false);
-  const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
+  const ref = React.useRef<HTMLButtonElement>(null);
   const openModal = () => {
     setOpen(true);
   };
   const closeModal = () => {
     setOpen(false);
-    if (buttonRef.current) {
-      buttonRef.current.focus();
+    if (ref.current) {
+      ref.current.focus();
     }
   };
 
   return (
     <>
-      <DeleteButton buttonRef={buttonRef} onClick={openModal}>
+      <DeleteButton ref={ref} onClick={openModal}>
         Delete Item
       </DeleteButton>
       <p>The content below should be hidden from assistive technology while the modal is open.</p>
@@ -89,7 +89,7 @@ export const AccessibilityTest = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+        <Button onClick={closeModal} variant="secondary">
           Cancel
         </Button>
       </Modal>
@@ -109,7 +109,7 @@ export const StackedModals = () => {
         <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
           Yes, Delete
         </DeleteButton>
-        <Button onClick={modal1.closeModal} variant={Button.Variant.Secondary}>
+        <Button onClick={modal1.closeModal} variant="secondary">
           Cancel
         </Button>
         <Modal heading={'Really Delete Item'} {...modal2.modalProps}>
@@ -123,7 +123,7 @@ export const StackedModals = () => {
           >
             Yes, Really Delete
           </DeleteButton>
-          <Button onClick={modal2.closeModal} variant={Button.Variant.Secondary}>
+          <Button onClick={modal2.closeModal} variant="secondary">
             Cancel
           </Button>
         </Modal>
@@ -147,7 +147,7 @@ export const ModalWithPopup = () => {
         <DeleteButton style={{marginRight: '16px'}} {...popup.targetProps}>
           Yes, Delete
         </DeleteButton>
-        <Button onClick={modal.closeModal} variant={Button.Variant.Secondary}>
+        <Button onClick={modal.closeModal} variant="secondary">
           Cancel
         </Button>
         <Popper {...popup.popperProps}>
@@ -162,7 +162,7 @@ export const ModalWithPopup = () => {
             >
               Yes, Really Delete
             </DeleteButton>
-            <Button onClick={popup.closePopup} variant={Button.Variant.Secondary}>
+            <Button onClick={popup.closePopup} variant="secondary">
               Cancel
             </Button>
           </Popup>

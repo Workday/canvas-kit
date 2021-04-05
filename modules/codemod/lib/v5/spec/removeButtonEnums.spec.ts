@@ -1,5 +1,5 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transform from '..';
+import transform from '../removeButtonEnums';
 
 const expectTransform = expectTransformFactory(transform);
 

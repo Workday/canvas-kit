@@ -3,8 +3,8 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button} from '../../button';
-import {ActionBar} from '../index';
+import {Button} from '@workday/canvas-kit-react/button';
+import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import README from '../README.md';
 
 storiesOf('Components/Buttons/Action Bar/React', module)
@@ -13,7 +13,7 @@ storiesOf('Components/Buttons/Action Bar/React', module)
   .add('Default', () => (
     <div className="story">
       <ActionBar>
-        <Button variant={Button.Variant.Primary}>Button</Button>
+        <Button variant="primary">Button</Button>
         <Button>Button</Button>
       </ActionBar>
     </div>
@@ -21,7 +21,7 @@ storiesOf('Components/Buttons/Action Bar/React', module)
   .add('With Three Buttons', () => (
     <div className="story">
       <ActionBar>
-        <Button variant={Button.Variant.Primary}>Button</Button>
+        <Button variant="primary">Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
       </ActionBar>
@@ -30,7 +30,7 @@ storiesOf('Components/Buttons/Action Bar/React', module)
   .add('With Two Buttons Fixed', () => (
     <div className="story">
       <ActionBar fixed={true}>
-        <Button variant={Button.Variant.Primary}>Button</Button>
+        <Button variant="primary">Button</Button>
         <Button>Button</Button>
       </ActionBar>
     </div>
@@ -38,7 +38,7 @@ storiesOf('Components/Buttons/Action Bar/React', module)
   .add('With Three Buttons Fixed', () => (
     <div className="story">
       <ActionBar fixed={true}>
-        <Button variant={Button.Variant.Primary}>Button</Button>
+        <Button variant="primary">Button</Button>
         <Button>Button</Button>
         <Button>Button</Button>
       </ActionBar>

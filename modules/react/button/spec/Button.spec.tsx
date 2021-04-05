@@ -22,7 +22,6 @@ import {ButtonProps} from '../lib/Button';
   DeprecatedButton,
   // We need to cast as `any` and cast as a specific button because TS will complain about no call signatures...
 ] as any[]).forEach((ButtonComponent: ElementComponent<'button', ButtonProps>) => {
-  console.log('displayName', ButtonComponent.displayName);
   describe(ButtonComponent.displayName, () => {
     const cb = jest.fn();
     afterEach(() => {

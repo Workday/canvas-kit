@@ -1,7 +1,7 @@
 'use strict';
 
 import {defineInlineTest} from 'jscodeshift/dist/testUtils';
-import transform from '..';
+import transform from '../slashImports';
 
 describe('slashImport', () => {
   defineInlineTest(
@@ -45,12 +45,12 @@ describe('slashImport', () => {
     transform,
     {},
     `
-    import Card from '@workday/canvas-kit-react-card';
+    import Button from '@workday/canvas-kit-react-button';
         `,
     `
-    import Card from "@workday/canvas-kit-react/card";
+    import Button from "@workday/canvas-kit-react/button";
         `,
-    'Updates default card import'
+    'Updates default button import'
   );
 
   defineInlineTest(

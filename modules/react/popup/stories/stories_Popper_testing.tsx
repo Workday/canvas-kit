@@ -37,7 +37,7 @@ export const UpdateOptions = () => {
           alignItems: 'center',
         }}
       >
-        <Button buttonRef={buttonRef} variant={Button.Variant.Primary}>
+        <Button ref={buttonRef} variant="primary">
           Target element
         </Button>
         <Popper placement={placement} open={open} anchorElement={buttonRef.current!} ref={popupRef}>

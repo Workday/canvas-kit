@@ -10,7 +10,7 @@ import {rewind30Icon, fastForward15Icon, mediaPauseIcon} from '@workday/canvas-s
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 
-const commonIconButtonProps: Pick<IconButtonProps, 'aria-label' | 'title' | 'icon'> = {
+const commonIconButtonProps: IconButtonProps = {
   'aria-label': 'Activity Stream',
   title: 'Activity Stream',
 };
@@ -25,20 +25,20 @@ storiesOf('Tokens/Common/Theming', module)
             <CanvasProvider theme={{canvas: {direction: ContentDirection.LTR}}}>
               <IconButton
                 {...commonIconButtonProps}
-                variant={IconButton.Variant.Circle}
-                size={IconButton.Size.Medium}
+                variant="circle"
+                size="medium"
                 icon={rewind30Icon}
               />
               <IconButton
                 {...commonIconButtonProps}
-                variant={IconButton.Variant.Circle}
-                size={IconButton.Size.Medium}
+                variant="circle"
+                size="medium"
                 icon={mediaPauseIcon}
               />
               <IconButton
                 {...commonIconButtonProps}
-                variant={IconButton.Variant.Circle}
-                size={IconButton.Size.Medium}
+                variant="circle"
+                size="medium"
                 icon={fastForward15Icon}
               />
             </CanvasProvider>

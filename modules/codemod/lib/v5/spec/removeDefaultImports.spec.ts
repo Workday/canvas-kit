@@ -1,5 +1,5 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transform from '..';
+import transform from '../removeDefaultImports';
 
 const expectTransform = expectTransformFactory(transform);
 

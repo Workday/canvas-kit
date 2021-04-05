@@ -112,16 +112,7 @@ export const IconButton = createComponent('button')({
   },
 });
 
-const getIconButtonBorderRadius = (
-  variant:
-    | 'square'
-    | 'squareFilled'
-    | 'plain'
-    | 'circle'
-    | 'circleFilled'
-    | 'inverse'
-    | 'inverseFilled'
-) => {
+const getIconButtonBorderRadius = (variant: IconButtonProps['variant']) => {
   switch (variant) {
     case 'square':
     case 'squareFilled':
@@ -132,14 +123,7 @@ const getIconButtonBorderRadius = (
 };
 
 const getIconButtonColors = (
-  variant:
-    | 'square'
-    | 'squareFilled'
-    | 'plain'
-    | 'circle'
-    | 'circleFilled'
-    | 'inverse'
-    | 'inverseFilled',
+  variant: IconButtonProps['variant'],
   theme: EmotionCanvasTheme,
   toggled?: boolean
 ): ButtonColors => {

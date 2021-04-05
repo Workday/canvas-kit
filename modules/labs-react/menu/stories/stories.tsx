@@ -16,7 +16,7 @@ import README from '../README.md';
 
 const FocusableButton = React.forwardRef(
   (props: ButtonProps, ref: React.RefObject<HTMLButtonElement>) => (
-    <Button buttonRef={ref} {...props}>
+    <Button ref={ref} {...props}>
       {props.children}
     </Button>
   )

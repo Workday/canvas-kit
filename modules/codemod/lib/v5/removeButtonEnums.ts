@@ -22,6 +22,8 @@ const importsToRemove = [
 ];
 
 // List of enums used in code that will be translated to string literals
+// before: <Button variant={ButtonVariant.Primary} />
+// after:  <Button variant={"primary"} />
 const enumsToMap = {
   'ButtonVariant.Primary': 'primary',
   'ButtonVariant.Secondary': 'secondary',
@@ -95,6 +97,8 @@ const enumsToMap = {
 };
 
 // List of enum types that will be converted to union types of string literals
+// before: function foo (variant: ButtonVariant) {}
+// after:  function foo (variant: 'primary' | 'secondary') {}
 const enumToLiteralUnionMap = {
   ButtonVariant: ['primary', 'secondary'],
   ButtonIconPosition: ['left', 'right'],
