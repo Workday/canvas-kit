@@ -77,7 +77,12 @@ export const WithRadioButtons = () => {
     <>
       <Button {...targetProps}>With Radio Buttons</Button>
       <Modal data-testid="TestModal" heading="Select Item" {...modalProps}>
-        <RadioGroup name="contact" data-testid="radiogroup" value={value} onChange={setValue}>
+        <RadioGroup
+          name="contact"
+          data-testid="radiogroup"
+          value={value}
+          onChange={value => setValue(String(value))}
+        >
           <Radio id="1" value="email" label="E-mail" />
           <Radio id="2" value="phone" label="Phone" />
         </RadioGroup>
