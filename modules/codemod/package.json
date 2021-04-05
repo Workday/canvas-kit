@@ -7,7 +7,7 @@
   "main": "index.js",
   "sideEffects": false,
   "bin": {
-    "canvas-kit-codemod": "dist/commonjs/index.js"
+    "canvas-kit-codemod": "index.js"
   },
   "repository": {
     "type": "git",
