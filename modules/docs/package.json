@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "glob": "^7.1.6",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "mkdirp": "^1.0.3"
   }
 }
