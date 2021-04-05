@@ -33,7 +33,7 @@ We've provided a [new codemod package](./modules/codemod) that you can use to up
 
 > Note: You may need to run your linter after executing the codemod, as it's resulting formatting (spacing, quotes, etc.) may not match your project's styling.
 
-Breaking changes covered by this codemox will be marked with a 🤖.
+Breaking changes accounted for by this codemod will be marked with a 🤖.
 
 Please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have any troubles or missed use cases with this codemod. The `@workday/canvas-kit-codemod` package will help us maintain additional codemod transforms to make future migrations easier.
 
@@ -97,4 +97,3 @@ PR:
 - Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and allows `as` to change the underlying element.
   - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer valid. The codemod will rewrite all instances of `buttonRef` to `ref`. This has the potential to catch too much, so it is only run on files that import a Canvas Kit package. Run a type check and check the diff to make sure this codemod didn't change unintentional `buttonRef` that are valid in your code base.
   - Button prop interfaces no longer extend directly from the `React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that determines the element interface via the `as` prop. This is why Button props no longer contain an element interface directly. If you extend from a Button prop interface, or have code that uses a Button prop interface and accesses properties like `onClick`, you'll have to provide the button attribute yourself. This is not code-moddable since intent cannot be pre-determined. This will not effect runtime, but only Typescript.
-
