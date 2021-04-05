@@ -23,7 +23,6 @@ export const HighlightButtonStates = (props: {theme?: PartialEmotionCanvasTheme}
     <ComponentStatesTable
       rowProps={permutateProps({
         size: [
-          {value: 'small', label: 'Small'},
           {value: 'medium', label: 'Medium'},
           {value: 'large', label: 'Large'},
         ],
