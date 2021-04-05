@@ -6,7 +6,6 @@ import {
   Themeable,
   createComponent,
 } from '@workday/canvas-kit-react/common';
-import './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 import {getButtonColors} from './Button';
 
@@ -45,7 +44,7 @@ export const DropdownButton = createComponent('button')({
       {...elemProps}
     >
       <ButtonLabel>{children}</ButtonLabel>
-      <ButtonLabelIcon size={size} icon={caretDownIcon} iconPosition={'right'} dropdown={true} />
+      <ButtonLabelIcon size={size} icon={caretDownIcon} iconPosition="right" dropdown={true} />
     </ButtonContainer>
   ),
 });

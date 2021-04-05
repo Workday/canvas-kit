@@ -63,8 +63,8 @@ export const StepToPreviousButton = ({onClick, model, ...restProps}: ControlButt
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      variant={'square'}
-      size={'small'}
+      variant="square"
+      size="small"
       icon={icon}
       onClick={handleClick}
       {...restProps}
@@ -86,8 +86,8 @@ export const StepToNextButton = ({model, onClick, ...restProps}: ControlButtonPr
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      variant={'square'}
-      size={'small'}
+      variant="square"
+      size="small"
       icon={icon}
       onClick={handleClick}
       {...restProps}
@@ -109,8 +109,8 @@ export const JumpToLastButton = ({model, onClick, ...restProps}: ControlButtonPr
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      variant={'square'}
-      size={'small'}
+      variant="square"
+      size="small"
       icon={icon}
       onClick={handleClick}
       {...restProps}

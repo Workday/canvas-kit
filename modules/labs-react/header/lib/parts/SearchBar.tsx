@@ -481,7 +481,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             aria-label={closeButtonAriaLabel}
             icon={xIcon}
             isCollapsed={isCollapsed}
-            variant={'plain'}
+            variant="plain"
             showForm={this.state.showForm}
             onClick={this.closeCollapsedSearch}
             type="button"

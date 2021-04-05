@@ -38,7 +38,7 @@ storiesOf('Labs/Color Picker/React', module)
           icon={bgColorIcon}
           aria-label="Select Background Color"
           ref={ref}
-          variant={'squareFilled'}
+          variant="squareFilled"
           onClick={toggleOpen}
         />
         <Popper placement={'bottom-start'} open={isOpen} anchorElement={ref.current!}>
