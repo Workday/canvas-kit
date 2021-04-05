@@ -5,6 +5,7 @@ import {
   ImportSpecifier,
   MemberExpression,
   TSTypeReference,
+  ImportDeclaration,
 } from 'jscodeshift';
 import {getImportRenameMap} from './getImportRenameMap';
 
@@ -187,6 +188,24 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       const matched = findEnumReplacement(nodePath.value);
       return j.literal(matched);
     });
+
+  // Rewrite `import { beta_Button as Button } from `@workday/canvas-kit-react/button` to
+  // `import { Button } from '@workday/canvas-kit-react/button'
+  root.find(j.ImportSpecifier, {imported: {name: 'beta_Button'}}).forEach(nodePath => {
+    const parent = nodePath.parent.value as ImportDeclaration;
+    if (
+      parent.source &&
+      typeof parent.source.value === 'string' &&
+      parent.source.value.includes('@workday/canvas-kit-react')
+    ) {
+      nodePath.value.imported = j.identifier('Button');
+      // if the local name is also `Button`, remove it so the AST won't output `{ Button as Button }`
+      if (nodePath.value.local?.name === 'Button') {
+        nodePath.value.local = null;
+      }
+    }
+    return nodePath;
+  });
 
   /**
    * Rewrites usages of GenericTypeAnnotations to union types of string literals

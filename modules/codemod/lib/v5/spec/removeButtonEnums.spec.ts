@@ -192,6 +192,30 @@ describe('removeButtonEnum', () => {
     expectTransform(input, expected);
   });
 
+  it('should remove `beta_Button` in favor of `Button', () => {
+    const input = `
+      import { beta_Button as Button } from '@workday/canvas-kit-react/button';
+    `;
+
+    const expected = `
+      import { Button } from '@workday/canvas-kit-react/button';
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should rename beta Button if it is locally renamed', () => {
+    const input = `
+      import { beta_Button as BetaButton } from '@workday/canvas-kit-react/button';
+    `;
+
+    const expected = `
+      import { Button as BetaButton } from '@workday/canvas-kit-react/button';
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should handle all variant renaming', () => {
     const input = `
       import {
@@ -296,7 +320,7 @@ describe('removeButtonEnum', () => {
     const expected = `
       import {
         Button,
-        beta_Button as BetaButton,
+        Button as BetaButton,
         DeleteButton,
         deprecated_Button as DeprecatedButton,
         DropdownButton,
