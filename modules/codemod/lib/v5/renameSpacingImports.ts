@@ -13,20 +13,26 @@ export default function transformer(file: FileInfo, api: API) {
     }
 
     nodePath.value.specifiers?.forEach(specifier => {
+      // only iterate over named import statements
       if (specifier.type === 'ImportSpecifier') {
         switch (specifier.imported.name) {
+          // `import { spacing }` becomes `import { space }`
           case 'spacing':
             specifier.imported.name = 'space';
             break;
+          // `import { spacingNumbers }` becomes `import { spaceNumbers }`
           case 'spacingNumbers':
             specifier.imported.name = 'spaceNumbers';
             break;
+          // `import { CanvasSpacing }` becomes `import { CanvasSpace }`
           case 'CanvasSpacing':
             specifier.imported.name = 'CanvasSpace';
             break;
+          // `import { CanvasSpacingValue }` becomes `import { CanvasSpaceValues }`
           case 'CanvasSpacingValue':
             specifier.imported.name = 'CanvasSpaceValues';
             break;
+          // `import { CanvasSpacingNumber }` becomes `import { CanvasSpaceNumbers }`
           case 'CanvasSpacingNumber':
             specifier.imported.name = 'CanvasSpaceNumbers';
             break;

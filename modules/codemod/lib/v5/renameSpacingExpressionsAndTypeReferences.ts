@@ -20,7 +20,8 @@ export default function transformer(file: FileInfo, api: API) {
     return root.toSource();
   }
 
-  // replace all member expressions of 'spacing' with 'space'
+  // Replace all member expressions of 'spacing' with 'space'
+  // e.g. `{ margin: spacing.m }` becomes `{ margin: space.m }`
   root
     .find(j.MemberExpression, {object: {type: 'Identifier', name: 'spacing'}})
     .forEach(nodePath => {
@@ -29,7 +30,8 @@ export default function transformer(file: FileInfo, api: API) {
       return nodePath;
     });
 
-  // replace all member expressions of 'spacingNumbers' with 'spaceNumbers'
+  // Replace all member expressions of 'spacingNumbers' with 'spaceNumbers'
+  // e.g. `{ margin: spacingNumbers.m }` becomes `{ margin: spaceNumbers.m }`
   root
     .find(j.MemberExpression, {object: {type: 'Identifier', name: 'spacingNumbers'}})
     .forEach(nodePath => {
@@ -38,7 +40,9 @@ export default function transformer(file: FileInfo, api: API) {
       return nodePath;
     });
 
-  // replace all spacing and spacingNumber properties from canvas
+  // Replace all spacing and spacingNumber properties from canvas
+  // e.g. `{ margin: canvas.spacing.m }` becomes `{ margin: canvas.space.m }`
+  // and `{ margin: canvas.spacingNumber.m }` becomes `{ margin: canvas.spaceNumber.m }`
   root
     .find(j.MemberExpression, {object: {type: 'Identifier', name: 'canvas'}})
     .forEach(nodePath => {
@@ -53,7 +57,9 @@ export default function transformer(file: FileInfo, api: API) {
       return nodePath;
     });
 
-  // replace all member expressions of 'CanvasSpacing' with 'CanvasSpace'
+  // Replace all type references of 'CanvasSpacing' with 'CanvasSpace'
+  // e.g. `type SpaceProps = CanvasSpacing;`
+  // becomes `type SpaceProps = CanvasSpace;`
   root
     .find(j.TSTypeReference, {typeName: {type: 'Identifier', name: 'CanvasSpacing'}})
     .forEach(nodePath => {
@@ -62,7 +68,9 @@ export default function transformer(file: FileInfo, api: API) {
       return nodePath;
     });
 
-  // replace all member expressions of 'CanvasSpacingNumber' with 'CanvasSpaceNumbers'
+  // Replace all type references of 'CanvasSpacingNumber' with 'CanvasSpaceNumbers'
+  // e.g. `type SpaceNumberProps = CanvasSpacingNumber;`
+  // becomes `type SpaceNumberProps = CanvasSpaceNumbers;`
   root
     .find(j.TSTypeReference, {typeName: {type: 'Identifier', name: 'CanvasSpacingNumber'}})
     .forEach(nodePath => {
@@ -71,7 +79,9 @@ export default function transformer(file: FileInfo, api: API) {
       return nodePath;
     });
 
-  // replace all member expressions of 'CanvasSpacingValue' with 'CanvasSpaceValues'
+  // Replace all type references of 'CanvasSpacingValue' with 'CanvasSpaceValues'
+  // e.g. `type SpaceValueProps = CanvasSpacingValue;`
+  // becomes `type SpaceValueProps = CanvasSpaceValues;`
   root
     .find(j.TSTypeReference, {typeName: {type: 'Identifier', name: 'CanvasSpacingValue'}})
     .forEach(nodePath => {
