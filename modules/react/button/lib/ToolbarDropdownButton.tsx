@@ -1,7 +1,13 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
-import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {
+  focusRing,
+  useTheme,
+  Themeable,
+  EmotionCanvasTheme,
+  createComponent,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
@@ -34,35 +40,38 @@ const containerStyles = {
   },
 };
 
-const ToolbarDropdownButton = ({
-  // TODO: Fix useTheme and make it a real hook
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  theme = useTheme(),
-  buttonRef,
-  'aria-label': iconArialabel,
-  icon,
-  children,
-  ...elemProps
-}: ToolbarDropdownButtonProps) => {
-  return (
-    <ButtonContainer
-      colors={getToolbarDropdownButtonColors(theme)}
-      ref={buttonRef}
-      extraStyles={containerStyles}
-      aria-label={iconArialabel}
-      {...elemProps}
-    >
-      {icon ? (
-        <SystemIcon className={'wdc-toolbar-dropdown-btn-custom-icon'} icon={icon} />
-      ) : (
-        children
-      )}
-      <SystemIcon className={'wdc-toolbar-dropdown-btn-arrow'} icon={chevronDownSmallIcon} />
-    </ButtonContainer>
-  );
-};
-
-export default ToolbarDropdownButton;
+export const ToolbarDropdownButton = createComponent('button')({
+  displayName: 'ToolbarDropdownButton',
+  Component: (
+    {
+      // TODO: Fix useTheme and make it a real hook
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      theme = useTheme(),
+      icon,
+      children,
+      ...elemProps
+    }: ToolbarDropdownButtonProps,
+    ref,
+    Element
+  ) => {
+    return (
+      <ButtonContainer
+        ref={ref}
+        as={Element}
+        colors={getToolbarDropdownButtonColors(theme)}
+        extraStyles={containerStyles}
+        {...elemProps}
+      >
+        {icon ? (
+          <SystemIcon className={'wdc-toolbar-dropdown-btn-custom-icon'} icon={icon} />
+        ) : (
+          children
+        )}
+        <SystemIcon className={'wdc-toolbar-dropdown-btn-arrow'} icon={chevronDownSmallIcon} />
+      </ButtonContainer>
+    );
+  },
+});
 
 const getToolbarDropdownButtonColors = (theme: EmotionCanvasTheme): ButtonColors => {
   return {

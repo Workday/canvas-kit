@@ -4,19 +4,18 @@
   "license": "Apache-2.0",
   "version": "0.0.0",
   "description": "A collection of codemods for use on Workday Canvas Kit packages.",
-  "main": "dist/commonjs/index.js",
-  "module": "dist/es6/index.js",
+  "main": "index.js",
   "sideEffects": false,
   "bin": {
-    "canvas-kit-codemod": "dist/commonjs/index.js"
+    "canvas-kit-codemod": "index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Workday/canvas-kit.git"
   },
   "files": [
-    "dist/",
-    "index.ts"
+    "lib/",
+    "index.js"
   ],
   "keywords": [
     "workday",
@@ -34,11 +33,6 @@
     "yargs": "^16.2.0"
   },
   "scripts": {
-    "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:es6": "tsc -p tsconfig.es6.json",
-    "build:rebuild": "npm-run-all clean build",
-    "build": "npm-run-all --parallel build:cjs build:es6",
     "test": "TZ=UTC jest -c ../../jest.config.js"
   }
 }

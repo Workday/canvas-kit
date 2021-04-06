@@ -1,34 +1,29 @@
 import * as React from 'react';
 import canvas, {borderRadius, type} from '@workday/canvas-kit-react/core';
-import {focusRing, mouseFocusBehavior, GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {DeprecatedButtonVariant, ButtonSize, ButtonOrAnchorComponent} from './types';
+import {
+  focusRing,
+  mouseFocusBehavior,
+  GrowthBehavior,
+  createComponent,
+  StyledType,
+} from '@workday/canvas-kit-react/common';
 import styled from '@emotion/styled';
 
-export interface DeprecatedButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    GrowthBehavior {
+export interface DeprecatedButtonProps extends GrowthBehavior {
   /**
    * The variant of the Button.
-   * @default DeprecatedButtonVariant.Secondary
+   * @default 'secondary'
    */
-  variant?: DeprecatedButtonVariant;
+  variant?: 'primary' | 'secondary' | 'delete';
   /**
    * The size of the Button.
    * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
-  /**
-   * The ref to the button that the styled component renders.
-   */
-  buttonRef?: React.Ref<HTMLButtonElement>;
-  /**
-   * The alternative container type for the button. Uses Emotion's special `as` prop.
-   * Will render an `a` tag instead of a `button` when defined.
-   */
-  as?: 'a';
+  children?: React.ReactNode;
 }
 
-const Container = styled('button')<DeprecatedButtonProps>(
+const Container = styled('button')<DeprecatedButtonProps & StyledType>(
   {
     fontFamily: type.body.fontFamily,
     fontSize: type.body.fontSize,
@@ -81,14 +76,14 @@ const Container = styled('button')<DeprecatedButtonProps>(
   ({variant}) => {
     let buttonColors;
     switch (variant) {
-      case DeprecatedButtonVariant.Primary:
+      case 'primary':
         buttonColors = canvas.buttonColors.primary;
         break;
-      case DeprecatedButtonVariant.Secondary:
+      case 'secondary':
       default:
         buttonColors = canvas.buttonColors.secondary;
         break;
-      case DeprecatedButtonVariant.Delete:
+      case 'delete':
         buttonColors = {
           ...canvas.buttonColors.delete,
           focusBorder: canvas.colors.cinnamon500,
@@ -162,28 +157,21 @@ const Container = styled('button')<DeprecatedButtonProps>(
   }
 );
 
-const DeprecatedButton: ButtonOrAnchorComponent<
-  DeprecatedButtonProps,
-  typeof DeprecatedButtonVariant
-> = ({
-  variant = DeprecatedButtonVariant.Secondary,
-  size = 'large',
-  buttonRef,
-  children,
-  ...elemProps
-}: DeprecatedButtonProps) => {
-  React.useEffect(() => {
-    console.warn('This component is now deprecated, consider using the new Button component');
-  }, []);
+export const DeprecatedButton = createComponent('button')({
+  displayName: 'DeprecatedButton',
+  Component: (
+    {variant = 'secondary', size = 'large', children, ...elemProps}: DeprecatedButtonProps,
+    ref,
+    Element
+  ) => {
+    React.useEffect(() => {
+      console.warn('This component is now deprecated, consider using the new Button component');
+    }, []);
 
-  return (
-    <Container variant={variant} size={size} ref={buttonRef} {...elemProps}>
-      {children}
-    </Container>
-  );
-};
-
-DeprecatedButton.Variant = DeprecatedButtonVariant;
-DeprecatedButton.Size = ButtonSize;
-
-export default DeprecatedButton;
+    return (
+      <Container ref={ref} as={Element} variant={variant} size={size} {...elemProps}>
+        {children}
+      </Container>
+    );
+  },
+});

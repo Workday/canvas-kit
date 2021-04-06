@@ -9,22 +9,22 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {HighlightButton} from '../../index';
+import {HighlightButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Highlight Button',
   component: HighlightButton,
 });
 
-export const HighlightButtonStates = () => (
-  <StaticStates>
+export const HighlightButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
         size: [
-          {value: HighlightButton.Size.Small, label: 'Small'},
-          {value: HighlightButton.Size.Medium, label: 'Medium'},
-          {value: HighlightButton.Size.Large, label: 'Large'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
         ],
         icon: [
           {value: undefined, label: ''},
@@ -42,9 +42,6 @@ export const HighlightButtonStates = () => (
   </StaticStates>
 );
 
-export const HighlightButtonThemedStates = () => <HighlightButtonStates />;
-HighlightButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
+export const HighlightButtonThemedStates = () => (
+  <HighlightButtonStates theme={{canvas: customColorTheme}} />
+);

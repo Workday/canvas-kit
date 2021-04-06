@@ -5,33 +5,23 @@ import {
   useTheme,
   Themeable,
   EmotionCanvasTheme,
+  createComponent,
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {ButtonColors, ButtonOrAnchorComponent} from './types';
+import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelIcon} from './parts';
 
-export interface HighlightButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    Themeable,
-    GrowthBehavior {
+export interface HighlightButtonProps extends Themeable, GrowthBehavior {
   /**
    * The size of the HighlightButton.
    * @default 'medium'
    */
   size?: 'medium' | 'large';
   /**
-   * The ref to the button that the styled component renders.
-   */
-  buttonRef?: React.Ref<HTMLButtonElement>;
-  /**
    * The icon of the HighlightButton.
    */
   icon?: CanvasSystemIcon;
-  /**
-   * The alternative container type for the button. Uses Emotion's special `as` prop.
-   * Will render an `a` tag instead of a `button` when defined.
-   */
-  as?: 'a';
+  children?: React.ReactNode;
 }
 
 const getHighlightButtonColors = ({
@@ -71,33 +61,30 @@ const getHighlightButtonColors = ({
   },
 });
 
-const HighlightButton: ButtonOrAnchorComponent<HighlightButtonProps> = ({
-  // TODO: Fix useTheme and make it a real hook
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  theme = useTheme(),
-  size = 'medium',
-  buttonRef,
-  icon,
-  children,
-  ...elemProps
-}: HighlightButtonProps) => (
-  <ButtonContainer
-    colors={getHighlightButtonColors(theme)}
-    size={size}
-    ref={buttonRef}
-    {...elemProps}
-  >
-    {icon && <ButtonLabelIcon size={size} icon={icon} />}
-    <ButtonLabel>{children}</ButtonLabel>
-  </ButtonContainer>
-);
-
-HighlightButton.Size = {
-  Medium: 'medium',
-  Large: 'large',
-} as const;
-
-// @ts-ignore ButtonOrAnchorComponent requires a Variant, but will complain Variable 'Variant' implicitly has an 'any' type. ts(7005)
-HighlightButton.Variant = undefined;
-
-export default HighlightButton;
+export const HighlightButton = createComponent('button')({
+  displayName: 'HighlightButton',
+  Component: (
+    {
+      // TODO: Fix useTheme and make it a real hook
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      theme = useTheme(),
+      size = 'medium',
+      icon,
+      children,
+      ...elemProps
+    }: HighlightButtonProps,
+    ref,
+    Element
+  ) => (
+    <ButtonContainer
+      ref={ref}
+      as={Element}
+      colors={getHighlightButtonColors(theme)}
+      size={size}
+      {...elemProps}
+    >
+      {icon && <ButtonLabelIcon size={size} icon={icon} />}
+      <ButtonLabel>{children}</ButtonLabel>
+    </ButtonContainer>
+  ),
+});

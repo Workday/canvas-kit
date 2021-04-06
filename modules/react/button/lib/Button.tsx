@@ -1,39 +1,28 @@
 import * as React from 'react';
+
 import {colors} from '@workday/canvas-kit-react/core';
 import {
   GrowthBehavior,
   useTheme,
   Themeable,
   EmotionCanvasTheme,
+  createComponent,
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {
-  ButtonVariant,
-  ButtonColors,
-  DropdownButtonVariant,
-  ButtonSize,
-  ButtonOrAnchorComponent,
-} from './types';
+import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    Themeable,
-    GrowthBehavior {
+export interface ButtonProps extends Themeable, GrowthBehavior {
   /**
    * The variant of the Button.
-   * @default ButtonVariant.Secondary
+   * @default 'secondary'
    */
-  variant?: ButtonVariant;
+  variant?: 'primary' | 'secondary';
   /**
    * The size of the Button.
    * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
-  /**
-   * The ref to the button that the styled component renders.
-   */
-  buttonRef?: React.Ref<HTMLButtonElement>;
   /**
    * The data label of the Button.
    * Note: not displayed at `small` size
@@ -44,44 +33,42 @@ export interface ButtonProps
    * Note: not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
-  /**
-   * The alternative container type for the button. Uses Emotion's special `as` prop.
-   * Will render an `a` tag instead of a `button` when defined.
-   */
-  as?: 'a';
+  children?: React.ReactNode;
 }
 
-const Button: ButtonOrAnchorComponent<ButtonProps, typeof ButtonVariant> = ({
-  // TODO: Fix useTheme and make it a real hook
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  theme = useTheme(),
-  variant = ButtonVariant.Secondary,
-  size = 'medium',
-  buttonRef,
-  dataLabel,
-  icon,
-  children,
-  ...elemProps
-}: ButtonProps) => (
-  <ButtonContainer
-    colors={getButtonColors(variant, theme)}
-    size={size}
-    ref={buttonRef}
-    {...elemProps}
-  >
-    {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
-    <ButtonLabel>{children}</ButtonLabel>
-    {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-  </ButtonContainer>
-);
-
-Button.Variant = ButtonVariant;
-Button.Size = ButtonSize;
-
-export default Button;
+export const Button = createComponent('button')({
+  displayName: 'Button',
+  Component: (
+    {
+      // TODO: Fix useTheme and make it a real hook
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      theme = useTheme(),
+      variant = 'secondary',
+      size = 'medium',
+      dataLabel,
+      icon,
+      children,
+      ...elemProps
+    }: ButtonProps,
+    ref,
+    Element
+  ) => (
+    <ButtonContainer
+      ref={ref}
+      as={Element}
+      colors={getButtonColors(variant, theme)}
+      size={size}
+      {...elemProps}
+    >
+      {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+      <ButtonLabel>{children}</ButtonLabel>
+      {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+    </ButtonContainer>
+  ),
+});
 
 export const getButtonColors = (
-  variant: ButtonVariant | DropdownButtonVariant,
+  variant: 'primary' | 'secondary',
   {
     canvas: {
       palette: {primary: themePrimary},
@@ -89,8 +76,7 @@ export const getButtonColors = (
   }: EmotionCanvasTheme
 ): ButtonColors => {
   switch (variant) {
-    case ButtonVariant.Primary:
-    case DropdownButtonVariant.Primary:
+    case 'primary':
       return {
         default: {
           background: themePrimary.main,
@@ -110,8 +96,7 @@ export const getButtonColors = (
           background: themePrimary.light,
         },
       };
-    case ButtonVariant.Secondary:
-    case DropdownButtonVariant.Secondary:
+    case 'secondary':
     default:
       return {
         default: {

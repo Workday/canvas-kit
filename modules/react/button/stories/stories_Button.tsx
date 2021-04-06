@@ -1,21 +1,13 @@
 /// <reference path="../../../../typings.d.ts" />
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
+
+import React from 'react';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {editIcon, playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {Button} from '../index';
+import {Button} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
-
-const buttonContainer = {
-  display: 'flex',
-  alignItems: 'center',
-  '& button + button': {
-    marginLeft: 10,
-  },
-};
 
 storiesOf('Components/Buttons/Button/React/Standard', module)
   .addParameters({component: Button})
@@ -23,133 +15,105 @@ storiesOf('Components/Buttons/Button/React/Standard', module)
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
-      <Button size="large" variant={Button.Variant.Primary}>
+      <Button size="large" variant="primary">
         Primary
       </Button>
-      <Button size="large" variant={Button.Variant.Primary} icon={activityStreamIcon}>
+      <Button size="large" variant="primary" icon={activityStreamIcon}>
         Primary
       </Button>
-      <Button
-        size="large"
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
+      <Button size="large" variant="primary" icon={playCircleIcon} dataLabel="1:00">
         Primary
       </Button>
-      <Button
-        disabled={true}
-        size="large"
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
+      <Button disabled={true} size="large" variant="primary" icon={playCircleIcon} dataLabel="1:00">
         Primary
       </Button>
 
       <h3>Medium Primary</h3>
-      <Button size="medium" variant={Button.Variant.Primary}>
+      <Button size="medium" variant="primary">
         Primary
       </Button>
-      <Button size="medium" variant={Button.Variant.Primary} icon={editIcon}>
+      <Button size="medium" variant="primary" icon={editIcon}>
         Primary
       </Button>
-      <Button
-        size="medium"
-        variant={Button.Variant.Primary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
+      <Button size="medium" variant="primary" icon={playCircleIcon} dataLabel="1:00">
         Primary
       </Button>
       <Button
         disabled={true}
         size="medium"
-        variant={Button.Variant.Primary}
+        variant="primary"
         icon={playCircleIcon}
-        dataLabel={'1:00'}
+        dataLabel="1:00"
       >
         Primary
       </Button>
 
       <h3>Small Primary</h3>
-      <Button size="small" variant={Button.Variant.Primary}>
+      <Button size="small" variant="primary">
         Primary
       </Button>
-      <Button disabled={true} size="small" variant={Button.Variant.Primary}>
+      <Button disabled={true} size="small" variant="primary">
         Primary
       </Button>
 
       <h3>Growing Primary</h3>
-      <div css={buttonContainer}>
-        <Button size="large" variant={Button.Variant.Primary} grow={true}>
-          Primary
-        </Button>
-      </div>
+      <Button size="large" variant="primary" grow={true}>
+        Primary
+      </Button>
     </div>
   ))
   .add('Secondary', () => (
     <div className="story">
       <h3>Large Secondary</h3>
-      <Button size="large" variant={Button.Variant.Secondary}>
+      <Button size="large" variant="secondary">
         Secondary
       </Button>
-      <Button size="large" variant={Button.Variant.Secondary} icon={activityStreamIcon}>
+      <Button size="large" variant="secondary" icon={activityStreamIcon}>
         Secondary
       </Button>
-      <Button
-        size="large"
-        variant={Button.Variant.Secondary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
+      <Button size="large" variant="secondary" icon={playCircleIcon} dataLabel="1:00">
         Secondary
       </Button>
       <Button
         disabled={true}
         size="large"
-        variant={Button.Variant.Secondary}
+        variant="secondary"
         icon={playCircleIcon}
-        dataLabel={'1:00'}
+        dataLabel="1:00"
       >
         Secondary
       </Button>
 
       <h3>Medium Secondary</h3>
-      <Button size="medium" variant={Button.Variant.Secondary}>
+      <Button size="medium" variant="secondary">
         Secondary
       </Button>
-      <Button size="medium" variant={Button.Variant.Secondary} icon={editIcon}>
+      <Button size="medium" variant="secondary" icon={editIcon}>
         Secondary
       </Button>
-      <Button
-        size="medium"
-        variant={Button.Variant.Secondary}
-        icon={playCircleIcon}
-        dataLabel={'1:00'}
-      >
+      <Button size="medium" variant="secondary" icon={playCircleIcon} dataLabel="1:00">
         Secondary
       </Button>
       <Button
         disabled={true}
         size="medium"
-        variant={Button.Variant.Secondary}
+        variant="secondary"
         icon={playCircleIcon}
-        dataLabel={'1:00'}
+        dataLabel="1:00"
       >
         Secondary
       </Button>
 
       <h3>Small Secondary</h3>
-      <Button size="small" variant={Button.Variant.Secondary}>
+      <Button size="small" variant="secondary">
         Secondary
       </Button>
-      <Button disabled={true} size="small" variant={Button.Variant.Secondary}>
+      <Button disabled={true} size="small" variant="secondary">
         Secondary
       </Button>
 
       <h3>Growing Secondary</h3>
-      <Button size="large" variant={Button.Variant.Secondary} grow={true}>
+      <Button size="large" variant="secondary" grow={true}>
         Growing Secondary
       </Button>
     </div>

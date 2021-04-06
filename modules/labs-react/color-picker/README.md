@@ -28,7 +28,7 @@ import {Popper, Popup} from '@workday/canvas-kit-react/popup';
 const MyComponent: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [color, setColor] = React.useState('');
-  const buttonRef = React.useRef(null);
+  const ref = React.useRef(null);
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -42,10 +42,10 @@ const MyComponent: React.FunctionComponent = () => {
 
   return (
     <>
-      <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={toggleOpen}>
+      <Button ref={ref} variant="primary" onClick={toggleOpen}>
         Toggle Color Picker
       </Button>
-      <Popper placement={'bottom'} open={isOpen} anchorElement={buttonRef.current!}>
+      <Popper placement={'bottom'} open={isOpen} anchorElement={ref.current!}>
         <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
           <ColorPicker
             resetColor={colors.blueberry400}

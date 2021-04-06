@@ -207,11 +207,7 @@ const ColorPicker = ({
               showCheck={value === validHexValue || value === customHexValue}
             />
           </ColorInputAndLabel>
-          <CheckButton
-            aria-label={submitLabel}
-            variant={IconButton.Variant.CircleFilled}
-            icon={checkIcon}
-          />
+          <CheckButton aria-label={submitLabel} variant="circleFilled" icon={checkIcon} />
         </ColorInputWrapper>
       )}
     </ColorPickerContainer>

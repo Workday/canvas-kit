@@ -3,7 +3,7 @@ import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, commonColors, type, spacing} from '@workday/canvas-kit-react/core';
-import Button from '@workday/canvas-kit-react/button';
+import {Button} from '@workday/canvas-kit-react/button';
 
 export interface CookieBannerProps {
   /**
@@ -107,7 +107,7 @@ export default class CookieBanner extends React.Component<CookieBannerProps> {
           {onClickSettings && (
             <CookieSettings onClick={onClickSettings}>{settingsLabel}</CookieSettings>
           )}
-          <Button onClick={onAccept} variant={Button.Variant.Primary} grow={true}>
+          <Button onClick={onAccept} variant="primary" grow={true}>
             Continue
           </Button>
         </BannerItem>

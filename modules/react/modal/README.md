@@ -12,7 +12,7 @@ yarn add @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react/button';
+import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
 import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 
 const DeleteItem = ({item, onDelete}) => {
@@ -25,17 +25,11 @@ const DeleteItem = ({item, onDelete}) => {
 
   return (
     <>
-      <Button variant={Button.Variant.Delete} {...modal.targetProps}>
-        Delete Item
-      </Button>
+      <DeleteButton {...modal.targetProps}>Delete Item</DeleteButton>
       <Modal heading={'Delete Item'} {...modal.modalProps}>
         <p>Are you sure you'd like to delete the item titled '{item.name}'?</p>
-        <Button onClick={deleteItem} variant={Button.Variant.Delete}>
-          Delete
-        </Button>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
-          Cancel
-        </Button>
+        <DeleteButton onClick={deleteItem}>Delete</DeleteButton>
+        <Button onClick={closeModal}>Cancel</Button>
       </Modal>
     </>
   );

@@ -10,11 +10,11 @@ import {select, number} from '@storybook/addon-knobs';
 
 import {colors, type} from '@workday/canvas-kit-react/core';
 import README from '../README.md';
-import {SystemIcon} from '../../icon';
-import {Header} from '../../../labs-react/header';
-import {Button, IconButton} from '../../button';
-import {Avatar} from '../../avatar';
-import SidePanel from '../index';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {Header} from '@workday/canvas-kit-labs-react/header';
+import {Button, IconButton} from '@workday/canvas-kit-react/button';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 
 interface SidePanelState {
   open: boolean;
@@ -104,14 +104,9 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
         header={'Side Panel Header'}
       >
         {open ? (
-          <Button variant={Button.Variant.Primary}>Add New</Button>
+          <Button variant="primary">Add New</Button>
         ) : (
-          <AddButton
-            toggled={false}
-            size={IconButton.Size.Small}
-            variant={IconButton.Variant.CircleFilled}
-            aria-label="Add"
-          >
+          <AddButton toggled={false} size="small" variant="circleFilled" aria-label="Add">
             <SystemIcon icon={plusIcon} />
           </AddButton>
         )}
@@ -178,7 +173,7 @@ storiesOf('Components/Containers/Side Panel/React', module)
               alert('clicked avatar');
             }}
           />
-          <Button variant={Button.Variant.Primary}>Sign Up</Button>
+          <Button variant="primary">Sign Up</Button>
         </Header>
         <SidePanelWrapper />
       </div>

@@ -7,20 +7,12 @@ import uuid from 'uuid/v4';
 import {setupIcon, uploadCloudIcon, userIcon, extLinkIcon} from '@workday/canvas-system-icons-web';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import {Button, ButtonProps} from '../../../react/button';
+import {Button, ButtonProps} from '@workday/canvas-kit-react/button';
 
 import Menu from '../lib/Menu';
 import MenuItem, {MenuItemProps} from '../lib/MenuItem';
 
 import README from '../README.md';
-
-const FocusableButton = React.forwardRef(
-  (props: ButtonProps, ref: React.RefObject<HTMLButtonElement>) => (
-    <Button buttonRef={ref} {...props}>
-      {props.children}
-    </Button>
-  )
-);
 
 interface StoryMenuItemProps extends Omit<MenuItemProps, 'role'> {
   text: React.ReactNode;
@@ -99,7 +91,7 @@ class ControlledMenu extends React.Component<{items?: React.ReactElement[]}, Con
     return (
       <ClickAwayListener onClickAway={this.handleClose}>
         <div>
-          <FocusableButton
+          <Button
             onClick={this.handleClick}
             onKeyDown={this.handleKeyDown}
             aria-expanded={!!isOpen}
@@ -109,7 +101,7 @@ class ControlledMenu extends React.Component<{items?: React.ReactElement[]}, Con
             ref={this.buttonRef}
           >
             Open Menu
-          </FocusableButton>
+          </Button>
           <Popper placement={'bottom-start'} open={isOpen} anchorElement={anchorEl}>
             <div style={{opacity: isOpen ? 1 : 0, display: isOpen ? `initial` : `none`}}>
               <Menu

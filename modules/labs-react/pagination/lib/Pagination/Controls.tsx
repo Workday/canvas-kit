@@ -11,9 +11,10 @@ import {PaginationModel} from './types';
 import {HStack} from './common/Stack';
 import {useRTL} from './common/utils/useRTL';
 
-export type ControlButtonProps = IconButtonProps & {
-  model: PaginationModel;
-};
+export type ControlButtonProps = IconButtonProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    model: PaginationModel;
+  };
 
 export type ControlsProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -39,8 +40,8 @@ export const JumpToFirstButton = ({model, onClick, ...restProps}: ControlButtonP
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      variant={IconButton.Variant.Square}
-      size={IconButton.Size.Small}
+      variant="square"
+      size="small"
       icon={icon}
       onClick={handleClick}
       {...restProps}
@@ -62,8 +63,8 @@ export const StepToPreviousButton = ({onClick, model, ...restProps}: ControlButt
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      variant={IconButton.Variant.Square}
-      size={IconButton.Size.Small}
+      variant="square"
+      size="small"
       icon={icon}
       onClick={handleClick}
       {...restProps}
@@ -85,8 +86,8 @@ export const StepToNextButton = ({model, onClick, ...restProps}: ControlButtonPr
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      variant={IconButton.Variant.Square}
-      size={IconButton.Size.Small}
+      variant="square"
+      size="small"
       icon={icon}
       onClick={handleClick}
       {...restProps}
@@ -108,8 +109,8 @@ export const JumpToLastButton = ({model, onClick, ...restProps}: ControlButtonPr
   return (
     <IconButton
       aria-disabled={isDisabled || undefined}
-      variant={IconButton.Variant.Square}
-      size={IconButton.Size.Small}
+      variant="square"
+      size="small"
       icon={icon}
       onClick={handleClick}
       {...restProps}

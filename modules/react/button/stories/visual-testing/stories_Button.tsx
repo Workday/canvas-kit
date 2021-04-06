@@ -9,26 +9,27 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {Button} from '../../index';
+import {Button} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Button',
   component: Button,
 });
 
-export const ButtonStates = () => (
-  <StaticStates>
+export const ButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
         variant: [
-          {value: Button.Variant.Primary, label: 'Primary'},
-          {value: Button.Variant.Secondary, label: 'Secondary'},
+          {value: 'primary', label: 'Primary'},
+          {value: 'secondary', label: 'Secondary'},
         ],
         size: [
-          {value: Button.Size.Small, label: 'Small'},
-          {value: Button.Size.Medium, label: 'Medium'},
-          {value: Button.Size.Large, label: 'Large'},
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
         ],
         icon: [
           {value: undefined, label: ''},
@@ -50,9 +51,4 @@ export const ButtonStates = () => (
   </StaticStates>
 );
 
-export const ButtonThemedStates = () => <ButtonStates />;
-ButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
+export const ButtonThemedStates = () => <ButtonStates theme={{canvas: customColorTheme}} />;

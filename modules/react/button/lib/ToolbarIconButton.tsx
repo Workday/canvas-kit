@@ -1,6 +1,12 @@
 import * as React from 'react';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
-import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {
+  focusRing,
+  useTheme,
+  Themeable,
+  EmotionCanvasTheme,
+  createComponent,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
@@ -24,48 +30,51 @@ const containerStyles = {
   },
 };
 
-const ToolbarIconButton = ({
-  // TODO: Fix useTheme and make it a real hook
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  theme = useTheme(),
-  buttonRef,
-  onToggleChange,
-  'aria-label': iconArialabel,
-  icon,
-  toggled,
-  children,
-  ...elemProps
-}: ToolbarIconButtonProps) => {
-  const isInitialMount = React.useRef(true);
+export const ToolbarIconButton = createComponent('button')({
+  displayName: 'ToolbarIconButton',
+  Component: (
+    {
+      // TODO: Fix useTheme and make it a real hook
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      theme = useTheme(),
+      onToggleChange,
+      icon,
+      toggled,
+      children,
+      ...elemProps
+    }: ToolbarIconButtonProps,
+    ref,
+    Element
+  ) => {
+    const isInitialMount = React.useRef(true);
 
-  // Only call onToggleChange on update - not on first mount
-  React.useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      if (toggled && typeof onToggleChange === 'function') {
-        onToggleChange(toggled);
+    // Only call onToggleChange on update - not on first mount
+    React.useEffect(() => {
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+      } else {
+        if (toggled && typeof onToggleChange === 'function') {
+          onToggleChange(toggled);
+        }
       }
-    }
-  }, [toggled, onToggleChange]);
+    }, [toggled, onToggleChange]);
 
-  return (
-    <ButtonContainer
-      colors={getToolbarIconButtonColors(theme, toggled)}
-      size={'small'}
-      ref={buttonRef}
-      fillIcon={toggled}
-      extraStyles={containerStyles}
-      aria-pressed={toggled}
-      aria-label={iconArialabel}
-      {...elemProps}
-    >
-      {icon ? <SystemIcon icon={icon} /> : children}
-    </ButtonContainer>
-  );
-};
-
-export default ToolbarIconButton;
+    return (
+      <ButtonContainer
+        ref={ref}
+        as={Element}
+        colors={getToolbarIconButtonColors(theme, toggled)}
+        size={'small'}
+        fillIcon={toggled}
+        extraStyles={containerStyles}
+        aria-pressed={toggled}
+        {...elemProps}
+      >
+        {icon ? <SystemIcon icon={icon} /> : children}
+      </ButtonContainer>
+    );
+  },
+});
 
 const getToolbarIconButtonColors = (theme: EmotionCanvasTheme, toggled?: boolean): ButtonColors => {
   const {

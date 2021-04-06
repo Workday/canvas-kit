@@ -8,14 +8,14 @@ import {
   controlComponent,
   customColorTheme,
 } from '../../../../utils/storybook';
-import Select from '../lib/Select';
+import {Select} from '@workday/canvas-kit-labs-react/select';
 import SelectBase from '../lib/SelectBase';
 import SelectOption from '../lib/SelectOption';
 
 import {colors} from '@workday/canvas-kit-react/core';
-import {Button} from '../../../react/button';
-import FormField from '../../../react/form-field';
-import {Modal, useModal} from '../../../react/modal';
+import {Button} from '@workday/canvas-kit-react/button';
+import FormField from '@workday/canvas-kit-react/form-field';
+import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 
 import {manyOptions, options} from './stories';
 
@@ -195,7 +195,7 @@ const SelectModal = () => {
 
   return (
     <div>
-      <Button variant={Button.Variant.Primary} {...targetProps}>
+      <Button variant="primary" {...targetProps}>
         Show Modal
       </Button>
       <Modal heading="Modal with Select" {...modalProps}>
@@ -203,10 +203,10 @@ const SelectModal = () => {
         <FormField label="Label" inputId="select-modal">
           {controlComponent(<Select name="city" options={manyOptions} />)}
         </FormField>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} variant={Button.Variant.Primary}>
+        <Button style={{marginRight: '16px'}} onClick={closeModal} variant="primary">
           Submit
         </Button>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+        <Button onClick={closeModal} variant="secondary">
           Cancel
         </Button>
       </Modal>

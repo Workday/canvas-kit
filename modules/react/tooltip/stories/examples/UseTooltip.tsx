@@ -10,12 +10,7 @@ export const UseTooltip = () => {
 
   return (
     <>
-      <IconButton
-        variant={IconButton.Variant.Circle}
-        icon={xIcon}
-        {...targetProps}
-        aria-label="Close"
-      />
+      <IconButton variant="circle" icon={xIcon} {...targetProps} aria-label="Close" />
       <Popper placement="top" {...popperProps}>
         <TooltipContainer {...tooltipProps}>Close</TooltipContainer>
       </Popper>

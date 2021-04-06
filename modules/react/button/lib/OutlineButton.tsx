@@ -6,29 +6,23 @@ import {
   useTheme,
   Themeable,
   EmotionCanvasTheme,
+  createComponent,
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {OutlineButtonVariant, ButtonColors, ButtonSize, ButtonOrAnchorComponent} from './types';
+import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
-export interface OutlineButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    Themeable,
-    GrowthBehavior {
+export interface OutlineButtonProps extends Themeable, GrowthBehavior {
   /**
    * The variant of the Button.
-   * @default OutlineButtonVariant.Secondary
+   * @default 'secondary'
    */
-  variant?: OutlineButtonVariant;
+  variant?: 'primary' | 'secondary' | 'inverse';
   /**
    * The size of the Button.
    * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
-  /**
-   * The ref to the button that the styled component renders.
-   */
-  buttonRef?: React.Ref<HTMLButtonElement>;
   /**
    * The data label of the Button.
    * Note: not displayed at `small` size
@@ -39,44 +33,42 @@ export interface OutlineButtonProps
    * Note: not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
-  /**
-   * The alternative container type for the button. Uses Emotion's special `as` prop.
-   * Will render an `a` tag instead of a `button` when defined.
-   */
-  as?: 'a';
+  children?: React.ReactNode;
 }
 
-const OutlineButton: ButtonOrAnchorComponent<OutlineButtonProps, typeof OutlineButtonVariant> = ({
-  // TODO: Fix useTheme and make it a real hook
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  theme = useTheme(),
-  variant = OutlineButtonVariant.Secondary,
-  size = 'medium',
-  buttonRef,
-  dataLabel,
-  icon,
-  children,
-  ...elemProps
-}: OutlineButtonProps) => (
-  <ButtonContainer
-    colors={getOutlineButtonColors(variant, theme)}
-    size={size}
-    ref={buttonRef}
-    {...elemProps}
-  >
-    {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
-    <ButtonLabel>{children}</ButtonLabel>
-    {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-  </ButtonContainer>
-);
-
-OutlineButton.Variant = OutlineButtonVariant;
-OutlineButton.Size = ButtonSize;
-
-export default OutlineButton;
+export const OutlineButton = createComponent('button')({
+  displayName: 'OutlineButton',
+  Component: (
+    {
+      // TODO: Fix useTheme and make it a real hook
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      theme = useTheme(),
+      variant = 'secondary',
+      size = 'medium',
+      dataLabel,
+      icon,
+      children,
+      ...elemProps
+    }: OutlineButtonProps,
+    ref,
+    Element
+  ) => (
+    <ButtonContainer
+      ref={ref}
+      as={Element}
+      colors={getOutlineButtonColors(variant, theme)}
+      size={size}
+      {...elemProps}
+    >
+      {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+      <ButtonLabel>{children}</ButtonLabel>
+      {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+    </ButtonContainer>
+  ),
+});
 
 export const getOutlineButtonColors = (
-  variant: OutlineButtonVariant,
+  variant: 'primary' | 'secondary' | 'inverse',
   theme: EmotionCanvasTheme
 ): ButtonColors => {
   const {
@@ -86,7 +78,7 @@ export const getOutlineButtonColors = (
   } = theme;
 
   switch (variant) {
-    case OutlineButtonVariant.Primary:
+    case 'primary':
       return {
         default: {
           background: 'transparent',
@@ -117,7 +109,7 @@ export const getOutlineButtonColors = (
           label: colors.licorice100,
         },
       };
-    case OutlineButtonVariant.Secondary:
+    case 'secondary':
     default:
       return {
         default: {
@@ -151,7 +143,7 @@ export const getOutlineButtonColors = (
           label: colors.licorice100,
         },
       };
-    case OutlineButtonVariant.Inverse:
+    case 'inverse':
       return {
         default: {
           background: 'transparent',

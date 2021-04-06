@@ -1,53 +1,46 @@
 import * as React from 'react';
 import {type} from '@workday/canvas-kit-labs-react/core';
-import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {
+  focusRing,
+  useTheme,
+  Themeable,
+  EmotionCanvasTheme,
+  createComponent,
+} from '@workday/canvas-kit-react/common';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {
-  TextButtonVariant,
-  ButtonIconPosition,
-  ButtonColors,
-  ButtonOrAnchorComponent,
-} from './types';
+import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
-export interface TextButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Themeable {
+export interface TextButtonProps extends Themeable {
   /**
    * The variant of the TextButton.
-   * @default TextButtonVariant.Default
+   * @default 'text'
    */
-  variant?: TextButtonVariant;
+  variant?: 'text' | 'inverse';
   /**
    * The size of the TextButton.
    * @default 'medium'
    */
   size?: 'small' | 'medium';
   /**
-   * The position of the TextButton icon. Accepts `Left` or `Right`.
-   * @default ButtonIconPosition.Left
+   * The position of the TextButton icon.
+   * @default 'left'
    */
-  iconPosition?: ButtonIconPosition;
-  /**
-   * The ref to the button that the styled component renders.
-   */
-  buttonRef?: React.Ref<HTMLButtonElement>;
+  iconPosition?: 'left' | 'right';
   /**
    * The icon of the TextButton.
    */
   icon?: CanvasSystemIcon;
   /**
-   * The capitialization of the text in the button.
+   * The capitalization of the text in the button.
    */
   allCaps?: boolean;
-  /**
-   * The alternative container type for the button. Uses Emotion's special `as` prop.
-   * Will render an `a` tag instead of a `button` when defined.
-   */
-  as?: 'a';
+  children?: React.ReactNode;
 }
 
 const getTextButtonColors = (
-  variant: TextButtonVariant,
+  variant: 'text' | 'inverse',
   theme: EmotionCanvasTheme
 ): ButtonColors => {
   const {
@@ -57,7 +50,7 @@ const getTextButtonColors = (
   } = theme;
 
   switch (variant) {
-    case TextButtonVariant.Default:
+    case 'text':
     default:
       return {
         default: {
@@ -85,7 +78,7 @@ const getTextButtonColors = (
           label: themePrimary.light,
         },
       };
-    case TextButtonVariant.Inverse:
+    case 'inverse':
       return {
         default: {
           background: 'transparent',
@@ -140,59 +133,55 @@ const containerStyles = {
   },
 };
 
-const TextButton: ButtonOrAnchorComponent<TextButtonProps, typeof TextButtonVariant> & {
-  IconPosition: typeof ButtonIconPosition;
-} = ({
-  // TODO: Fix useTheme and make it a real hook
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  theme = useTheme(),
-  variant = TextButtonVariant.Default,
-  size = 'medium',
-  iconPosition = ButtonIconPosition.Left,
-  buttonRef,
-  children,
-  icon,
-  allCaps,
-  ...elemProps
-}: TextButtonProps) => {
-  // Note: We don't use ButtonLabel because the label styles differ from other button types
-  const allContainerStyles = allCaps
-    ? {
-        ...containerStyles,
-        ...type.variant.caps,
-        ...type.variant.button,
-        fontSize: size === 'medium' ? type.body.fontSize : undefined,
-        letterSpacing: '.5px',
-      }
-    : {
-        ...containerStyles,
-        fontSize: size === 'medium' ? type.body.fontSize : undefined,
-      };
+export const TextButton = createComponent('button')({
+  displayName: 'TextButton',
+  Component: (
+    {
+      // TODO: Fix useTheme and make it a real hook
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      theme = useTheme(),
+      variant = 'text',
+      size = 'medium',
+      iconPosition = 'left',
+      children,
+      icon,
+      allCaps,
+      ...elemProps
+    }: TextButtonProps,
+    ref,
+    Element
+  ) => {
+    // Note: We don't use ButtonLabel because the label styles differ from other button types
+    const allContainerStyles = allCaps
+      ? {
+          ...containerStyles,
+          ...type.variant.caps,
+          ...type.variant.button,
+          fontSize: size === 'medium' ? type.body.fontSize : undefined,
+          letterSpacing: '.5px',
+        }
+      : {
+          ...containerStyles,
+          fontSize: size === 'medium' ? type.body.fontSize : undefined,
+        };
 
-  return (
-    <ButtonContainer
-      colors={getTextButtonColors(variant, theme)}
-      ref={buttonRef}
-      size={size}
-      extraStyles={allContainerStyles}
-      {...elemProps}
-    >
-      {icon && iconPosition === ButtonIconPosition.Left && (
-        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
-      )}
-      <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
-      {icon && iconPosition === ButtonIconPosition.Right && (
-        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
-      )}
-    </ButtonContainer>
-  );
-};
-
-TextButton.IconPosition = ButtonIconPosition;
-TextButton.Variant = TextButtonVariant;
-TextButton.Size = {
-  Small: 'small',
-  Medium: 'medium',
-} as const;
-
-export default TextButton;
+    return (
+      <ButtonContainer
+        ref={ref}
+        as={Element}
+        colors={getTextButtonColors(variant, theme)}
+        size={size}
+        extraStyles={allContainerStyles}
+        {...elemProps}
+      >
+        {icon && iconPosition === 'left' && (
+          <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+        )}
+        <ButtonLabel className="wdc-text-button-label">{children}</ButtonLabel>
+        {icon && iconPosition === 'right' && (
+          <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+        )}
+      </ButtonContainer>
+    );
+  },
+});

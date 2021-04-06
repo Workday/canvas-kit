@@ -40,7 +40,7 @@ interface UseDropdown {
 
 export const useDropdown = (
   activeDropdownItemRef: React.RefObject<HTMLAnchorElement>,
-  buttonRef: React.RefObject<HTMLButtonElement>,
+  ref: React.RefObject<HTMLButtonElement>,
   items: Breadcrumb[],
   buttonId?: string
 ): UseDropdown => {
@@ -49,7 +49,7 @@ export const useDropdown = (
   // behaviors
   const {targetProps, closePopup, popperProps} = usePopup();
   useCloseOnOutsideClick(popperProps.ref, closePopup);
-  useCloseOnEscape(popperProps.ref, closePopup, buttonRef);
+  useCloseOnEscape(popperProps.ref, closePopup, ref);
   useFocusActiveItemElement(activeDropdownItemRef);
 
   const handleButtonKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -59,7 +59,7 @@ export const useDropdown = (
   };
 
   const resetMenuFocus = () => {
-    buttonRef.current?.focus();
+    ref.current?.focus();
     closePopup();
   };
 
@@ -87,7 +87,7 @@ export const useDropdown = (
 
   const dropdownButtonProps = {
     id: uniqueButtonId,
-    buttonRef,
+    ref,
     toggled: popperProps.open,
     onKeyUp: handleButtonKeyUp,
     ...targetProps,

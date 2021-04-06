@@ -10,6 +10,7 @@ about the update.
 - [Canvas Kit 5.0 Migration Guide](#canvas-kit-50-migration-guide)
   - [General Changes](#general-changes)
     - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
+    - [Codemod](#codemod)
     - [Slash Imports](#slash-imports)
     - [Compound Components](#compound-components)
   - [Breaking Component Changes](#breaking-component-changes)
@@ -20,6 +21,21 @@ about the update.
 ### Canvas Kit CSS Maintenance Mode
 
 Due to the infrequent use of our CSS modules, they will be going into maintenance mode in Canvas Kit v5. We will still support `@workday/canvas-kit-css` with bug fixes and significant visual updates, but it generally won't be receiving new components, additional features, etc. This will allow us to provide more focused support, and dedicate our efforts to making bigger and better improvements to our most used components: Canvas Kit React. If you have questions or concerns, please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=&template=question.md).
+
+### Codemod
+
+We've provided a [new codemod package](./modules/codemod) that you can use to update the majority of these breaking code changes. Simply run:
+
+```sh
+> npx @workday/canvas-kit-codemod v5 [path]
+```
+> Note: This codemod only work on .js, .jsx, .ts, and .tsx extensions. You may need to make some manual changes in other file types (.json, .mdx, .md, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as it's resulting formatting (spacing, quotes, etc.) may not match your project's styling.
+
+Breaking changes accounted for by this codemod will be marked with a 🤖.
+
+Please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have any troubles or missed use cases with this codemod. The `@workday/canvas-kit-codemod` package will help us maintain additional codemod transforms to make future migrations easier.
 
 ### Slash Imports
 
@@ -38,16 +54,7 @@ import canvas from "@workday/canvas-kit-react/core";
 import { Button } from "@workday/canvas-kit-react/button";
 ```
 
-We've provided a [new codemod package](./modules/codemod) that you can use to update the majority of your imports. Simply run:
-
-```sh
-> npx @workday/canvas-kit-codemod v5 [path]
-```
-> Note: This codemod only work on .js, .jsx, .ts, and .tsx extensions. You may need to make some manual changes in other file types (.json, .mdx, .md, etc.).
-
-> Note: You may need to run your linter after executing the codemod, as it's resulting formatting (spacing, quotes, etc.) may not match your project's styling.
-
-Please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have any troubles or missed use cases with this codemod. The `@workday/canvas-kit-codemod` package will help us maintain additional codemod transforms to make future migrations easier.
+This change is covered by the codemod, but it doesn't currently run on files that don't use the .js, .jsx, .ts, and .tsx extensions. Those files will have to be updated manually.
 
 ### Compound Components
 
@@ -69,3 +76,57 @@ Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.md)
 PR:
 
 - https://github.com/Workday/canvas-kit/pull/953
+
+### Button
+
+- 🤖 `beta_Button` export was removed. The codemod will rename the import to `Button` instead, preserving local renaming if it exists.
+  ```tsx
+  // before
+  import { beta_Button as Button } from '@workday/canvas-kit-react-button';
+  // after
+  import { Button } from '@workday/canvas-kit-react-button';
+  ```
+- 🤖 The default export was removed. The codemod will change default imports to named imports.
+  ```tsx
+  // before
+  import Button from '@workday/canvas-kit-react-button';
+  // after
+  import { Button } from '@workday/canvas-kit-react-button';
+  ```
+- 🤖 Enums have been removed from all buttons. String literals are used instead. The codemod will write any usages of an enum to the string literal. If you used an enum as a type, the codemod will expand to a union of string literals. You could change the union manually instead to be something like `ButtonProps['variant']` if you prefer not to duplicate the union of string literals.
+  ```tsx
+  // before
+  <Button variant={Button.Variant.Primary} />
+  interface Props {
+    variant: ButtonVariant
+  }
+  // after
+  <Button variant="primary" />
+  interface Props {
+    variant: 'primary' | 'secondary'
+  }
+  ```
+- Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and allows `as` to change the underlying element.
+  - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer valid. The codemod will rewrite all instances of `buttonRef` to `ref`. This has the potential to catch too much, so it is only run on files that import a Canvas Kit package. Run a type check and check the diff to make sure this codemod didn't change unintentional `buttonRef` that are valid in your code base.
+    ```tsx
+    // before
+    <Button buttonRef={ref}>
+    // after
+    <Button ref={ref}>
+    ```
+  - Button prop interfaces no longer extend directly from the `React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that determines the element interface via the `as` prop. This is why Button props no longer contain an element interface directly. If you extend from a Button prop interface, or have code that uses a Button prop interface and accesses properties like `onClick`, you'll have to provide the button attribute yourself. This is not code-moddable since intent cannot be pre-determined. This will not effect runtime, but only Typescript.
+    ```tsx
+    // before
+    interface MyButtonProps extends ButtonProps {}
+
+    // onClick no longer exists on `ButtonProps`, but does exist as a prop in `<Button>`
+    const MyButton = ({ children, onClick }: MyButtonProps) => <Button onClick={onClick}>{children}</Button>
+
+    // after
+    interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+    // OR
+    interface MyButtonProps extends ButtonProps {
+      onClick?: React.MouseEventHandler<HTMLButtonElement>
+    }
+    ```

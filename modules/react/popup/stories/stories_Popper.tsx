@@ -33,7 +33,7 @@ export const PopperStory = () => {
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
-      <Button buttonRef={buttonRef} variant={Button.Variant.Primary} onClick={onClickButton}>
+      <Button ref={buttonRef} variant="primary" onClick={onClickButton}>
         Toggle Popup
       </Button>
       <Popper placement={'bottom'} open={open} anchorElement={buttonRef.current!} ref={popupRef}>
