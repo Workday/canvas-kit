@@ -38,6 +38,21 @@ export default function transformer(file: FileInfo, api: API) {
       return nodePath;
     });
 
+  // replace all spacing and spacingNumber properties from canvas
+  root
+    .find(j.MemberExpression, {object: {type: 'Identifier', name: 'canvas'}})
+    .forEach(nodePath => {
+      const objectProperty = nodePath.value.property as Identifier;
+      if (objectProperty.name === 'spacing') {
+        objectProperty.name = 'space';
+      }
+      if (objectProperty.name === 'spacingNumbers') {
+        objectProperty.name = 'spaceNumbers';
+      }
+
+      return nodePath;
+    });
+
   // replace all member expressions of 'CanvasSpacing' with 'CanvasSpace'
   root
     .find(j.TSTypeReference, {typeName: {type: 'Identifier', name: 'CanvasSpacing'}})

@@ -134,6 +134,26 @@ describe('Canvas Kit Spacing Member Expressions and Type References Codemod', ()
 
       expectTransform(input, expected);
     });
+
+    it('should properly transform spacing values from canvas', () => {
+      const input = `
+      import canvas, {CanvasSpace} from '@workday/canvas-kit-react/core';
+
+      const styles = {
+        padding: canvas.spacingNumbers.m,
+        width: canvas.spacing.s,
+      }`;
+
+      const expected = `
+      import canvas, {CanvasSpace} from '@workday/canvas-kit-react/core';
+
+      const styles = {
+        padding: canvas.spaceNumbers.m,
+        width: canvas.space.s,
+      }`;
+
+      expectTransform(input, expected);
+    });
   });
 
   context('when using Canvas spacing types', () => {
