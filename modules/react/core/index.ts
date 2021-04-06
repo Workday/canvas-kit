@@ -7,8 +7,9 @@ import InputProvider from './lib/InputProvider';
 import {
   space,
   CanvasSpace,
-  CanvasSpaceNumbers,
   CanvasSpaceValues,
+  CanvasSpaceNumberValues,
+  CanvasSpaceNumbers,
   spaceNumbers,
 } from './lib/space';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
@@ -40,8 +41,6 @@ export {
   BrandingColor,
   CanvasDepth,
   CanvasDepthValue,
-  CanvasSpace,
-  CanvasSpaceValues,
   CSSProperties,
   InputProvider,
 };
@@ -49,6 +48,9 @@ export default canvas;
 
 export type {
   CanvasColor,
+  CanvasSpace,
+  CanvasSpaceValues,
+  CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
   CanvasType,
   CanvasTypeVariant,
