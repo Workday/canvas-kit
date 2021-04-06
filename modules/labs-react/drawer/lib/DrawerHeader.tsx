@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, spacing, H4, CanvasColor, typeColors} from '@workday/canvas-kit-react/core';
+import {colors, space, H4, CanvasColor, typeColors} from '@workday/canvas-kit-react/core';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
@@ -44,7 +44,7 @@ const HeaderContainer = styled('div')<Pick<DrawerHeaderProps, 'headerColor' | 'b
     height: headerHeight,
     display: 'flex',
     alignItems: 'center',
-    padding: `0 ${spacing.s}`,
+    padding: `0 ${space.s}`,
     justifyContent: 'space-between',
   },
   ({borderColor}) => ({
@@ -60,7 +60,7 @@ const HeaderTitle = styled(H4)<Pick<DrawerHeaderProps, 'inverse'>>(
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    paddingRight: spacing.xxxs,
+    paddingRight: space.xxxs,
   },
   ({inverse}) => ({
     color: inverse ? colors.frenchVanilla100 : typeColors.heading,

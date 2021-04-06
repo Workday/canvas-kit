@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 
-import {colors, type, depth, spacing, borderRadius, H1, H2, H3, H4, H5} from '..';
+import {colors, type, depth, space, borderRadius, H1, H2, H3, H4, H5} from '..';
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
@@ -95,7 +95,7 @@ export const Type = () => (
 const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
   {
     ...type.h4,
-    margin: spacing.m,
+    margin: space.m,
     background: colors.blueberry400,
     color: colors.frenchVanilla100,
     display: 'flex',
@@ -113,14 +113,14 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
     borderRadius: radius,
   }),
   ({size}) => ({
-    width: size || spacing.xxl,
-    height: size || spacing.xxl,
+    width: size || space.xxl,
+    height: size || space.xxl,
   })
 );
 
 const SizeLabel = styled('div')({
   ...type.h4,
-  margin: spacing.s,
+  margin: space.s,
   width: 80,
   '& span': {
     ...type.body2,
@@ -144,15 +144,15 @@ export const BorderRadius = () => (
   </React.Fragment>
 );
 
-export const Spacing = () => (
+export const Space = () => (
   <React.Fragment>
-    {Object.keys(spacing).map(size => (
+    {Object.keys(space).map(size => (
       <div css={{display: 'flex'}}>
         <SizeLabel>
           {size}
-          <span>({(spacing as any)[size]})</span>
+          <span>({(space as any)[size]})</span>
         </SizeLabel>
-        <Shape size={(spacing as any)[size]} radius={borderRadius.m} />
+        <Shape size={(space as any)[size]} radius={borderRadius.m} />
       </div>
     ))}
   </React.Fragment>
@@ -181,8 +181,8 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   {
     ...type.body,
     fontWeight: 700,
-    padding: `0 ${spacing.m}`,
-    height: spacing.xl,
+    padding: `0 ${space.m}`,
+    height: space.xl,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -190,9 +190,9 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   ({primary, bg}) =>
     primary && {
       ...type.h3,
-      height: spacing.xxxl,
-      paddingTop: spacing.s,
-      paddingBottom: spacing.s,
+      height: space.xxxl,
+      paddingTop: space.s,
+      paddingBottom: space.s,
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-around',

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import throttle from 'lodash/throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, spacing, type, CanvasSpacingValue} from '@workday/canvas-kit-react/core';
+import {colors, space, type, CanvasSpaceValues} from '@workday/canvas-kit-react/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
 
@@ -33,7 +33,7 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The padding of the SidePanel when it's open.
    */
-  padding?: CanvasSpacingValue;
+  padding?: CanvasSpaceValues;
   /**
    * The window width at which the SidePanel triggers `onBreakPointChange`.
    * @default 768px
@@ -76,11 +76,11 @@ export enum SidePanelBackgroundColor {
   Gray,
 }
 
-const closedWidth = spacing.xxl;
+const closedWidth = space.xxl;
 
 const Header = styled('h2')({
   ...type.h2,
-  marginTop: spacing.zero,
+  marginTop: space.zero,
 });
 
 const SidePanelContainer = styled('div')<
@@ -123,11 +123,11 @@ const SidePanelContainer = styled('div')<
     width: open ? openWidth : closedWidth,
   }),
   ({open, padding}) => ({
-    padding: open ? padding || spacing.m : `${spacing.s} 0`,
+    padding: open ? padding || space.m : `${space.s} 0`,
   }),
   ({openDirection}) => ({
-    right: openDirection === SidePanelOpenDirection.Right ? spacing.zero : undefined,
-    left: openDirection === SidePanelOpenDirection.Left ? spacing.zero : undefined,
+    right: openDirection === SidePanelOpenDirection.Right ? space.zero : undefined,
+    left: openDirection === SidePanelOpenDirection.Left ? space.zero : undefined,
   })
 );
 
@@ -144,11 +144,11 @@ const ChildrenContainer = styled('div')<Pick<SidePanelProps, 'openWidth' | 'open
 const ToggleButton = styled(IconButton)<IconButtonProps & Pick<SidePanelProps, 'openDirection'>>(
   {
     position: 'absolute',
-    bottom: spacing.s,
+    bottom: space.s,
   },
   ({openDirection}) => ({
-    right: openDirection === SidePanelOpenDirection.Left ? spacing.s : '',
-    left: openDirection === SidePanelOpenDirection.Right ? spacing.s : '',
+    right: openDirection === SidePanelOpenDirection.Left ? space.s : '',
+    left: openDirection === SidePanelOpenDirection.Right ? space.s : '',
   })
 );
 
@@ -161,7 +161,7 @@ const SidePanelFooter = styled('div')<Pick<SidePanelProps, 'open' | 'openWidth'>
     background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.0001) 0%, #FFFFFF 100%)',
   },
   ({open, openWidth}) => ({
-    width: open ? openWidth : spacing.xxl,
+    width: open ? openWidth : space.xxl,
   })
 );
 

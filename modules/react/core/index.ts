@@ -8,7 +8,7 @@ import {
   space,
   CanvasSpace,
   CanvasSpaceNumbers,
-  CanvasSpaceValue,
+  CanvasSpaceValues,
   spaceNumbers,
 } from './lib/space';
 import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
@@ -41,7 +41,7 @@ export {
   CanvasDepth,
   CanvasDepthValue,
   CanvasSpace,
-  CanvasSpaceValue,
+  CanvasSpaceValues,
   CSSProperties,
   InputProvider,
 };

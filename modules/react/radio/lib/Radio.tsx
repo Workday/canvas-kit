@@ -10,7 +10,7 @@ import canvas, {
   borderRadius,
   colors,
   inputColors,
-  spacingNumbers as spacing,
+  spaceNumbers,
 } from '@workday/canvas-kit-react/core';
 
 export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
@@ -55,11 +55,11 @@ export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInp
 const radioBorderRadius = 9;
 const radioDot = 8;
 const radioHeight = 18;
-const radioTapArea = spacing.m;
+const radioTapArea = spaceNumbers.m;
 const radioContainerHeight = radioTapArea;
-const radioLabelDistance = spacing.xs;
+const radioLabelDistance = spaceNumbers.xs;
 const radioWidth = 18;
-const rippleRadius = (spacing.l - radioWidth) / 2;
+const rippleRadius = (spaceNumbers.l - radioWidth) / 2;
 
 const RadioContainer = styled('div')({
   display: 'flex',

@@ -7,7 +7,7 @@ import {
   Themeable,
   ContentDirection,
 } from '@workday/canvas-kit-react/common';
-import {colors, spacing, type, inputColors} from '@workday/canvas-kit-react/core';
+import {colors, space, type, inputColors} from '@workday/canvas-kit-react/core';
 import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
 import {ColorSwatch} from './parts/ColorSwatch';
 
@@ -103,7 +103,7 @@ const PoundSignPrefix = styled('span')<Pick<ColorInputProps, 'disabled'>>(
 const SwatchTile = styled(ColorSwatch)({
   position: 'absolute',
   top: 0,
-  left: spacing.xxs,
+  left: space.xxs,
   marginTop: '10px', // Fix vertical alignment on IE11
   boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.25)',
   pointerEvents: 'none',

@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Menu, MenuItem} from '@workday/canvas-kit-labs-react/menu';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/core';
 
 const containerStyles: React.CSSProperties = {
   display: 'flex',
@@ -19,7 +19,7 @@ const innerContainerStyles: React.CSSProperties = {
 
   width: 200,
   height: 200,
-  padding: spacing.m,
+  padding: space.m,
 
   border: `1px solid ${colors.blueberry500}`,
   borderRadius: borderRadius.l,

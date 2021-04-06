@@ -5,7 +5,7 @@ import uuid from 'uuid/v4';
 
 import Card from '@workday/canvas-kit-react/card';
 import {IconButton} from '@workday/canvas-kit-react/button';
-import {CanvasDepthValue, depth as depthValues, spacing} from '@workday/canvas-kit-react/core';
+import {CanvasDepthValue, depth as depthValues, space} from '@workday/canvas-kit-react/core';
 import {
   styled,
   TransformOrigin,
@@ -68,11 +68,11 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
   closeButtonAriaLabel?: string;
 }
 
-const closeIconSpacing = spacing.xs;
+const closeIconSpacing = space.xs;
 const closeIconSpacingSmall = 10;
 
 const popupAnimation = (transformOrigin: TransformOrigin) => {
-  const translate = getTranslateFromOrigin(transformOrigin, spacing.xxs);
+  const translate = getTranslateFromOrigin(transformOrigin, space.xxs);
 
   return keyframes`
     0% {
@@ -91,7 +91,7 @@ const Container = styled('div', {
 })<PickRequired<PopupProps, 'transformOrigin', 'width'>>(
   {
     position: 'relative',
-    maxWidth: `calc(100vw - ${spacing.l})`,
+    maxWidth: `calc(100vw - ${space.l})`,
   },
   ({width}) => width && {width},
   ({transformOrigin}) => {

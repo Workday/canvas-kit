@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Button} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 
 export const Ellipsis = () => {
   return (
@@ -18,7 +18,7 @@ export const Ellipsis = () => {
       <OverflowTooltip>
         <button
           style={{
-            marginTop: spacing.xs,
+            marginTop: space.xs,
             maxWidth: 200,
             overflow: 'hidden',
             textOverflow: 'ellipsis',

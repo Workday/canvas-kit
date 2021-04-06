@@ -1,5 +1,5 @@
 import React from 'react';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 
 import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
 
@@ -37,7 +37,7 @@ export const SinglePanel = () => {
           Third Tab
         </Tabs.Item>
       </Tabs.List>
-      <Tabs.Panel style={{marginTop: spacing.m}} hidden={undefined} id="mytab-panel">
+      <Tabs.Panel style={{marginTop: space.m}} hidden={undefined} id="mytab-panel">
         {contents[currentTab]}
       </Tabs.Panel>
     </Tabs>

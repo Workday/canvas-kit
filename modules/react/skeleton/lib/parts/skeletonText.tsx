@@ -4,7 +4,7 @@ import {TEXT_BORDER_RADIUS} from './utils';
 import canvas from '@workday/canvas-kit-react/core';
 
 const TextContainer = styled('div')({
-  marginBottom: canvas.spacing.m,
+  marginBottom: canvas.space.m,
 });
 
 export interface SkeletonTextProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -31,7 +31,7 @@ const Line = styled('div')<{
     height: height,
     borderRadius: borderRadius,
     backgroundColor: backgroundColor,
-    marginBottom: canvas.spacing.xs,
+    marginBottom: canvas.space.xs,
   };
 });
 

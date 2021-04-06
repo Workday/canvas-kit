@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 import {GrowthBehavior, ErrorType, styled, Themeable} from '@workday/canvas-kit-react/common';
 import Hint from './Hint';
 import Label from './Label';
@@ -76,13 +76,13 @@ const FormFieldContainer = styled('div')<FormFieldLabelPositionBehavior>(({label
   if (labelPosition === FormFieldLabelPosition.Left) {
     return {
       display: 'flex',
-      marginBottom: spacing.m,
+      marginBottom: space.m,
     };
   }
 
   return {
     display: 'block',
-    marginBottom: spacing.m,
+    marginBottom: space.m,
   };
 });
 

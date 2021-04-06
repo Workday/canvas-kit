@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {CSSObject} from '@emotion/core';
-import {colors, spacing, spacingNumbers} from '@workday/canvas-kit-react/core';
+import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/core';
 import {GrowthBehavior} from '@workday/canvas-kit-react/common';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
@@ -119,7 +119,7 @@ const SearchForm = styled('form')<
     flex: `1 1 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
     display: 'flex',
     alignItems: 'center',
-    marginLeft: spacing.m,
+    marginLeft: space.m,
     minWidth: minWidth,
   },
   ({isCollapsed, showForm, rightAlign, grow}) => {
@@ -133,8 +133,8 @@ const SearchForm = styled('form')<
           position: showForm ? 'absolute' : 'relative',
           backgroundColor: showForm ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
           transition: 'background-color 120ms',
-          maxWidth: showForm ? 'none' : spacingNumbers.xl + spacingNumbers.xxs,
-          minWidth: spacingNumbers.xl + spacingNumbers.xs,
+          maxWidth: showForm ? 'none' : spaceNumbers.xl + spaceNumbers.xxs,
+          minWidth: spaceNumbers.xl + spaceNumbers.xs,
           overflow: showForm ? 'visible' : 'hidden',
           zIndex: 1,
         }
@@ -187,7 +187,7 @@ const SearchIcon = styled(IconButton)<Pick<SearchBarProps, 'isCollapsed'> & {isH
 
     return {
       position: `absolute`,
-      margin: isCollapsed ? `auto ${spacing.xxs}` : `auto ${spacing.xxxs}`,
+      margin: isCollapsed ? `auto ${space.xxs}` : `auto ${space.xxxs}`,
       top: 0,
       bottom: 0,
       left: 0,
@@ -216,7 +216,7 @@ const CloseButton = styled(IconButton)<
     top: 0,
     bottom: 0,
     right: 0,
-    margin: `auto ${spacing.xxs}`,
+    margin: `auto ${space.xxs}`,
     zIndex: 3,
     ...collapseStyles,
   };
@@ -230,7 +230,7 @@ const SearchField = styled(FormField)<
     width: '100%',
     height: height,
     maxWidth: isCollapsed || grow ? '100%' : maxWidth,
-    marginBottom: spacing.zero,
+    marginBottom: space.zero,
     '> div': {
       display: 'block',
     },
@@ -246,8 +246,8 @@ const SearchInput = styled(TextInput)<
     ? {
         fontSize: '20px',
         lineHeight: '20px', // For ie11, line-height needs to match font-size
-        paddingLeft: spacingNumbers.xl + spacingNumbers.s,
-        paddingRight: spacingNumbers.xl + spacingNumbers.s,
+        paddingLeft: spaceNumbers.xl + spaceNumbers.s,
+        paddingRight: spaceNumbers.xl + spaceNumbers.s,
         maxWidth: 'none',
         minWidth: 0,
         backgroundColor: `rgba(0, 0, 0, 0)`,
@@ -256,8 +256,8 @@ const SearchInput = styled(TextInput)<
     : {
         maxWidth: grow ? '100%' : maxWidth,
         minWidth: minWidth,
-        paddingLeft: spacingNumbers.xl + spacingNumbers.xxs,
-        paddingRight: spacing.xl,
+        paddingLeft: spaceNumbers.xl + spaceNumbers.xxs,
+        paddingRight: space.xl,
         backgroundColor: inputColors.background,
         height: height,
       };

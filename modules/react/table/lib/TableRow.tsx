@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CSSObject} from '@emotion/core';
 import styled from '@emotion/styled';
 import {rgba} from 'polished';
-import {colors, spacing, spacingNumbers, statusColors} from '@workday/canvas-kit-react/core';
+import {colors, space, spaceNumbers, statusColors} from '@workday/canvas-kit-react/core';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
 export enum TableRowState {
@@ -96,11 +96,11 @@ const Row = styled('tr')<TableRowProps>(
   {
     'th, td': {
       backgroundColor: colors.frenchVanilla100,
-      padding: `${spacing.xs} ${spacing.xxs}`,
+      padding: `${space.xs} ${space.xxs}`,
       fontSize: 13,
       borderRight: cellBorder,
       borderBottom: cellBorder,
-      height: spacingNumbers.xl + spacingNumbers.xxs,
+      height: spaceNumbers.xl + spaceNumbers.xxs,
       boxSizing: 'border-box',
       transition: 'background-color 0.2s',
     },
@@ -110,7 +110,7 @@ const Row = styled('tr')<TableRowProps>(
       },
     },
     th: {
-      height: spacing.xxl,
+      height: space.xxl,
       '&:last-child': {
         borderRight: 'none',
       },

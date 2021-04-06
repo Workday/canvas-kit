@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {HeaderHeight, HeaderTheme, HeaderVariant} from '../shared/types';
 import {miniWdayLogoBlue, wdayLogoWhite, wdayLogoBlue} from '@workday/canvas-kit-react/common';
-import {colors, spacing} from '@workday/canvas-kit-react/core';
+import {colors, space} from '@workday/canvas-kit-react/core';
 import chroma from 'chroma-js';
 
 export type WorkdayLogoTitleProps = {
@@ -41,10 +41,10 @@ const Title = styled('h3')<WorkdayLogoTitleProps>(
   {
     fontSize: '20px',
     fontWeight: 400,
-    marginLeft: spacing.l,
-    padding: spacing.s,
-    paddingLeft: spacing.m,
-    paddingRight: spacing.l,
+    marginLeft: space.l,
+    padding: space.s,
+    paddingLeft: space.m,
+    paddingRight: space.l,
     whiteSpace: 'nowrap',
     display: 'initial',
   },
@@ -61,7 +61,7 @@ const Title = styled('h3')<WorkdayLogoTitleProps>(
 );
 
 const WorkdayLogo = styled('span')<WorkdayLogoTitleProps>({
-  paddingLeft: spacing.m,
+  paddingLeft: space.m,
   lineHeight: 0,
 });
 

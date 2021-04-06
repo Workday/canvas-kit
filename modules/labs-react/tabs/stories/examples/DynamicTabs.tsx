@@ -1,5 +1,5 @@
 import React from 'react';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 
 import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react/tabs';
 
@@ -48,7 +48,7 @@ export const DynamicTabs = () => {
           Add Tab
         </Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: spacing.m}}>
+      <div style={{marginTop: space.m}}>
         {tabs.map((item, index) => (
           <Tabs.Panel key={item.name} name={item.name}>
             Contents of {item.tab}

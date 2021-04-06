@@ -102,7 +102,7 @@ export const SelectStatesMenuOn = () => (
           >
             <SelectBase
               {...props}
-              buttonRef={buttonRef}
+              ref={buttonRef}
               onChange={() => {}} // eslint-disable-line no-empty-function
               options={normalizedOptions}
               focusedOptionIndex={1}

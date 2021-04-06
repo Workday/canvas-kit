@@ -6,7 +6,7 @@ import {select, boolean, text} from '@storybook/addon-knobs';
 import {action} from '@storybook/addon-actions';
 import {Drawer, DrawerDirection, DrawerHeader} from '../index';
 import README from '../README.md';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 
 // Drawer Open Direction Knob
 const label = 'Open Direction';
@@ -32,13 +32,13 @@ const showDropShadow = true;
 
 const paddingLabel = 'Padding';
 const paddingOptions = {
-  zero: spacing.zero,
-  xxxs: spacing.xxxs,
-  xxs: spacing.xxs,
-  xs: spacing.xs,
-  s: spacing.s,
-  m: spacing.m,
-  l: spacing.l,
+  zero: space.zero,
+  xxxs: space.xxxs,
+  xxs: space.xxs,
+  xs: space.xs,
+  s: space.s,
+  m: space.m,
+  l: space.l,
 };
 
 const paddingDefault = paddingOptions.s;
@@ -49,7 +49,7 @@ storiesOf('Labs/Drawer/React', module)
   .add('Default', () => (
     <div className="story">
       <div style={{height: '80vh', position: 'relative'}}>
-        <Drawer openDirection={DrawerDirection.Left} padding={spacing.s}>
+        <Drawer openDirection={DrawerDirection.Left} padding={space.s}>
           <div style={{fontFamily: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif'}}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
             sit amet blandit leo lobortis eget.
@@ -70,7 +70,7 @@ storiesOf('Labs/Drawer/React', module)
             />
           }
           openDirection={DrawerDirection.Left}
-          padding={spacing.s}
+          padding={space.s}
           showDropShadow={true}
         ></Drawer>
       </div>
@@ -82,7 +82,7 @@ storiesOf('Labs/Drawer/React', module)
         <Drawer
           header={<DrawerHeader title={'Drawer Header'} />}
           openDirection={DrawerDirection.Left}
-          padding={spacing.s}
+          padding={space.s}
           showDropShadow={true}
         />
       </div>

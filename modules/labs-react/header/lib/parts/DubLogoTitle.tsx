@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, spacing} from '@workday/canvas-kit-react/core';
+import {colors, space} from '@workday/canvas-kit-react/core';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import chroma from 'chroma-js';
 import {dubLogoWhite, dubLogoBlue} from '@workday/canvas-kit-react/common';
@@ -30,7 +30,7 @@ const Lockup = styled('div')<DubTitleProps>(
     display: 'flex',
     alignItems: 'center',
     height: HeaderHeight.Small,
-    paddingLeft: spacing.m,
+    paddingLeft: space.m,
   },
   ({bgColor}) => ({
     background: bgColor ? bgColor : 'none',
@@ -41,9 +41,9 @@ const Title = styled('h3')<DubTitleProps>(
   {
     fontSize: '20px',
     fontWeight: 400,
-    padding: `${spacing.xxs} ${spacing.s}`,
-    paddingRight: spacing.l,
-    marginLeft: spacing.s,
+    padding: `${space.xxs} ${space.s}`,
+    paddingRight: space.l,
+    marginLeft: space.s,
     whiteSpace: 'nowrap',
   },
   ({themeColor}) => ({

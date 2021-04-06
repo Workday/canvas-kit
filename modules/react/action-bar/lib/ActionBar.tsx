@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, commonColors, spacing} from '@workday/canvas-kit-react/core';
+import {colors, commonColors, space} from '@workday/canvas-kit-react/core';
 
 export interface ActionBarProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -14,10 +14,10 @@ const ActionBarContainer = styled('div')(
   {
     borderTop: `solid 1px ${colors.soap400}`,
     background: commonColors.background,
-    padding: spacing.s,
+    padding: space.s,
     boxShadow: '0 -2px 4px rgba(0, 0, 0, 0.08)',
     '@media (max-width: 575px)': {
-      padding: spacing.xxs,
+      padding: space.xxs,
     },
   },
   ({fixed}: ActionBarProps) =>
@@ -31,19 +31,19 @@ const ActionBarContainer = styled('div')(
 
 const ChildrenContainer = styled('div')({
   display: 'inline-block',
-  padding: `0 ${spacing.m}`,
+  padding: `0 ${space.m}`,
   '*:not(:first-of-type)': {
-    marginLeft: spacing.s,
+    marginLeft: space.s,
   },
   '@media (max-width: 575px)': {
     display: 'flex',
-    padding: spacing.xxs,
+    padding: space.xxs,
     justifyContent: 'center',
     flexDirection: 'row-reverse',
     '> *': {
       flex: 1,
       '&:not(:first-of-type)': {
-        marginRight: spacing.s,
+        marginRight: space.s,
         marginLeft: 0,
       },
     },

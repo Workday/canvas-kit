@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {colors, spacing, borderRadius, type} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius, type} from '@workday/canvas-kit-react/core';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {ErrorType, focusRing, styled, Themeable} from '@workday/canvas-kit-react/common';
@@ -43,7 +43,7 @@ const BannerWrapper = styled('button')<BannerProps>(
     color: colors.blackPepper400,
     fontSize: 14,
     fontWeight: 500,
-    padding: `${spacing.xxs} ${spacing.s}`,
+    padding: `${space.xxs} ${space.s}`,
     textAlign: 'left',
     border: 0,
     display: 'flex',
@@ -70,7 +70,7 @@ const BannerWrapper = styled('button')<BannerProps>(
 );
 
 const BannerIcon = styled(SystemIcon)({
-  marginRight: spacing.xs,
+  marginRight: space.xs,
 });
 
 const BannerLabel = styled('div')({

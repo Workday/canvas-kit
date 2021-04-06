@@ -2,7 +2,7 @@ import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
 import {CSSObject} from '@emotion/core';
 import {type} from '@workday/canvas-kit-labs-react/core';
-import {borderRadius, spacing, spacingNumbers} from '@workday/canvas-kit-react/core';
+import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/core';
 import {
   GrowthBehavior,
   mouseFocusBehavior,
@@ -108,28 +108,28 @@ export const ButtonContainer = styled('button', {
           fontSize: type.body.fontSize,
           minWidth: '112px',
           height: '48px',
-          padding: `0 ${spacing.l}`,
+          padding: `0 ${space.l}`,
           '& > * ': {
-            margin: `0 ${spacingNumbers.xs / 2}px`,
+            margin: `0 ${spaceNumbers.xs / 2}px`,
           },
         };
       case 'medium':
       default:
         return {
           minWidth: '96px',
-          height: spacing.xl,
-          padding: `0 ${spacing.m}`,
+          height: space.xl,
+          padding: `0 ${space.m}`,
           '& > * ': {
-            margin: `0 ${spacingNumbers.xxs / 2}px`,
+            margin: `0 ${spaceNumbers.xxs / 2}px`,
           },
         };
       case 'small':
         return {
           minWidth: '80px',
-          height: spacing.l,
-          padding: `0 ${spacing.s}`,
+          height: space.l,
+          padding: `0 ${space.s}`,
           '& > * ': {
-            margin: `0 ${spacingNumbers.xxxs / 2}px`,
+            margin: `0 ${spaceNumbers.xxxs / 2}px`,
           },
         };
     }

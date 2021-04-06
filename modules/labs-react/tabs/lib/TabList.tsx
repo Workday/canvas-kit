@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {spacing, commonColors} from '@workday/canvas-kit-react/core';
+import {space, commonColors} from '@workday/canvas-kit-react/core';
 import {
   composeHooks,
   createComponent,
@@ -35,7 +35,7 @@ const TabsListContainer = styled('div')({
 
 const TabsListInnerContainer = styled('div')<StyledType>({
   display: `flex`,
-  margin: `0 ${spacing.m}`,
+  margin: `0 ${space.m}`,
 });
 
 export const TabList = createComponent('div')({

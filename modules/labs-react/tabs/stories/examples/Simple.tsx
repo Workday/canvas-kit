@@ -1,5 +1,5 @@
 import React from 'react';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 
 import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
 
@@ -13,7 +13,7 @@ export const Simple = () => {
         <Tabs.Item>Fourth Tab</Tabs.Item>
         <Tabs.Item>Fifth Tab</Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: spacing.m}}>
+      <div style={{marginTop: space.m}}>
         <Tabs.Panel>Contents of First Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Third Tab</Tabs.Panel>

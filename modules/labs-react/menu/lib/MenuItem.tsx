@@ -1,12 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {
-  colors,
-  commonColors,
-  iconColors,
-  typeColors,
-  spacing,
-} from '@workday/canvas-kit-react/core';
+import {colors, commonColors, iconColors, typeColors, space} from '@workday/canvas-kit-react/core';
 import {type} from '@workday/canvas-kit-labs-react/core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
@@ -58,8 +52,8 @@ export interface MenuItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
 const Item = styled('li')<Pick<MenuItemProps, 'isDisabled' | 'isFocused'>>(
   {
     ...type.body2,
-    padding: `${spacing.xxs} ${spacing.s}`,
-    height: spacing.xl,
+    padding: `${space.xxs} ${space.s}`,
+    height: space.xl,
     boxSizing: 'border-box',
     cursor: 'pointer',
     color: colors.blackPepper300,
@@ -131,7 +125,7 @@ const Divider = styled('hr')({
   height: 1,
   border: 0,
   borderTop: `1px solid ${colors.soap400}`,
-  margin: `${spacing.xxs} 0`,
+  margin: `${space.xxs} 0`,
 });
 
 const iconSize = 24;

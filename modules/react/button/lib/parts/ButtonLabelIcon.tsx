@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 import isPropValid from '@emotion/is-prop-valid';
 import {ButtonProps} from '../Button';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -25,9 +25,9 @@ const ButtonLabelIconStyled = styled('span', {
   }),
   ({iconPosition, dropdown}) => ({
     marginLeft:
-      iconPosition === 'right' ? undefined : `-${dropdown ? spacing.xxs : spacing.xxxs} !important`,
+      iconPosition === 'right' ? undefined : `-${dropdown ? space.xxs : space.xxxs} !important`,
     marginRight:
-      iconPosition === 'right' ? `-${dropdown ? spacing.xxs : spacing.xxxs} !important` : undefined,
+      iconPosition === 'right' ? `-${dropdown ? space.xxs : space.xxxs} !important` : undefined,
   })
 );
 

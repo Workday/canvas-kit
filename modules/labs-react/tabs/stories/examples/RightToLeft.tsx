@@ -1,5 +1,5 @@
 import React from 'react';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
@@ -15,7 +15,7 @@ export const RightToLeft = () => {
           <Tabs.Item>רביעי</Tabs.Item>
           <Tabs.Item>חמישי</Tabs.Item>
         </Tabs.List>
-        <div style={{marginTop: spacing.m}}>
+        <div style={{marginTop: space.m}}>
           <Tabs.Panel>תוכן הראשון</Tabs.Panel>
           <Tabs.Panel>תוכן השני</Tabs.Panel>
           <Tabs.Panel>תוכן השלישי</Tabs.Panel>

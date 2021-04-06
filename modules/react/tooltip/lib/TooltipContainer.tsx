@@ -2,11 +2,11 @@ import * as React from 'react';
 import {keyframes} from '@emotion/core';
 import styled from '@emotion/styled';
 
-import {borderRadius, colors, spacing, spacingNumbers, type} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors, space, spaceNumbers, type} from '@workday/canvas-kit-react/core';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react/common';
 
 const tooltipAnimation = (transformOrigin: TransformOrigin) => {
-  const translate = getTranslateFromOrigin(transformOrigin, spacing.xxxs);
+  const translate = getTranslateFromOrigin(transformOrigin, space.xxxs);
 
   return keyframes`
     0% {
@@ -49,7 +49,7 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
   {
     ...type.body,
     display: 'inline-flex',
-    padding: spacingNumbers.xxs + spacingNumbers.xxxs,
+    padding: spaceNumbers.xxs + spaceNumbers.xxxs,
     color: colors.frenchVanilla100,
     fontSize: 13,
     a: {
@@ -61,7 +61,7 @@ export const TooltipContainer = styled('div')<TooltipContainerProps>(
       content: '""',
       borderRadius: borderRadius.m,
       zIndex: -1,
-      margin: spacingNumbers.xxxs,
+      margin: spaceNumbers.xxxs,
       backgroundColor: 'rgba(0,0,0,.85)',
       position: 'absolute',
       top: 0,

@@ -3,7 +3,7 @@
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
 import withReadme from 'storybook-readme/with-readme';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {spaceNumbers} from '@workday/canvas-kit-react/core';
 import type, {space} from '..';
 
 import README from '../README.md';
@@ -77,7 +77,7 @@ export const Type = () => (
 export const Space = () => {
   const Box = styled('div')(space);
   return (
-    <Box style={{border: '1px solid #eee'}} p={spacing.xl} pb={64} m={40} mx={10}>
+    <Box style={{border: '1px solid #eee'}} p={spaceNumbers.xl} pb={64} m={40} mx={10}>
       Margin and Padding
     </Box>
   );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import {borderRadius, spacing, type} from '@workday/canvas-kit-react/core';
+import {borderRadius, space, type} from '@workday/canvas-kit-react/core';
 import {DubLogoTitle, WorkdayLogoTitle} from './parts';
 import {themes} from './shared/themes';
 import {HeaderHeight, HeaderTheme, HeaderVariant} from './shared/types';
@@ -57,7 +57,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   isCollapsed?: boolean;
 }
 
-const childrenSpacing = spacing.s;
+const childrenSpacing = space.s;
 
 const HeaderShell = styled('div')<PickRequired<HeaderProps, 'themeColor', 'variant'>>(
   {
@@ -108,7 +108,7 @@ const navStyle = ({themeColor}: PickRequired<HeaderProps, 'themeColor', 'css'>) 
       flex: `1 0 auto`, // Instead of just flex-grow: 1 for IE11, see https://github.com/philipwalton/flexbugs#flexbug-1
       justifyContent: 'center',
       height: 'inherit',
-      marginLeft: spacing.xl,
+      marginLeft: space.xl,
 
       '& ul': {
         color: theme.linkColor,
@@ -143,8 +143,8 @@ const navStyle = ({themeColor}: PickRequired<HeaderProps, 'themeColor', 'css'>) 
           '& > *': {
             color: 'inherit',
             textDecoration: 'none',
-            padding: `0px ${spacing.s}`,
-            margin: `0 ${spacing.xxxs}`,
+            padding: `0px ${space.s}`,
+            margin: `0 ${space.xxxs}`,
             display: 'flex',
             alignItems: 'center',
             height: 'inherit',
@@ -184,7 +184,7 @@ const ChildrenSlot = styled('div')<
   PickRequired<HeaderProps, 'themeColor', 'isCollapsed' | 'centeredNav'>
 >(
   {
-    marginRight: spacing.m,
+    marginRight: space.m,
     // TODO: remove this when we get real icon buttons
     '> .canvas-header--menu-icon': {
       cursor: 'pointer',

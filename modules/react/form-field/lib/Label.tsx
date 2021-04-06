@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, spacing, type} from '@workday/canvas-kit-react/core';
+import {colors, space, type} from '@workday/canvas-kit-react/core';
 import {accessibleHide as accessibleHideCSS} from '@workday/canvas-kit-react/common';
 import {FormFieldLabelPosition, FormFieldLabelPositionBehavior} from './types';
 
@@ -49,15 +49,15 @@ const labelStyles = [
     return {
       ...(labelPosition === FormFieldLabelPosition.Left
         ? {
-            marginRight: spacing.l,
+            marginRight: space.l,
             minWidth: 180,
             display: 'flex',
             alignItems: 'center',
-            maxHeight: spacing.xl,
+            maxHeight: space.xl,
           }
         : {
             display: 'block',
-            marginBottom: spacing.xxxs,
+            marginBottom: space.xxxs,
           }),
     };
   },

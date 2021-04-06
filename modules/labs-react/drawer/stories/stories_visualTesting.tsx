@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {StaticStates} from '@workday/canvas-kit-labs-react/core';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 
 import {Drawer, DrawerHeader, DrawerDirection} from '../index';
 import {action} from '@storybook/addon-actions';
@@ -20,8 +20,8 @@ export const DrawerStates = () => (
         rowProps={[
           {label: 'Default', props: {}},
           {label: 'With Drop Shadow', props: {showDropShadow: true}},
-          {label: 'With Custom Padding', props: {padding: spacing.l, showDropShadow: true}},
-          {label: 'With Zero Padding', props: {padding: spacing.zero, showDropShadow: true}},
+          {label: 'With Custom Padding', props: {padding: space.l, showDropShadow: true}},
+          {label: 'With Zero Padding', props: {padding: space.zero, showDropShadow: true}},
           {label: 'With Custom Width', props: {width: 150, showDropShadow: true}},
           {
             label: 'With Open Direction Left',
