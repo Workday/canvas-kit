@@ -1,3 +1,11 @@
+type ValueOf<T> = T[keyof T];
+
+// Writing out `CanvasSpace` is more verbose for us, but nicer for consumers.
+// Casting this type as `const` would have the same effect,
+// but writing it this way removes the `readonly` in the hint,
+// which adds a lot of visual noise and can be confusing for folks.
+
+/** Type for the `space` object with keys and px values (strings) */
 export type CanvasSpace = {
   zero: '0px';
   xxxs: '4px';
@@ -11,10 +19,10 @@ export type CanvasSpace = {
   xxxl: '80px';
 };
 
-// Writing out `CanvasSpace` is more verbose for us, but nicer for consumers.
-// Casting this type as `const` would have the same effect,
-// but writing it this way removes the `readonly` in the hint,
-// which adds a lot of visual noise and can be confusing for folks.
+/** The px values for CanvasSpace (strings) */
+export type CanvasSpaceValues = ValueOf<CanvasSpace>;
+
+/** An object of space keys and px values (strings) */
 export const space: CanvasSpace = {
   zero: '0px',
   xxxs: '4px',
@@ -28,6 +36,7 @@ export const space: CanvasSpace = {
   xxxl: '80px',
 };
 
+/** Type for the `spaceNumbers` object with keys and numeric px values (numbers) */
 export type CanvasSpaceNumbers = {
   zero: 0;
   xxxs: 4;
@@ -41,6 +50,16 @@ export type CanvasSpaceNumbers = {
   xxxl: 80;
 };
 
+/** The numeric px values for CanvasSpaceNumbers (numbers) */
+export type CanvasSpaceNumberValues = ValueOf<CanvasSpaceNumbers>;
+
+/**
+ * An object of space keys and their numeric px values (numbers)
+ * - These are helpful when you need a raw numeric px value.
+ * - Here's an example usage to perform calculations:
+ * @example
+ * const buttonPadding = spaceNumbers.s - iconSize;
+ */
 export const spaceNumbers: CanvasSpaceNumbers = {
   zero: 0,
   xxxs: 4,
@@ -53,8 +72,3 @@ export const spaceNumbers: CanvasSpaceNumbers = {
   xxl: 64,
   xxxl: 80,
 };
-
-type ValueOf<T> = T[keyof T];
-
-export type CanvasSpaceNumberValue = ValueOf<CanvasSpaceNumbers>;
-export type CanvasSpaceValue = ValueOf<CanvasSpace>;
