@@ -5,6 +5,21 @@ export default function transformer(file: FileInfo, api: API) {
 
   const root = j(file.source);
 
+  // Check file import statements for canvas-kit imports
+  // This allows us to somewhat safely assume any member expressions or types should not be modified
+  const canvasKitImports = root.find(j.ImportDeclaration).filter(nodePath => {
+    const importSource = nodePath.value.source.value;
+    return (
+      importSource === '@workday/canvas-kit-react/core' ||
+      importSource === '@workday/canvas-kit-react'
+    );
+  });
+
+  // If there are no canvas-kit imports, return the original AST
+  if (!canvasKitImports.length) {
+    return root.toSource();
+  }
+
   // replace all member expressions of 'spacing' with 'space'
   root
     .find(j.MemberExpression, {object: {type: 'Identifier', name: 'spacing'}})

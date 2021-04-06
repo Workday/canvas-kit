@@ -7,11 +7,8 @@ export default function transformer(file: FileInfo, api: API) {
 
   root.find(j.ImportDeclaration).forEach(nodePath => {
     const source = nodePath.value.source.value;
-    // Skip if source isn't canvas-kit core
-    if (
-      typeof source !== 'string' ||
-      (source !== '@workday/canvas-kit-react' && source !== '@workday/canvas-kit-react/core')
-    ) {
+    // Skip if source isn't canvas-kit/core
+    if (source !== '@workday/canvas-kit-react/core') {
       return;
     }
 

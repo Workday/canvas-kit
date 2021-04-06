@@ -43,6 +43,13 @@ describe('Canvas Kit Space Imports Codemod', () => {
   });
 
   context('when importing spacing types', () => {
+    it('should ignore non-canvas-kit imports', () => {
+      const input = `import { CanvasSpacing } from '@workday/canvas-space-web'`;
+      const expected = `import { CanvasSpacing } from '@workday/canvas-space-web'`;
+
+      expectTransform(input, expected);
+    });
+
     it('should properly transform CanvasSpacing to CanvasSpace', () => {
       const input = `import { CanvasSpacing } from "@workday/canvas-kit-react/core";`;
       const expected = `import { CanvasSpace } from "@workday/canvas-kit-react/core";`;

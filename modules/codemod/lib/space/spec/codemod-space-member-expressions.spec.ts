@@ -4,10 +4,9 @@ const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);
 
-describe('Canvas Kit Space Imports Codemod', () => {
+describe('Canvas Kit Space Member Expression and Type Reference Codemod', () => {
   context('when used in CSS object styles', () => {
-    // TODO: it should ignore files with non-canvas-kit imports
-    xit('should ignore files without canvas-kit imports', () => {
+    it('should ignore files without canvas-kit imports', () => {
       const input = `
       import { spacing } from "@workday/canvas-space-web";
       
