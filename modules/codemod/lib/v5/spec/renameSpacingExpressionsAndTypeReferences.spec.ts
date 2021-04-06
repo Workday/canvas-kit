@@ -1,10 +1,10 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../space-member-expressions';
+import transformer from '../renameSpacingExpressionsAndTypeReferences';
 const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);
 
-describe('Canvas Kit Space Member Expression and Type Reference Codemod', () => {
+describe('Canvas Kit Spacing Member Expressions and Type References Codemod', () => {
   context('when used in CSS object styles', () => {
     it('should ignore files without canvas-kit imports', () => {
       const input = `

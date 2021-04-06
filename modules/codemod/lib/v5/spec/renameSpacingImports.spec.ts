@@ -1,10 +1,10 @@
 import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../space-imports';
+import transformer from '../renameSpacingImports';
 const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);
 
-describe('Canvas Kit Space Imports Codemod', () => {
+describe('Canvas Kit Spacing Imports Codemod', () => {
   context('when importing from named export statements', () => {
     it('should ignore non-canvas-kit imports', () => {
       const input = `import { spacing } from '@workday/canvas-space-web'`;
