@@ -1,16 +1,16 @@
-export {default, default as Button, default as beta_Button, ButtonProps} from './lib/Button';
+export {Button, ButtonProps} from './lib/Button';
 
-export {default as DeleteButton, DeleteButtonProps} from './lib/DeleteButton';
-export {default as deprecated_Button, DeprecatedButtonProps} from './lib/deprecated_Button';
-export {default as DropdownButton, DropdownButtonProps} from './lib/DropdownButton';
-export {default as HighlightButton, HighlightButtonProps} from './lib/HighlightButton';
-export {default as OutlineButton, OutlineButtonProps} from './lib/OutlineButton';
-export {default as IconButton, IconButtonProps} from './lib/IconButton';
-export {default as TextButton, TextButtonProps} from './lib/TextButton';
-export {default as ToolbarIconButton, ToolbarIconButtonProps} from './lib/ToolbarIconButton';
+export {DeleteButton, DeleteButtonProps} from './lib/DeleteButton';
 export {
-  default as ToolbarDropdownButton,
-  ToolbarDropdownButtonProps,
-} from './lib/ToolbarDropdownButton';
-export {default as Hyperlink} from './lib/Hyperlink';
+  DeprecatedButton as deprecated_Button,
+  DeprecatedButtonProps,
+} from './lib/deprecated_Button';
+export {DropdownButton, DropdownButtonProps} from './lib/DropdownButton';
+export {HighlightButton, HighlightButtonProps} from './lib/HighlightButton';
+export {OutlineButton, OutlineButtonProps} from './lib/OutlineButton';
+export {IconButton, IconButtonProps} from './lib/IconButton';
+export {TextButton, TextButtonProps} from './lib/TextButton';
+export {ToolbarIconButton, ToolbarIconButtonProps} from './lib/ToolbarIconButton';
+export {ToolbarDropdownButton, ToolbarDropdownButtonProps} from './lib/ToolbarDropdownButton';
+export {Hyperlink} from './lib/Hyperlink';
 export * from './lib/types';

@@ -131,8 +131,8 @@ const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
     position: 'absolute',
   },
   ({closeIconSize}) => ({
-    right: closeIconSize === IconButton.Size.Small ? closeIconSpacingSmall : closeIconSpacing,
-    top: closeIconSize === IconButton.Size.Small ? closeIconSpacingSmall : closeIconSpacing,
+    right: closeIconSize === 'small' ? closeIconSpacingSmall : closeIconSpacing,
+    top: closeIconSize === 'small' ? closeIconSpacingSmall : closeIconSpacing,
   })
 );
 
@@ -173,8 +173,8 @@ export default class Popup extends React.Component<PopupProps> {
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton
               data-close="close" // Allows for grabbing focus to the close button rather than relying on the aria label "Close" which will change based on different languages
-              buttonRef={this.closeButtonRef}
-              variant={IconButton.Variant.Plain}
+              ref={this.closeButtonRef}
+              variant="plain"
               size={closeIconSize}
               onClick={handleClose}
               icon={xIcon}

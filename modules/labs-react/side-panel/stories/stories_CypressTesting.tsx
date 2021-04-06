@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import SidePanel, {useSidePanel} from '../index';
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-labs-react/side-panel';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {Button} from '@workday/canvas-kit-react/button';
 
@@ -97,7 +97,7 @@ export const FirstFocusable = () => {
           </span>
           <h1>Panel Name</h1>
           <SidePanel.ToggleButton {...controlProps} />
-          <Button variant={Button.Variant.Primary}>Another Button</Button>
+          <Button variant="primary">Another Button</Button>
         </SidePanel>
       </Container>
     </React.Fragment>

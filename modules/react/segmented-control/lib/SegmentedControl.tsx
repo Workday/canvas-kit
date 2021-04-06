@@ -96,17 +96,25 @@ const onButtonClick = (
 
 const SegmentedControl = ({value = 0, children, onChange, ...elemProps}: SegmentedControlProps) => (
   <SegmentedControlContainer {...elemProps}>
-    {React.Children.map(children, (child: React.ReactElement<IconButtonProps>, index: number) => {
-      if (typeof child.type === typeof IconButton) {
-        return React.cloneElement(child, {
-          toggled: typeof value === 'number' ? index === value : child.props.value === value,
-          variant: IconButton.Variant.SquareFilled,
-          onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
-        });
-      }
+    {React.Children.map(
+      children,
+      (
+        child: React.ReactElement<
+          IconButtonProps & {onClick?: React.MouseEventHandler<HTMLButtonElement>} // IconButton will have correct props
+        >,
+        index: number
+      ) => {
+        if (typeof child.type === typeof IconButton) {
+          return React.cloneElement(child, {
+            toggled: typeof value === 'number' ? index === value : child.props.value === value,
+            variant: 'squareFilled',
+            onClick: onButtonClick.bind(undefined, child.props.onClick, onChange, index),
+          });
+        }
 
-      return child;
-    })}
+        return child;
+      }
+    )}
   </SegmentedControlContainer>
 );
 

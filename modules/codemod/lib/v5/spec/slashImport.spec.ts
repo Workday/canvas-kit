@@ -1,9 +1,9 @@
 'use strict';
 
 import {defineInlineTest} from 'jscodeshift/dist/testUtils';
-import transform from '..';
+import transform from '../slashImports';
 
-describe('Canvas Kit v5 Codemod', () => {
+describe('slashImport', () => {
   defineInlineTest(
     transform,
     {},

@@ -20,7 +20,7 @@ storiesOf('Labs/Color Picker/React', module)
   .add('Icon Button Popup', () => {
     const [isOpen, setOpen] = React.useState(false);
     const [color, setColor] = React.useState('');
-    const buttonRef = React.useRef(null);
+    const ref = React.useRef(null);
 
     const toggleOpen = () => setOpen(!isOpen);
 
@@ -37,11 +37,11 @@ storiesOf('Labs/Color Picker/React', module)
         <IconButton
           icon={bgColorIcon}
           aria-label="Select Background Color"
-          buttonRef={buttonRef}
-          variant={IconButton.Variant.SquareFilled}
+          ref={ref}
+          variant="squareFilled"
           onClick={toggleOpen}
         />
-        <Popper placement={'bottom-start'} open={isOpen} anchorElement={buttonRef.current!}>
+        <Popper placement={'bottom-start'} open={isOpen} anchorElement={ref.current!}>
           <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
             <ColorPicker
               resetColor={colors.blueberry400}

@@ -96,7 +96,7 @@ describe('Header', () => {
 
       expect(wrapper.find(IconButton)).toHaveLength(1);
       expect(renderedIcon.props().icon).toBe(activityStreamIcon);
-      expect(renderedIcon.props().variant).toBe(IconButton.Variant.Inverse);
+      expect(renderedIcon.props().variant).toBe('inverse');
       expect(renderedIcon.props().onClick).toBeTruthy();
     });
 

@@ -1,8 +1,9 @@
 /** @jsx jsx */
 import {jsx, CSSObject} from '@emotion/core';
 import * as React from 'react';
+
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import * as systemIcons from '@workday/canvas-system-icons-web';
-import {IconButton, IconButtonVariant} from '../../index';
 
 const buttonLayout: CSSObject = {
   display: 'flex',
@@ -32,11 +33,11 @@ export const stateTableColumnProps = [
   {label: 'Active Hover ', props: {className: 'active hover', disabled: false}},
 ];
 
-const isInverseVariant = (variant: IconButtonVariant) => {
-  return [IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].indexOf(variant) !== -1;
+const isInverseVariant = (variant: IconButtonProps['variant']) => {
+  return ['inverse', 'inverseFilled'].indexOf(variant) !== -1;
 };
 
-const iconGridStyles = (variant: IconButtonVariant): CSSObject => {
+const iconGridStyles = (variant: IconButtonProps['variant']): CSSObject => {
   const inverse = isInverseVariant(variant);
 
   return {
@@ -47,7 +48,7 @@ const iconGridStyles = (variant: IconButtonVariant): CSSObject => {
   };
 };
 
-const iconCellStyles = (variant: IconButtonVariant): CSSObject => {
+const iconCellStyles = (variant: IconButtonProps['variant']): CSSObject => {
   const inverse = isInverseVariant(variant);
 
   return {
@@ -83,7 +84,7 @@ interface IconButtonGridProps {
   /**
    * The button variant to display in the grid.
    */
-  variant: IconButtonVariant;
+  variant: IconButtonProps['variant'];
 }
 
 export const IconButtonGrid = ({initialToggled, variant}: IconButtonGridProps) => {

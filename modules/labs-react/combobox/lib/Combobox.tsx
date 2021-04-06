@@ -5,7 +5,7 @@ import {GrowthBehavior} from '@workday/canvas-kit-react/common';
 import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react/core';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
-import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react/button';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import uuid from 'uuid/v4';
@@ -33,7 +33,7 @@ export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTML
    * The variant of the Combobox clear button.
    * @default IconButton.Variant.Plain
    */
-  clearButtonVariant?: IconButtonVariant;
+  clearButtonVariant?: IconButtonProps['variant'];
   /**
    * If true, render the Combobox with a button to clear the text input.
    * @default false
@@ -168,7 +168,7 @@ const Combobox = ({
   onFocus,
   onBlur,
   showClearButton,
-  clearButtonVariant = IconButton.Variant.Plain,
+  clearButtonVariant = 'plain',
   clearButtonAriaLabel = `Reset Search Input`,
   labelId,
   getStatusText = buildStatusString,

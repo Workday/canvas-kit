@@ -206,24 +206,16 @@ const SidePanel = ({
   );
 };
 
-type IconButtonPropsWithoutAriaLabel = Omit<IconButtonProps, 'aria-label'> &
-  Partial<Pick<IconButtonProps, 'aria-label'>>;
-
-interface IconButtonPropsWithLabelledBy extends IconButtonPropsWithoutAriaLabel {
-  'aria-labelledby': string;
-}
-
-// ToggleButtonProps are IconButtonProps but 'aria-labelledby' will also satisify the constraint
-export type ToggleButtonProps = IconButtonProps | IconButtonPropsWithLabelledBy;
+export type ToggleButtonProps = Omit<IconButtonProps, 'aria-label'>;
 
 /**
  * A toggle button styled specifically for the side panel container.
  */
 const ToggleButton = ({
-  variant = IconButton.Variant.Plain,
+  variant = 'plain',
   icon = transformationImportIcon,
   ...rest
-}: ToggleButtonProps) => {
+}: ToggleButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const context = React.useContext(SidePanelContext);
 
   // Note: Depending on the collapsed width, the button could "jump" to it's final position.

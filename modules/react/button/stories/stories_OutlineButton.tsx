@@ -6,7 +6,7 @@ import withReadme from 'storybook-readme/with-readme';
 
 import {editIcon, playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {OutlineButton} from '../index';
+import {OutlineButton} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 const blueBackground: CSSObject = {
@@ -30,65 +30,55 @@ storiesOf('Components/Buttons/Button/React/Outline', module)
   .add('Primary', () => (
     <div className="story">
       <h3>Large Primary</h3>
-      <OutlineButton size="large" variant={OutlineButton.Variant.Primary}>
+      <OutlineButton size="large" variant="primary">
         Outline Primary
       </OutlineButton>
-      <OutlineButton size="large" variant={OutlineButton.Variant.Primary} icon={activityStreamIcon}>
+      <OutlineButton size="large" variant="primary" icon={activityStreamIcon}>
         Outline Primary
       </OutlineButton>
-      <OutlineButton
-        size="large"
-        dataLabel={'1:00'}
-        variant={OutlineButton.Variant.Primary}
-        icon={playCircleIcon}
-      >
+      <OutlineButton size="large" dataLabel={'1:00'} variant="primary" icon={playCircleIcon}>
         Outline Primary
       </OutlineButton>
       <OutlineButton
         size="large"
         disabled={true}
         dataLabel={'1:00'}
-        variant={OutlineButton.Variant.Primary}
+        variant="primary"
         icon={playCircleIcon}
       >
         Outline Primary
       </OutlineButton>
 
       <h3>Medium Primary</h3>
-      <OutlineButton size="medium" variant={OutlineButton.Variant.Primary}>
+      <OutlineButton size="medium" variant="primary">
         Outline Primary
       </OutlineButton>
-      <OutlineButton size="medium" variant={OutlineButton.Variant.Primary} icon={editIcon}>
+      <OutlineButton size="medium" variant="primary" icon={editIcon}>
         Outline Primary
       </OutlineButton>
-      <OutlineButton
-        size="medium"
-        dataLabel={'1:00'}
-        variant={OutlineButton.Variant.Primary}
-        icon={playCircleIcon}
-      >
+      <OutlineButton size="medium" dataLabel={'1:00'} variant="primary" icon={playCircleIcon}>
         Outline Primary
       </OutlineButton>
       <OutlineButton
         size="medium"
         disabled={true}
         dataLabel={'1:00'}
-        variant={OutlineButton.Variant.Primary}
+        variant="primary"
         icon={playCircleIcon}
       >
         Outline Primary
       </OutlineButton>
 
       <h3>Small Primary</h3>
-      <OutlineButton size="small" variant={OutlineButton.Variant.Primary}>
+      <OutlineButton size="small" variant="primary">
         Outline Primary
       </OutlineButton>
-      <OutlineButton size="small" disabled={true} variant={OutlineButton.Variant.Primary}>
+      <OutlineButton size="small" disabled={true} variant="primary">
         Outline Primary
       </OutlineButton>
 
       <h3>Growing Primary</h3>
-      <OutlineButton size="large" variant={OutlineButton.Variant.Primary} grow={true}>
+      <OutlineButton size="large" variant="primary" grow={true}>
         Growing Primary Outline
       </OutlineButton>
     </div>
@@ -135,29 +125,20 @@ storiesOf('Components/Buttons/Button/React/Outline', module)
     <div className="story">
       <h3>Large Inverse</h3>
       <div css={blueBackground}>
-        <OutlineButton size="large" variant={OutlineButton.Variant.Inverse}>
+        <OutlineButton size="large" variant="inverse">
           Outline Inverse
         </OutlineButton>
-        <OutlineButton
-          size="large"
-          variant={OutlineButton.Variant.Inverse}
-          icon={activityStreamIcon}
-        >
+        <OutlineButton size="large" variant="inverse" icon={activityStreamIcon}>
           Outline Inverse
         </OutlineButton>
-        <OutlineButton
-          size="large"
-          dataLabel={'1:00'}
-          variant={OutlineButton.Variant.Inverse}
-          icon={playCircleIcon}
-        >
+        <OutlineButton size="large" dataLabel={'1:00'} variant="inverse" icon={playCircleIcon}>
           Outline Inverse
         </OutlineButton>
         <OutlineButton
           size="large"
           disabled={true}
           dataLabel={'1:00'}
-          variant={OutlineButton.Variant.Inverse}
+          variant="inverse"
           icon={playCircleIcon}
         >
           Outline Inverse
@@ -166,25 +147,20 @@ storiesOf('Components/Buttons/Button/React/Outline', module)
 
       <h3>Medium Inverse</h3>
       <div css={blueBackground}>
-        <OutlineButton size="medium" variant={OutlineButton.Variant.Inverse}>
+        <OutlineButton size="medium" variant="inverse">
           Outline Inverse
         </OutlineButton>
-        <OutlineButton size="medium" variant={OutlineButton.Variant.Inverse} icon={editIcon}>
+        <OutlineButton size="medium" variant="inverse" icon={editIcon}>
           Outline Inverse
         </OutlineButton>
-        <OutlineButton
-          size="medium"
-          dataLabel={'1:00'}
-          variant={OutlineButton.Variant.Inverse}
-          icon={playCircleIcon}
-        >
+        <OutlineButton size="medium" dataLabel={'1:00'} variant="inverse" icon={playCircleIcon}>
           Outline Inverse
         </OutlineButton>
         <OutlineButton
           size="medium"
           disabled={true}
           dataLabel={'1:00'}
-          variant={OutlineButton.Variant.Inverse}
+          variant="inverse"
           icon={playCircleIcon}
         >
           Outline Inverse
@@ -193,17 +169,17 @@ storiesOf('Components/Buttons/Button/React/Outline', module)
 
       <h3>Small Inverse</h3>
       <div css={blueBackground}>
-        <OutlineButton size="small" variant={OutlineButton.Variant.Inverse}>
+        <OutlineButton size="small" variant="inverse">
           Outline Inverse
         </OutlineButton>
-        <OutlineButton size="small" disabled={true} variant={OutlineButton.Variant.Inverse}>
+        <OutlineButton size="small" disabled={true} variant="inverse">
           Outline Inverse
         </OutlineButton>
       </div>
 
       <h3>Growing Inverse</h3>
       <div css={blueBackground} style={{maxWidth: 'initial'}}>
-        <OutlineButton size="large" variant={OutlineButton.Variant.Inverse} grow={true}>
+        <OutlineButton size="large" variant="inverse" grow={true}>
           Growing Inverse Outline
         </OutlineButton>
       </div>

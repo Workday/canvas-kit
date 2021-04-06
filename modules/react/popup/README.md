@@ -39,12 +39,12 @@ import {Popper} from '@workday/canvas-kit-react/popup';
 
 const MyPopper = () => {
   const [open, setOpen] = React.useState(false);
-  const buttonRef = React.useRef(null)
+  const ref = React.useRef(null)
 
   return (
     <div>
-      <Button onClick={() => setOpen(true)} buttonRef={buttonRef}>
-      <Popper anchorElement={buttonRef} open={open}>
+      <Button onClick={() => setOpen(true)} ref={ref}>
+      <Popper anchorElement={ref} open={open}>
         <div>
           <p>Popper content</p>
           <Button onClick={() => setOpen(false)}>
@@ -65,12 +65,12 @@ import {Popper} from '@workday/canvas-kit-react/popup';
 
 const MyPopper = () => {
   const [open, setOpen] = React.useState(false);
-  const buttonRef = React.useRef(null)
+  const ref = React.useRef(null)
 
   return (
     <div>
-      <Button onClick={() => setOpen(true)} buttonRef={buttonRef}>
-      <Popper anchorElement={buttonRef} open={open}>
+      <Button onClick={() => setOpen(true)} ref={ref}>
+      <Popper anchorElement={ref} open={open}>
         {({placement}) => {
           return (
             <div>

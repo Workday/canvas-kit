@@ -39,9 +39,9 @@ class SidePanelExample extends React.Component<{}, SidePanelState> {
         header={'Side Panel Header'}
       >
         {open ? (
-          <Button variant={Button.Variant.Primary}>Add New</Button>
+          <Button variant="primary">Add New</Button>
         ) : (
-          <IconButton size={IconButton.Size.Small} variant={IconButton.Variant.Filled}>
+          <IconButton size="small" variant="filled">
             <SystemIcon icon={plusIcon} />
           </IconButton>
         )}

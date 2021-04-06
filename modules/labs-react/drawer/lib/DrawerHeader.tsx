@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {colors, spacing, H4, CanvasColor, typeColors} from '@workday/canvas-kit-react/core';
-import {IconButton, IconButtonVariant, IconButtonProps} from '@workday/canvas-kit-react/button';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {xIcon} from '@workday/canvas-system-icons-web';
 
 export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -12,7 +12,7 @@ export interface DrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
   /**
    * The function called when the DrawerHeader close button is clicked.
    */
-  onClose?: IconButtonProps['onClick'];
+  onClose?: React.MouseEventHandler<HTMLButtonElement>;
   /**
    * The `aria-label` for the DrawHeader close button. Useful for i18n.
    * @default Close
@@ -91,7 +91,7 @@ export default class DrawerHeader extends React.Component<DrawerHeaderProps, {}>
         </HeaderTitle>
         {onClose && closeIconAriaLabel && (
           <CloseButton
-            variant={inverse ? IconButtonVariant.Inverse : IconButtonVariant.Plain}
+            variant={inverse ? 'inverse' : 'plain'}
             onClick={onClose}
             aria-label={closeIconAriaLabel}
             icon={xIcon}

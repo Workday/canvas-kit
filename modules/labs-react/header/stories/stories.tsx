@@ -10,10 +10,10 @@ import chroma from 'chroma-js';
 
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
-import {Avatar} from '../../../react/avatar';
-import {colors, spacing, gradients} from '../../../react/core';
-import {Button, IconButton} from '../../../react/button';
-import {MenuItem} from '../../menu';
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {colors, spacing, gradients} from '@workday/canvas-kit-react/core';
+import {Button, IconButton} from '@workday/canvas-kit-react/button';
+import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
 import {
   GlobalHeader,
   Header,
@@ -152,16 +152,11 @@ storiesOf('Labs/Header/React', module)
         >
           <IconButton
             icon={notificationsIcon}
-            variant={IconButton.Variant.Circle}
+            variant="circle"
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            icon={inboxIcon}
-            variant={IconButton.Variant.Circle}
-            title="Inbox"
-            aria-label="Inbox"
-          />
+          <IconButton icon={inboxIcon} variant="circle" title="Inbox" aria-label="Inbox" />
           <Avatar
             onClick={handleAvatarClickTest}
             url="https://s3-us-west-2.amazonaws.com/design-assets-internal/avatars/lmcneil.png"
@@ -183,16 +178,11 @@ storiesOf('Labs/Header/React', module)
         >
           <IconButton
             icon={notificationsIcon}
-            variant={IconButton.Variant.Circle}
+            variant="circle"
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            icon={inboxIcon}
-            variant={IconButton.Variant.Circle}
-            title="Inbox"
-            aria-label="Inbox"
-          />
+          <IconButton icon={inboxIcon} variant="circle" title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
@@ -209,16 +199,11 @@ storiesOf('Labs/Header/React', module)
         >
           <IconButton
             icon={notificationsIcon}
-            variant={IconButton.Variant.Circle}
+            variant="circle"
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            icon={inboxIcon}
-            variant={IconButton.Variant.Circle}
-            title="Inbox"
-            aria-label="Inbox"
-          />
+          <IconButton icon={inboxIcon} variant="circle" title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </GlobalHeader>
       </div>
@@ -253,17 +238,12 @@ storiesOf('Labs/Header/React', module)
           isCollapsed={boolean('isCollapsed', false)}
         >
           <IconButton
-            variant={IconButton.Variant.Circle}
+            variant="circle"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            variant={IconButton.Variant.Circle}
-            icon={inboxIcon}
-            title="Inbox"
-            aria-label="Inbox"
-          />
+          <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
         </Header>
       </div>
@@ -280,13 +260,13 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Inverse}
+            variant="inverse"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-          <Button variant={Button.Variant.Primary}>Download</Button>
+          <Button variant="primary">Download</Button>
         </Header>
       </div>
       <br />
@@ -314,18 +294,13 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Circle}
+            variant="circle"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            variant={IconButton.Variant.Circle}
-            icon={inboxIcon}
-            title="Inbox"
-            aria-label="Inbox"
-          />
-          <Button variant={Button.Variant.Primary}>Logout</Button>
+          <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
+          <Button variant="primary">Logout</Button>
         </Header>
       </div>
       <br />
@@ -347,18 +322,13 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Circle}
+            variant="circle"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            variant={IconButton.Variant.Circle}
-            icon={inboxIcon}
-            title="Inbox"
-            aria-label="Inbox"
-          />
-          <Button variant={Button.Variant.Primary}>Logout</Button>
+          <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
+          <Button variant="primary">Logout</Button>
         </Header>
       </div>
       <br />
@@ -373,18 +343,13 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Circle}
+            variant="circle"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            variant={IconButton.Variant.Circle}
-            icon={inboxIcon}
-            title="Inbox"
-            aria-label="Inbox"
-          />
-          <Button variant={Button.Variant.Primary}>Logout</Button>
+          <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
+          <Button variant="primary">Logout</Button>
         </Header>
       </div>
       <br />
@@ -406,18 +371,13 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Inverse}
+            variant="inverse"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            variant={IconButton.Variant.Inverse}
-            icon={inboxIcon}
-            title="Inbox"
-            aria-label="Inbox"
-          />
-          <Button variant={Button.Variant.Primary}>Logout</Button>
+          <IconButton variant="inverse" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
+          <Button variant="primary">Logout</Button>
         </Header>
       </div>
     </div>
@@ -450,13 +410,13 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Inverse}
+            variant="inverse"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-          <Button variant={Button.Variant.Primary}>Download</Button>
+          <Button variant="primary">Download</Button>
         </Header>
       </div>
       <br />
@@ -470,7 +430,7 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Inverse}
+            variant="inverse"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
@@ -489,7 +449,7 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Inverse}
+            variant="inverse"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
@@ -509,18 +469,13 @@ storiesOf('Labs/Header/React', module)
         >
           {nav}
           <IconButton
-            variant={IconButton.Variant.Circle}
+            variant="circle"
             icon={notificationsIcon}
             title="Notifications"
             aria-label="Notifications"
           />
-          <IconButton
-            variant={IconButton.Variant.Circle}
-            icon={inboxIcon}
-            title="Inbox"
-            aria-label="Inbox"
-          />
-          <Button variant={Button.Variant.Primary}>Logout</Button>
+          <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
+          <Button variant="primary">Logout</Button>
         </Header>
       </div>
     </div>

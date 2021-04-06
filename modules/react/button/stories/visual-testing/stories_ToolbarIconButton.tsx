@@ -9,16 +9,17 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {ToolbarIconButton} from '../../index';
+import {ToolbarIconButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Toolbar Icon Button',
   component: ToolbarIconButton,
 });
 
-export const ToolbarIconButtonStates = () => (
-  <StaticStates>
+export const ToolbarIconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={[
         {label: 'Toggled Off', props: {toggled: false}},
@@ -40,9 +41,6 @@ export const ToolbarIconButtonStates = () => (
   </StaticStates>
 );
 
-export const ToolbarIconButtonThemedStates = () => <ToolbarIconButtonStates />;
-ToolbarIconButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
+export const ToolbarIconButtonThemedStates = () => (
+  <ToolbarIconButtonStates theme={{canvas: customColorTheme}} />
+);
