@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 
 import {activityStreamIcon, paragraphIcon} from '@workday/canvas-system-icons-web';
 
-import {ToolbarIconButton, ToolbarDropdownButton} from '../index';
+import {ToolbarIconButton, ToolbarDropdownButton} from '@workday/canvas-kit-react/button';
 
 import README from '../README.md';
 

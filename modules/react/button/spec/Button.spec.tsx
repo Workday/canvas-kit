@@ -9,24 +9,26 @@ import {
   deprecated_Button as DeprecatedButton,
 } from '../index';
 import {render, fireEvent} from '@testing-library/react';
+import {ElementComponent} from '../../common';
+import {ButtonProps} from '../lib/Button';
 
-const map = {
-  Button: Button,
-  'Delete Button': DeleteButton,
-  'Dropdown Button': DropdownButton,
-  'Highlight Button': HighlightButton,
-  'Outline Button': OutlineButton,
-  'Text Button': TextButton,
-  'Deprecated Button': DeprecatedButton,
-};
-Object.keys(map).forEach(buttonName => {
-  const ButtonComponent: typeof Button = map[buttonName];
-
-  describe(buttonName, () => {
+([
+  Button,
+  DeleteButton,
+  DropdownButton,
+  HighlightButton,
+  OutlineButton,
+  TextButton,
+  DeprecatedButton,
+  // We need to cast as `any` and cast as a specific button because TS will complain about no call signatures...
+] as any[]).forEach((ButtonComponent: ElementComponent<'button', ButtonProps>) => {
+  describe(ButtonComponent.displayName, () => {
     const cb = jest.fn();
     afterEach(() => {
       cb.mockReset();
     });
+
+    verifyComponent(ButtonComponent, {});
 
     describe('when rendered', () => {
       it('should render a button', () => {
@@ -68,9 +70,9 @@ Object.keys(map).forEach(buttonName => {
 
     describe('when rendered with a button ref', () => {
       it('should set the ref to the checkbox input element', () => {
-        const ref = React.createRef<HTMLButtonElement>();
+        const ref = {current: null};
 
-        render(<ButtonComponent buttonRef={ref} />);
+        render(<ButtonComponent ref={ref} />);
 
         expect(ref.current).not.toBeNull();
         expect(ref.current!.tagName.toLowerCase()).toEqual('button');

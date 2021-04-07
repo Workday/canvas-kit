@@ -77,7 +77,7 @@ export default class PageHeader extends React.Component<PageHeaderProps> {
 
       if (child.type === IconButton) {
         return React.cloneElement(child as React.ReactElement<IconButtonProps>, {
-          variant: IconButton.Variant.Inverse,
+          variant: 'inverse',
         });
       }
 

@@ -51,7 +51,7 @@ import {Button} from '@workday/canvas-kit-react/button';
   </nav>
   <IconButton
     icon={notificationsIcon}
-    variant={IconButton.Variant.Circle}
+    variant="circle"
     title="Notifications"
     aria-label="Notifications"
   />
@@ -61,7 +61,7 @@ import {Button} from '@workday/canvas-kit-react/button';
     }}
     altText="Profile"
   />
-  <Button variant={Button.Variant.Primary}>Sign Up</Button>
+  <Button variant="primary">Sign Up</Button>
 </Header>;
 ```
 

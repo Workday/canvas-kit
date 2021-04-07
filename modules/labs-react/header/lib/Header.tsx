@@ -257,9 +257,7 @@ class MenuIconButton extends React.Component<
 
     return (
       <IconButton
-        variant={
-          themeColor === HeaderTheme.White ? IconButton.Variant.Circle : IconButton.Variant.Inverse
-        }
+        variant={themeColor === HeaderTheme.White ? 'circle' : 'inverse'}
         icon={justifyIcon}
         className={'canvas-header--menu-icon'}
         aria-label="Open Menu"
@@ -297,10 +295,7 @@ export default class Header extends React.Component<HeaderProps, {}> {
       const propsChildren = (child as React.ReactElement<Props>).props.children;
       const singleChild =
         React.Children.count(propsChildren) === 1 && (propsChildren as React.ReactElement<any>);
-      const iconButtonVariant =
-        this.props.themeColor === HeaderTheme.White
-          ? IconButton.Variant.Circle
-          : IconButton.Variant.Inverse;
+      const iconButtonVariant = this.props.themeColor === HeaderTheme.White ? 'circle' : 'inverse';
 
       // Convert old method of SystemIcon into IconButton. If SystemIcon is within a link, make sure it's passed through
       if (child.type === 'a' && singleChild && singleChild.type === SystemIcon) {
@@ -313,7 +308,7 @@ export default class Header extends React.Component<HeaderProps, {}> {
           },
           variant: iconButtonVariant,
           icon: (singleChild.props as SystemIconProps).icon,
-        };
+        } as const;
 
         return <IconButton {...iconButtonProps} aria-label="" />;
       }
@@ -333,11 +328,8 @@ export default class Header extends React.Component<HeaderProps, {}> {
       }
 
       // Plain icon buttons have negative margin that we need to negate.
-      if (
-        child.type === IconButton &&
-        (child.props as IconButtonProps).variant === IconButton.Variant.Plain
-      ) {
-        return React.cloneElement(child as React.ReactElement<IconButtonProps>, {
+      if (child.type === IconButton && (child.props as IconButtonProps).variant === 'plain') {
+        return React.cloneElement(child as React.ReactElement, {
           style: {margin: `0 0 0 ${childrenSpacing}`},
         });
       }

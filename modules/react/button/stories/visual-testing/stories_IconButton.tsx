@@ -10,37 +10,38 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {IconButton} from '../../index';
+import {IconButton} from '@workday/canvas-kit-react/button';
 import {Container, IconButtonGrid, stateTableColumnProps} from './utils';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Icon Button',
   component: IconButton,
 });
 
-export const IconButtonStates = () => (
+export const IconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <React.Fragment>
     {[false, true].map(toggled => (
       <div>
         <h3>Toggled {toggled ? 'On' : 'Off'}</h3>
-        <StaticStates>
+        <StaticStates theme={props.theme}>
           <ComponentStatesTable
             rowProps={permutateProps({
               variant: [
-                {value: IconButton.Variant.Inverse, label: 'Inverse'},
-                {value: IconButton.Variant.InverseFilled, label: 'Inverse Filled'},
-                {value: IconButton.Variant.Plain, label: 'Plain'},
-                {value: IconButton.Variant.Circle, label: 'Circle'},
-                {value: IconButton.Variant.CircleFilled, label: 'Circle Filled'},
-                {value: IconButton.Variant.Square, label: 'Square'},
-                {value: IconButton.Variant.SquareFilled, label: 'Square Filled'},
+                {value: "inverse", label: 'Inverse'},
+                {value: "inverseFilled", label: 'Inverse Filled'},
+                {value: "plain", label: 'Plain'},
+                {value: "circle", label: 'Circle'},
+                {value: "circleFilled", label: 'Circle Filled'},
+                {value: "square", label: 'Square'},
+                {value: "squareFilled", label: 'Square Filled'},
               ],
             })}
             columnProps={stateTableColumnProps}
           >
             {props => (
               <Container
-                blue={[IconButton.Variant.Inverse, IconButton.Variant.InverseFilled].includes(
+                blue={["inverse", "inverseFilled"].includes(
                   props.variant
                 )}
               >
@@ -61,16 +62,11 @@ export const IconButtonStates = () => (
 );
 
 export const IconButtonCircleToggleableGrid = () => (
-  <IconButtonGrid initialToggled={true} variant={IconButton.Variant.Circle} />
+  <IconButtonGrid initialToggled={true} variant={"circle"} />
 );
 
 export const IconButtonInverseToggleableGrid = () => (
-  <IconButtonGrid initialToggled={true} variant={IconButton.Variant.Inverse} />
+  <IconButtonGrid initialToggled={true} variant={"inverse"} />
 );
 
-export const IconButtonThemedStates = () => <IconButtonStates />;
-IconButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
+export const IconButtonThemedStates = () => <IconButtonStates theme={{canvas: customColorTheme}} />;

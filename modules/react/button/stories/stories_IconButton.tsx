@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {IconButton} from '../index';
+import {IconButton} from '@workday/canvas-kit-react/button';
 
 import README from '../README.md';
 
@@ -44,14 +44,14 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          variant={IconButton.Variant.Circle}
-          size={IconButton.Size.Medium}
+          variant="circle"
+          size="medium"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          variant={IconButton.Variant.Circle}
-          size={IconButton.Size.Medium}
+          variant="circle"
+          size="medium"
           disabled={true}
         />
 
@@ -59,14 +59,14 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          variant={IconButton.Variant.Circle}
-          size={IconButton.Size.Small}
+          variant="circle"
+          size="small"
         />
         <IconButton
           aria-label="Activity Stream"
-          variant={IconButton.Variant.Circle}
+          variant="circle"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
+          size="small"
           disabled={true}
         />
 
@@ -75,7 +75,7 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           aria-label="Activity Stream"
           icon={activityStreamIcon}
           toggled={toggled}
-          variant={IconButton.Variant.Circle}
+          variant="circle"
           onClick={handleToggle}
         />
       </div>
@@ -93,30 +93,30 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Medium}
-          variant={IconButton.Variant.Square}
+          size="medium"
+          variant="square"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Medium}
+          size="medium"
           disabled={true}
-          variant={IconButton.Variant.Square}
+          variant="square"
         />
 
         <h3>Small Square</h3>
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
-          variant={IconButton.Variant.Square}
+          size="small"
+          variant="square"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
+          size="small"
           disabled={true}
-          variant={IconButton.Variant.Square}
+          variant="square"
         />
 
         <h3>Toggleable Square</h3>
@@ -124,7 +124,7 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           aria-label="Activity Stream"
           icon={activityStreamIcon}
           toggled={toggled}
-          variant={IconButton.Variant.Square}
+          variant="square"
           onClick={handleToggle}
         />
       </div>
@@ -142,36 +142,36 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Medium}
-          variant={IconButton.Variant.SquareFilled}
+          size="medium"
+          variant="squareFilled"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Medium}
+          size="medium"
           disabled={true}
-          variant={IconButton.Variant.SquareFilled}
+          variant="squareFilled"
         />
         <h3>Small Square</h3>
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
-          variant={IconButton.Variant.SquareFilled}
+          size="small"
+          variant="squareFilled"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
+          size="small"
           disabled={true}
-          variant={IconButton.Variant.SquareFilled}
+          variant="squareFilled"
         />
         <h3>Toggleable Square</h3>
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
           toggled={toggled}
-          variant={IconButton.Variant.SquareFilled}
+          variant="squareFilled"
           onClick={handleToggle}
         />
       </div>
@@ -189,36 +189,36 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Medium}
-          variant={IconButton.Variant.Plain}
+          size="medium"
+          variant="plain"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Medium}
-          variant={IconButton.Variant.Plain}
+          size="medium"
+          variant="plain"
           disabled={true}
         />
         <h3>Small Plain</h3>
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
-          variant={IconButton.Variant.Plain}
+          size="small"
+          variant="plain"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
+          size="small"
           disabled={true}
-          variant={IconButton.Variant.Plain}
+          variant="plain"
         />
         <h3>Toggleable Plain</h3>
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
           toggled={toggled}
-          variant={IconButton.Variant.Plain}
+          variant="plain"
           onClick={handleToggle}
         />
       </div>
@@ -236,36 +236,36 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Medium}
-          variant={IconButton.Variant.CircleFilled}
+          size="medium"
+          variant="circleFilled"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Medium}
-          variant={IconButton.Variant.CircleFilled}
+          size="medium"
+          variant="circleFilled"
           disabled={true}
         />
         <h3>Small Filled</h3>
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
-          variant={IconButton.Variant.CircleFilled}
+          size="small"
+          variant="circleFilled"
         />
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
-          size={IconButton.Size.Small}
+          size="small"
           disabled={true}
-          variant={IconButton.Variant.CircleFilled}
+          variant="circleFilled"
         />
         <h3>Toggleable Filled</h3>
         <IconButton
           aria-label="Activity Stream"
           icon={activityStreamIcon}
           toggled={toggled}
-          variant={IconButton.Variant.CircleFilled}
+          variant="circleFilled"
           onClick={handleToggle}
         />
       </div>
@@ -284,14 +284,14 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           <IconButton
             aria-label="Activity Stream"
             icon={activityStreamIcon}
-            size={IconButton.Size.Medium}
-            variant={IconButton.Variant.Inverse}
+            size="medium"
+            variant="inverse"
           />
           <IconButton
             aria-label="Activity Stream"
             icon={activityStreamIcon}
-            size={IconButton.Size.Medium}
-            variant={IconButton.Variant.Inverse}
+            size="medium"
+            variant="inverse"
             disabled={true}
           />
         </div>
@@ -300,15 +300,15 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           <IconButton
             aria-label="Activity Stream"
             icon={activityStreamIcon}
-            size={IconButton.Size.Small}
-            variant={IconButton.Variant.Inverse}
+            size="small"
+            variant="inverse"
           />
           <IconButton
             aria-label="Activity Stream"
             icon={activityStreamIcon}
-            size={IconButton.Size.Small}
+            size="small"
             disabled={true}
-            variant={IconButton.Variant.Inverse}
+            variant="inverse"
           />
         </div>
         <h3>Toggleable Inverse</h3>
@@ -317,7 +317,7 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
             aria-label="Activity Stream"
             icon={activityStreamIcon}
             toggled={toggled}
-            variant={IconButton.Variant.Inverse}
+            variant="inverse"
             onClick={handleToggle}
           />
         </div>
@@ -337,14 +337,14 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           <IconButton
             aria-label="Activity Stream"
             icon={activityStreamIcon}
-            size={IconButton.Size.Medium}
-            variant={IconButton.Variant.InverseFilled}
+            size="medium"
+            variant="inverseFilled"
           />
           <IconButton
             aria-label="Activity Stream"
             icon={activityStreamIcon}
-            size={IconButton.Size.Medium}
-            variant={IconButton.Variant.InverseFilled}
+            size="medium"
+            variant="inverseFilled"
             disabled={true}
           />
         </div>
@@ -353,15 +353,15 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
           <IconButton
             aria-label="Activity Stream"
             icon={activityStreamIcon}
-            size={IconButton.Size.Small}
-            variant={IconButton.Variant.InverseFilled}
+            size="small"
+            variant="inverseFilled"
           />
           <IconButton
             aria-label="Activity Stream"
             icon={activityStreamIcon}
-            size={IconButton.Size.Small}
+            size="small"
             disabled={true}
-            variant={IconButton.Variant.InverseFilled}
+            variant="inverseFilled"
           />
         </div>
         <h3>Toggleable Inverse Filled</h3>
@@ -370,7 +370,7 @@ storiesOf('Components/Buttons/Button/React/Icon Button', module)
             aria-label="Activity Stream"
             icon={activityStreamIcon}
             toggled={toggled}
-            variant={IconButton.Variant.InverseFilled}
+            variant="inverseFilled"
             onClick={handleToggle}
           />
         </div>

@@ -9,27 +9,28 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {OutlineButton} from '../../index';
+import {OutlineButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Outline Button',
   component: OutlineButton,
 });
 
-export const OutlineButtonStates = () => (
-  <StaticStates>
+export const OutlineButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+  <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
         variant: [
-          {value: OutlineButton.Variant.Primary, label: 'Outline Primary'},
-          {value: OutlineButton.Variant.Secondary, label: 'Outline Secondary'},
-          {value: OutlineButton.Variant.Inverse, label: 'Outline Inverse'},
+          {value: 'primary', label: 'Outline Primary'},
+          {value: 'secondary', label: 'Outline Secondary'},
+          {value: 'inverse', label: 'Outline Inverse'},
         ],
         size: [
-          {value: OutlineButton.Size.Small, label: 'Small'},
-          {value: OutlineButton.Size.Medium, label: 'Medium'},
-          {value: OutlineButton.Size.Large, label: 'Large'},
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
         ],
         icon: [
           {value: undefined, label: ''},
@@ -43,7 +44,7 @@ export const OutlineButtonStates = () => (
       columnProps={stateTableColumnProps}
     >
       {props => (
-        <Container blue={props.variant === OutlineButton.Variant.Inverse}>
+        <Container blue={props.variant === 'inverse'}>
           <OutlineButton {...props}>Test</OutlineButton>
         </Container>
       )}
@@ -51,9 +52,6 @@ export const OutlineButtonStates = () => (
   </StaticStates>
 );
 
-export const OutlineButtonThemedStates = () => <OutlineButtonStates />;
-OutlineButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
+export const OutlineButtonThemedStates = () => (
+  <OutlineButtonStates theme={{canvas: customColorTheme}} />
+);

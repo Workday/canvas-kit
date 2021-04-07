@@ -8,7 +8,7 @@ import {
   permutateProps,
   withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
-import {Hyperlink} from '../../index';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {Container} from './utils';
 
 export default withSnapshotsEnabled({
@@ -22,7 +22,7 @@ export const HyperlinkStates = () => (
       rowProps={permutateProps({
         variant: [
           {label: 'Default', value: undefined},
-          {label: 'Inverse', value: Hyperlink.Variant.Inverse},
+          {label: 'Inverse', value: 'inverse'},
         ],
       })}
       columnProps={permutateProps({
@@ -38,12 +38,11 @@ export const HyperlinkStates = () => (
       })}
     >
       {(props: any) => (
-        <Container blue={props.variant === Hyperlink.Variant.Inverse}>
+        <Container blue={props.variant === 'inverse'}>
           <div
             css={{
               ...type.body2,
-              color:
-                props.variant === Hyperlink.Variant.Inverse ? colors.frenchVanilla100 : undefined,
+              color: props.variant === 'inverse' ? colors.frenchVanilla100 : undefined,
             }}
           >
             Here's a <Hyperlink {...props}>Link</Hyperlink> to something

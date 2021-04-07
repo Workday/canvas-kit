@@ -1,21 +1,34 @@
 import * as React from 'react';
 import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
-import {focusRing, useTheme, Themeable, EmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {
+  focusRing,
+  useTheme,
+  Themeable,
+  EmotionCanvasTheme,
+  createComponent,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {IconButtonVariant, ButtonColors, ButtonOrAnchorComponent} from './types';
+import {ButtonColors} from './types';
 import {ButtonContainer} from './parts';
 
-export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Themeable {
+export interface IconButtonProps extends Themeable {
   /**
    * The accessibility label to indicate the action triggered by clicking the IconButton.
    */
   'aria-label': string;
   /**
    * The type of the IconButton.
-   * @default IconButtonVariant.Circle
+   * @default 'circle'
    */
-  variant?: IconButtonVariant;
+  variant?:
+    | 'square'
+    | 'squareFilled'
+    | 'plain'
+    | 'circle'
+    | 'circleFilled'
+    | 'inverse'
+    | 'inverseFilled';
   /**
    * The size of the IconButton.
    * @default 'medium'
@@ -27,10 +40,6 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    */
   toggled?: boolean;
   /**
-   * The ref to the button that the styled component renders.
-   */
-  buttonRef?: React.Ref<HTMLButtonElement>;
-  /**
    * The icon of the IconButton.
    */
   icon?: CanvasSystemIcon;
@@ -38,87 +47,77 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * The function called when the IconButton toggled state changes.
    */
   onToggleChange?: (toggled: boolean | undefined) => void;
-  /**
-   * The alternative container type for the button. Uses Emotion's special `as` prop.
-   * Will render an `a` tag instead of a `button` when defined.
-   */
-  as?: 'a';
+  value?: string | string[] | number;
+  children?: React.ReactNode;
 }
 
-const IconButton: ButtonOrAnchorComponent<
-  IconButtonProps,
-  typeof IconButtonVariant,
-  'aria-label'
-> = ({
-  // TODO: Fix useTheme and make it a real hook
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  theme = useTheme(),
-  variant = IconButtonVariant.Circle,
-  size = 'medium',
-  buttonRef,
-  onToggleChange,
-  'aria-label': iconArialabel,
-  icon,
-  toggled,
-  children,
-  ...elemProps
-}: IconButtonProps) => {
-  const isInitialMount = React.useRef(true);
+export const IconButton = createComponent('button')({
+  displayName: 'IconButton',
+  Component: (
+    {
+      // TODO: Fix useTheme and make it a real hook
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      theme = useTheme(),
+      variant = 'circle',
+      size = 'medium',
+      onToggleChange,
+      icon,
+      toggled,
+      children,
+      ...elemProps
+    }: IconButtonProps,
+    ref,
+    Element
+  ) => {
+    const isInitialMount = React.useRef(true);
 
-  // Only call onToggleChange on update - not on first mount
-  React.useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      if (toggled && typeof onToggleChange === 'function') {
-        onToggleChange(toggled);
+    // Only call onToggleChange on update - not on first mount
+    React.useEffect(() => {
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+      } else {
+        if (toggled && typeof onToggleChange === 'function') {
+          onToggleChange(toggled);
+        }
       }
-    }
-  }, [toggled, onToggleChange]);
+    }, [toggled, onToggleChange]);
 
-  const containerStyles = {
-    padding: 0,
-    margin: variant === IconButtonVariant.Plain ? '-8px' : undefined,
-    minWidth: size === 'small' ? spacing.l : spacing.xl, // min-width is set so buttons don't collapse in IE11
-    width: size === 'small' ? spacing.l : spacing.xl,
-    height: size === 'small' ? spacing.l : spacing.xl,
-    ...getIconButtonBorderRadius(variant),
-    ['& .wd-icon']: {
-      display: 'inline-block',
-      verticalAlign: 'middle',
-      width: size === 'small' ? '20px' : undefined,
-      height: size === 'small' ? '20px' : undefined,
-    },
-  };
+    const containerStyles = {
+      padding: 0,
+      margin: variant === 'plain' ? '-8px' : undefined,
+      minWidth: size === 'small' ? spacing.l : spacing.xl, // min-width is set so buttons don't collapse in IE11
+      width: size === 'small' ? spacing.l : spacing.xl,
+      height: size === 'small' ? spacing.l : spacing.xl,
+      ...getIconButtonBorderRadius(variant),
+      ['& .wd-icon']: {
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        width: size === 'small' ? '20px' : undefined,
+        height: size === 'small' ? '20px' : undefined,
+      },
+    };
 
-  return (
-    <ButtonContainer
-      colors={getIconButtonColors(variant, theme, toggled)}
-      size={size}
-      ref={buttonRef}
-      fillIcon={toggled}
-      extraStyles={containerStyles}
-      aria-pressed={toggled}
-      aria-label={iconArialabel}
-      {...elemProps}
-    >
-      {icon ? <SystemIcon icon={icon} /> : children}
-    </ButtonContainer>
-  );
-};
+    return (
+      <ButtonContainer
+        ref={ref}
+        as={Element}
+        colors={getIconButtonColors(variant, theme, toggled)}
+        size={size}
+        fillIcon={toggled}
+        extraStyles={containerStyles}
+        aria-pressed={toggled}
+        {...elemProps}
+      >
+        {icon ? <SystemIcon icon={icon} /> : children}
+      </ButtonContainer>
+    );
+  },
+});
 
-IconButton.Variant = IconButtonVariant;
-IconButton.Size = {
-  Small: 'small',
-  Medium: 'medium',
-} as const;
-
-export default IconButton;
-
-const getIconButtonBorderRadius = (variant: IconButtonVariant) => {
+const getIconButtonBorderRadius = (variant: IconButtonProps['variant']) => {
   switch (variant) {
-    case IconButtonVariant.Square:
-    case IconButtonVariant.SquareFilled:
+    case 'square':
+    case 'squareFilled':
       return {borderRadius: borderRadius.m};
     default:
       return {borderRadius: borderRadius.circle};
@@ -126,7 +125,7 @@ const getIconButtonBorderRadius = (variant: IconButtonVariant) => {
 };
 
 const getIconButtonColors = (
-  variant: IconButtonVariant,
+  variant: IconButtonProps['variant'],
   theme: EmotionCanvasTheme,
   toggled?: boolean
 ): ButtonColors => {
@@ -137,8 +136,8 @@ const getIconButtonColors = (
   } = theme;
 
   switch (variant) {
-    case IconButton.Variant.Square:
-    case IconButtonVariant.Circle:
+    case 'square':
+    case 'circle':
     default:
       return {
         default: {
@@ -162,8 +161,8 @@ const getIconButtonColors = (
           icon: toggled ? themePrimary.light : colors.soap600,
         },
       };
-    case IconButtonVariant.SquareFilled:
-    case IconButtonVariant.CircleFilled:
+    case 'squareFilled':
+    case 'circleFilled':
       return {
         default: {
           background: toggled ? themePrimary.main : colors.soap200,
@@ -186,7 +185,7 @@ const getIconButtonColors = (
           icon: toggled ? themePrimary.light : colors.soap600,
         },
       };
-    case IconButtonVariant.Plain:
+    case 'plain':
       return {
         default: {
           icon: toggled ? themePrimary.main : colors.licorice200,
@@ -205,7 +204,7 @@ const getIconButtonColors = (
           icon: toggled ? themePrimary.light : colors.soap600,
         },
       };
-    case IconButtonVariant.Inverse:
+    case 'inverse':
       return {
         default: {
           background: toggled ? themePrimary.contrast : undefined,
@@ -236,7 +235,7 @@ const getIconButtonColors = (
           icon: toggled ? themePrimary.main : 'rgba(255, 255, 255, 0.75)',
         },
       };
-    case IconButtonVariant.InverseFilled:
+    case 'inverseFilled':
       return {
         default: {
           background: toggled ? themePrimary.contrast : 'rgba(0, 0, 0, 0.2)',

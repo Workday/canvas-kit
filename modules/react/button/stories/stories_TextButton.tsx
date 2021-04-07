@@ -8,7 +8,7 @@ import {colors} from '@workday/canvas-kit-react/core';
 import {type} from '@workday/canvas-kit-labs-react/core';
 import {editIcon, arrowRightIcon} from '@workday/canvas-system-icons-web';
 
-import {TextButton, Hyperlink} from '../index';
+import {TextButton, Hyperlink} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 const blueBackground: CSSObject = {
@@ -40,18 +40,18 @@ storiesOf('Components/Buttons/Button/React/Text', module)
   .add('Default', () => (
     <div className="story">
       <h3>Medium Large</h3>
-      <TextButton size="medium" variant={TextButton.Variant.Default}>
+      <TextButton size="medium" variant="text">
         Text
       </TextButton>
-      <TextButton disabled={true} size="medium" variant={TextButton.Variant.Default}>
+      <TextButton disabled={true} size="medium" variant="text">
         Text
       </TextButton>
 
       <h3>Small</h3>
-      <TextButton size="small" variant={TextButton.Variant.Default}>
+      <TextButton size="small" variant="text">
         Text
       </TextButton>
-      <TextButton disabled={true} size="small" variant={TextButton.Variant.Default}>
+      <TextButton disabled={true} size="small" variant="text">
         Text
       </TextButton>
 
@@ -60,18 +60,10 @@ storiesOf('Components/Buttons/Button/React/Text', module)
 
       <h3>Icons</h3>
       <div css={buttonContainer}>
-        <TextButton
-          icon={editIcon}
-          iconPosition={TextButton.IconPosition.Left}
-          variant={TextButton.Variant.Default}
-        >
+        <TextButton icon={editIcon} iconPosition="left" variant="text">
           Left Icon
         </TextButton>
-        <TextButton
-          icon={arrowRightIcon}
-          iconPosition={TextButton.IconPosition.Right}
-          variant={TextButton.Variant.Default}
-        >
+        <TextButton icon={arrowRightIcon} iconPosition="right" variant="text">
           Right Icon
         </TextButton>
       </div>
@@ -81,45 +73,37 @@ storiesOf('Components/Buttons/Button/React/Text', module)
     <div className="story">
       <h3>Medium Inverse</h3>
       <div css={blueBackground}>
-        <TextButton size="medium" variant={TextButton.Variant.Inverse}>
+        <TextButton size="medium" variant="inverse">
           Text
         </TextButton>
-        <TextButton disabled={true} size="medium" variant={TextButton.Variant.Inverse}>
+        <TextButton disabled={true} size="medium" variant="inverse">
           Text
         </TextButton>
       </div>
 
       <h3>Small Inverse</h3>
       <div css={blueBackground}>
-        <TextButton size="small" variant={TextButton.Variant.Inverse}>
+        <TextButton size="small" variant="inverse">
           Text
         </TextButton>
-        <TextButton disabled={true} size="small" variant={TextButton.Variant.Inverse}>
+        <TextButton disabled={true} size="small" variant="inverse">
           Text
         </TextButton>
       </div>
 
       <h3>All Caps Inverse</h3>
       <div css={blueBackground}>
-        <TextButton variant={TextButton.Variant.Inverse} allCaps={true}>
+        <TextButton variant="inverse" allCaps={true}>
           All Caps
         </TextButton>
       </div>
 
       <h3>Icons Inverse</h3>
       <div css={{...buttonContainer, ...blueBackground}}>
-        <TextButton
-          icon={editIcon}
-          iconPosition={TextButton.IconPosition.Left}
-          variant={TextButton.Variant.Inverse}
-        >
+        <TextButton icon={editIcon} iconPosition="left" variant="inverse">
           Left Icon
         </TextButton>
-        <TextButton
-          icon={arrowRightIcon}
-          iconPosition={TextButton.IconPosition.Right}
-          variant={TextButton.Variant.Inverse}
-        >
+        <TextButton icon={arrowRightIcon} iconPosition="right" variant="inverse">
           Right Icon
         </TextButton>
       </div>
@@ -135,7 +119,7 @@ storiesOf('Components/Buttons/Button/React/Text', module)
       <div
         css={{...blueBackground, ...type.body, display: 'block', color: colors.frenchVanilla100}}
       >
-        Here is a <Hyperlink variant={Hyperlink.Variant.Inverse}>Link</Hyperlink> to something
+        Here is a <Hyperlink variant="inverse">Link</Hyperlink> to something
       </div>
     </div>
   ));

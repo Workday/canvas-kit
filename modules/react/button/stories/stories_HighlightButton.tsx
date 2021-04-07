@@ -6,7 +6,7 @@ import withReadme from 'storybook-readme/with-readme';
 
 import {playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {HighlightButton} from '../index';
+import {HighlightButton} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 const buttonContainer = {

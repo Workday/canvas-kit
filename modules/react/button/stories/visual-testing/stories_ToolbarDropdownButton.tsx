@@ -6,23 +6,23 @@ import {StaticStates} from '@workday/canvas-kit-labs-react/core';
 import {
   ComponentStatesTable,
   withSnapshotsEnabled,
-  permutateProps,
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {ToolbarDropdownButton} from '../../index';
+import {ToolbarDropdownButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Toolbar Dropdown Button',
   component: ToolbarDropdownButton,
 });
 
-export const ToolbarDropdownButtonStates = () => (
+export const ToolbarDropdownButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <React.Fragment>
     <div>
       <h3>Default</h3>
-      <StaticStates>
+      <StaticStates theme={props.theme}>
         <ComponentStatesTable
           rowProps={[{label: 'Default', props: {}}]}
           columnProps={stateTableColumnProps}
@@ -43,9 +43,6 @@ export const ToolbarDropdownButtonStates = () => (
   </React.Fragment>
 );
 
-export const ToolbarDropdownButtonThemedStates = () => <ToolbarDropdownButtonStates />;
-ToolbarDropdownButtonThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
+export const ToolbarDropdownButtonThemedStates = () => (
+  <ToolbarDropdownButtonStates theme={{canvas: customColorTheme}} />
+);

@@ -1,28 +1,28 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react/core';
 import {type} from '@workday/canvas-kit-labs-react/core';
-import {TextButtonVariant} from './types';
-import {styled} from '@workday/canvas-kit-react/common';
+import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/common';
 
-export interface HyperlinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface HyperlinkProps {
   /**
    * The variant of the Hyperlink.
-   * @default TextButtonVariant.Default
+   * @default 'text'
    */
-  variant?: TextButtonVariant;
+  variant?: 'text' | 'inverse';
   /**
    * The href of the anchor tag.
    */
   href?: string;
+  children?: React.ReactNode;
 }
 
-const Anchor = styled('a')<HyperlinkProps>(
+const Anchor = styled('a')<HyperlinkProps & StyledType>(
   {
     fontFamily: type.body.fontFamily,
     ...type.variant.link,
   },
   ({variant}) => {
-    if (variant === TextButtonVariant.Inverse) {
+    if (variant === 'inverse') {
       return {
         color: colors.frenchVanilla100,
         '&:hover': {
@@ -42,10 +42,11 @@ const Anchor = styled('a')<HyperlinkProps>(
   }
 );
 
-const Hyperlink = ({variant, href, ...elemProps}: HyperlinkProps) => (
-  <Anchor variant={variant} href={href} {...elemProps}></Anchor>
-);
-
-Hyperlink.Variant = TextButtonVariant;
-
-export default Hyperlink;
+export const Hyperlink = createComponent('a')({
+  displayName: 'Hyperlink',
+  Component: ({variant, href, children, ...elemProps}: HyperlinkProps, ref, Element) => (
+    <Anchor ref={ref} as={Element} variant={variant} href={href} {...elemProps}>
+      {children}
+    </Anchor>
+  ),
+});

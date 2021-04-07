@@ -9,6 +9,8 @@ describe('Icon Button', () => {
     cb.mockReset();
   });
 
+  verifyComponent(IconButton, {});
+
   describe('when rendered', () => {
     it('should render a button', () => {
       const {getByRole} = render(
@@ -49,9 +51,9 @@ describe('Icon Button', () => {
 
   describe('when rendered with a button ref', () => {
     it('should set the ref to the checkbox input element', () => {
-      const ref = React.createRef<HTMLButtonElement>();
+      const ref = {current: null};
 
-      render(<IconButton aria-label="Activity Stream" icon={activityStreamIcon} buttonRef={ref} />);
+      render(<IconButton aria-label="Activity Stream" icon={activityStreamIcon} ref={ref} />);
 
       expect(ref.current).not.toBeNull();
       expect(ref.current!.tagName.toLowerCase()).toEqual('button');

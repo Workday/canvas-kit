@@ -3,12 +3,12 @@ import {memoizedFocusRing} from '../lib/styles/focusRing';
 describe('memoizedFocusRing', () => {
   test('returns same object (reference equality)', () => {
     const args = {
-      ringWidth: 3,
-      separationWidth: 1,
+      width: 3,
+      separation: 1,
       animate: true,
       inset: 'outer',
-      innerShadowColor: '#333333',
-      outerShadowColor: '#666666',
+      innerColor: '#333333',
+      outerColor: '#666666',
     } as const;
     const received0 = memoizedFocusRing(args);
     const received1 = memoizedFocusRing(args);

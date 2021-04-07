@@ -29,7 +29,7 @@ export const Default = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+        <Button onClick={closeModal} variant="secondary">
           Cancel
         </Button>
       </Modal>
@@ -39,20 +39,20 @@ export const Default = () => {
 
 export const WithoutHook = () => {
   const [open, setOpen] = React.useState(false);
-  const buttonRef = React.useRef<HTMLButtonElement>() as React.RefObject<HTMLButtonElement>; // cast to keep buttonRef happy
+  const ref = React.useRef<HTMLButtonElement>(null);
   const openModal = () => {
     setOpen(true);
   };
   const closeModal = () => {
     setOpen(false);
-    if (buttonRef.current) {
-      buttonRef.current.focus();
+    if (ref.current) {
+      ref.current.focus();
     }
   };
 
   return (
     <>
-      <DeleteButton buttonRef={buttonRef} onClick={openModal}>
+      <DeleteButton ref={ref} onClick={openModal}>
         Delete Item
       </DeleteButton>
 
@@ -61,7 +61,7 @@ export const WithoutHook = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+        <Button onClick={closeModal} variant="secondary">
           Cancel
         </Button>
       </Modal>
@@ -77,7 +77,12 @@ export const WithRadioButtons = () => {
     <>
       <Button {...targetProps}>With Radio Buttons</Button>
       <Modal data-testid="TestModal" heading="Select Item" {...modalProps}>
-        <RadioGroup name="contact" data-testid="radiogroup" value={value} onChange={setValue}>
+        <RadioGroup
+          name="contact"
+          data-testid="radiogroup"
+          value={value}
+          onChange={value => setValue(String(value))}
+        >
           <Radio id="1" value="email" label="E-mail" />
           <Radio id="2" value="phone" label="Phone" />
         </RadioGroup>
@@ -102,7 +107,7 @@ export const WithoutCloseIcon = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+        <Button onClick={closeModal} variant="secondary">
           Cancel
         </Button>
       </Modal>
@@ -129,7 +134,7 @@ export const CustomFocus = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant={Button.Variant.Secondary}>
+        <Button onClick={closeModal} variant="secondary">
           Cancel
         </Button>
       </Modal>

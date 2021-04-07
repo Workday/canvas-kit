@@ -2,7 +2,7 @@
 
 Clickable button elements that extend the native `<button>` element with Canvas styling.
 
-[> Workday Design Reference](https://design.workday.com/components/buttons/buttons) 
+[> Workday Design Reference](https://design.workday.com/components/buttons/buttons)
 
 ## Installation
 
@@ -69,22 +69,6 @@ import {Button} from '@workday/canvas-kit-react/button';
 <Button>Button Label</Button>;
 ```
 
-## Static Properties
-
-#### `Size: 'small' | 'medium' | 'large'`
-
-```tsx
-<Button size={Button.Size.Small}>Small Button</Button>
-```
-
----
-
-#### `Variant: ButtonVariant`
-
-```tsx
-<Button variant={Button.Variant.Primary}>Primary Button</Button>
-```
-
 ## Component Props
 
 ### Required
@@ -95,15 +79,15 @@ import {Button} from '@workday/canvas-kit-react/button';
 
 ### Optional
 
-#### `variant: ButtonVariant`
+#### `variant: 'primary' | 'secondary'`
 
 > The type of the button
 
-Default: `ButtonVariant.Secondary`
+Default: `'secondary'`
 
 | Theme       | Description                     |
 | ----------- | ------------------------------- |
-| `Primary`   | Blue background, white text     |
+| `primary`   | Blue background, white text     |
 | `Secondary` | Gray background, dark gray text |
 
 ---
@@ -130,7 +114,7 @@ Default: `false`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
@@ -173,14 +157,6 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 <DeleteButton>Button Label</DeleteButton>;
 ```
 
-## Static Properties
-
-#### `Size: 'small' | 'medium' | 'large'`
-
-```tsx
-<DeleteButton size={DeleteButton.Size.Small}>Small Button</DeleteButton>
-```
-
 ## Component Props
 
 ### Required
@@ -205,7 +181,7 @@ Default: `'medium'`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
@@ -240,22 +216,6 @@ import {DropdownButton} from '@workday/canvas-kit-react/button';
 <DropdownButton>Button Label</DropdownButton>;
 ```
 
-## Static Properties
-
-#### `Size: 'medium' | 'large'`
-
-```tsx
-<DropdownButton size={DropdownButton.Size.Large}>Large Button</DropdownButton>
-```
-
----
-
-#### `Variant: DropdownButtonVariant`
-
-```tsx
-<DropdownButton variant={DropdownButton.Variant.Primary}>Primary Button</DropdownButton>
-```
-
 ## Component Props
 
 ### Required
@@ -266,16 +226,16 @@ import {DropdownButton} from '@workday/canvas-kit-react/button';
 
 ### Optional
 
-#### `variant: ButtonVariant`
+#### `variant: 'primary' | 'secondary'`
 
 > The type of the button
 
-Default: `DropdownButtonVariant.Secondary`
+Default: `'secondary'`
 
 | Theme       | Description                          |
 | ----------- | ------------------------------------ |
-| `Primary`   | Blue background, white text/icon     |
-| `Secondary` | Gray background, dark gray text/icon |
+| `primary`   | Blue background, white text/icon     |
+| `secondary` | Gray background, dark gray text/icon |
 
 ---
 
@@ -300,7 +260,7 @@ Default: `false`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
@@ -327,14 +287,6 @@ import {HighlightButton} from '@workday/canvas-kit-react/button';
 <HighlightButton>Button Label</HighlightButton>;
 ```
 
-## Static Properties
-
-#### `Size: 'medium' | 'large'`
-
-```tsx
-<HighlightButton size={HighlightButton.Size.Large}>Large Button</HighlightButton>
-```
-
 ## Component Props
 
 ### Required
@@ -366,7 +318,7 @@ Default: `false`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
@@ -399,22 +351,6 @@ import {OutlineButton} from '@workday/canvas-kit-react/button';
 <OutlineButton>Button Label</OutlineButton>;
 ```
 
-## Static Properties
-
-#### `Size: 'small' | 'medium' | 'large'`
-
-```tsx
-<OutlineButton size={OutlineButton.Size.Small}>Small Button</OutlineButton>
-```
-
----
-
-#### `Variant: OutlineButtonVariant`
-
-```tsx
-<OutlineButton variant={OutlineButton.Variant.Primary}>Primary Button</OutlineButton>
-```
-
 ## Component Props
 
 ### Required
@@ -425,17 +361,17 @@ import {OutlineButton} from '@workday/canvas-kit-react/button';
 
 ### Optional
 
-#### `variant: ButtonVariant`
+#### `variant: 'primary' | 'secondary' | 'inverse'`
 
 > The type of the button
 
-Default: `OutlineButtonVariant.Secondary`
+Default: `'secondary'`
 
 | Theme       | Description                                   |
 | ----------- | --------------------------------------------- |
-| `Primary`   | Transparent background, blue border and text  |
-| `Secondary` | Transparent background, gray border and text  |
-| `Inverse`   | Transparent background, white border and text |
+| `primary`   | Transparent background, blue border and text  |
+| `secondary` | Transparent background, gray border and text  |
+| `inverse`   | Transparent background, white border and text |
 
 ---
 
@@ -461,7 +397,7 @@ Default: `false`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
@@ -504,22 +440,6 @@ import {TextButton} from '@workday/canvas-kit-react/button';
 <TextButton>Button Label</TextButton>;
 ```
 
-## Static Properties
-
-#### `Size: 'small' | 'medium'`
-
-```tsx
-<TextButton size={TextButton.Size.Small}>Small Button</TextButton>
-```
-
----
-
-#### `Variant: ButtonVariant`
-
-```tsx
-<TextButton variant={TextButton.Variant.Inverse}>Inverse Button</TextButton>
-```
-
 ## Component Props
 
 ### Required
@@ -530,16 +450,16 @@ import {TextButton} from '@workday/canvas-kit-react/button';
 
 ### Optional
 
-#### `variant: TextButtonVariant`
+#### `variant: 'text' | 'inverse'`
 
 > The type of the button
 
-Default: `TextButtonVariant.Default`
+Default: `'text'`
 
 | Theme     | Description |
 | --------- | ----------- |
-| `Default` | Blue text   |
-| `Inverse` | White text  |
+| `text`    | Blue text   |
+| `inverse` | White text  |
 
 ---
 
@@ -565,7 +485,7 @@ Default: `ButtonIconPosition.Left`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
@@ -607,23 +527,6 @@ import {Hyperlink} from '@workday/canvas-kit-react/button';
 Hyperlink will apply our link styling, but follow the font styles of it's container (size, weight,
 line-height, etc.).
 
-## Static Properties
-
-#### `Variant: ButtonVariant`
-
-```tsx
-<Hyperlink variant={Hyperlink.Variant.Inverse}>Link</Hyperlink>
-```
-
-> The style of the link for different backgrounds
-
-Default: `TextButtonVariant.Default`
-
-| Theme     | Description |
-| --------- | ----------- |
-| `Default` | Blue text   |
-| `Inverse` | White text  |
-
 ## Component Props
 
 ### Required
@@ -654,22 +557,6 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 <IconButton icon={activityStreamIcon} aria-label="Activity Stream" />;
 ```
 
-## Static Properties
-
-#### `Size: 'small' | 'medium'`
-
-```tsx
-<IconButton size={IconButton.Size.Small} icon={xIcon} />
-```
-
----
-
-#### `Variant: IconButtonVariant`
-
-```tsx
-<IconButton variant={IconButton.Variant.Plain} icon={xIcon} />
-```
-
 ## Component Props
 
 ### Required
@@ -682,21 +569,21 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ### Optional
 
-#### `variant: IconButtonVariant`
+#### `variant: 'square' | 'squareFilled' | 'plain' | 'circle' | 'circleFilled' | 'inverse' | 'inverseFilled'`
 
 > The type of the icon button
 
-Default: `IconButtonVariant.Circle`
+Default: `'circle'`
 
 | Theme           | Description                                      |
 | --------------- | ------------------------------------------------ |
-| `Square`        | Square, white background, dark gray icon         |
-| `SquareFilled`  | Square, gray background, dark gray icon          |
-| `Plain`         | Dark gray icon                                   |
-| `Circle`        | Circular, dark gray icon                         |
-| `CircleFilled`  | Circular, gray background, dark gray icon        |
-| `Inverse`       | Circular, transparent background, white icon     |
-| `InverseFilled` | Circular, semitransparent background, white icon |
+| `square`        | Square, white background, dark gray icon         |
+| `squareFilled`  | Square, gray background, dark gray icon          |
+| `plain`         | Dark gray icon                                   |
+| `circle`        | Circular, dark gray icon                         |
+| `circleFilled`  | Circular, gray background, dark gray icon        |
+| `inverse`       | Circular, transparent background, white icon     |
+| `inverseFilled` | Circular, semitransparent background, white icon |
 
 ---
 
@@ -733,7 +620,7 @@ Default: `undefined`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
@@ -808,7 +695,7 @@ Default: `undefined`
 
 ---
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 
@@ -852,7 +739,7 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 ### Optional
 
-#### `buttonRef: React.Ref<HTMLButtonElement>`
+#### `ref: React.Ref<HTMLButtonElement>`
 
 > Returns the ref to the rendered HTMLButtonElement.
 

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import {CSSObject} from '@emotion/core';
 import {colors, spacing, spacingNumbers} from '@workday/canvas-kit-react/core';
 import {GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {IconButton, IconButtonVariant} from '@workday/canvas-kit-react/button';
+import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {searchIcon, xIcon} from '@workday/canvas-system-icons-web';
 import {FormField, FormFieldLabelPosition} from '@workday/canvas-kit-react/form-field';
 import {Combobox} from '@workday/canvas-kit-labs-react/combobox';
@@ -323,13 +323,13 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
     return getInputColors(theme, this.state.isFocused);
   };
 
-  getIconButtonType = (): IconButtonVariant => {
+  getIconButtonType = (): IconButtonProps['variant'] => {
     let background = this.getThemeColors().background || `#fff`;
     if (this.props.isCollapsed && this.state.showForm) {
       background = formCollapsedBackground;
     }
     const isDarkBackground = chroma(background).get('lab.l') < 70;
-    return isDarkBackground ? IconButton.Variant.Inverse : IconButton.Variant.Plain;
+    return isDarkBackground ? 'inverse' : 'plain';
   };
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -440,7 +440,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             isCollapsed={isCollapsed}
             variant={this.getIconButtonType()}
             onClick={this.openCollapsedSearch}
-            buttonRef={this.openRef}
+            ref={this.openRef}
             type="button"
             isHidden={!isCollapsed || (!!isCollapsed && this.state.showForm)}
           />
@@ -481,7 +481,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
             aria-label={closeButtonAriaLabel}
             icon={xIcon}
             isCollapsed={isCollapsed}
-            variant={IconButton.Variant.Plain}
+            variant="plain"
             showForm={this.state.showForm}
             onClick={this.closeCollapsedSearch}
             type="button"

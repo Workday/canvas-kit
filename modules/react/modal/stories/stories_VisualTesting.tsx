@@ -1,10 +1,10 @@
 /// <reference path="../../../../typings.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button, DeleteButton} from '../../button';
+import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {Modal, ModalWidth} from '../';
+import {Modal, ModalWidth} from '@workday/canvas-kit-react/modal';
 
 const noop = () => {}; // eslint-disable-line no-empty-function
 
@@ -32,7 +32,7 @@ const TestModal = ({width}: {width: ModalWidth}) => (
     <Modal heading="Delete Item" open={true} handleClose={noop} width={width}>
       <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
       <DeleteButton style={{marginRight: '16px'}}>Delete</DeleteButton>
-      <Button variant={Button.Variant.Secondary}>Cancel</Button>
+      <Button>Cancel</Button>
     </Modal>
   </>
 );

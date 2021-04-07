@@ -1,5 +1,3 @@
-/// <reference types="@testing-library/jest-dom/extend-expect" />
-
 import * as React from 'react';
 import Combobox, {ComboboxProps} from '../lib/Combobox';
 import {MenuItem} from '../../menu';

@@ -6,7 +6,7 @@ import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 
 import {PaginationModel} from './types';
 
-const toggledStlyes = {
+const toggledStyles = {
   color: canvas.colors.frenchVanilla100,
   fontWeight: 700,
   pointerEvents: 'none',
@@ -17,14 +17,15 @@ const StyledPageButton = styled(IconButton)<{toggled?: boolean}>(
     ...type.small,
   },
   ({toggled}) => {
-    return toggled ? toggledStlyes : {};
+    return toggled ? toggledStyles : {};
   }
 );
 
-export interface PageButtonProps extends IconButtonProps {
-  model: PaginationModel;
-  pageNumber: number;
-}
+export type PageButtonProps = IconButtonProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    model: PaginationModel;
+    pageNumber: number;
+  };
 
 export const PageButton = ({
   model,
@@ -45,9 +46,9 @@ export const PageButton = ({
       aria-current={isCurrentPage ? 'page' : undefined}
       aria-pressed={undefined}
       onClick={handleClick}
-      size={IconButton.Size.Small}
+      size="small"
       toggled={isCurrentPage}
-      variant={IconButton.Variant.Square}
+      variant="square"
       {...elemProps}
     >
       {children || pageNumber}
