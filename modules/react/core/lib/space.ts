@@ -58,7 +58,7 @@ export type CanvasSpaceNumberValues = ValueOf<CanvasSpaceNumbers>;
  * - These are helpful when you need a raw numeric px value.
  * - Here's an example usage to perform calculations:
  * @example
- * const buttonPadding = spaceNumbers.s - iconSize;
+ * const buttonPaddingLeft = spaceNumbers.s + iconSize;
  */
 export const spaceNumbers: CanvasSpaceNumbers = {
   zero: 0,

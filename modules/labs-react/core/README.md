@@ -67,17 +67,17 @@ The `space` function utilizes the following props:
 ## Usage
 
 ```tsx
-import {spacing, spacingNumbers} from '@workday/canvas-kit-react/core';
-import {space} from '@workday/canvas-kit-labs-react/core';
+import {space, spaceNumbers} from '@workday/canvas-kit-react/core';
+import {space as spaceFn} from '@workday/canvas-kit-labs-react/core';
 
-spacing.s; // 16px
-spacingNumbers.s; // 16
+space.s; // 16px
+spaceNumbers.s; // 16
 
 ...
 
-const Box = styled('div')(space)
+const Box = styled('div')(spaceFn)
 
-<Box p={spacing.xl} pb={64} m={40} mx={10}>
+<Box p={space.xl} pb={64} m={40} mx={10}>
   ...
 </Box>
 
