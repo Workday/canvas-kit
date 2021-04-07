@@ -1,6 +1,6 @@
-# Canvas Kit Core
+# Canvas Kit Tokens
 
-Canvas Kit Core contains values and base styles that are shared across the kit.
+Canvas Kit Tokens contains values and base styles that are shared across the kit.
 
 Includes:
 
@@ -56,7 +56,7 @@ Colors (100-600):
 ### Usage
 
 ```tsx
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 colors.blueberry400;
 ```
@@ -64,7 +64,7 @@ colors.blueberry400;
 > Each of the colors have a gradient version as well
 
 ```tsx
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 colors.gradients.blueberry;
 ```
@@ -87,7 +87,7 @@ We have several semantic groupings:
 - `typeColors`
 
 ```tsx
-import {iconColors} from '@workday/canvas-kit-react/core';
+import {iconColors} from '@workday/canvas-kit-react/tokens';
 
 iconColors.hover;
 ```
@@ -136,7 +136,7 @@ Below are descriptions of these types:
 ### Usage
 
 ```tsx
-import {space, spaceNumbers} from '@workday/canvas-kit-react/core';
+import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
 const iconSize = 20;
 
@@ -163,7 +163,7 @@ Five levels of depth are available. They are directly exported from `@workday/ca
 ### Usage
 
 ```tsx
-import {depth} from '@workday/canvas-kit-react/core';
+import {depth} from '@workday/canvas-kit-react/tokens';
 
 depth.inset;
 depth['2'];
@@ -223,7 +223,7 @@ Variants only come their augmenting styles and a base type object is required.
 If you're working in emotion, you can simply spread the type objects to use their styles.
 
 ```tsx
-import {type} from '@workday/canvas-kit-react/core';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 const MyLabel = styled('label')({
   ...type.body,
@@ -235,7 +235,7 @@ If you are only using one object, you can do this inline with the `style` attrib
 styled components are also available.
 
 ```tsx
-import {H2, type} from '@workday/canvas-kit-react/core';
+import {H2, type} from '@workday/canvas-kit-react/tokens';
 
 <h1 style={type.h1}>H1 Header</h1>;
 <H2>H2 Header</H2>;
@@ -244,7 +244,7 @@ import {H2, type} from '@workday/canvas-kit-react/core';
 To combine objects inline, you can also use emotion's `css` function.
 
 ```tsx
-import {type} from '@workday/canvas-kit-react/core';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 <label css={[canvas.type.body, canvas.type.variant.label]}>Label Text</label>;
 ```
