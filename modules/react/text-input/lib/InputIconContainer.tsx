@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 export interface InputIconContainerProps extends GrowthBehavior {
@@ -15,8 +15,8 @@ const Container = styled('div')<InputIconContainerProps>(({grow}) => ({
 
 const IconContainer = styled('div')({
   position: 'absolute',
-  top: spacing.xxs,
-  right: spacing.xxs,
+  top: space.xxs,
+  right: space.xxs,
 });
 
 const InputIconContainer: React.FunctionComponent<InputIconContainerProps> = ({

@@ -2,7 +2,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from '
 import styled from '@emotion/styled';
 import {CSSObject, jsx, keyframes} from '@emotion/core';
 import {GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react/core';
+import {depth, space, commonColors, borderRadius} from '@workday/canvas-kit-react/core';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
@@ -110,11 +110,11 @@ const MenuContainer = styled(Card)({
 
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
   {
-    width: spacing.l,
-    minWidth: spacing.l,
-    height: spacing.l,
+    width: space.l,
+    minWidth: space.l,
+    height: space.l,
     position: 'absolute',
-    margin: `auto ${spacing.xxxs}`,
+    margin: `auto ${space.xxxs}`,
     top: 0,
     bottom: 0,
     right: 0,
@@ -406,7 +406,7 @@ const Combobox = ({
     if (showClearButton) {
       cssOverride = {
         ...cssOverride,
-        paddingRight: spacing.xl,
+        paddingRight: space.xl,
       };
     }
     const newTextInputProps: Partial<TextInputProps> = {
@@ -455,7 +455,7 @@ const Combobox = ({
           />
         )}
         {showingAutocomplete && autocompleteItems && (
-          <MenuContainer padding={spacing.zero} depth={depth[1]}>
+          <MenuContainer padding={space.zero} depth={depth[1]}>
             <AutocompleteList
               comboboxId={componentId}
               autocompleteItems={autocompleteItems}

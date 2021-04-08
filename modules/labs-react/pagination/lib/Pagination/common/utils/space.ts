@@ -1,6 +1,6 @@
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space as canvasSpace} from '@workday/canvas-kit-react/core';
 
-export type Spacing = keyof typeof spacing;
+export type Spacing = keyof typeof canvasSpace;
 
 export interface SpaceProps {
   margin?: Spacing;
@@ -33,48 +33,48 @@ export interface SpaceProps {
   pl?: Spacing;
 }
 
-const margin = (value: Spacing) => ({margin: spacing[value] || value});
+const margin = (value: Spacing) => ({margin: canvasSpace[value] || value});
 
 const marginX = (value: Spacing) => ({
-  marginLeft: spacing[value], // || value,
-  marginRight: spacing[value], // || value
+  marginLeft: canvasSpace[value], // || value,
+  marginRight: canvasSpace[value], // || value
 });
 const marginY = (value: Spacing) => ({
-  marginBottom: spacing[value], // || value,
-  marginTop: spacing[value], // || value
+  marginBottom: canvasSpace[value], // || value,
+  marginTop: canvasSpace[value], // || value
 });
 const marginT = (value: Spacing) => ({
-  marginTop: spacing[value], // || value
+  marginTop: canvasSpace[value], // || value
 });
 const marginR = (value: Spacing) => ({
-  marginRight: spacing[value], // || value
+  marginRight: canvasSpace[value], // || value
 });
 const marginB = (value: Spacing) => ({
-  marginBottom: spacing[value], // || value
+  marginBottom: canvasSpace[value], // || value
 });
 const marginL = (value: Spacing) => ({
-  marginLeft: spacing[value], // || value
+  marginLeft: canvasSpace[value], // || value
 });
-const padding = (value: Spacing) => ({padding: spacing[value]}); // || value });
+const padding = (value: Spacing) => ({padding: canvasSpace[value]}); // || value });
 const paddingX = (value: Spacing) => ({
-  paddingLeft: spacing[value], // || value,
-  paddingRight: spacing[value], // || value
+  paddingLeft: canvasSpace[value], // || value,
+  paddingRight: canvasSpace[value], // || value
 });
 const paddingY = (value: Spacing) => ({
-  paddingBottom: spacing[value], // || value,
-  paddingTop: spacing[value], // || value
+  paddingBottom: canvasSpace[value], // || value,
+  paddingTop: canvasSpace[value], // || value
 });
 const paddingT = (value: Spacing) => ({
-  paddingTop: spacing[value], // || value
+  paddingTop: canvasSpace[value], // || value
 });
 const paddingR = (value: Spacing) => ({
-  paddingRight: spacing[value], // || value
+  paddingRight: canvasSpace[value], // || value
 });
 const paddingB = (value: Spacing) => ({
-  paddingBottom: spacing[value], // || value
+  paddingBottom: canvasSpace[value], // || value
 });
 const paddingL = (value: Spacing) => ({
-  paddingLeft: spacing[value], // || value
+  paddingLeft: canvasSpace[value], // || value
 });
 
 export const space = {

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/core';
 import {
   focusRing,
   useTheme,
@@ -19,10 +19,10 @@ export interface ToolbarDropdownButtonProps
     Themeable {}
 
 const containerStyles = {
-  padding: spacing.zero,
-  minWidth: spacing.l,
+  padding: space.zero,
+  minWidth: space.l,
   width: 'auto',
-  height: spacing.l,
+  height: space.l,
   borderRadius: borderRadius.m,
   '& .wd-icon': {
     display: 'inline-block',
@@ -34,7 +34,7 @@ const containerStyles = {
     margin: '0 2px 0 0',
   },
   '& .wdc-toolbar-dropdown-btn-custom-icon': {
-    marginLeft: `${spacing.xxxs}`,
+    marginLeft: `${space.xxxs}`,
     marginRight: 0,
     width: 18, // decrease the space between a custom icon and the chevron per design
   },

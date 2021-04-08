@@ -2,7 +2,7 @@ import * as React from 'react';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {GenericStyle, PickRequired} from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, type, spacing} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors, type, space} from '@workday/canvas-kit-react/core';
 import {CSSObject} from '@emotion/core';
 import styled from '@emotion/styled';
 
@@ -37,8 +37,8 @@ export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
     alignItems: 'center',
     verticalAlign: 'middle',
     maxWidth: 150,
-    height: spacing.s,
-    padding: `1px ${spacing.xxxs}`,
+    height: space.s,
+    padding: `1px ${space.xxxs}`,
     borderRadius: borderRadius.s,
     boxSizing: 'border-box',
   },
@@ -159,7 +159,7 @@ export default class StatusIndicator extends React.Component<StatusIndicatorProp
             color={variant.color}
             icon={icon}
             size={14}
-            style={{paddingRight: spacing.xxxs}}
+            style={{paddingRight: space.xxxs}}
           />
         )}
         <StatusLabel>{label}</StatusLabel>

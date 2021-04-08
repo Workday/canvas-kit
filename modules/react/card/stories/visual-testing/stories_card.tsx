@@ -8,7 +8,7 @@ import {
   withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 import {Card} from '../../index';
-import {depth, spacing} from '@workday/canvas-kit-react/core';
+import {depth, space} from '@workday/canvas-kit-react/core';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Containers/Card',
@@ -25,7 +25,7 @@ export const CardStates = () => (
           label: 'With zero padding',
           props: {
             heading: 'Delete Item',
-            padding: spacing.zero,
+            padding: space.zero,
           },
         },
         {
@@ -33,7 +33,7 @@ export const CardStates = () => (
           props: {
             heading: 'Delete Item',
 
-            padding: spacing.s,
+            padding: space.s,
           },
         },
 

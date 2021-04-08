@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import {colors, spacing, type} from '@workday/canvas-kit-react/core';
+import {colors, space, type} from '@workday/canvas-kit-react/core';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
 
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
@@ -13,17 +13,17 @@ export interface ResetButtonProps {
 }
 
 const Label = styled('div')({
-  marginLeft: spacing.xxs,
+  marginLeft: space.xxs,
 });
 
 const Container = styled('button')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
-  width: `calc(100% + ${spacing.l})`,
-  height: spacing.l,
-  margin: `-${spacing.xxs} -${spacing.s} ${spacing.xxs}`,
-  padding: `0px ${spacing.s}`,
+  width: `calc(100% + ${space.l})`,
+  height: space.l,
+  margin: `-${space.xxs} -${space.s} ${space.xxs}`,
+  padding: `0px ${space.s}`,
   ...type.body2,
   whiteSpace: 'nowrap',
   border: 'none',

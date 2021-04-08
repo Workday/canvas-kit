@@ -62,6 +62,59 @@ Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.md)
 - Components will support [forwarded refs](https://reactjs.org/docs/forwarding-refs.html)
 - The corresponding tag of a component can be changed with the `as` prop
 
+### Space Tokens
+
+To better align with our design taxonomy, we are renaming our space tokens in our core package. We will also no longer rely on `@workday/canvas-space-web` to supply our space values. Instead, we are keeping the values in canvas-kit. We also took the opportunity to improve the space types (which were too generic) and JSDoc hints.
+
+The codemod will handle _almost all_ of these changes with a few possible exceptions that will be noted in [Manual Updates](#manual-updates) below.
+
+```tsx
+// before
+import { spacing, spacingNumbers CanvasSpacingValue } from '@workday/canvas-kit-react-core';
+
+// after
+import canvas { space, spaceNumbers, CanvasSpaceValues } from '@workday/canvas-kit-react/core';
+```
+
+This table describes each update:
+
+| Before                 | After                     | Change Description              |
+| ---------------------- | ------------------------- | ------------------------------- |
+| `spacing`              | `space`                   | name change only                |
+| `spacingNumbers`       | `spaceNumbers`            | name change only                |
+| `CanvasSpacing`        | `CanvasSpace`             | name change and improved types* |
+| `CanvasSpacingValue`  | `CanvasSpaceValues`       | name change only                |
+| `CanvasSpacingNumber` | `CanvasSpaceNumbers`      | name change and improved types* |
+| `n/a`                  | `CanvasSpaceNumberValues` | new type!                       |
+
+\* Before the types were too generic and not very useful. They now better reflect the values they represent.
+
+#### Automatic Updates
+
+- 🤖 Token imports: `spacing`, `spacingNumbers`
+  - e.g. `import { spacing, spacingNumbers }` becomes `import { space, spaceNumbers }`
+- 🤖 Type imports: `CanvasSpacing`, `CanvasSpacingValue`, `CanvasSpacingNumber`
+  - e.g. `import { CanvasSpacing, CanvasSpacingValue, CanvasSpacingNumber }` becomes `import { CanvasSpace, CanvasSpaceValues, CanvasSpaceNumbers }`
+- 🤖 Token expressions
+  - e.g. `const iconPadding = spacing.s;` becomes `const iconPadding = space.s`
+- 🤖 Type expressions
+  - e.g. `const getSpace = (value: CanvasSpacingValue) => ( spacing[value] )` becomes `const getSpace = (value: CanvasSpaceValue) => ( space[value] )`
+- 🤖 Token properties
+  - e.g. `const iconPadding = canvas.spacing.s;` becomes `const iconPadding = canvas.space.s`
+
+#### Manual Updates
+
+As previously mentioned, the codemod should handle the vast majority of these updates. But there are potentially a few changes that will need to be made manually. There may be more beyond what's listed below, but these were the most common issues found in our investigation.
+
+- Usage outside of `.ts` and `.tsx` files
+  - e.g. referencing `spacing` in documentation (`.md` files)
+- Usage in code comments or JSDoc comments
+  - e.g. `// spacing.s = 16px`
+- Re-declararation `space` or `spaceNumbers` in the same files
+  = e.g. importing or declaring a new `space` or `spaceNumbers` variable will prevent the codemod from updating the file
+- Aliasing existing variables as `spacing` or `spaceNumbers`
+  - e.g. `import { spacingNumbers as spacing }` will prevent the codemod from updating the file
+
 ## Breaking Component Changes
 
 ### Tabs

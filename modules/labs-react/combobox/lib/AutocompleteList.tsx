@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import styled from '@emotion/styled';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 import {accessibleHide} from '@workday/canvas-kit-react/common';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react/menu';
 import {ComboBoxMenuItemGroup, getOptionId, listBoxIdPart, getTextFromElement} from './Combobox';
@@ -8,7 +8,7 @@ import uuid from 'uuid/v4';
 
 const Autocomplete = styled('ul')({
   padding: 0,
-  margin: `${spacing.xxs} 0`,
+  margin: `${space.xxs} 0`,
 });
 
 const AccessibleHide = styled('span')(accessibleHide);

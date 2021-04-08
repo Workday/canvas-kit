@@ -11,7 +11,7 @@ import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {colors, spacing, gradients} from '@workday/canvas-kit-react/core';
+import {colors, space, gradients} from '@workday/canvas-kit-react/core';
 import {Button, IconButton} from '@workday/canvas-kit-react/button';
 import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
 import {
@@ -30,7 +30,7 @@ import {boolean, withKnobs} from '@storybook/addon-knobs';
 
 const containerStyle = {
   backgroundColor: colors.soap100,
-  padding: spacing.m,
+  padding: space.m,
 };
 
 const backgroundStyle = {
@@ -484,14 +484,14 @@ storiesOf('Labs/Header/React', module)
     <div css={{display: 'flex', width: '100%'}}>
       <div css={{flex: 1, background: colors.frenchVanilla100, padding: '12px'}}>
         <SearchWithAutoComplete
-          css={{marginLeft: spacing.zero}}
+          css={{marginLeft: space.zero}}
           searchTheme={SearchBar.Theme.Light}
           height={48}
         />
       </div>
-      <div css={{flex: 1, background: colors.blueberry400, marginLeft: spacing.m, padding: '12px'}}>
+      <div css={{flex: 1, background: colors.blueberry400, marginLeft: space.m, padding: '12px'}}>
         <SearchWithAutoComplete
-          css={{marginLeft: spacing.zero}}
+          css={{marginLeft: space.zero}}
           searchTheme={SearchBar.Theme.Dark}
           height={48}
         />

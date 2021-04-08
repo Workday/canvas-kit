@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Popup, PopupPadding} from '@workday/canvas-kit-react/popup';
-import {spacing, colors, type, CanvasColor} from '@workday/canvas-kit-react/core';
+import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/core';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
@@ -49,12 +49,12 @@ const ToastContentContainer = styled('div')<Pick<ToastProps, 'onClose'>>(
     ...type.body2,
   },
   ({onClose}) => ({
-    marginRight: onClose ? spacing.m : undefined,
+    marginRight: onClose ? space.m : undefined,
   })
 );
 
 const ToastSystemIcon = styled(SystemIcon)({
-  marginRight: spacing.s,
+  marginRight: space.s,
   alignSelf: 'start',
 });
 
@@ -64,7 +64,7 @@ const ActionButton = styled('button')({
   display: 'block',
   backgroundColor: 'transparent', // To prevent Safari from rendering grey 'buttonface' as bgcolor
   border: 'none',
-  marginTop: spacing.xxxs,
+  marginTop: space.xxxs,
 });
 
 const Message = styled('div')({

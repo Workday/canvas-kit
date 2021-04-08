@@ -1,4 +1,4 @@
-import {colors, spacing} from '@workday/canvas-kit-react/core';
+import {colors, space} from '@workday/canvas-kit-react/core';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {IconButton} from '@workday/canvas-kit-react/button';
@@ -129,7 +129,7 @@ const ColorPickerContainer = styled('div')({
 
 const ColorInputWrapper = styled('form')({
   width: '100%',
-  marginTop: spacing.s,
+  marginTop: space.s,
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',

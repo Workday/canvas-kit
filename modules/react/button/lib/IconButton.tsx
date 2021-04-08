@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/core';
 import {
   focusRing,
   useTheme,
@@ -85,9 +85,9 @@ export const IconButton = createComponent('button')({
     const containerStyles = {
       padding: 0,
       margin: variant === 'plain' ? '-8px' : undefined,
-      minWidth: size === 'small' ? spacing.l : spacing.xl, // min-width is set so buttons don't collapse in IE11
-      width: size === 'small' ? spacing.l : spacing.xl,
-      height: size === 'small' ? spacing.l : spacing.xl,
+      minWidth: size === 'small' ? space.l : space.xl, // min-width is set so buttons don't collapse in IE11
+      width: size === 'small' ? space.l : space.xl,
+      height: size === 'small' ? space.l : space.xl,
       ...getIconButtonBorderRadius(variant),
       ['& .wd-icon']: {
         display: 'inline-block',

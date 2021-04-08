@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors, spacing, type, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, type, borderRadius} from '@workday/canvas-kit-react/core';
 import {
   createComponent,
   focusRing,
@@ -72,12 +72,12 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
     backgroundColor: 'transparent',
     flex: '0 0 auto',
     maxWidth: '280px',
-    padding: spacing.s,
+    padding: space.s,
     boxSizing: 'border-box',
     cursor: 'pointer',
     color: colors.licorice300,
     position: 'relative',
-    marginLeft: `${spacing.xxxs}`,
+    marginLeft: `${space.xxxs}`,
     borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
     transition: 'background 150ms ease, color 150ms ease',
     '&:first-of-type': {
@@ -107,7 +107,7 @@ const StyledButton = styled('button')<{isSelected: boolean} & StyledType>(
         cursor: 'default',
         '&:after': {
           position: 'absolute',
-          height: spacing.xxxs,
+          height: space.xxxs,
           borderRadius: `${borderRadius.m} ${borderRadius.m} 0px 0px`,
           backgroundColor: colors.blueberry400,
           bottom: 0,

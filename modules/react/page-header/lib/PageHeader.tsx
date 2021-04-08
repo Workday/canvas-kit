@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, gradients, spacing, type} from '@workday/canvas-kit-react/core';
+import {colors, gradients, space, type} from '@workday/canvas-kit-react/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 
 export interface PageHeaderProps {
@@ -35,11 +35,11 @@ const Container = styled('div')<Pick<PageHeaderProps, 'breakpoint' | 'capWidth'>
     justifyContent: 'space-between',
     height: '100%',
     overflow: 'hidden',
-    padding: `0 ${spacing.s}`,
+    padding: `0 ${space.s}`,
   },
   ({breakpoint}) => ({
     [`@media (min-width: ${breakpoint}px)`]: {
-      padding: `0 ${spacing.xl}`,
+      padding: `0 ${space.xl}`,
     },
   }),
   ({capWidth}) =>
@@ -54,17 +54,17 @@ const Container = styled('div')<Pick<PageHeaderProps, 'breakpoint' | 'capWidth'>
 const Title = styled('h2')({
   ...type.h1,
   color: colors.frenchVanilla100,
-  padding: `${spacing.xs} 0`,
+  padding: `${space.xs} 0`,
   margin: 0,
   whiteSpace: 'nowrap',
 });
 
 const IconList = styled('div')({
   display: 'flex',
-  marginLeft: spacing.l,
+  marginLeft: space.l,
 
   '> *:not(:last-child)': {
-    marginRight: spacing.xxs,
+    marginRight: space.xxs,
   },
 });
 

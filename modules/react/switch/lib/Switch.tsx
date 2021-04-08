@@ -8,7 +8,7 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, depth, spacing} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors, depth, space} from '@workday/canvas-kit-react/core';
 
 export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -44,25 +44,25 @@ export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLIn
   error?: ErrorType;
 }
 
-const circleSize = spacing.xs;
-const switchWidth = spacing.l;
-const switchHeight = spacing.s;
-const switchTapArea = spacing.l;
-const translateLength = spacing.s;
+const circleSize = space.xs;
+const switchWidth = space.l;
+const switchHeight = space.s;
+const switchTapArea = space.l;
+const translateLength = space.s;
 
 const SwitchContainer = styled('div')({
   position: 'relative',
-  height: spacing.m,
+  height: space.m,
   width: switchTapArea,
 });
 
 const SwitchInput = styled('input')<SwitchProps>(
   {
     position: 'absolute',
-    height: spacing.m,
+    height: space.m,
     width: switchTapArea,
     margin: 0,
-    marginLeft: spacing.xxxs,
+    marginLeft: space.xxxs,
     borderRadius: borderRadius.circle,
     opacity: 0,
     display: 'block',
@@ -117,7 +117,7 @@ const SwitchBackground = styled('div')<Pick<SwitchProps, 'checked' | 'disabled'>
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
-    marginTop: spacing.xxxs,
+    marginTop: space.xxxs,
     width: switchWidth,
     height: switchHeight,
     borderRadius: borderRadius.circle,

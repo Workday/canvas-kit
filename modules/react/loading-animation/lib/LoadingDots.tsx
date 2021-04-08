@@ -29,13 +29,13 @@ type LoadingDotProps = {
 const LoadingAnimationDot = styled('div')<LoadingDotProps>(
   {
     backgroundColor: canvas.colors.soap400,
-    width: canvas.spacing.s,
-    height: canvas.spacing.s,
+    width: canvas.space.s,
+    height: canvas.space.s,
     fontSize: '0px',
     borderRadius: borderRadius.circle,
     transform: 'scale(0)',
     display: 'inline-block',
-    marginRight: canvas.spacing.xxs,
+    marginRight: canvas.space.xxs,
     animationName: keyframesLoading,
     animationDuration: '1400ms',
     animationIterationCount: 'infinite',

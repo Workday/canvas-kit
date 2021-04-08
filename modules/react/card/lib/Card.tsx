@@ -5,10 +5,10 @@ import {
   colors,
   depth as depthValues,
   type,
-  spacing,
+  space,
   borderRadius,
   CanvasDepthValue,
-  CanvasSpacingValue,
+  CanvasSpaceValues,
 } from '@workday/canvas-kit-react/core';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -24,9 +24,9 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
   /**
    * The padding of the Card. Imported from `@workday/canvas-kit-react/core`.
-   * @default spacing.l
+   * @default space.l
    */
-  padding?: CanvasSpacingValue;
+  padding?: CanvasSpaceValues;
 
   /**
    * The depth of the Card. Imported from `@workday/canvas-kit-react/core`.
@@ -61,7 +61,7 @@ const Box = styled('div', {
 );
 
 const Header = styled('h3')(type.h3, {
-  marginBottom: spacing.m,
+  marginBottom: space.m,
   marginTop: 0,
 });
 
@@ -71,7 +71,7 @@ export default class Card extends React.Component<CardProps> {
   public render() {
     const {
       depth = depthValues[2],
-      padding = spacing.l,
+      padding = space.l,
       heading,
       headingId,
       ...elemProps

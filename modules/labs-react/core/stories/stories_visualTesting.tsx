@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {spaceNumbers} from '@workday/canvas-kit-react/core';
 import type, {space} from '..';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -84,22 +84,22 @@ export const TypeAndSpace = () => {
         <span css={[type.body, type.variant.mono]}>Mono Text</span>
       </section>
       <section className="story">
-        <h2 style={type.h2}>Spacing</h2>
-        <Box m={spacing.m} p={spacing.m}>
+        <h2 style={type.h2}>Space and Space Numbers</h2>
+        <Box m={spaceNumbers.m} p={spaceNumbers.m}>
           medium margin and padding
         </Box>
-        <Box mx={spacing.m} my={spacing.m} px={spacing.m} py={spacing.m}>
+        <Box mx={spaceNumbers.m} my={spaceNumbers.m} px={spaceNumbers.m} py={spaceNumbers.m}>
           medium margin (x, y) and padding (x, y)
         </Box>
         <Box
-          mt={spacing.m}
-          mr={spacing.m}
-          mb={spacing.m}
-          ml={spacing.m}
-          pt={spacing.m}
-          pr={spacing.m}
-          pb={spacing.m}
-          pl={spacing.m}
+          mt={spaceNumbers.m}
+          mr={spaceNumbers.m}
+          mb={spaceNumbers.m}
+          ml={spaceNumbers.m}
+          pt={spaceNumbers.m}
+          pr={spaceNumbers.m}
+          pb={spaceNumbers.m}
+          pl={spaceNumbers.m}
         >
           medium margin (top, right,left, bottom) and padding (top, right,left, bottom)
         </Box>

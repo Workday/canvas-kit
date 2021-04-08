@@ -7,7 +7,7 @@ import {
   colors,
   commonColors,
   depth,
-  spacing,
+  space,
   type,
 } from '@workday/canvas-kit-react/core';
 
@@ -59,7 +59,7 @@ const menuStyles = css({
   borderRadius: borderRadius.m,
   boxSizing: 'border-box',
   display: 'inline-block',
-  marginTop: spacing.xxxs,
+  marginTop: space.xxxs,
   maxHeight: 200,
   outline: 'none',
   overflowY: 'auto',
@@ -70,7 +70,7 @@ const menuStyles = css({
 const StyledMenuList = styled('ul')({
   boxSizing: 'border-box',
   listStyle: 'none',
-  margin: `${spacing.xxs} 0`,
+  margin: `${space.xxs} 0`,
   padding: 0,
   width: 280,
   wordBreak: 'break-word',

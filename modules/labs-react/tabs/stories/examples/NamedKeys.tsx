@@ -1,5 +1,5 @@
 import React from 'react';
-import {spacing} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/core';
 
 import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
 
@@ -13,7 +13,7 @@ export const NamedKeys = () => {
         <Tabs.Item name="fourth">Fourth Tab</Tabs.Item>
         <Tabs.Item name="fifth">Fifth Tab</Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: spacing.m}}>
+      <div style={{marginTop: space.m}}>
         <Tabs.Panel name="first">Contents of First Tab</Tabs.Panel>
         <Tabs.Panel name="second">Contents of Second Tab</Tabs.Panel>
         <Tabs.Panel name="third">Contents of Third Tab</Tabs.Panel>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ErrorType, styled, Themeable} from '@workday/canvas-kit-react/common';
-import {spacing, type} from '@workday/canvas-kit-react/core';
+import {space, type} from '@workday/canvas-kit-react/core';
 
 export interface HintProps extends Themeable, React.HTMLAttributes<HTMLParagraphElement> {
   /**
@@ -28,7 +28,7 @@ const Label = styled('span')<Pick<HintProps, 'error'>>(
 const Message = styled('p')<Pick<HintProps, 'error'>>(
   type.body2,
   {
-    margin: `${spacing.xxs} 0 0`,
+    margin: `${space.xxs} 0 0`,
     width: '100%',
   },
   ({error, theme}) => error === ErrorType.Error && {color: theme.canvas.palette.error.main}

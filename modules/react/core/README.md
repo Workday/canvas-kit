@@ -6,7 +6,7 @@ Includes:
 
 - [Colors](#colors)
 - [Border Radius](#border-radius)
-- [Spacing](#spacing)
+- [Space](#space)
 - [Depth](#depth)
 - [Type](#type)
 - [Providers](#providers)
@@ -17,7 +17,7 @@ Includes:
 yarn add @workday/canvas-kit-react
 ```
 
-# Colors
+## Colors
 
 Workday Canvas Colors are directly exported from `@workday/canvas-colors-web`. Colors come in shades
 from 100 (lighter) - 600 (darker). These can be used directly, but
@@ -53,7 +53,7 @@ Colors (100-600):
 - French Vanilla
 - Black Pepper
 
-## Usage
+### Usage
 
 ```tsx
 import {colors} from '@workday/canvas-kit-react/core';
@@ -69,7 +69,7 @@ import {colors} from '@workday/canvas-kit-react/core';
 colors.gradients.blueberry;
 ```
 
-## Semantic constants
+### Semantic constants
 
 To ensure consistency across implementations, our semantic constants should be used wherever
 possible. This allows us to swap out the color of a button or icon for example, without having to
@@ -92,7 +92,7 @@ import {iconColors} from '@workday/canvas-kit-react/core';
 iconColors.hover;
 ```
 
-# Border Radius
+## Border Radius
 
 Border Radius variables are in a "t-shirt size" format. Border Radius values are in `px` format.
 
@@ -104,12 +104,10 @@ Border Radius variables are in a "t-shirt size" format. Border Radius values are
 | `l`      | `'8px'`   |
 | `circle` | `'999px'` |
 
-# Spacing
+## Space
 
-Workday Canvas Spacing is directly exported from `@workday/canvas-spacing-web`.
-
-Spacing variables are in a "t-shirt size" format. Spacing values are in `px` format (`spacing`) or
-number format (`spacingNumbers`).
+Space variables are in a "t-shirt size" format. Space values are in `px` format (`space`) or number
+format (`spaceNumbers`).
 
 | Variable | Size (px) | Size (number) |
 | -------- | --------- | ------------- |
@@ -123,60 +121,34 @@ number format (`spacingNumbers`).
 | `xxl`    | `'64px'`  | `64`          |
 | `xxxl`   | `'80px'`  | `80`          |
 
-## Margin & Padding
+The following space types are also provided: `CanvasSpace`, `CanvasSpaceValues`,
+`CanvasSpaceNumbers`, `CanvasSpaceNumberValues`
 
-Spacing functions provide margin and padding spacing. These are available with the `space` function.
-The `space` function utilizes the following props:
+Below are descriptions of these types:
 
-**Margin Props**
+| Name                      | Description                                  |
+| ------------------------- | -------------------------------------------- |
+| `CanvasSpace`             | `space` object with string px values         |
+| `CanvasSpaceValues`       | string px values for CanvasSpace             |
+| `CanvasSpaceNumbers`      | `spaceNumbers` object with numeric px values |
+| `CanvasSpaceNumberValues` | numeric px values for CanvasSpaceNumbers     |
 
-- `m` margin
-- `mt` margin-top
-- `mr` margin-right
-- `mb` margin-bottom
-- `ml` margin-left
-- `mx` margin-left & margin-right
-- `my` margin-top & margin-bottom
-
-**Padding Props**
-
-- `p` padding
-- `pt` padding-top
-- `pr` padding-right
-- `pb` padding-bottom
-- `pl` padding-left
-- `px` padding-left & padding-right
-- `py` padding-top & padding-bottom
-
-## Usage
+### Usage
 
 ```tsx
-import {spacing, spacingNumbers, space} from '@workday/canvas-kit-react/core';
+import {space, spaceNumbers} from '@workday/canvas-kit-react/core';
 
-spacing.s; // 16px
-spacingNumbers.s; // 16
+const iconSize = 20;
 
-...
-
-const Box = styled('div')(space)
-
-<Box p={spacing.xl} pb={64} m={40} mx={10}>
-  ...
-</Box>
-
-/*
-  margin-top: 40px;
-  margin-right: 10px;
-  margin-bottom: 40px;
-  margin-left: 10px;
-  padding-top: 40px;
-  padding-right: 40px;
-  padding-bottom: 64px;
-  padding-left: 40px;
-*/
+const buttonSyles = {
+  paddingTop: space.xs,
+  paddingRight: space.s,
+  paddingBottom: space.xs,
+  paddingLeft: spaceNumbers.s + iconSize,
+};
 ```
 
-# Depth
+## Depth
 
 Five levels of depth are available. They are directly exported from `@workday/canvas-depth-web`.
 
@@ -188,7 +160,7 @@ Five levels of depth are available. They are directly exported from `@workday/ca
 | Depth 3          | Active cards, popups              |
 | Depth 4          | Cards on white backgrounds, menus |
 
-## Usage
+### Usage
 
 ```tsx
 import {depth} from '@workday/canvas-kit-react/core';
@@ -197,18 +169,18 @@ depth.inset;
 depth['2'];
 ```
 
-# Type
+## Type
 
 Type styles are available as objects to use alone or with
 [Emotion](https://github.com/emotion-js/emotion).
 
-## Fonts
+### Fonts
 
 To use the Canvas Kit font
 [install and import the `@workday/canvas-kit-react-fonts` module](https://github.com/Workday/canvas-kit/tree/master/modules/fonts/react).
 Note that this module sources fonts from the Workday CDN.
 
-## Hierarchy
+### Hierarchy
 
 Our type module is a combination of hierarchy and variants. The hierarchy has the font size, weight,
 etc. for different levels of type (e.g. `canvas.type.h1`, `canvas.type.body`, etc.). The variants
@@ -239,14 +211,14 @@ Variants only come their augmenting styles and a base type object is required.
 | `mono`    |
 | `link`    |
 
-#### Disclaimer
+##### Disclaimer
 
 > A new type hierarchy is in the process of being introduced into our products. You can find more
 > info about it in the [Labs Type](?path=/story/labs-core-react--type) section. We plan to maintain
 > both hierarchies for a short time, but there will be a breaking change when we replace the current
 > one with the new one.
 
-## Usage
+### Usage
 
 If you're working in emotion, you can simply spread the type objects to use their styles.
 
@@ -277,12 +249,12 @@ import {type} from '@workday/canvas-kit-react/core';
 <label css={[canvas.type.body, canvas.type.variant.label]}>Label Text</label>;
 ```
 
-# Providers
+## Providers
 
 Providers are higher order (wrapping) components used to provide global configuration to Canvas
 components.
 
-## Input Provider
+### Input Provider
 
 This is a higher order (wrapping) component for providing css-referencable data attributes for the
 users current input. Focus outlines are required for accesibility, but they can be unnecessary
@@ -294,7 +266,7 @@ You can use it to style your own components as well using the examples below.
 Preferably you would use the `CanvasProvider` as `InputProvider` functionality is included within
 it. However, if you want `InputProvider` functionality on it's own, you can use this.
 
-### Definitions
+#### Definitions
 
 **Input**: The current input method from the user.
 
@@ -320,7 +292,7 @@ type updates from the events above, the intent type will also be updated to the 
   - `mousewheel`
   - `DOMMouseScroll`
 
-### Usage
+#### Usage
 
 As an external consumer, you should reference the following example.
 
@@ -382,9 +354,9 @@ cases you would like (i.e. mouse/touch/pointer input).
 **Note:** Multiple InputProviders in the same tree are not supported. Any nested `InputProvider`
 will remove itself from the DOM (rendering only its children) and not attach any event listeners.
 
-### Static Properties
+#### Static Properties
 
-#### `InputTypes`
+##### `InputTypes`
 
 | Theme      |
 | ---------- |
@@ -395,28 +367,28 @@ will remove itself from the DOM (rendering only its children) and not attach any
 
 ---
 
-### Component Props
+#### Component Props
 
-#### Required
+##### Required
 
 > None
 
-#### Optional
+##### Optional
 
-##### `provideIntent: boolean`
+###### `provideIntent: boolean`
 
 > Whether you would like the attribute `data-whatintent` rendered (see definition of intent above).
 > Note: detecting intent will add scroll and mouse positioning listeners which could affect
 > performance.
 
-##### `container: HTMLElement | React.RefObject<HTMLElement>`
+###### `container: HTMLElement | React.RefObject<HTMLElement>`
 
 > The containing element in which the InputProvider attaches its data attributes. This property
 > should be set to an element that is an ancestor of all your Canvas components.
 
 Default: `document.body`
 
-### Storybook Decorator
+#### Storybook Decorator
 
 We provide a [storybook decorator](../../utils/storybook/CanvasProviderDecorator.tsx) to wrap your
 stories in an `InputProvider` automatically.

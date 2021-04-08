@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Radio, {RadioProps} from './Radio';
-import {borderRadius, spacing} from '@workday/canvas-kit-react/core';
+import {borderRadius, space} from '@workday/canvas-kit-react/core';
 import {
   ErrorType,
   GrowthBehavior,
@@ -38,15 +38,15 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
     display: 'inline-block',
     boxSizing: 'border-box',
     borderRadius: borderRadius.m,
-    padding: `${spacing.xxxs} ${spacing.xs}`,
-    margin: `-${spacing.xxxs} -${spacing.xs}`,
+    padding: `${space.xxxs} ${space.xs}`,
+    margin: `-${space.xxxs} -${space.xs}`,
     '& > div': {
-      margin: `${spacing.xxs} ${spacing.zero}`,
+      margin: `${space.xxs} ${space.zero}`,
       '&:first-of-type': {
-        marginTop: spacing.xxxs,
+        marginTop: space.xxxs,
       },
       '&:last-child': {
-        marginBottom: spacing.xxxs,
+        marginBottom: space.xxxs,
       },
     },
   },

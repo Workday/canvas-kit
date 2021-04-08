@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, spacing, CanvasSpacingValue} from '@workday/canvas-kit-react/core';
+import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/core';
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * The padding of the Drawer contents.
-   * @default spacing.s
+   * @default space.s
    */
-  padding?: CanvasSpacingValue;
+  padding?: CanvasSpaceValues;
   /**
    * The direction from which the Drawer opens. Accepts `Left` or `Right`.
    * @default DrawerDirection.Right
@@ -70,8 +70,8 @@ const DrawerContainer = styled('div')<
   ({openDirection}) => ({
     borderLeft: openDirection === DrawerDirection.Right ? `1px solid ${colors.soap400}` : undefined,
     borderRight: openDirection === DrawerDirection.Left ? `1px solid ${colors.soap400}` : undefined,
-    right: openDirection === DrawerDirection.Right ? spacing.zero : undefined,
-    left: openDirection === DrawerDirection.Left ? spacing.zero : undefined,
+    right: openDirection === DrawerDirection.Right ? space.zero : undefined,
+    left: openDirection === DrawerDirection.Left ? space.zero : undefined,
   })
 );
 
@@ -93,7 +93,7 @@ export default class Drawer extends React.Component<DrawerProps, {}> {
 
   public render() {
     const {
-      padding = spacing.s,
+      padding = space.s,
       width = 360,
       openDirection = DrawerDirection.Right,
       showDropShadow = false,

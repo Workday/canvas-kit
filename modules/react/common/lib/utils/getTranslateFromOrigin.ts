@@ -1,4 +1,4 @@
-import {CanvasSpacingValue} from '@workday/canvas-kit-react/core';
+import {CanvasSpaceValues} from '@workday/canvas-kit-react/core';
 import {TransformOrigin} from '../types';
 
 type translateMapType = {
@@ -27,7 +27,7 @@ const translateMap: translateMapType = {
  */
 export const getTranslateFromOrigin = (
   transformOrigin: TransformOrigin,
-  distance: CanvasSpacingValue
+  distance: CanvasSpaceValues
 ) => {
   return {
     x: translateMap.x[transformOrigin.horizontal] * parseInt(distance, 10),

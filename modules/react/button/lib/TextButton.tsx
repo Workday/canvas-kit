@@ -7,7 +7,7 @@ import {
   EmotionCanvasTheme,
   createComponent,
 } from '@workday/canvas-kit-react/common';
-import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/core';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
@@ -121,7 +121,7 @@ const getTextButtonColors = (
 const containerStyles = {
   borderRadius: borderRadius.m,
   border: '0',
-  padding: `0 ${spacing.xxs}`,
+  padding: `0 ${space.xxs}`,
   minWidth: 'auto',
   '.wdc-text-button-label': {
     borderBottom: '2px solid transparent',

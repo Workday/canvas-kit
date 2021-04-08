@@ -48,7 +48,7 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
       case 'large':
         return {
           height: '40px',
-          padding: `0 ${canvas.spacing.l}`,
+          padding: `0 ${canvas.space.l}`,
           minWidth: '112px',
           maxWidth: '288px',
         };
@@ -56,7 +56,7 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
       default:
         return {
           height: '24px',
-          padding: `0 ${canvas.spacing.m}`,
+          padding: `0 ${canvas.space.m}`,
           minWidth: '80px',
           maxWidth: '200px',
           fontSize: type.body2.fontSize,
@@ -64,7 +64,7 @@ const Container = styled('button')<DeprecatedButtonProps & StyledType>(
       case 'small':
         return {
           height: '18px',
-          padding: `0 ${canvas.spacing.xxs}`,
+          padding: `0 ${canvas.space.xxs}`,
           minWidth: '56px',
           maxWidth: '120px',
           fontSize: '10px',

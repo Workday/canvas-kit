@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {colors, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/core';
 import {
   focusRing,
   useTheme,
@@ -18,9 +18,9 @@ export interface ToolbarIconButtonProps
 
 const containerStyles = {
   padding: 0,
-  minWidth: spacing.l,
-  width: spacing.l,
-  height: spacing.l,
+  minWidth: space.l,
+  width: space.l,
+  height: space.l,
   borderRadius: borderRadius.m,
   ['& .wd-icon']: {
     display: 'inline-block',

@@ -12,9 +12,9 @@ import {
   colors,
   borderRadius,
   inputColors,
-  spacingNumbers,
+  spaceNumbers,
   type,
-  spacing,
+  space,
 } from '@workday/canvas-kit-react/core';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -160,7 +160,7 @@ export const buttonBorderWidth = 1;
 export const buttonDefaultWidth = 280;
 
 const menuIconSize = 24;
-const buttonPadding = spacingNumbers.xxs - buttonBorderWidth;
+const buttonPadding = spaceNumbers.xxs - buttonBorderWidth;
 
 const SelectButton = styled('button')<
   Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'>
@@ -173,11 +173,11 @@ const SelectButton = styled('button')<
     backgroundColor: inputColors.background,
     borderRadius: borderRadius.m,
     boxSizing: 'border-box',
-    height: spacing.xl,
+    height: space.xl,
     outline: 'none',
     overflow: 'hidden',
     padding: buttonPadding,
-    paddingRight: spacingNumbers.xxs + menuIconSize + buttonPadding,
+    paddingRight: spaceNumbers.xxs + menuIconSize + buttonPadding,
     textAlign: 'left',
     textOverflow: 'ellipsis',
     transition: '0.2s box-shadow, 0.2s border-color',
@@ -232,9 +232,9 @@ const SelectButton = styled('button')<
 
 const SelectMenuIcon = styled(SystemIcon)({
   position: 'absolute',
-  top: spacing.xxxs,
-  right: spacing.xxxs,
-  padding: spacing.xxxs,
+  top: space.xxxs,
+  right: space.xxxs,
+  padding: space.xxxs,
   pointerEvents: 'none',
   '& path': {
     transition: '100ms fill',

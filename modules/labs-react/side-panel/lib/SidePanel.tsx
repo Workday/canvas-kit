@@ -3,7 +3,7 @@ import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
 import {css, CSSObject, jsx, keyframes} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
-import {spacing, colors, depth} from '@workday/canvas-kit-react/core';
+import {space, colors, depth} from '@workday/canvas-kit-react/core';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 
 export type SidePanelVariant = 'standard' | 'alternate';
@@ -221,9 +221,9 @@ const ToggleButton = ({
   // Note: Depending on the collapsed width, the button could "jump" to it's final position.
   const buttonStyle = css({
     position: 'absolute',
-    top: spacing.m,
-    right: context.state === 'collapsed' ? 0 : context.origin === 'left' ? spacing.s : undefined,
-    left: context.state === 'collapsed' ? 0 : context.origin === 'right' ? spacing.s : undefined,
+    top: space.m,
+    right: context.state === 'collapsed' ? 0 : context.origin === 'left' ? space.s : undefined,
+    left: context.state === 'collapsed' ? 0 : context.origin === 'right' ? space.s : undefined,
     margin: context.state === 'collapsed' ? 'auto' : 0, // to override the -8px margin for IconButton.Plain
     transform:
       context.state === 'collapsed' || context.state === 'collapsing'

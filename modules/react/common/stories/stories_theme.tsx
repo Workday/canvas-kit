@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider} from '../index';
 import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
 import README from '../lib/theming/README.md';
-import {H1, colors, type, spacing, borderRadius} from '@workday/canvas-kit-react/core';
+import {H1, colors, type, space, borderRadius} from '@workday/canvas-kit-react/core';
 import {useTheme} from '@workday/canvas-kit-react/common';
 
 const Palettes = styled('div')({
@@ -27,8 +27,8 @@ const Palette = styled('ul')({
 const Swatch = styled('li')(
   {
     ...type.body,
-    padding: `0 ${spacing.m}`,
-    height: spacing.xl,
+    padding: `0 ${space.m}`,
+    height: space.xl,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -43,8 +43,8 @@ const Swatch = styled('li')(
 const PaletteTitle = styled(Swatch)(
   {
     ...type.h3,
-    height: spacing.xxl,
-    paddingBottom: spacing.s,
+    height: space.xxl,
+    paddingBottom: space.s,
     alignItems: 'flex-end',
     textTransform: 'capitalize',
   },
@@ -76,7 +76,7 @@ const ThemedComponent = styled('h1')<Themeable>(
     background: themePrimary.main,
     color: themePrimary.contrast,
     borderRadius: borderRadius.m,
-    padding: spacing.xs,
+    padding: space.xs,
     display: 'inline-block',
   })
 );

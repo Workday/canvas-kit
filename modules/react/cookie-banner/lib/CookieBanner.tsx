@@ -2,7 +2,7 @@
 import {css, jsx} from '@emotion/core';
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, commonColors, type, spacing} from '@workday/canvas-kit-react/core';
+import {colors, commonColors, type, space} from '@workday/canvas-kit-react/core';
 import {Button} from '@workday/canvas-kit-react/button';
 
 export interface CookieBannerProps {
@@ -41,7 +41,7 @@ const Banner = styled('div')(
     backgroundColor: commonColors.background,
     borderTop: `1px solid ${colors.soap400}`,
     display: 'flex',
-    padding: spacing.m,
+    padding: space.m,
     alignItems: 'center',
     justifyContent: 'space-between',
     position: 'fixed',
@@ -54,7 +54,7 @@ const Banner = styled('div')(
       flexDirection: 'column',
       alignItems: 'stretch',
       textAlign: 'center',
-      padding: `${spacing.s} 0`,
+      padding: `${space.s} 0`,
     },
   },
   ({isClosed}: Pick<CookieBannerProps, 'isClosed'>) =>
@@ -62,11 +62,11 @@ const Banner = styled('div')(
 );
 
 const BannerItem = styled('div')({
-  marginLeft: spacing.s,
-  marginRight: spacing.s,
+  marginLeft: space.s,
+  marginRight: space.s,
   '@media (max-width: 450px)': {
     '&:not(:first-of-type)': {
-      marginTop: spacing.s,
+      marginTop: space.s,
     },
   },
 });
@@ -76,7 +76,7 @@ const rowStyle = css({
 });
 
 const CookieSettings = styled('button')(type.body2, type.link, {
-  marginRight: spacing.s,
+  marginRight: space.s,
   border: 0,
   fontWeight: 500,
   whiteSpace: 'nowrap',
