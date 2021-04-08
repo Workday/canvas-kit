@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/core';
 import {
   GrowthBehavior,
   useTheme,
@@ -28,6 +27,11 @@ export interface PrimaryButtonProps extends Themeable, GrowthBehavior {
    * Note: not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
+  /**
+   * The position of the TertiaryButton icon.
+   * @default 'left'
+   */
+  iconPosition?: 'left' | 'right';
   children?: React.ReactNode;
 }
 
@@ -41,6 +45,7 @@ export const PrimaryButton = createComponent('button')({
       size = 'medium',
       dataLabel,
       icon,
+      iconPosition,
       children,
       ...elemProps
     }: PrimaryButtonProps,
@@ -54,9 +59,14 @@ export const PrimaryButton = createComponent('button')({
       size={size}
       {...elemProps}
     >
-      {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+      {icon && iconPosition === 'left' && (
+        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+      )}
       <ButtonLabel>{children}</ButtonLabel>
       {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+      {icon && iconPosition === 'right' && (
+        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+      )}
     </ButtonContainer>
   ),
 });
