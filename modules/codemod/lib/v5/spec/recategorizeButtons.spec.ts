@@ -52,8 +52,6 @@ describe('recategorizeButtons', () => {
     expectTransform(input, expected);
   });
 
-  // TODO: WHAT ARE WE DOING WITH DROPDOWN BUTTON?
-
   it('should replace "HighlightButton" with "SecondaryButton', () => {
     const input = `
       import {HighlightButton} from '@workday/canvas-kit-react/button'
