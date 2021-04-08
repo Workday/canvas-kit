@@ -84,7 +84,7 @@ export const TypeAndSpace = () => {
         <span css={[type.body, type.variant.mono]}>Mono Text</span>
       </section>
       <section className="story">
-        <h2 style={type.h2}>SpaceNumspaceNumbers</h2>
+        <h2 style={type.h2}>Space and Space Numbers</h2>
         <Box m={spaceNumbers.m} p={spaceNumbers.m}>
           medium margin and padding
         </Box>
