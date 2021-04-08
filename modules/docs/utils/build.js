@@ -38,7 +38,6 @@ const build = (source, target) => {
     files = fs.readdirSync(source);
     files.forEach(file => {
       const curSource = path.join(source, file);
-      console.log(curSource);
       if (fs.lstatSync(curSource).isDirectory()) {
         build(curSource, targetFolder);
       } else {
