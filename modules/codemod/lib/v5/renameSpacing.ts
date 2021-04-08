@@ -5,6 +5,45 @@ export default function transformer(file: FileInfo, api: API) {
 
   const root = j(file.source);
 
+  // Rename spacing imports
+  root
+    .find(j.ImportDeclaration, {source: {value: '@workday/canvas-kit-react/core'}})
+    .forEach(nodePath => {
+      nodePath.value.specifiers?.forEach(specifier => {
+        // Only iterate over named import statements
+        if (specifier.type === 'ImportSpecifier') {
+          switch (specifier.imported.name) {
+            // `import { spacing }` becomes `import { space }`
+            case 'spacing':
+              specifier.imported.name = 'space';
+              break;
+            // `import { spacingNumbers }` becomes `import { spaceNumbers }`
+            case 'spacingNumbers':
+              specifier.imported.name = 'spaceNumbers';
+              break;
+            // `import { CanvasSpacing }` becomes `import { CanvasSpace }`
+            case 'CanvasSpacing':
+              specifier.imported.name = 'CanvasSpace';
+              break;
+            // `import { CanvasSpacingValue }` becomes `import { CanvasSpaceValues }`
+            case 'CanvasSpacingValue':
+              specifier.imported.name = 'CanvasSpaceValues';
+              break;
+            // `import { CanvasSpacingNumber }` becomes `import { CanvasSpaceNumbers }`
+            case 'CanvasSpacingNumber':
+              specifier.imported.name = 'CanvasSpaceNumbers';
+              break;
+            default:
+              break;
+          }
+        }
+        return specifier;
+      });
+
+      return nodePath;
+    });
+
+  // Rename spacing expressions
   // Check file import statements for canvas-kit imports
   // This allows us to somewhat safely assume any member expressions or types should not be modified
   const canvasKitImports = root.find(j.ImportDeclaration).filter(nodePath => {

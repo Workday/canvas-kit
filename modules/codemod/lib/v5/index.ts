@@ -4,8 +4,7 @@ import removeDefaultImports from './removeDefaultImports';
 import removeButtonEnums from './removeButtonEnums';
 import renameButtonRefs from './renameButtonRefs';
 // spacing codemods
-import renameSpacingImports from './renameSpacingImports';
-import renameSpacingExpressionsAndTypeReferences from './renameSpacingExpressionsAndTypeReferences';
+import renameSpacing from './renameSpacing';
 
 import {API, FileInfo, Options} from 'jscodeshift';
 
@@ -17,8 +16,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     removeDefaultImports,
     removeButtonEnums,
     renameButtonRefs,
-    renameSpacingImports,
-    renameSpacingExpressionsAndTypeReferences,
+    renameSpacing,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);
