@@ -15,6 +15,7 @@ yarn add @workday/canvas-kit-labs-react
 ```tsx
 import * as React from 'react';
 import {Drawer, DrawerDirection, DrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
+import {space} from '@workday/canvas-kit-react/core';
 
 <div style={{height: '100vh', position: 'relative'}}>
   <Drawer
@@ -27,7 +28,7 @@ import {Drawer, DrawerDirection, DrawerHeader} from '@workday/canvas-kit-labs-re
       />
     }
     openDirection={DrawerDirection.Left}
-    padding={spacing.l}
+    padding={space.l}
     showDropShadow={true}
   ></Drawer>
 </div>;

@@ -151,7 +151,7 @@ Default: `SidePanelOpenDirection.Left`
 
 ---
 
-#### `padding: CanvasSpacingValue`
+#### `padding: CanvasSpaceValues`
 
 > Adjust padding of the side panel when it's open.
 

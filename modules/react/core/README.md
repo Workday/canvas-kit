@@ -6,7 +6,7 @@ Includes:
 
 - [Colors](#colors)
 - [Border Radius](#border-radius)
-- [Spacing](#spacing)
+- [Space](#space)
 - [Depth](#depth)
 - [Type](#type)
 - [Providers](#providers)
@@ -141,9 +141,9 @@ import {space, spaceNumbers} from '@workday/canvas-kit-react/core';
 const iconSize = 20;
 
 const buttonSyles = {
-  paddingTop: spacing.xs,
-  paddingRight: spacing.s,
-  paddingBottom: spacing.xs,
+  paddingTop: space.xs,
+  paddingRight: space.s,
+  paddingBottom: space.xs,
   paddingLeft: spaceNumbers.s + iconSize,
 };
 ```

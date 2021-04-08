@@ -17,6 +17,7 @@ yarn add @workday/canvas-kit-labs-react
 ```tsx
 import * as React from 'react';
 import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
+import {space} from '@workday/canvas-kit-react/core';
 
 export default () => (
   <Tabs>
@@ -24,7 +25,7 @@ export default () => (
       <Tabs.Item>First Tab</Tabs.Item>
       <Tabs.Item>Second Tab</Tabs.Item>
     </Tabs.List>
-    <div css={{marginTop: spacing.m}}>
+    <div css={{marginTop: space.m}}>
       <Tabs.Panel>Contents of First Tab</Tabs.Panel>
       <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
     </div>

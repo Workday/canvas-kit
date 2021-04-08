@@ -1,6 +1,6 @@
 module.exports = pascalCaseName => `import React from 'react';
 
-import {colors, spacing} from '@workday/canvas-kit-react/core';
+import {colors, space} from '@workday/canvas-kit-react/core';
 import {createComponent, styled, StyledType, useModelContext} from '@workday/canvas-kit-react/common';
 
 import {${pascalCaseName}ModelContext} from './${pascalCaseName}';
@@ -13,7 +13,7 @@ export interface ${pascalCaseName}ContentProps {
 
 const Container = styled('div')<StyledType>({
   background: colors.frenchVanilla600,
-  padding: spacing.s,
+  padding: space.s,
   border: \`1px solid \${colors.licorice600}\`,
 });
 
