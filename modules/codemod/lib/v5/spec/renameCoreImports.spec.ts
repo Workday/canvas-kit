@@ -15,8 +15,6 @@ describe('Canvas Kit Core Imports Codemod', () => {
   });
 
   context('when importing from canvas-kit-labs-react/core', () => {
-    // import type from '@workday/canvas-kit-labs-react-core
-    // import type, { type, colors, StaticStates } '@workday/canvas-kit-labs-react/core';
     it('should do properly transform core to tokens', () => {
       const input = `import { type } from "@workday/canvas-kit-labs-react/core";`;
       const expected = `import { type } from "@workday/canvas-kit-labs-react/tokens";`;
