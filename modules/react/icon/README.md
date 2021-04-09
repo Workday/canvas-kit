@@ -30,7 +30,7 @@ Install one of the following icon packages:
 Use with `@workday/canvas-accent-icons-web`.
 
 ```tsx
-import { colors } from '@workday/canvas-kit-react/core'
+import { colors } from '@workday/canvas-kit-react/tokens'
 import { AccentIcon } from '@workday/canvas-kit-react/icon'
 import { shieldIcon } from '@workday/canvas-accent-icons-web'
 
@@ -172,7 +172,7 @@ Default: `92`
 Use with `@workday/canvas-system-icons-web`.
 
 ```tsx
-import { colors } from '@workday/canvas-kit-react/core'
+import { colors } from '@workday/canvas-kit-react/tokens'
 import { SystemIcon } from '@workday/canvas-kit-react/icon'
 import { activityStreamIcon } from '@workday/canvas-system-icons-web'
 
@@ -282,7 +282,7 @@ against the background color provided.
 Use with `@workday/canvas-accent-icons-web`.
 
 ```tsx
-import { colors } from '@workday/canvas-kit-react/core'
+import { colors } from '@workday/canvas-kit-react/tokens'
 import { SystemIconCircle } from '@workday/canvas-kit-react/icon'
 import { shieldIcon } from '@workday/canvas-accent-icons-web'
 
@@ -333,7 +333,7 @@ Default: `SystemIconCircleSize.l` (`40`)
 Use with `@workday/canvas-graphics-web`.
 
 ```tsx
-import { colors } from '@workday/canvas-kit-react/core'
+import { colors } from '@workday/canvas-kit-react/tokens'
 import { Graphic } from '@workday/canvas-kit-react/icon'
 import { badgeAchievementGraphic } from '@workday/canvas-graphics-web'
 

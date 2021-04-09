@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import throttle from 'lodash/throttle';
 
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {colors, space, type, CanvasSpaceValues} from '@workday/canvas-kit-react/core';
+import {colors, space, type, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
 

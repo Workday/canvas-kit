@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -12,7 +12,7 @@ import {Select} from '@workday/canvas-kit-labs-react/select';
 import SelectBase from '../lib/SelectBase';
 import SelectOption from '../lib/SelectOption';
 
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {Button} from '@workday/canvas-kit-react/button';
 import FormField from '@workday/canvas-kit-react/form-field';
 import {Modal, useModal} from '@workday/canvas-kit-react/modal';

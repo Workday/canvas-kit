@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {colors, space, borderRadius, type} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius, type} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
 import {ErrorType, focusRing, styled, Themeable} from '@workday/canvas-kit-react/common';

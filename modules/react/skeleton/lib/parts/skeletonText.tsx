@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {TEXT_BORDER_RADIUS} from './utils';
-import canvas from '@workday/canvas-kit-react/core';
+import canvas from '@workday/canvas-kit-react/tokens';
 
 const TextContainer = styled('div')({
   marginBottom: canvas.space.m,

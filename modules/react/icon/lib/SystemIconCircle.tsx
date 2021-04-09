@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {colors, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import SystemIcon, {SystemIconProps} from './SystemIcon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import {borderRadius, space, type} from '@workday/canvas-kit-react/core';
+import {borderRadius, space, type} from '@workday/canvas-kit-react/tokens';
 import {DubLogoTitle, WorkdayLogoTitle} from './parts';
 import {themes} from './shared/themes';
 import {HeaderHeight, HeaderTheme, HeaderVariant} from './shared/types';

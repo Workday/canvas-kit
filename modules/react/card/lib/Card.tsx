@@ -9,7 +9,7 @@ import {
   borderRadius,
   CanvasDepthValue,
   CanvasSpaceValues,
-} from '@workday/canvas-kit-react/core';
+} from '@workday/canvas-kit-react/tokens';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -23,13 +23,13 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   headingId?: string;
 
   /**
-   * The padding of the Card. Imported from `@workday/canvas-kit-react/core`.
+   * The padding of the Card. Imported from `@workday/canvas-kit-react/tokens`.
    * @default space.l
    */
   padding?: CanvasSpaceValues;
 
   /**
-   * The depth of the Card. Imported from `@workday/canvas-kit-react/core`.
+   * The depth of the Card. Imported from `@workday/canvas-kit-react/tokens`.
    * @default depth[2]
    */
   depth?: CanvasDepthValue;

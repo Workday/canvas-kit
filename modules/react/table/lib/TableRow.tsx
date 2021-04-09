@@ -2,7 +2,7 @@ import * as React from 'react';
 import {CSSObject} from '@emotion/core';
 import styled from '@emotion/styled';
 import {rgba} from 'polished';
-import {colors, space, spaceNumbers, statusColors} from '@workday/canvas-kit-react/core';
+import {colors, space, spaceNumbers, statusColors} from '@workday/canvas-kit-react/tokens';
 import {borderColor, borderWidth, cellBorder} from './Table';
 
 export enum TableRowState {

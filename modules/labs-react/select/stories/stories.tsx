@@ -10,7 +10,7 @@ import {
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
-import {colors, typeColors} from '@workday/canvas-kit-react/core';
+import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
 import FormField from '../../../react/form-field';
 import Select from '../lib/Select';
 import {RenderOptionFunction} from '../lib/SelectBase';

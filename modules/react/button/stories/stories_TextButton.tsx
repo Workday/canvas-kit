@@ -4,8 +4,8 @@ import {jsx, CSSObject} from '@emotion/core';
 import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {colors} from '@workday/canvas-kit-react/core';
-import {type} from '@workday/canvas-kit-labs-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {type} from '@workday/canvas-kit-labs-react/tokens';
 import {editIcon, arrowRightIcon} from '@workday/canvas-system-icons-web';
 
 import {TextButton, Hyperlink} from '@workday/canvas-kit-react/button';

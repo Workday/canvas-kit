@@ -39,7 +39,7 @@ Examples:
 
 ```tsx
 import {css} from '@emotion/core';
-import {type} from '@workday/canvas-kit-react/core';
+import {type} from '@workday/canvas-kit-react/tokens';
 
 ...
 
@@ -53,7 +53,7 @@ or
 
 ```tsx
 import styled from '@emotion/styled';
-import {fontFamily, monoFontFamily} from '@workday/canvas-kit-react/core';
+import {fontFamily, monoFontFamily} from '@workday/canvas-kit-react/tokens';
 
 // Custom typography using the official Canvas font list
 const customParagraph = styled('p')({

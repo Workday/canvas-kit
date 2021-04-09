@@ -3,7 +3,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import withReadme from 'storybook-readme/with-readme';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {
   ComponentStatesTable,
   permutateProps,

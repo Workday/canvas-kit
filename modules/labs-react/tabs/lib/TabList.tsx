@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {space, commonColors} from '@workday/canvas-kit-react/core';
+import {space, commonColors} from '@workday/canvas-kit-react/tokens';
 import {
   composeHooks,
   createComponent,

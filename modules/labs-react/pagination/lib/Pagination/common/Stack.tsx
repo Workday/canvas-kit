@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import * as React from 'react';
 import {jsx, css} from '@emotion/core';
-import {space as sp} from '@workday/canvas-kit-react/core';
+import {space as sp} from '@workday/canvas-kit-react/tokens';
 
 import {Flex, FlexProps} from './Flex';
 import {Spacing} from './utils/space';

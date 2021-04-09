@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {uploadCloudIcon, extLinkIcon, userIcon} from '@workday/canvas-system-icons-web';
 import {Menu, MenuItem, MenuItemProps} from '../index';

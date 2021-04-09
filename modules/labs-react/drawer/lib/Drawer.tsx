@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/core';
+import {colors, space, CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

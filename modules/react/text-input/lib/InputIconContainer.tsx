@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {GrowthBehavior} from '@workday/canvas-kit-react/common';
-import {space} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
 export interface InputIconContainerProps extends GrowthBehavior {

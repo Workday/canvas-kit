@@ -1,7 +1,7 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {
   ComponentStatesTable,
   permutateProps,

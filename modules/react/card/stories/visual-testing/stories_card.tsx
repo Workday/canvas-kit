@@ -1,14 +1,14 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {
   ComponentStatesTable,
   permutateProps,
   withSnapshotsEnabled,
 } from '../../../../../utils/storybook';
 import {Card} from '../../index';
-import {depth, space} from '@workday/canvas-kit-react/core';
+import {depth, space} from '@workday/canvas-kit-react/tokens';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Containers/Card',

@@ -1,4 +1,4 @@
-import {CanvasSpaceValues} from '@workday/canvas-kit-react/core';
+import {CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 import {TransformOrigin} from '../types';
 
 type translateMapType = {

@@ -7,7 +7,7 @@ import {
   Themeable,
   ContentDirection,
 } from '@workday/canvas-kit-react/common';
-import {colors, space, type, inputColors} from '@workday/canvas-kit-react/core';
+import {colors, space, type, inputColors} from '@workday/canvas-kit-react/tokens';
 import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
 import {ColorSwatch} from './parts/ColorSwatch';
 

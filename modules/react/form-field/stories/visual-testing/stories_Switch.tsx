@@ -6,7 +6,7 @@ import {
   withSnapshotsEnabled,
   customColorTheme,
 } from '../../../../../utils/storybook';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {Switch} from '../../../switch';
 
 export default withSnapshotsEnabled({

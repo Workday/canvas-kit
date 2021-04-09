@@ -165,11 +165,9 @@ const variants: CanvasTypeVariant = {
   },
 };
 
-const type: CanvasType = {
+export const type: CanvasType = {
   ...hierarchy,
   variant: {
     ...variants,
   },
 };
-
-export default type;

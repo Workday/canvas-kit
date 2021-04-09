@@ -13,7 +13,7 @@ import {
   spaceNumbers,
   type,
   space,
-} from '@workday/canvas-kit-react/core';
+} from '@workday/canvas-kit-react/tokens';
 import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import SelectOption from './SelectOption';

@@ -1,8 +1,8 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {colors} from '@workday/canvas-kit-react/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {action} from '@storybook/addon-actions';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';

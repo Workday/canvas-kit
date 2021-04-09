@@ -7,7 +7,7 @@ import {
   pickForegroundColor,
   styled,
 } from '@workday/canvas-kit-react/common';
-import {colors, commonColors, type} from '@workday/canvas-kit-react/core';
+import {colors, commonColors, type} from '@workday/canvas-kit-react/tokens';
 
 export interface SelectOptionProps extends Themeable, React.LiHTMLAttributes<HTMLLIElement> {
   /**

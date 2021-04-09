@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -28,23 +28,19 @@ export const IconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => 
           <ComponentStatesTable
             rowProps={permutateProps({
               variant: [
-                {value: "inverse", label: 'Inverse'},
-                {value: "inverseFilled", label: 'Inverse Filled'},
-                {value: "plain", label: 'Plain'},
-                {value: "circle", label: 'Circle'},
-                {value: "circleFilled", label: 'Circle Filled'},
-                {value: "square", label: 'Square'},
-                {value: "squareFilled", label: 'Square Filled'},
+                {value: 'inverse', label: 'Inverse'},
+                {value: 'inverseFilled', label: 'Inverse Filled'},
+                {value: 'plain', label: 'Plain'},
+                {value: 'circle', label: 'Circle'},
+                {value: 'circleFilled', label: 'Circle Filled'},
+                {value: 'square', label: 'Square'},
+                {value: 'squareFilled', label: 'Square Filled'},
               ],
             })}
             columnProps={stateTableColumnProps}
           >
             {props => (
-              <Container
-                blue={["inverse", "inverseFilled"].includes(
-                  props.variant
-                )}
-              >
+              <Container blue={['inverse', 'inverseFilled'].includes(props.variant)}>
                 <IconButton
                   toggled={toggled}
                   icon={playCircleIcon}
@@ -62,11 +58,11 @@ export const IconButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => 
 );
 
 export const IconButtonCircleToggleableGrid = () => (
-  <IconButtonGrid initialToggled={true} variant={"circle"} />
+  <IconButtonGrid initialToggled={true} variant={'circle'} />
 );
 
 export const IconButtonInverseToggleableGrid = () => (
-  <IconButtonGrid initialToggled={true} variant={"inverse"} />
+  <IconButtonGrid initialToggled={true} variant={'inverse'} />
 );
 
 export const IconButtonThemedStates = () => <IconButtonStates theme={{canvas: customColorTheme}} />;

@@ -5,7 +5,7 @@ import uuid from 'uuid/v4';
 
 import Card from '@workday/canvas-kit-react/card';
 import {IconButton} from '@workday/canvas-kit-react/button';
-import {CanvasDepthValue, depth as depthValues, space} from '@workday/canvas-kit-react/core';
+import {CanvasDepthValue, depth as depthValues, space} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -57,7 +57,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   heading?: React.ReactNode;
   /**
-   * The depth of the Popup. Imported from `@workday/canvas-kit-react/core`.
+   * The depth of the Popup. Imported from `@workday/canvas-kit-react/tokens`.
    * @default depth[2]
    */
   depth?: CanvasDepthValue;

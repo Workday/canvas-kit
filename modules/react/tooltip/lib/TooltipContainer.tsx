@@ -2,7 +2,7 @@ import * as React from 'react';
 import {keyframes} from '@emotion/core';
 import styled from '@emotion/styled';
 
-import {borderRadius, colors, space, spaceNumbers, type} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors, space, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 import {TransformOrigin, getTranslateFromOrigin} from '@workday/canvas-kit-react/common';
 
 const tooltipAnimation = (transformOrigin: TransformOrigin) => {

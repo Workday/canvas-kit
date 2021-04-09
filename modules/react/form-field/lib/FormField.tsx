@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {space} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {GrowthBehavior, ErrorType, styled, Themeable} from '@workday/canvas-kit-react/common';
 import Hint from './Hint';
 import Label from './Label';

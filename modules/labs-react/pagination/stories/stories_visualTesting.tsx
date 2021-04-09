@@ -2,7 +2,7 @@
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {ContentDirection} from '@workday/canvas-kit-react/common';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 

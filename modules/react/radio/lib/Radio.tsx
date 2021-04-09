@@ -11,7 +11,7 @@ import canvas, {
   colors,
   inputColors,
   spaceNumbers,
-} from '@workday/canvas-kit-react/core';
+} from '@workday/canvas-kit-react/tokens';
 
 export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**

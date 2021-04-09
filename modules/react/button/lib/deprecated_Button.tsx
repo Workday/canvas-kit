@@ -1,5 +1,5 @@
 import * as React from 'react';
-import canvas, {borderRadius, type} from '@workday/canvas-kit-react/core';
+import canvas, {borderRadius, type} from '@workday/canvas-kit-react/tokens';
 import {
   focusRing,
   mouseFocusBehavior,

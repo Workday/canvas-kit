@@ -21,11 +21,11 @@ ruleTester.run('restricted-imports', rule, {
       ],
     },
     {
-      code: "import radius from '@workday/canvas-kit-react/core/lib/radius'",
+      code: "import radius from '@workday/canvas-kit-react/tokens/lib/radius'",
       errors: [
         {
           message:
-            "The /lib directory isn't available in production. Import from '@workday/canvas-kit-react/core' instead.",
+            "The /lib directory isn't available in production. Import from '@workday/canvas-kit-react/tokens' instead.",
         },
       ],
     },

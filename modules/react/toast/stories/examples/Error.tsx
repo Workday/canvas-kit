@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 import Toast from '../../index';
 

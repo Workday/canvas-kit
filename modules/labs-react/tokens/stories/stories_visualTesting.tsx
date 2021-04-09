@@ -2,8 +2,8 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import styled from '@emotion/styled';
-import {spaceNumbers} from '@workday/canvas-kit-react/core';
-import type, {space} from '..';
+import {spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {type, space} from '..';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({

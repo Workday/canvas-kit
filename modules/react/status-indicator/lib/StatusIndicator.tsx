@@ -2,7 +2,7 @@ import * as React from 'react';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {GenericStyle, PickRequired} from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, type, space} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors, type, space} from '@workday/canvas-kit-react/tokens';
 import {CSSObject} from '@emotion/core';
 import styled from '@emotion/styled';
 

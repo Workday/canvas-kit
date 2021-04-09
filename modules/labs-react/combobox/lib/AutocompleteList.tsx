@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import styled from '@emotion/styled';
-import {space} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {accessibleHide} from '@workday/canvas-kit-react/common';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react/menu';
 import {ComboBoxMenuItemGroup, getOptionId, listBoxIdPart, getTextFromElement} from './Combobox';

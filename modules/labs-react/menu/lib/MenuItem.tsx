@@ -1,7 +1,13 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, commonColors, iconColors, typeColors, space} from '@workday/canvas-kit-react/core';
-import {type} from '@workday/canvas-kit-labs-react/core';
+import {
+  colors,
+  commonColors,
+  iconColors,
+  typeColors,
+  space,
+} from '@workday/canvas-kit-react/tokens';
+import {type} from '@workday/canvas-kit-labs-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 

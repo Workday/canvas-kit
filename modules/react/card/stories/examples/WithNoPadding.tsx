@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card} from '@workday/canvas-kit-react/card';
-import {space} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export const WithNoPadding = () => {
   return (
