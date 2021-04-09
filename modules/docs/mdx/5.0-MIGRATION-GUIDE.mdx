@@ -160,7 +160,7 @@ PR:
   }
   ```
 - Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and allows `as` to change the underlying element.
-  - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer valid. The codemod will rewrite all instances of `buttonRef` to `ref`. This has the potential to catch too much, so it is only run on files that import a Canvas Kit package. Run a type check and check the diff to make sure this codemod didn't change unintentional `buttonRef` that are valid in your code base.
+  - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer valid. The codemod will rewrite all instances of `buttonRef` to `ref` for any JSX element that is a Button import from Canvas-Kit.
     ```tsx
     // before
     <Button buttonRef={ref}>
