@@ -20,53 +20,73 @@ about the update.
 
 ### Canvas Kit CSS Maintenance Mode
 
-Due to the infrequent use of our CSS modules, they will be going into maintenance mode in Canvas Kit v5. We will still support `@workday/canvas-kit-css` with bug fixes and significant visual updates, but it generally won't be receiving new components, additional features, etc. This will allow us to provide more focused support, and dedicate our efforts to making bigger and better improvements to our most used components: Canvas Kit React. If you have questions or concerns, please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=&template=question.md).
+Due to the infrequent use of our CSS modules, they will be going into maintenance mode in Canvas Kit
+v5. We will still support `@workday/canvas-kit-css` with bug fixes and significant visual updates,
+but it generally won't be receiving new components, additional features, etc. This will allow us to
+provide more focused support, and dedicate our efforts to making bigger and better improvements to
+our most used components: Canvas Kit React. If you have questions or concerns, please
+[let us know](https://github.com/Workday/canvas-kit/issues/new?labels=&template=question.md).
 
 ### Codemod
 
-We've provided a [new codemod package](./modules/codemod) that you can use to update the majority of these breaking code changes. Simply run:
+We've provided a [new codemod package](./modules/codemod) that you can use to update the majority of
+these breaking code changes. Simply run:
 
 ```sh
 > npx @workday/canvas-kit-codemod v5 [path]
 ```
-> Note: This codemod only work on .js, .jsx, .ts, and .tsx extensions. You may need to make some manual changes in other file types (.json, .mdx, .md, etc.).
 
-> Note: You may need to run your linter after executing the codemod, as it's resulting formatting (spacing, quotes, etc.) may not match your project's styling.
+> Note: This codemod only work on .js, .jsx, .ts, and .tsx extensions. You may need to make some
+> manual changes in other file types (.json, .mdx, .md, etc.).
+
+> Note: You may need to run your linter after executing the codemod, as it's resulting formatting
+> (spacing, quotes, etc.) may not match your project's styling.
 
 Breaking changes accounted for by this codemod will be marked with a 🤖.
 
-Please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have any troubles or missed use cases with this codemod. The `@workday/canvas-kit-codemod` package will help us maintain additional codemod transforms to make future migrations easier.
+Please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if
+you have any troubles or missed use cases with this codemod. The `@workday/canvas-kit-codemod`
+package will help us maintain additional codemod transforms to make future migrations easier.
 
 ### Slash Imports
 
-We have moved from a separate module for every component to a slash imports system. All of our react components are now bundled under two packages:
+We have moved from a separate module for every component to a slash imports system. All of our react
+components are now bundled under two packages:
+
 - `@workday/canvas-kit-react`
 - `@workday/canvas-kit-labs-react`
 
 Due to this change, imports will need to be updated. For example:
+
 ```tsx
 // before
 import canvas from '@workday/canvas-kit-react';
 import Button from '@workday/canvas-kit-react-button';
 
 // after
-import canvas from "@workday/canvas-kit-react/core";
-import { Button } from "@workday/canvas-kit-react/button";
+import canvas from '@workday/canvas-kit-react/core';
+import {Button} from '@workday/canvas-kit-react/button';
 ```
 
-This change is covered by the codemod, but it doesn't currently run on files that don't use the .js, .jsx, .ts, and .tsx extensions. Those files will have to be updated manually.
+This change is covered by the codemod, but it doesn't currently run on files that don't use the .js,
+.jsx, .ts, and .tsx extensions. Those files will have to be updated manually.
 
 ### Compound Components
 
 Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.md)
+
 - Components will support [forwarded refs](https://reactjs.org/docs/forwarding-refs.html)
 - The corresponding tag of a component can be changed with the `as` prop
 
 ### Space Tokens
 
-To better align with our design taxonomy, we are renaming our space tokens in our core package. We will also no longer rely on `@workday/canvas-space-web` to supply our space values. Instead, we are keeping the values in canvas-kit. We also took the opportunity to improve the space types (which were too generic) and JSDoc hints.
+To better align with our design taxonomy, we are renaming our space tokens in our core package. We
+will also no longer rely on `@workday/canvas-space-web` to supply our space values. Instead, we are
+keeping the values in canvas-kit. We also took the opportunity to improve the space types (which
+were too generic) and JSDoc hints.
 
-The codemod will handle _almost all_ of these changes with a few possible exceptions that will be noted in [Manual Updates](#manual-updates) below.
+The codemod will handle _almost all_ of these changes with a few possible exceptions that will be
+noted in [Manual Updates](#manual-updates) below.
 
 ```tsx
 // before
@@ -78,42 +98,67 @@ import canvas { space, spaceNumbers, CanvasSpaceValues } from '@workday/canvas-k
 
 This table describes each update:
 
-| Before                 | After                     | Change Description              |
-| ---------------------- | ------------------------- | ------------------------------- |
-| `spacing`              | `space`                   | name change only                |
-| `spacingNumbers`       | `spaceNumbers`            | name change only                |
-| `CanvasSpacing`        | `CanvasSpace`             | name change and improved types* |
-| `CanvasSpacingValue`  | `CanvasSpaceValues`       | name change only                |
-| `CanvasSpacingNumber` | `CanvasSpaceNumbers`      | name change and improved types* |
-| `n/a`                  | `CanvasSpaceNumberValues` | new type!                       |
+| Before                | After                     | Change Description               |
+| --------------------- | ------------------------- | -------------------------------- |
+| `spacing`             | `space`                   | name change only                 |
+| `spacingNumbers`      | `spaceNumbers`            | name change only                 |
+| `CanvasSpacing`       | `CanvasSpace`             | name change and improved types\* |
+| `CanvasSpacingValue`  | `CanvasSpaceValues`       | name change only                 |
+| `CanvasSpacingNumber` | `CanvasSpaceNumbers`      | name change and improved types\* |
+| `n/a`                 | `CanvasSpaceNumberValues` | new type!                        |
 
-\* Before the types were too generic and not very useful. They now better reflect the values they represent.
+\* Before the types were too generic and not very useful. They now better reflect the values they
+represent.
 
 #### Automatic Updates
 
 - 🤖 Token imports: `spacing`, `spacingNumbers`
   - e.g. `import { spacing, spacingNumbers }` becomes `import { space, spaceNumbers }`
 - 🤖 Type imports: `CanvasSpacing`, `CanvasSpacingValue`, `CanvasSpacingNumber`
-  - e.g. `import { CanvasSpacing, CanvasSpacingValue, CanvasSpacingNumber }` becomes `import { CanvasSpace, CanvasSpaceValues, CanvasSpaceNumbers }`
+  - e.g. `import { CanvasSpacing, CanvasSpacingValue, CanvasSpacingNumber }` becomes
+    `import { CanvasSpace, CanvasSpaceValues, CanvasSpaceNumbers }`
 - 🤖 Token expressions
   - e.g. `const iconPadding = spacing.s;` becomes `const iconPadding = space.s`
 - 🤖 Type expressions
-  - e.g. `const getSpace = (value: CanvasSpacingValue) => ( spacing[value] )` becomes `const getSpace = (value: CanvasSpaceValue) => ( space[value] )`
+  - e.g. `const getSpace = (value: CanvasSpacingValue) => ( spacing[value] )` becomes
+    `const getSpace = (value: CanvasSpaceValue) => ( space[value] )`
 - 🤖 Token properties
   - e.g. `const iconPadding = canvas.spacing.s;` becomes `const iconPadding = canvas.space.s`
 
 #### Manual Updates
 
-As previously mentioned, the codemod should handle the vast majority of these updates. But there are potentially a few changes that will need to be made manually. There may be more beyond what's listed below, but these were the most common issues found in our investigation.
+As previously mentioned, the codemod should handle the vast majority of these updates. But there are
+potentially a few changes that will need to be made manually. There may be more beyond what's listed
+below, but these were the most common issues found in our investigation.
 
 - Usage outside of `.ts` and `.tsx` files
   - e.g. referencing `spacing` in documentation (`.md` files)
 - Usage in code comments or JSDoc comments
   - e.g. `// spacing.s = 16px`
-- Re-declararation `space` or `spaceNumbers` in the same files
-  = e.g. importing or declaring a new `space` or `spaceNumbers` variable will prevent the codemod from updating the file
+- Re-declararation `space` or `spaceNumbers` in the same files = e.g. importing or declaring a new
+  `space` or `spaceNumbers` variable will prevent the codemod from updating the file
 - Aliasing existing variables as `spacing` or `spaceNumbers`
   - e.g. `import { spacingNumbers as spacing }` will prevent the codemod from updating the file
+
+### Rename Core and Labs Core Module Names to Tokens
+
+The distinction between our core and common packages is often unclear and creates confusion around
+what should be imported from where. To help alleviate this and better align with our design
+taxonomy, we're renaming our `core` packages to `tokens`. We are also removing the `type` default
+\export the labs core package in favor of named imports. These changes are listed below; all of
+which are handled by the v5 codemod.
+
+#### Automatic Updates
+
+- 🤖 Core import statements
+- e.g. `import { space } from '@workday/canvas-kit-react/core';` becomes
+  `import { space } from '@workday/canvas-kit-react/tokens';`
+- 🤖 Labs core import statements
+- e.g. `import { type } from '@workday/canvas-kit-labs-react/core';` becomes
+  `import { type } from '@workday/canvas-kit-labs-react/tokens';`
+- 🤖 Labs core default type import
+- e.g. `import type from '@workday/canvas-kit-labs-react/core';` becomes
+  `import { type } from '@workday/canvas-kit-labs-react/tokens';`
 
 ## Breaking Component Changes
 
@@ -132,54 +177,71 @@ PR:
 
 ### Button
 
-- 🤖 `beta_Button` export was removed. The codemod will rename the import to `Button` instead, preserving local renaming if it exists.
+- 🤖 `beta_Button` export was removed. The codemod will rename the import to `Button` instead,
+  preserving local renaming if it exists.
   ```tsx
   // before
-  import { beta_Button as Button } from '@workday/canvas-kit-react-button';
+  import {beta_Button as Button} from '@workday/canvas-kit-react-button';
   // after
-  import { Button } from '@workday/canvas-kit-react-button';
+  import {Button} from '@workday/canvas-kit-react-button';
   ```
 - 🤖 The default export was removed. The codemod will change default imports to named imports.
   ```tsx
   // before
   import Button from '@workday/canvas-kit-react-button';
   // after
-  import { Button } from '@workday/canvas-kit-react-button';
+  import {Button} from '@workday/canvas-kit-react-button';
   ```
-- 🤖 Enums have been removed from all buttons. String literals are used instead. The codemod will write any usages of an enum to the string literal. If you used an enum as a type, the codemod will expand to a union of string literals. You could change the union manually instead to be something like `ButtonProps['variant']` if you prefer not to duplicate the union of string literals.
+- 🤖 Enums have been removed from all buttons. String literals are used instead. The codemod will
+  write any usages of an enum to the string literal. If you used an enum as a type, the codemod will
+  expand to a union of string literals. You could change the union manually instead to be something
+  like `ButtonProps['variant']` if you prefer not to duplicate the union of string literals.
   ```tsx
   // before
-  <Button variant={Button.Variant.Primary} />
+  <Button variant={Button.Variant.Primary} />;
   interface Props {
-    variant: ButtonVariant
+    variant: ButtonVariant;
   }
   // after
-  <Button variant="primary" />
+  <Button variant="primary" />;
   interface Props {
-    variant: 'primary' | 'secondary'
+    variant: 'primary' | 'secondary';
   }
   ```
-- Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and allows `as` to change the underlying element.
-  - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer valid. The codemod will rewrite all instances of `buttonRef` to `ref` for any JSX element that is a Button import from Canvas-Kit.
+- Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and
+  allows `as` to change the underlying element.
+
+  - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer
+    valid. The codemod will rewrite all instances of `buttonRef` to `ref` for any JSX element that
+    is a Button import from Canvas-Kit.
     ```tsx
     // before
     <Button buttonRef={ref}>
     // after
     <Button ref={ref}>
     ```
-  - Button prop interfaces no longer extend directly from the `React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that determines the element interface via the `as` prop. This is why Button props no longer contain an element interface directly. If you extend from a Button prop interface, or have code that uses a Button prop interface and accesses properties like `onClick`, you'll have to provide the button attribute yourself. This is not code-moddable since intent cannot be pre-determined. This will not effect runtime, but only Typescript.
+  - Button prop interfaces no longer extend directly from the
+    `React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that
+    determines the element interface via the `as` prop. This is why Button props no longer contain
+    an element interface directly. If you extend from a Button prop interface, or have code that
+    uses a Button prop interface and accesses properties like `onClick`, you'll have to provide the
+    button attribute yourself. This is not code-moddable since intent cannot be pre-determined. This
+    will not effect runtime, but only Typescript.
+
     ```tsx
     // before
     interface MyButtonProps extends ButtonProps {}
 
     // onClick no longer exists on `ButtonProps`, but does exist as a prop in `<Button>`
-    const MyButton = ({ children, onClick }: MyButtonProps) => <Button onClick={onClick}>{children}</Button>
+    const MyButton = ({children, onClick}: MyButtonProps) => (
+      <Button onClick={onClick}>{children}</Button>
+    );
 
     // after
     interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
     // OR
     interface MyButtonProps extends ButtonProps {
-      onClick?: React.MouseEventHandler<HTMLButtonElement>
+      onClick?: React.MouseEventHandler<HTMLButtonElement>;
     }
     ```
