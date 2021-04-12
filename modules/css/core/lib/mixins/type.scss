@@ -101,7 +101,7 @@
   color: $wdc-color-peach-500;
 }
 @mixin wdc-type-variant-link() {
-  color: $wdc-color-blueberry-400;
+  color: $wdc-color-primary-main;
   text-decoration: none;
   cursor: pointer;
   border-radius: 2px;
@@ -112,17 +112,17 @@
 
   // States
   &:hover {
-    color: $wdc-color-blueberry-500;
+    color: $wdc-color-primary-dark;
     background: $wdc-color-soap-200;
   }
 
   &.wdc-type-variant-link-focus,
   &:focus {
-    box-shadow: 0 0 0 2px $wdc-color-blueberry-400;
+    box-shadow: 0 0 0 2px $wdc-color-primary-main;
   }
 
   &:active {
-    color: $wdc-color-blueberry-600;
+    color: $wdc-color-primary-darkest;
     background: $wdc-color-soap-200;
   }
 }

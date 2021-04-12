@@ -44,10 +44,10 @@
   @include wdc-count-badge();
   background: $wdc-color-french-vanilla-100;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  color: $wdc-color-blueberry-400;
+  color: $wdc-color-primary-main;
 
   &:empty {
-    background: $wdc-color-blueberry-400;
+    background: $wdc-color-primary-main;
     border: solid 6px $wdc-color-french-vanilla-100;
     padding: 0;
   }
