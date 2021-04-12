@@ -37,7 +37,7 @@ console.log(transform, path);
 console.log(`\nApplying ${transform} transform to '${path}'\n`.brightBlue);
 
 exec(
-  `jscodeshift -t ${__dirname}/lib/${transform} ${path} --parser=tsx --extensions=js,jsx,ts,tsx --verbose=2`,
+  `jscodeshift -t ${__dirname}/dist/es6/${transform} ${path} --parser=tsx --extensions=js,jsx,ts,tsx --verbose=2`,
   (error, stdout, stderr) => {
     if (error) {
       console.error(`${error}\n`);
