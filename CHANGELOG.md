@@ -3,7 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# 5.0.0-beta.0 (2021-01-27)
+## 5.0.0-beta.1 (2021-04-12)
+
+### Components
+
+- feat(common): Spread additional props on CanvasProvider [@NicholasBoll](https://github.com/NicholasBoll)
+- chore(tabs): Convert to a compound component utility functions ([#953](https://github.com/Workday/canvas-kit/pull/953)) [@NicholasBoll](https://github.com/NicholasBoll)
+- feat(tabs): Update Tabs list model to support passing index position ([#990](https://github.com/Workday/canvas-kit/pull/990)) [@omasrii](https://github.com/omasrii)
+- fix: Allow refs to be passed to createComponent components ([#1009](https://github.com/Workday/canvas-kit/pull/1009)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Refactor Button to use createComponent ([#1017](https://github.com/Workday/canvas-kit/pull/1017)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Codemods
+
+- chore: Add slash imports ([#992](https://github.com/Workday/canvas-kit/pull/992)) [@anicholls](https://github.com/anicholls)
+- chore: Update spacing tokens + codemod ([#1010](https://github.com/Workday/canvas-kit/pull/1010)) [@alanbsmith](https://github.com/alanbsmith)
+- fix: Scope buttonRef codemod to only Button components ([#1022](https://github.com/Workday/canvas-kit/pull/1022)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Rename core packages to tokens and add codemod [@alanbsmith](https://github.com/alanbsmith)
+- fix: Updates jscodeshift build directories [@alanbsmith](https://github.com/alanbsmith)
+
+### Infrastructure
+
+#### Docs
+
+- docs: Add compound Component Creation Doc ([#950](https://github.com/Workday/canvas-kit/pull/950)) [@NicholasBoll](https://github.com/NicholasBoll)
+- docs: Update v5 migration TOC and ordering [@anicholls](https://github.com/anicholls)
+- docs: Relocate supplemental docs to new docs module ([#998](https://github.com/Workday/canvas-kit/pull/998)) [@anicholls](https://github.com/anicholls)
+- chore: Deprecate CKCSS and update migration guide ([#1000](https://github.com/Workday/canvas-kit/pull/1000)) [@anicholls](https://github.com/anicholls)
+  
+#### Testing
+
+- test: Add verifyComponent test helper and fix test types ([#958](https://github.com/Workday/canvas-kit/pull/958)) [@NicholasBoll](https://github.com/NicholasBoll)
+  
+#### CI
+
+- ci: Fix error in prerelease logic in publish-canary script [@anicholls](https://github.com/anicholls)
+- ci: Update setup-node action and remove custom matcher ([#994](https://github.com/Workday/canvas-kit/pull/994)) [@NicholasBoll](https://github.com/NicholasBoll)
+- ci: Fix canary dist-tag for prerelease canaries in slack message ([#1003](https://github.com/Workday/canvas-kit/pull/1003)) [@anicholls](https://github.com/anicholls)
+
+## 5.0.0-beta.0 (2021-01-27)
 
 ### Infrastructure
 - feat: Add compound component utility functions ([#946](https://github.com/Workday/canvas-kit/pull/946)) [@NicholasBoll](https://github.com/NicholasBoll)
