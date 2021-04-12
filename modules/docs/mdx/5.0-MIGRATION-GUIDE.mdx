@@ -7,14 +7,16 @@ import {Meta} from '@storybook/addon-docs/blocks';
 Below are the breaking changes made in Canvas Kit v5. Please reach out if you have any questions
 about the update.
 
-- [Canvas Kit 5.0 Migration Guide](#canvas-kit-50-migration-guide)
-  - [General Changes](#general-changes)
-    - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
-    - [Codemod](#codemod)
-    - [Slash Imports](#slash-imports)
-    - [Compound Components](#compound-components)
-  - [Breaking Component Changes](#breaking-component-changes)
-    - [Tabs](#tabs)
+- [General Changes](#general-changes)
+  - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
+  - [Codemod](#codemod)
+  - [Rename Core and Labs Core Modules to Tokens](#rename-core-and-labs-core-modules-to-tokens)
+  - [Slash Imports](#slash-imports)
+  - [Space Tokens](#space-tokens)
+  - [Compound Components](#compound-components)
+- [Breaking Component Changes](#breaking-component-changes)
+  - [Tabs](#tabs)
+  - [Button](#button)
 
 ## General Changes
 
@@ -30,7 +32,7 @@ our most used components: Canvas Kit React. If you have questions or concerns, p
 ### Codemod
 
 We've provided a [new codemod package](./modules/codemod) that you can use to update the majority of
-these breaking code changes. Simply run:
+the v5 breaking code changes. Simply run:
 
 ```sh
 > npx @workday/canvas-kit-codemod v5 [path]
@@ -48,6 +50,26 @@ Please [let us know](https://github.com/Workday/canvas-kit/issues/new?labels=bug
 you have any troubles or missed use cases with this codemod. The `@workday/canvas-kit-codemod`
 package will help us maintain additional codemod transforms to make future migrations easier.
 
+### Rename Core and Labs Core Modules to Tokens
+
+The distinction between our core and common packages is often unclear and creates confusion around
+what should be imported from where. To help alleviate this and better align with our design
+taxonomy, we're renaming our `core` packages to `tokens`. We are also removing the `type` default
+\export the labs core package in favor of named imports. These changes are listed below; all of
+which are handled by the v5 codemod.
+
+#### Automatic Updates
+
+- 🤖 Core import statements
+- e.g. `import { space } from '@workday/canvas-kit-react/core';` becomes
+  `import { space } from '@workday/canvas-kit-react/tokens';`
+- 🤖 Labs core import statements
+- e.g. `import { type } from '@workday/canvas-kit-labs-react/core';` becomes
+  `import { type } from '@workday/canvas-kit-labs-react/tokens';`
+- 🤖 Labs core default type import
+- e.g. `import type from '@workday/canvas-kit-labs-react/core';` becomes
+  `import { type } from '@workday/canvas-kit-labs-react/tokens';`
+
 ### Slash Imports
 
 We have moved from a separate module for every component to a slash imports system. All of our react
@@ -64,19 +86,12 @@ import canvas from '@workday/canvas-kit-react';
 import Button from '@workday/canvas-kit-react-button';
 
 // after
-import canvas from '@workday/canvas-kit-react/core';
+import canvas from '@workday/canvas-kit-react/tokens';
 import {Button} from '@workday/canvas-kit-react/button';
 ```
 
-This change is covered by the codemod, but it doesn't currently run on files that don't use the .js,
-.jsx, .ts, and .tsx extensions. Those files will have to be updated manually.
-
-### Compound Components
-
-Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.md)
-
-- Components will support [forwarded refs](https://reactjs.org/docs/forwarding-refs.html)
-- The corresponding tag of a component can be changed with the `as` prop
+This change is covered by the codemod, but it doesn't currently run on files that don't use the
+`.js`, `.jsx`, `.ts`, and `.tsx` extensions. Those files will have to be updated manually.
 
 ### Space Tokens
 
@@ -93,7 +108,7 @@ noted in [Manual Updates](#manual-updates) below.
 import { spacing, spacingNumbers CanvasSpacingValue } from '@workday/canvas-kit-react-core';
 
 // after
-import canvas { space, spaceNumbers, CanvasSpaceValues } from '@workday/canvas-kit-react/core';
+import { space, spaceNumbers, CanvasSpaceValues } from '@workday/canvas-kit-react/tokens';
 ```
 
 This table describes each update:
@@ -131,7 +146,7 @@ As previously mentioned, the codemod should handle the vast majority of these up
 potentially a few changes that will need to be made manually. There may be more beyond what's listed
 below, but these were the most common issues found in our investigation.
 
-- Usage outside of `.ts` and `.tsx` files
+- Usage outside of `.js`, `.jsx`, `.ts`, and `.tsx` files
   - e.g. referencing `spacing` in documentation (`.md` files)
 - Usage in code comments or JSDoc comments
   - e.g. `// spacing.s = 16px`
@@ -140,25 +155,12 @@ below, but these were the most common issues found in our investigation.
 - Aliasing existing variables as `spacing` or `spaceNumbers`
   - e.g. `import { spacingNumbers as spacing }` will prevent the codemod from updating the file
 
-### Rename Core and Labs Core Module Names to Tokens
+### Compound Components
 
-The distinction between our core and common packages is often unclear and creates confusion around
-what should be imported from where. To help alleviate this and better align with our design
-taxonomy, we're renaming our `core` packages to `tokens`. We are also removing the `type` default
-\export the labs core package in favor of named imports. These changes are listed below; all of
-which are handled by the v5 codemod.
+Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.md)
 
-#### Automatic Updates
-
-- 🤖 Core import statements
-- e.g. `import { space } from '@workday/canvas-kit-react/core';` becomes
-  `import { space } from '@workday/canvas-kit-react/tokens';`
-- 🤖 Labs core import statements
-- e.g. `import { type } from '@workday/canvas-kit-labs-react/core';` becomes
-  `import { type } from '@workday/canvas-kit-labs-react/tokens';`
-- 🤖 Labs core default type import
-- e.g. `import type from '@workday/canvas-kit-labs-react/core';` becomes
-  `import { type } from '@workday/canvas-kit-labs-react/tokens';`
+- Components will support [forwarded refs](https://reactjs.org/docs/forwarding-refs.html)
+- The corresponding tag of a component can be changed with the `as` prop
 
 ## Breaking Component Changes
 
