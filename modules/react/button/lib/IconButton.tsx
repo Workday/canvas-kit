@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {
   focusRing,
   useTheme,

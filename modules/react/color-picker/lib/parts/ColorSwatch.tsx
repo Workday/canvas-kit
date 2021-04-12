@@ -1,4 +1,4 @@
-import {borderRadius, colors} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 import chroma from 'chroma-js';
 import * as React from 'react';

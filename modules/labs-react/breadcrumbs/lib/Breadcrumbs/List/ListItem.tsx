@@ -3,7 +3,7 @@ import React from 'react';
 import {css, jsx} from '@emotion/core';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {chevronLeftSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 import {useRTL} from '../hooks';
 

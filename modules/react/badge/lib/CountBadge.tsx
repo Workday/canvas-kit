@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {keyframes} from '@emotion/core';
 import styled from '@emotion/styled';
-import {borderRadius, colors, fontFamily} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors, fontFamily} from '@workday/canvas-kit-react/tokens';
 
 export interface CountBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   count?: number;

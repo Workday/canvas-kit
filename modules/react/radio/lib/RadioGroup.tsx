@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Radio, {RadioProps} from './Radio';
-import {borderRadius, space} from '@workday/canvas-kit-react/core';
+import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {
   ErrorType,
   GrowthBehavior,

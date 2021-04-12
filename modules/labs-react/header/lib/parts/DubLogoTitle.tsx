@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, space} from '@workday/canvas-kit-react/core';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {HeaderHeight, HeaderTheme} from '../shared/types';
 import chroma from 'chroma-js';
 import {dubLogoWhite, dubLogoBlue} from '@workday/canvas-kit-react/common';

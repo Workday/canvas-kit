@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
 import AccentIcon, {accentIconStyles} from '../lib/AccentIcon';
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 
 describe('Accent Icon', () => {

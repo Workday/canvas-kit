@@ -8,7 +8,7 @@ import {homeIcon, starIcon, rocketIcon, plusIcon} from '@workday/canvas-system-i
 import styled from '@emotion/styled';
 import {select, number} from '@storybook/addon-knobs';
 
-import {colors, type} from '@workday/canvas-kit-react/core';
+import {colors, type} from '@workday/canvas-kit-react/tokens';
 import README from '../README.md';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Header} from '@workday/canvas-kit-labs-react/header';

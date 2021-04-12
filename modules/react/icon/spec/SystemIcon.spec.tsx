@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
 import SystemIcon, {systemIconStyles} from '../lib/SystemIcon';
-import {colors, iconColors} from '@workday/canvas-kit-react/core';
+import {colors, iconColors} from '@workday/canvas-kit-react/tokens';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
 describe('System Icon', () => {

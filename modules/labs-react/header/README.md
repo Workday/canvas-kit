@@ -281,7 +281,7 @@ background color of the contained lockup
 
 ```tsx
 import {Header, DubLogoTitle} from '@workday/canvas-kit-labs-react/header';
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 <Header
   brand={<DubLogoTitle title="This title will show up instead" bgColor={colors.blueberry600} />}

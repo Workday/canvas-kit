@@ -1,4 +1,4 @@
-import {colors, space} from '@workday/canvas-kit-react/core';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {IconButton} from '@workday/canvas-kit-react/button';

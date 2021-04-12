@@ -1,4 +1,4 @@
-# Canvas Kit Labs React Core
+# Canvas Kit Labs React Tokens
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
@@ -6,7 +6,7 @@
 
 Includes:
 
-- [Canvas Kit Labs React Core](#canvas-kit-labs-react-core)
+- [Canvas Kit Labs React Tokens](#canvas-kit-labs-react-tokens)
   - [Type](#type)
     - [Usage](#usage)
     - [Breaking Change](#breaking-change)
@@ -26,7 +26,7 @@ respectively.
 The usage is the same as the current hierarchy, you just need a different import.
 
 ```tsx
-import {type} from '@workday/canvas-kit-labs-react/core';
+import {type} from '@workday/canvas-kit-labs-react/tokens';
 
 const MyLabel = styled('label')({
   ...type.body,
@@ -67,8 +67,8 @@ The `space` function utilizes the following props:
 ## Usage
 
 ```tsx
-import {space, spaceNumbers} from '@workday/canvas-kit-react/core';
-import {space as spaceFn} from '@workday/canvas-kit-labs-react/core';
+import {space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
+import {space as spaceFn} from '@workday/canvas-kit-labs-react/tokens';
 
 space.s; // 16px
 spaceNumbers.s; // 16

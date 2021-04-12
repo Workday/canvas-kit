@@ -14,7 +14,7 @@ import canvas, {
   colors,
   inputColors,
   spaceNumbers,
-} from '@workday/canvas-kit-react/core';
+} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 

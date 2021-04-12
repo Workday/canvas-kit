@@ -8,7 +8,7 @@ import {action} from '@storybook/addon-actions';
 import styled from '@emotion/styled';
 
 import {Button} from '../../button';
-import {type} from '../../core';
+import {type} from '../../tokens';
 import CookieBanner from '../index';
 import README from '../README.md';
 

@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider} from '../index';
 import {CanvasTheme, CanvasThemePalette, Themeable} from '../lib/theming';
 import README from '../lib/theming/README.md';
-import {H1, colors, type, space, borderRadius} from '@workday/canvas-kit-react/core';
+import {H1, colors, type, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';
 
 const Palettes = styled('div')({

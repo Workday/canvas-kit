@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Menu, MenuItem} from '@workday/canvas-kit-labs-react/menu';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 
 const containerStyles: React.CSSProperties = {
   display: 'flex',

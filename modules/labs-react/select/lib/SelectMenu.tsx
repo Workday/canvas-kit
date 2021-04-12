@@ -3,7 +3,7 @@ import React, {useState, useEffect, useLayoutEffect, useCallback} from 'react';
 import {CSSObject} from '@emotion/core';
 import {EmotionCanvasTheme, ErrorType, Themeable, styled} from '@workday/canvas-kit-react/common';
 import {Placement, Popper, useCloseOnEscape} from '@workday/canvas-kit-react/popup';
-import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react/core';
+import {colors, borderRadius, inputColors} from '@workday/canvas-kit-react/tokens';
 
 import {SelectProps} from './Select';
 import {buttonBorderWidth} from './SelectBase';

@@ -11,7 +11,7 @@ import {
   PartialCanvasThemePalette,
   ContentDirection,
 } from './types';
-import {CanvasColor} from '@workday/canvas-kit-react/core';
+import {CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {pickForegroundColor} from '../utils';
 
 export enum ColorDirection {

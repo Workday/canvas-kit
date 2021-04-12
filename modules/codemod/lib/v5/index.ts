@@ -5,6 +5,8 @@ import removeButtonEnums from './removeButtonEnums';
 import renameButtonRefs from './renameButtonRefs';
 // spacing codemods
 import renameSpacing from './renameSpacing';
+// core and labs/core codemods
+import renameCoreImports from './renameCoreImports';
 
 import {API, FileInfo, Options} from 'jscodeshift';
 
@@ -17,6 +19,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     removeButtonEnums,
     renameButtonRefs,
     renameSpacing,
+    renameCoreImports,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);

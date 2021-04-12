@@ -1,6 +1,6 @@
 import React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
-import {type} from '@workday/canvas-kit-react/core';
+import {type} from '@workday/canvas-kit-react/tokens';
 import {TooltipContainer} from '@workday/canvas-kit-react/tooltip';
 import {Popper} from '@workday/canvas-kit-react/popup';
 

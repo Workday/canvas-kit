@@ -29,8 +29,8 @@ In this example, `options` is an array of objects. Each option contains a `label
 text content of an `<option>`) and a `value` (analagous to the `value` attribute of an `<option>`).
 
 **Note:** While a base Select component is provided in this package, it is **not accessible** when
-used as is. It should be used in tandem with [`FormField`](../../../form-field/react) to
-be made fully accessible (see below).
+used as is. It should be used in tandem with [`FormField`](../../../form-field/react) to be made
+fully accessible (see below).
 
 ```tsx
 import * as React from 'react';
@@ -46,13 +46,11 @@ function Example() {
 
   const [value, setValue] = React.useState('email');
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setValue(event.currentTarget.value);
   };
 
-  return (
-    <Select onChange={handleChange} options={options} value={value} />
-  );
+  return <Select onChange={handleChange} options={options} value={value} />;
 }
 ```
 
@@ -73,7 +71,7 @@ function Example() {
 
   const [value, setValue] = React.useState('email');
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setValue(event.currentTarget.value);
   };
 
@@ -99,7 +97,7 @@ function Example() {
 
   const [value, setValue] = React.useState('California');
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setValue(event.currentTarget.value);
   };
 
@@ -121,7 +119,7 @@ used to customize how each option is rendered.
 import * as React from 'react';
 import Select from '@workday/canvas-kit-labs-react/select';
 import FormField from '@workday/canvas-kit-react/form-field';
-import {colors, typeColors} from '@workday/canvas-kit-react/core';
+import {colors, typeColors} from '@workday/canvas-kit-react/tokens';
 import {
   activityStreamIcon,
   avatarIcon,
@@ -150,7 +148,7 @@ function Example() {
 
   const [value, setValue] = React.useState('Activity Stream');
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setValue(event.currentTarget.value);
   };
 

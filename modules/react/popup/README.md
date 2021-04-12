@@ -224,7 +224,7 @@ Default: `PopupPadding.l`
 
 #### `depth: CanvasDepthValue`
 
-> Depth of the card. Style imported from `@workday/canvas-kit-react/core`.
+> Depth of the card. Style imported from `@workday/canvas-kit-react/tokens`.
 
 Default: `depth[2]`
 

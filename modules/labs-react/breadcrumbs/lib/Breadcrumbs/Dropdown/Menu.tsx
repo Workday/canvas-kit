@@ -9,7 +9,7 @@ import {
   depth,
   space,
   type,
-} from '@workday/canvas-kit-react/core';
+} from '@workday/canvas-kit-react/tokens';
 
 // types
 import {Breadcrumb} from '../types';

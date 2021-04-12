@@ -3,7 +3,7 @@ import * as React from 'react';
 import {styled} from '@workday/canvas-kit-react/common';
 import {css, CSSObject, jsx, keyframes} from '@emotion/core';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
-import {space, colors, depth} from '@workday/canvas-kit-react/core';
+import {space, colors, depth} from '@workday/canvas-kit-react/tokens';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 
 export type SidePanelVariant = 'standard' | 'alternate';

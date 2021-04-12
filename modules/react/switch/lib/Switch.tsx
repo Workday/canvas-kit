@@ -8,7 +8,7 @@ import {
   Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, depth, space} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors, depth, space} from '@workday/canvas-kit-react/tokens';
 
 export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
   /**

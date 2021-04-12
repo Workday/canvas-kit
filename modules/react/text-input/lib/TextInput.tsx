@@ -6,7 +6,7 @@ import {
   styled,
   Themeable,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/core';
+import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
 export interface TextInputProps
   extends Themeable,

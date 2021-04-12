@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {
   ComponentStatesTable,
   withSnapshotsEnabled,

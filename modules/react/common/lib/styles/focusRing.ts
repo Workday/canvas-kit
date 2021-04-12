@@ -1,5 +1,5 @@
 import {keyframes, CSSObject} from '@emotion/core';
-import canvas from '@workday/canvas-kit-react/core';
+import canvas from '@workday/canvas-kit-react/tokens';
 import {EmotionCanvasTheme, defaultCanvasTheme} from '../theming/index';
 import memoize from 'lodash/memoize';
 

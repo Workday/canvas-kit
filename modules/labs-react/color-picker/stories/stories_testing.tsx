@@ -2,8 +2,8 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import React from 'react';
-import {colors} from '@workday/canvas-kit-react/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import ColorPicker from '../lib/ColorPicker';
 

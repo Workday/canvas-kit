@@ -12,7 +12,7 @@ import {
   CanvasSpaceNumbers,
   spaceNumbers,
 } from './lib/space';
-import type, {CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
+import {type, CanvasType, fontFamily, monoFontFamily, CanvasTypeVariant} from './lib/type';
 import {CSSProperties} from './lib/types';
 
 const {default: colors, gradients, ...semanticColors} = canvasColorsWeb;

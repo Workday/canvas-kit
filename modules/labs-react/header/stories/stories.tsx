@@ -11,7 +11,7 @@ import chroma from 'chroma-js';
 import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {colors, space, gradients} from '@workday/canvas-kit-react/core';
+import {colors, space, gradients} from '@workday/canvas-kit-react/tokens';
 import {Button, IconButton} from '@workday/canvas-kit-react/button';
 import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
 import {

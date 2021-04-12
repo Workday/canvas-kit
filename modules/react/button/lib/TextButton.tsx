@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {type} from '@workday/canvas-kit-labs-react/core';
+import {type} from '@workday/canvas-kit-labs-react/tokens';
 import {
   focusRing,
   useTheme,
@@ -7,7 +7,7 @@ import {
   EmotionCanvasTheme,
   createComponent,
 } from '@workday/canvas-kit-react/common';
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/core';
+import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';

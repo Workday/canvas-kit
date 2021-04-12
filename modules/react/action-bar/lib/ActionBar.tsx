@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, commonColors, space} from '@workday/canvas-kit-react/core';
+import {colors, commonColors, space} from '@workday/canvas-kit-react/tokens';
 
 export interface ActionBarProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

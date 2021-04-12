@@ -1,5 +1,10 @@
 import {typeColors} from '@workday/canvas-colors-web';
-import {CSSProperties, type, CanvasTypeVariant, fontFamily} from '@workday/canvas-kit-react/core';
+import {
+  CSSProperties,
+  type as baseType,
+  CanvasTypeVariant,
+  fontFamily,
+} from '@workday/canvas-kit-react/tokens';
 
 export interface CanvasTypeHierarchy {
   brand1: CSSProperties;
@@ -97,10 +102,10 @@ const updatedVariants: Pick<CanvasTypeVariant, 'button' | 'caps'> = {
   },
 };
 
-export default {
+export const type = {
   ...hierarchy,
   variant: {
-    ...type.variant,
+    ...baseType.variant,
     ...updatedVariants,
   },
 };

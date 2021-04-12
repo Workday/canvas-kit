@@ -1,4 +1,4 @@
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 
 // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")

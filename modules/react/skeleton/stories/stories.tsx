@@ -16,7 +16,7 @@ import {Button} from '@workday/canvas-kit-react/button';
 import Skeleton, {SkeletonShape, SkeletonText, SkeletonHeader} from '../index';
 
 import README from '../README.md';
-import canvas from '@workday/canvas-kit-react/core';
+import canvas from '@workday/canvas-kit-react/tokens';
 
 const Container = styled('span')({
   width: '60%',

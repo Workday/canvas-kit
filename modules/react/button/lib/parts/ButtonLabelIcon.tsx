@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {space} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/tokens';
 import isPropValid from '@emotion/is-prop-valid';
 import {ButtonProps} from '../Button';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';

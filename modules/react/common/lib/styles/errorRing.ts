@@ -1,7 +1,7 @@
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
 import {CSSObject} from '@emotion/core';
-import {colors, inputColors} from '@workday/canvas-kit-react/core';
+import {colors, inputColors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 
 const isAccessible = (foreground: string, background: string = colors.frenchVanilla100) => {

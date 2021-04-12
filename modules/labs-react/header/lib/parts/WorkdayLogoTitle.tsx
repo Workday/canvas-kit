@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {HeaderHeight, HeaderTheme, HeaderVariant} from '../shared/types';
 import {miniWdayLogoBlue, wdayLogoWhite, wdayLogoBlue} from '@workday/canvas-kit-react/common';
-import {colors, space} from '@workday/canvas-kit-react/core';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
 
 export type WorkdayLogoTitleProps = {

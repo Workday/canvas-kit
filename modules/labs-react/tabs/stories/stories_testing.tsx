@@ -3,10 +3,10 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {StaticStates} from '@workday/canvas-kit-labs-react/core';
+import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
-import {space} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react/tabs';
 
 import {Simple} from './examples/Simple';

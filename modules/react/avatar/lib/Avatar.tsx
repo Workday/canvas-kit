@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {styled, focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
 import isPropValid from '@emotion/is-prop-valid';
-import {borderRadius, colors} from '@workday/canvas-kit-react/core';
+import {borderRadius, colors} from '@workday/canvas-kit-react/tokens';
 import {SystemIconCircle, SystemIconCircleSize} from '@workday/canvas-kit-react/icon';
 import {userIcon} from '@workday/canvas-system-icons-web';
 

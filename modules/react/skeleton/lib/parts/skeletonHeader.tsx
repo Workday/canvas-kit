@@ -1,4 +1,4 @@
-import canvas from '@workday/canvas-kit-react/core';
+import canvas from '@workday/canvas-kit-react/tokens';
 import * as React from 'react';
 import SkeletonShape from './skeletonShape';
 import {TEXT_BORDER_RADIUS} from './utils';

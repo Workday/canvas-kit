@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Popup, PopupPadding} from '@workday/canvas-kit-react/popup';
-import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/core';
+import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';

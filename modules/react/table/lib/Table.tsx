@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {colors, type} from '@workday/canvas-kit-react/core';
+import {colors, type} from '@workday/canvas-kit-react/tokens';
 
 export const borderWidth = 1;
 export const borderColor = colors.soap400;

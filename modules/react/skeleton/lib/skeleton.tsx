@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
-import canvas from '@workday/canvas-kit-react/core';
+import canvas from '@workday/canvas-kit-react/tokens';
 import {accessibleHide} from '@workday/canvas-kit-react/common';
 
 export interface SkeletonProps {

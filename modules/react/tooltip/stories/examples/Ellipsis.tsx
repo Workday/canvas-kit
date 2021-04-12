@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Button} from '@workday/canvas-kit-react/button';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {space} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export const Ellipsis = () => {
   return (

@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {GenericStyle} from '@workday/canvas-kit-react/common';
 import Column, {ColumnProps} from './Column';
-import canvas, {spaceNumbers} from '@workday/canvas-kit-react/core';
+import canvas, {spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import isPropValid from '@emotion/is-prop-valid';
 
 export interface LayoutProps {

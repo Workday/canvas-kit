@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 
-import {colors, space, type} from '@workday/canvas-kit-react/core';
+import {colors, space, type} from '@workday/canvas-kit-react/tokens';
 import {focusRing, hideMouseFocus} from '@workday/canvas-kit-react/common';
 
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';

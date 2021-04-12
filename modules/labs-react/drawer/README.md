@@ -15,7 +15,7 @@ yarn add @workday/canvas-kit-labs-react
 ```tsx
 import * as React from 'react';
 import {Drawer, DrawerDirection, DrawerHeader} from '@workday/canvas-kit-labs-react/drawer';
-import {space} from '@workday/canvas-kit-react/core';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 <div style={{height: '100vh', position: 'relative'}}>
   <Drawer

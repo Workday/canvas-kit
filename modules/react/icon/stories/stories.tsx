@@ -7,7 +7,7 @@ import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
-import {colors} from '../../core';
+import {colors} from '../../tokens';
 import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../index';
 import README from '../README.md';
 
