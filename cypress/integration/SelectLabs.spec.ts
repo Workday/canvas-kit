@@ -443,7 +443,7 @@ describe('Select', () => {
 
   context('given the "Disabled Options Test" story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Labs/Select', 'Disabled Options Test');
+      h.stories.load('Testing/React/Labs/Select/Cypress', 'Disabled Options Test');
     });
 
     context('when the menu is opened', () => {
@@ -883,17 +883,19 @@ describe('Select', () => {
 
   context(`given the "Portal Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Labs/Select', 'Portal Test');
+      h.stories.load('Testing/React/Labs/Select/Cypress', 'Portal Test');
     });
 
-    context(
-      'when the page is scrolled to the bottom and the bottommost select button is clicked',
-      () => {
+    context('when the page is scrolled to the bottom', () => {
+      beforeEach(() => {
+        cy.scrollTo('bottom');
+        cy.window()
+          .its('scrollY')
+          .as('originalWindowScrollY');
+      });
+
+      context('when the bottommost select button is clicked', () => {
         beforeEach(() => {
-          cy.scrollTo('bottom');
-          cy.window()
-            .its('scrollY')
-            .as('originalWindowScrollY');
           cy.findByLabelText('Label (Bottom)').click();
         });
 
@@ -904,13 +906,31 @@ describe('Select', () => {
             });
           });
         });
-      }
-    );
+      });
+
+      context(
+        `when the blur test button is clicked and then the bottommost select button (which is re-rendered by the test button's blur handler) is clicked`,
+        () => {
+          beforeEach(() => {
+            cy.findByTestId('blur-test-button').click();
+            cy.findByLabelText('Label (Bottom)').click();
+          });
+
+          context('the page', () => {
+            it('should not scroll', () => {
+              cy.window().then($window => {
+                cy.get('@originalWindowScrollY').should('equal', $window.scrollY);
+              });
+            });
+          });
+        }
+      );
+    });
   });
 
   context(`given the "Accessibility Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Labs/Select', 'Accessibility Test');
+      h.stories.load('Testing/React/Labs/Select/Cypress', 'Accessibility Test');
     });
 
     context('when the select button with aria-required set to true is clicked', () => {

@@ -13,6 +13,29 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - fix(common): Remove unintended whitespace around bdo tag in IE11 ([#868](https://github.com/Workday/canvas-kit/pull/868)) [@vibdev](https://github.com/vibdev)
 
+## v4.7.0 (2021-04-12)
+
+### Components
+- fix(select): Fix undesired scrolling when activating the menu ([#1016](https://github.com/Workday/canvas-kit/pull/1016)) [@jamesfan](https://github.com/jamesfan)
+  
+### Infrastructure
+- docs: Fix Github Pages story link in Specifications ([#1005](https://github.com/Workday/canvas-kit/pull/1005)) [@NicholasBoll](https://github.com/NicholasBoll)
+- fix: Fix specification story links [@NicholasBoll](https://github.com/NicholasBoll)
+  
+### CSS
+- feat: Add basic primary theme support to CSS components ([#995](https://github.com/Workday/canvas-kit/pull/995)) [@aaronanderson](https://github.com/aaronanderson)
+
+## v4.6.0 (2021-03-19)
+
+### Components
+
+- feat(popup): Add OverflowTooltip and update Popup behaviors to match a11y specs ([#980](https://github.com/Workday/canvas-kit/pull/980)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+
+- fix(modal): Update readme with correct import ([#988](https://github.com/Workday/canvas-kit/pull/988)) [@mannycarrera4](https://github.com/mannycarrera4)
+- chore: Bump prismjs from 1.17.1 to 1.23.0 ([#986](https://github.com/Workday/canvas-kit/pull/986)) [@dependabot](https://github.com/dependabot)
+- ci: Update setup-node action and remove custom matcher ([#994](https://github.com/Workday/canvas-kit/pull/994)) [@NicholasBoll](https://github.com/NicholasBoll)
 
 ## v4.5.1 (2021-02-26)
 

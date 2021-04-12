@@ -1,8 +1,8 @@
-$wdc-btn-bg-primary: $wdc-color-blueberry-400;
-$wdc-btn-bg-primary-active: $wdc-color-blueberry-600;
-$wdc-btn-bg-primary-hover: $wdc-color-blueberry-500;
-$wdc-btn-bg-primary-focus: $wdc-color-blueberry-400;
-$wdc-btn-bg-primary-disabled: $wdc-color-blueberry-200;
+$wdc-btn-bg-primary: $wdc-color-primary-main;
+$wdc-btn-bg-primary-active: $wdc-color-primary-darkest;
+$wdc-btn-bg-primary-hover: $wdc-color-primary-dark;
+$wdc-btn-bg-primary-focus: $wdc-color-primary-main;
+$wdc-btn-bg-primary-disabled: $wdc-color-primary-light;
 
 $wdc-btn-bg-delete: $wdc-color-cinnamon-500;
 $wdc-btn-bg-delete-focus: $wdc-color-cinnamon-500;
@@ -28,8 +28,8 @@ $wdc-btn-height-l: $wdc-spacing-xl;
 $wdc-btn-split-icon-height: $wdc-spacing-s;
 $wdc-btn-height-l: $wdc-spacing-xl;
 
-$wdc-btn-text: $wdc-color-blueberry-400;
-$wdc-btn-text-hover: $wdc-color-blueberry-500;
+$wdc-btn-text: $wdc-color-primary-main;
+$wdc-btn-text-hover: $wdc-color-primary-dark;
 $wdc-btn-text-color-inverse: $wdc-color-french-vanilla-100;
 
 $wdc-btn-icon-color: $wdc-color-licorice-500;

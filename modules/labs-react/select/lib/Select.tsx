@@ -366,15 +366,6 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
   }
 
-  handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    // Cancel default handling of the event to ensure we maintain control
-    // of focus (i.e., so focus is immediately transferred to the menu when
-    // opening the menu, rather than briefly being applied to the button
-    // and creating a momentary flash of a focus ring around the button).
-    // This has implications for our click handler (see handleClick below).
-    event.preventDefault();
-  };
-
   handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const {menuVisibility} = this.state;
 
@@ -382,8 +373,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       // If we click the button while the menu is in the process of closing,
       // we want to toggle the menu back on. However, we also need to focus
       // the menu since it won't be focused using Popper's onFirstUpdate
-      // callback (because the menu already exists). If we don't focus the
-      // menu, clicking outside the menu to dismiss it on blur won't work.
+      // callback (because the menu already exists).
       case 'close':
       case 'closing':
         if (this.menuRef.current) {
@@ -394,13 +384,9 @@ class Select extends React.Component<SelectProps, SelectState> {
       case 'closed':
         this.toggleMenu(true);
         break;
-      // Otherwise, the menu is opened or in the process of opening. Focus
-      // the button and toggle the menu off. Note that since we're calling
-      // event.preventDefault in our mouseDown handler for the button, we
-      // must manage focus on the button ourselves (the browser will no
-      // longer automatically apply focus to the button when clicking on it).
+      // Otherwise, the menu is opened or in the process of opening; toggle
+      // the menu off.
       default:
-        this.focusButton();
         this.toggleMenu(false);
         break;
     }
@@ -418,17 +404,17 @@ class Select extends React.Component<SelectProps, SelectState> {
     this.fireChangeEvent(this.normalizedOptions[index].value);
   };
 
-  handleMenuBlur = (event: React.FocusEvent<HTMLUListElement>): void => {
-    this.toggleMenu(false);
-  };
-
   handleMenuCloseOnKeyPress = (): void => {
     // Toggle menu off and shift focus back to the button
     this.toggleMenu(false);
     this.focusButton();
   };
 
-  handleKeyDown = (event: React.KeyboardEvent<HTMLElement>): void => {
+  handleMenuCloseOnOutsideClick = (): void => {
+    this.toggleMenu(false);
+  };
+
+  handleKeyDown = (event: React.KeyboardEvent): void => {
     const {options} = this.props;
     const numOptions = options.length;
 
@@ -500,7 +486,18 @@ class Select extends React.Component<SelectProps, SelectState> {
     }
 
     if (isShortcut) {
+      // Call stopPropagation here to limit shortcut key handling to the Select
+      // component. Otherwise, for example, using the typeahead feature of the
+      // Select would end up triggering a number of undesired if actions if the
+      // containing application supports its own keyboard shortcuts.
       event.stopPropagation();
+
+      // Call preventDefault here to maintain control of what happens when
+      // handling shortcut keys. For example, without this call, pressing the
+      // down arrow key would scroll the menu down (since the menu has DOM
+      // focus while its visible and scrolling is the default behavior of the
+      // down arrow key). Instead, we want to provide our own custom behavior
+      // of assistively focusing the next option.
       event.preventDefault();
     }
   };
@@ -521,9 +518,8 @@ class Select extends React.Component<SelectProps, SelectState> {
       ? {
           onClick: this.handleClick,
           onKeyDown: this.handleKeyDown,
-          onMenuBlur: this.handleMenuBlur,
           onMenuCloseOnEscape: this.handleMenuCloseOnKeyPress,
-          onMouseDown: this.handleMouseDown,
+          onMenuCloseOnOutsideClick: this.handleMenuCloseOnOutsideClick,
           onOptionSelection: this.handleOptionSelection,
         }
       : {};

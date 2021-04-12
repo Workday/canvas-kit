@@ -124,13 +124,13 @@ export interface SelectBaseProps extends CoreSelectBaseProps {
    */
   onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void;
   /**
-   * The function called when the SelectBase menu loses focus.
-   */
-  onMenuBlur?: (event: React.FocusEvent<HTMLUListElement>) => void;
-  /**
    * The function called when the Escape key is pressed while the SelectBase menu is the topmost element in the stack.
    */
   onMenuCloseOnEscape?: () => void;
+  /**
+   * The function called when a click occurs outside the SelectBase menu while the menu is the topmost element in the stack.
+   */
+  onMenuCloseOnOutsideClick?: () => void;
   /**
    * The function called when an option in the SelectBase is selected via a click or a keyboard shortcut. The `index` passed to the callback function represents the index of the option which was selected.
    */
@@ -277,8 +277,8 @@ const SelectBase = ({
   menuVisibility = 'closed',
   onChange,
   onKeyDown,
-  onMenuBlur,
   onMenuCloseOnEscape,
+  onMenuCloseOnOutsideClick,
   onOptionSelection,
   options,
   renderOption = defaultRenderOption,
@@ -312,6 +312,9 @@ const SelectBase = ({
         ...(onOptionSelection
           ? {
               onClick: (event: React.MouseEvent) => {
+                // TODO: Figure out why this preventDefault call exists.
+                // Removing it doesn't have any obvious consequences,
+                // but need to do more careful testing.
                 event.preventDefault();
                 onOptionSelection(index);
               },
@@ -428,9 +431,9 @@ const SelectBase = ({
           id={menuId}
           error={error}
           menuRef={menuRef}
-          onBlur={onMenuBlur}
           onKeyDown={onKeyDown}
           onCloseOnEscape={onMenuCloseOnEscape}
+          onCloseOnOutsideClick={onMenuCloseOnOutsideClick}
           placement={menuPlacement}
           shouldAutoFlip={shouldMenuAutoFlip}
           shouldAutoFocus={shouldMenuAutoFocus}
