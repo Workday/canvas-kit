@@ -1,6 +1,7 @@
 import {Meta} from '@storybook/addon-docs/blocks';
 
 import {Box} from '@workday/canvas-kit-labs-react/common';
+import {Color} from './examples/Color';
 import {Depth} from './examples/Depth';
 // import {CustomRange} from './examples/CustomRange';
 // import {JumpControls} from './examples/JumpControls';
@@ -28,12 +29,24 @@ are listed below. Each category has a more detailed explanation in the following
 
 ### Categories
 
+- [Color](#color)
 - [Depth](#depth)
+
+### Color
+
+Color style props allow you to adjust the color and background color of components. There are three
+color props available: `color`, `backgroundColor`, and `bgColor` (an alias for `backgroundColor`).
+
+#### Example
+
+<ExampleCodeBlock code={Color} />
 
 ### Depth
 
 Depth style props allow you to adjust the visual elevation of a component using our depth tokens.
 `Box` applies these tokens via the `depth` prop.
+
+#### Example
 
 <ExampleCodeBlock code={Depth} />
 

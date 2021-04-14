@@ -5,6 +5,7 @@ export type DepthTokenKeys = keyof DepthTokens;
 export type DepthTokenValues = DepthTokens[keyof DepthTokens];
 
 export type DepthProps = {
+  /** sets depth styles (box-shadow & border) */
   depth?: DepthTokenKeys;
 };
 
@@ -16,8 +17,9 @@ const depthFns = {
 /**
  * A style prop function that takes components props and returns depth styles from canvas token values.
  * If no `DepthProps` are found, it returns an empty object.
+ *
  * @example
- * // You'll mostly likely use `depth` in low-level, styled components
+ * // You'll mostly likely use `depth` with low-level, styled components
  * const BoxExample = () => (
  *   <Box depth={3}>Hello, box shadows!</Box>
  * );

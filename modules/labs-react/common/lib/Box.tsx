@@ -2,9 +2,10 @@ import * as React from 'react';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 
 // style props
+import {color, ColorProps} from './utils/color';
 import {depth, DepthProps} from './utils/depth';
 
-export interface BoxProps extends StyledType, DepthProps {
+export interface BoxProps extends StyledType, ColorProps, DepthProps {
   children: React.ReactNode;
 }
 
@@ -12,7 +13,8 @@ const StyledBox = styled('div')<BoxProps>(
   {
     boxSizing: 'border-box',
   },
-  depth
+  depth,
+  color
 );
 
 /**
