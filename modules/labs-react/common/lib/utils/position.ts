@@ -25,8 +25,8 @@ export const positionKeys = {
 };
 
 /**
- * A style prop function that takes components props and returns position styles from canvas token values.
- * If no `DepthProps` are found, it returns an empty object.
+ * A style prop function that takes components props and returns position styles.
+ * If no `PositionProps` are found, it returns an empty object.
  *
  * @example
  * // You'll most likely use `position` with low-level, styled components
@@ -47,7 +47,7 @@ export function position<P extends PositionProps>(props: P) {
     if (key in positionKeys) {
       const attr = positionKeys[key as keyof PositionProps];
       const value = props[key];
-      // @ts-ignore
+      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
       styles[attr] = value;
     }
   }
