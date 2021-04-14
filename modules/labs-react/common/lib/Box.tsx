@@ -1,14 +1,37 @@
 import * as React from 'react';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 
-export interface BoxProps extends StyledType {
+// style props
+import {depth, DepthProps} from './utils/depth';
+
+export interface BoxProps extends StyledType, DepthProps {
   children: React.ReactNode;
 }
 
-const StyledBox = styled('div')<BoxProps>({
-  boxSizing: 'border-box',
-});
+const StyledBox = styled('div')<BoxProps>(
+  {
+    boxSizing: 'border-box',
+  },
+  depth
+);
 
+/**
+ * `Box` is a primitive component that provides a common, ergonomic API around Canvas design tokens.
+ * It is highly flexible, and its primary purpose is to build other components.
+ *
+ * @example
+ * import { Box, BoxProps } from '@workday/canvas-kit-labs-react/common';
+ *
+ * interface CardProps extends BoxProps {
+ *   // card-specific props
+ * }
+ *
+ * // `Card`'s default values are set using `BoxProps`
+ * const Card = (props: CardProps) => (
+ *   <Box depth={2} space="m" {...props}>Hello, Card!</Box>
+ * );
+ *
+ */
 export const Box = createComponent('div')<BoxProps>({
   displayName: 'Box',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
