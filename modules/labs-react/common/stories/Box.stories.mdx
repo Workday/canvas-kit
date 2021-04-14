@@ -3,12 +3,7 @@ import {Meta} from '@storybook/addon-docs/blocks';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 import {Color} from './examples/Color';
 import {Depth} from './examples/Depth';
-// import {CustomRange} from './examples/CustomRange';
-// import {JumpControls} from './examples/JumpControls';
-// import {GoToForm} from './examples/GoToForm';
-// import {ShowAdditionalDetails} from './examples/ShowAdditionalDetails';
-// import {HoistedModel} from './examples/HoistedModel';
-// import {RTL} from './examples/RTL';
+import {Position} from './examples/Position';
 
 <Meta title="Labs/Common/Box" component={Box} />
 
@@ -31,6 +26,7 @@ are listed below. Each category has a more detailed explanation in the following
 
 - [Color](#color)
 - [Depth](#depth)
+- [Position](#position)
 
 ### Color
 
@@ -49,6 +45,15 @@ Depth style props allow you to adjust the visual elevation of a component using 
 #### Example
 
 <ExampleCodeBlock code={Depth} />
+
+### Position
+
+Position style props allow you to adjust the position of a component. These props are not connected
+to our design tokens, but they are often useful for building components.
+
+#### Example
+
+<ExampleCodeBlock code={Position} />
 
 ## Props
 
