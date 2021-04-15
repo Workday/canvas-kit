@@ -15,8 +15,8 @@ about the update.
   - [Space Tokens](#space-tokens)
   - [Compound Components](#compound-components)
 - [Breaking Component Changes](#breaking-component-changes)
-  - [Tabs](#tabs)
   - [Button](#button)
+  - [Tabs](#tabs)
 
 ## General Changes
 
@@ -164,20 +164,38 @@ Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.md)
 
 ## Breaking Component Changes
 
-### Tabs
-
-- `onTabsChange` is now `onActivateTab` and the signature is now:
-  ```tsx
-  function onActivateTab({data: {tab: string}, state: TabsState}): void;
-  ```
-- The `<Tabs>` component no longer accepts the `currentTab` property. The Tabs uses a model now. See
-  story for more details
-
-PR:
-
-- https://github.com/Workday/canvas-kit/pull/953
-
 ### Button
+
+#### Recategorization
+
+There has been common confusion around the large number of buttons Canvas supports and when each
+should be used. To improve the usability of our design system, we have been working to recategorize
+and simplify our button offering. To align with the changes recently made in our Figma libraries, we
+have reorganized our buttons, renaming a few and removing some others. The majority of button use
+cases have been simplified into three different components: `PrimaryButton`, `SecondaryButton`, and
+`TertiaryButton`, each level representing its emphasis and hierarchy in a UI. We hope this makes
+your usage of our buttons more intentional and clear. We have provided a codemod to make all of
+these changes automatic updates.
+
+**Renamed:**
+
+- 🤖 `Button` has been split into `PrimaryButton` and `SecondaryButton` (depending on the `variant`
+  prop).
+- 🤖 `OutlineButton` (`secondary`) is now `SecondaryButton` with an `outline` variant.
+- 🤖 `TextButton` is now `TertiaryButton`.
+
+**Removed:**
+
+- 🤖 `HighlightButton`. Use `SecondaryButton` instead.
+- 🤖 `DropdownButton`. This can be achieved simply using `PrimaryButton` or `SecondaryButton` with
+  an `icon` prop and `iconPosition="right"`.
+
+To see examples of the before and after code, have a look at our
+[codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
+
+#### Exports
+
+Additionally, we have changed some of the button module's export behavior:
 
 - 🤖 `beta_Button` export was removed. The codemod will rename the import to `Button` instead,
   preserving local renaming if it exists.
