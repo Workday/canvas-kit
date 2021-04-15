@@ -2,278 +2,222 @@ import {
   API,
   FileInfo,
   Options,
-  ImportSpecifier,
-  MemberExpression,
-  TSTypeReference,
-  ImportDeclaration,
+  StringLiteral,
+  JSXIdentifier,
+  JSXAttribute,
+  ASTPath,
+  JSXElement,
 } from 'jscodeshift';
 import {getImportRenameMap} from './getImportRenameMap';
 
-/**
- * 1. Find button imports
- * 2. Find `Button`
- *  - If it has variant="primary"
- *    - Swap to `PrimaryButton` and remove variant prop
- *    - Add `PrimaryButton` import if it doesn't exist.
- *  - If not
- *    - Swap to `SecondaryButton` and remove variant prop
- *    - Add `SecondaryButton` import if it doesn't exist
- *
- * 3. Find `HighlightButton`
- *  - Replace with `SecondaryButton`
- *  - Replace import with `SecondaryButton` if it doesn't exist
- *
- * 4. Find `OutlineButton`
- *  - Replace with `SecondaryButton` and remove variant Prop
- *  - Replace import with `SecondaryButton` if it doesn't exist
- *
- * 5. Find `TextButton`
- *  - Replace with `TertiaryButton`
- *  - If variant="text", remove variant prop
- *
- * 6. Find `DropdownButton`
- *  - Replace `DropdownButton` with `SecondaryButton`
- *  - Remove `variant` prop
- *  - Add `con="caretDownIcon" iconPosition="right"`
- *  - Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
- *  - Replace `DropdownButton` import with `SecondaryButton`
- */
-
-// List of imports that will be removed from an import statement
-const importsToRemove = [
-  'ButtonVariant',
-  'ButtonIconPosition',
-  'ButtonSize',
-  'OutlineButtonVariant',
-  'DropdownButtonVariant',
-  'IconButtonVariant',
-  'TextButtonVariant',
-  'DeprecatedButtonVariant',
-  'ButtonIconPosition',
-];
-
-// List of enums used in code that will be translated to string literals
-// before: <Button variant={ButtonVariant.Primary} />
-// after:  <Button variant={"primary"} />
-const enumsToMap = {
-  'ButtonVariant.Primary': 'primary',
-  'ButtonVariant.Secondary': 'secondary',
-  'Button.Variant.Primary': 'primary',
-  'Button.Variant.Secondary': 'secondary',
-  'OutlineButtonVariant.Primary': 'primary',
-  'OutlineButtonVariant.Secondary': 'secondary',
-  'OutlineButtonVariant.Inverse': 'inverse',
-  'OutlineButton.Variant.Primary': 'primary',
-  'OutlineButton.Variant.Secondary': 'secondary',
-  'OutlineButton.Variant.Inverse': 'inverse',
-  'DropdownButtonVariant.Primary': 'primary',
-  'DropdownButtonVariant.Secondary': 'secondary',
-  'DropdownButton.Variant.Primary': 'primary',
-  'DropdownButton.Variant.Secondary': 'secondary',
-  'IconButtonVariant.Square': 'square',
-  'IconButtonVariant.SquareFilled': 'squareFilled',
-  'IconButtonVariant.Plain': 'plain',
-  'IconButtonVariant.Circle': 'circle',
-  'IconButtonVariant.CircleFilled': 'circleFilled',
-  'IconButtonVariant.Inverse': 'inverse',
-  'IconButtonVariant.InverseFilled': 'inverseFilled',
-  'IconButton.Variant.Square': 'square',
-  'IconButton.Variant.SquareFilled': 'squareFilled',
-  'IconButton.Variant.Plain': 'plain',
-  'IconButton.Variant.Circle': 'circle',
-  'IconButton.Variant.CircleFilled': 'circleFilled',
-  'IconButton.Variant.Inverse': 'inverse',
-  'IconButton.Variant.InverseFilled': 'inverseFilled',
-  'TextButtonVariant.Default': 'text',
-  'TextButtonVariant.Inverse': 'inverse',
-  'TextButton.Variant.Default': 'text',
-  'TextButton.Variant.Inverse': 'inverse',
-  'Hyperlink.Variant.Default': 'text',
-  'Hyperlink.Variant.Inverse': 'inverse',
-  'DeprecatedButtonVariant.Primary': 'primary',
-  'DeprecatedButtonVariant.Secondary': 'secondary',
-  'DeprecatedButtonVariant.Delete': 'delete',
-  'deprecated_Button.Variant.Primary': 'primary',
-  'deprecated_Button.Variant.Secondary': 'secondary',
-  'deprecated_Button.Variant.Delete': 'delete',
-  'ButtonIconPosition.Left': 'left',
-  'ButtonIconPosition.Right': 'right',
-  'TextButton.IconPosition.Left': 'left',
-  'TextButton.IconPosition.Right': 'right',
-  'ButtonSize.Small': 'small',
-  'ButtonSize.Medium': 'medium',
-  'ButtonSize.Large': 'large',
-  'Button.Size.Small': 'small',
-  'Button.Size.Medium': 'medium',
-  'Button.Size.Large': 'large',
-  'IconButton.Size.Small': 'small',
-  'IconButton.Size.Medium': 'medium',
-  'IconButton.Size.Large': 'large',
-  'DeleteButton.Size.Small': 'small',
-  'DeleteButton.Size.Medium': 'medium',
-  'DeleteButton.Size.Large': 'large',
-  'OutlineButton.Size.Small': 'small',
-  'OutlineButton.Size.Medium': 'medium',
-  'OutlineButton.Size.Large': 'large',
-  'TextButton.Size.Small': 'small',
-  'TextButton.Size.Medium': 'medium',
-  'HighlightButton.Size.Small': 'small',
-  'HighlightButton.Size.Medium': 'medium',
-  'HighlightButton.Size.Large': 'large',
-  'DropdownButton.Size.Medium': 'medium',
-  'DropdownButton.Size.Large': 'large',
-  'deprecated_Button.Size.Small': 'small',
-  'deprecated_Button.Size.Medium': 'medium',
-  'deprecated_Button.Size.Large': 'large',
-};
-
-// List of enum types that will be converted to union types of string literals
-// before: function foo (variant: ButtonVariant) {}
-// after:  function foo (variant: 'primary' | 'secondary') {}
-const enumToLiteralUnionMap = {
-  ButtonVariant: ['primary', 'secondary'],
-  ButtonIconPosition: ['left', 'right'],
-  ButtonIconSize: ['small', 'medium', 'large'],
-  OutlineButtonVariant: ['primary', 'secondary', 'inverse'],
-  DropdownButtonVariant: ['primary', 'secondary'],
-  IconButtonVariant: [
-    'square',
-    'squareFilled',
-    'plain',
-    'circle',
-    'circleFilled',
-    'inverse',
-    'inverseFilled',
-  ],
-  TextButtonVariant: ['text', 'inverse'],
-  DeprecatedButtonVariant: ['primary', 'secondary', 'delete'],
+const updateJSXTag = (nodePath: ASTPath<JSXElement>, newTag: string) => {
+  (nodePath.value.openingElement.name as JSXIdentifier).name = newTag;
+  if (nodePath.value.closingElement) {
+    (nodePath.value.closingElement.name as JSXIdentifier).name = newTag;
+  }
 };
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
-
   const root = j(file.source);
+  const requiredImportSpecifiers: string[] = [];
 
-  const {containsCanvasImports, importMap} = getImportRenameMap(
-    j,
-    root,
-    '@workday/canvas-kit-react/button'
-  );
-
+  /**
+   * 1. Find button imports
+   */
+  const {containsCanvasImports} = getImportRenameMap(j, root, '@workday/canvas-kit-react/button');
   if (!containsCanvasImports) {
     return file.source;
   }
 
-  // Remove Variant imports
+  /**
+   * 2. Find `Button`
+   *  - If it has variant="primary"
+   *    - Swap to `PrimaryButton` and remove variant prop
+   *    - Add `PrimaryButton` import if it doesn't exist.
+   *  - If not
+   *    - Swap to `SecondaryButton` and remove variant prop
+   *    - Add `SecondaryButton` import if it doesn't exist
+   */
   root
-    .find(j.ImportSpecifier, (node: ImportSpecifier) => {
-      return importsToRemove.includes(node.imported.name);
-    })
-    .remove();
+    .find(j.JSXElement, {openingElement: {name: {name: 'Button'}}})
+    .forEach((nodePath: ASTPath<JSXElement>) => {
+      const attrs = nodePath.value.openingElement.attributes;
+      let isPrimary = false;
 
-  // The following will replace JSX attributes that match something in `enumsToMap`
-  // Example: variant={Button.Variant.Primary} => variant="primary"
-  function findEnumReplacement(
-    node: MemberExpression,
-    candidates = enumsToMap,
-    matched = ''
-  ): null | string {
-    let candidate: keyof typeof candidates;
-    // eslint-disable-next-line guard-for-in
-    for (candidate in candidates) {
-      // base case
-      if (
-        node.object.type === 'Identifier' &&
-        node.property.type === 'Identifier' &&
-        (`${node.object.name}.${node.property.name}${matched}` === candidate ||
-          `${importMap[node.object.name]}.${node.property.name}${matched}` === candidate)
-      ) {
-        return enumsToMap[candidate];
+      const variantProp = attrs?.find(
+        attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
+      );
+      if (variantProp) {
+        isPrimary = ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'primary';
+        // remove variant prop
+        nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
       }
 
-      // We didn't match yet, we'll try splitting the candidate string up into a left and right
-      // portion and try again
-      const parts = candidate.split('.');
-      const last = parts.splice(-1, 1).join('');
-      if (
-        node.property.type === 'Identifier' &&
-        node.property.name === last &&
-        node.object.type === 'MemberExpression'
-      ) {
-        // we have a partial match
-        return findEnumReplacement(node.object, enumsToMap, `.${last}`);
-      }
-    }
-
-    return null;
-  }
-
-  root
-    .find(j.MemberExpression, (node: MemberExpression) => {
-      const matched = findEnumReplacement(node);
-
-      return matched !== null;
-    })
-    .replaceWith(nodePath => {
-      const matched = findEnumReplacement(nodePath.value);
-      return j.literal(matched);
+      const buttonType = isPrimary ? 'PrimaryButton' : 'SecondaryButton';
+      // Swap to `PrimaryButton` or `SecondaryButton`
+      updateJSXTag(nodePath, buttonType);
+      requiredImportSpecifiers.push(buttonType);
     });
 
-  // Rewrite `import { beta_Button as Button } from `@workday/canvas-kit-react/button` to
-  // `import { Button } from '@workday/canvas-kit-react/button'
-  root.find(j.ImportSpecifier, {imported: {name: 'beta_Button'}}).forEach(nodePath => {
-    const parent = nodePath.parent.value as ImportDeclaration;
-    if (
-      parent.source &&
-      typeof parent.source.value === 'string' &&
-      parent.source.value.includes('@workday/canvas-kit-react')
-    ) {
-      nodePath.value.imported = j.identifier('Button');
-      // if the local name is also `Button`, remove it so the AST won't output `{ Button as Button }`
-      if (nodePath.value.local?.name === 'Button') {
-        nodePath.value.local = null;
-      }
-    }
-    return nodePath;
+  /**
+   * 3. Find `HighlightButton`
+   *  - Replace with `SecondaryButton`
+   *  - Replace import with `SecondaryButton` if it doesn't exist
+   */
+  root.find(j.JSXElement, {openingElement: {name: {name: 'HighlightButton'}}}).forEach(nodePath => {
+    updateJSXTag(nodePath, 'SecondaryButton');
+    requiredImportSpecifiers.push('SecondaryButton');
   });
 
   /**
-   * Rewrites usages of GenericTypeAnnotations to union types of string literals
-   * @example
-   * // from
-   * interface Foo {
-   *   variant?: ButtonVariant
-   * }
-   * // to
-   * interface Foo {
-   *   variant:? 'primary' | 'secondary'
-   * }
+   * 4. Find `OutlineButton`
+   *  - Replace with `SecondaryButton` and remove variant Prop
+   *  - Replace import with `SecondaryButton` if it doesn't exist
    */
-  function findTypeRename(node: TSTypeReference): null | string[] {
-    if (node.type === 'TSTypeReference' && node.typeName.type === 'Identifier') {
-      let identifier: keyof typeof enumToLiteralUnionMap;
-      for (identifier in enumToLiteralUnionMap) {
-        if (node.typeName.name === identifier || importMap[node.typeName.name] === identifier) {
-          return enumToLiteralUnionMap[identifier];
-        }
-      }
-    }
+  root.find(j.JSXElement, {openingElement: {name: {name: 'OutlineButton'}}}).forEach(nodePath => {
+    // Swap to `SecondaryButton`
+    updateJSXTag(nodePath, 'SecondaryButton');
 
-    return null;
-  }
+    const attrs = nodePath.value.openingElement.attributes;
 
-  root.find(j.TSTypeReference, findTypeRename).replaceWith(nodePath => {
-    const node = nodePath.value;
-
-    const matches = findTypeRename(node);
-    if (matches) {
-      return j.tsUnionType(
-        matches.map(literal => j.tsLiteralType({type: 'StringLiteral', value: literal}))
+    const variantProp = attrs?.find(
+      attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
+    );
+    if (variantProp && variantProp.type === 'JSXAttribute') {
+      (variantProp.value as StringLiteral).value = 'outline';
+    } else {
+      nodePath.value.openingElement.attributes!.push(
+        j.jsxAttribute(j.jsxIdentifier('variant'), j.stringLiteral('outline'))
       );
     }
 
-    return nodePath.value;
+    requiredImportSpecifiers.push('SecondaryButton');
   });
+
+  /**
+   * 5. Find `TextButton`
+   *  - Replace with `TertiaryButton`
+   *  - If variant="text", remove variant prop
+   */
+  root.find(j.JSXElement, {openingElement: {name: {name: 'TextButton'}}}).forEach(nodePath => {
+    // Swap to `TertiaryButton`
+    updateJSXTag(nodePath, 'TertiaryButton');
+    const attrs = nodePath.value.openingElement.attributes;
+
+    const variantProp = attrs?.find(
+      attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
+    );
+    if (variantProp) {
+      // remove variant prop
+      nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+    }
+
+    requiredImportSpecifiers.push('TertiaryButton');
+  });
+
+  /**
+   * 6. Find `DropdownButton`
+   *  - Replace `DropdownButton` with `SecondaryButton`
+   *  - Remove `variant` prop
+   *  - Add `icon="caretDownIcon" iconPosition="right"`
+   *  - Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
+   *  - Replace `DropdownButton` import with `SecondaryButton`
+   */
+  root.find(j.JSXElement, {openingElement: {name: {name: 'DropdownButton'}}}).forEach(nodePath => {
+    const attrs = nodePath.value.openingElement.attributes;
+    let isPrimary = false;
+
+    const variantProp = attrs?.find(
+      attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
+    );
+    if (variantProp) {
+      isPrimary = ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'primary';
+      // remove variant prop
+      nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+    }
+
+    const buttonType = isPrimary ? 'PrimaryButton' : 'SecondaryButton';
+    // Swap to `PrimaryButton` or `SecondaryButton`
+    updateJSXTag(nodePath, buttonType);
+
+    // Add `icon="caretDownIcon" iconPosition="right"`
+    nodePath.value.openingElement.attributes!.push(
+      j.jsxAttribute(j.jsxIdentifier('icon'), j.stringLiteral('caretDownIcon'))
+    );
+    nodePath.value.openingElement.attributes!.push(
+      j.jsxAttribute(j.jsxIdentifier('iconPosition'), j.stringLiteral('right'))
+    );
+
+    requiredImportSpecifiers.push(buttonType);
+
+    // Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
+    const allImports = root.find(j.ImportDeclaration);
+    const lastImport = allImports.at(allImports.length);
+    if (lastImport) {
+      lastImport.insertAfter(
+        j.importDeclaration(
+          [j.importSpecifier(j.identifier('caretDownIcon'))],
+          j.stringLiteral('@workday/canvas-system-icons-web')
+        )
+      );
+      console.log('zzz');
+      console.log(lastImport);
+    }
+  });
+
+  /**
+   * Remove old imports: `DropdownButton`, `TextButton`, `OutlineButton`, `HighlightButton`, `Button`.
+   * Add new required imports
+   */
+  const buttonImports = root.find(j.ImportDeclaration, {
+    source: {value: '@workday/canvas-kit-react/button'},
+  });
+
+  if (!buttonImports.length) {
+    // Add new specifiers to a new import
+    const allImports = root.find(j.ImportDeclaration);
+    const lastImport = allImports.at(allImports.length);
+    if (lastImport) {
+      lastImport.insertAfter(
+        j.importDeclaration(
+          requiredImportSpecifiers.map(specifier => j.importSpecifier(j.identifier(specifier))),
+          j.stringLiteral('@workday/canvas-kit-react/button')
+        )
+      );
+    }
+  } else {
+    buttonImports.forEach(({node}) => {
+      const specifiersToRemove = [
+        'DropdownButton',
+        'TextButton',
+        'OutlineButton',
+        'HighlightButton',
+        'Button',
+      ];
+
+      // Remove old specifiers
+      if (
+        typeof node.source.value === 'string' &&
+        node.source.value === '@workday/canvas-kit-react/button'
+      ) {
+        node.specifiers?.forEach(specifier => {
+          if (
+            specifier.type === 'ImportSpecifier' &&
+            specifiersToRemove.includes(specifier.imported.name)
+          ) {
+            // delete specifier
+            node.specifiers?.splice(node.specifiers?.indexOf(specifier)!, 1);
+          }
+        });
+      }
+
+      //  Add new specifiers to existing import
+      requiredImportSpecifiers.forEach(specifier => {
+        node.specifiers?.push(j.importSpecifier(j.identifier(specifier)));
+      });
+    });
+  }
 
   return root.toSource();
 }
