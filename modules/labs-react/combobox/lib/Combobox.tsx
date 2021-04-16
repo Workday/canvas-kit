@@ -456,14 +456,16 @@ const Combobox = ({
         )}
         {showingAutocomplete && autocompleteItems && (
           <MenuContainer padding={space.zero} depth={depth[1]}>
-            <AutocompleteList
-              comboboxId={componentId}
-              autocompleteItems={autocompleteItems}
-              selectedIndex={selectedAutocompleteIndex}
-              handleAutocompleteClick={handleAutocompleteClick}
-              labelId={formLabelId}
-              showGroupText={showGroupText}
-            />
+            <Card.Body>
+              <AutocompleteList
+                comboboxId={componentId}
+                autocompleteItems={autocompleteItems}
+                selectedIndex={selectedAutocompleteIndex}
+                handleAutocompleteClick={handleAutocompleteClick}
+                labelId={formLabelId}
+                showGroupText={showGroupText}
+              />
+            </Card.Body>
           </MenuContainer>
         )}
       </InputContainer>

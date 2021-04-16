@@ -60,7 +60,7 @@ export const Placements = withSnapshotsEnabled(() => {
           justifyContent: 'center',
         }}
       >
-        Target
+        <Card.Body>Target</Card.Body>
       </Card>
       {placements.map(placement =>
         !open ? null : (

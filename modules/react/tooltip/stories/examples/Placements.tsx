@@ -21,7 +21,7 @@ export const Placements = () => {
             alignItems: 'center',
           }}
         >
-          {placement}
+          <Card.Body>{placement}</Card.Body>
         </Card>
       </Tooltip>
     );

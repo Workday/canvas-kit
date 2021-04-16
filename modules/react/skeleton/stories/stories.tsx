@@ -87,45 +87,47 @@ storiesOf('Components/Indicators/Skeleton/React', module)
           Reset Skeleton
         </Button>
         <Card width={600}>
-          <div style={{position: 'relative', height: 146}}>
-            {!isLoading && (
-              <div>
-                <div style={{display: 'inline-flex', alignItems: 'center', marginBottom: 8}}>
-                  <Avatar size={Avatar.Size.l}></Avatar>
-                  <h2 style={{marginLeft: 8}}>Header Text Information</h2>
-                </div>
-                <div style={{lineHeight: 2}}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea
-                </div>
-              </div>
-            )}
-
-            <div
-              css={{
-                position: 'absolute',
-                pointerEvents: 'none',
-                top: 6,
-                right: 0,
-                left: 0,
-                animation: !isLoading ? `${fadeOut} 150ms ease-out` : null,
-                animationFillMode: !isLoading ? 'forwards' : null,
-              }}
-            >
-              <Skeleton>
-                <FlexContainer>
-                  <SkeletonShape width={40} height={40} borderRadius={99} />
-                  <Container>
-                    <SkeletonHeader />
-                  </Container>
-                </FlexContainer>
+          <Card.Body>
+            <div style={{position: 'relative', height: 146}}>
+              {!isLoading && (
                 <div>
-                  <SkeletonText lineCount={3} />
+                  <div style={{display: 'inline-flex', alignItems: 'center', marginBottom: 8}}>
+                    <Avatar size={Avatar.Size.l}></Avatar>
+                    <h2 style={{marginLeft: 8}}>Header Text Information</h2>
+                  </div>
+                  <div style={{lineHeight: 2}}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                  </div>
                 </div>
-              </Skeleton>
+              )}
+
+              <div
+                css={{
+                  position: 'absolute',
+                  pointerEvents: 'none',
+                  top: 6,
+                  right: 0,
+                  left: 0,
+                  animation: !isLoading ? `${fadeOut} 150ms ease-out` : null,
+                  animationFillMode: !isLoading ? 'forwards' : null,
+                }}
+              >
+                <Skeleton>
+                  <FlexContainer>
+                    <SkeletonShape width={40} height={40} borderRadius={99} />
+                    <Container>
+                      <SkeletonHeader />
+                    </Container>
+                  </FlexContainer>
+                  <div>
+                    <SkeletonText lineCount={3} />
+                  </div>
+                </Skeleton>
+              </div>
             </div>
-          </div>
+          </Card.Body>
         </Card>
       </div>
     );
