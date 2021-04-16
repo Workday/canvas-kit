@@ -4,8 +4,15 @@ import {TooltipContainer, Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Card} from '@workday/canvas-kit-react/card';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
+const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
+
 export default {
   title: 'Testing/React/Popups/Tooltip',
+  parameters: {
+    chromatic: {
+      delay: fontDelay,
+    },
+  },
 };
 
 export const NonInteractive = () => {

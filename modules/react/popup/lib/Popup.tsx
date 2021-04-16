@@ -183,7 +183,7 @@ export default class Popup extends React.Component<PopupProps> {
           </CloseIconContainer>
         )}
         <Card depth={depth} width="100%" padding={padding}>
-          <Card.Header id={headingId}>{heading}</Card.Header>
+          {heading && <Card.Header id={headingId}>{heading}</Card.Header>}
           <Card.Body>{this.props.children}</Card.Body>
         </Card>
       </Container>
