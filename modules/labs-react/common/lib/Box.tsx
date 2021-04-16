@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
+import styled from '@emotion/styled';
+import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 
 // style props
 import {border, BorderProps} from './utils/border';
@@ -7,13 +8,15 @@ import {color, ColorProps} from './utils/color';
 import {depth, DepthProps} from './utils/depth';
 import {layout, LayoutProps} from './utils/layout';
 import {position, PositionProps} from './utils/position';
+import {space, SpaceProps} from './utils/space';
 
 export type BoxProps = StyledType &
   BorderProps &
   ColorProps &
   DepthProps &
   LayoutProps &
-  PositionProps & {
+  PositionProps &
+  SpaceProps & {
     children: React.ReactNode;
   };
 
@@ -25,7 +28,8 @@ const StyledBox = styled('div')<BoxProps>(
   depth,
   color,
   layout,
-  position
+  position,
+  space
 );
 
 /**
