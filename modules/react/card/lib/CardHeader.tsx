@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {type, space} from '@workday/canvas-kit-react/core';
+import {type, space} from '@workday/canvas-kit-react/tokens';
 import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
 
 export interface CardHeaderProps {
