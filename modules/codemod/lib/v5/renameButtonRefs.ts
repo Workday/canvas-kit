@@ -35,7 +35,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     .replaceWith(nodePath => {
       // only replace via one of our Button imports
       const elementName = nodePath.parent?.parent?.value?.name?.name;
-      if (buttonNames.includes(elementName) || buttonNames.includes(importMap[elementName])) {
+      if (buttonNames.map(n => importMap[n]).includes(elementName)) {
         return j.jsxIdentifier('ref');
       }
       return nodePath.value;

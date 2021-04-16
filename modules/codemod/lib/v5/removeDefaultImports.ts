@@ -5,6 +5,7 @@ import {API, FileInfo, Options, ImportDeclaration, ASTPath} from 'jscodeshift';
 // after:  import { Button } from '@workday/canvas-kit-react/button
 const renameDefaultMap = {
   '@workday/canvas-kit-react/button': 'Button',
+  '@workday/canvas-kit-react/card': 'Card',
 };
 
 export default function transformer(file: FileInfo, api: API, options: Options) {

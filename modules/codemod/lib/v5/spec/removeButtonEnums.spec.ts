@@ -28,7 +28,16 @@ describe('removeButtonEnum', () => {
 
   it('should replace enum types with the equivalent type union of string literals', () => {
     const input = `
-      import '@workday/canvas-kit-react/button'
+      import {
+        ButtonVariant,
+        ButtonIconPosition,
+        ButtonIconSize,
+        OutlineButtonVariant,
+        DropdownButtonVariant,
+        IconButtonVariant,
+        TextButtonVariant,
+        DeprecatedButtonVariant,
+      } from '@workday/canvas-kit-react/button';
 
       export interface MyButtonProps {
         buttonVariant?: ButtonVariant
@@ -43,7 +52,7 @@ describe('removeButtonEnum', () => {
     `;
 
     const expected = `
-      import '@workday/canvas-kit-react/button'
+      import '@workday/canvas-kit-react/button';
 
       export interface MyButtonProps {
         buttonVariant?: "primary" | "secondary"
@@ -62,7 +71,7 @@ describe('removeButtonEnum', () => {
 
   it('should replace enum types in a "type" construct', () => {
     const input = `
-      import '@workday/canvas-kit-react/button'
+      import {ButtonVariant} from '@workday/canvas-kit-react/button';
 
       export type MyButtonProps = {
         variant?: ButtonVariant
@@ -70,7 +79,7 @@ describe('removeButtonEnum', () => {
     `;
 
     const expected = `
-      import '@workday/canvas-kit-react/button'
+      import '@workday/canvas-kit-react/button';
 
       export type MyButtonProps = {
         variant?: "primary" | "secondary"
@@ -82,7 +91,7 @@ describe('removeButtonEnum', () => {
 
   it('should replace enum types in a function declaration', () => {
     const input = `
-      import '@workday/canvas-kit-react/button'
+      import {ButtonVariant} from '@workday/canvas-kit-react/button';
 
       function foo(variant: ButtonVariant) {
         return variant
@@ -90,7 +99,7 @@ describe('removeButtonEnum', () => {
     `;
 
     const expected = `
-      import '@workday/canvas-kit-react/button'
+      import '@workday/canvas-kit-react/button';
 
       function foo(variant: "primary" | "secondary") {
         return variant
@@ -174,7 +183,7 @@ describe('removeButtonEnum', () => {
 
   it('should handle renaming of a MemberExpression of an enum to a string literal', () => {
     const input = `
-      import '@workday/canvas-kit-react/button'
+      import {ButtonVariant} from '@workday/canvas-kit-react/button';
 
       const foo = {
         variant: ButtonVariant.Primary
@@ -182,7 +191,7 @@ describe('removeButtonEnum', () => {
     `;
 
     const expected = `
-      import '@workday/canvas-kit-react/button'
+      import '@workday/canvas-kit-react/button';
 
       const foo = {
         variant: "primary"
