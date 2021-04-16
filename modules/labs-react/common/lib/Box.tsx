@@ -2,12 +2,14 @@ import * as React from 'react';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 
 // style props
+import {border, BorderProps} from './utils/border';
 import {color, ColorProps} from './utils/color';
 import {depth, DepthProps} from './utils/depth';
 import {layout, LayoutProps} from './utils/layout';
 import {position, PositionProps} from './utils/position';
 
 export type BoxProps = StyledType &
+  BorderProps &
   ColorProps &
   DepthProps &
   LayoutProps &
@@ -19,6 +21,7 @@ const StyledBox = styled('div')<BoxProps>(
   {
     boxSizing: 'border-box',
   },
+  border,
   depth,
   color,
   layout,

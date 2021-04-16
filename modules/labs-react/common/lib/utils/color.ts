@@ -20,7 +20,7 @@ const getColor = (token: ColorTokenKeys) => ({
   color: colorTokens[token],
 });
 
-export const colorFns = {
+export const colorProps = {
   backgroundColor: getBackgroundColor,
   bgColor: getBackgroundColor,
   color: getColor,
@@ -28,7 +28,7 @@ export const colorFns = {
 
 /**
  * A style prop function that takes components props and returns color styles from canvas token values.
- * If no `DepthProps` are found, it returns an empty object.
+ * If no `ColorProps` are found, it returns an empty object.
  *
  * @example
  * // You'll most likely use `color` with low-level, styled components
@@ -44,9 +44,9 @@ export const colorFns = {
 export function color<P extends ColorProps>(props: P) {
   let styles = {};
   for (const key in props) {
-    if (key in colorFns) {
+    if (key in colorProps) {
       const token = props[key as keyof ColorProps] as CanvasColor;
-      const colorFn = colorFns[key as keyof ColorProps];
+      const colorFn = colorProps[key as keyof ColorProps];
       const style = colorFn(token);
       styles = {...styles, ...style};
     }
