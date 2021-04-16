@@ -79,7 +79,12 @@ export const CardStates = () => (
       ]}
       columnProps={[{label: 'Default', props: {}}]}
     >
-      {props => <Card {...props}>Card Content</Card>}
+      {({heading, ...props}) => (
+        <Card {...props}>
+          {heading && <Card.Header>{heading}</Card.Header>}
+          <Card.Body>Card Content</Card.Body>
+        </Card>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );
