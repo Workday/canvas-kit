@@ -120,14 +120,16 @@ describe('recategorizeButtons', () => {
 
   it('should replace "DropdownButton" with correct props on "SecondaryButton"', () => {
     const input = `
-      import {DropdownButton} from '@workday/canvas-kit-react/button'
+      import {DropdownButton} from '@workday/canvas-kit-react/button';
 
       <DropdownButton />
     `;
 
+    // Note: jscodeshift can't match formatting on new import declarations.
     const expected = `
-      import {SecondaryButton} from '@workday/canvas-kit-react/button'
-      import {caretDownIcon} from '@workday/canvas-system-icons-web'
+      import {SecondaryButton} from '@workday/canvas-kit-react/button';
+
+      import { caretDownIcon } from "@workday/canvas-system-icons-web";
 
       <SecondaryButton icon="caretDownIcon" iconPosition="right" />
     `;
@@ -137,14 +139,16 @@ describe('recategorizeButtons', () => {
 
   it('should replace Primary "DropdownButton" with correct props on "PrimaryButton"', () => {
     const input = `
-      import {DropdownButton} from '@workday/canvas-kit-react/button'
+      import {DropdownButton} from '@workday/canvas-kit-react/button';
 
       <DropdownButton variant="primary" />
     `;
 
+    // Note: jscodeshift can't match formatting on new import declarations.
     const expected = `
-      import {PrimaryButton} from '@workday/canvas-kit-react/button'
-      import {caretDownIcon} from '@workday/canvas-system-icons-web'
+      import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+      import { caretDownIcon } from "@workday/canvas-system-icons-web";
 
       <PrimaryButton icon="caretDownIcon" iconPosition="right" />
     `;

@@ -152,8 +152,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     requiredImportSpecifiers.push(buttonType);
 
     // Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
-    const allImports = root.find(j.ImportDeclaration);
-    const lastImport = allImports.at(allImports.length);
+    const lastImport = root.find(j.ImportDeclaration).at(-1);
     if (lastImport) {
       lastImport.insertAfter(
         j.importDeclaration(
@@ -161,8 +160,6 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           j.stringLiteral('@workday/canvas-system-icons-web')
         )
       );
-      console.log('zzz');
-      console.log(lastImport);
     }
   });
 
