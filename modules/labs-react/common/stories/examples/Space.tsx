@@ -13,7 +13,12 @@ export const Space = () => (
     >
       Hello, Space!
     </Box>
-    <Box display="inline-block" border={`solid 1px ${colors.blackPepper400}`}>
+    <Box
+      display="inline-block"
+      paddingX={space.xs}
+      paddingY="l"
+      border={`solid 1px ${colors.blackPepper400}`}
+    >
       Hello, Space!
     </Box>
   </>

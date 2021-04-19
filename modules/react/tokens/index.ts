@@ -7,6 +7,7 @@ import InputProvider from './lib/InputProvider';
 import {
   space,
   CanvasSpace,
+  CanvasSpaceKeys,
   CanvasSpaceValues,
   CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
@@ -52,6 +53,7 @@ export type {
   CanvasBorderRadiusValues,
   CanvasColor,
   CanvasSpace,
+  CanvasSpaceKeys,
   CanvasSpaceValues,
   CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
