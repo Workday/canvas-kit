@@ -3,15 +3,7 @@ import * as CSS from 'csstype';
 // splitting out CSS prop types from generic provides better hints and autocomplete for devs
 export type LayoutCSSProps = {
   /** sets display styles  */
-  display?:
-    | CSS.Globals
-    | CSS.DisplayOutside
-    | CSS.DisplayInside
-    | CSS.DisplayInternal
-    | CSS.DisplayLegacy
-    | 'contents'
-    | 'list-item'
-    | 'none';
+  display?: CSS.Property.Display;
   // /** sets height styles */
   height?: number | string;
   /** sets max-height styles */
@@ -23,13 +15,13 @@ export type LayoutCSSProps = {
   /** sets min-width styles */
   minWidth?: number | string;
   /** sets overflow styles */
-  overflow?: CSS.OverflowProperty;
+  overflow?: CSS.Property.Overflow;
   /** sets overflow-x styles */
-  overflowX?: CSS.OverflowXProperty;
+  overflowX?: CSS.Property.OverflowX;
   /** sets overflow-y styles */
-  overflowY?: CSS.OverflowYProperty;
+  overflowY?: CSS.Property.OverflowY;
   /** sets vertical-align styles */
-  verticalAlign?: CSS.VerticalAlignProperty<string>;
+  verticalAlign?: CSS.Property.VerticalAlign;
   // /** sets width styles */
   width?: number | string;
 };

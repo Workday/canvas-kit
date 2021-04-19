@@ -2,9 +2,9 @@ import * as CSS from 'csstype';
 
 export type PositionProps = {
   /** sets position styles  */
-  position?: CSS.PositionProperty;
+  position?: CSS.Property.Position;
   /** sets zIndex styles  */
-  zIndex?: CSS.ZIndexProperty;
+  zIndex?: CSS.Property.ZIndex;
   /** sets top styles  */
   top?: number | string;
   /** sets right styles  */

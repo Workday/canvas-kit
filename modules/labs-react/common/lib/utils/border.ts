@@ -43,13 +43,13 @@ export type BorderRadiusProps = {
 
 export type BorderStyleProps = {
   /** sets border-style styles */
-  borderStyle?: CSS.Globals | CSS.LineStyle;
+  borderStyle?: CSS.Property.BorderStyle;
   /** sets border-top-style styles */
-  borderTopStyle?: CSS.Globals | CSS.LineStyle;
+  borderTopStyle?: CSS.Property.BorderStyle;
   /** sets border-left-style styles */
-  borderLeftStyle?: CSS.Globals | CSS.LineStyle;
+  borderLeftStyle?: CSS.Property.BorderStyle;
   /** sets border-right-style styles */
-  borderRightStyle?: CSS.Globals | CSS.LineStyle;
+  borderRightStyle?: CSS.Property.BorderStyle;
 };
 
 export type BorderWidthProps = {
