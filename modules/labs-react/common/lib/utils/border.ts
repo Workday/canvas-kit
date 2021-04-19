@@ -19,26 +19,26 @@ export type BorderShorthandProps = {
 
 export type BorderColorProps = {
   /** sets border-color styles */
-  borderColor?: CanvasColor;
+  borderColor?: CanvasColor | (string & {});
   /** sets border-top-color styles */
-  borderTopColor?: CanvasColor;
+  borderTopColor?: CanvasColor | (string & {});
   /** sets border-left-color styles */
-  borderLeftColor?: CanvasColor;
+  borderLeftColor?: CanvasColor | (string & {});
   /** sets border-right-color styles */
-  borderRightColor?: CanvasColor;
+  borderRightColor?: CanvasColor | (string & {});
 };
 
 export type BorderRadiusProps = {
   /** sets border-radius styles */
-  borderRadius?: CanvasBorderRadiusTokens;
+  borderRadius?: CanvasBorderRadiusTokens | number | (string & {});
   /** sets border-top-left-radius styles */
-  borderTopLeftRadius?: CanvasBorderRadiusTokens;
+  borderTopLeftRadius?: CanvasBorderRadiusTokens | number | (string & {});
   /** sets border-top-right-radius styles */
-  borderTopRightRadius?: CanvasBorderRadiusTokens;
+  borderTopRightRadius?: CanvasBorderRadiusTokens | number | (string & {});
   /** sets border-bottom-left-radius styles */
-  borderBottomLeftRadius?: CanvasBorderRadiusTokens;
+  borderBottomLeftRadius?: CanvasBorderRadiusTokens | number | (string & {});
   /** sets border-bottom-right-radius styles */
-  borderBottomRightRadius?: CanvasBorderRadiusTokens;
+  borderBottomRightRadius?: CanvasBorderRadiusTokens | number | (string & {});
 };
 
 export type BorderStyleProps = {
@@ -132,15 +132,18 @@ export function border<P extends BorderProps>(props: P) {
         styles[attr] = value;
       }
       if (key in borderColors) {
-        const token = props[key as keyof BorderColorProps] as CanvasColor;
-        const value = colorTokens[token];
+        const propValue = props[key as keyof BorderColorProps] as CanvasColor | string;
+        const value = colorTokens[propValue as CanvasColor] || propValue;
         const attr = borderColors[key as keyof BorderColorProps];
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
       }
       if (key in borderRadii) {
-        const token = props[key as keyof BorderRadiusProps] as CanvasBorderRadiusTokens;
-        const value = borderRadiusTokens[token];
+        const propValue = props[key as keyof BorderRadiusProps] as
+          | CanvasBorderRadiusTokens
+          | string
+          | number;
+        const value = borderRadiusTokens[propValue as CanvasBorderRadiusTokens] || propValue;
         const attr = borderRadii[key as keyof BorderRadiusProps];
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;

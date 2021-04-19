@@ -1,23 +1,22 @@
 import {colors as colorTokens, CanvasColor} from '@workday/canvas-kit-react/tokens';
 
 export type ColorTokens = typeof colorTokens;
-export type ColorTokenKeys = CanvasColor;
 
 export type ColorProps = {
   /** sets background color styles */
-  backgroundColor?: CanvasColor;
+  backgroundColor?: CanvasColor | (string & {});
   /** sets background color styles (an alias for `backgroundColor`) */
-  bgColor?: CanvasColor;
+  bgColor?: CanvasColor | (string & {});
   /** sets color styles */
-  color?: CanvasColor;
+  color?: CanvasColor | (string & {});
 };
 
-const getBackgroundColor = (token: ColorTokenKeys) => ({
-  backgroundColor: colorTokens[token],
+const getBackgroundColor = (value: CanvasColor | string) => ({
+  backgroundColor: colorTokens[value] || value,
 });
 
-const getColor = (token: ColorTokenKeys) => ({
-  color: colorTokens[token],
+const getColor = (value: CanvasColor | string) => ({
+  color: colorTokens[value] || value,
 });
 
 export const colorProps = {
@@ -45,9 +44,9 @@ export function color<P extends ColorProps>(props: P) {
   let styles = {};
   for (const key in props) {
     if (key in colorProps) {
-      const token = props[key as keyof ColorProps] as CanvasColor;
+      const value = props[key as keyof ColorProps] as CanvasColor | string;
       const colorFn = colorProps[key as keyof ColorProps];
-      const style = colorFn(token);
+      const style = colorFn(value);
       styles = {...styles, ...style};
     }
   }

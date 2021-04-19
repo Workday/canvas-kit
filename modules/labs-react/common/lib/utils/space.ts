@@ -5,7 +5,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {space as spaceTokens, CanvasSpace, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
 
-type SpacePropValues = (string & {}) | CanvasSpaceKeys | number;
+type SpacePropValues = CanvasSpaceKeys | number | (string & {});
 
 /** These props automatically adjust for bidirectionality (LTR & RTL) */
 export type LogicalSpaceProps = {
@@ -188,7 +188,7 @@ export function space<P extends SpaceProps & {theme?: PartialEmotionCanvasTheme}
   const {canvas} = useTheme(props.theme);
   let styles = {};
   for (const key in props) {
-    if (key in props) {
+    if (props.hasOwnProperty(key)) {
       if (key in standardSpaceProps) {
         const value = props[key as keyof StandardSpaceProps] as SpacePropValues;
         const spaceFn = standardSpaceProps[key as keyof StandardSpaceProps];
