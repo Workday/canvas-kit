@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/tokens';
 import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
 
-import {CardHeader} from './CardHeader';
+import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
 
 export interface CardProps {
@@ -38,7 +38,7 @@ export interface CardProps {
   height?: number | string;
 
   /**
-   * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Header>`
+   * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
    */
   children?: React.ReactNode;
 }
@@ -72,7 +72,7 @@ export const Card = createComponent('div')({
     );
   },
   subComponents: {
-    Header: CardHeader,
+    Heading: CardHeading,
     Body: CardBody,
   },
 });

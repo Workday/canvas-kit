@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import {type, space} from '@workday/canvas-kit-react/tokens';
 import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
 
-export interface CardHeaderProps {
+export interface CardHeadingProps {
   /**
    * The id of the Card heading. Tie this to an `aria-labelledby` for accessibility.
    */
@@ -12,18 +12,18 @@ export interface CardHeaderProps {
   children?: React.ReactNode;
 }
 
-const Header = styled('h3')<StyledType>(type.h3, {
+const Heading = styled('h3')<StyledType>(type.h3, {
   marginBottom: space.m,
   marginTop: 0,
 });
 
-export const CardHeader = createComponent('h3')({
-  displayName: 'Card.Header',
-  Component: ({children, ...elemProps}: CardHeaderProps, ref, Element) => {
+export const CardHeading = createComponent('h3')({
+  displayName: 'Card.Heading',
+  Component: ({children, ...elemProps}: CardHeadingProps, ref, Element) => {
     return (
-      <Header ref={ref} as={Element} {...elemProps}>
+      <Heading ref={ref} as={Element} {...elemProps}>
         {children}
-      </Header>
+      </Heading>
     );
   },
 });

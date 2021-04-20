@@ -73,9 +73,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           return true;
         });
 
-        const CardHeaderJSX = j.jsxMemberExpression(
+        const CardHeadingJSX = j.jsxMemberExpression(
           j.jsxIdentifier(importMap.Card),
-          j.jsxIdentifier('Header')
+          j.jsxIdentifier('Heading')
         );
 
         const CardBodyJSX = j.jsxMemberExpression(
@@ -101,10 +101,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           !!header
             ? j.jsxElement(
                 j.jsxOpeningElement(
-                  CardHeaderJSX,
+                  CardHeadingJSX,
                   id ? [j.jsxAttribute(j.jsxIdentifier('id'), id.value)] : []
                 ),
-                j.jsxClosingElement(CardHeaderJSX),
+                j.jsxClosingElement(CardHeadingJSX),
                 convertAttributeToChildren(header)
               )
             : undefined,

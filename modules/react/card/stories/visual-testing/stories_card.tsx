@@ -81,7 +81,7 @@ export const CardStates = () => (
     >
       {({heading, ...props}) => (
         <Card {...props}>
-          {heading && <Card.Header>{heading}</Card.Header>}
+          {heading && <Card.Heading>{heading}</Card.Heading>}
           <Card.Body>Card Content</Card.Body>
         </Card>
       )}

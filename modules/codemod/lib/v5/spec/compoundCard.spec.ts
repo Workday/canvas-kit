@@ -15,7 +15,7 @@ describe('card', () => {
     const expected = stripIndent`
       import {Card} from '@workday/canvas-kit-react/card'
 
-      <Card><Card.Header id={id}>Card Heading</Card.Header><Card.Body>Card Contents</Card.Body></Card>
+      <Card><Card.Heading id={id}>Card Heading</Card.Heading><Card.Body>Card Contents</Card.Body></Card>
     `;
 
     expectTransform(input, expected);
@@ -69,7 +69,7 @@ describe('card', () => {
     const expected = stripIndent`
       import {Card as StyledCard} from '@workday/canvas-kit-react/card'
 
-      <StyledCard><StyledCard.Header id={id}>Card Heading</StyledCard.Header><StyledCard.Body>Card Contents</StyledCard.Body></StyledCard>
+      <StyledCard><StyledCard.Heading id={id}>Card Heading</StyledCard.Heading><StyledCard.Body>Card Contents</StyledCard.Body></StyledCard>
     `;
 
     expectTransform(input, expected);
@@ -85,7 +85,7 @@ describe('card', () => {
     const expected = stripIndent`
       import {Card} from '@workday/canvas-kit-react/card'
 
-      <Card><Card.Header id={id}><span>Card Heading</span></Card.Header><Card.Body>Card Contents</Card.Body></Card>
+      <Card><Card.Heading id={id}><span>Card Heading</span></Card.Heading><Card.Body>Card Contents</Card.Body></Card>
     `;
 
     expectTransform(input, expected);
@@ -101,7 +101,7 @@ describe('card', () => {
     const expected = stripIndent`
       import {Card} from '@workday/canvas-kit-react/card'
 
-      <Card><Card.Header id={id}>{getHeading()}</Card.Header><Card.Body>Card Contents</Card.Body></Card>
+      <Card><Card.Heading id={id}>{getHeading()}</Card.Heading><Card.Body>Card Contents</Card.Body></Card>
     `;
 
     expectTransform(input, expected);
@@ -117,7 +117,7 @@ describe('card', () => {
     const expected = stripIndent`
       import {Card} from '@workday/canvas-kit-react/card'
 
-      <Card><Card.Header id={id}>Card Heading</Card.Header><Card.Body><span>Card Contents</span></Card.Body></Card>
+      <Card><Card.Heading id={id}>Card Heading</Card.Heading><Card.Body><span>Card Contents</span></Card.Body></Card>
     `;
 
     expectTransform(input, expected);
@@ -137,7 +137,7 @@ describe('card', () => {
 
       const StyledCard = styled(Card)({});
 
-      <StyledCard><Card.Header id={id}>Card Heading</Card.Header><Card.Body>Card Contents</Card.Body></StyledCard>
+      <StyledCard><Card.Heading id={id}>Card Heading</Card.Heading><Card.Body>Card Contents</Card.Body></StyledCard>
     `;
 
     expectTransform(input, expected);
@@ -161,7 +161,7 @@ describe('card', () => {
         padding: 1px;
       \`;
 
-      <StyledCard><Card.Header id={id}>Card Heading</Card.Header><Card.Body>Card Contents</Card.Body></StyledCard>
+      <StyledCard><Card.Heading id={id}>Card Heading</Card.Heading><Card.Body>Card Contents</Card.Body></StyledCard>
     `;
 
     expectTransform(input, expected);

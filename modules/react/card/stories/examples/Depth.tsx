@@ -5,7 +5,7 @@ import {depth} from '@workday/canvas-kit-react/tokens';
 export const Depth = () => {
   return (
     <Card depth={depth[1]}>
-      <Card.Header>Title</Card.Header>
+      <Card.Heading>Title</Card.Heading>
       <Card.Body>Less depth</Card.Body>
     </Card>
   );
