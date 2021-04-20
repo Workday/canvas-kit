@@ -3,6 +3,7 @@ import removeDefaultImports from './removeDefaultImports';
 // button codemods
 import removeButtonEnums from './removeButtonEnums';
 import renameButtonRefs from './renameButtonRefs';
+import recategorizeButtons from './recategorizeButtons';
 // spacing codemods
 import renameSpacing from './renameSpacing';
 // core and labs/core codemods
@@ -20,6 +21,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     renameButtonRefs,
     renameSpacing,
     renameCoreImports,
+    recategorizeButtons,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);
