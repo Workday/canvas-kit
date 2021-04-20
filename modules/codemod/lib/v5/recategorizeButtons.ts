@@ -108,7 +108,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     const variantProp = attrs?.find(
       attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
     );
-    if (variantProp) {
+    if (variantProp && ((variantProp as JSXAttribute)?.value as StringLiteral)?.value === 'text') {
       // remove variant prop
       nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
     }
@@ -211,7 +211,13 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
       //  Add new specifiers to existing import
       requiredImportSpecifiers.forEach(specifier => {
-        node.specifiers?.push(j.importSpecifier(j.identifier(specifier)));
+        if (
+          !node.specifiers?.find(
+            existing => existing.type === 'ImportSpecifier' && existing.imported.name === specifier
+          )
+        ) {
+          node.specifiers?.push(j.importSpecifier(j.identifier(specifier)));
+        }
       });
     });
   }
