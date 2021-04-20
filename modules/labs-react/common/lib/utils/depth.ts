@@ -10,7 +10,7 @@ export type DepthProps = {
 };
 
 // handler functions for depth props
-const depthFns = {
+export const depthProps = {
   depth: (token: DepthTokenKeys) => depthTokens[token],
 };
 
@@ -31,9 +31,9 @@ const depthFns = {
  */
 export function depth<P extends DepthProps>(props: P): DepthTokenValues {
   for (const key in props) {
-    if (key in depthFns) {
+    if (key in depthProps) {
       const token = props[key as keyof DepthProps] as DepthTokenKeys;
-      const depthFn = depthFns[key as keyof DepthProps];
+      const depthFn = depthProps[key as keyof DepthProps];
       return depthFn(token);
     }
   }

@@ -5,8 +5,6 @@ export type ColorTokens = typeof colorTokens;
 export type ColorProps = {
   /** sets background color styles */
   backgroundColor?: CanvasColor | (string & {});
-  /** sets background color styles (an alias for `backgroundColor`) */
-  bgColor?: CanvasColor | (string & {});
   /** sets color styles */
   color?: CanvasColor | (string & {});
 };
@@ -21,7 +19,6 @@ const getColor = (value: CanvasColor | string) => ({
 
 export const colorProps = {
   backgroundColor: getBackgroundColor,
-  bgColor: getBackgroundColor,
   color: getColor,
 };
 

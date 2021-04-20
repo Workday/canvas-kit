@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+import isPropValid from '@emotion/is-prop-valid';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 
 // style props
@@ -10,17 +11,20 @@ import {layout, LayoutProps} from './utils/layout';
 import {position, PositionProps} from './utils/position';
 import {space, SpaceProps} from './utils/space';
 
+type StyleProps = BorderProps & ColorProps & DepthProps & LayoutProps & PositionProps & SpaceProps;
+
 export type BoxProps = StyledType &
-  BorderProps &
-  ColorProps &
-  DepthProps &
-  LayoutProps &
-  PositionProps &
-  SpaceProps & {
-    children: React.ReactNode;
+  StyleProps & {
+    children?: React.ReactNode;
   };
 
-const StyledBox = styled('div')<BoxProps>(
+const omittedProps = ['display', 'color'];
+
+const shouldForwardProp = (prop: string) => {
+  return isPropValid(prop) && !omittedProps.includes(prop);
+};
+
+const StyledBox = styled('div', {shouldForwardProp})<BoxProps>(
   {
     boxSizing: 'border-box',
   },

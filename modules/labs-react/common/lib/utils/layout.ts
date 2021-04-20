@@ -1,7 +1,6 @@
 import * as CSS from 'csstype';
 
-// splitting out CSS prop types from generic provides better hints and autocomplete for devs
-export type LayoutCSSProps = {
+export type LayoutProps = {
   /** sets display styles  */
   display?: CSS.Property.Display;
   // /** sets height styles */
@@ -26,9 +25,7 @@ export type LayoutCSSProps = {
   width?: number | string;
 };
 
-export type LayoutProps = LayoutCSSProps;
-
-export const layoutKeys = {
+export const layoutProps = {
   display: 'display',
   height: 'height',
   maxHeight: 'maxHeight',
@@ -62,8 +59,8 @@ export const layoutKeys = {
 export function layout<P extends LayoutProps>(props: P) {
   const styles = {};
   for (const key in props) {
-    if (key in layoutKeys) {
-      const attr = layoutKeys[key as keyof LayoutProps];
+    if (key in layoutProps) {
+      const attr = layoutProps[key as keyof LayoutProps];
       const value = props[key];
       // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
       styles[attr] = value;

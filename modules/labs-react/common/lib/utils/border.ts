@@ -106,6 +106,14 @@ const borderWidths = {
   borderRightWidth: 'borderRightWidth',
 };
 
+export const borderProps = {
+  ...borderShorthandStyles,
+  ...borderColors,
+  ...borderRadii,
+  ...borderStyles,
+  ...borderWidths,
+};
+
 /**
  * A style prop function that takes components props and returns border styles. Some props, such as borderRadius and borderColor, are connected to our design tokens.
  * If no `BorderProps` are found, it returns an empty object.

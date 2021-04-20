@@ -15,7 +15,7 @@ export type PositionProps = {
   left?: number | string;
 };
 
-export const positionKeys = {
+export const positionProps = {
   position: 'position',
   zIndex: 'zIndex',
   top: 'top',
@@ -44,8 +44,8 @@ export const positionKeys = {
 export function position<P extends PositionProps>(props: P) {
   const styles = {};
   for (const key in props) {
-    if (key in positionKeys) {
-      const attr = positionKeys[key as keyof PositionProps];
+    if (key in positionProps) {
+      const attr = positionProps[key as keyof PositionProps];
       const value = props[key];
       // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
       styles[attr] = value;
