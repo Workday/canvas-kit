@@ -40,7 +40,7 @@
 
       & {
         box-shadow: inset 0 0 0 1px $_borderColor, 0 0 0 2px $wdc-color-input-background,
-          0 0 0 4px $wdc-color-common-focus-outline;
+          0 0 0 4px $wdc-color-primary-main;
       }
 
       @if ($_type== 'alert') {
@@ -49,20 +49,20 @@
 
         & {
           box-shadow: inset 0 0 0 2px $_borderColor, 0 0 0 2px $wdc-color-input-background,
-            0 0 0 4px $wdc-color-common-focus-outline;
+            0 0 0 4px $wdc-color-primary-main;
         }
       }
     }
 
     &.wdc-form-checkbox + .wdc-form-label:before {
       border-color: $_borderColor;
-      box-shadow: 0 0 0 2px $wdc-color-input-background, 0 0 0 4px $wdc-color-common-focus-outline;
+      box-shadow: 0 0 0 2px $wdc-color-input-background, 0 0 0 4px $wdc-color-primary-main;
     }
 
     &.wdc-form-checkbox:checked,
     &.wdc-form-checkbox.wdc-form-checked {
       + .wdc-form-label:before {
-        border-color: $wdc-color-common-focus-outline;
+        border-color: $wdc-color-primary-main;
       }
     }
   }
@@ -108,29 +108,29 @@
     }
 
     input:checked + label::before {
-      border-color: $wdc-color-blueberry-400;
+      border-color: $wdc-color-primary-main;
       box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px #de2e21, 0 0 0 5px transparent;
     }
 
     input:focus + label::before {
-      border-color: $wdc-color-blueberry-400;
+      border-color: $wdc-color-primary-main;
       border-width: 1px;
-      box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400, 0 0 0 0 $wdc-color-french-vanilla-100;
+      box-shadow: inset 0 0 0 1px $wdc-color-primary-main, 0 0 0 0 $wdc-color-french-vanilla-100;
     }
 
     input:checked:focus + label::before {
-      border-color: $wdc-color-blueberry-400;
+      border-color: $wdc-color-primary-main;
       box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px #de2e21, 0 0 0 5px transparent;
     }
 
     [data-whatinput='keyboard'] & {
       input:focus + label::before {
-        border-color: $wdc-color-blueberry-400;
-        box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400;
+        border-color: $wdc-color-primary-main;
+        box-shadow: inset 0 0 0 1px $wdc-color-primary-main;
       }
 
       input:checked:focus + label::before {
-        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-400,
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-primary-main,
           0 0 0 5px transparent;
       }
     }
@@ -139,7 +139,7 @@
     [data-whatinput='mouse'] &,
     [data-whatinput='touch'] & {
       input:checked:focus + label::before {
-        border-color: $wdc-color-blueberry-400;
+        border-color: $wdc-color-primary-main;
         box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px #de2e21,
           0 0 0 5px transparent;
       }
@@ -187,7 +187,7 @@
     }
 
     input:checked + label::before {
-      border-color: $wdc-color-blueberry-400;
+      border-color: $wdc-color-primary-main;
       box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-cantaloupe-400,
         0 0 0 5px $wdc-color-cantaloupe-600;
     }
@@ -198,19 +198,19 @@
     }
 
     input:checked:focus + label::before {
-      border-color: $wdc-color-blueberry-400;
+      border-color: $wdc-color-primary-main;
       box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-cantaloupe-400,
         0 0 0 5px $wdc-color-cantaloupe-600;
     }
 
     [data-whatinput='keyboard'] & {
       input:focus + label::before {
-        border-color: $wdc-color-blueberry-400;
-        box-shadow: inset 0 0 0 1px $wdc-color-blueberry-400;
+        border-color: $wdc-color-primary-main;
+        box-shadow: inset 0 0 0 1px $wdc-color-primary-main;
       }
 
       input:checked:focus + label::before {
-        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-blueberry-400,
+        box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-primary-main,
           0 0 0 5px transparent;
       }
     }
@@ -219,7 +219,7 @@
     [data-whatinput='mouse'] &,
     [data-whatinput='touch'] & {
       input:checked:focus + label::before {
-        border-color: $wdc-color-blueberry-400;
+        border-color: $wdc-color-primary-main;
         box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $wdc-color-cantaloupe-400,
           0 0 0 5px $wdc-color-cantaloupe-600;
       }
