@@ -251,7 +251,7 @@ PR:
 ### Card
 
 🤖 `Card` is now a compound component. The card is now composed of a `Card.Body` and an optional
-`Card.Header`. This allows direct access to the header and body elements.
+`Card.Heading`. This allows direct access to the header and body elements.
 
 ```tsx
 // before
@@ -261,7 +261,7 @@ PR:
 
 // after
 <Card>
-  <Card.Header id="header-id">Card Title</Card.Header>
+  <Card.Heading id="header-id">Card Title</Card.Heading>
   <Card.Body>Card Body</Card.Body>
 </Card>
 ```
