@@ -10,7 +10,7 @@ import {Depth} from './examples/Depth';
 # Canvas Kit Card
 
 Generic Canvas Card component. The card is a presentational
-[compound component](../../../../modules/docs/mdx/COMPOUND_COMPONENTS.mdx) is a building block for
+[compound component](../../../../modules/docs/mdx/COMPOUND_COMPONENTS.mdx) used as a building block for
 other components, like Popups and Modals.
 
 [> Workday Design Reference](https://design.workday.com/components/containers/cards)
@@ -60,8 +60,8 @@ semantic meaning.
 The `Card.Header` component is an optional sub-component that is meant to describe the card. Since
 the `Card` is a non-semantic presentational component, the `Card.Header` does not automatically have
 any semantic meaning. If your use-case requires the header to label the card, you must do so
-manually. For example, the `Modal` component uses a `Card` and adds a `aria-labelledby` and a `role`
-to the `Card` contaienr component and adds an `id` to the `Card.Header` component:
+manually. For example, the `Modal` component uses a `Card`. It adds an `aria-labelledby` and a `role`
+to the `Card` container component, then adds an `id` to the `Card.Header` component:
 
 ```tsx
 <Card role="dialog" aria-labelledby="card-header">
