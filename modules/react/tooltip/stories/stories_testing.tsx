@@ -8,11 +8,6 @@ const fontDelay = 150; // best guess for the font delay to prevent incorrect Chr
 
 export default {
   title: 'Testing/React/Popups/Tooltip',
-  parameters: {
-    chromatic: {
-      delay: fontDelay,
-    },
-  },
 };
 
 export const NonInteractive = () => {
@@ -28,10 +23,16 @@ export const Placements = withSnapshotsEnabled(() => {
   const [ref, setRef] = React.useState<null | Element>(null);
   const [containerElement, setContainerElement] = React.useState<null | Element>(null);
 
-  React.useLayoutEffect(() => {
-    setContainerElement(document.querySelector('[data-testid="tooltip-container"]'));
-    setRef(document.querySelector('[data-testid="tooltip-target"]'));
-    setOpen(true);
+  React.useEffect(() => {
+    const id = setTimeout(() => {
+      setContainerElement(document.querySelector('[data-testid="tooltip-container"]'));
+      setRef(document.querySelector('[data-testid="tooltip-target"]'));
+      setOpen(true);
+    });
+
+    return () => {
+      clearTimeout(id);
+    };
   }, []);
 
   const placements: Placement[] = [
