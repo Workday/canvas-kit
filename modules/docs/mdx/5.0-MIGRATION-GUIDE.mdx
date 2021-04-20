@@ -265,3 +265,16 @@ Additionally, we have changed some of the button module's export behavior:
       onClick?: React.MouseEventHandler<HTMLButtonElement>;
     }
     ```
+
+### Tabs
+
+- `onTabsChange` is now `onActivateTab` and the signature is now:
+  ```tsx
+  function onActivateTab({data: {tab: string}, state: TabsState}): void;
+  ```
+- The `<Tabs>` component no longer accepts the `currentTab` property. The Tabs uses a model now. See
+  story for more details
+
+PR:
+
+- https://github.com/Workday/canvas-kit/pull/953
