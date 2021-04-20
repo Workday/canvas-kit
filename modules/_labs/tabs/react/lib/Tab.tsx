@@ -114,7 +114,7 @@ const Tab = ({name = '', children, ...elemProps}: TabProps) => {
       role="tab"
       id={`tab-${id}-${tabName}`}
       tabIndex={!!tabName && intentTab === tabName ? undefined : -1}
-      aria-selected={isSelected ? true : undefined}
+      aria-selected={isSelected}
       aria-controls={`tabpanel-${id}-${tabName}`}
       onClick={onSelect}
       onBlur={resetIntentTab}
