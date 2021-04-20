@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-docs",
-  "version": "4.6.0",
+  "version": "4.7.0",
   "description": "Documentation components of Canvas Kit components",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -48,8 +48,8 @@
   ],
   "dependencies": {
     "@storybook/csf": "0.0.1",
-    "@workday/canvas-kit-react-button": "^4.6.0",
-    "@workday/canvas-kit-react-table": "^4.6.0"
+    "@workday/canvas-kit-react-button": "^4.7.0",
+    "@workday/canvas-kit-react-table": "^4.7.0"
   },
   "devDependencies": {
     "glob": "^7.1.6",

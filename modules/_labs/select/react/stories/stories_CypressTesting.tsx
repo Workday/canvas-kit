@@ -1,167 +1,20 @@
 /// <reference path="../../../../../typings.d.ts" />
 import * as React from 'react';
-import {StaticStates} from '@workday/canvas-kit-labs-react-core';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-  controlComponent,
-  customColorTheme,
-} from '../../../../../utils/storybook';
-import Select from '../lib/Select';
-import SelectBase from '../lib/SelectBase';
-import SelectOption from '../lib/SelectOption';
+import {controlComponent} from '../../../../../utils/storybook';
 
 import {colors} from '@workday/canvas-kit-react-core';
 import {Button} from '../../../../button/react';
 import FormField from '../../../../form-field/react';
 import {Modal, useModal} from '../../../../modal/react';
 
+import Select from '../lib/Select';
+
 import {manyOptions, options} from './stories';
 
-const normalizedOptions = options.map(option => {
-  return {
-    data: {},
-    disabled: option.disabled || false,
-    id: option.value,
-    label: option.label || option.value,
-    value: option.value,
-  };
-});
-
-export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Select',
+export default {
+  title: 'Testing/React/Labs/Select/Cypress',
   component: Select,
-});
-
-export const SelectStates = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={[
-        {label: 'Default', props: {}},
-        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
-        {label: 'Error', props: {error: Select.ErrorType.Error}},
-      ]}
-      columnProps={permutateProps(
-        {
-          className: [
-            {label: 'Default', value: ''},
-            {label: 'Hover', value: 'hover'},
-            {label: 'Focus', value: 'focus'},
-            {label: 'Focus Hover', value: 'focus hover'},
-            {label: 'Active', value: 'active'},
-            {label: 'Active Hover', value: 'active hover'},
-          ],
-          disabled: [
-            {label: '', value: false},
-            {label: 'Disabled', value: true},
-          ],
-        },
-        props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
-        }
-      )}
-    >
-      {props => (
-        <Select
-          {...props}
-          onChange={() => {}} // eslint-disable-line no-empty-function
-          options={options}
-        />
-      )}
-    </ComponentStatesTable>
-  </StaticStates>
-);
-
-export const SelectStatesMenuOn = () => (
-  <StaticStates>
-    <ComponentStatesTable
-      rowProps={[
-        {label: 'Default', props: {}},
-        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
-        {label: 'Error', props: {error: Select.ErrorType.Error}},
-      ]}
-      columnProps={[
-        {label: 'Default', props: {}},
-        {label: 'Top', props: {menuPlacement: 'top'}},
-      ]}
-    >
-      {props => {
-        const buttonRef = React.createRef<HTMLButtonElement>();
-        return (
-          <div
-            style={{
-              height: 500,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-            }}
-          >
-            <SelectBase
-              {...props}
-              buttonRef={buttonRef}
-              onChange={() => {}} // eslint-disable-line no-empty-function
-              options={normalizedOptions}
-              focusedOptionIndex={1}
-              menuVisibility="opened"
-              shouldMenuAutoFlip={false}
-              shouldMenuAutoFocus={false}
-            />
-          </div>
-        );
-      }}
-    </ComponentStatesTable>
-  </StaticStates>
-);
-
-export const SelectStatesOption = () => (
-  <div>
-    {[
-      {
-        label: 'Disabled States',
-        columnProps: [
-          {label: 'Default', props: {}},
-          {label: 'Hover', props: {className: 'hover'}},
-        ],
-        rowProps: [{label: 'Disabled', props: {'aria-disabled': true}}],
-      },
-      {
-        label: 'Interaction States',
-        columnProps: [
-          {label: 'Default', props: {}},
-          {label: 'Hover', props: {className: 'hover'}},
-          {label: 'Active', props: {className: 'active'}},
-          {label: 'Active Hover', props: {className: 'active hover'}},
-        ],
-        rowProps: [
-          {label: 'Default', props: {}},
-          {label: 'Assistive-Focus', props: {focused: true}},
-          {label: 'Selected', props: {'aria-selected': true}},
-          {label: 'Assistive-Focus Selected', props: {'aria-selected': true, focused: true}},
-        ],
-      },
-    ].map(statesTable => (
-      <div key={statesTable.label}>
-        <h2>{statesTable.label}</h2>
-        <StaticStates>
-          <ComponentStatesTable
-            rowProps={statesTable.rowProps}
-            columnProps={statesTable.columnProps}
-          >
-            {props => (
-              <ul style={{listStyle: 'none', margin: 0, padding: 0, width: 280}}>
-                <SelectOption {...props}>E-mail</SelectOption>
-              </ul>
-            )}
-          </ComponentStatesTable>
-        </StaticStates>
-      </div>
-    ))}
-  </div>
-);
+};
 
 const disabledOptions = [
   {label: 'Carrier Pigeon', value: 'pigeon', disabled: true},
@@ -211,6 +64,87 @@ const SelectModal = () => {
         </Button>
       </Modal>
     </div>
+  );
+};
+
+const BlurTest = () => {
+  const [clicked, setClicked] = React.useState(false);
+
+  const handleButtonBlur = () => {
+    // Setting clicked updates the state of BlurTest which in turn causes
+    // the contained Select to re-render
+    setClicked(false);
+  };
+
+  const handleButtonClick = () => {
+    setClicked(true);
+  };
+
+  return (
+    <>
+      <div style={{height: '100vh'}}>Empty filler (scroll down)</div>
+      <h2>Blur Test</h2>
+      <p>
+        The following test checks against a timing issue where focus could be applied to the Select
+        Menu before it's been properly positioned, causing the browser to scroll to the top of the
+        page when clicking the Select Button to activate its Menu.
+      </p>
+      <h3>Context</h3>
+      <p>
+        The Select component consists of a Button (the collapsed form of the Select) and a Menu (the
+        dropdown menu displayed when you click on the Button or activate it using assistive
+        technology). The Menu has two important characteristics:
+      </p>
+      <ol>
+        <li>DOM focus is applied to the Menu when it's visible.</li>
+        <li>
+          The Menu is portalled to another location in the DOM outside the DOM hierarchy of the
+          Select component (to enable it to break outside of Modals, for example). Because the Menu
+          is located some distance (DOM-wise) away from it's corresponding Button, it needs to be
+          positioned so that it's visually attached to its Button.
+        </li>
+      </ol>
+      <p>
+        Focusing the Menu before it's been properly positioned next to the Button will cause the
+        browser to scroll to the wrong location (where the Menu was <strong>before</strong> it was
+        positioned next to the button -- this is generally the top of the page).
+      </p>
+      <h3>Test</h3>
+      <p>
+        The following test creates a scenario where such a timing issue could potentially occur:
+      </p>
+      <ol>
+        <li>The page is long (requires scrolling).</li>
+        <li>
+          There's a button and a Select near the bottom of the page. The button has a blur handler
+          which triggers a re-render of the Select.
+        </li>
+        <li>You click on the button to give it focus.</li>
+        <li>
+          You then click on the Select. This activates the Menu and immediately triggers the blur
+          handler for the button (which re-renders the Select).
+        </li>
+      </ol>
+      <p>
+        This creates a tricky situation where we could potentially assign focus to the Menu before
+        it's been positioned since we're re-rendering the Menu immediately after it's been
+        activated. If we assign focus too soon, the page will scroll to the top and you'll need to
+        scroll back down to access the Menu you just activated.
+      </p>
+      <p>
+        To run the test, click on the "Click me first!" button, and then click directly on the
+        Select below it (directly on the Select itself, <strong>not</strong> the label).{' '}
+        <strong>No scrolling should occur when the Select is clicked.</strong>
+      </p>
+      <button onBlur={handleButtonBlur} onClick={handleButtonClick} data-testid="blur-test-button">
+        {clicked
+          ? 'Clicked! Now click directly on the Select below (not the label)'
+          : 'Click me first!'}
+      </button>
+      <FormField label="Label (Bottom)" inputId="select-bottom" style={{marginTop: '10px'}}>
+        {controlComponent(<Select name="contact" options={options} />)}
+      </FormField>
+    </>
   );
 };
 
@@ -308,24 +242,7 @@ export const PortalTest = () => (
       <SelectModal />
     </Container>
     <Container>
-      <p>This Select is forced to display its menu upwards since it's at the bottom the page.</p>
-      <FormField label="Label (Bottom)" inputId="select-bottom" error={FormField.ErrorType.Error}>
-        {controlComponent(<Select name="contact" options={options} />)}
-      </FormField>
+      <BlurTest />
     </Container>
   </div>
 );
-
-const themedParameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
-
-export const SelectThemedStates = () => <SelectStates />;
-export const SelectThemedStatesMenuOn = () => <SelectStatesMenuOn />;
-export const SelectThemedStatesOption = () => <SelectStatesOption />;
-
-SelectThemedStates.parameters = themedParameters;
-SelectThemedStatesMenuOn.parameters = themedParameters;
-SelectThemedStatesOption.parameters = themedParameters;
