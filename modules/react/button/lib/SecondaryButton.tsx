@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/core';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {
   GrowthBehavior,
   useTheme,

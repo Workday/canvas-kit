@@ -3,7 +3,7 @@ import * as React from 'react';
 import {controlComponent} from '../../../../utils/storybook';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 
@@ -48,20 +48,16 @@ const SelectModal = () => {
 
   return (
     <div>
-      <Button variant="primary" {...targetProps}>
-        Show Modal
-      </Button>
+      <PrimaryButton {...targetProps}>Show Modal</PrimaryButton>
       <Modal heading="Modal with Select" {...modalProps}>
         <p>The menu for this Select should break out of the Modal.</p>
         <FormField label="Label" inputId="select-modal">
           {controlComponent(<Select name="city" options={manyOptions} />)}
         </FormField>
-        <Button style={{marginRight: '16px'}} onClick={closeModal} variant="primary">
+        <PrimaryButton style={{marginRight: '16px'}} onClick={closeModal}>
           Submit
-        </Button>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        </PrimaryButton>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </div>
   );

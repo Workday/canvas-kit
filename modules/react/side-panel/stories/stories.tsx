@@ -12,7 +12,7 @@ import {colors, type} from '@workday/canvas-kit-react/tokens';
 import README from '../README.md';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Header} from '@workday/canvas-kit-labs-react/header';
-import {Button, IconButton} from '@workday/canvas-kit-react/button';
+import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 
@@ -104,7 +104,7 @@ class SidePanelWrapper extends React.Component<{}, SidePanelState> {
         header={'Side Panel Header'}
       >
         {open ? (
-          <Button variant="primary">Add New</Button>
+          <PrimaryButton>Add New</PrimaryButton>
         ) : (
           <AddButton toggled={false} size="small" variant="circleFilled" aria-label="Add">
             <SystemIcon icon={plusIcon} />
@@ -173,7 +173,7 @@ storiesOf('Components/Containers/Side Panel/React', module)
               alert('clicked avatar');
             }}
           />
-          <Button variant="primary">Sign Up</Button>
+          <PrimaryButton>Sign Up</PrimaryButton>
         </Header>
         <SidePanelWrapper />
       </div>

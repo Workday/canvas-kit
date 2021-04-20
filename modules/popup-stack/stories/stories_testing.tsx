@@ -11,7 +11,7 @@ import {
   useBringToTopOnClick,
   useCloseOnEscape,
 } from '@workday/canvas-kit-react/popup';
-import {DeleteButton, Button} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export default {
   title: 'Testing/React/Popups/Popup Stack',
@@ -131,11 +131,11 @@ export const MixedPopupTypes = () => {
                         <DeleteButton style={{marginRight: '16px'}} onClick={onClose}>
                           Really Delete
                         </DeleteButton>
-                        <Button onClick={onClose}>Cancel</Button>
+                        <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
                       </>
                     )}
                   </TempPopup>
-                  <Button onClick={onClose}>Cancel</Button>
+                  <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
                 </>
               )}
             </TempPopup>

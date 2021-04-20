@@ -6,115 +6,47 @@ import withReadme from 'storybook-readme/with-readme';
 
 import {editIcon, playCircleIcon, activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 storiesOf('Components/Buttons/Button/React/Standard', module)
-  .addParameters({component: Button})
+  .addParameters({component: SecondaryButton})
   .addDecorator(withReadme(README))
-  .add('Primary', () => (
-    <div className="story">
-      <h3>Large Primary</h3>
-      <Button size="large" variant="primary">
-        Primary
-      </Button>
-      <Button size="large" variant="primary" icon={activityStreamIcon}>
-        Primary
-      </Button>
-      <Button size="large" variant="primary" icon={playCircleIcon} dataLabel="1:00">
-        Primary
-      </Button>
-      <Button disabled={true} size="large" variant="primary" icon={playCircleIcon} dataLabel="1:00">
-        Primary
-      </Button>
-
-      <h3>Medium Primary</h3>
-      <Button size="medium" variant="primary">
-        Primary
-      </Button>
-      <Button size="medium" variant="primary" icon={editIcon}>
-        Primary
-      </Button>
-      <Button size="medium" variant="primary" icon={playCircleIcon} dataLabel="1:00">
-        Primary
-      </Button>
-      <Button
-        disabled={true}
-        size="medium"
-        variant="primary"
-        icon={playCircleIcon}
-        dataLabel="1:00"
-      >
-        Primary
-      </Button>
-
-      <h3>Small Primary</h3>
-      <Button size="small" variant="primary">
-        Primary
-      </Button>
-      <Button disabled={true} size="small" variant="primary">
-        Primary
-      </Button>
-
-      <h3>Growing Primary</h3>
-      <Button size="large" variant="primary" grow={true}>
-        Primary
-      </Button>
-    </div>
-  ))
   .add('Secondary', () => (
     <div className="story">
       <h3>Large Secondary</h3>
-      <Button size="large" variant="secondary">
+      <SecondaryButton size="large">Secondary</SecondaryButton>
+      <SecondaryButton size="large" icon={activityStreamIcon}>
         Secondary
-      </Button>
-      <Button size="large" variant="secondary" icon={activityStreamIcon}>
+      </SecondaryButton>
+      <SecondaryButton size="large" icon={playCircleIcon} dataLabel="1:00">
         Secondary
-      </Button>
-      <Button size="large" variant="secondary" icon={playCircleIcon} dataLabel="1:00">
+      </SecondaryButton>
+      <SecondaryButton disabled={true} size="large" icon={playCircleIcon} dataLabel="1:00">
         Secondary
-      </Button>
-      <Button
-        disabled={true}
-        size="large"
-        variant="secondary"
-        icon={playCircleIcon}
-        dataLabel="1:00"
-      >
-        Secondary
-      </Button>
+      </SecondaryButton>
 
       <h3>Medium Secondary</h3>
-      <Button size="medium" variant="secondary">
+      <SecondaryButton size="medium">Secondary</SecondaryButton>
+      <SecondaryButton size="medium" icon={editIcon}>
         Secondary
-      </Button>
-      <Button size="medium" variant="secondary" icon={editIcon}>
+      </SecondaryButton>
+      <SecondaryButton size="medium" icon={playCircleIcon} dataLabel="1:00">
         Secondary
-      </Button>
-      <Button size="medium" variant="secondary" icon={playCircleIcon} dataLabel="1:00">
+      </SecondaryButton>
+      <SecondaryButton disabled={true} size="medium" icon={playCircleIcon} dataLabel="1:00">
         Secondary
-      </Button>
-      <Button
-        disabled={true}
-        size="medium"
-        variant="secondary"
-        icon={playCircleIcon}
-        dataLabel="1:00"
-      >
-        Secondary
-      </Button>
+      </SecondaryButton>
 
       <h3>Small Secondary</h3>
-      <Button size="small" variant="secondary">
+      <SecondaryButton size="small">Secondary</SecondaryButton>
+      <SecondaryButton disabled={true} size="small">
         Secondary
-      </Button>
-      <Button disabled={true} size="small" variant="secondary">
-        Secondary
-      </Button>
+      </SecondaryButton>
 
       <h3>Growing Secondary</h3>
-      <Button size="large" variant="secondary" grow={true}>
+      <SecondaryButton size="large" grow={true}>
         Growing Secondary
-      </Button>
+      </SecondaryButton>
     </div>
   ));

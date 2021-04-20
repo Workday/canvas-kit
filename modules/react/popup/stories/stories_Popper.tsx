@@ -2,7 +2,7 @@
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
   Popper,
@@ -33,9 +33,9 @@ export const PopperStory = () => {
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
-      <Button ref={buttonRef} variant="primary" onClick={onClickButton}>
+      <PrimaryButton ref={buttonRef} onClick={onClickButton}>
         Toggle Popup
-      </Button>
+      </PrimaryButton>
       <Popper placement={'bottom'} open={open} anchorElement={buttonRef.current!} ref={popupRef}>
         <Popup width={400} heading={'Popper Example'} handleClose={onClose}>
           <h3>Welcome to your popup positioned by Popper!</h3>
