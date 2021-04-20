@@ -1,24 +1,20 @@
 import * as React from 'react';
 import {
-  Button,
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
   DeleteButton,
-  DropdownButton,
-  HighlightButton,
-  OutlineButton,
-  TextButton,
   deprecated_Button as DeprecatedButton,
 } from '../index';
 import {render, fireEvent} from '@testing-library/react';
 import {ElementComponent} from '../../common';
-import {ButtonProps} from '../lib/Button';
+import {SecondaryButtonProps as ButtonProps} from '../lib/SecondaryButton';
 
 ([
-  Button,
+  PrimaryButton,
+  SecondaryButton,
+  TertiaryButton,
   DeleteButton,
-  DropdownButton,
-  HighlightButton,
-  OutlineButton,
-  TextButton,
   DeprecatedButton,
   // We need to cast as `any` and cast as a specific button because TS will complain about no call signatures...
 ] as any[]).forEach((ButtonComponent: ElementComponent<'button', ButtonProps>) => {
