@@ -7,7 +7,7 @@ describe('Button', () => {
 
   context('given primary buttons are rendered', () => {
     beforeEach(() => {
-      h.stories.load('Components/Buttons/Button/React/Standard', 'Primary');
+      h.stories.load('Components/Buttons/Button/React/Secondary', 'Default');
     });
 
     it('should not have any axe errors', () => {
