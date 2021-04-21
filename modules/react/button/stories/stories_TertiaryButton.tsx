@@ -34,8 +34,8 @@ const buttonContainer = {
   },
 };
 
-storiesOf('Components/Buttons/Button/React/Text', module)
-  .addParameters({component: TextButton})
+storiesOf('Components/Buttons/Button/React/Tertiary', module)
+  .addParameters({component: TertiaryButton})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">

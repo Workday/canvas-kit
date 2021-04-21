@@ -14,7 +14,7 @@ import {Container, stateTableColumnProps} from './utils';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Text Button',
+  title: 'Testing/React/Buttons/Button/Tertiary Button',
   component: TertiaryButton,
 });
 
