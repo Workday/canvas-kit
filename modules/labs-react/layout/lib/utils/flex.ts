@@ -1,4 +1,4 @@
-import CSS from 'csstype';
+import * as CSS from 'csstype';
 
 export type FlexProps = {
   alignItems?: CSS.Property.AlignItems;
@@ -45,7 +45,7 @@ export const flexProps = {
 export function flex<P extends FlexProps>(props: P) {
   const styles = {};
   for (const key in props) {
-    if (key in props) {
+    if (key in flexProps) {
       const attr = flexProps[key as keyof FlexProps];
       const value = props[key];
       // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
