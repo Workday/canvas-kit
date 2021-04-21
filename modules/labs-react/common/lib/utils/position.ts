@@ -1,10 +1,10 @@
-import * as CSS from 'csstype';
+import {Property} from 'csstype';
 
 export type PositionProps = {
   /** sets position styles  */
-  position?: CSS.Property.Position;
+  position?: Property.Position;
   /** sets zIndex styles  */
-  zIndex?: CSS.Property.ZIndex;
+  zIndex?: Property.ZIndex;
   /** sets top styles  */
   top?: number | string;
   /** sets right styles  */

@@ -1,8 +1,8 @@
-import * as CSS from 'csstype';
+import {Property} from 'csstype';
 
 export type LayoutProps = {
   /** sets display styles  */
-  display?: CSS.Property.Display;
+  display?: Property.Display;
   // /** sets height styles */
   height?: number | string;
   /** sets max-height styles */
@@ -14,13 +14,13 @@ export type LayoutProps = {
   /** sets min-width styles */
   minWidth?: number | string;
   /** sets overflow styles */
-  overflow?: CSS.Property.Overflow;
+  overflow?: Property.Overflow;
   /** sets overflow-x styles */
-  overflowX?: CSS.Property.OverflowX;
+  overflowX?: Property.OverflowX;
   /** sets overflow-y styles */
-  overflowY?: CSS.Property.OverflowY;
+  overflowY?: Property.OverflowY;
   /** sets vertical-align styles */
-  verticalAlign?: CSS.Property.VerticalAlign;
+  verticalAlign?: Property.VerticalAlign;
   // /** sets width styles */
   width?: number | string;
 };

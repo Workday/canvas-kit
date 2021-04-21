@@ -1,4 +1,4 @@
-import * as CSS from 'csstype';
+import {Property} from 'csstype';
 import {
   borderRadius as borderRadiusTokens,
   CanvasBorderRadiusTokens,
@@ -43,13 +43,13 @@ export type BorderRadiusProps = {
 
 export type BorderStyleProps = {
   /** sets border-style styles */
-  borderStyle?: CSS.Property.BorderStyle;
+  borderStyle?: Property.BorderStyle;
   /** sets border-top-style styles */
-  borderTopStyle?: CSS.Property.BorderStyle;
+  borderTopStyle?: Property.BorderStyle;
   /** sets border-left-style styles */
-  borderLeftStyle?: CSS.Property.BorderStyle;
+  borderLeftStyle?: Property.BorderStyle;
   /** sets border-right-style styles */
-  borderRightStyle?: CSS.Property.BorderStyle;
+  borderRightStyle?: Property.BorderStyle;
 };
 
 export type BorderWidthProps = {

@@ -1,14 +1,14 @@
-import * as CSS from 'csstype';
+import {Property} from 'csstype';
 
 export type FlexProps = {
-  alignItems?: CSS.Property.AlignItems;
-  alignContent?: CSS.Property.AlignContent;
-  justifyItems?: CSS.Property.JustifyItems;
-  justifyContent?: CSS.Property.JustifyContent;
-  flexWrap?: CSS.Property.FlexWrap;
-  wrap?: CSS.Property.FlexWrap; // a helpful alias for flexWrap
-  flexDirection?: CSS.Property.FlexDirection;
-  direction?: CSS.Property.FlexDirection; // a helpful alias for flexDirection
+  alignItems?: Property.AlignItems;
+  alignContent?: Property.AlignContent;
+  justifyItems?: Property.JustifyItems;
+  justifyContent?: Property.JustifyContent;
+  flexWrap?: Property.FlexWrap;
+  wrap?: Property.FlexWrap; // a helpful alias for flexWrap
+  flexDirection?: Property.FlexDirection;
+  direction?: Property.FlexDirection; // a helpful alias for flexDirection
   flex?: number | string;
   flexGrow?: number | string;
   grow?: number | string; // a helpful alias for flexGrow
@@ -16,9 +16,9 @@ export type FlexProps = {
   shrink?: number | string; // a helpful alias for flexShrink
   flexBasis?: number | string;
   basis?: number | string; // a helpful alias for flexBasis
-  justifySelf?: CSS.Property.JustifySelf;
-  alignSelf?: CSS.Property.AlignSelf;
-  order?: CSS.Property.Order;
+  justifySelf?: Property.JustifySelf;
+  alignSelf?: Property.AlignSelf;
+  order?: Property.Order;
 };
 
 export const flexProps = {
