@@ -67,12 +67,12 @@ export const SecondaryButton = createComponent('button')({
       size={size}
       {...elemProps}
     >
-      {icon && iconPosition === 'left' && (
+      {icon && size !== 'small' && iconPosition === 'left' && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
       <ButtonLabel>{children}</ButtonLabel>
       {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
-      {icon && iconPosition === 'right' && (
+      {icon && size !== 'small' && iconPosition === 'right' && (
         <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
       )}
     </ButtonContainer>
