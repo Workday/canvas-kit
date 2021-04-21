@@ -182,6 +182,7 @@ these changes automatic updates.
 - 🤖 `Button` has been split into `PrimaryButton` and `SecondaryButton` (depending on the `variant`
   prop).
 - 🤖 `OutlineButton` (`secondary`) is now `SecondaryButton` with an `outline` variant.
+- 🤖 `OutlineButton` (`inverse`) is now `SecondaryButton` with an `inverse` variant.
 - 🤖 `TextButton` is now `TertiaryButton`.
 
 **Removed:**
@@ -192,6 +193,11 @@ these changes automatic updates.
 
 To see examples of the before and after code, have a look at our
 [codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
+
+Note: There may still be some confusion between the filled default and the `outline`
+`SecondaryButton`. For accessibility reasons, the `outline` styling will become the new default and
+the filled version will be removed in a future update. This is in progress, which is why it has been
+pushed to v6.
 
 #### Exports
 
@@ -215,17 +221,18 @@ Additionally, we have changed some of the button module's export behavior:
 - 🤖 Enums have been removed from all buttons. String literals are used instead. The codemod will
   write any usages of an enum to the string literal. If you used an enum as a type, the codemod will
   expand to a union of string literals. You could change the union manually instead to be something
-  like `ButtonProps['variant']` if you prefer not to duplicate the union of string literals.
+  like `SecondaryButtonProps['variant']` if you prefer not to duplicate the union of string
+  literals.
   ```tsx
   // before
-  <Button variant={Button.Variant.Primary} />;
+  <Button size={Button.Size.Large} />;
   interface Props {
-    variant: ButtonVariant;
+    size: ButtonSize;
   }
   // after
-  <Button variant="primary" />;
+  <SecondaryButton size="large" />;
   interface Props {
-    variant: 'primary' | 'secondary';
+    size: 'small' | 'medium' | 'large';
   }
   ```
 - Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and

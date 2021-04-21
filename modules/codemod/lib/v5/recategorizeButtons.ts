@@ -72,7 +72,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
   /**
    * 4. Find `OutlineButton`
-   *  - Replace with `SecondaryButton` and remove variant Prop
+   *  - Replace with `SecondaryButton`
+   *  - If variant is 'inverse', keep it. Otherwise, replace variant with 'outline'
    *  - Replace import with `SecondaryButton` if it doesn't exist
    */
   root.find(j.JSXElement, {openingElement: {name: {name: 'OutlineButton'}}}).forEach(nodePath => {
@@ -85,7 +86,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
     );
     if (variantProp && variantProp.type === 'JSXAttribute') {
-      (variantProp.value as StringLiteral).value = 'outline';
+      if ((variantProp.value as StringLiteral).value !== 'inverse') {
+        (variantProp.value as StringLiteral).value = 'outline';
+      }
     } else {
       nodePath.value.openingElement.attributes!.push(
         j.jsxAttribute(j.jsxIdentifier('variant'), j.stringLiteral('outline'))

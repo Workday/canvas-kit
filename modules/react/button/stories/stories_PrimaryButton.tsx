@@ -9,7 +9,7 @@ import {editIcon, playCircleIcon, activityStreamIcon} from '@workday/canvas-syst
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
-storiesOf('Components/Buttons/Button/React/Standard', module)
+storiesOf('Components/Buttons/Button/React', module)
   .addParameters({component: PrimaryButton})
   .addDecorator(withReadme(README))
   .add('Primary', () => (

@@ -102,6 +102,22 @@ describe('recategorizeButtons', () => {
     expectTransform(input, expected);
   });
 
+  it('should replace inverse "OutlineButton" with "SecondaryButton" with "inverse" variant', () => {
+    const input = `
+      import {OutlineButton} from '@workday/canvas-kit-react/button'
+
+      <OutlineButton variant='inverse'/>
+    `;
+
+    const expected = `
+      import {SecondaryButton} from '@workday/canvas-kit-react/button'
+
+      <SecondaryButton variant='inverse'/>
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should replace "TextButton" with "TertiaryButton"', () => {
     const input = `
       import {TextButton} from '@workday/canvas-kit-react/button'

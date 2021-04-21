@@ -43,9 +43,9 @@ export const PrimaryButton = createComponent('button')({
       // eslint-disable-next-line react-hooks/rules-of-hooks
       theme = useTheme(),
       size = 'medium',
+      iconPosition = 'left',
       dataLabel,
       icon,
-      iconPosition,
       children,
       ...elemProps
     }: PrimaryButtonProps,
