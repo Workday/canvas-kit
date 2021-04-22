@@ -9,37 +9,42 @@ type StackDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
 
 const selector = '& > *:not(style) ~ *:not(style)';
 
-export type StackProps =
-  | {
-      direction: StackDirection;
-      flexDirection?: StackDirection;
-      spacing: CanvasSpaceKeys;
-    }
-  | {
-      direction?: StackDirection;
-      flexDirection: StackDirection;
-      spacing: CanvasSpaceKeys;
-    };
+type FlexDirectionProps = {
+  flexDirection: StackDirection;
+  direction?: StackDirection;
+};
 
-const column = (value: CanvasSpaceKeys) => ({
-  marginTop: spaceTokens[value],
+type DirectionProps = {
+  direction: StackDirection;
+  flexDirection?: StackDirection;
+};
+
+type SpacingValue = CanvasSpaceKeys | number | (string & {});
+
+export type StackProps = {
+  spacing: SpacingValue;
+  shouldWrapChildren?: boolean;
+} & (FlexDirectionProps | DirectionProps);
+
+const column = (value: SpacingValue) => ({
+  marginTop: spaceTokens[value as CanvasSpaceKeys] || value,
 });
 
-const columnReverse = (value: CanvasSpaceKeys) => ({
-  marginBottom: spaceTokens[value],
+const columnReverse = (value: SpacingValue) => ({
+  marginBottom: spaceTokens[value as CanvasSpaceKeys] || value,
 });
 
-const row = (value: CanvasSpaceKeys, isRTL = false) => {
+const row = (value: SpacingValue, isRTL = false) => {
   const attr = isRTL ? 'marginRight' : 'marginLeft';
   return {
-    [attr]: spaceTokens[value],
+    [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const rowReverse = (value: CanvasSpaceKeys, isRTL = false) => {
+const rowReverse = (value: SpacingValue, isRTL = false) => {
   const attr = isRTL ? 'marginleft' : 'marginRight';
   return {
-    [attr]: spaceTokens[value],
+    [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 

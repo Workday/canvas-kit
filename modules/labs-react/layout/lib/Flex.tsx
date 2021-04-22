@@ -5,11 +5,7 @@ import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 
 import {flex, FlexProps as FlexBaseProps} from './utils/flex';
 
-export type FlexProps = StyledType &
-  BoxProps &
-  FlexBaseProps & {
-    display?: 'flex' | 'inline-flex';
-  };
+export type FlexProps = StyledType & BoxProps & FlexBaseProps;
 
 const StyledFlex = styled(Box)<FlexProps>(
   {

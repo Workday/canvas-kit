@@ -3,6 +3,7 @@ import {Property} from 'csstype';
 export type FlexProps = {
   alignItems?: Property.AlignItems;
   alignContent?: Property.AlignContent;
+  display?: Property.Display;
   justifyItems?: Property.JustifyItems;
   justifyContent?: Property.JustifyContent;
   flexWrap?: Property.FlexWrap;
@@ -24,6 +25,7 @@ export type FlexProps = {
 export const flexProps = {
   alignItems: 'alignItems',
   alignContent: 'alignContent',
+  display: 'display',
   justifyItems: 'justifyItems',
   justifyContent: 'justifyContent',
   flexWrap: 'flexWrap',

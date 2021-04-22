@@ -17,7 +17,7 @@ const Card = ({heading = '', body = ''}) => (
 
 export const HStackCards = () => {
   return (
-    <HStack spacing="s" backgroundColor="soap100" padding="s">
+    <HStack as="section" shouldWrapChildren spacing="s" backgroundColor="soap100" padding="s">
       <Card heading="Diavola" body="sauce, smoked mozzarella, pepperoni, basil, chili flake" />
       <Card
         heading="Four Cheese"

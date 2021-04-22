@@ -7,17 +7,40 @@ import {stack, StackProps as StackBaseProps} from './utils/stack';
 
 export type StackProps = StyledType & FlexProps & StackBaseProps;
 
+const StackItem = createComponent('div')({
+  displayName: 'Stack.Item',
+  Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
+    return (
+      <Flex
+        as={Element}
+        ref={ref}
+        display="inline-block"
+        flex="0 0 auto"
+        minWidth={0}
+        {...elemProps}
+      >
+        {children}
+      </Flex>
+    );
+  },
+});
+
 const StyledStack = styled(Flex)<StackProps>(stack);
 
 export const Stack = createComponent('div')<StackProps>({
   displayName: 'Stack',
-  Component: ({children, ...elemProps}: StackProps, ref, Element) => {
+  Component: ({children, shouldWrapChildren = false, ...elemProps}: StackProps, ref, Element) => {
     const validChildren = getValidChildren(children);
     return (
       <StyledStack as={Element} ref={ref} {...elemProps}>
-        {validChildren}
+        {shouldWrapChildren
+          ? validChildren.map(child => <StackItem>{child}</StackItem>)
+          : validChildren}
       </StyledStack>
     );
+  },
+  subComponents: {
+    Item: StackItem,
   },
 });
 
@@ -29,9 +52,7 @@ export const HStack = createComponent(Stack)<HStackProps>({
   displayName: 'HStack',
   Component: ({children, direction = 'row', ...elemProps}: HStackProps, ref, Element) => {
     return (
-      <Stack as={Element} ref={ref} direction={direction} {...elemProps}>
-        {children}
-      </Stack>
+      <Stack as={Element} ref={ref} direction={direction} children={children} {...elemProps} />
     );
   },
 });
