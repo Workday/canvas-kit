@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/radio",
+  "module": "../dist/es6/radio",
+  "sideEffects": false
+}

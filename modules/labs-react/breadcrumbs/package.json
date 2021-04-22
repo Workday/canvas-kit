@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/breadcrumbs",
+  "module": "../dist/es6/breadcrumbs",
+  "sideEffects": false
+}

@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/pagination",
+  "module": "../dist/es6/pagination",
+  "sideEffects": false
+}

@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/page-header",
+  "module": "../dist/es6/page-header",
+  "sideEffects": false
+}

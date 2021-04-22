@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/select",
+  "module": "../dist/es6/select",
+  "sideEffects": false
+}

@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/badge",
+  "module": "../dist/es6/badge",
+  "sideEffects": false
+}

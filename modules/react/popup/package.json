@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/popup",
+  "module": "../dist/es6/popup",
+  "sideEffects": false
+}

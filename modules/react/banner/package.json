@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/banner",
+  "module": "../dist/es6/banner",
+  "sideEffects": false
+}

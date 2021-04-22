@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/checkbox",
+  "module": "../dist/es6/checkbox",
+  "sideEffects": false
+}

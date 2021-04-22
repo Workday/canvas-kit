@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/tooltip",
+  "module": "../dist/es6/tooltip",
+  "sideEffects": false
+}

@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/button",
+  "module": "../dist/es6/button",
+  "sideEffects": false
+}

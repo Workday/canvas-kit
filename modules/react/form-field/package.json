@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/form-field",
+  "module": "../dist/es6/form-field",
+  "sideEffects": false
+}

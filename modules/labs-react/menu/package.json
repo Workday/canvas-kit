@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/menu",
+  "module": "../dist/es6/menu",
+  "sideEffects": false
+}

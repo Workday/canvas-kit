@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/toast",
+  "module": "../dist/es6/toast",
+  "sideEffects": false
+}

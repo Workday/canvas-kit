@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/text-area",
+  "module": "../dist/es6/text-area",
+  "sideEffects": false
+}

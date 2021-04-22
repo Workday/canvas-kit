@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/switch",
+  "module": "../dist/es6/switch",
+  "sideEffects": false
+}

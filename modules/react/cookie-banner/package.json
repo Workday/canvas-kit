@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/cookie-banner",
+  "module": "../dist/es6/cookie-banner",
+  "sideEffects": false
+}

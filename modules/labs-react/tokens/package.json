@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/tokens",
+  "module": "../dist/es6/tokens",
+  "sideEffects": false
+}

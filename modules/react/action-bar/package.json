@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/action-bar",
+  "module": "../dist/es6/action-bar",
+  "sideEffects": false
+}

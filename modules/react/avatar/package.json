@@ -1,0 +1,5 @@
+{
+  "main": "../dist/commonjs/avatar",
+  "module": "../dist/es6/avatar",
+  "sideEffects": false
+}

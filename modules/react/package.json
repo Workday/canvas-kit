@@ -13,6 +13,9 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/canvas-kit-react"
   },
   "files": [
+    "*/package.json",
+    "*/lib/*",
+    "*/index.ts",
     "dist/",
     "index.ts",
     "ts3.5/**/*"
