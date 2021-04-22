@@ -4,6 +4,8 @@ import {TooltipContainer, Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {Card} from '@workday/canvas-kit-react/card';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
+const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
+
 export default {
   title: 'Testing/React/Popups/Tooltip',
 };
@@ -21,10 +23,16 @@ export const Placements = withSnapshotsEnabled(() => {
   const [ref, setRef] = React.useState<null | Element>(null);
   const [containerElement, setContainerElement] = React.useState<null | Element>(null);
 
-  React.useLayoutEffect(() => {
-    setContainerElement(document.querySelector('[data-testid="tooltip-container"]'));
-    setRef(document.querySelector('[data-testid="tooltip-target"]'));
-    setOpen(true);
+  React.useEffect(() => {
+    const id = setTimeout(() => {
+      setContainerElement(document.querySelector('[data-testid="tooltip-container"]'));
+      setRef(document.querySelector('[data-testid="tooltip-target"]'));
+      setOpen(true);
+    });
+
+    return () => {
+      clearTimeout(id);
+    };
   }, []);
 
   const placements: Placement[] = [
@@ -60,7 +68,7 @@ export const Placements = withSnapshotsEnabled(() => {
           justifyContent: 'center',
         }}
       >
-        Target
+        <Card.Body>Target</Card.Body>
       </Card>
       {placements.map(placement =>
         !open ? null : (

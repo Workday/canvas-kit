@@ -17,6 +17,7 @@ about the update.
 - [Breaking Component Changes](#breaking-component-changes)
   - [Tabs](#tabs)
   - [Button](#button)
+  - [Card](#card)
 
 ## General Changes
 
@@ -247,3 +248,61 @@ PR:
       onClick?: React.MouseEventHandler<HTMLButtonElement>;
     }
     ```
+
+### Card
+
+🤖 `Card` is now a compound component. The card is now composed of a `Card.Body` and an optional
+`Card.Heading`. This allows direct access to the header and body elements.
+
+```tsx
+// before
+<Card header="Card Title" headerId="header-id">
+  Card Body
+</Card>
+
+// after
+<Card>
+  <Card.Heading id="header-id">Card Title</Card.Heading>
+  <Card.Body>Card Body</Card.Body>
+</Card>
+```
+
+The codemod will do its best to rewrite the JSX to match the new API. It will work if you rename
+`Card` in the import or use style via `styled(Card)`. It will not work in cases where `header` or
+`headerId` are used in a spread props. Here's some examples:
+
+```tsx
+// WORKS
+
+// default import
+import Card from '@workday/canvas-kit-react-card'
+
+<Card header="Card Title">Card Body</Card>
+
+// renamed import
+import { Card as CanvasCard } from '@workday/canvas-kit-react-card'
+
+<CanvasCard header="Card Title">Card Body</CanvasCard>
+
+// styled card
+import {Card} from '@workday/canvas-kit-react-card'
+
+const StyleCard = styled(Card)(styles)
+
+<StyledCard header="Card Title">Card Body</StyledCard>
+
+// DOES NOT WORK
+
+// spread props
+import {Card} from '@workday-canvas-kit-card'
+
+const props = {
+  header: 'Card Title'
+}
+<Card {...props}>Card Body</Card>
+
+// re-exporting
+import {Card} from './Card' // where `Card` is a re-exported Canvas `Card`
+```
+
+This codemod should handle most of what we've seen in code that uses Canvas Kit cards already.

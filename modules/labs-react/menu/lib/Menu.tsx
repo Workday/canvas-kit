@@ -122,32 +122,34 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
 
     return (
       <Card style={{display: 'inline-block'}} padding={space.zero} width={cardWidth}>
-        <List
-          role="menu"
-          tabIndex={0}
-          id={id}
-          aria-labelledby={ariaLabelledby}
-          aria-activedescendant={`${id}-${selectedItemIndex}`}
-          onKeyDown={this.handleKeyboardShortcuts}
-          ref={this.menuRef}
-          {...elemProps}
-        >
-          {React.Children.map(children, (menuItem, index) => {
-            if (!React.isValidElement(menuItem)) {
-              return;
-            }
-            const itemId = `${id}-${index}`;
-            return (
-              <React.Fragment key={itemId}>
-                {React.cloneElement(menuItem, {
-                  onClick: (event: React.MouseEvent) => this.handleClick(event, menuItem.props),
-                  id: itemId,
-                  isFocused: selectedItemIndex === index,
-                })}
-              </React.Fragment>
-            );
-          })}
-        </List>
+        <Card.Body>
+          <List
+            role="menu"
+            tabIndex={0}
+            id={id}
+            aria-labelledby={ariaLabelledby}
+            aria-activedescendant={`${id}-${selectedItemIndex}`}
+            onKeyDown={this.handleKeyboardShortcuts}
+            ref={this.menuRef}
+            {...elemProps}
+          >
+            {React.Children.map(children, (menuItem, index) => {
+              if (!React.isValidElement(menuItem)) {
+                return;
+              }
+              const itemId = `${id}-${index}`;
+              return (
+                <React.Fragment key={itemId}>
+                  {React.cloneElement(menuItem, {
+                    onClick: (event: React.MouseEvent) => this.handleClick(event, menuItem.props),
+                    id: itemId,
+                    isFocused: selectedItemIndex === index,
+                  })}
+                </React.Fragment>
+              );
+            })}
+          </List>
+        </Card.Body>
       </Card>
     );
   }

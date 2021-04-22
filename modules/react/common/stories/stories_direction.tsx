@@ -16,12 +16,15 @@ storiesOf('Tokens/Common/Theming', module)
     <div className="story">
       <section className="story">
         <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-          <Card heading="مشغل وسائط" style={{width: '186px'}}>
-            <CanvasProvider theme={{canvas: {direction: ContentDirection.LTR}}}>
-              <IconButton aria-label="Activity Stream" size="medium" icon={rewind30Icon} />
-              <IconButton aria-label="Activity Stream" size="medium" icon={mediaPauseIcon} />
-              <IconButton aria-label="Activity Stream" size="medium" icon={fastForward15Icon} />
-            </CanvasProvider>
+          <Card style={{width: '186px'}}>
+            <Card.Heading>مشغل وسائط</Card.Heading>
+            <Card.Body>
+              <CanvasProvider theme={{canvas: {direction: ContentDirection.LTR}}}>
+                <IconButton aria-label="Activity Stream" size="medium" icon={rewind30Icon} />
+                <IconButton aria-label="Activity Stream" size="medium" icon={mediaPauseIcon} />
+                <IconButton aria-label="Activity Stream" size="medium" icon={fastForward15Icon} />
+              </CanvasProvider>
+            </Card.Body>
           </Card>
         </CanvasProvider>
       </section>

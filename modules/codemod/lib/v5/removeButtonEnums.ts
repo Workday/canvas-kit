@@ -14,6 +14,7 @@ const importsToRemove = [
   'ButtonVariant',
   'ButtonIconPosition',
   'ButtonSize',
+  'ButtonIconSize',
   'OutlineButtonVariant',
   'DropdownButtonVariant',
   'IconButtonVariant',
@@ -141,6 +142,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     })
     .remove();
 
+  const reverseImportMap = Object.keys(importMap).reduce((result, key) => {
+    result[importMap[key]] = key;
+    return result;
+  }, {} as Record<string, string>);
+
   // The following will replace JSX attributes that match something in `enumsToMap`
   // Example: variant={Button.Variant.Primary} => variant="primary"
   function findEnumReplacement(
@@ -155,8 +161,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
       if (
         node.object.type === 'Identifier' &&
         node.property.type === 'Identifier' &&
-        (`${node.object.name}.${node.property.name}${matched}` === candidate ||
-          `${importMap[node.object.name]}.${node.property.name}${matched}` === candidate)
+        `${reverseImportMap[node.object.name]}.${node.property.name}${matched}` === candidate
       ) {
         return enumsToMap[candidate];
       }
@@ -223,7 +228,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     if (node.type === 'TSTypeReference' && node.typeName.type === 'Identifier') {
       let identifier: keyof typeof enumToLiteralUnionMap;
       for (identifier in enumToLiteralUnionMap) {
-        if (node.typeName.name === identifier || importMap[node.typeName.name] === identifier) {
+        if (node.typeName.name === importMap[identifier]) {
           return enumToLiteralUnionMap[identifier];
         }
       }

@@ -2,13 +2,10 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
-import {
-  ComponentStatesTable,
-  permutateProps,
-  withSnapshotsEnabled,
-} from '../../../../../utils/storybook';
-import {Card} from '../../index';
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {depth, space} from '@workday/canvas-kit-react/tokens';
+
+import {Card} from '@workday/canvas-kit-react/card';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Containers/Card',
@@ -82,7 +79,12 @@ export const CardStates = () => (
       ]}
       columnProps={[{label: 'Default', props: {}}]}
     >
-      {props => <Card {...props}>Card Content</Card>}
+      {({heading, ...props}) => (
+        <Card {...props}>
+          {heading && <Card.Heading>{heading}</Card.Heading>}
+          <Card.Body>Card Content</Card.Body>
+        </Card>
+      )}
     </ComponentStatesTable>
   </StaticStates>
 );

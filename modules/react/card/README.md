@@ -16,16 +16,17 @@ yarn add @workday/canvas-kit-react
 import Card from '@workday/canvas-kit-react/card';
 import {depth, space} from '@workday/canvas-kit-react/tokens';
 
-<Card heading="Title">
-  Card contents
+<Card>
+  <Card.Heading>Title</Card.Heading>
+  <Card.Body>Card contents</Card.Body>
 </Card>
 
 <Card padding={space.l}>
-  Card with custom padding
+  <Card.Body>Card with custom padding</Card.Body>
 </Card>
 
 <Card depth={depth[1]}>
-  Card with custom depth
+  <Card.Body>Card with custom depth</Card.Body>
 </Card>
 ```
 
@@ -40,18 +41,6 @@ import {depth, space} from '@workday/canvas-kit-react/tokens';
 > None
 
 ### Optional
-
-#### `heading: ReactNode`
-
-> Heading at the top of the card.
-
-Default: `null`
-
----
-
-#### `headingId: string`
-
-> Heading ID for accessibility. Useful tie to an `aria-labelledby`
 
 ---
 
