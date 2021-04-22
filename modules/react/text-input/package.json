@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/text-input",
-  "module": "../dist/es6/text-input",
-  "sideEffects": false
-}

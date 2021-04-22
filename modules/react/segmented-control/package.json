@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/segmented-control",
-  "module": "../dist/es6/segmented-control",
-  "sideEffects": false
-}

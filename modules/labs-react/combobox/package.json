@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/combobox",
-  "module": "../dist/es6/combobox",
-  "sideEffects": false
-}

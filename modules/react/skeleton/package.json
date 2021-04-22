@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/skeleton",
-  "module": "../dist/es6/skeleton",
-  "sideEffects": false
-}

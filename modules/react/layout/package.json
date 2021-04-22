@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/layout",
-  "module": "../dist/es6/layout",
-  "sideEffects": false
-}

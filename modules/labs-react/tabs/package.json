@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/tabs",
-  "module": "../dist/es6/tabs",
-  "sideEffects": false
-}

@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/side-panel",
-  "module": "../dist/es6/side-panel",
-  "sideEffects": false
-}

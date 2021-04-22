@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/table",
-  "module": "../dist/es6/table",
-  "sideEffects": false
-}

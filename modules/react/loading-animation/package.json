@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/loading-animation",
-  "module": "../dist/es6/loading-animation",
-  "sideEffects": false
-}

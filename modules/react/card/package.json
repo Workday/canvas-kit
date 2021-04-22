@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/card",
-  "module": "../dist/es6/card",
-  "sideEffects": false
-}

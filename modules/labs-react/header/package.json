@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/header",
-  "module": "../dist/es6/header",
-  "sideEffects": false
-}

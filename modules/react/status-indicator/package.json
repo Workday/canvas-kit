@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/status-indicator",
-  "module": "../dist/es6/status-indicator",
-  "sideEffects": false
-}

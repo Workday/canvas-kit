@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/drawer",
-  "module": "../dist/es6/drawer",
-  "sideEffects": false
-}

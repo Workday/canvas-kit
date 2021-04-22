@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/color-picker",
-  "module": "../dist/es6/color-picker",
-  "sideEffects": false
-}

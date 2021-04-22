@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/modal",
-  "module": "../dist/es6/modal",
-  "sideEffects": false
-}

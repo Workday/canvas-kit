@@ -1,5 +1,0 @@
-{
-  "main": "../dist/commonjs/icon",
-  "module": "../dist/es6/icon",
-  "sideEffects": false
-}
