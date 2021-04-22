@@ -26,14 +26,14 @@ describe('card', () => {
       import {Card} from '@workday/canvas-kit-react/card';
 
       <Card>
-        No Padding
+        No Props
       </Card>
     `;
 
     const expected = stripIndent`
       import {Card} from '@workday/canvas-kit-react/card';
 
-      <Card><Card.Body>No Padding</Card.Body></Card>
+      <Card><Card.Body>No Props</Card.Body></Card>
     `;
 
     expectTransform(input, expected);
