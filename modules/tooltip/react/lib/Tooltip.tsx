@@ -76,6 +76,9 @@ export const Tooltip = ({
       {React.cloneElement(children, {
         ...targetProps,
         ...mergeCallbacks(children.props, targetProps),
+        ...(type === 'muted' && children.props['aria-label']
+          ? {'aria-label': children.props['aria-label']}
+          : {}),
       })}
       <Popper placement={placement} {...popperProps}>
         {({placement}) => {
