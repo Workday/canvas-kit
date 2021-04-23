@@ -1,21 +1,22 @@
 import {Property} from 'csstype';
 
+/** style props to for position properties */
 export type PositionProps = {
-  /** sets position styles  */
+  /** sets `position` property  */
   position?: Property.Position;
-  /** sets zIndex styles  */
+  /** sets `zIndex` property  */
   zIndex?: Property.ZIndex;
-  /** sets top styles  */
+  /** sets `top` property  */
   top?: number | string;
-  /** sets right styles  */
+  /** sets `right` property  */
   right?: number | string;
-  /** sets bottom styles  */
+  /** sets `bottom` property  */
   bottom?: number | string;
-  /** sets left styles  */
+  /** sets `left` property  */
   left?: number | string;
 };
 
-export const positionProps = {
+const positionProps = {
   position: 'position',
   zIndex: 'zIndex',
   top: 'top',
@@ -35,10 +36,6 @@ export const positionProps = {
  *     Hello, positions!
  *   </Box>
  * );
- *
- * // But it can also be used as a standalone function
- * const props = {position: "absolute", top: "50%"};
- * const positionStyles = position(props);
  *
  */
 export function position<P extends PositionProps>(props: P) {

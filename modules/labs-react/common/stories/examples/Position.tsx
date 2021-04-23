@@ -25,7 +25,7 @@ export const Position = () => {
         left={0}
         zIndex={1}
       >
-        Center-Left Position
+        Left
       </Box>
       <Box
         ref={boxRef}
@@ -35,7 +35,7 @@ export const Position = () => {
         left={`calc(50% - ${position.x}px)`}
         zIndex={2}
       >
-        Center Position
+        Center
       </Box>
       <Box
         style={boxStyles}
@@ -44,7 +44,7 @@ export const Position = () => {
         right={0}
         zIndex={3}
       >
-        Center-Right Position
+        Right
       </Box>
     </>
   );

@@ -1,31 +1,32 @@
 import {Property} from 'csstype';
 
+/** style props to for layout properties */
 export type LayoutProps = {
-  /** sets display styles  */
+  /** sets `display` property */
   display?: Property.Display;
-  // /** sets height styles */
+  /** sets `height` property */
   height?: number | string;
-  /** sets max-height styles */
+  /** sets `max-height` property */
   maxHeight?: number | string;
-  /** sets max-width styles */
+  /** sets `max-width` property */
   maxWidth?: number | string;
-  /** sets min-height styles */
+  /** sets `min-height` property */
   minHeight?: number | string;
-  /** sets min-width styles */
+  /** sets `min-width` property */
   minWidth?: number | string;
-  /** sets overflow styles */
+  /** sets `overflow` property */
   overflow?: Property.Overflow;
-  /** sets overflow-x styles */
+  /** sets `overflow-x` property */
   overflowX?: Property.OverflowX;
-  /** sets overflow-y styles */
+  /** sets `overflow-y` property */
   overflowY?: Property.OverflowY;
-  /** sets vertical-align styles */
+  /** sets `vertical-align` property */
   verticalAlign?: Property.VerticalAlign;
-  // /** sets width styles */
+  /** sets `width` property */
   width?: number | string;
 };
 
-export const layoutProps = {
+const layoutProps = {
   display: 'display',
   height: 'height',
   maxHeight: 'maxHeight',
@@ -50,10 +51,6 @@ export const layoutProps = {
  *     Hello, positions!
  *   </Box>
  * );
- *
- * // But it can also be used as a standalone function
- * const props = {display: "inline-block", height: "50%"};
- * const layoutStyles = layout(props);
  *
  */
 export function layout<P extends LayoutProps>(props: P) {

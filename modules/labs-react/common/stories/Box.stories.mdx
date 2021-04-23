@@ -39,20 +39,95 @@ are listed below. Each category has a more detailed explanation in the following
 
 Border style props allow you to adjust the border styles of components. Some props, such as
 `borderRadius` and `borderColor`, are connected to our design tokens. This makes it really simple to
-use Canvas values as you build UI.
+use Canvas values as you build UI. There are five types of border props: `BorderShorthandProps`,
+`BorderColorProps`, `BorderRadiusProps`, `BorderStyleProps`, and `BorderWidthProps`.
+
+#### Border Shorthand Props
+
+These props map to CSS border shorthand properties:
+
+| Prop Name      | Style           |
+| -------------- | --------------- |
+| `border`       | `border`        |
+| `borderTop`    | `border-top`    |
+| `borderRight`  | `border-Right`  |
+| `borderBottom` | `border-bottom` |
+| `borderLeft`   | `border-left`   |
+
+---
+
+#### Border Color Props
+
+These props map to border color properties:
+
+| Prop Name           | Style                 |
+| ------------------- | --------------------- |
+| `borderColor`       | `border-color`        |
+| `borderTopColor`    | `border-top-color`    |
+| `borderRightColor`  | `border-Right-color`  |
+| `borderBottomColor` | `border-bottom-color` |
+| `borderLeftColor`   | `border-left-color`   |
+
+---
+
+#### Border Radius Props
+
+These props map to border radius properies:
+
+| Prop Name                 | Style                        |
+| ------------------------- | ---------------------------- |
+| `borderRadius`            | `border-radius`              |
+| `borderTopLeftRadius`     | `border-top-left-radius`     |
+| `borderTopRightRadius`    | `border-top-right-radius`    |
+| `borderBottomLeftRadius`  | `border-bottom-left-radius`  |
+| `borderBottomRightRadius` | `border-bottom-right-radius` |
+
+---
+
+#### Border Style Props
+
+These props map to border style properties:
+
+| Prop Name           | Style                 |
+| ------------------- | --------------------- |
+| `borderStyle`       | `border-style`        |
+| `borderTopStyle`    | `border-top-style`    |
+| `borderRightStyle`  | `border-Right-style`  |
+| `borderBottomStyle` | `border-bottom-style` |
+| `borderLeftStyle`   | `border-left-style`   |
+
+---
+
+#### Border Width Props
+
+These props map to border width properties:
+
+| Prop Name           | Style                 |
+| ------------------- | --------------------- |
+| `borderWidth`       | `border-width`        |
+| `borderTopWidth`    | `border-top-width`    |
+| `borderRightWidth`  | `border-Right-width`  |
+| `borderBottomWidth` | `border-bottom-width` |
+| `borderLeftWidth`   | `border-left-width`   |
+
+---
 
 #### Example
 
 <ExampleCodeBlock code={Border} />
 
+---
+
 ### Color
 
-Color style props allow you to adjust the color and background color of components. There are three
-color props available: `color`, `backgroundColor`, and `bgColor` (an alias for `backgroundColor`).
+Color style props allow you to adjust the color and background color of components. There are two
+color props available: `color` and `backgroundColor`.
 
 #### Example
 
 <ExampleCodeBlock code={Color} />
+
+---
 
 ### Depth
 
@@ -63,27 +138,85 @@ Depth style props allow you to adjust the visual elevation of a component using 
 
 <ExampleCodeBlock code={Depth} />
 
+---
+
 ### Layout
 
 Layout style props allow you to adjust the display, dimensions, and overflow of a component. These
 props are not connected to our design tokens, but they are often useful for building components.
+There are eleven layout props: `display`, `height`, `maxHeight`, `maxWidth`, `minHeight`,
+`minWidth`, `overflow`, `overflowX`, `overflowY`, `verticalAlign`, and `width`.
 
 #### Example
 
 <ExampleCodeBlock code={Layout} />
 
+---
+
 ### Position
 
 Position style props allow you to adjust the position of a component. These props are not connected
-to our design tokens, but they are often useful for building components.
+to our design tokens, but they are often useful for building components. There are six position
+props: `position`, `zIndex`, `top`, `right`, `bottom`, and `left`.
 
 #### Example
 
 <ExampleCodeBlock code={Position} />
 
+---
+
 ### Space
 
-Space style props allow you to adjust the margin and padding of components using our space tokens.
+Space style props allow you to adjust the margin and padding of components. There are two types of
+space props: `LogicalSpaceProps` and `StandardSpaceProps`.
+
+#### Logical Space Props
+
+Logical space props are based on
+[CSS Logical Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties/Basic_concepts).
+They support bidirectionality (LTR and RTL) and will automatically flip the value when a change in
+direction is detected. For example: `marginInlineStart="16px"` would set `margin-left: 16px;` for
+LTR and switch to `margin-right: 16px;` for RTL. You'll want to opt for these properties over
+standard space props, such as `marginLeft` and `marginRight` when you need bidrectional styles.
+
+Here's a quick reference for these props and how they map to LTR and RTL styles:
+
+| Logical Space Prop   | LTR Style       | RTL Style       |
+| -------------------- | --------------- | --------------- |
+| `marginInlineStart`  | `margin-left`   | `margin-right`  |
+| `marginInlineEnd`    | `padding-right` | `padding-left`  |
+| `paddingInlineStart` | `padding-left`  | `padding-right` |
+| `paddingInlineEnd`   | `padding-right` | `padding-left`  |
+
+---
+
+#### Standard Space Props
+
+Standard space props work the same as logical space props, but have no bidirectional support. This
+will really only affect `marginLeft`, `marginRight`, `paddingLeft`, and `paddingRight`.
+
+Here's a quick reference for these props and their styles:
+
+| Standard Space Prop | Styles                             |
+| ------------------- | ---------------------------------- |
+| `margin`            | `margin`                           |
+| `marginX`           | `margin-left` and `margin-right`   |
+| `marginY`           | `margin-top` and `margin-bottom`   |
+| `marginTop`         | `margin-top`                       |
+| `marginRight`       | `margin-right`                     |
+| `marginBottom`      | `margin-bottom`                    |
+| `marginLeft`        | `margin-left`                      |
+| `padding`           | `padding`                          |
+| `paddingX`          | `padding-left` and `padding-right` |
+| `paddingY`          | `padding-top` and `padding-bottom` |
+| `paddingTop`        | `padding-top`                      |
+| `paddingRight`      | `padding-right`                    |
+| `paddingBottom`     | `padding-bottom`                   |
+| `paddingLeft`       | `padding-left`                     |
+
+---
+
+#### Example
 
 <ExampleCodeBlock code={Space} />
 

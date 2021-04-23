@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {colors, borderRadius, space} from '@workday/canvas-kit-react/tokens';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
 const boxStyles = {
@@ -14,14 +14,18 @@ export const Border = () => (
       borderRadius="m"
       border={`solid 1px ${colors.blackPepper400}`}
       display="inline-block"
+      margin={space.xxxs}
+      padding={space.xs}
     >
       Hello, border styles!
     </Box>
     <Box
       style={boxStyles}
-      borderRadius="l"
+      borderRadius={borderRadius.l}
       border={`solid 1px ${colors.blackPepper400}`}
       display="inline-block"
+      margin={space.xxxs}
+      padding={space.xs}
     >
       Hello, border styles!
     </Box>
@@ -32,6 +36,8 @@ export const Border = () => (
       borderColor="blackPepper400"
       borderRadius="circle"
       display="inline-block"
+      margin={space.xxxs}
+      padding={space.xs}
     >
       Hello, border styles!
     </Box>

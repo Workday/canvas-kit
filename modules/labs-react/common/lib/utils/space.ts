@@ -169,11 +169,6 @@ const standardSpaceProps = {
   paddingLeft,
 };
 
-export const spaceProps = {
-  ...logicalSpaceProps,
-  ...standardSpaceProps,
-};
-
 /**
  * A style prop function that takes component props and returns space styles.
  * If no `SpaceProps` are found, it returns an empty object.

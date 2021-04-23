@@ -1,25 +1,28 @@
 import * as React from 'react';
 import {Box} from '@workday/canvas-kit-labs-react/common';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+import {colors, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 
 export const Space = () => (
-  <>
+  <Box margin="l">
     <Box
-      padding="xs"
-      margin="xl"
-      marginBottom="m"
+      marginX="xxxs"
+      paddingX="xs"
+      paddingY="s"
       display="inline-block"
       border={`solid 1px ${colors.blackPepper400}`}
     >
-      Hello, Space!
+      Space props using CanvasSpaceKeys
     </Box>
     <Box
+      marginX={space.xxxs}
+      paddingTop={space.s}
+      paddingRight={spaceNumbers.xs}
+      paddingBottom={spaceNumbers.s}
+      paddingLeft={space.xs}
       display="inline-block"
-      paddingX={space.xs}
-      paddingY="l"
       border={`solid 1px ${colors.blackPepper400}`}
     >
-      Hello, Space!
+      Space props using space tokens
     </Box>
-  </>
+  </Box>
 );

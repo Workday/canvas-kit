@@ -2,10 +2,11 @@ import {colors as colorTokens, CanvasColor} from '@workday/canvas-kit-react/toke
 
 export type ColorTokens = typeof colorTokens;
 
+/** style props to for color properties */
 export type ColorProps = {
-  /** sets background color styles */
+  /** sets `background-color` property */
   backgroundColor?: CanvasColor | (string & {});
-  /** sets color styles */
+  /** sets `color` property */
   color?: CanvasColor | (string & {});
 };
 
@@ -17,7 +18,7 @@ const getColor = (value: CanvasColor | string) => ({
   color: colorTokens[value] || value,
 });
 
-export const colorProps = {
+const colorProps = {
   backgroundColor: getBackgroundColor,
   color: getColor,
 };
@@ -31,10 +32,6 @@ export const colorProps = {
  * const BoxExample = () => (
  *   <Box backgroundColor="blueberry500" color="frenchVanilla100">Hello, colors!</Box>
  * );
- *
- * // But it can also be used as a standalone function
- * const props = { color: 'frenchVanilla100' };
- * const colorStyles = color(props);
  *
  */
 export function color<P extends ColorProps>(props: P) {

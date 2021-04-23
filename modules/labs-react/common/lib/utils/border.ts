@@ -6,64 +6,77 @@ import {
   CanvasColor,
 } from '@workday/canvas-kit-react/tokens';
 
+/** style props to set the border properties */
 export type BorderShorthandProps = {
-  /** sets border styles */
+  /** sets `border` property */
   border?: string;
-  /** sets border-top styles */
+  /** sets `border-top` property */
   borderTop?: string;
-  /** sets border-left styles */
-  borderLeft?: string;
-  /** sets border-right styles */
+  /** sets `border-right` property */
   borderRight?: string;
+  /** sets `border-bottom` property */
+  borderBottom?: string;
+  /** sets `border-left` property */
+  borderLeft?: string;
 };
 
+/** style props to set the border color properties */
 export type BorderColorProps = {
-  /** sets border-color styles */
+  /** sets `border-color` property */
   borderColor?: CanvasColor | (string & {});
-  /** sets border-top-color styles */
+  /** sets `border-top-color` property */
   borderTopColor?: CanvasColor | (string & {});
-  /** sets border-left-color styles */
-  borderLeftColor?: CanvasColor | (string & {});
-  /** sets border-right-color styles */
+  /** sets `border-right-color` property */
   borderRightColor?: CanvasColor | (string & {});
+  /** sets `border-bottom-color` property */
+  borderBottomColor?: CanvasColor | (string & {});
+  /** sets `border-left-color` property */
+  borderLeftColor?: CanvasColor | (string & {});
 };
 
+/** style props to set the border radius properties */
 export type BorderRadiusProps = {
-  /** sets border-radius styles */
+  /** sets `border-radius` property */
   borderRadius?: CanvasBorderRadiusTokens | number | (string & {});
-  /** sets border-top-left-radius styles */
+  /** sets `border-top-left-radius` property */
   borderTopLeftRadius?: CanvasBorderRadiusTokens | number | (string & {});
-  /** sets border-top-right-radius styles */
+  /** sets `border-top-right-radius` property */
   borderTopRightRadius?: CanvasBorderRadiusTokens | number | (string & {});
-  /** sets border-bottom-left-radius styles */
+  /** sets `border-bottom-left-radius` property */
   borderBottomLeftRadius?: CanvasBorderRadiusTokens | number | (string & {});
-  /** sets border-bottom-right-radius styles */
+  /** sets `border-bottom-right-radius` property */
   borderBottomRightRadius?: CanvasBorderRadiusTokens | number | (string & {});
 };
 
+/** style props to set the border style properties */
 export type BorderStyleProps = {
-  /** sets border-style styles */
+  /** sets `border-style` property */
   borderStyle?: Property.BorderStyle;
-  /** sets border-top-style styles */
+  /** sets `border-top-style` property */
   borderTopStyle?: Property.BorderStyle;
-  /** sets border-left-style styles */
-  borderLeftStyle?: Property.BorderStyle;
-  /** sets border-right-style styles */
+  /** sets `border-right-style` property */
   borderRightStyle?: Property.BorderStyle;
+  /** sets `border-bottom-style` property */
+  borderBottomStyle?: Property.BorderStyle;
+  /** sets `border-left-style` property */
+  borderLeftStyle?: Property.BorderStyle;
 };
 
+/** style props to set the border width properties */
 export type BorderWidthProps = {
-  /** sets border-width styles */
+  /** sets `border-width` property */
   borderWidth?: string | number;
-  /** sets border-top-width styles */
+  /** sets `border-top-width` property */
   borderTopWidth?: string | number;
-  /** sets border-left-width styles */
-  borderLeftWidth?: string | number;
-  /** sets border-right-width styles */
+  /** sets `border-right-width` property */
   borderRightWidth?: string | number;
+  /** sets `border-bottom-width` property */
+  borderBottomWidth?: string | number;
+  /** sets `border-left-width` property */
+  borderLeftWidth?: string | number;
 };
 
-/** a collection style props for borders */
+/** a collection style props for border properties */
 export type BorderProps = BorderShorthandProps &
   BorderColorProps &
   BorderRadiusProps &
@@ -73,15 +86,17 @@ export type BorderProps = BorderShorthandProps &
 const borderShorthandStyles = {
   border: 'border',
   borderTop: 'borderTop',
-  borderLeft: 'borderLeft',
   borderRight: 'borderRight',
+  borderBottom: 'borderBottom',
+  borderLeft: 'borderLeft',
 };
 
 const borderColors = {
   borderColor: 'borderColor',
   borderTopColor: 'borderTopColor',
-  borderLeftColor: 'borderLeftColor',
   borderRightColor: 'borderRightColor',
+  borderBottomColor: 'borderBottomColor',
+  borderLeftColor: 'borderLeftColor',
 };
 
 const borderRadii = {
@@ -95,23 +110,17 @@ const borderRadii = {
 const borderStyles = {
   borderStyle: 'borderStyle',
   borderTopStyle: 'borderTopStyle',
-  borderLeftStyle: 'borderLeftStyle',
   borderRightStyle: 'borderRightStyle',
+  borderBottomStyle: 'borderBottomStyle',
+  borderLeftStyle: 'borderLeftStyle',
 };
 
 const borderWidths = {
   borderWidth: 'borderWidth',
   borderTopWidth: 'borderTopWidth',
-  borderLeftWidth: 'borderLeftWidth',
   borderRightWidth: 'borderRightWidth',
-};
-
-export const borderProps = {
-  ...borderShorthandStyles,
-  ...borderColors,
-  ...borderRadii,
-  ...borderStyles,
-  ...borderWidths,
+  borderBottomWidth: 'borderBottomWidth',
+  borderLeftWidth: 'borderLeftWidth',
 };
 
 /**
@@ -123,10 +132,6 @@ export const borderProps = {
  * const BoxExample = () => (
  *   <Box border={`solid 1px #333333 ${colors.blackPepper400}`}>Hello, border styles!</Box>
  * );
- *
- * // But it can also be used as a standalone function
- * const props = { border: `solid 1px #333333 ${colors.blackPepper400}` };
- * const borderStyles = border(props);
  *
  */
 export function border<P extends BorderProps>(props: P) {
