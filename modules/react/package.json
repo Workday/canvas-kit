@@ -13,6 +13,9 @@
     "url": "http://github.com/Workday/canvas-kit/tree/master/modules/canvas-kit-react"
   },
   "files": [
+    "*/package.json",
+    "*/lib/*",
+    "*/index.ts",
     "dist/",
     "index.ts",
     "ts3.5/**/*"
@@ -33,6 +36,8 @@
     "build:rebuild": "npm-run-all clean build",
     "build:downlevel-dts": "yarn run downlevel-dts dist ts3.5/dist",
     "build": "npm-run-all --parallel build:cjs build:es6 --sequential build:downlevel-dts",
+    "prepack": "node ../../utils/publish.js pre react",
+    "postpack": "node ../../utils/publish.js post react",
     "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
   "keywords": [
