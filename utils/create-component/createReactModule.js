@@ -12,7 +12,6 @@ const component = require('./templates/react/component');
 const componentTarget = require('./templates/react/component.target');
 const componentContent = require('./templates/react/component.content');
 const index = require('./templates/react/index');
-const packageJson = require('./templates/react/package');
 const stories = require('./templates/react/stories');
 const testingStories = require('./templates/react/stories_VisualTesting');
 const ssr = require('./templates/react/SSR');
@@ -55,10 +54,6 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
     index: {
       path: 'index.ts',
       contents: index(pascalCaseName),
-    },
-    packageJson: {
-      path: 'package.json',
-      contents: packageJson(name),
     },
     stories: {
       path: 'stories/stories.tsx',
