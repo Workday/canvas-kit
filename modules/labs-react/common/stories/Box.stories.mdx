@@ -5,6 +5,7 @@ import {Box} from '@workday/canvas-kit-labs-react/common';
 import {Border} from './examples/Border';
 import {Color} from './examples/Color';
 import {Depth} from './examples/Depth';
+import {FlexItem} from './examples/FlexItem';
 import {Layout} from './examples/Layout';
 import {Position} from './examples/Position';
 import {Space} from './examples/Space';
@@ -31,6 +32,7 @@ are listed below. Each category has a more detailed explanation in the following
 - [Border](#border)
 - [Color](#color)
 - [Depth](#depth)
+- [Flex Item](#flex-item)
 - [Layout](#layout)
 - [Position](#position)
 - [Space](#space)
@@ -137,6 +139,20 @@ Depth style props allow you to adjust the visual elevation of a component using 
 #### Example
 
 <ExampleCodeBlock code={Depth} />
+
+---
+
+### Flex Item
+
+Flex item style props allow you to adjust the
+[CSS Flex Item](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Item) properties of a
+component. There are seven flex item props: `flex`, `flexGrow`, `flexShrink`, `flexBasis`,
+`justifySelf`, `alignSelf`, and `order`. These props are useful when a component is a child of a
+[flex container](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Container).
+
+#### Example
+
+<ExampleCodeBlock code={FlexItem} />
 
 ---
 

@@ -1,67 +1,31 @@
 import {Property} from 'csstype';
 
-/** style props to for flexbox properties */
+/** style props to for flexbox container properties */
 export type FlexProps = {
   /** sets `align-items` property */
   alignItems?: Property.AlignItems;
   /** sets `align-content` property */
   alignContent?: Property.AlignContent;
   /** sets `display` property */
-  display?: Property.Display;
+  display?: 'flex' | 'inline-flex';
   /** sets `justify-items` property */
   justifyItems?: Property.JustifyItems;
   /** sets `justify-content` property */
   justifyContent?: Property.JustifyContent;
   /** sets `flex-wrap` property */
   flexWrap?: Property.FlexWrap;
-  /** sets `flex-wrap` property (alias for flexWrap) */
-  wrap?: Property.FlexWrap;
   /** sets `flex-direction` property */
   flexDirection?: Property.FlexDirection;
-  /** sets `flex-direction` property (alias for flexDirection) */
-  direction?: Property.FlexDirection;
-  /** sets `flex` property */
-  flex?: number | string;
-  /** sets `flex-grow` property */
-  flexGrow?: number | string;
-  /** sets `flex-grow` property (alias for flexGrow) */
-  grow?: number | string;
-  /** sets `flex-shrink` property */
-  flexShrink?: number | string;
-  /** sets `flex-shrink` property (alias for flexShrink) */
-  shrink?: number | string;
-  /** sets `flex-basis` property */
-  flexBasis?: number | string;
-  /** sets `flex-basis` property (alias for flexBasis) */
-  basis?: number | string;
-  /** sets `justify-self` property */
-  justifySelf?: Property.JustifySelf;
-  /** sets `align-self` property */
-  alignSelf?: Property.AlignSelf;
-  /** sets `order` property */
-  order?: Property.Order;
 };
 
 const flexProps = {
-  alignItems: 'alignItems',
   alignContent: 'alignContent',
+  alignItems: 'alignItems',
   display: 'display',
-  justifyItems: 'justifyItems',
-  justifyContent: 'justifyContent',
-  flexWrap: 'flexWrap',
-  wrap: 'flexWrap',
   flexDirection: 'flexDirection',
-  direction: 'flexDirection',
-  flex: 'flex',
-  flexGrow: 'flexGrow',
-  grow: 'flexGrow',
-  flexShrink: 'flexShrink',
-  shrink: 'flexShrink',
-  flexBasis: 'flexBasis',
-  basis: 'basis',
-  justifySelf: 'justifySelf',
-  alignSelf: 'alignSelf',
-  order: 'order',
+  flexWrap: 'flexWrap',
+  justifyContent: 'justifyContent',
+  justifyItems: 'justifyItems',
 };
 
 /**

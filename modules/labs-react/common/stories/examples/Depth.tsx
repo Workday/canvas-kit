@@ -1,27 +1,21 @@
 import * as React from 'react';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
-const boxStyles = {
-  display: 'inline-block',
-  margin: '4px',
-  padding: '12px',
-};
-
 export const Depth = () => (
   <>
-    <Box style={boxStyles} depth="inset">
+    <Box depth="inset" display="inline-block" margin="xxxs" padding="xs">
       Depth Inset
     </Box>
-    <Box style={boxStyles} depth={1}>
+    <Box depth={1} display="inline-block" margin="xxxs" padding="xs">
       Depth 1
     </Box>
-    <Box style={boxStyles} depth={2}>
+    <Box depth={2} display="inline-block" margin="xxxs" padding="xs">
       Depth 2
     </Box>
-    <Box style={boxStyles} depth={3}>
+    <Box depth={3} display="inline-block" margin="xxxs" padding="xs">
       Depth 3
     </Box>
-    <Box style={boxStyles} depth={4}>
+    <Box depth={4} display="inline-block" margin="xxxs" padding="xs">
       Depth 4
     </Box>
   </>

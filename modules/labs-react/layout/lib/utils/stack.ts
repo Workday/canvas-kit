@@ -9,22 +9,13 @@ type StackDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
 
 const selector = '& > *:not(style) ~ *:not(style)';
 
-type FlexDirectionProps = {
-  flexDirection: StackDirection;
-  direction?: StackDirection;
-};
-
-type DirectionProps = {
-  direction: StackDirection;
-  flexDirection?: StackDirection;
-};
-
 type SpacingValue = CanvasSpaceKeys | number | (string & {});
 
 export type StackProps = {
   spacing: SpacingValue;
   shouldWrapChildren?: boolean;
-} & (FlexDirectionProps | DirectionProps);
+  flexDirection: StackDirection;
+};
 
 const column = (value: SpacingValue) => ({
   marginTop: spaceTokens[value as CanvasSpaceKeys] || value,
@@ -57,18 +48,17 @@ const stackDirectionProps = {
 
 export function stack<P extends StackProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
   let styles = {};
-  const {direction = 'row', flexDirection, spacing} = props;
-  const stackDirection = flexDirection || direction;
-  if (stackDirection === 'column' || stackDirection === 'column-reverse') {
-    const stackFn = stackDirectionProps[stackDirection];
+  const {flexDirection = 'row', spacing} = props;
+  if (flexDirection === 'column' || flexDirection === 'column-reverse') {
+    const stackFn = stackDirectionProps[flexDirection];
     styles = stackFn(spacing);
   }
 
-  if (stackDirection === 'row' || stackDirection === 'row-reverse') {
+  if (flexDirection === 'row' || flexDirection === 'row-reverse') {
     // stack will always be used within the context of a component, but eslint doesn't know that
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const {canvas} = useTheme(props.theme);
-    const stackFn = stackDirectionProps[stackDirection];
+    const stackFn = stackDirectionProps[flexDirection];
     const isRTL = canvas.direction === ContentDirection.RTL;
     styles = stackFn(spacing, isRTL);
   }

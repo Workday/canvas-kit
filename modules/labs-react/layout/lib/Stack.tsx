@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 import {Flex, FlexProps} from './Flex';
 import {getValidChildren} from './utils/getValidChildren';
 import {stack, StackProps as StackBaseProps} from './utils/stack';
@@ -9,9 +10,9 @@ export type StackProps = StyledType & FlexProps & StackBaseProps;
 
 const StackItem = createComponent('div')({
   displayName: 'Stack.Item',
-  Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
+  Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
-      <Flex
+      <Box
         as={Element}
         ref={ref}
         display="inline-block"
@@ -20,7 +21,7 @@ const StackItem = createComponent('div')({
         {...elemProps}
       >
         {children}
-      </Flex>
+      </Box>
     );
   },
 });
@@ -45,27 +46,33 @@ export const Stack = createComponent('div')<StackProps>({
 });
 
 export type HStackProps = Omit<StackProps, 'direction'> & {
-  direction?: 'row' | 'row-reverse';
+  flexDirection?: 'row' | 'row-reverse';
 };
 
 export const HStack = createComponent(Stack)<HStackProps>({
   displayName: 'HStack',
-  Component: ({children, direction = 'row', ...elemProps}: HStackProps, ref, Element) => {
+  Component: ({children, flexDirection = 'row', ...elemProps}: HStackProps, ref, Element) => {
     return (
-      <Stack as={Element} ref={ref} direction={direction} children={children} {...elemProps} />
+      <Stack
+        as={Element}
+        ref={ref}
+        flexDirection={flexDirection}
+        children={children}
+        {...elemProps}
+      />
     );
   },
 });
 
-export type VStackProps = Omit<StackProps, 'direction'> & {
-  direction?: 'column' | 'column-reverse';
+export type VStackProps = Omit<StackProps, 'flexDirection'> & {
+  flexDirection?: 'column' | 'column-reverse';
 };
 
 export const VStack = createComponent(Stack)<VStackProps>({
   displayName: 'VStack',
-  Component: ({children, direction = 'column', ...elemProps}: VStackProps, ref, Element) => {
+  Component: ({children, flexDirection = 'column', ...elemProps}: VStackProps, ref, Element) => {
     return (
-      <Stack as={Element} ref={ref} direction={direction} {...elemProps}>
+      <Stack as={Element} ref={ref} flexDirection={flexDirection} {...elemProps}>
         {children}
       </Stack>
     );

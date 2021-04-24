@@ -1,12 +1,6 @@
 import * as React from 'react';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 
-const boxStyles = {
-  backgroundColor: '#fff',
-  border: 'solid 1px',
-  padding: '12px',
-};
-
 export const Position = () => {
   const boxRef = React.useRef(null);
   const [position, setPosition] = React.useState({x: 0, y: 0});
@@ -19,30 +13,36 @@ export const Position = () => {
   return (
     <>
       <Box
-        style={boxStyles}
         position="absolute"
         top={`calc(50% - ${position.y}px)`}
         left={0}
         zIndex={1}
+        backgroundColor="frenchVanilla100"
+        border="solid 1px"
+        padding="xs"
       >
         Left
       </Box>
       <Box
         ref={boxRef}
-        style={boxStyles}
         position="absolute"
         top={`calc(50% - ${position.y}px)`}
         left={`calc(50% - ${position.x}px)`}
         zIndex={2}
+        backgroundColor="frenchVanilla100"
+        border="solid 1px"
+        padding="xs"
       >
         Center
       </Box>
       <Box
-        style={boxStyles}
         position="absolute"
         top={`calc(50% - ${position.y}px)`}
         right={0}
         zIndex={3}
+        backgroundColor="frenchVanilla100"
+        border="solid 1px"
+        padding="xs"
       >
         Right
       </Box>

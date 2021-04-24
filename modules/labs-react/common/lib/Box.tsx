@@ -7,11 +7,18 @@ import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {border, BorderProps} from './utils/border';
 import {color, ColorProps} from './utils/color';
 import {depth, DepthProps} from './utils/depth';
+import {flexItem, FlexItemProps} from './utils/flexItem';
 import {layout, LayoutProps} from './utils/layout';
 import {position, PositionProps} from './utils/position';
 import {space, SpaceProps} from './utils/space';
 
-type StyleProps = BorderProps & ColorProps & DepthProps & LayoutProps & PositionProps & SpaceProps;
+type StyleProps = BorderProps &
+  ColorProps &
+  DepthProps &
+  FlexItemProps &
+  LayoutProps &
+  PositionProps &
+  SpaceProps;
 
 export type BoxProps = StyledType &
   StyleProps & {
@@ -30,6 +37,7 @@ const StyledBox = styled('div', {shouldForwardProp})<BoxProps>(
   },
   border,
   depth,
+  flexItem,
   color,
   layout,
   position,
