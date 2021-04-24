@@ -18,17 +18,17 @@ const Cell = (props: {children: React.ReactNode}) => {
 
 export const NestedStacks = () => {
   return (
-    <Stack spacing="xs" border="solid 1px" direction="column" padding="xs">
-      <Stack spacing="xs" direction="row">
+    <Stack spacing="xs" border="solid 1px" flexDirection="column" padding="xs">
+      <Stack spacing="xs" flexDirection="row">
         <Cell>1</Cell>
         <Cell>2</Cell>
         <Cell>3</Cell>
       </Stack>
-      <Stack spacing="xs" direction="row">
+      <Stack spacing="xs" flexDirection="row">
         <Cell>4</Cell>
         <Cell>5</Cell>
       </Stack>
-      <Stack spacing="xs" direction="row">
+      <Stack spacing="xs" flexDirection="row">
         <Cell>6</Cell>
         <Cell>7</Cell>
         <Cell>8</Cell>

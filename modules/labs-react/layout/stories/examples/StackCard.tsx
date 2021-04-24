@@ -7,7 +7,7 @@ export const StackCard = () => {
   return (
     <Flex backgroundColor="soap100" alignItems="flex-start" padding="s">
       <Flex depth={2} padding="s" backgroundColor="frenchVanilla100">
-        <Stack direction="column" spacing="xs">
+        <Stack flexDirection="column" spacing="xs">
           <h3 style={{...type.h3, margin: 0}}>Stack</h3>
           <span style={{...type.body}}>
             Stack provides a simple API for managing consistent space between elements in

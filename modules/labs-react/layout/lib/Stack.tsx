@@ -8,7 +8,7 @@ import {stack, StackProps as StackBaseProps} from './utils/stack';
 
 export type StackProps = StyledType & FlexProps & StackBaseProps;
 
-const StackItem = createComponent('div')({
+export const StackItem = createComponent('div')({
   displayName: 'Stack.Item',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
@@ -30,10 +30,14 @@ const StyledStack = styled(Flex)<StackProps>(stack);
 
 export const Stack = createComponent('div')<StackProps>({
   displayName: 'Stack',
-  Component: ({children, shouldWrapChildren = false, ...elemProps}: StackProps, ref, Element) => {
+  Component: (
+    {children, flexDirection = 'row', shouldWrapChildren = false, ...elemProps}: StackProps,
+    ref,
+    Element
+  ) => {
     const validChildren = getValidChildren(children);
     return (
-      <StyledStack as={Element} ref={ref} {...elemProps}>
+      <StyledStack as={Element} ref={ref} flexDirection={flexDirection} {...elemProps}>
         {shouldWrapChildren
           ? validChildren.map(child => <StackItem>{child}</StackItem>)
           : validChildren}
@@ -45,7 +49,7 @@ export const Stack = createComponent('div')<StackProps>({
   },
 });
 
-export type HStackProps = Omit<StackProps, 'direction'> & {
+export type HStackProps = Omit<StackProps, 'flexDirection'> & {
   flexDirection?: 'row' | 'row-reverse';
 };
 

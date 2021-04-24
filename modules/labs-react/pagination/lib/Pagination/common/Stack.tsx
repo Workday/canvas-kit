@@ -73,25 +73,25 @@ export const Stack = React.forwardRef(
 
 Stack.displayName = 'Stack';
 
-export interface HStackProps extends Omit<StackProps, 'direction'> {
-  direction?: 'row' | 'row-reverse';
+export interface HStackProps extends Omit<StackProps, 'flexDirection'> {
+  flexDirection?: 'row' | 'row-reverse';
 }
 
 export const HStack = React.forwardRef(
-  ({direction = 'row', spacing, ...elemProps}: HStackProps, ref) => {
-    return <Stack ref={ref} direction={direction} spacing={spacing} {...elemProps} />;
+  ({flexDirection = 'row', spacing, ...elemProps}: HStackProps, ref) => {
+    return <Stack ref={ref} flexDirection={flexDirection} spacing={spacing} {...elemProps} />;
   }
 );
 
 HStack.displayName = 'HStack';
 
-export interface VStackProps extends Omit<StackProps, 'direction'> {
-  direction?: 'column' | 'column-reverse';
+export interface VStackProps extends Omit<StackProps, 'flexDirection'> {
+  flexDirection?: 'column' | 'column-reverse';
 }
 
 export const VStack = React.forwardRef(
-  ({direction = 'column', spacing, ...elemProps}: VStackProps, ref) => {
-    return <Stack ref={ref} direction={direction} spacing={spacing} {...elemProps} />;
+  ({flexDirection = 'column', spacing, ...elemProps}: VStackProps, ref) => {
+    return <Stack ref={ref} flexDirection={flexDirection} spacing={spacing} {...elemProps} />;
   }
 );
 

@@ -5,7 +5,7 @@ import {type} from '@workday/canvas-kit-labs-react/tokens';
 
 const Card = ({heading = '', body = ''}) => (
   <Flex flex={1} depth={2} padding="s" backgroundColor="frenchVanilla100">
-    <Stack direction="column" spacing="xs">
+    <Stack flexDirection="column" spacing="xs">
       <h3 style={{...type.h3, margin: 0}}>{heading}</h3>
       <span style={{...type.body}}>{body}</span>
       <Flex>
@@ -17,7 +17,7 @@ const Card = ({heading = '', body = ''}) => (
 
 export const HStackCards = () => {
   return (
-    <HStack as="section" shouldWrapChildren spacing="s" backgroundColor="soap100" padding="s">
+    <HStack shouldWrapChildren spacing="s" backgroundColor="soap100" padding="s">
       <Card heading="Diavola" body="sauce, smoked mozzarella, pepperoni, basil, chili flake" />
       <Card
         heading="Four Cheese"

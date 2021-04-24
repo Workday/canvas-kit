@@ -13,8 +13,8 @@ type SpacingValue = CanvasSpaceKeys | number | (string & {});
 
 export type StackProps = {
   spacing: SpacingValue;
+  flexDirection?: StackDirection;
   shouldWrapChildren?: boolean;
-  flexDirection: StackDirection;
 };
 
 const column = (value: SpacingValue) => ({
