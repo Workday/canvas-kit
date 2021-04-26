@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.0.0-beta.2 (2021-04-26)
+
+### Components
+- chore(card): Convert to a Compound Component and create codemod ([#1028](https://github.com/Workday/canvas-kit/pull/1028)) [@NicholasBoll](https://github.com/NicholasBoll)
+
+### Infrastructure
+
+- fix: Fix slash import paths ([#1038](https://github.com/Workday/canvas-kit/pull/1038)) [@NicholasBoll](https://github.com/NicholasBoll)
+- chore: Remove package.json from create component script ([#1039](https://github.com/Workday/canvas-kit/pull/1039)) [@NicholasBoll](https://github.com/NicholasBoll)
+
 ## 5.0.0-beta.1 (2021-04-12)
 
 ### Components
