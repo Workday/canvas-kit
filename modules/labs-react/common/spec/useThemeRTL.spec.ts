@@ -36,17 +36,7 @@ describe('styles', () => {
       const {result} = renderHook(() => useThemeRTL());
       const cssProp = result.current.themeRTL(styleOne, styleTwo);
       expect(cssProp.height).toEqual(expectedHeight);
-      expect(cssProp.width).toEqual(5);
-    });
-
-    it('should handle css template strings', () => {
-      const expectedWrap = `nowrap`;
-      const style = css`
-        white-space: nowrap;
-      `;
-      const {result} = renderHook(() => useThemeRTL());
-      const cssProp = result.current.themeRTL(style);
-      expect(cssProp.whiteSpace).toEqual(expectedWrap);
+      expect(cssProp.width).toEqual(expectedWidth);
     });
 
     describe('LTR', () => {
@@ -67,36 +57,36 @@ describe('styles', () => {
         const cssProp = result.current.themeRTL(style);
         expect(cssProp.paddingLeft).toEqual(expectedPadding);
       });
+    });
 
-      describe('RTL', () => {
-        beforeEach(() => {
-          (window as any).workday = {
-            canvas: {
-              theme: RTLTheme.canvas,
-            },
-          };
-        });
+    describe('RTL', () => {
+      beforeEach(() => {
+        (window as any).workday = {
+          canvas: {
+            theme: RTLTheme.canvas,
+          },
+        };
+      });
 
-        it('should NOT flip padding left to padding right when the direction is RTL but /* @noflip */ is included', () => {
-          const expectedPadding = `10px /* @noflip */`;
-          const style = {
-            paddingLeft: expectedPadding,
-          };
+      it('should NOT flip padding left to padding right when the direction is RTL but /* @noflip */ is included', () => {
+        const expectedPadding = `10px /* @noflip */`;
+        const style = {
+          paddingLeft: expectedPadding,
+        };
 
-          const {result} = renderHook(() => useThemeRTL());
-          const cssProp = result.current.themeRTL(style);
-          expect(cssProp.paddingLeft).toEqual(expectedPadding);
-        });
+        const {result} = renderHook(() => useThemeRTL());
+        const cssProp = result.current.themeRTL(style);
+        expect(cssProp.paddingLeft).toEqual(expectedPadding);
+      });
 
-        it('should flip padding left to padding right the direction is RTL support', () => {
-          const expectedPadding = `10px`;
-          const style = {
-            paddingLeft: expectedPadding,
-          };
-          const {result} = renderHook(() => useThemeRTL());
-          const cssProp = result.current.themeRTL(style);
-          expect(cssProp.paddingRight).toEqual(expectedPadding);
-        });
+      it('should flip padding left to padding right the direction is RTL support', () => {
+        const expectedPadding = `10px`;
+        const style = {
+          paddingLeft: expectedPadding,
+        };
+        const {result} = renderHook(() => useThemeRTL());
+        const cssProp = result.current.themeRTL(style);
+        expect(cssProp.paddingRight).toEqual(expectedPadding);
       });
     });
   });

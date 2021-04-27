@@ -15,8 +15,7 @@ Includes:
 This is a way to automatically transform CSS, applied using either Emotion's css attribute or by a
 style attribute, when there is a RTL theme in use. Instead of authoring two sets of CSS objects, one
 for each language direction. Now you can author the LTR version and this hook will automatically
-create the RTL counterpart for you on the fly. This works for both object and string template
-Emotion methods.
+create the RTL counterpart for you on the fly.
 
 For convenience we also export a ComponentStyles type if you want to organize your styles all
 together.
