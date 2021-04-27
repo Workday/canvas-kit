@@ -1,6 +1,7 @@
 import {SerializedStyles} from '@emotion/core';
 import {ContentDirection, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
+import {useMemo} from 'react';
 import rtlCSSJS from 'rtl-css-js';
 
 type TemplateOrObjectStyles = CSSProperties | SerializedStyles;
@@ -11,10 +12,15 @@ const getThemedRTL = (theme: EmotionCanvasTheme, ...styles: TemplateOrObjectStyl
   return theme.canvas.direction === ContentDirection.RTL ? rtlCSSJS(styles) : styles;
 };
 
-export function useThemeRTL(...cssObject: TemplateOrObjectStyles[]) {
+export function useThemeRTL() {
   const theme = useTheme();
 
-  const styles = getThemedRTL(theme, ...cssObject);
+  const themeRTL = useMemo(() => {
+    return (...cssObject: TemplateOrObjectStyles[]) => {
+      const styles = getThemedRTL(theme, ...cssObject);
+      return styles.reduce((first, second) => ({...first, ...second}), {}) as CSSProperties;
+    };
+  }, [theme]);
 
-  return styles.reduce((first, second) => ({...first, ...second}), {}) as CSSProperties;
+  return {themeRTL, theme};
 }

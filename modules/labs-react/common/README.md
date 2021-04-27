@@ -42,8 +42,10 @@ const styles: ComponentStyles = {
 };
 
 export const HelloWorld = () => {
+  const {themeRTL} = useThemeRTL();
+
   return (
-    <div css={useThemeRTL(styles.panel, styles.top)} style={useThemeRTL(styles.red)}>
+    <div css={themeRTL(styles.panel, styles.top)} style={themeRTL(styles.red)}>
       Hello World
     </div>
   );
