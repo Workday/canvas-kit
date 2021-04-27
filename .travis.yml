@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "12"
+  - "14"
 
 cache:
   npm: false # Caching npm makes yarn install faster but downloading and packaging up the cache makes this slower when enabled
