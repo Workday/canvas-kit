@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0 # Required to retrieve git history
       - uses: actions/setup-node@v2
         with:
-          node-version: 10.x
+          node-version: 14.x
 
       - name: Get Cypress Version
         id: cypress-version
