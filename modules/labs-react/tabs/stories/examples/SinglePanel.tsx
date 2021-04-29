@@ -2,9 +2,10 @@ import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
+import {useTabsModel} from '../../lib/useTabsModel';
 
 export const SinglePanel = () => {
-  const [currentTab, setCurrentTab] = React.useState('second');
+  const model = useTabsModel();
 
   const message = (
     <p>
@@ -18,14 +19,10 @@ export const SinglePanel = () => {
     first: <div>Contents of First Tab {message}</div>,
     second: <div>Contents of Second Tab {message}</div>,
     third: <div>Contents of Third Tab {message}</div>,
-  } as const;
+  };
 
   return (
-    <Tabs
-      initialTab={currentTab}
-      shouldActivate={({data, state}) => true}
-      onActivate={({data}) => setCurrentTab(data.tab)}
-    >
+    <Tabs model={model}>
       <Tabs.List>
         <Tabs.Item name="first" aria-controls="mytab-panel">
           First Tab
@@ -38,7 +35,7 @@ export const SinglePanel = () => {
         </Tabs.Item>
       </Tabs.List>
       <Tabs.Panel style={{marginTop: space.m}} hidden={undefined} id="mytab-panel">
-        {contents[currentTab]}
+        {contents[model.state.activeTab]}
       </Tabs.Panel>
     </Tabs>
   );
