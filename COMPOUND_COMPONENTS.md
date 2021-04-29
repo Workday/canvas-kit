@@ -117,9 +117,9 @@ Components that directly wrap an element (most of them) will have the following 
   <Tabs.List as="section" />
   
   // Component
-  const Section = React.forwardRef({children, ...elemProps}, ref) => (
+  const Section = React.forwardRef(({children, ...elemProps}, ref) => (
     <section ref={ref} {...elemProps}>{children}</section>
-  )
+  ))
   
   <Tabs.List as={Section}/>
   ```
