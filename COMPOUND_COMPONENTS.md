@@ -149,9 +149,9 @@ const MyComponent = () => {
     // also call the `onActivateTab` callback
   }
   
-  const onActivateTab = ({ data, state }) => {
+  const onActivateTab = ({ data, prevState }) => {
     // called any time the `activateTab` event is triggered
-    console.log('onActivteTab', data, state)
+    console.log('onActivteTab', data, prevState)
   }
   
   return (
@@ -276,7 +276,7 @@ const useTabsModel = (config = {}) => {
         return
       }
       setActiveTab(data.tab)
-      config.onActivateTab?.({ data, state })
+      config.onActivateTab?.({ data, prevState: state })
     }
   }
   
@@ -301,7 +301,7 @@ interface Model<
     
 The Typescript interface of Callbacks and Guards looks like this:
 ```ts
-type Callback<EventData, State> = ({ data: EventData, state: State}) => void
+type Callback<EventData, State> = ({ data: EventData, prevState: State}) => void
 type Guard<EventData, State> = ({ data: EventData, state: State}) => boolean
 ```
 
