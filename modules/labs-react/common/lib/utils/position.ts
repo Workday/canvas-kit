@@ -1,22 +1,44 @@
+import {
+  ContentDirection,
+  PartialEmotionCanvasTheme,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
 import {Property} from 'csstype';
 
-/** style props to for position properties */
-export type PositionProps = {
+/** style props to for standard position properties */
+export type StandardPositionProps = {
   /** sets `position` property  */
   position?: Property.Position;
   /** sets `zIndex` property  */
   zIndex?: Property.ZIndex;
   /** sets `top` property  */
   top?: number | string;
-  /** sets `right` property  */
+  /** sets `right` property (no bidirectional support) */
   right?: number | string;
   /** sets `bottom` property  */
   bottom?: number | string;
-  /** sets `left` property  */
+  /** sets `left` property (no bidirectional support)  */
   left?: number | string;
 };
 
-const positionProps = {
+export type LogicalPositionProps = {
+  /** sets `left` property (with bidirectional support)  */
+  insetInlineStart?: number | string;
+  /** sets `right` property (with bidirectional support) */
+  insetInlineEnd?: number | string;
+};
+
+const getInsetInlineStartStyle = (value: number | string, isRTL = false) => {
+  const attr = isRTL ? 'right' : 'left';
+  return {[attr]: value};
+};
+
+const getInsetInlineEndStyle = (value: number | string, isRTL = false) => {
+  const attr = isRTL ? 'left' : 'right';
+  return {[attr]: value};
+};
+
+const standardPositionProps = {
   position: 'position',
   zIndex: 'zIndex',
   top: 'top',
@@ -24,6 +46,13 @@ const positionProps = {
   bottom: 'bottom',
   left: 'left',
 };
+
+const logicalPositionProps = {
+  insetInlineStart: getInsetInlineStartStyle,
+  insetInlineEnd: getInsetInlineEndStyle,
+};
+
+export type PositionProps = StandardPositionProps & LogicalPositionProps;
 
 /**
  * A style prop function that takes components props and returns position styles.
@@ -38,14 +67,26 @@ const positionProps = {
  * );
  *
  */
-export function position<P extends PositionProps>(props: P) {
-  const styles = {};
+export function position<P extends PositionProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
+  // position will always be used within the context of a component, but eslint doesn't know that
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const {canvas} = useTheme(props.theme);
+  let styles = {};
   for (const key in props) {
-    if (key in positionProps) {
-      const attr = positionProps[key as keyof PositionProps];
-      const value = props[key];
-      // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-      styles[attr] = value;
+    if (key in props) {
+      if (key in standardPositionProps) {
+        const value = props[key];
+        const attr = standardPositionProps[key as keyof StandardPositionProps];
+        // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
+        styles[attr] = value;
+      }
+      if (key in logicalPositionProps) {
+        const value = props[key as keyof LogicalPositionProps] as string | number;
+        const styleFn = logicalPositionProps[key as keyof LogicalPositionProps];
+        const isRTL = canvas.direction === ContentDirection.RTL;
+        const style = styleFn(value, isRTL);
+        styles = {...styles, ...style};
+      }
     }
   }
   return styles;

@@ -53,7 +53,7 @@ export type HStackProps = Omit<StackProps, 'flexDirection'> & {
   flexDirection?: 'row' | 'row-reverse';
 };
 
-export const HStack = createComponent(Stack)<HStackProps>({
+export const HStack = createComponent('div')<HStackProps>({
   displayName: 'HStack',
   Component: ({children, flexDirection = 'row', ...elemProps}: HStackProps, ref, Element) => {
     return (
@@ -72,7 +72,7 @@ export type VStackProps = Omit<StackProps, 'flexDirection'> & {
   flexDirection?: 'column' | 'column-reverse';
 };
 
-export const VStack = createComponent(Stack)<VStackProps>({
+export const VStack = createComponent('div')<VStackProps>({
   displayName: 'VStack',
   Component: ({children, flexDirection = 'column', ...elemProps}: VStackProps, ref, Element) => {
     return (

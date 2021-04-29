@@ -21,31 +21,31 @@ export type LogicalSpaceProps = {
 
 /** These props do not adjust for bidirectionality (LTR & RTL) */
 export type StandardSpaceProps = {
-  /** sets margin (no bidirectional support) */
+  /** sets margin */
   margin?: SpacePropValues;
-  /** sets margin-left and margin-right (no bidirectional support) */
+  /** sets margin-left and margin-right */
   marginX?: SpacePropValues;
-  /** sets margin-top and margin-bottom (no bidirectional support) */
+  /** sets margin-top and margin-bottom */
   marginY?: SpacePropValues;
-  /** sets margin-top (no bidirectional support) */
+  /** sets margin-top */
   marginTop?: SpacePropValues;
   /** sets margin-right (no bidirectional support) */
   marginRight?: SpacePropValues;
-  /** sets margin-bottom (no bidirectional support) */
+  /** sets margin-bottom */
   marginBottom?: SpacePropValues;
   /** sets margin-left (no bidirectional support) */
   marginLeft?: SpacePropValues;
-  /** sets padding (no bidirectional support) */
+  /** sets padding */
   padding?: SpacePropValues;
-  /** sets padding-left and margin-right (no bidirectional support) */
+  /** sets padding-left and margin-right */
   paddingX?: SpacePropValues;
-  /** sets padding-top and padding-bottom (no bidirectional support) */
+  /** sets padding-top and padding-bottom */
   paddingY?: SpacePropValues;
-  /** sets padding-top (no bidirectional support) */
+  /** sets padding-top */
   paddingTop?: SpacePropValues;
   /** sets padding-right (no bidirectional support) */
   paddingRight?: SpacePropValues;
-  /** sets padding-bottom (no bidirectional support) */
+  /** sets padding-bottom */
   paddingBottom?: SpacePropValues;
   /** sets padding-left (no bidirectional support) */
   paddingLeft?: SpacePropValues;
@@ -88,7 +88,7 @@ const marginRight = (value: SpacePropValue, isRTL = false) => {
 
 const marginBottom = (value: SpacePropValue) => {
   return {
-    marginB: spaceTokens[value as CanvasSpaceKeys] || value,
+    marginBottom: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 

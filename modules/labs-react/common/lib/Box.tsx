@@ -36,9 +36,9 @@ const StyledBox = styled('div', {shouldForwardProp})<BoxProps>(
     boxSizing: 'border-box',
   },
   border,
+  color,
   depth,
   flexItem,
-  color,
   layout,
   position,
   space

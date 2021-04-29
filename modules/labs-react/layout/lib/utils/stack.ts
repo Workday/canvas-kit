@@ -5,34 +5,34 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {space as spaceTokens, CanvasSpaceKeys} from '@workday/canvas-kit-react/tokens';
 
-type StackDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
+export type StackDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
 
 const selector = '& > *:not(style) ~ *:not(style)';
 
-type SpacingValue = CanvasSpaceKeys | number | (string & {});
+export type StackSpacing = CanvasSpaceKeys | number | (string & {});
 
 export type StackProps = {
-  spacing: SpacingValue;
+  spacing: StackSpacing;
   flexDirection?: StackDirection;
   shouldWrapChildren?: boolean;
 };
 
-const column = (value: SpacingValue) => ({
+const column = (value: StackSpacing) => ({
   marginTop: spaceTokens[value as CanvasSpaceKeys] || value,
 });
 
-const columnReverse = (value: SpacingValue) => ({
+const columnReverse = (value: StackSpacing) => ({
   marginBottom: spaceTokens[value as CanvasSpaceKeys] || value,
 });
 
-const row = (value: SpacingValue, isRTL = false) => {
+const row = (value: StackSpacing, isRTL = false) => {
   const attr = isRTL ? 'marginRight' : 'marginLeft';
   return {
     [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const rowReverse = (value: SpacingValue, isRTL = false) => {
+const rowReverse = (value: StackSpacing, isRTL = false) => {
   const attr = isRTL ? 'marginleft' : 'marginRight';
   return {
     [attr]: spaceTokens[value as CanvasSpaceKeys] || value,

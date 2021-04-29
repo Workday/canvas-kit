@@ -7,7 +7,7 @@ type ValueOf<T> = T[keyof T];
 
 /** Type for the `borderRadius` object with keys and px values (strings and numbers) */
 export type CanvasBorderRadius = {
-  zero: 0;
+  zero: '0px';
   s: '2px';
   m: '4px';
   l: '8px';
@@ -22,7 +22,7 @@ export type CanvasBorderRadiusValues = ValueOf<CanvasBorderRadius>;
 
 /** An object of border-radius keys and px values (strings and numbers) */
 export const borderRadius: CanvasBorderRadius = {
-  zero: 0,
+  zero: '0px',
   s: '2px',
   m: '4px',
   l: '8px',

@@ -4,14 +4,26 @@ export type ColorTokens = typeof colorTokens;
 
 /** style props to for color properties */
 export type ColorProps = {
+  /** sets `background` property */
+  background?: CanvasColor | (string & {});
   /** sets `background-color` property */
   backgroundColor?: CanvasColor | (string & {});
+  /** sets `background` property */
+  backgroundImage?: string;
   /** sets `color` property */
   color?: CanvasColor | (string & {});
 };
 
+const getBackground = (value: CanvasColor | string) => ({
+  background: colorTokens[value] || value,
+});
+
 const getBackgroundColor = (value: CanvasColor | string) => ({
   backgroundColor: colorTokens[value] || value,
+});
+
+const getBackgroundImage = (value: string) => ({
+  backgroundImage: value,
 });
 
 const getColor = (value: CanvasColor | string) => ({
@@ -19,7 +31,9 @@ const getColor = (value: CanvasColor | string) => ({
 });
 
 const colorProps = {
+  background: getBackground,
   backgroundColor: getBackgroundColor,
+  backgroundImage: getBackgroundImage,
   color: getColor,
 };
 
