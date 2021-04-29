@@ -1,5 +1,4 @@
 import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
-import {Button} from '@workday/canvas-kit-react/button';
 import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Simple} from './examples/Simple';
@@ -80,14 +79,6 @@ read this section, but if you're needing to go beyond basic examples or are curi
 explore this section. While these examples are not exhaustive, they provide additional insight into
 what's possible.
 
-#### Single Tab Panel
-
-The compound component patterns allows advanced composition. For example, the tabs can be composed
-to have only a single tab panel using attribute overrides and callbacks. More info about attributes
-and callbacks are in property tables below for each sub-component.
-
-<ExampleCodeBlock code={SinglePanel} />
-
 #### Hoisted Model
 
 The `Tabs` component takes in an optional `model` property. If not defined, it will create and use
@@ -100,6 +91,15 @@ In this example, we'll set up external observation of the `TabsModel` state and 
 button to trigger an event to change the currently active tab.
 
 <ExampleCodeBlock code={HoistedModel} />
+
+#### Single Tab Panel
+
+The compound component patterns allows advanced composition. For example, the tabs can be composed
+to have only a single tab panel using attribute overrides and callbacks. More info about attributes
+and callbacks are in property tables below for each sub-component. In this example, we'll use a
+Hoisted model and the `activeTab` property of the state to show content of our `contents` object.
+
+<ExampleCodeBlock code={SinglePanel} />
 
 #### Dynamic Tabs
 
@@ -195,7 +195,3 @@ list. If a `name` is provided, it must match the name passed to the `Tabs.Item` 
 ## Specifications
 
 <Specifications file="Tabs.spec.ts" name="Tabs" />
-
-#### Button Props
-
-<PropsTable of={Button} />
