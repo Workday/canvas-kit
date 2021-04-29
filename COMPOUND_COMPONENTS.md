@@ -111,15 +111,15 @@ Components that directly wrap an element (most of them) will have the following 
   ```tsx
   <Tabs.Item ref={myRef}>
   ```
-* `as`: This allows overriding of the default element. The override can be a string representation of a tag (i.e. `section`, `div`, `nav`, etc), or a Component that forwards attributes to an element.
+* `as`: This allows overriding of the default element. The override can be a string representation of a tag (i.e. `section`, `div`, `nav`, etc), or a Component that forwards attributes to an element. If you use a component, you should forward the React `ref` and spread all extra props to the element to ensure the API still works.
   ```tsx
   // tag
   <Tabs.List as="section" />
   
   // Component
-  const Section = ({children, ...elemProps}) => (
-    <section {...elemProps}>{children}</section>
-  )
+  const Section = React.forwardRef(({children, ...elemProps}, ref) => (
+    <section ref={ref} {...elemProps}>{children}</section>
+  ))
   
   <Tabs.List as={Section}/>
   ```
@@ -149,9 +149,9 @@ const MyComponent = () => {
     // also call the `onActivateTab` callback
   }
   
-  const onActivateTab = ({ data, state }) => {
+  const onActivateTab = ({ data, prevState }) => {
     // called any time the `activateTab` event is triggered
-    console.log('onActivteTab', data, state)
+    console.log('onActivteTab', data, prevState)
   }
   
   return (
@@ -276,7 +276,7 @@ const useTabsModel = (config = {}) => {
         return
       }
       setActiveTab(data.tab)
-      config.onActivateTab?.({ data, state })
+      config.onActivateTab?.({ data, prevState: state })
     }
   }
   
@@ -301,7 +301,7 @@ interface Model<
     
 The Typescript interface of Callbacks and Guards looks like this:
 ```ts
-type Callback<EventData, State> = ({ data: EventData, state: State}) => void
+type Callback<EventData, State> = ({ data: EventData, prevState: State}) => void
 type Guard<EventData, State> = ({ data: EventData, state: State}) => boolean
 ```
 
