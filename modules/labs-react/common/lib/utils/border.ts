@@ -108,12 +108,24 @@ export type BorderProps = BorderShorthandProps &
   BorderWidthProps &
   BorderLogicalProps;
 
+// border logical prop handlers
+const borderInlineStart = (isRTL: boolean) => (isRTL ? 'borderRight' : 'borderLeft');
+const borderInlineEnd = (isRTL: boolean) => (isRTL ? 'borderLeft' : 'borderRight');
+const borderInlineStartColor = (isRTL: boolean) => (isRTL ? 'borderRightColor' : 'borderLeftColor');
+const borderInlineEndColor = (isRTL: boolean) => (isRTL ? 'borderLeftColor' : 'borderRightColor');
+const borderInlineStartStyle = (isRTL: boolean) => (isRTL ? 'borderRightStyle' : 'borderLeftStyle');
+const borderInlineEndStyle = (isRTL: boolean) => (isRTL ? 'borderLeftStyle' : 'borderRightStyle');
+const borderInlineStartWidth = (isRTL: boolean) => (isRTL ? 'borderRightWidth' : 'borderLeftWidth');
+const borderInlineEndWidth = (isRTL: boolean) => (isRTL ? 'borderLeftWidth' : 'borderRightWidth');
+
 const borderShorthandProps = {
   border: 'border',
   borderTop: 'borderTop',
   borderRight: 'borderRight',
   borderBottom: 'borderBottom',
   borderLeft: 'borderLeft',
+  borderInlineStart,
+  borderInlineEnd,
 };
 
 const borderColors = {
@@ -122,6 +134,8 @@ const borderColors = {
   borderRightColor: 'borderRightColor',
   borderBottomColor: 'borderBottomColor',
   borderLeftColor: 'borderLeftColor',
+  borderInlineStartColor,
+  borderInlineEndColor,
 };
 
 const borderRadii = {
@@ -138,6 +152,8 @@ const borderStyles = {
   borderRightStyle: 'borderRightStyle',
   borderBottomStyle: 'borderBottomStyle',
   borderLeftStyle: 'borderLeftStyle',
+  borderInlineStartStyle,
+  borderInlineEndStyle,
 };
 
 const borderWidths = {
@@ -146,47 +162,9 @@ const borderWidths = {
   borderRightWidth: 'borderRightWidth',
   borderBottomWidth: 'borderBottomWidth',
   borderLeftWidth: 'borderLeftWidth',
+  borderInlineStartWidth,
+  borderInlineEndWidth,
 };
-
-const borderLogicalProps = {
-  borderInlineStart: (isRTL: boolean) => (isRTL ? 'borderRight' : 'borderLeft'),
-  borderInlineEnd: (isRTL: boolean) => (isRTL ? 'borderLeft' : 'borderRight'),
-
-  borderInlineStartColor: (isRTL: boolean) => (isRTL ? 'borderRightColor' : 'borderLeftColor'),
-  borderInlineEndColor: (isRTL: boolean) => (isRTL ? 'borderLeftColor' : 'borderRightColor'),
-
-  borderInlineStartStyle: (isRTL: boolean) => (isRTL ? 'borderRightStyle' : 'borderLeftStyle'),
-  borderInlineEndStyle: (isRTL: boolean) => (isRTL ? 'borderLeftStyle' : 'borderRightStyle'),
-
-  borderInlineStartWidth: (isRTL: boolean) => (isRTL ? 'borderRightWidth' : 'borderLeftWidth'),
-  borderInlineEndWidth: (isRTL: boolean) => (isRTL ? 'borderLeftWidth' : 'borderRightWidth'),
-};
-
-function convertLogicalPropAttrs<P extends BorderProps & {theme?: PartialEmotionCanvasTheme}>(
-  props: P
-) {
-  // convertLogicalPropAttrs will always be used within the context of a component, but eslint doesn't know that
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const {canvas} = useTheme(props.theme);
-  const convertedProps = {};
-  for (const key in props) {
-    if (key in props) {
-      const value = props[key];
-
-      if (key in borderLogicalProps) {
-        const isRTL = canvas.direction === ContentDirection.RTL;
-        const propFn = borderLogicalProps[key as keyof BorderLogicalProps];
-        const attr = propFn(isRTL);
-        // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-        convertedProps[attr] = value;
-      } else {
-        // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
-        convertedProps[key] = value;
-      }
-    }
-  }
-  return convertedProps as P;
-}
 
 /**
  * A style prop function that takes components props and returns border styles. Some props, such as borderRadius and borderColor, are connected to our design tokens.
@@ -200,27 +178,44 @@ function convertLogicalPropAttrs<P extends BorderProps & {theme?: PartialEmotion
  *
  */
 export function border<P extends BorderProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
+  // border will always be used within the context of a component, but eslint doesn't know that
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const {canvas} = useTheme(props.theme);
+  const isRTL = canvas.direction === ContentDirection.RTL;
   const styles = {};
-  const convertedProps = convertLogicalPropAttrs(props);
-  for (const key in convertedProps) {
-    if (convertedProps.hasOwnProperty(key)) {
+  for (const key in props) {
+    if (props.hasOwnProperty(key)) {
       if (key in borderShorthandProps) {
-        const value = convertedProps[key as keyof BorderShorthandProps];
-        const attr = borderShorthandProps[key as keyof BorderShorthandProps];
+        const value = props[key as keyof BorderShorthandProps];
+        let attr: string;
+        if (key === 'borderInlineStart') {
+          attr = borderInlineStart(isRTL);
+        } else if (key === 'borderInlineEnd') {
+          attr = borderInlineEnd(isRTL);
+        } else {
+          attr = borderShorthandProps[key as keyof BorderShorthandProps];
+        }
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
       }
 
       if (key in borderColors) {
-        const propValue = convertedProps[key as keyof BorderColorProps] as CanvasColor | string;
+        const propValue = props[key as keyof BorderColorProps] as CanvasColor | string;
         const value = colorTokens[propValue as CanvasColor] || propValue;
-        const attr = borderColors[key as keyof BorderColorProps];
+        let attr: string;
+        if (key === 'borderInlineStartColor') {
+          attr = borderInlineStartColor(isRTL);
+        } else if (key === 'borderInlineEndColor') {
+          attr = borderInlineEndColor(isRTL);
+        } else {
+          attr = borderColors[key as keyof BorderColorProps];
+        }
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
       }
 
       if (key in borderRadii) {
-        const propValue = convertedProps[key as keyof BorderRadiusProps] as
+        const propValue = props[key as keyof BorderRadiusProps] as
           | CanvasBorderRadiusTokens
           | number
           | string;
@@ -231,15 +226,29 @@ export function border<P extends BorderProps & {theme?: PartialEmotionCanvasThem
       }
 
       if (key in borderStyles) {
-        const value = convertedProps[key as keyof BorderStyleProps];
-        const attr = borderStyles[key as keyof BorderStyleProps];
+        const value = props[key as keyof BorderStyleProps];
+        let attr: string;
+        if (key === 'borderInlineStartStyle') {
+          attr = borderInlineStartStyle(isRTL);
+        } else if (key === 'borderInlineEndStyle') {
+          attr = borderInlineEndStyle(isRTL);
+        } else {
+          attr = borderStyles[key as keyof BorderStyleProps];
+        }
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
       }
 
       if (key in borderWidths) {
-        const value = convertedProps[key as keyof BorderWidthProps];
-        const attr = borderWidths[key as keyof BorderWidthProps];
+        const value = props[key as keyof BorderWidthProps];
+        let attr: string;
+        if (key === 'borderInlineStartWidth') {
+          attr = borderInlineStartWidth(isRTL);
+        } else if (key === 'borderInlineEndWidth') {
+          attr = borderInlineEndWidth(isRTL);
+        } else {
+          attr = borderWidths[key as keyof BorderWidthProps];
+        }
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
       }
