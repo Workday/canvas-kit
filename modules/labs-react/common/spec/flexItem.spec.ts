@@ -1,4 +1,4 @@
-import {flexItem, FlexItemProps} from '../lib/utils/flexItem';
+import {flexItem, FlexItemStyleProps} from '../lib/utils/flexItem';
 
 describe('FlexItem Style Props Function', () => {
   it('should ignore non-flex-item props', () => {
@@ -6,7 +6,7 @@ describe('FlexItem Style Props Function', () => {
       depth: 'inset',
       children: null,
       flex: 1,
-    } as FlexItemProps;
+    } as FlexItemStyleProps;
     const expected = {flex: 1};
     const flexItemStyles = flexItem(props);
 
@@ -21,7 +21,7 @@ describe('FlexItem Style Props Function', () => {
       justifySelf: 'flex-start',
       alignSelf: 'center',
       order: -1,
-    } as FlexItemProps;
+    } as FlexItemStyleProps;
     const expected = props;
     const flexItemStyles = flexItem(props);
 

@@ -1,7 +1,7 @@
 import {Property} from 'csstype';
 
 /** style props to for flexbox item properties */
-export type FlexItemProps = {
+export type FlexItemStyleProps = {
   /** sets `flex` property */
   flex?: number | string;
   /** sets `flex-grow` property */
@@ -31,7 +31,7 @@ const flexItemProps = {
 
 /**
  * A style prop function that takes component props and returns flexbox item styles.
- * If no `FlexItemProps` are found, it returns an empty object.
+ * If no `FlexItemStyleProps` are found, it returns an empty object.
  *
  * @example
  * // You'll most likely use `flexItem` with low-level, styled components
@@ -42,11 +42,11 @@ const flexItemProps = {
  * );
  *
  */
-export function flexItem<P extends FlexItemProps>(props: P) {
+export function flexItem<P extends FlexItemStyleProps>(props: P) {
   const styles = {};
   for (const key in props) {
     if (key in flexItemProps) {
-      const attr = flexItemProps[key as keyof FlexItemProps];
+      const attr = flexItemProps[key as keyof FlexItemStyleProps];
       const value = props[key];
       // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
       styles[attr] = value;

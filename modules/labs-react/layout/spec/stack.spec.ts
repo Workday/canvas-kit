@@ -1,4 +1,4 @@
-import {stack, StackProps} from '../lib/utils/stack';
+import {stack, StackStyleProps} from '../lib/utils/stack';
 import {space} from '@workday/canvas-kit-react/tokens';
 const context = describe;
 
@@ -11,7 +11,7 @@ describe('Stack Style Props Function', () => {
       children: null,
       flexDirection: 'column',
       spacing: space.s,
-    } as StackProps;
+    } as StackStyleProps;
     const expected = {
       [selector]: {
         marginTop: space.s,
@@ -27,7 +27,7 @@ describe('Stack Style Props Function', () => {
       const props = {
         flexDirection: 'column',
         spacing: space.m,
-      } as StackProps;
+      } as StackStyleProps;
       const expected = {
         [selector]: {
           marginTop: space.m,
@@ -44,7 +44,7 @@ describe('Stack Style Props Function', () => {
       const props = {
         flexDirection: 'column-reverse',
         spacing: space.xxs,
-      } as StackProps;
+      } as StackStyleProps;
       const expected = {
         [selector]: {
           marginBottom: space.xxs,
@@ -61,7 +61,7 @@ describe('Stack Style Props Function', () => {
       const props = {
         flexDirection: 'row',
         spacing: space.m,
-      } as StackProps;
+      } as StackStyleProps;
       const expected = {
         [selector]: {
           marginLeft: space.m,
@@ -78,7 +78,7 @@ describe('Stack Style Props Function', () => {
       const props = {
         flexDirection: 'row-reverse',
         spacing: space.m,
-      } as StackProps;
+      } as StackStyleProps;
       const expected = {
         [selector]: {
           marginRight: space.m,

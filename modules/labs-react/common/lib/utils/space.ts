@@ -9,51 +9,51 @@ type SpacePropValues = CanvasSpaceKeys | number | (string & {});
 
 /** These props automatically adjust for bidirectionality (LTR & RTL) */
 export type SpaceLogicalProps = {
-  /** sets margin-left (bidirectional support) */
+  /** sets margin-left property (bidirectional support) */
   marginInlineStart?: SpacePropValues;
-  /** sets margin-right (bidirectional support) */
+  /** sets margin-right property (bidirectional support) */
   marginInlineEnd?: SpacePropValues;
-  /** sets padding-left (bidirectional support) */
+  /** sets padding-left property (bidirectional support) */
   paddingInlineStart?: SpacePropValues;
-  /** sets padding-right (bidirectional support) */
+  /** sets padding-right property (bidirectional support) */
   paddingInlineEnd?: SpacePropValues;
 };
 
 /** These props do not adjust for bidirectionality (LTR & RTL) */
 export type SpaceStandardProps = {
-  /** sets margin */
+  /** sets margin property */
   margin?: SpacePropValues;
-  /** sets margin-left and margin-right */
+  /** sets margin-left and margin-right properties */
   marginX?: SpacePropValues;
-  /** sets margin-top and margin-bottom */
+  /** sets margin-top and margin-bottom properties */
   marginY?: SpacePropValues;
-  /** sets margin-top */
+  /** sets margin-top property */
   marginTop?: SpacePropValues;
-  /** sets margin-right (no bidirectional support) */
+  /** sets margin-right property (no bidirectional support) */
   marginRight?: SpacePropValues;
-  /** sets margin-bottom */
+  /** sets margin-bottom property */
   marginBottom?: SpacePropValues;
-  /** sets margin-left (no bidirectional support) */
+  /** sets margin-left property (no bidirectional support) */
   marginLeft?: SpacePropValues;
-  /** sets padding */
+  /** sets padding property */
   padding?: SpacePropValues;
-  /** sets padding-left and margin-right */
+  /** sets padding-left and margin-right properties */
   paddingX?: SpacePropValues;
-  /** sets padding-top and padding-bottom */
+  /** sets padding-top and padding-bottom properties */
   paddingY?: SpacePropValues;
-  /** sets padding-top */
+  /** sets padding-top property */
   paddingTop?: SpacePropValues;
-  /** sets padding-right (no bidirectional support) */
+  /** sets padding-right property (no bidirectional support) */
   paddingRight?: SpacePropValues;
   /** sets padding-bottom */
   paddingBottom?: SpacePropValues;
-  /** sets padding-left (no bidirectional support) */
+  /** sets padding-left property (no bidirectional support) */
   paddingLeft?: SpacePropValues;
 };
 
 type SpacePropValue = CanvasSpaceKeys | number | string;
 
-export type SpaceProps = SpaceStandardProps & SpaceLogicalProps;
+export type SpaceStyleProps = SpaceStandardProps & SpaceLogicalProps;
 
 const margin = (value: SpacePropValue) => {
   return {margin: spaceTokens[value as keyof CanvasSpace] || value};
@@ -145,14 +145,14 @@ const paddingLeft = (value: SpacePropValue, isRTL = false) => {
   };
 };
 
-const logicalSpaceProps = {
+const logicalSpaceStyleProps = {
   marginInlineStart: marginLeft,
   marginInlineEnd: marginRight,
   paddingInlineStart: paddingLeft,
   paddingInlineEnd: paddingRight,
 };
 
-const standardSpaceProps = {
+const standardSpaceStyleProps = {
   margin,
   marginX,
   marginY,
@@ -171,7 +171,7 @@ const standardSpaceProps = {
 
 /**
  * A style prop function that takes component props and returns space styles.
- * If no `SpaceProps` are found, it returns an empty object.
+ * If no `SpaceStyleProps` are found, it returns an empty object.
  *
  * @example
  * // You'll most likely use `space` with low-level, styled components
@@ -182,22 +182,22 @@ const standardSpaceProps = {
  * );
  *
  */
-export function space<P extends SpaceProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
+export function space<P extends SpaceStyleProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
   // space will always be used within the context of a component, but eslint doesn't know that
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const {canvas} = useTheme(props.theme);
   let styles = {};
   for (const key in props) {
     if (props.hasOwnProperty(key)) {
-      if (key in standardSpaceProps) {
+      if (key in standardSpaceStyleProps) {
         const value = props[key as keyof SpaceStandardProps] as SpacePropValues;
-        const spaceFn = standardSpaceProps[key as keyof SpaceStandardProps];
+        const spaceFn = standardSpaceStyleProps[key as keyof SpaceStandardProps];
         const style = spaceFn(value);
         styles = {...styles, ...style};
       }
-      if (key in logicalSpaceProps) {
+      if (key in logicalSpaceStyleProps) {
         const value = props[key as keyof SpaceLogicalProps] as SpacePropValues;
-        const spaceFn = logicalSpaceProps[key as keyof SpaceLogicalProps];
+        const spaceFn = logicalSpaceStyleProps[key as keyof SpaceLogicalProps];
         const isRTL = canvas.direction === ContentDirection.RTL;
         const style = spaceFn(value, isRTL);
         styles = {...styles, ...style};

@@ -1,5 +1,5 @@
 import {ContentDirection} from '@workday/canvas-kit-react/common';
-import {position, PositionProps} from '../lib/utils/position';
+import {position, PositionStyleProps} from '../lib/utils/position';
 const context = describe;
 
 describe('Layout Style Props Function', () => {
@@ -8,7 +8,7 @@ describe('Layout Style Props Function', () => {
       display: 'block',
       children: null,
       position: 'absolute',
-    } as PositionProps;
+    } as PositionStyleProps;
     const expected = {position: 'absolute'};
     const positionStyles = position(props);
 
@@ -24,7 +24,7 @@ describe('Layout Style Props Function', () => {
         right: 0,
         bottom: '24',
         left: 0,
-      } as PositionProps;
+      } as PositionStyleProps;
       const expected = props;
       const positionStyles = position(props);
 
@@ -40,7 +40,7 @@ describe('Layout Style Props Function', () => {
             direction: ContentDirection.RTL,
           },
         },
-      } as PositionProps;
+      } as PositionStyleProps;
       const expected = {
         left: '16px',
         right: '24px',
@@ -61,7 +61,7 @@ describe('Layout Style Props Function', () => {
             direction: ContentDirection.RTL,
           },
         },
-      } as PositionProps;
+      } as PositionStyleProps;
       const expected = {
         right: '16px',
         left: '24px',

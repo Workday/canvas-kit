@@ -4,31 +4,31 @@ import isPropValid from '@emotion/is-prop-valid';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 
 // style props
-import {border, BorderProps} from './utils/border';
-import {color, ColorProps} from './utils/color';
-import {depth, DepthProps} from './utils/depth';
-import {flexItem, FlexItemProps} from './utils/flexItem';
-import {layout, LayoutProps} from './utils/layout';
-import {position, PositionProps} from './utils/position';
-import {space, SpaceProps} from './utils/space';
+import {border, BorderStyleProps} from './utils/border';
+import {color, ColorStyleProps} from './utils/color';
+import {depth, DepthStyleProps} from './utils/depth';
+import {flexItem, FlexItemStyleProps} from './utils/flexItem';
+import {layout, LayoutStyleProps} from './utils/layout';
+import {position, PositionStyleProps} from './utils/position';
+import {space, SpaceStyleProps} from './utils/space';
 
 export type {
-  BorderProps,
-  ColorProps,
-  DepthProps,
-  FlexItemProps,
-  LayoutProps,
-  PositionProps,
-  SpaceProps,
+  BorderStyleProps,
+  ColorStyleProps,
+  DepthStyleProps,
+  FlexItemStyleProps,
+  LayoutStyleProps,
+  PositionStyleProps,
+  SpaceStyleProps,
 };
 
-export type BoxProps = BorderProps &
-  ColorProps &
-  DepthProps &
-  FlexItemProps &
-  LayoutProps &
-  PositionProps &
-  SpaceProps & {
+export type BoxProps = BorderStyleProps &
+  ColorStyleProps &
+  DepthStyleProps &
+  FlexItemStyleProps &
+  LayoutStyleProps &
+  PositionStyleProps &
+  SpaceStyleProps & {
     children?: React.ReactNode;
   };
 

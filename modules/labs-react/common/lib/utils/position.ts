@@ -52,7 +52,7 @@ const logicalPositionProps = {
   insetInlineEnd: getInsetInlineEndStyle,
 };
 
-export type PositionProps = PositionStandardProps & PositionLogicalProps;
+export type PositionStyleProps = PositionStandardProps & PositionLogicalProps;
 
 /**
  * A style prop function that takes components props and returns position styles.
@@ -67,7 +67,9 @@ export type PositionProps = PositionStandardProps & PositionLogicalProps;
  * );
  *
  */
-export function position<P extends PositionProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
+export function position<P extends PositionStyleProps & {theme?: PartialEmotionCanvasTheme}>(
+  props: P
+) {
   // position will always be used within the context of a component, but eslint doesn't know that
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const {canvas} = useTheme(props.theme);

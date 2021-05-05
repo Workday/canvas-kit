@@ -19,7 +19,7 @@ This component is work in progress and currently in pre-release.
 
 `Stack`, `HStack`, and `VStack` are higher-level layout components that provide an ergonomic API for
 building one-dimensional layouts with consistent spacing between elements. They're built on top of
-`Flex` and have access to all `FlexProps` and `BoxProps`. `Stack` can align items in either a
+`Flex` and have access to all `FlexStyleProps` and `BoxProps`. `Stack` can align items in either a
 horizontal or vertical orientation. `HStack` and `VStack` will only align items in a horizontal or
 vertical orientation, respectively.
 
@@ -31,7 +31,7 @@ create horizontal or vertical stacks of elements.
 ### Up & Running
 
 ```tsx
-import {Stack, StackProps} from '@workday/canvas-kit-labs-react/layout';
+import {Stack, StackStyleProps} from '@workday/canvas-kit-labs-react/layout';
 ```
 
 ### What Stack Is & Isn't
@@ -123,7 +123,7 @@ defaults to `row` if no `flexDirection` is provided.
 ### Up & Running
 
 ```tsx
-import {HStack, HStackProps} from '@workday/canvas-kit-labs-react/layout';
+import {HStack, HStackStyleProps} from '@workday/canvas-kit-labs-react/layout';
 ```
 
 ### Example
@@ -140,7 +140,7 @@ directions. It defaults to `column` if no `flexDirection` is provided.
 ### Up & Running
 
 ```tsx
-import {VStack, VStackProps} from '@workday/canvas-kit-labs-react/layout';
+import {VStack, VStackStyleProps} from '@workday/canvas-kit-labs-react/layout';
 ```
 
 ### Example

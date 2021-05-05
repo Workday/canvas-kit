@@ -1,27 +1,30 @@
 import {
   BoxProps,
-  BorderProps,
-  ColorProps,
-  DepthProps,
-  FlexItemProps,
-  LayoutProps,
-  PositionProps,
-  SpaceProps,
+  BorderStyleProps,
+  ColorStyleProps,
+  DepthStyleProps,
+  FlexItemStyleProps,
+  LayoutStyleProps,
+  PositionStyleProps,
+  SpaceStyleProps,
 } from '@workday/canvas-kit-labs-react/common';
 // border props
-export const BoxBorder = (props: BorderProps) => <div />;
+export const BoxBorder = (props: BorderStyleProps) => <div />;
 export const BoxBorderShorthand = (
-  props: Pick<BorderProps, 'border' | 'borderTop' | 'borderRight' | 'borderBottom' | 'borderLeft'>
+  props: Pick<
+    BorderStyleProps,
+    'border' | 'borderTop' | 'borderRight' | 'borderBottom' | 'borderLeft'
+  >
 ) => <div />;
 export const BoxBorderColor = (
   props: Pick<
-    BorderProps,
+    BorderStyleProps,
     'borderColor' | 'borderTopColor' | 'borderRightColor' | 'borderBottomColor' | 'borderLeftColor'
   >
 ) => <div />;
 export const BoxBorderRadius = (
   props: Pick<
-    BorderProps,
+    BorderStyleProps,
     | 'borderRadius'
     | 'borderTopLeftRadius'
     | 'borderTopRightRadius'
@@ -31,19 +34,19 @@ export const BoxBorderRadius = (
 ) => <div />;
 export const BoxBorderStyle = (
   props: Pick<
-    BorderProps,
+    BorderStyleProps,
     'borderStyle' | 'borderTopStyle' | 'borderRightStyle' | 'borderBottomStyle' | 'borderLeftStyle'
   >
 ) => <div />;
 export const BoxBorderWidth = (
   props: Pick<
-    BorderProps,
+    BorderStyleProps,
     'borderWidth' | 'borderTopWidth' | 'borderRightWidth' | 'borderBottomWidth' | 'borderLeftWidth'
   >
 ) => <div />;
 export const BoxBorderLogical = (
   props: Pick<
-    BorderProps,
+    BorderStyleProps,
     | 'borderInlineStart'
     | 'borderInlineStartColor'
     | 'borderInlineStartStyle'
@@ -55,32 +58,32 @@ export const BoxBorderLogical = (
   >
 ) => <div />;
 // color props
-export const BoxColor = (props: ColorProps) => <div />;
+export const BoxColor = (props: ColorStyleProps) => <div />;
 // depth props
-export const BoxDepth = (props: DepthProps) => <div />;
+export const BoxDepth = (props: DepthStyleProps) => <div />;
 // flex item props
-export const BoxFlexItem = (props: FlexItemProps) => <div />;
+export const BoxFlexItem = (props: FlexItemStyleProps) => <div />;
 // layout props
-export const BoxLayout = (props: LayoutProps) => <div />;
+export const BoxLayout = (props: LayoutStyleProps) => <div />;
 // position props
-export const BoxPosition = (props: PositionProps) => <div />;
+export const BoxPosition = (props: PositionStyleProps) => <div />;
 export const BoxPositionLogical = (
-  props: Pick<PositionProps, 'insetInlineStart' | 'insetInlineEnd'>
+  props: Pick<PositionStyleProps, 'insetInlineStart' | 'insetInlineEnd'>
 ) => <div />;
 export const BoxPositionStandard = (
-  props: Omit<PositionProps, 'insetInlineStart' | 'insetInlineEnd'>
+  props: Omit<PositionStyleProps, 'insetInlineStart' | 'insetInlineEnd'>
 ) => <div />;
 // space props
-export const BoxSpace = (props: SpaceProps) => <div />;
+export const BoxSpace = (props: SpaceStyleProps) => <div />;
 export const BoxSpaceLogical = (
   props: Pick<
-    SpaceProps,
+    SpaceStyleProps,
     'marginInlineStart' | 'marginInlineEnd' | 'paddingInlineStart' | 'paddingInlineEnd'
   >
 ) => <div />;
 export const BoxSpaceStandard = (
   props: Omit<
-    SpaceProps,
+    SpaceStyleProps,
     'marginInlineStart' | 'marginInlineEnd' | 'paddingInlineStart' | 'paddingInlineEnd'
   >
 ) => <div />;

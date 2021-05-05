@@ -11,7 +11,7 @@ const selector = '& > *:not(style) ~ *:not(style)';
 
 export type StackSpacing = CanvasSpaceKeys | number | (string & {});
 
-export type StackProps = {
+export type StackStyleProps = {
   spacing: StackSpacing;
   flexDirection?: StackDirection;
   shouldWrapChildren?: boolean;
@@ -46,7 +46,7 @@ const stackDirectionProps = {
   'row-reverse': rowReverse,
 };
 
-export function stack<P extends StackProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
+export function stack<P extends StackStyleProps & {theme?: PartialEmotionCanvasTheme}>(props: P) {
   let styles = {};
   const {flexDirection = 'row', spacing} = props;
   if (flexDirection === 'column' || flexDirection === 'column-reverse') {

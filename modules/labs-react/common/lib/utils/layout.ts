@@ -1,7 +1,7 @@
 import {Property} from 'csstype';
 
 /** style props to for layout properties */
-export type LayoutProps = {
+export type LayoutStyleProps = {
   /** sets `display` property */
   display?: Property.Display;
   /** sets `height` property */
@@ -42,7 +42,7 @@ const layoutProps = {
 
 /**
  * A style prop function that takes components props and returns layout styles.
- * If no `LayoutProps` are found, it returns an empty object.
+ * If no `LayoutStyleProps` are found, it returns an empty object.
  *
  * @example
  * // You'll most likely use `layout` with low-level, styled components
@@ -53,11 +53,11 @@ const layoutProps = {
  * );
  *
  */
-export function layout<P extends LayoutProps>(props: P) {
+export function layout<P extends LayoutStyleProps>(props: P) {
   const styles = {};
   for (const key in props) {
     if (key in layoutProps) {
-      const attr = layoutProps[key as keyof LayoutProps];
+      const attr = layoutProps[key as keyof LayoutStyleProps];
       const value = props[key];
       // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
       styles[attr] = value;

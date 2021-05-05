@@ -1,4 +1,4 @@
-import {flex, FlexProps} from '../lib/utils/flex';
+import {flex, FlexStyleProps} from '../lib/utils/flex';
 
 describe('Flex Style Props Function', () => {
   it('should ignore non-flex props', () => {
@@ -6,7 +6,7 @@ describe('Flex Style Props Function', () => {
       paddingX: 's',
       children: null,
       flexDirection: 'column',
-    } as FlexProps;
+    } as FlexStyleProps;
     const expected = {flexDirection: 'column'};
     const flexStyles = flex(props);
 
@@ -22,7 +22,7 @@ describe('Flex Style Props Function', () => {
       justifyContent: 'flex-end',
       flexWrap: 'wrap',
       flexDirection: 'column',
-    } as FlexProps;
+    } as FlexStyleProps;
     const expected = props;
     const flexStyles = flex(props);
 

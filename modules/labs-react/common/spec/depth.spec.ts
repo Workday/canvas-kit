@@ -1,11 +1,11 @@
-import {depth, DepthProps} from '../lib/utils/depth';
+import {depth, DepthStyleProps} from '../lib/utils/depth';
 
 describe('Depth Style Props Function', () => {
   it('should ignore non-depth props', () => {
     const props = {
       color: 'blackPepper400',
       children: null,
-    } as DepthProps;
+    } as DepthStyleProps;
     const expected = {};
     const depthStyles = depth(props);
 
@@ -15,7 +15,7 @@ describe('Depth Style Props Function', () => {
   it('should translate depth token values to styles', () => {
     const props = {
       depth: 4,
-    } as DepthProps;
+    } as DepthStyleProps;
     const expected = {
       border: '1px solid rgba(218, 226, 230, 1)',
       boxShadow: '0px 8px 16px 0 rgba(0, 0, 0, 0.12)',

@@ -1,7 +1,7 @@
 import {Property} from 'csstype';
 
 /** style props to for flexbox container properties */
-export type FlexProps = {
+export type FlexStyleProps = {
   /** sets `align-items` property */
   alignItems?: Property.AlignItems;
   /** sets `align-content` property */
@@ -30,7 +30,7 @@ const flexProps = {
 
 /**
  * A style prop function that takes component props and returns flexbox styles.
- * If no `FlexProps` are found, it returns an empty object.
+ * If no `FlexStyleProps` are found, it returns an empty object.
  *
  * @example
  * // You'll most likely use `flex` with low-level, styled components
@@ -41,11 +41,11 @@ const flexProps = {
  * );
  *
  */
-export function flex<P extends FlexProps>(props: P) {
+export function flex<P extends FlexStyleProps>(props: P) {
   const styles = {};
   for (const key in props) {
     if (key in flexProps) {
-      const attr = flexProps[key as keyof FlexProps];
+      const attr = flexProps[key as keyof FlexStyleProps];
       const value = props[key];
       // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
       styles[attr] = value;

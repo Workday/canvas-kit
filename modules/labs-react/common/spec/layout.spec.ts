@@ -1,4 +1,4 @@
-import {layout, LayoutProps} from '../lib/utils/layout';
+import {layout, LayoutStyleProps} from '../lib/utils/layout';
 
 describe('Layout Style Props Function', () => {
   it('should ignore non-layout props', () => {
@@ -6,7 +6,7 @@ describe('Layout Style Props Function', () => {
       flex: 1,
       children: null,
       minHeight: '100vh',
-    } as LayoutProps;
+    } as LayoutStyleProps;
     const expected = {minHeight: '100vh'};
     const layoutStyles = layout(props);
 
@@ -26,7 +26,7 @@ describe('Layout Style Props Function', () => {
       overflowY: 'scroll',
       verticalAlign: 'baseline',
       width: '4rem',
-    } as LayoutProps;
+    } as LayoutStyleProps;
     const expected = props;
     const layoutStyles = layout(props);
 

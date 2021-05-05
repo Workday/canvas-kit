@@ -3,7 +3,7 @@ import {colors as colorTokens, CanvasColor} from '@workday/canvas-kit-react/toke
 export type ColorTokens = typeof colorTokens;
 
 /** style props to for color properties */
-export type ColorProps = {
+export type ColorStyleProps = {
   /** sets `background` property */
   background?: CanvasColor | (string & {});
   /** sets `background-color` property */
@@ -39,7 +39,7 @@ const colorProps = {
 
 /**
  * A style prop function that takes components props and returns color styles from canvas token values.
- * If no `ColorProps` are found, it returns an empty object.
+ * If no `ColorStyleProps` are found, it returns an empty object.
  *
  * @example
  * // You'll most likely use `color` with low-level, styled components
@@ -48,12 +48,12 @@ const colorProps = {
  * );
  *
  */
-export function color<P extends ColorProps>(props: P) {
+export function color<P extends ColorStyleProps>(props: P) {
   let styles = {};
   for (const key in props) {
     if (key in colorProps) {
-      const value = props[key as keyof ColorProps] as CanvasColor | string;
-      const colorFn = colorProps[key as keyof ColorProps];
+      const value = props[key as keyof ColorStyleProps] as CanvasColor | string;
+      const colorFn = colorProps[key as keyof ColorStyleProps];
       const style = colorFn(value);
       styles = {...styles, ...style};
     }

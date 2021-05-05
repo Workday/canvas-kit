@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 
-import {flex, FlexProps as FlexBaseProps} from './utils/flex';
+import {flex, FlexStyleProps as FlexBaseProps} from './utils/flex';
 
-export type FlexProps = BoxProps & FlexBaseProps;
+export type FlexStyleProps = BoxProps & FlexBaseProps;
 
-const StyledFlex = styled(Box)<StyledType & FlexProps>(
+const StyledFlex = styled(Box)<StyledType & FlexStyleProps>(
   {
     display: 'flex',
   },
@@ -20,13 +20,13 @@ const StyledFlex = styled(Box)<StyledType & FlexProps>(
  * `Flex` is built on top of `Box` and has access to all `BoxProps`.
  *
  * @example
- * import { Flex, FlexProps } from '@workday/canvas-kit-labs-react/layout';
+ * import { Flex, FlexStyleProps } from '@workday/canvas-kit-labs-react/layout';
  *
- * interface CardProps extends FlexProps {
+ * interface CardProps extends FlexStyleProps {
  *   // card-specific props
  * }
  *
- * // `Card`'s default values are set using `FlexProps`
+ * // `Card`'s default values are set using `FlexStyleProps`
  * const Card = (props: CardProps) => (
  *   <Flex flexDirection="column" alignItems="flex-start" depth={2} space="m" {...props}>
  *     <h1>Hello, Card!</h1>
@@ -37,7 +37,7 @@ const StyledFlex = styled(Box)<StyledType & FlexProps>(
  */
 export const Flex = createComponent('div')({
   displayName: 'Flex',
-  Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
+  Component: ({children, ...elemProps}: FlexStyleProps, ref, Element) => {
     return (
       <StyledFlex as={Element} ref={ref} {...elemProps}>
         {children}
