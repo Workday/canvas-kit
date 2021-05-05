@@ -82,21 +82,21 @@ export type BorderWidthProps = {
 };
 
 export type BorderLogicalProps = {
-  /** sets `border-left` property (no bidirectional support) */
+  /** sets `border-left` property (bidirectional support) */
   borderInlineStart?: string;
-  /** sets `border-left-color` property (no bidirectional support) */
+  /** sets `border-left-color` property (bidirectional support) */
   borderInlineStartColor?: CanvasColor | (string & {});
-  /** sets `border-left-style` property (no bidirectional support) */
+  /** sets `border-left-style` property (bidirectional support) */
   borderInlineStartStyle?: Property.BorderStyle;
-  /** sets `border-left-width` property (no bidirectional support) */
+  /** sets `border-left-width` property (bidirectional support) */
   borderInlineStartWidth?: string | number;
-  /** sets `border-right` property (no bidirectional support) */
+  /** sets `border-right` property (bidirectional support) */
   borderInlineEnd?: string;
-  /** sets `border-right-color` property (no bidirectional support) */
+  /** sets `border-right-color` property (bidirectional support) */
   borderInlineEndColor?: CanvasColor | (string & {});
-  /** sets `border-right-style` property (no bidirectional support) */
+  /** sets `border-right-style` property (bidirectional support) */
   borderInlineEndStyle?: Property.BorderStyle;
-  /** sets `border-right-width` property (no bidirectional support) */
+  /** sets `border-right-width` property (bidirectional support) */
   borderInlineEndWidth?: string | number;
 };
 

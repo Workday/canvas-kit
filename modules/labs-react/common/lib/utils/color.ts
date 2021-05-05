@@ -8,7 +8,7 @@ export type ColorProps = {
   background?: CanvasColor | (string & {});
   /** sets `background-color` property */
   backgroundColor?: CanvasColor | (string & {});
-  /** sets `background` property */
+  /** sets `background-image` property */
   backgroundImage?: string;
   /** sets `color` property */
   color?: CanvasColor | (string & {});

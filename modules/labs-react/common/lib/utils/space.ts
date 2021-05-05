@@ -8,19 +8,19 @@ import {space as spaceTokens, CanvasSpace, CanvasSpaceKeys} from '@workday/canva
 type SpacePropValues = CanvasSpaceKeys | number | (string & {});
 
 /** These props automatically adjust for bidirectionality (LTR & RTL) */
-export type LogicalSpaceProps = {
-  /** sets margin-left (with bidirectional support) */
+export type SpaceLogicalProps = {
+  /** sets margin-left (bidirectional support) */
   marginInlineStart?: SpacePropValues;
-  /** sets margin-right (with bidirectional support) */
+  /** sets margin-right (bidirectional support) */
   marginInlineEnd?: SpacePropValues;
-  /** sets padding-left (with bidirectional support) */
+  /** sets padding-left (bidirectional support) */
   paddingInlineStart?: SpacePropValues;
-  /** sets padding-right (with bidirectional support) */
+  /** sets padding-right (bidirectional support) */
   paddingInlineEnd?: SpacePropValues;
 };
 
 /** These props do not adjust for bidirectionality (LTR & RTL) */
-export type StandardSpaceProps = {
+export type SpaceStandardProps = {
   /** sets margin */
   margin?: SpacePropValues;
   /** sets margin-left and margin-right */
@@ -53,7 +53,7 @@ export type StandardSpaceProps = {
 
 type SpacePropValue = CanvasSpaceKeys | number | string;
 
-export type SpaceProps = StandardSpaceProps & LogicalSpaceProps;
+export type SpaceProps = SpaceStandardProps & SpaceLogicalProps;
 
 const margin = (value: SpacePropValue) => {
   return {margin: spaceTokens[value as keyof CanvasSpace] || value};
@@ -190,14 +190,14 @@ export function space<P extends SpaceProps & {theme?: PartialEmotionCanvasTheme}
   for (const key in props) {
     if (props.hasOwnProperty(key)) {
       if (key in standardSpaceProps) {
-        const value = props[key as keyof StandardSpaceProps] as SpacePropValues;
-        const spaceFn = standardSpaceProps[key as keyof StandardSpaceProps];
+        const value = props[key as keyof SpaceStandardProps] as SpacePropValues;
+        const spaceFn = standardSpaceProps[key as keyof SpaceStandardProps];
         const style = spaceFn(value);
         styles = {...styles, ...style};
       }
       if (key in logicalSpaceProps) {
-        const value = props[key as keyof LogicalSpaceProps] as SpacePropValues;
-        const spaceFn = logicalSpaceProps[key as keyof LogicalSpaceProps];
+        const value = props[key as keyof SpaceLogicalProps] as SpacePropValues;
+        const spaceFn = logicalSpaceProps[key as keyof SpaceLogicalProps];
         const isRTL = canvas.direction === ContentDirection.RTL;
         const style = spaceFn(value, isRTL);
         styles = {...styles, ...style};

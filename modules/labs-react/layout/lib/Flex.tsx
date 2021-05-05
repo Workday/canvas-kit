@@ -5,9 +5,9 @@ import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 
 import {flex, FlexProps as FlexBaseProps} from './utils/flex';
 
-export type FlexProps = StyledType & BoxProps & FlexBaseProps;
+export type FlexProps = BoxProps & FlexBaseProps;
 
-const StyledFlex = styled(Box)<FlexProps>(
+const StyledFlex = styled(Box)<StyledType & FlexProps>(
   {
     display: 'flex',
   },
@@ -35,7 +35,7 @@ const StyledFlex = styled(Box)<FlexProps>(
  * );
  *
  */
-export const Flex = createComponent('div')<FlexProps>({
+export const Flex = createComponent('div')({
   displayName: 'Flex',
   Component: ({children, ...elemProps}: FlexProps, ref, Element) => {
     return (

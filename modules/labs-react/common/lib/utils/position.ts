@@ -6,7 +6,7 @@ import {
 import {Property} from 'csstype';
 
 /** style props to for standard position properties */
-export type StandardPositionProps = {
+export type PositionStandardProps = {
   /** sets `position` property  */
   position?: Property.Position;
   /** sets `zIndex` property  */
@@ -21,10 +21,10 @@ export type StandardPositionProps = {
   left?: number | string;
 };
 
-export type LogicalPositionProps = {
-  /** sets `left` property (with bidirectional support)  */
+export type PositionLogicalProps = {
+  /** sets `left` property (bidirectional support)  */
   insetInlineStart?: number | string;
-  /** sets `right` property (with bidirectional support) */
+  /** sets `right` property (bidirectional support) */
   insetInlineEnd?: number | string;
 };
 
@@ -52,7 +52,7 @@ const logicalPositionProps = {
   insetInlineEnd: getInsetInlineEndStyle,
 };
 
-export type PositionProps = StandardPositionProps & LogicalPositionProps;
+export type PositionProps = PositionStandardProps & PositionLogicalProps;
 
 /**
  * A style prop function that takes components props and returns position styles.
@@ -76,13 +76,13 @@ export function position<P extends PositionProps & {theme?: PartialEmotionCanvas
     if (key in props) {
       if (key in standardPositionProps) {
         const value = props[key];
-        const attr = standardPositionProps[key as keyof StandardPositionProps];
+        const attr = standardPositionProps[key as keyof PositionStandardProps];
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
       }
       if (key in logicalPositionProps) {
-        const value = props[key as keyof LogicalPositionProps] as string | number;
-        const styleFn = logicalPositionProps[key as keyof LogicalPositionProps];
+        const value = props[key as keyof PositionLogicalProps] as string | number;
+        const styleFn = logicalPositionProps[key as keyof PositionLogicalProps];
         const isRTL = canvas.direction === ContentDirection.RTL;
         const style = styleFn(value, isRTL);
         styles = {...styles, ...style};

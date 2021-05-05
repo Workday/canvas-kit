@@ -2,6 +2,7 @@ import {Meta} from '@storybook/addon-docs/blocks';
 
 import {Box} from '@workday/canvas-kit-labs-react/common';
 // examples
+import {As} from './examples/As';
 import {Border} from './examples/Border';
 import {Color} from './examples/Color';
 import {Depth} from './examples/Depth';
@@ -9,6 +10,26 @@ import {FlexItem} from './examples/FlexItem';
 import {Layout} from './examples/Layout';
 import {Position} from './examples/Position';
 import {Space} from './examples/Space';
+// props tables
+import {
+  BoxBorder,
+  BoxBorderShorthand,
+  BoxBorderColor,
+  BoxBorderRadius,
+  BoxBorderStyle,
+  BoxBorderWidth,
+  BoxBorderLogical,
+  BoxColor,
+  BoxDepth,
+  BoxFlexItem,
+  BoxLayout,
+  BoxPosition,
+  BoxPositionLogical,
+  BoxPositionStandard,
+  BoxSpace,
+  BoxSpaceLogical,
+  BoxSpaceStandard,
+} from './examples/PropTables';
 
 <Meta title="Labs/Common/Box" component={Box} />
 
@@ -25,6 +46,17 @@ is highly flexible, and its primary purpose is to build other components.
 ```tsx
 import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
 ```
+
+## Understanding the `as` Prop
+
+The `as` prop allows you to override the underlying element of a component or combine it with
+another component. By default, `Box` will render a `div` element, but often that's not what you
+want. Below, we have a `Box` that we want to render as a semantic anchor element. The most
+noticeable transformation is that `Box` renders as a link. But also notice that while it still
+supports all `BoxProps` such as `padding`, it also supports semantic anchor element props such as
+`href`.
+
+<ExampleCodeBlock code={As} />
 
 ## Style Props
 
@@ -47,20 +79,37 @@ are listed below. Each category has a more detailed explanation in the following
 
 Border style props allow you to adjust the border styles of components. Some props, such as
 `borderRadius` and `borderColor`, are connected to our design tokens. This makes it really simple to
-use Canvas values as you build UI. There are five types of border props: `BorderShorthandProps`,
-`BorderColorProps`, `BorderRadiusProps`, `BorderStyleProps`, and `BorderWidthProps`.
+use Canvas values as you build UI. There are five types of border props: `BoxBorderShorthandProps`,
+`BorderColorProps`, `BorderRadiusProps`, `BorderStyleProps`, and `BoxBorderWidthPropsBoxBoxBoxBox`.
+
+#### Border Logical Props
+
+Border logical props are based on
+[CSS Logical Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties/Basic_concepts).
+They support bidirectionality (LTR and RTL) and will automatically flip the value when a change in
+direction is detected. For example: `borderInlineStart="1px solid #000"` would set
+`border-left: 1px solid #000;` for LTR and switch to `border-right: 1px solid #000;` for RTL. You'll
+want to opt for these properties over standard border props, such as `borderLeft` and `borderRight`
+when you need bidrectional styles.
+
+Here's a quick reference for how these props map to LTR and RTL styles:
+
+| Logical Prop                           | LTR Style                            | RTL Style                            |
+| -------------------------------------- | ------------------------------------ | ------------------------------------ |
+| `borderInlineStart`                    | `border-left`                        | `border-right`                       |
+| `borderInlineEnd`                      | `border-right`                       | `border-left`                        |
+| `borderInlineStart{Color,Style,Width}` | `border-left{-color,-style,-width}`  | `border-right{-color,-style,-width}` |
+| `borderInlineEnd{Color,Style,Width}`   | `border-right{-color,-style,-width}` | `border-left{-color,-style,-width}`  |
+
+And below is a props table for the logical props:
+
+<ArgsTable of={BoxBorderLogical} />
 
 #### Border Shorthand Props
 
 These props map to CSS border shorthand properties:
 
-| Prop Name      | Style           |
-| -------------- | --------------- |
-| `border`       | `border`        |
-| `borderTop`    | `border-top`    |
-| `borderRight`  | `border-Right`  |
-| `borderBottom` | `border-bottom` |
-| `borderLeft`   | `border-left`   |
+<ArgsTable of={BoxBorderShorthand} />
 
 ---
 
@@ -68,13 +117,7 @@ These props map to CSS border shorthand properties:
 
 These props map to border color properties:
 
-| Prop Name           | Style                 |
-| ------------------- | --------------------- |
-| `borderColor`       | `border-color`        |
-| `borderTopColor`    | `border-top-color`    |
-| `borderRightColor`  | `border-Right-color`  |
-| `borderBottomColor` | `border-bottom-color` |
-| `borderLeftColor`   | `border-left-color`   |
+<ArgsTable of={BoxBorderColor} />
 
 ---
 
@@ -82,13 +125,7 @@ These props map to border color properties:
 
 These props map to border radius properies:
 
-| Prop Name                 | Style                        |
-| ------------------------- | ---------------------------- |
-| `borderRadius`            | `border-radius`              |
-| `borderTopLeftRadius`     | `border-top-left-radius`     |
-| `borderTopRightRadius`    | `border-top-right-radius`    |
-| `borderBottomLeftRadius`  | `border-bottom-left-radius`  |
-| `borderBottomRightRadius` | `border-bottom-right-radius` |
+<ArgsTable of={BoxBorderRadius} />
 
 ---
 
@@ -96,13 +133,7 @@ These props map to border radius properies:
 
 These props map to border style properties:
 
-| Prop Name           | Style                 |
-| ------------------- | --------------------- |
-| `borderStyle`       | `border-style`        |
-| `borderTopStyle`    | `border-top-style`    |
-| `borderRightStyle`  | `border-Right-style`  |
-| `borderBottomStyle` | `border-bottom-style` |
-| `borderLeftStyle`   | `border-left-style`   |
+<ArgsTable of={BoxBorderStyle} />
 
 ---
 
@@ -110,13 +141,7 @@ These props map to border style properties:
 
 These props map to border width properties:
 
-| Prop Name           | Style                 |
-| ------------------- | --------------------- |
-| `borderWidth`       | `border-width`        |
-| `borderTopWidth`    | `border-top-width`    |
-| `borderRightWidth`  | `border-Right-width`  |
-| `borderBottomWidth` | `border-bottom-width` |
-| `borderLeftWidth`   | `border-left-width`   |
+<ArgsTable of={BoxBorderWidth} />
 
 ---
 
@@ -128,8 +153,10 @@ These props map to border width properties:
 
 ### Color
 
-Color style props allow you to adjust the color and background color of components. There are two
-color props available: `color` and `backgroundColor`.
+Color style props allow you to adjust the color or background of components. Below is a props table
+for color props:
+
+<ArgsTable of={BoxColor} />
 
 #### Example
 
@@ -140,7 +167,9 @@ color props available: `color` and `backgroundColor`.
 ### Depth
 
 Depth style props allow you to adjust the visual elevation of a component using our depth tokens.
-`Box` applies these tokens via the `depth` prop.
+Below is a props table for depth props:
+
+<ArgsTable of={BoxDepth} />
 
 #### Example
 
@@ -152,9 +181,11 @@ Depth style props allow you to adjust the visual elevation of a component using 
 
 Flex item style props allow you to adjust the
 [CSS Flex Item](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Item) properties of a
-component. There are seven flex item props: `flex`, `flexGrow`, `flexShrink`, `flexBasis`,
-`justifySelf`, `alignSelf`, and `order`. These props are useful when a component is a child of a
-[flex container](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Container).
+component. These props are useful when a component is a child of a
+[flex container](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Container). Below is a props
+table for flex item props:
+
+<ArgsTable of={BoxFlexItem} />
 
 #### Example
 
@@ -166,8 +197,9 @@ component. There are seven flex item props: `flex`, `flexGrow`, `flexShrink`, `f
 
 Layout style props allow you to adjust the display, dimensions, and overflow of a component. These
 props are not connected to our design tokens, but they are often useful for building components.
-There are eleven layout props: `display`, `height`, `maxHeight`, `maxWidth`, `minHeight`,
-`minWidth`, `overflow`, `overflowX`, `overflowY`, `verticalAlign`, and `width`.
+Below is a props table for layout props:
+
+<ArgsTable of={BoxLayout} />
 
 #### Example
 
@@ -178,8 +210,38 @@ There are eleven layout props: `display`, `height`, `maxHeight`, `maxWidth`, `mi
 ### Position
 
 Position style props allow you to adjust the position of a component. These props are not connected
-to our design tokens, but they are often useful for building components. There are six position
-props: `position`, `zIndex`, `top`, `right`, `bottom`, and `left`.
+to our design tokens, but they are often useful for building components. There are two types of
+position props: `PositionLogicalProps` and `PositionStandardProps`.
+
+#### Position Logical Props
+
+Position logical props are based on
+[CSS Logical Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties/Basic_concepts).
+They support bidirectionality (LTR and RTL) and will automatically flip the value when a change in
+direction is detected. For example: `insetInlineStart="2px"` would set `left: 2px;` for LTR and
+switch to `right: 2px;` for RTL. You'll want to opt for these properties over standard position
+props, such as `left` and `right` when you need bidrectional styles.
+
+Here's a quick reference for how these props map to LTR and RTL styles:
+
+| Logical Prop       | LTR Style | RTL Style |
+| ------------------ | --------- | --------- |
+| `insetInlineStart` | `left`    | `right`   |
+| `insetInlineEnd`   | `right`   | `left`    |
+
+And below is a props table for the logical props:
+
+<ArgsTable of={BoxPositionLogical} />
+
+---
+
+#### Position Standard Props
+
+Position standard props work the same as position logical props, but have no bidirectional support.
+Bidirectional support will only affect `left` and `right`. Below is a props table for the standard
+props:
+
+<ArgsTable of={BoxPositionStandard} />
 
 #### Example
 
@@ -190,51 +252,39 @@ props: `position`, `zIndex`, `top`, `right`, `bottom`, and `left`.
 ### Space
 
 Space style props allow you to adjust the margin and padding of components. There are two types of
-space props: `LogicalSpaceProps` and `StandardSpaceProps`.
+space props: `SpaceLogicalProps` and `SpaceStandardProps`.
 
-#### Logical Space Props
+#### Space Logical Props
 
-Logical space props are based on
+Space logical props are based on
 [CSS Logical Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties/Basic_concepts).
 They support bidirectionality (LTR and RTL) and will automatically flip the value when a change in
 direction is detected. For example: `marginInlineStart="16px"` would set `margin-left: 16px;` for
 LTR and switch to `margin-right: 16px;` for RTL. You'll want to opt for these properties over
 standard space props, such as `marginLeft` and `marginRight` when you need bidrectional styles.
 
-Here's a quick reference for these props and how they map to LTR and RTL styles:
+Here's a quick reference for how these props map to LTR and RTL styles:
 
-| Logical Space Prop   | LTR Style       | RTL Style       |
+| Logical Prop         | LTR Style       | RTL Style       |
 | -------------------- | --------------- | --------------- |
 | `marginInlineStart`  | `margin-left`   | `margin-right`  |
 | `marginInlineEnd`    | `padding-right` | `padding-left`  |
 | `paddingInlineStart` | `padding-left`  | `padding-right` |
 | `paddingInlineEnd`   | `padding-right` | `padding-left`  |
 
+And below is a props table for the logical props:
+
+<ArgsTable of={BoxSpaceLogical} />
+
 ---
 
-#### Standard Space Props
+#### Space Standard Props
 
-Standard space props work the same as logical space props, but have no bidirectional support. This
-will really only affect `marginLeft`, `marginRight`, `paddingLeft`, and `paddingRight`.
+Space standard props work the same as logical space props, but have no bidirectional support.
+Bidirectional support will only affect `marginLeft`, `marginRight`, `paddingLeft`, and
+`paddingRight`. Below is a props table for the standard props:
 
-Here's a quick reference for these props and their styles:
-
-| Standard Space Prop | Styles                             |
-| ------------------- | ---------------------------------- |
-| `margin`            | `margin`                           |
-| `marginX`           | `margin-left` and `margin-right`   |
-| `marginY`           | `margin-top` and `margin-bottom`   |
-| `marginTop`         | `margin-top`                       |
-| `marginRight`       | `margin-right`                     |
-| `marginBottom`      | `margin-bottom`                    |
-| `marginLeft`        | `margin-left`                      |
-| `padding`           | `padding`                          |
-| `paddingX`          | `padding-left` and `padding-right` |
-| `paddingY`          | `padding-top` and `padding-bottom` |
-| `paddingTop`        | `padding-top`                      |
-| `paddingRight`      | `padding-right`                    |
-| `paddingBottom`     | `padding-bottom`                   |
-| `paddingLeft`       | `padding-left`                     |
+<ArgsTable of={BoxSpaceStandard} />
 
 ---
 
@@ -242,6 +292,34 @@ Here's a quick reference for these props and their styles:
 
 <ExampleCodeBlock code={Space} />
 
-## Exhaustive Prop List
+## Exhaustive Style Prop List
 
-<ArgsTable of={Box} />
+Below is an exhaustive list of `Box` style props divided by category.
+
+### Border Props
+
+<ArgsTable of={BoxBorder} />
+
+### Color Props
+
+<ArgsTable of={BoxColor} />
+
+### Depth Props
+
+<ArgsTable of={BoxDepth} />
+
+### FlexItem Props
+
+<ArgsTable of={BoxFlexItem} />
+
+### Layout Props
+
+<ArgsTable of={BoxLayout} />
+
+### Position Props
+
+<ArgsTable of={BoxPosition} />
+
+### Space Props
+
+<ArgsTable of={BoxSpace} />

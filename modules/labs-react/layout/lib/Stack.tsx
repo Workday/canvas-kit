@@ -6,9 +6,9 @@ import {Flex, FlexProps} from './Flex';
 import {getValidChildren} from './utils/getValidChildren';
 import {stack, StackProps as StackBaseProps} from './utils/stack';
 
-export type StackProps = StyledType & FlexProps & StackBaseProps;
+export type StackProps = FlexProps & StackBaseProps;
 
-export const StackItem = createComponent('div')({
+const StackItem = createComponent('div')({
   displayName: 'Stack.Item',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
@@ -26,9 +26,9 @@ export const StackItem = createComponent('div')({
   },
 });
 
-const StyledStack = styled(Flex)<StackProps>(stack);
+const StyledStack = styled(Flex)<StyledType & StackProps>(stack);
 
-export const Stack = createComponent('div')<StackProps>({
+export const Stack = createComponent('div')({
   displayName: 'Stack',
   Component: (
     {children, flexDirection = 'row', shouldWrapChildren = false, ...elemProps}: StackProps,
@@ -53,7 +53,7 @@ export type HStackProps = Omit<StackProps, 'flexDirection'> & {
   flexDirection?: 'row' | 'row-reverse';
 };
 
-export const HStack = createComponent('div')<HStackProps>({
+export const HStack = createComponent('div')({
   displayName: 'HStack',
   Component: ({children, flexDirection = 'row', ...elemProps}: HStackProps, ref, Element) => {
     return (
@@ -72,7 +72,7 @@ export type VStackProps = Omit<StackProps, 'flexDirection'> & {
   flexDirection?: 'column' | 'column-reverse';
 };
 
-export const VStack = createComponent('div')<VStackProps>({
+export const VStack = createComponent('div')({
   displayName: 'VStack',
   Component: ({children, flexDirection = 'column', ...elemProps}: VStackProps, ref, Element) => {
     return (

@@ -12,16 +12,23 @@ import {layout, LayoutProps} from './utils/layout';
 import {position, PositionProps} from './utils/position';
 import {space, SpaceProps} from './utils/space';
 
-type StyleProps = BorderProps &
+export type {
+  BorderProps,
+  ColorProps,
+  DepthProps,
+  FlexItemProps,
+  LayoutProps,
+  PositionProps,
+  SpaceProps,
+};
+
+export type BoxProps = BorderProps &
   ColorProps &
   DepthProps &
   FlexItemProps &
   LayoutProps &
   PositionProps &
-  SpaceProps;
-
-export type BoxProps = StyledType &
-  StyleProps & {
+  SpaceProps & {
     children?: React.ReactNode;
   };
 
@@ -31,7 +38,7 @@ const shouldForwardProp = (prop: string) => {
   return isPropValid(prop) && !omittedProps.includes(prop);
 };
 
-const StyledBox = styled('div', {shouldForwardProp})<BoxProps>(
+const StyledBox = styled('div', {shouldForwardProp})<StyledType & BoxProps>(
   {
     boxSizing: 'border-box',
   },
@@ -61,7 +68,7 @@ const StyledBox = styled('div', {shouldForwardProp})<BoxProps>(
  * );
  *
  */
-export const Box = createComponent('div')<BoxProps>({
+export const Box = createComponent('div')({
   displayName: 'Box',
   Component: ({children, ...elemProps}: BoxProps, ref, Element) => {
     return (
