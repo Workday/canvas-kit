@@ -1,8 +1,8 @@
 import {Meta} from '@storybook/addon-docs/blocks';
-
 import {Box} from '@workday/canvas-kit-labs-react/common';
 // examples
-import {As} from './examples/As';
+import {AsPropLink} from './examples/As/Link';
+import {AsPropCustomComponent} from './examples/As/CustomComponent';
 import {Border} from './examples/Border';
 import {Color} from './examples/Color';
 import {Depth} from './examples/Depth';
@@ -56,7 +56,11 @@ noticeable transformation is that `Box` renders as a link. But also notice that 
 supports all `BoxProps` such as `padding`, it also supports semantic anchor element props such as
 `href`.
 
-<ExampleCodeBlock code={As} />
+<ExampleCodeBlock code={AsPropLink} />
+
+---
+
+<ExampleCodeBlock code={AsPropCustomComponent} />
 
 ## Style Props
 
