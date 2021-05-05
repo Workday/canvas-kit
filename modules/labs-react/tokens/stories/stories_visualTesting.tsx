@@ -7,7 +7,7 @@ import {type, space} from '..';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Tokens',
+  title: 'Testing/React/Labs/Core',
 });
 
 export const TypeAndSpace = () => {
