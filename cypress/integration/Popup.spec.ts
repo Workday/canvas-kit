@@ -1,5 +1,7 @@
 import * as h from '../helpers';
 
+const beOnTopOfLabelledByText = h.popup.beOnTopOfLabelledByText;
+
 function getPopup() {
   return cy.findByRole('dialog');
 }
@@ -104,7 +106,7 @@ describe('Popup', () => {
         cy.findByLabelText('Popup 1').should('be.visible');
       });
 
-      context('then Open Popup 2 button is click', () => {
+      context('then Open Popup 2 button is clicked', () => {
         beforeEach(() => {
           cy.findByText('Open Popup 2').click();
         });
@@ -116,6 +118,37 @@ describe('Popup', () => {
         // TODO Skip for now until we have a systematic approach to fix this issue
         it.skip('should close Popup 1', () => {
           cy.findAllByLabelText('Popup 1').should('not.exist');
+        });
+
+        context('then Open Popup 3 button is clicked', () => {
+          const Popup3Title = 'Popup 3 (Not hidable on outside click)';
+          beforeEach(() => {
+            cy.findByText('Open Popup 3').click();
+          });
+
+          it('should open Popup 3 in front of Popup 2', () => {
+            cy.findByLabelText(Popup3Title).should('be.visible');
+            cy.findByLabelText('Popup 2').should('be.visible');
+
+            cy.findByLabelText(Popup3Title).should(beOnTopOfLabelledByText('Popup 2'));
+          });
+
+          context('then the close button in Popup 3 is clicked', () => {
+            beforeEach(() => {
+              cy.findByLabelText(Popup3Title)
+                .parentsUntil('[popup-id]')
+                .find('[data-close]')
+                .click();
+            });
+
+            it('should close Popup 3', () => {
+              cy.findByLabelText(Popup3Title).should('not.exist');
+            });
+
+            it('should not close Popup 2', () => {
+              cy.findByLabelText('Popup 2').should('be.visible');
+            });
+          });
         });
       });
     });

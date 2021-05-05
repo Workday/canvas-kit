@@ -1,27 +1,6 @@
 import * as h from '../helpers';
-import {queries} from '@testing-library/dom';
 
-const getStackedParent = (element: HTMLElement): HTMLElement | null => {
-  if (element.style.zIndex !== '') {
-    return element;
-  } else {
-    if (element.parentElement) {
-      return getStackedParent(element.parentElement);
-    } else {
-      return null;
-    }
-  }
-};
-
-const beOnTopOfLabelledByText = (labelText: string) => ($el: JQuery) => {
-  const comparingElement = queries.getByLabelText(Cypress.$('body')[0], labelText);
-
-  const comparingElementZIndex = parseFloat(
-    getStackedParent(comparingElement)?.style?.zIndex || ''
-  );
-  const actualElementZIndex = parseFloat(getStackedParent($el[0])?.style?.zIndex || '');
-  expect(actualElementZIndex).to.be.greaterThan(comparingElementZIndex);
-};
+const beOnTopOfLabelledByText = h.popup.beOnTopOfLabelledByText;
 
 describe('PopupStack', () => {
   before(() => {
