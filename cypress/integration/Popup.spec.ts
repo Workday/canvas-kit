@@ -1,7 +1,5 @@
 import * as h from '../helpers';
 
-const beOnTopOfLabelledByText = h.popup.beOnTopOfLabelledByText;
-
 function getPopup() {
   return cy.findByRole('dialog');
 }
@@ -130,7 +128,7 @@ describe('Popup', () => {
             cy.findByLabelText(Popup3Title).should('be.visible');
             cy.findByLabelText('Popup 2').should('be.visible');
 
-            cy.findByLabelText(Popup3Title).should(beOnTopOfLabelledByText('Popup 2'));
+            cy.findByLabelText(Popup3Title).should(h.popup.beOnTopOfLabelledByText('Popup 2'));
           });
 
           context('then the close button in Popup 3 is clicked', () => {

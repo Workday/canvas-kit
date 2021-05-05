@@ -1,7 +1,5 @@
 import * as h from '../helpers';
 
-const beOnTopOfLabelledByText = h.popup.beOnTopOfLabelledByText;
-
 describe('PopupStack', () => {
   before(() => {
     h.stories.visit();
@@ -13,9 +11,9 @@ describe('PopupStack', () => {
 
   it('should start with Window 3 stacked on top of 3 Windows', () => {
     cy.findByLabelText('Window 3')
-      .should(beOnTopOfLabelledByText('Window 2'))
-      .should(beOnTopOfLabelledByText('Window 4'))
-      .should(beOnTopOfLabelledByText('Window 1'));
+      .should(h.popup.beOnTopOfLabelledByText('Window 2'))
+      .should(h.popup.beOnTopOfLabelledByText('Window 4'))
+      .should(h.popup.beOnTopOfLabelledByText('Window 1'));
   });
 
   context('when Window 2 is clicked', () => {
@@ -25,8 +23,8 @@ describe('PopupStack', () => {
 
     it('should place Window 2 above others', () => {
       cy.findByLabelText('Window 2')
-        .should(beOnTopOfLabelledByText('Window 3'))
-        .should(beOnTopOfLabelledByText('Window 1'));
+        .should(h.popup.beOnTopOfLabelledByText('Window 3'))
+        .should(h.popup.beOnTopOfLabelledByText('Window 1'));
     });
   });
 
@@ -37,9 +35,9 @@ describe('PopupStack', () => {
 
     it('should place Window 1 Tooltip above all other stacked UI elements', () => {
       cy.findByRole('tooltip')
-        .should(beOnTopOfLabelledByText('Window 1'))
-        .should(beOnTopOfLabelledByText('Window 2'))
-        .should(beOnTopOfLabelledByText('Window 4'));
+        .should(h.popup.beOnTopOfLabelledByText('Window 1'))
+        .should(h.popup.beOnTopOfLabelledByText('Window 2'))
+        .should(h.popup.beOnTopOfLabelledByText('Window 4'));
     });
   });
 
@@ -63,8 +61,8 @@ describe('PopupStack', () => {
 
       it('should place Window 2 above others', () => {
         cy.findByLabelText('Window 2')
-          .should(beOnTopOfLabelledByText('Window 1'))
-          .should(beOnTopOfLabelledByText('Window 3'));
+          .should(h.popup.beOnTopOfLabelledByText('Window 1'))
+          .should(h.popup.beOnTopOfLabelledByText('Window 3'));
       });
     });
 
@@ -84,8 +82,8 @@ describe('PopupStack', () => {
 
         it('should place Window 2 above others', () => {
           cy.findByLabelText('Window 2')
-            .should(beOnTopOfLabelledByText('Window 1'))
-            .should(beOnTopOfLabelledByText('Window 3'));
+            .should(h.popup.beOnTopOfLabelledByText('Window 1'))
+            .should(h.popup.beOnTopOfLabelledByText('Window 3'));
         });
       });
 
