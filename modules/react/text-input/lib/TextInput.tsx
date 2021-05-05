@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  createComponent,
+  StyledType,
   GrowthBehavior,
   ErrorType,
   errorRing,
@@ -16,13 +18,11 @@ export interface TextInputProps
    * The type of error associated with the TextInput (if applicable).
    */
   error?: ErrorType;
-  /**
-   * The ref to the inner text input element.
-   */
-  inputRef?: React.Ref<HTMLInputElement>;
 }
 
-const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 'theme'>>(
+const TextInput = styled('input')<
+  Pick<TextInputProps, 'error' | 'grow' | 'width' | 'theme'> & StyledType
+>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -77,17 +77,14 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 
   }
 );
 
-class TextInput extends React.Component<TextInputProps> {
-  static ErrorType = ErrorType;
-
-  render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {inputRef, grow, error, ...inputProps} = this.props;
-
-    return <Input type="text" ref={inputRef} grow={grow} error={error} {...inputProps} />;
-  }
-}
-
-TextInput.ErrorType = ErrorType;
-
-export default TextInput;
+export default createComponent('input')({
+  displayName: 'TextInput',
+  Component: ({grow, error, ...elemProps}: TextInputProps, ref, Element) => {
+    return (
+      <TextInput type="text" ref={ref} as={Element} grow={grow} error={error} {...elemProps} />
+    );
+  },
+  subComponents: {
+    ErrorType,
+  },
+});
