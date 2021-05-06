@@ -343,3 +343,24 @@ This codemod should handle most of what we've seen in code that uses Canvas Kit 
 PR:
 
 - https://github.com/Workday/canvas-kit/pull/953
+
+### Labs Space Style Function
+
+The `space` style function in the `/labs-react/token` (formerly `labs/core`) has been removed.
+Please opt to use `Box` instead. Below is an example:
+
+```tsx
+// before
+import {spaceNumbers} from '@workday/canvas-kit-react-core';
+import {space} from '@workday/canvas-kit-labs-react-core';
+// A styled div with space props
+const Box = styled('div')(space);
+
+<Box p={spaceNumbers.xl}>Ye Olde SpaceBox</Box>
+
+// after
+import {Box} from '@workday/canvas-kit/labs-react/common'
+
+// You can also use `padding={spaceNumbers.xl}` or `padding={space.xl}`
+<Box padding="xl">New Box</Box>
+```
