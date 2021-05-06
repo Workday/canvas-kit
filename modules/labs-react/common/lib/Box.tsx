@@ -12,16 +12,6 @@ import {layout, LayoutStyleProps} from './utils/layout';
 import {position, PositionStyleProps} from './utils/position';
 import {space, SpaceStyleProps} from './utils/space';
 
-export type {
-  BorderStyleProps,
-  ColorStyleProps,
-  DepthStyleProps,
-  FlexItemStyleProps,
-  LayoutStyleProps,
-  PositionStyleProps,
-  SpaceStyleProps,
-};
-
 export type BoxProps = BorderStyleProps &
   ColorStyleProps &
   DepthStyleProps &

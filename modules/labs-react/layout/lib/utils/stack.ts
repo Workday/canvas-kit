@@ -33,7 +33,7 @@ const row = (value: StackSpacing, isRTL = false) => {
 };
 
 const rowReverse = (value: StackSpacing, isRTL = false) => {
-  const attr = isRTL ? 'marginleft' : 'marginRight';
+  const attr = isRTL ? 'marginLeft' : 'marginRight';
   return {
     [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
   };
