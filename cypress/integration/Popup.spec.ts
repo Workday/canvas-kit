@@ -1,7 +1,7 @@
 import * as h from '../helpers';
 
 function getPopup() {
-  return cy.findByRole('dialog');
+  return cy.findByRole('dialog', {name: 'Delete Item'});
 }
 
 function getPopupTargetButton() {
@@ -33,7 +33,7 @@ describe('Popup', () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Popup/React', 'Default');
     });
-    context('when the target buttton is clicked', () => {
+    context('when the target button is clicked', () => {
       beforeEach(() => {
         getPopupTargetButton().click();
       });
@@ -101,7 +101,7 @@ describe('Popup', () => {
       });
 
       it('should open Popup 1', () => {
-        cy.findByLabelText('Popup 1').should('be.visible');
+        cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
       });
 
       context('then Open Popup 2 button is clicked', () => {
@@ -110,12 +110,12 @@ describe('Popup', () => {
         });
 
         it('should open Popup 2', () => {
-          cy.findByLabelText('Popup 2').should('be.visible');
+          cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
         });
 
         // TODO Skip for now until we have a systematic approach to fix this issue
         it.skip('should close Popup 1', () => {
-          cy.findAllByLabelText('Popup 1').should('not.exist');
+          cy.findByRole('dialog', {name: 'Popup 1'}).should('not.exist');
         });
 
         context('then Open Popup 3 button is clicked', () => {
@@ -125,26 +125,27 @@ describe('Popup', () => {
           });
 
           it('should open Popup 3 in front of Popup 2', () => {
-            cy.findByLabelText(Popup3Title).should('be.visible');
-            cy.findByLabelText('Popup 2').should('be.visible');
+            cy.findByRole('dialog', {name: Popup3Title}).should('be.visible');
+            cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
 
-            cy.findByLabelText(Popup3Title).should(h.popup.beOnTopOfLabelledByText('Popup 2'));
+            cy.findByRole('dialog', {name: Popup3Title}).should(
+              h.popup.beOnTopOfLabelledByText('Popup 2')
+            );
           });
 
           context('then the close button in Popup 3 is clicked', () => {
             beforeEach(() => {
-              cy.findByLabelText(Popup3Title)
-                .parentsUntil('[data-popper-placement]')
+              cy.findByRole('dialog', {name: Popup3Title})
                 .find('[data-close]')
                 .click();
             });
 
             it('should close Popup 3', () => {
-              cy.findByLabelText(Popup3Title).should('not.exist');
+              cy.findByRole('dialog', {name: Popup3Title}).should('not.exist');
             });
 
             it('should not close Popup 2', () => {
-              cy.findByLabelText('Popup 2').should('be.visible');
+              cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
             });
           });
         });

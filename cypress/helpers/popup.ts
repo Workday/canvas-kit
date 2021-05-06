@@ -20,7 +20,7 @@ const getStackedParent = (element: HTMLElement): HTMLElement | null => {
  *   .should(h.popup.beOnTopOfLabelledByText('Popup 2'))
  */
 export const beOnTopOfLabelledByText = (labelText: string) => ($el: JQuery) => {
-  const comparingElement = queries.getByLabelText(Cypress.$('body')[0], labelText);
+  const comparingElement = queries.getByRole(Cypress.$('body')[0], 'dialog', {name: labelText});
 
   const comparingElementZIndex = parseFloat(
     getStackedParent(comparingElement)?.style?.zIndex || ''
