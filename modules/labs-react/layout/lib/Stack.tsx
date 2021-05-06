@@ -57,14 +57,13 @@ export const HStack = createComponent('div')({
   displayName: 'HStack',
   Component: ({children, flexDirection = 'row', ...elemProps}: HStackProps, ref, Element) => {
     return (
-      <Stack
-        as={Element}
-        ref={ref}
-        flexDirection={flexDirection}
-        children={children}
-        {...elemProps}
-      />
+      <Stack as={Element} ref={ref} flexDirection={flexDirection} {...elemProps}>
+        {children}
+      </Stack>
     );
+  },
+  subComponents: {
+    Item: StackItem,
   },
 });
 
@@ -80,5 +79,8 @@ export const VStack = createComponent('div')({
         {children}
       </Stack>
     );
+  },
+  subComponents: {
+    Item: StackItem,
   },
 });

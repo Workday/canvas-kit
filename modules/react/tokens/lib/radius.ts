@@ -15,7 +15,7 @@ export type CanvasBorderRadius = {
 };
 
 /** the tokens (keys) for CanvasBorderRadius */
-export type CanvasBorderRadiusTokens = keyof CanvasBorderRadius;
+export type CanvasBorderRadiusKeys = keyof CanvasBorderRadius;
 
 /** the values for CanvasBorderRadius (strings and numbers) */
 export type CanvasBorderRadiusValues = ValueOf<CanvasBorderRadius>;

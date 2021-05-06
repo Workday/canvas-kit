@@ -9,28 +9,8 @@ a collection of layout components
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+yarn add @workday/canvas-kit-labs-react/layout
 ```
 
-## Usage
-
-```tsx
-import * as React from 'react';
-import {Layout} from '@workday/canvas-kit-labs-react/layout';
-
-<Layout />;
-```
-
-## Static Properties
-
-> None
-
-## Component Props
-
-### Required
-
-> None
-
-### Optional
-
-> None
+For more detailed information on this component, please refer to the
+[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/labs-layout)

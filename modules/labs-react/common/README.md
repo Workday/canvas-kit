@@ -11,8 +11,8 @@ a collection of shared components used across canvas-kit-react
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+yarn add @workday/canvas-kit-labs-react/common
 ```
 
 For more detailed information on this component, please refer to the
-[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/labs-common-box)
+[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/labs-common)

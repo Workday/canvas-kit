@@ -1,7 +1,7 @@
 import {Property} from 'csstype';
 import {
   borderRadius as borderRadiusTokens,
-  CanvasBorderRadiusTokens,
+  CanvasBorderRadiusKeys,
   colors as colorTokens,
   CanvasColor,
 } from '@workday/canvas-kit-react/tokens';
@@ -42,15 +42,15 @@ export type BorderColorStyleProps = {
 /** style props to set the border radius properties */
 export type BorderRadiusStyleProps = {
   /** sets `border-radius` property */
-  borderRadius?: CanvasBorderRadiusTokens | number | (string & {});
+  borderRadius?: CanvasBorderRadiusKeys | number | (string & {});
   /** sets `border-top-left-radius` property */
-  borderTopLeftRadius?: CanvasBorderRadiusTokens | number | (string & {});
+  borderTopLeftRadius?: CanvasBorderRadiusKeys | number | (string & {});
   /** sets `border-top-right-radius` property */
-  borderTopRightRadius?: CanvasBorderRadiusTokens | number | (string & {});
+  borderTopRightRadius?: CanvasBorderRadiusKeys | number | (string & {});
   /** sets `border-bottom-left-radius` property */
-  borderBottomLeftRadius?: CanvasBorderRadiusTokens | number | (string & {});
+  borderBottomLeftRadius?: CanvasBorderRadiusKeys | number | (string & {});
   /** sets `border-bottom-right-radius` property */
-  borderBottomRightRadius?: CanvasBorderRadiusTokens | number | (string & {});
+  borderBottomRightRadius?: CanvasBorderRadiusKeys | number | (string & {});
 };
 
 /** style props to set the border style properties */
@@ -216,10 +216,10 @@ export function border<P extends BorderStyleProps & {theme?: PartialEmotionCanva
 
       if (key in borderRadii) {
         const propValue = props[key as keyof BorderRadiusStyleProps] as
-          | CanvasBorderRadiusTokens
+          | CanvasBorderRadiusKeys
           | number
           | string;
-        const value = borderRadiusTokens[propValue as CanvasBorderRadiusTokens] || propValue;
+        const value = borderRadiusTokens[propValue as CanvasBorderRadiusKeys] || propValue;
         const attr = borderRadii[key as keyof BorderRadiusStyleProps];
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;

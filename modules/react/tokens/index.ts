@@ -1,6 +1,6 @@
 import * as canvasColorsWeb from '@workday/canvas-colors-web';
 
-import {borderRadius, CanvasBorderRadius, CanvasBorderRadiusTokens, CanvasBorderRadiusValues} from './lib/radius';
+import {borderRadius, CanvasBorderRadius, CanvasBorderRadiusKeys, CanvasBorderRadiusValues} from './lib/radius';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
 import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
 import InputProvider from './lib/InputProvider';
@@ -49,7 +49,7 @@ export default canvas;
 
 export type {
   CanvasBorderRadius,
-  CanvasBorderRadiusTokens,
+  CanvasBorderRadiusKeys,
   CanvasBorderRadiusValues,
   CanvasColor,
   CanvasSpace,
