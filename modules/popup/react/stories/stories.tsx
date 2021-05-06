@@ -104,7 +104,7 @@ export const Accessible = () => {
   };
 
   const getFirstFocusableElement = (content: HTMLElement): HTMLElement | null => {
-    const elements = content.getElementsByTagName('*');
+    const elements = content.querySelectorAll('*');
 
     for (let i = 0; i < elements.length; i++) {
       const element = elements.item(i);
