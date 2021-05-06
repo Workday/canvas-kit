@@ -51,94 +51,92 @@ export type SpaceStandardProps = {
   paddingLeft?: SpacePropValues;
 };
 
-type SpacePropValue = CanvasSpaceKeys | number | string;
-
 export type SpaceStyleProps = SpaceStandardProps & SpaceLogicalProps;
 
-const margin = (value: SpacePropValue) => {
+const margin = (value: SpacePropValues) => {
   return {margin: spaceTokens[value as keyof CanvasSpace] || value};
 };
 
-const marginX = (value: SpacePropValue) => {
+const marginX = (value: SpacePropValues) => {
   return {
     marginLeft: spaceTokens[value as CanvasSpaceKeys] || value,
     marginRight: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const marginY = (value: SpacePropValue) => {
+const marginY = (value: SpacePropValues) => {
   return {
     marginTop: spaceTokens[value as CanvasSpaceKeys] || value,
     marginBottom: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const marginTop = (value: SpacePropValue) => {
+const marginTop = (value: SpacePropValues) => {
   return {
     marginTop: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const marginRight = (value: SpacePropValue, isRTL = false) => {
+const marginRight = (value: SpacePropValues, isRTL = false) => {
   const attr = isRTL ? 'marginLeft' : 'marginRight';
   return {
     [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const marginBottom = (value: SpacePropValue) => {
+const marginBottom = (value: SpacePropValues) => {
   return {
     marginBottom: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const marginLeft = (value: SpacePropValue, isRTL = false) => {
+const marginLeft = (value: SpacePropValues, isRTL = false) => {
   const attr = isRTL ? 'marginRight' : 'marginLeft';
   return {
     [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const padding = (value: SpacePropValue) => {
+const padding = (value: SpacePropValues) => {
   return {
     padding: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const paddingX = (value: SpacePropValue) => {
+const paddingX = (value: SpacePropValues) => {
   return {
     paddingLeft: spaceTokens[value as CanvasSpaceKeys] || value,
     paddingRight: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const paddingY = (value: SpacePropValue) => {
+const paddingY = (value: SpacePropValues) => {
   return {
     paddingTop: spaceTokens[value as CanvasSpaceKeys] || value,
     paddingBottom: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const paddingTop = (value: SpacePropValue) => {
+const paddingTop = (value: SpacePropValues) => {
   return {
     paddingTop: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const paddingRight = (value: SpacePropValue, isRTL = false) => {
+const paddingRight = (value: SpacePropValues, isRTL = false) => {
   const attr = isRTL ? 'paddingLeft' : 'paddingRight';
   return {
     [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const paddingBottom = (value: SpacePropValue) => {
+const paddingBottom = (value: SpacePropValues) => {
   return {
     paddingBottom: spaceTokens[value as CanvasSpaceKeys] || value,
   };
 };
 
-const paddingLeft = (value: SpacePropValue, isRTL = false) => {
+const paddingLeft = (value: SpacePropValues, isRTL = false) => {
   const attr = isRTL ? 'paddingRight' : 'paddingLeft';
   return {
     [attr]: spaceTokens[value as CanvasSpaceKeys] || value,
