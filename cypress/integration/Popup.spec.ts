@@ -134,7 +134,7 @@ describe('Popup', () => {
           context('then the close button in Popup 3 is clicked', () => {
             beforeEach(() => {
               cy.findByLabelText(Popup3Title)
-                .parentsUntil('[popup-id]')
+                .parentsUntil('[data-popper-placement]')
                 .find('[data-close]')
                 .click();
             });
