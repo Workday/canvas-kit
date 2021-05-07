@@ -41,10 +41,20 @@ This component is work in progress and currently in pre-release.
 `Box` is a primitive component that provides a common, ergonomic API around Canvas design tokens. It
 is highly flexible, and its primary purpose is to build other components.
 
-## Up & Running
+## Usage
 
 ```tsx
 import {Box, BoxProps} from '@workday/canvas-kit-labs-react/common';
+
+interface CardProps extends BoxProps {
+  // custom Card props go here
+};
+
+const Card = (props: CardProps) => {
+  return (
+    <Box borderRadius="m" depth={2} padding="m" {...props} />
+  );
+}
 ```
 
 ## Understanding the `as` Prop

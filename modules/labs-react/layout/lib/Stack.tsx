@@ -26,18 +26,35 @@ const StackItem = createComponent('div')({
   },
 });
 
-const StyledStack = styled(Flex)<StyledType & StackProps>(stack);
+// prevent `spacing` prop from being passed through to the HTML element
+const shouldForwardProp = (prop: string) => {
+  return prop !== 'spacing';
+};
+
+const StyledStack = styled(Flex, {shouldForwardProp})<StyledType & StackProps>(stack);
 
 export const Stack = createComponent('div')({
   displayName: 'Stack',
   Component: (
-    {children, flexDirection = 'row', shouldWrapChildren = false, ...elemProps}: StackProps,
+    {
+      children,
+      flexDirection = 'row',
+      spacing,
+      shouldWrapChildren = false,
+      ...elemProps
+    }: StackProps,
     ref,
     Element
   ) => {
     const validChildren = getValidChildren(children);
     return (
-      <StyledStack as={Element} ref={ref} flexDirection={flexDirection} {...elemProps}>
+      <StyledStack
+        as={Element}
+        ref={ref}
+        flexDirection={flexDirection}
+        spacing={spacing}
+        {...elemProps}
+      >
         {shouldWrapChildren
           ? validChildren.map(child => <StackItem>{child}</StackItem>)
           : validChildren}
@@ -50,6 +67,10 @@ export const Stack = createComponent('div')({
 });
 
 export type HStackProps = Omit<StackProps, 'flexDirection'> & {
+  /**
+   * sets the direction for the stack
+   * @default "row"
+   * */
   flexDirection?: 'row' | 'row-reverse';
 };
 
@@ -68,6 +89,10 @@ export const HStack = createComponent('div')({
 });
 
 export type VStackProps = Omit<StackProps, 'flexDirection'> & {
+  /**
+   * sets the direction for the stack
+   * @default "column"
+   * */
   flexDirection?: 'column' | 'column-reverse';
 };
 

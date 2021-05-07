@@ -12,8 +12,17 @@ const selector = '& > *:not(style) ~ *:not(style)';
 export type StackSpacing = CanvasSpaceKeys | number | (string & {});
 
 export type StackStyleProps = {
+  /** sets space values between child elements (bidirectional support) */
   spacing: StackSpacing;
+  /**
+   * sets the direction for the stack
+   * @default "row"
+   * */
   flexDirection?: StackDirection;
+  /**
+   * when `true` wraps each child element in a `Stack.Item`
+   * @default false
+   * */
   shouldWrapChildren?: boolean;
 };
 
