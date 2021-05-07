@@ -20,7 +20,7 @@ export interface TextInputProps
   error?: ErrorType;
 }
 
-const TextInput = styled('input')<
+const StyledTextInput = styled('input')<
   Pick<TextInputProps, 'error' | 'grow' | 'width' | 'theme'> & StyledType
 >(
   {
@@ -77,14 +77,23 @@ const TextInput = styled('input')<
   }
 );
 
-export default createComponent('input')({
+export const TextInput = createComponent('input')({
   displayName: 'TextInput',
   Component: ({grow, error, ...elemProps}: TextInputProps, ref, Element) => {
     return (
-      <TextInput type="text" ref={ref} as={Element} grow={grow} error={error} {...elemProps} />
+      <StyledTextInput
+        type="text"
+        ref={ref}
+        as={Element}
+        grow={grow}
+        error={error}
+        {...elemProps}
+      />
     );
   },
   subComponents: {
     ErrorType,
   },
 });
+
+export default TextInput;

@@ -279,7 +279,7 @@ const CheckboxLabel = styled('label')<{disabled?: boolean}>(
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
 );
 
-export default createComponent('input')({
+export const Checkbox = createComponent('input')({
   displayName: 'Checkbox',
   Component: (
     {
@@ -338,3 +338,5 @@ export default createComponent('input')({
     ErrorType,
   },
 });
+
+export default Checkbox;

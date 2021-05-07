@@ -233,7 +233,7 @@ const RadioLabel = styled('label')<{disabled?: boolean}>(
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
 );
 
-export default createComponent('input')({
+export const Radio = createComponent('input')({
   displayName: 'Radio',
   Component: (
     {checked = false, id, label = '', disabled, name, onChange, value, ...elemProps}: RadioProps,
@@ -271,3 +271,5 @@ export default createComponent('input')({
     );
   },
 });
+
+export default Radio;

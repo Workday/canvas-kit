@@ -54,7 +54,7 @@ export enum TextAreaResizeDirection {
   Vertical = 'vertical',
 }
 
-const TextArea = styled('textarea')<TextAreaProps & StyledType>(
+const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
   ({theme, error}) => ({
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -98,17 +98,19 @@ const TextArea = styled('textarea')<TextAreaProps & StyledType>(
   })
 );
 
-export default createComponent('textarea')({
+export const TextArea = createComponent('textarea')({
   displayName: 'TextArea',
   Component: (
     {resize = TextAreaResizeDirection.Both, grow, ...elemProps}: TextAreaProps,
     ref,
     Element
   ) => {
-    return <TextArea ref={ref} as={Element} grow={grow} resize={resize} {...elemProps} />;
+    return <StyledTextArea ref={ref} as={Element} grow={grow} resize={resize} {...elemProps} />;
   },
   subComponents: {
     ErrorType,
     ResizeDirection: TextAreaResizeDirection,
   },
 });
+
+export default TextArea;

@@ -160,7 +160,7 @@ const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>(
   })
 );
 
-export default createComponent('input')({
+export const Switch = createComponent('input')({
   displayName: 'Switch',
   Component: (
     {checked = false, id, disabled = false, onChange, value, ...elemProps}: SwitchProps,
@@ -193,3 +193,5 @@ export default createComponent('input')({
     ErrorType,
   },
 });
+
+export default Switch;
