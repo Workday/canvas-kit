@@ -3,7 +3,7 @@ import {keyframes} from '@emotion/core';
 import isPropValid from '@emotion/is-prop-valid';
 import uuid from 'uuid/v4';
 
-import Card from '@workday/canvas-kit-react/card';
+import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {CanvasDepthValue, depth as depthValues, space} from '@workday/canvas-kit-react/tokens';
 import {
@@ -182,8 +182,9 @@ export default class Popup extends React.Component<PopupProps> {
             />
           </CloseIconContainer>
         )}
-        <Card depth={depth} heading={heading} headingId={headingId} width="100%" padding={padding}>
-          {this.props.children}
+        <Card depth={depth} width="100%" padding={padding}>
+          {heading && <Card.Heading id={headingId}>{heading}</Card.Heading>}
+          <Card.Body>{this.props.children}</Card.Body>
         </Card>
       </Container>
     );

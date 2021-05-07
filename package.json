@@ -54,6 +54,7 @@
     "caniuse-lite": "^1.0.30001154",
     "colors": "^1.4.0",
     "commitizen": "^4.0.4",
+    "common-tags": "^1.8.0",
     "core-js": "^3.5.0",
     "css-loader": "^3.2.0",
     "css-mqpacker": "^7.0.0",

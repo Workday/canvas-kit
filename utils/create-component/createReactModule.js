@@ -73,7 +73,7 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
     },
     tsconfigSpec: {
       path: 'spec/tsconfig.json',
-      contents: tsconfig.spec(),
+      contents: tsconfig.spec(`../${rootPath}`),
     },
   };
 

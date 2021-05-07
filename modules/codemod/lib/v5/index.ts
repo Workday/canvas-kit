@@ -8,6 +8,8 @@ import recategorizeButtons from './recategorizeButtons';
 import renameSpacing from './renameSpacing';
 // core and labs/core codemods
 import renameCoreImports from './renameCoreImports';
+// card codemods
+import compoundCard from './compoundCard';
 
 import {API, FileInfo, Options} from 'jscodeshift';
 
@@ -22,6 +24,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     renameSpacing,
     renameCoreImports,
     recategorizeButtons,
+    compoundCard,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);

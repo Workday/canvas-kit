@@ -4,24 +4,17 @@ import isPropValid from '@emotion/is-prop-valid';
 import {
   colors,
   depth as depthValues,
-  type,
   space,
   borderRadius,
   CanvasDepthValue,
   CanvasSpaceValues,
 } from '@workday/canvas-kit-react/tokens';
+import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * The heading of the Card.
-   */
-  heading?: React.ReactNode;
+import {CardHeading} from './CardHeading';
+import {CardBody} from './CardBody';
 
-  /**
-   * The id of the Card heading. Tie this to an `aria-labelledby` for accessibility.
-   */
-  headingId?: string;
-
+export interface CardProps {
   /**
    * The padding of the Card. Imported from `@workday/canvas-kit-react/tokens`.
    * @default space.l
@@ -43,11 +36,16 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
    * The height of the Card.
    */
   height?: number | string;
+
+  /**
+   * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
+   */
+  children?: React.ReactNode;
 }
 
 const Box = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'width' && prop !== 'height',
-})<CardProps>(
+})<CardProps & StyledType>(
   {
     backgroundColor: colors.frenchVanilla100,
     border: `1px solid ${colors.soap500}`,
@@ -60,28 +58,21 @@ const Box = styled('div', {
   ({height}) => height && {height}
 );
 
-const Header = styled('h3')(type.h3, {
-  marginBottom: space.m,
-  marginTop: 0,
-});
-
-const Body = styled('div')(type.body);
-
-export default class Card extends React.Component<CardProps> {
-  public render() {
-    const {
-      depth = depthValues[2],
-      padding = space.l,
-      heading,
-      headingId,
-      ...elemProps
-    } = this.props;
-
+export const Card = createComponent('div')({
+  displayName: 'Card',
+  Component: (
+    {depth = depthValues[2], children, padding = space.l, ...elemProps}: CardProps,
+    ref,
+    Element
+  ) => {
     return (
-      <Box {...elemProps} depth={depth} padding={padding}>
-        {heading && <Header id={headingId}>{heading}</Header>}
-        <Body>{this.props.children}</Body>
+      <Box ref={ref} as={Element} depth={depth} padding={padding} {...elemProps}>
+        {children}
       </Box>
     );
-  }
-}
+  },
+  subComponents: {
+    Heading: CardHeading,
+    Body: CardBody,
+  },
+});
