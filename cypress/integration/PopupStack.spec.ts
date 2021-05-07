@@ -1,27 +1,4 @@
 import * as h from '../helpers';
-import {queries} from '@testing-library/dom';
-
-const getStackedParent = (element: HTMLElement): HTMLElement | null => {
-  if (element.style.zIndex !== '') {
-    return element;
-  } else {
-    if (element.parentElement) {
-      return getStackedParent(element.parentElement);
-    } else {
-      return null;
-    }
-  }
-};
-
-const beOnTopOfLabelledByText = (labelText: string) => ($el: JQuery) => {
-  const comparingElement = queries.getByLabelText(Cypress.$('body')[0], labelText);
-
-  const comparingElementZIndex = parseFloat(
-    getStackedParent(comparingElement)?.style?.zIndex || ''
-  );
-  const actualElementZIndex = parseFloat(getStackedParent($el[0])?.style?.zIndex || '');
-  expect(actualElementZIndex).to.be.greaterThan(comparingElementZIndex);
-};
 
 describe('PopupStack', () => {
   before(() => {
@@ -33,10 +10,10 @@ describe('PopupStack', () => {
   });
 
   it('should start with Window 3 stacked on top of 3 Windows', () => {
-    cy.findByLabelText('Window 3')
-      .should(beOnTopOfLabelledByText('Window 2'))
-      .should(beOnTopOfLabelledByText('Window 4'))
-      .should(beOnTopOfLabelledByText('Window 1'));
+    cy.findByRole('dialog', {name: 'Window 3'})
+      .should(h.popup.beOnTopOfLabelledByText('Window 2'))
+      .should(h.popup.beOnTopOfLabelledByText('Window 4'))
+      .should(h.popup.beOnTopOfLabelledByText('Window 1'));
   });
 
   context('when Window 2 is clicked', () => {
@@ -45,9 +22,9 @@ describe('PopupStack', () => {
     });
 
     it('should place Window 2 above others', () => {
-      cy.findByLabelText('Window 2')
-        .should(beOnTopOfLabelledByText('Window 3'))
-        .should(beOnTopOfLabelledByText('Window 1'));
+      cy.findByRole('dialog', {name: 'Window 2'})
+        .should(h.popup.beOnTopOfLabelledByText('Window 3'))
+        .should(h.popup.beOnTopOfLabelledByText('Window 1'));
     });
   });
 
@@ -57,10 +34,10 @@ describe('PopupStack', () => {
     });
 
     it('should place Window 1 Tooltip above all other stacked UI elements', () => {
-      cy.findByRole('tooltip')
-        .should(beOnTopOfLabelledByText('Window 1'))
-        .should(beOnTopOfLabelledByText('Window 2'))
-        .should(beOnTopOfLabelledByText('Window 4'));
+      cy.findByRole('tooltip', {name: 'Really long tooltip showing how popup stacks overlap 1'})
+        .should(h.popup.beOnTopOfLabelledByText('Window 1'))
+        .should(h.popup.beOnTopOfLabelledByText('Window 2'))
+        .should(h.popup.beOnTopOfLabelledByText('Window 4'));
     });
   });
 
@@ -70,12 +47,12 @@ describe('PopupStack', () => {
     });
 
     it('should open "Delete Item" popup', () => {
-      cy.findByLabelText('Delete Item').should('be.visible');
+      cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
     });
 
     context('when Window 2 is clicked', () => {
       beforeEach(() => {
-        cy.findByLabelText('Window 2').click();
+        cy.findByRole('dialog', {name: 'Window 2'}).click();
       });
 
       it('should close "Delete Item" popup', () => {
@@ -83,9 +60,9 @@ describe('PopupStack', () => {
       });
 
       it('should place Window 2 above others', () => {
-        cy.findByLabelText('Window 2')
-          .should(beOnTopOfLabelledByText('Window 1'))
-          .should(beOnTopOfLabelledByText('Window 3'));
+        cy.findByRole('dialog', {name: 'Window 2'})
+          .should(h.popup.beOnTopOfLabelledByText('Window 1'))
+          .should(h.popup.beOnTopOfLabelledByText('Window 3'));
       });
     });
 
@@ -100,13 +77,13 @@ describe('PopupStack', () => {
         });
 
         it('should close "Delete Item" popup', () => {
-          cy.findByLabelText('Delete Item').should('not.exist');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
         });
 
         it('should place Window 2 above others', () => {
-          cy.findByLabelText('Window 2')
-            .should(beOnTopOfLabelledByText('Window 1'))
-            .should(beOnTopOfLabelledByText('Window 3'));
+          cy.findByRole('dialog', {name: 'Window 2'})
+            .should(h.popup.beOnTopOfLabelledByText('Window 1'))
+            .should(h.popup.beOnTopOfLabelledByText('Window 3'));
         });
       });
 
@@ -118,11 +95,13 @@ describe('PopupStack', () => {
         });
 
         it('should close the Tooltip', () => {
-          cy.findByRole('tooltip').should('not.exist');
+          cy.findByRole('tooltip', {
+            name: 'Really long tooltip showing how popup stacks overlap 1',
+          }).should('not.exist');
         });
 
         it('should not close the "Delete Item" popup', () => {
-          cy.findByLabelText('Delete Item').should('be.visible');
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
         });
 
         context('when the Escape key is pressed again', () => {
@@ -133,7 +112,7 @@ describe('PopupStack', () => {
           });
 
           it('should close the "Delete Item" popup', () => {
-            cy.findByLabelText('Delete Item').should('not.exist');
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
           });
         });
       });
@@ -145,7 +124,7 @@ describe('PopupStack', () => {
       });
 
       it('should close "Delete Item" popup', () => {
-        cy.findByLabelText('Delete Item').should('not.exist');
+        cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
       });
     });
 
@@ -157,7 +136,7 @@ describe('PopupStack', () => {
       });
 
       it('should close "Delete Item" popup', () => {
-        cy.findByLabelText('Delete Item').should('not.exist');
+        cy.findByRole('dialog', {name: 'Delete Item'}).should('not.exist');
       });
     });
 
@@ -176,7 +155,9 @@ describe('PopupStack', () => {
         });
 
         it('should open the tooltip', () => {
-          cy.findByRole('tooltip').should('be.visible');
+          cy.findByRole('tooltip', {
+            name: 'Really long tooltip showing how popup stacks overlap 2',
+          }).should('be.visible');
         });
 
         context('when an area outside popups is clicked', () => {
@@ -185,7 +166,9 @@ describe('PopupStack', () => {
           });
 
           it('should close the tooltip', () => {
-            cy.findByRole('tooltip').should('not.be.visible');
+            cy.findByRole('tooltip', {
+              name: 'Really long tooltip showing how popup stacks overlap 2',
+            }).should('not.be.visible');
           });
 
           it('should close the "Really Delete Item" popup', () => {

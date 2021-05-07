@@ -325,8 +325,18 @@ export const PopupStack = {
     }
     const item = find(stack.items, i => i.element === element);
 
+    const containsOwnerOfAnotherPopupTargeted = stack.items.some(currentItem => {
+      return (
+        item?.element.contains(currentItem.owner || null) &&
+        (eventTarget === currentItem.owner ||
+          currentItem.owner?.contains(eventTarget) ||
+          currentItem.element.contains(eventTarget))
+      );
+    });
+
     if (item) {
       return (
+        containsOwnerOfAnotherPopupTargeted ||
         eventTarget === item.owner ||
         item.owner?.contains(eventTarget) ||
         element.contains(eventTarget)
