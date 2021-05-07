@@ -68,7 +68,7 @@ describe('recategorizeButtons', () => {
     expectTransform(input, expected);
   });
 
-  it('should replace "OutlineButton" with "SecondaryButton" with "outline" variant', () => {
+  it('should replace "OutlineButton" with "SecondaryButton"', () => {
     const input = `
       import {OutlineButton} from '@workday/canvas-kit-react/button'
 
@@ -78,7 +78,7 @@ describe('recategorizeButtons', () => {
     const expected = `
       import {SecondaryButton} from '@workday/canvas-kit-react/button'
 
-      <SecondaryButton variant="outline" />
+      <SecondaryButton />
     `;
 
     expectTransform(input, expected);
@@ -86,7 +86,7 @@ describe('recategorizeButtons', () => {
 
   // TODO: Note to users that if they want the color back, they need to use theming.
 
-  it('should replace primary "OutlineButton" with "SecondaryButton" with "outline" variant', () => {
+  it('should replace primary "OutlineButton" with "SecondaryButton"', () => {
     const input = `
       import {OutlineButton} from '@workday/canvas-kit-react/button'
 
@@ -96,7 +96,7 @@ describe('recategorizeButtons', () => {
     const expected = `
       import {SecondaryButton} from '@workday/canvas-kit-react/button'
 
-      <SecondaryButton variant="outline"/>
+      <SecondaryButton />
     `;
 
     expectTransform(input, expected);

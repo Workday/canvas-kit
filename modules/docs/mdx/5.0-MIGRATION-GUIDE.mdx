@@ -175,29 +175,28 @@ have reorganized our buttons, renaming a few and removing some others. The major
 cases have been simplified into three different components: `PrimaryButton`, `SecondaryButton`, and
 `TertiaryButton`, each level representing its emphasis and hierarchy in a UI. We hope this makes
 your usage of our buttons more intentional and clear. We have provided a codemod to make all of
-these changes automatic updates.
+these changes automatic updates. In addition, the `SecondaryButton` now uses the "outline" styling
+by default for improved accessibility.
 
 **Renamed:**
 
 - 🤖 `Button` has been split into `PrimaryButton` and `SecondaryButton` (depending on the `variant`
   prop).
-- 🤖 `OutlineButton` (`secondary`) is now `SecondaryButton` with an `outline` variant.
+- 🤖 `OutlineButton` (`secondary`) is now `SecondaryButton`. For accessibility reasons, the
+  `outline` styling is the new styling for our secondary buttons.
 - 🤖 `OutlineButton` (`inverse`) is now `SecondaryButton` with an `inverse` variant.
 - 🤖 `TextButton` is now `TertiaryButton`.
 
 **Removed:**
 
 - 🤖 `HighlightButton`. Use `SecondaryButton` instead.
+- 🤖 `OutlineButton` with `primary` variant. Use `PrimaryButton` or `SecondaryButton` instead. The
+  codemod will replace with `SecondaryButton`.
 - 🤖 `DropdownButton`. This can be achieved simply using `PrimaryButton` or `SecondaryButton` with
   an `icon` prop and `iconPosition="right"`.
 
 To see examples of the before and after code, have a look at our
 [codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
-
-Note: There may still be some confusion between the filled default and the `outline`
-`SecondaryButton`. For accessibility reasons, the `outline` styling will become the new default and
-the filled version will be removed in a future update. This is in progress, which is why it has been
-pushed to v6.
 
 #### Exports
 

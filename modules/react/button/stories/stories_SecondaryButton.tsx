@@ -65,62 +65,6 @@ storiesOf('Components/Buttons/Button/React/Secondary', module)
       </SecondaryButton>
     </div>
   ))
-  .add('Outline', () => (
-    <div className="story">
-      <h3>Large Secondary Outline</h3>
-      <SecondaryButton variant="outline" size="large">
-        Secondary
-      </SecondaryButton>
-      <SecondaryButton variant="outline" size="large" icon={activityStreamIcon}>
-        Secondary
-      </SecondaryButton>
-      <SecondaryButton variant="outline" size="large" icon={playCircleIcon} dataLabel="1:00">
-        Secondary
-      </SecondaryButton>
-      <SecondaryButton
-        variant="outline"
-        disabled={true}
-        size="large"
-        icon={playCircleIcon}
-        dataLabel="1:00"
-      >
-        Secondary
-      </SecondaryButton>
-
-      <h3>Medium Secondary Outline</h3>
-      <SecondaryButton variant="outline" size="medium">
-        Secondary
-      </SecondaryButton>
-      <SecondaryButton variant="outline" size="medium" icon={editIcon}>
-        Secondary
-      </SecondaryButton>
-      <SecondaryButton variant="outline" size="medium" icon={playCircleIcon} dataLabel="1:00">
-        Secondary
-      </SecondaryButton>
-      <SecondaryButton
-        variant="outline"
-        disabled={true}
-        size="medium"
-        icon={playCircleIcon}
-        dataLabel="1:00"
-      >
-        Secondary
-      </SecondaryButton>
-
-      <h3>Small Secondary Outline</h3>
-      <SecondaryButton variant="outline" size="small">
-        Secondary
-      </SecondaryButton>
-      <SecondaryButton variant="outline" disabled={true} size="small">
-        Secondary
-      </SecondaryButton>
-
-      <h3>Growing Secondary Outline</h3>
-      <SecondaryButton variant="outline" size="large" grow={true}>
-        Growing Secondary
-      </SecondaryButton>
-    </div>
-  ))
   .add('Inverse', () => (
     <div className="story">
       <h3>Large Secondary Inverse</h3>

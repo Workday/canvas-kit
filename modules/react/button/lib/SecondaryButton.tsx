@@ -18,7 +18,7 @@ export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
    * The variant of the SecondaryButton.
    * @default undefined
    */
-  variant?: 'outline' | 'inverse' | undefined;
+  variant?: 'inverse' | undefined;
   /**
    * The size of the Button.
    * @default 'medium'
@@ -92,33 +92,6 @@ export const getSecondaryButtonColors = (
   switch (variant) {
     case undefined:
     default:
-      return {
-        default: {
-          background: colors.soap200,
-          icon: colors.licorice200,
-          label: colors.blackPepper400,
-          labelData: colors.blackPepper400,
-        },
-        hover: {
-          background: colors.soap400,
-          icon: colors.licorice500,
-        },
-        active: {
-          background: colors.soap500,
-          icon: colors.licorice500,
-        },
-        focus: {
-          background: colors.soap200,
-          icon: colors.licorice500,
-        },
-        disabled: {
-          background: colors.soap100,
-          icon: colors.soap600,
-          label: colors.licorice100,
-          labelData: colors.licorice100,
-        },
-      };
-    case 'outline':
       return {
         default: {
           background: 'transparent',

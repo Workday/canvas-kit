@@ -24,7 +24,6 @@ export const SecondaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}
       rowProps={permutateProps({
         variant: [
           {value: undefined, label: ''},
-          {value: 'outline', label: 'Outline'},
           {value: 'inverse', label: 'Inverse'},
         ],
         size: [

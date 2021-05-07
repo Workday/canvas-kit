@@ -128,17 +128,16 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 ### Optional
 
-#### `variant: 'outline' | 'inverse' | undefined`
+#### `variant: 'inverse' | undefined`
 
-> The type of the button
+> The style of the button
 
 Default: `undefined`
 
-| Theme       | Description                       |
-| ----------- | --------------------------------- |
-| `undefined` | Filled background                 |
-| `outline`   | No background with a gray stroke  |
-| `inverse`   | No background with a white stroke |
+| Theme     | Description   |
+| --------- | ------------- |
+| `outline` | Gray outline  |
+| `inverse` | White outline |
 
 ---
 
