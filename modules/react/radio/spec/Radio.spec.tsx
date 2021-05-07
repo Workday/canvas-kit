@@ -86,11 +86,11 @@ describe('Radio', () => {
     });
   });
 
-  describe('when rendered with an input ref', () => {
+  describe('when rendered with a ref', () => {
     it('should set the ref to the checkbox input element', () => {
       const ref = React.createRef<HTMLInputElement>();
 
-      render(<Radio inputRef={ref} onChange={cb} />);
+      render(<Radio ref={ref} onChange={cb} />);
 
       expect(ref.current).not.toBeNull();
       expect(ref.current).toHaveAttribute('type', 'radio');

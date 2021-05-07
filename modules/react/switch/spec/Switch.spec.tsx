@@ -101,11 +101,11 @@ describe('Switch', () => {
     });
   });
 
-  describe('when rendered with an input ref', () => {
-    it("should set the ref's current property to the checkbox input element", () => {
+  describe('when rendered with a ref', () => {
+    it('should set the ref to the checkbox input element', () => {
       const ref = React.createRef<HTMLInputElement>();
 
-      render(<Switch inputRef={ref} onChange={cb} />);
+      render(<Switch ref={ref} onChange={cb} />);
 
       expect(ref.current).not.toBeNull();
       expect(ref.current).toHaveAttribute('role', role);

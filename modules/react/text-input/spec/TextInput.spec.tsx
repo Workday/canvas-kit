@@ -55,10 +55,10 @@ describe('Text Input', () => {
     });
   });
 
-  describe('when provided an input ref', () => {
+  describe('when rendered with a ref', () => {
     it('should set the ref to the input element', async () => {
       const ref: React.RefObject<HTMLInputElement> = React.createRef();
-      const {findByRole} = render(<TextInput inputRef={ref} />);
+      const {findByRole} = render(<TextInput ref={ref} />);
       expect(await findByRole('textbox')).toEqual(ref.current);
     });
   });

@@ -48,10 +48,10 @@ describe('Text Area', () => {
     });
   });
 
-  describe('when provided an input ref', () => {
+  describe('when rendered with a ref', () => {
     it('should set the ref to the input element', async () => {
       const ref: React.RefObject<HTMLTextAreaElement> = React.createRef();
-      const {findByRole} = render(<TextArea inputRef={ref} />);
+      const {findByRole} = render(<TextArea ref={ref} />);
       expect(await findByRole('textbox')).toEqual(ref.current);
     });
   });
