@@ -197,6 +197,7 @@ export function border<P extends BorderStyleProps & {theme?: PartialEmotionCanva
         }
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
+        continue;
       }
 
       if (key in borderColors) {
@@ -212,6 +213,7 @@ export function border<P extends BorderStyleProps & {theme?: PartialEmotionCanva
         }
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
+        continue;
       }
 
       if (key in borderRadii) {
@@ -223,6 +225,7 @@ export function border<P extends BorderStyleProps & {theme?: PartialEmotionCanva
         const attr = borderRadii[key as keyof BorderRadiusStyleProps];
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
+        continue;
       }
 
       if (key in borderStyles) {
@@ -237,6 +240,7 @@ export function border<P extends BorderStyleProps & {theme?: PartialEmotionCanva
         }
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
+        continue;
       }
 
       if (key in borderWidths) {

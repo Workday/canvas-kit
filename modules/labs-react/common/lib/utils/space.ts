@@ -192,6 +192,7 @@ export function space<P extends SpaceStyleProps & {theme?: PartialEmotionCanvasT
         const spaceFn = standardSpaceStyleProps[key as keyof SpaceStandardProps];
         const style = spaceFn(value);
         styles = {...styles, ...style};
+        continue;
       }
       if (key in logicalSpaceStyleProps) {
         const value = props[key as keyof SpaceLogicalProps] as SpacePropValues;

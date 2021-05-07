@@ -81,6 +81,7 @@ export function position<P extends PositionStyleProps & {theme?: PartialEmotionC
         const attr = standardPositionProps[key as keyof PositionStandardProps];
         // @ts-ignore TS doesn't like adding a potentially unknown key to an object, but because we own this object, it's fine.
         styles[attr] = value;
+        continue;
       }
       if (key in logicalPositionProps) {
         const value = props[key as keyof PositionLogicalProps] as string | number;
