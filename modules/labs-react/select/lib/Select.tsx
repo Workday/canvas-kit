@@ -1,5 +1,10 @@
 import * as React from 'react';
-import {ErrorType, createComponent, useLocalRef} from '@workday/canvas-kit-react/common';
+import {
+  ErrorType,
+  StyledType,
+  createComponent,
+  useLocalRef,
+} from '@workday/canvas-kit-react/common';
 import {menuAnimationDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
@@ -25,7 +30,7 @@ export interface SelectProps extends CoreSelectBaseProps {
   options: (Option | string)[];
 }
 
-interface SelectContainerProps extends SelectProps {
+interface SelectContainerProps extends SelectProps, StyledType {
   forwardedButtonRef?: React.Ref<HTMLButtonElement>;
   localButtonRef?: React.RefObject<HTMLButtonElement>;
 }
@@ -546,19 +551,21 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
 
 export const Select = createComponent('button')({
   displayName: 'Select',
-  Component: (
-    props: SelectProps,
-    ref
-    // TODO: Add support for as
-    // Element
-  ) => {
+  Component: (props: SelectProps, ref, Element) => {
     // We need a local ref (RefObject) to the Select Button to serve as the
     // Popper Menu's anchorElement. However, we also need to forward the
     // provided ref to the Select Button -- since this forwarded ref may not
     // be a RefObject (i.e., it may be a callback ref), we use useLocalRef to
     // create a local ref and a forwardable ref out of the provided ref.
     const {localRef, elementRef} = useLocalRef<HTMLButtonElement>(ref);
-    return <SelectContainer forwardedButtonRef={elementRef} localButtonRef={localRef} {...props} />;
+    return (
+      <SelectContainer
+        as={Element}
+        forwardedButtonRef={elementRef}
+        localButtonRef={localRef}
+        {...props}
+      />
+    );
   },
   subComponents: {
     ErrorType,

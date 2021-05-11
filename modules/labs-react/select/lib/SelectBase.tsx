@@ -4,6 +4,7 @@ import uuid from 'uuid/v4';
 import {
   GrowthBehavior,
   ErrorType,
+  StyledType,
   Themeable,
   errorRing,
   styled,
@@ -91,7 +92,7 @@ export interface CoreSelectBaseProps
   value?: string;
 }
 
-export interface SelectBaseProps extends CoreSelectBaseProps {
+export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
   /**
    * The ref to be forwarded to the underlying button element. Use this to imperatively manipulate the button.
    */
@@ -167,7 +168,7 @@ const menuIconSize = 24;
 const buttonPadding = spaceNumbers.xxs - buttonBorderWidth;
 
 const SelectButton = styled('button')<
-  Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'>
+  Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'> & StyledType
 >(
   {
     ...type.body,
@@ -270,6 +271,7 @@ const defaultRenderOption: RenderOptionFunction = option => {
 const SelectBase = ({
   'aria-labelledby': ariaLabelledBy,
   'aria-required': ariaRequired,
+  as,
   forwardedButtonRef,
   localButtonRef,
   disabled,
@@ -408,6 +410,7 @@ const SelectBase = ({
         aria-expanded={menuVisibility !== 'closed' ? 'true' : undefined}
         aria-haspopup="listbox"
         aria-controls={menuVisibility !== 'closed' ? menuId : undefined}
+        as={as}
         disabled={disabled}
         error={error}
         grow={grow}
