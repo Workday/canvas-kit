@@ -37,7 +37,7 @@ const testInput = (
 
   // If this fails for not being a function, it's because the listener wasn't added
   // in InputProvider. Likely because the right window circumstances weren't provided
-  // in the test to immitate an environment required for certain event types (e.g. IE10)
+  // in the test to imitate an environment required for certain event types (e.g. IE10)
   map[eventType](mockEvent);
 
   if (!provideIntent) {
@@ -71,7 +71,6 @@ const getMockInputEvent = (
       return {
         type: eventType,
         key: 'Tab',
-        which: 9,
       };
     case InputType.Pointer:
       return {

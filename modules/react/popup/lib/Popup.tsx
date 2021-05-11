@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {keyframes} from '@emotion/core';
 import isPropValid from '@emotion/is-prop-valid';
-import uuid from 'uuid/v4';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton} from '@workday/canvas-kit-react/button';
@@ -11,8 +10,18 @@ import {
   TransformOrigin,
   getTranslateFromOrigin,
   PickRequired,
+  createComponent,
+  useUniqueId,
+  useDefaultModel,
 } from '@workday/canvas-kit-react/common';
 import {xIcon} from '@workday/canvas-system-icons-web';
+import {PopupModel, usePopupModel, PopupModelConfig} from '@workday/canvas-kit-react/popup/lib/usePopupModel';
+import {PopupCard} from './PopupCard';
+import {PopupTarget, usePopupTargetButton} from './PopupTarget';
+import {PopupPopper, usePopupPopper} from './PopupPopper';
+import {PopupHeading} from './PopupHeading';
+import {PopupCloseIcon} from './PopupCloseIcon';
+import {PopupCloseButton, usePopupCloseButton} from './PopupCloseButton';
 
 export enum PopupPadding {
   zero = '0px',
@@ -20,7 +29,7 @@ export enum PopupPadding {
   l = '32px',
 }
 
-export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PopupPropsOld {
   /**
    * Aria label will override aria-labelledby, it is used if there is no heading or we need custom label for popup
    */
@@ -66,6 +75,7 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default Close
    */
   closeButtonAriaLabel?: string;
+  children?: React.ReactNode;
 }
 
 const closeIconSpacing = space.xs;
@@ -88,7 +98,7 @@ const popupAnimation = (transformOrigin: TransformOrigin) => {
 
 const Container = styled('div', {
   shouldForwardProp: prop => isPropValid(prop) && prop !== 'width',
-})<PickRequired<PopupProps, 'transformOrigin', 'width'>>(
+})<PickRequired<PopupPropsOld, 'transformOrigin', 'width'>>(
   {
     position: 'relative',
     maxWidth: `calc(100vw - ${space.l})`,
@@ -126,7 +136,7 @@ const getAriaLabel = (
   return undefined;
 };
 
-const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
+const CloseIconContainer = styled('div')<Pick<PopupPropsOld, 'closeIconSize'>>(
   {
     position: 'absolute',
   },
@@ -136,15 +146,12 @@ const CloseIconContainer = styled('div')<Pick<PopupProps, 'closeIconSize'>>(
   })
 );
 
-export default class Popup extends React.Component<PopupProps> {
-  static Padding = PopupPadding;
-
-  private id = uuid();
-  private closeButtonRef = React.createRef<any>();
-
-  public render() {
-    const {
-      padding = Popup.Padding.l,
+export const PopupOld = createComponent('div')({
+  displayName: 'Popup',
+  Component: (
+    {
+      children,
+      padding = PopupPadding.l,
       closeIconSize = 'medium',
       closeButtonAriaLabel = 'Close',
       transformOrigin = {
@@ -158,8 +165,14 @@ export default class Popup extends React.Component<PopupProps> {
       popupRef,
       ariaLabel,
       ...elemProps
-    } = this.props;
-    const headingId = getHeadingId(heading, this.id);
+    }: PopupPropsOld,
+    ref,
+    Element
+  ) => {
+    const id = useUniqueId();
+    const closeButtonRef = React.useRef<any>(null);
+    const headingId = getHeadingId(heading, id);
+
     return (
       <Container
         transformOrigin={transformOrigin}
@@ -173,7 +186,7 @@ export default class Popup extends React.Component<PopupProps> {
           <CloseIconContainer closeIconSize={closeIconSize}>
             <IconButton
               data-close="close" // Allows for grabbing focus to the close button rather than relying on the aria label "Close" which will change based on different languages
-              ref={this.closeButtonRef}
+              ref={closeButtonRef}
               variant="plain"
               size={closeIconSize}
               onClick={handleClose}
@@ -184,19 +197,62 @@ export default class Popup extends React.Component<PopupProps> {
         )}
         <Card depth={depth} width="100%" padding={padding}>
           {heading && <Card.Heading id={headingId}>{heading}</Card.Heading>}
-          <Card.Body>{this.props.children}</Card.Body>
+          <Card.Body>{children}</Card.Body>
         </Card>
       </Container>
     );
-  }
+  },
+  subComponents: {
+    Padding: PopupPadding,
+  },
+});
+
+// eslint-disable-next-line no-empty-function
+const noop = () => {};
+
+// create enough of a model to use `Popup.Card` without a `Popup` container component.
+export const PopupModelContext = React.createContext<PopupModel>({
+  state: {},
+  events: {show: noop, hide: noop},
+} as any);
+
+export interface PopupProps extends PopupModelConfig {
+  /**
+   * The contents of the Popup. Can be `Popup` children or any valid elements. Foobar
+   */
+  children: React.ReactNode;
+  /**
+   * Optionally pass a model directly to this component. Default is to create a model out of model
+   * config passed to this component.
+   * @default usePopupModel(config)
+   */
+  model?: PopupModel;
 }
+
+export const Popup = createComponent('div')({
+  displayName: 'Popup',
+  Component: ({children, model, ...config}: PopupProps) => {
+    const value = useDefaultModel(model, config, usePopupModel);
+    return <PopupModelContext.Provider value={value}>{children}</PopupModelContext.Provider>;
+  },
+  subComponents: {
+    Padding: PopupPadding,
+    Heading: PopupHeading,
+    Body: Card.Body,
+    Card: PopupCard,
+    CloseIcon: PopupCloseIcon,
+    Target: PopupTarget,
+    Popper: PopupPopper,
+    CloseButton: PopupCloseButton,
+  },
+});
 
 /**
  * Convenience hook around popups. Most popups are non-modal dialogs with a single target and toggle
  * when the target button is clicked. Additional popup features like `useCloseOnOutsideClick` need
  * to be added manually.
  */
-export const usePopup = <T extends HTMLElement = HTMLElement>() => {
+export const usePopupOld = <T extends HTMLElement = HTMLElement>() => {
   const [open, setOpen] = React.useState(false);
   const [anchorElement, setAnchorElement] = React.useState<T | null>(null);
   const stackRef = React.useRef<HTMLDivElement>(null);
@@ -219,5 +275,25 @@ export const usePopup = <T extends HTMLElement = HTMLElement>() => {
       ref: stackRef,
     },
     stackRef,
+  };
+};
+
+/**
+ *
+ * @deprecated
+ */
+export const usePopup = (config: PopupModelConfig = {}) => {
+  const model = usePopupModel(config);
+  const closeButtonProps = usePopupCloseButton(model);
+  const popperProps = usePopupPopper(model);
+  const targetProps = usePopupTargetButton(model);
+
+  return {
+    targetProps,
+    popperProps,
+    closeButtonProps,
+    closePopup: model.events.hide,
+    stackRef: model.state.stackRef,
+    model,
   };
 };

@@ -1,7 +1,7 @@
 import {useState, useLayoutEffect} from 'react';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {
-  usePopup,
+  usePopupOld,
   useCloseOnOutsideClick,
   useCloseOnEscape,
   PopperProps,
@@ -47,7 +47,7 @@ export const useDropdown = (
   // state
   const [activeDropdownItem, setActiveDropdownItem] = useState(initialActiveItem);
   // behaviors
-  const {targetProps, closePopup, popperProps} = usePopup();
+  const {targetProps, closePopup, popperProps} = usePopupOld();
   useCloseOnOutsideClick(popperProps.ref, closePopup);
   useCloseOnEscape(popperProps.ref, closePopup, ref);
   useFocusActiveItemElement(activeDropdownItemRef);

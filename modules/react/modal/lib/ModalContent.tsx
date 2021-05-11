@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import {
-  Popup,
+  Popup2 as Popup,
   PopupPadding,
   usePopupStack,
   useCloseOnEscape,

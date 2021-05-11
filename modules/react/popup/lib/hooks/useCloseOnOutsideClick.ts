@@ -1,0 +1,45 @@
+import React from 'react';
+
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {PopupModel} from '../usePopupModel';
+
+/**
+ * Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
+ * click happened outside the model's `stackRef` element and its children _and_ the model's
+ * `stackRef` element is the topmost element with this behavior applied in the stack. Adds a
+ * `data-behavior-click-outside-close` attribute to track usage of this behavior hook.
+ */
+export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
+  const onClick = React.useMemo(
+    () => (event: MouseEvent) => {
+      if (!model.state.stackRef.current) {
+        return;
+      }
+      const elements = PopupStack.getElements()
+        .sort((a, b) => Number(a.style.zIndex) - Number(b.style.zIndex))
+        .filter(e => e.getAttribute('data-behavior-click-outside-close') === 'topmost');
+      if (
+        elements.length &&
+        elements[elements.length - 1] === model.state.stackRef.current &&
+        // Use `PopupStack.contains` instead of `ref.current.contains` so that the application can
+        // decide if clicking the target should toggle the popup rather than it toggling implicitly
+        // because the target is outside `ref.current`
+        !PopupStack.contains(model.state.stackRef.current, event.target as HTMLElement)
+      ) {
+        model.events.hide();
+      }
+    },
+    [model.state.stackRef, model.events]
+  );
+
+  React.useLayoutEffect(() => {
+    document.addEventListener('mousedown', onClick);
+    model.state.stackRef.current?.setAttribute('data-behavior-click-outside-close', 'topmost');
+
+    return () => {
+      document.removeEventListener('mousedown', onClick);
+    };
+  });
+
+  return elemProps;
+};

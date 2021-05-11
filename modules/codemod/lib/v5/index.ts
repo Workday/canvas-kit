@@ -9,6 +9,8 @@ import renameSpacing from './renameSpacing';
 import renameCoreImports from './renameCoreImports';
 // card codemods
 import compoundCard from './compoundCard';
+// popup codemods
+import compoundPopup from './compoundPopup';
 
 import {API, FileInfo, Options} from 'jscodeshift';
 
@@ -23,6 +25,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     renameSpacing,
     renameCoreImports,
     compoundCard,
+    compoundPopup,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);

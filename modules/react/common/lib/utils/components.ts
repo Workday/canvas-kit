@@ -1,4 +1,6 @@
 import React from 'react';
+import {mergeProps} from './mergeProps';
+import {Model} from './models';
 
 /**
  * Adds the `as` to the style interface to support `as` in styled components
@@ -156,6 +158,47 @@ export const createComponent = <T extends React.ElementType | undefined = undefi
   return ReturnedComponent;
 };
 
+/**
+ * Factory function to crate a behavior hook with correct generic types. It takes a function that
+ * return props and returns a function that will also require `elemProps` and will call `mergeProps` for
+ * you. If your hook makes use of the `ref`, you will have to also use `useLocalRef` to properly fork
+ * the ref.
+ *
+ * @example
+ * const useMyHook = createHook((model: MyModel, ref) => {
+ *   const { localRef, elementRef } = useLocalRef(ref);
+ *   // do whatever with `localRef` which is a RefObject
+ *
+ *   return {
+ *     onClick: model.events.doSomething,
+ *     ref: elementRef,
+ *   };
+ * });
+ *
+ * // Equivalent to:
+ * const useMyHook = <P extends {}, R>(
+ *   model: MyModel,
+ *   elemProps: P,
+ *   ref: React.Ref<R>
+ * ) => {
+ *   const { localRef, elementRef } = useLocalRef(ref);
+ *   // do whatever with `localRef` which is a RefObject
+ *
+ *   return mergeProps({
+ *     onClick: model.events.doSomething,
+ *     ref: elementRef,
+ *   }, elemProps);
+ * };
+ *
+ * @param fn Function that takes a model and optional ref and returns props
+ */
+export const createHook = <M extends Model<any, any>, P1 extends {}, R>(
+  fn: (model: M, ref?: React.Ref<R>) => P1
+) => {
+  return <P2 extends {}>(model: M, elemProps: P2 = {} as P2, ref: React.Ref<R> = null) =>
+    mergeProps(fn(model, ref), elemProps);
+};
+
 function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
   if (ref) {
     if (typeof ref === 'function') {
@@ -277,12 +320,12 @@ export function useModelContext<T>(context: React.Context<T>, model?: T): T {
 export function composeHooks<M, R, P extends {}, O1 extends {}, O2 extends {}>(
   hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
   hook2: (model: M, props: P, ref: React.Ref<R>) => O2
-): (model: M, props: P, ref: React.Ref<R>) => P & O1 & O2;
+): (model: M, props?: P, ref?: React.Ref<R>) => P & O1 & O2;
 export function composeHooks<M, R, P extends {}, O1 extends {}, O2 extends {}, O3 extends {}>(
   hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
   hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3
-): (model: M, props: P, ref: React.Ref<R>) => P & O1 & O2 & O3;
+): (model: M, props?: P, ref?: React.Ref<R>) => P & O1 & O2 & O3;
 export function composeHooks<
   M,
   R,
@@ -296,7 +339,7 @@ export function composeHooks<
   hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3,
   hook4: (model: M, props: P, ref: React.Ref<R>) => O4
-): (model: M, props: P, ref: React.Ref<R>) => P & O1 & O2 & O3 & O4;
+): (model: M, props?: P, ref?: React.Ref<R>) => P & O1 & O2 & O3 & O4;
 export function composeHooks<
   M,
   R,
@@ -312,11 +355,11 @@ export function composeHooks<
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3,
   hook4: (model: M, props: P, ref: React.Ref<R>) => O4,
   hook5: (model: M, props: P, ref: React.Ref<R>) => O5
-): (model: M, props: P, ref: React.Ref<R>) => P & O1 & O2 & O3 & O4 & O5;
+): (model: M, props?: P, ref?: React.Ref<R>) => P & O1 & O2 & O3 & O4 & O5;
 export function composeHooks<M, R, P extends {}, O extends {}>(
   ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
-): (model: M, props: P, ref: React.Ref<R>) => O {
-  return (model: M, props: P, ref: React.Ref<R>) => {
+): (model: M, props?: P, ref?: React.Ref<R>) => O {
+  return (model: M, props: P = {} as any, ref: React.Ref<R> = null) => {
     return hooks.reverse().reduce((props: any, hook) => {
       return hook(model, props, props.ref || ref);
     }, props);

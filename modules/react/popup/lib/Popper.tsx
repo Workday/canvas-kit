@@ -5,7 +5,7 @@ import * as PopperJS from '@popperjs/core';
 export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.Options;
 
-import {usePopupStack} from '../';
+import {usePopupStack} from './usePopupStack';
 
 export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -51,6 +51,12 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   placement?: Placement;
   /**
+   * A callback function that will be called whenever PopperJS chooses a placement that is different
+   * from the provided `placement` preference. If a `placement` preference doesn't fit, PopperJS
+   * will choose a new one and call this callback.
+   */
+  updatePlacement?: (placement: Placement) => void;
+  /**
    * The additional options passed to the Popper's `popper.js` instance.
    */
   popperOptions?: Partial<PopperOptions>;
@@ -86,19 +92,6 @@ const getElementFromRefOrElement = (
   }
 };
 
-const createSetPlacementModifier = (
-  setPlacement: (placement: Placement) => void
-): PopperJS.Modifier<any, any> => {
-  return {
-    name: 'setPlacement',
-    enabled: true,
-    phase: 'main',
-    fn({state}) {
-      setPlacement(state.placement);
-    },
-  };
-};
-
 // prevent unnecessary renders if popperOptions are not passed
 const defaultPopperOptions: PopperProps['popperOptions'] = {};
 
@@ -111,6 +104,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
       getAnchorClientRect,
       popperOptions = defaultPopperOptions,
       placement: popperPlacement = 'bottom',
+      updatePlacement,
       children,
       portal,
       containerElement,
@@ -122,6 +116,18 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     const popperInstance = React.useRef<PopperJS.Instance>();
     const [placement, setPlacement] = React.useState(popperPlacement);
     const stackRef = usePopupStack(ref, anchorElement as HTMLElement);
+
+    const placementModifier = React.useMemo((): PopperJS.Modifier<any, any> => {
+      return {
+        name: 'setPlacement',
+        enabled: true,
+        phase: 'main',
+        fn({state}) {
+          setPlacement(state.placement);
+          updatePlacement?.(state.placement);
+        },
+      };
+    }, [setPlacement, updatePlacement]);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
@@ -139,7 +145,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         popperInstance.current = PopperJS.createPopper(anchorEl, stackRef.current, {
           placement: popperPlacement,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), createSetPlacementModifier(setPlacement)],
+          modifiers: [...(popperOptions.modifiers || []), placementModifier],
         });
 
         return () => {
@@ -160,11 +166,11 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         popperInstance.current?.setOptions({
           placement: popperPlacement,
           ...popperOptions,
-          modifiers: [...(popperOptions.modifiers || []), createSetPlacementModifier(setPlacement)],
+          modifiers: [...(popperOptions.modifiers || []), placementModifier],
         });
       }
       firstRender.current = false;
-    }, [popperOptions, popperPlacement]);
+    }, [popperOptions, popperPlacement, placementModifier]);
 
     const contents = (
       <div {...elemProps}>{isRenderProp(children) ? children({placement}) : children}</div>

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {
-  Popup,
+  Popup2 as Popup,
   Popper,
   usePopupStack,
   useCloseOnOutsideClick,
@@ -139,6 +139,80 @@ export const MixedPopupTypes = () => {
                 </>
               )}
             </TempPopup>
+          </div>
+        </div>
+      </Window>
+    </div>
+  );
+};
+
+export const MixedPopupTypes2 = () => {
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
+
+  const onClose = () => setOpen(false);
+  const onButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setOpen(true);
+    setAnchorEl(event.currentTarget);
+  };
+
+  const stackRef = React.useRef<HTMLDivElement>(null);
+  useCloseOnEscape(stackRef, onClose);
+
+  return (
+    <div ref={ref} style={{height: 420}}>
+      <Window heading="Window 1" top={50} left={50} relativeNode={ref}>
+        <Tooltip title="Really long tooltip showing how popup stacks overlap">
+          <span tabIndex={0}>Contents of Window 1</span>
+        </Tooltip>
+      </Window>
+      <Window heading="Window 2" top={100} left={250} relativeNode={ref}>
+        <Tooltip title="Really long tooltip showing how popup stacks overlap">
+          <span tabIndex={0}>Contents of Window 2</span>
+        </Tooltip>
+      </Window>
+      <Window heading="Window 4" top={300} left={250} relativeNode={ref}>
+        <div>
+          <Tooltip title="Really long tooltip showing how popup stacks overlap">
+            <span tabIndex={0}>Contents of Window 4</span>
+          </Tooltip>
+        </div>
+      </Window>
+      <Window heading="Window 3" top={200} left={75} relativeNode={ref}>
+        <div>
+          <Tooltip title="Really long tooltip showing how popup stacks overlap">
+            <span tabIndex={0} onClick={() => console.log('clicked')}>
+              Contents of Window 3
+            </span>
+          </Tooltip>
+          <div>
+            <TempPopup heading="Delete Item" deleteText="Delete Item">
+              {({onClose}) => (
+                <>
+                  <div style={{marginBottom: '24px'}}>
+                    Are you sure you'd like to delete the item titled 'My Item'?
+                  </div>
+
+                  <DeleteButton style={{marginRight: '16px'}} onClick={onButtonClick}>
+                    {'Really Delete Item'}
+                  </DeleteButton>
+                  <Button onClick={onClose}>Cancel</Button>
+                </>
+              )}
+            </TempPopup>
+
+            <Popper placement={'bottom'} open={open} anchorElement={anchorEl} ref={stackRef}>
+              <Popup
+                width={400}
+                heading={'Really Delete Button'}
+                padding={Popup.Padding.s}
+                handleClose={onClose}
+              >
+                <Button onClick={onClose}>Cancel</Button>
+              </Popup>
+            </Popper>
           </div>
         </div>
       </Window>

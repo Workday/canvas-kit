@@ -184,6 +184,5 @@ export const useEventMap = <
       }) as TEvents[keyof TEvents]; // this cast keeps Typescript happy
       return result;
     }, {} as TEvents);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
