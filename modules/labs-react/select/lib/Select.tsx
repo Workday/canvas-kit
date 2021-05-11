@@ -552,11 +552,24 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
 export const Select = createComponent('button')({
   displayName: 'Select',
   Component: (props: SelectProps, ref, Element) => {
-    // We need a local ref (RefObject) to the Select Button to serve as the
-    // Popper Menu's anchorElement. However, we also need to forward the
-    // provided ref to the Select Button -- since this forwarded ref may not
-    // be a RefObject (i.e., it may be a callback ref), we use useLocalRef to
-    // create a local ref and a forwardable ref out of the provided ref.
+    // We need a local mutable ref (RefObject) to the Select component's
+    // underlying button to manage focus within the component and to serve as
+    // its Popper Menu's anchorElement. If the provided ref was a mutable ref,
+    // we could simply reuse it for our internal purposes. The provided ref
+    // could be a callback ref, however, or maybe there was no ref provided. To
+    // guarantee we have access to a mutable ref, we use useLocalRef to create:
+    //
+    // (1) A mutable ref for local use in the component, and;
+    // (2) A callback ref to be forwarded to the component's underlying button
+    //     element. When the component mounts/unmounts, this callback will
+    //     both:
+    //       (a) Update the current value of the mutable ref from (1) above,
+    //           and;
+    //       (b) Either update the current value of the provided ref if it was
+    //           a mutable ref, or call the provided ref with the underlying
+    //           button element if the provided ref was a callback ref.
+    //
+    // Both refs are passed to the component.
     const {localRef, elementRef} = useLocalRef<HTMLButtonElement>(ref);
     return (
       <SelectContainer
