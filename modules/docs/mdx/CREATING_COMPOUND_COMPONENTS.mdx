@@ -299,7 +299,7 @@ Disclosure.Target = DisclosureTarget;
 Disclosure.Content = DisclosureContent;
 ```
 
-We can see that the `DisclosureProps` interface extends the `DisclosureConfig` interface. This allows us to pass model config directly to the `<Disclosure>` component. A user of this `<Disclosure>` component might want to register a callback when the `open` event is called, for instance.
+We can see that the `DisclosureProps` interface extends the `DisclosureConfig` interface. This allows us to pass model config directly to the `<Disclosure>` component. A user of this `<Disclosure>` component might want to register a callback when the `show` event is called, for instance.
 
 Next, a React Context object is created to represent the model of the compound component. This context will be used to pass the model to sub-components implicitly. This allows our compound component API to remain clean for consumers of compound components.
 
@@ -337,7 +337,7 @@ export const DisclosureTarget = ({children}: DisclosureTargetProps) => {
 };
 ```
 
-The `DisclosureTarget` component is in charge of the toggle button and it calls the `open` or `close` event on the model.
+The `DisclosureTarget` component is in charge of the toggle button and it calls the `show` or `hide` event on the model.
 
 ### DisclosureContent Component
 

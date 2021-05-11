@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-popup-stack",
-  "version": "5.0.0-beta.1",
+  "version": "5.0.0-beta.2",
   "description": "Stack for managing popup UIs to coordinate global concerns like escape key handling and rendering order",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
@@ -36,7 +36,7 @@
     "depcheck": "node ../../utils/check-dependencies-exist.js"
   },
   "devDependencies": {
-    "@workday/canvas-kit-react": "^5.0.0-beta.1"
+    "@workday/canvas-kit-react": "^5.0.0-beta.2"
   },
   "keywords": [
     "canvas",
