@@ -95,33 +95,37 @@ export const getSecondaryButtonColors = (
       return {
         default: {
           background: 'transparent',
-          border: colors.soap500,
-          icon: colors.licorice200,
+          border: colors.blackPepper400,
+          icon: colors.blackPepper400,
           label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
         },
         hover: {
-          background: colors.licorice500,
-          border: colors.licorice500,
+          background: colors.blackPepper400,
+          border: colors.blackPepper400,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
+          labelData: themePrimary.contrast,
         },
         active: {
-          background: colors.licorice600,
-          border: colors.licorice600,
+          background: colors.blackPepper500,
+          border: colors.blackPepper500,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
+          labelData: themePrimary.contrast,
         },
         focus: {
-          background: colors.licorice500,
-          border: colors.licorice500,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
+          border: colors.blackPepper400,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
         },
         disabled: {
           background: 'transparent',
-          border: colors.soap500,
-          icon: colors.soap600,
-          label: colors.licorice100,
+          border: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
+          icon: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
+          label: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
+          labelData: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
         },
       };
     case 'inverse':
@@ -133,23 +137,24 @@ export const getSecondaryButtonColors = (
           label: colors.frenchVanilla100,
         },
         hover: {
-          background: colors.frenchVanilla100,
-          icon: colors.licorice500,
-          label: colors.blackPepper400,
-          labelData: colors.licorice300,
-        },
-        active: {
           background: colors.soap300,
           border: colors.soap300,
-          icon: colors.licorice500,
+          icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.licorice300,
+          labelData: colors.blackPepper400,
+        },
+        active: {
+          background: colors.soap400,
+          border: colors.soap400,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
         },
         focus: {
           background: colors.frenchVanilla100,
-          icon: colors.licorice500,
+          icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.licorice300,
+          labelData: colors.blackPepper400,
           focusRing: focusRing(
             {
               separation: 2,
@@ -161,10 +166,10 @@ export const getSecondaryButtonColors = (
         },
         disabled: {
           background: 'transparent',
-          border: 'rgba(255, 255, 255, 0.75)',
-          icon: 'rgba(255, 255, 255, 0.75)',
-          label: 'rgba(255, 255, 255, 0.75)',
-          labelData: 'rgba(255, 255, 255, 0.75)',
+          border: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
+          icon: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
+          label: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
+          labelData: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
         },
       };
   }
