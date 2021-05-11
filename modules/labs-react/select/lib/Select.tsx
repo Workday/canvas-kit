@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ErrorType} from '@workday/canvas-kit-react/common';
+import {ErrorType, createComponent, useLocalRef} from '@workday/canvas-kit-react/common';
 import {menuAnimationDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
@@ -25,20 +25,24 @@ export interface SelectProps extends CoreSelectBaseProps {
   options: (Option | string)[];
 }
 
-interface SelectState {
+interface SelectContainerProps extends SelectProps {
+  forwardedButtonRef?: React.Ref<HTMLButtonElement>;
+  localButtonRef?: React.RefObject<HTMLButtonElement>;
+}
+
+interface SelectContainerState {
   focusedOptionIndex: number;
   menuVisibility: MenuVisibility;
 }
 
-class Select extends React.Component<SelectProps, SelectState> {
+class SelectContainer extends React.Component<SelectContainerProps, SelectContainerState> {
   static ErrorType = ErrorType;
 
-  state: Readonly<SelectState> = {
+  state: Readonly<SelectContainerState> = {
     focusedOptionIndex: 0,
     menuVisibility: 'closed',
   };
 
-  private buttonRef = React.createRef<HTMLButtonElement>();
   private inputRef = React.createRef<HTMLInputElement>();
   private menuRef = React.createRef<HTMLUListElement>();
 
@@ -164,8 +168,9 @@ class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private focusButton = () => {
-    if (this.buttonRef.current) {
-      this.buttonRef.current.focus();
+    const {localButtonRef} = this.props;
+    if (localButtonRef && localButtonRef.current) {
+      localButtonRef.current.focus();
     }
   };
 
@@ -526,7 +531,6 @@ class Select extends React.Component<SelectProps, SelectState> {
 
     return (
       <SelectBase
-        buttonRef={this.buttonRef}
         focusedOptionIndex={focusedOptionIndex}
         inputRef={this.inputRef}
         menuRef={this.menuRef}
@@ -540,6 +544,25 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 }
 
-Select.ErrorType = ErrorType;
+export const Select = createComponent('button')({
+  displayName: 'Select',
+  Component: (
+    props: SelectProps,
+    ref
+    // TODO: Add support for as
+    // Element
+  ) => {
+    // We need a local ref (RefObject) to the Select Button to serve as the
+    // Popper Menu's anchorElement. However, we also need to forward the
+    // provided ref to the Select Button -- since this forwarded ref may not
+    // be a RefObject (i.e., it may be a callback ref), we use useLocalRef to
+    // create a local ref and a forwardable ref out of the provided ref.
+    const {localRef, elementRef} = useLocalRef<HTMLButtonElement>(ref);
+    return <SelectContainer forwardedButtonRef={elementRef} localButtonRef={localRef} {...props} />;
+  },
+  subComponents: {
+    ErrorType,
+  },
+});
 
 export default Select;

@@ -93,9 +93,13 @@ export interface CoreSelectBaseProps
 
 export interface SelectBaseProps extends CoreSelectBaseProps {
   /**
-   * The ref to the underlying button element. Use this to imperatively manipulate the button.
+   * The ref to be forwarded to the underlying button element. Use this to imperatively manipulate the button.
    */
-  buttonRef: React.RefObject<HTMLButtonElement>;
+  forwardedButtonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * The local ref to the underlying button element. Can be used in situations where RefObject is required (such as the Popper Menu).
+   */
+  localButtonRef?: React.RefObject<HTMLButtonElement>;
   /**
    * The index of the focused option in the SelectBase.
    * @default 0
@@ -266,7 +270,8 @@ const defaultRenderOption: RenderOptionFunction = option => {
 const SelectBase = ({
   'aria-labelledby': ariaLabelledBy,
   'aria-required': ariaRequired,
-  buttonRef,
+  forwardedButtonRef,
+  localButtonRef,
   disabled,
   error,
   focusedOptionIndex = 0,
@@ -414,7 +419,7 @@ const SelectBase = ({
         onKeyUp={e => {
           e.preventDefault();
         }}
-        ref={buttonRef}
+        ref={forwardedButtonRef}
         type="button"
         value={selectedOptionValue}
         {...elemProps}
@@ -427,7 +432,7 @@ const SelectBase = ({
           aria-activedescendant={options[focusedOptionIndex].id}
           aria-labelledby={ariaLabelledBy}
           aria-required={ariaRequired || required ? true : undefined}
-          buttonRef={buttonRef}
+          buttonRef={localButtonRef}
           id={menuId}
           error={error}
           menuRef={menuRef}

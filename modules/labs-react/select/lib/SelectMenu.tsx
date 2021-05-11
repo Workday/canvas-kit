@@ -21,7 +21,7 @@ interface SelectMenuProps
   /**
    * The ref to the anchor button element. Required to anchor the menu.
    */
-  buttonRef: React.RefObject<HTMLButtonElement>;
+  buttonRef?: React.RefObject<HTMLButtonElement>;
   /**
    * The ref to the underlying menu/listbox element. Use this to imperatively manipulate the menu.
    */
@@ -242,7 +242,7 @@ const SelectMenu = ({
   const [width, setWidth] = useState(0);
 
   const handleWidthChange = useCallback(() => {
-    if (buttonRef.current && visibility !== 'closed') {
+    if (buttonRef && buttonRef.current && visibility !== 'closed') {
       const newMenuWidth = buttonRef.current.clientWidth + 2 * buttonBorderWidth;
       setWidth(newMenuWidth);
     }
