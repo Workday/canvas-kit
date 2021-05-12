@@ -17,6 +17,13 @@ const updateJSXTag = (nodePath: ASTPath<JSXElement>, newTag: string) => {
   }
 };
 
+const findBtnTag = (elementName: string, node: JSXElement) => {
+  if ((node.openingElement.name as JSXIdentifier).name === elementName) {
+    return true;
+  }
+  return false;
+};
+
 export default function transformer(file: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
   const root = j(file.source);
@@ -25,7 +32,11 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   /**
    * 1. Find button imports
    */
-  const {containsCanvasImports} = getImportRenameMap(j, root, '@workday/canvas-kit-react/button');
+  const {containsCanvasImports, importMap} = getImportRenameMap(
+    j,
+    root,
+    '@workday/canvas-kit-react/button'
+  );
   if (!containsCanvasImports) {
     return file.source;
   }
@@ -40,7 +51,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
    *    - Add `SecondaryButton` import if it doesn't exist
    */
   root
-    .find(j.JSXElement, {openingElement: {name: {name: 'Button'}}})
+    .find(j.JSXElement, findBtnTag.bind(undefined, importMap.Button))
     .forEach((nodePath: ASTPath<JSXElement>) => {
       const attrs = nodePath.value.openingElement.attributes;
       let isPrimary = false;
@@ -65,10 +76,12 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
    *  - Replace with `SecondaryButton`
    *  - Replace import with `SecondaryButton` if it doesn't exist
    */
-  root.find(j.JSXElement, {openingElement: {name: {name: 'HighlightButton'}}}).forEach(nodePath => {
-    updateJSXTag(nodePath, 'SecondaryButton');
-    requiredImportSpecifiers.push('SecondaryButton');
-  });
+  root
+    .find(j.JSXElement, findBtnTag.bind(undefined, importMap.HighlightButton))
+    .forEach(nodePath => {
+      updateJSXTag(nodePath, 'SecondaryButton');
+      requiredImportSpecifiers.push('SecondaryButton');
+    });
 
   /**
    * 4. Find `OutlineButton`
@@ -76,7 +89,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
    *  - If variant is 'inverse', keep it. Otherwise, remove the variant prop
    *  - Replace import with `SecondaryButton` if it doesn't exist
    */
-  root.find(j.JSXElement, {openingElement: {name: {name: 'OutlineButton'}}}).forEach(nodePath => {
+  root.find(j.JSXElement, findBtnTag.bind(undefined, importMap.OutlineButton)).forEach(nodePath => {
     // Swap to `SecondaryButton`
     updateJSXTag(nodePath, 'SecondaryButton');
 
@@ -100,7 +113,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
    *  - Replace with `TertiaryButton`
    *  - If variant="text", remove variant prop
    */
-  root.find(j.JSXElement, {openingElement: {name: {name: 'TextButton'}}}).forEach(nodePath => {
+  root.find(j.JSXElement, findBtnTag.bind(undefined, importMap.TextButton)).forEach(nodePath => {
     // Swap to `TertiaryButton`
     updateJSXTag(nodePath, 'TertiaryButton');
     const attrs = nodePath.value.openingElement.attributes;
@@ -124,44 +137,46 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
    *  - Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
    *  - Replace `DropdownButton` import with `SecondaryButton`
    */
-  root.find(j.JSXElement, {openingElement: {name: {name: 'DropdownButton'}}}).forEach(nodePath => {
-    const attrs = nodePath.value.openingElement.attributes;
-    let isPrimary = false;
+  root
+    .find(j.JSXElement, findBtnTag.bind(undefined, importMap.DropdownButton))
+    .forEach(nodePath => {
+      const attrs = nodePath.value.openingElement.attributes;
+      let isPrimary = false;
 
-    const variantProp = attrs?.find(
-      attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
-    );
-    if (variantProp) {
-      isPrimary = ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'primary';
-      // remove variant prop
-      nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
-    }
-
-    const buttonType = isPrimary ? 'PrimaryButton' : 'SecondaryButton';
-    // Swap to `PrimaryButton` or `SecondaryButton`
-    updateJSXTag(nodePath, buttonType);
-
-    // Add `icon="caretDownIcon" iconPosition="right"`
-    nodePath.value.openingElement.attributes!.push(
-      j.jsxAttribute(j.jsxIdentifier('icon'), j.stringLiteral('caretDownIcon'))
-    );
-    nodePath.value.openingElement.attributes!.push(
-      j.jsxAttribute(j.jsxIdentifier('iconPosition'), j.stringLiteral('right'))
-    );
-
-    requiredImportSpecifiers.push(buttonType);
-
-    // Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
-    const lastImport = root.find(j.ImportDeclaration).at(-1);
-    if (lastImport) {
-      lastImport.insertAfter(
-        j.importDeclaration(
-          [j.importSpecifier(j.identifier('caretDownIcon'))],
-          j.stringLiteral('@workday/canvas-system-icons-web')
-        )
+      const variantProp = attrs?.find(
+        attr => attr.type === 'JSXAttribute' && attr.name.name === 'variant'
       );
-    }
-  });
+      if (variantProp) {
+        isPrimary = ((variantProp as JSXAttribute).value as StringLiteral)?.value === 'primary';
+        // remove variant prop
+        nodePath.value.openingElement.attributes?.splice(attrs?.indexOf(variantProp)!, 1);
+      }
+
+      const buttonType = isPrimary ? 'PrimaryButton' : 'SecondaryButton';
+      // Swap to `PrimaryButton` or `SecondaryButton`
+      updateJSXTag(nodePath, buttonType);
+
+      // Add `icon="caretDownIcon" iconPosition="right"`
+      nodePath.value.openingElement.attributes!.push(
+        j.jsxAttribute(j.jsxIdentifier('icon'), j.stringLiteral('caretDownIcon'))
+      );
+      nodePath.value.openingElement.attributes!.push(
+        j.jsxAttribute(j.jsxIdentifier('iconPosition'), j.stringLiteral('right'))
+      );
+
+      requiredImportSpecifiers.push(buttonType);
+
+      // Add `import {caretDownIcon} from '@workday/canvas-system-icons-web'`
+      const lastImport = root.find(j.ImportDeclaration).at(-1);
+      if (lastImport) {
+        lastImport.insertAfter(
+          j.importDeclaration(
+            [j.importSpecifier(j.identifier('caretDownIcon'))],
+            j.stringLiteral('@workday/canvas-system-icons-web')
+          )
+        );
+      }
+    });
 
   /**
    * Remove old imports: `DropdownButton`, `TextButton`, `OutlineButton`, `HighlightButton`, `Button`.

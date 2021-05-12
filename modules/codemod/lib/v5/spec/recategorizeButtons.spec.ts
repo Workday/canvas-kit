@@ -36,6 +36,24 @@ describe('recategorizeButtons', () => {
     expectTransform(input, expected);
   });
 
+  it('should replace CK "Button" and not namespaced "Button" with "SecondaryButton"', () => {
+    const input = `
+      import {Button} from './asdf'
+      import {Button as CKButton} from '@workday/canvas-kit-react/button'
+
+      <CKButton />
+    `;
+
+    const expected = `
+      import {Button} from './asdf'
+      import {SecondaryButton} from '@workday/canvas-kit-react/button'
+
+      <SecondaryButton />
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should replace "Button" with "primary" variant with "PrimaryButton"', () => {
     const input = `
       import {Button} from '@workday/canvas-kit-react/button'
