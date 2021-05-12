@@ -7,7 +7,7 @@ import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {space} from '@workday/canvas-kit-react/tokens';
-import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react/tabs';
+import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 import {Simple} from './examples/Simple';
 import {RightToLeft} from './examples/RightToLeft';

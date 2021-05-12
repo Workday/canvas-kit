@@ -16,7 +16,7 @@ yarn add @workday/canvas-kit-labs-react
 
 ```tsx
 import * as React from 'react';
-import {Tabs} from '@workday/canvas-kit-labs-react/tabs';
+import {Tabs} from '@workday/canvas-kit-react/tabs';
 import {space} from '@workday/canvas-kit-react/tokens';
 
 export default () => (

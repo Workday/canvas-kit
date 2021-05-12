@@ -1,7 +1,7 @@
 import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react/tabs';
+import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 export const DynamicTabs = () => {
   const [tabs, setTabs] = React.useState([

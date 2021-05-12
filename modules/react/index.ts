@@ -22,6 +22,7 @@ export * from './skeleton';
 export * from './status-indicator';
 export * from './switch';
 export * from './table';
+export * from './tabs';
 export * from './text-area';
 export * from './text-input';
 export * from './toast';
