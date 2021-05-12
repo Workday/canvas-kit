@@ -3,7 +3,7 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {space} from '@workday/canvas-kit-react/tokens';
@@ -15,7 +15,7 @@ import {RightToLeft} from './examples/RightToLeft';
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
 export default {
-  title: 'Testing/React/Labs/Tabs',
+  title: 'Testing/React/Containers/Tabs',
   component: Tabs,
   parameters: {
     chromatic: {

@@ -2,7 +2,7 @@
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {ContentDirection} from '@workday/canvas-kit-react/common';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -16,7 +16,7 @@ import {
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Pagination',
+  title: 'Testing/React/Navigation/Pagination',
   component: Pagination,
   decorators: [withReadme(README)],
 });
