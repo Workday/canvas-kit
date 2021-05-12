@@ -32,6 +32,10 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
    */
   error?: ErrorType;
   /**
+   * The ref to the underlying text input element.
+   */
+  inputRef?: React.Ref<HTMLInputElement>;
+  /**
    * The function called when the ColorInput state changes.
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -130,7 +134,7 @@ export default class ColorInput extends React.Component<ColorInputProps> {
       <ColorInputContainer grow={grow}>
         <CustomHexInput
           dir="ltr"
-          inputRef={inputRef}
+          ref={inputRef}
           onChange={this.handleChange}
           type="text"
           placeholder={value ? undefined : placeholder}

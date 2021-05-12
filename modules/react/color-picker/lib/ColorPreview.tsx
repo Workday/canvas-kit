@@ -13,6 +13,10 @@ export interface ColorPreviewProps extends TextInputProps {
    * The HTML `id` of the underlying text input element.
    */
   id?: string;
+  /**
+   * The ref to the underlying text input element.
+   */
+  inputRef?: React.Ref<HTMLInputElement>;
 }
 
 const ColorPreviewComponent = styled(ColorInput)({
