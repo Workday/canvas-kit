@@ -467,7 +467,7 @@ export class SearchBar extends React.Component<SearchBarProps, SearchBarState> {
               labelId={this.labelId}
             >
               <SearchInput
-                inputRef={this.inputRef}
+                ref={this.inputRef}
                 value={this.state.searchQuery}
                 placeholder={placeholder}
                 isCollapsed={isCollapsed}
