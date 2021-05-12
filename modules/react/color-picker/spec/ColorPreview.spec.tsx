@@ -53,22 +53,22 @@ describe('ColorPreview', () => {
       });
     });
 
-    describe('when provided an input ref', () => {
-      test('input ref should be defined', () => {
+    describe('with an input ref', () => {
+      test('should set the ref to the input element', async () => {
         const ref: React.RefObject<HTMLInputElement> = React.createRef();
-        render(<ColorPreview value={value} inputRef={ref} />);
-        expect(ref.current).toBeDefined();
+        const {findByRole} = render(<ColorPreview value={value} inputRef={ref} />);
+        expect(await findByRole('textbox')).toEqual(ref.current);
       });
     });
 
-    describe('when provided a value with a hash', () => {
+    describe('with a value that has a hash', () => {
       test('the value is stripped', () => {
         const {getByTestId} = render(<ColorPreview value={'#eee'} data-testid={id} />);
         expect(getByTestId(id)).toHaveValue(value);
       });
     });
 
-    describe('when provided more than 6 characters as the value', () => {
+    describe('with a value more than 6 characters in length', () => {
       test('the value is stripped', () => {
         const {getByTestId} = render(<ColorPreview value={'123456789'} data-testid={id} />);
         expect(getByTestId(id)).toHaveValue('123456');

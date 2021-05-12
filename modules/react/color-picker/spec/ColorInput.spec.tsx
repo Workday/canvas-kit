@@ -61,22 +61,22 @@ describe('ColorInput', () => {
       });
     });
 
-    describe('when provided an input ref', () => {
-      test('input ref should be defined', () => {
+    describe('with an input ref', () => {
+      test('should set the ref to the input element', async () => {
         const ref: React.RefObject<HTMLInputElement> = React.createRef();
-        render(<ColorInput inputRef={ref} />);
-        expect(ref.current).toBeDefined();
+        const {findByRole} = render(<ColorInput inputRef={ref} />);
+        expect(await findByRole('textbox')).toEqual(ref.current);
       });
     });
 
-    describe('when provided a value with a hash', () => {
+    describe('with a value that has a hash', () => {
       test('the hash is stripped from the value', () => {
         const {getByRole} = render(<ColorInput value={'#eee'} />);
         expect(getByRole('textbox')).toHaveValue(value);
       });
     });
 
-    describe('when provided more than 6 characters as the value', () => {
+    describe('with a value more than 6 characters in length', () => {
       test('the value is truncated to a length of 6', () => {
         const {getByRole} = render(<ColorInput value={'123456789'} />);
         expect(getByRole('textbox')).toHaveValue('123456');
