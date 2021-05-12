@@ -81,92 +81,111 @@ export const RTL = () => {
   );
 };
 
-export const Accessible = () => {
-  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
+const isElementNativelyFocusable = (element: HTMLElement) => {
+  const nodeName = element.nodeName.toLowerCase();
+  const validInput = nodeName === 'input' && (element as HTMLInputElement).type !== 'hidden';
+  const validAnchor = nodeName === 'a' && element.hasAttribute('href');
+  const validAudioVideo = ['audio', 'video'].includes(nodeName) && element.hasAttribute('controls');
+  const validImgObject = ['img', 'object'].includes(nodeName) && element.hasAttribute('usemap');
+  const validNativelyFocusable = [
+    'button',
+    'details',
+    'embed',
+    'iframe',
+    'select',
+    'textarea',
+  ].includes(nodeName);
 
-  const isElementNativelyFocusable = (element: HTMLElement) => {
-    const nodeName = element.nodeName.toLowerCase();
-    const validInput = nodeName === 'input' && (element as HTMLInputElement).type !== 'hidden';
-    const validAnchor = nodeName === 'a' && element.hasAttribute('href');
-    const validAudioVideo =
-      ['audio', 'video'].includes(nodeName) && element.hasAttribute('controls');
-    const validImgObject = ['img', 'object'].includes(nodeName) && element.hasAttribute('usemap');
-    const validNativelyFocusable = [
-      'button',
-      'details',
-      'embed',
-      'iframe',
-      'select',
-      'textarea',
-    ].includes(nodeName);
+  return validInput || validAnchor || validAudioVideo || validImgObject || validNativelyFocusable;
+};
 
-    return validInput || validAnchor || validAudioVideo || validImgObject || validNativelyFocusable;
-  };
+const getFirstFocusableElement = (content: HTMLElement): HTMLElement | null => {
+  const elements = content.querySelectorAll('*');
 
-  const getFirstFocusableElement = (content: HTMLElement): HTMLElement | null => {
-    const elements = content.querySelectorAll('*');
-
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements.item(i);
-      if (element && isElementNativelyFocusable(element as HTMLElement)) {
-        return element as HTMLElement;
-      }
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements.item(i);
+    if (element && isElementNativelyFocusable(element as HTMLElement)) {
+      return element as HTMLElement;
     }
+  }
 
-    console.log(
-      'No focusable element was found. Please ensure popup has at least one focusable element'
-    );
-    return null;
-  };
+  console.log(
+    'No focusable element was found. Please ensure popup has at least one focusable element'
+  );
+  return null;
+};
 
-  const useInitialFocus = (popupRef: React.RefObject<HTMLElement>, popupOpen: boolean = false) => {
-    React.useLayoutEffect(() => {
-      const handlerRef =
-        document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
-      if (popupRef.current && popupOpen) {
+const useInitialFocus = (
+  popupRef: React.RefObject<HTMLElement>,
+  popupOpen: boolean = false,
+  initialFocusRef?: React.RefObject<HTMLElement>
+) => {
+  React.useLayoutEffect(() => {
+    if (popupOpen && popupRef.current) {
+      if (initialFocusRef.current) {
+        initialFocusRef.current.focus();
+      } else {
         const elem = getFirstFocusableElement(popupRef.current);
         if (elem) {
           elem.focus();
         }
       }
-      return () => {
-        if (handlerRef) {
-          handlerRef.focus();
-        }
-      };
-    }, [popupRef, popupOpen]);
-  };
+    }
+  }, [popupRef, popupOpen, initialFocusRef]);
+};
 
-  /**
-   * Most accessible popups come with these expectations by default:
-   * 1. Close on ESCAPE key
-   * 2. Focus trap within the popup
-   * 3. When the popup first opens, initial focus lands on the first focusable element in the popup.
-   *
-   * (with the exception of dropdowns and tooltips, which have their own set of expectations)
-   * @param popupRef the popup ref
-   * @param popupOpen whether the popup is open or not
-   * @param onClose the handler to execute when the popup closes
-   */
-  const useAccessiblePopupBehaviors = (
-    popupRef: React.RefObject<HTMLElement>,
-    popupOpen: boolean,
-    onClose: () => void
-  ) => {
-    useCloseOnEscape(popupRef, onClose);
+const useReturnFocus = (
+  popupRef: React.RefObject<HTMLElement>,
+  popupOpen: boolean = false,
+  returnFocusRef: React.RefObject<HTMLElement>
+) => {
+  React.useLayoutEffect(() => {
+    if (!popupOpen && popupRef.current && returnFocusRef.current) {
+      returnFocusRef.current.focus();
+    }
+  }, [popupRef, popupOpen, returnFocusRef]);
+};
 
-    useFocusTrap(popupRef);
+/**
+ * Most accessible popups come with these expectations:
+ * 1. Close on ESCAPE key
+ * 2. When the popup first opens, initial focus lands on the first focusable element in the popup.
+ * 3. When the popup closes, focus should land on a specified element. Usually, this is the popup's
+ *    target element, but this return focus element can be a different element from the target
+ *    element.
+ *
+ * (with the exception of dropdowns and tooltips, which have their own set of expectations)
+ * @param popupRef the popup ref
+ * @param popupOpen whether the popup is open or not
+ * @param onClose the handler to execute when the popup closes
+ * @param returnFocusRef the element that should receive focus when the popup closes
+ */
+const useAccessiblePopupBehaviors = (
+  popupRef: React.RefObject<HTMLElement>,
+  popupOpen: boolean,
+  onClose: () => void,
+  returnFocusRef: React.RefObject<HTMLElement>
+) => {
+  useCloseOnEscape(popupRef, onClose);
 
-    useInitialFocus(popupRef, popupOpen);
-  };
+  useInitialFocus(popupRef, popupOpen);
 
+  useReturnFocus(popupRef, popupOpen, returnFocusRef);
+};
+
+export const AccessiblePopupWithFocusTrapping = () => {
+  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
+
+  const deleteButtonRef = React.useRef(null);
   useCloseOnOutsideClick(stackRef, closePopup);
-  useAccessiblePopupBehaviors(stackRef, popperProps.open, closePopup);
+  useAccessiblePopupBehaviors(stackRef, popperProps.open, closePopup, deleteButtonRef);
+  useFocusTrap(stackRef);
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
-      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <DeleteButton {...targetProps} buttonRef={deleteButtonRef}>
+        Delete Item
+      </DeleteButton>
       <Popper placement={'bottom'} {...popperProps}>
         <Popup
           width={400}
