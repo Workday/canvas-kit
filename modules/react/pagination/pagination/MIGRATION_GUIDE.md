@@ -25,7 +25,7 @@ If you were previously writing your `Pagination component like this:
 
 ```tsx
 import * as React from 'react';
-import Pagination from '@workday/canvas-kit-labs-react/pagination';
+import Pagination from '@workday/canvas-kit-react/pagination';
 
 const [currentPage, setCurrentPage] = React.useState(1);
 

@@ -77,28 +77,36 @@ Pagination.Controls = (props: ControlsProps) => {
   return <Controls {...props} />;
 };
 
-Pagination.JumpToFirstButton = (props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+Pagination.JumpToFirstButton = (
+  props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <JumpToFirstButton model={model} {...props} />;
 };
 
-Pagination.StepToPreviousButton = (props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+Pagination.StepToPreviousButton = (
+  props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <StepToPreviousButton model={model} {...props} />;
 };
 
-Pagination.StepToNextButton = (props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+Pagination.StepToNextButton = (
+  props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
   return <StepToNextButton model={model} {...props} />;
 };
 
-Pagination.JumpToLastButton = (props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+Pagination.JumpToLastButton = (
+  props: IconButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+) => {
   // The linter doesn't recognize the dot syntax, so we're disabling the rule
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const model = React.useContext(PaginationContext);
