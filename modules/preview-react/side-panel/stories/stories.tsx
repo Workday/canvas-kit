@@ -3,10 +3,10 @@
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {jsx} from '@emotion/core';
-import {SidePanel, useSidePanel} from '@workday/canvas-kit-labs-react/side-panel';
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Button} from '@workday/canvas-kit-react/button';
 import {colors, depth} from '@workday/canvas-kit-react/tokens';
-import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {type} from '@workday/canvas-kit-preview-react/tokens';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {plusIcon} from '@workday/canvas-system-icons-web';
@@ -14,7 +14,7 @@ import README from '../README.md';
 import {SidePanelTransitionStates} from '../lib/SidePanel';
 
 export default {
-  title: 'Labs/Side Panel/React',
+  title: 'Preview/Side Panel/React',
   decorators: [withReadme(README)],
   component: SidePanel,
 };

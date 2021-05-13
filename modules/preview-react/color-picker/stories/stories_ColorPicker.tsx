@@ -7,13 +7,13 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {Popper, Popup, PopupPadding} from '@workday/canvas-kit-react/popup';
 import {IconButton} from '@workday/canvas-kit-react/button';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
-import {ColorPicker} from '@workday/canvas-kit-labs-react/color-picker';
+import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import README from '../README.md';
 
 // eslint-disable-next-line no-empty-function
 const noop = () => {};
 
-storiesOf('Labs/Color Picker/React', module)
+storiesOf('Preview/Color Picker/React', module)
   .addParameters({component: ColorPicker})
   .addDecorator(withReadme(README))
   .add('Default', () => <ColorPicker onColorChange={noop} />)

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {fireEvent, render} from '@testing-library/react';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {ColorPicker, ColorPickerProps} from '@workday/canvas-kit-labs-react/color-picker';
+import {ColorPicker, ColorPickerProps} from '@workday/canvas-kit-preview-react/color-picker';
 
 describe('Color Picker', () => {
   const renderColorPicker = (props?: Partial<ColorPickerProps>) =>

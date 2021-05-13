@@ -2,7 +2,7 @@
 import React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -13,7 +13,7 @@ import {useDropdown} from '../lib/Breadcrumbs/Dropdown/hooks';
 import {DropdownMenu} from '../lib/Breadcrumbs/Dropdown/Menu';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Breadcrumbs',
+  title: 'Testing/React/Preview/Breadcrumbs',
   component: Breadcrumbs,
   decorators: [withReadme(README)],
 });

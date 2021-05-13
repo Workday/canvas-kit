@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {uploadCloudIcon, extLinkIcon, userIcon} from '@workday/canvas-system-icons-web';
 import {Menu, MenuItem, MenuItemProps} from '../index';
@@ -12,7 +12,7 @@ import testAvatar from './test-avatar.png';
 const noop = () => {};
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Menu',
+  title: 'Testing/React/Preview/Menu',
   component: Menu,
   parameters: {
     chromatic: {

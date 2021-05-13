@@ -6,7 +6,7 @@ import {withKnobs} from '@storybook/addon-knobs';
 
 import Combobox, {ComboboxProps, ComboBoxMenuItemGroup} from '../index';
 import FormField from '../../../react/form-field';
-import {MenuItem, MenuItemProps} from '../../menu';
+import {MenuItem, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '../../../react/text-input';
 import README from '../README.md';
 

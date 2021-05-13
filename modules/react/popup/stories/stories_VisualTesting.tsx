@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {depth} from '@workday/canvas-kit-react/tokens';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {action} from '@storybook/addon-actions';

@@ -12,7 +12,7 @@ import Select from '../lib/Select';
 import {manyOptions, options} from './stories';
 
 export default {
-  title: 'Testing/React/Labs/Select/Cypress',
+  title: 'Testing/React/Preview/Select/Cypress',
   component: Select,
 };
 

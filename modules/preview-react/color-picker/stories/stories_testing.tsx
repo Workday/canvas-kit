@@ -3,12 +3,12 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {StaticStates} from '@workday/canvas-kit-labs-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import ColorPicker from '../lib/ColorPicker';
 
 export default {
-  title: 'Testing/React/Labs/Color Picker',
+  title: 'Preview/Color Picker/React',
   component: ColorPicker,
 };
 
