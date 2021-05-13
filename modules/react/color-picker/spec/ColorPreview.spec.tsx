@@ -53,10 +53,10 @@ describe('ColorPreview', () => {
       });
     });
 
-    describe('with an input ref', () => {
+    describe('with a ref', () => {
       test('should set the ref to the input element', async () => {
         const ref: React.RefObject<HTMLInputElement> = React.createRef();
-        const {findByRole} = render(<ColorPreview value={value} inputRef={ref} />);
+        const {findByRole} = render(<ColorPreview value={value} ref={ref} />);
         expect(await findByRole('textbox')).toEqual(ref.current);
       });
     });

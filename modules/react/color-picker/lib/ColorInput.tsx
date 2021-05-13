@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  createComponent,
+  StyledType,
   expandHex,
   GrowthBehavior,
   ErrorType,
@@ -32,10 +34,6 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
    */
   error?: ErrorType;
   /**
-   * The ref to the underlying text input element.
-   */
-  inputRef?: React.Ref<HTMLInputElement>;
-  /**
    * The function called when the ColorInput state changes.
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -47,7 +45,7 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
 
 const colorInputWidth = 116;
 
-const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'grow'>>(
+const CustomHexInput = styled(TextInput)<Pick<ColorInputProps, 'disabled' | 'grow'> & StyledType>(
   {
     boxSizing: 'border-box',
     minWidth: colorInputWidth,
@@ -113,29 +111,53 @@ const SwatchTile = styled(ColorSwatch)({
   pointerEvents: 'none',
 });
 
-export default class ColorInput extends React.Component<ColorInputProps> {
-  public render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {
+const isValidHex = (value: string) => {
+  return /(^#?[0-9A-F]{3}$)|(^#?[0-9A-F]{6}$)/i.test(value);
+};
+
+const formatValue = (value: string) => {
+  return value.replace(/#/g, '').substring(0, 6);
+};
+
+// TODO: createComponent('TextInput') gives TS error with ref
+export const ColorInput = createComponent('input')({
+  displayName: 'ColorInput',
+  Component: (
+    {
       placeholder = 'FFFFFF',
       value = '',
       showCheck,
       onChange,
       onValidColorChange,
-      inputRef,
       disabled,
       error,
       grow,
       ...elemProps
-    } = this.props;
-    const formattedValue = this.formatValue(value);
+    }: ColorInputProps,
+    ref,
+    Element
+  ) => {
+    const formattedValue = formatValue(value);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = formatValue(e.currentTarget.value);
+
+      if (onChange) {
+        onChange(e);
+      }
+
+      if (isValidHex(value) && onValidColorChange) {
+        onValidColorChange(`#${expandHex(value)}`);
+      }
+    };
 
     return (
       <ColorInputContainer grow={grow}>
         <CustomHexInput
           dir="ltr"
-          ref={inputRef}
-          onChange={this.handleChange}
+          ref={ref}
+          as={Element}
+          onChange={handleChange}
           type="text"
           placeholder={value ? undefined : placeholder}
           value={formattedValue}
@@ -148,32 +170,14 @@ export default class ColorInput extends React.Component<ColorInputProps> {
         />
         <SwatchTile
           showCheck={showCheck}
-          color={this.isValidHex(formattedValue) ? `#${formattedValue}` : ''}
+          color={isValidHex(formattedValue) ? `#${formattedValue}` : ''}
         />
         <PoundSignPrefix aria-hidden={true} disabled={disabled}>
           #
         </PoundSignPrefix>
       </ColorInputContainer>
     );
-  }
+  },
+});
 
-  private handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const value = this.formatValue(e.currentTarget.value);
-
-    if (this.props.onChange) {
-      this.props.onChange(e);
-    }
-
-    if (this.isValidHex(value) && this.props.onValidColorChange) {
-      this.props.onValidColorChange(`#${expandHex(value)}`);
-    }
-  };
-
-  private isValidHex = (value: string) => {
-    return /(^#?[0-9A-F]{3}$)|(^#?[0-9A-F]{6}$)/i.test(value);
-  };
-
-  private formatValue = (value: string) => {
-    return value.replace(/#/g, '').substring(0, 6);
-  };
-}
+export default ColorInput;
