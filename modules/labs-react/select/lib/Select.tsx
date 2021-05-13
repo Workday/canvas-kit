@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  ErrorType,
-  StyledType,
-  createComponent,
-  useLocalRef,
-} from '@workday/canvas-kit-react/common';
+import {ErrorType, StyledType, createComponent, useForkRef} from '@workday/canvas-kit-react/common';
 import {menuAnimationDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
@@ -31,8 +26,10 @@ export interface SelectProps extends CoreSelectBaseProps {
 }
 
 interface SelectContainerProps extends SelectProps, StyledType {
-  forwardedButtonRef?: React.Ref<HTMLButtonElement>;
-  localButtonRef?: React.RefObject<HTMLButtonElement>;
+  /**
+   * The ref passed from `createComponent` to be forwarded to the underlying button element.
+   */
+  buttonRef?: React.Ref<HTMLButtonElement>;
 }
 
 interface SelectContainerState {
@@ -48,6 +45,8 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
     menuVisibility: 'closed',
   };
 
+  private forwardedButtonRef: React.Ref<HTMLButtonElement>;
+  private localButtonRef = React.createRef<HTMLButtonElement>();
   private inputRef = React.createRef<HTMLInputElement>();
   private menuRef = React.createRef<HTMLUListElement>();
 
@@ -173,9 +172,8 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
   };
 
   private focusButton = () => {
-    const {localButtonRef} = this.props;
-    if (localButtonRef && localButtonRef.current) {
-      localButtonRef.current.focus();
+    if (this.localButtonRef.current) {
+      this.localButtonRef.current.focus();
     }
   };
 
@@ -344,9 +342,28 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
     }, this.clearKeysSoFarTimeout);
   };
 
-  constructor(props: SelectProps) {
+  constructor(props: SelectContainerProps) {
     super(props);
     this.setNormalizedOptions();
+
+    // We need a local ref (RefObject) to the Select component's underlying
+    // button to manage focus within the component and to serve as its Popper
+    // Menu's anchorElement. If the buttonRef prop (to be forwarded to the
+    // underlying button) passed in through createComponent was a ref object,
+    // we could reuse it for our internal purposes. buttonRef may be a callback
+    // ref, however, or it may not even be defined.
+    //
+    // To guarantee we have access to a ref object, we created one earlier when
+    // declaring the localButtonRef instance variable. We then use useForkRef
+    // to combine localButtonRef and buttonRef into a single callback ref
+    // (forwardedButtonRef) which can be forwarded to the underlying button.
+    // When the component mounts/unmounts, this callback will both:
+    //
+    // (1) Update the current value of localButtonRef, and;
+    // (2) Either update the current value of buttonRef if it was a ref object,
+    //     or call buttonRef with the underlying button element if it was a
+    //     callback ref.
+    this.forwardedButtonRef = useForkRef(props.buttonRef, this.localButtonRef);
   }
 
   componentDidMount() {
@@ -515,9 +532,12 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
   public render() {
     const {
       value,
-      // Strip options from elemProps
+
+      // Strip props we don't want to pass down from elemProps
+      buttonRef,
       options,
       onKeyDown,
+
       ...elemProps
     } = this.props;
 
@@ -536,6 +556,8 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
 
     return (
       <SelectBase
+        forwardedButtonRef={this.forwardedButtonRef}
+        localButtonRef={this.localButtonRef}
         focusedOptionIndex={focusedOptionIndex}
         inputRef={this.inputRef}
         menuRef={this.menuRef}
@@ -552,33 +574,9 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
 export const Select = createComponent('button')({
   displayName: 'Select',
   Component: (props: SelectProps, ref, Element) => {
-    // We need a local mutable ref (RefObject) to the Select component's
-    // underlying button to manage focus within the component and to serve as
-    // its Popper Menu's anchorElement. If the provided ref was a mutable ref,
-    // we could simply reuse it for our internal purposes. The provided ref
-    // could be a callback ref, however, or maybe there was no ref provided. To
-    // guarantee we have access to a mutable ref, we use useLocalRef to create:
-    //
-    // (1) A mutable ref for local use in the component, and;
-    // (2) A callback ref to be forwarded to the component's underlying button
-    //     element. When the component mounts/unmounts, this callback will
-    //     both:
-    //       (a) Update the current value of the mutable ref from (1) above,
-    //           and;
-    //       (b) Either update the current value of the provided ref if it was
-    //           a mutable ref, or call the provided ref with the underlying
-    //           button element if the provided ref was a callback ref.
-    //
-    // Both refs are passed to the component.
-    const {localRef, elementRef} = useLocalRef<HTMLButtonElement>(ref);
-    return (
-      <SelectContainer
-        as={Element}
-        forwardedButtonRef={elementRef}
-        localButtonRef={localRef}
-        {...props}
-      />
-    );
+    // Select is still a class component, so we render a renamed version of it
+    // (SelectContainer) and pass it ref and Element
+    return <SelectContainer as={Element} buttonRef={ref} {...props} />;
   },
   subComponents: {
     ErrorType,
