@@ -12,61 +12,27 @@ yarn add @workday/canvas-kit-react
 
 ---
 
-## Deprecation Warning
-
-> We are rolling out our next iteration of our buttons and will be deprecating the old style (orange
-> primary, and accompanying secondary, and delete). These are still avialable, but will be removed
-> in the first major release after they are available for all Workday customers. The biggest change
-> is with regards to colors and styling, but the behavior should remain the same.
->
-> ### New Button
->
-> Anywhere you were using `Button`, you will automatically get the updated styling (previously
-> `beta_Button`). This will be a visual breaking change (padding and colors have changed). The new
-> buttons include: blue primary button, and accompanying secondary, delete, outline, highlight, and
-> dropdown buttons. The import and usage is documented below.
-
-### Deprecated Buttons
-
-If you need to continue to use the old style buttons, you can use the `deprecated_Button` class.
-Usage will be the same as before, but you must change your imports. Note: this will be removed
-entirely in a future release.
-
-```tsx
-import * as React from 'react';
-import {deprecated_Button as Button} from '@workday/canvas-kit-react/button';
-
-<Button>Button Label</Button>;
-```
-
-Deprecation tags have been added to all the pieces regarding the old buttons including it's types
-and the component itself. Tslint and your IDE should reflect this warning but you should still be
-able to compile your code.
-
----
-
 ## Table of Contents
 
-- [Button](#button)
+- [PrimaryButton](#primarybutton)
+- [SecondaryButton](#secondarybutton)
+- [TertiaryButton](#tertiarybutton)
 - [DeleteButton](#deletebutton)
-- [DropdownButton](#dropdownbutton)
-- [HighlightButton](#highlightbutton)
-- [OutlineButton](#outlinebutton)
-- [TextButton](#textbutton)
 - [Hyperlink](#hyperlink)
 - [IconButton](#iconbutton)
 - [ToolbarIconButton](#toolbariconbutton)
 - [ToolbarDropdownButton](#toolbardropdownbutton)
+- [Deprecated Buttons](#deprecated-buttons)
 
 ---
 
-# Button
+# PrimaryButton
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
-<Button>Button Label</Button>;
+<PrimaryButton>Button Label</PrimaryButton>;
 ```
 
 ## Component Props
@@ -79,16 +45,99 @@ import {Button} from '@workday/canvas-kit-react/button';
 
 ### Optional
 
-#### `variant: 'primary' | 'secondary'`
+#### `size: 'small' | 'medium' | 'large'`
 
-> The type of the button
+> The size of the button
 
-Default: `'secondary'`
+Default: `'medium'`
 
-| Theme       | Description                     |
-| ----------- | ------------------------------- |
-| `primary`   | Blue background, white text     |
-| `Secondary` | Gray background, dark gray text |
+| Theme    | Description                            |
+| -------- | -------------------------------------- |
+| `small`  | 24px tall, small padding, small text   |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
+
+---
+
+#### `grow: boolean`
+
+> If true, the button will grow to its container's width.
+
+Default: `false`
+
+---
+
+#### `ref: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+#### `dataLabel: String`
+
+> The data label of the button (generally used for media timestamps).
+>
+> Note: not displayed at `small` size.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button.
+>
+> Note: not displayed at `small` size.
+
+---
+
+#### `iconPosition: ButtonIconPosition`
+
+> The position of the TextButton icon.
+
+Default: `left`
+
+---
+
+### `as: React.ElementType`
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
+
+---
+
+# SecondaryButton
+
+```tsx
+import * as React from 'react';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+
+<SecondaryButton>Button Label</SecondaryButton>;
+```
+
+## Component Props
+
+### Required
+
+#### `children: ReactNode`
+
+> Buttons cannot be empty
+
+### Optional
+
+#### `variant: 'inverse' | undefined`
+
+> The style of the button
+
+Default: `undefined`
+
+| Theme     | Description   |
+| --------- | ------------- |
+| `outline` | Gray outline  |
+| `inverse` | White outline |
 
 ---
 
@@ -136,7 +185,99 @@ Default: `false`
 
 ---
 
-### `as: 'a'`
+#### `iconPosition: ButtonIconPosition`
+
+> The position of the TextButton icon.
+
+Default: `left`
+
+---
+
+### `as: React.ElementType`
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
+
+---
+
+# TertiaryButton
+
+```tsx
+import * as React from 'react';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+
+<TertiaryButton>Button Label</TertiaryButton>;
+```
+
+## Component Props
+
+### Required
+
+#### `children: ReactNode`
+
+> Buttons cannot be empty
+
+### Optional
+
+#### `variant: 'inverse' | undefined`
+
+> The type of the button
+
+Default: `undefined`
+
+| Theme       | Description |
+| ----------- | ----------- |
+| `undefined` | Blue text   |
+| `inverse`   | White text  |
+
+---
+
+#### `size: 'small' | 'medium' | 'large'`
+
+> The size of the button
+
+Default: `'medium'`
+
+| Theme    | Description                            |
+| -------- | -------------------------------------- |
+| `small`  | 24px tall, small padding, small text   |
+| `medium` | 32px tall, medium padding, medium text |
+| `large`  | 48px tall, large padding, larger text  |
+
+---
+
+#### `iconPosition: ButtonIconPosition`
+
+> The position of the TextButton icon.
+
+Default: `left`
+
+---
+
+#### `ref: React.Ref<HTMLButtonElement>`
+
+> Returns the ref to the rendered HTMLButtonElement.
+
+---
+
+### `icon: CanvasSystemIcon`
+
+> The icon of the button.
+
+---
+
+### `allCaps: boolean`
+
+> The capitialization of the text in the button.
+
+---
+
+### `as: React.ElementType`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -195,315 +336,7 @@ Default: `false`
 
 ---
 
-### `as: 'a'`
-
-> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
-> `as` prop to render an `a` tag instead of a `button`.
-
-> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
-> `href`, `target`, etc.) become available.
-
-Default: `undefined`
-
----
-
-# DropdownButton
-
-```tsx
-import * as React from 'react';
-import {DropdownButton} from '@workday/canvas-kit-react/button';
-
-<DropdownButton>Button Label</DropdownButton>;
-```
-
-## Component Props
-
-### Required
-
-#### `children: ReactNode`
-
-> Buttons cannot be empty
-
-### Optional
-
-#### `variant: 'primary' | 'secondary'`
-
-> The type of the button
-
-Default: `'secondary'`
-
-| Theme       | Description                          |
-| ----------- | ------------------------------------ |
-| `primary`   | Blue background, white text/icon     |
-| `secondary` | Gray background, dark gray text/icon |
-
----
-
-#### `size: 'medium' | 'large'`
-
-> The size of the button
-
-Default: `'medium'`
-
-| Theme    | Description                            |
-| -------- | -------------------------------------- |
-| `medium` | 32px tall, medium padding, medium text |
-| `large`  | 48px tall, large padding, larger text  |
-
----
-
-#### `grow: boolean`
-
-> If true, the button will grow to its container's width.
-
-Default: `false`
-
----
-
-#### `ref: React.Ref<HTMLButtonElement>`
-
-> Returns the ref to the rendered HTMLButtonElement.
-
----
-
-### `as: 'a'`
-
-> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
-> `as` prop to render an `a` tag instead of a `button`.
-
-> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
-> `href`, `target`, etc.) become available.
-
-Default: `undefined`
-
----
-
-# HighlightButton
-
-```tsx
-import * as React from 'react';
-import {HighlightButton} from '@workday/canvas-kit-react/button';
-
-<HighlightButton>Button Label</HighlightButton>;
-```
-
-## Component Props
-
-### Required
-
-#### `children: ReactNode`
-
-> Buttons cannot be empty
-
-### Optional
-
-#### `size: 'medium' | 'large'`
-
-> The size of the button
-
-Default: `'medium'`
-
-| Theme    | Description                            |
-| -------- | -------------------------------------- |
-| `medium` | 32px tall, medium padding, medium text |
-| `large`  | 48px tall, large padding, larger text  |
-
----
-
-#### `grow: boolean`
-
-> If true, the button will grow to its container's width.
-
-Default: `false`
-
----
-
-#### `ref: React.Ref<HTMLButtonElement>`
-
-> Returns the ref to the rendered HTMLButtonElement.
-
----
-
-### `icon: CanvasSystemIcon`
-
-> The icon of the button
-
----
-
-### `as: 'a'`
-
-> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
-> `as` prop to render an `a` tag instead of a `button`.
-
-> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
-> `href`, `target`, etc.) become available.
-
-Default: `undefined`
-
----
-
-# OutlineButton
-
-```tsx
-import * as React from 'react';
-import {OutlineButton} from '@workday/canvas-kit-react/button';
-
-<OutlineButton>Button Label</OutlineButton>;
-```
-
-## Component Props
-
-### Required
-
-#### `children: ReactNode`
-
-> Buttons cannot be empty
-
-### Optional
-
-#### `variant: 'primary' | 'secondary' | 'inverse'`
-
-> The type of the button
-
-Default: `'secondary'`
-
-| Theme       | Description                                   |
-| ----------- | --------------------------------------------- |
-| `primary`   | Transparent background, blue border and text  |
-| `secondary` | Transparent background, gray border and text  |
-| `inverse`   | Transparent background, white border and text |
-
----
-
-#### `size: 'small' | 'medium' | 'large'`
-
-> The size of the button
-
-Default: `'medium'`
-
-| Theme    | Description                            |
-| -------- | -------------------------------------- |
-| `small`  | 24px tall, small padding, small text   |
-| `medium` | 32px tall, medium padding, medium text |
-| `large`  | 48px tall, large padding, larger text  |
-
----
-
-#### `grow: boolean`
-
-> If true, the button will grow to its container's width.
-
-Default: `false`
-
----
-
-#### `ref: React.Ref<HTMLButtonElement>`
-
-> Returns the ref to the rendered HTMLButtonElement.
-
----
-
-#### `dataLabel: String`
-
-> The data label of the button (generally used for media timestamps)
->
-> Note: not displayed at `small` size.
-
----
-
-### `icon: CanvasSystemIcon`
-
-> The icon of the button
->
-> Note: not displayed at `small` size.
-
----
-
-### `as: 'a'`
-
-> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
-> `as` prop to render an `a` tag instead of a `button`.
-
-> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
-> `href`, `target`, etc.) become available.
-
-Default: `undefined`
-
----
-
-# TextButton
-
-```tsx
-import * as React from 'react';
-import {TextButton} from '@workday/canvas-kit-react/button';
-
-<TextButton>Button Label</TextButton>;
-```
-
-## Component Props
-
-### Required
-
-#### `children: ReactNode`
-
-> Buttons cannot be empty
-
-### Optional
-
-#### `variant: 'text' | 'inverse'`
-
-> The type of the button
-
-Default: `'text'`
-
-| Theme     | Description |
-| --------- | ----------- |
-| `text`    | Blue text   |
-| `inverse` | White text  |
-
----
-
-#### `size: 'small' | 'medium' | 'large'`
-
-> The size of the button
-
-Default: `'medium'`
-
-| Theme    | Description                            |
-| -------- | -------------------------------------- |
-| `small`  | 24px tall, small padding, small text   |
-| `medium` | 32px tall, medium padding, medium text |
-| `large`  | 48px tall, large padding, larger text  |
-
----
-
-#### `iconPosition: ButtonIconPosition`
-
-> The position of the TextButton icon.
-
-Default: `ButtonIconPosition.Left`
-
----
-
-#### `ref: React.Ref<HTMLButtonElement>`
-
-> Returns the ref to the rendered HTMLButtonElement.
-
----
-
-### `icon: CanvasSystemIcon`
-
-> The icon of the button.
-
----
-
-### `allCaps: boolean`
-
-> The capitialization of the text in the button.
-
----
-
-### `as: 'a'`
+### `as: React.ElementType`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -538,6 +371,18 @@ line-height, etc.).
 #### `href: string`
 
 > The href url of the anchor tag
+
+---
+
+### `as: React.ElementType`
+
+> The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
+> `as` prop to render an `a` tag instead of a `button`.
+
+> When defined, all props available via `React.AnchorHTMLAttributes<HTMLAnchorElement>` (e.g.
+> `href`, `target`, etc.) become available.
+
+Default: `undefined`
 
 ---
 
@@ -632,7 +477,7 @@ Default: `undefined`
 
 ---
 
-### `as: 'a'`
+### `as: React.ElementType`
 
 > The alternative container type for the button. If `as="a"` is provided, We use Emotion's special
 > `as` prop to render an `a` tag instead of a `button`.
@@ -751,3 +596,25 @@ import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 > component.
 
 ---
+
+### Deprecated Buttons
+
+> We have rolled out our next iteration of our buttons and will be deprecating the old style (orange
+> primary, and accompanying secondary, and delete). These are still avialable, but will be removed
+> in the first major release after they are available for all Workday customers. The biggest change
+> is with regards to colors and styling, but the behavior should remain the same.
+
+If you need to continue to use the old style buttons, you can use the `deprecated_Button` component.
+Usage will be the same as before, but you must change your imports. Note: this will be removed
+entirely in a future release.
+
+```tsx
+import * as React from 'react';
+import {deprecated_Button as Button} from '@workday/canvas-kit-react/button';
+
+<Button>Button Label</Button>;
+```
+
+Deprecation tags have been added to all the pieces regarding the old buttons including it's types
+and the component itself. Tslint and your IDE should reflect this warning but you should still be
+able to compile your code.

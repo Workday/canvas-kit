@@ -1,23 +1,24 @@
 import * as React from 'react';
+
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {
-  focusRing,
   GrowthBehavior,
   useTheme,
   Themeable,
   EmotionCanvasTheme,
   createComponent,
+  focusRing,
 } from '@workday/canvas-kit-react/common';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabel, ButtonLabelData, ButtonLabelIcon} from './parts';
 
-export interface OutlineButtonProps extends Themeable, GrowthBehavior {
+export interface SecondaryButtonProps extends Themeable, GrowthBehavior {
   /**
-   * The variant of the Button.
-   * @default 'secondary'
+   * The variant of the SecondaryButton.
+   * @default undefined
    */
-  variant?: 'primary' | 'secondary' | 'inverse';
+  variant?: 'inverse' | undefined;
   /**
    * The size of the Button.
    * @default 'medium'
@@ -33,42 +34,53 @@ export interface OutlineButtonProps extends Themeable, GrowthBehavior {
    * Note: not displayed at `small` size
    */
   icon?: CanvasSystemIcon;
+  /**
+   * The position of the TertiaryButton icon.
+   * @default 'left'
+   */
+  iconPosition?: 'left' | 'right';
   children?: React.ReactNode;
 }
 
-export const OutlineButton = createComponent('button')({
-  displayName: 'OutlineButton',
+export const SecondaryButton = createComponent('button')({
+  displayName: 'SecondaryButton',
   Component: (
     {
       // TODO: Fix useTheme and make it a real hook
       // eslint-disable-next-line react-hooks/rules-of-hooks
       theme = useTheme(),
-      variant = 'secondary',
       size = 'medium',
+      iconPosition = 'left',
+      variant,
       dataLabel,
       icon,
       children,
       ...elemProps
-    }: OutlineButtonProps,
+    }: SecondaryButtonProps,
     ref,
     Element
   ) => (
     <ButtonContainer
       ref={ref}
       as={Element}
-      colors={getOutlineButtonColors(variant, theme)}
+      colors={getSecondaryButtonColors(variant, theme)}
       size={size}
       {...elemProps}
     >
-      {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+      {icon && size !== 'small' && iconPosition === 'left' && (
+        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+      )}
       <ButtonLabel>{children}</ButtonLabel>
       {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
+      {icon && size !== 'small' && iconPosition === 'right' && (
+        <ButtonLabelIcon size={size} iconPosition={iconPosition} icon={icon} />
+      )}
     </ButtonContainer>
   ),
 });
 
-export const getOutlineButtonColors = (
-  variant: 'primary' | 'secondary' | 'inverse',
+export const getSecondaryButtonColors = (
+  variant: 'outline' | 'inverse' | undefined,
   theme: EmotionCanvasTheme
 ): ButtonColors => {
   const {
@@ -78,69 +90,42 @@ export const getOutlineButtonColors = (
   } = theme;
 
   switch (variant) {
-    case 'primary':
-      return {
-        default: {
-          background: 'transparent',
-          border: themePrimary.main,
-          icon: themePrimary.main,
-          label: themePrimary.main,
-        },
-        hover: {
-          background: themePrimary.main,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
-        },
-        active: {
-          background: themePrimary.dark,
-          border: themePrimary.dark,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
-        },
-        focus: {
-          background: themePrimary.main,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
-        },
-        disabled: {
-          background: 'transparent',
-          border: colors.soap500,
-          icon: colors.soap600,
-          label: colors.licorice100,
-        },
-      };
-    case 'secondary':
+    case undefined:
     default:
       return {
         default: {
           background: 'transparent',
-          border: colors.soap500,
-          icon: colors.licorice200,
+          border: colors.blackPepper400,
+          icon: colors.blackPepper400,
           label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
         },
         hover: {
-          background: colors.licorice500,
-          border: colors.licorice500,
+          background: colors.blackPepper400,
+          border: colors.blackPepper400,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
+          labelData: themePrimary.contrast,
         },
         active: {
-          background: colors.licorice600,
-          border: colors.licorice600,
+          background: colors.blackPepper500,
+          border: colors.blackPepper500,
           icon: themePrimary.contrast,
           label: themePrimary.contrast,
+          labelData: themePrimary.contrast,
         },
         focus: {
-          background: colors.licorice500,
-          border: colors.licorice500,
-          icon: themePrimary.contrast,
-          label: themePrimary.contrast,
+          border: colors.blackPepper400,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
         },
         disabled: {
           background: 'transparent',
-          border: colors.soap500,
-          icon: colors.soap600,
-          label: colors.licorice100,
+          border: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
+          icon: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
+          label: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
+          labelData: 'rgba(30, 30, 30, 0.4)', // Black Pepper 400 @ 40%
         },
       };
     case 'inverse':
@@ -152,23 +137,24 @@ export const getOutlineButtonColors = (
           label: colors.frenchVanilla100,
         },
         hover: {
-          background: colors.frenchVanilla100,
-          icon: colors.licorice500,
-          label: colors.blackPepper400,
-          labelData: colors.licorice300,
-        },
-        active: {
           background: colors.soap300,
           border: colors.soap300,
-          icon: colors.licorice500,
+          icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.licorice300,
+          labelData: colors.blackPepper400,
+        },
+        active: {
+          background: colors.soap400,
+          border: colors.soap400,
+          icon: colors.blackPepper400,
+          label: colors.blackPepper400,
+          labelData: colors.blackPepper400,
         },
         focus: {
           background: colors.frenchVanilla100,
-          icon: colors.licorice500,
+          icon: colors.blackPepper400,
           label: colors.blackPepper400,
-          labelData: colors.licorice300,
+          labelData: colors.blackPepper400,
           focusRing: focusRing(
             {
               separation: 2,
@@ -180,10 +166,10 @@ export const getOutlineButtonColors = (
         },
         disabled: {
           background: 'transparent',
-          border: 'rgba(255, 255, 255, 0.75)',
-          icon: 'rgba(255, 255, 255, 0.75)',
-          label: 'rgba(255, 255, 255, 0.75)',
-          labelData: 'rgba(255, 255, 255, 0.75)',
+          border: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
+          icon: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
+          label: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
+          labelData: 'rgba(255, 255, 255, 0.4)', // French Vanilla 400 @ 40%
         },
       };
   }

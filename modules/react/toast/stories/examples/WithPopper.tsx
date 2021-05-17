@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper} from '@workday/canvas-kit-react/popup';
 import {Toast} from '@workday/canvas-kit-react/toast';
 
@@ -17,7 +17,7 @@ export const WithPopper = () => {
 
   return (
     <div ref={containerRef}>
-      <Button onClick={handleOpen}>Show Toast</Button>
+      <SecondaryButton onClick={handleOpen}>Show Toast</SecondaryButton>
       <Popper placement="bottom-end" open={open} anchorElement={containerRef}>
         <Toast onClose={handleClose}>Your workbook was successfully processed.</Toast>
       </Popper>

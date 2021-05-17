@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 export const CustomContent = () => {
@@ -14,7 +14,7 @@ export const CustomContent = () => {
           </div>
         }
       >
-        <Button>Hover Me</Button>
+        <SecondaryButton>Hover Me</SecondaryButton>
       </Tooltip>
     </React.Fragment>
   );

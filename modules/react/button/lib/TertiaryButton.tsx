@@ -12,24 +12,24 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {ButtonColors} from './types';
 import {ButtonContainer, ButtonLabelIcon, ButtonLabel} from './parts';
 
-export interface TextButtonProps extends Themeable {
+export interface TertiaryButtonProps extends Themeable {
   /**
-   * The variant of the TextButton.
-   * @default 'text'
+   * The variant of the TertiaryButton.
+   * @default undefined
    */
-  variant?: 'text' | 'inverse';
+  variant?: 'inverse' | undefined;
   /**
-   * The size of the TextButton.
+   * The size of the TertiaryButton.
    * @default 'medium'
    */
   size?: 'small' | 'medium';
   /**
-   * The position of the TextButton icon.
+   * The position of the TertiaryButton icon.
    * @default 'left'
    */
   iconPosition?: 'left' | 'right';
   /**
-   * The icon of the TextButton.
+   * The icon of the TertiaryButton.
    */
   icon?: CanvasSystemIcon;
   /**
@@ -39,8 +39,8 @@ export interface TextButtonProps extends Themeable {
   children?: React.ReactNode;
 }
 
-const getTextButtonColors = (
-  variant: 'text' | 'inverse',
+const getTertiaryButtonColors = (
+  variant: 'inverse' | undefined,
   theme: EmotionCanvasTheme
 ): ButtonColors => {
   const {
@@ -49,72 +49,70 @@ const getTextButtonColors = (
     },
   } = theme;
 
-  switch (variant) {
-    case 'text':
-    default:
-      return {
-        default: {
-          icon: themePrimary.main,
-          label: themePrimary.main,
-        },
-        hover: {
-          background: colors.soap200,
-          icon: themePrimary.dark,
-          label: themePrimary.dark,
-        },
-        active: {
-          background: colors.soap300,
-          icon: themePrimary.dark,
-          label: themePrimary.dark,
-        },
-        focus: {
-          icon: themePrimary.dark,
-          label: themePrimary.dark,
-          focusRing: focusRing({}, theme),
-        },
-        disabled: {
-          background: 'transparent',
-          icon: themePrimary.light,
-          label: themePrimary.light,
-        },
-      };
-    case 'inverse':
-      return {
-        default: {
-          background: 'transparent',
-          icon: colors.frenchVanilla100,
-          label: colors.frenchVanilla100,
-        },
-        hover: {
-          background: colors.frenchVanilla100,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-        active: {
-          background: colors.soap200,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-        },
-        focus: {
-          background: colors.frenchVanilla100,
-          icon: colors.blackPepper400,
-          label: colors.blackPepper400,
-          focusRing: focusRing(
-            {
-              separation: 2,
-              inset: 'inner',
-              innerColor: 'currentColor',
-              outerColor: colors.frenchVanilla100,
-            },
-            theme
-          ),
-        },
-        disabled: {
-          background: 'transparent',
-          icon: 'rgba(255, 255, 255, 0.5)',
-          label: 'rgba(255, 255, 255, 0.5)',
-        },
-      };
+  if (variant === 'inverse') {
+    return {
+      default: {
+        background: 'transparent',
+        icon: colors.frenchVanilla100,
+        label: colors.frenchVanilla100,
+      },
+      hover: {
+        background: colors.frenchVanilla100,
+        icon: colors.blackPepper400,
+        label: colors.blackPepper400,
+      },
+      active: {
+        background: colors.soap200,
+        icon: colors.blackPepper400,
+        label: colors.blackPepper400,
+      },
+      focus: {
+        background: colors.frenchVanilla100,
+        icon: colors.blackPepper400,
+        label: colors.blackPepper400,
+        focusRing: focusRing(
+          {
+            separation: 2,
+            inset: 'inner',
+            innerColor: 'currentColor',
+            outerColor: colors.frenchVanilla100,
+          },
+          theme
+        ),
+      },
+      disabled: {
+        background: 'transparent',
+        icon: 'rgba(255, 255, 255, 0.5)',
+        label: 'rgba(255, 255, 255, 0.5)',
+      },
+    };
+  } else {
+    return {
+      default: {
+        icon: themePrimary.main,
+        label: themePrimary.main,
+      },
+      hover: {
+        background: colors.soap200,
+        icon: themePrimary.dark,
+        label: themePrimary.dark,
+      },
+      active: {
+        background: colors.soap300,
+        icon: themePrimary.dark,
+        label: themePrimary.dark,
+      },
+      focus: {
+        icon: themePrimary.dark,
+        label: themePrimary.dark,
+        focusRing: focusRing({}, theme),
+      },
+      disabled: {
+        background: 'transparent',
+        icon: themePrimary.light,
+        label: themePrimary.light,
+      },
+    };
   }
 };
 
@@ -133,21 +131,21 @@ const containerStyles = {
   },
 };
 
-export const TextButton = createComponent('button')({
-  displayName: 'TextButton',
+export const TertiaryButton = createComponent('button')({
+  displayName: 'TertiaryButton',
   Component: (
     {
       // TODO: Fix useTheme and make it a real hook
       // eslint-disable-next-line react-hooks/rules-of-hooks
       theme = useTheme(),
-      variant = 'text',
       size = 'medium',
       iconPosition = 'left',
+      variant,
       children,
       icon,
       allCaps,
       ...elemProps
-    }: TextButtonProps,
+    }: TertiaryButtonProps,
     ref,
     Element
   ) => {
@@ -169,7 +167,7 @@ export const TextButton = createComponent('button')({
       <ButtonContainer
         ref={ref}
         as={Element}
-        colors={getTextButtonColors(variant, theme)}
+        colors={getTertiaryButtonColors(variant, theme)}
         size={size}
         extraStyles={allContainerStyles}
         {...elemProps}
