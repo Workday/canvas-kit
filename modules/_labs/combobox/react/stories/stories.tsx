@@ -9,6 +9,7 @@ import FormField from '../../../../form-field/react';
 import {MenuItem, MenuItemProps} from '../../../menu/react';
 import {TextInput} from '../../../../text-input/react';
 import README from '../README.md';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react-common';
 
 const autocompleteResult = (
   textModifier: number,
@@ -103,4 +104,11 @@ storiesOf('Labs/Combobox/React', module)
     <FormField id="autocomplete-123" label="Group of results">
       <Autocomplete showDisabledItems={true} />
     </FormField>
+  ))
+  .add('RTL', () => (
+    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <FormField id="rtl-autocomplete-123" label="RTL Autocomplete example">
+        <Autocomplete />
+      </FormField>
+    </CanvasProvider>
   ));
