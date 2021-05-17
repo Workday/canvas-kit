@@ -65,6 +65,7 @@
   "devDependencies": {
     "@material-ui/core": "^4.9.7",
     "@types/lodash.flatten": "^4.4.6",
-    "@workday/canvas-accent-icons-web": "^1.0.0"
+    "@workday/canvas-accent-icons-web": "^1.0.0",
+    "@workday/canvas-kit-preview-react": "^5.0.0-beta.2"
   }
 }
