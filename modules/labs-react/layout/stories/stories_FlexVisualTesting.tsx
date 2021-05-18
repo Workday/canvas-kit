@@ -21,26 +21,26 @@ export const FlexLTRStates = () => {
           rowProps={[
             {
               label: 'Row',
-              props: {flexDirection: 'row', border: 'solid 2px', borderColor: 'blackpepper500'},
+              props: {flexDirection: 'row', border: 'solid 2px', borderColor: 'blackPepper500'},
             },
             {
               label: 'Row Reverse',
               props: {
                 flexDirection: 'row-reverse',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
             {
               label: 'Column',
-              props: {flexDirection: 'column', border: 'solid 2px', borderColor: 'blackpepper500'},
+              props: {flexDirection: 'column', border: 'solid 2px', borderColor: 'blackPepper500'},
             },
             {
               label: 'Column Reverse',
               props: {
                 flexDirection: 'column-reverse',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
           ]}
@@ -103,26 +103,26 @@ export const FlexRTLStates = () => {
           rowProps={[
             {
               label: 'Row',
-              props: {flexDirection: 'row', border: 'solid 2px', borderColor: 'blackpepper500'},
+              props: {flexDirection: 'row', border: 'solid 2px', borderColor: 'blackPepper500'},
             },
             {
               label: 'Row-Reverse',
               props: {
                 flexDirection: 'row-reverse',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
             {
               label: 'Column',
-              props: {flexDirection: 'column', border: 'solid 2px', borderColor: 'blackpepper500'},
+              props: {flexDirection: 'column', border: 'solid 2px', borderColor: 'blackPepper500'},
             },
             {
               label: 'Column-Reverse',
               props: {
                 flexDirection: 'column-reverse',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
           ]}

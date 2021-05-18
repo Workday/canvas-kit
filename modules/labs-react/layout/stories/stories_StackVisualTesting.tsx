@@ -25,7 +25,7 @@ export const StackLTRStates = () => {
                 spacing: 'xxs',
                 flexDirection: 'row',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
             {
@@ -34,7 +34,7 @@ export const StackLTRStates = () => {
                 spacing: 'xxs',
                 flexDirection: 'row-reverse',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
             {
@@ -43,7 +43,7 @@ export const StackLTRStates = () => {
                 spacing: 'xxs',
                 flexDirection: 'column',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
             {
@@ -52,7 +52,7 @@ export const StackLTRStates = () => {
                 spacing: 'xxs',
                 flexDirection: 'column-reverse',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
           ]}
@@ -113,7 +113,7 @@ export const StackRTLStates = () => {
                 spacing: 'xxs',
                 flexDirection: 'row',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
             {
@@ -122,7 +122,7 @@ export const StackRTLStates = () => {
                 spacing: 'xxs',
                 flexDirection: 'row-reverse',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
             {
@@ -131,7 +131,7 @@ export const StackRTLStates = () => {
                 spacing: 'xxs',
                 flexDirection: 'column',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
             {
@@ -140,7 +140,7 @@ export const StackRTLStates = () => {
                 spacing: 'xxs',
                 flexDirection: 'column-reverse',
                 border: 'solid 2px',
-                borderColor: 'blackpepper500',
+                borderColor: 'blackPepper500',
               },
             },
           ]}
