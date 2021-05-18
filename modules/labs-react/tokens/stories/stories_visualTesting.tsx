@@ -74,9 +74,6 @@ export const Type = () => {
         <br />
         <span css={[type.body, type.variant.mono]}>Mono Text</span>
       </section>
-      <section className="story">
-        <h2 style={type.h2}>Space and Space Numbers</h2>
-      </section>
     </div>
   );
 };
