@@ -1,9 +1,15 @@
-import {Property} from 'csstype';
+import {
+  PropertyDisplay,
+  PropertyOverflow,
+  PropertyOverflowX,
+  PropertyOverflowY,
+  PropertyVerticalAlign,
+} from './types';
 
 /** style props to for layout properties */
 export type LayoutStyleProps = {
   /** sets `display` property */
-  display?: Property.Display;
+  display?: PropertyDisplay;
   /** sets `height` property */
   height?: number | string;
   /** sets `max-height` property */
@@ -15,13 +21,13 @@ export type LayoutStyleProps = {
   /** sets `min-width` property */
   minWidth?: number | string;
   /** sets `overflow` property */
-  overflow?: Property.Overflow;
+  overflow?: PropertyOverflow;
   /** sets `overflow-x` property */
-  overflowX?: Property.OverflowX;
+  overflowX?: PropertyOverflowX;
   /** sets `overflow-y` property */
-  overflowY?: Property.OverflowY;
+  overflowY?: PropertyOverflowY;
   /** sets `vertical-align` property */
-  verticalAlign?: Property.VerticalAlign;
+  verticalAlign?: PropertyVerticalAlign;
   /** sets `width` property */
   width?: number | string;
 };

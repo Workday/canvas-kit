@@ -1,4 +1,3 @@
-import {Property} from 'csstype';
 import {
   borderRadius as borderRadiusTokens,
   CanvasBorderRadiusKeys,
@@ -10,6 +9,8 @@ import {
   PartialEmotionCanvasTheme,
   useTheme,
 } from '@workday/canvas-kit-react/common';
+
+import {PropertyBorder} from './types';
 
 /** style props to set the border properties */
 export type BorderShorthandStyleProps = {
@@ -56,15 +57,15 @@ export type BorderRadiusStyleProps = {
 /** style props to set the border style properties */
 export type BorderLineStyleProps = {
   /** sets `border-style` property */
-  borderStyle?: Property.BorderStyle;
+  borderStyle?: PropertyBorder;
   /** sets `border-top-style` property */
-  borderTopStyle?: Property.BorderStyle;
+  borderTopStyle?: PropertyBorder;
   /** sets `border-right-style` property (no bidirectional support) */
-  borderRightStyle?: Property.BorderStyle;
+  borderRightStyle?: PropertyBorder;
   /** sets `border-bottom-style` property */
-  borderBottomStyle?: Property.BorderStyle;
+  borderBottomStyle?: PropertyBorder;
   /** sets `border-left-style` property (no bidirectional support) */
-  borderLeftStyle?: Property.BorderStyle;
+  borderLeftStyle?: PropertyBorder;
 };
 
 /** style props to set the border width properties */
@@ -87,7 +88,7 @@ export type BorderLogicalStyleProps = {
   /** sets `border-left-color` property (bidirectional support) */
   borderInlineStartColor?: CanvasColor | (string & {});
   /** sets `border-left-style` property (bidirectional support) */
-  borderInlineStartStyle?: Property.BorderStyle;
+  borderInlineStartStyle?: PropertyBorder;
   /** sets `border-left-width` property (bidirectional support) */
   borderInlineStartWidth?: string | number;
   /** sets `border-right` property (bidirectional support) */
@@ -95,7 +96,7 @@ export type BorderLogicalStyleProps = {
   /** sets `border-right-color` property (bidirectional support) */
   borderInlineEndColor?: CanvasColor | (string & {});
   /** sets `border-right-style` property (bidirectional support) */
-  borderInlineEndStyle?: Property.BorderStyle;
+  borderInlineEndStyle?: PropertyBorder;
   /** sets `border-right-width` property (bidirectional support) */
   borderInlineEndWidth?: string | number;
 };
