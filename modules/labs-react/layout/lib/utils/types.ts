@@ -10,7 +10,7 @@ export type PropertyAlignItems =
   | 'baseline'
   | 'normal'
   | 'stretch'
-  | string;
+  | (string & {});
 
 export type PropertyAlignContent =
   | Globals
@@ -18,7 +18,7 @@ export type PropertyAlignContent =
   | ContentPosition
   | 'baseline'
   | 'normal'
-  | string;
+  | (string & {});
 
 export type PropertyJustifyItems =
   | Globals
@@ -29,7 +29,7 @@ export type PropertyJustifyItems =
   | 'normal'
   | 'right'
   | 'stretch'
-  | string;
+  | (string & {});
 
 export type PropertyJustifyContent =
   | Globals
@@ -38,7 +38,7 @@ export type PropertyJustifyContent =
   | 'left'
   | 'normal'
   | 'right'
-  | string;
+  | (string & {});
 
 export type PropertyFlexWrap = Globals | 'nowrap' | 'wrap' | 'wrap-reverse';
 
