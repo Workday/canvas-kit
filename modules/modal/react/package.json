@@ -57,6 +57,7 @@
   "devDependencies": {
     "@workday/canvas-kit-react-button": "^4.7.0",
     "@workday/canvas-kit-react-form-field": "^4.7.0",
-    "@workday/canvas-kit-react-text-input": "^4.7.0"
+    "@workday/canvas-kit-react-text-input": "^4.7.0",
+    "@workday/canvas-kit-react-tooltip": "^4.7.0"
   }
 }
