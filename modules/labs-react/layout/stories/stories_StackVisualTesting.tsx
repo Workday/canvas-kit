@@ -61,7 +61,7 @@ export const StackLTRStates = () => {
             return (
               <Stack {...props}>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -71,7 +71,7 @@ export const StackLTRStates = () => {
                   1
                 </Flex>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -81,7 +81,7 @@ export const StackLTRStates = () => {
                   2
                 </Flex>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -149,7 +149,7 @@ export const StackRTLStates = () => {
             return (
               <Stack {...props}>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -159,7 +159,7 @@ export const StackRTLStates = () => {
                   1
                 </Flex>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -169,7 +169,7 @@ export const StackRTLStates = () => {
                   2
                 </Flex>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"

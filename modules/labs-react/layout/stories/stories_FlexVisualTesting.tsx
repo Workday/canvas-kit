@@ -49,7 +49,7 @@ export const FlexLTRStates = () => {
             return (
               <Flex {...props}>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -61,7 +61,7 @@ export const FlexLTRStates = () => {
                   1
                 </Flex>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -73,7 +73,7 @@ export const FlexLTRStates = () => {
                   2
                 </Flex>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -131,7 +131,7 @@ export const FlexRTLStates = () => {
             return (
               <Flex {...props}>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -143,7 +143,7 @@ export const FlexRTLStates = () => {
                   1
                 </Flex>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
@@ -155,7 +155,7 @@ export const FlexRTLStates = () => {
                   2
                 </Flex>
                 <Flex
-                  flex={1}
+                  flex="1 1 auto"
                   border="solid 2px"
                   alignItems="center"
                   justifyContent="center"
