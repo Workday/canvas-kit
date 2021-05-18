@@ -8,7 +8,7 @@ const {exec} = require('child_process');
 
 require('colors');
 
-const createReactModule = require('./createReactModule');
+const createReactComponent = require('./createReactComponent');
 const addExport = require('./addExport');
 
 const cwd = process.cwd();
@@ -42,7 +42,8 @@ const questions = [
     name: 'category',
     message: 'What category should this component live in?:',
     choices: [
-      'Labs (beta)',
+      'Labs (alpha)',
+      'Preview (beta)',
       'Buttons',
       'Containers',
       'Indicators',
@@ -51,12 +52,12 @@ const questions = [
       'Popups',
     ],
   },
-  {
-    type: 'confirm',
-    name: 'publicModule',
-    message: 'Make access public when publishing?:',
-    default: true,
-  },
+  // {
+  //   type: 'confirm',
+  //   name: 'publicModule',
+  //   message: 'Make access public when publishing?:',
+  //   default: true,
+  // },
   /**
    * Add question to add deps
    * React: CK core, emotion
@@ -67,13 +68,12 @@ inquirer
   .prompt(questions)
   .then(answers => {
     const {name, category} = answers;
-    const unstable = category === 'Labs (beta)';
-    const componentPath = path.join(
-      cwd,
-      unstable ? `modules/labs-react/${name}` : `modules/react/${name}`
-    );
+    const prerelease =
+      category === 'Labs (alpha)' ? 'labs' : category === 'Preview (beta)' ? 'preview' : undefined;
+    const prefix = prerelease && prerelease + '-';
+    const componentPath = path.join(cwd, `modules/${prefix}react/${name}`);
 
-    createModule(componentPath, 'react', createReactModule, answers, unstable);
+    createComponent(componentPath, createReactComponent, answers, prerelease, prefix);
 
     console.log('\n');
   })
@@ -82,17 +82,17 @@ inquirer
     console.log(e.stack);
   });
 
-const createModule = (componentPath, target, moduleGenerator, answers, unstable) => {
-  const {name, description, category, publicModule} = answers;
+const createComponent = (componentPath, componentGenerator, answers, prerelease, prefix) => {
+  const {name, description, category} = answers;
 
   if (fs.existsSync(componentPath)) {
-    const moduleName = `@workday/canvas-kit-${unstable ? 'labs' : ''}${target}/${name}`;
+    const moduleName = `@workday/canvas-kit-${prefix}react/${name}`;
     console.log(`\nModule ${moduleName} already exists. Skipping.`.yellow);
   } else {
-    moduleGenerator(componentPath, name, description, unstable, publicModule, category);
+    componentGenerator(componentPath, name, description, prerelease, category);
 
-    console.log('\nAdding export to ' + `./modules/${unstable ? 'labs-' : ''}react/index.ts`.cyan);
-    addExport(name, unstable);
+    console.log('\nAdding export to ' + `./modules/${prefix}react/index.ts`.cyan);
+    addExport(name, prerelease);
 
     console.log('\nBootstrapping dependencies.');
     exec('yarn');

@@ -20,19 +20,20 @@ const tsconfig = require('./templates/react/tsconfig');
 
 const cwd = process.cwd();
 
-module.exports = (modulePath, name, description, unstable, public, category) => {
-  const moduleName = `@workday/canvas-kit-${unstable ? 'labs-' : ''}react/${name}`;
+module.exports = (modulePath, name, description, prerelease, category) => {
+  const moduleName = `@workday/canvas-kit-${prerelease && prerelease + '-'}react/${name}`;
 
   console.log('\nCreating ' + `${moduleName}\n`.blue.underline);
 
   mkdirp.sync(modulePath);
 
+  const prereleaseTitle = prerelease && prerelease.charAt(0).toUpperCase() + prerelease.slice(1);
   const camelCaseName = getCamelCaseName(name);
   const pascalCaseName = getPascalCaseName(name);
   const titleCaseName = getTitleCaseName(name);
   const rootPath = '../../..';
-  const storyPath = `${unstable ? 'Labs/' : `Components/${category}/`}${titleCaseName}/React`;
-  const testingStoryPath = `Testing/React/${unstable ? 'Labs' : category}/${titleCaseName}`;
+  const storyPath = `${prereleaseTitle || `Components/${category}`}/${titleCaseName}/React`;
+  const testingStoryPath = `Testing/React/${prereleaseTitle || category}/${titleCaseName}`;
 
   const files = {
     model: {
@@ -69,7 +70,7 @@ module.exports = (modulePath, name, description, unstable, public, category) => 
     },
     readme: {
       path: 'README.md',
-      contents: readme(name, description, unstable),
+      contents: readme(name, description, prerelease),
     },
     tsconfigSpec: {
       path: 'spec/tsconfig.json',
