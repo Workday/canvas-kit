@@ -27,7 +27,7 @@ module.exports = (componentName, prerelease) => {
 
   const indexPath = path.join(
     process.cwd(),
-    `modules/${prerelease && prerelease + '-'}react/index.ts`
+    `modules/${(prerelease && prerelease + '-') || ''}react/index.ts`
   );
   const lines = fs.readFileSync(indexPath, 'utf8').split('\n');
 

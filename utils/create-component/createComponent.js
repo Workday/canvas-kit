@@ -70,7 +70,7 @@ inquirer
     const {name, category} = answers;
     const prerelease =
       category === 'Labs (alpha)' ? 'labs' : category === 'Preview (beta)' ? 'preview' : undefined;
-    const prefix = prerelease && prerelease + '-';
+    const prefix = prerelease ? prerelease + '-' : '';
     const componentPath = path.join(cwd, `modules/${prefix}react/${name}`);
 
     createComponent(componentPath, createReactComponent, answers, prerelease, prefix);
