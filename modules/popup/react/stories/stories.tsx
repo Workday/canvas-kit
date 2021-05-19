@@ -11,6 +11,7 @@ import {
   useCloseOnEscape,
   useCloseOnOutsideClick,
   useFocusTrap,
+  useKeyDownListener,
 } from '@workday/canvas-kit-react-popup';
 
 import README from '../README.md';
@@ -115,6 +116,22 @@ const getFirstFocusableElement = (content: HTMLElement): HTMLElement | null => {
   return null;
 };
 
+const getLastFocusableElement = (content: HTMLElement): HTMLElement | null => {
+  const elements = content.querySelectorAll('*');
+
+  for (let i = elements.length - 1; i >= 0; i--) {
+    const element = elements.item(i);
+    if (element && isElementNativelyFocusable(element as HTMLElement)) {
+      return element as HTMLElement;
+    }
+  }
+
+  console.log(
+    'No focusable element was found. Please ensure popup has at least one focusable element'
+  );
+  return null;
+};
+
 const useInitialFocus = (
   popupRef: React.RefObject<HTMLElement>,
   popupOpen: boolean = false,
@@ -173,13 +190,76 @@ const useAccessiblePopupBehaviors = (
   useReturnFocus(popupRef, popupOpen, returnFocusRef);
 };
 
+const useFocusRedirect = (
+  popupRef: React.RefObject<HTMLElement>,
+  popupOpen: boolean,
+  onClose: () => void,
+  firstFocusableRef?: React.RefObject<HTMLElement>,
+  lastFocusableRef?: React.RefObject<HTMLElement>
+) => {
+  const handleKeydown: EventListener = (event: Event): void => {
+    const keyboardEvent = event as KeyboardEvent;
+    if (popupRef.current && keyboardEvent.key === 'Tab') {
+      const firstFocusableElement =
+        firstFocusableRef?.current || getFirstFocusableElement(popupRef.current);
+      const lastFocusableElement =
+        lastFocusableRef?.current || getLastFocusableElement(popupRef.current);
+
+      if (
+        keyboardEvent.getModifierState('Shift') &&
+        document.activeElement === firstFocusableElement
+      ) {
+        onClose();
+      } else if (document.activeElement === lastFocusableElement) {
+        onClose();
+      }
+    }
+  };
+
+  useKeyDownListener(handleKeydown);
+};
+
+export const AccessiblePopupWithFocusRedirect = () => {
+  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
+
+  const deleteButtonRef = React.useRef(null);
+  useCloseOnOutsideClick(stackRef, closePopup);
+  useAccessiblePopupBehaviors(stackRef, popperProps.open, closePopup, deleteButtonRef);
+  // useFocusRedirect(stackRef, popperProps.open, closePopup);
+
+  return (
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+      <DeleteButton {...targetProps} buttonRef={deleteButtonRef}>
+        Delete Item
+      </DeleteButton>
+      <Popper placement={'bottom'} {...popperProps}>
+        <Popup
+          width={400}
+          heading={'Delete Item'}
+          padding={Popup.Padding.s}
+          handleClose={closePopup}
+        >
+          <div style={{marginBottom: '24px'}}>
+            Are you sure you'd like to delete the item titled 'My Item'?
+          </div>
+
+          <DeleteButton style={{marginRight: '16px'}} onClick={closePopup}>
+            Delete
+          </DeleteButton>
+          <Button onClick={closePopup}>Cancel</Button>
+        </Popup>
+      </Popper>
+    </div>
+  );
+};
+
 export const AccessiblePopupWithFocusTrapping = () => {
   const {targetProps, closePopup, popperProps, stackRef} = usePopup();
 
   const deleteButtonRef = React.useRef(null);
   useCloseOnOutsideClick(stackRef, closePopup);
   useAccessiblePopupBehaviors(stackRef, popperProps.open, closePopup, deleteButtonRef);
-  useFocusTrap(stackRef);
+  // useFocusTrap(stackRef);
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
