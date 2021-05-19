@@ -138,8 +138,8 @@ const useInitialFocus = (
   initialFocusRef?: React.RefObject<HTMLElement>
 ) => {
   React.useLayoutEffect(() => {
-    if (popupOpen && popupRef.current) {
-      if (initialFocusRef.current) {
+    if (popupOpen && popupRef && popupRef.current) {
+      if (initialFocusRef && initialFocusRef.current) {
         initialFocusRef.current.focus();
       } else {
         const elem = getFirstFocusableElement(popupRef.current);
@@ -195,7 +195,8 @@ const useFocusRedirect = (
   popupOpen: boolean,
   onClose: () => void,
   firstFocusableRef?: React.RefObject<HTMLElement>,
-  lastFocusableRef?: React.RefObject<HTMLElement>
+  lastFocusableRef?: React.RefObject<HTMLElement>,
+  returnFocusableRef?: React.RefObject<HTMLElement>
 ) => {
   const handleKeydown: EventListener = (event: Event): void => {
     const keyboardEvent = event as KeyboardEvent;
@@ -204,12 +205,14 @@ const useFocusRedirect = (
         firstFocusableRef?.current || getFirstFocusableElement(popupRef.current);
       const lastFocusableElement =
         lastFocusableRef?.current || getLastFocusableElement(popupRef.current);
-
       if (
         keyboardEvent.getModifierState('Shift') &&
         document.activeElement === firstFocusableElement
       ) {
+        event.preventDefault();
+        event.stopPropagation();
         onClose();
+        returnFocusableRef?.current?.focus();
       } else if (document.activeElement === lastFocusableElement) {
         onClose();
       }
@@ -219,19 +222,26 @@ const useFocusRedirect = (
   useKeyDownListener(handleKeydown);
 };
 
-export const AccessiblePopupWithFocusRedirect = () => {
+export const AccessiblePopupWithOnlyAriaOwns = () => {
   const {targetProps, closePopup, popperProps, stackRef} = usePopup();
 
   const deleteButtonRef = React.useRef(null);
   useCloseOnOutsideClick(stackRef, closePopup);
   useAccessiblePopupBehaviors(stackRef, popperProps.open, closePopup, deleteButtonRef);
-  // useFocusRedirect(stackRef, popperProps.open, closePopup);
+
+  const popupId = 'popup-test-id';
+  React.useLayoutEffect(() => {
+    if (popperProps.open && stackRef.current) {
+      stackRef.current.setAttribute('id', popupId);
+    }
+  }, [stackRef, popperProps.open]);
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
-      <DeleteButton {...targetProps} buttonRef={deleteButtonRef}>
+      <DeleteButton {...targetProps} buttonRef={deleteButtonRef} aria-owns={popupId}>
         Delete Item
       </DeleteButton>
+      <Button> Next Focusable Button</Button>
       <Popper placement={'bottom'} {...popperProps}>
         <Popup
           width={400}
@@ -249,6 +259,50 @@ export const AccessiblePopupWithFocusRedirect = () => {
           <Button onClick={closePopup}>Cancel</Button>
         </Popup>
       </Popper>
+      <Button> Focusable Button After Popup</Button>
+    </div>
+  );
+};
+
+export const AccessiblePopupWithFocusRedirect = () => {
+  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
+
+  const deleteButtonRef = React.useRef(null);
+  useCloseOnOutsideClick(stackRef, closePopup);
+  useAccessiblePopupBehaviors(stackRef, popperProps.open, closePopup, deleteButtonRef);
+  useFocusRedirect(stackRef, popperProps.open, closePopup, undefined, undefined, deleteButtonRef);
+  const popupId = 'popup-test-id';
+
+  React.useLayoutEffect(() => {
+    if (popperProps.open && stackRef.current) {
+      stackRef.current.setAttribute('id', popupId);
+    }
+  }, [stackRef, popperProps.open]);
+
+  return (
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+      <DeleteButton {...targetProps} buttonRef={deleteButtonRef} aria-owns={popupId}>
+        Delete Item
+      </DeleteButton>
+      <Button> Next Focusable Button</Button>
+      <Popper placement={'bottom'} {...popperProps}>
+        <Popup
+          width={400}
+          heading={'Delete Item'}
+          padding={Popup.Padding.s}
+          handleClose={closePopup}
+        >
+          <div style={{marginBottom: '24px'}}>
+            Are you sure you'd like to delete the item titled 'My Item'?
+          </div>
+
+          <DeleteButton style={{marginRight: '16px'}} onClick={closePopup}>
+            Delete
+          </DeleteButton>
+          <Button onClick={closePopup}>Cancel</Button>
+        </Popup>
+      </Popper>
+      <Button> Focusable Button After Popup</Button>
     </div>
   );
 };
@@ -259,13 +313,14 @@ export const AccessiblePopupWithFocusTrapping = () => {
   const deleteButtonRef = React.useRef(null);
   useCloseOnOutsideClick(stackRef, closePopup);
   useAccessiblePopupBehaviors(stackRef, popperProps.open, closePopup, deleteButtonRef);
-  // useFocusTrap(stackRef);
+  useFocusTrap(stackRef);
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <DeleteButton {...targetProps} buttonRef={deleteButtonRef}>
         Delete Item
       </DeleteButton>
+      <Button> Next Focusable Button</Button>
       <Popper placement={'bottom'} {...popperProps}>
         <Popup
           width={400}
@@ -283,6 +338,7 @@ export const AccessiblePopupWithFocusTrapping = () => {
           <Button onClick={closePopup}>Cancel</Button>
         </Popup>
       </Popper>
+      <Button> Focusable Button After Popup</Button>
     </div>
   );
 };
