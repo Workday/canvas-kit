@@ -46,16 +46,11 @@ ultimately performing a migration when components are promoted to a stable versi
 1. Copy it into the above module structure
 2. Add a warning to the README:
    > <a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
-   >   <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
+   >   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
    > </a>  This component is work in progress and currently in pre-release.
 3. Update any necessary paths (links to storybook utils, tsconfig, etc.)
 4. Change the storybook path to add a `Labs` prefix (e.g. `Labs/Menu/Default`)
 
 ## Promoting a Component out of Canvas Kit Labs
 
-1. Move the module folder from `modules/labs-react` to `modules/react`
-2. Remove the warning from the README
-3. Update any necessary paths (links to storybook utils, tsconfig, etc.)
-
-**Note**: When components are promoted from Canvas Kit Labs, their old namespace is left orphaned in
-npm, so these version will still be available and will never be overwritten.
+1. Run `yarn promote-component`

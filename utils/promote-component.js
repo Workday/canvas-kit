@@ -51,9 +51,11 @@ inquirer.prompt(questions).then(answers => {
     process.exit(1);
   }
 
-  const prefix = prerelease && prerelease + '-';
-  const srcPath = path.join(cwd, `modules/${prefix}react/${component}`);
-  const destModule = path.join(cwd, `modules/react/`);
+  const prereleaseTitle = prerelease && prerelease.charAt(0).toUpperCase() + prerelease.slice(1);
+  const srcPrefix = prerelease && prerelease + '-';
+  const srcPath = path.join(cwd, `modules/${srcPrefix}react/${component}`);
+  const destPrefix = prerelease === 'labs' ? 'preview-' : '';
+  const destModule = path.join(cwd, `modules/${destPrefix}react/`);
   const destPath = path.join(destModule, component);
 
   if (fs.existsSync(`${destPath}`)) {
@@ -61,9 +63,9 @@ inquirer.prompt(questions).then(answers => {
   } else {
     console.log(
       `\nMoving `.gray +
-        `modules/${prefix}react/${component}`.cyan +
+        `modules/${srcPrefix}react/${component}`.cyan +
         ` > `.gray +
-        `modules/react/${component}`.cyan
+        `modules/${destPrefix}react/${component}`.cyan
     );
 
     exec(`git mv ${srcPath} ${destModule}`)
@@ -76,35 +78,44 @@ inquirer.prompt(questions).then(answers => {
 
           try {
             console.log(`Updating file paths and removing labs references\n`.gray);
-            const {
-              changedFiles,
-              countOfMatchesByPaths,
-              replaceInFilesOptions,
-            } = await replaceInFiles({
+            await replaceInFiles({
               files,
-              from: `@workday/canvas-kit-${prefix}react/${component}`,
-              to: `@workday/canvas-kit-react/${component}`,
+              from: `@workday/canvas-kit-${srcPrefix}react/${component}`,
+              to: `@workday/canvas-kit-${destPrefix}react/${component}`,
             })
               .pipe({
-                from: `yarn add @workday/canvas-kit-${prefix}react`,
-                to: 'yarn add @workday/canvas-kit-react',
+                from: `yarn add @workday/canvas-kit-${srcPrefix}react`,
+                to: `yarn add @workday/canvas-kit-${destPrefix}react`,
               })
               .pipe({
-                from: `modules/${prefix}react/${component}`,
-                to: `modules/react/${component}`,
+                from: `modules/${srcPrefix}react/${component}`,
+                to: `modules/${destPrefix}react/${component}`,
               })
               .pipe({
-                from: /\n<a href=".*modules\/(labs|preview).*(\n.*)*in prerelease\.\n\n\n/g,
-                to: '',
-              })
-              .pipe({
-                from: `'Labs/`,
+                from: `'${prereleaseTitle}/`,
                 to: `'Components/${category}/`,
               })
               .pipe({
-                from: `'Testing/React/Labs`,
+                from: `'Testing/React/${prereleaseTitle}`,
                 to: `'Testing/React/${category}`,
               });
+
+            if (prerelease === 'labs') {
+              await replaceInFiles({
+                files,
+                from: 'modules/labs-react/README.md',
+                to: 'modules/preview-react/README.md',
+              }).pipe({
+                from: 'img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha"',
+                to: 'img.shields.io/badge/PREVIEW-beta-blueviolet" alt="Preview: Beta"',
+              });
+            } else if (prerelease === 'preview') {
+              await replaceInFiles({
+                files,
+                from: /\n<a href=".*modules\/(labs|preview).*(\n.*)*in prerelease\.\n\n\n/g,
+                to: '',
+              });
+            }
           } catch (error) {
             console.log('Error occurred:', error);
           }
