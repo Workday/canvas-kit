@@ -12,7 +12,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, depth, space} from '@workday/canvas-kit-react/tokens';
 
-export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+export interface SwitchProps extends Themeable {
   /**
    * If true, set the Switch to the on state.
    * @default false

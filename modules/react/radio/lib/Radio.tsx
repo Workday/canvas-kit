@@ -15,7 +15,7 @@ import canvas, {
   spaceNumbers,
 } from '@workday/canvas-kit-react/tokens';
 
-export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+export interface RadioProps extends Themeable {
   /**
    * If true, set the Radio button to the checked state.
    * @default false

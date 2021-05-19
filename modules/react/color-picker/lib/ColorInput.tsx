@@ -34,6 +34,11 @@ export interface ColorInputProps extends Themeable, TextInputProps, GrowthBehavi
    */
   error?: ErrorType;
   /**
+   * If true, set the ColorInput to the disabled state.
+   * @default false
+   */
+  disabled?: boolean;
+  /**
    * The function called when the ColorInput state changes.
    */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -119,7 +124,6 @@ const formatValue = (value: string) => {
   return value.replace(/#/g, '').substring(0, 6);
 };
 
-// TODO: createComponent('TextInput') gives TS error with ref
 export const ColorInput = createComponent('input')({
   displayName: 'ColorInput',
   Component: (

@@ -10,14 +10,15 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
-export interface TextInputProps
-  extends Themeable,
-    GrowthBehavior,
-    React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends Themeable, GrowthBehavior {
   /**
    * The type of error associated with the TextInput (if applicable).
    */
   error?: ErrorType;
+  /**
+   * The width of the TextInput.
+   */
+  width?: number | string;
 }
 
 const StyledTextInput = styled('input')<

@@ -22,10 +22,6 @@ const StyledColorPreview = styled(ColorInput)<StyledType>({
   pointerEvents: 'none',
 });
 
-// TODO: Figure out why createComponent(ColorInput) works here (but only if
-// ColorInput uses createComponent('input') -- if ColorInput uses
-// createComponent(TextInput), then the createComponent(ColorInput) here
-// gives a TS error)
 export const ColorPreview = createComponent('input')({
   displayName: 'ColorPreview',
   Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => {

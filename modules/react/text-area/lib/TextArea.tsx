@@ -10,10 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
-export interface TextAreaProps
-  extends Themeable,
-    GrowthBehavior,
-    React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaProps extends Themeable, GrowthBehavior {
   /**
    * If true, set the TextArea to the disabled state.
    * @default false

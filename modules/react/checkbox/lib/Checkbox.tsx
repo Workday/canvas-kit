@@ -20,7 +20,7 @@ import canvas, {
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 
-export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps extends Themeable {
   /**
    * If true, set the Checkbox to the checked state.
    * @default false
