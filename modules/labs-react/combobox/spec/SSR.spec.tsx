@@ -4,7 +4,7 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import Combobox from '../lib/Combobox';
-import {MenuItem} from '../../menu';
+import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {TextInput} from '../../../react/text-input';
 
 describe('InputProvider', () => {
