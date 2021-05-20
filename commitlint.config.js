@@ -13,7 +13,7 @@ module.exports = {
 };
 
 // Extra scopes supported outside the `modules` folder
-const scopes = ['labs', 'fonts', 'popup-stack'];
+const scopes = ['labs', 'preview', 'fonts', 'popup-stack'];
 
 /**
  * @param {{ cwd: string}} context
@@ -27,11 +27,11 @@ function getPackages(context) {
     readdir(path.resolve(cwd, 'modules/css'), {withFileTypes: true}),
     readdir(path.resolve(cwd, 'modules/react'), {withFileTypes: true}),
     readdir(path.resolve(cwd, 'modules/labs-react'), {withFileTypes: true}),
+    readdir(path.resolve(cwd, 'modules/preview-react'), {withFileTypes: true}),
   ])
-    .then(([core, labs]) => [...core, ...labs])
+    .then(([css, react, labs, preview]) => [...css, ...react, ...labs, ...preview])
     .then(files => files.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name))
-    .then(files => scopes.concat(files))
-    .then(files => files.map(file => file.replace(/^(_.+)|(labs)/, '')).filter(name => name));
+    .then(files => scopes.concat(files));
 }
 
 // To test the output of this function, run the following:
