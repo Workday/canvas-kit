@@ -264,7 +264,7 @@ export const AccessiblePopupWithOnlyAriaOwns = () => {
   );
 };
 
-export const AccessiblePopupWithFocusRedirect = () => {
+export const AccessiblePopupWithFocusRedirectAndAriaOwns = () => {
   const {targetProps, closePopup, popperProps, stackRef} = usePopup();
 
   const deleteButtonRef = React.useRef(null);
@@ -281,9 +281,10 @@ export const AccessiblePopupWithFocusRedirect = () => {
 
   return (
     <div style={{display: 'flex', justifyContent: 'center'}}>
-      <DeleteButton {...targetProps} buttonRef={deleteButtonRef} aria-owns={popupId}>
+      <DeleteButton {...targetProps} buttonRef={deleteButtonRef}>
         Delete Item
       </DeleteButton>
+      <div aria-owns={popupId}></div>
       <Button> Next Focusable Button</Button>
       <Popper placement={'bottom'} {...popperProps}>
         <Popup
