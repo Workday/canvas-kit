@@ -49,6 +49,9 @@ describe('Select', () => {
     });
   });
 
+  // TODO: Replace ref test with verifyComponent after fixing Select to handle
+  // consumer-provided onKeyDown event handler. Currently fails the onKeyDown
+  // callback test in verifyComponent.
   describe('when rendered with a ref', () => {
     it('should set the ref to the button element', async () => {
       const ref: React.RefObject<HTMLButtonElement> = React.createRef();

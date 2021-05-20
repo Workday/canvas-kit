@@ -1,7 +1,7 @@
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
 import styled from '@emotion/styled';
 import {CSSObject, jsx, keyframes} from '@emotion/core';
-import {GrowthBehavior, PropsWithAs, useForkRef} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, useForkRef} from '@workday/canvas-kit-react/common';
 import {depth, space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
@@ -184,12 +184,19 @@ const Combobox = ({
   >([]);
   const [announcementText, setAnnouncementText] = useState('');
 
-  // Create a ref to the text input for internal use and use useForkRef to
-  // combine it with the ref already assigned to the text input (if it exists)
-  // to create a single callback ref which can be forwarded to the cloned
-  // text input created later.
+  // Create a ref to the soon-to-be-created TextInput clone for internal use.
+  // Use useForkRef to combine it with the ref already assigned to the original
+  // TextInput (if it exists) to create a single callback ref which can be
+  // forwarded to the TextInput clone.
   const inputRef: React.RefObject<HTMLInputElement> = useRef(null);
-  const elementRef = useForkRef((children as PropsWithAs<TextInputProps, 'input'>).ref, inputRef);
+  // We need access to the original TextInput's ref _property_ (not prop) so we
+  // can combine it with the internal inputRef using useForkRef. ref isn't
+  // listed in the ReactElement interface, but it's there, so we cast children
+  // to satisfy TS.
+  const elementRef = useForkRef(
+    (children as React.ReactElement<TextInputProps> & {ref: React.Ref<HTMLInputElement>}).ref,
+    inputRef
+  );
 
   const comboboxRef: React.RefObject<HTMLDivElement> = useRef(null);
 
@@ -410,7 +417,8 @@ const Combobox = ({
         paddingRight: space.xl,
       };
     }
-    const newTextInputProps: Partial<PropsWithAs<TextInputProps, 'input'>> = {
+    const newTextInputProps: Partial<TextInputProps &
+      React.InputHTMLAttributes<HTMLInputElement> & {ref: React.Ref<HTMLInputElement>}> = {
       type: 'text',
       id: componentId,
       grow: grow,
