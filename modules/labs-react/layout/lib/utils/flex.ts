@@ -13,7 +13,10 @@ export type FlexStyleProps = {
   alignItems?: PropertyAlignItems;
   /** sets `align-content` property */
   alignContent?: PropertyAlignContent;
-  /** sets `display` property */
+  /**
+   * sets `display` property
+   * @default 'flex'
+   * */
   display?: 'flex' | 'inline-flex';
   /** sets `justify-items` property */
   justifyItems?: PropertyJustifyItems;
