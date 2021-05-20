@@ -1,8 +1,8 @@
 # Canvas Kit React Color Picker
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
-  <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
-</a>  This component is work in progress and currently in pre-release.
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/preview-react/README.md">
+  <img src="https://img.shields.io/badge/PREVIEW-beta-blueviolet" alt="PREVIEW: Beta" />
+</a>  This component is in Preview because it has not been converted to a [Compound Component](../../docs/mdx/COMPOUND_COMPONENTS.mdx) yet. There is also work other teams are doing on Color Picker that may replace this implementation.
 
 Color Picker is a popup for selecting a color.
 

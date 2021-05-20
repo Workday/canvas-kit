@@ -1,8 +1,8 @@
 # Canvas Kit Labs React Menu
 
-<a href="https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md">
-  <img src="https://img.shields.io/badge/LABS-beta-orange" alt="LABS: Beta" />
-</a>  This component is work in progress and currently in pre-release.
+<a href="https://github.com/Workday/canvas-kit/tree/master/modules/preview-react/README.md">
+  <img src="https://img.shields.io/badge/PREVIEW-beta-blueviolet" alt="PREVIEW: Beta" />
+</a> This component is in Preview because it has not been converted to a [Compound Component](../../docs/mdx/COMPOUND_COMPONENTS.mdx) yet and we would like to change the underlying code architecture.
 
 Creates an actions menu of clickable items.
 
