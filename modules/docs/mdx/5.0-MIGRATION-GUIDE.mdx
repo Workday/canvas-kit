@@ -201,15 +201,6 @@ and our main `@workday/canvas-kit-react` module:
 
 ### Button
 
-- `onTabsChange` is now `onActivateTab` and the signature is now:
-  ```tsx
-  function onActivateTab({data: {tab: string}, state: TabsState}): void;
-  ```
-- The `<Tabs>` component no longer accepts the `currentTab` property. The Tabs uses a model now. See
-  story for more details
-- As noted above, Tabs has been promoted out of Canvas Kit Labs. You can now import directly from
-  `@workday/canvas-kit-react/tabs`.
-
 #### Recategorization
 
 There has been common confusion around the large number of buttons Canvas supports and when each
@@ -382,7 +373,5 @@ This codemod should handle most of what we've seen in code that uses Canvas Kit 
   ```
 - The `<Tabs>` component no longer accepts the `currentTab` property. The Tabs uses a model now. See
   story for more details
-
-PR:
-
-- https://github.com/Workday/canvas-kit/pull/953
+- As noted above, Tabs has been promoted out of Canvas Kit Labs. You can now import directly from
+  `@workday/canvas-kit-react/tabs`.
