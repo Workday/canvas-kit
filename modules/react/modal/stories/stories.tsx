@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Modal, useModal} from '@workday/canvas-kit-react/modal';
@@ -29,9 +29,7 @@ export const Default = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </>
   );
@@ -61,9 +59,7 @@ export const WithoutHook = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </>
   );
@@ -75,7 +71,7 @@ export const WithRadioButtons = () => {
 
   return (
     <>
-      <Button {...targetProps}>With Radio Buttons</Button>
+      <SecondaryButton {...targetProps}>With Radio Buttons</SecondaryButton>
       <Modal data-testid="TestModal" heading="Select Item" {...modalProps}>
         <RadioGroup
           name="contact"
@@ -107,9 +103,7 @@ export const WithoutCloseIcon = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </>
   );
@@ -134,9 +128,7 @@ export const CustomFocus = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </>
   );

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 export default {
   title: 'Testing/React/Preview/Side Panel/Cypress',
@@ -97,7 +97,7 @@ export const FirstFocusable = () => {
           </span>
           <h1>Panel Name</h1>
           <SidePanel.ToggleButton {...controlProps} />
-          <Button variant="primary">Another Button</Button>
+          <PrimaryButton>Another Button</PrimaryButton>
         </SidePanel>
       </Container>
     </React.Fragment>
