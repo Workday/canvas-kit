@@ -14,7 +14,7 @@ describe('Side Panel', () => {
   ].forEach(story => {
     context(`given the "${story.name}" story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Testing|React/Labs/Side Panel/Cypress', story.name);
+        h.stories.load('Testing|React/Preview/Side Panel/Cypress', story.name);
       });
 
       it('should not have any axe errors', () => {
@@ -59,7 +59,7 @@ describe('Side Panel', () => {
   describe(`given the 'first focusable' story is rendered`, () => {
     context(`when focused on a focusable element preceding the Side Panel`, () => {
       beforeEach(() => {
-        h.stories.load('Testing|React/Labs/Side Panel/Cypress', 'First Focusable');
+        h.stories.load('Testing|React/Preview/Side Panel/Cypress', 'First Focusable');
         cy.findByLabelText('Avatar').focus();
       });
 

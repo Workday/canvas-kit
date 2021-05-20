@@ -43,7 +43,7 @@ describe('Select', () => {
   ['Default', 'Alert', 'Error'].forEach(story => {
     context(`given the "${story}" story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Labs/Select/React/Top Label', story);
+        h.stories.load('Preview/Select/React/Top Label', story);
       });
 
       it('should not have any axe errors', () => {
@@ -68,19 +68,19 @@ describe('Select', () => {
         context('the menu', () => {
           it('should be visible', () => {
             cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
+              .pipe(h.selectPreview.getMenu)
               .should('be.visible');
           });
 
           it('should have focus', () => {
             cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
+              .pipe(h.selectPreview.getMenu)
               .should('be.focused');
           });
 
           it('should have an aria-activedescendant attribute with the same value as the id of the first option ("E-mail")', () => {
             cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
+              .pipe(h.selectPreview.getMenu)
               .should($menu => {
                 const menuAD = $menu.attr('aria-activedescendant');
                 const optionId = $menu.find(`[role=option]:eq(0)`).attr('id');
@@ -91,7 +91,7 @@ describe('Select', () => {
 
           it('should set assistive focus to the first option ("E-mail")', () => {
             cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
+              .pipe(h.selectPreview.getMenu)
               .pipe(getAssistiveFocus)
               .should('have.text', 'E-mail');
           });
@@ -100,7 +100,7 @@ describe('Select', () => {
         context('the first option ("Mail")', () => {
           it('should have an aria-selected attribute set to "true"', () => {
             cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getOption(0))
+              .pipe(h.selectPreview.getOption(0))
               .should('have.attr', 'aria-selected', 'true');
           });
         });
@@ -108,7 +108,7 @@ describe('Select', () => {
         context(`when the "Phone" option (with the value "phone") is clicked`, () => {
           beforeEach(() => {
             cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getOption('Phone'))
+              .pipe(h.selectPreview.getOption('Phone'))
               .click();
           });
 
@@ -129,7 +129,7 @@ describe('Select', () => {
           context('the menu', () => {
             it('should not be visible', () => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .should('not.be.visible');
             });
           });
@@ -142,7 +142,7 @@ describe('Select', () => {
             context('the menu', () => {
               it('should set assistive focus to the "Phone" option', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'Phone');
               });
@@ -151,7 +151,7 @@ describe('Select', () => {
             context('the "Phone" option', () => {
               it('should have an aria-selected attribute set to "true"', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getOption('Phone'))
+                  .pipe(h.selectPreview.getOption('Phone'))
                   .should('have.attr', 'aria-selected', 'true');
               });
             });
@@ -178,13 +178,13 @@ describe('Select', () => {
           context('the menu', () => {
             it('should be visible', () => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .should('be.visible');
             });
 
             it('should have focus', () => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .should('be.focused');
             });
           });
@@ -197,7 +197,7 @@ describe('Select', () => {
             context('the menu', () => {
               it('should set assistive focus to the "Phone" option', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'Phone');
               });
@@ -211,7 +211,7 @@ describe('Select', () => {
               context('the menu', () => {
                 it('should set assistive focus to the "Mail" option', () => {
                   cy.findByLabelText('Label')
-                    .pipe(h.selectLabs.getMenu)
+                    .pipe(h.selectPreview.getMenu)
                     .pipe(getAssistiveFocus)
                     .should('have.text', 'Mail');
                 });
@@ -220,7 +220,7 @@ describe('Select', () => {
               context('when the enter key is pressed', () => {
                 beforeEach(() => {
                   cy.findByLabelText('Label')
-                    .pipe(h.selectLabs.getMenu)
+                    .pipe(h.selectPreview.getMenu)
                     .type('{enter}');
                 });
 
@@ -241,7 +241,7 @@ describe('Select', () => {
                 context('the menu', () => {
                   it('should not be visible', () => {
                     cy.findByLabelText('Label')
-                      .pipe(h.selectLabs.getMenu)
+                      .pipe(h.selectPreview.getMenu)
                       .should('not.be.visible');
                   });
                 });
@@ -254,7 +254,7 @@ describe('Select', () => {
                   context('the menu', () => {
                     it('should set assistive focus to the "Mail" option', () => {
                       cy.findByLabelText('Label')
-                        .pipe(h.selectLabs.getMenu)
+                        .pipe(h.selectPreview.getMenu)
                         .pipe(getAssistiveFocus)
                         .should('have.text', 'Mail');
                     });
@@ -263,7 +263,7 @@ describe('Select', () => {
                   context('the "Mail" option', () => {
                     it('should have an aria-selected attribute set to "true"', () => {
                       cy.findByLabelText('Label')
-                        .pipe(h.selectLabs.getOption('Mail'))
+                        .pipe(h.selectPreview.getOption('Mail'))
                         .should('have.attr', 'aria-selected', 'true');
                     });
                   });
@@ -274,14 +274,14 @@ describe('Select', () => {
             context('when the up arrow key is pressed', () => {
               beforeEach(() => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .type('{uparrow}');
               });
 
               context('the menu', () => {
                 it('should set assistive focus to the "E-mail" option', () => {
                   cy.findByLabelText('Label')
-                    .pipe(h.selectLabs.getMenu)
+                    .pipe(h.selectPreview.getMenu)
                     .pipe(getAssistiveFocus)
                     .should('have.text', 'E-mail');
                 });
@@ -317,7 +317,7 @@ describe('Select', () => {
 
       context('when the "select" helper is used to select "Mail"', () => {
         beforeEach(() => {
-          cy.findByLabelText('Label').pipe(h.selectLabs.select('Mail'));
+          cy.findByLabelText('Label').pipe(h.selectPreview.select('Mail'));
         });
 
         it('should have a value of "mail"', () => {
@@ -327,7 +327,7 @@ describe('Select', () => {
 
       context('when the "select" helper is used to select /^Mail$/', () => {
         beforeEach(() => {
-          cy.findByLabelText('Label').pipe(h.selectLabs.select(/^Mail$/));
+          cy.findByLabelText('Label').pipe(h.selectPreview.select(/^Mail$/));
         });
 
         it('should have a value of "mail"', () => {
@@ -339,7 +339,7 @@ describe('Select', () => {
 
   context(`given the "Default" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs/Select/React/Top Label', 'Default');
+      h.stories.load('Preview/Select/React/Top Label', 'Default');
     });
 
     context('when the menu is opened', () => {
@@ -352,7 +352,7 @@ describe('Select', () => {
       context('the menu', () => {
         it('should set assistive focus to the first option ("E-mail")', () => {
           cy.findByLabelText('Label')
-            .pipe(h.selectLabs.getMenu)
+            .pipe(h.selectPreview.getMenu)
             .pipe(getAssistiveFocus)
             .should('have.text', 'E-mail');
         });
@@ -366,7 +366,7 @@ describe('Select', () => {
         context('the menu', () => {
           it('should set assistive focus to the second option ("Phone")', () => {
             cy.findByLabelText('Label')
-              .pipe(h.selectLabs.getMenu)
+              .pipe(h.selectPreview.getMenu)
               .pipe(getAssistiveFocus)
               .should('have.text', 'Phone');
           });
@@ -385,7 +385,7 @@ describe('Select', () => {
                 // don't interrupt the menu's closing animation and cause it to
                 // re-open while it's in the middle of closing)
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .should('not.exist');
                 cy.findByLabelText('Label')
                   .focus()
@@ -395,7 +395,7 @@ describe('Select', () => {
               context('the menu', () => {
                 it('should have reset assistive focus to the first option ("E-mail")', () => {
                   cy.findByLabelText('Label')
-                    .pipe(h.selectLabs.getMenu)
+                    .pipe(h.selectPreview.getMenu)
                     .pipe(getAssistiveFocus)
                     .should('have.text', 'E-mail');
                 });
@@ -413,7 +413,7 @@ describe('Select', () => {
                   // and open the menu. It's important that we use getMenu rather
                   // than cy.focused() to ensure we obtain a reference to the menu.
                   cy.findByLabelText('Label')
-                    .pipe(h.selectLabs.getMenu)
+                    .pipe(h.selectPreview.getMenu)
                     .pipe(getAssistiveFocus)
                     .should('have.text', 'Phone');
                 });
@@ -427,7 +427,7 @@ describe('Select', () => {
 
   context(`given the "Disabled" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs/Select/React/Top Label', 'Disabled');
+      h.stories.load('Preview/Select/React/Top Label', 'Disabled');
     });
 
     it('should not have any axe errors', () => {
@@ -443,7 +443,7 @@ describe('Select', () => {
 
   context('given the "Disabled Options Test" story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Labs/Select/Cypress', 'Disabled Options Test');
+      h.stories.load('Testing/React/Preview/Select/Cypress', 'Disabled Options Test');
     });
 
     context('when the menu is opened', () => {
@@ -456,7 +456,7 @@ describe('Select', () => {
       context('the "Carrier Pigeon" option', () => {
         it('should have an aria-disabled attribute set to "true"', () => {
           cy.findByLabelText('Label (Disabled Options)')
-            .pipe(h.selectLabs.getOption('Carrier Pigeon'))
+            .pipe(h.selectPreview.getOption('Carrier Pigeon'))
             .should('have.attr', 'aria-disabled', 'true');
         });
       });
@@ -469,7 +469,7 @@ describe('Select', () => {
         context('the menu', () => {
           it('should set assistive focus to first enabled option ("E-mail")', () => {
             cy.findByLabelText('Label (Disabled Options)')
-              .pipe(h.selectLabs.getMenu)
+              .pipe(h.selectPreview.getMenu)
               .pipe(getAssistiveFocus)
               .should('have.text', 'E-mail');
           });
@@ -483,7 +483,7 @@ describe('Select', () => {
           context('the menu', () => {
             it('should retain assistive focus on the "E-mail" option since the previous option ("Carrier Pigeon", which also happens to be the first option) is disabled', () => {
               cy.findByLabelText('Label (Disabled Options)')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .pipe(getAssistiveFocus)
                 .should('have.text', 'E-mail');
             });
@@ -498,7 +498,7 @@ describe('Select', () => {
           context('the menu', () => {
             it('should set assistive focus to the third option down ("Mail") since focus will have skipped one disabled option ("Fax")', () => {
               cy.findByLabelText('Label (Disabled Options)')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .pipe(getAssistiveFocus)
                 .should('have.text', 'Mail');
             });
@@ -512,7 +512,7 @@ describe('Select', () => {
             context('the menu', () => {
               it('should set assistive focus to the first option down ("Mobile Phone") since the second option down ("Telegram", which also happens to be the last option) is disabled', () => {
                 cy.findByLabelText('Label (Disabled Options)')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'Mobile Phone');
               });
@@ -529,7 +529,7 @@ describe('Select', () => {
         context('the menu', () => {
           it('should set assistive focus to the first enabled option ("E-mail")', () => {
             cy.findByLabelText('Label (Disabled Options)')
-              .pipe(h.selectLabs.getMenu)
+              .pipe(h.selectPreview.getMenu)
               .pipe(getAssistiveFocus)
               .should('have.text', 'E-mail');
           });
@@ -544,7 +544,7 @@ describe('Select', () => {
         context('the menu', () => {
           it('should set assistive focus to the last enabled option ("Mobile Phone")', () => {
             cy.findByLabelText('Label (Disabled Options)')
-              .pipe(h.selectLabs.getMenu)
+              .pipe(h.selectPreview.getMenu)
               .pipe(getAssistiveFocus)
               .should('have.text', 'Mobile Phone');
           });
@@ -555,7 +555,7 @@ describe('Select', () => {
 
   context(`given the "Scrollable" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Labs/Select/React/Top Label', 'Scrollable');
+      h.stories.load('Preview/Select/React/Top Label', 'Scrollable');
     });
 
     context('when the select button is focused', () => {
@@ -663,7 +663,7 @@ describe('Select', () => {
       //   context('the menu', () => {
       //     it('should not be visible', () => {
       //       cy.findByLabelText('Label')
-      //         .pipe(h.selectLabs.getMenu)
+      //         .pipe(h.selectPreview.getMenu)
       //         .should('not.be.visible');
       //     });
       //   });
@@ -681,21 +681,21 @@ describe('Select', () => {
           context('when "s" is typed', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .type('s');
             });
 
             context('the menu', () => {
               it('should set assistive focus to the first option beginning with "s" ("San Francisco (United States)")', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'San Francisco (United States)');
               });
 
               it('should scroll so that the "San Francisco (United States)" option is fully visible', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should(assertOptionInView);
               });
@@ -705,21 +705,21 @@ describe('Select', () => {
           context('when "s{500ms delay}s" is typed', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .type('ss', {delay: 500});
             });
 
             context('the menu', () => {
               it('should set assistive focus to the second option beginning with "s" ("San Mateo (United States)")', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'San Mateo (United States)');
               });
 
               it('should scroll so that the "San Mateo (United States)" option is fully visible', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should(assertOptionInView);
               });
@@ -729,21 +729,21 @@ describe('Select', () => {
           context('when "s{500ms delay}d" is typed', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .type('sd', {delay: 500});
             });
 
             context('the menu', () => {
               it('should set assistive focus to the first option beginning with "d" ("Dallas (United States)")', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'Dallas (United States)');
               });
 
               it('should scroll so that the "Dallas (United States)" option is fully visible', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should(assertOptionInView);
               });
@@ -753,14 +753,14 @@ describe('Select', () => {
           context('when "the onto" is typed', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .type('the onto');
             });
 
             context('the menu', () => {
               it('should set assistive focus to "The Ontologically..."', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should(
                     'have.text',
@@ -770,7 +770,7 @@ describe('Select', () => {
 
               it('should scroll so that the "The Ontologically..." (text wrapped) option is fully visible', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should(assertOptionInView);
               });
@@ -785,14 +785,14 @@ describe('Select', () => {
           context('when "sa" is typed', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .type('sa');
             });
 
             context('the menu', () => {
               it('should set assistive focus to the "San Francisco (United States)" option', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'San Francisco (United States)');
               });
@@ -802,14 +802,14 @@ describe('Select', () => {
           context('when "san " is typed', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .type('san ');
             });
 
             context('the menu', () => {
               it('should set assistive focus to the "San Francisco (United States)" option', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'San Francisco (United States)');
               });
@@ -819,14 +819,14 @@ describe('Select', () => {
           context('when "san m" is typed', () => {
             beforeEach(() => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .type('san m');
             });
 
             context('the menu', () => {
               it('should set assistive focus to the "San Mateo (United States)" option', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should('have.text', 'San Mateo (United States)');
               });
@@ -850,7 +850,7 @@ describe('Select', () => {
           context('the menu', () => {
             it('should scroll so that the "Dallas (United States)" option is centered in view', () => {
               cy.findByLabelText('Label')
-                .pipe(h.selectLabs.getMenu)
+                .pipe(h.selectPreview.getMenu)
                 .pipe(getAssistiveFocus)
                 .should(assertOptionCenteredInView);
             });
@@ -870,7 +870,7 @@ describe('Select', () => {
             context('the menu', () => {
               it('should scroll so that the "The Ontologically..." option is centered in view', () => {
                 cy.findByLabelText('Label')
-                  .pipe(h.selectLabs.getMenu)
+                  .pipe(h.selectPreview.getMenu)
                   .pipe(getAssistiveFocus)
                   .should(assertOptionCenteredInView);
               });
@@ -883,7 +883,7 @@ describe('Select', () => {
 
   context(`given the "Portal Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Labs/Select/Cypress', 'Portal Test');
+      h.stories.load('Testing/React/Preview/Select/Cypress', 'Portal Test');
     });
 
     context('when the page is scrolled to the bottom', () => {
@@ -930,7 +930,7 @@ describe('Select', () => {
 
   context(`given the "Accessibility Test" story is rendered`, () => {
     beforeEach(() => {
-      h.stories.load('Testing/React/Labs/Select/Cypress', 'Accessibility Test');
+      h.stories.load('Testing/React/Preview/Select/Cypress', 'Accessibility Test');
     });
 
     context('when the select button with aria-required set to true is clicked', () => {
@@ -941,7 +941,7 @@ describe('Select', () => {
       context('the menu', () => {
         it('should have an aria-required attribute set to "true"', () => {
           cy.findByLabelText(/Label \(aria-required\)/)
-            .pipe(h.selectLabs.getMenu)
+            .pipe(h.selectPreview.getMenu)
             .should('have.attr', 'aria-required', 'true');
         });
       });
@@ -955,7 +955,7 @@ describe('Select', () => {
       context('the menu', () => {
         it('should have an aria-required attribute set to "true"', () => {
           cy.findByLabelText(/Label \(required\)/)
-            .pipe(h.selectLabs.getMenu)
+            .pipe(h.selectPreview.getMenu)
             .should('have.attr', 'aria-required', 'true');
         });
       });
