@@ -6,6 +6,8 @@ const id = 'color-preview';
 const value = 'eee';
 
 describe('ColorPreview', () => {
+  verifyComponent(ColorPreview, {});
+
   describe('when rendered', () => {
     describe('with a value', () => {
       test('should render ColorPreview with value', () => {
@@ -53,14 +55,6 @@ describe('ColorPreview', () => {
       });
     });
 
-    describe('with a ref', () => {
-      test('should set the ref to the input element', async () => {
-        const ref: React.RefObject<HTMLInputElement> = React.createRef();
-        const {findByRole} = render(<ColorPreview value={value} ref={ref} />);
-        expect(await findByRole('textbox')).toEqual(ref.current);
-      });
-    });
-
     describe('with a value that has a hash', () => {
       test('the value is stripped', () => {
         const {getByTestId} = render(<ColorPreview value={'#eee'} data-testid={id} />);
@@ -72,16 +66,6 @@ describe('ColorPreview', () => {
       test('the value is stripped', () => {
         const {getByTestId} = render(<ColorPreview value={'123456789'} data-testid={id} />);
         expect(getByTestId(id)).toHaveValue('123456');
-      });
-    });
-
-    describe('with extra, arbitrary props', () => {
-      test('should spread extra props', () => {
-        const attr = 'test';
-        const {getByTestId} = render(
-          <ColorPreview value={value} data-propspread={attr} data-testid={id} />
-        );
-        expect(getByTestId(id)).toHaveAttribute('data-propspread', attr);
       });
     });
   });

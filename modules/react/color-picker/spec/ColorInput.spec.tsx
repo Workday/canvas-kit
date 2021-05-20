@@ -12,6 +12,8 @@ describe('ColorInput', () => {
     cb.mockReset();
   });
 
+  verifyComponent(ColorInput, {});
+
   describe('when rendered', () => {
     describe('with a placeholder', () => {
       test('should render a ColorInput with a placeholder', () => {
@@ -50,22 +52,6 @@ describe('ColorInput', () => {
       test('should render a disabled ColorInput', () => {
         const {getByRole} = render(<ColorInput disabled={true} />);
         expect(getByRole('textbox')).toBeDisabled();
-      });
-    });
-
-    describe('with extra, arbitrary props', () => {
-      test('should spread extra props', () => {
-        const attr = 'test';
-        const {getByRole} = render(<ColorInput data-propspread={attr} />);
-        expect(getByRole('textbox')).toHaveAttribute('data-propspread', attr);
-      });
-    });
-
-    describe('with a ref', () => {
-      test('should set the ref to the input element', async () => {
-        const ref: React.RefObject<HTMLInputElement> = React.createRef();
-        const {findByRole} = render(<ColorInput ref={ref} />);
-        expect(await findByRole('textbox')).toEqual(ref.current);
       });
     });
 
