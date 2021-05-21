@@ -17,6 +17,7 @@ about the update.
 - [Breaking Component Changes](#breaking-component-changes)
   - [Button](#button)
   - [Card](#card)
+  - [InputProvider](#inputprovider)
   - [Tabs](#tabs)
 
 ## General Changes
@@ -330,6 +331,15 @@ import {Card} from './Card' // where `Card` is a re-exported Canvas `Card`
 ```
 
 This codemod should handle most of what we've seen in code that uses Canvas Kit cards already.
+
+### InputProvider
+
+The `InputProvider` wrapper component (used to provide css-referencable data attributes for the
+users current input method) has been moved. After renaming our `core` package to `tokens`, it no
+longer made sense in this location.
+
+- 🤖 `InputProvider` moved from `@workday/canvas-kit-react-core` to
+  `@workday/canvas-kit-react/common`.
 
 ### Tabs
 
