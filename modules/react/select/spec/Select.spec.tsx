@@ -12,6 +12,8 @@ describe('Select', () => {
     cb.mockReset();
   });
 
+  verifyComponent(Select, {});
+
   describe('when rendered with a single child', () => {
     it('should not throw an error', () => {
       const {getAllByRole} = render(
@@ -58,19 +60,6 @@ describe('Select', () => {
         </Select>
       );
       expect(getByDisplayValue(selectedValue)).toBeDefined();
-    });
-  });
-
-  describe('when rendered with extra, arbitrary props', () => {
-    it('should spread extra props onto the select', () => {
-      const attr = 'test';
-      const {getByRole} = render(
-        <Select data-propspread={attr} onChange={cb}>
-          <SelectOption value="email" label="E-mail" />
-          <SelectOption value="phone" label="Phone" />
-        </Select>
-      );
-      expect(getByRole(role)).toHaveAttribute('data-propspread', attr);
     });
   });
 
