@@ -262,7 +262,6 @@ describe('Modal', () => {
 
           context(`when clicking outside the modal`, () => {
             beforeEach(() => {
-              // cy.findByRole('dialog', {name: 'Delete Item'}).click();
               cy.get('body').click('top');
             });
 
