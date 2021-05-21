@@ -217,7 +217,17 @@ const ModalContent = ({
   // special handling for clicking on the overlay
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
     // Detect clicks only on the centering wrapper element
-    if (event.target === centeringRef.current && PopupStack.isTopmost(stackRef.current!)) {
+    if (!stackRef.current) {
+      return;
+    }
+    const elements = PopupStack.getElements()
+      .sort((a, b) => Number(a.style.zIndex) - Number(b.style.zIndex))
+      .filter(e => e.getAttribute('data-behavior-click-outside-close') === 'topmost');
+    if (
+      elements.length &&
+      elements[elements.length - 1] === stackRef.current &&
+      event.target === centeringRef.current
+    ) {
       onClose();
     }
   };

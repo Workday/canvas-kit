@@ -113,8 +113,7 @@ describe('Popup', () => {
           cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
         });
 
-        // TODO Skip for now until we have a systematic approach to fix this issue
-        it.skip('should close Popup 1', () => {
+        it('should close Popup 1', () => {
           cy.findByRole('dialog', {name: 'Popup 1'}).should('not.exist');
         });
 
