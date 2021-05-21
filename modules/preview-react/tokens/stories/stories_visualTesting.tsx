@@ -8,7 +8,7 @@ export default withSnapshotsEnabled({
   title: 'Testing/React/Preview/Tokens',
 });
 
-export const TypeAndSpace = () => {
+export const Type = () => {
   const inverseStyle = {
     display: 'inline-block',
     background: '#667380',
