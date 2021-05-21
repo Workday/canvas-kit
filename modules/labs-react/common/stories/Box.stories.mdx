@@ -130,8 +130,8 @@ if you accidentally put an `href` on a `button`, TypeScript will warn you.
 
 While `Box` supports `as`, `ref`, and all semantic element props, style props are at its heart.
 Style props are special design-system-aware props that allow you to use Canvas design tokens
-efficiently as you build components. Style props are better understood by their categories, which
-are listed below. Each category has a more detailed explanation in the following subsections.
+efficiently as you build components. Style props are more easily digestible within their categories,
+which are listed and explained in more detail below.
 
 ### Categories
 
@@ -157,7 +157,7 @@ are listed below. Each category has a more detailed explanation in the following
 
 Border style props allow you to adjust the border styles of components. Some props, such as
 `borderRadius` and `borderColor`, are connected to our design tokens. This makes it really simple to
-use Canvas values as you build UI. There are five types of border props:
+use Canvas values as you build UI. There are six types of border props: `BorderLogicalStyleProps`,
 `BorderShorthandStyleProps`, `BorderColorStyleProps`, `BorderRadiusStyleProps`,
 `BorderLineStyleProps`, and `BoxBorderWidthStyleProps`.
 
@@ -169,7 +169,7 @@ They support bidirectionality (LTR and RTL) and will automatically flip the valu
 direction is detected. For example: `borderInlineStart="1px solid #000"` would set
 `border-left: 1px solid #000;` for LTR and switch to `border-right: 1px solid #000;` for RTL. You'll
 want to opt for these properties over standard border props, such as `borderLeft` and `borderRight`
-when you need bidrectional styles.
+when you need bidirectional styles.
 
 Here's a quick reference for how these props map to LTR and RTL styles:
 
@@ -184,9 +184,11 @@ And below is a props table for the logical props:
 
 <ArgsTable of={BoxBorderLogical} />
 
+---
+
 #### Border Shorthand Props
 
-These props map to CSS border shorthand properties:
+These props map to border shorthand properties:
 
 <ArgsTable of={BoxBorderShorthand} />
 
@@ -202,7 +204,7 @@ These props map to border color properties:
 
 #### Border Radius Props
 
-These props map to border radius properies:
+These props map to border radius properties:
 
 <ArgsTable of={BoxBorderRadius} />
 
@@ -299,7 +301,7 @@ Position logical props are based on
 They support bidirectionality (LTR and RTL) and will automatically flip the value when a change in
 direction is detected. For example: `insetInlineStart="2px"` would set `left: 2px;` for LTR and
 switch to `right: 2px;` for RTL. You'll want to opt for these properties over standard position
-props, such as `left` and `right` when you need bidrectional styles.
+props, such as `left` and `right` when you need bidirectional styles.
 
 Here's a quick reference for how these props map to LTR and RTL styles:
 
@@ -340,7 +342,7 @@ Space logical props are based on
 They support bidirectionality (LTR and RTL) and will automatically flip the value when a change in
 direction is detected. For example: `marginInlineStart="16px"` would set `margin-left: 16px;` for
 LTR and switch to `margin-right: 16px;` for RTL. You'll want to opt for these properties over
-standard space props, such as `marginLeft` and `marginRight` when you need bidrectional styles.
+standard space props, such as `marginLeft` and `marginRight` when you need bidirectional styles.
 
 Here's a quick reference for how these props map to LTR and RTL styles:
 
