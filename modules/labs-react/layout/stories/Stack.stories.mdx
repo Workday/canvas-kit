@@ -19,16 +19,38 @@ This component is work in progress and currently in pre-release.
 
 `Stack`, `HStack`, and `VStack` are higher-level layout components that provide an ergonomic API for
 building one-dimensional layouts with consistent spacing between elements. They're built on top of
-`Flex` and have access to all `FlexStyleProps` and `BoxProps`. `Stack` can align items in either a
+`Flex` and have access to all `FlexProps` and `BoxProps`. `Stack` can align items in either a
 horizontal or vertical orientation. `HStack` and `VStack` will only align items in a horizontal or
 vertical orientation, respectively.
+
+## Table of Contents
+- [Stack, HStack, and VStack](#stack-hstack-and-vstack)
+  - [Table of Contents](#table-of-contents)
+  - [Stack](#stack)
+    - [Usage](#usage)
+    - [What Stack Is & Isn't](#what-stack-is--isnt)
+    - [Setting Direction](#setting-direction)
+    - [Setting Space](#setting-space)
+    - [Managing Child Elements](#managing-child-elements)
+      - [Basic Usage](#basic-usage)
+      - [Using `shouldWrapChildren`](#using-shouldwrapchildren)
+      - [Using `Stack.Item`](#using-stackitem)
+    - [Valid Children](#valid-children)
+    - [Examples](#examples)
+  - [HStack](#hstack)
+    - [Usage](#usage-1)
+    - [Example](#example)
+  - [VStack](#vstack)
+    - [Usage](#usage-2)
+    - [Example](#example-1)
+  - [Exhaustive Prop List](#exhaustive-prop-list)
 
 ## Stack
 
 `Stack` is a helpful component for creating layouts with equal spacing between elements. It can
 create horizontal or vertical stacks of elements.
 
-### Up & Running
+### Usage
 
 ```tsx
 import {Stack, StackStyleProps} from '@workday/canvas-kit-labs-react/layout';
@@ -120,7 +142,7 @@ You can also use `Stack` to manage smaller layouts, such as within Cards.
 `HStack` works identically to `Stack` but is limited to only `row` and `row-reverse` directions. It
 defaults to `row` if no `flexDirection` is provided.
 
-### Up & Running
+### Usage
 
 ```tsx
 import {HStack, HStackStyleProps} from '@workday/canvas-kit-labs-react/layout';
@@ -137,7 +159,7 @@ In this example, `HStack` is placing three cards in a row with small spacing bet
 `VStack` works identically to `Stack` but is limited to only `column` and `column-reverse`
 directions. It defaults to `column` if no `flexDirection` is provided.
 
-### Up & Running
+### Usage
 
 ```tsx
 import {VStack, VStackStyleProps} from '@workday/canvas-kit-labs-react/layout';
