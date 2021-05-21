@@ -15,8 +15,8 @@ yarn add @workday/canvas-kit-react
 #### Simple Example
 
 **Note:** While a base select component is provided in this package, it is **not accessible** when
-used as is. It should be used in tandem with [`FormField`](../../form-field/react) to be
-made fully accessible (see below).
+used as is. It should be used in tandem with [`FormField`](../../form-field/react) to be made fully
+accessible (see below).
 
 ```tsx
 import * as React from 'react';
@@ -59,8 +59,6 @@ import FormField from '@workday/canvas-kit-react/form-field';
 
 ### Required
 
-None
-
 #### `children: React.ReactElement<SelectOption >[]`
 
 A select component must have children of type `SelectOption`:
@@ -74,7 +72,7 @@ A select component must have children of type `SelectOption`:
 </Select>
 ```
 
----
+### Optional
 
 #### `name: string`
 
@@ -85,6 +83,15 @@ A select component must have children of type `SelectOption`:
 #### `onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void`
 
 > A callback that gets called everytime the select state changes.
+
+---
+
+#### `ref: React.Ref<HTMLSelectElement>`
+
+> A ref to be forwarded to the underlying `<select>` element. Use this to imperatively modify the
+> select element.
+
+Default: `undefined`
 
 ---
 
@@ -104,8 +111,6 @@ A select component must have children of type `SelectOption`:
 | Alert | Yellow outline with alert icon. |
 
 Default: `undefined`
-
-### Optional
 
 #### `disabled: boolean`
 

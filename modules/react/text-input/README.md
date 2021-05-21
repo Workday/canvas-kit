@@ -101,14 +101,6 @@ Default: `undefined`
 
 ---
 
-#### `inputRef: React.Ref<HTMLInputElement>`
-
-> The ref callback for the inner input element.
-
-Default: `undefined`
-
----
-
 #### `onChange: (e: React.ChangeEvent<HTMLInputElement>) => void`
 
 > The callback fired when the value is changed.
@@ -130,6 +122,15 @@ Default: `''`
 > If true, user will be unable to interact with the field.
 
 Default: `false`
+
+---
+
+#### `ref: React.Ref<HTMLInputElement>`
+
+> A ref to be forwarded to the underlying `<input type="text" />` element. Use this to imperatively
+> modify the input element.
+
+Default: `undefined`
 
 ---
 

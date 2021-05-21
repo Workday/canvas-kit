@@ -202,6 +202,15 @@ function Example() {
 
 ---
 
+#### `ref: React.Ref<HTMLButtonElement>`
+
+> A ref to be forwarded to the underlying `<button>` element (the collapsed form of the Select
+> component is rendered as a `<button>`). Use this to imperatively modify the button element.
+
+Default: `undefined`
+
+---
+
 #### `renderOption: (option: RenderableOption) => React.ReactNode`
 
 > The function called to render the content of each option.
