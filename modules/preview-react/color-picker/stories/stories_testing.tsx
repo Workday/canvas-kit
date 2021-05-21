@@ -8,7 +8,7 @@ import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/stor
 import ColorPicker from '../lib/ColorPicker';
 
 export default {
-  title: 'Preview/Color Picker/React',
+  title: 'Testing/React/Preview/Color Picker',
   component: ColorPicker,
 };
 
