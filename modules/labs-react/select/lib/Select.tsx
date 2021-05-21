@@ -573,11 +573,11 @@ class SelectContainer extends React.Component<SelectContainerProps, SelectContai
 
 export const Select = createComponent('button')({
   displayName: 'Select',
-  Component: (props: SelectProps, ref, Element) => {
+  Component: (props: SelectProps, ref, Element) => (
     // Select is still a class component, so we render a renamed version of it
     // (SelectContainer) and pass it ref and Element
-    return <SelectContainer as={Element} buttonRef={ref} {...props} />;
-  },
+    <SelectContainer as={Element} buttonRef={ref} {...props} />
+  ),
   subComponents: {
     ErrorType,
   },

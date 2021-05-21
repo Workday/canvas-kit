@@ -24,19 +24,17 @@ const StyledColorPreview = styled(ColorInput)<StyledType>({
 
 export const ColorPreview = createComponent('input')({
   displayName: 'ColorPreview',
-  Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => {
-    return (
-      <StyledColorPreview
-        ref={ref}
-        as={Element}
-        id={id}
-        value={value}
-        readOnly={true}
-        placeholder=""
-        {...elemProps}
-      />
-    );
-  },
+  Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => (
+    <StyledColorPreview
+      ref={ref}
+      as={Element}
+      id={id}
+      value={value}
+      readOnly={true}
+      placeholder=""
+      {...elemProps}
+    />
+  ),
 });
 
 export default ColorPreview;

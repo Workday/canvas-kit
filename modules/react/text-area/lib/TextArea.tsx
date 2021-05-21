@@ -101,9 +101,7 @@ export const TextArea = createComponent('textarea')({
     {resize = TextAreaResizeDirection.Both, grow, ...elemProps}: TextAreaProps,
     ref,
     Element
-  ) => {
-    return <StyledTextArea ref={ref} as={Element} grow={grow} resize={resize} {...elemProps} />;
-  },
+  ) => <StyledTextArea ref={ref} as={Element} grow={grow} resize={resize} {...elemProps} />,
   subComponents: {
     ErrorType,
     ResizeDirection: TextAreaResizeDirection,

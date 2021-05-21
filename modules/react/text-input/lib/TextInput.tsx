@@ -80,18 +80,9 @@ const StyledTextInput = styled('input')<
 
 export const TextInput = createComponent('input')({
   displayName: 'TextInput',
-  Component: ({grow, error, ...elemProps}: TextInputProps, ref, Element) => {
-    return (
-      <StyledTextInput
-        type="text"
-        ref={ref}
-        as={Element}
-        grow={grow}
-        error={error}
-        {...elemProps}
-      />
-    );
-  },
+  Component: ({grow, error, ...elemProps}: TextInputProps, ref, Element) => (
+    <StyledTextInput type="text" ref={ref} as={Element} grow={grow} error={error} {...elemProps} />
+  ),
   subComponents: {
     ErrorType,
   },
