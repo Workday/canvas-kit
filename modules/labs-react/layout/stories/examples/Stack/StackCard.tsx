@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Stack, Flex} from '@workday/canvas-kit-labs-react/layout';
-import {TextButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {type} from '@workday/canvas-kit-labs-react/tokens';
 
 export const StackCard = () => {
@@ -15,7 +15,7 @@ export const StackCard = () => {
             heading, body text, and button elements.
           </span>
           <Flex>
-            <TextButton>Learn more</TextButton>
+            <TertiaryButton>Learn more</TertiaryButton>
           </Flex>
         </Stack>
       </Flex>

@@ -13,36 +13,36 @@ export const Position = () => {
   return (
     <>
       <Box
-        position="absolute"
-        top={`calc(50% - ${position.y}px)`}
-        left={0}
-        zIndex={1}
         backgroundColor="frenchVanilla100"
         border="solid 1px"
+        left={0}
         padding="xs"
+        position="absolute"
+        top={`calc(50% - ${position.y}px)`}
+        zIndex={1}
       >
         Left
       </Box>
       <Box
-        ref={boxRef}
-        position="absolute"
-        top={`calc(50% - ${position.y}px)`}
-        left={`calc(50% - ${position.x}px)`}
-        zIndex={2}
         backgroundColor="frenchVanilla100"
         border="solid 1px"
+        left={`calc(50% - ${position.x}px)`}
         padding="xs"
+        position="absolute"
+        ref={boxRef}
+        top={`calc(50% - ${position.y}px)`}
+        zIndex={2}
       >
         Center
       </Box>
       <Box
-        position="absolute"
-        top={`calc(50% - ${position.y}px)`}
-        right={0}
-        zIndex={3}
         backgroundColor="frenchVanilla100"
         border="solid 1px"
         padding="xs"
+        position="absolute"
+        right={0}
+        top={`calc(50% - ${position.y}px)`}
+        zIndex={3}
       >
         Right
       </Box>

@@ -23,10 +23,10 @@ export const Border = () => (
       Hello, border styles!
     </Box>
     <Box
-      borderWidth="1px"
-      borderStyle="solid"
       borderColor="blackPepper400"
       borderRadius="circle"
+      borderStyle="solid"
+      borderWidth="1px"
       display="inline-block"
       margin={space.xxxs}
       padding={space.xs}

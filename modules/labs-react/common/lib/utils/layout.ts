@@ -1,5 +1,6 @@
 import {
   PropertyDisplay,
+  PropertyListStyle,
   PropertyOverflow,
   PropertyOverflowX,
   PropertyOverflowY,
@@ -12,6 +13,8 @@ export type LayoutStyleProps = {
   display?: PropertyDisplay;
   /** sets `height` property */
   height?: number | string;
+  /** sets `list-style property */
+  listStyle?: PropertyListStyle;
   /** sets `max-height` property */
   maxHeight?: number | string;
   /** sets `max-width` property */
@@ -35,6 +38,7 @@ export type LayoutStyleProps = {
 const layoutProps = {
   display: 'display',
   height: 'height',
+  listStyle: 'listStyle',
   maxHeight: 'maxHeight',
   maxWidth: 'maxWidth',
   minHeight: 'minHeight',

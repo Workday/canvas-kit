@@ -4,12 +4,13 @@ import {Stack, Flex} from '@workday/canvas-kit-labs-react/layout';
 const Cell = (props: {children: React.ReactNode}) => {
   return (
     <Flex
-      flex={1}
-      padding="xs"
-      justifyContent="center"
       backgroundColor="blueberry400"
-      color="frenchVanilla100"
       borderRadius="m"
+      color="frenchVanilla100"
+      flex={1}
+      flexBasis="auto"
+      justifyContent="center"
+      padding="xs"
     >
       {props.children}
     </Flex>
@@ -18,7 +19,7 @@ const Cell = (props: {children: React.ReactNode}) => {
 
 export const NestedStacks = () => {
   return (
-    <Stack spacing="xs" border="solid 1px" flexDirection="column" padding="xs">
+    <Stack spacing="xs" border="solid 2px" flexDirection="column">
       <Stack spacing="xs" flexDirection="row">
         <Cell>1</Cell>
         <Cell>2</Cell>

@@ -4,9 +4,9 @@ import {Box} from '@workday/canvas-kit-labs-react/common';
 export const Layout = () => (
   <Box
     as="blockquote"
+    cite="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version"
     display="block"
     maxWidth={250}
-    cite="https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version"
   >
     <p>
       "My tongue, every atom of my blood, form’d from this soil, this air, <br />

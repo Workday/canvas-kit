@@ -50,6 +50,8 @@ export type PropertyDisplay =
   | 'none'
   | (string & {});
 
+export type PropertyListStyle = Globals | 'inside' | 'none' | 'outside' | (string & {});
+
 export type PropertyOverflow =
   | Globals
   | '-moz-hidden-unscrollable'

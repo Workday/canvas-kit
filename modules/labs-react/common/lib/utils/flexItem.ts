@@ -36,7 +36,7 @@ const flexItemProps = {
  * @example
  * // You'll most likely use `flexItem` with low-level, styled components
  * const FlexItemExample = () => (
- *   <Box flex={1} alignSelf={center}>
+ *   <Box flex={1} flexBasis="auto" alignSelf={center}>
  *     Hello, flex item!
  *   </Box>
  * );

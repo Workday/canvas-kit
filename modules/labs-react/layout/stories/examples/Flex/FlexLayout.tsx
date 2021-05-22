@@ -5,6 +5,7 @@ const Cell = (props: {children: React.ReactNode}) => {
   return (
     <Flex
       flex={1}
+      flexBasis="auto"
       padding="xs"
       marginX="xxxs"
       justifyContent="center"

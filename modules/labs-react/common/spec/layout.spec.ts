@@ -17,6 +17,7 @@ describe('Layout Style Props Function', () => {
     const props = {
       display: 'inline-block',
       height: 100,
+      listStyle: 'none',
       maxHeight: '150vh',
       maxWidth: '4rem',
       minHeight: '100vh',
