@@ -3,7 +3,7 @@ import * as React from 'react';
 import {createComponent, mergeProps, useModelContext} from '@workday/canvas-kit-react/common';
 import {Card} from '@workday/canvas-kit-react/card';
 
-import {PopupModel} from '@workday/canvas-kit-react/popup/lib/usePopupModel';
+import {PopupModel} from './usePopupModel';
 import {PopupModelContext} from './Popup';
 
 export interface PopupHeadingProps {

@@ -192,12 +192,24 @@ export const createComponent = <T extends React.ElementType | undefined = undefi
  *
  * @param fn Function that takes a model and optional ref and returns props
  */
-export const createHook = <M extends Model<any, any>, P1 extends {}, R>(
-  fn: (model: M, ref?: React.Ref<R>) => P1
-) => {
-  return <P2 extends {}>(model: M, elemProps: P2 = {} as P2, ref: React.Ref<R> = null) =>
-    mergeProps(fn(model, ref), elemProps);
+export const createHook = <M extends Model<any, any>, P1 extends {}>(
+  fn: (model: M, ref?: React.Ref<any>) => P1
+): BehaviorHook<M, P1> => {
+  return (model, elemProps, ref) => {
+    const props = mergeProps(fn(model, ref), elemProps || ({} as any));
+    if (!props.hasOwnProperty('ref')) {
+      // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
+      props.ref = ref;
+    }
+    return props;
+  };
 };
+
+export type BehaviorHook<M extends Model<any, any>, O extends {}> = <P extends {}, R>(
+  model: M,
+  elemProps?: P,
+  ref?: React.Ref<R>
+) => O & P & (R extends HTMLOrSVGElement ? {ref: React.Ref<R>} : {});
 
 function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
   if (ref) {
@@ -236,6 +248,7 @@ function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
  */
 export function useForkRef<T>(ref1?: React.Ref<T>, ref2?: React.Ref<T>): (instance: T) => void {
   return (value: T) => {
+    console.log('useForkRef', value);
     setRef(ref1, value);
     setRef(ref2, value);
   };
@@ -317,17 +330,25 @@ export function useModelContext<T>(context: React.Context<T>, model?: T): T {
  *   return <div id="foo" {...props}>{children}</div>
  * })
  */
-export function composeHooks<M, R, P extends {}, O1 extends {}, O2 extends {}>(
-  hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
-  hook2: (model: M, props: P, ref: React.Ref<R>) => O2
-): (model: M, props?: P, ref?: React.Ref<R>) => P & O1 & O2;
-export function composeHooks<M, R, P extends {}, O1 extends {}, O2 extends {}, O3 extends {}>(
+export function composeHooks<M extends Model<any, any>, O1 extends {}, P extends {}, O2 extends {}>(
+  hook1: (model: M, props: P, ref: React.Ref<any>) => O1,
+  hook2: (model: M, props: P, ref: React.Ref<any>) => O2
+): BehaviorHook<M, O1 & O2>;
+
+export function composeHooks<
+  M extends Model<any, any>,
+  R,
+  P extends {},
+  O1 extends {},
+  O2 extends {},
+  O3 extends {}
+>(
   hook1: (model: M, props: P, ref: React.Ref<R>) => O1,
   hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3
-): (model: M, props?: P, ref?: React.Ref<R>) => P & O1 & O2 & O3;
+): BehaviorHook<M, O1 & O2 & O3>;
 export function composeHooks<
-  M,
+  M extends Model<any, any>,
   R,
   P extends {},
   O1 extends {},
@@ -339,9 +360,9 @@ export function composeHooks<
   hook2: (model: M, props: P, ref: React.Ref<R>) => O2,
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3,
   hook4: (model: M, props: P, ref: React.Ref<R>) => O4
-): (model: M, props?: P, ref?: React.Ref<R>) => P & O1 & O2 & O3 & O4;
+): BehaviorHook<M, O1 & O2 & O3 & O4>;
 export function composeHooks<
-  M,
+  M extends Model<any, any>,
   R,
   P extends {},
   O1 extends {},
@@ -355,11 +376,11 @@ export function composeHooks<
   hook3: (model: M, props: P, ref: React.Ref<R>) => O3,
   hook4: (model: M, props: P, ref: React.Ref<R>) => O4,
   hook5: (model: M, props: P, ref: React.Ref<R>) => O5
-): (model: M, props?: P, ref?: React.Ref<R>) => P & O1 & O2 & O3 & O4 & O5;
-export function composeHooks<M, R, P extends {}, O extends {}>(
+): BehaviorHook<M, O1 & O2 & O3 & O4 & O5>;
+export function composeHooks<M extends Model<any, any>, R, P extends {}, O extends {}>(
   ...hooks: ((model: M, props: P, ref: React.Ref<R>) => O)[]
-): (model: M, props?: P, ref?: React.Ref<R>) => O {
-  return (model: M, props: P = {} as any, ref: React.Ref<R> = null) => {
+): BehaviorHook<M, O> {
+  return (model, props, ref) => {
     return hooks.reverse().reduce((props: any, hook) => {
       return hook(model, props, props.ref || ref);
     }, props);

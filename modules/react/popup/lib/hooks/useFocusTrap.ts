@@ -11,8 +11,8 @@ import {PopupModel} from '../usePopupModel';
  * technology users.
  */
 export const useFocusTrap = (model: PopupModel, elemProps = {}) => {
-  const onKeyDown = React.useMemo(
-    () => (event: KeyboardEvent) => {
+  const onKeyDown = React.useCallback(
+    (event: KeyboardEvent) => {
       if (model.state.stackRef.current) {
         tabTrappingKey(event, model.state.stackRef.current);
       }
@@ -22,11 +22,14 @@ export const useFocusTrap = (model: PopupModel, elemProps = {}) => {
 
   // `useLayoutEffect` for automation
   React.useLayoutEffect(() => {
+    if (!model.state.visible) {
+      return;
+    }
     document.addEventListener('keydown', onKeyDown);
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [onKeyDown]);
+  }, [model.state.visible, onKeyDown]);
 
   return elemProps;
 };

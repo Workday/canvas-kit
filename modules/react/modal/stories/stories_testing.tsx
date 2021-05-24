@@ -6,9 +6,9 @@ import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
   Popper,
-  usePopup,
   useCloseOnOutsideClick,
   useCloseOnEscape,
+  usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 
 export default {
@@ -24,23 +24,11 @@ export default {
 export * from './stories_VisualTesting';
 
 export const AccessibilityTest = () => {
-  const [open, setOpen] = React.useState(false);
-  const ref = React.useRef<HTMLButtonElement>(null);
-  const openModal = () => {
-    setOpen(true);
-  };
-  const closeModal = () => {
-    setOpen(false);
-    if (ref.current) {
-      ref.current.focus();
-    }
-  };
+  const {targetProps, modalProps, closeModal} = useModal();
 
   return (
     <>
-      <DeleteButton ref={ref} onClick={openModal}>
-        Delete Item
-      </DeleteButton>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <p>The content below should be hidden from assistive technology while the modal is open.</p>
       <p>
         <a href="#">Link</a>
@@ -84,7 +72,7 @@ export const AccessibilityTest = () => {
       <div>
         <iframe title="iframe test" src="https://workday.com/" width="300" height="300"></iframe>
       </div>
-      <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
+      <Modal data-testid="TestModal" heading="Delete Item" {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
@@ -134,39 +122,41 @@ export const StackedModals = () => {
 
 export const ModalWithPopup = () => {
   const modal = useModal();
-  const popup = usePopup();
+  const popup = usePopupModel();
 
-  useCloseOnOutsideClick(popup.popperProps.ref, popup.closePopup);
-  useCloseOnEscape(popup.popperProps.ref, popup.closePopup);
+  useCloseOnOutsideClick(popup);
+  useCloseOnEscape(popup);
 
   return (
     <>
       <DeleteButton {...modal.targetProps}>Delete Item</DeleteButton>
       <Modal heading={'Delete Item'} {...modal.modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} {...popup.targetProps}>
-          Yes, Delete
-        </DeleteButton>
-        <Button onClick={modal.closeModal} variant="secondary">
-          Cancel
-        </Button>
-        <Popper {...popup.popperProps}>
-          <Popup heading={'Really Delete Item'} handleClose={popup.closePopup}>
-            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-            <DeleteButton
-              style={{marginRight: '16px'}}
-              onClick={() => {
-                modal.closeModal();
-                popup.closePopup();
-              }}
-            >
-              Yes, Really Delete
-            </DeleteButton>
-            <Button onClick={popup.closePopup} variant="secondary">
-              Cancel
-            </Button>
-          </Popup>
-        </Popper>
+        <Popup model={popup}>
+          <Popup.Target as={DeleteButton} style={{marginRight: '16px'}}>
+            Yes, Delete
+          </Popup.Target>
+          <Popup.CloseButton model={modal.modalProps.model}>Cancel</Popup.CloseButton>
+          <Popup.Popper>
+            <Popup.Card>
+              <Popup.CloseIcon aria-label="Close" />
+              <Popup.Heading>Really Delete Item</Popup.Heading>
+              <Popup.Body>
+                <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+                <Popup.CloseButton
+                  as={DeleteButton}
+                  style={{marginRight: '16px'}}
+                  onClick={() => {
+                    modal.closeModal();
+                  }}
+                >
+                  Yes, Really Delete
+                </Popup.CloseButton>
+                <Popup.CloseButton>Cancel</Popup.CloseButton>
+              </Popup.Body>
+            </Popup.Card>
+          </Popup.Popper>
+        </Popup>
       </Modal>
     </>
   );

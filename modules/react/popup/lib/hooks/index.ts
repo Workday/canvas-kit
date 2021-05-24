@@ -6,3 +6,4 @@ export * from './useCloseOnOutsideClick';
 export * from './useFocusTrap';
 export * from './useInitialFocus';
 export * from './useReturnFocus';
+export * from './useDisableBodyScroll';

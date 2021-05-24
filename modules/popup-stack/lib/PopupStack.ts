@@ -218,7 +218,6 @@ export const PopupStack = {
     }
     stack.items.push(item);
     document.body.appendChild(item.element);
-    console.log('owner', item.owner);
 
     setZIndexOfElements(PopupStack.getElements());
   },
@@ -327,7 +326,6 @@ export const PopupStack = {
     const item = find(stack.items, i => i.element === element);
 
     if (item) {
-      console.log('contains', element, item.owner);
       return (
         eventTarget === item.owner ||
         item.owner?.contains(eventTarget) ||

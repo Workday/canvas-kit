@@ -11,11 +11,12 @@ import {mergeCallback} from './mergeCallback';
 export function mergeProps<T extends object, S extends object>(
   targetProps: T,
   sourceProps: S
-): T & S {
-  const returnProps = {...targetProps} as T & S;
+): S & T {
+  const returnProps = {...targetProps} as S & T;
 
   for (const key in sourceProps) {
     if (sourceProps.hasOwnProperty(key)) {
+      console.log('key', key);
       if (key === 'css' && targetProps.hasOwnProperty('css')) {
         // @ts-ignore
         const css = [].concat(targetProps[key], sourceProps[key]);

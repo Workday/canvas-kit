@@ -37,38 +37,6 @@ export const Default = () => {
   );
 };
 
-export const WithoutHook = () => {
-  const [open, setOpen] = React.useState(false);
-  const ref = React.useRef<HTMLButtonElement>(null);
-  const openModal = () => {
-    setOpen(true);
-  };
-  const closeModal = () => {
-    setOpen(false);
-    if (ref.current) {
-      ref.current.focus();
-    }
-  };
-
-  return (
-    <>
-      <DeleteButton ref={ref} onClick={openModal}>
-        Delete Item
-      </DeleteButton>
-
-      <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
-        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
-          Delete
-        </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
-      </Modal>
-    </>
-  );
-};
-
 export const WithRadioButtons = () => {
   const {targetProps, modalProps} = useModal();
   const [value, setValue] = React.useState('');

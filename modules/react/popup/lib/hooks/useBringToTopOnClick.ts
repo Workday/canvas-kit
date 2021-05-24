@@ -1,5 +1,6 @@
 import React from 'react';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
+
 import {PopupModel} from '../usePopupModel';
 
 /**
@@ -9,23 +10,30 @@ import {PopupModel} from '../usePopupModel';
  * another Popup. Usually this is a Tooltip or Select component inside something like a Modal.
  */
 export const useBringToTopOnClick = (model: PopupModel, elemProps = {}) => {
-  let timer: number;
-  const onClick = (event: MouseEvent) => {
-    // requestAnimationFrame is used to control timing of when `bringToTop` is called.
-    // https://github.com/Workday/canvas-kit/pull/670#discussion_r436158184
-    timer = requestAnimationFrame(() => {
-      if (model.state.stackRef.current?.contains(event.target as Node)) {
-        PopupStack.bringToTop(model.state.stackRef.current!);
-      }
-    });
-  };
+  const timer = React.useRef(-1);
+  const onClick = React.useCallback(
+    (event: MouseEvent) => {
+      // requestAnimationFrame is used to control timing of when `bringToTop` is called.
+      // https://github.com/Workday/canvas-kit/pull/670#discussion_r436158184
+      timer.current = requestAnimationFrame(() => {
+        if (model.state.stackRef.current?.contains(event.target as Node)) {
+          PopupStack.bringToTop(model.state.stackRef.current!);
+        }
+      });
+    },
+    [model.state.stackRef]
+  );
+
   React.useLayoutEffect(() => {
+    if (!model.state.visible) {
+      return;
+    }
     document.addEventListener('click', onClick);
     return () => {
-      cancelAnimationFrame(timer);
+      cancelAnimationFrame(timer.current);
       document.removeEventListener('click', onClick);
     };
-  });
+  }, [model.state.visible, onClick]);
 
   return elemProps;
 };

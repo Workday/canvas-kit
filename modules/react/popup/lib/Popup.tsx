@@ -15,7 +15,8 @@ import {
   useDefaultModel,
 } from '@workday/canvas-kit-react/common';
 import {xIcon} from '@workday/canvas-system-icons-web';
-import {PopupModel, usePopupModel, PopupModelConfig} from '@workday/canvas-kit-react/popup/lib/usePopupModel';
+
+import {PopupModel, usePopupModel, PopupModelConfig} from './usePopupModel';
 import {PopupCard} from './PopupCard';
 import {PopupTarget, usePopupTargetButton} from './PopupTarget';
 import {PopupPopper, usePopupPopper} from './PopupPopper';
@@ -212,21 +213,19 @@ const noop = () => {};
 
 // create enough of a model to use `Popup.Card` without a `Popup` container component.
 export const PopupModelContext = React.createContext<PopupModel>({
-  state: {},
+  state: {willReturnFocus: {current: false}},
   events: {show: noop, hide: noop},
 } as any);
 
-export interface PopupProps extends PopupModelConfig {
+export interface PopupProps {
   /**
-   * The contents of the Popup. Can be `Popup` children or any valid elements. Foobar
+   * The contents of the Popup. Can be `Popup` children or any valid elements.
    */
   children: React.ReactNode;
   /**
-   * Optionally pass a model directly to this component. Default is to create a model out of model
-   * config passed to this component.
-   * @default usePopupModel(config)
+   * A PopupModel with optional behavior hooks applied.
    */
-  model?: PopupModel;
+  model: PopupModel;
 }
 
 export const Popup = createComponent('div')({
@@ -284,9 +283,9 @@ export const usePopupOld = <T extends HTMLElement = HTMLElement>() => {
  */
 export const usePopup = (config: PopupModelConfig = {}) => {
   const model = usePopupModel(config);
-  const closeButtonProps = usePopupCloseButton(model);
-  const popperProps = usePopupPopper(model);
-  const targetProps = usePopupTargetButton(model);
+  const closeButtonProps = usePopupCloseButton(model, {}, null);
+  const popperProps = usePopupPopper(model, {}, null);
+  const targetProps = usePopupTargetButton(model, {}, null);
 
   return {
     targetProps,

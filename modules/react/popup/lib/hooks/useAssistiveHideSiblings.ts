@@ -12,6 +12,10 @@ import {PopupModel} from '../usePopupModel';
  */
 export const useAssistiveHideSiblings = (model: PopupModel, elemProps = {}) => {
   React.useEffect(() => {
+    if (!model.state.visible) {
+      return;
+    }
+
     const siblings = [
       ...((model.state.stackRef.current?.parentElement?.children as any) as HTMLElement[]),
     ].filter(el => el !== model.state.stackRef.current);
@@ -30,7 +34,7 @@ export const useAssistiveHideSiblings = (model: PopupModel, elemProps = {}) => {
         }
       });
     };
-  }, [model.state.stackRef]);
+  }, [model.state.stackRef, model.state.visible]);
 
   return elemProps;
 };

@@ -421,7 +421,7 @@ const Combobox = ({
           ? getOptionId(componentId, selectedAutocompleteIndex)
           : undefined,
       onClick: handleClick,
-      onChange: handleSearchInputChange,
+      onChange: handleSearchInputChange,y
       onKeyDown: handleKeyboardShortcuts,
       onFocus: handleFocus,
       onBlur: handleBlur,

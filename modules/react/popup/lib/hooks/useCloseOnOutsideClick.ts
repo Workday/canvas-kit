@@ -10,8 +10,8 @@ import {PopupModel} from '../usePopupModel';
  * `data-behavior-click-outside-close` attribute to track usage of this behavior hook.
  */
 export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
-  const onClick = React.useMemo(
-    () => (event: MouseEvent) => {
+  const onClick = React.useCallback(
+    (event: MouseEvent) => {
       if (!model.state.stackRef.current) {
         return;
       }
@@ -33,13 +33,16 @@ export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
   );
 
   React.useLayoutEffect(() => {
+    if (!model.state.visible) {
+      return;
+    }
     document.addEventListener('mousedown', onClick);
     model.state.stackRef.current?.setAttribute('data-behavior-click-outside-close', 'topmost');
 
     return () => {
       document.removeEventListener('mousedown', onClick);
     };
-  });
+  }, [model.state.stackRef, model.state.visible, onClick]);
 
   return elemProps;
 };

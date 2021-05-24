@@ -6,6 +6,8 @@ import {
   useCloseOnOutsideClick,
   Popup,
   usePopupModel,
+  useInitialFocus,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 
 export const Simple = () => {
@@ -13,6 +15,8 @@ export const Simple = () => {
 
   useCloseOnOutsideClick(model);
   useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
 
   return (
     <Popup model={model}>

@@ -4,14 +4,15 @@ import ReactDOM from 'react-dom';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 import {
-  Popup2 as Popup,
-  Popper,
+  Popup,
   usePopupStack,
   useCloseOnOutsideClick,
   useBringToTopOnClick,
   useCloseOnEscape,
+  usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 import {DeleteButton, Button} from '@workday/canvas-kit-react/button';
+import {useMount} from '@workday/canvas-kit-react/common';
 
 export default {
   title: 'Testing/React/Popups/Popup Stack',
@@ -26,26 +27,28 @@ interface WindowProps {
 }
 
 const Window = ({children, heading, relativeNode, top, left}: WindowProps) => {
-  const ref = React.useRef<HTMLDivElement>(null);
+  const model = usePopupModel();
 
-  usePopupStack(ref);
-  useBringToTopOnClick(ref);
+  usePopupStack(model.state.stackRef);
+  useBringToTopOnClick(model);
 
   // position Window relative to a container
-  React.useEffect(() => {
-    console.log(relativeNode);
+  useMount(() => {
+    const element = model.state.stackRef.current;
     const rect = relativeNode.current.getBoundingClientRect();
-    ref.current.style.position = 'absolute';
-    ref.current.style.top = `${top + rect.top}px`;
-    ref.current.style.left = `${left + rect.left}px`;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    element.style.position = 'absolute';
+    element.style.top = `${top + rect.top}px`;
+    element.style.left = `${left + rect.left}px`;
+  });
 
   return ReactDOM.createPortal(
-    <Popup heading={heading} width={500}>
-      {children}
+    <Popup model={model}>
+      <Popup.Card width={500}>
+        <Popup.Heading>{heading}</Popup.Heading>
+        <Popup.Body>{children}</Popup.Body>
+      </Popup.Card>
     </Popup>,
-    ref.current
+    model.state.stackRef.current
   );
 };
 
@@ -58,30 +61,23 @@ const TempPopup = ({
   deleteText: string;
   children: ({onClose}: {onClose: () => void}) => React.ReactNode;
 }) => {
-  const [open, setOpen] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
+  const model = usePopupModel();
 
-  const onClose = () => setOpen(false);
-  const onButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpen(true);
-    setAnchorEl(event.currentTarget);
-  };
-
-  const stackRef = React.useRef<HTMLDivElement>(null);
-  useCloseOnOutsideClick(stackRef, onClose);
-  useCloseOnEscape(stackRef, onClose);
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
 
   return (
-    <>
-      <DeleteButton style={{marginRight: '16px'}} onClick={onButtonClick}>
+    <Popup model={model}>
+      <Popup.Target as={DeleteButton} style={{marginRight: '16px'}}>
         {deleteText}
-      </DeleteButton>
-      <Popper placement={'bottom'} open={open} anchorElement={anchorEl} ref={stackRef}>
-        <Popup width={400} heading={heading} padding={Popup.Padding.s} handleClose={onClose}>
-          {children({onClose})}
-        </Popup>
-      </Popper>
-    </>
+      </Popup.Target>
+      <Popup.Popper>
+        <Popup.Card width={400} padding={Popup.Padding.s}>
+          <Popup.Heading>{heading}</Popup.Heading>
+          <Popup.Body>{children({onClose: model.events.hide})}</Popup.Body>
+        </Popup.Card>
+      </Popup.Popper>
+    </Popup>
   );
 };
 
@@ -139,80 +135,6 @@ export const MixedPopupTypes = () => {
                 </>
               )}
             </TempPopup>
-          </div>
-        </div>
-      </Window>
-    </div>
-  );
-};
-
-export const MixedPopupTypes2 = () => {
-  const ref = React.useRef<HTMLDivElement>(null);
-
-  const [open, setOpen] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
-
-  const onClose = () => setOpen(false);
-  const onButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpen(true);
-    setAnchorEl(event.currentTarget);
-  };
-
-  const stackRef = React.useRef<HTMLDivElement>(null);
-  useCloseOnEscape(stackRef, onClose);
-
-  return (
-    <div ref={ref} style={{height: 420}}>
-      <Window heading="Window 1" top={50} left={50} relativeNode={ref}>
-        <Tooltip title="Really long tooltip showing how popup stacks overlap">
-          <span tabIndex={0}>Contents of Window 1</span>
-        </Tooltip>
-      </Window>
-      <Window heading="Window 2" top={100} left={250} relativeNode={ref}>
-        <Tooltip title="Really long tooltip showing how popup stacks overlap">
-          <span tabIndex={0}>Contents of Window 2</span>
-        </Tooltip>
-      </Window>
-      <Window heading="Window 4" top={300} left={250} relativeNode={ref}>
-        <div>
-          <Tooltip title="Really long tooltip showing how popup stacks overlap">
-            <span tabIndex={0}>Contents of Window 4</span>
-          </Tooltip>
-        </div>
-      </Window>
-      <Window heading="Window 3" top={200} left={75} relativeNode={ref}>
-        <div>
-          <Tooltip title="Really long tooltip showing how popup stacks overlap">
-            <span tabIndex={0} onClick={() => console.log('clicked')}>
-              Contents of Window 3
-            </span>
-          </Tooltip>
-          <div>
-            <TempPopup heading="Delete Item" deleteText="Delete Item">
-              {({onClose}) => (
-                <>
-                  <div style={{marginBottom: '24px'}}>
-                    Are you sure you'd like to delete the item titled 'My Item'?
-                  </div>
-
-                  <DeleteButton style={{marginRight: '16px'}} onClick={onButtonClick}>
-                    {'Really Delete Item'}
-                  </DeleteButton>
-                  <Button onClick={onClose}>Cancel</Button>
-                </>
-              )}
-            </TempPopup>
-
-            <Popper placement={'bottom'} open={open} anchorElement={anchorEl} ref={stackRef}>
-              <Popup
-                width={400}
-                heading={'Really Delete Button'}
-                padding={Popup.Padding.s}
-                handleClose={onClose}
-              >
-                <Button onClick={onClose}>Cancel</Button>
-              </Popup>
-            </Popper>
           </div>
         </div>
       </Window>

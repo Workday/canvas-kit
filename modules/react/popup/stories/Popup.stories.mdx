@@ -5,8 +5,10 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Simple} from './examples/Simple';
 import {InitialFocus} from './examples/InitialFocus';
+import {OpenWithoutModel} from './examples/OpenWithoutModel';
+import {ManualControl} from './examples/ManualControl';
 import {MultiplePopups} from './examples/MultiplePopups';
-import {Open} from './examples/Open';
+import {NestedPopups} from './examples/NestedPopups';
 import {RTL} from './examples/RTL';
 import {UsePopup} from './examples/UsePopup';
 import {PopupModelConfigComponent, PopupStateComponent, PopupEventsComponent} from './PopupModel';
@@ -23,16 +25,15 @@ capabilities, or traits. Canvas Kit comes with a number of [behaviors](#hooks) i
 Hooks.
 
 You should use the most semantic component for your use-case before using `Popup` directly, like
-`Modal`, which already has the correct behaviors built-in. If no existing popup-style component
-already exists, you can use `Popup` and use our [hooks](#hooks). The `Popup` component comes with a
-`Popup.Popper` component that positions a popup using [PopperJS](https://popper.js.org/) that
-registers a popup with the `PopupStack` automatically and sets the popup model's `placement`
-property. `Popup.Popper` component and hooks work with the stack management system for correct
-rendering and accessibility behavior. If you cannot use `Popup.Popper`, use the
-[usePopupStack](#usepoupstack) hook to properly register and deregister the popup at the correct
-time. If you cannot use our hooks, consider upgrading your component to use Hooks. If you cannot do
-that, you'll have to look up the `PopupStack` package for the direct API and have a look at the
-source code for our hooks into the `PopupStack` API.
+`Modal`, which already has the correct behaviors built-in. If no component already exists, you can
+use `Popup` and use our [hooks](#hooks). The `Popup` component comes with a `Popup.Popper` component
+that positions a popup using [PopperJS](https://popper.js.org/) that registers a popup with the
+`PopupStack` automatically and sets the popup model's `placement` property. `Popup.Popper` component
+and hooks work with the stack management system for correct rendering and accessibility behavior. If
+you cannot use `Popup.Popper`, use the [usePopupStack](#usepoupstack) hook to properly register and
+deregister the popup at the correct time. If you cannot use our hooks, consider upgrading your
+component to use Hooks. If you cannot do that, you'll have to look up the `PopupStack` package for
+the direct API and have a look at the source code for our hooks into the `PopupStack` API.
 
 This package comes with everything you need to build Popup UIs.
 
@@ -52,28 +53,43 @@ already covered by Canvas Kit.
 The Popup has no pre-defined behaviors already registered, therefore the `usePopupModel` must always
 be used to create a new `model`. This `model` is then used by all behavior hooks to apply additional
 popup behaviors to the compound component group. The following example creates a typical popup
-around a target element and adds `useCloseOnOutsideClick` and `useCloseOnEscape` behaviors.
+around a target element and adds `useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitialFocus`,
+and `useReturnFocus` behaviors. You can read through the [hooks](#hooks) section to learn about all
+the popup behaviors. For accessibility, these behaviors should be included most of the time.
 
 <ExampleCodeBlock code={Simple} />
 
-## Open
+### Without a model
 
 This example shows how a `Popup.Card` can be used outside a `Popup` component, but accessibility is
 lost. If you use the Popup this way, you'll have to manually add a `aria-labelledby` to the
 `Popup.Card` component and an `id` to the `Popup.Heading` component.
 
-<ExampleCodeBlock code={Open} />
+> **Note:** This example shows an inaccessible open card for demonstration purposes.
 
-## Initial focus
+<ExampleCodeBlock code={OpenWithoutModel} />
 
-If you want focus to move to a specific element, use `React.useEffect` that depends on the
-PopupModel's `visible` state. Check with accessibility before doing this. The following example sets
-the focus on the "OK" button with an `aria-describedby` pointing to the model's `id` state so screen
-readers properly announce the message of the popup when focus is changed to the button.
+### Manually passing the model
+
+Each `Popup` sub-component optionally takes a `model`. Sometimes you may want to render an open
+Popup because visibility is controlled elsewhere. Behaviors require a model, so you can initialize
+the model visibility set to `true`. This may be required for legacy uses or where the entire `Popup`
+component API is undesired. This example has the same functionality as the [Basic](#basic) example,
+but breaks up control of a Popup in a way that is common to the way Popups are done in v4. This is
+an intermediate way to describe Popups with a more incremental upgrade path from version 4.
+
+<ExampleCodeBlock code={ManualControl} />
+
+### Initial focus
+
+If you want focus to move to a specific element, set the `initialFocusRef` of the model. Check with
+accessibility before doing this. The following example sets the focus on the "OK" button with an
+`aria-describedby` pointing to the model's `id` state so screen readers properly announce the
+message of the popup when focus is changed to the button.
 
 <ExampleCodeBlock code={InitialFocus} />
 
-## Multiple Popups
+### Multiple Popups
 
 If you need multiple Popups within the same component, you can create multiple models and pass a
 unique model to each Popup. Below is an example of 2 different popups within the same component.
@@ -82,17 +98,61 @@ used for nested Popups.
 
 <ExampleCodeBlock code={MultiplePopups} />
 
-## RTL
+### Nested Popups
+
+If you need nested Popups within the same component, you can create multiple models and pass a
+unique model to each Popup. Popup comes with a `Popup.CloseButton` that uses a `Button` and adds
+props via the `usePopupCloseButton` hook to ensure the popups hides and focus is returned. The `as`
+can be used in a powerful way to do this by using `<Popup.CloseButton as={Popup.CloseButton}>` which
+will mix in click handlers from both popups. This is not very intuitive, however. You can create
+props that merge a click handler for both Popups by using `usePopupCloseButton` directly. The second
+parameter is props to be merged which will effectively hide both popups. Focus management is
+preserved.
+
+<ExampleCodeBlock code={NestedPopups} />
+
+### RTL
 
 The Popup component automatically handles right-to-left rendering.
+
+> **Note:** This example shows an inaccessible open card for demonstration purposes.
 
 <ExampleCodeBlock code={RTL} />
 
 ## Components
 
-## Properties
+## Popup
+
+This component is a container component that has no semantic element. It provides a React Context
+model for all Popup sub-components. If you manually pass a `model` to all sub-components, this
+container component isn't needed.
 
 <ArgsTable of={Popup} />
+
+## Popup.Target
+
+A `Popup.Target` is any element that is meant to show the Popup. The default component rendered by
+this component is a `Button` element. You can override this by passing the desired component via
+`as`. Many examples above use `as={DeleteButton}`. If you want to render an `IconButton` instead, do
+`as={IconButton}`. This element merges all props provided by the
+[usePopupTargetButton](#usepopuptargetbutton) hook which would be used in place of this component if
+desired.
+
+```tsx
+const model = usePopupModel();
+
+// using this component
+<Popup.Target>Show Popup</PopupTarget>
+
+// using props instead
+const popupTargetButtonProps = usePopupTargetButton(model);
+<Button {...popupTargetButtonProps}>Show Popup</Button>
+```
+
+## Popup.Popper
+
+A `Popup.Popper` is a [Popper](#popper) component that is hooked up to the `PopupModel`
+automatically.
 
 ## Popup Model
 

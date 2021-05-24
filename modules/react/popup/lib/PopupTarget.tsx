@@ -1,6 +1,15 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext, createHook} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  useModelContext,
+  createHook,
+  useForkRef,
+  composeHooks,
+  composeHooks2,
+  composeHooks3,
+  mergeProps,
+} from '@workday/canvas-kit-react/common';
 import {Button} from '@workday/canvas-kit-react/button';
 
 import {PopupModel} from '@workday/canvas-kit-react/popup';
@@ -15,23 +24,48 @@ export interface PopupTargetProps {
   children?: React.ReactNode;
 }
 
-export const usePopupTargetButton = createHook(({events, state}: PopupModel) => {
+export const usePopupTargetButton = createHook(({events, state}: PopupModel, ref) => {
+  const elementRef = useForkRef(ref, state.targetRef);
   return {
-    ref: state.targetRef,
+    ref: elementRef,
     onClick: events.show,
   };
 });
+
+const useTemp = createHook((model: PopupModel) => {
+  return {
+    foo: 'bar',
+  };
+});
+
+const useTemp2 = (model: PopupModel, elemProps: {}) => {
+  return mergeProps(
+    {
+      foo: 'bar',
+    },
+    elemProps
+  );
+};
+
+const useTemp1 = (model: PopupModel, elemProps: {}) => {
+  return mergeProps(
+    {
+      button: 'bar',
+    },
+    elemProps
+  );
+};
 
 export const PopupTarget = createComponent(Button)({
   displayName: 'Popup.Target',
   Component: ({children, model, ...elemProps}: PopupTargetProps, ref, Element) => {
     const localModel = useModelContext(PopupModelContext, model);
 
-    const props = usePopupTargetButton(localModel, elemProps, ref);
-    return (
-      <Element ref={ref} {...props}>
-        {children}
-      </Element>
-    );
+    const props = usePopupTargetButton(localModel, {foo: 'bar'}, ref);
+
+    const useNewHook = composeHooks(usePopupTargetButton, useTemp); //(localModel, {bar: 'baz'}, ref);
+    const props2 = useNewHook(localModel, {bar: 'baz'}, ref);
+
+    return <Element {...props}>{children}</Element>;
   },
 });

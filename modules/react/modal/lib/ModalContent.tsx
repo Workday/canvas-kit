@@ -3,16 +3,20 @@ import ReactDOM from 'react-dom';
 import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import {
-  Popup2 as Popup,
+  Popup,
   PopupPadding,
   usePopupStack,
   useCloseOnEscape,
   useAssistiveHideSiblings,
   useFocusTrap,
+  useInitialFocus,
+  PopupModel,
+  useDisableBodyScroll,
 } from '@workday/canvas-kit-react/popup';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
 import {ModalWidth} from './Modal';
+import {changeFocus} from '../../common';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -65,6 +69,8 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * The `aria-label` for the Popup close button.
    */
   closeButtonAriaLabel?: string;
+
+  model: PopupModel;
 }
 
 const fadeIn = keyframes`
@@ -105,44 +111,6 @@ const CenteringContainer = styled('div')({
   justifyContent: 'center',
 });
 
-const transformOrigin = {
-  horizontal: 'center',
-  vertical: 'bottom',
-} as const;
-
-function getFirstElementToFocus(overlayEl: HTMLElement): HTMLElement {
-  const modalEl = overlayEl.querySelector('[role=dialog]');
-  const firstFocusable = modalEl?.querySelector<HTMLElement>(
-    `[data-close=close],[id="${modalEl?.getAttribute('aria-labelledby')}"]`
-  );
-  if (firstFocusable) {
-    if (firstFocusable.tagName === 'H3') {
-      // If there is no close icon, we need to transfer focus to the header.
-      // Setting tabIndex allows the header to be focusable.
-      // We do the header instead of the next focusable element to prevent useful context from being skipped
-      firstFocusable.tabIndex = 0;
-      firstFocusable.style.outline = 'none';
-
-      const changeTabIndex = () => {
-        // We no longer need to focus on the header after it loses focus
-        // We simply want to transfer focus inside
-        firstFocusable.removeEventListener('blur', changeTabIndex);
-        // We must wait one frame to ensure tabbable checks are satisfied
-        // by all focus libraries...
-        requestAnimationFrame(() => {
-          firstFocusable.removeAttribute('tabIndex');
-        });
-      };
-      firstFocusable.addEventListener('blur', changeTabIndex);
-    }
-    return firstFocusable;
-  } else {
-    throw new Error(
-      'No focusable element was found. Please ensure modal has at least one focusable element'
-    );
-  }
-}
-
 const getFromWindow = <T extends any>(property: string, defaultValue: T): T => {
   if (typeof window !== undefined) {
     return (window as any)[property] ?? defaultValue;
@@ -169,27 +137,22 @@ const useWindowSize = (): {width: number; height: number} => {
   return {width, height};
 };
 
-const useInitialFocus = (
-  modalRef: React.RefObject<HTMLElement>,
-  firstFocusRef: React.RefObject<HTMLElement> | undefined
-) => {
-  React.useLayoutEffect(() => {
-    const handlerRef =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    if (modalRef.current) {
-      const elem =
-        (firstFocusRef && firstFocusRef.current) || getFirstElementToFocus(modalRef.current);
-      elem.focus();
-    }
+const useReturnFocus = (model: PopupModel) => {
+  React.useEffect(() => {
+    const element = (model.state.returnFocusRef || model.state.targetRef).current;
     return () => {
-      if (handlerRef) {
-        handlerRef.focus();
-      }
+      console.log('useReturnFocus', element);
+      // if the overlay was clicked, focus will be returning to body. Wait until after that happens,
+      // then redirect it
+      requestAnimationFrame(() => {
+        changeFocus(element);
+      });
     };
-  }, [modalRef, firstFocusRef]);
+  }, [model.state.returnFocusRef, model.state.targetRef]);
 };
 
 const ModalContent = ({
+  model,
   ariaLabel,
   width = ModalWidth.s,
   padding = PopupPadding.l,
@@ -202,13 +165,16 @@ const ModalContent = ({
   ...elemProps
 }: ModalContentProps) => {
   const centeringRef = React.useRef<HTMLDivElement>(null);
-  const onClose = () => handleClose?.();
+  const [tabIndex, setTabIndex] = React.useState(handleClose ? undefined : 0);
+  const onBlur = () => setTabIndex(undefined);
 
-  const stackRef = usePopupStack();
-  useCloseOnEscape(stackRef, onClose);
-  useFocusTrap(stackRef);
-  useInitialFocus(stackRef, firstFocusRef);
-  useAssistiveHideSiblings(stackRef);
+  const stackRef = usePopupStack(model.state.stackRef);
+  useCloseOnEscape(model);
+  useFocusTrap(model);
+  useAssistiveHideSiblings(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useDisableBodyScroll(model);
 
   React.useEffect(() => {
     // We don't use `useCloseOnOutsideClick` directly, so we add this data attribute manually
@@ -219,7 +185,8 @@ const ModalContent = ({
   const onOverlayClick = (event: React.MouseEvent<HTMLElement>) => {
     // Detect clicks only on the centering wrapper element
     if (event.target === centeringRef.current && PopupStack.isTopmost(stackRef.current!)) {
-      onClose();
+      handleClose?.();
+      changeFocus((model.state.returnFocusRef || model.state.targetRef).current);
     }
   };
   const windowSize = useWindowSize();
@@ -231,18 +198,21 @@ const ModalContent = ({
         style={{width: windowSize.width % 2 === 1 ? 'calc(100vw - 1px)' : '100vw'}}
         onMouseDown={onOverlayClick}
       >
-        <Popup
+        <Popup.Card
+          model={model}
           width={width}
-          heading={heading}
-          handleClose={handleClose}
           padding={padding}
-          transformOrigin={transformOrigin}
           aria-modal={true}
-          ariaLabel={ariaLabel}
-          closeButtonAriaLabel={closeButtonAriaLabel}
+          aria-label={ariaLabel}
         >
-          {children}
-        </Popup>
+          <Popup.Heading model={model} tabIndex={tabIndex} onBlur={onBlur}>
+            {heading}
+          </Popup.Heading>
+          {handleClose ? (
+            <Popup.CloseIcon model={model} aria-label={closeButtonAriaLabel || 'Close'} />
+          ) : null}
+          <Popup.Body>{children}</Popup.Body>
+        </Popup.Card>
       </CenteringContainer>
     </Container>
   );

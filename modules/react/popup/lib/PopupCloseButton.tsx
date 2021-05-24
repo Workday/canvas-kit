@@ -39,11 +39,7 @@ export const PopupCloseButton = createComponent(Button)({
   Component: ({children, model, ...elemProps}: PopupCloseButtonProps, ref, Element) => {
     const localModel = useModelContext(PopupModelContext, model);
 
-    const props = usePopupCloseButton(localModel, elemProps);
-    return (
-      <Element ref={ref} {...props}>
-        {children}
-      </Element>
-    );
+    const props = usePopupCloseButton(localModel, elemProps, ref);
+    return <Element {...props}>{children}</Element>;
   },
 });

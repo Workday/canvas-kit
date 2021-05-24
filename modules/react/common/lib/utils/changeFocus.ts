@@ -1,5 +1,5 @@
 /**
- *
+ * Programmatically change focus in a way that causes a focus ring around the new element.
  * @param element Element that should be focused
  */
 export const changeFocus = (element: HTMLElement) => {

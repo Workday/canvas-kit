@@ -17,8 +17,16 @@ const isFocusable = (element: HTMLElement) => {
     'select',
     'textarea',
   ].includes(nodeName);
+  const hasTabIndex = element.getAttribute('tabindex') === '0';
 
-  return validInput || validAnchor || validAudioVideo || validImgObject || validNativelyFocusable;
+  return (
+    validInput ||
+    validAnchor ||
+    validAudioVideo ||
+    validImgObject ||
+    validNativelyFocusable ||
+    hasTabIndex
+  );
 };
 
 const getFirstFocusableElement = (content: HTMLElement): HTMLElement | null => {
@@ -41,13 +49,17 @@ const getFirstFocusableElement = (content: HTMLElement): HTMLElement | null => {
  * Transfer focus to an appropriate element within the popup.
  */
 export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
-  React.useLayoutEffect(() => {
+  // Using `useEffect` instead of `useLayoutEffect` so that focus doesn't change _before_ PopperJS
+  // has positioned the Popup. If we change focus before positioning, the browser will scroll to the
+  // top of the page.
+  React.useEffect(() => {
     if (model.state.visible && model.state.stackRef.current) {
       const element =
         model.state.initialFocusRef?.current ||
         getFirstFocusableElement(model.state.stackRef.current);
 
       if (element) {
+        console.log('useInitialFocus changeFocus');
         changeFocus(element);
       }
     }

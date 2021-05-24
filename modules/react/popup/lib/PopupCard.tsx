@@ -11,9 +11,8 @@ import {
   StyledType,
   mergeProps,
   useModelContext,
-  useLocalRef,
-  useMount,
 } from '@workday/canvas-kit-react/common';
+
 import {PopupModel} from './usePopupModel';
 import {PopupModelContext} from './Popup';
 import {getTransformFromPlacement} from './getTransformFromPlacement';

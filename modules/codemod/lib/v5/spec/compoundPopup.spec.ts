@@ -4,7 +4,7 @@ import {stripIndent} from 'common-tags';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('popup', () => {
+describe('popup', () => {
   it('should restructure Popup usages with a literal heading', () => {
     const input = stripIndent`
       import {Popup} from '@workday/canvas-kit-react/popup'

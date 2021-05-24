@@ -43,7 +43,7 @@ const useCloseButton = createHook(({events, state}: PopupModel) => {
 
       // delay until after state change have happened and changes are flushed to the DOM
       requestAnimationFrame(() => {
-        if (state.willReturnFocus.current) {
+        if (state.willReturnFocus?.current) {
           changeFocus((state.returnFocusRef || state.targetRef).current);
         }
       });
@@ -59,9 +59,7 @@ export const PopupCloseIcon = createComponent('button')({
     Element
   ) => {
     const localModel = useModelContext(PopupModelContext, model);
-    const props = useCloseButton(localModel, elemProps);
-    return (
-      <StyledCloseIcon ref={ref} as={Element} variant="plain" size={size} icon={xIcon} {...props} />
-    );
+    const props = useCloseButton(localModel, elemProps, ref);
+    return <StyledCloseIcon as={Element} variant="plain" size={size} icon={xIcon} {...props} />;
   },
 });

@@ -406,11 +406,11 @@ class Select extends React.Component<SelectProps, SelectState> {
 
   handleMenuCloseOnKeyPress = (): void => {
     // Toggle menu off and shift focus back to the button
-    this.toggleMenu(false);
+    this.handleClose();
     this.focusButton();
   };
 
-  handleMenuCloseOnOutsideClick = (): void => {
+  handleClose = (): void => {
     this.toggleMenu(false);
   };
 
@@ -518,8 +518,7 @@ class Select extends React.Component<SelectProps, SelectState> {
       ? {
           onClick: this.handleClick,
           onKeyDown: this.handleKeyDown,
-          onMenuCloseOnEscape: this.handleMenuCloseOnKeyPress,
-          onMenuCloseOnOutsideClick: this.handleMenuCloseOnOutsideClick,
+          onClose: this.handleClose,
           onOptionSelection: this.handleOptionSelection,
         }
       : {};

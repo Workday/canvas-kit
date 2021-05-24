@@ -3,7 +3,7 @@ import React from 'react';
 import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
 import {Popup, PopupOld} from '@workday/canvas-kit-react/popup';
 
-export const Open = () => {
+export const OpenWithoutModel = () => {
   return (
     <>
       <PopupOld
