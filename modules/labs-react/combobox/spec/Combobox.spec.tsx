@@ -91,14 +91,14 @@ describe('Combobox', () => {
   });
 
   describe('when the child input is rendered with a ref', () => {
-    it('should set the ref to the child input element', async () => {
+    it('should set the ref to the child input element', () => {
       const ref: React.RefObject<HTMLInputElement> = React.createRef();
-      const {findByRole} = render(
+      const screen = render(
         <Combobox>
           <TextInput ref={ref} />
         </Combobox>
       );
-      expect(await findByRole('combobox')).toEqual(ref.current);
+      expect(screen.getByRole('combobox')).toEqual(ref.current);
     });
   });
 
