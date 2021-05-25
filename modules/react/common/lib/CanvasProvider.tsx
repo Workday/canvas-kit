@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ThemeProvider} from 'emotion-theming';
-import {InputProvider} from '@workday/canvas-kit-react/tokens';
-import {defaultCanvasTheme, PartialEmotionCanvasTheme} from '../lib/theming';
+import {InputProvider} from './InputProvider';
+import {defaultCanvasTheme, PartialEmotionCanvasTheme} from './theming';
 
 export interface CanvasProviderProps {
   theme: PartialEmotionCanvasTheme;

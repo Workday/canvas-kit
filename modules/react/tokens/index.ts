@@ -3,7 +3,6 @@ import * as canvasColorsWeb from '@workday/canvas-colors-web';
 import {borderRadius, CanvasBorderRadius, CanvasBorderRadiusKeys, CanvasBorderRadiusValues} from './lib/radius';
 import {BrandingColor, CanvasColor} from './lib/colors.types';
 import depth, {CanvasDepth, CanvasDepthValue} from './lib/depth';
-import InputProvider from './lib/InputProvider';
 import {
   space,
   CanvasSpace,
@@ -43,7 +42,6 @@ export {
   CanvasDepth,
   CanvasDepthValue,
   CSSProperties,
-  InputProvider,
 };
 export default canvas;
 
