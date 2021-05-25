@@ -1,29 +1,20 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import styled from '@emotion/styled';
-import {spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {type, space} from '..';
+import {type} from '..';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Labs/Core',
+  title: 'Testing/React/Labs/Tokens',
 });
 
-export const TypeAndSpace = () => {
+export const Type = () => {
   const inverseStyle = {
     display: 'inline-block',
     background: '#667380',
     padding: '2px 8px',
     borderRadius: '3px',
   };
-
-  const Box = styled('div')(
-    {
-      border: '1px solid #eee',
-    },
-    space
-  );
 
   return (
     <div>
@@ -82,27 +73,6 @@ export const TypeAndSpace = () => {
         <span css={[type.body, type.variant.inverse, inverseStyle]}>Inverse Text</span>
         <br />
         <span css={[type.body, type.variant.mono]}>Mono Text</span>
-      </section>
-      <section className="story">
-        <h2 style={type.h2}>Space and Space Numbers</h2>
-        <Box m={spaceNumbers.m} p={spaceNumbers.m}>
-          medium margin and padding
-        </Box>
-        <Box mx={spaceNumbers.m} my={spaceNumbers.m} px={spaceNumbers.m} py={spaceNumbers.m}>
-          medium margin (x, y) and padding (x, y)
-        </Box>
-        <Box
-          mt={spaceNumbers.m}
-          mr={spaceNumbers.m}
-          mb={spaceNumbers.m}
-          ml={spaceNumbers.m}
-          pt={spaceNumbers.m}
-          pr={spaceNumbers.m}
-          pb={spaceNumbers.m}
-          pl={spaceNumbers.m}
-        >
-          medium margin (top, right,left, bottom) and padding (top, right,left, bottom)
-        </Box>
       </section>
     </div>
   );

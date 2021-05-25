@@ -1,0 +1,256 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Stack} from '@workday/canvas-kit-labs-react/layout';
+// examples
+import {BasicStack} from './examples/Stack/BasicStack';
+import {ShouldWrapChildren} from './examples/Stack/ShouldWrapChildren';
+import {StackItems} from './examples/Stack/StackItems';
+import {NestedStacks} from './examples/Stack/NestedStacks';
+import {StackCard} from './examples/Stack/StackCard';
+import {HStackCards} from './examples/Stack/HStackCards';
+import {VStackCards} from './examples/Stack/VStackCards';
+
+<Meta title="Labs/Layout/Stack" component={Stack} />
+
+# Stack, HStack, and VStack
+
+[![LABS: Beta](https://img.shields.io/badge/LABS-beta-orange)](https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md)
+This component is work in progress and currently in pre-release.
+
+`Stack`, `HStack`, and `VStack` are higher-level layout components that provide an ergonomic API for
+building one-dimensional layouts with consistent spacing between elements. They're built on top of
+`Flex` and have access to all `FlexProps` and `BoxProps`. `Stack` can align items in either a
+horizontal or vertical orientation. `HStack` and `VStack` will only align items in a horizontal or
+vertical orientation, respectively.
+
+## Table of Contents
+
+- [Stack, HStack, and VStack](#stack-hstack-and-vstack)
+  - [Table of Contents](#table-of-contents)
+  - [Stack](#stack)
+    - [Usage](#usage)
+    - [What Stack Is & Isn't](#what-stack-is--isnt)
+    - [Setting Direction](#setting-direction)
+    - [Setting Space](#setting-space)
+    - [Managing Child Elements](#managing-child-elements)
+      - [Basic Usage](#basic-usage)
+      - [Using `shouldWrapChildren`](#using-shouldwrapchildren)
+      - [Using `Stack.Item`](#using-stackitem)
+    - [Valid Children](#valid-children)
+    - [Examples](#examples)
+  - [HStack](#hstack)
+    - [Usage](#usage-1)
+    - [Example](#example)
+  - [VStack](#vstack)
+    - [Usage](#usage-2)
+    - [Example](#example-1)
+  - [Exhaustive Prop List](#exhaustive-prop-list)
+
+## Stack
+
+`Stack` is a composable component that's helpful for creating layouts with equal spacing between
+elements. It can create horizontal or vertical stacks of elements.
+
+### Usage
+
+```tsx
+import {Stack, StackStyleProps} from '@workday/canvas-kit-labs-react/layout';
+```
+
+### What Stack Is & Isn't
+
+The most important distinction to make with `Stack` is that it is _not a grid._ Grid components are
+able to align items along two dimensions (rows and columns), and `Stack` is only built to support
+one dimension (rows _or_ columns). That said, you can nest horizontal and vertical `Stack`
+components to create grid-like layouts.
+
+### Thinking in Stacks
+
+`Stack` is a higher-level layout component, meaning:
+
+1. It's built on top of lower-level components (`Box` and `Flex`)
+2. It's opinionated about how it builds layouts.
+
+`Stack` has three core opinions that guide its API:
+
+- space should be equal between child elements
+- space should only exist between child elements
+- children should be semantic elements
+
+Much of layout design is founded on these opinions. Whether its creating lists of navigation links,
+groups of cards, or collections of buttons, once you think in stacks, you'll see them everywhere.
+
+### Setting Direction
+
+The direction of the child elements is set with the `flexDirection` prop. This prop supports four
+directions: `column`, `column-reverse`, `row`, and `row-reverse`. By default, it will set the
+direction to `row` as is consistent with the CSS Flexbox spec.
+
+> Note: `flex-direction` and other CSS Flexbox attributes support bidirectionality (LTR and RTL)
+> automatically. You don't need to think about switching directions for localization.
+
+> Note: `spacing` also supports bidirectionality automatically. This means you don't need to think
+> about it for localization as long as you properly pass the `direction` to the `theme` object un
+
+### Setting Space
+
+The space between child elements is set with the `spacing` prop, which supports all space token and
+string values. `Stack` intentionally only sets space between elements and never outside. For
+example: a vertical stack of three elements would only have margin added to the top of the second
+and third child elements. Keeping space between elements makes building layouts more block-like and
+predictable.
+
+### Managing Child Elements
+
+There are three ways to manage space between child elements with `Stack`.
+
+- implicit spacing applied directly to child elements (default behavior)
+- implicit wrapping child elements with `shouldWrapChildren`
+- explicit wrapping child elements with `Stack.Item`s.
+
+Each approach has its own benefits and limitations, which are discussed in further detail below. We
+chose to implicitly apply spacing to child elements as the default behavior because it requires the
+least overhead to implement and should support most use cases. The other approaches act as escape
+hatches for when the default behavior becomes forced. Should you find none of these approaches work
+for your use case, we recommend using `Flex` instead of `Stack`, which will provide you with more
+flexibility.
+
+#### Basic Usage
+
+`Stack` uses CSS pseudo-classes to apply margin to child elements. This makes it really simple to
+get consistent spacing between child elements without much manual effort. Below is a basic example.
+Note that `Stack` does not add any space above or below the child elements. This helps your element
+fit nicely within their containers.
+
+<ExampleCodeBlock code={BasicStack} />
+
+Use this approach when:
+
+- you want consistent space between child elements
+- you don't need to apply custom margin to child elements
+  - specifically `marginLeft`/`marginInlineStart` for horizontal stacks and `marginTop` for vertical
+    stacks
+- you don't want to add extra markup to wrap child elements
+
+A side-effect of `Stack`'s pseduo-classes is an increased style specificity. This specificity can
+override the child element's margin styles. If that creates a problem, there are two recommended
+options available:
+
+- Use the `shouldWrapChildren` prop (implicit option)
+- Use `Stack.Item` (explicit option)
+
+Both are discussed below.
+
+#### Using `shouldWrapChildren`
+
+The `shouldWrapChildren` prop will implicitly wrap each child in a `Stack.Item` component (which is
+a `Box`) and apply the margin to it instead of the child element provided. This allows you to
+control the margin of the child elements you provide and avoiding style collisions. The trade-off is
+that you do not have direct access to the `Stack.Item` being rendered. If having access to that
+element is necessary, using `Stack.Item` explicitly (as described below) could be the best solution.
+
+The example below is a bit contrived but has enough information to convey the point. In this
+scenario, we have a horizontal stack of `IconButtons`, but they are visually divided into separate
+groupings. The navigational buttons are on the left, and the additional actions are spaced slightly
+further to the right. You could use two separate horizontal stacks here to achieve the same result,
+but you could also use `shouldWrapChildren` and then put additional margin only where needed. Either
+approach would be fine; it's a matter of personal preference.
+
+<ExampleCodeBlock code={ShouldWrapChildren} />
+
+Use this approach when:
+
+- you want consistent space between child elements
+- you need to apply custom margin to particular children
+- wrapping each child element won't create issues with other semantic elements
+- you don't want to explicitly add extra markup to wrap child elements
+
+#### Using `Stack.Item`
+
+Sometimes inserting implicit wrapper elements can be problematic when you need access to those
+elements. In those situations, `shouldWrapChildren` is not the best choice, and you should opt for
+wrapping children in `Stack.Item`s. A `Stack.Item` is a `Box` with some preset styles which can be
+overridden if needed.
+
+In the example below, we wanted to keep our `li` elements as direct children of the `ul` stack. So
+we're wrapping each of the links with `Stack.Item`s, casting them as `li`s and applying custom styles to each.
+This would not be possible with `shouldWrapChildren`.
+
+<ExampleCodeBlock code={StackItems} />
+
+Use this approach when:
+
+- you want consistent space between child elements
+- you need to have direct access to `Stack.Item` wrappers
+- wrapping each child element won't create issues with other semantic elements
+
+### Valid Children
+
+Because `Stack` applies styles to children, it requires its immediate children to be valid child
+elements. For example, text outside of an HTML tag would not render if it was an immediate `Stack`
+child. Here's an example snippet:
+
+```tsx
+const ValidChildrenExample = () => {
+  return (
+    <Stack flexDirection="row" spacing="s">
+      This text will not render. Don't do this.
+      <p>This text will render.</p>
+      <span>This text will also render.</span>
+    </Stack>
+  );
+};
+```
+
+### Examples
+
+You can nest vertical and horizontal `Stack`s to create grid-like layouts. Here are three horizontal
+`Stack`s nested within a vertical `Stack`. The fourth row is a single `Flex` component.
+
+<ExampleCodeBlock code={NestedStacks} />
+
+You can also use `Stack` to manage smaller layouts, such as within Cards.
+
+<ExampleCodeBlock code={StackCard} />
+
+## HStack
+
+`HStack` works identically to `Stack` but is limited to only `row` and `row-reverse` directions. It
+defaults to `row` if no `flexDirection` is provided.
+
+> Note: `HStack` supports bidirectionality automatically. This means that you won't need to switch
+> the direction or spacing for localization. The direction switching is handled by the CSS Flexbox
+> spec, and the spacing will flip direction based on the `direction` provided in the `theme` object.
+
+### Usage
+
+```tsx
+import {HStack, HStackStyleProps} from '@workday/canvas-kit-labs-react/layout';
+```
+
+### Example
+
+In this example, `HStack` is placing three cards in a row with small spacing between them.
+
+<ExampleCodeBlock code={HStackCards} />
+
+## VStack
+
+`VStack` works identically to `Stack` but is limited to only `column` and `column-reverse`
+directions. It defaults to `column` if no `flexDirection` is provided.
+
+### Usage
+
+```tsx
+import {VStack, VStackStyleProps} from '@workday/canvas-kit-labs-react/layout';
+```
+
+### Example
+
+In this example, `VStack` is placing three cards in a column with small spacing between them.
+
+<ExampleCodeBlock code={VStackCards} />
+
+## Exhaustive Prop List
+
+<ArgsTable of={Stack} />

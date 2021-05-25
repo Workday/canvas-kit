@@ -1,10 +1,8 @@
 /// <reference path="../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import styled from '@emotion/styled';
 import withReadme from 'storybook-readme/with-readme';
-import {spaceNumbers} from '@workday/canvas-kit-react/tokens';
-import {type, space} from '..';
+import {type} from '..';
 
 import README from '../README.md';
 
@@ -16,7 +14,7 @@ const inverseStyle = {
 };
 
 export default {
-  title: 'Labs/Core/React',
+  title: 'Labs/Tokens/React',
   decorators: [withReadme(README)],
 };
 
@@ -73,12 +71,3 @@ export const Type = () => (
     <span css={[type.body, type.variant.mono]}>Mono Text</span>
   </section>
 );
-
-export const Space = () => {
-  const Box = styled('div')(space);
-  return (
-    <Box style={{border: '1px solid #eee'}} p={spaceNumbers.xl} pb={64} m={40} mx={10}>
-      Margin and Padding
-    </Box>
-  );
-};
