@@ -1,7 +1,7 @@
 import React from 'react';
 import {space} from '@workday/canvas-kit-react/tokens';
 
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-labs-react/tabs';
 
 export const HoistedModel = () => {
@@ -25,13 +25,13 @@ export const HoistedModel = () => {
           <Tabs.Panel name="third">Contents of Third Tab</Tabs.Panel>
         </div>
       </Tabs>
-      <Button
+      <SecondaryButton
         onClick={() => {
           model.events.activate({tab: 'third'});
         }}
       >
         Activate third tab
-      </Button>
+      </SecondaryButton>
     </>
   );
 };

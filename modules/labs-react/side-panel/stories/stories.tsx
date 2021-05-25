@@ -4,7 +4,7 @@ import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 import {jsx} from '@emotion/core';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-labs-react/side-panel';
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {colors, depth} from '@workday/canvas-kit-react/tokens';
 import {type} from '@workday/canvas-kit-labs-react/tokens';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
@@ -60,9 +60,9 @@ export const NoHeaderPermanentlyOpen = () => {
           Tasks Panel
         </span>
         <div style={{padding: '16px 24px'}}>
-          <Button variant="primary" size="large" icon={plusIcon}>
+          <PrimaryButton size="large" icon={plusIcon}>
             Add New
-          </Button>
+          </PrimaryButton>
         </div>
       </SidePanel>
     </div>
@@ -129,9 +129,9 @@ export const ExternalControl = () => {
           }}
         >
           <p>Control from somewhere else</p>
-          <Button {...controlProps} role="button" variant="primary">
+          <PrimaryButton {...controlProps} role="button">
             Toggle Side Panel
-          </Button>
+          </PrimaryButton>
         </div>
       </main>
     </div>

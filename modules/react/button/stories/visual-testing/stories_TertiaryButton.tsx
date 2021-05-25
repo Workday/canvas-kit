@@ -9,22 +9,22 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {TextButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Text Button',
-  component: TextButton,
+  title: 'Testing/React/Buttons/Button/Tertiary Button',
+  component: TertiaryButton,
 });
 
-export const TextButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+export const TertiaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps(
         {
           variant: [
-            {value: 'text', label: 'Default'},
+            {value: undefined, label: 'Default'},
             {value: 'inverse', label: 'Inverse'},
           ],
           allCaps: [
@@ -39,6 +39,10 @@ export const TextButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => 
             {value: undefined, label: ''},
             {value: playCircleIcon, label: 'w/ Icon'},
           ],
+          iconPosition: [
+            {value: 'left', label: 'Left Icon'},
+            {value: 'right', label: 'right Icon'},
+          ],
         },
         props => {
           return true;
@@ -48,11 +52,13 @@ export const TextButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => 
     >
       {props => (
         <Container blue={props.variant === 'inverse'}>
-          <TextButton {...props}>Test</TextButton>
+          <TertiaryButton {...props}>Test</TertiaryButton>
         </Container>
       )}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const TextButtonThemedStates = () => <TextButtonStates theme={{canvas: customColorTheme}} />;
+export const TertiaryButtonThemedStates = () => (
+  <TertiaryButtonStates theme={{canvas: customColorTheme}} />
+);

@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import {Modal, useModal} from '@workday/canvas-kit-react/modal';
-import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
   Popper,
@@ -89,9 +89,7 @@ export const AccessibilityTest = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </>
   );
@@ -109,9 +107,7 @@ export const StackedModals = () => {
         <DeleteButton style={{marginRight: '16px'}} {...modal2.targetProps}>
           Yes, Delete
         </DeleteButton>
-        <Button onClick={modal1.closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={modal1.closeModal}>Cancel</SecondaryButton>
         <Modal heading={'Really Delete Item'} {...modal2.modalProps}>
           <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
           <DeleteButton
@@ -123,9 +119,7 @@ export const StackedModals = () => {
           >
             Yes, Really Delete
           </DeleteButton>
-          <Button onClick={modal2.closeModal} variant="secondary">
-            Cancel
-          </Button>
+          <SecondaryButton onClick={modal2.closeModal}>Cancel</SecondaryButton>
         </Modal>
       </Modal>
     </>
@@ -147,9 +141,7 @@ export const ModalWithPopup = () => {
         <DeleteButton style={{marginRight: '16px'}} {...popup.targetProps}>
           Yes, Delete
         </DeleteButton>
-        <Button onClick={modal.closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={modal.closeModal}>Cancel</SecondaryButton>
         <Popper {...popup.popperProps}>
           <Popup heading={'Really Delete Item'} handleClose={popup.closePopup}>
             <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
@@ -162,9 +154,7 @@ export const ModalWithPopup = () => {
             >
               Yes, Really Delete
             </DeleteButton>
-            <Button onClick={popup.closePopup} variant="secondary">
-              Cancel
-            </Button>
+            <SecondaryButton onClick={popup.closePopup}>Cancel</SecondaryButton>
           </Popup>
         </Popper>
       </Modal>

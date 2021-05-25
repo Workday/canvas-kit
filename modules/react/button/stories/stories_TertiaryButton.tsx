@@ -8,7 +8,7 @@ import {colors} from '@workday/canvas-kit-react/tokens';
 import {type} from '@workday/canvas-kit-labs-react/tokens';
 import {editIcon, arrowRightIcon} from '@workday/canvas-system-icons-web';
 
-import {TextButton, Hyperlink} from '@workday/canvas-kit-react/button';
+import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
 import README from '../README.md';
 
 const blueBackground: CSSObject = {
@@ -34,38 +34,34 @@ const buttonContainer = {
   },
 };
 
-storiesOf('Components/Buttons/Button/React/Text', module)
-  .addParameters({component: TextButton})
+storiesOf('Components/Buttons/Button/React/Tertiary', module)
+  .addParameters({component: TertiaryButton})
   .addDecorator(withReadme(README))
   .add('Default', () => (
     <div className="story">
       <h3>Medium Large</h3>
-      <TextButton size="medium" variant="text">
+      <TertiaryButton size="medium">Text</TertiaryButton>
+      <TertiaryButton disabled={true} size="medium">
         Text
-      </TextButton>
-      <TextButton disabled={true} size="medium" variant="text">
-        Text
-      </TextButton>
+      </TertiaryButton>
 
       <h3>Small</h3>
-      <TextButton size="small" variant="text">
+      <TertiaryButton size="small">Text</TertiaryButton>
+      <TertiaryButton disabled={true} size="small">
         Text
-      </TextButton>
-      <TextButton disabled={true} size="small" variant="text">
-        Text
-      </TextButton>
+      </TertiaryButton>
 
       <h3>All Caps</h3>
-      <TextButton allCaps={true}>All Caps</TextButton>
+      <TertiaryButton allCaps={true}>All Caps</TertiaryButton>
 
       <h3>Icons</h3>
       <div css={buttonContainer}>
-        <TextButton icon={editIcon} iconPosition="left" variant="text">
+        <TertiaryButton icon={editIcon} iconPosition="left">
           Left Icon
-        </TextButton>
-        <TextButton icon={arrowRightIcon} iconPosition="right" variant="text">
+        </TertiaryButton>
+        <TertiaryButton icon={arrowRightIcon} iconPosition="right">
           Right Icon
-        </TextButton>
+        </TertiaryButton>
       </div>
     </div>
   ))
@@ -73,39 +69,39 @@ storiesOf('Components/Buttons/Button/React/Text', module)
     <div className="story">
       <h3>Medium Inverse</h3>
       <div css={blueBackground}>
-        <TextButton size="medium" variant="inverse">
+        <TertiaryButton size="medium" variant="inverse">
           Text
-        </TextButton>
-        <TextButton disabled={true} size="medium" variant="inverse">
+        </TertiaryButton>
+        <TertiaryButton disabled={true} size="medium" variant="inverse">
           Text
-        </TextButton>
+        </TertiaryButton>
       </div>
 
       <h3>Small Inverse</h3>
       <div css={blueBackground}>
-        <TextButton size="small" variant="inverse">
+        <TertiaryButton size="small" variant="inverse">
           Text
-        </TextButton>
-        <TextButton disabled={true} size="small" variant="inverse">
+        </TertiaryButton>
+        <TertiaryButton disabled={true} size="small" variant="inverse">
           Text
-        </TextButton>
+        </TertiaryButton>
       </div>
 
       <h3>All Caps Inverse</h3>
       <div css={blueBackground}>
-        <TextButton variant="inverse" allCaps={true}>
+        <TertiaryButton variant="inverse" allCaps={true}>
           All Caps
-        </TextButton>
+        </TertiaryButton>
       </div>
 
       <h3>Icons Inverse</h3>
       <div css={{...buttonContainer, ...blueBackground}}>
-        <TextButton icon={editIcon} iconPosition="left" variant="inverse">
+        <TertiaryButton icon={editIcon} iconPosition="left" variant="inverse">
           Left Icon
-        </TextButton>
-        <TextButton icon={arrowRightIcon} iconPosition="right" variant="inverse">
+        </TertiaryButton>
+        <TertiaryButton icon={arrowRightIcon} iconPosition="right" variant="inverse">
           Right Icon
-        </TextButton>
+        </TertiaryButton>
       </div>
     </div>
   ))

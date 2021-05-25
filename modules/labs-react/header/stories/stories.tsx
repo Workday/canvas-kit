@@ -12,7 +12,7 @@ import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {colors, space, gradients} from '@workday/canvas-kit-react/tokens';
-import {Button, IconButton} from '@workday/canvas-kit-react/button';
+import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
 import {
   GlobalHeader,
@@ -266,7 +266,7 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-          <Button variant="primary">Download</Button>
+          <PrimaryButton>Download</PrimaryButton>
         </Header>
       </div>
       <br />
@@ -300,7 +300,7 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
-          <Button variant="primary">Logout</Button>
+          <PrimaryButton>Logout</PrimaryButton>
         </Header>
       </div>
       <br />
@@ -328,7 +328,7 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
-          <Button variant="primary">Logout</Button>
+          <PrimaryButton>Logout</PrimaryButton>
         </Header>
       </div>
       <br />
@@ -349,7 +349,7 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
-          <Button variant="primary">Logout</Button>
+          <PrimaryButton>Logout</PrimaryButton>
         </Header>
       </div>
       <br />
@@ -377,7 +377,7 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <IconButton variant="inverse" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
-          <Button variant="primary">Logout</Button>
+          <PrimaryButton>Logout</PrimaryButton>
         </Header>
       </div>
     </div>
@@ -416,7 +416,7 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <Avatar onClick={handleAvatarClickTest} altText="Profile" />
-          <Button variant="primary">Download</Button>
+          <PrimaryButton>Download</PrimaryButton>
         </Header>
       </div>
       <br />
@@ -475,7 +475,7 @@ storiesOf('Labs/Header/React', module)
             aria-label="Notifications"
           />
           <IconButton variant="circle" icon={inboxIcon} title="Inbox" aria-label="Inbox" />
-          <Button variant="primary">Logout</Button>
+          <PrimaryButton>Logout</PrimaryButton>
         </Header>
       </div>
     </div>

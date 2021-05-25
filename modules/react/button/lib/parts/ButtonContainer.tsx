@@ -85,7 +85,7 @@ export const ButtonContainer = styled('button', {
     cursor: 'pointer',
     outline: 'none',
     verticalAlign: 'middle',
-    border: '2px solid transparent',
+    border: '1px solid transparent',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     WebkitFontSmoothing: 'antialiased',

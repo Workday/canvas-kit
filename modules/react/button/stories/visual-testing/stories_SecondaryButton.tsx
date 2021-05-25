@@ -9,20 +9,25 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {HighlightButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Highlight Button',
-  component: HighlightButton,
+  title: 'Testing/React/Buttons/Button/Secondary Button',
+  component: SecondaryButton,
 });
 
-export const HighlightButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+export const SecondaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
+        variant: [
+          {value: undefined, label: ''},
+          {value: 'inverse', label: 'Inverse'},
+        ],
         size: [
+          {value: 'small', label: 'Small'},
           {value: 'medium', label: 'Medium'},
           {value: 'large', label: 'Large'},
         ],
@@ -30,18 +35,26 @@ export const HighlightButtonStates = (props: {theme?: PartialEmotionCanvasTheme}
           {value: undefined, label: ''},
           {value: playCircleIcon, label: 'w/ Icon'},
         ],
+        iconPosition: [
+          {value: 'left', label: 'Left Icon'},
+          {value: 'right', label: 'right Icon'},
+        ],
+        dataLabel: [
+          {value: undefined, label: ''},
+          {value: '1:23', label: 'w/ Data Label'},
+        ],
       })}
       columnProps={stateTableColumnProps}
     >
       {props => (
-        <Container>
-          <HighlightButton {...props}>Test</HighlightButton>
+        <Container blue={props.variant === 'inverse'}>
+          <SecondaryButton {...props}>Test</SecondaryButton>
         </Container>
       )}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const HighlightButtonThemedStates = () => (
-  <HighlightButtonStates theme={{canvas: customColorTheme}} />
+export const SecondaryButtonThemedStates = () => (
+  <SecondaryButtonStates theme={{canvas: customColorTheme}} />
 );

@@ -1,12 +1,25 @@
 import * as React from 'react';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {space} from '@workday/canvas-kit-react/tokens';
 import isPropValid from '@emotion/is-prop-valid';
-import {ButtonProps} from '../Button';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {styled} from '@workday/canvas-kit-react/common';
 
-export interface ButtonLabelIconProps extends Pick<ButtonProps, 'size' | 'icon'> {
-  dropdown?: boolean;
+export interface ButtonLabelIconProps {
+  /**
+   * The size of the Button.
+   * @default 'medium'
+   */
+  size?: 'small' | 'medium' | 'large';
+  /**
+   * The icon of the Button.
+   * Note: not displayed at `small` size
+   */
+  icon?: CanvasSystemIcon;
+  /**
+   * The position of the TertiaryButton icon.
+   * @default 'left'
+   */
   iconPosition?: 'left' | 'right';
 }
 
@@ -23,21 +36,13 @@ const ButtonLabelIconStyled = styled('span', {
     width: size === 'small' ? SMALL_ICON_SIZE : ICON_SIZE,
     height: size === 'small' ? SMALL_ICON_SIZE : ICON_SIZE,
   }),
-  ({iconPosition, dropdown}) => ({
-    marginLeft:
-      iconPosition === 'right' ? undefined : `-${dropdown ? space.xxs : space.xxxs} !important`,
-    marginRight:
-      iconPosition === 'right' ? `-${dropdown ? space.xxs : space.xxxs} !important` : undefined,
+  ({iconPosition}) => ({
+    marginLeft: iconPosition === 'right' ? undefined : `-${space.xxxs} !important`,
+    marginRight: iconPosition === 'right' ? `-${space.xxxs} !important` : undefined,
   })
 );
 
-export const ButtonLabelIcon = ({
-  icon,
-  size,
-  dropdown,
-  iconPosition,
-  ...elemProps
-}: ButtonLabelIconProps) => {
+export const ButtonLabelIcon = ({icon, size, iconPosition, ...elemProps}: ButtonLabelIconProps) => {
   /* istanbul ignore next line for coverage */
   if (icon === undefined) {
     return null;
@@ -46,12 +51,7 @@ export const ButtonLabelIcon = ({
   const iconSize = size === 'small' ? SMALL_ICON_SIZE : undefined;
 
   return (
-    <ButtonLabelIconStyled
-      iconPosition={iconPosition}
-      dropdown={dropdown}
-      size={size}
-      {...elemProps}
-    >
+    <ButtonLabelIconStyled iconPosition={iconPosition} size={size} {...elemProps}>
       <SystemIcon size={iconSize} icon={icon} />
     </ButtonLabelIconStyled>
   );

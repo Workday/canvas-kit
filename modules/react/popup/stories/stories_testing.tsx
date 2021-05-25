@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings.d.ts" />
 import * as React from 'react';
 
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper, Popup, usePopup, useCloseOnOutsideClick} from '@workday/canvas-kit-react/popup';
 
 export default {
@@ -20,13 +20,13 @@ export const MultiplePopups = () => {
 
   return (
     <>
-      <Button {...popup1.targetProps}>Open Popup 1</Button>
+      <SecondaryButton {...popup1.targetProps}>Open Popup 1</SecondaryButton>
       <Popper {...popup1.popperProps}>
         <Popup heading="Popup 1" handleClose={popup1.closePopup}>
           Contents of Popup 1
         </Popup>
       </Popper>
-      <Button {...popup2.targetProps}>Open Popup 2</Button>
+      <SecondaryButton {...popup2.targetProps}>Open Popup 2</SecondaryButton>
       <Popper {...popup2.popperProps}>
         <Popup heading="Popup 2" handleClose={popup2.closePopup}>
           Contents of Popup 2

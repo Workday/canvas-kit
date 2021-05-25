@@ -9,23 +9,19 @@ import {
   customColorTheme,
 } from '../../../../../utils/storybook';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
-  title: 'Testing/React/Buttons/Button/Button',
-  component: Button,
+  title: 'Testing/React/Buttons/Button/Primary Button',
+  component: PrimaryButton,
 });
 
-export const ButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
+export const PrimaryButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
-        variant: [
-          {value: 'primary', label: 'Primary'},
-          {value: 'secondary', label: 'Secondary'},
-        ],
         size: [
           {value: 'small', label: 'Small'},
           {value: 'medium', label: 'Medium'},
@@ -34,6 +30,10 @@ export const ButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
         icon: [
           {value: undefined, label: ''},
           {value: playCircleIcon, label: 'w/ Icon'},
+        ],
+        iconPosition: [
+          {value: 'left', label: 'Left Icon'},
+          {value: 'right', label: 'right Icon'},
         ],
         dataLabel: [
           {value: undefined, label: ''},
@@ -44,11 +44,13 @@ export const ButtonStates = (props: {theme?: PartialEmotionCanvasTheme}) => (
     >
       {props => (
         <Container>
-          <Button {...props}>Test</Button>
+          <PrimaryButton {...props}>Test</PrimaryButton>
         </Container>
       )}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const ButtonThemedStates = () => <ButtonStates theme={{canvas: customColorTheme}} />;
+export const PrimaryButtonThemedStates = () => (
+  <PrimaryButtonStates theme={{canvas: customColorTheme}} />
+);
