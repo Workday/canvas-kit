@@ -26,8 +26,16 @@ and migration strategies.
 **By consuming any of these modules, you acknowledge the potential complexity of updating and
 ultimately performing a migration when components are promoted to a stable version.**
 
-**These components are purely opt in**, so they are not included in the universal module
+**These components are purely opt in**, so they are not included in the main module
 `@workday/canvas-kit-react`.
+
+## Support
+
+- Docs & examples
+- Change announcements & migration strategies
+- Longer stretches between any potential breaking changes
+- Migration to main module might still require some effort
+- Direct support is available, but we prioritize Main components first
 
 ## Module Structure
 

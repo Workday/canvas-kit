@@ -26,8 +26,16 @@ a major version bump across our component library.
 **By consuming any of these modules, you acknowledge the potential complexity of updating and
 ultimately performing a migration when components are promoted to a stable version.**
 
-**These components are purely opt in**, so they are not included in the universal module
+**These components are purely opt in**, so they are not included in the main module
 `@workday/canvas-kit-react`.
+
+## Support
+
+- Docs & examples
+- Change announcements & migration strategies
+- Breaking changes can happen at any time
+- Updates or promotion to Canvas Kit Preview may require signficant refactoring
+- Direct support when we have capacity, but we prioritize Preview and Main components first
 
 ## Module Structure
 
