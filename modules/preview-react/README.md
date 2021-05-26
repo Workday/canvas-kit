@@ -3,7 +3,7 @@
 <img src="https://img.shields.io/badge/PREVIEW-beta-blueviolet" alt="PREVIEW: Beta" />
 
 This is a group of coming-soon components that have had a full design and a11y review, and are
-approved for use in product. Their functionality and design are set, but the API's and/or underlying
+approved for use in product. Their functionality and design are set, but the APIs and/or underlying
 architecture could still be subject to change. This bundle serves as a staging ground for components
 that are ready to use, but may not be up to the high code standards upheld in the main
 `@workday/canvas-kit-react` bundle.
