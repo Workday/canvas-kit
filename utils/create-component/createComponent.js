@@ -30,13 +30,6 @@ const questions = [
     name: 'description',
     message: 'Module description:',
   },
-  // {
-  //   type: 'checkbox',
-  //   name: 'targets',
-  //   message: 'What target modules would you like to create?:',
-  //   choices: ['React', 'CSS'],
-  //   default: ['React'],
-  // },
   {
     type: 'list',
     name: 'category',
@@ -52,16 +45,6 @@ const questions = [
       'Popups',
     ],
   },
-  // {
-  //   type: 'confirm',
-  //   name: 'publicModule',
-  //   message: 'Make access public when publishing?:',
-  //   default: true,
-  // },
-  /**
-   * Add question to add deps
-   * React: CK core, emotion
-   */
 ];
 
 inquirer
