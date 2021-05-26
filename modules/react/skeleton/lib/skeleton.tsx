@@ -1,7 +1,6 @@
 import * as React from 'react';
-import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
-import {accessibleHide} from '@workday/canvas-kit-react/common';
+import {accessibleHide, createComponent, styled} from '@workday/canvas-kit-react/common';
 
 export interface SkeletonProps {
   /**
@@ -14,6 +13,7 @@ export interface SkeletonProps {
    * @default 'Loading'
    */
   'aria-label'?: string;
+  children: React.ReactNode;
 }
 
 const AccessibleHide = styled('div')(accessibleHide);
@@ -41,20 +41,22 @@ const SkeletonContainer = styled('div')<SkeletonProps>({
   position: 'relative',
 });
 
-const Skeleton: React.FunctionComponent<SkeletonProps> = ({
-  'aria-label': loadingAriaLabel = 'Loading',
-  children,
-  ...elemProps
-}) => {
-  const ref: React.RefObject<HTMLDivElement> = React.createRef();
-
-  return (
-    <SkeletonContainer ref={ref} {...elemProps}>
+export const Skeleton = createComponent()({
+  displayName: 'SkeletonTest',
+  Component: ({
+    children,
+    'aria-label': loadingAriaLabel = 'Loading',
+    ...elemProps
+  }: SkeletonProps) => (
+    <SkeletonContainer {...elemProps}>
       <AccessibleHide>{loadingAriaLabel}</AccessibleHide>
 
       <div aria-hidden={true}>{children}</div>
     </SkeletonContainer>
-  );
-};
+  ),
+  subComponents: {
+    Container: SkeletonContainer,
+  },
+});
 
 export default Skeleton;
