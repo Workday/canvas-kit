@@ -77,8 +77,6 @@ storiesOf('Preview/Color Picker/React', module)
     const [color, setColor] = React.useState(defaultColor);
     const [colorInputValidColor, setColorInputValidColor] = React.useState(defaultColor);
     const [colorInputValue, setColorInputValue] = React.useState(defaultColor);
-    const inputRef = React.useRef<HTMLInputElement>(null);
-    const popupRef = React.useRef<HTMLDivElement>(null);
     const model = usePopupModel();
 
     useCloseOnOutsideClick(model);
@@ -115,7 +113,10 @@ storiesOf('Preview/Color Picker/React', module)
     ];
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      if (!popupRef.current || !popupRef.current.contains(e.relatedTarget as Node)) {
+      if (
+        !model.state.stackRef.current ||
+        !model.state.stackRef.current.contains(e.relatedTarget as Node)
+      ) {
         model.events.hide();
       }
     };
@@ -133,7 +134,6 @@ storiesOf('Preview/Color Picker/React', module)
           showCheck={colorInputValidColor === color || colorInputValue === color}
           onFocus={() => model.events.show()}
           onBlur={onBlur}
-          ref={inputRef}
         />
         <Popup.Popper>
           <Popup.Card style={{marginTop: 8}} padding={PopupPadding.s}>

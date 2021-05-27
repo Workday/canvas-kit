@@ -235,7 +235,7 @@ const SelectMenu = ({
   ...elemProps
 }: SelectMenuProps) => {
   const model = usePopupModel({
-    initialVisible: true,
+    initialVisibility: 'visible',
     returnFocusRef: buttonRef,
     onHide: onClose,
   });

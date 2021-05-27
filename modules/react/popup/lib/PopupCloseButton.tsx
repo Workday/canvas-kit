@@ -6,7 +6,7 @@ import {
   createHook,
   changeFocus,
 } from '@workday/canvas-kit-react/common';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 import {PopupModel} from './usePopupModel';
 import {PopupModelContext} from './Popup';
@@ -34,7 +34,7 @@ export const usePopupCloseButton = createHook(({events, state}: PopupModel) => {
   };
 });
 
-export const PopupCloseButton = createComponent(Button)({
+export const PopupCloseButton = createComponent(SecondaryButton)({
   displayName: 'Popup.CloseButton',
   Component: ({children, model, ...elemProps}: PopupCloseButtonProps, ref, Element) => {
     const localModel = useModelContext(PopupModelContext, model);

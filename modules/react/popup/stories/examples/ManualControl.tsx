@@ -20,7 +20,7 @@ interface OpenPopupProps {
 const OpenPopup = ({onClose, targetRef}: OpenPopupProps) => {
   const model = usePopupModel({
     // Behaviors check visibility. Since that is controlled externally, we'll initialize visible
-    initialVisible: true,
+    initialVisibility: 'visible',
     // The target isn't handled directly by this model, so we'll manually set a ref to return focus
     returnFocusRef: targetRef,
     onHide: onClose,

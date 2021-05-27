@@ -6,7 +6,7 @@ import {
   createHook,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 import {PopupModel} from '@workday/canvas-kit-react/popup';
 import {PopupModelContext} from './Popup';
@@ -34,7 +34,7 @@ export const usePopupTarget = createHook(({events, state}: PopupModel, ref) => {
   };
 });
 
-export const PopupTarget = createComponent(Button)({
+export const PopupTarget = createComponent(SecondaryButton)({
   displayName: 'Popup.Target',
   Component: ({children, model, ...elemProps}: PopupTargetProps, ref, Element) => {
     const localModel = useModelContext(PopupModelContext, model);

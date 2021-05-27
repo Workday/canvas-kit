@@ -59,7 +59,7 @@ export function verifyComponent(
         role: 'MyRole',
         'data-testid': 'MyTestID',
       } as const;
-      render(<Test ref={ref} {...attrs} {...callbacks} />);
+      render(<Test ref={ref} {...attrs} />);
 
       for (const key in attrs) {
         expect(ref.current).toHaveAttribute(key, attrs[key]);

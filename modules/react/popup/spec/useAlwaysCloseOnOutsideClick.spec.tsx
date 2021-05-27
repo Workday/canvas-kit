@@ -9,7 +9,7 @@ describe('useAlwaysCloseOnOutsideClick', () => {
   it('should add "data-behavior-click-outside-close=topmost" attribute', () => {
     let model: PopupModel;
     renderHook(() => {
-      model = usePopupModel({initialVisible: true});
+      model = usePopupModel({initialVisibility: 'visible'});
       (model.state.stackRef as React.MutableRefObject<
         HTMLDivElement
       >).current = document.createElement('div');

@@ -26,9 +26,9 @@ export const PopupHeading = createComponent('h2')({
   Component: ({children, model, ...elemProps}: PopupHeadingProps, ref, Element) => {
     const localModel = useModelContext(PopupModelContext, model);
 
-    const props = usePopupHeading(localModel, elemProps);
+    const props = usePopupHeading(localModel, elemProps, ref);
     return (
-      <Card.Heading as={Element} ref={ref} {...props}>
+      <Card.Heading as={Element} {...props}>
         {children}
       </Card.Heading>
     );
