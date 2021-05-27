@@ -18,23 +18,14 @@ export interface SkeletonProps {
 
 const AccessibleHide = styled('div')(accessibleHide);
 
-const fade50 = keyframes({
-  '0%': {opacity: 1},
-  '50%': {opacity: 0.5},
-  '100%': {opacity: 1},
-});
-
-// similar to MUI
-const fade50Animation = `${fade50} 1s ease-in-out 0.5s infinite`;
-
 const fade = keyframes({
-  from: {opacity: 0},
+  from: {opacity: 0.4},
   to: {opacity: 1},
 });
-// const animation = `${fade} 0.8s`;
+const animation = `${fade} 0.8s linear infinite alternate`;
 
 const SkeletonContainer = styled('div')<SkeletonProps>({
-  animation: fade50Animation,
+  animation,
   overflow: 'hidden',
   width: '100%',
   height: '100%',
