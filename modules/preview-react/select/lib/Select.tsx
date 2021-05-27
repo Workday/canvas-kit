@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ErrorType} from '@workday/canvas-kit-react/common';
+import {ErrorType, StyledType, createComponent, useForkRef} from '@workday/canvas-kit-react/common';
 import {menuAnimationDuration} from './SelectMenu';
 import SelectBase, {CoreSelectBaseProps, Option, NormalizedOption} from './SelectBase';
 import {MenuVisibility} from './types';
@@ -25,20 +25,28 @@ export interface SelectProps extends CoreSelectBaseProps {
   options: (Option | string)[];
 }
 
-interface SelectState {
+interface SelectContainerProps extends SelectProps, StyledType {
+  /**
+   * The ref passed from `createComponent` to be forwarded to the underlying button element.
+   */
+  buttonRef?: React.Ref<HTMLButtonElement>;
+}
+
+interface SelectContainerState {
   focusedOptionIndex: number;
   menuVisibility: MenuVisibility;
 }
 
-class Select extends React.Component<SelectProps, SelectState> {
+class SelectContainer extends React.Component<SelectContainerProps, SelectContainerState> {
   static ErrorType = ErrorType;
 
-  state: Readonly<SelectState> = {
+  state: Readonly<SelectContainerState> = {
     focusedOptionIndex: 0,
     menuVisibility: 'closed',
   };
 
-  private buttonRef = React.createRef<HTMLButtonElement>();
+  private forwardedButtonRef: React.Ref<HTMLButtonElement>;
+  private localButtonRef = React.createRef<HTMLButtonElement>();
   private inputRef = React.createRef<HTMLInputElement>();
   private menuRef = React.createRef<HTMLUListElement>();
 
@@ -164,8 +172,8 @@ class Select extends React.Component<SelectProps, SelectState> {
   };
 
   private focusButton = () => {
-    if (this.buttonRef.current) {
-      this.buttonRef.current.focus();
+    if (this.localButtonRef.current) {
+      this.localButtonRef.current.focus();
     }
   };
 
@@ -334,9 +342,28 @@ class Select extends React.Component<SelectProps, SelectState> {
     }, this.clearKeysSoFarTimeout);
   };
 
-  constructor(props: SelectProps) {
+  constructor(props: SelectContainerProps) {
     super(props);
     this.setNormalizedOptions();
+
+    // We need a local ref (RefObject) to the Select component's underlying
+    // button to manage focus within the component and to serve as its Popper
+    // Menu's anchorElement. If the buttonRef prop (to be forwarded to the
+    // underlying button) passed in through createComponent was a ref object,
+    // we could reuse it for our internal purposes. buttonRef may be a callback
+    // ref, however, or it may not even be defined.
+    //
+    // To guarantee we have access to a ref object, we created one earlier when
+    // declaring the localButtonRef instance variable. We then use useForkRef
+    // to combine localButtonRef and buttonRef into a single callback ref
+    // (forwardedButtonRef) which can be forwarded to the underlying button.
+    // When the component mounts/unmounts, this callback will both:
+    //
+    // (1) Update the current value of localButtonRef, and;
+    // (2) Either update the current value of buttonRef if it was a ref object,
+    //     or call buttonRef with the underlying button element if it was a
+    //     callback ref.
+    this.forwardedButtonRef = useForkRef(props.buttonRef, this.localButtonRef);
   }
 
   componentDidMount() {
@@ -505,9 +532,12 @@ class Select extends React.Component<SelectProps, SelectState> {
   public render() {
     const {
       value,
-      // Strip options from elemProps
+
+      // Strip props we don't want to pass down from elemProps
+      buttonRef,
       options,
       onKeyDown,
+
       ...elemProps
     } = this.props;
 
@@ -526,7 +556,8 @@ class Select extends React.Component<SelectProps, SelectState> {
 
     return (
       <SelectBase
-        buttonRef={this.buttonRef}
+        forwardedButtonRef={this.forwardedButtonRef}
+        localButtonRef={this.localButtonRef}
         focusedOptionIndex={focusedOptionIndex}
         inputRef={this.inputRef}
         menuRef={this.menuRef}
@@ -540,6 +571,16 @@ class Select extends React.Component<SelectProps, SelectState> {
   }
 }
 
-Select.ErrorType = ErrorType;
+export const Select = createComponent('button')({
+  displayName: 'Select',
+  Component: (props: SelectProps, ref, Element) => (
+    // Select is still a class component, so we render a renamed version of it
+    // (SelectContainer) and pass it ref and Element
+    <SelectContainer as={Element} buttonRef={ref} {...props} />
+  ),
+  subComponents: {
+    ErrorType,
+  },
+});
 
 export default Select;

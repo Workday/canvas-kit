@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  createComponent,
+  StyledType,
   ErrorType,
   focusRing,
   mouseFocusBehavior,
@@ -10,7 +12,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, colors, depth, space} from '@workday/canvas-kit-react/tokens';
 
-export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+export interface SwitchProps extends Themeable {
   /**
    * If true, set the Switch to the on state.
    * @default false
@@ -35,10 +37,6 @@ export interface SwitchProps extends Themeable, React.InputHTMLAttributes<HTMLIn
    */
   value?: string;
   /**
-   * The ref to the underlying checkbox input element. Use this to imperatively switch or focus the Switch.
-   */
-  inputRef?: React.Ref<HTMLInputElement>;
-  /**
    * The type of error associated with the Switch (if applicable).
    */
   error?: ErrorType;
@@ -56,7 +54,7 @@ const SwitchContainer = styled('div')({
   width: switchTapArea,
 });
 
-const SwitchInput = styled('input')<SwitchProps>(
+const SwitchInput = styled('input')<SwitchProps & StyledType>(
   {
     position: 'absolute',
     height: space.m,
@@ -162,37 +160,38 @@ const SwitchCircle = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>(
   })
 );
 
-export const Switch = ({
-  checked = false,
-  id,
-  disabled = false,
-  inputRef,
-  onChange,
-  value,
-  ...elemProps
-}: SwitchProps) => {
-  const inputId = useUniqueId(id);
-  return (
-    <SwitchContainer>
-      <SwitchInput
-        checked={checked}
-        disabled={disabled}
-        id={inputId}
-        ref={inputRef}
-        onChange={onChange}
-        role="checkbox"
-        tabIndex={0}
-        type="checkbox"
-        value={value}
-        {...elemProps}
-      />
-      <SwitchBackground checked={checked} disabled={disabled}>
-        <SwitchCircle checked={checked} />
-      </SwitchBackground>
-    </SwitchContainer>
-  );
-};
-
-Switch.ErrorType = ErrorType;
+export const Switch = createComponent('input')({
+  displayName: 'Switch',
+  Component: (
+    {checked = false, id, disabled = false, onChange, value, ...elemProps}: SwitchProps,
+    ref,
+    Element
+  ) => {
+    const inputId = useUniqueId(id);
+    return (
+      <SwitchContainer>
+        <SwitchInput
+          as={Element}
+          checked={checked}
+          disabled={disabled}
+          id={inputId}
+          ref={ref}
+          onChange={onChange}
+          role="checkbox"
+          tabIndex={0}
+          type="checkbox"
+          value={value}
+          {...elemProps}
+        />
+        <SwitchBackground checked={checked} disabled={disabled}>
+          <SwitchCircle checked={checked} />
+        </SwitchBackground>
+      </SwitchContainer>
+    );
+  },
+  subComponents: {
+    ErrorType,
+  },
+});
 
 export default Switch;

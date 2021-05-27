@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  createComponent,
+  StyledType,
   GrowthBehavior,
   ErrorType,
   errorRing,
@@ -18,10 +20,7 @@ import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import SelectOption from './SelectOption';
 
-export interface SelectProps
-  extends Themeable,
-    GrowthBehavior,
-    React.SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends Themeable, GrowthBehavior {
   /**
    * The SelectOption children of the Select (must be at least two).
    */
@@ -45,7 +44,7 @@ export interface SelectProps
   value?: string;
 }
 
-const SelectContainer = styled('select')<SelectProps>(
+const StyledSelect = styled('select')<SelectProps & StyledType>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -117,35 +116,36 @@ const SelectWrapper = styled('div')<Pick<SelectProps, 'grow' | 'disabled'>>(
   })
 );
 
-class Select extends React.Component<SelectProps> {
-  static ErrorType = ErrorType;
-
-  public render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {disabled = false, error, grow, children, value, onChange, ...elemProps} = this.props;
-
-    return (
-      <SelectWrapper grow={grow} disabled={disabled}>
-        <SelectContainer
-          disabled={disabled}
-          grow={grow}
-          error={error}
-          value={value}
-          onChange={onChange}
-          {...elemProps}
-        >
-          {children}
-        </SelectContainer>
-        <SelectDropdownIcon
-          icon={caretDownSmallIcon}
-          color={disabled ? colors.licorice100 : colors.licorice200}
-          colorHover={disabled ? colors.licorice100 : colors.licorice500}
-        />
-      </SelectWrapper>
-    );
-  }
-}
-
-Select.ErrorType = ErrorType;
+export const Select = createComponent('select')({
+  displayName: 'Select',
+  Component: (
+    {disabled = false, error, grow, children, value, onChange, ...elemProps}: SelectProps,
+    ref,
+    Element
+  ) => (
+    <SelectWrapper grow={grow} disabled={disabled}>
+      <StyledSelect
+        as={Element}
+        disabled={disabled}
+        grow={grow}
+        error={error}
+        ref={ref}
+        value={value}
+        onChange={onChange}
+        {...elemProps}
+      >
+        {children}
+      </StyledSelect>
+      <SelectDropdownIcon
+        icon={caretDownSmallIcon}
+        color={disabled ? colors.licorice100 : colors.licorice200}
+        colorHover={disabled ? colors.licorice100 : colors.licorice500}
+      />
+    </SelectWrapper>
+  ),
+  subComponents: {
+    ErrorType,
+  },
+});
 
 export default Select;

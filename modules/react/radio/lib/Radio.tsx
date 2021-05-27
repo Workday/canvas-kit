@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  createComponent,
+  StyledType,
   focusRing,
   mouseFocusBehavior,
   styled,
@@ -13,7 +15,7 @@ import canvas, {
   spaceNumbers,
 } from '@workday/canvas-kit-react/tokens';
 
-export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+export interface RadioProps extends Themeable {
   /**
    * If true, set the Radio button to the checked state.
    * @default false
@@ -29,10 +31,6 @@ export interface RadioProps extends Themeable, React.InputHTMLAttributes<HTMLInp
    * @default A uniquely generated id by uuid()
    */
   id?: string;
-  /**
-   * The ref to the underlying radio input element. Use this to imperatively check or focus the Radio button.
-   */
-  inputRef?: React.Ref<HTMLInputElement>;
   /**
    * The text of the Radio button label.
    * @default ''
@@ -90,7 +88,7 @@ const RadioRipple = styled('span')<Pick<RadioProps, 'disabled'>>({
   zIndex: -1,
 });
 
-const RadioInput = styled('input')<RadioProps>(
+const RadioInput = styled('input')<RadioProps & StyledType>(
   {
     borderRadius: radioBorderRadius,
     width: radioTapArea,
@@ -235,45 +233,43 @@ const RadioLabel = styled('label')<{disabled?: boolean}>(
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
 );
 
-export const Radio = ({
-  checked = false,
-  id,
-  label = '',
-  disabled,
-  inputRef,
-  name,
-  onChange,
-  value,
-  ...elemProps
-}: RadioProps) => {
-  const inputId = useUniqueId(id);
-  return (
-    <RadioContainer>
-      <RadioInputWrapper disabled={disabled}>
-        <RadioInput
-          checked={checked}
-          disabled={disabled}
-          id={inputId}
-          ref={inputRef}
-          name={name}
-          onChange={onChange}
-          type="radio"
-          value={value}
-          aria-checked={checked}
-          {...elemProps}
-        />
-        <RadioRipple />
-        <RadioBackground checked={checked} disabled={disabled}>
-          <RadioCheck checked={checked} />
-        </RadioBackground>
-      </RadioInputWrapper>
-      {label && (
-        <RadioLabel htmlFor={inputId} disabled={disabled}>
-          {label}
-        </RadioLabel>
-      )}
-    </RadioContainer>
-  );
-};
+export const Radio = createComponent('input')({
+  displayName: 'Radio',
+  Component: (
+    {checked = false, id, label = '', disabled, name, onChange, value, ...elemProps}: RadioProps,
+    ref,
+    Element
+  ) => {
+    const inputId = useUniqueId(id);
+    return (
+      <RadioContainer>
+        <RadioInputWrapper disabled={disabled}>
+          <RadioInput
+            as={Element}
+            checked={checked}
+            disabled={disabled}
+            id={inputId}
+            ref={ref}
+            name={name}
+            onChange={onChange}
+            type="radio"
+            value={value}
+            aria-checked={checked}
+            {...elemProps}
+          />
+          <RadioRipple />
+          <RadioBackground checked={checked} disabled={disabled}>
+            <RadioCheck checked={checked} />
+          </RadioBackground>
+        </RadioInputWrapper>
+        {label && (
+          <RadioLabel htmlFor={inputId} disabled={disabled}>
+            {label}
+          </RadioLabel>
+        )}
+      </RadioContainer>
+    );
+  },
+});
 
 export default Radio;

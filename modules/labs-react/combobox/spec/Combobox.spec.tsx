@@ -90,6 +90,18 @@ describe('Combobox', () => {
     });
   });
 
+  describe('when the child input is rendered with a ref', () => {
+    it('should set the ref to the child input element', () => {
+      const ref: React.RefObject<HTMLInputElement> = React.createRef();
+      const screen = render(
+        <Combobox>
+          <TextInput ref={ref} />
+        </Combobox>
+      );
+      expect(screen.getByRole('combobox')).toEqual(ref.current);
+    });
+  });
+
   test('Call callback function when enter is pressed', async () => {
     const menuText = 'menuText';
     const autocompleteItems = [<MenuItem onClick={cb}>{menuText}</MenuItem>];

@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  createComponent,
+  StyledType,
   GrowthBehavior,
   ErrorType,
   errorRing,
@@ -8,10 +10,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
-export interface TextAreaProps
-  extends Themeable,
-    GrowthBehavior,
-    React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaProps extends Themeable, GrowthBehavior {
   /**
    * If true, set the TextArea to the disabled state.
    * @default false
@@ -21,10 +20,6 @@ export interface TextAreaProps
    * The type of error associated with the TextArea (if applicable).
    */
   error?: ErrorType;
-  /**
-   * The ref to the inner textarea element.
-   */
-  inputRef?: React.Ref<HTMLTextAreaElement>;
   /**
    * The function called when the TextArea state changes.
    */
@@ -56,7 +51,7 @@ export enum TextAreaResizeDirection {
   Vertical = 'vertical',
 }
 
-const TextAreaContainer = styled('textarea')<TextAreaProps>(
+const StyledTextArea = styled('textarea')<TextAreaProps & StyledType>(
   ({theme, error}) => ({
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -100,18 +95,17 @@ const TextAreaContainer = styled('textarea')<TextAreaProps>(
   })
 );
 
-class TextArea extends React.Component<TextAreaProps> {
-  static ErrorType = ErrorType;
-  static ResizeDirection = TextAreaResizeDirection;
-
-  render() {
-    const {resize = TextAreaResizeDirection.Both, grow, inputRef, ...inputProps} = this.props;
-
-    return <TextAreaContainer ref={inputRef} grow={grow} resize={resize} {...inputProps} />;
-  }
-}
-
-TextArea.ErrorType = ErrorType;
-TextArea.ResizeDirection = TextAreaResizeDirection;
+export const TextArea = createComponent('textarea')({
+  displayName: 'TextArea',
+  Component: (
+    {resize = TextAreaResizeDirection.Both, grow, ...elemProps}: TextAreaProps,
+    ref,
+    Element
+  ) => <StyledTextArea ref={ref} as={Element} grow={grow} resize={resize} {...elemProps} />,
+  subComponents: {
+    ErrorType,
+    ResizeDirection: TextAreaResizeDirection,
+  },
+});
 
 export default TextArea;

@@ -16,6 +16,7 @@ about the update.
   - [Compound Components](#compound-components) -
     [Canvas Kit Preview & Component Promotions](#canvas-kit-preview-component-promotions)
 - [Breaking Component Changes](#breaking-component-changes)
+  - [Input Ref Forwarding](#input-ref-forwarding)
   - [Button](#button)
   - [Card](#card)
   - [InputProvider](#inputprovider)
@@ -202,6 +203,85 @@ and our main `@workday/canvas-kit-react` module:
 - Tabs
 
 ## Breaking Component Changes
+
+### Input Ref Forwarding
+
+All input components in the main package now support
+[ref forwarding](https://reactjs.org/docs/forwarding-refs.html) using the standard `ref` attribute.
+This includes:
+
+- Checkbox
+- Color Input
+- Color Preview
+- Radio
+- Select
+- Switch
+- Text Input
+- Text Area
+
+Additionally, the Select in Preview (formerly in Labs) has also been updated to support ref
+forwarding.
+
+Most of these input components previously supported an `inputRef` prop that could be used to obtain
+a ref to the component's underlying input element. For example, in v4, if you wanted to obtain a ref
+to a Text Input's underlying `<input type="text" />` element, you could pass a ref to the component
+using `inputRef`. In v5, you'll need to use `ref` instead of `inputRef` (or run the codemod 🤖):
+
+```tsx
+const ref = React.useRef(null);
+// before
+<TextInput inputRef={ref} />;
+// after
+<TextInput ref={ref} />;
+```
+
+🤖 The codemod will update all input components that previously supported `inputRef` to use `ref`
+instead.
+
+For components that previously supported `inputRef`, `ref` is now forwarded to the same underlying
+element that `inputRef` was applied to previously. Select and Select (Preview) did not support
+`inputRef` in v4, but now support `ref` in v5. See each component's documentation for information on
+which element `ref` is forwarded to for that particular component.
+
+Input component prop interfaces no longer extend directly from their underlying element interface
+(e.g., `TextInputProps` no longer extends from `React.InputHTMLAttributes<HTMLInputElement>`).
+`createComponent` returns a component that determines the element interface via the `as` prop. This
+is why input component props no longer contain an element interface directly. If you extend from an
+input component prop interface, or have code that uses an input component prop interface and
+accesses properties like `onClick`, you'll have to provide the input attribute yourself. This is not
+code-moddable since intent cannot be pre-determined. This will not effect runtime, but only
+TypeScript.
+
+```tsx
+interface MyTextInputProps extends TextInputProps {}
+
+// onClick no longer exists in `TextInputProps` so TypeScript will complain about onClick not
+// existing in `MyTextInputProps` (onClick does exist as a prop on `<TextInput>`, however)
+const MyTextInput = ({onClick}: MyTextInputProps) => <TextInput onClick={onClick} />;
+
+// Fix
+interface MyTextInputProps extends TextInputProps, React.InputHTMLAttributes<HTMLInputElement> {}
+
+// Alternate fix
+interface MyTextInputProps extends TextInputProps {
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
+}
+```
+
+As a final note, the following input components were previously class components and, thus,
+technically supported the `ref` attribute in v4:
+
+- Color Input
+- Color Preview
+- Select
+- Select (Preview)
+- Text Input
+- Text Area
+
+Passing `ref={ref}` to any of these components in v4 would have set `ref.current` to the mounted
+instance of the entire component
+([source](https://reactjs.org/docs/refs-and-the-dom.html#accessing-refs)) rather than the underlying
+HTML element represented by the component. This is no longer the case in v5.
 
 ### Button
 

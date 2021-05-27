@@ -4,6 +4,7 @@ import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
 
 export type GoToTextInputProps = TextInputProps & {
   'aria-label': string;
+  value?: string | number;
 };
 
 export const GoToTextInput = ({

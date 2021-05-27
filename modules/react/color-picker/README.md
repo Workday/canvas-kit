@@ -8,13 +8,7 @@ selecting specific swatches.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react/color-picker
-```
-
-or
-
-```sh
-yarn add @workday/canvas-kit-color-picker
+yarn add @workday/canvas-kit-react
 ```
 
 # Color Input
@@ -25,7 +19,7 @@ A controlled input for accepting typed/pasted hex codes.
 
 ```tsx
 import * as React from 'react';
-import {ColorInput} from '@workday/canvas-kit-color-picker';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 
 <ColorInput
   showCheck={true}
@@ -58,12 +52,6 @@ available and can be passed to the input field.
 
 ---
 
-#### `inputRef: React.Ref<HTMLInputElement>`
-
-> A ref to the input element. This allows you to imperatively focus on the color input if needed.
-
----
-
 #### `onChange: (e: React.ChangeEvent<HTMLInputElement>) => void`
 
 > A onChange callback from the input. Value can be accessed from `e.currentTarget.value`. Should be
@@ -75,6 +63,15 @@ available and can be passed to the input field.
 
 > A callback that passes up the valid hex value typed by the user. This is always prefixed with a
 > hash, and is always the expanded hex value (e.g. "03F" > "#0033FF").
+
+---
+
+#### `ref: React.Ref<HTMLInputElement>`
+
+> A ref to be forwarded to the underlying `<input type="text" />` element. Use this to imperatively
+> modify the input element.
+
+Default: `undefined`
 
 ---
 
@@ -103,7 +100,7 @@ A component to show a color swatch
 
 ```tsx
 import * as React from 'react';
-import {ColorPreview} from '@workday/canvas-kit-color-preview';
+import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
 
 <ColorPreview value="#00FFCC" />;
 ```
@@ -127,3 +124,12 @@ import {ColorPreview} from '@workday/canvas-kit-color-preview';
 #### `id: string`
 
 > An id linked to the color preview input to be used with an associated form label
+
+---
+
+#### `ref: React.Ref<HTMLInputElement>`
+
+> A ref to be forwarded to the underlying `<input type="text" />` element. Use this to imperatively
+> modify the input element.
+
+Default: `undefined`

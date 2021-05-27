@@ -36,8 +36,8 @@ type ExtractRef<T> = T extends undefined // test if T was even passed in
 export type PropsWithAs<P, ElementType extends React.ElementType> = P &
   Omit<React.ComponentProps<ElementType>, 'as' | 'state' | keyof P> & {
     /**
-     * Optional ref. If the component represents and element, this will ref will be a reference to
-     * the real DOM element of the component. If `as` is set to an element, it will be that element.
+     * Optional ref. If the component represents an element, this ref will be a reference to the
+     * real DOM element of the component. If `as` is set to an element, it will be that element.
      * If `as` is a component, the reference will be to that component (or element if the component
      * uses `React.forwardRef`).
      */
@@ -72,7 +72,7 @@ interface RefForwardingComponent<T, P = {}> {
   (
     props: React.PropsWithChildren<P> & {as?: React.ReactElement<any>},
     /**
-     * A ref to be forwarded. Pass it along to the root element. If not element was passed, this
+     * A ref to be forwarded. Pass it along to the root element. If no element was passed, this
      * will result in a `never`
      */
     ref: ExtractRef<T>,

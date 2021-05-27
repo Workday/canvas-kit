@@ -124,7 +124,7 @@ export const CustomFocus = () => {
         handleClose={undefined}
       >
         <p>Enter name to confirm deletion</p>
-        <FormField label="Item name">{controlComponent(<TextInput inputRef={ref} />)}</FormField>
+        <FormField label="Item name">{controlComponent(<TextInput ref={ref} />)}</FormField>
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>

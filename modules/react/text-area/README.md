@@ -95,12 +95,6 @@ Default: `false`
 
 ---
 
-#### `inputRef: React.Ref<HTMLTextAreaElement>`
-
-> The ref callback for the inner text area element.
-
----
-
 #### `onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void`
 
 > The callback fired when the value is changed.
@@ -120,6 +114,15 @@ Default: `''`
 > If true, user will be unable to interact with the field.
 
 Default: `false`
+
+---
+
+#### `ref: React.Ref<HTMLTextAreaElement>`
+
+> A ref to be forwarded to the underlying `<textarea>` element. Use this to imperatively modify the
+> textarea element.
+
+Default: `undefined`
 
 ---
 

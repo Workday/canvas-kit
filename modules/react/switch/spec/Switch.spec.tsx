@@ -19,6 +19,8 @@ describe('Switch', () => {
     cb.mockClear();
   });
 
+  verifyComponent(Switch, {});
+
   describe('when rendered', () => {
     it('should render an input element with `type=checkbox`', () => {
       const {getByRole} = render(<Switch onChange={cb} />);
@@ -89,26 +91,6 @@ describe('Switch', () => {
     it('should have a "not-allowed" cursor', () => {
       const {getByRole} = render(<Switch disabled={true} onChange={cb} />);
       expect(getByRole(role)).toHaveStyleRule('cursor', 'not-allowed');
-    });
-  });
-
-  describe('when rendered with extra, arbitrary props', () => {
-    it('should apply those extra props to the checkbox input', () => {
-      const testValue = 'test';
-
-      const {getByRole} = render(<Switch data-propspread={testValue} onChange={cb} />);
-      expect(getByRole(role)).toHaveAttribute('data-propspread', testValue);
-    });
-  });
-
-  describe('when rendered with an input ref', () => {
-    it("should set the ref's current property to the checkbox input element", () => {
-      const ref = React.createRef<HTMLInputElement>();
-
-      render(<Switch inputRef={ref} onChange={cb} />);
-
-      expect(ref.current).not.toBeNull();
-      expect(ref.current).toHaveAttribute('role', role);
     });
   });
 

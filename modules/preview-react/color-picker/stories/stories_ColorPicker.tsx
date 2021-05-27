@@ -112,7 +112,7 @@ storiesOf('Preview/Color Picker/React', module)
           onFocus={() => setOpen(true)}
           onClick={() => setOpen(true)}
           onBlur={onBlur}
-          inputRef={inputRef}
+          ref={inputRef}
         />
         <Popper
           placement={'bottom-start'}

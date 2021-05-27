@@ -4,6 +4,7 @@ import uuid from 'uuid/v4';
 import {
   GrowthBehavior,
   ErrorType,
+  StyledType,
   Themeable,
   errorRing,
   styled,
@@ -91,11 +92,15 @@ export interface CoreSelectBaseProps
   value?: string;
 }
 
-export interface SelectBaseProps extends CoreSelectBaseProps {
+export interface SelectBaseProps extends CoreSelectBaseProps, StyledType {
   /**
-   * The ref to the underlying button element. Use this to imperatively manipulate the button.
+   * The ref to be forwarded to the underlying button element. Use this to imperatively manipulate the button.
    */
-  buttonRef: React.RefObject<HTMLButtonElement>;
+  forwardedButtonRef?: React.Ref<HTMLButtonElement>;
+  /**
+   * The local ref to the underlying button element. Can be used in situations where RefObject is required (such as the Popper Menu).
+   */
+  localButtonRef?: React.RefObject<HTMLButtonElement>;
   /**
    * The index of the focused option in the SelectBase.
    * @default 0
@@ -163,7 +168,7 @@ const menuIconSize = 24;
 const buttonPadding = spaceNumbers.xxs - buttonBorderWidth;
 
 const SelectButton = styled('button')<
-  Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'>
+  Pick<SelectBaseProps, 'error' | 'grow' | 'menuVisibility' | 'theme'> & StyledType
 >(
   {
     ...type.body,
@@ -266,7 +271,9 @@ const defaultRenderOption: RenderOptionFunction = option => {
 const SelectBase = ({
   'aria-labelledby': ariaLabelledBy,
   'aria-required': ariaRequired,
-  buttonRef,
+  as,
+  forwardedButtonRef,
+  localButtonRef,
   disabled,
   error,
   focusedOptionIndex = 0,
@@ -403,6 +410,7 @@ const SelectBase = ({
         aria-expanded={menuVisibility !== 'closed' ? 'true' : undefined}
         aria-haspopup="listbox"
         aria-controls={menuVisibility !== 'closed' ? menuId : undefined}
+        as={as}
         disabled={disabled}
         error={error}
         grow={grow}
@@ -414,7 +422,7 @@ const SelectBase = ({
         onKeyUp={e => {
           e.preventDefault();
         }}
-        ref={buttonRef}
+        ref={forwardedButtonRef}
         type="button"
         value={selectedOptionValue}
         {...elemProps}
@@ -427,7 +435,7 @@ const SelectBase = ({
           aria-activedescendant={options[focusedOptionIndex].id}
           aria-labelledby={ariaLabelledBy}
           aria-required={ariaRequired || required ? true : undefined}
-          buttonRef={buttonRef}
+          buttonRef={localButtonRef}
           id={menuId}
           error={error}
           menuRef={menuRef}

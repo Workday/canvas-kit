@@ -49,6 +49,17 @@ describe('Select', () => {
     });
   });
 
+  // TODO: Replace ref test with verifyComponent after fixing Select to handle
+  // consumer-provided onKeyDown event handler. Currently fails the onKeyDown
+  // callback test in verifyComponent.
+  describe('when rendered with a ref', () => {
+    it('should set the ref to the button element', async () => {
+      const ref: React.RefObject<HTMLButtonElement> = React.createRef();
+      const {findByRole} = render(<Select onChange={cb} options={options} ref={ref} />);
+      expect(await findByRole(selectButtonRole)).toEqual(ref.current);
+    });
+  });
+
   describe('when an option with a different value than the current value of the select is clicked', () => {
     it('should call the onChange callback', () => {
       const {getAllByRole, getByRole} = render(<Select onChange={cb} options={options} />);

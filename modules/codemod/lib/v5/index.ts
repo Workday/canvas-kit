@@ -12,6 +12,8 @@ import renameCoreImports from './renameCoreImports';
 import compoundCard from './compoundCard';
 // input provider
 import moveInputProvider from './moveInputProvider';
+// input codemods
+import renameInputRefs from './renameInputRefs';
 
 import {API, FileInfo, Options} from 'jscodeshift';
 
@@ -28,6 +30,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     recategorizeButtons,
     compoundCard,
     moveInputProvider,
+    renameInputRefs,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);

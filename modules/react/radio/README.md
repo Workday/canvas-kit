@@ -99,16 +99,18 @@ Default: A uniquely generated id
 
 ---
 
-#### `value: string`
+#### `ref: React.Ref<HTMLInputElement>`
 
-> The `value` attribute of the input radio.
+> A ref to be forwarded to the underlying `<input type="radio" />` element. Use this to imperatively
+> modify the input element.
+
+Default: `undefined`
 
 ---
 
-#### `inputRef: React.Ref<HTMLInputElement>`
+#### `value: string`
 
-> A ref to the underlying radio input element. Use this to imperatively check or focus this
-> component.
+> The `value` attribute of the input radio.
 
 # Radio Button Group
 
