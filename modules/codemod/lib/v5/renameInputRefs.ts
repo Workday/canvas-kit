@@ -57,8 +57,9 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           // Rewrite inputRef to ref if any of the following are true:
           // (a) elementName was the name used in a default import of the current
           //     input being processed (e.g., `import TextInput ...`)
-          // (b) elementName was renamed from a named import of the current input
-          //     being processed (e.g., `import {TextInput as CanvasTextInput} ...`)
+          // (b) elementName was the name used in a named import of the current
+          //     input being processed (e.g., `import {TextInput} ...`  or
+          //     `import {TextInput as CanvasTextInput} ...`)
           // (c) elementName was created by calling `styled` on the current input
           //     being processed (e.g., `const StyledTextInput = styled(TextInput)`)
           if (
