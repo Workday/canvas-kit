@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  createComponent,
+  StyledType,
   ErrorType,
   useUniqueId,
   focusRing,
@@ -18,7 +20,7 @@ import canvas, {
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 
-export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps extends Themeable {
   /**
    * If true, set the Checkbox to the checked state.
    * @default false
@@ -34,10 +36,6 @@ export interface CheckboxProps extends Themeable, React.InputHTMLAttributes<HTML
    * @default A uniquely generated id by uuid()
    */
   id?: string;
-  /**
-   * The ref to the underlying checkbox input element. Use this to imperatively check or focus the Checkbox.
-   */
-  inputRef?: React.Ref<HTMLInputElement>;
   /**
    * The text of the Checkbox label.
    * @default ''
@@ -104,7 +102,7 @@ const CheckboxRipple = styled('span')<Pick<CheckboxProps, 'disabled'>>({
  * Note: `~ div:first-of-type` refers to `CheckboxBackground`
  * and was easier to use than a component selector in this case.
  */
-const CheckboxInput = styled('input')<CheckboxProps>(
+const CheckboxInput = styled('input')<CheckboxProps & StyledType>(
   ({
     theme: {
       canvas: {
@@ -281,57 +279,64 @@ const CheckboxLabel = styled('label')<{disabled?: boolean}>(
   ({disabled}) => (disabled ? {color: inputColors.disabled.text} : {cursor: 'pointer'})
 );
 
-export const Checkbox = ({
-  checked = false,
-  label = '',
-  // TODO: Fix useTheme and make it a real hook
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  theme = useTheme(),
-  id,
-  disabled,
-  inputRef,
-  onChange,
-  value,
-  error,
-  indeterminate,
-  // TODO: Standardize on prop spread location (see #150)
-  ...elemProps
-}: CheckboxProps) => {
-  const inputId = useUniqueId(id);
-  return (
-    <CheckboxContainer>
-      <CheckboxInputWrapper disabled={disabled}>
-        <CheckboxInput
-          checked={checked}
-          disabled={disabled}
-          id={inputId}
-          ref={inputRef}
-          onChange={onChange}
-          type="checkbox"
-          value={value}
-          error={error}
-          {...elemProps}
-        />
-        <CheckboxRipple />
-        <CheckboxBackground checked={checked} disabled={disabled}>
-          <CheckboxCheck checked={checked}>
-            {indeterminate ? (
-              <IndeterminateBox />
-            ) : (
-              <SystemIcon icon={checkSmallIcon} color={theme.canvas.palette.primary.contrast} />
-            )}
-          </CheckboxCheck>
-        </CheckboxBackground>
-      </CheckboxInputWrapper>
-      {label && (
-        <CheckboxLabel htmlFor={inputId} disabled={disabled}>
-          {label}
-        </CheckboxLabel>
-      )}
-    </CheckboxContainer>
-  );
-};
-
-Checkbox.ErrorType = ErrorType;
+export const Checkbox = createComponent('input')({
+  displayName: 'Checkbox',
+  Component: (
+    {
+      checked = false,
+      label = '',
+      // TODO: Fix useTheme and make it a real hook
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      theme = useTheme(),
+      id,
+      disabled,
+      onChange,
+      value,
+      error,
+      indeterminate,
+      ...elemProps
+    }: CheckboxProps,
+    ref,
+    Element
+  ) => {
+    const inputId = useUniqueId(id);
+    return (
+      <CheckboxContainer>
+        <CheckboxInputWrapper disabled={disabled}>
+          <CheckboxInput
+            as={Element}
+            checked={checked}
+            disabled={disabled}
+            id={inputId}
+            ref={ref}
+            onChange={onChange}
+            type="checkbox"
+            value={value}
+            error={error}
+            {...elemProps}
+          />
+          <CheckboxRipple />
+          <CheckboxBackground checked={checked} disabled={disabled}>
+            <CheckboxCheck checked={checked}>
+              {indeterminate ? (
+                <IndeterminateBox />
+              ) : (
+                <SystemIcon icon={checkSmallIcon} color={theme.canvas.palette.primary.contrast} />
+              )}
+            </CheckboxCheck>
+          </CheckboxBackground>
+        </CheckboxInputWrapper>
+        {label && (
+          <CheckboxLabel htmlFor={inputId} disabled={disabled}>
+            {label}
+          </CheckboxLabel>
+        )}
+      </CheckboxContainer>
+    );
+  },
+  subComponents: {
+    ErrorType,
+  },
+});
 
 export default Checkbox;

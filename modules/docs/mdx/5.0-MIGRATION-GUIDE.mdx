@@ -13,11 +13,16 @@ about the update.
   - [Rename Core and Labs Core Modules to Tokens](#rename-core-and-labs-core-modules-to-tokens)
   - [Slash Imports](#slash-imports)
   - [Space Tokens](#space-tokens)
-  - [Compound Components](#compound-components)
+  - [Compound Components](#compound-components) -
+    [Canvas Kit Preview & Component Promotions](#canvas-kit-preview-component-promotions)
 - [Breaking Component Changes](#breaking-component-changes)
-  - [Tabs](#tabs)
+  - [Input Ref Forwarding](#input-ref-forwarding)
   - [Button](#button)
   - [Card](#card)
+  - [InputProvider](#inputprovider)
+  - [Tabs](#tabs)
+  - [Labs Space Style Function](#-labs-space-style-function)
+  - [Border Radius Zero Token](#border-radius-zero-token)
 
 ## General Changes
 
@@ -74,10 +79,11 @@ which are handled by the v5 codemod.
 ### Slash Imports
 
 We have moved from a separate module for every component to a slash imports system. All of our react
-components are now bundled under two packages:
+components are now bundled under three packages:
 
 - `@workday/canvas-kit-react`
 - `@workday/canvas-kit-labs-react`
+- `@workday/canvas-kit-preview-react`
 
 Due to this change, imports will need to be updated. For example:
 
@@ -163,22 +169,157 @@ Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.md)
 - Components will support [forwarded refs](https://reactjs.org/docs/forwarding-refs.html)
 - The corresponding tag of a component can be changed with the `as` prop
 
+### Canvas Kit Preview & Component Promotions
+
+Due to the broad range of stability in Canvas Kit Labs (`@workday/canvas-kit-labs-react`), we are
+introducing a new module called "Canvas Kit Preview" (`@workday/canvas-kit-preview-react`) to
+provide consumers with more clarity and confidence when uptaking experimental and upcoming
+components. The components in Canvas Kit Preview have had a full design and accessibility review,
+and are approved for use in product. Their functionality and design are set, but the API's and/or
+underlying architecture could still be subject to change. This bundle serves as a staging ground for
+components that are ready to use, but may not be up to the high code standards upheld in the main
+`@workday/canvas-kit-react` bundle. For more info, check out the
+[Canvis Kit Preview README](../../preview-react/README.md).
+
+Generally, Canvas Kit Preview components were originally in [Canvas Kit Labs](../../labs-react) and
+have been promoted. Essentially, Canvas Kit Labs is for alpha components and Canvas Kit Preview is
+for beta components.
+
+We have promoted several components that were previously in Canvas Kit Labs into Canvas Kit Preview
+and our main `@workday/canvas-kit-react` module:
+
+#### `@workday/canvas-kit-preview-react`
+
+- Breadcrumbs
+- Color Picker
+- Core `type` > Tokens `type`
+- Menu
+- Select
+- Side Panel
+
+#### `@workday/canvas-kit-react`
+
+- Pagination
+- Tabs
+
 ## Breaking Component Changes
 
-### Tabs
+### Input Ref Forwarding
 
-- `onTabsChange` is now `onActivateTab` and the signature is now:
-  ```tsx
-  function onActivateTab({data: {tab: string}, state: TabsState}): void;
-  ```
-- The `<Tabs>` component no longer accepts the `currentTab` property. The Tabs uses a model now. See
-  story for more details
+All input components in the main package now support
+[ref forwarding](https://reactjs.org/docs/forwarding-refs.html) using the standard `ref` attribute.
+This includes:
 
-PR:
+- Checkbox
+- Color Input
+- Color Preview
+- Radio
+- Select
+- Switch
+- Text Input
+- Text Area
 
-- https://github.com/Workday/canvas-kit/pull/953
+Additionally, the Select in Preview (formerly in Labs) has also been updated to support ref
+forwarding.
+
+Most of these input components previously supported an `inputRef` prop that could be used to obtain
+a ref to the component's underlying input element. For example, in v4, if you wanted to obtain a ref
+to a Text Input's underlying `<input type="text" />` element, you could pass a ref to the component
+using `inputRef`. In v5, you'll need to use `ref` instead of `inputRef` (or run the codemod 🤖):
+
+```tsx
+const ref = React.useRef(null);
+// before
+<TextInput inputRef={ref} />;
+// after
+<TextInput ref={ref} />;
+```
+
+🤖 The codemod will update all input components that previously supported `inputRef` to use `ref`
+instead.
+
+For components that previously supported `inputRef`, `ref` is now forwarded to the same underlying
+element that `inputRef` was applied to previously. Select and Select (Preview) did not support
+`inputRef` in v4, but now support `ref` in v5. See each component's documentation for information on
+which element `ref` is forwarded to for that particular component.
+
+Input component prop interfaces no longer extend directly from their underlying element interface
+(e.g., `TextInputProps` no longer extends from `React.InputHTMLAttributes<HTMLInputElement>`).
+`createComponent` returns a component that determines the element interface via the `as` prop. This
+is why input component props no longer contain an element interface directly. If you extend from an
+input component prop interface, or have code that uses an input component prop interface and
+accesses properties like `onClick`, you'll have to provide the input attribute yourself. This is not
+code-moddable since intent cannot be pre-determined. This will not effect runtime, but only
+TypeScript.
+
+```tsx
+interface MyTextInputProps extends TextInputProps {}
+
+// onClick no longer exists in `TextInputProps` so TypeScript will complain about onClick not
+// existing in `MyTextInputProps` (onClick does exist as a prop on `<TextInput>`, however)
+const MyTextInput = ({onClick}: MyTextInputProps) => <TextInput onClick={onClick} />;
+
+// Fix
+interface MyTextInputProps extends TextInputProps, React.InputHTMLAttributes<HTMLInputElement> {}
+
+// Alternate fix
+interface MyTextInputProps extends TextInputProps {
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
+}
+```
+
+As a final note, the following input components were previously class components and, thus,
+technically supported the `ref` attribute in v4:
+
+- Color Input
+- Color Preview
+- Select
+- Select (Preview)
+- Text Input
+- Text Area
+
+Passing `ref={ref}` to any of these components in v4 would have set `ref.current` to the mounted
+instance of the entire component
+([source](https://reactjs.org/docs/refs-and-the-dom.html#accessing-refs)) rather than the underlying
+HTML element represented by the component. This is no longer the case in v5.
 
 ### Button
+
+#### Recategorization
+
+There has been common confusion around the large number of buttons Canvas supports and when each
+should be used. To improve the usability of our design system, we have been working to recategorize
+and simplify our button offering. To align with the changes recently made in our Figma libraries, we
+have reorganized our buttons, renaming a few and removing some others. The majority of button use
+cases have been simplified into three different components: `PrimaryButton`, `SecondaryButton`, and
+`TertiaryButton`, each level representing its emphasis and hierarchy in a UI. We hope this makes
+your usage of our buttons more intentional and clear. We have provided a codemod to make all of
+these changes automatic updates. In addition, the `SecondaryButton` now uses the "outline" styling
+by default for improved accessibility.
+
+**Renamed:**
+
+- 🤖 `Button` has been split into `PrimaryButton` and `SecondaryButton` (depending on the `variant`
+  prop).
+- 🤖 `OutlineButton` (`secondary`) is now `SecondaryButton`. For accessibility reasons, the
+  `outline` styling is the new styling for our secondary buttons.
+- 🤖 `OutlineButton` (`inverse`) is now `SecondaryButton` with an `inverse` variant.
+- 🤖 `TextButton` is now `TertiaryButton`.
+
+**Removed:**
+
+- 🤖 `HighlightButton`. Use `SecondaryButton` instead.
+- 🤖 `OutlineButton` with `primary` variant. Use `PrimaryButton` or `SecondaryButton` instead. The
+  codemod will replace with `SecondaryButton`.
+- 🤖 `DropdownButton`. This can be achieved simply using `PrimaryButton` or `SecondaryButton` with
+  an `icon` prop and `iconPosition="right"`.
+
+To see examples of the before and after code, have a look at our
+[codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
+
+#### Exports
+
+Additionally, we have changed some of the button module's export behavior:
 
 - 🤖 `beta_Button` export was removed. The codemod will rename the import to `Button` instead,
   preserving local renaming if it exists.
@@ -186,29 +327,30 @@ PR:
   // before
   import {beta_Button as Button} from '@workday/canvas-kit-react-button';
   // after
-  import {Button} from '@workday/canvas-kit-react-button';
+  import {SecondaryButton} from '@workday/canvas-kit-react-button';
   ```
 - 🤖 The default export was removed. The codemod will change default imports to named imports.
   ```tsx
   // before
   import Button from '@workday/canvas-kit-react-button';
   // after
-  import {Button} from '@workday/canvas-kit-react-button';
+  import {SecondaryButton} from '@workday/canvas-kit-react-button';
   ```
 - 🤖 Enums have been removed from all buttons. String literals are used instead. The codemod will
   write any usages of an enum to the string literal. If you used an enum as a type, the codemod will
   expand to a union of string literals. You could change the union manually instead to be something
-  like `ButtonProps['variant']` if you prefer not to duplicate the union of string literals.
+  like `SecondaryButtonProps['variant']` if you prefer not to duplicate the union of string
+  literals.
   ```tsx
   // before
-  <Button variant={Button.Variant.Primary} />;
+  <Button size={Button.Size.Large} />;
   interface Props {
-    variant: ButtonVariant;
+    size: ButtonSize;
   }
   // after
-  <Button variant="primary" />;
+  <SecondaryButton size="large" />;
   interface Props {
-    variant: 'primary' | 'secondary';
+    size: 'small' | 'medium' | 'large';
   }
   ```
 - Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and
@@ -307,142 +449,61 @@ import {Card} from './Card' // where `Card` is a re-exported Canvas `Card`
 
 This codemod should handle most of what we've seen in code that uses Canvas Kit cards already.
 
-```tsx
-// before: common workaround
-const MyCardHeading = styled('h2')({
-  // styles copied from Canvas Card source code
-  ...cardStyleOverrides
-})
+### InputProvider
 
-<Card>
-  <MyCardHeading>Card Heading</MyCardHeading>
-  Card Body
-</Card>
+The `InputProvider` wrapper component (used to provide css-referencable data attributes for the
+users current input method) has been moved. After renaming our `core` package to `tokens`, it no
+longer made sense in this location.
 
-// after using css
-<Card>
-  <Card.Heading as="h2" css={cardStyleOverrides}>Card Heading</Card.Heading>
-  <Card.Body>Card Body</Card.Body>
-</Card>
+- 🤖 `InputProvider` moved from `@workday/canvas-kit-react-core` to
+  `@workday/canvas-kit-react/common`.
 
-// after using styled
-const MyCardHeading = styled(Card.Heading)(cardStyleOverrides)
-<Card>
-  <MyCardHeading as="h2">Card Heading</MyCardHeading>
-  <Card.Body>Card Body</Card.Body>
-</Card>
-```
+### Tabs
 
-Before:
+- `onTabsChange` is now `onActivateTab` and the signature is now:
+  ```tsx
+  function onActivateTab({data: {tab: string}, state: TabsState}): void;
+  ```
+- The `<Tabs>` component no longer accepts the `currentTab` property. The Tabs uses a model now. See
+  story for more details
+- As noted above, Tabs has been promoted out of Canvas Kit Labs. You can now import directly from
+  `@workday/canvas-kit-react/tabs`.
 
-```tsx
-import React from 'react';
+### Labs Space Style Function
 
-import {
-  Popper,
-  Popup,
-  usePopup,
-  useCloseOnEscape,
-  useCloseOnOutsideClick,
-} from '@workday/canvas-kit-react-popup';
-
-export const Simple = () => {
-  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
-
-  useCloseOnOutsideClick(stackRef, closePopup);
-  useCloseOnEscape(stackRef, closePopup);
-
-  return (
-    <>
-      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
-      <Popper placement={'bottom'} {...popperProps}>
-        <Popup
-          width={400}
-          heading={'Delete Item'}
-          padding={Popup.Padding.s}
-          handleClose={closePopup}
-        >
-          <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-
-          <DeleteButton style={{marginRight: '16px'}} onClick={closePopup}>
-            Delete
-          </DeleteButton>
-          <Button onClick={closePopup}>Cancel</Button>
-        </Popup>
-      </Popper>
-    </>
-  );
-};
-```
-
-After:
-
-```tsx
-import React from 'react';
-
-import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {
-  useCloseOnEscape,
-  useCloseOnOutsideClick,
-  Popup,
-  usePopupModel,
-  useInitialFocus,
-  useReturnFocus,
-} from '@workday/canvas-kit-react/popup';
-
-export const Simple = () => {
-  const model = usePopupModel();
-
-  useCloseOnOutsideClick(model);
-  useCloseOnEscape(model);
-  useInitialFocus(model);
-  useReturnFocus(model);
-
-  return (
-    <Popup model={model}>
-      <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
-      <Popup.Popper placement={'bottom'}>
-        <Popup.Card width={400} padding="16px">
-          <Popup.CloseIcon aria-label="Close" />
-          <Popup.Heading>Delete Item</Popup.Heading>
-          <Popup.Body>
-            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-
-            <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
-            <Popup.CloseButton>Cancel</Popup.CloseButton>
-          </Popup.Body>
-        </Popup.Card>
-      </Popup.Popper>
-    </Popup>
-  );
-};
-```
+The `space` style function in the `/labs-react/token` (formerly `labs/core`) has been removed.
+Please opt to use `Box` instead. Below is an example:
 
 ```tsx
 // before
-const {targetProps, popperProps, closePopup, stackRef} = usePopup();
+import {spaceNumbers} from '@workday/canvas-kit-react-core';
+import {space} from '@workday/canvas-kit-labs-react-core';
+// A styled div with space props
+const Box = styled('div')(space);
 
-useCloseOnOutsideClick(stackRef, closePopup);
-useCloseOnEscape(stackRef, closePopup, buttonRef); // used to return focus to button
+<Box p={spaceNumbers.xl}>Ye Olde SpaceBox</Box>;
 
 // after
-const model = usePopupModel({
-  returnFocusRef: buttonRef, // only needed if you don't use `Popper.Target`
-});
+import {Box} from '@workday/canvas-kit/labs-react/common';
 
-const targetProps = usePopupTarget(model);
-const popperProps = usePopupPopper(model);
-const closePopup = model.events.hide;
+// You can also use `padding={spaceNumbers.xl}` or `padding={space.xl}`
+<Box padding="xl">New Box</Box>;
+```
 
-// onClick that returns focus if not using `Popup.CloseButton` or `Popup.CloseIcon`
-const onClick = () => {
-  model.events.hide();
+## Border Radius Zero Token
 
-  // changeFocus comes from `common`
-  changeFocus(buttonRef.current); // if `Popper.Target` was used, this could be `model.state.targetRef.current`
-};
+The border radius zero token value was updated from `0` to `"0px"` for consistency; all other border
+radius tokens use string pixel values. We highly doubt this change will cause any issues, but
+because the value's type is different, this is technically a breaking change.
 
-useCloseOnOutsideClick(model);
-useCloseOnEscape(model);
-useReturnFocus(model); // replaces the third parameter in `useCloseOnEscape`.
+```tsx
+// before
+import {borderRadius} from '@workday/canvas-kit-react/tokens';
+
+console.log(borderRadius.zero); // returns `0`
+
+// after
+import {borderRadius} from '@workday/canvas-kit-react/tokens';
+
+console.log(borderRadius.zero); // returns "0px"
 ```

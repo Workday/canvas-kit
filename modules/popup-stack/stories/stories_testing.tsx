@@ -11,7 +11,7 @@ import {
   useCloseOnEscape,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {DeleteButton, Button} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
 
 export default {
@@ -127,11 +127,11 @@ export const MixedPopupTypes = () => {
                         <DeleteButton style={{marginRight: '16px'}} onClick={onClose}>
                           Really Delete
                         </DeleteButton>
-                        <Button onClick={onClose}>Cancel</Button>
+                        <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
                       </>
                     )}
                   </TempPopup>
-                  <Button onClick={onClose}>Cancel</Button>
+                  <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
                 </>
               )}
             </TempPopup>

@@ -6,6 +6,8 @@ const id = 'color-preview';
 const value = 'eee';
 
 describe('ColorPreview', () => {
+  verifyComponent(ColorPreview, {});
+
   describe('when rendered', () => {
     describe('with a value', () => {
       test('should render ColorPreview with value', () => {
@@ -53,35 +55,17 @@ describe('ColorPreview', () => {
       });
     });
 
-    describe('when provided an input ref', () => {
-      test('input ref should be defined', () => {
-        const ref: React.RefObject<HTMLInputElement> = React.createRef();
-        render(<ColorPreview value={value} inputRef={ref} />);
-        expect(ref.current).toBeDefined();
-      });
-    });
-
-    describe('when provided a value with a hash', () => {
+    describe('with a value that has a hash', () => {
       test('the value is stripped', () => {
         const {getByTestId} = render(<ColorPreview value={'#eee'} data-testid={id} />);
         expect(getByTestId(id)).toHaveValue(value);
       });
     });
 
-    describe('when provided more than 6 characters as the value', () => {
+    describe('with a value more than 6 characters in length', () => {
       test('the value is stripped', () => {
         const {getByTestId} = render(<ColorPreview value={'123456789'} data-testid={id} />);
         expect(getByTestId(id)).toHaveValue('123456');
-      });
-    });
-
-    describe('with extra, arbitrary props', () => {
-      test('should spread extra props', () => {
-        const attr = 'test';
-        const {getByTestId} = render(
-          <ColorPreview value={value} data-propspread={attr} data-testid={id} />
-        );
-        expect(getByTestId(id)).toHaveAttribute('data-propspread', attr);
       });
     });
   });

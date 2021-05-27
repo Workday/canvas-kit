@@ -11,7 +11,7 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 import Skeleton, {SkeletonShape, SkeletonText, SkeletonHeader} from '../index';
 
@@ -83,9 +83,7 @@ storiesOf('Components/Indicators/Skeleton/React', module)
         <FormField label="Loading" labelPosition={FormField.LabelPosition.Left}>
           <Checkbox checked={isLoading} onChange={onChangeLoading} />
         </FormField>
-        <Button onClick={resetTimeout} variant="primary">
-          Reset Skeleton
-        </Button>
+        <PrimaryButton onClick={resetTimeout}>Reset Skeleton</PrimaryButton>
         <Card width={600}>
           <Card.Body>
             <div style={{position: 'relative', height: 146}}>

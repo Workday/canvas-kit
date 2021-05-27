@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Modal, useModal} from '@workday/canvas-kit-react/modal';
@@ -29,9 +29,37 @@ export const Default = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+      </Modal>
+    </>
+  );
+};
+
+export const WithoutHook = () => {
+  const [open, setOpen] = React.useState(false);
+  const ref = React.useRef<HTMLButtonElement>(null);
+  const openModal = () => {
+    setOpen(true);
+  };
+  const closeModal = () => {
+    setOpen(false);
+    if (ref.current) {
+      ref.current.focus();
+    }
+  };
+
+  return (
+    <>
+      <DeleteButton ref={ref} onClick={openModal}>
+        Delete Item
+      </DeleteButton>
+
+      <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
+          Delete
+        </DeleteButton>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </>
   );
@@ -43,7 +71,7 @@ export const WithRadioButtons = () => {
 
   return (
     <>
-      <Button {...targetProps}>With Radio Buttons</Button>
+      <SecondaryButton {...targetProps}>With Radio Buttons</SecondaryButton>
       <Modal data-testid="TestModal" heading="Select Item" {...modalProps}>
         <RadioGroup
           name="contact"
@@ -75,9 +103,7 @@ export const WithoutCloseIcon = () => {
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </>
   );
@@ -98,13 +124,11 @@ export const CustomFocus = () => {
         handleClose={undefined}
       >
         <p>Enter name to confirm deletion</p>
-        <FormField label="Item name">{controlComponent(<TextInput inputRef={ref} />)}</FormField>
+        <FormField label="Item name">{controlComponent(<TextInput ref={ref} />)}</FormField>
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
         </DeleteButton>
-        <Button onClick={closeModal} variant="secondary">
-          Cancel
-        </Button>
+        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
     </>
   );

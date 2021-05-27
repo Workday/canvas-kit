@@ -2,7 +2,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {DeleteButton, Button} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
 
 import {
@@ -67,7 +67,7 @@ interface WindowProps {
 
 const Window = ({children, heading, relativeNode, top, left}: WindowProps) => {
   const model = usePopupModel({
-    initialVisible: true,
+    initialVisibility: 'visible',
   });
 
   usePopupStack(model.state.stackRef);
@@ -170,11 +170,11 @@ export const MixedPopupTypes = () => {
                         <DeleteButton style={{marginRight: '16px'}} onClick={onClose}>
                           Really Delete
                         </DeleteButton>
-                        <Button onClick={onClose}>Cancel</Button>
+                        <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
                       </>
                     )}
                   </TempPopup>
-                  <Button onClick={onClose}>Cancel</Button>
+                  <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
                 </>
               )}
             </TempPopup>

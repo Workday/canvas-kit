@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ColorInput from './ColorInput';
+import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
 import styled from '@emotion/styled';
 import {colors} from '@workday/canvas-kit-react/tokens';
@@ -15,19 +16,25 @@ export interface ColorPreviewProps extends TextInputProps {
   id?: string;
 }
 
-const ColorPreviewComponent = styled(ColorInput)({
+const StyledColorPreview = styled(ColorInput)<StyledType>({
   backgroundColor: colors.frenchVanilla100,
   borderColor: colors.frenchVanilla100,
   pointerEvents: 'none',
 });
 
-export default class ColorPreview extends React.Component<ColorPreviewProps> {
-  public render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {id, value, ...elemProps} = this.props;
+export const ColorPreview = createComponent('input')({
+  displayName: 'ColorPreview',
+  Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => (
+    <StyledColorPreview
+      ref={ref}
+      as={Element}
+      id={id}
+      value={value}
+      readOnly={true}
+      placeholder=""
+      {...elemProps}
+    />
+  ),
+});
 
-    return (
-      <ColorPreviewComponent id={id} value={value} readOnly={true} placeholder="" {...elemProps} />
-    );
-  }
-}
+export default ColorPreview;

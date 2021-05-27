@@ -1,7 +1,7 @@
 import * as React from 'react';
 import isPropValid from '@emotion/is-prop-valid';
 import {CSSObject} from '@emotion/core';
-import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {type} from '@workday/canvas-kit-preview-react/tokens';
 import {borderRadius, space, spaceNumbers} from '@workday/canvas-kit-react/tokens';
 import {
   GrowthBehavior,
@@ -85,7 +85,7 @@ export const ButtonContainer = styled('button', {
     cursor: 'pointer',
     outline: 'none',
     verticalAlign: 'middle',
-    border: '2px solid transparent',
+    border: '1px solid transparent',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     WebkitFontSmoothing: 'antialiased',

@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  createComponent,
+  StyledType,
   GrowthBehavior,
   ErrorType,
   errorRing,
@@ -8,21 +10,20 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, inputColors, spaceNumbers, type} from '@workday/canvas-kit-react/tokens';
 
-export interface TextInputProps
-  extends Themeable,
-    GrowthBehavior,
-    React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps extends Themeable, GrowthBehavior {
   /**
    * The type of error associated with the TextInput (if applicable).
    */
   error?: ErrorType;
   /**
-   * The ref to the inner text input element.
+   * The width of the TextInput.
    */
-  inputRef?: React.Ref<HTMLInputElement>;
+  width?: number | string;
 }
 
-const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 'theme'>>(
+const StyledTextInput = styled('input')<
+  Pick<TextInputProps, 'error' | 'grow' | 'width' | 'theme'> & StyledType
+>(
   {
     ...type.body,
     border: `1px solid ${inputColors.border}`,
@@ -77,17 +78,22 @@ const Input = styled('input')<Pick<TextInputProps, 'error' | 'grow' | 'width' | 
   }
 );
 
-class TextInput extends React.Component<TextInputProps> {
-  static ErrorType = ErrorType;
-
-  render() {
-    // TODO: Standardize on prop spread location (see #150)
-    const {inputRef, grow, error, ...inputProps} = this.props;
-
-    return <Input type="text" ref={inputRef} grow={grow} error={error} {...inputProps} />;
-  }
-}
-
-TextInput.ErrorType = ErrorType;
+export const TextInput = createComponent('input')({
+  displayName: 'TextInput',
+  Component: ({grow, error, width, ...elemProps}: TextInputProps, ref, Element) => (
+    <StyledTextInput
+      type="text"
+      ref={ref}
+      as={Element}
+      grow={grow}
+      error={error}
+      width={width}
+      {...elemProps}
+    />
+  ),
+  subComponents: {
+    ErrorType,
+  },
+});
 
 export default TextInput;

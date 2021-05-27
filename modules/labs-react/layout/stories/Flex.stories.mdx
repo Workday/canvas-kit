@@ -1,0 +1,71 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+
+import {Flex} from '@workday/canvas-kit-labs-react/layout';
+// examples
+import {FlexCard} from './examples/Flex/FlexCard';
+import {FlexLayout} from './examples/Flex/FlexLayout';
+import {Usage} from './examples/Flex/Usage';
+import {FlexStyle} from './examples/PropTables';
+
+<Meta title="Labs/Layout/Flex" component={Flex} />
+
+# Flex
+
+[![LABS: Beta](https://img.shields.io/badge/LABS-beta-orange)](https://github.com/Workday/canvas-kit/tree/master/modules/labs-react/README.md)
+This component is work in progress and currently in pre-release.
+
+`Flex` is a low-level layout component that provides a common, ergonomic API for building
+one-dimensional layouts with
+[CSS Flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox).
+
+## Table of Contents
+
+- [Flex](#flex)
+  - [Table of Contents](#table-of-contents)
+  - [Usage](#usage)
+  - [What's the difference between `Flex` and `Box`?](#whats-the-difference-between-flex-and-box)
+  - [Flex Props](#flex-props)
+  - [Examples](#examples)
+  - [Exhaustive Prop List](#exhaustive-prop-list)
+
+## Usage
+
+<ExampleCodeBlock code={Usage} />
+
+## What's the difference between `Flex` and `Box`?
+
+`Flex` is built with `Box` and has access to all `BoxProps`. The main differences between `Box` and
+`Flex` are:
+
+- `Flex` is set to `display: flex` by default
+- The `display` prop is limited to `flex` and `inline-flex`
+- `Flex` has access to flex container properties.
+
+In short, use `Flex` when you need a flex container to build layouts with CSS Flexbox, and use `Box`
+when you need a simple container. It's also important to note that `Flex` has no real opinion about
+how to build layouts outside of the CSS Flexbox spec. Its unopinonated nature allows it to be
+composed into many different components.
+
+## Flex Props
+
+As previously mentioned, `Flex` is built on top of `Box` and has access to all its props, including
+[flex item properties](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Item). But `Flex` adds
+[flex container properties](https://developer.mozilla.org/en-US/docs/Glossary/Flex_Container)
+through style props as well. There are seven flex container props:
+
+<ArgsTable of={FlexStyle} />
+
+## Examples
+
+You can nest `Flex` components to build layouts with rows and columns.
+
+<ExampleCodeBlock code={FlexLayout} />
+
+You can also use `Flex` to create layouts within smaller containers, such as this card example
+below:
+
+<ExampleCodeBlock code={FlexCard} />
+
+## Exhaustive Prop List
+
+<ArgsTable of={Flex} />

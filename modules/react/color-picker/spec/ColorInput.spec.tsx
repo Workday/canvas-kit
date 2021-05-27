@@ -12,6 +12,8 @@ describe('ColorInput', () => {
     cb.mockReset();
   });
 
+  verifyComponent(ColorInput, {});
+
   describe('when rendered', () => {
     describe('with a placeholder', () => {
       test('should render a ColorInput with a placeholder', () => {
@@ -53,30 +55,14 @@ describe('ColorInput', () => {
       });
     });
 
-    describe('with extra, arbitrary props', () => {
-      test('should spread extra props', () => {
-        const attr = 'test';
-        const {getByRole} = render(<ColorInput data-propspread={attr} />);
-        expect(getByRole('textbox')).toHaveAttribute('data-propspread', attr);
-      });
-    });
-
-    describe('when provided an input ref', () => {
-      test('input ref should be defined', () => {
-        const ref: React.RefObject<HTMLInputElement> = React.createRef();
-        render(<ColorInput inputRef={ref} />);
-        expect(ref.current).toBeDefined();
-      });
-    });
-
-    describe('when provided a value with a hash', () => {
+    describe('with a value that has a hash', () => {
       test('the hash is stripped from the value', () => {
         const {getByRole} = render(<ColorInput value={'#eee'} />);
         expect(getByRole('textbox')).toHaveValue(value);
       });
     });
 
-    describe('when provided more than 6 characters as the value', () => {
+    describe('with a value more than 6 characters in length', () => {
       test('the value is truncated to a length of 6', () => {
         const {getByRole} = render(<ColorInput value={'123456789'} />);
         expect(getByRole('textbox')).toHaveValue('123456');

@@ -6,9 +6,9 @@ describe('Tabs', () => {
   });
 
   ['Simple', 'Named Keys'].forEach(story => {
-    context(`given the [Labs/Tabs/React, ${story}] story is rendered`, () => {
+    context(`given the [Components/Containers/Tabs/React, ${story}] story is rendered`, () => {
       beforeEach(() => {
-        h.stories.load('Labs/Tabs/React', story);
+        h.stories.load('Components/Containers/Tabs/React', story);
       });
 
       it('should pass axe checks', () => {
@@ -217,9 +217,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Labs/Tabs/React, DisabledTab] story is rendered', () => {
+  context('given the [Components/Containers/Tabs/React, DisabledTab] story is rendered', () => {
     beforeEach(() => {
-      cy.loadStory('Labs/Tabs/React', 'DisabledTab');
+      cy.loadStory('Components/Containers/Tabs/React', 'DisabledTab');
     });
 
     context('when the first tab is active and focused', () => {
@@ -241,9 +241,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Labs/Tabs/React, DynamicTabs] story is rendered', () => {
+  context('given the [Components/Containers/Tabs/React, DynamicTabs] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Labs/Tabs/React', 'DynamicTabs');
+      h.stories.load('Components/Containers/Tabs/React', 'DynamicTabs');
     });
 
     context('when "Add Tab" is clicked', () => {
@@ -364,9 +364,9 @@ describe('Tabs', () => {
     });
   });
 
-  context('given the [Labs/Tabs/React, LeftToRight] story is rendered', () => {
+  context('given the [Components/Containers/Tabs/React, LeftToRight] story is rendered', () => {
     beforeEach(() => {
-      h.stories.load('Labs/Tabs/React', 'RightToLeft');
+      h.stories.load('Components/Containers/Tabs/React', 'RightToLeft');
     });
 
     context('when the first tab is active and focused', () => {

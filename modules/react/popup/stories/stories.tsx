@@ -2,7 +2,7 @@
 import * as React from 'react';
 import withReadme from 'storybook-readme/with-readme';
 
-import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {
   Popper,
@@ -40,7 +40,7 @@ export const Default = () => {
             <DeleteButton style={{marginRight: '16px'}} onClick={closePopup}>
               Delete
             </DeleteButton>
-            <Button onClick={closePopup}>Cancel</Button>
+            <SecondaryButton onClick={closePopup}>Cancel</SecondaryButton>
           </Popup.Body>
         </Popup.Card>
       </Popper>
@@ -59,7 +59,7 @@ export const RTL = () => {
           <DeleteButton style={{marginLeft: '16px'}} onClick={() => null}>
             לִמְחוֹק
           </DeleteButton>
-          <Button onClick={() => null}>לְבַטֵל</Button>
+          <SecondaryButton onClick={() => null}>לְבַטֵל</SecondaryButton>
         </Popup.Body>
       </Popup.Card>
     </CanvasProvider>

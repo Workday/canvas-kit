@@ -2,11 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
-
-import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Modal, ModalWidth} from '@workday/canvas-kit-react/modal';
 import {usePopupModel} from '@workday/canvas-kit-react/popup';
+
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 const noop = () => {}; // eslint-disable-line no-empty-function
 
@@ -29,14 +29,14 @@ const TestContent = () => {
 };
 
 const TestModal = ({width}: {width: ModalWidth}) => {
-  const model = usePopupModel({initialVisible: true});
+  const model = usePopupModel({initialVisibility: 'visible'});
   return (
     <>
       <TestContent />
       <Modal heading="Delete Item" model={model} handleClose={noop} width={width}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <DeleteButton style={{marginRight: '16px'}}>Delete</DeleteButton>
-        <Button>Cancel</Button>
+        <SecondaryButton>Cancel</SecondaryButton>
       </Modal>
     </>
   );

@@ -33,8 +33,7 @@ import Checkbox from '@workday/canvas-kit-react/checkbox';
 import FormField from '@workday/canvas-kit-react/form-field';
 
 <FormField label="My Field" inputId="my-checkbox-field">
-  <Checkbox disabled={false} checked={checked} onChange={this.handleCheck} id="my-checkbox-field" />
-  ;
+  <Checkbox disabled={false} checked={checked} onChange={this.handleCheck} id="my-checkbox-field" />;
 </FormField>;
 ```
 
@@ -98,16 +97,18 @@ Default: A uniquely generated id
 
 ---
 
-#### `value: string`
+#### `ref: React.Ref<HTMLInputElement>`
 
-> The `value` attribute of the input checkbox.
+> A ref to be forwarded to the underlying `<input type="checkbox" />` element. Use this to
+> imperatively modify the input element.
+
+Default: `undefined`
 
 ---
 
-#### `inputRef: React.Ref<HTMLInputElement>`
+#### `value: string`
 
-> A ref to the underlying input checkbox element. Use this to imperatively check or focus this
-> component.
+> The `value` attribute of the input checkbox.
 
 ---
 
