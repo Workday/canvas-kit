@@ -188,8 +188,8 @@ Variants only come their augmenting styles and a base type object is required.
 
 | Hierarchy Levels |
 | ---------------- |
-| `dataViz1`       |
-| `dataViz2`       |
+| `body1`       |
+| `body2`       |
 | `h1`             |
 | `h2`             |
 | `h3`             |

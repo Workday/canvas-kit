@@ -44,8 +44,8 @@ export const Depth = () => (
 
 export const Type = () => (
   <React.Fragment>
-    <h1 css={type.dataViz1}>Data Viz 1 Header</h1>
-    <h1 css={type.dataViz2}>Data Viz 2 Header</h1>
+    <h1 css={type.brand1}>Data Viz 1 Header</h1>
+    <h1 css={type.brand2}>Data Viz 2 Header</h1>
     <H1>H1 Header</H1>
     <H2>H2 Header</H2>
     <H3>H3 Header</H3>
