@@ -10,14 +10,16 @@ import {
 export type DisclosureState = {
   /** ID reference of the list. Children ids can be derived from this id */
   id: string;
-  /** Visual state of the disclosed content */
-  visible: boolean;
+  /** Visibility state of the disclosed content. Models are allowed to extend the states to fit
+   * their needs, so if you need to consistently determine "not hidden", use `visibility !==
+   * 'hidden'` rather than `visibility === 'visible'` */
+  visibility: 'hidden' | 'visible';
 };
 
 export type DisclosureEvents = {
-  /** Show the disclosed content */
+  /** Start showing the disclosed content */
   show(): void;
-  /** Hide this disclosed content */
+  /** Start hiding this disclosed content */
   hide(): void;
 };
 
@@ -39,9 +41,12 @@ export const disclosureEventMap = createEventMap<DisclosureEvents>()({
   },
   callbacks: {
     /**
-     * Called before disclosed contents are shown. It is safe to update state inside this callback
+     * Called when disclosed contents start showing. It is safe to update state inside this callback
      */
     onShow: 'show',
+    /**
+     * Called when disclosed contents start hiding. It is safe to update state inside this callback
+     */
     onHide: 'hide',
   },
 });
@@ -49,10 +54,10 @@ export const disclosureEventMap = createEventMap<DisclosureEvents>()({
 export type BaseDisclosureModelConfig = {
   /** ID reference of the list. Children ids can be derived from this id */
   id?: string;
-  /** Should the model start visible?
-   * @default false
+  /** The initial visibility of the disclosed content
+   * @default 'hidden'
    */
-  initialVisible?: boolean;
+  initialVisibility?: DisclosureState['visibility'];
 };
 
 export type DisclosureModelConfig = BaseDisclosureModelConfig &
@@ -60,17 +65,18 @@ export type DisclosureModelConfig = BaseDisclosureModelConfig &
 
 export const useDisclosureModel = (config: DisclosureModelConfig = {}): DisclosureModel => {
   const id = useUniqueId(config.id);
-  const [visible, setVisible] = React.useState(config.initialVisible || false);
+  const [visibility, setVisibility] = React.useState<DisclosureState['visibility']>(
+    config.initialVisibility || 'hidden'
+  );
 
-  const state = {id, visible};
+  const state = {id, visibility};
 
   const events = useEventMap(disclosureEventMap, state, config, {
     show() {
-      console.log('show');
-      setVisible(true);
+      setVisibility('visible');
     },
     hide() {
-      setVisible(false);
+      setVisibility('hidden');
     },
   });
 

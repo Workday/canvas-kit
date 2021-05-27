@@ -11,8 +11,10 @@ import {PopupModel} from '../usePopupModel';
  * VoiceOver for example.
  */
 export const useAssistiveHideSiblings = (model: PopupModel, elemProps = {}) => {
+  const visible = model.state.visibility !== 'hidden';
+
   React.useEffect(() => {
-    if (!model.state.visible) {
+    if (!visible) {
       return;
     }
 
@@ -34,7 +36,7 @@ export const useAssistiveHideSiblings = (model: PopupModel, elemProps = {}) => {
         }
       });
     };
-  }, [model.state.stackRef, model.state.visible]);
+  }, [model.state.stackRef, visible]);
 
   return elemProps;
 };

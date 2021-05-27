@@ -16,7 +16,6 @@ export function mergeProps<T extends object, S extends object>(
 
   for (const key in sourceProps) {
     if (sourceProps.hasOwnProperty(key)) {
-      console.log('key', key);
       if (key === 'css' && targetProps.hasOwnProperty('css')) {
         // @ts-ignore
         const css = [].concat(targetProps[key], sourceProps[key]);

@@ -7,13 +7,12 @@ import {
   createComponent,
   StyledType,
   useModelContext,
-  createHook,
-  changeFocus,
 } from '@workday/canvas-kit-react/common';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
 
 import {PopupModel} from './usePopupModel';
 import {PopupModelContext} from './Popup';
+import {usePopupCloseButton} from './PopupCloseButton';
 
 const closeIconSpacing = space.xs;
 const closeIconSpacingSmall = 10;
@@ -36,22 +35,7 @@ const StyledCloseIcon = styled(IconButton)<StyledType & IconButtonProps>(
   })
 );
 
-const useCloseButton = createHook(({events, state}: PopupModel) => {
-  return {
-    onClick: () => {
-      events.hide();
-
-      // delay until after state change have happened and changes are flushed to the DOM
-      requestAnimationFrame(() => {
-        if (state.willReturnFocus?.current) {
-          changeFocus((state.returnFocusRef || state.targetRef).current);
-        }
-      });
-    },
-  };
-});
-
-export const PopupCloseIcon = createComponent('button')({
+export const PopupCloseIcon = createComponent(IconButton)({
   displayName: 'Popup.CloseIcon',
   Component: (
     {size = 'medium', children, model, ...elemProps}: PopupCloseIconProps,
@@ -59,7 +43,7 @@ export const PopupCloseIcon = createComponent('button')({
     Element
   ) => {
     const localModel = useModelContext(PopupModelContext, model);
-    const props = useCloseButton(localModel, elemProps, ref);
+    const props = usePopupCloseButton(localModel, elemProps, ref);
     return <StyledCloseIcon as={Element} variant="plain" size={size} icon={xIcon} {...props} />;
   },
 });

@@ -5,6 +5,7 @@ import * as PopperJS from '@popperjs/core';
 export type Placement = PopperJS.Placement;
 export type PopperOptions = PopperJS.Options;
 
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {usePopupStack} from './usePopupStack';
 
 export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -55,7 +56,7 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
    * from the provided `placement` preference. If a `placement` preference doesn't fit, PopperJS
    * will choose a new one and call this callback.
    */
-  updatePlacement?: (placement: Placement) => void;
+  onPlacementChange?: (placement: Placement) => void;
   /**
    * The additional options passed to the Popper's `popper.js` instance.
    */
@@ -70,15 +71,16 @@ export interface PopperProps extends React.HTMLAttributes<HTMLDivElement> {
   portal?: boolean;
 }
 
-export const Popper = React.forwardRef<HTMLDivElement, PopperProps>(
-  ({portal = true, open = true, ...elemProps}: PopperProps, ref) => {
+export const Popper = createComponent('div')({
+  displayName: 'Popper',
+  Component: ({portal = true, open = true, ...elemProps}: PopperProps, ref, Element) => {
     if (!open) {
       return null;
     }
 
-    return <OpenPopper ref={ref} portal={portal} {...elemProps} />;
-  }
-);
+    return <OpenPopper ref={ref} as={Element} portal={portal} {...elemProps} />;
+  },
+});
 
 const getElementFromRefOrElement = (
   input: React.RefObject<Element> | Element | null
@@ -97,20 +99,22 @@ const defaultPopperOptions: PopperProps['popperOptions'] = {};
 
 // Popper bails early if `open` is false and React hooks cannot be called conditionally,
 // so we're breaking out the open version into another component.
-const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
-  (
+const OpenPopper = createComponent('div')({
+  displayName: 'OpenPopper',
+  Component: (
     {
       anchorElement,
       getAnchorClientRect,
       popperOptions = defaultPopperOptions,
       placement: popperPlacement = 'bottom',
-      updatePlacement,
+      onPlacementChange,
       children,
       portal,
       containerElement,
       ...elemProps
-    },
-    ref
+    }: PopperProps,
+    ref,
+    Element
   ) => {
     const firstRender = React.useRef(true);
     const popperInstance = React.useRef<PopperJS.Instance>();
@@ -124,10 +128,10 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         phase: 'main',
         fn({state}) {
           setPlacement(state.placement);
-          updatePlacement?.(state.placement);
+          onPlacementChange?.(state.placement);
         },
       };
-    }, [setPlacement, updatePlacement]);
+    }, [setPlacement, onPlacementChange]);
 
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
@@ -173,7 +177,7 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     }, [popperOptions, popperPlacement, placementModifier]);
 
     const contents = (
-      <div {...elemProps}>{isRenderProp(children) ? children({placement}) : children}</div>
+      <Element {...elemProps}>{isRenderProp(children) ? children({placement}) : children}</Element>
     );
 
     if (!portal) {
@@ -181,8 +185,8 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     }
 
     return ReactDOM.createPortal(contents, containerElement || stackRef.current!);
-  }
-);
+  },
+});
 
 // Typescript threw an error about non-callable signatures. Using typeof as a 'function' returns
 // a type of `Function` which isn't descriptive enough for Typescript. We don't do any detection

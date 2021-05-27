@@ -112,11 +112,13 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
   useCloseOnEscape(popupModel);
   useAlwaysCloseOnOutsideClick(popupModel);
 
+  const visible = popupModel.state.visibility !== 'hidden';
+
   return {
     /** Mix these properties into the target element. **Must be an Element** */
     targetProps: {
       // extra description of the target element for assistive technology
-      'aria-describedby': type === 'describe' && popupModel.state.visible ? id : undefined,
+      'aria-describedby': type === 'describe' && visible ? id : undefined,
       // This will replace the accessible name of the target element
       'aria-label': type === 'label' ? titleText : undefined,
       onMouseEnter: onOpenFromTarget,
@@ -127,13 +129,13 @@ export function useTooltip<T extends HTMLElement = HTMLElement>({
     },
     /** Mix these properties into the `Popper` component */
     popperProps: {
-      open: popupModel.state.visible,
+      open: visible,
       anchorElement,
       ref: popupModel.state.stackRef,
     },
     /** Mix these properties into the `TooltipContainer` component */
     tooltipProps: {
-      id: type === 'describe' && popupModel.state.visible ? id : undefined,
+      id: type === 'describe' && visible ? id : undefined,
       role: 'tooltip',
       onMouseEnter: onOpen,
       onMouseLeave: intentTimer.start,

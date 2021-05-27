@@ -24,8 +24,10 @@ export const useBringToTopOnClick = (model: PopupModel, elemProps = {}) => {
     [model.state.stackRef]
   );
 
+  const visible = model.state.visibility !== 'hidden';
+
   React.useLayoutEffect(() => {
-    if (!model.state.visible) {
+    if (!visible) {
       return;
     }
     document.addEventListener('click', onClick);
@@ -33,7 +35,7 @@ export const useBringToTopOnClick = (model: PopupModel, elemProps = {}) => {
       cancelAnimationFrame(timer.current);
       document.removeEventListener('click', onClick);
     };
-  }, [model.state.visible, onClick]);
+  }, [visible, onClick]);
 
   return elemProps;
 };

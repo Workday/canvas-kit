@@ -1,10 +1,13 @@
 import {useState, useLayoutEffect} from 'react';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {useUniqueId, changeFocus} from '@workday/canvas-kit-react/common';
 import {
-  usePopupOld,
   useCloseOnOutsideClick,
   useCloseOnEscape,
   PopperProps,
+  usePopupModel,
+  useReturnFocus,
+  usePopupTarget,
+  usePopupPopper,
 } from '@workday/canvas-kit-react/popup';
 
 import {DropdownButtonProps} from './Button';
@@ -15,6 +18,7 @@ export const useFocusActiveItemElement = <E extends HTMLElement>(
   activeDropdownItemRef: React.RefObject<E>
 ) => {
   useLayoutEffect(() => {
+    console.log('useFocusActiveItem');
     if (activeDropdownItemRef.current) {
       return activeDropdownItemRef.current.focus();
     }
@@ -40,16 +44,19 @@ interface UseDropdown {
 
 export const useDropdown = (
   activeDropdownItemRef: React.RefObject<HTMLAnchorElement>,
-  ref: React.RefObject<HTMLButtonElement>,
   items: Breadcrumb[],
   buttonId?: string
 ): UseDropdown => {
   // state
   const [activeDropdownItem, setActiveDropdownItem] = useState(initialActiveItem);
   // behaviors
-  const {targetProps, closePopup, popperProps} = usePopupOld();
-  useCloseOnOutsideClick(popperProps.ref, closePopup);
-  useCloseOnEscape(popperProps.ref, closePopup, ref);
+  const model = usePopupModel({
+    initialFocusRef: activeDropdownItemRef,
+  });
+
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useReturnFocus(model);
   useFocusActiveItemElement(activeDropdownItemRef);
 
   const handleButtonKeyUp = (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -59,8 +66,8 @@ export const useDropdown = (
   };
 
   const resetMenuFocus = () => {
-    ref.current?.focus();
-    closePopup();
+    model.events.hide();
+    changeFocus(model.state.targetRef.current);
   };
 
   const findActiveDropdownItemByIndex = (index: number) => {
@@ -85,24 +92,24 @@ export const useDropdown = (
 
   const uniqueButtonId = useUniqueId(buttonId);
 
-  const dropdownButtonProps = {
+  const dropdownButtonProps = usePopupTarget(model, {
     id: uniqueButtonId,
-    ref,
-    toggled: popperProps.open,
+    toggled: model.state.visibility !== 'hidden',
     onKeyUp: handleButtonKeyUp,
-    ...targetProps,
-  };
+  });
 
   const dropdownMenuProps = {
     'aria-labelledby': uniqueButtonId,
     dropdownItems: items,
-    activeDropdownItem: activeDropdownItem,
-    activeDropdownItemRef: activeDropdownItemRef,
-    setActiveDropdownItem: setActiveDropdownItem,
+    activeDropdownItem,
+    activeDropdownItemRef,
+    setActiveDropdownItem,
     resetFocus: resetMenuFocus,
     toggleActiveItemUp,
     toggleActiveItemDown,
   };
+
+  const popperProps = usePopupPopper(model);
 
   return {dropdownButtonProps, dropdownMenuProps, popperProps};
 };

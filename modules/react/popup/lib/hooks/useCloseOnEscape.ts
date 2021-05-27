@@ -11,16 +11,13 @@ import {PopupModel} from '../usePopupModel';
  * return to the target when closed.
  */
 export const useCloseOnEscape = (model: PopupModel, elemProps = {}) => {
-  console.log('close on escape');
   const onKeyDown = React.useCallback(
     (event: KeyboardEvent) => {
-      console.log('useCloseOnEscape', event.key, model.state.stackRef);
       if (
         (event.key === 'Esc' || event.key === 'Escape') &&
         PopupStack.isTopmost(model.state.stackRef.current!)
       ) {
         if (model.state.willReturnFocus.current) {
-          console.log('change focus');
           changeFocus((model.state.returnFocusRef || model.state.targetRef).current);
         }
         model.events.hide();
@@ -35,18 +32,18 @@ export const useCloseOnEscape = (model: PopupModel, elemProps = {}) => {
     ]
   );
 
+  const visible = model.state.visibility !== 'hidden';
+
   // `useLayoutEffect` for automation
   React.useLayoutEffect(() => {
-    if (!model.state.visible) {
+    if (!visible) {
       return;
     }
-    console.log('useCloseOnEscape useLayoutEffect');
     document.addEventListener('keydown', onKeyDown);
     return () => {
-      console.log('useCloseOnEscape unlisten');
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [onKeyDown, model.state.visible]);
+  }, [onKeyDown, visible]);
 
   return elemProps;
 };

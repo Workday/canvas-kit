@@ -248,7 +248,6 @@ function setRef<T>(ref: React.Ref<T> | undefined, value: T): void {
  */
 export function useForkRef<T>(ref1?: React.Ref<T>, ref2?: React.Ref<T>): (instance: T) => void {
   return (value: T) => {
-    console.log('useForkRef', value);
     setRef(ref1, value);
     setRef(ref2, value);
   };

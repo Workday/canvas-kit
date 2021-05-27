@@ -12,11 +12,12 @@ import {
   useInitialFocus,
   PopupModel,
   useDisableBodyScroll,
+  usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
+import {changeFocus} from '@workday/canvas-kit-react/common';
 
 import {ModalWidth} from './Modal';
-import {changeFocus} from '../../common';
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -69,8 +70,6 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * The `aria-label` for the Popup close button.
    */
   closeButtonAriaLabel?: string;
-
-  model: PopupModel;
 }
 
 const fadeIn = keyframes`
@@ -141,7 +140,6 @@ const useReturnFocus = (model: PopupModel) => {
   React.useEffect(() => {
     const element = (model.state.returnFocusRef || model.state.targetRef).current;
     return () => {
-      console.log('useReturnFocus', element);
       // if the overlay was clicked, focus will be returning to body. Wait until after that happens,
       // then redirect it
       requestAnimationFrame(() => {
@@ -152,7 +150,6 @@ const useReturnFocus = (model: PopupModel) => {
 };
 
 const ModalContent = ({
-  model,
   ariaLabel,
   width = ModalWidth.s,
   padding = PopupPadding.l,
@@ -164,6 +161,7 @@ const ModalContent = ({
   closeButtonAriaLabel,
   ...elemProps
 }: ModalContentProps) => {
+  const model = usePopupModel({initialVisibility: 'visible', onHide: handleClose});
   const centeringRef = React.useRef<HTMLDivElement>(null);
   const [tabIndex, setTabIndex] = React.useState(handleClose ? undefined : 0);
   const onBlur = () => setTabIndex(undefined);

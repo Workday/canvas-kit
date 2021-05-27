@@ -6,14 +6,8 @@ describe('Popup.Target', () => {
   verifyComponent(Popup.Target, {modelFn: usePopupModel});
 
   it('should have a role of "button"', () => {
-    render(
-      <Popup>
-        <Popup.Target>Open</Popup.Target>
-      </Popup>
-    );
+    render(<Popup.Target>Open</Popup.Target>);
 
     expect(screen.getByRole('button', {name: 'Open'})).toBeInTheDocument();
   });
 });
-
-// TODO... Fix the way the ref works here... The usePopupTarget hook uses `state.targetRef`, but needs to forward the ref properly

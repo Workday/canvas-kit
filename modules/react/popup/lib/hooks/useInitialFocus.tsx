@@ -49,17 +49,18 @@ const getFirstFocusableElement = (content: HTMLElement): HTMLElement | null => {
  * Transfer focus to an appropriate element within the popup.
  */
 export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
+  const visible = model.state.visibility !== 'hidden';
+
   // Using `useEffect` instead of `useLayoutEffect` so that focus doesn't change _before_ PopperJS
   // has positioned the Popup. If we change focus before positioning, the browser will scroll to the
   // top of the page.
   React.useEffect(() => {
-    if (model.state.visible && model.state.stackRef.current) {
+    if (visible && model.state.stackRef.current) {
       const element =
         model.state.initialFocusRef?.current ||
         getFirstFocusableElement(model.state.stackRef.current);
 
       if (element) {
-        console.log('useInitialFocus changeFocus');
         changeFocus(element);
       }
     }
@@ -69,7 +70,7 @@ export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
     // unintentionally changes a ref's pointer
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [model.state.visible]);
+  }, [visible]);
 
   return elemProps;
 };

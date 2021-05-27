@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {PopupPadding, usePopupModel, usePopupTargetButton} from '@workday/canvas-kit-react/popup';
+import {PopupPadding} from '@workday/canvas-kit-react/popup';
 import ModalContent, {ModalContentProps} from './ModalContent';
 
 export enum ModalWidth {
@@ -11,24 +11,23 @@ export interface ModalProps extends Omit<ModalContentProps, 'padding' | 'width' 
   padding?: PopupPadding;
   width?: ModalWidth;
   container?: HTMLElement;
+  /**
+   * If true, set the Modal to the open state.
+   * @default false
+   */
+  open: boolean;
 }
 
 const Modal = ({
-  model,
+  open = false,
   padding = PopupPadding.l,
   width = ModalWidth.s,
   container,
   ...modalContentProps
 }: ModalProps): JSX.Element | null =>
   // Only render if on the client and `open` is `true`
-  model.state.visible && typeof window !== 'undefined' ? (
-    <ModalContent
-      model={model}
-      container={container}
-      padding={padding}
-      width={width}
-      {...modalContentProps}
-    />
+  open && typeof window !== 'undefined' ? (
+    <ModalContent container={container} padding={padding} width={width} {...modalContentProps} />
   ) : null;
 
 Modal.Padding = PopupPadding;
@@ -55,16 +54,22 @@ export default Modal;
  * }
  */
 export function useModal() {
-  const model = usePopupModel();
-  const targetProps = usePopupTargetButton(model, {}, null);
+  const [open, setOpen] = React.useState(false);
 
   return {
-    targetProps,
-    closeModal: model.events.hide,
+    targetProps: {
+      onClick() {
+        setOpen(true);
+      },
+    },
+    closeModal() {
+      setOpen(false);
+    },
     modalProps: {
-      open: model.state.visible,
-      handleClose: model.events.hide,
-      model,
+      open,
+      handleClose() {
+        setOpen(false);
+      },
     },
   };
 }

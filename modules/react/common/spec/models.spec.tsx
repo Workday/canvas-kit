@@ -19,7 +19,7 @@ describe('createEventMap', () => {
 
 describe('useEventMap', () => {
   type Events = {
-    foo(data: {}): void;
+    foo(data: {value: string}): void;
   };
   const eventMap = createEventMap<Events>()({
     guards: {
@@ -128,6 +128,72 @@ describe('useEventMap', () => {
     act(() => {
       result.current.events.foo({value: 'next'});
       expect(callback).not.toBeCalled();
+    });
+  });
+
+  describe('with a composed model', () => {
+    type ComposedEvents = Events & {
+      bar(data: {value: string}): void;
+    };
+    const eventMap = createEventMap<ComposedEvents>()({
+      guards: {
+        shouldFoo: 'foo',
+      },
+      callbacks: {
+        onFoo: 'foo',
+      },
+    });
+    const useComposedModel = (config = {}) => {
+      const model = useModel(config);
+      const [bar, setBar] = React.useState('previous');
+
+      const state = {...model.state, bar};
+      const events = useEventMap(eventMap, state, config, {
+        ...model.events,
+        bar({value}) {
+          setBar(state.bar + value);
+        },
+      });
+
+      return {state, events};
+    };
+
+    it('should only call a guard once', () => {
+      const guard = jest.fn();
+      guard.mockReturnValue(true);
+
+      const {result} = renderHook(() =>
+        useComposedModel({
+          shouldFoo: guard,
+        })
+      );
+
+      result.current.events.foo({value: 'bar'});
+
+      expect(guard).toBeCalledTimes(1);
+    });
+
+    it('should only call a callback once', () => {
+      const callback = jest.fn();
+
+      const {result} = renderHook(() =>
+        useComposedModel({
+          onFoo: callback,
+        })
+      );
+
+      result.current.events.foo({value: 'bar'});
+
+      expect(callback).toBeCalledTimes(1);
+    });
+
+    it('should use the latest closed over state for events', () => {
+      const {result} = renderHook(() => useComposedModel());
+
+      result.current.events.bar({value: '1'});
+      result.current.events.bar({value: '2'});
+
+      expect(result.current).toHaveProperty('state.bar', 'previous12');
     });
   });
 });

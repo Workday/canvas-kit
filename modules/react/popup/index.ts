@@ -8,4 +8,5 @@ export * from './lib/PopupCloseButton';
 export * from './lib/PopupCloseIcon';
 export * from './lib/PopupHeading';
 export * from './lib/PopupTarget';
+export * from './lib/PopupPopper';
 export * from './lib/hooks';

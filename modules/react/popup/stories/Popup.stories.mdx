@@ -134,9 +134,8 @@ container component isn't needed.
 A `Popup.Target` is any element that is meant to show the Popup. The default component rendered by
 this component is a `Button` element. You can override this by passing the desired component via
 `as`. Many examples above use `as={DeleteButton}`. If you want to render an `IconButton` instead, do
-`as={IconButton}`. This element merges all props provided by the
-[usePopupTargetButton](#usepopuptargetbutton) hook which would be used in place of this component if
-desired.
+`as={IconButton}`. This element merges all props provided by the [usePopupTarget](#usepopuptarget)
+hook which would be used in place of this component if desired.
 
 ```tsx
 const model = usePopupModel();
@@ -145,7 +144,7 @@ const model = usePopupModel();
 <Popup.Target>Show Popup</PopupTarget>
 
 // using props instead
-const popupTargetButtonProps = usePopupTargetButton(model);
+const popupTargetButtonProps = usePopupTarget(model);
 <Button {...popupTargetButtonProps}>Show Popup</Button>
 ```
 
@@ -205,7 +204,7 @@ useCloseOnEscape(model);
 return (
   <>
     <button ref={model.state.targetRef}>Open Popup</button>
-    {model.state.visible
+    {model.state.visibility !== 'hidden'
       ? ReactDOM.createPortal(<div>Popup Contents</div>, model.state.stackRef.current)
       : null}
   </>

@@ -18,7 +18,7 @@ import {xIcon} from '@workday/canvas-system-icons-web';
 
 import {PopupModel, usePopupModel, PopupModelConfig} from './usePopupModel';
 import {PopupCard} from './PopupCard';
-import {PopupTarget, usePopupTargetButton} from './PopupTarget';
+import {PopupTarget, usePopupTarget} from './PopupTarget';
 import {PopupPopper, usePopupPopper} from './PopupPopper';
 import {PopupHeading} from './PopupHeading';
 import {PopupCloseIcon} from './PopupCloseIcon';
@@ -283,14 +283,12 @@ export const usePopupOld = <T extends HTMLElement = HTMLElement>() => {
  */
 export const usePopup = (config: PopupModelConfig = {}) => {
   const model = usePopupModel(config);
-  const closeButtonProps = usePopupCloseButton(model, {}, null);
   const popperProps = usePopupPopper(model, {}, null);
-  const targetProps = usePopupTargetButton(model, {}, null);
+  const targetProps = usePopupTarget(model, {}, null);
 
   return {
     targetProps,
     popperProps,
-    closeButtonProps,
     closePopup: model.events.hide,
     stackRef: model.state.stackRef,
     model,

@@ -27,7 +27,7 @@ export interface PopupPopperProps {
 }
 
 export const usePopupPopper = createHook(({state, events}: PopupModel, ref) => {
-  const updatePlacement = React.useCallback(
+  const onPlacementChange = React.useCallback(
     (placement: Placement) => {
       if (placement !== state.placement) {
         // only update if the placement has changed
@@ -38,10 +38,10 @@ export const usePopupPopper = createHook(({state, events}: PopupModel, ref) => {
   );
 
   return {
-    open: state.visible,
+    open: state.visibility !== 'hidden',
     anchorElement: state.targetRef,
     ref: state.stackRef,
-    updatePlacement,
+    onPlacementChange,
   };
 });
 
@@ -51,6 +51,10 @@ export const PopupPopper = createComponent('div')({
     const localModel = useModelContext(PopupModelContext, model);
 
     const props = usePopupPopper(localModel, elemProps, ref);
-    return <Popper {...props}>{children}</Popper>;
+    return (
+      <Popper as={Element} {...props}>
+        {children}
+      </Popper>
+    );
   },
 });

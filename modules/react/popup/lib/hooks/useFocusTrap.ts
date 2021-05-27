@@ -20,16 +20,18 @@ export const useFocusTrap = (model: PopupModel, elemProps = {}) => {
     [model.state.stackRef]
   );
 
+  const visible = model.state.visibility !== 'hidden';
+
   // `useLayoutEffect` for automation
   React.useLayoutEffect(() => {
-    if (!model.state.visible) {
+    if (!visible) {
       return;
     }
     document.addEventListener('keydown', onKeyDown);
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [model.state.visible, onKeyDown]);
+  }, [visible, onKeyDown]);
 
   return elemProps;
 };

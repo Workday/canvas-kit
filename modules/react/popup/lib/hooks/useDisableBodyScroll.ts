@@ -7,8 +7,10 @@ import {PopupModel} from '../usePopupModel';
  * when the popup is hidden again.
  */
 export const useDisableBodyScroll = (model: PopupModel, elemProps = {}) => {
+  const visible = model.state.visibility !== 'hidden';
+
   React.useLayoutEffect(() => {
-    if (!model.state.visible) {
+    if (!visible) {
       return;
     }
     const overflow = document.body.style.overflow;
@@ -17,7 +19,7 @@ export const useDisableBodyScroll = (model: PopupModel, elemProps = {}) => {
     return () => {
       document.body.style.overflow = overflow;
     };
-  }, [model.state.visible]);
+  }, [visible]);
 
   return elemProps;
 };

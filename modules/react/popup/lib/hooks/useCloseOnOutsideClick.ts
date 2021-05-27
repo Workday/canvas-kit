@@ -32,8 +32,10 @@ export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
     [model.state.stackRef, model.events]
   );
 
+  const visible = model.state.visibility !== 'hidden';
+
   React.useLayoutEffect(() => {
-    if (!model.state.visible) {
+    if (!visible) {
       return;
     }
     document.addEventListener('mousedown', onClick);
@@ -42,7 +44,7 @@ export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
     return () => {
       document.removeEventListener('mousedown', onClick);
     };
-  }, [model.state.stackRef, model.state.visible, onClick]);
+  }, [model.state.stackRef, visible, onClick]);
 
   return elemProps;
 };
