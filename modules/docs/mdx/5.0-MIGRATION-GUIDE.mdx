@@ -188,7 +188,7 @@ forwarding.
 Most of these input components previously supported an `inputRef` prop that could be used to obtain
 a ref to the component's underlying input element. For example, in v4, if you wanted to obtain a ref
 to a Text Input's underlying `<input type="text" />` element, you could pass a ref to the component
-using `inputRef`. In v5, you'll need to use `ref` instead of `inputRef`:
+using `inputRef`. In v5, you'll need to use `ref` instead of `inputRef` (or run the codemod 🤖):
 
 ```tsx
 const ref = React.useRef(null);
@@ -198,10 +198,38 @@ const ref = React.useRef(null);
 <TextInput ref={ref} />;
 ```
 
+🤖 The codemod will update all input components that previously supported `inputRef` to use `ref`
+instead.
+
 For components that previously supported `inputRef`, `ref` is now forwarded to the same underlying
 element that `inputRef` was applied to previously. Select and Select (Preview) did not support
 `inputRef` in v4, but now support `ref` in v5. See each component's documentation for information on
 which element `ref` is forwarded to for that particular component.
+
+Input component prop interfaces no longer extend directly from their underlying element interface
+(e.g., `TextInputProps` no longer extends from `React.InputHTMLAttributes<HTMLInputElement>`).
+`createComponent` returns a component that determines the element interface via the `as` prop. This
+is why input component props no longer contain an element interface directly. If you extend from an
+input component prop interface, or have code that uses an input component prop interface and
+accesses properties like `onClick`, you'll have to provide the input attribute yourself. This is not
+code-moddable since intent cannot be pre-determined. This will not effect runtime, but only
+TypeScript.
+
+```tsx
+interface MyTextInputProps extends TextInputProps {}
+
+// onClick no longer exists in `TextInputProps` so TypeScript will complain about onClick not
+// existing in `MyTextInputProps` (onClick does exist as a prop on `<TextInput>`, however)
+const MyTextInput = ({onClick}: MyTextInputProps) => <TextInput onClick={onClick} />;
+
+// Fix
+interface MyTextInputProps extends TextInputProps, React.InputHTMLAttributes<HTMLInputElement> {}
+
+// Alternate fix
+interface MyTextInputProps extends TextInputProps {
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
+}
+```
 
 As a final note, the following input components were previously class components and, thus,
 technically supported the `ref` attribute in v4:
