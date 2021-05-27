@@ -8,13 +8,7 @@ selecting specific swatches.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-react/color-picker
-```
-
-or
-
-```sh
-yarn add @workday/canvas-kit-color-picker
+yarn add @workday/canvas-kit-react
 ```
 
 # Color Input
@@ -25,7 +19,7 @@ A controlled input for accepting typed/pasted hex codes.
 
 ```tsx
 import * as React from 'react';
-import {ColorInput} from '@workday/canvas-kit-color-picker';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 
 <ColorInput
   showCheck={true}
@@ -106,7 +100,7 @@ A component to show a color swatch
 
 ```tsx
 import * as React from 'react';
-import {ColorPreview} from '@workday/canvas-kit-color-preview';
+import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
 
 <ColorPreview value="#00FFCC" />;
 ```
