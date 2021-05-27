@@ -14,6 +14,8 @@ import compoundCard from './compoundCard';
 import moveInputProvider from './moveInputProvider';
 // input codemods
 import renameInputRefs from './renameInputRefs';
+// preview/tokens codemods
+import renamePreviewTokenImports from './renamePreviewTokenImports';
 
 import {API, FileInfo, Options} from 'jscodeshift';
 
@@ -31,6 +33,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     compoundCard,
     moveInputProvider,
     renameInputRefs,
+    renamePreviewTokenImports,
   ];
 
   return fixes.reduce((source, fix) => fix({...file, source}, api, options), file.source);

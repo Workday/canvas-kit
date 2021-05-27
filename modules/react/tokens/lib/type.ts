@@ -17,8 +17,8 @@ export const monoFontFamily =
     : inheritMonoFont || '"Roboto Mono", "Courier New", Courier, monospace';
 
 export interface CanvasTypeHierarchy {
-  dataViz1: CSSProperties;
-  dataViz2: CSSProperties;
+  brand1: CSSProperties;
+  brand2: CSSProperties;
   h1: CSSProperties;
   h2: CSSProperties;
   h3: CSSProperties;
@@ -48,75 +48,77 @@ export interface CanvasType extends CanvasTypeHierarchy {
 }
 
 const hierarchy: CanvasTypeHierarchy = {
-  dataViz1: {
-    fontSize: '56px',
-    lineHeight: '68px',
-    fontWeight: 300,
+  brand1: {
+    fontFamily,
+    fontSize: 56,
+    lineHeight: 1.3,
+    fontWeight: 700,
     color: typeColors.heading,
   },
-  dataViz2: {
-    fontSize: '34px',
-    lineHeight: '40px',
-    fontWeight: 300,
+  brand2: {
+    fontFamily,
+    fontSize: 48,
+    lineHeight: 1.3,
+    fontWeight: 700,
     color: typeColors.heading,
   },
   h1: {
-    fontSize: '28px',
-    lineHeight: '36px',
+    fontFamily,
+    fontSize: 40,
+    lineHeight: 1.3,
     fontWeight: 500,
     color: typeColors.heading,
   },
   h2: {
-    fontSize: '24px',
-    lineHeight: '32px',
+    fontFamily,
+    fontSize: 32,
+    lineHeight: 1.3,
     fontWeight: 700,
     color: typeColors.heading,
   },
   h3: {
-    fontSize: '20px',
-    lineHeight: '28px',
+    fontFamily,
+    fontSize: 24,
+    lineHeight: 1.3,
     fontWeight: 700,
     color: typeColors.heading,
   },
   h4: {
-    fontSize: '16px',
-    lineHeight: '24px',
+    fontFamily,
+    fontSize: 20,
+    lineHeight: 1.3,
     fontWeight: 700,
     color: typeColors.heading,
   },
   h5: {
-    fontSize: '16px',
-    lineHeight: '24px',
+    fontFamily,
+    fontSize: 20,
+    lineHeight: 1.3,
     fontWeight: 400,
     color: typeColors.heading,
   },
   body: {
-    fontSize: '14px',
-    lineHeight: '20px',
+    fontFamily,
+    fontSize: 16,
+    lineHeight: 1.5,
     fontWeight: 400,
     color: typeColors.body,
   },
   body2: {
-    fontSize: '13px',
-    lineHeight: '20px',
+    fontFamily,
+    fontSize: 14,
+    lineHeight: 1.5,
     fontWeight: 400,
     color: typeColors.body,
   },
   small: {
-    fontSize: '12px',
-    lineHeight: '16px',
+    fontFamily,
+    fontSize: 13,
+    lineHeight: 1.5,
     fontWeight: 400,
     color: typeColors.body,
   },
 };
-
-// Add fontFamily to each level of hierarchy
-Object.keys(hierarchy).forEach(key => {
-  hierarchy[key] = {
-    ...hierarchy[key],
-    fontFamily,
-  };
-});
 
 const variants: CanvasTypeVariant = {
   label: {
@@ -126,7 +128,8 @@ const variants: CanvasTypeVariant = {
     fontWeight: 500,
   },
   caps: {
-    fontWeight: 700,
+    fontWeight: 500,
+    letterSpacing: 0.5,
     textTransform: 'uppercase',
   },
   hint: {
