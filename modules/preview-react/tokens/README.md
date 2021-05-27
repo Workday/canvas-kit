@@ -1,4 +1,4 @@
-# Canvas Kit Labs React Tokens
+# Canvas Kit Preview React Tokens
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/preview-react/README.md">
   <img src="https://img.shields.io/badge/PREVIEW-beta-blueviolet" alt="PREVIEW: Beta" />
@@ -17,7 +17,7 @@ respectively.
 The usage is the same as the current hierarchy, you just need a different import.
 
 ```tsx
-import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {type} from '@workday/canvas-kit-preview-react/tokens';
 
 const MyLabel = styled('label')({
   ...type.body,

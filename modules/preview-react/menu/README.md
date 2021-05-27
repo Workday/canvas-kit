@@ -1,4 +1,4 @@
-# Canvas Kit Labs React Menu
+# Canvas Kit React Menu
 
 <a href="https://github.com/Workday/canvas-kit/tree/master/modules/preview-react/README.md">
   <img src="https://img.shields.io/badge/PREVIEW-beta-blueviolet" alt="PREVIEW: Beta" />

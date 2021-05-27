@@ -2,7 +2,7 @@ import * as React from 'react';
 import {HStack, Stack, Flex} from '@workday/canvas-kit-labs-react/layout';
 import {Box} from '@workday/canvas-kit-labs-react/common';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {type} from '@workday/canvas-kit-preview-react/tokens';
 
 const Card = ({heading = '', body = ''}) => (
   <Flex flex={1} flexBasis="auto" depth={2} padding="s" backgroundColor="frenchVanilla100">
