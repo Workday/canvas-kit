@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {StaticStates, type} from '@workday/canvas-kit-labs-react/tokens';
+import {StaticStates, type} from '@workday/canvas-kit-preview-react/tokens';
 import {
   ComponentStatesTable,
   permutateProps,

@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {type} from '@workday/canvas-kit-preview-react/tokens';
 import {editIcon, arrowRightIcon} from '@workday/canvas-system-icons-web';
 
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';

@@ -1,5 +1,5 @@
 import * as stories from './stories';
 import * as modal from './modal';
-import * as selectLabs from './selectLabs';
+import * as selectPreview from './selectPreview';
 
-export {modal, selectLabs, stories};
+export {modal, selectPreview, stories};

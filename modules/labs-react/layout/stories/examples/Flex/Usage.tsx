@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Flex, FlexProps} from '@workday/canvas-kit-labs-react/layout';
 import {Box} from '@workday/canvas-kit-labs-react/common';
-import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {type} from '@workday/canvas-kit-preview-react/tokens';
 
 // temporary placeholder until type components are added to canvas-kit
 const H3 = props => <h3 style={{...type.h4, ...type.variant.inverse, margin: 0}} {...props} />;

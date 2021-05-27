@@ -13,7 +13,7 @@ import {notificationsIcon, inboxIcon} from '@workday/canvas-system-icons-web';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {colors, space, gradients} from '@workday/canvas-kit-react/tokens';
 import {IconButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {MenuItem} from '@workday/canvas-kit-labs-react/menu';
+import {MenuItem} from '@workday/canvas-kit-preview-react/menu';
 import {
   GlobalHeader,
   Header,

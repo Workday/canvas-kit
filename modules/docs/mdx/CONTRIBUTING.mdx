@@ -19,7 +19,7 @@ sections:
   - [Building Modules](#building-modules)
   - [Testing Modules](#testing-modules)
   - [Code Style Guide](#code-style-guide)
-  - [Canvas Kit Labs](#canvas-kit-labs)
+  - [Canvas Kit Labs & Preview](#canvas-kit-labs-preview)
   - [Editors](#editors)
 
 ## Code of Conduct
@@ -156,15 +156,13 @@ fix: Add missing static class variable to IconButton and Avatar
 
 ### Creating a module
 
-1.  Run `yarn create-module`
-2.  Enter in a module name and description. You'll be prompted to choose if you also want to create
-    a CSS module.
+1.  Run `yarn create-component`
+2.  Enter in a module name and description
 3.  (optional) Add any required dependencies on other modules
 4.  (optional) If you added any extra dependencies, run `yarn`
 5.  Start Storybook `yarn start`
 6.  Navigate to [http://localhost:9001/](http://localhost:9001/) and find your new module's story
-7.  Begin editing your new React component in `modules/<MODULE_NAME>/react/index.ts` and CSS module
-    in `modules/<MODULE_NAME>/css/index.scss`!
+7.  Begin editing your new React component in `modules/react/<MODULE_NAME>/index.ts`.
 
 If creating a React module, a new compound component will be created. To find out more about
 Compound Components, refer to [Compound Components](./COMPOUND_COMPONENTS.md). To find out more
@@ -173,19 +171,9 @@ about creating Compound Components, refer to
 
 ### Exporting a Module
 
-#### React
-
 If your module's `index.ts` has a default export, make sure it is available as a named export as
 well. This allows for greater flexibility in how developers consume your module. _Note that
-`yarn create-module` should set this up for you by default._
-
-#### CSS
-
-If in the `yarn create-module` flow you reply that you'd like to create a CSS module as well, it
-will (in addition to creating required scaffolding):
-
-- Add your module as a package dependency in `modules/_canvas-kit-css/package.json`
-- Add an import statement for your module in `modules/_canvas-kit-css/index.scss`
+`yarn create-component` should set this up for you by default._
 
 ### Building Modules
 
@@ -212,14 +200,20 @@ files), use `yarn format`.
 
 Code formatting will occur automatically before `git commit` for files staged using `git add`.
 
-### Canvas Kit Labs
+### Canvas Kit Labs & Preview
 
-While we iterate on a new components' API and functionality, sometimes we want to make it available
-to consumers ASAP. If we introduced the component normally, this could result in many breaking
-changes to our codebase. To avoid this, we have introduced [Canvas Kit Labs](./modules/_labs) as a
-place to incubate components. If there is a lot of debate/discussion/flux happening in your PR and
-the component is needed right away, it may be moved to this location so it can be made available
-while we iterate on it. Visit the link above for more info.
+While we iterate on a new component's API, functionality and accessibility, sometimes we want to
+make it available to consumers ASAP. If we introduced the component normally, this could result in
+many breaking changes to our codebase. To avoid this, we have introduced
+[Canvas Kit Labs](../../modules/labs-react) as a place to incubate components. If there is a lot of
+debate/discussion/flux happening in your PR and the component is needed right away, it may be moved
+to this location so it can be made available while we iterate on it. Visit the link above for more
+info.
+
+[Canvas Kit Preview](../../preview-react) is for components that have had a full design and a11y
+review, and are approved for use in product. The API's and/or underlying architecture could still be
+subject to change, but not without strong communication and migration strategies. Essentially,
+Canvas Kit Labs is for alpha components and Canvas Kit Preview is for beta components.
 
 ### Editors
 

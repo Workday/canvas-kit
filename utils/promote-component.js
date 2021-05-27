@@ -18,7 +18,7 @@ const cwd = process.cwd();
 console.log('\nCanvas Kit Component Promoter'.brightBlue.underline.bold);
 
 console.log(
-  '\nThis utility will walk you through promoting a Canvas Kit Labs component to a regular component.'
+  '\nThis utility will walk you through promoting a Canvas Kit Labs or Preview component to a regular component.'
 );
 
 console.log('\nPress ^C at any time to quit.\n'.gray);
@@ -31,6 +31,12 @@ const questions = [
   },
   {
     type: 'list',
+    name: 'prerelease',
+    message: 'Which package are you promoting from?:',
+    choices: ['labs', 'preview'],
+  },
+  {
+    type: 'list',
     name: 'category',
     message: 'What IA category does this component belong in within storybook?:',
     choices: ['Buttons', 'Containers', 'Indicators', 'Inputs', 'Navigation', 'Popups'],
@@ -38,32 +44,31 @@ const questions = [
 ];
 
 inquirer.prompt(questions).then(answers => {
-  const component = answers.name;
+  const {name: component, prerelease, category} = answers;
 
   if (!component) {
     console.log('You must enter a component name');
     process.exit(1);
   }
 
-  const target = 'react';
-  const srcPath = path.join(cwd, `modules/labs-${target}/${component}`);
-  const destPath = path.join(cwd, `modules/${target}/${component}`);
+  const prereleaseTitle = prerelease && prerelease.charAt(0).toUpperCase() + prerelease.slice(1);
+  const srcPrefix = prerelease && prerelease + '-';
+  const srcPath = path.join(cwd, `modules/${srcPrefix}react/${component}`);
+  const destPrefix = prerelease === 'labs' ? 'preview-' : '';
+  const destModule = path.join(cwd, `modules/${destPrefix}react/`);
+  const destPath = path.join(destModule, component);
 
-  if (!fs.existsSync(destPath)) {
-    mkdirp.sync(destPath);
-  }
-
-  if (fs.existsSync(`${destPath}/${target}`)) {
+  if (fs.existsSync(`${destPath}`)) {
     console.log(`\n${destPath} already exists. Skipping.`.yellow);
   } else {
     console.log(
       `\nMoving `.gray +
-        `modules/labs-${target}/${component}`.cyan +
+        `modules/${srcPrefix}react/${component}`.cyan +
         ` > `.gray +
-        `modules/${target}/${component}`.cyan
+        `modules/${destPrefix}react/${component}`.cyan
     );
 
-    exec(`git mv ${srcPath} ${destPath}`)
+    exec(`git mv ${srcPath} ${destModule}`)
       .then(() => {
         glob(`${destPath}/**/*`, async (err, files) => {
           if (err) {
@@ -73,33 +78,50 @@ inquirer.prompt(questions).then(answers => {
 
           try {
             console.log(`Updating file paths and removing labs references\n`.gray);
-            const {
-              changedFiles,
-              countOfMatchesByPaths,
-              replaceInFilesOptions,
-            } = await replaceInFiles({
+            await replaceInFiles({
               files,
-              from: `@workday/canvas-kit-labs-${target}/${component}`,
-              to: `@workday/canvas-kit-${target}/${component}`,
+              from: `@workday/canvas-kit-${srcPrefix}react/${component}`,
+              to: `@workday/canvas-kit-${destPrefix}react/${component}`,
             })
               .pipe({
-                from: `modules/labs-${target}/${component}`,
-                to: `modules/${target}/${component}`,
+                from: `yarn add @workday/canvas-kit-${srcPrefix}react`,
+                to: `yarn add @workday/canvas-kit-${destPrefix}react`,
               })
               .pipe({
-                from: /\n<a href="https:\/\/github.com\/Workday\/canvas-kit\/tree\/master\/modules\/labs-react.*\n.*\n.*currently in pre-release.\n\n\n/g,
-                to: '',
+                from: `modules/${srcPrefix}react/${component}`,
+                to: `modules/${destPrefix}react/${component}`,
               })
               .pipe({
-                from: `storiesOf('Labs/`,
-                to: `storiesOf('Components/${answers.category}/`,
+                from: `'${prereleaseTitle}/`,
+                to: `'Components/${category}/`,
+              })
+              .pipe({
+                from: `'Testing/React/${prereleaseTitle}`,
+                to: `'Testing/React/${category}`,
               });
+
+            if (prerelease === 'labs') {
+              await replaceInFiles({
+                files,
+                from: 'modules/labs-react/README.md',
+                to: 'modules/preview-react/README.md',
+              }).pipe({
+                from: 'img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha"',
+                to: 'img.shields.io/badge/PREVIEW-beta-blueviolet" alt="Preview: Beta"',
+              });
+            } else if (prerelease === 'preview') {
+              await replaceInFiles({
+                files,
+                from: /\n<a href=".*modules\/(labs|preview).*(\n.*)*in prerelease\.\n\n\n/g,
+                to: '',
+              });
+            }
           } catch (error) {
             console.log('Error occurred:', error);
           }
 
-          console.log(`Adding depenency to ` + `modules/${target}/index.ts\n`.brightBlue);
-          addExport(component, false);
+          console.log(`Adding depenency to ` + `modules/react/index.ts\n`.brightBlue);
+          addExport(component);
         });
       })
       .catch(err => {
