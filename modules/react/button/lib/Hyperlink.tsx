@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {type} from '@workday/canvas-kit-preview-react/tokens';
 import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/common';
 
 export interface HyperlinkProps {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {type} from '@workday/canvas-kit-labs-react/tokens';
+import {type} from '@workday/canvas-kit-preview-react/tokens';
 import {
   focusRing,
   useTheme,

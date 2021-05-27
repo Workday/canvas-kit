@@ -151,6 +151,8 @@ if (modulePath.endsWith('/modules/react')) {
   depCheckOptions.ignoreMatches.push('@workday/canvas-kit-react');
 } else if (modulePath.endsWith('/modules/labs-react')) {
   depCheckOptions.ignoreMatches.push('@workday/canvas-kit-labs-react');
+} else if (modulePath.endsWith('/modules/preview-react')) {
+  depCheckOptions.ignoreMatches.push('@workday/canvas-kit-preview-react');
 }
 
 depCheck(modulePath, depCheckOptions, unused => {

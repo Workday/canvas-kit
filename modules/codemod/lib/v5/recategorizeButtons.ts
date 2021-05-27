@@ -18,7 +18,7 @@ const updateJSXTag = (nodePath: ASTPath<JSXElement>, newTag: string) => {
 };
 
 const findBtnTag = (elementName: string, node: JSXElement) => {
-  if ((node.openingElement.name as JSXIdentifier).name === elementName) {
+  if (elementName && (node.openingElement.name as JSXIdentifier).name === elementName) {
     return true;
   }
   return false;
