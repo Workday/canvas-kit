@@ -188,8 +188,8 @@ Variants only come their augmenting styles and a base type object is required.
 
 | Hierarchy Levels |
 | ---------------- |
-| `body1`       |
-| `body2`       |
+| `brand1`       |
+| `brand2`       |
 | `h1`             |
 | `h2`             |
 | `h3`             |
