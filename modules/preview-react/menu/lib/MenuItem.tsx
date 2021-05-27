@@ -6,8 +6,8 @@ import {
   iconColors,
   typeColors,
   space,
+  type,
 } from '@workday/canvas-kit-react/tokens';
-import {type} from '@workday/canvas-kit-preview-react/tokens';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 

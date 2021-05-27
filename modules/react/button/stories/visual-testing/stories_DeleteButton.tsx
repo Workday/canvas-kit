@@ -1,7 +1,6 @@
 /// <reference path="../../../../../typings.d.ts" />
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
-import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {
   ComponentStatesTable,
   permutateProps,
@@ -10,7 +9,7 @@ import {
 } from '../../../../../utils/storybook';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {Container, stateTableColumnProps} from './utils';
-import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {PartialEmotionCanvasTheme, StaticStates} from '@workday/canvas-kit-react/common';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Buttons/Button/Delete Button',

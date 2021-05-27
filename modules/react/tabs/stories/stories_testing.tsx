@@ -3,7 +3,7 @@
 import {jsx} from '@emotion/core';
 import React from 'react';
 
-import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
+import {StaticStates} from '@workday/canvas-kit-react/common';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 import {space} from '@workday/canvas-kit-react/tokens';
