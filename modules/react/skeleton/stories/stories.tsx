@@ -13,7 +13,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
-import Skeleton from '../index';
+import {Skeleton} from '../index';
 
 import README from '../README.md';
 import canvas from '@workday/canvas-kit-react/tokens';

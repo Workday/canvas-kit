@@ -22,12 +22,14 @@ itself by utilizing a visually hidden div.
 import * as React from 'react';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 
-<Skeleton>
-  <Skeleton.Shape width={50} height={50} borderRadius={99} />
-  <Skeleton.Header />
-  <h1>Hello!</h1>
-  <Skeleton.Text lineCount={3} />
-</Skeleton>;
+export default () => (
+  <Skeleton>
+    <Skeleton.Shape width={50} height={50} borderRadius={99} />
+    <Skeleton.Header />
+    <h1>Hello!</h1>
+    <Skeleton.Text lineCount={3} />
+  </Skeleton>
+);
 ```
 
 > Note: In this example, non-Skeleton elements like `<h1>Hello!</h1>` will still show. This allows
@@ -62,9 +64,11 @@ and fixed height of `28px`.
 import * as React from 'react';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 
-<Skeleton>
-  <Skeleton.Header />
-</Skeleton>;
+export default () => (
+  <Skeleton>
+    <Skeleton.Header />
+  </Skeleton>
+);
 ```
 
 ### Static Properties
@@ -96,9 +100,11 @@ the borderRadius, width, and height to make various rectangular and circular sha
 import * as React from 'react';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 
-<Skeleton>
-  <Skeleton.Shape width={50} height={50} borderRadius={99} />
-</Skeleton>;
+export default () => (
+  <Skeleton>
+    <Skeleton.Shape width={50} height={50} borderRadius={99} />
+  </Skeleton>
+);
 ```
 
 ### Static Properties
@@ -149,9 +155,11 @@ will have a width of `60%`.
 import * as React from 'react';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 
-<Skeleton>
-  <Skeleton.Text lineCount={3} />
-</Skeleton>;
+export default () => (
+  <Skeleton>
+    <Skeleton.Text lineCount={3} />
+  </Skeleton>
+);
 ```
 
 ### Static Properties

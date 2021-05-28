@@ -8,8 +8,8 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 import SkeletonHeader from './parts/skeletonHeader';
-import SkeletonText from './parts/skeletonText';
 import SkeletonShape from './parts/skeletonShape';
+import SkeletonText from './parts/skeletonText';
 
 export interface SkeletonProps {
   /**
@@ -31,6 +31,7 @@ const fade = keyframes({
   from: {opacity: 0.4},
   to: {opacity: 1},
 });
+
 const animation = `${fade} 0.8s linear infinite alternate`;
 
 const SkeletonContainer = styled('div')<SkeletonProps & StyledType>({
@@ -60,5 +61,3 @@ export const Skeleton = createComponent('div')({
     Text: SkeletonText,
   },
 });
-
-export default Skeleton;
