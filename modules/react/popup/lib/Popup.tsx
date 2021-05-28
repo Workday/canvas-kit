@@ -57,11 +57,6 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   heading?: React.ReactNode;
   /**
-   * The depth of the Popup. Imported from `@workday/canvas-kit-react/tokens`.
-   * @default depth[2]
-   */
-  depth?: CanvasDepthValue;
-  /**
    * The `aria-label` for the Popup close button.
    * @default Close
    */

@@ -1,1 +1,1 @@
-export * from './lib/Card';
+export {Card} from './lib/Card';

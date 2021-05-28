@@ -39,12 +39,32 @@ describe('card', () => {
     expectTransform(input, expected);
   });
 
+  it('should convert the depth prop to align with Box props instead', () => {
+    const input = stripIndent`
+      import {Card} from '@workday/canvas-kit-react/card';
+      import {depth} from '@workday/canvas-kit-react/tokens';
+
+      <Card depth={depth[2]}>
+        Card Body
+      </Card>
+    `;
+
+    const expected = stripIndent`
+      import {Card} from '@workday/canvas-kit-react/card';
+      import {depth} from '@workday/canvas-kit-react/tokens';
+
+      <Card depth={2}><Card.Body>Card Body</Card.Body></Card>
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should not restructure Card usages already transformed', () => {
     const input = stripIndent`
       import {Card} from '@workday/canvas-kit-react/card';
 
       <Card>
-        <Card.Body>No Padding</Card.Body>
+        <Card.Body>Card Body</Card.Body>
       </Card>
     `;
 
@@ -52,7 +72,7 @@ describe('card', () => {
       import {Card} from '@workday/canvas-kit-react/card';
 
       <Card>
-        <Card.Body>No Padding</Card.Body>
+        <Card.Body>Card Body</Card.Body>
       </Card>
     `;
 

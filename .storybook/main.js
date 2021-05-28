@@ -22,6 +22,10 @@ module.exports = {
     '@storybook/addon-knobs',
     '@storybook/addon-storysource',
   ],
+  typescript: {
+    check: false,
+    reactDocgen: false, // we'll handle this ourselves
+  },
   webpackFinal: async config => {
     // Get the specifications object and replace with a real object in the spec.ts file
     const specs = await getSpecifications();
