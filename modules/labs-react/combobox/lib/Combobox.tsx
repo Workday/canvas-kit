@@ -2,7 +2,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from '
 import styled from '@emotion/styled';
 import {CSSObject, jsx, keyframes} from '@emotion/core';
 import {GrowthBehavior, useForkRef} from '@workday/canvas-kit-react/common';
-import {depth, space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {space, commonColors, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
 import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton, IconButtonProps} from '@workday/canvas-kit-react/button';
@@ -464,7 +464,7 @@ const Combobox = ({
           />
         )}
         {showingAutocomplete && autocompleteItems && (
-          <MenuContainer padding={space.zero} depth={depth[1]}>
+          <MenuContainer padding={space.zero} depth={1}>
             <Card.Body>
               <AutocompleteList
                 comboboxId={componentId}
