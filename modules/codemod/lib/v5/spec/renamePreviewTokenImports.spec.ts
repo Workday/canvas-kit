@@ -96,7 +96,7 @@ describe('Canvas Kit Labs and Preview Tokens Imports Codemod', () => {
   context(
     'when importing both type tokens and StaticStates from canvas-kit-preview-react/tokens',
     () => {
-      it('should transform tokens to common', () => {
+      it('should transform preview/tokens to tokens for type and preview/tokens to common for StaticStates', () => {
         const input = `
         import { StaticStates, type } from "@workday/canvas-kit-preview-react/tokens";
       `;
