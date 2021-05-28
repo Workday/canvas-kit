@@ -98,11 +98,11 @@ describe('Canvas Kit Labs and Preview Tokens Imports Codemod', () => {
     () => {
       it('should transform preview/tokens to tokens for type and preview/tokens to common for StaticStates', () => {
         const input = `
-        import { StaticStates, type } from "@workday/canvas-kit-preview-react/tokens";
+          import { StaticStates, type } from "@workday/canvas-kit-preview-react/tokens";
       `;
         const expected = `
-        import { StaticStates } from "@workday/canvas-kit-react/common";
-        import { type } from "@workday/canvas-kit-react/tokens";
+          import { StaticStates } from "@workday/canvas-kit-react/common";
+          import { type } from "@workday/canvas-kit-react/tokens";
       `;
 
         expectTransform(input, expected);
@@ -127,11 +127,11 @@ describe('Canvas Kit Labs and Preview Tokens Imports Codemod', () => {
     () => {
       it('should transform labs/tokens to tokens for type and labs/tokens to common for StaticStates', () => {
         const input = `
-        import { StaticStates, type } from "@workday/canvas-kit-labs-react/tokens";
+          import { StaticStates, type } from "@workday/canvas-kit-labs-react/tokens";
       `;
         const expected = `
-        import { StaticStates } from "@workday/canvas-kit-react/common";
-        import { type } from "@workday/canvas-kit-react/tokens";
+          import { StaticStates } from "@workday/canvas-kit-react/common";
+          import { type } from "@workday/canvas-kit-react/tokens";
       `;
 
         expectTransform(input, expected);
