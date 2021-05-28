@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 
-import {colors, type, depth, space, borderRadius, H1, H2, H3, H4, H5} from '..';
+import {colors, type, depth, space, borderRadius} from '..';
 import README from '../README.md';
 
 export default withSnapshotsEnabled({
@@ -44,28 +44,23 @@ export const Depth = () => (
 
 export const Type = () => (
   <React.Fragment>
-    <h1 css={type.brand1}>Data Viz 1 Header</h1>
-    <h1 css={type.brand2}>Data Viz 2 Header</h1>
-    <H1>H1 Header</H1>
-    <H2>H2 Header</H2>
-    <H3>H3 Header</H3>
-    <H4>H4 Header</H4>
-    <H5>H5 Header</H5>
-    <p css={type.body}>
+    <h1 css={type.levels.display.large}>Display Large Header</h1>
+    <h1 css={type.levels.display.large}>Data Viz 2 Header</h1>
+    <p css={type.levels.body.medium}>
       <strong>Body: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
       Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
       level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
       Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
       salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
     </p>
-    <p css={type.body2}>
+    <p css={type.levels.subtext.large}>
       <strong>Body 2: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
       Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
       level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
       Polaroid occupy typewriter distillery. Kinfolk nisi man braid try-hard raw denim, thundercats
       salvia intelligentsia jean shorts officia. Heirloom craft beer put a bird on it occaecat
     </p>
-    <p css={type.small}>
+    <p css={type.levels.subtext.medium}>
       <strong>Small: </strong> Tacos chartreuse raclette single-origin coffee ethical tilde ennui.
       Magna asymmetrical church-key farm-to-table dreamcatcher nisi iceland photo booth kitsch next
       level pop-up banh mi quinoa exercitation hella. Raw denim organic enim laboris sustainable.
@@ -74,27 +69,18 @@ export const Type = () => (
     </p>
     <hr />
 
-    <H3>Variants</H3>
-    <div css={{...type.body, '& > *': {display: 'block', margin: '4px 0'}}}>
-      <span css={type.variant.button}>Button Text</span>
-      <span css={type.variant.caps}>Caps Text</span>
-      <label css={type.variant.label}>Label Text</label>
-      <span css={type.variant.hint}>Hint Text</span>
-      <span css={type.variant.error}>Error Text</span>
-      <div>
-        <a href="#" css={type.variant.link}>
-          Link Text
-        </a>
-      </div>
-      <span css={[type.variant.inverse, inverseStyle]}>Inverse Text</span>
-      <span css={type.variant.mono}>Mono Text</span>
+    <h3>Variants</h3>
+    <div css={{...type.levels.body.medium, '& > *': {display: 'block', margin: '4px 0'}}}>
+      <span css={type.variants.error}>Error Text</span>
+      <span css={type.variants.hint}>Hint Text</span>
+      <span css={[type.variants.inverse, inverseStyle]}>Inverse Text</span>
     </div>
   </React.Fragment>
 );
 
 const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
   {
-    ...type.h4,
+    ...type.levels.heading.small,
     margin: space.m,
     background: colors.blueberry400,
     color: colors.frenchVanilla100,
@@ -103,8 +89,8 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
     justifyContent: 'center',
     flexDirection: 'column',
     '& span': {
-      ...type.body2,
-      ...type.variant.mono,
+      ...type.levels.subtext.large,
+      fontFamily: type.properties.fonts.monospace,
       display: 'block',
       color: colors.blueberry100,
     },
@@ -119,13 +105,13 @@ const Shape = styled('div')<{radius?: string | number; size?: string | number}>(
 );
 
 const SizeLabel = styled('div')({
-  ...type.h4,
+  ...type.levels.heading.small,
   margin: space.s,
   width: 80,
   '& span': {
-    ...type.body2,
-    ...type.variant.mono,
-    ...type.variant.hint,
+    ...type.levels.subtext.large,
+    fontFamily: type.properties.fonts.monospace,
+    ...type.variants.hint,
     display: 'block',
   },
 });
@@ -179,7 +165,7 @@ const Palette = styled('ul')({
 
 const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   {
-    ...type.body,
+    ...type.levels.body.medium,
     fontWeight: 700,
     padding: `0 ${space.m}`,
     height: space.xl,
@@ -189,7 +175,7 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
   },
   ({primary, bg}) =>
     primary && {
-      ...type.h3,
+      ...type.levels.heading.medium,
       height: space.xxxl,
       paddingTop: space.s,
       paddingBottom: space.s,
@@ -228,7 +214,9 @@ export const Colors = () => (
           return (
             <Swatch bg={(colors as any)[color]} key={color}>
               <span>{level}00</span>
-              <span css={type.variant.mono}>{(colors as any)[color]}</span>
+              <span css={{fontFamily: type.properties.fonts.monospace}}>
+                {(colors as any)[color]}
+              </span>
             </Swatch>
           );
         })}
