@@ -1,6 +1,15 @@
 import * as React from 'react';
 import {keyframes} from '@emotion/core';
-import {accessibleHide, createComponent, styled} from '@workday/canvas-kit-react/common';
+import {
+  accessibleHide,
+  createComponent,
+  styled,
+  StyledType,
+} from '@workday/canvas-kit-react/common';
+
+import SkeletonHeader from './parts/skeletonHeader';
+import SkeletonText from './parts/skeletonText';
+import SkeletonShape from './parts/skeletonShape';
 
 export interface SkeletonProps {
   /**
@@ -13,7 +22,7 @@ export interface SkeletonProps {
    * @default 'Loading'
    */
   'aria-label'?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const AccessibleHide = styled('div')(accessibleHide);
@@ -24,7 +33,7 @@ const fade = keyframes({
 });
 const animation = `${fade} 0.8s linear infinite alternate`;
 
-const SkeletonContainer = styled('div')<SkeletonProps>({
+const SkeletonContainer = styled('div')<SkeletonProps & StyledType>({
   animation,
   overflow: 'hidden',
   width: '100%',
@@ -33,20 +42,22 @@ const SkeletonContainer = styled('div')<SkeletonProps>({
 });
 
 export const Skeleton = createComponent()({
-  displayName: 'SkeletonTest',
-  Component: ({
-    children,
-    'aria-label': loadingAriaLabel = 'Loading',
-    ...elemProps
-  }: SkeletonProps) => (
-    <SkeletonContainer {...elemProps}>
+  displayName: 'Skeleton',
+  Component: (
+    {children, 'aria-label': loadingAriaLabel = 'Loading', ...elemProps}: SkeletonProps,
+    ref,
+    Element
+  ) => (
+    <SkeletonContainer ref={ref} as={Element} {...elemProps}>
       <AccessibleHide>{loadingAriaLabel}</AccessibleHide>
 
       <div aria-hidden={true}>{children}</div>
     </SkeletonContainer>
   ),
   subComponents: {
-    Container: SkeletonContainer,
+    Header: SkeletonHeader,
+    Shape: SkeletonShape,
+    Text: SkeletonText,
   },
 });
 
