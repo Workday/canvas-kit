@@ -41,7 +41,7 @@ const SkeletonContainer = styled('div')<SkeletonProps & StyledType>({
   position: 'relative',
 });
 
-export const Skeleton = createComponent()({
+export const Skeleton = createComponent('div')({
   displayName: 'Skeleton',
   Component: (
     {children, 'aria-label': loadingAriaLabel = 'Loading', ...elemProps}: SkeletonProps,
