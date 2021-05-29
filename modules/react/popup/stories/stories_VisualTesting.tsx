@@ -2,7 +2,6 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core';
 import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
-import {depth} from '@workday/canvas-kit-react/tokens';
 import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {action} from '@storybook/addon-actions';
 
@@ -52,7 +51,7 @@ export const PopupStates = withSnapshotsEnabled(() => (
           props: {
             heading: 'Delete Item',
             handleClose: action('close button clicked'),
-            depth: depth[1],
+            depth: 1,
           },
         },
         {
@@ -60,7 +59,7 @@ export const PopupStates = withSnapshotsEnabled(() => (
           props: {
             heading: 'Delete Item',
             handleClose: action('close button clicked'),
-            depth: depth[2],
+            depth: 2,
           },
         },
         {
@@ -68,7 +67,7 @@ export const PopupStates = withSnapshotsEnabled(() => (
           props: {
             heading: 'Delete Item',
             handleClose: action('close button clicked'),
-            depth: depth[3],
+            depth: 3,
           },
         },
         {
@@ -76,7 +75,7 @@ export const PopupStates = withSnapshotsEnabled(() => (
           props: {
             heading: 'Delete Item',
             handleClose: action('close button clicked'),
-            depth: depth[4],
+            depth: 4,
           },
         },
         {
