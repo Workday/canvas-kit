@@ -44,10 +44,10 @@ export default Modal;
  *
  *   return (
  *     <>
- *       <Button {...targetProps}>Delete Item</Button>
+ *       <SecondaryButton {...targetProps}>Delete Item</SecondaryButton>
  *       <Modal heading='Delete Item' {...modalProps}>
  *         Are you sure?
- *         <Button onClick={closeModal}>Cancel</Button>
+ *         <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
  *       </Modal>
  *     </>
  *   )

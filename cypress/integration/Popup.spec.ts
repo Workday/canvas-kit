@@ -95,7 +95,39 @@ describe('Popup', () => {
         });
 
         it('should close Popup 1', () => {
-          cy.findAllByLabelText('Popup 1').should('not.exist');
+          cy.findByRole('dialog', {name: 'Popup 1'}).should('not.exist');
+        });
+
+        context('then Open Popup 3 button is clicked', () => {
+          const Popup3Title = 'Popup 3 (Not hidable on outside click)';
+          beforeEach(() => {
+            cy.findByText('Open Popup 3').click();
+          });
+
+          it('should open Popup 3 in front of Popup 2', () => {
+            cy.findByRole('dialog', {name: Popup3Title}).should('be.visible');
+            cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
+
+            cy.findByRole('dialog', {name: Popup3Title}).should(
+              h.popup.beOnTopOfLabelledByText('Popup 2')
+            );
+          });
+
+          context('then the close button in Popup 3 is clicked', () => {
+            beforeEach(() => {
+              cy.findByRole('dialog', {name: Popup3Title})
+                .find('[data-close]')
+                .click();
+            });
+
+            it('should close Popup 3', () => {
+              cy.findByRole('dialog', {name: Popup3Title}).should('not.exist');
+            });
+
+            it('should not close Popup 2', () => {
+              cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
+            });
+          });
         });
       });
     });

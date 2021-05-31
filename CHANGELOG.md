@@ -39,37 +39,28 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Update v5 migration TOC and ordering [@anicholls](https://github.com/anicholls)
 - docs: Relocate supplemental docs to new docs module ([#998](https://github.com/Workday/canvas-kit/pull/998)) [@anicholls](https://github.com/anicholls)
 - chore: Deprecate CKCSS and update migration guide ([#1000](https://github.com/Workday/canvas-kit/pull/1000)) [@anicholls](https://github.com/anicholls)
-  
+
 #### Testing
 
 - test: Add verifyComponent test helper and fix test types ([#958](https://github.com/Workday/canvas-kit/pull/958)) [@NicholasBoll](https://github.com/NicholasBoll)
-  
+
 #### CI
 
 - ci: Fix error in prerelease logic in publish-canary script [@anicholls](https://github.com/anicholls)
 - ci: Update setup-node action and remove custom matcher ([#994](https://github.com/Workday/canvas-kit/pull/994)) [@NicholasBoll](https://github.com/NicholasBoll)
 - ci: Fix canary dist-tag for prerelease canaries in slack message ([#1003](https://github.com/Workday/canvas-kit/pull/1003)) [@anicholls](https://github.com/anicholls)
 
-## 5.0.0-beta.0 (2021-01-27)
-
-### Infrastructure
-- feat: Add compound component utility functions ([#946](https://github.com/Workday/canvas-kit/pull/946)) [@NicholasBoll](https://github.com/NicholasBoll)
-- build: Re-enable canary builds for prerelease/v5 [@anicholls](https://github.com/anicholls)
-
-### Components
-
-- fix(common): Remove unintended whitespace around bdo tag in IE11 ([#868](https://github.com/Workday/canvas-kit/pull/868)) [@vibdev](https://github.com/vibdev)
-
 ## v4.7.0 (2021-04-12)
 
 ### Components
 - fix(select): Fix undesired scrolling when activating the menu ([#1016](https://github.com/Workday/canvas-kit/pull/1016)) [@jamesfan](https://github.com/jamesfan)
-  
+
 ### Infrastructure
 - docs: Fix Github Pages story link in Specifications ([#1005](https://github.com/Workday/canvas-kit/pull/1005)) [@NicholasBoll](https://github.com/NicholasBoll)
 - fix: Fix specification story links [@NicholasBoll](https://github.com/NicholasBoll)
-  
+
 ### CSS
+
 - feat: Add basic primary theme support to CSS components ([#995](https://github.com/Workday/canvas-kit/pull/995)) [@aaronanderson](https://github.com/aaronanderson)
 
 ## v4.6.0 (2021-03-19)
@@ -128,6 +119,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - Update Pagination component  [#954](https://github.com/Workday/canvas-kit/pull/954)
   - This is a breaking change in this Labs component. Please refer to the [migration guide](https://github.com/Workday/canvas-kit/blob/master/modules/labs-react/pagination/react/MIGRATION_GUIDE.md) for more information on how to upgrade.
+
+## 5.0.0-beta.0 (2021-01-27)
+
+### Infrastructure
+- feat: Add compound component utility functions ([#946](https://github.com/Workday/canvas-kit/pull/946)) [@NicholasBoll](https://github.com/NicholasBoll)
+- build: Re-enable canary builds for prerelease/v5 [@anicholls](https://github.com/anicholls)
+
+### Components
+
+- fix(common): Remove unintended whitespace around bdo tag in IE11 ([#868](https://github.com/Workday/canvas-kit/pull/868)) [@vibdev](https://github.com/vibdev)
 
 ## 4.4.2 (2020-12-09)
 

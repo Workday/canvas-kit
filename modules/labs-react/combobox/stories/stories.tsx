@@ -4,11 +4,12 @@ import {storiesOf} from '@storybook/react';
 import withReadme from 'storybook-readme/with-readme';
 import {withKnobs} from '@storybook/addon-knobs';
 
-import Combobox, {ComboboxProps, ComboBoxMenuItemGroup} from '../index';
-import FormField from '../../../react/form-field';
+import {Combobox, ComboboxProps, ComboBoxMenuItemGroup} from '@workday/canvas-kit-labs-react';
+import FormField from '@workday/canvas-kit-react/form-field';
 import {MenuItem, MenuItemProps} from '@workday/canvas-kit-preview-react/menu';
-import {TextInput} from '../../../react/text-input';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import README from '../README.md';
+import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 const autocompleteResult = (
   textModifier: number,
@@ -103,4 +104,11 @@ storiesOf('Labs/Combobox/React', module)
     <FormField id="autocomplete-123" label="Group of results">
       <Autocomplete showDisabledItems={true} />
     </FormField>
+  ))
+  .add('RTL', () => (
+    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+      <FormField id="rtl-autocomplete-123" label="RTL Autocomplete example">
+        <Autocomplete />
+      </FormField>
+    </CanvasProvider>
   ));

@@ -4,7 +4,7 @@ import isPropValid from '@emotion/is-prop-valid';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton} from '@workday/canvas-kit-react/button';
-import {CanvasDepthValue, depth as depthValues, space} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -15,6 +15,7 @@ import {
   useDefaultModel,
 } from '@workday/canvas-kit-react/common';
 import {xIcon} from '@workday/canvas-system-icons-web';
+import {BoxProps} from '@workday/canvas-kit-labs-react/common';
 
 import {PopupModel, usePopupModel, PopupModelConfig} from './usePopupModel';
 import {PopupCard} from './PopupCard';
@@ -22,7 +23,7 @@ import {PopupTarget, usePopupTarget} from './PopupTarget';
 import {PopupPopper, usePopupPopper} from './PopupPopper';
 import {PopupHeading} from './PopupHeading';
 import {PopupCloseIcon} from './PopupCloseIcon';
-import {PopupCloseButton, usePopupCloseButton} from './PopupCloseButton';
+import {PopupCloseButton} from './PopupCloseButton';
 
 export enum PopupPadding {
   zero = '0px',
@@ -67,16 +68,13 @@ export interface PopupPropsOld {
    */
   heading?: React.ReactNode;
   /**
-   * The depth of the Popup. Imported from `@workday/canvas-kit-react/tokens`.
-   * @default depth[2]
-   */
-  depth?: CanvasDepthValue;
-  /**
    * The `aria-label` for the Popup close button.
    * @default Close
    */
   closeButtonAriaLabel?: string;
   children?: React.ReactNode;
+  // temp
+  depth?: BoxProps['depth'];
 }
 
 const closeIconSpacing = space.xs;
@@ -159,7 +157,7 @@ export const PopupOld = createComponent('div')({
         horizontal: 'center',
         vertical: 'top',
       } as const,
-      depth = depthValues[2],
+      depth = 2,
       handleClose,
       width,
       heading,

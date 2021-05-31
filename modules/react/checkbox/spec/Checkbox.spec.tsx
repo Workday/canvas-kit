@@ -18,7 +18,7 @@ describe('Checkbox', () => {
 
     it('should be unchecked by default', () => {
       const {getByRole} = render(<Checkbox onChange={cb} />);
-      expect(getByRole('checkbox')).toHaveProperty('checked', false);
+      expect(getByRole('checkbox')).not.toBeChecked();
     });
   });
 
@@ -41,7 +41,14 @@ describe('Checkbox', () => {
   describe('when rendered with checked=true', () => {
     it('should render a checked checkbox input', () => {
       const {getByRole} = render(<Checkbox checked={true} onChange={cb} />);
-      expect(getByRole('checkbox')).toHaveProperty('checked', true);
+      expect(getByRole('checkbox')).toBeChecked();
+    });
+  });
+
+  describe('when rendered with indeterminate=true', () => {
+    it('should render a partially checked checkbox input', () => {
+      const {getByRole} = render(<Checkbox checked={true} indeterminate={true} onChange={cb} />);
+      expect(getByRole('checkbox')).toBePartiallyChecked();
     });
   });
 
@@ -75,7 +82,7 @@ describe('Checkbox', () => {
 
       rerender(<Checkbox checked={true} onChange={cb} />);
 
-      expect(getByRole('checkbox')).toHaveProperty('checked');
+      expect(getByRole('checkbox')).toBeChecked();
       expect(getByRole('checkbox')).toHaveProperty('id', uniqueId);
     });
   });

@@ -146,7 +146,7 @@ const useTab = (
     {
       id: `tab-${state.id}-${name}`,
       tabIndex: !!name && state.cursorId === name ? undefined : -1,
-      'aria-selected': isSelected ? true : undefined,
+      'aria-selected': isSelected,
       'aria-controls': `tabpanel-${state.id}-${name}`,
       onClick: onSelect,
       isSelected: isSelected,

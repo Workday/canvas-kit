@@ -22,9 +22,14 @@ module.exports = {
     '@storybook/addon-knobs',
     '@storybook/addon-storysource',
   ],
+  typescript: {
+    check: false,
+    reactDocgen: false, // we'll handle this ourselves
+  },
   webpackFinal: async config => {
     // Get the specifications object and replace with a real object in the spec.ts file
     const specs = await getSpecifications();
+
     // modules/specifications/lib/specs.ts
     config.module.rules.push({
       test: /specs\.ts$/,
@@ -116,6 +121,11 @@ module.exports = {
   },
   babel: async options => ({
     ...options,
-    plugins: [...options.plugins, '@babel/plugin-transform-modules-commonjs'],
+    plugins: [
+      ...options.plugins,
+      '@babel/plugin-transform-modules-commonjs',
+      // Needed temporarily until https://github.com/storybookjs/storybook/issues/14805 is resolved
+      ['@babel/plugin-proposal-private-property-in-object', {loose: true}],
+    ],
   }),
 };
