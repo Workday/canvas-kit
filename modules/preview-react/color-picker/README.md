@@ -22,7 +22,7 @@ yarn add @workday/canvas-kit-labs-react
 import * as React from 'react';
 import ColorPicker from '@workday/canvas-kit-labs-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper, Popup} from '@workday/canvas-kit-react/popup';
 
 const MyComponent: React.FunctionComponent = () => {
@@ -42,9 +42,9 @@ const MyComponent: React.FunctionComponent = () => {
 
   return (
     <>
-      <Button ref={ref} variant="primary" onClick={toggleOpen}>
+      <SecondaryButton ref={ref} variant="primary" onClick={toggleOpen}>
         Toggle Color Picker
-      </Button>
+      </SecondaryButton>
       <Popper placement={'bottom'} open={isOpen} anchorElement={ref.current!}>
         <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
           <ColorPicker

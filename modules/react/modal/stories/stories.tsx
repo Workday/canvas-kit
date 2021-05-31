@@ -8,9 +8,11 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 import README from '../README.md';
 import {controlComponent} from '../../../../utils/storybook';
+import Popup, {Popper, useCloseOnOutsideClick, usePopup} from '@workday/canvas-kit-react/popup';
 
 export default {
   title: 'Components/Popups/Modal/React',
@@ -31,6 +33,56 @@ export const Default = () => {
         </DeleteButton>
         <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
       </Modal>
+    </>
+  );
+};
+
+export const WithTooltips = () => {
+  const {targetProps, modalProps, closeModal} = useModal();
+  const popup1 = usePopup();
+  const popup2 = usePopup();
+
+  useCloseOnOutsideClick(popup1.stackRef, popup1.closePopup);
+
+  return (
+    <>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
+        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+        <SecondaryButton {...popup1.targetProps}>Open Popup to reach Delete button</SecondaryButton>
+        <SecondaryButton {...popup2.targetProps}>Non-hidable Popup</SecondaryButton>
+        <Tooltip title={'Not so sure'} type={'muted'}>
+          <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+        </Tooltip>
+      </Modal>
+      <Popper {...popup1.popperProps}>
+        <Popup heading="Really Delete" handleClose={popup1.closePopup}>
+          Pressing 'Delete' will close the modal
+          <Tooltip
+            placement="left"
+            title={'Really, Really, Really, Really, Really sure'}
+            type={'muted'}
+          >
+            <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
+              Delete
+            </DeleteButton>
+          </Tooltip>
+        </Popup>
+      </Popper>
+      <Popper {...popup2.popperProps}>
+        <Popup heading="Does Not Hide On Click Outside" handleClose={popup2.closePopup}>
+          Pressing 'Delete' will close the modal
+          <Tooltip
+            placement="left"
+            title={'Really, Really, Really, Really, Really sure'}
+            type={'muted'}
+          >
+            <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
+              Delete
+            </DeleteButton>
+          </Tooltip>
+        </Popup>
+      </Popper>
     </>
   );
 };
