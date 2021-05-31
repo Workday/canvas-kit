@@ -146,7 +146,7 @@ fix: Add missing static class variable to IconButton and Avatar
 
 ## Getting Started
 
-1.  Clone the respository and run `yarn`
+1.  Clone the repository and run `yarn`
 2.  Run `yarn start` to start [Storybook](https://storybook.js.org/)
 3.  Visit [http://localhost:9001/](http://localhost:9001/)
 
