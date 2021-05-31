@@ -28,6 +28,9 @@ junit.xml
 # docs
 /docs
 
+# public
+/public
+
 # cypress
 cypress/videos
 cypress/screenshots

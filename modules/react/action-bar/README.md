@@ -16,13 +16,13 @@ yarn add @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react/button';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 
 <ActionBar>
-  <Button variant="primary">Button</Button>
-  <Button>Button</Button>
-  <Button>Button</Button>
+  <PrimaryButton variant="primary">Button</PrimaryButton>
+  <SecondaryButton>Button</SecondaryButton>
+  <SecondaryButton>Button</SecondaryButton>
 </ActionBar>;
 ```
 

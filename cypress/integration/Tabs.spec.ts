@@ -30,7 +30,7 @@ describe('Tabs', () => {
       });
 
       it('should not have "aria-selected" for the second tab', () => {
-        cy.findByRole('tab', {name: 'Second Tab'}).should('not.have.attr', 'aria-selected');
+        cy.findByRole('tab', {name: 'Second Tab'}).should('have.attr', 'aria-selected', 'false');
       });
 
       it('should not have tabindex on the first tab', () => {
@@ -110,7 +110,11 @@ describe('Tabs', () => {
             });
 
             it('should not have "aria-selected" on the first tab', () => {
-              cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'aria-selected');
+              cy.findByRole('tab', {name: 'First Tab'}).should(
+                'have.attr',
+                'aria-selected',
+                'false'
+              );
             });
 
             it('should have "aria-selected=true" on the second tab', () => {
@@ -128,7 +132,11 @@ describe('Tabs', () => {
             });
 
             it('should not have "aria-selected" on the first tab', () => {
-              cy.findByRole('tab', {name: 'First Tab'}).should('not.have.attr', 'aria-selected');
+              cy.findByRole('tab', {name: 'First Tab'}).should(
+                'have.attr',
+                'aria-selected',
+                'false'
+              );
             });
 
             it('should have "aria-selected=true" on the second tab', () => {
@@ -411,7 +419,7 @@ describe('Tabs', () => {
           });
 
           it('should not have "aria-selected" on the first tab', () => {
-            cy.findByRole('tab', {name: 'ראשון'}).should('not.have.attr', 'aria-selected');
+            cy.findByRole('tab', {name: 'ראשון'}).should('have.attr', 'aria-selected', 'false');
           });
 
           it('should have "aria-selected=true" on the second tab', () => {
