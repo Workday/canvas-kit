@@ -10,7 +10,7 @@ Hooks.
 If you are building your own custom stacked UI components, use the [Popper](#popper) component along
 with our [hooks](#hooks). The `Popper` component and hooks work with the stack management system for
 correct rendering and accessibility behavior. If you cannot use `Popper`, use the
-[usePopupStack](#usepoupstack) hook to properly register and deregister the popup at the correct
+[usePopupStack](#usepopupstack) hook to properly register and deregister the popup at the correct
 time. If you cannot use our hooks, consider upgrading your component to use Hooks. If you cannot do
 that, you'll have to look up the `PopupStack` package for the direct API and have a look at the
 source code for our hooks into the `PopupStack` API.
@@ -34,20 +34,22 @@ no UI and will render any children to the `body` element and position around a p
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper} from '@workday/canvas-kit-react/popup';
 
 const MyPopper = () => {
   const [open, setOpen] = React.useState(false);
-  const ref = React.useRef(null)
+  const ref = React.useRef(null);
 
   return (
     <div>
-      <Button onClick={() => setOpen(true)} ref={ref}>
+      <SecondaryButton onClick={() => setOpen(true)} ref={ref}>
+        Open Popper
+      </SecondaryButton>
       <Popper anchorElement={ref} open={open}>
         <div>
           <p>Popper content</p>
-          <Button onClick={() => setOpen(false)}>
+          <SecondaryButton onClick={() => setOpen(false)}>Close Popper</SecondaryButton>
         </div>
       </Popper>
     </div>
@@ -60,25 +62,27 @@ If you need access to the `placement` that was chosen by PopperJS, `children` ca
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper} from '@workday/canvas-kit-react/popup';
 
 const MyPopper = () => {
   const [open, setOpen] = React.useState(false);
-  const ref = React.useRef(null)
+  const ref = React.useRef(null);
 
   return (
     <div>
-      <Button onClick={() => setOpen(true)} ref={ref}>
+      <SecondaryButton onClick={() => setOpen(true)} ref={ref}>
+        Open Popper
+      </SecondaryButton>
       <Popper anchorElement={ref} open={open}>
         {({placement}) => {
           return (
             <div>
               <p>Popper content</p>
               <p>Placement chosen: {placement}</p>
-              <Button onClick={() => setOpen(false)}>
+              <SecondaryButton onClick={() => setOpen(false)}>Close Popper</SecondaryButton>
             </div>
-          )
+          );
         }}
       </Popper>
     </div>
@@ -156,7 +160,7 @@ Default: `true`
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popup, Popper, usePopup, useCloseOnOutsideClick, useCloseOnEscape} from '@workday/canvas-kit-react/popup';
 
 const MyPopup = () => {
@@ -167,10 +171,10 @@ const MyPopup = () => {
   useCloseOnEscape(stackRef, closePopup);
 
   return (
-    <Button {...targetProps}>Toggle Popup</Button>
+    <SecondaryButton {...targetProps}>Toggle Popup</SecondaryButton>
     <Popper placement="bottom" {...popperProps}>
       <Popup heading="Popup Title">Popup Contents</Popup>
-      <Button onClick={closePopup}>Close</Button>
+      <SecondaryButton onClick={closePopup}>Close</SecondaryButton>
     </Popper>
   );
 };
@@ -305,7 +309,7 @@ composite parts of the Popup pattern.
 
 ```tsx
 import {
-  Button,
+  SecondaryButton,
   DeleteButton,
   Popper,
   Popup,
@@ -328,7 +332,7 @@ const MyDeleteButton = ({onConfirm}) => {
         <Popup heading="Delete Item" handleClose={closePopup}>
           <p>Are you sure you'd like to delete?</p>
           <DeleteButton onClick={onConfirm}>Yes</DeleteButton>
-          <Button onClick={closePopup}>No</Button>
+          <SecondaryButton onClick={closePopup}>No</SecondaryButton>
         </Popup>
       </Popper>
     </>

@@ -7,7 +7,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {action} from '@storybook/addon-actions';
 import styled from '@emotion/styled';
 
-import {Button} from '../../button';
+import {SecondaryButton} from '../../button';
 import {type} from '../../tokens';
 import CookieBanner from '../index';
 import README from '../README.md';
@@ -50,7 +50,7 @@ class BannerContainer extends React.Component<Props, State> {
 
     return (
       <Container>
-        <Button onClick={this.reset}>Reset Banner</Button>
+        <SecondaryButton onClick={this.reset}>Reset Banner</SecondaryButton>
         <CookieBanner
           onAccept={this.onAccept}
           isClosed={this.state.acceptedCookies}

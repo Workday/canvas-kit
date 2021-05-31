@@ -1,7 +1,7 @@
 import {DocsPage, DocsContainer} from '@storybook/addon-docs/blocks';
 import 'cypress-storybook/react';
 
-import {CanvasProviderDecorator, FontsDecorator} from '../utils/storybook';
+import {CanvasProviderDecorator} from '../utils/storybook';
 import theme from './theme';
 
 /** If the string contains a phrase, prefix it. This is useful for making ordering sections */
@@ -29,7 +29,7 @@ function storySort(a, b) {
   return left === right ? 0 : left.localeCompare(right);
 }
 
-export const decorators = [FontsDecorator, CanvasProviderDecorator];
+export const decorators = [CanvasProviderDecorator];
 
 export const parameters = {
   options: {

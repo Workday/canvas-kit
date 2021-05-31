@@ -44,9 +44,9 @@ npm install @workday/canvas-kit-react
 
 ```tsx
 import * as React from 'react';
-import {Button} from '@workday/canvas-kit-react';
+import {SecondaryButton} from '@workday/canvas-kit-react';
 
-<Button>Button Label</Button>;
+<SecondaryButton>Button Label</SecondaryButton>;
 ```
 
 ### CSS
@@ -96,8 +96,9 @@ The Canvas Kit core team will take a look and discuss it with you.
 
 ## Contributing
 
-Want to contribute to Canvas Kit React? Please read our [contributing guidelines](./modules/docs/mdx/CONTRIBUTING.md)
-to find out more and how to get started.
+Want to contribute to Canvas Kit React? Please read our
+[contributing guidelines](./modules/docs/mdx/CONTRIBUTING.md) to find out more and how to get
+started.
 
 ## Open Development
 

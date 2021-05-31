@@ -313,6 +313,7 @@ export const Checkbox = createComponent('input')({
             type="checkbox"
             value={value}
             error={error}
+            aria-checked={indeterminate ? 'mixed' : checked}
             {...elemProps}
           />
           <CheckboxRipple />
