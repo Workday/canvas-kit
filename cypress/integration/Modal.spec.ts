@@ -162,6 +162,131 @@ describe('Modal', () => {
     });
   });
 
+  context(`given the 'With Tooltips' story is rendered`, () => {
+    beforeEach(() => {
+      h.stories.load('Components/Popups/Modal/React', 'With Tooltips');
+    });
+
+    context('when the modal is open', () => {
+      beforeEach(() => {
+        cy.findByText('Delete Item').click();
+      });
+
+      it('should open the modal', () => {
+        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+      });
+
+      context(`when the 'Cancel' button is focused`, () => {
+        beforeEach(() => {
+          cy.contains('Cancel').focus();
+        });
+
+        it(`should open the 'Cancel' tooltip`, () => {
+          cy.findByRole('tooltip', {name: 'Not so sure'}).should('be.visible');
+        });
+
+        context(`when clicking outside the modal`, () => {
+          beforeEach(() => {
+            cy.get('body').click('top');
+          });
+
+          it(`should close the 'Cancel' tooltip`, () => {
+            cy.findByRole('tooltip', {name: 'Not so sure'}).should('not.be.visible');
+          });
+
+          it(`should close the modal`, () => {
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+          });
+        });
+      });
+
+      context(`when the 'Open Popup to reach Delete button' button is clicked`, () => {
+        beforeEach(() => {
+          cy.findByText('Open Popup to reach Delete button').click();
+        });
+
+        it(`should open the 'Really Delete' popup`, () => {
+          cy.findByRole('dialog', {name: 'Really Delete'}).should('be.visible');
+        });
+
+        context(`when the 'Delete' button is focused`, () => {
+          beforeEach(() => {
+            cy.findByRole('button', {name: 'Delete'}).focus();
+          });
+          it(`should open the 'Delete' tooltip`, () => {
+            cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
+              'be.visible'
+            );
+          });
+
+          context(`when clicking outside the modal`, () => {
+            beforeEach(() => {
+              cy.get('body').click('top');
+            });
+
+            it(`should close the 'Delete' tooltip`, () => {
+              cy.findByRole('tooltip', {
+                name: 'Really, Really, Really, Really, Really sure',
+              }).should('not.be.visible');
+            });
+
+            it(`should close the 'Really Delete' popup`, () => {
+              cy.findByRole('dialog', {name: 'Really Delete'}).should('not.be.visible');
+            });
+
+            it(`should keep the modal open`, () => {
+              cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+            });
+          });
+        });
+      });
+
+      context(`when the 'Non-hidable Popup' button is clicked`, () => {
+        beforeEach(() => {
+          cy.findByText('Non-hidable Popup').click();
+        });
+
+        it(`should open the 'Does Not Hide On Click Outside' popup`, () => {
+          cy.findByRole('dialog', {name: 'Does Not Hide On Click Outside'}).should('be.visible');
+        });
+
+        context(`when the 'Delete' button is focused`, () => {
+          beforeEach(() => {
+            cy.findByRole('button', {name: 'Delete'}).focus();
+          });
+          it(`should open the 'Delete' tooltip`, () => {
+            cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'}).should(
+              'be.visible'
+            );
+          });
+
+          context(`when clicking outside the modal`, () => {
+            beforeEach(() => {
+              cy.get('body').click('top');
+            });
+
+            it(`should not close the 'Does Not Hide On Click Outside' popup`, () => {
+              cy.findByRole('dialog', {name: 'Does Not Hide On Click Outside'}).should(
+                'be.visible'
+              );
+            });
+
+            it(`should close the modal`, () => {
+              cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+            });
+
+            // TODO: Manually, this test case works, but cypress click on body does not close the tooltip.
+            it.skip(`should close the 'Delete' tooltip`, () => {
+              cy.findByRole('tooltip', {
+                name: 'Really, Really, Really, Really, Really sure',
+              }).should('not.be.visible');
+            });
+          });
+        });
+      });
+    });
+  });
+
   context(`given the 'With Radio buttons' story is rendered`, () => {
     beforeEach(() => {
       h.stories.load('Components/Popups/Modal/React', 'With Radio buttons');

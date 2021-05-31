@@ -1,7 +1,6 @@
 import React, {useEffect, useLayoutEffect, useRef, useState, useCallback} from 'react';
-import styled from '@emotion/styled';
 import {CSSObject, jsx, keyframes} from '@emotion/core';
-import {GrowthBehavior} from '@workday/canvas-kit-react-common';
+import {GrowthBehavior, styled, useIsRTL} from '@workday/canvas-kit-react-common';
 import {depth, spacing, commonColors, borderRadius} from '@workday/canvas-kit-react-core';
 import {MenuItemProps} from '@workday/canvas-kit-labs-react-menu';
 import {Card} from '@workday/canvas-kit-react-card';
@@ -106,6 +105,8 @@ const MenuContainer = styled(Card)({
   width: '100%',
   minWidth: 0,
   animation: `${fadeInKeyframes} 200ms ease-out`,
+  maxHeight: 200,
+  overflowY: 'auto',
 });
 
 const ResetButton = styled(IconButton)<{shouldShow: boolean}>(
@@ -209,6 +210,9 @@ const Combobox = ({
       setAnnouncementText(getStatusText(interactiveAutocompleteItems.length));
     }
   }, [getStatusText, interactiveAutocompleteItems, isOpened]);
+
+  // Used to set the position of the reset button and the padding direction inside the input container
+  const isRTL = useIsRTL();
 
   const setInputValue = useCallback(
     (newValue: string) => {
@@ -404,9 +408,10 @@ const Combobox = ({
   const renderChildren = (inputElement: React.ReactElement<TextInputProps>): React.ReactNode => {
     let cssOverride: CSSObject = {zIndex: 2};
     if (showClearButton) {
+      const paddingDirection = isRTL ? 'paddingLeft' : 'paddingRight';
       cssOverride = {
         ...cssOverride,
-        paddingRight: spacing.xl,
+        [paddingDirection]: spacing.xl,
       };
     }
     const newTextInputProps: Partial<TextInputProps> = {
