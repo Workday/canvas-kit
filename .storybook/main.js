@@ -24,6 +24,7 @@ module.exports = {
   webpackFinal: async config => {
     // Get the specifications object and replace with a real object in the spec.ts file
     const specs = await getSpecifications();
+
     // modules/specifications/lib/specs.ts
     config.module.rules.push({
       test: /specs\.ts$/,
