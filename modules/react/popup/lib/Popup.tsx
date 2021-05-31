@@ -5,7 +5,7 @@ import uuid from 'uuid/v4';
 
 import {Card} from '@workday/canvas-kit-react/card';
 import {IconButton} from '@workday/canvas-kit-react/button';
-import {CanvasDepthValue, depth as depthValues, space} from '@workday/canvas-kit-react/tokens';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -13,6 +13,7 @@ import {
   PickRequired,
 } from '@workday/canvas-kit-react/common';
 import {xIcon} from '@workday/canvas-system-icons-web';
+import {BoxProps} from '@workday/canvas-kit-labs-react/common';
 
 export enum PopupPadding {
   zero = '0px',
@@ -57,15 +58,12 @@ export interface PopupProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   heading?: React.ReactNode;
   /**
-   * The depth of the Popup. Imported from `@workday/canvas-kit-react/tokens`.
-   * @default depth[2]
-   */
-  depth?: CanvasDepthValue;
-  /**
    * The `aria-label` for the Popup close button.
    * @default Close
    */
   closeButtonAriaLabel?: string;
+  // temp
+  depth?: BoxProps['depth'];
 }
 
 const closeIconSpacing = space.xs;
@@ -151,7 +149,7 @@ export default class Popup extends React.Component<PopupProps> {
         horizontal: 'center',
         vertical: 'top',
       } as const,
-      depth = depthValues[2],
+      depth = 2,
       handleClose,
       width,
       heading,

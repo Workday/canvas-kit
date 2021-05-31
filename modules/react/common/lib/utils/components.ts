@@ -45,6 +45,17 @@ export type PropsWithAs<P, ElementType extends React.ElementType> = P &
   };
 
 /**
+ * Extract props from any component that was created using `createComponent`.
+ * @example
+ * interface MyProps extends ExtractProps<typeof Card.Body> {}
+ */
+export type ExtractProps<T> = T extends ElementComponent<any, infer P>
+  ? P
+  : T extends Component<infer P>
+  ? P
+  : {};
+
+/**
  * Component type that allows for `as` to change the element or component type.
  * Passing `as` will correctly change the allowed interface of the JSX element
  */

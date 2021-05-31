@@ -49,7 +49,8 @@ This changes the box shadow surrounding the card. Values are `inset`, or 0-4. He
 The `Card` component is the container component that holds a `Card.Body` and an optional
 `Card.Heading`. The `Card` component wraps a non-semantic `div` element. The element can be replaced
 using the `as` prop or a `role` or other `aria-*` attributes can be added to give the card container
-semantic meaning.
+semantic meaning. `Card` extends from [Box](/?path=/docs/labs-common-box--as#style-props), so any
+style props that `Box` supports, `Card` also supports.
 
 #### Component Props
 
@@ -85,7 +86,9 @@ The `Card.Heading` defaults to an `h3` element, but can be changed using the `as
 The `Card.Body` component is a non-semantic sub-component that contains the body of the card. Any
 attributes can be added to give the body any extra semantic meaning. If the body is very small, an
 `aria-describedby` could be added to the `Card` container component that points to the `id` of this
-sub-component. This might be useful in a short dialog.
+sub-component. This might be useful in a short dialog. `Card.Body` extends from
+[Box](/?path=/docs/labs-common-box--as#style-props), so any style props that `Box` supports,
+`Card.Body` also supports.
 
 The `Card.Body` defaults to a `div` element.
 
