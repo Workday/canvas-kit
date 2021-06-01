@@ -21,7 +21,7 @@ export interface GraphicStyles {
   grow?: boolean;
 }
 
-export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'iconRef'> {
+export interface GraphicProps extends GraphicStyles, Pick<SvgProps, 'iconRef' | 'mirror'> {
   /**
    * The graphic to display from `@workday/canvas-graphics-web`.
    */
@@ -60,7 +60,7 @@ export const graphicStyles = ({width, height, grow}: GraphicStyles): CSSObject =
 
 export default class Graphic extends React.Component<GraphicProps> {
   render() {
-    const {grow = false, src, width, height, iconRef, ...elemProps} = this.props;
+    const {grow = false, src, width, height, iconRef, mirror = false, ...elemProps} = this.props;
 
     return (
       <Svg
@@ -68,6 +68,7 @@ export default class Graphic extends React.Component<GraphicProps> {
         styles={graphicStyles({width, height, grow})}
         type={CanvasIconTypes.Graphic}
         iconRef={iconRef}
+        mirror={mirror}
         {...elemProps}
       />
     );

@@ -43,6 +43,11 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
    * Will render an `a` tag instead of a `button` when defined.
    */
   as?: 'a';
+  /**
+   * Choose whether to mirror the icon in the vertical axis
+   * @default false
+   */
+  mirrorIcon?: boolean;
 }
 
 const IconButton: ButtonOrAnchorComponent<
@@ -55,6 +60,7 @@ const IconButton: ButtonOrAnchorComponent<
   theme = useTheme(),
   variant = IconButtonVariant.Circle,
   size = 'medium',
+  mirrorIcon = false,
   buttonRef,
   onToggleChange,
   'aria-label': iconArialabel,
@@ -102,7 +108,7 @@ const IconButton: ButtonOrAnchorComponent<
       aria-label={iconArialabel}
       {...elemProps}
     >
-      {icon ? <SystemIcon icon={icon} /> : children}
+      {icon ? <SystemIcon icon={icon} mirror={mirrorIcon} /> : children}
     </ButtonContainer>
   );
 };

@@ -38,6 +38,7 @@ const ToolbarDropdownButton = ({
   // TODO: Fix useTheme and make it a real hook
   // eslint-disable-next-line react-hooks/rules-of-hooks
   theme = useTheme(),
+  mirrorIcon = false,
   buttonRef,
   'aria-label': iconArialabel,
   icon,
@@ -53,7 +54,11 @@ const ToolbarDropdownButton = ({
       {...elemProps}
     >
       {icon ? (
-        <SystemIcon className={'wdc-toolbar-dropdown-btn-custom-icon'} icon={icon} />
+        <SystemIcon
+          className={'wdc-toolbar-dropdown-btn-custom-icon'}
+          icon={icon}
+          mirror={mirrorIcon}
+        />
       ) : (
         children
       )}

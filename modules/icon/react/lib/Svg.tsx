@@ -9,11 +9,16 @@ export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   styles?: CSSObject;
   type: CanvasIconTypes;
   iconRef?: React.Ref<HTMLSpanElement>;
+  /**
+   * Choose whether to mirror the SVG in the vertical axis.
+   * @default false
+   */
+  mirror?: boolean;
 }
 
 export default class Svg extends React.Component<SvgProps> {
   public render() {
-    const {src, styles, type, iconRef, ...elemProps} = this.props;
+    const {src, styles, type, iconRef, mirror = false, ...elemProps} = this.props;
 
     // Validation for JS
     try {
@@ -35,6 +40,7 @@ export default class Svg extends React.Component<SvgProps> {
               css(styles, {
                 display: 'inline-block',
                 '& svg': {display: 'block'},
+                transform: mirror ? 'scaleX(-1)' : undefined,
               }),
               elemProps.className
             )}

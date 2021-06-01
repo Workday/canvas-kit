@@ -6,7 +6,7 @@ import {ButtonProps} from '../Button';
 import {SystemIcon} from '@workday/canvas-kit-react-icon';
 import {styled} from '@workday/canvas-kit-react-common';
 
-export interface ButtonLabelIconProps extends Pick<ButtonProps, 'size' | 'icon'> {
+export interface ButtonLabelIconProps extends Pick<ButtonProps, 'size' | 'icon' | 'mirrorIcon'> {
   dropdown?: boolean;
   iconPosition?: ButtonIconPosition;
 }
@@ -37,6 +37,7 @@ const ButtonLabelIconStyled = styled('span', {
 );
 
 export const ButtonLabelIcon = ({
+  mirrorIcon = false,
   icon,
   size,
   dropdown,
@@ -57,7 +58,7 @@ export const ButtonLabelIcon = ({
       size={size}
       {...elemProps}
     >
-      <SystemIcon size={iconSize} icon={icon} />
+      <SystemIcon size={iconSize} icon={icon} mirror={mirrorIcon} />
     </ButtonLabelIconStyled>
   );
 };

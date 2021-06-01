@@ -98,6 +98,7 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
       fill,
       fillHover,
       size,
+      mirror = false,
       ...elemProps
     } = this.props;
 
@@ -119,6 +120,7 @@ export default class SystemIcon extends React.Component<SystemIconProps> {
         size={size}
         styles={style}
         iconRef={iconRef}
+        mirror={mirror}
         {...elemProps}
       />
     );

@@ -44,6 +44,11 @@ export interface OutlineButtonProps
    * Will render an `a` tag instead of a `button` when defined.
    */
   as?: 'a';
+  /**
+   * Choose whether to mirror the icon in the vertical axis
+   * @default false
+   */
+  mirrorIcon?: boolean;
 }
 
 const OutlineButton: ButtonOrAnchorComponent<OutlineButtonProps, typeof OutlineButtonVariant> = ({
@@ -52,6 +57,7 @@ const OutlineButton: ButtonOrAnchorComponent<OutlineButtonProps, typeof OutlineB
   theme = useTheme(),
   variant = OutlineButtonVariant.Secondary,
   size = 'medium',
+  mirrorIcon = false,
   buttonRef,
   dataLabel,
   icon,
@@ -64,7 +70,9 @@ const OutlineButton: ButtonOrAnchorComponent<OutlineButtonProps, typeof OutlineB
     ref={buttonRef}
     {...elemProps}
   >
-    {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+    {icon && size !== 'small' && (
+      <ButtonLabelIcon size={size} icon={icon} mirrorIcon={mirrorIcon} />
+    )}
     <ButtonLabel>{children}</ButtonLabel>
     {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
   </ButtonContainer>

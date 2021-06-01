@@ -49,6 +49,11 @@ export interface ButtonProps
    * Will render an `a` tag instead of a `button` when defined.
    */
   as?: 'a';
+  /**
+   * Choose whether to mirror the icon in the vertical axis
+   * @default false
+   */
+  mirrorIcon?: boolean;
 }
 
 const Button: ButtonOrAnchorComponent<ButtonProps, typeof ButtonVariant> = ({
@@ -57,6 +62,7 @@ const Button: ButtonOrAnchorComponent<ButtonProps, typeof ButtonVariant> = ({
   theme = useTheme(),
   variant = ButtonVariant.Secondary,
   size = 'medium',
+  mirrorIcon = false,
   buttonRef,
   dataLabel,
   icon,
@@ -69,7 +75,9 @@ const Button: ButtonOrAnchorComponent<ButtonProps, typeof ButtonVariant> = ({
     ref={buttonRef}
     {...elemProps}
   >
-    {icon && size !== 'small' && <ButtonLabelIcon size={size} icon={icon} />}
+    {icon && size !== 'small' && (
+      <ButtonLabelIcon size={size} icon={icon} mirrorIcon={mirrorIcon} />
+    )}
     <ButtonLabel>{children}</ButtonLabel>
     {dataLabel && size !== 'small' && <ButtonLabelData>{dataLabel}</ButtonLabelData>}
   </ButtonContainer>
