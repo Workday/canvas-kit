@@ -79,8 +79,10 @@ const Container = styled('div')({
   position: 'fixed',
   top: 0,
   left: 0,
-  width: '100vw',
-  height: '100vh',
+  bottom: 0,
+  right: 0,
+  overflowX: 'hidden',
+  overflowY: 'auto',
   background: 'rgba(0,0,0,0.65)',
   animationName: `${fadeIn}`,
   animationDuration: '0.3s',
@@ -95,13 +97,18 @@ const Container = styled('div')({
 // the Modal. The centering container forces a "center" pixel calculation by making sure the width
 // is always an even number
 const CenteringContainer = styled('div')({
-  height: '100vh',
   display: 'flex',
-  position: 'absolute',
-  left: 0,
-  top: 0,
   alignItems: 'center',
   justifyContent: 'center',
+  margin: '1.75rem auto',
+  minHeight: 'calc(100% - (1.75rem * 2))',
+
+  // IE11 fix for setting min-height in a flex container
+  '&::before': {
+    display: 'block',
+    content: "''",
+    height: 'calc(100vh - (1.75rem * 2))',
+  },
 });
 
 const transformOrigin = {
@@ -188,6 +195,18 @@ const useInitialFocus = (
   }, [modalRef, firstFocusRef]);
 };
 
+const useRemoveBodyScroll = () => {
+  React.useLayoutEffect(() => {
+    const originalOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+};
+
 const ModalContent = ({
   ariaLabel,
   width = ModalWidth.s,
@@ -208,6 +227,7 @@ const ModalContent = ({
   useFocusTrap(stackRef);
   useInitialFocus(stackRef, firstFocusRef);
   useAssistiveHideSiblings(stackRef);
+  useRemoveBodyScroll();
 
   React.useEffect(() => {
     // We don't use `useCloseOnOutsideClick` directly, so we add this data attribute manually
