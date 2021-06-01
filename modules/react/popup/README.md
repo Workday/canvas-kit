@@ -182,11 +182,7 @@ const MyPopup = () => {
 
 ### Popup Static Properties
 
-#### `Padding: PopupPadding`
-
-```tsx
-<Popup padding={Popup.Padding.l}>{this.props.children}</Popup>
-```
+> None
 
 ### Popup Required Props
 

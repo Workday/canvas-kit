@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Button,
+  SecondaryButton,
   DeleteButton,
   Popper,
   Popup,
@@ -20,7 +20,7 @@ export const UsePopup = () => {
     <>
       <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <Popper placement={'bottom'} {...popperProps}>
-        <Popup.Card width={400} padding={Popup.Padding.s}>
+        <Popup.Card width={400} padding="s">
           <Popup.CloseIcon onClick={closePopup} aria-label="Close" />
           <Popup.Heading>{'Delete Item'}</Popup.Heading>
           <Popup.Body>
@@ -28,7 +28,7 @@ export const UsePopup = () => {
             <DeleteButton style={{marginRight: '16px'}} onClick={closePopup}>
               Delete
             </DeleteButton>
-            <Button onClick={closePopup}>Cancel</Button>
+            <SecondaryButton onClick={closePopup}>Cancel</SecondaryButton>
           </Popup.Body>
         </Popup.Card>
       </Popper>

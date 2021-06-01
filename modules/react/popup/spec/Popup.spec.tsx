@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {renderToString} from 'react-dom/server';
-import {screen, render, fireEvent} from '@testing-library/react';
 
 import {
   usePopupModel,
@@ -26,7 +25,7 @@ describe('Popup', () => {
         <Popup model={model}>
           <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
           <Popup.Popper placement={'bottom'}>
-            <Popup.Card width={400} padding="16px">
+            <Popup.Card width={400} padding="s">
               <Popup.CloseIcon aria-label="Close" />
               <Popup.Heading>Delete Item</Popup.Heading>
               <Popup.Body>

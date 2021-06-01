@@ -6,6 +6,7 @@ import {
   JSXAttribute,
   JSXSpreadAttribute,
   CallExpression,
+  ImportSpecifier,
 } from 'jscodeshift';
 
 import {getImportRenameMap} from './getImportRenameMap';
@@ -56,6 +57,14 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         }
       }
 
+      // remove `PopupPadding` import
+      root
+        .find(j.ImportSpecifier, (node: ImportSpecifier) => {
+          return node.imported.name === importMap.PopupPadding;
+        })
+        .remove();
+
+      // Gather attributes
       const findAttribute = (name: string) => (item: JSXAttribute | JSXSpreadAttribute) => {
         if (
           item.type === 'JSXAttribute' &&
@@ -82,6 +91,7 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           | JSXAttribute
           | undefined;
         const children = nodePath.value.children;
+        const padding = attributes.find(findAttribute('padding')) as JSXAttribute | undefined;
 
         // remove these attributes from the list - we'll add them as sub components
         nodePath.value.openingElement.attributes = attributes
@@ -138,6 +148,35 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
           }
         };
 
+        // Convert `padding={Popup.Padding.s}` to `padding="s"`
+        if (
+          padding &&
+          padding.value?.type === 'JSXExpressionContainer' &&
+          padding.value.expression.type === 'MemberExpression' &&
+          padding.value.expression.object.type === 'MemberExpression' &&
+          padding.value.expression.object.object.type === 'Identifier' &&
+          [importMap.Popup, styledMap.Popup].includes(
+            padding.value.expression.object.object.name
+          ) &&
+          padding.value.expression.property.type === 'Identifier'
+        ) {
+          const spacing = padding.value.expression.property.name;
+          padding.value = j.literal(spacing);
+        }
+
+        // Convert `padding={PopupPadding.s}` to `padding="s"`
+        if (
+          padding &&
+          padding.value?.type === 'JSXExpressionContainer' &&
+          padding.value.expression.type === 'MemberExpression' &&
+          padding.value.expression.object.type === 'Identifier' &&
+          padding.value.expression.object.name === importMap.PopupPadding &&
+          padding.value.expression.property.type === 'Identifier'
+        ) {
+          const spacing = padding.value.expression.property.name;
+          padding.value = j.literal(spacing);
+        }
+
         // Add header back as children
         nodePath.value.children = [
           !!handleClose
@@ -178,13 +217,13 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
 
         // Change the JSX element from a `<Popup>` to a `<Popup.Card>`
         nodePath.value.openingElement.name = j.jsxMemberExpression(
-          j.jsxIdentifier('Popup'),
+          j.jsxIdentifier(importMap.Popup),
           j.jsxIdentifier('Card')
         );
 
         if (nodePath.value.closingElement) {
           nodePath.value.closingElement.name = j.jsxMemberExpression(
-            j.jsxIdentifier('Popup'),
+            j.jsxIdentifier(importMap.Popup),
             j.jsxIdentifier('Card')
           );
         }

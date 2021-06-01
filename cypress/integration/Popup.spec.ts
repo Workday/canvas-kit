@@ -116,7 +116,7 @@ describe('Popup', () => {
           context('then the close button in Popup 3 is clicked', () => {
             beforeEach(() => {
               cy.findByRole('dialog', {name: Popup3Title})
-                .find('[data-close]')
+                .findByRole('button', {name: 'Close'})
                 .click();
             });
 

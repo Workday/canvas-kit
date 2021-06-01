@@ -363,7 +363,7 @@ Additionally, we have changed some of the button module's export behavior:
     // before
     <Button buttonRef={ref}>
     // after
-    <Button ref={ref}>
+    <SecondaryButton ref={ref}>
     ```
   - Button prop interfaces no longer extend directly from the
     `React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that
@@ -379,7 +379,7 @@ Additionally, we have changed some of the button module's export behavior:
 
     // onClick no longer exists on `ButtonProps`, but does exist as a prop in `<Button>`
     const MyButton = ({children, onClick}: MyButtonProps) => (
-      <Button onClick={onClick}>{children}</Button>
+      <SecondaryButton onClick={onClick}>{children}</Button>
     );
 
     // after

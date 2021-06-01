@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import {keyframes} from '@emotion/core';
 import {
   Popup,
-  PopupPadding,
   usePopupStack,
   useCloseOnEscape,
   useAssistiveHideSiblings,
@@ -15,7 +14,8 @@ import {
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {changeFocus} from '@workday/canvas-kit-react/common';
+import {changeFocus, ExtractProps, useMount} from '@workday/canvas-kit-react/common';
+import {Card} from '@workday/canvas-kit-react/card';
 
 import {ModalWidth} from './Modal';
 
@@ -26,9 +26,9 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
   ariaLabel?: string;
   /**
    * The padding of the Modal. Accepts `zero`, `s`, or `l`.
-   * @default PopupPadding.l
+   * @default 'l'
    */
-  padding: PopupPadding;
+  padding?: ExtractProps<typeof Card>['padding'];
   /**
    * The width of the Modal. Accepts `s` or `l`.
    * @default ModalWidth.s
@@ -70,6 +70,8 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
    * The `aria-label` for the Popup close button.
    */
   closeButtonAriaLabel?: string;
+  // temp
+  targetRef?: React.RefObject<HTMLButtonElement>;
 }
 
 const fadeIn = keyframes`
@@ -152,18 +154,24 @@ const useReturnFocus = (model: PopupModel) => {
 const ModalContent = ({
   ariaLabel,
   width = ModalWidth.s,
-  padding = PopupPadding.l,
+  padding = 'l',
   container,
   handleClose,
   children,
   firstFocusRef,
   heading,
   closeButtonAriaLabel,
+  targetRef,
   ...elemProps
 }: ModalContentProps) => {
-  const model = usePopupModel({initialVisibility: 'visible', onHide: handleClose});
+  const model = usePopupModel({
+    initialVisibility: 'visible',
+    onHide: handleClose,
+    initialFocusRef: firstFocusRef,
+    returnFocusRef: targetRef,
+  });
   const centeringRef = React.useRef<HTMLDivElement>(null);
-  const [tabIndex, setTabIndex] = React.useState(handleClose ? undefined : 0);
+  const [tabIndex, setTabIndex] = React.useState(handleClose || firstFocusRef ? undefined : 0);
   const onBlur = () => setTabIndex(undefined);
 
   const stackRef = usePopupStack(model.state.stackRef);
@@ -174,7 +182,7 @@ const ModalContent = ({
   useReturnFocus(model);
   useDisableBodyScroll(model);
 
-  React.useEffect(() => {
+  useMount(() => {
     // We don't use `useCloseOnOutsideClick` directly, so we add this data attribute manually
     stackRef.current?.setAttribute('data-behavior-click-outside-close', 'topmost');
   });

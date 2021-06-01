@@ -32,7 +32,7 @@ export const Default = () => {
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <DeleteButton {...targetProps}>Delete Item</DeleteButton>
       <Popper placement={'bottom'} {...popperProps}>
-        <Popup.Card width={400} padding={Popup.Padding.s}>
+        <Popup.Card width={400} padding="s">
           <Popup.CloseIcon onClick={closePopup} aria-label="Close" />
           <Popup.Heading>{'Delete Item'}</Popup.Heading>
           <Popup.Body>
@@ -53,7 +53,7 @@ export const Default = () => {
 export const RTL = () => {
   return (
     <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-      <Popup.Card width={400} padding={Popup.Padding.s}>
+      <Popup.Card width={400} padding="s">
         <Popup.CloseIcon onClick={() => null} aria-label="Close" />
         <Popup.Heading>למחוק פריט</Popup.Heading>
         <Popup.Body>
@@ -229,12 +229,7 @@ export const AccessiblePopupWithOnlyAriaOwns = () => {
       </DeleteButton>
       <SecondaryButton> Next Focusable Button</SecondaryButton>
       <Popper placement={'bottom'} {...popperProps}>
-        <Popup
-          width={400}
-          heading={'Delete Item'}
-          padding={Popup.Padding.s}
-          handleClose={closePopup}
-        >
+        <Popup width={400} heading={'Delete Item'} padding="s" handleClose={closePopup}>
           <div style={{marginBottom: '24px'}}>
             Are you sure you'd like to delete the item titled 'My Item'?
           </div>
@@ -273,12 +268,7 @@ export const AccessiblePopupWithFocusRedirectAndAriaOwns = () => {
       <div aria-owns={popupId}></div>
       <SecondaryButton> Next Focusable Button</SecondaryButton>
       <Popper placement={'bottom'} {...popperProps}>
-        <Popup
-          width={400}
-          heading={'Delete Item'}
-          padding={Popup.Padding.s}
-          handleClose={closePopup}
-        >
+        <Popup width={400} heading={'Delete Item'} padding="s" handleClose={closePopup}>
           <div style={{marginBottom: '24px'}}>
             Are you sure you'd like to delete the item titled 'My Item'?
           </div>
@@ -309,12 +299,7 @@ export const AccessiblePopupWithFocusTrapping = () => {
       </DeleteButton>
       <SecondaryButton> Next Focusable Button</SecondaryButton>
       <Popper placement={'bottom'} {...popperProps}>
-        <Popup
-          width={400}
-          heading={'Delete Item'}
-          padding={Popup.Padding.s}
-          handleClose={closePopup}
-        >
+        <Popup width={400} heading={'Delete Item'} padding="s" handleClose={closePopup}>
           <div style={{marginBottom: '24px'}}>
             Are you sure you'd like to delete the item titled 'My Item'?
           </div>

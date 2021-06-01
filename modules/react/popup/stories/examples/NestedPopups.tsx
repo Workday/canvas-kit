@@ -9,7 +9,7 @@ import {
   useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Button} from '@workday/canvas-kit-react/button';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 export const NestedPopups = () => {
   const popup1 = usePopupModel();
@@ -46,7 +46,7 @@ export const NestedPopups = () => {
                       <Popup.CloseButton as={Popup.CloseButton} model={popup1}>
                         Close Both (as)
                       </Popup.CloseButton>
-                      <Button {...closeBothProps}>Close Both (props)</Button>
+                      <SecondaryButton {...closeBothProps}>Close Both (props)</SecondaryButton>
                     </Popup.Body>
                   </Popup.Card>
                 </Popup.Popper>

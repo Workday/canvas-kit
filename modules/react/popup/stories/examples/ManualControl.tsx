@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, DeleteButton} from '@workday/canvas-kit-react/button';
+import {SecondaryButton, DeleteButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
   usePopupModel,
@@ -35,7 +35,7 @@ const OpenPopup = ({onClose, targetRef}: OpenPopupProps) => {
 
   return (
     <Popper anchorElement={targetRef} ref={model.state.stackRef}>
-      <Popup.Card model={model} width={400} padding={Popup.Padding.s}>
+      <Popup.Card model={model} width={400} padding="s">
         <Popup.CloseIcon model={model} aria-label="Close" />
         <Popup.Heading model={model}>Delete Item</Popup.Heading>
         <Popup.Body>
@@ -46,7 +46,7 @@ const OpenPopup = ({onClose, targetRef}: OpenPopupProps) => {
           <DeleteButton style={{marginRight: '16px'}} {...closeProps}>
             Delete
           </DeleteButton>
-          <Button {...closeProps}>Cancel</Button>
+          <SecondaryButton {...closeProps}>Cancel</SecondaryButton>
         </Popup.Body>
       </Popup.Card>
     </Popper>

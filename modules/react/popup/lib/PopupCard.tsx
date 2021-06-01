@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {keyframes} from '@emotion/core';
 
-import {Card, CardProps} from '@workday/canvas-kit-react/card';
-import {CanvasDepthValue, depth as depthValues, space} from '@workday/canvas-kit-react/tokens';
+import {Card} from '@workday/canvas-kit-react/card';
+import {space} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   TransformOrigin,
@@ -11,22 +11,18 @@ import {
   StyledType,
   mergeProps,
   useModelContext,
+  ExtractProps,
 } from '@workday/canvas-kit-react/common';
 
 import {PopupModel} from './usePopupModel';
 import {PopupModelContext} from './Popup';
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 
-export interface PopupCardProps extends CardProps {
+export interface PopupCardProps extends ExtractProps<typeof Card> {
   /**
    * The width of the Popup.
    */
   width?: number | string;
-  /**
-   * The depth of the Popup. Imported from `@workday/canvas-kit-react/tokens`.
-   * @default depth[2]
-   */
-  depth?: CanvasDepthValue;
   /**
    * Optionally pass a model directly to this component. Default is to implicitly use the same
    * model as the container component which uses React context. Only use this for advanced use-cases
@@ -88,14 +84,7 @@ const usePopupCard = ({state}: PopupModel, elemProps = {}) => {
 export const PopupCard = createComponent('div')({
   displayName: 'Popup.Card',
   Component: (
-    {
-      children,
-      model,
-      padding = '32px',
-      depth = depthValues[2],
-      width,
-      ...elemProps
-    }: PopupCardProps,
+    {children, model, padding = 'l', depth = 2, width, ...elemProps}: PopupCardProps,
     ref,
     Element
   ) => {

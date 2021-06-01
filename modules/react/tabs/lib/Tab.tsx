@@ -10,7 +10,6 @@ import {
   StyledType,
   useLocalRef,
   useModelContext,
-  composeHooks,
 } from '@workday/canvas-kit-react/common';
 
 import {TabsModelContext} from './Tabs';
@@ -162,7 +161,6 @@ export const Tab = createComponent('button')({
     const localModel = useModelContext(TabsModelContext, model);
 
     const props = useTab(localModel, elemProps, ref);
-    props.ref;
 
     return (
       <StyledButton type="button" role="tab" as={Element} {...props}>

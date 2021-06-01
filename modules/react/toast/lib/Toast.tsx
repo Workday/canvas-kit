@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Popup, PopupPadding, PopupCardProps} from '@workday/canvas-kit-react/popup';
+import {Popup, PopupCardProps} from '@workday/canvas-kit-react/popup';
 import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
@@ -82,7 +82,7 @@ export default class Toast extends React.Component<ToastProps> {
     return (
       <Popup.Card
         width={toastWidth}
-        padding={PopupPadding.s}
+        padding="s"
         role={isInteractive ? 'dialog' : 'status'}
         aria-live={isInteractive ? 'off' : 'polite'}
         aria-atomic={!isInteractive}
