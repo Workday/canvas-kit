@@ -38,10 +38,10 @@ type ToGuardConfig<
 type ToCallbackConfig<
   TState extends Record<string, any>,
   TEvents extends IEvent,
-  TGuardMap extends Record<string, keyof TEvents>
+  TCallbackMap extends Record<string, keyof TEvents>
 > = {
-  [K in keyof TGuardMap]: (event: {
-    data: Parameters<TEvents[TGuardMap[K]]>[0];
+  [K in keyof TCallbackMap]: (event: {
+    data: Parameters<TEvents[TCallbackMap[K]]>[0];
     /**
      * Callbacks are called during the `setState` phase in React. This means the state has not
      * resolved yet. This is a good time to add more `setState` calls which will be added to React's
@@ -193,3 +193,36 @@ export const useEventMap = <
     }, {} as TEvents);
   }, []);
 };
+
+type EventCreator = {[key: string]: {bivarianceHack(...args: any[]): object}['bivarianceHack']};
+type ToEvent<TEvents extends EventCreator> = {
+  [K in keyof TEvents]: (data: ReturnType<TEvents[K]>) => void;
+};
+
+const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
+  TGuardMap extends Record<string, keyof TEvents>,
+  TCallbackMap extends Record<string, keyof TEvents>
+>(
+  config?: Partial<EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>>
+) => {
+  return {events, eventMap: config as EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>};
+};
+
+// const disclosureEvents = createEvents({
+//   show(event: Event | React.SyntheticEvent) {
+//     return {event};
+//   },
+// })({
+//   callbacks: {
+//     onShow: 'show',
+//   },
+//   guards: {
+//     shouldShow: 'show',
+//   },
+// });
+
+// useDisclosureModel({
+//   onShow({data, prevState})
+// });
+
+// <Tabs calbacks={ show: () => {}}

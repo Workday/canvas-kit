@@ -6,6 +6,7 @@ import {
   useCloseOnEscape,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
 
 export const MultiplePopups = () => {
   const popup1 = usePopupModel();
@@ -19,7 +20,7 @@ export const MultiplePopups = () => {
   useCloseOnEscape(popup2);
 
   return (
-    <>
+    <HStack spacing="s">
       <Popup model={popup1}>
         <Popup.Target>Open Popup 1</Popup.Target>
         <Popup.Popper>
@@ -52,6 +53,6 @@ export const MultiplePopups = () => {
           </Popup.Card>
         </Popup.Popper>
       </Popup>
-    </>
+    </HStack>
   );
 };

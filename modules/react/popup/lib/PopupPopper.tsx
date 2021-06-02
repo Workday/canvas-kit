@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import {createComponent, useModelContext, createHook} from '@workday/canvas-kit-react/common';
+import {
+  createComponent,
+  useModelContext,
+  createHook,
+  useForkRef,
+} from '@workday/canvas-kit-react/common';
 
 import {PopupModel} from './usePopupModel';
 import {PopupModelContext} from './Popup';
@@ -26,7 +31,11 @@ export interface PopupPopperProps {
   children?: React.ReactNode;
 }
 
+/**
+ * Hooks a Popper up to a PopupModel
+ */
 export const usePopupPopper = createHook(({state, events}: PopupModel, ref) => {
+  const elementRef = useForkRef(ref, state.stackRef);
   const onPlacementChange = React.useCallback(
     (placement: Placement) => {
       if (placement !== state.placement) {
@@ -40,21 +49,17 @@ export const usePopupPopper = createHook(({state, events}: PopupModel, ref) => {
   return {
     open: state.visibility !== 'hidden',
     anchorElement: state.targetRef,
-    ref: state.stackRef,
+    ref: elementRef,
     onPlacementChange,
   };
 });
 
 export const PopupPopper = createComponent('div')({
   displayName: 'Popup.Popper',
-  Component: ({children, model, ...elemProps}: PopupPopperProps, ref, Element) => {
+  Component: ({children, model, ...elemProps}: PopupPopperProps, ref) => {
     const localModel = useModelContext(PopupModelContext, model);
 
     const props = usePopupPopper(localModel, elemProps, ref);
-    return (
-      <Popper as={Element} {...props}>
-        {children}
-      </Popper>
-    );
+    return <Popper {...props}>{children}</Popper>;
   },
 });

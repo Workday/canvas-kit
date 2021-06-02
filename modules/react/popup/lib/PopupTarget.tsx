@@ -24,11 +24,11 @@ export const usePopupTarget = createHook(({events, state}: PopupModel, ref) => {
   const elementRef = useForkRef(ref, state.targetRef);
   return {
     ref: elementRef,
-    onClick: () => {
+    onClick: (event: React.MouseEvent) => {
       if (state.visibility !== 'hidden') {
-        events.hide();
+        events.hide({event});
       } else {
-        events.show();
+        events.show({event});
       }
     },
   };

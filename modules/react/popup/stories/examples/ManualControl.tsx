@@ -11,6 +11,8 @@ import {
   usePopupCloseButton,
   Popper,
 } from '@workday/canvas-kit-react/popup';
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 interface OpenPopupProps {
   onClose(): void;
@@ -39,14 +41,14 @@ const OpenPopup = ({onClose, targetRef}: OpenPopupProps) => {
         <Popup.CloseIcon model={model} aria-label="Close" />
         <Popup.Heading model={model}>Delete Item</Popup.Heading>
         <Popup.Body>
-          <p style={{marginBottom: '24px'}}>
+          <Box as="p" marginBottom="m">
             Are you sure you'd like to delete the item titled 'My Item'?
-          </p>
+          </Box>
 
-          <DeleteButton style={{marginRight: '16px'}} {...closeProps}>
-            Delete
-          </DeleteButton>
-          <SecondaryButton {...closeProps}>Cancel</SecondaryButton>
+          <HStack spacing="s">
+            <DeleteButton {...closeProps}>Delete</DeleteButton>
+            <SecondaryButton {...closeProps}>Cancel</SecondaryButton>
+          </HStack>
         </Popup.Body>
       </Popup.Card>
     </Popper>

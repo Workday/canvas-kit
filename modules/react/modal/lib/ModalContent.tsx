@@ -167,9 +167,25 @@ const ModalContent = ({
   const model = usePopupModel({
     initialVisibility: 'visible',
     onHide: handleClose,
+    shouldHide({data}) {
+      function isKeyboardEvent(event: object): event is KeyboardEvent {
+        return 'key' in event;
+      }
+      // Don't hide if event.key was escape and `handleClose` is not defined
+      if (
+        data?.event &&
+        isKeyboardEvent(data.event) &&
+        !handleClose &&
+        (data.event.key === 'Escape' || data.event.key === 'Esc')
+      ) {
+        return false;
+      }
+      return true;
+    },
     initialFocusRef: firstFocusRef,
     returnFocusRef: targetRef,
   });
+
   const centeringRef = React.useRef<HTMLDivElement>(null);
   const [tabIndex, setTabIndex] = React.useState(handleClose || firstFocusRef ? undefined : 0);
   const onBlur = () => setTabIndex(undefined);

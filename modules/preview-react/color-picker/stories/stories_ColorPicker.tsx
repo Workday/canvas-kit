@@ -5,9 +5,7 @@ import withReadme from 'storybook-readme/with-readme';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {
-  Popper,
   Popup,
-  PopupPadding,
   usePopupModel,
   useCloseOnOutsideClick,
   useCloseOnEscape,
@@ -54,7 +52,7 @@ storiesOf('Preview/Color Picker/React', module)
           variant="squareFilled"
         />
         <Popup.Popper>
-          <Popup.Card style={{marginTop: 8}} padding={PopupPadding.s}>
+          <Popup.Card marginTop="xxs" padding="s">
             <Popup.Body>
               <ColorPicker
                 resetColor={colors.blueberry400}
@@ -62,7 +60,7 @@ storiesOf('Preview/Color Picker/React', module)
                 showCustomHexInput={true}
                 onColorChange={handleSubmit}
                 onColorReset={() => handleSubmit(colors.blueberry400)}
-                onSubmitClick={model.events.hide}
+                onSubmitClick={event => model.events.hide({event})}
                 value={color}
               />
             </Popup.Body>
@@ -113,11 +111,12 @@ storiesOf('Preview/Color Picker/React', module)
     ];
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      console.log('blur', e.currentTarget, e.relatedTarget, model.state.stackRef.current);
       if (
         !model.state.stackRef.current ||
         !model.state.stackRef.current.contains(e.relatedTarget as Node)
       ) {
-        model.events.hide();
+        // model.events.hide();
       }
     };
 
@@ -132,11 +131,11 @@ storiesOf('Preview/Color Picker/React', module)
           }}
           value={colorInputValue}
           showCheck={colorInputValidColor === color || colorInputValue === color}
-          onFocus={() => model.events.show()}
+          onFocus={event => model.events.show({event})}
           onBlur={onBlur}
         />
         <Popup.Popper>
-          <Popup.Card style={{marginTop: 8}} padding={PopupPadding.s}>
+          <Popup.Card style={{marginTop: 8}} padding="s">
             <Popup.Body>
               <ColorPicker
                 resetColor={colors.blueberry400}

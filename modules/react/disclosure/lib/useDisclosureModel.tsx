@@ -17,10 +17,15 @@ export type DisclosureState = {
 };
 
 export type DisclosureEvents = {
-  /** Start showing the disclosed content */
-  show(): void;
-  /** Start hiding this disclosed content */
-  hide(): void;
+  /**
+   * Start showing the disclosed content. If a DOM event triggered this event, the event data will
+   * be passed along. This data can be used by guards and callbacks.
+   */
+  show(data?: {event: Event | React.SyntheticEvent}): void;
+  /**
+   * Start hiding this disclosed content. If a DOM event triggered this event, the event data will
+   * be passed along. This data can be used by guards and callbacks. */
+  hide(data?: {event: Event | React.SyntheticEvent}): void;
 };
 
 export type DisclosureModel = Model<DisclosureState, DisclosureEvents>;

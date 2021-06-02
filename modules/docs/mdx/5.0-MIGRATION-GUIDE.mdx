@@ -490,7 +490,16 @@ import {Box} from '@workday/canvas-kit/labs-react/common';
 <Box padding="xl">New Box</Box>;
 ```
 
-## Border Radius Zero Token
+### Popper
+
+Popper used to render an empty `div` element as a child of the element created by the `PopupStack`.
+`ref` and `elemProps` (extra props) applied to that element. Now `ref` applies to the element
+created by the `PopupStack` and `elemProps` don't get applied to anything. The `PopupStack` is not
+React-specific and there is no easy way to spread extra props onto this element like other
+components do. The `ref` still points to that element, so you can add anything extra to that `ref`
+via DOM APIs if necessary. There is no codemod for this change.
+
+### Border Radius Zero Token
 
 The border radius zero token value was updated from `0` to `"0px"` for consistency; all other border
 radius tokens use string pixel values. We highly doubt this change will cause any issues, but

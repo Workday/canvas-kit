@@ -2,6 +2,8 @@ import React from 'react';
 
 import {SecondaryButton, DeleteButton} from '@workday/canvas-kit-react/button';
 import {Popup} from '@workday/canvas-kit-react/popup';
+import {HStack} from '@workday/canvas-kit-labs-react/layout';
+import {Box} from '@workday/canvas-kit-labs-react/common';
 
 export const OpenWithoutModel = () => {
   return (
@@ -10,12 +12,13 @@ export const OpenWithoutModel = () => {
         <Popup.CloseIcon aria-label="Close" />
         <Popup.Heading id="popup-heading">Delete Item</Popup.Heading>
         <Popup.Body>
-          <p style={{marginBottom: '24px'}}>
+          <Box as="p" marginBottom="m">
             Are you sure you'd like to delete the item titled 'My Item'?
-          </p>
-
-          <DeleteButton style={{marginRight: '16px'}}>Delete</DeleteButton>
-          <SecondaryButton>Cancel</SecondaryButton>
+          </Box>
+          <HStack spacing="s">
+            <DeleteButton>Delete</DeleteButton>
+            <SecondaryButton>Cancel</SecondaryButton>
+          </HStack>
         </Popup.Body>
       </Popup.Card>
     </>

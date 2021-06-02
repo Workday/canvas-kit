@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {changeFocus} from '@workday/canvas-kit-react/common';
 
 import {PopupModel} from '../usePopupModel';
 
@@ -17,19 +16,10 @@ export const useCloseOnEscape = (model: PopupModel, elemProps = {}) => {
         (event.key === 'Esc' || event.key === 'Escape') &&
         PopupStack.isTopmost(model.state.stackRef.current!)
       ) {
-        if (model.state.willReturnFocus.current) {
-          changeFocus((model.state.returnFocusRef || model.state.targetRef).current);
-        }
-        model.events.hide();
+        model.events.hide({event});
       }
     },
-    [
-      model.state.stackRef,
-      model.state.willReturnFocus,
-      model.state.returnFocusRef,
-      model.state.targetRef,
-      model.events,
-    ]
+    [model.state.stackRef, model.events]
   );
 
   const visible = model.state.visibility !== 'hidden';

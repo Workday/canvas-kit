@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-import {
-  createComponent,
-  useModelContext,
-  createHook,
-  changeFocus,
-} from '@workday/canvas-kit-react/common';
+import {createComponent, useModelContext, createHook} from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 
 import {PopupModel} from './usePopupModel';
@@ -22,14 +17,8 @@ export interface PopupCloseButtonProps {
 
 export const usePopupCloseButton = createHook(({events, state}: PopupModel) => {
   return {
-    onClick: () => {
-      events.hide();
-      // delay until after state change have happened and changes are flushed to the DOM
-      requestAnimationFrame(() => {
-        if (state.willReturnFocus.current) {
-          changeFocus((state.returnFocusRef || state.targetRef).current);
-        }
-      });
+    onClick: (event: React.MouseEvent) => {
+      events.hide({event});
     },
   };
 });

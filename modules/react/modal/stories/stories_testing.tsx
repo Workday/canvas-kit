@@ -5,7 +5,6 @@ import {Modal, useModal} from '@workday/canvas-kit-react/modal';
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
-  Popper,
   useCloseOnOutsideClick,
   useCloseOnEscape,
   usePopupModel,

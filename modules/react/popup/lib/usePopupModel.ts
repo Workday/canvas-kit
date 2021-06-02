@@ -33,13 +33,6 @@ export type PopupState = DisclosureState & {
    */
   returnFocusRef?: React.RefObject<any>;
   /**
-   * Controls whether focus will return when the popup is hidden. If true, hooks like `useCloseOnEscape`
-   * will return focus to either the `returnFocusRef` or the `targetRef`. Most dialogs should set this
-   * to true.
-   * @default false
-   */
-  willReturnFocus: React.RefObject<boolean>;
-  /**
    * The placement chosen by the positioning Popper. This should get set prior to showing the popup
    * content.
    * @default 'bottom'
@@ -98,7 +91,6 @@ export type PopupModelConfig = BasePopupModelConfig &
 export const usePopupModel = (config: PopupModelConfig = {}): PopupModel => {
   const stackRef = React.useRef<HTMLDivElement>(null);
   const targetRef = React.useRef<HTMLButtonElement>(null);
-  const willReturnFocus = React.useRef(false);
   const [placement, setPlacement] = React.useState<Placement>('bottom');
   const disclosure = useDisclosureModel(config as DisclosureModelConfig);
 
@@ -107,7 +99,6 @@ export const usePopupModel = (config: PopupModelConfig = {}): PopupModel => {
     stackRef,
     targetRef,
     initialFocusRef: config.initialFocusRef,
-    willReturnFocus,
     returnFocusRef: config.returnFocusRef,
     placement,
   };

@@ -26,7 +26,7 @@ export const Default = () => {
   return (
     <>
       <DeleteButton {...targetProps}>Delete Item</DeleteButton>
-      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
+      <Modal heading={'Delete Item'} {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
@@ -47,7 +47,7 @@ export const WithTooltips = () => {
   return (
     <>
       <DeleteButton {...targetProps}>Delete Item</DeleteButton>
-      <Modal data-testid="TestModal" heading={'Delete Item'} {...modalProps}>
+      <Modal heading={'Delete Item'} {...modalProps}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <Popup.Target model={popup1}>Open Popup to reach Delete button</Popup.Target>
         <Popup.Target model={popup2}>Non-hidable Popup</Popup.Target>
@@ -114,7 +114,7 @@ export const WithoutHook = () => {
         Delete Item
       </DeleteButton>
 
-      <Modal data-testid="TestModal" heading="Delete Item" open={open} handleClose={closeModal}>
+      <Modal heading="Delete Item" open={open} handleClose={closeModal} targetRef={ref}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
@@ -132,7 +132,7 @@ export const WithRadioButtons = () => {
   return (
     <>
       <SecondaryButton {...targetProps}>With Radio Buttons</SecondaryButton>
-      <Modal data-testid="TestModal" heading="Select Item" {...modalProps}>
+      <Modal heading="Select Item" {...modalProps}>
         <RadioGroup
           name="contact"
           data-testid="radiogroup"
@@ -153,12 +153,7 @@ export const WithoutCloseIcon = () => {
   return (
     <>
       <DeleteButton {...targetProps}>Delete Item</DeleteButton>
-      <Modal
-        data-testid="TestModal"
-        heading={'Delete Item'}
-        {...modalProps}
-        handleClose={undefined}
-      >
+      <Modal heading={'Delete Item'} {...modalProps} handleClose={undefined}>
         <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
         <DeleteButton style={{marginRight: '16px'}} onClick={closeModal}>
           Delete
@@ -171,19 +166,13 @@ export const WithoutCloseIcon = () => {
 
 export const CustomFocus = () => {
   const {targetProps, modalProps, closeModal} = useModal();
-  const ref = React.useRef() as React.RefObject<HTMLInputElement>;
+  const ref = React.useRef<HTMLInputElement>(null);
   const [value, setValue] = React.useState('');
 
   return (
     <>
       <DeleteButton {...targetProps}>Delete Item</DeleteButton>
-      <Modal
-        data-testid="TestModal"
-        heading={'Delete Item'}
-        {...modalProps}
-        firstFocusRef={ref}
-        handleClose={undefined}
-      >
+      <Modal heading={'Delete Item'} {...modalProps} firstFocusRef={ref} handleClose={undefined}>
         <p>Enter name to confirm deletion</p>
         <FormField label="Item name">
           <TextInput ref={ref} value={value} onChange={e => setValue(e.currentTarget.value)} />

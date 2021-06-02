@@ -9,8 +9,9 @@ import {OpenWithoutModel} from './examples/OpenWithoutModel';
 import {ManualControl} from './examples/ManualControl';
 import {MultiplePopups} from './examples/MultiplePopups';
 import {NestedPopups} from './examples/NestedPopups';
+import {FocusRedirect} from './examples/FocusRedirect';
+import {FocusTrap} from './examples/FocusTrap';
 import {RTL} from './examples/RTL';
-import {UsePopup} from './examples/UsePopup';
 import {PopupModelConfigComponent, PopupStateComponent, PopupEventsComponent} from './PopupModel';
 
 <Meta title="Components/Popups/Popup/React" component={Popup} />
@@ -88,6 +89,39 @@ accessibility before doing this. The following example sets the focus on the "OK
 message of the popup when focus is changed to the button.
 
 <ExampleCodeBlock code={InitialFocus} />
+
+### Focus Redirect
+
+Focus management is important to accessibility of popup contents. The following example shows
+`useFocusRedirect` being used to manage focus in and out of a Popup. This is very useful for
+Dialog-style popups. Since `Popup.Popper` renders contents to the bottom of the document body,
+`aria-owns` is used for screen readers that support it. This effectively treats a Popup like it
+exists in between the buttons while it is opened. Screen readers will navigate the content as if the
+content was not portalled to the bottom of the document body. Focus redirection tries to treat the
+Popup as if it were inline to the document. Tabbing out of the Popup will close the Popup and move
+focus to the next appropriate element.
+
+**Note**: Safari does not support `aria-owns`. This means that the contents of the Popup will
+appears out of order to Safari + VoiceOver users. We render popups at the bottom of the
+document.body to ensure proper rendering. You could use `portal=false` on the `Popper` component,
+but that would risk incorrect rendering in all browsers.
+
+<ExampleCodeBlock code={FocusRedirect} />
+
+### Focus Trapping
+
+Focus trapping is similar to the [Focus Redirect](#focus-redirect) example, but will trap focus
+inside the popup instead of redirecting focus, it will be trapped inside the Popup. This is most
+useful for modal dialogs where the modal must be interacted with before normal interaction can
+continue.
+
+**Note**: Using focus trapping outside a Modal context can give users a different experience
+depending on how they interact with your application. Focus trapping will not prevent mouse users
+from breaking out of a focus trap, nor will it prevent screen reader users from using virtual
+cursors from breaking out. Modals should use additional techniques to truely "trap" focus into the
+Popup to provide a consistent experience for all users.
+
+<ExampleCodeBlock code={FocusTrap} />
 
 ### Multiple Popups
 
@@ -210,16 +244,6 @@ return (
   </>
 );
 ```
-
-### usePopup
-
-Convenience hook for common Popups used as non-modal dialogs. It provides props to mix into
-composite parts of the Popup pattern.
-
-> Note: This is **deprecated**. Please upgrade to using `usePopupModel` and the `Popup` compound
-> component API instead.
-
-<ExampleCodeBlock code={UsePopup} />
 
 ## useAssistiveHideSiblings
 

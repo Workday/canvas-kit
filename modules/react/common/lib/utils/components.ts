@@ -203,11 +203,11 @@ export const createComponent = <T extends React.ElementType | undefined = undefi
  *
  * @param fn Function that takes a model and optional ref and returns props
  */
-export const createHook = <M extends Model<any, any>, P1 extends {}>(
-  fn: (model: M, ref?: React.Ref<any>) => P1
-): BehaviorHook<M, P1> => {
+export const createHook = <M extends Model<any, any>, PO extends {}, PI extends {}>(
+  fn: (model: M, ref?: React.Ref<any>, elemProps?: PI) => PO
+): BehaviorHook<M, PO> => {
   return (model, elemProps, ref) => {
-    const props = mergeProps(fn(model, ref), elemProps || ({} as any));
+    const props = mergeProps(fn(model, ref, elemProps || ({} as any)), elemProps || ({} as any));
     if (!props.hasOwnProperty('ref')) {
       // This is the weird "incoming ref isn't in props, but outgoing ref is in props" thing
       props.ref = ref;

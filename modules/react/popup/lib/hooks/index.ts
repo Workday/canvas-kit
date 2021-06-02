@@ -4,6 +4,7 @@ export * from './useBringToTopOnClick';
 export * from './useCloseOnEscape';
 export * from './useCloseOnOutsideClick';
 export * from './useFocusTrap';
+export * from './useFocusRedirect';
 export * from './useInitialFocus';
 export * from './useReturnFocus';
 export * from './useDisableBodyScroll';

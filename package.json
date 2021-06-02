@@ -155,6 +155,7 @@
     "typecheck:cypress": "tsc -p cypress --noEmit",
     "typecheck:types": "tsc -p tsconfig.expect-type.json --noEmit",
     "typecheck:specs": "tsc -p tsconfig.spec.json --noEmit --incremental false",
+    "typecheck:stories": "tsc -p tsconfig.stories.json --noEmit --incremental false",
     "format:prettier": "prettier --config=./.prettierrc.js --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format": "yarn eslint --ext=jsx,ts,tsx --fix -c .eslintrc-prettier.js",
     "test": "TZ=UTC jest",

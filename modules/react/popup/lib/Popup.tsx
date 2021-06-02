@@ -16,7 +16,7 @@ const noop = () => {};
 
 // create enough of a model to use `Popup.Card` without a `Popup` container component.
 export const PopupModelContext = React.createContext<PopupModel>({
-  state: {willReturnFocus: {current: false}},
+  state: {},
   events: {show: noop, hide: noop},
 } as any);
 
@@ -58,11 +58,15 @@ export const usePopup = (config: PopupModelConfig = {}) => {
   const model = usePopupModel(config);
   const popperProps = usePopupPopper(model, {}, null);
   const targetProps = usePopupTarget(model, {}, null);
+  const closePopup = React.useCallback(
+    (event: React.SyntheticEvent) => model.events.hide({event}),
+    [model.events]
+  );
 
   return {
     targetProps,
     popperProps,
-    closePopup: model.events.hide,
+    closePopup,
     stackRef: model.state.stackRef,
     model,
   };
