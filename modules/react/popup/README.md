@@ -90,70 +90,6 @@ const MyPopper = () => {
 };
 ```
 
-### Popper Required Props
-
-#### `anchorElement: RefObject<Element> | Element | null`
-
-> The reference element used to position the Popper. Popper content will try to follow the
-> `anchorElement` if it moves and will reposition itself if there is no longer room in the window.
-
-#### `children: ((props: {placement: Placement}) => React.ReactNode) | React.ReactNode`
-
-> The content of the Popper. If a function is provided, it will be treated as a Render Prop and pass
-> the `placement` chosen by PopperJS. This `placement` value is useful if your popup needs to
-> animate and that animation depends on the direction of the content in relation to the
-> `anchorElement`.
-
-### Popper Optional Props
-
-#### `containerElement: Element | null`
-
-> The element that contains the portal children when `portal` is true. It is best to not define this
-> unless you know what you're doing. Popper works with a PopupStack and in order for z-indexes to
-> work correctly, all Popups on your page should live on the same root element otherwise you risk
-> running into rendering issues:
-> https://philipwalton.com/articles/what-no-one-told-you-about-z-index/.
-
-Default: `document.body`
-
-#### `getAnchorClientRect?: () => DOMRect`
-
-> When provided, this optional callback will be used to determine positioning for the Popper element
-> instead of calling `getBoundingClientRect` on the `anchorElement` prop. Use this when you need
-> complete control over positioning. When this prop is specified, it is safe to pass `null` into the
-> `anchorElement` prop. If `null` is passed into the `anchorElement` prop, an `owner` will not be
-> provided for the `PopupStack`.
-
-Default: `undefined`
-
-#### `open: boolean`
-
-> Determines if `Popper` content should be rendered. The content only exists in the DOM when `open`
-> is `true`
-
-Default: `true`
-
-#### `placement: PopperJS.Placement`
-
-> The placement of the `Popper` contents relative to the `anchorElement`. Accepts `auto`, `top`,
-> `right`, `bottom`, or `left`. Each placement can also be modified using any of the following
-> variations: `-start` or `-end`.
-
-Default: `'bottom'`
-
-#### `popperOptions: Partial<PopperJS.PopperOptions>`
-
-> The additional options passed to the Popper's `popper.js` instance.
-
-#### `portal: boolean`
-
-> If true, attach the Popper to the `containerElement`. If false, render the Popper within the DOM
-> hierarchy of its parent. A non-portal Popper will constrained by the parent container overflows.
-> If you set this to `false`, you may experience issues where you content gets cut off by scrollbars
-> or `overflow: hidden`
-
-Default: `true`
-
 ## Popup
 
 ### Popup Usage
@@ -180,88 +116,6 @@ const MyPopup = () => {
 };
 ```
 
-### Popup Static Properties
-
-> None
-
-### Popup Required Props
-
-> None
-
----
-
-### Popup Optional Props
-
-#### `padding: PopupPadding`
-
-> You can choose between zero, s, l for your padding
-
-Default: `PopupPadding.l`
-
-| Name   | Size (px) |
-| ------ | --------- |
-| `zero` | 0         |
-| `s`    | 16        |
-| `l`    | 32        |
-
-#### `handleClose: () => void`
-
-> Callback to handle close of your Popup and any other event when the Popup is closed.
-
----
-
-#### `width: number | string`
-
-> Width of the card.
-
----
-
-#### `closeButtonAriaLabel: string`
-
-> Aria label string for the close icon button
-
----
-
-#### `depth: CanvasDepthValue`
-
-> Depth of the card. Style imported from `@workday/canvas-kit-react/tokens`.
-
-Default: `depth[2]`
-
----
-
-#### `transformOrigin: TransformOrigin`
-
-> Origin from which the popup will animate from
-
-Default:
-
-```js
-{
-  horizontal: 'center',
-  vertical: 'top',
-}
-```
-
----
-
-#### `heading: ReactNode`
-
-> Heading at the top of the card.
-
----
-
-#### `closeIconSize: IconButtonSize`
-
-> The size of the close icon button (small or medium)
-
----
-
-#### `popupRef: React.Ref<HTMLDivElement>`
-
-> A ref to the underlying popup container element. Use this to check click targets against when
-> closing a popup.
-
 ## Hooks
 
 ### usePopupStack
@@ -281,150 +135,154 @@ stack, all popups will close rather than only the topmost one.
 If `forwardRef` is provided, it will be the same as `stackRef`. If `forwardRef` is not provided`,
 this hook will create one and return it.
 
-This hook should be used by all stacked UIs unless using the `Popper` component.
+This hook should be used by all popups unless using the `Popper` component.
 
 Example:
 
 ```tsx
-const [open, setOpen] = React.useState(false);
-const stackRef = usePopupStack();
-
-const closePopup = () => {
-  setOpen(false);
-};
+const model = usePopupModel();
+usePopupStack(model.state.stackRef, model.state.targetRef);
 
 // add some popup functionality
-useCloseOnOutsideClick(stackRef, closePopup);
-useCloseOnEscape(stackRef, closePopup);
-```
+useCloseOnOutsideClick(model);
+useCloseOnEscape(model);
 
-### usePopup
-
-Convenience hook for common Popups used as non-modal dialogs. It provides props to mix into
-composite parts of the Popup pattern.
-
-```tsx
-import {
-  SecondaryButton,
-  DeleteButton,
-  Popper,
-  Popup,
-  usePopup,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-} from '@workday/canvas-kit-react';
-
-const MyDeleteButton = ({onConfirm}) => {
-  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
-
-  // popup traits
-  useCloseOnOutsideClick(stackRef, closePopup);
-  useCloseOnEscape(stackRef, closePopup);
-
-  return (
-    <>
-      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
-      <Popper placement="bottom" {...popperProps}>
-        <Popup heading="Delete Item" handleClose={closePopup}>
-          <p>Are you sure you'd like to delete?</p>
-          <DeleteButton onClick={onConfirm}>Yes</DeleteButton>
-          <SecondaryButton onClick={closePopup}>No</SecondaryButton>
-        </Popup>
-      </Popper>
-    </>
-  );
-};
+return (
+  <>
+    <button ref={model.state.targetRef}>Open Popup</button>
+    {model.state.visibility !== 'hidden'
+      ? ReactDOM.createPortal(<div>Popup Contents</div>, model.state.stackRef.current)
+      : null}
+  </>
+);
 ```
 
 ## useAssistiveHideSiblings
 
 ```ts
-useAssistiveHideSiblings(ref: React.RefObject<HTMLElement>): void
+useAssistiveHideSiblings(model: PopupModel): {}
 ```
 
 This hook will hide all sibling elements from assistive technology. Very useful for modal dialogs.
-This will set `aria-hidden` for sibling elements of the provided `stackRef` element and restore the
-previous `aria-hidden` to each component when the component is unmounted. For example, if added to a
-Modal component, all children of `document.body` will have an `aria-hidden=true` applied _except_
-for the provided `stackRef` element (the Modal). This will effectively hide all content outside the
-Modal from assistive technology including Web Rotor for VoiceOver for example.
+This will set `aria-hidden` for sibling elements of the provided PopupModel's `state.stackRef`
+element and restore the previous `aria-hidden` to each component when the component is unmounted.
+For example, if added to a Modal component, all children of `document.body` will have an
+`aria-hidden=true` applied _except_ for the provided `stackRef` element (the Modal). This will
+effectively hide all content outside the Modal from assistive technology including Web Rotor for
+VoiceOver for example.
 
-**Note**: The provided `stackRef` element should be root element of your component so that other
-elements _outside_ your component will be hidden rather than elements _inside_ your component.
-
-This should be used on stacked UI elements that need to hide content. Like Modals.
+This should be used on popup elements that need to hide content (i.e. Modals).
 
 ## useBringToTopOnClick
 
 ```ts
-useBringToTopOnClick(stackRef: React.RefObject<HTMLElement>): void
+useBringToTopOnClick(model: PopupModel): {}
 ```
 
 This hook will bring an element to the top of the stack when any element inside the provided
-`stackRef` element is clicked. If `Popper` was used or `PopupStack.add` provided an `owner`, all
-"child" popups will also be brought to the top. A "child" popup is a Popup that was opened from
-another Popup. Usually this is a Tooltip or Select component inside something like a Modal.
+PopupModel's `state.stackRef` element is clicked. If `Popup.Popper` was used or `PopupStack.add`
+provided an `owner`, all "child" popups will also be brought to the top. A "child" popup is a Popup
+that was opened from another Popup. Usually this is a Tooltip or Select component inside something
+like a Modal.
 
-This should be used on stacked UI elements that are meant to persist, like Windows.
+This should be used on popup elements that are meant to persist (i.e. Windows).
 
 ## useCloseOnEscape
 
 ```ts
-useCloseOnEscape(stackRef: React.RefObject<HTMLElement>, onClose: () => void, returnFocusRef?: React.RefObject<HTMLElement>): void
+useCloseOnEscape(model: PopupModel): {}
 ```
 
-Registers global detection of the Escape key. It will only call the `onClose` callback if the
-provided `stackRef` element is the topmost in the stack. The `stackRef` should be the same as the
-one passed to `usePopupStack` or the `Popper` component since `Popper` uses `usePopupStack`
-internally.
+Registers global detection of the Escape key. It will only call the PopupModel's `hide` event if the
+provided model's `state.stackRef` element is the topmost in the stack.
 
-This should be used with stacked UI elements that are dismissible like Tooltips, Modals, non-modal
+This should be used with popup elements that are dismissible like Tooltips, Modals, non-modal
 dialogs, dropdown menus, etc.
-
-`returnFocusRef` is an optional prop that returns focus to a specific element on escape. This is
-useful for instances such as returning focus to a dropdown button when closing a menu.
 
 ## useCloseOnOutsideClick
 
 ```ts
-useCloseOnOutsideClick(stackRef: React.RefObject<HTMLElement>, onClose: () => void): void
+useCloseOnOutsideClick(model: PopupModel): {}
 ```
 
-Registers global listener for all clicks. It will only call the `onClose` callback if the click
-happened outside the `stackRef` element and its children _and_ the provided `stackRef` element is
-the topmost element with this behavior applied in the stack. Adds a
+Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
+click happened outside the PopupModel's `state.stackRef` element and its children _and_ the provided
+`stackRef` element is the topmost element with this behavior applied in the stack. Adds a
 `data-behavior-click-outside-close="topmost"` attribute to ensure proper functionality.
 
-The `stackRef` should be the same as the one passed to `usePopupStack` or the `Popper` component
-since `Popper` uses `usePopupStack` internally.
-
-This should be used with stacked UI elements that are dismissible like Modals, non-modal dialogs,
+This should be used with popup elements that are dismissible like Modals, non-modal dialogs,
 dropdown menus, etc. Tooltips and hierarchical menus should use `useAlwaysCloseOnClickOutside`
 instead.
 
 ## useAlwaysCloseOnOutsideClick
 
 ```ts
-useAlwaysCloseOnOutsideClick(stackRef: React.RefObject<HTMLElement>, onClose: () => void): void
+useAlwaysCloseOnOutsideClick(model: PopupModel): {}
 ```
 
-Registers global listener for all clicks. It will only call the `onClose` callback if the click
-happened outside the `stackRef` element and its children regardless of the position in the stack.
-This is useful for Tooltips or hierarchical menus. Adds a
+Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
+click happened outside the `stackRef` element and its children regardless of the position in the
+stack. This is useful for Tooltips or hierarchical menus. Adds a
 `data-behavior-click-outside-close="always"` attribute to ensure proper functionality.
 
-The `stackRef` should be the same as the one passed to `usePopupStack` or the `Popper` component
-since `Popper` uses `usePopupStack` internally.
+This should be used with popup elements that should close no matter their position in the stack
+(i.e. Tooltips).
+
+## useDisableBodyScroll
+
+```ts
+useDisableBodyScroll(model: PopupModel): {}
+```
+
+Disables body scroll by adding `overflow: hidden` to the body element. This effectively prevents
+page scrolling while the popup is visible.
+
+This should be used with popup elements that hide all other content and force the user to accept or
+dismiss the popup before continuing (i.e. Modals).
+
+## useFocusRedirect
+
+```ts
+useFocusRedirect(model: PopupModel): {}
+```
+
+Manages focus around a popup, treating the popup as if it was part of the DOM where it appears.
+Popups are typically "portalled" (inserted at the end of `document.body`) to ensure proper
+rendering. This violates
+[WCAG Focus Order](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-focus-order.html).
+This hook helps redirect focus as if the popup element appeared in the DOM. `aria-owns` might also
+be used to ensure assistive technology places the popup after the button for virtual cursors. This
+hook does no provide `aria-owns` and this must be provided yourself. Requires
+[useReturnFocus](#useReturnFocus) to work properly. Works well with
+[useInitialFocus](#useinitialfocus).
+
+This should be used with non-modal dialogs.
 
 ## useFocusTrap
 
 ```ts
-useFocusTrap(stackRef: React.RefObject<HTMLElement>): void
+useFocusTrap(model: PopupModel): {}
 ```
 
 "Trap" or "loop" focus within a provided `stackRef` element. This is required for accessibility on
 modals. If a keyboard users hits the Tab or Shift + Tab, this will force "looping" of focus. It
 effectively "hides" outside content from keyboard users. Use an overlay to hide content from mouse
-users and `useAssistiveHideSiblings` to hide content from assistive technology users.
+users and `useAssistiveHideSiblings` to hide content from assistive technology users. Works well
+with [useInitialFocus](#useinitialfocus) and [useReturnFocus](#usereturnfocus).
 
-This should be used on stacked UI elements that need to hide content. Like Modals.
+This should be used on popup elements that need to hide content (i.e. Modals).
+
+## useInitialFocus
+
+Moves focus within the popup when the popup becomes visible. This is useful for keyboard and screen
+reader users alike. This should be used with [useFocusRedirect](#usefocusredirect) or
+[useFocusTrap](#usefocustrap) for a complete focus management solution.
+
+This should be used for popups that have focusable elements inside, like Modals, non-modal dialogs,
+menus, etc.
+
+## useReturnFocus
+
+Returns focus to the target element when the popup is hidden. This works well with
+[useInitialFocus](#useinitialfocus). This should be used with [useFocusRedirect](#usefocusredirect)
+or [useFocusTrap](#usefocustrap) for a complete focus management solution.
