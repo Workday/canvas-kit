@@ -199,7 +199,8 @@ type ToEvent<TEvents extends EventCreator> = {
   [K in keyof TEvents]: (data: ReturnType<TEvents[K]>) => void;
 };
 
-const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
+// use this?
+export const createEvents = <TEvents extends EventCreator>(events: TEvents) => <
   TGuardMap extends Record<string, keyof TEvents>,
   TCallbackMap extends Record<string, keyof TEvents>
 >(

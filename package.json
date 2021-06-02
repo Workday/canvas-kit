@@ -150,7 +150,7 @@
     "commitmsg": "commitlint --edit $HUSKY_GIT_PARAMS",
     "build-storybook": "node utils/download-fonts.js && build-storybook -c .storybook -o docs -s ./public ",
     "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint -c ./.eslintrc.js --ext=jsx,ts,tsx .",
-    "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs",
+    "typecheck": "npm-run-all --parallel typecheck:src typecheck:cypress typecheck:types typecheck:specs typecheck:stories",
     "typecheck:src": "tsc -p . --noEmit --incremental false",
     "typecheck:cypress": "tsc -p cypress --noEmit",
     "typecheck:types": "tsc -p tsconfig.expect-type.json --noEmit",

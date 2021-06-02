@@ -3,7 +3,6 @@ import {useUniqueId, changeFocus} from '@workday/canvas-kit-react/common';
 import {
   useCloseOnOutsideClick,
   useCloseOnEscape,
-  PopperProps,
   usePopupModel,
   useReturnFocus,
   usePopupTarget,
@@ -32,14 +31,10 @@ const initialActiveItem = {
   width: 0,
 } as Breadcrumb;
 
-interface DropdownPopperProps extends Pick<PopperProps, 'open' | 'anchorElement'> {
-  ref: React.RefObject<HTMLDivElement>;
-}
-
 interface UseDropdown {
   dropdownButtonProps: Omit<DropdownButtonProps, 'aria-label'>;
   dropdownMenuProps: DropdownMenuProps;
-  popperProps: DropdownPopperProps;
+  popperProps: ReturnType<typeof usePopupPopper>;
 }
 
 export const useDropdown = (
