@@ -4,11 +4,16 @@ import {PopupModel} from '../usePopupModel';
 import {getFirstFocusableElement, getLastFocusableElement} from '@workday/canvas-kit-react/common';
 
 /**
- * "Trap" or "loop" focus within a PopupModel's `stackRef` element. This is required for
- * accessibility on modals. If a keyboard users hits the Tab or Shift + Tab, this will force
- * "looping" of focus. It effectively "hides" outside content from keyboard users. Use an overlay to
- * hide content from mouse users and `useAssistiveHideSiblings` to hide content from assistive
- * technology users.
+ * Manages focus around a popup, treating the popup as if it was part of the DOM where it appears.
+ * Popups are typically "portalled" (inserted at the end of `document.body`) to ensure proper
+ * rendering. This violates [WCAG Focus
+ * Order](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-focus-order.html). This
+ * hook helps redirect focus as if the popup element appeared in the DOM. `aria-owns` might also be
+ * used to ensure assistive technology places the popup after the button for virtual cursors. This
+ * hook does no provide `aria-owns` and this must be provided yourself. Requires `useReturnFocus` to
+ * work properly. Works well with `useInitialFocus`.
+ *
+ * This should be used with non-modal dialogs.
  */
 export const useFocusRedirect = (model: PopupModel, elemProps = {}) => {
   const onKeyDown = React.useCallback(

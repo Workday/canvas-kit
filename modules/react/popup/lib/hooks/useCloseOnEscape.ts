@@ -5,9 +5,11 @@ import {PopupStack} from '@workday/canvas-kit-popup-stack';
 import {PopupModel} from '../usePopupModel';
 
 /**
- * Registers global detection of the Escape key. It will only call the PopupModel's `hide` event if
- * the model's `stackRef` element is the topmost in the stack. If there was a target, focus will
- * return to the target when closed.
+ * Registers global detection of the Escape key. It will only call the PopupModel's `hide` event if the
+ * provided model's `state.stackRef` element is the topmost in the stack.
+ *
+ * This should be used with popup elements that are dismissible like Tooltips, Modals, non-modal
+ * dialogs, dropdown menus, etc.
  */
 export const useCloseOnEscape = (model: PopupModel, elemProps = {}) => {
   const onKeyDown = React.useCallback(

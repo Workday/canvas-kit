@@ -3,8 +3,11 @@ import React from 'react';
 import {PopupModel} from '../usePopupModel';
 
 /**
- * Removes `document.body` overflow while the popup is visible and returns to the original setting
- * when the popup is hidden again.
+ * Disables body scroll by adding `overflow: hidden` to the body element. This effectively prevents
+ * page scrolling while the popup is visible.
+ *
+ * This should be used with popup elements that hide all other content and force the user to accept
+ * or dismiss the popup before continuing (i.e. Modals).
  */
 export const useDisableBodyScroll = (model: PopupModel, elemProps = {}) => {
   const visible = model.state.visibility !== 'hidden';

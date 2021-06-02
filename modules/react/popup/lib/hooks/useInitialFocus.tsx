@@ -5,7 +5,12 @@ import {changeFocus, assert, getFirstFocusableElement} from '@workday/canvas-kit
 import {PopupModel} from '../usePopupModel';
 
 /**
- * Transfer focus to an appropriate element within the popup.
+ * Moves focus within the popup when the popup becomes visible. This is useful for keyboard and
+ * screen reader users alike. This should be used with `useFocusRedirect` or `useFocusTrap` for a
+ * complete focus management solution.
+ *
+ * This should be used for popups that have focusable elements inside, like Modals, non-modal
+ * dialogs, menus, etc.
  */
 export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
   const visible = model.state.visibility !== 'hidden';
@@ -26,13 +31,7 @@ export const useInitialFocus = (model: PopupModel, elemProps = {}) => {
 
       changeFocus(element);
     }
-
-    // The eslint rule wants to add refs as dependencies, but that is not what we want. We want to
-    // only run this callback when visibility changes, not risk focusing something when someone
-    // unintentionally changes a ref's pointer
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible]);
+  }, [model.state.initialFocusRef, model.state.stackRef, visible]);
 
   return elemProps;
 };

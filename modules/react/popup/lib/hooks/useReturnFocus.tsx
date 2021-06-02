@@ -4,7 +4,11 @@ import {PopupModel} from '../usePopupModel';
 import {changeFocus} from '@workday/canvas-kit-react/common';
 
 /**
- * Set up model so that behaviors return focus when the popup is hidden.
+ * Returns focus to the target element when the popup is hidden. This works well with
+ * `useInitialFocus`. This should be used with `useFocusRedirect` or `useFocusTrap` for a complete
+ * focus management solution.
+ *
+ * This should ble used on popup elements that use `useInitialFocus`.
  */
 export const useReturnFocus = (model: PopupModel, elemProps = {}) => {
   const visible = model.state.visibility !== 'hidden';

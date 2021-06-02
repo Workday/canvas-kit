@@ -4,9 +4,13 @@ import {PopupStack} from '@workday/canvas-kit-popup-stack';
 import {PopupModel} from '../usePopupModel';
 
 /**
- * Registers global listener for all clicks. It will only call the `PopupModel` `hide` event if the
- * click happened outside the model's `stackRef` element and its children regardless of the position
- * in the stack. This is useful for Tooltips or hierarchical menus.
+ * Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
+ * click happened outside the `stackRef` element and its children regardless of the position in the
+ * stack. This is useful for Tooltips or hierarchical menus. Adds a
+ * `data-behavior-click-outside-close="always"` attribute to ensure proper functionality.
+ *
+ * This should be used with popup elements that should close no matter their position in the stack
+ * (i.e. Tooltips).
  */
 export const useAlwaysCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
   const onClick = React.useCallback(

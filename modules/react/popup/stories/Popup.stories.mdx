@@ -397,7 +397,7 @@ rendering. This violates
 This hook helps redirect focus as if the popup element appeared in the DOM. `aria-owns` might also
 be used to ensure assistive technology places the popup after the button for virtual cursors. This
 hook does no provide `aria-owns` and this must be provided yourself. Requires
-[useReturnFocus](#useReturnFocus) to work properly. Works well with
+[useReturnFocus](#usereturnfocus) to work properly. Works well with
 [useInitialFocus](#useinitialfocus).
 
 This should be used with non-modal dialogs.
@@ -430,6 +430,8 @@ menus, etc.
 Returns focus to the target element when the popup is hidden. This works well with
 [useInitialFocus](#useinitialfocus). This should be used with [useFocusRedirect](#usefocusredirect)
 or [useFocusTrap](#usefocustrap) for a complete focus management solution.
+
+This should ble used on popup elements that use [useInitialFocus](#useinitialfocus).
 
 ## usePopupPopper
 

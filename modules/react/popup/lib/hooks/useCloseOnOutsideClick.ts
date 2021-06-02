@@ -5,9 +5,13 @@ import {PopupModel} from '../usePopupModel';
 
 /**
  * Registers global listener for all clicks. It will only call the PopupModel's `hide` event if the
- * click happened outside the model's `stackRef` element and its children _and_ the model's
- * `stackRef` element is the topmost element with this behavior applied in the stack. Adds a
- * `data-behavior-click-outside-close` attribute to track usage of this behavior hook.
+ * click happened outside the PopupModel's `state.stackRef` element and its children _and_ the
+ * provided `stackRef` element is the topmost element with this behavior applied in the stack. Adds
+ * a `data-behavior-click-outside-close="topmost"` attribute to ensure proper functionality.
+ *
+ * This should be used with popup elements that are dismissible like Modals, non-modal dialogs,
+ * dropdown menus, etc. Tooltips and hierarchical menus should use `useAlwaysCloseOnClickOutside`
+ * instead.
  */
 export const useCloseOnOutsideClick = (model: PopupModel, elemProps = {}) => {
   const onClick = React.useCallback(
