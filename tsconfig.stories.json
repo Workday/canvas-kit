@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.stories.tsx", "**/*.stories.ts", "**/examples/*.tsx"],
+  "include": ["**/*stories*.tsx", "**/*stories*.ts", "**/examples/*.tsx"],
   "exclude": ["cypress"],
   "compilerOptions": {
     "declaration": false,

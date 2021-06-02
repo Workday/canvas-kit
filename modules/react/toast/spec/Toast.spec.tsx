@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {screen, render, fireEvent} from '@testing-library/react';
 import {checkIcon} from '@workday/canvas-system-icons-web';
-import Toast from '../lib/Toast';
+import {Toast} from '@workday/canvas-kit-react/toast';
 
 describe('Toast', () => {
   const cb = jest.fn();

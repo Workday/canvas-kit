@@ -35,7 +35,7 @@ const StyledCloseIcon = styled(IconButton)<StyledType & IconButtonProps>(
   })
 );
 
-export const PopupCloseIcon = createComponent(IconButton)({
+export const PopupCloseIcon = createComponent('button')({
   displayName: 'Popup.CloseIcon',
   Component: (
     {size = 'medium', children, model, ...elemProps}: PopupCloseIconProps,

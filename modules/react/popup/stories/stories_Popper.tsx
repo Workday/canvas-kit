@@ -37,9 +37,13 @@ export const PopperStory = () => {
         Toggle Popup
       </PrimaryButton>
       <Popper placement={'bottom'} open={open} anchorElement={buttonRef.current!} ref={popupRef}>
-        <Popup width={400} heading={'Popper Example'} handleClose={onClose}>
-          <h3>Welcome to your popup positioned by Popper!</h3>
-        </Popup>
+        <Popup.Card width={400}>
+          <Popup.CloseIcon aria-label="Close" onClick={onClose} />
+          <Popup.Heading>{'Popper Example'}</Popup.Heading>
+          <Popup.Body>
+            <h3>Welcome to your popup positioned by Popper!</h3>
+          </Popup.Body>
+        </Popup.Card>
       </Popper>
     </div>
   );

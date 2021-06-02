@@ -1,10 +1,12 @@
 import * as React from 'react';
+import styled from '@emotion/styled';
+
 import {Popup, PopupCardProps} from '@workday/canvas-kit-react/popup';
 import {space, colors, type, CanvasColor} from '@workday/canvas-kit-react/tokens';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
-import styled from '@emotion/styled';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface ToastProps extends PopupCardProps {
   /**
@@ -66,21 +68,27 @@ const Message = styled('div')({
   wordWrap: 'break-word', // Needed for IE11
 });
 
-export default class Toast extends React.Component<ToastProps> {
-  public render() {
-    const {
-      icon = checkIcon as CanvasSystemIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
+export const Toast = createComponent('div')({
+  displayName: 'Toast',
+  Component: (
+    {
+      icon = checkIcon, // needed for TS2742 - https://github.com/microsoft/TypeScript/issues/29808
       iconColor = colors.greenApple400,
       onClose,
       onActionClick,
       actionText,
+      children,
       ...elemProps
-    } = this.props;
-
+    }: ToastProps,
+    ref,
+    Element
+  ) => {
     const isInteractive = onClose || onActionClick;
 
     return (
       <Popup.Card
+        ref={ref}
+        as={Element}
         width={toastWidth}
         padding="s"
         role={isInteractive ? 'dialog' : 'status'}
@@ -93,12 +101,12 @@ export default class Toast extends React.Component<ToastProps> {
           <ToastContentContainer onClose={onClose}>
             {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}
             <Message>
-              {this.props.children}
+              {children}
               {onActionClick && <ActionButton onClick={onActionClick}>{actionText}</ActionButton>}
             </Message>
           </ToastContentContainer>
         </Popup.Body>
       </Popup.Card>
     );
-  }
-}
+  },
+});

@@ -7,6 +7,7 @@ import {action} from '@storybook/addon-actions';
 import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
 import {Toast} from '../index';
+import styled from '@emotion/styled';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Popups/Toast',
@@ -43,7 +44,7 @@ export const ToastStates = () => (
       columnProps={[{label: 'Default', props: {}}]}
     >
       {({children, ...props}) => (
-        <Toast transformOrigin={null} aria-label="Play" {...props}>
+        <Toast style={{animation: 'none'}} aria-label="Play" {...props}>
           {children || 'Successfully processed.'}
         </Toast>
       )}

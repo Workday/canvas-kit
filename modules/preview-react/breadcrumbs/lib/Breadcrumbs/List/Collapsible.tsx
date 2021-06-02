@@ -41,6 +41,7 @@ export const CollapsibleList = ({
   const {collapsedItems, collapsedItemIndices} = useBuildCollapsedList(listRef, children, maxWidth);
 
   const {rootItem, collapsibleItems, currentItem} = parseListItems(children);
+  console.log(collapsedItems, collapsedItemIndices);
   return (
     <BreadcrumbsList ref={listRef} {...props}>
       {rootItem}
