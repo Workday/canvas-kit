@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {keyframes} from '@emotion/core';
+
 import {
   accessibleHide,
   createComponent,
@@ -11,7 +12,7 @@ import SkeletonHeader from './parts/skeletonHeader';
 import SkeletonShape from './parts/skeletonShape';
 import SkeletonText from './parts/skeletonText';
 
-export interface SkeletonProps {
+interface SkeletonProps {
   /**
    * For accessibility reasons, `aria-label` is transformed into a text representation
    * (visually hidden, but announced by screen readers) of the loader.

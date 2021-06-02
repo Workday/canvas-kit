@@ -1,7 +1,9 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import {TEXT_BORDER_RADIUS} from './utils';
+
 import canvas from '@workday/canvas-kit-react/tokens';
+
+import {TEXT_BORDER_RADIUS} from './utils';
 
 const TextContainer = styled('div')({
   marginBottom: canvas.space.m,
@@ -27,13 +29,35 @@ const Line = styled('div')<{
   backgroundColor: string;
 }>(({width, height, borderRadius, backgroundColor}) => {
   return {
-    width: width,
-    height: height,
-    borderRadius: borderRadius,
-    backgroundColor: backgroundColor,
+    backgroundColor,
+    width,
+    height,
+    borderRadius,
     marginBottom: canvas.space.xs,
   };
 });
+
+const createTextLines = (lineCount: number, backgroundColor: string) => {
+  const lines = [];
+
+  const lineProps = {
+    backgroundColor,
+    borderRadius: TEXT_BORDER_RADIUS,
+    height: '21px',
+    width: '100%',
+  };
+
+  for (let i = 0; i < lineCount; i++) {
+    lines.push(
+      <Line
+        key={i}
+        {...lineProps}
+        width={lineCount === 1 || i + 1 !== lineCount ? '100%' : '60%'}
+      />
+    );
+  }
+  return lines;
+};
 
 export default class SkeletonText extends React.Component<SkeletonTextProps> {
   render(): React.ReactNode {
@@ -44,31 +68,7 @@ export default class SkeletonText extends React.Component<SkeletonTextProps> {
     }
 
     return (
-      <TextContainer {...elemProps}>
-        {this.createTextLines(lineCount, backgroundColor)}
-      </TextContainer>
+      <TextContainer {...elemProps}>{createTextLines(lineCount, backgroundColor)}</TextContainer>
     );
   }
-
-  private readonly createTextLines = (lineCount: number, backgroundColor: string) => {
-    const lines = [];
-
-    const lineProps = {
-      backgroundColor,
-      borderRadius: TEXT_BORDER_RADIUS,
-      height: '21px',
-      width: '100%',
-    };
-
-    for (let i = 0; i < lineCount; i++) {
-      lines.push(
-        <Line
-          key={i}
-          {...lineProps}
-          width={lineCount === 1 || i + 1 !== lineCount ? '100%' : '60%'}
-        />
-      );
-    }
-    return lines;
-  };
 }
