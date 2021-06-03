@@ -1,4 +1,6 @@
 /* eslint-disable */
+// Code copied/modified from https://github.com/Bkucera/cypress-plugin-tab
+// because of https://github.com/Bkucera/cypress-plugin-tab/issues/47
 
 const tabSequence = require('ally.js/query/tabsequence')
 

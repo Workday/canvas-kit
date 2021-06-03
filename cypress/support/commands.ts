@@ -18,6 +18,7 @@ Cypress.Commands.add('injectAxe', () => {
   });
 });
 
+// Needed for https://github.com/Bkucera/cypress-plugin-tab/issues/46
 Cypress.Commands.overwrite('visit', (originalFn, url, options = {}) => {
   if (typeof url === 'object') {
     // eslint-disable-next-line no-param-reassign
