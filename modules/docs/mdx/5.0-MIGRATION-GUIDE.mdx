@@ -10,7 +10,6 @@ any questions about the update.
 
 - [Codemod](#codemod)
 - [General Changes](#general-changes)
-  - [Compound Components](#compound-components)
   - [Slash Imports](#slash-imports)
   - [Canvas Kit Preview](#canvas-kit-preview)
   - [Canvas Kit CSS Maintenance Mode](#canvas-kit-css-maintenance-mode)
@@ -47,13 +46,6 @@ encounter any issues or use cases that we've missed. The `@workday/canvas-kit-co
 help us maintain additional codemod transforms to make future migrations easier.
 
 ## General Changes
-
-### Compound Components
-
-Components are transitioning to [Compound Components](./COMPOUND_COMPONENTS.mdx):
-
-- Components will support [forwarded refs](https://reactjs.org/docs/forwarding-refs.html)
-- The corresponding tag of a component can be changed with the `as` prop
 
 ### Slash Imports
 
@@ -384,100 +376,102 @@ provided a codemod to make these changes automatically.
 - 🤖 `DropdownButton`. This can be achieved simply using `PrimaryButton` or `SecondaryButton` with
   an `icon` prop and `iconPosition="right"`.
 
-To see examples of the before and after code, have a look at our
+To see examples of code in v4 versus v5, see our
 [codemod tests](../../codemod/lib/v5/spec/recategorizeButtons.spec.ts).
 
 #### Exports
 
-Additionally, we've changed some of the Button module's export behavior:
+We've changed some of the Button module's export behavior:
 
-- 🤖 `beta_Button` export was removed. The codemod will rename the import to `Button` instead,
+- 🤖 The `beta_Button` export was removed. The codemod will rename the import to `Button` instead,
   preserving local renaming if it exists.
 
   ```tsx
-  // Before
+  // v4
   import {beta_Button as Button} from '@workday/canvas-kit-react-button';
 
-  // After
-  import {Button} from '@workday/canvas-kit-react-button';
+  // v5
+  import {SecondaryButton} from '@workday/canvas-kit-react/button';
   ```
 
 - 🤖 The default export was removed. The codemod will change default imports to named imports.
 
   ```tsx
-  // Before
+  // v4
   import Button from '@workday/canvas-kit-react-button';
 
-  // After
-  import {SecondaryButton} from '@workday/canvas-kit-react-button';
+  // v5
+  import {SecondaryButton} from '@workday/canvas-kit-react/button';
   ```
 
-- 🤖 Enums have been removed from all buttons. String literals are used instead. The codemod will
-  write any usages of an enum to the string literal. If you used an enum as a type, the codemod will
-  expand to a union of string literals. You could change the union manually instead to be something
-  like `SecondaryButtonProps['variant']` if you prefer not to duplicate the union of string
-  literals.
+#### Enums
 
-  ```tsx
-  // Before
-  <Button size={Button.Size.Large} />;
-  interface Props {
-    size: ButtonSize;
-  }
+Enums have been removed from all buttons in favor of string literals.
 
-  // After
-  <SecondaryButton size="large" />;
-  interface Props {
-    size: 'small' | 'medium' | 'large';
-  }
-  ```
+🤖 The codemod will rewrite any usages of an enum to the string literal. If you used an enum as a
+type, the codemod will expand to a union of string literals. You could change the union manually
+instead to be something like `SecondaryButtonProps['variant']` if you prefer not to duplicate the
+union of string literals.
 
-- Buttons now use `createComponent` utility from the `common` module which now forwards `ref` and
-  allows `as` to change the underlying element.
+```tsx
+// v4
+<Button size={Button.Size.Large} />;
+interface Props {
+  size: ButtonSize;
+}
 
-  - 🤖 `buttonRef` was renamed to `ref` provided by `createComponent`. `buttonRef` is no longer
-    valid. The codemod will rewrite all instances of `buttonRef` to `ref` for any JSX element that
-    is a Button import from Canvas-Kit.
+// v5
+<SecondaryButton size="large" />;
+interface Props {
+  size: 'small' | 'medium' | 'large';
+}
+```
 
-    ```tsx
-    // Before
-    <Button buttonRef={ref}>
+#### createComponent
 
-    // After
-    <Button ref={ref}>
-    ```
+Buttons now use the `createComponent` utility from the `common` module which forwards `ref` and
+allows `as` to change the underlying element.
 
-  - Button prop interfaces no longer extend directly from
-    `React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that
-    determines the element interface via the `as` prop. This is why Button props no longer contain
-    an element interface directly. If you extend from a Button prop interface, or have code that
-    uses a Button prop interface and accesses properties like `onClick`, you'll need to provide the
-    button attribute yourself in order to avoid TypeScript issues (this doesn't affect runtime).
-    This is not code-moddable since intent cannot be pre-determined.
+```tsx
+// v4
+<Button buttonRef={ref} />;
 
-    ```tsx
-    // Before
-    interface MyButtonProps extends ButtonProps {}
+// v5
+<SecondaryButton ref={ref} />;
+```
 
-    // onClick no longer exists in `ButtonProps`, so TypeScript will complain about onClick not
-    // existing in `MyButtonProps` (`onClick` does exist as a prop on `<Button>`, however)
-    const MyButton = ({children, onClick}: MyButtonProps) => (
-      <Button onClick={onClick}>{children}</Button>
-    );
+🤖 The codemod will update all buttons to use `ref` instead of `buttonRef`.
 
-    // After
-    interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
+Button prop interfaces no longer extend directly from
+`React.ButtonHTMLAttributes<HTMLButtonElement>`. `createComponent` returns a component that
+determines the element interface via the `as` prop. This is why Button props no longer contain an
+element interface directly. If you extend from a Button prop interface, or have code that uses a
+Button prop interface and accesses properties like `onClick`, you'll need to provide the button
+attribute yourself in order to avoid TypeScript issues (this doesn't affect runtime). This is not
+code-moddable since intent cannot be pre-determined.
 
-    // After (alternate fix)
-    interface MyButtonProps extends ButtonProps {
-      onClick?: React.MouseEventHandler<HTMLButtonElement>;
-    }
-    ```
+```tsx
+interface MyButtonProps extends ButtonProps {}
+
+// onClick no longer exists in `ButtonProps`, so TypeScript will complain about onClick not
+// existing in `MyButtonProps` (`onClick` does exist as a prop on `<Button>`, however)
+const MyButton = ({children, onClick}: MyButtonProps) => (
+  <Button onClick={onClick}>{children}</Button>
+);
+
+// After
+interface MyButtonProps extends ButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+// After (alternate fix)
+interface MyButtonProps extends ButtonProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+```
 
 ### Card
 
-Card is now a compound component composed of a `Card.Body` and an optional `Card.Heading`. This
-allows direct access to the heading and body elements.
+Card is now a [compound component](./COMPOUND_COMPONENTS.mdx) composed of a `Card.Body` and an
+optional `Card.Heading`. This allows direct access to the heading and body elements.
 
 ```tsx
 // v4
