@@ -675,9 +675,9 @@ via DOM APIs if necessary. There is no codemod for this change.
 
 ### Popups
 
-`Popup` has transitioned to a compound component, along with all Popup-base behavior hooks. What was
-a `Popup` Provider to v5 is now a `Popup.Card` in v5. The target button and `Popper` components have
-been moved to subcomponents of a `Popup`.
+`Popup` has transitioned to a compound component, along with all Popup-based behavior hooks. What
+was a `Popup` prior to v5 is now a `Popup.Card` in v5. The target button and `Popper` components
+have been moved to subcomponents of a `Popup`.
 
 **Before**
 
@@ -780,9 +780,10 @@ the `PopupModel` via React context and have access to state and events. `Popup.C
 `Popup` once was.
 
 All behavior hooks, like `useCloseOnEscape` now take a `model` instead of variable parameters. This
-allowed us to fix some subtle bugs where visibility of the Popup wasn't originally known to the
-behavior hooks. Using the `PopupModel` means all hooks have access to all Popup state and events
-without passing in many parameters.
+allowed us to fix some subtle bugs. Using the `PopupModel` means all hooks have access to all Popup
+state and events without passing in many parameters.
+
+#### usePopup
 
 In the above example, `usePopup` has been removed. `usePopupModel` should be used instead. All
 subcomponents have an associated behavior hook. For example, `Popup.Target` uses a hook called
@@ -808,6 +809,8 @@ If you were using `usePopup`, here's a list of equivalent APIs:
 | `stackRef` or `popperProps.ref`                                         | `model.state.stackRef`                |
 | `popperProps.anchorElement`                                             | `model.state.targetRef.current`       |
 | `targetProps.onClick`                                                   | `usePopupTarget(model).onClick`       |
+
+#### New Focus management
 
 A common theme we noticed in uses of Popup in the wild was focus management. Developers were
 manually passing a `ref` to the target button element and manually returning focus to it when
@@ -860,6 +863,8 @@ const model = usePopupModel({
 useInitialFocus(model);
 ```
 
+#### Using your own positioning
+
 If you use your own positioning and only need to use the original `Popup`, you can use `Popup.Card`
 instead. Without the model and behaviors, the following is equivalent:
 
@@ -884,3 +889,120 @@ instead. Without the model and behaviors, the following is equivalent:
 | `padding={Popup.Padding.zero}` | `padding="zero"` or `padding={space.zero}` |
 | `depth={depth[0]}`             | `depth={0}`                                |
 | `popupRef={ref}`               | `ref={ref}`                                |
+
+#### Transitioning
+
+We noticed Popups were used in 2 different ways: always rendering and conditional rendering.
+
+```tsx
+// always rendering
+const MyPopup = () => {
+  const targetRef = React.useRef(null)
+  const {stackRef, popperProps, targetProps, closePopup} = usePopup()
+
+  const handleClose = () => {
+    closePopup()
+    targetRef.current.focus() // focus back on target
+  }
+
+  useCloseOnEscape(stackRef, handleClose)
+
+  return (
+    <>
+      <button ref={targetRef} {...targetProps}>Open</button>
+      <Popper {...popperProps}>
+        <Popup>
+          {/* content */}
+          <button onClick={handleClose}>Close</button>
+        </Popup>
+      </Popper>
+    </>
+  )
+}
+
+// conditional rendering
+const MyOpenPopup = ({onClose, targetRef}) => {
+  const {popperProps, closePopup} = usePopup()
+
+  const handleClose = () => {
+    onClose()
+    closePopup()
+    targetRef.current.focus() // focus back on target
+  }
+
+  useCloseOnEscape(stackRef, handleClose)
+
+  return (
+    <Popper {...popperProps}>
+      <Popup>
+        {/* content */}
+        <button onClick={handleClose}>
+      </Popup>
+    </Popper>
+  )
+}
+
+const MyPopup = () => {
+  const targetRef = React.useRef(null)
+  const [open, setOpen] = React.useState(false)
+
+  const onClose = () => {
+    setOpen(false)
+  }
+
+  return (
+    <>
+      <button ref={targetRef} onClick={() => { setOpen(true) }}>
+      {open && <MyOpenPopup onClose={onClose} />}
+    </>
+  )
+}
+```
+
+The difference between the two is subtle, but when always rendering example, the `usePopup` hook
+runs on every render. In the conditional rendering example, the `usePopup` hook only runs when
+`MyPopup` renders it. This means hooks like `useCloseOnEscape` need to function properly in both
+cases, but `open` is not passed to the hook. This caused subtle bugs, and now `useCloseOnEscape` is
+passed a `PopupModel` which does have access to the popup's visible state. `useCloseOnEscape` will
+now only run when the popup is visible, but this means the conditional rendering example will have
+to do extra work because the `target` is out of scope of the `MyOpenPopup` component. The following
+is equivalent to the example in v5:
+
+```tsx
+const MyOpenPopup = ({onClose, targetRef}) => {
+  const model = usePopupModel({
+    initialVisibility: 'visible', // needed for `useCloseOnEscape` and other hooks
+    returnFocusRef: targetRef, // determines where return focus goes
+  })
+
+  useCloseOnEscape(model)
+  useReturnFocus(model) // handles return focus
+
+  return (
+    <Popup>
+      <Popup.Popper>
+        <Popup.Card>
+          {/* content */}
+          <Popup.CloseButton as="button">Close</Popup.CloseButton>
+        </Popup>
+      </Popper>
+    </Popup>
+  )
+}
+
+const MyPopup = () => {
+  const targetRef = React.useRef(null)
+  const [open, setOpen] = React.useState(false)
+
+  const onClose = () => {
+    setOpen(false)
+  }
+
+  return (
+    <>
+      <button ref={targetRef} onClick={() => { setOpen(true) }}>
+      {open && <MyOpenPopup onClose={onClose} />}
+    </>
+  )
+}
+```

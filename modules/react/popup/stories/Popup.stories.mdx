@@ -5,8 +5,6 @@ import {Specifications} from '@workday/canvas-kit-docs';
 
 import {Simple} from './examples/Simple';
 import {InitialFocus} from './examples/InitialFocus';
-import {OpenWithoutModel} from './examples/OpenWithoutModel';
-import {ManualControl} from './examples/ManualControl';
 import {MultiplePopups} from './examples/MultiplePopups';
 import {NestedPopups} from './examples/NestedPopups';
 import {FocusRedirect} from './examples/FocusRedirect';
@@ -49,7 +47,7 @@ yarn add @workday/canvas-kit-react
 The `Popup` component is a generic compound component that is used to build popup UIs that are not
 already covered by Canvas Kit.
 
-### Basic
+### Simple
 
 The Popup has no pre-defined behaviors built in, therefore the `usePopupModel` must always be used
 to create a new `model`. This `model` is then used by all behavior hooks to apply additional popup
@@ -60,33 +58,13 @@ popup behaviors. For accessibility, these behaviors should be included most of t
 
 <ExampleCodeBlock code={Simple} />
 
-### Without a model
-
-This example shows how a `Popup.Card` can be used outside a `Popup` component, but accessibility is
-lost. If you use the Popup this way, you'll have to manually add a `aria-labelledby` to the
-`Popup.Card` component and an `id` to the `Popup.Heading` component.
-
-> **Note:** This example shows an inaccessible open card for demonstration purposes.
-
-<ExampleCodeBlock code={OpenWithoutModel} />
-
-### Manually passing the model
-
-Each `Popup` subcomponent optionally takes a `model`. Sometimes you may want to render an open Popup
-because visibility is controlled elsewhere. Behaviors require a model, so you can initialize the
-model visibility set to `true`. This may be required for legacy uses or where the entire `Popup`
-component API is undesired. This example has the same functionality as the [Basic](#basic) example,
-but breaks up control of a Popup in a way that is common to the way Popups are done in v4. This is
-an intermediate way to describe Popups with a more incremental upgrade path from version 4.
-
-<ExampleCodeBlock code={ManualControl} />
-
 ### Initial focus
 
-If you want focus to move to a specific element, set the `initialFocusRef` of the model. Check with
-accessibility before doing this. The following example sets the focus on the "OK" button with an
-`aria-describedby` pointing to the model's `id` state so screen readers properly announce the
-message of the popup when focus is changed to the button.
+If you want focus to move to a specific element when the popup is opened, set the `initialFocusRef`
+of the model. Check with accessibility before doing this. The following example sets the focus on
+the "OK" button with an `aria-describedby` pointing to the model's `id` state so screen readers
+properly announce the message of the popup when focus is changed to the button. By default, focus
+will be placed on the first focusable element when the popup is opened.
 
 <ExampleCodeBlock code={InitialFocus} />
 
@@ -101,10 +79,10 @@ content was not portalled to the bottom of the document body. Focus redirection 
 Popup as if it were inline to the document. Tabbing out of the Popup will close the Popup and move
 focus to the next appropriate element.
 
-**Note**: Safari does not support `aria-owns`. This means that the contents of the Popup will
-appears out of order to Safari + VoiceOver users. We render popups at the bottom of the
-document.body to ensure proper rendering. You could use `portal=false` on the `Popper` component,
-but that would risk incorrect rendering in all browsers.
+> **Note**: Safari does not support `aria-owns`. This means that the contents of the Popup will
+> appears out of order to Safari + VoiceOver users. We render popups at the bottom of the
+> document.body to ensure proper rendering. You could use `portal=false` on the `Popper` component,
+> but that would risk incorrect rendering in all browsers.
 
 <ExampleCodeBlock code={FocusRedirect} />
 
@@ -115,11 +93,11 @@ inside the popup instead of redirecting focus, it will be trapped inside the Pop
 useful for modal dialogs where the modal must be interacted with before normal interaction can
 continue.
 
-**Note**: Using focus trapping outside a Modal context can give users a different experience
-depending on how they interact with your application. Focus trapping will not prevent mouse users
-from breaking out of a focus trap, nor will it prevent screen reader users from using virtual
-cursors from breaking out. Modals should use additional techniques to truely "trap" focus into the
-Popup to provide a consistent experience for all users.
+> **Note**: Using focus trapping outside a Modal context can give users a different experience
+> depending on how they interact with your application. Focus trapping will not prevent mouse users
+> from breaking out of a focus trap, nor will it prevent screen reader users from using virtual
+> cursors from breaking out. Modals should use additional techniques to truely "trap" focus into the
+> Popup to provide a consistent experience for all users.
 
 <ExampleCodeBlock code={FocusTrap} />
 
@@ -279,7 +257,7 @@ a `DisclosureModel` for showing and hiding content.
 const stackRef = usePopupStack(forwardRef?: React.RefObject<HTMLElement>): React.RefObject<HTMLDivElement>
 ```
 
-**Note:** If you're using `Popper`, you do not need to use this hook directly.
+> **Note:** If you're using `Popper`, you do not need to use this hook directly.
 
 This hook will add the `stackRef` element to the Popup stack on mount and remove on unmount. If you
 use `Popper`, the popper `stackRef` is automatically added/removed from the Popup stack. The Popup
