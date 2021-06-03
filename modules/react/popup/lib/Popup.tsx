@@ -56,8 +56,8 @@ export const Popup = createComponent('div')({
  */
 export const usePopup = (config: PopupModelConfig = {}) => {
   const model = usePopupModel(config);
-  const popperProps = usePopupPopper(model, {}, null);
-  const targetProps = usePopupTarget(model, {}, null);
+  const popperProps = usePopupPopper(model);
+  const targetProps = usePopupTarget(model);
   const closePopup = React.useCallback(
     (event: React.SyntheticEvent) => model.events.hide({event}),
     [model.events]

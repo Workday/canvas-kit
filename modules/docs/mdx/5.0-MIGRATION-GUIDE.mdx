@@ -23,6 +23,7 @@ about the update.
   - [Tabs](#tabs)
   - [Labs Space Style Function](#-labs-space-style-function)
   - [Border Radius Zero Token](#border-radius-zero-token)
+  - [Popups](#popups)
 
 ## General Changes
 
@@ -516,3 +517,215 @@ import {borderRadius} from '@workday/canvas-kit-react/tokens';
 
 console.log(borderRadius.zero); // returns "0px"
 ```
+
+### Popups
+
+`Popup` has transitioned to a compound component, along with all Popup-base behavior hooks. What was
+a `Popup` Provider to v5 is now a `Popup.Card` in v5. The target button and `Popper` components have
+been moved to subcomponents of a `Popup`.
+
+**Before**
+
+```tsx
+import React from 'react';
+
+import {Button, DeleteButton} from '@workday/canvas-kit-react-button';
+import {
+  Popper,
+  Popup,
+  usePopup,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+} from '@workday/canvas-kit-react-popup';
+
+export const MyPopup = () => {
+  const {targetProps, closePopup, popperProps, stackRef} = usePopup();
+
+  useCloseOnOutsideClick(stackRef, closePopup);
+  useCloseOnEscape(stackRef, closePopup);
+
+  const onDeleteClick = () => {
+    closePopup();
+    console.log('Delete');
+  };
+
+  return (
+    <>
+      <DeleteButton {...targetProps}>Delete Item</DeleteButton>
+      <Popper placement={'bottom'} {...popperProps}>
+        <Popup
+          width={400}
+          heading={'Delete Item'}
+          padding={Popup.Padding.s}
+          handleClose={closePopup}
+        >
+          <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+
+          <DeleteButton onClick={onDeleteClick}>Delete</DeleteButton>
+          <Button onClick={closePopup}>Cancel</Button>
+        </Popup>
+      </Popper>
+    </>
+  );
+};
+```
+
+**After**
+
+```tsx
+import React from 'react';
+
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {
+  Popup,
+  usePopupModel,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
+
+export const MyPopup = () => {
+  const model = usePopupModel();
+
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model); // new
+  useReturnFocus(model); // new
+
+  const onDeleteClick = () => {
+    console.log('Delete');
+  };
+
+  return (
+    <Popup model={model}>
+      <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
+      <Popup.Popper placement={'bottom'}>
+        <Popup.Card width={400} padding="s">
+          <Popup.CloseIcon aria-label="Close" />
+          <Popup.Heading>Delete Item</Popup.Heading>
+          <Popup.Body>
+            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+
+            <Popup.CloseButton as={DeleteButton} onClick={onDeleteClick}>
+              Delete
+            </Popup.CloseButton>
+            <Popup.CloseButton>Cancel</Popup.CloseButton>
+          </Popup.Body>
+        </Popup.Card>
+      </Popup.Popper>
+    </Popup>
+  );
+};
+```
+
+The most notable changes is `Popup` is now a container component that takes a `PopupModel` and has
+several subcomponents like `Popup.Target` and `Popup.CloseButton`. These components are hooked up to
+the `PopupModel` via React context and have access to state and events. `Popup.Card` is what the v4
+`Popup` once was.
+
+All behavior hooks, like `useCloseOnEscape` now take a `model` instead of variable parameters. This
+allowed us to fix some subtle bugs where visibility of the Popup wasn't originally known to the
+behavior hooks. Using the `PopupModel` means all hooks have access to all Popup state and events
+without passing in many parameters.
+
+In the above example, `usePopup` has been removed. `usePopupModel` should be used instead. All
+subcomponents have an associated behavior hook. For example, `Popup.Target` uses a hook called
+`usePopupTarget`. If you need to use your own components for any reason, these hooks are available.
+`Popup.Target` and `Popup.CloseButton` do not include any styling. They both use `SecondaryButton`
+as the default component rendered. You can change this via the `as` prop. For example, the following
+will render an unstyled button:
+
+```tsx
+<Popup.Target as="button">Show</Popup.Target>
+```
+
+Pass a `css` prop, or a styled button instead to have a custom styled button. You could even pass
+`IconButton` if you need an icon button to show a popup instead!
+
+If you were using `usePopup`, here's a list of equivalent APIs:
+
+| Before                                                                  | After                                 |
+| ----------------------------------------------------------------------- | ------------------------------------- |
+| `const { popperProps, targetProps, closePopup, stackRef } = usePopup()` | `const model = usePopupModel()`       |
+| `popperProps.open`                                                      | `model.state.visibility !== 'hidden'` |
+| `closePopup()`                                                          | `model.events.hide()`                 |
+| `stackRef` or `popperProps.ref`                                         | `model.state.stackRef`                |
+| `popperProps.anchorElement`                                             | `model.state.targetRef.current`       |
+| `targetProps.onClick`                                                   | `usePopupTarget(model).onClick`       |
+
+A common theme we noticed in uses of Popup in the wild was focus management. Developers were
+manually passing a `ref` to the target button element and manually returning focus to it when
+closing a Popup through whatever means it was closed. This use-case should be handled now by a new
+hook: `useReturnFocus`. By default, `useReturnFocus` will return focus to the `targetRef` in the
+model, which is set by `Popup.Target`. This can be overridden via `returnFocusRef` passed to the
+model on creation. This `returnFocusRef` might make some migrations easier if `Popup.Target` cannot
+be used for whatever reason.
+
+```tsx
+// before
+const {closePopup} = usePopup();
+
+// passed to some event handler
+const closeAndReturnFocus = () => {
+  closePopup();
+  buttonRef.current.focus();
+};
+
+// after
+const model = usePopupModel({
+  returnFocusRef: buttonRef, // only use if you cannot use `Popup.Target`
+});
+
+useReturnFocus(model);
+```
+
+Another common focus thing to do is to focus something within a popup when the popup is shown. The
+`useInitialFocus` was created for this purpose. `useInitialFocus` will set focus on the first
+focusable element when the popup becomes visible. This behavior can be overridden by setting the
+`initialFocusRef` in the model.
+
+```tsx
+// before
+const {stackRef, popperProps} = usePopup();
+
+useLayoutEffect(() => {
+  if (!open) {
+    return;
+  }
+
+  stackRef.current.querySelector('input,...').focus();
+}, [popperProps.open]);
+
+// after
+const model = usePopupModel({
+  initialFocusRef: someRef, // only use if you want to explicitly focus on something. Could be useful for an input.
+});
+
+useInitialFocus(model);
+```
+
+If you use your own positioning and only need to use the original `Popup`, you can use `Popup.Card`
+instead. Without the model and behaviors, the following is equivalent:
+
+```tsx
+// before
+<Popup width={width} handleClose={onClose} heading="Popup Heading">
+  Popup Content
+</Popup>
+
+// after
+<Popup.Card with={width}>
+  <Popup.CloseIcon aria-label="Close" onClick={onClose} />
+  <Popup.Heading>Popup Heading</Popup.Heading>
+  <Popup.Body>Popup Content</Popup.Body>
+</Popup.Card>
+```
+
+`Popup.Card` is using `Card`, which is now using `Box`. This means changes to some props:
+
+| Before                         | After                                      |
+| ------------------------------ | ------------------------------------------ |
+| `padding={Popup.Padding.zero}` | `padding="zero"` or `padding={space.zero}` |
+| `depth={depth[0]}`             | `depth={0}`                                |
+| `popupRef={ref}`               | `ref={ref}`                                |

@@ -22,18 +22,19 @@ A "popup" is a classification for a type of stacked UI element that appears "on 
 positioned content. Tooltips, Modals, Dropdown menus, etc are all examples of "popups". Canvas Kit
 has a "stack manager" system for managing these popups. Different types of popups have different
 requirements of behavior for UX and accessibility - we can call them behaviors, capabilities, or
-traits. Canvas Kit comes with a number of [behaviors](#hooks) in the form of React Hooks.
+traits. Canvas Kit comes with a number of [behavioral hooks](#hooks) in the form of React Hooks.
 
 You should use the most semantic component for your use-case before using `Popup` directly, like
-`Modal`, which already has the correct behaviors built-in. If no component already exists, you can
-use `Popup` and use our [hooks](#hooks). The `Popup` component comes with a `Popup.Popper` component
-that positions a popup using [PopperJS](https://popper.js.org/) that registers a popup with the
-`PopupStack` automatically and sets the popup model's `placement` property. `Popup.Popper` component
-and hooks work with the stack management system for correct rendering and accessibility behavior. If
-you cannot use `Popup.Popper`, use the [usePopupStack](#usepoupstack) hook to properly register and
-deregister the popup at the correct time. If you cannot use our hooks, consider upgrading your
-component to use Hooks. If you cannot do that, you'll have to look up the `PopupStack` package for
-the direct API and have a look at the source code for our hooks into the `PopupStack` API.
+`Modal`, which already has the correct behaviors built-in. If no component already exists that
+matches your use case, you can use `Popup` and use our [hooks](#hooks). The `Popup` component comes
+with a `Popup.Popper` subcomponent that positions a popup using [PopperJS](https://popper.js.org/)
+that registers a popup with the `PopupStack` automatically and sets the popup model's `placement`
+property. `Popup.Popper` component and hooks work with the stack management system for correct
+rendering and accessibility behavior. If you cannot use `Popup.Popper`, use the
+[usePopupStack](#usepoupstack) hook to properly register and deregister the popup at the correct
+time. If you cannot use our hooks, consider upgrading your component to use Hooks. If you cannot do
+that, you'll have to look up the `PopupStack` package for the direct API and have a look at the
+source code for our hooks into the `PopupStack` API.
 
 This package comes with everything you need to build Popup UIs.
 
@@ -45,17 +46,17 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-The `Popup` component is a low-level compound component that is used to build popup UIs that are not
+The `Popup` component is a generic compound component that is used to build popup UIs that are not
 already covered by Canvas Kit.
 
 ### Basic
 
-The Popup has no pre-defined behaviors already registered, therefore the `usePopupModel` must always
-be used to create a new `model`. This `model` is then used by all behavior hooks to apply additional
-popup behaviors to the compound component group. The following example creates a typical popup
-around a target element and adds `useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitialFocus`,
-and `useReturnFocus` behaviors. You can read through the [hooks](#hooks) section to learn about all
-the popup behaviors. For accessibility, these behaviors should be included most of the time.
+The Popup has no pre-defined behaviors built in, therefore the `usePopupModel` must always be used
+to create a new `model`. This `model` is then used by all behavior hooks to apply additional popup
+behaviors to the compound component group. The following example creates a typical popup around a
+target element and adds `useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitialFocus`, and
+`useReturnFocus` behaviors. You can read through the [hooks](#hooks) section to learn about all the
+popup behaviors. For accessibility, these behaviors should be included most of the time.
 
 <ExampleCodeBlock code={Simple} />
 
@@ -71,9 +72,9 @@ lost. If you use the Popup this way, you'll have to manually add a `aria-labelle
 
 ### Manually passing the model
 
-Each `Popup` sub-component optionally takes a `model`. Sometimes you may want to render an open
-Popup because visibility is controlled elsewhere. Behaviors require a model, so you can initialize
-the model visibility set to `true`. This may be required for legacy uses or where the entire `Popup`
+Each `Popup` subcomponent optionally takes a `model`. Sometimes you may want to render an open Popup
+because visibility is controlled elsewhere. Behaviors require a model, so you can initialize the
+model visibility set to `true`. This may be required for legacy uses or where the entire `Popup`
 component API is undesired. This example has the same functionality as the [Basic](#basic) example,
 but breaks up control of a Popup in a way that is common to the way Popups are done in v4. This is
 an intermediate way to describe Popups with a more incremental upgrade path from version 4.
@@ -167,7 +168,7 @@ PopupModel or any associate popup [hooks](#hooks).
 ## Popup
 
 This component is a container component that has no semantic element. It provides a React Context
-model for all Popup sub-components. If you manually pass a `model` to all sub-components, this
+model for all Popup subcomponents. If you manually pass a `model` to all subcomponents, this
 container component isn't needed.
 
 ```tsx
@@ -201,6 +202,16 @@ const model = usePopupModel();
 const popupTargetButtonProps = usePopupTarget(model);
 <SecondaryButton {...popupTargetButtonProps}>Show Popup</SecondaryButton>
 ```
+
+`Popup.Target` doesn't provide any styling by default. All styling comes from the default component
+used, which is `SecondaryButton`. If you don't want any styling, you can do the following:
+
+```tsx
+<Popup.Target as="button">Open</Popup.Target>
+```
+
+To add your own styling, you could either add a `css` prop, or make a styled button and pass that
+styled component via the `as` prop.
 
 ## Popup.Popper
 
@@ -276,7 +287,7 @@ stack is required for proper z-index values to ensure Popups are rendered correc
 required for global listeners like click outside or escape key closing a popup. Without the Popup
 stack, all popups will close rather than only the topmost one.
 
-If `forwardRef` is provided, it will be the same as `stackRef`. If `forwardRef` is not provided`,
+If `forwardRef` is provided, it will be the same as `stackRef`. If `forwardRef` is not provided,
 this hook will create one and return it.
 
 This hook should be used by all popups unless using the `Popper` component.
