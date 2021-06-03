@@ -29,7 +29,7 @@ export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement>
 }
 
 const Shape = styled('div')<SkeletonShapeProps & StyledType>(
-  ({backgroundColor, borderRadius = 0, height = '100%', width = '100%'}) => ({
+  ({backgroundColor, borderRadius, height, width}) => ({
     backgroundColor,
     borderRadius,
     height,
@@ -43,9 +43,9 @@ const SkeletonShape = createComponent('div')({
   Component: (
     {
       backgroundColor = canvas.colors.soap200,
-      borderRadius,
-      height,
-      width,
+      borderRadius = 0,
+      height = '100%',
+      width = '100%',
       ...elemProps
     }: SkeletonShapeProps,
     ref,
