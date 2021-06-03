@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {xIcon} from '@workday/canvas-system-icons-web';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {
   styled,
   createComponent,
@@ -14,8 +13,8 @@ import {PopupModel} from './usePopupModel';
 import {PopupModelContext} from './Popup';
 import {usePopupCloseButton} from './PopupCloseButton';
 
-const closeIconSpacing = space.xs;
-const closeIconSpacingSmall = 10;
+const closeIconSpacing = 11;
+const closeIconSpacingSmall = 9;
 
 export interface PopupCloseIconProps extends IconButtonProps {
   /**
