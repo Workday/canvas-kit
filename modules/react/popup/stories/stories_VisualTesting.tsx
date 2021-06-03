@@ -91,7 +91,7 @@ export const PopupStates = withSnapshotsEnabled(() => (
             heading: 'Delete Item',
             hasCloseIcon: true,
             width: 300,
-            closeIconSize: 's',
+            closeIconSize: 'small',
           },
         },
       ]}

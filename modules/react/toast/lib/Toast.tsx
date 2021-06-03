@@ -96,7 +96,7 @@ export const Toast = createComponent('div')({
         aria-atomic={!isInteractive}
         {...elemProps}
       >
-        <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />
+        {onClose && <Popup.CloseIcon aria-label="Close" onClick={onClose} size="small" />}
         <Popup.Body>
           <ToastContentContainer onClose={onClose}>
             {icon && <ToastSystemIcon color={iconColor} colorHover={iconColor} icon={icon} />}

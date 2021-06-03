@@ -1,13 +1,12 @@
-/// <reference path="../../../../typings.d.ts" />
-/** @jsx jsx */
-import {jsx} from '@emotion/core';
+import React from 'react';
+
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {StaticStates} from '@workday/canvas-kit-preview-react/tokens';
 import {action} from '@storybook/addon-actions';
-import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 import {exclamationCircleIcon} from '@workday/canvas-system-icons-web';
-import {Toast} from '../index';
-import styled from '@emotion/styled';
+import {Toast} from '@workday/canvas-kit-react/toast';
+
+import {ComponentStatesTable, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/React/Popups/Toast',
