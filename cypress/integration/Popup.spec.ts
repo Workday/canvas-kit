@@ -312,4 +312,63 @@ describe('Popup', () => {
       });
     });
   });
+
+  context('given the [Components/Popups/Popup/React, FocusRedirect] story is rendered', () => {
+    beforeEach(() => {
+      h.stories.load('Components/Popups/Popup/React', 'FocusRedirect');
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    context('when the "Delete Item" button is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Delete Item'}).click();
+      });
+
+      it('should open the popup', () => {
+        cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
+      });
+
+      it('should focus on the close icon button', () => {
+        cy.findByRole('button', {name: 'Close'}).should('have.focus');
+      });
+
+      context('when Shift+Tab keys are pressed', () => {
+        beforeEach(() => {
+          cy.tab({shift: true});
+        });
+
+        it('should hide the popup', () => {
+          cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+        });
+
+        it('should transfer focus back to the "Delete Item" button', () => {
+          cy.findByRole('button', {name: 'Delete Item'}).should('have.focus');
+        });
+      });
+
+      context('when the "Cancel" button is focused', () => {
+        beforeEach(() => {
+          cy.findByRole('button', {name: 'Cancel'}).focus();
+        });
+
+        context('when the Tab key is pressed', () => {
+          beforeEach(() => {
+            cy.tab();
+          });
+
+          it('should hide the popup', () => {
+            cy.findByRole('dialog', {name: 'Delete Item'}).should('not.be.visible');
+          });
+
+          it('should focus on the "Next Focusable Button"', () => {
+            cy.focused();
+            cy.findByRole('button', {name: 'Next Focusable Button'}).should('have.focus');
+          });
+        });
+      });
+    });
+  });
 });
