@@ -35,7 +35,7 @@ const fade = keyframes({
 
 const animation = `${fade} 0.8s linear infinite alternate`;
 
-const SkeletonContainer = styled('div')<SkeletonProps & StyledType>({
+const SkeletonAnimator = styled('div')<SkeletonProps & StyledType>({
   animation,
   overflow: 'hidden',
   width: '100%',
@@ -50,11 +50,11 @@ export const Skeleton = createComponent('div')({
     ref,
     Element
   ) => (
-    <SkeletonContainer ref={ref} as={Element} {...elemProps}>
+    <SkeletonAnimator ref={ref} as={Element} {...elemProps}>
       <AccessibleHide>{loadingAriaLabel}</AccessibleHide>
 
       <div aria-hidden={true}>{children}</div>
-    </SkeletonContainer>
+    </SkeletonAnimator>
   ),
   subComponents: {
     Header: SkeletonHeader,
