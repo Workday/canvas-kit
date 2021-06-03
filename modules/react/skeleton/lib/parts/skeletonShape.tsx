@@ -3,8 +3,6 @@ import * as React from 'react';
 import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
 import canvas from '@workday/canvas-kit-react/tokens';
 
-import {TEXT_BORDER_RADIUS} from './utils';
-
 const BOTTOM_MARGIN = 16;
 
 export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -31,15 +29,13 @@ export interface SkeletonShapeProps extends React.HTMLAttributes<HTMLDivElement>
 }
 
 const Shape = styled('div')<SkeletonShapeProps & StyledType>(
-  ({backgroundColor, borderRadius = TEXT_BORDER_RADIUS, height, width = '100%'}) => {
-    return {
-      backgroundColor,
-      borderRadius,
-      height,
-      width,
-      marginBottom: BOTTOM_MARGIN,
-    };
-  }
+  ({backgroundColor, borderRadius = 0, height = '100%', width = '100%'}) => ({
+    backgroundColor,
+    borderRadius,
+    height,
+    width,
+    marginBottom: BOTTOM_MARGIN,
+  })
 );
 
 const SkeletonShape = createComponent('div')({

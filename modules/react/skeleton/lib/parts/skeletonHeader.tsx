@@ -4,6 +4,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import canvas from '@workday/canvas-kit-react/tokens';
 
 import SkeletonShape from './skeletonShape';
+import {TEXT_BORDER_RADIUS} from './utils';
 
 export interface SkeletonHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -34,18 +35,17 @@ const SkeletonHeader = createComponent('div')({
     }: SkeletonHeaderProps,
     ref,
     Element
-  ) => {
-    return (
-      <SkeletonShape
-        ref={ref}
-        as={Element}
-        backgroundColor={backgroundColor}
-        height={height}
-        width={width}
-        {...elemProps}
-      />
-    );
-  },
+  ) => (
+    <SkeletonShape
+      ref={ref}
+      as={Element}
+      backgroundColor={backgroundColor}
+      borderRadius={TEXT_BORDER_RADIUS}
+      height={height}
+      width={width}
+      {...elemProps}
+    />
+  ),
 });
 
 export default SkeletonHeader;
