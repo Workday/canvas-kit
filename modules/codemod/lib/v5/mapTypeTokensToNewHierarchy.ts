@@ -23,14 +23,14 @@ const legacyTypeLevelsMap = {
 
 const legacyTypeFontSizesMap = {
   dataViz1: 56,
-  dataViz2: 34,
+  dataViz2: 32,
   h1: 28,
   h2: 24,
   h3: 20,
   h4: 16,
   h5: 16,
   body: 14,
-  body2: 13,
+  body2: 12,
   small: 12,
 };
 
@@ -57,7 +57,7 @@ const betaTypeFontSizesMap = {
   h5: 20,
   body: 16,
   body2: 14,
-  small: 13,
+  small: 12,
 };
 
 const fontWeightsMap = {

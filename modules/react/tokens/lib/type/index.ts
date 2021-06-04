@@ -70,7 +70,7 @@ type CanvasTypeProperties = {
    * ---
    * There are fifteen font size tokens. Here's a quick reference:
    *
-   * `10`, `12`, `14`, `16`, `18`, `20`, `24`, `28`, `32`, `40`, `48`, `56`, `64`, `80`, `96`
+   * `10`, `12`, `14`, `16`, `18`, `20`, `24`, `28`, `32`, `40`, `48`, `56`, `68`, `80`, `92`
    *
    * Each token key corresponds to a pixel value. So if you're looking for a token
    * that matches 16px, you'd grab the `fontSizes[16]` token.

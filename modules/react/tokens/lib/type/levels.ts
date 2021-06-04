@@ -39,10 +39,10 @@ export const levels: CanvasTypeHierarchy = {
   display: {
     small: {
       fontFamily: fonts.normal,
-      /** 64px converted to base-16 rem (4rem)*/
-      fontSize: fontSizes[64],
-      /** 80px converted to base-16 rem */
-      lineHeight: '5rem',
+      /** 68px converted to base-16 rem (4.25rem)*/
+      fontSize: fontSizes[68],
+      /** 76px converted to base-16 rem */
+      lineHeight: '4.75rem',
       fontWeight: fontWeights.bold,
       color: typeColors.heading,
     },
@@ -50,17 +50,17 @@ export const levels: CanvasTypeHierarchy = {
       fontFamily: fonts.normal,
       /** 80px converted to base-16 rem (5rem)*/
       fontSize: fontSizes[80],
-      /** 96px converted to base-16 rem (6rem) */
-      lineHeight: '6rem',
+      /** 88px converted to base-16 rem (5.5rem) */
+      lineHeight: '5.5rem',
       fontWeight: fontWeights.bold,
       color: typeColors.heading,
     },
     large: {
       fontFamily: fonts.normal,
-      /** 96px converted to base-16 rem (6rem)*/
-      fontSize: fontSizes[96],
-      /** 112px converted to base-16 rem (7rem) */
-      lineHeight: '7rem',
+      /** 92px converted to base-16 rem (5.75rem)*/
+      fontSize: fontSizes[92],
+      /** 100px converted to base-16 rem (6.25rem) */
+      lineHeight: '6.25rem',
       fontWeight: fontWeights.bold,
       color: typeColors.heading,
     },
@@ -203,9 +203,9 @@ export type CanvasTypeHierarchy = {
    * It has three sizes: `small`, `medium`, and `large`.
    * Here's a quick reference for font-sizes and weights:
    *
-   * - `small`: font-size: 64px (4rem), font-weight: bold (700)
+   * - `small`: font-size: 68px (4.25rem), font-weight: bold (700)
    * - `medium`: font-size: 80px (5rem), font-weight: bold (700)
-   * - `large`: font-size: 96px (6rem), font-weight: bold (700)
+   * - `large`: font-size: 92px (5.75rem), font-weight: bold (700)
    *
    * You can find more detailed styled information by inspecting individual sizes.
    *
@@ -325,10 +325,10 @@ export type CanvasTypeHierarchy = {
 type CanvasTypeDisplayLevel = {
   small: {
     fontFamily: CanvasFonts['normal'];
-    /** 64px converted to base-16 rem (4rem)*/
-    fontSize: CanvasFontSizes[64];
-    /** 80px converted to base-16 rem */
-    lineHeight: '5rem';
+    /** 68px converted to base-16 rem (4.25rem)*/
+    fontSize: CanvasFontSizes[68];
+    /** 76px converted to base-16 rem */
+    lineHeight: '4.75rem';
     fontWeight: CanvasFontWeights['bold'];
     color: typeof typeColors.heading;
   };
@@ -336,17 +336,17 @@ type CanvasTypeDisplayLevel = {
     fontFamily: CanvasFonts['normal'];
     /** 80px converted to base-16 rem (5rem)*/
     fontSize: CanvasFontSizes[80];
-    /** 96px converted to base-16 rem (6rem) */
-    lineHeight: '6rem';
+    /** 88px converted to base-16 rem (5.5rem) */
+    lineHeight: '5.5rem';
     fontWeight: CanvasFontWeights['bold'];
     color: typeof typeColors.heading;
   };
   large: {
     fontFamily: CanvasFonts['normal'];
-    /** 96px converted to base-16 rem (6rem)*/
-    fontSize: CanvasFontSizes[96];
-    /** 112px converted to base-16 rem (7rem) */
-    lineHeight: '7rem';
+    /** 92px converted to base-16 rem (5.75rem)*/
+    fontSize: CanvasFontSizes[92];
+    /** 100px converted to base-16 rem (6.25rem) */
+    lineHeight: '6.25rem';
     fontWeight: CanvasFontWeights['bold'];
     color: typeof typeColors.heading;
   };

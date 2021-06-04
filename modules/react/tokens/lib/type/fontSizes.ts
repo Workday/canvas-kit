@@ -8,14 +8,14 @@ type ValueOf<T> = T[keyof T];
  * E.g. `fontSizes[16]` returns `'1rem'`
  *
  * Here's a quick reference for all font size tokens:
- * - 10, 12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96
+ * - 10, 12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 68, 80, 92
  *
  * @example
  * ```tsx
  * import { type } from '@workday/canvas-kit-react/tokens';
  *
  * const LargeText = () => (
- *   <p css={{ fontSize: type.properties.fontSizes[20]}}>
+ *   <p css={{fontSize: type.properties.fontSizes[20]}}>
  *     Bold Text
  *   </p>
  * );
@@ -34,9 +34,9 @@ export const fontSizes: CanvasFontSizes = {
   40: '2.5rem',
   48: '3rem',
   56: '3.5rem',
-  64: '4rem',
+  68: '4.25rem',
   80: '5rem',
-  96: '6rem',
+  92: '5.75rem',
 };
 
 export type CanvasFontSizes = {
@@ -64,12 +64,12 @@ export type CanvasFontSizes = {
   48: '3rem';
   /** 56px converted to base-16 rem */
   56: '3.5rem';
-  /** 64px converted to base-16 rem */
-  64: '4rem';
+  /** 68px converted to base-16 rem */
+  68: '4.25rem';
   /** 80px converted to base-16 rem */
   80: '5rem';
-  /** 96px converted to base-16 rem */
-  96: '6rem';
+  /** 92px converted to base-16 rem */
+  92: '5.75rem';
 };
 
 export type CanvasFontSizeValues = ValueOf<CanvasFontSizes>;
